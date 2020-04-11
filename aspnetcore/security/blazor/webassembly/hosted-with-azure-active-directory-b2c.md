@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/08/2020
+ms.date: 04/09/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 4c79f7530e18b9f70262812a64abb55122701d15
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: e2bb0c1bd807d590331b714e3b80d8c4ab434e2f
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977159"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123470"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Azure アクティブBlazorディレクトリ B2C を使用して、ASP.NETコア Web アセンブリホスト アプリをセキュリティで保護する
 
@@ -305,9 +305,12 @@ builder.Services.AddMsalAuthentication(options =>
 <!-- HOLD
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 -->
+
+[!INCLUDE[](~/includes/blazor-security/wasm-aad-b2c-userflows.md)]
+
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [追加のアクセス トークンを要求する](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
 * <xref:security/authentication/azure-ad-b2c>

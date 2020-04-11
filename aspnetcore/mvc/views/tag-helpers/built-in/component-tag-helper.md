@@ -1,34 +1,47 @@
 ---
-title: ASP.NET Core のコンポーネントタグヘルパー
+title: ASP.NETコアのコンポーネント タグ ヘルパー
 author: guardrex
 ms.author: riande
-description: ASP.NET Core コンポーネントタグヘルパーを使用して、ページおよびビューで Razor コンポーネントを表示する方法について説明します。
+description: ASP.NET コア コンポーネント タグ ヘルパーを使用して、Razor コンポーネントをページとビューにレンダリングする方法について説明します。
 ms.custom: mvc
-ms.date: 03/18/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 801ceb73de5bb4ef7500624e1fbddbf96d1ab89c
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80226382"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123430"
 ---
-# <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core のコンポーネントタグヘルパー
+# <a name="component-tag-helper-in-aspnet-core"></a>ASP.NETコアのコンポーネント タグ ヘルパー
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
-ページまたはビューからコンポーネントを表示するには、[コンポーネントタグヘルパー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)を使用します。
+ページまたはビューからコンポーネントをレンダリングするには、 コンポーネント[タグ ヘルパー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)を使用します。
 
-次のコンポーネントタグヘルパーは、ページまたはビューで `Counter` コンポーネントをレンダリングします。
+## <a name="prerequisites"></a>前提条件
+
+「*ページとビューでコンポーネントを使用するようにアプリを準備する」* セクションのガイダンスに<xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views>従ってください。
+
+## <a name="component-tag-helper"></a>コンポーネント タグ ヘルパー
+
+次のコンポーネント タグ ヘルパーは`Counter`、コンポーネントをページまたはビューにレンダリングします。
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Pages
+
+...
+
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-コンポーネントタグヘルパーは、コンポーネントにパラメーターを渡すこともできます。 チェックボックスのラベルの色とサイズを設定する次の `ColorfulCheckbox` コンポーネントについて考えてみます。
+前の例では、`Counter`コンポーネントがアプリの*Pages*フォルダー内にあることを前提としています。
+
+コンポーネント タグ ヘルパーは、コンポーネントにパラメータを渡すこともできます。 チェック ボックス`ColorfulCheckbox`ラベルの色とサイズを設定する次のコンポーネントを検討してください。
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -56,14 +69,21 @@ ms.locfileid: "80226382"
 }
 ```
 
-コンポーネントタグヘルパーでは、`Size` (`int`) および `Color` (`string`)[コンポーネントのパラメーター](xref:blazor/components#component-parameters)を設定できます。
+( `Size` `int`)`Color`および`string`( )[コンポーネント パラメータ](xref:blazor/components#component-parameters)は、コンポーネント タグ ヘルパーで設定できます。
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Shared
+
+...
+
 <component type="typeof(ColorfulCheckbox)" render-mode="ServerPrerendered" 
     param-Size="14" param-Color="@("blue")" />
 ```
 
-ページまたはビューには、次の HTML が表示されます。
+前の例では、`ColorfulCheckbox`コンポーネントがアプリの*共有*フォルダー内にあることを前提としています。
+
+ページまたはビューに次の HTML が表示されます。
 
 ```html
 <label style="font-size:24px;color:blue">
@@ -72,26 +92,80 @@ ms.locfileid: "80226382"
 </label>
 ```
 
-引用符で囲まれた文字列を渡すには、前の例の `param-Color` に示すように、[明示的な Razor 式](xref:mvc/views/razor#explicit-razor-expressions)が必要です。 `string` 型の値に対する Razor 解析動作は、属性が `object` 型であるため、`param-*` 属性には適用されません。
+引用符で囲まれた文字列を渡す場合は、前の`param-Color`例に示すように[、明示的](xref:mvc/views/razor#explicit-razor-expressions)な Razor 式が必要です。 型値の`string`Razor 解析動作は、属性が型であるため`param-*`、属性には`object`適用されません。
 
-パラメーターは、JSON のシリアル化可能な型である必要があります。これは通常、その型に既定のコンストラクターと設定できるプロパティがある必要があることを意味します。 たとえば、前の例では `Size` と `Color` の値を指定できます。 `Size` と `Color` の型はプリミティブ型 (`int` および `string`) であり、JSON シリアライザーでサポートされています。
+パラメーター型は JSON シリアル化可能である必要があります。 たとえば、前`Size`の例`Color`では、および の型`Size``Color`が JSON シリアライザーでサポートされるプリミティブ型 (`int` `string`および ) であるため、値を指定できます。
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、コンポーネントに対して以下の構成が行われます。
+次の例では、クラス オブジェクトがコンポーネントに渡されます。
 
-* ページに事前レンダリングするかどうか。
-* ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
+*MyClass.cs:*
 
-| レンダリングモード | 説明 |
+```csharp
+public class MyClass
+{
+    public MyClass()
+    {
+    }
+
+    public int MyInt { get; set; } = 999;
+    public string MyString { get; set; } = "Initial value";
+}
+```
+
+**クラスには、パブリックなパラメーターなしのコンストラクターが必要です。**
+
+*共有/マイコンポーネント.カミソリ*:
+
+```razor
+<h2>MyComponent</h2>
+
+<p>Int: @MyObject.MyInt</p>
+<p>String: @MyObject.MyString</p>
+
+@code
+{
+    [Parameter]
+    public MyClass MyObject { get; set; }
+}
+```
+
+*ページ/マイページ.cshtml*:
+
+```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}
+@using {APP ASSEMBLY}.Shared
+
+...
+
+@{
+    var myObject = new MyClass();
+    myObject.MyInt = 7;
+    myObject.MyString = "Set by MyPage";
+}
+
+<component type="typeof(MyComponent)" render-mode="ServerPrerendered" 
+    param-MyObject="@myObject" />
+```
+
+前の例では、`MyComponent`コンポーネントがアプリの*共有*フォルダー内にあることを前提としています。 `MyClass`は、アプリの名前空間 (`{APP ASSEMBLY}`) にあります。
+
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>コンポーネントを構成します。
+
+* ページにプリレンダリングされます。
+* ページ上で静的 HTML としてレンダリングされるか、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれている場合。
+
+| レンダリング モード | 説明 |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | コンポーネントを静的 HTML にレンダリングし、Blazor Server アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | コンポーネントを静的 HTML にレンダリングし、サーバー アプリケーションBlazorのマーカーを含みます。 ユーザー エージェントが起動すると、このマーカーを使用してアプリをBlazorブートストラップします。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | サーバー アプリのマーカーをBlazorレンダリングします。 コンポーネントからの出力は含まれません。 ユーザー エージェントが起動すると、このマーカーを使用してアプリをBlazorブートストラップします。 |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | コンポーネントを静的 HTML にレンダリングします。 |
 
-ページとビューはコンポーネントを使用できますが、逆のことはできません。 コンポーネントでは、ビューおよびページ固有の機能 (部分ビューやセクションなど) を使用できません。 コンポーネントの部分ビューのロジックを使用するには、部分ビューのロジックをコンポーネントにします。
+ページとビューはコンポーネントを使用できますが、逆は当てはまりません。 コンポーネントは、部分的なビューやセクションなどのビュー固有の機能やページ固有の機能を使用できません。 コンポーネントの部分ビューからロジックを使用するには、部分ビュー ロジックをコンポーネントに組み込みます。
 
-静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
+静的 HTML ページからのサーバー コンポーネントのレンダリングはサポートされていません。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>
 * <xref:mvc/views/tag-helpers/intro>
