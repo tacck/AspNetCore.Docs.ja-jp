@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 uid: tutorials/first-web-api
-ms.openlocfilehash: 55dfc05b5c96f7fa060d537745bac969e92daa9b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644966"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417657"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -135,7 +135,7 @@ IIS Express 証明書を信頼するかどうかを確認するダイアログ �
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Ctrl キーを押しながら F5 キーを押して、アプリを実行します。 ブラウザーで、次の URL に移動します: [https://localhost:5001/WeatherForecast](https://localhost:5001/WeatherForecast)。
+Ctrl キーを押しながら F5 キーを押して、アプリを実行します。 ブラウザーで、次の URL に移動します: `https://localhost:5001/WeatherForecast`。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -374,8 +374,8 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 ブラウザーまたは Postman から 2 つのエンドポイントを呼び出すことによって、アプリをテストします。 次に例を示します。
 
-* [https://localhost:5001/api/TodoItems](https://localhost:5001/api/TodoItems)
-* [https://localhost:5001/api/TodoItems/1](https://localhost:5001/api/TodoItems/1)
+* `https://localhost:5001/api/TodoItems`
+* `https://localhost:5001/api/TodoItems/1`
 
 `GetTodoItems` への呼び出しによって、次のような応答が生成されます。
 
@@ -606,7 +606,7 @@ IIS Express 証明書を信頼するかどうかを確認するダイアログ �
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Ctrl キーを押しながら F5 キーを押して、アプリを実行します。 ブラウザーで、次の URL に移動します: [https://localhost:5001/api/values](https://localhost:5001/api/values)。
+Ctrl キーを押しながら F5 キーを押して、アプリを実行します。 ブラウザーで、次の URL に移動します: `https://localhost:5001/api/values`。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 

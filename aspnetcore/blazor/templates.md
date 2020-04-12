@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor アプリ テンプレートと Blazor プロ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/29/2020
+ms.date: 03/26/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: acfa4b8a42cbd310c6fc6dc973573578e94ef999
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649448"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80320977"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -58,18 +58,17 @@ Blazor のホスティング モデルの詳細については、「<xref:blazor
     * .NET ランタイム、アプリ、およびアプリの依存関係のダウンロード。
     * アプリを実行するランタイムの初期化。
 
-* *Pages/_Host.cshtml* (Blazor Server) &ndash; Razor ページとして実装されるアプリのルート ページ。
-  * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
-  * ブラウザーとサーバーの間のリアルタイム SignalR 接続を設定する `_framework/blazor.server.js` JavaScript ファイルが読み込まれます。
-  * このホスト ページは、ルート `App` コンポーネント (*App.razor*) を表示する場所を指定します。
-
 * *App.razor* &ndash; <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントを使用してクライアント側のルーティングを設定するアプリのルート コンポーネント。 `Router` コンポーネントは、ブラウザーのナビゲーションをインターセプトし、要求されたアドレスに一致するページをレンダリングします。
 
-* *Pages* フォルダー &ndash; Blazor アプリを構成するルーティング可能なコンポーネント/ページ ( *.razor*) を含みます。 各ページのルートは、[`@page`](xref:mvc/views/razor#page) ディレクティブを使用して指定します。 テンプレートには、以下のコンポーネントが含まれています。
-  * `Index` (*Index.razor*) &ndash; ホーム ページを実装します。
+* *Pages* フォルダー &ndash; Blazor アプリと Blazor サーバー アプリのルート Razor ページを構成するルーティング可能なコンポーネント/ページ ( *.razor*) が含まれています。 各ページのルートは、[`@page`](xref:mvc/views/razor#page) ディレクティブを使用して指定します。 テンプレートには以下が含まれています。
+  * *_Host.cshtml* (Blazor Server) &ndash; Razor ページとして実装されるアプリのルート ページ。
+    * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
+    * ブラウザーとサーバーの間のリアルタイム SignalR 接続を設定する `_framework/blazor.server.js` JavaScript ファイルが読み込まれます。
+    * このホスト ページは、ルート `App` コンポーネント (*App.razor*) を表示する場所を指定します。
   * `Counter` (*Counter.razor*) &ndash; カウンター ページを実装します。
   * `Error` (*Error.razor*、Blazor Server アプリのみ) &ndash; アプリで処理されない例外が発生したときに表示されます。
   * `FetchData` (*FetchData.razor*) &ndash; フェッチ データ ページを実装します。
+  * `Index` (*Index.razor*) &ndash; ホーム ページを実装します。
 
 * *Shared* フォルダー &ndash; アプリで使用する他の UI コンポーネント ( *.razor*) を含みます。
   * `MainLayout` (*MainLayout.razor*) &ndash; アプリのレイアウト コンポーネント。

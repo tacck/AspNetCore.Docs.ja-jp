@@ -1,131 +1,150 @@
 ---
-title: ASP.NET Core Blazor をデバッグする
+title: ASP.NET Core Blazor WebAssembly をデバッグする
 author: guardrex
 description: Blazor アプリをデバッグする方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/16/2020
+ms.date: 03/26/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 1b0035af48b82807a6ae14835a41a1ecbef06bb6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648314"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80381874"
 ---
-# <a name="debug-aspnet-core-blazor"></a>ASP.NET Core Blazor をデバッグする
+# <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Chromium ベースのブラウザー (Chrome/Edge) で、ブラウザー開発ツールを使用して Blazor WebAssembly をデバッグするために、*初期*のサポートが存在します。 以下のための作業が進行中です。
+Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chrome) のブラウザー開発ツールを使用してデバッグできます。  または、Visual Studio または Visual Studio Code を使用してアプリをデバッグすることもできます。
 
-* Visual Studio でのデバッグを完全に可能にする。
-* Visual Studio Code でのデバッグを可能にする。
-
-デバッガーの機能は制限されています。 利用可能なシナリオには以下が含まれます。
+利用可能なシナリオには以下が含まれます。
 
 * ブレークポイントの設定と削除を行う。
-* コード全体でステップ実行する (`F10`)、コードの実行を再開 (`F8`) する。
-* *Locals* の表示で、`int`、`string`、`bool` 型の任意のローカル変数の値を観察する。
+* Visual Studio と Visual Studio Code (<kbd>F5</kbd> サポート) でデバッグ サポートを使用して、アプリを実行する。
+* コードを使用して、シングルステップ (<kbd>F10</kbd>) を実行する。
+* ブラウザーで <kbd>F8</kbd> を使用するか、Visual Studio または Visual Studio Code で <kbd>F5</kbd> を使用して、コードの実行を再開する。
+* *Locals* の表示で、ローカル変数の値を観察する。
 * 呼び出し履歴を表示する。これには、JavaScript から .NET への呼び出しチェーンと、.NET から JavaScript への呼び出しチェーンが含まれます。
 
-以下のことは*行えません*。
+現時点では、次の操作を行うことは*できません*。
 
-* `int`、`string`、`bool` ではないローカルの値を観察する。
-* クラスのプロパティまたはフィールドの値を観察する。
-* 変数をポイントしてその値を表示する。
-* コンソール内で式を評価する。
-* 複数の非同期呼び出しにわたってステップ実行する。
-* その他の最も一般的なデバッグ シナリオを実行する。
+* 配列を検査する。
+* メンバーをポイントして検査する。
+* マネージ コードに対してデバッグをステップ実行する。
+* 値型の検査を完全にサポートする。
+* 未処理の例外の発生時に中断する。
+* アプリの起動中にブレークポイントにヒットする。
+* サービス ワーカーを使用してアプリをデバッグする。
 
-エンジニアリング チームでは、これ以上のデバッグ シナリオの開発が引き続き重視されています。
+今後のリリースでは、引き続きデバッグエクス ペリエンスが向上します。
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
 デバッグには、次のいずれかのブラウザーが必要です。
 
+* Microsoft Edge (バージョン 80 以降)
 * Google Chrome (バージョン 70 以降)
-* Microsoft Edge プレビュー ([Edge Dev Channel](https://www.microsoftedgeinsider.com))
 
-## <a name="procedure"></a>プロシージャ
+## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio と Visual Studio Code のデバッグを有効にする
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+ASP.NET Core 3.2 Preview 3 以降の Blazor WebAssembly プロジェクト テンプレートを使用して作成された新しいプロジェクトでは、デバッグが自動的に有効になります。
 
-> [!WARNING]
-> Visual Studio でのデバッグのサポートは、開発の初期段階にあります。 **F5** でのデバッグは現在サポートされていません。
+既存の Blazor WebAssembly アプリのデバッグを有効にするには、スタートアップ プロジェクトの *launchSettings. json* ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。
 
-1. デバッグを行わずに `Debug` 構成で Blazor WebAssembly アプリを実行します (**F5** ではなく **Ctrl**+**F5**)。
-1. アプリの [デバッグ] プロパティ ( **[デバッグ]** メニューの最後のエントリ) を開き、HTTP の **[アプリ URL]** をコピーします。 Chromium ベースのブラウザー (Edge ベータまたは Chrome) を使用して、アプリの HTTP アドレス (HTTPS アドレスではありません) を参照します。
-1. 開発者ツール パネルではなく、ブラウザーのウィンドウで、キーボードのフォーカスをアプリに合わせます。 この手順では、開発者ツール パネルを閉じたままにしておくのが適切です。 デバッグが開始された後で、開発者ツール パネルを再び開くことができます。
-1. 以下の Blazor 固有のキーボード ショートカットを選択します。
+```json
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+```
 
-   * Windows の場合: `Shift+Alt+D`
-   * macOS の場合: `Shift+Cmd+D`
+更新されると、*launchSettings. json* ファイルは次の例のようになります。
 
-   **[Unable to find debuggable browser tab] (デバッグ可能なブラウザー タブが見つかりません)** と表示される場合は、「[リモート デバッグの有効化](#enable-remote-debugging)」を参照してください。
-   
-   リモート デバッグの有効化後:
-   
-   1\. 新しいブラウザー ウィンドウが開きます。 前のウィンドウを閉じます。
+[!code-json[](debug/launchSettings.json?highlight=14,22)]
 
-   2\. ブラウザーのウィンドウで、キーボードのフォーカスをアプリに合わせます。
+`inspectUri` プロパティ:
 
-   3\. 新しいブラウザー ウィンドウで Blazor 固有のキーボード ショートカットを選択します。Windows の場合は `Shift+Alt+D`、macOS の場合は `Shift+Cmd+D` です。
+* アプリが Blazor WebAssembly アプリであることを IDE で検出できるようにします。
+* スクリプト デバッグ インフラストラクチャに対して、Blazor のデバッグ プロキシを使用してブラウザーに接続するように指示します。
 
-   4\. ブラウザーに **[DevTools]** タブが表示されます。 **ブラウザー ウィンドウでアプリのタブを再度選択します。**
+## <a name="visual-studio"></a>Visual Studio
 
-   アプリを Visual Studio にアタッチするには、「[Visual Studio でプロセスにアタッチする](#attach-to-process-in-visual-studio)」セクションを参照してください。
+Visual Studio で Blazor WebAssembly アプリをデバッグするには、次のようにします。
 
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+1. [Visual Studio 2019 16.6 (Preview 2 以降) の最新のプレビュー リリースがインストールされている](https://visualstudio.com/preview)ことを確認します。
+1. ASP.NET Core でホストされる新しい Blazor WebAssembly アプリを作成します。
+1. <kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。
+1. `IncrementCount` メソッドで *Counter.razor* にブレークポイントを設定します。
+1. **[カウンター]** タブに移動し、ボタンを選択してブレークポイントをヒットします。
 
-1. `--configuration Debug` オプションを [dotnet run](/dotnet/core/tools/dotnet-run) コマンドに渡すことによって、`Debug` 構成で Blazor WebAssembly アプリを実行します: `dotnet run --configuration Debug`。
-1. シェルのウィンドウに表示された HTTP URL にあるアプリに移動します。
-1. 開発者ツール パネルではなく、アプリにキーボードのフォーカスを合わせます。 この手順では、開発者ツール パネルを閉じたままにしておくのが適切です。 デバッグが開始された後で、開発者ツール パネルを再び開くことができます。
-1. 以下の Blazor 固有のキーボード ショートカットを選択します。
+   ![デバッグ カウンター](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
-   * Windows の場合: `Shift+Alt+D`
-   * macOS の場合: `Shift+Cmd+D`
+1. [ローカル] ウィンドウの `currentCount` フィールドの値を確認します。
 
-   **[Unable to find debuggable browser tab] (デバッグ可能なブラウザー タブが見つかりません)** と表示される場合は、「[リモート デバッグの有効化](#enable-remote-debugging)」を参照してください。
-   
-   リモート デバッグの有効化後:
-   
-   1\. 新しいブラウザー ウィンドウが開きます。 前のウィンドウを閉じます。
+   ![[ローカル] を表示する](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-locals.png)
 
-   2\. 開発者ツール パネルではなく、ブラウザーのウィンドウで、キーボードのフォーカスをアプリに合わせます。
+1. <kbd>F5</kbd> キーを押して、実行を続行します。
 
-   3\. 新しいブラウザー ウィンドウで Blazor 固有のキーボード ショートカットを選択します。Windows の場合は `Shift+Alt+D`、macOS の場合は `Shift+Cmd+D` です。
+Blazor WebAssembly アプリのデバッグ中に、サーバー コードをデバッグすることもできます。
 
----
+1. `OnInitializedAsync` の *FetchData.razor* ページにブレークポイントを設定します。
+1. `Get` アクション メソッドの `WeatherForecastController` にブレークポイントを設定します。
+1. **フェッチ データ** タブに移動し、サーバーへの HTTP 要求を発行する直前に `FetchData` コンポーネント内の最初のブレークポイントをヒットします。
 
-## <a name="enable-remote-debugging"></a>リモート デバッグの有効化
+   ![フェッチ データをデバッグする](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
-リモートデバッグが無効になっている場合、 **[Unable to find debuggable browser tab] (デバッグ可能なブラウザー タブが見つかりません)** というエラー ページが Chrome によって生成されます。 エラー ページには、Blazor デバッグ プロキシがアプリに接続できるように、デバッグ ポートを開いた状態で Chrome を実行するための手順が記載されています。 *すべての Chrome インスタンスを閉じ*、指示のとおり Chrome を再起動します。
+1. <kbd>F5</kbd> キーを押して実行を続行し、`WeatherForecastController` 内のサーバーでブレークポイントをヒットします。
 
-## <a name="debug-the-app"></a>アプリをデバッグする
+   ![デバッグ サーバー](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
-リモート デバッグが有効な状態で Chrome を実行すると、デバッグ用のキーボード ショートカットによって新しいデバッガー タブが開きます。少しすると、 **[ソース]** タブに、アプリ内の .NET アセンブリの一覧が表示されます。 各アセンブリを展開して、デバッグに使用できる *.cs*/ *.razor* ソース ファイルを見つけます。 ブレークポイントを設定し、アプリのタブに戻ります。コードの実行時にブレークポイントにヒットします。 ブレークポイントにヒットした後、コード全体をステップ実行する (`F10`) か、コードの実行を普通に再開 (`F8`) します。
+1. <kbd>F5</kbd> をもう一度押して実行を続行し、天気予報テーブルがレンダリングされたことを確認します。
+
+## <a name="visual-studio-code"></a>Visual Studio Code
+
+Visual Studio Code で Blazor WebAssembly アプリをデバッグするには、次のようにします。
+ 
+1. `debug.javascript.usePreview` が `true` に設定された状態で、[C# 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)と [JavaScript デバッガー (夜間)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 拡張機能をインストールします。
+
+   ![拡張機能](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
+
+   ![JS プレビュー デバッガー](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
+
+1. デバッグが有効な状態で、既存の Blazor WebAssembly アプリを開きます。
+
+   * デバッグを有効にするために追加の設定が必要であることを示す、次の通知が表示された場合は、適切な拡張機能がインストールされており、JavaScript プレビューのデバッグが有効になっていることを確認してから、ウィンドウを再度読み込みます。
+
+     ![追加のセットアップ必要](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+
+   * 通知では、ビルドおよびデバッグのために必要なアセットをアプリに追加することが提案されます。 **[はい]** を選択します。
+
+     ![必要なアセットを追加する](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
+
+1. デバッガーでアプリを起動するには、次の 2 段階の手順を実行します。
+
+   1\. **最初に**、 **.NET Core Launch (Blazor スタンドアロン)** 起動構成を使用してアプリを起動します。
+
+   2\. **アプリが開始したら**、**Chrome の .NET Core Debug Blazor Web Assembly** 起動構成 (Chrome が必要) を使用してブラウザーを起動します。 Chrome ではなく Edge を使用するには、 *.vscode/launch.json* の起動構成の `type` を `pwa-chrome` から `pwa-msedge` に変更します。
+
+1. `Counter` コンポーネントの `IncrementCount` メソッドにブレークポイントを設定し、ボタンを選択してブレークポイントをヒットします。
+
+   ![VS Code のデバッグ カウンター](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
+
+## <a name="debug-in-the-browser"></a>ブラウザーでデバッグする
+
+1. 開発環境でアプリのデバッグ ビルドを実行します。
+
+1. <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>D</kbd> キーを押します。
+
+1. リモート デバッグが有効な状態で、ブラウザーを実行する必要があります。 リモート デバッグが無効になっている場合、 **[Unable to find debuggable browser tab] (デバッグ可能なブラウザー タブが見つかりません)** というエラー ページが生成されます。 エラー ページには、Blazor デバッグ プロキシがアプリに接続できるように、デバッグ ポートを開いた状態でブラウザーを実行するための手順が記載されています。 *すべてのブラウザー インスタンス*を閉じ、指示に従ってブラウザーを再起動します。
+
+リモート デバッグが有効な状態でブラウザーを実行すると、デバッグ用のキーボード ショートカットによって新しいデバッガー タブが開きます。少しすると、 **[ソース]** タブに、アプリ内の .NET アセンブリの一覧が表示されます。 各アセンブリを展開して、デバッグに使用できる *.cs*/ *.razor* ソース ファイルを見つけます。 ブレークポイントを設定し、アプリのタブに戻ります。コードの実行時にブレークポイントにヒットします。 ブレークポイントにヒットした後、コード全体をステップ実行する (<kbd>F10</kbd>) か、コードの実行を普通に再開 (<kbd>F8</kbd>) します。
 
 Blazor は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/devtools-protocol/)を実装し、.NET 固有の情報によってプロトコルを拡張するデバッグ プロキシを備えています。 デバッグ用のキーボード ショートカットが押されると、Blazor はプロキシで Chrome DevTools を指し示します。 プロキシは、デバッグしようとしているブラウザー ウィンドウに接続します (そのためリモート デバッグを有効にする必要があります)。
-
-## <a name="attach-to-process-in-visual-studio"></a>Visual Studio でプロセスにアタッチする
-
-Visual Studio でのアプリのプロセスへのアタッチは、Blazor WebAssembly 用の*一時的*なデバッグ シナリオです。一方、**F5** によるデバッグは開発中です。
-
-実行中のアプリのプロセスを Visual Studio にアタッチするには、次の手順を実行します。
-
-1. Visual Studio で、 **[デバッグ]**  >  **[プロセスにアタッチ]** と選択します。
-1. **[接続の種類]** で、 **[Chrome devtools protocol websocket (no authentication)] (Chrome DevTools Protocol Websocket (認証なし))** を選択します。
-1. **[接続先]** には、アプリの HTTP アドレス (HTTPS アドレスではありません) を貼り付けます。
-1. **[最新の情報に更新]** を選択し、 **[選択可能なプロセス]** のエントリを最新の情報に更新します。
-1. デバッグするブラウザー プロセスを選択し、 **[アタッチ]** を選択します。
-1. **[コードの種類の選択]** ダイアログで、アタッチ先の特定ブラウザーのコードの種類 (Edge または Chrome) を選択し、 **[OK]** を選択します。
 
 ## <a name="browser-source-maps"></a>ブラウザー ソース マップ
 

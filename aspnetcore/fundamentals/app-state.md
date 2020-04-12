@@ -8,12 +8,12 @@ ms.date: 03/06/2020
 no-loc:
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 0cf75c14e09744907af926f0ec314801efeb3023
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: 85d2a418c3aaae40bbcdc040095c2c98d4b7242c
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083269"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80640044"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 
@@ -164,7 +164,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=18-19,22-23)]
 
-分散キャッシュのシナリオを有効にするには、メモリ内キャッシュを使用する場合であっても、すべてのセッション データをシリアル化する必要があります。 文字列と整数のシリアライザーは、[ISession](/dotnet/api/microsoft.aspnetcore.http.isession)) の拡張メソッドによって提供されます。 複合型は、JSON などの別のメカニズムを使ってユーザーがシリアル化する必要があります。
+分散キャッシュのシナリオを有効にするには、メモリ内キャッシュを使用する場合であっても、すべてのセッション データをシリアル化する必要があります。 文字列と整数のシリアライザーは、[ISession](/dotnet/api/microsoft.aspnetcore.http.isession) の拡張メソッドによって提供されます。 複合型は、JSON などの別のメカニズムを使ってユーザーがシリアル化する必要があります。
 
 次のサンプル コードを使用して、オブジェクトをシリアル化します。
 

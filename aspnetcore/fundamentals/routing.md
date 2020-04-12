@@ -5,14 +5,14 @@ description: ASP.NET Core ルーティングによって、HTTP 要求の照合�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 3/25/2020
+ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 2ebba716de90f142a66cf7619b5a4b0c77684bd4
-ms.sourcegitcommit: 0c62042d7d030ec5296c73bccd9f9b961d84496a
+ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80270447"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80751151"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -580,7 +580,7 @@ ASP.NET Core フレームワークでは、正規表現コンストラクター�
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/TestController.cs?name=snippet&highlight=6,13)]
 
-[MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x/RoutingSample/Extensions/ControllerContextExtensions.cs) メソッドは、[サンプルのダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x)に含まれており、ルーティング情報を表示するために使用されます。
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 `MyCustomConstraint` を実装することにより、ルート パラメーターに `0` が適用されなくなります。
 
@@ -984,6 +984,8 @@ app.UseEndpoints(endpoints =>
 * エンドポイントに一致しない要求。
 
 これにより、承認ミドルウェアはルーティングのコンテキストの外部で役に立ちます。 承認ミドルウェアは、従来のミドルウェア プログラミングに使用できます。
+
+[!INCLUDE[](~/includes/dbg-route.md)]
 
 ::: moniker-end
 
@@ -1626,7 +1628,7 @@ URL 生成サポートを使用すると、アプリを相互にリンクする 
 * 応答ではルーティングを使用し、ルート情報に基づいて URL (リダイレクトやリンクなど) を生成できます。そのため、URL をハードコーディングする必要がなく、保守管理が容易になります。
 * URL の生成は、任意の拡張機能をサポートする、ルートに基づきます。 <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> では、URL を構築するためのメソッドが提供されます。
 <!-- fix [middleware](xref:fundamentals/middleware/index) -->
-ルーティングは <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> クラスにより`[middleware](xref:fundamentals/middleware/index)` パイプラインに接続されます。 [ASP.NET Core MVC](xref:mvc/overview) では、ミドルウェア パイプラインにその構成の一部としてルーティングが追加され、MVC および Razor Pages アプリでのルーティングが処理されます。 スタンドアロン コンポーネントとしてルーティングを利用する方法については、「[ルーティング ミドルウェアの使用](#use-routing-middleware)」セクションを参照してください。
+ルーティングは <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> クラスにより[ミドルウェア](xref:fundamentals/middleware/index) パイプラインに接続されます。 [ASP.NET Core MVC](xref:mvc/overview) では、ミドルウェア パイプラインにその構成の一部としてルーティングが追加され、MVC および Razor Pages アプリでのルーティングが処理されます。 スタンドアロン コンポーネントとしてルーティングを利用する方法については、「[ルーティング ミドルウェアの使用](#use-routing-middleware)」セクションを参照してください。
 
 ### <a name="url-matching"></a>URL 一致
 
@@ -1980,6 +1982,5 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 ## <a name="complex-segments"></a>複雑なセグメント
 
 複雑なセグメント (例: `[Route("/x{token}y")]`) は、リテラルを右から左に最短一致の方法で照合することによって処理されます。 複雑なセグメントの一致方法に関する詳しい説明については、[こちらのコード](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)をご覧ください。 この[コード サンプル](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)は ASP.NET Core では使われていませんが、複雑なセグメントに関する優れた説明が提供されています。
-
 
 ::: moniker-end
