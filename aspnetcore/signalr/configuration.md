@@ -1,41 +1,41 @@
 ---
-title: SignalR 構成の ASP.NET Core
+title: ASP.NETコアSignalR構成
 author: bradygaster
-description: ASP.NET Core SignalR アプリを構成する方法について説明します。
+description: ASP.NETコアSignalRアプリを構成する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 12/10/2019
+ms.date: 04/12/2020
 no-loc:
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: c225ff88110dc17185a430ac1c422d2433306115
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2e9fda6d57986171fc375a2e0fdebf9e111218e0
+ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651686"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81223986"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR の構成
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="jsonmessagepack-serialization-options"></a>JSON/MessagePack のシリアル化オプション
+## <a name="jsonmessagepack-serialization-options"></a>JSON/メッセージパックのシリアル化オプション
 
-ASP.NET Core SignalR は、 [JSON](https://www.json.org/)と[messagepack](https://msgpack.org/index.html)の2つのプロトコルをサポートしています。 各プロトコルには、シリアル化の構成オプションがあります。
+ASP.NETコア SignalR は、メッセージをエンコードするための 2 つのプロトコルをサポートしています: [JSON](https://www.json.org/)と[MessagePack](https://msgpack.org/index.html)。 各プロトコルには、シリアル化構成オプションがあります。
 
-JSON のシリアル化は、 [Addjsonprotocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol)拡張メソッドを使用して、サーバー上で構成できます。 `AddJsonProtocol` は、`Startup.ConfigureServices`の[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr)の後に追加できます。 `AddJsonProtocol` メソッドは、`options` オブジェクトを受け取るデリゲートを受け取ります。 そのオブジェクトの[PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions)プロパティは、引数と戻り値のシリアル化を構成するために使用できる `System.Text.Json` <xref:System.Text.Json.JsonSerializerOptions> オブジェクトです。 詳細については、「system.string」[ドキュメント](/dotnet/api/system.text.json)を参照してください。
+JSON シリアル化は[、AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol)拡張メソッドを使用してサーバー上で構成できます。 `AddJsonProtocol`の[後に追加](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr)することができます`Startup.ConfigureServices`。 この`AddJsonProtocol`メソッドは、オブジェクトを受け取`options`るデリゲートを受け取ります。 そのオブジェクトの[PayloadSerializerOptions](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializeroptions)プロパティは`System.Text.Json`<xref:System.Text.Json.JsonSerializerOptions>、引数と戻り値のシリアル化を構成するために使用できるオブジェクトです。 詳細については[、System.Text.Json ドキュメントを参照してください](/dotnet/api/system.text.json)。
 
-たとえば、既定の "キャメルケース" の名前ではなく、プロパティ名の大文字と小文字の区別を変更しないようにシリアライザーを構成するには、`Startup.ConfigureServices`で次のコードを使用します。
+たとえば、既定の "camelCase" 名ではなく、プロパティ名の大文字と小文字を変更しないようにシリアライザーを構成するには、 で`Startup.ConfigureServices`次のコードを使用します。
 
 ```csharp
 services.AddSignalR()
     .AddJsonProtocol(options => {
-        options.PayloadSerializerOptions.PropertyNamingPolicy = null
+        options.PayloadSerializerOptions.PropertyNamingPolicy = null;
     });
 ```
 
-.NET クライアントでは、 [HubConnectionBuilder](/dotnet/api/microsoft.aspnetcore.signalr.client.hubconnectionbuilder)に同じ `AddJsonProtocol` 拡張メソッドが存在します。 拡張メソッドを解決するには、`Microsoft.Extensions.DependencyInjection` 名前空間をインポートする必要があります。
+NET クライアントでは、同じ`AddJsonProtocol`拡張メソッドが[ハブ接続ビルダー](/dotnet/api/microsoft.aspnetcore.signalr.client.hubconnectionbuilder)に存在します。 拡張`Microsoft.Extensions.DependencyInjection`メソッドを解決するには、名前空間をインポートする必要があります。
 
 ```csharp
 // At the top of the file:
@@ -50,34 +50,34 @@ var connection = new HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 現時点では、JSON シリアル化を JavaScript クライアントで構成することはできません。
+> 現時点では、JavaScript クライアントで JSON シリアル化を構成することはできません。
 
-### <a name="switch-to-newtonsoftjson"></a>Newtonsoft. Json に切り替える
+### <a name="switch-to-newtonsoftjson"></a>ニュートンソフトに切り替える.
 
-`System.Text.Json`でサポートされていない `Newtonsoft.Json` の機能が必要な場合は、「 [Newtonsoft. Json への切り替え」を](xref:migration/22-to-30#switch-to-newtonsoftjson)参照してください。
+の機能`Newtonsoft.Json`が必要な場合は`System.Text.Json`、「 [Newtonsoft.Json に切り替える](xref:migration/22-to-30#switch-to-newtonsoftjson)」を参照してください。
 
-### <a name="messagepack-serialization-options"></a>MessagePack のシリアル化オプション
+### <a name="messagepack-serialization-options"></a>メッセージ パックのシリアル化オプション
 
-MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/microsoft.extensions.dependencyinjection.msgpackprotocoldependencyinjectionextensions.addmessagepackprotocol)呼び出しにデリゲートを指定することによって構成できます。 詳細については[、「SignalR の Messagepack](xref:signalr/messagepackhubprotocol) 」を参照してください。
+メッセージ パックシリアル化は、[呼び出](/dotnet/api/microsoft.extensions.dependencyinjection.msgpackprotocoldependencyinjectionextensions.addmessagepackprotocol)しにデリゲートを提供することによって構成できます。 詳細については[、SignalR のメッセージ パック](xref:signalr/messagepackhubprotocol)を参照してください。
 
 > [!NOTE]
-> 現時点では、JavaScript クライアントで MessagePack のシリアル化を構成することはできません。
+> 現時点では、JavaScript クライアントでメッセージ パックのシリアル化を構成することはできません。
 
-## <a name="configure-server-options"></a>サーバーオプションの構成
+## <a name="configure-server-options"></a>サーバー オプションの構成
 
-次の表では、SignalR hub を構成するためのオプションについて説明します。
+次の表に、SignalR ハブを設定するためのオプションを示します。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `ClientTimeoutInterval` | 30 秒 | サーバーは、この間隔で (キープアライブを含む) メッセージを受信していない場合に、クライアントが切断されていると見なします。 クライアントが実際に切断されているとマークされるまでに、このタイムアウト間隔より長くかかることがあります。これは、この実装方法によるものです。 推奨値は、`KeepAliveInterval` 値の倍精度浮動小数点数です。|
-| `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにするために ping メッセージが自動的に送信されます。 `KeepAliveInterval`を変更する場合は、クライアントの `ServerTimeout`/`serverTimeoutInMilliseconds` 設定を変更します。 推奨される `ServerTimeout`/`serverTimeoutInMilliseconds` 値は `KeepAliveInterval` 値の倍精度浮動小数点数です。  |
-| `SupportedProtocols` | インストールされているすべてのプロトコル | このハブでサポートされているプロトコル。 既定では、サーバーに登録されているすべてのプロトコルが許可されますが、個々のハブの特定のプロトコルを無効にするために、この一覧からプロトコルを削除することができます。 |
-| `EnableDetailedErrors` | `false` | `true`した場合、ハブメソッドで例外がスローされると、詳細な例外メッセージがクライアントに返されます。 既定値は `false`です。これらの例外メッセージには機密情報が含まれる可能性があるためです。 |
-| `StreamBufferCapacity` | `10` | クライアントアップロードストリームに対してバッファーできる項目の最大数。 この制限に達すると、サーバーがストリーム項目を処理するまで、呼び出しの処理はブロックされます。|
-| `MaximumReceiveMessageSize` | 32 KB | 1つの受信ハブメッセージの最大サイズ。 |
+| `ClientTimeoutInterval` | 30 秒 | この間隔でメッセージ (キープアライブを含む) を受信していない場合、サーバーはクライアントが切断されたと見なします。 クライアントが実際に切断としてマークされるには、このタイムアウト間隔よりも長い時間がかかる可能性があります。 推奨値は 2`KeepAliveInterval`倍の値です。|
+| `HandshakeTimeout` | 15 秒 | クライアントがこの時間内に最初のハンドシェイク メッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにする ping メッセージが自動的に送信されます。 を変更`KeepAliveInterval`する場合は`ServerTimeout`/`serverTimeoutInMilliseconds`、クライアントの設定を変更します。 推奨値`ServerTimeout`/`serverTimeoutInMilliseconds`は 2`KeepAliveInterval`倍の値です。  |
+| `SupportedProtocols` | インストールされているすべてのプロトコル | このハブでサポートされているプロトコル。 既定では、サーバーに登録されているすべてのプロトコルは許可されますが、この一覧からプロトコルを削除して、個々のハブの特定のプロトコルを無効にすることができます。 |
+| `EnableDetailedErrors` | `false` | 場合`true`、ハブ メソッドで例外がスローされたときに、詳細な例外メッセージがクライアントに返されます。 これらの例外メッセージ`false`には機密情報が含まれる可能性があるため、既定では 、 が使用されます。 |
+| `StreamBufferCapacity` | `10` | クライアント アップロード ストリーム用にバッファリングできる項目の最大数。 この制限に達すると、サーバーがストリーム項目を処理するまで、呼び出しの処理はブロックされます。|
+| `MaximumReceiveMessageSize` | 32 KB | 単一の受信ハブ メッセージの最大サイズ。 |
 
-オプションは、`Startup.ConfigureServices`の `AddSignalR` 呼び出しに委任オプションを指定することで、すべてのハブに対して構成できます。
+オプションは、 内の呼び出しに代えてオプションを`AddSignalR`提供することで`Startup.ConfigureServices`、すべてのハブに対して構成できます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -90,7 +90,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-1つのハブのオプションは `AddSignalR` で提供されるグローバルオプションを上書きし、<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddHubOptions*>を使用して構成できます。
+単一のハブのオプションは、 で`AddSignalR`提供されるグローバル オプションを<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddHubOptions*>オーバーライドし、 を使用して構成できます。
 
 ```csharp
 services.AddSignalR().AddHubOptions<MyHub>(options =>
@@ -99,9 +99,9 @@ services.AddSignalR().AddHubOptions<MyHub>(options =>
 });
 ```
 
-### <a name="advanced-http-configuration-options"></a>詳細な HTTP 構成オプション
+### <a name="advanced-http-configuration-options"></a>高度な HTTP 構成オプション
 
-トランスポートおよびメモリバッファー管理に関連する詳細設定を構成するには、`HttpConnectionDispatcherOptions` を使用します。 これらのオプションは、`Startup.Configure`で[Maphub\<t >](/dotnet/api/microsoft.aspnetcore.builder.hubendpointroutebuilderextensions.maphub)にデリゲートを渡すことによって構成されます。
+トランスポート`HttpConnectionDispatcherOptions`とメモリ バッファ管理に関連する詳細設定を構成するために使用します。 これらのオプションは、デリゲートを[MapHub\<T>](/dotnet/api/microsoft.aspnetcore.builder.hubendpointroutebuilderextensions.maphub) `Startup.Configure`に渡すことによって構成されます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -120,42 +120,42 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
+次の表では、core SignalR の高度な HTTP オプションASP.NET設定するためのオプションについて説明します。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `ApplicationMaxBufferSize` | 32 KB | サーバーがバック圧力を適用する前に、クライアントから受信した最大バイト数。 この値を大きくすると、バック圧力を適用せずに、より大きいメッセージをサーバーがより迅速に受信できるようになりますが、メモリ使用量が増加する可能性があります。 |
-| `AuthorizationData` | ハブクラスに適用された `Authorize` の属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
-| `TransportMaxBufferSize` | 32 KB | サーバーがバック圧力を観察する前に、アプリによって送信された最大バイト数。 この値を大きくすると、バック圧力を待機することなく、より大きなメッセージをサーバーでバッファーできるようになりますが、メモリの消費量が増加する可能性があります。 |
-| `Transports` | すべてのトランスポートが有効になります。 | クライアントが接続に使用できるトランスポートを制限できる、`HttpTransportType` 値のビットフラグ列挙型。 |
-| `LongPolling` | 以下を参照してください。 | 長いポーリングトランスポートに固有の追加オプション。 |
-| `WebSockets` | 以下を参照してください。 | Websocket トランスポートに固有の追加オプション。 |
+| `ApplicationMaxBufferSize` | 32 KB | バックプレッシャを適用する前にサーバーがバッファリングするクライアントから受信した最大バイト数。 この値を大きくすると、バックプレッシャを適用せずに、サーバーがより大きなメッセージを受信する時間が増えますが、メモリ消費量が増加する可能性があります。 |
+| `AuthorizationData` | ハブ クラスに`Authorize`適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
+| `TransportMaxBufferSize` | 32 KB | バックプレッシャを観察する前にサーバーがバッファーに入れるアプリによって送信される最大バイト数。 この値を大きくすると、サーバーはバックプレッシャを待たずに大きなメッセージをより迅速にバッファリングできますが、メモリ消費量を増加させることができます。 |
+| `Transports` | すべてのトランスポートが有効になっています。 | クライアントが接続に使用`HttpTransportType`できるトランスポートを制限できる値の列挙値をビット フラグにします。 |
+| `LongPolling` | 以下を参照してください。 | ロングポーリングトランスポートに固有の追加オプション。 |
+| `WebSockets` | 以下を参照してください。 | WebSocket トランスポートに固有の追加オプション。 |
 
-長いポーリングトランスポートには、`LongPolling` プロパティを使用して構成できる追加のオプションがあります。
-
-| オプション | Default value | 説明 |
-| ------ | ------------- | ----------- |
-| `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
-
-WebSocket トランスポートには、`WebSockets` プロパティを使用して構成できる追加のオプションがあります。
+ロング ポーリング トランスポートには、プロパティを使用して構成できる`LongPolling`追加オプションがあります。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
-| `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol` ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
+| `PollTimeout` | 90秒 | 1 回のポーリング要求を終了するまでに、サーバーがクライアントにメッセージを送信するまで待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求を頻繁に発行します。 |
 
-## <a name="configure-client-options"></a>クライアントオプションを構成する
+WebSocket トランスポートには、プロパティを使用して構成できる追加`WebSockets`オプションがあります。
 
-クライアントオプションは `HubConnectionBuilder` の種類で構成できます (.NET および JavaScript クライアントで使用できます)。 Java クライアントでも使用できますが、`HttpHubConnectionBuilder` サブクラスは、ビルダーの構成オプションと `HubConnection` 自体に含まれています。
+| オプション | Default value | 説明 |
+| ------ | ------------- | ----------- |
+| `CloseTimeout` | 5 秒 | サーバーが閉じた後、この時間内にクライアントが閉じられなかった場合、接続は終了します。 |
+| `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、必要な値を返す必要があります。 |
+
+## <a name="configure-client-options"></a>クライアント オプションの構成
+
+クライアント オプションは、型に`HubConnectionBuilder`対して構成できます (.NET クライアントおよび JavaScript クライアントで使用可能)。 Java クライアントでも使用できますが、`HttpHubConnectionBuilder`サブクラスにはビルダーの設定オプションとそれ自体が`HubConnection`含まれます。
 
 ### <a name="configure-logging"></a>ログの構成
 
-ログは、.NET クライアントで `ConfigureLogging` メソッドを使用して構成されます。 ログプロバイダーとフィルターは、サーバーと同じ方法で登録できます。 詳細については、ASP.NET Core のドキュメントの[ログ](xref:fundamentals/logging/index)を参照してください。
+ログ記録は、このメソッドを使用して`ConfigureLogging`.NET クライアントで構成されます。 ログ プロバイダーとフィルターは、サーバー上と同じ方法で登録できます。 詳細については[、ASP.NETコアのドキュメントのロギング](xref:fundamentals/logging/index)を参照してください。
 
 > [!NOTE]
-> ログプロバイダーを登録するには、必要なパッケージをインストールする必要があります。 完全な一覧については、ドキュメントの「[組み込みのログプロバイダー](xref:fundamentals/logging/index#built-in-logging-providers) 」セクションを参照してください。
+> ログ プロバイダを登録するには、必要なパッケージをインストールする必要があります。 詳細については、ドキュメントの[「組み込みログ プロバイダ](xref:fundamentals/logging/index#built-in-logging-providers)」セクションを参照してください。
 
-たとえば、コンソールのログ記録を有効にするには、`Microsoft.Extensions.Logging.Console` NuGet パッケージをインストールします。 `AddConsole` 拡張メソッドを呼び出します。
+たとえば、コンソールのログ記録を有効にするには、NuGet パッケージをインストールします`Microsoft.Extensions.Logging.Console`。 拡張メソッド`AddConsole`を呼び出します。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -167,7 +167,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、同様の `configureLogging` メソッドが存在します。 生成するログメッセージの最小レベルを示す `LogLevel` 値を指定します。 ログは、ブラウザーのコンソールウィンドウに書き込まれます。
+JavaScript クライアントでは、同様`configureLogging`のメソッドが存在します。 生成する`LogLevel`ログ メッセージの最小レベルを示す値を指定します。 ログは、ブラウザのコンソール ウィンドウに書き込まれます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -176,7 +176,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-`LogLevel` 値の代わりに、ログレベル名を表す `string` の値を指定することもできます。 これは、`LogLevel` 定数にアクセスできない環境で SignalR logging を構成する場合に便利です。
+値の`LogLevel`代わりに、ログ レベル名を`string`表す値を指定することもできます。 これは、定数にアクセスできない環境で SignalR ロギングを設定する場合に`LogLevel`便利です。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -185,7 +185,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-次の表は、使用可能なログレベルを示しています。 `configureLogging` に指定する値は、ログに記録される**最小**ログレベルを設定します。 このレベルでログに記録されたメッセージ、**またはテーブルに記載されているレベルの**メッセージはログに記録されます。
+次の表は、使用可能なログ レベルの一覧です。 指定する`configureLogging`値は、ログに記録される**最小**ログ レベルを設定します。 このレベルでログに記録されたメッセージ **、または表に示されたレベルの後に記録**されたメッセージがログに記録されます。
 
 | String                      | LogLevel               |
 | --------------------------- | ---------------------- |
@@ -198,17 +198,17 @@ let connection = new signalR.HubConnectionBuilder()
 | `none`                      | `LogLevel.None`        |
 
 > [!NOTE]
-> 完全にログ記録を無効にするには、`configureLogging` 方法で `signalR.LogLevel.None` を指定します。
+> ログの記録を完全に`signalR.LogLevel.None`無効にするには`configureLogging`、メソッドで指定します。
 
-ログ記録の詳細については、 [SignalR Diagnostics のドキュメント](xref:signalr/diagnostics)を参照してください。
+ログ記録の詳細については[、SignalR 診断のドキュメントを参照してください](xref:signalr/diagnostics)。
 
-SignalR Java クライアントは、 [SLF4J](https://www.slf4j.org/)ライブラリを使用してログを記録します。 これは、ライブラリのユーザーが特定のログの依存関係を使用して独自のログの実装を選択できるようにする、高レベルのログ記録 API です。 次のコードスニペットは、SignalR Java クライアントで `java.util.logging` を使用する方法を示しています。
+SignalR Java クライアントは[、SLF4J](https://www.slf4j.org/)ライブラリを使用してロギングします。 これは、ライブラリのユーザーが特定のロギング依存関係を持ち込むことによって、独自のログ記録実装を選択できるようにする高レベルのロギング API です。 次のコード スニペットは、SignalR Java クライアントでの使用方法`java.util.logging`を示しています。
 
 ```gradle
 implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 ```
 
-依存関係にログ記録を構成しない場合、SLF4J は既定の非操作 logger を読み込み、次の警告メッセージを表示します。
+依存関係でロギングを設定しない場合、SLF4J はデフォルトの操作なしロガーをロードし、次の警告メッセージを表示します。
 
 ```
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
@@ -216,13 +216,13 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ```
 
-これは無視してもかまいません。
+これは無視しても問題ありません。
 
 ### <a name="configure-allowed-transports"></a>許可されたトランスポートの構成
 
-SignalR によって使用されるトランスポートは、`WithUrl` の呼び出し (JavaScript の`withUrl`) で構成できます。 `HttpTransportType` の値のビットごとの OR を使用して、指定したトランスポートのみを使用するようにクライアントを制限できます。 既定では、すべてのトランスポートが有効になっています。
+SignalR によって使用されるトランスポートは、呼び出`WithUrl`しで`withUrl`構成できます (JavaScript で)。 の値のビット単位の OR`HttpTransportType`を使用して、クライアントが指定されたトランスポートのみを使用するように制限できます。 すべてのトランスポートは既定で有効になっています。
 
-たとえば、サーバーから送信されたイベントトランスポートを無効にし、Websocket と長いポーリング接続を許可するには、次のようにします。
+たとえば、サーバー送信イベント トランスポートを無効にするが、WebSocket とロング ポーリング接続を許可するには、次の手順を実行します。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -230,7 +230,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、`withUrl`に提供される options オブジェクトの `transport` フィールドを設定することによって、トランスポートを構成します。
+JavaScript クライアントでは、トランスポートは、 に提供される`transport`オプション オブジェクトのフィールドを設定`withUrl`して構成されます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -238,9 +238,9 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-このバージョンの Java クライアント websocket は、唯一の利用可能なトランスポートです。
+このバージョンの Java クライアント Web ソケットは、使用可能なトランスポートのみです。
 
-Java クライアントでは、トランスポートは、`HttpHubConnectionBuilder`の `withTransport` メソッドを使用して選択されます。 Java クライアントでは、既定で Websocket トランスポートが使用されます。
+Java クライアントでは、トランスポートは、 の`withTransport`メソッドで選択されます`HttpHubConnectionBuilder`。 Java クライアントは、デフォルトで WebSockets トランスポートを使用します。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -249,13 +249,13 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 ```
 
 > [!NOTE]
-> SignalR Java クライアントは、トランスポートフォールバックをまだサポートしていません。
+> SignalR Java クライアントは、まだトランスポート フォールバックをサポートしていません。
 
-### <a name="configure-bearer-authentication"></a>ベアラー認証を構成する
+### <a name="configure-bearer-authentication"></a>ベアラ認証の構成
 
-SignalR 要求と共に認証データを提供するには、`AccessTokenProvider` オプション (JavaScript の`accessTokenFactory`) を使用して、目的のアクセストークンを返す関数を指定します。 .NET クライアントでは、このアクセストークンは HTTP "ベアラー認証" トークンとして渡されます (`Bearer`の種類の `Authorization` ヘッダーを使用します)。 JavaScript クライアントでは、アクセストークンはベアラートークンとして使用されますが、ブラウザー Api がヘッダー (特に、サーバーが送信するイベントと Websocket 要求) を適用する機能を制限する場合は**例外**です。 このような場合、アクセストークンは `access_token`クエリ文字列値として指定されます。
+SignalR 要求と共に認証データを提供するには`AccessTokenProvider`、オプション`accessTokenFactory`(JavaScript で) を使用して、目的のアクセス トークンを返す関数を指定します。 NET クライアントでは、このアクセス トークンは HTTP "ベアラー認証" トークンとして渡されます`Authorization`(ヘッダーの種類を`Bearer`使用します)。 JavaScript クライアントでは、ブラウザー API がヘッダーの適用を制限する場合を除いて (特に、サーバー送信イベントと WebSocket 要求) 場合**を除き**、アクセス トークンはベアラー トークンとして使用されます。 このような場合、アクセス トークンはクエリ文字列値`access_token`として提供されます。
 
-.NET クライアントでは、`WithUrl`のオプションデリゲートを使用して、`AccessTokenProvider` オプションを指定できます。
+NET クライアントでは、 の`AccessTokenProvider`オプション デリゲートを使用してオプションを指定`WithUrl`できます。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -267,7 +267,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、`withUrl`の options オブジェクトの `accessTokenFactory` フィールドを設定することにより、アクセストークンが構成されます。
+JavaScript クライアントでは、アクセス トークンは、 のオプション`accessTokenFactory`オブジェクトのフィールドを設定`withUrl`して構成します。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -281,7 +281,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalR Java クライアントでは、 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)にアクセストークンファクトリを提供することによって、認証に使用するベアラートークンを構成できます。 [WithAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)を使用して、 [RxJava](https://github.com/ReactiveX/RxJava)の[単一\<文字列 >](https://reactivex.io/documentation/single.html)を指定します。 [単一の defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)を呼び出すことで、クライアントのアクセストークンを生成するロジックを作成できます。
+SignalR Java クライアントでは[、HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)にアクセス トークン ファクトリを提供することで、認証に使用するベアラー トークンを構成できます。 を使用[して](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)[、RxJava](https://github.com/ReactiveX/RxJava) [の単一\<文字列>](https://reactivex.io/documentation/single.html)を提供します。 [Single.defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)を呼び出すと、クライアントのアクセス トークンを生成するロジックを記述できます。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -291,75 +291,75 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
     })).build();
 ```
 
-### <a name="configure-timeout-and-keep-alive-options"></a>タイムアウトとキープアライブオプションを構成する
+### <a name="configure-timeout-and-keep-alive-options"></a>タイムアウトとキープアライブ オプションを構成する
 
-タイムアウトとキープアライブの動作を構成するための追加オプションは、`HubConnection` オブジェクト自体で利用できます。
+`HubConnection`タイムアウトとキープアライブ動作を設定するための追加オプションは、オブジェクト自体で使用できます。
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`Closed` イベント (JavaScript では`onclose`) をトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`Closed` イベント (JavaScript では`onclose`) をトリガーします。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `KeepAliveInterval` | 15 秒 | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバーで設定された `ClientTimeoutInterval` にメッセージを送信していない場合、サーバーはクライアントを切断したと見なします。 |
+| `ServerTimeout` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なし、イベントを`Closed`(JavaScript で)`onclose`トリガーします。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `HandshakeTimeout` | 15 秒 | 最初のサーバー ハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`Closed`イベントを (JavaScript で)`onclose`トリガーします。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `KeepAliveInterval` | 15 秒 | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーは間隔の開始にリセットされます。 クライアントがサーバー上のセット内のメッセージを`ClientTimeoutInterval`送信していない場合、サーバーはクライアントが切断されたと見なします。 |
 
-.NET クライアントでは、タイムアウト値は `TimeSpan` 値として指定されます。
+NET クライアントでは、タイムアウト値が値として`TimeSpan`指定されます。
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`onclose` イベントをトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバーで設定された `ClientTimeoutInterval` にメッセージを送信していない場合、サーバーはクライアントを切断したと見なします。 |
+| `serverTimeoutInMilliseconds` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なしてイベントをトリガー`onclose`します。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `keepAliveIntervalInMilliseconds` | 15 秒 (15,000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーは間隔の開始にリセットされます。 クライアントがサーバー上のセット内のメッセージを`ClientTimeoutInterval`送信していない場合、サーバーはクライアントが切断されたと見なします。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `getServerTimeout` / `setServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`onClose` イベントをトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `withHandshakeResponseTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`onClose` イベントをトリガーします。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `getKeepAliveInterval` / `setKeepAliveInterval` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバーで設定された `ClientTimeoutInterval` にメッセージを送信していない場合、サーバーはクライアントを切断したと見なします。 |
+| `getServerTimeout` / `setServerTimeout` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なしてイベントをトリガー`onClose`します。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `withHandshakeResponseTimeout` | 15 秒 | 最初のサーバー ハンドシェイクのタイムアウト。 この間隔でサーバーがハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルしてイベントをトリガー`onClose`します。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `getKeepAliveInterval` / `setKeepAliveInterval` | 15 秒 (15,000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーは間隔の開始にリセットされます。 クライアントがサーバー上のセット内のメッセージを`ClientTimeoutInterval`送信していない場合、サーバーはクライアントが切断されたと見なします。 |
 
 ---
 
-### <a name="configure-additional-options"></a>追加のオプションを構成する
+### <a name="configure-additional-options"></a>詳細設定オプションの構成
 
-追加のオプションは `HubConnectionBuilder` または Java クライアントの `HttpHubConnectionBuilder` のさまざまな構成 Api で `WithUrl` (JavaScript の`withUrl`) メソッドで構成できます。
+追加オプション`WithUrl`は、Java`withUrl`クライアントの各種構成 API 上`HubConnectionBuilder`または JavaScript での`HttpHubConnectionBuilder`(JavaScript) メソッドで構成できます。
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 | .NET オプション |  既定値 | 説明 |
 | ----------- | -------------- | ----------- |
-| `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
-| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
-| `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
-| `HttpMessageHandlerFactory` | `null` | HTTP 要求の送信に使用される `HttpMessageHandler` を構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、新しい `HttpMessageHandler` インスタンスを返します。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
+| `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `SkipNegotiation` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | Empty | すべての HTTP 要求で送信する HTTP クッキーのコレクション。 |
+| `Credentials` | Empty | すべての HTTP 要求で送信する資格情報。 |
+| `CloseTimeout` | 5 秒 | ウェブソケットのみ。 サーバーがクローズ要求を確認するまでの、クライアントがクローズ後に待機する最大時間。 この時間内にサーバーがクローズを確認しない場合、クライアントは切断されます。 |
+| `Headers` | Empty | すべての HTTP 要求で送信する追加の HTTP ヘッダーのマップ。 |
+| `HttpMessageHandlerFactory` | `null` | HTTP 要求の送信に使用されるを`HttpMessageHandler`構成または置き換えるために使用できるデリゲート。 Web ソケット接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、既定値をパラメーターとして受け取ります。 その既定値の設定を変更して返すか、新`HttpMessageHandler`しいインスタンスを返します。 **ハンドラを置き換える場合は、指定されたハンドラから保持する設定を必ずコピーし、そうでない場合は、設定されたオプション (Cookie や Headers など) が新しいハンドラに適用されないようにしてください。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
-| `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
-| `WebSocketConfiguration` | `null` | 追加の WebSocket オプションを構成するために使用できるデリゲート。 オプションの構成に使用できる[ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions)のインスタンスを受け取ります。 |
+| `UseDefaultCredentials` | `false` | HTTP および WebSocket 要求の既定の資格情報を送信するには、このブール値を設定します。 これにより、Windows 認証を使用できるようになります。 |
+| `WebSocketConfiguration` | `null` | 追加の WebSocket オプションを構成するために使用できるデリゲート。 オプションの構成に使用できる[ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions)のインスタンスを受信します。 |
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | Default value | 説明 |
+| Java スクリプトオプション | Default value | 説明 |
 | ----------------- | ------------- | ----------- |
-| `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `skipNegotiation` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java オプション | Default value | 説明 |
 | ----------- | ------------- | ----------- |
-| `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
-| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `shouldSkipNegotiate` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `withHeader` `withHeaders` | Empty | すべての HTTP 要求で送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
-.NET クライアントでは、これらのオプションは `WithUrl`に提供されるオプションデリゲートによって変更できます。
+NET クライアントでは、これらのオプションは、 に提供されるオプション デリゲートによって`WithUrl`変更できます。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -371,7 +371,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、これらのオプションは `withUrl`に提供される JavaScript オブジェクトで提供できます。
+JavaScript クライアントでは、これらのオプションは`withUrl`、次の JavaScript オブジェクトで提供できます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -382,7 +382,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Java クライアントでは、これらのオプションはから返された `HttpHubConnectionBuilder` のメソッドを使用して構成でき `HubConnectionBuilder.create("HUB URL")`
+Java クライアントでは、これらのオプションは、そこから返されるメソッドで構成`HttpHubConnectionBuilder`できます。`HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -392,7 +392,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
         .build();
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -404,13 +404,13 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 ::: moniker-end
 ::: moniker range="= aspnetcore-2.2"
 
-## <a name="jsonmessagepack-serialization-options"></a>JSON/MessagePack のシリアル化オプション
+## <a name="jsonmessagepack-serialization-options"></a>JSON/メッセージパックのシリアル化オプション
 
-ASP.NET Core SignalR は、 [JSON](https://www.json.org/)と[messagepack](https://msgpack.org/index.html)の2つのプロトコルをサポートしています。 各プロトコルには、シリアル化の構成オプションがあります。
+ASP.NETコア SignalR は、メッセージをエンコードするための 2 つのプロトコルをサポートしています: [JSON](https://www.json.org/)と[MessagePack](https://msgpack.org/index.html)。 各プロトコルには、シリアル化構成オプションがあります。
 
-JSON のシリアル化は、 [Addjsonprotocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol)拡張メソッドを使用してサーバー上で構成できます。これは、`Startup.ConfigureServices` メソッドで[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr)の後に追加できます。 `AddJsonProtocol` メソッドは、`options` オブジェクトを受け取るデリゲートを受け取ります。 そのオブジェクトの[PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings)プロパティは、引数と戻り値のシリアル化を構成するために使用できる JSON.NET `JsonSerializerSettings` オブジェクトです。 詳細については、[JSON.NET のドキュメント](https://www.newtonsoft.com/json/help/html/Introduction.htm)を参照してください。
+JSON シリアル化は、メソッドの[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr)の後に追加できる[AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol)拡張メソッドを`Startup.ConfigureServices`使用してサーバー上で構成できます。 この`AddJsonProtocol`メソッドは、オブジェクトを受け取`options`るデリゲートを受け取ります。 そのオブジェクトの[PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings)プロパティは、`JsonSerializerSettings`引数と戻り値のシリアル化を構成するために使用できるJSON.NETオブジェクトです。 詳細については、[JSON.NET のドキュメント](https://www.newtonsoft.com/json/help/html/Introduction.htm)を参照してください。
  
-たとえば、"キャメルケース" という既定の名前の代わりに "" という名前のプロパティ名を使用するようにシリアライザーを構成するには、`Startup.ConfigureServices`で次のコードを使用します。
+たとえば、既定の "camelCase" の名前ではなく、"PascalCase" プロパティ名を使用するようにシリアライザーを構成するには、`Startup.ConfigureServices`で次のコードを使用します。
  
 ```csharp
 services.AddSignalR()
@@ -420,7 +420,7 @@ services.AddSignalR()
     });
 ```
 
-.NET クライアントでは、 [HubConnectionBuilder](/dotnet/api/microsoft.aspnetcore.signalr.client.hubconnectionbuilder)に同じ `AddJsonProtocol` 拡張メソッドが存在します。 拡張メソッドを解決するには、`Microsoft.Extensions.DependencyInjection` 名前空間をインポートする必要があります。
+NET クライアントでは、同じ`AddJsonProtocol`拡張メソッドが[ハブ接続ビルダー](/dotnet/api/microsoft.aspnetcore.signalr.client.hubconnectionbuilder)に存在します。 拡張`Microsoft.Extensions.DependencyInjection`メソッドを解決するには、名前空間をインポートする必要があります。
 
 ```csharp
 // At the top of the file:
@@ -436,28 +436,28 @@ var connection = new HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 現時点では、JSON シリアル化を JavaScript クライアントで構成することはできません。
+> 現時点では、JavaScript クライアントで JSON シリアル化を構成することはできません。
 
-### <a name="messagepack-serialization-options"></a>MessagePack のシリアル化オプション
+### <a name="messagepack-serialization-options"></a>メッセージ パックのシリアル化オプション
 
-MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/microsoft.extensions.dependencyinjection.msgpackprotocoldependencyinjectionextensions.addmessagepackprotocol)呼び出しにデリゲートを指定することによって構成できます。 詳細については[、「SignalR の Messagepack](xref:signalr/messagepackhubprotocol) 」を参照してください。
+メッセージ パックシリアル化は、[呼び出](/dotnet/api/microsoft.extensions.dependencyinjection.msgpackprotocoldependencyinjectionextensions.addmessagepackprotocol)しにデリゲートを提供することによって構成できます。 詳細については[、SignalR のメッセージ パック](xref:signalr/messagepackhubprotocol)を参照してください。
 
 > [!NOTE]
-> 現時点では、JavaScript クライアントで MessagePack のシリアル化を構成することはできません。
+> 現時点では、JavaScript クライアントでメッセージ パックのシリアル化を構成することはできません。
 
-## <a name="configure-server-options"></a>サーバーオプションの構成
+## <a name="configure-server-options"></a>サーバー オプションの構成
 
-次の表では、SignalR hub を構成するためのオプションについて説明します。
+次の表に、SignalR ハブを設定するためのオプションを示します。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `ClientTimeoutInterval` | 30 秒 | サーバーは、この間隔で (キープアライブを含む) メッセージを受信していない場合に、クライアントが切断されていると見なします。 クライアントが実際に切断されているとマークされるまでに、このタイムアウト間隔より長くかかることがあります。これは、この実装方法によるものです。 推奨値は、`KeepAliveInterval` 値の倍精度浮動小数点数です。|
-| `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにするために ping メッセージが自動的に送信されます。 `KeepAliveInterval`を変更する場合は、クライアントの `ServerTimeout`/`serverTimeoutInMilliseconds` 設定を変更します。 推奨される `ServerTimeout`/`serverTimeoutInMilliseconds` 値は `KeepAliveInterval` 値の倍精度浮動小数点数です。  |
-| `SupportedProtocols` | インストールされているすべてのプロトコル | このハブでサポートされているプロトコル。 既定では、サーバーに登録されているすべてのプロトコルが許可されますが、個々のハブの特定のプロトコルを無効にするために、この一覧からプロトコルを削除することができます。 |
-| `EnableDetailedErrors` | `false` | `true`した場合、ハブメソッドで例外がスローされると、詳細な例外メッセージがクライアントに返されます。 既定値は `false`です。これらの例外メッセージには機密情報が含まれる可能性があるためです。 |
+| `ClientTimeoutInterval` | 30 秒 | この間隔でメッセージ (キープアライブを含む) を受信していない場合、サーバーはクライアントが切断されたと見なします。 クライアントが実際に切断としてマークされるには、このタイムアウト間隔よりも長い時間がかかる可能性があります。 推奨値は 2`KeepAliveInterval`倍の値です。|
+| `HandshakeTimeout` | 15 秒 | クライアントがこの時間内に最初のハンドシェイク メッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにする ping メッセージが自動的に送信されます。 を変更`KeepAliveInterval`する場合は`ServerTimeout`/`serverTimeoutInMilliseconds`、クライアントの設定を変更します。 推奨値`ServerTimeout`/`serverTimeoutInMilliseconds`は 2`KeepAliveInterval`倍の値です。  |
+| `SupportedProtocols` | インストールされているすべてのプロトコル | このハブでサポートされているプロトコル。 既定では、サーバーに登録されているすべてのプロトコルは許可されますが、この一覧からプロトコルを削除して、個々のハブの特定のプロトコルを無効にすることができます。 |
+| `EnableDetailedErrors` | `false` | 場合`true`、ハブ メソッドで例外がスローされたときに、詳細な例外メッセージがクライアントに返されます。 これらの例外メッセージ`false`には機密情報が含まれる可能性があるため、既定では 、 が使用されます。 |
 
-オプションは、`Startup.ConfigureServices`の `AddSignalR` 呼び出しに委任オプションを指定することで、すべてのハブに対して構成できます。
+オプションは、 内の呼び出しに代えてオプションを`AddSignalR`提供することで`Startup.ConfigureServices`、すべてのハブに対して構成できます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -470,7 +470,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-1つのハブのオプションは `AddSignalR` で提供されるグローバルオプションを上書きし、<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddHubOptions*>を使用して構成できます。
+単一のハブのオプションは、 で`AddSignalR`提供されるグローバル オプションを<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddHubOptions*>オーバーライドし、 を使用して構成できます。
 
 ```csharp
 services.AddSignalR().AddHubOptions<MyHub>(options =>
@@ -479,9 +479,9 @@ services.AddSignalR().AddHubOptions<MyHub>(options =>
 });
 ```
 
-### <a name="advanced-http-configuration-options"></a>詳細な HTTP 構成オプション
+### <a name="advanced-http-configuration-options"></a>高度な HTTP 構成オプション
 
-トランスポートおよびメモリバッファー管理に関連する詳細設定を構成するには、`HttpConnectionDispatcherOptions` を使用します。 これらのオプションは、`Startup.Configure`で[Maphub\<t >](/dotnet/api/microsoft.aspnetcore.signalr.hubroutebuilder.maphub)にデリゲートを渡すことによって構成されます。
+トランスポート`HttpConnectionDispatcherOptions`とメモリ バッファ管理に関連する詳細設定を構成するために使用します。 これらのオプションは、デリゲートを[MapHub\<T>](/dotnet/api/microsoft.aspnetcore.signalr.hubroutebuilder.maphub) `Startup.Configure`に渡すことによって構成されます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -500,42 +500,42 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
+次の表では、core SignalR の高度な HTTP オプションASP.NET設定するためのオプションについて説明します。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `ApplicationMaxBufferSize` | 32 KB | クライアントから受信した、サーバーがバッファーする最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを受け取ることができますが、メモリの消費に悪影響を与える可能性があります。 |
-| `AuthorizationData` | ハブクラスに適用された `Authorize` の属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
-| `TransportMaxBufferSize` | 32 KB | サーバーがバッファーするアプリによって送信される最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを送信できるようになりますが、メモリの消費に悪影響を及ぼす可能性があります。 |
-| `Transports` | すべてのトランスポートが有効になります。 | クライアントが接続に使用できるトランスポートを制限できる、`HttpTransportType` 値のビットフラグ列挙型。 |
-| `LongPolling` | 以下を参照してください。 | 長いポーリングトランスポートに固有の追加オプション。 |
-| `WebSockets` | 以下を参照してください。 | Websocket トランスポートに固有の追加オプション。 |
+| `ApplicationMaxBufferSize` | 32 KB | サーバーがバッファリングするクライアントから受信した最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを受信できますが、メモリ消費に悪影響を及ぼす可能性があります。 |
+| `AuthorizationData` | ハブ クラスに`Authorize`適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
+| `TransportMaxBufferSize` | 32 KB | サーバーがバッファーに格納するアプリによって送信される最大バイト数。 この値を大きくすると、サーバーは大きなメッセージを送信できますが、メモリ消費に悪影響を及ぼす可能性があります。 |
+| `Transports` | すべてのトランスポートが有効になっています。 | クライアントが接続に使用`HttpTransportType`できるトランスポートを制限できる値の列挙値をビット フラグにします。 |
+| `LongPolling` | 以下を参照してください。 | ロングポーリングトランスポートに固有の追加オプション。 |
+| `WebSockets` | 以下を参照してください。 | WebSocket トランスポートに固有の追加オプション。 |
 
-長いポーリングトランスポートには、`LongPolling` プロパティを使用して構成できる追加のオプションがあります。
-
-| オプション | Default value | 説明 |
-| ------ | ------------- | ----------- |
-| `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
-
-WebSocket トランスポートには、`WebSockets` プロパティを使用して構成できる追加のオプションがあります。
+ロング ポーリング トランスポートには、プロパティを使用して構成できる`LongPolling`追加オプションがあります。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
-| `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol` ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
+| `PollTimeout` | 90秒 | 1 回のポーリング要求を終了するまでに、サーバーがクライアントにメッセージを送信するまで待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求を頻繁に発行します。 |
 
-## <a name="configure-client-options"></a>クライアントオプションを構成する
+WebSocket トランスポートには、プロパティを使用して構成できる追加`WebSockets`オプションがあります。
 
-クライアントオプションは `HubConnectionBuilder` の種類で構成できます (.NET および JavaScript クライアントで使用できます)。 Java クライアントでも使用できますが、`HttpHubConnectionBuilder` サブクラスは、ビルダーの構成オプションと `HubConnection` 自体に含まれています。
+| オプション | Default value | 説明 |
+| ------ | ------------- | ----------- |
+| `CloseTimeout` | 5 秒 | サーバーが閉じた後、この時間内にクライアントが閉じられなかった場合、接続は終了します。 |
+| `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、必要な値を返す必要があります。 |
+
+## <a name="configure-client-options"></a>クライアント オプションの構成
+
+クライアント オプションは、型に`HubConnectionBuilder`対して構成できます (.NET クライアントおよび JavaScript クライアントで使用可能)。 Java クライアントでも使用できますが、`HttpHubConnectionBuilder`サブクラスにはビルダーの設定オプションとそれ自体が`HubConnection`含まれます。
 
 ### <a name="configure-logging"></a>ログの構成
 
-ログは、.NET クライアントで `ConfigureLogging` メソッドを使用して構成されます。 ログプロバイダーとフィルターは、サーバーと同じ方法で登録できます。 詳細については、ASP.NET Core のドキュメントの[ログ](xref:fundamentals/logging/index)を参照してください。
+ログ記録は、このメソッドを使用して`ConfigureLogging`.NET クライアントで構成されます。 ログ プロバイダーとフィルターは、サーバー上と同じ方法で登録できます。 詳細については[、ASP.NETコアのドキュメントのロギング](xref:fundamentals/logging/index)を参照してください。
 
 > [!NOTE]
-> ログプロバイダーを登録するには、必要なパッケージをインストールする必要があります。 完全な一覧については、ドキュメントの「[組み込みのログプロバイダー](xref:fundamentals/logging/index#built-in-logging-providers) 」セクションを参照してください。
+> ログ プロバイダを登録するには、必要なパッケージをインストールする必要があります。 詳細については、ドキュメントの[「組み込みログ プロバイダ](xref:fundamentals/logging/index#built-in-logging-providers)」セクションを参照してください。
 
-たとえば、コンソールのログ記録を有効にするには、`Microsoft.Extensions.Logging.Console` NuGet パッケージをインストールします。 `AddConsole` 拡張メソッドを呼び出します。
+たとえば、コンソールのログ記録を有効にするには、NuGet パッケージをインストールします`Microsoft.Extensions.Logging.Console`。 拡張メソッド`AddConsole`を呼び出します。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -547,7 +547,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、同様の `configureLogging` メソッドが存在します。 生成するログメッセージの最小レベルを示す `LogLevel` 値を指定します。 ログは、ブラウザーのコンソールウィンドウに書き込まれます。
+JavaScript クライアントでは、同様`configureLogging`のメソッドが存在します。 生成する`LogLevel`ログ メッセージの最小レベルを示す値を指定します。 ログは、ブラウザのコンソール ウィンドウに書き込まれます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -557,17 +557,17 @@ let connection = new signalR.HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 完全にログ記録を無効にするには、`configureLogging` 方法で `signalR.LogLevel.None` を指定します。
+> ログの記録を完全に`signalR.LogLevel.None`無効にするには`configureLogging`、メソッドで指定します。
 
-ログ記録の詳細については、 [SignalR Diagnostics のドキュメント](xref:signalr/diagnostics)を参照してください。
+ログ記録の詳細については[、SignalR 診断のドキュメントを参照してください](xref:signalr/diagnostics)。
 
-SignalR Java クライアントは、 [SLF4J](https://www.slf4j.org/)ライブラリを使用してログを記録します。 これは、ライブラリのユーザーが特定のログの依存関係を使用して独自のログの実装を選択できるようにする、高レベルのログ記録 API です。 次のコードスニペットは、SignalR Java クライアントで `java.util.logging` を使用する方法を示しています。
+SignalR Java クライアントは[、SLF4J](https://www.slf4j.org/)ライブラリを使用してロギングします。 これは、ライブラリのユーザーが特定のロギング依存関係を持ち込むことによって、独自のログ記録実装を選択できるようにする高レベルのロギング API です。 次のコード スニペットは、SignalR Java クライアントでの使用方法`java.util.logging`を示しています。
 
 ```gradle
 implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 ```
 
-依存関係にログ記録を構成しない場合、SLF4J は既定の非操作 logger を読み込み、次の警告メッセージを表示します。
+依存関係でロギングを設定しない場合、SLF4J はデフォルトの操作なしロガーをロードし、次の警告メッセージを表示します。
 
 ```
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
@@ -575,13 +575,13 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ```
 
-これは無視してもかまいません。
+これは無視しても問題ありません。
 
 ### <a name="configure-allowed-transports"></a>許可されたトランスポートの構成
 
-SignalR によって使用されるトランスポートは、`WithUrl` の呼び出し (JavaScript の`withUrl`) で構成できます。 `HttpTransportType` の値のビットごとの OR を使用して、指定したトランスポートのみを使用するようにクライアントを制限できます。 既定では、すべてのトランスポートが有効になっています。
+SignalR によって使用されるトランスポートは、呼び出`WithUrl`しで`withUrl`構成できます (JavaScript で)。 の値のビット単位の OR`HttpTransportType`を使用して、クライアントが指定されたトランスポートのみを使用するように制限できます。 すべてのトランスポートは既定で有効になっています。
 
-たとえば、サーバーから送信されたイベントトランスポートを無効にし、Websocket と長いポーリング接続を許可するには、次のようにします。
+たとえば、サーバー送信イベント トランスポートを無効にするが、WebSocket とロング ポーリング接続を許可するには、次の手順を実行します。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -589,7 +589,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、`withUrl`に提供される options オブジェクトの `transport` フィールドを設定することによって、トランスポートを構成します。
+JavaScript クライアントでは、トランスポートは、 に提供される`transport`オプション オブジェクトのフィールドを設定`withUrl`して構成されます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -597,13 +597,13 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-このバージョンの Java クライアント websocket は、唯一の利用可能なトランスポートです。
+このバージョンの Java クライアント Web ソケットは、使用可能なトランスポートのみです。
 
-### <a name="configure-bearer-authentication"></a>ベアラー認証を構成する
+### <a name="configure-bearer-authentication"></a>ベアラ認証の構成
 
-SignalR 要求と共に認証データを提供するには、`AccessTokenProvider` オプション (JavaScript の`accessTokenFactory`) を使用して、目的のアクセストークンを返す関数を指定します。 .NET クライアントでは、このアクセストークンは HTTP "ベアラー認証" トークンとして渡されます (`Bearer`の種類の `Authorization` ヘッダーを使用します)。 JavaScript クライアントでは、アクセストークンはベアラートークンとして使用されますが、ブラウザー Api がヘッダー (特に、サーバーが送信するイベントと Websocket 要求) を適用する機能を制限する場合は**例外**です。 このような場合、アクセストークンは `access_token`クエリ文字列値として指定されます。
+SignalR 要求と共に認証データを提供するには`AccessTokenProvider`、オプション`accessTokenFactory`(JavaScript で) を使用して、目的のアクセス トークンを返す関数を指定します。 NET クライアントでは、このアクセス トークンは HTTP "ベアラー認証" トークンとして渡されます`Authorization`(ヘッダーの種類を`Bearer`使用します)。 JavaScript クライアントでは、ブラウザー API がヘッダーの適用を制限する場合を除いて (特に、サーバー送信イベントと WebSocket 要求) 場合**を除き**、アクセス トークンはベアラー トークンとして使用されます。 このような場合、アクセス トークンはクエリ文字列値`access_token`として提供されます。
 
-.NET クライアントでは、`WithUrl`のオプションデリゲートを使用して、`AccessTokenProvider` オプションを指定できます。
+NET クライアントでは、 の`AccessTokenProvider`オプション デリゲートを使用してオプションを指定`WithUrl`できます。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -615,7 +615,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、`withUrl`の options オブジェクトの `accessTokenFactory` フィールドを設定することにより、アクセストークンが構成されます。
+JavaScript クライアントでは、アクセス トークンは、 のオプション`accessTokenFactory`オブジェクトのフィールドを設定`withUrl`して構成します。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -629,7 +629,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalR Java クライアントでは、 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)にアクセストークンファクトリを提供することによって、認証に使用するベアラートークンを構成できます。 [WithAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)を使用して、 [RxJava](https://github.com/ReactiveX/RxJava)の[単一\<文字列 >](https://reactivex.io/documentation/single.html)を指定します。 [単一の defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)を呼び出すことで、クライアントのアクセストークンを生成するロジックを作成できます。
+SignalR Java クライアントでは[、HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)にアクセス トークン ファクトリを提供することで、認証に使用するベアラー トークンを構成できます。 を使用[して](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)[、RxJava](https://github.com/ReactiveX/RxJava) [の単一\<文字列>](https://reactivex.io/documentation/single.html)を提供します。 [Single.defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)を呼び出すと、クライアントのアクセス トークンを生成するロジックを記述できます。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -639,75 +639,75 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
     })).build();
 ```
 
-### <a name="configure-timeout-and-keep-alive-options"></a>タイムアウトとキープアライブオプションを構成する
+### <a name="configure-timeout-and-keep-alive-options"></a>タイムアウトとキープアライブ オプションを構成する
 
-タイムアウトとキープアライブの動作を構成するための追加オプションは、`HubConnection` オブジェクト自体で利用できます。
+`HubConnection`タイムアウトとキープアライブ動作を設定するための追加オプションは、オブジェクト自体で使用できます。
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`Closed` イベント (JavaScript では`onclose`) をトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`Closed` イベント (JavaScript では`onclose`) をトリガーします。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `KeepAliveInterval` | 15 秒 | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバーで設定された `ClientTimeoutInterval` にメッセージを送信していない場合、サーバーはクライアントを切断したと見なします。 |
+| `ServerTimeout` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なし、イベントを`Closed`(JavaScript で)`onclose`トリガーします。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `HandshakeTimeout` | 15 秒 | 最初のサーバー ハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`Closed`イベントを (JavaScript で)`onclose`トリガーします。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `KeepAliveInterval` | 15 秒 | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーは間隔の開始にリセットされます。 クライアントがサーバー上のセット内のメッセージを`ClientTimeoutInterval`送信していない場合、サーバーはクライアントが切断されたと見なします。 |
 
-.NET クライアントでは、タイムアウト値は `TimeSpan` 値として指定されます。
+NET クライアントでは、タイムアウト値が値として`TimeSpan`指定されます。
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`onclose` イベントをトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバーで設定された `ClientTimeoutInterval` にメッセージを送信していない場合、サーバーはクライアントを切断したと見なします。 |
+| `serverTimeoutInMilliseconds` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なしてイベントをトリガー`onclose`します。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `keepAliveIntervalInMilliseconds` | 15 秒 (15,000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーは間隔の開始にリセットされます。 クライアントがサーバー上のセット内のメッセージを`ClientTimeoutInterval`送信していない場合、サーバーはクライアントが切断されたと見なします。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `getServerTimeout` / `setServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`onClose` イベントをトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `withHandshakeResponseTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`onClose` イベントをトリガーします。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `getKeepAliveInterval` / `setKeepAliveInterval` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバーで設定された `ClientTimeoutInterval` にメッセージを送信していない場合、サーバーはクライアントを切断したと見なします。 |
+| `getServerTimeout` / `setServerTimeout` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なしてイベントをトリガー`onClose`します。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `withHandshakeResponseTimeout` | 15 秒 | 最初のサーバー ハンドシェイクのタイムアウト。 この間隔でサーバーがハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルしてイベントをトリガー`onClose`します。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `getKeepAliveInterval` / `setKeepAliveInterval` | 15 秒 (15,000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーは間隔の開始にリセットされます。 クライアントがサーバー上のセット内のメッセージを`ClientTimeoutInterval`送信していない場合、サーバーはクライアントが切断されたと見なします。 |
 
 ---
 
-### <a name="configure-additional-options"></a>追加のオプションを構成する
+### <a name="configure-additional-options"></a>詳細設定オプションの構成
 
-追加のオプションは `HubConnectionBuilder` または Java クライアントの `HttpHubConnectionBuilder` のさまざまな構成 Api で `WithUrl` (JavaScript の`withUrl`) メソッドで構成できます。
+追加オプション`WithUrl`は、Java`withUrl`クライアントの各種構成 API 上`HubConnectionBuilder`または JavaScript での`HttpHubConnectionBuilder`(JavaScript) メソッドで構成できます。
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 | .NET オプション |  既定値 | 説明 |
 | ----------- | -------------- | ----------- |
-| `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
-| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
-| `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
-| `HttpMessageHandlerFactory` | `null` | HTTP 要求の送信に使用される `HttpMessageHandler` を構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、新しい `HttpMessageHandler` インスタンスを返します。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
+| `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `SkipNegotiation` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | Empty | すべての HTTP 要求で送信する HTTP クッキーのコレクション。 |
+| `Credentials` | Empty | すべての HTTP 要求で送信する資格情報。 |
+| `CloseTimeout` | 5 秒 | ウェブソケットのみ。 サーバーがクローズ要求を確認するまでの、クライアントがクローズ後に待機する最大時間。 この時間内にサーバーがクローズを確認しない場合、クライアントは切断されます。 |
+| `Headers` | Empty | すべての HTTP 要求で送信する追加の HTTP ヘッダーのマップ。 |
+| `HttpMessageHandlerFactory` | `null` | HTTP 要求の送信に使用されるを`HttpMessageHandler`構成または置き換えるために使用できるデリゲート。 Web ソケット接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、既定値をパラメーターとして受け取ります。 その既定値の設定を変更して返すか、新`HttpMessageHandler`しいインスタンスを返します。 **ハンドラを置き換える場合は、指定されたハンドラから保持する設定を必ずコピーし、そうでない場合は、設定されたオプション (Cookie や Headers など) が新しいハンドラに適用されないようにしてください。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
-| `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
-| `WebSocketConfiguration` | `null` | 追加の WebSocket オプションを構成するために使用できるデリゲート。 オプションの構成に使用できる[ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions)のインスタンスを受け取ります。 |
+| `UseDefaultCredentials` | `false` | HTTP および WebSocket 要求の既定の資格情報を送信するには、このブール値を設定します。 これにより、Windows 認証を使用できるようになります。 |
+| `WebSocketConfiguration` | `null` | 追加の WebSocket オプションを構成するために使用できるデリゲート。 オプションの構成に使用できる[ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions)のインスタンスを受信します。 |
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | Default value | 説明 |
+| Java スクリプトオプション | Default value | 説明 |
 | ----------------- | ------------- | ----------- |
-| `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `skipNegotiation` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java オプション | Default value | 説明 |
 | ----------- | ------------- | ----------- |
-| `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
-| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `shouldSkipNegotiate` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `withHeader` `withHeaders` | Empty | すべての HTTP 要求で送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
-.NET クライアントでは、これらのオプションは `WithUrl`に提供されるオプションデリゲートによって変更できます。
+NET クライアントでは、これらのオプションは、 に提供されるオプション デリゲートによって`WithUrl`変更できます。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -719,7 +719,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、これらのオプションは `withUrl`に提供される JavaScript オブジェクトで提供できます。
+JavaScript クライアントでは、これらのオプションは`withUrl`、次の JavaScript オブジェクトで提供できます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -730,7 +730,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Java クライアントでは、これらのオプションはから返された `HttpHubConnectionBuilder` のメソッドを使用して構成でき `HubConnectionBuilder.create("HUB URL")`
+Java クライアントでは、これらのオプションは、そこから返されるメソッドで構成`HttpHubConnectionBuilder`できます。`HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -740,7 +740,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
         .build();
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -752,13 +752,13 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 ::: moniker-end
 ::: moniker range="< aspnetcore-2.2"
 
-## <a name="jsonmessagepack-serialization-options"></a>JSON/MessagePack のシリアル化オプション
+## <a name="jsonmessagepack-serialization-options"></a>JSON/メッセージパックのシリアル化オプション
 
-ASP.NET Core SignalR は、 [JSON](https://www.json.org/)と[messagepack](https://msgpack.org/index.html)の2つのプロトコルをサポートしています。 各プロトコルには、シリアル化の構成オプションがあります。
+ASP.NETコア SignalR は、メッセージをエンコードするための 2 つのプロトコルをサポートしています: [JSON](https://www.json.org/)と[MessagePack](https://msgpack.org/index.html)。 各プロトコルには、シリアル化構成オプションがあります。
 
-JSON のシリアル化は、 [Addjsonprotocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol)拡張メソッドを使用してサーバー上で構成できます。これは、`Startup.ConfigureServices` メソッドで[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr)の後に追加できます。 `AddJsonProtocol` メソッドは、`options` オブジェクトを受け取るデリゲートを受け取ります。 そのオブジェクトの[PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings)プロパティは、引数と戻り値のシリアル化を構成するために使用できる JSON.NET `JsonSerializerSettings` オブジェクトです。 詳細については、[JSON.NET のドキュメント](https://www.newtonsoft.com/json/help/html/Introduction.htm)を参照してください。
+JSON シリアル化は、メソッドの[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr)の後に追加できる[AddJsonProtocol](/dotnet/api/microsoft.extensions.dependencyinjection.jsonprotocoldependencyinjectionextensions.addjsonprotocol)拡張メソッドを`Startup.ConfigureServices`使用してサーバー上で構成できます。 この`AddJsonProtocol`メソッドは、オブジェクトを受け取`options`るデリゲートを受け取ります。 そのオブジェクトの[PayloadSerializerSettings](/dotnet/api/microsoft.aspnetcore.signalr.jsonhubprotocoloptions.payloadserializersettings)プロパティは、`JsonSerializerSettings`引数と戻り値のシリアル化を構成するために使用できるJSON.NETオブジェクトです。 詳細については、[JSON.NET のドキュメント](https://www.newtonsoft.com/json/help/html/Introduction.htm)を参照してください。
  
-たとえば、"キャメルケース" という既定の名前の代わりに "" という名前のプロパティ名を使用するようにシリアライザーを構成するには、`Startup.ConfigureServices`で次のコードを使用します。
+たとえば、既定の "camelCase" の名前ではなく、"PascalCase" プロパティ名を使用するようにシリアライザーを構成するには、`Startup.ConfigureServices`で次のコードを使用します。
  
 ```csharp
 services.AddSignalR()
@@ -768,7 +768,7 @@ services.AddSignalR()
     });
 ```
 
-.NET クライアントでは、 [HubConnectionBuilder](/dotnet/api/microsoft.aspnetcore.signalr.client.hubconnectionbuilder)に同じ `AddJsonProtocol` 拡張メソッドが存在します。 拡張メソッドを解決するには、`Microsoft.Extensions.DependencyInjection` 名前空間をインポートする必要があります。
+NET クライアントでは、同じ`AddJsonProtocol`拡張メソッドが[ハブ接続ビルダー](/dotnet/api/microsoft.aspnetcore.signalr.client.hubconnectionbuilder)に存在します。 拡張`Microsoft.Extensions.DependencyInjection`メソッドを解決するには、名前空間をインポートする必要があります。
 
 ```csharp
 // At the top of the file:
@@ -784,27 +784,27 @@ var connection = new HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 現時点では、JSON シリアル化を JavaScript クライアントで構成することはできません。
+> 現時点では、JavaScript クライアントで JSON シリアル化を構成することはできません。
 
-### <a name="messagepack-serialization-options"></a>MessagePack のシリアル化オプション
+### <a name="messagepack-serialization-options"></a>メッセージ パックのシリアル化オプション
 
-MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/microsoft.extensions.dependencyinjection.msgpackprotocoldependencyinjectionextensions.addmessagepackprotocol)呼び出しにデリゲートを指定することによって構成できます。 詳細については[、「SignalR の Messagepack](xref:signalr/messagepackhubprotocol) 」を参照してください。
+メッセージ パックシリアル化は、[呼び出](/dotnet/api/microsoft.extensions.dependencyinjection.msgpackprotocoldependencyinjectionextensions.addmessagepackprotocol)しにデリゲートを提供することによって構成できます。 詳細については[、SignalR のメッセージ パック](xref:signalr/messagepackhubprotocol)を参照してください。
 
 > [!NOTE]
-> 現時点では、JavaScript クライアントで MessagePack のシリアル化を構成することはできません。
+> 現時点では、JavaScript クライアントでメッセージ パックのシリアル化を構成することはできません。
 
-## <a name="configure-server-options"></a>サーバーオプションの構成
+## <a name="configure-server-options"></a>サーバー オプションの構成
 
-次の表では、SignalR hub を構成するためのオプションについて説明します。
+次の表に、SignalR ハブを設定するためのオプションを示します。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
-| `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにするために ping メッセージが自動的に送信されます。 `KeepAliveInterval`を変更する場合は、クライアントの `ServerTimeout`/`serverTimeoutInMilliseconds` 設定を変更します。 推奨される `ServerTimeout`/`serverTimeoutInMilliseconds` 値は `KeepAliveInterval` 値の倍精度浮動小数点数です。  |
-| `SupportedProtocols` | インストールされているすべてのプロトコル | このハブでサポートされているプロトコル。 既定では、サーバーに登録されているすべてのプロトコルが許可されますが、個々のハブの特定のプロトコルを無効にするために、この一覧からプロトコルを削除することができます。 |
-| `EnableDetailedErrors` | `false` | `true`した場合、ハブメソッドで例外がスローされると、詳細な例外メッセージがクライアントに返されます。 既定値は `false`です。これらの例外メッセージには機密情報が含まれる可能性があるためです。 |
+| `HandshakeTimeout` | 15 秒 | クライアントがこの時間内に最初のハンドシェイク メッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにする ping メッセージが自動的に送信されます。 を変更`KeepAliveInterval`する場合は`ServerTimeout`/`serverTimeoutInMilliseconds`、クライアントの設定を変更します。 推奨値`ServerTimeout`/`serverTimeoutInMilliseconds`は 2`KeepAliveInterval`倍の値です。  |
+| `SupportedProtocols` | インストールされているすべてのプロトコル | このハブでサポートされているプロトコル。 既定では、サーバーに登録されているすべてのプロトコルは許可されますが、この一覧からプロトコルを削除して、個々のハブの特定のプロトコルを無効にすることができます。 |
+| `EnableDetailedErrors` | `false` | 場合`true`、ハブ メソッドで例外がスローされたときに、詳細な例外メッセージがクライアントに返されます。 これらの例外メッセージ`false`には機密情報が含まれる可能性があるため、既定では 、 が使用されます。 |
 
-オプションは、`Startup.ConfigureServices`の `AddSignalR` 呼び出しに委任オプションを指定することで、すべてのハブに対して構成できます。
+オプションは、 内の呼び出しに代えてオプションを`AddSignalR`提供することで`Startup.ConfigureServices`、すべてのハブに対して構成できます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -817,7 +817,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-1つのハブのオプションは `AddSignalR` で提供されるグローバルオプションを上書きし、<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddHubOptions*>を使用して構成できます。
+単一のハブのオプションは、 で`AddSignalR`提供されるグローバル オプションを<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddHubOptions*>オーバーライドし、 を使用して構成できます。
 
 ```csharp
 services.AddSignalR().AddHubOptions<MyHub>(options =>
@@ -826,9 +826,9 @@ services.AddSignalR().AddHubOptions<MyHub>(options =>
 });
 ```
 
-### <a name="advanced-http-configuration-options"></a>詳細な HTTP 構成オプション
+### <a name="advanced-http-configuration-options"></a>高度な HTTP 構成オプション
 
-トランスポートおよびメモリバッファー管理に関連する詳細設定を構成するには、`HttpConnectionDispatcherOptions` を使用します。 これらのオプションは、`Startup.Configure`で[Maphub\<t >](/dotnet/api/microsoft.aspnetcore.signalr.hubroutebuilder.maphub)にデリゲートを渡すことによって構成されます。
+トランスポート`HttpConnectionDispatcherOptions`とメモリ バッファ管理に関連する詳細設定を構成するために使用します。 これらのオプションは、デリゲートを[MapHub\<T>](/dotnet/api/microsoft.aspnetcore.signalr.hubroutebuilder.maphub) `Startup.Configure`に渡すことによって構成されます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -847,42 +847,42 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
+次の表では、core SignalR の高度な HTTP オプションASP.NET設定するためのオプションについて説明します。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `ApplicationMaxBufferSize` | 32 KB | クライアントから受信した、サーバーがバッファーする最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを受け取ることができますが、メモリの消費に悪影響を与える可能性があります。 |
-| `AuthorizationData` | ハブクラスに適用された `Authorize` の属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
-| `TransportMaxBufferSize` | 32 KB | サーバーがバッファーするアプリによって送信される最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを送信できるようになりますが、メモリの消費に悪影響を及ぼす可能性があります。 |
-| `Transports` | すべてのトランスポートが有効になります。 | クライアントが接続に使用できるトランスポートを制限できる、`HttpTransportType` 値のビットフラグ列挙型。 |
-| `LongPolling` | 以下を参照してください。 | 長いポーリングトランスポートに固有の追加オプション。 |
-| `WebSockets` | 以下を参照してください。 | Websocket トランスポートに固有の追加オプション。 |
+| `ApplicationMaxBufferSize` | 32 KB | サーバーがバッファリングするクライアントから受信した最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを受信できますが、メモリ消費に悪影響を及ぼす可能性があります。 |
+| `AuthorizationData` | ハブ クラスに`Authorize`適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[IAuthorizeData](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
+| `TransportMaxBufferSize` | 32 KB | サーバーがバッファーに格納するアプリによって送信される最大バイト数。 この値を大きくすると、サーバーは大きなメッセージを送信できますが、メモリ消費に悪影響を及ぼす可能性があります。 |
+| `Transports` | すべてのトランスポートが有効になっています。 | クライアントが接続に使用`HttpTransportType`できるトランスポートを制限できる値の列挙値をビット フラグにします。 |
+| `LongPolling` | 以下を参照してください。 | ロングポーリングトランスポートに固有の追加オプション。 |
+| `WebSockets` | 以下を参照してください。 | WebSocket トランスポートに固有の追加オプション。 |
 
-長いポーリングトランスポートには、`LongPolling` プロパティを使用して構成できる追加のオプションがあります。
-
-| オプション | Default value | 説明 |
-| ------ | ------------- | ----------- |
-| `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
-
-WebSocket トランスポートには、`WebSockets` プロパティを使用して構成できる追加のオプションがあります。
+ロング ポーリング トランスポートには、プロパティを使用して構成できる`LongPolling`追加オプションがあります。
 
 | オプション | Default value | 説明 |
 | ------ | ------------- | ----------- |
-| `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
-| `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol` ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
+| `PollTimeout` | 90秒 | 1 回のポーリング要求を終了するまでに、サーバーがクライアントにメッセージを送信するまで待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求を頻繁に発行します。 |
 
-## <a name="configure-client-options"></a>クライアントオプションを構成する
+WebSocket トランスポートには、プロパティを使用して構成できる追加`WebSockets`オプションがあります。
 
-クライアントオプションは `HubConnectionBuilder` の種類で構成できます (.NET および JavaScript クライアントで使用できます)。 Java クライアントでも使用できますが、`HttpHubConnectionBuilder` サブクラスは、ビルダーの構成オプションと `HubConnection` 自体に含まれています。
+| オプション | Default value | 説明 |
+| ------ | ------------- | ----------- |
+| `CloseTimeout` | 5 秒 | サーバーが閉じた後、この時間内にクライアントが閉じられなかった場合、接続は終了します。 |
+| `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、必要な値を返す必要があります。 |
+
+## <a name="configure-client-options"></a>クライアント オプションの構成
+
+クライアント オプションは、型に`HubConnectionBuilder`対して構成できます (.NET クライアントおよび JavaScript クライアントで使用可能)。 Java クライアントでも使用できますが、`HttpHubConnectionBuilder`サブクラスにはビルダーの設定オプションとそれ自体が`HubConnection`含まれます。
 
 ### <a name="configure-logging"></a>ログの構成
 
-ログは、.NET クライアントで `ConfigureLogging` メソッドを使用して構成されます。 ログプロバイダーとフィルターは、サーバーと同じ方法で登録できます。 詳細については、ASP.NET Core のドキュメントの[ログ](xref:fundamentals/logging/index)を参照してください。
+ログ記録は、このメソッドを使用して`ConfigureLogging`.NET クライアントで構成されます。 ログ プロバイダーとフィルターは、サーバー上と同じ方法で登録できます。 詳細については[、ASP.NETコアのドキュメントのロギング](xref:fundamentals/logging/index)を参照してください。
 
 > [!NOTE]
-> ログプロバイダーを登録するには、必要なパッケージをインストールする必要があります。 完全な一覧については、ドキュメントの「[組み込みのログプロバイダー](xref:fundamentals/logging/index#built-in-logging-providers) 」セクションを参照してください。
+> ログ プロバイダを登録するには、必要なパッケージをインストールする必要があります。 詳細については、ドキュメントの[「組み込みログ プロバイダ](xref:fundamentals/logging/index#built-in-logging-providers)」セクションを参照してください。
 
-たとえば、コンソールのログ記録を有効にするには、`Microsoft.Extensions.Logging.Console` NuGet パッケージをインストールします。 `AddConsole` 拡張メソッドを呼び出します。
+たとえば、コンソールのログ記録を有効にするには、NuGet パッケージをインストールします`Microsoft.Extensions.Logging.Console`。 拡張メソッド`AddConsole`を呼び出します。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -894,7 +894,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、同様の `configureLogging` メソッドが存在します。 生成するログメッセージの最小レベルを示す `LogLevel` 値を指定します。 ログは、ブラウザーのコンソールウィンドウに書き込まれます。
+JavaScript クライアントでは、同様`configureLogging`のメソッドが存在します。 生成する`LogLevel`ログ メッセージの最小レベルを示す値を指定します。 ログは、ブラウザのコンソール ウィンドウに書き込まれます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -904,17 +904,17 @@ let connection = new signalR.HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 完全にログ記録を無効にするには、`configureLogging` 方法で `signalR.LogLevel.None` を指定します。
+> ログの記録を完全に`signalR.LogLevel.None`無効にするには`configureLogging`、メソッドで指定します。
 
-ログ記録の詳細については、 [SignalR Diagnostics のドキュメント](xref:signalr/diagnostics)を参照してください。
+ログ記録の詳細については[、SignalR 診断のドキュメントを参照してください](xref:signalr/diagnostics)。
 
-SignalR Java クライアントは、 [SLF4J](https://www.slf4j.org/)ライブラリを使用してログを記録します。 これは、ライブラリのユーザーが特定のログの依存関係を使用して独自のログの実装を選択できるようにする、高レベルのログ記録 API です。 次のコードスニペットは、SignalR Java クライアントで `java.util.logging` を使用する方法を示しています。
+SignalR Java クライアントは[、SLF4J](https://www.slf4j.org/)ライブラリを使用してロギングします。 これは、ライブラリのユーザーが特定のロギング依存関係を持ち込むことによって、独自のログ記録実装を選択できるようにする高レベルのロギング API です。 次のコード スニペットは、SignalR Java クライアントでの使用方法`java.util.logging`を示しています。
 
 ```gradle
 implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 ```
 
-依存関係にログ記録を構成しない場合、SLF4J は既定の非操作 logger を読み込み、次の警告メッセージを表示します。
+依存関係でロギングを設定しない場合、SLF4J はデフォルトの操作なしロガーをロードし、次の警告メッセージを表示します。
 
 ```
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
@@ -922,13 +922,13 @@ SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ```
 
-これは無視してもかまいません。
+これは無視しても問題ありません。
 
 ### <a name="configure-allowed-transports"></a>許可されたトランスポートの構成
 
-SignalR によって使用されるトランスポートは、`WithUrl` の呼び出し (JavaScript の`withUrl`) で構成できます。 `HttpTransportType` の値のビットごとの OR を使用して、指定したトランスポートのみを使用するようにクライアントを制限できます。 既定では、すべてのトランスポートが有効になっています。
+SignalR によって使用されるトランスポートは、呼び出`WithUrl`しで`withUrl`構成できます (JavaScript で)。 の値のビット単位の OR`HttpTransportType`を使用して、クライアントが指定されたトランスポートのみを使用するように制限できます。 すべてのトランスポートは既定で有効になっています。
 
-たとえば、サーバーから送信されたイベントトランスポートを無効にし、Websocket と長いポーリング接続を許可するには、次のようにします。
+たとえば、サーバー送信イベント トランスポートを無効にするが、WebSocket とロング ポーリング接続を許可するには、次の手順を実行します。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -936,7 +936,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、`withUrl`に提供される options オブジェクトの `transport` フィールドを設定することによって、トランスポートを構成します。
+JavaScript クライアントでは、トランスポートは、 に提供される`transport`オプション オブジェクトのフィールドを設定`withUrl`して構成されます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -944,11 +944,11 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-### <a name="configure-bearer-authentication"></a>ベアラー認証を構成する
+### <a name="configure-bearer-authentication"></a>ベアラ認証の構成
 
-SignalR 要求と共に認証データを提供するには、`AccessTokenProvider` オプション (JavaScript の`accessTokenFactory`) を使用して、目的のアクセストークンを返す関数を指定します。 .NET クライアントでは、このアクセストークンは HTTP "ベアラー認証" トークンとして渡されます (`Bearer`の種類の `Authorization` ヘッダーを使用します)。 JavaScript クライアントでは、アクセストークンはベアラートークンとして使用されますが、ブラウザー Api がヘッダー (特に、サーバーが送信するイベントと Websocket 要求) を適用する機能を制限する場合は**例外**です。 このような場合、アクセストークンは `access_token`クエリ文字列値として指定されます。
+SignalR 要求と共に認証データを提供するには`AccessTokenProvider`、オプション`accessTokenFactory`(JavaScript で) を使用して、目的のアクセス トークンを返す関数を指定します。 NET クライアントでは、このアクセス トークンは HTTP "ベアラー認証" トークンとして渡されます`Authorization`(ヘッダーの種類を`Bearer`使用します)。 JavaScript クライアントでは、ブラウザー API がヘッダーの適用を制限する場合を除いて (特に、サーバー送信イベントと WebSocket 要求) 場合**を除き**、アクセス トークンはベアラー トークンとして使用されます。 このような場合、アクセス トークンはクエリ文字列値`access_token`として提供されます。
 
-.NET クライアントでは、`WithUrl`のオプションデリゲートを使用して、`AccessTokenProvider` オプションを指定できます。
+NET クライアントでは、 の`AccessTokenProvider`オプション デリゲートを使用してオプションを指定`WithUrl`できます。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -960,7 +960,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、`withUrl`の options オブジェクトの `accessTokenFactory` フィールドを設定することにより、アクセストークンが構成されます。
+JavaScript クライアントでは、アクセス トークンは、 のオプション`accessTokenFactory`オブジェクトのフィールドを設定`withUrl`して構成します。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -974,7 +974,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalR Java クライアントでは、 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)にアクセストークンファクトリを提供することによって、認証に使用するベアラートークンを構成できます。 [WithAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)を使用して、 [RxJava](https://github.com/ReactiveX/RxJava)の[単一\<文字列 >](https://reactivex.io/documentation/single.html)を指定します。 [単一の defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)を呼び出すことで、クライアントのアクセストークンを生成するロジックを作成できます。
+SignalR Java クライアントでは[、HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)にアクセス トークン ファクトリを提供することで、認証に使用するベアラー トークンを構成できます。 を使用[して](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__)[、RxJava](https://github.com/ReactiveX/RxJava) [の単一\<文字列>](https://reactivex.io/documentation/single.html)を提供します。 [Single.defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)を呼び出すと、クライアントのアクセス トークンを生成するロジックを記述できます。
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -984,72 +984,72 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
     })).build();
 ```
 
-### <a name="configure-timeout-and-keep-alive-options"></a>タイムアウトとキープアライブオプションを構成する
+### <a name="configure-timeout-and-keep-alive-options"></a>タイムアウトとキープアライブ オプションを構成する
 
-タイムアウトとキープアライブの動作を構成するための追加オプションは、`HubConnection` オブジェクト自体で利用できます。
+`HubConnection`タイムアウトとキープアライブ動作を設定するための追加オプションは、オブジェクト自体で使用できます。
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`Closed` イベント (JavaScript では`onclose`) をトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
-| `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`Closed` イベント (JavaScript では`onclose`) をトリガーします。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `ServerTimeout` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なし、イベントを`Closed`(JavaScript で)`onclose`トリガーします。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `HandshakeTimeout` | 15 秒 | 最初のサーバー ハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`Closed`イベントを (JavaScript で)`onclose`トリガーします。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
 
-.NET クライアントでは、タイムアウト値は `TimeSpan` 値として指定されます。
+NET クライアントでは、タイムアウト値が値として`TimeSpan`指定されます。
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`onclose` イベントをトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を考慮して、サーバーの `KeepAliveInterval` 値の少なくとも2倍の値です。 |
+| `serverTimeoutInMilliseconds` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なしてイベントをトリガー`onclose`します。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| `getServerTimeout` / `setServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、`onClose` イベントをトリガーします。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、サーバーの `KeepAliveInterval` 値の少なくとも2倍の数で、ping が到着するまでの時間を考慮します。 |
-| `withHandshakeResponseTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、`onClose` イベントをトリガーします。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、 [SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
+| `getServerTimeout` / `setServerTimeout` | 30 秒 (30,000 ミリ秒) | サーバーアクティビティのタイムアウト。 この間隔でサーバーがメッセージを送信していない場合、クライアントはサーバーが切断されたと見なしてイベントをトリガー`onClose`します。 この値は、サーバーから送信され **、** タイムアウト間隔内にクライアントが受信する ping メッセージに十分な大きさである必要があります。 推奨値は、ping が到着するまでの時間を許容`KeepAliveInterval`するために、サーバーの値の少なくとも 2 倍の数値です。 |
+| `withHandshakeResponseTimeout` | 15 秒 | 最初のサーバー ハンドシェイクのタイムアウト。 この間隔でサーバーがハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルしてイベントをトリガー`onClose`します。 これは、ネットワーク遅延が深刻なためにハンドシェイク タイムアウト エラーが発生した場合にのみ変更する必要がある詳細設定です。 ハンドシェイク プロセスの詳細については[、SignalR ハブ プロトコル仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)を参照してください。 |
 
 ---
 
-### <a name="configure-additional-options"></a>追加のオプションを構成する
+### <a name="configure-additional-options"></a>詳細設定オプションの構成
 
-追加のオプションは `HubConnectionBuilder` または Java クライアントの `HttpHubConnectionBuilder` のさまざまな構成 Api で `WithUrl` (JavaScript の`withUrl`) メソッドで構成できます。
+追加オプション`WithUrl`は、Java`withUrl`クライアントの各種構成 API 上`HubConnectionBuilder`または JavaScript での`HttpHubConnectionBuilder`(JavaScript) メソッドで構成できます。
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
 | .NET オプション |  既定値 | 説明 |
 | ----------- | -------------- | ----------- |
-| `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
-| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
-| `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
-| `HttpMessageHandlerFactory` | `null` | HTTP 要求の送信に使用される `HttpMessageHandler` を構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、新しい `HttpMessageHandler` インスタンスを返します。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
+| `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `SkipNegotiation` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | Empty | すべての HTTP 要求で送信する HTTP クッキーのコレクション。 |
+| `Credentials` | Empty | すべての HTTP 要求で送信する資格情報。 |
+| `CloseTimeout` | 5 秒 | ウェブソケットのみ。 サーバーがクローズ要求を確認するまでの、クライアントがクローズ後に待機する最大時間。 この時間内にサーバーがクローズを確認しない場合、クライアントは切断されます。 |
+| `Headers` | Empty | すべての HTTP 要求で送信する追加の HTTP ヘッダーのマップ。 |
+| `HttpMessageHandlerFactory` | `null` | HTTP 要求の送信に使用されるを`HttpMessageHandler`構成または置き換えるために使用できるデリゲート。 Web ソケット接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、既定値をパラメーターとして受け取ります。 その既定値の設定を変更して返すか、新`HttpMessageHandler`しいインスタンスを返します。 **ハンドラを置き換える場合は、指定されたハンドラから保持する設定を必ずコピーし、そうでない場合は、設定されたオプション (Cookie や Headers など) が新しいハンドラに適用されないようにしてください。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
-| `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
-| `WebSocketConfiguration` | `null` | 追加の WebSocket オプションを構成するために使用できるデリゲート。 オプションの構成に使用できる[ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions)のインスタンスを受け取ります。 |
+| `UseDefaultCredentials` | `false` | HTTP および WebSocket 要求の既定の資格情報を送信するには、このブール値を設定します。 これにより、Windows 認証を使用できるようになります。 |
+| `WebSocketConfiguration` | `null` | 追加の WebSocket オプションを構成するために使用できるデリゲート。 オプションの構成に使用できる[ClientWebSocketOptions](/dotnet/api/system.net.websockets.clientwebsocketoptions)のインスタンスを受信します。 |
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | Default value | 説明 |
+| Java スクリプトオプション | Default value | 説明 |
 | ----------------- | ------------- | ----------- |
-| `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `skipNegotiation` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java オプション | Default value | 説明 |
 | ----------- | ------------- | ----------- |
-| `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
-| `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これを `true` に設定します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
-| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして提供される文字列を返す関数。 |
+| `shouldSkipNegotiate` | `false` | ネゴシエーションステップを`true`スキップするには、これをに設定します。 **WebSockets トランスポートが唯一有効なトランスポートである場合にのみサポートされます**。 Azure SignalR サービスを使用している場合、この設定を有効にすることはできません。 |
+| `withHeader` `withHeaders` | Empty | すべての HTTP 要求で送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
-.NET クライアントでは、これらのオプションは `WithUrl`に提供されるオプションデリゲートによって変更できます。
+NET クライアントでは、これらのオプションは、 に提供されるオプション デリゲートによって`WithUrl`変更できます。
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -1061,7 +1061,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-JavaScript クライアントでは、これらのオプションは `withUrl`に提供される JavaScript オブジェクトで提供できます。
+JavaScript クライアントでは、これらのオプションは`withUrl`、次の JavaScript オブジェクトで提供できます。
 
 ```javascript
 let connection = new signalR.HubConnectionBuilder()
@@ -1072,7 +1072,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Java クライアントでは、これらのオプションはから返された `HttpHubConnectionBuilder` のメソッドを使用して構成でき `HubConnectionBuilder.create("HUB URL")`
+Java クライアントでは、これらのオプションは、そこから返されるメソッドで構成`HttpHubConnectionBuilder`できます。`HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -1082,7 +1082,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
         .build();
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>

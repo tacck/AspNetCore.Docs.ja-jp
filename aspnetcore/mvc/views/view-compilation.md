@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/8/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 7f329ffb4c63e8699663f49720145984bb8802fd
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 0afd39fdb5a6f570e0e78ad54f6c436460bad3a6
+ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994604"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81223960"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core での Razor ファイルのコンパイル
 
@@ -31,7 +31,7 @@ Razor ファイルのビルドおよび発行時のコンパイルは、既定�
 
 1. パッケージ[を](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/)インストールします。
 
-1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、`AddRazorRuntimeCompilation` の呼び出しを含めます。 次に例を示します。
+1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、<xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> の呼び出しを含めます。 次に例を示します。
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -61,29 +61,15 @@ Razor ファイルのビルドおよび発行時のコンパイルは、既定�
 
 1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、`AddRazorRuntimeCompilation` の呼び出しを含めます。 `ASPNETCORE_ENVIRONMENT` 変数が `Development` に設定されている場合にのみ Debug モードで実行されるように、条件付きで `AddRazorRuntimeCompilation` を実行します。
 
-    ```csharp
-    public IWebHostEnvironment Env { get; set; }
+  [!code-csharp[](~/mvc/views/view-compilation/sample/Startup.cs?name=snippet)]
 
-    public void ConfigureServices(IServiceCollection services)
-    {
-        IMvcBuilder builder = services.AddRazorPages();
+## <a name="additional-resources"></a>その他の技術情報
 
-    #if DEBUG
-        if (Env.IsDevelopment())
-        {
-            builder.AddRazorRuntimeCompilation();
-        }
-    #endif
-
-        // code omitted for brevity
-    }
-    ```
-
-## <a name="additional-resources"></a>その他のリソース
-
+* [プロパティを構築し、カミソリコンパイルオンを発行します](xref:razor-pages/sdk#properties)。
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
+* プロジェクト間[でのランタイム コンパイル](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation)の動作を示すサンプルについては、GitHub のランタイム コンパイル のサンプルを参照してください。
 
 ::: moniker-end
 
@@ -104,7 +90,7 @@ Razor ファイルのビルドおよび発行時のコンパイルは、既定�
 
 ビルド時のコンパイルは Razor ファイルの実行時コンパイルによって補完されます。 ASP.NET Core MVC は、*.cshtml* ファイルの内容が変更されたとき、Razor ファイルを再コンパイルします。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
