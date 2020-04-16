@@ -9,12 +9,12 @@ ms.date: 04/08/2020
 no-loc:
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: a99c1dd2aba6ef6ff925783762a98e2c81ed7225
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 43b2cacf9f415ec422a00b28246f30c8ad74de29
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994584"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440858"
 ---
 # <a name="aspnet-core-opno-locsignalr-javascript-client"></a>ASP.NETコアSignalRJavaScript クライアント
 
@@ -145,9 +145,9 @@ SignalRで定義されたメソッド名と引数を一致させることによ�
 
 メソッドを`catch`メソッドの最後にチェイン`start`して、クライアント側のエラーを処理します。 ブラウザ`console.error`のコンソールにエラーを出力するために使用します。
 
-[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=49-51)]
+[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=50)]
 
-接続が確立されたときにログに記録するロガーとイベントの種類を渡すことによって、クライアント側のログ トレースをセットアップします。 メッセージは、指定したログ レベル以上でログに記録されます。 使用可能なログ・レベルは次のとおりです。
+接続が行われたときにログに記録するロガーとイベントの種類を渡すことによって、クライアント側のログ トレースを設定します。 メッセージは、指定したログ レベル以上でログに記録されます。 使用可能なログ・レベルは次のとおりです。
 
 * `signalR.LogLevel.Error`&ndash;エラー メッセージ。 メッセージ`Error`のみをログに記録します。
 * `signalR.LogLevel.Warning`&ndash;潜在的なエラーに関する警告メッセージ。 ログ`Warning`、`Error`およびメッセージ。
@@ -178,7 +178,7 @@ const connection = new signalR.HubConnectionBuilder()
 再接続の試行を開始する前に`HubConnection`、状態に遷`HubConnectionState.Reconnecting`移`onreconnecting`し、`Disconnected`状態に遷移して、自動再接続を設定せずにコールバックを`onclose`トリガーする代わりに`HubConnection`、コールバックを起動します。 これにより、接続が失われたことをユーザーに警告し、UI 要素を無効にする機会が得られます。
 
 ```javascript
-connection.onreconnecting((error) => {
+connection.onreconnecting(error => {
     console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
 
     document.getElementById("messageInput").disabled = true;
@@ -197,7 +197,7 @@ connection.onreconnecting((error) => {
 > ネゴシエーション`onreconnected`をスキップするように`connectionId`設定されている場合、コールバックの`HubConnection`パラメータは未定義[skip negotiation](xref:signalr/configuration#configure-client-options)になります。
 
 ```javascript
-connection.onreconnected((connectionId) => {
+connection.onreconnected(connectionId => {
     console.assert(connection.state === signalR.HubConnectionState.Connected);
 
     document.getElementById("messageInput").disabled = false;
@@ -227,7 +227,7 @@ async function start() {
 クライアントが最初の 4 回の試行で正常に再接続しない場合は`HubConnection`、`Disconnected`状態に遷移し[、onclose](/javascript/api/%40aspnet/signalr/hubconnection#onclose)コールバックを起動します。 これにより、接続が完全に失われたことをユーザーに通知し、ページを更新することをお勧めします。
 
 ```javascript
-connection.onclose((error) => {
+connection.onclose(error => {
     console.assert(connection.state === signalR.HubConnectionState.Disconnected);
 
     document.getElementById("messageInput").disabled = true;

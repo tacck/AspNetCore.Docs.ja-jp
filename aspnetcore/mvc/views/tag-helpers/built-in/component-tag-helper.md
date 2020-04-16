@@ -4,17 +4,17 @@ author: guardrex
 ms.author: riande
 description: ASP.NET コア コンポーネント タグ ヘルパーを使用して、Razor コンポーネントをページとビューにレンダリングする方法について説明します。
 ms.custom: mvc
-ms.date: 04/01/2020
+ms.date: 04/15/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: aaa4b92a8912b4f52d861ed07432aa7cf3ca5240
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123430"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440962"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NETコアのコンポーネント タグ ヘルパー
 
@@ -24,7 +24,7 @@ ms.locfileid: "81123430"
 
 ## <a name="prerequisites"></a>前提条件
 
-「*ページとビューでコンポーネントを使用するようにアプリを準備する」* セクションのガイダンスに<xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views>従ってください。
+「*ページとビューでコンポーネントを使用するようにアプリを準備する」* セクションのガイダンスに<xref:blazor/integrate-components#prepare-the-app>従ってください。
 
 ## <a name="component-tag-helper"></a>コンポーネント タグ ヘルパー
 
@@ -165,7 +165,7 @@ public class MyClass
 
 静的 HTML ページからのサーバー コンポーネントのレンダリングはサポートされていません。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>
 * <xref:mvc/views/tag-helpers/intro>

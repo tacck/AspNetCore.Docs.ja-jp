@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core アプリで Razor ファイルのコンパイルがどのように行われるかについて説明します。
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 04/14/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 67bbeb88cd944791b522900b69bd10cff38c9f3a
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 3d871ab960de28a565280d9e4cb2c597832e2455
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277271"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440936"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core での Razor ファイルのコンパイル
 
@@ -83,13 +83,23 @@ dotnet new webapp --razor-runtime-compilation
 
 プロジェクトの`Startup`クラスでコードを変更する必要はありません。 実行時に、ASP.NET Core は、 で[アセンブリ レベルの HostingStartup 属性](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute)を`Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`検索します。 この`HostingStartup`属性は、実行するアプリのスタートアップ コードを指定します。 このスタートアップ コードは、実行時のコンパイルを有効にします。
 
+## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Razor クラス ライブラリのランタイム コンパイルを有効にする
+
+Razor ページ プロジェクトが*MyClassLib*という名前の[Razor クラス ライブラリ (RCL) を](xref:razor-pages/ui-class)参照するシナリオを考えてみます。 RCL には、チームのすべての MVC および Razor ページ プロジェクトで使用される *_Layout.cshtml*ファイルが含まれています。 その RCL 内の *_Layout.cshtml*ファイルの実行時コンパイルを有効にする必要があります。 Razor ページ プロジェクトで次の変更を行います。
+
+1. 「既存のプロジェクトで条件付きの実行時コンパイルを有効にする」の手順を使用して[、ランタイム コンパイルを有効に](#conditionally-enable-runtime-compilation-in-an-existing-project)します。
+1. でランタイム コンパイル オプション`Startup.ConfigureServices`を構成します。
+
+    [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
+
+    上記のコードでは *、MyClassLib* RCL への絶対パスが作成されます。 [物理ファイル プロバイダ API](xref:fundamentals/file-providers#physicalfileprovider)は、その絶対パスにあるディレクトリとファイルを検索するために使用されます。 最後に`PhysicalFileProvider`、インスタンスは、RCL の *.cshtml*ファイルへのアクセスを許可するファイル プロバイダーコレクションに追加されます。
+
 ## <a name="additional-resources"></a>その他のリソース
 
 * [プロパティを構築し、カミソリコンパイルオンを発行します](xref:razor-pages/sdk#properties)。
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* プロジェクト間[でのランタイム コンパイル](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation)の動作を示すサンプルについては、GitHub のランタイム コンパイル サンプルを参照してください。
 
 ::: moniker-end
 
