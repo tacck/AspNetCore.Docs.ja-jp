@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 03/27/2020
-  ms.openlocfilehash: fb6d03616560649a336df8a624e7fb59006a7ea8
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+  ms.date: 04/15/2020
+  ms.openlocfilehash: c0f987396a4bfcdbc8c189938125eb2a65dadc8a
+  ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
   ms.translationtype: HT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80366638"
+  ms.lasthandoff: 04/17/2020
+  ms.locfileid: "81542420"
 highlightedContent:
   items:
   - title: 任意のプラットフォームに 5 分で ASP.NET Core アプリを作成する
@@ -41,7 +41,7 @@ highlightedContent:
     url: tutorials/signalr.md
   - title: 最初のデータドリブン MVC Web アプリを作成する
     itemType: get-started
-    url: tutorials/first-mvc-app/index.md
+    url: tutorials/first-mvc-app//start-mvc.md
 conceptualContent:
   title: ASP.NET Core MVC アプリの開発
   summary: 対話型 Web アプリ、Web API、MVC パターンのアプリ、リアルタイム アプリなどを選択してください
@@ -184,13 +184,13 @@ conceptualContent:
   - title: データドリブンの Web アプリ
     summary: ASP.NET Core でデータドリブンの Web アプリを作成します
     links:
-    - url: tutorials/first-mvc-app/working-with-sql.md
+    - url: tutorials/first-mvc-app/start-mvc.md
       itemType: tutorial
       text: ASP.NET Core による SQL
     - url: blazor/data-binding.md
       itemType: concept
       text: ASP.NET Core Blazor でのデータ バインディング
-    - url: tutorials/razor-pages/sql.md
+    - url: tutorials/razor-pages/razor-pages-start.md
       itemType: tutorial
       text: SQL Server Express と Razor Pages
     - url: data/ef-rp/intro.md
