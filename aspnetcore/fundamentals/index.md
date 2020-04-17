@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417648"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81384056"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core の基礎
 
@@ -205,7 +205,7 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
   * データ ファイル ( *.db*)
 * [Web ルート](#web-root) (通常は *wwwroot* フォルダー)。
 
-開発中、コンテンツ ルートの既定値は、プロジェクトのルート ディレクトリです。 このディレクトリは、アプリのコンテンツ ファイルと [Web ルート](#web-root)の両方の基本パスでもあります。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別のコンテンツ ルートを指定します。 詳細については、[コンテンツ ルート](xref:fundamentals/host/generic-host#contentrootpath-1)に関するページを参照してください。
+開発中、コンテンツ ルートの既定値は、プロジェクトのルート ディレクトリです。 このディレクトリは、アプリのコンテンツ ファイルと [Web ルート](#web-root)の両方の基本パスでもあります。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別のコンテンツ ルートを指定します。 詳細については、[コンテンツ ルート](xref:fundamentals/host/generic-host#contentroot)に関するページを参照してください。
 
 ## <a name="web-root"></a>Web ルート
 
@@ -215,7 +215,7 @@ Web ルートは、次のような、パブリックで静的なリソース フ
 * JavaScript ( *.js*)
 * 画像 ( *.png*、*jpg*)
 
-既定では、静的ファイルは Web ルート ディレクトリとそのサブディレクトリからのみ提供されます。 Web ルートのパスの既定値は、 *{コンテンツ ルート}/wwwroot* です。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別の Web ルートを指定します。 詳細については、「[Web ルート](xref:fundamentals/host/generic-host#webroot-1)」を参照してください。
+既定では、静的ファイルは Web ルート ディレクトリとそのサブディレクトリからのみ提供されます。 Web ルートのパスの既定値は、 *{コンテンツ ルート}/wwwroot* です。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別の Web ルートを指定します。 詳細については、「[Web ルート](xref:fundamentals/host/generic-host#webroot)」を参照してください。
 
 プロジェクト ファイル内の [\<コンテンツ > プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content) を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* とそのサブディレクトリにコンテンツを公開しないようにします。
 
