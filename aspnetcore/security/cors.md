@@ -4,20 +4,20 @@ author: rick-anderson
 description: ASP.NET Core アプリでクロスオリジン要求を許可または拒否するための標準として CORS を説明します。
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 04/17/2020
 uid: security/cors
-ms.openlocfilehash: e7731fd967c206679ac93209fdb84f40367bea37
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 56a339d9018f619af38aecc6f4c2ff40c3c43d2f
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440910"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642703"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NETコアでのクロスオリジンリクエスト(CORS)の有効化
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[リック・アンダーソン](https://twitter.com/RickAndMSFT)と[カーク・ラーキン](https://twitter.com/serpent5)
+作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Kirk Larkin](https://twitter.com/serpent5)
 
 この記事では、ASP.NET コア アプリで CORS を有効にする方法について説明します。
 
@@ -68,10 +68,10 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,31)]
 
-上のコードでは以下の操作が行われます。
+上記のコードでは次の操作が行われます。
 
 * ポリシー名を に`_myAllowSpecificOrigins`設定します。 ポリシー名は任意です。
-* 拡張メソッド<xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>を呼び出し`_myAllowSpecificOrigins`、CORS ポリシーを指定します。 `UseCors`CORS ミドルウェアを追加します。
+* 拡張メソッド<xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>を呼び出し`_myAllowSpecificOrigins`、CORS ポリシーを指定します。 `UseCors`CORS ミドルウェアを追加します。 の`UseCors`呼び出しは、`UseRouting`の後`UseAuthorization`に置く必要がありますが、 の前に置く必要があります。 詳細については、[ミドルウェアの順序](xref:fundamentals/middleware/index#middleware-order)を参照してください。
 * <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)を使用して呼び出します。 ラムダはオブジェクト<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder>を受け取ります。 などの`WithOrigins`[構成オプション](#cors-policy-options)については、この記事の後半で説明します。
 * すべてのコントローラー`_myAllowSpecificOrigins`エンドポイントの CORS ポリシーを有効にします。 特定[のエンドポイント](#ecors)に CORS ポリシーを適用するには、エンドポイントルーティングを参照してください。
 
@@ -172,7 +172,7 @@ CORS 要求を制限する最も優れた制御を行う場合:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet&highlight=1,23)]
 
-上のコードでは以下の操作が行われます。
+上記のコードでは次の操作が行われます。
 
 * [エンドポイント ルーティング](#ecors)で CORS を有効にしません。
 * 既定の[CORS ポリシー](#dp)を定義しません。
@@ -605,7 +605,7 @@ C:\Program Files\Git\mingw64\bin\
 
 展開されたサンプルの[テスト ページ](https://cors1.azurewebsites.net/test?number=2)から、上記のコードをテストします。 [**コントローラ**] ドロップダウン リストで、[**プリフライト**] を選択し、[**コントローラの設定]** を選択します。 `TodoItems2Controller`エンドポイントへの CORS 呼び出しはすべて成功します。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [クロスオリジンリソース共有(CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -653,7 +653,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
-上のコードでは以下の操作が行われます。
+上記のコードでは次の操作が行われます。
 
 * ポリシー名を "myAllowSpecificOrigins"\_に設定します。 ポリシー名は任意です。
 * 拡張メソッド<xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>を呼び出して、CORS を有効にします。
@@ -1011,7 +1011,7 @@ CORS 対応のエンドポイントは[、Fiddler](https://www.telerik.com/fiddl
 
 IIS に展開する場合、サーバーが匿名アクセスを許可するように構成されていない場合は、Windows 認証の前に CORS を実行する必要があります。 このシナリオをサポートするには[、IIS CORS モジュール](https://www.iis.net/downloads/microsoft/iis-cors-module)をインストールし、アプリ用に構成する必要があります。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [クロスオリジンリソース共有(CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
