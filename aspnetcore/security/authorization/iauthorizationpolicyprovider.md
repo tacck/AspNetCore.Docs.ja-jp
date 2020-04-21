@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2a8b189cc9f17529a962a1f9642c7bb199d5781b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440923"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661770"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET コアで IAuthorizationPolicyProvider を使用するカスタム承認ポリシー プロバイダー 
 
@@ -25,7 +25,7 @@ ms.locfileid: "81440923"
 * さまざまな部屋番号や年齢など、さまざまな範囲のポリシーを使用するため、個々の承認ポリシーを`AuthorizationOptions.AddPolicy`呼び出しで追加しても意味がありません。
 * 外部データ ソース (データベースなど) の情報に基づいて実行時にポリシーを作成するか、別のメカニズムを使用して動的に承認要件を決定する。
 
-[AspNetCore GitHub リポジトリ](https://github.com/dotnet/AspNetCore)から[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider)します。 ドットネット/AspNetCore リポジトリ ZIP ファイルをダウンロードします。 ファイルを解凍します。 *src/セキュリティ/サンプル/カスタムポリシープロバイダ*プロジェクトフォルダに移動します。
+[AspNetCore GitHub リポジトリ](https://github.com/dotnet/AspNetCore)から[サンプル コードを表示またはダウンロード](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)します。 ドットネット/AspNetCore リポジトリ ZIP ファイルをダウンロードします。 ファイルを解凍します。 *src/セキュリティ/サンプル/カスタムポリシープロバイダ*プロジェクトフォルダに移動します。
 
 ## <a name="customize-policy-retrieval"></a>ポリシーの取得のカスタマイズ
 
@@ -183,4 +183,4 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-完全なカスタム`IAuthorizationPolicyProvider`サンプルは、[ドットネット/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore/tree/ea555458dc61e04314598c25b3ab8c56362a5123/src/Security/samples/CustomPolicyProvider)で入手できます。
+完全なカスタム`IAuthorizationPolicyProvider`サンプルは、[ドットネット/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)で入手できます。

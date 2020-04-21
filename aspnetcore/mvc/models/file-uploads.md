@@ -5,18 +5,18 @@ description: モデル バインドとストリーミングを使用して、ASP
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/25/2020
+ms.date: 04/18/2020
 uid: mvc/models/file-uploads
-ms.openlocfilehash: fc71c39dd1aa70e6b092799fec00bd7bf66703e8
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e25da0b3867181a16a4636768f36c148a152dd23
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654086"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661737"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
-[上田氏](https://ardalis.com/)との[嵐](https://github.com/rutix)
+[スティーブ・スミス](https://ardalis.com/)と[ラトガー・ストーム](https://github.com/rutix)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -36,9 +36,9 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 * 専用のファイル アップロード領域 (できれば、システム ドライブ以外) にファイルをアップロードします。 専用の場所を使用すると、アップロードされるファイルにセキュリティ制限を適用しやすくなります。 ファイルのアップロード場所に対する実行アクセス許可を無効にします。&dagger;
 * アプリと同じディレクトリ ツリーに、アップロードしたファイルを保持**しないでください**。&dagger;
-* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。&dagger; HTML では、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりします (Razor では、出力が自動的に HTML エンコードされます)。
+* アプリによって決められた安全なファイル名を使用します。 ユーザーから提供されたファイル名や、アップロードされたファイルの信頼できないファイル名を使用しないでください。&dagger; HTML は、それを表示するときに、信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりします (Razor では、出力が自動的に HTML エンコードされます)。
 * アプリの設計仕様に対して承認されているファイル拡張子のみを許可します。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* クライアント側のチェックがサーバーで実行されていることを確認します。&dagger; クライアント側のチェックは簡単に回避できます。
+* サーバーでクライアント側のチェックが実行されていることを確認します。&dagger;クライアント側のチェックは簡単に回避できます。
 * アップロードされたファイルのサイズをチェックします。 サイズの大きなアップロードを防ぐために、最大サイズ制限を設定します。&dagger;
 * 同じ名前でアップロードされたファイルによってファイルが上書きされないようにする必要があるときは、ファイルをアップロードする前に、データベースまたは物理ストレージに対してファイル名を確認します。
 * **ファイルを格納する前に、アップロードされる内容に対してウイルス/マルウェア スキャナーを実行します。**
@@ -55,7 +55,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 >
 > ユーザーからファイルを受け入れる際の外部アクセスによる攻撃を減らす方法については、次の資料を参照してください。
 >
-> * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
+> * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 > * [Azure セキュリティ: ユーザーから受け入れるファイルに適切な管理制御を整備する](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 サンプル アプリの例など、セキュリティ対策の実装の詳細については、「[検証](#validation)」セクションを参照してください。
@@ -64,7 +64,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 ファイルの一般的なストレージ オプションには次のようなものがあります。
 
-* ［データベース］
+* データベース
 
   * 小さいファイルをアップロードする場合、物理ストレージ (ファイル システムまたはネットワーク共有) のオプションよりデータベースの方が速いことがよくあります。
   * 多くの場合、ユーザー データに対するデータベース レコードの取得でファイルの内容を同時に提供できるため (たとえば、アバター イメージ)、データベースの方が物理的なストレージ オプションより便利です。
@@ -83,13 +83,13 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   * 通常、サービスでは、大抵の場合に単一障害点となるオンプレミス ソリューションより高いスケーラビリティと回復性が提供されます。
   * 大規模なストレージ インフラストラクチャのシナリオでは、サービスのコストが低下する可能性があります。
 
-  詳細については、「[クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。
+  詳細については、「[クイック スタート : .NET を使用してオブジェクト ストレージに BLOB を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。
 
 ## <a name="file-upload-scenarios"></a>ファイル アップロードのシナリオ
 
 ファイルをアップロードするための一般的な 2 つの方法は、バッファーリングとストリーミングです。
 
-**バッファーリング**
+**Buffering**
 
 ファイル全体が <xref:Microsoft.AspNetCore.Http.IFormFile> に読み込まれます。これは、ファイルの処理または保存に使用される C# でのファイルの表現です。
 
@@ -183,7 +183,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 [Fetch API がサポートされていない](https://caniuse.com/#feat=fetch)クライアントに対して JavaScript でフォーム POST を実行するには、次のいずれかの方法を使用します。
 
 * Fetch Polyfill を使用します (例: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))。
-* `XMLHttpRequest`を使用します。 例 :
+* `XMLHttpRequest`を使用します。 次に例を示します。
 
   ```javascript
   <script>
@@ -201,20 +201,20 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   </script>
   ```
 
-ファイルのアップロードをサポートするには、HTML フォームで `enctype` のエンコード タイプ (`multipart/form-data`) を指定する必要があります。
+ファイルのアップロードをサポートするには、HTML フォームで `multipart/form-data` のエンコード タイプ (`enctype`) を指定する必要があります。
 
-`files` 入力要素で複数のファイルのアップロードをサポートするには、`multiple` 要素で `<input>` 属性を指定します。
+`files` 入力要素で複数のファイルのアップロードをサポートするには、`<input>` 要素で `multiple` 属性を指定します。
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-サーバーにアップロードされた個々のファイルには、[ を使用して](xref:mvc/models/model-binding)モデル バインド<xref:Microsoft.AspNetCore.Http.IFormFile>でアクセスできます。 サンプル アプリでは、データベースおよび物理ストレージのシナリオでの複数のバッファー ファイル アップロードが示されています。
+サーバーにアップロードされた個々のファイルには、<xref:Microsoft.AspNetCore.Http.IFormFile> を使用して[モデル バインド](xref:mvc/models/model-binding)でアクセスできます。 サンプル アプリでは、データベースおよび物理ストレージのシナリオでの複数のバッファー ファイル アップロードが示されています。
 
 <a name="filename"></a>
 
 > [!WARNING]
-> **の** プロパティは、表示とログ記録の目的以外に使用`FileName`しないでください<xref:Microsoft.AspNetCore.Http.IFormFile>。 表示またはログ記録を行うときに、ファイル名を HTML エンコードします。 攻撃者は、完全パスまたは相対パスを含む悪意のあるファイル名を提供することがあります。 アプリケーションで次の処理を行う必要があります。
+> <xref:Microsoft.AspNetCore.Http.IFormFile> の `FileName` プロパティは、表示とログ記録の目的以外に使用**しないでください**。 表示またはログ記録を行うときに、ファイル名を HTML エンコードします。 攻撃者は、完全パスまたは相対パスを含む悪意のあるファイル名を提供することがあります。 アプリケーションで次の処理を行う必要があります。
 >
 > * ユーザーが指定したファイル名からパスを削除します。
 > * UI またはログ記録のために、HTML エンコードされ、パスが削除されたファイル名を保存します。
@@ -229,7 +229,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > これまでに示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
 > * [セキュリティに関する考慮事項](#security-considerations)
-> * [検証](#validation)
+> * [Validation](#validation)
 
 モデル バインドと <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してファイルをアップロードする場合、アクション メソッドでは以下を受け入れることができます。
 
@@ -237,12 +237,12 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 * 複数のファイルを表す次のいずれかのコレクション:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
-  * [List](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
+  * [リスト](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `name` の `<input type="file" name="formFile">` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
+> バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次に例を示します。
+次のような例です。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -292,7 +292,7 @@ foreach (var formFile in files)
 }
 ```
 
-<xref:System.IO.FileStream> に渡すパスには、ファイル名が含まれている "*必要があります*"。 ファイル名を指定しないと、実行時に <xref:System.UnauthorizedAccessException> がスローされます。
+ に渡すパスには、ファイル名が含まれている "<xref:System.IO.FileStream> *必要があります*"。 ファイル名を指定しないと、実行時に <xref:System.UnauthorizedAccessException> がスローされます。
 
 <xref:Microsoft.AspNetCore.Http.IFormFile> の方法を使用してアップロードされたファイルは、処理の前に、サーバー上のメモリまたはディスクのバッファーに格納されます。 アクション メソッド内では、<xref:Microsoft.AspNetCore.Http.IFormFile> の内容には <xref:System.IO.Stream> としてアクセスできます。 ローカル ファイル システムに加えて、ネットワーク共有またはファイル ストレージ サービス ([Azure Blob Storage](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs) など) にファイルを保存することができます。
 
@@ -395,12 +395,12 @@ public async Task<IActionResult> OnPostUploadAsync()
 > [!WARNING]
 > パフォーマンスに悪影響を与える可能性があるため、リレーショナル データベースにバイナリ データを格納する場合は注意してください。
 >
-> 検証を行わずに `FileName` の <xref:Microsoft.AspNetCore.Http.IFormFile> プロパティに依存したり、信頼したりしないでください。 `FileName` プロパティは、表示目的でのみ、HTML エンコードした後でだけ、使用する必要があります。
+> 検証を行わずに <xref:Microsoft.AspNetCore.Http.IFormFile> の `FileName` プロパティに依存したり、信頼したりしないでください。 `FileName` プロパティは、表示目的でのみ、HTML エンコードした後でだけ、使用する必要があります。
 >
 > 示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
 > * [セキュリティに関する考慮事項](#security-considerations)
-> * [検証](#validation)
+> * [Validation](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>ストリーミングを使用して大きいファイルをアップロードする
 
@@ -414,7 +414,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-サンプル アプリでは、`GenerateAntiforgeryTokenCookieAttribute` および `DisableFormValueModelBindingAttribute` は、`/StreamedSingleFileUploadDb`Razor Pages の規則`/StreamedSingleFileUploadPhysical`を使用して、`Startup.ConfigureServices` で [ および ](xref:razor-pages/razor-pages-conventions) のページ アプリケーション モデルにフィルターとして適用されます。
+サンプル アプリでは、`GenerateAntiforgeryTokenCookieAttribute` および `DisableFormValueModelBindingAttribute` は、[Razor Pages の規則](xref:razor-pages/razor-pages-conventions)を使用して、`Startup.ConfigureServices` で `/StreamedSingleFileUploadDb` および `/StreamedSingleFileUploadPhysical` のページ アプリケーション モデルにフィルターとして適用されます。
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
@@ -434,9 +434,9 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 サンプル アプリでは、検証チェックは `FileHelpers.ProcessStreamedFile` によって処理されます。
 
-## <a name="validation"></a>Validation
+## <a name="validation"></a>検証
 
-サンプル アプリの `FileHelpers` クラスでは、バッファーリングされた <xref:Microsoft.AspNetCore.Http.IFormFile> とストリーミングされたファイルのアップロードに関するいくつかのチェックが示されています。 サンプル アプリでのバッファーリングされたファイルのアップロード <xref:Microsoft.AspNetCore.Http.IFormFile> の処理については、`ProcessFormFile`Utilities/FileHelpers.cs*ファイルの* メソッドを参照してください。 ストリーミングされたファイルの処理については、同じファイルの `ProcessStreamedFile` メソッドを参照してください。
+サンプル アプリの `FileHelpers` クラスでは、バッファーリングされた <xref:Microsoft.AspNetCore.Http.IFormFile> とストリーミングされたファイルのアップロードに関するいくつかのチェックが示されています。 サンプル アプリでのバッファーリングされたファイルのアップロード <xref:Microsoft.AspNetCore.Http.IFormFile> の処理については、*Utilities/FileHelpers.cs* ファイルの `ProcessFormFile` メソッドを参照してください。 ストリーミングされたファイルの処理については、同じファイルの `ProcessStreamedFile` メソッドを参照してください。
 
 > [!WARNING]
 > サンプル アプリで示されている検証処理メソッドでは、アップロードされたファイルの内容はスキャンされません。 ほとんどの運用シナリオでは、ファイルをユーザーまたは他のシステムで使用できるようにする前に、ウイルス/マルウェア スキャナー API が使用されます。
@@ -456,7 +456,7 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 ### <a name="file-extension-validation"></a>ファイル拡張子の検証
 
-アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 例 :
+アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 次に例を示します。
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -522,7 +522,7 @@ Razor の外部では、ユーザーの要求からのファイル名の内容�
 
 アップロードされるファイルのサイズを制限します。
 
-サンプル アプリでは、ファイルのサイズは 2 MB (バイト単位) に制限されています。 その制限は、[appsettings.json](xref:fundamentals/configuration/index) ファイルの *Configuration* によって提供されます。
+サンプル アプリでは、ファイルのサイズは 2 MB (バイト単位) に制限されています。 その制限は、*appsettings.json* ファイルの [Configuration](xref:fundamentals/configuration/index) によって提供されます。
 
 ```json
 {
@@ -559,7 +559,7 @@ if (formFile.Length > _fileSizeLimit)
 
 フォーム データを POST する、または JavaScript の `FormData` を直接使用する、Razor 以外のフォームでは、フォームの要素または `FormData` で指定されている名前が、コントローラーのアクションのパラメーターの name と一致している必要があります。
 
-たとえば、行が次のように表示されているとします。
+次の例では
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 
@@ -595,7 +595,7 @@ C# メソッドのパラメーターに一致する名前を使用します (`ba
 
 ### <a name="multipart-body-length-limit"></a>マルチパート本文の長さの制限
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> では、各マルチパート本文の長さの制限が設定されます。 この制限を超えるフォーム セクションでは、解析時に <xref:System.IO.InvalidDataException> がスローされます。 既定値は 134,217,728 (128 MB) です。 制限をカスタマイズするには、<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> の設定 `Startup.ConfigureServices` を使用します。
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> では、各マルチパート本文の長さの制限が設定されます。 この制限を超えるフォーム セクションでは、解析時に <xref:System.IO.InvalidDataException> がスローされます。 既定値は 134,217,728 (128 MB) です。 制限をカスタマイズするには、`Startup.ConfigureServices` の設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を使用します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -608,9 +608,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> を設定するには、<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を使用します。
+単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> を使用します。
 
-Razor Pages アプリでは、[ の ](xref:razor-pages/razor-pages-conventions)convention`Startup.ConfigureServices` を使用してフィルターを適用します。
+Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
 
 ```csharp
 services.AddRazorPages()
@@ -656,9 +656,9 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>MaxRequestBodySize[ を設定するには、](xref:fundamentals/servers/kestrel#maximum-request-body-size) を使用します。
+単一ページまたはアクションに対する [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> を使用します。
 
-Razor Pages アプリでは、[ の ](xref:razor-pages/razor-pages-conventions)convention`Startup.ConfigureServices` を使用してフィルターを適用します。
+Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
 
 ```csharp
 services.AddRazorPages()
@@ -686,7 +686,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-`RequestSizeLimitAttribute` は、[`@attribute`](xref:mvc/views/razor#attribute) Razor ディレクティブを使用して適用することもできます。
+[`@attribute`](xref:mvc/views/razor#attribute) Razor ディレクティブを`RequestSizeLimitAttribute`使用して適用することもできます。
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -739,11 +739,11 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ### <a name="null-reference-exception-with-iformfile"></a>IFormFile での null 参照例外
 
-コントローラーが <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してアップロードされたファイルを受け取っても、値が `null` の場合は、HTML フォームで `enctype` に値 `multipart/form-data` が指定されていることを確認します。 この属性が `<form>` 要素で設定されていない場合、ファイルはアップロードされず、バインドされた <xref:Microsoft.AspNetCore.Http.IFormFile> 引数は `null` になります。 また、[フォーム データでのアップロードの名前がアプリの名前と一致する](#match-name-attribute-value-to-parameter-name-of-post-method)ことを確認します。
+コントローラーが <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してアップロードされたファイルを受け取っても、値が `null` の場合は、HTML フォームで `multipart/form-data` に値 `enctype` が指定されていることを確認します。 この属性が `<form>` 要素で設定されていない場合、ファイルはアップロードされず、バインドされた <xref:Microsoft.AspNetCore.Http.IFormFile> 引数は `null` になります。 また、[フォーム データでのアップロードの名前がアプリの名前と一致する](#match-name-attribute-value-to-parameter-name-of-post-method)ことを確認します。
 
 ### <a name="stream-was-too-long"></a>ストリームが長すぎる
 
-このトピックの例は、アップロードされたファイル コンテンツを保持するために <xref:System.IO.MemoryStream> に依存しています。 `MemoryStream` のサイズ制限は `int.MaxValue` です。 アプリのファイル アップロード シナリオで 50 MB を超えるファイル コンテンツを保持する必要がある場合は、アップロードされたファイルのコンテンツを 1 つの `MemoryStream` に依存することなく保持する別のアプローチを使用します。
+このトピックの例は、アップロードされたファイル コンテンツを保持するために <xref:System.IO.MemoryStream> に依存しています。 `int.MaxValue` のサイズ制限は `MemoryStream` です。 アプリのファイル アップロード シナリオで 50 MB を超えるファイル コンテンツを保持する必要がある場合は、アップロードされたファイルのコンテンツを 1 つの `MemoryStream` に依存することなく保持する別のアプローチを使用します。
 
 ::: moniker-end
 
@@ -765,9 +765,9 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 * 専用のファイル アップロード領域 (できれば、システム ドライブ以外) にファイルをアップロードします。 専用の場所を使用すると、アップロードされるファイルにセキュリティ制限を適用しやすくなります。 ファイルのアップロード場所に対する実行アクセス許可を無効にします。&dagger;
 * アプリと同じディレクトリ ツリーに、アップロードしたファイルを保持**しないでください**。&dagger;
-* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。&dagger; HTML では、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりします (Razor では、出力が自動的に HTML エンコードされます)。
+* アプリによって決められた安全なファイル名を使用します。 ユーザーから提供されたファイル名や、アップロードされたファイルの信頼できないファイル名を使用しないでください。&dagger; HTML は、それを表示するときに、信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりします (Razor では、出力が自動的に HTML エンコードされます)。
 * アプリの設計仕様に対して承認されているファイル拡張子のみを許可します。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* クライアント側のチェックがサーバーで実行されていることを確認します。&dagger; クライアント側のチェックは簡単に回避できます。
+* サーバーでクライアント側のチェックが実行されていることを確認します。&dagger;クライアント側のチェックは簡単に回避できます。
 * アップロードされたファイルのサイズをチェックします。 サイズの大きなアップロードを防ぐために、最大サイズ制限を設定します。&dagger;
 * 同じ名前でアップロードされたファイルによってファイルが上書きされないようにする必要があるときは、ファイルをアップロードする前に、データベースまたは物理ストレージに対してファイル名を確認します。
 * **ファイルを格納する前に、アップロードされる内容に対してウイルス/マルウェア スキャナーを実行します。**
@@ -784,7 +784,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 >
 > ユーザーからファイルを受け入れる際の外部アクセスによる攻撃を減らす方法については、次の資料を参照してください。
 >
-> * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
+> * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 > * [Azure セキュリティ: ユーザーから受け入れるファイルに適切な管理制御を整備する](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 サンプル アプリの例など、セキュリティ対策の実装の詳細については、「[検証](#validation)」セクションを参照してください。
@@ -793,7 +793,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 ファイルの一般的なストレージ オプションには次のようなものがあります。
 
-* ［データベース］
+* データベース
 
   * 小さいファイルをアップロードする場合、物理ストレージ (ファイル システムまたはネットワーク共有) のオプションよりデータベースの方が速いことがよくあります。
   * 多くの場合、ユーザー データに対するデータベース レコードの取得でファイルの内容を同時に提供できるため (たとえば、アバター イメージ)、データベースの方が物理的なストレージ オプションより便利です。
@@ -812,13 +812,13 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   * 通常、サービスでは、大抵の場合に単一障害点となるオンプレミス ソリューションより高いスケーラビリティと回復性が提供されます。
   * 大規模なストレージ インフラストラクチャのシナリオでは、サービスのコストが低下する可能性があります。
 
-  詳細については、「[クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。 そのトピックでは <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> が示されていますが、<xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> を使用する場合は、<xref:System.IO.FileStream> を使用して <xref:System.IO.Stream> を Blob Storage に保存することもできます。
+  詳細については、「[クイック スタート : .NET を使用してオブジェクト ストレージに BLOB を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。 そのトピックでは <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> が示されていますが、<xref:System.IO.Stream> を使用する場合は、<xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> を使用して <xref:System.IO.FileStream> を Blob Storage に保存することもできます。
 
 ## <a name="file-upload-scenarios"></a>ファイル アップロードのシナリオ
 
 ファイルをアップロードするための一般的な 2 つの方法は、バッファーリングとストリーミングです。
 
-**バッファーリング**
+**Buffering**
 
 ファイル全体が <xref:Microsoft.AspNetCore.Http.IFormFile> に読み込まれます。これは、ファイルの処理または保存に使用される C# でのファイルの表現です。
 
@@ -912,7 +912,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 [Fetch API がサポートされていない](https://caniuse.com/#feat=fetch)クライアントに対して JavaScript でフォーム POST を実行するには、次のいずれかの方法を使用します。
 
 * Fetch Polyfill を使用します (例: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))。
-* `XMLHttpRequest`を使用します。 例 :
+* `XMLHttpRequest`を使用します。 次に例を示します。
 
   ```javascript
   <script>
@@ -930,20 +930,20 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   </script>
   ```
 
-ファイルのアップロードをサポートするには、HTML フォームで `enctype` のエンコード タイプ (`multipart/form-data`) を指定する必要があります。
+ファイルのアップロードをサポートするには、HTML フォームで `multipart/form-data` のエンコード タイプ (`enctype`) を指定する必要があります。
 
-`files` 入力要素で複数のファイルのアップロードをサポートするには、`multiple` 要素で `<input>` 属性を指定します。
+`files` 入力要素で複数のファイルのアップロードをサポートするには、`<input>` 要素で `multiple` 属性を指定します。
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-サーバーにアップロードされた個々のファイルには、[ を使用して](xref:mvc/models/model-binding)モデル バインド<xref:Microsoft.AspNetCore.Http.IFormFile>でアクセスできます。 サンプル アプリでは、データベースおよび物理ストレージのシナリオでの複数のバッファー ファイル アップロードが示されています。
+サーバーにアップロードされた個々のファイルには、<xref:Microsoft.AspNetCore.Http.IFormFile> を使用して[モデル バインド](xref:mvc/models/model-binding)でアクセスできます。 サンプル アプリでは、データベースおよび物理ストレージのシナリオでの複数のバッファー ファイル アップロードが示されています。
 
 <a name="filename2"></a>
 
 > [!WARNING]
-> **の** プロパティは、表示とログ記録の目的以外に使用`FileName`しないでください<xref:Microsoft.AspNetCore.Http.IFormFile>。 表示またはログ記録を行うときに、ファイル名を HTML エンコードします。 攻撃者は、完全パスまたは相対パスを含む悪意のあるファイル名を提供することがあります。 アプリケーションで次の処理を行う必要があります。
+> <xref:Microsoft.AspNetCore.Http.IFormFile> の `FileName` プロパティは、表示とログ記録の目的以外に使用**しないでください**。 表示またはログ記録を行うときに、ファイル名を HTML エンコードします。 攻撃者は、完全パスまたは相対パスを含む悪意のあるファイル名を提供することがあります。 アプリケーションで次の処理を行う必要があります。
 >
 > * ユーザーが指定したファイル名からパスを削除します。
 > * UI またはログ記録のために、HTML エンコードされ、パスが削除されたファイル名を保存します。
@@ -958,7 +958,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > これまでに示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
 > * [セキュリティに関する考慮事項](#security-considerations)
-> * [検証](#validation)
+> * [Validation](#validation)
 
 モデル バインドと <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してファイルをアップロードする場合、アクション メソッドでは以下を受け入れることができます。
 
@@ -966,12 +966,12 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 * 複数のファイルを表す次のいずれかのコレクション:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
-  * [List](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
+  * [リスト](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `name` の `<input type="file" name="formFile">` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
+> バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次に例を示します。
+次のような例です。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -1021,7 +1021,7 @@ foreach (var formFile in files)
 }
 ```
 
-<xref:System.IO.FileStream> に渡すパスには、ファイル名が含まれている "*必要があります*"。 ファイル名を指定しないと、実行時に <xref:System.UnauthorizedAccessException> がスローされます。
+ に渡すパスには、ファイル名が含まれている "<xref:System.IO.FileStream> *必要があります*"。 ファイル名を指定しないと、実行時に <xref:System.UnauthorizedAccessException> がスローされます。
 
 <xref:Microsoft.AspNetCore.Http.IFormFile> の方法を使用してアップロードされたファイルは、処理の前に、サーバー上のメモリまたはディスクのバッファーに格納されます。 アクション メソッド内では、<xref:Microsoft.AspNetCore.Http.IFormFile> の内容には <xref:System.IO.Stream> としてアクセスできます。 ローカル ファイル システムに加えて、ネットワーク共有またはファイル ストレージ サービス ([Azure Blob Storage](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs) など) にファイルを保存することができます。
 
@@ -1124,12 +1124,12 @@ public async Task<IActionResult> OnPostUploadAsync()
 > [!WARNING]
 > パフォーマンスに悪影響を与える可能性があるため、リレーショナル データベースにバイナリ データを格納する場合は注意してください。
 >
-> 検証を行わずに `FileName` の <xref:Microsoft.AspNetCore.Http.IFormFile> プロパティに依存したり、信頼したりしないでください。 `FileName` プロパティは、表示目的でのみ、HTML エンコードした後でだけ、使用する必要があります。
+> 検証を行わずに <xref:Microsoft.AspNetCore.Http.IFormFile> の `FileName` プロパティに依存したり、信頼したりしないでください。 `FileName` プロパティは、表示目的でのみ、HTML エンコードした後でだけ、使用する必要があります。
 >
 > 示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
 > * [セキュリティに関する考慮事項](#security-considerations)
-> * [検証](#validation)
+> * [Validation](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>ストリーミングを使用して大きいファイルをアップロードする
 
@@ -1143,7 +1143,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-サンプル アプリでは、`GenerateAntiforgeryTokenCookieAttribute` および `DisableFormValueModelBindingAttribute` は、`/StreamedSingleFileUploadDb`Razor Pages の規則`/StreamedSingleFileUploadPhysical`を使用して、`Startup.ConfigureServices` で [ および ](xref:razor-pages/razor-pages-conventions) のページ アプリケーション モデルにフィルターとして適用されます。
+サンプル アプリでは、`GenerateAntiforgeryTokenCookieAttribute` および `DisableFormValueModelBindingAttribute` は、[Razor Pages の規則](xref:razor-pages/razor-pages-conventions)を使用して、`Startup.ConfigureServices` で `/StreamedSingleFileUploadDb` および `/StreamedSingleFileUploadPhysical` のページ アプリケーション モデルにフィルターとして適用されます。
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
@@ -1163,9 +1163,9 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 サンプル アプリでは、検証チェックは `FileHelpers.ProcessStreamedFile` によって処理されます。
 
-## <a name="validation"></a>Validation
+## <a name="validation"></a>検証
 
-サンプル アプリの `FileHelpers` クラスでは、バッファーリングされた <xref:Microsoft.AspNetCore.Http.IFormFile> とストリーミングされたファイルのアップロードに関するいくつかのチェックが示されています。 サンプル アプリでのバッファーリングされたファイルのアップロード <xref:Microsoft.AspNetCore.Http.IFormFile> の処理については、`ProcessFormFile`Utilities/FileHelpers.cs*ファイルの* メソッドを参照してください。 ストリーミングされたファイルの処理については、同じファイルの `ProcessStreamedFile` メソッドを参照してください。
+サンプル アプリの `FileHelpers` クラスでは、バッファーリングされた <xref:Microsoft.AspNetCore.Http.IFormFile> とストリーミングされたファイルのアップロードに関するいくつかのチェックが示されています。 サンプル アプリでのバッファーリングされたファイルのアップロード <xref:Microsoft.AspNetCore.Http.IFormFile> の処理については、*Utilities/FileHelpers.cs* ファイルの `ProcessFormFile` メソッドを参照してください。 ストリーミングされたファイルの処理については、同じファイルの `ProcessStreamedFile` メソッドを参照してください。
 
 > [!WARNING]
 > サンプル アプリで示されている検証処理メソッドでは、アップロードされたファイルの内容はスキャンされません。 ほとんどの運用シナリオでは、ファイルをユーザーまたは他のシステムで使用できるようにする前に、ウイルス/マルウェア スキャナー API が使用されます。
@@ -1185,7 +1185,7 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 ### <a name="file-extension-validation"></a>ファイル拡張子の検証
 
-アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 例 :
+アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 次に例を示します。
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1251,7 +1251,7 @@ Razor の外部では、ユーザーの要求からのファイル名の内容�
 
 アップロードされるファイルのサイズを制限します。
 
-サンプル アプリでは、ファイルのサイズは 2 MB (バイト単位) に制限されています。 その制限は、[appsettings.json](xref:fundamentals/configuration/index) ファイルの *Configuration* によって提供されます。
+サンプル アプリでは、ファイルのサイズは 2 MB (バイト単位) に制限されています。 その制限は、*appsettings.json* ファイルの [Configuration](xref:fundamentals/configuration/index) によって提供されます。
 
 ```json
 {
@@ -1288,7 +1288,7 @@ if (formFile.Length > _fileSizeLimit)
 
 フォーム データを POST する、または JavaScript の `FormData` を直接使用する、Razor 以外のフォームでは、フォームの要素または `FormData` で指定されている名前が、コントローラーのアクションのパラメーターの name と一致している必要があります。
 
-たとえば、行が次のように表示されているとします。
+次の例では
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 
@@ -1324,7 +1324,7 @@ C# メソッドのパラメーターに一致する名前を使用します (`ba
 
 ### <a name="multipart-body-length-limit"></a>マルチパート本文の長さの制限
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> では、各マルチパート本文の長さの制限が設定されます。 この制限を超えるフォーム セクションでは、解析時に <xref:System.IO.InvalidDataException> がスローされます。 既定値は 134,217,728 (128 MB) です。 制限をカスタマイズするには、<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> の設定 `Startup.ConfigureServices` を使用します。
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> では、各マルチパート本文の長さの制限が設定されます。 この制限を超えるフォーム セクションでは、解析時に <xref:System.IO.InvalidDataException> がスローされます。 既定値は 134,217,728 (128 MB) です。 制限をカスタマイズするには、`Startup.ConfigureServices` の設定 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を使用します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1337,9 +1337,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> を設定するには、<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を使用します。
+単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> を使用します。
 
-Razor Pages アプリでは、[ の ](xref:razor-pages/razor-pages-conventions)convention`Startup.ConfigureServices` を使用してフィルターを適用します。
+Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
 
 ```csharp
 services.AddMvc()
@@ -1383,9 +1383,9 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>MaxRequestBodySize[ を設定するには、](xref:fundamentals/servers/kestrel#maximum-request-body-size) を使用します。
+単一ページまたはアクションに対する [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> を使用します。
 
-Razor Pages アプリでは、[ の ](xref:razor-pages/razor-pages-conventions)convention`Startup.ConfigureServices` を使用してフィルターを適用します。
+Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
 
 ```csharp
 services.AddMvc()
@@ -1461,17 +1461,17 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ### <a name="null-reference-exception-with-iformfile"></a>IFormFile での null 参照例外
 
-コントローラーが <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してアップロードされたファイルを受け取っても、値が `null` の場合は、HTML フォームで `enctype` に値 `multipart/form-data` が指定されていることを確認します。 この属性が `<form>` 要素で設定されていない場合、ファイルはアップロードされず、バインドされた <xref:Microsoft.AspNetCore.Http.IFormFile> 引数は `null` になります。 また、[フォーム データでのアップロードの名前がアプリの名前と一致する](#match-name-attribute-value-to-parameter-name-of-post-method)ことを確認します。
+コントローラーが <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してアップロードされたファイルを受け取っても、値が `null` の場合は、HTML フォームで `multipart/form-data` に値 `enctype` が指定されていることを確認します。 この属性が `<form>` 要素で設定されていない場合、ファイルはアップロードされず、バインドされた <xref:Microsoft.AspNetCore.Http.IFormFile> 引数は `null` になります。 また、[フォーム データでのアップロードの名前がアプリの名前と一致する](#match-name-attribute-value-to-parameter-name-of-post-method)ことを確認します。
 
 ### <a name="stream-was-too-long"></a>ストリームが長すぎる
 
-このトピックの例は、アップロードされたファイル コンテンツを保持するために <xref:System.IO.MemoryStream> に依存しています。 `MemoryStream` のサイズ制限は `int.MaxValue` です。 アプリのファイル アップロード シナリオで 50 MB を超えるファイル コンテンツを保持する必要がある場合は、アップロードされたファイルのコンテンツを 1 つの `MemoryStream` に依存することなく保持する別のアプローチを使用します。
+このトピックの例は、アップロードされたファイル コンテンツを保持するために <xref:System.IO.MemoryStream> に依存しています。 `int.MaxValue` のサイズ制限は `MemoryStream` です。 アプリのファイル アップロード シナリオで 50 MB を超えるファイル コンテンツを保持する必要がある場合は、アップロードされたファイルのコンテンツを 1 つの `MemoryStream` に依存することなく保持する別のアプローチを使用します。
 
 ::: moniker-end
 
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* [Unrestricted File Upload (ファイルの無制限のアップロード)](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-* [Azure のセキュリティ: セキュリティフレーム: 入力の検証 |対策](/azure/security/azure-security-threat-modeling-tool-input-validation)
-* [Azure クラウドの設計パターン: Valet キーパターン](/azure/architecture/patterns/valet-key)
+* [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
+* [Azure セキュリティ: セキュリティ フレーム: 入力検証 |緩和 策](/azure/security/azure-security-threat-modeling-tool-input-validation)
+* [Azure クラウドのデザイン パターン: バレー キー パターン](/azure/architecture/patterns/valet-key)
