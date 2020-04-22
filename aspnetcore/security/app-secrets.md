@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 uid: security/app-secrets
-ms.openlocfilehash: 9d4e59c003afc253971ee64fce523c7188d3582a
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: c62c5e59ad0a72506fb72bda82aa821a4f1719c8
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661799"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791575"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NETコアの開発におけるアプリの秘密の安全な保管
 
@@ -75,7 +75,7 @@ dotnet user-secrets init
 
 上記のコマンドは`UserSecretsId`*、.csproj*ファイル`PropertyGroup`内に要素を追加します。 既定では、 の`UserSecretsId`内部テキストは GUID です。 内部テキストは任意ですが、プロジェクトに固有です。
 
-[!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
+[!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 Visual Studio で、ソリューション エクスプローラーでプロジェクトを右クリックし、コンテキスト メニューから **[ユーザー シークレットの管理**] を選択します。 このジェスチャは`UserSecretsId`*、.csproj*ファイルに GUID を設定した要素を追加します。
 
@@ -142,18 +142,17 @@ JSON 構造は、 または`dotnet user-secrets remove``dotnet user-secrets set`
 
 [ASP.NETコア構成 API は](xref:fundamentals/configuration/index)シークレットマネージャーシークレットへのアクセスを提供します。
 
-ASP.NET Core 2.0 以降では、プロジェクトがホストの新しいインスタンスを初期化するために事前設定された<xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>既定値を使用して呼び出すと、ユーザー シークレット構成ソースが開発モードで自動的に追加されます。 `CreateDefaultBuilder`の<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A><xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName>ときに呼び<xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>出します。
+ユーザー シークレット構成ソースは、プロジェクトがホストの新しいインスタンスを<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A>初期化するために事前設定された既定値を使用して呼び出すと、開発モードで自動的に追加されます。 `CreateDefaultBuilder`の<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A><xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName>ときに呼び<xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>出します。
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-呼`CreateDefaultBuilder`び出されない場合は、コンストラクターで呼び出<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>して、ユーザー シークレット構成`Startup`ソースを明示的に追加します。 次`AddUserSecrets`の例に示すように、アプリケーションが開発環境で実行されている場合にのみ呼び出します。
+呼`CreateDefaultBuilder`び出されない場合は、 を呼び出<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>して、ユーザー シークレット構成ソースを明示的に追加します。 次`AddUserSecrets`の例に示すように、アプリケーションが開発環境で実行されている場合にのみ呼び出します。
 
-[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
 ユーザーシークレットは`Configuration`API を使用して取得できます。
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
-
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
 ## <a name="map-secrets-to-a-poco"></a>POCO にシークレットをマップする
 
@@ -163,17 +162,17 @@ ASP.NET Core 2.0 以降では、プロジェクトがホストの新しいイン
 
 上記のシークレットを POCO にマップするには、API`Configuration`の[オブジェクト グラフ バインド](xref:fundamentals/configuration/index#bind-to-an-object-graph)機能を使用します。 次のコードは、カスタム`MovieSettings`POCO にバインドされ、`ServiceApiKey`プロパティ値にアクセスします。
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
 `Movies:ConnectionString`および`Movies:ServiceApiKey`シークレットは、 のそれぞれのプロパティにマップ`MovieSettings`されます。
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>文字列をシークレットに置き換える
 
 パスワードをプレーンテキストで保存することは安全ではありません。 たとえば *、appsettings.json*に格納されているデータベース接続文字列には、指定したユーザーのパスワードが含まれる場合があります。
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
 より安全な方法は、パスワードを秘密として保存することです。 次に例を示します。
 
@@ -183,11 +182,11 @@ dotnet user-secrets set "DbPassword" "pass123"
 
 `Password` *appsettings.json*の接続文字列からキーと値のペアを削除します。 次に例を示します。
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
 シークレットの値は、接続文字列を<xref:System.Data.SqlClient.SqlConnectionStringBuilder>完了するために、オブジェクトの<xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A>プロパティに設定できます。
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
 ## <a name="list-the-secrets"></a>秘密を一覧表示する
 
@@ -388,15 +387,13 @@ JSON 構造は、 または`dotnet user-secrets remove``dotnet user-secrets set`
 
 プロジェクトが .NET Framework を対象とする場合は、[パッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets)をインストールします。
 
-
 ASP.NET Core 2.0 以降では、プロジェクトがホストの新しいインスタンスを初期化するために事前設定された<xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>既定値を使用して呼び出すと、ユーザー シークレット構成ソースが開発モードで自動的に追加されます。 `CreateDefaultBuilder`の<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A><xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName>ときに呼び<xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>出します。
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-
 呼`CreateDefaultBuilder`び出されない場合は、コンストラクターで呼び出<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>して、ユーザー シークレット構成`Startup`ソースを明示的に追加します。 次`AddUserSecrets`の例に示すように、アプリケーションが開発環境で実行されている場合にのみ呼び出します。
 
-[!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
 ユーザーシークレットは`Configuration`API を使用して取得できます。
 

@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 832109530c4aac372fd75aa1a1d2edbe3768f55f
-ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
+ms.openlocfilehash: 4c51200159ced16132e15bb4a1f0915ca0cf5945
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80501279"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791619"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>アイデンティティサーバーを使用BlazorしてASP.NETコア WebAssembly ホストアプリケーションを保護する
 
@@ -49,16 +49,15 @@ dotnet new blazorwasm -au Individual -ho
 
 この`Startup`クラスには、次の追加機能があります。
 
-* `Startup.ConfigureServices`: 
+* `Startup.ConfigureServices`の場合:
 
-  * 既定の UI を持つ ID:
+  * ID:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
     services.AddDefaultIdentity<ApplicationUser>()
-        .AddDefaultUI(UIFramework.Bootstrap4)
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
@@ -76,7 +75,7 @@ dotnet new blazorwasm -au Individual -ho
         .AddIdentityServerJwt();
     ```
 
-* `Startup.Configure`: 
+* `Startup.Configure`の場合:
 
   * 要求の資格情報を検証し、要求コンテキストでユーザーを設定する認証ミドルウェア:
 
