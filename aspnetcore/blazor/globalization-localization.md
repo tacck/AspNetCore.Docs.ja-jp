@@ -5,17 +5,17 @@ description: 複数のカルチャと言語でユーザーが Razor コンポー
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: aba62fa7b6285c8ba884652694f1ea3e3a66ed18
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
+ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644894"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81539662"
 ---
 # <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -60,6 +60,18 @@ Blazor の `@bind` 機能では、書式設定が実行され、ユーザーの�
 
 ## <a name="localization"></a>ローカリゼーション
 
+### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+
+Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)を使用してカルチャが設定されます。
+
+カルチャを明示的に構成するには、`Program.Main` で `CultureInfo.DefaultThreadCurrentCulture` と `CultureInfo.DefaultThreadCurrentUICulture` を設定します。
+
+既定では、Blazor WebAssembly に対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
+
+Blazor で既定で選択されるカルチャは、ほとんどのユーザーにとって十分と考えられますが、ユーザーが優先ロケールを指定する手段を提供することを検討してください。 カルチャ ピッカーを使用した Blazor WebAssembly サンプル アプリについては、[LocSample](https://github.com/pranavkm/LocSample) ローカライズのサンプル アプリを参照してください。
+
+### <a name="opno-locblazor-server"></a>Blazor サーバー
+
 Blazor サーバー アプリは、[ローカライズ ミドルウェア](xref:fundamentals/localization#localization-middleware)を使用してローカライズされます。 ミドルウェアによって、アプリからリソースを要求するユーザーに対して適切なカルチャが選択されます。
 
 カルチャは、次のいずれかの方法を使用して設定できます。
@@ -69,11 +81,7 @@ Blazor サーバー アプリは、[ローカライズ ミドルウェア](xref:
 
 使用例を含む詳細については、「<xref:fundamentals/localization>」を参照してください。
 
-### <a name="configure-the-linker-for-internationalization-opno-locblazor-webassembly"></a>国際化用にリンカーを構成する (Blazor WebAssembly)
-
-既定では、Blazor WebAssembly に対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
-
-### <a name="cookies"></a>クッキー
+#### <a name="cookies"></a>クッキー
 
 ローカライズ カルチャの Cookie では、ユーザーのカルチャを保持できます。 Cookie は、アプリのホスト ページ (*Pages/Host. cshtml*) の `OnGet` メソッドによって作成されます。 ローカライズ ミドルウェアでは、後続の要求で Cookie を読み取り、ユーザーのカルチャを設定します。 
 
@@ -107,9 +115,9 @@ public class HostModel : PageModel
 1. ローカライズ ミドルウェアによって、Cookie が読み取られ、カルチャが割り当てられます。
 1. Blazor サーバー セッションは、正しいカルチャで開始されます。
 
-### <a name="provide-ui-to-choose-the-culture"></a>カルチャを選択するための UI を提供する
+#### <a name="provide-ui-to-choose-the-culture"></a>カルチャを選択するための UI を提供する
 
-ユーザーがカルチャを選択できるように UI を提供するには、"*リダイレクト ベースのアプローチ*" をお勧めします。 このプロセスは、ユーザーがセキュリティで保護されたリソースにアクセスしようとしたときに、Web アプリで発生する処理に似ています&mdash;ユーザーがサインイン ページにリダイレクトされ、元のリソースに戻されます。 
+ユーザーがカルチャを選択できるように UI を提供するには、"*リダイレクト ベースのアプローチ*" をお勧めします。 このプロセスは、セキュリティで保護されたリソースにユーザーがアクセスしようとすると Web アプリで発生する処理に似ています。 ユーザーはサインイン ページにリダイレクトされ、元のリソースに再びリダイレクトされます。 
 
 アプリでは、コントローラーへのリダイレクトによって、ユーザーが選択したカルチャが保持されます。 コントローラーによって、ユーザーが選択したカルチャが Cookie に設定され、ユーザーは元の URI にリダイレクトされます。
 
@@ -154,7 +162,7 @@ public class CultureController : Controller
     private void OnSelected(ChangeEventArgs e)
     {
         var culture = (string)e.Value;
-        var uri = new Uri(NavigationManager.Uri())
+        var uri = new Uri(NavigationManager.Uri)
             .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
         var query = $"?culture={Uri.EscapeDataString(culture)}&" +
             $"redirectUri={Uri.EscapeDataString(uri)}";

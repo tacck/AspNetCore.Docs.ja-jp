@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751151"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277224"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -454,6 +454,8 @@ URL の生成:
 
 複雑なセグメントは、リテラル区切り文字を右から左に[最短一致](#greedy)の方法で照合することによって処理されます。 たとえば、`[Route("/a{b}c{d}")]` は複雑なセグメントです。
 複雑なセグメントは、それらを適切に使用する上で理解する必要がある特定の方法で機能します。 このセクションの例では、パラメーター値の中に区切り文字が含まれていない場合にのみ、複雑なセグメントが本当にうまく機能する理由を示します。 より複雑なケースでは、[regex](/dotnet/standard/base-types/regular-expressions) を使用し、値を手動で抽出する必要があります。
+
+[!INCLUDE[](~/includes/regex.md)]
 
 これは、ルーティングがテンプレート `/a{b}c{d}` と URL パス `/abcd` を使用して実行するステップの概要です。 `|` は、アルゴリズムの動作を視覚化するために使用されます。
 

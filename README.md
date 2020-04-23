@@ -5,8 +5,3 @@
 API ドキュメントの変更は、[AspNetApiDocs リポジトリ](https://github.com/dotnet/AspNetApiDocs)で、トリプル スラッシュ `///` コメントに対して行われます。
 
 ASP.NET 4.x ドキュメントの変更は、[dotnet/AspNetDocs リポジトリ](https://github.com/dotnet/AspNetDocs)で行われます。
-
-## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft オープン ソース倫理規定
-
-このプロジェクトは、「[Microsoft のオープン ソースの倫理規定](https://opensource.microsoft.com/codeofconduct/)」を採用しています。
-詳細については、[倫理規定の FAQ](https://opensource.microsoft.com/codeofconduct/faq/) のページを参照してください。また、追加の質問やコメントがある場合は [opencode@microsoft.com](mailto:opencode@microsoft.com) にお問い合わせください。

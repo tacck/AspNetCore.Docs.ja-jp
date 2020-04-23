@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
+ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646556"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81228128"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service にアプリをデプロイする
 
@@ -85,7 +85,7 @@ ms.locfileid: "78646556"
 
     b. リソース グループを作成します。 リソース グループを使用すると、管理対象の Azure リソースをグループとして集約させることができます。
 
-    ```azure-cli
+    ```azurecli
     az group create --location centralus --name AzureTutorial
     ```
 
@@ -93,25 +93,25 @@ ms.locfileid: "78646556"
 
     c. S1 レベルで App Service プランを作成します。 App Service プランは、同じ価格レベルを共有する Web アプリをグループ化したものです。 S1 レベルは無料ではありませんが、ステージング スロット機能に必要です。
 
-    ```azure-cli
+    ```azurecli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
     d. App Service プランを使用して、同じリソース グループ内に Web アプリ リソースを作成します。
 
-    ```azure-cli
+    ```azurecli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
     e. デプロイの資格情報を設定します。 これらのデプロイ資格情報は、サブスクリプション内のすべての Web アプリに適用されます。 ユーザー名では特殊文字を使用しないでください。
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
     f. ローカル環境の Git からデプロイを受け入れるように Web アプリを構成し、"*Git デプロイ URL*" を表示します。 **後で参照するので、この URL を記録しておきます**。
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
@@ -170,13 +170,13 @@ Visual Studio によってアプリがビルドされ、Azure にデプロイさ
 
     a. *staging* という名前でデプロイ スロットを作成します。
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
     b. ローカル環境の Git からのデプロイを使用するようにステージング スロットを構成し、**ステージング** デプロイ URL を取得します。 **後で参照するので、この URL を記録しておきます**。
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
@@ -216,7 +216,7 @@ Visual Studio によってアプリがビルドされ、Azure にデプロイさ
 
 7. Cloud Shell で、検証済みのウォームアップされたステージング スロットを運用環境にスワップします。
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
