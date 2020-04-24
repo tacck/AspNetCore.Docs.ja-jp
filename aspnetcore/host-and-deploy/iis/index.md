@@ -5,16 +5,27 @@ description: Windows Server インターネット インフォメーション �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2020
+ms.date: 04/17/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 819c53f945c1e5bb2cedcef8fc39d4c8761e4549
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977029"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642747"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS を使用した Windows での ASP.NET Core のホスト
+
+<!-- 
+
+    NOTE FOR 5.0
+    
+    When making the 5.0 version of this topic, remove the Hosting Bundle
+    direct download section from the (new) <5.0 & >2.2 version and modify 
+    the text and heading for the *Earlier versions of the installer* 
+    section. See the 2.2 version for an example.
+    
+-->
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -250,9 +261,9 @@ Web SDK ファイルの変換を無効にすると、 *processPath*と*引数*�
 以前のバージョンのインストーラーを入手するには:
 
 1. 「[.NET Core のダウンロード](https://dotnet.microsoft.com/download/dotnet-core)」ページに移動します。
-1. 目的の .NET Core のバージョンをクリックします。
+1. 目的の .NET Core のバージョンを選択します。
 1. **[Run apps - Runtime]\(アプリの実行 - ランタイム\)** 列から、目的の .NET Core ランタイム バージョンの行を探します。
-1. **[Runtime & Hosting Bundle]\(ランタイム & ホスティング バンドル\)** のリンクを使用してインストーラーをダウンロードします。
+1. **[Hosting Bundle]\(ホスティング バンドル\)** のリンクを使用してインストーラーをダウンロードします。
 
 > [!WARNING]
 > 一部のインストーラーには、有効期限 (EOL) に達して Microsoft によるサポートが終了した、リリース バージョンが含まれています。 詳細については、[サポート ポリシー](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)をご覧ください。
@@ -846,20 +857,12 @@ Web SDK ファイルの変換を無効にすると、 *processPath*と*引数*�
 >
 > .NET Core の 64 ビット (x64) バージョンをインストールした後、ホスティング バンドルをインストールした場合は、SDK が表示されない可能性があります ([.NET Core SDK が検出されない](xref:test/troubleshoot#no-net-core-sdks-were-detected))。 この問題を解決するには、<xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle> を参照してください。
 
-### <a name="direct-download-current-version"></a>直接ダウンロード (現在のバージョン)
-
-次のリンクを使用してインストーラーをダウンロードします。
-
-[現在の .NET Core ホスティング バンドルのインストーラー (直接ダウンロード)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>以前のバージョンのインストーラー
-
-以前のバージョンのインストーラーを入手するには:
+### <a name="download"></a>ダウンロード
 
 1. 「[.NET Core のダウンロード](https://dotnet.microsoft.com/download/dotnet-core)」ページに移動します。
-1. 目的の .NET Core のバージョンをクリックします。
+1. 目的の .NET Core のバージョンを選択します。
 1. **[Run apps - Runtime]\(アプリの実行 - ランタイム\)** 列から、目的の .NET Core ランタイム バージョンの行を探します。
-1. **[Runtime & Hosting Bundle]\(ランタイム & ホスティング バンドル\)** のリンクを使用してインストーラーをダウンロードします。
+1. **[Hosting Bundle]\(ホスティング バンドル\)** のリンクを使用してインストーラーをダウンロードします。
 
 > [!WARNING]
 > 一部のインストーラーには、有効期限 (EOL) に達して Microsoft によるサポートが終了した、リリース バージョンが含まれています。 詳細については、[サポート ポリシー](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)をご覧ください。
@@ -1422,20 +1425,12 @@ Web SDK ファイルの変換を無効にすると、 *processPath*と*引数*�
 >
 > .NET Core の 64 ビット (x64) バージョンをインストールした後、ホスティング バンドルをインストールした場合は、SDK が表示されない可能性があります ([.NET Core SDK が検出されない](xref:test/troubleshoot#no-net-core-sdks-were-detected))。 この問題を解決するには、<xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle> を参照してください。
 
-### <a name="direct-download-current-version"></a>直接ダウンロード (現在のバージョン)
-
-次のリンクを使用してインストーラーをダウンロードします。
-
-[現在の .NET Core ホスティング バンドルのインストーラー (直接ダウンロード)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>以前のバージョンのインストーラー
-
-以前のバージョンのインストーラーを入手するには:
+### <a name="download"></a>ダウンロード
 
 1. 「[.NET Core のダウンロード](https://dotnet.microsoft.com/download/dotnet-core)」ページに移動します。
-1. 目的の .NET Core のバージョンをクリックします。
+1. 目的の .NET Core のバージョンを選択します。
 1. **[Run apps - Runtime]\(アプリの実行 - ランタイム\)** 列から、目的の .NET Core ランタイム バージョンの行を探します。
-1. **[Runtime & Hosting Bundle]\(ランタイム & ホスティング バンドル\)** のリンクを使用してインストーラーをダウンロードします。
+1. **[Hosting Bundle]\(ホスティング バンドル\)** のリンクを使用してインストーラーをダウンロードします。
 
 > [!WARNING]
 > 一部のインストーラーには、有効期限 (EOL) に達して Microsoft によるサポートが終了した、リリース バージョンが含まれています。 詳細については、[サポート ポリシー](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)をご覧ください。
