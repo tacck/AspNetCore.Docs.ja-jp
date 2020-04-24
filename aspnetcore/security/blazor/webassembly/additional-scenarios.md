@@ -1,35 +1,38 @@
 ---
-title: ASP.NETコアBlazorWeb アセンブリ追加のセキュリティ シナリオ
+title: 追加Blazorのセキュリティシナリオを ASP.NET Core
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/19/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 314a7b54ab87295b8ca814f5e369942ae911407e
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 2dbb2bbd07c427c594a12b8037f35cfff2228191
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661594"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111176"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET コア Blazor WebAssembly の追加のセキュリティ シナリオ
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Webasの追加のセキュリティシナリオ
 
-[ハビエル・カルバロ・ネルソン](https://github.com/javiercn)
+作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="request-additional-access-tokens"></a>追加のアクセス トークンを要求する
+> [!NOTE]
+> この記事のガイダンスは、ASP.NET Core 3.2 Preview 4 に適用されます。 このトピックは、4月24日金曜日の Preview 5 に対応するよう更新されます。
 
-ほとんどのアプリは、使用する保護されたリソースと対話するためにアクセス トークンのみを必要とします。 シナリオによっては、アプリが複数のリソースとやり取りするために複数のトークンを必要とする場合があります。
+## <a name="request-additional-access-tokens"></a>追加のアクセストークンを要求する
 
-次の例では、ユーザー データを読み取ってメールを送信するためにアプリで追加の Azure アクティブ ディレクトリ (AAD) Microsoft Graph API スコープが必要です。 Azure AAD ポータルで Microsoft Graph API のアクセス許可を追加すると、追加のスコープが`Program.Main`クライアント アプリ ( , *Program.cs)* で構成されます。
+ほとんどのアプリでは、使用する保護されたリソースと対話するためのアクセストークンのみが必要です。 場合によっては、アプリで2つ以上のリソースを操作するために複数のトークンが必要になることがあります。
+
+次の例では、アプリがユーザーデータの読み取りとメールの送信を行うために、追加の Azure Active Directory (AAD) Microsoft Graph API スコープが必要です。 Azure AAD ポータルで Microsoft Graph API のアクセス許可を追加すると、クライアントアプリ (`Program.Main`、 *Program.cs*) で追加のスコープが構成されます。
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -43,7 +46,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-この`IAccessTokenProvider.RequestToken`メソッドは、次の例に示すように、アプリが特定のスコープのセットでトークンをプロビジョニングできるようにするオーバーロードを提供します。
+メソッド`IAccessTokenProvider.RequestToken`は、次の例に示すように、アプリが特定のスコープセットを使用してトークンをプロビジョニングできるようにするオーバーロードを提供します。
 
 ```csharp
 var tokenResult = await AuthenticationService.RequestAccessToken(
@@ -59,41 +62,143 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-`TryGetToken`返します：
+`TryGetToken`型
 
-* `true`を使用`token`します。
-* `false`トークンが取得されない場合。
+* `true``token`を使用します。
+* `false`トークンが取得されない場合は。
 
-## <a name="handle-token-request-errors"></a>トークン要求エラーの処理
+## <a name="attach-tokens-to-outgoing-requests"></a>送信要求にトークンを添付する
 
-シングル ページ アプリケーション (SPA) が Open ID 接続 (OIDC) を使用してユーザーを認証する場合、認証状態は、ユーザーが資格情報を提供した結果として設定されたセッション Cookie の形式で、SPA 内および ID プロバイダー (IP) 内でローカルに維持されます。
+サービス`AuthorizationMessageHandler`をと共に使用`HttpClient`して、アクセストークンを送信要求に接続できます。 トークンは、既存`IAccessTokenProvider`のサービスを使用して取得されます。 トークンを取得できない場合`AccessTokenNotAvailableException`は、がスローされます。 `AccessTokenNotAvailableException`には`Redirect` 、ユーザーを id プロバイダーに移動して新しいトークンを取得するために使用できるメソッドが用意されています。 は`AuthorizationMessageHandler` 、 `ConfigureHandler`メソッドを使用して、承認された url、スコープ、およびリターン url を使用して構成できます。
 
-通常、ユーザーに対して生成される IP トークンは、通常約 1 時間の短い期間有効であるため、クライアント アプリは定期的に新しいトークンをフェッチする必要があります。 そうしないと、付与されたトークンの有効期限が切れた後に、ユーザーがログアウトされます。 ほとんどの場合、OIDC クライアントは、認証状態または IP 内に保持されている"セッション"のおかげでユーザーが再認証を要求することなく、新しいトークンをプロビジョニングできます。
+次の例では`AuthorizationMessageHandler` 、は`HttpClient` in `Program.Main` (*Program.cs*) を構成します。
 
-何らかの理由でユーザーが明示的に IP からログアウトする場合など、ユーザーの操作なしにクライアントがトークンを取得できない場合があります。 このシナリオは、ユーザーがアクセス`https://login.microsoftonline.com`してログアウトした場合に発生します。これらのシナリオでは、アプリは、ユーザーがログアウトしたことをすぐにはわかりません。クライアントが保持しているトークンは、もはや有効ではない可能性があります。 また、現在のトークンの有効期限が切れた後、クライアントはユーザーの操作なしで新しいトークンをプロビジョニングできません。
+```csharp
+builder.Services.AddSingleton(sp =>
+{
+    return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
+        .ConfigureHandler(
+            new [] { "https://www.example.com/base" },
+            scopes: new[] { "example.read", "example.write" }))
+        {
+            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+        };
+});
+```
 
-これらのシナリオは、トークンベースの認証に固有のものではありません。 彼らは、SPAの性質の一部です。 また、認証 Cookie が削除された場合、Cookie を使用する SPA はサーバー API の呼び出しに失敗します。
+便宜上、アプリの`BaseAddressAuthorizationMessageHandler`ベースアドレスを承認された URL として事前に構成したが含まれています。 認証が有効な Blazor WebAssembly テンプレートでは、 `BaseAddressAuthorizationMessageHandler`次のように`HttpClient` [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests)を使用してを設定するようになりました。
 
-アプリが保護されたリソースに対して API 呼び出しを実行する場合は、次の点に注意する必要があります。
+```csharp
+builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-* 新しいアクセス トークンをプロビジョニングして API を呼び出すために、ユーザーが再び認証を受ける必要がある場合があります。
-* クライアントに有効と思われるトークンがある場合でも、ユーザーがトークンを取り消したため、サーバーへの呼び出しが失敗する可能性があります。
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWithIdentityApp1.ServerAPI"));
+```
 
-アプリがトークンを要求すると、次の 2 つの結果が考えられます。
+前の例`CreateClient`でクライアントが作成された場所に`HttpClient`は、サーバープロジェクトへの要求を行うときにアクセストークンを含むインスタンスが提供されます。
 
-* 要求が成功し、アプリに有効なトークンが含まれています。
-* 要求が失敗し、アプリは新しいトークンを取得するためにユーザーを再認証する必要があります。
+構成`HttpClient`されたは、単純な`try-catch`パターンを使用して承認された要求を行うために使用されます。 次`FetchData`のコンポーネントは、天気予報データを要求します。
 
-トークン要求が失敗した場合は、リダイレクトを実行する前に、現在の状態を保存するかどうかを決定する必要があります。 複雑さのレベルが高まる中、いくつかのアプローチが存在します。
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    try
+    {
+        forecasts = 
+            await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+    catch (AccessTokenNotAvailableException exception)
+    {
+        exception.Redirect();
+    }
+}
+```
 
-* 現在のページの状態をセッション ストレージに格納します。 の`OnInitializeAsync`間に、状態が復元可能かどうかを確認してから続行してください。
-* クエリ文字列パラメーターを追加し、以前に保存した状態を再処理する必要があることをアプリに通知する方法として使用します。
-* 一意の識別子を持つクエリ文字列パラメーターを追加して、他の項目との競合を危険にさらすことなく、データをセッション ストレージに格納します。
+または、1つのクラス内のすべての HTTP およびトークンの取得に関する問題を処理する、型指定されたクライアントを定義することもできます。
+
+*WeatherClient.cs*:
+
+```csharp
+public class WeatherClient
+{
+    private readonly HttpClient httpClient;
+ 
+    public WeatherClient(HttpClient httpClient)
+    {
+        this.httpClient = httpClient;
+    }
+ 
+    public async Task<IEnumerable<WeatherForecast>> GetWeatherForeacasts()
+    {
+        IEnumerable<WeatherForecast> forecasts = new WeatherForecast[0];
+
+        try
+        {
+            forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
+                "WeatherForecast");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
+        return forecasts;
+    }
+}
+```
+
+*Program.cs*:
+
+```csharp
+builder.Services.AddHttpClient<WeatherClient>(
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+```
+
+*Fetchdata。 razor*:
+
+```razor
+@inject WeatherClient WeatherClient
+
+...
+
+protected override async Task OnInitializedAsync()
+{
+    forecasts = await WeatherClient.GetWeatherForeacasts();
+}
+```
+
+## <a name="handle-token-request-errors"></a>トークン要求エラーを処理する
+
+シングルページアプリケーション (SPA) が Open ID Connect (OIDC) を使用してユーザーを認証すると、認証状態は SPA 内および Id プロバイダー (IP) 内でローカルに保持され、ユーザーが資格情報を入力したときに設定されるセッション cookie の形式になります。
+
+通常、ユーザーに対して IP が生成するトークンは短時間、通常は1時間にわたって有効であるため、クライアントアプリは定期的に新しいトークンを取得する必要があります。 そうしないと、許可されたトークンの有効期限が切れると、ユーザーはログアウトされます。 ほとんどの場合、OIDC クライアントは、認証状態または IP 内に保持される "セッション" によってユーザーの認証を再度要求することなく、新しいトークンをプロビジョニングできます。
+
+場合によっては、ユーザーの介入なしにクライアントがトークンを取得できないことがあります。たとえば、何らかの理由でユーザーが明示的に IP からログアウトした場合などです。 このシナリオは、ユーザーがアクセス`https://login.microsoftonline.com`してログアウトした場合に発生します。これらのシナリオでは、アプリはユーザーがログアウトしたことをすぐに認識できません。クライアントが保持するトークンは、有効でなくなった可能性があります。 また、クライアントは、現在のトークンの有効期限が切れた後に、ユーザーの介入なしに新しいトークンをプロビジョニングすることはできません。
+
+これらのシナリオは、トークンベースの認証に固有のものではありません。 これらは、SPAs の性質の一部です。 認証クッキーが削除されると、cookie を使用する SPA もサーバー API を呼び出すことができません。
+
+アプリが保護されたリソースに対する API 呼び出しを実行するときは、次の点に注意する必要があります。
+
+* API を呼び出すための新しいアクセストークンをプロビジョニングするには、ユーザーが再度認証される必要があります。
+* クライアントに有効なトークンがある場合でも、トークンがユーザーによって取り消されたために、サーバーへの呼び出しが失敗する可能性があります。
+
+アプリがトークンを要求すると、次の2つの結果が得られます。
+
+* 要求が成功し、アプリに有効なトークンがあります。
+* 要求は失敗します。アプリは、新しいトークンを取得するために、ユーザーを再度認証する必要があります。
+
+トークン要求が失敗した場合は、リダイレクトを実行する前に、現在の状態を保存するかどうかを決定する必要があります。 次のようないくつかの方法があり、複雑さが増します。
+
+* 現在のページの状態をセッションストレージに格納します。 の`OnInitializeAsync`間、続行する前に状態を復元できるかどうかを確認します。
+* クエリ文字列パラメーターを追加し、それを使用して、以前に保存した状態を再ハイドレートする必要があることをアプリに通知する方法として使用します。
+* セッションストレージにデータを格納するための一意の識別子を持つクエリ文字列パラメーターを追加します。他の項目と競合するリスクはありません。
 
 以下の例では、次のことを行っています。
 
-* ログイン ページにリダイレクトする前に状態を保持します。
-* クエリ文字列パラメーターを使用して、認証後に前の状態を回復します。
+* ログインページにリダイレクトする前に状態を保持します。
+* クエリ文字列パラメーターを使用して、認証後に以前の状態を回復します。
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -156,9 +261,9 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="save-app-state-before-an-authentication-operation"></a>認証操作の前にアプリの状態を保存する
 
-認証操作中に、ブラウザーが IP にリダイレクトされる前にアプリの状態を保存する必要がある場合があります。 これは、状態コンテナーのようなものを使用していて、認証が成功した後に状態を復元する場合に発生する可能性があります。 カスタム認証状態オブジェクトを使用して、アプリ固有の状態またはアプリケーションへの参照を保持し、認証操作が正常に完了した後にその状態を復元できます。
+認証操作中に、ブラウザーが IP にリダイレクトされる前に、アプリの状態を保存することが必要になる場合があります。 これは、状態コンテナーのようなものを使用していて、認証が成功した後に状態を復元する場合に発生する可能性があります。 カスタム認証状態オブジェクトを使用して、アプリ固有の状態またはその参照を保持し、認証操作が正常に完了したらその状態を復元することができます。
 
-`Authentication`コンポーネント (*ページ/認証.カミソリ*):
+`Authentication`コンポーネント (*Pages/Authentication. razor*):
 
 ```razor
 @page "/authentication/{action}"
@@ -202,27 +307,27 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-## <a name="customize-app-routes"></a>アプリのルートをカスタマイズする
+## <a name="customize-app-routes"></a>アプリルートをカスタマイズする
 
-既定では、ライブラリ`Microsoft.AspNetCore.Components.WebAssembly.Authentication`は、次の表に示すルートを使用して、さまざまな認証状態を表します。
+既定では、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication`ライブラリは、さまざまな認証状態を表すために、次の表に示すルートを使用します。
 
 | ルート                            | 目的 |
 | -------------------------------- | ------- |
 | `authentication/login`           | サインイン操作をトリガーします。 |
 | `authentication/login-callback`  | サインイン操作の結果を処理します。 |
-| `authentication/login-failed`    | 何らかの理由でサインイン操作が失敗した場合にエラー メッセージを表示します。 |
+| `authentication/login-failed`    | 何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。 |
 | `authentication/logout`          | サインアウト操作をトリガーします。 |
 | `authentication/logout-callback` | サインアウト操作の結果を処理します。 |
-| `authentication/logout-failed`   | 何らかの理由でサインアウト操作が失敗した場合にエラー メッセージを表示します。 |
+| `authentication/logout-failed`   | 何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。 |
 | `authentication/logged-out`      | ユーザーが正常にログアウトしたことを示します。 |
-| `authentication/profile`         | ユーザー プロファイルを編集する操作をトリガーします。 |
+| `authentication/profile`         | ユーザープロファイルを編集する操作をトリガーします。 |
 | `authentication/register`        | 新しいユーザーを登録する操作をトリガーします。 |
 
-上記の表に示したルートは、 を使用`RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`して構成できます。 カスタム ルートを提供するオプションを設定する場合は、アプリに各パスを処理するルートがあることを確認します。
+上の表に示されているルートは`RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`、を使用して構成できます。 カスタムルートを提供するオプションを設定する場合は、アプリに各パスを処理するルートがあることを確認します。
 
-次の例では、すべてのパスの先頭に`/security`.
+次の例では、すべてのパスの先頭`/security`にが付きます。
 
-`Authentication`コンポーネント (*ページ/認証.カミソリ*):
+`Authentication`コンポーネント (*Pages/Authentication. razor*):
 
 ```razor
 @page "/security/{action}"
@@ -252,7 +357,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-要件が完全に異なるパスを要求する場合は、前述のようにルートを設定し`RemoteAuthenticatorView`、明示的な action パラメーターを使用してをレンダリングします。
+完全に異なるパスを必要とする場合は、前述のようにルートを設定`RemoteAuthenticatorView`し、明示的なアクションパラメーターを使用してを表示します。
 
 ```razor
 @page "/register"
@@ -260,13 +365,13 @@ builder.Services.AddApiAuthorization(options => {
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-この操作を行う場合は、UI を別のページに分割できます。
+UI を別のページに分割することもできます。
 
-## <a name="customize-the-authentication-user-interface"></a>認証ユーザー インターフェイスのカスタマイズ
+## <a name="customize-the-authentication-user-interface"></a>認証ユーザーインターフェイスをカスタマイズする
 
-`RemoteAuthenticatorView`には、各認証状態に対する UI 部分の既定のセットが含まれています。 各状態は、カスタム`RenderFragment`を渡すことによってカスタマイズできます。 初期ログイン処理中に表示されるテキストをカスタマイズするには、次`RemoteAuthenticatorView`のように変更できます。
+`RemoteAuthenticatorView`には、各認証状態の UI 部分の既定のセットが含まれています。 各状態は、カスタム`RenderFragment`を渡すことによってカスタマイズできます。 初期ログインプロセス中に表示されるテキストをカスタマイズするには`RemoteAuthenticatorView` 、次のようにを変更します。
 
-`Authentication`コンポーネント (*ページ/認証.カミソリ*):
+`Authentication`コンポーネント (*Pages/Authentication. razor*):
 
 ```razor
 @page "/security/{action}"
@@ -284,7 +389,7 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-には`RemoteAuthenticatorView`、次の表に示す認証ルートごとに使用できるフラグメントが 1 つ含まれます。
+に`RemoteAuthenticatorView`は、次の表に示す認証ルートごとに使用できる1つのフラグメントがあります。
 
 | ルート                            | フラグメント                |
 | -------------------------------- | ----------------------- |
@@ -297,3 +402,130 @@ builder.Services.AddApiAuthorization(options => {
 | `authentication/logged-out`      | `<LogOutSucceeded>`     |
 | `authentication/profile`         | `<UserProfile>`         |
 | `authentication/register`        | `<Registering>`         |
+
+## <a name="support-prerendering-with-authentication"></a>認証を使用したプリレンダリングのサポート
+
+ホストされている Blazor WebAssembly アプリのトピックのいずれかのガイダンスを実行した後は、この後の手順に従って次のようなアプリを作成できます。
+
+* 承認が不要なパスをプリレンダリングする。
+* 承認が必要なパスをプリレンダリングしない。
+
+クライアント アプリの `Program` クラス (*Program.cs*) で、共通のサービスの登録を別のメソッド (たとえば、`ConfigureCommonServices`) に組み入れます。
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.RootComponents.Add<App>("app");
+
+        builder.Services.AddSingleton(new HttpClient 
+        {
+            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+        });
+
+        services.Add...;
+
+        ConfigureCommonServices(builder.Services);
+
+        await builder.Build().RunAsync();
+    }
+
+    public static void ConfigureCommonServices(IServiceCollection services)
+    {
+        // Common service registrations
+    }
+}
+```
+
+サーバー アプリの `Startup.ConfigureServices` で、次の追加サービスを登録します。
+
+```csharp
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+
+    services.AddRazorPages();
+    services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+    services.AddScoped<SignOutSessionStateManager>();
+
+    Client.Program.ConfigureCommonServices(services);
+}
+```
+
+サーバー アプリの `Startup.Configure` メソッドで、`endpoints.MapFallbackToFile("index.html")` を `endpoints.MapFallbackToPage("/_Host")` に置き換えます。
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToPage("/_Host");
+});
+```
+
+サーバー アプリで、*Pages* フォルダーが存在しない場合は作成します。 サーバー アプリの *Pages* フォルダー内に *_Host.cshtml* ページを作成します。 クライアント アプリの *wwwroot/index.html* ファイルの内容を *Pages/_Host.cshtml* ファイル内に貼り付けます。 ファイルの内容を更新します。
+
+* ファイルの先頭に、`@page "_Host"` を追加します。
+* `<app>Loading...</app>` タグを次のように置き換えます。
+
+  ```cshtml
+  <app>
+      @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
+      {
+          <component type="typeof(Wasm.Authentication.Client.App)" render-mode="Static" />
+      }
+      else
+      {
+          <text>Loading...</text>
+      }
+  </app>
+  ```
+  
+## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>ホストされているアプリおよびサードパーティ ログイン プロバイダーに関するオプション
+
+ホストされている Blazor WebAssembly アプリをサードパーティ プロバイダーで認証および承認する場合、ユーザーの認証にはいくつかのオプションを使用できます。 どれを選択するかは、シナリオによって異なります。
+
+詳細については、「<xref:security/authentication/social/additional-claims>」を参照してください。
+
+### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>ユーザーを認証して保護されたサードパーティ API のみを呼び出す
+
+サードパーティ API プロバイダーに対してクライアント側の OAuth フローを使用してユーザーを認証します。
+
+ ```csharp
+ builder.services.AddOidcAuthentication(options => { ... });
+ ```
+ 
+ このシナリオでは:
+
+* アプリをホストしているサーバーは関与しません。
+* サーバー上の API を保護することはできません。
+* アプリでは、保護されたサードパーティ API のみを呼び出すことができます。
+
+### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a>サードパーティ プロバイダーでユーザーを認証し、ホスト サーバーおよびサード パーティ上で保護された API を呼び出す
+
+サードパーティ ログイン プロバイダーで ID を構成します。 サードパーティ API へのアクセスに必要なトークンを取得し、それを格納します。
+
+ユーザーがログインすると、認証プロセスの一環としてアクセス トークンと更新トークンが ID によって収集されます。 その時点で、サードパーティ API の API 呼び出しを行うために使用できる方法はいくつかあります。
+
+#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a>サーバー アクセス トークンを使用してサードパーティのアクセス トークンを取得する
+
+サーバー上で生成されたアクセス トークンを使用して、サーバー API エンドポイントからサードパーティのアクセストークンを取得します。 そこから、サードパーティのアクセス トークンを使用して、クライアント上の ID から直接、サードパーティ API リソースを呼び出します。
+
+この方法はお勧めしません。 この方法では、サードパーティのアクセス トークンをパブリック クライアント用に生成されたものとして扱う必要があります。 OAuth 規約では、パブリック アプリにはクライアント シークレットがありません。これはシークレットを安全に格納することが信頼できないためです。アクセス トークンは機密クライアントに対して生成されます。 機密クライアントとは、クライアント シークレットを持っていてシークレットを安全に格納できると想定されるクライアントです。
+
+* サードパーティのアクセス トークンには、サードパーティがより信頼できるクライアントのトークンを生成したという事実に基づいて機密性の高い操作を実行するための追加のスコープが付与される場合があります。
+* 同様に、信頼されていないクライアントに更新トークンを発行してはなりません。それを行ってしまうと、他の制限が適用されない限り、クライアントは無制限にアクセスできます。
+
+#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a>サードパーティ API を呼び出すために、クライアントからサーバー API への API 呼び出しを行う
+
+クライアントからサーバー API への API 呼び出しを行います。 サーバーから、サードパーティ API リソースのアクセス トークンを取得し、必要な呼び出しはすべて発行します。
+
+この方法では、サードパーティ API を呼び出すためにサーバー経由で追加のネットワーク ホップが必要になりますが、それによって最終的にはより安全なエクスペリエンスが得られます。
+
+* サーバーでは、更新トークンを格納し、アプリからサードパーティ リソースへのアクセスが決して失われないようにすることができます。
+* アプリでは、より機密性の高いアクセス許可を含む可能性のあるサーバーからのアクセス トークンをリークさせることはできません。
