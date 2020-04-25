@@ -1,18 +1,18 @@
-## <a name="usermanager-and-signinmanager"></a><span data-ttu-id="e4aa8-101">ユーザーマネージャーとサインインマネージャー</span><span class="sxs-lookup"><span data-stu-id="e4aa8-101">UserManager and SignInManager</span></span>
+## <a name="usermanager-and-signinmanager"></a><span data-ttu-id="b9762-101">UserManager と SignInManager</span><span class="sxs-lookup"><span data-stu-id="b9762-101">UserManager and SignInManager</span></span>
 
-<span data-ttu-id="e4aa8-102">サーバー アプリが必要な場合は、ユーザー識別子の要求の種類を設定します。</span><span class="sxs-lookup"><span data-stu-id="e4aa8-102">Set the user identifier claim type when a Server app requires:</span></span>
+<span data-ttu-id="b9762-102">サーバーアプリが必要とするユーザー id 要求の種類を設定します。</span><span class="sxs-lookup"><span data-stu-id="b9762-102">Set the user identifier claim type when a Server app requires:</span></span>
 
-* <span data-ttu-id="e4aa8-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601>または<xref:Microsoft.AspNetCore.Identity.SignInManager%601>API エンドポイント内での場合。</span><span class="sxs-lookup"><span data-stu-id="e4aa8-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601> or <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in an API endpoint.</span></span>
-* <span data-ttu-id="e4aa8-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser>ユーザーの名前、電子メール アドレス、ロックアウト終了時刻などの詳細を表示します。</span><span class="sxs-lookup"><span data-stu-id="e4aa8-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser> details, such as the user's name, email address, or lockout end time.</span></span>
+* <span data-ttu-id="b9762-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601>API <xref:Microsoft.AspNetCore.Identity.SignInManager%601>エンドポイント内。</span><span class="sxs-lookup"><span data-stu-id="b9762-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601> or <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in an API endpoint.</span></span>
+* <span data-ttu-id="b9762-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser>ユーザーの名前、電子メールアドレス、またはロックアウトの終了時刻などの詳細。</span><span class="sxs-lookup"><span data-stu-id="b9762-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser> details, such as the user's name, email address, or lockout end time.</span></span>
 
-<span data-ttu-id="e4aa8-105">`Startup.ConfigureServices`: </span><span class="sxs-lookup"><span data-stu-id="e4aa8-105">In `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="b9762-105">`Startup.ConfigureServices`の場合:</span><span class="sxs-lookup"><span data-stu-id="b9762-105">In `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-<span data-ttu-id="e4aa8-106">メソッドが`WeatherForecastController`呼び<xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName>出されると`Get`、次のログが記録されます。</span><span class="sxs-lookup"><span data-stu-id="e4aa8-106">The following `WeatherForecastController` logs the <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> when the `Get` method is called:</span></span>
+<span data-ttu-id="b9762-106">メソッドが`WeatherForecastController`呼び出される<xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName>と、次のログがに記録されます。 `Get`</span><span class="sxs-lookup"><span data-stu-id="b9762-106">The following `WeatherForecastController` logs the <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> when the `Get` method is called:</span></span>
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]
