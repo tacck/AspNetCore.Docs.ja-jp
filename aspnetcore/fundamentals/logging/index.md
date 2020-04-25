@@ -5,14 +5,14 @@ description: Microsoft.Extensions.Logging NuGet パッケージで提供され�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 4/17/2020
+ms.date: 4/23/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: b897d0d775da62a11f01a64f39b47b6c5abebc8b
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: 7be8cef3377132ed43efde209db67401d7bdb6dc
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791559"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82110916"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core および ASP.NET Core でのログ記録
 
@@ -165,7 +165,9 @@ ASP.NET Core の以前のバージョンでは Web ホスト用に別の DI コ�
 
 前の強調表示されているコードは、DI コンテナーで `MyService` のインスタンスが初めて作成されるときに実行される `Func` です。 この方法では、任意の登録済みサービスにアクセスできます。
 
-### <a name="create-logs-in-blazor-webassembly"></a>Blazor WebAssembly ログを作成する
+### <a name="create-logs-in-blazor"></a>Blazor でログを作成する
+
+#### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 `Program.Main` の `WebAssemblyHostBuilder.Logging` プロパティを使用して、Blazor WebAssembly でのログ記録を構成します。
 
@@ -181,6 +183,63 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 ```
 
 `Logging` プロパティは型 <xref:Microsoft.Extensions.Logging.ILoggingBuilder> であるため、<xref:Microsoft.Extensions.Logging.ILoggingBuilder> で使用できるすべての拡張メソッドを `Logging` で使用することもできます。
+
+#### <a name="log-in-razor-components"></a>Razor コンポーネントのログイン
+
+ロガーは、アプリのスタートアップ構成を尊重します。
+
+<xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> や <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> など、API の Intellisense 入力候補をサポートするには、<xref:Microsoft.Extensions.Logging> の `using` ディレクティブが必要です。
+
+次の例は、Razor コンポーネントでの <xref:Microsoft.Extensions.Logging.ILogger> を使用したログ記録を示しています。
+
+```razor
+@page "/counter"
+@using Microsoft.Extensions.Logging;
+@inject ILogger<Counter> logger;
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        logger.LogWarning("Someone has clicked me!");
+
+        currentCount++;
+    }
+}
+```
+
+次の例は、Razor コンポーネントでの <xref:Microsoft.Extensions.Logging.ILoggerFactory> を使用したログ記録を示しています。
+
+```razor
+@page "/counter"
+@using Microsoft.Extensions.Logging;
+@inject ILoggerFactory LoggerFactory
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        var logger = LoggerFactory.CreateLogger<Counter>();
+        logger.LogWarning("Someone has clicked me!");
+
+        currentCount++;
+    }
+}
+```
 
 ### <a name="no-asynchronous-logger-methods"></a>非同期でないロガー メソッド
 
