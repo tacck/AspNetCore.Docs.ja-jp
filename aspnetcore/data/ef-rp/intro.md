@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: 94783aa9014aef4c5f775fc8f36a2c3a7715e4b6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645800"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661617"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor ページ - チュートリアル 1/8
 
@@ -159,7 +159,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
-`ID` プロパティは、このクラスに相当するデータベース テーブルの主キー列になります。 既定では、EF Core は、`ID` または `classnameID` という名前のプロパティを主キーとして解釈します。 そのため、`Student` クラスの主キーの自動的に認識される代替名は、`StudentID` です。
+`ID` プロパティは、このクラスに相当するデータベース テーブルの主キー列になります。 既定では、EF Core は、`ID` または `classnameID` という名前のプロパティを主キーとして解釈します。 そのため、`Student` クラスの主キーの自動的に認識される代替名は、`StudentID` です。 詳細については、[EF Core - キー](/ef/core/modeling/keys?tabs=data-annotations)に関するページを参照してください。
 
 `Enrollments` プロパティは[ナビゲーション プロパティ](/ef/core/modeling/relationships)です。 ナビゲーション プロパティには、このエンティティに関連する他のエンティティが含まれます。 この例では、`Student` エンティティの `Enrollments` プロパティによって、その Student に関連するすべての `Enrollment` エンティティが保持されます。 たとえば、データベース内のある Student 行に 2 つの関連する Enrollment 行がある場合、`Enrollments` ナビゲーション プロパティにその 2 つの Enrollment エンティティが含まれます。 
 

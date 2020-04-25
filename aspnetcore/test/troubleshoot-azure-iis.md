@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 671f68da2ea261cb8ae32a9d5ef875217859054d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f994cd1274bda9082a7cd8b637968b2769db1671
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644882"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661708"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service および IIS での ASP.NET Core のトラブルシューティング
 
@@ -159,6 +159,15 @@ The specified framework 'Microsoft.NETCore.App', version '3.0.0' was not found.
 指定されたスタートアップ時間の制限内に ANCM が起動に失敗しました。 既定では、タイムアウトは 120 秒です。
 
 このエラーは、同じマシン上で多数のアプリを起動したときに発生する可能性があります。 スタートアップ中のサーバー上の CPU/メモリ使用量の急上昇を確認します。 必要に応じて、複数のアプリのスタートアップ プロセスをずらします。
+
+### <a name="50038-ancm-application-dll-not-found"></a>500.38 ANCM アプリケーション DLL が見つかりません
+
+ANCM は、実行可能ファイルの横にあるアプリケーション DLL を見つけることができませんでした。
+
+このエラーは、インプロセス ホスティング モデルを使用して[単一ファイルの実行可能ファイル](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables)としてパッケージ化されたアプリをホストするときに発生します。 インプロセス モデルでは、ANCM によって既存の IIS プロセスに .NET Core アプリが読み込まれることが必要です。 このシナリオは、単一ファイル展開モデルではサポートされていません。 このエラーを修正するには、アプリのプロジェクト ファイルで、次のうち **1 つ**を使用します。
+
+1. `PublishSingleFile` MSBuild プロパティを `false` に設定して、単一ファイルの公開を無効にします。
+1. `AspNetCoreHostingModel` MSBuild プロパティを `OutOfProcess` に設定して、アウトプロセス ホスティング モデルに切り替えます。
 
 ### <a name="5025-process-failure"></a>502.5 処理エラー
 

@@ -5,21 +5,21 @@ description: データへのバインド、イベントの処理、コンポー�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/25/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4434636992cb2506ef6525996690946f97c43764
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306511"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791488"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
-作成者: [Luke Latham](https://github.com/guardrex) と [Daniel Roth](https://github.com/danroth27)
+作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -141,6 +141,9 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 *Pages/ParentComponent.razor*:
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+> [!WARNING]
+> 独自の "*コンポーネント パラメーター*" を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[独自のパラメーター プロパティを書き込み先とするコンポーネントを作成しない](#dont-create-components-that-write-to-their-own-parameter-properties)」セクションを参照してください。
 
 ## <a name="child-content"></a>子コンテンツ
 
@@ -400,7 +403,7 @@ public class NotifierService
 
 `People` コレクションのコンテンツは、挿入、削除、または順序変更されたエントリによって変更される可能性があります。 コンポーネントのレンダリング時に、`<DetailsEditor>` コンポーネントが変更され、異なる `Details` パラメーター値を受け取ることがあります。 これにより、予期したものよりも複雑な再レンダリングが発生する可能性があります。 場合によっては、再レンダリングによって、要素のフォーカスの喪失などの表示動作の違いが発生する可能性があります。
 
-マッピング プロセスは、`@key` ディレクティブ属性を使用して制御できます。 `@key` により、比較アルゴリズムで、キーの値に基づいて要素やコンポーネントが確実に保持されます。
+マッピング プロセスは、[`@key`](xref:mvc/views/razor#key) ディレクティブ属性を使用して制御できます。 `@key` により、比較アルゴリズムで、キーの値に基づいて要素やコンポーネントが確実に保持されます。
 
 ```csharp
 @foreach (var person in People)
@@ -453,6 +456,99 @@ public class NotifierService
 * 一意の識別子 (たとえば、`int` 型、`string` 型、`Guid` 型の主キー値)。
 
 `@key` に使用される値は競合しないようにしてください。 同じ親要素内で競合する値が検出された場合、Blazor では、古い要素やコンポーネントを新しい要素やコンポーネントに確定的にマップできないため、例外がスローされます。 個別の値 (オブジェクト インスタンスや主キー値など) のみを使用してください。
+
+## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>独自のパラメーター プロパティを書き込み先とするコンポーネントを作成しない
+
+パラメーターは、次のような条件で上書きされます。
+
+* 子コンポーネントのコンテンツが、`RenderFragment` を使用してレンダリングされる。
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が、親コンポーネントで呼び出される。
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されると親コンポーネントがレンダリングされ、新しいパラメーター値が子コンポーネントに指定されるため、パラメーターがリセットされます。
+
+次が実行される `Expander` コンポーネントについて考えてみましょう。
+
+* 子コンテンツのレンダリング。
+* コンポーネント パラメーターを使用した、子コンテンツの表示の切り替え。
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @Expanded)
+
+    @if (Expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private void Toggle()
+    {
+        Expanded = !Expanded;
+    }
+}
+```
+
+`Expander` コンポーネントは、`StateHasChanged` を呼び出す可能性のある親コンポーネントに追加されます。
+
+```razor
+<Expander Expanded="true">
+    <h1>Hello, world!</h1>
+</Expander>
+
+<Expander Expanded="true" />
+
+<button @onclick="@(() => StateHasChanged())">
+    Call StateHasChanged
+</button>
+```
+
+初期状態では、`Expanded` プロパティが切り替えられると、`Expander` コンポーネントはそれぞれ独立して動作します。 子コンポーネントの状態は、想定どおりのままです。 親で `StateHasChanged` が呼び出されると、最初の子コンポーネントの `Expanded` パラメーターが初期値 (`true`) にリセットされます。 2 つめの `Expander` コンポーネントの `Expanded` 値はリセットされません。これは、2 つめのコンポーネントでは子コンテンツがレンダリングされないためです。
+
+前のシナリオでの状態を維持するには、`Expander` コンポーネントで "*プライベート フィールド*" を使用して、切り替え状態を維持します。
+
+次の `Expander` コンポーネントでは、次を実行します。
+
+* 親から `Expanded` コンポーネント パラメーター値を受け入れます。
+* コンポーネント パラメーター値を、[OnInitialized イベント](xref:blazor/lifecycle#component-initialization-methods) の "*プライベート フィールド*" (`_expanded`) に割り当てます。
+* プライベート フィールドを使用して、内部のトグル状態を維持します。
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @_expanded)
+
+    @if (_expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool _expanded;
+
+    protected override void OnInitialized()
+    {
+        _expanded = Expanded;
+    }
+
+    private void Toggle()
+    {
+        _expanded = !_expanded;
+    }
+}
+```
 
 ## <a name="partial-class-support"></a>部分クラスのサポート
 

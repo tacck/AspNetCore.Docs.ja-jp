@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 1a4efcd4e9e3296e9c208f1419bc86734951b0c1
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4886673a9b16b8be8d9a0b0d5c7002a91760544e
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511523"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976977"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 の新機能
 
@@ -428,7 +428,7 @@ ASP.NET Core 3.0 リリースよりも前には、`ASPNETCORE_` というプレ�
 * 接続アダプターは Kestrel から削除され、接続ミドルウェアで置き換えられました。これは ASP.NET Core パイプラインの HTTP ミドルウェアに似ていますが下位レベルの接続用です。
 * Kestrel トランスポート層は、`Connections.Abstractions` のパブリック インターフェイスとして公開されています。
 * ヘッダーとトレーラーのあいまいさは、末尾のヘッダーを新しいコレクションに移動することによって解決されました。
-* 同期 IO の API (`HttpRequest.Body.Read` など) は、アプリのクラッシュにつながるスレッド スタベーションの一般的な原因です。 3\.0 では、`AllowSynchronousIO` は既定で無効になっています。
+* 同期 I/O の API (`HttpRequest.Body.Read` など) は、アプリのクラッシュにつながるスレッドの不足の一般的な原因です。 3\.0 では、`AllowSynchronousIO` は既定で無効になっています。
 
 詳細については、「<xref:migration/22-to-30#kestrel>」を参照してください。
 

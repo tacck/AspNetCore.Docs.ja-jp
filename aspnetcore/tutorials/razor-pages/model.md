@@ -5,12 +5,12 @@ description: Entity Framework Core (EF Core) を利用し、データベース�
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: f6dbac81b4efceb30c379ab06dd715005d879228
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647174"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488872"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core での Razor ページ アプリへのモデルの追加
 
@@ -20,7 +20,7 @@ ms.locfileid: "78647174"
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-このセクションでは、クロスプラットフォーム [SQLite データベース](https://www.sqlite.org/index.html)でムービーを管理するためのクラスを追加します。 ASP.NET Core テンプレートから作成されたアプリでは、SQLite データベースが使用されます。 このアプリのモデル クラスは、データベースを操作するために [Entity Framework Core (EF Core)](/ef/core) ([SQLite EF Core データベース プロバイダー](/ef/core/providers/sqlite)) で使用されます。 EF Core は、データ アクセスを簡略化するオブジェクト リレーショナル マッピング (ORM) フレームワークです。
+このセクションでは、映画を管理するクラスが追加されます。 アプリのモデル クラスでは、[Entity Framework Core (EF Core)](/ef/core) を使用して、データベースを操作します。 EF Core は、データ アクセスを簡略化するオブジェクト リレーショナル マッパー (O/RM) です。
 
 このモデル クラスは、EF Core に対する依存関係がないために、POCO クラス (plain-old CLR オブジェクト、つまり単純な従来の CLR) と呼ばれます。 これらは、データベースに格納されるデータのプロパティを定義します。
 

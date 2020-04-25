@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor アプリ テンプレートと Blazor プロ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80320977"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661728"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -31,6 +31,13 @@ Blazor フレームワークには、Blazor ホスティング モデルのそ�
 Blazor のホスティング モデルの詳細については、「<xref:blazor/hosting-models>」を参照してください。
 
 テンプレートから Blazor アプリを作成する手順の詳細については、「<xref:blazor/get-started>」を参照してください。
+
+`--help` オプションを [dotnet new](/dotnet/core/tools/dotnet-new) CLI コマンドに渡すことで、テンプレート オプションを使用できます。
+
+```dotnetcli
+dotnet new blazorwasm --help
+dotnet new blazorserver --help
+```
 
 ## <a name="opno-locblazor-project-structure"></a>Blazor プロジェクトの構造
 

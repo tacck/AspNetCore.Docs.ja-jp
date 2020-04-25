@@ -3,14 +3,14 @@ title: ASP.NET Core で .NET Core gRPC のクライアントとサーバーを�
 author: juntaoluo
 description: このチュートリアルでは、ASP.NET Core で gRPC サービスと gRPC クライアントを作成する方法を示します。 gRPC サービス プロジェクトの作成方法、proto ファイルの編集方法、二重ストリーミング呼び出しの追加方法について学習します。
 ms.author: johluo
-ms.date: 12/05/2019
+ms.date: 04/08/2020
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 0cedeb021427455c3f60a8a8cc36b52794a055bc
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2bbd40b4b89af170dae40b8a5277749d6bcd5faf
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650300"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994627"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>チュートリアル: ASP.NET Core で gRPC のクライアントとサーバーを作成する
 
@@ -298,7 +298,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 > [!NOTE]
-> この記事のコードでは、gRPC サービスをセキュリティで保護するために、ASP.NET Core HTTPS 開発証明書が必要です。 クライアントが `The remote certificate is invalid according to the validation procedure.` というメッセージで失敗する場合、その開発証明書は信頼されていません。 この問題を解決する手順については、「[Windows と macOS で ASP.NET Core HTTPS 開発証明書を信頼します](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)」を参照してください。
+> この記事のコードでは、gRPC サービスをセキュリティで保護するために、ASP.NET Core HTTPS 開発証明書が必要です。 .NET gRPC クライアントが `The remote certificate is invalid according to the validation procedure.` または `The SSL connection could not be established.` というメッセージで失敗する場合、その開発証明書は信頼されていません。 この問題を解決するには、「[信頼されていないか無効な証明書で gRPC サービスを呼び出す](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate)」を参照してください。
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 

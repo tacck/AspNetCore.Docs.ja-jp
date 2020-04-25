@@ -5,17 +5,17 @@ description: Blazor アプリをデバッグする方法について説明しま
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7273ae3d240de0b59a58069fdcc1880247379751
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80381874"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661609"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -55,7 +55,7 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio と Visual Studio Code のデバッグを有効にする
 
-ASP.NET Core 3.2 Preview 3 以降の Blazor WebAssembly プロジェクト テンプレートを使用して作成された新しいプロジェクトでは、デバッグが自動的に有効になります。
+ASP.NET Core 3.2 Preview 3 以降の Blazor WebAssembly プロジェクト テンプレート ([現在のリリースは 3.2 Preview 4](xref:blazor/get-started)) を使用して作成された新しいプロジェクトでは、デバッグが自動的に有効になります。
 
 既存の Blazor WebAssembly アプリのデバッグを有効にするには、スタートアップ プロジェクトの *launchSettings. json* ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。
 
@@ -103,6 +103,8 @@ Blazor WebAssembly アプリのデバッグ中に、サーバー コードをデ
    ![デバッグ サーバー](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
 1. <kbd>F5</kbd> をもう一度押して実行を続行し、天気予報テーブルがレンダリングされたことを確認します。
+
+<a id="vscode"></a>
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 

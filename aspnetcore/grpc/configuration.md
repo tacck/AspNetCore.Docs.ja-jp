@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 02/26/2020
 uid: grpc/configuration
-ms.openlocfilehash: cabe2d86f535bf3063dd7ede9e8a3bc5de70e244
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4c13c45ce745643c3cb089a1c984d2ef599db48b
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650696"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440832"
 ---
 # <a name="grpc-for-net-configuration"></a>.NET 構成のための gRPC
 
@@ -22,8 +22,8 @@ gRPC サービスは、*Startup.cs* の `AddGrpc` によって構成されます
 
 | オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
-| MaxSendMessageSize | `null` | サーバーから送信できる最大メッセージ サイズ (バイト単位)。 構成された最大メッセージ サイズを超えるメッセージを送信しようとすると、例外が発生します。 |
-| MaxReceiveMessageSize | 4 MB | サーバーで受信できる最大メッセージ サイズ (バイト単位)。 サーバーでこの制限を超えるメッセージを受信すると、例外がスローされます。 この値を大きくすると、サーバーはより大きなメッセージを受け取れますが、メモリの消費に悪影響を与える可能性があります。 |
+| MaxSendMessageSize | `null` | サーバーから送信できる最大メッセージ サイズ (バイト単位)。 構成された最大メッセージ サイズを超えるメッセージを送信しようとすると、例外が発生します。 `null` に設定する場合、メッセージ サイズは制限されません。 |
+| MaxReceiveMessageSize | 4 MB | サーバーで受信できる最大メッセージ サイズ (バイト単位)。 サーバーでこの制限を超えるメッセージを受信すると、例外がスローされます。 この値を大きくすると、サーバーはより大きなメッセージを受け取れますが、メモリの消費に悪影響を与える可能性があります。 `null` に設定する場合、メッセージ サイズは制限されません。 |
 | EnableDetailedErrors | `false` | `true` の場合、サービス メソッドで例外がスローされると、詳細な例外メッセージがクライアントに返されます。 既定値は、`false` です。 `EnableDetailedErrors` を `true` に設定すると、機密情報が漏洩する可能性があります。 |
 | CompressionProviders | gzip | メッセージの圧縮と圧縮解除に使用される圧縮プロバイダーのコレクション。 カスタム圧縮プロバイダーを作成し、コレクションに追加することができます。 既定で構成されているプロバイダーは、**gzip** 圧縮をサポートしています。 |
 | <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | サーバーから送信されるメッセージの圧縮に使用される圧縮アルゴリズム。 このアルゴリズムは、`CompressionProviders` の圧縮プロバイダーと一致している必要があります。 アルゴリズムで応答を圧縮するには、そのアルゴリズムをサポートしていることをクライアントが **grpc-accept-encoding** ヘッダーで送信することによって、そのことを示す必要があります。 |
@@ -47,8 +47,8 @@ gRPC のクライアント構成は `GrpcChannelOptions` で設定されます�
 | HttpClient | 新しいインスタンス | gRPC 呼び出しを行うために使用される `HttpClient`。 カスタム `HttpClientHandler` を構成したり、gRPC 呼び出しの HTTP パイプラインに追加のハンドラーを加えたりするために、クライアントを設定できます。 `HttpClient` が指定されていない場合、チャネルのために新しい `HttpClient` インスタンスが作成されます。 これは自動的に破棄されます。 |
 | DisposeHttpClient | `false` | `true` の場合に `HttpClient` が指定されると、`GrpcChannel` が破棄されるときに `HttpClient` インスタンスが破棄されます。 |
 | LoggerFactory | `null` | gRPC 呼び出しに関する情報をログに記録するため、クライアントによって使用される `LoggerFactory`。 `LoggerFactory` インスタンスは、依存関係の挿入から解決することも、`LoggerFactory.Create` を使用して作成することもできます。 ログ記録を構成する例については、「<xref:grpc/diagnostics#grpc-client-logging>」を参照してください。 |
-| MaxSendMessageSize | `null` | クライアントから送信できる最大メッセージ サイズ (バイト単位)。 構成された最大メッセージ サイズを超えるメッセージを送信しようとすると、例外が発生します。 |
-| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | クライアントで受信できる最大メッセージ サイズ (バイト単位)。 クライアントでこの制限を超えるメッセージを受信すると、例外がスローされます。 この値を大きくすると、クライアントはより大きなメッセージを受け取れますが、メモリの消費に悪影響を与える可能性があります。 |
+| MaxSendMessageSize | `null` | クライアントから送信できる最大メッセージ サイズ (バイト単位)。 構成された最大メッセージ サイズを超えるメッセージを送信しようとすると、例外が発生します。 `null` に設定する場合、メッセージ サイズは制限されません。 |
+| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | クライアントで受信できる最大メッセージ サイズ (バイト単位)。 クライアントでこの制限を超えるメッセージを受信すると、例外がスローされます。 この値を大きくすると、クライアントはより大きなメッセージを受け取れますが、メモリの消費に悪影響を与える可能性があります。 `null` に設定する場合、メッセージ サイズは制限されません。 |
 | 資格情報: | `null` | `ChannelCredentials` のインスタンス。 資格情報は、認証メタデータを gRPC 呼び出しに追加するために使用します。 |
 | CompressionProviders | gzip | メッセージの圧縮と圧縮解除に使用される圧縮プロバイダーのコレクション。 カスタム圧縮プロバイダーを作成し、コレクションに追加することができます。 既定で構成されているプロバイダーは、**gzip** 圧縮をサポートしています。 |
 

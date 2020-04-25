@@ -5,17 +5,17 @@ description: Blazor アプリで JavaScript 関数から .NET メソッドを呼
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/24/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: dbf44fe7923998c65119e42d97c304890fa95523
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e2344dd15efd243a405373b6cf0362f28b48173a
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218792"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976951"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す
 
@@ -66,7 +66,7 @@ JavaScript から静的 .NET メソッドを呼び出すには、`DotNet.invokeM
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-4 番目の配列値は、`data.push(4);` によって返される配列 (`ReturnArrayAsync`) にプッシュされます。
+4 番目の配列値は、`ReturnArrayAsync` によって返される配列 (`data.push(4);`) にプッシュされます。
 
 既定では、メソッド識別子はメソッド名ですが、`JSInvokableAttribute` コンストラクターを使用して別の識別子を指定することもできます。
 
@@ -98,7 +98,7 @@ JavaScript から .NET インスタンス メソッドを呼び出すことも�
 
 * 参照渡しで .NET インスタンスを JavaScript に渡します。
   * 静的呼び出しを `DotNetObjectReference.Create` にします。
-  * インスタンスを `DotNetObjectReference` インスタンスにラップし、`Create` インスタンスで `DotNetObjectReference` を呼び出します。 `DotNetObjectReference` オブジェクトを破棄します (このセクションの後半で例を示します)。
+  * インスタンスを `DotNetObjectReference` インスタンスにラップし、`DotNetObjectReference` インスタンスで `Create` を呼び出します。 `DotNetObjectReference` オブジェクトを破棄します (このセクションの後半で例を示します)。
 * `invokeMethod` 関数または `invokeMethodAsync` 関数を使用して、インスタンスで .NET インスタンス メソッドを呼び出します。 .NET インスタンスは、JavaScript から他の .NET メソッドを呼び出すときに引数として渡すこともできます。
 
 > [!NOTE]
@@ -122,7 +122,7 @@ JavaScript から .NET インスタンス メソッドを呼び出すことも�
 }
 ```
 
-`CallHelloHelperSayHello` では、`sayHello` の新しいインスタンスを使用して JavaScript 関数 `HelloHelper` を呼び出します。
+`CallHelloHelperSayHello` では、`HelloHelper` の新しいインスタンスを使用して JavaScript 関数 `sayHello` を呼び出します。
 
 *JsInteropClasses/ExampleJsInterop.cs*:
 
@@ -359,6 +359,18 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 ```
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="avoid-circular-object-references"></a>循環オブジェクト参照の回避
+
+循環参照を含むオブジェクトは、次のいずれに対しても、クライアントでシリアル化することはできません。
+
+* .NET メソッドの呼び出し。
+* 戻り値の型に循環参照がある場合の、C# からの JavaScript メソッドの呼び出し。
+
+詳細については、次のイシューを参照してください。
+
+* [Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) (循環参照はサポートされていません、テイク 2 (dotnet/aspnetcore #20525))
+* [Proposal:Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))
 
 ## <a name="additional-resources"></a>その他の技術情報
 

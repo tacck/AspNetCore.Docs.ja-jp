@@ -8,12 +8,12 @@ ms.date: 12/16/2019
 no-loc:
 - Blazor
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 72096fc2f03033dfe8325b5129e074913a2fbd1f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5374d7eec4334223a4bba7ee26cb6e2f208ed20b
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646688"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977198"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>クラス ライブラリで ASP.NET Core API を使用する
 
@@ -76,7 +76,7 @@ dotnet new razorclasslib
   * [Microsoft.AspNetCore.Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft.AspNetCore.Components.Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
 
-(例:
+次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-components-library.csproj)]
 
@@ -87,7 +87,7 @@ dotnet new razorclasslib
 * .NET Core 3.x を対象とします。
 * 共有フレームワークの `<FrameworkReference>` 要素を追加します。
 
-(例:
+次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
@@ -109,7 +109,7 @@ Razor コンポーネントを含むライブラリの詳細については、�
 
 プロジェクトが .NET Core 3.x を対象とする場合、次のものが必要です。
 
-* `AddRazorSupportForMvc` に設定された `true` MSBuild プロパティ。
+* `true` に設定された `AddRazorSupportForMvc` MSBuild プロパティ。
 * 共有フレームワークの `<FrameworkReference>` 要素。
 
 **Razor クラス ライブラリ** プロジェクト テンプレートは、.NET Core 3.x を対象とするプロジェクトについて、前述の要件を満たしています。 ご使用のエディターに応じて、次の手順を使用します。
@@ -132,31 +132,31 @@ dotnet new razorclasslib -s
 
 ---
 
-(例:
+次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-views-pages-library.csproj)]
 
-プロジェクトが代わりに NET Standard を対象とする場合、[Microsoft.AspNetCore.Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) パッケージ参照が必要です。 `Microsoft.AspNetCore.Mvc` パッケージは ASP.NET Core 3.0 で共有フレームワークに移動されたため、公開されなくなりました。 (例:
+プロジェクトが代わりに NET Standard を対象とする場合、[Microsoft.AspNetCore.Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) パッケージ参照が必要です。 `Microsoft.AspNetCore.Mvc` パッケージは ASP.NET Core 3.0 で共有フレームワークに移動されたため、公開されなくなりました。 次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-views-pages-library.csproj?highlight=8)]
 
 ### <a name="tag-helpers"></a>タグ ヘルパー
 
-[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を含むプロジェクトでは、`Microsoft.NET.Sdk` SDK を使用する必要があります。 .NET Core 3.x を対象とする場合、共有フレームワークの `<FrameworkReference>` 要素を追加します。 (例:
+[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を含むプロジェクトでは、`Microsoft.NET.Sdk` SDK を使用する必要があります。 .NET Core 3.x を対象とする場合、共有フレームワークの `<FrameworkReference>` 要素を追加します。 次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) へのパッケージ参照を追加します。 `Microsoft.AspNetCore.Mvc.Razor` パッケージは共有フレームワークに移動されたため、公開されなくなりました。 (例:
+.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) へのパッケージ参照を追加します。 `Microsoft.AspNetCore.Mvc.Razor` パッケージは共有フレームワークに移動されたため、公開されなくなりました。 次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
 ### <a name="view-components"></a>ビュー コンポーネント
 
-[ビュー コンポーネント](xref:mvc/views/view-components)を含むプロジェクトでは、`Microsoft.NET.Sdk` SDK を使用する必要があります。 .NET Core 3.x を対象とする場合、共有フレームワークの `<FrameworkReference>` 要素を追加します。 (例:
+[ビュー コンポーネント](xref:mvc/views/view-components)を含むプロジェクトでは、`Microsoft.NET.Sdk` SDK を使用する必要があります。 .NET Core 3.x を対象とする場合、共有フレームワークの `<FrameworkReference>` 要素を追加します。 次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) へのパッケージ参照を追加します。 `Microsoft.AspNetCore.Mvc.ViewFeatures` パッケージは共有フレームワークに移動されたため、公開されなくなりました。 (例:
+.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) へのパッケージ参照を追加します。 `Microsoft.AspNetCore.Mvc.ViewFeatures` パッケージは共有フレームワークに移動されたため、公開されなくなりました。 次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-view-components-library.csproj)]
 
@@ -208,7 +208,7 @@ ASP.NET Core の複数のバリアントをサポートするライブラリを�
 * 共有フレームワークの `<FrameworkReference>` 要素を追加します。
 * 条件付きでコードをコンパイルするには、適切なターゲット フレームワーク シンボルを設定した [#if プリプロセッサ ディレクティブ](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)を使用します。
 
-たとえば、ASP.NET Core 3.0 から、HTTP 要求および応答ストリームでの同期読み取りと同期書き込みは既定で無効になっています。 ASP.NET Core 2.2 では、この同期動作が既定でサポートされています。 IO の発生時に同期読み取りと同期書き込みを有効にする必要があるミドルウェア ライブラリについて検討します。 ライブラリで、同期機能を有効にするコードを適切なプリプロセッサ ディレクティブで囲む必要があります。 (例:
+たとえば、ASP.NET Core 3.0 から、HTTP 要求および応答ストリームでの同期読み取りと同期書き込みは既定で無効になっています。 ASP.NET Core 2.2 では、この同期動作が既定でサポートされています。 I/O の発生時に同期読み取りと同期書き込みを有効にする必要があるミドルウェア ライブラリについて検討します。 ライブラリで、同期機能を有効にするコードを適切なプリプロセッサ ディレクティブで囲む必要があります。 次に例を示します。
 
 [!code-csharp[](target-aspnetcore/samples/middleware.cs?highlight=9-24)]
 

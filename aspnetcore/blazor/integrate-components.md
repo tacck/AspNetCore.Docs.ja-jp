@@ -5,17 +5,17 @@ description: Blazor アプリのコンポーネントと DOM 要素のデータ 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218935"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81383969"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する
 
@@ -23,7 +23,14 @@ ms.locfileid: "80218935"
 
 Razor コンポーネントは、Razor Pages と MVC アプリに統合できます。 ページまたはビューがレンダリングされるときには、コンポーネントを同時に事前レンダリングすることができます。
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>ページとビューでコンポーネントを使用するためにアプリを準備する
+[アプリを準備](#prepare-the-app)した後に、アプリの要件に応じて、次のセクションのガイダンスを使用します。
+
+* ルーティング可能なコンポーネント &ndash; ユーザー要求から直接ルーティング可能なコンポーネント。 訪問者が [`@page`](xref:mvc/views/razor#page) ディレクティブを含むコンポーネントのブラウザーで HTTP 要求を行うことができる必要がある場合は、このガイダンスに従ってください。
+  * [Razor Pages アプリでルーティング可能なコンポーネントを使用する](#use-routable-components-in-a-razor-pages-app)
+  * [MVC アプリでルーティング可能なコンポーネントを使用する](#use-routable-components-in-an-mvc-app)
+* [ページまたはビューからコンポーネントをレンダリングする](#render-components-from-a-page-or-view) &ndash; ユーザー要求から直接ルーティング可能なコンポーネント。 アプリによって[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を含む既存のページやビューにコンポーネントが埋め込まれる場合は、このガイダンスに従ってください。
+
+## <a name="prepare-the-app"></a>アプリの準備
 
 既存の Razor Pages や MVC アプリでは、Razor コンポーネントをページとビューに統合できます。
 
@@ -35,11 +42,11 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
      <base href="~/" />
      ```
 
-     前の例の `href` 値 (*アプリ ベースのパス*) は、アプリがルート URL パス (`/`) に置かれていることを前提としています。 アプリがサブアプリケーションになっている場合は、記事  *の「* アプリのベース パス<xref:host-and-deploy/blazor/index#app-base-path>」セクションのガイダンスに従ってください。
+     前の例の `href` 値 (*アプリ ベースのパス*) は、アプリがルート URL パス (`/`) に置かれていることを前提としています。 アプリがサブアプリケーションになっている場合は、記事 <xref:host-and-deploy/blazor/index#app-base-path> の「*アプリのベース パス*」セクションのガイダンスに従ってください。
 
      *_Layout.cshtml* ファイルは、Razor Pages アプリの *Pages/Shared* フォルダーまたは MVC アプリの *Views/Shared* フォルダーにあります。
 
-   * `<script>`blazor.server.js*スクリプトの* タグを、終了 `</body>` タグの直前に追加します。
+   * *blazor.server.js* スクリプトの `<script>` タグを、終了 `</body>` タグの直前に追加します。
 
      ```html
      <script src="_framework/blazor.server.js"></script>
@@ -80,7 +87,7 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
 
 Razor Pages アプリでルーティング可能な Razor コンポーネントをサポートするには、次のようにします。
 
-1. 「[ページとビューでコンポーネントを使用するためにアプリを準備する](#prepare-the-app-to-use-components-in-pages-and-views)」セクションのガイダンスに従ってください。
+1. 「[アプリを準備する](#prepare-the-app)」セクションのガイダンスに従ってください。
 
 1. 次の内容の *App.razor* ファイルをプロジェクト ルートに追加します。
 
@@ -113,6 +120,19 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
 
    コンポーネントは、そのレイアウトで共有される *_Layout.cshtml* ファイルを使用します。
 
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、`App` コンポーネントに対して以下の構成が行われます。
+
+   * ページに事前レンダリングするかどうか。
+   * ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
+
+   | 表示モード | 説明 |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 `App` コンポーネントからの出力は含まれません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` コンポーネントを静的 HTML にレンダリングします。 |
+
+   コンポーネント タグ ヘルパーの詳細については、「ASP.NET コアのコンポーネント タグ ヘルパー<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
+
 1. *_Host.cshtml* ページの優先度が低いルートを、`Startup.Configure` 内のエンドポイント構成に追加します。
 
    ```csharp
@@ -124,7 +144,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
    });
    ```
 
-1. ルーティング可能なコンポーネントをアプリに追加します。 (例:
+1. ルーティング可能なコンポーネントをアプリに追加します。 次に例を示します。
 
    ```razor
    @page "/counter"
@@ -134,7 +154,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
    ...
    ```
 
-   名前空間の詳細については、「[コンポーネントの名前空間](#component-namespaces)」セクションを参照してください。
+名前空間の詳細については、「[コンポーネントの名前空間](#component-namespaces)」セクションを参照してください。
 
 ## <a name="use-routable-components-in-an-mvc-app"></a>MVC アプリでルーティング可能なコンポーネントを使用する
 
@@ -142,7 +162,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
 
 MVC アプリでルーティング可能な Razor コンポーネントをサポートするには、次のようにします。
 
-1. 「[ページとビューでコンポーネントを使用するためにアプリを準備する](#prepare-the-app-to-use-components-in-pages-and-views)」セクションのガイダンスに従ってください。
+1. 「[アプリを準備する](#prepare-the-app)」セクションのガイダンスに従ってください。
 
 1. 次の内容の *App.razor* ファイルを、プロジェクトのルートに追加します。
 
@@ -173,6 +193,19 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    ```
 
    コンポーネントは、そのレイアウトで共有される *_Layout.cshtml* ファイルを使用します。
+   
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、`App` コンポーネントに対して以下の構成が行われます。
+
+   * ページに事前レンダリングするかどうか。
+   * ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
+
+   | 表示モード | 説明 |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 `App` コンポーネントからの出力は含まれません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` コンポーネントを静的 HTML にレンダリングします。 |
+
+   コンポーネント タグ ヘルパーの詳細については、「ASP.NET コアのコンポーネント タグ ヘルパー<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
 
 1. Home コントローラーにアクションを追加します。
 
@@ -183,7 +216,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    }
    ```
 
-1. *内のエンドポイント構成に*_Host.cshtml`Startup.Configure` ビューを返すコントローラー アクションのために、優先度が低いルートを追加します。
+1. `Startup.Configure` 内のエンドポイント構成に *_Host.cshtml* ビューを返すコントローラー アクションのために、優先度が低いルートを追加します。
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -194,7 +227,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    });
    ```
 
-1. *Pages* フォルダーを作成し、アプリにルーティング可能なコンポーネントを追加します。 (例:
+1. *Pages* フォルダーを作成し、アプリにルーティング可能なコンポーネントを追加します。 次に例を示します。
 
    ```razor
    @page "/counter"
@@ -204,7 +237,19 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    ...
    ```
 
-   名前空間の詳細については、「[コンポーネントの名前空間](#component-namespaces)」セクションを参照してください。
+名前空間の詳細については、「[コンポーネントの名前空間](#component-namespaces)」セクションを参照してください。
+
+## <a name="render-components-from-a-page-or-view"></a>ページまたはビューからコンポーネントをレンダリングする
+
+*これは、コンポーネントをユーザー要求から直接ルーティングできないページまたはビューにコンポーネントを追加することに関係するセクションです。*
+
+ページまたはビューからコンポーネントをレンダリングするには、[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を使用します。
+
+コンポーネントがどのようにレンダリングされるか、コンポーネントの状態、および `Component` タグ ヘルパーの詳細については、以下の記事を参照してください。
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/hosting-model-configuration>
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
 
 ## <a name="component-namespaces"></a>コンポーネントの名前空間
 
@@ -220,15 +265,3 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
 *_ViewImports.cshtml* ファイルは、Razor Pages アプリの *Pages* フォルダーまたは MVC アプリの *Views* フォルダーにあります。
 
 詳細については、「<xref:blazor/components#import-components>」を参照してください。
-
-## <a name="render-components-from-a-page-or-view"></a>ページまたはビューからコンポーネントをレンダリングする
-
-*これは、コンポーネントをユーザー要求から直接ルーティングできないページまたはビューにコンポーネントを追加することに関係するセクションです。*
-
-ページまたはビューからコンポーネントをレンダリングするには、[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を使用します。
-
-コンポーネントがどのようにレンダリングされるか、コンポーネントの状態、および `Component` タグ ヘルパーの詳細については、以下の記事を参照してください。
-
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>

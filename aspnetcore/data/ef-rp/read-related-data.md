@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: d244ce1527486466bcbc6557ec35869aa206bc4f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0835dbf6b5434e4224d9f56ea3335df4b5d9e119
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645590"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277328"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core の Razor ページと EF Core - 関連データの読み込み - 6/8
 
@@ -136,6 +136,8 @@ EF Core がエンティティのナビゲーション プロパティに関連�
 次のコードは、`Select` メソッドを使用して関連データを読み込みます。
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
+
+上記のコードではエンティティ型が返されないため、追跡は行われません。 EF の追跡の詳細については、「[追跡と追跡なしのクエリ](/ef/core/querying/tracking)」を参照してください。
 
 `CourseViewModel`:
 
