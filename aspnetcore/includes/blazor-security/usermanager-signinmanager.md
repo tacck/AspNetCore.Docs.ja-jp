@@ -1,18 +1,18 @@
-## <a name="usermanager-and-signinmanager"></a>ユーザーマネージャーとサインインマネージャー
+## <a name="usermanager-and-signinmanager"></a>UserManager と SignInManager
 
-サーバー アプリが必要な場合は、ユーザー識別子の要求の種類を設定します。
+サーバーアプリが必要とするユーザー id 要求の種類を設定します。
 
-* <xref:Microsoft.AspNetCore.Identity.UserManager%601>または<xref:Microsoft.AspNetCore.Identity.SignInManager%601>API エンドポイント内での場合。
-* <xref:Microsoft.AspNetCore.Identity.IdentityUser>ユーザーの名前、電子メール アドレス、ロックアウト終了時刻などの詳細を表示します。
+* <xref:Microsoft.AspNetCore.Identity.UserManager%601>API <xref:Microsoft.AspNetCore.Identity.SignInManager%601>エンドポイント内。
+* <xref:Microsoft.AspNetCore.Identity.IdentityUser>ユーザーの名前、電子メールアドレス、またはロックアウトの終了時刻などの詳細。
 
-`Startup.ConfigureServices`: 
+`Startup.ConfigureServices`の場合:
 
 ```csharp
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-メソッドが`WeatherForecastController`呼び<xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName>出されると`Get`、次のログが記録されます。
+メソッドが`WeatherForecastController`呼び出される<xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName>と、次のログがに記録されます。 `Get`
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]

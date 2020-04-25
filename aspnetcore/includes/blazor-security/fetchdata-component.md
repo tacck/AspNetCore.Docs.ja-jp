@@ -1,26 +1,25 @@
-コンポーネント`FetchData`は、次の方法を示しています。
+コンポーネント`FetchData`では、次の方法を示しています。
 
-* アクセス トークンをプロビジョニングします。
-* アクセス トークンを使用して、*サーバー*アプリで保護されたリソース API を呼び出します。
+* アクセストークンをプロビジョニングします。
+* *サーバー*アプリで保護されたリソース API を呼び出すには、アクセストークンを使用します。
 
-この`@attribute [Authorize]`ディレクティブは、Blazor WebAssembly 承認システムに対して、このコンポーネントにアクセスするためにユーザーが承認されていることを示します。 *クライアント*アプリに属性が存在しても、サーバー上の API が適切な資格情報なしで呼び出されることを防ぐわけではありません。 *また、サーバー*アプリケーションは`[Authorize]`、適切なエンドポイントで適切なエンドポイントを使用して、適切に保護する必要があります。
+ディレクティブ`@attribute [Authorize]`は、このコンポーネントにアクセスするためにユーザーを承認する必要があることを、Blazor WebAssembly 認証システムに示します。 *クライアント*アプリに属性が存在しても、適切な資格情報を使用せずにサーバー上の API が呼び出されるのを防ぐことはできません。 また、*サーバー*アプリは、 `[Authorize]`適切なエンドポイントでを使用して適切に保護する必要があります。
 
-`AuthenticationService.RequestAccessToken();`は、API を呼び出す要求に追加できるアクセス トークンの要求を行います。 トークンがキャッシュされている場合、またはサービスがユーザーの操作なしに新しいアクセス トークンをプロビジョニングできる場合、トークン要求は成功します。 それ以外の場合、トークン要求は失敗します。
+`AuthenticationService.RequestAccessToken();`は、API を呼び出すために要求に追加できるアクセストークンを要求します。 トークンがキャッシュされている場合、またはサービスがユーザーの操作なしで新しいアクセストークンをプロビジョニングできる場合、トークン要求は成功します。 それ以外の場合、トークン要求は失敗します。
 
-要求に含める実際のトークンを取得するには、アプリは要求が成功したことを確認する必要があります`tokenResult.TryGetToken(out var token)`。 
+要求に含める実際のトークンを取得するために、アプリはを呼び出し`tokenResult.TryGetToken(out var token)`て要求が成功したことを確認する必要があります。 
 
-要求が成功した場合、トークン変数にはアクセス トークンが設定されます。 トークン`Value`のプロパティは、要求ヘッダーに含めるリテラル文字列を`Authorization`公開します。
+要求が成功すると、トークン変数にアクセストークンが設定されます。 トークン`Value`のプロパティは、 `Authorization`要求ヘッダーに含めるリテラル文字列を公開します。
 
-ユーザーの操作なしでトークンをプロビジョニングできなかったために要求が失敗した場合、トークンの結果にはリダイレクト URL が含まれます。 この URL に移動すると、ユーザーはログイン ページに移動し、認証が成功した後に現在のページに戻ります。
+ユーザーの操作なしでトークンをプロビジョニングできなかったために要求が失敗した場合、トークンの結果にはリダイレクト URL が含まれます。 この URL に移動すると、認証が成功した後、ユーザーがログインページに移動し、現在のページに戻ります。
 
 ```razor
 @page "/fetchdata"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject IAccessTokenProvider AuthenticationService
-@inject NavigationManager Navigation
-@using {APPLICATION NAMESPACE}.Shared
+@using {APP NAMESPACE}.Shared
 @attribute [Authorize]
+@inject HttpClient Http
 
 ...
 
@@ -29,25 +28,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri(Navigation.BaseUri);
-
-        var tokenResult = await AuthenticationService.RequestAccessToken();
-
-        if (tokenResult.TryGetToken(out var token))
+        try
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", 
-                $"Bearer {token.Value}");
-            forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
-                "WeatherForecast");
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
         }
-        else
+        catch (AccessTokenNotAvailableException exception)
         {
-            Navigation.NavigateTo(tokenResult.RedirectUrl);
+            exception.Redirect();
         }
-
     }
 }
 ```
-
-詳細については、「[認証操作の前にアプリの状態を保存する」を](xref:security/blazor/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)参照してください。

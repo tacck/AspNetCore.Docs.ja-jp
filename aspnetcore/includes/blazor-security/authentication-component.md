@@ -1,8 +1,8 @@
-`Authentication` コンポーネント (*Pages/Authentication. razor*) によって生成されるページは、さまざまな認証ステージを処理するために必要なルートを定義します。
+`Authentication`コンポーネントによって生成されるページ (*Pages/Authentication. razor*) は、さまざまな認証ステージを処理するために必要なルートを定義します。
 
-`RemoteAuthenticatorView` コンポーネント:
+`RemoteAuthenticatorView`コンポーネント:
 
-* は、`Microsoft.AspNetCore.Components.WebAssembly.Authentication` パッケージによって提供されます。
+* は、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)パッケージによって提供されています。
 * 認証の各段階で、適切な操作の実行を管理します。
 
 ```razor
