@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/10/2020
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: e9b4b57ee70e4050f9399b90a6e34e8cc9cca78d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 18846d60fd5c29f17cb4e59192795fd92251e2d0
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218831"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976769"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core への Kestrel Web サーバーの実装
 
@@ -344,14 +344,14 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 既定値は 96 KB (98,304) です。
 
-### <a name="synchronous-io"></a>同期 IO
+### <a name="synchronous-io"></a>同期 I/O
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> を使うと、要求と応答に対して同期 IO を許可するかどうかを制御できます。 既定値は `false` です。
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> を使うと、要求と応答に対して同期 I/O を許可するかどうかを制御できます。 既定値は `false` です。
 
 > [!WARNING]
-> ブロッキング同期 IO 操作の回数が多いと、スレッド プールの不足を招き、アプリが応答しなくなる可能性があります。 非同期 IO をサポートしていないライブラリを使用する場合にのみ `AllowSynchronousIO` を有効にしてください。
+> ブロッキング同期 I/O 操作の回数が多いと、スレッド プールの不足を招き、アプリが応答しなくなる可能性があります。 非同期 I/O をサポートしていないライブラリを使用する場合にのみ `AllowSynchronousIO` を有効にしてください。
 
-同期 IO を有効にする例を次に示します。
+同期 I/O を有効にする例を次に示します。
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_SyncIO)]
 
@@ -1325,14 +1325,14 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 既定値は 96 KB (98,304) です。
 
-### <a name="synchronous-io"></a>同期 IO
+### <a name="synchronous-io"></a>同期 I/O
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> を使うと、要求と応答に対して同期 IO を許可するかどうかを制御できます。 既定値は `true` です。
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> を使うと、要求と応答に対して同期 I/O を許可するかどうかを制御できます。 既定値は `true` です。
 
 > [!WARNING]
-> ブロッキング同期 IO 操作の回数が多いと、スレッド プールの不足を招き、アプリが応答しなくなる可能性があります。 非同期 IO をサポートしていないライブラリを使用する場合にのみ `AllowSynchronousIO` を有効にしてください。
+> ブロッキング同期 I/O 操作の回数が多いと、スレッド プールの不足を招き、アプリが応答しなくなる可能性があります。 非同期 I/O をサポートしていないライブラリを使用する場合にのみ `AllowSynchronousIO` を有効にしてください。
 
-同期 IO を有効にする例を次に示します。
+同期 I/O を有効にする例を次に示します。
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_SyncIO)]
 
@@ -2182,14 +2182,14 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-### <a name="synchronous-io"></a>同期 IO
+### <a name="synchronous-io"></a>同期 I/O
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> を使うと、要求と応答に対して同期 IO を許可するかどうかを制御できます。 既定値は `true` です。
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> を使うと、要求と応答に対して同期 I/O を許可するかどうかを制御できます。 既定値は `true` です。
 
 > [!WARNING]
-> ブロッキング同期 IO 操作の回数が多いと、スレッド プールの不足を招き、アプリが応答しなくなる可能性があります。 非同期 IO をサポートしていないライブラリを使用する場合にのみ `AllowSynchronousIO` を有効にしてください。
+> ブロッキング同期 I/O 操作の回数が多いと、スレッド プールの不足を招き、アプリが応答しなくなる可能性があります。 非同期 I/O をサポートしていないライブラリを使用する場合にのみ `AllowSynchronousIO` を有効にしてください。
 
-同期 IO を無効にする例を次に示します。
+同期 I/O を無効にする例を次に示します。
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

@@ -299,14 +299,14 @@
           uid: blazor/data-binding
         - name: イベント処理
           uid: blazor/event-handling
+        - name: ライフサイクル
+          uid: blazor/lifecycle
         - name: テンプレート コンポーネント
           uid: blazor/templated-components
         - name: コンポーネントの統合
           uid: blazor/integrate-components
         - name: グローバリゼーションとローカリゼーション
           uid: blazor/globalization-localization
-        - name: ライフサイクル
-          uid: blazor/lifecycle
         - name: レイアウト
           uid: blazor/layouts
         - name: フォームと検証
