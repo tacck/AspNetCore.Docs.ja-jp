@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: 04bbf20d1d848edfa98e719f316b790c812bfd95
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501323"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206100"
 ---
-# <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
+# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)、[Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +44,7 @@ Blazor WebAssembly アプリはクライアント上で動作します。 承認
 
 Blazor は、既存の ASP.NET Core 認証メカニズムを使用してユーザーの ID を証明します。 詳細なメカニズムは、Blazor アプリのホスティング方法、Blazor WebAssembly か Blazor サーバーかによって異なります。
 
-### <a name="opno-locblazor-webassembly-authentication"></a>Blazor WebAssembly 認証
+### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly 認証
 
 Blazor WebAssembly アプリでは、すべてのクライアント側コードがユーザーによって変更される可能性があるため、認証チェックがバイパスされる可能性があります。 JavaScript SPA フレームワークや任意のオペレーティング システム用のネイティブ アプリを含め、すべてのクライアント側アプリのテクノロジにも同じことが当てはまります。
 
@@ -57,11 +57,11 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 
 アプリの作成と構成の詳細については、「<xref:security/blazor/webassembly/index>」を参照してください。
 
-### <a name="opno-locblazor-server-authentication"></a>Blazor サーバー認証
+### <a name="blazor-server-authentication"></a>Blazor サーバー認証
 
 Blazor サーバー アプリは、SignalR を使用して作成されたリアルタイム接続を介して動作します。 [SignalR ベースのアプリの認証](xref:signalr/authn-and-authz)は、接続が確立したときに処理されます。 認証は、Cookie または他のベアラー トークンに基づいています。
 
-アプリの作成と構成の詳細については、「<xref:security/blazor/server>」を参照してください。
+アプリの作成と構成の詳細については、「<xref:security/blazor/server/index>」を参照してください。
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider サービス
 
@@ -468,7 +468,7 @@ Not authorized.
 >
 > これらの名前空間は、アプリの *_Imports.razor* ファイルに追加することで、グローバルに提供できます。
 
-## <a name="authorization-in-opno-locblazor-webassembly-apps"></a>Blazor WebAssembly アプリでの承認
+## <a name="authorization-in-blazor-webassembly-apps"></a>Blazor WebAssembly アプリでの承認
 
 Blazor WebAssembly アプリでは、すべてのクライアント側コードがユーザーによって変更される可能性があるため、承認チェックがバイパスされる可能性があります。 JavaScript SPA フレームワークや任意のオペレーティング システム用のネイティブ アプリを含め、すべてのクライアント側アプリのテクノロジにも同じことが当てはまります。
 
@@ -499,6 +499,5 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/index>
-* <xref:security/blazor/server>
 * <xref:security/authentication/windowsauth>
 * [すばらしい Blazor: 認証](https://github.com/AdrienTorris/awesome-blazor#authentication) コミュニティのサンプル リンク

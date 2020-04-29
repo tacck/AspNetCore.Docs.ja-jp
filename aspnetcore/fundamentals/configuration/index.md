@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 506f01ace72d6e915c0f3ebdaae5b4a3328a79b9
-ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
+ms.openlocfilehash: 7715adc9b39edd4f8a5882b2e60a1b5513fe400b
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81007159"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205996"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -533,8 +533,6 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
 上記のコードでは、[既定の構成プロバイダー](#default)の後に `config.AddInMemoryCollection(Dict)` が追加されています。 構成プロバイダーの順序付けの例については、「[JSON 構成プロバイダー](#jcp)」を参照してください。
-
-構成プロバイダーの順序付けの例については、「[JSON 構成プロバイダー](#jcp)」を参照してください。
 
 `MemoryConfigurationProvider` を使用した別の例については、[配列をバインド](#boa)を参照してください。
 
