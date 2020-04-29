@@ -1,21 +1,21 @@
 ---
 title: 追加Blazorのセキュリティシナリオを ASP.NET Core
 author: guardrex
-description: ''
+description: 追加のセキュリティシナリオBlazorを実現するために webassembly 構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 04/27/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: cd1433d5716b9b595270209fa874a8cb93fdf699
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: 093498c3e0d42430c66c66a0998bcc44f62d1e0d
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138431"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206152"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Webasの追加のセキュリティシナリオ
 
@@ -430,7 +430,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 public class CustomAccountFactory 
     : AccountClaimsPrincipalFactory<OidcAccount>
 {
-    public AccountClaimsPrincipalFactory(NavigationManager navigationManager, 
+    public CustomAccountFactory(NavigationManager navigationManager, 
         IAccessTokenProviderAccessor accessor) : base(accessor)
     {
     }
