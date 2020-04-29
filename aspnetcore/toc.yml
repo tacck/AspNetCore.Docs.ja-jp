@@ -348,7 +348,13 @@
                 - name: その他のシナリオ
                   uid: security/blazor/webassembly/additional-scenarios
             - name: Blazor サーバー
-              uid: security/blazor/server
+              items:
+                - name: 概要
+                  uid: security/blazor/server/index
+                - name: 脅威の緩和
+                  uid: security/blazor/server/threat-mitigation
+                - name: その他のシナリオ
+                  uid: security/blazor/server/additional-scenarios
             - name: コンテンツのセキュリティ ポリシー
               uid: security/blazor/content-security-policy
         - name: 状態管理
@@ -1135,7 +1141,13 @@
             - name: その他のシナリオ
               uid: security/blazor/webassembly/additional-scenarios
         - name: Blazor サーバー
-          uid: security/blazor/server
+          items:
+            - name: 概要
+              uid: security/blazor/server/index
+            - name: 脅威の緩和
+              uid: security/blazor/server/threat-mitigation
+            - name: その他のシナリオ
+              uid: security/blazor/server/additional-scenarios
         - name: コンテンツのセキュリティ ポリシー
           uid: security/blazor/content-security-policy
 - name: パフォーマンス
