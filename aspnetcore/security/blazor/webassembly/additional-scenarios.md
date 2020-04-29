@@ -1,35 +1,35 @@
 ---
 title: 追加Blazorのセキュリティシナリオを ASP.NET Core
 author: guardrex
-description: ''
+description: 追加のセキュリティシナリオBlazorを実現するために webassembly 構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 04/27/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: cd1433d5716b9b595270209fa874a8cb93fdf699
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: 093498c3e0d42430c66c66a0998bcc44f62d1e0d
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138431"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206152"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="b5491-102">ASP.NET Core Blazor Webasの追加のセキュリティシナリオ</span><span class="sxs-lookup"><span data-stu-id="b5491-102">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="eeedd-103">ASP.NET Core Blazor Webasの追加のセキュリティシナリオ</span><span class="sxs-lookup"><span data-stu-id="eeedd-103">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
 
-<span data-ttu-id="b5491-103">作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="b5491-103">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
+<span data-ttu-id="eeedd-104">作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="eeedd-104">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="request-additional-access-tokens"></a><span data-ttu-id="b5491-104">追加のアクセストークンを要求する</span><span class="sxs-lookup"><span data-stu-id="b5491-104">Request additional access tokens</span></span>
+## <a name="request-additional-access-tokens"></a><span data-ttu-id="eeedd-105">追加のアクセストークンを要求する</span><span class="sxs-lookup"><span data-stu-id="eeedd-105">Request additional access tokens</span></span>
 
-<span data-ttu-id="b5491-105">ほとんどのアプリでは、使用する保護されたリソースと対話するためのアクセストークンのみが必要です。</span><span class="sxs-lookup"><span data-stu-id="b5491-105">Most apps only require an access token to interact with the protected resources that they use.</span></span> <span data-ttu-id="b5491-106">場合によっては、アプリで2つ以上のリソースを操作するために複数のトークンが必要になることがあります。</span><span class="sxs-lookup"><span data-stu-id="b5491-106">In some scenarios, an app might require more than one token in order to interact with two or more resources.</span></span>
+<span data-ttu-id="eeedd-106">ほとんどのアプリでは、使用する保護されたリソースと対話するためのアクセストークンのみが必要です。</span><span class="sxs-lookup"><span data-stu-id="eeedd-106">Most apps only require an access token to interact with the protected resources that they use.</span></span> <span data-ttu-id="eeedd-107">場合によっては、アプリで2つ以上のリソースを操作するために複数のトークンが必要になることがあります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-107">In some scenarios, an app might require more than one token in order to interact with two or more resources.</span></span>
 
-<span data-ttu-id="b5491-107">次の例では、アプリがユーザーデータの読み取りとメールの送信を行うために、追加の Azure Active Directory (AAD) Microsoft Graph API スコープが必要です。</span><span class="sxs-lookup"><span data-stu-id="b5491-107">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="b5491-108">Azure AAD ポータルで Microsoft Graph API のアクセス許可を追加すると、クライアントアプリ (`Program.Main`、 *Program.cs*) で追加のスコープが構成されます。</span><span class="sxs-lookup"><span data-stu-id="b5491-108">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app (`Program.Main`, *Program.cs*):</span></span>
+<span data-ttu-id="eeedd-108">次の例では、アプリがユーザーデータの読み取りとメールの送信を行うために、追加の Azure Active Directory (AAD) Microsoft Graph API スコープが必要です。</span><span class="sxs-lookup"><span data-stu-id="eeedd-108">In the following example, additional Azure Active Directory (AAD) Microsoft Graph API scopes are required by an app to read user data and send mail.</span></span> <span data-ttu-id="eeedd-109">Azure AAD ポータルで Microsoft Graph API のアクセス許可を追加すると、クライアントアプリ (`Program.Main`、 *Program.cs*) で追加のスコープが構成されます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-109">After adding the Microsoft Graph API permissions in the Azure AAD portal, the additional scopes are configured in the Client app (`Program.Main`, *Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -43,7 +43,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="b5491-109">メソッド`IAccessTokenProvider.RequestToken`は、次の例に示すように、特定のスコープセットを使用してアクセストークンをプロビジョニングすることをアプリに許可するオーバーロードを提供します。</span><span class="sxs-lookup"><span data-stu-id="b5491-109">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes, as seen in the following example:</span></span>
+<span data-ttu-id="eeedd-110">メソッド`IAccessTokenProvider.RequestToken`は、次の例に示すように、特定のスコープセットを使用してアクセストークンをプロビジョニングすることをアプリに許可するオーバーロードを提供します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-110">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes, as seen in the following example:</span></span>
 
 ```csharp
 var tokenResult = await AuthenticationService.RequestAccessToken(
@@ -59,16 +59,16 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<span data-ttu-id="b5491-110">`TryGetToken`型</span><span class="sxs-lookup"><span data-stu-id="b5491-110">`TryGetToken` returns:</span></span>
+<span data-ttu-id="eeedd-111">`TryGetToken`型</span><span class="sxs-lookup"><span data-stu-id="eeedd-111">`TryGetToken` returns:</span></span>
 
-* <span data-ttu-id="b5491-111">`true``token`を使用します。</span><span class="sxs-lookup"><span data-stu-id="b5491-111">`true` with the `token` for use.</span></span>
-* <span data-ttu-id="b5491-112">`false`トークンが取得されない場合は。</span><span class="sxs-lookup"><span data-stu-id="b5491-112">`false` if the token isn't retrieved.</span></span>
+* <span data-ttu-id="eeedd-112">`true``token`を使用します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-112">`true` with the `token` for use.</span></span>
+* <span data-ttu-id="eeedd-113">`false`トークンが取得されない場合は。</span><span class="sxs-lookup"><span data-stu-id="eeedd-113">`false` if the token isn't retrieved.</span></span>
 
-## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="b5491-113">送信要求にトークンを添付する</span><span class="sxs-lookup"><span data-stu-id="b5491-113">Attach tokens to outgoing requests</span></span>
+## <a name="attach-tokens-to-outgoing-requests"></a><span data-ttu-id="eeedd-114">送信要求にトークンを添付する</span><span class="sxs-lookup"><span data-stu-id="eeedd-114">Attach tokens to outgoing requests</span></span>
 
-<span data-ttu-id="b5491-114">サービス`AuthorizationMessageHandler`をと共に使用`HttpClient`して、アクセストークンを送信要求に接続できます。</span><span class="sxs-lookup"><span data-stu-id="b5491-114">The `AuthorizationMessageHandler` service can be used with `HttpClient` to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="b5491-115">トークンは、既存`IAccessTokenProvider`のサービスを使用して取得されます。</span><span class="sxs-lookup"><span data-stu-id="b5491-115">Tokens are acquired using the existing `IAccessTokenProvider` service.</span></span> <span data-ttu-id="b5491-116">トークンを取得できない場合`AccessTokenNotAvailableException`は、がスローされます。</span><span class="sxs-lookup"><span data-stu-id="b5491-116">If a token can't be acquired, an `AccessTokenNotAvailableException` is thrown.</span></span> <span data-ttu-id="b5491-117">`AccessTokenNotAvailableException`には`Redirect` 、ユーザーを id プロバイダーに移動して新しいトークンを取得するために使用できるメソッドが用意されています。</span><span class="sxs-lookup"><span data-stu-id="b5491-117">`AccessTokenNotAvailableException` has a `Redirect` method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="b5491-118">は`AuthorizationMessageHandler` 、 `ConfigureHandler`メソッドを使用して、承認された url、スコープ、およびリターン url を使用して構成できます。</span><span class="sxs-lookup"><span data-stu-id="b5491-118">The `AuthorizationMessageHandler` can be configured with the authorized URLs, scopes, and return URL using the `ConfigureHandler` method.</span></span>
+<span data-ttu-id="eeedd-115">サービス`AuthorizationMessageHandler`をと共に使用`HttpClient`して、アクセストークンを送信要求に接続できます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-115">The `AuthorizationMessageHandler` service can be used with `HttpClient` to attach access tokens to outgoing requests.</span></span> <span data-ttu-id="eeedd-116">トークンは、既存`IAccessTokenProvider`のサービスを使用して取得されます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-116">Tokens are acquired using the existing `IAccessTokenProvider` service.</span></span> <span data-ttu-id="eeedd-117">トークンを取得できない場合`AccessTokenNotAvailableException`は、がスローされます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-117">If a token can't be acquired, an `AccessTokenNotAvailableException` is thrown.</span></span> <span data-ttu-id="eeedd-118">`AccessTokenNotAvailableException`には`Redirect` 、ユーザーを id プロバイダーに移動して新しいトークンを取得するために使用できるメソッドが用意されています。</span><span class="sxs-lookup"><span data-stu-id="eeedd-118">`AccessTokenNotAvailableException` has a `Redirect` method that can be used to navigate the user to the identity provider to acquire a new token.</span></span> <span data-ttu-id="eeedd-119">は`AuthorizationMessageHandler` 、 `ConfigureHandler`メソッドを使用して、承認された url、スコープ、およびリターン url を使用して構成できます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-119">The `AuthorizationMessageHandler` can be configured with the authorized URLs, scopes, and return URL using the `ConfigureHandler` method.</span></span>
 
-<span data-ttu-id="b5491-119">次の例では`AuthorizationMessageHandler` 、は`HttpClient` in `Program.Main` (*Program.cs*) を構成します。</span><span class="sxs-lookup"><span data-stu-id="b5491-119">In the following example, `AuthorizationMessageHandler` configures an `HttpClient` in `Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="eeedd-120">次の例では`AuthorizationMessageHandler` 、は`HttpClient` in `Program.Main` (*Program.cs*) を構成します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-120">In the following example, `AuthorizationMessageHandler` configures an `HttpClient` in `Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddSingleton(sp =>
@@ -83,7 +83,7 @@ builder.Services.AddSingleton(sp =>
 });
 ```
 
-<span data-ttu-id="b5491-120">便宜上、アプリの`BaseAddressAuthorizationMessageHandler`ベースアドレスを承認された URL として事前に構成したが含まれています。</span><span class="sxs-lookup"><span data-stu-id="b5491-120">For convenience, a `BaseAddressAuthorizationMessageHandler` is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="b5491-121">認証が有効な Blazor WebAssembly テンプレートでは、 `BaseAddressAuthorizationMessageHandler`次のように`HttpClient` [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests)を使用してを設定するようになりました。</span><span class="sxs-lookup"><span data-stu-id="b5491-121">The authentication-enabled Blazor WebAssembly templates now use [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests) to set up an `HttpClient` with the `BaseAddressAuthorizationMessageHandler`:</span></span>
+<span data-ttu-id="eeedd-121">便宜上、アプリの`BaseAddressAuthorizationMessageHandler`ベースアドレスを承認された URL として事前に構成したが含まれています。</span><span class="sxs-lookup"><span data-stu-id="eeedd-121">For convenience, a `BaseAddressAuthorizationMessageHandler` is included that's preconfigured with the app base address as an authorized URL.</span></span> <span data-ttu-id="eeedd-122">認証が有効な Blazor WebAssembly テンプレートでは、 `BaseAddressAuthorizationMessageHandler`次のように`HttpClient` [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests)を使用してを設定するようになりました。</span><span class="sxs-lookup"><span data-stu-id="eeedd-122">The authentication-enabled Blazor WebAssembly templates now use [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests) to set up an `HttpClient` with the `BaseAddressAuthorizationMessageHandler`:</span></span>
 
 ```csharp
 builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
@@ -94,9 +94,9 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
 ```
 
-<span data-ttu-id="b5491-122">前の例`CreateClient`でクライアントが作成された場所に`HttpClient`は、サーバープロジェクトへの要求を行うときにアクセストークンを含むインスタンスが提供されます。</span><span class="sxs-lookup"><span data-stu-id="b5491-122">Where the client is created with `CreateClient` in the preceding example, the `HttpClient` is supplied instances that include access tokens when making requests to the server project.</span></span>
+<span data-ttu-id="eeedd-123">前の例`CreateClient`でクライアントが作成された場所に`HttpClient`は、サーバープロジェクトへの要求を行うときにアクセストークンを含むインスタンスが提供されます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-123">Where the client is created with `CreateClient` in the preceding example, the `HttpClient` is supplied instances that include access tokens when making requests to the server project.</span></span>
 
-<span data-ttu-id="b5491-123">構成`HttpClient`されたは、単純な`try-catch`パターンを使用して承認された要求を行うために使用されます。</span><span class="sxs-lookup"><span data-stu-id="b5491-123">The configured `HttpClient` is then used to make authorized requests using a simple `try-catch` pattern.</span></span> <span data-ttu-id="b5491-124">次`FetchData`のコンポーネントは、天気予報データを要求します。</span><span class="sxs-lookup"><span data-stu-id="b5491-124">The following `FetchData` component requests weather forecast data:</span></span>
+<span data-ttu-id="eeedd-124">構成`HttpClient`されたは、単純な`try-catch`パターンを使用して承認された要求を行うために使用されます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-124">The configured `HttpClient` is then used to make authorized requests using a simple `try-catch` pattern.</span></span> <span data-ttu-id="eeedd-125">次`FetchData`のコンポーネントは、天気予報データを要求します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-125">The following `FetchData` component requests weather forecast data:</span></span>
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -113,9 +113,9 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-<span data-ttu-id="b5491-125">または、1つのクラス内のすべての HTTP およびトークンの取得に関する問題を処理する、型指定されたクライアントを定義することもできます。</span><span class="sxs-lookup"><span data-stu-id="b5491-125">Alternatively, you can define a typed client that handles all of the HTTP and token acquisition concerns within a single class:</span></span>
+<span data-ttu-id="eeedd-126">または、1つのクラス内のすべての HTTP およびトークンの取得に関する問題を処理する、型指定されたクライアントを定義することもできます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-126">Alternatively, you can define a typed client that handles all of the HTTP and token acquisition concerns within a single class:</span></span>
 
-<span data-ttu-id="b5491-126">*WeatherClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="b5491-126">*WeatherClient.cs*:</span></span>
+<span data-ttu-id="eeedd-127">*WeatherClient.cs*:</span><span class="sxs-lookup"><span data-stu-id="eeedd-127">*WeatherClient.cs*:</span></span>
 
 ```csharp
 public class WeatherClient
@@ -146,7 +146,7 @@ public class WeatherClient
 }
 ```
 
-<span data-ttu-id="b5491-127">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="b5491-127">*Program.cs*:</span></span>
+<span data-ttu-id="eeedd-128">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="eeedd-128">*Program.cs*:</span></span>
 
 ```csharp
 builder.Services.AddHttpClient<WeatherClient>(
@@ -154,7 +154,7 @@ builder.Services.AddHttpClient<WeatherClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="b5491-128">*Fetchdata。 razor*:</span><span class="sxs-lookup"><span data-stu-id="b5491-128">*FetchData.razor*:</span></span>
+<span data-ttu-id="eeedd-129">*Fetchdata。 razor*:</span><span class="sxs-lookup"><span data-stu-id="eeedd-129">*FetchData.razor*:</span></span>
 
 ```razor
 @inject WeatherClient WeatherClient
@@ -167,36 +167,36 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="handle-token-request-errors"></a><span data-ttu-id="b5491-129">トークン要求エラーを処理する</span><span class="sxs-lookup"><span data-stu-id="b5491-129">Handle token request errors</span></span>
+## <a name="handle-token-request-errors"></a><span data-ttu-id="eeedd-130">トークン要求エラーを処理する</span><span class="sxs-lookup"><span data-stu-id="eeedd-130">Handle token request errors</span></span>
 
-<span data-ttu-id="b5491-130">シングルページアプリケーション (SPA) が Open ID Connect (OIDC) を使用してユーザーを認証すると、認証状態は SPA 内および Id プロバイダー (IP) 内でローカルに保持され、ユーザーが資格情報を入力したときに設定されるセッション cookie の形式になります。</span><span class="sxs-lookup"><span data-stu-id="b5491-130">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
+<span data-ttu-id="eeedd-131">シングルページアプリケーション (SPA) が Open ID Connect (OIDC) を使用してユーザーを認証すると、認証状態は SPA 内および Id プロバイダー (IP) 内でローカルに保持され、ユーザーが資格情報を入力したときに設定されるセッション cookie の形式になります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-131">When a Single Page Application (SPA) authenticates a user using Open ID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
 
-<span data-ttu-id="b5491-131">通常、ユーザーに対して IP が生成するトークンは短時間、通常は1時間にわたって有効であるため、クライアントアプリは定期的に新しいトークンを取得する必要があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-131">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="b5491-132">そうしないと、許可されたトークンの有効期限が切れると、ユーザーはログアウトされます。</span><span class="sxs-lookup"><span data-stu-id="b5491-132">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="b5491-133">ほとんどの場合、OIDC クライアントは、認証状態または IP 内に保持される "セッション" によってユーザーの認証を再度要求することなく、新しいトークンをプロビジョニングできます。</span><span class="sxs-lookup"><span data-stu-id="b5491-133">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
+<span data-ttu-id="eeedd-132">通常、ユーザーに対して IP が生成するトークンは短時間、通常は1時間にわたって有効であるため、クライアントアプリは定期的に新しいトークンを取得する必要があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-132">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="eeedd-133">そうしないと、許可されたトークンの有効期限が切れると、ユーザーはログアウトされます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-133">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="eeedd-134">ほとんどの場合、OIDC クライアントは、認証状態または IP 内に保持される "セッション" によってユーザーの認証を再度要求することなく、新しいトークンをプロビジョニングできます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-134">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
 
-<span data-ttu-id="b5491-134">場合によっては、ユーザーの介入なしにクライアントがトークンを取得できないことがあります。たとえば、何らかの理由でユーザーが明示的に IP からログアウトした場合などです。</span><span class="sxs-lookup"><span data-stu-id="b5491-134">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="b5491-135">このシナリオは、ユーザーがアクセス`https://login.microsoftonline.com`してログアウトした場合に発生します。これらのシナリオでは、アプリはユーザーがログアウトしたことをすぐに認識できません。クライアントが保持するトークンは、有効でなくなった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-135">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="b5491-136">また、クライアントは、現在のトークンの有効期限が切れた後に、ユーザーの介入なしに新しいトークンをプロビジョニングすることはできません。</span><span class="sxs-lookup"><span data-stu-id="b5491-136">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
+<span data-ttu-id="eeedd-135">場合によっては、ユーザーの介入なしにクライアントがトークンを取得できないことがあります。たとえば、何らかの理由でユーザーが明示的に IP からログアウトした場合などです。</span><span class="sxs-lookup"><span data-stu-id="eeedd-135">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="eeedd-136">このシナリオは、ユーザーがアクセス`https://login.microsoftonline.com`してログアウトした場合に発生します。これらのシナリオでは、アプリはユーザーがログアウトしたことをすぐに認識できません。クライアントが保持するトークンは、有効でなくなった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-136">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="eeedd-137">また、クライアントは、現在のトークンの有効期限が切れた後に、ユーザーの介入なしに新しいトークンをプロビジョニングすることはできません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-137">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
 
-<span data-ttu-id="b5491-137">これらのシナリオは、トークンベースの認証に固有のものではありません。</span><span class="sxs-lookup"><span data-stu-id="b5491-137">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="b5491-138">これらは、SPAs の性質の一部です。</span><span class="sxs-lookup"><span data-stu-id="b5491-138">They are part of the nature of SPAs.</span></span> <span data-ttu-id="b5491-139">認証クッキーが削除されると、cookie を使用する SPA もサーバー API を呼び出すことができません。</span><span class="sxs-lookup"><span data-stu-id="b5491-139">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
+<span data-ttu-id="eeedd-138">これらのシナリオは、トークンベースの認証に固有のものではありません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-138">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="eeedd-139">これらは、SPAs の性質の一部です。</span><span class="sxs-lookup"><span data-stu-id="eeedd-139">They are part of the nature of SPAs.</span></span> <span data-ttu-id="eeedd-140">認証クッキーが削除されると、cookie を使用する SPA もサーバー API を呼び出すことができません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-140">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
 
-<span data-ttu-id="b5491-140">アプリが保護されたリソースに対する API 呼び出しを実行するときは、次の点に注意する必要があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-140">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
+<span data-ttu-id="eeedd-141">アプリが保護されたリソースに対する API 呼び出しを実行するときは、次の点に注意する必要があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-141">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
 
-* <span data-ttu-id="b5491-141">API を呼び出すための新しいアクセストークンをプロビジョニングするには、ユーザーが再度認証される必要があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-141">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
-* <span data-ttu-id="b5491-142">クライアントに有効なトークンがある場合でも、トークンがユーザーによって取り消されたために、サーバーへの呼び出しが失敗する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-142">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
+* <span data-ttu-id="eeedd-142">API を呼び出すための新しいアクセストークンをプロビジョニングするには、ユーザーが再度認証される必要があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-142">To provision a new access token to call the API, the user might be required to authenticate again.</span></span>
+* <span data-ttu-id="eeedd-143">クライアントに有効なトークンがある場合でも、トークンがユーザーによって取り消されたために、サーバーへの呼び出しが失敗する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-143">Even if the client has a token that seems to be valid, the call to the server might fail because the token was revoked by the user.</span></span>
 
-<span data-ttu-id="b5491-143">アプリがトークンを要求すると、次の2つの結果が得られます。</span><span class="sxs-lookup"><span data-stu-id="b5491-143">When the app requests a token, there are two possible outcomes:</span></span>
+<span data-ttu-id="eeedd-144">アプリがトークンを要求すると、次の2つの結果が得られます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-144">When the app requests a token, there are two possible outcomes:</span></span>
 
-* <span data-ttu-id="b5491-144">要求が成功し、アプリに有効なトークンがあります。</span><span class="sxs-lookup"><span data-stu-id="b5491-144">The request succeeds, and the app has a valid token.</span></span>
-* <span data-ttu-id="b5491-145">要求は失敗します。アプリは、新しいトークンを取得するために、ユーザーを再度認証する必要があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-145">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
+* <span data-ttu-id="eeedd-145">要求が成功し、アプリに有効なトークンがあります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-145">The request succeeds, and the app has a valid token.</span></span>
+* <span data-ttu-id="eeedd-146">要求は失敗します。アプリは、新しいトークンを取得するために、ユーザーを再度認証する必要があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-146">The request fails, and the app must authenticate the user again to obtain a new token.</span></span>
 
-<span data-ttu-id="b5491-146">トークン要求が失敗した場合は、リダイレクトを実行する前に、現在の状態を保存するかどうかを決定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-146">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="b5491-147">次のようないくつかの方法があり、複雑さが増します。</span><span class="sxs-lookup"><span data-stu-id="b5491-147">Several approaches exist with increasing levels of complexity:</span></span>
+<span data-ttu-id="eeedd-147">トークン要求が失敗した場合は、リダイレクトを実行する前に、現在の状態を保存するかどうかを決定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-147">When a token request fails, you need to decide whether you want to save any current state before you perform a redirection.</span></span> <span data-ttu-id="eeedd-148">次のようないくつかの方法があり、複雑さが増します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-148">Several approaches exist with increasing levels of complexity:</span></span>
 
-* <span data-ttu-id="b5491-148">現在のページの状態をセッションストレージに格納します。</span><span class="sxs-lookup"><span data-stu-id="b5491-148">Store the current page state in session storage.</span></span> <span data-ttu-id="b5491-149">の`OnInitializeAsync`間、続行する前に状態を復元できるかどうかを確認します。</span><span class="sxs-lookup"><span data-stu-id="b5491-149">During `OnInitializeAsync`, check if state can be restored before continuing.</span></span>
-* <span data-ttu-id="b5491-150">クエリ文字列パラメーターを追加し、それを使用して、以前に保存した状態を再ハイドレートする必要があることをアプリに通知する方法として使用します。</span><span class="sxs-lookup"><span data-stu-id="b5491-150">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
-* <span data-ttu-id="b5491-151">セッションストレージにデータを格納するための一意の識別子を持つクエリ文字列パラメーターを追加します。他の項目と競合するリスクはありません。</span><span class="sxs-lookup"><span data-stu-id="b5491-151">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
+* <span data-ttu-id="eeedd-149">現在のページの状態をセッションストレージに格納します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-149">Store the current page state in session storage.</span></span> <span data-ttu-id="eeedd-150">の`OnInitializeAsync`間、続行する前に状態を復元できるかどうかを確認します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-150">During `OnInitializeAsync`, check if state can be restored before continuing.</span></span>
+* <span data-ttu-id="eeedd-151">クエリ文字列パラメーターを追加し、それを使用して、以前に保存した状態を再ハイドレートする必要があることをアプリに通知する方法として使用します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-151">Add a query string parameter and use that as a way to signal the app that it needs to re-hydrate the previously saved state.</span></span>
+* <span data-ttu-id="eeedd-152">セッションストレージにデータを格納するための一意の識別子を持つクエリ文字列パラメーターを追加します。他の項目と競合するリスクはありません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-152">Add a query string parameter with a unique identifier to store data in session storage without risking collisions with other items.</span></span>
 
-<span data-ttu-id="b5491-152">以下の例では、次のことを行っています。</span><span class="sxs-lookup"><span data-stu-id="b5491-152">The following example shows how to:</span></span>
+<span data-ttu-id="eeedd-153">以下の例では、次のことを行っています。</span><span class="sxs-lookup"><span data-stu-id="eeedd-153">The following example shows how to:</span></span>
 
-* <span data-ttu-id="b5491-153">ログインページにリダイレクトする前に状態を保持します。</span><span class="sxs-lookup"><span data-stu-id="b5491-153">Preserve state before redirecting to the login page.</span></span>
-* <span data-ttu-id="b5491-154">クエリ文字列パラメーターを使用して、認証後に以前の状態を回復します。</span><span class="sxs-lookup"><span data-stu-id="b5491-154">Recover the previous state afterward authentication using the query string parameter.</span></span>
+* <span data-ttu-id="eeedd-154">ログインページにリダイレクトする前に状態を保持します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-154">Preserve state before redirecting to the login page.</span></span>
+* <span data-ttu-id="eeedd-155">クエリ文字列パラメーターを使用して、認証後に以前の状態を回復します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-155">Recover the previous state afterward authentication using the query string parameter.</span></span>
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -257,11 +257,11 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="b5491-155">認証操作の前にアプリの状態を保存する</span><span class="sxs-lookup"><span data-stu-id="b5491-155">Save app state before an authentication operation</span></span>
+## <a name="save-app-state-before-an-authentication-operation"></a><span data-ttu-id="eeedd-156">認証操作の前にアプリの状態を保存する</span><span class="sxs-lookup"><span data-stu-id="eeedd-156">Save app state before an authentication operation</span></span>
 
-<span data-ttu-id="b5491-156">認証操作中に、ブラウザーが IP にリダイレクトされる前に、アプリの状態を保存することが必要になる場合があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-156">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="b5491-157">これは、状態コンテナーのようなものを使用していて、認証が成功した後に状態を復元する場合に発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-157">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="b5491-158">カスタム認証状態オブジェクトを使用して、アプリ固有の状態またはその参照を保持し、認証操作が正常に完了したらその状態を復元することができます。</span><span class="sxs-lookup"><span data-stu-id="b5491-158">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
+<span data-ttu-id="eeedd-157">認証操作中に、ブラウザーが IP にリダイレクトされる前に、アプリの状態を保存することが必要になる場合があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-157">During an authentication operation, there are cases where you want to save the app state before the browser is redirected to the IP.</span></span> <span data-ttu-id="eeedd-158">これは、状態コンテナーのようなものを使用していて、認証が成功した後に状態を復元する場合に発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-158">This can be the case when you are using something like a state container and you want to restore the state after the authentication succeeds.</span></span> <span data-ttu-id="eeedd-159">カスタム認証状態オブジェクトを使用して、アプリ固有の状態またはその参照を保持し、認証操作が正常に完了したらその状態を復元することができます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-159">You can use a custom authentication state object to preserve app-specific state or a reference to it and restore that state once the authentication operation successfully completes.</span></span>
 
-<span data-ttu-id="b5491-159">`Authentication`コンポーネント (*Pages/Authentication. razor*):</span><span class="sxs-lookup"><span data-stu-id="b5491-159">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="eeedd-160">`Authentication`コンポーネント (*Pages/Authentication. razor*):</span><span class="sxs-lookup"><span data-stu-id="eeedd-160">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/authentication/{action}"
@@ -305,27 +305,27 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="customize-app-routes"></a><span data-ttu-id="b5491-160">アプリルートをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b5491-160">Customize app routes</span></span>
+## <a name="customize-app-routes"></a><span data-ttu-id="eeedd-161">アプリルートをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="eeedd-161">Customize app routes</span></span>
 
-<span data-ttu-id="b5491-161">既定では、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication`ライブラリは、さまざまな認証状態を表すために、次の表に示すルートを使用します。</span><span class="sxs-lookup"><span data-stu-id="b5491-161">By default, the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` library uses the routes shown in the following table for representing different authentication states.</span></span>
+<span data-ttu-id="eeedd-162">既定では、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication`ライブラリは、さまざまな認証状態を表すために、次の表に示すルートを使用します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-162">By default, the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` library uses the routes shown in the following table for representing different authentication states.</span></span>
 
-| <span data-ttu-id="b5491-162">ルート</span><span class="sxs-lookup"><span data-stu-id="b5491-162">Route</span></span>                            | <span data-ttu-id="b5491-163">目的</span><span class="sxs-lookup"><span data-stu-id="b5491-163">Purpose</span></span> |
+| <span data-ttu-id="eeedd-163">ルート</span><span class="sxs-lookup"><span data-stu-id="eeedd-163">Route</span></span>                            | <span data-ttu-id="eeedd-164">目的</span><span class="sxs-lookup"><span data-stu-id="eeedd-164">Purpose</span></span> |
 | -------------------------------- | ------- |
-| `authentication/login`           | <span data-ttu-id="b5491-164">サインイン操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="b5491-164">Triggers a sign-in operation.</span></span> |
-| `authentication/login-callback`  | <span data-ttu-id="b5491-165">サインイン操作の結果を処理します。</span><span class="sxs-lookup"><span data-stu-id="b5491-165">Handles the result of any sign-in operation.</span></span> |
-| `authentication/login-failed`    | <span data-ttu-id="b5491-166">何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。</span><span class="sxs-lookup"><span data-stu-id="b5491-166">Displays error messages when the sign-in operation fails for some reason.</span></span> |
-| `authentication/logout`          | <span data-ttu-id="b5491-167">サインアウト操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="b5491-167">Triggers a sign-out operation.</span></span> |
-| `authentication/logout-callback` | <span data-ttu-id="b5491-168">サインアウト操作の結果を処理します。</span><span class="sxs-lookup"><span data-stu-id="b5491-168">Handles the result of a sign-out operation.</span></span> |
-| `authentication/logout-failed`   | <span data-ttu-id="b5491-169">何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。</span><span class="sxs-lookup"><span data-stu-id="b5491-169">Displays error messages when the sign-out operation fails for some reason.</span></span> |
-| `authentication/logged-out`      | <span data-ttu-id="b5491-170">ユーザーが正常にログアウトしたことを示します。</span><span class="sxs-lookup"><span data-stu-id="b5491-170">Indicates that the user has successfully logout.</span></span> |
-| `authentication/profile`         | <span data-ttu-id="b5491-171">ユーザープロファイルを編集する操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="b5491-171">Triggers an operation to edit the user profile.</span></span> |
-| `authentication/register`        | <span data-ttu-id="b5491-172">新しいユーザーを登録する操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="b5491-172">Triggers an operation to register a new user.</span></span> |
+| `authentication/login`           | <span data-ttu-id="eeedd-165">サインイン操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="eeedd-165">Triggers a sign-in operation.</span></span> |
+| `authentication/login-callback`  | <span data-ttu-id="eeedd-166">サインイン操作の結果を処理します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-166">Handles the result of any sign-in operation.</span></span> |
+| `authentication/login-failed`    | <span data-ttu-id="eeedd-167">何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-167">Displays error messages when the sign-in operation fails for some reason.</span></span> |
+| `authentication/logout`          | <span data-ttu-id="eeedd-168">サインアウト操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="eeedd-168">Triggers a sign-out operation.</span></span> |
+| `authentication/logout-callback` | <span data-ttu-id="eeedd-169">サインアウト操作の結果を処理します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-169">Handles the result of a sign-out operation.</span></span> |
+| `authentication/logout-failed`   | <span data-ttu-id="eeedd-170">何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-170">Displays error messages when the sign-out operation fails for some reason.</span></span> |
+| `authentication/logged-out`      | <span data-ttu-id="eeedd-171">ユーザーが正常にログアウトしたことを示します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-171">Indicates that the user has successfully logout.</span></span> |
+| `authentication/profile`         | <span data-ttu-id="eeedd-172">ユーザープロファイルを編集する操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="eeedd-172">Triggers an operation to edit the user profile.</span></span> |
+| `authentication/register`        | <span data-ttu-id="eeedd-173">新しいユーザーを登録する操作をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="eeedd-173">Triggers an operation to register a new user.</span></span> |
 
-<span data-ttu-id="b5491-173">上の表に示されているルートは`RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`、を使用して構成できます。</span><span class="sxs-lookup"><span data-stu-id="b5491-173">The routes shown in the preceding table are configurable via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span></span> <span data-ttu-id="b5491-174">カスタムルートを提供するオプションを設定する場合は、アプリに各パスを処理するルートがあることを確認します。</span><span class="sxs-lookup"><span data-stu-id="b5491-174">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
+<span data-ttu-id="eeedd-174">上の表に示されているルートは`RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`、を使用して構成できます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-174">The routes shown in the preceding table are configurable via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`.</span></span> <span data-ttu-id="eeedd-175">カスタムルートを提供するオプションを設定する場合は、アプリに各パスを処理するルートがあることを確認します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-175">When setting options to provide custom routes, confirm that the app has a route that handles each path.</span></span>
 
-<span data-ttu-id="b5491-175">次の例では、すべてのパスの先頭`/security`にが付きます。</span><span class="sxs-lookup"><span data-stu-id="b5491-175">In the following example, all the paths are prefixed with `/security`.</span></span>
+<span data-ttu-id="eeedd-176">次の例では、すべてのパスの先頭`/security`にが付きます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-176">In the following example, all the paths are prefixed with `/security`.</span></span>
 
-<span data-ttu-id="b5491-176">`Authentication`コンポーネント (*Pages/Authentication. razor*):</span><span class="sxs-lookup"><span data-stu-id="b5491-176">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="eeedd-177">`Authentication`コンポーネント (*Pages/Authentication. razor*):</span><span class="sxs-lookup"><span data-stu-id="eeedd-177">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -339,7 +339,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-<span data-ttu-id="b5491-177">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="b5491-177">`Program.Main` (*Program.cs*):</span></span>
+<span data-ttu-id="eeedd-178">`Program.Main`(*Program.cs*):</span><span class="sxs-lookup"><span data-stu-id="eeedd-178">`Program.Main` (*Program.cs*):</span></span>
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -355,7 +355,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-<span data-ttu-id="b5491-178">完全に異なるパスを必要とする場合は、前述のようにルートを設定`RemoteAuthenticatorView`し、明示的なアクションパラメーターを使用してを表示します。</span><span class="sxs-lookup"><span data-stu-id="b5491-178">If the requirement calls for completely different paths, set the routes as described previously and render the `RemoteAuthenticatorView` with an explicit action parameter:</span></span>
+<span data-ttu-id="eeedd-179">完全に異なるパスを必要とする場合は、前述のようにルートを設定`RemoteAuthenticatorView`し、明示的なアクションパラメーターを使用してを表示します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-179">If the requirement calls for completely different paths, set the routes as described previously and render the `RemoteAuthenticatorView` with an explicit action parameter:</span></span>
 
 ```razor
 @page "/register"
@@ -363,13 +363,13 @@ builder.Services.AddApiAuthorization(options => {
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-<span data-ttu-id="b5491-179">UI を別のページに分割することもできます。</span><span class="sxs-lookup"><span data-stu-id="b5491-179">You're allowed to break the UI into different pages if you choose to do so.</span></span>
+<span data-ttu-id="eeedd-180">UI を別のページに分割することもできます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-180">You're allowed to break the UI into different pages if you choose to do so.</span></span>
 
-## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="b5491-180">認証ユーザーインターフェイスをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b5491-180">Customize the authentication user interface</span></span>
+## <a name="customize-the-authentication-user-interface"></a><span data-ttu-id="eeedd-181">認証ユーザーインターフェイスをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="eeedd-181">Customize the authentication user interface</span></span>
 
-<span data-ttu-id="b5491-181">`RemoteAuthenticatorView`には、各認証状態の UI 部分の既定のセットが含まれています。</span><span class="sxs-lookup"><span data-stu-id="b5491-181">`RemoteAuthenticatorView` includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="b5491-182">各状態は、カスタム`RenderFragment`を渡すことによってカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="b5491-182">Each state can be customized by passing in a custom `RenderFragment`.</span></span> <span data-ttu-id="b5491-183">初期ログインプロセス中に表示されるテキストをカスタマイズするには`RemoteAuthenticatorView` 、次のようにを変更します。</span><span class="sxs-lookup"><span data-stu-id="b5491-183">To customize the displayed text during the initial login process, can change the `RemoteAuthenticatorView` as follows.</span></span>
+<span data-ttu-id="eeedd-182">`RemoteAuthenticatorView`には、各認証状態の UI 部分の既定のセットが含まれています。</span><span class="sxs-lookup"><span data-stu-id="eeedd-182">`RemoteAuthenticatorView` includes a default set of UI pieces for each authentication state.</span></span> <span data-ttu-id="eeedd-183">各状態は、カスタム`RenderFragment`を渡すことによってカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-183">Each state can be customized by passing in a custom `RenderFragment`.</span></span> <span data-ttu-id="eeedd-184">初期ログインプロセス中に表示されるテキストをカスタマイズするには`RemoteAuthenticatorView` 、次のようにを変更します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-184">To customize the displayed text during the initial login process, can change the `RemoteAuthenticatorView` as follows.</span></span>
 
-<span data-ttu-id="b5491-184">`Authentication`コンポーネント (*Pages/Authentication. razor*):</span><span class="sxs-lookup"><span data-stu-id="b5491-184">`Authentication` component (*Pages/Authentication.razor*):</span></span>
+<span data-ttu-id="eeedd-185">`Authentication`コンポーネント (*Pages/Authentication. razor*):</span><span class="sxs-lookup"><span data-stu-id="eeedd-185">`Authentication` component (*Pages/Authentication.razor*):</span></span>
 
 ```razor
 @page "/security/{action}"
@@ -387,9 +387,9 @@ builder.Services.AddApiAuthorization(options => {
 }
 ```
 
-<span data-ttu-id="b5491-185">に`RemoteAuthenticatorView`は、次の表に示す認証ルートごとに使用できる1つのフラグメントがあります。</span><span class="sxs-lookup"><span data-stu-id="b5491-185">The `RemoteAuthenticatorView` has one fragment that can be used per authentication route shown in the following table.</span></span>
+<span data-ttu-id="eeedd-186">に`RemoteAuthenticatorView`は、次の表に示す認証ルートごとに使用できる1つのフラグメントがあります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-186">The `RemoteAuthenticatorView` has one fragment that can be used per authentication route shown in the following table.</span></span>
 
-| <span data-ttu-id="b5491-186">ルート</span><span class="sxs-lookup"><span data-stu-id="b5491-186">Route</span></span>                            | <span data-ttu-id="b5491-187">フラグメント</span><span class="sxs-lookup"><span data-stu-id="b5491-187">Fragment</span></span>                |
+| <span data-ttu-id="eeedd-187">ルート</span><span class="sxs-lookup"><span data-stu-id="eeedd-187">Route</span></span>                            | <span data-ttu-id="eeedd-188">フラグメント</span><span class="sxs-lookup"><span data-stu-id="eeedd-188">Fragment</span></span>                |
 | -------------------------------- | ----------------------- |
 | `authentication/login`           | `<LoggingIn>`           |
 | `authentication/login-callback`  | `<CompletingLoggingIn>` |
@@ -401,11 +401,11 @@ builder.Services.AddApiAuthorization(options => {
 | `authentication/profile`         | `<UserProfile>`         |
 | `authentication/register`        | `<Registering>`         |
 
-## <a name="customize-the-user"></a><span data-ttu-id="b5491-188">ユーザーをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b5491-188">Customize the user</span></span>
+## <a name="customize-the-user"></a><span data-ttu-id="eeedd-189">ユーザーをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="eeedd-189">Customize the user</span></span>
 
-<span data-ttu-id="b5491-189">アプリにバインドされているユーザーをカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="b5491-189">Users bound to the app can be customized.</span></span> <span data-ttu-id="b5491-190">次の例では、すべての認証さ`amr`れたユーザーが、ユーザーの認証方法ごとに要求を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="b5491-190">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
+<span data-ttu-id="eeedd-190">アプリにバインドされているユーザーをカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-190">Users bound to the app can be customized.</span></span> <span data-ttu-id="eeedd-191">次の例では、すべての認証さ`amr`れたユーザーが、ユーザーの認証方法ごとに要求を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-191">In the following example, all authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span>
 
-<span data-ttu-id="b5491-191">`RemoteUserAccount`クラスを拡張するクラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="b5491-191">Create a class that extends the `RemoteUserAccount` class:</span></span>
+<span data-ttu-id="eeedd-192">`RemoteUserAccount`クラスを拡張するクラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-192">Create a class that extends the `RemoteUserAccount` class:</span></span>
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -418,7 +418,7 @@ public class OidcAccount : RemoteUserAccount
 }
 ```
 
-<span data-ttu-id="b5491-192">以下を拡張`AccountClaimsPrincipalFactory<TAccount>`するファクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="b5491-192">Create a factory that extends `AccountClaimsPrincipalFactory<TAccount>`:</span></span>
+<span data-ttu-id="eeedd-193">以下を拡張`AccountClaimsPrincipalFactory<TAccount>`するファクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-193">Create a factory that extends `AccountClaimsPrincipalFactory<TAccount>`:</span></span>
 
 ```csharp
 using System.Security.Claims;
@@ -430,7 +430,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
 public class CustomAccountFactory 
     : AccountClaimsPrincipalFactory<OidcAccount>
 {
-    public AccountClaimsPrincipalFactory(NavigationManager navigationManager, 
+    public CustomAccountFactory(NavigationManager navigationManager, 
         IAccessTokenProviderAccessor accessor) : base(accessor)
     {
     }
@@ -454,7 +454,7 @@ public class CustomAccountFactory
 }
 ```
 
-<span data-ttu-id="b5491-193">を使用するように`CustomAccountFactory`サービスを登録します。</span><span class="sxs-lookup"><span data-stu-id="b5491-193">Register services to use the `CustomAccountFactory`:</span></span>
+<span data-ttu-id="eeedd-194">を使用するように`CustomAccountFactory`サービスを登録します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-194">Register services to use the `CustomAccountFactory`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -466,14 +466,14 @@ builder.Services.AddApiAuthorization<RemoteAuthenticationState, OidcAccount>()
         CustomAccountFactory>();
 ```
 
-## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="b5491-194">認証を使用したプリレンダリングのサポート</span><span class="sxs-lookup"><span data-stu-id="b5491-194">Support prerendering with authentication</span></span>
+## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="eeedd-195">認証を使用したプリレンダリングのサポート</span><span class="sxs-lookup"><span data-stu-id="eeedd-195">Support prerendering with authentication</span></span>
 
-<span data-ttu-id="b5491-195">ホストされている Blazor WebAssembly アプリのトピックのいずれかのガイダンスを実行した後は、この後の手順に従って次のようなアプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="b5491-195">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
+<span data-ttu-id="eeedd-196">ホストされている Blazor WebAssembly アプリのトピックのいずれかのガイダンスを実行した後は、この後の手順に従って次のようなアプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-196">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
 
-* <span data-ttu-id="b5491-196">承認が不要なパスをプリレンダリングする。</span><span class="sxs-lookup"><span data-stu-id="b5491-196">Prerenders paths for which authorization isn't required.</span></span>
-* <span data-ttu-id="b5491-197">承認が必要なパスをプリレンダリングしない。</span><span class="sxs-lookup"><span data-stu-id="b5491-197">Doesn't prerender paths for which authorization is required.</span></span>
+* <span data-ttu-id="eeedd-197">承認が不要なパスをプリレンダリングする。</span><span class="sxs-lookup"><span data-stu-id="eeedd-197">Prerenders paths for which authorization isn't required.</span></span>
+* <span data-ttu-id="eeedd-198">承認が必要なパスをプリレンダリングしない。</span><span class="sxs-lookup"><span data-stu-id="eeedd-198">Doesn't prerender paths for which authorization is required.</span></span>
 
-<span data-ttu-id="b5491-198">クライアント アプリの `Program` クラス (*Program.cs*) で、共通のサービスの登録を別のメソッド (たとえば、`ConfigureCommonServices`) に組み入れます。</span><span class="sxs-lookup"><span data-stu-id="b5491-198">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
+<span data-ttu-id="eeedd-199">クライアント アプリの `Program` クラス (*Program.cs*) で、共通のサービスの登録を別のメソッド (たとえば、`ConfigureCommonServices`) に組み入れます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-199">In the Client app's `Program` class (*Program.cs*), factor common service registrations into a separate method (for example, `ConfigureCommonServices`):</span></span>
 
 ```csharp
 public class Program
@@ -502,7 +502,7 @@ public class Program
 }
 ```
 
-<span data-ttu-id="b5491-199">サーバー アプリの `Startup.ConfigureServices` で、次の追加サービスを登録します。</span><span class="sxs-lookup"><span data-stu-id="b5491-199">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
+<span data-ttu-id="eeedd-200">サーバー アプリの `Startup.ConfigureServices` で、次の追加サービスを登録します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-200">In the Server app's `Startup.ConfigureServices`, register the following additional services:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -522,7 +522,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="b5491-200">サーバー アプリの `Startup.Configure` メソッドで、`endpoints.MapFallbackToFile("index.html")` を `endpoints.MapFallbackToPage("/_Host")` に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="b5491-200">In the Server app's `Startup.Configure` method, replace `endpoints.MapFallbackToFile("index.html")` with `endpoints.MapFallbackToPage("/_Host")`:</span></span>
+<span data-ttu-id="eeedd-201">サーバー アプリの `Startup.Configure` メソッドで、`endpoints.MapFallbackToFile("index.html")` を `endpoints.MapFallbackToPage("/_Host")` に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-201">In the Server app's `Startup.Configure` method, replace `endpoints.MapFallbackToFile("index.html")` with `endpoints.MapFallbackToPage("/_Host")`:</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -532,10 +532,10 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<span data-ttu-id="b5491-201">サーバー アプリで、*Pages* フォルダーが存在しない場合は作成します。</span><span class="sxs-lookup"><span data-stu-id="b5491-201">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="b5491-202">サーバー アプリの *Pages* フォルダー内に *_Host.cshtml* ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="b5491-202">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="b5491-203">クライアント アプリの *wwwroot/index.html* ファイルの内容を *Pages/_Host.cshtml* ファイル内に貼り付けます。</span><span class="sxs-lookup"><span data-stu-id="b5491-203">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="b5491-204">ファイルの内容を更新します。</span><span class="sxs-lookup"><span data-stu-id="b5491-204">Update the file's contents:</span></span>
+<span data-ttu-id="eeedd-202">サーバー アプリで、*Pages* フォルダーが存在しない場合は作成します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-202">In the Server app, create a *Pages* folder if it doesn't exist.</span></span> <span data-ttu-id="eeedd-203">サーバー アプリの *Pages* フォルダー内に *_Host.cshtml* ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-203">Create a *_Host.cshtml* page inside the Server app's *Pages* folder.</span></span> <span data-ttu-id="eeedd-204">クライアント アプリの *wwwroot/index.html* ファイルの内容を *Pages/_Host.cshtml* ファイル内に貼り付けます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-204">Paste the contents from the Client app's *wwwroot/index.html* file into the *Pages/_Host.cshtml* file.</span></span> <span data-ttu-id="eeedd-205">ファイルの内容を更新します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-205">Update the file's contents:</span></span>
 
-* <span data-ttu-id="b5491-205">ファイルの先頭に、`@page "_Host"` を追加します。</span><span class="sxs-lookup"><span data-stu-id="b5491-205">Add `@page "_Host"` to the top of the file.</span></span>
-* <span data-ttu-id="b5491-206">`<app>Loading...</app>` タグを次のように置き換えます。</span><span class="sxs-lookup"><span data-stu-id="b5491-206">Replace the `<app>Loading...</app>` tag with the following:</span></span>
+* <span data-ttu-id="eeedd-206">ファイルの先頭に、`@page "_Host"` を追加します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-206">Add `@page "_Host"` to the top of the file.</span></span>
+* <span data-ttu-id="eeedd-207">`<app>Loading...</app>` タグを次のように置き換えます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-207">Replace the `<app>Loading...</app>` tag with the following:</span></span>
 
   ```cshtml
   <app>
@@ -551,46 +551,46 @@ app.UseEndpoints(endpoints =>
   </app>
   ```
   
-## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="b5491-207">ホストされているアプリおよびサードパーティ ログイン プロバイダーに関するオプション</span><span class="sxs-lookup"><span data-stu-id="b5491-207">Options for hosted apps and third-party login providers</span></span>
+## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="eeedd-208">ホストされているアプリおよびサードパーティ ログイン プロバイダーに関するオプション</span><span class="sxs-lookup"><span data-stu-id="eeedd-208">Options for hosted apps and third-party login providers</span></span>
 
-<span data-ttu-id="b5491-208">ホストされている Blazor WebAssembly アプリをサードパーティ プロバイダーで認証および承認する場合、ユーザーの認証にはいくつかのオプションを使用できます。</span><span class="sxs-lookup"><span data-stu-id="b5491-208">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="b5491-209">どれを選択するかは、シナリオによって異なります。</span><span class="sxs-lookup"><span data-stu-id="b5491-209">Which one you choose depends on your scenario.</span></span>
+<span data-ttu-id="eeedd-209">ホストされている Blazor WebAssembly アプリをサードパーティ プロバイダーで認証および承認する場合、ユーザーの認証にはいくつかのオプションを使用できます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-209">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="eeedd-210">どれを選択するかは、シナリオによって異なります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-210">Which one you choose depends on your scenario.</span></span>
 
-<span data-ttu-id="b5491-210">詳細については、「<xref:security/authentication/social/additional-claims>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="b5491-210">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
+<span data-ttu-id="eeedd-211">詳細については、「<xref:security/authentication/social/additional-claims>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="eeedd-211">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
 
-### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="b5491-211">ユーザーを認証して保護されたサードパーティ API のみを呼び出す</span><span class="sxs-lookup"><span data-stu-id="b5491-211">Authenticate users to only call protected third party APIs</span></span>
+### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a><span data-ttu-id="eeedd-212">ユーザーを認証して保護されたサードパーティ API のみを呼び出す</span><span class="sxs-lookup"><span data-stu-id="eeedd-212">Authenticate users to only call protected third party APIs</span></span>
 
-<span data-ttu-id="b5491-212">サードパーティ API プロバイダーに対してクライアント側の OAuth フローを使用してユーザーを認証します。</span><span class="sxs-lookup"><span data-stu-id="b5491-212">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
+<span data-ttu-id="eeedd-213">サードパーティ API プロバイダーに対してクライアント側の OAuth フローを使用してユーザーを認証します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-213">Authenticate the user with a client-side OAuth flow against the third-party API provider:</span></span>
 
  ```csharp
  builder.services.AddOidcAuthentication(options => { ... });
  ```
  
- <span data-ttu-id="b5491-213">このシナリオでは:</span><span class="sxs-lookup"><span data-stu-id="b5491-213">In this scenario:</span></span>
+ <span data-ttu-id="eeedd-214">このシナリオでは:</span><span class="sxs-lookup"><span data-stu-id="eeedd-214">In this scenario:</span></span>
 
-* <span data-ttu-id="b5491-214">アプリをホストしているサーバーは関与しません。</span><span class="sxs-lookup"><span data-stu-id="b5491-214">The server hosting the app doesn't play a role.</span></span>
-* <span data-ttu-id="b5491-215">サーバー上の API を保護することはできません。</span><span class="sxs-lookup"><span data-stu-id="b5491-215">APIs on the server can't be protected.</span></span>
-* <span data-ttu-id="b5491-216">アプリでは、保護されたサードパーティ API のみを呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="b5491-216">The app can only call protected third-party APIs.</span></span>
+* <span data-ttu-id="eeedd-215">アプリをホストしているサーバーは関与しません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-215">The server hosting the app doesn't play a role.</span></span>
+* <span data-ttu-id="eeedd-216">サーバー上の API を保護することはできません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-216">APIs on the server can't be protected.</span></span>
+* <span data-ttu-id="eeedd-217">アプリでは、保護されたサードパーティ API のみを呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-217">The app can only call protected third-party APIs.</span></span>
 
-### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="b5491-217">サードパーティ プロバイダーでユーザーを認証し、ホスト サーバーおよびサード パーティ上で保護された API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="b5491-217">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
+### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="eeedd-218">サードパーティ プロバイダーでユーザーを認証し、ホスト サーバーおよびサード パーティ上で保護された API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="eeedd-218">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
 
-<span data-ttu-id="b5491-218">サードパーティ ログイン プロバイダーで ID を構成します。</span><span class="sxs-lookup"><span data-stu-id="b5491-218">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="b5491-219">サードパーティ API へのアクセスに必要なトークンを取得し、それを格納します。</span><span class="sxs-lookup"><span data-stu-id="b5491-219">Obtain the tokens required for third-party API access and store them.</span></span>
+<span data-ttu-id="eeedd-219">サードパーティ ログイン プロバイダーで ID を構成します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-219">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="eeedd-220">サードパーティ API へのアクセスに必要なトークンを取得し、それを格納します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-220">Obtain the tokens required for third-party API access and store them.</span></span>
 
-<span data-ttu-id="b5491-220">ユーザーがログインすると、認証プロセスの一環としてアクセス トークンと更新トークンが ID によって収集されます。</span><span class="sxs-lookup"><span data-stu-id="b5491-220">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="b5491-221">その時点で、サードパーティ API の API 呼び出しを行うために使用できる方法はいくつかあります。</span><span class="sxs-lookup"><span data-stu-id="b5491-221">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
+<span data-ttu-id="eeedd-221">ユーザーがログインすると、認証プロセスの一環としてアクセス トークンと更新トークンが ID によって収集されます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-221">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="eeedd-222">その時点で、サードパーティ API の API 呼び出しを行うために使用できる方法はいくつかあります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-222">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
 
-#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="b5491-222">サーバー アクセス トークンを使用してサードパーティのアクセス トークンを取得する</span><span class="sxs-lookup"><span data-stu-id="b5491-222">Use a server access token to retrieve the third-party access token</span></span>
+#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="eeedd-223">サーバー アクセス トークンを使用してサードパーティのアクセス トークンを取得する</span><span class="sxs-lookup"><span data-stu-id="eeedd-223">Use a server access token to retrieve the third-party access token</span></span>
 
-<span data-ttu-id="b5491-223">サーバー上で生成されたアクセス トークンを使用して、サーバー API エンドポイントからサードパーティのアクセストークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="b5491-223">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="b5491-224">そこから、サードパーティのアクセス トークンを使用して、クライアント上の ID から直接、サードパーティ API リソースを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="b5491-224">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
+<span data-ttu-id="eeedd-224">サーバー上で生成されたアクセス トークンを使用して、サーバー API エンドポイントからサードパーティのアクセストークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-224">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="eeedd-225">そこから、サードパーティのアクセス トークンを使用して、クライアント上の ID から直接、サードパーティ API リソースを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-225">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
 
-<span data-ttu-id="b5491-225">この方法はお勧めしません。</span><span class="sxs-lookup"><span data-stu-id="b5491-225">We don't recommend this approach.</span></span> <span data-ttu-id="b5491-226">この方法では、サードパーティのアクセス トークンをパブリック クライアント用に生成されたものとして扱う必要があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-226">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="b5491-227">OAuth 規約では、パブリック アプリにはクライアント シークレットがありません。これはシークレットを安全に格納することが信頼できないためです。アクセス トークンは機密クライアントに対して生成されます。</span><span class="sxs-lookup"><span data-stu-id="b5491-227">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="b5491-228">機密クライアントとは、クライアント シークレットを持っていてシークレットを安全に格納できると想定されるクライアントです。</span><span class="sxs-lookup"><span data-stu-id="b5491-228">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
+<span data-ttu-id="eeedd-226">この方法はお勧めしません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-226">We don't recommend this approach.</span></span> <span data-ttu-id="eeedd-227">この方法では、サードパーティのアクセス トークンをパブリック クライアント用に生成されたものとして扱う必要があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-227">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="eeedd-228">OAuth 規約では、パブリック アプリにはクライアント シークレットがありません。これはシークレットを安全に格納することが信頼できないためです。アクセス トークンは機密クライアントに対して生成されます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-228">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="eeedd-229">機密クライアントとは、クライアント シークレットを持っていてシークレットを安全に格納できると想定されるクライアントです。</span><span class="sxs-lookup"><span data-stu-id="eeedd-229">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
 
-* <span data-ttu-id="b5491-229">サードパーティのアクセス トークンには、サードパーティがより信頼できるクライアントのトークンを生成したという事実に基づいて機密性の高い操作を実行するための追加のスコープが付与される場合があります。</span><span class="sxs-lookup"><span data-stu-id="b5491-229">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
-* <span data-ttu-id="b5491-230">同様に、信頼されていないクライアントに更新トークンを発行してはなりません。それを行ってしまうと、他の制限が適用されない限り、クライアントは無制限にアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="b5491-230">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
+* <span data-ttu-id="eeedd-230">サードパーティのアクセス トークンには、サードパーティがより信頼できるクライアントのトークンを生成したという事実に基づいて機密性の高い操作を実行するための追加のスコープが付与される場合があります。</span><span class="sxs-lookup"><span data-stu-id="eeedd-230">The third-party access token might be granted additional scopes to perform sensitive operations based on the fact that the third-party emitted the token for a more trusted client.</span></span>
+* <span data-ttu-id="eeedd-231">同様に、信頼されていないクライアントに更新トークンを発行してはなりません。それを行ってしまうと、他の制限が適用されない限り、クライアントは無制限にアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-231">Similarly, refresh tokens shouldn't be issued to a client that isn't trusted, as doing so gives the client unlimited access unless other restrictions are put into place.</span></span>
 
-#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="b5491-231">サードパーティ API を呼び出すために、クライアントからサーバー API への API 呼び出しを行う</span><span class="sxs-lookup"><span data-stu-id="b5491-231">Make API calls from the client to the server API in order to call third-party APIs</span></span>
+#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a><span data-ttu-id="eeedd-232">サードパーティ API を呼び出すために、クライアントからサーバー API への API 呼び出しを行う</span><span class="sxs-lookup"><span data-stu-id="eeedd-232">Make API calls from the client to the server API in order to call third-party APIs</span></span>
 
-<span data-ttu-id="b5491-232">クライアントからサーバー API への API 呼び出しを行います。</span><span class="sxs-lookup"><span data-stu-id="b5491-232">Make an API call from the client to the server API.</span></span> <span data-ttu-id="b5491-233">サーバーから、サードパーティ API リソースのアクセス トークンを取得し、必要な呼び出しはすべて発行します。</span><span class="sxs-lookup"><span data-stu-id="b5491-233">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
+<span data-ttu-id="eeedd-233">クライアントからサーバー API への API 呼び出しを行います。</span><span class="sxs-lookup"><span data-stu-id="eeedd-233">Make an API call from the client to the server API.</span></span> <span data-ttu-id="eeedd-234">サーバーから、サードパーティ API リソースのアクセス トークンを取得し、必要な呼び出しはすべて発行します。</span><span class="sxs-lookup"><span data-stu-id="eeedd-234">From the server, retrieve the access token for the third-party API resource and issue whatever call is necessary.</span></span>
 
-<span data-ttu-id="b5491-234">この方法では、サードパーティ API を呼び出すためにサーバー経由で追加のネットワーク ホップが必要になりますが、それによって最終的にはより安全なエクスペリエンスが得られます。</span><span class="sxs-lookup"><span data-stu-id="b5491-234">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
+<span data-ttu-id="eeedd-235">この方法では、サードパーティ API を呼び出すためにサーバー経由で追加のネットワーク ホップが必要になりますが、それによって最終的にはより安全なエクスペリエンスが得られます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-235">While this approach requires an extra network hop through the server to call a third-party API, it ultimately results in a safer experience:</span></span>
 
-* <span data-ttu-id="b5491-235">サーバーでは、更新トークンを格納し、アプリからサードパーティ リソースへのアクセスが決して失われないようにすることができます。</span><span class="sxs-lookup"><span data-stu-id="b5491-235">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
-* <span data-ttu-id="b5491-236">アプリでは、より機密性の高いアクセス許可を含む可能性のあるサーバーからのアクセス トークンをリークさせることはできません。</span><span class="sxs-lookup"><span data-stu-id="b5491-236">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
+* <span data-ttu-id="eeedd-236">サーバーでは、更新トークンを格納し、アプリからサードパーティ リソースへのアクセスが決して失われないようにすることができます。</span><span class="sxs-lookup"><span data-stu-id="eeedd-236">The server can store refresh tokens and ensure that the app doesn't lose access to third-party resources.</span></span>
+* <span data-ttu-id="eeedd-237">アプリでは、より機密性の高いアクセス許可を含む可能性のあるサーバーからのアクセス トークンをリークさせることはできません。</span><span class="sxs-lookup"><span data-stu-id="eeedd-237">The app can't leak access tokens from the server that might contain more sensitive permissions.</span></span>
