@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0dfc991f76acb227ce9ea27a07fbae50571f0117
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80471828"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205970"
 ---
-# <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
+# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
 作成者: [Daniel Roth](https://github.com/danroth27)
 
@@ -29,7 +29,7 @@ Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタ
 
 詳細な構成については、「<xref:blazor/hosting-model-configuration>」を参照してください。
 
-## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
 
@@ -60,7 +60,7 @@ Blazor WebAssembly ホスティングには、次の欠点があります。
 
 Blazor でホストされているアプリ モデルでは、[Docker コンテナー](/dotnet/standard/microservices-architecture/container-docker-introduction/index)がサポートされています。 Visual Studio でサーバー プロジェクトを右クリックし、 **[追加]**  >  **[Docker サポート]** を選択します。
 
-## <a name="opno-locblazor-server"></a>Blazor サーバー
+## <a name="blazor-server"></a>Blazor サーバー
 
 Blazor サーバーのホスティング モデルを使用すると、アプリは ASP.NET Core アプリ内からサーバー上で実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
 
@@ -115,7 +115,7 @@ Blazor の UI の更新は、次の方法でトリガーされます。
 
 グラフが再レンダリングされ、UI *diff* (相違) が計算されます。 この diff は、クライアントで UI を更新するために必要な DOM 編集の最小セットです。 diff はバイナリ形式でクライアントに送信され、ブラウザーによって適用されます。
 
-コンポーネントは、ユーザーがクライアント上でコンポーネントから移動すると破棄されます。 ユーザーがコンポーネントを操作している間、コンポーネントの状態 (サービス、リソース) はサーバーのメモリに保持されている必要があります。 多くのコンポーネントの状態はサーバーによって同時に維持される場合があるため、メモリ不足の問題に対処する必要があります。 サーバー メモリを最大限に活用できるよう Blazor サーバー アプリを作成する方法については、「<xref:security/blazor/server>」を参照してください。
+コンポーネントは、ユーザーがクライアント上でコンポーネントから移動すると破棄されます。 ユーザーがコンポーネントを操作している間、コンポーネントの状態 (サービス、リソース) はサーバーのメモリに保持されている必要があります。 多くのコンポーネントの状態はサーバーによって同時に維持される場合があるため、メモリ不足の問題に対処する必要があります。 サーバー メモリを最大限に活用できるよう Blazor サーバー アプリを作成する方法については、「<xref:security/blazor/server/threat-mitigation>」を参照してください。
 
 ### <a name="circuits"></a>回線
 
@@ -133,12 +133,12 @@ UI 遅延時間とは、アクションが開始されてから UI が更新さ�
 
 企業のプライベート ネットワークに限定された基幹業務アプリでは、通常、ネットワーク遅延時間によってユーザーが遅延を感じる度合いはわずかです。 インターネット経由で展開されたアプリでは、特にユーザーが地理的に広く分散している場合、ユーザーが遅延を感じる可能性があります。
 
-メモリ使用量も、アプリ遅延時間の一因となる場合があります。 メモリ使用量が増加すると、ガベージ コレクションまたはディスクへのメモリのページングが頻繁に発生します。どちらの場合も、アプリのパフォーマンスが低下し、その結果、UI 遅延時間が長くなります。 詳細については、「<xref:security/blazor/server>」を参照してください。
+メモリ使用量も、アプリ遅延時間の一因となる場合があります。 メモリ使用量が増加すると、ガベージ コレクションまたはディスクへのメモリのページングが頻繁に発生します。どちらの場合も、アプリのパフォーマンスが低下し、その結果、UI 遅延時間が長くなります。
 
 Blazor サーバー アプリは、ネットワーク遅延時間とメモリ使用量を低減することで、UI 遅延時間を最小限に抑えるように最適化する必要があります。 ネットワーク遅延時間を測定する方法については、「<xref:host-and-deploy/blazor/server#measure-network-latency>」を参照してください。 SignalR と Blazor の詳細については、以下を参照してください。
 
 * <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server>
+* <xref:security/blazor/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>サーバーへの接続
 

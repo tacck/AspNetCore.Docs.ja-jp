@@ -5,17 +5,17 @@ description: 希望のツールで Blazor アプリを構築することで、Bl
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/10/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 89c7529d2b8ec97db731f7c7268e19937c398115
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: 2f10b00adce31c020d46d107c087159c17341beb
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083244"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111072"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor の概要
 
@@ -23,89 +23,115 @@ ms.locfileid: "79083244"
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor の使用を開始します。
+Blazor の使用を開始するには、使用するツールに向けたガイダンスに従ってください。
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+1. Blazor サーバー アプリを作成するには、**ASP.NET および Web 開発**ワークロードと共に、最新バージョンの [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) をインストールします。
+
+   Blazor サーバー アプリと Blazor WebAssembly アプリを作成するには、**ASP.NET および Web 開発**ワークロードと共に、[Visual Studio 2019](https://visualstudio.microsoft.com/vs/preview/) の最新プレビューをインストールします。
+
+   2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor サーバー*については、「<xref:blazor/hosting-models>」を参照してください。
+
+1. 次のコマンドを実行して、[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) プレビュー テンプレートをインストールします。
+
+   ```dotnetcli
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   ```
+
+1. 新しいプロジェクトを作成します。
+
+1. **[Blazor アプリ]** を選択します。 **[次へ]** を選択します。
+
+1. **[プロジェクト名]** フィールドにプロジェクト名を入力するか、既定のプロジェクト名をそのまま使用します。 **[場所]** エントリが正しいことを確認します。または、プロジェクトの場所を指定します。 **[作成]** を選択します。
+
+1. Blazor WebAssembly エクスペリエンス (Visual Studio 16.6 Preview 2 以降) については、 **[Blazor WebAssembly アプリ]** テンプレートを選択します。 Blazor サーバー エクスペリエンス (Visual Studio 16.4 以降) については、 **[Blazor サーバー アプリ]** テンプレートを選択します。 **[作成]** を選択します。
+
+1. <kbd>Ctrl</kbd>+<kbd>F5</kbd> キーを押してアプリを実行します。
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 1. [.NET Core 3.1 SDK をインストールします](https://dotnet.microsoft.com/download/dotnet-core/3.1)。
 
-1. オプションで、[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) テンプレートをインストールします。
-   * [.NET Core 3.1 102 以降 (Preview) SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) をインストールします。
-   * コマンド シェルで次のコマンドを実行します。 Blazor WebAssembly がプレビュー段階にある間、[Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) パッケージにはプレビュー バージョンが用意されています。
+1. 必要に応じて、次のコマンドを実行して、[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) プレビュー テンプレートをインストールします。
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview2.20160.5
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
    ```
 
    > [!NOTE]
-   > 3\.2 Preview 2 Blazor WebAssembly テンプレートを使用するには、.NET Core SDK バージョン 3.1.102 以降が**必要です**。 コマンド シェルで `dotnet --version` を実行して、インストールされている .NET Core SDK バージョンを確認します。
+   > 3\.2 Preview 4 Blazor WebAssembly テンプレートを使用するには、[.NET Core SDK バージョン 3.1.201 以降](https://dotnet.microsoft.com/download/dotnet-core/3.1)が**必要です**。 コマンド シェルで `dotnet --version` を実行して、インストールされている .NET Core SDK バージョンを確認します。
 
-1. 使用するツールに向けたガイダンスに従ってください。
+1. [Visual Studio Code](https://code.visualstudio.com/) のインストール。
 
-   # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+1. `debug.javascript.usePreview` が `true` に設定された状態で、最新の [Visual Studio Code 拡張機能用の C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) と [JavaScript デバッガー (夜間)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 拡張機能をインストールします。
 
-   1\. **ASP.NET および Web 開発**ワークロードを含む [Visual Studio 2019 バージョン 16.4 以降](https://visualstudio.microsoft.com/vs/preview/)をインストールします。
+1. Blazor Server エクスペリエンスについては、コマンド シェルで次のコマンドを実行します。
 
-   2\. 新しいプロジェクトを作成します。
+   ```dotnetcli
+   dotnet new blazorserver -o WebApplication1
+   ```
 
-   3\. **[Blazor アプリ]** を選択します。 **[次へ]** を選択します。
+   Blazor WebAssembly エクスペリエンスについては、コマンド シェルで次のコマンドを実行します。
 
-   4\. **[プロジェクト名]** フィールドにプロジェクト名を入力するか、既定のプロジェクト名をそのまま使用します。 **[場所]** エントリが正しいことを確認します。または、プロジェクトの場所を指定します。 **[作成]** を選択します。
+   ```dotnetcli
+   dotnet new blazorwasm -o WebApplication1
+   ```
 
-   5\. Blazor WebAssembly エクスペリエンスについては、 **[Blazor WebAssembly アプリ]** テンプレートを選択します。 Blazor Server エクスペリエンスについては、 **[Blazor Server App] (Blazor Server アプリ)** テンプレートを選択します。 **[作成]** を選択します。 2つの Blazor ホスティング モデル、*Blazor Server*、*Blazor WebAssembly* については、「<xref:blazor/hosting-models>」を参照してください。 Blazor WebAssembly テンプレートが存在しない場合は、前のステップに戻り、テンプレートを再インストールします。
+   2つの Blazor ホスティング モデル、*Blazor Server*、*Blazor WebAssembly* については、「<xref:blazor/hosting-models>」を参照してください。
 
-   6\. **Ctrl**+**F5** キーを押してアプリを実行します。
+1. Visual Studio Code で *WebApplication1* フォルダーを開きます。
+
+1. IDE によって、プロジェクトをビルドおよびデバッグするためにアセットを追加するよう要求されます。 **[はい]** を選択します。
+
+1. Blazor サーバーを使用し、Visual Studio Code デバッガーを使用してアプリを実行します。
+
+   Blazor WebAssembly を使用し、 **.NET Core Launch (Blazor Standalone)** の起動構成を使用してアプリを起動します。次に、**Chrome の .NET Core Debug Blazor Web Assembly** の起動構成 (Chrome が必要) を使用してブラウザーを起動します。 詳細については、「<xref:blazor/debug#visual-studio-code>」を参照してください。
+
+1. ブラウザーで、`https://localhost:5001` に移動します。
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+Visual Studio for Mac では Blazor サーバーがサポートされています。 現時点では、Blazor WebAssembly はサポートされていません。 macOS で Blazor WebAssembly アプリをビルドするには、 **[.NET Core CLI]** タブのガイダンスに従ってください。
+
+1. [Visual Studio for Mac をインストールします](https://visualstudio.microsoft.com/vs/mac/)。
+
+1. **[ファイル]**  >  **[新しいソリューション]** を選択するか、**新しいプロジェクト**を作成します。
+
+1. サイドバーで、 **[.NET Core]**  >  **[アプリ]** の順に選択します。
+
+1. **[Blazor Server App] (Blazor Server アプリ)** テンプレートを選択します。 **[作成]** を選択します。
+
+   Blazor サーバー ホスティング モデルについては、「<xref:blazor/hosting-models>」を参照してください。
+
+1. **[ターゲット フレームワーク]** を **[.NET Core 3.1]** に設定し、 **[次へ]** を選択します。
+
+1. **[プロジェクト名]** フィールドで、アプリに `WebApplication1` という名前を付けます。 **[作成]** を選択します。
+
+1. *デバッガーを使用せずに*アプリを実行するには、 **[実行]**  >  **[デバッグなしで実行する]** の順に選択します。 *デバッガーを使用して*アプリを実行するには、 **[デバッグの開始]** を選択してアプリを実行します。
+
+開発証明書を信頼することを求めるメッセージが表示されたら、証明書を信頼して続行します。
+
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+
+1. [.NET Core 3.1 SDK をインストールします](https://dotnet.microsoft.com/download/dotnet-core/3.1)。
+
+1. 必要に応じて、次のコマンドを実行して、[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) プレビュー テンプレートをインストールします。
+
+   ```dotnetcli
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   ```
 
    > [!NOTE]
-   > 以前のプレビュー リリースの ASP.NET Core Blazor (Preview 6 以前) 用に Blazor Visual Studio 拡張機能をインストールした場合は、その拡張機能をアンインストールできます。 Visual Studio でテンプレートを表示するには、コマンド シェルで Blazor テンプレートをインストールするだけで十分になりました。
+   > 3\.2 Preview 4 Blazor WebAssembly テンプレートを使用するには、[.NET Core SDK バージョン 3.1.201 以降](https://dotnet.microsoft.com/download/dotnet-core/3.1)が**必要です**。 コマンド シェルで `dotnet --version` を実行して、インストールされている .NET Core SDK バージョンを確認します。
 
-   # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+1. Blazor Server エクスペリエンスについては、コマンド シェルで以下のコマンドを実行します。
 
-   1\. [Visual Studio Code](https://code.visualstudio.com/) のインストール。
-
-   2\. 最新の [C# for Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)をインストールします。
-
-   3\. Blazor WebAssembly エクスペリエンスについては、コマンド シェルで次のコマンドを実行します。
-
-      ```dotnetcli
-      dotnet new blazorwasm -o WebApplication1
-      ```
-
-      Blazor Server エクスペリエンスについては、コマンド シェルで次のコマンドを実行します。
-
-      ```dotnetcli
-      dotnet new blazorserver -o WebApplication1
-      ```
-
-      2つの Blazor ホスティング モデル、*Blazor Server*、*Blazor WebAssembly* については、「<xref:blazor/hosting-models>」を参照してください。
-
-   4\. Visual Studio Code で *WebApplication1* フォルダーを開きます。
-
-   5\. Blazor Server プロジェクトについては、プロジェクトをビルドおよびデバッグするためにアセットを追加するように、IDE によって要求されます。 **[はい]** を選択します。
-
-   6\. Blazor Server アプリを使用する場合、Visual Studio Code デバッガーを使用してアプリを実行します。 Blazor WebAssembly アプリを使用する場合、アプリのプロジェクト フォルダーから `dotnet run` を実行します。
-
-   7\. ブラウザーで、`https://localhost:5001` に移動します。
-
-   # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
-
-   1\. [Visual Studio for Mac をインストールします](https://visualstudio.microsoft.com/vs/mac/)。
-
-   2\. **[ファイル]**  >  **[新しいソリューション]** を選択するか、**新しいプロジェクト**を作成します。
-
-   3\. サイドバーで、 **[.NET Core]**  >  **[アプリ]** の順に選択します。
-
-   4\. **[Blazor Server App] (Blazor Server アプリ)** テンプレートを選択します。 現時点では、Visual Studio for Mac で使用できるのは Blazor Server テンプレートのみです。 Blazor WebAssembly については、 **[.NET Core CLI]** タブの指示に従ってください。Blazor Server テンプレートを選択したら、 **[次へ]** を選択します。 2つの Blazor ホスティング モデル、*Blazor Server*、*Blazor WebAssembly* については、「<xref:blazor/hosting-models>」を参照してください。
-
-   <!-- For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. -->
-
-   5\. **[ターゲット フレームワーク]** を **[.NET Core 3.1]** に設定し、 **[次へ]** を選択します。
-
-   6\. **[プロジェクト名]** フィールドで、アプリに `WebApplication1` という名前を付けます。 **[作成]** を選択します。
-
-   7\. *デバッガーを使用せずに*アプリを実行するには、 **[実行]**  >  **[デバッグなしで実行する]** の順に選択します。 *デバッガーを使用して*アプリを実行するには、 **[デバッグの開始]** を選択してアプリを実行します。
-
-   開発証明書を信頼することを求めるメッセージが表示されたら、証明書を信頼して続行します。
-
-   # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+   ```dotnetcli
+   dotnet new blazorserver -o WebApplication1
+   cd WebApplication1
+   dotnet run
+   ```
 
    Blazor WebAssembly エクスペリエンスについては、コマンド シェルで以下のコマンドを実行します。
 
@@ -115,19 +141,11 @@ Blazor の使用を開始します。
    dotnet run
    ```
 
-   Blazor Server エクスペリエンスについては、コマンド シェルで以下のコマンドを実行します。
-
-   ```dotnetcli
-   dotnet new blazorserver -o WebApplication1
-   cd WebApplication1
-   dotnet run
-   ```
-
    2つの Blazor ホスティング モデル、*Blazor Server*、*Blazor WebAssembly* については、「<xref:blazor/hosting-models>」を参照してください。
 
-   ブラウザーで、`https://localhost:5001` に移動します。
+1. ブラウザーで、`https://localhost:5001` に移動します。
 
-   ---
+---
 
 サイドバーのタブから複数のページを使用できます。
 

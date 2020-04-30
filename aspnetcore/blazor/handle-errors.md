@@ -5,19 +5,19 @@ description: ASP.NET Core Blazor で、ハンドルされない例外を Blazor 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/29/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 4fdaf7fb90d126b8f7f029aac3af49eec3b69e74
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 63bb791958785fa9a4a676f1aab79126c6873068
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80382276"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111046"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor アプリのエラーを処理する
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor アプリのエラーを処理する
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -80,7 +80,7 @@ Blazor Server アプリでは、*Pages/_Host.cshtml* ファイルでエクスペ
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>ハンドルされない例外に対して Blazor Server アプリがどのように反応するか
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>ハンドルされない例外に対して Blazor Server アプリがどのように反応するか
 
 Blazor Server はステートフルなフレームワークです。 ユーザーはアプリを操作するときに、*回線*と呼ばれる、サーバーへの接続を維持します。 回線では、アクティブなコンポーネント インスタンスに加えて、次のような状態の他の多くの側面が保持されます。
 
@@ -113,6 +113,8 @@ Blazor は、ハンドルされない例外が発生した回線に対して、�
 開発中、Blazor は通常、デバッグの助けになるよう、ブラウザーのコンソールに例外の完全な詳細情報を送信します。 運用環境では、ブラウザー コンソールの詳細なエラーは既定で無効になっています。つまり、エラーはクライアントに送信されませんが、例外の完全な詳細はサーバー側でログに記録され続けます。 詳細については、「<xref:fundamentals/error-handling>」を参照してください。
 
 ログに記録するインシデントと、ログに記録されるインシデントの重大度レベルを決定する必要があります。 悪意のあるユーザーが、意図的にエラーをトリガーできる可能性もあります。 たとえば、製品の詳細を表示するコンポーネントの URL に不明な `ProductId` が指定されているエラーのインシデントは、ログに記録しないようにします。 ログ記録では、すべてのエラーを重大度の高いインシデントとして扱わないようにしてください。
+
+詳細については、「<xref:fundamentals/logging/index#create-logs-in-blazor>」を参照してください。
 
 ## <a name="places-where-errors-may-occur"></a>エラーが発生する可能性のある場所
 
@@ -214,7 +216,7 @@ Blazor によってコンポーネントのインスタンスが作成される�
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>Blazor Server の事前レンダリング
+### <a name="blazor-server-prerendering"></a>Blazor Server の事前レンダリング
 
 レンダリングされた HTML マークアップがユーザーの初期 HTTP 要求の一部として返されるように、[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を使用して Blazor コンポーネントを事前レンダリングすることができます。 これは以下によって機能します。
 
