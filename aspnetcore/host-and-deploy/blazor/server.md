@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: 866bb348180c872d8ab20787283cfb7217183a8d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 380bbab8898b4fbeab4efa514b17b807accbb1ac
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79025427"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205866"
 ---
-# <a name="host-and-deploy-opno-locblazor-server"></a>Blazor サーバーをホストおよびデプロイする
+# <a name="host-and-deploy-blazor-server"></a>Blazor サーバーをホストおよびデプロイする
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)
 
@@ -36,7 +36,7 @@ ASP.NET Core アプリをホストできる Web サーバーが必要です。 V
 Blazor サーバー アプリで使用できるインフラストラクチャを最大限に活用できるようにデプロイを計画します。 Blazor サーバー アプリのスケーラビリティに対処するには、次のリソースを参照してください。
 
 * [Blazor サーバー アプリの基礎](xref:blazor/hosting-models#blazor-server)
-* <xref:security/blazor/server>
+* <xref:security/blazor/server/threat-mitigation>
 
 ### <a name="deployment-server"></a>展開サーバー
 
@@ -45,17 +45,17 @@ Blazor サーバー アプリで使用できるインフラストラクチャを
 * サーバーがサポートできるアクティブ回線の数。
 * クライアントでの UI の待機時間。
 
-セキュリティで保護されたスケーラブルな Blazor サーバー アプリを構築するためのガイダンスについては、「<xref:security/blazor/server>」を参照してください。
+セキュリティで保護されたスケーラブルな Blazor サーバー アプリを構築するためのガイダンスについては、「<xref:security/blazor/server/threat-mitigation>」を参照してください。
 
 各回線では、最小限の *Hello World* スタイルのアプリに約 250 KB のメモリが使用されます。 回線のサイズは、アプリのコードと各コンポーネントに関連付けられている状態の保守要件によって変わります。 アプリとインフラストラクチャの開発時にはリソースのニーズを測定することをお勧めしますが、展開ターゲットを計画する際に、次のベースラインを出発点にすることができます。アプリで 5,000 人の同時ユーザーをサポートすることを想定している場合は、アプリに対して少なくとも 1.3 GB のサーバー メモリ (またはユーザーあたり最大 273 KB) の予算を割り当てること検討してください。
 
-### <a name="opno-locsignalr-configuration"></a>SignalR 構成
+### <a name="signalr-configuration"></a>SignalR 構成
 
 Blazor サーバー アプリでは、ブラウザーとの通信に ASP.NET Core SignalR が使用されます。 [SignalR のホストとスケーリングの条件](xref:signalr/publish-to-azure-web-app)は、Blazor サーバー アプリに適用されます。
 
 Blazor は、待ち時間、信頼性、および[セキュリティ](xref:signalr/security)が低いために WebSocket を SignalR トランスポートとして使用する場合に最適です。 WebSocket が使用できない場合や、ロング ポーリングを使用するようにアプリが明示的に構成されている場合は、SignalR によってロング ポーリングが使用されます。 Azure App Service にデプロイする場合は、サービスの Azure portal 設定で WebSocket を使用するようにアプリを構成します。 Azure App Service 用にアプリを構成する方法の詳細については、[SignalR の発行ガイドライン](xref:signalr/publish-to-azure-web-app)を参照してください。
 
-#### <a name="azure-opno-locsignalr-service"></a>Azure SignalR Service
+#### <a name="azure-signalr-service"></a>Azure SignalR Service
 
 Blazor サーバー アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 さらに、SignalR サービスのグローバル リーチとハイパフォーマンスのデータ センターは、地理的条件による待機時間の短縮に役立ちます。 アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
 

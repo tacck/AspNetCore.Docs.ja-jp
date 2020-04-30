@@ -18,5 +18,5 @@ ASP.NET Core の利点は次のとおりです。
   * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
   * [Docker](xref:host-and-deploy/docker/index)
-* [side-by-side でのバージョン管理](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level)。
+* [side-by-side でのバージョン管理](/dotnet/standard/choosing-core-framework-server#side-by-side-net-versions-per-application-level)。
 * 最新の Web 開発を簡単にするツール。

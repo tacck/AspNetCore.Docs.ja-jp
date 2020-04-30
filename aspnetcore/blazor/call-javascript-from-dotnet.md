@@ -10,14 +10,14 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 0c6b6a0a8f88fa912523e7772fcd84ef4ce3b4ff
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 380a14177d4bb8fa3de63a3c1cd9a39aeab13db3
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977016"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205983"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -149,7 +149,7 @@ JavaScript ファイルを参照する `<script>` タグを *wwwroot/index.html*
 
 [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) または [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) を返す JavaScript 関数は、`IJSRuntime.InvokeVoidAsync` を指定して呼び出します。
 
-## <a name="detect-when-a-opno-locblazor-server-app-is-prerendering"></a>Blazor サーバー アプリがプリレンダリングされていることを検出する
+## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>Blazor サーバー アプリがプリレンダリングされていることを検出する
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
@@ -458,7 +458,7 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-リソース枯渇の詳細については、「<xref:security/blazor/server>」を参照してください。
+リソース枯渇の詳細については、「<xref:security/blazor/server/threat-mitigation>」を参照してください。
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
 

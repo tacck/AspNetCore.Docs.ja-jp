@@ -8,12 +8,12 @@ ms.date: 03/06/2020
 no-loc:
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 85d2a418c3aaae40bbcdc040095c2c98d4b7242c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80640044"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558907"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 
@@ -96,7 +96,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 次のコードでは、`IDistributedCache` の既定のメモリ内実装でメモリ内セッション プロバイダーを設定する方法を示します。
 
-[!code-csharp[](app-state/samples/3.x/SessionSample/Startup4.cs?name=snippet1&highlight=12-19,39)]
+[!code-csharp[](app-state/samples/3.x/SessionSample/Startup4.cs?name=snippet1&highlight=12-19,45)]
 
 前のコードでは、テストを簡単にするために短いタイムアウトを設定しています。
 
@@ -589,7 +589,7 @@ app.Run(async (context) =>
 
   エラーを確認するための推奨される方法は、アプリがセッションへの書き込みを終了したら、アプリ コードから `await feature.Session.CommitAsync();` を呼び出すことです。 バッキング ストアが利用できない場合、`CommitAsync` は例外をスローします。 `CommitAsync` が失敗した場合、アプリは例外を処理できます。 `LoadAsync` は、データ ストアが利用できない場合に同じ条件で例外をスローします。
   
-## <a name="opno-locsignalr-and-session-state"></a>SignalR とセッション状態
+## <a name="signalr-and-session-state"></a>SignalR とセッション状態
 
 SignalR アプリでは、セッション状態を使用して情報を格納することはできません。 SignalR アプリは、ハブ内の `Context.Items` に接続ごとの状態を格納できます。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
