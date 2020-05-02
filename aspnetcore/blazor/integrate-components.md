@@ -5,17 +5,17 @@ description: Blazor アプリのコンポーネントと DOM 要素のデータ 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/14/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383969"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558920"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する
 
@@ -245,11 +245,54 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
 
 ページまたはビューからコンポーネントをレンダリングするには、[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を使用します。
 
-コンポーネントがどのようにレンダリングされるか、コンポーネントの状態、および `Component` タグ ヘルパーの詳細については、以下の記事を参照してください。
+### <a name="render-stateful-interactive-components"></a>ステートフル対話型コンポーネントをレンダリングする
 
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
+Razor ページまたはビューには、ステートフル対話型コンポーネントを追加できます。
+
+ページまたはビューがレンダリングされると、次の処理が行われます。
+
+* ページまたはビューと共にコンポーネントがプリレンダリングされます。
+* プリレンダリングに使用された初期のコンポーネント状態は失われます。
+* SignalR 接続が確立されると、新しいコンポーネント状態が作成されます。
+
+次の Razor ページには、`Counter` コンポーネントがレンダリングされます。
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<component type="typeof(Counter)" render-mode="ServerPrerendered" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+詳細については、「<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
+
+### <a name="render-noninteractive-components"></a>非対話型コンポーネントをレンダリングする
+
+次の Razor ページには、フォームを使用して指定された初期値を使用して、`Counter` コンポーネントが静的にレンダリングされます。 コンポーネントは静的にレンダリングされるため、コンポーネントは対話型ではありません。
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<form>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
+</form>
+
+<component type="typeof(Counter)" render-mode="Static" 
+    param-InitialValue="InitialValue" />
+
+@functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+詳細については、「<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
 
 ## <a name="component-namespaces"></a>コンポーネントの名前空間
 

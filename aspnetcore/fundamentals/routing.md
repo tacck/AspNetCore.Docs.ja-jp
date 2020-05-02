@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277224"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206126"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -324,7 +324,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 >
 > <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 内での処理の順序は、ルーティングの動作には影響しませんが、例外が 1 つあります。 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> および <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> では、それぞれが呼び出された順序に基づいて、それぞれのエンドポイントに順序値が自動的に割り当てられます。 これにより、ルーティング システムでより古いルーティング実装と同じ保証を提供しなくても、コントローラーの長時間の動作がシミュレートされます。
 >
-> ルーティングの従来の実装では、ルートの処理順序に依存するルーティング拡張性を実装することができます。 ASP.NET Core 3.0 以降でのエンドポイントのルーティング:
+> ルーティングの従来の実装では、ルートの処理順序に依存するルーティング拡張性を実装することができます。 ASP.NET Core 3.0 以降でのエンドポイントのルーティング: 
 > 
 > * ルートの概念がありません。
 > * 順序付けが保証されません。 すべてのエンドポイントが一度に処理されます。
@@ -335,7 +335,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 
 ### <a name="route-template-precedence-and-endpoint-selection-order"></a>ルート テンプレートの優先順位とエンドポイントの選択順序
 
-[ルート テンプレートの優先順位](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L16)とは、どれほど具体的であるかに基づいて、各ルート テンプレートに値を割り当てるシステムです。 ルート テンプレートの優先順位:
+[ルート テンプレートの優先順位](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L16)とは、どれほど具体的であるかに基づいて、各ルート テンプレートに値を割り当てるシステムです。 ルート テンプレートの優先順位: 
 
 * 一般的なケースでは、エンドポイントの順序を調整する必要はなくなります。
 * 一般的に期待されるルーティング動作との一致が試みられます。
@@ -356,7 +356,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 
 ### <a name="url-generation-concepts"></a>URL 生成の概念
 
-URL の生成:
+URL の生成: 
 
 * ルーティングにおいて、一連のルート値に基づいて URL パスを作成するプロセスです。
 * エンドポイントとそれにアクセスする URL を論理的に分離できます。
@@ -407,9 +407,9 @@ URL の生成:
 
 `{}` 内のトークンでは、ルートが一致した場合にバインドされるルート パラメーターが定義されます。 1 つのルート セグメントに複数のルート パラメーターを定義できますが、各ルート パラメーターをリテラル値で区切る必要があります。 たとえば、`{controller=Home}{action=Index}` は有効なルートになりません。`{controller}` と `{action}` の間にリテラル値がないためです。  ルート パラメーターには名前を付ける必要があります。付加的な属性を指定することもあります。
 
-ルート パラメーター以外のリテラル テキスト (`{id}` など) とパス区切り `/` は URL のテキストに一致する必要があります。 テキスト照合は復号された URL パスを基盤とし、大文字と小文字が区別されます。 リテラル ルート パラメーターの区切り記号 (`{` または `}`) を照合するには、文字を繰り返して区切り記号をエスケープします。 たとえば、`{{` または `}}` です。
+ルート パラメーター以外のリテラル テキスト (`{id}` など) とパス区切り `/` は URL のテキストに一致する必要があります。 テキスト照合は復号された URL のパスを基盤とし、大文字と小文字が区別されます。 リテラル ルート パラメーターの区切り記号 (`{` または `}`) を照合するには、文字を繰り返して区切り記号をエスケープします。 たとえば、`{{` または `}}` です。
 
-アスタリスク `*` または二重アスタリスク`**`:
+アスタリスク `*` または二重アスタリスク`**`: 
 
 * ルート パラメーターのプレフィックスとして使用して、URI の残りの部分にバインドすることができます。
 * **キャッチオール** パラメーターと呼ばれています。 `blog/{**slug}` の例を次に示します。

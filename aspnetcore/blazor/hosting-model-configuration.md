@@ -5,31 +5,253 @@ description: Razor コンポーネントを Razor Pages および MVC アプリ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: bd44643877e45c5b48b0972bcc2f637fbc5d98f2
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
+ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646790"
+ms.lasthandoff: 04/26/2020
+ms.locfileid: "82159620"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
-作成者: [Daniel Roth](https://github.com/danroth27)
+作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 この記事では、ホスティング モデルの構成について説明します。
 
-<!-- For future use:
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-## Blazor WebAssembly
+### <a name="environment"></a>環境
 
--->
+アプリをローカルで実行する場合、環境は既定で開発に設定されます。 アプリが発行されると、環境は既定で実稼働になります。
+
+ホストされている Blazor WebAssembly アプリは、`blazor-environment` ヘッダーを追加して環境をブラウザーに送信するミドルウェアを介して、サーバーから環境を取得します。 ヘッダーの値は環境です。 ホストされた Blazor アプリとサーバー アプリは、同じ環境を共有します。 環境の構成方法などの詳細については、「<xref:fundamentals/environments>」を参照してください。
+
+ローカルで実行されているスタンドアロン アプリの場合、開発サーバーでは `blazor-environment` ヘッダーが追加され、開発環境が指定されます。 他のホスト環境の環境を指定するには、`blazor-environment` ヘッダーを追加します。
+
+次の IIS の例では、発行された *web.config* ファイルにカスタム ヘッダーを追加しています。 *web.config* ファイルは、*bin/Release/{TARGET FRAMEWORK}/publish* フォルダーにあります。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+
+    ...
+
+    <httpProtocol>
+      <customHeaders>
+        <add name="blazor-environment" value="Staging" />
+      </customHeaders>
+    </httpProtocol>
+  </system.webServer>
+</configuration>
+```
+
+> [!NOTE]
+> アプリが *publish* フォルダーに発行されたときに上書きされない IIS 用のカスタム *web.config* ファイルを使用するには、「ASP.NET Core Blazor WebAssembly をホストしてデプロイする<xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>」を参照してください。
+
+`IWebAssemblyHostEnvironment` を挿入し、`Environment` プロパティを読み取ることで、コンポーネント内のアプリの環境を取得します。
+
+```razor
+@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment HostEnvironment
+
+<h1>Environment example</h1>
+
+<p>Environment: @HostEnvironment.Environment</p>
+```
+
+起動時に、`WebAssemblyHostBuilder` では、`HostEnvironment` プロパティを使用して `IWebAssemblyHostEnvironment` が公開されます。これにより、開発者は環境固有のロジックをコードに含めることができます。
+
+```csharp
+if (builder.HostEnvironment.Environment == "Custom")
+{
+    ...
+};
+```
+
+次の便利な拡張メソッドを使用すると、現在の環境で開発、運用、ステージング、およびカスタムの環境名を確認できます。
+
+* `IsDevelopment()`
+* `IsProduction()`
+* `IsStaging()`
+* `IsEnvironment("{ENVIRONMENT NAME}")
+
+```csharp
+if (builder.HostEnvironment.IsStaging())
+{
+    ...
+};
+
+if (builder.HostEnvironment.IsEnvironment("Custom"))
+{
+    ...
+};
+```
+
+`IWebAssemblyHostEnvironment.BaseAddress` プロパティは、`NavigationManager` サービスを利用できないときの起動時に使用できます。
+
+### <a name="configuration"></a>構成
+
+Blazor WebAssembly は次の構成をサポートしています。
+
+* 既定でアプリ設定ファイルの[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider):
+  * *wwwroot/appsettings.json*
+  * *wwwroot/appsettings.{ENVIRONMENT}.json*
+* アプリによって登録されたその他の[構成プロバイダー](xref:fundamentals/configuration/index)。
+
+> [!WARNING]
+> Blazor WebAssembly アプリの構成は、ユーザーに表示されます。 **アプリのシークレットや資格情報を構成に保存しないでください。**
+
+構成プロバイダーの詳細については、「<xref:fundamentals/configuration/index>」を参照してください。
+
+#### <a name="app-settings-configuration"></a>アプリ設定の構成
+
+*wwwroot/appsettings.json*:
+
+```json
+{
+  "message": "Hello from config!"
+}
+```
+
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<p>Message: @Configuration["message"]</p>
+```
+
+#### <a name="provider-configuration"></a>プロバイダーの構成
+
+次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> と[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)を使用して追加の構成を指定しています。
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var vehicleData = new Dictionary<string, string>()
+{
+    { "color", "blue" },
+    { "type", "car" },
+    { "wheels:count", "3" },
+    { "wheels:brand", "Blazin" },
+    { "wheels:brand:type", "rally" },
+    { "wheels:year", "2008" },
+};
+
+var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
+
+...
+
+builder.Configuration
+    .Add(memoryConfig)
+    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+```
+
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @Configuration["wheels:count"]</p>
+    <li>Brand: @Configuration["wheels:brand"]</p>
+    <li>Type: @Configuration["wheels:brand:type"]</p>
+    <li>Year: @Configuration["wheels:year"]</p>
+</ul>
+
+@code {
+    var wheelsSection = Configuration.GetSection("wheels");
+    
+    ...
+}
+```
+
+#### <a name="authentication-configuration"></a>認証の構成
+
+*wwwroot/appsettings.json*:
+
+```json
+{
+  "AzureAD": {
+    "Authority": "https://login.microsoftonline.com/",
+    "ClientId": "aeaebf0f-d416-4d92-a08f-e1d5b51fc494"
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Services.AddOidcAuthentication(options =>
+    builder.Configuration.Bind("AzureAD", options);
+```
+
+#### <a name="logging-configuration"></a>ログの構成
+
+*wwwroot/appsettings.json*:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Logging.AddConfiguration(
+    builder.Configuration.GetSection("Logging"));
+```
+
+#### <a name="host-builder-configuration"></a>ホスト ビルダーの構成
+
+`Program.Main`:
+
+```csharp
+var hostname = builder.Configuration["HostName"];
+```
+
+#### <a name="cached-configuration"></a>キャッシュされた構成
+
+構成ファイルは、オフラインで使用できるようにキャッシュされます。 [プログレッシブ Web アプリケーション (PWA)](xref:blazor/progressive-web-app) では、新しい展開を作成するときにのみ構成ファイルを更新できます。 次の理由により、展開間で構成ファイルを編集しても意味がありません。
+
+* ユーザーには、引き続き使用するファイルのキャッシュされたバージョンがあります。
+* PWA の *service-worker.js* ファイルと *service-worker-assets.js* ファイルは、コンパイル時に再構築される必要があります。これにより、ユーザーの次回のオンライン アクセス時に、アプリが再展開されたことが通知されます。
+
+PWA によるバックグラウンド更新の処理方法の詳細については、「<xref:blazor/progressive-web-app#background-updates>」を参照してください。
+
+### <a name="logging"></a>ログの記録
+
+Blazor WebAssembly ログ記録のサポートについては、「.NET Core および ASP.NET Core でのログ記録<xref:fundamentals/logging/index#create-logs-in-blazor>」を参照してください。
 
 ## <a name="blazor-server"></a>Blazor サーバー
 
@@ -70,65 +292,18 @@ Blazor サーバー アプリは、サーバーへのクライアント接続が
 
 `RenderMode` により、コンポーネントに対して次の構成が行われます。
 
-* ページにプリレンダリングするかどうか。
-* ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報を含めるかどうか。
+* ページに事前レンダリングするかどうか。
+* ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
 
 | `RenderMode`        | 説明 |
 | ------------------- | ----------- |
-| `ServerPrerendered` | コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 ユーザー エージェントの起動時に、Blazor アプリをブートストラップするためにこのマーカーが使用されます。 |
-| `Server`            | Blazor サーバー アプリのマーカーをレンダリングします。 コンポーネントからの出力は含まれません。 ユーザー エージェントの起動時に、Blazor アプリをブートストラップするためにこのマーカーが使用されます。 |
+| `ServerPrerendered` | コンポーネントを静的 HTML にレンダリングし、Blazor Server アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+| `Server`            | Blazor Server アプリのマーカーをレンダリングします。 コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
 | `Static`            | コンポーネントを静的 HTML にレンダリングします。 |
 
-静的 HTML ページからのサーバー コンポーネントのレンダリングはサポートされていません。
+静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
 
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor ページおよびビューからステートフル対話型コンポーネントをレンダリングする
-
-Razor ページまたはビューには、ステートフル対話型コンポーネントを追加できます。
-
-ページまたはビューがレンダリングされると、次の処理が行われます。
-
-* ページまたはビューと共にコンポーネントがプリレンダリングされます。
-* プリレンダリングに使用された初期のコンポーネント状態は失われます。
-* SignalR 接続が確立されると、新しいコンポーネント状態が作成されます。
-
-次の Razor ページには、`Counter` コンポーネントがレンダリングされます。
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor ページおよびビューから非対話型コンポーネントをレンダリングする
-
-次の Razor ページには、フォームを使用して指定された初期値を使用して、`Counter` コンポーネントが静的にレンダリングされます。
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<form>
-    <input type="number" asp-for="InitialValue" />
-    <button type="submit">Set initial value</button>
-</form>
-
-<component type="typeof(Counter)" render-mode="Static" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-`MyComponent` が静的にレンダリングされるため、コンポーネントを対話型にすることはできません。
-
-### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Blazor サーバー アプリ用に SignalR クライアントを構成する
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor サーバー アプリ用に SignalR クライアントを構成する
 
 場合によっては、Blazor サーバー アプリによって使用される SignalR クライアントを構成する必要があります。 たとえば、接続の問題を診断するために SignalR クライアントのログ記録を構成できます。
 
@@ -147,3 +322,7 @@ Razor ページまたはビューには、ステートフル対話型コンポ�
   });
 </script>
 ```
+
+### <a name="logging"></a>ログの記録
+
+Blazor サーバー ログのサポートの詳細については、「<xref:fundamentals/logging/index#create-logs-in-blazor>」を参照してください。
