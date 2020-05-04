@@ -44,8 +44,8 @@ ms.locfileid: "82110916"
 
 既定の ASP.NET Core プロジェクト テンプレートからは <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> が呼び出されます。これにより、次のログ プロバイダーが追加されます。
 
-* [コンソール](#console-provider)
-* [デバッグ](#debug-provider)
+* [Console](#console-provider)
+* [Debug](#debug-provider)
 * [EventSource](#event-source-provider)
 * [EventLog](#windows-eventlog-provider) (Windows 上で実行されている場合のみ)
 
@@ -508,7 +508,7 @@ System.Exception: Item not found exception.
 
 ### <a name="create-filter-rules-in-configuration"></a>構成にフィルター規則を作成する
 
-プロジェクト テンプレート コードは `CreateDefaultBuilder` を呼び出して、コンソール、デバッグ、EventSource (ASP.NET Core 2.2 以降) のプロバイダーのログ記録を設定します。 `Logging`この記事で既に説明[したように、`CreateDefaultBuilder` メソッドでは、](#configuration) セクションで構成を検索するようにログが設定されます。
+プロジェクト テンプレート コードは `CreateDefaultBuilder` を呼び出して、Console、Debug、EventSource (ASP.NET Core 2.2 以降) のプロバイダーのログ記録を設定します。[この記事](#configuration)で既に説明したように、`CreateDefaultBuilder` メソッドでは、`Logging` セクションで構成を検索するようにログが設定されます。
 
 次の例のように、構成データでは、プロバイダーとカテゴリごとに最小ログ レベルを指定します。
 
@@ -530,14 +530,14 @@ System.Exception: Item not found exception.
 
 | 数値 | プロバイダー      | 以下から始まるカテゴリ          | 最小ログ レベル |
 | :----: | ------------- | --------------------------------------- | ----------------- |
-| 1      | デバッグ         | すべてのカテゴリ                          | 情報       |
-| 2      | コンソール       | Microsoft.AspNetCore.Mvc.Razor.Internal | 警告           |
-| 3      | コンソール       | Microsoft.AspNetCore.Mvc.Razor.Razor    | デバッグ             |
-| 4      | コンソール       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
-| 5      | コンソール       | すべてのカテゴリ                          | 情報       |
-| 6      | すべてのプロバイダー | すべてのカテゴリ                          | デバッグ             |
-| 7      | すべてのプロバイダー | システム                                  | デバッグ             |
-| 8      | デバッグ         | Microsoft                               | トレース             |
+| 1      | Debug         | すべてのカテゴリ                          | Information       |
+| 2      | Console       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
+| 3      | Console       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
+| 4      | Console       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
+| 5      | Console       | すべてのカテゴリ                          | Information       |
+| 6      | All providers | すべてのカテゴリ                          | Debug             |
+| 7      | All providers | System                                  | Debug             |
+| 8      | Debug         | Microsoft                               | Trace             |
 
 `ILogger` オブジェクトを作成すると、`ILoggerFactory` オブジェクトによって、そのロガーに適用するプロバイダーごとに 1 つの規則が選択されます。 `ILogger` インスタンスによって書き込まれるすべてのメッセージは、選択した規則に基づいてフィルター処理されます。 使用できる規則から、各プロバイダーとカテゴリのペアごとに該当する最も限定的な規則が選択されます。
 
@@ -559,8 +559,8 @@ System.Exception: Item not found exception.
 
 各プロバイダーでは "*エイリアス*" が定義されます。これは構成で完全修飾型名の代わりに使用できます。  組み込みのプロバイダーの場合は、次のエイリアスを使用してください。
 
-* コンソール
-* デバッグ
+* Console
+* Debug
 * EventSource
 * EventLog
 * TraceSource
@@ -632,8 +632,8 @@ warn: TodoApiSample.Controllers.TodoController[4000]
 
 ASP.NET Core には次のプロバイダーが付属しています。
 
-* [コンソール](#console-provider)
-* [デバッグ](#debug-provider)
+* [Console](#console-provider)
+* [Debug](#debug-provider)
 * [EventSource](#event-source-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
@@ -923,8 +923,8 @@ ASP.NET Core で使用できるサードパーティ製のログ記録フレー�
 
 既定のプロジェクト テンプレートでは、次のログ プロバイダーを追加する <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> が呼び出されます。
 
-* コンソール
-* デバッグ
+* Console
+* Debug
 * EventSource (ASP.NET Core 2.2 以降)
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_TemplateCode&highlight=7)]
@@ -1296,14 +1296,14 @@ System.Exception: Item not found exception.
 
 | 数値 | プロバイダー      | 以下から始まるカテゴリ          | 最小ログ レベル |
 | :----: | ------------- | --------------------------------------- | ----------------- |
-| 1      | デバッグ         | すべてのカテゴリ                          | 情報       |
-| 2      | コンソール       | Microsoft.AspNetCore.Mvc.Razor.Internal | 警告           |
-| 3      | コンソール       | Microsoft.AspNetCore.Mvc.Razor.Razor    | デバッグ             |
-| 4      | コンソール       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
-| 5      | コンソール       | すべてのカテゴリ                          | 情報       |
-| 6      | すべてのプロバイダー | すべてのカテゴリ                          | デバッグ             |
-| 7      | すべてのプロバイダー | システム                                  | デバッグ             |
-| 8      | デバッグ         | Microsoft                               | トレース             |
+| 1      | Debug         | すべてのカテゴリ                          | Information       |
+| 2      | Console       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
+| 3      | Console       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
+| 4      | Console       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
+| 5      | Console       | すべてのカテゴリ                          | Information       |
+| 6      | All providers | すべてのカテゴリ                          | Debug             |
+| 7      | All providers | System                                  | Debug             |
+| 8      | Debug         | Microsoft                               | Trace             |
 
 `ILogger` オブジェクトを作成すると、`ILoggerFactory` オブジェクトによって、そのロガーに適用するプロバイダーごとに 1 つの規則が選択されます。 `ILogger` インスタンスによって書き込まれるすべてのメッセージは、選択した規則に基づいてフィルター処理されます。 使用できる規則から、各プロバイダーとカテゴリのペアごとに該当する最も限定的な規則が選択されます。
 
@@ -1325,8 +1325,8 @@ System.Exception: Item not found exception.
 
 各プロバイダーでは "*エイリアス*" が定義されます。これは構成で完全修飾型名の代わりに使用できます。  組み込みのプロバイダーの場合は、次のエイリアスを使用してください。
 
-* コンソール
-* デバッグ
+* Console
+* Debug
 * EventSource
 * EventLog
 * TraceSource
@@ -1399,7 +1399,7 @@ warn: TodoApiSample.Controllers.TodoController[4000]
 ASP.NET Core には次のプロバイダーが付属しています。
 
 * [コンソール](#console-provider)
-* [デバッグ](#debug-provider)
+* [Debug](#debug-provider)
 * [EventSource](#event-source-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
