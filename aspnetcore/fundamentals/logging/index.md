@@ -508,7 +508,7 @@ System.Exception: Item not found exception.
 
 ### <a name="create-filter-rules-in-configuration"></a>構成にフィルター規則を作成する
 
-プロジェクト テンプレート コードは `CreateDefaultBuilder` を呼び出して、Console、Debug、EventSource (ASP.NET Core 2.2 以降) のプロバイダーのログ記録を設定します。 `Logging`この記事で既に説明[したように、`CreateDefaultBuilder` メソッドでは、](#configuration) セクションで構成を検索するようにログが設定されます。
+プロジェクト テンプレート コードは `CreateDefaultBuilder` を呼び出して、Console、Debug、EventSource (ASP.NET Core 2.2 以降) のプロバイダーのログ記録を設定します。[この記事](#configuration)で既に説明したように、`CreateDefaultBuilder` メソッドでは、`Logging` セクションで構成を検索するようにログが設定されます。
 
 次の例のように、構成データでは、プロバイダーとカテゴリごとに最小ログ レベルを指定します。
 
