@@ -1,29 +1,35 @@
 ---
-title: ASP.NETコアのキーストレージ形式
+title: ASP.NET Core のキー格納形式
 author: rick-anderson
-description: ASP.NETコア データ保護キーストレージ形式の実装の詳細を説明します。
+description: ASP.NET Core データ保護のキーストレージ形式の実装の詳細について説明します。
 ms.author: riande
 ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: 3072c673791b589027a910b80eaba52052eb9311
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: d284927e8ff4315b813fe36b9c335d8bd75ece11
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976938"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776865"
 ---
-# <a name="key-storage-format-in-aspnet-core"></a><span data-ttu-id="05737-103">ASP.NETコアのキーストレージ形式</span><span class="sxs-lookup"><span data-stu-id="05737-103">Key storage format in ASP.NET Core</span></span>
+# <a name="key-storage-format-in-aspnet-core"></a><span data-ttu-id="45b2a-103">ASP.NET Core のキー格納形式</span><span class="sxs-lookup"><span data-stu-id="45b2a-103">Key storage format in ASP.NET Core</span></span>
 
 <a name="data-protection-implementation-key-storage-format"></a>
 
-<span data-ttu-id="05737-104">オブジェクトは、XML 表現で保存されます。</span><span class="sxs-lookup"><span data-stu-id="05737-104">Objects are stored at rest in XML representation.</span></span> <span data-ttu-id="05737-105">キーストレージのデフォルトディレクトリは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="05737-105">The default directory for key storage is:</span></span>
+<span data-ttu-id="45b2a-104">オブジェクトは、XML 形式で保存されます。</span><span class="sxs-lookup"><span data-stu-id="45b2a-104">Objects are stored at rest in XML representation.</span></span> <span data-ttu-id="45b2a-105">キーストレージの既定のディレクトリは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="45b2a-105">The default directory for key storage is:</span></span>
 
-* <span data-ttu-id="05737-106">ウィンドウ: \*%ローカルアプリケーションデータ%\ASP.NET\データ保護キー\*</span><span class="sxs-lookup"><span data-stu-id="05737-106">Windows: \*%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*</span></span>
-* <span data-ttu-id="05737-107">macOS / Linux: *$HOME/.aspnet/データ保護キー*</span><span class="sxs-lookup"><span data-stu-id="05737-107">macOS / Linux: *$HOME/.aspnet/DataProtection-Keys*</span></span>
+* <span data-ttu-id="45b2a-106">Windows: \*%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*</span><span class="sxs-lookup"><span data-stu-id="45b2a-106">Windows: \*%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*</span></span>
+* <span data-ttu-id="45b2a-107">macOS/Linux: *$HOME/.aspnet/dataprotection-keys*</span><span class="sxs-lookup"><span data-stu-id="45b2a-107">macOS / Linux: *$HOME/.aspnet/DataProtection-Keys*</span></span>
 
-## <a name="the-key-element"></a><span data-ttu-id="05737-108">\<キー>要素</span><span class="sxs-lookup"><span data-stu-id="05737-108">The \<key> element</span></span>
+## <a name="the-key-element"></a><span data-ttu-id="45b2a-108">\<キー> 要素</span><span class="sxs-lookup"><span data-stu-id="45b2a-108">The \<key> element</span></span>
 
-<span data-ttu-id="05737-109">キーは、キー リポジトリ内のトップレベル オブジェクトとして存在します。</span><span class="sxs-lookup"><span data-stu-id="05737-109">Keys exist as top-level objects in the key repository.</span></span> <span data-ttu-id="05737-110">規則によってキーのファイル名**キーを持っている{guid}.xml、{guid}** はキーの ID です。</span><span class="sxs-lookup"><span data-stu-id="05737-110">By convention keys have the filename **key-{guid}.xml**, where {guid} is the id of the key.</span></span> <span data-ttu-id="05737-111">このようなファイルには、それぞれ 1 つのキーが含まれています。</span><span class="sxs-lookup"><span data-stu-id="05737-111">Each such file contains a single key.</span></span> <span data-ttu-id="05737-112">ファイルの形式は以下の通りです。</span><span class="sxs-lookup"><span data-stu-id="05737-112">The format of the file is as follows.</span></span>
+<span data-ttu-id="45b2a-109">キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。</span><span class="sxs-lookup"><span data-stu-id="45b2a-109">Keys exist as top-level objects in the key repository.</span></span> <span data-ttu-id="45b2a-110">規則によるキーのファイル名は**キー {guid} .xml です**。ここで、{guid} はキーの id です。</span><span class="sxs-lookup"><span data-stu-id="45b2a-110">By convention keys have the filename **key-{guid}.xml**, where {guid} is the id of the key.</span></span> <span data-ttu-id="45b2a-111">このようなファイルには1つのキーが含まれています。</span><span class="sxs-lookup"><span data-stu-id="45b2a-111">Each such file contains a single key.</span></span> <span data-ttu-id="45b2a-112">ファイルの形式は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="45b2a-112">The format of the file is as follows.</span></span>
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -46,35 +52,35 @@ ms.locfileid: "80976938"
 </key>
 ```
 
-<span data-ttu-id="05737-113">キー \<>要素には、次の属性と子要素が含まれます。</span><span class="sxs-lookup"><span data-stu-id="05737-113">The \<key> element contains the following attributes and child elements:</span></span>
+<span data-ttu-id="45b2a-113">Key \<> 要素には、次の属性と子要素が含まれています。</span><span class="sxs-lookup"><span data-stu-id="45b2a-113">The \<key> element contains the following attributes and child elements:</span></span>
 
-* <span data-ttu-id="05737-114">キー ID。この値は、権限ありとして扱われます。ファイル名は、人間の読みやすさのための単に素晴らしいです。</span><span class="sxs-lookup"><span data-stu-id="05737-114">The key id. This value is treated as authoritative; the filename is simply a nicety for human readability.</span></span>
+* <span data-ttu-id="45b2a-114">キー id。この値は権限のあるものとして扱われます。ファイル名は、人間が読みやすくするための単なる言えです。</span><span class="sxs-lookup"><span data-stu-id="45b2a-114">The key id. This value is treated as authoritative; the filename is simply a nicety for human readability.</span></span>
 
-* <span data-ttu-id="05737-115">\<キー>要素のバージョンは、現在 1 に固定されています。</span><span class="sxs-lookup"><span data-stu-id="05737-115">The version of the \<key> element, currently fixed at 1.</span></span>
+* <span data-ttu-id="45b2a-115">\<キー> 要素のバージョン。現在は1で修正されています。</span><span class="sxs-lookup"><span data-stu-id="45b2a-115">The version of the \<key> element, currently fixed at 1.</span></span>
 
-* <span data-ttu-id="05737-116">キーの作成、アクティベーション、および有効期限。</span><span class="sxs-lookup"><span data-stu-id="05737-116">The key's creation, activation, and expiration dates.</span></span>
+* <span data-ttu-id="45b2a-116">キーの作成、アクティブ化、および有効期限。</span><span class="sxs-lookup"><span data-stu-id="45b2a-116">The key's creation, activation, and expiration dates.</span></span>
 
-* <span data-ttu-id="05737-117">この\<キーに含まれる認証済みの暗号化実装に関する情報を含む、記述子>要素。</span><span class="sxs-lookup"><span data-stu-id="05737-117">A \<descriptor> element, which contains information on the authenticated encryption implementation contained within this key.</span></span>
+* <span data-ttu-id="45b2a-117">この\<キーに含まれる認証済み暗号化の実装に関する情報を格納する記述子> 要素。</span><span class="sxs-lookup"><span data-stu-id="45b2a-117">A \<descriptor> element, which contains information on the authenticated encryption implementation contained within this key.</span></span>
 
-<span data-ttu-id="05737-118">上記の例では、キーの id は {80732141-ec8f-4b80-af9c-c4d2d1ff8901} であり、2015 年 3 月 19 日に作成およびアクティブ化され、有効期間は 90 日です。</span><span class="sxs-lookup"><span data-stu-id="05737-118">In the above example, the key's id is {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, it was created and activated on March 19, 2015, and it has a lifetime of 90 days.</span></span> <span data-ttu-id="05737-119">(この例のように、アクティベーション日が作成日より少し前になることがあります。</span><span class="sxs-lookup"><span data-stu-id="05737-119">(Occasionally the activation date might be slightly before the creation date as in this example.</span></span> <span data-ttu-id="05737-120">これは、API の動作の仕組みに起因し、実際には無害です。</span><span class="sxs-lookup"><span data-stu-id="05737-120">This is due to a nit in how the APIs work and is harmless in practice.)</span></span>
+<span data-ttu-id="45b2a-118">上の例では、キーの id は {80732141-ec8f-4b80-af9c-c4d2d1ff8901} であり、2015年3月19日に作成され、アクティブ化され、90日の有効期間があります。</span><span class="sxs-lookup"><span data-stu-id="45b2a-118">In the above example, the key's id is {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, it was created and activated on March 19, 2015, and it has a lifetime of 90 days.</span></span> <span data-ttu-id="45b2a-119">(場合によっては、ライセンス認証日が、この例のように作成日よりも少し前になることがあります。</span><span class="sxs-lookup"><span data-stu-id="45b2a-119">(Occasionally the activation date might be slightly before the creation date as in this example.</span></span> <span data-ttu-id="45b2a-120">これは、Api が動作し、実際には無害であることが原因です)。</span><span class="sxs-lookup"><span data-stu-id="45b2a-120">This is due to a nit in how the APIs work and is harmless in practice.)</span></span>
 
-## <a name="the-descriptor-element"></a><span data-ttu-id="05737-121">記述子\<>要素</span><span class="sxs-lookup"><span data-stu-id="05737-121">The \<descriptor> element</span></span>
+## <a name="the-descriptor-element"></a><span data-ttu-id="45b2a-121">\<記述子> 要素</span><span class="sxs-lookup"><span data-stu-id="45b2a-121">The \<descriptor> element</span></span>
 
-<span data-ttu-id="05737-122">要素>\<外部記述子には、IAuthenticatedEncryptorDescriptorDeserializer を実装する型のアセンブリ修飾名である属性デシリアライザー型が含まれています。</span><span class="sxs-lookup"><span data-stu-id="05737-122">The outer \<descriptor> element contains an attribute deserializerType, which is the assembly-qualified name of a type which implements IAuthenticatedEncryptorDescriptorDeserializer.</span></span> <span data-ttu-id="05737-123">この型は、内部\<記述子>要素を読み取り、内部に含まれる情報を解析する役割を担います。</span><span class="sxs-lookup"><span data-stu-id="05737-123">This type is responsible for reading the inner \<descriptor> element and for parsing the information contained within.</span></span>
+<span data-ttu-id="45b2a-122">外部\<記述子> 要素には、deserializerType 属性が含まれています。これは、I認証 Ated Tordescriptor デシリアライザーを実装する型のアセンブリ修飾名です。</span><span class="sxs-lookup"><span data-stu-id="45b2a-122">The outer \<descriptor> element contains an attribute deserializerType, which is the assembly-qualified name of a type which implements IAuthenticatedEncryptorDescriptorDeserializer.</span></span> <span data-ttu-id="45b2a-123">この型は、内部\<記述子> 要素を読み取り、内に格納されている情報を解析します。</span><span class="sxs-lookup"><span data-stu-id="45b2a-123">This type is responsible for reading the inner \<descriptor> element and for parsing the information contained within.</span></span>
 
-<span data-ttu-id="05737-124">記述子>要素の\<特定の形式は、キーによってカプセル化された認証済み暗号化ツールの実装に依存し、デシリアライザーの各型は、このためにわずかに異なる形式を期待します。</span><span class="sxs-lookup"><span data-stu-id="05737-124">The particular format of the \<descriptor> element depends on the authenticated encryptor implementation encapsulated by the key, and each deserializer type expects a slightly different format for this.</span></span> <span data-ttu-id="05737-125">ただし、一般に、この要素にはアルゴリズム情報 (名前、型、OID、または類似) と秘密キーマテリアルが含まれます。</span><span class="sxs-lookup"><span data-stu-id="05737-125">In general, though, this element will contain algorithmic information (names, types, OIDs, or similar) and secret key material.</span></span> <span data-ttu-id="05737-126">上記の例では、記述子は、このキーが AES-256-CBC 暗号化 + HMACSHA256 検証をラップすることを指定します。</span><span class="sxs-lookup"><span data-stu-id="05737-126">In the above example, the descriptor specifies that this key wraps AES-256-CBC encryption + HMACSHA256 validation.</span></span>
+<span data-ttu-id="45b2a-124">\<記述子> 要素の特定の形式は、キーによってカプセル化される認証済みの暗号化機能の実装によって異なります。また、各デシリアライザー型には、これに対して若干異なる形式が必要です。</span><span class="sxs-lookup"><span data-stu-id="45b2a-124">The particular format of the \<descriptor> element depends on the authenticated encryptor implementation encapsulated by the key, and each deserializer type expects a slightly different format for this.</span></span> <span data-ttu-id="45b2a-125">ただし、一般に、この要素にはアルゴリズム情報 (名前、型、Oid、または類似) とシークレットキーマテリアルが含まれます。</span><span class="sxs-lookup"><span data-stu-id="45b2a-125">In general, though, this element will contain algorithmic information (names, types, OIDs, or similar) and secret key material.</span></span> <span data-ttu-id="45b2a-126">上の例では、記述子は、このキーが AES-256-CBC encryption + HMACSHA256 検証をラップすることを指定しています。</span><span class="sxs-lookup"><span data-stu-id="45b2a-126">In the above example, the descriptor specifies that this key wraps AES-256-CBC encryption + HMACSHA256 validation.</span></span>
 
-## <a name="the-encryptedsecret-element"></a><span data-ttu-id="05737-127">\<暗号化されたシークレット>要素</span><span class="sxs-lookup"><span data-stu-id="05737-127">The \<encryptedSecret> element</span></span>
+## <a name="the-encryptedsecret-element"></a><span data-ttu-id="45b2a-127">\<Encryptedsecret> 要素</span><span class="sxs-lookup"><span data-stu-id="45b2a-127">The \<encryptedSecret> element</span></span>
 
-<span data-ttu-id="05737-128">秘密**&lt;鍵&gt;** の暗号化形式を含む EncryptedSecret 要素は[、保管時の秘密の暗号化が有効になっている場合に](xref:security/data-protection/implementation/key-encryption-at-rest)存在する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="05737-128">An **&lt;encryptedSecret&gt;** element which contains the encrypted form of the secret key material may be present if [encryption of secrets at rest is enabled](xref:security/data-protection/implementation/key-encryption-at-rest).</span></span> <span data-ttu-id="05737-129">属性`decryptorType`は[、IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。</span><span class="sxs-lookup"><span data-stu-id="05737-129">The attribute `decryptorType` is the assembly-qualified name of a type which implements [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor).</span></span> <span data-ttu-id="05737-130">この型は、内部**&lt;の暗号化されたKey&gt;** 要素を読み取り、元のプレーンテキストを回復するためにそれを復号化します。</span><span class="sxs-lookup"><span data-stu-id="05737-130">This type is responsible for reading the inner **&lt;encryptedKey&gt;** element and decrypting it to recover the original plaintext.</span></span>
+<span data-ttu-id="45b2a-128">暗号化された形式の秘密キーマテリアルを含む\*\* &lt;&gt; encryptedsecret\*\*要素は、保存[時のシークレットの暗号化が有効になっ](xref:security/data-protection/implementation/key-encryption-at-rest)ている場合に存在する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="45b2a-128">An **&lt;encryptedSecret&gt;** element which contains the encrypted form of the secret key material may be present if [encryption of secrets at rest is enabled](xref:security/data-protection/implementation/key-encryption-at-rest).</span></span> <span data-ttu-id="45b2a-129">属性`decryptorType`は、 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。</span><span class="sxs-lookup"><span data-stu-id="45b2a-129">The attribute `decryptorType` is the assembly-qualified name of a type which implements [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor).</span></span> <span data-ttu-id="45b2a-130">この型は、内部\*\* &lt;の encryptedKey&gt; \*\*要素を読み取り、復号化して元のプレーンテキストを回復する役割を担います。</span><span class="sxs-lookup"><span data-stu-id="45b2a-130">This type is responsible for reading the inner **&lt;encryptedKey&gt;** element and decrypting it to recover the original plaintext.</span></span>
 
-<span data-ttu-id="05737-131">と同様`<descriptor>`に、`<encryptedSecret>`要素の特定の形式は、使用されている保管時の暗号化メカニズムによって異なります。</span><span class="sxs-lookup"><span data-stu-id="05737-131">As with `<descriptor>`, the particular format of the `<encryptedSecret>` element depends on the at-rest encryption mechanism in use.</span></span> <span data-ttu-id="05737-132">上記の例では、マスター キーは、コメントごとに Windows DPAPI を使用して暗号化されます。</span><span class="sxs-lookup"><span data-stu-id="05737-132">In the above example, the master key is encrypted using Windows DPAPI per the comment.</span></span>
+<span data-ttu-id="45b2a-131">と`<descriptor>`同様に、 `<encryptedSecret>`要素の特定の形式は、使用されている保存時の暗号化メカニズムに依存します。</span><span class="sxs-lookup"><span data-stu-id="45b2a-131">As with `<descriptor>`, the particular format of the `<encryptedSecret>` element depends on the at-rest encryption mechanism in use.</span></span> <span data-ttu-id="45b2a-132">上の例では、コメントごとに Windows DPAPI を使用してマスターキーが暗号化されています。</span><span class="sxs-lookup"><span data-stu-id="45b2a-132">In the above example, the master key is encrypted using Windows DPAPI per the comment.</span></span>
 
-## <a name="the-revocation-element"></a><span data-ttu-id="05737-133">失効\<>要素</span><span class="sxs-lookup"><span data-stu-id="05737-133">The \<revocation> element</span></span>
+## <a name="the-revocation-element"></a><span data-ttu-id="45b2a-133">\<失効> 要素</span><span class="sxs-lookup"><span data-stu-id="45b2a-133">The \<revocation> element</span></span>
 
-<span data-ttu-id="05737-134">失効は、キー リポジトリ内の最上位レベルのオブジェクトとして存在します。</span><span class="sxs-lookup"><span data-stu-id="05737-134">Revocations exist as top-level objects in the key repository.</span></span> <span data-ttu-id="05737-135">慣例によって、失効ファイルの**失効-{timestamp}.xml(** 特定の日付より前のすべてのキーを取り消すための)または**失効-{guid}.xml(特定の**キーを取り消すための)があります。</span><span class="sxs-lookup"><span data-stu-id="05737-135">By convention revocations have the filename **revocation-{timestamp}.xml** (for revoking all keys before a specific date) or **revocation-{guid}.xml** (for revoking a specific key).</span></span> <span data-ttu-id="05737-136">各ファイルには、>\<要素が 1 つ含まれています。</span><span class="sxs-lookup"><span data-stu-id="05737-136">Each file contains a single \<revocation> element.</span></span>
+<span data-ttu-id="45b2a-134">失効は、キーリポジトリの最上位レベルのオブジェクトとして存在します。</span><span class="sxs-lookup"><span data-stu-id="45b2a-134">Revocations exist as top-level objects in the key repository.</span></span> <span data-ttu-id="45b2a-135">慣例により、失効はファイル名の**失効-{timestamp} .xml** (特定の日付より前のすべてのキーを取り消す場合) または**失効-{guid} .xml** (特定のキーを取り消す場合) を持ちます。</span><span class="sxs-lookup"><span data-stu-id="45b2a-135">By convention revocations have the filename **revocation-{timestamp}.xml** (for revoking all keys before a specific date) or **revocation-{guid}.xml** (for revoking a specific key).</span></span> <span data-ttu-id="45b2a-136">各ファイルには、 \<1 つの失効> 要素が含まれます。</span><span class="sxs-lookup"><span data-stu-id="45b2a-136">Each file contains a single \<revocation> element.</span></span>
 
-<span data-ttu-id="05737-137">個々のキーの取り消しの場合、ファイルの内容は以下のようになります。</span><span class="sxs-lookup"><span data-stu-id="05737-137">For revocations of individual keys, the file contents will be as below.</span></span>
+<span data-ttu-id="45b2a-137">個々のキーの失効の場合、ファイルの内容は次のようになります。</span><span class="sxs-lookup"><span data-stu-id="45b2a-137">For revocations of individual keys, the file contents will be as below.</span></span>
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -85,7 +91,7 @@ ms.locfileid: "80976938"
 </revocation>
 ```
 
-<span data-ttu-id="05737-138">この場合、指定されたキーのみが取り消されます。</span><span class="sxs-lookup"><span data-stu-id="05737-138">In this case, only the specified key is revoked.</span></span> <span data-ttu-id="05737-139">ただし、キー ID が "\*" の場合、次の例のように、作成日が指定の失効日より前のすべてのキーは取り消されます。</span><span class="sxs-lookup"><span data-stu-id="05737-139">If the key id is "\*", however, as in the below example, all keys whose creation date is prior to the specified revocation date are revoked.</span></span>
+<span data-ttu-id="45b2a-138">この場合、指定されたキーのみが取り消されます。</span><span class="sxs-lookup"><span data-stu-id="45b2a-138">In this case, only the specified key is revoked.</span></span> <span data-ttu-id="45b2a-139">ただし、キー id が "\*" の場合、次の例のように、作成日が指定した失効日より前のすべてのキーが取り消されます。</span><span class="sxs-lookup"><span data-stu-id="45b2a-139">If the key id is "\*", however, as in the below example, all keys whose creation date is prior to the specified revocation date are revoked.</span></span>
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -97,4 +103,4 @@ ms.locfileid: "80976938"
 </revocation>
 ```
 
-<span data-ttu-id="05737-140">要素\<>がシステムによって読み取られることはありません理由。</span><span class="sxs-lookup"><span data-stu-id="05737-140">The \<reason> element is never read by the system.</span></span> <span data-ttu-id="05737-141">これは、単に取り消しのための人間が読める理由を格納するのに便利な場所です。</span><span class="sxs-lookup"><span data-stu-id="05737-141">It's simply a convenient place to store a human-readable reason for revocation.</span></span>
+<span data-ttu-id="45b2a-140">\<理由> 要素がシステムによって読み取られることはありません。</span><span class="sxs-lookup"><span data-stu-id="45b2a-140">The \<reason> element is never read by the system.</span></span> <span data-ttu-id="45b2a-141">これは、ユーザーが判読できる失効の理由を格納するための便利な場所です。</span><span class="sxs-lookup"><span data-stu-id="45b2a-141">It's simply a convenient place to store a human-readable reason for revocation.</span></span>
