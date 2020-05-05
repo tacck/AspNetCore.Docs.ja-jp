@@ -1,5 +1,5 @@
 ---
-title: Id サーバーをBlazor使用して、ASP.NET Core webasのホスト型アプリをセキュリティで保護する
+title: サーバーを使用Blazorして ASP.NET Core webasのIdentityホスト型アプリをセキュリティで保護する
 author: guardrex
 description: ホスティングサーバーバックエンドBlazorを使用する Visual Studio 内から認証を使用し[IdentityServer](https://identityserver.io/)て新しいホスト型アプリを作成するには
 monikerRange: '>= aspnetcore-3.1'
@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ffdcd30ae9ce5350113569a500e99cf8db82ad65
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: bf2298618e922df412e0742177afd390c4116388
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138608"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768125"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Id サーバーをBlazor使用して、ASP.NET Core webasのホスト型アプリをセキュリティで保護する
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>サーバーを使用Blazorして ASP.NET Core webasのIdentityホスト型アプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
@@ -51,7 +54,7 @@ dotnet new blazorwasm -au Individual -ho
 
 * `Startup.ConfigureServices`の場合:
 
-  * ID:
+  * Identity:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -104,7 +107,7 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
-ヘルパー <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>メソッドは、アプリのポリシースキームを既定の認証ハンドラーとして構成します。 このポリシーは、id URL 空間`/Identity`内のサブパスにルーティングされたすべての要求を id が処理できるように構成されています。 は<xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 、他のすべての要求を処理します。 さらに、このメソッドは次のようになります。
+ヘルパー <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A>メソッドは、アプリのポリシースキームを既定の認証ハンドラーとして構成します。 ポリシーは、がIdentity Identity URL 空間`/Identity`内のすべてのサブパスにルーティングされたすべての要求を処理できるように構成されています。 は<xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> 、他のすべての要求を処理します。 さらに、このメソッドは次のようになります。
 
 * 既定の`{APPLICATION NAME}API`スコープの`{APPLICATION NAME}API`を使用して、API リソースをに登録します。
 * アプリに対して、サービスによって発行されたトークンを検証するように JWT ベアラートークンミドルウェアを構成します。
@@ -115,9 +118,9 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-`ApplicationDbContext` (*Data/applicationdbcontext .cs*) では、id には<xref:Microsoft.EntityFrameworkCore.DbContext> 、ユーザーのスキーマを含むように拡張<xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>された例外と同じが使用されます。 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> は、<xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> から派生しています。
+`ApplicationDbContext` (*Data/applicationdbcontext .cs*) では、で<xref:Microsoft.EntityFrameworkCore.DbContext> Identityも同じものが使用されます。ただし、 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>この例外は、を使用して、のスキーマを追加します。 <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> は、<xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> から派生しています。
 
-データベーススキーマを完全に制御するには、使用可能な Id <xref:Microsoft.EntityFrameworkCore.DbContext>クラスの1つを継承し、 `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating`メソッドでを呼び出して、id スキーマを含めるようにコンテキストを構成します。
+データベーススキーマを完全に制御するには、使用Identity <xref:Microsoft.EntityFrameworkCore.DbContext>可能なクラスの1つを継承し、 Identity `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating`メソッドでを呼び出してスキーマを含めるようにコンテキストを構成します。
 
 ### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
 
@@ -185,7 +188,7 @@ builder.Services.AddApiAuthorization();
 
 * 認証されたユーザーの場合:
   * 現在のユーザー名を表示します。
-  * ASP.NET Core Id のユーザープロファイルページへのリンクを提供します。
+  * ASP.NET Core Identityの [ユーザープロファイル] ページへのリンクを提供します。
   * アプリからログアウトするためのボタンが用意されています。
 * 匿名ユーザーの場合:
   * 登録するオプションが用意されています。

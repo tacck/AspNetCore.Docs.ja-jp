@@ -7,14 +7,18 @@ ms.author: rick-anderson
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- Blazor
 - Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 6220688d53f0718ca5be5f63dd5d9539d37e2391
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: e2f34a72515a700223ce83ce6ec8b55020599ab0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79520147"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767422"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core での multi-factor authentication
 
@@ -25,7 +29,7 @@ Multi-factor authentication (MFA) は、追加の形式の識別のためにサ�
 この記事では、次の項目について説明します。
 
 * MFA とは何か、推奨される MFA フロー
-* ASP.NET Core Identity を使用して管理ページの MFA を構成する
+* ASP.NET Core を使用して管理ページの MFA を構成するIdentity
 * MFA のサインイン要件を OpenID Connect サーバーに送信する
 * MFA を要求するように ASP.NET Core OpenID Connect クライアントを強制する
 
@@ -63,13 +67,13 @@ SMS による MFA は、パスワード認証 (単一要素) と比較して、�
 
 [NIST のガイドライン](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-## <a name="configure-mfa-for-administration-pages-using-aspnet-core-opno-locidentity"></a>ASP.NET Core Identity を使用して管理ページの MFA を構成する
+## <a name="configure-mfa-for-administration-pages-using-aspnet-core-identity"></a>ASP.NET Core を使用して管理ページの MFA を構成するIdentity
 
-MFA は、ユーザーが ASP.NET Core Identity アプリ内の機密性の高いページにアクセスすることを強制する可能性があります。 これは、異なる id に対して異なるレベルのアクセスが存在するアプリに便利な場合があります。 たとえば、ユーザーはパスワードログインを使用してプロファイルデータを表示できますが、管理者は MFA を使用して管理ページにアクセスする必要があります。
+MFA は、ユーザーが ASP.NET Core Identityアプリ内の機密性の高いページにアクセスすることを強制する可能性があります。 これは、異なる id に対して異なるレベルのアクセスが存在するアプリに便利な場合があります。 たとえば、ユーザーはパスワードログインを使用してプロファイルデータを表示できますが、管理者は MFA を使用して管理ページにアクセスする必要があります。
 
 ### <a name="extend-the-login-with-an-mfa-claim"></a>MFA 要求を使用してログインを拡張する
 
-デモコードは、Identity と Razor Pages で ASP.NET Core を使用して設定します。 `AddIdentity` メソッドは `AddDefaultIdentity` 1 ではなく使用されます。そのため、ログインが成功した後に、`IUserClaimsPrincipalFactory` の実装を使用して、クレームを id に追加できます。
+デモコードはIdentity 、およびRazorページと ASP.NET Core を使用して設定します。 `AddIdentity`メソッドは1つでは`AddDefaultIdentity`なく使用される`IUserClaimsPrincipalFactory`ので、ログインが成功した後で、実装を使用して id にクレームを追加できます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -95,7 +99,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`AdditionalUserClaimsPrincipalFactory` クラスは、ログインが成功した後にのみ、ユーザー要求に `amr` 要求を追加します。 要求の値がデータベースから読み取られます。 Id が MFA でログインしている場合は、保護されたビューにユーザーがアクセスする必要があるため、この要求はここに追加されます。 データベースビューが要求を使用せずにデータベースから直接読み取られた場合は、MFA をアクティブ化した後に、MFA を使用せずにビューに直接アクセスすることができます。
+クラス`AdditionalUserClaimsPrincipalFactory`は、ログイン`amr`が成功した後にのみ、要求をユーザー要求に追加します。 要求の値がデータベースから読み取られます。 Id が MFA でログインしている場合は、保護されたビューにユーザーがアクセスする必要があるため、この要求はここに追加されます。 データベースビューが要求を使用せずにデータベースから直接読み取られた場合は、MFA をアクティブ化した後に、MFA を使用せずにビューに直接アクセスすることができます。
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -140,7 +144,7 @@ namespace IdentityStandaloneMfa
 }
 ```
 
-`Startup` クラスで Identity サービスのセットアップが変更されたため、Identity のレイアウトを更新する必要があります。 Identity のページをアプリにスキャフォールディングします。 *Identity/Account/manage/_Layout*ファイルでレイアウトを定義します。
+クラスでIdentityサービスのセットアップが変更されたため、のIdentityレイアウトを更新する必要があります。 `Startup` Identityページをアプリにスキャフォールディングします。 * Identity/アカウント/manage/_Layout*ファイルでレイアウトを定義します。
 
 ```cshtml
 @{
@@ -148,7 +152,7 @@ namespace IdentityStandaloneMfa
 }
 ```
 
-また、Identity のページからすべての管理ページのレイアウトを割り当てます。
+また、すべての管理ページのレイアウトをIdentityページから割り当てます。
 
 ```cshtml
 @{
@@ -158,7 +162,7 @@ namespace IdentityStandaloneMfa
 
 ### <a name="validate-the-mfa-requirement-in-the-administration-page"></a>[管理] ページで MFA の要件を検証する
 
-管理 Razor ページは、ユーザーが MFA を使用してログインしたことを検証します。 `OnGet` メソッドでは、ユーザー要求にアクセスするために id が使用されます。 `amr` の要求は、`mfa`値に対してチェックされます。 Id にこの要求がない場合、または `false`場合、ページは [MFA を有効にする] ページにリダイレクトされます。 これは、ユーザーが既にログインしていて、MFA がないために発生する可能性があります。
+管理Razorページは、ユーザーが MFA を使用してログインしたことを検証します。 `OnGet`メソッドでは、ユーザー要求にアクセスするために id が使用されます。 `amr`要求の値`mfa`がチェックされます。 Id にこの要求がない場合、また`false`はがの場合、ページは [MFA を有効にする] ページにリダイレクトされます。 これは、ユーザーが既にログインしていて、MFA がないために発生する可能性があります。
 
 ```csharp
 using System;
@@ -196,7 +200,7 @@ namespace IdentityStandaloneMfa
 
 ### <a name="ui-logic-to-toggle-user-login-information"></a>ユーザーのログイン情報を切り替える UI ロジック
 
-スタートアップ時に承認ポリシーが追加されました。 このポリシーでは、`mfa`値の `amr` 要求が必要です。
+スタートアップ時に承認ポリシーが追加されました。 このポリシーでは`amr` 、という値`mfa`を持つクレームが必要です。
 
 ```csharp
 services.AddAuthorization(options =>
@@ -204,7 +208,7 @@ services.AddAuthorization(options =>
         x => x.RequireClaim("amr", "mfa")));
 ```
 
-このポリシーを `_Layout` ビューで使用すると、**管理者**メニューの表示と非表示を切り替えることができます。
+このポリシーを`_Layout`ビューで使用すると、**管理者**メニューの表示と非表示を切り替えることができます。
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
@@ -214,7 +218,7 @@ services.AddAuthorization(options =>
 @inject IAuthorizationService AuthorizationService
 ```
 
-Id が MFA を使用してログインしている場合は、 **[管理者]** メニューが表示され、ツールヒントの警告は表示されません。 ユーザーが MFA なしでログインした場合、ユーザーに通知するツールヒントと共に **[管理者 (無効)]** メニューが表示されます (警告について説明しています)。
+Id が MFA を使用してログインしている場合は、[**管理者**] メニューが表示され、ツールヒントの警告は表示されません。 ユーザーが MFA なしでログインした場合、ユーザーに通知するツールヒントと共に [**管理者 (無効)** ] メニューが表示されます (警告について説明しています)。
 
 ```cshtml
 @if (SignInManager.IsSignedIn(User))
@@ -244,22 +248,22 @@ Id が MFA を使用してログインしている場合は、 **[管理者]** �
 
 ![管理者の MFA 認証](mfa/_static/identitystandalonemfa_01.png)
 
-ユーザーは、 **[管理者]** リンクをクリックすると、MFA の有効化ビューにリダイレクトされます。
+ユーザーは、[**管理者**] リンクをクリックすると、MFA の有効化ビューにリダイレクトされます。
 
 ![管理者が MFA 認証をアクティブ化する](mfa/_static/identitystandalonemfa_02.png)
 
 ## <a name="send-mfa-sign-in-requirement-to-openid-connect-server"></a>MFA のサインイン要件を OpenID Connect サーバーに送信する 
 
-`acr_values` パラメーターを使用すると、認証要求でクライアントから必要な `mfa` の値をサーバーに渡すことができます。
+`acr_values`パラメーターを使用すると、認証要求`mfa`でクライアントからサーバーに必要な値を渡すことができます。
 
 > [!NOTE]
-> これを機能させるには、Open ID Connect サーバーで `acr_values` パラメーターを処理する必要があります。
+> これ`acr_values`を機能させるには、Open ID Connect サーバーでパラメーターを処理する必要があります。
 
 ### <a name="openid-connect-aspnet-core-client"></a>OpenID Connect ASP.NET Core クライアント
 
-Open ID Connect クライアントアプリの ASP.NET Core Razor Pages は、`AddOpenIdConnect` メソッドを使用して Open ID Connect サーバーにログインします。 `acr_values` パラメーターは `mfa` 値で設定され、認証要求と共に送信されます。 このを追加するには、`OpenIdConnectEvents` を使用します。
+ASP.NET Core Razor PAGES Open id connect クライアントアプリは、 `AddOpenIdConnect`メソッドを使用して open id connect サーバーにログインします。 `acr_values`パラメーターに`mfa`値を設定し、認証要求と共に送信します。 は`OpenIdConnectEvents` 、このを追加するために使用されます。
 
-推奨される `acr_values` パラメーター値については、「[認証方法の参照値](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)」を参照してください。
+推奨さ`acr_values`れるパラメーター値については、「[認証方法の参照値](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)」を参照してください。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -296,11 +300,11 @@ public void ConfigureServices(IServiceCollection services)
     });
 ```
 
-### <a name="example-openid-connect-identityserver-4-server-with-aspnet-core-opno-locidentity"></a>ASP.NET Core Identity を使用した OpenID Connect のサーバー4サーバーの例
+### <a name="example-openid-connect-identityserver-4-server-with-aspnet-core-identity"></a>ASP.NET Core を使用した OpenID Connect サーバー4サーバーの例Identity
 
-MVC ビューで ASP.NET Core Identity を使用して実装された OpenID Connect サーバーでは、 *ErrorEnable2FA*という名前の新しいビューが作成されます。 ビュー:
+MVC ビューで ASP.NET Core Identityを使用して実装された OpenID connect サーバーでは、 *ErrorEnable2FA*という名前の新しいビューが作成されます。 ビュー:
 
-* Identity が MFA を必要としているものの、ユーザーが Identityでアクティブ化していないアプリからのものであるかどうかが表示されます。
+* が MFA をIdentity必要とするアプリからのものの、ユーザーがでこれをIdentityアクティブ化していない場合に表示されます。
 * ユーザーに通知し、このをアクティブにするためのリンクを追加します。
 
 ```cshtml
@@ -319,9 +323,9 @@ You can enable MFA to login here:
 <a asp-controller="Manage" asp-action="TwoFactorAuthentication">Enable MFA</a>
 ```
 
-`Login` メソッドでは、Open ID Connect 要求パラメーターにアクセスするために、`IIdentityServerInteractionService` インターフェイス実装 `_interaction` が使用されます。 `acr_values` パラメーターには、`AcrValues` プロパティを使用してアクセスします。 クライアントが `mfa` セットを使用してこれを送信したときに、このチェックボックスをオンにすることができます。
+メソッドでは、Open `IIdentityServerInteractionService` ID Connect `_interaction`要求パラメーターにアクセスするためにインターフェイスの実装が使用されます。 `Login` `acr_values`パラメーターには、 `AcrValues`プロパティを使用してアクセスします。 クライアントがこれを set と`mfa`共に送信すると、これを確認できます。
 
-MFA が必要で、ASP.NET Core Identity のユーザーが MFA を有効にしている場合、ログインは続行されます。 ユーザーが MFA を有効にしていない場合、ユーザーはカスタムビュー *ErrorEnable2FA*にリダイレクトされます。 次に、ASP.NET Core Identity ユーザーにサインインします。
+MFA が必要で、ASP.NET Core Identityのユーザーが mfa を有効にしている場合、ログインは続行されます。 ユーザーが MFA を有効にしていない場合、ユーザーはカスタムビュー *ErrorEnable2FA*にリダイレクトされます。 次にIdentity 、ASP.NET Core ユーザーにサインインします。
 
 ```csharp
 //
@@ -346,7 +350,7 @@ public async Task<IActionResult> Login(LoginInputModel model)
     // code omitted for brevity
 ```
 
-`ExternalLoginCallback` メソッドは、ローカル Identity ログインと同様に機能します。 `mfa` 値の `AcrValues` プロパティがチェックされます。 `mfa` 値が存在する場合は、ログインが完了する前に MFA が強制されます (たとえば、`ErrorEnable2FA` ビューにリダイレクトされます)。
+メソッド`ExternalLoginCallback`は、ローカルIdentityログインと同様に機能します。 `AcrValues`プロパティの`mfa`値がチェックされます。 `mfa`値が存在する場合は、ログインが完了する前に MFA が強制されます ( `ErrorEnable2FA`たとえば、ビューにリダイレクトされます)。
 
 ```csharp
 //
@@ -401,16 +405,16 @@ public async Task<IActionResult> ExternalLoginCallback(
 
 ユーザーが既にログインしている場合、クライアントアプリは次のようになります。
 
-* は引き続き `amr` 要求を検証します。
-* ASP.NET Core Identity ビューへのリンクを使用して MFA を設定できます。
+* は引き続きクレーム`amr`を検証します。
+* ASP.NET Core Identityビューへのリンクを使用して MFA を設定できます。
 
 ![acr_values-1](mfa/_static/acr_values-1.png)
 
 ## <a name="force-aspnet-core-openid-connect-client-to-require-mfa"></a>MFA を要求するように ASP.NET Core OpenID Connect クライアントを強制する
 
-この例は、OpenID Connect を使用してサインインする ASP.NET Core Razor ページアプリで、ユーザーが MFA を使用して認証されていることを要求できる方法を示しています。
+この例では、OpenID Razor connect を使用してサインインする ASP.NET Core ページアプリで、ユーザーが MFA を使用して認証されていることを要求できる方法を示します。
 
-MFA の要件を検証するために、`IAuthorizationRequirement` の要件が作成されます。 これは、MFA を必要とするポリシーを使用してページに追加されます。
+MFA の要件を検証するため`IAuthorizationRequirement`に、要件が作成されます。 これは、MFA を必要とするポリシーを使用してページに追加されます。
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -421,11 +425,11 @@ namespace AspNetCoreRequireMfaOidc
 }
 ```
 
-`amr` 要求を使用して `mfa`値を確認する `AuthorizationHandler` が実装されています。 `amr` は、認証が成功したことを示す `id_token` に返され、[認証方法の参照値](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)の指定に定義されているように、さまざまな値を持つことができます。
+要求を使用して値`mfa`をチェックするが実装されています。 `AuthorizationHandler` `amr` `amr`は認証が成功し`id_token`たときに返され、[認証方法の参照値](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)の指定に定義されているように、さまざまな値を持つことができます。
 
 返される値は、id の認証方法と Open ID Connect サーバーの実装によって異なります。
 
-`AuthorizationHandler` は `RequireMfa` の要件を使用し、`amr` 要求を検証します。 OpenID Connect サーバーは、ASP.NET Core Identityと共に IdentityServer4 を使用して実装できます。 ユーザーが TOTP を使用してログインすると、`amr` 要求が MFA 値と共に返されます。 異なる OpenID Connect サーバーの実装または別の MFA の種類を使用している場合は、`amr` 要求の値が異なることがあります。 このコードも、このコードを受け入れるように拡張する必要があります。
+は`AuthorizationHandler` `RequireMfa`要件を使用し、 `amr`要求を検証します。 OpenID Connect サーバーは、ASP.NET Core Identityと共に IdentityServer4 を使用して実装できます。 ユーザーが TOTP を使用してログインする`amr`と、要求は MFA 値と共に返されます。 異なる OpenID Connect サーバーの実装または別の MFA の種類を使用`amr`している場合、要求は異なる値を持つことになります。 このコードも、このコードを受け入れるように拡張する必要があります。
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -460,7 +464,7 @@ namespace AspNetCoreRequireMfaOidc
 }
 ```
 
-`Startup.ConfigureServices` メソッドでは、`AddOpenIdConnect` メソッドが既定のチャレンジスキームとして使用されます。 `amr` 要求を確認するために使用される承認ハンドラーが、コントロールの反転コンテナーに追加されます。 その後、`RequireMfa` 要件を追加するポリシーが作成されます。
+`Startup.ConfigureServices`メソッドでは、 `AddOpenIdConnect`メソッドが既定のチャレンジスキームとして使用されます。 `amr`要求を確認するために使用される承認ハンドラーが、コントロールの反転コンテナーに追加されます。 その後、 `RequireMfa`要件を追加するポリシーが作成されます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -505,7 +509,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-このポリシーは、必要に応じて Razor ページで使用されます。 ポリシーは、アプリ全体に対してグローバルに追加することもできます。
+このポリシーは、 Razor必要に応じてページで使用されます。 ポリシーは、アプリ全体に対してグローバルに追加することもできます。
 
 ```csharp
 using System;
@@ -536,7 +540,7 @@ namespace AspNetCoreRequireMfaOidc.Pages
 }
 ```
 
-ユーザーが MFA を使用せずに認証した場合、`amr` の要求には、`pwd` 値が設定されている可能性があります。 要求は、ページへのアクセスを承認されません。 既定値を使用すると、ユーザーは [*アカウント/AccessDenied* ] ページにリダイレクトされます。 この動作は変更できます。または、独自のカスタムロジックを実装することもできます。 この例では、有効なユーザーが自分のアカウントに対して MFA を設定できるように、リンクが追加されています。
+ユーザーが MFA を使用せずに`amr`認証する場合、要求`pwd`には値が設定されている可能性があります。 要求は、ページへのアクセスを承認されません。 既定値を使用すると、ユーザーは [*アカウント/AccessDenied* ] ページにリダイレクトされます。 この動作は変更できます。または、独自のカスタムロジックを実装することもできます。 この例では、有効なユーザーが自分のアカウントに対して MFA を設定できるように、リンクが追加されています。
 
 ```cshtml
 @page
@@ -553,11 +557,11 @@ You require MFA to login here
 <a href="https://localhost:44352/Manage/TwoFactorAuthentication">Enable MFA</a>
 ```
 
-これで、MFA で認証されるユーザーのみがページまたは web サイトにアクセスできるようになりました。 異なる種類の MFA が使用されている場合、または2FA が正常な場合、`amr` 要求の値は異なり、正しく処理する必要があります。 Open ID Connect サーバーが異なると、この要求に対して異なる値が返され、[認証方法の参照値](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)の指定に従わないことがあります。
+これで、MFA で認証されるユーザーのみがページまたは web サイトにアクセスできるようになりました。 異なる種類の MFA が使用されている場合、または`amr` 2fa が正常な場合、要求は異なる値を持ち、正しく処理する必要があります。 Open ID Connect サーバーが異なると、この要求に対して異なる値が返され、[認証方法の参照値](https://tools.ietf.org/html/draft-ietf-oauth-amr-values-08)の指定に従わないことがあります。
 
 MFA を使用せずにログインする場合 (パスワードのみを使用する場合など):
 
-* `amr` には `pwd` の値があります。
+* の`amr` `pwd`値は次のとおりです。
 
     ![require_mfa_oidc_02 .png](mfa/_static/require_mfa_oidc_02.png)
 
@@ -565,13 +569,13 @@ MFA を使用せずにログインする場合 (パスワードのみを使用�
 
     ![require_mfa_oidc_03 .png](mfa/_static/require_mfa_oidc_03.png)
 
-または、Identityで OTP を使用してログインします。
+または、次の方法でIdentityOTP を使用してログインします。
 
 ![require_mfa_oidc_01 .png](mfa/_static/require_mfa_oidc_01.png)
 
 ## <a name="additional-resources"></a>その他のリソース
 
 * [ASP.NET Core での TOTP authenticator アプリの QR コード生成を有効にする](xref:security/authentication/identity-enable-qrcodes)
-* [Azure Active Directory 用の passwordless 認証オプション](/azure/active-directory/authentication/concept-authentication-passwordless)
+* [Azure Active Directory のパスワードレス認証オプション](/azure/active-directory/authentication/concept-authentication-passwordless)
 * [.NET を使用した FIDO2/WebAuthn 構成証明およびアサーション用の FIDO2 .NET ライブラリ](https://github.com/abergs/fido2-net-lib)
 * [WebAuthn すばらしい](https://github.com/herrjemand/awesome-webauthn)
