@@ -6,17 +6,23 @@ monikerRange: '>= aspnetcore-2.2'
 ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 7b6a7328deb8718a2a1c67c104cec359a4f13497
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 530ce2d2a7f67f549f6d188a0c571a5d58518377
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653054"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776247"
 ---
 # <a name="use-web-api-analyzers"></a>Web API アナライザーを使用する
 
-ASP.NET Core 2.2 以降には、Web API プロジェクトでの使用を目的とした MVC アナライザー パッケージが用意されています。 アナライザーは、<xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>Web API 規約[の設定中に ](xref:web-api/advanced/conventions) の注釈が付けられたコントローラーで動作します。
+ASP.NET Core 2.2 以降には、Web API プロジェクトでの使用を目的とした MVC アナライザー パッケージが用意されています。 アナライザーは、[Web API 規約](xref:web-api/advanced/conventions)の設定中に <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> の注釈が付けられたコントローラーで動作します。
 
 アナライザー パッケージでは、次のようなコントローラーのアクションが通知されます。
 
@@ -47,8 +53,8 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**[パッケージ マネージャー コンソール]** ウィンドウから:
-  * [**他の Windows** >**パッケージマネージャーコンソール**を**表示**>] にアクセスします。
+[**パッケージ マネージャー コンソール**] ウィンドウから:
+  * **[表示]** > ** [その他のウィンドウ]** > **[パッケージ マネージャー コンソール]** に移動します。
   * *ApiConventions.csproj* ファイルが存在するディレクトリに移動します。
   * たとえば、次のコマンドを実行します。
 
@@ -58,14 +64,14 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* **Solution Pad**の [*パッケージ*] フォルダーを右クリックし、 **[パッケージの追加]** > ます。
-* **[パッケージを追加]** ウィンドウの **[ソース]** ドロップダウンを "nuget.org" に設定します。
+* [パッケージの**追加**] **Solution Pad** >の [*パッケージ*] フォルダーを右クリックします。
+* [**パッケージの追加**] ウィンドウの [**ソース**] ドロップダウンを [nuget.org] に設定します。
 * 検索ボックスに「Microsoft.AspNetCore.Mvc.Api.Analyzers」と入力します。
-* 結果ウィンドウから "Microsoft.AspNetCore.Mvc.Api.Analyzers" パッケージを選択して、 **[パッケージを追加]** をクリックします。
+* 結果ウィンドウから "Microsoft.AspNetCore.Mvc.Api.Analyzers" パッケージを選択して、[**パッケージを追加**] をクリックします。
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**統合端末**からから次のコマンドを実行します。
+**統合ターミナル**からから次のコマンドを実行します。
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -95,7 +101,7 @@ OpenAPI ドキュメントには、アクションによって返される可能
 
 ![警告を報告するアナライザー](conventions/_static/Analyzer.gif)
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:web-api/advanced/conventions>
 * <xref:tutorials/web-api-help-pages-using-swagger>

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 597f1472bb30ae3b34fa98659c8c8bb464223e84
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4deae7f7511e3ce94450bc06d5fc8dc77a94f212
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654476"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767084"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core でコントローラーのロジックの単体テストを行う
 
@@ -57,7 +63,7 @@ Home コントローラーは、ブレーンストーミング セッション�
 
 Home コントローラーの `HTTP POST Index` メソッドのテストでは、以下が検証されます。
 
-* [Modelstate. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)が `false`場合、アクションメソッドは、適切なデータと共に*400 の不適切な要求*<xref:Microsoft.AspNetCore.Mvc.ViewResult> を返します。
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) が `false` の場合、アクション メソッドは、*400 Bad Request* <xref:Microsoft.AspNetCore.Mvc.ViewResult> と適切なデータを返す。
 * `ModelState.IsValid` が `true` の場合:
   * リポジトリの `Add` メソッドが呼び出される。
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> と適切な引数が返される。
@@ -82,7 +88,7 @@ Home コントローラーの `HTTP POST Index` メソッドのテストでは�
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
-Session コントローラーの `return`アクション内に各 `Index` シナリオ用の 1 つのテストを含む単体テスト:
+Session コントローラーの `Index`アクション内に各 `return` シナリオ用の 1 つのテストを含む単体テスト:
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/SessionControllerTests.cs?name=snippet_SessionControllerTests&highlight=2,11-14,18,31-32,36,50-55)]
 
@@ -113,7 +119,7 @@ API の呼び出しでビジネス ドメイン エンティティを直接返�
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests5&highlight=5,7-8,15-18)]
 
-`Create` が無効の場合の `ModelState` メソッドの動作をテストするため、サンプル アプリでは、テストの一部としてコントローラーにモデル エラーを追加します。 単体テストでは、モデルの検証またはモデル バインドのテストを試さないでください。無効な &mdash; に遭遇したときのアクション メソッドの動作だけをテストしてください。
+`ModelState` が無効の場合の `Create` メソッドの動作をテストするため、サンプル アプリでは、テストの一部としてコントローラーにモデル エラーを追加します。 単体テストでは、モデルの検証またはモデル バインドのテストを試さないでください。無効な `ModelState` に遭遇したときのアクション メソッドの動作だけをテストしてください。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests1&highlight=7,13)]
 
@@ -127,13 +133,13 @@ API の呼び出しでビジネス ドメイン エンティティを直接返�
 
 ## <a name="test-actionresultt"></a>ActionResult\<T> をテストする
 
-ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) で、`ActionResult` から派生する型または特定の型を返すことができます。
+ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) を使用して、から`ActionResult`派生した型を返すか、特定の型を返すことができます。
 
-サンプル アプリには、特定のセッション `List<IdeaDTO>` に対して `id` を返すメソッドが含まれています。 セッションに `id` が存在しない場合、コントローラーは <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> を返します。
+サンプル アプリには、特定のセッション `id` に対して `List<IdeaDTO>` を返すメソッドが含まれています。 セッションに `id` が存在しない場合、コントローラーは <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> を返します。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_ForSessionActionResult&highlight=10,21)]
 
-`ForSessionActionResult`には、`ApiIdeasControllerTests` コントローラーの 2 つのテストが含まれています。
+`ApiIdeasControllerTests`には、`ForSessionActionResult` コントローラーの 2 つのテストが含まれています。
 
 最初のテストでは、コントローラーは `ActionResult` を返すが、存在しないセッション `id` の存在しないアイデアの一覧は返さないことを確認します。
 
@@ -144,8 +150,8 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 有効なセッション `id` に対する 2 番目のテストでは、メソッドが以下を返すことを確認します。
 
-* `ActionResult` 型の `List<IdeaDTO>`。
-* [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) は `List<IdeaDTO>` 型。
+* `List<IdeaDTO>` 型の `ActionResult`。
+* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`List<IdeaDTO>`型です。
 * 一覧の最初の項目は、モック セッションに格納されているアイデアと一致する有効なアイデア (`GetTestSession` の呼び出しによって取得)。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -158,7 +164,7 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
-`CreateActionResult` には、`ApiIdeasControllerTests` の 3 つのテストが含まれます。
+`ApiIdeasControllerTests` には、`CreateActionResult` の 3 つのテストが含まれます。
 
 最初のテストでは、無効なモデルに対して <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> が返されることを確認します。
 
@@ -170,12 +176,12 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 有効なセッション `id` に対しては、最後のテストで以下を確認します。
 
-* メソッドが `ActionResult` 型の `BrainstormSession` を返す。
-* [ActionResult\<T>.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) は <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
-* [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) は `BrainstormSession` 型。
+* メソッドが `BrainstormSession` 型の `ActionResult` を返す。
+* [Actionresult\<T>。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)は<xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>です。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
+* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`BrainstormSession`型です。
 * セッション `UpdateAsync(testSession)` を更新するモック 呼び出しが呼び出された。 `Verifiable` メソッド呼び出しは、アサーション内で `mockRepo.Verify()` を実行することでチェックされます。
 * セッションに対して 2 つの `Idea` オブジェクトが返された。
-* 最後の項目 (`Idea` へのモック呼び出しによって追加された `UpdateAsync`) が、テスト中にセッションに追加された `newIdea` と一致する。
+* 最後の項目 (`UpdateAsync` へのモック呼び出しによって追加された `Idea`) が、テスト中にセッションに追加された `newIdea` と一致する。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNewlyCreatedIdeaForSession&highlight=20-22,28-34)]
 
@@ -220,7 +226,7 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 Home コントローラーの `HTTP POST Index` メソッドのテストでは、以下が検証されます。
 
-* [Modelstate. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)が `false`場合、アクションメソッドは、適切なデータと共に*400 の不適切な要求*<xref:Microsoft.AspNetCore.Mvc.ViewResult> を返します。
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) が `false` の場合、アクション メソッドは、*400 Bad Request* <xref:Microsoft.AspNetCore.Mvc.ViewResult> と適切なデータを返す。
 * `ModelState.IsValid` が `true` の場合:
   * リポジトリの `Add` メソッドが呼び出される。
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> と適切な引数が返される。
@@ -245,7 +251,7 @@ Home コントローラーの `HTTP POST Index` メソッドのテストでは�
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
-Session コントローラーの `return`アクション内に各 `Index` シナリオ用の 1 つのテストを含む単体テスト:
+Session コントローラーの `Index`アクション内に各 `return` シナリオ用の 1 つのテストを含む単体テスト:
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/SessionControllerTests.cs?name=snippet_SessionControllerTests&highlight=2,11-14,18,31-32,36,50-55)]
 
@@ -276,7 +282,7 @@ API の呼び出しでビジネス ドメイン エンティティを直接返�
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests5&highlight=5,7-8,15-18)]
 
-`Create` が無効の場合の `ModelState` メソッドの動作をテストするため、サンプル アプリでは、テストの一部としてコントローラーにモデル エラーを追加します。 単体テストでは、モデルの検証またはモデル バインドのテストを試さないでください。無効な &mdash; に遭遇したときのアクション メソッドの動作だけをテストしてください。
+`ModelState` が無効の場合の `Create` メソッドの動作をテストするため、サンプル アプリでは、テストの一部としてコントローラーにモデル エラーを追加します。 単体テストでは、モデルの検証またはモデル バインドのテストを試さないでください。無効な `ModelState` に遭遇したときのアクション メソッドの動作だけをテストしてください。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests1&highlight=7,13)]
 
@@ -290,13 +296,13 @@ API の呼び出しでビジネス ドメイン エンティティを直接返�
 
 ## <a name="test-actionresultt"></a>ActionResult\<T> をテストする
 
-ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) で、`ActionResult` から派生する型または特定の型を返すことができます。
+ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) を使用して、から`ActionResult`派生した型を返すか、特定の型を返すことができます。
 
-サンプル アプリには、特定のセッション `List<IdeaDTO>` に対して `id` を返すメソッドが含まれています。 セッションに `id` が存在しない場合、コントローラーは <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> を返します。
+サンプル アプリには、特定のセッション `id` に対して `List<IdeaDTO>` を返すメソッドが含まれています。 セッションに `id` が存在しない場合、コントローラーは <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> を返します。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_ForSessionActionResult&highlight=10,21)]
 
-`ForSessionActionResult`には、`ApiIdeasControllerTests` コントローラーの 2 つのテストが含まれています。
+`ApiIdeasControllerTests`には、`ForSessionActionResult` コントローラーの 2 つのテストが含まれています。
 
 最初のテストでは、コントローラーは `ActionResult` を返すが、存在しないセッション `id` の存在しないアイデアの一覧は返さないことを確認します。
 
@@ -307,8 +313,8 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 有効なセッション `id` に対する 2 番目のテストでは、メソッドが以下を返すことを確認します。
 
-* `ActionResult` 型の `List<IdeaDTO>`。
-* [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) は `List<IdeaDTO>` 型。
+* `List<IdeaDTO>` 型の `ActionResult`。
+* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`List<IdeaDTO>`型です。
 * 一覧の最初の項目は、モック セッションに格納されているアイデアと一致する有効なアイデア (`GetTestSession` の呼び出しによって取得)。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -321,7 +327,7 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
-`CreateActionResult` には、`ApiIdeasControllerTests` の 3 つのテストが含まれます。
+`ApiIdeasControllerTests` には、`CreateActionResult` の 3 つのテストが含まれます。
 
 最初のテストでは、無効なモデルに対して <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> が返されることを確認します。
 
@@ -333,12 +339,12 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 有効なセッション `id` に対しては、最後のテストで以下を確認します。
 
-* メソッドが `ActionResult` 型の `BrainstormSession` を返す。
-* [ActionResult\<T>.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) は <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
-* [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) は `BrainstormSession` 型。
+* メソッドが `BrainstormSession` 型の `ActionResult` を返す。
+* [Actionresult\<T>。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)は<xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>です。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
+* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`BrainstormSession`型です。
 * セッション `UpdateAsync(testSession)` を更新するモック 呼び出しが呼び出された。 `Verifiable` メソッド呼び出しは、アサーション内で `mockRepo.Verify()` を実行することでチェックされます。
 * セッションに対して 2 つの `Idea` オブジェクトが返された。
-* 最後の項目 (`Idea` へのモック呼び出しによって追加された `UpdateAsync`) が、テスト中にセッションに追加された `newIdea` と一致する。
+* 最後の項目 (`UpdateAsync` へのモック呼び出しによって追加された `Idea`) が、テスト中にセッションに追加された `newIdea` と一致する。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNewlyCreatedIdeaForSession&highlight=20-22,28-34)]
 
@@ -348,5 +354,5 @@ ASP.NET Core 2.1 以降、[ActionResult\<T>](xref:web-api/action-return-types#ac
 
 * <xref:test/integration-tests>
 * [Visual Studio で単体テストを作成して実行する](/visualstudio/test/unit-test-your-code)
-* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC 用の Fluent テスト ライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; MVC と Web API アプリをテストするための fluent インターフェイスを提供する厳密に型指定された単体テスト ライブラリ。 ("*Microsoft では保守管理もサポートも行っていません。* ")
+* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC 用の Fluent テスト ライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; MVC と Web API アプリをテストするための fluent インターフェイスを提供する厳密に型指定された単体テスト ライブラリ。 ("*Microsoft では保守管理もサポートも行っていません。*")
 

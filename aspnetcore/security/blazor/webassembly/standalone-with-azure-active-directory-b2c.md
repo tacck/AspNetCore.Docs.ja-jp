@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 4ccf86550a520f1d001088859ef5909041178781
-ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
+ms.openlocfilehash: 0fb4f4176f214d6bf0c005838a0ccbe4487243f2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82149995"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767975"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C を使用Blazorして ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C を使用Blazorして ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
@@ -31,13 +34,13 @@ ms.locfileid: "82149995"
 
    * [AAD B2C のテナント](/azure/active-directory-b2c/tutorial-create-tenant) &ndash;レコードを作成して、次の情報を記録します。
 
-     1 \。 AAD B2C インスタンス (たとえば`https://contoso.b2clogin.com/`、末尾のスラッシュを含む)<br>
-     2 \。 テナントドメインの AAD B2C (例`contoso.onmicrosoft.com`)
+     1\. AAD B2C インスタンス (たとえば`https://contoso.b2clogin.com/`、末尾のスラッシュを含む)<br>
+     2\. テナントドメインの AAD B2C (例`contoso.onmicrosoft.com`)
 
    * &ndash; [Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)アプリの登録時に、次の選択を行います。
 
-     1 \。 [ **Web アプリ/WEB API** **] を [はい]** に設定します。<br>
-     2 \。 [**暗黙的フローを許可**する **] を [はい]** に設定します。<br>
+     1\. [ **Web アプリ/WEB API** **] を [はい]** に設定します。<br>
+     2\. [**暗黙的フローを許可**する **] を [はい]** に設定します。<br>
      3 \。 の`https://localhost:5001/authentication/login-callback`**応答 URL**を追加します。
 
      アプリケーション ID (クライアント ID) を記録します (たとえば`11111111-1111-1111-1111-111111111111`、)。
@@ -73,7 +76,7 @@ ms.locfileid: "82149995"
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリが Id プロバイダー (IP) と対話するために必要なすべてのサービスを設定します。
+ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリがIdentityプロバイダー (IP) と対話するために必要なすべてのサービスを設定します。
 
 *Program.cs*:
 
@@ -135,7 +138,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 
-* [追加のアクセストークンを要求する](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [追加のアクセス トークンを要求する](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
 * [送信要求にトークンを添付する](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>ファイルのインポート
@@ -166,7 +169,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-ad-b2c>

@@ -4,13 +4,19 @@ author: rick-anderson
 description: 認証ポリシースキームを使用すると、単一の論理認証スキームを簡単に使用できるようになります。
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: f02d8e5cac20a9b60c5eddbd28253efacf682ea1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ddedf62c5e8363bd93c9948fd2d3418abc566539
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652352"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767318"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core のポリシースキーム
 
@@ -19,7 +25,7 @@ ms.locfileid: "78652352"
 * 任意の認証アクションを別のスキームに簡単に転送できます。
 * 要求に基づいて動的に転送します。
 
-派生 <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> を使用するすべての認証方式と、関連付けられている[Authenticationhandler\<TOptions >](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1):
+派生<xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions>と関連付けられている[authenticationhandler\<TOptions](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)を使用するすべての認証方式は、次の>ます。
 
 * は、2.1 以降の ASP.NET Core で自動的にポリシースキームになります。
 * は、スキームのオプションを構成することによって有効にすることができます。

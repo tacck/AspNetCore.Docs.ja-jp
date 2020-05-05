@@ -1,53 +1,59 @@
 ---
-title: ASP.NET コアのカスタム承認ポリシー プロバイダー
+title: ASP.NET Core のカスタム承認ポリシープロバイダー
 author: mjrousos
-description: ASP.NET コア アプリでカスタム IAuthorizationPolicyProvider を使用して、承認ポリシーを動的に生成する方法について説明します。
+description: ASP.NET Core アプリでカスタム IAuthorizationPolicyProvider を使用して、承認ポリシーを動的に生成する方法について説明します。
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 1db78e5b2cea964471e4eea090f713f6af5f4740
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661770"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777541"
 ---
-# <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET コアで IAuthorizationPolicyProvider を使用するカスタム承認ポリシー プロバイダー 
+# <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core で IAuthorizationPolicyProvider を使用するカスタム承認ポリシープロバイダー 
 
 作成者: [Mike Rousos](https://github.com/mjrousos)
 
-通常、[ポリシー ベースの認可](xref:security/authorization/policies)を使用する場合、`AuthorizationOptions.AddPolicy`ポリシーは認可サービスの構成の一部として呼び出すことによって登録されます。 シナリオによっては、この方法ですべての承認ポリシーを登録できない場合があります (または望ましいとは限りません)。 このような場合は、カスタム`IAuthorizationPolicyProvider`を使用して承認ポリシーの提供方法を制御できます。
+通常、[ポリシーベースの承認](xref:security/authorization/policies)を使用する場合、ポリシーは`AuthorizationOptions.AddPolicy` 、承認サービス構成の一部としてを呼び出すことによって登録されます。 場合によっては、すべての承認ポリシーをこの方法で登録することができない (または望ましくない) ことがあります。 そのような場合は、カスタム`IAuthorizationPolicyProvider`を使用して、承認ポリシーの提供方法を制御できます。
 
-カスタム[IAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider)が役に立つシナリオの例を次に示します。
+カスタム[IAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider)が役に立つ可能性のあるシナリオの例を次に示します。
 
-* 外部サービスを使用してポリシー評価を行う。
-* さまざまな部屋番号や年齢など、さまざまな範囲のポリシーを使用するため、個々の承認ポリシーを`AuthorizationOptions.AddPolicy`呼び出しで追加しても意味がありません。
-* 外部データ ソース (データベースなど) の情報に基づいて実行時にポリシーを作成するか、別のメカニズムを使用して動的に承認要件を決定する。
+* 外部サービスを使用してポリシーの評価を提供する。
+* 多数のポリシー (部屋番号や年齢など) を使用すると、個々の承認ポリシーを1つの`AuthorizationOptions.AddPolicy`呼び出しで追加することは意味がありません。
+* 外部データソース (データベースなど) の情報に基づいて実行時にポリシーを作成するか、別のメカニズムを使用して承認要件を動的に決定します。
 
-[AspNetCore GitHub リポジトリ](https://github.com/dotnet/AspNetCore)から[サンプル コードを表示またはダウンロード](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)します。 ドットネット/AspNetCore リポジトリ ZIP ファイルをダウンロードします。 ファイルを解凍します。 *src/セキュリティ/サンプル/カスタムポリシープロバイダ*プロジェクトフォルダに移動します。
+[AspNetCore GitHub リポジトリ](https://github.com/dotnet/AspNetCore)から[サンプルコードを表示またはダウンロード](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)します。 Dotnet/AspNetCore リポジトリ ZIP ファイルをダウンロードします。 ファイルを解凍します。 *Src/Security/samples/CustomPolicyProvider*プロジェクトフォルダーに移動します。
 
 ## <a name="customize-policy-retrieval"></a>ポリシーの取得のカスタマイズ
 
-ASP.NET Core アプリは、インターフェイス`IAuthorizationPolicyProvider`の実装を使用して承認ポリシーを取得します。 既定では、[既定の承認ポリシー プロバイダー](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider)が登録され、使用されます。 `DefaultAuthorizationPolicyProvider`は、呼び`AuthorizationOptions`出しで`IServiceCollection.AddAuthorization`提供された からポリシーを返します。
+ASP.NET Core アプリは、インターフェイスの実装`IAuthorizationPolicyProvider`を使用して承認ポリシーを取得します。 既定では、 [Defaultauthorizationpolicyprovider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider)が登録され、使用されます。 `DefaultAuthorizationPolicyProvider``IServiceCollection.AddAuthorization`呼び出しで`AuthorizationOptions`指定されたからポリシーを返します。
 
-アプリの[依存関係の注入](xref:fundamentals/dependency-injection)コンテナーに`IAuthorizationPolicyProvider`別の実装を登録することによって、この動作をカスタマイズします。 
+この動作をカスタマイズするには`IAuthorizationPolicyProvider` 、アプリの[依存関係挿入](xref:fundamentals/dependency-injection)コンテナーに別の実装を登録します。 
 
-この`IAuthorizationPolicyProvider`インターフェイスには、次の 3 つの API が含まれています。
+インターフェイス`IAuthorizationPolicyProvider`には、次の3つの api が含まれます。
 
-* [指定](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getpolicyasync#Microsoft_AspNetCore_Authorization_IAuthorizationPolicyProvider_GetPolicyAsync_System_String_)された名前の承認ポリシーを返します。
-* [既定](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getdefaultpolicyasync)の承認ポリシー (ポリシーが指定されていない属性に使用される`[Authorize]`ポリシー) を返します。 
-* [フォールバック](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getfallbackpolicyasync)認証ポリシー (ポリシーが指定されていない場合に承認ミドルウェアによって使用されるポリシー) を返します。 
+* [Getpolicyasync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getpolicyasync#Microsoft_AspNetCore_Authorization_IAuthorizationPolicyProvider_GetPolicyAsync_System_String_)は、指定された名前の承認ポリシーを返します。
+* [GetDefaultPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getdefaultpolicyasync)では、既定の承認ポリシー (ポリシーが`[Authorize]`指定されていない属性に使用されるポリシー) が返されます。 
+* [Getfallbackpolicyasync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getfallbackpolicyasync)は、フォールバック承認ポリシー (ポリシーが指定されていない場合に、承認ミドルウェアによって使用されるポリシー) を返します。 
 
-これらの API を実装することで、承認ポリシーの提供方法をカスタマイズできます。
+これらの Api を実装することで、承認ポリシーの提供方法をカスタマイズできます。
 
 ## <a name="parameterized-authorize-attribute-example"></a>パラメーター化された承認属性の例
 
-便利`IAuthorizationPolicyProvider`なシナリオの 1 つは`[Authorize]`、パラメーターに依存する要件を持つカスタム属性を有効にすることです。 たとえば、ポリシー[ベースの承認](xref:security/authorization/policies)ドキュメントでは、年齢ベースの ("AtLeast21") ポリシーがサンプルとして使用されました。 アプリ内の異なるコントローラーアクションを*異なる*年齢のユーザーが使用できるようにする場合は、年齢ベースのポリシーを多数用意すると便利です。 でアプリケーションが必要`AuthorizationOptions`とするさまざまな年齢ベースのポリシーをすべて登録する代わりに、カスタム`IAuthorizationPolicyProvider`でポリシーを動的に生成できます。 ポリシーを簡単に使用するには、 などの`[MinimumAgeAuthorize(20)]`カスタム承認属性を使用してアクションにアポイントを付けることができます。
+`IAuthorizationPolicyProvider`が便利なシナリオの1つは`[Authorize]` 、パラメーターに依存する要件を持つカスタム属性を有効にすることです。 たとえば、[ポリシーベースの承認](xref:security/authorization/policies)ドキュメントでは、age ベース ("AtLeast21") ポリシーがサンプルとして使用されていました。 アプリ内のさまざまなコントローラーアクションを*異なる*年齢のユーザーが使用できるようにする必要がある場合は、さまざまな年齢ベースのポリシーを作成すると便利です。 アプリケーションが必要`AuthorizationOptions`とするさまざまな有効期間ベースのポリシーをすべて登録する代わりに、カスタム`IAuthorizationPolicyProvider`のを使用してポリシーを動的に生成できます。 ポリシーを簡単に使用できるようにするには、のような`[MinimumAgeAuthorize(20)]`カスタム承認属性を使用してアクションに注釈を設定します。
 
-## <a name="custom-authorization-attributes"></a>カスタム認証属性
+## <a name="custom-authorization-attributes"></a>カスタム承認属性
 
-許可ポリシーは、名前で識別されます。 前述の`MinimumAgeAuthorizeAttribute`カスタムは、対応する承認ポリシーを取得するために使用できる文字列に引数をマップする必要があります。 プロパティを派生`AuthorizeAttribute`し、`Age``AuthorizeAttribute.Policy`プロパティをラップさせることによってこれを行うことができます。
+承認ポリシーは、名前によって識別されます。 前に`MinimumAgeAuthorizeAttribute`説明したカスタムは、対応する承認ポリシーを取得するために使用できる文字列に引数をマップする必要があります。 これを行うには、から`AuthorizeAttribute` `Age`派生させ、プロパティを`AuthorizeAttribute.Policy`ラップする必要があります。
 
 ```csharp
 internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
@@ -75,25 +81,25 @@ internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
 }
 ```
 
-この属性型には、`Policy`ハードコーディングされたプレフィックス ( )`"MinimumAge"`に基づく文字列と、コンストラクターを介して渡される整数が含まれます。
+この属性の型に`Policy`は、ハードコーディングされたプレフィックス (`"MinimumAge"`) と、コンストラクターを介して渡される整数に基づく文字列があります。
 
-パラメーターとして整数を受け取る以外は、他`Authorize`の属性と同じ方法でアクションに適用できます。
+パラメーターとして整数を受け取る点を除いて、 `Authorize`他の属性と同じようにアクションに適用できます。
 
 ```csharp
 [MinimumAgeAuthorize(10)]
 public IActionResult RequiresMinimumAge10()
 ```
 
-## <a name="custom-iauthorizationpolicyprovider"></a>カスタム I 承認ポリシープロバイダー
+## <a name="custom-iauthorizationpolicyprovider"></a>カスタム IAuthorizationPolicyProvider
 
-このカスタム`MinimumAgeAuthorizeAttribute`により、必要な最小期間に対して承認ポリシーを要求することが容易になります。 次に解決する問題は、これらの異なる年齢のすべての承認ポリシーが使用可能であることを確認することです。 ここで便利`IAuthorizationPolicyProvider`です。
+カスタム`MinimumAgeAuthorizeAttribute`を使用すると、必要最小限の期間に承認ポリシーを簡単に要求できます。 解決すべき次の問題は、すべての異なる年齢に対して承認ポリシーを使用できるようにすることです。 ここでは、 `IAuthorizationPolicyProvider`が役に立ちます。
 
-を使用`MinimumAgeAuthorizationAttribute`する場合、承認ポリシー名は パターン`"MinimumAge" + Age`に従うので`IAuthorizationPolicyProvider`、カスタムは次の方法で承認ポリシーを生成する必要があります。
+を使用`MinimumAgeAuthorizationAttribute`する場合、承認ポリシー名はパターン`"MinimumAge" + Age`に従います。その`IAuthorizationPolicyProvider`ため、カスタムでは、次の方法で承認ポリシーを生成する必要があります。
 
-* ポリシー名から経過時間を解析します。
-* 新規`AuthorizationPolicyBuilder`の作成に使用する`AuthorizationPolicy`
-* この例と以下の例では、ユーザーがクッキーを介して認証されていると仮定します。 は`AuthorizationPolicyBuilder`、少なくとも 1 つの承認スキーム名を使用して構築するか、常に成功する必要があります。 それ以外の場合は、ユーザーにチャレンジを提供する方法に関する情報はなく、例外がスローされます。
-* での経過時間に基づいてポリシーに要件`AuthorizationPolicyBuilder.AddRequirements`を追加します。 その他のシナリオでは、 、`RequireClaim``RequireRole`または`RequireUserName`を使用できます。
+* ポリシー名から age を解析しています。
+* を`AuthorizationPolicyBuilder`使用して新しいを作成する`AuthorizationPolicy`
+* 次の例では、cookie を使用してユーザーが認証されることを前提としています。 は`AuthorizationPolicyBuilder` 、少なくとも1つの認証スキーム名を使用して構築するか、常に成功する必要があります。 そうしないと、ユーザーにチャレンジを提供する方法に関する情報はなく、例外がスローされます。
+* の`AuthorizationPolicyBuilder.AddRequirements`年齢に基づいてポリシーに要件を追加します。 他のシナリオでは、 `RequireClaim` `RequireRole`代わりに、、また`RequireUserName`はを使用することもできます。
 
 ```csharp
 internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
@@ -119,16 +125,16 @@ internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
 }
 ```
 
-## <a name="multiple-authorization-policy-providers"></a>複数の承認ポリシー プロバイダー
+## <a name="multiple-authorization-policy-providers"></a>複数の承認ポリシープロバイダー
 
-カスタム`IAuthorizationPolicyProvider`実装を使用する場合、core ASP.NETは`IAuthorizationPolicyProvider`のインスタンスを 1 つだけ使用することに注意してください。 カスタム プロバイダーが、使用されるすべてのポリシー名に承認ポリシーを提供できない場合は、バックアップ プロバイダーに従う必要があります。 
+カスタム`IAuthorizationPolicyProvider`実装を使用する場合、ASP.NET Core はの`IAuthorizationPolicyProvider`インスタンスを1つだけ使用することに注意してください。 使用されるすべてのポリシー名に対してカスタムプロバイダーが承認ポリシーを提供できない場合は、バックアッププロバイダーに従う必要があります。 
 
-たとえば、カスタムの経過時間ポリシーと従来のロールベースのポリシー取得の両方を必要とするアプリケーションを考えてみます。 このようなアプリでは、次のようなカスタム承認ポリシー プロバイダーを使用できます。
+たとえば、カスタムの年齢ポリシーと従来のロールベースのポリシーの取得の両方を必要とするアプリケーションについて考えてみます。 このようなアプリでは、次のようなカスタム承認ポリシープロバイダーを使用できます。
 
 * ポリシー名の解析を試みます。 
-* ポリシー名に年齢が含まれていない場合`DefaultAuthorizationPolicyProvider`は、別のポリシー プロバイダ (など) を呼び出します。
+* ポリシー名に age が含まれて`DefaultAuthorizationPolicyProvider`いない場合は、別のポリシープロバイダー (など) を呼び出します。
 
-上記の`IAuthorizationPolicyProvider`実装例は、そのコンストラクターでバックアップ`DefaultAuthorizationPolicyProvider`ポリシー プロバイダーを作成することで、そのを使用するように更新できます (ポリシー名が予期されるパターンの 'MinimumAge' + age と一致しない場合に使用されます)。
+上の`IAuthorizationPolicyProvider`例の実装は、コンストラクターでバックアップポリシー `DefaultAuthorizationPolicyProvider`プロバイダーを作成することによって、を使用するように更新できます (ポリシー名が予期された "minimumage" + age のパターンと一致しない場合に使用されます)。
 
 ```csharp
 private DefaultAuthorizationPolicyProvider BackupPolicyProvider { get; }
@@ -141,7 +147,7 @@ public MinimumAgePolicyProvider(IOptions<AuthorizationOptions> options)
 }
 ```
 
-その後、`GetPolicyAsync`メソッドを更新して、null`BackupPolicyProvider`を返す代わりにを使用できます。
+次に、 `GetPolicyAsync`メソッドを更新して、null `BackupPolicyProvider`を返すのではなく、を使用するようにすることができます。
 
 ```csharp
 ...
@@ -150,37 +156,37 @@ return BackupPolicyProvider.GetPolicyAsync(policyName);
 
 ## <a name="default-policy"></a>既定のポリシー
 
-名前付き承認ポリシーを提供することに加えて`IAuthorizationPolicyProvider`、ポリシー名`GetDefaultPolicyAsync`を指定せずに属性に対`[Authorize]`して承認ポリシーを提供するために、カスタムが実装する必要があります。
+名前付き承認ポリシーを提供するだけでなく`IAuthorizationPolicyProvider` 、カスタムで`GetDefaultPolicyAsync`を実装して、ポリシー `[Authorize]`名が指定されていない属性に対して承認ポリシーを提供する必要があります。
 
-多くの場合、この認可属性は認証されたユーザーのみを必要とするため、必要なポリシーを に呼`RequireAuthenticatedUser`び出して作成できます。
+多くの場合、この承認属性には認証されたユーザーのみが必要であるため、の呼び出しで`RequireAuthenticatedUser`必要なポリシーを作成できます。
 
 ```csharp
 public Task<AuthorizationPolicy> GetDefaultPolicyAsync() => 
     Task.FromResult(new AuthorizationPolicyBuilder(CookieAuthenticationDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build());
 ```
 
-カスタム`IAuthorizationPolicyProvider`の全ての側面と同様に、必要に応じてカスタマイズできます。 場合によっては、フォールバック`IAuthorizationPolicyProvider`からデフォルトのポリシーを取得することが望ましい場合があります。
+カスタム`IAuthorizationPolicyProvider`のすべての側面と同様に、必要に応じてこれをカスタマイズできます。 場合によっては、フォールバック`IAuthorizationPolicyProvider`から既定のポリシーを取得することが望ましい場合があります。
 
-## <a name="fallback-policy"></a>フォールバック ポリシー
+## <a name="fallback-policy"></a>フォールバックポリシー
 
-カスタム`IAuthorizationPolicyProvider`は、ポリシーを組`GetFallbackPolicyAsync`み合わせるときに、ポリシーが指定されていない場合に使用[されるポリシーを提供するために](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicy.combine)、オプションで実装できます。 NULL`GetFallbackPolicyAsync`以外のポリシーを返す場合、要求にポリシーが指定されていない場合、返されるポリシーは承認ミドルウェアによって使用されます。
+カスタム`IAuthorizationPolicyProvider`は、必要に`GetFallbackPolicyAsync`応じてを実装して、ポリシーを[組み合わせる](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicy.combine)とき、およびポリシーが指定されていない場合に使用されるポリシーを提供できます。 が`GetFallbackPolicyAsync` null 以外のポリシーを返す場合、要求にポリシーが指定されていない場合は、返されたポリシーが承認ミドルウェアによって使用されます。
 
-フォールバック ポリシーが必要ない場合、プロバイダーはフォールバック`null`プロバイダーに戻るか、または遅延できます。
+フォールバックポリシーが必要ない場合、プロバイダーはフォールバックプロバイダー `null`を返すか、フォールバックプロバイダーに遅延させることができます。
 
 ```csharp
 public Task<AuthorizationPolicy> GetFallbackPolicyAsync() => 
     Task.FromResult<AuthorizationPolicy>(null);
 ```
 
-## <a name="use-a-custom-iauthorizationpolicyprovider"></a>カスタム I 承認ポリシー プロバイダーを使用します。
+## <a name="use-a-custom-iauthorizationpolicyprovider"></a>カスタム IAuthorizationPolicyProvider を使用する
 
-からカスタム ポリシーを使用`IAuthorizationPolicyProvider`するには、次の操作を行う必要があります。
+からカスタムポリシーを使用する`IAuthorizationPolicyProvider`には、次のことを行う必要があります。
 
-* すべてのポリシー`AuthorizationHandler`ベースの承認シナリオと同様に、依存関係の挿入 ([ポリシー ベースの承認](xref:security/authorization/policies#authorization-handlers)で説明) に適切な型を登録します。
-* 既定のポリシー`IAuthorizationPolicyProvider`プロバイダーを置き換えるために、アプリの依存関係の`Startup.ConfigureServices`差し込みサービス コレクション ( で ) にカスタムの種類を登録します。
+* ポリシーベースの`AuthorizationHandler`承認シナリオと同様に、適切な型を依存関係の挿入 ([ポリシーベースの承認](xref:security/authorization/policies#authorization-handlers)で説明) に登録します。
+* アプリの依存`IAuthorizationPolicyProvider`関係挿入サービスコレクション ( `Startup.ConfigureServices`) にカスタム型を登録して、既定のポリシープロバイダーを置き換えます。
 
 ```csharp
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-完全なカスタム`IAuthorizationPolicyProvider`サンプルは、[ドットネット/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)で入手できます。
+完全なカスタム`IAuthorizationPolicyProvider`サンプルについては、 [Dotnet/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)を参照してください。
