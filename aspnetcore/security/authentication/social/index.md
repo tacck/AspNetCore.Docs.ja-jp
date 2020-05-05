@@ -5,13 +5,19 @@ description: このチュートリアルでは、OAuth 2.0 と外部の認証プ
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: c698edbd85d665509366287b1dcad08e276e71cc
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644816"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777151"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Facebook、Google、ASP.NET Core での外部プロバイダーの認証
 
@@ -21,7 +27,7 @@ ms.locfileid: "78644816"
 
 以下のセクションでは、[Facebook](xref:security/authentication/facebook-logins)、[Twitter](xref:security/authentication/twitter-logins)、[Google](xref:security/authentication/google-logins)、および [Microsoft](xref:security/authentication/microsoft-logins) の各プロバイダーを対象とします。また、この記事で作成するスタート プロジェクトを使用します。 他のプロバイダーは、[AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers)、[AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) などのサードパーティ パッケージで利用できます。
 
-既存の資格情報でユーザーがサインインできるようになると:
+既存の資格情報でユーザーがサインインできるようになると: 
 
 * ユーザーにとって便利です。
 * サインイン プロセスの複雑な管理の多くが、サード パーティに移ります。
@@ -34,12 +40,12 @@ ms.locfileid: "78644816"
 
 * 新しいプロジェクトを作成します。
 * **[ASP.NET Core Web アプリケーション]** 、 **[次へ]** の順に選択します。
-* **[プロジェクト名]** を指定して、 **[場所]** を確認または変更します。 **作成** を選択します。
+* **[プロジェクト名]** を指定して、 **[場所]** を確認または変更します。 **[作成]** を選択します。
 * ドロップダウン (**ASP.NET Core {X.y}** ) で ASP.NET Core の最新バージョンを選択し、 **[Web アプリケーション]** を選択します。
 * **[認証]** の下で、 **[変更]** を選択して認証を **[個人のユーザー アカウント]** に設定します。 **[OK]** を選択します。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ウィンドウで、 **[作成]** を選択します。
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * ターミナルを開きます。  Visual Studio Code の場合は、[統合ターミナル](https://code.visualstudio.com/docs/editor/integrated-terminal)を開くことができます。
 

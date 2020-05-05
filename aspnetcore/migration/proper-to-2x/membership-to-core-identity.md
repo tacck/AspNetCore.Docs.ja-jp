@@ -1,17 +1,23 @@
 ---
-title: ASP.NET メンバーシップ認証から ASP.NET Core 2.0 Id に移行する
+title: ASP.NET メンバーシップ認証から ASP.NET Core 2.0 への移行Identity
 author: isaac2004
-description: メンバーシップ認証を使用して既存の ASP.NET アプリを ASP.NET Core 2.0 Id に移行する方法について説明します。
+description: メンバーシップ認証を使用して既存の ASP.NET アプリを ASP.NET Core 2.0 Identityに移行する方法について説明します。
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: 3b708da13ff9f2887eee87ea17844312a4fe1b8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b5205ef69943f3744bba8381701008369dd0843c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651836"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774510"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET メンバーシップ認証から ASP.NET Core 2.0 Id に移行する
 
@@ -36,16 +42,16 @@ ASP.NET Core 2.0 は、ASP.NET 4.5 で導入された[id](/aspnet/identity/index
 
 ASP.NET Core 2.0 Id のスキーマを表示する最も簡単な方法は、新しい ASP.NET Core 2.0 アプリを作成することです。 Visual Studio 2017 で、次の手順を実行します。
 
-1. **[File]**  >  **[New]**  >  **[Project]** の順に選択します。
+1. [**ファイル** > ] [**新しい** > **プロジェクト**] を選択します。
 1. *CoreIdentitySample*という名前の新しい**ASP.NET Core Web アプリケーション**プロジェクトを作成します。
-1. ドロップダウンで**ASP.NET Core 2.0**を選択し、 **[Web アプリケーション]** を選択します。 このテンプレートは、 [Razor Pages](xref:razor-pages/index)アプリを生成します。 [ **OK]** をクリックしてから、 **[認証の変更]** をクリックします。
-1. Id テンプレートに**個別のユーザーアカウント**を選択します。 最後に、 **[ok]** をクリックし、[ **ok]** をクリックします。 Visual Studio によって、ASP.NET Core Id テンプレートを使用してプロジェクトが作成されます。
-1. [**ツール** > **NuGet パッケージマネージャー** > **パッケージマネージャーコンソール**] を選択して、**パッケージマネージャーコンソール**(PMC) ウィンドウを開きます。
-1. PMC のプロジェクトルートに移動し、 [Entity Framework (EF) Core](/ef/core) `Update-Database` コマンドを実行します。
+1. ドロップダウンで**ASP.NET Core 2.0**を選択し、[ **Web アプリケーション**] を選択します。 このテンプレートは、 [Razor Pages](xref:razor-pages/index)アプリを生成します。 [ **OK]** をクリックしてから、[**認証の変更**] をクリックします。
+1. Id テンプレートに**個別のユーザーアカウント**を選択します。 最後に、[ **ok**] をクリックし、[ **ok]** をクリックします。 Visual Studio によって、ASP.NET Core Id テンプレートを使用してプロジェクトが作成されます。
+1. [**ツール** > ] [**NuGet パッケージマネージャー** > ] [**パッケージマネージャーコンソール**] を選択して、[**パッケージマネージャーコンソール**(PMC)] ウィンドウを開きます。
+1. PMC のプロジェクトルートに移動し、 [Entity Framework (EF) Core](/ef/core) `Update-Database`コマンドを実行します。
 
     ASP.NET Core 2.0 Id では、EF Core を使用して、認証データを格納するデータベースと対話します。 新しく作成したアプリを機能させるには、このデータを格納するデータベースが必要です。 新しいアプリを作成した後、データベース環境でスキーマを検査する最も簡単な方法は、EF Core の[移行](/ef/core/managing-schemas/migrations/)を使用してデータベースを作成することです。 このプロセスでは、ローカルまたはその他の場所にあるデータベースを作成し、そのスキーマを模倣します。 詳細については、前のドキュメントを参照してください。
 
-    EF Core コマンドは、 *appsettings*で指定されたデータベースの接続文字列を使用します。 次の接続文字列は、 *localhost*という名前のデータベースを*対象とし*ています。 この設定では、`DefaultConnection` 接続文字列を使用するように EF Core が構成されています。
+    EF Core コマンドは、 *appsettings*で指定されたデータベースの接続文字列を使用します。 次の接続文字列は、 *localhost*という名前のデータベースを*対象とし*ています。 この設定では、EF Core は`DefaultConnection`接続文字列を使用するように構成されています。
 
     ```json
     {
@@ -55,9 +61,9 @@ ASP.NET Core 2.0 Id のスキーマを表示する最も簡単な方法は、新
     }
     ```
 
-1. **ビュー** > **SQL Server オブジェクトエクスプローラー**を選択します。 *Appsettings*の [`ConnectionStrings:DefaultConnection`] プロパティで指定したデータベース名に対応するノードを展開します。
+1. [**ビュー** > **SQL Server オブジェクトエクスプローラー**] を選択します。 Appsettings. `ConnectionStrings:DefaultConnection` *json*のプロパティに指定されているデータベース名に対応するノードを展開します。
 
-    `Update-Database` コマンドを実行すると、スキーマで指定されたデータベースと、アプリの初期化に必要なデータが作成されます。 次の図は、前の手順で作成されたテーブル構造を示しています。
+    この`Update-Database`コマンドは、スキーマで指定されたデータベースと、アプリの初期化に必要なデータを作成しました。 次の図は、前の手順で作成されたテーブル構造を示しています。
 
     ![Id テーブル](identity/_static/identity-tables.png)
 
@@ -65,9 +71,9 @@ ASP.NET Core 2.0 Id のスキーマを表示する最も簡単な方法は、新
 
 テーブルの構造とフィールドには、メンバーシップと ASP.NET Core Id の両方について微妙な違いがあります。 このパターンは、ASP.NET および ASP.NET Core アプリでの認証/承認のために大幅に変更されています。 Id で引き続き使用されるキーオブジェクトは、*ユーザー*と*ロール*です。 ここでは、*ユーザー*、*ロール*、および*userroles*のマッピングテーブルについて説明します。
 
-### <a name="users"></a>Users
+### <a name="users"></a>ユーザー
 
-|*Id<br>(dbo です。AspNetUsers*        ||*メンバーシップ<br>(dbo. aspnet_Users/dbo. aspnet_Membership)*||
+|*Identity<br>(dbo.AspNetUsers*        ||*メンバーシップ<br>(dbo. aspnet_Users/dbo. aspnet_Membership)*||
 |----------------------------------------|-----------------------------------------------------------|
 |**フィールド名**                 |**Type**|**フィールド名**                                    |**Type**|
 |`Id`                           |string  |`aspnet_Users.UserId`                             |string  |
@@ -79,11 +85,11 @@ ASP.NET Core 2.0 Id のスキーマを表示する最も簡単な方法は、新
 |`LockoutEnabled`               |bit     |`aspnet_Membership.IsLockedOut`                   |bit     |
 
 > [!NOTE]
-> すべてのフィールドマッピングは、メンバーシップから ASP.NET Core Id への一対一のリレーションシップに似ているわけではありません。 上の表は、既定のメンバーシップユーザースキーマを取得し、それを ASP.NET Core Id スキーマにマップします。 メンバーシップに使用されていたその他のカスタムフィールドは、手動でマップする必要があります。 このマッピングでは、パスワードの条件とパスワード salts の両方が2つの間で移行されないため、パスワードのマップはありません。 **パスワードを null として残し、ユーザーにパスワードのリセットを依頼することをお勧めします。** ASP.NET Core Id では、ユーザーがロックアウトされている場合、`LockoutEnd` は将来の日付に設定する必要があります。これは移行スクリプトに示されています。
+> すべてのフィールドマッピングは、メンバーシップから ASP.NET Core Id への一対一のリレーションシップに似ているわけではありません。 上の表は、既定のメンバーシップユーザースキーマを取得し、それを ASP.NET Core Id スキーマにマップします。 メンバーシップに使用されていたその他のカスタムフィールドは、手動でマップする必要があります。 このマッピングでは、パスワードの条件とパスワード salts の両方が2つの間で移行されないため、パスワードのマップはありません。 **パスワードを null として残し、ユーザーにパスワードのリセットを依頼することをお勧めします。** ASP.NET Core Id では`LockoutEnd` 、ユーザーがロックアウトされている場合は、将来の日付に設定する必要があります。これは移行スクリプトに示されています。
 
-### <a name="roles"></a>役割
+### <a name="roles"></a>ロール
 
-|*Id<br>(dbo です。AspNetRoles)*        ||*メンバーシップ<br>(dbo. aspnet_Roles)*||
+|*Identity<br>(dbo.AspNetRoles)*        ||*メンバーシップ<br>(dbo. aspnet_Roles)*||
 |----------------------------------------|-----------------------------------|
 |**フィールド名**                 |**Type**|**フィールド名**   |**Type**         |
 |`Id`                           |string  |`RoleId`         | string          |
@@ -92,7 +98,7 @@ ASP.NET Core 2.0 Id のスキーマを表示する最も簡単な方法は、新
 
 ### <a name="user-roles"></a>ユーザー ロール
 
-|*Id<br>(dbo です。AspNetUserRoles*||*メンバーシップ<br>(dbo. aspnet_UsersInRoles)*||
+|*Identity<br>(dbo.AspNetUserRoles*||*メンバーシップ<br>(dbo. aspnet_UsersInRoles)*||
 |------------------------------------|------------------------------------------|
 |**フィールド名**           |**Type**  |**フィールド名**|**Type**                   |
 |`RoleId`                 |string    |`RoleId`      |string                     |
@@ -187,15 +193,15 @@ IF @@ERROR <> 0
 COMMIT TRANSACTION MigrateUsersAndRoles
 ```
 
-前のスクリプトが完了すると、前に作成した ASP.NET Core Id アプリにメンバーシップユーザーが設定されます。 ユーザーはログインする前にパスワードを変更する必要があります。
+前のスクリプトが完了すると、前Identityに作成した ASP.NET Core アプリにメンバーシップユーザーが設定されます。 ユーザーはログインする前にパスワードを変更する必要があります。
 
 > [!NOTE]
-> メンバーシップシステムにユーザー名が電子メールアドレスと一致しないユーザーがいる場合は、これに対応するために以前に作成したアプリに変更を加える必要があります。 既定のテンプレートでは `UserName` と `Email` は同じである必要があります。 これらが異なる場合は、`Email`ではなく `UserName` を使用するようにログインプロセスを変更する必要があります。
+> メンバーシップシステムにユーザー名が電子メールアドレスと一致しないユーザーがいる場合は、これに対応するために以前に作成したアプリに変更を加える必要があります。 既定のテンプレートで`UserName`は`Email` 、とが同じである必要があります。 これらが異なる場合は、の`UserName` `Email`代わりにを使用するようにログインプロセスを変更する必要があります。
 
-*Pages\Account\Login.cshtml.cs*にあるログインページの `PageModel` で、" *Email* " プロパティから `[EmailAddress]` 属性を削除します。 名前を*UserName*に変更します。 これには `EmailAddress` が示されている場所で、*ビュー*と*PageModel*で変更が必要になります。 結果は次のようになります。
+*Pages\Account\Login.cshtml.cs*に`PageModel`あるログインページので、 *Email*プロパティから`[EmailAddress]`属性を削除します。 名前を*UserName*に変更します。 これを行うには`EmailAddress` 、*ビュー*と*PageModel*で説明されているすべての場所で変更が必要です。 結果は次のようになります。
 
  ![固定ログイン](identity/_static/fixed-login.png)
 
-## <a name="next-steps"></a>次のステップ:
+## <a name="next-steps"></a>次のステップ
 
-このチュートリアルでは、SQL メンバーシップからユーザーを ASP.NET Core 2.0 Id に移植する方法を学習しました。 ASP.NET Core Id の詳細については、「 [id の概要](xref:security/authentication/identity)」を参照してください。
+このチュートリアルでは、SQL メンバーシップから ASP.NET Core 2.0 Identityにユーザーを移植する方法について学習しました。 ASP.NET Core Identityの詳細については、「」[をIdentity](xref:security/authentication/identity)参照してください。

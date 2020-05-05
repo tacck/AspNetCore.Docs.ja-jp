@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 95c16bcd8da22792b27b3aaaf8632b2206372270
-ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
+ms.openlocfilehash: 3ea2b7632fc41e1c8ad72292e45a93e081b6edbe
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82150068"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776156"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft アカウントをBlazor使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft アカウントをBlazor使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
@@ -31,16 +34,16 @@ ms.locfileid: "82150068"
 
    Azure portal の**Azure Active Directory** > **アプリの登録**領域に AAD アプリを登録します。
 
-   1 \。 アプリの**名前**( ** Blazorクライアント AAD**など) を指定します。<br>
-   2 \。 [**サポートされているアカウントの種類**] で、**任意の組織ディレクトリのアカウント**を選択します。<br>
+   1\. アプリの**名前**( ** Blazorクライアント AAD**など) を指定します。<br>
+   2\. [**サポートされているアカウントの種類**] で、**任意の組織ディレクトリのアカウント**を選択します。<br>
    3 \。 [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、の`https://localhost:5001/authentication/login-callback`リダイレクト uri を指定します。<br>
    4 \。 [ **Permissions** > **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。<br>
    5 \。 **[登録]** を選択します。
 
    [**認証** > **プラットフォーム構成** > **Web**:
 
-   1 \。 の`https://localhost:5001/authentication/login-callback` **リダイレクト URI**が存在することを確認します。<br>
-   2 \。 **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。<br>
+   1\. の`https://localhost:5001/authentication/login-callback` **リダイレクト URI**が存在することを確認します。<br>
+   2\. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。<br>
    3 \。 アプリの残りの既定値は、このエクスペリエンスで許容されます。<br>
    4 \。 **[保存]** を選択します。
 
@@ -76,7 +79,7 @@ ms.locfileid: "82150068"
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリが Id プロバイダー (IP) と対話するために必要なすべてのサービスを設定します。
+ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリがIdentityプロバイダー (IP) と対話するために必要なすべてのサービスを設定します。
 
 *Program.cs*:
 
@@ -138,7 +141,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 
-* [追加のアクセストークンを要求する](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [追加のアクセス トークンを要求する](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
 * [送信要求にトークンを添付する](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>ファイルのインポート
@@ -167,8 +170,8 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/blazor/webassembly/additional-scenarios>
-* [クイック スタート:Microsoft ID プラットフォームにアプリケーションを登録する](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
-* [クイックスタート: web Api を公開するようにアプリケーションを構成する](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
+* [クイック スタート: Microsoft ID プラットフォームにアプリケーションを登録する](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
+* [クイック スタート: Web API を公開するようにアプリケーションを構成する](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)

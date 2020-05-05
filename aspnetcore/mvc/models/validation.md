@@ -1,25 +1,31 @@
 ---
 title: ASP.NET Core MVC でのモデルの検証
 author: rick-anderson
-description: ASP.NET Core MVC および Razor Pages でのモデルの検証について説明します。
+description: ASP.NET Core MVC とRazorページでのモデルの検証について説明します。
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205892"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777177"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC および Razor Pages でのモデルの検証
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC とRazorページ ASP.NET Core でのモデルの検証
 
 ::: moniker range=">= aspnetcore-3.0"
 
 作成者: [Kirk Larkin](https://github.com/serpent5)
 
-この記事では、ASP.NET Core MVC アプリまたは Razor Pages アプリでユーザー入力を検証する方法について説明します。
+この記事では、ASP.NET Core MVC またはRazorページアプリでユーザー入力を検証する方法について説明します。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -27,7 +33,7 @@ ms.locfileid: "82205892"
 
 モデルの状態では、モデル バインドとモデル検証の 2 つのサブシステムで発生したエラーが表されます。 [モデルバインド](model-binding.md)から発生するエラーは、通常、データ変換エラーです。 たとえば、"x" は整数フィールドに入力されます。 モデルの検証は、モデル バインド後に行われ、データがビジネス ルールに準拠していないエラーを報告します。 たとえば、1 から 5 の評価を想定したフィールドに 0 が入力されたとします。
 
-モデル バインドとモデル検証はどちらも、コントローラー アクションまたは Razor Pages ハンドラー メソッドの実行前に行われます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
+モデルバインドとモデル検証は、どちらもコントローラーアクションまたはRazorページハンドラーメソッドの実行前に行われます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -367,7 +373,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 ## <a name="disable-client-side-validation"></a>クライアント側検証を無効にする
 
-次のコードでは、Razor Pages のクライアント検証が無効になります。
+次のコードは、ページ内Razorのクライアント検証を無効にします。
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -376,7 +382,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 * すべての *.cshtml* ファイル内の `_ValidationScriptsPartial` への参照をコメントアウトします。
 * *Pages\Shared\_ValidationScriptsPartial.cshtml* ファイルの内容を削除します。
 
-上記の方法では、ASP.NET Core Identity Razor クラス ライブラリのクライアント側の検証は阻止されません。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。
+上記の方法では、ASP.NET Core Identity Razorクラスライブラリをクライアント側で検証することはできません。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -387,7 +393,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 ::: moniker range="< aspnetcore-3.0"
 
-この記事では、ASP.NET Core MVC アプリまたは Razor Pages アプリでユーザー入力を検証する方法について説明します。
+この記事では、ASP.NET Core MVC またはRazorページアプリでユーザー入力を検証する方法について説明します。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -395,7 +401,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 モデルの状態では、モデル バインドとモデル検証の 2 つのサブシステムで発生したエラーが表されます。 [モデル バインド](model-binding.md)で発生するエラーは、一般に、データ変換エラーです (たとえば、整数が必要なフィールドに "x" が入力された場合)。 モデル検証は、モデル バインドの後で行われて、データがビジネス ルールに従っていないエラーが報告されます (たとえば、1 から 5 までのレーティングが必要なフィールドに 0 が入力された場合)。
 
-モデル バインドとモデル検証はどちらも、コントローラー アクションまたは Razor Pages ハンドラー メソッドの実行前に行われます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
+モデルバインドと検証の両方が、コントローラーアクションまたはRazorページハンドラーメソッドの実行前に行われます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -418,7 +424,7 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 組み込みの検証属性には次のものがあります。
 
 * `[CreditCard]`: プロパティにクレジットカード形式があることを検証します。
-* `[Compare]`: モデル内の2つのプロパティが一致することを検証します。 たとえば、*Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。 [ID をスキャフォールディング](xref:security/authentication/scaffold-identity)して、レジスタ コードを確認します。
+* `[Compare]`: モデル内の2つのプロパティが一致することを検証します。 たとえば、*Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。 [スキャフォールディングIdentity ](xref:security/authentication/scaffold-identity)を参照して、レジスタコードを確認してください。
 * `[EmailAddress]`: プロパティが電子メール形式であることを検証します。
 * `[Phone]`: プロパティに電話番号の書式が設定されていることを検証します。
 * `[Range]`: プロパティ値が指定した範囲内にあることを検証します。
@@ -742,7 +748,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-また、Razor Pages の場合は次のようになります。
+ページ内Razor :
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 

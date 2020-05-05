@@ -1,29 +1,35 @@
 ---
-title: ASP.NETコアのキーストレージ形式
+title: ASP.NET Core のキー格納形式
 author: rick-anderson
-description: ASP.NETコア データ保護キーストレージ形式の実装の詳細を説明します。
+description: ASP.NET Core データ保護のキーストレージ形式の実装の詳細について説明します。
 ms.author: riande
 ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: 3072c673791b589027a910b80eaba52052eb9311
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: d284927e8ff4315b813fe36b9c335d8bd75ece11
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976938"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776865"
 ---
-# <a name="key-storage-format-in-aspnet-core"></a>ASP.NETコアのキーストレージ形式
+# <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core のキー格納形式
 
 <a name="data-protection-implementation-key-storage-format"></a>
 
-オブジェクトは、XML 表現で保存されます。 キーストレージのデフォルトディレクトリは次のとおりです。
+オブジェクトは、XML 形式で保存されます。 キーストレージの既定のディレクトリは次のとおりです。
 
-* ウィンドウ: *%ローカルアプリケーションデータ%\ASP.NET\データ保護キー\*
-* macOS / Linux: *$HOME/.aspnet/データ保護キー*
+* Windows: *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*
+* macOS/Linux: *$HOME/.aspnet/dataprotection-keys*
 
-## <a name="the-key-element"></a>\<キー>要素
+## <a name="the-key-element"></a>\<キー> 要素
 
-キーは、キー リポジトリ内のトップレベル オブジェクトとして存在します。 規則によってキーのファイル名**キーを持っている{guid}.xml、{guid}** はキーの ID です。 このようなファイルには、それぞれ 1 つのキーが含まれています。 ファイルの形式は以下の通りです。
+キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。 規則によるキーのファイル名は**キー {guid} .xml です**。ここで、{guid} はキーの id です。 このようなファイルには1つのキーが含まれています。 ファイルの形式は次のとおりです。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -46,35 +52,35 @@ ms.locfileid: "80976938"
 </key>
 ```
 
-キー \<>要素には、次の属性と子要素が含まれます。
+Key \<> 要素には、次の属性と子要素が含まれています。
 
-* キー ID。この値は、権限ありとして扱われます。ファイル名は、人間の読みやすさのための単に素晴らしいです。
+* キー id。この値は権限のあるものとして扱われます。ファイル名は、人間が読みやすくするための単なる言えです。
 
-* \<キー>要素のバージョンは、現在 1 に固定されています。
+* \<キー> 要素のバージョン。現在は1で修正されています。
 
-* キーの作成、アクティベーション、および有効期限。
+* キーの作成、アクティブ化、および有効期限。
 
-* この\<キーに含まれる認証済みの暗号化実装に関する情報を含む、記述子>要素。
+* この\<キーに含まれる認証済み暗号化の実装に関する情報を格納する記述子> 要素。
 
-上記の例では、キーの id は {80732141-ec8f-4b80-af9c-c4d2d1ff8901} であり、2015 年 3 月 19 日に作成およびアクティブ化され、有効期間は 90 日です。 (この例のように、アクティベーション日が作成日より少し前になることがあります。 これは、API の動作の仕組みに起因し、実際には無害です。
+上の例では、キーの id は {80732141-ec8f-4b80-af9c-c4d2d1ff8901} であり、2015年3月19日に作成され、アクティブ化され、90日の有効期間があります。 (場合によっては、ライセンス認証日が、この例のように作成日よりも少し前になることがあります。 これは、Api が動作し、実際には無害であることが原因です)。
 
-## <a name="the-descriptor-element"></a>記述子\<>要素
+## <a name="the-descriptor-element"></a>\<記述子> 要素
 
-要素>\<外部記述子には、IAuthenticatedEncryptorDescriptorDeserializer を実装する型のアセンブリ修飾名である属性デシリアライザー型が含まれています。 この型は、内部\<記述子>要素を読み取り、内部に含まれる情報を解析する役割を担います。
+外部\<記述子> 要素には、deserializerType 属性が含まれています。これは、I認証 Ated Tordescriptor デシリアライザーを実装する型のアセンブリ修飾名です。 この型は、内部\<記述子> 要素を読み取り、内に格納されている情報を解析します。
 
-記述子>要素の\<特定の形式は、キーによってカプセル化された認証済み暗号化ツールの実装に依存し、デシリアライザーの各型は、このためにわずかに異なる形式を期待します。 ただし、一般に、この要素にはアルゴリズム情報 (名前、型、OID、または類似) と秘密キーマテリアルが含まれます。 上記の例では、記述子は、このキーが AES-256-CBC 暗号化 + HMACSHA256 検証をラップすることを指定します。
+\<記述子> 要素の特定の形式は、キーによってカプセル化される認証済みの暗号化機能の実装によって異なります。また、各デシリアライザー型には、これに対して若干異なる形式が必要です。 ただし、一般に、この要素にはアルゴリズム情報 (名前、型、Oid、または類似) とシークレットキーマテリアルが含まれます。 上の例では、記述子は、このキーが AES-256-CBC encryption + HMACSHA256 検証をラップすることを指定しています。
 
-## <a name="the-encryptedsecret-element"></a>\<暗号化されたシークレット>要素
+## <a name="the-encryptedsecret-element"></a>\<Encryptedsecret> 要素
 
-秘密**&lt;鍵&gt;** の暗号化形式を含む EncryptedSecret 要素は[、保管時の秘密の暗号化が有効になっている場合に](xref:security/data-protection/implementation/key-encryption-at-rest)存在する可能性があります。 属性`decryptorType`は[、IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。 この型は、内部**&lt;の暗号化されたKey&gt;** 要素を読み取り、元のプレーンテキストを回復するためにそれを復号化します。
+暗号化された形式の秘密キーマテリアルを含む** &lt;&gt; encryptedsecret**要素は、保存[時のシークレットの暗号化が有効になっ](xref:security/data-protection/implementation/key-encryption-at-rest)ている場合に存在する可能性があります。 属性`decryptorType`は、 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。 この型は、内部** &lt;の encryptedKey&gt; **要素を読み取り、復号化して元のプレーンテキストを回復する役割を担います。
 
-と同様`<descriptor>`に、`<encryptedSecret>`要素の特定の形式は、使用されている保管時の暗号化メカニズムによって異なります。 上記の例では、マスター キーは、コメントごとに Windows DPAPI を使用して暗号化されます。
+と`<descriptor>`同様に、 `<encryptedSecret>`要素の特定の形式は、使用されている保存時の暗号化メカニズムに依存します。 上の例では、コメントごとに Windows DPAPI を使用してマスターキーが暗号化されています。
 
-## <a name="the-revocation-element"></a>失効\<>要素
+## <a name="the-revocation-element"></a>\<失効> 要素
 
-失効は、キー リポジトリ内の最上位レベルのオブジェクトとして存在します。 慣例によって、失効ファイルの**失効-{timestamp}.xml(** 特定の日付より前のすべてのキーを取り消すための)または**失効-{guid}.xml(特定の**キーを取り消すための)があります。 各ファイルには、>\<要素が 1 つ含まれています。
+失効は、キーリポジトリの最上位レベルのオブジェクトとして存在します。 慣例により、失効はファイル名の**失効-{timestamp} .xml** (特定の日付より前のすべてのキーを取り消す場合) または**失効-{guid} .xml** (特定のキーを取り消す場合) を持ちます。 各ファイルには、 \<1 つの失効> 要素が含まれます。
 
-個々のキーの取り消しの場合、ファイルの内容は以下のようになります。
+個々のキーの失効の場合、ファイルの内容は次のようになります。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -85,7 +91,7 @@ ms.locfileid: "80976938"
 </revocation>
 ```
 
-この場合、指定されたキーのみが取り消されます。 ただし、キー ID が "*" の場合、次の例のように、作成日が指定の失効日より前のすべてのキーは取り消されます。
+この場合、指定されたキーのみが取り消されます。 ただし、キー id が "*" の場合、次の例のように、作成日が指定した失効日より前のすべてのキーが取り消されます。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -97,4 +103,4 @@ ms.locfileid: "80976938"
 </revocation>
 ```
 
-要素\<>がシステムによって読み取られることはありません理由。 これは、単に取り消しのための人間が読める理由を格納するのに便利な場所です。
+\<理由> 要素がシステムによって読み取られることはありません。 これは、ユーザーが判読できる失効の理由を格納するための便利な場所です。

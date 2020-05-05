@@ -5,13 +5,19 @@ ms.author: riande
 description: ASP.NET Core スクリプト タグ ヘルパーの属性と、HTML スクリプト タグの動作拡張時の各属性の役割を示します。
 ms.custom: mvc
 ms.date: 12/02/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: a037abb6a454e6d06305e7d7f6ecad0c2a0ca717
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4162221ef3401427c44fb54dee9c36b78b39564f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652094"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774666"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core のスクリプト タグ ヘルパー
 
@@ -23,7 +29,7 @@ ms.locfileid: "78652094"
 
 スクリプト タグ ヘルパーを使用すると、スクリプト ファイルの CDN と、CDN が使用できない場合のフォールバックを指定できます。 スクリプト タグ ヘルパーによって、ローカル ホスティングの堅牢性が CDN のパフォーマンスの利点にもたらされます。
 
-次の Razor マークアップでは、フォールバックを含む `script` 要素が示されています。
+次Razorのマークアップは`script` 、フォールバックを持つ要素を示しています。
 
 ```html
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
@@ -42,13 +48,13 @@ CDN スクリプトの読み込みを延期する場合、`<script>` 要素の [
 
 ### <a name="asp-fallback-test"></a>asp-fallback-test
 
-フォールバック テストに使用するプライマリ スクリプトで定義されているスクリプト メソッド。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression> を参照してください。
+フォールバック テストに使用するプライマリ スクリプトで定義されているスクリプト メソッド。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>」を参照してください。
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-プライマリ側でエラーが発生した場合にフォールバックするスクリプト タグの URL。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc> を参照してください。
+プライマリ側でエラーが発生した場合にフォールバックするスクリプト タグの URL。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>

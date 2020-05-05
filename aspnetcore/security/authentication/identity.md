@@ -1,16 +1,22 @@
 ---
-title: ASP.NET Core での Id の概要
+title: ASP.NET Core Identityの概要
 author: rick-anderson
-description: ASP.NET Core アプリで Id を使用します。 パスワードの要件 (RequireDigit、RequiredLength、RequiredUniqueChars など) を設定する方法について説明します。
+description: ASP.NET Core Identityアプリで使用します。 パスワードの要件 (RequireDigit、RequiredLength、RequiredUniqueChars など) を設定する方法について説明します。
 ms.author: riande
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 4bc5f206b3aee7c2d34055703acc5b6c5218f964
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d596a8357c5c812b94950809eedf35718328747c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205944"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777008"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core での Id の概要
 
@@ -230,7 +236,7 @@ Id のプライマリパッケージは[AspNetCore](https://www.nuget.org/packag
 </Target>
 ```
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 * SQLite を使用して Id を構成する方法については、 [GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/5131)を参照してください。
 * [Identity の構成](xref:security/authentication/identity-configuration)
@@ -391,39 +397,39 @@ Post は*Pages/Shared/_LoginPartial*に指定されています。
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-identity"></a>テスト Id
+## <a name="test-identity"></a>TestIdentity
 
-既定の web プロジェクトテンプレートでは、ホームページへの匿名アクセスが許可されます。 Id をテストするに[`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute)は、[プライバシー] ページにを追加します。
+既定の web プロジェクトテンプレートでは、ホームページへの匿名アクセスが許可されます。 をテストIdentityするに[`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute)は、[プライバシー] ページにを追加します。
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=7)]
 
 サインインしている場合は、サインアウトします。アプリを実行し、[**プライバシー** ] リンクを選択します。 ログイン ページにリダイレクトされます。
 
-### <a name="explore-identity"></a>Id の探索
+### <a name="explore-identity"></a>TsmIdentity
 
-Id の詳細については、以下を参照してください。
+詳細にIdentityついては、次を参照してください。
 
 * [完全な id UI ソースの作成](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * 各ページのソースを確認し、デバッガーをステップ実行します。
 
-## <a name="identity-components"></a>Id コンポーネント
+## <a name="identity-components"></a>Identityコンポーネント
 
-すべての Id 依存 NuGet パッケージは、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)に含まれています。
+すべてのIdentity依存する NuGet パッケージは、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)に含まれています。
 
-Id のプライマリパッケージは[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)です。 このパッケージには ASP.NET Core Id のインターフェイスのコアセットが含まれており`Microsoft.AspNetCore.Identity.EntityFrameworkCore`、によって含まれています。
+のIdentityプライマリパッケージは[AspNetCore ですIdentity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)。 このパッケージには ASP.NET Core Identityのインターフェイスのコアセットが含まれており`Microsoft.AspNetCore.Identity.EntityFrameworkCore`、によって含まれています。
 
-## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core Id への移行
+## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core への移行Identity
 
-既存の Id ストアを移行する方法の詳細とガイダンスについては、「[認証と id の移行](xref:migration/identity)」を参照してください。
+既存Identityのストアの移行に関する詳細とガイダンスについては、「[認証とIdentityの移行](xref:migration/identity)」を参照してください。
 
 ## <a name="setting-password-strength"></a>パスワードの強度を設定する
 
 パスワードの最小要件を設定するサンプルについては、「[構成](#pw)」を参照してください。
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
-* SQLite を使用して Id を構成する方法については、 [GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/5131)を参照してください。
-* [Identity の構成](xref:security/authentication/identity-configuration)
+* SQLite [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/5131)を使用したの構成Identityの詳細については、こちらの GitHub の問題を参照してください。
+* [設定Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

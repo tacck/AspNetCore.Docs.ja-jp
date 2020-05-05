@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core MVC でルーティング ミドルウェアを使って、受信した要求の URL を照合し、アクションにマップする方法について説明します。
 ms.author: riande
 ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 4208ef8fb7a9b10621f214f79679ff8d7fd83996
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206113"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775025"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core でのコントローラー アクションへのルーティング
 
@@ -147,9 +153,9 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 * 呼び出された順序に基づいて、エンドポイントに**注文**値を自動的に割り当てます。
 
-ASP.NET Core 3.0 以降でのエンドポイントのルーティング:
+ASP.NET Core 3.0 以降でのエンドポイントのルーティング: 
 
-* ルートの概念はありません。
+* ルートの概念がありません。
 * は、拡張性の実行に対する順序の保証を提供しません。すべてのエンドポイントが一度に処理されます。
 
 [ログ](xref:fundamentals/logging/index)を有効にすると、<xref:Microsoft.AspNetCore.Routing.Route> など、組み込みのルーティング実装で要求を照合するしくみを確認できます。
@@ -185,7 +191,7 @@ ASP.NET Core 3.0 以降でのエンドポイントのルーティング:
 
 > [!WARNING]
 > ASP.NET Core 3.0 以降では、ルーティングは次のようになります。
-> * *ルート*と呼ばれる概念を定義します。 `UseRouting`ミドルウェアパイプラインにルート一致を追加します。 ミドルウェア`UseRouting`は、アプリで定義されているエンドポイントのセットを調べ、要求に基づいて最適なエンドポイント一致を選択します。
+> * *ルート*と呼ばれる概念を定義します。 `UseRouting` では、ルートの照合がミドルウェア パイプラインに追加されます。 ミドルウェア`UseRouting`は、アプリで定義されているエンドポイントのセットを調べ、要求に基づいて最適なエンドポイント一致を選択します。
 > * や<xref:Microsoft.AspNetCore.Routing.IRouteConstraint> <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint>などの拡張機能の実行順序についての保証を提供します。
 >
 >ルーティングのリファレンス資料については、「[ルーティング](xref:fundamentals/routing)」を参照してください。
@@ -195,7 +201,9 @@ ASP.NET Core 3.0 以降でのエンドポイントのルーティング:
 ### <a name="conventional-routing-order"></a>従来のルーティング順序
 
 従来のルーティングは、アプリによって定義されたアクションとコントローラーの組み合わせにのみ一致します。 これは、通常のルートが重複するケースを簡略化することを目的としています。
-、 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>、および<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>を使用し<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>てルートを追加すると、呼び出された順序に基づいて、そのエンドポイントに自動的に注文値が割り当てられます。 以前に表示されたルートからの一致は、優先順位が高くなります。 規則ルーティングは順序に依存します。 一般に、区分を持つルートは、領域を持たないルートよりも固有であるため、前に配置する必要があります。 [Dedicated conventional routes](#dcr)のような`{*article}`すべてのルートパラメーターをキャッチした専用のルートでは、ルートが[最長](xref:fundamentals/routing#greedy)長すぎる可能性があります。これは、他のルートと一致するように意図した url と一致することを意味します。 最短一致の一致を防ぐために、ルートテーブルの中で最長一致のルートを指定します。
+、 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>、および<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>を使用し<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>てルートを追加すると、呼び出された順序に基づいて、そのエンドポイントに自動的に注文値が割り当てられます。 以前に表示されたルートからの一致は、優先順位が高くなります。 規則ルーティングは順序に依存します。 一般に、区分を持つルートは、領域を持たないルートよりも固有であるため、前に配置する必要があります。 [Dedicated conventional routes](#dcr)など`{*article}`のすべてのルートパラメーターを持つ専用の従来のルートでは、ルートの[最長](xref:fundamentals/routing#greedy)一致が実現されます。これは、他のルートと一致するように意図した url と一致することを意味します。 最短一致の一致を防ぐために、ルートテーブルの中で最長一致のルートを指定します。
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 <a name="best"></a>
 
@@ -463,7 +471,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 * 上記のコードは、ルーティング設計の一例または不十分です。 これは、 `Order`プロパティを示すために使用されていました。
 * プロパティ`Order`はあいまいさを解決するだけで、そのテンプレートは一致しません。 `[Route("Home")]`テンプレートを削除することをお勧めします。
 
-Razor Pages を使用したルートの順序については[、Razor Pages ルートとアプリの規則](xref:razor-pages/razor-pages-conventions#route-order)に関する説明を参照してください。
+ページとRazorルートの順序については[、「ルートとアプリの規則Razor ](xref:razor-pages/razor-pages-conventions#route-order) 」を参照してください。
 
 場合によっては、あいまいなルートで HTTP 500 エラーが返されます。 [ログ](xref:fundamentals/logging/index)を使用して、の原因`AmbiguousMatchException`となったエンドポイントを確認します。
 
@@ -744,13 +752,13 @@ Url のいくつかのオーバーロードでは、ルート値オブジェク�
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-次の Razor ファイルでは、への`Destination_Route`HTML リンクが生成されます。
+次Razorのファイルでは、への`Destination_Route`HTML リンクが生成されます。
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>HTML および Razor での Url の生成
+### <a name="generate-urls-in-html-and-razor"></a>HTML およびでの Url の生成Razor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper><xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper>メソッドを使用して、要素と`<form>` `<a>`要素をそれぞれ生成するように html.actionlink と[html](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*)を[提供します](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*)。 これらのメソッドは、Url を生成するために[url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)メソッドを使用し、同様の引数を受け取ります。 `HtmlHelper` の `Url.RouteUrl` コンパニオンは、同様の機能を持つ `Html.BeginRouteForm` と `Html.RouteLink` です。
 
@@ -1212,7 +1220,7 @@ public class HomeController : Controller
 > [!TIP]
 > `Order` には依存しないでください。 URL 空間で正しくルーティングするために明示的な順序値が必要な場合、クライアントの混乱を招く可能性があります。 一般に、属性ルーティングは URL 照合で正しいルートを選びます。 URL の生成に使われる既定の順序がうまくいかない場合は、通常、オーバーライドとしてルート名を使う方が、`Order` プロパティを適用するより簡単です。
 
-Razor Pages ルーティングと MVC コントローラー ルーティングは、実装を共有します。 Razor Pages でのルート順序に関する情報は、[Razor Pages のルートとアプリの規則:ルート順序](xref:razor-pages/razor-pages-conventions#route-order)に関する記事を参照してください。
+Razorページルーティングと MVC コントローラールーティングは、実装を共有します。 「ページのルート[ Razorとアプリの規則: ルートの順序](xref:razor-pages/razor-pages-conventions#route-order)」で、 Razorルートの順序に関する情報を参照できます。
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

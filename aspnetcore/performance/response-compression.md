@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 8fc68f2303bfcf16d279b829ab9441a80119f1bb
-ms.sourcegitcommit: 755952496316fdb0923689109b536b609ce525ee
+ms.openlocfilehash: 12a39ccfefdcaec6251a9804011aefde3bbae7b2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82643080"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776670"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core での応答圧縮
 
@@ -42,7 +48,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、要求と共に`Accept-Encoding`ヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに`Content-Encoding` 、圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | [説明] |
+| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | 説明 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | あり (既定)        | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -76,7 +82,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 * Gzip およびカスタム圧縮プロバイダーを使用したアプリ応答の圧縮。
 * 圧縮する mime の種類の既定の一覧に MIME の種類を追加する方法について説明します。
 
-## <a name="package"></a>Package
+## <a name="package"></a>パッケージ
 
 応答圧縮ミドルウェアは、AspNetCore アプリ ASP.NET Core に暗黙的に含まれる[ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)パッケージによって提供されます。
 
@@ -136,7 +142,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに<xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>設定します。 Brotli 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | [説明] |
+| Compression Level | 説明 |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -176,7 +182,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに<xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>設定します。 Gzip 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | [説明] |
+| Compression Level | 説明 |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -251,7 +257,7 @@ public void ConfigureServices(IServiceCollection services)
 * 要求にヘッダーを`Content-Range`含めることはできません。
 * 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、[前述](#compression-with-secure-protocol)の危険に注意してください。*
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -288,7 +294,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、要求と共に`Accept-Encoding`ヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに`Content-Encoding` 、圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | [説明] |
+| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | 説明 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | あり (既定)        | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -322,7 +328,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 * Gzip およびカスタム圧縮プロバイダーを使用したアプリ応答の圧縮。
 * 圧縮する mime の種類の既定の一覧に MIME の種類を追加する方法について説明します。
 
-## <a name="package"></a>Package
+## <a name="package"></a>パッケージ
 
 ミドルウェアをプロジェクトに含めるには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)への参照を追加します。これには、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)パッケージが含まれています。
 
@@ -382,7 +388,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに<xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>設定します。 Brotli 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | [説明] |
+| Compression Level | 説明 |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -422,7 +428,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに<xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>設定します。 Gzip 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | [説明] |
+| Compression Level | 説明 |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -496,7 +502,7 @@ public void ConfigureServices(IServiceCollection services)
 * 要求にヘッダーを`Content-Range`含めることはできません。
 * 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、[前述](#compression-with-secure-protocol)の危険に注意してください。*
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -533,7 +539,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、要求と共に`Accept-Encoding`ヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに`Content-Encoding` 、圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | [説明] |
+| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | 説明 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | いいえ                   | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -567,7 +573,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 * Gzip およびカスタム圧縮プロバイダーを使用したアプリ応答の圧縮。
 * 圧縮する mime の種類の既定の一覧に MIME の種類を追加する方法について説明します。
 
-## <a name="package"></a>Package
+## <a name="package"></a>パッケージ
 
 ミドルウェアをプロジェクトに含めるには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)への参照を追加します。これには、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)パッケージが含まれています。
 
@@ -627,7 +633,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに<xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>設定します。 Gzip 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | [説明] |
+| Compression Level | 説明 |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -701,7 +707,7 @@ public void ConfigureServices(IServiceCollection services)
 * 要求にヘッダーを`Content-Range`含めることはできません。
 * 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、[前述](#compression-with-secure-protocol)の危険に注意してください。*
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

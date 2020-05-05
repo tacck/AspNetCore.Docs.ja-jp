@@ -4,24 +4,30 @@ author: rick-anderson
 description: I認証 Ated暗号化機能、I認証 ated、Tordescriptor、I認証 Ated暗号化、およびトップレベルファクトリについて説明します。
 ms.author: riande
 ms.date: 08/11/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: a5f651e3313cc579b995b45905826a5bffcc241c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653546"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776423"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core でのコア暗号化の拡張性
 
 <a name="data-protection-extensibility-core-crypto"></a>
 
 >[!WARNING]
-> 次のインターフェイスのいずれかを実装する型がスレッド セーフにする必要があります複数の呼び出し元の。
+> 次のインターフェイスのいずれかを実装する型は、複数の呼び出し元に対してスレッドセーフである必要があります。
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptor"></a>
 
-## <a name="iauthenticatedencryptor"></a>IAuthenticatedEncryptor
+## <a name="iauthenticatedencryptor"></a>I認証 Ated暗号化機能
 
 **Icryptographic atedcryptographic**インターフェイスは、暗号化サブシステムの基本的な構成要素です。 一般に、キーごとに1つの icryptographic Atedcryptographic が存在し、Icryptographic Atedcryptographic インスタンスは暗号化操作を実行するために必要なすべての暗号化キーマテリアルとアルゴリズム情報をラップします。
 
@@ -129,7 +135,7 @@ I認証 Atedの暗号化機能と I認証機能の主な違いは、記述子が
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer"></a>
 
-## <a name="iauthenticatedencryptordescriptordeserializer"></a>IAuthenticatedEncryptorDescriptorDeserializer
+## <a name="iauthenticatedencryptordescriptordeserializer"></a>I認証 Ated暗号化 Tor記述子デシリアライザー
 
 **IXElement Ated暗号化 Tordescriptor デシリアライザー**インターフェイスは、I認証 Ated暗号化 tordescriptor インスタンスをから逆シリアル化する方法を認識する型を表します。 1つのメソッドを公開します。
 
@@ -139,9 +145,9 @@ ImportFromXml メソッドは、 [ExportToXml](xref:security/data-protection/ext
 
 I認証を実装する型は、次の2つのパブリックコンストラクターのいずれかを持つ必要があります。
 
-* .ctor(IServiceProvider)
+* .ctor (IServiceProvider)
 
-* .ctor()
+* .ctor ()
 
 > [!NOTE]
 > コンストラクターに渡される IServiceProvider は null でもかまいません。

@@ -5,13 +5,19 @@ description: フィルターのしくみと ASP.NET Core でそれを使用す�
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 03335811766ea3a1455901199863c6da0e35f7e4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653342"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776787"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core フィルター
 
@@ -47,15 +53,15 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 * [承認フィルター](#authorization-filters)は、最初に実行され、ユーザーが要求に対して承認されているかどうかを判断するために使用されます。 承認フィルターでは、要求が承認されていない場合、パイプラインがショートサーキットされます。
 
-* [リソース フィルター](#resource-filters):
+* [リソースフィルター](#resource-filters):
 
   * 承認後に実行されます。  
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> では、残りのフィルター パイプラインの前にコードが実行されます。 たとえば、`OnResourceExecuting` では、モデル バインディングの前にコードが実行されます。
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> では、残りのパイプラインの完了後にコードが実行されます。
 
-* [アクション フィルター](#action-filters):
+* [アクションフィルター](#action-filters):
 
-  * アクション メソッドが呼び出される直前と直後にコードを実行します。
+  *  アクション メソッドが呼び出される直前と直後にコードを実行します。
   * アクションに渡される引数を変更できます。
   * アクションから返された結果を変更できます。
   * Razor Pages ではサポート**されていません**。
@@ -76,7 +82,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-非同期フィルターでは、`On-Stage-ExecutionAsync` メソッドが定義されます。 例: <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>
+非同期フィルターでは、`On-Stage-ExecutionAsync` メソッドが定義されます。 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*> の例を次に示します。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
@@ -104,7 +110,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-[ブラウザー開発者ツール](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) などのツールを使用して、ヘッダーを調べます。 **[応答ヘッダー]** の下に `author: Rick Anderson` が表示されます。
+[ブラウザー開発者ツール](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) などのツールを使用して、ヘッダーを調べます。 **応答ヘッダー**の下`author: Rick Anderson`にが表示されます。
 
 次のコードでは、次のことを行う `ActionFilterAttribute` が実装されます。
 
@@ -117,9 +123,9 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 [!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
 
-`StartUp.ConfigureServices`で、次の操作を行います。
+`StartUp.ConfigureServices` では、次のことが行われます。
 
-* `PositionOptions` 構成領域を使用して `"Position"` クラスをサービス コンテナーに追加します。
+* `"Position"` 構成領域を使用して `PositionOptions` クラスをサービス コンテナーに追加します。
 * `MyActionFilterAttribute` をサービス コンテナーに追加します。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupAF.cs?name=snippet)]
@@ -128,11 +134,11 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Helper/PositionOptions.cs?name=snippet)]
 
-次のコードでは、`MyActionFilterAttribute` メソッドに `Index2` が適用されています。
+次のコードでは、`Index2` メソッドに `MyActionFilterAttribute` が適用されています。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**エンドポイントが呼び出されると、** [応答ヘッダー]`author: Rick Anderson` の下に `Editor: Joe Smith` および `Sample/Index2` が表示されます。
+**応答ヘッダー**では`author: Rick Anderson`、 `Sample/Index2`エンド`Editor: Joe Smith`ポイントが呼び出されると、とが表示されます。
 
 次のコードでは、`MyActionFilterAttribute` と `AddHeaderAttribute` が Razor ページに適用されます。
 
@@ -176,12 +182,12 @@ Razor ページ ハンドラー メソッドにフィルターを適用するこ
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| Sequence | フィルターのスコープ | Filter メソッド |
+| Sequence | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラーまたは Razor ページ| `OnActionExecuting` |
-| 3 | 方法 | `OnActionExecuting` |
-| 4 | 方法 | `OnActionExecuted` |
+| 3 | Method | `OnActionExecuting` |
+| 4 | Method | `OnActionExecuted` |
 | 5 | コントローラーまたは Razor ページ | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -224,8 +230,8 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter> を実装することで、実行の既定の順序をオーバーライドできます。 `IOrderedFilter` により、実行の順序を決定するために、スコープよりも優先される <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> プロパティが公開されます。 より低い `Order` 値を持つフィルター:
 
-* より高い *の値を持つフィルターのそれよりも前に*before`Order` コードが実行されます。
-* より高い *の値を持つフィルターのそれよりも後に*after`Order` コードが実行されます。
+* より高い `Order` の値を持つフィルターのそれよりも前に *before* コードが実行されます。
+* より高い `Order` の値を持つフィルターのそれよりも後に *after* コードが実行されます。
 
 `Order` プロパティは、次のコンストラクター パラメーターで設定できます。
 
@@ -261,7 +267,7 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 
 ## <a name="cancellation-and-short-circuiting"></a>キャンセルとショートサーキット
 
-フィルター メソッドに提供される <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> パラメーターで <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> プロパティを設定することで、フィルター パイプラインをショートサーキットできます。 たとえば、次のリソース フィルターは、パイプラインの残りの部分が実行されるのを防止します。
+フィルター メソッドに提供される <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> パラメーターで <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> プロパティを設定することで、フィルター パイプラインをショートサーキットできます。 たとえば、次のリソース フィルターは、パイプラインの残りの部分が実行されるのを防止します。
 
 <a name="short-circuiting-resource-filter"></a>
 
@@ -272,7 +278,7 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 * これはリソース フィルターであり、`AddHeader` はアクション フィルターであるため、最初に実行されます。
 * パイプラインの残りの部分は迂回されます。
 
-そのため、`AddHeader` アクションの場合、`SomeResource` フィルターが実行されることはありません。 `ShortCircuitingResourceFilter` が最初に実行された場合は、両方のフィルターがアクション メソッド レベルで適用されると、この動作が同じになります。 そのフィルターの種類が原因で、あるいは `ShortCircuitingResourceFilter` プロパティの明示的な使用により、`Order` が最初に実行されます。
+そのため、`SomeResource` アクションの場合、`AddHeader` フィルターが実行されることはありません。 `ShortCircuitingResourceFilter` が最初に実行された場合は、両方のフィルターがアクション メソッド レベルで適用されると、この動作が同じになります。 そのフィルターの種類が原因で、あるいは `Order` プロパティの明示的な使用により、`ShortCircuitingResourceFilter` が最初に実行されます。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
@@ -326,7 +332,7 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 
 * シングルトン以外で有効期間があるサービスに依存するフィルターと共に使用しないでください。
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> メソッドを公開します。 `CreateInstance` により、DI から指定の型が読み込まれます。
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> メソッドを公開します。 `CreateInstance` により、DI から指定の型が読み込まれます。
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
@@ -427,7 +433,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 `IAsyncActionFilter` の場合、<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> の呼び出しによって:
 
 * 後続のすべてのアクション フィルターとアクション メソッドが実行されます。
-* `ActionExecutedContext` を返します。
+* `ActionExecutedContext` が返されます。
 
 ショートサーキットするには、<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> を結果インスタンスに割り当てます。`next` (`ActionExecutionDelegate`) は呼び出さないでください。
 
@@ -504,7 +510,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 承認フィルターまたはリソース フィルターによって、パイプラインがショートサーキットされる。
 * アクションの結果を生成することで、例外フィルターによって例外が処理されます。
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> メソッドは、<xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> を `true` に設定することで、アクションの結果と後続の結果フィルターの実行をショートサーキットできます。 ショートサーキットする場合は、空の応答が生成されないように応答オブジェクトに記述します。 `IResultFilter.OnResultExecuting` での例外のスロー:
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> メソッドは、<xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> を `true` に設定することで、アクションの結果と後続の結果フィルターの実行をショートサーキットできます。 ショートサーキットする場合は、空の応答が生成されないように応答オブジェクトに記述します。 `IResultFilter.OnResultExecuting` での例外のスロー: 
 
 * アクション結果と後続フィルターの実行を回避します。
 * 結果は成功ではなく、失敗として処理されます。
@@ -515,7 +521,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 アクションの結果または後続の結果フィルターが例外をスローした場合、`ResultExecutedContext.Exception` は null 以外の値に設定されます。 `Exception` を null に設定すると、例外を効果的に処理し、パイプラインの後方で例外が再スローされるのを防ぐことができます。 結果フィルターの例外を処理するとき、応答にデータを書き込む目的で信頼できる方法はありません。 アクションの結果により例外がスローされるとき、ヘッダーがクライアントにフラッシュされている場合、エラー コードを送信する目的で信頼できるメカニズムはありません。
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter> の場合、`await next` で <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> を呼び出すと、後続のすべての結果フィルターとアクションの結果が実行されます。 ショートサーキットするには、[ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) を `true` に設定し、`ResultExecutionDelegate` を呼び出しません。
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter> の場合、<xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> で `await next` を呼び出すと、後続のすべての結果フィルターとアクションの結果が実行されます。 ショートサーキットするには、[ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) を `true` に設定し、`ResultExecutionDelegate` を呼び出しません。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
@@ -528,13 +534,13 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * ショートサーキットが行われる承認フィルターとリソース フィルター。
 * 例外フィルター。
 
-たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に "<xref:Microsoft.AspNetCore.Mvc.ObjectResult>422 処理不可エンティティ *" 状態コードを使ってアクションの結果 (* ) を設定します。
+たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に "*422 処理不可エンティティ*" 状態コードを使ってアクションの結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) を設定します。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> を実装します。 そのため、`IFilterFactory` インスタンスはフィルター パイプライン内の任意の場所で `IFilterMetadata` インスタンスとして使用できます。 ランタイムでは、フィルターを呼び出す準備をする際、`IFilterFactory` へのキャストが試行されます。 そのキャストが成功した場合、呼び出される <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> インスタンスを作成するために `IFilterMetadata` メソッドが呼び出されます。 これにより、アプリの起動時に正確なフィルター パイプラインを明示的に設定する必要がないため、柔軟なデザインが可能になります。
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> を実装します。 そのため、`IFilterFactory` インスタンスはフィルター パイプライン内の任意の場所で `IFilterMetadata` インスタンスとして使用できます。 ランタイムでは、フィルターを呼び出す準備をする際、`IFilterFactory` へのキャストが試行されます。 そのキャストが成功した場合、呼び出される `IFilterMetadata` インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> メソッドが呼び出されます。 これにより、アプリの起動時に正確なフィルター パイプラインを明示的に設定する必要がないため、柔軟なデザインが可能になります。
 
 フィルターを作成するための別の方法として、カスタムの属性の実装で `IFilterFactory` を実装できます。
 
@@ -551,9 +557,9 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 F12 開発者ツールでは、サンプル コードによって追加された次の応答ヘッダーが表示されます。
 
-* **author:** `Rick Anderson`
+* **作成者:**`Rick Anderson`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **internal:** `My header`
+* **内部:**`My header`
 
 上記のコードでは、**internal:** `My header` という応答ヘッダーが作成されます。
 
@@ -569,7 +575,7 @@ What's a non-named attribute?
 * パラメーターの引き渡しを必要としません。
 * DI で満たす必要があるコンストラクター依存関係があります。
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> メソッドを公開します。 `CreateInstance` により、サービス コンテナー (DI) から指定の型が読み込まれます。
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> メソッドを公開します。 `CreateInstance` により、サービス コンテナー (DI) から指定の型が読み込まれます。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
@@ -577,7 +583,7 @@ What's a non-named attribute?
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet&highlight=1)]
 
-上記のコードでは、`[SampleActionFilter]` を適用する方法としては、`SampleActionFilter` でメソッドを装飾する方法が推奨されます。
+上記のコードでは、`SampleActionFilter` を適用する方法としては、`[SampleActionFilter]` でメソッドを装飾する方法が推奨されます。
 
 ## <a name="using-middleware-in-the-filter-pipeline"></a>フィルター パイプラインでのミドルウェアの使用
 
@@ -596,7 +602,7 @@ What's a non-named attribute?
 ## <a name="next-actions"></a>次の操作
 
 * [Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページをご覧ください。
-* フィルターを試すには、[GitHub のサンプルをダウンロードして、テストおよび変更を行います](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)。
+* フィルターを試してみるには、 [GitHub サンプルをダウンロードし、テスト](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)して、変更します。
 
 ::: moniker-end
 
@@ -629,13 +635,13 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 * [承認フィルター](#authorization-filters)は、最初に実行され、ユーザーが要求に対して承認されているかどうかを判断するために使用されます。 承認フィルターでは、要求が承認されていない場合、パイプラインがショートサーキットされます。
 
-* [リソース フィルター](#resource-filters):
+* [リソースフィルター](#resource-filters):
 
   * 承認後に実行されます。  
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> では、残りのフィルター パイプラインの前にコードを実行できます。 たとえば、`OnResourceExecuting` では、モデル バインディングの前にコードを実行できます。
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> では、残りのパイプラインの完了後にコードを実行できます。
 
-* [アクション フィルター](#action-filters)は、個々のアクション メソッドが呼び出される直前と直後にコードを実行できます。 アクションに渡される引数とアクションから返される結果を操作するために使用できます。 アクション フィルターは Razor Pages ではサポート**されていません**。
+* [アクション フィルター](#action-filters)は、個々のアクション メソッドが呼び出される直前と直後にコードを実行できます。 アクションに渡される引数とアクションから返される結果を操作するために使用できます。 アクションフィルターは、Razor Pages ではサポートされて**いません**。
 
 * [例外フィルター](#exception-filters)は、応答本文に何かが書き込まれる前に発生する未処理の例外にグローバル ポリシーを適用するために使用されます。
 
@@ -717,12 +723,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| Sequence | フィルターのスコープ | Filter メソッド |
+| Sequence | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラー | `OnActionExecuting` |
-| 3 | 方法 | `OnActionExecuting` |
-| 4 | 方法 | `OnActionExecuted` |
+| 3 | Method | `OnActionExecuting` |
+| 4 | Method | `OnActionExecuted` |
 | 5 | コントローラー | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -766,8 +772,8 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter> を実装することで、実行の既定の順序をオーバーライドできます。 `IOrderedFilter` により、実行の順序を決定するために、スコープよりも優先される <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> プロパティが公開されます。 より低い `Order` 値を持つフィルター:
 
-* より高い *の値を持つフィルターのそれよりも前に*before`Order` コードが実行されます。
-* より高い *の値を持つフィルターのそれよりも後に*after`Order` コードが実行されます。
+* より高い `Order` の値を持つフィルターのそれよりも前に *before* コードが実行されます。
+* より高い `Order` の値を持つフィルターのそれよりも後に *after* コードが実行されます。
 
 `Order` プロパティはコンストラクター パラメーターで設定できます。
 
@@ -777,20 +783,20 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 
 上記の例にある同じ 3 つのアクション フィルターを検討してください。 コントローラーとグローバル フィルターの `Order` プロパティが 1 と 2 にそれぞれ設定される場合、実行順序が逆になります。
 
-| Sequence | フィルターのスコープ | `Order` プロパティ | Filter メソッド |
+| Sequence | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 方法 | 0 | `OnActionExecuting` |
+| 1 | Method | 0 | `OnActionExecuting` |
 | 2 | コントローラー | 1  | `OnActionExecuting` |
 | 3 | グローバル | 2  | `OnActionExecuting` |
 | 4 | グローバル | 2  | `OnActionExecuted` |
 | 5 | コントローラー | 1  | `OnActionExecuted` |
-| 6 | 方法 | 0  | `OnActionExecuted` |
+| 6 | Method | 0  | `OnActionExecuted` |
 
 フィルターの実行順序を決定するときに、`Order` プロパティによりスコープがオーバーライドされます。 最初に順序でフィルターが並べ替えられ、次に同じ順位の優先度を決めるためにスコープが使用されます。 組み込みのフィルターはすべて `IOrderedFilter` を実装し、既定の `Order` 値を 0 に設定します。 組み込みのフィルターの場合、`Order` をゼロ以外の値に設定しない限り、スコープによって順序が決定されます。
 
 ## <a name="cancellation-and-short-circuiting"></a>キャンセルとショートサーキット
 
-フィルター メソッドに提供される <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> パラメーターで <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> プロパティを設定することで、フィルター パイプラインをショートサーキットできます。 たとえば、次のリソース フィルターは、パイプラインの残りの部分が実行されるのを防止します。
+フィルター メソッドに提供される <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> パラメーターで <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> プロパティを設定することで、フィルター パイプラインをショートサーキットできます。 たとえば、次のリソース フィルターは、パイプラインの残りの部分が実行されるのを防止します。
 
 <a name="short-circuiting-resource-filter"></a>
 
@@ -801,7 +807,7 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 * これはリソース フィルターであり、`AddHeader` はアクション フィルターであるため、最初に実行されます。
 * パイプラインの残りの部分は迂回されます。
 
-そのため、`AddHeader` アクションの場合、`SomeResource` フィルターが実行されることはありません。 `ShortCircuitingResourceFilter` が最初に実行された場合は、両方のフィルターがアクション メソッド レベルで適用されると、この動作が同じになります。 そのフィルターの種類が原因で、あるいは `ShortCircuitingResourceFilter` プロパティの明示的な使用により、`Order` が最初に実行されます。
+そのため、`SomeResource` アクションの場合、`AddHeader` フィルターが実行されることはありません。 `ShortCircuitingResourceFilter` が最初に実行された場合は、両方のフィルターがアクション メソッド レベルで適用されると、この動作が同じになります。 そのフィルターの種類が原因で、あるいは `Order` プロパティの明示的な使用により、`ShortCircuitingResourceFilter` が最初に実行されます。
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1,9)]
 
@@ -855,7 +861,7 @@ Razor Pages の場合、「[フィルター メソッドをオーバーライド
 
 * シングルトン以外で有効期間があるサービスに依存するフィルターと共に使用しないでください。
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> メソッドを公開します。 `CreateInstance` により、DI から指定の型が読み込まれます。
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> メソッドを公開します。 `CreateInstance` により、DI から指定の型が読み込まれます。
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
@@ -925,7 +931,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 ## <a name="action-filters"></a>アクション フィルター
 
 > [!IMPORTANT]
-> アクション フィルターは Razor Pages に適用**されません**。 Razor Pages では <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> と <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> がサポートされています。 詳細については、[Razor ページのフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
+> アクションフィルターは、ページにRazorは適用**されません**。 Razorページは<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>と<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter>をサポートします。 詳細については、「[ページRazorのフィルターメソッド](xref:razor-pages/filter)」を参照してください。
 
 アクション フィルター:
 
@@ -958,7 +964,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 `IAsyncActionFilter` の場合、<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> の呼び出しによって:
 
 * 後続のすべてのアクション フィルターとアクション メソッドが実行されます。
-* `ActionExecutedContext` を返します。
+* `ActionExecutedContext` が返されます。
 
 ショートサーキットするには、<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> を結果インスタンスに割り当てます。`next` (`ActionExecutionDelegate`) は呼び出さないでください。
 
@@ -997,7 +1003,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 * before イベントと after イベントが与えられません。
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> または <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*> を実装します。
-* Razor Page またはコントローラーの作成、[モデル バインド](xref:mvc/models/model-binding)、アクション フィルター、またはアクション メソッドで発生する未処理の例外を処理します。
+* ページまたはコントローラーの作成Razor 、[モデルのバインド](xref:mvc/models/model-binding)、アクションフィルター、アクションメソッドで発生する未処理の例外を処理します。
 * リソース フィルター、結果フィルター、または MVC 結果の実行で発生した例外はキャッチ**しません**。
 
 例外を処理するには、<xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> プロパティを `true` に設定するか、応答を記述します。 これにより、例外の伝達を停止します。 例外フィルターで例外を "成功" に変えることはできません。 それができるのは、アクション フィルターだけです。
@@ -1042,7 +1048,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 アクションの結果または後続の結果フィルターが例外をスローした場合、`ResultExecutedContext.Exception` は null 以外の値に設定されます。 `Exception` を null に設定すると、例外を効果的に処理でき、パイプラインの後方で ASP.NET Core によって例外が再スローされることを防げます。 結果フィルターの例外を処理するとき、応答にデータを書き込む目的で信頼できる方法はありません。 アクションの結果により例外がスローされるとき、ヘッダーがクライアントにフラッシュされている場合、エラー コードを送信する目的で信頼できるメカニズムはありません。
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter> の場合、`await next` で <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> を呼び出すと、後続のすべての結果フィルターとアクションの結果が実行されます。 ショートサーキットするには、[ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) を `true` に設定し、`ResultExecutionDelegate` を呼び出しません。
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter> の場合、<xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> で `await next` を呼び出すと、後続のすべての結果フィルターとアクションの結果が実行されます。 ショートサーキットするには、[ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) を `true` に設定し、`ResultExecutionDelegate` を呼び出しません。
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
@@ -1055,13 +1061,13 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * ショートサーキットが行われる承認フィルターとリソース フィルター。
 * 例外フィルター。
 
-たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に "<xref:Microsoft.AspNetCore.Mvc.ObjectResult>422 処理不可エンティティ *" 状態コードを使ってアクションの結果 (* ) を設定します。
+たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に "*422 処理不可エンティティ*" 状態コードを使ってアクションの結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) を設定します。
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> を実装します。 そのため、`IFilterFactory` インスタンスはフィルター パイプライン内の任意の場所で `IFilterMetadata` インスタンスとして使用できます。 ランタイムでは、フィルターを呼び出す準備をする際、`IFilterFactory` へのキャストが試行されます。 そのキャストが成功した場合、呼び出される <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> インスタンスを作成するために `IFilterMetadata` メソッドが呼び出されます。 これにより、アプリの起動時に正確なフィルター パイプラインを明示的に設定する必要がないため、柔軟なデザインが可能になります。
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> を実装します。 そのため、`IFilterFactory` インスタンスはフィルター パイプライン内の任意の場所で `IFilterMetadata` インスタンスとして使用できます。 ランタイムでは、フィルターを呼び出す準備をする際、`IFilterFactory` へのキャストが試行されます。 そのキャストが成功した場合、呼び出される `IFilterMetadata` インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> メソッドが呼び出されます。 これにより、アプリの起動時に正確なフィルター パイプラインを明示的に設定する必要がないため、柔軟なデザインが可能になります。
 
 フィルターを作成するための別の方法として、カスタムの属性の実装で `IFilterFactory` を実装できます。
 
@@ -1074,9 +1080,9 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 F12 開発者ツールでは、サンプル コードによって追加された次の応答ヘッダーが表示されます。
 
-* **author:** `Joe Smith`
+* **作成者:**`Joe Smith`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **internal:** `My header`
+* **内部:**`My header`
 
 上記のコードでは、**internal:** `My header` という応答ヘッダーが作成されます。
 
@@ -1092,7 +1098,7 @@ What's a non-named attribute?
 * パラメーターの引き渡しを必要としません。
 * DI で満たす必要があるコンストラクター依存関係があります。
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> メソッドを公開します。 `CreateInstance` により、サービス コンテナー (DI) から指定の型が読み込まれます。
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> を実装します。 `IFilterFactory` は、<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> インスタンスを作成するために <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> メソッドを公開します。 `CreateInstance` により、サービス コンテナー (DI) から指定の型が読み込まれます。
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
@@ -1100,7 +1106,7 @@ What's a non-named attribute?
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet&highlight=1)]
 
-上記のコードでは、`[SampleActionFilter]` を適用する方法としては、`SampleActionFilter` でメソッドを装飾する方法が推奨されます。
+上記のコードでは、`SampleActionFilter` を適用する方法としては、`[SampleActionFilter]` でメソッドを装飾する方法が推奨されます。
 
 ## <a name="using-middleware-in-the-filter-pipeline"></a>フィルター パイプラインでのミドルウェアの使用
 
@@ -1118,7 +1124,7 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a>次の操作
 
-* [Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページをご覧ください。
-* フィルターを試すには、[GitHub のサンプルをダウンロードして、テストおよび変更を行います](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)。
+* 「[ページのフィルター Razorメソッド」を](xref:razor-pages/filter)参照してください。
+* フィルターを試してみるには、 [GitHub サンプルをダウンロードし、テスト](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)して、変更します。
 
 ::: moniker-end

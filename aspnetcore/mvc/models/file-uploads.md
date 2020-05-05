@@ -5,18 +5,24 @@ description: モデル バインドとストリーミングを使用して、ASP
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/18/2020
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: e25da0b3867181a16a4636768f36c148a152dd23
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661737"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774133"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
-[スティーブ・スミス](https://ardalis.com/)と[ラトガー・ストーム](https://github.com/rutix)
+[上田氏](https://ardalis.com/)との[嵐](https://github.com/rutix)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -36,9 +42,9 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 * 専用のファイル アップロード領域 (できれば、システム ドライブ以外) にファイルをアップロードします。 専用の場所を使用すると、アップロードされるファイルにセキュリティ制限を適用しやすくなります。 ファイルのアップロード場所に対する実行アクセス許可を無効にします。&dagger;
 * アプリと同じディレクトリ ツリーに、アップロードしたファイルを保持**しないでください**。&dagger;
-* アプリによって決められた安全なファイル名を使用します。 ユーザーから提供されたファイル名や、アップロードされたファイルの信頼できないファイル名を使用しないでください。&dagger; HTML は、それを表示するときに、信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりします (Razor では、出力が自動的に HTML エンコードされます)。
+* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。&dagger; HTML は、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UIRazorに表示したりします (出力を自動的に HTML エンコードします)。
 * アプリの設計仕様に対して承認されているファイル拡張子のみを許可します。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* サーバーでクライアント側のチェックが実行されていることを確認します。&dagger;クライアント側のチェックは簡単に回避できます。
+* クライアント側のチェックがサーバーで実行されていることを確認します。&dagger;クライアント側のチェックは簡単に回避できます。
 * アップロードされたファイルのサイズをチェックします。 サイズの大きなアップロードを防ぐために、最大サイズ制限を設定します。&dagger;
 * 同じ名前でアップロードされたファイルによってファイルが上書きされないようにする必要があるときは、ファイルをアップロードする前に、データベースまたは物理ストレージに対してファイル名を確認します。
 * **ファイルを格納する前に、アップロードされる内容に対してウイルス/マルウェア スキャナーを実行します。**
@@ -83,7 +89,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   * 通常、サービスでは、大抵の場合に単一障害点となるオンプレミス ソリューションより高いスケーラビリティと回復性が提供されます。
   * 大規模なストレージ インフラストラクチャのシナリオでは、サービスのコストが低下する可能性があります。
 
-  詳細については、「[クイック スタート : .NET を使用してオブジェクト ストレージに BLOB を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。
+  詳細については、「[クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。
 
 ## <a name="file-upload-scenarios"></a>ファイル アップロードのシナリオ
 
@@ -113,7 +119,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 小さいファイルをアップロードするには、マルチパート形式を使用するか、または JavaScript を使用して POST 要求を作成します。
 
-次の例では、Razor Pages フォームを使用して 1 つのファイル (サンプル アプリの*Pages/BufferedSingleFileUploadPhysical.cshtml*) をアップロードする方法を示します。
+次の例では、ページフォームRazorを使用して1つのファイルをアップロードします (サンプルアプリの*pages/BufferedSingleFileUploadPhysical* )。
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -237,7 +243,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 * 複数のファイルを表す次のいずれかのコレクション:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
-  * [リスト](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
+  * [表](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
@@ -340,7 +346,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Http.IFormFile> は、アクション メソッドのパラメーターとして直接、またはバインドされたモデル プロパティとして、使用することができます。 前の例では、バインドされたモデル プロパティが使用されています。
 
-`FileUpload` は、Razor Pages フォームで使用されます。
+は`FileUpload` 、 Razorページ形式で使用されます。
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -414,7 +420,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-サンプル アプリでは、`GenerateAntiforgeryTokenCookieAttribute` および `DisableFormValueModelBindingAttribute` は、[Razor Pages の規則](xref:razor-pages/razor-pages-conventions)を使用して、`Startup.ConfigureServices` で `/StreamedSingleFileUploadDb` および `/StreamedSingleFileUploadPhysical` のページ アプリケーション モデルにフィルターとして適用されます。
+このサンプルアプリでは`GenerateAntiforgeryTokenCookieAttribute` 、 `DisableFormValueModelBindingAttribute`とは、ページ[ Razor表記規則](xref:razor-pages/razor-pages-conventions)を`Startup.ConfigureServices`使用すると`/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical`のページアプリケーションモデルにフィルターとして適用されます。
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
@@ -502,7 +508,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 ファイルを物理ストレージに保存する場合は、クライアント指定のファイル名を使用しないでください。 [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) または [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) を使用して、ファイルの安全なファイル名を作成し、一時ストレージの完全なパス (ファイル名を含む) を作成します。
 
-Razor では、プロパティ値が表示用に自動的に HTML エンコードされます。 次のコードは安全に使用できます。
+Razorプロパティ値が自動的に HTML エンコードされて表示されます。 次のコードは安全に使用できます。
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -514,7 +520,7 @@ Razor では、プロパティ値が表示用に自動的に HTML エンコー�
 }
 ```
 
-Razor の外部では、ユーザーの要求からのファイル名の内容を常に <xref:System.Net.WebUtility.HtmlEncode*> でエンコードします。
+のRazor外部では<xref:System.Net.WebUtility.HtmlEncode*> 、常にユーザーの要求の内容をファイル名で指定します。
 
 多くの実装には、ファイルが存在するかどうかのチェックを含める必要があります。そうしないと、同じ名前のファイルによってファイルが上書きされます。 アプリの仕様を満たす追加のロジックを提供します。
 
@@ -557,9 +563,9 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>name 属性の値を POST メソッドのパラメーター名に一致させる
 
-フォーム データを POST する、または JavaScript の `FormData` を直接使用する、Razor 以外のフォームでは、フォームの要素または `FormData` で指定されている名前が、コントローラーのアクションのパラメーターの name と一致している必要があります。
+フォームデータをRazorポストするか、JavaScript の`FormData`直接を使用する非フォームでは、フォームの要素で指定`FormData`された名前、またはコントローラーのアクション内のパラメーターの名前と一致する必要があります。
 
-次の例では
+次に例を示します。
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 
@@ -579,7 +585,7 @@ if (formFile.Length > _fileSizeLimit)
 
 C# メソッドのパラメーターに一致する名前を使用します (`battlePlans`)。
 
-* `Upload` という名前の Razor Pages ページ ハンドラー メソッドの場合:
+* というRazor名前`Upload`のページページハンドラーメソッドの場合:
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -610,7 +616,7 @@ public void ConfigureServices(IServiceCollection services)
 
 単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> を使用します。
 
-Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
+Razor Pages アプリで、で`Startup.ConfigureServices`[規則](xref:razor-pages/razor-pages-conventions)を適用したフィルターを適用します。
 
 ```csharp
 services.AddRazorPages()
@@ -627,7 +633,7 @@ services.AddRazorPages()
     });
 ```
 
-Razor Pages アプリまたは MVC アプリでは、ページ モデルまたはアクション メソッドにフィルターを適用します。
+Razorページアプリまたは MVC アプリで、ページモデルまたはアクションメソッドにフィルターを適用します。
 
 ```csharp
 // Set the limit to 256 MB
@@ -658,7 +664,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 単一ページまたはアクションに対する [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> を使用します。
 
-Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
+Razor Pages アプリで、で`Startup.ConfigureServices`[規則](xref:razor-pages/razor-pages-conventions)を適用したフィルターを適用します。
 
 ```csharp
 services.AddRazorPages()
@@ -675,7 +681,7 @@ services.AddRazorPages()
     });
 ```
 
-Razor Pages アプリまたは MVC アプリでは、ページ ハンドラー クラスまたはアクション メソッドにフィルターを適用します。
+Razorページアプリまたは MVC アプリで、フィルターをページハンドラークラスまたはアクションメソッドに適用します。
 
 ```csharp
 // Handle requests up to 50 MB
@@ -686,7 +692,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-[`@attribute`](xref:mvc/views/razor#attribute) Razor ディレクティブを`RequestSizeLimitAttribute`使用して適用することもできます。
+は`RequestSizeLimitAttribute` 、 [`@attribute`](xref:mvc/views/razor#attribute) Razorディレクティブを使用して適用することもできます。
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -765,9 +771,9 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 * 専用のファイル アップロード領域 (できれば、システム ドライブ以外) にファイルをアップロードします。 専用の場所を使用すると、アップロードされるファイルにセキュリティ制限を適用しやすくなります。 ファイルのアップロード場所に対する実行アクセス許可を無効にします。&dagger;
 * アプリと同じディレクトリ ツリーに、アップロードしたファイルを保持**しないでください**。&dagger;
-* アプリによって決められた安全なファイル名を使用します。 ユーザーから提供されたファイル名や、アップロードされたファイルの信頼できないファイル名を使用しないでください。&dagger; HTML は、それを表示するときに、信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりします (Razor では、出力が自動的に HTML エンコードされます)。
+* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。&dagger; HTML は、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UIRazorに表示したりします (出力を自動的に HTML エンコードします)。
 * アプリの設計仕様に対して承認されているファイル拡張子のみを許可します。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* サーバーでクライアント側のチェックが実行されていることを確認します。&dagger;クライアント側のチェックは簡単に回避できます。
+* クライアント側のチェックがサーバーで実行されていることを確認します。&dagger;クライアント側のチェックは簡単に回避できます。
 * アップロードされたファイルのサイズをチェックします。 サイズの大きなアップロードを防ぐために、最大サイズ制限を設定します。&dagger;
 * 同じ名前でアップロードされたファイルによってファイルが上書きされないようにする必要があるときは、ファイルをアップロードする前に、データベースまたは物理ストレージに対してファイル名を確認します。
 * **ファイルを格納する前に、アップロードされる内容に対してウイルス/マルウェア スキャナーを実行します。**
@@ -812,7 +818,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   * 通常、サービスでは、大抵の場合に単一障害点となるオンプレミス ソリューションより高いスケーラビリティと回復性が提供されます。
   * 大規模なストレージ インフラストラクチャのシナリオでは、サービスのコストが低下する可能性があります。
 
-  詳細については、「[クイック スタート : .NET を使用してオブジェクト ストレージに BLOB を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。 そのトピックでは <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> が示されていますが、<xref:System.IO.Stream> を使用する場合は、<xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> を使用して <xref:System.IO.FileStream> を Blob Storage に保存することもできます。
+  詳細については、「[クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。 そのトピックでは <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> が示されていますが、<xref:System.IO.Stream> を使用する場合は、<xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> を使用して <xref:System.IO.FileStream> を Blob Storage に保存することもできます。
 
 ## <a name="file-upload-scenarios"></a>ファイル アップロードのシナリオ
 
@@ -842,7 +848,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 小さいファイルをアップロードするには、マルチパート形式を使用するか、または JavaScript を使用して POST 要求を作成します。
 
-次の例では、Razor Pages フォームを使用して 1 つのファイル (サンプル アプリの*Pages/BufferedSingleFileUploadPhysical.cshtml*) をアップロードする方法を示します。
+次の例では、ページフォームRazorを使用して1つのファイルをアップロードします (サンプルアプリの*pages/BufferedSingleFileUploadPhysical* )。
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -966,7 +972,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 * 複数のファイルを表す次のいずれかのコレクション:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
-  * [リスト](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
+  * [表](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
@@ -1069,7 +1075,7 @@ public class BufferedSingleFileUploadDb
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Http.IFormFile> は、アクション メソッドのパラメーターとして直接、またはバインドされたモデル プロパティとして、使用することができます。 前の例では、バインドされたモデル プロパティが使用されています。
 
-`FileUpload` は、Razor Pages フォームで使用されます。
+は`FileUpload` 、 Razorページ形式で使用されます。
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1143,7 +1149,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-サンプル アプリでは、`GenerateAntiforgeryTokenCookieAttribute` および `DisableFormValueModelBindingAttribute` は、[Razor Pages の規則](xref:razor-pages/razor-pages-conventions)を使用して、`Startup.ConfigureServices` で `/StreamedSingleFileUploadDb` および `/StreamedSingleFileUploadPhysical` のページ アプリケーション モデルにフィルターとして適用されます。
+このサンプルアプリでは`GenerateAntiforgeryTokenCookieAttribute` 、 `DisableFormValueModelBindingAttribute`とは、ページ[ Razor表記規則](xref:razor-pages/razor-pages-conventions)を`Startup.ConfigureServices`使用すると`/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical`のページアプリケーションモデルにフィルターとして適用されます。
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
@@ -1231,7 +1237,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 ファイルを物理ストレージに保存する場合は、クライアント指定のファイル名を使用しないでください。 [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) または [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) を使用して、ファイルの安全なファイル名を作成し、一時ストレージの完全なパス (ファイル名を含む) を作成します。
 
-Razor では、プロパティ値が表示用に自動的に HTML エンコードされます。 次のコードは安全に使用できます。
+Razorプロパティ値が自動的に HTML エンコードされて表示されます。 次のコードは安全に使用できます。
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -1243,7 +1249,7 @@ Razor では、プロパティ値が表示用に自動的に HTML エンコー�
 }
 ```
 
-Razor の外部では、ユーザーの要求からのファイル名の内容を常に <xref:System.Net.WebUtility.HtmlEncode*> でエンコードします。
+のRazor外部では<xref:System.Net.WebUtility.HtmlEncode*> 、常にユーザーの要求の内容をファイル名で指定します。
 
 多くの実装には、ファイルが存在するかどうかのチェックを含める必要があります。そうしないと、同じ名前のファイルによってファイルが上書きされます。 アプリの仕様を満たす追加のロジックを提供します。
 
@@ -1286,9 +1292,9 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>name 属性の値を POST メソッドのパラメーター名に一致させる
 
-フォーム データを POST する、または JavaScript の `FormData` を直接使用する、Razor 以外のフォームでは、フォームの要素または `FormData` で指定されている名前が、コントローラーのアクションのパラメーターの name と一致している必要があります。
+フォームデータをRazorポストするか、JavaScript の`FormData`直接を使用する非フォームでは、フォームの要素で指定`FormData`された名前、またはコントローラーのアクション内のパラメーターの名前と一致する必要があります。
 
-次の例では
+次に例を示します。
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 
@@ -1308,7 +1314,7 @@ if (formFile.Length > _fileSizeLimit)
 
 C# メソッドのパラメーターに一致する名前を使用します (`battlePlans`)。
 
-* `Upload` という名前の Razor Pages ページ ハンドラー メソッドの場合:
+* というRazor名前`Upload`のページページハンドラーメソッドの場合:
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -1339,7 +1345,7 @@ public void ConfigureServices(IServiceCollection services)
 
 単一ページまたはアクションに対する <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute> を使用します。
 
-Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
+Razor Pages アプリで、で`Startup.ConfigureServices`[規則](xref:razor-pages/razor-pages-conventions)を適用したフィルターを適用します。
 
 ```csharp
 services.AddMvc()
@@ -1357,7 +1363,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Razor Pages アプリまたは MVC アプリでは、ページ モデルまたはアクション メソッドにフィルターを適用します。
+Razorページアプリまたは MVC アプリで、ページモデルまたはアクションメソッドにフィルターを適用します。
 
 ```csharp
 // Set the limit to 256 MB
@@ -1385,7 +1391,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 単一ページまたはアクションに対する [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) を設定するには、<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> を使用します。
 
-Razor Pages アプリでは、`Startup.ConfigureServices` の [convention](xref:razor-pages/razor-pages-conventions) を使用してフィルターを適用します。
+Razor Pages アプリで、で`Startup.ConfigureServices`[規則](xref:razor-pages/razor-pages-conventions)を適用したフィルターを適用します。
 
 ```csharp
 services.AddMvc()
@@ -1403,7 +1409,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Razor Pages アプリまたは MVC アプリでは、ページ ハンドラー クラスまたはアクション メソッドにフィルターを適用します。
+Razorページアプリまたは MVC アプリで、フィルターをページハンドラークラスまたはアクションメソッドに適用します。
 
 ```csharp
 // Handle requests up to 50 MB
@@ -1472,6 +1478,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ## <a name="additional-resources"></a>その他のリソース
 
+* [HTTP 接続要求をドレインしています](xref:fundamentals/servers/kestrel#http-connection-request-draining)
 * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
-* [Azure セキュリティ: セキュリティ フレーム: 入力検証 |緩和 策](/azure/security/azure-security-threat-modeling-tool-input-validation)
-* [Azure クラウドのデザイン パターン: バレー キー パターン](/azure/architecture/patterns/valet-key)
+* [Azure のセキュリティ: セキュリティフレーム: 入力の検証 |対策](/azure/security/azure-security-threat-modeling-tool-input-validation)
+* [Azure クラウドの設計パターン: Valet キーパターン](/azure/architecture/patterns/valet-key)

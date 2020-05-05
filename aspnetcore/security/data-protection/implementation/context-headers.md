@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core データ保護コンテキストヘッダーの実装の詳細について説明します。
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 381cc137d1de87e87f36c3b32a6a551a318ed3cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654578"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776956"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core のコンテキストヘッダー
 
@@ -20,9 +26,9 @@ ms.locfileid: "78654578"
 
 データ保護システムでは、"キー" は認証された暗号化サービスを提供できるオブジェクトを意味します。 各キーは一意の id (GUID) によって識別され、それにはアルゴリズム情報と entropic マテリアルが含まれます。 各キーは一意のエントロピを伝達することを目的としていますが、システムではこれを強制することはできません。また、キーリング内の既存のキーのアルゴリズム情報を変更することによって、キーリングを手動で変更する可能性がある開発者にも考慮する必要があります。 これらのケースによってセキュリティ要件を達成するために、データ保護システムには[暗号化の俊敏性](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/)の概念があります。これにより、複数の暗号化アルゴリズムで1つの entropic 値を安全に使用できます。
 
-暗号化の機敏性をサポートするほとんどのシステムは、ペイロード内のアルゴリズムに関する特定の情報を含めます。 アルゴリズムの OID は、通常、このような場合に適しています。 ただし、1つの問題として、同じアルゴリズムを指定する方法は複数あります。 "AES" (CNG) とマネージ Aes、AesManaged、AesCryptoServiceProvider、AesCng、および RijndaelManaged (特定のパラメーター) クラスはすべて実際に同じです。これらのすべてを正しい OID にマッピングする必要があります。 開発者がカスタムアルゴリズム (または AES! の別の実装) を提供する必要がある場合は、その OID を知らせる必要があります。 この追加の登録手順では、システム構成が特に困難になります。
+暗号化の機敏性をサポートするほとんどのシステムは、ペイロード内のアルゴリズムに関する特定の情報を含めます。 アルゴリズムの OID は、通常、このような場合に適しています。 ただし、1つの問題として、同じアルゴリズムを指定する方法は複数あります。 "AES" (CNG) とマネージ Aes、AesManaged、AesCryptoServiceProvider、AesCng、および RijndaelManaged (特定のパラメーター) クラスはすべて同じものであり、これらのすべてを正しい OID にマッピングする必要があります。 開発者がカスタムアルゴリズム (または AES! の別の実装) を提供する必要がある場合は、その OID を知らせる必要があります。 この追加の登録手順では、システム構成が特に困難になります。
 
-前のステップでは、間違った方向から問題に近づいていると判断しました。 OID はアルゴリズムがどのようなものかを示していますが、実際には気にしません。 2つの異なるアルゴリズムで1つの entropic 値を安全に使用する必要がある場合、アルゴリズムが実際にどのようなものかを知る必要はありません。 実際には、どのように動作するかということに注意してください。 任意の適正な対称ブロック暗号アルゴリズムは、強力な擬似乱数 (PRP) でもあります。入力 (キー、チェーンモード、IV、プレーンテキスト) を修正します。また、暗号化テキストの出力は、その他の対称ブロック暗号とは異なる可能性があります。同じ入力が指定されたアルゴリズム。 同様に、適切なキー付きハッシュ関数も強力な擬似乱数関数 (PRF) であり、固定された入力セットを指定すると、その出力は他のキー付きハッシュ関数とは異なる overwhelmingly になります。
+前のステップでは、間違った方向から問題に近づいていると判断しました。 OID はアルゴリズムがどのようなものかを示していますが、実際には気にしません。 2つの異なるアルゴリズムで1つの entropic 値を安全に使用する必要がある場合、アルゴリズムが実際にどのようなものかを知る必要はありません。 実際には、どのように動作するかということに注意してください。 任意の適正な対称ブロック暗号アルゴリズムは、強力な擬似乱数 (PRP) でもあります。入力 (キー、チェーンモード、IV、プレーンテキスト) を修正し、暗号文の出力は、同じ入力が指定された他の対称ブロック暗号アルゴリズムとは異なる確率で区別されます。 同様に、適切なキー付きハッシュ関数も強力な擬似乱数関数 (PRF) であり、固定された入力セットを指定すると、その出力は他のキー付きハッシュ関数とは異なる overwhelmingly になります。
 
 コンテキストヘッダーを構築するには、この強力な PRPs と Prps の概念を使用します。 このコンテキストヘッダーは基本的に、特定の操作で使用されているアルゴリズムに対する安定したサムプリントとして機能し、データ保護システムで必要とされる暗号化の機敏性を提供します。 このヘッダーは再現可能で、後で[サブキー派生プロセス](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)の一部として使用されます。 コンテキストヘッダーを作成するには、基になるアルゴリズムの動作モードに応じて2つの方法があります。
 
@@ -50,7 +56,7 @@ ms.locfileid: "78654578"
 
 代わりに、カウンタモードで NIST SP800-108 KDF を使用します ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5.1 を参照)。長さ0のキー、ラベル、およびコンテキストと HMACSHA512 を基になる PRF として使用します。 派生した |K_E |+ |K_H |出力のバイト数。その後、結果を K_E に分解して K_H します。 数学的には、次のように表されます。
 
-( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")
+(K_E | |K_H) = SP800_108_CTR (prf = HMACSHA512、key = ""、label = ""、context = "")
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>例: AES-192-CBC + HMACSHA256
 

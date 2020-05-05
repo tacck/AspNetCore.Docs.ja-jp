@@ -5,19 +5,25 @@ description: すべてのプロパティを含む、定義済みの ASP.NET Core
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 308e7db47104ebd4d6bb8d08c64f14bbd118898b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 144cc8988ba5797265b38f0f7364f528e0dbb97e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653768"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777424"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>ASP.NET Core の環境タグ ヘルパー
 
 著者: [Peter Kellner](https://peterkellner.net)、[Hisham Bin Ateya](https://twitter.com/hishambinateya)
 
-環境タグ ヘルパーは、現在の[ホスティング環境](xref:fundamentals/environments)に基づき、囲まれたコンテンツを条件付きで表示します。 環境タグ ヘルパーの 1 つの属性 `names` は、環境名のコンマ区切りリストです。 指定された環境名のいずれかが現在の環境と一致する場合、囲まれたコンテンツが表示されます。
+環境タグヘルパーは、現在の[ホスト環境](xref:fundamentals/environments)に基づいて、囲まれたコンテンツを条件付きでレンダリングします。 環境タグ ヘルパーの 1 つの属性 `names` は、環境名のコンマ区切りリストです。 指定された環境名のいずれかが現在の環境と一致する場合、囲まれたコンテンツが表示されます。
 
 タグ ヘルパーの概要については、「<xref:mvc/views/tag-helpers/intro>」をご覧ください。
 
@@ -41,11 +47,11 @@ ms.locfileid: "78653768"
 
 ## <a name="include-and-exclude-attributes"></a>include および exclude 属性
 
-`include` & `exclude` 属性は、含まれている、または除外されているホスト環境名に基づいて、囲まれたコンテンツを表示します。
+`include`&インクルードまたは除外されるホスティング環境名に基づいて、囲まれたコンテンツをレンダリングする属性`exclude`コントロール。
 
 ### <a name="include"></a>include
 
-`include` プロパティが示す動作は、`names` 属性と似ています。 `include` タグの内容が表示されるためには、[ 属性の値で列記されている環境が、アプリのホスティング環境 (](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName*)IHostingEnvironment.EnvironmentName`<environment>`) と一致する必要があります。
+`include` プロパティが示す動作は、`names` 属性と似ています。 `<environment>` タグの内容が表示されるためには、`include` 属性の値で列記されている環境が、アプリのホスティング環境 ([IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName*)) と一致する必要があります。
 
 ```cshtml
 <environment include="Staging,Production">
@@ -65,6 +71,6 @@ ms.locfileid: "78653768"
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:fundamentals/environments>

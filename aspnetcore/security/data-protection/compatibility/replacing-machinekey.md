@@ -4,19 +4,25 @@ author: rick-anderson
 description: ASP.NET の machineKey を置き換えて、新しいより安全なデータ保護システムを使用できるようにする方法について説明します。
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 2317cb50cfe63226baf336ebfc5d681d1cebe5c6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655082"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777463"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>ASP.NET Core の ASP.NET machineKey を置き換える
 
 <a name="compatibility-replacing-machinekey"></a>
 
-ASP.NET の `<machineKey>` 要素の実装[は置き換えることが](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)できます。 これにより、ASP.NET 暗号化ルーチンのほとんどの呼び出しは、新しいデータ保護システムを含む代替のデータ保護メカニズムを通じてルーティングされます。
+ASP.NET の`<machineKey>`要素の実装[は置き換えることが](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)できます。 これにより、ASP.NET 暗号化ルーチンのほとんどの呼び出しは、新しいデータ保護システムを含む代替のデータ保護メカニズムを通じてルーティングされます。
 
 ## <a name="package-installation"></a>パッケージ インストール
 
@@ -32,7 +38,7 @@ ASP.NET の `<machineKey>` 要素の実装[は置き換えることが](https://
 ```
 
 >[!TIP]
-> 新しいデータ保護システムがアクティブであるかどうかを確認するには、次の例に示すように、`__VIEWSTATE`のようなフィールドを調べます。これは "CfDJ8" で始まります。 "CfDJ8" は、データ保護システムによって保護されているペイロードを識別するマジック "09 F0 C9 F0" ヘッダーの base64 表現です。
+> 新しいデータ保護システムがアクティブであるかどうかを確認するに`__VIEWSTATE`は、のようなフィールドを調べます。次の例のように、"CfDJ8" で始まる必要があります。 "CfDJ8" は、データ保護システムによって保護されているペイロードを識別するマジック "09 F0 C9 F0" ヘッダーの base64 表現です。
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -67,9 +73,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> また、SetApplicationName への明示的な呼び出しの代わりに `<machineKey applicationName="my-app" ... />` を使用することもできます。 これは、構成するすべてのユーザーがアプリケーション名を設定していた場合に、開発者が DataProtectionStartup 派生型を作成する必要がないようにするための便利なメカニズムです。
+> SetApplicationName への`<machineKey applicationName="my-app" ... />`明示的な呼び出しの代わりにを使用することもできます。 これは、構成するすべてのユーザーがアプリケーション名を設定していた場合に、開発者が DataProtectionStartup 派生型を作成する必要がないようにするための便利なメカニズムです。
 
-このカスタム構成を有効にするには、web.config に戻り、パッケージのインストールによって構成ファイルに追加された `<appSettings>` 要素を探します。 次のマークアップが表示されます。
+このカスタム構成を有効にするには、web.config に戻り、パッケージの`<appSettings>`インストールによって構成ファイルに追加された要素を探します。 次のマークアップが表示されます。
 
 ```xml
 <appSettings>

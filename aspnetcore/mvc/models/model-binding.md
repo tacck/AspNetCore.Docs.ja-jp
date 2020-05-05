@@ -5,13 +5,19 @@ description: ASP.NET Core でのモデル バインドのしくみと、その�
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 19580768679f30131683717792252c03aade68f9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2e604cd1869ea077fc0465df91ec083b9db83763
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654470"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768971"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core でのモデル バインド
 
@@ -23,10 +29,10 @@ ms.locfileid: "78654470"
 
 ## <a name="what-is-model-binding"></a>モデル バインドとは何か
 
-コントローラーおよび Razor Pages では、HTTP 要求からのデータが使用されます。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
+コントローラーとRazorページは、HTTP 要求から取得されたデータを処理します。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
 
 * ルート データ、フォーム フィールド、クエリ文字列などのさまざまなソースからデータを取得します。
-* メソッド パラメーターとパブリック プロパティでコントローラーと Razor Pages にデータを提供します。
+* メソッドパラメーターおよびパブリックプロパティのRazorデータをコントローラーおよびページに提供します。
 * 文字列データを .NET 型に変換します。
 * 複合型のプロパティを更新します。
 
@@ -51,16 +57,16 @@ http://contoso.com/api/pets/2?DogsOnly=true
 * 該当するソース内を調べ、クエリ文字列内で "DogsOnly=true" を検索します。 名前の照合では大文字と小文字が区別されません。
 * 文字列 "true" をブール型の `true` に変換します。
 
-次にフレームワークによって `GetById` メソッドが呼び出され、`id` パラメーターには 2 が、`true` パラメーターには `dogsOnly` が渡されます。
+次にフレームワークによって `GetById` メソッドが呼び出され、`id` パラメーターには 2 が、`dogsOnly` パラメーターには `true` が渡されます。
 
 上記の例で、モデル バインディング ターゲットは単純型のメソッド パラメーターになっています。 ターゲットは複合型のプロパティになる場合もあります。 各プロパティが正常にバインドされたら、そのプロパティに対して[モデル検証](xref:mvc/models/validation)が行われます。 どのようなデータがモデルにバインドされているかを示す記録、バインド エラー、または検証のエラーは、[ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) または [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) に格納されます。 このプロセスが正常終了したかどうかを確認するために、アプリでは [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) フラグが調べられます。
 
-## <a name="targets"></a>ターゲット
+## <a name="targets"></a>対象サーバー
 
 モデル バインドでは、次の種類のターゲットの値について検索が試みられます。
 
 * 要求のルーティング先であるコントローラー アクション メソッドのパラメーター。
-* 要求のルーティング先である Razor Pages ハンドラー メソッドのパラメーター。 
+* 要求がルーティングRazorされるページハンドラーメソッドのパラメーター。 
 * 属性によって指定されている場合は、コントローラーまたは `PageModel` クラスのパブリック プロパティ。
 
 ### <a name="bindproperty-attribute"></a>[BindProperty] 属性
@@ -98,13 +104,13 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 既定のソースが正しくない場合は、次のいずれかの属性を使用してソースを指定します。
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) - クエリ文字列から値を取得します。 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) - ルート データから値を取得します。
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) - ポストされたフォーム フィールドから値を取得します。
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) - 要求本文から値を取得します。
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) - HTTP ヘッダーから値を取得します。
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-クエリ文字列から値を取得します。 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-ルートデータから値を取得します。
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-ポストされたフォームフィールドから値を取得します。
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-要求本文から値を取得します。
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-HTTP ヘッダーから値を取得します。
 
-これらの属性:
+これらの属性: 
 
 * 次の例のように、(モデル クラスにではなく) モデル プロパティに個別に追加されます。
 
@@ -147,7 +153,7 @@ public class Pet
 
 ### <a name="additional-sources"></a>その他のソース
 
-ソース データは、"*値プロバイダー*" によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、cookie またはセッション状態からのデータが必要だとします。 新しいソースからデータを取得するには:
+ソース データは、"*値プロバイダー*" によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、cookie またはセッション状態からのデータが必要だとします。 新しいソースからデータを取得するには: 
 
 * `IValueProvider` を実装するクラスを作成します。
 * `IValueProviderFactory` を実装するクラスを作成します。
@@ -157,7 +163,7 @@ public class Pet
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
-表示したコードでは、すべての組み込み値プロバイダーの後にカスタムの値プロバイダーが配置されています。  それをリストの最初に持ってくるには、`Insert(0, new CookieValueProviderFactory())` ではなく `Add` を呼び出します。
+表示したコードでは、すべての組み込み値プロバイダーの後にカスタムの値プロバイダーが配置されています。  それをリストの最初に持ってくるには、`Add` ではなく `Insert(0, new CookieValueProviderFactory())` を呼び出します。
 
 ## <a name="no-source-for-a-model-property"></a>モデル プロパティ用のソースがない
 
@@ -168,7 +174,7 @@ public class Pet
 * 複合型の場合、モデル バインドでは、プロパティを設定せずに既定のコンストラクターを使用して、インスタンスが作成されます。
 * 配列は `Array.Empty<T>()` に設定されます。例外として、`byte[]` 配列は `null` に設定されます。
 
-モデル プロパティ用のフォーム フィールド内で何も見つからないときモデル状態を無効にする必要がある場合は、[`[BindRequired]`](#bindrequired-attribute) 属性を使用します。
+モデルプロパティのフォームフィールドに何も見つからない場合にモデルの状態を無効にする必要[`[BindRequired]`](#bindrequired-attribute)がある場合は、属性を使用します。
 
 この `[BindRequired]` 動作は、要求本文内の JSON または XML データに対してではなく、ポストされたフォーム データからのモデル バインドに適用されることに注意してください。 要求本文データは、[入力フォーマッタ](#input-formatters)によって処理されます。
 
@@ -178,11 +184,11 @@ public class Pet
 
 `[ApiController]` 属性を持つ API コントローラーでは、モデル状態が無効であると、HTTP 400 の自動応答が生成されます。
 
-Razor ページでは、エラー メッセージを含むページが再表示されます。
+Razorページで、次のエラーメッセージが表示されたページを再び表示します。
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-クライアント側の検証では、それを行わないなら Razor Pages フォームに送信されてしまう不適切なデータのほとんどがキャッチされます。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、 **[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、 **[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
+クライアント側の検証では、 Razorページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチします。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
 
 上のコードでページが再表示されると、無効な入力はフォーム フィールドに表示されません。 これは、モデル プロパティが null または既定値に設定されているためです。 無効な入力はエラー メッセージに表示されます。 しかし、フォーム フィールドに不適切なデータを再表示したい場合は、モデル プロパティを文字列にしてデータ変換を手動で行うことを検討してください。
 
@@ -195,9 +201,9 @@ Razor ページでは、エラー メッセージを含むページが再表示�
 * [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
-* [DateTime](xref:System.ComponentModel.DateTimeConverter)
+* [/](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Decimal](xref:System.ComponentModel.DecimalConverter)
+* [10 進数](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
@@ -206,7 +212,7 @@ Razor ページでは、エラー メッセージを含むページが再表示�
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter)、[UInt32](xref:System.ComponentModel.UInt32Converter)、[UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [バージョン](xref:System.ComponentModel.VersionConverter)
+* [Version](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>複合型
 
@@ -229,7 +235,7 @@ Razor ページでは、エラー メッセージを含むページが再表示�
 
 ### <a name="prefix--parameter-name"></a>プレフィックス = パラメーター名
 
-バインドされるモデルが `instructorToUpdate` という名前のパラメーターである場合:
+バインドされるモデルが `instructorToUpdate` という名前のパラメーターである場合: 
 
 ```csharp
 public IActionResult OnPost(int? id, Instructor instructorToUpdate)
@@ -239,7 +245,7 @@ public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 
 ### <a name="prefix--property-name"></a>プレフィックス = プロパティ名
 
-バインドされるモデルがコントローラーの `Instructor` という名前のプロパティか、または `PageModel` クラスである場合:
+バインドされるモデルがコントローラーの `Instructor` という名前のプロパティか、または `PageModel` クラスである場合: 
 
 ```csharp
 [BindProperty]
@@ -250,7 +256,7 @@ public Instructor Instructor { get; set; }
 
 ### <a name="custom-prefix"></a>カスタム プレフィックス
 
-バインドされるモデルが `instructorToUpdate` という名前のパラメーターであり、かつ `Bind` 属性でプレフィックスとして `Instructor` が指定されている場合:
+バインドされるモデルが `instructorToUpdate` という名前のパラメーターであり、かつ `Bind` 属性でプレフィックスとして `Instructor` が指定されている場合: 
 
 ```csharp
 public IActionResult OnPost(
@@ -270,7 +276,7 @@ public IActionResult OnPost(
 > [!NOTE]
 > ポストされたフォーム データが値のソースである場合、これらの属性はモデル バインドに影響します。 ポストされた JSON および XML 要求本文を処理する入力フォーマッタには影響しません。 入力フォーマッタについては、[この記事で後ほど](#input-formatters)説明します。
 >
-> `[Required]`モデル検証[に関するページにある ](xref:mvc/models/validation#required-attribute) 属性の説明も参照してください。
+> [モデル検証](xref:mvc/models/validation#required-attribute)に関するページにある `[Required]` 属性の説明も参照してください。
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 属性
 
@@ -295,7 +301,7 @@ public IActionResult OnPost(
 public class Instructor
 ```
 
-次の例では、`Instructor` メソッドが呼び出されると、`OnPost` モデルの指定されたプロパティのみがバインドされます。
+次の例では、`OnPost` メソッドが呼び出されると、`Instructor` モデルの指定されたプロパティのみがバインドされます。
 
 ```csharp
 [HttpPost]
@@ -306,9 +312,9 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>コレクション
 
-ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例 :
+ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
-* バインドされるパラメーターが `selectedCourses` という名前の配列であるとした場合:
+* バインドされるパラメーターが `selectedCourses` という名前の配列であるとした場合: 
 
   ```csharp
   public IActionResult OnPost(int? id, int[] selectedCourses)
@@ -351,9 +357,9 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>ディクショナリ
 
-`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例 :
+`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
-* ターゲット パラメーターが `Dictionary<int, string>` という名前の `selectedCourses` であるとします:
+* ターゲット パラメーターが `selectedCourses` という名前の `Dictionary<int, string>` であるとします: 
 
   ```csharp
   public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
@@ -426,7 +432,7 @@ HTTP 要求に含まれたアップロード済みファイル。  また、複�
 
 ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 属性に基づいて入力フォーマッタが選択されます。 属性が存在しない場合は、[Content-Type ヘッダー](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)が使用されます。
 
-組み込みの XML 入力フォーマッタを使用するには:
+組み込みの XML 入力フォーマッタを使用するには: 
 
 * `Microsoft.AspNetCore.Mvc.Formatters.Xml` NuGet パッケージをインストールします。
 
@@ -446,9 +452,9 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 ### <a name="customize-model-binding-with-input-formatters"></a>入力フォーマッタを使用してモデル バインドをカスタマイズする
 
-入力フォーマッタは、要求本文からデータを読み取るためのすべての役割を担います。 このプロセスをカスタマイズするには、入力フォーマッタによって使用される API を構成します。 このセクションでは、`System.Text.Json` という名前のカスタム型を理解するために、`ObjectId` ベースの入力フォーマッタをカスタマイズする方法について説明します。 
+入力フォーマッタは、要求本文からデータを読み取るためのすべての役割を担います。 このプロセスをカスタマイズするには、入力フォーマッタによって使用される API を構成します。 このセクションでは、`ObjectId` という名前のカスタム型を理解するために、`System.Text.Json` ベースの入力フォーマッタをカスタマイズする方法について説明します。 
 
-`ObjectId` という名前のカスタム `Id` プロパティが含まれている、次のモデルを考えてみます。
+`Id` という名前のカスタム `ObjectId` プロパティが含まれている、次のモデルを考えてみます。
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/ModelWithObjectId.cs?name=snippet_Class&highlight=3)]
 
@@ -466,11 +472,11 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 モデル バインドおよび検証システムの動作は、[ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata) によって駆動されます。 `ModelMetadata` については、詳細プロバイダーを [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders) に追加してカスタマイズできます。 組み込みの詳細プロバイダーは、指定された型に対してモデル バインドまたは検証を無効にする場合に使用できます。
 
-指定された型のすべてのモデルに対してモデル バインドを無効にするには、<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider> に `Startup.ConfigureServices` を追加します。 たとえば、`System.Version` 型のすべてのモデルに対してモデル バインドを無効にするには、次のようにします。
+指定された型のすべてのモデルに対してモデル バインドを無効にするには、`Startup.ConfigureServices` に <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider> を追加します。 たとえば、`System.Version` 型のすべてのモデルに対してモデル バインドを無効にするには、次のようにします。
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=5-6)]
 
-指定された型のプロパティに対して検証を無効にするには、<xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider> に `Startup.ConfigureServices` を追加します。 たとえば、`System.Guid` 型のプロパティに対して検証を無効にするには、次のようにします。
+指定された型のプロパティに対して検証を無効にするには、`Startup.ConfigureServices` に <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider> を追加します。 たとえば、`System.Guid` 型のプロパティに対して検証を無効にするには、次のようにします。
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=7-8)]
 
@@ -486,7 +492,7 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> では、フォーム本文、クエリ文字列、およびルート データからデータを取得するために、値プロバイダーが使用されます。 `TryUpdateModelAsync` は通常、次のようになります。 
 
-* オーバーポスティングを防ぐために、Razor Pages およびコントローラーとビューを使用した MVC アプリで使用されます。
+* 過剰ポストRazorを防ぐために、コントローラーとビューを使用してページおよび MVC アプリで使用します。
 * フォーム データ、クエリ文字列、およびルート データから使用される場合を除き、Web API では使用されません。 JSON を使用する Web API エンドポイントでは、[入力フォーマッタ](#input-formatters)を使用して要求本文がオブジェクトに逆シリアル化されます。
 
 詳細については、「[TryUpdateModelAsync](xref:data/ef-rp/crud#TryUpdateModelAsync)」をご覧ください。
@@ -509,10 +515,10 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 ## <a name="what-is-model-binding"></a>モデル バインドとは何か
 
-コントローラーおよび Razor Pages では、HTTP 要求からのデータが使用されます。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
+コントローラーとRazorページは、HTTP 要求から取得されたデータを処理します。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
 
 * ルート データ、フォーム フィールド、クエリ文字列などのさまざまなソースからデータを取得します。
-* メソッド パラメーターとパブリック プロパティでコントローラーと Razor Pages にデータを提供します。
+* メソッドパラメーターおよびパブリックプロパティのRazorデータをコントローラーおよびページに提供します。
 * 文字列データを .NET 型に変換します。
 * 複合型のプロパティを更新します。
 
@@ -537,16 +543,16 @@ http://contoso.com/api/pets/2?DogsOnly=true
 * 該当するソース内を調べ、クエリ文字列内で "DogsOnly=true" を検索します。 名前の照合では大文字と小文字が区別されません。
 * 文字列 "true" をブール型の `true` に変換します。
 
-次にフレームワークによって `GetById` メソッドが呼び出され、`id` パラメーターには 2 が、`true` パラメーターには `dogsOnly` が渡されます。
+次にフレームワークによって `GetById` メソッドが呼び出され、`id` パラメーターには 2 が、`dogsOnly` パラメーターには `true` が渡されます。
 
 上記の例で、モデル バインディング ターゲットは単純型のメソッド パラメーターになっています。 ターゲットは複合型のプロパティになる場合もあります。 各プロパティが正常にバインドされたら、そのプロパティに対して[モデル検証](xref:mvc/models/validation)が行われます。 どのようなデータがモデルにバインドされているかを示す記録、バインド エラー、または検証のエラーは、[ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) または [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) に格納されます。 このプロセスが正常終了したかどうかを確認するために、アプリでは [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) フラグが調べられます。
 
-## <a name="targets"></a>ターゲット
+## <a name="targets"></a>対象サーバー
 
 モデル バインドでは、次の種類のターゲットの値について検索が試みられます。
 
 * 要求のルーティング先であるコントローラー アクション メソッドのパラメーター。
-* 要求のルーティング先である Razor Pages ハンドラー メソッドのパラメーター。 
+* 要求がルーティングRazorされるページハンドラーメソッドのパラメーター。 
 * 属性によって指定されている場合は、コントローラーまたは `PageModel` クラスのパブリック プロパティ。
 
 ### <a name="bindproperty-attribute"></a>[BindProperty] 属性
@@ -584,13 +590,13 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 既定のソースが正しくない場合は、次のいずれかの属性を使用してソースを指定します。
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) - クエリ文字列から値を取得します。 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) - ルート データから値を取得します。
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) - ポストされたフォーム フィールドから値を取得します。
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) - 要求本文から値を取得します。
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) - HTTP ヘッダーから値を取得します。
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-クエリ文字列から値を取得します。 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-ルートデータから値を取得します。
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-ポストされたフォームフィールドから値を取得します。
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-要求本文から値を取得します。
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-HTTP ヘッダーから値を取得します。
 
-これらの属性:
+これらの属性: 
 
 * 次の例のように、(モデル クラスにではなく) モデル プロパティに個別に追加されます。
 
@@ -633,7 +639,7 @@ public class Pet
 
 ### <a name="additional-sources"></a>その他のソース
 
-ソース データは、"*値プロバイダー*" によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、cookie またはセッション状態からのデータが必要だとします。 新しいソースからデータを取得するには:
+ソース データは、"*値プロバイダー*" によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、cookie またはセッション状態からのデータが必要だとします。 新しいソースからデータを取得するには: 
 
 * `IValueProvider` を実装するクラスを作成します。
 * `IValueProviderFactory` を実装するクラスを作成します。
@@ -643,7 +649,7 @@ public class Pet
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
-表示したコードでは、すべての組み込み値プロバイダーの後にカスタムの値プロバイダーが配置されています。  それをリストの最初に持ってくるには、`Insert(0, new CookieValueProviderFactory())` ではなく `Add` を呼び出します。
+表示したコードでは、すべての組み込み値プロバイダーの後にカスタムの値プロバイダーが配置されています。  それをリストの最初に持ってくるには、`Add` ではなく `Insert(0, new CookieValueProviderFactory())` を呼び出します。
 
 ## <a name="no-source-for-a-model-property"></a>モデル プロパティ用のソースがない
 
@@ -654,7 +660,7 @@ public class Pet
 * 複合型の場合、モデル バインドでは、プロパティを設定せずに既定のコンストラクターを使用して、インスタンスが作成されます。
 * 配列は `Array.Empty<T>()` に設定されます。例外として、`byte[]` 配列は `null` に設定されます。
 
-モデル プロパティ用のフォーム フィールド内で何も見つからないときモデル状態を無効にする必要がある場合は、[`[BindRequired]`](#bindrequired-attribute) 属性を使用します。
+モデルプロパティのフォームフィールドに何も見つからない場合にモデルの状態を無効にする必要[`[BindRequired]`](#bindrequired-attribute)がある場合は、属性を使用します。
 
 この `[BindRequired]` 動作は、要求本文内の JSON または XML データに対してではなく、ポストされたフォーム データからのモデル バインドに適用されることに注意してください。 要求本文データは、[入力フォーマッタ](#input-formatters)によって処理されます。
 
@@ -664,11 +670,11 @@ public class Pet
 
 `[ApiController]` 属性を持つ API コントローラーでは、モデル状態が無効であると、HTTP 400 の自動応答が生成されます。
 
-Razor ページでは、エラー メッセージを含むページが再表示されます。
+Razorページで、次のエラーメッセージが表示されたページを再び表示します。
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-クライアント側の検証では、それを行わないなら Razor Pages フォームに送信されてしまう不適切なデータのほとんどがキャッチされます。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、 **[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、 **[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
+クライアント側の検証では、 Razorページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチします。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
 
 上のコードでページが再表示されると、無効な入力はフォーム フィールドに表示されません。 これは、モデル プロパティが null または既定値に設定されているためです。 無効な入力はエラー メッセージに表示されます。 しかし、フォーム フィールドに不適切なデータを再表示したい場合は、モデル プロパティを文字列にしてデータ変換を手動で行うことを検討してください。
 
@@ -681,9 +687,9 @@ Razor ページでは、エラー メッセージを含むページが再表示�
 * [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
-* [DateTime](xref:System.ComponentModel.DateTimeConverter)
+* [/](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Decimal](xref:System.ComponentModel.DecimalConverter)
+* [10 進数](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
@@ -692,7 +698,7 @@ Razor ページでは、エラー メッセージを含むページが再表示�
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter)、[UInt32](xref:System.ComponentModel.UInt32Converter)、[UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [バージョン](xref:System.ComponentModel.VersionConverter)
+* [Version](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>複合型
 
@@ -715,7 +721,7 @@ Razor ページでは、エラー メッセージを含むページが再表示�
 
 ### <a name="prefix--parameter-name"></a>プレフィックス = パラメーター名
 
-バインドされるモデルが `instructorToUpdate` という名前のパラメーターである場合:
+バインドされるモデルが `instructorToUpdate` という名前のパラメーターである場合: 
 
 ```csharp
 public IActionResult OnPost(int? id, Instructor instructorToUpdate)
@@ -725,7 +731,7 @@ public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 
 ### <a name="prefix--property-name"></a>プレフィックス = プロパティ名
 
-バインドされるモデルがコントローラーの `Instructor` という名前のプロパティか、または `PageModel` クラスである場合:
+バインドされるモデルがコントローラーの `Instructor` という名前のプロパティか、または `PageModel` クラスである場合: 
 
 ```csharp
 [BindProperty]
@@ -736,7 +742,7 @@ public Instructor Instructor { get; set; }
 
 ### <a name="custom-prefix"></a>カスタム プレフィックス
 
-バインドされるモデルが `instructorToUpdate` という名前のパラメーターであり、かつ `Bind` 属性でプレフィックスとして `Instructor` が指定されている場合:
+バインドされるモデルが `instructorToUpdate` という名前のパラメーターであり、かつ `Bind` 属性でプレフィックスとして `Instructor` が指定されている場合: 
 
 ```csharp
 public IActionResult OnPost(
@@ -756,7 +762,7 @@ public IActionResult OnPost(
 > [!NOTE]
 > ポストされたフォーム データが値のソースである場合、これらの属性はモデル バインドに影響します。 ポストされた JSON および XML 要求本文を処理する入力フォーマッタには影響しません。 入力フォーマッタについては、[この記事で後ほど](#input-formatters)説明します。
 >
-> `[Required]`モデル検証[に関するページにある ](xref:mvc/models/validation#required-attribute) 属性の説明も参照してください。
+> [モデル検証](xref:mvc/models/validation#required-attribute)に関するページにある `[Required]` 属性の説明も参照してください。
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 属性
 
@@ -781,7 +787,7 @@ public IActionResult OnPost(
 public class Instructor
 ```
 
-次の例では、`Instructor` メソッドが呼び出されると、`OnPost` モデルの指定されたプロパティのみがバインドされます。
+次の例では、`OnPost` メソッドが呼び出されると、`Instructor` モデルの指定されたプロパティのみがバインドされます。
 
 ```csharp
 [HttpPost]
@@ -792,9 +798,9 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>コレクション
 
-ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例 :
+ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
-* バインドされるパラメーターが `selectedCourses` という名前の配列であるとした場合:
+* バインドされるパラメーターが `selectedCourses` という名前の配列であるとした場合: 
 
   ```csharp
   public IActionResult OnPost(int? id, int[] selectedCourses)
@@ -837,9 +843,9 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>ディクショナリ
 
-`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例 :
+`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
-* ターゲット パラメーターが `Dictionary<int, string>` という名前の `selectedCourses` であるとします:
+* ターゲット パラメーターが `selectedCourses` という名前の `Dictionary<int, string>` であるとします: 
 
   ```csharp
   public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
@@ -912,7 +918,7 @@ HTTP 要求に含まれたアップロード済みファイル。  また、複�
 
 ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 属性に基づいて入力フォーマッタが選択されます。 属性が存在しない場合は、[Content-Type ヘッダー](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)が使用されます。
 
-組み込みの XML 入力フォーマッタを使用するには:
+組み込みの XML 入力フォーマッタを使用するには: 
 
 * `Microsoft.AspNetCore.Mvc.Formatters.Xml` NuGet パッケージをインストールします。
 
@@ -934,11 +940,11 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 モデル バインドおよび検証システムの動作は、[ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata) によって駆動されます。 `ModelMetadata` については、詳細プロバイダーを [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders) に追加してカスタマイズできます。 組み込みの詳細プロバイダーは、指定された型に対してモデル バインドまたは検証を無効にする場合に使用できます。
 
-指定された型のすべてのモデルに対してモデル バインドを無効にするには、<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider> に `Startup.ConfigureServices` を追加します。 たとえば、`System.Version` 型のすべてのモデルに対してモデル バインドを無効にするには、次のようにします。
+指定された型のすべてのモデルに対してモデル バインドを無効にするには、`Startup.ConfigureServices` に <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider> を追加します。 たとえば、`System.Version` 型のすべてのモデルに対してモデル バインドを無効にするには、次のようにします。
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4-5)]
 
-指定された型のプロパティに対して検証を無効にするには、<xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider> に `Startup.ConfigureServices` を追加します。 たとえば、`System.Guid` 型のプロパティに対して検証を無効にするには、次のようにします。
+指定された型のプロパティに対して検証を無効にするには、`Startup.ConfigureServices` に <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider> を追加します。 たとえば、`System.Guid` 型のプロパティに対して検証を無効にするには、次のようにします。
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=6-7)]
 
@@ -956,7 +962,7 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 この属性の名前は、データ ソースを指定するモデル バインド属性のパターンに従います。 ただし、それは、値プロバイダーからのデータ バインドを説明するものではありません。 [依存関係挿入](xref:fundamentals/dependency-injection)コンテナーから型のインスタンスが取得されます。 その目的は、特定のメソッドが呼び出された場合にのみサービスを必要するときにコンストラクターの挿入の代替手段を提供することにあります。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>

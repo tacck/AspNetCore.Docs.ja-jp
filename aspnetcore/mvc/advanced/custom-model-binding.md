@@ -4,13 +4,19 @@ author: ardalis
 description: モデル バインドにより ASP.NET Core のモデルの型を使用して、コントローラー アクションが直接動作する方法について説明します。
 ms.author: riande
 ms.date: 01/06/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 511cf39bfedfc55d2f75842daf4445d2aaf4872d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 109bebe79c9e77d26b02ca27367b8ff33191a4b4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652118"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776696"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core でのカスタム モデル バインド
 
@@ -79,13 +85,13 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 - Entity Framework Core を使用して関連するエンティティをフェッチする。
 - 関連するエンティティを引数としてアクション メソッドに渡す。
 
-次のサンプルでは、`ModelBinder` モデルの `Author` 属性を使用しています。
+次のサンプルでは、`Author` モデルの `ModelBinder` 属性を使用しています。
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Data/Author.cs?highlight=6)]
 
-上記のコードでは、`ModelBinder` アクション パラメーターのバインドで使用される必要がある `IModelBinder` の型が `Author` 属性で指定されています。
+上記のコードでは、`Author` アクション パラメーターのバインドで使用される必要がある `IModelBinder` の型が `ModelBinder` 属性で指定されています。
 
-次の `AuthorEntityBinder` クラスは、Entity Framework Core と `Author` を使用してデータ ソースからエンティティをフェッチすることで `authorId` パラメーターをバインドします。
+次の `AuthorEntityBinder` クラスは、Entity Framework Core と `authorId` を使用してデータ ソースからエンティティをフェッチすることで `Author` パラメーターをバインドします。
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Binders/AuthorEntityBinder.cs?name=snippet_Class)]
 
@@ -106,7 +112,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="implementing-a-modelbinderprovider"></a>ModelBinderProvider の実装
 
-属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力**ではなく**、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`ModelBinder` または `Author` の型のパラメーターで `Author` 属性を使用する必要はありません。
+属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力**ではなく**、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`Author` または `Author` の型のパラメーターで `ModelBinder` 属性を使用する必要はありません。
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 
@@ -201,13 +207,13 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 - Entity Framework Core を使用して関連するエンティティをフェッチする。
 - 関連するエンティティを引数としてアクション メソッドに渡す。
 
-次のサンプルでは、`ModelBinder` モデルの `Author` 属性を使用しています。
+次のサンプルでは、`Author` モデルの `ModelBinder` 属性を使用しています。
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Data/Author.cs?highlight=6)]
 
-上記のコードでは、`ModelBinder` アクション パラメーターのバインドで使用される必要がある `IModelBinder` の型が `Author` 属性で指定されています。
+上記のコードでは、`Author` アクション パラメーターのバインドで使用される必要がある `IModelBinder` の型が `ModelBinder` 属性で指定されています。
 
-次の `AuthorEntityBinder` クラスは、Entity Framework Core と `Author` を使用してデータ ソースからエンティティをフェッチすることで `authorId` パラメーターをバインドします。
+次の `AuthorEntityBinder` クラスは、Entity Framework Core と `authorId` を使用してデータ ソースからエンティティをフェッチすることで `Author` パラメーターをバインドします。
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Binders/AuthorEntityBinder.cs?name=demo)]
 
@@ -228,7 +234,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="implementing-a-modelbinderprovider"></a>ModelBinderProvider の実装
 
-属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力**ではなく**、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`ModelBinder` または `Author` の型のパラメーターで `Author` 属性を使用する必要はありません。
+属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力**ではなく**、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`Author` または `Author` の型のパラメーターで `ModelBinder` 属性を使用する必要はありません。
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 

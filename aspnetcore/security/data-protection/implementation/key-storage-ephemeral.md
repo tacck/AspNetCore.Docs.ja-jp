@@ -4,23 +4,29 @@ author: rick-anderson
 description: ASP.NET Core 短期データ保護プロバイダーの実装の詳細について説明します。
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-ephemeral
-ms.openlocfilehash: e4b0014ab3bdbf90b91383e8a33102f94faa8153
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 22a332230e15256dc33fd1d06f2da3ea8d34d3bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654014"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776891"
 ---
 # <a name="ephemeral-data-protection-providers-in-aspnet-core"></a>ASP.NET Core の短期データ保護プロバイダー
 
 <a name="data-protection-implementation-key-storage-ephemeral"></a>
 
-アプリケーションに使い捨て `IDataProtectionProvider`が必要なシナリオがあります。 たとえば、開発者が1回限りのコンソールアプリケーションを試している場合や、アプリケーション自体が一時的なものである場合があります (スクリプトまたは単体テストプロジェクト)。 これらのシナリオをサポートするために、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/)パッケージには `EphemeralDataProtectionProvider`型が含まれています。 この型は、キーリポジトリがメモリ内にのみ保持され、バッキングストアに書き出されない `IDataProtectionProvider` の基本的な実装を提供します。
+アプリケーションに使い捨て`IDataProtectionProvider`が必要なシナリオがあります。 たとえば、開発者が1回限りのコンソールアプリケーションを試している場合や、アプリケーション自体が一時的なものである場合があります (スクリプトまたは単体テストプロジェクト)。 これらのシナリオをサポートするために、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/)パッケージには型`EphemeralDataProtectionProvider`が含まれています。 この型は、キーリポジトリが`IDataProtectionProvider`メモリ内にのみ保持され、バッキングストアに書き出されないの基本実装を提供します。
 
-`EphemeralDataProtectionProvider` の各インスタンスは、独自の一意のマスターキーを使用します。 したがって、`EphemeralDataProtectionProvider` をルートとする `IDataProtector` が保護されたペイロードを生成する場合、そのペイロードは、同じ `EphemeralDataProtectionProvider` インスタンスをルートとする同等の `IDataProtector` (同じ[目的](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes)のチェーンが指定されている) によってのみ保護を解除できます。
+の各インスタンス`EphemeralDataProtectionProvider`は、独自の一意のマスターキーを使用します。 したがって、を`IDataProtector`ルートとする`EphemeralDataProtectionProvider`が、保護されたペイロードを生成する場合、同じ`IDataProtector` `EphemeralDataProtectionProvider`インスタンスをルートとする同等の (同じ[目的](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes)のチェーンが指定されている) によってのみ、そのペイロードを保護することができます。
 
-次のサンプルでは、`EphemeralDataProtectionProvider` をインスタンス化し、それを使用してデータを保護および保護解除する方法を示します。
+をインスタンス化`EphemeralDataProtectionProvider`し、それを使用してデータを保護および保護解除する例を次に示します。
 
 ```csharp
 using System;

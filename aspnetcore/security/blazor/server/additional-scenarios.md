@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 1a3e5a215daedbb9b97c1924275701915806983e
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206348"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772805"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazorサーバーの追加のセキュリティシナリオ
 
@@ -23,9 +26,9 @@ ms.locfileid: "82206348"
 
 ## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazorサーバーアプリにトークンを渡す
 
-Blazorサーバーアプリの Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 完全`Startup.ConfigureServices`な例を含むサンプルコードについては、「[サーバー側Blazorアプリケーションへのトークンの引き渡し](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
+BlazorサーバーアプリのRazorコンポーネントの外部で利用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 完全`Startup.ConfigureServices`な例を含むサンプルコードについては、「[サーバー側Blazorアプリケーションへのトークンの引き渡し](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
 
-通常のBlazor Razor Pages または MVC アプリの場合と同様に、サーバーアプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
+通常RazorのBlazorページや MVC アプリの場合と同様に、サーバーアプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

@@ -4,13 +4,19 @@ author: ardalis
 description: ASP.NET Core の MVC コントローラーが、ASP.NET Core でそれらのコンストラクターと依存関係の挿入を使用して、明示的にそれらの依存関係を要求する方法について説明します。
 ms.author: riande
 ms.date: 02/24/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 202b62d4b30c5c61c407abdc8509a2a75e181cb6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a7df6a5fa2d49efc332c4684ea8192f143cdebf5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652154"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775701"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core でのコントローラーへの依存関係の挿入
 
@@ -52,9 +58,9 @@ ASP.NET Core の MVC コントローラーは、コンストラクターを使�
 
 ## <a name="access-settings-from-a-controller"></a>コントローラーから設定にアクセスする
 
-コントローラー内からアプリまたは構成の設定にアクセスするのが一般的なパターンです。 *で説明されている*オプション パターン<xref:fundamentals/configuration/options>が設定の管理手法として推奨されています。 通常はコントローラーに <xref:Microsoft.Extensions.Configuration.IConfiguration> を直接挿入しないでください。
+コントローラー内からアプリまたは構成の設定にアクセスするのが一般的なパターンです。 <xref:fundamentals/configuration/options> で説明されている*オプション パターン*が設定の管理手法として推奨されています。 通常はコントローラーに <xref:Microsoft.Extensions.Configuration.IConfiguration> を直接挿入しないでください。
 
-オプションを表すクラスを作成します。 例 :
+オプションを表すクラスを作成します。 次に例を示します。
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
