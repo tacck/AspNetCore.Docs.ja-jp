@@ -8,152 +8,155 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 6f049906da4a1aa87f293f5ad1af19dad44f477a
-ms.sourcegitcommit: 6d271f4b4c3cd1e82267f51d9bfb6de221c394fe
+ms.openlocfilehash: 05068853615a63611188175d95c27f1442973a86
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82150038"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768209"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a><span data-ttu-id="35411-102">Azure Active Directory B2C を使用Blazorして ASP.NET Core webasのホスト型アプリをセキュリティで保護する</span><span class="sxs-lookup"><span data-stu-id="35411-102">Secure an ASP.NET Core Blazor WebAssembly hosted app with Azure Active Directory B2C</span></span>
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a><span data-ttu-id="7f95f-102">Azure Active Directory B2C を使用Blazorして ASP.NET Core webasのホスト型アプリをセキュリティで保護する</span><span class="sxs-lookup"><span data-stu-id="7f95f-102">Secure an ASP.NET Core Blazor WebAssembly hosted app with Azure Active Directory B2C</span></span>
 
-<span data-ttu-id="35411-103">[Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="35411-103">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="7f95f-103">[Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="7f95f-103">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-<span data-ttu-id="35411-104">この記事では、認証にBlazor [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview)を使用する webassembly スタンドアロンアプリを作成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="35411-104">This article describes how to create a Blazor WebAssembly standalone app that uses [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) for authentication.</span></span>
+<span data-ttu-id="7f95f-104">この記事では、認証にBlazor [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview)を使用する webassembly スタンドアロンアプリを作成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-104">This article describes how to create a Blazor WebAssembly standalone app that uses [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) for authentication.</span></span>
 
-## <a name="register-apps-in-aad-b2c-and-create-solution"></a><span data-ttu-id="35411-105">AAD B2C でのアプリの登録とソリューションの作成</span><span class="sxs-lookup"><span data-stu-id="35411-105">Register apps in AAD B2C and create solution</span></span>
+## <a name="register-apps-in-aad-b2c-and-create-solution"></a><span data-ttu-id="7f95f-105">AAD B2C でのアプリの登録とソリューションの作成</span><span class="sxs-lookup"><span data-stu-id="7f95f-105">Register apps in AAD B2C and create solution</span></span>
 
-### <a name="create-a-tenant"></a><span data-ttu-id="35411-106">テナントの作成</span><span class="sxs-lookup"><span data-stu-id="35411-106">Create a tenant</span></span>
+### <a name="create-a-tenant"></a><span data-ttu-id="7f95f-106">テナントの作成</span><span class="sxs-lookup"><span data-stu-id="7f95f-106">Create a tenant</span></span>
 
-<span data-ttu-id="35411-107">[「チュートリアル: Azure Active Directory B2C テナントを作成](/azure/active-directory-b2c/tutorial-create-tenant)する」のガイダンスに従って AAD B2C テナントを作成し、次の情報を記録します。</span><span class="sxs-lookup"><span data-stu-id="35411-107">Follow the guidance in [Tutorial: Create an Azure Active Directory B2C tenant](/azure/active-directory-b2c/tutorial-create-tenant) to create an AAD B2C tenant and record the following information:</span></span>
+<span data-ttu-id="7f95f-107">[「チュートリアル: Azure Active Directory B2C テナントを作成](/azure/active-directory-b2c/tutorial-create-tenant)する」のガイダンスに従って AAD B2C テナントを作成し、次の情報を記録します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-107">Follow the guidance in [Tutorial: Create an Azure Active Directory B2C tenant](/azure/active-directory-b2c/tutorial-create-tenant) to create an AAD B2C tenant and record the following information:</span></span>
 
-* <span data-ttu-id="35411-108">AAD B2C インスタンス (たとえば`https://contoso.b2clogin.com/`、末尾のスラッシュを含む)</span><span class="sxs-lookup"><span data-stu-id="35411-108">AAD B2C instance (for example, `https://contoso.b2clogin.com/`, which includes the trailing slash)</span></span>
-* <span data-ttu-id="35411-109">テナントドメインの AAD B2C (例`contoso.onmicrosoft.com`)</span><span class="sxs-lookup"><span data-stu-id="35411-109">AAD B2C Tenant domain (for example, `contoso.onmicrosoft.com`)</span></span>
+* <span data-ttu-id="7f95f-108">AAD B2C インスタンス (たとえば`https://contoso.b2clogin.com/`、末尾のスラッシュを含む)</span><span class="sxs-lookup"><span data-stu-id="7f95f-108">AAD B2C instance (for example, `https://contoso.b2clogin.com/`, which includes the trailing slash)</span></span>
+* <span data-ttu-id="7f95f-109">テナントドメインの AAD B2C (例`contoso.onmicrosoft.com`)</span><span class="sxs-lookup"><span data-stu-id="7f95f-109">AAD B2C Tenant domain (for example, `contoso.onmicrosoft.com`)</span></span>
 
-### <a name="register-a-server-api-app"></a><span data-ttu-id="35411-110">サーバー API アプリを登録する</span><span class="sxs-lookup"><span data-stu-id="35411-110">Register a server API app</span></span>
+### <a name="register-a-server-api-app"></a><span data-ttu-id="7f95f-110">サーバー API アプリを登録する</span><span class="sxs-lookup"><span data-stu-id="7f95f-110">Register a server API app</span></span>
 
-<span data-ttu-id="35411-111">[「チュートリアル: Azure Active Directory B2C にアプリケーションを登録](/azure/active-directory-b2c/tutorial-register-applications)する」のガイダンスに従って、Azure portal の**Azure Active Directory** > **アプリの登録**領域に*サーバー API アプリ*の AAD アプリを登録します。</span><span class="sxs-lookup"><span data-stu-id="35411-111">Follow the guidance in [Tutorial: Register an application in Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) to register an AAD app for the *Server API app* in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
+<span data-ttu-id="7f95f-111">[「チュートリアル: Azure Active Directory B2C にアプリケーションを登録](/azure/active-directory-b2c/tutorial-register-applications)する」のガイダンスに従って、Azure portal の**Azure Active Directory** > **アプリの登録**領域に*サーバー API アプリ*の AAD アプリを登録します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-111">Follow the guidance in [Tutorial: Register an application in Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) to register an AAD app for the *Server API app* in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
 
-1. <span data-ttu-id="35411-112">**[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-112">Select **New registration**.</span></span>
-1. <span data-ttu-id="35411-113">アプリの**名前**を指定します (たとえば、 \*\* Blazor Server AAD B2C\*\*)。</span><span class="sxs-lookup"><span data-stu-id="35411-113">Provide a **Name** for the app (for example, **Blazor Server AAD B2C**).</span></span>
-1. <span data-ttu-id="35411-114">**サポートされているアカウントの種類**について**は、任意の組織ディレクトリまたは任意の Id プロバイダーでアカウントを選択します。Azure AD B2C を使用してユーザーを認証します。**</span><span class="sxs-lookup"><span data-stu-id="35411-114">For **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C.**</span></span> <span data-ttu-id="35411-115">(マルチテナント)。</span><span class="sxs-lookup"><span data-stu-id="35411-115">(multi-tenant) for this experience.</span></span>
-1. <span data-ttu-id="35411-116">このシナリオでは、*サーバー API アプリ*に**リダイレクト uri**は必要ないため、ドロップダウンは [ **Web** ] に設定し、リダイレクト uri は入力しないでください。</span><span class="sxs-lookup"><span data-stu-id="35411-116">The *Server API app* doesn't require a **Redirect URI** in this scenario, so leave the drop down set to **Web** and don't enter a redirect URI.</span></span>
-1. <span data-ttu-id="35411-117">**アクセス許可** > によって **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="35411-117">Confirm that **Permissions** > **Grant admin concent to openid and offline_access permissions** is enabled.</span></span>
-1. <span data-ttu-id="35411-118">**[登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-118">Select **Register**.</span></span>
+1. <span data-ttu-id="7f95f-112">**[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-112">Select **New registration**.</span></span>
+1. <span data-ttu-id="7f95f-113">アプリの**名前**を指定します (たとえば、 \*\* Blazor Server AAD B2C\*\*)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-113">Provide a **Name** for the app (for example, **Blazor Server AAD B2C**).</span></span>
+1. <span data-ttu-id="7f95f-114">**サポートされているアカウントの種類**について**は、任意の組織ディレクトリまたは任意の Id プロバイダーでアカウントを選択します。Azure AD B2C を使用してユーザーを認証します。**</span><span class="sxs-lookup"><span data-stu-id="7f95f-114">For **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C.**</span></span> <span data-ttu-id="7f95f-115">(マルチテナント)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-115">(multi-tenant) for this experience.</span></span>
+1. <span data-ttu-id="7f95f-116">このシナリオでは、*サーバー API アプリ*に**リダイレクト uri**は必要ないため、ドロップダウンは [ **Web** ] に設定し、リダイレクト uri は入力しないでください。</span><span class="sxs-lookup"><span data-stu-id="7f95f-116">The *Server API app* doesn't require a **Redirect URI** in this scenario, so leave the drop down set to **Web** and don't enter a redirect URI.</span></span>
+1. <span data-ttu-id="7f95f-117">**アクセス許可** > によって **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-117">Confirm that **Permissions** > **Grant admin concent to openid and offline_access permissions** is enabled.</span></span>
+1. <span data-ttu-id="7f95f-118">**[登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-118">Select **Register**.</span></span>
 
-<span data-ttu-id="35411-119">で**API を公開**します。</span><span class="sxs-lookup"><span data-stu-id="35411-119">In **Expose an API**:</span></span>
+<span data-ttu-id="7f95f-119">で**API を公開**します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-119">In **Expose an API**:</span></span>
 
-1. <span data-ttu-id="35411-120">**[Scope の追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-120">Select **Add a scope**.</span></span>
-1. <span data-ttu-id="35411-121">**[Save and continue]** (保存して続行) を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-121">Select **Save and continue**.</span></span>
-1. <span data-ttu-id="35411-122">**スコープ名**(など`API.Access`) を指定します。</span><span class="sxs-lookup"><span data-stu-id="35411-122">Provide a **Scope name** (for example, `API.Access`).</span></span>
-1. <span data-ttu-id="35411-123">**管理者の同意の表示名**を指定し`Access API`ます (たとえば、)。</span><span class="sxs-lookup"><span data-stu-id="35411-123">Provide an **Admin consent display name** (for example, `Access API`).</span></span>
-1. <span data-ttu-id="35411-124">**管理者の同意の説明**を入力し`Allows the app to access server app API endpoints.`ます (例:)。</span><span class="sxs-lookup"><span data-stu-id="35411-124">Provide an **Admin consent description** (for example, `Allows the app to access server app API endpoints.`).</span></span>
-1. <span data-ttu-id="35411-125">**状態**が**有効**に設定されていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="35411-125">Confirm that the **State** is set to **Enabled**.</span></span>
-1. <span data-ttu-id="35411-126">**[スコープの追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-126">Select **Add scope**.</span></span>
+1. <span data-ttu-id="7f95f-120">**[Scope の追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-120">Select **Add a scope**.</span></span>
+1. <span data-ttu-id="7f95f-121">**[Save and continue]** (保存して続行) を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-121">Select **Save and continue**.</span></span>
+1. <span data-ttu-id="7f95f-122">**スコープ名**(など`API.Access`) を指定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-122">Provide a **Scope name** (for example, `API.Access`).</span></span>
+1. <span data-ttu-id="7f95f-123">**管理者の同意の表示名**を指定し`Access API`ます (たとえば、)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-123">Provide an **Admin consent display name** (for example, `Access API`).</span></span>
+1. <span data-ttu-id="7f95f-124">**管理者の同意の説明**を入力し`Allows the app to access server app API endpoints.`ます (例:)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-124">Provide an **Admin consent description** (for example, `Allows the app to access server app API endpoints.`).</span></span>
+1. <span data-ttu-id="7f95f-125">**状態**が**有効**に設定されていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-125">Confirm that the **State** is set to **Enabled**.</span></span>
+1. <span data-ttu-id="7f95f-126">**[スコープの追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-126">Select **Add scope**.</span></span>
 
-<span data-ttu-id="35411-127">次の情報を記録します。</span><span class="sxs-lookup"><span data-stu-id="35411-127">Record the following information:</span></span>
+<span data-ttu-id="7f95f-127">次の情報を記録します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-127">Record the following information:</span></span>
 
-* <span data-ttu-id="35411-128">*サーバー API アプリ*アプリケーション ID (クライアント ID) (など`11111111-1111-1111-1111-111111111111`)</span><span class="sxs-lookup"><span data-stu-id="35411-128">*Server API app* Application ID (Client ID) (for example, `11111111-1111-1111-1111-111111111111`)</span></span>
-* <span data-ttu-id="35411-129">アプリ ID URI (たとえば`https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111` `api://11111111-1111-1111-1111-111111111111`、、、または指定したカスタム値)</span><span class="sxs-lookup"><span data-stu-id="35411-129">App ID URI (for example, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`, `api://11111111-1111-1111-1111-111111111111`, or the custom value that you provided)</span></span>
-* <span data-ttu-id="35411-130">ディレクトリ ID (テナント ID) (など`222222222-2222-2222-2222-222222222222`)</span><span class="sxs-lookup"><span data-stu-id="35411-130">Directory ID (Tenant ID) (for example, `222222222-2222-2222-2222-222222222222`)</span></span>
-* <span data-ttu-id="35411-131">*サーバー API アプリ*アプリ ID URI (たとえば`https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`、Azure portal では、クライアント ID に値が既定で設定される可能性があります)</span><span class="sxs-lookup"><span data-stu-id="35411-131">*Server API app* App ID URI (for example, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`, the Azure portal might default the value to the Client ID)</span></span>
-* <span data-ttu-id="35411-132">既定のスコープ (例、 `API.Access`)</span><span class="sxs-lookup"><span data-stu-id="35411-132">Default scope (for example, `API.Access`)</span></span>
+* <span data-ttu-id="7f95f-128">*サーバー API アプリ*アプリケーション ID (クライアント ID) (など`11111111-1111-1111-1111-111111111111`)</span><span class="sxs-lookup"><span data-stu-id="7f95f-128">*Server API app* Application ID (Client ID) (for example, `11111111-1111-1111-1111-111111111111`)</span></span>
+* <span data-ttu-id="7f95f-129">アプリ ID URI (たとえば`https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111` `api://11111111-1111-1111-1111-111111111111`、、、または指定したカスタム値)</span><span class="sxs-lookup"><span data-stu-id="7f95f-129">App ID URI (for example, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`, `api://11111111-1111-1111-1111-111111111111`, or the custom value that you provided)</span></span>
+* <span data-ttu-id="7f95f-130">ディレクトリ ID (テナント ID) (など`222222222-2222-2222-2222-222222222222`)</span><span class="sxs-lookup"><span data-stu-id="7f95f-130">Directory ID (Tenant ID) (for example, `222222222-2222-2222-2222-222222222222`)</span></span>
+* <span data-ttu-id="7f95f-131">*サーバー API アプリ*アプリ ID URI (たとえば`https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`、Azure portal では、クライアント ID に値が既定で設定される可能性があります)</span><span class="sxs-lookup"><span data-stu-id="7f95f-131">*Server API app* App ID URI (for example, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`, the Azure portal might default the value to the Client ID)</span></span>
+* <span data-ttu-id="7f95f-132">既定のスコープ (例、 `API.Access`)</span><span class="sxs-lookup"><span data-stu-id="7f95f-132">Default scope (for example, `API.Access`)</span></span>
 
-### <a name="register-a-client-app"></a><span data-ttu-id="35411-133">クライアント アプリを登録する</span><span class="sxs-lookup"><span data-stu-id="35411-133">Register a client app</span></span>
+### <a name="register-a-client-app"></a><span data-ttu-id="7f95f-133">クライアント アプリを登録する</span><span class="sxs-lookup"><span data-stu-id="7f95f-133">Register a client app</span></span>
 
-<span data-ttu-id="35411-134">[「チュートリアル: Azure Active Directory B2C にアプリケーションを登録](/azure/active-directory-b2c/tutorial-register-applications)する」のガイダンスに従って、Azure portal の**Azure Active Directory** > **アプリの登録**領域に*クライアントアプリ*の AAD アプリを登録します。</span><span class="sxs-lookup"><span data-stu-id="35411-134">Follow the guidance in [Tutorial: Register an application in Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) again to register an AAD app for the *Client app* in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
+<span data-ttu-id="7f95f-134">[「チュートリアル: Azure Active Directory B2C にアプリケーションを登録](/azure/active-directory-b2c/tutorial-register-applications)する」のガイダンスに従って、Azure portal の**Azure Active Directory** > **アプリの登録**領域に*クライアントアプリ*の AAD アプリを登録します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-134">Follow the guidance in [Tutorial: Register an application in Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) again to register an AAD app for the *Client app* in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
 
-1. <span data-ttu-id="35411-135">**[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-135">Select **New registration**.</span></span>
-1. <span data-ttu-id="35411-136">アプリの**名前**( \*\* Blazorクライアント AAD B2C\*\*など) を指定します。</span><span class="sxs-lookup"><span data-stu-id="35411-136">Provide a **Name** for the app (for example, **Blazor Client AAD B2C**).</span></span>
-1. <span data-ttu-id="35411-137">**サポートされているアカウントの種類**について**は、任意の組織ディレクトリまたは任意の Id プロバイダーでアカウントを選択します。Azure AD B2C を使用してユーザーを認証します。**</span><span class="sxs-lookup"><span data-stu-id="35411-137">For **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C.**</span></span> <span data-ttu-id="35411-138">(マルチテナント)。</span><span class="sxs-lookup"><span data-stu-id="35411-138">(multi-tenant) for this experience.</span></span>
-1. <span data-ttu-id="35411-139">[**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、の`https://localhost:5001/authentication/login-callback`リダイレクト uri を指定します。</span><span class="sxs-lookup"><span data-stu-id="35411-139">Leave the **Redirect URI** drop down set to **Web**, and provide a redirect URI of `https://localhost:5001/authentication/login-callback`.</span></span>
-1. <span data-ttu-id="35411-140">**アクセス許可** > によって **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="35411-140">Confirm that **Permissions** > **Grant admin concent to openid and offline_access permissions** is enabled.</span></span>
-1. <span data-ttu-id="35411-141">**[登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-141">Select **Register**.</span></span>
+1. <span data-ttu-id="7f95f-135">**[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-135">Select **New registration**.</span></span>
+1. <span data-ttu-id="7f95f-136">アプリの**名前**( \*\* Blazorクライアント AAD B2C\*\*など) を指定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-136">Provide a **Name** for the app (for example, **Blazor Client AAD B2C**).</span></span>
+1. <span data-ttu-id="7f95f-137">**サポートされているアカウントの種類**について**は、任意の組織ディレクトリまたは任意の Id プロバイダーでアカウントを選択します。Azure AD B2C を使用してユーザーを認証します。**</span><span class="sxs-lookup"><span data-stu-id="7f95f-137">For **Supported account types**, select **Accounts in any organizational directory or any identity provider. For authenticating users with Azure AD B2C.**</span></span> <span data-ttu-id="7f95f-138">(マルチテナント)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-138">(multi-tenant) for this experience.</span></span>
+1. <span data-ttu-id="7f95f-139">[**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、の`https://localhost:5001/authentication/login-callback`リダイレクト uri を指定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-139">Leave the **Redirect URI** drop down set to **Web**, and provide a redirect URI of `https://localhost:5001/authentication/login-callback`.</span></span>
+1. <span data-ttu-id="7f95f-140">**アクセス許可** > によって **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-140">Confirm that **Permissions** > **Grant admin concent to openid and offline_access permissions** is enabled.</span></span>
+1. <span data-ttu-id="7f95f-141">**[登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-141">Select **Register**.</span></span>
 
-<span data-ttu-id="35411-142">[**認証** > **プラットフォーム構成** > **Web**:</span><span class="sxs-lookup"><span data-stu-id="35411-142">In **Authentication** > **Platform configurations** > **Web**:</span></span>
+<span data-ttu-id="7f95f-142">[**認証** > **プラットフォーム構成** > **Web**:</span><span class="sxs-lookup"><span data-stu-id="7f95f-142">In **Authentication** > **Platform configurations** > **Web**:</span></span>
 
-1. <span data-ttu-id="35411-143">の`https://localhost:5001/authentication/login-callback` **リダイレクト URI**が存在することを確認します。</span><span class="sxs-lookup"><span data-stu-id="35411-143">Confirm the **Redirect URI** of `https://localhost:5001/authentication/login-callback` is present.</span></span>
-1. <span data-ttu-id="35411-144">**暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="35411-144">For **Implicit grant**, select the check boxes for **Access tokens** and **ID tokens**.</span></span>
-1. <span data-ttu-id="35411-145">アプリの残りの既定値は、このエクスペリエンスで許容されます。</span><span class="sxs-lookup"><span data-stu-id="35411-145">The remaining defaults for the app are acceptable for this experience.</span></span>
-1. <span data-ttu-id="35411-146">**[保存]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-146">Select the **Save** button.</span></span>
+1. <span data-ttu-id="7f95f-143">の`https://localhost:5001/authentication/login-callback` **リダイレクト URI**が存在することを確認します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-143">Confirm the **Redirect URI** of `https://localhost:5001/authentication/login-callback` is present.</span></span>
+1. <span data-ttu-id="7f95f-144">**暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="7f95f-144">For **Implicit grant**, select the check boxes for **Access tokens** and **ID tokens**.</span></span>
+1. <span data-ttu-id="7f95f-145">アプリの残りの既定値は、このエクスペリエンスで許容されます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-145">The remaining defaults for the app are acceptable for this experience.</span></span>
+1. <span data-ttu-id="7f95f-146">**[保存]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-146">Select the **Save** button.</span></span>
 
-<span data-ttu-id="35411-147">**API のアクセス許可**:</span><span class="sxs-lookup"><span data-stu-id="35411-147">In **API permissions**:</span></span>
+<span data-ttu-id="7f95f-147">**API のアクセス許可**:</span><span class="sxs-lookup"><span data-stu-id="7f95f-147">In **API permissions**:</span></span>
 
-1. <span data-ttu-id="35411-148">アプリに**Microsoft Graph** > ユーザーがあることを確認**します。読み取り**アクセス許可。</span><span class="sxs-lookup"><span data-stu-id="35411-148">Confirm that the app has **Microsoft Graph** > **User.Read** permission.</span></span>
-1. <span data-ttu-id="35411-149">[**アクセス許可の追加]、** **[api**の追加] の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-149">Select **Add a permission** followed by **My APIs**.</span></span>
-1. <span data-ttu-id="35411-150">[**名前**] 列から*サーバー API アプリ*を選択します ( \*\* Blazorサーバー AAD B2C\*\*など)。</span><span class="sxs-lookup"><span data-stu-id="35411-150">Select the *Server API app* from the **Name** column (for example, **Blazor Server AAD B2C**).</span></span>
-1. <span data-ttu-id="35411-151">**API**の一覧を開きます。</span><span class="sxs-lookup"><span data-stu-id="35411-151">Open the **API** list.</span></span>
-1. <span data-ttu-id="35411-152">API へのアクセスを有効にします`API.Access`(たとえば、)。</span><span class="sxs-lookup"><span data-stu-id="35411-152">Enable access to the API (for example, `API.Access`).</span></span>
-1. <span data-ttu-id="35411-153">**[アクセス許可の追加]** を選択します.</span><span class="sxs-lookup"><span data-stu-id="35411-153">Select **Add permissions**.</span></span>
-1. <span data-ttu-id="35411-154">[ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。</span><span class="sxs-lookup"><span data-stu-id="35411-154">Select the **Grant admin content for {TENANT NAME}** button.</span></span> <span data-ttu-id="35411-155">**[はい]** を選択して確定します。</span><span class="sxs-lookup"><span data-stu-id="35411-155">Select **Yes** to confirm.</span></span>
+1. <span data-ttu-id="7f95f-148">アプリに**Microsoft Graph** > ユーザーがあることを確認**します。読み取り**アクセス許可。</span><span class="sxs-lookup"><span data-stu-id="7f95f-148">Confirm that the app has **Microsoft Graph** > **User.Read** permission.</span></span>
+1. <span data-ttu-id="7f95f-149">[**アクセス許可の追加]、** **[api**の追加] の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-149">Select **Add a permission** followed by **My APIs**.</span></span>
+1. <span data-ttu-id="7f95f-150">[**名前**] 列から*サーバー API アプリ*を選択します ( \*\* Blazorサーバー AAD B2C\*\*など)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-150">Select the *Server API app* from the **Name** column (for example, **Blazor Server AAD B2C**).</span></span>
+1. <span data-ttu-id="7f95f-151">**API**の一覧を開きます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-151">Open the **API** list.</span></span>
+1. <span data-ttu-id="7f95f-152">API へのアクセスを有効にします`API.Access`(たとえば、)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-152">Enable access to the API (for example, `API.Access`).</span></span>
+1. <span data-ttu-id="7f95f-153">**[アクセス許可の追加]** を選択します.</span><span class="sxs-lookup"><span data-stu-id="7f95f-153">Select **Add permissions**.</span></span>
+1. <span data-ttu-id="7f95f-154">[ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-154">Select the **Grant admin content for {TENANT NAME}** button.</span></span> <span data-ttu-id="7f95f-155">**[はい]** を選択して確定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-155">Select **Yes** to confirm.</span></span>
 
-<span data-ttu-id="35411-156">[**ホーム** > **Azure AD B2C** > **ユーザーフロー**:</span><span class="sxs-lookup"><span data-stu-id="35411-156">In **Home** > **Azure AD B2C** > **User flows**:</span></span>
+<span data-ttu-id="7f95f-156">[**ホーム** > **Azure AD B2C** > **ユーザーフロー**:</span><span class="sxs-lookup"><span data-stu-id="7f95f-156">In **Home** > **Azure AD B2C** > **User flows**:</span></span>
 
-[<span data-ttu-id="35411-157">サインアップとサインイン ユーザー フローを作成する</span><span class="sxs-lookup"><span data-stu-id="35411-157">Create a sign-up and sign-in user flow</span></span>](/azure/active-directory-b2c/tutorial-create-user-flows)
+[<span data-ttu-id="7f95f-157">サインアップとサインイン ユーザー フローを作成する</span><span class="sxs-lookup"><span data-stu-id="7f95f-157">Create a sign-up and sign-in user flow</span></span>](/azure/active-directory-b2c/tutorial-create-user-flows)
 
-<span data-ttu-id="35411-158">少なくとも、**アプリケーション要求** > の**表示名**ユーザー属性を選択して`context.User.Identity.Name` 、 `LoginDisplay`コンポーネントにを設定します (*Shared/logindisplay. razor*)。</span><span class="sxs-lookup"><span data-stu-id="35411-158">At a minimum, select the **Application claims** > **Display Name** user attribute to populate the `context.User.Identity.Name` in the `LoginDisplay` component (*Shared/LoginDisplay.razor*).</span></span>
+<span data-ttu-id="7f95f-158">少なくとも、**アプリケーション要求** > の**表示名**ユーザー属性を選択して`context.User.Identity.Name` 、 `LoginDisplay`コンポーネントにを設定します (*Shared/logindisplay. razor*)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-158">At a minimum, select the **Application claims** > **Display Name** user attribute to populate the `context.User.Identity.Name` in the `LoginDisplay` component (*Shared/LoginDisplay.razor*).</span></span>
 
-<span data-ttu-id="35411-159">次の情報を記録します。</span><span class="sxs-lookup"><span data-stu-id="35411-159">Record the following information:</span></span>
+<span data-ttu-id="7f95f-159">次の情報を記録します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-159">Record the following information:</span></span>
 
-* <span data-ttu-id="35411-160">*クライアントアプリ*アプリケーション Id (クライアント id) を記録します (たとえば`33333333-3333-3333-3333-333333333333`、)。</span><span class="sxs-lookup"><span data-stu-id="35411-160">Record the *Client app* Application ID (Client ID) (for example, `33333333-3333-3333-3333-333333333333`).</span></span>
-* <span data-ttu-id="35411-161">アプリ用に作成されたサインアップおよびサインインユーザーフロー名を記録します (例: `B2C_1_signupsignin`)。</span><span class="sxs-lookup"><span data-stu-id="35411-161">Record the sign-up and sign-in user flow name created for the app (for example, `B2C_1_signupsignin`).</span></span>
+* <span data-ttu-id="7f95f-160">*クライアントアプリ*アプリケーション Id (クライアント id) を記録します (たとえば`33333333-3333-3333-3333-333333333333`、)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-160">Record the *Client app* Application ID (Client ID) (for example, `33333333-3333-3333-3333-333333333333`).</span></span>
+* <span data-ttu-id="7f95f-161">アプリ用に作成されたサインアップおよびサインインユーザーフロー名を記録します (例: `B2C_1_signupsignin`)。</span><span class="sxs-lookup"><span data-stu-id="7f95f-161">Record the sign-up and sign-in user flow name created for the app (for example, `B2C_1_signupsignin`).</span></span>
 
-### <a name="create-the-app"></a><span data-ttu-id="35411-162">アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="35411-162">Create the app</span></span>
+### <a name="create-the-app"></a><span data-ttu-id="7f95f-162">アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="7f95f-162">Create the app</span></span>
 
-<span data-ttu-id="35411-163">次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="35411-163">Replace the placeholders in the following command with the information recorded earlier and execute the command in a command shell:</span></span>
+<span data-ttu-id="7f95f-163">次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-163">Replace the placeholders in the following command with the information recorded earlier and execute the command in a command shell:</span></span>
 
 ```dotnetcli
 dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{DOMAIN}" -ho -ssp "{SIGN UP OR SIGN IN POLICY}" --tenant-id "{TENANT ID}"
 ```
 
-<span data-ttu-id="35411-164">プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など`-o BlazorSample`) を指定して出力オプションを含めます。</span><span class="sxs-lookup"><span data-stu-id="35411-164">To specify the output location, which creates a project folder if it doesn't exist, include the output option in the command with a path (for example, `-o BlazorSample`).</span></span> <span data-ttu-id="35411-165">フォルダー名もプロジェクトの名前の一部になります。</span><span class="sxs-lookup"><span data-stu-id="35411-165">The folder name also becomes part of the project's name.</span></span>
+<span data-ttu-id="7f95f-164">プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など`-o BlazorSample`) を指定して出力オプションを含めます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-164">To specify the output location, which creates a project folder if it doesn't exist, include the output option in the command with a path (for example, `-o BlazorSample`).</span></span> <span data-ttu-id="7f95f-165">フォルダー名もプロジェクトの名前の一部になります。</span><span class="sxs-lookup"><span data-stu-id="7f95f-165">The folder name also becomes part of the project's name.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="35411-166">アプリ ID URI を`app-id-uri`オプションに渡しますが、クライアントアプリで構成の変更が必要になる場合があることに注意してください。詳細については、「[アクセストークンのスコープ](#access-token-scopes)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="35411-166">Pass the App ID URI to the `app-id-uri` option, but note a configuration change might be required in the client app, which is described in the [Access token scopes](#access-token-scopes) section.</span></span>
+> <span data-ttu-id="7f95f-166">アプリ ID URI を`app-id-uri`オプションに渡しますが、クライアントアプリで構成の変更が必要になる場合があることに注意してください。詳細については、「[アクセストークンのスコープ](#access-token-scopes)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="7f95f-166">Pass the App ID URI to the `app-id-uri` option, but note a configuration change might be required in the client app, which is described in the [Access token scopes](#access-token-scopes) section.</span></span>
 
-## <a name="server-app-configuration"></a><span data-ttu-id="35411-167">サーバーアプリの構成</span><span class="sxs-lookup"><span data-stu-id="35411-167">Server app configuration</span></span>
+## <a name="server-app-configuration"></a><span data-ttu-id="7f95f-167">サーバーアプリの構成</span><span class="sxs-lookup"><span data-stu-id="7f95f-167">Server app configuration</span></span>
 
-<span data-ttu-id="35411-168">*このセクションは、ソリューションの**サーバー**アプリに関連しています。*</span><span class="sxs-lookup"><span data-stu-id="35411-168">*This section pertains to the solution's **Server** app.*</span></span>
+<span data-ttu-id="7f95f-168">*このセクションは、ソリューションの**サーバー**アプリに関連しています。*</span><span class="sxs-lookup"><span data-stu-id="7f95f-168">*This section pertains to the solution's **Server** app.*</span></span>
 
-### <a name="authentication-package"></a><span data-ttu-id="35411-169">認証パッケージ</span><span class="sxs-lookup"><span data-stu-id="35411-169">Authentication package</span></span>
+### <a name="authentication-package"></a><span data-ttu-id="7f95f-169">認証パッケージ</span><span class="sxs-lookup"><span data-stu-id="7f95f-169">Authentication package</span></span>
 
-<span data-ttu-id="35411-170">ASP.NET Core Web Api の呼び出しを認証および承認するためのサポートは、 `Microsoft.AspNetCore.Authentication.AzureADB2C.UI`次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="35411-170">The support for authenticating and authorizing calls to ASP.NET Core Web APIs is provided by the `Microsoft.AspNetCore.Authentication.AzureADB2C.UI`:</span></span>
+<span data-ttu-id="7f95f-170">ASP.NET Core Web Api の呼び出しを認証および承認するためのサポートは、 `Microsoft.AspNetCore.Authentication.AzureADB2C.UI`次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="7f95f-170">The support for authenticating and authorizing calls to ASP.NET Core Web APIs is provided by the `Microsoft.AspNetCore.Authentication.AzureADB2C.UI`:</span></span>
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
     Version="{VERSION}" />
 ```
 
-### <a name="authentication-service-support"></a><span data-ttu-id="35411-171">認証サービスのサポート</span><span class="sxs-lookup"><span data-stu-id="35411-171">Authentication service support</span></span>
+### <a name="authentication-service-support"></a><span data-ttu-id="7f95f-171">認証サービスのサポート</span><span class="sxs-lookup"><span data-stu-id="7f95f-171">Authentication service support</span></span>
 
-<span data-ttu-id="35411-172">メソッド`AddAuthentication`は、アプリ内に認証サービスを設定し、JWT ベアラーハンドラーを既定の認証方法として構成します。</span><span class="sxs-lookup"><span data-stu-id="35411-172">The `AddAuthentication` method sets up authentication services within the app and configures the JWT Bearer handler as the default authentication method.</span></span> <span data-ttu-id="35411-173">メソッド`AddAzureADB2CBearer`は、Azure Active Directory B2C によって出力されたトークンを検証するために必要な JWT ベアラーハンドラーの特定のパラメーターを設定します。</span><span class="sxs-lookup"><span data-stu-id="35411-173">The `AddAzureADB2CBearer` method sets up the specific parameters in the JWT Bearer handler required to validate tokens emitted by the Azure Active Directory B2C:</span></span>
+<span data-ttu-id="7f95f-172">メソッド`AddAuthentication`は、アプリ内に認証サービスを設定し、JWT ベアラーハンドラーを既定の認証方法として構成します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-172">The `AddAuthentication` method sets up authentication services within the app and configures the JWT Bearer handler as the default authentication method.</span></span> <span data-ttu-id="7f95f-173">メソッド`AddAzureADB2CBearer`は、Azure Active Directory B2C によって出力されたトークンを検証するために必要な JWT ベアラーハンドラーの特定のパラメーターを設定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-173">The `AddAzureADB2CBearer` method sets up the specific parameters in the JWT Bearer handler required to validate tokens emitted by the Azure Active Directory B2C:</span></span>
 
 ```csharp
 services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
     .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
 ```
 
-<span data-ttu-id="35411-174">`UseAuthentication`次`UseAuthorization`のことを確認します。</span><span class="sxs-lookup"><span data-stu-id="35411-174">`UseAuthentication` and `UseAuthorization` ensure that:</span></span>
+<span data-ttu-id="7f95f-174">`UseAuthentication`次`UseAuthorization`のことを確認します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-174">`UseAuthentication` and `UseAuthorization` ensure that:</span></span>
 
-* <span data-ttu-id="35411-175">アプリは、受信要求のトークンの解析と検証を試みます。</span><span class="sxs-lookup"><span data-stu-id="35411-175">The app attempts to parse and validate tokens on incoming requests.</span></span>
-* <span data-ttu-id="35411-176">適切な資格情報を使用せずに保護されたリソースにアクセスしようとした要求は失敗します。</span><span class="sxs-lookup"><span data-stu-id="35411-176">Any request attempting to access a protected resource without proper credentials fails.</span></span>
+* <span data-ttu-id="7f95f-175">アプリは、受信要求のトークンの解析と検証を試みます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-175">The app attempts to parse and validate tokens on incoming requests.</span></span>
+* <span data-ttu-id="7f95f-176">適切な資格情報を使用せずに保護されたリソースにアクセスしようとした要求は失敗します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-176">Any request attempting to access a protected resource without proper credentials fails.</span></span>
 
 ```csharp
 app.UseAuthentication();
 app.UseAuthorization();
 ```
 
-### <a name="useridentityname"></a><span data-ttu-id="35411-177">User.Identity.Name</span><span class="sxs-lookup"><span data-stu-id="35411-177">User.Identity.Name</span></span>
+### <a name="useridentityname"></a><span data-ttu-id="7f95f-177">ユーザーズ.Identity.指定</span><span class="sxs-lookup"><span data-stu-id="7f95f-177">User.Identity.Name</span></span>
 
-<span data-ttu-id="35411-178">既定では、 `User.Identity.Name`は設定されません。</span><span class="sxs-lookup"><span data-stu-id="35411-178">By default, the `User.Identity.Name` isn't populated.</span></span>
+<span data-ttu-id="7f95f-178">既定では、 `User.Identity.Name`は設定されません。</span><span class="sxs-lookup"><span data-stu-id="7f95f-178">By default, the `User.Identity.Name` isn't populated.</span></span>
 
-<span data-ttu-id="35411-179">要求の種類から値を受け取るようにアプリを構成するには<xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> 、で`Startup.ConfigureServices`の[Tokenvalidationparameters. nameclaimtype を構成します。](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) `name`</span><span class="sxs-lookup"><span data-stu-id="35411-179">To configure the app to receive the value from the `name` claim type, configure the [TokenValidationParameters.NameClaimType](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) of the <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="7f95f-179">要求の種類から値を受け取るようにアプリを構成するには<xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> 、で`Startup.ConfigureServices`の[Tokenvalidationparameters. nameclaimtype を構成します。](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) `name`</span><span class="sxs-lookup"><span data-stu-id="7f95f-179">To configure the app to receive the value from the `name` claim type, configure the [TokenValidationParameters.NameClaimType](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) of the <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -163,9 +166,9 @@ services.Configure<JwtBearerOptions>(
     });
 ```
 
-### <a name="app-settings"></a><span data-ttu-id="35411-180">アプリケーション設定</span><span class="sxs-lookup"><span data-stu-id="35411-180">App settings</span></span>
+### <a name="app-settings"></a><span data-ttu-id="7f95f-180">アプリケーション設定</span><span class="sxs-lookup"><span data-stu-id="7f95f-180">App settings</span></span>
 
-<span data-ttu-id="35411-181">*Appsettings*ファイルには、アクセストークンの検証に使用される JWT ベアラーハンドラーを構成するためのオプションが含まれています。</span><span class="sxs-lookup"><span data-stu-id="35411-181">The *appsettings.json* file contains the options to configure the JWT bearer handler used to validate access tokens.</span></span>
+<span data-ttu-id="7f95f-181">*Appsettings*ファイルには、アクセストークンの検証に使用される JWT ベアラーハンドラーを構成するためのオプションが含まれています。</span><span class="sxs-lookup"><span data-stu-id="7f95f-181">The *appsettings.json* file contains the options to configure the JWT bearer handler used to validate access tokens.</span></span>
 
 ```json
 {
@@ -178,7 +181,7 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-<span data-ttu-id="35411-182">例:</span><span class="sxs-lookup"><span data-stu-id="35411-182">Example:</span></span>
+<span data-ttu-id="7f95f-182">例:</span><span class="sxs-lookup"><span data-stu-id="7f95f-182">Example:</span></span>
 
 ```json
 {
@@ -191,12 +194,12 @@ services.Configure<JwtBearerOptions>(
 }
 ```
 
-### <a name="weatherforecast-controller"></a><span data-ttu-id="35411-183">WeatherForecast コントローラー</span><span class="sxs-lookup"><span data-stu-id="35411-183">WeatherForecast controller</span></span>
+### <a name="weatherforecast-controller"></a><span data-ttu-id="7f95f-183">WeatherForecast コントローラー</span><span class="sxs-lookup"><span data-stu-id="7f95f-183">WeatherForecast controller</span></span>
 
-<span data-ttu-id="35411-184">WeatherForecast コントローラー (*Controllers/WeatherForecastController*) は、コントローラーに属性が`[Authorize]`適用された保護された API を公開します。</span><span class="sxs-lookup"><span data-stu-id="35411-184">The WeatherForecast controller (*Controllers/WeatherForecastController.cs*) exposes a protected API with the `[Authorize]` attribute applied to the controller.</span></span> <span data-ttu-id="35411-185">次の**点**を理解しておくことが重要です。</span><span class="sxs-lookup"><span data-stu-id="35411-185">It's **important** to understand that:</span></span>
+<span data-ttu-id="7f95f-184">WeatherForecast コントローラー (*Controllers/WeatherForecastController*) は、コントローラーに属性が`[Authorize]`適用された保護された API を公開します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-184">The WeatherForecast controller (*Controllers/WeatherForecastController.cs*) exposes a protected API with the `[Authorize]` attribute applied to the controller.</span></span> <span data-ttu-id="7f95f-185">次の**点**を理解しておくことが重要です。</span><span class="sxs-lookup"><span data-stu-id="7f95f-185">It's **important** to understand that:</span></span>
 
-* <span data-ttu-id="35411-186">この`[Authorize]` api コントローラーの属性は、この api を不正アクセスから保護する唯一の方法です。</span><span class="sxs-lookup"><span data-stu-id="35411-186">The `[Authorize]` attribute in this API controller is the only thing that protect this API from unauthorized access.</span></span>
-* <span data-ttu-id="35411-187">Webassembly で使用される属性は`[Authorize]` 、アプリへのヒントとしてのみ機能し、アプリが正しく動作することをユーザーに承認する必要があります。 Blazor</span><span class="sxs-lookup"><span data-stu-id="35411-187">The `[Authorize]` attribute used in the Blazor WebAssembly app only serves as a hint to the app that the user should be authorized for the app to work correctly.</span></span>
+* <span data-ttu-id="7f95f-186">この`[Authorize]` api コントローラーの属性は、この api を不正アクセスから保護する唯一の方法です。</span><span class="sxs-lookup"><span data-stu-id="7f95f-186">The `[Authorize]` attribute in this API controller is the only thing that protect this API from unauthorized access.</span></span>
+* <span data-ttu-id="7f95f-187">Webassembly で使用される属性は`[Authorize]` 、アプリへのヒントとしてのみ機能し、アプリが正しく動作することをユーザーに承認する必要があります。 Blazor</span><span class="sxs-lookup"><span data-stu-id="7f95f-187">The `[Authorize]` attribute used in the Blazor WebAssembly app only serves as a hint to the app that the user should be authorized for the app to work correctly.</span></span>
 
 ```csharp
 [Authorize]
@@ -212,30 +215,30 @@ public class WeatherForecastController : ControllerBase
 }
 ```
 
-## <a name="client-app-configuration"></a><span data-ttu-id="35411-188">クライアントアプリの構成</span><span class="sxs-lookup"><span data-stu-id="35411-188">Client app configuration</span></span>
+## <a name="client-app-configuration"></a><span data-ttu-id="7f95f-188">クライアントアプリの構成</span><span class="sxs-lookup"><span data-stu-id="7f95f-188">Client app configuration</span></span>
 
-<span data-ttu-id="35411-189">*このセクションは、ソリューションの**クライアント**アプリに関連しています。*</span><span class="sxs-lookup"><span data-stu-id="35411-189">*This section pertains to the solution's **Client** app.*</span></span>
+<span data-ttu-id="7f95f-189">*このセクションは、ソリューションの**クライアント**アプリに関連しています。*</span><span class="sxs-lookup"><span data-stu-id="7f95f-189">*This section pertains to the solution's **Client** app.*</span></span>
 
-### <a name="authentication-package"></a><span data-ttu-id="35411-190">認証パッケージ</span><span class="sxs-lookup"><span data-stu-id="35411-190">Authentication package</span></span>
+### <a name="authentication-package"></a><span data-ttu-id="7f95f-190">認証パッケージ</span><span class="sxs-lookup"><span data-stu-id="7f95f-190">Authentication package</span></span>
 
-<span data-ttu-id="35411-191">個々の B2C アカウント (`IndividualB2C`) を使用するようにアプリを作成すると、アプリは[Microsoft 認証ライブラリ](/azure/active-directory/develop/msal-overview)(`Microsoft.Authentication.WebAssembly.Msal`) のパッケージ参照を自動的に受け取ります。</span><span class="sxs-lookup"><span data-stu-id="35411-191">When an app is created to use an Individual B2C Account (`IndividualB2C`), the app automatically receives a package reference for the [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`).</span></span> <span data-ttu-id="35411-192">このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。</span><span class="sxs-lookup"><span data-stu-id="35411-192">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
+<span data-ttu-id="7f95f-191">個々の B2C アカウント (`IndividualB2C`) を使用するようにアプリを作成すると、アプリは[Microsoft 認証ライブラリ](/azure/active-directory/develop/msal-overview)(`Microsoft.Authentication.WebAssembly.Msal`) のパッケージ参照を自動的に受け取ります。</span><span class="sxs-lookup"><span data-stu-id="7f95f-191">When an app is created to use an Individual B2C Account (`IndividualB2C`), the app automatically receives a package reference for the [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`).</span></span> <span data-ttu-id="7f95f-192">このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。</span><span class="sxs-lookup"><span data-stu-id="7f95f-192">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
 
-<span data-ttu-id="35411-193">アプリに認証を追加する場合は、アプリのプロジェクトファイルにパッケージを手動で追加します。</span><span class="sxs-lookup"><span data-stu-id="35411-193">If adding authentication to an app, manually add the package to the app's project file:</span></span>
+<span data-ttu-id="7f95f-193">アプリに認証を追加する場合は、アプリのプロジェクトファイルにパッケージを手動で追加します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-193">If adding authentication to an app, manually add the package to the app's project file:</span></span>
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-<span data-ttu-id="35411-194">前`{VERSION}`のパッケージ参照のを、 <xref:blazor/get-started>この記事に示さ`Microsoft.AspNetCore.Blazor.Templates`れているパッケージのバージョンに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="35411-194">Replace `{VERSION}` in the preceding package reference with the version of the `Microsoft.AspNetCore.Blazor.Templates` package shown in the <xref:blazor/get-started> article.</span></span>
+<span data-ttu-id="7f95f-194">前`{VERSION}`のパッケージ参照のを、 <xref:blazor/get-started>この記事に示さ`Microsoft.AspNetCore.Blazor.Templates`れているパッケージのバージョンに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-194">Replace `{VERSION}` in the preceding package reference with the version of the `Microsoft.AspNetCore.Blazor.Templates` package shown in the <xref:blazor/get-started> article.</span></span>
 
-<span data-ttu-id="35411-195">`Microsoft.Authentication.WebAssembly.Msal`パッケージによって、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication`パッケージが推移的にアプリに追加されます。</span><span class="sxs-lookup"><span data-stu-id="35411-195">The `Microsoft.Authentication.WebAssembly.Msal` package transitively adds the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package to the app.</span></span>
+<span data-ttu-id="7f95f-195">`Microsoft.Authentication.WebAssembly.Msal`パッケージによって、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication`パッケージが推移的にアプリに追加されます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-195">The `Microsoft.Authentication.WebAssembly.Msal` package transitively adds the `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package to the app.</span></span>
 
-### <a name="authentication-service-support"></a><span data-ttu-id="35411-196">認証サービスのサポート</span><span class="sxs-lookup"><span data-stu-id="35411-196">Authentication service support</span></span>
+### <a name="authentication-service-support"></a><span data-ttu-id="7f95f-196">認証サービスのサポート</span><span class="sxs-lookup"><span data-stu-id="7f95f-196">Authentication service support</span></span>
 
-<span data-ttu-id="35411-197">サーバープロジェクト`HttpClient`への要求を行うときに、アクセストークンを含むインスタンスのサポートが追加されます。</span><span class="sxs-lookup"><span data-stu-id="35411-197">Support for `HttpClient` instances is added that include access tokens when making requests to the server project.</span></span>
+<span data-ttu-id="7f95f-197">サーバープロジェクト`HttpClient`への要求を行うときに、アクセストークンを含むインスタンスのサポートが追加されます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-197">Support for `HttpClient` instances is added that include access tokens when making requests to the server project.</span></span>
 
-<span data-ttu-id="35411-198">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="35411-198">*Program.cs*:</span></span>
+<span data-ttu-id="7f95f-198">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="7f95f-198">*Program.cs*:</span></span>
 
 ```csharp
 builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client => 
@@ -246,9 +249,9 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 
-<span data-ttu-id="35411-199">ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。</span><span class="sxs-lookup"><span data-stu-id="35411-199">Support for authenticating users is registered in the service container with the `AddMsalAuthentication` extension method provided by the `Microsoft.Authentication.WebAssembly.Msal` package.</span></span> <span data-ttu-id="35411-200">このメソッドは、アプリが Id プロバイダー (IP) と対話するために必要なすべてのサービスを設定します。</span><span class="sxs-lookup"><span data-stu-id="35411-200">This method sets up all of the services required for the app to interact with the Identity Provider (IP).</span></span>
+<span data-ttu-id="7f95f-199">ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-199">Support for authenticating users is registered in the service container with the `AddMsalAuthentication` extension method provided by the `Microsoft.Authentication.WebAssembly.Msal` package.</span></span> <span data-ttu-id="7f95f-200">このメソッドは、アプリがIdentityプロバイダー (IP) と対話するために必要なすべてのサービスを設定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-200">This method sets up all of the services required for the app to interact with the Identity Provider (IP).</span></span>
 
-<span data-ttu-id="35411-201">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="35411-201">*Program.cs*:</span></span>
+<span data-ttu-id="7f95f-201">*Program.cs*:</span><span class="sxs-lookup"><span data-stu-id="7f95f-201">*Program.cs*:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -258,9 +261,9 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-<span data-ttu-id="35411-202">メソッド`AddMsalAuthentication`は、コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。</span><span class="sxs-lookup"><span data-stu-id="35411-202">The `AddMsalAuthentication` method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="35411-203">アプリを構成するために必要な値は、アプリを登録するときに Azure Portal AAD 構成から取得できます。</span><span class="sxs-lookup"><span data-stu-id="35411-203">The values required for configuring the app can be obtained from the Azure Portal AAD configuration when you register the app.</span></span>
+<span data-ttu-id="7f95f-202">メソッド`AddMsalAuthentication`は、コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-202">The `AddMsalAuthentication` method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="7f95f-203">アプリを構成するために必要な値は、アプリを登録するときに Azure Portal AAD 構成から取得できます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-203">The values required for configuring the app can be obtained from the Azure Portal AAD configuration when you register the app.</span></span>
 
-<span data-ttu-id="35411-204">構成は*wwwroot/appsettings*ファイルによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="35411-204">Configuration is supplied by the *wwwroot/appsettings.json* file:</span></span>
+<span data-ttu-id="7f95f-204">構成は*wwwroot/appsettings*ファイルによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-204">Configuration is supplied by the *wwwroot/appsettings.json* file:</span></span>
 
 ```json
 {
@@ -272,7 +275,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="35411-205">例:</span><span class="sxs-lookup"><span data-stu-id="35411-205">Example:</span></span>
+<span data-ttu-id="7f95f-205">例:</span><span class="sxs-lookup"><span data-stu-id="7f95f-205">Example:</span></span>
 
 ```json
 {
@@ -284,14 +287,14 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-### <a name="access-token-scopes"></a><span data-ttu-id="35411-206">アクセストークンスコープ</span><span class="sxs-lookup"><span data-stu-id="35411-206">Access token scopes</span></span>
+### <a name="access-token-scopes"></a><span data-ttu-id="7f95f-206">アクセストークンスコープ</span><span class="sxs-lookup"><span data-stu-id="7f95f-206">Access token scopes</span></span>
 
-<span data-ttu-id="35411-207">既定のアクセストークンスコープは、次のようなアクセストークンスコープの一覧を表します。</span><span class="sxs-lookup"><span data-stu-id="35411-207">The default access token scopes represent the list of access token scopes that are:</span></span>
+<span data-ttu-id="7f95f-207">既定のアクセストークンスコープは、次のようなアクセストークンスコープの一覧を表します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-207">The default access token scopes represent the list of access token scopes that are:</span></span>
 
-* <span data-ttu-id="35411-208">サインイン要求に既定で含まれています。</span><span class="sxs-lookup"><span data-stu-id="35411-208">Included by default in the sign in request.</span></span>
-* <span data-ttu-id="35411-209">認証直後にアクセストークンをプロビジョニングするために使用されます。</span><span class="sxs-lookup"><span data-stu-id="35411-209">Used to provision an access token immediately after authentication.</span></span>
+* <span data-ttu-id="7f95f-208">サインイン要求に既定で含まれています。</span><span class="sxs-lookup"><span data-stu-id="7f95f-208">Included by default in the sign in request.</span></span>
+* <span data-ttu-id="7f95f-209">認証直後にアクセストークンをプロビジョニングするために使用されます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-209">Used to provision an access token immediately after authentication.</span></span>
 
-<span data-ttu-id="35411-210">すべてのスコープは、Azure Active Directory ルールごとに同じアプリに属している必要があります。</span><span class="sxs-lookup"><span data-stu-id="35411-210">All scopes must belong to the same app per Azure Active Directory rules.</span></span> <span data-ttu-id="35411-211">必要に応じて追加の API アプリ用に追加のスコープを追加できます。</span><span class="sxs-lookup"><span data-stu-id="35411-211">Additional scopes can be added for additional API apps as needed:</span></span>
+<span data-ttu-id="7f95f-210">すべてのスコープは、Azure Active Directory ルールごとに同じアプリに属している必要があります。</span><span class="sxs-lookup"><span data-stu-id="7f95f-210">All scopes must belong to the same app per Azure Active Directory rules.</span></span> <span data-ttu-id="7f95f-211">必要に応じて追加の API アプリ用に追加のスコープを追加できます。</span><span class="sxs-lookup"><span data-stu-id="7f95f-211">Additional scopes can be added for additional API apps as needed:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -302,55 +305,55 @@ builder.Services.AddMsalAuthentication(options =>
 ```
 
 > [!NOTE]
-> <span data-ttu-id="35411-212">Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。</span><span class="sxs-lookup"><span data-stu-id="35411-212">If the Azure portal provides a scope URI and **the app throws an unhandled exception** when it receives a *401 Unauthorized* response from the API, try using a scope URI that doesn't include the scheme and host.</span></span> <span data-ttu-id="35411-213">たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。</span><span class="sxs-lookup"><span data-stu-id="35411-213">For example, the Azure portal may provide one of the following scope URI formats:</span></span>
+> <span data-ttu-id="7f95f-212">Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。</span><span class="sxs-lookup"><span data-stu-id="7f95f-212">If the Azure portal provides a scope URI and **the app throws an unhandled exception** when it receives a *401 Unauthorized* response from the API, try using a scope URI that doesn't include the scheme and host.</span></span> <span data-ttu-id="7f95f-213">たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。</span><span class="sxs-lookup"><span data-stu-id="7f95f-213">For example, the Azure portal may provide one of the following scope URI formats:</span></span>
 >
 > * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 > * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 >
-> <span data-ttu-id="35411-214">スキームとホストなしでスコープ URI を指定します。</span><span class="sxs-lookup"><span data-stu-id="35411-214">Supply the scope URI without the scheme and host:</span></span>
+> <span data-ttu-id="7f95f-214">スキームとホストなしでスコープ URI を指定します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-214">Supply the scope URI without the scheme and host:</span></span>
 >
 > ```csharp
 > options.ProviderOptions.DefaultAccessTokenScopes.Add(
 >     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
 > ```
 
-<span data-ttu-id="35411-215">詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="35411-215">For more information, see the following sections of the *Additional scenarios* article:</span></span>
+<span data-ttu-id="7f95f-215">詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="7f95f-215">For more information, see the following sections of the *Additional scenarios* article:</span></span>
 
-* [<span data-ttu-id="35411-216">追加のアクセストークンを要求する</span><span class="sxs-lookup"><span data-stu-id="35411-216">Request additional access tokens</span></span>](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
-* [<span data-ttu-id="35411-217">送信要求にトークンを添付する</span><span class="sxs-lookup"><span data-stu-id="35411-217">Attach tokens to outgoing requests</span></span>](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
+* [<span data-ttu-id="7f95f-216">追加のアクセス トークンを要求する</span><span class="sxs-lookup"><span data-stu-id="7f95f-216">Request additional access tokens</span></span>](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [<span data-ttu-id="7f95f-217">送信要求にトークンを添付する</span><span class="sxs-lookup"><span data-stu-id="7f95f-217">Attach tokens to outgoing requests</span></span>](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 
-### <a name="imports-file"></a><span data-ttu-id="35411-218">ファイルのインポート</span><span class="sxs-lookup"><span data-stu-id="35411-218">Imports file</span></span>
+### <a name="imports-file"></a><span data-ttu-id="7f95f-218">ファイルのインポート</span><span class="sxs-lookup"><span data-stu-id="7f95f-218">Imports file</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
 
-### <a name="index-page"></a><span data-ttu-id="35411-219">Index ページ</span><span class="sxs-lookup"><span data-stu-id="35411-219">Index page</span></span>
+### <a name="index-page"></a><span data-ttu-id="7f95f-219">Index ページ</span><span class="sxs-lookup"><span data-stu-id="7f95f-219">Index page</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
-### <a name="app-component"></a><span data-ttu-id="35411-220">アプリコンポーネント</span><span class="sxs-lookup"><span data-stu-id="35411-220">App component</span></span>
+### <a name="app-component"></a><span data-ttu-id="7f95f-220">アプリコンポーネント</span><span class="sxs-lookup"><span data-stu-id="7f95f-220">App component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-### <a name="redirecttologin-component"></a><span data-ttu-id="35411-221">RedirectToLogin コンポーネント</span><span class="sxs-lookup"><span data-stu-id="35411-221">RedirectToLogin component</span></span>
+### <a name="redirecttologin-component"></a><span data-ttu-id="7f95f-221">RedirectToLogin コンポーネント</span><span class="sxs-lookup"><span data-stu-id="7f95f-221">RedirectToLogin component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-### <a name="logindisplay-component"></a><span data-ttu-id="35411-222">LoginDisplay コンポーネント</span><span class="sxs-lookup"><span data-stu-id="35411-222">LoginDisplay component</span></span>
+### <a name="logindisplay-component"></a><span data-ttu-id="7f95f-222">LoginDisplay コンポーネント</span><span class="sxs-lookup"><span data-stu-id="7f95f-222">LoginDisplay component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
 
-### <a name="authentication-component"></a><span data-ttu-id="35411-223">認証コンポーネント</span><span class="sxs-lookup"><span data-stu-id="35411-223">Authentication component</span></span>
+### <a name="authentication-component"></a><span data-ttu-id="7f95f-223">認証コンポーネント</span><span class="sxs-lookup"><span data-stu-id="7f95f-223">Authentication component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
-### <a name="fetchdata-component"></a><span data-ttu-id="35411-224">FetchData コンポーネント</span><span class="sxs-lookup"><span data-stu-id="35411-224">FetchData component</span></span>
+### <a name="fetchdata-component"></a><span data-ttu-id="7f95f-224">FetchData コンポーネント</span><span class="sxs-lookup"><span data-stu-id="7f95f-224">FetchData component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
 
-## <a name="run-the-app"></a><span data-ttu-id="35411-225">アプリを実行する</span><span class="sxs-lookup"><span data-stu-id="35411-225">Run the app</span></span>
+## <a name="run-the-app"></a><span data-ttu-id="7f95f-225">アプリを実行する</span><span class="sxs-lookup"><span data-stu-id="7f95f-225">Run the app</span></span>
 
-<span data-ttu-id="35411-226">サーバープロジェクトからアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="35411-226">Run the app from the Server project.</span></span> <span data-ttu-id="35411-227">Visual Studio を使用する場合は、**ソリューションエクスプローラー**でサーバープロジェクトを選択し、ツールバーの [**実行**] ボタンを選択するか、[**デバッグ**] メニューからアプリを起動します。</span><span class="sxs-lookup"><span data-stu-id="35411-227">When using Visual Studio, select the Server project in **Solution Explorer** and select the **Run** button in the toolbar or start the app from the **Debug** menu.</span></span>
+<span data-ttu-id="7f95f-226">サーバープロジェクトからアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-226">Run the app from the Server project.</span></span> <span data-ttu-id="7f95f-227">Visual Studio を使用する場合は、**ソリューションエクスプローラー**でサーバープロジェクトを選択し、ツールバーの [**実行**] ボタンを選択するか、[**デバッグ**] メニューからアプリを起動します。</span><span class="sxs-lookup"><span data-stu-id="7f95f-227">When using Visual Studio, select the Server project in **Solution Explorer** and select the **Run** button in the toolbar or start the app from the **Debug** menu.</span></span>
 
 <!-- HOLD
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
@@ -360,9 +363,9 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a><span data-ttu-id="35411-228">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="35411-228">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="7f95f-228">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="7f95f-228">Additional resources</span></span>
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-ad-b2c>
-* [<span data-ttu-id="35411-229">チュートリアル:Azure Active Directory B2C テナントの作成</span><span class="sxs-lookup"><span data-stu-id="35411-229">Tutorial: Create an Azure Active Directory B2C tenant</span></span>](/azure/active-directory-b2c/tutorial-create-tenant)
-* [<span data-ttu-id="35411-230">Microsoft ID プラットフォームのドキュメント</span><span class="sxs-lookup"><span data-stu-id="35411-230">Microsoft identity platform documentation</span></span>](/azure/active-directory/develop/)
+* [<span data-ttu-id="7f95f-229">チュートリアル:Azure Active Directory B2C テナントの作成</span><span class="sxs-lookup"><span data-stu-id="7f95f-229">Tutorial: Create an Azure Active Directory B2C tenant</span></span>](/azure/active-directory-b2c/tutorial-create-tenant)
+* [<span data-ttu-id="7f95f-230">Microsoft ID プラットフォームのドキュメント</span><span class="sxs-lookup"><span data-stu-id="7f95f-230">Microsoft identity platform documentation</span></span>](/azure/active-directory/develop/)
