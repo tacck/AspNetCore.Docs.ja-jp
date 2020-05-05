@@ -5,13 +5,19 @@ description: ASP.NET Core アンカー タグ ヘルパーの属性と、HTML �
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 6bfbad39115c7823b5677d3c52ca64cfb0683037
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653780"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773966"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core のアンカー タグ ヘルパー
 
@@ -41,7 +47,7 @@ ms.locfileid: "78653780"
 <a href="/Speaker">All Speakers</a>
 ```
 
-`asp-controller` 属性が指定されていて、`asp-action` が指定されていない場合は、既定値 `asp-action` が現在実行中のビューに関連付けられたコント ローラー アクションです。 `asp-action` が前のマークアップから省略されていて、アンカー タグ ヘルパーが *HomeController* の *Index* ビュー ( */Home*) で使用されている場合、次の HTML が生成されます。
+`asp-controller` 属性が指定されていて、`asp-action` が指定されていない場合は、既定値 `asp-action` が現在実行中のビューに関連付けられたコント ローラー アクションです。 `asp-action` が前のマークアップから省略されていて、アンカー タグ ヘルパーが *HomeController* の *Index* ビュー (*/Home*) で使用されている場合、次の HTML が生成されます。
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -139,7 +145,7 @@ MVC ビューは、次のように、アクションによって提供される�
 
 [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 属性は、キー/値ペアのディクショナリの作成をサポートします。 キーはパラメーターの名前で、値はパラメーターの値です。
 
-次の例では、ディクショナリが初期化され、Razor ビューに渡されます。 データがモデルによって渡される場合もあります。
+次の例では、ディクショナリが初期化され、 Razorビューに渡されます。 データがモデルによって渡される場合もあります。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -173,9 +179,9 @@ MVC ビューは、次のように、アクションによって提供される�
 
 [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 属性は、適切なルートの設定に使用する領域名を設定します。 `asp-area` 属性によってどのようにルートの再マップが行われるかの例を以下に示します。
 
-#### <a name="usage-in-razor-pages"></a>Razor Pages の使用法
+#### <a name="usage-in-razor-pages"></a>使用 ( Razorページで)
 
-Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
+Razorページ領域は ASP.NET Core 2.1 以降でサポートされています。
 
 次のディレクトリ階層があるとします。
 
@@ -183,13 +189,13 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
   * **wwwroot**
   * **領域**
     * **セッション**
-      * **ページ**
-        * *\_ViewStart.cshtml*
+      * **トピック**
+        * *\_ViewStart. cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
-  * **ページ**
+  * **トピック**
 
-*Sessions* 領域の *Index* Razor ページを参照するマークアップは次のとおりです。
+[*セッション*領域の*インデックス* Razor ] ページを参照するマークアップは次のとおりです。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -200,7 +206,7 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
 ```
 
 > [!TIP]
-> Razor Pages アプリの領域をサポートするには、`Startup.ConfigureServices` で次のいずれかを行います。
+> Razor Pages アプリの領域をサポートするには、で`Startup.ConfigureServices`次のいずれかの操作を行います。
 >
 > * [互換性バージョン](xref:mvc/compatibility-version)に 2.1 以降を設定します。
 > * [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) プロパティに `true` を設定します。
@@ -215,14 +221,14 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
   * **wwwroot**
   * **領域**
     * **ブログ**
-      * **コントローラー**
+      * **Controllers**
         * *HomeController.cs*
       * **ビュー**
         * **ホーム**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
-        * *\_ViewStart.cshtml*
-  * **コントローラー**
+        * *\_ViewStart. cshtml*
+  * **Controllers**
 
 `asp-area` を [ブログ] に設定すると、このアンカー タグの関連付けられているコントローラーとビューのルートに、ディレクトリ *Areas/Blogs* のプレフィックスが付けられます。 *AboutBlog* ビューを参照するマークアップは次のとおりです。
 
@@ -235,13 +241,13 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
 ```
 
 > [!TIP]
-> MVC アプリで領域をサポートするには、ルート テンプレートに領域への参照 (存在する場合) が含まれている必要があります。 そのテンプレートは、`routes.MapRoute`Startup.Configure*の* メソッド呼び出しの 2 番目のパラメーターで表されます
+> MVC アプリで領域をサポートするには、ルート テンプレートに領域への参照 (存在する場合) が含まれている必要があります。 そのテンプレートは、*Startup.Configure* の `routes.MapRoute` メソッド呼び出しの 2 番目のパラメーターで表されます
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>asp-protocol
 
-[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 属性は URL に (`https` などの) プロトコルを指定するためにあります。 例 :
+[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 属性は URL に (`https` などの) プロトコルを指定するためにあります。 次に例を示します。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -255,7 +261,7 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
 
 ### <a name="asp-host"></a>asp-host
 
-[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 属性は URL のホスト名を指定するためにあります。 例 :
+[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 属性は URL のホスト名を指定するためにあります。 次に例を示します。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 
@@ -267,9 +273,9 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
 
 ### <a name="asp-page"></a>asp-page
 
-[asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) 属性は Razor ページで使用されます。 アンカー タグの `href` 属性の値を特定のページに設定するために使用します。 ページ名の前にスラッシュ "/" を付けると URL が作成されます。
+[Asp ページ](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*)属性は、ページでRazor使用されます。 アンカー タグの `href` 属性の値を特定のページに設定するために使用します。 ページ名の前にスラッシュ "/" を付けると URL が作成されます。
 
-次の例は、出席者の Razor ページを示しています。
+次の例では、出席者Razorページを参照しています。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -291,7 +297,7 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-[asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) 属性は Razor ページで使用されます。 特定のページ ハンドラーへのリンクが目的です。
+[Asp ページハンドラー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*)属性は、ページでRazor使用されます。 特定のページ ハンドラーへのリンクが目的です。
 
 次のページ ハンドラーがあるとします。
 
@@ -307,7 +313,7 @@ Razor Pages の領域は、ASP.NET Core 2.1 以降でサポートされます。
 <a href="/Attendee?attendeeid=12&handler=Profile">Attendee Profile</a>
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:mvc/controllers/areas>
 * <xref:razor-pages/index>

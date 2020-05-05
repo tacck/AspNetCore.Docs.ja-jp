@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core でのデータ保護キーの管理と有効期間
+title: ASP.NET Core でのデータ保護のキー管理と有効期間
 author: rick-anderson
 description: ASP.NET Core におけるデータ保護のキー管理と有効期間について説明します。
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 2f022a4c7519485fe629ce47c27d214c8c27d5bc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655070"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777450"
 ---
-# <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core でのデータ保護キーの管理と有効期間
+# <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core でのデータ保護のキー管理と有効期間
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -27,18 +33,18 @@ ms.locfileid: "78655070"
 
 1. ユーザープロファイルが使用可能な場合、キーは *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys*フォルダーに保存されます。 オペレーティングシステムが Windows の場合、キーは DPAPI を使用して保存時に暗号化されます。
 
-   アプリ プールの [setProfileEnvironment 属性](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration)も有効にする必要があります。 `setProfileEnvironment` の既定値は `true` です。 一部のシナリオ (たとえば、Windows OS) では、`setProfileEnvironment` は `false` に設定されます。 キーが期待どおりにユーザー プロファイル ディレクトリに格納されていない場合:
+   アプリ プールの [setProfileEnvironment 属性](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration)も有効にする必要があります。 `setProfileEnvironment` の既定値は `true`です。 一部のシナリオ (たとえば、Windows OS) では、`setProfileEnvironment` は `false` に設定されます。 キーが期待どおりにユーザー プロファイル ディレクトリに格納されていない場合:
 
    1. *%windir%/system32/inetsrv/config* フォルダーに移動します。
    1. *applicationHost.config* ファイルを開きます。
-   1. `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` 要素を見つけます。
+   1. `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` 要素を探します。
    1. `setProfileEnvironment` 属性 (その規定値は `true` です) が存在しないことを確認するか、属性の値を明示的に `true` に設定します。
 
 1. アプリが IIS でホストされている場合、キーは、ワーカープロセスアカウントに対してのみ機能する特別なレジストリキーの HKLM レジストリに保存されます。 キーは DPAPI を使用して保存時に暗号化されます。
 
 1. これらの条件のいずれも一致しない場合、キーは現在のプロセスの外部では保持されません。 プロセスがシャットダウンされると、生成されたすべてのキーが失われます。
 
-開発者は常にフルコントロールを使用し、キーの格納方法と場所をオーバーライドできます。 上記の最初の3つのオプションでは、ASP.NET **\<machineKey >** 自動生成ルーチンが過去にどのように動作するかと同様に、ほとんどのアプリに適した既定値が提供されます。 最後のフォールバックオプションは、キーの永続化が必要な場合に、開発者が事前に[構成](xref:security/data-protection/configuration/overview)を指定することを必要とする唯一のシナリオですが、このフォールバックはまれな状況でのみ発生します。
+開発者は常にフルコントロールを使用し、キーの格納方法と場所をオーバーライドできます。 上記の最初の3つのオプションでは、ASP.NET ** \<machineKey>** 自動生成ルーチンが過去にどのように動作したかに似た、ほとんどのアプリに適した既定値が提供されます。 最後のフォールバックオプションは、キーの永続化が必要な場合に、開発者が事前に[構成](xref:security/data-protection/configuration/overview)を指定することを必要とする唯一のシナリオですが、このフォールバックはまれな状況でのみ発生します。
 
 Docker コンテナーでホストする場合、キーは、Docker ボリューム (共有ボリュームまたはコンテナーの有効期間を超えて保持されるホストマウントボリューム)、または[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)や[Redis](https://redis.io/)などの外部プロバイダーのフォルダーに保存する必要があります。 アプリが共有ネットワークボリュームにアクセスできない場合は、web ファームのシナリオでも外部プロバイダーが役立ちます (詳細については、「 [Persistkeystofilesystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) 」を参照してください)。
 
@@ -53,7 +59,7 @@ Docker コンテナーでホストする場合、キーは、Docker ボリュー
 
 使用される既定のペイロード保護アルゴリズムは、HMACSHA256 の場合は AES-256-CBC、信頼性を確保する場合はです。 90日ごとに変更された512ビットのマスターキーは、ペイロードごとにこれらのアルゴリズムに使用される2つのサブキーを派生させるために使用されます。 詳細については、「[サブキーの派生](xref:security/data-protection/implementation/subkeyderivation#additional-authenticated-data-and-subkey-derivation)」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/data-protection/extensibility/key-management>
 * <xref:host-and-deploy/web-farm>

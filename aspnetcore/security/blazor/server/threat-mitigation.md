@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 9a5e313153e5c5c17fc723cc9768c49ffd828007
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206342"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774185"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor サーバーの脅威軽減ガイダンス
 
@@ -144,7 +147,7 @@ JavaScript から .NET メソッドへの呼び出しを信頼しません。 .N
   * ユーザーが指定したデータをパラメーターで JavaScript 呼び出しに渡すことは避けてください。 パラメーターにデータを渡す必要がある場合は、JavaScript コードが[クロスサイトスクリプティング (XSS)](#cross-site-scripting-xss)の脆弱性を導入せずにデータを渡すことを確認してください。 たとえば、要素の`innerHTML`プロパティを設定することによって、ユーザー指定のデータをドキュメントオブジェクトモデル (DOM) に書き込まないでください。 [コンテンツセキュリティポリシー (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)を使用して`eval` 、およびその他の安全でない JavaScript プリミティブを無効にすることを検討してください。
 * フレームワークのディスパッチ実装の上に .NET 呼び出しのカスタムディスパッチを実装しないようにします。 ブラウザーへの .NET メソッドの公開は高度なシナリオであり、一般的Blazorな開発では推奨されません。
 
-### <a name="events"></a>イベント
+### <a name="events"></a>events
 
 イベントは、サーバーアプリへのBlazorエントリポイントを提供します。 Web アプリでエンドポイントを保護する場合と同じ規則が、 Blazorサーバーアプリのイベント処理に適用されます。 悪意のあるクライアントは、イベントのペイロードとして送信するデータを送信できます。
 
@@ -342,9 +345,9 @@ Blazorサーバーは、サーバーとクライアントの間で送信され�
 
 XSS の脆弱性が存在するようにするには、レンダリングされたページにユーザー入力を組み込む必要があります。 Blazorサーバーコンポーネントは、 *razor*ファイル内のマークアップが手続き型の C# ロジックに変換されるコンパイル時の手順を実行します。 実行時には、C# ロジックによって、要素、テキスト、および子コンポーネントを記述する*レンダリングツリー*が構築されます。 これは、JavaScript 命令のシーケンスを使用してブラウザーの DOM に適用されます (または、プリレンダリングの場合は HTML にシリアル化されます)。
 
-* 通常の Razor 構文 (など`@someStringValue`) によってレンダリングされるユーザー入力では、テキストのみを書き込むことができるコマンドを使用して DOM に Razor 構文が追加されるため、XSS 脆弱性は公開されません。 値に HTML マークアップが含まれている場合でも、値は静的なテキストとして表示されます。 プリレンダリングすると、出力は HTML エンコードされ、コンテンツも静的テキストとして表示されます。
+* 通常Razorの構文 (たとえば、 `@someStringValue`) を使用してレンダリングされるユーザー入力ではRazor 、テキストのみを書き込むことができるコマンドを使用して DOM に構文を追加するため、XSS 脆弱性は公開されません。 値に HTML マークアップが含まれている場合でも、値は静的なテキストとして表示されます。 プリレンダリングすると、出力は HTML エンコードされ、コンテンツも静的テキストとして表示されます。
 * スクリプトタグは許可されていないため、アプリのコンポーネントレンダリングツリーに含めることはできません。 コンポーネントのマークアップにスクリプトタグが含まれている場合は、コンパイル時エラーが生成されます。
-* コンポーネント作成者は、Razor を使用せずに C# でコンポーネントを作成できます。 コンポーネントの作成者は、出力の生成時に適切な Api を使用します。 たとえば、とは`builder.AddContent(0, someUserSuppliedString)`使用し*ませ* `builder.AddMarkupContent(0, someUserSuppliedString)`ん。後者は XSS 脆弱性を作成する可能性があります。
+* コンポーネントの作成者は、を使用Razorせずに、C# でコンポーネントを作成できます。 コンポーネントの作成者は、出力の生成時に適切な Api を使用します。 たとえば、とは`builder.AddContent(0, someUserSuppliedString)`使用し*ませ* `builder.AddMarkupContent(0, someUserSuppliedString)`ん。後者は XSS 脆弱性を作成する可能性があります。
 
 XSS 攻撃からの保護の一環として、[コンテンツセキュリティポリシー (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)などの xss 軽減策を実装することを検討してください。
 

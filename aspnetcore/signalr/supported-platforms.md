@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core SignalR サポートされているプラットフォーム
+title: サポートSignalRされているプラットフォームの ASP.NET Core
 author: bradygaster
 description: ASP.NET Core SignalRでサポートされているプラットフォームについて説明します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,14 +7,18 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 054965921c87c1a9be27e5ddaa8a87b0fa1f4113
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 70a05dabb95aaf561aa78d5c8b24b430c51bd973
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655148"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772606"
 ---
 # <a name="aspnet-core-signalr-supported-platforms"></a>SignalR でサポートされているプラットフォームの ASP.NET Core
 
@@ -26,7 +30,7 @@ ASP.NET Core の SignalR は、ASP.NET Core がサポートするすべてのサ
 
 [JavaScript クライアント](xref:signalr/javascript-client)は、nodejs 8 以降のバージョンと次のブラウザーで実行されます。
 
-| ブラウザー                         | バージョン         |
+| Browser                         | Version         |
 | ------------------------------- | --------------- |
 | Microsoft Edge                  | 現在の&dagger; |
 | Mozilla Firefox                 | 現在の&dagger; |
@@ -34,11 +38,11 @@ ASP.NET Core の SignalR は、ASP.NET Core がサポートするすべてのサ
 | SafariiOS を含む            | 現在の&dagger; |
 | Microsoft Internet Explorer     | 11              |
 
-*現在*の &dagger;は、ブラウザーの最新バージョンを参照します。
+&dagger;*Current*は、ブラウザーの最新バージョンを参照します。
 
 ## <a name="net-client"></a>.NET クライアント
 
-[.Net クライアント](xref:signalr/dotnet-client)は、ASP.NET Core によってサポートされる任意のプラットフォームで実行されます。 たとえば、xamarin[開発者は](https://github.com/aspnet/Announcements/issues/305)、xamarin 8.4.0.1 以降と11.14.0.4 以降を使用して、android アプリをビルドするために SignalRを使用できます。
+[.Net クライアント](xref:signalr/dotnet-client)は、ASP.NET Core によってサポートされる任意のプラットフォームで実行されます。 たとえば、xamarin[開発者はをSignalR使用](https://github.com/aspnet/Announcements/issues/305)して、xamarin 8.4.0.1 以降と ios アプリを使用して、xamarin 11.14.0.4 以降を使用して android アプリをビルドできます。
 
 サーバーで IIS が実行されている場合、Websocket トランスポートでは Windows Server 2012 以降に IIS 8.0 以降が必要です。 その他のトランスポートはすべてのプラットフォームでサポートされています。
 
@@ -50,6 +54,6 @@ ASP.NET Core の SignalR は、ASP.NET Core がサポートするすべてのサ
 
 次のクライアントは使用できますが、試験的または非公式です。 現時点ではサポートされておらず、そうでない場合もあります。
 
-* [C++client](https://github.com/aspnet/SignalR-Client-Cpp)
+* [C++ クライアント](https://github.com/aspnet/SignalR-Client-Cpp)
 
 * [Swift クライアント](https://github.com/moozzyk/SignalR-Client-Swift)

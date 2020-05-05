@@ -4,19 +4,25 @@ author: rick-anderson
 description: ASP.NET Core で Web API のカスタム フォーマッタを作成して使用する方法を説明します。
 ms.author: riande
 ms.date: 02/08/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: dd25cda460ba758cd07de094eaadd1f2d8c28657
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0836fc288a015adb9a6223c5a2b681b1b03bded4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654956"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777320"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API のカスタム フォーマッタ
 
 著者: [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web API でのデータ交換をサポートしています。 入力フォーマッタは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。 出力フォーマッタは、[応答の書式設定](xref:web-api/advanced/formatting)に使用されます。
+ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web API でのデータ交換をサポートしています。 入力フォーマッタは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。 出力フォーマッタは、[応答を書式設定](xref:web-api/advanced/formatting)するために使用されます。
 
 フレームワークには、JSON および XML 用の組み込みの入力および出力フォーマッタが用意されています。 プレーン テキスト用の組み込みの出力フォーマッタが用意されていますが、プレーン テキスト用の入力フォーマッタは用意されていません。
 
@@ -36,7 +42,7 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 * クライアントに送信するデータをシリアル化する場合は、出力フォーマッタ クラスを作成します。
 * クライアントから受信したデータを逆シリアル化する場合は、入力フォーマッタ クラスを作成します。
-* フォーマッタのインスタンスを `InputFormatters`MvcOptions`OutputFormatters` の [ および ](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions) コレクションに追加します。
+* フォーマッタのインスタンスを [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions) の `InputFormatters` および `OutputFormatters` コレクションに追加します。
 
 次のセクションでは、これらの各手順のガイダンスとコード例を提供します。
 
@@ -80,13 +86,13 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 #### <a name="the-canwriteresult-method"></a>CanWriteResult メソッド
 
-一部のシナリオでは、`CanWriteResult` の代わりに `CanWriteType` をオーバーライドする必要があります。 次のすべての条件が満たされている場合は、`CanWriteResult` を使用します。
+一部のシナリオでは、`CanWriteType` の代わりに `CanWriteResult` をオーバーライドする必要があります。 次のすべての条件が満たされている場合は、`CanWriteResult` を使用します。
 
 * アクション メソッドはモデル クラスを返します。
 * 実行時に返される可能性がある派生クラスがあります。
 * アクションが返した派生クラスを実行時に把握する必要があります。
 
-たとえば、アクション メソッド シグネチャが `Person` の種類を返したとします。ただし、この場合、`Student` から派生した `Instructor` または `Person` の種類を返す可能性があります。 フォーマッタで `Student` オブジェクトのみを処理する場合は、[ メソッドに提供されたコンテキスト オブジェクトで ](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object)Object`CanWriteResult` の種類を確認します。 アクション メソッドが `CanWriteResult` を返す場合は、`IActionResult` を使用する必要がないことに注意してください。この場合、`CanWriteType` メソッドはランタイム型を受け取ります。
+たとえば、アクション メソッド シグネチャが `Person` の種類を返したとします。ただし、この場合、`Person` から派生した `Student` または `Instructor` の種類を返す可能性があります。 フォーマッタで `Student` オブジェクトのみを処理する場合は、`CanWriteResult` メソッドに提供されたコンテキスト オブジェクトで [Object](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) の種類を確認します。 アクション メソッドが `IActionResult` を返す場合は、`CanWriteResult` を使用する必要がないことに注意してください。この場合、`CanWriteType` メソッドはランタイム型を受け取ります。
 
 <a id="read-write"></a>
 
@@ -106,7 +112,7 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 フォーマッタは、挿入した順序で評価されます。 最初のものが優先されます。
 
-## <a name="next-steps"></a>次のステップ:
+## <a name="next-steps"></a>次のステップ
 
 * [このドキュメント用のサンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)。このアプリを使用して、シンプルな vCard の入力と出力フォーマッタを実装します。 アプリでは、次の例のように vCard の読み取りと書き込みを行います。
 
@@ -115,7 +121,8 @@ BEGIN:VCARD
 VERSION:2.1
 N:Davolio;Nancy
 FN:Nancy Davolio
-UID:20293482-9240-4d68-b475-325df4a83728
+no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR]
+uid:20293482-9240-4d68-b475-325df4a83728
 END:VCARD
 ```
 

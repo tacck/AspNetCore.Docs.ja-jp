@@ -5,13 +5,19 @@ description: ASP.NET Core アプリのパフォーマンスの問題を診断す
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/diagnostic-tools
-ms.openlocfilehash: d273897b9ad26d57eb94b196b58f14019a96d07d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 82c724ec647dfe5547db775ebaf8c2479bb258bd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652472"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775857"
 ---
 # <a name="performance-diagnostic-tools"></a>パフォーマンス診断ツール
 
@@ -55,7 +61,7 @@ Application Insights は、さまざまな環境で使用できます。
 
 PerfView の詳細と、 [Perfview のビデオチュートリアル](https://channel9.msdn.com/Series/PerfView-Tutorial)を開始する方法、またはツールまたは[GitHub](https://github.com/Microsoft/perfview)で利用可能なユーザーガイドを参照してください。
 
-## <a name="windows-performance-toolkit"></a>Windows パフォーマンスツールキット
+## <a name="windows-performance-toolkit"></a>Windows Performance Toolkit
 
 [Windows パフォーマンスツールキット](/windows-hardware/test/wpt/)(WPT) は、Windows パフォーマンスレコーダー (wpr) と Windows performance ANALYZER (WPA) の2つのコンポーネントで構成されています。 これらのツールは、Windows オペレーティングシステムとアプリのパフォーマンスプロファイルを詳細に生成します。 WPT には、データを視覚化するための豊富な方法が用意されていますが、そのデータの収集は PerfView のより強力ではありません。
 

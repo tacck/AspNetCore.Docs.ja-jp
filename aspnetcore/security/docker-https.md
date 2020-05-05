@@ -7,14 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
+- Blazor
+- Identity
 - Let's Encrypt
+- Razor
+- SignalR
 uid: security/docker-https
-ms.openlocfilehash: f2a615093e7b1190962bd1c6ecbcc63f65bfbe7e
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: 74d4a215b81259674fa6c14bdc8f306a3508f71a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511588"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775129"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする
 
@@ -36,14 +40,14 @@ ms.locfileid: "79511588"
 
 ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。 [Let's Encrypt](https://letsencrypt.org/)は、無料の証明書を提供する証明機関です。
 
-このドキュメントでは、`localhost`で事前構築されたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用します。 手順は、実稼働証明書の使用に似ています。
+このドキュメントでは、事前に構築さ`localhost`れたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用します。 手順は、実稼働証明書の使用に似ています。
 
 実稼働証明書の場合:
 
-* `dotnet dev-certs` ツールは必要ありません。
+* `dotnet dev-certs`ツールは必要ありません。
 * 手順で使用した場所に証明書を保存する必要はありません。 任意の場所を使用できますが、証明書をサイトディレクトリ内に格納することはお勧めしません。
 
-次のセクションに記載されている手順では、Docker の `-v` コマンドラインオプションを使用して、コンテナーに証明書をマウントします。 *Dockerfile*で `COPY` コマンドを使用してコンテナーイメージに証明書を追加することもできますが、この方法はお勧めしません。 証明書をイメージにコピーすることは、次の理由から推奨されません。
+次のセクションに記載されている手順では、Docker の`-v`コマンドラインオプションを使用して証明書をコンテナーにマウントします。 `COPY` *Dockerfile*でコマンドを使用してコンテナーイメージに証明書を追加することもできますが、この方法はお勧めしません。 証明書をイメージにコピーすることは、次の理由から推奨されません。
 
 * 開発者の証明書を使用したテストで同じイメージを使用するのは困難です。
 * 実稼働証明書を使用してホストする場合、同じイメージを使用するのは困難です。
@@ -62,7 +66,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-上記のコマンドの `{ password here }` をパスワードに置き換えます。
+上記のコマンドで、を`{ password here }`パスワードに置き換えます。
 
 HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
 
@@ -82,9 +86,9 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust` は、macOS と Windows でのみサポートされています。 ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。 ブラウザーで証明書を信頼する必要があると考えられます。
+`dotnet dev-certs https --trust`は、macOS と Windows でのみサポートされています。 ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。 ブラウザーで証明書を信頼する必要があると考えられます。
 
-上記のコマンドの `{ password here }` をパスワードに置き換えます。
+上記のコマンドで、を`{ password here }`パスワードに置き換えます。
 
 HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
 
@@ -104,7 +108,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-上記のコマンドの `{ password here }` をパスワードに置き換えます。
+上記のコマンドで、を`{ password here }`パスワードに置き換えます。
 
 HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
 
