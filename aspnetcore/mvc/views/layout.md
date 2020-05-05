@@ -4,68 +4,74 @@ author: ardalis
 description: 共通レイアウトの使用方法、ディレクティブの共有方法、および ASP.NET Core アプリでビューをレンダリングする前に共通コードを実行する方法について説明します。
 ms.author: riande
 ms.date: 07/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: db8c6c30397593c1a8375ebc800c1c0e34d241cb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655046"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766486"
 ---
-# <a name="layout-in-aspnet-core"></a><span data-ttu-id="49d1a-103">ASP.NET Core でのレイアウト</span><span class="sxs-lookup"><span data-stu-id="49d1a-103">Layout in ASP.NET Core</span></span>
+# <a name="layout-in-aspnet-core"></a><span data-ttu-id="a1c88-103">ASP.NET Core でのレイアウト</span><span class="sxs-lookup"><span data-stu-id="a1c88-103">Layout in ASP.NET Core</span></span>
 
-<span data-ttu-id="49d1a-104">作成者: [Steve Smith](https://ardalis.com/)、[Dave Brock](https://twitter.com/daveabrock)</span><span class="sxs-lookup"><span data-stu-id="49d1a-104">By [Steve Smith](https://ardalis.com/) and [Dave Brock](https://twitter.com/daveabrock)</span></span>
+<span data-ttu-id="a1c88-104">作成者: [Steve Smith](https://ardalis.com/)、[Dave Brock](https://twitter.com/daveabrock)</span><span class="sxs-lookup"><span data-stu-id="a1c88-104">By [Steve Smith](https://ardalis.com/) and [Dave Brock](https://twitter.com/daveabrock)</span></span>
 
-<span data-ttu-id="49d1a-105">ページやビューは、多くの場合、ビジュアルおよびプログラムの要素を共有します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-105">Pages and views frequently share visual and programmatic elements.</span></span> <span data-ttu-id="49d1a-106">この記事では、次の方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-106">This article demonstrates how to:</span></span>
+<span data-ttu-id="a1c88-105">ページやビューは、多くの場合、ビジュアルおよびプログラムの要素を共有します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-105">Pages and views frequently share visual and programmatic elements.</span></span> <span data-ttu-id="a1c88-106">この記事では、次の方法を示します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-106">This article demonstrates how to:</span></span>
 
-* <span data-ttu-id="49d1a-107">共通のレイアウトを使用する。</span><span class="sxs-lookup"><span data-stu-id="49d1a-107">Use common layouts.</span></span>
-* <span data-ttu-id="49d1a-108">ディレクティブを共有する。</span><span class="sxs-lookup"><span data-stu-id="49d1a-108">Share directives.</span></span>
-* <span data-ttu-id="49d1a-109">ページまたはビューを表示する前に、共通のコードを実行する。</span><span class="sxs-lookup"><span data-stu-id="49d1a-109">Run common code before rendering pages or views.</span></span>
+* <span data-ttu-id="a1c88-107">共通のレイアウトを使用する。</span><span class="sxs-lookup"><span data-stu-id="a1c88-107">Use common layouts.</span></span>
+* <span data-ttu-id="a1c88-108">ディレクティブを共有する。</span><span class="sxs-lookup"><span data-stu-id="a1c88-108">Share directives.</span></span>
+* <span data-ttu-id="a1c88-109">ページまたはビューを表示する前に、共通のコードを実行する。</span><span class="sxs-lookup"><span data-stu-id="a1c88-109">Run common code before rendering pages or views.</span></span>
 
-<span data-ttu-id="49d1a-110">このドキュメントでは、ASP.NET Core MVC に対するアプローチとして、Razor Pages とビューを含むコントローラーの 2 種類のレイアウトについて説明します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-110">This document discusses layouts for the two different approaches to ASP.NET Core MVC: Razor Pages and controllers with views.</span></span> <span data-ttu-id="49d1a-111">このトピックでは、違いは最小限です。</span><span class="sxs-lookup"><span data-stu-id="49d1a-111">For this topic, the differences are minimal:</span></span>
+<span data-ttu-id="a1c88-110">このドキュメントでは、MVC を ASP.NET Core するための2つRazorの異なるアプローチのレイアウトについて説明します。ビューにはページとコントローラーがあります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-110">This document discusses layouts for the two different approaches to ASP.NET Core MVC: Razor Pages and controllers with views.</span></span> <span data-ttu-id="a1c88-111">このトピックでは、違いは最小限です。</span><span class="sxs-lookup"><span data-stu-id="a1c88-111">For this topic, the differences are minimal:</span></span>
 
-* <span data-ttu-id="49d1a-112">Razor Pages は、*Pages* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-112">Razor Pages are in the *Pages* folder.</span></span>
-* <span data-ttu-id="49d1a-113">ビューを含むコントローラーでは、*Views* フォルダーをビューに使用します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-113">Controllers with views uses a *Views* folder for views.</span></span>
+* Razor<span data-ttu-id="a1c88-112">ページは*ページ*フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-112"> Pages are in the *Pages* folder.</span></span>
+* <span data-ttu-id="a1c88-113">ビューを含むコントローラーでは、*Views* フォルダーをビューに使用します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-113">Controllers with views uses a *Views* folder for views.</span></span>
 
-## <a name="what-is-a-layout"></a><span data-ttu-id="49d1a-114">レイアウトとは</span><span class="sxs-lookup"><span data-stu-id="49d1a-114">What is a Layout</span></span>
+## <a name="what-is-a-layout"></a><span data-ttu-id="a1c88-114">レイアウトとは</span><span class="sxs-lookup"><span data-stu-id="a1c88-114">What is a Layout</span></span>
 
-<span data-ttu-id="49d1a-115">ほとんどの Web アプリには、ユーザーがページ間を移動する際に一貫性のあるエクスペリエンスを提供する共通レイアウトがあります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-115">Most web apps have a common layout that provides the user with a consistent experience as they navigate from page to page.</span></span> <span data-ttu-id="49d1a-116">通常、このレイアウトには、アプリのヘッダー、ナビゲーションまたはメニュー要素、フッターなどの共通のユーザー インターフェイス要素が含まれます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-116">The layout typically includes common user interface elements such as the app header, navigation or menu elements, and footer.</span></span>
+<span data-ttu-id="a1c88-115">ほとんどの Web アプリには、ユーザーがページ間を移動する際に一貫性のあるエクスペリエンスを提供する共通レイアウトがあります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-115">Most web apps have a common layout that provides the user with a consistent experience as they navigate from page to page.</span></span> <span data-ttu-id="a1c88-116">通常、このレイアウトには、アプリのヘッダー、ナビゲーションまたはメニュー要素、フッターなどの共通のユーザー インターフェイス要素が含まれます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-116">The layout typically includes common user interface elements such as the app header, navigation or menu elements, and footer.</span></span>
 
 ![ページ レイアウトの例](layout/_static/page-layout.png)
 
-<span data-ttu-id="49d1a-118">スクリプトやスタイルシートなどの共通の HTML 構造体も、アプリ内の多くのページでよく使用されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-118">Common HTML structures such as scripts and stylesheets are also frequently used by many pages within an app.</span></span> <span data-ttu-id="49d1a-119">これらの共有要素をすべて *layout* ファイルで定義することで、アプリ内で使用する任意のビューで参照できるようになります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-119">All of these shared elements may be defined in a *layout* file, which can then be referenced by any view used within the app.</span></span> <span data-ttu-id="49d1a-120">レイアウトにより、ビュー内の重複コードが減ります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-120">Layouts reduce duplicate code in views.</span></span>
+<span data-ttu-id="a1c88-118">スクリプトやスタイルシートなどの共通の HTML 構造体も、アプリ内の多くのページでよく使用されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-118">Common HTML structures such as scripts and stylesheets are also frequently used by many pages within an app.</span></span> <span data-ttu-id="a1c88-119">これらの共有要素をすべて *layout* ファイルで定義することで、アプリ内で使用する任意のビューで参照できるようになります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-119">All of these shared elements may be defined in a *layout* file, which can then be referenced by any view used within the app.</span></span> <span data-ttu-id="a1c88-120">レイアウトにより、ビュー内の重複コードが減ります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-120">Layouts reduce duplicate code in views.</span></span>
 
-<span data-ttu-id="49d1a-121">規則により、ASP.NET Core アプリの既定のレイアウトには *_Layout.cshtml* という名前が付けられます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-121">By convention, the default layout for an ASP.NET Core app is named *_Layout.cshtml*.</span></span> <span data-ttu-id="49d1a-122">テンプレートを使用すると、次のような新しい ASP.NET Core プロジェクトのレイアウト ファイルが作成されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-122">The layout files for new ASP.NET Core projects created with the templates are:</span></span>
+<span data-ttu-id="a1c88-121">規則により、ASP.NET Core アプリの既定のレイアウトには *_Layout.cshtml* という名前が付けられます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-121">By convention, the default layout for an ASP.NET Core app is named *_Layout.cshtml*.</span></span> <span data-ttu-id="a1c88-122">テンプレートを使用すると、次のような新しい ASP.NET Core プロジェクトのレイアウト ファイルが作成されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-122">The layout files for new ASP.NET Core projects created with the templates are:</span></span>
 
-* <span data-ttu-id="49d1a-123">Razor Pages: *Pages/Shared/_Layout.cshtml*</span><span class="sxs-lookup"><span data-stu-id="49d1a-123">Razor Pages: *Pages/Shared/_Layout.cshtml*</span></span>
+* Razor<span data-ttu-id="a1c88-123">ページ: *pages/Shared/_Layout. cshtml*</span><span class="sxs-lookup"><span data-stu-id="a1c88-123"> Pages: *Pages/Shared/_Layout.cshtml*</span></span>
 
   ![ソリューション エクスプローラーの Pages フォルダー](layout/_static/rp-web-project-views.png)
 
-* <span data-ttu-id="49d1a-125">ビューを含むコントローラー: *Views/Shared/_Layout.cshtml*</span><span class="sxs-lookup"><span data-stu-id="49d1a-125">Controller with views: *Views/Shared/_Layout.cshtml*</span></span>
+* <span data-ttu-id="a1c88-125">ビューを含むコントローラー: *Views/Shared/_Layout.cshtml*</span><span class="sxs-lookup"><span data-stu-id="a1c88-125">Controller with views: *Views/Shared/_Layout.cshtml*</span></span>
 
   ![ソリューション エクスプローラーの Views フォルダー](layout/_static/mvc-web-project-views.png)
 
-<span data-ttu-id="49d1a-127">レイアウトでは、アプリのビューの最上位のテンプレートが定義されています。</span><span class="sxs-lookup"><span data-stu-id="49d1a-127">The layout defines a top level template for views in the app.</span></span> <span data-ttu-id="49d1a-128">アプリでは、レイアウトは必要ありません。</span><span class="sxs-lookup"><span data-stu-id="49d1a-128">Apps don't require a layout.</span></span> <span data-ttu-id="49d1a-129">アプリでは、それぞれ異なるレイアウトを指定するさまざまなビューを使用して、複数のレイアウトを定義できます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-129">Apps can define more than one layout, with different views specifying different layouts.</span></span>
+<span data-ttu-id="a1c88-127">レイアウトでは、アプリのビューの最上位のテンプレートが定義されています。</span><span class="sxs-lookup"><span data-stu-id="a1c88-127">The layout defines a top level template for views in the app.</span></span> <span data-ttu-id="a1c88-128">アプリでは、レイアウトは必要ありません。</span><span class="sxs-lookup"><span data-stu-id="a1c88-128">Apps don't require a layout.</span></span> <span data-ttu-id="a1c88-129">アプリでは、それぞれ異なるレイアウトを指定するさまざまなビューを使用して、複数のレイアウトを定義できます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-129">Apps can define more than one layout, with different views specifying different layouts.</span></span>
 
-<span data-ttu-id="49d1a-130">次のコードでは、コントローラーとビューを含むテンプレートで作成されたプロジェクトのレイアウト ファイルを示します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-130">The following code shows the layout file for a template created project with a controller and views:</span></span>
+<span data-ttu-id="a1c88-130">次のコードでは、コントローラーとビューを含むテンプレートで作成されたプロジェクトのレイアウト ファイルを示します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-130">The following code shows the layout file for a template created project with a controller and views:</span></span>
 
 [!code-cshtml[](~/common/samples/WebApplication1/Views/Shared/_Layout.cshtml?highlight=44,72)]
 
-## <a name="specifying-a-layout"></a><span data-ttu-id="49d1a-131">レイアウトの指定</span><span class="sxs-lookup"><span data-stu-id="49d1a-131">Specifying a Layout</span></span>
+## <a name="specifying-a-layout"></a><span data-ttu-id="a1c88-131">レイアウトの指定</span><span class="sxs-lookup"><span data-stu-id="a1c88-131">Specifying a Layout</span></span>
 
-<span data-ttu-id="49d1a-132">Razor ビューには `Layout` プロパティがあります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-132">Razor views have a `Layout` property.</span></span> <span data-ttu-id="49d1a-133">個々のビューは、このプロパティを設定することでレイアウトを指定します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-133">Individual views specify a layout by setting this property:</span></span>
+Razor<span data-ttu-id="a1c88-132">ビューには`Layout`プロパティがあります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-132"> views have a `Layout` property.</span></span> <span data-ttu-id="a1c88-133">個々のビューは、このプロパティを設定することでレイアウトを指定します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-133">Individual views specify a layout by setting this property:</span></span>
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-<span data-ttu-id="49d1a-134">指定されるレイアウトでは、完全なパス (例: */Pages/Shared/_Layout.cshtml*、 */Views/Shared/_Layout.cshtml*) または部分パス (例: `_Layout`) を使用できます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-134">The layout specified can use a full path (for example, */Pages/Shared/_Layout.cshtml* or */Views/Shared/_Layout.cshtml*) or a partial name (example: `_Layout`).</span></span> <span data-ttu-id="49d1a-135">部分的な名前を指定すると、Razor ビュー エンジンが標準の検出プロセスを使用して、レイアウト ファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-135">When a partial name is provided, the Razor view engine searches for the layout file using its standard discovery process.</span></span> <span data-ttu-id="49d1a-136">ハンドラー メソッド (またはコントローラー) が存在するフォルダーが最初に検索され、その後で *Shared* フォルダーが検索されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-136">The folder where the handler method (or controller) exists is searched first, followed by the *Shared* folder.</span></span> <span data-ttu-id="49d1a-137">この検出プロセスは、[部分ビュー](xref:mvc/views/partial#partial-view-discovery)の検出に使用されるのと同じプロセスです。</span><span class="sxs-lookup"><span data-stu-id="49d1a-137">This discovery process is identical to the process used to discover [partial views](xref:mvc/views/partial#partial-view-discovery).</span></span>
+<span data-ttu-id="a1c88-134">指定されるレイアウトでは、完全なパス (例: */Pages/Shared/_Layout.cshtml*、*/Views/Shared/_Layout.cshtml*) または部分パス (例: `_Layout`) を使用できます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-134">The layout specified can use a full path (for example, */Pages/Shared/_Layout.cshtml* or */Views/Shared/_Layout.cshtml*) or a partial name (example: `_Layout`).</span></span> <span data-ttu-id="a1c88-135">部分名を指定すると、ビュー Razorエンジンは標準の検出プロセスを使用してレイアウトファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-135">When a partial name is provided, the Razor view engine searches for the layout file using its standard discovery process.</span></span> <span data-ttu-id="a1c88-136">ハンドラー メソッド (またはコントローラー) が存在するフォルダーが最初に検索され、その後で *Shared* フォルダーが検索されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-136">The folder where the handler method (or controller) exists is searched first, followed by the *Shared* folder.</span></span> <span data-ttu-id="a1c88-137">この検出プロセスは、[部分ビュー](xref:mvc/views/partial#partial-view-discovery)の検出に使用されるのと同じプロセスです。</span><span class="sxs-lookup"><span data-stu-id="a1c88-137">This discovery process is identical to the process used to discover [partial views](xref:mvc/views/partial#partial-view-discovery).</span></span>
 
-<span data-ttu-id="49d1a-138">既定では、すべてのレイアウトで `RenderBody` を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-138">By default, every layout must call `RenderBody`.</span></span> <span data-ttu-id="49d1a-139">`RenderBody` への呼び出しが配置されると、ビューのコンテンツがレンダリングされます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-139">Wherever the call to `RenderBody` is placed, the contents of the view will be rendered.</span></span>
+<span data-ttu-id="a1c88-138">既定では、すべてのレイアウトで `RenderBody` を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-138">By default, every layout must call `RenderBody`.</span></span> <span data-ttu-id="a1c88-139">`RenderBody` への呼び出しが配置されると、ビューのコンテンツがレンダリングされます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-139">Wherever the call to `RenderBody` is placed, the contents of the view will be rendered.</span></span>
 
 <a name="layout-sections-label"></a>
 <!-- https://stackoverflow.com/questions/23327578 -->
-### <a name="sections"></a><span data-ttu-id="49d1a-140">セクション</span><span class="sxs-lookup"><span data-stu-id="49d1a-140">Sections</span></span>
+### <a name="sections"></a><span data-ttu-id="a1c88-140">セクション</span><span class="sxs-lookup"><span data-stu-id="a1c88-140">Sections</span></span>
 
-<span data-ttu-id="49d1a-141">レイアウトは、必要に応じて  *を呼び出すことで、1 つ以上の*セクション`RenderSection`を参照することができます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-141">A layout can optionally reference one or more *sections*, by calling `RenderSection`.</span></span> <span data-ttu-id="49d1a-142">セクションは、特定のページ要素の配置場所を整理する方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-142">Sections provide a way to organize where certain page elements should be placed.</span></span> <span data-ttu-id="49d1a-143">`RenderSection` の呼び出しごとに、そのセクションを必須またはオプションにするかどうかを指定できます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-143">Each call to `RenderSection` can specify whether that section is required or optional:</span></span>
+<span data-ttu-id="a1c88-141">レイアウトは、必要に応じて `RenderSection` を呼び出すことで、1 つ以上の*セクション*を参照することができます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-141">A layout can optionally reference one or more *sections*, by calling `RenderSection`.</span></span> <span data-ttu-id="a1c88-142">セクションは、特定のページ要素の配置場所を整理する方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-142">Sections provide a way to organize where certain page elements should be placed.</span></span> <span data-ttu-id="a1c88-143">`RenderSection` の呼び出しごとに、そのセクションを必須またはオプションにするかどうかを指定できます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-143">Each call to `RenderSection` can specify whether that section is required or optional:</span></span>
 
 ```html
 <script type="text/javascript" src="~/scripts/global.js"></script>
@@ -73,9 +79,9 @@ ms.locfileid: "78655046"
 @RenderSection("Scripts", required: false)
 ```
 
-<span data-ttu-id="49d1a-144">必須のセクションが見つからない場合、例外がスローされます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-144">If a required section isn't found, an exception is thrown.</span></span> <span data-ttu-id="49d1a-145">個々のビューは、`@section` Razor 構文を使用して、セクション内にレンダリングされるコンテンツを指定します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-145">Individual views specify the content to be rendered within a section using the `@section` Razor syntax.</span></span> <span data-ttu-id="49d1a-146">ページまたはビューでセクションを定義する場合は、レンダリングされる必要があります (そうしないと、エラーが発生します)。</span><span class="sxs-lookup"><span data-stu-id="49d1a-146">If a page or view defines a section, it must be rendered (or an error will occur).</span></span>
+<span data-ttu-id="a1c88-144">必須のセクションが見つからない場合、例外がスローされます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-144">If a required section isn't found, an exception is thrown.</span></span> <span data-ttu-id="a1c88-145">個々のビューでは、 `@section` Razor構文を使用して、セクション内に表示されるコンテンツを指定します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-145">Individual views specify the content to be rendered within a section using the `@section` Razor syntax.</span></span> <span data-ttu-id="a1c88-146">ページまたはビューでセクションを定義する場合は、レンダリングされる必要があります (そうしないと、エラーが発生します)。</span><span class="sxs-lookup"><span data-stu-id="a1c88-146">If a page or view defines a section, it must be rendered (or an error will occur).</span></span>
 
-<span data-ttu-id="49d1a-147">Razor Pages ビューでの `@section` 定義の例:</span><span class="sxs-lookup"><span data-stu-id="49d1a-147">An example `@section` definition in Razor Pages view:</span></span>
+<span data-ttu-id="a1c88-147">ページビュー `@section`の定義Razorの例を次に示します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-147">An example `@section` definition in Razor Pages view:</span></span>
 
 ```html
 @section Scripts {
@@ -83,9 +89,9 @@ ms.locfileid: "78655046"
 }
 ```
 
-<span data-ttu-id="49d1a-148">上記のコードでは、*scripts/main.js* がページまたはビューの `scripts` セクションに追加されています。</span><span class="sxs-lookup"><span data-stu-id="49d1a-148">In the preceding code, *scripts/main.js* is added to the `scripts` section on a page or view.</span></span> <span data-ttu-id="49d1a-149">同じアプリの他のページまたはビューではこのスクリプトは必要なく、スクリプト セクションは定義されていません。</span><span class="sxs-lookup"><span data-stu-id="49d1a-149">Other pages or views in the same app might not require this script and wouldn't define a scripts section.</span></span>
+<span data-ttu-id="a1c88-148">上記のコードでは、*scripts/main.js* がページまたはビューの `scripts` セクションに追加されています。</span><span class="sxs-lookup"><span data-stu-id="a1c88-148">In the preceding code, *scripts/main.js* is added to the `scripts` section on a page or view.</span></span> <span data-ttu-id="a1c88-149">同じアプリの他のページまたはビューではこのスクリプトは必要なく、スクリプト セクションは定義されていません。</span><span class="sxs-lookup"><span data-stu-id="a1c88-149">Other pages or views in the same app might not require this script and wouldn't define a scripts section.</span></span>
 
-<span data-ttu-id="49d1a-150">次のマークアップでは、[部分タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)を使用して *_ValidationScriptsPartial.cshtml* を表示しています。</span><span class="sxs-lookup"><span data-stu-id="49d1a-150">The following markup uses the [Partial Tag Helper](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) to render  *_ValidationScriptsPartial.cshtml*:</span></span>
+<span data-ttu-id="a1c88-150">次のマークアップでは、[部分タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)を使用して *_ValidationScriptsPartial.cshtml* を表示しています。</span><span class="sxs-lookup"><span data-stu-id="a1c88-150">The following markup uses the [Partial Tag Helper](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) to render  *_ValidationScriptsPartial.cshtml*:</span></span>
 
 ```html
 @section Scripts {
@@ -93,23 +99,23 @@ ms.locfileid: "78655046"
 }
 ```
 
-<span data-ttu-id="49d1a-151">上記のマークアップは、[スキャフォールディング ID](xref:security/authentication/scaffold-identity) によって生成されました。</span><span class="sxs-lookup"><span data-stu-id="49d1a-151">The preceding markup was generated by [scaffolding Identity](xref:security/authentication/scaffold-identity).</span></span>
+<span data-ttu-id="a1c88-151">前のマークアップは、[スキャフォールディングIdentity](xref:security/authentication/scaffold-identity)によって生成されました。</span><span class="sxs-lookup"><span data-stu-id="a1c88-151">The preceding markup was generated by [scaffolding Identity](xref:security/authentication/scaffold-identity).</span></span>
 
-<span data-ttu-id="49d1a-152">ページまたはビューで定義されたセクションは、そのイミディエイト レイアウト ページでのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-152">Sections defined in a page or view are available only in its immediate layout page.</span></span> <span data-ttu-id="49d1a-153">これらは、部分、ビュー コンポーネント、またはビュー システムの他の部分からは参照できません。</span><span class="sxs-lookup"><span data-stu-id="49d1a-153">They cannot be referenced from partials, view components, or other parts of the view system.</span></span>
+<span data-ttu-id="a1c88-152">ページまたはビューで定義されたセクションは、そのイミディエイト レイアウト ページでのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-152">Sections defined in a page or view are available only in its immediate layout page.</span></span> <span data-ttu-id="a1c88-153">これらは、部分、ビュー コンポーネント、またはビュー システムの他の部分からは参照できません。</span><span class="sxs-lookup"><span data-stu-id="a1c88-153">They cannot be referenced from partials, view components, or other parts of the view system.</span></span>
 
-### <a name="ignoring-sections"></a><span data-ttu-id="49d1a-154">セクションの無視</span><span class="sxs-lookup"><span data-stu-id="49d1a-154">Ignoring sections</span></span>
+### <a name="ignoring-sections"></a><span data-ttu-id="a1c88-154">セクションの無視</span><span class="sxs-lookup"><span data-stu-id="a1c88-154">Ignoring sections</span></span>
 
-<span data-ttu-id="49d1a-155">既定では、コンテンツ ページの本文とすべてのセクションがレイアウト ページですべてレンダリングされる必要があります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-155">By default, the body and all sections in a content page must all be rendered by the layout page.</span></span> <span data-ttu-id="49d1a-156">Razor ビュー エンジンは、本文と各セクションがレンダリングされているかどうかを追跡することによってこれを実行します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-156">The Razor view engine enforces this by tracking whether the body and each section have been rendered.</span></span>
+<span data-ttu-id="a1c88-155">既定では、コンテンツ ページの本文とすべてのセクションがレイアウト ページですべてレンダリングされる必要があります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-155">By default, the body and all sections in a content page must all be rendered by the layout page.</span></span> <span data-ttu-id="a1c88-156">ビュー Razorエンジンは、本文と各セクションがレンダリングされているかどうかを追跡することによってこれを適用します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-156">The Razor view engine enforces this by tracking whether the body and each section have been rendered.</span></span>
 
-<span data-ttu-id="49d1a-157">本文またはセクションを無視するようにビュー エンジンに指示するには、`IgnoreBody` メソッドと `IgnoreSection` メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-157">To instruct the view engine to ignore the body or sections, call the `IgnoreBody` and `IgnoreSection` methods.</span></span>
+<span data-ttu-id="a1c88-157">本文またはセクションを無視するようにビュー エンジンに指示するには、`IgnoreBody` メソッドと `IgnoreSection` メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-157">To instruct the view engine to ignore the body or sections, call the `IgnoreBody` and `IgnoreSection` methods.</span></span>
 
-<span data-ttu-id="49d1a-158">Razor ページ内の本文とすべてのセクションは、レンダリングされるか無視される必要があります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-158">The body and every section in a Razor page must be either rendered or ignored.</span></span>
+<span data-ttu-id="a1c88-158">Razorページ内の本文とすべてのセクションは、表示または無視する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-158">The body and every section in a Razor page must be either rendered or ignored.</span></span>
 
 <a name="viewimports"></a>
 
-## <a name="importing-shared-directives"></a><span data-ttu-id="49d1a-159">共有ディレクティブのインポート</span><span class="sxs-lookup"><span data-stu-id="49d1a-159">Importing Shared Directives</span></span>
+## <a name="importing-shared-directives"></a><span data-ttu-id="a1c88-159">共有ディレクティブのインポート</span><span class="sxs-lookup"><span data-stu-id="a1c88-159">Importing Shared Directives</span></span>
 
-<span data-ttu-id="49d1a-160">ビューおよびページでは、Razor ディレクティブを使用して名前空間をインポートし、[依存関係の挿入](dependency-injection.md)を使用できます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-160">Views and pages can use Razor directives to import namespaces and use [dependency injection](dependency-injection.md).</span></span> <span data-ttu-id="49d1a-161">多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-161">Directives shared by many views may be specified in a common *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="49d1a-162">`_ViewImports` ファイルは、次のディレクティブをサポートします。</span><span class="sxs-lookup"><span data-stu-id="49d1a-162">The `_ViewImports` file supports the following directives:</span></span>
+<span data-ttu-id="a1c88-160">ビューおよびページではRazor 、ディレクティブを使用して名前空間をインポートし、[依存関係の挿入](dependency-injection.md)を使用できます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-160">Views and pages can use Razor directives to import namespaces and use [dependency injection](dependency-injection.md).</span></span> <span data-ttu-id="a1c88-161">多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-161">Directives shared by many views may be specified in a common *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="a1c88-162">`_ViewImports` ファイルは、次のディレクティブをサポートします。</span><span class="sxs-lookup"><span data-stu-id="a1c88-162">The `_ViewImports` file supports the following directives:</span></span>
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -119,40 +125,40 @@ ms.locfileid: "78655046"
 * `@inherits`
 * `@inject`
 
-<span data-ttu-id="49d1a-163">このファイルは、関数やセクションの定義などの Razor 機能をサポートしていません。</span><span class="sxs-lookup"><span data-stu-id="49d1a-163">The file doesn't support other Razor features, such as functions and section definitions.</span></span>
+<span data-ttu-id="a1c88-163">ファイルは、関数やRazorセクション定義などの他の機能をサポートしていません。</span><span class="sxs-lookup"><span data-stu-id="a1c88-163">The file doesn't support other Razor features, such as functions and section definitions.</span></span>
 
-<span data-ttu-id="49d1a-164">`_ViewImports.cshtml` ファイルのサンプル:</span><span class="sxs-lookup"><span data-stu-id="49d1a-164">A sample `_ViewImports.cshtml` file:</span></span>
+<span data-ttu-id="a1c88-164">`_ViewImports.cshtml` ファイルのサンプル:</span><span class="sxs-lookup"><span data-stu-id="a1c88-164">A sample `_ViewImports.cshtml` file:</span></span>
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
-<span data-ttu-id="49d1a-165">ASP.NET Core MVC アプリの *_ViewImports.cshtml* ファイルは、通常、*Pages* (または *Views*) フォルダーに配置されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-165">The *_ViewImports.cshtml* file for an ASP.NET Core MVC app is typically placed in the *Pages* (or *Views*) folder.</span></span> <span data-ttu-id="49d1a-166">*_ViewImports.cshtml* ファイルは、任意のフォルダー内に配置できますが、その場合は、そのフォルダーとそのサブフォルダー内にあるパージまたはビューにのみ適用されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-166">A *_ViewImports.cshtml* file can be placed within any folder, in which case it will only be applied to pages or views within that folder and its subfolders.</span></span> <span data-ttu-id="49d1a-167">`_ViewImports` ファイルの処理はルート レベルで開始されてから、フォルダーごとに、ページまたはビュー自体の場所に至るまで行われます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-167">`_ViewImports` files are processed starting at the root level and then for each folder leading up to the location of the page or view itself.</span></span> <span data-ttu-id="49d1a-168">ルート レベルで指定された `_ViewImports` の設定は、フォルダー レベルでオーバーライドされる可能性があります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-168">`_ViewImports` settings specified at the root level may be overridden at the folder level.</span></span>
+<span data-ttu-id="a1c88-165">ASP.NET Core MVC アプリの *_ViewImports.cshtml* ファイルは、通常、*Pages* (または *Views*) フォルダーに配置されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-165">The *_ViewImports.cshtml* file for an ASP.NET Core MVC app is typically placed in the *Pages* (or *Views*) folder.</span></span> <span data-ttu-id="a1c88-166">*_ViewImports.cshtml* ファイルは、任意のフォルダー内に配置できますが、その場合は、そのフォルダーとそのサブフォルダー内にあるパージまたはビューにのみ適用されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-166">A *_ViewImports.cshtml* file can be placed within any folder, in which case it will only be applied to pages or views within that folder and its subfolders.</span></span> <span data-ttu-id="a1c88-167">`_ViewImports` ファイルの処理はルート レベルで開始されてから、フォルダーごとに、ページまたはビュー自体の場所に至るまで行われます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-167">`_ViewImports` files are processed starting at the root level and then for each folder leading up to the location of the page or view itself.</span></span> <span data-ttu-id="a1c88-168">ルート レベルで指定された `_ViewImports` の設定は、フォルダー レベルでオーバーライドされる可能性があります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-168">`_ViewImports` settings specified at the root level may be overridden at the folder level.</span></span>
 
-<span data-ttu-id="49d1a-169">たとえば、次のように想定します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-169">For example, suppose:</span></span>
+<span data-ttu-id="a1c88-169">たとえば、次のように想定します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-169">For example, suppose:</span></span>
 
-* <span data-ttu-id="49d1a-170">ルート レベルの *_ViewImports.cshtml* ファイルには、`@model MyModel1` と `@addTagHelper *, MyTagHelper1` が含まれます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-170">The  root level *_ViewImports.cshtml* file includes `@model MyModel1` and `@addTagHelper *, MyTagHelper1`.</span></span>
-* <span data-ttu-id="49d1a-171">サブフォルダーの *_ViewImports.cshtml* ファイルには、`@model MyModel2` と `@addTagHelper *, MyTagHelper2` が含まれます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-171">A subfolder  *_ViewImports.cshtml* file includes `@model MyModel2` and `@addTagHelper *, MyTagHelper2`.</span></span>
+* <span data-ttu-id="a1c88-170">ルート レベルの *_ViewImports.cshtml* ファイルには、`@model MyModel1` と `@addTagHelper *, MyTagHelper1` が含まれます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-170">The  root level *_ViewImports.cshtml* file includes `@model MyModel1` and `@addTagHelper *, MyTagHelper1`.</span></span>
+* <span data-ttu-id="a1c88-171">サブフォルダーの *_ViewImports.cshtml* ファイルには、`@model MyModel2` と `@addTagHelper *, MyTagHelper2` が含まれます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-171">A subfolder  *_ViewImports.cshtml* file includes `@model MyModel2` and `@addTagHelper *, MyTagHelper2`.</span></span>
 
-<span data-ttu-id="49d1a-172">サブフォルダー内のページおよびビューは、タグ ヘルパーと `MyModel2` モデルの両方にアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-172">Pages and views in the subfolder will have access to both Tag Helpers and the `MyModel2` model.</span></span>
+<span data-ttu-id="a1c88-172">サブフォルダー内のページおよびビューは、タグ ヘルパーと `MyModel2` モデルの両方にアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-172">Pages and views in the subfolder will have access to both Tag Helpers and the `MyModel2` model.</span></span>
 
-<span data-ttu-id="49d1a-173">複数の *_ViewImports.cshtml* ファイルがファイル階層内にある場合、ディレクティブの結合された動作は次のようになります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-173">If multiple *_ViewImports.cshtml* files are found in the file hierarchy, the combined behavior of the directives are:</span></span>
+<span data-ttu-id="a1c88-173">複数の *_ViewImports.cshtml* ファイルがファイル階層内にある場合、ディレクティブの結合された動作は次のようになります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-173">If multiple *_ViewImports.cshtml* files are found in the file hierarchy, the combined behavior of the directives are:</span></span>
 
-* <span data-ttu-id="49d1a-174">`@addTagHelper`、`@removeTagHelper`: 順番どおりにすべて実行</span><span class="sxs-lookup"><span data-stu-id="49d1a-174">`@addTagHelper`, `@removeTagHelper`: all run, in order</span></span>
-* <span data-ttu-id="49d1a-175">`@tagHelperPrefix`: ビューに最も近いものが、他のものをすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="49d1a-175">`@tagHelperPrefix`: the closest one to the view overrides any others</span></span>
-* <span data-ttu-id="49d1a-176">`@model`: ビューに最も近いものが、他のものをすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="49d1a-176">`@model`: the closest one to the view overrides any others</span></span>
-* <span data-ttu-id="49d1a-177">`@inherits`: ビューに最も近いものが、他のものをすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="49d1a-177">`@inherits`: the closest one to the view overrides any others</span></span>
-* <span data-ttu-id="49d1a-178">`@using`: すべてが含まれ、重複は無視される</span><span class="sxs-lookup"><span data-stu-id="49d1a-178">`@using`: all are included; duplicates are ignored</span></span>
-* <span data-ttu-id="49d1a-179">`@inject`: プロパティごとに、ビューに最も近いものが、同じプロパティ名を持つ他のものすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="49d1a-179">`@inject`: for each property, the closest one to the view overrides any others with the same property name</span></span>
+* <span data-ttu-id="a1c88-174">`@addTagHelper`、`@removeTagHelper`: 順番どおりにすべて実行</span><span class="sxs-lookup"><span data-stu-id="a1c88-174">`@addTagHelper`, `@removeTagHelper`: all run, in order</span></span>
+* <span data-ttu-id="a1c88-175">`@tagHelperPrefix`: ビューに最も近いものが、他のものをすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="a1c88-175">`@tagHelperPrefix`: the closest one to the view overrides any others</span></span>
+* <span data-ttu-id="a1c88-176">`@model`: ビューに最も近いものが、他のものをすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="a1c88-176">`@model`: the closest one to the view overrides any others</span></span>
+* <span data-ttu-id="a1c88-177">`@inherits`: ビューに最も近いものが、他のものをすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="a1c88-177">`@inherits`: the closest one to the view overrides any others</span></span>
+* <span data-ttu-id="a1c88-178">`@using`: すべてが含まれ、重複は無視される</span><span class="sxs-lookup"><span data-stu-id="a1c88-178">`@using`: all are included; duplicates are ignored</span></span>
+* <span data-ttu-id="a1c88-179">`@inject`: プロパティごとに、ビューに最も近いものが、同じプロパティ名を持つ他のものすべてをオーバーライドする</span><span class="sxs-lookup"><span data-stu-id="a1c88-179">`@inject`: for each property, the closest one to the view overrides any others with the same property name</span></span>
 
 <a name="viewstart"></a>
 
-## <a name="running-code-before-each-view"></a><span data-ttu-id="49d1a-180">各ビューの前にコードを実行する</span><span class="sxs-lookup"><span data-stu-id="49d1a-180">Running Code Before Each View</span></span>
+## <a name="running-code-before-each-view"></a><span data-ttu-id="a1c88-180">各ビューの前にコードを実行する</span><span class="sxs-lookup"><span data-stu-id="a1c88-180">Running Code Before Each View</span></span>
 
-<span data-ttu-id="49d1a-181">各ビューまたはページの前に実行する必要があるコードは、 *_ViewStart.cshtml* ファイルに配置する必要があります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-181">Code that needs to run before each view or page should be placed in the *_ViewStart.cshtml* file.</span></span> <span data-ttu-id="49d1a-182">慣例により、 *_ViewStart.cshtml* ファイルは *Pages* (または *Views*) フォルダーに配置されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-182">By convention, the *_ViewStart.cshtml* file is located in the *Pages* (or *Views*) folder.</span></span> <span data-ttu-id="49d1a-183">*_ViewStart.cshtml* に列記されているステートメントは、すべての (レイアウトでもなく、部分ビューでもない) 完全なビューより前に実行されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-183">The statements listed in *_ViewStart.cshtml* are run before every full view (not layouts, and not partial views).</span></span> <span data-ttu-id="49d1a-184">[ViewImports.cshtml](xref:mvc/views/layout#viewimports) と同様に、 *_ViewStart.cshtml* は階層構造です。</span><span class="sxs-lookup"><span data-stu-id="49d1a-184">Like [ViewImports.cshtml](xref:mvc/views/layout#viewimports), *_ViewStart.cshtml* is hierarchical.</span></span> <span data-ttu-id="49d1a-185">*_ViewStart.cshtml* ファイルがビューまたはページ フォルダーで定義されている場合、*Pages* (または *Views*) フォルダーのルートで定義されているファイル (ある場合) の後に実行されます。</span><span class="sxs-lookup"><span data-stu-id="49d1a-185">If a *_ViewStart.cshtml* file is defined in the view or pages folder, it will be run after the one defined in the root of the *Pages* (or *Views*) folder (if any).</span></span>
+<span data-ttu-id="a1c88-181">各ビューまたはページの前に実行する必要があるコードは、*_ViewStart.cshtml* ファイルに配置する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-181">Code that needs to run before each view or page should be placed in the *_ViewStart.cshtml* file.</span></span> <span data-ttu-id="a1c88-182">慣例により、*_ViewStart.cshtml* ファイルは *Pages* (または *Views*) フォルダーに配置されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-182">By convention, the *_ViewStart.cshtml* file is located in the *Pages* (or *Views*) folder.</span></span> <span data-ttu-id="a1c88-183">*_ViewStart.cshtml* に列記されているステートメントは、すべての (レイアウトでもなく、部分ビューでもない) 完全なビューより前に実行されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-183">The statements listed in *_ViewStart.cshtml* are run before every full view (not layouts, and not partial views).</span></span> <span data-ttu-id="a1c88-184">[ViewImports.cshtml](xref:mvc/views/layout#viewimports) と同様に、*_ViewStart.cshtml* は階層構造です。</span><span class="sxs-lookup"><span data-stu-id="a1c88-184">Like [ViewImports.cshtml](xref:mvc/views/layout#viewimports), *_ViewStart.cshtml* is hierarchical.</span></span> <span data-ttu-id="a1c88-185">*_ViewStart.cshtml* ファイルがビューまたはページ フォルダーで定義されている場合、*Pages* (または *Views*) フォルダーのルートで定義されているファイル (ある場合) の後に実行されます。</span><span class="sxs-lookup"><span data-stu-id="a1c88-185">If a *_ViewStart.cshtml* file is defined in the view or pages folder, it will be run after the one defined in the root of the *Pages* (or *Views*) folder (if any).</span></span>
 
-<span data-ttu-id="49d1a-186">*_ViewStart.cshtml* ファイルのサンプル:</span><span class="sxs-lookup"><span data-stu-id="49d1a-186">A sample *_ViewStart.cshtml* file:</span></span>
+<span data-ttu-id="a1c88-186">*_ViewStart.cshtml* ファイルのサンプル:</span><span class="sxs-lookup"><span data-stu-id="a1c88-186">A sample *_ViewStart.cshtml* file:</span></span>
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml)]
 
-<span data-ttu-id="49d1a-187">上記のファイルは、すべてのビューで *_Layout.cshtml* レイアウトを使用することを指定します。</span><span class="sxs-lookup"><span data-stu-id="49d1a-187">The file above specifies that all views will use the *_Layout.cshtml* layout.</span></span>
+<span data-ttu-id="a1c88-187">上記のファイルは、すべてのビューで *_Layout.cshtml* レイアウトを使用することを指定します。</span><span class="sxs-lookup"><span data-stu-id="a1c88-187">The file above specifies that all views will use the *_Layout.cshtml* layout.</span></span>
 
-<span data-ttu-id="49d1a-188">通常、 *_ViewStart.cshtml* および *_ViewImports.cshtml* は、 **/Pages/Shared** (または */Views/Shared*) フォルダーには配置*されません*。</span><span class="sxs-lookup"><span data-stu-id="49d1a-188">*_ViewStart.cshtml* and *_ViewImports.cshtml* are **not** typically placed in the */Pages/Shared* (or */Views/Shared*) folder.</span></span> <span data-ttu-id="49d1a-189">これらのファイルのアプリ レベルのバージョンは、 */Pages* (または */Views*) フォルダーに直接配置する必要があります。</span><span class="sxs-lookup"><span data-stu-id="49d1a-189">The app-level versions of these files should be placed directly in the */Pages* (or */Views*) folder.</span></span>
+<span data-ttu-id="a1c88-188">通常、*_ViewStart.cshtml* および *_ViewImports.cshtml* は、*/Pages/Shared* (または */Views/Shared*) フォルダーには配置**されません**。</span><span class="sxs-lookup"><span data-stu-id="a1c88-188">*_ViewStart.cshtml* and *_ViewImports.cshtml* are **not** typically placed in the */Pages/Shared* (or */Views/Shared*) folder.</span></span> <span data-ttu-id="a1c88-189">これらのファイルのアプリ レベルのバージョンは、*/Pages* (または */Views*) フォルダーに直接配置する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a1c88-189">The app-level versions of these files should be placed directly in the */Pages* (or */Views*) folder.</span></span>
