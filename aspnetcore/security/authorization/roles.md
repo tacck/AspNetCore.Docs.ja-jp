@@ -4,25 +4,31 @@ author: rick-anderson
 description: ロールを承認属性に渡すことによって、ASP.NET Core コントローラーとアクションアクセスを制限する方法について説明します。
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 28aa3df6aa661d0b762df78fe611cd827af43f75
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 01d4239377b128f711a110a821e1afea58ca14a7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651638"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776540"
 ---
-# <a name="role-based-authorization-in-aspnet-core"></a><span data-ttu-id="3d23e-103">ASP.NET Core でのロールベースの承認</span><span class="sxs-lookup"><span data-stu-id="3d23e-103">Role-based authorization in ASP.NET Core</span></span>
+# <a name="role-based-authorization-in-aspnet-core"></a><span data-ttu-id="fb7fa-103">ASP.NET Core でのロールベースの承認</span><span class="sxs-lookup"><span data-stu-id="fb7fa-103">Role-based authorization in ASP.NET Core</span></span>
 
 <a name="security-authorization-role-based"></a>
 
-<span data-ttu-id="3d23e-104">Id が作成されると、1つまたは複数のロールに属することができます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-104">When an identity is created it may belong to one or more roles.</span></span> <span data-ttu-id="3d23e-105">たとえば、Tracy は管理者ロールとユーザーロールに属している場合がありますが、Scott はユーザーロールのみに属している可能性があります。</span><span class="sxs-lookup"><span data-stu-id="3d23e-105">For example, Tracy may belong to the Administrator and User roles whilst Scott may only belong to the User role.</span></span> <span data-ttu-id="3d23e-106">これらのロールを作成および管理する方法は、承認プロセスのバッキングストアによって異なります。</span><span class="sxs-lookup"><span data-stu-id="3d23e-106">How these roles are created and managed depends on the backing store of the authorization process.</span></span> <span data-ttu-id="3d23e-107">ロールは、 [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal)クラスの[IsInRole](/dotnet/api/system.security.principal.genericprincipal.isinrole)メソッドを使用して開発者に公開されます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-107">Roles are exposed to the developer through the [IsInRole](/dotnet/api/system.security.principal.genericprincipal.isinrole) method on the [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal) class.</span></span>
+<span data-ttu-id="fb7fa-104">Id が作成されると、1つまたは複数のロールに属することができます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-104">When an identity is created it may belong to one or more roles.</span></span> <span data-ttu-id="fb7fa-105">たとえば、Tracy は管理者ロールとユーザーロールに属している場合がありますが、Scott はユーザーロールのみに属している可能性があります。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-105">For example, Tracy may belong to the Administrator and User roles whilst Scott may only belong to the User role.</span></span> <span data-ttu-id="fb7fa-106">これらのロールを作成および管理する方法は、承認プロセスのバッキングストアによって異なります。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-106">How these roles are created and managed depends on the backing store of the authorization process.</span></span> <span data-ttu-id="fb7fa-107">ロールは、 [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal)クラスの[IsInRole](/dotnet/api/system.security.principal.genericprincipal.isinrole)メソッドを使用して開発者に公開されます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-107">Roles are exposed to the developer through the [IsInRole](/dotnet/api/system.security.principal.genericprincipal.isinrole) method on the [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal) class.</span></span>
 
-## <a name="adding-role-checks"></a><span data-ttu-id="3d23e-108">ロールチェックの追加</span><span class="sxs-lookup"><span data-stu-id="3d23e-108">Adding role checks</span></span>
+## <a name="adding-role-checks"></a><span data-ttu-id="fb7fa-108">ロールチェックの追加</span><span class="sxs-lookup"><span data-stu-id="fb7fa-108">Adding role checks</span></span>
 
-<span data-ttu-id="3d23e-109">ロールベースの承認チェックは、開発者がコントローラーまたはコントローラー内のアクションに対してコード内に埋め込む&mdash;宣言型です。要求されたリソースにアクセスするには、現在のユーザーがメンバーである必要があるロールを指定します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-109">Role-based authorization checks are declarative&mdash;the developer embeds them within their code, against a controller or an action within a controller, specifying roles which the current user must be a member of to access the requested resource.</span></span>
+<span data-ttu-id="fb7fa-109">ロールベースの承認チェックは宣言&mdash;型です。開発者は、コントローラーまたはコントローラー内のアクションに対してコード内にそれらを埋め込み、要求されたリソースにアクセスするために、現在のユーザーがメンバーである必要があるロールを指定します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-109">Role-based authorization checks are declarative&mdash;the developer embeds them within their code, against a controller or an action within a controller, specifying roles which the current user must be a member of to access the requested resource.</span></span>
 
-<span data-ttu-id="3d23e-110">たとえば、次のコードは、`Administrator` ロールのメンバーであるユーザーに、`AdministrationController` のアクションへのアクセスを制限します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-110">For example, the following code limits access to any actions on the `AdministrationController` to users who are a member of the `Administrator` role:</span></span>
+<span data-ttu-id="fb7fa-110">たとえば、次のコードは、のアクションへのアクセスを`AdministrationController` 、 `Administrator`ロールのメンバーであるユーザーに制限します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-110">For example, the following code limits access to any actions on the `AdministrationController` to users who are a member of the `Administrator` role:</span></span>
 
 ```csharp
 [Authorize(Roles = "Administrator")]
@@ -31,7 +37,7 @@ public class AdministrationController : Controller
 }
 ```
 
-<span data-ttu-id="3d23e-111">複数のロールは、コンマ区切りの一覧として指定できます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-111">You can specify multiple roles as a comma separated list:</span></span>
+<span data-ttu-id="fb7fa-111">複数のロールは、コンマ区切りの一覧として指定できます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-111">You can specify multiple roles as a comma separated list:</span></span>
 
 ```csharp
 [Authorize(Roles = "HRManager,Finance")]
@@ -40,9 +46,9 @@ public class SalaryController : Controller
 }
 ```
 
-<span data-ttu-id="3d23e-112">このコントローラーにアクセスできるのは、`HRManager` ロールまたは `Finance` ロールのメンバーであるユーザーだけです。</span><span class="sxs-lookup"><span data-stu-id="3d23e-112">This controller would be only accessible by users who are members of the `HRManager` role or the `Finance` role.</span></span>
+<span data-ttu-id="fb7fa-112">このコントローラーにアクセスできるのは、 `HRManager`ロールまたは`Finance`ロールのメンバーであるユーザーだけです。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-112">This controller would be only accessible by users who are members of the `HRManager` role or the `Finance` role.</span></span>
 
-<span data-ttu-id="3d23e-113">複数の属性を適用する場合、アクセスするユーザーは、指定されたすべてのロールのメンバーである必要があります。次の例では、ユーザーが `PowerUser` ロールと `ControlPanelUser` ロールの両方のメンバーである必要があります。</span><span class="sxs-lookup"><span data-stu-id="3d23e-113">If you apply multiple attributes then an accessing user must be a member of all the roles specified; the following sample requires that a user must be a member of both the `PowerUser` and `ControlPanelUser` role.</span></span>
+<span data-ttu-id="fb7fa-113">複数の属性を適用する場合、アクセスするユーザーは、指定されたすべてのロールのメンバーである必要があります。次の例では、ユーザーが`PowerUser`と`ControlPanelUser`の両方のロールのメンバーである必要があります。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-113">If you apply multiple attributes then an accessing user must be a member of all the roles specified; the following sample requires that a user must be a member of both the `PowerUser` and `ControlPanelUser` role.</span></span>
 
 ```csharp
 [Authorize(Roles = "PowerUser")]
@@ -52,7 +58,7 @@ public class ControlPanelController : Controller
 }
 ```
 
-<span data-ttu-id="3d23e-114">アクションレベルで追加のロール承認属性を適用することで、さらにアクセスを制限できます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-114">You can further limit access by applying additional role authorization attributes at the action level:</span></span>
+<span data-ttu-id="fb7fa-114">アクションレベルで追加のロール承認属性を適用することで、さらにアクセスを制限できます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-114">You can further limit access by applying additional role authorization attributes at the action level:</span></span>
 
 ```csharp
 [Authorize(Roles = "Administrator, PowerUser")]
@@ -69,9 +75,9 @@ public class ControlPanelController : Controller
 }
 ```
 
-<span data-ttu-id="3d23e-115">前のコードスニペットでは、`Administrator` ロールのメンバー、または `PowerUser` ロールはコントローラーと `SetTime` アクションにアクセスできますが、`ShutDown` アクションにアクセスできるのは `Administrator` ロールのメンバーだけです。</span><span class="sxs-lookup"><span data-stu-id="3d23e-115">In the previous code snippet members of the `Administrator` role or the `PowerUser` role can access the controller and the `SetTime` action, but only members of the `Administrator` role can access the `ShutDown` action.</span></span>
+<span data-ttu-id="fb7fa-115">前のコードスニペットでは、 `Administrator`ロールのメンバー、 `PowerUser`またはロールはコントローラーと`SetTime`アクションにアクセスできますが、ロール`Administrator`のメンバーだけが`ShutDown`アクションにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-115">In the previous code snippet members of the `Administrator` role or the `PowerUser` role can access the controller and the `SetTime` action, but only members of the `Administrator` role can access the `ShutDown` action.</span></span>
 
-<span data-ttu-id="3d23e-116">コントローラーをロックダウンすることもできますが、個々のアクションへの認証されていない匿名アクセスが許可されます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-116">You can also lock down a controller but allow anonymous, unauthenticated access to individual actions.</span></span>
+<span data-ttu-id="fb7fa-116">コントローラーをロックダウンすることもできますが、個々のアクションへの認証されていない匿名アクセスが許可されます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-116">You can also lock down a controller but allow anonymous, unauthenticated access to individual actions.</span></span>
 
 ```csharp
 [Authorize]
@@ -90,10 +96,10 @@ public class ControlPanelController : Controller
 
 ::: moniker range=">= aspnetcore-2.0"
 
-<span data-ttu-id="3d23e-117">Razor Pages の場合、`AuthorizeAttribute` は次のいずれかの方法で適用できます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-117">For Razor Pages, the `AuthorizeAttribute` can be applied by either:</span></span>
+<span data-ttu-id="fb7fa-117">ページRazorの場合、 `AuthorizeAttribute`は次のいずれかの方法で適用できます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-117">For Razor Pages, the `AuthorizeAttribute` can be applied by either:</span></span>
 
-* <span data-ttu-id="3d23e-118">[規則](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)の使用、または</span><span class="sxs-lookup"><span data-stu-id="3d23e-118">Using a [convention](xref:razor-pages/razor-pages-conventions#page-model-action-conventions), or</span></span>
-* <span data-ttu-id="3d23e-119">`PageModel` インスタンスに `AuthorizeAttribute` を適用します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-119">Applying the `AuthorizeAttribute` to the `PageModel` instance:</span></span>
+* <span data-ttu-id="fb7fa-118">[規則](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)の使用、または</span><span class="sxs-lookup"><span data-stu-id="fb7fa-118">Using a [convention](xref:razor-pages/razor-pages-conventions#page-model-action-conventions), or</span></span>
+* <span data-ttu-id="fb7fa-119">を`PageModel`インスタンス`AuthorizeAttribute`に適用します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-119">Applying the `AuthorizeAttribute` to the `PageModel` instance:</span></span>
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -106,14 +112,14 @@ public class UpdateModel : PageModel
 ```
 
 > [!IMPORTANT]
-> <span data-ttu-id="3d23e-120">`AuthorizeAttribute`を含むフィルター属性は、PageModel にのみ適用でき、特定のページハンドラーメソッドに適用することはできません。</span><span class="sxs-lookup"><span data-stu-id="3d23e-120">Filter attributes, including `AuthorizeAttribute`, can only be applied to PageModel and cannot be applied to specific page handler methods.</span></span>
+> <span data-ttu-id="fb7fa-120">フィルター属性 (を`AuthorizeAttribute`含む) は、PageModel にのみ適用でき、特定のページハンドラーメソッドには適用できません。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-120">Filter attributes, including `AuthorizeAttribute`, can only be applied to PageModel and cannot be applied to specific page handler methods.</span></span>
 ::: moniker-end
 
 <a name="security-authorization-role-policy"></a>
 
-## <a name="policy-based-role-checks"></a><span data-ttu-id="3d23e-121">ポリシーベースのロールチェック</span><span class="sxs-lookup"><span data-stu-id="3d23e-121">Policy based role checks</span></span>
+## <a name="policy-based-role-checks"></a><span data-ttu-id="fb7fa-121">ポリシーベースのロールチェック</span><span class="sxs-lookup"><span data-stu-id="fb7fa-121">Policy based role checks</span></span>
 
-<span data-ttu-id="3d23e-122">ロール要件は、新しいポリシー構文を使用して表すこともできます。ここでは、開発者が承認サービス構成の一部としてスタートアップ時にポリシーを登録します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-122">Role requirements can also be expressed using the new Policy syntax, where a developer registers a policy at startup as part of the Authorization service configuration.</span></span> <span data-ttu-id="3d23e-123">これは通常、 *Startup.cs*ファイルの `ConfigureServices()` で発生します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-123">This normally occurs in `ConfigureServices()` in your *Startup.cs* file.</span></span>
+<span data-ttu-id="fb7fa-122">ロール要件は、新しいポリシー構文を使用して表すこともできます。ここでは、開発者が承認サービス構成の一部としてスタートアップ時にポリシーを登録します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-122">Role requirements can also be expressed using the new Policy syntax, where a developer registers a policy at startup as part of the Authorization service configuration.</span></span> <span data-ttu-id="fb7fa-123">これは通常、 `ConfigureServices()` *Startup.cs*ファイル内で発生します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-123">This normally occurs in `ConfigureServices()` in your *Startup.cs* file.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 ```csharp
@@ -146,7 +152,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 ::: moniker-end
 
-<span data-ttu-id="3d23e-124">ポリシーは、`AuthorizeAttribute` 属性の `Policy` プロパティを使用して適用されます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-124">Policies are applied using the `Policy` property on the `AuthorizeAttribute` attribute:</span></span>
+<span data-ttu-id="fb7fa-124">ポリシーは、 `AuthorizeAttribute`属性の`Policy`プロパティを使用して適用されます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-124">Policies are applied using the `Policy` property on the `AuthorizeAttribute` attribute:</span></span>
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -156,18 +162,18 @@ public IActionResult Shutdown()
 }
 ```
 
-<span data-ttu-id="3d23e-125">要件に複数の許可されたロールを指定する場合は、`RequireRole` メソッドのパラメーターとして指定できます。</span><span class="sxs-lookup"><span data-stu-id="3d23e-125">If you want to specify multiple allowed roles in a requirement then you can specify them as parameters to the `RequireRole` method:</span></span>
+<span data-ttu-id="fb7fa-125">要件に複数の許可されたロールを指定する場合は、メソッドの`RequireRole`パラメーターとして指定できます。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-125">If you want to specify multiple allowed roles in a requirement then you can specify them as parameters to the `RequireRole` method:</span></span>
 
 ```csharp
 options.AddPolicy("ElevatedRights", policy =>
                   policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
 ```
 
-<span data-ttu-id="3d23e-126">この例では、`Administrator`、`PowerUser` または `BackupAdministrator` ロールに属しているユーザーを承認します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-126">This example authorizes users who belong to the `Administrator`, `PowerUser` or `BackupAdministrator` roles.</span></span>
+<span data-ttu-id="fb7fa-126">この例では、、、 `Administrator` `PowerUser`または`BackupAdministrator`ロールに属しているユーザーを承認します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-126">This example authorizes users who belong to the `Administrator`, `PowerUser` or `BackupAdministrator` roles.</span></span>
 
-### <a name="add-role-services-to-identity"></a><span data-ttu-id="3d23e-127">役割サービスの Id を追加します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-127">Add Role services to Identity</span></span>
+### <a name="add-role-services-to-identity"></a><span data-ttu-id="fb7fa-127">役割サービスの追加先Identity</span><span class="sxs-lookup"><span data-stu-id="fb7fa-127">Add Role services to Identity</span></span>
 
-<span data-ttu-id="3d23e-128">役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1)を追加します。</span><span class="sxs-lookup"><span data-stu-id="3d23e-128">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) to add Role services:</span></span>
+<span data-ttu-id="fb7fa-128">役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1)を追加します。</span><span class="sxs-lookup"><span data-stu-id="fb7fa-128">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) to add Role services:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](roles/samples/3_0/Startup.cs?name=snippet&highlight=7)]
