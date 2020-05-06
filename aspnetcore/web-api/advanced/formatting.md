@@ -5,13 +5,19 @@ description: ASP.NET Core Web API で応答データを書式設定する方法�
 ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 392e4905126ffb6801cc55055f1d511f5fa99dd1
-ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
+ms.openlocfilehash: 22787b20879c3739ee8a8d74c7a39e7cf8f4d5b0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81642708"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774237"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -206,11 +212,11 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 ### <a name="specify-a-format"></a>形式を指定する
 
-応答形式を制限するには、フィルターを[`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)適用します。 ほとんどの[フィルタ](xref:mvc/controllers/filters)と同様`[Produces]`に、アクション、コントローラ、またはグローバルスコープで適用できます。
+応答形式を制限するには、 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)フィルターを適用します。 ほとんどの[フィルター](xref:mvc/controllers/filters)と`[Produces]`同様に、アクション、コントローラー、またはグローバルスコープで適用できます。
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
-上記の[`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)フィルタ:
+上記[`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)のフィルター:
 
 * コントローラー内のすべてのアクションが、JSON で書式設定された応答を返すように強制します。
 * 他のフォーマッタが構成されていて、クライアントが別の形式を指定した場合でも、JSON が返されます。
@@ -246,7 +252,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 属性[`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)は、 形式値の存在を`RouteData`チェックし、応答が作成されるときに応答形式を適切なフォーマッタにマップします。
+前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 属性[`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)は、の`RouteData` format 値が存在するかどうかをチェックし、応答が作成されるときに応答形式を適切なフォーマッタにマップします。
 
 |           ルート        |             フォーマッタ              |
 |------------------------|------------------------------------|

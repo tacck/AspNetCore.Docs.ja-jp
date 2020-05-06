@@ -1,36 +1,42 @@
 ---
-title: ASP.NET Core プロジェクト内のスキャフォールディング Id
+title: ASP.NET Core Identityプロジェクトでのスキャフォールディング
 author: rick-anderson
-description: ASP.NET Core プロジェクトで Id をスキャフォールディングする方法について説明します。
+description: ASP.NET Core のプロジェクトでIdentityスキャフォールディングする方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: ac95035b114274ddaa6ccb0b5b6e3da98885e39e
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: 6f1ff69863e14c73e90496ea61188387f5267b19
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604728"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768391"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core プロジェクト内のスキャフォールディング Id
+# <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core Identityプロジェクトでのスキャフォールディング
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core は、 [ASP.NET Core id](xref:security/authentication/identity)を[Razor クラスライブラリ](xref:razor-pages/ui-class)として提供します。 Id を含むアプリケーションでは、scaffolder を適用して、Id Razor クラスライブラリ (RCL) に含まれているソースコードを選択的に追加することができます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、Identity RCL の同じコードよりも優先されます。 UI を完全に制御し、既定の RCL を使用しないようにするには、「[完全な ID UI ソースの作成](#full)」セクションを参照してください。
+ASP.NET Core は、 [ Razorクラスライブラリ](xref:razor-pages/ui-class)として[ASP.NET Core Identity ](xref:security/authentication/identity)を提供します。 を含むIdentityアプリケーションでは、scaffolder を適用して、 Identity Razorクラスライブラリ (rcl) に含まれているソースコードを選択的に追加できます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、 Identity rcl の同じコードよりも優先されます。 UI を完全に制御し、既定の RCL を使用しないようにするには、「[完全な ID UI ソースの作成](#full)」セクションを参照してください。
 
-認証を含ま**ない**アプリケーションでは、scaffolder を適用して Rcl id パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
+認証を含ま**ない**アプリケーションでは、scaffolder を適用して rcl Identityパッケージを追加できます。 生成するコードを選択Identityすることもできます。
 
-Scaffolder は、必要なコードの大部分を生成しますが、プロセスを完了するにはプロジェクトを更新する必要があります。 このドキュメントでは、Id スキャフォールディングの更新を完了するために必要な手順について説明します。
+Scaffolder は、必要なコードの大部分を生成しますが、プロセスを完了するにはプロジェクトを更新する必要があります。 このドキュメントでは、 Identityスキャフォールディングの更新を完了するために必要な手順について説明します。
 
-ファイルの違いを示すソース管理システムを使用して、変更を元に戻すことをお勧めします。 Id scaffolder を実行した後に変更を確認します。
+ファイルの違いを示すソース管理システムを使用して、変更を元に戻すことをお勧めします。 Scaffolder をIdentity実行した後に変更を確認します。
 
-サービスは、 [2 要素認証](xref:security/authentication/identity-enable-qrcodes)、アカウントの[確認とパスワードの回復](xref:security/authentication/accconfirm)、および id を持つその他のセキュリティ機能を使用する場合に必要です。 サービスまたはサービススタブは、スキャフォールディング Id では生成されません。 これらの機能を有効にするサービスは、手動で追加する必要があります。 たとえば、「[電子メールの確認を要求する](xref:security/authentication/accconfirm#require-email-confirmation)」を参照してください。
+サービスは、 [2 要素認証](xref:security/authentication/identity-enable-qrcodes)、アカウントの[確認とパスワードの回復](xref:security/authentication/accconfirm)、およびの他のセキュリティIdentity機能を使用する場合に必要です。 サービスまたはサービススタブは、スキャフォールディングIdentity時に生成されません。 これらの機能を有効にするサービスは、手動で追加する必要があります。 たとえば、「[電子メールの確認を要求する](xref:security/authentication/accconfirm#require-email-confirmation)」を参照してください。
 
-新しいデータコンテキストで Id をスキャフォールディングし、既存の個別のアカウントを持つプロジェクトにする場合:
+新しいデータIdentityコンテキストを使用して、既存の個別のアカウントを持つプロジェクトにスキャフォールディングする場合:
 
 * で`Startup.ConfigureServices`、の呼び出しを削除します。
   * `AddDbContext`
@@ -40,7 +46,7 @@ Scaffolder は、必要なコードの大部分を生成しますが、プロセ
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
 
-上記のコードは、*区分/id/IdentityHostingStartup*で重複しているコードをコメントアウトします。
+上記のコードは、*区分/Identity/IdentityHostingStartup.cs*で重複するコードをコメントアウトします。
 
 通常、個別のアカウントで作成されたアプリは、新しいデータコンテキストを作成し***ない***ようにする必要があります。
 
@@ -56,7 +62,7 @@ Scaffolder は、必要なコードの大部分を生成しますが、プロセ
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>既存の承認なしでスキャフォールディング id を Razor プロジェクトに
+## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>既存のRazor承認なしで id をプロジェクトにスキャフォールディング
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -85,7 +91,7 @@ before dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Id は、 *Areas/identity/IdentityHostingStartup*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+Identityは、 *Areas/Identity/IdentityHostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 <a name="efm"></a>
 
@@ -109,7 +115,7 @@ Id は、 *Areas/identity/IdentityHostingStartup*で構成されます。 詳細
 
 [!code-html[Main](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>承認を使用して id を Razor プロジェクトにスキャフォールディング
+## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>承認を使用しRazorて id をプロジェクトにスキャフォールディング
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -123,7 +129,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-一部の Id オプションは、 *Areas/Identity/IdentityHostingStartup*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+一部Identityのオプションは、 *Areas/Identity/IdentityHostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>既存の承認なしでスキャフォールディング identity を MVC プロジェクトに
 
@@ -149,7 +155,7 @@ dotnet ef database update
 
 * *Pages/shared/_LoginPartial cshtml*ファイルを*Views/shared/_LoginPartial*に移動します。
 
-Id は、 *Areas/identity/IdentityHostingStartup*で構成されます。 詳細については、「IHostingStartup」を参照してください。
+Identityは、 *Areas/Identity/IdentityHostingStartup.cs*で構成されます。 詳細については、「IHostingStartup」を参照してください。
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -175,13 +181,13 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 ## <a name="create-full-identity-ui-source"></a>完全な id UI ソースの作成
 
-Id UI の完全な制御を維持するには、Identity scaffolder を実行し、[**すべてのファイルを上書き**する] を選択します。
+Identity UI の完全な制御を維持するにはIdentity 、scaffolder を実行し、[すべてのファイルを**上書き**する] を選択します。
 
-次の強調表示されたコードは、既定の Id UI を ASP.NET Core 2.1 web アプリの Id に置き換える変更を示しています。 これは、Id UI を完全に制御するために必要になる場合があります。
+次の強調表示されたコードは、ASP.NET Core Identity 2.1 web Identityアプリで既定の UI をに置き換える変更を示しています。 この操作を行うと、 Identity UI を完全に制御できます。
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet1&highlight=13-14,17-999)]
 
-既定の Id は、次のコードで置き換えられます。
+既定値Identityは、次のコードで置き換えられます。
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet2)]
 
@@ -207,21 +213,21 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ユーザー登録を無効にするには:
 
-* スキャフォールディング Id。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 次に例を示します。
+* スキャフォールディングIdentity。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 次に例を示します。
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
   ```
 
-* ユーザーがこのエンドポイントから登録できないように、*区分/id/ページ/アカウント/登録*を更新します。
+* ユーザーがこのエンドポイントから登録できないように、*区分/Identity/Pages/Account/Register.cshtml.cs*を更新します。
 
   [!code-csharp[](scaffold-identity/sample/Register.cshtml.cs?name=snippet)]
 
-* 前の変更との一貫性を保つために、*区分/id/ページ/アカウント/登録*を更新します。
+* 次の変更との整合性を保つために、*区分/////またIdentity* はを更新します。
 
   [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
 
-* *区分/id/ページ/アカウント/ログイン. cshtml*から登録リンクをコメントアウトするか削除します。
+* *区分/////////Identity////* から登録リンクをコメントアウトまたは削除します。
 
 ```cshtml
 @*
@@ -231,7 +237,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 *@
 ```
 
-* [*区分/id/ページ/アカウント/RegisterConfirmation 確認*] ページを更新します。
+* [*区分/ページIdentity/アカウント/* 登録の確認] ページを更新します。
 
   * コードとリンクを cshtml ファイルから削除します。
   * から確認コードを削除し`PageModel`ます。
@@ -258,7 +264,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 * ユーザーの一覧がメモリに読み込まれます。
 * ユーザーごとに一意の強力なパスワードが生成されます。
-* ユーザーが Id データベースに追加されます。
+* ユーザーがIdentityデータベースに追加されます。
 * ユーザーに通知され、パスワードを変更するように指示されます。
 
 [!code-csharp[](scaffold-identity/consoleAddUser/Program.cs?name=snippet)]
@@ -269,9 +275,9 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 同様の方法で、運用環境のシナリオにも対応できます。
 
-## <a name="prevent-publish-of-static-identity-assets"></a>静的 Id 資産の発行を禁止する
+## <a name="prevent-publish-of-static-identity-assets"></a>静的Identityアセットの発行を禁止する
 
-静的な ID 資産が Web ルートに公開されないようにするには、<xref:security/authentication/identity#prevent-publish-of-static-identity-assets> を参照してください。
+静的Identityなアセットが web ルートに発行され<xref:security/authentication/identity#prevent-publish-of-static-identity-assets>ないようにするには、「」を参照してください。
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -281,18 +287,18 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 2.1 以降では、 [ASP.NET Core id](xref:security/authentication/identity)を[Razor クラスライブラリ](xref:razor-pages/ui-class)として提供します。 Id を含むアプリケーションでは、scaffolder を適用して、Id Razor クラスライブラリ (RCL) に含まれているソースコードを選択的に追加することができます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、Identity RCL の同じコードよりも優先されます。 UI を完全に制御し、既定の RCL を使用しないようにするには、「[完全な ID UI ソースの作成](#full)」セクションを参照してください。
+ASP.NET Core 2.1 以降では、 [ Razorクラスライブラリ](xref:razor-pages/ui-class)として[ASP.NET Core Identity ](xref:security/authentication/identity)が提供されます。 を含むIdentityアプリケーションでは、scaffolder を適用して、 Identity Razorクラスライブラリ (rcl) に含まれているソースコードを選択的に追加できます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、 Identity rcl の同じコードよりも優先されます。 UI を完全に制御し、既定の RCL を使用しないようにするには、「[完全な ID UI ソースの作成](#full)」セクションを参照してください。
 
-認証を含ま**ない**アプリケーションでは、scaffolder を適用して Rcl id パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
+認証を含ま**ない**アプリケーションでは、scaffolder を適用して rcl Identityパッケージを追加できます。 生成するコードを選択Identityすることもできます。
 
-Scaffolder は、必要なコードの大部分を生成しますが、プロセスを完了するにはプロジェクトを更新する必要があります。 このドキュメントでは、Id スキャフォールディングの更新を完了するために必要な手順について説明します。
+Scaffolder は、必要なコードの大部分を生成しますが、プロセスを完了するにはプロジェクトを更新する必要があります。 このドキュメントでは、 Identityスキャフォールディングの更新を完了するために必要な手順について説明します。
 
-Id scaffolder を実行すると、 *ScaffoldingReadme*ファイルがプロジェクトディレクトリに作成されます。 *ScaffoldingReadme*ファイルには、id スキャフォールディングの更新を完了するために必要な手順に関する一般的な指示が含まれています。 このドキュメントには、 *ScaffoldingReadme*ファイルよりも完全な手順が含まれています。
+Identity Scaffolder を実行すると、 *ScaffoldingReadme*ファイルがプロジェクトディレクトリに作成されます。 *ScaffoldingReadme*ファイルには、 Identityスキャフォールディングの更新を完了するために必要な手順に関する一般的な指示が含まれています。 このドキュメントには、 *ScaffoldingReadme*ファイルよりも完全な手順が含まれています。
 
-ファイルの違いを示すソース管理システムを使用して、変更を元に戻すことをお勧めします。 Id scaffolder を実行した後に変更を確認します。
+ファイルの違いを示すソース管理システムを使用して、変更を元に戻すことをお勧めします。 Scaffolder をIdentity実行した後に変更を確認します。
 
 > [!NOTE]
-> サービスは、 [2 要素認証](xref:security/authentication/identity-enable-qrcodes)、アカウントの[確認とパスワードの回復](xref:security/authentication/accconfirm)、および id を持つその他のセキュリティ機能を使用する場合に必要です。 サービスまたはサービススタブは、スキャフォールディング Id では生成されません。 これらの機能を有効にするサービスは、手動で追加する必要があります。 たとえば、「[電子メールの確認を要求する](xref:security/authentication/accconfirm#require-email-confirmation)」を参照してください。
+> サービスは、 [2 要素認証](xref:security/authentication/identity-enable-qrcodes)、アカウントの[確認とパスワードの回復](xref:security/authentication/accconfirm)、およびの他のセキュリティIdentity機能を使用する場合に必要です。 サービスまたはサービススタブは、スキャフォールディングIdentity時に生成されません。 これらの機能を有効にするサービスは、手動で追加する必要があります。 たとえば、「[電子メールの確認を要求する](xref:security/authentication/accconfirm#require-email-confirmation)」を参照してください。
 
 ## <a name="scaffold-identity-into-an-empty-project"></a>Id を空のプロジェクトにスキャフォールディング
 
@@ -306,7 +312,7 @@ Id scaffolder を実行すると、 *ScaffoldingReadme*ファイルがプロジ�
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>既存の承認なしでスキャフォールディング id を Razor プロジェクトに
+## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>既存のRazor承認なしで id をプロジェクトにスキャフォールディング
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -327,7 +333,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Id は、 *Areas/identity/IdentityHostingStartup*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+Identityは、 *Areas/Identity/IdentityHostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 <a name="efm"></a>
 
@@ -351,7 +357,7 @@ Id は、 *Areas/identity/IdentityHostingStartup*で構成されます。 詳細
 
 [!code-html[Main](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>承認を使用して id を Razor プロジェクトにスキャフォールディング
+## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>承認を使用しRazorて id をプロジェクトにスキャフォールディング
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -365,7 +371,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-一部の Id オプションは、 *Areas/Identity/IdentityHostingStartup*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+一部Identityのオプションは、 *Areas/Identity/IdentityHostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>既存の承認なしでスキャフォールディング identity を MVC プロジェクトに
 
@@ -391,7 +397,7 @@ dotnet ef database update
 
 * *Pages/shared/_LoginPartial cshtml*ファイルを*Views/shared/_LoginPartial*に移動します。
 
-Id は、 *Areas/identity/IdentityHostingStartup*で構成されます。 詳細については、「IHostingStartup」を参照してください。
+Identityは、 *Areas/Identity/IdentityHostingStartup.cs*で構成されます。 詳細については、「IHostingStartup」を参照してください。
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -419,13 +425,13 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 ## <a name="create-full-identity-ui-source"></a>完全な id UI ソースの作成
 
-Id UI の完全な制御を維持するには、Identity scaffolder を実行し、[**すべてのファイルを上書き**する] を選択します。
+Identity UI の完全な制御を維持するにはIdentity 、scaffolder を実行し、[すべてのファイルを**上書き**する] を選択します。
 
-次の強調表示されたコードは、既定の Id UI を ASP.NET Core 2.1 web アプリの Id に置き換える変更を示しています。 これは、Id UI を完全に制御するために必要になる場合があります。
+次の強調表示されたコードは、ASP.NET Core Identity 2.1 web Identityアプリで既定の UI をに置き換える変更を示しています。 この操作を行うと、 Identity UI を完全に制御できます。
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet1&highlight=13-14,17-999)]
 
-既定の Id は、次のコードで置き換えられます。
+既定値Identityは、次のコードで置き換えられます。
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet2)]
 
@@ -451,21 +457,21 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ユーザー登録を無効にするには:
 
-* スキャフォールディング Id。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 次に例を示します。
+* スキャフォールディングIdentity。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 次に例を示します。
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
   ```
 
-* ユーザーがこのエンドポイントから登録できないように、*区分/id/ページ/アカウント/登録*を更新します。
+* ユーザーがこのエンドポイントから登録できないように、*区分/Identity/Pages/Account/Register.cshtml.cs*を更新します。
 
   [!code-csharp[](scaffold-identity/sample/Register.cshtml.cs?name=snippet)]
 
-* 前の変更との一貫性を保つために、*区分/id/ページ/アカウント/登録*を更新します。
+* 次の変更との整合性を保つために、*区分/////またIdentity* はを更新します。
 
   [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
 
-* *区分/id/ページ/アカウント/ログイン. cshtml*から登録リンクをコメントアウトするか削除します。
+* *区分/////////Identity////* から登録リンクをコメントアウトまたは削除します。
 
 ```cshtml
 @*
@@ -475,7 +481,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 *@
 ```
 
-* [*区分/id/ページ/アカウント/RegisterConfirmation 確認*] ページを更新します。
+* [*区分/ページIdentity/アカウント/* 登録の確認] ページを更新します。
 
   * コードとリンクを cshtml ファイルから削除します。
   * から確認コードを削除し`PageModel`ます。
@@ -502,7 +508,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 * ユーザーの一覧がメモリに読み込まれます。
 * ユーザーごとに一意の強力なパスワードが生成されます。
-* ユーザーが Id データベースに追加されます。
+* ユーザーがIdentityデータベースに追加されます。
 * ユーザーに通知され、パスワードを変更するように指示されます。
 
 [!code-csharp[](scaffold-identity/consoleAddUser/Program.cs?name=snippet)]

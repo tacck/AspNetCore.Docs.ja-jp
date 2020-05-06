@@ -5,13 +5,19 @@ description: ASP.NET Core における Web アプリと API のための Microso
 ms.author: riande
 ms.date: 01/21/2020
 ms.custom: mvc, seodec18
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/azure-active-directory/index
-ms.openlocfilehash: 7829a062d4727238addca051d0599438c99e90dc
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 823f027245774433244f6de078a26f97a998086d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644402"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777346"
 ---
 # <a name="azure-active-directory-with-aspnet-core"></a>Azure Active Directory と ASP.NET Core
 

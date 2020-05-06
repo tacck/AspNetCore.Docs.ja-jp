@@ -4,13 +4,19 @@ author: ardalis
 description: ビューがアプリのデータ表示と、ASP.NET Core MVC でのユーザー操作を処理する方法について説明します。
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 70b8c2c01a28f99dd384351041a3b77d23f46a48
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: bda00a416ac34883e0a70a265156fa3ddcde3c6f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384065"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777138"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC のビュー
 
@@ -199,16 +205,16 @@ viewmodel 型とビジネス モデル型の両方に同じクラスを使用す
 | データをやり取りする相手                        | 例                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | コントローラーとビュー                             | ドロップダウン リストにデータを読み込む。                                          |
-| ビューと[レイアウト ビュー](xref:mvc/views/layout)   | レイアウト ビュー ** \<>** ビュー ファイルから要素コンテンツのタイトルを設定します。  |
+| ビューと[レイアウト ビュー](xref:mvc/views/layout)   | ビューファイルからレイアウトビューの要素コンテンツ** \<>タイトル**を設定します。  |
 | [部分ビュー](xref:mvc/views/partial)とビュー | ユーザーが要求した Web ページに基づいてデータを表示するウィジェット。      |
 
-このコレクションは、コントローラーおよびビューで `ViewData` または `ViewBag` のいずれかのプロパティを通じて参照できます。 `ViewData` プロパティは、弱く型指定されたオブジェクトのディクショナリです。 `ViewBag` プロパティは、基になる `ViewData` コレクションに動的プロパティを提供する `ViewData` をラップするラッパーです。 注: キールックアップは、 および`ViewData``ViewBag`の両方で大文字と小文字を区別しません。
+このコレクションは、コントローラーおよびビューで `ViewData` または `ViewBag` のいずれかのプロパティを通じて参照できます。 `ViewData` プロパティは、弱く型指定されたオブジェクトのディクショナリです。 `ViewBag` プロパティは、基になる `ViewData` コレクションに動的プロパティを提供する `ViewData` をラップするラッパーです。 注: キーの参照では、との`ViewData`両方`ViewBag`で大文字と小文字が区別されません。
 
 `ViewData` および `ViewBag` は実行時に動的に解決されます。 これらはコンパイル時の型チェックを提供していないため、どちらも viewmodel を使用する場合よりも一般的にエラーが発生しやすくなります。 そのため、開発者の中には、`ViewData` および `ViewBag` の使用を最小限に抑えるか、まったく使用しない人もいます。
 
 <a name="VD"></a>
 
-**Viewdata**
+**ViewData**
 
 `ViewData` は `string` キーを介してアクセスされる [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) オブジェクトです。 文字列データは、格納してキャストなしで直接使用できますが、特定の型を抽出するときには、他の `ViewData` オブジェクトの値をこれらの型にキャストする必要があります。 `ViewData` を使用して、データをコントローラーからビューとビュー内部 ([部分ビュー](xref:mvc/views/partial)および[レイアウト](xref:mvc/views/layout)を含む) に渡すことができます。
 
@@ -252,7 +258,7 @@ public IActionResult SomeAction()
 
 **ViewData 属性**
 
-[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) を使用するもう 1 つの方法は [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) です。 コントローラーや Razor ページのモデルのプロパティが `[ViewData]` 属性でマークされている場合、その値をディクショナリに格納してそこから読み込むことができます。
+[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) を使用するもう 1 つの方法は [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) です。 属性でマークさRazorれたコントローラーまたはページモデルのプロパティの値は、ディクショナリから格納および読み込まれます。 `[ViewData]`
 
 次の例では、Home コントローラーには `[ViewData]` でマークされた `Title` プロパティが含まれています。 `About` メソッドは、About ビューのタイトルを設定します。
 
@@ -286,9 +292,9 @@ public class HomeController : Controller
 
 **ViewBag**
 
-`ViewBag` *は Razor Pages では使用できません。*
+`ViewBag`*ページではRazor使用できません。*
 
-`ViewBag`は、 に格納されているオブジェクトに動的アクセスを提供する[DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata)オブジェクトです`ViewData`。 `ViewBag` はキャストを必要としないため、より簡単に使用できます。 次の例は、上記の `ViewData` を使用した時と同じ結果になるように、`ViewBag` を使用する方法を示しています。
+`ViewBag`は、 [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata)に`ViewData`格納されているオブジェクトへの動的アクセスを提供する DynamicViewData オブジェクトです。 `ViewBag` はキャストを必要としないため、より簡単に使用できます。 次の例は、上記の `ViewData` を使用した時と同じ結果になるように、`ViewBag` を使用する方法を示しています。
 
 ```csharp
 public IActionResult SomeAction()
@@ -319,7 +325,7 @@ public IActionResult SomeAction()
 
 **ViewBag、ViewData を同時に使用する**
 
-`ViewBag` *は Razor Pages では使用できません。*
+`ViewBag`*ページではRazor使用できません。*
 
 `ViewData` と `ViewBag` は基になる同じ `ViewData` コレクションを参照しているため、値を読み書きするときに、`ViewData` と `ViewBag` の両方を使用して、それらを組み合わせることができます。
 
@@ -359,15 +365,15 @@ public IActionResult SomeAction()
 
 **ViewData と ViewBag の相違点の概要**
 
- `ViewBag` は Razor ページでは使用できません。
+ `ViewBag`は、ページでRazorは使用できません。
 
 * `ViewData`
-  * [から](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)派生するため、 、 `ContainsKey`、、、`Add``Remove`および`Clear`などの便利なディクショナリ プロパティを持ちます。
-  * ディクショナリ内のキーは文字列なので、空白が許可されます。 例 : `ViewData["Some Key With Whitespace"]`
+  * は[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)から派生して`ContainsKey`いるため、 `Add`、、 `Remove`、などの便利なディクショナリプロパティを持つ`Clear`ことができます。
+  * ディクショナリ内のキーは文字列なので、空白が許可されます。 例: `ViewData["Some Key With Whitespace"]`
   * `ViewData` を使用するには、ビューで `string` 以外のすべての型をキャストする必要があります。
 * `ViewBag`
   * [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) から派生するため、ドット表記 (`@ViewBag.SomeKey = <value or object>`) を使用して動的プロパティを作成できます。キャストは必要ありません。 `ViewBag` の構文は、コントローラーとビューへの追加を高速化します。
-  * null 値のチェックを簡素化します。 例 : `@ViewBag.Person?.Name`
+  * null 値のチェックを簡素化します。 例: `@ViewBag.Person?.Name`
 
 **ViewData または ViewBag を使用する場合**
 

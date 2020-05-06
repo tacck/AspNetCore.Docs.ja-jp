@@ -5,13 +5,19 @@ description: キャッシュ タグ ヘルパーを使用する方法につい�
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: db9e1a968588410f11e5f137dfdd4542df505ebc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653306"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773943"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC のキャッシュ タグ ヘルパー
 
@@ -33,7 +39,7 @@ ms.locfileid: "78653306"
 
 ### <a name="enabled"></a>enabled
 
-| 属性の種類  | 例        | 既定値 |
+| 属性の種類  | 例        | Default |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
@@ -65,7 +71,7 @@ ms.locfileid: "78653306"
 
 ### <a name="expires-after"></a>expires-after
 
-| 属性の種類 | 例                      | 既定値    |
+| 属性の種類 | 例                      | Default    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 分 |
 
@@ -119,7 +125,7 @@ Razor ビュー エンジンでは、`expires-after` の規定値が 20 分に�
 | -------------- | -------------------- |
 | String         | `Make`, `Make,Model` |
 
-`vary-by-query` には、リストのいずれかのキーの値が変化したときにキャッシュの更新をトリガーする、クエリ文字列 (<xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*>) の <xref:Microsoft.AspNetCore.Http.HttpRequest.Query*> のコンマ区切り値リストを指定します。
+`vary-by-query` には、リストのいずれかのキーの値が変化したときにキャッシュの更新をトリガーする、クエリ文字列 (<xref:Microsoft.AspNetCore.Http.HttpRequest.Query*>) の <xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*> のコンマ区切り値リストを指定します。
 
 次の例では、`Make` と `Model` の値を監視します。 この例は、Web サーバーに提示されるすべての異なる `Make` と `Model` の内容をキャッシュします。
 
@@ -147,7 +153,7 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{Make?}/{Model?}");
 ```
 
-*Index.cshtml*:
+*Index. cshtml*:
 
 ```cshtml
 <cache vary-by-route="Make,Model">
@@ -173,7 +179,7 @@ routes.MapRoute(
 
 ### <a name="vary-by-user"></a>vary-by-user
 
-| 属性の種類  | 例        | 既定値 |
+| 属性の種類  | 例        | Default |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
@@ -212,7 +218,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 }
 ```
 
-*Index.cshtml*:
+*Index. cshtml*:
 
 ```cshtml
 <cache vary-by="@Model">
@@ -222,9 +228,9 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| 属性の種類      | 例                               | 既定値  |
+| 属性の種類      | 例                               | Default  |
 | ------------------- | -------------------------------------- | -------- |
-| `CacheItemPriority` | `High`、`Low`、`NeverRemove`, `Normal` | `Normal` |
+| `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 
 `priority` により、組み込みのキャッシュ プロバイダーにキャッシュ削除ガイダンスを提供します。 Web サーバーは、メモリ不足になると、`Low` キャッシュ エントリを最初に削除します。
 
@@ -240,7 +246,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 キャッシュ タグ ヘルパーは、[メモリ キャッシュ サービス](xref:performance/caching/memory)に依存します。 サービスが追加されていない場合、キャッシュ タグ ヘルパーによってサービスが追加されます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:performance/caching/memory>
 * <xref:security/authentication/identity>

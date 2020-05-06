@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core データ保護で認証された暗号化の実装の詳細について説明します。
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3066cd505781ed2ddad46626dda9d9ce35307877
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655004"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776969"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>ASP.NET Core での認証された暗号化の詳細
 
@@ -55,4 +61,4 @@ AA FF EE 57 57 2F 40 4C 3F 7F CC 9D CC D9 32 3E
 残りはペイロードを含み、使用される形式に固有のものです。
 
 > [!WARNING]
-> 特定のキーに対して保護されているすべてのペイロードは、同じ20バイト (マジック値, キー id) ヘッダーで開始されます。 管理者は、この事実を診断のために使用して、ペイロードが生成されたことを概算することができます。 たとえば、上記のペイロードはキー {0c819c80-6619-4019-9536-53f8aaffee57} に対応しています。 キーリポジトリを確認した後に、この特定のキーのライセンス認証日が2015-01-01 であり、その有効期限が2015-03-01 であることが判明した場合は、ペイロード (改ざんされていない場合) がそのウィンドウ内に生成されたと見なすことができます。どちらかの側のファッジ factor。
+> 特定のキーに対して保護されているすべてのペイロードは、同じ20バイト (マジック値, キー id) ヘッダーで開始されます。 管理者は、この事実を診断のために使用して、ペイロードが生成されたことを概算することができます。 たとえば、上記のペイロードはキー {0c819c80-6619-4019-9536-53f8aaffee57} に対応しています。 キーリポジトリを確認した後に、この特定のキーのライセンス認証日が2015-01-01 であり、その有効期限が2015-03-01 であることがわかった場合は、ペイロード (改ざんされていない場合) がそのウィンドウ内に生成されたと見なすことができます。どちらの側にも小さなファッジ因子を与えてください。

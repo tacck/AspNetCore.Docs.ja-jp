@@ -5,13 +5,19 @@ description: このチュートリアルでは、ASP.NET Core アプリで WS-FE
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: d82421a14ede6cb6b01ef59f233bb2eba6b56aec
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
-ms.translationtype: MT
+ms.openlocfilehash: ce0c484e84bc2ddb4a1d287246c63663f3875924
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651332"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768430"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core で WS-FEDERATION を使用してユーザーを認証する
 
@@ -21,8 +27,8 @@ ASP.NET Core 2.0 アプリの場合、WS-FEDERATION のサポートは[AspNetCor
 
 既定では、新しいミドルウェアは次のようになります。
 
-* は、要求されていないログインを許可しません。 WS-FEDERATION プロトコルのこの機能は、XSRF 攻撃に対して脆弱です。 ただし、`AllowUnsolicitedLogins` オプションを使用して有効にすることができます。
-* では、サインインメッセージのすべてのフォームポストがチェックされません。 サインインがチェックされるのは、`CallbackPath` に対する要求だけです。 `CallbackPath` の既定値は `/signin-wsfed` ですが、 [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions)クラスの継承された[remoteauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)プロパティを使用して変更できます。 このパスは、 [Skipun認識要求](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests)オプションを有効にすることで、他の認証プロバイダーと共有できます。
+* は、要求されていないログインを許可しません。 WS-FEDERATION プロトコルのこの機能は、XSRF 攻撃に対して脆弱です。 ただし、 `AllowUnsolicitedLogins`オプションを使用して有効にすることができます。
+* では、サインインメッセージのすべてのフォームポストがチェックされません。 に対する要求のみ`CallbackPath`がサインインのチェックが行われ`CallbackPath`ます。 `/signin-wsfed`既定値はですが、 [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions)クラスの継承された[remoteauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)を使用して変更できます。 このパスは、 [Skipun認識要求](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests)オプションを有効にすることで、他の認証プロバイダーと共有できます。
 
 ## <a name="register-the-app-with-active-directory"></a>Active Directory にアプリを登録する
 
@@ -49,21 +55,21 @@ ASP.NET Core 2.0 アプリの場合、WS-FEDERATION のサポートは[AspNetCor
 > [!NOTE]
 > これは HTTPS URL である必要があります。 IIS Express は、開発時にアプリをホストするときに自己署名証明書を提供できます。 Kestrel には、手動による証明書の構成が必要です。 詳細については、 [Kestrel のドキュメント](xref:fundamentals/servers/kestrel)を参照してください。
 
-* ウィザードの残りの部分で **[次へ]** をクリックし、最後**に終了し**ます。
+* ウィザードの残りの部分で [**次へ**] をクリックし、最後**に終了し**ます。
 
-* ASP.NET Core Id には**名前 ID**要求が必要です。 **[要求規則の編集]** ダイアログボックスで、次のいずれかを追加します。
+* ASP.NET Core Identityには**名前 ID**要求が必要です。 [**要求規則の編集**] ダイアログボックスで、次のいずれかを追加します。
 
-![要求規則の編集](ws-federation/_static/EditClaimRules.png)
+![要求規則を編集する](ws-federation/_static/EditClaimRules.png)
 
-* **変換要求規則の追加ウィザード**で、既定の **[LDAP 属性を要求として送信]** テンプレートを選択したままにして、 **[次へ]** をクリックします。 **SAM-Account-name** LDAP 属性を出力方向の要求の**名前 ID**にマッピングする規則を追加します。
+* **変換要求規則の追加ウィザード**で、既定の [ **LDAP 属性を要求として送信**] テンプレートを選択したままにして、[**次へ**] をクリックします。 **SAM-Account-name** LDAP 属性を出力方向の要求の**名前 ID**にマッピングする規則を追加します。
 
 ![変換要求規則の追加ウィザード: 要求規則の構成](ws-federation/_static/AddTransformClaimRule.png)
 
-* **[要求規則の編集]** ウィンドウで **[完了]**  > [ **OK]** をクリックします。
+* [**要求規則の編集**] ウィンドウで [**完了** > **]** をクリックします。
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
 
-* AAD テナントの [アプリの登録] ブレードに移動します。 **[新しいアプリケーションの登録]** をクリックします。
+* AAD テナントの [アプリの登録] ブレードに移動します。 [**新しいアプリケーションの登録**] をクリックします。
 
 ![Azure Active Directory: アプリの登録](ws-federation/_static/AadNewAppRegistration.png)
 
@@ -72,17 +78,17 @@ ASP.NET Core 2.0 アプリの場合、WS-FEDERATION のサポートは[AspNetCor
 
 ![Azure Active Directory: アプリの登録を作成する](ws-federation/_static/AadCreateAppRegistration.png)
 
-* **[エンドポイント]** をクリックして、**フェデレーションメタデータドキュメント**の URL を確認します。 WS-FEDERATION ミドルウェアの `MetadataAddress`を次に示します。
+* [**エンドポイント**] をクリックして、**フェデレーションメタデータドキュメント**の URL を確認します。 WS-FEDERATION ミドルウェアは`MetadataAddress`次のようになります。
 
 ![Azure Active Directory: エンドポイント](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* 新しいアプリの登録に移動します。 [**設定** > **プロパティ**] をクリックし、**アプリ ID URI**をメモします。 WS-FEDERATION ミドルウェアの `Wtrealm`を次に示します。
+* 新しいアプリの登録に移動します。 [**設定** > の**プロパティ**] をクリックし、**アプリ ID URI**をメモします。 WS-FEDERATION ミドルウェアは`Wtrealm`次のようになります。
 
 ![Azure Active Directory: アプリの登録のプロパティ](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-aspnet-core-identity"></a>ASP.NET Core Id なしで WS-FEDERATION を使用する
+## <a name="use-ws-federation-without-aspnet-core-identity"></a>ASP.NET Core せずに WS-FEDERATION を使用するIdentity
 
-WS-MANAGEMENT ミドルウェアは、Id なしで使用できます。 例 :
+WS-FEDERATION ミドルウェアは、なしでIdentity使用できます。 次に例を示します。
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -91,10 +97,10 @@ WS-MANAGEMENT ミドルウェアは、Id なしで使用できます。 例 :
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>ASP.NET Core Id の外部ログインプロバイダーとして WS-FEDERATION を追加する
+## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>ASP.NET Core の外部ログインプロバイダーとして WS-FEDERATION を追加します。Identity
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)への依存関係をプロジェクトに追加します。
-* WS-FEDERATION を `Startup.ConfigureServices`に追加します。
+* WS-FEDERATION の追加先`Startup.ConfigureServices`:
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -108,10 +114,10 @@ WS-MANAGEMENT ミドルウェアは、Id なしで使用できます。 例 :
 
 ### <a name="log-in-with-ws-federation"></a>WS-FEDERATION を使用してログインする
 
-アプリを参照し、nav ヘッダーの **[ログイン]** リンクをクリックします。 WsFederation: ![のログイン ページを使用してログインすることができ](ws-federation/_static/WsFederationButton.png)
+アプリを参照し、nav ヘッダーの [**ログイン**] リンクをクリックします。 WsFederation: ログインページでログインするオプションがあり![ます。](ws-federation/_static/WsFederationButton.png)
 
-ADFS をプロバイダーとして使用すると、このボタンは adfs サインインページにリダイレクトされます: ![ADFS サインインページ](ws-federation/_static/AdfsLoginPage.png)
+ADFS をプロバイダーとして使用すると、このボタンは adfs サインインページに![リダイレクトされます。 adfs サインインページ](ws-federation/_static/AdfsLoginPage.png)
 
-プロバイダーとして Azure Active Directory を使用すると、このボタンは AAD サインインページにリダイレクトされます: ![AAD サインインページ](ws-federation/_static/AadSignIn.png)
+プロバイダーとして Azure Active Directory を使用すると、このボタンは AAD サインインページに![リダイレクトされます。 aad サインインページ](ws-federation/_static/AadSignIn.png)
 
-新しいユーザーのサインインが成功すると、アプリのユーザー登録ページにリダイレクトされます。 ![登録 ページ](ws-federation/_static/Register.png)
+新しいユーザーのサインインが成功すると、アプリのユーザー登録ページにリダイレクトされ![ます。 [登録] ページ](ws-federation/_static/Register.png)
