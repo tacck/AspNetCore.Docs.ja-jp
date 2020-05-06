@@ -4,13 +4,19 @@ author: ardalis
 description: ''
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 715a73863513870d1cbd522e75013d41830da1e7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b7c4d61c4a71939e84bdea180a2f77b6438b15d5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653348"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774198"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>ASP.NET Core MVC でコントローラーで要求を処理する
 
@@ -65,7 +71,7 @@ ms.locfileid: "78653348"
 
     この型は HTTP 状態コードを返します。 この種類のヘルパー メソッドには、`BadRequest`、`NotFound`、`Ok` などがあります。 たとえば、`return BadRequest();` の場合、実行時に 400 状態コードが生成されます。 `BadRequest`、`NotFound`、`Ok` などのメソッドがオーバーロードされると、HTTP ステータス コードのレスポンダーでなくなります。コンテンツ ネゴシエーションが発生するためです。
 
-* **リダイレクト**
+* **読み込み**
 
     この種類では、アクションまたは宛先にリダイレクトが返されます (`Redirect`、`LocalRedirect`、`RedirectToAction`、`RedirectToRoute` を利用して)。 たとえば、`return RedirectToAction("Complete", new {id = 123});` は `Complete` にリダイレクトし、匿名のオブジェクトを渡します。
 
@@ -101,6 +107,6 @@ ms.locfileid: "78653348"
 
 エラー処理と応答キャッシュは多くの場合、横断的な問題です。
 * [エラーを処理する](xref:mvc/controllers/filters#exception-filters)
-* [応答キャッシュ](xref:performance/caching/response)
+* [応答のキャッシュ](xref:performance/caching/response)
 
 横断的な問題の多くはフィルターやカスタム [ミドルウェア](xref:fundamentals/middleware/index)の利用で処理できます。

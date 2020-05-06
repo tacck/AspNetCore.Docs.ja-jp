@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/index
-ms.openlocfilehash: be88b8d58f1f660f3a815c395c210c05a7b4917c
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 5ea82d36d305b1f6ba58fba1b4c5bb4dca22f912
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644648"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776527"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core を使って Web API を作成する
 
@@ -38,7 +44,7 @@ Web API は、<xref:Microsoft.AspNetCore.Mvc.ControllerBase> から派生した 
 
 ::: moniker-end
 
-<xref:Microsoft.AspNetCore.Mvc.Controller> クラスから派生させて Web API のコントローラーを作成しないでください。 `Controller` から派生した `ControllerBase` にはビューのサポートが追加されるため、これは Web API 要求ではなく Web ページを処理するためのものです。 このルールには例外があります。ビューと Web API の両方で同じコントローラーを使うことを計画している場合は、`Controller` から派生させます。
+<xref:Microsoft.AspNetCore.Mvc.Controller> クラスから派生させて Web API のコントローラーを作成しないでください。 `ControllerBase` から派生した `Controller` にはビューのサポートが追加されるため、これは Web API 要求ではなく Web ページを処理するためのものです。 このルールには例外があります。ビューと Web API の両方で同じコントローラーを使うことを計画している場合は、`Controller` から派生させます。
 
 `ControllerBase` クラスには、HTTP 要求の処理に役立つプロパティとメソッドが多数用意されています。 たとえば、`ControllerBase.CreatedAtAction` では状態コード 201 が返されます。
 
@@ -46,7 +52,7 @@ Web API は、<xref:Microsoft.AspNetCore.Mvc.ControllerBase> から派生した 
 
 次に、`ControllerBase` に用意されているメソッドの例をさらにいくつか示します。
 
-|方法   |メモ    |
+|メソッド   |メモ    |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| 400 状態コードを返します。|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|404 状態コードを返します。|
@@ -64,7 +70,7 @@ Web API は、<xref:Microsoft.AspNetCore.Mvc.ControllerBase> から派生した 
 
 次に、使用できる属性の例をさらにいくつか示します。
 
-|Attribute|メモ|
+|属性|メモ|
 |---------|-----|
 |[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |コントローラーまたはアクションの URL パターンを指定します。|
 |[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |モデル バインドのために含めるプレフィックスとプロパティを指定します。|
@@ -156,13 +162,13 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>属性ルーティング要件
 
-`[ApiController]` 属性では、属性ルーティング要件が作成されます。 (例:
+`[ApiController]` 属性では、属性ルーティング要件が作成されます。 次に例を示します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-[ の ](xref:mvc/controllers/routing#conventional-routing)、`UseEndpoints`、または <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> で定義された<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>規則ルート経由`Startup.Configure`でアクションにアクセスすることはできません。
+`Startup.Configure` の `UseEndpoints`、<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>、または <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> で定義された[規則ルート経由](xref:mvc/controllers/routing#conventional-routing)でアクションにアクセスすることはできません。
 
 ::: moniker-end
 
@@ -170,7 +176,7 @@ namespace WebApiSample
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ValuesController.cs?name=snippet_ControllerSignature&highlight=1)]
 
-[ の ](xref:mvc/controllers/routing#conventional-routing) または <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> で定義された<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>規則ルート`Startup.Configure`経由でアクションにアクセスすることはできません。
+`Startup.Configure` の <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> または <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> で定義された[規則ルート](xref:mvc/controllers/routing#conventional-routing)経由でアクションにアクセスすることはできません。
 
 ::: moniker-end
 
@@ -254,7 +260,7 @@ ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSta
 
 バインディング ソース属性では、アクション パラメーターの値が存在する場所が定義されます。 次のバインディング ソース属性が存在します。
 
-|Attribute|バインド ソース |
+|属性|バインド ソース |
 |---------|---------|
 |[`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | 要求本文 |
 |[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | 要求本文内のフォーム データ |
@@ -264,11 +270,11 @@ ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSta
 |[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | アクション パラメーターとして挿入される要求サービス |
 
 > [!WARNING]
-> 値に `[FromRoute]` (つまり、`%2f`) が含まれる可能性がある場合は、`/` を使用しないでください。 `%2f` は `/` にエスケープ解除されません。 値に `[FromQuery]` が含まれる可能性がある場合は、`%2f` を使用してください。
+> 値に `%2f` (つまり、`/`) が含まれる可能性がある場合は、`[FromRoute]` を使用しないでください。 `%2f` は `/` にエスケープ解除されません。 値に `%2f` が含まれる可能性がある場合は、`[FromQuery]` を使用してください。
 
 `[ApiController]` 属性や `[FromQuery]` などのバインディング ソース属性がない場合は、ASP.NET Core ランタイムにより複合オブジェクト モデル バインダーの使用が試行されます。 複合オブジェクト モデル バインダーでは、値プロバイダーから定義された順序でデータを取得します。
 
-次の例では、`[FromQuery]` パラメーター値が要求 URL のクエリ文字列に指定されていることが `discontinuedOnly` によって示されています。
+次の例では、`discontinuedOnly` パラメーター値が要求 URL のクエリ文字列に指定されていることが `[FromQuery]` によって示されています。
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ProductsController.cs?name=snippet_BindingSourceAttributes&highlight=3)]
 
@@ -337,9 +343,9 @@ ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSta
 
 ## <a name="multipartform-data-request-inference"></a>マルチパート/フォーム データ要求の推論
 
-`[ApiController]`[`[FromForm]` 属性を使用してアクション パラメーターに注釈を付けた場合、](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 属性が推論規則に適用されます。 `multipart/form-data` 要求コンテンツ型が推論されます。
+[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 属性を使用してアクション パラメーターに注釈を付けた場合、`[ApiController]` 属性が推論規則に適用されます。 `multipart/form-data` 要求コンテンツ型が推論されます。
 
-既定の動作を無効にするには、<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> で `true` プロパティを `Startup.ConfigureServices` に設定します。
+既定の動作を無効にするには、`Startup.ConfigureServices` で <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> プロパティを `true` に設定します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -369,7 +375,7 @@ ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSta
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound` メソッドにより、`ProblemDetails` 本文を使用して HTTP 404 ステータス コードが生成されます。 (例:
+`NotFound` メソッドにより、`ProblemDetails` 本文を使用して HTTP 404 ステータス コードが生成されます。 次に例を示します。
 
 ```json
 {
@@ -382,7 +388,7 @@ ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSta
 
 ### <a name="disable-problemdetails-response"></a>ProblemDetails 応答を無効にする
 
-`ProblemDetails` プロパティが <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> に設定されている場合、エラー状態コード用の `true` の自動作成は無効になります。 `Startup.ConfigureServices` に次のコードを追加します。
+<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> プロパティが `true` に設定されている場合、エラー状態コード用の `ProblemDetails` の自動作成は無効になります。 `Startup.ConfigureServices` に次のコードを追加します。
 
 ::: moniker-end
 

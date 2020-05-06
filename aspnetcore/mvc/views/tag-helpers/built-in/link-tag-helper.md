@@ -5,13 +5,19 @@ ms.author: riande
 description: ASP.NET Core リンク タグ ヘルパーの属性と、HTML リンク タグの動作拡張時の各属性の役割を示します。
 ms.custom: mvc
 ms.date: 09/24/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: d7514433bee8a138cd7d75bfd15c9798d4fd31a3
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1efd7c1a63baea4312a4a01cd9cd9c7582375d97
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653300"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777355"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core のリンク タグ ヘルパー
 
@@ -23,7 +29,7 @@ ms.locfileid: "78653300"
 
 リンク タグ ヘルパーを使用すると、CSS ファイルの CDN と、CDN が使用できない場合のフォールバックを指定できます。 リンク タグ ヘルパーによって、ローカル ホスティングの堅牢性が CDN のパフォーマンスの利点にもたらされます。
 
-次の Razor マークアップでは、ASP.NET Core Web アプリ テンプレートを使用して作成されたレイアウト ファイルの `head` 要素を示します。
+次Razorのマークアップは`head` 、ASP.NET Core web アプリテンプレートを使用して作成されたレイアウトファイルの要素を示しています。
 
 [!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
@@ -47,17 +53,17 @@ ms.locfileid: "78653300"
 
 ### <a name="asp-fallback-test-class"></a>asp-fallback-test-class
 
-フォールバック テストで使用するためにスタイルシートに定義されているクラス名。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass> を参照してください。
+フォールバック テストで使用するためにスタイルシートに定義されているクラス名。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>」を参照してください。
 
 ### <a name="asp-fallback-test-property"></a>asp-fallback-test-property
 
-フォールバック テストで使用する CSS プロパティ名。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty> を参照してください。
+フォールバック テストで使用する CSS プロパティ名。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>」を参照してください。
 
 ### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
 
-フォールバック テストで使用する CSS プロパティ値。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue> を参照してください。
+フォールバック テストで使用する CSS プロパティ値。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>

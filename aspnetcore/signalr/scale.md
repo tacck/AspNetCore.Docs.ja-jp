@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core SignalR 運用環境のホスティングとスケーリング
+title: 運用SignalR環境のホスティングとスケーリングの ASP.NET Core
 author: bradygaster
 description: ASP.NET Core SignalRを使用するアプリのパフォーマンスとスケーリングに関する問題を回避する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,14 +7,18 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 23ac2b1c80b9d73d6e9ac57f0ef774ac2ea54be4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655160"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775077"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR のホストとスケーリング
 
@@ -32,7 +36,7 @@ SignalR を使用するには、特定の接続に対するすべての HTTP 要
 
 その他のすべての状況 (Redis バックプレーンを使用する場合を含む) では、サーバー環境を固定セッション用に構成する必要があります。
 
-SignalR の Azure App Service の構成に関するガイダンスについては、「<xref:signalr/publish-to-azure-web-app>」を参照してください。
+SignalR の Azure App Service の構成に関するガイダンスに<xref:signalr/publish-to-azure-web-app>ついては、「」を参照してください。
 
 ## <a name="tcp-connection-resources"></a>TCP 接続リソース
 
@@ -42,7 +46,7 @@ Web サーバーがサポートできる同時 TCP 接続の数は制限され�
 
 SignalR によって接続関連のリソースが多用されると、同じサーバー上でホストされている他の web アプリに影響を与える可能性があります。 SignalR が開いたときに、使用可能な最後の TCP 接続が保持されている場合、同じサーバー上の他の web アプリにも使用できる接続がありません。
 
-サーバーの接続が不足している場合は、ランダムソケットエラーと接続リセットエラーが表示されます。 例 :
+サーバーの接続が不足している場合は、ランダムソケットエラーと接続リセットエラーが表示されます。 次に例を示します。
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -94,8 +98,8 @@ Redis バックプレーンは、お客様のインフラストラクチャで�
   * すべてのクライアントは、Websocket**のみ**を使用するように構成されています。
   * クライアント構成で[Skipnegotiation 設定](xref:signalr/configuration#configure-additional-options)が有効になっています。 
    サーバーで接続が開始されると、接続はそのサーバー上にとどまります。
-* SignalR のアプリは、送信されるメッセージが少ない場合でも、クライアントの数に基づいてスケールアウトする必要があります。
-* SignalR アプリでは、SignalRのない web アプリよりもはるかに多くの接続リソースを使用します。
+* アプリSignalRは、送信されるメッセージが少ない場合でも、クライアントの数に基づいてスケールアウトする必要があります。
+* アプリSignalRは、を使用しないSignalR場合、web アプリよりもはるかに多くの接続リソースを使用します。
 
 ## <a name="iis-limitations-on-windows-client-os"></a>Windows クライアント OS での IIS の制限事項
 
@@ -111,7 +115,7 @@ Windows 10 と Windows 8.x はクライアントオペレーティングシス�
 
 ## <a name="linux-with-nginx"></a>Nginx を使用した Linux
 
-Websocket を SignalR するには、プロキシの `Connection` と `Upgrade` ヘッダーを次のように設定します。
+Websocket の`Connection` `Upgrade` SignalRプロキシとヘッダーを次のように設定します。
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
@@ -120,14 +124,14 @@ proxy_set_header Connection $connection_upgrade;
 
 詳細については、「[WebSocket プロキシとしての NGINX](https://www.nginx.com/blog/websocket-nginx/)」を参照してください。
 
-## <a name="third-party-opno-locsignalr-backplane-providers"></a>サードパーティ製 SignalR バックプレーンプロバイダー
+## <a name="third-party-signalr-backplane-providers"></a>サードパーティ製SignalRバックプレーンプロバイダー
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
 
-## <a name="next-steps"></a>次のステップ:
+## <a name="next-steps"></a>次のステップ
 
 詳細については、次のリソースを参照してください。
 
-* [Azure SignalR サービスのドキュメント](/azure/azure-signalr/signalr-overview)
+* [Azure SignalRサービスのドキュメント](/azure/azure-signalr/signalr-overview)
 * [Redis バックプレーンを設定する](xref:signalr/redis-backplane)

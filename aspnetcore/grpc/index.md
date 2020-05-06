@@ -5,13 +5,19 @@ description: Kestrel サーバーと ASP.NET Core の gRPC サービスについ
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/index
-ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 2d7d683051fd1eb97f3f57d75bd582109166a6cd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644720"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768849"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core の gRPC の概要
 
@@ -54,7 +60,7 @@ message HelloReply {
 サービス、クライアント、およびメッセージの .NET 型は、プロジェクトに *\*.proto* ファイルを含めることで自動的に生成されます。
 
 * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) パッケージにパッケージ参照を追加します。
-* *項目グループに \** .proto`<Protobuf>` ファイルを追加します。
+* `<Protobuf>` 項目グループに *\*.proto* ファイルを追加します。
 
 ```xml
 <ItemGroup>
@@ -92,7 +98,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService` は `GreeterBase` 型を継承します。これは `Greeter` *.proto\* ファイル内の*  サービスから生成されます。 サービスは、*Startup.cs* 内でクライアントがアクセスできるようになります。
+`GreeterService` は `GreeterBase` 型を継承します。これは *\*.proto* ファイル内の `Greeter` サービスから生成されます。 サービスは、*Startup.cs* 内でクライアントがアクセスできるようになります。
 
 ```csharp
 app.UseEndpoints(endpoints =>

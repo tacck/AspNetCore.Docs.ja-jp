@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 464d19bd63e1f0f06bd7d218e7644afde04a5672
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 796d7da76da6723ea996b57510da9c45ab21b3e7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644150"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775922"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core のホストと展開
 
@@ -69,7 +75,7 @@ Visual Studio を使って Azure にアプリを発行するための手順に�
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows での MSDeploy を使用した発行
 
-Visual Studio 発行プロファイルを使って (Windows コマンド プロンプトからの <xref:host-and-deploy/visual-studio-publish-profiles>dotnet msbuild[ コマンドの使用を含む) アプリを発行する方法については、「](/dotnet/core/tools/dotnet-msbuild)」をご覧ください。
+Visual Studio 発行プロファイルを使って (Windows コマンド プロンプトからの [dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) コマンドの使用を含む) アプリを発行する方法については、「<xref:host-and-deploy/visual-studio-publish-profiles>」をご覧ください。
 
 ## <a name="internet-information-services-iis"></a>インターネット インフォメーション サービス (IIS)
 
@@ -147,7 +153,7 @@ Visual Studio を使って Azure にアプリを発行するための手順に�
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows での MSDeploy を使用した発行
 
-Visual Studio 発行プロファイルを使って (Windows コマンド プロンプトからの <xref:host-and-deploy/visual-studio-publish-profiles>dotnet msbuild[ コマンドの使用を含む) アプリを発行する方法については、「](/dotnet/core/tools/dotnet-msbuild)」をご覧ください。
+Visual Studio 発行プロファイルを使って (Windows コマンド プロンプトからの [dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) コマンドの使用を含む) アプリを発行する方法については、「<xref:host-and-deploy/visual-studio-publish-profiles>」をご覧ください。
 
 ## <a name="internet-information-services-iis"></a>インターネット インフォメーション サービス (IIS)
 

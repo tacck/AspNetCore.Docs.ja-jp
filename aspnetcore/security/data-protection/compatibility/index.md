@@ -4,13 +4,19 @@ author: rick-anderson
 description: このドキュメントは、さまざまな ASP.NET Core データ保護の互換性に関するトピックの目次として機能します。
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/compatibility/index
-ms.openlocfilehash: c5e277d812bb5d16fa5a3ab1b6acc091ed3b32ce
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 103cd3529fa25c9e4c7e1afe32fef1f84748dd71
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644798"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777476"
 ---
 # <a name="compatibility-in-aspnet-core"></a>ASP.NET Core の互換性
 
