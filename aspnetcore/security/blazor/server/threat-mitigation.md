@@ -5,7 +5,7 @@ description: サーバーアプリにBlazor対するセキュリティ上の脅�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/05/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
+ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774185"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850501"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor サーバーの脅威軽減ガイダンス
 
@@ -281,7 +281,7 @@ ASP.NET Core アプリをセキュリティで保護するためBlazorのガイ�
 
 * [ログ記録と機微なデータ](#logging-and-sensitive-data)
 * [HTTPS を使用した転送中の情報の保護](#protect-information-in-transit-with-https)
-* [クロスサイトスクリプティング (XSS)](#cross-site-scripting-xss))
+* [クロスサイトスクリプティング (XSS)](#cross-site-scripting-xss)
 * [クロスオリジン保護](#cross-origin-protection)
 * [[-Jacking] をクリックします。](#click-jacking)
 * [リダイレクトを開く](#open-redirects)

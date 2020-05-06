@@ -5,13 +5,19 @@ description: ASP.NET Core での認証、承認、およびセキュリティの
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/index
-ms.openlocfilehash: 0f8e96fb7d5246e746b95f8907745f849de60e24
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78644030"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776514"
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core Security の概要
 
@@ -19,7 +25,7 @@ ASP.NET Core を使用することで、開発者はアプリのセキュリテ�
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core セキュリティ機能
 
-ASP.NET Core では、組み込みの ID プロバイダーを含むアプリをセキュリティで保護するための多くのツールとライブラリが提供されますが、Facebook、Twitter、LinkedIn などのサードパーティの ID サービスを使用することもできます。 ASP.NET Core では、コードで公開せずに機密情報を格納して使用する方法である、アプリ シークレットを簡単に管理できます。
+ASP.NET Core では、組み込みの Identity プロバイダーを含むアプリをセキュリティで保護するための多くのツールとライブラリが提供されますが、Facebook、Twitter、LinkedIn などのサードパーティの ID サービスを使用することもできます。 ASP.NET Core では、コードで公開せずに機密情報を格納して使用する方法である、アプリ シークレットを簡単に管理できます。
 
 ## <a name="authentication-vs-authorization"></a>認証と承認
 
@@ -36,4 +42,4 @@ ASP.NET Core および EF には、アプリをセキュリティで保護し、
 * [クロスサイト リクエスト フォージェリ (CSRF)](xref:security/anti-request-forgery)
 * [オープン リダイレクト攻撃](xref:security/preventing-open-redirects)
 
-この他にも知っておく必要がある脆弱性はあります。 詳細については、目次の**セキュリティと ID** のセクションにある他の記事を参照してください。
+この他にも知っておく必要がある脆弱性はあります。 詳細については、目次の**セキュリティと Identity** のセクションにある他の記事を参照してください。
