@@ -7,14 +7,18 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 9634aca01acd218c3c18e5532a9a8d59eadc22dc
-ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+ms.openlocfilehash: 0f0bb2040d2407817c91f64a4769e6601c37a07d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/02/2020
-ms.locfileid: "82727728"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775285"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core での認証と承認SignalR
 
@@ -290,7 +294,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [ASP.NET Core でのベアラートークン認証](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [リソースベースの承認](xref:security/authorization/resourcebased)

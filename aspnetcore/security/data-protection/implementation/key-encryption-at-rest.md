@@ -4,13 +4,19 @@ author: rick-anderson
 description: 保存時のデータ保護キーの暗号化 ASP.NET Core の実装の詳細について説明します。
 ms.author: riande
 ms.date: 07/16/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651632"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776930"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>ASP.NET Core での保存時のキーの暗号化
 
@@ -23,7 +29,7 @@ ms.locfileid: "78651632"
 
 ## <a name="azure-key-vault"></a>Azure Key Vault
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)にキーを格納するには、`Startup` クラスで[ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault)を使用してシステムを構成します。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)にキーを格納するには、 `Startup`クラスで[ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault)を使用してシステムを構成します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -53,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-パラメーターを使用せずに `ProtectKeysWithDpapi` を呼び出すと、現在の Windows ユーザーアカウントのみが、永続化されたキーリングを解読できます。 必要に応じて、(現在のユーザーアカウントだけでなく) コンピューター上のすべてのユーザーアカウントがキーリングを解読できるように指定することもできます。
+パラメーター `ProtectKeysWithDpapi`を使用せずにを呼び出すと、現在の Windows ユーザーアカウントのみが、永続化されたキーリングを解読できます。 必要に応じて、(現在のユーザーアカウントだけでなく) コンピューター上のすべてのユーザーアカウントがキーリングを解読できるように指定することもできます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -100,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`ProtectKeysWithDpapiNG`のパラメーターなしのオーバーロードもあります。 この便利な方法を使用して、"SID = {CURRENT_ACCOUNT_SID}" という規則を指定します。 *CURRENT_ACCOUNT_SID*は現在の Windows ユーザーアカウントの SID です。
+の`ProtectKeysWithDpapiNG`パラメーターなしのオーバーロードもあります。 この便利な方法を使用して、"SID = {CURRENT_ACCOUNT_SID}" という規則を指定します。 *CURRENT_ACCOUNT_SID*は現在の Windows ユーザーアカウントの SID です。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

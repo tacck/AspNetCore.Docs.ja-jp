@@ -4,13 +4,19 @@ author: ardalis
 description: アプリケーションを読み、操作し、ASP.NET Core での MVC 要素の動作を変更する方法について説明します。
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 4b6c978e5752eb320412a1c204df8e3d288fe4a1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5e31d2e6611321bec7442534ce41350de10478e0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654554"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768664"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core のアプリケーション モデルの使用
 
@@ -38,7 +44,7 @@ ASP.NET Core MVC アプリケーション モデルの構造は、次のとお�
 
 ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iapplicationmodelprovider) インターフェイスによって定義されるプロバイダー パターンを使用して、アプリケーション モデルを読み込みます。 このセクションでは、このプロバイダーがどのように機能するかについての、いくつかの内部実装に関する詳細を説明します。 これは高度なトピックです。アプリケーション モデルを活用するアプリのほとんどでは、規則を使用してアプリケーション モデルを活用する必要があります。
 
-`IApplicationModelProvider` インターフェイスの実装は、その `OnProvidersExecuting` プロパティに応じて、昇順で `Order` を呼び出して互いを "ラップ" します。 次いで、`OnProvidersExecuted` メソッドが逆順で呼び出されます。 このフレームワークでは、次のいくつかのプロバイダーが定義されます。
+`IApplicationModelProvider` インターフェイスの実装は、その `Order` プロパティに応じて、昇順で `OnProvidersExecuting` を呼び出して互いを "ラップ" します。 次いで、`OnProvidersExecuted` メソッドが逆順で呼び出されます。 このフレームワークでは、次のいくつかのプロバイダーが定義されます。
 
 1 番目 (`Order=-1000`):
 
@@ -63,13 +69,13 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 * コンテキストにアクション メソッド パラメーターを追加する
 * ルートおよびその他の属性を適用する
 
-いくつかの組み込みの動作は、`DefaultApplicationModelProvider` によって実装されます。 このプロバイダーは、[`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)、[`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel)、および [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) インスタンスを代わりに参照する、[`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) を構築する役割があります。 `DefaultApplicationModelProvider` クラスは、今後変更する可能性がある変更される、内部フレームワークの実装についての詳細です。 
+いくつかの組み込みの動作は、`DefaultApplicationModelProvider` によって実装されます。 このプロバイダーは、、、および[`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel)の各インスタンスを参照[`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel)するを構築する役割を担います。 `DefaultApplicationModelProvider` クラスは、今後変更する可能性がある変更される、内部フレームワークの実装についての詳細です。 
 
 `AuthorizationApplicationModelProvider` は、`AuthorizeFilter` 属性および `AllowAnonymousFilter` 属性に関連付けられた動作を適用します。 [これらの属性については、こちらを参照してください](xref:security/authorization/simple)。
 
 `CorsApplicationModelProvider` は、`IEnableCorsAttribute` および `IDisableCorsAttribute` および `DisableCorsAuthorizationFilter` に関連付けられた動作を実装します。 [CORS の詳細については、こちらを参照してください](xref:security/cors).
 
-## <a name="conventions"></a>規則
+## <a name="conventions"></a>規約
 
 このアプリケーション モデルでは、モデルまたはプロバイダー全体をオーバーライドするよりも簡単に、モデルの動作をカスタマイズできる、規則の抽象化を定義できます。 これらの抽象化は、アプリの動作の変更に推奨されます。 規則では、動的にカスタマイズすることが可能なコードを記述することができます。 [フィルター](xref:mvc/controllers/filters)では、フレームワークの動作を変更できるのに対して、カスタマイズではアプリ全体がどのように連携するかを制御できます。
 
@@ -80,7 +86,7 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-規則は、規則を MVC オプションを追加したり、`Attribute` を実装してそれらをコントローラー、アクション、またはアクション パラメーターに適用したりすることによって適用します ([`Filters`](xref:mvc/controllers/filters) と類似しています)。 フィルターとは異なり、規則は、各要求の一部としてではなく、アプリの起動時にのみ実行されます。
+規則を適用するには、それらを MVC オプションに`Attribute`追加するか、を実装してコントローラー、アクション、またはアクション[`Filters`](xref:mvc/controllers/filters)パラメーターに適用します (に似ています)。 フィルターとは異なり、規則は、各要求の一部としてではなく、アプリの起動時にのみ実行されます。
 
 ### <a name="sample-modifying-the-applicationmodel"></a>サンプル: ApplicationModel を変更する
 
@@ -88,7 +94,7 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/ApplicationDescription.cs)]
 
-アプリケーション モデルの規則は、MVC が `ConfigureServices` の `Startup` に追加されるときに、オプションとしてが適用されます。
+アプリケーション モデルの規則は、MVC が `Startup` の `ConfigureServices` に追加されるときに、オプションとしてが適用されます。
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Startup.cs?name=ConfigureServices&highlight=5)]
 
@@ -154,7 +160,7 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 [!code-csharp[](./application-model/sample/src/AppModelSample/Startup.cs?name=ConfigureServices&highlight=6)]
 
 > [!TIP]
-> [ を使用し、](xref:fundamentals/middleware/index) にアクセスして、`MvcOptions`ミドルウェア`services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));`に規則を追加できます。
+> `services.Configure<MvcOptions>(c => c.Conventions.Add(YOURCONVENTION));` を使用し、`MvcOptions` にアクセスして、[ミドルウェア](xref:fundamentals/middleware/index)に規則を追加できます。
 
 このサンプルでは、コントローラー名に "Namespace" が含まれる、属性のルーティングを使用していないルートにこの規則は適用されます。 この規則は、次のコントローラーによって使用されます。
 
@@ -167,7 +173,7 @@ ASP.NET Core MVC と ASP.NET Web API 2 とでは使用する規則のセット�
 > [!NOTE]
 > [ASP.NET Web API からの移行](xref:migration/webapi)に関するページをご覧ください。
 
-Web API Compatibility Shim を使用するには、プロジェクトにパッケージを追加し、`AddWebApiConventions` の `Startup` を呼び出して MVC に規則を追加する必要があります。
+Web API Compatibility Shim を使用するには、プロジェクトにパッケージを追加し、`Startup` の `AddWebApiConventions` を呼び出して MVC に規則を追加する必要があります。
 
 ```csharp
 services.AddMvc().AddWebApiConventions();
@@ -200,7 +206,7 @@ Shim が提供するこの規則は、それに特定の属性が適用された
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>アプリをドキュメント化するための ApiExplorer の使用
 
-このアプリケーション モデルは、アプリの構造をスキャンするために使用できる [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) プロパティを各レベルで公開します。 これは、[Swagger などのツールを使用して、Web API のヘルプ ページを生成する](xref:tutorials/web-api-help-pages-using-swagger)ために使用できます。 `ApiExplorer` プロパティは、アプリのモデルのどの部分を公開するか指定するために設定できる `IsVisible` プロパティを公開します。 この設定は、次の規則を使用して構成できます。
+アプリケーションモデルは、アプリ[`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel)の構造を走査するために使用できる各レベルのプロパティを公開します。 これは、[Swagger などのツールを使用して、Web API のヘルプ ページを生成する](xref:tutorials/web-api-help-pages-using-swagger)ために使用できます。 `ApiExplorer` プロパティは、アプリのモデルのどの部分を公開するか指定するために設定できる `IsVisible` プロパティを公開します。 この設定は、次の規則を使用して構成できます。
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

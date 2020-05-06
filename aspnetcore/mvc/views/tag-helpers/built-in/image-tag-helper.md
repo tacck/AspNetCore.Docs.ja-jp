@@ -5,13 +5,19 @@ description: イメージ タグ ヘルパーを使用する方法を示しま�
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
-ms.openlocfilehash: 964072ad276f7e3e411ee41cb03a2efb9d05c585
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e1e3566f09c44d70650fa1f21e1921e76e46d384
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653774"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777411"
 ---
 # <a name="image-tag-helper-in-aspnet-core"></a>ASP.NET Core のイメージ タグ ヘルパー
 
@@ -32,7 +38,7 @@ ms.locfileid: "78653774"
 
 ### <a name="src"></a>src
 
-イメージ タグ ヘルパーをアクティブにするには、`src` 要素に `<img>` 属性が必要です。
+イメージ タグ ヘルパーをアクティブにするには、`<img>` 要素に `src` 属性が必要です。
 
 イメージ ソース (`src`) は、サーバー上の物理静的ファイルをポイントしている必要があります。 `src` がリモート URI の場合は、キャッシュ バスティング クエリ文字列パラメーターは生成されません。
 
@@ -58,6 +64,6 @@ ms.locfileid: "78653774"
 
 イメージ タグ ヘルパーはローカル Web サーバーでキャッシュ プロバイダーを使用して、特定のファイルの計算された `Sha512` ハッシュを格納します。 ファイルが複数回要求された場合、ハッシュは再計算されません。 キャッシュは、ファイルの `Sha512` ハッシュが計算されたときにファイルにアタッチされるファイル ウォッチャーによって無効になります。 ディスク上のファイルが変更されると、新しいハッシュが計算されてキャッシュされます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:performance/caching/memory>

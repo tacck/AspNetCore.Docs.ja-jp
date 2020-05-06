@@ -6,26 +6,32 @@ monikerRange: '>= aspnetcore-2.2'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: d49b51d11d3f14d0c3edbe1765d74fd63e3ac061
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: f74327cd5bb6a5794c90ffdd3896f2b343e175a6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78651524"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774887"
 ---
 # <a name="use-web-api-conventions"></a>Web API 規約を使用する
 
 作成者: [Pranav Krishnamoorthy](https://github.com/pranavkm)、[Scott Addie](https://github.com/scottaddie)
 
-ASP.NET Core 2.2 以降では、一般的な [API ドキュメント](xref:tutorials/web-api-help-pages-using-swagger)を抽出し、これを複数のアクション、コントローラー、またはアセンブリ内のすべてのコントローラーに適用する方法が含まれています。 Web API 規約は、[`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) による個々のアクションの装飾の代わりになるものです。
+ASP.NET Core 2.2 以降では、一般的な [API ドキュメント](xref:tutorials/web-api-help-pages-using-swagger)を抽出し、これを複数のアクション、コントローラー、またはアセンブリ内のすべてのコントローラーに適用する方法が含まれています。 Web API 規則は、を使用して[`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)個々のアクションを装飾するための代替手段です。
 
 規約を使用すると、次のことを実行できます。
 
 * 特定の型のアクションから返される最も一般的な戻り値の型と状態コードを定義する
 * 定義済みの標準から外れるアクションを識別する
 
-ASP.NET Core MVC 2.2 以降には、一連の既定の規約 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> が含まれています。 この規約は、ASP.NET Core *API* プロジェクト テンプレートで提供されるコントローラー (**ValuesController.cs**) に基づいています。 アクションがテンプレートのパターンに従う場合は、既定の規約を使用すると成功します。 既定の規約がニーズに合わない場合は、「[Web API 規約を作成する](#create-web-api-conventions)」を参照してください。
+ASP.NET Core MVC 2.2 以降には、一連の既定の規約 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> が含まれています。 この規約は、ASP.NET Core **API** プロジェクト テンプレートで提供されるコントローラー (*ValuesController.cs*) に基づいています。 アクションがテンプレートのパターンに従う場合は、既定の規約を使用すると成功します。 既定の規約がニーズに合わない場合は、「[Web API 規約を作成する](#create-web-api-conventions)」を参照してください。
 
 実行時に、<xref:Microsoft.AspNetCore.Mvc.ApiExplorer> は規約を理解します。 `ApiExplorer` は [OpenAPI](https://www.openapis.org/) (Swagger とも呼ばれている) ドキュメントのジェネレーターと通信するために MVC を抽象化したものです。 適用された規約の属性はアクションと関連付けられており、アクションの OpenAPI ドキュメントに含まれます。 [API アナライザー](xref:web-api/advanced/analyzers)でも、規約を理解します。 従来とは異なるアクションである場合 (適用されている規約で文書化されていない状態コードを返す場合など)、警告で状態コードの文書化が促されます。
 
@@ -35,7 +41,7 @@ ASP.NET Core MVC 2.2 以降には、一連の既定の規約 <xref:Microsoft.Asp
 
 規約では作成は行われません。各アクションを 1 つの規約だけに関連付けることができます。 より具体的な規約の方が一般的な規約より優先されます。 優先順位が同じである 2 つ以上の規約が 1 つのアクションに適用されていると、選択は不明確になります。 次のオプションは、規約をアクションに適用するためにあります。より具体的なものから並んでいます。
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute` &mdash; は個々のアクションに適用され、規則の種類と適用される規則の方法を指定します。
+1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash;個々のアクションに適用され、規則の種類と適用される規則の方法を指定します。
 
     次の例では、既定の規約の種類の `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` 規約のメソッドが、`Update` アクションに適用されます。
 
@@ -73,7 +79,7 @@ ASP.NET Core MVC 2.2 以降には、一連の既定の規約 <xref:Microsoft.Asp
 
 ### <a name="response-types"></a>応答の種類
 
-これらのメソッドには `[ProducesResponseType]` または `[ProducesDefaultResponseType]` 属性の注釈が付けられています。 例 :
+これらのメソッドには `[ProducesResponseType]` または `[ProducesDefaultResponseType]` 属性の注釈が付けられています。 次に例を示します。
 
 ```csharp
 public static class MyAppConventions
@@ -93,7 +99,7 @@ public static class MyAppConventions
 
 ### <a name="naming-requirements"></a>名前付けに関する要件
 
-`[ApiConventionNameMatch]` 属性と `[ApiConventionTypeMatch]` 属性は、適用されるアクションを決定する規約のメソッドに適用することができます。 例 :
+`[ApiConventionNameMatch]` 属性と `[ApiConventionTypeMatch]` 属性は、適用されるアクションを決定する規約のメソッドに適用することができます。 次に例を示します。
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]
@@ -110,7 +116,7 @@ public static void Find(
 * メソッドに適用された `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix` オプションは、規約が "Find" というプレフィックスがあるアクションに一致することを示します。 `Find`、`FindPet`、および `FindById` を含む照合アクションの例。
 * パラメーターに適用された `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix` は、規約がサフィックス識別子で終わる 1 つのパラメーターが含まれるメソッドと一致することを示します。 例には、`id` や `petId` などのパラメーターが含まれます。 `ApiConventionTypeMatch` も同様に型に適用して、パラメーターの型に制約を設けることができます。 `params[]` の引数では、明示的に一致する必要がない残りのパラメーターを示します。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:web-api/advanced/analyzers>
 * <xref:tutorials/web-api-help-pages-using-swagger>
