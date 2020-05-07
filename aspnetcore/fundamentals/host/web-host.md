@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: e02d6efcb3aec1329469b8654e66ba845870421a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 71bca4c0987059efa0e4ff35f25fe7cdb75641d5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650582"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773992"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core の Web ホスト
 

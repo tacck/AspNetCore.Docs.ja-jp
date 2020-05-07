@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/16/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: c144841805e07a136f153c25a78c7f9af7c5801b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: a9b0d0efd4afd4941bd4d93f33adecdf3288992f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511367"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767071"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor のイベント処理
 

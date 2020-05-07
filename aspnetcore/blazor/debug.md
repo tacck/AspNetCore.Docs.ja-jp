@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/16/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7273ae3d240de0b59a58069fdcc1880247379751
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 9acbb8e7b122a8d527d16ce33af01c2e7e7608bf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661609"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767539"
 ---
-# <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
+# <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
 [Daniel Roth](https://github.com/danroth27)
 

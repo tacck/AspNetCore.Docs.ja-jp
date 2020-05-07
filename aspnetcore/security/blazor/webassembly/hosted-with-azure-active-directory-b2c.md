@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 05068853615a63611188175d95c27f1442973a86
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b451df023bdea3e76725d5d1301f3c3f44ea5d99
+ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768209"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82876206"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C を使用Blazorして ASP.NET Core webasのホスト型アプリをセキュリティで保護する
 
@@ -94,7 +94,7 @@ ms.locfileid: "82768209"
 1. **API**の一覧を開きます。
 1. API へのアクセスを有効にします`API.Access`(たとえば、)。
 1. **[アクセス許可の追加]** を選択します.
-1. [ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。 **[はい]** を選択して確定します。
+1. [ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。 **[はい]** をクリックして操作を確定します。
 
 [**ホーム** > **Azure AD B2C** > **ユーザーフロー**:
 
@@ -172,7 +172,7 @@ services.Configure<JwtBearerOptions>(
 
 ```json
 {
-  "AzureAd": {
+  "AzureAdB2C": {
     "Instance": "https://{ORGANIZATION}.b2clogin.com/",
     "ClientId": "{SERVER API APP CLIENT ID}",
     "Domain": "{DOMAIN}",
@@ -185,7 +185,7 @@ services.Configure<JwtBearerOptions>(
 
 ```json
 {
-  "AzureAd": {
+  "AzureAdB2C": {
     "Instance": "https://contoso.b2clogin.com/",
     "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
     "Domain": "contoso.onmicrosoft.com",

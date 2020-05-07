@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 03/18/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/templated-components
-ms.openlocfilehash: b57e3fe186402723607e90b1628062f602c77632
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989495"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771068"
 ---
-# <a name="aspnet-core-opno-locblazor-templated-components"></a>ASP.NET Core Blazor テンプレート コンポーネント
+# <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core Blazor テンプレート コンポーネント
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 

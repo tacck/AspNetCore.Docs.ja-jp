@@ -5,13 +5,19 @@ description: ASP.NET Core のために gRPC で認証と承認を使用する方
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: c0312b186bbb35e3b802984484b7213016d8bf04
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: eecdebe5ea7555df0914adfbff728331e3592093
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78964443"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776169"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core のための gRPC での認証と承認
 

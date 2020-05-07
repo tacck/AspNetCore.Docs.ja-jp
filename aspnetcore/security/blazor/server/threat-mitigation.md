@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: f43a46f53dc50cde43c88460b8bd3d6fb7a7076f
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
-ms.translationtype: HT
+ms.openlocfilehash: 7c71da690efc0a515b289fd575173f2d3093d1c1
+ms.sourcegitcommit: d4527df91f2c15bbe1cbf5a541adbea5747897aa
+ms.translationtype: MT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850501"
+ms.locfileid: "82852388"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor サーバーの脅威軽減ガイダンス
 
@@ -34,6 +34,10 @@ JS 相互運用はインターネット経由で行われ、クライアント�
 
 * は、制約された環境には適用されません。
 * 制約された環境でセキュリティリスクが低いため、を実装する価値はありません。
+
+## <a name="blazor-and-shared-state"></a>Blazor と共有状態
+
+[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
 
 ## <a name="resource-exhaustion"></a>リソース枯渇
 

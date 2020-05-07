@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core MVC アプリ内で SQL Server LocalDB または SQLite を使用する方法について説明します。
 ms.author: riande
 ms.date: 8/16/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: d556f07111fb2022a1c2f1a066459566e302835d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 54b10f10fb048819fced223f77f06a32102512d0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649808"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776208"
 ---
 # <a name="work-with-sql-in-aspnet-core"></a>ASP.NET Core での SQL の操作
 

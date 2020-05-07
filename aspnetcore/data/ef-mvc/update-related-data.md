@@ -6,13 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 83d662659fb4bc7a2867be563e4e36927d2adafe
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 32d3a22b85675d817286e3e72b8b9c8e63df6ca6
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646058"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850423"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>チュートリアル: 関連データを更新する - ASP.NET MVC と EF Core
 
@@ -225,7 +231,7 @@ Course エンティティと Instructor エンティティ間には、多対多�
 
 <a id="notepad"></a>
 > [!NOTE]
-> Visual Studio にコードを貼り付けると、改行がコードを分割するように変更される場合があります。 貼り付けた後でコードが変化している場合は、Ctrl + Z キーを 1 回押して、自動書式設定を元に戻してください。 これにより、改行がここに示されているように修正されます。 インデントは完璧である必要はありませんが、`@</tr><tr>`、`@:<td>`、`@:</td>`、および `@:</tr>` の行は、示されているようにそれぞれ 1 行にする必要があります。そうしないと、ランタイム エラーが発生します。 新しいコードのブロックを選択して、Tab キーを 3 回押して、新しいコードと既存のコードを並べます。 この問題は、Visual Studio 2019 で修正されます。
+> Visual Studio にコードを貼り付けると、改行がコードを分割するように変更される場合があります。 貼り付けた後でコードが変化している場合は、Ctrl + Z キーを 1 回押して、自動書式設定を元に戻してください。 これにより、改行がここに示されているように修正されます。 インデントは完璧である必要はありませんが、`@:</tr><tr>`、`@:<td>`、`@:</td>`、および `@:</tr>` の行は、示されているようにそれぞれ 1 行にする必要があります。そうしないと、ランタイム エラーが発生します。 新しいコードのブロックを選択して、Tab キーを 3 回押して、新しいコードと既存のコードを並べます。 この問題は、Visual Studio 2019 で修正されます。
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 

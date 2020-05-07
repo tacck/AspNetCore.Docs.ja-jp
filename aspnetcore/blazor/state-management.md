@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: e8a1959a8fc05ea59362bb5824181a9d2e418811
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 75d9a66eb25201c2993b8f922754b8aa7ab84615
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218870"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771169"
 ---
-# <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 状態管理
+# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -34,7 +37,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ほ
 > [!NOTE]
 > この記事では、Blazor Server アプリの状態維持について取り扱います。 Blazor WebAssembly アプリでは、[ブラウザーのクライアント側の状態維持](#client-side-in-the-browser)が利用されますが、この記事に扱う範囲を超えたカスタム ソリューションやサードパーティ製のパッケージが必要です。
 
-## <a name="opno-locblazor-circuits"></a>Blazor 回線
+## <a name="blazor-circuits"></a>Blazor 回線
 
 ユーザーが一時的にネットワークに接続できなくなる場合、Blazor では、ユーザーがアプリを引き続き使用できるよう、そのユーザーを元の回線に再接続が試行されます。 ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。
 

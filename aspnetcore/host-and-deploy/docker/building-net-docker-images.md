@@ -5,13 +5,19 @@ description: 公開されている .NET Core Docker イメージを Docker レ�
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: ced0cb7cbeed1b8811813a70035c2e0b42c3e35a
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: bce04caf20dcf23ab7160066d55a279b29dca1ae
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440780"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774107"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 向けの Docker イメージ
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core 1.1 の新機能について説明します。
 ms.author: riande
 ms.date: 12/18/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: aspnetcore-1.1
-ms.openlocfilehash: df9fd6bda00ac5f5516f40507001463fd7d0b92e
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c3317c8ff905d1c7a9c9d9019d18cbebad92edaf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78651146"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775844"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>ASP.NET Core 1.1 の新機能
 

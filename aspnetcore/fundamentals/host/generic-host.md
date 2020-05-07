@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 46a56c278e889778e58a1fbb41ec217aaf023b13
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: 268c507ee35c9c0432c3dd2da2a389308531b9f1
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488775"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775597"
 ---
 # <a name="net-generic-host"></a>.NET での汎用ホスト
 

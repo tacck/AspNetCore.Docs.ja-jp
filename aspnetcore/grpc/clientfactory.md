@@ -6,14 +6,18 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: grpc/clientfactory
-ms.openlocfilehash: 3042bb61367f8b9a9f3142217ad329270ab2cca5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 42b786b9a4d9b422ccf92d7a329979894a35b275
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650798"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774718"
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core での gRPC クライアント ファクトリの統合
 

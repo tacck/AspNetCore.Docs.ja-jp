@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: 5edbbe36e8389bac0335594b1e4331aee1c02867
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 9f1e5ea4d883a027f40ac0eccc7a9bba1435139d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647414"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767201"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor の高度なシナリオ
 
@@ -218,7 +221,7 @@ builder.AddContent(seq++, "Second");
 * シーケンス番号がハードコードされている場合、差分アルゴリズムでは、シーケンス番号の値が増えることだけが要求されます。 初期値とギャップは関係ありません。 合理的な選択肢の 1 つは、コード行番号をシーケンス番号として使用するか、ゼロから開始し、1 つずつまたは 100 ずつ (または任意の間隔で) 増やすことです。 
 * Blazor ではシーケンス番号が使用されていますが、他のツリー差分 UI フレームワークでは使用されていません。 シーケンス番号を使用すると、差分がはるかに高速になります。また、Blazor には、" *.razor*" ファイルを作成する開発者に対して、シーケンス番号を自動的に処理するコンパイル ステップの利点があります。
 
-## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Blazor サーバー アプリで大規模なデータ転送を実行する
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor サーバー アプリで大規模なデータ転送を実行する
 
 シナリオによっては、JavaScript と Blazor 間で大量のデータを転送する必要があります。 通常、大規模なデータ転送は次の場合に発生します。
 

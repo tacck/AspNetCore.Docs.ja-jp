@@ -5,13 +5,19 @@ description: Visual Studio で ASP.NET Core Web アプリを作成し、それ�
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648110"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850566"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Visual Studio および Git と ASP.NET Core を組み合わせた Azure への継続的配置
 
@@ -24,7 +30,7 @@ ms.locfileid: "78648110"
 [Azure Pipelines を使用した初めてのパイプラインの作成](/azure/devops/pipelines/get-started-yaml)に関する記事を参照してください。記事では、Azure DevOps Services を使用した [Azure App Service](/azure/app-service/app-service-web-overview) 向けの継続的デリバリー (CD) ワークフローの構成方法が示されています。 Azure Pipelines (Azure DevOps Services サービス) を利用すると、Azure App Service でホストされているアプリの更新プログラムを公開するための堅牢な配置パイプラインの設定が簡単になります。 Azure Portal で、このパイプラインのビルド、テスト実行、ステージング スロットへの配置、運用への配置を構成できます。
 
 > [!NOTE]
-> このチュートリアルを完了するには、Microsoft Azure アカウントが必要です。 アカウントを持っていない場合は、[MSDN サブスクライバー特典を有効にする](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)か、[無料試用版にサインアップ](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)してください。
+> このチュートリアルを完了するには、Microsoft Azure アカウントが必要です。 アカウントを持っていない場合は、[MSDN サブスクライバー特典を有効にする](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)か、[無料試用版にサインアップ](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F)してください。
 
 ## <a name="prerequisites"></a>必須コンポーネント
 

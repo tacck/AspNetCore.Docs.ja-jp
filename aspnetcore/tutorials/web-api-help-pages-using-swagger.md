@@ -5,13 +5,19 @@ description: このチュートリアルでは、Swagger を追加して、Web A
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 4408e02996b958bf009903aa1e4eeda9ad4f457c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: bde38fcbc11ef36c42523acb182fc62a934821c3
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646856"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774523"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ
 
