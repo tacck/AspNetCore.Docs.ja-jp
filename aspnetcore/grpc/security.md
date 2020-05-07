@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
 ms.date: 07/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/security
-ms.openlocfilehash: f84bec0ef485b701b2be36384a2e49b9b28e473d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 8bbe198087f8ba80abfe6b518f8223c719801a85
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650888"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774956"
 ---
 # <a name="security-considerations-in-grpc-for-aspnet-core"></a>gRPC での ASP.NET Core のセキュリティに関する考慮事項
 

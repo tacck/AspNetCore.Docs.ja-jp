@@ -5,13 +5,19 @@ description: ASP.NET Core および Azure を使用した DevOps に必要なツ
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 9c1042dd48b9167209b46e97a09e011b80e2609c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1917a329a5dcbe60542541cfcdc746799307e3d5
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511146"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850410"
 ---
 # <a name="tools-and-downloads"></a>ツールとダウンロード
 
@@ -21,7 +27,7 @@ Azure には、[Azure portal](https://portal.azure.com)、[Azure CLI](/cli/azure
 
 次のサブスクリプションが必要です。
 
-* Azure &mdash; アカウントをお持ちでない場合は、[無料試用版を入手](https://azure.microsoft.com/free/)してください。
+* Azure &mdash; アカウントをお持ちでない場合は、[無料試用版を入手](https://azure.microsoft.com/free/dotnet/)してください。
 * Azure DevOps Services &mdash; Azure DevOps サブスクリプションと組織は、第 4 章で作成されます。
 * GitHub &mdash; アカウントをお持ちでない場合は、[無料でサインアップ](https://github.com/join)できます。
 

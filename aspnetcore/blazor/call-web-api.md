@@ -5,17 +5,20 @@ description: クロス オリジン リソース共有 (CORS) 要求の作成な
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: abc546cc0079a01e3999b2c7c083235d3fff9b06
-ms.sourcegitcommit: e94ecfae6a3ef568fa197da791c8bc595917d17a
+ms.openlocfilehash: d823db3688e05f6befefacc9f390e0dcdbf329a7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82122219"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767149"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor から Web API を呼び出す
 
@@ -23,9 +26,9 @@ ms.locfileid: "82122219"
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) アプリからは、事前に構成された `HttpClient` サービスを使用して Web API を呼び出します。 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) オプションを含めることができる要求は、Blazor JSON ヘルパーまたは <xref:System.Net.Http.HttpRequestMessage> を使用して作成します。 Blazor WebAssembly アプリの `HttpClient` サービスは、発行元のサーバーに要求を戻すことに重点を置いています。 このトピックのガイダンスは、Blazor WebAssembly アプリにのみ関連します。
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) アプリは、事前に構成された `HttpClient` サービスを使用して Web API を呼び出します。 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) オプションを含めることができる要求は、Blazor JSON ヘルパーまたは <xref:System.Net.Http.HttpRequestMessage> を使用して作成ます。 Blazor WebAssembly アプリの `HttpClient` サービスは、発行元のサーバーに要求を戻すことに重点を置いています。 このトピックのガイダンスは、Blazor WebAssembly アプリにのみ関連します。
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) アプリからは <xref:System.Net.Http.HttpClient> インスタンス (通常、<xref:System.Net.Http.IHttpClientFactory> を使用して作成されます) を使用して Web API を呼び出します。 このトピックのガイダンスは、Blazor Server アプリには関係しません。 Blazor Server アプリの開発時には、<xref:fundamentals/http-requests> のガイダンスに従ってください。
+[Blazor Server](xref:blazor/hosting-models#blazor-server) アプリは、<xref:System.Net.Http.HttpClient> インスタンスを使用して Web API を呼び出します。これは通常、<xref:System.Net.Http.IHttpClientFactory> を使用して作成されます。 このトピックのガイダンスは、Blazor Server アプリには関係しません。 Blazor Server アプリの開発時には、<xref:fundamentals/http-requests> のガイダンスに従ってください。
 
 [サンプルコードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([ダウンロードの方法](xref:index#how-to-download-a-sample)) &ndash;*BlazorWebAssemblySample* アプリを選択します。
 
@@ -43,7 +46,7 @@ ms.locfileid: "82122219"
 `Program.Main` で、`HttpClient` サービスがまだ存在しない場合は追加します。
 
 ```csharp
-builder.Services.AddSingleton(
+builder.Services.AddTransient(sp => 
     new HttpClient
     {
         BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
@@ -52,7 +55,7 @@ builder.Services.AddSingleton(
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient と JSON ヘルパー
 
-Blazor WebAssembly アプリでは、要求を要求元のサーバーに返すための構成済みのサービスとして [HttpClient](xref:fundamentals/http-requests) を使用できます。
+Blazor WebAssembly アプリでは、[HttpClient](xref:fundamentals/http-requests) は、要求を要求元のサーバーに返すための構成済みのサービスとして利用できます。
 
 Blazor Server アプリには、既定では `HttpClient` サービスが含まれません。 [HttpClient ファクトリ インフラストラクチャ](xref:fundamentals/http-requests)を使用して、アプリに `HttpClient` を提供します。
 
@@ -186,90 +189,10 @@ Web ページでは、ブラウザーのセキュリティにより、その Web
 
 他のサイトがアプリに対してクロス オリジン リソース共有 (CORS) 要求を行えるようにするには、「<xref:security/cors>」を参照してください。
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 要求オプションを使用する HttpClient と HttpRequestMessage
-
-Blazor WebAssembly アプリで WebAssembly を実行するときには、[HttpClient](xref:fundamentals/http-requests) および <xref:System.Net.Http.HttpRequestMessage> を使用して要求をカスタマイズします。 たとえば、要求 URI、HTTP メソッド、および必要なすべての要求ヘッダーを指定できます。
-
-```razor
-@using System.Net.Http
-@using System.Net.Http.Headers
-@using System.Net.Http.Json
-@inject HttpClient Http
-
-@code {
-    private async Task PostRequest()
-    {
-        var requestMessage = new HttpRequestMessage()
-        {
-            Method = new HttpMethod("POST"),
-            RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
-            Content = 
-                JsonContent.Create(new TodoItem
-                { 
-                    Name: "A New Todo Item",
-                    IsComplete: false
-                })
-        };
-        
-        requestMessage.Headers.Authorization = 
-           new AuthenticationHeaderValue("Bearer", "{OAUTH TOKEN}");
-
-        requestMessage.Content.Headers.TryAddWithoutValidation(
-            "x-custom-header", "value");
-
-        var response = await Http.SendAsync(requestMessage);
-        var responseStatusCode = response.StatusCode;
-        var responseBody = await response.Content.ReadAsStringAsync();
-    }
-}
-```
-
-.NET WebAssembly の `HttpClient` の実装には、[WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch) が使用されます。 フェッチを使用すると、いくつかの[要求固有のオプション](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)を構成できます。 
-
-HTTP フェッチ要求オプションは、次の表に示す `HttpRequestMessage` 拡張メソッドを使用して構成できます。
-
-| `HttpRequestMessage` 拡張メソッド | フェッチ要求プロパティ |
-| ------------------------------------- | ---------------------- |
-| `SetBrowserRequestCredentials`        | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| `SetBrowserRequestCache`              | [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| `SetBrowserRequestMode`               | [モード](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| `SetBrowserRequestIntegrity`          | [integrity](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
-
-より汎用的な `SetBrowserRequestOption` 拡張メソッドを使用してその他のオプションを設定できます。
- 
-通常、HTTP 応答は、応答コンテンツに対する同期読み取りのサポートを有効にするために Blazor WebAssembly アプリでバッファリングされます。 応答ストリーミングのサポートを有効にするには、要求に対して `SetBrowserResponseStreamingEnabled` 拡張メソッドを使用します。
-
-クロスオリジン要求に資格情報を含めるには、`SetBrowserRequestCredentials` 拡張メソッドを使用します。
-
-```csharp
-requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
-```
-
-Fetch API オプションの詳細については、[MDN の Web ドキュメント、WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters) を参照してください。
-
-CORS 要求で資格情報 (承認 cookie/ヘッダー) を送信するときには、CORS ポリシーで `Authorization` ヘッダーが許可されている必要があります。
-
-次のポリシーには、以下についての構成が含まれています。
-
-* 要求元 (`http://localhost:5000`、`https://localhost:5001`)。
-* 任意のメソッド (動詞)。
-* `Content-Type` ヘッダーと `Authorization` ヘッダー。 カスタム ヘッダー (`x-custom-header`など) を許可するには、<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> の呼び出し時にヘッダーを一覧表示します。
-* クライアント側の JavaScript コードによって設定された資格情報 (`credentials` プロパティが `include`に設定されています)。
-
-```csharp
-app.UseCors(policy => 
-    policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
-    .AllowAnyMethod()
-    .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
-    .AllowCredentials());
-```
-
-詳細については、「<xref:security/cors>」と、サンプル アプリの HTTP 要求テスター コンポーネント (*Components/HTTPRequestTester.razor*) を参照してください。
-
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [追加のアクセス トークンを要求する](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
-* [送信要求にトークンを添付する](xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
+* <xref:security/blazor/webassembly/index>
+* <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS エンドポイントの構成](xref:fundamentals/servers/kestrel#endpoint-configuration)

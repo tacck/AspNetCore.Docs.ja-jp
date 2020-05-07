@@ -5,17 +5,23 @@ description: ASP.NET Core および Azure を使用した DevOps のための追
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: a775dc42551a43bcce72b5f9ca364ed00b1dc4e6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 92401d45d36dd3b93d175e08a8fa8697217ca7c7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647432"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766525"
 ---
 # <a name="next-steps"></a>次の手順
 
-このガイドでは ASP.NET Core サンプル アプリ用の DevOps パイプラインを作成しました。 お疲れさまでした。 Azure App Service に ASP.NET Core Web アプリを発行し、変更の継続的インテグレーションを自動化する方法についてご理解いただけたと思います。
+このガイドでは ASP.NET Core サンプル アプリ用の DevOps パイプラインを作成しました。 おめでとうございます!  Azure App Service に ASP.NET Core Web アプリを発行し、変更の継続的インテグレーションを自動化する方法についてご理解いただけたと思います。
 
 Web ホスティングと DevOps 以外にも、Azure には、ASP.NET Core の開発者に役立つ数多くのサービスとしてのプラットフォーム (PaaS) サービスがあります。 このセクションでは、いくつかの最も一般的に使用されるサービスの概要について説明します。
 
@@ -29,7 +35,7 @@ Web ホスティングと DevOps 以外にも、Azure には、ASP.NET Core の�
 
 [Cosmos DB](/azure/cosmos-db/) は、グローバル分散型のマルチモデル NoSQL データベース サービスです。 SQL API (旧称 DocumentDB)、Cassandra、MongoDB など、複数の API を使用できます。
 
-## <a name="identity"></a>Identity
+## Identity
 
 [Azure Active Directory](/azure/active-directory/) と [Azure Active Directory B2C](/azure/active-directory-b2c/) はどちらも ID サービスです。 Azure Active Directory は、エンタープライズ シナリオ向けに設計されており、Azure AD B2B (企業間) コラボレーションを可能にします。一方、Azure Active Directory B2C は、ソーシャル ネットワークのサインインなど、企業と消費者間のシナリオを対象としています。
 

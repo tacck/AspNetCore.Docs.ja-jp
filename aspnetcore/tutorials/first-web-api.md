@@ -5,13 +5,19 @@ description: ASP.NET Core で Web API をビルドする方法を学習します
 ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 7418e962076fae3ebdbb25381838757b09046578
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ddc14aba14e31c5530cda14b4792736da001246a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417657"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767240"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -38,11 +44,11 @@ ms.locfileid: "80417657"
 
 |API | 説明 | 要求本文 | 応答本文 |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | すべての To Do アイテムを取得します。 | None | To Do アイテムの配列|
-|GET /api/TodoItems/{id} | ID でアイテムを取得します。 | None | To Do アイテム|
-|POST /api/TodoItems | 新しいアイテムを追加します。 | To Do アイテム | To Do アイテム |
-|PUT /api/TodoItems/{id} | 既存のアイテムを更新します。&nbsp; | To Do アイテム | None |
-|DELETE /api/TodoItems/{id} &nbsp; &nbsp; | アイテムを削除します &nbsp; &nbsp; | None | None|
+|`GET /api/TodoItems` | すべての To Do アイテムを取得します。 | None | To Do アイテムの配列|
+|`GET /api/TodoItems/{id}` | ID でアイテムを取得します。 | None | To Do アイテム|
+|`POST /api/TodoItems` | 新しいアイテムを追加します。 | To Do アイテム | To Do アイテム |
+|`PUT /api/TodoItems/{id}` | 既存のアイテムを更新します。&nbsp; | To Do アイテム | None |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | アイテムを削除します &nbsp; &nbsp; | None | None|
 
 次の図は、アプリのデザインを示しています。
 

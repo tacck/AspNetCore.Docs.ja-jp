@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
 ms.date: 02/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/configuration
-ms.openlocfilehash: 4c13c45ce745643c3cb089a1c984d2ef599db48b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 6e4259b538d32490d5281f189a04ab5a04dbcce5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440832"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774692"
 ---
 # <a name="grpc-for-net-configuration"></a>.NET 構成のための gRPC
 

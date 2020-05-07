@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: spa/react
-ms.openlocfilehash: 9703a62eb7f779974382fe0fb01702d9fcd37d64
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1dd352f1a00d30df915fe1936d7dcb34af1b6634
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649754"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773677"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>ASP.NET Core で React プロジェクト テンプレートを使用する
 

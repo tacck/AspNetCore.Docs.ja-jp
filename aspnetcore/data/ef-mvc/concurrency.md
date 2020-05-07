@@ -6,13 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 6839e383093b993ff55095f26cf88cd68708f001
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: bbf04e3500b11a339dc59b6086d910b76eace735
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646262"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773602"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>チュートリアル: コンカレンシーの処理 - ASP.NET MVC と EF Core
 

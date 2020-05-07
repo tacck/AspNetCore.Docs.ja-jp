@@ -5,13 +5,19 @@ description: 既存の C-core ベースの gRPC アプリを移動して ASP.NET
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/25/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/migration
-ms.openlocfilehash: 451171a041f7bbb3711babd73d2fa2e245aadd28
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1846195cc43aec703333e69f66380ddcabcf2ad4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649370"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768823"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>gRPC サービスの C-core から ASP.NET Core への移行
 
@@ -47,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="configure-grpc-services-options"></a>gRPC サービス オプションの構成
 
-C-core ベースのアプリでは、`grpc.max_receive_message_length` や `grpc.max_send_message_length` などの設定は、`ChannelOption`サーバー インスタンスの構築[時に ](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__) で構成します。
+C-core ベースのアプリでは、`grpc.max_receive_message_length` や `grpc.max_send_message_length` などの設定は、[サーバー インスタンスの構築](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)時に `ChannelOption` で構成します。
 
 ASP.NET Core では、gRPC で `GrpcServiceOptions` 型による構成を提供しています。 たとえば、gRPC サービスの最大受信メッセージ サイズは、`AddGrpc` を使用して構成できます。 次の例では、既定の `MaxReceiveMessageSize` を 4 MB から 16 MB に変更しています。
 
@@ -65,7 +71,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="logging"></a>ログの記録
 
-C-core ベースのアプリでは、デバッグ目的で`GrpcEnvironment`ロガーを構成する[ために ](https://grpc.io/grpc/csharp/api/Grpc.Core.GrpcEnvironment.html?q=size#Grpc_Core_GrpcEnvironment_SetLogger_Grpc_Core_Logging_ILogger_) に依存しています。 ASP.NET Core スタックでは、[ロギング API](xref:fundamentals/logging/index) によってこの機能を提供しています。 たとえば、コンストラクター インジェクションを使用して、gRPC サービスにロガーを追加できます。
+C-core ベースのアプリでは、デバッグ目的で[ロガーを構成する](https://grpc.io/grpc/csharp/api/Grpc.Core.GrpcEnvironment.html?q=size#Grpc_Core_GrpcEnvironment_SetLogger_Grpc_Core_Logging_ILogger_)ために `GrpcEnvironment` に依存しています。 ASP.NET Core スタックでは、[ロギング API](xref:fundamentals/logging/index) によってこの機能を提供しています。 たとえば、コンストラクター インジェクションを使用して、gRPC サービスにロガーを追加できます。
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -82,13 +88,13 @@ C-core ベースのアプリでは、[Server. Ports プロパティ](https://grp
 
 ## <a name="grpc-interceptors-vs-middleware"></a>gRPC インターセプターとミドルウェア
 
-ASP.NET Core [ミドルウェア](xref:fundamentals/middleware/index)は、C-core ベースの gRPC アプリのインターセプターと比較して、同様の機能を提供します。 ASP.NET Core ミドルウェアとインターセプターは概念的に似ています。 両方:
+ASP.NET Core [ミドルウェア](xref:fundamentals/middleware/index)は、C-core ベースの gRPC アプリのインターセプターと比較して、同様の機能を提供します。 ASP.NET Core ミドルウェアとインターセプターは概念的に似ています。 両方: 
 
 * gRPC 要求を処理するパイプラインを構築するために使用されます。
 * パイプライン内の次のコンポーネントの前または後で作業が実行されます。
 * `HttpContext` へのアクセスを提供します。
   * ミドルウェアでは、`HttpContext` はパラメーターです。
-  * インターセプターでは、`HttpContext` 拡張メソッドで `ServerCallContext` パラメーターを使用して、`ServerCallContext.GetHttpContext` にアクセスできます。 この機能は、ASP.NET Core で実行されているインターセプターに固有です。
+  * インターセプターでは、`ServerCallContext.GetHttpContext` 拡張メソッドで `ServerCallContext` パラメーターを使用して、`HttpContext` にアクセスできます。 この機能は、ASP.NET Core で実行されているインターセプターに固有です。
 
 gRPC インターセプターと ASP.NET Core ミドルウェアの違い:
 

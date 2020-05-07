@@ -5,13 +5,19 @@ description: C# を使用した gRPC サービスを作成する際の基本的�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/03/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/basics
-ms.openlocfilehash: 59257449e211ddf9c7faa5f21a3986caba4eebc6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: a55ed90e7c854d1475b1f5d95347505fad0813ab
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649424"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774757"
 ---
 # <a name="grpc-services-with-c"></a>C\# を使用した gRPC サービス
 
