@@ -36,7 +36,7 @@ Microsoft アカウントがない場合は、[**作成**] を選択します。
 * **新しい登録**の選択
 * **[名前]** を入力します。
 * **サポートされているアカウントの種類**のオプションを選択します。  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
-* [**リダイレクト URI**] に、追加した`/signin-microsoft`開発 URL を入力します。 たとえば、「 `https://localhost:5001/signin-microsoft` 」のように入力します。 このサンプルの後半で構成されている Microsoft 認証スキームは`/signin-microsoft` 、OAuth フローを実装するために、ルートで要求を自動的に処理します。
+* [**リダイレクト URI**] に、追加した`/signin-microsoft`開発 URL を入力します。 たとえば、`https://localhost:5001/signin-microsoft` のようにします。 このサンプルの後半で構成されている Microsoft 認証スキームは`/signin-microsoft` 、OAuth フローを実装するために、ルートで要求を自動的に処理します。
 * **[登録]** を選択します
 
 ### <a name="create-client-secret"></a>クライアント シークレットを作成する

@@ -69,7 +69,7 @@ Windows 認証は、 `-au Windows`オプションを使用して .NET Core CLI �
 
 | オプション | 認証の種類 | 詳細情報のリンク |
  | ----------------- | ------------ | ---------- |
-| なし            |  認証なし | | 
+| None            |  認証なし | | 
 | 個人      |  個々の認証 | <xref:security/authentication/identity>
 | IndividualB2C   |  Azure AD B2C を使用したクラウドホストの個々の認証 | [Azure AD B2C](/azure/active-directory-b2c/) |
 | SingleOrg       |  単一のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
@@ -82,14 +82,14 @@ Windows 認証は、 `-au Windows`オプションを使用して .NET Core CLI �
 
 | オプション | 認証の種類 | 詳細情報のリンク |
  | ----------------- | ------------ | ---------- |
-| なし            |  認証なし | | 
+| None            |  認証なし | | 
 | 個々のユーザーアカウント/アプリ内のユーザーアカウントを格納する |  個々の認証 | <xref:security/authentication/identity> |
 | 個々のユーザーアカウント/クラウド内の既存のユーザーストアに接続する |  Azure AD B2C を使用したクラウドホストの個々の認証 | [Azure AD B2C](/azure/active-directory-b2c/) |
 | 職場または学校のクラウド/単一組織  |  単一のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | 職場または学校のクラウド/複数の組織 |  複数のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  [Windows 認証] | [Windows 認証](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 次の記事では、個々のユーザーアカウントを使用する ASP.NET Core テンプレートで生成されたコードを使用する方法について説明します。
 

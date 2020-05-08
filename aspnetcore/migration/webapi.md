@@ -75,7 +75,7 @@ ASP.NET Core MVC では、がで<xref:Microsoft.AspNetCore.Builder.MvcApplicatio
 
 ## <a name="migrate-models-and-controllers"></a>モデルとコントローラーの移行
 
-*Productapp*プロジェクトのコントローラーとそれが使用するモデルをコピーします。 次の手順に従います。
+*Productapp*プロジェクトのコントローラーとそれが使用するモデルをコピーします。 この場合は、以下の手順に従ってください。
 
 1. 元のプロジェクトから新しいコントローラー */製品コントローラー .cs*をコピーします。
 1. 元のプロジェクトの [*モデル*] フォルダー全体を新しいプロジェクトにコピーします。

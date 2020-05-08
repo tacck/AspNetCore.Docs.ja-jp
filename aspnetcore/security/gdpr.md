@@ -151,7 +151,7 @@ Cookie を保存するための同意が指定されていない場合は、必�
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [Encfs](https://github.com/vgough/encfs)。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [GDPR-ASP.NET Core に Revoke 同意ボタンを追加する](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)

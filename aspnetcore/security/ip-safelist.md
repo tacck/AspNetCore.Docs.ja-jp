@@ -124,7 +124,7 @@ dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]
       Remote IpAddress: ::1
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:fundamentals/middleware/index>
 * [アクション フィルター](xref:mvc/controllers/filters#action-filters)

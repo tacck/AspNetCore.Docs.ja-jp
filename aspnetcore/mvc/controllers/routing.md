@@ -330,7 +330,7 @@ ASP.NET Core には、次の HTTP 動詞テンプレートがあります。
 
 <a name="rt"></a>
 
-### <a name="route-templates"></a>ルートテンプレート
+### <a name="route-templates"></a>ルート テンプレート
 
 ASP.NET Core には、次のルートテンプレートがあります。
 
@@ -721,7 +721,7 @@ result: /UrlGeneration/Destination
 
 既定のルート`{controller}/{action}/{id?}`では、この問題が発生する可能性があります。 この問題は、常にと`Url.Action`の`controller`値が明示的`action`に指定されているため、実際にはめったにありません。
 
-Url のいくつかのオーバーロードでは、ルート値オブジェクトを使用して、および`action`以外`controller`のルートパラメーターの値を指定[します。](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) ルート値オブジェクトは、と共に`id`よく使用されます。 たとえば、「 `Url.Action("Buy", "Products", new { id = 17 })` 」のように入力します。 ルート値オブジェクト:
+Url のいくつかのオーバーロードでは、ルート値オブジェクトを使用して、および`action`以外`controller`のルートパラメーターの値を指定[します。](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) ルート値オブジェクトは、と共に`id`よく使用されます。 たとえば、`Url.Action("Buy", "Products", new { id = 17 })` のようにします。 ルート値オブジェクト:
 
 * 慣例により、通常は匿名型のオブジェクトです。
 * に`IDictionary<>`は、または[POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)を指定できます。

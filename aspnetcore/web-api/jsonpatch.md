@@ -108,7 +108,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、「 `"/address/zipCode"` 」のように入力します。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のようにします。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列`add`の末尾には、インデックス番号`-` `/addresses/-`ではなくハイフン () を使用します。
 
@@ -116,7 +116,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|Operation  | 注 |
+|操作  | メモ |
 |-----------|--------------------------------|
 | `add`     | プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します。|
 | `remove`  | プロパティまたは配列要素を削除します。 |
@@ -243,7 +243,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードの入手
+## <a name="get-the-code"></a>コードを取得する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -254,7 +254,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)
@@ -320,7 +320,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、「 `"/address/zipCode"` 」のように入力します。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のようにします。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列の末尾への `add` では、インデックス番号ではなく、`/addresses/-` のようにハイフン (-) を使用します。
 
@@ -328,7 +328,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|Operation  | 注 |
+|操作  | メモ |
 |-----------|--------------------------------|
 | `add`     | プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します。|
 | `remove`  | プロパティまたは配列要素を削除します。 |
@@ -455,7 +455,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードの入手
+## <a name="get-the-code"></a>コードを取得する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -466,7 +466,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)

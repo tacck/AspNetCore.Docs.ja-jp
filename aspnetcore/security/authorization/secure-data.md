@@ -75,14 +75,14 @@ ASP.NET Core MVC バージョンについては、[この PDF](https://webpifeed
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
 * [認証](xref:security/authentication/identity)
 * [アカウントの確認とパスワードの回復](xref:security/authentication/accconfirm)
-* [権限](xref:security/authorization/introduction)
+* [承認](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
 
 ## <a name="the-starter-and-completed-app"></a>スターターおよび完成したアプリ
@@ -314,7 +314,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel`�
 * マネージャーは、連絡先データを承認/拒否することができます。 この`Details`ビューには、[**承認**] ボタンと [**却下**] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| User                | アプリによるシード処理 | Options                                  |
+| User                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -411,14 +411,14 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
 * [認証](xref:security/authentication/identity)
 * [アカウントの確認とパスワードの回復](xref:security/authentication/accconfirm)
-* [権限](xref:security/authorization/introduction)
+* [承認](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
 
 ## <a name="the-starter-and-completed-app"></a>スターターおよび完成したアプリ
@@ -641,7 +641,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel`�
 * マネージャーは、連絡先データを承認/拒否することができます。 この`Details`ビューには、[**承認**] ボタンと [**却下**] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| User                | アプリによるシード処理 | Options                                  |
+| User                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -696,7 +696,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel`�
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>その他のリソース
+### <a name="additional-resources"></a>その他の技術情報
 
 * [Azure App Service で .NET Core と SQL Database web アプリを構築する](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core の承認ラボ](https://github.com/blowdart/AspNetAuthorizationWorkshop)。 このチュートリアルで紹介するセキュリティ機能の詳細については、このラボを参照してください。

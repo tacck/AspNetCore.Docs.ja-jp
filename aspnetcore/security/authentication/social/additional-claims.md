@@ -51,7 +51,7 @@ OAuth 認証プロバイダーは、クライアント ID とクライアント�
 
 を指定して、 <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*>プロバイダーから取得するアクセス許可の一覧を指定します。 共通外部プロバイダーの認証スコープは、次の表に表示されます。
 
-| プロバイダー  | Scope                                                            |
+| プロバイダー  | スコープ                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -191,7 +191,7 @@ OAuth 認証プロバイダーは、クライアント ID とクライアント�
 
 を指定して、 <xref:Microsoft.AspNetCore.Authentication.OAuth.OAuthOptions.Scope*>プロバイダーから取得するアクセス許可の一覧を指定します。 共通外部プロバイダーの認証スコープは、次の表に表示されます。
 
-| プロバイダー  | Scope                                                            |
+| プロバイダー  | スコープ                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -302,6 +302,6 @@ Authentication Properties
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [dotnet/AspNetCore engineering の社会 alsample アプリ](https://github.com/dotnet/AspNetCore/tree/master/src/Security/Authentication/samples/SocialSample) &ndash;リンクされたサンプルアプリは、 [dotnet/AspNetCore GitHub リポジトリの](https://github.com/dotnet/AspNetCore) `master`エンジニアリングブランチにあります。 ブランチ`master`には、ASP.NET Core の次のリリースでアクティブな開発のコードが含まれています。 リリースされたバージョンの ASP.NET Core 用のサンプルアプリのバージョンを表示するには、[**ブランチ**] ドロップダウンリストを使用して`release/{X.Y}`リリースブランチを選択します (たとえば、)。

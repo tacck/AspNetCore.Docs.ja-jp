@@ -27,7 +27,7 @@ ASP.NET Core Identityは拡張可能なシステムであり、カスタム記�
 
 [GitHub のサンプルを表示またはダウンロードしてください](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)。
 
-## <a name="introduction"></a>概要
+## <a name="introduction"></a>はじめに
 
 既定では、ASP.NET Core Identityシステムは Entity Framework Core を使用して SQL Server データベースにユーザー情報を格納します。 多くのアプリでは、この方法が適しています。 ただし、別の永続化メカニズムまたはデータスキーマを使用することをお勧めします。 次に例を示します。
 
@@ -63,7 +63,7 @@ ASP.NET Core Identityは、マネージャーとストアと呼ばれるクラ�
 
 [ASP.NET Core Identity ](https://github.com/aspnet/identity)のデータ型については、次のセクションで詳しく説明します。
 
-### <a name="users"></a>ユーザー
+### <a name="users"></a>Users
 
 Web サイトの登録済みユーザー。 [ユーザー](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)の種類は、独自のカスタム型の例として拡張または使用できます。 独自のカスタム id ストレージソリューションを実装するために、特定の型から継承する必要はありません。
 
@@ -241,7 +241,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>参考資料
+## <a name="references"></a>References
 
 * [ASP.NET 4.x 用のカスタムストレージプロバイダーIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
 * [ASP.NET Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity) &ndash;このリポジトリには、コミュニティによって管理されるストアプロバイダーへのリンクが含まれています。

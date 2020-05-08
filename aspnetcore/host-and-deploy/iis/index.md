@@ -5,7 +5,7 @@ description: Windows Server インターネット インフォメーション �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/17/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 72f433ffdc7d08e23fb68fc6ed9903a39959363b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 157cfc4c42d5e057e9b2ebd04c93d80db55419c9
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775987"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967494"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS を使用した Windows での ASP.NET Core のホスト
 
@@ -59,6 +59,8 @@ Azure でのホスティングの情報については、「<xref:host-and-deplo
 * 64 ビット アプリ用の大規模な仮想メモリ アドレス空間が必要。
 * 大規模な IIS スタック サイズが必要。
 * 64 ビットのネイティブの依存関係がある。
+
+32 ビット (x86) 用に公開されたアプリでは、IIS アプリケーション プールで 32 ビットが有効になっている必要があります。 詳細については、「[IIS サイトを作成する](#create-the-iis-site)」セクションを参照してください。
 
 64 ビット (x64) .NET Core SDK を使って 64 ビット アプリを発行します。 ホスト システム上に 64 ビット ランタイムが存在している必要があります。
 
@@ -326,11 +328,13 @@ net start w3svc
 
    ![.NET CLR バージョンとして [マネージド コードなし] を設定します。](index/_static/edit-apppool-ws2016.png)
 
-    ASP.NET Core は、別個のプロセスで実行され、ランタイムを管理します。 ASP.NET Core はデスクトップ CLR (.NET CLR) の読み込みに依存しません&mdash;.NET Core 用の Core 共通言語ランタイム (CoreCLR) が起動され、ワーカー プロセスでアプリがホストされます。 **[.NET CLR バージョン]** の **[マネージド コードなし]** への設定は省略可能ですが、推奨されます。
+    ASP.NET Core は、別個のプロセスで実行され、ランタイムを管理します。 ASP.NET Core を使用するためにデスクトップ CLR (.NET CLR) を読み込む必要はありません。 .NET Core 用の Core 共通言語ランタイム (CoreCLR) が起動され、ワーカー プロセスでアプリがホストされます。 **[.NET CLR バージョン]** の **[マネージド コードなし]** への設定は省略可能ですが、推奨されます。
 
-1. *ASP.NET Core 2.2 以降*:[インプロセス ホスティング モデル](#in-process-hosting-model)を使用する 64 ビット (x64) の[自己完結型展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、32 ビット (x86) プロセス用のアプリケーション プールを無効にします。
+1. *ASP.NET Core 2.2 以降*:
 
-   IIS マネージャー > **[アプリケーション プール]** の **[操作]** サイドバーで、 **[アプリケーション プールの既定値の設定]** または **[詳細設定]** を選択します。 **[32 ビット アプリケーションの有効化]** を探し、値を `False` に設定します。 この設定は[アウトプロセス ホスティング](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model)で展開されたアプリには影響しません。
+   * [インプロセス ホスティング モデル](#in-process-hosting-model)を使用する 32 ビット SDK で公開される 32 ビット (x86) の[自己完結型展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、32 ビット用のアプリケーション プールを有効にします。 IIS マネージャーで、 **[接続]** サイドバーの **[アプリケーション プール]** に移動します。 アプリのアプリケーション プールを選択します。 **[操作]** サイドバーで、[**詳細設定]** を選択します。 **[32 ビット アプリケーションの有効化]** を `True` に設定します。 
+
+   * [インプロセス ホスティング モデル](#in-process-hosting-model)を使用する 64 ビット (x64) の[自己完結型展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、32 ビット (x86) プロセス用のアプリケーション プールを無効にします。 IIS マネージャーで、 **[接続]** サイドバーの **[アプリケーション プール]** に移動します。 アプリのアプリケーション プールを選択します。 **[操作]** サイドバーで、[**詳細設定]** を選択します。 **[32 ビット アプリケーションの有効化]** を `False` に設定します。 
 
 1. プロセス モデル ID に適切なアクセス許可があることを確認します。
 
