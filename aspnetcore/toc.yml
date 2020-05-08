@@ -1210,7 +1210,7 @@
       uid: fundamentals/request-features
     - name: HttpContext へのアクセス
       uid: fundamentals/httpcontext
-    - name: トークンの変更
+    - name: 変更トークン
       uid: fundamentals/change-tokens
     - name: Open Web Interface for .NET (OWIN)
       uid: fundamentals/owin
