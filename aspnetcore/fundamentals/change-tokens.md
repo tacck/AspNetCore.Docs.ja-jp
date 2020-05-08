@@ -51,7 +51,7 @@ ms.locfileid: "82774796"
 
 `OnChange` では <xref:System.IDisposable> が返されます。 <xref:System.IDisposable.Dispose*> を呼び出すと、トークンによるその後の変更のリッスンが停止され、トークンのリソースが解放されます。
 
-## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>ASP.NET Core での変更のトークンの使用例
+## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>ASP.NET Core での変更トークンの使用例
 
 変更トークンは、オブジェクトの変更を監視するために ASP.NET Core の主要な領域で使用されます。
 
@@ -63,7 +63,7 @@ ms.locfileid: "82774796"
 
 既定では、ASP.NET Core テンプレートは、[JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json*、*appsettings.Development.json*、および *appsettings.Production.json*) を使用して、アプリの構成設定を読み込みます。
 
-これらのファイルは、[ パラメーターを受け取る、](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 上の <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)`reloadOnChange` 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.Extensions.Hosting.Host> の便利なメソッド <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 内に現れます。
+これらのファイルは、`reloadOnChange` パラメーターを受け入れる <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> の [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.Extensions.Hosting.Host> の便利なメソッド <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 内に現れます。
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
