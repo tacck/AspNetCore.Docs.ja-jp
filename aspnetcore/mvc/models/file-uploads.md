@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774133"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976754"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
@@ -1476,9 +1476,9 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
-* [HTTP 接続要求をドレインしています](xref:fundamentals/servers/kestrel#http-connection-request-draining)
+* [HTTP 接続要求をドレインしています](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
 * [Azure のセキュリティ: セキュリティフレーム: 入力の検証 |対策](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Azure クラウドの設計パターン: Valet キーパターン](/azure/architecture/patterns/valet-key)
