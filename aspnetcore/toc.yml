@@ -339,14 +339,16 @@
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory
                 - name: AAD B2C によるスタンドアロン
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-                - name: Identity Server によるホスティング
-                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: AAD によるホスティング
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory
                 - name: AAD B2C によるホスティング
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                - name: Identity Server によるホスティング
+                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: その他のシナリオ
                   uid: security/blazor/webassembly/additional-scenarios
+                - name: AAD グループとロール
+                  uid: security/blazor/webassembly/aad-groups-roles
             - name: Blazor サーバー
               items:
                 - name: 概要
@@ -1134,14 +1136,16 @@
               uid: security/blazor/webassembly/standalone-with-azure-active-directory
             - name: AAD B2C によるスタンドアロン
               uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-            - name: Identity Server によるホスティング
-              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: AAD によるホスティング
               uid: security/blazor/webassembly/hosted-with-azure-active-directory
             - name: AAD B2C によるホスティング
               uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+            - name: Identity Server によるホスティング
+              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: その他のシナリオ
               uid: security/blazor/webassembly/additional-scenarios
+            - name: AAD グループとロール
+              uid: security/blazor/webassembly/aad-groups-roles
         - name: Blazor サーバー
           items:
             - name: 概要
