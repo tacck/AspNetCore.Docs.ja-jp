@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 56c8d799b98cc09b8cfff12744c6eeb46af4f8e6
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777177"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003163"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC とRazorページ ASP.NET Core でのモデルの検証
 
@@ -55,7 +55,7 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 
 組み込み検証属性の一部を次に示します。
 
-* `[CreditCard]`: プロパティにクレジットカード形式があることを検証します。
+* `[CreditCard]`: プロパティにクレジットカード形式があることを検証します。 [JQuery 検証の追加のメソッド](https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js)が必要です。
 * `[Compare]`: モデル内の2つのプロパティが一致することを検証します。
 * `[EmailAddress]`: プロパティが電子メール形式であることを検証します。
 * `[Phone]`: プロパティに電話番号の書式が設定されていることを検証します。
@@ -122,7 +122,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 
 リモート検証を実装するには:
 
-1. JavaScript で呼び出すアクション メソッドを作成します。  JQuery Validate の [remote](https://jqueryvalidation.org/remote-method/) メソッドでは、JSON の応答が必要です。
+1. JavaScript で呼び出すアクション メソッドを作成します。  JQuery Validation[リモート](https://jqueryvalidation.org/remote-method/)メソッドは JSON 応答を想定しています。
 
    * `true` は、入力データが有効であることを意味します。
    * `false`、`undefined`、または `null` は、入力が有効ではないことを意味します。 既定のエラー メッセージを表示します。
@@ -248,7 +248,7 @@ public string MiddleName { get; set; }
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Views/Shared/_ValidationScriptsPartial.cshtml?name=snippet_Scripts)]
 
-[jQuery Unobtrusive Validation](https://github.com/aspnet/jquery-validation-unobtrusive) スクリプトは、人気のある [jQuery Validate](https://jqueryvalidation.org/) プラグインを基に作成された Microsoft のカスタム フロントエンド ライブラリです。 jQuery Unobtrusive Validation を使用しないと、同じ検証ロジックを 2 か所でコーディングする必要があります。1 つはモデル プロパティでのサーバー側検証属性で、もう 1 つはクライアント側スクリプトです。 代わりに、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)および [HTML ヘルパー](xref:mvc/views/overview)では、モデル プロパティの検証属性と型メタデータを使用して、検証の必要なフォーム要素に対する HTML 5 の `data-` 属性がレンダリングされます。 jQuery Unobtrusive Validation では、`data-` 属性が解析され、ロジックが jQuery Validate に渡されて、サーバー側検証ロジックがクライアントに実質的に "コピー" されます。 次に示すように、タグ ヘルパーを使用して、クライアントで検証エラーを表示できます。
+[Jquery の控えめな検証](https://github.com/aspnet/jquery-validation-unobtrusive)スクリプトは、広く使われている[jquery validation](https://jqueryvalidation.org/)プラグインを基盤とするカスタム Microsoft フロントエンドライブラリです。 jQuery Unobtrusive Validation を使用しないと、同じ検証ロジックを 2 か所でコーディングする必要があります。1 つはモデル プロパティでのサーバー側検証属性で、もう 1 つはクライアント側スクリプトです。 代わりに、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)および [HTML ヘルパー](xref:mvc/views/overview)では、モデル プロパティの検証属性と型メタデータを使用して、検証の必要なフォーム要素に対する HTML 5 の `data-` 属性がレンダリングされます。 jQuery の控えめな検証`data-`では、属性を解析し、そのロジックを JQuery の検証に渡します。これにより、サーバー側の検証ロジックがクライアントに効果的に "コピー" されます。 次に示すように、タグ ヘルパーを使用して、クライアントで検証エラーを表示できます。
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml?name=snippet_ReleaseDate&highlight=3-4)]
 
@@ -265,7 +265,7 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery Unobtrusive Validation はこの値を jQuery Validate の [required()](https://jqueryvalidation.org/required-method/) メソッドに渡し、このメソッドは付随する **\<span>** 要素にそのメッセージを表示します。
+HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jquery の控えめな検証は、この値を jquery Validation [required ()](https://jqueryvalidation.org/required-method/)メソッドに渡します。これにより、そのメッセージが付随** \<するスパン>** 要素に表示されます。
 
 `[DataType]` 属性によってオーバーライドされていない限り、データ型の検証はプロパティの .NET 型に基づいて行われます。 ブラウザーには独自の既定のエラー メッセージがありますが、jQuery Validation Unobtrusive Validation パッケージでそれらのメッセージをオーバーライドできます。 `[DataType]` 属性と `[EmailAddress]` などのサブクラスを使用して、エラー メッセージを指定できます。
 
@@ -275,7 +275,7 @@ HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証�
 
 ### <a name="add-validation-to-dynamic-forms"></a>動的なフォームに検証を追加する
 
-ページが初めて読み込まれるときに、jQuery Unobtrusive Validation によって検証ロジックとパラメーターが jQuery Validate に渡されます。 したがって、動的に生成されるフォームでは、検証は自動的には機能しません。 検証を有効にするには、作成直後に動的フォームを解析するよう、jQuery Unobtrusive Validation に指示します。 たとえば、次のコードでは、AJAX によって追加されるフォームでクライアント側検証が設定されます。
+jQuery の控えめな検証は、ページが最初に読み込まれるときに検証ロジックとパラメーターを jQuery 検証に渡します。 したがって、動的に生成されるフォームでは、検証は自動的には機能しません。 検証を有効にするには、作成直後に動的フォームを解析するよう、jQuery Unobtrusive Validation に指示します。 たとえば、次のコードでは、AJAX によって追加されるフォームでクライアント側検証が設定されます。
 
 ```javascript
 $.get({
@@ -294,7 +294,7 @@ $.get({
 })
 ```
 
-`$.validator.unobtrusive.parse()` メソッドには、その引数の 1 つで jQuery セレクターを指定します。 このメソッドは、そのセレクター内のフォームの `data-` 属性を解析するよう jQuery Unobtrusive Validation に指示します。 その後、これらの属性の値は、jQuery Validate プラグインに渡されます。
+`$.validator.unobtrusive.parse()` メソッドには、その引数の 1 つで jQuery セレクターを指定します。 このメソッドは、そのセレクター内のフォームの `data-` 属性を解析するよう jQuery Unobtrusive Validation に指示します。 これらの属性の値は、jQuery Validation プラグインに渡されます。
 
 ### <a name="add-validation-to-dynamic-controls"></a>動的なコントロールに検証を追加する
 
@@ -310,7 +310,7 @@ $.get({
     success: function(newInputHTML) {
         var form = document.getElementById("my-form");
         form.insertAdjacentHTML("beforeend", newInputHTML);
-        $(form).removeData("validator")    // Added by jQuery Validate
+        $(form).removeData("validator")    // Added by jQuery Validation
                .removeData("unobtrusiveValidation");   // Added by jQuery Unobtrusive Validation
         $.validator.unobtrusive.parse(form);
     }
@@ -319,11 +319,11 @@ $.get({
 
 ## <a name="custom-client-side-validation"></a>カスタム クライアント側検証
 
-カスタム クライアント側検証は、カスタム jQuery Validate アダプターで動作する `data-` HTML 属性を生成することによって行われます。 次のサンプルのアダプター コードは、この記事で前に導入した `[ClassicMovie]` および `[ClassicMovieWithClientValidator]` 属性用に記述されたものです。
+カスタムのクライアント側検証を行うには`data-` 、カスタム jQuery 検証アダプターを使用する HTML 属性を生成します。 次のサンプルのアダプター コードは、この記事で前に導入した `[ClassicMovie]` および `[ClassicMovieWithClientValidator]` 属性用に記述されたものです。
 
 [!code-javascript[](validation/samples/3.x/ValidationSample/wwwroot/js/classicMovieValidator.js)]
 
-アダプターの作成方法については、[jQuery Validate のドキュメント](https://jqueryvalidation.org/documentation/)をご覧ください。
+アダプターの作成方法の詳細については、 [jQuery の検証](https://jqueryvalidation.org/documentation/)に関するドキュメントを参照してください。
 
 特定のフィールドに対するアダプターの使用は、次のような `data-` 属性によってトリガーされます。
 
@@ -434,7 +434,7 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 * `[Url]`: プロパティに URL 形式があることを検証します。
 * `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]`属性](#remote-attribute)」を参照してください。
 
-クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/corefx/issues/42487)します。
+クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/corefx/issues/42487)のページを参照してください。
 
 検証属性の完全な一覧については、[System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 名前空間で確認できます。
 
@@ -754,7 +754,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 クライアント検証を無効にするもう 1 つのオプションは、*.cshtml* ファイルで `_ValidationScriptsPartial` への参照をコメントにすることです。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [System.ComponentModel.DataAnnotations 名前空間](xref:System.ComponentModel.DataAnnotations)
 * [モデルバインド](model-binding.md)

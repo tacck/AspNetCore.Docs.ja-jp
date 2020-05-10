@@ -1,20 +1,26 @@
 ---
-title: ASP.NET Core の Razor 構文リファレンス
+title: ASP.NET Core の razor 構文リファレンス
 author: rick-anderson
-description: Web ページにサーバー ベースのコードを埋め込むための Razor マークアップの構文について説明します。
+description: Web ページRazorにサーバーベースのコードを埋め込むためのマークアップ構文について説明します。
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: dd5c73be56ed0dafb759df2f5ff2eac1a3b5b09e
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381771"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003199"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core の Razor 構文リファレンス
 
-[リック・アンダーソン](https://twitter.com/RickAndMSFT)、[テイラー・マレン](https://twitter.com/ntaylormullen)、[ダン・ヴィカレル](https://github.com/Rabadash8820)
+[Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)、 [Dan Vicarel](https://github.com/Rabadash8820)
 
 Razor は、Web ページにサーバー ベースのコードを埋め込むためのマークアップ構文です。 Razor 構文は、Razor マークアップ、C#、HTML で構成されます。 通常、Razor を含むファイルのファイル拡張子は *.cshtml* です。 Razor は [Razor コンポーネント](xref:blazor/components) ファイル (*.razor*) にもあります。
 
@@ -389,7 +395,7 @@ Razor には、重要なセクションを lock ステートメントで保護�
 }
 ```
 
-### <a name="comments"></a>説明
+### <a name="comments"></a>コメント
 
 Razor は、C# と HTML のコメントをサポートしています。
 
@@ -467,7 +473,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Razor コンポーネントの`@code`場合は、[`@functions`](#functions)のエイリアスであり`@functions`、上に推奨されます。 複数の `@code` ブロックが許容されます。
+Razor コンポーネントの場合`@code` 、はの[`@functions`](#functions)エイリアスであり、 `@functions`よりも優先されます。 複数の `@code` ブロックが許容されます。
 
 ::: moniker-end
 
@@ -633,7 +639,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「[厳密に型指定されたモデル」@modelおよび「キーワード」を](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)参照してください。
+`@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「[厳密に型@model指定されたモデルとキーワード](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)」を参照してください。
 
 ### <a name="namespace"></a>\@namespace
 
@@ -654,7 +660,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 | ページ                                        | 名前空間                             |
 | ------------------------------------------- | ------------------------------------- |
-| *ページ/インデックス.cshtml*                        | `Hello.World`                         |
+| *Pages/Index. cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Hello.World.MorePages.EvenMorePages` |
 
@@ -666,7 +672,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 | ページ                                        | 名前空間               |
 | ------------------------------------------- | ----------------------- |
-| *ページ/インデックス.cshtml*                        | `Hello.World`           |
+| *Pages/Index. cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Another.Planet`        |
 
@@ -701,7 +707,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor コンポーネント](xref:blazor/components)`@using`では、スコープ内にあるコンポーネントも制御します。
+[Razor コンポーネント](xref:blazor/components)では`@using` 、は、どのコンポーネントがスコープ内にあるかも制御します。
 
 ::: moniker-end
 
@@ -878,9 +884,9 @@ public class Pet
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 前に追加したタグ ヘルパーをビューから削除します。 |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | タグ プレフィックスを指定して、タグ ヘルパーのサポートを有効にしたり、タグ ヘルパーの使用を明示的にしたりします。 |
 
-## <a name="razor-reserved-keywords"></a>Razor の予約済みキーワード
+## <a name="razor-reserved-keywords"></a>Razor予約済みキーワード
 
-### <a name="razor-keywords"></a>Razor のキーワード
+### <a name="razor-keywords"></a>Razorkeywords
 
 * page (ASP.NET Core 2.1 以降を必要とします)
 * namespace
@@ -890,9 +896,9 @@ public class Pet
 * section
 * helper (現在は ASP.NET Core ではサポートされていません)
 
-Razor のキーワードは、`@(Razor Keyword)` でエスケープします (例: `@(functions)`)。
+Razorキーワードは、で`@(Razor Keyword)`エスケープされます`@(functions)`(たとえば、)。
 
-### <a name="c-razor-keywords"></a>C# Razor のキーワード
+### <a name="c-razor-keywords"></a>C# Razorのキーワード
 
 * case
 * do
@@ -901,7 +907,7 @@ Razor のキーワードは、`@(Razor Keyword)` でエスケープします (�
 * foreach
 * if
 * else
-* ロック (lock)
+* lock
 * switch
 * 試す
 * catch
@@ -909,51 +915,51 @@ Razor のキーワードは、`@(Razor Keyword)` でエスケープします (�
 * using
 * while
 
-C# Razor のキーワードは、`@(@C# Razor Keyword)` で二重にエスケープする必要があります (例: `@(@case)`)。 最初の `@` は、Razor パーサーをエスケープします。 2 番目の `@` は、C# パーサーをエスケープします。
+C# Razorのキーワードは、 `@(@C# Razor Keyword)` `@(@case)`を使用してダブルエスケープする必要があります (例:)。 最初`@`のは、 Razorパーサーをエスケープします。 2 番目の `@` は、C# パーサーをエスケープします。
 
-### <a name="reserved-keywords-not-used-by-razor"></a>Razor で使われない予約済みキーワード
+### <a name="reserved-keywords-not-used-by-razor"></a>予約済みキーワードがで使用されていませんRazor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>ビューに対して生成された Razor C# クラスを調べる
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>ビューにRazor対して生成された C# クラスを検査する
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2.1 以降、[Razor SDK](xref:razor-pages/sdk) は Razor ファイルのコンパイルを処理します。 プロジェクトを作成する際に、Razor SDK はプロジェクト ルートに *obj/<build_configuration>/<target_framework_moniker>/Razor* ディレクトリを生成します。 *Razor* ディレクトリ内のディレクトリ構造は、プロジェクトのディレクトリ構造をミラー化します。
+.NET Core SDK 2.1 以降では、 [ Razor SDK](xref:razor-pages/sdk)によってファイルRazorのコンパイルが処理されます。 プロジェクトをビルドすると、 Razor SDK によって、プロジェクトルートに*obj/<build_configuration>Razor /<target_framework_moniker/* ディレクトリが生成されます。 ディレクトリ内*Razor* のディレクトリ構造は、プロジェクトのディレクトリ構造をミラー化します。
 
-.NET Core 2.1 をターゲットとする ASP.NET Core 2.1 Razor Pages プロジェクト内の次のディレクトリ構造を考えてみましょう。
+.NET Core 2.1 を対象とする ASP.NET Core 2.1 Razorページプロジェクトでは、次のディレクトリ構造について考えてみます。
 
-* **エリア/**
-  * **管理者/**
-    * **ページ/**
+* **場所**
+  * **管理者**
+    * **トピック**
       * *Index.cshtml*
       * *Index.cshtml.cs*
-* **ページ/**
-  * **共有/**
-    * *_Layout.cshtml*
+* **トピック**
+  * **共用**
+    * *_Layout. cshtml*
   * *_ViewImports.cshtml*
-  * *_ViewStart.cshtml*
+  * *_ViewStart. cshtml*
   * *Index.cshtml*
   * *Index.cshtml.cs*
 
 *Debug* 構成でプロジェクトを作成すると、次の *obj* ディレクトリが生成されます。
 
-* **obj/**
-  * **デバッグ/**
+* **obj**
+  * **デバック**
     * **netcoreapp2.1/**
-      * **カミソリ/**
-        * **エリア/**
-          * **管理者/**
-            * **ページ/**
+      * **Razor/**
+        * **場所**
+          * **管理者**
+            * **トピック**
               * *Index.g.cshtml.cs*
-        * **ページ/**
-          * **共有/**
+        * **トピック**
+          * **共用**
             * *_Layout.g.cshtml.cs*
           * *_ViewImports.g.cshtml.cs*
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-*Pages/Index.cshtml* に対して生成されたクラスを表示するには、*obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs* を開きます。
+*Pages/Index. cshtml*の生成されたクラスを表示するには、 *obj/Debug/netcoreapp 2.1/Razor/Pages/Index.g.cshtml.cs*を開きます。
 
 ::: moniker-end
 
@@ -975,7 +981,7 @@ C# Razor のキーワードは、`@(@C# Razor Keyword)` で二重にエスケー
 
 ## <a name="view-lookups-and-case-sensitivity"></a>ビューの参照と大文字/小文字の区別
 
-Razor ビュー エンジンによるビューの参照では、大文字と小文字が区別されます。 ただし、実際の参照は、基になるファイル システムによって決定されます。
+ビュー Razorエンジンは、ビューに対して大文字と小文字を区別して検索を実行します。 ただし、実際の参照は、基になるファイル システムによって決定されます。
 
 * ファイル ベースのソース:
   * 大文字と小文字が区別されないファイル システムを使っているオペレーティング システム (Windows など) では、物理的なファイル プロバイダーの参照は大文字と小文字を区別しません。 たとえば、`return View("Test")` は、*/Views/Home/Test.cshtml*、*/Views/home/test.cshtml*、その他のすべての大文字と小文字のバリエーションと一致します。
@@ -985,10 +991,10 @@ Razor ビュー エンジンによるビューの参照では、大文字と小�
 開発者には、ファイル名とディレクトリ名の大文字/小文字の使い分けを、次のものと一致させることをお勧めします。
 
 * 領域、コントローラー、アクションの名前。
-* Razor ページ。
+* Razorトピック.
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
-[Razor 構文を使用した web プログラミングのASP.NETの概要](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)では、Razor 構文を使用したプログラミングの多くのサンプルを提供します。
+[構文を使用した ASP.NET Web Razorプログラミングの概要](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)では、構文Razorを使用したプログラミングの多くのサンプルが提供されています。

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: 06a5cf77e47d9fc618fddf3a096001a4f31688be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8b1eee7ff088fb1229ec1d2dd538ea4f01e094c3
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776995"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003109"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core での Google 外部ログインのセットアップ
 
@@ -28,7 +28,7 @@ ms.locfileid: "82776995"
 ## <a name="create-a-google-api-console-project-and-client-id"></a>Google API コンソールプロジェクトとクライアント ID を作成する
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)をインストールします。
-* [「Google サインインを web アプリに統合](https://developers.google.com/identity/sign-in/web/devconsole-project)する」に移動し、[**プロジェクトの構成**] を選択します。
+* [「Google サインインを web アプリに統合](https://developers.google.com/identity/sign-in/web/sign-in)する」に移動し、[**プロジェクトの構成**] を選択します。
 * [ **OAuth クライアントの構成**] ダイアログで、[ **Web サーバー**] を選択します。
 * [承認された**リダイレクト uri**のテキスト入力] ボックスで、リダイレクト uri を設定します。 たとえば、`https://localhost:44312/signin-google` のように指定します。
 * **クライアント ID**と**クライアントシークレット**を保存します。
@@ -80,7 +80,7 @@ URI セグメント`/signin-google`は、Google 認証プロバイダーの既�
 * でIdentity `ConfigureServices`を呼び出す`services.AddIdentity`ことによってが構成されていない場合、ArgumentException で結果を認証しようとしています。 *' SignInScheme ' オプションを指定する必要があり*ます。 このチュートリアルで使用するプロジェクトテンプレートによって、この処理が確実に行われます。
 * 初期移行を適用してサイトデータベースが作成されていない場合は、*要求エラーの処理中にデータベース操作が失敗*します。 [**移行の適用**] を選択してデータベースを作成し、ページを更新してエラーを解消します。
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 * この記事では、Google で認証する方法について説明しました。 同様のアプローチに従って、[前のページ](xref:security/authentication/social/index)に一覧表示されている他のプロバイダーとの認証を行うことができます。
 * アプリを Azure に発行したら、Google API `ClientSecret`コンソールでをリセットします。

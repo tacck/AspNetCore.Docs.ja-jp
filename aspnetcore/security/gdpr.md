@@ -12,18 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 68f8ebaafd1aaa725ef1ff41f2ffa9f605e49f7f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2e21f54ebfcb55be2b97da217b92a39843b5d702
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776325"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003209"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core での EU 一般データ保護規則 (GDPR) のサポート
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core は、一部の[EU 一般データ保護規則 (GDPR)](https://www.eugdpr.org/)要件を満たすための api とテンプレートを提供します。
+ASP.NET Core は、一部の[EU 一般データ保護規則 (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection/reform/what-does-general-data-protection-regulation-gdpr-govern_en)要件を満たすための api とテンプレートを提供します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
