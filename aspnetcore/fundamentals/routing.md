@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206126"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850514"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -324,7 +330,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 >
 > <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> 内での処理の順序は、ルーティングの動作には影響しませんが、例外が 1 つあります。 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> および <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> では、それぞれが呼び出された順序に基づいて、それぞれのエンドポイントに順序値が自動的に割り当てられます。 これにより、ルーティング システムでより古いルーティング実装と同じ保証を提供しなくても、コントローラーの長時間の動作がシミュレートされます。
 >
-> ルーティングの従来の実装では、ルートの処理順序に依存するルーティング拡張性を実装することができます。 ASP.NET Core 3.0 以降でのエンドポイントのルーティング: 
+> ルーティングの従来の実装では、ルートの処理順序に依存するルーティング拡張性を実装することができます。 ASP.NET Core 3.0 以降でのエンドポイントのルーティング:
 > 
 > * ルートの概念がありません。
 > * 順序付けが保証されません。 すべてのエンドポイントが一度に処理されます。
@@ -335,7 +341,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 
 ### <a name="route-template-precedence-and-endpoint-selection-order"></a>ルート テンプレートの優先順位とエンドポイントの選択順序
 
-[ルート テンプレートの優先順位](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L16)とは、どれほど具体的であるかに基づいて、各ルート テンプレートに値を割り当てるシステムです。 ルート テンプレートの優先順位: 
+[ルート テンプレートの優先順位](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L16)とは、どれほど具体的であるかに基づいて、各ルート テンプレートに値を割り当てるシステムです。 ルート テンプレートの優先順位:
 
 * 一般的なケースでは、エンドポイントの順序を調整する必要はなくなります。
 * 一般的に期待されるルーティング動作との一致が試みられます。
@@ -348,7 +354,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 * リテラル テキストを含むセグメントは、パラメーター セグメントよりも具体的であると見なされます。
 * 制約が含まれるパラメーター セグメントは、それが含まれないものよりも具体的であると見なされます。
 * 複雑なセグメントは、制約を含むパラメーター セグメントと同じくらい具体的であると見なされます。
-* キャッチ オール パラメーターは、最も具体的ではありません。
+* キャッチオール パラメーターは、まったく具体的ではありません。 キャッチオール ルートに関する重要な情報については、「[ルート テンプレート参照](#rtr)」の**キャッチオール**を参照してください。
 
 実際の値のリファレンスについては、[GitHub 上のソース コード](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189)を参照してください。
 
@@ -356,7 +362,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 
 ### <a name="url-generation-concepts"></a>URL 生成の概念
 
-URL の生成: 
+URL の生成:
 
 * ルーティングにおいて、一連のルート値に基づいて URL パスを作成するプロセスです。
 * エンドポイントとそれにアクセスする URL を論理的に分離できます。
@@ -409,12 +415,14 @@ URL の生成:
 
 ルート パラメーター以外のリテラル テキスト (`{id}` など) とパス区切り `/` は URL のテキストに一致する必要があります。 テキスト照合は復号された URL のパスを基盤とし、大文字と小文字が区別されます。 リテラル ルート パラメーターの区切り記号 (`{` または `}`) を照合するには、文字を繰り返して区切り記号をエスケープします。 たとえば、`{{` または `}}` です。
 
-アスタリスク `*` または二重アスタリスク`**`: 
+アスタリスク `*` または二重アスタリスク`**`:
 
 * ルート パラメーターのプレフィックスとして使用して、URI の残りの部分にバインドすることができます。
 * **キャッチオール** パラメーターと呼ばれています。 `blog/{**slug}` の例を次に示します。
   * `/blog` で始まり、その後に任意の値が続く URI と一致します。
   * `/blog` に続く値は、[slug](https://developer.mozilla.org/docs/Glossary/Slug) ルート値に割り当てられます。
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 キャッチオール パラメーターは空の文字列に一致することもあります。
 
@@ -573,6 +581,8 @@ ASP.NET Core フレームワークでは、正規表現コンストラクター�
 カスタム ルート制約は、<xref:Microsoft.AspNetCore.Routing.IRouteConstraint> インターフェイスを実装して作成できます。 `IRouteConstraint` インターフェイスには、<xref:System.Web.Routing.IRouteConstraint.Match*> が含まれています。これでは、制約が満たされている場合は `true` を返し、それ以外の場合は `false` を返します。
 
 カスタム ルート制約は通常必要ありません。 カスタム ルート制約を実装する前に、モデル バインドなどの代替手段を検討してください。
+
+ASP.NET Core の [Constraints](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) フォルダーには、制約を作成するための適切な例が用意されています。 たとえば、[GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18) です。
 
 カスタムの `IRouteConstraint` を使うには、サービス コンテナー内の <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> に、ルート制約の種類が登録されている必要があります。 `ConstraintMap` は、ルート制約キーを、その制約を検証する `IRouteConstraint` の実装にマッピングするディクショナリです。 アプリの `ConstraintMap` は、`Startup.ConfigureServices` で、[services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 呼び出しの一部として、または `services.Configure<RouteOptions>` を使って <xref:Microsoft.AspNetCore.Routing.RouteOptions> を直接構成することで、更新できます。 次に例を示します。
 

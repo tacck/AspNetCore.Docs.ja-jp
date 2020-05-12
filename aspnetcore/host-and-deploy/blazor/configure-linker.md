@@ -5,17 +5,20 @@ description: Blazor アプリを構築するときに、中間言語 (IL) リン
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 109da5ef400c3b9d64ccf3ceb33a5387ea6b5618
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b274752b375f68cca0c0a9adf9c146bc525d9eba
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218662"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775181"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor 用のリンカーを構成する
 
@@ -86,7 +89,7 @@ XML の構成ファイルを用意してそのファイルをプロジェクト 
 </linker>
 ```
 
-詳細については、[Link xml ファイルの例 (mono/リンカー GitHub リポジトリ)](https://github.com/mono/linker#link-xml-file-examples) を参照してください。
+詳細と例については、[データ形式 (mono/linker GitHub リポジトリ)](https://github.com/mono/linker/blob/master/docs/data-formats.md) を参照してください。
 
 ## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>XML リンカー構成ファイルをライブラリに追加する
 
@@ -106,11 +109,11 @@ XML の構成ファイルを用意してそのファイルをプロジェクト 
 
 既定では、WebAssembly アプリに対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報が除去されます。 これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。
 
-保持される I18N アセンブリを制御するには、プロジェクト ファイルで MSBuild のプロパティ `<MonoLinkerI18NAssemblies>` を設定します。
+保持される I18N アセンブリを制御するには、プロジェクト ファイルで MSBuild のプロパティ `<BlazorWebAssemblyI18NAssemblies>` を設定します。
 
 ```xml
 <PropertyGroup>
-  <MonoLinkerI18NAssemblies>{all|none|REGION1,REGION2,...}</MonoLinkerI18NAssemblies>
+  <BlazorWebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</BlazorWebAssemblyI18NAssemblies>
 </PropertyGroup>
 ```
 

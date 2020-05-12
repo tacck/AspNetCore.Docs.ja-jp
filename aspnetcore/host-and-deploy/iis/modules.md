@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 0f13ef3eb1da03960ef1fa54d33532b6ebbdc128
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7262b9ea18e4cf6acd278d087fcc44262f8f9c80
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646646"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775948"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core での IIS モジュール
 
@@ -76,7 +82,7 @@ ms.locfileid: "78646646"
 | セッション                 | [セッション ミドルウェア](xref:fundamentals/app-state) |
 | UrlAuthorization        | |
 | UrlMappingsModule       | [URL リライト ミドルウェア](xref:fundamentals/url-rewriting) |
-| UrlRoutingModule-4.0    | [ASP.NET Core ID](xref:security/authentication/identity) |
+| UrlRoutingModule-4.0    | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | WindowsAuthentication   | |
 
 ## <a name="iis-manager-application-changes"></a>IIS マネージャー アプリケーションの変更

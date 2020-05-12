@@ -1,17 +1,23 @@
 ---
 title: ASP.NET Core で Razor ページに新しいフィールドを追加する
 author: rick-anderson
-description: Entity Framework Core を使用した Razor ページへの新しいフィールドの追加方法
+description: Entity Framework Core を使用した Razor ページへの新しいフィールドの追加方法を示します
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: d34b938dbd1b512ddb167cac0c035837889cd38f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 683d6718f4dcdb73c45cbcf94f6ac4f477b71bcd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646604"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769735"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core で Razor ページに新しいフィールドを追加する
 
@@ -116,7 +122,7 @@ DB 内のすべてのレコードを削除すると、初期化子は DB にデ�
   Update-Database
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 ### <a name="drop-and-re-create-the-database"></a>データベースを削除して再作成する
 
@@ -139,8 +145,8 @@ dotnet ef database update
 * [このチュートリアルの YouTube バージョン](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [前: 検索の追加](xref:tutorials/razor-pages/search)
-> [次: 検証の追加](xref:tutorials/razor-pages/validation)
+> [前へ:検索の追加](xref:tutorials/razor-pages/search)
+> [次へ: 検証の追加](xref:tutorials/razor-pages/validation)
 
 ::: moniker-end
 
@@ -241,7 +247,7 @@ DB 内のすべてのレコードを削除すると、初期化子は DB にデ�
   Update-Database
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 ### <a name="drop-and-re-create-the-database"></a>データベースを削除して再作成する
 
@@ -262,7 +268,7 @@ dotnet ef database update
 * [このチュートリアルの YouTube バージョン](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [前: 検索の追加](xref:tutorials/razor-pages/search)
-> [次: 検証の追加](xref:tutorials/razor-pages/validation)
+> [前へ:検索の追加](xref:tutorials/razor-pages/search)
+> [次へ: 検証の追加](xref:tutorials/razor-pages/validation)
 
 ::: moniker-end

@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: a7280b59578ee1d96edeeccf9c9df0b0e4eb4eb8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1fb81d5a54cf332ca473af8fbe1841813a127be7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649904"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775883"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>ASP.NET 4.x と ASP.NET Core の選択
 
@@ -36,7 +40,7 @@ ASP.NET 4.x は成熟したフレームワークであり、Windows 上でエン
 | ASP.NET Core | ASP.NET 4.x |
 |---|---|
 |Windows、macOS、Linux が対象|Windows が対象|
-|[Razor ページ](xref:razor-pages/index)は、ASP.NET Core 2.x の時点で Web UI を作成する場合に推奨される方法です。 [MVC](xref:mvc/overview)、[Web API](xref:tutorials/first-web-api)、[SignalR](xref:signalr/introduction) についても参照してください。|[Web Forms](/aspnet/web-forms)、[SignalR](/aspnet/signalr)、[MVC](/aspnet/mvc)、[Web API](/aspnet/web-api/)、[WebHooks](/aspnet/webhooks/)、または [Web ページ](/aspnet/web-pages)を使います|
+|[Razor Pages](xref:razor-pages/index) は、ASP.NET Core 2.x の時点で Web UI を作成する場合に推奨される方法です。 [MVC](xref:mvc/overview)、[Web API](xref:tutorials/first-web-api)、[SignalR](xref:signalr/introduction) についても参照してください。|[Web Forms](/aspnet/web-forms)、[SignalR](/aspnet/signalr)、[MVC](/aspnet/mvc)、[Web API](/aspnet/web-api/)、[WebHooks](/aspnet/webhooks/)、または [Web ページ](/aspnet/web-pages)を使います|
 |コンピューターごとに複数のバージョン|コンピューターごとに 1 つのバージョン|
 |C# または F# を使い、[Visual Studio](https://visualstudio.microsoft.com/vs/)、[Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)、または [Visual Studio Code](https://code.visualstudio.com/) で 開発|C#、VB、または F# を使い、[Visual Studio](https://visualstudio.microsoft.com/vs/) で開発|
 |ASP.NET 4.x より高いパフォーマンス|よいパフォーマンス|

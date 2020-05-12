@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/31/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205970"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772088"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
@@ -106,7 +109,7 @@ Blazor アプリは、"*コンポーネント*" と呼ばれる UI の再利用�
 * HTML テキストに変換できます (プリレンダリング時&dagger;)。
 * 通常のレンダリング時にマークアップを効率的に更新するために使用できます。
 
-&dagger;*プリレンダリング*&ndash; 要求された Razor コンポーネントはサーバーで静的 HTML にコンパイルされ、クライアントに送信されて、そこでユーザーに対してレンダリングされます。 クライアントとサーバーの間で接続が確立されると、コンポーネントのプリレンダリング済みの静的な要素が対話型要素に置き換えられます。 プリレンダリングによって、ユーザーに対するアプリの応答性が向上します。
+&dagger;*プリレンダリング* &ndash; 要求された Razor コンポーネントはサーバーで静的 HTML にコンパイルされ、クライアントに送信されて、そこでユーザーに対してレンダリングされます。 クライアントとサーバーの間で接続が確立されると、コンポーネントのプリレンダリング済みの静的な要素が対話型要素に置き換えられます。 プリレンダリングによって、ユーザーに対するアプリの応答性が向上します。
 
 Blazor の UI の更新は、次の方法でトリガーされます。
 

@@ -8,15 +8,19 @@ ms.custom: mvc
 ms.date: 03/20/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 138057c2ceb9ed01bdf958c01f5cf2275387df23
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989432"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776605"
 ---
-# <a name="build-your-first-opno-locblazor-app"></a>最初の Blazor アプリをビルドする
+# <a name="build-your-first-blazor-app"></a>最初の Blazor アプリをビルドする
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -28,7 +32,7 @@ ms.locfileid: "79989432"
 
 1. <xref:blazor/get-started> の記事にあるガイダンスに従って、このチュートリアルの Blazor プロジェクトを作成します。 プロジェクトに *ToDoList* という名前を付けます。
 
-1. *Pages* フォルダー内にあるアプリの 3 つのページそれぞれを参照します。ホーム、カウンター、データのフェッチです。 これらのページは Razor コンポーネント ファイル *Index.razor*、*Counter.razor*、および *FetchData.razor* によって実装されています。
+1. *Pages* フォルダー内にあるアプリの 3 つのページそれぞれを参照します。ホーム、カウンター、データのフェッチです。 これらのページは Razor コンポーネント ファイル *Index.razor*、*Counter.razor*、*FetchData.razor* によって実装されています。
 
 1. Counter ページ上で **[クリックしてください]** ボタンを選択し、ページを更新することなくカウンターをインクリメントします。 Web ページでカウンターをインクリメントする場合、通常は JavaScript を記述することが必要です。 Blazor を使用すると、代わりに C# を記述できます。
 
@@ -101,7 +105,7 @@ HTML 構文を使用して、別のコンポーネント内にコンポーネン
 
 ## <a name="dependency-injection"></a>依存関係の挿入
 
-### <a name="opno-locblazor-server-experience"></a>Blazor サーバーのエクスペリエンス
+### <a name="blazor-server-experience"></a>Blazor サーバーのエクスペリエンス
 
 Blazor サーバー アプリを使用している場合、`WeatherForecastService` サービスは `Startup.ConfigureServices` の[シングルトン](xref:fundamentals/dependency-injection#service-lifetimes)として登録されます。 サービスのインスタンスは、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) を介してアプリ全体で利用できます。
 
@@ -117,7 +121,7 @@ Blazor サーバー アプリを使用している場合、`WeatherForecastServi
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="opno-locblazor-webassembly-experience"></a>Blazor WebAssembly のエクスペリエンス
+### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly のエクスペリエンス
 
 Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォルダー内の *weather.json* ファイルから天気予報データを取得するために、`HttpClient` が挿入されます。
 
@@ -133,7 +137,7 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
 
 シンプルな ToDo リストを実装したアプリに新しいコンポーネントを追加します。
 
-1. 新しい `Todo` Razor コンポーネントを、"*Pages*" フォルダー内のアプリに追加します。 Visual Studio で **Pages** フォルダーを右クリックし、 **[Add]**  >  **[新しい項目]**  >  **[Razor コンポーネント]** の順に選択します。 コンポーネントのファイルに "*Todo.razor*" という名前を指定します。 その他の開発環境では、"*Todo.razor*" という名前の **Pages** フォルダーに空のファイルを追加します。
+1. 新しい `Todo` Razor コンポーネントを、*Pages* フォルダー内のアプリに追加します。 Visual Studio で **Pages** フォルダーを右クリックし、 **[追加]**  >  **[新しい項目]**  >  **[Razor コンポーネント]** の順に選択します。 コンポーネントのファイルに "*Todo.razor*" という名前を指定します。 その他の開発環境では、"*Todo.razor*" という名前の **Pages** フォルダーに空のファイルを追加します。
 
 1. コンポーネントに最初のマークアップを指定します。
 

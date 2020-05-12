@@ -1,16 +1,22 @@
 ---
-title: ASP.NET Core での Razor ページ アプリへのモデルの追加
+title: ASP.NET Core での Razor Pages アプリへのモデルの追加
 author: rick-anderson
 description: Entity Framework Core (EF Core) を利用し、データベースでムービーを管理するためのクラスを追加する方法について説明します。
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: d093d7c4dc1b355c0042f300f70a830653b168c0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488872"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769833"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core での Razor ページ アプリへのモデルの追加
 
@@ -534,6 +540,6 @@ Login failed for user 'User-name'.
 
 > [!div class="step-by-step"]
 > [前へ:はじめに](xref:tutorials/razor-pages/razor-pages-start)
-> [次: スキャフォールディングされた Razor Pages](xref:tutorials/razor-pages/page)
+> [次: スキャフォールディングされた Razor ページ](xref:tutorials/razor-pages/page)
 
 ::: moniker-end

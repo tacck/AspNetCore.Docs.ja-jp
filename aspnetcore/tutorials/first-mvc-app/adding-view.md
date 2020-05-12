@@ -4,13 +4,19 @@ author: rick-anderson
 description: 単純な ASP.NET Core MVC アプリにビューを追加する
 ms.author: riande
 ms.date: 8/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 5510fb6844452571ca764e21640f0bd16444c782
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c89e0f0428fa7556fcd6b75cdfc1dd19109ec1c8
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647786"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774601"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC アプリへのビューの追加
 
@@ -227,7 +233,7 @@ ms.locfileid: "78647786"
 
 ---
 
-*Views/HelloWorld/Index.cshtml* Razor ビュー ファイルの内容を次のコードに置き換えます。
+*Views/HelloWorld/Index.cshtml* Razor ビュー ファイルを次の内容に置き換えます。
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 

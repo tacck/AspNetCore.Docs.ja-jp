@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/09/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: 3ed27db31c5fda8376ed108568ea74b657d30531
-ms.sourcegitcommit: 4506a8f71ece921010ad6b7edebc8b200618f40d
+ms.openlocfilehash: 29031556882dd471a5036b79dcb93a515bc98a33
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81002939"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776397"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Core のディレクトリ構造
 

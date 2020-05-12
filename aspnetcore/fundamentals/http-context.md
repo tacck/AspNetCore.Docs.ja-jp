@@ -5,18 +5,24 @@ description: ASP.NET Core で HttpContext にアクセスする方法につい�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/03/2019
+ms.date: 5/5/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 8a7ee180380c42ea745c91b8e6a18c1baa820220
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 716e74551b95455c99abbac58b712f013acfde56
+ms.sourcegitcommit: d4527df91f2c15bbe1cbf5a541adbea5747897aa
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647012"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82852371"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>ASP.NET Core で HttpContext にアクセスする
 
-ASP.NET Core アプリでは、`HttpContext` インターフェイスと、その既定の実装 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> を介して <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> にアクセスします。 `IHttpContextAccessor` を使用する必要があるのは、サービス内の `HttpContext` にアクセスする必要がある場合のみです。
+ASP.NET Core アプリでは、<xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> インターフェイスと、その既定の実装 <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> を介して `HttpContext` にアクセスします。 `IHttpContextAccessor` を使用する必要があるのは、サービス内の `HttpContext` にアクセスする必要がある場合のみです。
 
 ## <a name="use-httpcontext-from-razor-pages"></a>Razor Pages から HttpContext を使用する
 
@@ -36,7 +42,7 @@ public class AboutModel : PageModel
 
 ## <a name="use-httpcontext-from-a-razor-view"></a>Razor ビューから HttpContext を使用する
 
-Razor ビューでは、`HttpContext`RazorPage.Context[ プロパティを使用して、ビューに直接 ](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) が公開されます。 次の例では、Windows 認証を使用して、イントラネット アプリで現在のユーザー名を取得します。
+Razor ビューでは、[RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) プロパティを使用して、ビューに直接 `HttpContext` が公開されます。 次の例では、Windows 認証を使用して、イントラネット アプリで現在のユーザー名を取得します。
 
 ```cshtml
 @{
@@ -144,7 +150,7 @@ public class UserRepository : IUserRepository
 * 要求処理中に必要なデータをコピーします。
 * コピーしたデータをバックグラウンド タスクに渡します。
 
-アンセーフ コードを避けるために、バックグラウンド処理を実行しないメソッドには `HttpContext` を決して渡さないでください。 代わりに必要なデータを渡してください。 次の例では、電子メールの送信を開始するために `SendEmailCore` が呼び出されます。 `correlationId` は、`SendEmailCore` ではなく `HttpContext` に渡されます。 コードの実行では、`SendEmailCore` が完了するのを待機しません。
+アンセーフ コードを避けるために、バックグラウンド処理を実行しないメソッドには `HttpContext` を決して渡さないでください。 代わりに必要なデータを渡してください。 次の例では、電子メールの送信を開始するために `SendEmailCore` が呼び出されます。 `correlationId` は、`HttpContext` ではなく `SendEmailCore` に渡されます。 コードの実行では、`SendEmailCore` が完了するのを待機しません。
 
 ```csharp
 public class EmailController : Controller
@@ -163,3 +169,8 @@ public class EmailController : Controller
         ...
     }
 }
+```
+
+## <a name="blazor-and-shared-state"></a>Blazor と共有状態
+
+[!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]

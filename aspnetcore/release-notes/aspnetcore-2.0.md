@@ -5,26 +5,32 @@ description: ASP.NET Core 2.0 の新機能について説明します。
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b1fc486633ab7c7d7bee4f8981a978747b2890da
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650858"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775818"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0 の新機能
 
 この記事では、ASP.NET Core 2.0 の最も大きな変更点について説明します。また、その変更点のドキュメントへのリンクも示します。
 
-## <a name="razor-pages"></a>Razor ページ
+## <a name="razor-pages"></a>Razor Pages
 
-Razor ページは、ページ コーディングに重点を置いたシナリオをより簡略化し、生産性を高める ASP.NET Core MVC の新機能です。
+Razor Pages は、ページ コーディングに重点を置いたシナリオをより簡略化し、生産性を高める ASP.NET Core MVC の新機能です。
 
 詳細については、概要とチュートリアルを参照してください。
 
-* [Razor ページを始める](xref:razor-pages/index)
-* [Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)
+* [Razor Pages の概要](xref:razor-pages/index)
+* [Razor Pages の使用を開始する](xref:tutorials/razor-pages/razor-pages-start)
 
 ## <a name="aspnet-core-metapackage"></a>ASP.NET Core メタパッケージ
 
@@ -64,15 +70,15 @@ ASP.NET Core 2.0 には、既定で依存性の注入 (DI) システムにログ
 
 計画されているドキュメントの状態については、「[GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/3054)」 (GitHub の問題) を参照してください。
 
-## <a name="identity-update"></a>ID の更新
+## <a name="identity-update"></a>Identity の更新
 
-ASP.NET Core 2.0 で ID を使用し、簡単に安全な Web API を作成できるようになりました。 [Microsoft 認証ライブラリ (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client) を使用して Web API にアクセスするアクセス トークンを取得することができます。
+ASP.NET Core 2.0 で Identity を使用し、簡単にセキュリティで保護された Web API をビルドできるようになりました。 [Microsoft 認証ライブラリ (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client) を使用して Web API にアクセスするアクセス トークンを取得することができます。
 
 2\.0 での認証の変更の詳細については、次のリソースを参照してください。
 
 * [ASP.NET Core でのアカウントの確認とパスワードの回復](xref:security/authentication/accconfirm)
 * [ASP.NET Core の認証アプリでの QR コードの生成の有効化](xref:security/authentication/identity-enable-qrcodes)
-* [ASP.NET Core 2.0 への認証と ID の移行](xref:migration/1x-to-2x/identity-2x)
+* [ASP.NET Core 2.0 への認証と Identity の移行](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="spa-templates"></a>SPA テンプレート
 
@@ -143,7 +149,7 @@ C# 7.1 機能の状態については、「[Roslyn GitHub repository](https://gi
 * [ASP.NET Core アプリ開発のための Visual Studio によるプロファイルの発行](xref:host-and-deploy/visual-studio-publish-profiles)
 * [キーの管理](xref:security/data-protection/implementation/key-management)
 * [Facebook 認証の構成](xref:security/authentication/facebook-logins)
-* [Twitter 認証を構成する](xref:security/authentication/twitter-logins)
+* [Twitter 認証の構成](xref:security/authentication/twitter-logins)
 * [Googler 認証の構成](xref:security/authentication/google-logins)
 * [Microsoft アカウント認証の構成](xref:security/authentication/microsoft-logins)
 
@@ -152,7 +158,7 @@ C# 7.1 機能の状態については、「[Roslyn GitHub repository](https://gi
 ASP.NET Core 1.x アプリケーションを ASP.NET Core 2.0 に移行する方法の手順については、次のリソースを参照してください。
 
 * [ASP.NET Core 1.x から ASP.NET Core 2.0 への移行](xref:migration/1x-to-2x/index)
-* [ASP.NET Core 2.0 への認証と ID の移行](xref:migration/1x-to-2x/identity-2x)
+* [ASP.NET Core 2.0 への認証と Identity の移行](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="additional-information"></a>追加情報
 

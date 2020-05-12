@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: fe69e51aefae9c80e5bb4b78151d384ce25d41a7
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: cf31c91ddc073498d882b111b597c546e788cc98
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218948"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771560"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
 

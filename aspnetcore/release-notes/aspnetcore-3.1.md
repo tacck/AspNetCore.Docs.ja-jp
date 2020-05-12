@@ -7,14 +7,17 @@ ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: f375022ad3ebdea2990f626320ef295926f88c22
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 67fc972676549a02265035c129c513f11d303d51
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648770"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774048"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1 の新機能
 
@@ -24,7 +27,7 @@ ms.locfileid: "78648770"
 
 Razor コンポーネントが部分クラスとして生成されるようになりました。 Razor コンポーネントのコードは、単一ファイル内のコンポーネントのすべてのコードを定義するのではなく、部分クラスとして定義された分離コード ファイルを使用して記述できます。 詳細については、「[部分クラスのサポート](xref:blazor/components#partial-class-support)」を参照してください。
 
-## <a name="opno-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor コンポーネント タグ ヘルパーと最上位レベルのコンポーネントへのパラメーターの引き渡し
+## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor コンポーネント タグ ヘルパーと最上位レベルのコンポーネントへのパラメーターの引き渡し
 
 ASP.NET Core 3.0 がインストールされた Blazor では、コンポーネントは HTML ヘルパー (`Html.RenderComponentAsync`) を使用してページとビューにレンダリングされていました。 ASP.NET Core 3.1 では、新しいコンポーネント タグ ヘルパーを使用して、ページまたはビューからコンポーネントがレンダリングされます。
 
@@ -36,14 +39,14 @@ HTML ヘルパーは ASP.NET Core 3.1 でも引き続きサポートされてい
 
 Blazor 初回のレンダリング時に、サーバーアプリで最上位レベルのコンポーネントにパラメーターを渡すことができるようになりました。 以前は、最上位レベルのコンポーネントにパラメーターを渡すには、[RenderMode.Static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static) を使用するしかありませんでした。 このリリースでは、[RenderMode.Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) と [RenderModel.ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) の両方がサポートされています。 指定されたパラメーター値はすべて JSON としてシリアル化され、初回の応答に含まれます。
 
-たとえば、インクリメント量 (`Counter`) を使用して `IncrementAmount` コンポーネントを事前レンダリングする場合は、次のようになります。
+たとえば、インクリメント量 (`IncrementAmount`) を使用して `Counter` コンポーネントを事前レンダリングする場合は、次のようになります。
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
     param-IncrementAmount="10" />
 ```
 
-詳細については、「[コンポーネントを Razor Pages と MVC アプリに統合する](xref:blazor/integrate-components)」を参照してください。
+詳細については、[コンポーネントの Razor Pages と MVC アプリへの統合](xref:blazor/integrate-components)に関するページを参照してください。
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>Http.sys での共有キューのサポート
 
@@ -55,7 +58,7 @@ Blazor 初回のレンダリング時に、サーバーアプリで最上位レ�
 
 SameSite Cookie の動作が、今後のブラウザーの変更を反映するように変更されました。 これは、AzureAd、OpenIdConnect、WsFederation などの認証シナリオに影響を与える可能性があります。 詳細については、「<xref:security/samesite>」を参照してください。
 
-## <a name="prevent-default-actions-for-events-in-opno-locblazor-apps"></a>Blazor アプリのイベントに対する既定のアクションを回避する
+## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Blazor アプリのイベントに対する既定のアクションを回避する
 
 イベントに対する既定のアクションを回避するには、`@on{EVENT}:preventDefault` ディレクティブ属性を使用します。 次の例では、テキスト ボックスにキーの文字を表示する既定のアクションが回避されます。
 
@@ -65,7 +68,7 @@ SameSite Cookie の動作が、今後のブラウザーの変更を反映する�
 
 詳細については、「[既定のアクションを禁止する](xref:blazor/event-handling#prevent-default-actions)」を参照してください。
 
-## <a name="stop-event-propagation-in-opno-locblazor-apps"></a>Blazor アプリでのイベント伝達を停止する
+## <a name="stop-event-propagation-in-blazor-apps"></a>Blazor アプリでのイベント伝達を停止する
 
 イベント伝達を停止するには、`@on{EVENT}:stopPropagation` ディレクティブ属性を使用します。 次の例では、チェック ボックスをオンにすると、子 `<div>` からのクリック イベントが親 `<div>` に伝達されなくなります。
 
@@ -85,7 +88,7 @@ SameSite Cookie の動作が、今後のブラウザーの変更を反映する�
 
 詳細については、「[イベントの伝達の停止](xref:blazor/event-handling#stop-event-propagation)」を参照してください。
 
-## <a name="detailed-errors-during-opno-locblazor-app-development"></a>Blazor アプリの開発中の詳細なエラー
+## <a name="detailed-errors-during-blazor-app-development"></a>Blazor アプリの開発中の詳細なエラー
 
 開発中に Blazor アプリが正常に機能していない場合、アプリからの詳細なエラー情報を受け取ることで、問題のトラブルシューティングと修正に役立ちます。 エラーが発生すると Blazor アプリによって画面の下部に金色のバーが表示されます。
 

@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1f68bd5347ba1f67e56b7a2fe8914ffdaef8010c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650972"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774081"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 の新機能
 
@@ -34,24 +38,24 @@ ASP.NET Core 2.1 用に SignalR を書き直しました。 ASP.NET Core SignalR
 
 ## <a name="razor-class-libraries"></a>Razor クラス ライブラリ
 
-ASP.NET Core 2.1 を使用すると、Razor ベースの UI をビルドしてライブラリに含め、複数のプロジェクト間で共有することが容易になります。 新しい Razor SDK を使用すると、NuGet パッケージにパッケージ化できるクラス ライブラリ プロジェクトに Razor ファイルをビルドすることができます。 アプリにより、ライブラリ内のビューとページを自動的に検出して、オーバーライドすることができます。 ビルドに Razor コンパイルを統合すると、次のことが可能になります。
+ASP.NET Core 2.1 を使用すると、Razor ベースの UI をビルドしてライブラリに含め、複数のプロジェクトとの間で共有することが容易になります。 新しい Razor SDK を使用すると、NuGet パッケージにパッケージ化できるクラス ライブラリ プロジェクトに Razor ファイルをビルドすることができます。 アプリにより、ライブラリ内のビューとページを自動的に検出して、オーバーライドすることができます。 ビルドに Razor コンパイルを統合すると、次のことが可能になります。
 
 * アプリの起動時間が大幅に短縮されます。
 * 実行時の Razor ビューとページへの高速更新は、反復開発ワークフローの一部として引き続き利用できます。
 
-詳細については、[Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成](xref:razor-pages/ui-class)に関するページをご覧ください。
+詳細については、[Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成](xref:razor-pages/ui-class)に関するページを参照してください。
 
 ## <a name="identity-ui-library--scaffolding"></a>Identity の UI ライブラリとスキャフォールディング
 
 ASP.NET Core 2.1 では、[ASP.NET Core Identity](xref:security/authentication/identity) を [Razor クラス ライブラリ](xref:razor-pages/ui-class)として提供しています。 Identity を含むアプリでは、新しい Identity スキャフォルダーを適用して、Identity Razor クラス ライブラリ (RCL) に含まれるソース コードを選択的に追加することができます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、Identity RCL の同じコードよりも優先されます。
 
-認証が**含まれていない**アプリでは、Identity スキャフォルダーを適用して RCL Identity パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
+認証が含まれて**いない**アプリでは、Identity スキャフォルダーを適用して RCL Identity パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
 
-詳細については、「[Scaffold Identity in ASP.NET Core projects](xref:security/authentication/scaffold-identity)」 (ASP.NET Core プロジェクトの ID のスキャフォールディング) を参照してください。
+詳細については、「[ASP.NET Core プロジェクトの Identity のスキャフォールディング](xref:security/authentication/scaffold-identity)」を参照してください。
 
 ## <a name="https"></a>HTTPS
 
-セキュリティとプライバシーがより強化されたため、Web アプリの HTTPS を有効化することが重要です。 Web 上では、HTTPS の強制がますます厳しくなっています。 HTTPS を使用していないサイトは、安全でないと見なされます。 ブラウザー (Chromium、Mozilla) では、セキュリティで保護されたコンテキストから Web 機能を使用することを強制するようになってきています。 [GDPR](xref:security/gdpr) では、ユーザー プライバシーの保護に HTTPS を使用する必要があります。 運用環境では HTTPS の使用が非常に重要ですが、開発環境で HTTPS を使用すると、展開における問題 (セキュリティ保護されていないリンクなど) を防止するのに役立ちます。 ASP.NET Core 2.1 には、開発環境での HTTPS の使用と、運用環境での HTTPS の構成を容易にする多くの機能強化が含まれています。 詳細については、「[HTTPS の適用](xref:security/enforcing-ssl)」を参照してください。
+セキュリティとプライバシーがより強化されたため、Web アプリの HTTPS を有効化することが重要です。 Web 上では、HTTPS の強制がますます厳しくなっています。 HTTPS を使用していないサイトは、安全でないと見なされます。 ブラウザー (Chromium、Mozilla) では、セキュリティで保護されたコンテキストから Web 機能を使用することを強制するようになってきています。 [GDPR](xref:security/gdpr) では、ユーザー プライバシーの保護に HTTPS を使用する必要があります。 運用環境では HTTPS の使用が非常に重要ですが、開発環境で HTTPS を使用すると、展開における問題 (セキュリティ保護されていないリンクなど) を防止するのに役立ちます。 ASP.NET Core 2.1 には、開発環境での HTTPS の使用と、運用環境での HTTPS の構成を容易にする多くの機能強化が含まれています。 詳細については、[HTTPS の適用](xref:security/enforcing-ssl)に関するページをご覧ください。
 
 ### <a name="on-by-default"></a>既定でオン
 
@@ -72,7 +76,7 @@ ASP.NET Core 2.1 では、[ASP.NET Core Identity](xref:security/authentication/i
 
 運用環境では、HTTPS を明示的に構成する必要があります。 2\.1 では、Kestrel に HTTPS を構成するための既定の構成スキーマが追加されています。 以下を使用するようにアプリを構成できます。
 
-* URL を含む複数のエンドポイント。 詳細については、[Kestrel Web サーバーの実装: エンドポイントの構成](xref:fundamentals/servers/kestrel#endpoint-configuration)のセクションを参照してください。
+* URL を含む複数のエンドポイント。 詳細については、[Kestrel Web サーバーの実装:エンドポイントの構成](xref:fundamentals/servers/kestrel#endpoint-configuration)に関するセクションを参照してください。
 * ディスク上のファイルまたは証明書ストアから HTTPS に使用する証明書。
 
 ## <a name="gdpr"></a>GDPR
@@ -124,7 +128,7 @@ ASP.NET Core 2.1 では、クリーンでわかりやすい Web API のビルド
 
 ## <a name="ihttpclientfactory"></a>IHttpClientFactory
 
-ASP.NET Core 2.1 には、アプリでの `IHttpClientFactory` のインスタンスの構成と使用を容易にする新しい `HttpClient` サービスが含まれています。 `HttpClient` は既に、送信 HTTP 要求用にリンクできるハンドラーのデリゲートの概念を備えています。 ファクトリは次のことを行います。
+ASP.NET Core 2.1 には、アプリでの `HttpClient` のインスタンスの構成と使用を容易にする新しい `IHttpClientFactory` サービスが含まれています。 `HttpClient` は既に、送信 HTTP 要求用にリンクできるハンドラーのデリゲートの概念を備えています。 ファクトリは次のことを行います。
 
 * 名前付きクライアントごとの `HttpClient` のインスタンスの登録をより直観的にします。
 * Polly ポリシーを Retry、CircuitBreakers などに使用できるようにする Polly ハンドラーを実装します。
@@ -133,7 +137,7 @@ ASP.NET Core 2.1 には、アプリでの `IHttpClientFactory` のインスタ�
 
 ## <a name="kestrel-transport-configuration"></a>Kestrel トランスポート構成
 
-ASP.NET Core 2.1 のリリースにより、Kestrel の既定のトランスポートは、Libuv に基づかなくなり、代わりにマネージド ソケットに基づくようになりました。 詳細については、[Kestrel Web サーバーの実装: トランスポート構成](xref:fundamentals/servers/kestrel#transport-configuration)のセクションを参照してください。
+ASP.NET Core 2.1 のリリースにより、Kestrel の既定のトランスポートは、Libuv に基づかなくなり、代わりにマネージド ソケットに基づくようになりました。 詳細については、[Kestrel Web サーバーの実装:トランスポート構成](xref:fundamentals/servers/kestrel#transport-configuration)に関する記事をご覧ください。
 
 ## <a name="generic-host-builder"></a>汎用ホスト ビルダー
 
@@ -153,9 +157,9 @@ Angular テンプレートは Angular CLI に基づいており、React テン�
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="razor-pages-search-for-razor-assets"></a>Razor アセットの Razor Pages 検索
+## <a name="razor-pages-search-for-razor-assets"></a>Razor Pages での Razor アセットの検索
 
-2\.1 では、Razor Pages は、次のディレクトリ内の Razor アセット (レイアウトや部分など) を次の順序で検索します。
+2\.1 では、Razor Pages によって、次のディレクトリ内の Razor アセット (レイアウトや部分など) が次の順序で検索されます。
 
 1. 現在の Pages フォルダー
 1. */Pages/Shared/*

@@ -1,27 +1,33 @@
 ---
-title: ASP.NET Core の Razor ページのフィルター メソッド
+title: ASP.NET Core の Razor Pages のフィルター メソッド
 author: Rick-Anderson
-description: ASP.NET Core の Razor ページのフィルター メソッドを作成する方法を説明します。
+description: ASP.NET Core の Razor Pages のフィルター メソッドを作成する方法を学習します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: cd772da8ed565bc779d8c6bcc7c9949a0c1c7c60
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 68962d5a3a49e52510d72899e7dead2c1983d8b6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78648050"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775519"
 ---
-# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>ASP.NET Core の Razor ページのフィルター メソッド
+# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>ASP.NET Core の Razor Pages のフィルター メソッド
 
 ::: moniker range=">= aspnetcore-3.0"
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、Razor ページ ハンドラーの実行の前後に Razor ページでコードを実行できます。 Razor ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。
+Razor ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、Razor ページ ハンドラーの実行の前後に Razor Pages でコードを実行できます。 Razor ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。
 
-Razor ページ フィルターとは、次のとおりです。
+Razor ページ フィルター
 
 * モデルのバインドが行われる前の、ハンドラー メソッドが選択された後にコードを実行します。
 * モデルのバインドの完了後の、ハンドラー メソッドの実行前にコードを実行します。
@@ -30,7 +36,7 @@ Razor ページ フィルターとは、次のとおりです。
 * 特定のページ ハンドラー メソッドには適用できません。
 * コンストラクターの依存関係は、[依存関係の挿入](xref:fundamentals/dependency-injection) (DI) によって入力されるようにできます。 詳細については、「[ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute)」と「[TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)」を参照してください。
 
-ページ コンストラクターとミドルウェアにより、ハンドラー メソッドが実行される前にカスタム コードの実行が可能になりますが、<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> とページへのアクセスを可能にするのは Razor ページ フィルターのみです。 ミドルウェアは `HttpContext` にアクセスできますが、"ページ コンテキスト" にはアクセスできません。 フィルターには、<xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> へのアクセスを提供する派生型のパラメーター `HttpContext` があります。 たとえば、「[フィルター属性を実装する](#ifa)」のサンプルでは、応答にヘッダーが追加されます。これは、コンストラクターやミドルウェアでは実行できません。
+ページ コンストラクターとミドルウェアにより、ハンドラー メソッドが実行される前にカスタム コードの実行が可能になりますが、<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> とページへのアクセスを可能にするのは Razor ページ フィルターのみです。 ミドルウェアは `HttpContext` にアクセスできますが、"ページ コンテキスト" にはアクセスできません。 フィルターには、`HttpContext` へのアクセスを提供する派生型のパラメーター <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> があります。 たとえば、「[フィルター属性を実装する](#ifa)」のサンプルでは、応答にヘッダーが追加されます。これは、コンストラクターやミドルウェアでは実行できません。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -38,14 +44,14 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 * 同期メソッド:
 
-  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) : モデルのバインドが行われる前の、ハンドラー メソッドが選択された後に呼び出されます。
-  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) : モデルのバインドの完了後の、ハンドラー メソッドの実行前に呼び出されます。
-  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : アクション結果の前の、ハンドラー メソッドの実行前に呼び出されます。
+  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0):ハンドラー メソッドが選択された後の、モデル バインドが行われる前に呼び出されます。
+  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0):ハンドラー メソッドが実行される前の、モデル バインドが完了した後に呼び出されます。
+  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0):ハンドラー メソッドが実行された後の、アクションの結果の前に呼び出されます。
 
 * 非同期メソッド:
 
-  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : モデルのバインドが行われる前の、ハンドラー メソッドが選択された後に非同期で呼び出されます。
-  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : モデルのバインドの完了後の、ハンドラー メソッドが呼び出される前に非同期で呼び出されます。
+  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0):ハンドラー メソッドが選択された後の、モデル バインドが行われる前に非同期で呼び出されます。
+  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0):ハンドラー メソッドが呼び出される前の、モデル バインドの完了後に非同期で呼び出されます。
 
 フィルター インターフェイスの同期と非同期バージョンの**両方ではなく**、**いずれか**を実装します。 フレームワークは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 両方のインターフェイスを実装した場合、非同期メソッドのみが呼び出されます。 ページのオーバーライドでもこの規則は同じです。オーバーライドの同期バージョンまたは非同期バージョンを実装でき、両方はできません。
 
@@ -57,11 +63,11 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 上記のコードでは、`ProcessUserAgent.Write` が、ユーザー エージェント文字列を使用して機能するユーザー指定のコードです。
 
-次のコードは、`SampleAsyncPageFilter` クラスで `Startup` を有効にします。
+次のコードは、`Startup` クラスで `SampleAsyncPageFilter` を有効にします。
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
-次のコードでは、<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> を呼び出して、`SampleAsyncPageFilter`/Movies*内のページにのみ* を適用しています。
+次のコードでは、<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> を呼び出して、 */Movies* 内のページにのみ `SampleAsyncPageFilter` を適用しています。
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup2.cs?name=snippet2)]
 
@@ -101,7 +107,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 ## <a name="authorize-filter-attribute"></a>Authorize フィルター属性
 
-[ に ](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0)Authorize`PageModel` 属性を適用できます。
+`PageModel` に [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) 属性を適用できます。
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/ModelWithAuthFilter.cshtml.cs?highlight=7)]
 
@@ -111,9 +117,9 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Razor ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、Razor ページ ハンドラーの実行の前後に Razor ページでコードを実行できます。 Razor ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。
+Razor ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、Razor ページ ハンドラーの実行の前後に Razor Pages でコードを実行できます。 Razor ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。
 
-Razor ページ フィルターとは、次のとおりです。
+Razor ページ フィルター
 
 * モデルのバインドが行われる前の、ハンドラー メソッドが選択された後にコードを実行します。
 * モデルのバインドの完了後の、ハンドラー メソッドの実行前にコードを実行します。
@@ -121,7 +127,7 @@ Razor ページ フィルターとは、次のとおりです。
 * ページまたはグローバルに実装できます。
 * 特定のページ ハンドラー メソッドには適用できません。
 
-コードは、ページ コンストラクターまたはミドルウェアを使用してハンドラー メソッドの実行前に実行できますが、[HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext) にアクセスできるのは Razor ページ フィルターのみです。 フィルターには、[ へのアクセスを提供する ](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0)FilterContext`HttpContext` 派生のパラメーターがあります。 たとえば、「[フィルター属性を実装する](#ifa)」のサンプルでは、応答にヘッダーが追加されます。これは、コンストラクターやミドルウェアでは実行できません。
+コードは、ページ コンストラクターまたはミドルウェアを使用してハンドラー メソッドの実行前に実行できますが、[HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext) にアクセスできるのは Razor ページ フィルターのみです。 フィルターには、`HttpContext` へのアクセスを提供する [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) 派生のパラメーターがあります。 たとえば、「[フィルター属性を実装する](#ifa)」のサンプルでは、応答にヘッダーが追加されます。これは、コンストラクターやミドルウェアでは実行できません。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -129,14 +135,14 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 * 同期メソッド:
 
-  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0) : モデルのバインドが行われる前の、ハンドラー メソッドが選択された後に呼び出されます。
-  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0) : モデルのバインドの完了後の、ハンドラー メソッドの実行前に呼び出されます。
-  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0) : アクション結果の前の、ハンドラー メソッドの実行前に呼び出されます。
+  * [OnPageHandlerSelected](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerselected?view=aspnetcore-2.0):ハンドラー メソッドが選択された後の、モデル バインドが行われる前に呼び出されます。
+  * [OnPageHandlerExecuting](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuting?view=aspnetcore-2.0):ハンドラー メソッドが実行される前の、モデル バインドが完了した後に呼び出されます。
+  * [OnPageHandlerExecuted](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter.onpagehandlerexecuted?view=aspnetcore-2.0):ハンドラー メソッドが実行された後の、アクションの結果の前に呼び出されます。
 
 * 非同期メソッド:
 
-  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0) : モデルのバインドが行われる前の、ハンドラー メソッドが選択された後に非同期で呼び出されます。
-  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0) : モデルのバインドの完了後の、ハンドラー メソッドが呼び出される前に非同期で呼び出されます。
+  * [OnPageHandlerSelectionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerselectionasync?view=aspnetcore-2.0):ハンドラー メソッドが選択された後の、モデル バインドが行われる前に非同期で呼び出されます。
+  * [OnPageHandlerExecutionAsync](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter.onpagehandlerexecutionasync?view=aspnetcore-2.0):ハンドラー メソッドが呼び出される前の、モデル バインドの完了後に非同期で呼び出されます。
 
 > [!NOTE]
 > フィルター インターフェイスの同期と非同期バージョンの両方ではなく、**いずれか**を実装します。 フレームワークは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 両方のインターフェイスを実装した場合、非同期メソッドのみが呼び出されます。 ページのオーバーライドでもこの規則は同じです。オーバーライドの同期バージョンまたは非同期バージョンを実装でき、両方はできません。
@@ -149,7 +155,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 前述のコードでは、[ILogger](/dotnet/api/microsoft.extensions.logging.ilogger?view=aspnetcore-2.0) は不要です。 これは、アプリケーションのトレース情報を提供するためにサンプルで使用されています。
 
-次のコードは、`SampleAsyncPageFilter` クラスで `Startup` を有効にします。
+次のコードは、`Startup` クラスで `SampleAsyncPageFilter` を有効にします。
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet2&highlight=11)]
 
@@ -157,7 +163,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet1)]
 
-次のコードは、`AddFolderApplicationModelConvention` を呼び出し、`SampleAsyncPageFilter`/subFolder*のページにのみ* を適用します。
+次のコードは、`AddFolderApplicationModelConvention` を呼び出し、 */subFolder* のページにのみ `SampleAsyncPageFilter` を適用します。
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup2.cs?name=snippet2)]
 
@@ -171,7 +177,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 ## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する
 
-次のコードは、同期 Razor ページ フィルターをオーバーライドします。
+次のコードでは、同期 Razor ページ フィルターをオーバーライドしています。
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/Index.cshtml.cs)]
 
@@ -195,7 +201,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 ## <a name="authorize-filter-attribute"></a>Authorize フィルター属性
 
-[ に ](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0)Authorize`PageModel` 属性を適用できます。
+`PageModel` に [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute?view=aspnetcore-2.0) 属性を適用できます。
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/ModelWithAuthFilter.cshtml.cs?highlight=7)]
 

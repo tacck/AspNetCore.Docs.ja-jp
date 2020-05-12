@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647342"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776358"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web ファームでの ASP.NET Core のホスト
 
@@ -77,7 +83,7 @@ Web ファーム環境におけるキャッシュのメカニズムでは、Web 
 次の現象のいずれかが**断続的に**発生するときは、多くの場合、データ保護またはキャッシュが Web ファーム環境に向けて適切に構成されていないことが問題の原因です。
 
 * 認証の中断 &ndash; 認証 Cookie が正しく構成されていない、または暗号化解除できない。 OAuth (Facebook、Microsoft、Twitter) ログインまたは OpenIdConnect ログインが「関連付けできませんでした」というエラーで失敗する。
-* 承認の中断 &ndash; Id が失われる。
+* 承認の中断 &ndash; Identity が失われる。
 * セッション状態でデータが失われる。
 * キャッシュされた項目が消える。
 * TempData が失敗する。

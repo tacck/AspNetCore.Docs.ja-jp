@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core がコンテンツをさまざまな言語と文化にローカライズするために提供するサービスとミドルウェアについて説明します。
 ms.author: riande
 ms.date: 11/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 91db83eb8685c7bee5e976f386c2a12c4090b734
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 1111c0c57baf5bfd52b26b553179338100b9ba79
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440819"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776566"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core のグローバリゼーションおよびローカリゼーション
 
@@ -372,7 +378,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` を挿入するコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 

@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
-ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
+ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81539662"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772492"
 ---
-# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
+# <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 
@@ -60,7 +63,7 @@ Blazor の `@bind` 機能では、書式設定が実行され、ユーザーの�
 
 ## <a name="localization"></a>ローカリゼーション
 
-### <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
+### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)を使用してカルチャが設定されます。
 
@@ -70,7 +73,7 @@ Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://devel
 
 Blazor で既定で選択されるカルチャは、ほとんどのユーザーにとって十分と考えられますが、ユーザーが優先ロケールを指定する手段を提供することを検討してください。 カルチャ ピッカーを使用した Blazor WebAssembly サンプル アプリについては、[LocSample](https://github.com/pranavkm/LocSample) ローカライズのサンプル アプリを参照してください。
 
-### <a name="opno-locblazor-server"></a>Blazor サーバー
+### <a name="blazor-server"></a>Blazor サーバー
 
 Blazor サーバー アプリは、[ローカライズ ミドルウェア](xref:fundamentals/localization#localization-middleware)を使用してローカライズされます。 ミドルウェアによって、アプリからリソースを要求するユーザーに対して適切なカルチャが選択されます。
 

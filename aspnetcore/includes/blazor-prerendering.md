@@ -1,13 +1,4 @@
 ---
-no-loc:
-- Blazor
-- SignalR
-ms.openlocfilehash: 5f3e22e04fe18149ec5a8acb42f42a8ef83a7664
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78647528"
 ---
 Blazor サーバー アプリをプリレンダリングしている間、ブラウザーとの接続が確立されていないため、JavaScript への呼び出しなどの特定のアクションは実行できません。 コンポーネントは、プリレンダリング時に異なるレンダリングが必要になる場合があります。
 
@@ -33,7 +24,7 @@ Blazor サーバー アプリをプリレンダリングしている間、ブラ
 }
 ```
 
-前のサンプル コードでは、`setElementText`wwwroot/index.html`<head>` (*WebAssembly) または*Pages/_Host.cshtmlBlazor (*サーバー) の* 要素内で、Blazor JavaScript 関数を提供します。 関数は `IJSRuntime.InvokeVoidAsync` を指定して呼び出され、値を返しません。
+前のコード例では、*wwwroot/index.html* (Blazor WebAssembly) または *Pages/_Host.cshtml* (Blazor サーバー) の `<head>` 要素内で、`setElementText` JavaScript 関数を提供します。 関数は `IJSRuntime.InvokeVoidAsync` を指定して呼び出され、値を返しません。
 
 ```html
 <script>
@@ -42,7 +33,7 @@ Blazor サーバー アプリをプリレンダリングしている間、ブラ
 ```
 
 > [!WARNING]
-> 前の例では、デモンストレーションのみを目的として、ドキュメント オブジェクト モデル (DOM) を直接変更しています。 JavaScript での DOM の直接変更は、ほとんどのシナリオでは推奨されません。JavaScript が Blazor の変更追跡に影響する可能性があるためです。
+> 前の例では、デモンストレーションのみを目的として、ドキュメント オブジェクト モデル (DOM) を直接変更しています。 ほとんどのシナリオにおいて、JavaScript で DOM を直接変更することはお勧めできません。JavaScript が Blazor の変更追跡に影響する可能性があるためです。
 
 次のコンポーネントは、プリレンダリングと互換性のある方法で、コンポーネントの初期化ロジックの一部として JavaScript の相互運用を使用する方法を示しています。 コンポーネントには、`OnAfterRenderAsync` 内からレンダリングの更新をトリガーできることが示されています。 このシナリオでは、開発者が無限ループを作成しないようにする必要があります。
 
@@ -81,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-前のサンプル コードでは、`setElementText`wwwroot/index.html`<head>` (*WebAssembly) または*Pages/_Host.cshtmlBlazor (*サーバー) の* 要素内で、Blazor JavaScript 関数を提供します。 関数は `IJSRuntime.InvokeAsync` を指定して呼び出され、次の値を返します。
+前のコード例では、*wwwroot/index.html* (Blazor WebAssembly) または *Pages/_Host.cshtml* (Blazor サーバー) の `<head>` 要素内で、`setElementText` JavaScript 関数を提供します。 関数は `IJSRuntime.InvokeAsync` を指定して呼び出され、次の値を返します。
 
 ```html
 <script>
@@ -93,4 +84,4 @@ Set value via JS interop call:
 ```
 
 > [!WARNING]
-> 前の例では、デモンストレーションのみを目的として、ドキュメント オブジェクト モデル (DOM) を直接変更しています。 JavaScript での DOM の直接変更は、ほとんどのシナリオでは推奨されません。JavaScript が Blazor の変更追跡に影響する可能性があるためです。
+> 前の例では、デモンストレーションのみを目的として、ドキュメント オブジェクト モデル (DOM) を直接変更しています。 ほとんどのシナリオにおいて、JavaScript で DOM を直接変更することはお勧めできません。JavaScript が Blazor の変更追跡に影響する可能性があるためです。

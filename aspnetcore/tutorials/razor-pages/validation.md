@@ -1,17 +1,23 @@
 ---
 title: ASP.NET Core Razor ページに検証を追加する
 author: rick-anderson
-description: ASP.NET Core で Razor ページに検証を追加する方法について説明します。
+description: ASP.NET Core で Razor ページに検証を追加する方法について調べます。
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f283234ed8a32dc9b7904bc6fee1cc9c04741029
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650342"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773776"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor ページに検証を追加する
 
@@ -211,7 +217,7 @@ SQLite では、移行は必要ありません。
 
 Azure へのデプロイの詳細については、「[チュートリアル: SQL Database を使用して Azure に ASP.NET Core アプリを作成する](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)」をご覧ください。
 
-このたびは、この Razor ページの紹介を最後までお読みいただきありがとうございました。 このチュートリアルの後は、[Razor ページと EF Core の概要](xref:data/ef-rp/intro)に関するページにお進みいただくことが推奨されます。
+このたびは、この Razor Pages の紹介を最後までお読みいただきありがとうございました。 このチュートリアルの後は、[Razor Pages と EF Core の概要](xref:data/ef-rp/intro)に関するページにお進みいただくことをお勧めします。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

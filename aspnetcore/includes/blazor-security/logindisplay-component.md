@@ -1,4 +1,4 @@
-`LoginDisplay` コンポーネント (*shared/Logindisplay*) は、`MainLayout` コンポーネント (*shared/mainlayout. razor*) にレンダリングされ、次の動作を管理します。
+コンポーネント (*shared/Logindisplay*) は`MainLayout` 、コンポーネント (*shared/mainlayout*) にレンダリングされ、次の動作を管理します。 `LoginDisplay`
 
 * 認証されたユーザーの場合:
   * 現在のユーザー名を表示します。

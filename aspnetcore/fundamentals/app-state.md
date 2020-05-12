@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558907"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774809"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 

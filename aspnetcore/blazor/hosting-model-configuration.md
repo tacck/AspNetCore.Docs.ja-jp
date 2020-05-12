@@ -1,21 +1,24 @@
 ---
 title: ASP.NET Core Blazor ホスティング モデルの構成
 author: guardrex
-description: Razor コンポーネントを Razor Pages および MVC アプリに統合する方法など、Blazor ホスティング モデルの構成について説明します。
+description: Razor コンポーネントを Razor Pages および MVC アプリに統合する方法など、Blazor ホスティング モデルの構成について学習します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/25/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159620"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772075"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
@@ -100,12 +103,12 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 ### <a name="configuration"></a>構成
 
-Blazor WebAssembly は次の構成をサポートしています。
+Blazor WebAssembly では、以下から構成を読み込みます。
 
-* 既定でアプリ設定ファイルの[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider):
+* 既定のアプリ設定ファイル
   * *wwwroot/appsettings.json*
   * *wwwroot/appsettings.{ENVIRONMENT}.json*
-* アプリによって登録されたその他の[構成プロバイダー](xref:fundamentals/configuration/index)。
+* アプリによって登録されたその他の[構成プロバイダー](xref:fundamentals/configuration/index)。 すべてのプロバイダーが Blazor WebAssembly アプリに適しているわけではありません。 Blazor WebAssembly に対してサポートされているプロバイダーの説明については、「[Blazor WASM の構成プロバイダーの明確化 (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134)」で追跡されています。
 
 > [!WARNING]
 > Blazor WebAssembly アプリの構成は、ユーザーに表示されます。 **アプリのシークレットや資格情報を構成に保存しないでください。**
@@ -136,12 +139,12 @@ Blazor WebAssembly は次の構成をサポートしています。
 
 #### <a name="provider-configuration"></a>プロバイダーの構成
 
-次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> と[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)を使用して追加の構成を指定しています。
+次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> を使用して追加の構成を指定します。
 
 `Program.Main`:
 
 ```csharp
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 
 ...
 
@@ -159,9 +162,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 
 ...
 
-builder.Configuration
-    .Add(memoryConfig)
-    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+builder.Configuration.Add(memoryConfig);
 ```
 
 構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
@@ -176,10 +177,10 @@ builder.Configuration
 <h2>Wheels</h2>
 
 <ul>
-    <li>Count: @Configuration["wheels:count"]</p>
-    <li>Brand: @Configuration["wheels:brand"]</p>
-    <li>Type: @Configuration["wheels:brand:type"]</p>
-    <li>Year: @Configuration["wheels:year"]</p>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
 </ul>
 
 @code {
@@ -187,6 +188,36 @@ builder.Configuration
     
     ...
 }
+```
+
+その他の構成ファイルを *wwwroot* フォルダーから構成に読み取るには、`HttpClient` を使用してファイルの内容を取得します。 この方法を使用する場合、既存の `HttpClient` サービスの登録では、次の例に示すように、作成されたローカル クライアントを使用してファイルを読み取ることができます。
+
+*wwwroot/cars.json*:
+
+```json
+{
+    "size": "tiny"
+}
+```
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var client = new HttpClient()
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+};
+
+builder.Services.AddTransient(sp => client);
+
+using var response = await client.GetAsync("cars.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+
+builder.Configuration.AddJsonStream(stream);
 ```
 
 #### <a name="authentication-configuration"></a>認証の構成

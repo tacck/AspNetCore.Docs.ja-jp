@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core でコントローラー メソッド、ビュー、DataAnnotations を使用する方法について説明します。
 ms.author: riande
 ms.date: 12/13/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 87b3cb2f4429157123d30274d1f12cd589c1cc99
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 444c870fcf9e866f0c382e32af174442d11d3af5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80242511"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777580"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core のコントローラーのメソッドとビュー
 

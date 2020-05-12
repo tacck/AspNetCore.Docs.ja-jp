@@ -5,13 +5,19 @@ description: ASP.NET Core のクラス ライブラリで部分ビューを使�
 ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: f24dc62eba345a8a3d35143805b4966cb51832fa
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2c2a2c1e13b2d511ecf8c1c02c235192861fd486
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650984"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774276"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core の Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成
 

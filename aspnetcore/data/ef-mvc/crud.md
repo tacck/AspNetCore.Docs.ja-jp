@@ -6,13 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2aa4ef48509b9a34f3b25eb657b1ecac51c1374b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 51334370b07709a773f6acd18d302f8b3ea88290
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416162"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773589"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>チュートリアル: CRUD 機能を実装する - ASP.NET MVC と EF Core
 

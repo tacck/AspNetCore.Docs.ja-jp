@@ -7,13 +7,17 @@ ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 5374d7eec4334223a4bba7ee26cb6e2f208ed20b
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977198"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776488"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>クラス ライブラリで ASP.NET Core API を使用する
 
@@ -175,7 +179,7 @@ ASP.NET Core の複数のバリアントをサポートするライブラリを�
 上記のプロジェクト ファイルでは、次のことが実行されます。
 
 * すべてのコンシューマー向けに `Markdig` パッケージが追加されます。
-* .NET Framework 4.6.1 以降または .NET Core 2.x を対象とするコンシューマー向けに [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) への参照が追加されます。 パッケージのバージョン 2.1.0 は、下位互換性のために ASP.NET Core 2.2 で動作します。
+* [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) への参照 が、.NET Framework 4.6.1 以降または .NET Core 2.x を対象とするコンシューマー向けに追加されます。 パッケージのバージョン 2.1.0 は、下位互換性のために ASP.NET Core 2.2 で動作します。
 * 共有フレームワークは、.NET Core 3.x を対象とするコンシューマー向けに参照されます。 `Microsoft.AspNetCore.Mvc.Razor` パッケージは、共有フレームワークに含まれます。
 
 また、.NET Core 2.1 と .NET Framework 4.6.1 の両方を対象とする場合、代わりに .NET Standard 2.0 を対象とすることもできます。

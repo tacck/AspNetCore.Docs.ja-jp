@@ -1,16 +1,22 @@
 ---
-title: 'チュートリアル: ASP.NET Core の Razor ページの概要'
+title: 'チュートリアル: ASP.NET Core の Razor Pages の概要'
 author: rick-anderson
-description: このチュートリアル シリーズでは、ASP.NET Core で Razor ページを使用する方法を示します。 モデルの作成、Razor ページのコードの生成、Entity Framework Core と SQL Server を使用したデータ アクセス、検索機能の追加、入力検証の追加、および移行を使用したモデルの更新の方法について説明します。
+description: このチュートリアル シリーズでは、ASP.NET Core で Razor ページを使用する方法を示します。 モデルの作成、Razor ページのコードの生成、Entity Framework Core と SQL Server を使用したデータ アクセス、検索機能の追加、入力検証の追加、移行を使用したモデルの更新の方法について学習します。
 ms.author: riande
 ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 6e1d58ccd83f7d7c1083dc2bf9ce7476650812a1
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 8ed12b1778673962fe0b174e005bd6d8a7f54168
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78646904"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774874"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>チュートリアル: ASP.NET Core の Razor ページの概要
 
@@ -323,9 +329,9 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
 ### <a name="pages-folder"></a>Pages フォルダー
 
-Razor ページとサポート ファイルが格納されます。 各 Razor ページは、次のファイルのペアとなります。
+Razor ページとサポート ファイルが含まれます。 各 Razor ページは、次のファイルのペアとなります。
 
-* *.cshtml* ファイル: HTML マークアップと、Razor 構文を使用した C# コードが保存されます。
+* *.cshtml* ファイル: HTML マークアップと、Razor 構文を使用した C# コードが含まれます。
 * *.cshtml.cs* ファイル: ページ イベントを処理する C# コードが保存されます。
 
 サポート ファイルには、アンダー スコアで始まる名前が付けられます。 たとえば、 *_Layout.cshtml* ファイルでは、すべてのページに共通の UI 要素が構成されます。 このファイルでは、ページの上部に表示されるナビゲーション メニューと、ページの下部に表示される著作権の通知が設定されます。 詳細については、「<xref:mvc/views/layout>」を参照してください。

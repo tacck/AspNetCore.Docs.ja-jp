@@ -7,14 +7,17 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 4886673a9b16b8be8d9a0b0d5c7002a91760544e
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: aa0b2b51632cff729449018f9823c38cc26ce612
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976977"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774094"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 の新機能
 
@@ -40,11 +43,11 @@ Blazor フレームワークでサポートされるシナリオ:
 
 詳細については、「<xref:blazor/index>」を参照してください。
 
-### <a name="opno-locblazor-server"></a>Blazor サーバー
+### <a name="blazor-server"></a>Blazor サーバー
 
 Blazor では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。 Blazor サーバーでは、ASP.NET Core アプリでサーバー上の Razor コンポーネントをホストするためのサポートが提供されます。 UI の更新は SignalR 接続を介して処理されます。 Blazor サーバーは ASP.NET Core 3.0 でサポートされています。
 
-### <a name="opno-locblazor-webassembly-preview"></a>Blazor WebAssembly (プレビュー)
+### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly (プレビュー)
 
 Blazor アプリは、WebAssembly ベースの .NET ランタイムを使用してブラウザーで直接実行することもできます。 Blazor WebAssembly はプレビュー段階であり、ASP.NET Core 3.0 ではサポートされて "*いません*"。 Blazor WebAssembly は、ASP.NET Core の今後のリリースでサポートされる予定です。
 
@@ -234,7 +237,7 @@ app.UseSignalR(routes =>
 });
 ```
 
-以前のバージョンでは、開発者はさまざまな場所でコントローラー、Razor ページ、およびハブを接続する必要がありました。 明示的な接続によって、ほぼ同一のルーティング セグメントがいくつも生成されます。
+以前のバージョンでは、開発者はさまざまな場所でコントローラー、Razor ページ、ハブを関連付ける必要がありました。 明示的な接続によって、ほぼ同一のルーティング セグメントがいくつも生成されます。
 
 ```csharp
 app.UseSignalR(routes =>
@@ -324,7 +327,7 @@ Json.NET を ASP.NET Core 3.0 に追加するには、「[Newtonsoft.Json ベー
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 では、Web API と SPA の認証と承認がサポートされています
 
-ASP.NET Core 3.0 では、Web API 認証のサポートの使用により、シングルページ アプリ (SPA) での認証が提供されます。 ユーザーを認証および格納するための ASP.NET Core ID が [IdentityServer4](https://identityserver.io/) と組み合わされ、Open ID Connect が実装されます。
+ASP.NET Core 3.0 では、Web API 認証のサポートの使用により、シングルページ アプリ (SPA) での認証が提供されます。 ユーザーを認証および格納するための ASP.NET Core Identity が [IdentityServer4](https://identityserver.io/) と組み合わされ、Open ID Connect が実装されます。
 
 IdentityServer4 は、ASP.NET Core 3.0 用の OpenID Connect および OAuth 2.0 フレームワークです。 これにより、次のセキュリティ機能が有効になります。
 

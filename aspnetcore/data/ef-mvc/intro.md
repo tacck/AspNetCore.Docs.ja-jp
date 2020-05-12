@@ -6,17 +6,23 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: fca9fdc425506ec8b4eec5c609237208f4c0d7b5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511302"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773550"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>チュートリアル: ASP.NET MVC Web アプリでの EF Core の概要
 
-このチュートリアルは ASP.NET Core 3.0 に更新されて**いません**。 [Razor Pages バージョン](xref:data/ef-rp/intro)は更新されています。 このチュートリアルの ASP.NET Core 3.0 以降のバージョンの、ほとんどのコード変更は:
+このチュートリアルは ASP.NET Core 3.0 に更新されて**いません**。 [Razor Pages のバージョン](xref:data/ef-rp/intro)は更新されています。 このチュートリアルの ASP.NET Core 3.0 以降のバージョンの、ほとんどのコード変更は:
 
 * *Startup.cs* と *Program.cs* ファイルにあります。
 * [Razor Pages バージョン](xref:data/ef-rp/intro)にある場合があります。 

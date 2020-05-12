@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: ac667b0205f5daad395d86fbe129beb509a044a6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: afbffc752f9c184ef32c9518464a94a615828dab
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417619"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776579"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core でホスティング スタートアップ アセンブリを使用する
 
@@ -94,7 +100,7 @@ ms.locfileid: "80417619"
 
 クラス ライブラリでは、ホスティング スタートアップの拡張機能を提供できます。 このライブラリには `HostingStartup` 属性が含まれています。
 
-[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、*HostingStartupApp*、クラス ライブラリ、および *HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
+[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、*HostingStartupApp*、クラス ライブラリ、*HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
 
 * `IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。 `ServiceKeyInjection` では、メモリ内の構成プロバイダー ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) を使用して、サービスの文字列のペアがアプリの構成に追加されます。
 * ホスティング スタートアップの名前空間とクラスを識別する `HostingStartup` 属性。
@@ -492,7 +498,7 @@ dotnet nuget locals all --clear
 
 クラス ライブラリでは、ホスティング スタートアップの拡張機能を提供できます。 このライブラリには `HostingStartup` 属性が含まれています。
 
-[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、*HostingStartupApp*、クラス ライブラリ、および *HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
+[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、*HostingStartupApp*、クラス ライブラリ、*HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
 
 * `IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。 `ServiceKeyInjection` では、メモリ内の構成プロバイダー ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) を使用して、サービスの文字列のペアがアプリの構成に追加されます。
 * ホスティング スタートアップの名前空間とクラスを識別する `HostingStartup` 属性。
