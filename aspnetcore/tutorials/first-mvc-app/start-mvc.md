@@ -89,7 +89,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
    code -r MvcMovie
    ```
 
-  * "**Required assets to build and debug are missing from 'MvcMovie'. Add them?**" という内容のダイアログ ボックスが表示されたら、  **[Yes]** を選択します
+  * "**Required assets to build and debug are missing from 'MvcMovie'. Add them?\(ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?\)**" という内容のダイアログ ボックスが表示されたら、  **[Yes]\(はい\)** を選択します
 
   * `dotnet new mvc -o MvcMovie`: *MvcMovie* フォルダー内に新しい ASP.NET Core MVC プロジェクトを作成します。
   * `code -r MvcMovie`:Visual Studio Code で *MvcMovie.csproj* プロジェクト ファイルを読み込みます。
