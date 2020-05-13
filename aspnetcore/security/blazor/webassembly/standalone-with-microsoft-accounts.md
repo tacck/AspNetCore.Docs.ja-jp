@@ -1,11 +1,11 @@
 ---
-title: Microsoft アカウントをBlazor使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
+title: BlazorMicrosoft アカウントを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/06/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,14 +13,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 6f884cbfc9ac50f38c415af522d3d09a3ef38712
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 9fc93cc02129081ac6c777677a0c8d6397724e53
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976845"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153578"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft アカウントをBlazor使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>BlazorMicrosoft アカウントを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
@@ -28,26 +28,26 @@ ms.locfileid: "82976845"
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-認証にBlazor [Microsoft アカウントと Azure Active Directory (AAD)](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)を使用する webassembly スタンドアロンアプリを作成するには、次のようにします。
+Blazor認証に[Microsoft アカウントと AZURE ACTIVE DIRECTORY (AAD)](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)を使用する webassembly スタンドアロンアプリを作成するには、次のようにします。
 
 1. [AAD テナントと web アプリケーションを作成する](/azure/active-directory/develop/v2-overview)
 
-   Azure portal の**Azure Active Directory** > **アプリの登録**領域に AAD アプリを登録します。
+   Azure portal の**Azure Active Directory**  >  **アプリの登録**領域に AAD アプリを登録します。
 
-   1\. アプリの**名前**( ** Blazorクライアント AAD**など) を指定します。<br>
+   1\. アプリの**名前**( ** Blazor クライアント AAD**など) を指定します。<br>
    2\. [**サポートされているアカウントの種類**] で、**任意の組織ディレクトリのアカウント**を選択します。<br>
-   3 \。 [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、の`https://localhost:5001/authentication/login-callback`リダイレクト uri を指定します。<br>
-   4 \。 [ **Permissions** > **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。<br>
+   3 \。 [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、のリダイレクト uri を指定し `https://localhost:5001/authentication/login-callback` ます。<br>
+   4 \。 [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。<br>
    5 \。 **[登録]** を選択します。
 
-   [**認証** > **プラットフォーム構成** > **Web**:
+   [**認証**  >  **プラットフォーム構成**  >  **Web**:
 
-   1\. の`https://localhost:5001/authentication/login-callback` **リダイレクト URI**が存在することを確認します。<br>
+   1\. の**リダイレクト URI**が存在することを確認 `https://localhost:5001/authentication/login-callback` します。<br>
    2\. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。<br>
    3 \。 アプリの残りの既定値は、このエクスペリエンスで許容されます。<br>
    4 \。 **[保存]** を選択します。
 
-   アプリケーション ID (クライアント ID) を記録します (たとえば`11111111-1111-1111-1111-111111111111`、)。
+   アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
 
 1. 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
 
@@ -55,16 +55,16 @@ ms.locfileid: "82976845"
    dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common"
    ```
 
-   プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など`-o BlazorSample`) を指定して出力オプションを含めます。 フォルダー名もプロジェクトの名前の一部になります。
+   プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
 
 アプリを作成すると、次のことができるようになります。
 
 * Microsoft アカウントを使用してアプリにログインします。
-* アプリが正しく構成されている場合は、スタンドアロンBlazorアプリの場合と同じ方法を使用して、Microsoft api のアクセストークンを要求します。 詳細については、「[クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する」を参照してください。
+* アプリが正しく構成されている場合は、スタンドアロンアプリの場合と同じ方法を使用して、Microsoft Api のアクセストークンを要求し Blazor ます。 詳細については、「[クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する」を参照してください。
 
 ## <a name="authentication-package"></a>認証パッケージ
 
-職場または学校のアカウント (`SingleOrg`) を使用するようにアプリを作成すると、アプリは[Microsoft 認証ライブラリ](/azure/active-directory/develop/msal-overview)(`Microsoft.Authentication.WebAssembly.Msal`) のパッケージ参照を自動的に受け取ります。 このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
+職場または学校のアカウント () を使用するようにアプリを作成すると、 `SingleOrg` アプリは[Microsoft 認証ライブラリ](/azure/active-directory/develop/msal-overview)() のパッケージ参照を自動的に受け取り `Microsoft.Authentication.WebAssembly.Msal` ます。 このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
 
 アプリに認証を追加する場合は、アプリのプロジェクトファイルにパッケージを手動で追加します。
 
@@ -73,13 +73,13 @@ ms.locfileid: "82976845"
     Version="{VERSION}" />
 ```
 
-前`{VERSION}`のパッケージ参照のを、 <xref:blazor/get-started>この記事に示さ`Microsoft.AspNetCore.Blazor.Templates`れているパッケージのバージョンに置き換えます。
+`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
-`Microsoft.Authentication.WebAssembly.Msal`パッケージによって、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication`パッケージが推移的にアプリに追加されます。
+パッケージによって、 `Microsoft.Authentication.WebAssembly.Msal` パッケージが推移的 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` にアプリに追加されます。
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddMsalAuthentication` `Microsoft.Authentication.WebAssembly.Msal`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリがIdentityプロバイダー (IP) と対話するために必要なすべてのサービスを設定します。
+ユーザー認証のサポートは、 `AddMsalAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.Authentication.WebAssembly.Msal` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なすべてのサービスを設定 Identity します。
 
 *Program.cs*:
 
@@ -90,7 +90,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-メソッド`AddMsalAuthentication`は、コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリの構成に必要な値は、アプリを登録するときに Microsoft アカウントの構成から取得できます。
+メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリの構成に必要な値は、アプリを登録するときに Microsoft アカウントの構成から取得できます。
 
 構成は*wwwroot/appsettings*ファイルによって提供されます。
 
@@ -116,7 +116,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="access-token-scopes"></a>アクセストークンスコープ
 
-Webassembly テンプレートでは、セキュリティで保護された API のアクセストークンを要求するようにアプリが自動的に構成されるわけではBlazorありません。 サインインフローの一部としてアクセストークンをプロビジョニングするには、の既定のアクセストークンスコープにスコープを追加`MsalProviderOptions`します。
+BlazorWebassembly テンプレートでは、セキュリティで保護された API のアクセストークンを要求するようにアプリが自動的に構成されるわけではありません。 サインインフローの一部としてアクセストークンをプロビジョニングするには、の既定のアクセストークンスコープにスコープを追加し `MsalProviderOptions` ます。
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -170,9 +170,10 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/blazor/webassembly/additional-scenarios>
+* [セキュリティで保護された既定のクライアントを使用するアプリ内の認証されていない web API 要求](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:security/blazor/webassembly/aad-groups-roles>
 * [クイック スタート: Microsoft ID プラットフォームにアプリケーションを登録する](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
 * [クイック スタート: Web API を公開するようにアプリケーションを構成する](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)

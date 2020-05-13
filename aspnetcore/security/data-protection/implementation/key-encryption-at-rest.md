@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core での保存時のキーの暗号化
+title: ASP.NET Core を使用した Windows および Azure での保存時のキーの暗号化
 author: rick-anderson
 description: 保存時のデータ保護キーの暗号化 ASP.NET Core の実装の詳細について説明します。
 ms.author: riande
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c927c926212aeb1263d15fd3fdc753c377b2e305
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776930"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153569"
 ---
-# <a name="key-encryption-at-rest-in-aspnet-core"></a>ASP.NET Core での保存時のキーの暗号化
+# <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>ASP.NET Core を使用した Windows および Azure での保存時のキーの暗号化
 
 データ保護システムでは、暗号化キーを保存時に暗号化する方法を[既定で検出するメカニズム](xref:security/data-protection/configuration/default-settings)を使用します。 開発者は検出メカニズムをオーバーライドし、保存時のキーの暗号化方法を手動で指定できます。
 
@@ -29,7 +29,7 @@ ms.locfileid: "82776930"
 
 ## <a name="azure-key-vault"></a>Azure Key Vault
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)にキーを格納するには、 `Startup`クラスで[ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault)を使用してシステムを構成します。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)にキーを格納するには、クラスで[ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault)を使用してシステムを構成し `Startup` ます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -59,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-パラメーター `ProtectKeysWithDpapi`を使用せずにを呼び出すと、現在の Windows ユーザーアカウントのみが、永続化されたキーリングを解読できます。 必要に応じて、(現在のユーザーアカウントだけでなく) コンピューター上のすべてのユーザーアカウントがキーリングを解読できるように指定することもできます。
+`ProtectKeysWithDpapi`パラメーターを使用せずにを呼び出すと、現在の Windows ユーザーアカウントのみが、永続化されたキーリングを解読できます。 必要に応じて、(現在のユーザーアカウントだけでなく) コンピューター上のすべてのユーザーアカウントがキーリングを解読できるように指定することもできます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -106,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-の`ProtectKeysWithDpapiNG`パラメーターなしのオーバーロードもあります。 この便利な方法を使用して、"SID = {CURRENT_ACCOUNT_SID}" という規則を指定します。 *CURRENT_ACCOUNT_SID*は現在の Windows ユーザーアカウントの SID です。
+のパラメーターなしのオーバーロードもあり `ProtectKeysWithDpapiNG` ます。 この便利な方法を使用して、"SID = {CURRENT_ACCOUNT_SID}" という規則を指定します。 *CURRENT_ACCOUNT_SID*は現在の Windows ユーザーアカウントの SID です。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

@@ -1,11 +1,11 @@
 ---
-title: 認証ライブラリをBlazor使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
+title: Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,14 +13,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 6907a1213a6a9089e2aed885093c2fd38f972ad0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 219364ef2e699ff1029536effd106a80ec02825c
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768053"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153410"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>認証ライブラリをBlazor使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
+# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
@@ -30,19 +30,19 @@ ms.locfileid: "82768053"
 
 *Azure Active Directory (AAD) と Azure Active Directory B2C (AAD B2C) については、このトピックのガイダンスに従ってください。この目次ノードの AAD と AAD B2C のトピックを参照してください。*
 
-ライブラリを使用Blazor `Microsoft.AspNetCore.Components.WebAssembly.Authentication`する webassembly アプリを作成するには、コマンドシェルで次のコマンドを実行します。
+Blazorライブラリを使用する webassembly アプリを作成するには `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 、コマンドシェルで次のコマンドを実行します。
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
 ```
 
-プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など`-o BlazorSample`) を指定して出力オプションを含めます。 フォルダー名もプロジェクトの名前の一部になります。
+プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
 
-Visual Studio で、 [webassembly Blazorを作成](xref:blazor/get-started)します。 [**ユーザーアカウントをアプリ内に格納**する] オプションを使用して、**認証**を**個々のユーザーアカウント**に設定します。
+Visual Studio で、 [ Blazor webassembly を作成](xref:blazor/get-started)します。 [**ユーザーアカウントをアプリ内に格納**する] オプションを使用して、**認証**を**個々のユーザーアカウント**に設定します。
 
 ## <a name="authentication-package"></a>認証パッケージ
 
-個々のユーザーアカウントを使用するようにアプリを作成すると、アプリはアプリのプロジェクト`Microsoft.AspNetCore.Components.WebAssembly.Authentication`ファイルでパッケージのパッケージ参照を自動的に受け取ります。 このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
+個々のユーザーアカウントを使用するようにアプリを作成すると、アプリはアプリのプロジェクトファイルでパッケージのパッケージ参照を自動的に受け取り `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ます。 このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
 
 アプリに認証を追加する場合は、アプリのプロジェクトファイルにパッケージを手動で追加します。
 
@@ -52,11 +52,11 @@ Visual Studio で、 [webassembly Blazorを作成](xref:blazor/get-started)し�
     Version="{VERSION}" />
 ```
 
-前`{VERSION}`のパッケージ参照のを、 <xref:blazor/get-started>この記事に示さ`Microsoft.AspNetCore.Blazor.Templates`れているパッケージのバージョンに置き換えます。
+`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddOidcAuthentication` `Microsoft.AspNetCore.Components.WebAssembly.Authentication`パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリがIdentityプロバイダー (IP) と対話するために必要なすべてのサービスを設定します。
+ユーザー認証のサポートは、 `AddOidcAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なすべてのサービスを設定 Identity します。
 
 *Program.cs*:
 
@@ -78,11 +78,11 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-スタンドアロンアプリの認証サポートは、Open ID Connect (OIDC) を使用して提供されます。 メソッド`AddOidcAuthentication`は、oidc を使用してアプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。 アプリの構成に必要な値は、OIDC に準拠している IP から取得できます。 アプリを登録するときに値を取得します。これは通常、オンラインポータルで実行されます。
+スタンドアロンアプリの認証サポートは、Open ID Connect (OIDC) を使用して提供されます。 メソッドは、 `AddOidcAuthentication` OIDC を使用してアプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。 アプリの構成に必要な値は、OIDC に準拠している IP から取得できます。 アプリを登録するときに値を取得します。これは通常、オンラインポータルで実行されます。
 
 ## <a name="access-token-scopes"></a>アクセストークンスコープ
 
-Webassembly テンプレートでは、セキュリティで保護された API のアクセストークンを要求するようにアプリが自動的に構成されるわけではBlazorありません。 サインインフローの一部としてアクセストークンをプロビジョニングするには、の既定のトークンスコープにスコープを追加`OidcProviderOptions`します。
+BlazorWebassembly テンプレートでは、セキュリティで保護された API のアクセストークンを要求するようにアプリが自動的に構成されるわけではありません。 サインインフローの一部としてアクセストークンをプロビジョニングするには、の既定のトークンスコープにスコープを追加し `OidcProviderOptions` ます。
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -136,6 +136,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/blazor/webassembly/additional-scenarios>
+* [セキュリティで保護された既定のクライアントを使用するアプリ内の認証されていない web API 要求](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
