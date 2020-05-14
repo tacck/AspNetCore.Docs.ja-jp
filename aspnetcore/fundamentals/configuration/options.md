@@ -56,7 +56,7 @@ ASP.NET Core アプリでは、[Microsoft.Extensions.Options.ConfigurationExtens
 
 <xref:Microsoft.Extensions.Options.IOptions%601> はオプションをサポートするために使用できます。 ただし、<xref:Microsoft.Extensions.Options.IOptions%601> では、上記の <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> のシナリオはサポートされません。 既に <xref:Microsoft.Extensions.Options.IOptions%601> インターフェイスを使用しており、<xref:Microsoft.Extensions.Options.IOptionsMonitor%601> によって提供されるシナリオが必要ない既存のフレームワークとライブラリでは、<xref:Microsoft.Extensions.Options.IOptions%601> を継続して使用できます。
 
-## <a name="general-options-configuration"></a>一般般的なオプションの構成
+## <a name="general-options-configuration"></a>一般的なオプションの構成
 
 サンプル アプリの例 1 は一般的なオプション構成です。
 
