@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/19/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 705fa32ee72221b3c18653e9f3495b9cd61e9ad1
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661728"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967429"
 ---
-# <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Core Blazor テンプレート
+# <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor テンプレート
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -39,7 +42,7 @@ dotnet new blazorwasm --help
 dotnet new blazorserver --help
 ```
 
-## <a name="opno-locblazor-project-structure"></a>Blazor プロジェクトの構造
+## <a name="blazor-project-structure"></a>Blazor プロジェクトの構造
 
 次のファイルとフォルダーは、Blazor テンプレートから生成された Blazor アプリを構成します。
 
@@ -53,9 +56,9 @@ dotnet new blazorserver --help
 
 * *Startup.cs* (Blazor Server) &ndash; アプリのスタートアップ ロジックを含みます。 `Startup` クラスには、次の 2 つのメソッドがあります。
 
-  * `ConfigureServices` &ndash; アプリの [ 依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービスを構成します。 Blazor Server アプリでは、<xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor*> を呼び出すことによってサービスが追加されます。`WeatherForecastService` は、サンプルの `FetchData` コンポーネントが使用するためにサービス コンテナーに追加されます。
+  * `ConfigureServices` &ndash; アプリの [ 依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービスを構成します。 Blazor Server アプリでは、<xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> を呼び出すことによってサービスが追加されます。`WeatherForecastService` は、サンプルの `FetchData` コンポーネントが使用するためにサービス コンテナーに追加されます。
   * `Configure` &ndash; アプリの要求処理パイプラインを構成します。
-    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*> は、ブラウザーとのリアルタイム接続用のエンドポイントを設定するために呼び出されます。 この接続は [SignalR](xref:signalr/introduction) で作成されます。これは、アプリにリアルタイム Web 機能を追加するためのフレームワークです。
+    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> は、ブラウザーとのリアルタイム接続用のエンドポイントを設定するために呼び出されます。 この接続は [SignalR](xref:signalr/introduction) で作成されます。これは、アプリにリアルタイム Web 機能を追加するためのフレームワークです。
     * [MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) は、アプリのルート ページ (*Pages/_Host.cshtml*) を設定し、ナビゲーションを有効にするために呼び出されます。
 
 * *wwwroot/index.html* (Blazor WebAssembly) &ndash; HTML ページとして実装されているアプリのルート ページ。
@@ -67,8 +70,8 @@ dotnet new blazorserver --help
 
 * *App.razor* &ndash; <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントを使用してクライアント側のルーティングを設定するアプリのルート コンポーネント。 `Router` コンポーネントは、ブラウザーのナビゲーションをインターセプトし、要求されたアドレスに一致するページをレンダリングします。
 
-* *Pages* フォルダー &ndash; Blazor アプリと Blazor サーバー アプリのルート Razor ページを構成するルーティング可能なコンポーネント/ページ ( *.razor*) が含まれています。 各ページのルートは、[`@page`](xref:mvc/views/razor#page) ディレクティブを使用して指定します。 テンプレートには以下が含まれています。
-  * *_Host.cshtml* (Blazor Server) &ndash; Razor ページとして実装されるアプリのルート ページ。
+* *Pages* フォルダー &ndash; Blazor アプリと Blazor サーバー アプリのルート Razor ページを構成するルーティング可能なコンポーネントまたはページ ( *.razor*) が含まれています。 各ページのルートは、[`@page`](xref:mvc/views/razor#page) ディレクティブを使用して指定します。 テンプレートには以下が含まれています。
+  * *_Host.cshtml* (Blazor サーバー) &ndash; Razor ページとして実装されるアプリのルート ページ。
     * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
     * ブラウザーとサーバーの間のリアルタイム SignalR 接続を設定する `_framework/blazor.server.js` JavaScript ファイルが読み込まれます。
     * このホスト ページは、ルート `App` コンポーネント (*App.razor*) を表示する場所を指定します。
@@ -79,9 +82,9 @@ dotnet new blazorserver --help
 
 * *Shared* フォルダー &ndash; アプリで使用する他の UI コンポーネント ( *.razor*) を含みます。
   * `MainLayout` (*MainLayout.razor*) &ndash; アプリのレイアウト コンポーネント。
-  * `NavMenu` (*NavMenu.razor*) &ndash; サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [NavLink コンポーネント](xref:blazor/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) を含みます。 `NavLink` コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
+  * `NavMenu` (*NavMenu.razor*) &ndash; サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [NavLink コンポーネント](xref:blazor/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 `NavLink` コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
 
-* *_Imports razor* &ndash; 名前空間の [`@using`](xref:mvc/views/razor#using) ディレクティブなど、アプリのコンポーネント ( *.razor*) に含める一般的な Razor ディレクティブを含みます。
+* *_Imports.razor* &ndash; 名前空間の [`@using`](xref:mvc/views/razor#using) ディレクティブなど、アプリのコンポーネント ( *.razor*) に含める一般的な Razor ディレクティブが含まれます。
 
 * *Data* フォルダー (Blazor Server) &ndash; には、アプリの `FetchData` コンポーネントに気象データの例を提供する、`WeatherForecast` クラスと `WeatherForecastService` の実装を含みます。
 

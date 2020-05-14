@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 380a14177d4bb8fa3de63a3c1cd9a39aeab13db3
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 064f504e94cd65862370d4551c6cb44210a8238f
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205983"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967299"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -274,7 +277,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 ```razor
 @page "/"
 
-<h1 @ref="_title">Hello, world!</h1>
+<h1 @ref="title">Hello, world!</h1>
 
 Welcome to your new app.
 
@@ -293,20 +296,20 @@ namespace BlazorSample.Pages
     public partial class Index : 
         ComponentBase, IObservable<ElementReference>, IDisposable
     {
-        private bool _disposing;
-        private IList<IObserver<ElementReference>> _subscriptions = 
+        private bool disposing;
+        private IList<IObserver<ElementReference>> subscriptions = 
             new List<IObserver<ElementReference>>();
-        private ElementReference _title;
+        private ElementReference title;
 
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
 
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in subscriptions)
             {
                 try
                 {
-                    subscription.OnNext(_title);
+                    subscription.OnNext(title);
                 }
                 catch (Exception)
                 {
@@ -317,9 +320,9 @@ namespace BlazorSample.Pages
 
         public void Dispose()
         {
-            _disposing = true;
+            disposing = true;
 
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in subscriptions)
             {
                 try
                 {
@@ -330,17 +333,17 @@ namespace BlazorSample.Pages
                 }
             }
 
-            _subscriptions.Clear();
+            subscriptions.Clear();
         }
 
         public IDisposable Subscribe(IObserver<ElementReference> observer)
         {
-            if (_disposing)
+            if (disposing)
             {
                 throw new InvalidOperationException("Parent being disposed");
             }
 
-            _subscriptions.Add(observer);
+            subscriptions.Add(observer);
 
             return new Subscription(observer, this);
         }
@@ -358,7 +361,7 @@ namespace BlazorSample.Pages
 
             public void Dispose()
             {
-                Self._subscriptions.Remove(Observer);
+                Self.subscriptions.Remove(Observer);
             }
         }
     }
@@ -399,7 +402,7 @@ namespace BlazorSample.Shared
     public partial class SurveyPrompt : 
         ComponentBase, IObserver<ElementReference>, IDisposable
     {
-        private IDisposable _subscription = null;
+        private IDisposable subscription = null;
 
         [Parameter]
         public IObservable<ElementReference> Parent { get; set; }
@@ -408,22 +411,22 @@ namespace BlazorSample.Shared
         {
             base.OnParametersSet();
 
-            if (_subscription != null)
+            if (subscription != null)
             {
-                _subscription.Dispose();
+                subscription.Dispose();
             }
 
-            _subscription = Parent.Subscribe(this);
+            subscription = Parent.Subscribe(this);
         }
 
         public void OnCompleted()
         {
-            _subscription = null;
+            subscription = null;
         }
 
         public void OnError(Exception error)
         {
-            _subscription = null;
+            subscription = null;
         }
 
         public void OnNext(ElementReference value)
@@ -434,7 +437,7 @@ namespace BlazorSample.Shared
 
         public void Dispose()
         {
-            _subscription?.Dispose();
+            subscription?.Dispose();
         }
     }
 }
