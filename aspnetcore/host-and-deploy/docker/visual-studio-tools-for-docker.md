@@ -5,13 +5,19 @@ description: Visual Studio ツールと Docker for Windows を使用して、ASP
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: ba79f0af8192ad9e8b263d4304ccc0df36c50f00
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440754"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967572"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Visual Studio コンテナー ツールと ASP.NET Core
 
@@ -84,7 +90,11 @@ Visual Studio コンテナー ツールでは、.NET Framework をターゲッ�
 
 Visual Studio 2017 バージョン 15.7 以前では、唯一のコンテナー オーケストレーション ソリューションとして、[Docker Compose](https://docs.docker.com/compose/overview/) がサポートされています。 Docker Compose の成果物は、 **[追加]**  >  **[Docker サポート]** を使用して追加されます。
 
-Visual Studio 2017 バージョン 15.8 以降では、指示された場合にのみ、オーケストレーション ソリューションが追加されます。 **ソリューション エクスプローラー**でプロジェクトを右クリックして、 **[追加]**  >  **[Container Orchestrator Support]\(コンテナー オーケストレーター サポート)** の順に選択します。 2 つの異なる選択肢が提示されます。[Docker Compose](#docker-compose) と [Service Fabric](#service-fabric) です。
+Visual Studio 2017 バージョン 15.8 以降では、指示された場合にのみ、オーケストレーション ソリューションが追加されます。 **ソリューション エクスプローラー**でプロジェクトを右クリックして、 **[追加]**  >  **[Container Orchestrator Support]\(コンテナー オーケストレーター サポート)** の順に選択します。 次の選択肢があります。 
+
+* [Docker Compose](#docker-compose)
+* [Service Fabric](#service-fabric)
+* [Kubernetes/Helm ](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 
@@ -185,7 +195,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>エディット コンティニュ
 
-静的なファイルや Razor ビューに対する変更は、コンパイルを行う必要はなく、自動的に更新されます。 変更を行って保存し、ブラウザーを更新し、更新を確認します。
+静的なファイルや Razor ビューに対する変更は、コンパイルの手順を行う必要はなく、自動的に更新されます。 変更を行って保存し、ブラウザーを更新し、更新を確認します。
 
 コード ファイルを変更する場合、コンテナー内で Kestrel をコンパイルして再起動する必要があります。 変更したら、`CTRL+F5` キーを使用して、コンテナー内でプロセスを実行し、アプリを起動します。 Docker コンテナーが再構築されたり、停止されたりすることはありません。 PMC で `docker ps` コマンドを実行します。 元のコンテナーが 10 分前と同じ状態で実行されていることを確認できます。
 

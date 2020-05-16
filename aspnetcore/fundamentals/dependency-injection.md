@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 4e990329b7ebcfc9cbbff8a3c9895604a22461d3
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 3e31be02f21f8c28c1d98d47d9a744b3a8502253
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661696"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003178"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
 
@@ -539,6 +545,12 @@ public void ConfigureServices(IServiceCollection services)
 どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです&mdash;ほとんどがフレームワーク自体の内の特殊なケースです。
 
 DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
+
+## <a name="recommended-patterns-for-multi-tenancy-in-di"></a>DI でのマルチテナントの推奨パターン
+
+[Orchard Core](https://github.com/OrchardCMS/OrchardCore) はマルチテナント機能があります。 詳細については、[Orchard Core のドキュメント](https://docs.orchardcore.net/en/dev/)を参照してください。
+
+CMS 固有の機能を使用せずに Orchard Core Framework のみを使用してモジュラーおよびマルチテナント アプリを構築する方法の例については、 https://github.com/OrchardCMS/OrchardCore.Samples のサンプル アプリを参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

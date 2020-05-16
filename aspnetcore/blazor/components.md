@@ -1,21 +1,24 @@
 ---
 title: ASP.NET Core Razor コンポーネントの作成と使用
 author: guardrex
-description: データへのバインド、イベントの処理、コンポーネント ライフサイクルの管理の方法など、Razor コンポーネントを作成および使用する方法について説明します。
+description: データへのバインド、イベントの処理、コンポーネント ライフ サイクルの管理の方法など、Razor コンポーネントを作成および使用する方法について学習します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/21/2020
+ms.date: 05/11/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: a9ae84c36716bfc07ae3cf86214e48ad24770401
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205957"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153515"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -37,15 +40,15 @@ Blazor アプリは *コンポーネント*を使用してビルドします。 
 
 コンポーネント メンバーは、`@` で始まる C# 式を使用して、コンポーネントのレンダリング ロジックの一部として使用できます。 たとえば、フィールド名の前に `@` を付けることによって、C# フィールドがレンダリングされます。 次の例では、以下のように評価され、レンダリングされます。
 
-* `_headingFontStyle` が `font-style` の CSS プロパティ値に。
-* `_headingText` が `<h1>` 要素のコンテンツに。
+* `headingFontStyle` が `font-style` の CSS プロパティ値に。
+* `headingText` が `<h1>` 要素のコンテンツに。
 
 ```razor
-<h1 style="font-style:@_headingFontStyle">@_headingText</h1>
+<h1 style="font-style:@headingFontStyle">@headingText</h1>
 
 @code {
-    private string _headingFontStyle = "italic";
-    private string _headingText = "Put on your new Blazor!";
+    private string headingFontStyle = "italic";
+    private string headingText = "Put on your new Blazor!";
 }
 ```
 
@@ -58,13 +61,19 @@ Blazor アプリは *コンポーネント*を使用してビルドします。 
 * `Counter` コンポーネントの名前空間は `BlazorApp.Pages` になります。
 * コンポーネントの完全修飾型名は `BlazorApp.Pages.Counter` になります。
 
-詳細については、「[コンポーネントのインポート](#import-components)」セクションを参照してください。
-
-カスタム フォルダーを使用するには、カスタム フォルダーの名前空間を親コンポーネントまたはアプリの *_Imports.razor* ファイルに追加します。 たとえば、アプリのルート名前空間が `BlazorApp` である場合、次の名前空間によって、*Components* フォルダー内のコンポーネントを使用できます。
+コンポーネントを保持するカスタム フォルダーの場合は、`using` ステートメントを親コンポーネントまたはアプリの *_Imports.razor* ファイルに追加します。 次の例では、*Components* フォルダー内のコンポーネントを使用できるようにします。
 
 ```razor
 @using BlazorApp.Components
 ```
+
+または、コンポーネントを直接参照することもできます。
+
+```razor
+<BlazorApp.Components.MyCoolComponent />
+```
+
+詳細については、「[コンポーネントのインポート](#import-components)」セクションを参照してください。
 
 ## <a name="static-assets"></a>静的な資産
 
@@ -126,7 +135,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 オプションのパラメーターはサポートされていないため、前の例では 2 つの `@page` ディレクティブが適用されます。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の `@page` ディレクティブは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
 
-複数のフォルダー境界をまたいだパスをキャプチャする*キャッチオール* パラメーター構文 (`*`/`**`) は、Razor コンポーネント ( *.razor*) ではサポートされて**いません**。
+複数のフォルダー境界をまたいだパスをキャプチャする "*キャッチオール*" パラメーター構文 (`*`/`**`) は、Razor コンポーネント ( *.razor*) ではサポートされて**いません**。
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
@@ -166,7 +175,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>属性スプラッティングと任意のパラメーター
 
-コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、[`@attributes`](xref:mvc/views/razor#attributes) Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に*スプラッティング*できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
+コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、[`@attributes`](xref:mvc/views/razor#attributes) Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に "*スプラッティング*" できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
 
 次の例で、最初の `<input>` 要素 (`id="useIndividualParams"`) では、個々のコンポーネント パラメーターを使用していますが、2 番目の `<input>` 要素 (`id="useAttributesDict"`) では、属性スプラッティングを使用しています。
 
@@ -288,22 +297,22 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 * 子コンポーネントと同じ型のフィールドを定義します。
 
 ```razor
-<MyLoginDialog @ref="_loginDialog" ... />
+<MyLoginDialog @ref="loginDialog" ... />
 
 @code {
-    private MyLoginDialog _loginDialog;
+    private MyLoginDialog loginDialog;
 
     private void OnSomething()
     {
-        _loginDialog.Show();
+        loginDialog.Show();
     }
 }
 ```
 
-コンポーネントがレンダリングされると、`_loginDialog` フィールドに `MyLoginDialog` 子コンポーネント インスタンスが設定されます。 これにより、コンポーネント インスタンスに対し、.NET メソッドを呼び出すことができます。
+コンポーネントがレンダリングされると、`loginDialog` フィールドに `MyLoginDialog` 子コンポーネント インスタンスが設定されます。 これにより、コンポーネント インスタンスに対し、.NET メソッドを呼び出すことができます。
 
 > [!IMPORTANT]
-> `_loginDialog` 変数は、コンポーネントがレンダリングされた後にのみ設定され、その出力には `MyLoginDialog` 要素が含まれます。 この時点まで、何も参照できません。 コンポーネントのレンダリングが完了した後にコンポーネント参照を操作するには、[OnAfterRenderAsync メソッドまたは OnAfterRender メソッド](xref:blazor/lifecycle#after-component-render)を使用します。
+> `loginDialog` 変数は、コンポーネントがレンダリングされた後にのみ設定され、その出力には `MyLoginDialog` 要素が含まれます。 この時点まで、何も参照できません。 コンポーネントのレンダリングが完了した後にコンポーネント参照を操作するには、[OnAfterRenderAsync メソッドまたは OnAfterRender メソッド](xref:blazor/lifecycle#after-component-render)を使用します。
 
 ループ内のコンポーネントを参照するには、「[Capture references to multiple similar child-components](https://github.com/dotnet/aspnetcore/issues/13358)」(複数の類似した子コンポーネントへの参照をキャプチャする) (dotnet/aspnetcore #13358) を参照してください。
 
@@ -314,9 +323,11 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>状態を更新するために外部でコンポーネント メソッドを呼び出す
 
-Blazor では、`SynchronizationContext` を使用して、1 つの論理スレッドを強制的に実行します。 コンポーネントの [ライフサイクル メソッド](xref:blazor/lifecycle)と Blazor によって発生するイベント コールバックは、この `SynchronizationContext` で実行されます。 タイマーやその他の通知などの外部のイベントに基づいてコンポーネントを更新する必要がある場合は、`InvokeAsync` メソッドを使用します。これにより、Blazor の `SynchronizationContext` にディスパッチされます。
+Blazor では、同期コンテキスト (`SynchronizationContext`) を使用して、1 つの実行の論理スレッドを強制します。 コンポーネントの[ライフサイクル メソッド](xref:blazor/lifecycle)と、Blazor によって発生するすべてのイベント コールバックは、同期コンテキストで実行されます。
 
-たとえば、リッスンしているコンポーネントに、更新状態を通知できる*通知サービス* を考えてみます。
+Blazor サーバーの同期コンテキストでは、ブラウザーの WebAssembly モデル (シングル スレッド) と厳密に一致するように、シングルスレッド環境のエミュレートが試行されます。 どの時点でも、作業は 1 つのスレッドでのみ実行され、1 つの論理スレッドであるという印象になります。 2 つの操作が同時に実行されることはありません。
+
+タイマーやその他の通知などの外部のイベントに基づいてコンポーネントを更新する必要がある場合は、`InvokeAsync` メソッドを使用します。これにより、Blazor の同期コンテキストにディスパッチされます。 たとえば、リッスンしているコンポーネントに、更新状態を通知できる*通知サービス* を考えてみます。
 
 ```csharp
 public class NotifierService
@@ -355,10 +366,10 @@ public class NotifierService
 @inject NotifierService Notifier
 @implements IDisposable
 
-<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
+<p>Last update: @lastNotification.key = @lastNotification.value</p>
 
 @code {
-    private (string key, int value) _lastNotification;
+    private (string key, int value) lastNotification;
 
     protected override void OnInitialized()
     {
@@ -369,7 +380,7 @@ public class NotifierService
     {
         await InvokeAsync(() =>
         {
-            _lastNotification = (key, value);
+            lastNotification = (key, value);
             StateHasChanged();
         });
     }
@@ -381,7 +392,7 @@ public class NotifierService
 }
 ```
 
-前の例では、`NotifierService` が Blazor の `SynchronizationContext` の外部で、コンポーネントの `OnNotify` メソッドを呼び出します。 `InvokeAsync` を使用して、正しいコンテキストに切り替え、レンダリングをキューに登録します。
+前の例では、Blazor の同期コンテキスト外で `NotifierService` からコンポーネントの `OnNotify` メソッドが呼び出されます。 `InvokeAsync` を使用して、正しいコンテキストに切り替え、レンダリングをキューに登録します。
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>\@ キーを使用して要素とコンポーネントの保存を制御する
 
@@ -516,14 +527,14 @@ public class NotifierService
 次の `Expander` コンポーネントでは、次を実行します。
 
 * 親から `Expanded` コンポーネント パラメーター値を受け入れます。
-* コンポーネント パラメーター値を、[OnInitialized イベント](xref:blazor/lifecycle#component-initialization-methods) の "*プライベート フィールド*" (`_expanded`) に割り当てます。
+* コンポーネント パラメーター値を、[OnInitialized イベント](xref:blazor/lifecycle#component-initialization-methods) の "*プライベート フィールド*" (`expanded`) に割り当てます。
 * プライベート フィールドを使用して、内部のトグル状態を維持します。
 
 ```razor
 <div @onclick="@Toggle">
-    Toggle (Expanded = @_expanded)
+    Toggle (Expanded = @expanded)
 
-    @if (_expanded)
+    @if (expanded)
     {
         @ChildContent
     }
@@ -536,16 +547,16 @@ public class NotifierService
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private bool _expanded;
+    private bool expanded;
 
     protected override void OnInitialized()
     {
-        _expanded = Expanded;
+        expanded = Expanded;
     }
 
     private void Toggle()
     {
-        _expanded = !_expanded;
+        expanded = !expanded;
     }
 }
 ```
@@ -566,16 +577,16 @@ Razor コンポーネントは、部分クラスとして生成されます。 R
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -589,7 +600,7 @@ Razor コンポーネントは、部分クラスとして生成されます。 R
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
@@ -601,11 +612,11 @@ namespace BlazorApp.Pages
 {
     public partial class Counter
     {
-        private int _currentCount = 0;
+        private int currentCount = 0;
 
         void IncrementCount()
         {
-            _currentCount++;
+            currentCount++;
         }
     }
 }
@@ -661,7 +672,7 @@ namespace BlazorSample
 
 ## <a name="import-components"></a>コンポーネントのインポート
 
-Razor で作成されるコンポーネントの名前空間は、次に基づきます (優先順で)。
+Razor で作成されるコンポーネントの名前空間は、次に基づきます (優先順)。
 
 * Razor ファイル ( *.razor*) マークアップ内の [`@namespace`](xref:mvc/views/razor#namespace) の指定 (`@namespace BlazorSample.MyNamespace`)。
 * プロジェクト ファイル内のプロジェクトの `RootNamespace` (`<RootNamespace>BlazorSample</RootNamespace>`)。
@@ -738,10 +749,10 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 次の例では、`MarkupString` 型を使用して、コンポーネントのレンダリングされた出力に静的 HTML コンテンツのブロックを追加しています。
 
 ```html
-@((MarkupString)_myMarkup)
+@((MarkupString)myMarkup)
 
 @code {
-    private string _myMarkup = 
+    private string myMarkup = 
         "<p class='markup'>This is a <em>markup string</em>.</p>";
 }
 ```
@@ -779,7 +790,7 @@ public class ThemeInfo
             <NavMenu />
         </div>
         <div class="col-sm-9">
-            <CascadingValue Value="_theme">
+            <CascadingValue Value="theme">
                 <div class="content px-4">
                     @Body
                 </div>
@@ -789,7 +800,7 @@ public class ThemeInfo
 </div>
 
 @code {
-    private ThemeInfo _theme = new ThemeInfo { ButtonClass = "btn-success" };
+    private ThemeInfo theme = new ThemeInfo { ButtonClass = "btn-success" };
 }
 ```
 
@@ -806,7 +817,7 @@ public class ThemeInfo
 
 <h1>Cascading Values & Parameters</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <p>
     <button class="btn" @onclick="IncrementCount">
@@ -821,14 +832,14 @@ public class ThemeInfo
 </p>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     [CascadingParameter]
     protected ThemeInfo ThemeInfo { get; set; }
 
     private void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -836,14 +847,14 @@ public class ThemeInfo
 同じサブツリー内で同じ型の複数の値をカスケードするには、各 `CascadingValue` コンポーネントとその対応する `CascadingParameter` に一意の `Name` 文字列を指定します。 次の例では、2 つの `CascadingValue` コンポーネントで、名前によって `MyCascadingType` の異なるインスタンスをカスケードしています。
 
 ```razor
-<CascadingValue Value=@_parentCascadeParameter1 Name="CascadeParam1">
+<CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
     <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
 
 @code {
-    private MyCascadingType _parentCascadeParameter1;
+    private MyCascadingType parentCascadeParameter1;
 
     [Parameter]
     public MyCascadingType ParentCascadeParameter2 { get; set; }
@@ -923,13 +934,13 @@ public class ThemeInfo
 次の例では、`RenderFragment` と `RenderFragment<T>` の値を指定し、コンポーネント内にテンプレートを直接レンダリングする方法を示しています。 レンダリング フラグメントは、引数として[テンプレート コンポーネント](xref:blazor/templated-components)に渡すこともできます。
 
 ```razor
-@_timeTemplate
+@timeTemplate
 
-@_petTemplate(new Pet { Name = "Rex" })
+@petTemplate(new Pet { Name = "Rex" })
 
 @code {
-    private RenderFragment _timeTemplate = @<p>The time is @DateTime.Now.</p>;
-    private RenderFragment<Pet> _petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
+    private RenderFragment timeTemplate = @<p>The time is @DateTime.Now.</p>;
+    private RenderFragment<Pet> petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
 
     private class Pet
     {

@@ -1,23 +1,26 @@
 ---
 title: ASP.NET Core Blazor ライフサイクル
 author: guardrex
-description: ASP.NET Core Blazor アプリで Razor コンポーネント ライフサイクル メソッドを使用する方法について説明します。
+description: ASP.NET Core Blazor アプリで Razor コンポーネント ライフサイクル メソッドを使用する方法について学習します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: e7450ad57acc87500bb977aa8349c6ee009e3bf4
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791467"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976702"
 ---
-# <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
+# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
 著者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 
@@ -27,7 +30,7 @@ Blazor フレームワークには、同期と非同期のライフサイクル 
 
 ### <a name="component-initialization-methods"></a>コンポーネントの初期化メソッド
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> および <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> は、コンポーネントが、その親コンポーネントから初期パラメーターを受け取った後で初期化されるときに呼び出されます。 コンポーネントが非同期操作を実行し、操作の完了時に更新する必要がある場合は、`OnInitializedAsync` を使用します。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> および <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> は、コンポーネントが、その親コンポーネントから初期パラメーターを受け取った後で初期化されるときに呼び出されます。 コンポーネントが非同期操作を実行し、操作の完了時に更新する必要がある場合は、`OnInitializedAsync` を使用します。
 
 同期操作の場合は、`OnInitialized` をオーバーライドします。
 
@@ -60,7 +63,7 @@ Blazor サーバー アプリをプリレンダリングしている間、ブラ
 
 ### <a name="before-parameters-are-set"></a>パラメーターが設定される前
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*> は、レンダリング ツリーのコンポーネントの親によって指定されたパラメーターを設定します。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> は、レンダリング ツリーのコンポーネントの親によって指定されたパラメーターを設定します。
 
 ```csharp
 public override async Task SetParametersAsync(ParameterView parameters)
@@ -81,7 +84,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 ### <a name="after-parameters-are-set"></a>パラメーターが設定された後
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> と <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> が呼び出されます。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> と <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> が呼び出されます。
 
 * コンポーネントが初期化され、その親コンポーネントからパラメーターの最初のセットを受け取ったとき。
 * 親コンポーネントが再レンダリングし、次のものを提供するとき:
@@ -109,7 +112,7 @@ protected override void OnParametersSet()
 
 ### <a name="after-component-render"></a>コンポーネントのレンダリング後
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync*> および <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender*> は、コンポーネントのレンダリングが完了した後に呼び出されます。 この時点で、要素およびコンポーネント参照が設定されます。 レンダリングされた DOM 要素を操作するサードパーティ製の JavaScript ライブラリをアクティブ化するなど、レンダリングされたコンテンツを使用して追加の初期化手順を行うには、この段階を使用します。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> および <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> は、コンポーネントのレンダリングが完了した後に呼び出されます。 この時点で、要素およびコンポーネント参照が設定されます。 レンダリングされた DOM 要素を操作するサードパーティ製の JavaScript ライブラリをアクティブ化するなど、レンダリングされたコンテンツを使用して追加の初期化手順を行うには、この段階を使用します。
 
 `OnAfterRenderAsync` と `OnAfterRender` の `firstRender` パラメーター:
 
@@ -147,7 +150,7 @@ protected override void OnAfterRender(bool firstRender)
 
 ### <a name="suppress-ui-refreshing"></a>UI 更新の抑制
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender*> をオーバーライドして、UI の更新を抑制します。 実装によって `true` が返された場合は、UI が更新されます。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> をオーバーライドして、UI の更新を抑制します。 実装によって `true` が返された場合は、UI が更新されます。
 
 ```csharp
 protected override bool ShouldRender()
@@ -164,7 +167,7 @@ protected override bool ShouldRender()
 
 ## <a name="state-changes"></a>状態変更
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> は、状態が変更されたことをコンポーネントに通知します。 必要に応じて、`StateHasChanged` を呼び出すと、コンポーネントが再レンダリングされます。
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> は、状態が変更されたことをコンポーネントに通知します。 必要に応じて、`StateHasChanged` を呼び出すと、コンポーネントが再レンダリングされます。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>レンダリング時の不完全な非同期アクションを処理する
 
@@ -195,7 +198,7 @@ Blazor サーバー テンプレート内の *Pages/FetchData.razor*:
 ```
 
 > [!NOTE]
-> `Dispose` では、<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> の呼び出しはサポートされていません。 `StateHasChanged` は、レンダラーの破棄の一部として呼び出されることがあるため、その時点での UI 更新の要求はサポートされていません。
+> `Dispose` では、<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> の呼び出しはサポートされていません。 `StateHasChanged` は、レンダラーの破棄の一部として呼び出されることがあるため、その時点での UI 更新の要求はサポートされていません。
 
 .NET イベントからイベント ハンドラーのサブスクライブを解除します。 次の [Blazor フォーム](xref:blazor/forms-validation)の例は、`Dispose` メソッドでイベント ハンドラーをアンフックする方法を示しています。
 
@@ -231,7 +234,7 @@ Blazor サーバー アプリ内の二重レンダリングのシナリオを回
 ```csharp
 public class WeatherForecastService
 {
-    private static readonly string[] _summaries = new[]
+    private static readonly string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild",
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -262,7 +265,7 @@ public class WeatherForecastService
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Length)]
+                Summary = summaries[rng.Next(summaries.Length)]
             }).ToArray();
         });
     }
@@ -274,3 +277,73 @@ public class WeatherForecastService
 ## <a name="detect-when-the-app-is-prerendering"></a>アプリがプリレンダリングされていることを検出する
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="cancelable-background-work"></a>取り消し可能なバックグラウンド作業
+
+ネットワーク呼び出し (<xref:System.Net.Http.HttpClient>) の実行やデータベースとの対話など、コンポーネントによって実行時間の長いバックグラウンド作業が実行されることがよくあります。 いくつかの状況でシステム リソースを節約するために、バックグラウンド作業を停止することをお勧めします。 たとえば、ユーザーがコンポーネントの操作を止めても、バックグラウンドの非同期操作は自動的に停止しません。
+
+バックグラウンド作業項目の取り消しが必要になるその他の理由には、次のようなものがあります。
+
+* 実行中のバックグラウンド タスクは、不完全な入力データまたは処理パラメーターを使用して開始されました。
+* 現在実行中のバックグラウンド作業項目のセットを、新しい作業項目のセットに置き換える必要があります。
+* 現在実行中のタスクの優先度を変更する必要があります。
+* アプリをサーバーに再展開するには、シャットダウンする必要があります。
+* サーバー リソースが制限され、バックグラウンド作業項目の再スケジュールが必要になりました。
+
+コンポーネントに取り消し可能なバックグラウンド作業パターンを実装するには:
+
+* <xref:System.Threading.CancellationTokenSource> と <xref:System.Threading.CancellationToken> を使用します。
+* [コンポーネントの破棄](#component-disposal-with-idisposable)時と、任意の時点で手動でトークンを取り消すことで取り消しが望まれた場合は、[CancellationTokenSource.Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A) を呼び出して、バックグラウンド作業を取り消す必要があることを通知します。
+* 非同期呼び出しが返された後、トークンに対して <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> を呼び出します。
+
+次に例を示します。
+
+* `await Task.Delay(5000, cts.Token);` は、実行時間が長い非同期のバックグラウンド作業を表します。
+* `BackgroundResourceMethod` は、メソッドが呼び出される前に `Resource` が破棄された場合に開始されない、実行時間が長いバックグラウンド メソッドを表します。
+
+```razor
+@implements IDisposable
+@using System.Threading
+
+<button @onclick="LongRunningWork">Trigger long running work</button>
+
+@code {
+    private Resource resource = new Resource();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected async Task LongRunningWork()
+    {
+        await Task.Delay(5000, cts.Token);
+
+        cts.Token.ThrowIfCancellationRequested();
+        resource.BackgroundResourceMethod();
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        resource.Dispose();
+    }
+
+    private class Resource : IDisposable
+    {
+        private bool disposed;
+
+        public void BackgroundResourceMethod()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(Resource));
+            }
+            
+            ...
+        }
+        
+        public void Dispose()
+        {
+            disposed = true;
+        }
+    }
+}
+```

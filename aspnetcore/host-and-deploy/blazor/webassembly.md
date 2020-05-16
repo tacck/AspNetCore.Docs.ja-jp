@@ -5,33 +5,42 @@ description: ASP.NET Core、Content Delivery Networks (CDN)、ファイル サ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: e136a401beffe9cc7e29906b3631ab3f068b30fd
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751120"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967598"
 ---
-# <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をホストしてデプロイする
+# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をホストして展開する
 
-作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)
+作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)、[Ben Adams](https://twitter.com/ben_a_adams)、[Safia Abdalla](https://safia.rocks)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [Blazor WebAssembly ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)を使用すると、次のことが行われます。
 
-* Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。
+* Blazor アプリ、その依存関係、.NET ランタイムが並行してブラウザーにダウンロードされます。
 * アプリがブラウザー UI スレッド上で直接実行されます。
 
 次の展開戦略がサポートされています。
 
 * Blazor アプリは、ASP.NET Core アプリによって提供されます。 この戦略については、「[ASP.NET Core でのホストされた展開](#hosted-deployment-with-aspnet-core)」セクションで説明します。
-* Blazor アプリは、Blazor アプリの提供に .NET が使用されていない静的ホスティング Web サーバーまたはサービス上に配置されます。 この戦略については、「[スタンドアロン展開](#standalone-deployment)」セクションで示されます。これには、Blazor WebAssembly アプリを IIS サブアプリとしてホストする方法についての情報が含まれています。
+* Blazor アプリは、Blazor アプリの提供に .NET が使用されていない静的ホスティング Web サーバーまたはサービス上に配置されます。 この戦略については、「[スタンドアロン展開](#standalone-deployment)」セクションで示されます。これには、Blazor WebAssembly アプリを IIS サブアプリとしてホストする方法などについて含まれています。
+
+## <a name="brotli-precompression"></a>Brotli 事前圧縮
+
+Blazor WebAssembly アプリが発行されると、最上位レベルの [Brotli 圧縮アルゴリズム](https://tools.ietf.org/html/rfc7932)を使用して、出力が事前圧縮されます。このことで、アプリのサイズが縮小され、実行時の圧縮が不要になります。
+
+IIS の *web.config* の圧縮構成については、[「IIS」の「Brotli と Gzip の圧縮」](#brotli-and-gzip-compression)セクションを参照してください。
 
 ## <a name="rewrite-urls-for-correct-routing"></a>正しいルーティングのために URL を書き換える
 
@@ -47,7 +56,7 @@ Blazor WebAssembly アプリ内のページ コンポーネントに対するル
 1. *index.html* によりアプリがブートストラップされます。
 1. Blazor のルーターが読み込まれて、Razor `Main` コンポーネントが表示されます。
 
-Main ページでは、`About` コンポーネントへのリンクの選択がクライアント上で動作します。Blazor のルーターにより、インターネット上で `www.contoso.com` に `About` を求めるブラウザーの要求が停止され、レンダリングされた `About` コンポーネント自体が提供されるためです。 " *Blazor WebAssembly アプリ*" 内にある内部エンドポイントへの要求は、すべて同じように動作します。要求によって、サーバーにホストされているインターネット上のリソースに対するブラウザーベースの要求がトリガーされることはありません。 要求は、ルーターによって内部的に処理されます。
+Main ページでは、`About` コンポーネントへのリンクの選択がクライアント上で動作します。Blazor のルーターにより、インターネット上で `www.contoso.com` に `About` を求めるブラウザーの要求が停止され、レンダリングされた `About` コンポーネント自体が提供されるためです。 *Blazor WebAssembly アプリ内にある*内部エンドポイントへの要求は、すべて同じように動作します。要求によって、サーバーにホストされているインターネット上のリソースに対するブラウザーベースの要求がトリガーされることはありません。 要求は、ルーターによって内部的に処理されます。
 
 ブラウザーのアドレス バーを使用して `www.contoso.com/About` の要求が行われた場合、その要求は失敗します。 アプリのインターネット ホスト上にそのようなリソースは存在しないため、"*404 見つかりません*" という応答が返されます。
 
@@ -57,7 +66,7 @@ IIS サーバーに展開する場合は、アプリの発行される *web.conf
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>ASP.NET Core でのホストされた展開
 
-"*ホストされたデプロイ*" により、Blazor WebAssembly アプリが、Web サーバー上で実行されている [ASP.NET Core アプリ](xref:index)からブラウザーに提供されます。
+*ホストされた展開*により、Blazor WebAssembly アプリが、Web サーバー上で実行されている [ASP.NET Core アプリ](xref:index)からブラウザーに提供されます。
 
 クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 2 つのアプリが一緒に展開されます。 ASP.NET Core アプリをホストできる Web サーバーが必要です。 ホストされている展開の場合、Visual Studio には **Blazor WebAssembly アプリ** プロジェクト テンプレートが含まれており ([dotnet new](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorwasm` テンプレート)、 **[ホスト]** オプションが選択されています (`dotnet new` コマンドを使用する場合は `-ho|--hosted`)。
 
@@ -67,13 +76,19 @@ Azure App Service の展開については、「<xref:tutorials/publish-to-azure
 
 ## <a name="standalone-deployment"></a>スタンドアロン展開
 
-"*スタンドアロン デプロイ*" により、Blazor WebAssembly アプリが、クライアントによって直接要求される静的ファイルのセットとして提供されます。 任意の静的ファイル サーバーで Blazor アプリを提供できます。
+*スタンドアロン展開*により、Blazor WebAssembly アプリが、クライアントによって直接要求される静的ファイルのセットとして提供されます。 任意の静的ファイル サーバーで Blazor アプリを提供できます。
 
 スタンドアロン展開のアセットは " */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot*" フォルダーに発行されます。
 
+### <a name="azure-app-service"></a>Azure App Service
+
+Blazor WebAssembly アプリは、[IIS](#iis) 上でアプリをホストするために使用される Windows 上の Azure App Services にデプロイできます。
+
+スタンドアロンの Blazor WebAssembly アプリを Azure App Service for Linux にデプロイすることは、現在サポートされていません。 現時点では、アプリをホストする Linux サーバー イメージは使用できません。 このシナリオを可能にするための取り組みが進行中です。
+
 ### <a name="iis"></a>IIS
 
-IIS は、Blazor アプリ対応の静的ファイル サーバーです。 Blazor をホストするよう IIS を構成する方法については、「[IIS で静的 Web サイトを構築する](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)」を参照してください。
+IIS は、Blazor アプリ対応の静的ファイル サーバーです。 Blazor をホストするよう IIS を構成する方法については、「[Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)」 (IIS で静的 Web サイトを構築する) を参照してください。
 
 発行された資産は、 */bin/Release/<ターゲット フレームワーク>/publish* フォルダーに作成されます。 *publish*フォルダーのコンテンツを、Web サーバーまたはホスティング サービス上でホストします。
 
@@ -96,19 +111,7 @@ Blazor プロジェクトが発行されると、*web.config* ファイルが以
   
 #### <a name="use-a-custom-webconfig"></a>カスタム web.config を使用する
 
-カスタム *web.config* ファイルを使用するには、次のようにします。
-
-1. カスタム *web.config* ファイルをプロジェクト フォルダーのルートに配置します。
-1. 次のターゲットをプロジェクト ファイル ( *.csproj*) に追加します。
-
-   ```xml
-   <Target Name="CopyWebConfigOnPublish" AfterTargets="Publish">
-     <Copy SourceFiles="web.config" DestinationFolder="$(PublishDir)" />
-   </Target>
-   ```
-   
-> [!NOTE]
-> `true` に設定されている MSBuild プロパティ `<IsWebConfigTransformDisabled>` の使用は、[IIS に展開された ASP.NET Core アプリの場合と同様に](xref:host-and-deploy/iis/index#webconfig-file)、Blazor WebAssembly アプリではサポートされていません。 詳細については、「[Copy target required to provide custom Blazor WASM web.config](https://github.com/dotnet/aspnetcore/issues/20569)」(カスタム Blazor WASM web.config を提供するために必要なターゲットのコピー) (dotnet/aspnetcore #20569) を参照してください。
+カスタムの *web.config* ファイルを使用するには、カスタムの *web.config* ファイルをプロジェクト フォルダーのルートに配置し、プロジェクトを発行します。
 
 #### <a name="install-the-url-rewrite-module"></a>URL リライト モジュールをインストールする
 
@@ -155,6 +158,10 @@ Web サイトの**物理パス**をアプリのフォルダーに設定します
   ```
 
 ハンドラーの削除または継承の無効化は、[アプリの基本パスの構成](xref:host-and-deploy/blazor/index#app-base-path)に加えて行われます。 IIS でサブアプリを構成するときに、アプリの *index.html* ファイル内のアプリのベース パスを、使用している IIS エイリアスに設定します。
+
+#### <a name="brotli-and-gzip-compression"></a>Brotli と Gzip の圧縮
+
+*web.config* を使用して、Brotli または Gzip で圧縮された Blazor アセットを提供するように IIS を構成することができます。 構成の例については、[web.config](webassembly/_samples/web.config?raw=true) を参照してください。
 
 #### <a name="troubleshooting"></a>トラブルシューティング
 
@@ -207,7 +214,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a>Apache
 
-Blazor WebAssembly アプリを CentOS 7 以降にデプロイするには:
+Blazor WebAssembly アプリを CentOS 7 以降に展開するには:
 
 1. Apache 構成ファイルを作成します。 次の例は、簡略化された構成ファイル (*blazorapp.config*) です。
 
@@ -335,3 +342,122 @@ URL の書き換えを処理するために、*404.html* ファイルを、要�
 ## <a name="configure-the-linker"></a>リンカーを構成する
 
 Blazor では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL リンク設定が各リリース ビルド上で実行されます。 詳細については、「<xref:host-and-deploy/blazor/configure-linker>」を参照してください。
+
+## <a name="custom-boot-resource-loading"></a>カスタム ブート リソースの読み込み
+
+Blazor WebAssembly を `loadBootResource` 関数で初期化して、組み込みのブート リソース読み込みメカニズムをオーバーライドできます。 次のシナリオで `loadBootResource` を使用します。
+
+* ユーザーが、タイムゾーン データや *dotnet.wasm* などの静的なリソースを CDN から読み込むことができるようにする。
+* HTTP 要求を使用して圧縮されたアセンブリを読み込み、サーバーからの圧縮コンテンツのフェッチをサポートしていないホストのクライアントに展開する。
+* 各 `fetch` 要求を新しい名前にリダイレクトして、リソースを別の名前に設定する。
+
+`loadBootResource` パラメーターは次の表に表示されます。
+
+| パラメーター    | 説明 |
+| ------------ | ----------- |
+| `type`       | リソースの型。 許容される型: `assembly`、`pdb`、`dotnetjs`、`dotnetwasm`、`timezonedata` |
+| `name`       | リソースの名前。 |
+| `defaultUri` | リソースの相対 URI または絶対 URI。 |
+| `integrity`  | 応答で予想されるコンテンツを表す整合性文字列。 |
+
+`loadBootResource` は読み込みプロセスをオーバーライドするために、次のいずれかを返します。
+
+* URI 文字列。 次の例 (*wwwroot/index.html*) では、`https://my-awesome-cdn.com/` の CDN から次のファイルが提供されます。
+
+  * *dotnet.\*.js*
+  * *dotnet.wasm*
+  * タイムゾーン データ
+
+  ```html
+  ...
+
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
+        switch (type) {
+          case 'dotnetjs':
+          case 'dotnetwasm':
+          case 'timezonedata':
+            return `https://my-awesome-cdn.com/blazorwebassembly/3.2.0/${name}`;
+        }
+      }
+    });
+  </script>
+  ```
+
+* `Promise<Response>`。 ヘッダーに `integrity` パラメーターを渡して、既定の整合性チェックの動作を保持します。
+
+  次の例 (*wwwroot/index.html*) は、カスタム HTTP ヘッダーを送信要求に追加し、`integrity` パラメーターを経由して `fetch` 呼び出しに渡します。
+  
+  ```html
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        return fetch(defaultUri, { 
+          cache: 'no-cache',
+          integrity: integrity,
+          headers: { 'MyCustomHeader': 'My custom value' }
+        });
+      }
+    });
+  </script>
+  ```
+
+* `null`/`undefined`。既定の読み込み動作になります。
+
+外部ソースは、ブラウザーがクロスオリジンのリソースの読み込みを許可するために必要な CORS ヘッダーを返す必要があります。 通常、既定では、必要なヘッダーが CDN によって提供されます。
+
+カスタム動作の型のみ指定する必要があります。 `loadBootResource` に指定されていない型は、既定の読み込み動作に従ってフレームワークによって読み込まれます。
+
+## <a name="change-the-filename-extension-of-dll-files"></a>DLL ファイルのファイル名拡張子を変更する
+
+アプリで発行されている " *.dll*" ファイルのファイル名拡張子を変更する必要がある場合は、このセクションのガイダンスに従ってください。
+
+アプリを発行した後、シェル スクリプトまたは DevOps ビルド パイプラインを使用して、別のファイル拡張子を使用するように " *.dll*" ファイルの名前を変更します。 アプリの発行された出力の "*wwwroot*" ディレクトリ内の " *.dll*" ファイルをターゲットにします (たとえば、" *{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot*")。
+
+次の例では、" *.dll*" ファイルの名前が " *.bin*" ファイル拡張子を使用するように変更されています。
+
+Windows の場合:
+
+```powershell
+dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content .\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content .\_framework\blazor.boot.json
+```
+
+Linux または macOS の場合:
+
+```console
+for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
+sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
+```
+   
+" *.bin*" とは異なるファイル拡張子を使用するには、前のコマンドで " *.bin*" を置き換えます。
+
+圧縮された "*blazor.boot.json.gz*" と "*blazor.boot.json.br*" のファイルに対処するには、次のいずれかの方法を採用します。
+
+* 圧縮された "*blazor.boot.json.gz*" と "*blazor.boot.json.br*" のファイルを削除します。 このアプローチでは、圧縮は無効になっています。
+* 更新された "*blazor.boot.json*" ファイルを再圧縮します。
+
+次の Windows の例では、プロジェクトのルートに配置された PowerShell スクリプトを使用しています。
+
+"*ChangeDLLExtensions.ps1:* :"
+
+```powershell
+param([string]$filepath,[string]$tfm)
+dir $filepath\bin\Release\$tfm\wwwroot\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json
+Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
+```
+
+プロジェクト ファイルでは、アプリの発行後にスクリプトが実行されます。
+
+```xml
+<Target Name="ChangeDLLFileExtensions" AfterTargets="Publish" Condition="'$(Configuration)'=='Release'">
+  <Exec Command="powershell.exe -command &quot;&amp; { .\ChangeDLLExtensions.ps1 '$(SolutionDir)' '$(TargetFramework)'}&quot;" />
+</Target>
+```
+
+フィードバックを提供するには、[aspnetcore/issue #5477](https://github.com/dotnet/aspnetcore/issues/5477) を参照してください。
