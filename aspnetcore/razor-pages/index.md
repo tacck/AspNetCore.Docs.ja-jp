@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 827a0df4c914fd012c55e6612a987713bfbaa5c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6939d285838a6dd971f530c1d65d73273b5b14e7
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777216"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424561"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core での Razor ページの概要
 
@@ -61,9 +61,7 @@ Razor ページ プロジェクトを作成する詳細な手順については�
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-コマンド ラインから `dotnet new webapp` を実行します。
-
-Visual Studio for Mac から生成された *.csproj* ファイルを開きます。
+Razor ページ プロジェクトを作成する詳細な手順については、「[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。
 
 ---
 
@@ -545,7 +543,7 @@ public string Message { get; set; }
 
 前の例のフォームには、それぞれが `FormActionTagHelper` を使用して異なる URL に送信する 2 つの送信ボタンがあります。 `asp-page-handler` 属性は、`asp-page` のコンパニオンです。 `asp-page-handler` はページごとに定義されている各ハンドラー メソッドに送信する URL を生成します。 サンプルは現在のページにリンクしているため、`asp-page` は指定されません。
 
-ページ モデル: 
+ページ モデル:
 
 [!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
@@ -557,7 +555,7 @@ public string Message { get; set; }
 
 ## <a name="custom-routes"></a>カスタム ルート
 
-`@page` ディレクティブを次に使用します: 
+`@page` ディレクティブを次に使用します:
 
 * カスタム ルートをページに指定します。 たとえば、[バージョン情報] ページへのルートを `@page "/Some/Other/Path"` を使用して `/Some/Other/Path` に設定することができます。
 * ページの既定のルートにセグメントを追加します。 たとえば、"item" セグメントを `@page "item"` を使用してページの既定のルートに追加することができます。
@@ -1051,7 +1049,7 @@ public string Message { get; set; }
 
 前の例のフォームには、それぞれが `FormActionTagHelper` を使用して異なる URL に送信する 2 つの送信ボタンがあります。 `asp-page-handler` 属性は、`asp-page` のコンパニオンです。 `asp-page-handler` はページごとに定義されている各ハンドラー メソッドに送信する URL を生成します。 サンプルは現在のページにリンクしているため、`asp-page` は指定されません。
 
-ページ モデル: 
+ページ モデル:
 
 [!code-cs[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
@@ -1063,7 +1061,7 @@ public string Message { get; set; }
 
 ## <a name="custom-routes"></a>カスタム ルート
 
-`@page` ディレクティブを次に使用します: 
+`@page` ディレクティブを次に使用します:
 
 * カスタム ルートをページに指定します。 たとえば、[バージョン情報] ページへのルートを `@page "/Some/Other/Path"` を使用して `/Some/Other/Path` に設定することができます。
 * ページの既定のルートにセグメントを追加します。 たとえば、"item" セグメントを `@page "item"` を使用してページの既定のルートに追加することができます。
