@@ -4,7 +4,7 @@ author: rick-anderson
 description: 公開されている .NET Core Docker イメージを Docker レジストリから使用する方法について説明します。 イメージをプルして独自のイメージをビルドします。
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 05/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,129 +12,129 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: bce04caf20dcf23ab7160066d55a279b29dca1ae
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7394cba07109fce5a8718998b4e2a3b5bf752b0b
+ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774107"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382518"
 ---
-# <a name="docker-images-for-aspnet-core"></a><span data-ttu-id="f11a4-104">ASP.NET Core 向けの Docker イメージ</span><span class="sxs-lookup"><span data-stu-id="f11a4-104">Docker images for ASP.NET Core</span></span>
+# <a name="docker-images-for-aspnet-core"></a><span data-ttu-id="f51ef-104">ASP.NET Core 向けの Docker イメージ</span><span class="sxs-lookup"><span data-stu-id="f51ef-104">Docker images for ASP.NET Core</span></span>
 
-<span data-ttu-id="f11a4-105">このチュートリアルでは、Docker コンテナー内で ASP.NET Core アプリを実行する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-105">This tutorial shows how to run an ASP.NET Core app in Docker containers.</span></span>
+<span data-ttu-id="f51ef-105">このチュートリアルでは、Docker コンテナー内で ASP.NET Core アプリを実行する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-105">This tutorial shows how to run an ASP.NET Core app in Docker containers.</span></span>
 
-<span data-ttu-id="f11a4-106">このチュートリアルでは、次の作業を行いました。</span><span class="sxs-lookup"><span data-stu-id="f11a4-106">In this tutorial, you:</span></span>
+<span data-ttu-id="f51ef-106">このチュートリアルでは、次の作業を行いました。</span><span class="sxs-lookup"><span data-stu-id="f51ef-106">In this tutorial, you:</span></span>
 > [!div class="checklist"]
-> * <span data-ttu-id="f11a4-107">Microsoft .NET Core Docker イメージについて学習する</span><span class="sxs-lookup"><span data-stu-id="f11a4-107">Learn about Microsoft .NET Core Docker images</span></span>
-> * <span data-ttu-id="f11a4-108">ASP.NET Core サンプル アプリをダウンロードする</span><span class="sxs-lookup"><span data-stu-id="f11a4-108">Download an ASP.NET Core sample app</span></span>
-> * <span data-ttu-id="f11a4-109">サンプル アプリをローカルで実行する</span><span class="sxs-lookup"><span data-stu-id="f11a4-109">Run the sample app locally</span></span>
-> * <span data-ttu-id="f11a4-110">Linux コンテナー内でサンプル アプリを実行する</span><span class="sxs-lookup"><span data-stu-id="f11a4-110">Run the sample app in Linux containers</span></span>
-> * <span data-ttu-id="f11a4-111">Windows コンテナー内でサンプル アプリを実行する</span><span class="sxs-lookup"><span data-stu-id="f11a4-111">Run the sample app in Windows containers</span></span>
-> * <span data-ttu-id="f11a4-112">手動でビルドしてデプロイする</span><span class="sxs-lookup"><span data-stu-id="f11a4-112">Build and deploy manually</span></span>
+> * <span data-ttu-id="f51ef-107">Microsoft .NET Core Docker イメージについて学習する</span><span class="sxs-lookup"><span data-stu-id="f51ef-107">Learn about Microsoft .NET Core Docker images</span></span>
+> * <span data-ttu-id="f51ef-108">ASP.NET Core サンプル アプリをダウンロードする</span><span class="sxs-lookup"><span data-stu-id="f51ef-108">Download an ASP.NET Core sample app</span></span>
+> * <span data-ttu-id="f51ef-109">サンプル アプリをローカルで実行する</span><span class="sxs-lookup"><span data-stu-id="f51ef-109">Run the sample app locally</span></span>
+> * <span data-ttu-id="f51ef-110">Linux コンテナー内でサンプル アプリを実行する</span><span class="sxs-lookup"><span data-stu-id="f51ef-110">Run the sample app in Linux containers</span></span>
+> * <span data-ttu-id="f51ef-111">Windows コンテナー内でサンプル アプリを実行する</span><span class="sxs-lookup"><span data-stu-id="f51ef-111">Run the sample app in Windows containers</span></span>
+> * <span data-ttu-id="f51ef-112">手動でビルドしてデプロイする</span><span class="sxs-lookup"><span data-stu-id="f51ef-112">Build and deploy manually</span></span>
 
-## <a name="aspnet-core-docker-images"></a><span data-ttu-id="f11a4-113">ASP.NET Core の Docker イメージ</span><span class="sxs-lookup"><span data-stu-id="f11a4-113">ASP.NET Core Docker images</span></span>
+## <a name="aspnet-core-docker-images"></a><span data-ttu-id="f51ef-113">ASP.NET Core の Docker イメージ</span><span class="sxs-lookup"><span data-stu-id="f51ef-113">ASP.NET Core Docker images</span></span>
 
-<span data-ttu-id="f11a4-114">このチュートリアルでは、ASP.NET Core サンプル アプリをダウンロードして、Docker コンテナー内で実行します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-114">For this tutorial, you download an ASP.NET Core sample app and run it in Docker containers.</span></span> <span data-ttu-id="f11a4-115">このサンプルは Linux コンテナーと Windows コンテナーのどちらでも動作します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-115">The sample works with both Linux and Windows containers.</span></span>
+<span data-ttu-id="f51ef-114">このチュートリアルでは、ASP.NET Core サンプル アプリをダウンロードして、Docker コンテナー内で実行します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-114">For this tutorial, you download an ASP.NET Core sample app and run it in Docker containers.</span></span> <span data-ttu-id="f51ef-115">このサンプルは Linux コンテナーと Windows コンテナーのどちらでも動作します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-115">The sample works with both Linux and Windows containers.</span></span>
 
-<span data-ttu-id="f11a4-116">さまざまなコンテナー内でビルドして実行するために、サンプルの Dockerfile では [Docker のマルチステージ ビルド機能](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)を使用しています。</span><span class="sxs-lookup"><span data-stu-id="f11a4-116">The sample Dockerfile uses the [Docker multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) to build and run in different containers.</span></span> <span data-ttu-id="f11a4-117">ビルドと実行のコンテナーは、マイクロソフトが Docker Hub に提供しているイメージから作成されます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-117">The build and run containers are created from images that are provided in Docker Hub by Microsoft:</span></span>
+<span data-ttu-id="f51ef-116">さまざまなコンテナー内でビルドして実行するために、サンプルの Dockerfile では [Docker のマルチステージ ビルド機能](https://docs.docker.com/engine/userguide/eng-image/multistage-build/)を使用しています。</span><span class="sxs-lookup"><span data-stu-id="f51ef-116">The sample Dockerfile uses the [Docker multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) to build and run in different containers.</span></span> <span data-ttu-id="f51ef-117">ビルドと実行のコンテナーは、マイクロソフトが Docker Hub に提供しているイメージから作成されます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-117">The build and run containers are created from images that are provided in Docker Hub by Microsoft:</span></span>
 
 * `dotnet/core/sdk`
 
-  <span data-ttu-id="f11a4-118">サンプルでは、アプリをビルドするためにこのイメージを使用します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-118">The sample uses this image for building the app.</span></span> <span data-ttu-id="f11a4-119">イメージには、コマンド ライン ツール (CLI) が組み込まれた .NET Core SDK が含まれています。</span><span class="sxs-lookup"><span data-stu-id="f11a4-119">The image contains the .NET Core SDK, which includes the Command Line Tools (CLI).</span></span> <span data-ttu-id="f11a4-120">イメージはローカル開発、デバッグ、および単体テスト用に最適化されています。</span><span class="sxs-lookup"><span data-stu-id="f11a4-120">The image is optimized for local development, debugging, and unit testing.</span></span> <span data-ttu-id="f11a4-121">開発とコンパイルのためにツールがインストールされているため、これは比較的大きなイメージになっています。</span><span class="sxs-lookup"><span data-stu-id="f11a4-121">The tools installed for development and compilation make this a relatively large image.</span></span> 
+  <span data-ttu-id="f51ef-118">サンプルでは、アプリをビルドするためにこのイメージを使用します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-118">The sample uses this image for building the app.</span></span> <span data-ttu-id="f51ef-119">イメージには、コマンド ライン ツール (CLI) が組み込まれた .NET Core SDK が含まれています。</span><span class="sxs-lookup"><span data-stu-id="f51ef-119">The image contains the .NET Core SDK, which includes the Command Line Tools (CLI).</span></span> <span data-ttu-id="f51ef-120">イメージはローカル開発、デバッグ、および単体テスト用に最適化されています。</span><span class="sxs-lookup"><span data-stu-id="f51ef-120">The image is optimized for local development, debugging, and unit testing.</span></span> <span data-ttu-id="f51ef-121">開発とコンパイルのためにツールがインストールされているため、これは比較的大きなイメージになっています。</span><span class="sxs-lookup"><span data-stu-id="f51ef-121">The tools installed for development and compilation make this a relatively large image.</span></span> 
 
 * `dotnet/core/aspnet`
 
-   <span data-ttu-id="f11a4-122">サンプルでは、アプリを実行するためにこのイメージを使用します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-122">The sample uses this image for running the app.</span></span> <span data-ttu-id="f11a4-123">イメージには ASP.NET Core ランタイムとライブラリが含まれており、実稼働環境でアプリを実行するために最適化されています。</span><span class="sxs-lookup"><span data-stu-id="f11a4-123">The image contains the ASP.NET Core runtime and libraries and is optimized for running apps in production.</span></span> <span data-ttu-id="f11a4-124">デプロイとアプリ起動の速度に対応した設計になっており、Docker レジストリから Docker ホストへのネットワーク パフォーマンスが最適化されていることから、イメージは比較的小さいです。</span><span class="sxs-lookup"><span data-stu-id="f11a4-124">Designed for speed of deployment and app startup, the image is relatively small, so network performance from Docker Registry to Docker host is optimized.</span></span> <span data-ttu-id="f11a4-125">アプリの実行に必要なバイナリとコンテンツのみが、コンテナーにコピーされます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-125">Only the binaries and content needed to run an app are copied to the container.</span></span> <span data-ttu-id="f11a4-126">コンテンツは実行できる状態になっており、`Docker run` からアプリの起動までを最速で行うことができます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-126">The contents are ready to run, enabling the fastest time from `Docker run` to app startup.</span></span> <span data-ttu-id="f11a4-127">動的コード コンパイルは Docker モデルで必要ありません。</span><span class="sxs-lookup"><span data-stu-id="f11a4-127">Dynamic code compilation isn't needed in the Docker model.</span></span>
+   <span data-ttu-id="f51ef-122">サンプルでは、アプリを実行するためにこのイメージを使用します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-122">The sample uses this image for running the app.</span></span> <span data-ttu-id="f51ef-123">イメージには ASP.NET Core ランタイムとライブラリが含まれており、実稼働環境でアプリを実行するために最適化されています。</span><span class="sxs-lookup"><span data-stu-id="f51ef-123">The image contains the ASP.NET Core runtime and libraries and is optimized for running apps in production.</span></span> <span data-ttu-id="f51ef-124">デプロイとアプリ起動の速度に対応した設計になっており、Docker レジストリから Docker ホストへのネットワーク パフォーマンスが最適化されていることから、イメージは比較的小さいです。</span><span class="sxs-lookup"><span data-stu-id="f51ef-124">Designed for speed of deployment and app startup, the image is relatively small, so network performance from Docker Registry to Docker host is optimized.</span></span> <span data-ttu-id="f51ef-125">アプリの実行に必要なバイナリとコンテンツのみが、コンテナーにコピーされます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-125">Only the binaries and content needed to run an app are copied to the container.</span></span> <span data-ttu-id="f51ef-126">コンテンツは実行できる状態になっており、`Docker run` からアプリの起動までを最速で行うことができます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-126">The contents are ready to run, enabling the fastest time from `Docker run` to app startup.</span></span> <span data-ttu-id="f51ef-127">動的コード コンパイルは Docker モデルで必要ありません。</span><span class="sxs-lookup"><span data-stu-id="f51ef-127">Dynamic code compilation isn't needed in the Docker model.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="f11a4-128">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="f11a4-128">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="f51ef-128">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="f51ef-128">Prerequisites</span></span>
 ::: moniker range="< aspnetcore-3.0"
 
-* [<span data-ttu-id="f11a4-129">.NET Core 2.2 SDK</span><span class="sxs-lookup"><span data-stu-id="f11a4-129">.NET Core 2.2 SDK</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="f51ef-129">.NET Core 2.2 SDK</span><span class="sxs-lookup"><span data-stu-id="f51ef-129">.NET Core 2.2 SDK</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* [<span data-ttu-id="f11a4-130">.NET Core SDK 3.0</span><span class="sxs-lookup"><span data-stu-id="f11a4-130">.NET Core SDK 3.0</span></span>](https://dotnet.microsoft.com/download)
+* [<span data-ttu-id="f51ef-130">.NET Core SDK 3.0</span><span class="sxs-lookup"><span data-stu-id="f51ef-130">.NET Core SDK 3.0</span></span>](https://dotnet.microsoft.com/download)
 
 ::: moniker-end
 
-* <span data-ttu-id="f11a4-131">Docker クライアント 18.03 以降</span><span class="sxs-lookup"><span data-stu-id="f11a4-131">Docker client 18.03 or later</span></span>
+* <span data-ttu-id="f51ef-131">Docker クライアント 18.03 以降</span><span class="sxs-lookup"><span data-stu-id="f51ef-131">Docker client 18.03 or later</span></span>
 
-  * <span data-ttu-id="f11a4-132">Linux ディストリビューション</span><span class="sxs-lookup"><span data-stu-id="f11a4-132">Linux distributions</span></span>
-    * [<span data-ttu-id="f11a4-133">CentOS</span><span class="sxs-lookup"><span data-stu-id="f11a4-133">CentOS</span></span>](https://docs.docker.com/install/linux/docker-ce/centos/)
-    * [<span data-ttu-id="f11a4-134">Debian</span><span class="sxs-lookup"><span data-stu-id="f11a4-134">Debian</span></span>](https://docs.docker.com/install/linux/docker-ce/debian/)
-    * [<span data-ttu-id="f11a4-135">Fedora</span><span class="sxs-lookup"><span data-stu-id="f11a4-135">Fedora</span></span>](https://docs.docker.com/install/linux/docker-ce/fedora/)
-    * [<span data-ttu-id="f11a4-136">Ubuntu</span><span class="sxs-lookup"><span data-stu-id="f11a4-136">Ubuntu</span></span>](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-  * [<span data-ttu-id="f11a4-137">macOS</span><span class="sxs-lookup"><span data-stu-id="f11a4-137">macOS</span></span>](https://docs.docker.com/docker-for-mac/install/)
-  * [<span data-ttu-id="f11a4-138">Windows</span><span class="sxs-lookup"><span data-stu-id="f11a4-138">Windows</span></span>](https://docs.docker.com/docker-for-windows/install/)
+  * <span data-ttu-id="f51ef-132">Linux ディストリビューション</span><span class="sxs-lookup"><span data-stu-id="f51ef-132">Linux distributions</span></span>
+    * [<span data-ttu-id="f51ef-133">CentOS</span><span class="sxs-lookup"><span data-stu-id="f51ef-133">CentOS</span></span>](https://docs.docker.com/install/linux/docker-ce/centos/)
+    * [<span data-ttu-id="f51ef-134">Debian</span><span class="sxs-lookup"><span data-stu-id="f51ef-134">Debian</span></span>](https://docs.docker.com/install/linux/docker-ce/debian/)
+    * [<span data-ttu-id="f51ef-135">Fedora</span><span class="sxs-lookup"><span data-stu-id="f51ef-135">Fedora</span></span>](https://docs.docker.com/install/linux/docker-ce/fedora/)
+    * [<span data-ttu-id="f51ef-136">Ubuntu</span><span class="sxs-lookup"><span data-stu-id="f51ef-136">Ubuntu</span></span>](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+  * [<span data-ttu-id="f51ef-137">macOS</span><span class="sxs-lookup"><span data-stu-id="f51ef-137">macOS</span></span>](https://docs.docker.com/docker-for-mac/install/)
+  * [<span data-ttu-id="f51ef-138">Windows</span><span class="sxs-lookup"><span data-stu-id="f51ef-138">Windows</span></span>](https://docs.docker.com/docker-for-windows/install/)
 
-* [<span data-ttu-id="f11a4-139">Git</span><span class="sxs-lookup"><span data-stu-id="f11a4-139">Git</span></span>](https://git-scm.com/download)
+* [<span data-ttu-id="f51ef-139">Git</span><span class="sxs-lookup"><span data-stu-id="f51ef-139">Git</span></span>](https://git-scm.com/download)
 
-## <a name="download-the-sample-app"></a><span data-ttu-id="f11a4-140">サンプル アプリ をダウンロードする</span><span class="sxs-lookup"><span data-stu-id="f11a4-140">Download the sample app</span></span>
+## <a name="download-the-sample-app"></a><span data-ttu-id="f51ef-140">サンプル アプリ をダウンロードする</span><span class="sxs-lookup"><span data-stu-id="f51ef-140">Download the sample app</span></span>
 
-* <span data-ttu-id="f11a4-141">[.NET Core の Docker リポジトリ](https://github.com/dotnet/dotnet-docker)を複製して、サンプルをダウンロードします。</span><span class="sxs-lookup"><span data-stu-id="f11a4-141">Download the sample by cloning the [.NET Core Docker repository](https://github.com/dotnet/dotnet-docker):</span></span> 
+* <span data-ttu-id="f51ef-141">[.NET Core の Docker リポジトリ](https://github.com/dotnet/dotnet-docker)を複製して、サンプルをダウンロードします。</span><span class="sxs-lookup"><span data-stu-id="f51ef-141">Download the sample by cloning the [.NET Core Docker repository](https://github.com/dotnet/dotnet-docker):</span></span> 
 
   ```console
   git clone https://github.com/dotnet/dotnet-docker
   ```
 
-## <a name="run-the-app-locally"></a><span data-ttu-id="f11a4-142">アプリをローカルで実行する</span><span class="sxs-lookup"><span data-stu-id="f11a4-142">Run the app locally</span></span>
+## <a name="run-the-app-locally"></a><span data-ttu-id="f51ef-142">アプリをローカルで実行する</span><span class="sxs-lookup"><span data-stu-id="f51ef-142">Run the app locally</span></span>
 
-* <span data-ttu-id="f11a4-143">*dotnet-docker/samples/aspnetapp/aspnetapp* にあるプロジェクト フォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-143">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
+* <span data-ttu-id="f51ef-143">*dotnet-docker/samples/aspnetapp/aspnetapp* にあるプロジェクト フォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-143">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
 
-* <span data-ttu-id="f11a4-144">次のコマンドを実行し、アプリをビルドしてローカルで実行します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-144">Run the following command to build and run the app locally:</span></span>
+* <span data-ttu-id="f51ef-144">次のコマンドを実行し、アプリをビルドしてローカルで実行します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-144">Run the following command to build and run the app locally:</span></span>
 
   ```dotnetcli
   dotnet run
   ```
 
-* <span data-ttu-id="f11a4-145">アプリをテストするには、ブラウザーで `http://localhost:5000` に移動します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-145">Go to `http://localhost:5000` in a browser to test the app.</span></span>
+* <span data-ttu-id="f51ef-145">アプリをテストするには、ブラウザーで `http://localhost:5000` に移動します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-145">Go to `http://localhost:5000` in a browser to test the app.</span></span>
 
-* <span data-ttu-id="f11a4-146">コマンド プロンプト上で Ctrl +C キーを押して、アプリを停止します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-146">Press Ctrl+C at the command prompt to stop the app.</span></span>
+* <span data-ttu-id="f51ef-146">コマンド プロンプト上で Ctrl +C キーを押して、アプリを停止します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-146">Press Ctrl+C at the command prompt to stop the app.</span></span>
 
-## <a name="run-in-a-linux-container"></a><span data-ttu-id="f11a4-147">Linux コンテナーでの実行</span><span class="sxs-lookup"><span data-stu-id="f11a4-147">Run in a Linux container</span></span>
+## <a name="run-in-a-linux-container"></a><span data-ttu-id="f51ef-147">Linux コンテナーでの実行</span><span class="sxs-lookup"><span data-stu-id="f51ef-147">Run in a Linux container</span></span>
 
-* <span data-ttu-id="f11a4-148">Docker クライアント上で、Linux コンテナーに切り替えます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-148">In the Docker client, switch to Linux containers.</span></span>
+* <span data-ttu-id="f51ef-148">Docker クライアント上で、Linux コンテナーに切り替えます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-148">In the Docker client, switch to Linux containers.</span></span>
 
-* <span data-ttu-id="f11a4-149">*dotnet-docker/samples/aspnetapp* にある Dockerfile フォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-149">Navigate to the Dockerfile folder at *dotnet-docker/samples/aspnetapp*.</span></span>
+* <span data-ttu-id="f51ef-149">*dotnet-docker/samples/aspnetapp* にある Dockerfile フォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-149">Navigate to the Dockerfile folder at *dotnet-docker/samples/aspnetapp*.</span></span>
 
-* <span data-ttu-id="f11a4-150">次のコマンドを実行して、Docker 内でサンプルをビルドして実行します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-150">Run the following commands to build and run the sample in Docker:</span></span>
+* <span data-ttu-id="f51ef-150">次のコマンドを実行して、Docker 内でサンプルをビルドして実行します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-150">Run the following commands to build and run the sample in Docker:</span></span>
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
   ```
 
-  <span data-ttu-id="f11a4-151">`build` コマンドの引数:</span><span class="sxs-lookup"><span data-stu-id="f11a4-151">The `build` command arguments:</span></span>
-  * <span data-ttu-id="f11a4-152">イメージに aspnetapp という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-152">Name the image aspnetapp.</span></span>
-  * <span data-ttu-id="f11a4-153">現在のフォルダー内にある Dockerfile を探します (末尾にピリオド)。</span><span class="sxs-lookup"><span data-stu-id="f11a4-153">Look for the Dockerfile in the current folder (the period at the end).</span></span>
+  <span data-ttu-id="f51ef-151">`build` コマンドの引数:</span><span class="sxs-lookup"><span data-stu-id="f51ef-151">The `build` command arguments:</span></span>
+  * <span data-ttu-id="f51ef-152">イメージに aspnetapp という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-152">Name the image aspnetapp.</span></span>
+  * <span data-ttu-id="f51ef-153">現在のフォルダー内にある Dockerfile を探します (末尾にピリオド)。</span><span class="sxs-lookup"><span data-stu-id="f51ef-153">Look for the Dockerfile in the current folder (the period at the end).</span></span>
 
-  <span data-ttu-id="f11a4-154">実行コマンドの引数:</span><span class="sxs-lookup"><span data-stu-id="f11a4-154">The run command arguments:</span></span>
-  * <span data-ttu-id="f11a4-155">擬似端末を割り当てて、接続されていない場合でも開いた状態を保持します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-155">Allocate a pseudo-TTY and keep it open even if not attached.</span></span> <span data-ttu-id="f11a4-156">(`--interactive --tty` と効果は同じです。)</span><span class="sxs-lookup"><span data-stu-id="f11a4-156">(Same effect as `--interactive --tty`.)</span></span>
-  * <span data-ttu-id="f11a4-157">コンテナーが存在する場合は、自動的に削除します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-157">Automatically remove the container when it exits.</span></span>
-  * <span data-ttu-id="f11a4-158">ローカル コンピューター上のポート 5000 をコンテナー内のポート 80 にマップします。</span><span class="sxs-lookup"><span data-stu-id="f11a4-158">Map port 5000 on the local machine to port 80 in the container.</span></span>
-  * <span data-ttu-id="f11a4-159">コンテナーに aspnetcore_sample という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-159">Name the container aspnetcore_sample.</span></span>
-  * <span data-ttu-id="f11a4-160">aspnetapp イメージを指定します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-160">Specify the aspnetapp image.</span></span>
+  <span data-ttu-id="f51ef-154">実行コマンドの引数:</span><span class="sxs-lookup"><span data-stu-id="f51ef-154">The run command arguments:</span></span>
+  * <span data-ttu-id="f51ef-155">擬似端末を割り当てて、接続されていない場合でも開いた状態を保持します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-155">Allocate a pseudo-TTY and keep it open even if not attached.</span></span> <span data-ttu-id="f51ef-156">(`--interactive --tty` と効果は同じです。)</span><span class="sxs-lookup"><span data-stu-id="f51ef-156">(Same effect as `--interactive --tty`.)</span></span>
+  * <span data-ttu-id="f51ef-157">コンテナーが存在する場合は、自動的に削除します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-157">Automatically remove the container when it exits.</span></span>
+  * <span data-ttu-id="f51ef-158">ローカル コンピューター上のポート 5000 をコンテナー内のポート 80 にマップします。</span><span class="sxs-lookup"><span data-stu-id="f51ef-158">Map port 5000 on the local machine to port 80 in the container.</span></span>
+  * <span data-ttu-id="f51ef-159">コンテナーに aspnetcore_sample という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-159">Name the container aspnetcore_sample.</span></span>
+  * <span data-ttu-id="f51ef-160">aspnetapp イメージを指定します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-160">Specify the aspnetapp image.</span></span>
 
-* <span data-ttu-id="f11a4-161">アプリをテストするには、ブラウザーで `http://localhost:5000` に移動します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-161">Go to `http://localhost:5000` in a browser to test the app.</span></span>
+* <span data-ttu-id="f51ef-161">アプリをテストするには、ブラウザーで `http://localhost:5000` に移動します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-161">Go to `http://localhost:5000` in a browser to test the app.</span></span>
 
-## <a name="run-in-a-windows-container"></a><span data-ttu-id="f11a4-162">Windows コンテナーでの実行</span><span class="sxs-lookup"><span data-stu-id="f11a4-162">Run in a Windows container</span></span>
+## <a name="run-in-a-windows-container"></a><span data-ttu-id="f51ef-162">Windows コンテナーでの実行</span><span class="sxs-lookup"><span data-stu-id="f51ef-162">Run in a Windows container</span></span>
 
-* <span data-ttu-id="f11a4-163">Docker クライアント上で、Windows コンテナーに切り替えます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-163">In the Docker client, switch to Windows containers.</span></span>
+* <span data-ttu-id="f51ef-163">Docker クライアント上で、Windows コンテナーに切り替えます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-163">In the Docker client, switch to Windows containers.</span></span>
 
-<span data-ttu-id="f11a4-164">`dotnet-docker/samples/aspnetapp` にある Docker ファイルのフォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-164">Navigate to the docker file folder at `dotnet-docker/samples/aspnetapp`.</span></span>
+<span data-ttu-id="f51ef-164">`dotnet-docker/samples/aspnetapp` にある Docker ファイルのフォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-164">Navigate to the docker file folder at `dotnet-docker/samples/aspnetapp`.</span></span>
 
-* <span data-ttu-id="f11a4-165">次のコマンドを実行して、Docker 内でサンプルをビルドして実行します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-165">Run the following commands to build and run the sample in Docker:</span></span>
+* <span data-ttu-id="f51ef-165">次のコマンドを実行して、Docker 内でサンプルをビルドして実行します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-165">Run the following commands to build and run the sample in Docker:</span></span>
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm --name aspnetcore_sample aspnetapp
   ```
 
-* <span data-ttu-id="f11a4-166">Windows コンテナーの場合、コンテナーの IP アドレスが必要です (`http://localhost:5000` の参照は機能しません)。</span><span class="sxs-lookup"><span data-stu-id="f11a4-166">For Windows containers, you need the IP address of the container (browsing to `http://localhost:5000` won't work):</span></span>
-  * <span data-ttu-id="f11a4-167">別のコマンド プロンプトを開きます。</span><span class="sxs-lookup"><span data-stu-id="f11a4-167">Open up another command prompt.</span></span>
-  * <span data-ttu-id="f11a4-168">`docker ps` を実行して、実行中のコンテナーを表示します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-168">Run `docker ps` to see the running containers.</span></span> <span data-ttu-id="f11a4-169">"aspnetcore_sample" コンテナーがそこにあることを確認します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-169">Verify that the "aspnetcore_sample" container is there.</span></span>
-  * <span data-ttu-id="f11a4-170">`docker exec aspnetcore_sample ipconfig` を実行して、コンテナーの IP アドレスを表示します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-170">Run `docker exec aspnetcore_sample ipconfig` to display the IP address of the container.</span></span> <span data-ttu-id="f11a4-171">コマンドからの出力は、この例のようになります。</span><span class="sxs-lookup"><span data-stu-id="f11a4-171">The output from the command looks like this example:</span></span>
+* <span data-ttu-id="f51ef-166">Windows コンテナーの場合、コンテナーの IP アドレスが必要です (`http://localhost:5000` の参照は機能しません)。</span><span class="sxs-lookup"><span data-stu-id="f51ef-166">For Windows containers, you need the IP address of the container (browsing to `http://localhost:5000` won't work):</span></span>
+  * <span data-ttu-id="f51ef-167">別のコマンド プロンプトを開きます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-167">Open up another command prompt.</span></span>
+  * <span data-ttu-id="f51ef-168">`docker ps` を実行して、実行中のコンテナーを表示します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-168">Run `docker ps` to see the running containers.</span></span> <span data-ttu-id="f51ef-169">"aspnetcore_sample" コンテナーがそこにあることを確認します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-169">Verify that the "aspnetcore_sample" container is there.</span></span>
+  * <span data-ttu-id="f51ef-170">`docker exec aspnetcore_sample ipconfig` を実行して、コンテナーの IP アドレスを表示します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-170">Run `docker exec aspnetcore_sample ipconfig` to display the IP address of the container.</span></span> <span data-ttu-id="f51ef-171">コマンドからの出力は、この例のようになります。</span><span class="sxs-lookup"><span data-stu-id="f51ef-171">The output from the command looks like this example:</span></span>
 
     ```console
     Ethernet adapter Ethernet:
@@ -146,41 +146,41 @@ ms.locfileid: "82774107"
        Default Gateway . . . . . . . . . : 172.29.240.1
     ```
 
-* <span data-ttu-id="f11a4-172">コンテナーの IPv4 アドレス (たとえば、172.29.245.43) をコピーして、ブラウザーのアドレス バーに貼り付けてアプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="f11a4-172">Copy the container IPv4 address (for example, 172.29.245.43) and paste into the browser address bar to test the app.</span></span>
+* <span data-ttu-id="f51ef-172">コンテナーの IPv4 アドレス (たとえば、172.29.245.43) をコピーして、ブラウザーのアドレス バーに貼り付けてアプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="f51ef-172">Copy the container IPv4 address (for example, 172.29.245.43) and paste into the browser address bar to test the app.</span></span>
 
-## <a name="build-and-deploy-manually"></a><span data-ttu-id="f11a4-173">手動でビルドしてデプロイする</span><span class="sxs-lookup"><span data-stu-id="f11a4-173">Build and deploy manually</span></span>
+## <a name="build-and-deploy-manually"></a><span data-ttu-id="f51ef-173">手動でビルドしてデプロイする</span><span class="sxs-lookup"><span data-stu-id="f51ef-173">Build and deploy manually</span></span>
 
-<span data-ttu-id="f11a4-174">一部のシナリオでは、実行時に必要なアプリケーション ファイルにコピーすることで、アプリをコンテナーにデプロイすることを考える場合があります。</span><span class="sxs-lookup"><span data-stu-id="f11a4-174">In some scenarios, you might want to deploy an app to a container by copying to it the application files that are needed at run time.</span></span> <span data-ttu-id="f11a4-175">このセクションでは、手動によるデプロイの方法を示します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-175">This section shows how to deploy manually.</span></span>
+<span data-ttu-id="f51ef-174">一部のシナリオでは、実行時に必要なアプリケーション ファイルにコピーすることで、アプリをコンテナーにデプロイすることを考える場合があります。</span><span class="sxs-lookup"><span data-stu-id="f51ef-174">In some scenarios, you might want to deploy an app to a container by copying to it the application files that are needed at run time.</span></span> <span data-ttu-id="f51ef-175">このセクションでは、手動によるデプロイの方法を示します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-175">This section shows how to deploy manually.</span></span>
 
-* <span data-ttu-id="f11a4-176">*dotnet-docker/samples/aspnetapp/aspnetapp* にあるプロジェクト フォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-176">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
+* <span data-ttu-id="f51ef-176">*dotnet-docker/samples/aspnetapp/aspnetapp* にあるプロジェクト フォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-176">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
 
-* <span data-ttu-id="f11a4-177">[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-177">Run the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
+* <span data-ttu-id="f51ef-177">[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-177">Run the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
 
   ```dotnetcli
   dotnet publish -c Release -o published
   ```
 
-  <span data-ttu-id="f11a4-178">コマンドの引数:</span><span class="sxs-lookup"><span data-stu-id="f11a4-178">The command arguments:</span></span>
-  * <span data-ttu-id="f11a4-179">リリース モードでアプリケーションをビルドします (既定はデバッグ モードです)。</span><span class="sxs-lookup"><span data-stu-id="f11a4-179">Build the application in release mode (the default is debug mode).</span></span>
-  * <span data-ttu-id="f11a4-180">*published* フォルダーにファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-180">Create the files in the *published* folder.</span></span>
+  <span data-ttu-id="f51ef-178">コマンドの引数:</span><span class="sxs-lookup"><span data-stu-id="f51ef-178">The command arguments:</span></span>
+  * <span data-ttu-id="f51ef-179">リリース モードでアプリケーションをビルドします (既定はデバッグ モードです)。</span><span class="sxs-lookup"><span data-stu-id="f51ef-179">Build the application in release mode (the default is debug mode).</span></span>
+  * <span data-ttu-id="f51ef-180">*published* フォルダーにファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-180">Create the files in the *published* folder.</span></span>
 
-* <span data-ttu-id="f11a4-181">アプリケーションを実行します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-181">Run the application.</span></span>
+* <span data-ttu-id="f51ef-181">アプリケーションを実行します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-181">Run the application.</span></span>
 
-  * <span data-ttu-id="f11a4-182">Windows の場合:</span><span class="sxs-lookup"><span data-stu-id="f11a4-182">Windows:</span></span>
+  * <span data-ttu-id="f51ef-182">Windows の場合:</span><span class="sxs-lookup"><span data-stu-id="f51ef-182">Windows:</span></span>
 
     ```dotnetcli
     dotnet published\aspnetapp.dll
     ```
 
-  * <span data-ttu-id="f11a4-183">Linux の場合:</span><span class="sxs-lookup"><span data-stu-id="f11a4-183">Linux:</span></span>
+  * <span data-ttu-id="f51ef-183">Linux の場合:</span><span class="sxs-lookup"><span data-stu-id="f51ef-183">Linux:</span></span>
 
     ```dotnetcli
     dotnet published/aspnetapp.dll
     ```
 
-* <span data-ttu-id="f11a4-184">`http://localhost:5000` を参照してホーム ページを確認します。</span><span class="sxs-lookup"><span data-stu-id="f11a4-184">Browse to `http://localhost:5000` to see the home page.</span></span>
+* <span data-ttu-id="f51ef-184">`http://localhost:5000` を参照してホーム ページを確認します。</span><span class="sxs-lookup"><span data-stu-id="f51ef-184">Browse to `http://localhost:5000` to see the home page.</span></span>
 
-<span data-ttu-id="f11a4-185">Docker コンテナー内で手動で発行されたアプリケーションを使用するには、新しい Dockerfile を作成し、`docker build .` コマンドを使用してコンテナーをビルドします。</span><span class="sxs-lookup"><span data-stu-id="f11a4-185">To use the manually published application within a Docker container, create a new Dockerfile and use the `docker build .` command to build the container.</span></span>
+<span data-ttu-id="f51ef-185">Docker コンテナー内で手動で発行されたアプリケーションを使用するには、新しい Dockerfile を作成し、`docker build .` コマンドを使用してコンテナーをビルドします。</span><span class="sxs-lookup"><span data-stu-id="f51ef-185">To use the manually published application within a Docker container, create a new Dockerfile and use the `docker build .` command to build the container.</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -191,9 +191,9 @@ COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a><span data-ttu-id="f11a4-186">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="f11a4-186">The Dockerfile</span></span>
+### <a name="the-dockerfile"></a><span data-ttu-id="f51ef-186">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="f51ef-186">The Dockerfile</span></span>
 
-<span data-ttu-id="f11a4-187">ここに示すのは、先ほど実行した `docker build` コマンドで使用された *Dockerfile* です。</span><span class="sxs-lookup"><span data-stu-id="f11a4-187">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="f11a4-188">このセクションで実行したときと同じ方法で `dotnet publish` を使用して、ビルドとデプロイを行います。</span><span class="sxs-lookup"><span data-stu-id="f11a4-188">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
+<span data-ttu-id="f51ef-187">ここに示すのは、先ほど実行した `docker build` コマンドで使用された *Dockerfile* です。</span><span class="sxs-lookup"><span data-stu-id="f51ef-187">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="f51ef-188">このセクションで実行したときと同じ方法で `dotnet publish` を使用して、ビルドとデプロイを行います。</span><span class="sxs-lookup"><span data-stu-id="f51ef-188">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -209,7 +209,6 @@ COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
 
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
@@ -227,9 +226,9 @@ COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a><span data-ttu-id="f11a4-189">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="f11a4-189">The Dockerfile</span></span>
+### <a name="the-dockerfile"></a><span data-ttu-id="f51ef-189">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="f51ef-189">The Dockerfile</span></span>
 
-<span data-ttu-id="f11a4-190">ここに示すのは、先ほど実行した `docker build` コマンドで使用された *Dockerfile* です。</span><span class="sxs-lookup"><span data-stu-id="f11a4-190">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="f11a4-191">このセクションで実行したときと同じ方法で `dotnet publish` を使用して、ビルドとデプロイを行います。</span><span class="sxs-lookup"><span data-stu-id="f11a4-191">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
+<span data-ttu-id="f51ef-190">ここに示すのは、先ほど実行した `docker build` コマンドで使用された *Dockerfile* です。</span><span class="sxs-lookup"><span data-stu-id="f51ef-190">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="f51ef-191">このセクションで実行したときと同じ方法で `dotnet publish` を使用して、ビルドとデプロイを行います。</span><span class="sxs-lookup"><span data-stu-id="f51ef-191">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -245,35 +244,29 @@ COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
 
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
+<span data-ttu-id="f51ef-192">前の Dockerfile で示されているように、`*.csproj` ファイルは別個の "*レイヤー*" としてコピーおよび復元されます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-192">As noted in the preceding Dockerfile, the `*.csproj` files are copied and restored as distinct *layers*.</span></span> <span data-ttu-id="f51ef-193">`docker build` コマンドを使用してイメージをビルドすると、組み込みのキャッシュが使用されます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-193">When the `docker build` command builds an image, it uses a built-in cache.</span></span> <span data-ttu-id="f51ef-194">`docker build` コマンドが最後に実行されてから `*.csproj` ファイルが変更されていない場合、`dotnet restore` コマンドを再度実行する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="f51ef-194">If the `*.csproj` files haven't changed since the `docker build` command last ran, the `dotnet restore` command doesn't need to run again.</span></span> <span data-ttu-id="f51ef-195">代わりに、対応する `dotnet restore` レイヤーの組み込みキャッシュが再利用されます。</span><span class="sxs-lookup"><span data-stu-id="f51ef-195">Instead, the built-in cache for the corresponding `dotnet restore` layer is reused.</span></span> <span data-ttu-id="f51ef-196">詳細については、「[Dockerfile を記述するためのベスト プラクティス](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f51ef-196">For more information, see [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span></span>
+
 ::: moniker-end
 
-```dockerfile
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
-WORKDIR /app
-COPY published/aspnetapp.dll ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-```
+## <a name="additional-resources"></a><span data-ttu-id="f51ef-197">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="f51ef-197">Additional resources</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="f11a4-192">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="f11a4-192">Additional resources</span></span>
+* [<span data-ttu-id="f51ef-198">Docker の build コマンド</span><span class="sxs-lookup"><span data-stu-id="f51ef-198">Docker build command</span></span>](https://docs.docker.com/engine/reference/commandline/build)
+* [<span data-ttu-id="f51ef-199">Docker の run コマンド</span><span class="sxs-lookup"><span data-stu-id="f51ef-199">Docker run command</span></span>](https://docs.docker.com/engine/reference/commandline/run)
+* <span data-ttu-id="f51ef-200">[ASP.NET Core の Docker サンプル](https://github.com/dotnet/dotnet-docker) (このチュートリアルで使用されたものです。)</span><span class="sxs-lookup"><span data-stu-id="f51ef-200">[ASP.NET Core Docker sample](https://github.com/dotnet/dotnet-docker) (The one used in this tutorial.)</span></span>
+* [<span data-ttu-id="f51ef-201">プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する</span><span class="sxs-lookup"><span data-stu-id="f51ef-201">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](/aspnet/core/host-and-deploy/proxy-load-balancer)
+* [<span data-ttu-id="f51ef-202">Visual Studio Docker ツールの使用</span><span class="sxs-lookup"><span data-stu-id="f51ef-202">Working with Visual Studio Docker Tools</span></span>](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
+* [<span data-ttu-id="f51ef-203">Visual Studio Code でのデバッグ</span><span class="sxs-lookup"><span data-stu-id="f51ef-203">Debugging with Visual Studio Code</span></span>](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
+* [<span data-ttu-id="f51ef-204">ドッカーと小さなコンテナを使用した GC</span><span class="sxs-lookup"><span data-stu-id="f51ef-204">GC using Docker and small containers</span></span>](xref:performance/memory#sc)
 
-* [<span data-ttu-id="f11a4-193">Docker の build コマンド</span><span class="sxs-lookup"><span data-stu-id="f11a4-193">Docker build command</span></span>](https://docs.docker.com/engine/reference/commandline/build)
-* [<span data-ttu-id="f11a4-194">Docker の run コマンド</span><span class="sxs-lookup"><span data-stu-id="f11a4-194">Docker run command</span></span>](https://docs.docker.com/engine/reference/commandline/run)
-* <span data-ttu-id="f11a4-195">[ASP.NET Core の Docker サンプル](https://github.com/dotnet/dotnet-docker) (このチュートリアルで使用されたものです。)</span><span class="sxs-lookup"><span data-stu-id="f11a4-195">[ASP.NET Core Docker sample](https://github.com/dotnet/dotnet-docker) (The one used in this tutorial.)</span></span>
-* [<span data-ttu-id="f11a4-196">プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する</span><span class="sxs-lookup"><span data-stu-id="f11a4-196">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](/aspnet/core/host-and-deploy/proxy-load-balancer)
-* [<span data-ttu-id="f11a4-197">Visual Studio Docker ツールの使用</span><span class="sxs-lookup"><span data-stu-id="f11a4-197">Working with Visual Studio Docker Tools</span></span>](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
-* [<span data-ttu-id="f11a4-198">Visual Studio Code でのデバッグ</span><span class="sxs-lookup"><span data-stu-id="f11a4-198">Debugging with Visual Studio Code</span></span>](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
-* [<span data-ttu-id="f11a4-199">ドッカーと小さなコンテナを使用した GC</span><span class="sxs-lookup"><span data-stu-id="f11a4-199">GC using Docker and small containers</span></span>](xref:performance/memory#sc)
+## <a name="next-steps"></a><span data-ttu-id="f51ef-205">次の手順</span><span class="sxs-lookup"><span data-stu-id="f51ef-205">Next steps</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="f11a4-200">次の手順</span><span class="sxs-lookup"><span data-stu-id="f11a4-200">Next steps</span></span>
-
-<span data-ttu-id="f11a4-201">同じアプリを格納している Git リポジトリにも、ドキュメントが用意されています。</span><span class="sxs-lookup"><span data-stu-id="f11a4-201">The Git repository that contains the sample app also includes documentation.</span></span> <span data-ttu-id="f11a4-202">リポジトリ内にある利用可能なリソースの概要については、[README ファイル](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="f11a4-202">For an overview of the resources available in the repository, see [the README file](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md).</span></span> <span data-ttu-id="f11a4-203">特に、HTTPS を実装する方法について確認してください。</span><span class="sxs-lookup"><span data-stu-id="f11a4-203">In particular, learn how to implement HTTPS:</span></span>
+<span data-ttu-id="f51ef-206">同じアプリを格納している Git リポジトリにも、ドキュメントが用意されています。</span><span class="sxs-lookup"><span data-stu-id="f51ef-206">The Git repository that contains the sample app also includes documentation.</span></span> <span data-ttu-id="f51ef-207">リポジトリ内にある利用可能なリソースの概要については、[README ファイル](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="f51ef-207">For an overview of the resources available in the repository, see [the README file](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md).</span></span> <span data-ttu-id="f51ef-208">特に、HTTPS を実装する方法について確認してください。</span><span class="sxs-lookup"><span data-stu-id="f51ef-208">In particular, learn how to implement HTTPS:</span></span>
 
 > [!div class="nextstepaction"]
-> <span data-ttu-id="f11a4-204">「[Developing ASP.NET Core Applications with Docker over HTTPS (Docker を使用して HTTPS による ASP.NET Core アプリケーションを開発する)](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)」</span><span class="sxs-lookup"><span data-stu-id="f11a4-204">[Developing ASP.NET Core Applications with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)</span></span>
+> <span data-ttu-id="f51ef-209">「[Developing ASP.NET Core Applications with Docker over HTTPS (Docker を使用して HTTPS による ASP.NET Core アプリケーションを開発する)](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)」</span><span class="sxs-lookup"><span data-stu-id="f51ef-209">[Developing ASP.NET Core Applications with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)</span></span>
