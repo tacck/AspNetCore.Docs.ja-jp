@@ -140,7 +140,7 @@ SignalR サーバー ライブラリは、ASP.NET Core 3.0 共有フレームワ
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* **[端末]** で、次のコマンドを実行して LibMan をインストールします。
+* **[ターミナル]** で、次のコマンドを実行して LibMan をインストールします。
 
   ```dotnetcli
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
