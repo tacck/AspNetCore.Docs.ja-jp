@@ -24,11 +24,11 @@ ms.locfileid: "82776397"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-*publish* ディレクトリには、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドによって生成された、アプリの展開可能な資産が含まれています。 ディレクトリには次のものが含まれます。
+*publish* ディレクトリには、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドによって生成された、アプリの展開可能なアセットが含まれています。 ディレクトリには次のものが含まれます。
 
 * アプリケーション ファイル
 * 構成ファイル
-* 静的な資産
+* 静的なアセット
 * パッケージ
 * ランタイム ([自己完結型展開](/dotnet/core/deploying/#self-contained-deployments-scd)のみ)
 
@@ -41,7 +41,7 @@ ms.locfileid: "82776397"
 
 *publish* ディレクトリは、展開の "*コンテンツ ルート パス*" ("*アプリケーション ベース パス*" とも呼ばれます) を表します。 サーバー上で展開されたアプリの *publish* ディレクトリにどのような名前が指定されても、その場所がホストされたアプリへのサーバーの物理パスとして機能します。
 
-*Wwwroot* ディレクトリが存在する場合は、静的資産のみが含まれます。
+*Wwwroot* ディレクトリが存在する場合は、静的アセットのみが含まれます。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -54,11 +54,11 @@ ms.locfileid: "82776397"
 
 ::: moniker range="< aspnetcore-3.0"
 
-*publish* ディレクトリには、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドによって生成された、アプリの展開可能な資産が含まれています。 ディレクトリには次のものが含まれます。
+*publish* ディレクトリには、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドによって生成された、アプリの展開可能なアセットが含まれています。 ディレクトリには次のものが含まれます。
 
 * アプリケーション ファイル
 * 構成ファイル
-* 静的な資産
+* 静的なアセット
 * パッケージ
 * ランタイム ([自己完結型展開](/dotnet/core/deploying/#self-contained-deployments-scd)のみ)
 
@@ -71,7 +71,7 @@ ms.locfileid: "82776397"
 
 *publish* ディレクトリは、展開の "*コンテンツ ルート パス*" ("*アプリケーション ベース パス*" とも呼ばれます) を表します。 サーバー上で展開されたアプリの *publish* ディレクトリにどのような名前が指定されても、その場所がホストされたアプリへのサーバーの物理パスとして機能します。
 
-*Wwwroot* ディレクトリが存在する場合は、静的資産のみが含まれます。
+*Wwwroot* ディレクトリが存在する場合は、静的アセットのみが含まれます。
 
 [ASP.NET Core モジュールの強化されたデバッグ ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)では、*Logs* フォルダーを作成すると便利です。 `<handlerSetting>` 値に提供されるパスのフォルダーがこのモジュールによって自動的に作成されることはありません。デバッグ ログの書き込みをモジュールに許可するには、フォルダーがデプロイに事前に存在する必要があります。
 
