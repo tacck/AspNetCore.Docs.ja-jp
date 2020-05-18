@@ -367,6 +367,8 @@
           uid: blazor/debug
         - name: WebAssembly からの Web API の呼び出し
           uid: blazor/call-web-api
+        - name: WebAssembly のパフォーマンス
+          uid: performance/blazor/webassembly-best-practices
         - name: プログレッシブ Web アプリケーション
           uid: blazor/progressive-web-app
         - name: ホストと配置
@@ -557,7 +559,7 @@
     - name: クライアント
       displayName: signalr
       items:
-        - name: SignalR クライアントの機能
+        - name: 概要
           uid: signalr/client-features
           displayName: signalr
         - name: .NET クライアント
@@ -1180,6 +1182,8 @@
       uid: performance/diagnostic-tools
     - name: ロード テストおよびストレス テスト
       uid: test/loadtests
+    - name: Blazor WebAssembly
+      uid: performance/blazor/webassembly-best-practices
 - name: グローバリゼーションとローカリゼーション
   items:
     - name: 概要
