@@ -5,7 +5,7 @@ description: シングル ページ アプリケーション (SPA) として Bla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 153e88bb5bd99803f0ac4a0c50213e22a3278cad
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768001"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424527"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をセキュリティで保護する
 
@@ -57,8 +57,22 @@ SameSite Cookie の使用など、SPA を認証するためのその他のオプ
 * Blazor WebAssembly アプリでログイン コールバック エンドポイント (`/authentication/login-callback`) が読み込まれると、認証応答が処理されます。
   * 認証プロセスが正常に完了した場合、ユーザーは認証され、必要に応じてユーザーが要求した元の保護された URL に戻されます。
   * 何らかの理由で認証プロセスが失敗した場合、ユーザーはログイン失敗ページ (`/authentication/login-failed`) に送信され、エラーが表示されます。
+  
+## <a name="implementation-guidance"></a>実装ガイダンス
 
-## <a name="additional-resources"></a>その他の技術情報
+この*概要*の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。
 
-* この*概要*の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。
-* <xref:security/blazor/webassembly/additional-scenarios>
+スタンドアロンの Blazor WebAssembly アプリ:
+
+* [OIDC プロバイダーと WebAssembly 認証ライブラリ向けの一般的なガイダンス](xref:security/blazor/webassembly/standalone-with-authentication-library)
+* [Microsoft アカウント](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
+* [Azure Active Directory (AAD)](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
+* [Azure Active Directory (AAD) B2C](xref:security/blazor/webassembly/standalone-with-azure-active-directory-b2c)
+
+ホストされた Blazor WebAssembly アプリ:
+
+* [Azure Active Directory (AAD)](xref:security/blazor/webassembly/hosted-with-azure-active-directory)
+* [Azure Active Directory (AAD) B2C](xref:security/blazor/webassembly/hosted-with-azure-active-directory-b2c)
+* [Identity サーバー](xref:security/blazor/webassembly/hosted-with-identity-server)
+
+構成の詳細なガイダンスについては、<xref:security/blazor/webassembly/additional-scenarios> を参照してください。
