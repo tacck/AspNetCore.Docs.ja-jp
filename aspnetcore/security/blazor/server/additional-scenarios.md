@@ -1,11 +1,11 @@
 ---
-title: ASP.NET Core Blazorサーバーの追加のセキュリティシナリオ
+title: ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ
 author: guardrex
-description: 追加のセキュリティシナリオBlazor用にサーバーを構成する方法について説明します。
+description: Blazor追加のセキュリティシナリオ用にサーバーを構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772805"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444075"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a><span data-ttu-id="da360-103">ASP.NET Core Blazorサーバーの追加のセキュリティシナリオ</span><span class="sxs-lookup"><span data-stu-id="da360-103">ASP.NET Core Blazor Server additional security scenarios</span></span>
+# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a><span data-ttu-id="cdf33-103">ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ</span><span class="sxs-lookup"><span data-stu-id="cdf33-103">ASP.NET Core Blazor Server additional security scenarios</span></span>
 
-<span data-ttu-id="da360-104">作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="da360-104">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
+<span data-ttu-id="cdf33-104">作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="cdf33-104">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a><span data-ttu-id="da360-105">Blazorサーバーアプリにトークンを渡す</span><span class="sxs-lookup"><span data-stu-id="da360-105">Pass tokens to a Blazor Server app</span></span>
+## <a name="pass-tokens-to-a-blazor-server-app"></a><span data-ttu-id="cdf33-105">サーバーアプリにトークンを渡す Blazor</span><span class="sxs-lookup"><span data-stu-id="cdf33-105">Pass tokens to a Blazor Server app</span></span>
 
-<span data-ttu-id="da360-106">BlazorサーバーアプリのRazorコンポーネントの外部で利用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="da360-106">Tokens available outside of the Razor components in a Blazor Server app can be passed to components with the approach described in this section.</span></span> <span data-ttu-id="da360-107">完全`Startup.ConfigureServices`な例を含むサンプルコードについては、「[サーバー側Blazorアプリケーションへのトークンの引き渡し](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="da360-107">For sample code, including a complete `Startup.ConfigureServices` example, see the [Passing tokens to a server-side Blazor application](https://github.com/javiercn/blazor-server-aad-sample).</span></span>
+<span data-ttu-id="cdf33-106">サーバーアプリのコンポーネントの外部で利用できるトークンは Razor Blazor 、このセクションで説明する方法を使用してコンポーネントに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-106">Tokens available outside of the Razor components in a Blazor Server app can be passed to components with the approach described in this section.</span></span> <span data-ttu-id="cdf33-107">完全な例を含むサンプルコードについ `Startup.ConfigureServices` ては、「[サーバー側 Blazor アプリケーションへのトークンの引き渡し](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cdf33-107">For sample code, including a complete `Startup.ConfigureServices` example, see the [Passing tokens to a server-side Blazor application](https://github.com/javiercn/blazor-server-aad-sample).</span></span>
 
-<span data-ttu-id="da360-108">通常RazorのBlazorページや MVC アプリの場合と同様に、サーバーアプリを認証します。</span><span class="sxs-lookup"><span data-stu-id="da360-108">Authenticate the Blazor Server app as you would with a regular Razor Pages or MVC app.</span></span> <span data-ttu-id="da360-109">トークンをプロビジョニングし、認証 cookie に保存します。</span><span class="sxs-lookup"><span data-stu-id="da360-109">Provision and save the tokens to the authentication cookie.</span></span> <span data-ttu-id="da360-110">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="da360-110">For example:</span></span>
+<span data-ttu-id="cdf33-108">通常の Blazor ページや MVC アプリの場合と同様に、サーバーアプリを認証し Razor ます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-108">Authenticate the Blazor Server app as you would with a regular Razor Pages or MVC app.</span></span> <span data-ttu-id="cdf33-109">トークンをプロビジョニングし、認証 cookie に保存します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-109">Provision and save the tokens to the authentication cookie.</span></span> <span data-ttu-id="cdf33-110">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-110">For example:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -46,7 +46,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =
 });
 ```
 
-<span data-ttu-id="da360-111">アクセストークンと更新トークンを使用して最初のアプリの状態を渡すクラスを定義します。</span><span class="sxs-lookup"><span data-stu-id="da360-111">Define a class to pass in the initial app state with the access and refresh tokens:</span></span>
+<span data-ttu-id="cdf33-111">アクセストークンと更新トークンを使用して最初のアプリの状態を渡すクラスを定義します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-111">Define a class to pass in the initial app state with the access and refresh tokens:</span></span>
 
 ```csharp
 public class InitialApplicationState
@@ -56,7 +56,7 @@ public class InitialApplicationState
 }
 ```
 
-<span data-ttu-id="da360-112">[依存関係の挿入 (DI)](xref:blazor/dependency-injection)からトークンを解決するBlazorためにアプリ内で使用できる**スコープ**付きトークンプロバイダーサービスを定義します。</span><span class="sxs-lookup"><span data-stu-id="da360-112">Define a **scoped** token provider service that can be used within the Blazor app to resolve the tokens from [dependency injection (DI)](xref:blazor/dependency-injection):</span></span>
+<span data-ttu-id="cdf33-112">**scoped** Blazor [依存関係の挿入 (DI)](xref:blazor/dependency-injection)からトークンを解決するためにアプリ内で使用できるスコープ付きトークンプロバイダーサービスを定義します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-112">Define a **scoped** token provider service that can be used within the Blazor app to resolve the tokens from [dependency injection (DI)](xref:blazor/dependency-injection):</span></span>
 
 ```csharp
 public class TokenProvider
@@ -66,7 +66,7 @@ public class TokenProvider
 }
 ```
 
-<span data-ttu-id="da360-113">で`Startup.ConfigureServices`、次のサービスを追加します。</span><span class="sxs-lookup"><span data-stu-id="da360-113">In `Startup.ConfigureServices`, add services for:</span></span>
+<span data-ttu-id="cdf33-113">で `Startup.ConfigureServices` 、次のサービスを追加します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-113">In `Startup.ConfigureServices`, add services for:</span></span>
 
 * `IHttpClientFactory`
 * `TokenProvider`
@@ -76,7 +76,7 @@ services.AddHttpClient();
 services.AddScoped<TokenProvider>();
 ```
 
-<span data-ttu-id="da360-114">*_Host*ファイルで、の`InitialApplicationState`インスタンスを作成し、それをパラメーターとしてアプリに渡します。</span><span class="sxs-lookup"><span data-stu-id="da360-114">In the *_Host.cshtml* file, create and instance of `InitialApplicationState` and pass it as a parameter to the app:</span></span>
+<span data-ttu-id="cdf33-114">*_Host*ファイルで、のインスタンスを作成し、 `InitialApplicationState` それをパラメーターとしてアプリに渡します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-114">In the *_Host.cshtml* file, create and instance of `InitialApplicationState` and pass it as a parameter to the app:</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Authentication
@@ -97,7 +97,7 @@ services.AddScoped<TokenProvider>();
 </app>
 ```
 
-<span data-ttu-id="da360-115">`App`コンポーネント (*app.xaml*) で、サービスを解決し、パラメーターのデータで初期化します。</span><span class="sxs-lookup"><span data-stu-id="da360-115">In the `App` component (*App.razor*), resolve the service and initialize it with the data from the parameter:</span></span>
+<span data-ttu-id="cdf33-115">`App`コンポーネント (*app.xaml*) で、サービスを解決し、パラメーターのデータで初期化します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-115">In the `App` component (*App.razor*), resolve the service and initialize it with the data from the parameter:</span></span>
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -118,7 +118,7 @@ services.AddScoped<TokenProvider>();
 }
 ```
 
-<span data-ttu-id="da360-116">セキュリティで保護された API 要求を行うサービスで、トークンプロバイダーを挿入し、API を呼び出すトークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="da360-116">In the service that makes a secure API request, inject the token provider and retrieve the token to call the API:</span></span>
+<span data-ttu-id="cdf33-116">セキュリティで保護された API 要求を行うサービスで、トークンプロバイダーを挿入し、API を呼び出すトークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="cdf33-116">In the service that makes a secure API request, inject the token provider and retrieve the token to call the API:</span></span>
 
 ```csharp
 public class WeatherForecastService
@@ -147,3 +147,64 @@ public class WeatherForecastService
     }
 }
 ```
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a><span data-ttu-id="cdf33-117">Open ID Connect (OIDC) v2.0 エンドポイントを使用する</span><span class="sxs-lookup"><span data-stu-id="cdf33-117">Use Open ID Connect (OIDC) v2.0 endpoints</span></span>
+
+<span data-ttu-id="cdf33-118">認証ライブラリとテンプレートでは、 Blazor OPEN ID Connect (OIDC) v1.0 エンドポイントが使用されます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-118">The authentication library and Blazor templates use Open ID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="cdf33-119">V2.0 エンドポイントを使用するには、 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> でオプションを構成し <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-119">To use a v2.0 endpoint, configure the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> option in the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>:</span></span>
+
+```csharp
+services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    }
+```
+
+<span data-ttu-id="cdf33-120">または、アプリ設定 (*appsettings. json*) ファイルで設定を行うこともできます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-120">Alternatively, the setting can be made in the app settings (*appsettings.json*) file:</span></span>
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+<span data-ttu-id="cdf33-121">証明機関へのトラッキングがアプリの OIDC プロバイダー (AAD 以外のプロバイダーを含む) に適していない場合は、プロパティを直接設定し `Authority` ます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-121">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the `Authority` property directly.</span></span> <span data-ttu-id="cdf33-122"><xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>またはアプリ設定ファイルのプロパティを、キーを使用して設定し `Authority` ます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-122">Either set the property in <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> or in the app settings file with the `Authority` key.</span></span>
+
+### <a name="code-changes"></a><span data-ttu-id="cdf33-123">コードの変更</span><span class="sxs-lookup"><span data-stu-id="cdf33-123">Code changes</span></span>
+
+* <span data-ttu-id="cdf33-124">V2.0 エンドポイントの ID トークンの変更要求の一覧。</span><span class="sxs-lookup"><span data-stu-id="cdf33-124">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="cdf33-125">詳細については、「 [Microsoft identity platform (v2.0) を更新する理由](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cdf33-125">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)</span></span> <span data-ttu-id="cdf33-126">Azure のドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="cdf33-126">in the Azure documentation.</span></span>
+* <span data-ttu-id="cdf33-127">リソースは、v2.0 エンドポイントのスコープ Uri で指定されているため、 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> 次のようにのプロパティ設定を削除し <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-127">Since resources are specified in scope URIs for v2.0 endpoints, remove the the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> property setting in <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>:</span></span>
+
+  ```csharp
+  services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options => 
+      {
+          ...
+          options.Resource = "...";    // REMOVE THIS LINE
+          ...
+      }
+      ```
+
+  For more information, see [Scopes, not resources](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) in the Azure documentation.
+
+### App ID URI
+
+* When using v2.0 endpoints, APIs define an *App ID URI*, which is meant to represent a unique identifier for the API.
+* All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
+* When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
+
+*appsettings.json*:
+
+```json
+{
+  "AzureAd": {
+    ...
+    "ClientId": "https://{TENANT}.onmicrosoft.com/{APP NAME}"
+    ...
+  }
+}
+```
+
+<span data-ttu-id="cdf33-128">OIDC プロバイダーのアプリ登録の説明で使用するアプリ ID URI を見つけることができます。</span><span class="sxs-lookup"><span data-stu-id="cdf33-128">You can find the App ID URI to use in the OIDC provider app registration description.</span></span>
