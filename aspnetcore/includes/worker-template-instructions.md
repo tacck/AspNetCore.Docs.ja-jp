@@ -15,7 +15,7 @@
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-コマンド シェルから `worker`dotnet new[ コマンドと共にワーカー サービス (](/dotnet/core/tools/dotnet-new)) テンプレートを使用します。 次の例では、`ContosoWorker` という名前のワーカー サービス アプリが作成されます。 このコマンドが実行されると、`ContosoWorker` アプリ用のフォルダーが自動的に作成されます。
+コマンド シェルから [dotnet new](/dotnet/core/tools/dotnet-new) コマンドと共にワーカー サービス (`worker`) テンプレートを使用します。 次の例では、`ContosoWorker` という名前のワーカー サービス アプリが作成されます。 このコマンドが実行されると、`ContosoWorker` アプリ用のフォルダーが自動的に作成されます。
 
 ```dotnetcli
 dotnet new worker -o ContosoWorker
