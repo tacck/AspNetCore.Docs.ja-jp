@@ -1,32 +1,16 @@
 ---
-title: Blazor追加のセキュリティシナリオを ASP.NET Core
-author: guardrex
-description: Blazor追加のセキュリティシナリオを実現するために webassembly 構成する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: d460f65e996f1f77136a426b03d6eb548d9e309e
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153473"
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor Webasの追加のセキュリティシナリオ
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor追加のセキュリティシナリオを ASP.NET Core
 
 作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>送信要求にトークンを添付する
 
@@ -52,7 +36,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-便宜上、アプリの `BaseAddressAuthorizationMessageHandler` ベースアドレスを承認された URL として事前に構成したが含まれています。 認証が有効な Blazor WebAssembly テンプレートが、サーバー API プロジェクトでを使用してを設定するようになりました <xref:System.Net.Http.IHttpClientFactory> <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` 。
+便宜上、アプリの `BaseAddressAuthorizationMessageHandler` ベースアドレスを承認された URL として事前に構成したが含まれています。 認証が有効になったテンプレートでは、 Blazor サーバー API プロジェクトでを使用してを <xref:System.Net.Http.IHttpClientFactory> 設定し <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` ます。
 
 ```csharp
 using System.Net.Http;
@@ -72,7 +56,7 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 構成されたは、 <xref:System.Net.Http.HttpClient> 単純なパターンを使用して承認された要求を行うために使用され `try-catch` ます。
 
-`FetchData`コンポーネント (*Pages/FetchData. razor*):
+`FetchData` コンポーネント (*Pages/FetchData.razor*):
 
 ```csharp
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -135,7 +119,7 @@ public class WeatherForecastClient
 }
 ```
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 using System.Net.Http;
@@ -148,7 +132,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-`FetchData`コンポーネント (*Pages/FetchData. razor*):
+`FetchData` コンポーネント (*Pages/FetchData.razor*):
 
 ```razor
 @inject WeatherForecastClient Client
@@ -165,7 +149,7 @@ protected override async Task OnInitializedAsync()
 
 ハンドラーは、 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> 送信 HTTP 要求のためにを使用してさらに構成できます。
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -176,9 +160,9 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>セキュリティで保護された既定のクライアントを使用するアプリ内の認証されていない web API 要求
 
-通常、Blazor WebAssembly がセキュリティで保護された既定値を使用する場合、 <xref:System.Net.Http.HttpClient> アプリは、という名前のを構成することによって、認証されていない、または承認されていない WEB API 要求 <xref:System.Net.Http.HttpClient>
+通常、 Blazor セキュリティで保護された既定値を使用するアプリの場合、 <xref:System.Net.Http.HttpClient> アプリケーションは、という名前のを構成することによって、認証されていない、または承認されていない web API 要求を作成する <xref:System.Net.Http.HttpClient>
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient", 
@@ -216,7 +200,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 次の例では、アプリがユーザーデータの読み取りとメールの送信を行うために、追加の Azure Active Directory (AAD) Microsoft Graph API スコープが必要です。 Azure AAD ポータルで Microsoft Graph API のアクセス許可を追加すると、クライアントアプリで追加のスコープが構成されます。
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -232,7 +216,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 メソッドは、 `IAccessTokenProvider.RequestToken` アプリが特定のスコープセットを使用してアクセストークンをプロビジョニングできるようにするオーバーロードを提供します。
 
-Razor コンポーネントの場合:
+コンポーネント内 Razor :
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -260,7 +244,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 要求オプションを使用する HttpClient と HttpRequestMessage
 
-Blazor WebAssembly アプリで[Httpclient](xref:fundamentals/http-requests)とを使用して、 <xref:System.Net.Http.HttpRequestMessage> 要求をカスタマイズすることができます。 たとえば、HTTP メソッドと要求ヘッダーを指定できます。 次のコンポーネントは、 `POST` サーバー上の To Do LIST API エンドポイントに対して要求を行い、応答本文を表示します。
+Webassembly で Blazor [httpclient](xref:fundamentals/http-requests)およびを使用して、 <xref:System.Net.Http.HttpRequestMessage> 要求をカスタマイズすることができます。 たとえば、HTTP メソッドと要求ヘッダーを指定できます。 次のコンポーネントは、 `POST` サーバー上の To Do LIST API エンドポイントに対して要求を行い、応答本文を表示します。
 
 ```razor
 @page "/todorequest"
@@ -327,15 +311,235 @@ Blazor WebAssembly アプリで[Httpclient](xref:fundamentals/http-requests)と�
 HTTP フェッチ要求オプションは、次の表に示す `HttpRequestMessage` 拡張メソッドを使用して構成できます。
 
 | `HttpRequestMessage` 拡張メソッド | フェッチ要求プロパティ |
-| ------------------------------------- | ---------------------- |
-| `SetBrowserRequestCredentials`        | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| `SetBrowserRequestCache`              | [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| `SetBrowserRequestMode`               | [モード](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| `SetBrowserRequestIntegrity`          | [integrity](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| ---
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------------- |---タイトル: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------- | |`SetBrowserRequestCredentials`         |  [資格情報](https://developer.mozilla.org/docs/Web/API/Request/credentials)| | `SetBrowserRequestCache`               | [cache](https://developer.mozilla.org/docs/Web/API/Request/cache) | |`SetBrowserRequestMode`                |  [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) | `SetBrowserRequestIntegrity` |           | [整合性](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
 より汎用的な `SetBrowserRequestOption` 拡張メソッドを使用してその他のオプションを設定できます。
  
-通常、HTTP 応答は Blazor WebAssembly でバッファリングされ、応答コンテンツに対する同期読み取りのサポートを有効にします。 応答ストリーミングのサポートを有効にするには、要求に対して `SetBrowserResponseStreamingEnabled` 拡張メソッドを使用します。
+通常、HTTP 応答は、応答コンテンツに対する同期読み取りのサポートを有効にするために Blazor WebAssembly アプリでバッファリングされます。 応答ストリーミングのサポートを有効にするには、要求に対して `SetBrowserResponseStreamingEnabled` 拡張メソッドを使用します。
 
 クロスオリジン要求に資格情報を含めるには、`SetBrowserRequestCredentials` 拡張メソッドを使用します。
 
@@ -366,7 +570,7 @@ app.UseCors(policy =>
 
 ## <a name="handle-token-request-errors"></a>トークン要求エラーを処理する
 
-シングルページアプリケーション (SPA) が Open ID Connect (OIDC) を使用してユーザーを認証すると、認証状態は SPA 内および Id プロバイダー (IP) 内でローカルに保持され、ユーザーが資格情報を入力したときに設定されるセッション cookie の形式になります。
+シングルページアプリケーション (SPA) が Open ID Connect (OIDC) を使用してユーザーを認証する場合、認証状態は SPA 内およびプロバイダー (IP) 内でローカルに保持され、 Identity ユーザーが資格情報を入力したときに設定されるセッション cookie の形式になります。
 
 通常、ユーザーに対して IP が生成するトークンは短時間、通常は1時間にわたって有効であるため、クライアントアプリは定期的に新しいトークンを取得する必要があります。 そうしないと、許可されたトークンの有効期限が切れると、ユーザーはログアウトされます。 ほとんどの場合、OIDC クライアントは、認証状態または IP 内に保持される "セッション" によってユーザーの認証を再度要求することなく、新しいトークンをプロビジョニングできます。
 
@@ -507,16 +711,141 @@ app.UseCors(policy =>
 既定では、 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ライブラリは、さまざまな認証状態を表すために、次の表に示すルートを使用します。
 
 | ルート                            | 目的 |
-| -------------------------------- | ------- |
-| `authentication/login`           | サインイン操作をトリガーします。 |
-| `authentication/login-callback`  | サインイン操作の結果を処理します。 |
-| `authentication/login-failed`    | 何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。 |
-| `authentication/logout`          | サインアウト操作をトリガーします。 |
-| `authentication/logout-callback` | サインアウト操作の結果を処理します。 |
-| `authentication/logout-failed`   | 何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。 |
-| `authentication/logged-out`      | ユーザーが正常にログアウトしたことを示します。 |
-| `authentication/profile`         | ユーザープロファイルを編集する操作をトリガーします。 |
-| `authentication/register`        | 新しいユーザーを登録する操作をトリガーします。 |
+| ---
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------------- |---タイトル: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---- | |`authentication/login`           |サインイン操作をトリガーします。 | |`authentication/login-callback`  |サインイン操作の結果を処理します。 | |`authentication/login-failed`    |何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。 | |`authentication/logout`          |サインアウト操作をトリガーします。 | |`authentication/logout-callback` |サインアウト操作の結果を処理します。 | |`authentication/logout-failed`   |何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。 | |`authentication/logged-out`      |ユーザーが正常にログアウトしたことを示します。 | |`authentication/profile`         |ユーザープロファイルを編集する操作をトリガーします。 | |`authentication/register`        |新しいユーザーを登録する操作をトリガーします。 |
 
 上の表に示されているルートは、を使用して構成 `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` できます。 カスタムルートを提供するオプションを設定する場合は、アプリに各パスを処理するルートがあることを確認します。
 
@@ -536,7 +865,7 @@ app.UseCors(policy =>
 }
 ```
 
-`Program.Main`(*Program.cs*):
+`Program.Main` (*Program.cs*):
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -587,16 +916,213 @@ UI を別のページに分割することもできます。
 に `RemoteAuthenticatorView` は、次の表に示す認証ルートごとに使用できる1つのフラグメントがあります。
 
 | ルート                            | フラグメント                |
-| -------------------------------- | ----------------------- |
-| `authentication/login`           | `<LoggingIn>`           |
-| `authentication/login-callback`  | `<CompletingLoggingIn>` |
-| `authentication/login-failed`    | `<LogInFailed>`         |
-| `authentication/logout`          | `<LogOut>`              |
-| `authentication/logout-callback` | `<CompletingLogOut>`    |
-| `authentication/logout-failed`   | `<LogOutFailed>`        |
-| `authentication/logged-out`      | `<LogOutSucceeded>`     |
-| `authentication/profile`         | `<UserProfile>`         |
-| `authentication/register`        | `<Registering>`         |
+| ---
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------------- |---タイトル: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |
 
 ## <a name="customize-the-user"></a>ユーザーをカスタマイズする
 
@@ -829,3 +1355,31 @@ Identityサードパーティのログインプロバイダーを使用してを
 
 * サーバーでは、更新トークンを格納し、アプリからサードパーティ リソースへのアクセスが決して失われないようにすることができます。
 * アプリでは、より機密性の高いアクセス許可を含む可能性のあるサーバーからのアクセス トークンをリークさせることはできません。
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Open ID Connect (OIDC) v2.0 エンドポイントを使用する
+
+認証ライブラリとテンプレートでは、 Blazor OPEN ID Connect (OIDC) v1.0 エンドポイントが使用されます。 V2.0 エンドポイントを使用するには、JWT ベアラーオプションを構成し <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> ます。 次の例では、プロパティにセグメントを追加することによって、バージョン2.0 用に AAD が構成されてい `v2.0` `Authority` ます。
+
+```csharp
+builder.Services.Configure<JwtBearerOptions>(
+    AzureADDefaults.JwtBearerAuthenticationScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    });
+```
+
+または、アプリ設定 (*appsettings. json*) ファイルで設定を行うこともできます。
+
+```json
+{
+  "Local": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+証明機関へのトラッキングがアプリの OIDC プロバイダー (AAD 以外のプロバイダーを含む) に適していない場合は、プロパティを直接設定し `Authority` ます。 `JwtBearerOptions`またはアプリ設定ファイルのプロパティを、キーを使用して設定し `Authority` ます。
+
+V2.0 エンドポイントの ID トークンの変更要求の一覧。 詳細については、「 [Microsoft identity platform (v2.0) を更新する理由](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)」を参照してください。

@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core でのログ記録と診断SignalR
 author: anurse
-description: ASP.NET Core SignalRアプリから診断を収集する方法について説明します。
+description: ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: signalr
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 5fda458c2418c3570d55d551ce5144730afd7f85
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767227"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444218"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core SignalR のログと診断
 
@@ -29,20 +29,20 @@ By [Andrew Stanton-看護師](https://twitter.com/anurse)
 ## <a name="server-side-logging"></a>サーバー側のログ記録
 
 > [!WARNING]
-> サーバー側のログには、アプリからの機密情報が含まれている場合があります。 運用アプリから GitHub などのパブリックフォーラムに未加工のログを投稿**しない**でください。
+> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
 
-SignalR は ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、SignalR はごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、 [ASP.NET Core のログ記録](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
+SignalR は ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、SignalR はごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
 SignalR は、次の2つの logger カテゴリを使用します。
 
 * `Microsoft.AspNetCore.SignalR`&ndash;ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
-* `Microsoft.AspNetCore.Http.Connections`&ndash; Websocket、長いポーリング、サーバー送信イベント、低レベルの SignalR インフラストラクチャなどのトランスポートに関連するログ。
+* `Microsoft.AspNetCore.Http.Connections`&ndash;websocket、長いポーリング、サーバー送信イベント、低レベルの SignalR インフラストラクチャなどのトランスポートに関連するログ。
 
-SignalR から詳細なログを有効にするには、の`Debug` `LogLevel` `Logging`サブセクションに次の項目を追加して、前のプレフィックスの両方を*appsettings*ファイルのレベルに構成します。
+SignalR から詳細なログを有効にするには、 `Debug` のサブセクションに次の項目を追加して、前のプレフィックスの両方を*appsettings*ファイルのレベルに構成します `LogLevel` `Logging` 。
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
-これは、 `CreateWebHostBuilder`メソッドのコードで構成することもできます。
+これは、メソッドのコードで構成することもでき `CreateWebHostBuilder` ます。
 
 [!code-csharp[](diagnostics/logging-config-code.cs?highlight=5-6)]
 
@@ -51,17 +51,17 @@ JSON ベースの構成を使用していない場合は、構成システムで
 * `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-構成システムのドキュメントを参照して、入れ子になった構成値を指定する方法を確認してください。 たとえば、環境変数を使用する場合、 `_`の代わりに2文字が`:`使用されます`Logging__LogLevel__Microsoft.AspNetCore.SignalR`(たとえば、)。
+構成システムのドキュメントを調べて、入れ子になった構成値を指定する方法を確認してください。 たとえば、環境変数の使用時には、`:` の代わりに 2 つの `_` 文字を使用します (例: `Logging__LogLevel__Microsoft.AspNetCore.SignalR`)。
 
-アプリのより詳細`Debug`な診断情報を収集する場合は、レベルを使用することをお勧めします。 レベル`Trace`は非常に低いレベルの診断を生成するため、アプリの問題を診断するためにはほとんど必要ありません。
+アプリのより詳細な診断情報を収集する場合は、`Debug` レベルを使用することが推奨されます。 `Trace` レベルでは非常に低レベルの診断情報が生成されるため、アプリの問題を診断するために必要となることはまれです。
 
-## <a name="access-server-side-logs"></a>サーバー側のログへのアクセス
+## <a name="access-server-side-logs"></a>サーバー側ログにアクセスする
 
-サーバー側のログにアクセスする方法は、を実行している環境によって異なります。
+サーバー側のログにアクセスする方法は、実行環境によって異なります。
 
 ### <a name="as-a-console-app-outside-iis"></a>IIS の外部のコンソールアプリとして
 
-コンソールアプリでを実行している場合は、既定で[コンソール logger](xref:fundamentals/logging/index#console-provider)が有効になっている必要があります。 SignalR ログはコンソールに表示されます。
+コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。 SignalR ログはコンソールに表示されます。
 
 ### <a name="within-iis-express-from-visual-studio"></a>Visual Studio から IIS Express 内
 
@@ -69,22 +69,22 @@ Visual Studio では、[**出力**] ウィンドウにログ出力が表示さ�
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効**Level**にし`Verbose`、レベルをに構成します。 ログは、**ログストリーミング**サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
+Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル**をに構成し `Verbose` ます。 ログは、**ログストリーミング**サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
 
 ### <a name="other-environments"></a>その他の環境
 
-アプリが別の環境 (Docker、Kubernetes、または Windows サービスなど) に配置されている<xref:fundamentals/logging/index>場合は、「」を参照して、環境に適したログプロバイダーを構成する方法の詳細を確認してください。
+アプリが別の環境 (Docker、Kubernetes、Windows サービスなど) にデプロイされる場合は、その環境に適したログ プロバイダーを構成する方法についての詳細を、「<xref:fundamentals/logging/index>」で確認してください。
 
 ## <a name="javascript-client-logging"></a>JavaScript クライアントのログ記録
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれている場合があります。 運用アプリから GitHub などのパブリックフォーラムに未加工のログを投稿**しない**でください。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
 
-JavaScript クライアントを使用する場合は、で`configureLogging` `HubConnectionBuilder`メソッドを使用してログオプションを構成できます。
+JavaScript クライアントを使用する場合は、でメソッドを使用してログオプションを構成でき `configureLogging` `HubConnectionBuilder` ます。
 
 [!code-javascript[](diagnostics/logging-config-js.js?highlight=3)]
 
-完全にログ記録を無効`signalR.LogLevel.None`にする`configureLogging`には、メソッドでを指定します。
+完全にログ記録を無効にするには、メソッドでを指定し `signalR.LogLevel.None` `configureLogging` ます。
 
 次の表は、JavaScript クライアントで使用できるログレベルを示しています。 ログレベルをこれらの値のいずれかに設定すると、そのレベルおよびテーブル内のすべてのレベルでログ記録が有効になります。
 
@@ -100,38 +100,38 @@ JavaScript クライアントを使用する場合は、で`configureLogging` `H
 
 詳細設定を構成すると、ログはブラウザーコンソール (または NodeJS アプリの標準出力) に書き込まれます。
 
-カスタムログシステムにログを送信する場合は、インターフェイスを`ILogger`実装する JavaScript オブジェクトを指定できます。 実装する必要のあるメソッドは、イベント`log`のレベルとイベントに関連付けられたメッセージを受け取るだけです。 次に例を示します。
+カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。 実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。 次に例を示します。
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
 ## <a name="net-client-logging"></a>.NET クライアントのログ記録
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれている場合があります。 運用アプリから GitHub などのパブリックフォーラムに未加工のログを投稿**しない**でください。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
 
-.NET クライアントからログを取得するには、で`ConfigureLogging` `HubConnectionBuilder`メソッドを使用します。 これは、および`ConfigureLogging` `WebHostBuilder` `HostBuilder`のメソッドと同じように動作します。 ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。 ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。
+.NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。 これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。 ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。 ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。
 
 ### <a name="console-logging"></a>[コンソールのログ記録]
 
-コンソールのログ記録を有効にするには[、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console)追加します。 次に、 `AddConsole`メソッドを使用して、コンソールロガーを構成します。
+コンソールのログ記録を有効にするには[、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console)追加します。 次に、メソッドを使用し `AddConsole` て、コンソールロガーを構成します。
 
 [!code-csharp[](diagnostics/net-client-console-log.cs?highlight=6)]
 
 ### <a name="debug-output-window-logging"></a>デバッグ出力ウィンドウのログ記録
 
-また、ログを構成して、Visual Studio の [**出力**] ウィンドウにアクセスすることもできます。 次の[ように、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug)インストールして、 `AddDebug`メソッドを使用します。
+また、ログを構成して、Visual Studio の [**出力**] ウィンドウにアクセスすることもできます。 次のよう[に、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug)インストールして、メソッドを使用します。 `AddDebug`
 
 [!code-csharp[](diagnostics/net-client-debug-log.cs?highlight=6)]
 
 ### <a name="other-logging-providers"></a>その他のログプロバイダー
 
-SignalRでは、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と`Microsoft.Extensions.Logging`統合されるその他のログ記録プロバイダーがサポートされています。 ログシステムにが`ILoggerProvider`用意されている場合は、 `AddProvider`次のように登録できます。
+SignalRでは、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。 ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a>コントロールの詳細度
 
-アプリ内の他の場所からログを記録している場合は、 `Debug`既定のレベルをに変更すると、詳細が表示されない場合があります。 フィルターを使用して、ログのSignalRログ記録レベルを構成できます。 これは、サーバーの場合とほぼ同じ方法でコードで行うことができます。
+アプリ内の他の場所からログを記録している場合は、既定のレベルをに変更すると、詳細が表示されない場合 `Debug` があります。 フィルターを使用して、ログのログ記録レベルを構成でき SignalR ます。 これは、サーバーの場合とほぼ同じ方法でコードで行うことができます。
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
@@ -150,7 +150,7 @@ Fiddler は、HTTP トレースを収集するための非常に強力なツー�
 
 HTTPS を使用して接続する場合は、Fiddler が HTTPS トラフィックの暗号化を解除できるようにするための追加の手順がいくつかあります。 詳細については、 [Fiddler のドキュメント](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)を参照してください。
 
-トレースを収集したら、[**ファイル** > ] メニューの [**すべてのセッション**を**保存** > ] をクリックして、トレースをエクスポートできます。
+トレースを収集したら、[**ファイル**  >  **Save**  >  ] メニューの [**すべてのセッション**を保存] をクリックして、トレースをエクスポートできます。
 
 ![Fiddler からすべてのセッションをエクスポートしています](diagnostics/fiddler-export.png)
 
@@ -158,13 +158,13 @@ HTTPS を使用して接続する場合は、Fiddler が HTTPS トラフィッ�
 
 この方法は、すべてのアプリで使用できます。
 
-コマンドシェルから次のコマンドを実行して、tcpdump を使用して未加工の TCP トレースを収集できます。 アクセス許可のエラーが`root`表示された`sudo`場合は、コマンドにまたはのプレフィックスを付ける必要があります。
+コマンドシェルから次のコマンドを実行して、tcpdump を使用して未加工の TCP トレースを収集できます。 `root`アクセス許可のエラーが表示された場合は、コマンドにまたはのプレフィックスを付ける必要があり `sudo` ます。
 
 ```console
 tcpdump -i [interface] -w trace.pcap
 ```
 
-を`[interface]`キャプチャするネットワークインターフェイスで置き換えます。 通常は、(標準イーサ`/dev/eth0`ネットインターフェイスの場合) または`/dev/lo0` (localhost トラフィックの場合) のようになります。 詳細については、 `tcpdump`ホストシステムの man ページを参照してください。
+を `[interface]` キャプチャするネットワークインターフェイスで置き換えます。 通常は、 `/dev/eth0` (標準イーサネットインターフェイスの場合) または `/dev/lo0` (localhost トラフィックの場合) のようになります。 詳細については、 `tcpdump` ホストシステムの man ページを参照してください。
 
 ## <a name="collect-a-network-trace-in-the-browser"></a>ブラウザーでネットワークトレースを収集する
 
@@ -203,7 +203,7 @@ tcpdump -i [interface] -w trace.pcap
 
 ## <a name="attach-diagnostics-files-to-github-issues"></a>診断ファイルを GitHub の問題にアタッチする
 
-GitHub の問題に診断ファイルを添付するには、名前を変更`.txt`して拡張機能を設定し、問題にドラッグアンドドロップします。
+GitHub の問題に診断ファイルを添付するには、名前を変更して拡張機能を設定し、 `.txt` 問題にドラッグアンドドロップします。
 
 > [!NOTE]
 > ログファイルやネットワークトレースの内容を GitHub の問題に貼り付けることは避けてください。 これらのログとトレースは非常に大きくなる可能性があり、GitHub は通常、これらを切り捨てます。

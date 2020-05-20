@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core Web API の応答データの書式設定
-author: ardalis
-description: ASP.NET Core Web API で応答データを書式設定する方法について説明します。
-ms.author: riande
-ms.custom: H1Hack27Feb2017
-ms.date: 04/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/advanced/formatting
-ms.openlocfilehash: 22787b20879c3739ee8a8d74c7a39e7cf8f4d5b0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774237"
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -155,7 +143,7 @@ public IActionResult Get()
 
 ### <a name="add-newtonsoftjson-based-json-format-support"></a>Newtonsoft.Json ベースの JSON 形式のサポートを追加する
 
-ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを使用して実装された JSON フォーマッタが使用されていました。 ASP.NET Core 3.0 以降、既定の JSON フォーマッタは `System.Text.Json` に基づいています。 `Newtonsoft.Json` ベースのフォーマッタと機能のサポートは、[Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet パッケージをインストールして `Startup.ConfigureServices` で構成することで利用できます。
+ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを使用して実装された JSON フォーマッタが使用されていました。 ASP.NET Core 3.0 以降、既定の JSON フォーマッタは `System.Text.Json` に基づいています。 ベースの `Newtonsoft.Json` フォーマッタと機能のサポートは、NuGet パッケージをインストールし、で構成することによって利用でき [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) `Startup.ConfigureServices` ます。
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
 
@@ -212,11 +200,11 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 ### <a name="specify-a-format"></a>形式を指定する
 
-応答形式を制限するには、 [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)フィルターを適用します。 ほとんどの[フィルター](xref:mvc/controllers/filters)と`[Produces]`同様に、アクション、コントローラー、またはグローバルスコープで適用できます。
+応答形式を制限するには、フィルターを適用し [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) ます。 ほとんどの[フィルター](xref:mvc/controllers/filters)と同様に、 `[Produces]` アクション、コントローラー、またはグローバルスコープで適用できます。
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
-上記[`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute)のフィルター:
+上記の [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) フィルター:
 
 * コントローラー内のすべてのアクションが、JSON で書式設定された応答を返すように強制します。
 * 他のフォーマッタが構成されていて、クライアントが別の形式を指定した場合でも、JSON が返されます。
@@ -252,10 +240,214 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 属性[`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)は、の`RouteData` format 値が存在するかどうかをチェックし、応答が作成されるときに応答形式を適切なフォーマッタにマップします。
+前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)属性は、の format 値が存在するかどうかをチェック `RouteData` し、応答が作成されるときに応答形式を適切なフォーマッタにマップします。
 
 |           ルート        |             フォーマッタ              |
-|------------------------|------------------------------------|
-|   `/api/products/5`    |    既定の出力フォーマッタ    |
-| `/api/products/5.json` | JSON フォーマッタ (構成される場合) |
-| `/api/products/5.xml`  | XML フォーマッタ (構成される場合)  |
+|---
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------|---タイトル: 作成者: 説明: ms. 作成者: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------------| |  `/api/products/5`    |   既定の出力フォーマッタ | |`/api/products/5.json` |JSON フォーマッタ (構成されている場合) | |`/api/products/5.xml`  |XML フォーマッタ (構成されている場合) |

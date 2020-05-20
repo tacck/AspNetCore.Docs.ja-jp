@@ -1,32 +1,15 @@
 ---
-title: Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 219364ef2e699ff1029536effd106a80ec02825c
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153410"
+title: ' Blazor 認証ライブラリを使用して ASP.NET Core webassembly スタンドアロンアプリをセキュリティで保護する ' 作成者: 説明:: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 *Azure Active Directory (AAD) と Azure Active Directory B2C (AAD B2C) については、このトピックのガイダンスに従ってください。この目次ノードの AAD と AAD B2C のトピックを参照してください。*
 
@@ -48,15 +31,13 @@ Visual Studio で、 [ Blazor webassembly を作成](xref:blazor/get-started)し
 
 ```xml
 <PackageReference 
-    Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
-    Version="{VERSION}" />
+  Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
+  Version="3.2.0" />
 ```
-
-`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddOidcAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なすべてのサービスを設定 Identity します。
+ユーザー認証のサポートは、 `AddOidcAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なサービスを設定し Identity ます。
 
 *Program.cs*:
 
@@ -92,18 +73,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。 たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> スキームとホストなしでスコープ URI を指定します。
->
-> ```csharp
-> options.ProviderOptions.DefaultScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 
@@ -128,7 +98,39 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logindisplay-component"></a>LoginDisplay コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
+コンポーネント `LoginDisplay` (*Shared/logindisplay*) は、 `MainLayout` コンポーネント (*shared/mainlayout*) にレンダリングされ、次の動作を管理します。
+
+* 認証されたユーザーの場合:
+  * 現在のユーザー名を表示します。
+  * アプリからログアウトするためのボタンが用意されています。
+* 匿名ユーザーの場合、にログインするオプションが用意されています。
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity.Name!
+        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+            Log out
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+```
 
 ## <a name="authentication-component"></a>認証コンポーネント
 

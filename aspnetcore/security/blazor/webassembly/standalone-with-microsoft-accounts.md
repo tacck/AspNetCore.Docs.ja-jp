@@ -1,66 +1,51 @@
 ---
-title: BlazorMicrosoft アカウントを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 9fc93cc02129081ac6c777677a0c8d6397724e53
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153578"
+title: ' Blazor Microsoft アカウントを使用して ASP.NET Core webassembly スタンドアロンアプリをセキュリティで保護する: 説明:: ms. 作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>BlazorMicrosoft アカウントを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
 Blazor認証に[Microsoft アカウントと AZURE ACTIVE DIRECTORY (AAD)](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)を使用する webassembly スタンドアロンアプリを作成するには、次のようにします。
 
-1. [AAD テナントと web アプリケーションを作成する](/azure/active-directory/develop/v2-overview)
+[AAD テナントと web アプリケーションを作成する](/azure/active-directory/develop/v2-overview)
 
-   Azure portal の**Azure Active Directory**  >  **アプリの登録**領域に AAD アプリを登録します。
+Azure portal の**Azure Active Directory**  >  **アプリの登録**領域に AAD アプリを登録します。
 
-   1\. アプリの**名前**( ** Blazor クライアント AAD**など) を指定します。<br>
-   2\. [**サポートされているアカウントの種類**] で、**任意の組織ディレクトリのアカウント**を選択します。<br>
-   3 \。 [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、のリダイレクト uri を指定し `https://localhost:5001/authentication/login-callback` ます。<br>
-   4 \。 [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。<br>
-   5 \。 **[登録]** を選択します。
+1. アプリの**名前**を指定します ( ** Blazor スタンドアロン AAD Microsoft アカウント**など)。
+1. [**サポートされているアカウントの種類**] で、**任意の組織ディレクトリのアカウント**を選択します。
+1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定したままにし、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 IIS Express の場合、ランダムに生成されたポートは、アプリの [**デバッグ**] パネルの [プロパティ] にあります。
+1. [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。
+1. **[登録]** を選択します。
 
-   [**認証**  >  **プラットフォーム構成**  >  **Web**:
+アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
 
-   1\. の**リダイレクト URI**が存在することを確認 `https://localhost:5001/authentication/login-callback` します。<br>
-   2\. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。<br>
-   3 \。 アプリの残りの既定値は、このエクスペリエンスで許容されます。<br>
-   4 \。 **[保存]** を選択します。
+[**認証**  >  **プラットフォーム構成**  >  **Web**:
 
-   アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
+1. の**リダイレクト URI**が存在することを確認 `https://localhost:{PORT}/authentication/login-callback` します。
+1. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。
+1. アプリの残りの既定値は、このエクスペリエンスで許容されます。
+1. **[保存]** を選択します。
 
-1. 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
+アプリを作成します。 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルで次のコマンドを実行します。
 
-   ```dotnetcli
-   dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common"
-   ```
+```dotnetcli
+dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common"
+```
 
-   プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
+プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
 
 アプリを作成すると、次のことができるようになります。
 
 * Microsoft アカウントを使用してアプリにログインします。
-* アプリが正しく構成されている場合は、スタンドアロンアプリの場合と同じ方法を使用して、Microsoft Api のアクセストークンを要求し Blazor ます。 詳細については、「[クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する」を参照してください。
+* Microsoft Api のアクセストークンを要求します。 詳細については、次を参照してください。
+  * [アクセストークンスコープ](#access-token-scopes)
+  * [クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する。
 
 ## <a name="authentication-package"></a>認証パッケージ
 
@@ -70,10 +55,8 @@ Blazor認証に[Microsoft アカウントと AZURE ACTIVE DIRECTORY (AAD)](/azur
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
-
-`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
 パッケージによって、 `Microsoft.Authentication.WebAssembly.Msal` パッケージが推移的 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` にアプリに追加されます。
 
@@ -90,7 +73,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリの構成に必要な値は、アプリを登録するときに Microsoft アカウントの構成から取得できます。
+メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。
 
 構成は*wwwroot/appsettings*ファイルによって提供されます。
 
@@ -98,7 +81,8 @@ builder.Services.AddMsalAuthentication(options =>
 {
   "AzureAd": {
     "Authority": "https://login.microsoftonline.com/common",
-    "ClientId": "{CLIENT ID}"
+    "ClientId": "{CLIENT ID}",
+    "ValidateAuthority": true
   }
 }
 ```
@@ -109,7 +93,8 @@ builder.Services.AddMsalAuthentication(options =>
 {
   "AzureAd": {
     "Authority": "https://login.microsoftonline.com/common",
-    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
+    "ValidateAuthority": true
   }
 }
 ```
@@ -126,18 +111,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。 たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> スキームとホストなしでスコープ URI を指定します。
->
-> ```csharp
-> options.ProviderOptions.DefaultAccessTokenScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 

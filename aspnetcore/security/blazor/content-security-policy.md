@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core のコンテンツセキュリティポリシーを適用するBlazor
-author: guardrex
-description: ASP.NET Core Blazorアプリでコンテンツセキュリティポリシー (CSP) を使用して、クロスサイトスクリプティング (XSS) 攻撃から保護する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/content-security-policy
-ms.openlocfilehash: 8c5e1c5dd2d41efade91a612bea2855569a61fee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775584"
+title: ' ASP.NET Core にコンテンツセキュリティポリシーを適用し Blazor ます。説明: ' ASP.NET Core アプリでコンテンツセキュリティポリシー (CSP) を使用し Blazor てクロスサイトスクリプティング (XSS) 攻撃から保護する方法について説明します。 '
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core のコンテンツセキュリティポリシーを適用するBlazor
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [クロスサイトスクリプティング (XSS)](xref:security/cross-site-scripting)は、攻撃者が1つまたは複数の悪意のあるクライアント側スクリプトをアプリのレンダリングされたコンテンツに配置するセキュリティの脆弱性です。 コンテンツセキュリティポリシー (CSP) は、ブラウザーに有効なことを通知することで、XSS 攻撃から保護するのに役立ちます。
 
@@ -32,62 +18,62 @@ ms.locfileid: "82775584"
 * ページによって実行されるアクション。フォームの許可された URL ターゲットを指定します。
 * 読み込むことができるプラグイン。
 
-CSP をアプリに適用するために、開発者は1つ以上*directives*の`Content-Security-Policy`ヘッダーまた`<meta>`はタグに csp コンテンツのセキュリティディレクティブをいくつか指定します。
+CSP をアプリに適用するために、開発者は1つ以上のヘッダーまたはタグに CSP コンテンツのセキュリティ*ディレクティブ*をいくつか指定し `Content-Security-Policy` `<meta>` ます。
 
-ポリシーは、ページの読み込み中にブラウザーによって評価されます。 ブラウザーはページのソースを検査し、コンテンツセキュリティディレクティブの要件を満たしているかどうかを判断します。 リソースのポリシーディレクティブが満たされていない場合、ブラウザーはリソースを読み込みません。 たとえば、サードパーティのスクリプトを許可しないポリシーについて考えてみます。 属性にサードパーティの`<script>`元のタグが含まれている場合は、ブラウザーによってスクリプトの読み込みが禁止されます。 `src`
+ポリシーは、ページの読み込み中にブラウザーによって評価されます。 ブラウザーはページのソースを検査し、コンテンツセキュリティディレクティブの要件を満たしているかどうかを判断します。 リソースのポリシーディレクティブが満たされていない場合、ブラウザーはリソースを読み込みません。 たとえば、サードパーティのスクリプトを許可しないポリシーについて考えてみます。 属性にサードパーティの元のタグが含まれている場合は、 `<script>` `src` ブラウザーによってスクリプトの読み込みが禁止されます。
 
-CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスクトップおよびモバイルブラウザーでサポートされています。 アプリには CSP Blazorを使用することをお勧めします。
+CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスクトップおよびモバイルブラウザーでサポートされています。 アプリには CSP を使用することをお勧め Blazor します。
 
 ## <a name="policy-directives"></a>ポリシーディレクティブ
 
-最小で、次のアプリのBlazorディレクティブとソースを指定します。 必要に応じて、ディレクティブとソースを追加します。 この記事の「[ポリシーの適用](#apply-the-policy)」セクションでは、次のディレクティブを使用していBlazorます。ここではBlazor 、webassembly サーバーのセキュリティポリシーの例を示しています。
+最小で、次のアプリのディレクティブとソースを指定し Blazor ます。 必要に応じて、ディレクティブとソースを追加します。 この記事の「[ポリシーの適用](#apply-the-policy)」セクションでは、次のディレクティブを使用しています。ここでは、webassembly サーバーのセキュリティポリシーの例を示し Blazor Blazor ています。
 
-* [base uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash;は、ページの`<base>`タグの url を制限します。 を`self`指定すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-* [すべてのブロック-混合コンテンツ](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash;は、混合 HTTP と HTTPS コンテンツを読み込むことができません。
-* [既定値-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash;は、ポリシーによって明示的に指定されていないソースディレクティブのフォールバックを示します。 を`self`指定すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash;は、イメージの有効なソースを示します。
-  * Url `data:`からのイメージの`data:`読み込みを許可するには、を指定します。
-  * HTTPS `https:`エンドポイントからのイメージの読み込みを許可するには、を指定します。
-* [オブジェクト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash;は`<object>`、、 `<embed>`、および`<applet>`タグの有効なソースを示します。 すべて`none`の URL ソースを禁止するには、を指定します。
-* [スクリプト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash;は、スクリプトの有効なソースを示します。
-  * ブートストラップスクリプト`https://stackpath.bootstrapcdn.com/`のホストソースを指定します。
-  * を`self`指定すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-  * Webassembly の場合Blazor :
-    * 読み込む必要Blazorがあるインラインスクリプトを許可するには、次のハッシュを指定します。
+* [ベース uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash;ページのタグの Url を制限 `<base>` します。 を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
+* [すべてブロック-混合-コンテンツ](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash;HTTP と HTTPS の混合コンテンツの読み込みを禁止します。
+* [既定値-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash;ポリシーによって明示的に指定されていないソースディレクティブのフォールバックを示します。 を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash;画像の有効なソースを示します。
+  * `data:`Url からのイメージの読み込みを許可するには、を指定し `data:` ます。
+  * `https:`HTTPS エンドポイントからのイメージの読み込みを許可するには、を指定します。
+* [オブジェクト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash;`<object>`、、およびタグの有効なソースを示し `<embed>` `<applet>` ます。 `none`すべての URL ソースを禁止するには、を指定します。
+* [スクリプト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash;スクリプトの有効なソースを示します。
+  * `https://stackpath.bootstrapcdn.com/`ブートストラップスクリプトのホストソースを指定します。
+  * を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
+  * BlazorWebassembly の場合:
+    * 読み込む必要があるインラインスクリプトを許可するには、次のハッシュを指定し Blazor ます。
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
-    * 文字列`unsafe-eval`からコード`eval()`を作成するためにメソッドとメソッドを使用するように指定します。
-  * Blazorサーバーアプリで、スタイルシートの`sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=`フォールバック検出を実行するインラインスクリプトのハッシュを指定します。
-* [スタイル-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash;は、スタイルシートの有効なソースを示します。
-  * ブートストラップスタイル`https://stackpath.bootstrapcdn.com/`シートのホストソースを指定します。
-  * を`self`指定すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-  * インライン`unsafe-inline`スタイルの使用を許可するには、を指定します。 初期要求後にクライアントとサーバーを再Blazor接続するために、サーバーアプリの UI でインライン宣言が必要です。 今後のリリースで`unsafe-inline`は、が不要になるように、インラインスタイルが削除される可能性があります。
-* [アップグレード-安全で](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash;はない要求は、セキュリティで保護されていない (HTTP) ソースからのコンテンツ url を HTTPS 経由で安全に取得する必要があることを示します。
+    * `unsafe-eval`文字列からコードを作成するためにメソッドとメソッドを使用するように指定し `eval()` ます。
+  * Blazorサーバーアプリで、 `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` スタイルシートのフォールバック検出を実行するインラインスクリプトのハッシュを指定します。
+* [スタイル-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash;スタイルシートの有効なソースを示します。
+  * `https://stackpath.bootstrapcdn.com/`ブートストラップスタイルシートのホストソースを指定します。
+  * を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
+  * `unsafe-inline`インラインスタイルの使用を許可するには、を指定します。 Blazor初期要求後にクライアントとサーバーを再接続するために、サーバーアプリの UI でインライン宣言が必要です。 今後のリリースでは、が不要になるように、インラインスタイルが削除される可能性があり `unsafe-inline` ます。
+* [アップグレード-安全でない要求](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash;セキュリティで保護されていない (HTTP) ソースからのコンテンツ Url を HTTPS 経由で安全に取得する必要があることを示します。
 
 上記のディレクティブは、Microsoft Internet Explorer 以外のすべてのブラウザーでサポートされています。
 
 追加のインラインスクリプトの SHA ハッシュを取得するには、次のようにします。
 
 * 「[ポリシーの適用](#apply-the-policy)」セクションに示されている CSP を適用します。
-* アプリをローカルで実行しながら、ブラウザーの開発者ツールコンソールにアクセスします。 CSP ヘッダーまたは`meta`タグが存在する場合、ブラウザーはブロックされたスクリプトのハッシュを計算して表示します。
-* ブラウザーによって提供されるハッシュを`script-src`ソースにコピーします。 各ハッシュを囲む単一引用符を使用します。
+* アプリをローカルで実行しながら、ブラウザーの開発者ツールコンソールにアクセスします。 CSP ヘッダーまたはタグが存在する場合、ブラウザーはブロックされたスクリプトのハッシュを計算して表示し `meta` ます。
+* ブラウザーによって提供されるハッシュをソースにコピーし `script-src` ます。 各ハッシュを囲む単一引用符を使用します。
 
 コンテンツセキュリティポリシーレベル2のブラウザーサポートマトリックスについては、「[使用可能: コンテンツセキュリティポリシーレベル 2](https://www.caniuse.com/#feat=contentsecuritypolicy2)」を参照してください。
 
 ## <a name="apply-the-policy"></a>ポリシーの適用
 
-ポリシーを`<meta>`適用するには、タグを使用します。
+ポリシーを `<meta>` 適用するには、タグを使用します。
 
-* `http-equiv`属性の値をに`Content-Security-Policy`設定します。
-* `content`属性値にディレクティブを配置します。 ディレクティブはセミコロン (`;`) で区切ります。
-* 常にタグ`meta`を`<head>`コンテンツに配置します。
+* 属性の値 `http-equiv` をに設定 `Content-Security-Policy` します。
+* 属性値にディレクティブを配置 `content` します。 ディレクティブはセミコロン () で区切り `;` ます。
+* 常に `meta` タグをコンテンツに配置 `<head>` します。
 
-以下のセクションでは、webassembly Blazor Blazorサーバーのポリシーの例を示します。 これらの例は、のBlazor各リリースについて、この記事でバージョン管理されています。 リリースに適したバージョンを使用するには、この web ページの**バージョン**ドロップダウンセレクターでドキュメントバージョンを選択します。
+以下のセクションでは、webassembly サーバーのポリシーの例を示し Blazor Blazor ます。 これらの例は、の各リリースについて、この記事でバージョン管理されてい Blazor ます。 リリースに適したバージョンを使用するには、この web ページの**バージョン**ドロップダウンセレクターでドキュメントバージョンを選択します。
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-Wwwroot/index.html ホスト`<head>`ページのコンテンツ*wwwroot/index.html*で、「[ポリシーディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
+`<head>` *Wwwroot/index.html*ホストページのコンテンツで、「[ポリシーディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
 
 ```html
 <meta http-equiv="Content-Security-Policy" 
@@ -130,27 +116,27 @@ Wwwroot/index.html ホスト`<head>`ページのコンテンツ*wwwroot/index.ht
 
 ## <a name="meta-tag-limitations"></a>Meta タグの制限事項
 
-タグ`<meta>`ポリシーは、次のディレクティブをサポートしていません。
+`<meta>`タグポリシーは、次のディレクティブをサポートしていません。
 
 * [フレーム-先祖](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors)
 * [レポート先](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [レポート-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 * [サンドボックス](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox)
 
-上記のディレクティブをサポートするには、と`Content-Security-Policy`いう名前のヘッダーを使用します。 ディレクティブ文字列は、ヘッダーの値です。
+上記のディレクティブをサポートするには、という名前のヘッダーを使用し `Content-Security-Policy` ます。 ディレクティブ文字列は、ヘッダーの値です。
 
 ## <a name="test-a-policy-and-receive-violation-reports"></a>ポリシーをテストして違反レポートを受信する
 
 テストは、初期ポリシーを作成するときに、サードパーティ製のスクリプトが誤ってブロックされていないことを確認するのに役立ちます。
 
-ポリシーディレクティブを適用せずに一定期間にわたってポリシーをテストするに`<meta>`は、 `http-equiv`ヘッダーベースのポリシーのタグの属性またはヘッダー `Content-Security-Policy-Report-Only`名をに設定します。 エラーレポートは、JSON ドキュメントとして指定された URL に送信されます。 詳細については、 [MDN web ドキュメント: コンテンツ-セキュリティポリシー-レポートのみ](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)を参照してください。
+ポリシーディレクティブを適用せずに一定期間にわたってポリシーをテストするには、 `<meta>` `http-equiv` ヘッダーベースのポリシーのタグの属性またはヘッダー名をに設定し `Content-Security-Policy-Report-Only` ます。 エラーレポートは、JSON ドキュメントとして指定された URL に送信されます。 詳細については、 [MDN web ドキュメント: コンテンツ-セキュリティポリシー-レポートのみ](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only)を参照してください。
 
 ポリシーがアクティブになっているときの違反を報告するには、次の記事を参照してください。
 
 * [レポート先](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [レポート-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 
-の`report-uri`使用は推奨されなくなりましたが、すべての`report-to`主要なブラウザーでがサポートされるまでは、両方のディレクティブを使用する必要があります。 を排他的`report-uri`に使用し`report-uri`ないでください。のサポートは、ブラウザーからいつ*でも*削除される可能性があります。 が完全に`report-uri`サポートされて`report-to`いる場合は、ポリシー内ののサポートを削除します。 の`report-to`導入を追跡する方法については、「[レポートを使用](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)するには」を参照してください。
+の `report-uri` 使用は推奨されなくなりましたが、 `report-to` すべての主要なブラウザーでがサポートされるまでは、両方のディレクティブを使用する必要があります。 を排他的に使用しない `report-uri` で `report-uri` ください。のサポートは、ブラウザーからいつ*でも*削除される可能性があります。 `report-uri`が完全にサポートされている場合は、ポリシー内ののサポートを削除 `report-to` します。 の導入を追跡する方法に `report-to` ついては、「[レポートを使用](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)するには」を参照してください。
 
 アプリのポリシーをリリースするたびにテストして更新します。
 

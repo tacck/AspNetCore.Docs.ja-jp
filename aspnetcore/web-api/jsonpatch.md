@@ -1,24 +1,13 @@
 ---
-title: ASP.NET Core Web API における Json パッチ
-author: rick-anderson
-description: ASP.NET Core Web API において JSON パッチ要求を処理する方法について説明します。
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/jsonpatch
-ms.openlocfilehash: 3a78fa268cce8cff10fedf5814d61ce0e5faaf4b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766668"
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
+
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API における Json パッチ
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Kirk Larkin](https://github.com/serpent5)
@@ -31,8 +20,8 @@ ms.locfileid: "82766668"
 
 アプリで JSON 修正プログラムのサポートを有効にするには、次の手順を実行します。
 
-1. [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet パッケージをインストールします。
-1. を呼び出す<xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>よう`Startup.ConfigureServices`にプロジェクトのメソッドを更新します。 次に例を示します。
+1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet パッケージをインストールします。
+1. `Startup.ConfigureServices`を呼び出すようにプロジェクトのメソッドを更新し <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> ます。 次に例を示します。
 
     ```csharp
     services
@@ -48,11 +37,11 @@ ms.locfileid: "82766668"
 
 ## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch、AddNewtonsoftJson、および system.string
 
-`AddNewtonsoftJson`すべての`System.Text.Json`JSON コンテンツの書式設定に使用される**all** 、ベースの入力フォーマッタと出力フォーマッタを置き換えます。 を使用して`Newtonsoft.Json`JSON 修正プログラムのサポートを追加するには、他のフォーマッタを`Startup.ConfigureServices`変更せずに、プロジェクトのメソッドを次のように更新します。
+`AddNewtonsoftJson`すべての `System.Text.Json` JSON コンテンツの書式設定に使用される**all** 、ベースの入力フォーマッタと出力フォーマッタを置き換えます。 を使用して JSON 修正プログラムのサポートを追加するには `Newtonsoft.Json` 、他のフォーマッタを変更せずに、プロジェクトのメソッドを次のように更新し `Startup.ConfigureServices` ます。
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
-上記のコードでは`Microsoft.AspNetCore.Mvc.NewtonsoftJson` 、パッケージと次`using`のステートメントが必要です。
+上記のコードでは、 `Microsoft.AspNetCore.Mvc.NewtonsoftJson` パッケージと次のステートメントが必要です `using` 。
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet1)]
 
@@ -108,22 +97,152 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のようにします。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` となります。
 
-0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列`add`の末尾には、インデックス番号`-` `/addresses/-`ではなくハイフン () を使用します。
+0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 `add`配列の末尾には、 `-` インデックス番号ではなくハイフン () を使用し `/addresses/-` ます。
 
-### <a name="operations"></a>操作
+### <a name="operations"></a>オペレーション
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|操作  | メモ |
-|-----------|--------------------------------|
-| `add`     | プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します。|
-| `remove`  | プロパティまたは配列要素を削除します。 |
-| `replace` | `remove` の後に、同じ場所で `add` が続く場合と同じです。 |
-| `move`    | ソースからの `remove` の後に、ソースからの値を使用した宛先への `add` が続く場合と同じです。 |
-| `copy`    | ソースからの値を使用した宛先への `add` と同じです。 |
-| `test`    | `path` の値が指定された `value`と一致する場合に、成功の状態コードを返します。|
+|Operation  | メモ |
+|---
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------|---
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------------| |`add`     |プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します |。|`remove`  |プロパティまたは配列の要素を削除します。 | |`replace` |の `remove` 後に同じ場所を指定した場合と同じ `add` です。 | |`move`    |Source から `remove` の値を使用して、ソースから宛先への変換元と同じ `add` です。 | |`copy`    |`add`Source の値を使用して destination と同じです。 | |`test`    |値が `path` = 指定されている場合 `value` 、成功の状態コードを返します |。
 
 ## <a name="json-patch-in-aspnet-core"></a>ASP.NET Core の JSON 修正プログラム
 
@@ -141,7 +260,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-このサンプルアプリのコードは、次`Customer`のモデルで動作します。
+このサンプルアプリのコードは、次のモデルで動作し `Customer` ます。
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
@@ -194,7 +313,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
     * プロパティが null 値を許容する場合: null を設定します。
     * プロパティが null 値を許容しない場合: `default<T>` を設定します。
 
-次のサンプルパッチドキュメントで`CustomerName`は、を null `Orders[0]`に設定し、を削除します。
+次のサンプルパッチドキュメントでは、 `CustomerName` を null に設定し、を削除し `Orders[0]` ます。
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
@@ -202,7 +321,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 この操作は、`add` が後に続く `remove` と機能的に同じです。
 
-次のサンプルパッチドキュメントでは、の`CustomerName`値を`Orders[0]`に設定し`Order` 、新しいオブジェクトで置き換えます。
+次のサンプルパッチドキュメントでは、の値をに設定 `CustomerName` し、 `Orders[0]` 新しいオブジェクトで置き換え `Order` ます。
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
@@ -243,7 +362,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードを取得する
+## <a name="get-the-code"></a>コードを入手する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -254,7 +373,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)
@@ -320,22 +439,152 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のようにします。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` となります。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列の末尾への `add` では、インデックス番号ではなく、`/addresses/-` のようにハイフン (-) を使用します。
 
-### <a name="operations"></a>操作
+### <a name="operations"></a>オペレーション
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|操作  | メモ |
-|-----------|--------------------------------|
-| `add`     | プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します。|
-| `remove`  | プロパティまたは配列要素を削除します。 |
-| `replace` | `remove` の後に、同じ場所で `add` が続く場合と同じです。 |
-| `move`    | ソースからの `remove` の後に、ソースからの値を使用した宛先への `add` が続く場合と同じです。 |
-| `copy`    | ソースからの値を使用した宛先への `add` と同じです。 |
-| `test`    | `path` の値が指定された `value`と一致する場合に、成功の状態コードを返します。|
+|Operation  | メモ |
+|---
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------|---
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------------| |`add`     |プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します |。|`remove`  |プロパティまたは配列の要素を削除します。 | |`replace` |の `remove` 後に同じ場所を指定した場合と同じ `add` です。 | |`move`    |Source から `remove` の値を使用して、ソースから宛先への変換元と同じ `add` です。 | |`copy`    |`add`Source の値を使用して destination と同じです。 | |`test`    |値が `path` = 指定されている場合 `value` 、成功の状態コードを返します |。
 
 ## <a name="jsonpatch-in-aspnet-core"></a>ASP.NET Core における JSON パッチ
 
@@ -455,7 +704,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードを取得する
+## <a name="get-the-code"></a>コードを入手する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -466,7 +715,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)

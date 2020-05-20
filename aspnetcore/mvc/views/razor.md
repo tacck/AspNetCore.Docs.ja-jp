@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core の razor 構文リファレンス
 author: rick-anderson
-description: Web ページRazorにサーバーベースのコードを埋め込むためのマークアップ構文について説明します。
+description: RazorWeb ページにサーバーベースのコードを埋め込むためのマークアップ構文について説明します。
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: 2831fd2edd029043e9457cd213e32f1a82c2872e
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003199"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424420"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core の Razor 構文リファレンス
 
@@ -473,7 +473,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Razor コンポーネントの場合`@code` 、はの[`@functions`](#functions)エイリアスであり、 `@functions`よりも優先されます。 複数の `@code` ブロックが許容されます。
+Razor コンポーネントの場合、 `@code` はのエイリアスであり、よりも優先され [`@functions`](#functions) `@functions` ます。 複数の `@code` ブロックが許容されます。
 
 ::: moniker-end
 
@@ -639,7 +639,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「[厳密に型@model指定されたモデルとキーワード](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)」を参照してください。
+`@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「[厳密に型指定されたモデルと @model キーワード](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)」を参照してください。
 
 ### <a name="namespace"></a>\@namespace
 
@@ -707,13 +707,15 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor コンポーネント](xref:blazor/components)では`@using` 、は、どのコンポーネントがスコープ内にあるかも制御します。
+[Razor コンポーネント](xref:blazor/components)で `@using` は、は、どのコンポーネントがスコープ内にあるかも制御します。
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="directive-attributes"></a>ディレクティブ属性
+
+Razor ディレクティブの属性は、記号の後に予約済みのキーワードを持つ暗黙的な式で表され `@` ます。 通常、ディレクティブ属性は、要素の解析方法を変更したり、さまざまな機能を有効にしたりします。
 
 ### <a name="attributes"></a>\@attributes
 
@@ -896,14 +898,14 @@ public class Pet
 * section
 * helper (現在は ASP.NET Core ではサポートされていません)
 
-Razorキーワードは、で`@(Razor Keyword)`エスケープされます`@(functions)`(たとえば、)。
+Razorキーワードは、でエスケープされ `@(Razor Keyword)` ます (たとえば、 `@(functions)` )。
 
-### <a name="c-razor-keywords"></a>C# Razorのキーワード
+### <a name="c-razor-keywords"></a>C# の Razor キーワード
 
 * case
 * do
 * default
-* for
+* 対象
 * foreach
 * if
 * else
@@ -915,19 +917,19 @@ Razorキーワードは、で`@(Razor Keyword)`エスケープされます`@(fun
 * using
 * while
 
-C# Razorのキーワードは、 `@(@C# Razor Keyword)` `@(@case)`を使用してダブルエスケープする必要があります (例:)。 最初`@`のは、 Razorパーサーをエスケープします。 2 番目の `@` は、C# パーサーをエスケープします。
+C# の Razor キーワードは、を使用してダブルエスケープする必要があり `@(@C# Razor Keyword)` ます (例: `@(@case)` )。 最初のは、 `@` パーサーをエスケープし Razor ます。 2 番目の `@` は、C# パーサーをエスケープします。
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>予約済みキーワードがで使用されていませんRazor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>ビューにRazor対して生成された C# クラスを検査する
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Razorビューに対して生成された C# クラスを検査する
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2.1 以降では、 [ Razor SDK](xref:razor-pages/sdk)によってファイルRazorのコンパイルが処理されます。 プロジェクトをビルドすると、 Razor SDK によって、プロジェクトルートに*obj/<build_configuration>Razor /<target_framework_moniker/* ディレクトリが生成されます。 ディレクトリ内*Razor* のディレクトリ構造は、プロジェクトのディレクトリ構造をミラー化します。
+.NET Core SDK 2.1 以降では、 [ Razor SDK](xref:razor-pages/sdk)によってファイルのコンパイルが処理さ Razor れます。 プロジェクトをビルドすると、SDK によって、 Razor プロジェクトルートに*obj/<build_configuration> Razor /<target_framework_moniker/* ディレクトリが生成されます。 ディレクトリ内のディレクトリ構造は、 *Razor* プロジェクトのディレクトリ構造をミラー化します。
 
-.NET Core 2.1 を対象とする ASP.NET Core 2.1 Razorページプロジェクトでは、次のディレクトリ構造について考えてみます。
+.NET Core 2.1 を対象とする ASP.NET Core 2.1 ページプロジェクトでは、次のディレクトリ構造について考えてみ Razor ます。
 
 * **場所**
   * **管理者**
@@ -959,7 +961,7 @@ C# Razorのキーワードは、 `@(@C# Razor Keyword)` `@(@case)`を使用し�
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-*Pages/Index. cshtml*の生成されたクラスを表示するには、 *obj/Debug/netcoreapp 2.1/Razor/Pages/Index.g.cshtml.cs*を開きます。
+*Pages/Index. cshtml*の生成されたクラスを表示するには、 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs*を開きます。
 
 ::: moniker-end
 
@@ -981,7 +983,7 @@ C# Razorのキーワードは、 `@(@C# Razor Keyword)` `@(@case)`を使用し�
 
 ## <a name="view-lookups-and-case-sensitivity"></a>ビューの参照と大文字/小文字の区別
 
-ビュー Razorエンジンは、ビューに対して大文字と小文字を区別して検索を実行します。 ただし、実際の参照は、基になるファイル システムによって決定されます。
+Razorビューエンジンは、ビューに対して大文字と小文字を区別して検索を実行します。 ただし、実際の参照は、基になるファイル システムによって決定されます。
 
 * ファイル ベースのソース:
   * 大文字と小文字が区別されないファイル システムを使っているオペレーティング システム (Windows など) では、物理的なファイル プロバイダーの参照は大文字と小文字を区別しません。 たとえば、`return View("Test")` は、*/Views/Home/Test.cshtml*、*/Views/home/test.cshtml*、その他のすべての大文字と小文字のバリエーションと一致します。
@@ -995,6 +997,6 @@ C# Razorのキーワードは、 `@(@C# Razor Keyword)` `@(@case)`を使用し�
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
-[構文を使用した ASP.NET Web Razorプログラミングの概要](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)では、構文Razorを使用したプログラミングの多くのサンプルが提供されています。
+を[使用した ASP.NET Web プログラミング Razor の概要構文には、](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)構文を使用したプログラミングの多くのサンプルが用意されて Razor います。

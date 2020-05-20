@@ -1,63 +1,67 @@
 ---
-title: BlazorAzure Active Directory B2C を使用して ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 059947888653c05a062ec5e5849d8087cd01f475
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153612"
+title: ' Azure Active Directory B2C ' author: description: monikerRange: ms. author: ms. Blazor カスタム: ms. date: no loc: という名前のスタンドアロンアプリをセキュリティで ASP.NET Core 保護します。
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C を使用して ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
 Blazor認証に[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/overview)を使用する webassembly スタンドアロンアプリを作成するには、次のようにします。
 
-1. テナントを作成し、Azure Portal で web アプリを登録するには、次のトピックのガイダンスに従ってください。
+テナントを作成し、Azure Portal で web アプリを登録するには、次のトピックのガイダンスに従ってください。
 
-   * [AAD B2C テナント](/azure/active-directory-b2c/tutorial-create-tenant) &ndash; を作成する次の情報を記録します。
+[AAD B2C テナントを作成する](/azure/active-directory-b2c/tutorial-create-tenant)
 
-     1\. AAD B2C インスタンス (たとえば `https://contoso.b2clogin.com/` 、末尾のスラッシュを含む)<br>
-     2\. テナントドメインの AAD B2C (例 `contoso.onmicrosoft.com` )
+次の情報を記録します。
 
-   * [Web アプリケーション](/azure/active-directory-b2c/tutorial-register-applications) &ndash; を登録するアプリの登録時に、次の選択を行います。
+* AAD B2C インスタンス (たとえば `https://contoso.b2clogin.com/` 、末尾にスラッシュが含まれています)。
+* AAD B2C テナントドメイン (たとえば、 `contoso.onmicrosoft.com` )。
 
-     1\. [ **Web アプリ/WEB API** **] を [はい]** に設定します。<br>
-     2\. [**暗黙的フローを許可**する **] を [はい]** に設定します。<br>
-     3 \。 の**応答 URL**を追加 `https://localhost:5001/authentication/login-callback` します。
+[「チュートリアル: Azure Active Directory B2C でのアプリケーションの登録](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、*クライアントアプリ*に AAD アプリを登録します。
 
-     アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
+1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
+1. アプリの**名前**を指定します ( ** Blazor スタンドアロン AAD B2C**など)。
+1. **サポートされているアカウントの種類**については、[マルチテナント] オプションを選択します。**組織ディレクトリ内のアカウントまたは任意の id プロバイダーを選択します。Azure AD B2C を使用してユーザーを認証します。**
+1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定したままにし、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 IIS Express の場合、ランダムに生成されたポートは、アプリの [**デバッグ**] パネルの [プロパティ] にあります。
+1. **アクセス許可**によって  >  **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。
+1. **[登録]** を選択します。
 
-   * [ユーザーフロー](/azure/active-directory-b2c/tutorial-create-user-flows) &ndash; の作成サインアップとサインインのユーザーフローを作成します。
+アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
 
-     少なくとも、**アプリケーション要求**の  >  **表示名**ユーザー属性を選択して、コンポーネントにを設定します `context.User.Identity.Name` `LoginDisplay` (*Shared/logindisplay. razor*)。
+[**認証**  >  **プラットフォーム構成**  >  **Web**:
 
-     アプリ用に作成されたサインアップおよびサインインユーザーフロー名を記録します (例: `B2C_1_signupsignin` )。
+1. の**リダイレクト URI**が存在することを確認 `https://localhost:{PORT}/authentication/login-callback` します。
+1. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。
+1. アプリの残りの既定値は、このエクスペリエンスで許容されます。
+1. **[保存]** を選択します。
 
-1. 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
+[**ホーム**  >  **Azure AD B2C**  >  **ユーザーフロー**:
 
-   ```dotnetcli
-   dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --client-id "{CLIENT ID}" --domain "{DOMAIN}" -ssp "{SIGN UP OR SIGN IN POLICY}"
-   ```
+[サインアップとサインイン ユーザー フローを作成する](/azure/active-directory-b2c/tutorial-create-user-flows)
 
-   プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
+少なくとも、**アプリケーション要求**の  >  **表示名**ユーザー属性を選択して、コンポーネントにを設定します `context.User.Identity.Name` `LoginDisplay` (*Shared/logindisplay. razor*)。
+
+アプリ用に作成されたサインアップおよびサインインユーザーフロー名を記録します (例: `B2C_1_signupsignin` )。
+
+次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
+
+```dotnetcli
+dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --client-id "{CLIENT ID}" --domain "{TENANT DOMAIN}" -ssp "{SIGN UP OR SIGN IN POLICY}"
+```
+
+プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
+
+アプリを作成すると、次のことができるようになります。
+
+* AAD ユーザーアカウントを使用してアプリにログインします。
+* Microsoft Api のアクセストークンを要求します。 詳細については、次を参照してください。
+  * [アクセストークンスコープ](#access-token-scopes)
+  * [クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する。
 
 ## <a name="authentication-package"></a>認証パッケージ
 
@@ -67,10 +71,8 @@ Blazor認証に[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/ov
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
-
-`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
 パッケージによって、 `Microsoft.Authentication.WebAssembly.Msal` パッケージが推移的 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` にアプリに追加されます。
 
@@ -87,7 +89,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリの構成に必要な値は、アプリを登録するときに Microsoft アカウントの構成から取得できます。
+メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。
 
 構成は*wwwroot/appsettings*ファイルによって提供されます。
 
@@ -95,7 +97,8 @@ builder.Services.AddMsalAuthentication(options =>
 {
   "AzureAdB2C": {
     "Authority": "{AAD B2C INSTANCE}{DOMAIN}/{SIGN UP OR SIGN IN POLICY}",
-    "ClientId": "{CLIENT ID}"
+    "ClientId": "{CLIENT ID}",
+    "ValidateAuthority": false
   }
 }
 ```
@@ -106,7 +109,8 @@ builder.Services.AddMsalAuthentication(options =>
 {
   "AzureAdB2C": {
     "Authority": "https://contoso.b2clogin.com/contoso.onmicrosoft.com/B2C_1_signupsignin1",
-    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
+    "ValidateAuthority": false
   }
 }
 ```
@@ -123,18 +127,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。 たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> スキームとホストなしでスコープ URI を指定します。
->
-> ```csharp
-> options.ProviderOptions.DefaultAccessTokenScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 

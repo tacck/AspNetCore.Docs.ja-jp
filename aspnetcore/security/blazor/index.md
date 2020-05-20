@@ -1,33 +1,16 @@
 ---
-title: ASP.NET Core Blazor の認証と承認
-author: guardrex
-description: Blazor の認証と承認のシナリオについて説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/04/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/index
-ms.openlocfilehash: d55880265ed1ceedf8f115412e5ac47309521239
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772896"
+title:'ASP.NET Core Blazor 認証と承認 ' 作成者: 説明: ’Blazor の認証と承認のシナリオについて説明します。’
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)、[Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-> [!NOTE]
-> Blazor WebAssembly に適用されるこの記事のガイダンスは、ASP.NET Core Blazor WebAssembly テンプレート バージョン 3.2 以降が必要です。 Visual Studio バージョン 16.6 Preview 2 以降を使用していない場合は、「<xref:blazor/get-started>」のガイダンスに従って、最新の Blazor WebAssembly テンプレートを入手してください。
 
 ASP.NET Core は、Blazor アプリのセキュリティの構成と管理をサポートしています。
 

@@ -1,11 +1,11 @@
 ---
-title: ASP.NET Core Blazorサーバーの追加のセキュリティシナリオ
+title: ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ
 author: guardrex
-description: 追加のセキュリティシナリオBlazor用にサーバーを構成する方法について説明します。
+description: Blazor追加のセキュリティシナリオ用にサーバーを構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772805"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444075"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazorサーバーの追加のセキュリティシナリオ
+# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ
 
 作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazorサーバーアプリにトークンを渡す
+## <a name="pass-tokens-to-a-blazor-server-app"></a>サーバーアプリにトークンを渡す Blazor
 
-BlazorサーバーアプリのRazorコンポーネントの外部で利用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 完全`Startup.ConfigureServices`な例を含むサンプルコードについては、「[サーバー側Blazorアプリケーションへのトークンの引き渡し](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
+サーバーアプリのコンポーネントの外部で利用できるトークンは Razor Blazor 、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 完全な例を含むサンプルコードについ `Startup.ConfigureServices` ては、「[サーバー側 Blazor アプリケーションへのトークンの引き渡し](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
 
-通常RazorのBlazorページや MVC アプリの場合と同様に、サーバーアプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
+通常の Blazor ページや MVC アプリの場合と同様に、サーバーアプリを認証し Razor ます。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -56,7 +56,7 @@ public class InitialApplicationState
 }
 ```
 
-[依存関係の挿入 (DI)](xref:blazor/dependency-injection)からトークンを解決するBlazorためにアプリ内で使用できる**スコープ**付きトークンプロバイダーサービスを定義します。
+**scoped** Blazor [依存関係の挿入 (DI)](xref:blazor/dependency-injection)からトークンを解決するためにアプリ内で使用できるスコープ付きトークンプロバイダーサービスを定義します。
 
 ```csharp
 public class TokenProvider
@@ -66,7 +66,7 @@ public class TokenProvider
 }
 ```
 
-で`Startup.ConfigureServices`、次のサービスを追加します。
+で `Startup.ConfigureServices` 、次のサービスを追加します。
 
 * `IHttpClientFactory`
 * `TokenProvider`
@@ -76,7 +76,7 @@ services.AddHttpClient();
 services.AddScoped<TokenProvider>();
 ```
 
-*_Host*ファイルで、の`InitialApplicationState`インスタンスを作成し、それをパラメーターとしてアプリに渡します。
+*_Host*ファイルで、のインスタンスを作成し、 `InitialApplicationState` それをパラメーターとしてアプリに渡します。
 
 ```cshtml
 @using Microsoft.AspNetCore.Authentication
@@ -147,3 +147,64 @@ public class WeatherForecastService
     }
 }
 ```
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Open ID Connect (OIDC) v2.0 エンドポイントを使用する
+
+認証ライブラリとテンプレートでは、 Blazor OPEN ID Connect (OIDC) v1.0 エンドポイントが使用されます。 V2.0 エンドポイントを使用するには、 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> でオプションを構成し <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ます。
+
+```csharp
+services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    }
+```
+
+または、アプリ設定 (*appsettings. json*) ファイルで設定を行うこともできます。
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+証明機関へのトラッキングがアプリの OIDC プロバイダー (AAD 以外のプロバイダーを含む) に適していない場合は、プロパティを直接設定し `Authority` ます。 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>またはアプリ設定ファイルのプロパティを、キーを使用して設定し `Authority` ます。
+
+### <a name="code-changes"></a>コードの変更
+
+* V2.0 エンドポイントの ID トークンの変更要求の一覧。 詳細については、「 [Microsoft identity platform (v2.0) を更新する理由](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)」を参照してください。 Azure のドキュメントを参照してください。
+* リソースは、v2.0 エンドポイントのスコープ Uri で指定されているため、 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> 次のようにのプロパティ設定を削除し <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ます。
+
+  ```csharp
+  services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options => 
+      {
+          ...
+          options.Resource = "...";    // REMOVE THIS LINE
+          ...
+      }
+      ```
+
+  For more information, see [Scopes, not resources](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) in the Azure documentation.
+
+### App ID URI
+
+* When using v2.0 endpoints, APIs define an *App ID URI*, which is meant to represent a unique identifier for the API.
+* All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
+* When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
+
+*appsettings.json*:
+
+```json
+{
+  "AzureAd": {
+    ...
+    "ClientId": "https://{TENANT}.onmicrosoft.com/{APP NAME}"
+    ...
+  }
+}
+```
+
+OIDC プロバイダーのアプリ登録の説明で使用するアプリ ID URI を見つけることができます。

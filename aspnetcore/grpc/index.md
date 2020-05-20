@@ -1,23 +1,11 @@
 ---
-title: .NET Core の gRPC の概要
-author: juntaoluo
-description: Kestrel サーバーと ASP.NET Core の gRPC サービスについて説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: johluo
-ms.date: 09/20/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/index
-ms.openlocfilehash: 2d7d683051fd1eb97f3f57d75bd582109166a6cd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768849"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core の gRPC の概要
 
@@ -36,6 +24,8 @@ gRPC の主な利点:
 * 効率性が重要となる軽量のマイクロサービス。
 * 開発に複数の言語が必要になる多言語システム。
 * ストリーミングの要求または応答を処理する必要があるポイントツーポイントのリアルタイム サービス。
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="c-tooling-support-for-proto-files"></a>.proto ファイルに対する C# ツール サポート
 
@@ -126,8 +116,6 @@ Console.WriteLine(response.Message);
 gRPC クライアントはチャネルを使って作成され、これは gRPC サービスへの長期接続を表します。 チャネルは `GrpcChannel.ForAddress` を使って作成できます。
 
 クライアントの作成と、さまざまなサービス メソッドの呼び出しについて詳しくは、「<xref:grpc/client>」をご覧ください。
-
-[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

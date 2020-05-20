@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core SignalR JavaScript クライアント
-author: bradygaster
-description: ASP.NET Core SignalR JavaScript クライアントの概要について説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: bradyg
-ms.custom: mvc
-ms.date: 04/08/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/javascript-client
-ms.openlocfilehash: 966e8e171752edb230f6da82203fd901b0fdeaab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768943"
+title: ' ASP.NET Core SignalR javascript クライアント ' author: description: ' ASP.NET Core SignalR javascript クライアントの概要。 '
+monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
@@ -28,9 +16,9 @@ ASP.NET Core SignalR JavaScript クライアントライブラリを使用する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="install-the-signalr-client-package"></a>クライアントパッケージSignalRをインストールする
+## <a name="install-the-signalr-client-package"></a>クライアントパッケージをインストールする SignalR
 
-SignalR JavaScript クライアントライブラリは[npm](https://www.npmjs.com/)パッケージとして配信されます。 次のセクションでは、さまざまな方法でクライアントライブラリをインストールする方法について説明します。
+SignalRJavaScript クライアントライブラリは[npm](https://www.npmjs.com/)パッケージとして配信されます。 次のセクションでは、さまざまな方法でクライアントライブラリをインストールする方法について説明します。
 
 ### <a name="install-with-npm"></a>Npm を使用してインストールする
 
@@ -43,7 +31,7 @@ npm init -y
 npm install @microsoft/signalr
 ```
 
-npm は、 *node_modules\\ *フォルダーにパッケージの内容をインストールします。 *Wwwroot\\lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *Signalr*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
+npm は、 *node_modules \\ @microsoft\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *Signalr*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
 
 ::: moniker-end
 
@@ -54,11 +42,11 @@ npm init -y
 npm install @aspnet/signalr
 ```
 
-npm は、 *node_modules\\ *フォルダーにパッケージの内容をインストールします。 *Wwwroot\\lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *Signalr*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
+npm は、 *node_modules \\ @aspnet\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *Signalr*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
 
 ::: moniker-end
 
-要素でSignalR JavaScript クライアントを参照します。 `<script>` 次に例を示します。
+SignalR要素で JavaScript クライアントを参照し `<script>` ます。 次に例を示します。
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -92,70 +80,70 @@ Npm の前提条件なしでクライアントライブラリを使用するに�
 
 ### <a name="install-with-libman"></a>LibMan でのインストール
 
-[Libman](xref:client-side/libman/index)を使用すると、CDN でホストされているクライアントライブラリから特定のクライアントライブラリファイルをインストールできます。 たとえば、縮小版の JavaScript ファイルのみをプロジェクトに追加します。 その方法の詳細については、「[クライアントライブラリのSignalR追加](xref:tutorials/signalr#add-the-signalr-client-library)」を参照してください。
+[Libman](xref:client-side/libman/index)を使用すると、CDN でホストされているクライアントライブラリから特定のクライアントライブラリファイルをインストールできます。 たとえば、縮小版の JavaScript ファイルのみをプロジェクトに追加します。 その方法の詳細については、「 [ SignalR クライアントライブラリの追加](xref:tutorials/signalr#add-the-signalr-client-library)」を参照してください。
 
 ## <a name="connect-to-a-hub"></a>ハブへの接続
 
 次のコードでは、接続を作成して開始します。 ハブの名前は大文字と小文字が区別されません。
 
-[!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=9-13,43-45)]
+[!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=9-13,28-51)]
 
 ### <a name="cross-origin-connections"></a>クロスオリジン接続
 
 通常、ブラウザーは、要求されたページと同じドメインからの接続を読み込みます。 ただし、別のドメインへの接続が必要になる場合もあります。
 
-悪意のあるサイトが別のサイトから機密データを読み取れないようにするため、既定では、[クロスオリジン接続](xref:security/cors)は無効になっています。 クロスオリジン要求を許可するには、 `Startup`クラスで有効にします。
+悪意のあるサイトが別のサイトから機密データを読み取れないようにするため、既定では、[クロスオリジン接続](xref:security/cors)は無効になっています。 クロスオリジン要求を許可するには、クラスで有効にし `Startup` ます。
 
 [!code-csharp[Cross-origin connections](javascript-client/sample/Startup.cs?highlight=29-35,56)]
 
 ## <a name="call-hub-methods-from-client"></a>クライアントからのハブメソッドの呼び出し
 
-JavaScript クライアントは、 [HubConnection](/javascript/api/%40aspnet/signalr/hubconnection)の[invoke](/javascript/api/%40aspnet/signalr/hubconnection#invoke)メソッドを使用して、ハブでパブリックメソッドを呼び出します。 メソッド`invoke`は、次の2つの引数を受け取ります。
+JavaScript クライアントは、 [HubConnection](/javascript/api/%40aspnet/signalr/hubconnection)の[invoke](/javascript/api/%40aspnet/signalr/hubconnection#invoke)メソッドを使用して、ハブでパブリックメソッドを呼び出します。 メソッドは、 `invoke` 次の2つの引数を受け取ります。
 
-* ハブメソッドの名前。 次の例では、ハブのメソッド名は`SendMessage`です。
-* ハブメソッドで定義されているすべての引数。 次の例では、引数名は`message`です。 このコード例では、Internet Explorer を除くすべての主要なブラウザーの現在のバージョンでサポートされている、矢印関数の構文を使用します。
+* ハブメソッドの名前。 次の例では、ハブのメソッド名は `SendMessage` です。
+* ハブメソッドで定義されているすべての引数。 次の例では、引数名は `message` です。 このコード例では、Internet Explorer を除くすべての主要なブラウザーの現在のバージョンでサポートされている、矢印関数の構文を使用します。
 
   [!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=24)]
 
 > [!NOTE]
-> *サーバーレスモード*で Azure SignalRサービスを使用している場合は、クライアントからハブメソッドを呼び出すことはできません。 詳細については、 [ SignalRサービスのドキュメント](/azure/azure-signalr/signalr-concept-serverless-development-config)を参照してください。
+> SignalR*サーバーレスモード*で Azure サービスを使用している場合は、クライアントからハブメソッドを呼び出すことはできません。 詳細については、 [ SignalR サービスのドキュメント](/azure/azure-signalr/signalr-concept-serverless-development-config)を参照してください。
 
-メソッド`invoke`は、JavaScript [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)を返します。 は`Promise` 、サーバーのメソッドがを返すときに戻り値 (存在する場合) を使用して解決されます。 サーバー上のメソッドがエラーをスローした場合`Promise` 、はエラーメッセージと共に拒否されます。 これらの`then`ケース`catch` (または`Promise` `await`構文) を処理するには、自身でメソッドとメソッドを使用します。
+メソッドは、 `invoke` JavaScript [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)を返します。 は、 `Promise` サーバーのメソッドがを返すときに戻り値 (存在する場合) を使用して解決されます。 サーバー上のメソッドがエラーをスローした場合、は `Promise` エラーメッセージと共に拒否されます。 これらの `then` `catch` `Promise` ケース (または構文) を処理するには、自身でメソッドとメソッドを使用し `await` ます。
 
-メソッド`send`は、JavaScript `Promise`を返します。 は`Promise` 、メッセージがサーバーに送信されたときに解決されます。 メッセージの送信中にエラーが発生した`Promise`場合、はエラーメッセージと共に拒否されます。 これらの`then`ケース`catch` (または`Promise` `await`構文) を処理するには、自身でメソッドとメソッドを使用します。
+メソッドは、 `send` JavaScript を返し `Promise` ます。 は、 `Promise` メッセージがサーバーに送信されたときに解決されます。 メッセージの送信中にエラーが発生した場合、は `Promise` エラーメッセージと共に拒否されます。 これらの `then` `catch` `Promise` ケース (または構文) を処理するには、自身でメソッドとメソッドを使用し `await` ます。
 
 > [!NOTE]
-> を`send`使用すると、サーバーがメッセージを受信するまで待機しません。 このため、サーバーからデータまたはエラーを返すことはできません。
+> を使用する `send` と、サーバーがメッセージを受信するまで待機しません。 このため、サーバーからデータまたはエラーを返すことはできません。
 
 ## <a name="call-client-methods-from-hub"></a>ハブからクライアントメソッドを呼び出す
 
-ハブからメッセージを受信するには、の[on](/javascript/api/%40aspnet/signalr/hubconnection#on)メソッドを使用して`HubConnection`メソッドを定義します。
+ハブからメッセージを受信するには、の[on](/javascript/api/%40aspnet/signalr/hubconnection#on)メソッドを使用してメソッドを定義し `HubConnection` ます。
 
-* JavaScript クライアントメソッドの名前。 次の例では、メソッド名は`ReceiveMessage`です。
-* ハブがメソッドに渡す引数。 次の例では、引数の値`message`はです。
+* JavaScript クライアントメソッドの名前。 次の例では、メソッド名は `ReceiveMessage` です。
+* ハブがメソッドに渡す引数。 次の例では、引数の値は `message` です。
 
 [!code-javascript[Receive calls from hub](javascript-client/sample/wwwroot/js/chat.js?range=14-19)]
 
-の`connection.on`前のコードは、サーバー側のコードが[sendasync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync)メソッドを使用して呼び出したときに実行されます。
+の前のコードは、 `connection.on` サーバー側のコードが[sendasync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync)メソッドを使用して呼び出したときに実行されます。
 
 [!code-csharp[Call client-side](javascript-client/sample/hubs/chathub.cs?range=8-11)]
 
-SignalRと`SendAsync` `connection.on`で定義されたメソッド名と引数を照合することによって、どのクライアントメソッドを呼び出すかを決定します。
+SignalRとで定義されたメソッド名と引数を照合することによって、どのクライアントメソッドを呼び出すかを決定し `SendAsync` `connection.on` ます。
 
 > [!NOTE]
-> ベストプラクティスとして、の後`HubConnection` `on`にの[start](/javascript/api/%40aspnet/signalr/hubconnection#start)メソッドを呼び出します。 これにより、メッセージを受信する前にハンドラーが確実に登録されます。
+> ベストプラクティスとして、の後にの[start](/javascript/api/%40aspnet/signalr/hubconnection#start)メソッドを呼び出し `HubConnection` `on` ます。 これにより、メッセージを受信する前にハンドラーが確実に登録されます。
 
 ## <a name="error-handling-and-logging"></a>エラー処理とログ記録
 
-メソッドを`catch` `start`メソッドの最後にチェーンして、クライアント側のエラーを処理します。 ブラウザー `console.error`のコンソールにエラーを出力するには、を使用します。
+メソッドを `catch` メソッドの最後にチェーンして、 `start` クライアント側のエラーを処理します。 `console.error`ブラウザーのコンソールにエラーを出力するには、を使用します。
 
 [!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=50)]
 
 接続が確立されたときにログに記録する logger と種類のイベントを渡すことによって、クライアント側のログトレースを設定します。 メッセージは、指定されたログレベル以上でログに記録されます。 使用可能なログレベルは次のとおりです。
 
-* `signalR.LogLevel.Error`&ndash;エラーメッセージ。 メッセージ`Error`のみをログに記録します。
-* `signalR.LogLevel.Warning`&ndash;潜在的なエラーに関する警告メッセージ。 ログ`Warning`と`Error`メッセージ。
-* `signalR.LogLevel.Information`&ndash;エラーのないステータスメッセージ。 、 `Information`、 `Warning`および`Error`の各メッセージをログに記録します。
+* `signalR.LogLevel.Error`&ndash;エラーメッセージ。 `Error`メッセージのみをログに記録します。
+* `signalR.LogLevel.Warning`&ndash;潜在的なエラーに関する警告メッセージ。 ログ `Warning` と `Error` メッセージ。
+* `signalR.LogLevel.Information`&ndash;エラーのないステータスメッセージ。 、、およびの各メッセージをログ `Information` に記録 `Warning` `Error` します。
 * `signalR.LogLevel.Trace`&ndash;トレースメッセージ。 ハブとクライアント間で転送されたデータを含む、すべてをログに記録します。
 
 ログレベルを構成するには、 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)で[configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging)メソッドを使用します。 メッセージは、ブラウザーコンソールに記録されます。
@@ -168,7 +156,7 @@ SignalRと`SendAsync` `connection.on`で定義されたメソッド名と引数�
 
 ### <a name="automatically-reconnect"></a>自動的に再接続する
 
-のSignalR JavaScript クライアントは、 `withAutomaticReconnect` [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)のメソッドを使用して自動的に再接続するように構成できます。 既定では、自動的に再接続されません。
+の JavaScript クライアントは、 SignalR HubConnectionBuilder のメソッドを使用して自動的に再接続するように構成でき `withAutomaticReconnect` ます。 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) 既定では、自動的に再接続されません。
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -177,9 +165,9 @@ const connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-パラメーターを指定し`withAutomaticReconnect()`ない場合、は、再接続を試行する前に、それぞれ0、2、10、および30秒間待機するようにクライアントを構成します。これにより、4回の試行が失敗すると停止します。
+パラメーターを指定しない場合、は、 `withAutomaticReconnect()` 再接続を試行する前に、それぞれ0、2、10、および30秒間待機するようにクライアントを構成します。これにより、4回の試行が失敗すると停止します。
 
-再接続の試行を開始する`HubConnection`前に、は`HubConnectionState.Reconnecting`状態に遷移し`onreconnecting` 、コールバックを起動し`Disconnected`ます。この状態`onclose`に遷移し`HubConnection` 、自動再接続が構成されていないなどのコールバックをトリガーします。 これにより、接続が失われたことをユーザーに警告し、UI 要素を無効にすることができます。
+再接続の試行を開始する前に、は状態に遷移し、 `HubConnection` コールバックを起動します。この状態に遷移し、 `HubConnectionState.Reconnecting` `onreconnecting` `Disconnected` `onclose` 自動再接続が構成されていないなどのコールバックをトリガーし `HubConnection` ます。 これにより、接続が失われたことをユーザーに警告し、UI 要素を無効にすることができます。
 
 ```javascript
 connection.onreconnecting(error => {
@@ -193,12 +181,12 @@ connection.onreconnecting(error => {
 });
 ```
 
-最初の4回の試行でクライアントが正常に再`HubConnection`接続した場合、 `Connected`は状態に戻り`onreconnected` 、コールバックを起動します。 これにより、接続が再確立されたことをユーザーに通知することができます。
+最初の4回の試行でクライアントが正常に再接続した場合、は `HubConnection` 状態に戻り、 `Connected` コールバックを起動し `onreconnected` ます。 これにより、接続が再確立されたことをユーザーに通知することができます。
 
-接続はサーバーにまったく新しいものであるため、 `connectionId` `onreconnected`コールバックに新しいが提供されます。
+接続はサーバーにまったく新しいものであるため、 `connectionId` コールバックに新しいが提供され `onreconnected` ます。
 
 > [!WARNING]
-> が`onreconnected`ネゴシエーションを`connectionId` [スキップ](xref:signalr/configuration#configure-client-options)するように構成さ`HubConnection`れている場合、コールバックのパラメーターは未定義になります。
+> が `onreconnected` `connectionId` `HubConnection` [ネゴシエーションをスキップ](xref:signalr/configuration#configure-client-options)するように構成されている場合、コールバックのパラメーターは未定義になります。
 
 ```javascript
 connection.onreconnected(connectionId => {
@@ -212,7 +200,7 @@ connection.onreconnected(connectionId => {
 });
 ```
 
-`withAutomaticReconnect()`最初の開始`HubConnection`エラーを再試行するようにを構成しません。そのため、開始エラーは手動で処理する必要があります。
+`withAutomaticReconnect()`最初の開始エラーを再試行するようにを構成しません `HubConnection` 。そのため、開始エラーは手動で処理する必要があります。
 
 ```javascript
 async function start() {
@@ -228,7 +216,7 @@ async function start() {
 };
 ```
 
-最初の4回の試行でクライアントが正常に再接続`HubConnection`されない場合`Disconnected` 、は状態に遷移し、その[閉じる](/javascript/api/%40aspnet/signalr/hubconnection#onclose)コールバックを起動します。 これにより、接続が完全に失われたことをユーザーに通知し、ページを最新の情報に更新することをお勧めします。
+最初の4回の試行でクライアントが正常に再接続されない場合、は `HubConnection` 状態に遷移し、 `Disconnected` その[閉じる](/javascript/api/%40aspnet/signalr/hubconnection#onclose)コールバックを起動します。 これにより、接続が完全に失われたことをユーザーに通知し、ページを最新の情報に更新することをお勧めします。
 
 ```javascript
 connection.onclose(error => {
@@ -242,7 +230,7 @@ connection.onclose(error => {
 });
 ```
 
-再接続のタイミングを切断または変更する前に、カスタムの再接続試行`withAutomaticReconnect`回数を構成するために、では、各再接続の試行を開始するまでの待機時間 (ミリ秒) を表す数値の配列を受け取ります。
+再接続のタイミングを切断または変更する前に、カスタムの再接続試行回数を構成するために、では、 `withAutomaticReconnect` 各再接続の試行を開始するまでの待機時間 (ミリ秒) を表す数値の配列を受け取ります。
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -253,7 +241,7 @@ const connection = new signalR.HubConnectionBuilder()
     // .withAutomaticReconnect([0, 2000, 10000, 30000]) yields the default behavior
 ```
 
-前の例では`HubConnection` 、接続が失われた直後に再接続を開始するようにを構成しています。 これは、既定の構成にも当てはまります。
+前の例では、 `HubConnection` 接続が失われた直後に再接続を開始するようにを構成しています。 これは、既定の構成にも当てはまります。
 
 最初の再接続の試行が失敗した場合、2回目の再接続試行も、既定の構成のように2秒間待機するのではなく、直ちに開始されます。
 
@@ -261,11 +249,11 @@ const connection = new signalR.HubConnectionBuilder()
 
 このカスタム動作は、既定の構成のように、別の30秒でもう一度再接続を試行するのではなく、3回目の再接続試行の失敗後に停止することで、既定の動作から再び逸脱します。
 
-タイミングと自動再接続試行回数をさらに細かく制御する場合は、 `withAutomaticReconnect` `IRetryPolicy`インターフェイスを実装するオブジェクトを受け取ります。このインターフェイスには`nextRetryDelayInMilliseconds`、という名前の1つのメソッドがあります。
+タイミングと自動再接続試行回数をさらに細かく制御する場合は、 `withAutomaticReconnect` インターフェイスを実装するオブジェクトを受け取り `IRetryPolicy` ます。このインターフェイスには、という名前の1つのメソッドがあり `nextRetryDelayInMilliseconds` ます。
 
-`nextRetryDelayInMilliseconds`型`RetryContext`の1つの引数を受け取ります。 に`RetryContext`は、、、 `previousRetryCount`および`elapsedMilliseconds`の`retryReason` 3 つの`number`プロパティ`number` `Error`があります。 最初の再接続を試行する`previousRetryCount`前`elapsedMilliseconds`に、との`retryReason`両方がゼロになり、は接続が失われる原因となったエラーになります。 再試行に失敗するたびに`previousRetryCount` 、が 1 `elapsedMilliseconds`ずつインクリメントされます。これまでの再接続にかかった時間 (ミリ秒単位) を`retryReason`反映して更新されます。このエラーは、最後の再接続の試行が失敗した原因となったエラーになります。
+`nextRetryDelayInMilliseconds`型の1つの引数を受け取り `RetryContext` ます。 には、、、およびの `RetryContext` 3 つのプロパティがあります。 `previousRetryCount` `elapsedMilliseconds` `retryReason` `number` `number` `Error` 最初の再接続を試行する前に、 `previousRetryCount` と `elapsedMilliseconds` の両方がゼロになり、は接続が失われる `retryReason` 原因となったエラーになります。 再試行に失敗するたびに、 `previousRetryCount` が1ずつインクリメントされ `elapsedMilliseconds` ます。これまでの再接続にかかった時間 (ミリ秒単位) を反映して更新され `retryReason` ます。このエラーは、最後の再接続の試行が失敗した原因となったエラーになります。
 
-`nextRetryDelayInMilliseconds`は、次回の再接続が試行される前に待機するミリ秒数を`null`表す数値`HubConnection`を返すか、再接続を停止する必要がある場合はを返します。
+`nextRetryDelayInMilliseconds`は、次回の再接続が試行される前に待機するミリ秒数を表す数値を返すか、再接続を停止する必要がある場合はを返し `null` `HubConnection` ます。
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -294,14 +282,14 @@ const connection = new signalR.HubConnectionBuilder()
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> 3.0 より前では、のSignalR JavaScript クライアントは自動的に再接続しません。 クライアントを手動で再接続するコードを記述する必要があります。
+> 3.0 より前では、の JavaScript クライアントは SignalR 自動的に再接続しません。 クライアントを手動で再接続するコードを記述する必要があります。
 
 ::: moniker-end
 
 次のコードは、標準的な手動再接続アプローチを示しています。
 
-1. 接続を開始する関数 (この場合`start`は関数) が作成されます。
-1. 接続の`start` `onclose`イベントハンドラーで関数を呼び出します。
+1. 接続を開始する関数 (この場合は `start` 関数) が作成されます。
+1. `start`接続のイベントハンドラーで関数を呼び出し `onclose` ます。
 
 [!code-javascript[Reconnect the JavaScript client](javascript-client/sample/wwwroot/js/chat.js?range=28-40)]
 
@@ -316,4 +304,4 @@ const connection = new signalR.HubConnectionBuilder()
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [クロスオリジン要求 (CORS)](xref:security/cors)
-* [Azure SignalRサービスのサーバーレスドキュメント](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [Azure SignalR サービスのサーバーレスドキュメント](/azure/azure-signalr/signalr-concept-serverless-development-config)

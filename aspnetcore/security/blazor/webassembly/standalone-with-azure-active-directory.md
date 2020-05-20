@@ -1,32 +1,15 @@
 ---
-title: BlazorAzure Active Directory を使用して ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 512fab439686e54b1d21576c7dad7b3cd320a8b1
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153589"
+title: ' Azure Active Directory ' author: description: monikerRange: ms. author: ms. Blazor カスタム: ms. date: no loc: という名前のスタンドアロンアプリをセキュリティで ASP.NET Core 保護します。
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory"></a>BlazorAzure Active Directory を使用して ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 Blazor認証に[AZURE ACTIVE DIRECTORY (AAD)](https://azure.microsoft.com/services/active-directory/)を使用する webassembly アプリを作成するには、次のようにします。
 
@@ -34,31 +17,38 @@ Blazor認証に[AZURE ACTIVE DIRECTORY (AAD)](https://azure.microsoft.com/servic
 
 Azure portal の**Azure Active Directory**  >  **アプリの登録**領域に AAD アプリを登録します。
 
-1. アプリの**名前**( ** Blazor クライアント AAD**など) を指定します。
+1. アプリの**名前**を指定します ( ** Blazor スタンドアロン AAD**など)。
 1. **サポートされているアカウントの種類**を選択します。 この組織の**ディレクトリにあるアカウント**は、このエクスペリエンスのためにのみ選択できます。
-1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、のリダイレクト uri を指定し `https://localhost:5001/authentication/login-callback` ます。
+1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定したままにし、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 IIS Express の場合、ランダムに生成されたポートは、アプリの [**デバッグ**] パネルの [プロパティ] にあります。
 1. [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。
 1. **[登録]** を選択します。
-
-[**認証**  >  **プラットフォーム構成**  >  **Web**:
-
-1. の**リダイレクト URI**が存在することを確認 `https://localhost:5001/authentication/login-callback` します。
-1. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。
-1. アプリの残りの既定値は、このエクスペリエンスで許容されます。
-1. **[保存]** を選択します。
 
 次の情報を記録します。
 
 * アプリケーション ID (クライアント ID) (など `11111111-1111-1111-1111-111111111111` )
 * ディレクトリ ID (テナント ID) (など `22222222-2222-2222-2222-222222222222` )
 
-次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
+[**認証**  >  **プラットフォーム構成**  >  **Web**:
+
+1. の**リダイレクト URI**が存在することを確認 `https://localhost:{PORT}/authentication/login-callback` します。
+1. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。
+1. アプリの残りの既定値は、このエクスペリエンスで許容されます。
+1. **[保存]** を選択します。
+
+アプリを作成します。 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
 
 ```dotnetcli
 dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "{TENANT ID}"
 ```
 
 プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
+
+アプリを作成すると、次のことができるようになります。
+
+* AAD ユーザーアカウントを使用してアプリにログインします。
+* Microsoft Api のアクセストークンを要求します。 詳細については、次を参照してください。
+  * [アクセストークンスコープ](#access-token-scopes)
+  * [クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する。
 
 ## <a name="authentication-package"></a>認証パッケージ
 
@@ -68,16 +58,14 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "{TENA
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
-
-`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
 パッケージによって、 `Microsoft.Authentication.WebAssembly.Msal` パッケージが推移的 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` にアプリに追加されます。
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddMsalAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.Authentication.WebAssembly.Msal` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なすべてのサービスを設定 Identity します。
+ユーザー認証のサポートは、 `AddMsalAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.Authentication.WebAssembly.Msal` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なサービスを設定し Identity ます。
 
 *Program.cs*:
 
@@ -88,7 +76,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリの構成に必要な値は、アプリを登録するときに Microsoft アカウントの構成から取得できます。
+メソッドは、 `AddMsalAuthentication` コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。
 
 構成は*wwwroot/appsettings*ファイルによって提供されます。
 
@@ -96,7 +84,8 @@ builder.Services.AddMsalAuthentication(options =>
 {
   "AzureAd": {
     "Authority": "https://login.microsoftonline.com/{TENANT ID}",
-    "ClientId": "{CLIENT ID}"
+    "ClientId": "{CLIENT ID}",
+    "ValidateAuthority": true
   }
 }
 ```
@@ -107,7 +96,8 @@ builder.Services.AddMsalAuthentication(options =>
 {
   "AzureAd": {
     "Authority": "https://login.microsoftonline.com/e86c78e2-...-918e0565a45e",
-    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd"
+    "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
+    "ValidateAuthority": true
   }
 }
 ```
@@ -124,18 +114,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。 たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> スキームとホストなしでスコープ URI を指定します。
->
-> ```csharp
-> options.ProviderOptions.DefaultAccessTokenScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 

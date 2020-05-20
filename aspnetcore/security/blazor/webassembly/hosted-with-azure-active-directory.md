@@ -1,32 +1,15 @@
 ---
-title: BlazorAzure Active Directory を使用して ASP.NET Core webasのホスト型アプリをセキュリティで保護する
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 6ff95f0c5c925cbafef2b997a6cb23aeb15ff1aa
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153960"
+title: ' Blazor Azure Active Directory ' author: description: monikerRange: ms. author: ms. カスタム: ms. date: no loc: で、アプリケーション ASP.NET Core をセキュリティで保護します。
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>BlazorAzure Active Directory を使用して ASP.NET Core webasのホスト型アプリをセキュリティで保護する
 
 [Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 この記事では、認証に[Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/)を使用する、 [ Blazor アプリケーション](xref:blazor/hosting-models#blazor-webassembly)を作成する方法について説明します。
 
@@ -38,16 +21,22 @@ ms.locfileid: "83153960"
 
 ### <a name="register-a-server-api-app"></a>サーバー API アプリを登録する
 
-「[クイックスタート: アプリケーションを Microsoft identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」およびそれ以降の Azure AAD のトピックのガイダンスに従って、Azure portal の**Azure Active Directory**アプリの登録領域に*サーバー API アプリ*の AAD アプリを登録し  >  **App registrations**ます。
+*サーバー API アプリ*の AAD アプリを登録するには、 [「クイックスタート: アプリケーションを Microsoft Identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」および以降の Azure AAD のトピックのガイダンスに従ってください。
 
-1. **[新規登録]** を選択します。
+1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
 1. アプリの**名前**を指定します (たとえば、 ** Blazor Server AAD**)。
 1. **サポートされているアカウントの種類**を選択します。 このエクスペリエンスのために、[**この組織ディレクトリのみ**(シングルテナント)] でアカウントを選択することもできます。
 1. このシナリオでは、*サーバー API アプリ*に**リダイレクト uri**は必要ないため、ドロップダウンは [ **Web** ] に設定し、リダイレクト uri は入力しないでください。
 1. [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。
 1. **[登録]** を選択します。
 
-[ **API のアクセス許可**] で、 **Microsoft Graph**ユーザーを削除  >  **します。** アプリはサインインまたはプロファイルへのアクセスを必要としないため、読み取りアクセス許可を削除します。
+次の情報を記録します。
+
+* *サーバー API アプリ*アプリケーション ID (クライアント ID) (など `11111111-1111-1111-1111-111111111111` )
+* ディレクトリ ID (テナント ID) (など `222222222-2222-2222-2222-222222222222` )
+* AAD テナントドメイン (たとえば、 `contoso.onmicrosoft.com` ) ドメインは、 &ndash; 登録済みアプリの Azure portal の [**ブランド**化] ブレードで、**発行元ドメイン**として使用できます。
+
+[ **API のアクセス許可**] で、 **Microsoft Graph**ユーザーを削除  >  **します。** アプリはサインインまたはユーザープロファイルのアクセスを必要としないため、読み取りアクセス許可を削除します。
 
 で**API を公開**します。
 
@@ -61,26 +50,25 @@ ms.locfileid: "83153960"
 
 次の情報を記録します。
 
-* *サーバー API アプリ*アプリケーション ID (クライアント ID) (など `11111111-1111-1111-1111-111111111111` )
 * アプリ ID URI (たとえば、、 `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111` 、 `api://11111111-1111-1111-1111-111111111111` または指定したカスタム値)
-* ディレクトリ ID (テナント ID) (など `222222222-2222-2222-2222-222222222222` )
-* AAD テナントドメイン (例 `contoso.onmicrosoft.com` )
 * 既定のスコープ (例、 `API.Access` )
 
 ### <a name="register-a-client-app"></a>クライアント アプリを登録する
 
-[「クイックスタート: アプリケーションを Microsoft identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」およびそれ以降の Azure AAD のトピックのガイダンスに従って、Azure portal の**Azure Active Directory**アプリの登録領域に*クライアントアプリ*の AAD アプリを登録し  >  **App registrations**ます。
+[「クイックスタート: アプリケーションを Microsoft identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」およびそれ以降の Azure AAD のトピックのガイダンスに従って、*クライアントアプリ*に AAD アプリを登録します。
 
-1. **[新規登録]** を選択します。
+1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
 1. アプリの**名前**( ** Blazor クライアント AAD**など) を指定します。
 1. **サポートされているアカウントの種類**を選択します。 このエクスペリエンスのために、[**この組織ディレクトリのみ**(シングルテナント)] でアカウントを選択することもできます。
-1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定し、のリダイレクト uri を指定し `https://localhost:5001/authentication/login-callback` ます。
+1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定したままにし、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 IIS Express の場合、ランダムに生成されたポートは、サーバーアプリの [**デバッグ**] パネルの [プロパティ] にあります。
 1. [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。
 1. **[登録]** を選択します。
 
+*クライアントアプリ*アプリケーション Id (クライアント id) を記録します (たとえば、 `33333333-3333-3333-3333-333333333333` )。
+
 [**認証**  >  **プラットフォーム構成**  >  **Web**:
 
-1. の**リダイレクト URI**が存在することを確認 `https://localhost:5001/authentication/login-callback` します。
+1. の**リダイレクト URI**が存在することを確認 `https://localhost:{PORT}/authentication/login-callback` します。
 1. **暗黙の許可**では、**アクセストークン**と**ID トークン**のチェックボックスをオンにします。
 1. アプリの残りの既定値は、このエクスペリエンスで許容されます。
 1. **[保存]** を選択します。
@@ -92,17 +80,15 @@ ms.locfileid: "83153960"
 1. [**名前**] 列から*サーバー API アプリ*を選択します ( ** Blazor サーバー AAD**など)。
 1. **API**の一覧を開きます。
 1. API へのアクセスを有効にします (たとえば、 `API.Access` )。
-1. **[アクセス許可の追加]** を選択します.
+1. **[アクセス許可の追加]** を選択します。
 1. [ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。 **[はい]** をクリックして操作を確定します。
-
-*クライアントアプリ*アプリケーション Id (クライアント id) を記録します (たとえば、 `33333333-3333-3333-3333-333333333333` )。
 
 ### <a name="create-the-app"></a>アプリを作成する
 
 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンドシェルでコマンドを実行します。
 
 ```dotnetcli
-dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{DOMAIN}" -ho --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho --tenant-id "{TENANT ID}"
 ```
 
 プロジェクトフォルダーが存在しない場合に作成する出力場所を指定するには、コマンドにパス (など) を指定して出力オプションを含め `-o BlazorSample` ます。 フォルダー名もプロジェクトの名前の一部になります。
@@ -120,7 +106,7 @@ ASP.NET Core Web Api の呼び出しを認証および承認するためのサ�
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
 
 ### <a name="authentication-service-support"></a>認証サービスのサポート
@@ -149,6 +135,10 @@ app.UseAuthorization();
 要求の種類から値を受け取るようにアプリを構成するには、 `name` での[Tokenvalidationparameters. NameClaimType](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType)を構成します。 <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> `Startup.ConfigureServices`
 
 ```csharp
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+...
+
 services.Configure<JwtBearerOptions>(
     AzureADDefaults.JwtBearerAuthenticationScheme, options =>
     {
@@ -217,10 +207,8 @@ public class WeatherForecastController : ControllerBase
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
-
-`{VERSION}`前のパッケージ参照のを、この記事に示されているパッケージのバージョンに置き換え `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> ます。
 
 パッケージによって、 `Microsoft.Authentication.WebAssembly.Msal` パッケージが推移的 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` にアプリに追加されます。
 
@@ -239,7 +227,7 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 
-ユーザー認証のサポートは、 `AddMsalAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.Authentication.WebAssembly.Msal` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なすべてのサービスを設定 Identity します。
+ユーザー認証のサポートは、 `AddMsalAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.Authentication.WebAssembly.Msal` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なサービスを設定し Identity ます。
 
 *Program.cs*:
 
@@ -294,18 +282,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal がスコープ URI を提供し、**アプリ**が API から401の承認されて*い*ない応答を受信したときにハンドルされない例外をスローした場合は、スキームとホストを含まないスコープ uri を使用してみてください。 たとえば、Azure portal は、次のいずれかのスコープ URI 形式を提供する場合があります。
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> スキームとホストなしでスコープ URI を指定します。
->
-> ```csharp
-> options.ProviderOptions.DefaultAccessTokenScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 詳細については、*追加のシナリオ*に関する記事の次のセクションを参照してください。
 
@@ -343,7 +320,10 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="run-the-app"></a>アプリを実行する
 
-サーバープロジェクトからアプリを実行します。 Visual Studio を使用する場合は、**ソリューションエクスプローラー**でサーバープロジェクトを選択し、ツールバーの [**実行**] ボタンを選択するか、[**デバッグ**] メニューからアプリを起動します。
+サーバープロジェクトからアプリを実行します。 Visual Studio を使用する場合は、次のいずれかの方法で行います。
+
+* ツールバーの [**スタートアッププロジェクト**] ドロップダウンリストを*サーバー API アプリ*に設定し、[**実行**] ボタンを選択します。
+* **ソリューションエクスプローラー**でサーバープロジェクトを選択し、ツールバーの [**実行**] ボタンを選択するか、[**デバッグ**] メニューからアプリを起動します。
 
 <!-- HOLD
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]

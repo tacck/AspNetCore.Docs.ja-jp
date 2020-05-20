@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor の概要
-author: guardrex
-description: ASP.NET Core アプリ内に .NET を使った対話型のクライアント側 Web UI を構築する方法である、ASP.NET Core Blazor について調べます。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc, seoapril2019
-ms.date: 03/25/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/index
-ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771951"
+title:'ASP.NET Core の概要 Blazor' 作成者: 説明: ’ASP.NET Core アプリ内に .NET を使った対話型のクライアント側 Web UI を構築する方法である、ASP.NET Core Blazor について調べます。’
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor の概要
 
@@ -110,8 +98,6 @@ Welcome to your new app.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Blazor WebAssembly は、.NET を使って対話型のクライアント側 Web アプリを構築するための、単一ページ アプリのフレームワークです。 Blazor WebAssembly は、プラグインやコードのトランスパイルを伴わずにオープン Web の標準を使用して、モバイル ブラウザーなど、最新のすべての Web ブラウザー上で機能します。
 
 [WebAssembly](https://webassembly.org) (略称 *wasm*) によって、Web ブラウザー内で .NET コードを実行することが可能になります。 WebAssembly は、ダウンロードを高速化し実行速度を最大限に高めるために最適化されたコンパクトなバイトコード形式です。 WebAssembly はオープンな Web 標準であり、プラグインを使わずに Web ブラウザー内でサポートされます。
@@ -120,7 +106,7 @@ WebAssembly コードを使用すると、JavaScript を介してブラウザー
 
 ![Blazor WebAssembly では WebAssembly を使用してブラウザーで .NET コードが実行されます。](index/_static/blazor-webassembly.png)
 
-Blazor WebAssembly アプリをビルドしてブラウザーで実行する場合: 
+Blazor WebAssembly アプリをビルドしてブラウザーで実行する場合:
 
 * C# コード ファイルと Razor ファイルが .NET アセンブリにコンパイルされます。
 * そのアセンブリと .NET ランタイムがブラウザーにダウンロードされます。

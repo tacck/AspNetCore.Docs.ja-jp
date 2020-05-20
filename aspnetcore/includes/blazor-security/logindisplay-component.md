@@ -1,4 +1,4 @@
-コンポーネント (*shared/Logindisplay*) は`MainLayout` 、コンポーネント (*shared/mainlayout*) にレンダリングされ、次の動作を管理します。 `LoginDisplay`
+コンポーネント `LoginDisplay` (*Shared/logindisplay*) は、 `MainLayout` コンポーネント (*shared/mainlayout*) にレンダリングされ、次の動作を管理します。
 
 * 認証されたユーザーの場合:
   * 現在のユーザー名を表示します。
@@ -14,7 +14,7 @@
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
             Log out
         </button>
     </Authorized>
@@ -24,7 +24,7 @@
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginLogout(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
