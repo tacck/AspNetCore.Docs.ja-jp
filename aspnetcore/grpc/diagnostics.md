@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 15f68ced99bdaea9ce53db801a4b2a3bfef2f8dd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 33b2ee29830cd3012ff791c949c3a7c23a2e98c7
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774679"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444348"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET での gRPC のログ記録と診断
 
@@ -83,7 +83,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 #### <a name="as-a-console-app"></a>コンソール アプリとして
 
-コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console-provider)を既定で有効にする必要があります。 gRPC ログはコンソールに表示されるようになります。
+コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。 gRPC ログはコンソールに表示されるようになります。
 
 #### <a name="other-environments"></a>その他の環境
 

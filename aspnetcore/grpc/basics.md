@@ -1,27 +1,17 @@
 ---
-title: C# を使用した gRPC サービス
-author: juntaoluo
-description: C# を使用した gRPC サービスを作成する際の基本的な概念について説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: johluo
-ms.date: 07/03/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/basics
-ms.openlocfilehash: a55ed90e7c854d1475b1f5d95347505fad0813ab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774757"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="grpc-services-with-c"></a>C\# を使用した gRPC サービス
 
 このドキュメントでは、C# で [gRPC](https://grpc.io/docs/guides/) アプリを作成するために必要な概念を説明します。 ここで取り上げるトピックは、[C-core](https://grpc.io/blog/grpc-stacks)ベースと ASP.NET Core ベースの両方の gRPC アプリに適用されます。
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="proto-file"></a>proto ファイル
 
@@ -80,8 +70,6 @@ Protobuf ファイルの構文の詳細については、[公式ドキュメン�
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 
 同様に、クライアントプロジェクトでは属性を `Client` に設定します。
-
-[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

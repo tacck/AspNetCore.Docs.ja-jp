@@ -4,7 +4,7 @@ title: ' Blazor Azure Active Directory B2C ' author: description: monikerRange: 
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C を使用して ASP.NET Core webasのホスト型アプリをセキュリティで保護する
@@ -63,7 +63,7 @@ title: ' Blazor Azure Active Directory B2C ' author: description: monikerRange: 
 1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
 1. アプリの**名前**( ** Blazor クライアント AAD B2C**など) を指定します。
 1. **サポートされているアカウントの種類**については、[マルチテナント] オプションを選択します。**組織ディレクトリ内のアカウントまたは任意の id プロバイダーを選択します。Azure AD B2C を使用してユーザーを認証します。**
-1. [**リダイレクト uri** ] ドロップダウンを [ **Web**] に設定したままにし、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 IIS Express の場合、ランダムに生成されたポートは、サーバーアプリの [**デバッグ**] パネルの [プロパティ] にあります。
+1. [**リダイレクト uri** ] ドロップダウンを [ **Web** ] に設定し、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、サーバーアプリの [**デバッグ**] パネルの [プロパティ] にあります。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 「[アプリを作成](#create-the-app)する」セクションにコメントが表示され、ユーザーにリダイレクト URI の更新を IIS Express ように通知します。
 1. **アクセス許可**によって  >  **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。
 1. **[登録]** を選択します。
 
@@ -108,6 +108,13 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 >
 > さらに、ホストされているテンプレートによって設定されたスコープによって、 Blazor アプリ ID URI ホストが繰り返される場合があります。 コレクションに対して構成されているスコープ `DefaultAccessTokenScopes` が、 `Program.Main` *クライアントアプリ*の (*Program.cs*) で正しいことを確認します。
 
+> [!NOTE]
+> Azure portal では、*クライアントアプリの***認証**  >  **プラットフォーム構成**  >  **Web**  >  **リダイレクト URI**は、kestrel サーバーで既定の設定で実行されるアプリのポート5001用に構成されています。
+>
+> *クライアントアプリ*がランダム IIS Express ポートで実行されている場合、アプリケーションのポートは、[**デバッグ**] パネルの*サーバーアプリの*[プロパティ] にあります。
+>
+> ポートが*クライアントアプリの*既知のポートで事前に構成されていない場合は、Azure portal で*クライアントアプリの*登録に戻り、正しいポートでリダイレクト URI を更新します。
+
 ## <a name="server-app-configuration"></a>サーバーアプリの構成
 
 *このセクションは、ソリューションの**サーバー**アプリに関連しています。*
@@ -118,7 +125,7 @@ ASP.NET Core Web Api の呼び出しを認証および承認するためのサ�
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
-  Version="3.2.0" />
+  Version="3.1.4" />
 ```
 
 ### <a name="authentication-service-support"></a>認証サービスのサポート

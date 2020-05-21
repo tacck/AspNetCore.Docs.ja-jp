@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: e4fcd86b6e6a84d9e34a83688f9fb80c6907e5f3
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976702"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438916"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
@@ -50,7 +50,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-[コンテンツをプリレンダリングする ](xref:blazor/hosting-model-configuration#render-mode)Blazor サーバー アプリは、`OnInitializedAsync` を " **_2 回_** " 呼び出します。
+[コンテンツをプリレンダリングする ](xref:blazor/hosting-model-configuration#render-mode)Blazor サーバー アプリは、`OnInitializedAsync` を "**_2 回_**" 呼び出します。
 
 * コンポーネントが最初にページの一部として静的にレンダリングされるときに 1 回。
 * ブラウザーがサーバーへの接続を確立するときに 2 回目。
@@ -164,6 +164,8 @@ protected override bool ShouldRender()
 `ShouldRender` は、コンポーネントがレンダリングされるたびに呼び出されます。
 
 `ShouldRender` がオーバーライドされる場合でも、コンポーネントは常に最初にレンダリングされます。
+
+詳細については、「<xref:performance/blazor/webassembly-best-practices#avoid-unnecessary-component-renders>」を参照してください。
 
 ## <a name="state-changes"></a>状態変更
 

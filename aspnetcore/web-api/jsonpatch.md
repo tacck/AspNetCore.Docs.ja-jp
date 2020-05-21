@@ -4,7 +4,7 @@
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ---
 
@@ -97,7 +97,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` となります。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、「 `"/address/zipCode"` 」のように入力します。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 `add`配列の末尾には、 `-` インデックス番号ではなくハイフン () を使用し `/addresses/-` ます。
 
@@ -105,14 +105,14 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|Operation  | メモ |
+|Operation  | Notes |
 |---
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -120,7 +120,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -128,7 +128,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ------|---
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -136,7 +136,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -144,7 +144,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -152,7 +152,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -160,7 +160,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -168,7 +168,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -176,7 +176,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -184,7 +184,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -192,7 +192,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -200,7 +200,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -208,7 +208,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -216,7 +216,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -224,7 +224,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -232,7 +232,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -240,7 +240,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ----------------| |`add`     |プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します |。|`remove`  |プロパティまたは配列の要素を削除します。 | |`replace` |の `remove` 後に同じ場所を指定した場合と同じ `add` です。 | |`move`    |Source から `remove` の値を使用して、ソースから宛先への変換元と同じ `add` です。 | |`copy`    |`add`Source の値を使用して destination と同じです。 | |`test`    |値が `path` = 指定されている場合 `value` 、成功の状態コードを返します |。
 
@@ -439,7 +439,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` となります。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、「 `"/address/zipCode"` 」のように入力します。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列の末尾への `add` では、インデックス番号ではなく、`/addresses/-` のようにハイフン (-) を使用します。
 
@@ -447,14 +447,14 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|Operation  | メモ |
+|Operation  | Notes |
 |---
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -462,7 +462,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -470,7 +470,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ------|---
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -478,7 +478,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -486,7 +486,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -494,7 +494,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -502,7 +502,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -510,7 +510,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -518,7 +518,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -526,7 +526,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -534,7 +534,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -542,7 +542,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -550,7 +550,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -558,7 +558,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -566,7 +566,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -574,7 +574,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 -
 タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
@@ -582,7 +582,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ----------------| |`add`     |プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します |。|`remove`  |プロパティまたは配列の要素を削除します。 | |`replace` |の `remove` 後に同じ場所を指定した場合と同じ `add` です。 | |`move`    |Source から `remove` の値を使用して、ソースから宛先への変換元と同じ `add` です。 | |`copy`    |`add`Source の値を使用して destination と同じです。 | |`test`    |値が `path` = 指定されている場合 `value` 、成功の状態コードを返します |。
 
