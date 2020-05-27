@@ -4,7 +4,7 @@ title: ' Blazor 認証ライブラリを使用して ASP.NET Core webassembly �
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
@@ -13,7 +13,7 @@ title: ' Blazor 認証ライブラリを使用して ASP.NET Core webassembly �
 
 *Azure Active Directory (AAD) と Azure Active Directory B2C (AAD B2C) については、このトピックのガイダンスに従ってください。この目次ノードの AAD と AAD B2C のトピックを参照してください。*
 
-Blazorライブラリを使用する webassembly アプリを作成するには `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 、コマンドシェルで次のコマンドを実行します。
+Blazor [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)ライブラリを使用する、webassembly スタンドアロンアプリを作成するには、コマンドシェルで次のコマンドを実行します。
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
@@ -25,7 +25,7 @@ Visual Studio で、 [ Blazor webassembly を作成](xref:blazor/get-started)し
 
 ## <a name="authentication-package"></a>認証パッケージ
 
-個々のユーザーアカウントを使用するようにアプリを作成すると、アプリはアプリのプロジェクトファイルでパッケージのパッケージ参照を自動的に受け取り `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ます。 このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
+個々のユーザーアカウントを使用するようにアプリを作成すると、アプリは、アプリのプロジェクトファイル内の[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)パッケージのパッケージ参照を自動的に受け取ります。 このパッケージには、アプリがユーザーを認証し、保護された Api を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
 
 アプリに認証を追加する場合は、アプリのプロジェクトファイルにパッケージを手動で追加します。
 
@@ -37,7 +37,7 @@ Visual Studio で、 [ Blazor webassembly を作成](xref:blazor/get-started)し
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
-ユーザー認証のサポートは、 `AddOidcAuthentication` パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録され `Microsoft.AspNetCore.Components.WebAssembly.Authentication` ます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なサービスを設定し Identity ます。
+ユーザー認証のサポートは、 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)パッケージによって提供される拡張メソッドを使用して、サービスコンテナーに登録されます。 このメソッドは、アプリがプロバイダー (IP) と対話するために必要なサービスを設定し Identity ます。
 
 *Program.cs*:
 
@@ -59,11 +59,11 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-スタンドアロンアプリの認証サポートは、Open ID Connect (OIDC) を使用して提供されます。 メソッドは、 `AddOidcAuthentication` OIDC を使用してアプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。 アプリの構成に必要な値は、OIDC に準拠している IP から取得できます。 アプリを登録するときに値を取得します。これは通常、オンラインポータルで実行されます。
+スタンドアロンアプリの認証サポートは、Open ID Connect (OIDC) を使用して提供されます。 メソッドは、 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> OIDC を使用してアプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。 アプリの構成に必要な値は、OIDC に準拠している IP から取得できます。 アプリを登録するときに値を取得します。これは通常、オンラインポータルで実行されます。
 
 ## <a name="access-token-scopes"></a>アクセストークンスコープ
 
-BlazorWebassembly テンプレートでは、セキュリティで保護された API のアクセストークンを要求するようにアプリが自動的に構成されるわけではありません。 サインインフローの一部としてアクセストークンをプロビジョニングするには、の既定のトークンスコープにスコープを追加し `OidcProviderOptions` ます。
+BlazorWebassembly テンプレートでは、セキュリティで保護された API のアクセストークンを要求するようにアプリが自動的に構成されるわけではありません。 サインインフローの一部としてアクセストークンをプロビジョニングするには、の既定のトークンスコープにスコープを追加し <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> ます。
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>

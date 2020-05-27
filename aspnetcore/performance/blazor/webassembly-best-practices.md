@@ -1,24 +1,12 @@
 ---
-title: Blazorパフォーマンスのベストプラクティスを ASP.NET Core
-author: pranavkm
-description: ASP.NET Core アプリのパフォーマンスを向上させ Blazor 、一般的なパフォーマンスの問題を回避するためのヒントです。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/blazor/webassembly-best-practices
-ms.openlocfilehash: 9e9b166cb9ce9870a8ff275b72bb12f04b84751b
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439423"
+title: ' ASP.NET Core Blazor webassembly パフォーマンスのベストプラクティス ' 作成者: 説明: ' ASP.NET Core webasapp のパフォーマンスを向上させ Blazor 、一般的なパフォーマンスの問題を回避するためのヒント。 "
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Blazorパフォーマンスのベストプラクティスを ASP.NET Core
 
@@ -28,9 +16,9 @@ ms.locfileid: "83439423"
 
 ## <a name="avoid-unnecessary-component-renders"></a>不要なコンポーネントのレンダリングを回避する
 
-Blazorの比較アルゴリズムは、コンポーネントが変更されていないことをアルゴリズムが認識した場合に、コンポーネントの更新を回避します。 [Componentbase をオーバーライドします。](xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A)コンポーネントのレンダリングをきめ細かく制御するためにレンダリングします。
+Blazorの比較アルゴリズムは、コンポーネントが変更されていないことをアルゴリズムが認識した場合に、コンポーネントの更新を回避します。 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A?displayProperty=nameWithType>コンポーネントレンダリングをきめ細かく制御するためにオーバーライドします。
 
-初期レンダリング後に変更されることがない UI のみのコンポーネントを作成する場合は、を次のように構成し `ShouldRender` `false` ます。
+初期レンダリング後に変更されることがない UI のみのコンポーネントを作成する場合は、を次のように構成し <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> `false` ます。
 
 ```razor
 @code {
@@ -42,9 +30,9 @@ Blazorの比較アルゴリズムは、コンポーネントが変更されて�
 
 次に例を示します。
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>はオーバーライドされ、 `shouldRender` 最初はコンポーネントが読み込まれるときのフィールドの値に設定され `false` ます。
-* このボタンが選択されている場合、 `shouldRender` はに設定され `true` ます。これにより、コンポーネントは、更新されたに強制的にレンダリングされ `currentCount` ます。
-* 再リリースの直後に、 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> の値を `shouldRender` に戻して、 `false` 次回ボタンが選択されるまで再実行が行われないようにします。
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>はオーバーライドされ、 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> 最初はコンポーネントが読み込まれるときのフィールドの値に設定され `false` ます。
+* このボタンが選択されている場合、 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> はに設定され `true` ます。これにより、コンポーネントは、更新されたに強制的にレンダリングされ `currentCount` ます。
+* 再リリースの直後に、 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> の値を <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> に戻して、 `false` 次回ボタンが選択されるまで再実行が行われないようにします。
 
 ```razor
 <p>Current count: @currentCount</p>

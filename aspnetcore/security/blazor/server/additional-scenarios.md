@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ
-author: guardrex
-description: Blazor追加のセキュリティシナリオ用にサーバーを構成する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/19/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444075"
+タイトル: ' ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ ' author: 説明: ' Blazor 追加のセキュリティシナリオ用にサーバーを構成する方法を説明します。 '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor サーバーの追加のセキュリティシナリオ
 
@@ -171,7 +159,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 }
 ```
 
-証明機関へのトラッキングがアプリの OIDC プロバイダー (AAD 以外のプロバイダーを含む) に適していない場合は、プロパティを直接設定し `Authority` ます。 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>またはアプリ設定ファイルのプロパティを、キーを使用して設定し `Authority` ます。
+証明機関へのトラッキングがアプリの OIDC プロバイダー (AAD 以外のプロバイダーを含む) に適していない場合は、プロパティを直接設定し <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> ます。 <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>またはアプリ設定ファイルのプロパティを、キーを使用して設定し <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> ます。
 
 ### <a name="code-changes"></a>コードの変更
 
