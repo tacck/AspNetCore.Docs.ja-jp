@@ -1,22 +1,11 @@
 ---
-title: ASP.NET Core MVC の概要
-author: ardalis
-description: ASP.NET Core MVC が、モデル ビュー コントローラー デザイン パターンを使用して、Web アプリと API をビルドするための豊富なフレームワークであることについて説明します。
-ms.author: riande
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/overview
-ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775467"
+タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -43,7 +32,7 @@ MVC アプリケーションのモデルは、アプリケーションの状態�
 
 ### <a name="view-responsibilities"></a>ビューの責任
 
-ビューは、ユーザー インターフェイスを介してコンテンツを表示する役割があります。 これらは、 [ Razorビューエンジン](#razor-view-engine)を使用して、.net コードを HTML マークアップに埋め込みます。 ビュー内のロジックは最小限にする必要があり、そこに含まれるロジックはすべて、コンテンツの表示に関連する必要があります。 複雑なモデルからデータを表示するために、ビュー ファイルで多くのロジックを実行する必要がある場合、ビューを簡略化するために、[ビューのコンポーネント](views/view-components.md)、ViewModel、テンプレートの表示を使用することを検討してください。
+ビューは、ユーザー インターフェイスを介してコンテンツを表示する役割があります。 これらは、 [ Razor ビューエンジン](#razor-view-engine)を使用して、.NET コードを HTML マークアップに埋め込みます。 ビュー内のロジックは最小限にする必要があり、そこに含まれるロジックはすべて、コンテンツの表示に関連する必要があります。 複雑なモデルからデータを表示するために、ビュー ファイルで多くのロジックを実行する必要がある場合、ビューを簡略化するために、[ビューのコンポーネント](views/view-components.md)、ViewModel、テンプレートの表示を使用することを検討してください。
 
 ### <a name="controller-responsibilities"></a>コントローラーの責任
 
@@ -61,7 +50,7 @@ ASP.NET Core MVC フレームワークは、ASP.NET Core と共に使用する�
 
 ASP.NET Core MVC では、明確な関心の分離を可能にする動的な Web サイトをビルドするためのパターン ベースの方法を提供します。 ここでは、マークアップのフル コントロールが提供され、TDD 向けの開発をサポートし、最新の Web 標準を使用することができます。
 
-## <a name="features"></a>特徴
+## <a name="features"></a>機能
 
 ASP.NET Core MVC には、以下が含まれます。
 
@@ -194,7 +183,7 @@ Web サイトのビルドに最適なプラットフォームというだけで�
 
 ### <a name="razor-view-engine"></a>Razorビューエンジン
 
-[MVC ビュー ASP.NET Core](views/overview.md)ビューを表示するために[ Razorビューエンジン](views/razor.md)を使用します。 Razorは、埋め込み C# コードを使用してビューを定義するための、コンパクトで表現力豊かな滑らかなテンプレートマークアップ言語です。 Razorは、サーバー上の web コンテンツを動的に生成するために使用されます。 サーバー コードを、クライアント側のコンテンツとコードにクリーンに混在させることができます。
+[MVC ビュー ASP.NET Core](views/overview.md)ビューを表示するために[ Razor ビューエンジン](views/razor.md)を使用します。 Razorは、埋め込み C# コードを使用してビューを定義するための、コンパクトで表現力豊かな滑らかなテンプレートマークアップ言語です。 Razorは、サーバー上の web コンテンツを動的に生成するために使用されます。 サーバー コードを、クライアント側のコンテンツとコードにクリーンに混在させることができます。
 
 ```cshtml
 <ul>
@@ -224,7 +213,7 @@ RazorMVC のビューは、モデルに基づいて厳密に型指定できま�
 
 ### <a name="tag-helpers"></a>タグ ヘルパー
 
-[タグヘルパー](views/tag-helpers/intro.md)を使用すると、サーバー側コードがファイル内のRazor HTML 要素の作成とレンダリングに参加できるようになります。 タグ ヘルパーを使って、カスタム タグ (例: `<environment>`) を定義したり、既存のタグ (例: `<label>`) の動作を変更したりすることができます。 タグ ヘルパーは、要素名とその属性に基づいて特定の要素をバインドします。 タグ ヘルパーでは、HTML の編集操作を保持しながら、サーバー側のレンダリングの利点を提供します。
+[タグヘルパー](views/tag-helpers/intro.md)を使用すると、サーバー側コードがファイル内の HTML 要素の作成とレンダリングに参加できるようになり Razor ます。 タグ ヘルパーを使って、カスタム タグ (例: `<environment>`) を定義したり、既存のタグ (例: `<label>`) の動作を変更したりすることができます。 タグ ヘルパーは、要素名とその属性に基づいて特定の要素をバインドします。 タグ ヘルパーでは、HTML の編集操作を保持しながら、サーバー側のレンダリングの利点を提供します。
 
 フォームやリンクの作成、資産の読み込みなど、一般的なタスクの組み込みのタグ ヘルパーは数多くあります。パブリック GitHub リポジトリで NuGet パッケージとして使用することもできます。 タグ ヘルパーは C# で作成され、要素名、属性名、または親タグに基づく HTML 要素をターゲットとします。 たとえば、組み込みの LinkTagHelper を使用して、`AccountsController` の `Login` へのリンクを作成することができます。
 
@@ -249,7 +238,7 @@ RazorMVC のビューは、モデルに基づいて厳密に型指定できま�
 </environment>
 ```
 
-タグヘルパーは、HTML とRazorマークアップを作成するための、html に適した開発エクスペリエンスと豊富な IntelliSense 環境を提供します。 組み込みのタグ ヘルパーのほとんどは既存の HTML 要素をターゲットとし、要素に対してサーバー側の属性を提供します。
+タグヘルパーは、HTML とマークアップを作成するための、HTML に適した開発エクスペリエンスと豊富な IntelliSense 環境を提供し Razor ます。 組み込みのタグ ヘルパーのほとんどは既存の HTML 要素をターゲットとし、要素に対してサーバー側の属性を提供します。
 
 ### <a name="view-components"></a>ビュー コンポーネント
 
@@ -263,5 +252,5 @@ RazorMVC のビューは、モデルに基づいて厳密に型指定できま�
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC 用の Fluent テスト ライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; MVC と Web API アプリをテストするための fluent インターフェイスを提供する厳密に型指定された単体テスト ライブラリ。 ("*Microsoft では保守管理もサポートも行っていません。*")
+* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。*")
 * <xref:blazor/integrate-components>

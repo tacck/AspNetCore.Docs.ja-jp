@@ -92,7 +92,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 > ルーティングは、とミドルウェアを使用して構成され <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ます。 コントローラーを使用するには:
 >
 > * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` [属性ルーティング](#ar)コントローラーをマップするには、内でを呼び出します。
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>または <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> を呼び出して、[従来のルーティング](#cr)コントローラーをマップします。
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>または <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> を呼び出して、[従来のルーティング](#cr)コントローラーと[属性ルーティング](#ar)コントローラーの両方をマップします。
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -257,7 +257,7 @@ REST Api では、属性ルーティングを使用して、アプリの機能�
 
 属性ルーティングでは、属性のセットを使ってアクションをルート テンプレートに直接マップします。 次の `StartUp.Configure` コードは、REST API の一般的なコードであり、次のサンプルで使用します。
 
-[!code-csharp[](routing/samples/3.x/main/StartupApi.cs?name=snippet)]
+[!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
 前のコードで <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> は、 `UseEndpoints` 属性ルーティングコントローラーをマップするために、内でが呼び出されます。
 
@@ -272,10 +272,7 @@ REST Api では、属性ルーティングを使用して、アプリの機能�
 
 この例では、属性ルーティングと[従来のルーティング](#cr)の主なプログラミングの違いについて取り上げます。 属性ルーティングでは、ルートを指定するためにより多くの入力が必要です。 従来の既定のルートは、ルートをより簡潔に処理します。 ただし、属性ルーティングでは、各[アクション](#action)に適用されるルートテンプレートを正確に制御する必要があります。
 
-次のコードの内容は以下のとおりです。
-
-* コントローラー名とアクション名は、アクションが一致する役割を果たし**ません**。
-* 前の例と同じ Url に一致します。
+属性のルーティングでは、[トークンの置換](#routing-token-replacement-templates-ref-label)が使用されていない限り、アクションが一致する部分はコントローラーとアクションの名前によって決まります。 次の例は、前の例と同じ Url に一致します。
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemoController.cs?name=snippet)]
 
@@ -655,8 +652,6 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
 前のコードでは、は `[HttpPost("product/{id:int}")]` ルート制約を適用します。 `ProductsController.ShowProduct`アクションは、のような URL パスによってのみ照合され `/product/3` ます。 ルートテンプレートの部分は、 `{id:int}` そのセグメントを整数のみに制限します。
-
-[!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet24)]
 
 ルート テンプレートの構文について詳しくは、「[ルート テンプレート参照](xref:fundamentals/routing#route-template-reference)」をご覧ください。
 

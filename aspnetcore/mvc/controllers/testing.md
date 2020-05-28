@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core のコントローラーのロジックをテストする
-author: ardalis
-description: Moq と xUnit を使って ASP.NET Core のコントローラーのロジックをテストする方法を説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 11/07/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/controllers/testing
-ms.openlocfilehash: 4deae7f7511e3ce94450bc06d5fc8dc77a94f212
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767084"
+title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core でコントローラーのロジックの単体テストを行う
 
@@ -131,9 +118,9 @@ API の呼び出しでビジネス ドメイン エンティティを直接返�
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests3&highlight=20-22,28-33)]
 
-## <a name="test-actionresultt"></a>ActionResult\<T> をテストする
+## <a name="test-actionresultt"></a>テスト ActionResult\<T>
 
-ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) を使用して、から`ActionResult`派生した型を返すか、特定の型を返すことができます。
+ASP.NET Core 2.1 以降では、 [actionresult \<T> ](xref:web-api/action-return-types#actionresultt-type) () を使用して、 <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> から派生した型を返す `ActionResult` か、特定の型を返すことができます。
 
 サンプル アプリには、特定のセッション `id` に対して `List<IdeaDTO>` を返すメソッドが含まれています。 セッションに `id` が存在しない場合、コントローラーは <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> を返します。
 
@@ -151,7 +138,7 @@ ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-t
 有効なセッション `id` に対する 2 番目のテストでは、メソッドが以下を返すことを確認します。
 
 * `List<IdeaDTO>` 型の `ActionResult`。
-* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`List<IdeaDTO>`型です。
+* [Actionresult \<T> 。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は `List<IdeaDTO>` 型です。
 * 一覧の最初の項目は、モック セッションに格納されているアイデアと一致する有効なアイデア (`GetTestSession` の呼び出しによって取得)。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -177,8 +164,8 @@ ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-t
 有効なセッション `id` に対しては、最後のテストで以下を確認します。
 
 * メソッドが `BrainstormSession` 型の `ActionResult` を返す。
-* [Actionresult\<T>。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)は<xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>です。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
-* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`BrainstormSession`型です。
+* [Actionresult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)は <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> です。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
+* [Actionresult \<T> 。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は `BrainstormSession` 型です。
 * セッション `UpdateAsync(testSession)` を更新するモック 呼び出しが呼び出された。 `Verifiable` メソッド呼び出しは、アサーション内で `mockRepo.Verify()` を実行することでチェックされます。
 * セッションに対して 2 つの `Idea` オブジェクトが返された。
 * 最後の項目 (`UpdateAsync` へのモック呼び出しによって追加された `Idea`) が、テスト中にセッションに追加された `newIdea` と一致する。
@@ -294,9 +281,9 @@ API の呼び出しでビジネス ドメイン エンティティを直接返�
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests3&highlight=20-22,28-33)]
 
-## <a name="test-actionresultt"></a>ActionResult\<T> をテストする
+## <a name="test-actionresultt"></a>テスト ActionResult\<T>
 
-ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) を使用して、から`ActionResult`派生した型を返すか、特定の型を返すことができます。
+ASP.NET Core 2.1 以降では、 [actionresult \<T> ](xref:web-api/action-return-types#actionresultt-type) () を使用して、 <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> から派生した型を返す `ActionResult` か、特定の型を返すことができます。
 
 サンプル アプリには、特定のセッション `id` に対して `List<IdeaDTO>` を返すメソッドが含まれています。 セッションに `id` が存在しない場合、コントローラーは <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> を返します。
 
@@ -314,7 +301,7 @@ ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-t
 有効なセッション `id` に対する 2 番目のテストでは、メソッドが以下を返すことを確認します。
 
 * `List<IdeaDTO>` 型の `ActionResult`。
-* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`List<IdeaDTO>`型です。
+* [Actionresult \<T> 。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は `List<IdeaDTO>` 型です。
 * 一覧の最初の項目は、モック セッションに格納されているアイデアと一致する有効なアイデア (`GetTestSession` の呼び出しによって取得)。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -340,8 +327,8 @@ ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-t
 有効なセッション `id` に対しては、最後のテストで以下を確認します。
 
 * メソッドが `BrainstormSession` 型の `ActionResult` を返す。
-* [Actionresult\<T>。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)は<xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>です。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
-* [Actionresult\<T>。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は`BrainstormSession`型です。
+* [Actionresult \<T> 。結果](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)は <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> です。 `CreatedAtActionResult` は *201 Created* 応答に類似した `Location` ヘッダー付きの応答である。
+* [Actionresult \<T> 。値](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)は `BrainstormSession` 型です。
 * セッション `UpdateAsync(testSession)` を更新するモック 呼び出しが呼び出された。 `Verifiable` メソッド呼び出しは、アサーション内で `mockRepo.Verify()` を実行することでチェックされます。
 * セッションに対して 2 つの `Idea` オブジェクトが返された。
 * 最後の項目 (`UpdateAsync` へのモック呼び出しによって追加された `Idea`) が、テスト中にセッションに追加された `newIdea` と一致する。
@@ -354,5 +341,5 @@ ASP.NET Core 2.1 以降では、 [actionresult\<T>](xref:web-api/action-return-t
 
 * <xref:test/integration-tests>
 * [Visual Studio で単体テストを作成して実行する](/visualstudio/test/unit-test-your-code)
-* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC 用の Fluent テスト ライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; MVC と Web API アプリをテストするための fluent インターフェイスを提供する厳密に型指定された単体テスト ライブラリ。 ("*Microsoft では保守管理もサポートも行っていません。*")
+* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。*")
 

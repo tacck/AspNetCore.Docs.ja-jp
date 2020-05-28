@@ -1,11 +1,11 @@
 ---
 title: ' ASP.NET Core にコンテンツセキュリティポリシーを適用し Blazor ます。説明: ' ASP.NET Core アプリでコンテンツセキュリティポリシー (CSP) を使用し Blazor てクロスサイトスクリプティング (XSS) 攻撃から保護する方法について説明します。 '
-monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core のコンテンツセキュリティポリシーを適用するBlazor
@@ -28,14 +28,14 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
 
 最小で、次のアプリのディレクティブとソースを指定し Blazor ます。 必要に応じて、ディレクティブとソースを追加します。 この記事の「[ポリシーの適用](#apply-the-policy)」セクションでは、次のディレクティブを使用しています。ここでは、webassembly サーバーのセキュリティポリシーの例を示し Blazor Blazor ています。
 
-* [ベース uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash;ページのタグの Url を制限 `<base>` します。 を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-* [すべてブロック-混合-コンテンツ](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash;HTTP と HTTPS の混合コンテンツの読み込みを禁止します。
-* [既定値-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash;ポリシーによって明示的に指定されていないソースディレクティブのフォールバックを示します。 を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash;画像の有効なソースを示します。
+* [base-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): ページのタグの url を制限 `<base>` します。 を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
+* [all-mixed-content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): 混合 HTTP と HTTPS コンテンツの読み込みを禁止します。
+* [既定値-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src): ポリシーで明示的に指定されていないソースディレクティブのフォールバックを示します。 を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src): イメージの有効なソースを示します。
   * `data:`Url からのイメージの読み込みを許可するには、を指定し `data:` ます。
   * `https:`HTTPS エンドポイントからのイメージの読み込みを許可するには、を指定します。
-* [オブジェクト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash;`<object>`、、およびタグの有効なソースを示し `<embed>` `<applet>` ます。 `none`すべての URL ソースを禁止するには、を指定します。
-* [スクリプト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash;スクリプトの有効なソースを示します。
+* [オブジェクト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src): `<object>` 、、およびタグの有効なソースを示し `<embed>` `<applet>` ます。 `none`すべての URL ソースを禁止するには、を指定します。
+* [スクリプト-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): スクリプトの有効なソースを示します。
   * `https://stackpath.bootstrapcdn.com/`ブートストラップスクリプトのホストソースを指定します。
   * を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
   * BlazorWebassembly の場合:
@@ -45,11 +45,11 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * `unsafe-eval`文字列からコードを作成するためにメソッドとメソッドを使用するように指定し `eval()` ます。
   * Blazorサーバーアプリで、 `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` スタイルシートのフォールバック検出を実行するインラインスクリプトのハッシュを指定します。
-* [スタイル-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash;スタイルシートの有効なソースを示します。
+* [スタイル-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): スタイルシートの有効なソースを示します。
   * `https://stackpath.bootstrapcdn.com/`ブートストラップスタイルシートのホストソースを指定します。
   * を指定 `self` すると、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
   * `unsafe-inline`インラインスタイルの使用を許可するには、を指定します。 Blazor初期要求後にクライアントとサーバーを再接続するために、サーバーアプリの UI でインライン宣言が必要です。 今後のリリースでは、が不要になるように、インラインスタイルが削除される可能性があり `unsafe-inline` ます。
-* [アップグレード-安全でない要求](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash;セキュリティで保護されていない (HTTP) ソースからのコンテンツ Url を HTTPS 経由で安全に取得する必要があることを示します。
+* [upgrade-セキュリティで](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests)保護されていない要求: セキュリティで保護されていない (HTTP) ソースからのコンテンツ URL を HTTPS 経由で安全に取得する必要があることを示します。
 
 上記のディレクティブは、Microsoft Internet Explorer 以外のすべてのブラウザーでサポートされています。
 

@@ -1,27 +1,15 @@
 ---
-title: ASP.NET Core で証明書認証を構成する
-author: blowdart
-description: IIS と http.sys の ASP.NET Core で証明書認証を構成する方法について説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: bdorrans
-ms.date: 01/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/authentication/certauth
-ms.openlocfilehash: 2cee719014d57fa01b5e8b14edd703c192cfbe18
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776644"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core の[証明書認証](https://tools.ietf.org/html/rfc5246#section-7.4.4)に似た実装が含まれています。 証明書の認証は、TLS レベルで実行されますが、その前に ASP.NET Core になります。 より正確には、これは証明書を検証し、その証明書をに解決できるイベントを提供する認証ハンドラー `ClaimsPrincipal`です。 
+`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core の[証明書認証](https://tools.ietf.org/html/rfc5246#section-7.4.4)に似た実装が含まれています。 証明書の認証は、TLS レベルで実行されますが、その前に ASP.NET Core になります。 より正確には、これは証明書を検証し、その証明書をに解決できるイベントを提供する認証ハンドラーです `ClaimsPrincipal` 。 
 
 証明書認証用に[ホストを構成](#configure-your-host-to-require-certificates)します。これは、IIS、Kestrel、Azure Web Apps など、使用している他のすべてのものになります。
 
@@ -34,15 +22,15 @@ ms.locfileid: "82776644"
 
 プロキシとロードバランサーを使用する環境での証明書認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
 
-## <a name="get-started"></a>開始
+## <a name="get-started"></a>作業開始
 
 HTTPS 証明書を取得して適用し、証明書を要求するように[ホストを構成](#configure-your-host-to-require-certificates)します。
 
-Web アプリで、 `Microsoft.AspNetCore.Authentication.Certificate`パッケージへの参照を追加します。 次に、 `Startup.ConfigureServices`メソッドで、 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);`オプションを指定してを呼び出し、 `OnCertificateValidated`要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換`ClaimsPrincipal`し、 `context.Principal`プロパティに設定します。
+Web アプリで、パッケージへの参照を追加し `Microsoft.AspNetCore.Authentication.Certificate` ます。 次に、 `Startup.ConfigureServices` メソッドで、オプションを指定してを呼び出し `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 、 `OnCertificateValidated` 要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換 `ClaimsPrincipal` し、プロパティに設定し `context.Principal` ます。
 
-認証が失敗した場合、この`403 (Forbidden)`ハンドラーは、 `401 (Unauthorized)`予期したとおりに応答を返します。 これは、最初の TLS 接続中に認証が行われるということです。 ハンドラーに到達するまでには遅すぎます。 匿名接続から証明書を使用して接続をアップグレードする方法はありません。
+認証が失敗した場合、このハンドラーは、 `403 (Forbidden)` 予期したとおりに応答を返し `401 (Unauthorized)` ます。 これは、最初の TLS 接続中に認証が行われるということです。 ハンドラーに到達するまでには遅すぎます。 匿名接続から証明書を使用して接続をアップグレードする方法はありません。
 
-また、 `app.UseAuthentication();` `Startup.Configure`メソッドにを追加します。 それ以外の`HttpContext.User`場合、は証明書`ClaimsPrincipal`から作成されるように設定されません。 次に例を示します。
+また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 次に例を示します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -65,13 +53,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="configure-certificate-validation"></a>証明書の検証の構成
 
-`CertificateAuthenticationOptions`ハンドラーには、証明書に対して実行する必要のある検証の最小値である組み込みの検証がいくつかあります。 これらの各設定は既定で有効になっています。
+ハンドラーには、 `CertificateAuthenticationOptions` 証明書に対して実行する必要のある検証の最小値である組み込みの検証がいくつかあります。 これらの各設定は既定で有効になっています。
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = チェーン、自己署名、またはすべて (チェーン |自己署名済み)
 
 既定値:`CertificateTypes.Chained`
 
-このチェックでは、適切な証明書の種類のみが許可されていることが検証されます。 アプリで自己署名証明書を使用している場合は、このオプションを`CertificateTypes.All`また`CertificateTypes.SelfSigned`はに設定する必要があります。
+このチェックでは、適切な証明書の種類のみが許可されていることが検証されます。 アプリで自己署名証明書を使用している場合は、このオプションをまたはに設定する必要があり `CertificateTypes.All` `CertificateTypes.SelfSigned` ます。
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
@@ -111,8 +99,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ハンドラーには、次の2つのイベントがあります。
 
-* `OnAuthenticationFailed`&ndash;認証中に例外が発生し、応答できる場合に呼び出されます。
-* `OnCertificateValidated`&ndash;証明書が検証され、検証が渡され、既定のプリンシパルが作成された後に呼び出されます。 このイベントを使用すると、独自の検証を実行したり、プリンシパルを補強したり置き換えることができます。 例を次に示します。
+* `OnAuthenticationFailed`: 認証中に例外が発生し、対応できる場合に呼び出されます。
+* `OnCertificateValidated`: 証明書が検証され、検証が渡され、既定のプリンシパルが作成された後に呼び出されます。 このイベントを使用すると、独自の検証を実行したり、プリンシパルを補強したり置き換えることができます。 例を次に示します。
   * 証明書がサービスに対して認識されているかどうかを確認しています。
   * 独自のプリンシパルを構築します。 `Startup.ConfigureServices` での次の例を検討してください。
 
@@ -148,7 +136,7 @@ services.AddAuthentication(
     });
 ```
 
-受信証明書が追加の検証を満たしていない場合`context.Fail("failure reason")`は、失敗の理由でを呼び出します。
+受信証明書が追加の検証を満たしていない場合は、 `context.Fail("failure reason")` 失敗の理由でを呼び出します。
 
 実際の機能の場合は、データベースまたはその他の種類のユーザーストアに接続する依存関係の挿入に登録されているサービスを呼び出す必要があります。 デリゲートに渡されたコンテキストを使用してサービスにアクセスします。 `Startup.ConfigureServices` での次の例を検討してください。
 
@@ -193,7 +181,7 @@ services.AddAuthentication(
     });
 ```
 
-概念的には、証明書の検証は承認に関する問題です。 内部`OnCertificateValidated`ではなく、承認ポリシーの発行者や拇印などのチェックを追加することは、まったく可能です。
+概念的には、証明書の検証は承認に関する問題です。 内部ではなく、承認ポリシーの発行者や拇印などのチェックを追加すること `OnCertificateValidated` は、まったく可能です。
 
 ## <a name="configure-your-host-to-require-certificates"></a>証明書を要求するようにホストを構成する
 
@@ -249,12 +237,12 @@ Azure では、転送構成は必要ありません。 これは既に証明書�
 
 ### <a name="use-certificate-authentication-in-custom-web-proxies"></a>カスタム web プロキシで証明書認証を使用する
 
-メソッド`AddCertificateForwarding`を使用して、次のように指定します。
+メソッドを使用して、 `AddCertificateForwarding` 次のように指定します。
 
 * クライアントヘッダー名。
-* ( `HeaderConverter`プロパティを使用して) 証明書を読み込む方法。
+* (プロパティを使用して) 証明書を読み込む方法 `HeaderConverter` 。
 
-カスタム web プロキシでは、証明書はカスタム要求ヘッダーとして渡され`X-SSL-CERT`ます。たとえば、のようになります。 これを使用するには、次`Startup.ConfigureServices`のように証明書の転送を構成します。
+カスタム web プロキシでは、証明書はカスタム要求ヘッダーとして渡されます。たとえば、のように `X-SSL-CERT` なります。 これを使用するには、次のように証明書の転送を構成し `Startup.ConfigureServices` ます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -291,7 +279,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-次`Startup.Configure`に、メソッドはミドルウェアを追加します。 `UseCertificateForwarding`は、 `UseAuthentication`および`UseAuthorization`の呼び出しの前に呼び出されます。
+次に、 `Startup.Configure` メソッドはミドルウェアを追加します。 `UseCertificateForwarding`は、およびの呼び出しの前に呼び出され `UseAuthentication` `UseAuthorization` ます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -311,7 +299,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-別のクラスを使用して、検証ロジックを実装できます。 この例では同じ自己署名証明書が使用されているため、使用できるのは証明書のみであることを確認してください。 クライアント証明書とサーバー証明書の両方の拇印が一致しているかどうかを検証します。それ以外の場合は、証明書を使用して、認証に十分なものになります。 これは、メソッドの`AddCertificate`内部で使用されます。 中間証明書または子証明書を使用している場合は、ここでサブジェクトまたは発行者を検証することもできます。
+別のクラスを使用して、検証ロジックを実装できます。 この例では同じ自己署名証明書が使用されているため、使用できるのは証明書のみであることを確認してください。 クライアント証明書とサーバー証明書の両方の拇印が一致しているかどうかを検証します。それ以外の場合は、証明書を使用して、認証に十分なものになります。 これは、メソッドの内部で使用され `AddCertificate` ます。 中間証明書または子証明書を使用している場合は、ここでサブジェクトまたは発行者を検証することもできます。
 
 ```csharp
 using System.IO;
@@ -420,7 +408,7 @@ private async Task<JsonDocument> GetApiDataWithNamedClient()
 
 ### <a name="create-certificates-in-powershell"></a>PowerShell での証明書の作成
 
-証明書の作成は、このフローを設定するうえで最も難しい部分です。 ルート証明書は、 `New-SelfSignedCertificate` PowerShell コマンドレットを使用して作成できます。 証明書を作成するときは、強力なパスワードを使用します。 ここで示すように、 `KeyUsageProperty`パラメーターと`KeyUsage`パラメーターを追加することが重要です。
+証明書の作成は、このフローを設定するうえで最も難しい部分です。 ルート証明書は、PowerShell コマンドレットを使用して作成でき `New-SelfSignedCertificate` ます。 証明書を作成するときは、強力なパスワードを使用します。 ここで示すように、 `KeyUsageProperty` パラメーターとパラメーターを追加することが重要です `KeyUsage` 。
 
 #### <a name="create-root-ca"></a>ルート CA の作成
 
@@ -435,7 +423,7 @@ Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath roo
 ```
 
 > [!NOTE]
-> パラメーター `-DnsName`値は、アプリの配置ターゲットと一致している必要があります。 たとえば、開発用の "localhost" などです。
+> `-DnsName`パラメーター値は、アプリの配置ターゲットと一致している必要があります。 たとえば、開発用の "localhost" などです。
 
 #### <a name="install-in-the-trusted-root"></a>信頼されたルートにインストールする
 

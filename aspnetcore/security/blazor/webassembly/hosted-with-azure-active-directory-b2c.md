@@ -39,7 +39,7 @@ title: ' Blazor Azure Active Directory B2C ' author: description: monikerRange: 
 
 * *サーバー API アプリ*アプリケーション ID (クライアント ID) (など `11111111-1111-1111-1111-111111111111` )
 * ディレクトリ ID (テナント ID) (など `222222222-2222-2222-2222-222222222222` )
-* AAD テナントドメイン (たとえば、 `contoso.onmicrosoft.com` ) ドメインは、 &ndash; 登録済みアプリの Azure portal の [**ブランド**化] ブレードで、**発行元ドメイン**として使用できます。
+* AAD テナントドメイン (例 `contoso.onmicrosoft.com` :): 登録されているアプリの Azure portal の [**ブランド**化] ブレードで、**発行元ドメイン**としてドメインを使用できます。
 
 で**API を公開**します。
 

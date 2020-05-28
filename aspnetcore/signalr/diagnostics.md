@@ -1,44 +1,32 @@
 ---
-title: ASP.NET Core でのログ記録と診断SignalR
-author: anurse
-description: ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: signalr
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/diagnostics
-ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444218"
+title: ' ASP.NET Core でのログと診断 ' SignalR 作成者: 説明: ' ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。 '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core SignalR のログと診断
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core でのログ記録と診断SignalR
 
 By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
-この記事では、ASP.NET Core SignalR アプリから診断情報を収集して問題のトラブルシューティングを行うためのガイダンスを提供します。
+この記事では、ASP.NET Core アプリから診断情報を収集して問題のトラブルシューティングを行うためのガイダンスを提供 SignalR します。
 
 ## <a name="server-side-logging"></a>サーバー側のログ記録
 
 > [!WARNING]
 > サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
 
-SignalR は ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、SignalR はごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
+SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
-SignalR は、次の2つの logger カテゴリを使用します。
+SignalR2つの logger カテゴリを使用します。
 
-* `Microsoft.AspNetCore.SignalR`&ndash;ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
-* `Microsoft.AspNetCore.Http.Connections`&ndash;websocket、長いポーリング、サーバー送信イベント、低レベルの SignalR インフラストラクチャなどのトランスポートに関連するログ。
+* `Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
+* `Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、サーバー送信イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR
 
-SignalR から詳細なログを有効にするには、 `Debug` のサブセクションに次の項目を追加して、前のプレフィックスの両方を*appsettings*ファイルのレベルに構成します `LogLevel` `Logging` 。
+から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、前のプレフィックスを*appsettings*ファイルのレベルに構成し `LogLevel` `Logging` ます。
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -61,7 +49,7 @@ JSON ベースの構成を使用していない場合は、構成システムで
 
 ### <a name="as-a-console-app-outside-iis"></a>IIS の外部のコンソールアプリとして
 
-コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。 SignalR ログはコンソールに表示されます。
+コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。 SignalRログはコンソールに表示されます。
 
 ### <a name="within-iis-express-from-visual-studio"></a>Visual Studio から IIS Express 内
 
@@ -89,14 +77,34 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 次の表は、JavaScript クライアントで使用できるログレベルを示しています。 ログレベルをこれらの値のいずれかに設定すると、そのレベルおよびテーブル内のすべてのレベルでログ記録が有効になります。
 
 | Level | 説明 |
-| ----- | ----------- |
-| `None` | メッセージはログに記録されません。 |
-| `Critical` | アプリ全体でエラーが発生したことを示すメッセージ。 |
-| `Error` | 現在の操作でエラーが発生したことを示すメッセージ。 |
-| `Warning` | 致命的ではない問題を示すメッセージ。 |
-| `Information` | 情報メッセージ。 |
-| `Debug` | デバッグに役立つ診断メッセージ。 |
-| `Trace` | 特定の問題を診断するために設計された、非常に詳細な診断メッセージ。 |
+| ----- | ---
+title: ' ASP.NET Core でのログと診断 ' SignalR 作成者: 説明: ' ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。 '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: ' ASP.NET Core でのログと診断 ' SignalR 作成者: 説明: ' ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。 '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: ' ASP.NET Core でのログと診断 ' SignalR 作成者: 説明: ' ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。 '
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | |`None` |メッセージはログに記録されません。 | |`Critical` |アプリ全体でエラーが発生したことを示すメッセージ。 | |`Error` |現在の操作でエラーが発生したことを示すメッセージ。 | |`Warning` |致命的ではない問題を示すメッセージ。 | |`Information` |情報メッセージ。 | |`Debug` |デバッグに役立つ診断メッセージ。 | |`Trace` |特定の問題を診断するために設計された、非常に詳細な診断メッセージ。 |
 
 詳細設定を構成すると、ログはブラウザーコンソール (または NodeJS アプリの標準出力) に書き込まれます。
 

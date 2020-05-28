@@ -1,11 +1,11 @@
 ---
 title: ' ASP.NET Core SignalR javascript クライアント ' author: description: ' ASP.NET Core SignalR javascript クライアントの概要。 '
-monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- 'SignalR' uid: 
 
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
@@ -141,10 +141,10 @@ SignalRとで定義されたメソッド名と引数を照合することによ�
 
 接続が確立されたときにログに記録する logger と種類のイベントを渡すことによって、クライアント側のログトレースを設定します。 メッセージは、指定されたログレベル以上でログに記録されます。 使用可能なログレベルは次のとおりです。
 
-* `signalR.LogLevel.Error`&ndash;エラーメッセージ。 `Error`メッセージのみをログに記録します。
-* `signalR.LogLevel.Warning`&ndash;潜在的なエラーに関する警告メッセージ。 ログ `Warning` と `Error` メッセージ。
-* `signalR.LogLevel.Information`&ndash;エラーのないステータスメッセージ。 、、およびの各メッセージをログ `Information` に記録 `Warning` `Error` します。
-* `signalR.LogLevel.Trace`&ndash;トレースメッセージ。 ハブとクライアント間で転送されたデータを含む、すべてをログに記録します。
+* `signalR.LogLevel.Error`: エラーメッセージ。 `Error`メッセージのみをログに記録します。
+* `signalR.LogLevel.Warning`: 潜在的なエラーに関する警告メッセージ。 ログ `Warning` と `Error` メッセージ。
+* `signalR.LogLevel.Information`: エラーのないステータスメッセージ。 、、およびの各メッセージをログ `Information` に記録 `Warning` `Error` します。
+* `signalR.LogLevel.Trace`: トレースメッセージ。 ハブとクライアント間で転送されたデータを含む、すべてをログに記録します。
 
 ログレベルを構成するには、 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)で[configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging)メソッドを使用します。 メッセージは、ブラウザーコンソールに記録されます。
 

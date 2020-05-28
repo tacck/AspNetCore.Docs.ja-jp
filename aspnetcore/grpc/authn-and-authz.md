@@ -1,24 +1,13 @@
 ---
-title: ASP.NET Core のための gRPC での認証と承認
-author: jamesnk
-description: ASP.NET Core のために gRPC で認証と承認を使用する方法について説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/authn-and-authz
-ms.openlocfilehash: eecdebe5ea7555df0914adfbff728331e3592093
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776169"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
+
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core のための gRPC での認証と承認
 
 作成者: [James Newton-King](https://twitter.com/jamesnk)
@@ -47,7 +36,7 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> ASP.NET Core 認証ミドルウェアを登録する順序が重要です。 必ず `UseAuthentication` の後に `UseAuthorization` と `UseRouting` を呼び出し、その後に `UseEndpoints` を呼び出します。
+> ASP.NET Core 認証ミドルウェアを登録する順序が重要です。 必ず `UseRouting` の後に `UseAuthentication` と `UseAuthorization` を呼び出し、その後に `UseEndpoints` を呼び出します。
 
 呼び出し時にアプリによって使用される認証メカニズムは、構成する必要があります。 認証の構成は、`Startup.ConfigureServices` に追加され、アプリで使用される認証メカニズムによって異なるものとなります。 ASP.NET Core アプリをセキュリティで保護する方法の例については、[認証サンプル](xref:security/authentication/samples)に関するページを参照してください。
 
@@ -133,7 +122,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
     // Create the gRPC channel
     var channel = GrpcChannel.ForAddress(baseAddress, new GrpcChannelOptions
     {
-        HttpClient = new HttpClient(handler)
+        HttpHandler = handler
     });
 
     return new Ticketer.TicketerClient(channel);

@@ -18,8 +18,8 @@ Cookie とサイトデータは、アプリの更新間で保持され、テス�
   * **[追加]** ボタンを選びます。
   * **Program**フィールドにブラウザーへのパスを指定します。
   * [**引数**] フィールドに、ブラウザーが incognito モードまたはプライベートモードで開くために使用するコマンドラインオプション、およびアプリの URL を指定します。 次に例を示します。
-    * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
+    * Google Chrome:`--incognito --new-window https://localhost:5001`
+    * Mozilla Firefox:`-private -url https://localhost:5001`
   * [**フレンドリ名**] フィールドに名前を入力します。 たとえば、「 `Firefox Auth Testing` 」のように入力します。
   * **[OK]** ボタンを選択します。
   * アプリを使用したテストの各イテレーションでブラウザープロファイルを選択する必要がないようにするには、[**既定値として設定**] ボタンを使用してプロファイルを既定値として設定します。
