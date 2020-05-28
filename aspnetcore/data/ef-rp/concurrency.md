@@ -154,7 +154,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 端末で次のコマンドを実行します。
+* ターミナルで次のコマンドを実行します。
 
   ```dotnetcli
   dotnet ef migrations add RowVersion
@@ -188,7 +188,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
   * ランダムな BLOB 値を使用して既存の行を更新します。
   * 行が更新されるたびに RowVersion 列をランダムな BLOB 値に設定するデータベース トリガーを追加します。
 
-* 端末で次のコマンドを実行します。
+* ターミナルで次のコマンドを実行します。
 
   ```dotnetcli
   dotnet ef database update
