@@ -4,7 +4,7 @@ author: tratcher
 description: TestServer を使用して ASP.NET Core のミドルウェアをテストする方法について学習します。
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/6/2019
+ms.date: 5/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,57 +12,57 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 06ff7167e32fbd613c18709e31ecd078b3dfc926
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: ea7fc0e889ab32cbaf23257b3e866519af0727aa
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876423"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424534"
 ---
-# <a name="test-aspnet-core-middleware"></a><span data-ttu-id="434c2-103">ASP.NET Core のミドルウェアのテスト</span><span class="sxs-lookup"><span data-stu-id="434c2-103">Test ASP.NET Core middleware</span></span>
+# <a name="test-aspnet-core-middleware"></a><span data-ttu-id="e504d-103">ASP.NET Core のミドルウェアのテスト</span><span class="sxs-lookup"><span data-stu-id="e504d-103">Test ASP.NET Core middleware</span></span>
 
-<span data-ttu-id="434c2-104">作成者: [Chris Ross](https://github.com/Tratcher)</span><span class="sxs-lookup"><span data-stu-id="434c2-104">By [Chris Ross](https://github.com/Tratcher)</span></span>
+<span data-ttu-id="e504d-104">作成者: [Chris Ross](https://github.com/Tratcher)</span><span class="sxs-lookup"><span data-stu-id="e504d-104">By [Chris Ross](https://github.com/Tratcher)</span></span>
 
-<span data-ttu-id="434c2-105">ミドルウェアは、<xref:Microsoft.AspNetCore.TestHost.TestServer> と切り離してテストできます。</span><span class="sxs-lookup"><span data-stu-id="434c2-105">Middleware can be tested in isolation with <xref:Microsoft.AspNetCore.TestHost.TestServer>.</span></span> <span data-ttu-id="434c2-106">これにより次の操作を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="434c2-106">It allows you to:</span></span>
+<span data-ttu-id="e504d-105">ミドルウェアは、<xref:Microsoft.AspNetCore.TestHost.TestServer> と切り離してテストできます。</span><span class="sxs-lookup"><span data-stu-id="e504d-105">Middleware can be tested in isolation with <xref:Microsoft.AspNetCore.TestHost.TestServer>.</span></span> <span data-ttu-id="e504d-106">これにより次の操作を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="e504d-106">It allows you to:</span></span>
 
-* <span data-ttu-id="434c2-107">テストするコンポーネントのみを含むアプリ パイプラインをインスタンス化します。</span><span class="sxs-lookup"><span data-stu-id="434c2-107">Instantiate an app pipeline containing only the components that you need to test.</span></span>
-* <span data-ttu-id="434c2-108">カスタム要求を送信してミドルウェアの動作を検証します。</span><span class="sxs-lookup"><span data-stu-id="434c2-108">Send custom requests to verify middleware behavior.</span></span>
+* <span data-ttu-id="e504d-107">テストするコンポーネントのみを含むアプリ パイプラインをインスタンス化します。</span><span class="sxs-lookup"><span data-stu-id="e504d-107">Instantiate an app pipeline containing only the components that you need to test.</span></span>
+* <span data-ttu-id="e504d-108">カスタム要求を送信してミドルウェアの動作を検証します。</span><span class="sxs-lookup"><span data-stu-id="e504d-108">Send custom requests to verify middleware behavior.</span></span>
 
-<span data-ttu-id="434c2-109">利点:</span><span class="sxs-lookup"><span data-stu-id="434c2-109">Advantages:</span></span>
+<span data-ttu-id="e504d-109">利点:</span><span class="sxs-lookup"><span data-stu-id="e504d-109">Advantages:</span></span>
 
-* <span data-ttu-id="434c2-110">要求はネットワークを介してシリアル化されるのではなく、メモリ内で送信されます。</span><span class="sxs-lookup"><span data-stu-id="434c2-110">Requests are sent in-memory rather than being serialized over the network.</span></span>
-* <span data-ttu-id="434c2-111">これにより、ポート管理や HTTPS 証明書などの追加の問題が回避されます。</span><span class="sxs-lookup"><span data-stu-id="434c2-111">This avoids additional concerns, such as port management and HTTPS certificates.</span></span>
-* <span data-ttu-id="434c2-112">ミドルウェア内の例外は、呼び出し元のテスト フローに直接戻すことができます。</span><span class="sxs-lookup"><span data-stu-id="434c2-112">Exceptions in the middleware can flow directly back to the calling test.</span></span>
-* <span data-ttu-id="434c2-113"><xref:Microsoft.AspNetCore.Http.HttpContext> などのサーバーのデータ構造をテストで直接カスタマイズすることができます。</span><span class="sxs-lookup"><span data-stu-id="434c2-113">It's possible to customize server data structures, such as <xref:Microsoft.AspNetCore.Http.HttpContext>, directly in the test.</span></span>
+* <span data-ttu-id="e504d-110">要求はネットワークを介してシリアル化されるのではなく、メモリ内で送信されます。</span><span class="sxs-lookup"><span data-stu-id="e504d-110">Requests are sent in-memory rather than being serialized over the network.</span></span>
+* <span data-ttu-id="e504d-111">これにより、ポート管理や HTTPS 証明書などの追加の問題が回避されます。</span><span class="sxs-lookup"><span data-stu-id="e504d-111">This avoids additional concerns, such as port management and HTTPS certificates.</span></span>
+* <span data-ttu-id="e504d-112">ミドルウェア内の例外は、呼び出し元のテスト フローに直接戻すことができます。</span><span class="sxs-lookup"><span data-stu-id="e504d-112">Exceptions in the middleware can flow directly back to the calling test.</span></span>
+* <span data-ttu-id="e504d-113"><xref:Microsoft.AspNetCore.Http.HttpContext> などのサーバーのデータ構造をテストで直接カスタマイズすることができます。</span><span class="sxs-lookup"><span data-stu-id="e504d-113">It's possible to customize server data structures, such as <xref:Microsoft.AspNetCore.Http.HttpContext>, directly in the test.</span></span>
 
-## <a name="set-up-the-testserver"></a><span data-ttu-id="434c2-114">TestServer の設定</span><span class="sxs-lookup"><span data-stu-id="434c2-114">Set up the TestServer</span></span>
+## <a name="set-up-the-testserver"></a><span data-ttu-id="e504d-114">TestServer の設定</span><span class="sxs-lookup"><span data-stu-id="e504d-114">Set up the TestServer</span></span>
 
-<span data-ttu-id="434c2-115">テスト プロジェクトで、テストを作成します。</span><span class="sxs-lookup"><span data-stu-id="434c2-115">In the test project, create a test:</span></span>
+<span data-ttu-id="e504d-115">テスト プロジェクトで、テストを作成します。</span><span class="sxs-lookup"><span data-stu-id="e504d-115">In the test project, create a test:</span></span>
 
-* <span data-ttu-id="434c2-116"><xref:Microsoft.AspNetCore.TestHost.TestServer> を使用するホストをビルドして起動します。</span><span class="sxs-lookup"><span data-stu-id="434c2-116">Build and start a host that uses <xref:Microsoft.AspNetCore.TestHost.TestServer>.</span></span>
-* <span data-ttu-id="434c2-117">ミドルウェアが使用する必要なサービスを追加します。</span><span class="sxs-lookup"><span data-stu-id="434c2-117">Add any required services that the middleware uses.</span></span>
-* <span data-ttu-id="434c2-118">テストにミドルウェアを使用するように処理パイプラインを構成します。</span><span class="sxs-lookup"><span data-stu-id="434c2-118">Configure the processing pipeline to use the middleware for the test.</span></span>
+* <span data-ttu-id="e504d-116"><xref:Microsoft.AspNetCore.TestHost.TestServer> を使用するホストをビルドして起動します。</span><span class="sxs-lookup"><span data-stu-id="e504d-116">Build and start a host that uses <xref:Microsoft.AspNetCore.TestHost.TestServer>.</span></span>
+* <span data-ttu-id="e504d-117">ミドルウェアが使用する必要なサービスを追加します。</span><span class="sxs-lookup"><span data-stu-id="e504d-117">Add any required services that the middleware uses.</span></span>
+* <span data-ttu-id="e504d-118">テストにミドルウェアを使用するように処理パイプラインを構成します。</span><span class="sxs-lookup"><span data-stu-id="e504d-118">Configure the processing pipeline to use the middleware for the test.</span></span>
 
 [!code-csharp[](middleware/samples_snapshot/3.x/setup.cs?highlight=4-18)]
 
-## <a name="send-requests-with-httpclient"></a><span data-ttu-id="434c2-119">HttpClient での要求の送信</span><span class="sxs-lookup"><span data-stu-id="434c2-119">Send requests with HttpClient</span></span>
-<span data-ttu-id="434c2-120"><xref:System.Net.Http.HttpClient> を使用して要求を送信します。</span><span class="sxs-lookup"><span data-stu-id="434c2-120">Send a request using <xref:System.Net.Http.HttpClient>:</span></span>
+## <a name="send-requests-with-httpclient"></a><span data-ttu-id="e504d-119">HttpClient での要求の送信</span><span class="sxs-lookup"><span data-stu-id="e504d-119">Send requests with HttpClient</span></span>
+<span data-ttu-id="e504d-120"><xref:System.Net.Http.HttpClient> を使用して要求を送信します。</span><span class="sxs-lookup"><span data-stu-id="e504d-120">Send a request using <xref:System.Net.Http.HttpClient>:</span></span>
 
 [!code-csharp[](middleware/samples_snapshot/3.x/request.cs?highlight=20)]
 
-<span data-ttu-id="434c2-121">結果をアサートします。</span><span class="sxs-lookup"><span data-stu-id="434c2-121">Assert the result.</span></span> <span data-ttu-id="434c2-122">まず、予想した結果とは逆のアサーションを行います。</span><span class="sxs-lookup"><span data-stu-id="434c2-122">First, make an assertion the opposite of the result that you expect.</span></span> <span data-ttu-id="434c2-123">偽陽性のアサーションを使用した最初の実行では、ミドルウェアが正常に実行されているときにテストが失敗することを確認します。</span><span class="sxs-lookup"><span data-stu-id="434c2-123">An initial run with a false positive assertion confirms that the test fails when the middleware is performing correctly.</span></span> <span data-ttu-id="434c2-124">テストを実行し、テストが失敗することを確認します。</span><span class="sxs-lookup"><span data-stu-id="434c2-124">Run the test and confirm that the test fails.</span></span>
+<span data-ttu-id="e504d-121">結果をアサートします。</span><span class="sxs-lookup"><span data-stu-id="e504d-121">Assert the result.</span></span> <span data-ttu-id="e504d-122">まず、予想した結果とは逆のアサーションを行います。</span><span class="sxs-lookup"><span data-stu-id="e504d-122">First, make an assertion the opposite of the result that you expect.</span></span> <span data-ttu-id="e504d-123">偽陽性のアサーションを使用した最初の実行では、ミドルウェアが正常に実行されているときにテストが失敗することを確認します。</span><span class="sxs-lookup"><span data-stu-id="e504d-123">An initial run with a false positive assertion confirms that the test fails when the middleware is performing correctly.</span></span> <span data-ttu-id="e504d-124">テストを実行し、テストが失敗することを確認します。</span><span class="sxs-lookup"><span data-stu-id="e504d-124">Run the test and confirm that the test fails.</span></span>
 
-<span data-ttu-id="434c2-125">次の例では、ルート エンドポイントが要求されたときに、ミドルウェアによって状態コード 404 (*見つかりません*) が返される必要があります。</span><span class="sxs-lookup"><span data-stu-id="434c2-125">In the following example, the middleware should return a 404 status code (*Not Found*) when the root endpoint is requested.</span></span> <span data-ttu-id="434c2-126">最初のテストを `Assert.NotEqual( ... );` で実行します。これは失敗します。</span><span class="sxs-lookup"><span data-stu-id="434c2-126">Make the first test run with `Assert.NotEqual( ... );`, which should fail:</span></span>
+<span data-ttu-id="e504d-125">次の例では、ルート エンドポイントが要求されたときに、ミドルウェアによって状態コード 404 (*見つかりません*) が返される必要があります。</span><span class="sxs-lookup"><span data-stu-id="e504d-125">In the following example, the middleware should return a 404 status code (*Not Found*) when the root endpoint is requested.</span></span> <span data-ttu-id="e504d-126">最初のテストを `Assert.NotEqual( ... );` で実行します。これは失敗します。</span><span class="sxs-lookup"><span data-stu-id="e504d-126">Make the first test run with `Assert.NotEqual( ... );`, which should fail:</span></span>
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
-<span data-ttu-id="434c2-127">通常の動作状態でミドルウェアをテストするようにアサーションを変更します。</span><span class="sxs-lookup"><span data-stu-id="434c2-127">Change the assertion to test the middleware under normal operating conditions.</span></span> <span data-ttu-id="434c2-128">最終テストでは、`Assert.Equal( ... );` を使用します。</span><span class="sxs-lookup"><span data-stu-id="434c2-128">The final test uses `Assert.Equal( ... );`.</span></span> <span data-ttu-id="434c2-129">もう一度テストを実行して、成功することを確認します。</span><span class="sxs-lookup"><span data-stu-id="434c2-129">Run the test again to confirm that it passes.</span></span>
+<span data-ttu-id="e504d-127">通常の動作状態でミドルウェアをテストするようにアサーションを変更します。</span><span class="sxs-lookup"><span data-stu-id="e504d-127">Change the assertion to test the middleware under normal operating conditions.</span></span> <span data-ttu-id="e504d-128">最終テストでは、`Assert.Equal( ... );` を使用します。</span><span class="sxs-lookup"><span data-stu-id="e504d-128">The final test uses `Assert.Equal( ... );`.</span></span> <span data-ttu-id="e504d-129">もう一度テストを実行して、成功することを確認します。</span><span class="sxs-lookup"><span data-stu-id="e504d-129">Run the test again to confirm that it passes.</span></span>
 
 [!code-csharp[](middleware/samples_snapshot/3.x/final-test.cs?highlight=22)]
 
-## <a name="send-requests-with-httpcontext"></a><span data-ttu-id="434c2-130">HttpContext での要求の送信</span><span class="sxs-lookup"><span data-stu-id="434c2-130">Send requests with HttpContext</span></span>
+## <a name="send-requests-with-httpcontext"></a><span data-ttu-id="e504d-130">HttpContext での要求の送信</span><span class="sxs-lookup"><span data-stu-id="e504d-130">Send requests with HttpContext</span></span>
 
-<span data-ttu-id="434c2-131">テスト アプリでは、[SendAsync(Action\<HttpContext>, CancellationToken)](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A) を使用して要求を送信することもできます。</span><span class="sxs-lookup"><span data-stu-id="434c2-131">A test app can also send a request using [SendAsync(Action\<HttpContext>, CancellationToken)](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A).</span></span> <span data-ttu-id="434c2-132">次の例では、ミドルウェアによって `https://example.com/A/Path/?and=query` が処理されるときに、いくつかのチェックが行われます。</span><span class="sxs-lookup"><span data-stu-id="434c2-132">In the following example, several checks are made when `https://example.com/A/Path/?and=query` is processed by the middleware:</span></span>
+<span data-ttu-id="e504d-131">テスト アプリでは、[SendAsync(Action\<HttpContext>, CancellationToken)](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A) を使用して要求を送信することもできます。</span><span class="sxs-lookup"><span data-stu-id="e504d-131">A test app can also send a request using [SendAsync(Action\<HttpContext>, CancellationToken)](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A).</span></span> <span data-ttu-id="e504d-132">次の例では、ミドルウェアによって `https://example.com/A/Path/?and=query` が処理されるときに、いくつかのチェックが行われます。</span><span class="sxs-lookup"><span data-stu-id="e504d-132">In the following example, several checks are made when `https://example.com/A/Path/?and=query` is processed by the middleware:</span></span>
 
 ```csharp
 [Fact]
@@ -111,6 +111,23 @@ public async Task TestMiddleware_ExpectedResponse()
 }
 ```
 
-<span data-ttu-id="434c2-133"><xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> は、<xref:System.Net.Http.HttpClient> の抽象化を使用するのではなく、<xref:Microsoft.AspNetCore.Http.HttpContext> オブジェクトの直接構成を許可します。</span><span class="sxs-lookup"><span data-stu-id="434c2-133"><xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> permits direct configuration of an <xref:Microsoft.AspNetCore.Http.HttpContext> object rather than using the <xref:System.Net.Http.HttpClient> abstractions.</span></span> <span data-ttu-id="434c2-134"><xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> を使用すると、[HttpContext.Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) や [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features) など、サーバー上でのみ使用可能な構造体を操作できます。</span><span class="sxs-lookup"><span data-stu-id="434c2-134">Use <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> to manipulate structures only available on the server, such as [HttpContext.Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) or [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).</span></span>
+<span data-ttu-id="e504d-133"><xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> は、<xref:System.Net.Http.HttpClient> の抽象化を使用するのではなく、<xref:Microsoft.AspNetCore.Http.HttpContext> オブジェクトの直接構成を許可します。</span><span class="sxs-lookup"><span data-stu-id="e504d-133"><xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> permits direct configuration of an <xref:Microsoft.AspNetCore.Http.HttpContext> object rather than using the <xref:System.Net.Http.HttpClient> abstractions.</span></span> <span data-ttu-id="e504d-134"><xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> を使用すると、[HttpContext.Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) や [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features) など、サーバー上でのみ使用可能な構造体を操作できます。</span><span class="sxs-lookup"><span data-stu-id="e504d-134">Use <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> to manipulate structures only available on the server, such as [HttpContext.Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) or [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).</span></span>
 
-<span data-ttu-id="434c2-135">"*404 - 見つかりません*" 応答をテストした前の例と同じように、前のテストの各 `Assert` ステートメントの逆をチェックします。</span><span class="sxs-lookup"><span data-stu-id="434c2-135">As with the earlier example that tested for a *404 - Not Found* response, check the opposite for each `Assert` statement in the preceding test.</span></span> <span data-ttu-id="434c2-136">このチェックによって、ミドルウェアが正常に動作しているときにテストが正しく失敗しないことが確認されます。</span><span class="sxs-lookup"><span data-stu-id="434c2-136">The check confirms that the test fails correctly when the middleware is operating normally.</span></span> <span data-ttu-id="434c2-137">偽陽性のテストが動作することを確認したら、期待されるテストの条件と値に最終的な `Assert` ステートメントを設定します。</span><span class="sxs-lookup"><span data-stu-id="434c2-137">After you've confirmed that the false positive test works, set the final `Assert` statements for the expected conditions and values of the test.</span></span> <span data-ttu-id="434c2-138">もう一度実行して、テストが成功することを確認します。</span><span class="sxs-lookup"><span data-stu-id="434c2-138">Run it again to confirm that the test passes.</span></span>
+<span data-ttu-id="e504d-135">"*404 - 見つかりません*" 応答をテストした前の例と同じように、前のテストの各 `Assert` ステートメントの逆をチェックします。</span><span class="sxs-lookup"><span data-stu-id="e504d-135">As with the earlier example that tested for a *404 - Not Found* response, check the opposite for each `Assert` statement in the preceding test.</span></span> <span data-ttu-id="e504d-136">このチェックによって、ミドルウェアが正常に動作しているときにテストが正しく失敗しないことが確認されます。</span><span class="sxs-lookup"><span data-stu-id="e504d-136">The check confirms that the test fails correctly when the middleware is operating normally.</span></span> <span data-ttu-id="e504d-137">偽陽性のテストが動作することを確認したら、期待されるテストの条件と値に最終的な `Assert` ステートメントを設定します。</span><span class="sxs-lookup"><span data-stu-id="e504d-137">After you've confirmed that the false positive test works, set the final `Assert` statements for the expected conditions and values of the test.</span></span> <span data-ttu-id="e504d-138">もう一度実行して、テストが成功することを確認します。</span><span class="sxs-lookup"><span data-stu-id="e504d-138">Run it again to confirm that the test passes.</span></span>
+
+## <a name="testserver-limitations"></a><span data-ttu-id="e504d-139">TestServer の制限事項</span><span class="sxs-lookup"><span data-stu-id="e504d-139">TestServer limitations</span></span>
+
+<span data-ttu-id="e504d-140">TestServer:</span><span class="sxs-lookup"><span data-stu-id="e504d-140">TestServer:</span></span>
+
+* <span data-ttu-id="e504d-141">サーバーの動作をレプリケートしてミドルウェアをテストするように作成されています。</span><span class="sxs-lookup"><span data-stu-id="e504d-141">Was created to replicate server behaviors to test middleware.</span></span>
+* <span data-ttu-id="e504d-142">すべての <xref:System.Net.Http.HttpClient> 動作をレプリケートしようとは***しません***。</span><span class="sxs-lookup"><span data-stu-id="e504d-142">Does ***not*** try to replicate all <xref:System.Net.Http.HttpClient> behaviors.</span></span>
+* <span data-ttu-id="e504d-143">クライアントに可能な限りサーバーを制御できるアクセス権を付与し、サーバーで起こっていることの可視性をできるだけ高めるようにします。</span><span class="sxs-lookup"><span data-stu-id="e504d-143">Attempts to give the client access to as much control over the server as possible, and with as much visibility into what's happening on the server as possible.</span></span> <span data-ttu-id="e504d-144">たとえば、サーバー状態を直接通信するために、`HttpClient` によって通常スローされない例外がスローされる場合があります。</span><span class="sxs-lookup"><span data-stu-id="e504d-144">For example it may throw exceptions not normally thrown by `HttpClient` in order to directly communicate server state.</span></span>
+* <span data-ttu-id="e504d-145">通常、ミドルウェアに関連しないため、既定ではトランスポート固有のヘッダーの一部は設定しません。</span><span class="sxs-lookup"><span data-stu-id="e504d-145">Doesn't set some transport specific headers by default as those are not usually relevant to middleware.</span></span> <span data-ttu-id="e504d-146">詳細については、次のセクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="e504d-146">For more information, see the next section.</span></span>
+
+### <a name="content-length-and-transfer-encoding-headers"></a><span data-ttu-id="e504d-147">Content-Length ヘッダーと Transfer-Encoding ヘッダー</span><span class="sxs-lookup"><span data-stu-id="e504d-147">Content-Length and Transfer-Encoding headers</span></span>
+
+<span data-ttu-id="e504d-148">TestServer では、[Content-Length](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) や [Transfer-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding) などのトランスポート関連の要求ヘッダーまたは応答ヘッダーを設定***しません***。</span><span class="sxs-lookup"><span data-stu-id="e504d-148">TestServer does ***not*** set transport related request or response headers such as [Content-Length](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) or [Transfer-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding).</span></span> <span data-ttu-id="e504d-149">アプリケーションの使用方法はクライアント、シナリオ、プロトコルによって異なるため、これらのヘッダーに依存しないようにする必要があります。</span><span class="sxs-lookup"><span data-stu-id="e504d-149">Applications should avoid depending on these headers because their usage varies by client, scenario, and protocol.</span></span> <span data-ttu-id="e504d-150">特定のシナリオをテストするために `Content-Length` および `Transfer-Encoding` が必要な場合は、<xref:System.Net.Http.HttpRequestMessage> または <xref:Microsoft.AspNetCore.Http.HttpContext> を作成するときにテストで指定することができます。</span><span class="sxs-lookup"><span data-stu-id="e504d-150">If `Content-Length` and `Transfer-Encoding` are necessary to test a specific scenario, they can be specified in the test when composing the <xref:System.Net.Http.HttpRequestMessage> or <xref:Microsoft.AspNetCore.Http.HttpContext>.</span></span> <span data-ttu-id="e504d-151">詳しくは、次の GitHub の問題をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="e504d-151">For more information, see the following GitHub issues:</span></span>
+
+* [<span data-ttu-id="e504d-152">dotnet/aspnetcore#21677</span><span class="sxs-lookup"><span data-stu-id="e504d-152">dotnet/aspnetcore#21677</span></span>](https://github.com/dotnet/aspnetcore/issues/21677)
+* [<span data-ttu-id="e504d-153">dotnet/aspnetcore#18463</span><span class="sxs-lookup"><span data-stu-id="e504d-153">dotnet/aspnetcore#18463</span></span>](https://github.com/dotnet/aspnetcore/issues/18463)
+* [<span data-ttu-id="e504d-154">dotnet/aspnetcore#13273</span><span class="sxs-lookup"><span data-stu-id="e504d-154">dotnet/aspnetcore#13273</span></span>](https://github.com/dotnet/aspnetcore/issues/13273)
