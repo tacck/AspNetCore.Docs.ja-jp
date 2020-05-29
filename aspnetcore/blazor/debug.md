@@ -25,13 +25,8 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 現時点では、次の操作を行うことは*できません*。
 
-* 配列を検査する。
-* メンバーをポイントして検査する。
-* マネージ コードに対してデバッグをステップ実行する。
-* 値型の検査を完全にサポートする。
 * 未処理の例外の発生時に中断する。
 * アプリの起動中にブレークポイントにヒットする。
-* サービス ワーカーを使用してアプリをデバッグする。
 
 今後のリリースでは、引き続きデバッグエクス ペリエンスが向上します。
 
@@ -78,7 +73,7 @@ Visual Studio で Blazor WebAssembly アプリをデバッグするには、次�
 
 Blazor WebAssembly アプリのデバッグ中に、サーバー コードをデバッグすることもできます。
 
-1. `OnInitializedAsync` の *FetchData.razor* ページにブレークポイントを設定します。
+1. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> の *FetchData.razor* ページにブレークポイントを設定します。
 1. `Get` アクション メソッドの `WeatherForecastController` にブレークポイントを設定します。
 1. **フェッチ データ** タブに移動し、サーバーへの HTTP 要求を発行する直前に `FetchData` コンポーネント内の最初のブレークポイントをヒットします。
 
