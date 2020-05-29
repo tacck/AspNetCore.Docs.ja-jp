@@ -1495,7 +1495,7 @@ ASP.NET Core の [dotnet new](/dotnet/core/tools/dotnet-new) テンプレート�
 詳細については、次のトピックを参照してください。
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets> &ndash; 環境変数を使用して機密データを格納する場合に関するアドバイスが記載されています。 シークレット マネージャーは、ファイル構成プロバイダーを使用して、ユーザーの機密情報をローカル システム上の JSON ファイルに格納します。 ファイル構成プロバイダーについては、このトピックの後半で説明します。
+* <xref:security/app-secrets>:ここには、環境変数を使用して機密データを格納する際のアドバイスが記載されています。 シークレット マネージャーは、ファイル構成プロバイダーを使用して、ユーザーの機密情報をローカル システム上の JSON ファイルに格納します。 ファイル構成プロバイダーについては、このトピックの後半で説明します。
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) では、ASP.NET Core アプリのアプリのシークレットが安全に保存されます。 詳細については、「<xref:security/key-vault-configuration>」を参照してください。
 
@@ -2948,8 +2948,8 @@ title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
 
 サーバー上にカスタム接続文字列環境変数が作成されます。
 
-* 名前 &ndash; `CUSTOMCONNSTR_ReleaseDB`
-* 数値 &ndash; `Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
+* 名前: `CUSTOMCONNSTR_ReleaseDB`
+* 値: `Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
 
 `IConfiguration` が挿入され、`_config` という名前のフィールドに割り当てられた場合は、次の値を読み取ります。
 
@@ -3028,8 +3028,8 @@ JSON ファイルの構成をアクティブにするには、<xref:Microsoft.Ex
 
 `CreateDefaultBuilder` を使用して新しいホスト ビルダーを初期化すると、`AddJsonFile` が自動的に 2 回呼び出されます。 このメソッドは、次から構成を読み込むために呼び出されます。
 
-* *appsettings.json* &ndash; このファイルが最初に読み取られます。 ファイルの環境バージョンは、*appsettings.json* ファイルによって指定される値をオーバーライドできます。
-* *appsettings.{Environment}.json* &ndash; ファイルの環境バージョンは、[IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*) に基づいて読み込まれます。
+* *appsettings.json*:このファイルは最初に読み取られます。 ファイルの環境バージョンは、*appsettings.json* ファイルによって指定される値をオーバーライドできます。
+* *appsettings.{Environment}.json*:ファイルの環境バージョンは、[IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。
 
 詳細については、「[既定の構成](#default-configuration)」セクションを参照してください。
 

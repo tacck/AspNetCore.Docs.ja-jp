@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: ec2bc2867acdd1c9be42f77cb38be36abb8c8108
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: d7182594fbc22d056caff0864a053a0a92fa4e84
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967481"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438890"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -65,7 +65,7 @@ public class ExampleModel
 
 * フォームは、`ExampleModel` 型で定義されている検証を使用して、`name` フィールドのユーザー入力を検証します。 モデルはコンポーネントの `@code` ブロック内に作成され、プライベート フィールド (`exampleModel`) に保持されます。 フィールドは、`<EditForm>` 要素の `Model` 属性に割り当てられます。
 * `InputText` コンポーネントの `@bind-Value` は次のようにバインドします。
-  * モデル プロパティ (`exampleModel.Name`) を `InputText` コンポーネントの `Value` プロパティへ。
+  * モデル プロパティ (`exampleModel.Name`) を `InputText` コンポーネントの `Value` プロパティへ。 プロパティのバインドの詳細については、<xref:blazor/data-binding#parent-to-child-binding-with-component-parameters> を参照してください。
   * 変更イベント デリゲートを `InputText` コンポーネントの `ValueChanged` プロパティへ。
 * `DataAnnotationsValidator` コンポーネントは、データ注釈を使用して検証サポートをアタッチします。
 * `ValidationSummary` コンポーネントは、検証メッセージの概要を示します。
@@ -202,7 +202,7 @@ public class Starship
 * `isValid` をチェックすることによって、クライアント側とサーバー側の検証の結果に応じて、追加のコードが実行されます。
 
 ```razor
-<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
+<EditForm EditContext="@editContext" OnSubmit="HandleSubmit">
 
     ...
 

@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor のホスティング モデル
-author: guardrex
-description: Blazor WebAssembly と Blazor サーバーのホスティング モデルについて学習します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/31/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/hosting-models
-ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772088"
+title:'ASP.NET Core Blazor のホスティング モデル' author: description:'Blazor WebAssembly と Blazor サーバーのホスティング モデルについて学習します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
 作成者: [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタイム ( *Blazor WebAssembly*) 上のブラウザーのクライアント側で、または ASP.NET Core ( *Blazor サーバー*) のサーバー側で実行されるように設計された Web フレームワークです。 ホスティング モデルに関係なく、アプリ モデルとコンポーネント モデルは "*同じ*" です。
 
@@ -34,7 +20,7 @@ Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタ
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。アプリがブラウザー UI スレッド上で直接実行されます。UI の更新とイベントの処理は、同じプロセス内で行われます。アプリのアセットは、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
+Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
 
 ![Blazor WebAssembly:Blazor アプリは、ブラウザー内の UI スレッドで実行されます。](hosting-models/_static/blazor-webassembly.png)
 

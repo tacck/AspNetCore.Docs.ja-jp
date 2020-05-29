@@ -1,36 +1,22 @@
 ---
-title: ASP.NET Core Blazor 状態管理
-author: guardrex
-description: Blazor Server アプリで状態を維持する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/state-management
-ms.openlocfilehash: 5e14a0697fbc98575970b93dfa12c68e9f561c56
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967416"
+title:'ASP.NET Core Blazor 状態管理' author: description:'Blazor サーバー アプリで状態を維持する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Blazor Server はステートフル アプリ フレームワークです。 ほとんどの場合、アプリではサーバーとの現在進行中の接続が維持されます。 ユーザーの状態は、"*回線*" の中のサーバーのメモリに保持されます。 
 
 ユーザーの回線に保存される状態には次のとおりです。
 
-* レンダリングされた UI &mdash; 階層になっているコンポーネント インスタンスとその最近のレンダリング出力。
+* レンダリングされた UI:階層になっているコンポーネント インスタンスとその最近のレンダリング出力。
 * コンポーネント インスタンスに含まれるあらゆるフィールドとプロパティの値。
 * 回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータ。
 
@@ -56,7 +42,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ほ
 
 一般的に、ユーザーが既存のデータを読み取るだけでなく、積極的にデータを作成するとき、回線間の状態の維持が適用されます。
 
-1 つの回線を超えて状態を維持するには、"*データをサーバーのメモリに保存するだけでは不十分です*"。 アプリでは、データを他の保管場所にも保存する必要があります。 状態は自動的に保存されません。ステートフルなデータ保存を実装するアプリを開発するとき、措置を講じる必要があります。
+1 つの回線を超えて状態を維持するには、"*データをサーバーのメモリに保存するだけでは不十分です*"。 アプリでは、データを他の保管場所にも保存する必要があります。 状態は自動的に保存されません。 ステートフルなデータ保存を実装するアプリを開発するとき、措置を講じる必要があります。
 
 データの永続性は通常、その状態を作り出すためにユーザーが労力を費やす、高価値の状態にのみ必要です。 次の例では、状態を維持することで、時間が節約され、商業活動の支援になります。
 
@@ -99,7 +85,7 @@ Azure データ ストレージ オプションに関する詳細については
 次の場合、ブラウザーのアドレス バーのコンテンツが保持されます。
 
 * ユーザーがページを手動で再読み込みした。
-* Web サーバーが利用できなくなった &mdash; 別のサーバーに接続する目的で、ページの再読み込みがユーザーに強制される。
+* Web サーバーが利用できなくなり、別のサーバーに接続する目的で、ページの再読み込みがユーザーに強制される。
 
 `@page` ディレクティブで URL パターンを定義する方法については、「<xref:blazor/routing>」を参照してください。
 

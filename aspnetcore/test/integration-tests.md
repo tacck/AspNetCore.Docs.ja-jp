@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core での統合テスト
-author: rick-anderson
-description: 統合テストによってデータベース、ファイル システム、ネットワークなどのインフラストラクチャ レベルで、アプリのコンポーネントがどのように正しく機能するようになるかを説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 01/06/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: test/integration-tests
-ms.openlocfilehash: a01d2881133f39c1a26e4724ae25336c54746bc5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766395"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core での統合テスト
 
@@ -32,11 +19,11 @@ ms.locfileid: "82766395"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このサンプル アプリは Razor ページ アプリであり、Razor ページの基本を理解していることを前提としています。 Razor ページに慣れていない場合は、次のトピックを参照してください。
+このサンプル アプリは Razor Pages アプリであり、Razor Pages の基本を理解していることを前提としています。 Razor Pages に慣れていない場合は、次のトピックを参照してください。
 
-* [Razor ページを始める](xref:razor-pages/index)
-* [Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)
-* [Razor ページの単体テスト](xref:test/razor-pages-tests)
+* [Razor Pages の概要](xref:razor-pages/index)
+* [Razor Pages の使用を開始する](xref:tutorials/razor-pages/razor-pages-start)
+* [Razor Pages の単体テスト](xref:test/razor-pages-tests)
 
 > [!NOTE]
 > SPA をテストする場合は、ブラウザーを自動化できる [Selenium](https://www.seleniumhq.org/) などのツールを推奨します。
@@ -103,7 +90,7 @@ ASP.NET Core の統合テストには、次のものが必要です。
 > [!NOTE]
 > アプリのテスト プロジェクトを作成する場合は、単体テストを統合テストから別のプロジェクトに分離します。 これにより、インフラストラクチャ テスト コンポーネントが誤って単体テストに含まれないようにすることができます。 単体テストと統合テストを分離すると、実行されるテストのセットを制御することもできます。
 
-Razor ページ アプリと MVC アプリのテストの構成には、ほぼ違いはありません。 唯一の違いは、テストの命名方法です。 Razor ページ アプリでは、ページ エンドポイントのテストは通常、ページ モデル クラスにちなんだ名前が付けられます (たとえば、`IndexPageTests` は Index ページのコンポーネントの統合テストを行います)。 MVC アプリでは、テストは通常、コントローラー クラス別に編成され、テストするコントローラーにちなんだ名前が付けられます (たとえば、`HomeControllerTests` は Home コントローラーのコンポーネントの統合テストを行います)。
+Razor Pages アプリと MVC アプリのテストの構成には、ほぼ違いがありません。 唯一の違いは、テストの命名方法です。 Razor Pages アプリでは、ページ エンドポイントのテストは通常、ページ モデル クラスにちなんだ名前が付けられます (たとえば、`IndexPageTests` では Index ページのコンポーネントの統合テストが行われます)。 MVC アプリでは、テストは通常、コントローラー クラス別に編成され、テストするコントローラーにちなんだ名前が付けられます (たとえば、`HomeControllerTests` は Home コントローラーのコンポーネントの統合テストを行います)。
 
 ## <a name="test-app-prerequisites"></a>テスト アプリの前提条件
 
@@ -155,6 +142,8 @@ Web ホストの構成は、`WebApplicationFactory` から継承して 1 つ以�
    [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)でのデータベースのシード処理は、`InitializeDbForTests` メソッドによって実行されます。 このメソッドについては、[統合テストのサンプル: テスト アプリの構成](#test-app-organization)に関するセクションをご覧ください。
 
    SUT のデータベース コンテキストは、`Startup.ConfigureServices` メソッドに登録されます。 テスト アプリの `builder.ConfigureServices` コールバックは、アプリの `Startup.ConfigureServices` コードが実行された*後*に実行されます。 ASP.NET Core 3.0 リリースの[汎用ホスト](xref:fundamentals/host/generic-host)により、実行順序に関する互換性のない変更が行われています。 アプリのデータベースとは異なるデータベースをテストに使用するには、`builder.ConfigureServices` でアプリのデータベース コンテキストを置き換える必要があります。
+
+   まだ [Web ホスト}(xref:fundamentals/host/web-host) を使用している SUT の場合、テスト アプリの `builder.ConfigureServices` コールバックは、SUT の `Startup.ConfigureServices` コードの "*前に*" 実行されます。 テスト アプリの `builder.ConfigureTestServices` コールバックは、"*後で*" 実行されます。
 
    サンプル アプリでは、データベース コンテキストのサービス記述子を検索し、記述子を使用してサービス登録を削除しています。 次に、ファクトリは、テストにメモリ内データベースを使用する新しい `ApplicationDbContext` を追加します。
 
@@ -213,11 +202,45 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
 次の表に、`HttpClient` インスタンスを作成するときに使用できる既定の [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) を示します。
 
 | オプション | 説明 | Default |
-| ------ | ----------- | ------- |
-| [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` インスタンスがリダイレクト応答に自動的に従うかどうかを取得または設定します。 | `true` |
-| [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` インスタンスのベース アドレスを取得または設定します。 | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが Cookie を処理する必要があるかどうかを取得または設定します。 | `true` |
-| [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` インスタンスが従う必要があるリダイレクト応答の最大数を取得または設定します。 | 7 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` インスタンスがリダイレクト応答に自動的に従うかどうかを取得または設定します。 | `true` | | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` インスタンスのベース アドレスを取得または設定します。 | `http://localhost` | | [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが Cookie を処理する必要があるかどうかを取得または設定します。 | `true` | | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` インスタンスが従う必要があるリダイレクト応答の最大数を取得または設定します。 | 7 |
 
 `WebApplicationFactoryClientOptions` クラスを作成し、それを [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) メソッドに渡します (既定値については、コード例を参照してください)。
 
@@ -289,7 +312,7 @@ _client = _factory.CreateClient(clientOptions);
 * 認証されていないユーザーは、アプリのログイン ページにリダイレクトされます。
 * 認証されたユーザーには、コンテンツを返します。
 
-SUT の `/SecurePage` ページは、[AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 規約を使用してページに [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) を適用します。 詳細については、「[Razor ページの承認規則](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)」を参照してください。
+SUT の `/SecurePage` ページは、[AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 規約を使用してページに [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) を適用します。 詳細については、[Razor Pages の承認規則](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)に関するページを参照してください。
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
 
@@ -314,16 +337,23 @@ SUT の `/SecurePage` ページは、[AuthorizePage](/dotnet/api/microsoft.exten
 
 ## <a name="set-the-environment"></a>環境を設定する
 
-既定では、SUT のホストとアプリ環境は、開発環境を使用するように構成されています。 SUT の環境をオーバーライドするには、次のようにします。
+既定では、SUT のホストとアプリ環境は、開発環境を使用するように構成されています。 `IHostBuilder` を使用しているときに SUT の環境をオーバーライドするには、次のようにします。
 
 * `ASPNETCORE_ENVIRONMENT` 環境変数 (たとえば、`Staging`、`Production`、または `Testing` などのカスタム値) を設定します。
 * テスト アプリで `CreateHostBuilder` をオーバーライドして、`ASPNETCORE` で始まる環境変数を読み取ります。
 
 ```csharp
-protected override IHostBuilder CreateHostBuilder() => 
+protected override IHostBuilder CreateHostBuilder() =>
     base.CreateHostBuilder()
         .ConfigureHostConfiguration(
             config => config.AddEnvironmentVariables("ASPNETCORE"));
+```
+
+SUT が Web ホスト (`IWebHostBuilder`) を使用している場合は、`CreateWebHostBuilder` をオーバーライドします。
+
+```csharp
+protected override IWebHostBuilder CreateWebHostBuilder() =>
+    base.CreateWebHostBuilder().UseEnvironment("Testing");
 ```
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>テスト インフラストラクチャがアプリ コンテンツのルート パスを推測する方法
@@ -351,9 +381,78 @@ protected override IHostBuilder CreateHostBuilder() =>
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)は、次の 2 つのアプリで構成されています。
 
 | アプリ | プロジェクト ディレクトリ | 説明 |
-| --- | ----------------- | ----------- |
-| メッセージ アプリ (SUT) | *src/RazorPagesProject* | ユーザーは、メッセージの追加、1 つ削除、すべて削除、および分析を行うことができます。 |
-| アプリをテストする | *tests/RazorPagesProject.Tests* | SUT の統合テストに使用されます。 |
+| --- | ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | Message app (the SUT) | *src/RazorPagesProject* | ユーザーは、メッセージの追加、1 つ削除、すべて削除、および分析を行うことができます。 | | Test app | *tests/RazorPagesProject.Tests* | SUT の統合テストに使用されます。 |
 
 テストは、[Visual Studio](https://visualstudio.microsoft.com) などの IDE に組み込まれているテスト機能を使用して実行できます。 [Visual Studio Code](https://code.visualstudio.com/) またはコマンド ラインを使用している場合は、コマンド プロンプトで *tests/RazorPagesProject.Tests* ディレクトリを開き、次のコマンドを実行します。
 
@@ -363,7 +462,7 @@ dotnet test
 
 ### <a name="message-app-sut-organization"></a>メッセージ アプリ (SUT) の構成
 
-SUT は、次の特性を持つ Razor ページ メッセージ システムです。
+SUT は、次の特性を持つ Razor Pages メッセージ システムです。
 
 * アプリのインデックス ページ (*Pages/Index.cshtml* と *Pages/Index.cshtml.cs*) には、メッセージの追加、削除、および分析 (メッセージあたりの平均単語数) を制御する UI およびページ モデル メソッドが用意されています。
 * メッセージは、`Id` (キー) と `Text` (メッセージ) の 2 つのプロパティを持つ `Message` クラス (*Data/Message.cs*) によって記述されます。 `Text` プロパティは必須であり、200 文字までに制限されています。
@@ -374,18 +473,93 @@ SUT は、次の特性を持つ Razor ページ メッセージ システムで�
 
 &#8224; EF トピック「[InMemory を使用したテスト](/ef/core/miscellaneous/testing/in-memory)」では、MSTest を使用したテストでメモリ内データベースを使用する方法について説明します。 このトピックでは、[xUnit](https://xunit.github.io/) テスト フレームワークを使用します。 テストの概念とテストの実装は、異なるテスト フレームワークでも類似していますが、同一ではありません。
 
-アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor ページはこれらの開発パターンをサポートしています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](/aspnet/core/mvc/controllers/testing)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
+アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor Pages ではこれらの開発パターンがサポートされています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](/aspnet/core/mvc/controllers/testing)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
 
 ### <a name="test-app-organization"></a>テスト アプリの構成
 
 テスト アプリは、*tests/RazorPagesProject.Tests* ディレクトリにあるコンソール アプリです。
 
 | テスト アプリのディレクトリ | 説明 |
-| ------------------ | ----------- |
-| *AuthTests* | 次のテスト メソッドを含みます。<ul><li>認証されていないユーザーがセキュリティで保護されたページにアクセスする。</li><li>モック <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> で認証されたユーザーがセキュリティで保護されたページにアクセスする。</li><li>GitHub ユーザー プロファイルを取得し、プロファイルのユーザー ログインを確認する。</li></ul> |
-| *BasicTests* | ルーティングおよびコンテンツ タイプのテスト メソッドを含みます。 |
-| *IntegrationTests* | カスタム `WebApplicationFactory` クラスを使用したインデックス ページの統合テストを含みます。 |
-| *Helpers/Utilities* | <ul><li>*Utilities.cs* には、データベースにテスト データをシードする `InitializeDbForTests` メソッドが含まれています。</li><li>*HtmlHelpers.cs* には、テスト メソッドで使用する AngleSharp `IHtmlDocument` を返すメソッドが用意されています。</li><li>*HttpClientExtensions.cs* は、SUT に要求を送信する `SendAsync` のオーバーロードを提供します。</li></ul> |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | *AuthTests* | 次のテスト メソッドを含みます。<ul><li>認証されていないユーザーがセキュリティで保護されたページにアクセスする。</li><li>モック <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> で認証されたユーザーがセキュリティで保護されたページにアクセスする。</li><li>GitHub ユーザー プロファイルを取得し、プロファイルのユーザー ログインを確認する。</li></ul> | | *BasicTests* | ルーティングおよびコンテンツ タイプのテスト メソッドを含みます。 | | *IntegrationTests* | カスタム `WebApplicationFactory` クラスを使用したインデックス ページの統合テストを含みます。 | | *Helpers/Utilities* | <ul><li>*Utilities.cs* には、データベースにテスト データをシードする `InitializeDbForTests` メソッドが含まれています。</li><li>*HtmlHelpers.cs* には、テスト メソッドで使用する AngleSharp `IHtmlDocument` を返すメソッドが用意されています。</li><li>*HttpClientExtensions.cs* は、SUT に要求を送信する `SendAsync` のオーバーロードを提供します。</li></ul> |
 
 テスト フレームワークは、[xUnit](https://xunit.github.io/) です。 統合テストは、[TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) を含む [Microsoft.AspNetCore.TestHost](/dotnet/api/microsoft.aspnetcore.testhost) を使用して実行されます。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) パッケージはテスト ホストとテスト サーバーを構成するために使用されるため、テスト アプリのプロジェクト ファイルまたはテスト アプリの開発者構成で直接 `TestHost` および `TestServer` パッケージを参照する必要はありません。
 
@@ -399,6 +573,8 @@ SUT は、次の特性を持つ Razor ページ メッセージ システムで�
 
 SUT のデータベース コンテキストは、`Startup.ConfigureServices` メソッドに登録されます。 テスト アプリの `builder.ConfigureServices` コールバックは、アプリの `Startup.ConfigureServices` コードが実行された*後*に実行されます。 テストに異なるデータベースを使用するには、アプリのデータベース コンテキストを `builder.ConfigureServices`で置き換える必要があります。 詳細については、「[WebApplicationFactory のカスタマイズ](#customize-webapplicationfactory)」セクションをご覧ください。
 
+まだ [Web ホスト}(xref:fundamentals/host/web-host) を使用している SUT の場合、テスト アプリの `builder.ConfigureServices` コールバックは、SUT の `Startup.ConfigureServices` コードの "*前に*" 実行されます。 テスト アプリの `builder.ConfigureTestServices` コールバックは、"*後で*" 実行されます。
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
@@ -409,11 +585,11 @@ SUT のデータベース コンテキストは、`Startup.ConfigureServices` �
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このサンプル アプリは Razor ページ アプリであり、Razor ページの基本を理解していることを前提としています。 Razor ページに慣れていない場合は、次のトピックを参照してください。
+このサンプル アプリは Razor Pages アプリであり、Razor Pages の基本を理解していることを前提としています。 Razor Pages に慣れていない場合は、次のトピックを参照してください。
 
-* [Razor ページを始める](xref:razor-pages/index)
-* [Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)
-* [Razor ページの単体テスト](xref:test/razor-pages-tests)
+* [Razor Pages の概要](xref:razor-pages/index)
+* [Razor Pages の使用を開始する](xref:tutorials/razor-pages/razor-pages-start)
+* [Razor Pages の単体テスト](xref:test/razor-pages-tests)
 
 > [!NOTE]
 > SPA をテストする場合は、ブラウザーを自動化できる [Selenium](https://www.seleniumhq.org/) などのツールを推奨します。
@@ -480,7 +656,7 @@ ASP.NET Core の統合テストには、次のものが必要です。
 > [!NOTE]
 > アプリのテスト プロジェクトを作成する場合は、単体テストを統合テストから別のプロジェクトに分離します。 これにより、インフラストラクチャ テスト コンポーネントが誤って単体テストに含まれないようにすることができます。 単体テストと統合テストを分離すると、実行されるテストのセットを制御することもできます。
 
-Razor ページ アプリと MVC アプリのテストの構成には、ほぼ違いはありません。 唯一の違いは、テストの命名方法です。 Razor ページ アプリでは、ページ エンドポイントのテストは通常、ページ モデル クラスにちなんだ名前が付けられます (たとえば、`IndexPageTests` は Index ページのコンポーネントの統合テストを行います)。 MVC アプリでは、テストは通常、コントローラー クラス別に編成され、テストするコントローラーにちなんだ名前が付けられます (たとえば、`HomeControllerTests` は Home コントローラーのコンポーネントの統合テストを行います)。
+Razor Pages アプリと MVC アプリのテストの構成には、ほぼ違いがありません。 唯一の違いは、テストの命名方法です。 Razor Pages アプリでは、ページ エンドポイントのテストは通常、ページ モデル クラスにちなんだ名前が付けられます (たとえば、`IndexPageTests` では Index ページのコンポーネントの統合テストが行われます)。 MVC アプリでは、テストは通常、コントローラー クラス別に編成され、テストするコントローラーにちなんだ名前が付けられます (たとえば、`HomeControllerTests` は Home コントローラーのコンポーネントの統合テストを行います)。
 
 ## <a name="test-app-prerequisites"></a>テスト アプリの前提条件
 
@@ -519,7 +695,7 @@ SUT の [環境](xref:fundamentals/environments) が設定されていない場�
 
 Web ホストの構成は、`WebApplicationFactory` から継承して 1 つ以上のカスタム ファクトリを作成することで、テスト クラスとは別に作成できます。
 
-1. `WebApplicationFactory` から継承し、[ConfigureWebHost](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.configurewebhost) をオーバーライドします。 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) では、[ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices) を使用してサービス コレクションを構成できます。
+1. `WebApplicationFactory` から継承し、[ConfigureWebHost](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.configurewebhost) をオーバーライドします。 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) では、[ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices) を使用してサービス コレクションを構成できます。これはアプリの `Startup.ConfigureServices` の前に実行されます。 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) では、[ConfigureTestServices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices) を使用して、サービス コレクション内の登録済みサービスをオーバーライドしたり変更したりできます。
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
@@ -567,11 +743,45 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
 次の表に、`HttpClient` インスタンスを作成するときに使用できる既定の [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) を示します。
 
 | オプション | 説明 | Default |
-| ------ | ----------- | ------- |
-| [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` インスタンスがリダイレクト応答に自動的に従うかどうかを取得または設定します。 | `true` |
-| [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` インスタンスのベース アドレスを取得または設定します。 | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが Cookie を処理する必要があるかどうかを取得または設定します。 | `true` |
-| [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` インスタンスが従う必要があるリダイレクト応答の最大数を取得または設定します。 | 7 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` インスタンスがリダイレクト応答に自動的に従うかどうかを取得または設定します。 | `true` | | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` インスタンスのベース アドレスを取得または設定します。 | `http://localhost` | | [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが Cookie を処理する必要があるかどうかを取得または設定します。 | `true` | | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` インスタンスが従う必要があるリダイレクト応答の最大数を取得または設定します。 | 7 |
 
 `WebApplicationFactoryClientOptions` クラスを作成し、それを [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) メソッドに渡します (既定値については、コード例を参照してください)。
 
@@ -643,7 +853,7 @@ _client = _factory.CreateClient(clientOptions);
 * 認証されていないユーザーは、アプリのログイン ページにリダイレクトされます。
 * 認証されたユーザーには、コンテンツを返します。
 
-SUT の `/SecurePage` ページは、[AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 規約を使用してページに [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) を適用します。 詳細については、「[Razor ページの承認規則](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)」を参照してください。
+SUT の `/SecurePage` ページは、[AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 規約を使用してページに [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) を適用します。 詳細については、[Razor Pages の承認規則](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)に関するページを参照してください。
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
 
@@ -671,13 +881,38 @@ SUT の `/SecurePage` ページは、[AuthorizePage](/dotnet/api/microsoft.exten
 既定では、SUT のホストとアプリ環境は、開発環境を使用するように構成されています。 SUT の環境をオーバーライドするには、次のようにします。
 
 * `ASPNETCORE_ENVIRONMENT` 環境変数 (たとえば、`Staging`、`Production`、または `Testing` などのカスタム値) を設定します。
-* テスト アプリで `CreateHostBuilder` をオーバーライドして、`ASPNETCORE` で始まる環境変数を読み取ります。
+* テスト アプリで `CreateWebHostBuilder` をオーバーライドして、`ASPNETCORE_ENVIRONMENT` 環境変数を読み取ります。
 
 ```csharp
-protected override IHostBuilder CreateHostBuilder() => 
-    base.CreateHostBuilder()
-        .ConfigureHostConfiguration(
-            config => config.AddEnvironmentVariables("ASPNETCORE"));
+public class CustomWebApplicationFactory<TStartup> 
+    : WebApplicationFactory<TStartup> where TStartup: class
+{
+    protected override IWebHostBuilder CreateWebHostBuilder()
+    {
+        return base.CreateWebHostBuilder()
+            .UseEnvironment(
+                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+    }
+
+    ...
+}
+```
+
+環境は、カスタムの <xref:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory%601> のホスト ビルダーで直接設定することもできます。
+
+```csharp
+public class CustomWebApplicationFactory<TStartup> 
+    : WebApplicationFactory<TStartup> where TStartup: class
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.UseEnvironment(
+            Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+    
+        ...
+    }
+
+    ...
 ```
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>テスト インフラストラクチャがアプリ コンテンツのルート パスを推測する方法
@@ -715,9 +950,78 @@ Visual Studio を使用する場合は、ファイルの **[出力ディレク�
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)は、次の 2 つのアプリで構成されています。
 
 | アプリ | プロジェクト ディレクトリ | 説明 |
-| --- | ----------------- | ----------- |
-| メッセージ アプリ (SUT) | *src/RazorPagesProject* | ユーザーは、メッセージの追加、1 つ削除、すべて削除、および分析を行うことができます。 |
-| アプリをテストする | *tests/RazorPagesProject.Tests* | SUT の統合テストに使用されます。 |
+| --- | ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | Message app (the SUT) | *src/RazorPagesProject* | ユーザーは、メッセージの追加、1 つ削除、すべて削除、および分析を行うことができます。 | | Test app | *tests/RazorPagesProject.Tests* | SUT の統合テストに使用されます。 |
 
 テストは、[Visual Studio](https://visualstudio.microsoft.com) などの IDE に組み込まれているテスト機能を使用して実行できます。 [Visual Studio Code](https://code.visualstudio.com/) またはコマンド ラインを使用している場合は、コマンド プロンプトで *tests/RazorPagesProject.Tests* ディレクトリを開き、次のコマンドを実行します。
 
@@ -727,7 +1031,7 @@ dotnet test
 
 ### <a name="message-app-sut-organization"></a>メッセージ アプリ (SUT) の構成
 
-SUT は、次の特性を持つ Razor ページ メッセージ システムです。
+SUT は、次の特性を持つ Razor Pages メッセージ システムです。
 
 * アプリのインデックス ページ (*Pages/Index.cshtml* と *Pages/Index.cshtml.cs*) には、メッセージの追加、削除、および分析 (メッセージあたりの平均単語数) を制御する UI およびページ モデル メソッドが用意されています。
 * メッセージは、`Id` (キー) と `Text` (メッセージ) の 2 つのプロパティを持つ `Message` クラス (*Data/Message.cs*) によって記述されます。 `Text` プロパティは必須であり、200 文字までに制限されています。
@@ -738,18 +1042,93 @@ SUT は、次の特性を持つ Razor ページ メッセージ システムで�
 
 &#8224; EF トピック「[InMemory を使用したテスト](/ef/core/miscellaneous/testing/in-memory)」では、MSTest を使用したテストでメモリ内データベースを使用する方法について説明します。 このトピックでは、[xUnit](https://xunit.github.io/) テスト フレームワークを使用します。 テストの概念とテストの実装は、異なるテスト フレームワークでも類似していますが、同一ではありません。
 
-アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor ページはこれらの開発パターンをサポートしています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](/aspnet/core/mvc/controllers/testing)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
+アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor Pages ではこれらの開発パターンがサポートされています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](/aspnet/core/mvc/controllers/testing)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
 
 ### <a name="test-app-organization"></a>テスト アプリの構成
 
 テスト アプリは、*tests/RazorPagesProject.Tests* ディレクトリにあるコンソール アプリです。
 
 | テスト アプリのディレクトリ | 説明 |
-| ------------------ | ----------- |
-| *AuthTests* | 次のテスト メソッドを含みます。<ul><li>認証されていないユーザーがセキュリティで保護されたページにアクセスする。</li><li>モック <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> で認証されたユーザーがセキュリティで保護されたページにアクセスする。</li><li>GitHub ユーザー プロファイルを取得し、プロファイルのユーザー ログインを確認する。</li></ul> |
-| *BasicTests* | ルーティングおよびコンテンツ タイプのテスト メソッドを含みます。 |
-| *IntegrationTests* | カスタム `WebApplicationFactory` クラスを使用したインデックス ページの統合テストを含みます。 |
-| *Helpers/Utilities* | <ul><li>*Utilities.cs* には、データベースにテスト データをシードする `InitializeDbForTests` メソッドが含まれています。</li><li>*HtmlHelpers.cs* には、テスト メソッドで使用する AngleSharp `IHtmlDocument` を返すメソッドが用意されています。</li><li>*HttpClientExtensions.cs* は、SUT に要求を送信する `SendAsync` のオーバーロードを提供します。</li></ul> |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | *AuthTests* | 次のテスト メソッドを含みます。<ul><li>認証されていないユーザーがセキュリティで保護されたページにアクセスする。</li><li>モック <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> で認証されたユーザーがセキュリティで保護されたページにアクセスする。</li><li>GitHub ユーザー プロファイルを取得し、プロファイルのユーザー ログインを確認する。</li></ul> | | *BasicTests* | ルーティングおよびコンテンツ タイプのテスト メソッドを含みます。 | | *IntegrationTests* | カスタム `WebApplicationFactory` クラスを使用したインデックス ページの統合テストを含みます。 | | *Helpers/Utilities* | <ul><li>*Utilities.cs* には、データベースにテスト データをシードする `InitializeDbForTests` メソッドが含まれています。</li><li>*HtmlHelpers.cs* には、テスト メソッドで使用する AngleSharp `IHtmlDocument` を返すメソッドが用意されています。</li><li>*HttpClientExtensions.cs* は、SUT に要求を送信する `SendAsync` のオーバーロードを提供します。</li></ul> |
 
 テスト フレームワークは、[xUnit](https://xunit.github.io/) です。 統合テストは、[TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) を含む [Microsoft.AspNetCore.TestHost](/dotnet/api/microsoft.aspnetcore.testhost) を使用して実行されます。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) パッケージはテスト ホストとテスト サーバーを構成するために使用されるため、テスト アプリのプロジェクト ファイルまたはテスト アプリの開発者構成で直接 `TestHost` および `TestServer` パッケージを参照する必要はありません。
 

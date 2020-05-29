@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す
-author: guardrex
-description: Blazor アプリで JavaScript 関数から .NET メソッドを呼び出す方法について学習します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 9eab35f3fd856debf9f0305aedf012d63b9b800a
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967325"
+title:'ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す' author: description:'Blazor アプリで JavaScript 関数から .NET メソッドを呼び出す方法について学習します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Shashikant Rudrawadi](http://wisne.co)、[Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。
 
@@ -373,7 +359,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 詳細については、次のイシューを参照してください。
 
 * [Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) (循環参照はサポートされていません、テイク 2 (dotnet/aspnetcore #20525))
-* [Proposal:Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))
+* [Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))
 
 ## <a name="additional-resources"></a>その他の技術情報
 

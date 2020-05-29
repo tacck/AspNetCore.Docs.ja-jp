@@ -1,32 +1,26 @@
 ---
-title: 最初の Blazor アプリをビルドする
-author: guardrex
-description: Blazor アプリを段階的に構築します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/20/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: tutorials/first-blazor-app
-ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776605"
+title:'初めての Blazor アプリの作成' author: description:'Blazor アプリを段階的に構築します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="build-your-first-blazor-app"></a>最初の Blazor アプリをビルドする
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+このチュートリアルでは、Blazor アプリをビルドして変更する方法を示します。 以下の方法について説明します。
 
-このチュートリアルでは、Blazor アプリをビルドして変更する方法を示します。
+> [!div class="checklist"]
+> * Todo リストの Blazor アプリ プロジェクトを作成する
+> * Razor コンポーネントを変更する
+> * コンポーネントでイベント処理とデータ バインディングを使用する
+> * Blazor アプリで依存関係の挿入 (DI) とルーティングを使用する
+
+このチュートリアルの最後には、動作するチャット アプリが完成します。
 
 ## <a name="build-components"></a>コンポーネントを構築する
 
@@ -127,7 +121,7 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
 
 *Pages/FetchData.razor*:
 
-[!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
+[!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-9)]
 
 各 forecast 変数を気象データのテーブルの行としてレンダリングするために、[`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) ループが使われています。
 
@@ -213,6 +207,18 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
 1. アプリケーションをリビルドして実行します。 Todo アイテムを追加して新しいコードをテストします。
+
+## <a name="next-steps"></a>次の手順
+
+このチュートリアルでは、次の作業を行う方法を学びました。
+
+> [!div class="checklist"]
+> * Todo リストの Blazor アプリ プロジェクトを作成する
+> * Razor コンポーネントを変更する
+> * コンポーネントでイベント処理とデータ バインディングを使用する
+> * Blazor アプリで依存関係の挿入 (DI) とルーティングを使用する
+
+コンポーネントを構築して使用する方法について説明します。
 
 > [!div class="nextstepaction"]
 > <xref:blazor/components>

@@ -1,34 +1,20 @@
 ---
-title: ASP.NET Core Blazor 依存関係の挿入
-author: guardrex
-description: Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/04/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/dependency-injection
-ms.openlocfilehash: e96698bd0bd8f3f3b290ba24bc8169efb16f1d03
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967533"
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 依存関係の挿入
 
 作成者: [Rainer Stropek](https://www.timecockpit.com)、[Mike Rousos](https://github.com/mjrousos)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Blazor では、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) がサポートされています。 アプリでは、組み込みサービスをコンポーネントに挿入することにより、サービスを使用できます。 また、アプリでは、カスタム サービスを定義して登録し、DI によってアプリ全体でそれを使用できるようにすることもできます。
 
-DI は、中央の場所で構成されたサービスにアクセスするための手法です。 Blazor アプリでは、これは次のような役に立ちます。
+DI は、中央の場所で構成されたサービスにアクセスするための手法です。 これは、Blazor アプリで次のような場合に役立ちます。
 
 * サービス クラスの 1 つのインスタンスを、多数のコンポーネント間で共有します。これは、"*シングルトン*" サービスと呼ばれます。
 * 参照の抽象化を使用することで、具象サービス クラスからコンポーネントを切り離します。 たとえば、アプリ内のデータにアクセスするためのインターフェイス `IDataAccess` について考えます。 このインターフェイスは、具象クラス `DataAccess` によって実装され、アプリのサービス コンテナーにサービスとして登録されます。 コンポーネントで DI を使用して `IDataAccess` の実装を受け取ると、コンポーネントは具象型に結合されません。 たとえば単体テストでのモック実装の場合など、実装をスワップすることができます。
@@ -38,10 +24,59 @@ DI は、中央の場所で構成されたサービスにアクセスするた�
 既定のサービスは、アプリのサービス コレクションに自動的に追加されます。
 
 | サービス | 有効期間 | 説明 |
-| ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | 一時的 | URI によって識別されるリソースに HTTP 要求を送信し、そのリソースから HTTP 応答を受信するためのメソッドが提供されます。<br><br>Blazor WebAssembly アプリの `HttpClient` のインスタンスでは、バックグラウンドでの HTTP トラフィックの処理にブラウザーが使用されます。<br><br>Blazor サーバー アプリには、既定でサービスとして構成される `HttpClient` は含まれません。 Blazor Server アプリに `HttpClient` を提供します。<br><br>詳細については、「<xref:blazor/call-web-api>」を参照してください。 |
-| `IJSRuntime` | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | JavaScript の呼び出しがディスパッチされる JavaScript ランタイムのインスタンスを表します。 詳細については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。 |
-| `NavigationManager` | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | URI とナビゲーション状態を操作するためのヘルパーが含まれます。 詳細については、「[URI およびナビゲーション状態ヘルパー](xref:blazor/routing#uri-and-navigation-state-helpers)」を参照してください。 |
+| ---
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | <xref:System.Net.Http.HttpClient> | 一時的 | URI によって識別されるリソースに HTTP 要求を送信し、そのリソースから HTTP 応答を受信するためのメソッドが提供されます。<br><br>Blazor WebAssembly アプリの `HttpClient` のインスタンスでは、バックグラウンドでの HTTP トラフィックの処理にブラウザーが使用されます。<br><br>Blazor サーバー アプリには、既定でサービスとして構成される `HttpClient` は含まれません。 Blazor サーバー アプリには `HttpClient` を指定します。<br><br>詳細については、「<xref:blazor/call-web-api>」を参照してください。 | | `IJSRuntime` | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | JavaScript の呼び出しがディスパッチされる JavaScript ランタイムのインスタンスを表します。 詳細については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。 | | `NavigationManager` | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | URI とナビゲーション状態を操作するためのヘルパーが含まれます。 詳細については、「[URI およびナビゲーション状態ヘルパー](xref:blazor/routing#uri-and-navigation-state-helpers)」を参照してください。 |
 
 カスタム サービス プロバイダーでは、表に示されている既定のサービスは自動的に提供されません。 カスタム サービス プロバイダーを使用し、表に示されているいずれかのサービスが必要な場合は、必要なサービスを新しいサービス プロバイダーに追加します。
 
@@ -133,10 +168,51 @@ public void ConfigureServices(IServiceCollection services)
 サービスは、次の表に示す有効期間で構成できます。
 
 | 有効期間 | 説明 |
-| -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | 現在、Blazor WebAssembly には DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。 ただし、Blazor サーバー ホスティング モデルでは、`Scoped` 有効期間がサポートされています。 Blazor サーバー アプリでは、スコープ サービスの登録は "*接続*" にスコープされます。 このため、現在の目的がブラウザーでクライアント側を実行する場合でも、現在のユーザーにスコープする必要があるサービスの場合は、スコープ サービスを使用することが推奨されます。 |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI では、サービスの "*単一インスタンス*" が作成されます。 `Singleton` サービスを必要とするすべてのコンポーネントは、同じサービスのインスタンスを受け取ります。 |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | コンポーネントは、サービス コンテナーから `Transient` サービスのインスタンスを取得するたびに、サービスの "*新しいインスタンス*" を受け取ります。 |
+| ---
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | 現在、<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly には DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。 ただし、Blazor サーバー ホスティング モデルでは、`Scoped` 有効期間がサポートされています。 Blazor サーバー アプリでは、スコープ サービスの登録は "*接続*" にスコープされます。 このため、現在の目的がブラウザーでクライアント側を実行する場合でも、現在のユーザーにスコープする必要があるサービスの場合は、スコープ サービスを使用することが推奨されます。 | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI では、サービスの "*単一インスタンス*" が作成されます。 `Singleton` サービスを必要とするすべてのコンポーネントは、同じサービスのインスタンスを受け取ります。 | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | コンポーネントは、サービス コンテナーから `Transient` サービスのインスタンスを取得するたびに、サービスの "*新しいインスタンス*" を受け取ります。 |
 
 DI システムは、ASP.NET Core の DI システムが基になっています。 詳細については、「<xref:fundamentals/dependency-injection>」を参照してください。
 
@@ -153,7 +229,7 @@ DI システムは、ASP.NET Core の DI システムが基になっています
 
 次の例は、`@inject` を使用する方法を示しています。 `Services.IDataAccess` を実装するサービスを、コンポーネントのプロパティ `DataRepository` に挿入します。 コードによって `IDataAccess` 抽象化だけが使用されていることに注意してください。
 
-[!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
+[!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,20)]
 
 内部的には、生成されたプロパティ (`DataRepository`) によって、`InjectAttribute` 属性が使用されます。 通常、この属性を直接使用することはありません。 コンポーネントで基底クラスが必要であり、基底クラスで挿入されたプロパティも必要な場合は、`InjectAttribute` を手動で追加します。
 

@@ -4,7 +4,7 @@ author: tratcher
 description: TestServer を使用して ASP.NET Core のミドルウェアをテストする方法について学習します。
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/6/2019
+ms.date: 5/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 06ff7167e32fbd613c18709e31ecd078b3dfc926
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: ea7fc0e889ab32cbaf23257b3e866519af0727aa
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876423"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424534"
 ---
 # <a name="test-aspnet-core-middleware"></a>ASP.NET Core のミドルウェアのテスト
 
@@ -114,3 +114,20 @@ public async Task TestMiddleware_ExpectedResponse()
 <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> は、<xref:System.Net.Http.HttpClient> の抽象化を使用するのではなく、<xref:Microsoft.AspNetCore.Http.HttpContext> オブジェクトの直接構成を許可します。 <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> を使用すると、[HttpContext.Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) や [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features) など、サーバー上でのみ使用可能な構造体を操作できます。
 
 "*404 - 見つかりません*" 応答をテストした前の例と同じように、前のテストの各 `Assert` ステートメントの逆をチェックします。 このチェックによって、ミドルウェアが正常に動作しているときにテストが正しく失敗しないことが確認されます。 偽陽性のテストが動作することを確認したら、期待されるテストの条件と値に最終的な `Assert` ステートメントを設定します。 もう一度実行して、テストが成功することを確認します。
+
+## <a name="testserver-limitations"></a>TestServer の制限事項
+
+TestServer:
+
+* サーバーの動作をレプリケートしてミドルウェアをテストするように作成されています。
+* すべての <xref:System.Net.Http.HttpClient> 動作をレプリケートしようとは***しません***。
+* クライアントに可能な限りサーバーを制御できるアクセス権を付与し、サーバーで起こっていることの可視性をできるだけ高めるようにします。 たとえば、サーバー状態を直接通信するために、`HttpClient` によって通常スローされない例外がスローされる場合があります。
+* 通常、ミドルウェアに関連しないため、既定ではトランスポート固有のヘッダーの一部は設定しません。 詳細については、次のセクションを参照してください。
+
+### <a name="content-length-and-transfer-encoding-headers"></a>Content-Length ヘッダーと Transfer-Encoding ヘッダー
+
+TestServer では、[Content-Length](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) や [Transfer-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding) などのトランスポート関連の要求ヘッダーまたは応答ヘッダーを設定***しません***。 アプリケーションの使用方法はクライアント、シナリオ、プロトコルによって異なるため、これらのヘッダーに依存しないようにする必要があります。 特定のシナリオをテストするために `Content-Length` および `Transfer-Encoding` が必要な場合は、<xref:System.Net.Http.HttpRequestMessage> または <xref:Microsoft.AspNetCore.Http.HttpContext> を作成するときにテストで指定することができます。 詳しくは、次の GitHub の問題をご覧ください。
+
+* [dotnet/aspnetcore#21677](https://github.com/dotnet/aspnetcore/issues/21677)
+* [dotnet/aspnetcore#18463](https://github.com/dotnet/aspnetcore/issues/18463)
+* [dotnet/aspnetcore#13273](https://github.com/dotnet/aspnetcore/issues/13273)

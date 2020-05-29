@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor WebAssembly をデバッグする
-author: guardrex
-description: Blazor アプリをデバッグする方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/16/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/debug
-ms.openlocfilehash: 9acbb8e7b122a8d527d16ce33af01c2e7e7608bf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767539"
+title:'セキュリティで保護された ASP.NET Core Blazor WebAssembly' author: description:'Blazor アプリをデバッグする方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
 [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chrome) のブラウザー開発ツールを使用してデバッグできます。  または、Visual Studio または Visual Studio Code を使用してアプリをデバッグすることもできます。
 
@@ -58,8 +44,6 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio と Visual Studio Code のデバッグを有効にする
 
-ASP.NET Core 3.2 Preview 3 以降の Blazor WebAssembly プロジェクト テンプレート ([現在のリリースは 3.2 Preview 4](xref:blazor/get-started)) を使用して作成された新しいプロジェクトでは、デバッグが自動的に有効になります。
-
 既存の Blazor WebAssembly アプリのデバッグを有効にするには、スタートアップ プロジェクトの *launchSettings. json* ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。
 
 ```json
@@ -79,7 +63,6 @@ ASP.NET Core 3.2 Preview 3 以降の Blazor WebAssembly プロジェクト テ�
 
 Visual Studio で Blazor WebAssembly アプリをデバッグするには、次のようにします。
 
-1. [Visual Studio 2019 16.6 (Preview 2 以降) の最新のプレビュー リリースがインストールされている](https://visualstudio.com/preview)ことを確認します。
 1. ASP.NET Core でホストされる新しい Blazor WebAssembly アプリを作成します。
 1. <kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。
 1. `IncrementCount` メソッドで *Counter.razor* にブレークポイントを設定します。
@@ -123,7 +106,7 @@ Visual Studio Code で Blazor WebAssembly アプリをデバッグするには�
 
    * デバッグを有効にするために追加の設定が必要であることを示す、次の通知が表示された場合は、適切な拡張機能がインストールされており、JavaScript プレビューのデバッグが有効になっていることを確認してから、ウィンドウを再度読み込みます。
 
-     ![追加のセットアップ必要](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+     ![追加の設定が必要](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
 
    * 通知では、ビルドおよびデバッグのために必要なアセットをアプリに追加することが提案されます。 **[はい]** を選択します。
 

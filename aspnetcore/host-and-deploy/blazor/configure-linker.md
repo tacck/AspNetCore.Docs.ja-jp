@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor 用のリンカーを構成する
-author: guardrex
-description: Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/04/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: b274752b375f68cca0c0a9adf9c146bc525d9eba
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775181"
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor 用のリンカーを構成する
 
 作成者: [Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor WebAssembly では、ビルド中に[中間言語 (IL)](/dotnet/standard/managed-code#intermediate-language--execution) のリンクが実行されて、アプリの出力アセンブリから不要な IL がトリミングされます。 デバッグ構成でビルドすると、リンカーは無効になります。 リンカーを有効にするには、アプリをリリース構成でビルドする必要があります。 Blazor WebAssembly アプリを配置する場合は、リリースでビルドすることをお勧めします。 
 
@@ -107,7 +93,7 @@ XML の構成ファイルを用意してそのファイルをプロジェクト 
 
 ### <a name="configure-the-linker-for-internationalization"></a>国際化用にリンカーを構成する
 
-既定では、WebAssembly アプリに対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報が除去されます。 これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。
+既定では、Blazor WebAssembly に対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。
 
 保持される I18N アセンブリを制御するには、プロジェクト ファイルで MSBuild のプロパティ `<BlazorWebAssemblyI18NAssemblies>` を設定します。
 
@@ -118,15 +104,146 @@ XML の構成ファイルを用意してそのファイルをプロジェクト 
 ```
 
 | リージョンの値     | Mono のリージョン アセンブリ    |
-| ---------------- | ----------------------- |
-| `all`            | すべてのアセンブリが含まれます |
-| `cjk`            | *I18N.CJK.dll*          |
-| `mideast`        | *I18N.MidEast.dll*      |
-| `none` (既定値) | None                    |
-| `other`          | *I18N.Other.dll*        |
-| `rare`           | *I18N.Rare.dll*         |
-| `west`           | *I18N.West.dll*         |
+| ---
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------- | --- title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core のリンカーを構成する Blazor 用のリンカーを構成する' author: description:Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------ | | `all`            | すべてのアセンブリが含まれます | | `cjk`            | *I18N.CJK.dll*          | | `mideast`        | *I18N.MidEast.dll*      | | `none` (既定) | なし                    | | `other`          | *I18N.Other.dll*        | | `rare`           | *I18N.Rare.dll*         | | `west`           | *I18N.West.dll*         |
 
 複数の値を区切るにはコンマを使用します (例: `mideast,west`)。
 
 詳しくは、「[I18N: Pnetlib 国際化フレームワーク ライブラリ (mono/mono GitHub リポジトリ)](https://github.com/mono/mono/tree/master/mcs/class/I18N)」をご覧ください。
+
+## <a name="additional-resources"></a>その他の技術情報
+
+* <xref:performance/blazor/webassembly-best-practices#intermediate-language-il-linking>

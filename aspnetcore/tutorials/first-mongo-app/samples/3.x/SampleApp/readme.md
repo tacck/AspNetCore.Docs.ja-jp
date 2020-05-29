@@ -8,12 +8,12 @@ products:
 - aspnet-core
 - vs
 urlFragment: aspnetcore-webapi-mongodb
-ms.openlocfilehash: 09d73e25667822b8748a00cc76ad6d4f0e5fe290
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6f6022bee678af92066f45032b43b6b87e5f901e
+ms.sourcegitcommit: 7a42bc1e594de36c854fd4363c11821548a9efa7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511406"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83608669"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core と MongoDB で Web API を作成する
 
@@ -469,7 +469,7 @@ namespace BooksApi.Controllers
 
 上記の要件を満たすには、次の変更を行います。
 
-1. JSON.NET は ASP.NET 共有フレームワークから削除されています。 [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) へのパッケージ参照を追加します。
+1. JSON.NET は ASP.NET 共有フレームワークから削除されています。 [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) へのパッケージ参照を追加します。
 
 1. `Startup.ConfigureServices` で、次の強調表示されたコードを `AddMvc` メソッド呼び出しにチェーンします。
 

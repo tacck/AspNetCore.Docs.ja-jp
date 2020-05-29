@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Razor コンポーネントの作成と使用
-author: guardrex
-description: データへのバインド、イベントの処理、コンポーネント ライフ サイクルの管理の方法など、Razor コンポーネントを作成および使用する方法について学習します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/components
-ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153515"
+title:'ASP.NET Core Razor コンポーネントの作成と使用' author: description:'データへのバインド、イベントの処理、コンポーネント ライフ サイクルの管理の方法など、Razor コンポーネントを作成および使用する方法について学習します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -34,9 +22,9 @@ Blazor アプリは *コンポーネント*を使用してビルドします。 
 
 コンポーネントの名前は、大文字で始める必要があります。 たとえば、*MyCoolComponent.razor* は有効で、*myCoolComponent.razor* は無効です。
 
-コンポーネントの UI は、HTML を使用して定義します。 動的なレンダリング ロジック (たとえばループ、条件、式) が、[Razor](xref:mvc/views/razor) と呼ばれる埋め込みの C# 構文を使って追加されています。 アプリがコンパイルされると、HTML マークアップと C# のレンダリング ロジックはコンポーネント クラスに変換されます。 生成されたクラスの名前は、ファイルの名前と一致します。
+コンポーネントの UI は、HTML を使用して定義します。 動的なレンダリング ロジック (たとえばループ、条件、式) が、 *Razor* と呼ばれる埋め込みの C# 構文を使って追加されています。 アプリがコンパイルされると、HTML マークアップと C# のレンダリング ロジックはコンポーネント クラスに変換されます。 生成されたクラスの名前は、ファイルの名前と一致します。
 
-コンポーネント クラスのメンバーは、`@code` ブロック内で定義されています。 `@code` ブロックには、イベント処理のメソッド、またはその他のコンポーネント ロジックを定義するためのメソッドによって、コンポーネントの状態 (プロパティ、フィールド) を指定します。 複数の `@code` ブロックが許容されます。
+コンポーネント クラスのメンバーは、[`@code`][1] ブロック内で定義されています。 [`@code`][1] ブロックには、イベント処理のメソッド、またはその他のコンポーネント ロジックを定義するためのメソッドによって、コンポーネントの状態 (プロパティ、フィールド) を指定します。 複数の [`@code`][1] ブロックが許容されます。
 
 コンポーネント メンバーは、`@` で始まる C# 式を使用して、コンポーネントのレンダリング ロジックの一部として使用できます。 たとえば、フィールド名の前に `@` を付けることによって、C# フィールドがレンダリングされます。 次の例では、以下のように評価され、レンダリングされます。
 
@@ -75,6 +63,15 @@ Blazor アプリは *コンポーネント*を使用してビルドします。 
 
 詳細については、「[コンポーネントのインポート](#import-components)」セクションを参照してください。
 
+## <a name="razor-syntax"></a>Razor の構文
+
+Blazor アプリの Razor コンポーネントでは、Razor 構文が多用されます。 Razor マークアップ言語に慣れていない場合は、先に進む前に「<xref:mvc/views/razor>」を読むことをお勧めします。
+
+Razor 構文でコンテンツにアクセスする場合は、次のセクションに特にご注意ください。
+
+* [ディレクティブ](xref:mvc/views/razor#directives) &ndash; 通常はコンポーネント マークアップの解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
+* [ディレクティブ属性](xref:mvc/views/razor#directive-attributes) &ndash; 通常はコンポーネント要素の解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
+
 ## <a name="static-assets"></a>静的な資産
 
 Blazor は、プロジェクトの [Web ルート (wwwroot) フォルダー](xref:fundamentals/index#web-root)に静的アセットを配置する ASP.NET Core アプリの規則に従います。
@@ -107,13 +104,13 @@ Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) は�
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
-コンポーネント名と一致しない最初の文字が大文字の HTML 要素がコンポーネントに含まれている場合、要素に予期しない名前が付いていることを示す警告が出力されます。 コンポーネントの名前空間に `@using` ディレクティブを追加すると、コンポーネントを使用できるようになり、警告が解決されます。
+コンポーネント名と一致しない最初の文字が大文字の HTML 要素がコンポーネントに含まれている場合、要素に予期しない名前が付いていることを示す警告が出力されます。 コンポーネントの名前空間に [`@using`][2] ディレクティブを追加すると、コンポーネントを使用できるようになり、警告が解決されます。
 
 ## <a name="routing"></a>ルーティング
 
 Blazor でのルーティングは、アプリ内のアクセス可能な各コンポーネントへのルート テンプレートを提供することで実現します。
 
-`@page` ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって `RouteAttribute` を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。
+[`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって `RouteAttribute` を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。
 
 ```razor
 @page "/ParentComponent"
@@ -127,13 +124,13 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 ### <a name="route-parameters"></a>ルート パラメーター
 
-コンポーネントでは、`@page` ディレクティブに指定されたルート テンプレートからルート パラメーターを受け取ることができます。 ルーターでは、ルート パラメーターを使用して、対応するコンポーネント パラメーターが設定されます。
+コンポーネントでは、[`@page`][9] ディレクティブに指定されたルート テンプレートからルート パラメーターを受け取ることができます。 ルーターでは、ルート パラメーターを使用して、対応するコンポーネント パラメーターが設定されます。
 
 *Pages/RouteParameter.razor*:
 
 [!code-razor[](components/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
-オプションのパラメーターはサポートされていないため、前の例では 2 つの `@page` ディレクティブが適用されます。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の `@page` ディレクティブは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
+オプションのパラメーターはサポートされていないため、前の例では 2 つの [`@page`][9] ディレクティブが適用されます。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の [`@page`][9] ディレクティブでは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
 
 複数のフォルダー境界をまたいだパスをキャプチャする "*キャッチオール*" パラメーター構文 (`*`/`**`) は、Razor コンポーネント ( *.razor*) ではサポートされて**いません**。
 
@@ -175,7 +172,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>属性スプラッティングと任意のパラメーター
 
-コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、[`@attributes`](xref:mvc/views/razor#attributes) Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に "*スプラッティング*" できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
+コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、[`@attributes`][3] Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に "*スプラッティング*" できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
 
 次の例で、最初の `<input>` 要素 (`id="useIndividualParams"`) では、個々のコンポーネント パラメーターを使用していますが、2 番目の `<input>` 要素 (`id="useAttributesDict"`) では、属性スプラッティングを使用しています。
 
@@ -243,7 +240,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 `[Parameter]` の `CaptureUnmatchedValues` プロパティにより、パラメーターを他のパラメーターと一致しないすべての属性と一致させることができます。 1 つのコンポーネントで、`CaptureUnmatchedValues` を持つパラメーターは 1 つだけ定義できます。 `CaptureUnmatchedValues` で使用されるプロパティの型は、文字列キーを使用して `Dictionary<string, object>` から割り当て可能である必要があります。 このシナリオでは、`IEnumerable<KeyValuePair<string, object>>` または `IReadOnlyDictionary<string, object>` も使用できます。
 
-要素属性の位置を基準とした `@attributes` の位置は重要です。 `@attributes` が要素にスプラッティングされると、属性は右から左 (最後から最初) に処理されます。 `Child` コンポーネントを使用する次のコンポーネントの例を考えます。
+要素属性の位置を基準とした [`@attributes`][3] の位置は重要です。 [`@attributes`][3] が要素にスプラッティングされると、属性は右から左 (最後から最初) に処理されます。 `Child` コンポーネントを使用する次のコンポーネントの例を考えます。
 
 *ParentComponent.razor*:
 
@@ -260,13 +257,13 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-`Child` コンポーネントの `extra` 属性が `@attributes` の右側に設定されています。 属性は右から左 (最後から最初) に処理されるため、追加の属性によって渡された場合に、`Parent` コンポーネントのレンダリングされる `<div>` に、`extra="5"` が含まれます。
+`Child` コンポーネントの `extra` 属性が [`@attributes`][3] の右側に設定されています。 属性は右から左 (最後から最初) に処理されるため、追加の属性によって渡された場合に、`Parent` コンポーネントのレンダリングされる `<div>` に、`extra="5"` が含まれます。
 
 ```html
 <div extra="5" />
 ```
 
-次の例では、`Child` コンポーネントの `<div>` で、`extra` と `@attributes` の順序が逆になります。
+次の例では、`Child` コンポーネントの `<div>` で、`extra` と [`@attributes`][3] の順序が逆になります。
 
 *ParentComponent.razor*:
 
@@ -293,7 +290,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 コンポーネント参照によって、コンポーネント インスタンスを参照する方法が得られるため、そのインスタンスに `Show` や `Reset` などのコマンドを発行できます。 コンポーネント参照をキャプチャするには:
 
-* 子コンポーネントに [`@ref`](xref:mvc/views/razor#ref) 属性を追加します。
+* 子コンポーネントに [`@ref`][4] 属性を追加します。
 * 子コンポーネントと同じ型のフィールドを定義します。
 
 ```razor
@@ -316,7 +313,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ループ内のコンポーネントを参照するには、「[Capture references to multiple similar child-components](https://github.com/dotnet/aspnetcore/issues/13358)」(複数の類似した子コンポーネントへの参照をキャプチャする) (dotnet/aspnetcore #13358) を参照してください。
 
-コンポーネント参照のキャプチャでは、[要素参照のキャプチャ](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)と類似の構文を使用しますが、それは JavaScript 相互運用機能ではありません。 コンポーネント参照は、JavaScript コードに渡されません &mdash; それらは .NET コードでのみ使用されます。
+コンポーネント参照のキャプチャでは、[要素参照のキャプチャ](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)と類似の構文を使用しますが、それは JavaScript 相互運用機能ではありません。 コンポーネント参照は、JavaScript コードに渡されません。 コンポーネント参照は、.NET コードでのみ使用されます。
 
 > [!NOTE]
 > 子コンポーネントの状態を変えるためにコンポーネント参照を使用**しない**でください。 代わりに、通常の宣言型パラメーターを使用して、子コンポーネントにデータを渡します。 通常の宣言型パラメーターを使用すると、子コンポーネントが正しいタイミングで自動的にレンダリングされます。
@@ -414,7 +411,7 @@ public class NotifierService
 
 `People` コレクションのコンテンツは、挿入、削除、または順序変更されたエントリによって変更される可能性があります。 コンポーネントのレンダリング時に、`<DetailsEditor>` コンポーネントが変更され、異なる `Details` パラメーター値を受け取ることがあります。 これにより、予期したものよりも複雑な再レンダリングが発生する可能性があります。 場合によっては、再レンダリングによって、要素のフォーカスの喪失などの表示動作の違いが発生する可能性があります。
 
-マッピング プロセスは、[`@key`](xref:mvc/views/razor#key) ディレクティブ属性を使用して制御できます。 `@key` により、比較アルゴリズムで、キーの値に基づいて要素やコンポーネントが確実に保持されます。
+マッピング プロセスは、[`@key`][5] ディレクティブ属性を使用して制御できます。 [`@key`][5] により、比較アルゴリズムで、キーの値に基づいて要素やコンポーネントが確実に保持されます。
 
 ```csharp
 @foreach (var person in People)
@@ -434,16 +431,16 @@ public class NotifierService
 * リスト内の特定の位置に `Person` が挿入されると、その対応する位置に、1 つの新しい `<DetailsEditor>` インスタンスが挿入されます。 他のインスタンスは変更されません。
 * `Person` エントリの順序が変更された場合、対応する `<DetailsEditor>` インスタンスは UI で保持され、順序が変更されます。
 
-シナリオによっては、`@key` を使用すると、レンダリングの複雑さが最小限に抑えられ、フォーカス位置など、DOM 変更のステートフルな部分の潜在的な問題を回避できます。
+シナリオによっては、[`@key`][5] を使用すると、レンダリングの複雑さが最小限に抑えられ、フォーカス位置など、DOM 変更のステートフルな部分の潜在的な問題を回避できます。
 
 > [!IMPORTANT]
 > キーは、各コンテナー要素やコンポーネントに対してローカルです。 キーはドキュメント全体でグローバルに比較されません。
 
 ### <a name="when-to-use-key"></a>\@ キーを使用する場面
 
-一般に、リストがレンダリングされ (たとえば、`@foreach` ブロックで)、`@key` を定義するための適切な値が存在する場合は常に、`@key` を使用することは意味があります。
+一般に、リストがレンダリングされ (たとえば、`@foreach` ブロックで)、[`@key`][5] を定義するための適切な値が存在する場合は常に、[`@key`][5] を使用することは意味があります。
 
-また、`@key` を使用して、オブジェクトが変更されたときに Blazor が要素やコンポーネントのサブツリーを保持しないようにすることもできます。
+また、[`@key`][5] を使用して、オブジェクトが変更されたときに Blazor が要素やコンポーネントのサブツリーを保持しないようにすることもできます。
 
 ```razor
 <div @key="currentPerson">
@@ -451,22 +448,22 @@ public class NotifierService
 </div>
 ```
 
-`@currentPerson` が変更された場合、`@key` 属性ディレクティブによって、Blazor に、`<div>` とその子孫全体を破棄させ、新しい要素とコンポーネントで UI 内のサブツリーをリビルドさせます。 これは、`@currentPerson` が変更されたときに、UI の状態が確実に保持されないようにする必要がある場合に役立つ可能性があります。
+`@currentPerson` が変更された場合、[`@key`][5] 属性ディレクティブによって、Blazor に、`<div>` とその子孫全体を破棄させ、新しい要素とコンポーネントで UI 内のサブツリーをリビルドさせます。 これは、`@currentPerson` が変更されたときに、UI の状態が確実に保持されないようにする必要がある場合に役立つ可能性があります。
 
 ### <a name="when-not-to-use-key"></a>\@ キーを使用しない場面
 
-`@key` で比較すると、パフォーマンスが低下します。 パフォーマンスの低下は大きくありませんが、要素やコンポーネントの保存規則を制御することによって、アプリにメリットがある場合にのみ `@key` を指定してください。
+[`@key`][5] で比較すると、パフォーマンスが低下します。 パフォーマンスの低下は大きくありませんが、要素やコンポーネントの保存規則を制御することによって、アプリにメリットがある場合にのみ [`@key`][5] を指定してください。
 
-`@key` を使用しない場合でも、Blazor では可能な限り、子要素とコンポーネント インスタンスが保持されます。 `@key` を使用する唯一の利点は、マッピングを選択する比較アルゴリズムではなく、保持されているコンポーネント インスタンスにモデル インスタンスをマップする*方法*を制御することです。
+[`@key`][5] を使用しない場合でも、Blazor では可能な限り、子要素とコンポーネント インスタンスが保持されます。 [`@key`][5] を使用する唯一の利点は、マッピングを選択する比較アルゴリズムではなく、保持されているコンポーネント インスタンスにモデル インスタンスをマップする "*方法*" を制御することです。
 
 ### <a name="what-values-to-use-for-key"></a>\@ キーに使用する値
 
-一般に、`@key` には、次のいずれかの種類の値を指定するのが適切です。
+一般に、[`@key`][5] には、次のいずれかの種類の値を指定するのが適切です。
 
 * モデル オブジェクトインスタンス (たとえば、前の例のように、`Person` インスタンス)。 これにより、オブジェクト参照の等価性に基づいて保持されます。
 * 一意の識別子 (たとえば、`int` 型、`string` 型、`Guid` 型の主キー値)。
 
-`@key` に使用される値は競合しないようにしてください。 同じ親要素内で競合する値が検出された場合、Blazor では、古い要素やコンポーネントを新しい要素やコンポーネントに確定的にマップできないため、例外がスローされます。 個別の値 (オブジェクト インスタンスや主キー値など) のみを使用してください。
+[`@key`][5] に使用される値は確実に競合しないようにしてください。 同じ親要素内で競合する値が検出された場合、Blazor では、古い要素やコンポーネントを新しい要素やコンポーネントに確定的にマップできないため、例外がスローされます。 個別の値 (オブジェクト インスタンスや主キー値など) のみを使用してください。
 
 ## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>独自のパラメーター プロパティを書き込み先とするコンポーネントを作成しない
 
@@ -565,10 +562,10 @@ public class NotifierService
 
 Razor コンポーネントは、部分クラスとして生成されます。 Razor コンポーネントは、次のいずれかの方法を使用して作成します。
 
-* C# コードは、1 つのファイルに HTML マークアップと Razor コードを含む [`@code`](xref:mvc/views/razor#code) ブロックで定義します。 Blazor テンプレートでは、この方法を使用して Razor コンポーネントを定義します。
+* C# コードは、1 つのファイルに HTML マークアップと Razor コードを含む [`@code`][1] ブロックで定義します。 Blazor テンプレートでは、この方法を使用して Razor コンポーネントを定義します。
 * C# コードは、部分クラスとして定義されている分離コード ファイルに配置されます。
 
-次の例は、Blazor テンプレートから生成されたアプリ内の `@code` ブロックを含む既定の `Counter` コンポーネントを示しています。 HTML マークアップ、Razor コード、C# コードは、同じファイル内にあります。
+次の例は、Blazor テンプレートから生成されたアプリ内の [`@code`][1] ブロックを含む既定の `Counter` コンポーネントを示しています。 HTML マークアップ、Razor コード、C# コードは、同じファイル内にあります。
 
 *Counter.razor*:
 
@@ -635,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>基本クラスの指定
 
-[`@inherits`](xref:mvc/views/razor#inherits) ディレクティブを使用して、コンポーネントの基本クラスを指定できます。 次の例は、コンポーネントが基本クラス `BlazorRocksBase` を継承して、コンポーネントのプロパティとメソッドを提供する方法を示しています。 基本クラスは `ComponentBase` から派生する必要があります。
+[`@inherits`][6] ディレクティブを使用して、コンポーネントの基本クラスを指定できます。 次の例は、コンポーネントが基本クラス `BlazorRocksBase` を継承して、コンポーネントのプロパティとメソッドを提供する方法を示しています。 基本クラスは `ComponentBase` から派生する必要があります。
 
 *Pages/BlazorRocks.razor*:
 
@@ -663,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>属性の指定
 
-属性は、[`@attribute`](xref:mvc/views/razor#attribute) ディレクティブを使用して Razor コンポーネントに指定できます。 次の例では、`[Authorize]` 属性をコンポーネント クラスに適用しています。
+属性は、[`@attribute`][7] ディレクティブを使用して Razor コンポーネントに指定できます。 次の例では、`[Authorize]` 属性をコンポーネント クラスに適用しています。
 
 ```razor
 @page "/"
@@ -674,15 +671,15 @@ namespace BlazorSample
 
 Razor で作成されるコンポーネントの名前空間は、次に基づきます (優先順)。
 
-* Razor ファイル ( *.razor*) マークアップ内の [`@namespace`](xref:mvc/views/razor#namespace) の指定 (`@namespace BlazorSample.MyNamespace`)。
+* Razor ファイル ( *.razor*) マークアップ内の [`@namespace`][8] の指定 (`@namespace BlazorSample.MyNamespace`)。
 * プロジェクト ファイル内のプロジェクトの `RootNamespace` (`<RootNamespace>BlazorSample</RootNamespace>`)。
 * プロジェクト ファイルのファイル名 ( *.csproj*) から取得されたプロジェクト名、およびプロジェクト ルートからコンポーネントへのパス。 たとえば、フレームワークでは *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample.csproj*) が名前空間 `BlazorSample.Pages` に解決されます。 コンポーネントは C# の名前のバインド規則に従います。 この例の `Index` コンポーネントの場合、スコープ内のコンポーネントは、次のすべてのコンポーネントです。
   * 同じ *Pages* フォルダー内。
   * 別の名前空間を明示的に指定しない、プロジェクトのルート内のコンポーネント。
 
-別の名前空間に定義されているコンポーネントは、Razor の [`@using`](xref:mvc/views/razor#using) ディレクティブを使用してスコープ内に取り込みます。
+別の名前空間に定義されているコンポーネントは、Razor の [`@using`][2] ディレクティブを使用してスコープ内に取り込みます。
 
-別のコンポーネントの `NavMenu.razor` が *BlazorSample/Shared/* フォルダーに存在する場合は、次の `@using` ステートメントを使用して、そのコンポーネントを `Index.razor` で使用できます。
+別のコンポーネントの `NavMenu.razor` が *BlazorSample/Shared/* フォルダーに存在する場合は、次の [`@using`][2] ステートメントを使用して、そのコンポーネントを `Index.razor` で使用できます。
 
 ```razor
 @using BlazorSample.Shared
@@ -692,7 +689,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-コンポーネントは、完全修飾名を使用して参照することもできます。この場合、[`@using`](xref:mvc/views/razor#using) ディレクティブは必要ありません。
+コンポーネントは、完全修飾名を使用して参照することもできます。この場合、[`@using`][2] ディレクティブは必要ありません。
 
 ```razor
 This is the Index page.
@@ -973,8 +970,20 @@ Blazor は HTML をレンダリングするため、スケーラブル ベクタ
 }
 ```
 
-ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル ( *.razor*) に直接配置した場合、基本的なイメージ レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで `@bind` を使用できません。 将来のリリースで、これらの制限に対処する予定です。
+ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル ( *.razor*) に直接配置した場合、基本的なイメージ レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで `@bind` を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/blazor/server/threat-mitigation> &ndash; リソース不足に対処する必要がある Blazor サーバー アプリの構築に関するガイダンスが含まれています。
+
+<!--Reference links in article-->
+[1]: <xref:mvc/views/razor#code>
+[2]: <xref:mvc/views/razor#using>
+[3]: <xref:mvc/views/razor#attributes>
+[4]: <xref:mvc/views/razor#ref>
+[5]: <xref:mvc/views/razor#key>
+[6]: <xref:mvc/views/razor#inherits>
+[7]: <xref:mvc/views/razor#attribute>
+[8]: <xref:mvc/views/razor#namespace>
+[9]: <xref:mvc/views/razor#page>
+[10]: <xref:mvc/views/razor#bind>

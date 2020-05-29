@@ -1,23 +1,11 @@
 ---
-title: ブラウザー アプリでの gRPC の使用
-author: jamesnk
-description: ASP.NET Core で、GRPC-Web を使用してブラウザー アプリから呼び出しできるように、gRPC サービスを構成する方法について説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 04/15/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/browser
-ms.openlocfilehash: a74f7acb54b4601a0c30ff1a39dc30231e2b5a78
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774744"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="use-grpc-in-browser-apps"></a>ブラウザー アプリでの gRPC の使用
 
@@ -51,7 +39,7 @@ ASP.NET Core でホストされている gRPC サービスは、HTTP/2 gRPC と�
 ASP.NET Core gRPC サービスで gRPC-Web を有効にするには:
 
 * [Grpc.AspNetCore.Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) パッケージへの参照を追加します。
-* アプリで gRPC-Web を使用するように構成するには、`AddGrpcWeb` と `UseGrpcWeb` を *Startup.cs* に追加します。
+* アプリで gRPC-Web を使用するように構成するには、`UseGrpcWeb` と `EnableGrpcWeb` を *Startup.cs* に追加します。
 
 [!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
@@ -60,9 +48,9 @@ ASP.NET Core gRPC サービスで gRPC-Web を有効にするには:
 * GRPC-Web ミドルウェアの `UseGrpcWeb` を、ルーティングの後かつエンドポイントの前に追加します。
 * `endpoints.MapGrpcService<GreeterService>()` メソッドで、`EnableGrpcWeb` を使用して gRPC-Web をサポートすることを指定します。 
 
-または、ConfigureServices に `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);` を追加して、すべてのサービスで gRPC-Web をサポートするように構成します。
+または、gRPC-Web ミドルウェアを構成して、すべてのサービスで既定で gRPC-Web がサポートされ、`EnableGrpcWeb` が不要になるようにすることもできます。 ミドルウェアを追加するときに `new GrpcWebOptions { DefaultEnabled = true }` を指定します。
 
-[!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=6,13)]
+[!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=12)]
 
 > [!NOTE]
 > .NET Core 3.x で [Http.sys によりホストされている](xref:fundamentals/servers/httpsys)場合は、gRPC-Web が失敗する原因となる既知の問題があります。
@@ -102,7 +90,7 @@ gRPC-Web 呼び出しを行うように .NET gRPC クライアントを構成で
 gRPC-Web を使用するには:
 
 * [Grpc.Net.Client.Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) パッケージへの参照を追加します。
-* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) パッケージへの参照が 2.27.0 以上であることを確認します。
+* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) パッケージへの参照が確実に 2.29.0 以上であるようにします。
 * `GrpcWebHandler` を使用するようにチャネルを構成します。
 
 [!code-csharp[](~/grpc/browser/sample/Handler.cs?name=snippet_1)]
@@ -112,10 +100,10 @@ gRPC-Web を使用するには:
 * gRPC-Web を使用するようにチャネルを構成します。
 * クライアントを作成し、チャネルを使用して呼び出しを行います。
 
-作成時に、`GrpcWebHandler` には次の構成オプションがあります。
+`GrpcWebHandler` には次の構成オプションがあります。
 
 * **InnerHandler**:gRPC HTTP 要求を行う基になる <xref:System.Net.Http.HttpMessageHandler> (`HttpClientHandler` など)。
-* **[モード]** :gRPC HTTP 要求の `Content-Type` が `application/grpc-web` または `application/grpc-web-text` であるかどうかを指定する列挙型。
+* **GrpcWebMode**:gRPC HTTP 要求の `Content-Type` が `application/grpc-web` または `application/grpc-web-text` であるかどうかを指定する列挙型。
     * `GrpcWebMode.GrpcWeb` は、コンテンツをエンコードせずに送信するように構成します。 既定値です。
     * `GrpcWebMode.GrpcWebText` は、コンテンツを base64 でエンコードするように構成します。 ブラウザーでのサーバー ストリーム呼び出しに必要です。
 * **HttpVersion**:基になる gRPC HTTP 要求で、[HttpRequestMessage](xref:System.Net.Http.HttpRequestMessage.Version) を設定するために使用される HTTP プロトコル `Version`。 gRPC-Web では特定のバージョンを必要とせず、指定しない限り、既定値はオーバーライドされません。

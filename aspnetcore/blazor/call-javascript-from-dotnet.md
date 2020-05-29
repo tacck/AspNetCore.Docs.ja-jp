@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
-author: guardrex
-description: Blazor アプリで .NET メソッドから JavaScript 関数を呼び出す方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 064f504e94cd65862370d4551c6cb44210a8238f
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967299"
+title:'ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す' author: description:'Blazor アプリで .NET メソッドから JavaScript 関数を呼び出す方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。
 

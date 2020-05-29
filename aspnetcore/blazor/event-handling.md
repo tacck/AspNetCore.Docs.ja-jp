@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: aa338bbe61eec14bc1e1b3606e11e26bfb0e6a09
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: 610cb9124f59ed07f1fe6193f92052b4513450c8
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967468"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424248"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor のイベント処理
 
@@ -136,7 +136,7 @@ Razor コンポーネントでは、イベント処理機能が提供されま�
 
 ## <a name="eventcallback"></a>EventCallback
 
-入れ子になったコンポーネントがある一般的なシナリオでは、子で `onclick` イベントが発生したときなど、子コンポーネントのイベント&mdash;が発生したときに親コンポーネントのメソッドを実行する必要があります。 コンポーネント間にわたってイベントを公開するには、`EventCallback` を使用します。 親コンポーネントでは、コールバック メソッドを子コンポーネントの `EventCallback` に割り当てることができます。
+入れ子になったコンポーネントがある一般的なシナリオでは、子コンポーネントのイベントが発生したときに親コンポーネントのメソッドを実行する必要があります。 子コンポーネントで発生する `onclick` イベントが、一般的なユース ケースです。 コンポーネント間にわたってイベントを公開するには、`EventCallback` を使用します。 親コンポーネントでは、コールバック メソッドを子コンポーネントの `EventCallback` に割り当てることができます。
 
 サンプル アプリの `ChildComponent` (*Components/ChildComponent.razor*) は、ボタンの `onclick` ハンドラーがどのように、サンプルの `ParentComponent` から `EventCallback` デリゲートを受け取るように設定されているかを示しています。 `EventCallback` は `MouseEventArgs` によって型指定されます。これは、周辺機器の `onclick` イベントに適しています。
 

@@ -1,30 +1,20 @@
 ---
-title: カスタム ASP.NET Core ミドルウェアを記述する
-author: rick-anderson
-description: カスタム ASP.NET Core ミドルウェアを記述する方法について説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 5/6/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/middleware/write
-ms.openlocfilehash: 6852c1831d1f71af7f4fad3288fd6f897dfaa65f
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876193"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>カスタム ASP.NET Core ミドルウェアを記述する
 
-作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Steve Smith](https://ardalis.com/)
+作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)、[Steve Smith](https://ardalis.com/)
 
 ミドルウェアとは、要求と応答を処理するために、アプリのパイプラインに組み込まれたソフトウェアです。 ASP.NET Core からは、組み込みミドルウェア コンポーネントが豊富に提供されますが、カスタム ミドルウェアを記述したほうが良い場合もあります。
+
+> [!NOTE]
+> このトピックでは "*規約に基づく*" ミドルウェアを作成する方法について説明します。 厳密な型指定と要求ごとのアクティベーションを使用したアプローチについては、「<xref:fundamentals/middleware/extensibility>」を参照してください。
 
 ## <a name="middleware-class"></a>ミドルウェア クラス
 

@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 5c6771dd7249bfb8280ba20e1ce75967f279971c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771586"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424331"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor レイアウト
 
 作成者: [Rainer Stropek](https://www.timecockpit.com)、[Luke Latham](https://github.com/guardrex)
 
-メニュー、著作権メッセージ、会社のロゴなどの一部のアプリ要素は、通常、アプリの全体のレイアウトの一部であり、アプリのすべてのコンポーネントで使用されます。 これらの要素のコードをアプリのすべてのコンポーネントにコピーするのは、効率的な方法ではありません &mdash; 要素の 1 つで更新が必要になるたびに、すべてのコンポーネントを更新する必要があります。 このような複製を維持することは困難であり、時間の経過と共にコンテンツの一貫性が失われる可能性があります。 *レイアウト*によって、この問題を解決します。
+メニュー、著作権メッセージ、会社のロゴなどの一部のアプリ要素は、通常、アプリの全体のレイアウトの一部であり、アプリのすべてのコンポーネントで使用されます。 これらの要素のコードをアプリのすべてのコンポーネントにコピーするのは、効率的な方法ではありません。 要素の 1 つに更新が必要になるたびに、すべてのコンポーネントを更新する必要があります。 このような複製を維持することは困難であり、時間の経過と共にコンテンツの一貫性が失われる可能性があります。 *レイアウト*によって、この問題を解決します。
 
 技術的に、レイアウトはもう 1 つのコンポーネントにすぎません。 レイアウトは Razor テンプレートまたは C# コードで定義され、[データ バインディング](xref:blazor/data-binding)、[依存関係の挿入](xref:blazor/dependency-injection)、その他のコンポーネント シナリオを使用できます。
 

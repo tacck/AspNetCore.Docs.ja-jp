@@ -1,30 +1,16 @@
 ---
-title: ASP.NET Core Blazor テンプレート
-author: guardrex
-description: ASP.NET Core Blazor アプリ テンプレートと Blazor プロジェクトの構造について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/19/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/templates
-ms.openlocfilehash: 705fa32ee72221b3c18653e9f3495b9cd61e9ad1
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967429"
+title:'ASP.NET Core Blazor テンプレート' author: description:'ASP.NET Core Blazor アプリ テンプレートと Blazor プロジェクトの構造について学習します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor テンプレート
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor フレームワークには、Blazor ホスティング モデルのそれぞれに対応するアプリを開発するためのテンプレートが用意されています。
 

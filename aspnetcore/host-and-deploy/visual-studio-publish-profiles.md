@@ -5,7 +5,7 @@ description: Visual Studio で発行プロファイルを作成し、それら�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 05/14/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 0de20b93929162f79d4d15fc4731959e48bb3b6c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776371"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83439007"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core アプリを配置するための Visual Studio 発行プロファイル (.pubxml)
 
@@ -36,7 +36,7 @@ ms.locfileid: "82776371"
 
 上の `<Project>` 要素の `Sdk` 属性では、MSBuild の[プロパティ](/visualstudio/msbuild/msbuild-properties)と[ターゲット](/visualstudio/msbuild/msbuild-targets)が、それぞれ *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* と *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets* からインポートされます。 (Visual Studio 2019 Enterprise の場合) `$(MSBuildSDKsPath)` の既定の場所は、 *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* フォルダーです。
 
-`Microsoft.NET.Sdk.Web` (Web SDK) は、`Microsoft.NET.Sdk` (.NET Core SDK) や `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)) などの他の SDK に依存します。 依存する各 SDK に関連付けられている MSBuild のプロパティとターゲットがインポートされます。 発行ターゲットでは、使われる発行方法に基づいて、適切なターゲットのセットがインポートされます。
+`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) は、`Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) や `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)) などの他の SDK に依存します。 依存する各 SDK に関連付けられている MSBuild のプロパティとターゲットがインポートされます。 発行ターゲットでは、使われる発行方法に基づいて、適切なターゲットのセットがインポートされます。
 
 MSBuild または Visual Studio がプロジェクトを読み込むと、次の高レベルのアクションが発生します。
 
@@ -52,13 +52,13 @@ MSBuild または Visual Studio がプロジェクトを読み込むと、次の
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Web SDK では、[Razor SDK](xref:razor-pages/sdk) がインポートされます。 その結果、`**\*.cshtml` および `**\*.razor` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。
+[Web SDK](xref:razor-pages/web-sdk) では、[Razor SDK](xref:razor-pages/sdk) がインポートされます。 その結果、`**\*.cshtml` および `**\*.razor` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-Web SDK では、[Razor SDK](xref:razor-pages/sdk) がインポートされます。 その結果、`**\*.cshtml` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。
+[Web SDK](xref:razor-pages/web-sdk) では、[Razor SDK](xref:razor-pages/sdk) がインポートされます。 その結果、`**\*.cshtml` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。
 
 ::: moniker-end
 
@@ -145,7 +145,7 @@ dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb
 
 最も適切な発行先を決定するには、[自分に合った発行オプション](/visualstudio/ide/not-in-toc/web-publish-options)に関する記事を参照してください。
 
-発行先を **[フォルダー]** に選択した場合は、発行されたアセットを保存するフォルダーのパスを指定します。 既定のフォルダー パスは *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、*bin\Release\netcoreapp2.2\publish\\* などです。 **[プロファイルの作成]** ボタンを選択して完了します。
+発行先を **[フォルダー]** に選択した場合は、発行された資産を保存するフォルダーのパスを指定します。 既定のフォルダー パスは *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、*bin\Release\netcoreapp2.2\publish\\* などです。 **[プロファイルの作成]** ボタンを選択して完了します。
 
 発行プロファイルが作成されると、 **[発行]** タブの内容が変化します。 新しく作成したプロファイルがドロップダウン リストに表示されます。 別の新しいプロファイルを作成するには、ドロップダウン リストから **[新しいプロファイルの作成]** を選択します。
 
@@ -353,7 +353,7 @@ dotnet msbuild "AzureWebApp.csproj"
 
 ## <a name="exclude-files"></a>ファイルを除外する
 
-ASP.NET Core Web アプリを発行するときは、次のアセットが含まれます。
+ASP.NET Core Web アプリを発行するときは、次の資産が含まれます。
 
 * ビルド成果物
 * 次の glob パターンと一致するフォルダーおよびファイル:
@@ -440,7 +440,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 ## <a name="include-files"></a>インクルード ファイル
 
-次のセクションでは、発行時のファイル インクルードのさまざまな方法を概説します。 「[一般的なファイル インクルード](#general-file-inclusion)」のセクションでは、Web SDK の発行先ファイルから提供される `DotNetPublishFiles` 項目を使用します。 「[選択的なファイル インクルード](#selective-file-inclusion)」のセクションでは、.NET Core SDK の発行先ファイルから提供される `ResolvedFileToPublish` 項目を使用します。 Web SDK は .NET Core SDK に依存するため、どちらの項目も ASP.NET Core プロジェクトで使用することができます。
+次のセクションでは、発行時のファイル インクルードのさまざまな方法を概説します。 「[一般的なファイル インクルード](#general-file-inclusion)」のセクションでは、[Web SDK](xref:razor-pages/web-sdk) の発行先ファイルから提供される `DotNetPublishFiles` 項目を使用します。 「[選択的なファイル インクルード](#selective-file-inclusion)」のセクションでは、[.NET Core SDK](/dotnet/core/project-sdk/msbuild-props) の発行先ファイルから提供される `ResolvedFileToPublish` 項目を使用します。 Web SDK は .NET Core SDK に依存するため、どちらの項目も ASP.NET Core プロジェクトで使用することができます。
 
 ### <a name="general-file-inclusion"></a>一般的なファイル インクルード
 
