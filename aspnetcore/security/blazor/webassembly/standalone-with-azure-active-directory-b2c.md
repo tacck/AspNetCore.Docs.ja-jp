@@ -1,10 +1,10 @@
 ---
-title: ' Azure Active Directory B2C ' author: description: monikerRange: ms. author: ms. Blazor カスタム: ms. date: no loc: という名前のスタンドアロンアプリをセキュリティで ASP.NET Core 保護します。
+title: ' Blazor Azure Active Directory B2C を使用して ASP.NET Core webassembly スタンドアロンアプリをセキュリティで保護します。作成: guシャードの説明:: ' >= aspnetcore-3.1 ' ms. author: riande ms. カスタム: mvc ms. date: 05/19/2020:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- ' SignalR ' uid: security/blazor/azure--------azure-b2c
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C を使用して ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
@@ -22,7 +22,7 @@ Blazor認証に[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/ov
 * AAD B2C インスタンス (たとえば `https://contoso.b2clogin.com/` 、末尾にスラッシュが含まれています)。
 * AAD B2C テナントドメイン (たとえば、 `contoso.onmicrosoft.com` )。
 
-[「チュートリアル: Azure Active Directory B2C でのアプリケーションの登録](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、*クライアントアプリ*に AAD アプリを登録します。
+[「チュートリアル: Azure Active Directory B2C でのアプリケーションの登録](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、*クライアントアプリ*に AAD アプリを登録し、次の手順を実行します。
 
 1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
 1. アプリの**名前**を指定します ( ** Blazor スタンドアロン AAD B2C**など)。

@@ -1,10 +1,10 @@
 ---
-title: ' Blazor Azure Active Directory ' author: description: monikerRange: ms. author: ms. カスタム: ms. date: no loc: で、アプリケーション ASP.NET Core をセキュリティで保護します。
+title: ' ASP.NET Core Blazor webassembly ホスト型アプリを Azure Active Directory ' author: gumonikerRange の説明:: ' >= aspnetcore-3.1 ' ms. author: riande ms. カスタム: mvc ms. date: 05/19/2020 no loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- ' SignalR ' uid: security/blazor/webassembly hosted--azure-active directory
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>BlazorAzure Active Directory を使用して ASP.NET Core webasのホスト型アプリをセキュリティで保護する
@@ -21,7 +21,7 @@ title: ' Blazor Azure Active Directory ' author: description: monikerRange: ms. 
 
 ### <a name="register-a-server-api-app"></a>サーバー API アプリを登録する
 
-*サーバー API アプリ*の AAD アプリを登録するには、 [「クイックスタート: アプリケーションを Microsoft Identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」および以降の Azure AAD のトピックのガイダンスに従ってください。
+[「クイックスタート: アプリケーションを Microsoft identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」およびそれ以降の Azure AAD のトピックのガイダンスに従って、*サーバー API アプリ*に AAD アプリを登録し、次の手順を実行します。
 
 1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
 1. アプリの**名前**を指定します (たとえば、 ** Blazor Server AAD**)。
@@ -55,7 +55,7 @@ title: ' Blazor Azure Active Directory ' author: description: monikerRange: ms. 
 
 ### <a name="register-a-client-app"></a>クライアント アプリを登録する
 
-[「クイックスタート: アプリケーションを Microsoft identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」およびそれ以降の Azure AAD のトピックのガイダンスに従って、*クライアントアプリ*に AAD アプリを登録します。
+[「クイックスタート: アプリケーションを Microsoft identity platform に登録](/azure/active-directory/develop/quickstart-register-app)する」およびそれ以降の Azure AAD のトピックのガイダンスに従って、*クライアントアプリ*に AAD アプリを登録し、次の手順を実行します。
 
 1. **Azure Active Directory**  >  **アプリの登録**で、[**新規登録**] を選択します。
 1. アプリの**名前**( ** Blazor クライアント AAD**など) を指定します。
