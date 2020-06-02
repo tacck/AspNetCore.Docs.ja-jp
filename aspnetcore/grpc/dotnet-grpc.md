@@ -41,7 +41,7 @@ dotnet tool install -g dotnet-grpc
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Protobuf 参照は、C# クライアントやサーバーの資産を生成するために使用されます。 `dotnet-grpc` ツールは以下のことが可能です。
+Protobuf 参照は、C# クライアントやサーバーのアセットを生成するために使用されます。 `dotnet-grpc` ツールは以下のことが可能です。
 
 * ディスク上のローカル ファイルから Protobuf 参照を作成します。
 * URL で指定されたリモート ファイルから Protobuf 参照を作成します。
