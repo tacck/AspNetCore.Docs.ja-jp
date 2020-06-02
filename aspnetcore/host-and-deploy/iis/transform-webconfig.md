@@ -70,7 +70,7 @@ dotnet publish --configuration Release
 
 構成の MSBuild プロパティは `$(Configuration)` です。
 
-## <a name="profile"></a>プロファイル
+## <a name="profile"></a>Profile
 
 プロファイルの変換は、[ビルド構成](#build-configuration)の変換の後、2 番目に実行されます。
 

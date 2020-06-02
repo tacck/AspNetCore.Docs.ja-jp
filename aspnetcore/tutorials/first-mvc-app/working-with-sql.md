@@ -24,7 +24,7 @@ ms.locfileid: "82776208"
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、[Startup.cs](xref:fundamentals/dependency-injection) ファイルの `ConfigureServices` メソッドで*依存性の注入*コンテナーに登録されます。
+`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、*Startup.cs* ファイルの `ConfigureServices` メソッドで[依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -34,7 +34,7 @@ ASP.NET Core の[構成](xref:fundamentals/configuration/index)システムは `
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
@@ -70,7 +70,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
   ![開いた Movie テーブルにテーブル データが表示されています](working-with-sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -80,7 +80,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-`SeedData`Models*フォルダーに* という名前の新しいクラスを作成します。 生成されたコードを次のコードに変更します。
+*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。 生成されたコードを次のコードに置き換えます。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/SeedData.cs?name=snippet_1)]
 
@@ -117,7 +117,7 @@ if (context.Movie.Any())
     * 非デバッグ モードで VS を実行していた場合は、F5 キーを押してデバッグ モードで実行します。
     * デバッグ モードで VS を実行していた場合は、デバッガーを停止して、F5 キーを押します。
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 DB 内のすべてのレコードを削除します (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
 
@@ -136,7 +136,7 @@ DB 内のすべてのレコードを削除します (そのため Seed メソッ
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、[Startup.cs](xref:fundamentals/dependency-injection) ファイルの `ConfigureServices` メソッドで*依存性の注入*コンテナーに登録されます。
+`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、*Startup.cs* ファイルの `ConfigureServices` メソッドで[依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -146,7 +146,7 @@ ASP.NET Core の[構成](xref:fundamentals/configuration/index)システムは `
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
@@ -182,7 +182,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
   ![開いた Movie テーブルにテーブル データが表示されています](working-with-sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -192,7 +192,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-`SeedData`Models*フォルダーに* という名前の新しいクラスを作成します。 生成されたコードを次のコードに変更します。
+*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。 生成されたコードを次のコードに置き換えます。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -229,7 +229,7 @@ if (context.Movie.Any())
     * 非デバッグ モードで VS を実行していた場合は、F5 キーを押してデバッグ モードで実行します。
     * デバッグ モードで VS を実行していた場合は、デバッガーを停止して、F5 キーを押します。
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 DB 内のすべてのレコードを削除します (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
 

@@ -25,7 +25,7 @@ ms.locfileid: "82770553"
 
 [LibMan](xref:client-side/libman/index) CLI は、.NET Core がサポートされているすべての場所でサポートされているクロスプラットフォーム ツールです。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
@@ -113,11 +113,11 @@ libman init [-h|--help]
 
 * `-d|--default-destination <PATH>`
 
-  現在のフォルダーを基準とした相対パス。 `destination`libman.json*のライブラリに* プロパティが定義されていない場合、ライブラリ ファイルはこの場所にインストールされます。 `<PATH>` 値は `defaultDestination`libman.json*の* プロパティに書き込まれます。
+  現在のフォルダーを基準とした相対パス。 *libman.json* のライブラリに `destination` プロパティが定義されていない場合、ライブラリ ファイルはこの場所にインストールされます。 `<PATH>` 値は *libman.json* の `defaultDestination` プロパティに書き込まれます。
 
 * `-p|--default-provider <PROVIDER>`
 
-  指定されたライブラリでプロバイダーが定義されていない場合に使用するプロバイダー。 `<PROVIDER>` 値は `defaultProvider`libman.json*の* プロパティに書き込まれます。 `<PROVIDER>` を次のいずれかの値に置き換えます。
+  指定されたライブラリでプロバイダーが定義されていない場合に使用するプロバイダー。 `<PROVIDER>` 値は *libman.json* の `defaultProvider` プロパティに書き込まれます。 `<PROVIDER>` を次のいずれかの値に置き換えます。
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -173,7 +173,7 @@ libman install [-h|--help]
 
 * `-d|--destination <PATH>`
 
-  ライブラリをインストールする場所。 指定しない場合は、既定の場所が使用されます。 `defaultDestination`libman.json*で* プロパティが指定されていない場合、このオプションは必須です。
+  ライブラリをインストールする場所。 指定しない場合は、既定の場所が使用されます。 *libman.json* で `defaultDestination` プロパティが指定されていない場合、このオプションは必須です。
 
 * `--files <FILE>`
 
@@ -185,7 +185,7 @@ libman install [-h|--help]
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  指定しない場合、`defaultProvider`libman.json*の* プロパティが使用されます。 `defaultProvider`libman.json*で* プロパティが指定されていない場合、このオプションは必須です。
+  指定しない場合、*libman.json* の `defaultProvider` プロパティが使用されます。 *libman.json* で `defaultProvider` プロパティが指定されていない場合、このオプションは必須です。
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -225,7 +225,7 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-ファイル システム プロバイダーを使用して *C:* temp*contosoCalendar* *から \\calendar.js\\ ファイルと \\calendar.css* ファイルをインストールするには、次のようにします。
+ファイル システム プロバイダーを使用して *C:\\temp\\contosoCalendar\\* から *calendar.js* ファイルと *calendar.css* ファイルをインストールするには、次のようにします。
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -270,8 +270,8 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 `libman restore` コマンドは、*libman.json*で定義されているライブラリ ファイルをインストールします。 次の規則が適用されます。
 
 * プロジェクト ルートに *libman.json* ファイルが存在しない場合は、エラーが返されます。
-* ライブラリがプロバイダーを指定している場合、`defaultProvider`libman.json*の* プロパティは無視されます。
-* ライブラリがインストール先を指定している場合、`defaultDestination`libman.json*の* プロパティは無視されます。
+* ライブラリがプロバイダーを指定している場合、*libman.json* の `defaultProvider` プロパティは無視されます。
+* ライブラリがインストール先を指定している場合、*libman.json* の `defaultDestination` プロパティは無視されます。
 
 ### <a name="synopsis"></a>構文
 
@@ -296,7 +296,7 @@ libman restore
 
 ## <a name="delete-library-files"></a>ライブラリ ファイルの削除
 
-`libman clean` コマンドは、LibMan を使用して以前に復元されたライブラリ ファイルを削除します。 この操作の後、空になったフォルダーがあれば削除されます。 `libraries`libman.json*の* プロパティでライブラリ ファイルに関連付けられている構成は削除されません。
+`libman clean` コマンドは、LibMan を使用して以前に復元されたライブラリ ファイルを削除します。 この操作の後、空になったフォルダーがあれば削除されます。 *libman.json* の `libraries` プロパティでライブラリ ファイルに関連付けられている構成は削除されません。
 
 ### <a name="synopsis"></a>構文
 

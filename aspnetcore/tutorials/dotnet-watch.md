@@ -26,7 +26,7 @@ ms.locfileid: "82776592"
 
 このチュートリアルでは、エンドポイントが 2 つの既存の Web API を利用します。合計を返すエンドポイントと積を返すエンドポイントです。 積のメソッドにはバグがあり、このチュートリアルで修正します。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)をダウンロードしてください。 これは、*WebApp* (ASP.NET Core Web API) と *WebAppTests* (Web API の単体テスト) という 2 つのプロジェクトで構成されます。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)をダウンロードしてください。 これには次の 2 つのプロジェクトが含まれています。*WebApp* (ASP.NET Core Web API) および *WebAppTests* (Web API の単体テスト)。
 
 コマンド シェルで、*WebApp* フォルダーに移動します。 次のコマンドを実行します。
 
@@ -49,7 +49,7 @@ Application started. Press Ctrl+C to shut down.
 
 Web ブラウザーで、`http://localhost:<port number>/api/math/sum?a=4&b=5` に移動します。 結果として `9` が表示されます。
 
-製品 API に移動します (`http://localhost:<port number>/api/math/product?a=4&b=5`)。 予想していた `9` ではなく、`20` が返されます。 この問題は、チュートリアルで後ほど修正します。
+製品 API に移動します (`http://localhost:<port number>/api/math/product?a=4&b=5`)。 予想していた `20` ではなく、`9` が返されます。 この問題は、チュートリアルで後ほど修正します。
 
 ::: moniker range="<= aspnetcore-2.0"
 
@@ -75,7 +75,7 @@ Web ブラウザーで、`http://localhost:<port number>/api/math/sum?a=4&b=5` �
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>`dotnet watch` を使用した .NET Core CLI コマンドの実行
 
-[.NET Core CLI コマンド](/dotnet/core/tools#cli-commands) はいずれも、`dotnet watch` との組み合わせで実行することができます。 (例:
+[.NET Core CLI コマンド](/dotnet/core/tools#cli-commands) はいずれも、`dotnet watch` との組み合わせで実行することができます。 次に例を示します。
 
 | コマンド | コマンドと watch |
 | ---- | ----- |
@@ -84,7 +84,7 @@ Web ブラウザーで、`http://localhost:<port number>/api/math/sum?a=4&b=5` �
 | dotnet run -f netcoreapp2.0 -- --arg1 | dotnet watch run -f netcoreapp2.0 -- --arg1 |
 | dotnet test | dotnet watch test |
 
-`dotnet watch run`WebApp*フォルダーの* を実行します。 コンソール出力に、`watch` が起動したことが示されます。
+*WebApp* フォルダーの `dotnet watch run` を実行します。 コンソール出力に、`watch` が起動したことが示されます。
 
 > [!NOTE]
 > `dotnet watch --project <PROJECT>` を使用して、ウォッチするプロジェクトを指定することができます。 たとえば、サンプル アプリのルートから `dotnet watch --project WebApp run` を実行すると、*WebApp* プロジェクトも実行されてウォッチされます。
@@ -93,7 +93,7 @@ Web ブラウザーで、`http://localhost:<port number>/api/math/sum?a=4&b=5` �
 
 `dotnet watch` が実行されていることを確認します。
 
-`Product`MathController.cs*の* メソッドのバグを修正して、合計ではなく積を返すようにします。
+*MathController.cs* の `Product` メソッドのバグを修正して、合計ではなく積を返すようにします。
 
 ```csharp
 public static int Product(int a, int b)
@@ -108,10 +108,10 @@ public static int Product(int a, int b)
 
 ## <a name="run-tests-using-dotnet-watch"></a>`dotnet watch` を使用してテストを実行する
 
-1. `Product`MathController.cs*の* メソッドを元に戻して合計を返すようにします。 ファイルを保存します。
+1. *MathController.cs* の `Product` メソッドを元に戻して合計を返すようにします。 ファイルを保存します。
 1. コマンド シェルで、*WebAppTests* フォルダーに移動します。
 1. [dotnet restore](/dotnet/core/tools/dotnet-restore) を実行します。
-1. `dotnet watch test`を実行します。 テストに失敗し、ウォッチャーがファイル変更を待っていることが出力に示されます。
+1. `dotnet watch test` を実行します。 テストに失敗し、ウォッチャーがファイル変更を待っていることが出力に示されます。
 
      ```console
      Total tests: 2. Passed: 1. Failed: 1. Skipped: 0.
@@ -141,7 +141,7 @@ public static int Product(int a, int b)
 
 ## <a name="opt-out-of-files-to-be-watched"></a>ウォッチするファイルのオプトアウト
 
-既定の設定を無視するように `dotnet-watch` を構成することができます。 特定のファイルを無視するには、`Watch="false"`.csproj*ファイルで項目の定義に* 属性を追加します。
+既定の設定を無視するように `dotnet-watch` を構成することができます。 特定のファイルを無視するには、 *.csproj* ファイルで項目の定義に `Watch="false"` 属性を追加します。
 
 ```xml
 <ItemGroup>

@@ -49,7 +49,7 @@ Visual Studio または .NET Core CLI からアプリを実行します。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-値が `ASPNETCORE_Environment` である `Development` という名前の環境変数があることを確認します。 Windows では (PowerShell ではないプロンプトで) `SET ASPNETCORE_Environment=Development` を実行します。 Linux または macOS では、`export ASPNETCORE_Environment=Development` を実行します。
+値が `Development` である `ASPNETCORE_Environment` という名前の環境変数があることを確認します。 Windows では (PowerShell ではないプロンプトで) `SET ASPNETCORE_Environment=Development` を実行します。 Linux または macOS では、`export ASPNETCORE_Environment=Development` を実行します。
 
 [dotnet build](/dotnet/core/tools/dotnet-build) を実行して、アプリが正しくビルドされていることを確認します。 ビルド プロセスは、初回の実行で npm の依存関係を復元します。これには数分かかる可能性があります。 以降のビルドは非常に高速になります。
 
@@ -67,7 +67,7 @@ Visual Studio または .NET Core CLI からアプリを実行します。
 
 ## <a name="install-npm-packages"></a>npm パッケージをインストールする
 
-サードパーティ製の npm パッケージをインストールするには、*ClientApp* サブディレクトリでコマンド プロンプトを使用します。 (例:
+サードパーティ製の npm パッケージをインストールするには、*ClientApp* サブディレクトリでコマンド プロンプトを使用します。 次に例を示します。
 
 ```console
 cd ClientApp

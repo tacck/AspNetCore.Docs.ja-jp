@@ -21,7 +21,7 @@ ms.locfileid: "82774523"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ
 
-作成者: [Christoph Nienaber](https://twitter.com/zuckerthoben) / [Rico Suter](https://blog.rsuter.com/)
+作成者: [Christoph Nienaber](https://twitter.com/zuckerthoben) および [Rico Suter](https://blog.rsuter.com/)
 
 Web API を使用する場合、さまざまなメソッドを理解することは開発者にとって困難な場合があります。 [Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org/) とも呼ばれる) では、Web API の役立つドキュメントとヘルプ ページの生成に関する問題を解決します。 Swagger では、対話型のドキュメント、クライアント SDK の生成、API の発見可能性などの利点を提供します。
 

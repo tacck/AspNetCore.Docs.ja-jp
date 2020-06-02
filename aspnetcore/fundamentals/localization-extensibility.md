@@ -143,7 +143,7 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ## <a name="localization-resources"></a>ローカライズ リソース
 
-ASP.NET Core ローカライズからは <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> が与えられます。 <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> は、<xref:Microsoft.Extensions.Localization.IStringLocalizer> を使用してローカライズ リソースを格納する `resx` の実装です。
+ASP.NET Core ローカライズからは <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> が与えられます。 <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> は、`resx` を使用してローカライズ リソースを格納する <xref:Microsoft.Extensions.Localization.IStringLocalizer> の実装です。
 
 `resx` ファイルの使用に限定されることはありません。 `IStringLocalized` を実装することで、あらゆるデータ ソースを使用できます。
 

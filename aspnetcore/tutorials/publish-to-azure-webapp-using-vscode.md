@@ -111,7 +111,7 @@ tasks.json
 ## <a name="generate-the-deployment-package-locally"></a>デプロイ パッケージをローカルで生成する
 
 - Visual Studio Code ターミナルを開きます
-- 次のコマンドを使用し、`Release` という名前のサブフォルダーに `publish` パッケージを生成します。
+- 次のコマンドを使用し、`publish` という名前のサブフォルダーに `Release` パッケージを生成します。
   - `dotnet publish -c Release -o ./publish`
 - 新しい `publish` フォルダーがプロジェクト構造の下に作成されます
 
