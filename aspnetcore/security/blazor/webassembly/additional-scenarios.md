@@ -1,20 +1,88 @@
 ---
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
+title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: guシャードの説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
+monikerRange: ' >= aspnetcore-3.1 ' ms. author: riande ms. カスタム: mvc ms. date: 06/01/2020 no loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- ' SignalR ' uid: security/blazor/webas/追加-シナリオ
 
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor追加のセキュリティシナリオを ASP.NET Core
 
-作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)
+[Javier Calvarro jeannine](https://github.com/javiercn)と[Luke latham](https://github.com/guardrex)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>送信要求にトークンを添付する
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>サービスをと共に使用して、 <xref:System.Net.Http.HttpClient> アクセストークンを送信要求に接続できます。 トークンは、既存のサービスを使用して取得され <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> ます。 トークンを取得できない場合は、 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> がスローされます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>には、 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> ユーザーを id プロバイダーに移動して新しいトークンを取得するために使用できるメソッドが用意されています。 は、 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> メソッドを使用して、承認された url、スコープ、およびリターン url を使用して構成でき <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> ます。
+
+送信要求のメッセージハンドラーを構成するには、次のいずれかの方法を使用します。
+
+* [カスタム AuthorizationMessageHandler クラス](#custom-authorizationmessagehandler-class)(*推奨*)
+* [AuthorizationMessageHandler の構成](#configure-authorizationmessagehandler)
+
+### <a name="custom-authorizationmessagehandler-class"></a>カスタム AuthorizationMessageHandler クラス
+
+次の例では、を <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 構成するために使用できるカスタムクラスを拡張してい <xref:System.Net.Http.HttpClient> ます。
+
+```csharp
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
+{
+    public CustomAuthorizationMessageHandler(IAccessTokenProvider provider, 
+        NavigationManager navigationManager)
+        : base(provider, navigationManager)
+    {
+        ConfigureHandler(
+            authorizedUrls: new[] { "https://www.example.com/base" },
+            scopes: new[] { "example.read", "example.write" });
+    }
+}
+```
+
+`Program.Main`(*Program.cs*) では、 <xref:System.Net.Http.HttpClient> はカスタム承認メッセージハンドラーで構成されます。
+
+```csharp
+builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
+
+builder.Services.AddHttpClient("ServerAPI",
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+        .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
+```
+
+構成されたは、try-catch <xref:System.Net.Http.HttpClient> パターンを使用[try-catch](/dotnet/csharp/language-reference/keywords/try-catch)して承認された要求を行うために使用されます。 クライアントがによって作成される場所 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([Microsoft の拡張子は Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/)パッケージ) では、 <xref:System.Net.Http.HttpClient> サーバー API に要求を行うときにアクセストークンを含むインスタンスが提供されます。
+
+```razor
+@inject IHttpClientFactory ClientFactory
+
+...
+
+@code {
+    private ExampleType[] examples;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("ServerAPI");
+
+            examples = 
+                await client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+
+            ...
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        
+    }
+}
+```
+
+### <a name="configure-authorizationmessagehandler"></a>AuthorizationMessageHandler の構成
 
 次の例では、は <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> <xref:System.Net.Http.HttpClient> in `Program.Main` (*Program.cs*) を構成します。
 
@@ -28,7 +96,7 @@ builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
         .ConfigureHandler(
-            new [] { "https://www.example.com/base" },
+            authorizedUrls: new [] { "https://www.example.com/base" },
             scopes: new[] { "example.read", "example.write" }))
         {
             BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
@@ -36,7 +104,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-便宜上、アプリの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> ベースアドレスを承認された URL として事前に構成したが含まれています。 認証が有効になったテンプレートでは、 Blazor サーバー API プロジェクトでを使用してを <xref:System.Net.Http.IHttpClientFactory> 設定し <xref:System.Net.Http.HttpClient> <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> ます。
+便宜上、アプリの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> ベースアドレスを承認された URL として事前に構成したが含まれています。 認証が有効になっているテンプレートでは、 Blazor <xref:System.Net.Http.IHttpClientFactory> サーバー API プロジェクトで ([Microsoft. Extensions. Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/)パッケージ) を使用してを設定し <xref:System.Net.Http.HttpClient> <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> ます。
 
 ```csharp
 using System.Net.Http;
@@ -44,21 +112,19 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 ...
 
-builder.Services.AddHttpClient("BlazorWithIdentity.ServerAPI", 
+builder.Services.AddHttpClient("ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("BlazorWithIdentity.ServerAPI"));
+    .CreateClient("ServerAPI"));
 ```
 
 前の例でクライアントが作成された場所に <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> <xref:System.Net.Http.HttpClient> は、サーバープロジェクトへの要求を行うときにアクセストークンを含むインスタンスが提供されます。
 
-構成されたは、 <xref:System.Net.Http.HttpClient> 単純な[try-catch](/dotnet/csharp/language-reference/keywords/try-catch)パターンを使用して承認された要求を行うために使用されます。
+構成されたは、try-catch <xref:System.Net.Http.HttpClient> パターンを使用[try-catch](/dotnet/csharp/language-reference/keywords/try-catch)して承認された要求を行うために使用されます。
 
-`FetchData` コンポーネント (*Pages/FetchData.razor*):
-
-```csharp
+```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject HttpClient Client
 
@@ -66,10 +132,14 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 protected override async Task OnInitializedAsync()
 {
+    private ExampleType[] examples;
+
     try
     {
-        forecasts = 
-            await Client.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        examples = 
+            await Client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+
+        ...
     }
     catch (AccessTokenNotAvailableException exception)
     {
@@ -171,7 +241,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 前述の登録は、セキュリティで保護された既存の既定の登録に追加され <xref:System.Net.Http.HttpClient> ます。
 
-コンポーネントは、認証されて <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory> いない要求または未承認の要求を行うために、からを作成します。
+コンポーネントは、認証されて <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory> いない要求または承認されていない要求を行うために、([Microsoft 拡張子 Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/)パッケージ) からを作成します。
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -491,141 +561,16 @@ app.UseCors(policy =>
 既定では、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/)ライブラリは、さまざまな認証状態を表すために、次の表に示すルートを使用します。
 
 | ルート                            | 目的 |
-| ---
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------------- |---タイトル: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | |`authentication/login`           |サインイン操作をトリガーします。 | |`authentication/login-callback`  |サインイン操作の結果を処理します。 | |`authentication/login-failed`    |何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。 | |`authentication/logout`          |サインアウト操作をトリガーします。 | |`authentication/logout-callback` |サインアウト操作の結果を処理します。 | |`authentication/logout-failed`   |何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。 | |`authentication/logged-out`      |ユーザーが正常にログアウトしたことを示します。 | |`authentication/profile`         |ユーザープロファイルを編集する操作をトリガーします。 | |`authentication/register`        |新しいユーザーを登録する操作をトリガーします。 |
+| -------------------------------- | ------- |
+| `authentication/login`           | サインイン操作をトリガーします。 |
+| `authentication/login-callback`  | サインイン操作の結果を処理します。 |
+| `authentication/login-failed`    | 何らかの理由でサインイン操作が失敗した場合に、エラーメッセージを表示します。 |
+| `authentication/logout`          | サインアウト操作をトリガーします。 |
+| `authentication/logout-callback` | サインアウト操作の結果を処理します。 |
+| `authentication/logout-failed`   | 何らかの理由でサインアウト操作が失敗した場合に、エラーメッセージを表示します。 |
+| `authentication/logged-out`      | ユーザーが正常にログアウトしたことを示します。 |
+| `authentication/profile`         | ユーザープロファイルを編集する操作をトリガーします。 |
+| `authentication/register`        | 新しいユーザーを登録する操作をトリガーします。 |
 
 上の表に示されているルートは、を使用して構成 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType> できます。 カスタムルートを提供するオプションを設定する場合は、アプリに各パスを処理するルートがあることを確認します。
 
@@ -696,213 +641,16 @@ UI を別のページに分割することもできます。
 に <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> は、次の表に示す認証ルートごとに使用できる1つのフラグメントがあります。
 
 | ルート                            | フラグメント                |
-| ---
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------------- |---タイトル: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: 説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------------- | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |
+| -------------------------------- | ----------------------- |
+| `authentication/login`           | `<LoggingIn>`           |
+| `authentication/login-callback`  | `<CompletingLoggingIn>` |
+| `authentication/login-failed`    | `<LogInFailed>`         |
+| `authentication/logout`          | `<LogOut>`              |
+| `authentication/logout-callback` | `<CompletingLogOut>`    |
+| `authentication/logout-failed`   | `<LogOutFailed>`        |
+| `authentication/logged-out`      | `<LogOutSucceeded>`     |
+| `authentication/profile`         | `<UserProfile>`         |
+| `authentication/register`        | `<Registering>`         |
 
 ## <a name="customize-the-user"></a>ユーザーをカスタマイズする
 

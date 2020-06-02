@@ -1,23 +1,12 @@
 ---
-title: ASP.NET Core Web API のコントローラー アクションの戻り値の型
-author: scottaddie
-description: ASP.NET Core Web API でのさまざまなコントローラー アクション メソッドの戻り値の型の使用について説明します。
-ms.author: scaddie
-ms.custom: mvc
-ms.date: 02/03/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/action-return-types
-ms.openlocfilehash: 4db553a61ca0eeabe35a08731295333f588ee0fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774943"
+title: ASP.NET Core web API author でのコントローラーアクションの戻り値の型: scottaddie description: ASP.NET Core web API でのさまざまなコントローラーアクションメソッドの戻り値の型の使用について説明します。
+ms. author: scaddie ms. カスタム: mvc ms. date: 02/03/2020 no loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: web api/アクション-戻り値の型
+
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core Web API のコントローラー アクションの戻り値の型
 
@@ -52,9 +41,9 @@ ASP.NET Core では、Web API コントローラー アクションの戻り値�
 
 アクションの実行中に保護できる既知の条件がない場合は、特定の型を返すだけで十分です。 前のアクションでパラメーターを受け取っていないので、パラメーターの制約の検証は必要ありません。
 
-アクションで既知の条件を考慮する必要がある場合は、複数の戻り値のパスが導入されます。 このような場合、<xref:Microsoft.AspNetCore.Mvc.ActionResult> の戻り値の型とプリミティブまたは複合の戻り値の型を混在させるのが一般的です。 この種類のアクションに対応するには、[IActionResult](#iactionresult-type) または [ActionResult\<T>](#actionresultt-type) のいずれかが必要です。
+複数の戻り値の型が可能な場合は、戻り値の型 <xref:Microsoft.AspNetCore.Mvc.ActionResult> とプリミティブまたは複合の戻り値の型を混在させることが一般的です。 この種類のアクションに対応するには、 [Iactionresult](#iactionresult-type)または[ \<T> actionresult](#actionresultt-type)のいずれかが必要です。 このドキュメントでは、複数の戻り値の型のサンプルをいくつか紹介します。
 
-### <a name="return-ienumerablet-or-iasyncenumerablet"></a>IEnumerable\<T> または IAsyncEnumerable\<T> を返す
+### <a name="return-ienumerablet-or-iasyncenumerablet"></a>IEnumerable \<T> または IAsyncEnumerable を返します\<T>
 
 ASP.NET Core 2.2 以前では、アクションから <xref:System.Collections.Generic.IEnumerable%601> が返されると、シリアライザーによって同期コレクションのイテレーションが行われます。 その結果、呼び出しがブロックされ、スレッド プールが枯渇する可能性があります。 例として、Web API のデータ アクセスのニーズに Entity Framework (EF) コアが使用されているとします。 次のアクションの戻り値の型は、シリアル化中に同期的に列挙されます。
 
@@ -98,7 +87,7 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 
 戻り値の型 <xref:Microsoft.AspNetCore.Mvc.IActionResult> は、アクションの戻り値の型 `ActionResult` が複数考えられる場合に適しています。 `ActionResult` 型は、さまざまな HTTP 状態コードを表します。 `ActionResult` から派生したすべての非抽象クラスは、有効な戻り値の型として修飾されます。 このカテゴリの一般的な戻り値の型として、<xref:Microsoft.AspNetCore.Mvc.BadRequestResult> (400)、<xref:Microsoft.AspNetCore.Mvc.NotFoundResult> (404)、<xref:Microsoft.AspNetCore.Mvc.OkObjectResult> (200) などがあります。 また、<xref:Microsoft.AspNetCore.Mvc.ControllerBase> クラスの便利なメソッドを使用して、アクションから `ActionResult` 型を返すこともできます。 たとえば、`return BadRequest();` は、`return new BadRequestResult();` の短縮形です。
 
-この種類のアクションには複数の戻り値の型とパスがあるため、 [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)属性を自由に使用する必要があります。 この属性は、[Swagger](xref:tutorials/web-api-help-pages-using-swagger) などのツールで生成される Web API ヘルプ ページのよりわかりやすい応答の詳細を生成します。 `[ProducesResponseType]` は、アクションによって返される既知の型と HTTP 状態コードを示します。
+この種類のアクションには複数の戻り値の型とパスがあるため、属性を自由に使用する [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 必要があります。 この属性は、[Swagger](xref:tutorials/web-api-help-pages-using-swagger) などのツールで生成される Web API ヘルプ ページのよりわかりやすい応答の詳細を生成します。 `[ProducesResponseType]` は、アクションによって返される既知の型と HTTP 状態コードを示します。
 
 ### <a name="synchronous-action"></a>同期アクション
 
@@ -148,13 +137,13 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2.1 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)以降の属性が適用されている場合、モデル検証エラーは400状態コードになります。 詳細については、「[自動的な HTTP 400 応答](xref:web-api/index#automatic-http-400-responses)」を参照してください。
+[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute)ASP.NET Core 2.1 以降の属性が適用されている場合、モデル検証エラーは400状態コードになります。 詳細については、「[自動的な HTTP 400 応答](xref:web-api/index#automatic-http-400-responses)」を参照してください。
 
-## <a name="actionresultt-type"></a>ActionResult\<T> 型
+## <a name="actionresultt-type"></a>ActionResult \<T> 型
 
-ASP.NET Core 2.1 では、Web API コントローラー アクションに対して、[ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) の戻り値の型が導入されました。 これで、<xref:Microsoft.AspNetCore.Mvc.ActionResult> から派生した型を返したり、[特定の型](#specific-type)を返したりすることができるようになりました。 `ActionResult<T>` により、[IActionResult 型](#iactionresult-type)は次の利点を得られます。
+ASP.NET Core 2.1 では、web API コントローラーアクションの[Actionresult \<T> ](xref:Microsoft.AspNetCore.Mvc.ActionResult`1)戻り値の型が導入されました。 これで、<xref:Microsoft.AspNetCore.Mvc.ActionResult> から派生した型を返したり、[特定の型](#specific-type)を返したりすることができるようになりました。 `ActionResult<T>` により、[IActionResult 型](#iactionresult-type)は次の利点を得られます。
 
-* 属性[`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)の`Type`プロパティは除外できます。 たとえば、`[ProducesResponseType(200, Type = typeof(Product))]` は `[ProducesResponseType(200)]` に簡略化されます。 アクションの予期される戻り値の型は、代わりに `ActionResult<T>` の `T` から推論されます。
+* [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)属性の `Type` プロパティは除外できます。 たとえば、`[ProducesResponseType(200, Type = typeof(Product))]` は `[ProducesResponseType(200)]` に簡略化されます。 アクションの予期される戻り値の型は、代わりに `ActionResult<T>` の `T` から推論されます。
 * [暗黙的なキャスト演算子](/dotnet/csharp/language-reference/keywords/implicit)は、`T` と `ActionResult` の両方の `ActionResult<T>` への変換をサポートしています。 `T` は <xref:Microsoft.AspNetCore.Mvc.ObjectResult> に変換されます。つまり、`return new ObjectResult(T);` は `return T;` に簡略化されます。
 
 C# はインターフェイス上での暗黙的なキャスト演算子をサポートしていません。 そのため、`ActionResult<T>` を使用するには、インターフェイスを具象型に変換する必要があります。 たとえば、次の例における `IEnumerable` の使用は機能しません。
