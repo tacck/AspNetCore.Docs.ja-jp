@@ -72,7 +72,7 @@ Razor 構文でコンテンツにアクセスする場合は、次のセクシ�
 * [ディレクティブ](xref:mvc/views/razor#directives) &ndash; 通常はコンポーネント マークアップの解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
 * [ディレクティブ属性](xref:mvc/views/razor#directive-attributes) &ndash; 通常はコンポーネント要素の解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
 
-## <a name="static-assets"></a>静的な資産
+## <a name="static-assets"></a>静的アセット
 
 Blazor は、プロジェクトの [Web ルート (wwwroot) フォルダー](xref:fundamentals/index#web-root)に静的アセットを配置する ASP.NET Core アプリの規則に従います。
 
