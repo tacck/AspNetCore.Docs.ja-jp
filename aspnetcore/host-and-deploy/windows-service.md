@@ -267,7 +267,7 @@ Windows サービス アプリのトラブルシューティングについて�
 ### <a name="common-errors"></a>一般的なエラー
 
 * PowerShell の以前のバージョンまたはプレリリース バージョンが使用されています。
-* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの**発行済み**出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
+* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの**発行済み**出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行されたアセットは、展開の種類に応じて次のいずれかのフォルダーにあります。
   * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
   * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
 * サービスが実行中の状態ではありません。
