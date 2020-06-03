@@ -1,30 +1,30 @@
 ---
-<span data-ttu-id="2f82b-101">title:'ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す' author: description:'Blazor アプリで JavaScript 関数から .NET メソッドを呼び出す方法について学習します。'</span><span class="sxs-lookup"><span data-stu-id="2f82b-101">title: 'Call .NET methods from JavaScript functions in ASP.NET Core Blazor' author: description: 'Learn how to invoke .NET methods from JavaScript functions in Blazor apps.'</span></span>
-<span data-ttu-id="2f82b-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span><span class="sxs-lookup"><span data-stu-id="2f82b-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="2f82b-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="2f82b-103">'Blazor'</span></span>
-- <span data-ttu-id="2f82b-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="2f82b-104">'Identity'</span></span>
-- <span data-ttu-id="2f82b-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="2f82b-105">'Let's Encrypt'</span></span>
-- <span data-ttu-id="2f82b-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="2f82b-106">'Razor'</span></span>
-- <span data-ttu-id="2f82b-107">'SignalR' uid:</span><span class="sxs-lookup"><span data-stu-id="2f82b-107">'SignalR' uid:</span></span> 
+<span data-ttu-id="ee851-101">title:'ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す' author: description:'Blazor アプリで JavaScript 関数から .NET メソッドを呼び出す方法について学習します。'</span><span class="sxs-lookup"><span data-stu-id="ee851-101">title: 'Call .NET methods from JavaScript functions in ASP.NET Core Blazor' author: description: 'Learn how to invoke .NET methods from JavaScript functions in Blazor apps.'</span></span>
+<span data-ttu-id="ee851-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span><span class="sxs-lookup"><span data-stu-id="ee851-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="ee851-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="ee851-103">'Blazor'</span></span>
+- <span data-ttu-id="ee851-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="ee851-104">'Identity'</span></span>
+- <span data-ttu-id="ee851-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="ee851-105">'Let's Encrypt'</span></span>
+- <span data-ttu-id="ee851-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="ee851-106">'Razor'</span></span>
+- <span data-ttu-id="ee851-107">'SignalR' uid:</span><span class="sxs-lookup"><span data-stu-id="ee851-107">'SignalR' uid:</span></span> 
 
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a><span data-ttu-id="2f82b-108">ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す</span><span class="sxs-lookup"><span data-stu-id="2f82b-108">Call .NET methods from JavaScript functions in ASP.NET Core Blazor</span></span>
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a><span data-ttu-id="ee851-108">ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す</span><span class="sxs-lookup"><span data-stu-id="ee851-108">Call .NET methods from JavaScript functions in ASP.NET Core Blazor</span></span>
 
-<span data-ttu-id="2f82b-109">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Shashikant Rudrawadi](http://wisne.co)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="2f82b-109">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co), and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="ee851-109">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Shashikant Rudrawadi](http://wisne.co)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="ee851-109">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co), and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="2f82b-110">Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-110">A Blazor app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="2f82b-111">これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-111">These scenarios are called *JavaScript interoperability* (*JS interop*).</span></span>
+<span data-ttu-id="ee851-110">Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。</span><span class="sxs-lookup"><span data-stu-id="ee851-110">A Blazor app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="ee851-111">これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="ee851-111">These scenarios are called *JavaScript interoperability* (*JS interop*).</span></span>
 
-<span data-ttu-id="2f82b-112">この記事では、JavaScript から .NET メソッドを呼び出す方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-112">This article covers invoking .NET methods from JavaScript.</span></span> <span data-ttu-id="2f82b-113">.NET から JavaScript 関数を呼び出す方法については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="2f82b-113">For information on how to call JavaScript functions from .NET, see <xref:blazor/call-javascript-from-dotnet>.</span></span>
+<span data-ttu-id="ee851-112">この記事では、JavaScript から .NET メソッドを呼び出す方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="ee851-112">This article covers invoking .NET methods from JavaScript.</span></span> <span data-ttu-id="ee851-113">.NET から JavaScript 関数を呼び出す方法については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="ee851-113">For information on how to call JavaScript functions from .NET, see <xref:blazor/call-javascript-from-dotnet>.</span></span>
 
-<span data-ttu-id="2f82b-114">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="2f82b-114">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="ee851-114">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="ee851-114">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="static-net-method-call"></a><span data-ttu-id="2f82b-115">静的 .NET メソッドの呼び出し</span><span class="sxs-lookup"><span data-stu-id="2f82b-115">Static .NET method call</span></span>
+## <a name="static-net-method-call"></a><span data-ttu-id="ee851-115">静的 .NET メソッドの呼び出し</span><span class="sxs-lookup"><span data-stu-id="ee851-115">Static .NET method call</span></span>
 
-<span data-ttu-id="2f82b-116">JavaScript から静的 .NET メソッドを呼び出すには、`DotNet.invokeMethod` 関数または `DotNet.invokeMethodAsync` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-116">To invoke a static .NET method from JavaScript, use the `DotNet.invokeMethod` or `DotNet.invokeMethodAsync` functions.</span></span> <span data-ttu-id="2f82b-117">呼び出す静的メソッドの識別子、関数を含むアセンブリの名前、任意の引数を渡します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-117">Pass in the identifier of the static method you wish to call, the name of the assembly containing the function, and any arguments.</span></span> <span data-ttu-id="2f82b-118">Blazor サーバーのシナリオをサポートするには、非同期バージョンを使用することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="2f82b-118">The asynchronous version is preferred to support Blazor Server scenarios.</span></span> <span data-ttu-id="2f82b-119">.NET メソッドはパブリックかつ静的であり、`[JSInvokable]` 属性を持つ必要があります。</span><span class="sxs-lookup"><span data-stu-id="2f82b-119">The .NET method must be public, static, and have the `[JSInvokable]` attribute.</span></span> <span data-ttu-id="2f82b-120">オープン ジェネリック メソッドを呼び出すことは、現在サポートされていません。</span><span class="sxs-lookup"><span data-stu-id="2f82b-120">Calling open generic methods isn't currently supported.</span></span>
+<span data-ttu-id="ee851-116">JavaScript から静的 .NET メソッドを呼び出すには、`DotNet.invokeMethod` 関数または `DotNet.invokeMethodAsync` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="ee851-116">To invoke a static .NET method from JavaScript, use the `DotNet.invokeMethod` or `DotNet.invokeMethodAsync` functions.</span></span> <span data-ttu-id="ee851-117">呼び出す静的メソッドの識別子、関数を含むアセンブリの名前、任意の引数を渡します。</span><span class="sxs-lookup"><span data-stu-id="ee851-117">Pass in the identifier of the static method you wish to call, the name of the assembly containing the function, and any arguments.</span></span> <span data-ttu-id="ee851-118">Blazor サーバーのシナリオをサポートするには、非同期バージョンを使用することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="ee851-118">The asynchronous version is preferred to support Blazor Server scenarios.</span></span> <span data-ttu-id="ee851-119">.NET メソッドはパブリックかつ静的であり、[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 属性を持つ必要があります。</span><span class="sxs-lookup"><span data-stu-id="ee851-119">The .NET method must be public, static, and have the [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute.</span></span> <span data-ttu-id="ee851-120">オープン ジェネリック メソッドを呼び出すことは、現在サポートされていません。</span><span class="sxs-lookup"><span data-stu-id="ee851-120">Calling open generic methods isn't currently supported.</span></span>
 
-<span data-ttu-id="2f82b-121">サンプル アプリには、`int` 配列を返す C# メソッドが含まれています。</span><span class="sxs-lookup"><span data-stu-id="2f82b-121">The sample app includes a C# method to return an `int` array.</span></span> <span data-ttu-id="2f82b-122">`JSInvokable` 属性がメソッドに適用されます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-122">The `JSInvokable` attribute is applied to the method.</span></span>
+<span data-ttu-id="ee851-121">サンプル アプリには、`int` 配列を返す C# メソッドが含まれています。</span><span class="sxs-lookup"><span data-stu-id="ee851-121">The sample app includes a C# method to return an `int` array.</span></span> <span data-ttu-id="ee851-122">[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 属性がメソッドに適用されます。</span><span class="sxs-lookup"><span data-stu-id="ee851-122">The [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute is applied to the method.</span></span>
 
-<span data-ttu-id="2f82b-123">*Pages/JsInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-123">*Pages/JsInterop.razor*:</span></span>
+<span data-ttu-id="ee851-123">*Pages/JsInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="ee851-123">*Pages/JsInterop.razor*:</span></span>
 
 ```razor
 <button type="button" class="btn btn-primary"
@@ -41,23 +41,23 @@
 }
 ```
 
-<span data-ttu-id="2f82b-124">クライアントに提供される JavaScript は、C# .NET メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-124">JavaScript served to the client invokes the C# .NET method.</span></span>
+<span data-ttu-id="ee851-124">クライアントに提供される JavaScript は、C# .NET メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ee851-124">JavaScript served to the client invokes the C# .NET method.</span></span>
 
-<span data-ttu-id="2f82b-125">*wwwroot/exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-125">*wwwroot/exampleJsInterop.js*:</span></span>
+<span data-ttu-id="ee851-125">*wwwroot/exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="ee851-125">*wwwroot/exampleJsInterop.js*:</span></span>
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
-<span data-ttu-id="2f82b-126">**[Trigger .NET static method ReturnArrayAsync]** ボタンが選択されている場合は、ブラウザーの Web 開発者ツールでコンソール出力を確認します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-126">When the **Trigger .NET static method ReturnArrayAsync** button is selected, examine the console output in the browser's web developer tools.</span></span>
+<span data-ttu-id="ee851-126">**[Trigger .NET static method ReturnArrayAsync]** ボタンが選択されている場合は、ブラウザーの Web 開発者ツールでコンソール出力を確認します。</span><span class="sxs-lookup"><span data-stu-id="ee851-126">When the **Trigger .NET static method ReturnArrayAsync** button is selected, examine the console output in the browser's web developer tools.</span></span>
 
-<span data-ttu-id="2f82b-127">コンソール出力は、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="2f82b-127">The console output is:</span></span>
+<span data-ttu-id="ee851-127">コンソール出力は、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="ee851-127">The console output is:</span></span>
 
 ```console
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-<span data-ttu-id="2f82b-128">4 番目の配列値は、`ReturnArrayAsync` によって返される配列 (`data.push(4);`) にプッシュされます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-128">The fourth array value is pushed to the array (`data.push(4);`) returned by `ReturnArrayAsync`.</span></span>
+<span data-ttu-id="ee851-128">4 番目の配列値は、`ReturnArrayAsync` によって返される配列 (`data.push(4);`) にプッシュされます。</span><span class="sxs-lookup"><span data-stu-id="ee851-128">The fourth array value is pushed to the array (`data.push(4);`) returned by `ReturnArrayAsync`.</span></span>
 
-<span data-ttu-id="2f82b-129">既定では、メソッド識別子はメソッド名ですが、`JSInvokableAttribute` コンストラクターを使用して別の識別子を指定することもできます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-129">By default, the method identifier is the method name, but you can specify a different identifier using the `JSInvokableAttribute` constructor:</span></span>
+<span data-ttu-id="ee851-129">既定では、メソッド識別子はメソッド名ですが、[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 属性コンストラクターを使用して別の識別子を指定することもできます。</span><span class="sxs-lookup"><span data-stu-id="ee851-129">By default, the method identifier is the method name, but you can specify a different identifier using the [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute constructor:</span></span>
 
 ```csharp
 @code {
@@ -69,7 +69,7 @@ Array(4) [ 1, 2, 3, 4 ]
 }
 ```
 
-<span data-ttu-id="2f82b-130">クライアント側の JavaScript ファイル</span><span class="sxs-lookup"><span data-stu-id="2f82b-130">In the client-side JavaScript file:</span></span>
+<span data-ttu-id="ee851-130">クライアント側の JavaScript ファイル</span><span class="sxs-lookup"><span data-stu-id="ee851-130">In the client-side JavaScript file:</span></span>
 
 ```javascript
 returnArrayAsyncJs: function () {
@@ -81,21 +81,21 @@ returnArrayAsyncJs: function () {
 }
 ```
 
-## <a name="instance-method-call"></a><span data-ttu-id="2f82b-131">インスタンス メソッドの呼び出し</span><span class="sxs-lookup"><span data-stu-id="2f82b-131">Instance method call</span></span>
+## <a name="instance-method-call"></a><span data-ttu-id="ee851-131">インスタンス メソッドの呼び出し</span><span class="sxs-lookup"><span data-stu-id="ee851-131">Instance method call</span></span>
 
-<span data-ttu-id="2f82b-132">JavaScript から .NET インスタンス メソッドを呼び出すこともできます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-132">You can also call .NET instance methods from JavaScript.</span></span> <span data-ttu-id="2f82b-133">JavaScript から .NET インスタンス メソッドを呼び出すには</span><span class="sxs-lookup"><span data-stu-id="2f82b-133">To invoke a .NET instance method from JavaScript:</span></span>
+<span data-ttu-id="ee851-132">JavaScript から .NET インスタンス メソッドを呼び出すこともできます。</span><span class="sxs-lookup"><span data-stu-id="ee851-132">You can also call .NET instance methods from JavaScript.</span></span> <span data-ttu-id="ee851-133">JavaScript から .NET インスタンス メソッドを呼び出すには</span><span class="sxs-lookup"><span data-stu-id="ee851-133">To invoke a .NET instance method from JavaScript:</span></span>
 
-* <span data-ttu-id="2f82b-134">参照渡しで .NET インスタンスを JavaScript に渡します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-134">Pass the .NET instance by reference to JavaScript:</span></span>
-  * <span data-ttu-id="2f82b-135">静的呼び出しを `DotNetObjectReference.Create` にします。</span><span class="sxs-lookup"><span data-stu-id="2f82b-135">Make a static call to `DotNetObjectReference.Create`.</span></span>
-  * <span data-ttu-id="2f82b-136">インスタンスを `DotNetObjectReference` インスタンスにラップし、`DotNetObjectReference` インスタンスで `Create` を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-136">Wrap the instance in a `DotNetObjectReference` instance and call `Create` on the `DotNetObjectReference` instance.</span></span> <span data-ttu-id="2f82b-137">`DotNetObjectReference` オブジェクトを破棄します (このセクションの後半で例を示します)。</span><span class="sxs-lookup"><span data-stu-id="2f82b-137">Dispose of `DotNetObjectReference` objects (an example appears later in this section).</span></span>
-* <span data-ttu-id="2f82b-138">`invokeMethod` 関数または `invokeMethodAsync` 関数を使用して、インスタンスで .NET インスタンス メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-138">Invoke .NET instance methods on the instance using the `invokeMethod` or `invokeMethodAsync` functions.</span></span> <span data-ttu-id="2f82b-139">.NET インスタンスは、JavaScript から他の .NET メソッドを呼び出すときに引数として渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-139">The .NET instance can also be passed as an argument when invoking other .NET methods from JavaScript.</span></span>
+* <span data-ttu-id="ee851-134">参照渡しで .NET インスタンスを JavaScript に渡します。</span><span class="sxs-lookup"><span data-stu-id="ee851-134">Pass the .NET instance by reference to JavaScript:</span></span>
+  * <span data-ttu-id="ee851-135">静的呼び出しを <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> にします。</span><span class="sxs-lookup"><span data-stu-id="ee851-135">Make a static call to <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType>.</span></span>
+  * <span data-ttu-id="ee851-136">インスタンスを <xref:Microsoft.JSInterop.DotNetObjectReference> インスタンスにラップし、<xref:Microsoft.JSInterop.DotNetObjectReference> インスタンスで <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ee851-136">Wrap the instance in a <xref:Microsoft.JSInterop.DotNetObjectReference> instance and call <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> on the <xref:Microsoft.JSInterop.DotNetObjectReference> instance.</span></span> <span data-ttu-id="ee851-137"><xref:Microsoft.JSInterop.DotNetObjectReference> オブジェクトを破棄します (このセクションの後半で例を示します)。</span><span class="sxs-lookup"><span data-stu-id="ee851-137">Dispose of <xref:Microsoft.JSInterop.DotNetObjectReference> objects (an example appears later in this section).</span></span>
+* <span data-ttu-id="ee851-138">`invokeMethod` 関数または `invokeMethodAsync` 関数を使用して、インスタンスで .NET インスタンス メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ee851-138">Invoke .NET instance methods on the instance using the `invokeMethod` or `invokeMethodAsync` functions.</span></span> <span data-ttu-id="ee851-139">.NET インスタンスは、JavaScript から他の .NET メソッドを呼び出すときに引数として渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="ee851-139">The .NET instance can also be passed as an argument when invoking other .NET methods from JavaScript.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="2f82b-140">サンプル アプリでは、メッセージがクライアント側のコンソールにログ出力されます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-140">The sample app logs messages to the client-side console.</span></span> <span data-ttu-id="2f82b-141">サンプル アプリで示される以下の例については、ブラウザーの開発者ツールでブラウザーのコンソール出力を確認してください。</span><span class="sxs-lookup"><span data-stu-id="2f82b-141">For the following examples demonstrated by the sample app, examine the browser's console output in the browser's developer tools.</span></span>
+> <span data-ttu-id="ee851-140">サンプル アプリでは、メッセージがクライアント側のコンソールにログ出力されます。</span><span class="sxs-lookup"><span data-stu-id="ee851-140">The sample app logs messages to the client-side console.</span></span> <span data-ttu-id="ee851-141">サンプル アプリで示される以下の例については、ブラウザーの開発者ツールでブラウザーのコンソール出力を確認してください。</span><span class="sxs-lookup"><span data-stu-id="ee851-141">For the following examples demonstrated by the sample app, examine the browser's console output in the browser's developer tools.</span></span>
 
-<span data-ttu-id="2f82b-142">**[Trigger .NET instance method HelloHelper.SayHello]** ボタンが選択されている場合、`ExampleJsInterop.CallHelloHelperSayHello` が呼び出され、メソッドに名前 `Blazor` を渡します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-142">When the **Trigger .NET instance method HelloHelper.SayHello** button is selected, `ExampleJsInterop.CallHelloHelperSayHello` is called and passes a name, `Blazor`, to the method.</span></span>
+<span data-ttu-id="ee851-142">**[Trigger .NET instance method HelloHelper.SayHello]** ボタンが選択されている場合、`ExampleJsInterop.CallHelloHelperSayHello` が呼び出され、メソッドに名前 `Blazor` を渡します。</span><span class="sxs-lookup"><span data-stu-id="ee851-142">When the **Trigger .NET instance method HelloHelper.SayHello** button is selected, `ExampleJsInterop.CallHelloHelperSayHello` is called and passes a name, `Blazor`, to the method.</span></span>
 
-<span data-ttu-id="2f82b-143">*Pages/JsInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-143">*Pages/JsInterop.razor*:</span></span>
+<span data-ttu-id="ee851-143">*Pages/JsInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="ee851-143">*Pages/JsInterop.razor*:</span></span>
 
 ```razor
 <button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
@@ -111,31 +111,31 @@ returnArrayAsyncJs: function () {
 }
 ```
 
-<span data-ttu-id="2f82b-144">`CallHelloHelperSayHello` では、`HelloHelper` の新しいインスタンスを使用して JavaScript 関数 `sayHello` を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-144">`CallHelloHelperSayHello` invokes the JavaScript function `sayHello` with a new instance of `HelloHelper`.</span></span>
+<span data-ttu-id="ee851-144">`CallHelloHelperSayHello` では、`HelloHelper` の新しいインスタンスを使用して JavaScript 関数 `sayHello` を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ee851-144">`CallHelloHelperSayHello` invokes the JavaScript function `sayHello` with a new instance of `HelloHelper`.</span></span>
 
-<span data-ttu-id="2f82b-145">*JsInteropClasses/ExampleJsInterop.cs*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-145">*JsInteropClasses/ExampleJsInterop.cs*:</span></span>
+<span data-ttu-id="ee851-145">*JsInteropClasses/ExampleJsInterop.cs*:</span><span class="sxs-lookup"><span data-stu-id="ee851-145">*JsInteropClasses/ExampleJsInterop.cs*:</span></span>
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
-<span data-ttu-id="2f82b-146">*wwwroot/exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-146">*wwwroot/exampleJsInterop.js*:</span></span>
+<span data-ttu-id="ee851-146">*wwwroot/exampleJsInterop.js*:</span><span class="sxs-lookup"><span data-stu-id="ee851-146">*wwwroot/exampleJsInterop.js*:</span></span>
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
-<span data-ttu-id="2f82b-147">名前は `HelloHelper` のコンストラクターに渡されます。これにより、`HelloHelper.Name` プロパティが設定されます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-147">The name is passed to `HelloHelper`'s constructor, which sets the `HelloHelper.Name` property.</span></span> <span data-ttu-id="2f82b-148">JavaScript 関数 `sayHello` が実行されると、`HelloHelper.SayHello` によって `Hello, {Name}!` メッセージが返されます。これは、JavaScript 関数によってコンソールに書き込まれます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-148">When the JavaScript function `sayHello` is executed, `HelloHelper.SayHello` returns the `Hello, {Name}!` message, which is written to the console by the JavaScript function.</span></span>
+<span data-ttu-id="ee851-147">名前は `HelloHelper` のコンストラクターに渡されます。これにより、`HelloHelper.Name` プロパティが設定されます。</span><span class="sxs-lookup"><span data-stu-id="ee851-147">The name is passed to `HelloHelper`'s constructor, which sets the `HelloHelper.Name` property.</span></span> <span data-ttu-id="ee851-148">JavaScript 関数 `sayHello` が実行されると、`HelloHelper.SayHello` によって `Hello, {Name}!` メッセージが返されます。これは、JavaScript 関数によってコンソールに書き込まれます。</span><span class="sxs-lookup"><span data-stu-id="ee851-148">When the JavaScript function `sayHello` is executed, `HelloHelper.SayHello` returns the `Hello, {Name}!` message, which is written to the console by the JavaScript function.</span></span>
 
-<span data-ttu-id="2f82b-149">*JsInteropClasses/HelloHelper.cs*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-149">*JsInteropClasses/HelloHelper.cs*:</span></span>
+<span data-ttu-id="ee851-149">*JsInteropClasses/HelloHelper.cs*:</span><span class="sxs-lookup"><span data-stu-id="ee851-149">*JsInteropClasses/HelloHelper.cs*:</span></span>
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
-<span data-ttu-id="2f82b-150">ブラウザーの Web 開発者ツールでのコンソール出力</span><span class="sxs-lookup"><span data-stu-id="2f82b-150">Console output in the browser's web developer tools:</span></span>
+<span data-ttu-id="ee851-150">ブラウザーの Web 開発者ツールでのコンソール出力</span><span class="sxs-lookup"><span data-stu-id="ee851-150">Console output in the browser's web developer tools:</span></span>
 
 ```console
 Hello, Blazor!
 ```
 
-<span data-ttu-id="2f82b-151">メモリ リークを回避し、`DotNetObjectReference` を作成するコンポーネントでガベージ コレクションを許可するには、次のいずれかの方法を採用します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-151">To avoid a memory leak and allow garbage collection on a component that creates a `DotNetObjectReference`, adopt one of the following approaches:</span></span>
+<span data-ttu-id="ee851-151">メモリ リークを回避し、<xref:Microsoft.JSInterop.DotNetObjectReference> を作成するコンポーネントでガベージ コレクションを許可するには、次のいずれかの方法を採用します。</span><span class="sxs-lookup"><span data-stu-id="ee851-151">To avoid a memory leak and allow garbage collection on a component that creates a <xref:Microsoft.JSInterop.DotNetObjectReference>, adopt one of the following approaches:</span></span>
 
-* <span data-ttu-id="2f82b-152">`DotNetObjectReference` インスタンスを作成したクラスのオブジェクトを破棄します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-152">Dispose of the object in the class that created the `DotNetObjectReference` instance:</span></span>
+* <span data-ttu-id="ee851-152"><xref:Microsoft.JSInterop.DotNetObjectReference> インスタンスを作成したクラスのオブジェクトを破棄します。</span><span class="sxs-lookup"><span data-stu-id="ee851-152">Dispose of the object in the class that created the <xref:Microsoft.JSInterop.DotNetObjectReference> instance:</span></span>
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -164,7 +164,7 @@ Hello, Blazor!
   }
   ```
 
-  <span data-ttu-id="2f82b-153">`ExampleJsInterop` クラスに示されている上記のパターンは、コンポーネントに実装することもできます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-153">The preceding pattern shown in the `ExampleJsInterop` class can also be implemented in a component:</span></span>
+  <span data-ttu-id="ee851-153">`ExampleJsInterop` クラスに示されている上記のパターンは、コンポーネントに実装することもできます。</span><span class="sxs-lookup"><span data-stu-id="ee851-153">The preceding pattern shown in the `ExampleJsInterop` class can also be implemented in a component:</span></span>
 
   ```razor
   @page "/JSInteropComponent"
@@ -197,7 +197,7 @@ Hello, Blazor!
   }
   ```
 
-* <span data-ttu-id="2f82b-154">コンポーネントまたはクラスによって `DotNetObjectReference` が破棄されない場合は、`.dispose()` を呼び出すことによって、クライアント上のオブジェクトを破棄します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-154">When the component or class doesn't dispose of the `DotNetObjectReference`, dispose of the object on the client by calling `.dispose()`:</span></span>
+* <span data-ttu-id="ee851-154">コンポーネントまたはクラスによって <xref:Microsoft.JSInterop.DotNetObjectReference> が破棄されない場合は、`.dispose()` を呼び出すことによって、クライアント上のオブジェクトを破棄します。</span><span class="sxs-lookup"><span data-stu-id="ee851-154">When the component or class doesn't dispose of the <xref:Microsoft.JSInterop.DotNetObjectReference>, dispose of the object on the client by calling `.dispose()`:</span></span>
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -206,14 +206,14 @@ Hello, Blazor!
   }
   ```
 
-## <a name="component-instance-method-call"></a><span data-ttu-id="2f82b-155">コンポーネント インスタンス メソッドの呼び出し</span><span class="sxs-lookup"><span data-stu-id="2f82b-155">Component instance method call</span></span>
+## <a name="component-instance-method-call"></a><span data-ttu-id="ee851-155">コンポーネント インスタンス メソッドの呼び出し</span><span class="sxs-lookup"><span data-stu-id="ee851-155">Component instance method call</span></span>
 
-<span data-ttu-id="2f82b-156">コンポーネントの .NET メソッドを呼び出すには、次の手順を行います。</span><span class="sxs-lookup"><span data-stu-id="2f82b-156">To invoke a component's .NET methods:</span></span>
+<span data-ttu-id="ee851-156">コンポーネントの .NET メソッドを呼び出すには、次の手順を行います。</span><span class="sxs-lookup"><span data-stu-id="ee851-156">To invoke a component's .NET methods:</span></span>
 
-* <span data-ttu-id="2f82b-157">コンポーネントに対して静的メソッド呼び出しを行うには、`invokeMethod` または `invokeMethodAsync` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-157">Use the `invokeMethod` or `invokeMethodAsync` function to make a static method call to the component.</span></span>
-* <span data-ttu-id="2f82b-158">コンポーネントの静的メソッドにより、そのインスタンス メソッドへの呼び出しが、呼び出された `Action` としてラップされます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-158">The component's static method wraps the call to its instance method as an invoked `Action`.</span></span>
+* <span data-ttu-id="ee851-157">コンポーネントに対して静的メソッド呼び出しを行うには、`invokeMethod` または `invokeMethodAsync` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="ee851-157">Use the `invokeMethod` or `invokeMethodAsync` function to make a static method call to the component.</span></span>
+* <span data-ttu-id="ee851-158">コンポーネントの静的メソッドにより、そのインスタンス メソッドへの呼び出しが、呼び出された <xref:System.Action> としてラップされます。</span><span class="sxs-lookup"><span data-stu-id="ee851-158">The component's static method wraps the call to its instance method as an invoked <xref:System.Action>.</span></span>
 
-<span data-ttu-id="2f82b-159">クライアント側の JavaScript:</span><span class="sxs-lookup"><span data-stu-id="2f82b-159">In the client-side JavaScript:</span></span>
+<span data-ttu-id="ee851-159">クライアント側の JavaScript:</span><span class="sxs-lookup"><span data-stu-id="ee851-159">In the client-side JavaScript:</span></span>
 
 ```javascript
 function updateMessageCallerJS() {
@@ -221,7 +221,7 @@ function updateMessageCallerJS() {
 }
 ```
 
-<span data-ttu-id="2f82b-160">*Pages/JSInteropComponent.razor*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-160">*Pages/JSInteropComponent.razor*:</span></span>
+<span data-ttu-id="ee851-160">*Pages/JSInteropComponent.razor*:</span><span class="sxs-lookup"><span data-stu-id="ee851-160">*Pages/JSInteropComponent.razor*:</span></span>
 
 ```razor
 @page "/JSInteropComponent"
@@ -257,15 +257,15 @@ function updateMessageCallerJS() {
 }
 ```
 
-<span data-ttu-id="2f82b-161">複数のコンポーネントがあり、それぞれに呼び出すインスタンス メソッドがある場合は、ヘルパー クラスを使用して、各コンポーネントのインスタンス メソッドを (`Action` として) 呼び出します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-161">When there are several components, each with instance methods to call, use a helper class to invoke the instance methods (as `Action`s) of each component.</span></span>
+<span data-ttu-id="ee851-161">複数のコンポーネントがあり、それぞれに呼び出すインスタンス メソッドがある場合は、ヘルパー クラスを使用して、各コンポーネントのインスタンス メソッドを (<xref:System.Action> として) 呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ee851-161">When there are several components, each with instance methods to call, use a helper class to invoke the instance methods (as <xref:System.Action>s) of each component.</span></span>
 
-<span data-ttu-id="2f82b-162">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2f82b-162">In the following example:</span></span>
+<span data-ttu-id="ee851-162">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="ee851-162">In the following example:</span></span>
 
-* <span data-ttu-id="2f82b-163">`JSInterop` コンポーネントには、複数の `ListItem` コンポーネントが含まれています。</span><span class="sxs-lookup"><span data-stu-id="2f82b-163">The `JSInterop` component contains several `ListItem` components.</span></span>
-* <span data-ttu-id="2f82b-164">各 `ListItem` コンポーネントは、メッセージとボタンで構成されます。</span><span class="sxs-lookup"><span data-stu-id="2f82b-164">Each `ListItem` component is composed of a message and a button.</span></span>
-* <span data-ttu-id="2f82b-165">`ListItem` コンポーネント ボタンが選択されると、その `ListItem` の `UpdateMessage` メソッドによってリスト項目のテキストが変更され、ボタンが非表示になります。</span><span class="sxs-lookup"><span data-stu-id="2f82b-165">When a `ListItem` component button is selected, that `ListItem`'s `UpdateMessage` method changes the list item text and hides the button.</span></span>
+* <span data-ttu-id="ee851-163">`JSInteropExample` コンポーネントには、複数の `ListItem` コンポーネントが含まれています。</span><span class="sxs-lookup"><span data-stu-id="ee851-163">The `JSInteropExample` component contains several `ListItem` components.</span></span>
+* <span data-ttu-id="ee851-164">各 `ListItem` コンポーネントは、メッセージとボタンで構成されます。</span><span class="sxs-lookup"><span data-stu-id="ee851-164">Each `ListItem` component is composed of a message and a button.</span></span>
+* <span data-ttu-id="ee851-165">`ListItem` コンポーネント ボタンが選択されると、その `ListItem` の `UpdateMessage` メソッドによってリスト項目のテキストが変更され、ボタンが非表示になります。</span><span class="sxs-lookup"><span data-stu-id="ee851-165">When a `ListItem` component button is selected, that `ListItem`'s `UpdateMessage` method changes the list item text and hides the button.</span></span>
 
-<span data-ttu-id="2f82b-166">*MessageUpdateInvokeHelper.cs*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-166">*MessageUpdateInvokeHelper.cs*:</span></span>
+<span data-ttu-id="ee851-166">*MessageUpdateInvokeHelper.cs*:</span><span class="sxs-lookup"><span data-stu-id="ee851-166">*MessageUpdateInvokeHelper.cs*:</span></span>
 
 ```csharp
 using System;
@@ -288,7 +288,7 @@ public class MessageUpdateInvokeHelper
 }
 ```
 
-<span data-ttu-id="2f82b-167">クライアント側の JavaScript:</span><span class="sxs-lookup"><span data-stu-id="2f82b-167">In the client-side JavaScript:</span></span>
+<span data-ttu-id="ee851-167">クライアント側の JavaScript:</span><span class="sxs-lookup"><span data-stu-id="ee851-167">In the client-side JavaScript:</span></span>
 
 ```javascript
 window.updateMessageCallerJS = (dotnetHelper) => {
@@ -297,7 +297,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-<span data-ttu-id="2f82b-168">*Shared/ListItem.razor*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-168">*Shared/ListItem.razor*:</span></span>
+<span data-ttu-id="ee851-168">*Shared/ListItem.razor*:</span><span class="sxs-lookup"><span data-stu-id="ee851-168">*Shared/ListItem.razor*:</span></span>
 
 ```razor
 @inject IJSRuntime JsRuntime
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-<span data-ttu-id="2f82b-169">*Pages/JSInterop.razor*:</span><span class="sxs-lookup"><span data-stu-id="2f82b-169">*Pages/JSInterop.razor*:</span></span>
+<span data-ttu-id="ee851-169">*Pages/JSInteropExample.razor*:</span><span class="sxs-lookup"><span data-stu-id="ee851-169">*Pages/JSInteropExample.razor*:</span></span>
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 
@@ -349,20 +349,20 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
 
-## <a name="avoid-circular-object-references"></a><span data-ttu-id="2f82b-170">循環オブジェクト参照の回避</span><span class="sxs-lookup"><span data-stu-id="2f82b-170">Avoid circular object references</span></span>
+## <a name="avoid-circular-object-references"></a><span data-ttu-id="ee851-170">循環オブジェクト参照の回避</span><span class="sxs-lookup"><span data-stu-id="ee851-170">Avoid circular object references</span></span>
 
-<span data-ttu-id="2f82b-171">循環参照を含むオブジェクトは、次のいずれに対しても、クライアントでシリアル化することはできません。</span><span class="sxs-lookup"><span data-stu-id="2f82b-171">Objects that contain circular references can't be serialized on the client for either:</span></span>
+<span data-ttu-id="ee851-171">循環参照を含むオブジェクトは、次のいずれに対しても、クライアントでシリアル化することはできません。</span><span class="sxs-lookup"><span data-stu-id="ee851-171">Objects that contain circular references can't be serialized on the client for either:</span></span>
 
-* <span data-ttu-id="2f82b-172">.NET メソッドの呼び出し。</span><span class="sxs-lookup"><span data-stu-id="2f82b-172">.NET method calls.</span></span>
-* <span data-ttu-id="2f82b-173">戻り値の型に循環参照がある場合の、C# からの JavaScript メソッドの呼び出し。</span><span class="sxs-lookup"><span data-stu-id="2f82b-173">JavaScript method calls from C# when the return type has circular references.</span></span>
+* <span data-ttu-id="ee851-172">.NET メソッドの呼び出し。</span><span class="sxs-lookup"><span data-stu-id="ee851-172">.NET method calls.</span></span>
+* <span data-ttu-id="ee851-173">戻り値の型に循環参照がある場合の、C# からの JavaScript メソッドの呼び出し。</span><span class="sxs-lookup"><span data-stu-id="ee851-173">JavaScript method calls from C# when the return type has circular references.</span></span>
 
-<span data-ttu-id="2f82b-174">詳細については、次のイシューを参照してください。</span><span class="sxs-lookup"><span data-stu-id="2f82b-174">For more information, see the following issues:</span></span>
+<span data-ttu-id="ee851-174">詳細については、次のイシューを参照してください。</span><span class="sxs-lookup"><span data-stu-id="ee851-174">For more information, see the following issues:</span></span>
 
-* <span data-ttu-id="2f82b-175">[Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) (循環参照はサポートされていません、テイク 2 (dotnet/aspnetcore #20525))</span><span class="sxs-lookup"><span data-stu-id="2f82b-175">[Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)</span></span>
-* <span data-ttu-id="2f82b-176">[Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))</span><span class="sxs-lookup"><span data-stu-id="2f82b-176">[Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)</span></span>
+* <span data-ttu-id="ee851-175">[Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) (循環参照はサポートされていません、テイク 2 (dotnet/aspnetcore #20525))</span><span class="sxs-lookup"><span data-stu-id="ee851-175">[Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)</span></span>
+* <span data-ttu-id="ee851-176">[Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))</span><span class="sxs-lookup"><span data-stu-id="ee851-176">[Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="2f82b-177">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="2f82b-177">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="ee851-177">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="ee851-177">Additional resources</span></span>
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [<span data-ttu-id="2f82b-178">InteropComponent.razor の例 (dotnet/AspNetCore GitHub リポジトリ、3.1 リリース ブランチ)</span><span class="sxs-lookup"><span data-stu-id="2f82b-178">InteropComponent.razor example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* <span data-ttu-id="2f82b-179">[Blazor サーバー アプリで大規模なデータ転送を実行する](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span><span class="sxs-lookup"><span data-stu-id="2f82b-179">[Perform large data transfers in Blazor Server apps](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span></span>
+* [<span data-ttu-id="ee851-178">InteropComponent.razor の例 (dotnet/AspNetCore GitHub リポジトリ、3.1 リリース ブランチ)</span><span class="sxs-lookup"><span data-stu-id="ee851-178">InteropComponent.razor example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* <span data-ttu-id="ee851-179">[Blazor サーバー アプリで大規模なデータ転送を実行する](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span><span class="sxs-lookup"><span data-stu-id="ee851-179">[Perform large data transfers in Blazor Server apps](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)</span></span>
