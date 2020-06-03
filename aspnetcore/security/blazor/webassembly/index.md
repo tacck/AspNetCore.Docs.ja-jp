@@ -1,11 +1,11 @@
 ---
-title:’セキュリティで保護された ASP.NET Core Blazor WebAssembly' 作成者: 説明: ’シングル ページ アプリケーション (SPA) として Blazor WebAssemlby アプリをセキュリティで保護する方法について説明します。’
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
+title:'セキュリティで保護された ASP.NET Core Blazor WebAssembly' 作成者: guardrex 説明:’シングル ページ アプリケーション (SPA) として Blazor WebAssemlby アプリをセキュリティで保護する方法について説明します。’
+monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date:06/01/2020 no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- 'SignalR' uid: security/blazor/webassembly/index
 
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をセキュリティで保護する
@@ -41,7 +41,19 @@ SameSite Cookie の使用など、SPA を認証するためのその他のオプ
 * Blazor WebAssembly アプリでログイン コールバック エンドポイント (`/authentication/login-callback`) が読み込まれると、認証応答が処理されます。
   * 認証プロセスが正常に完了した場合、ユーザーは認証され、必要に応じてユーザーが要求した元の保護された URL に戻されます。
   * 何らかの理由で認証プロセスが失敗した場合、ユーザーはログイン失敗ページ (`/authentication/login-failed`) に送信され、エラーが表示されます。
-  
+
+## <a name="authorization"></a>承認
+
+Blazor WebAssembly アプリでは、すべてのクライアント側コードがユーザーによって変更される可能性があるため、承認チェックがバイパスされる可能性があります。 JavaScript SPA フレームワークや任意のオペレーティング システム用のネイティブ アプリを含め、すべてのクライアント側アプリのテクノロジにも同じことが当てはまります。
+
+**常に、クライアント側アプリからアクセスされるすべての API エンドポイント内のサーバー上で承認チェックを実行します。**
+
+## <a name="refresh-tokens"></a>更新トークン
+
+更新トークンは、Blazor WebAssembly アプリのクライアント側でセキュリティで保護することはできません。 そのため、更新トークンを直接使用するためにアプリに送信するべきではありません。
+
+更新トークンは、ホストされている Blazor WebAssembly ソリューションのサーバー側アプリで、サード パーティの API にアクセスするために保持および使用することができます。 詳細については、「<xref:security/blazor/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>」を参照してください。
+
 ## <a name="implementation-guidance"></a>実装ガイダンス
 
 この*概要*の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。

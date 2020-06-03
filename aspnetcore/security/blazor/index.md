@@ -1,11 +1,11 @@
 ---
-title:'ASP.NET Core Blazor 認証と承認 ' 作成者: 説明: ’Blazor の認証と承認のシナリオについて説明します。’
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
+title:'ASP.NET Core Blazor 認証と承認 ' 作成者: guardrex 説明:’Blazor の認証と承認のシナリオについて説明します。’
+monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date:05/19/2020 no-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- 'SignalR' uid: 
+- 'SignalR' uid: security/blazor/index
 
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
@@ -454,14 +454,6 @@ Not authorized.
 > ```
 >
 > これらの名前空間は、アプリの *_Imports.razor* ファイルに追加することで、グローバルに提供できます。
-
-## <a name="authorization-in-blazor-webassembly-apps"></a>Blazor WebAssembly アプリでの承認
-
-Blazor WebAssembly アプリでは、すべてのクライアント側コードがユーザーによって変更される可能性があるため、承認チェックがバイパスされる可能性があります。 JavaScript SPA フレームワークや任意のオペレーティング システム用のネイティブ アプリを含め、すべてのクライアント側アプリのテクノロジにも同じことが当てはまります。
-
-**常に、クライアント側アプリからアクセスされるすべての API エンドポイント内のサーバー上で承認チェックを実行します。**
-
-詳細については、<xref:security/blazor/webassembly/index> の記事を参照してください。
 
 ## <a name="troubleshoot-errors"></a>エラーのトラブルシューティング
 
