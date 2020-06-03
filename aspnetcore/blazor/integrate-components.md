@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する
-author: guardrex
-description: Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/25/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/integrate-components
-ms.openlocfilehash: eb4378223c40594ac52f50b7b890785067515555
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771775"
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する
 
@@ -28,10 +16,10 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
 
 [アプリを準備](#prepare-the-app)した後に、アプリの要件に応じて、次のセクションのガイダンスを使用します。
 
-* ルーティング可能なコンポーネント &ndash; ユーザー要求から直接ルーティング可能なコンポーネント。 訪問者が [`@page`](xref:mvc/views/razor#page) ディレクティブを含むコンポーネントのブラウザーで HTTP 要求を行うことができる必要がある場合は、このガイダンスに従ってください。
+* ルーティング可能なコンポーネント:ユーザー要求から直接ルーティング可能なコンポーネント。 訪問者が [`@page`](xref:mvc/views/razor#page) ディレクティブを含むコンポーネントのブラウザーで HTTP 要求を行うことができる必要がある場合は、このガイダンスに従ってください。
   * [Razor Pages アプリでルーティング可能なコンポーネントを使用する](#use-routable-components-in-a-razor-pages-app)
   * [MVC アプリでルーティング可能なコンポーネントを使用する](#use-routable-components-in-an-mvc-app)
-* [ページまたはビューからコンポーネントをレンダリングする](#render-components-from-a-page-or-view) &ndash; ユーザー要求から直接ルーティング可能なコンポーネント。 アプリによって[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を含む既存のページやビューにコンポーネントが埋め込まれる場合は、このガイダンスに従ってください。
+* [ページまたはビューからコンポーネントをレンダリングする](#render-components-from-a-page-or-view):ユーザー要求から直接ルーティングできないコンポーネント。 アプリによって[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)を含む既存のページやビューにコンポーネントが埋め込まれる場合は、このガイダンスに従ってください。
 
 ## <a name="prepare-the-app"></a>アプリの準備
 
@@ -129,10 +117,60 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
    * ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
 
    | 表示モード | 説明 |
-   | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 `App` コンポーネントからの出力は含まれません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` コンポーネントを静的 HTML にレンダリングします。 |
+   | ---
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor サーバー アプリのマーカーをレンダリングします。 `App` コンポーネントからの出力は含まれません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` コンポーネントを静的 HTML にレンダリングします。 |
 
    コンポーネント タグ ヘルパーの詳細については、「ASP.NET コアのコンポーネント タグ ヘルパー<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
 
@@ -203,10 +241,60 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    * ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
 
    | 表示モード | 説明 |
-   | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 `App` コンポーネントからの出力は含まれません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` コンポーネントを静的 HTML にレンダリングします。 |
+   | ---
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | --- title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディングのシナリオについて説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` コンポーネントを静的 HTML にレンダリングし、Blazor サーバー アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor サーバー アプリのマーカーをレンダリングします。 `App` コンポーネントからの出力は含まれません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` コンポーネントを静的 HTML にレンダリングします。 |
 
    コンポーネント タグ ヘルパーの詳細については、「ASP.NET コアのコンポーネント タグ ヘルパー<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
 

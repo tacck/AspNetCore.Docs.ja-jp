@@ -20,9 +20,9 @@ Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出�
 
 ## <a name="static-net-method-call"></a>静的 .NET メソッドの呼び出し
 
-JavaScript から静的 .NET メソッドを呼び出すには、`DotNet.invokeMethod` 関数または `DotNet.invokeMethodAsync` 関数を使用します。 呼び出す静的メソッドの識別子、関数を含むアセンブリの名前、任意の引数を渡します。 Blazor サーバーのシナリオをサポートするには、非同期バージョンを使用することをお勧めします。 .NET メソッドはパブリックかつ静的であり、`[JSInvokable]` 属性を持つ必要があります。 オープン ジェネリック メソッドを呼び出すことは、現在サポートされていません。
+JavaScript から静的 .NET メソッドを呼び出すには、`DotNet.invokeMethod` 関数または `DotNet.invokeMethodAsync` 関数を使用します。 呼び出す静的メソッドの識別子、関数を含むアセンブリの名前、任意の引数を渡します。 Blazor サーバーのシナリオをサポートするには、非同期バージョンを使用することをお勧めします。 .NET メソッドはパブリックかつ静的であり、[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 属性を持つ必要があります。 オープン ジェネリック メソッドを呼び出すことは、現在サポートされていません。
 
-サンプル アプリには、`int` 配列を返す C# メソッドが含まれています。 `JSInvokable` 属性がメソッドに適用されます。
+サンプル アプリには、`int` 配列を返す C# メソッドが含まれています。 [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 属性がメソッドに適用されます。
 
 *Pages/JsInterop.razor*:
 
@@ -57,7 +57,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 4 番目の配列値は、`ReturnArrayAsync` によって返される配列 (`data.push(4);`) にプッシュされます。
 
-既定では、メソッド識別子はメソッド名ですが、`JSInvokableAttribute` コンストラクターを使用して別の識別子を指定することもできます。
+既定では、メソッド識別子はメソッド名ですが、[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) 属性コンストラクターを使用して別の識別子を指定することもできます。
 
 ```csharp
 @code {
@@ -86,8 +86,8 @@ returnArrayAsyncJs: function () {
 JavaScript から .NET インスタンス メソッドを呼び出すこともできます。 JavaScript から .NET インスタンス メソッドを呼び出すには
 
 * 参照渡しで .NET インスタンスを JavaScript に渡します。
-  * 静的呼び出しを `DotNetObjectReference.Create` にします。
-  * インスタンスを `DotNetObjectReference` インスタンスにラップし、`DotNetObjectReference` インスタンスで `Create` を呼び出します。 `DotNetObjectReference` オブジェクトを破棄します (このセクションの後半で例を示します)。
+  * 静的呼び出しを <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> にします。
+  * インスタンスを <xref:Microsoft.JSInterop.DotNetObjectReference> インスタンスにラップし、<xref:Microsoft.JSInterop.DotNetObjectReference> インスタンスで <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> を呼び出します。 <xref:Microsoft.JSInterop.DotNetObjectReference> オブジェクトを破棄します (このセクションの後半で例を示します)。
 * `invokeMethod` 関数または `invokeMethodAsync` 関数を使用して、インスタンスで .NET インスタンス メソッドを呼び出します。 .NET インスタンスは、JavaScript から他の .NET メソッドを呼び出すときに引数として渡すこともできます。
 
 > [!NOTE]
@@ -133,9 +133,9 @@ JavaScript から .NET インスタンス メソッドを呼び出すことも�
 Hello, Blazor!
 ```
 
-メモリ リークを回避し、`DotNetObjectReference` を作成するコンポーネントでガベージ コレクションを許可するには、次のいずれかの方法を採用します。
+メモリ リークを回避し、<xref:Microsoft.JSInterop.DotNetObjectReference> を作成するコンポーネントでガベージ コレクションを許可するには、次のいずれかの方法を採用します。
 
-* `DotNetObjectReference` インスタンスを作成したクラスのオブジェクトを破棄します。
+* <xref:Microsoft.JSInterop.DotNetObjectReference> インスタンスを作成したクラスのオブジェクトを破棄します。
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -197,7 +197,7 @@ Hello, Blazor!
   }
   ```
 
-* コンポーネントまたはクラスによって `DotNetObjectReference` が破棄されない場合は、`.dispose()` を呼び出すことによって、クライアント上のオブジェクトを破棄します。
+* コンポーネントまたはクラスによって <xref:Microsoft.JSInterop.DotNetObjectReference> が破棄されない場合は、`.dispose()` を呼び出すことによって、クライアント上のオブジェクトを破棄します。
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -211,7 +211,7 @@ Hello, Blazor!
 コンポーネントの .NET メソッドを呼び出すには、次の手順を行います。
 
 * コンポーネントに対して静的メソッド呼び出しを行うには、`invokeMethod` または `invokeMethodAsync` 関数を使用します。
-* コンポーネントの静的メソッドにより、そのインスタンス メソッドへの呼び出しが、呼び出された `Action` としてラップされます。
+* コンポーネントの静的メソッドにより、そのインスタンス メソッドへの呼び出しが、呼び出された <xref:System.Action> としてラップされます。
 
 クライアント側の JavaScript:
 
@@ -257,11 +257,11 @@ function updateMessageCallerJS() {
 }
 ```
 
-複数のコンポーネントがあり、それぞれに呼び出すインスタンス メソッドがある場合は、ヘルパー クラスを使用して、各コンポーネントのインスタンス メソッドを (`Action` として) 呼び出します。
+複数のコンポーネントがあり、それぞれに呼び出すインスタンス メソッドがある場合は、ヘルパー クラスを使用して、各コンポーネントのインスタンス メソッドを (<xref:System.Action> として) 呼び出します。
 
 次に例を示します。
 
-* `JSInterop` コンポーネントには、複数の `ListItem` コンポーネントが含まれています。
+* `JSInteropExample` コンポーネントには、複数の `ListItem` コンポーネントが含まれています。
 * 各 `ListItem` コンポーネントは、メッセージとボタンで構成されます。
 * `ListItem` コンポーネント ボタンが選択されると、その `ListItem` の `UpdateMessage` メソッドによってリスト項目のテキストが変更され、ボタンが非表示になります。
 
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Pages/JSInterop.razor*:
+*Pages/JSInteropExample.razor*:
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 

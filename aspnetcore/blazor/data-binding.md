@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor データ バインディング
-author: guardrex
-description: Blazor アプリのコンポーネントと DOM 要素のデータ バインディング機能について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/26/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/data-binding
-ms.openlocfilehash: b4951c5eb712b15db3a7c1ccd57ae01c530a23ef
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967169"
+title:'ASP.NET Core Blazor データ バインディング' author: description:'Blazor アプリのコンポーネントと DOM 要素のデータ バインディング機能について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
@@ -40,7 +28,7 @@ Razor コンポーネントはフィールド、プロパティ、または Razo
 
 テキスト ボックスは、プロパティの値の変更に対する応答としてではなく、コンポーネントがレンダリングされたときにのみ UI が更新されます。 コンポーネントはイベント ハンドラーのコードが実行された後に自身をレンダリングするため、*通常は*、イベント ハンドラーがトリガーされた直後に、プロパティの更新が UI に反映されます。
 
-`CurrentValue` プロパティで `@bind` を使用する (`<input @bind="CurrentValue" />`) ことは、本質的に次の内容と同じです。
+`CurrentValue` プロパティで [`@bind`](xref:mvc/views/razor#bind) を使用する (`<input @bind="CurrentValue" />`) ことは、本質的に次の内容と同じです。
 
 ```razor
 <input value="@CurrentValue"
@@ -52,7 +40,7 @@ Razor コンポーネントはフィールド、プロパティ、または Razo
 }
 ```
 
-コンポーネントがレンダリングされると、入力要素の `value` は `CurrentValue` プロパティから取得されます。 ユーザーがテキスト ボックスに入力し、要素のフォーカスを変更すると、`onchange` イベントが発生し、`CurrentValue` プロパティが変更された値に設定されます。 実際には、`@bind` は型変換が行われるケースを扱うため、コード生成はより複雑になります。 原則として、`@bind` は、式の現在の値を `value` 属性と関連付け、登録されたハンドラーを使用して変更を処理します。
+コンポーネントがレンダリングされると、入力要素の `value` は `CurrentValue` プロパティから取得されます。 ユーザーがテキスト ボックスに入力し、要素のフォーカスを変更すると、`onchange` イベントが発生し、`CurrentValue` プロパティが変更された値に設定されます。 実際には、[`@bind`](xref:mvc/views/razor#bind) は型変換が行われるケースを扱うため、コード生成はより複雑になります。 原則として、[`@bind`](xref:mvc/views/razor#bind) は、式の現在の値を `value` 属性と関連付け、登録されたハンドラーを使用して変更を処理します。
 
 他のイベントのプロパティまたはフィールドをバインドするには、`event` パラメーターを含めた `@bind:event` 属性を含めます。 次の例は、`CurrentValue` プロパティを `oninput` イベントにバインドします。
 
@@ -84,7 +72,10 @@ Razor コンポーネントはフィールド、プロパティ、または Razo
 }
 ```
 
-属性バインディングでは大文字と小文字が区別されます。 たとえば、`@bind` は有効で、`@Bind` は無効です。
+属性バインディングでは大文字と小文字が区別されます。
+
+* `@bind` は有効です。
+* `@Bind` および `@BIND` は無効です。
 
 ## <a name="unparsable-values"></a>解析不可能値
 
@@ -110,13 +101,13 @@ Razor コンポーネントはフィールド、プロパティ、または Razo
 
 * `oninput` イベントは使用しません。 既定の `onchange` イベント (`@bind="{PROPERTY OR FIELD}"` のみを指定) を使用します。この場合、要素がフォーカスを失うまで無効な値は元に戻されません。
 * `int?` や `string` などの null 許容型にバインドし、無効なエントリを処理するカスタム ロジックを提供します。
-* `InputNumber` や `InputDate` などの[フォーム検証コンポーネント](xref:blazor/forms-validation)を使用します。 フォーム検証コンポーネントには、無効な入力を管理するためのサポートが組み込まれています。 フォーム検証コンポーネントを使うと、次のことができます。
-  * ユーザーの無効な入力を許可し、関連付けられた `EditContext` で検証エラーを受信します。
+* <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> や <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> などの[フォーム検証コンポーネント](xref:blazor/forms-validation)を使用します。 フォーム検証コンポーネントには、無効な入力を管理するためのサポートが組み込まれています。 フォーム検証コンポーネントを使うと、次のことができます。
+  * ユーザーの無効な入力を許可し、関連付けられた <xref:Microsoft.AspNetCore.Components.Forms.EditContext> で検証エラーを受信します。
   * ユーザーが追加の Web フォーム データを入力することを妨げることなく、UI に検証エラーを表示します。
 
 ## <a name="format-strings"></a>書式指定文字列
 
-データ バインディングは、[`@bind:format`](xref:mvc/views/razor#bind) を使用して <xref:System.DateTime> 書式指定文字列を処理します。 通貨形式や数値形式など、その他の書式指定式は現時点では使用できません。
+データ バインディングは、`@bind:format` を使用して <xref:System.DateTime> 形式の文字列を処理します。 通貨形式や数値形式など、その他の書式指定式は現時点では使用できません。
 
 ```razor
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -162,7 +153,7 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
 }
 ```
 
-`EventCallback<T>` についての説明は、<xref:blazor/event-handling#eventcallback>にあります。
+<xref:Microsoft.AspNetCore.Components.EventCallback%601> についての説明は、<xref:blazor/event-handling#eventcallback>にあります。
 
 次の親コンポーネントは、以下を使用します。
 
@@ -235,7 +226,7 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
 
 一般的なシナリオでは、データにバインドされたパラメーターをコンポーネントの出力のページ要素に連結します。 このシナリオは、複数のレベルのバインドが同時に発生するため、*チェーン バインド*と呼ばれます。
 
-チェーン バインドは、ページの要素で `@bind` 構文を使用して実装することはできません。 イベント ハンドラーと値は、個別に指定する必要があります。 ただし、親コンポーネントでは、`@bind` 構文をコンポーネントのパラメーターと共に使用できます。
+チェーン バインドは、ページの要素で [`@bind`](xref:mvc/views/razor#bind) 構文を使用して実装することはできません。 イベント ハンドラーと値は、個別に指定する必要があります。 ただし、親コンポーネントでは、[`@bind`](xref:mvc/views/razor#bind) 構文をコンポーネントのパラメーターと共に使用できます。
 
 次の `PasswordField` コンポーネント (*PasswordField.razor*) は、以下のことを行います。
 

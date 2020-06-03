@@ -24,7 +24,7 @@ Blazor サーバー アプリをプリレンダリングしている間、ブラ
 }
 ```
 
-前のコード例では、*wwwroot/index.html* (Blazor WebAssembly) または *Pages/_Host.cshtml* (Blazor サーバー) の `<head>` 要素内で、`setElementText` JavaScript 関数を提供します。 関数は `IJSRuntime.InvokeVoidAsync` を指定して呼び出され、値を返しません。
+前のコード例では、*wwwroot/index.html* (Blazor WebAssembly) または *Pages/_Host.cshtml* (Blazor サーバー) の `<head>` 要素内で、`setElementText` JavaScript 関数を提供します。 関数は <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を指定して呼び出され、値を返しません。
 
 ```html
 <script>
@@ -35,9 +35,9 @@ Blazor サーバー アプリをプリレンダリングしている間、ブラ
 > [!WARNING]
 > 前の例では、デモンストレーションのみを目的として、ドキュメント オブジェクト モデル (DOM) を直接変更しています。 ほとんどのシナリオにおいて、JavaScript で DOM を直接変更することはお勧めできません。JavaScript が Blazor の変更追跡に影響する可能性があるためです。
 
-次のコンポーネントは、プリレンダリングと互換性のある方法で、コンポーネントの初期化ロジックの一部として JavaScript の相互運用を使用する方法を示しています。 コンポーネントには、`OnAfterRenderAsync` 内からレンダリングの更新をトリガーできることが示されています。 このシナリオでは、開発者が無限ループを作成しないようにする必要があります。
+次のコンポーネントは、プリレンダリングと互換性のある方法で、コンポーネントの初期化ロジックの一部として JavaScript の相互運用を使用する方法を示しています。 コンポーネントには、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> 内からレンダリングの更新をトリガーできることが示されています。 このシナリオでは、開発者が無限ループを作成しないようにする必要があります。
 
-`JSRuntime.InvokeAsync` が呼び出されるとき、`ElementRef` は、以前のライフサイクル メソッドではなく `OnAfterRenderAsync` でのみ使用されます。コンポーネントがレンダリングされるまで JavaScript 要素が存在しないためです。
+<xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> が呼び出されるとき、`ElementRef` は、以前のライフサイクル メソッドではなく <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> でのみ使用されます。コンポーネントがレンダリングされるまで JavaScript 要素が存在しないためです。
 
 [StateHasChanged](xref:blazor/lifecycle#state-changes) は、JavaScript の相互運用呼び出しから取得された新しい状態でコンポーネントを再度レンダリングするために呼び出されます。 `StateHasChanged` は `infoFromJs`が `null` である場合にのみ呼び出されるため、このコードで無限ループが作成されることはありません。
 
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-前のコード例では、*wwwroot/index.html* (Blazor WebAssembly) または *Pages/_Host.cshtml* (Blazor サーバー) の `<head>` 要素内で、`setElementText` JavaScript 関数を提供します。 関数は `IJSRuntime.InvokeAsync` を指定して呼び出され、次の値を返します。
+前のコード例では、*wwwroot/index.html* (Blazor WebAssembly) または *Pages/_Host.cshtml* (Blazor サーバー) の `<head>` 要素内で、`setElementText` JavaScript 関数を提供します。 関数は <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> を指定して呼び出され、次の値を返します。
 
 ```html
 <script>

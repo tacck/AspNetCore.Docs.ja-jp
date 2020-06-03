@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core でホスティング スタートアップ アセンブリを使用する
-author: rick-anderson
-description: IHostingStartup 実装を使用して、外部アセンブリから ASP.NET Core アプリを拡張する方法について説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc, seodec18
-ms.date: 09/26/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: afbffc752f9c184ef32c9518464a94a615828dab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776579"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core でホスティング スタートアップ アセンブリを使用する
 
@@ -242,7 +229,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 ホスティング スタートアップのアクティブ化のオプションは次のとおりです。
 
-* [ランタイム ストア](#runtime-store) &ndash; アクティブ化では、アクティブ化に関するコンパイル時参照を必要としません。 サンプル アプリでは、ホスティング スタートアップ アセンブリおよび依存関係のファイルが *deployment* フォルダーに配置されています。これにより、複数のコンピューターから成る環境でのホスティング スタートアップの配置が容易になります。 *deployment* フォルダーには、ホスティングスタートアップが有効になるように配置システム上で環境変数を作成および変更する PowerShell スクリプトも含まれています。
+* [ランタイム ストア](#runtime-store):アクティブ化では、アクティブ化に関するコンパイル時参照を必要としません。 サンプル アプリでは、ホスティング スタートアップ アセンブリおよび依存関係のファイルが *deployment* フォルダーに配置されています。これにより、複数のコンピューターから成る環境でのホスティング スタートアップの配置が容易になります。 *deployment* フォルダーには、ホスティングスタートアップが有効になるように配置システム上で環境変数を作成および変更する PowerShell スクリプトも含まれています。
 * アクティブ化で必須のコンパイル時参照
   * [NuGet パッケージ](#nuget-package)
   * [プロジェクトの bin フォルダー](#project-bin-folder)
@@ -329,10 +316,10 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 {ADDITIONAL DEPENDENCIES PATH}/shared/{SHARED FRAMEWORK NAME}/{SHARED FRAMEWORK VERSION}/{ENHANCEMENT ASSEMBLY NAME}.deps.json
 ```
 
-* `{ADDITIONAL DEPENDENCIES PATH}` &ndash; `DOTNET_ADDITIONAL_DEPS` 環境変数に追加される場所。
-* `{SHARED FRAMEWORK NAME}` &ndash; この追加の依存関係ファイルに必要な共有フレームワーク。
-* `{SHARED FRAMEWORK VERSION}` &ndash; 共有フレームワークの最小バージョン。
-* `{ENHANCEMENT ASSEMBLY NAME}` &ndash; 拡張機能のアセンブリ名。
+* `{ADDITIONAL DEPENDENCIES PATH}`:`DOTNET_ADDITIONAL_DEPS` 環境変数に追加される場所。
+* `{SHARED FRAMEWORK NAME}`:この追加の依存関係ファイルに必要な共有フレームワーク。
+* `{SHARED FRAMEWORK VERSION}`:共有フレームワークの最小バージョン。
+* `{ENHANCEMENT ASSEMBLY NAME}`:拡張機能のアセンブリ名。
 
 サンプル アプリ (*RuntimeStore* プロジェクト) では、追加の依存関係ファイルは以下の場所に配置されます。
 
@@ -376,8 +363,8 @@ NuGet パッケージとランタイム ストアの詳細については、次�
   * 使用するプロジェクトでアクセスできる場所。
 * ホスティング スタートアップの依存関係ファイルは、「[ランタイム ストア](#runtime-store)」のセクションで説明にしたように (コンパイル参照がない場合)、機能強化されたアプリで利用できるようになります。
 * .NET Framework を対象にするとき、アセンブリは既定の読み込みコンテキストで読み込み可能です。これは、.NET Framework の場合、アセンブリが次のいずれかの場所にあることを意味します。
-  * アプリケーション ベース パス &ndash; アプリの実行可能ファイル ( *.exe*) が置かれている *bin* フォルダー。
-  * グローバル アセンブリ キャッシュ (GAC) &ndash; GAC には、複数の .NET Framework アプリで共有されるアセンブリが格納されています。 詳細については、[ アセンブリをグローバル アセンブリ キャッシュにインストールする](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)」を参照してください。これは .NET Framework ドキュメントにあります。
+  * アプリケーション ベース パス:アプリの実行可能ファイル ( *.exe*) が置かれている *bin* フォルダー。
+  * グローバル アセンブリ キャッシュ (GAC):GAC には、複数の .NET Framework アプリで共有されるアセンブリが格納されています。 詳細については、[ アセンブリをグローバル アセンブリ キャッシュにインストールする](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)」を参照してください。これは .NET Framework ドキュメントにあります。
 
 ## <a name="sample-code"></a>サンプル コード
 
@@ -628,7 +615,7 @@ HostingStartupLibrary;HostingStartupPackage;StartupDiagnostics
 
 ホスティング スタートアップのアクティブ化のオプションは次のとおりです。
 
-* [ランタイム ストア](#runtime-store) &ndash; アクティブ化では、アクティブ化に関するコンパイル時参照を必要としません。 サンプル アプリでは、ホスティング スタートアップ アセンブリおよび依存関係のファイルが *deployment* フォルダーに配置されています。これにより、複数のコンピューターから成る環境でのホスティング スタートアップの配置が容易になります。 *deployment* フォルダーには、ホスティングスタートアップが有効になるように配置システム上で環境変数を作成および変更する PowerShell スクリプトも含まれています。
+* [ランタイム ストア](#runtime-store):アクティブ化では、アクティブ化に関するコンパイル時参照を必要としません。 サンプル アプリでは、ホスティング スタートアップ アセンブリおよび依存関係のファイルが *deployment* フォルダーに配置されています。これにより、複数のコンピューターから成る環境でのホスティング スタートアップの配置が容易になります。 *deployment* フォルダーには、ホスティングスタートアップが有効になるように配置システム上で環境変数を作成および変更する PowerShell スクリプトも含まれています。
 * アクティブ化で必須のコンパイル時参照
   * [NuGet パッケージ](#nuget-package)
   * [プロジェクトの bin フォルダー](#project-bin-folder)
@@ -715,10 +702,10 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 {ADDITIONAL DEPENDENCIES PATH}/shared/{SHARED FRAMEWORK NAME}/{SHARED FRAMEWORK VERSION}/{ENHANCEMENT ASSEMBLY NAME}.deps.json
 ```
 
-* `{ADDITIONAL DEPENDENCIES PATH}` &ndash; `DOTNET_ADDITIONAL_DEPS` 環境変数に追加される場所。
-* `{SHARED FRAMEWORK NAME}` &ndash; この追加の依存関係ファイルに必要な共有フレームワーク。
-* `{SHARED FRAMEWORK VERSION}` &ndash; 共有フレームワークの最小バージョン。
-* `{ENHANCEMENT ASSEMBLY NAME}` &ndash; 拡張機能のアセンブリ名。
+* `{ADDITIONAL DEPENDENCIES PATH}`:`DOTNET_ADDITIONAL_DEPS` 環境変数に追加される場所。
+* `{SHARED FRAMEWORK NAME}`:この追加の依存関係ファイルに必要な共有フレームワーク。
+* `{SHARED FRAMEWORK VERSION}`:共有フレームワークの最小バージョン。
+* `{ENHANCEMENT ASSEMBLY NAME}`:拡張機能のアセンブリ名。
 
 サンプル アプリ (*RuntimeStore* プロジェクト) では、追加の依存関係ファイルは以下の場所に配置されます。
 
@@ -762,8 +749,8 @@ NuGet パッケージとランタイム ストアの詳細については、次�
   * 使用するプロジェクトでアクセスできる場所。
 * ホスティング スタートアップの依存関係ファイルは、「[ランタイム ストア](#runtime-store)」のセクションで説明にしたように (コンパイル参照がない場合)、機能強化されたアプリで利用できるようになります。
 * .NET Framework を対象にするとき、アセンブリは既定の読み込みコンテキストで読み込み可能です。これは、.NET Framework の場合、アセンブリが次のいずれかの場所にあることを意味します。
-  * アプリケーション ベース パス &ndash; アプリの実行可能ファイル ( *.exe*) が置かれている *bin* フォルダー。
-  * グローバル アセンブリ キャッシュ (GAC) &ndash; GAC には、複数の .NET Framework アプリで共有されるアセンブリが格納されています。 詳細については、[ アセンブリをグローバル アセンブリ キャッシュにインストールする](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)」を参照してください。これは .NET Framework ドキュメントにあります。
+  * アプリケーション ベース パス:アプリの実行可能ファイル ( *.exe*) が置かれている *bin* フォルダー。
+  * グローバル アセンブリ キャッシュ (GAC):GAC には、複数の .NET Framework アプリで共有されるアセンブリが格納されています。 詳細については、[ アセンブリをグローバル アセンブリ キャッシュにインストールする](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)」を参照してください。これは .NET Framework ドキュメントにあります。
 
 ## <a name="sample-code"></a>サンプル コード
 

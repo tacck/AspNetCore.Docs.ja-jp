@@ -1,23 +1,11 @@
 ---
-title: .NET Core での gRPC クライアント ファクトリの統合
-author: jamesnk
-description: クライアント ファクトリを使用して gRPC クライアントを作成する方法について説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/clientfactory
-ms.openlocfilehash: 42b786b9a4d9b422ccf92d7a329979894a35b275
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774718"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core での gRPC クライアント ファクトリの統合
 
@@ -69,7 +57,7 @@ public class AggregatorService : Aggregator.AggregatorBase
 
 ## <a name="configure-httpclient"></a>HttpClient を構成する
 
-`HttpClientFactory` では、gRPC クライアントによって使用される `HttpClient` が作成されます。 標準の `HttpClientFactory` メソッドを使用して、送信要求ミドルウェアを追加したり、`HttpClientHandler` の基になる `HttpClient` を構成したりすることができます。
+`HttpClientFactory` では、gRPC クライアントによって使用される `HttpClient` が作成されます。 標準の `HttpClientFactory` メソッドを使用して、送信要求ミドルウェアを追加したり、`HttpClient` の基になる `HttpClientHandler` を構成したりすることができます。
 
 ```csharp
 services
@@ -120,6 +108,17 @@ services
         o.Address = new Uri("https://localhost:5001");
     })
     .EnableCallContextPropagation();
+```
+
+既定では、クライアントが gRPC 呼び出しのコンテキスト外で使用されると、`EnableCallContextPropagation` によってエラーが発生します。 このエラーは、伝達する呼び出しコンテキストが存在しないことを警告するために設計されています。 クライアントを呼び出しコンテキストの外部で使用する場合は、クライアントが `SuppressContextNotFoundErrors` で構成されていると、エラーが抑制されます。
+
+```csharp
+services
+    .AddGrpcClient<Greeter.GreeterClient>(o =>
+    {
+        o.Address = new Uri("https://localhost:5001");
+    })
+    .EnableCallContextPropagation(o => o.SuppressContextNotFoundErrors = true);
 ```
 
 期限と RPC のキャンセルの詳細については、「[RPC ライフサイクル](https://www.grpc.io/docs/guides/concepts/#rpc-life-cycle)」を参照してください。

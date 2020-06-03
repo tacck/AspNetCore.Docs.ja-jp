@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core 3.0 の新機能
-author: rick-anderson
-description: ASP.NET Core 3.0 の新機能について説明します。
-ms.author: riande
-ms.custom: mvc
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: aspnetcore-3.0
-ms.openlocfilehash: aa0b2b51632cff729449018f9823c38cc26ce612
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774094"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 の新機能
 
@@ -76,9 +64,9 @@ Blazor アプリはコンポーネントから構築されています。 コン
 
 ASP.NET Core 3.0 の gRPC 機能には次のものが含まれます。
 
-* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash;grpc サービスをホストするための ASP.NET Core フレームワーク。 ASP.NET Core 上の gRPC は、ログ記録、依存関係の挿入 (DI)、認証、承認など、標準の ASP.NET Core 機能と完全に統合されています。
-* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; 使い慣れた `HttpClient` に基づいて構築される .NET Core 用の gRPC クライアント。
-* [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; `HttpClientFactory` と gRPC クライアントの統合。
+* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore):gRPC サービスをホストするための ASP.NET Core フレームワーク。 ASP.NET Core 上の gRPC は、ログ記録、依存関係の挿入 (DI)、認証、承認など、標準の ASP.NET Core 機能と完全に統合されています。
+* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client):使い慣れた `HttpClient` に基づいて構築される .NET Core 用の gRPC クライアント。
+* [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory): `HttpClientFactory` と gRPC クライアントの統合。
 
 詳細については、「<xref:grpc/index>」を参照してください。
 
@@ -322,8 +310,8 @@ Json.NET を ASP.NET Core 3.0 に追加するには、「[Newtonsoft.Json ベー
 
 次の一覧には、新しい Razor ディレクティブが含まれます。
 
-* [`@attribute`](xref:mvc/views/razor#attribute) &ndash; `@attribute` ディレクティブでは、指定された属性が生成されたページまたはビューのクラスに適用されます。 たとえば、`@attribute [Authorize]` のようにします。
-* [`@implements`](xref:mvc/views/razor#implements) &ndash; `@implements` ディレクティブでは、生成されたクラスのインターフェイスが実装されます。 たとえば、`@implements IDisposable` のようにします。
+* [`@attribute`](xref:mvc/views/razor#attribute):`@attribute` ディレクティブでは、指定された属性が生成されたページまたはビューのクラスに適用されます。 たとえば、`@attribute [Authorize]` のようにします。
+* [`@implements`](xref:mvc/views/razor#implements):`@implements` ディレクティブでは、生成されたクラスのインターフェイスが実装されます。 たとえば、`@implements IDisposable` のようにします。
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 では、Web API と SPA の認証と承認がサポートされています
 

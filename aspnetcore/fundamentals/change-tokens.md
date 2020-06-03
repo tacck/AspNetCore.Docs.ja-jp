@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core で変更トークンを使用して変更を検出する
-author: rick-anderson
-description: 変更トークンを使用して変更を追跡する方法を説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.date: 10/07/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/change-tokens
-ms.openlocfilehash: 40868c57507989e1d3040df2cbe2feb4871d4394
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774796"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core で変更トークンを使用して変更を検出する
 
@@ -42,16 +30,16 @@ ms.locfileid: "82774796"
 
 <xref:Microsoft.Extensions.Primitives.ChangeToken> は、変更が発生したことの通知を伝達するために使用される静的クラスです。 `ChangeToken` は <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 名前空間内にあります。 [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet パッケージは、ASP.NET Core アプリに暗黙的に提供されます。
 
-[ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) メソッドを使うと、トークンが変更されるたびに呼び出される `Action` を登録できます。
+[ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) メソッドは、トークンが変更されるたびに呼び出される `Action` を登録します。
 
 * `Func<IChangeToken>` はトークンを生成します。
 * `Action` は、トークンが変更されたときに呼び出されます。
 
-[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) オーバーロードには、トークン コンシューマー `TState` に渡される追加の `Action` パラメーターを指定できます。
+[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) オーバーロードは、トークン コンシューマー `Action` に渡される追加の `TState` パラメーターを取ります。
 
 `OnChange` では <xref:System.IDisposable> が返されます。 <xref:System.IDisposable.Dispose*> を呼び出すと、トークンによるその後の変更のリッスンが停止され、トークンのリソースが解放されます。
 
-## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>ASP.NET Core での変更トークンの使用例
+## <a name="example-uses-of-change-tokens-in-aspnet-core"></a>ASP.NET Core での変更のトークンの使用例
 
 変更トークンは、オブジェクトの変更を監視するために ASP.NET Core の主要な領域で使用されます。
 
@@ -63,7 +51,7 @@ ms.locfileid: "82774796"
 
 既定では、ASP.NET Core テンプレートは、[JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json*、*appsettings.Development.json*、および *appsettings.Production.json*) を使用して、アプリの構成設定を読み込みます。
 
-これらのファイルは、`reloadOnChange` パラメーターを受け入れる <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> の [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.Extensions.Hosting.Host> の便利なメソッド <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 内に現れます。
+これらのファイルは、`reloadOnChange` パラメーターを受け取る、<xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> 上の [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.Extensions.Hosting.Host> の便利なメソッド <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 内に現れます。
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -119,8 +107,8 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 `config.GetReloadToken()` はトークンを提供します。 `InvokeChanged` はコールバック メソッドです。 このインスタンスの `state` は、監視の状態にアクセスするために使用される `IConfigurationMonitor` インスタンスへの参照です。 次の 2 つのプロパティが使用されます。
 
-* `MonitoringEnabled` &ndash; コールバックでそのカスタム コードを実行する必要があるかどうかを示します。
-* `CurrentState` &ndash; UI で使用するための現在の監視状態を説明します。
+* `MonitoringEnabled`:コールバックでそのカスタム コードを実行する必要があるかどうかを示します。
+* `CurrentState`:UI で使用するための現在の監視状態を説明します。
 
 `InvokeChanged` メソッドは、次の点を除けば、前の方法に似ています。
 
@@ -176,7 +164,7 @@ UI のボタンを使って監視を有効および無効にできます。
 1. 変更トークンは、[IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) を使用してファイル プロバイダーから取得します。 ファイルが変更されたときに、トークンのコールバックがトリガーされます。
 1. ファイルの内容は、[スライド式有効期限](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration)の期間キャシュされます。 ファイルがキャッシュされている間に変更された場合、キャッシュ エントリを削除するために、[MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) を使用して変更トークンがアタッチされます。
 
-次の例では、ファイルはアプリの[コンテンツ ルート](xref:fundamentals/index#content-root)に格納されます。 `IWebHostEnvironment.ContentRootFileProvider` は、アプリの <xref:Microsoft.Extensions.FileProviders.IFileProvider> を指す `IWebHostEnvironment.ContentRootPath` を取得するために使用されます。 `filePath`IFileInfo.PhysicalPath[ を使って ](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath) を取得します。
+次の例では、ファイルはアプリの[コンテンツ ルート](xref:fundamentals/index#content-root)に格納されます。 `IWebHostEnvironment.ContentRootFileProvider` は、アプリの `IWebHostEnvironment.ContentRootPath` を指す <xref:Microsoft.Extensions.FileProviders.IFileProvider> を取得するために使用されます。 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath) を使って `filePath` を取得します。
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
@@ -215,7 +203,7 @@ var compositeChangeToken =
         });
 ```
 
-複合トークンの `HasChanged` は、いずれかの表現されているトークン `true` が `HasChanged` である場合に、`true` を報告します。 複合トークンの `ActiveChangeCallbacks` は、いずれかの表現されているトークン `true` が `ActiveChangeCallbacks` である場合に、`true` を報告します。 複数の同時変更イベントが発生すると、複合変更コールバックが 1 回呼び出されます。
+複合トークンの `HasChanged` は、いずれかの表現されているトークン `HasChanged` が `true` である場合に、`true` を報告します。 複合トークンの `ActiveChangeCallbacks` は、いずれかの表現されているトークン `ActiveChangeCallbacks` が `true` である場合に、`true` を報告します。 複数の同時変更イベントが発生すると、複合変更コールバックが 1 回呼び出されます。
 
 ::: moniker-end
 
@@ -240,12 +228,12 @@ var compositeChangeToken =
 
 <xref:Microsoft.Extensions.Primitives.ChangeToken> は、変更が発生したことの通知を伝達するために使用される静的クラスです。 `ChangeToken` は <xref:Microsoft.Extensions.Primitives?displayProperty=fullName> 名前空間内にあります。 [Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)を使用しないアプリの場合は、[Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) NuGet パッケージのパッケージ参照を作成します。
 
-[ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) メソッドを使うと、トークンが変更されるたびに呼び出される `Action` を登録できます。
+[ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) メソッドは、トークンが変更されるたびに呼び出される `Action` を登録します。
 
 * `Func<IChangeToken>` はトークンを生成します。
 * `Action` は、トークンが変更されたときに呼び出されます。
 
-[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) オーバーロードには、トークン コンシューマー `TState` に渡される追加の `Action` パラメーターを指定できます。
+[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) オーバーロードは、トークン コンシューマー `Action` に渡される追加の `TState` パラメーターを取ります。
 
 `OnChange` では <xref:System.IDisposable> が返されます。 <xref:System.IDisposable.Dispose*> を呼び出すと、トークンによるその後の変更のリッスンが停止され、トークンのリソースが解放されます。
 
@@ -261,7 +249,7 @@ var compositeChangeToken =
 
 既定では、ASP.NET Core テンプレートは、[JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.json*、*appsettings.Development.json*、および *appsettings.Production.json*) を使用して、アプリの構成設定を読み込みます。
 
-これらのファイルは、[ パラメーターを受け取る、](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 上の <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)`reloadOnChange` 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.AspNetCore.WebHost> の便利なメソッド <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 内に現れます。
+これらのファイルは、`reloadOnChange` パラメーターを受け取る、<xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> 上の [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.AspNetCore.WebHost> の便利なメソッド <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 内に現れます。
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -317,8 +305,8 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 `config.GetReloadToken()` はトークンを提供します。 `InvokeChanged` はコールバック メソッドです。 このインスタンスの `state` は、監視の状態にアクセスするために使用される `IConfigurationMonitor` インスタンスへの参照です。 次の 2 つのプロパティが使用されます。
 
-* `MonitoringEnabled` &ndash; コールバックでそのカスタム コードを実行する必要があるかどうかを示します。
-* `CurrentState` &ndash; UI で使用するための現在の監視状態を説明します。
+* `MonitoringEnabled`:コールバックでそのカスタム コードを実行する必要があるかどうかを示します。
+* `CurrentState`:UI で使用するための現在の監視状態を説明します。
 
 `InvokeChanged` メソッドは、次の点を除けば、前の方法に似ています。
 
@@ -374,7 +362,7 @@ UI のボタンを使って監視を有効および無効にできます。
 1. 変更トークンは、[IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) を使用してファイル プロバイダーから取得します。 ファイルが変更されたときに、トークンのコールバックがトリガーされます。
 1. ファイルの内容は、[スライド式有効期限](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration)の期間キャシュされます。 ファイルがキャッシュされている間に変更された場合、キャッシュ エントリを削除するために、[MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) を使用して変更トークンがアタッチされます。
 
-次の例では、ファイルはアプリの[コンテンツ ルート](xref:fundamentals/index#content-root)に格納されます。 アプリの [ を指す ](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider) を取得するために、<xref:Microsoft.Extensions.FileProviders.IFileProvider>IHostingEnvironment.ContentRootFileProvider<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> が使われます。 `filePath`IFileInfo.PhysicalPath[ を使って ](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath) を取得します。
+次の例では、ファイルはアプリの[コンテンツ ルート](xref:fundamentals/index#content-root)に格納されます。 アプリの <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> を指す <xref:Microsoft.Extensions.FileProviders.IFileProvider> を取得するために、[IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider) が使われます。 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath) を使って `filePath` を取得します。
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
@@ -413,7 +401,7 @@ var compositeChangeToken =
         });
 ```
 
-複合トークンの `HasChanged` は、いずれかの表現されているトークン `true` が `HasChanged` である場合に、`true` を報告します。 複合トークンの `ActiveChangeCallbacks` は、いずれかの表現されているトークン `true` が `ActiveChangeCallbacks` である場合に、`true` を報告します。 複数の同時変更イベントが発生すると、複合変更コールバックが 1 回呼び出されます。
+複合トークンの `HasChanged` は、いずれかの表現されているトークン `HasChanged` が `true` である場合に、`true` を報告します。 複合トークンの `ActiveChangeCallbacks` は、いずれかの表現されているトークン `ActiveChangeCallbacks` が `true` である場合に、`true` を報告します。 複数の同時変更イベントが発生すると、複合変更コールバックが 1 回呼び出されます。
 
 ::: moniker-end
 

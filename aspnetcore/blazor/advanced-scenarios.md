@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor の高度なシナリオ
-author: guardrex
-description: Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/advanced-scenarios
-ms.openlocfilehash: b47e7b1d7ff148bb5a8d299d3d2089999f017863
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967338"
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor の高度なシナリオ
 
@@ -74,10 +62,10 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="manual-rendertreebuilder-logic"></a>手動の RenderTreeBuilder ロジック
 
-`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder` には、コンポーネントと要素を操作するためのメソッドが用意されています。これには、C# コードでコンポーネントを手動で作成することも含まれます。
+<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> には、コンポーネントと要素を操作するためのメソッドが用意されています。これには、C# コードでコンポーネントを手動で作成することも含まれます。
 
 > [!NOTE]
-> コンポーネントの作成に `RenderTreeBuilder` を使用することは、高度なシナリオです。 形式が正しくないコンポーネント (閉じられていないマークアップ タグなど) により、定義されていない動作が発生する可能性があります。
+> コンポーネントの作成に <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> を使用することは、高度なシナリオです。 形式が正しくないコンポーネント (閉じられていないマークアップ タグなど) により、定義されていない動作が発生する可能性があります。
 
 次の `PetDetails` コンポーネントを考えてみましょう。これは手動で別のコンポーネントに組み込むことができます。
 
@@ -93,7 +81,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-次の例では、`CreateComponent` メソッド内のループによって、3 つの `PetDetails` コンポーネントが生成されます。 `RenderTreeBuilder` メソッドを呼び出してコンポーネント (`OpenComponent` と `AddAttribute`) を作成する場合、シーケンス番号はソース コードの行番号になります。 Blazor の差分アルゴリズムは、個別の呼び出しではなく、個別のコード行に対応するシーケンス番号に依存しています。 `RenderTreeBuilder` メソッドを使用してコンポーネントを作成する場合は、シーケンス番号の引数をハードコードします。 **計算またはカウンターを使用してシーケンス番号を生成すると、パフォーマンスが低下する可能性があります。** 詳細については、「[シーケンス番号は実行順序ではなくコード行番号に関係する](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)」セクションを参照してください。
+次の例では、`CreateComponent` メソッド内のループによって、3 つの `PetDetails` コンポーネントが生成されます。 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> メソッドを呼び出してコンポーネント (`OpenComponent` と `AddAttribute`) を作成する場合、シーケンス番号はソース コードの行番号になります。 Blazor の差分アルゴリズムは、個別の呼び出しではなく、個別のコード行に対応するシーケンス番号に依存しています。 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> メソッドを使用してコンポーネントを作成する場合は、シーケンス番号の引数をハードコードします。 **計算またはカウンターを使用してシーケンス番号を生成すると、パフォーマンスが低下する可能性があります。** 詳細については、「[シーケンス番号は実行順序ではなくコード行番号に関係する](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)」セクションを参照してください。
 
 `BuiltContent` コンポーネント:
 
@@ -129,15 +117,15 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!WARNING]
-> `Microsoft.AspNetCore.Components.RenderTree` の型により、レンダリング操作の "*結果*" の処理が許可されます。 これらは、Blazor フレームワーク実装の内部的な詳細です。 これらの型は "*不安定*" と考えるべきで、今後のリリースで変更される可能性があります。
+> <xref:Microsoft.AspNetCore.Components.RenderTree> の型により、レンダリング操作の "*結果*" の処理が許可されます。 これらは、Blazor フレームワーク実装の内部的な詳細です。 これらの型は "*不安定*" と考えるべきで、今後のリリースで変更される可能性があります。
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>シーケンス番号は実行順序ではなくコード行番号に関係する
 
-Razor コンポーネント ファイル (" *.razor*") は常にコンパイルされます。 コンパイル ステップは、実行時にアプリのパフォーマンスを向上させる情報を挿入するために使用できるため、コンパイルの方がコードを解釈するよりも潜在的な利点があります。
+Razor コンポーネント ファイル ( *.razor*) は常にコンパイルされます。 コンパイル ステップは、実行時にアプリのパフォーマンスを向上させる情報を挿入するために使用できるため、コンパイルの方がコードを解釈するよりも潜在的な利点があります。
 
 これらの機能強化の主な例として、"*シーケンス番号*" があります。 シーケンス番号は、出力がコードの個別の順序付けられたどの行からのものかをランタイムに示します。 ランタイムでは、この情報を使用して、効率的なツリーの差分を線形時間で生成します。これは、一般的なツリーの差分アルゴリズムで通常にできるよりもかなり高速です。
 
-次の Razor コンポーネント (" *.razor*") ファイルについて考えてみましょう。
+次の Razor コンポーネント ( *.razor*) ファイルについて考えてみましょう。
 
 ```razor
 @if (someFlag)
@@ -162,15 +150,73 @@ builder.AddContent(1, "Second");
 コードを初めて実行するときに、`someFlag` が `true` の場合、ビルダーは以下を受け取ります。
 
 | シーケンス | 種類      | データ   |
-| :------: | --------- | :----: |
-| 0        | テキスト ノード | First (先頭へ)  |
-| 1        | テキスト ノード | Second |
+| :---
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+----- | :----: | | 0        | テキスト ノード | 最初  | | 1        | テキスト ノード | 2 番目 |
 
 `someFlag` が `false` になり、マークアップが再びレンダリングされるとします。 今度は、ビルダーは以下を受け取ります。
 
 | シーケンス | 種類       | データ   |
-| :------: | ---------- | :----: |
-| 1        | テキスト ノード  | Second |
+| :---
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+----- | :----: | | 1        | テキスト ノード  | 2 番目 |
 
 ランタイムで差分を実行すると、シーケンス `0` の項目が削除されたことが認識されるため、次のような単純な "*編集スクリプト*" が生成されます。
 
@@ -194,15 +240,72 @@ builder.AddContent(seq++, "Second");
 最初の出力は次のようになります。
 
 | シーケンス | 種類      | データ   |
-| :------: | --------- | :----: |
-| 0        | テキスト ノード | First (先頭へ)  |
-| 1        | テキスト ノード | Second |
+| :---
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+----- | :----: | | 0        | テキスト ノード | 最初  | | 1        | テキスト ノード | 2 番目 |
 
 この結果は前のケースと同じであるため、否定的な問題は存在しません。 `someFlag` は 2 番目のレンダリングでは `false` で、出力は次のようになります。
 
 | シーケンス | 種類      | データ   |
-| :------: | --------- | ------ |
-| 0        | テキスト ノード | Second |
+| :---
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+----- | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | | 0        | テキスト ノード | 2 番目 |
 
 今度は、差分アルゴリズムによって、"*2 つ*" の変更が発生したことが認識され、アルゴリズムによって次の編集スクリプトが生成されます。
 
@@ -217,7 +320,7 @@ builder.AddContent(seq++, "Second");
 
 * シーケンス番号が動的に生成される場合、アプリのパフォーマンスが低下します。
 * コンパイル時にキャプチャされない限り、必要な情報が存在しないため、実行時にフレームワークで独自のシーケンス番号を自動的に作成することはできません。
-* 手動で実装された `RenderTreeBuilder` ロジックの長いブロックは記述しないでください。 " *.razor*" ファイルを優先し、コンパイラがシーケンス番号を処理できるようにします。 手動の `RenderTreeBuilder` ロジックを回避できない場合は、長いブロックのコードを `OpenRegion`/`CloseRegion` 呼び出しでラップされたより小さな部分に分割します。 各リージョンには独自のシーケンス番号の個別のスペースがあるため、各リージョン内でゼロ (または他の任意の数) から再開できます。
+* 手動で実装された <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ロジックの長いブロックは記述しないでください。 " *.razor*" ファイルを優先し、コンパイラがシーケンス番号を処理できるようにします。 手動の <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ロジックを回避できない場合は、長いブロックのコードを <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A>/<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> 呼び出しでラップされたより小さな部分に分割します。 各リージョンには独自のシーケンス番号の個別のスペースがあるため、各リージョン内でゼロ (または他の任意の数) から再開できます。
 * シーケンス番号がハードコードされている場合、差分アルゴリズムでは、シーケンス番号の値が増えることだけが要求されます。 初期値とギャップは関係ありません。 合理的な選択肢の 1 つは、コード行番号をシーケンス番号として使用するか、ゼロから開始し、1 つずつまたは 100 ずつ (または任意の間隔で) 増やすことです。 
 * Blazor ではシーケンス番号が使用されていますが、他のツリー差分 UI フレームワークでは使用されていません。 シーケンス番号を使用すると、差分がはるかに高速になります。また、Blazor には、" *.razor*" ファイルを作成する開発者に対して、シーケンス番号を自動的に処理するコンパイル ステップの利点があります。
 
@@ -340,7 +443,7 @@ public class FileUploader : IDisposable
 * `ReceiveFile` メソッドは、JS 相互運用によるアップロードを処理するために使用されます。
   * ファイル サイズは、`jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)` を使用した JS 相互運用を通じて、バイト単位で決定されます。
   * 受信するセグメントの数が計算され、`numberOfSegments` に格納されます。
-  * セグメントは、`for` を使用した JS 相互運用を通じて `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` ループで要求されます。 デコードする前のセグメントは、最後を除いてすべてが 8192 バイトである必要があります。 クライアントは、効率的な方法でデータを送信することを強制されます。
+  * セグメントは、`jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` を使用した JS 相互運用を通じて `for` ループで要求されます。 デコードする前のセグメントは、最後を除いてすべてが 8192 バイトである必要があります。 クライアントは、効率的な方法でデータを送信することを強制されます。
   * 受信した各セグメントに対して、<xref:System.Convert.TryFromBase64String%2A> でデコードする前にチェックが実行されます。
   * アップロードが完了すると、データを含むストリームが新しい <xref:System.IO.Stream> (`SegmentedStream`) として返されます。
 

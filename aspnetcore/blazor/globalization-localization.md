@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
-author: guardrex
-description: 複数のカルチャと言語でユーザーが Razor コンポーネントにアクセスできるようにする方法について学習します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/globalization-localization
-ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772492"
+title:'ASP.NET Core Blazor のグローバリゼーションとローカリゼーション' author: description:'複数のカルチャと言語のユーザーが Razor コンポーネントにアクセスできるようにする方法について学習します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -31,18 +19,18 @@ ms.locfileid: "82772492"
 
 現在、サポートされている ASP.NET Core のローカライズ シナリオは限られています。
 
-* Blazor アプリでは `IStringLocalizer<>` は "*サポートされていません*"。
-* `IHtmlLocalizer<>`、`IViewLocalizer<>`、データ注釈のローカライズは ASP.NET Core の MVC シナリオであり、Blazor アプリでは "**サポートされていません**"。
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> と <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> は、Blazor アプリで "*サポートされています*"。
+* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、<xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>、データ注釈のローカライズは ASP.NET Core の MVC シナリオであり、Blazor アプリでは "**サポートされていません**"。
 
 詳細については、「<xref:fundamentals/localization>」を参照してください。
 
 ## <a name="globalization"></a>グローバリゼーション
 
-Blazor の `@bind` 機能では、書式設定が実行され、ユーザーの現在のカルチャに基づいて、表示する値が解析されます。
+Blazor の [`@bind`](xref:mvc/views/razor#bind) 機能は、ユーザーの現在のカルチャに基づいて、書式設定を実行し、表示する値を解析します。
 
 現在のカルチャは、<xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> プロパティからアクセスできます。
 
-[CultureInfo.InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) は、次のフィールドの型 (`<input type="{TYPE}" />`) に使用されます。
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType> は、次のフィールドの型 (`<input type="{TYPE}" />`) に使用されます。
 
 * `date`
 * `number`
@@ -59,7 +47,7 @@ Blazor の `@bind` 機能では、書式設定が実行され、ユーザーの�
 * `month`
 * `week`
 
-`@bind` では、値の解析および書式設定のための <xref:System.Globalization.CultureInfo?displayProperty=fullName> を提供する `@bind:culture` パラメーターをサポートしています。 `date` および `number` のフィールドの型を使用する場合は、カルチャを指定しないことをお勧めします。 `date` および `number` には、必要なカルチャを提供する Blazor サポートが組み込まれています。
+[`@bind`](xref:mvc/views/razor#bind) では、値を解析および書式設定するための <xref:System.Globalization.CultureInfo?displayProperty=fullName> を提供する `@bind:culture` パラメーターをサポートしています。 `date` および `number` のフィールドの型を使用する場合は、カルチャを指定しないことをお勧めします。 `date` および `number` には、必要なカルチャを提供する Blazor サポートが組み込まれています。
 
 ## <a name="localization"></a>ローカリゼーション
 
@@ -67,7 +55,7 @@ Blazor の `@bind` 機能では、書式設定が実行され、ユーザーの�
 
 Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)を使用してカルチャが設定されます。
 
-カルチャを明示的に構成するには、`Program.Main` で `CultureInfo.DefaultThreadCurrentCulture` と `CultureInfo.DefaultThreadCurrentUICulture` を設定します。
+カルチャを明示的に構成するには、`Program.Main` で <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> と <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> を設定します。
 
 既定では、Blazor WebAssembly に対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
 
@@ -146,7 +134,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> `LocalRedirect` アクションの結果を使用して、オープン リダイレクト攻撃を防ぎます。 詳細については、「<xref:security/preventing-open-redirects>」を参照してください。
+> <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> アクションの結果を使用して、オープン リダイレクト攻撃を防ぎます。 詳細については、「<xref:security/preventing-open-redirects>」を参照してください。
 
 次のコンポーネントでは、ユーザーがカルチャを選択したときに、最初のリダイレクトを実行する方法の例を示します。
 

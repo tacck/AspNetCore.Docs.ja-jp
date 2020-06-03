@@ -1,24 +1,11 @@
 ---
-title: Web ファームでの ASP.NET Core のホスト
-author: rick-anderson
-description: Web ファーム環境での共有リソースを使用して、ASP.NET Core アプリのインスタンスを複数ホストする方法について説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 01/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/web-farm
-ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776358"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web ファームでの ASP.NET Core のホスト
 
@@ -26,10 +13,10 @@ ms.locfileid: "82776358"
 
 "*Web ファーム*" とは、アプリのインスタンスを複数ホストする、2 つ以上の Web サーバー (または "*ノード*") のグループのことです。 ユーザーからの要求が Web ファームに到着すると、"*ロード バランサー*" が要求を Web ファームのノードに分散します。 Web ファームの利点は次のとおりです。
 
-* **信頼性/可用性** &ndash; 1 つまたは複数のノードに障害が発生しても、ロード バランサーによって要求がルーティングされ、要求の処理を続行することができます。
-* **容量/パフォーマンス** &ndash; 複数のノードは 1 台のサーバーよりもより多くの要求を処理できます。 ロード バランサーは、ノードへの要求を分散することにでワークロードのバランスをとります。
-* **スケーラビリティ** &ndash; より多くの (またはより少ない) 容量が必要になると、ワークロードに一致するようにアクティブなノードの数を増加 (または減少) させることができます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) などの Web ファーム プラットフォーム テクノロジでは、システム管理者の要求に応じて、または人の介入なしに、自動的にノードを追加したり削除したりできます。
-* **保守容易性** &ndash; Web ファームのノードでは一連の共有サービスを利用できるため、システム管理が簡単になります。 たとえば、Web ファームのノードにおいて、画像やダウンロード可能ファイルなどの静的リソースのために、単一のデータベース サーバーと共通のネットワークの場所を利用することができます。
+* **信頼性/可用性**:1 つまたは複数のノードに障害が発生した場合、ロード バランサーによって要求が機能しているノードにルーティングされ、要求の処理を続行することができます。
+* **容量/パフォーマンス**:複数のノードは 1 台のサーバーよりもより多くの要求を処理できます。 ロード バランサーは、ノードへの要求を分散することにでワークロードのバランスをとります。
+* **スケーラビリティ**:より多くの (またはより少ない) 容量が必要になると、ワークロードに一致するようにアクティブなノードの数を増加 (または減少) させることができます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) などの Web ファーム プラットフォーム テクノロジでは、システム管理者の要求に応じて、または人の介入なしに、自動的にノードを追加したり削除したりできます。
+* **保守容易性**:Web ファームのノードでは一連の共有サービスを利用できるため、システム管理が簡単になります。 たとえば、Web ファームのノードにおいて、画像やダウンロード可能ファイルなどの静的リソースのために、単一のデータベース サーバーと共通のネットワークの場所を利用することができます。
 
 このトピックでは、共有リソースを利用する Web ファームでホストされている ASP.NET Core アプリ用の構成と依存関係について説明します。
 
@@ -65,12 +52,78 @@ Web ファーム環境におけるキャッシュのメカニズムでは、Web 
 次のシナリオに追加構成は必要ありませんが、シナリオが依存するテクノロジには、Web ファーム用の構成が必要です。
 
 | シナリオ | 依存先 &hellip; |
-| -------- | ------------------- |
-| 認証 | データ保護 (<xref:security/data-protection/configuration/overview> を参照)。<br><br>詳細については、次のトピックを参照してください。 <xref:security/authentication/cookie> および <xref:security/cookie-sharing> |
-| Identity | 認証とデータベースの構成。<br><br>詳細については、「<xref:security/authentication/identity>」を参照してください。 |
-| セッション | データ保護 (暗号化された Cookie) (<xref:security/data-protection/configuration/overview> を参照) とキャッシュ (<xref:performance/caching/distributed> を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照してください。 |
-| TempData | データ保護 (暗号化された Cookie) (<xref:security/data-protection/configuration/overview> を参照) またはセッション ([セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「TempData」](xref:fundamentals/app-state#tempdata)を参照してください。 |
-| 偽造防止 | データ保護 (<xref:security/data-protection/configuration/overview> を参照)。<br><br>詳細については、「<xref:security/anti-request-forgery>」を参照してください。 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---------- | | 認証 | データ保護 (「<xref:security/data-protection/configuration/overview>」を参照してください)。<br><br>詳細については、次のトピックを参照してください。 <xref:security/authentication/cookie> および <xref:security/cookie-sharing> | | Identity | 認証とデータベース構成。<br><br>詳細については、「<xref:security/authentication/identity>」を参照してください。 | | セッション | データ保護 (暗号化された Cookie) (<xref:security/data-protection/configuration/overview> を参照) とキャッシュ (<xref:performance/caching/distributed> を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照してください。 | | TempData | データ保護 (暗号化された Cookie) (<xref:security/data-protection/configuration/overview> を参照) またはセッション ([セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「TempData」](xref:fundamentals/app-state#tempdata)を参照してください。 | | 偽造防止 | データ保護 (「<xref:security/data-protection/configuration/overview>」を参照)。<br><br>詳細については、「<xref:security/anti-request-forgery>」を参照してください。 |
 
 ## <a name="troubleshoot"></a>トラブルシューティング
 
@@ -82,12 +135,12 @@ Web ファーム環境におけるキャッシュのメカニズムでは、Web 
 
 次の現象のいずれかが**断続的に**発生するときは、多くの場合、データ保護またはキャッシュが Web ファーム環境に向けて適切に構成されていないことが問題の原因です。
 
-* 認証の中断 &ndash; 認証 Cookie が正しく構成されていない、または暗号化解除できない。 OAuth (Facebook、Microsoft、Twitter) ログインまたは OpenIdConnect ログインが「関連付けできませんでした」というエラーで失敗する。
-* 承認の中断 &ndash; Identity が失われる。
+* 認証の中断:認証 Cookie が正しく構成されていない、または暗号化解除できない。 OAuth (Facebook、Microsoft、Twitter) ログインまたは OpenIdConnect ログインが「関連付けできませんでした」というエラーで失敗する。
+* 承認の中断: Identity が失われる。
 * セッション状態でデータが失われる。
 * キャッシュされた項目が消える。
 * TempData が失敗する。
-* POST の失敗 &ndash; 偽造防止チェックが失敗する。
+* POST の失敗:偽造防止チェックが失敗する。
 
 Web ファームの展開に向けたデータ保護の構成について詳しくは、<xref:security/data-protection/configuration/overview> をご覧ください。 Web ファームの展開に向けたキャッシュの構成について詳しくは、「<xref:performance/caching/distributed>」をご覧ください。
 
@@ -97,6 +150,6 @@ Web ファーム アプリが要求に応答できる場合は、ターミナル
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [Windows でのカスタムのスクリプト拡張機能](/azure/virtual-machines/extensions/custom-script-windows) &ndash; Azure 仮想マシンにスクリプトをダウンロードして実行します。これは、デプロイ後の構成とソフトウェアのインストールに役立ちます。
+* [Windows でのカスタムのスクリプト拡張機能](/azure/virtual-machines/extensions/custom-script-windows):Azure 仮想マシンにスクリプトをダウンロードして実行します。これは、デプロイ後の構成とソフトウェアのインストールに役立ちます。
 * <xref:host-and-deploy/proxy-load-balancer>
  

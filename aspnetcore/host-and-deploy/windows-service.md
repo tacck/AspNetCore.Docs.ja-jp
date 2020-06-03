@@ -1,24 +1,11 @@
 ---
-title: Windows サービスでの ASP.NET Core のホスト
-author: rick-anderson
-description: Windows サービスで ASP.NET Core アプリケーションをホストする方法を説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/windows-service
-ms.openlocfilehash: 4ad9086c60e58f89bdde4962d7487036df251cc1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776345"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows サービスでの ASP.NET Core のホスト
 
@@ -66,8 +53,8 @@ Host.CreateDefaultBuilder(args)
 
 このトピックには、次のサンプル アプリが付属しています。
 
-* バックグラウンド ワーカー サービスのサンプル &ndash; バックグラウンド タスク用に[ホステッド サービス](xref:fundamentals/host/hosted-services)を使用する[ワーカー サービステンプレート](#worker-service-template)に基づく、非 Web アプリのサンプルです。
-* Web アプリ サービスのサンプル &ndash; バックグラウンド タスク用の[ホステッド サービス](xref:fundamentals/host/hosted-services)を使用する Windows サービスとして実行される、Razor Pages Web アプリのサンプルです。
+* バックグラウンド ワーカー サービスのサンプル: バックグラウンド タスク用に[ホステッド サービス](xref:fundamentals/host/hosted-services)を使用する[ワーカー サービス テンプレート](#worker-service-template)に基づく、非 Web アプリのサンプルです。
+* Web アプリ サービスのサンプル: バックグラウンド タスク用の[ホステッド サービス](xref:fundamentals/host/hosted-services)を使用する Windows サービスとして実行される Razor Pages Web アプリのサンプルです。
 
 MVC のガイダンスについては、「<xref:mvc/overview>」と「<xref:migration/22-to-30>」にある記事を参照してください。
 
@@ -115,7 +102,7 @@ Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) は、ター�
 複数の RID を発行するには、次の処理を実行します。
 
 * セミコロンで区切られたリストの形式で RID を指定します。
-* プロパティ名 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複数) を使用します。
+* プロパティ名 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複数形) を使用します。
 
 詳細については、「[.NET Core の RID カタログ](/dotnet/core/rid-catalog)」を参照してください。
 
@@ -172,12 +159,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}` &ndash; ホスト上のアプリのフォルダーへのパス (`d:\myservice` など)。 このパスに、アプリの実行可能ファイルは含めないでください。 末尾のスラッシュは、必要ありません。
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; サービスのユーザー アカウント (`Contoso\ServiceUser` など)。
-* `{SERVICE NAME}` &ndash; サービス名 (`MyService` など)。
-* `{EXE FILE PATH}` &ndash; アプリの実行可能ファイルのパス (`d:\myservice\myservice.exe` など)。 拡張子付きの実行可能ファイルのファイル名を含めます。
-* `{DESCRIPTION}` &ndash; サービスの説明 (`My sample service` など)。
-* `{DISPLAY NAME}` &ndash; サービスの表示名 (`My Service` など)。
+* `{EXE PATH}`:ホスト上のアプリのフォルダーへのパス (`d:\myservice` など)。 このパスに、アプリの実行可能ファイルは含めないでください。 末尾のスラッシュは、必要ありません。
+* `{DOMAIN OR COMPUTER NAME\USER}`:サービスのユーザー アカウント (`Contoso\ServiceUser` など)。
+* `{SERVICE NAME}`:サービス名 (`MyService` など)。
+* `{EXE FILE PATH}`:アプリの実行可能ファイルのパス (`d:\myservice\myservice.exe` など)。 拡張子付きの実行可能ファイルのファイル名を含めます。
+* `{DESCRIPTION}`:サービスの説明 (`My sample service` など)。
+* `{DISPLAY NAME}`:サービスの表示名 (`My Service` など)。
 
 ### <a name="start-a-service"></a>サービスを開始する
 
@@ -267,7 +254,7 @@ Windows サービス アプリのトラブルシューティングについて�
 ### <a name="common-errors"></a>一般的なエラー
 
 * PowerShell の以前のバージョンまたはプレリリース バージョンが使用されています。
-* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの**発行済み**出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行されたアセットは、展開の種類に応じて次のいずれかのフォルダーにあります。
+* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの**発行済み**出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
   * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
   * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
 * サービスが実行中の状態ではありません。
@@ -421,7 +408,7 @@ Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) は、ター�
 複数の RID を発行するには、次の処理を実行します。
 
 * セミコロンで区切られたリストの形式で RID を指定します。
-* プロパティ名 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複数) を使用します。
+* プロパティ名 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複数形) を使用します。
 
 詳細については、「[.NET Core の RID カタログ](/dotnet/core/rid-catalog)」を参照してください。
 
@@ -484,12 +471,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}` &ndash; ホスト上のアプリのフォルダーへのパス (`d:\myservice` など)。 このパスに、アプリの実行可能ファイルは含めないでください。 末尾のスラッシュは、必要ありません。
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; サービスのユーザー アカウント (`Contoso\ServiceUser` など)。
-* `{SERVICE NAME}` &ndash; サービス名 (`MyService` など)。
-* `{EXE FILE PATH}` &ndash; アプリの実行可能ファイルのパス (`d:\myservice\myservice.exe` など)。 拡張子付きの実行可能ファイルのファイル名を含めます。
-* `{DESCRIPTION}` &ndash; サービスの説明 (`My sample service` など)。
-* `{DISPLAY NAME}` &ndash; サービスの表示名 (`My Service` など)。
+* `{EXE PATH}`:ホスト上のアプリのフォルダーへのパス (`d:\myservice` など)。 このパスに、アプリの実行可能ファイルは含めないでください。 末尾のスラッシュは、必要ありません。
+* `{DOMAIN OR COMPUTER NAME\USER}`:サービスのユーザー アカウント (`Contoso\ServiceUser` など)。
+* `{SERVICE NAME}`:サービス名 (`MyService` など)。
+* `{EXE FILE PATH}`:アプリの実行可能ファイルのパス (`d:\myservice\myservice.exe` など)。 拡張子付きの実行可能ファイルのファイル名を含めます。
+* `{DESCRIPTION}`:サービスの説明 (`My sample service` など)。
+* `{DISPLAY NAME}`:サービスの表示名 (`My Service` など)。
 
 ### <a name="start-a-service"></a>サービスを開始する
 
@@ -758,7 +745,7 @@ Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) は、ター�
 複数の RID を発行するには、次の処理を実行します。
 
 * セミコロンで区切られたリストの形式で RID を指定します。
-* プロパティ名 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複数) を使用します。
+* プロパティ名 [\<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (複数形) を使用します。
 
 詳細については、「[.NET Core の RID カタログ](/dotnet/core/rid-catalog)」を参照してください。
 
@@ -821,12 +808,12 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* `{EXE PATH}` &ndash; ホスト上のアプリのフォルダーへのパス (`d:\myservice` など)。 このパスに、アプリの実行可能ファイルは含めないでください。 末尾のスラッシュは、必要ありません。
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; サービスのユーザー アカウント (`Contoso\ServiceUser` など)。
-* `{SERVICE NAME}` &ndash; サービス名 (`MyService` など)。
-* `{EXE FILE PATH}` &ndash; アプリの実行可能ファイルのパス (`d:\myservice\myservice.exe` など)。 拡張子付きの実行可能ファイルのファイル名を含めます。
-* `{DESCRIPTION}` &ndash; サービスの説明 (`My sample service` など)。
-* `{DISPLAY NAME}` &ndash; サービスの表示名 (`My Service` など)。
+* `{EXE PATH}`:ホスト上のアプリのフォルダーへのパス (`d:\myservice` など)。 このパスに、アプリの実行可能ファイルは含めないでください。 末尾のスラッシュは、必要ありません。
+* `{DOMAIN OR COMPUTER NAME\USER}`:サービスのユーザー アカウント (`Contoso\ServiceUser` など)。
+* `{SERVICE NAME}`:サービス名 (`MyService` など)。
+* `{EXE FILE PATH}`:アプリの実行可能ファイルのパス (`d:\myservice\myservice.exe` など)。 拡張子付きの実行可能ファイルのファイル名を含めます。
+* `{DESCRIPTION}`:サービスの説明 (`My sample service` など)。
+* `{DISPLAY NAME}`:サービスの表示名 (`My Service` など)。
 
 ### <a name="start-a-service"></a>サービスを開始する
 

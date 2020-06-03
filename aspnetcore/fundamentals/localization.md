@@ -1,22 +1,11 @@
 ---
-title: ASP.NET Core のグローバリゼーションおよびローカリゼーション
-author: rick-anderson
-description: ASP.NET Core がコンテンツをさまざまな言語と文化にローカライズするために提供するサービスとミドルウェアについて説明します。
-ms.author: riande
-ms.date: 11/30/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/localization
-ms.openlocfilehash: 6a6179baedbb6e737335886457e9012ad463a2ba
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153956"
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core のグローバリゼーションおよびローカリゼーション
 
@@ -40,7 +29,7 @@ ms.locfileid: "83153956"
 
 ## <a name="make-the-apps-content-localizable"></a>アプリのコンテンツをローカライズできるようにする
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer`1> は、ローカライズされたアプリの開発時に生産性が向上するように設計されています。 `IStringLocalizer` は、[ResourceManager](/dotnet/api/system.resources.resourcemanager) と [ResourceReader](/dotnet/api/system.resources.resourcereader) を使用して、実行時にカルチャ固有のリソースを提供します。 インターフェイスには、ローカライズされた文字列を返すためのインデクサーと `IEnumerable` があります。 `IStringLocalizer` では、既定の言語文字列をリソース ファイルに格納する必要はありません。 ローカリゼーションの対象となるアプリを開発することができ、開発の早い段階でリソース ファイルを作成する必要はありません。 次のコードは、ローカリゼーションのために文字列 "About Title" をラップする方法を示しています。
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `IStringLocalizer` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an `IEnumerable` for returning localized strings. `IStringLocalizer` では、既定の言語文字列をリソース ファイルに格納する必要はありません。 ローカリゼーションの対象となるアプリを開発することができ、開発の早い段階でリソース ファイルを作成する必要はありません。 次のコードは、ローカリゼーションのために文字列 "About Title" をラップする方法を示しています。
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -72,7 +61,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップについて考えます。
+`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップがあるとします。
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -81,8 +70,15 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 フランス語のリソース ファイルには次の値が含まれます。
 
 | Key | [値] |
-| ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ---
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 描画されたビューには、リソース ファイルからの HTML マークアップが含まれます。
 
@@ -155,10 +151,70 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、*Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、*Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、*Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
 
 | リソース名 | ドットまたはパスの名前付け |
-| ------------   | ------------- |
-| Resources/Controllers.HomeController.fr.resx | ドット  |
-| Resources/Controllers/HomeController.fr.resx  | パス |
-|    |     |
+| ---
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------   | --- title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------- | | Resources/Controllers.HomeController.fr.resx | ドット  | | Resources/Controllers/HomeController.fr.resx  | パス | |    |     |
 
 Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
@@ -326,7 +382,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` を挿入するコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 
@@ -388,7 +444,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 ## <a name="make-the-apps-content-localizable"></a>アプリのコンテンツをローカライズできるようにする
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer`1> は、ローカライズされたアプリの開発時に生産性が向上するように設計されています。 `IStringLocalizer` は、[ResourceManager](/dotnet/api/system.resources.resourcemanager) と [ResourceReader](/dotnet/api/system.resources.resourcereader) を使用して、実行時にカルチャ固有のリソースを提供します。 インターフェイスには、ローカライズされた文字列を返すためのインデクサーと `IEnumerable` があります。 `IStringLocalizer` では、既定の言語文字列をリソース ファイルに格納する必要はありません。 ローカリゼーションの対象となるアプリを開発することができ、開発の早い段階でリソース ファイルを作成する必要はありません。 次のコードは、ローカリゼーションのために文字列 "About Title" をラップする方法を示しています。
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `IStringLocalizer` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an `IEnumerable` for returning localized strings. `IStringLocalizer` では、既定の言語文字列をリソース ファイルに格納する必要はありません。 ローカリゼーションの対象となるアプリを開発することができ、開発の早い段階でリソース ファイルを作成する必要はありません。 次のコードは、ローカリゼーションのために文字列 "About Title" をラップする方法を示しています。
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -420,7 +476,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップについて考えます。
+`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップがあるとします。
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -429,8 +485,15 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 フランス語のリソース ファイルには次の値が含まれます。
 
 | Key | [値] |
-| ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ---
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 描画されたビューには、リソース ファイルからの HTML マークアップが含まれます。
 
@@ -503,10 +566,70 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、*Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、*Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、*Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
 
 | リソース名 | ドットまたはパスの名前付け |
-| ------------   | ------------- |
-| Resources/Controllers.HomeController.fr.resx | ドット  |
-| Resources/Controllers/HomeController.fr.resx  | パス |
-|    |     |
+| ---
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------   | --- title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------- | | Resources/Controllers.HomeController.fr.resx | ドット  | | Resources/Controllers/HomeController.fr.resx  | パス | |    |     |
 
 Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
@@ -674,7 +797,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` を挿入するコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 
@@ -735,7 +858,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 ## <a name="make-the-apps-content-localizable"></a>アプリのコンテンツをローカライズできるようにする
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer`1> は、ローカライズされたアプリの開発時に生産性が向上するように設計されています。 `IStringLocalizer` は、[ResourceManager](/dotnet/api/system.resources.resourcemanager) と [ResourceReader](/dotnet/api/system.resources.resourcereader) を使用して、実行時にカルチャ固有のリソースを提供します。 インターフェイスには、ローカライズされた文字列を返すためのインデクサーと `IEnumerable` があります。 `IStringLocalizer` では、既定の言語文字列をリソース ファイルに格納する必要はありません。 ローカリゼーションの対象となるアプリを開発することができ、開発の早い段階でリソース ファイルを作成する必要はありません。 次のコードは、ローカリゼーションのために文字列 "About Title" をラップする方法を示しています。
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `IStringLocalizer` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an `IEnumerable` for returning localized strings. `IStringLocalizer` では、既定の言語文字列をリソース ファイルに格納する必要はありません。 ローカリゼーションの対象となるアプリを開発することができ、開発の早い段階でリソース ファイルを作成する必要はありません。 次のコードは、ローカリゼーションのために文字列 "About Title" をラップする方法を示しています。
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -767,7 +890,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップについて考えます。
+`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップがあるとします。
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -776,8 +899,15 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 フランス語のリソース ファイルには次の値が含まれます。
 
 | Key | [値] |
-| ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ---
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 描画されたビューには、リソース ファイルからの HTML マークアップが含まれます。
 
@@ -850,10 +980,70 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、*Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、*Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、*Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
 
 | リソース名 | ドットまたはパスの名前付け |
-| ------------   | ------------- |
-| Resources/Controllers.HomeController.fr.resx | ドット  |
-| Resources/Controllers/HomeController.fr.resx  | パス |
-|    |     |
+| ---
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------   | --- title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------- | | Resources/Controllers.HomeController.fr.resx | ドット  | | Resources/Controllers/HomeController.fr.resx  | パス | |    |     |
 
 Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 

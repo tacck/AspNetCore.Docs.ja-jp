@@ -69,8 +69,8 @@ Blazor アプリの Razor コンポーネントでは、Razor 構文が多用さ
 
 Razor 構文でコンテンツにアクセスする場合は、次のセクションに特にご注意ください。
 
-* [ディレクティブ](xref:mvc/views/razor#directives) &ndash; 通常はコンポーネント マークアップの解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
-* [ディレクティブ属性](xref:mvc/views/razor#directive-attributes) &ndash; 通常はコンポーネント要素の解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
+* [ディレクティブ](xref:mvc/views/razor#directives): 通常はコンポーネント マークアップの解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
+* [ディレクティブ属性](xref:mvc/views/razor#directive-attributes): 通常はコンポーネント要素の解析方法や機能を変更する、`@` プレフィックス付きの予約キーワード。
 
 ## <a name="static-assets"></a>静的な資産
 
@@ -110,7 +110,7 @@ Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) は�
 
 Blazor でのルーティングは、アプリ内のアクセス可能な各コンポーネントへのルート テンプレートを提供することで実現します。
 
-[`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって `RouteAttribute` を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。
+[`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。
 
 ```razor
 @page "/ParentComponent"
@@ -136,7 +136,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
-コンポーネントには、*コンポーネント パラメーター*を指定でき、これは `[Parameter]` 属性を指定したコンポーネント クラスで、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
+コンポーネントには、*コンポーネント パラメーター*を指定できます。このパラメーターは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
 
 *Components/ChildComponent.razor*:
 
@@ -155,14 +155,14 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 コンポーネントでは、別のコンポーネントのコンテンツを設定できます。 割り当てコンポーネントでは、受信コンポーネントを指定するタグ間にコンテンツを指定します。
 
-次の例では、`ChildComponent` に、レンダリングする UI のセグメントを表す `RenderFragment` を表す `ChildContent` プロパティがあります。 コンテンツをレンダリングする必要があるコンポーネントのマークアップに、`ChildContent` の値を配置します。 `ChildContent` の値は、親コンポーネントから受け取られ、ブートストラップ パネルの `panel-body` 内にレンダリングされます。
+次の例では、`ChildComponent` に、レンダリングする UI のセグメントを表す <xref:Microsoft.AspNetCore.Components.RenderFragment> を表す `ChildContent` プロパティがあります。 コンテンツをレンダリングする必要があるコンポーネントのマークアップに、`ChildContent` の値を配置します。 `ChildContent` の値は、親コンポーネントから受け取られ、ブートストラップ パネルの `panel-body` 内にレンダリングされます。
 
 *Components/ChildComponent.razor*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> `RenderFragment` コンテンツを受け取るプロパティは、規則によって `ChildContent` という名前にする必要があります。
+> <xref:Microsoft.AspNetCore.Components.RenderFragment> コンテンツを受け取るプロパティは、規則によって `ChildContent` という名前にする必要があります。
 
 サンプル アプリの `ParentComponent` では、コンテンツを `<ChildComponent>` タグ内に配置することによって、`ChildComponent` をレンダリングするためのコンテンツを提供できます。
 
@@ -229,7 +229,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
        size="50">
 ```
 
-任意の属性を受け入れるには、`CaptureUnmatchedValues` プロパティを `true` に設定した `[Parameter]` 属性を使用して、コンポーネント パラメーターを定義します。
+任意の属性を受け入れるには、<xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> プロパティを `true` に設定した [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を使用して、コンポーネント パラメーターを定義します。
 
 ```razor
 @code {
@@ -238,7 +238,7 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 }
 ```
 
-`[Parameter]` の `CaptureUnmatchedValues` プロパティにより、パラメーターを他のパラメーターと一致しないすべての属性と一致させることができます。 1 つのコンポーネントで、`CaptureUnmatchedValues` を持つパラメーターは 1 つだけ定義できます。 `CaptureUnmatchedValues` で使用されるプロパティの型は、文字列キーを使用して `Dictionary<string, object>` から割り当て可能である必要があります。 このシナリオでは、`IEnumerable<KeyValuePair<string, object>>` または `IReadOnlyDictionary<string, object>` も使用できます。
+[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) の <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> プロパティにより、パラメーターを他のパラメーターと一致しないすべての属性と一致させることができます。 1 つのコンポーネントで、<xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> を持つパラメーターは 1 つだけ定義できます。 <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> で使用されるプロパティの型は、文字列キーを使用して `Dictionary<string, object>` から割り当て可能である必要があります。 このシナリオでは、`IEnumerable<KeyValuePair<string, object>>` または `IReadOnlyDictionary<string, object>` も使用できます。
 
 要素属性の位置を基準とした [`@attributes`][3] の位置は重要です。 [`@attributes`][3] が要素にスプラッティングされると、属性は右から左 (最後から最初) に処理されます。 `Child` コンポーネントを使用する次のコンポーネントの例を考えます。
 
@@ -320,7 +320,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>状態を更新するために外部でコンポーネント メソッドを呼び出す
 
-Blazor では、同期コンテキスト (`SynchronizationContext`) を使用して、1 つの実行の論理スレッドを強制します。 コンポーネントの[ライフサイクル メソッド](xref:blazor/lifecycle)と、Blazor によって発生するすべてのイベント コールバックは、同期コンテキストで実行されます。
+Blazor では、同期コンテキスト (<xref:System.Threading.SynchronizationContext>) を使用して、1 つの実行の論理スレッドを強制します。 コンポーネントの[ライフサイクル メソッド](xref:blazor/lifecycle)と、Blazor によって発生するすべてのイベント コールバックは、同期コンテキストで実行されます。
 
 Blazor サーバーの同期コンテキストでは、ブラウザーの WebAssembly モデル (シングル スレッド) と厳密に一致するように、シングルスレッド環境のエミュレートが試行されます。 どの時点でも、作業は 1 つのスレッドでのみ実行され、1 つの論理スレッドであるという印象になります。 2 つの操作が同時に実行されることはありません。
 
@@ -438,7 +438,7 @@ public class NotifierService
 
 ### <a name="when-to-use-key"></a>\@ キーを使用する場面
 
-一般に、リストがレンダリングされ (たとえば、`@foreach` ブロックで)、[`@key`][5] を定義するための適切な値が存在する場合は常に、[`@key`][5] を使用することは意味があります。
+一般に、リストがレンダリングされ (たとえば、[foreach](/dotnet/csharp/language-reference/keywords/foreach-in) ブロックで)、[`@key`][5] を定義するための適切な値が存在する場合は常に、[`@key`][5] を使用することは意味があります。
 
 また、[`@key`][5] を使用して、オブジェクトが変更されたときに Blazor が要素やコンポーネントのサブツリーを保持しないようにすることもできます。
 
@@ -469,7 +469,7 @@ public class NotifierService
 
 パラメーターは、次のような条件で上書きされます。
 
-* 子コンポーネントのコンテンツが、`RenderFragment` を使用してレンダリングされる。
+* 子コンポーネントのコンテンツが、<xref:Microsoft.AspNetCore.Components.RenderFragment> を使用してレンダリングされる。
 * <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が、親コンポーネントで呼び出される。
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されると親コンポーネントがレンダリングされ、新しいパラメーター値が子コンポーネントに指定されるため、パラメーターがリセットされます。
@@ -503,7 +503,7 @@ public class NotifierService
 }
 ```
 
-`Expander` コンポーネントは、`StateHasChanged` を呼び出す可能性のある親コンポーネントに追加されます。
+`Expander` コンポーネントは、<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> を呼び出す可能性のある親コンポーネントに追加されます。
 
 ```razor
 <Expander Expanded="true">
@@ -517,7 +517,7 @@ public class NotifierService
 </button>
 ```
 
-初期状態では、`Expanded` プロパティが切り替えられると、`Expander` コンポーネントはそれぞれ独立して動作します。 子コンポーネントの状態は、想定どおりのままです。 親で `StateHasChanged` が呼び出されると、最初の子コンポーネントの `Expanded` パラメーターが初期値 (`true`) にリセットされます。 2 つめの `Expander` コンポーネントの `Expanded` 値はリセットされません。これは、2 つめのコンポーネントでは子コンテンツがレンダリングされないためです。
+初期状態では、`Expanded` プロパティが切り替えられると、`Expander` コンポーネントはそれぞれ独立して動作します。 子コンポーネントの状態は、想定どおりのままです。 親で <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されると、最初の子コンポーネントの `Expanded` パラメーターが初期値 (`true`) にリセットされます。 2 つめの `Expander` コンポーネントの `Expanded` 値はリセットされません。これは、2 つめのコンポーネントでは子コンテンツがレンダリングされないためです。
 
 前のシナリオでの状態を維持するには、`Expander` コンポーネントで "*プライベート フィールド*" を使用して、切り替え状態を維持します。
 
@@ -632,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>基本クラスの指定
 
-[`@inherits`][6] ディレクティブを使用して、コンポーネントの基本クラスを指定できます。 次の例は、コンポーネントが基本クラス `BlazorRocksBase` を継承して、コンポーネントのプロパティとメソッドを提供する方法を示しています。 基本クラスは `ComponentBase` から派生する必要があります。
+[`@inherits`][6] ディレクティブを使用して、コンポーネントの基本クラスを指定できます。 次の例は、コンポーネントが基本クラス `BlazorRocksBase` を継承して、コンポーネントのプロパティとメソッドを提供する方法を示しています。 基本クラスは <xref:Microsoft.AspNetCore.Components.ComponentBase> から派生する必要があります。
 
 *Pages/BlazorRocks.razor*:
 
@@ -660,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>属性の指定
 
-属性は、[`@attribute`][7] ディレクティブを使用して Razor コンポーネントに指定できます。 次の例では、`[Authorize]` 属性をコンポーネント クラスに適用しています。
+属性は、[`@attribute`][7] ディレクティブを使用して Razor コンポーネントに指定できます。 次の例では、[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性をコンポーネント クラスに適用しています。
 
 ```razor
 @page "/"
@@ -700,9 +700,9 @@ This is the Index page.
 > [!NOTE]
 > `global::` 修飾はサポートされていません。
 >
-> 別名が付けられた `using` ステートメント (`@using Foo = Bar` など) によるコンポーネントのインポートはサポートされていません。
+> 別名が付けられた [using](/dotnet/csharp/language-reference/keywords/using-statement) ステートメント (`@using Foo = Bar` など) によるコンポーネントのインポートはサポートされていません。
 >
-> 部分修飾名はサポートされていません。 たとえば、`<Shared.NavMenu></Shared.NavMenu>` による `@using BlazorSample` の追加と `NavMenu.razor` の参照はサポートされていません。
+> 部分修飾名はサポートされていません。 たとえば、`<Shared.NavMenu></Shared.NavMenu>` による `@using BlazorSample` の追加と `NavMenu` コンポーネント (`NavMenu.razor`) の参照はサポートされていません。
 
 ## <a name="conditional-html-element-attributes"></a>条件付き HTML 要素属性
 
@@ -771,7 +771,7 @@ public class ThemeInfo
 }
 ```
 
-先祖コンポーネントでは、Cascading Value コンポーネントを使用してカスケード値を指定できます。 `CascadingValue` コンポーネントは、コンポーネント階層のサブツリーをラップし、そのサブツリー内のすべてのコンポーネントに単一の値を指定します。
+先祖コンポーネントでは、Cascading Value コンポーネントを使用してカスケード値を指定できます。 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> コンポーネントは、コンポーネント階層のサブツリーをラップし、そのサブツリー内のすべてのコンポーネントに単一の値を指定します。
 
 たとえば、サンプル アプリでは、アプリのレイアウトの 1 つに、`@Body` プロパティのレイアウト本体を構成するすべてのコンポーネントのカスケード パラメーターとして、テーマ情報 (`ThemeInfo`) を指定しています。 `ButtonClass` には、レイアウト コンポーネント内の `btn-success` の値が割り当てられます。 すべての子孫コンポーネントで、`ThemeInfo` カスケード オブジェクトからこのプロパティを使用できます。
 
@@ -801,7 +801,7 @@ public class ThemeInfo
 }
 ```
 
-カスケード値を使用するには、コンポーネントで `[CascadingParameter]` 属性を使用してカスケード パラメーターを宣言します。 カスケード値は、型によってカスケード パラメーターにバインドされます。
+カスケード値を使用するには、コンポーネントで [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 属性を使用してカスケード パラメーターを宣言します。 カスケード値は、型によってカスケード パラメーターにバインドされます。
 
 サンプル アプリでは、`CascadingValuesParametersTheme` コンポーネントによって `ThemeInfo` カスケード値をカスケード パラメーターにバインドしています。 パラメーターは、コンポーネントによって表示されるボタンの 1 つに CSS クラスを設定するために使用されます。
 
@@ -841,7 +841,7 @@ public class ThemeInfo
 }
 ```
 
-同じサブツリー内で同じ型の複数の値をカスケードするには、各 `CascadingValue` コンポーネントとその対応する `CascadingParameter` に一意の `Name` 文字列を指定します。 次の例では、2 つの `CascadingValue` コンポーネントで、名前によって `MyCascadingType` の異なるインスタンスをカスケードしています。
+同じサブツリー内で同じ型の複数の値をカスケードするには、各 <xref:Microsoft.AspNetCore.Components.CascadingValue%601> コンポーネントとその対応する [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 属性に一意の <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> 文字列を指定します。 次の例では、2 つの <xref:Microsoft.AspNetCore.Components.CascadingValue%601> コンポーネントで、名前によって `MyCascadingType` の異なるインスタンスをカスケードしています。
 
 ```razor
 <CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
@@ -928,7 +928,7 @@ public class ThemeInfo
 @<{HTML tag}>...</{HTML tag}>
 ```
 
-次の例では、`RenderFragment` と `RenderFragment<T>` の値を指定し、コンポーネント内にテンプレートを直接レンダリングする方法を示しています。 レンダリング フラグメントは、引数として[テンプレート コンポーネント](xref:blazor/templated-components)に渡すこともできます。
+次の例では、<xref:Microsoft.AspNetCore.Components.RenderFragment> と <xref:Microsoft.AspNetCore.Components.RenderFragment%601> の値を指定し、コンポーネント内にテンプレートを直接レンダリングする方法を示しています。 レンダリング フラグメントは、引数として[テンプレート コンポーネント](xref:blazor/templated-components)に渡すこともできます。
 
 ```razor
 @timeTemplate
@@ -970,11 +970,11 @@ Blazor は HTML をレンダリングするため、スケーラブル ベクタ
 }
 ```
 
-ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル ( *.razor*) に直接配置した場合、基本的なイメージ レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで `@bind` を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
+ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル ( *.razor*) に直接配置した場合、基本的なイメージ レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* <xref:security/blazor/server/threat-mitigation> &ndash; リソース不足に対処する必要がある Blazor サーバー アプリの構築に関するガイダンスが含まれています。
+* <xref:security/blazor/server/threat-mitigation>:リソース不足に対処する必要がある Blazor サーバー アプリの構築に関するガイダンスが含まれています。
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

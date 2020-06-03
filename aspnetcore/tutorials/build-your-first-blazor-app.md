@@ -69,11 +69,11 @@ HTML 構文を使用して、別のコンポーネント内にコンポーネン
 
 ## <a name="component-parameters"></a>コンポーネントのパラメーター
 
-コンポーネントにパラメーターを持たせることもできます。 コンポーネントのパラメーターは、`[Parameter]` 属性が指定されたコンポーネント クラス上で、パブリック プロパティを使用して定義されます。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
+コンポーネントにパラメーターを持たせることもできます。 コンポーネントのパラメーターは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性が指定されたコンポーネント クラス上で、パブリック プロパティを使用して定義されます。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
 
 1. コンポーネントの `@code` C# コードを次のように更新します。
 
-   * 属性 `[Parameter]` を使用してパブリック `IncrementAmount` プロパティを追加します。
+   * [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を使用してパブリック `IncrementAmount` プロパティを追加します。
    * `currentCount` の値を増やすときに `IncrementAmount` プロパティを使うように `IncrementCount` メソッドを変更します。
 
    *Pages/Counter.razor*:
@@ -105,7 +105,7 @@ Blazor サーバー アプリを使用している場合、`WeatherForecastServi
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-`FetchData` コンポーネントに `WeatherForecastService` サービスのインスタンスを挿入するために、`@inject` ディレクティブが使われています。
+`FetchData` コンポーネントに `WeatherForecastService` サービスのインスタンスを挿入するために、[`@inject`](xref:mvc/views/razor#inject) ディレクティブが使われています。
 
 *Pages/FetchData.razor*:
 
@@ -117,7 +117,7 @@ Blazor サーバー アプリを使用している場合、`WeatherForecastServi
 
 ### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly のエクスペリエンス
 
-Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォルダー内の *weather.json* ファイルから天気予報データを取得するために、`HttpClient` が挿入されます。
+Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォルダー内の *weather.json* ファイルから天気予報データを取得するために、<xref:System.Net.Http.HttpClient> が挿入されます。
 
 *Pages/FetchData.razor*:
 

@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core でのファイル プロバイダー
-author: rick-anderson
-description: ASP.NET Core がファイル プロバイダーを使用してファイル システムへのアクセスを抽象化する方法について説明します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/06/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/file-providers
-ms.openlocfilehash: 2f1151d7854aeeb3e315d0de2b0be5267fe2e8f0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776286"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core でのファイル プロバイダー
 
@@ -60,10 +47,70 @@ ASP.NET Core は、ファイル プロバイダーを使用してファイル �
 次の表に、`IFileProvider` の実装の一覧を示します。
 
 | 実装 | 説明 |
-| -------------- | ----------- |
-| [CompositeFileProvider](#compositefileprovider) | その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリへのアクセスを結合するために使用します。 |
-| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリに埋め込まれているファイルにアクセスする場合に使用します。 |
-| [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために使用します。 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | [CompositeFileProvider](#compositefileprovider) | その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリに対するアクセスを結合する場合に使用されます。 | | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリ内に埋め込まれているファイルにアクセスするために使用されます。 | | [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために使用されます。 |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
@@ -101,7 +148,7 @@ var physicalProvider = _env.ContentRootFileProvider;
 埋め込みファイルのマニフェストを生成するには、次のようにします。
 
 1. [Microsoft.Extensions.FileProviders.Embedded](https://www.nuget.org/packages/Microsoft.Extensions.FileProviders.Embedded) NuGet パッケージをプロジェクトに追加します。
-1. `<GenerateEmbeddedFilesManifest>` プロパティを `true`に設定します。 [\<EmbeddedResource>](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects) を使用して埋め込むファイルを指定します。
+1. `<GenerateEmbeddedFilesManifest>` プロパティを `true`に設定します。 [\<EmbeddedResource>](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects) を使用して列挙するファイルを指定します:
 
     [!code-xml[](file-providers/samples/3.x/FileProviderSample/FileProviderSample.csproj?highlight=5,13)]
 
@@ -123,10 +170,46 @@ var manifestEmbeddedProvider =
 * 埋め込みファイルのマニフェストを含む埋め込みリソースに名前を付けます。
 
 | オーバーロード | 説明 |
-| -------- | ----------- |
-| `ManifestEmbeddedFileProvider(Assembly, String)` | 必要に応じて相対パスのパラメーター `root` を指定できます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 |
-| `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 必要に応じて、相対パス パラメーター `root` および日付パラメーター `lastModified` (<xref:System.DateTimeOffset>) を指定できます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 |
-| `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 必要に応じて、相対パス `root`、日付 `lastModified`、`manifestName` パラメーターを指定できます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | `ManifestEmbeddedFileProvider(Assembly, String)` | 任意指定の `root` 相対パス パラメーターを受け入れます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 任意指定の `root` 相対パス パラメーターと `lastModified` 日付 (<xref:System.DateTimeOffset>) パラメーターを受け入れます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 任意指定の `root` 相対パス、`lastModified` 日付、および `manifestName` パラメーターを受け入れます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
 
 ### <a name="compositefileprovider"></a>CompositeFileProvider
 
@@ -145,8 +228,8 @@ var manifestEmbeddedProvider =
 
 生成される変更トークンでは次のものが公開されます。
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> &ndash; このプロパティを調べることで、変更があったかどうかを判断できます。
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*> &ndash; 指定したパス文字列に対して変更が検出されたときに呼び出されます。 各変更トークンは、1 つの変更への応答として、関連付けられたコールバックを呼び出すのみです。 定数の監視を有効にするには、<xref:System.Threading.Tasks.TaskCompletionSource`1> を使用するか (以下を参照)、変更への応答として `IChangeToken` インスタンスを再作成します。
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>:このプロパティを調べることで、変更があったかどうかを判断できます。
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>:指定したパス文字列に対して変更が検出されたときに呼び出されます。 各変更トークンは、1 つの変更への応答として、関連付けられたコールバックを呼び出すのみです。 定数の監視を有効にするには、<xref:System.Threading.Tasks.TaskCompletionSource`1> を使用するか (以下を参照)、変更への応答として `IChangeToken` インスタンスを再作成します。
 
 *WatchConsole* サンプル アプリでは、*TextFiles* ディレクトリの *.txt* ファイルが変更されるたびに、メッセージが書き込まれます。
 
@@ -167,11 +250,40 @@ Docker コンテナーやネットワーク共有など、一部のファイル 
 次の表は、glob パターンの一般的な例を示しています。
 
 |パターン  |説明  |
-|---------|---------|
-|`directory/file.txt`|特定のディレクトリ内の特定のファイルを照合します。|
-|`directory/*.txt`|特定のディレクトリ内の *.txt* 拡張子を持つすべてのファイルを照合します。|
-|`directory/*/appsettings.json`|*directory* フォルダーのちょうど 1 つ下のレベルにあるディレクトリ内のすべての *appsettings.json* ファイルを照合します。|
-|`directory/**/*.txt`|*directory* フォルダーの下の任意の場所にある、 *.txt* 拡張子を持つすべてのファイルを照合します。|
+|---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-----|---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-----|
+|`directory/file.txt`|特定のディレクトリ内の特定のファイルと一致します。||`directory/*.txt`|特定のディレクトリ内で、拡張子が *.txt* のすべてのファイルと一致します。| |`directory/*/appsettings.json`|*directory* フォルダーの 1 つ下のレベルのディレクトリ内のすべての *appsettings.json* ファイルと一致します。| |`directory/**/*.txt`|*directory* フォルダーの下にある、拡張子が *.txt* のすべてのファイルと一致します。|
 
 ::: moniker-end
 
@@ -211,10 +323,70 @@ ASP.NET Core は、ファイル プロバイダーを使用してファイル �
 利用できる `IFileProvider` の実装は 3 つあります。
 
 | 実装 | 説明 |
-| -------------- | ----------- |
-| [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために、物理プロバイダーが使用されます。 |
-| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリに埋め込まれているファイルにアクセスするために、マニフェストが埋め込まれたプロバイダーが使用されます。 |
-| [CompositeFileProvider](#compositefileprovider) | コンポジット プロパイダーは、その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリに対するアクセスを結合する場合に使用されます。 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために、物理プロバイダーが使用されます。 | | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリに埋め込まれているファイルにアクセスするために、マニフェストが埋め込まれたプロバイダーが使用されます。 | | [CompositeFileProvider](#compositefileprovider) | その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリに対するアクセスを結合するために、コンポジット プロバイダーが使用されます。 |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
@@ -270,10 +442,46 @@ var manifestEmbeddedProvider =
 * 埋め込みファイルのマニフェストを含む埋め込みリソースに名前を付けます。
 
 | オーバーロード | 説明 |
-| -------- | ----------- |
-| `ManifestEmbeddedFileProvider(Assembly, String)` | 必要に応じて相対パスのパラメーター `root` を指定できます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 |
-| `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 必要に応じて、相対パス パラメーター `root` および日付パラメーター `lastModified` (<xref:System.DateTimeOffset>) を指定できます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 |
-| `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 必要に応じて、相対パス `root`、日付 `lastModified`、`manifestName` パラメーターを指定できます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
+| ---
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+---- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------ | | `ManifestEmbeddedFileProvider(Assembly, String)` | 任意指定の `root` 相対パス パラメーターを受け入れます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 任意指定の `root` 相対パス パラメーターと `lastModified` 日付 (<xref:System.DateTimeOffset>) パラメーターを受け入れます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 任意指定の `root` 相対パス、`lastModified` 日付、および `manifestName` パラメーターを受け入れます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
 
 ### <a name="compositefileprovider"></a>CompositeFileProvider
 
@@ -287,8 +495,8 @@ var manifestEmbeddedProvider =
 
 [IFileProvider.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) メソッドによって、1 つまたは複数のファイルやディレクトリに変更がないかどうか監視するシナリオが提供されます。 `Watch` にはパス文字列を指定できます。ここでは、[glob パターン](#glob-patterns)を使用して複数のファイルを指定できます。 `Watch` では <xref:Microsoft.Extensions.Primitives.IChangeToken> が返されます。 変更トークンでは次のものが公開されます。
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> &ndash; このプロパティを調べることで、変更があったかどうかを判断できます。
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*> &ndash; 指定したパス文字列に対して変更が検出されたときに呼び出されます。 各変更トークンは、1 つの変更への応答として、関連付けられたコールバックを呼び出すのみです。 定数の監視を有効にするには、<xref:System.Threading.Tasks.TaskCompletionSource`1> を使用するか (以下を参照)、変更への応答として `IChangeToken` インスタンスを再作成します。
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>:このプロパティを調べることで、変更があったかどうかを判断できます。
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>:指定したパス文字列に対して変更が検出されたときに呼び出されます。 各変更トークンは、1 つの変更への応答として、関連付けられたコールバックを呼び出すのみです。 定数の監視を有効にするには、<xref:System.Threading.Tasks.TaskCompletionSource`1> を使用するか (以下を参照)、変更への応答として `IChangeToken` インスタンスを再作成します。
 
 サンプル アプリでは、*WatchConsole* コンソール アプリは、テキスト ファイルが変更されるたびにメッセージを表示するように構成されています。
 

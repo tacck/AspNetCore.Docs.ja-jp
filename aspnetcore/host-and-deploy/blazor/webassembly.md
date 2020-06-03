@@ -32,8 +32,8 @@ IIS の *web.config* の圧縮構成については、[「IIS」の「Brotli と
 
 Blazor WebAssembly アプリ内のページ コンポーネントに対するルーティング要求は、Blazor サーバー (ホストされているアプリ) でのルーティング要求のように単純なものではありません。 2 つのコンポーネントを含む Blazor WebAssembly を考えてみましょう。
 
-* *Main.razor* &ndash; アプリのルートで読み込まれ、`About` コンポーネントへのリンク (`href="About"`) が含まれています。
-* *About.razor* &ndash; `About` コンポーネント。
+* *Main.razor*:アプリのルートで読み込まれ、`About` コンポーネントへのリンク (`href="About"`) が含まれています。
+* *About.razor*: `About` コンポーネント。
 
 アプリの既定のドキュメントがブラウザーのアドレス バー (例: `https://www.contoso.com/`) を使用して要求された場合:
 
@@ -83,11 +83,11 @@ IIS は、Blazor アプリ対応の静的ファイル サーバーです。 Blaz
 Blazor プロジェクトが発行されると、*web.config* ファイルが以下の IIS 構成で作成されます。
 
 * 各ファイル拡張子に対して設定される MIME の種類は次のとおりです。
-  * *.dll* &ndash; `application/octet-stream`
-  * *.json* &ndash; `application/json`
-  * *.wasm* &ndash; `application/wasm`
-  * *.woff* &ndash; `application/font-woff`
-  * *.woff2* &ndash; `application/font-woff`
+  * *.dll*: `application/octet-stream`
+  * *.json*: `application/json`
+  * *.wasm*: `application/wasm`
+  * *.woff*: `application/font-woff`
+  * *.woff2*: `application/font-woff`
 * 次の MIME の種類に対しては、HTTP 圧縮が有効にされます。
   * `application/octet-stream`
   * `application/wasm`

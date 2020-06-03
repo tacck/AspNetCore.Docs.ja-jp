@@ -1,23 +1,11 @@
 ---
-title: Visual Studio コンテナー ツールと ASP.NET Core
-author: spboyer
-description: Visual Studio ツールと Docker for Windows を使用して、ASP.NET Core アプリをコンテナー化する方法を説明します。
-ms.author: scaddie
-ms.custom: mvc
-ms.date: 09/12/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967572"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Visual Studio コンテナー ツールと ASP.NET Core
 
@@ -100,10 +88,10 @@ Visual Studio 2017 バージョン 15.8 以降では、指示された場合に�
 
 Visual Studio コンテナー ツールでは、ソリューションに *docker-compose* プロジェクトを追加します。これには以下のファイルが含まれます。
 
-* *docker-compose.dcproj* &ndash; プロジェクトを表すファイル。 使用する OS を指定する `<DockerTargetOS>` 要素が含まれます。
-* *.dockerignore* &ndash; ビルド コンテキストを生成するときに除外するファイルとディレクトリのパターンが一覧表示されます。
-* *docker-compose.yml* &ndash; `docker-compose build` および `docker-compose run` を使用して、それぞれビルドおよび実行されるイメージのコレクションを定義するために使用される、基本の [Docker Compose](https://docs.docker.com/compose/overview/) ファイル。
-* *docker-compose.override.yml* &ndash; サービスの構成オーバーライドを含む、Docker Compose によって読み取られるオプション ファイル。 Visual Studio は `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` を実行してこれらのファイルをマージします。
+* *docker-compose.dcproj*:プロジェクトを表すファイル。 使用する OS を指定する `<DockerTargetOS>` 要素が含まれます。
+* *.dockerignore*:ビルド コンテキストを生成するときに除外するファイルとディレクトリのパターンが一覧表示されます。
+* *docker-compose.yml*:`docker-compose build` および `docker-compose run` を使用して、それぞれビルドおよび実行されるイメージのコレクションを定義するために使用される、基本の [Docker Compose](https://docs.docker.com/compose/overview/) ファイル。
+* *docker-compose.override.yml*:サービスの構成オーバーライドを含む、Docker Compose によって読み取られるオプション ファイル。 Visual Studio は `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` を実行してこれらのファイルをマージします。
 
 *docker-compose.yml* ファイルでは、プロジェクトの実行時に作成されたイメージの名前を参照します。
 

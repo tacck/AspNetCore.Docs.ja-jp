@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor アプリのエラーを処理する
-author: guardrex
-description: ASP.NET Core Blazor で、ハンドルされない例外を Blazor で管理する方法と、エラーを検出して処理するアプリを開発する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/23/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/handle-errors
-ms.openlocfilehash: cca4d8ce0c783f26f33cb7b2b1535a4bc53384d6
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424344"
+title:'ASP.NET Core Blazor アプリのエラーを処理する' 作成者: 説明:'ASP.NET Core Blazor で、ハンドルされない例外を Blazor で管理する方法と、エラーを検出して処理するアプリを開発する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor アプリのエラーを処理する
 
@@ -138,7 +126,7 @@ Blazor は、ハンドルされない例外が発生した回線に対して、�
 Blazor によってコンポーネントのインスタンスが作成されるとき:
 
 * コンポーネントのコンストラクターが呼び出されます。
-* [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) ディレクティブ、または [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) 属性を介して、コンポーネントのコンストラクターに渡されるシングルトン以外の DI サービスのコンストラクターが呼び出されます。
+* [`@inject`](xref:mvc/views/razor#inject) ディレクティブ、または [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) 属性を介して、コンポーネントのコンストラクターに渡されるシングルトン以外の DI サービスのコンストラクターが呼び出されます。
 
 実行されたいずれかのコンストラクターまたは任意の `[Inject]` プロパティのセッターがハンドルされない例外をスローすると、Blazor Server の回線が失敗します。 フレームワークではコンポーネントをインスタンス化できないため、この例外は致命的です。 コンストラクターのロジックによって例外がスローされる可能性がある場合、アプリでは、エラー処理とログ記録を含む [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントを使用して、例外をトラップする必要があります。
 
@@ -146,16 +134,16 @@ Blazor によってコンポーネントのインスタンスが作成される�
 
 コンポーネントのライフサイクルの間、Blazor によって以下の[ライフサイクル メソッド](xref:blazor/lifecycle)が呼び出されます。
 
-* `OnInitialized` / `OnInitializedAsync`
-* `OnParametersSet` / `OnParametersSetAsync`
-* `ShouldRender` / `ShouldRenderAsync`
-* `OnAfterRender` / `OnAfterRenderAsync`
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> / <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>
 
 いずれかのライフサイクル メソッドが同期的または非同期的に例外をスローした場合、例外は Blazor Server 回線にとって致命的です。 コンポーネントでライフサイクル メソッドのエラーに対処するには、エラー処理ロジックを追加します。
 
-`OnParametersSetAsync` によって製品を取得するメソッドを呼び出す次の例では:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> によって製品を取得するメソッドを呼び出す次の例では:
 
-* `ProductRepository.GetProductByIdAsync` メソッドでスローされた例外は `try-catch` ステートメントによって処理されます。
+* `ProductRepository.GetProductByIdAsync` メソッドでスローされた例外は [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントによって処理されます。
 * `catch` ブロックの実行時には:
   * `loadFailed` が `true` に設定されます。これがユーザーにエラー メッセージを表示するために使われます。
   * エラーがログに記録されます。
@@ -164,7 +152,7 @@ Blazor によってコンポーネントのインスタンスが作成される�
 
 ### <a name="rendering-logic"></a>レンダリング ロジック
 
-`.razor` コンポーネント ファイル内の宣言マークアップは、`BuildRenderTree` と呼ばれる C# メソッドにコンパイルされます。 コンポーネントがレンダリングされるときには、`BuildRenderTree` が実行されて、レンダリングされたコンポーネントの要素、テキスト、および子コンポーネントを記述するデータ構造が構築されます。
+`.razor` コンポーネント ファイル内の宣言マークアップは、<xref:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree%2A> と呼ばれる C# メソッドにコンパイルされます。 コンポーネントがレンダリングされるときには、<xref:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree%2A> が実行されて、レンダリングされたコンポーネントの要素、テキスト、および子コンポーネントを記述するデータ構造が構築されます。
 
 レンダリング ロジックは例外をスローすることがあります。 このシナリオの例は、`@someObject.PropertyName` が評価されても `@someObject` が `null` であるときに発生しています。 レンダリング ロジックによってスローされるハンドルされない例外は、Blazor Server 回線にとって致命的です。
 
@@ -199,15 +187,15 @@ Blazor によってコンポーネントのインスタンスが作成される�
 
 ### <a name="javascript-interop"></a>JavaScript 相互運用
 
-`IJSRuntime.InvokeAsync<T>` を使用すると、.NET コードによって、ユーザーのブラウザーで JavaScript ランタイムの非同期呼び出しを行えます。
+<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> を使用すると、.NET コードによって、ユーザーのブラウザーで JavaScript ランタイムの非同期呼び出しを行えます。
 
-`InvokeAsync<T>` を使用するエラー処理には、以下の条件が適用されます。
+<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> を使用するエラー処理には、以下の条件が適用されます。
 
-* `InvokeAsync<T>` の呼び出しが同期的に失敗した場合は、.NET 例外が発生します。 たとえば、指定された引数をシリアル化できないため、`InvokeAsync<T>` の呼び出しが失敗することがあります。 開発者コードで例外をキャッチする必要があります。 イベント ハンドラーまたはコンポーネントのライフサイクル メソッドのアプリ コードで例外が処理されない場合、結果の例外は Blazor Server 回線にとって致命的です。
-* `InvokeAsync<T>` の呼び出しが非同期に失敗した場合、.NET <xref:System.Threading.Tasks.Task> が失敗します。 たとえば、JavaScript 側のコードが例外をスローしたり、`rejected` として完了した `Promise` を返したりするために、`InvokeAsync<T>` の呼び出しが失敗することがあります。 開発者コードで例外をキャッチする必要があります。 [await](/dotnet/csharp/language-reference/keywords/await) 演算子を使用する場合は、エラー処理とログ記録を含む [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントでメソッド呼び出しをラップすることを検討してください。 そうしないと、失敗したコードにより、Blazor Server 回線にとって致命的なハンドルされない例外が発生する結果となります。
-* 既定では、`InvokeAsync<T>` の呼び出しは一定の期間内に完了する必要があります。そうでないと呼び出しがタイムアウトになります。既定のタイムアウト期間は 1 分です。 タイムアウトにより、完了メッセージを送り返さないネットワーク接続や JavaScript コードでの損失からコードを保護します。 呼び出しがタイムアウトになった場合、結果の `Task` は <xref:System.OperationCanceledException> で失敗します。 ログ記録を使用して例外をトラップし、処理します。
+* <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> の呼び出しが同期的に失敗した場合は、.NET 例外が発生します。 たとえば、指定された引数をシリアル化できないため、<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> の呼び出しが失敗することがあります。 開発者コードで例外をキャッチする必要があります。 イベント ハンドラーまたはコンポーネントのライフサイクル メソッドのアプリ コードで例外が処理されない場合、結果の例外は Blazor Server 回線にとって致命的です。
+* <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> の呼び出しが非同期に失敗した場合、.NET <xref:System.Threading.Tasks.Task> が失敗します。 たとえば、JavaScript 側のコードが例外をスローしたり、`rejected` として完了した `Promise` を返したりするために、<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> の呼び出しが失敗することがあります。 開発者コードで例外をキャッチする必要があります。 [await](/dotnet/csharp/language-reference/keywords/await) 演算子を使用する場合は、エラー処理とログ記録を含む [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントでメソッド呼び出しをラップすることを検討してください。 そうしないと、失敗したコードにより、Blazor Server 回線にとって致命的なハンドルされない例外が発生する結果となります。
+* 既定では、<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> の呼び出しは一定の期間内に完了する必要があります。そうでないと呼び出しがタイムアウトになります。既定のタイムアウト期間は 1 分です。 タイムアウトにより、完了メッセージを送り返さないネットワーク接続や JavaScript コードでの損失からコードを保護します。 呼び出しがタイムアウトになった場合、結果の <xref:System.Threading.Tasks> は <xref:System.OperationCanceledException> で失敗します。 ログ記録を使用して例外をトラップし、処理します。
 
-同様に、JavaScript コードでは、[`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) 属性によって示される .NET メソッドの呼び出しを開始することがあります。 ハンドルされない例外が、これらの .NET メソッドでスローされた場合:
+同様に、JavaScript コードでは、[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)](xref:blazor/call-dotnet-from-javascript) 属性によって示される .NET メソッドの呼び出しを開始することがあります。 ハンドルされない例外が、これらの .NET メソッドでスローされた場合:
 
 * 例外は Blazor Server 回線にとって致命的なものとして扱われません。
 * JavaScript 側の `Promise` が拒否されます。
@@ -230,11 +218,11 @@ Blazor によってコンポーネントのインスタンスが作成される�
 ライフサイクル メソッドやレンダリング ロジックの実行中など、事前レンダリングでいずれかのコンポーネントからハンドルされない例外がスローされた場合:
 
 * 例外は回線にとって致命的です。
-* その例外は、`Component` タグ ヘルパーの呼び出し履歴から破棄されます。 そのため、開発者コードによって例外が明示的にキャッチされない限り、HTTP 要求全体が失敗します。
+* その例外は、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> タグ ヘルパーの呼び出し履歴から破棄されます。 そのため、開発者コードによって例外が明示的にキャッチされない限り、HTTP 要求全体が失敗します。
 
 事前レンダリングが失敗する通常の状況では、コンポーネントのビルドとレンダリングを続行しても意味がありません。これは、動作中のコンポーネントはレンダリングできないためです。
 
-事前レンダリング中に発生する可能性のあるエラーに耐えるには、例外をスローする可能性のあるコンポーネント内にエラー処理ロジックを配置する必要があります。 エラー処理とログ記録を含む [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントを使用してください。 `try-catch` ステートメント内に `Component` タグ ヘルパーをラップするのではなく、`Component` タグ ヘルパーによってレンダリングされるコンポーネント内にエラー処理ロジックを配置します。
+事前レンダリング中に発生する可能性のあるエラーに耐えるには、例外をスローする可能性のあるコンポーネント内にエラー処理ロジックを配置する必要があります。 エラー処理とログ記録を含む [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントを使用してください。 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメント内に <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> タグ ヘルパーをラップするのではなく、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper> タグ ヘルパーによってレンダリングされるコンポーネント内にエラー処理ロジックを配置します。
 
 ## <a name="advanced-scenarios"></a>高度なシナリオ
 
@@ -262,14 +250,14 @@ Blazor によってコンポーネントのインスタンスが作成される�
 
 ### <a name="custom-render-tree-logic"></a>カスタム レンダリング ツリーのロジック
 
-ほとんどの Blazor コンポーネントは *.razor* ファイルとして実装され、出力をレンダリングするために `RenderTreeBuilder` 上で動作するロジックを生成するためにコンパイルされます。 開発者は、手続き型の C# コードを使用して `RenderTreeBuilder` ロジックを手動で実装できます。 詳細については、「<xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>」を参照してください。
+ほとんどの Blazor コンポーネントは *.razor* ファイルとして実装され、出力をレンダリングするために <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> 上で動作するロジックを生成するためにコンパイルされます。 開発者は、手続き型の C# コードを使用して <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ロジックを手動で実装できます。 詳細については、「<xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>」を参照してください。
 
 > [!WARNING]
 > 手動のレンダー ツリー ビルダー ロジックの使用は、高度で安全ではないシナリオと考えられています。一般のコンポーネント開発には推奨されません。
 
-`RenderTreeBuilder` コードが記述される場合は、開発者がコードの正確性を保証する必要があります。 たとえば、開発者は以下のことを確認する必要があります。
+<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> コードが記述される場合は、開発者がコードの正確性を保証する必要があります。 たとえば、開発者は以下のことを確認する必要があります。
 
-* `OpenElement` と `CloseElement` の呼び出しが正しく調整されている。
+* <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenElement%2A> と <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseElement%2A> の呼び出しが正しく調整されている。
 * 正しい場所にのみ属性が追加される。
 
 手動レンダー ツリー ビルダーのロジックが正しくないと、クラッシュ、サーバーのハング、セキュリティ脆弱性など、不特定の未定義の動作が発生する可能性があります。

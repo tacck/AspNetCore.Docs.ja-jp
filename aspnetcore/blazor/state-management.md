@@ -46,8 +46,8 @@ Blazor Server はステートフル アプリ フレームワークです。 ほ
 
 データの永続性は通常、その状態を作り出すためにユーザーが労力を費やす、高価値の状態にのみ必要です。 次の例では、状態を維持することで、時間が節約され、商業活動の支援になります。
 
-* マルチステップ Web フォーム &ndash; 手順が複数になるプロセスでいくつかの手順を完了しているのに、状態が失われるため、データを再入力しなければならないのは時間の浪費です。 このシナリオでは、マルチステップ フォームからユーザーが離れ、後で戻ってきた場合、状態が失われます。
-* ショッピング カート &ndash; アプリの中でビジネス上、重要な構成要素が潜在的な収益を表わすとき、その要素を維持できます。 ユーザーが自分の状態を失い、そのため、自分のショッピング カートが消えると、後でサイトに戻ってきたとき、製品やサービスの購入数が減ることがあります。
+* マルチステップ Web フォーム:マルチステップ プロセスのいくつかの手順を完了したのに、状態が失われたためにデータを再入力しなければならないのは、ユーザーにとって時間の浪費になります。 このシナリオでは、マルチステップ フォームからユーザーが離れ、後で戻ってきた場合、状態が失われます。
+* ショッピング カート:収益につながる可能性がある、アプリの中のビジネス上重要なコンポーネントを維持できます。 ユーザーが自分の状態を失い、そのため、自分のショッピング カートが消えると、後でサイトに戻ってきたとき、製品やサービスの購入数が減ることがあります。
 
 簡単に再現される状態は通常、保存する必要がありません。サインイン ダイアログに入力されたユーザー名が送信されていない場合などです。
 
@@ -147,7 +147,7 @@ NuGet パッケージには `localStorage` や `sessionStorage` の[データを
 
 ### <a name="save-and-load-data-within-a-component"></a>コンポーネント内でデータを保存し、読み込む
 
-データを読み込むか、ブラウザー ストレージに保存する必要があるあらゆるコンポーネントで、[`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) を使用し、次のいずれかのインスタンスを挿入します。
+データを読み込むか、ブラウザー ストレージに保存する必要があるあらゆるコンポーネントで、[`@inject`](xref:mvc/views/razor#inject) を使用し、次のいずれかのインスタンスを挿入します。
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -184,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-コンポーネントのパラメーターにナビゲーションの状態が含まれている場合、`ProtectedSessionStore.GetAsync` を呼び出し、`OnInitializedAsync` ではなく、`OnParametersSetAsync` で結果を割り当てます。 `OnInitializedAsync` は、コンポーネントが最初にインスタンス化されたときに 1 回だけ呼び出されます。 後で、その同じページにいるとき、ユーザーが別の URL に移動しても `OnInitializedAsync` が再び呼び出されることはありません。 詳細については、「<xref:blazor/lifecycle>」を参照してください。
+コンポーネントのパラメーターにナビゲーションの状態が含まれている場合、`ProtectedSessionStore.GetAsync` を呼び出し、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ではなく、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> で結果を割り当てます。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> は、コンポーネントが最初にインスタンス化されたときに 1 回だけ呼び出されます。 後で、その同じページにいるとき、ユーザーが別の URL に移動しても <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> が再び呼び出されることはありません。 詳細については、「<xref:blazor/lifecycle>」を参照してください。
 
 > [!WARNING]
 > このセクションの例は、サーバーでプリレンダリングが有効になっていない場合に機能します。 プリレンダリングが有効になっている場合、次のようなエラーが発生します。
@@ -314,7 +314,7 @@ else
 
 `CounterStateProvider` コンポーネントによって読み込み段階が処理されます。読み込みが完了するまで、その子コンテンツがレンダリングされることはありません。
 
-`CounterStateProvider` コンポーネントを使用するには、カウンター状態にアクセスする必要がある他のコンポーネントをコンポーネントのインスタンスでラップします。 アプリに含まれるすべてのコンポーネントが状態にアクセスできるようにするには、`App` コンポーネント (*App.razor*) で `Router` を `CounterStateProvider` コンポーネントでラップします。
+`CounterStateProvider` コンポーネントを使用するには、カウンター状態にアクセスする必要がある他のコンポーネントをコンポーネントのインスタンスでラップします。 アプリに含まれるすべてのコンポーネントが状態にアクセスできるようにするには、`App` コンポーネント (*App.razor*) で <xref:Microsoft.AspNetCore.Components.Routing.Router> を `CounterStateProvider` コンポーネントでラップします。
 
 ```razor
 <CounterStateProvider>

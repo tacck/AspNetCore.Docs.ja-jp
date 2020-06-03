@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core プロジェクトのトラブルシューティングとデバッグ
-author: Rick-Anderson
-description: ASP.NET Core プロジェクトでの警告とエラーについて説明し、トラブルシューティングを行います。
-ms.author: riande
-ms.custom: mvc
-ms.date: 07/10/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: test/troubleshoot
-ms.openlocfilehash: 74b494f6d16637a54ab7f1b5c0cf9fbb86248fe7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776618"
+title: author: description: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>ASP.NET Core プロジェクトのトラブルシューティングとデバッグ
 
@@ -79,9 +67,9 @@ ASP.NET Core の **[新しいプロジェクト]** ダイアログに、次の�
 
 アプリが要求に応答できる場合は、ミドルウェアを使用してアプリから次のデータを取得できます。
 
-* 要求 &ndash; メソッド、スキーム、ホスト、パス ベース、パス、クエリ文字列、ヘッダー
-* 接続 &ndash; リモート IP アドレス、リモート ポート、ローカル IP アドレス、ローカル ポート、クライアント証明書
-* Identity &ndash; 名前、表示名
+* 要求 :メソッド、スキーム、ホスト、パス ベース、パス、クエリ文字列、ヘッダー
+* 接続:リモート IP アドレス、リモート ポート、ローカル IP アドレス、ローカル ポート、クライアント証明書
+* Identity: Name, display name
 * 構成設定
 * 環境変数
 

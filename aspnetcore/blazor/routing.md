@@ -11,11 +11,11 @@ title:'ASP.NET Core Blazor のルーティング' author: description: monikerRa
 
 作成者: [Luke Latham](https://github.com/guardrex)
 
-Blazor アプリで、要求をルーティングする方法と、`NavLink` コンポーネントを使用してナビゲーション リンクを作成する方法について説明します。
+Blazor アプリで、要求をルーティングする方法と、<xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントを使用してナビゲーション リンクを作成する方法について説明します。
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core エンドポイントのルーティングの統合
 
-Blazor サーバーは [ASP.NET Core エンドポイントのルーティング](xref:fundamentals/routing)に統合されています。 ASP.NET Core アプリは、`Startup.Configure` で `MapBlazorHub` を使用して、対話型コンポーネントの着信接続を受け入れるように構成します。
+Blazor サーバーは [ASP.NET Core エンドポイントのルーティング](xref:fundamentals/routing)に統合されています。 ASP.NET Core アプリは、`Startup.Configure` で <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> を使用して、対話型コンポーネントの着信接続を受け入れるように構成します。
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -23,7 +23,7 @@ Blazor サーバーは [ASP.NET Core エンドポイントのルーティング]
 
 ## <a name="route-templates"></a>ルート テンプレート
 
-`Router` コンポーネントでは、指定されたルートによる各コンポーネントへのルーティングが可能になります。 `Router` コンポーネントは *App.razor* ファイルに表示されます。
+<xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントでは、指定されたルートによる各コンポーネントへのルーティングが可能になります。 <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントは *App.razor* ファイルに表示されます。
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -38,12 +38,12 @@ Blazor サーバーは [ASP.NET Core エンドポイントのルーティング]
 
 `@page` ディレクティブを含む *razor* ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Components.RouteAttribute> が指定されます。
 
-実行時に、`RouteView` コンポーネントは、
+実行時に、<xref:Microsoft.AspNetCore.Components.RouteView> コンポーネントは、
 
-* `Router` から、必要なパラメーターと共に `RouteData` を受け取ります。
+* <xref:Microsoft.AspNetCore.Components.Routing.Router> から、必要なパラメーターと共に <xref:Microsoft.AspNetCore.Components.RouteData> を受け取ります。
 * 指定されたパラメーターを使用して、指定されたコンポーネントを、そのレイアウト (または任意の既定のレイアウト) でレンダリングします。
 
-必要に応じて、レイアウト クラスで `DefaultLayout` パラメーターを指定して、レイアウトを指定しないコンポーネントに使用できます。 既定の Blazor テンプレートでは、`MainLayout` コンポーネントを指定しています。 *MainLayout.razor* は、テンプレート プロジェクトの *Shared* フォルダーにあります。 レイアウトの詳細については、「<xref:blazor/layouts>」を参照してください。
+必要に応じて、レイアウト クラスで <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> パラメーターを指定して、レイアウトを指定しないコンポーネントに使用できます。 既定の Blazor テンプレートでは、`MainLayout` コンポーネントを指定しています。 *MainLayout.razor* は、テンプレート プロジェクトの *Shared* フォルダーにあります。 レイアウトの詳細については、「<xref:blazor/layouts>」を参照してください。
 
 コンポーネントには、複数のルート テンプレートを適用できます。 次のコンポーネントは、`/BlazorRoute` と `/DifferentBlazorRoute` に対する要求に応答します。
 
@@ -59,9 +59,9 @@ Blazor サーバーは [ASP.NET Core エンドポイントのルーティング]
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>コンテンツが見つからないときにカスタム コンテンツを提供する
 
-`Router` コンポーネントを使用すると、要求されたルートでコンテンツが見つからない場合に、アプリでカスタム コンテンツを指定できます。
+<xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントを使用すると、要求されたルートでコンテンツが見つからない場合に、アプリでカスタム コンテンツを指定できます。
 
-*App.razor* ファイルで、`Router` コンポーネントの `NotFound` テンプレート パラメーターにカスタム コンテンツを設定します。
+*App.razor* ファイルで、<xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントの <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> テンプレート パラメーターにカスタム コンテンツを設定します。
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -75,11 +75,11 @@ Blazor サーバーは [ASP.NET Core エンドポイントのルーティング]
 </Router>
 ```
 
-`<NotFound>` タグのコンテンツには、他の対話型コンポーネントなど、任意の項目を含めることができます。 `NotFound` コンテンツに既定のレイアウトを適用するには、「<xref:blazor/layouts>」を参照してください。
+`<NotFound>` タグのコンテンツには、他の対話型コンポーネントなど、任意の項目を含めることができます。 <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> コンテンツに既定のレイアウトを適用するには、「<xref:blazor/layouts>」を参照してください。
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>複数のアセンブリからコンポーネントにルーティングする
 
-`AdditionalAssemblies` パラメーターを使用して、`Router` コンポーネントで、ルーティング可能なコンポーネントを検索するときに考慮する追加のアセンブリを指定します。 指定されたアセンブリは、`AppAssembly` に指定されたアセンブリに加えて考慮されます。 次の例では、`Component1` は、参照されているクラス ライブラリに定義されているルーティング可能なコンポーネントです。 次の `AdditionalAssemblies` の例では、`Component1` のルーティング サポートの結果を示しています。
+<xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> パラメーターを使用して、<xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントで、ルーティング可能なコンポーネントを検索するときに考慮する追加のアセンブリを指定します。 指定されたアセンブリは、`AppAssembly` に指定されたアセンブリに加えて考慮されます。 次の例では、`Component1` は、参照されているクラス ライブラリに定義されているルーティング可能なコンポーネントです。 次の <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies> の例では、`Component1` のルーティング サポートの結果を示しています。
 
 ```razor
 <Router
@@ -606,7 +606,7 @@ title:'ASP.NET Core Blazor のルーティング' author: description: monikerRa
 ---------------: | | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | いいえ                               | | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | はい                              | | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | はい                              | | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | はい                              | | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | はい                              | | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | いいえ                               | | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | はい                              | | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | はい                              |
 
 > [!WARNING]
-> URL の妥当性を検証し、CLR 型 (`int` や `DateTime` など) に変換されるルート制約では、常にインバリアント カルチャが使用されます。 これらの制約では、URL がローカライズ不可であることが前提となります。
+> URL の妥当性を検証し、CLR 型 (`int` や <xref:System.DateTime> など) に変換されるルート制約では、常にインバリアント カルチャが使用されます。 これらの制約では、URL がローカライズ不可であることが前提となります。
 
 ### <a name="routing-with-urls-that-contain-dots"></a>ドットを含む URL によるルーティング
 
@@ -628,20 +628,20 @@ Blazor サーバー アプリでは、 *_Host.cshtml* の既定のルートは `
 
 ## <a name="navlink-component"></a>NavLink コンポーネント
 
-ナビゲーション リンクを作成するときは、HTML ハイパーリンク要素 (`<a>`) の代わりに `NavLink` コンポーネントを使用します。 `NavLink` コンポーネントは `<a>` 要素のように動作しますが、`href` が現在の URL と一致するかどうかに基づいて `active` CSS クラスを切り替える点が異なります。 `active` クラスは、表示されているナビゲーション リンクの中でどのページがアクティブ ページであるかをユーザーが理解するのに役立ちます。
+ナビゲーション リンクを作成するときは、HTML ハイパーリンク要素 (`<a>`) の代わりに <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントを使用します。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは `<a>` 要素のように動作しますが、`href` が現在の URL と一致するかどうかに基づいて `active` CSS クラスを切り替える点が異なります。 `active` クラスは、表示されているナビゲーション リンクの中でどのページがアクティブ ページであるかをユーザーが理解するのに役立ちます。
 
-次の `NavMenu` コンポーネントでは、`NavLink` コンポーネントの使用方法を示す[ブートストラップ](https://getbootstrap.com/docs/) ナビゲーション バーを作成しています。
+次の `NavMenu` コンポーネントでは、<xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントの使用方法を示す[ブートストラップ](https://getbootstrap.com/docs/) ナビゲーション バーを作成しています。
 
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
-`<NavLink>` 要素の `Match` 属性に割り当てられる 2 つの `NavLinkMatch` オプションがあります。
+`<NavLink>` 要素の `Match` 属性に割り当てられる 2 つの <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> オプションがあります。
 
-* `NavLinkMatch.All` &ndash; `NavLink` は、現在の URL 全体に一致する場合にアクティブになります。
-* `NavLinkMatch.Prefix` (*既定*) &ndash; `NavLink` は、現在の URL の任意のプレフィックスに一致する場合にアクティブになります。
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>:<xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、現在の URL 全体に一致する場合にアクティブになります。
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*既定値*):<xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、現在の URL の任意のプレフィックスに一致する場合にアクティブになります。
 
-前の例では、ホーム `NavLink` `href=""` はホーム URL と一致し、アプリの既定のベース パス URL (`https://localhost:5001/` など) でのみ `active` CSS クラスを受け取ります。 2 番目の `NavLink` は、ユーザーが `MyComponent` プレフィックスを含む任意の URL (`https://localhost:5001/MyComponent` や `https://localhost:5001/MyComponent/AnotherSegment` など) にアクセスしたときに、`active` クラスを受け取ります。
+前の例では、ホーム <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` はホーム URL と一致し、アプリの既定のベース パス URL (`https://localhost:5001/` など) でのみ `active` CSS クラスを受け取ります。 2 番目の <xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、ユーザーが `MyComponent` プレフィックスを含む任意の URL (`https://localhost:5001/MyComponent` や `https://localhost:5001/MyComponent/AnotherSegment` など) にアクセスしたときに、`active` クラスを受け取ります。
 
-追加の `NavLink` コンポーネント属性は、レンダリングされるアンカー タグに渡されます。 次の例では、`NavLink` コンポーネントに `target` 属性が含まれています。
+追加の <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネント属性は、レンダリングされるアンカー タグに渡されます。 次の例では、<xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントに `target` 属性が含まれています。
 
 ```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
@@ -655,7 +655,7 @@ Blazor サーバー アプリでは、 *_Host.cshtml* の既定のルートは `
 
 ## <a name="uri-and-navigation-state-helpers"></a>URI およびナビゲーション状態ヘルパー
 
-C# コード内の URI とナビゲーションを操作するには、<xref:Microsoft.AspNetCore.Components.NavigationManager> を使用します。 `NavigationManager` には、次の表に示すイベントとメソッドがあります。
+C# コード内の URI とナビゲーションを操作するには、<xref:Microsoft.AspNetCore.Components.NavigationManager> を使用します。 <xref:Microsoft.AspNetCore.Components.NavigationManager> には、次の表に示すイベントとメソッドがあります。
 
 | メンバー | 説明 |
 | ---
@@ -689,7 +689,7 @@ title:'ASP.NET Core Blazor のルーティング' author: description: monikerRa
 - 'Razor'
 - 'SignalR' uid: 
 
------- | | Uri | 現在の絶対 URI を取得します。 | | BaseUri | 絶対 URI を生成するために、相対 URI パスの前に付加できるベース URI (末尾のスラッシュを含む) を取得します。 通常、`BaseUri` は *wwwroot/index.html* (Blazor WebAssembly)、または *Pages/_Host.cshtml* (Blazor サーバー) 内のドキュメントの `<base>` 要素の `href` 属性に対応します。 | | NavigateTo | 指定された URI に移動します。 `forceLoad` が `true` の場合:<ul><li>クライアント側のルーティングはバイパスされます。</li><li>URI が通常クライアント側ルーターによって処理されるかどうかにかかわらず、ブラウザーでは、強制的にサーバーから新しいページが読み込まれます。</li></ul> | | LocationChanged | ナビゲーションの場所が変更されたときに発生するイベントです。 | | ToAbsoluteUri | 相対 URI を絶対 URI に変換します。 | | <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | ベース URI (たとえば、`GetBaseUri` によって以前に返された URI) が与えられると、絶対 URI を、ベース URI プレフィックスに相対的な URI に変換します。 |
+------ | | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | 現在の絶対 URI を取得します。 | | <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | 絶対 URI を生成するために、相対 URI パスの前に付加できるベース URI (末尾のスラッシュを含む) を取得します。 通常、<xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> は *wwwroot/index.html* (Blazor WebAssembly)、または *Pages/_Host.cshtml* (Blazor サーバー) 内のドキュメントの `<base>` 要素の `href` 属性に対応します。 | | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | 指定された URI に移動します。 `forceLoad` が `true` の場合:<ul><li>クライアント側のルーティングはバイパスされます。</li><li>URI が通常クライアント側ルーターによって処理されるかどうかにかかわらず、ブラウザーでは、強制的にサーバーから新しいページが読み込まれます。</li></ul> | | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | ナビゲーションの場所が変更されたときに発生するイベントです。 | | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | 相対 URI を絶対 URI に変換します。 | | <span style="word-break:normal;word-wrap:normal"><xref:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath%2A></span> | ベース URI (たとえば、<xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> によって以前に返された URI) が与えられると、絶対 URI を、ベース URI プレフィックスに相対的な URI に変換します。 |
 
 次のコンポーネントは、ボタンが選択されたときに、アプリの `Counter` コンポーネントに移動します。
 
@@ -711,7 +711,7 @@ title:'ASP.NET Core Blazor のルーティング' author: description: monikerRa
 }
 ```
 
-次のコンポーネントは、場所の変更イベントを処理します。 `HandleLocationChanged` メソッドは、`Dispose` がフレームワークによって呼び出されると、アンフックになります。 このメソッドをアンフックすることで、コンポーネントのガベージ コレクションが許可されます。
+次のコンポーネントは、<xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> を設定することにより、場所の変更イベントを処理します。 `HandleLocationChanged` メソッドは、`Dispose` がフレームワークによって呼び出されると、アンフックになります。 このメソッドをアンフックすることで、コンポーネントのガベージ コレクションが許可されます。
 
 ```razor
 @implements IDisposable
@@ -737,7 +737,7 @@ public void Dispose()
 
 <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> は、イベントに関する次の情報を提供します。
 
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location> &ndash; 新しい場所の URL。
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted> &ndash; `true` の場合、Blazor によってブラウザーからナビゲーションがインターセプトされました。 `false` の場合、[NavigationManager.NavigateTo](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A) によってナビゲーションが発生しました。
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>:新しい場所の URL。
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>:`true` の場合、Blazor によってブラウザーからナビゲーションがインターセプトされました。 `false` の場合、<xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> によってナビゲーションが発生しました。
 
 コンポーネントの破棄の詳細については、「<xref:blazor/lifecycle#component-disposal-with-idisposable>」を参照してください。

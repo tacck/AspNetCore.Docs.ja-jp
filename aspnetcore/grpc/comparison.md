@@ -1,23 +1,11 @@
 ---
-title: HTTP API を使用した gRPC サービスの比較
-author: jamesnk
-description: gRPC と HTTP API を比較し、どのようなシナリオが推奨されるかを説明します。
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/comparison
-ms.openlocfilehash: ab103adc20c5332f71d5f6e3348d0b14c69fce34
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774705"
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>HTTP API を使用した gRPC サービスの比較
 
@@ -30,15 +18,333 @@ ms.locfileid: "82774705"
 次の表は、gRPC と、JSON を使用する HTTP API の機能を比較した概要を示しています。
 
 | 機能          | gRPC                                               | JSON を使用する HTTP API           |
-| ---------------- | -------------------------------------------------- | ----------------------------- |
-| コントラクト         | 必須 ( *.proto*)                                | オプション (OpenAPI)            |
-| プロトコル         | HTTP/2                                             | HTTP                          |
-| Payload          | [Protobuf (小、バイナリ)](#performance)           | JSON (大、人が判読できる)  |
-| 規範的性質 | [厳密な仕様](#strict-specification)      | 制約が緩い。 どのような HTTP でも有効です。     |
-| ストリーム        | [クライアント、サーバー、双方向](#streaming)       | クライアント、サーバー                |
-| ブラウザーのサポート  | [いいえ (grpc-web が必要)](#limited-browser-support) | はい                           |
-| セキュリティ         | トランスポート (TLS)                                    | トランスポート (TLS)               |
-| クライアント コード生成 | [はい](#code-generation)                      | OpenAPI とサードパーティ製ツール |
+| ---
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-------- | --- title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+------------------------- | --- title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+-
+title: author: description: monikerRange: ms.author: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
+--------------- | | コントラクト         | 必須 ( *.proto*)                                | 省略可能 (OpenAPI)            | | プロトコル         | HTTP/2                                             | HTTP                          | | ペイロード          | [Protobuf (小、バイナリ)](#performance)           | JSON (大、人間が判別可能)  | | 規範性 | [厳密な仕様](#strict-specification)      | ゆるい。 どのような HTTP でも有効です。     | | ストリーミング        | [クライアント、サーバー、双方向](#streaming)       | クライアント、サーバー                | | ブラウザーのサポート  | [いいえ (grpc-web が必要)](#limited-browser-support) | はい                           | | セキュリティ         | トランスポート (TLS)                                    | トランスポート (TLS)               | | クライアントコード生成 | [はい](#code-generation)                      | OpenAPI + サードパーティー ツール |
 
 ## <a name="grpc-strengths"></a>gRPC の長所
 
@@ -86,10 +392,10 @@ gRPC を使用すると、クライアントが RPC の完了を待機する時�
 
 gRPC は以下のシナリオに適しています。
 
-* **マイクロサービス** &ndash; gRPC は、待機時間が短く、スループットの高い通信のために設計されています。 gRPC は、効率が非常に重要となる軽量のマイクロサービスに適しています。
-* **ポイント ツー ポイントのリアルタイム通信** &ndash; gRPC での双方向ストリーミングのサポートは非常に優秀です。 gRPC サービスでは、ポーリングせずにメッセージをリアルタイムにプッシュできます。
-* **多言語環境** &ndash; gRPC ツールでは、一般的な開発言語がすべてサポートされているため、gRPC は多言語環境に適した選択肢となっています。
-* **ネットワーク面の制約がある環境** &ndash; gRPC メッセージは、軽量なメッセージ形式である Protobuf でシリアル化されます。 gRPC メッセージは常に、同等の JSON メッセージよりも小さくなります。
+* **マイクロサービス**: gRPC は、待機時間が短く、スループットの高い通信のために設計されています。 gRPC は、効率が非常に重要となる軽量のマイクロサービスに適しています。
+* **ポイント ツー ポイントのリアルタイム通信**: gRPC での双方向ストリーミングのサポートは非常に優秀です。 gRPC サービスでは、ポーリングせずにメッセージをリアルタイムにプッシュできます。
+* **多言語環境**: gRPC ツールでは、一般的な開発言語がすべてサポートされているため、gRPC は多言語環境に適した選択肢となっています。
+* **ネットワーク面の制約がある環境**: gRPC メッセージは、軽量なメッセージ形式である Protobuf でシリアル化されます。 gRPC メッセージは常に、同等の JSON メッセージよりも小さくなります。
 
 ## <a name="grpc-weaknesses"></a>gRPC の短所
 
@@ -116,9 +422,9 @@ gRPC メッセージは、既定では Protobuf でエンコードされます�
 
 以下のシナリオでは、gRPC よりも他のフレームワークが推奨されます。
 
-* **ブラウザーでアクセスできる API** &ndash; gRPC は、ブラウザーで完全にサポートされているわけではありません。 gRPC-Web でブラウザーのサポートを提供可能ですが、制限があり、サーバー プロキシが必要になります。
-* **ブロードキャスト リアルタイム通信** &ndash; gRPC ではストリーミングによるリアルタイム通信がサポートされますが、登録済みの接続にメッセージをブロードキャストするという概念がありません。 たとえば、チャット ルーム内のすべてのクライアントに新しいチャット メッセージを送信する必要があるチャット ルーム シナリオでは、クライアントに新しいチャット メッセージを個々にストリーミングするため、それぞれに gRPC 呼び出しが必要です。 [SignalR](xref:signalr/introduction) は、このシナリオの場合に便利なフレームワークです。 SignalR には永続的な接続という概念があり、メッセージをブロードキャストするためのサポートが組み込まれています。
-* **プロセス間通信** &ndash; 受信 gRPC 呼び出しを受け入れるため、プロセスで HTTP/2 サーバーをホストする必要があります。 Windows の場合、プロセス間通信[パイプ](/dotnet/standard/io/pipe-operations)が高速で軽量な通信方法です。
+* **ブラウザーでアクセスできる API**: gRPC は、ブラウザーで完全にサポートされているわけではありません。 gRPC-Web でブラウザーのサポートを提供可能ですが、制限があり、サーバー プロキシが必要になります。
+* **ブロードキャスト リアルタイム通信**: gRPC ではストリーミングによるリアルタイム通信がサポートされますが、登録済みの接続にメッセージをブロードキャストするという概念がありません。 たとえば、チャット ルーム内のすべてのクライアントに新しいチャット メッセージを送信する必要があるチャット ルーム シナリオでは、クライアントに新しいチャット メッセージを個々にストリーミングするため、それぞれに gRPC 呼び出しが必要です。 [SignalR](xref:signalr/introduction) は、このシナリオの場合に便利なフレームワークです。 SignalR には永続的な接続という概念があり、メッセージをブロードキャストするためのサポートが組み込まれています。
+* **プロセス間通信**:受信 gRPC 呼び出しを受け入れるため、プロセスで HTTP/2 サーバーをホストする必要があります。 Windows の場合、プロセス間通信[パイプ](/dotnet/standard/io/pipe-operations)が高速で軽量な通信方法です。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

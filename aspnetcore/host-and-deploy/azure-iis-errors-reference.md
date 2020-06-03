@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core を使用した Azure App Service および IIS の一般的なエラーのリファレンス
-author: rick-anderson
-description: Azure Apps Service と IIS で ASP.NET Core アプリをホストするときに発生する一般的なエラーを解決する方法について助言を得ます。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 7b3454fbd891ca26d44125810a10eb3b3c2c3933
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775207"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core を使用した Azure App Service および IIS の一般的なエラーのリファレンス
 
@@ -32,13 +19,13 @@ ms.locfileid: "82775207"
 
 * ブラウザーの動作 (ステータス コードとエラー メッセージ)
 * アプリケーション イベント ログのエントリ
-  * Azure App Service &ndash; (<xref:test/troubleshoot-azure-iis> 参照)。
+  * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
   * IIS
     1. **[Windows]** メニューで **[スタート]** を選択し、「*Event Viewer*」と入力し、**Enter** を押します。
     1. **イベント ビューアー**が開いたら、サイド バーで **[Windows ログ]** > **[アプリケーション]** の順に展開します。
 * ASP.NET Core モジュールの stdout ログ エントリと debug ログ エントリ
-  * Azure App Service &ndash; (<xref:test/troubleshoot-azure-iis> 参照)。
-  * IIS &ndash; ASP.NET Core モジュール トピックの「[ログの作成とリダイレクト](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)」セクションと「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」セクションの指示に従います。
+  * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
+  * IIS:ASP.NET Core モジュール トピックの「[ログの作成とリダイレクト](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)」と「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」のセクションの指示に従います。
 
 エラー情報を次の一般的なエラーと比較します。 一致が見つかった場合は、トラブルシューティングのアドバイスに従います。
 
@@ -320,13 +307,13 @@ IIS Web サイトの**基本設定**と物理アプリのフォルダーを確�
 
 * ブラウザーの動作 (ステータス コードとエラー メッセージ)
 * アプリケーション イベント ログのエントリ
-  * Azure App Service &ndash; (<xref:test/troubleshoot-azure-iis> 参照)。
+  * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
   * IIS
     1. **[Windows]** メニューで **[スタート]** を選択し、「*Event Viewer*」と入力し、**Enter** を押します。
     1. **イベント ビューアー**が開いたら、サイド バーで **[Windows ログ]** > **[アプリケーション]** の順に展開します。
 * ASP.NET Core モジュールの stdout ログ エントリと debug ログ エントリ
-  * Azure App Service &ndash; (<xref:test/troubleshoot-azure-iis> 参照)。
-  * IIS &ndash; ASP.NET Core モジュール トピックの「[ログの作成とリダイレクト](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)」セクションと「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」セクションの指示に従います。
+  * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
+  * IIS:ASP.NET Core モジュール トピックの「[ログの作成とリダイレクト](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)」と「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」のセクションの指示に従います。
 
 エラー情報を次の一般的なエラーと比較します。 一致が見つかった場合は、トラブルシューティングのアドバイスに従います。
 

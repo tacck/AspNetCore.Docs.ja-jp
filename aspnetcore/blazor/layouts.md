@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor レイアウト
-author: guardrex
-description: Blazor アプリの再利用可能なレイアウト コンポーネントを作成する方法について説明します。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/layouts
-ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424331"
+title:'ASP.NET Core Blazor レイアウト' 作成者: 説明:'Blazor アプリの再利用可能なレイアウト コンポーネントを作成する方法について説明します。'
+monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor レイアウト
 
@@ -30,10 +18,10 @@ ms.locfileid: "83424331"
 
 *コンポーネント*を*レイアウト*に変えるには、コンポーネントが:
 
-* レイアウト内のレンダリングされるコンテンツの `Body` プロパティを定義する `LayoutComponentBase` から継承している。
+* レイアウト内のレンダリングされるコンテンツの <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> プロパティを定義する <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> から継承している。
 * Razor 構文 `@Body` を使用して、コンテンツがレンダリングされるレイアウト マークアップ内の場所を指定している。
 
-次のコード サンプルに、レイアウト コンポーネント *MainLayout.razor* の Razor テンプレートを示します。 レイアウトは `LayoutComponentBase` を継承し、ナビゲーション バーとフッターの間に `@Body` を設定します。
+次のコード サンプルに、レイアウト コンポーネント *MainLayout.razor* の Razor テンプレートを示します。 レイアウトは <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> を継承し、ナビゲーション バーとフッターの間に `@Body` を設定します。
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
@@ -41,21 +29,21 @@ Blazor アプリ テンプレートのいずれかに基づくアプリでは、
 
 ## <a name="default-layout"></a>既定のレイアウト
 
-アプリの *App.razor* ファイル内の `Router` コンポーネントに、既定のアプリ レイアウトを指定します。 既定の Blazor テンプレートによって提供される次の `Router` コンポーネントは、既定のレイアウトを `MainLayout` コンポーネントに設定します。
+アプリの *App.razor* ファイル内の <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントに、既定のアプリ レイアウトを指定します。 既定の Blazor テンプレートによって提供される次の <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントは、既定のレイアウトを `MainLayout` コンポーネントに設定します。
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-`NotFound` コンテンツの既定のレイアウトを指定するには、`NotFound` コンテンツの `LayoutView` を指定します。
+<xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> コンテンツの既定のレイアウトを指定するには、<xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> コンテンツの <xref:Microsoft.AspNetCore.Components.LayoutView> を指定します。
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-`Router` コンポーネントの詳細については、「<xref:blazor/routing>」を参照してください。
+<xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントの詳細については、「<xref:blazor/routing>」を参照してください。
 
 ルーターでレイアウトを既定のレイアウトとして指定することは、コンポーネントごとまたはフォルダーごとにオーバーライドできるため、便利な方法です。 ルーターを使用してアプリの既定のレイアウトを設定することは、最も一般的な技法であるため、お勧めします。
 
 ## <a name="specify-a-layout-in-a-component"></a>コンポーネントにレイアウトを指定する
 
-コンポーネントにレイアウトを適用するには、Razor ディレクティブ `@layout` を使用します。 コンパイラでは `@layout` を `LayoutAttribute` に変換します。これはコンポーネント クラスに適用されます。
+コンポーネントにレイアウトを適用するには、Razor ディレクティブ `@layout` を使用します。 コンパイラでは `@layout` を <xref:Microsoft.AspNetCore.Components.LayoutAttribute> に変換します。これはコンポーネント クラスに適用されます。
 
 次の `MasterList` コンポーネントのコンテンツは、`@Body` の位置にある `MasterLayout` に挿入されます。
 

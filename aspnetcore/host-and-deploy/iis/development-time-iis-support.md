@@ -1,24 +1,11 @@
 ---
-title: Visual Studio for ASP.NET Core の開発時 IIS サポート
-author: rick-anderson
-description: ASP.NET Core アプリが Windows Server 上の IIS で実行されている場合に、そのデバッグのサポートを検出します。
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: a6719b4f84b1bc60c7c2aea2aa3a97ef79f43e2e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777021"
+title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Visual Studio for ASP.NET Core の開発時 IIS サポート
 
@@ -28,7 +15,7 @@ ms.locfileid: "82777021"
 
 この記事では、Windows Server 上の IIS で実行されている ASP.NET Core アプリをデバッグするための、[Visual Studio](https://visualstudio.microsoft.com) のサポートについて説明します。 このトピックでは、このシナリオを有効にしてプロジェクトを設定する手順を示します。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 * [Visual Studio (Windows 版)](https://visualstudio.microsoft.com/downloads/)。
 * **ASP.NET および Web の開発**ワークロード
@@ -46,7 +33,7 @@ IIS のインストールには、システムの再起動が必要になる場�
 
 IIS には、次のように構成された Web サイトが含まれている必要があります。
 
-* **ホスト名** &ndash; 通常、 **の**ホスト名**では**既定の Web サイト`localhost`が使用されます。 ただし、一意のホスト名を持つ任意の有効な IIS Web サイトが動作します。
+* **ホスト名**:通常、`localhost` の**ホスト名**では**既定の Web サイト**が使用されます。 ただし、一意のホスト名を持つ任意の有効な IIS Web サイトが動作します。
 * **サイト バインド**
   * HTTPS を必要とするアプリの場合は、証明書でポート 443 へのバインドを作成します。 通常は、**IIS Express 開発証明書**が使用されますが、任意の有効な証明書を使用できます。
   * HTTP を使用するアプリの場合は、ポート 80 へのバインドが存在することを確認するか、または新しいサイト用にポート 80 へのバインドを作成します。
@@ -86,12 +73,12 @@ HTTP を使用するプロジェクトの場合は、[HTTPS リダイレクト�
    URL の最後でアプリの名前を指定します。
 
    たとえば、`https://localhost/WebApplication1` (HTTPS) や `http://localhost/WebApplication1`(HTTP) は有効なエンドポイント URL です。
-1. **[環境変数]** セクションで、 **[追加]** ボタンを選択します。 **の**[名前]`ASPNETCORE_ENVIRONMENT` および **の**[値]`Development` で環境変数を指定します。
+1. **[環境変数]** セクションで、 **[追加]** ボタンを選択します。 `ASPNETCORE_ENVIRONMENT` の **[名前]** および `Development` の **[値]** で環境変数を指定します。
 1. **[Web サーバーの設定]** 領域で、 **[アプリの URL]** を **[ブラウザーの起動]** エンドポイント URL に使用したものと同じ値に設定します。
 1. Visual Studio 2019 以降の **[ホスティング モデル]** の設定では、 **[既定]** を選択して、プロジェクトによって使用されるホスティング モデルを使用します。 プロジェクトのプロジェクト ファイルで `<AspNetCoreHostingModel>` プロパティが設定されている場合は、プロパティ (`InProcess` または `OutOfProcess`) の値が使用されます。 プロパティが存在しない場合は、アプリの既定のホスティング モデルが使用され、それはインプロセスです。 アプリの通常のホスティング モデルとは異なるホスティング モデルを明示的に設定する必要があるアプリの場合は、必要に応じて、 **[ホスティング モデル]** を `In Process` または `Out Of Process` に設定します。
 1. プロファイルを保存します。
 
-Visual Studio を使用していない場合は、起動プロファイルを [Properties](https://json.schemastore.org/launchsettings) フォルダーの *launchSettings.json* ファイルに手動で追加します。 次の例では、HTTPS プロトコルを使用するようにプロファイルを構成しています。
+Visual Studio を使用していない場合は、起動プロファイルを *Properties* フォルダーの [launchSettings.json](https://json.schemastore.org/launchsettings) ファイルに手動で追加します。 次の例では、HTTPS プロトコルを使用するようにプロファイルを構成しています。
 
 ```json
 {
@@ -143,7 +130,7 @@ Visual Studio を管理者として実行します。
 
 この記事では、Windows Server 上の IIS で実行されている ASP.NET Core アプリをデバッグするための、[Visual Studio](https://visualstudio.microsoft.com) のサポートについて説明します。 このトピックでは、このシナリオを有効にしてプロジェクトを設定する手順を示します。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 * [Visual Studio (Windows 版)](https://visualstudio.microsoft.com/downloads/)。
 * **ASP.NET および Web の開発**ワークロード
@@ -161,7 +148,7 @@ IIS のインストールには、システムの再起動が必要になる場�
 
 IIS には、次のように構成された Web サイトが含まれている必要があります。
 
-* **ホスト名** &ndash; 通常、 **の**ホスト名**では**既定の Web サイト`localhost`が使用されます。 ただし、一意のホスト名を持つ任意の有効な IIS Web サイトが動作します。
+* **ホスト名**:通常、`localhost` の**ホスト名**では**既定の Web サイト**が使用されます。 ただし、一意のホスト名を持つ任意の有効な IIS Web サイトが動作します。
 * **サイト バインド**
   * HTTPS を必要とするアプリの場合は、証明書でポート 443 へのバインドを作成します。 通常は、**IIS Express 開発証明書**が使用されますが、任意の有効な証明書を使用できます。
   * HTTP を使用するアプリの場合は、ポート 80 へのバインドが存在することを確認するか、または新しいサイト用にポート 80 へのバインドを作成します。
@@ -201,12 +188,12 @@ HTTP を使用するプロジェクトの場合は、[HTTPS リダイレクト�
    URL の最後でアプリの名前を指定します。
 
    たとえば、`https://localhost/WebApplication1` (HTTPS) や `http://localhost/WebApplication1`(HTTP) は有効なエンドポイント URL です。
-1. **[環境変数]** セクションで、 **[追加]** ボタンを選択します。 **の**[名前]`ASPNETCORE_ENVIRONMENT` および **の**[値]`Development` で環境変数を指定します。
+1. **[環境変数]** セクションで、 **[追加]** ボタンを選択します。 `ASPNETCORE_ENVIRONMENT` の **[名前]** および `Development` の **[値]** で環境変数を指定します。
 1. **[Web サーバーの設定]** 領域で、 **[アプリの URL]** を **[ブラウザーの起動]** エンドポイント URL に使用したものと同じ値に設定します。
 1. Visual Studio 2019 以降の **[ホスティング モデル]** の設定では、 **[既定]** を選択して、プロジェクトによって使用されるホスティング モデルを使用します。 プロジェクトのプロジェクト ファイルで `<AspNetCoreHostingModel>` プロパティが設定されている場合は、プロパティ (`InProcess` または `OutOfProcess`) の値が使用されます。 プロパティが存在しない場合は、アプリの既定のホスティング モデルが使用され、それはアウトプロセスです。 アプリの通常のホスティング モデルとは異なるホスティング モデルを明示的に設定する必要があるアプリの場合は、必要に応じて、 **[ホスティング モデル]** を `In Process` または `Out Of Process` に設定します。
 1. プロファイルを保存します。
 
-Visual Studio を使用していない場合は、起動プロファイルを [Properties](https://json.schemastore.org/launchsettings) フォルダーの *launchSettings.json* ファイルに手動で追加します。 次の例では、HTTPS プロトコルを使用するようにプロファイルを構成しています。
+Visual Studio を使用していない場合は、起動プロファイルを *Properties* フォルダーの [launchSettings.json](https://json.schemastore.org/launchsettings) ファイルに手動で追加します。 次の例では、HTTPS プロトコルを使用するようにプロファイルを構成しています。
 
 ```json
 {

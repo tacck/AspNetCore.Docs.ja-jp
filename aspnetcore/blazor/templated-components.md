@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core Blazor テンプレート コンポーネント
-author: guardrex
-description: テンプレート コンポーネントで 1 つまたは複数の UI テンプレートをパラメーターとして受け取る方法について学習します。これは、コンポーネントのレンダリング ロジックの一部として使用できます。
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/templated-components
-ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771068"
+title:'ASP.NET Core Blazor テンプレート コンポーネント' author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- 'SignalR' uid: 
+
 ---
 # <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core Blazor テンプレート コンポーネント
 
@@ -31,7 +18,7 @@ ms.locfileid: "82771068"
 
 ## <a name="template-parameters"></a>テンプレート パラメーター
 
-`RenderFragment` または `RenderFragment<T>` の型の 1 つまたは複数のコンポーネント パラメーターを指定することで、テンプレート コンポーネントが定義されます。 レンダー フラグメントは、レンダリングする UI のセグメントを表します。 `RenderFragment<T>` は、レンダー フラグメントが呼び出されたときに指定できる型パラメーターを受け取ります。
+<xref:Microsoft.AspNetCore.Components.RenderFragment> または <xref:Microsoft.AspNetCore.Components.RenderFragment%601> の型の 1 つまたは複数のコンポーネント パラメーターを指定することで、テンプレート コンポーネントが定義されます。 レンダー フラグメントは、レンダリングする UI のセグメントを表します。 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> は、レンダー フラグメントが呼び出されたときに指定できる型パラメーターを受け取ります。
 
 `TableTemplate` コンポーネント:
 
@@ -57,7 +44,7 @@ ms.locfileid: "82771068"
 
 ## <a name="template-context-parameters"></a>テンプレート コンテキスト パラメーター
 
-要素として渡される型 `RenderFragment<T>` のコンポーネント引数には、`context` という名前の暗黙的なパラメーターがありますが (たとえば、上記のコード サンプルの `@context.PetId`)、子要素の `Context` 属性を使用してパラメーター名を変更できます。 次の例では、`RowTemplate` 要素の `Context` 属性で `pet` パラメーターを指定しています。
+要素として渡される型 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> のコンポーネント引数には、`context` という名前の暗黙的なパラメーターがありますが (たとえば、上記のコード サンプルの `@context.PetId`)、子要素の `Context` 属性を使用してパラメーター名を変更できます。 次の例では、`RowTemplate` 要素の `Context` 属性で `pet` パラメーターを指定しています。
 
 ```razor
 <TableTemplate Items="pets">
