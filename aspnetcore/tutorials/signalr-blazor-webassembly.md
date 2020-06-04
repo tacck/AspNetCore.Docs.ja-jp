@@ -187,7 +187,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. `Startup.Configure` で、コントローラーのエンドポイントとクライアント側のフォールバックのエンドポイントの間に、ハブのエンドポイントを追加します。
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
 ## <a name="add-razor-component-code-for-chat"></a>チャット用の Razor コンポーネント コードを追加する
 
