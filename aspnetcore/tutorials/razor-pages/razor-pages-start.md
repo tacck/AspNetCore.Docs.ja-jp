@@ -92,7 +92,7 @@ ms.locfileid: "82774874"
   * `dotnet new` コマンド: *RazorPagesMovie* フォルダーに新しい Razor Pages プロジェクトが作成されます。
   * `code` コマンドは、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーを開きます。
 
-* 状態バーの OmniSharp フレーム アイコンが緑色になり、"**ビルドとデバッグに必要な資産が 'RazorPagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、 **[はい]** を選択します。
+* 状態バーの OmniSharp フレーム アイコンが緑色になり、"**[Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?]\(ビルドとデバッグに必要なアセットが 'RazorPagesMovie' にありません。追加しますか?\)** " という内容のダイアログ ボックスが表示されたら、 **[Yes]\(はい\)** を選択します。
 
   *launch.json* ファイルと *tasks.json* ファイルを格納している *.vscode* ディレクトリが、プロジェクトのルート ディレクトリに追加されます。
 
