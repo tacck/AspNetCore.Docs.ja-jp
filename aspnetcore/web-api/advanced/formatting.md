@@ -1,10 +1,11 @@
 ---
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
+title: ASP.NET Core Web API 作成者での応答データの書式設定: の説明: ASP.NET Core Web API で応答データを書式設定する方法について説明します。
+ms. author: riande ms. カスタム: H1Hack27Feb2017: 04/17/2020 なし:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: web api/advanced/書式設定
 
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
@@ -19,7 +20,7 @@ ASP.NET Core MVC では、応答データの書式設定がサポートされま
 
 アクションの結果には、<xref:Microsoft.AspNetCore.Mvc.JsonResult> や <xref:Microsoft.AspNetCore.Mvc.ContentResult> のように、特定の形式に固有となる型があります。 アクションでは、クライアントの設定に関係なく、特定の形式で書式設定された結果を返すことができます。 たとえば、`JsonResult` を返すと、JSON 形式のデータが返されます。 `ContentResult` または文字列を返すと、プレーンテキスト形式の文字列データが返されます。
 
-アクションが特定の型を返す必要はありません。 ASP.NET Core によって、すべてのオブジェクトの戻り値がサポートされます。  型が <xref:Microsoft.AspNetCore.Mvc.IActionResult> ではないオブジェクトを返すアクションからの結果は、適切な <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 実装を利用してシリアル化されます。 詳細については、「<xref:web-api/action-return-types>」を参照してください。
+アクションが特定の型を返す必要はありません。 ASP.NET Core によって、すべてのオブジェクトの戻り値がサポートされます。  型が <xref:Microsoft.AspNetCore.Mvc.IActionResult> ではないオブジェクトを返すアクションからの結果は、適切な <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 実装を利用してシリアル化されます。 詳細については、 <xref:web-api/action-return-types> を参照してください。
 
 組み込みヘルパー メソッド <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> では、JSON 形式のデータが返されます。[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
@@ -136,7 +137,7 @@ public IActionResult Get()
 {
     return Json(model, new JsonSerializerOptions
     {
-        options.WriteIndented = true,
+        WriteIndented = true,
     });
 }
 ```
@@ -175,7 +176,7 @@ public IActionResult Get()
 {
     return Json(model, new JsonSerializerSettings
     {
-        options.Formatting = Formatting.Indented,
+        Formatting = Formatting.Indented,
     });
 }
 ```
@@ -243,211 +244,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)属性は、の format 値が存在するかどうかをチェック `RouteData` し、応答が作成されるときに応答形式を適切なフォーマッタにマップします。
 
 |           ルート        |             フォーマッタ              |
-|---
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------------|---タイトル: 作成者: 説明: ms. 作成者: ms. カスタム: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------------------| |  `/api/products/5`    |   既定の出力フォーマッタ | |`/api/products/5.json` |JSON フォーマッタ (構成されている場合) | |`/api/products/5.xml`  |XML フォーマッタ (構成されている場合) |
+|------------------------|------------------------------------|
+|   `/api/products/5`    |    既定の出力フォーマッタ    |
+| `/api/products/5.json` | JSON フォーマッタ (構成される場合) |
+| `/api/products/5.xml`  | XML フォーマッタ (構成される場合)  |
