@@ -145,7 +145,7 @@ dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb
 
 最も適切な発行先を決定するには、[自分に合った発行オプション](/visualstudio/ide/not-in-toc/web-publish-options)に関する記事を参照してください。
 
-発行先を **[フォルダー]** に選択した場合は、発行されたアセットを保存するフォルダーのパスを指定します。 既定のフォルダー パスは *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、*bin\Release\netcoreapp2.2\publish\\* などです。 **[プロファイルの作成]** ボタンを選択して完了します。
+発行先を **[フォルダー]** に選択した場合は、発行されたアセットを保存するフォルダーのパスを指定します。既定のフォルダー パスは *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* です。たとえば、*bin\Release\netcoreapp2.2\publish\\* などです。**[プロファイルの作成]** ボタンを選択して完了します。
 
 発行プロファイルが作成されると、 **[発行]** タブの内容が変化します。 新しく作成したプロファイルがドロップダウン リストに表示されます。 別の新しいプロファイルを作成するには、ドロップダウン リストから **[新しいプロファイルの作成]** を選択します。
 
