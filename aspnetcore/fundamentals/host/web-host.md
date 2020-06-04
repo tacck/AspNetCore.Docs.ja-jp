@@ -389,7 +389,7 @@ WebHost.CreateDefaultBuilder(args)
 
 ### <a name="web-root"></a>Web ルート
 
-アプリの静的資産への相対パスを設定します。
+アプリの静的アセットへの相対パスを設定します。
 
 **キー**: webroot  
 **型**: *文字列*  

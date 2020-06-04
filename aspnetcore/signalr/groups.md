@@ -1,11 +1,11 @@
 ---
-title: ' 作成者でのユーザーとグループの管理 SignalR : 説明: ' ASP.NET Core の SignalR ユーザーとグループの管理の概要。 '
-monikerRange: ms. author: ms. カスタム: ms. date: no loc:
+title: ' author でのユーザーとグループの管理 SignalR : bradygaster の説明: ' SignalR ユーザーとグループの管理 ASP.NET Core の概要。 '
+monikerRange: ' >= aspnetcore-2.1 ' ms. author: bradyg ミリ秒: mvc ms. date: 05/17/2020 no loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: signalr/groups
 
 ---
 
@@ -15,7 +15,7 @@ monikerRange: ms. author: ms. カスタム: ms. date: no loc:
 
 SignalR特定のユーザーに関連付けられているすべての接続、および名前付きの接続グループにメッセージを送信できるようにします。
 
-[サンプルコードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/)[する (ダウンロードする方法)](xref:index#how-to-download-a-sample)
+[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
 
 ## <a name="users-in-signalr"></a>のユーザーSignalR
 

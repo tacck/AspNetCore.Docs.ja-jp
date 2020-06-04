@@ -20,7 +20,7 @@ Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタ
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
+Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。アプリがブラウザー UI スレッド上で直接実行されます。UI の更新とイベントの処理は、同じプロセス内で行われます。アプリのアセットは、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
 
 ![Blazor WebAssembly:Blazor アプリは、ブラウザー内の UI スレッドで実行されます。](hosting-models/_static/blazor-webassembly.png)
 
