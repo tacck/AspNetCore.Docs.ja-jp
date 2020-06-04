@@ -52,7 +52,7 @@ ASP.NET Core MVC では、応答データの書式設定がサポートされま
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_search)]
 
-ASP.NET Core では、規定で `application/json`、`text/json`、`text/plain` のメディアの種類がサポートされています。 [Fiddler](https://www.telerik.com/fiddler) や [Postman](https://www.getpostman.com/tools) のようなツールでは、`Accept` 要求ヘッダーを設定して戻り値の形式を指定できます。 サーバーでサポートされている型が `Accept` ヘッダーに含まれている場合は、その型が返されます。 フォーマッタの追加方法は次のセクションで説明します。
+ASP.NET Core では、規定で `application/json`、`text/json`、`text/plain` のメディアの種類がサポートされています。 [Fiddler](https://www.telerik.com/fiddler) や [Postman](https://www.getpostman.com/tools) のようなツールでは、`Accept` 要求ヘッダーを設定して戻り値の形式を指定できます。 サーバーでサポートされている型が `Accept` ヘッダーに含まれている場合は、その型が返されます。 フォーマッターの追加方法は次のセクションで説明します。
 
 コントローラー アクションは POCO (単純な従来の CLR オブジェクト) を返すことができます。 POCO が返されると、ランタイムはそのオブジェクトをラップする `ObjectResult` を自動的に作成します。 クライアントは、書式設定されたシリアル化オブジェクトを取得します。 返されるオブジェクトが `null` の場合は、`204 No Content` という応答が返されます。
 
@@ -67,16 +67,16 @@ ASP.NET Core では、規定で `application/json`、`text/json`、`text/plain` 
 コンテンツ "*ネゴシエーション*" は、`Accept` ヘッダーが要求に含まれるときに発生します。 要求に Accept ヘッダーが含まれるとき、ASP.NET Core は次のように処理します。
 
 * Accept ヘッダーのメディアの種類を優先順で列挙します。
-* 指定された形式のいずれかで応答を生成できるフォーマッタを見つけようとします。
+* 指定された形式のいずれかで応答を生成できるフォーマッターを見つけようとします。
 
-クライアントの要求を満たすことができるフォーマッタが見つからない場合は、ASP.NET Core は次のようにします。
+クライアントの要求を満たすことができるフォーマッターが見つからない場合は、ASP.NET Core は次のようにします。
 
 * <xref:Microsoft.AspNetCore.Mvc.MvcOptions> が設定されていた場合は、`406 Not Acceptable` を返します。それ以外の場合は次のようにします。
-* 応答を生成できる最初のフォーマッタを見つけようとします。
+* 応答を生成できる最初のフォーマッターを見つけようとします。
 
-要求された形式に対応するフォーマッタが構成されていない場合、オブジェクトを書式設定できる最初のフォーマッタが使用されます。 要求に `Accept` ヘッダーが表示されない場合は、次のようになります。
+要求された形式に対応するフォーマッターが構成されていない場合、オブジェクトを書式設定できる最初のフォーマッターが使用されます。 要求に `Accept` ヘッダーが表示されない場合は、次のようになります。
 
-* オブジェクトを処理できる最初のフォーマッタが使用されて、応答をシリアル化します。
+* オブジェクトを処理できる最初のフォーマッターが使用されて、応答をシリアル化します。
 * ネゴシエーションは発生しません。 サーバーが返す形式を決定します。
 
 Accept ヘッダーに `*/*` が含まれる場合、`RespectBrowserAcceptHeader` が <xref:Microsoft.AspNetCore.Mvc.MvcOptions> で true に設定されていない限り、ヘッダーが無視されます。
@@ -99,15 +99,15 @@ Accept ヘッダーに `*/*` が含まれる場合、`RespectBrowserAcceptHeader
 [!code-csharp[](./formatting/sample/StartupRespectBrowserAcceptHeader.cs?name=snippet)]
 ::: moniker-end
 
-### <a name="configure-formatters"></a>フォーマッタの構成
+### <a name="configure-formatters"></a>フォーマッターの構成
 
-追加の形式をサポートする必要があるアプリは、適切な NuGet パッケージを追加し、サポートを構成できます。 入力と出力で別々のフォーマッタがあります。 入力フォーマッタは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。 出力フォーマッタは、応答の書式設定に使用されます。 カスタム フォーマッタの作成の詳細については、[カスタム フォーマッタ](xref:web-api/advanced/custom-formatters)に関するページを参照してください。
+追加の形式をサポートする必要があるアプリは、適切な NuGet パッケージを追加し、サポートを構成できます。 入力と出力で別々のフォーマッターがあります。 入力フォーマッターは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。 出力フォーマッターは、応答の書式設定に使用されます。 カスタム フォーマッターの作成の詳細については、[カスタム フォーマッター](xref:web-api/advanced/custom-formatters)に関するページを参照してください。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ### <a name="add-xml-format-support"></a>XML 形式のサポートを追加する
 
-<xref:System.Xml.Serialization.XmlSerializer> を使用して実装された XML フォーマッタは、<xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlSerializerFormatters*> を呼び出すことで構成できます。
+<xref:System.Xml.Serialization.XmlSerializer> を使用して実装された XML フォーマッターは、<xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlSerializerFormatters*> を呼び出すことで構成できます。
 
 [!code-csharp[](./formatting/3.0sample/Startup.cs?name=snippet)]
 
@@ -115,9 +115,9 @@ Accept ヘッダーに `*/*` が含まれる場合、`RespectBrowserAcceptHeader
 
 前のコードを使用する場合、コントローラー メソッドは要求の `Accept` ヘッダーに基づいて適切な形式を返します。
 
-### <a name="configure-systemtextjson-based-formatters"></a>System.Text.Json ベースのフォーマッタを構成する
+### <a name="configure-systemtextjson-based-formatters"></a>System.Text.Json ベースのフォーマッターを構成する
 
-`System.Text.Json` ベースのフォーマッタの機能は、`Microsoft.AspNetCore.Mvc.JsonOptions.SerializerOptions` を使用して構成することができます。
+`System.Text.Json` ベースのフォーマッターの機能は、`Microsoft.AspNetCore.Mvc.JsonOptions.SerializerOptions` を使用して構成することができます。
 
 ```csharp
 services.AddControllers().AddJsonOptions(options =>
@@ -144,11 +144,11 @@ public IActionResult Get()
 
 ### <a name="add-newtonsoftjson-based-json-format-support"></a>Newtonsoft.Json ベースの JSON 形式のサポートを追加する
 
-ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを使用して実装された JSON フォーマッタが使用されていました。 ASP.NET Core 3.0 以降、既定の JSON フォーマッタは `System.Text.Json` に基づいています。 ベースの `Newtonsoft.Json` フォーマッタと機能のサポートは、NuGet パッケージをインストールし、で構成することによって利用でき [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) `Startup.ConfigureServices` ます。
+ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを使用して実装された JSON フォーマッターが使用されていました。 ASP.NET Core 3.0 以降、既定の JSON フォーマッターは `System.Text.Json` に基づいています。 ベースの `Newtonsoft.Json` フォーマッターと機能のサポートは、NuGet パッケージをインストールし、で構成することによって利用でき [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) `Startup.ConfigureServices` ます。
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
 
-一部の機能は `System.Text.Json` ベースのフォーマッタでうまく動作せず、`Newtonsoft.Json` ベースのフォーマッタの参照が必要となる場合があります。 アプリが以下の場合には、`Newtonsoft.Json` ベースのフォーマッタの使用を続けます。
+一部の機能は `System.Text.Json` ベースのフォーマッターでうまく動作せず、`Newtonsoft.Json` ベースのフォーマッターの参照が必要となる場合があります。 アプリが以下の場合には、`Newtonsoft.Json` ベースのフォーマッターの使用を続けます。
 
 * `Newtonsoft.Json` 属性を使用する。 たとえば、`[JsonProperty]` または `[JsonIgnore]` です。
 * シリアル化の設定をカスタマイズする。
@@ -156,7 +156,7 @@ ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings` を構成する。 ASP.NET Core 3.0 より前は、`JsonResult.SerializerSettings`が `Newtonsoft.Json` に固有の `JsonSerializerSettings` のインスタンスを受け入れます。
 * [OpenAPI](<xref:tutorials/web-api-help-pages-using-swagger>) ドキュメントを生成する。
 
-`Newtonsoft.Json` ベースのフォーマッタの機能は、`Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions.SerializerSettings` を使用して構成することができます。
+`Newtonsoft.Json` ベースのフォーマッターの機能は、`Microsoft.AspNetCore.Mvc.MvcNewtonsoftJsonOptions.SerializerSettings` を使用して構成することができます。
 
 ```csharp
 services.AddControllers().AddNewtonsoftJson(options =>
@@ -189,7 +189,7 @@ public IActionResult Get()
 
 XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Formatters.Xml/) NuGet パッケージが必要です。
 
-<xref:System.Xml.Serialization.XmlSerializer> を使用して実装された XML フォーマッタは、<xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlSerializerFormatters*> を呼び出すことで構成できます。
+<xref:System.Xml.Serialization.XmlSerializer> を使用して実装された XML フォーマッターは、<xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlSerializerFormatters*> を呼び出すことで構成できます。
 
 [!code-csharp[](./formatting/sample/Startup.cs?name=snippet)]
 
@@ -208,13 +208,13 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 上記の [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) フィルター:
 
 * コントローラー内のすべてのアクションが、JSON で書式設定された応答を返すように強制します。
-* 他のフォーマッタが構成されていて、クライアントが別の形式を指定した場合でも、JSON が返されます。
+* 他のフォーマッターが構成されていて、クライアントが別の形式を指定した場合でも、JSON が返されます。
 
 詳細については、[フィルター](xref:mvc/controllers/filters)に関するページを参照してください。
 
-### <a name="special-case-formatters"></a>特殊なケースのフォーマッタ
+### <a name="special-case-formatters"></a>特殊なケースのフォーマッター
 
-一部の特殊なケースが組み込みのフォーマッタで実装されます。 既定では、戻り値の型 `string` は *text/plain* として書式設定されます (`Accept` ヘッダー経由で要求された場合は *text/html*)。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> を削除することで削除できます。 フォーマッタは `ConfigureServices` メソッドで削除します。 戻り値の型としてモデル オブジェクトをともなうアクションは、`null` を返すとき、`204 No Content` を返します。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> を削除することで削除できます。 次のコードでは、`StringOutputFormatter` と `HttpNoContentOutputFormatter` が削除されます。
+一部の特殊なケースが組み込みのフォーマッターで実装されます。 既定では、戻り値の型 `string` は *text/plain* として書式設定されます (`Accept` ヘッダー経由で要求された場合は *text/html*)。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> を削除することで削除できます。 フォーマッターは `ConfigureServices` メソッドで削除します。 戻り値の型としてモデル オブジェクトをともなうアクションは、`null` を返すとき、`204 No Content` を返します。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> を削除することで削除できます。 次のコードでは、`StringOutputFormatter` と `HttpNoContentOutputFormatter` が削除されます。
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]
@@ -223,12 +223,12 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 [!code-csharp[](./formatting/sample/StartupStringOutputFormatter.cs?name=snippet)]
 ::: moniker-end
 
-`StringOutputFormatter` がない場合は、組み込みの JSON フォーマッタによって戻り値の型 `string` が書式設定されます。 組み込みの JSON フォーマッタが削除され、XML フォーマッタを使用できる場合は、XML フォーマッタによって戻り値の型 `string` が書式設定されます。 それ以外の場合は、戻り値の型 `string` で `406 Not Acceptable` が返されます。
+`StringOutputFormatter` がない場合は、組み込みの JSON フォーマッターによって戻り値の型 `string` が書式設定されます。 組み込みの JSON フォーマッターが削除され、XML フォーマッターを使用できる場合は、XML フォーマッターによって戻り値の型 `string` が書式設定されます。 それ以外の場合は、戻り値の型 `string` で `406 Not Acceptable` が返されます。
 
-`HttpNoContentOutputFormatter` がない場合、構成されているフォーマッタを利用し、null オブジェクトが書式設定されます。 次に例を示します。
+`HttpNoContentOutputFormatter` がない場合、構成されているフォーマッターを利用し、null オブジェクトが書式設定されます。 次に例を示します。
 
-* JSON フォーマッタは、本文が `null` の応答を返します。
-* XML フォーマッタは、属性 `xsi:nil="true"` が設定された空の XML 要素を返します。
+* JSON フォーマッターは、本文が `null` の応答を返します。
+* XML フォーマッターは、属性 `xsi:nil="true"` が設定された空の XML 要素を返します。
 
 ## <a name="response-format-url-mappings"></a>応答形式の URL マッピング
 
@@ -241,10 +241,10 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
-前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)属性は、の format 値が存在するかどうかをチェック `RouteData` し、応答が作成されるときに応答形式を適切なフォーマッタにマップします。
+前のルートを使用すると、要求された形式をオプションのファイル拡張子として指定できます。 [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute)属性は、の format 値が存在するかどうかをチェック `RouteData` し、応答が作成されるときに応答形式を適切なフォーマッターにマップします。
 
-|           ルート        |             フォーマッタ              |
-|------------------------|------------------------------------|
-|   `/api/products/5`    |    既定の出力フォーマッタ    |
-| `/api/products/5.json` | JSON フォーマッタ (構成される場合) |
-| `/api/products/5.xml`  | XML フォーマッタ (構成される場合)  |
+| ルート | フォーマッター |
+|-----------------------|-----------------------------------|
+|  `/api/products/5`    | 既定の出力フォーマッター |
+|`/api/products/5.json` | JSON フォーマッター (構成されている場合) |
+|`/api/products/5.xml`  | XML フォーマッター (構成されている場合) |
