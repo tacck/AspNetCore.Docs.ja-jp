@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: ASP.NET ドキュメント
+title: ASP.NET Core ドキュメント
 summary: ASP.NET Core を使用して、高速、安全、クロスプラットフォーム、クラウドベースの Web アプリとサービスを作成する方法について説明します。 チュートリアル、サンプル コード、基本事項、API リファレンスなどを参照できます。
 brand: aspnet
 metadata:
-  title: ASP.NET ドキュメント
+  title: ASP.NET Core ドキュメント
   description: ASP.NET Core を使用して、高速、安全、クロスプラットフォーム、クラウドベースの Web アプリとサービスを作成する方法について説明します。 チュートリアル、サンプル コード、基本事項、API リファレンスなどを参照できます。
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 05/01/2020
-  ms.openlocfilehash: 2d653ab5ca78fb856098fb5f250a235e3f2635d0
-  ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+  ms.date: 06/03/2020
+  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
+  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
   ms.translationtype: HT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 05/02/2020
-  ms.locfileid: "82727708"
+  ms.lasthandoff: 06/04/2020
+  ms.locfileid: "84355425"
 highlightedContent:
   items:
   - title: 任意のプラットフォームに 5 分で ASP.NET Core アプリを作成する
@@ -39,12 +39,12 @@ highlightedContent:
   - title: 最初のリアルタイム Web アプリを作成する
     itemType: get-started
     url: tutorials/signalr.md
-  - title: 最初のデータドリブン MVC Web アプリを作成する
-    itemType: get-started
-    url: tutorials/first-mvc-app//start-mvc.md
+  - title: ASP.NET 4.x ドキュメント
+    itemType: overview
+    url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: ASP.NET Core MVC アプリの開発
-  summary: 対話型 Web アプリ、Web API、MVC パターンのアプリ、リアルタイム アプリなどを選択してください
+  summary: 対話型 Web アプリ、Web API、MVC パターンのアプリ、リアルタイム アプリなどを選択してください。 ASP.NET 4.x のドキュメントについては、「[ASP.NET](https://docs.microsoft.com/aspnet/overview)」を参照してください。
   items:
   - title: 対話型のクライアント側 Blazor アプリ
     summary: WebAssembly を活用する再利用可能な UI コンポーネントを使用した開発で、ほぼネイティブなパフォーマンスを実現します
@@ -306,7 +306,7 @@ additionalContent:
     - title: Azure と ASP.NET Core
       links:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet
-        text: ASP.NET Web アプリをデプロイする
+        text: ASP.NET Core Web アプリをデプロイする
       - url: https://docs.microsoft.com/visualstudio/containers/container-tools?view=vs-2019.md
         text: ASP.NET Core と Docker
       - url: https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/
@@ -314,7 +314,7 @@ additionalContent:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
         text: App Service と Azure SQL Database
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-connect-msi
-        text: ASP.NET と Azure SQL Database を使用したマネージド ID
+        text: ASP.NET Core と Azure SQL Database を使用したマネージド ID
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api
         text: Azure App Service の CORS を使用した Web API
       - url: https://docs.microsoft.com/learn/modules/capture-application-logs-app-service/
@@ -373,4 +373,4 @@ additionalContent:
         text: 一般的なクライアント側の Web テクノロジ
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/development-process-for-azure
         text: Azure の開発プロセス
-  footer: ASP.NET ドキュメントに投稿してください。[共同作成者ガイド](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md)をお読みください。
+  footer: ASP.NET Core ドキュメントへの投稿。[共同作成者ガイド](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md)をお読みください。
