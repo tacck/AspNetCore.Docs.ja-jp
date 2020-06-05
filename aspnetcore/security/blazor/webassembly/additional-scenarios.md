@@ -1,12 +1,24 @@
 ---
-title: ' ASP.NET Core の Blazor 追加のセキュリティシナリオの作成者: guシャードの説明: ' Blazor セキュリティシナリオを追加するために webassembly 構成する方法について説明します。 "
-monikerRange: ' >= aspnetcore-3.1 ' ms. author: riande ms. カスタム: mvc ms. date: 06/01/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: security/blazor/webas/追加-シナリオ
-
+title: Blazor追加のセキュリティシナリオを ASP.NET Core
+author: guardrex
+description: Blazor追加のセキュリティシナリオを実現するために webassembly 構成する方法について説明します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/additional-scenarios
+ms.openlocfilehash: de752eb180767bbb269107ebc478a4422448f968
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272035"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Blazor追加のセキュリティシナリオを ASP.NET Core
 

@@ -1,11 +1,11 @@
 ---
-title: Azure Active Directory Blazorのグループと役割を使用した ASP.NET Core webas
+title: BlazorAzure Active Directory のグループと役割を使用した ASP.NET Core webas
 author: guardrex
-description: Azure Active Directory グループとロールBlazorを使用するように webassembly 構成する方法について説明します。
+description: BlazorAzure Active Directory グループとロールを使用するように webassembly 構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: afdb5ddc4d4ed08d0f1ecaf7158af283dda6b302
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976883"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451876"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD グループ、管理者ロール、およびユーザー定義のロール
 
 [Luke Latham](https://github.com/guardrex)および[Javier Calvarro jeannine](https://github.com/javiercn)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Azure Active Directory (AAD) には、ASP.NET Core Id と組み合わせることができるいくつかの承認方法が用意されています。
+Azure Active Directory (AAD) には、ASP.NET Core と組み合わせることができるいくつかの承認方法が用意されてい Identity ます。
 
 * ユーザー定義グループ
   * Security
@@ -38,7 +34,7 @@ Azure Active Directory (AAD) には、ASP.NET Core Id と組み合わせるこ�
   * 組み込みの管理者ロール
   * ユーザー定義ロール
 
-この記事のガイダンスは、次のトピックで説明する Blazor Webasaad 展開シナリオに適用されます。
+この記事のガイダンスは、次の Blazor トピックに記載されている AAD 展開シナリオに適用されます。
 
 * [Microsoft アカウントによるスタンドアロン](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
 * [AAD によるスタンドアロン](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
@@ -46,16 +42,16 @@ Azure Active Directory (AAD) には、ASP.NET Core Id と組み合わせるこ�
 
 ### <a name="user-defined-groups-and-built-in-administrative-roles"></a>ユーザー定義グループと組み込みの管理者ロール
 
-`groups`メンバーシップ要求を提供するように Azure portal でアプリを構成するには、次の Azure の記事を参照してください。 ユーザー定義の AAD グループと組み込みの管理者ロールにユーザーを割り当てます。
+メンバーシップ要求を提供するように Azure portal でアプリを構成するには `groups` 、次の Azure の記事を参照してください。 ユーザー定義の AAD グループと組み込みの管理者ロールにユーザーを割り当てます。
 
 * [Azure AD セキュリティ グループを使用したロール](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [groupMembershipClaims 属性](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 次の例では、AAD の組み込み*課金管理者*ロールにユーザーが割り当てられていることを前提としています。
 
-AAD に`groups`よって送信された単一の要求は、ユーザーのグループとロールを JSON 配列のオブジェクト Id (guid) として提示します。 アプリでは、グループとロールの JSON 配列を、アプリ`group`が[ポリシー](xref:security/authorization/policies)を作成できる個々の要求に変換する必要があります。
+`groups`AAD によって送信された単一の要求は、ユーザーのグループとロールを JSON 配列のオブジェクト id (guid) として提示します。 アプリでは、グループとロールの JSON 配列を、アプリがポリシーを作成できる個々の要求に変換する必要があり `group` ます。 [policies](xref:security/authorization/policies)
 
-を`RemoteUserAccount`拡張して、グループとロールの配列プロパティを含めます。
+を拡張し <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> て、グループとロールの配列プロパティを含めます。
 
 *CustomUserAccount.cs*:
 
@@ -73,7 +69,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-ホスト型ソリューションのスタンドアロンアプリまたはクライアントアプリでカスタムユーザーファクトリを作成します。 次のファクトリは、[ユーザー定義](#user-defined-roles)の`roles`ロールセクションで説明されている要求配列を処理するようにも構成されています。
+ホスト型ソリューションのスタンドアロンアプリまたはクライアントアプリでカスタムユーザーファクトリを作成します。 次のファクトリは、 `roles` [ユーザー定義のロール](#user-defined-roles)セクションで説明されている要求配列を処理するようにも構成されています。
 
 ```csharp
 using System.Security.Claims;
@@ -117,9 +113,9 @@ public class CustomUserFactory
 }
 ```
 
-元`groups`の要求を削除するためのコードを提供する必要はありません。これは、フレームワークによって自動的に削除されるためです。
+元の要求を削除するためのコードを提供する必要はありません `groups` 。これは、フレームワークによって自動的に削除されるためです。
 
-ホストされて`Program.Main`いるソリューションのスタンドアロンアプリまたはクライアントアプリのファクトリを (*Program.cs*) に登録します。
+ホストされている `Program.Main` ソリューションのスタンドアロンアプリまたはクライアントアプリのファクトリを (*Program.cs*) に登録します。
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -135,7 +131,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-で`Program.Main`、グループまたはロールごとに[ポリシー](xref:security/authorization/policies)を作成します。 次の例では、AAD の組み込み*課金管理者*ロールのポリシーを作成します。
+で、グループまたはロールごとに[ポリシー](xref:security/authorization/policies)を作成 `Program.Main` します。 次の例では、AAD の組み込み*課金管理者*ロールのポリシーを作成します。
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -168,7 +164,7 @@ AAD ロールオブジェクト Id の完全な一覧については、「 [aad 
 </AuthorizeView>
 ```
 
-コンポーネント全体へのアクセスは、 [ `[Authorize]`属性ディレクティブ](xref:security/blazor/index#authorize-attribute)ディレクティブを使用して、ポリシーに基づいて行うことができます。
+コンポーネント全体へのアクセスは、[ `[Authorize]` ] 属性ディレクティブ] (xref: security/blazor/index # 承認属性) () を使用して、ポリシーに基づいて行うことができ <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ます。
 
 ```razor
 @page "/"
@@ -220,7 +216,7 @@ AAD ロールオブジェクト Id の完全な一覧については、「 [aad 
 
 AAD で登録されたアプリは、ユーザー定義のロールを使用するように構成することもできます。
 
-`roles`メンバーシップ要求を提供するために Azure portal でアプリを構成する方法については、「[方法: アプリケーションにアプリロールを追加し](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps)、Azure ドキュメントのトークンで受信する」を参照してください。
+メンバーシップ要求を提供するために Azure portal でアプリを構成する `roles` 方法については、「[方法: アプリケーションにアプリロールを追加し](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps)、Azure ドキュメントのトークンで受信する」を参照してください。
 
 次の例では、アプリが2つのロールで構成されていることを前提としています。
 
@@ -228,15 +224,15 @@ AAD で登録されたアプリは、ユーザー定義のロールを使用す�
 * `developer`
 
 > [!NOTE]
-> Azure AD Premium アカウントを使用せずにセキュリティグループにロールを割り当てることはできませんが、ユーザーを`roles`ロールに割り当て、標準の Azure アカウントを持つユーザーの要求を受け取ることができます。 このセクションのガイダンスでは、Azure AD Premium アカウントは必要ありません。
+> Azure AD Premium アカウントを使用せずにセキュリティグループにロールを割り当てることはできませんが、ユーザーをロールに割り当て、 `roles` 標準の Azure アカウントを持つユーザーの要求を受け取ることができます。 このセクションのガイダンスでは、Azure AD Premium アカウントは必要ありません。
 >
 > Azure portal に複数のロールが割り当てられている場合は、追加のロールの割り当てごとに**_ユーザーを再度追加_** します。
 
-AAD に`roles`よって送信された1つの要求は、 `appRoles`ユーザー `value`定義のロールを JSON 配列内のとして提示します。 アプリでは、ロールの JSON 配列を個々`role`の要求に変換する必要があります。
+AAD によって送信された1つの要求は、 `roles` ユーザー定義のロールを JSON 配列内のとして提示し `appRoles` `value` ます。 アプリでは、ロールの JSON 配列を個々の要求に変換する必要があり `role` ます。
 
-「 `CustomUserFactory` [ユーザー定義グループと AAD の組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションに示されているは、JSON 配列値`roles`を持つクレームに対して動作するように設定されています。 「 `CustomUserFactory` [ユーザー定義グループと AAD の組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションで示したように、ホストされているソリューションのスタンドアロンアプリまたはクライアントアプリにを追加して登録します。 元`roles`の要求を削除するためのコードを提供する必要はありません。これは、フレームワークによって自動的に削除されるためです。
+`CustomUserFactory`「[ユーザー定義グループと AAD の組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションに示されているは、JSON 配列値を持つクレームに対して動作するように設定されてい `roles` ます。 `CustomUserFactory`「[ユーザー定義グループと AAD の組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションで示したように、ホストされているソリューションのスタンドアロンアプリまたはクライアントアプリにを追加して登録します。 元の要求を削除するためのコードを提供する必要はありません `roles` 。これは、フレームワークによって自動的に削除されるためです。
 
-スタンド`Program.Main`アロンアプリまたはホストされたソリューションのクライアントアプリで、ロール要求と`role`して "" という名前の要求を指定します。
+`Program.Main`スタンドアロンアプリまたはホストされたソリューションのクライアントアプリで、 `role` ロール要求として "" という名前の要求を指定します。
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -247,11 +243,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-コンポーネントの承認方法は、この時点で機能します。 コンポーネント内のすべての承認メカニズムは、 `admin`ロールを使用してユーザーを承認できます。
+コンポーネントの承認方法は、この時点で機能します。 コンポーネント内のすべての承認メカニズムは、ロールを使用して `admin` ユーザーを承認できます。
 
-* [Authorizeview コンポーネント](xref:security/blazor/index#authorizeview-component)(例: `<AuthorizeView Roles="admin">`)
-* attribute ディレクティブ (例: `@attribute [Authorize(Roles = "admin")]`) [ `[Authorize]` ](xref:security/blazor/index#authorize-attribute)
-* [手続き型ロジック](xref:security/blazor/index#procedural-logic)(例`if (user.IsInRole("admin")) { ... }`:)
+* [Authorizeview コンポーネント](xref:security/blazor/index#authorizeview-component)(例: `<AuthorizeView Roles="admin">` )
+* [ `[Authorize]` ] 属性ディレクティブ](xref: security/blazor/index # 承認-属性)( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (例: `@attribute [Authorize(Roles = "admin")]` )
+* [手続き型ロジック](xref:security/blazor/index#procedural-logic)(例: `if (user.IsInRole("admin")) { ... }` )
 
   複数のロールテストがサポートされています。
 
@@ -264,7 +260,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="aad-adminstrative-role-group-ids"></a>AAD のロールグループ Id
 
-次の表に示すオブジェクト Id は、要求の`group` [ポリシー](xref:security/authorization/policies)を作成するために使用されます。 ポリシーを使用すると、アプリ内のさまざまなアクティビティについてユーザーを承認することができます。 詳細については、[ユーザー定義グループと AAD の組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)に関するセクションを参照してください。
+次の表に示すオブジェクト Id は、要求の[ポリシー](xref:security/authorization/policies)を作成するために使用され `group` ます。 ポリシーを使用すると、アプリ内のさまざまなアクティビティについてユーザーを承認することができます。 詳細については、[ユーザー定義グループと AAD の組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)に関するセクションを参照してください。
 
 AAD 管理者ロール | Object ID
 --- | ---
@@ -288,7 +284,7 @@ B2C ユーザーフロー属性管理者 | dd0baca0-a535-48c1-b871-8431abe16452
 ディレクトリ閲覧者 | e1fc84a6-7762-4b9b-8e29-518b4adbc23b
 Dynamics 365 管理者 | f20a9cfa-9fdf-49a8-a977-1afe446a1d6e
 Exchange 管理者 | b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652
-外部Identityプロバイダー管理者 | febfaeb4-e478-407a-b4b3-f4d9716618a2
+外部 Identity プロバイダー管理者 | febfaeb4-e478-407a-b4b3-f4d9716618a2
 全体管理者 | a45ba61b-44db-462c-924b-3b2719152588
 グローバル閲覧者 | f6903b21-6aba-4124-b44c-76671796b9d5
 グループ管理者 | 158b3e5a-d89d-460b-92b5-3b34985f0197

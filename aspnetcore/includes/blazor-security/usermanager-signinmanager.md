@@ -2,17 +2,21 @@
 
 サーバーアプリが必要とするユーザー id 要求の種類を設定します。
 
-* <xref:Microsoft.AspNetCore.Identity.UserManager%601>API <xref:Microsoft.AspNetCore.Identity.SignInManager%601>エンドポイント内。
+* <xref:Microsoft.AspNetCore.Identity.UserManager%601><xref:Microsoft.AspNetCore.Identity.SignInManager%601>API エンドポイント内。
 * <xref:Microsoft.AspNetCore.Identity.IdentityUser>ユーザーの名前、電子メールアドレス、またはロックアウトの終了時刻などの詳細。
 
 `Startup.ConfigureServices`の場合:
 
 ```csharp
+using System.Security.Claims;
+
+...
+
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-メソッドが`WeatherForecastController`呼び出される<xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName>と、次のログがに記録されます。 `Get`
+`WeatherForecastController` <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> メソッドが呼び出されると、次のログがに記録 `Get` されます。
 
 ```csharp
 using System;
@@ -33,7 +37,7 @@ namespace {APP NAMESPACE}.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         private static readonly string[] Summaries = new[]
         {
@@ -47,7 +51,7 @@ namespace {APP NAMESPACE}.Server.Controllers
             UserManager<ApplicationUser> userManager)
         {
             this.logger = logger;
-            _userManager = userManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -55,7 +59,7 @@ namespace {APP NAMESPACE}.Server.Controllers
         {
             var rng = new Random();
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
 
             if (user != null)
             {

@@ -1,14 +1,24 @@
 ---
-title: Microsoft. Extensions. Logging 2.1 から2.2 または 3.0 author: pakrym description: non-ASP.NET を使用する Core アプリケーションを2.1 から2.2 または3.0 に移行する方法について説明します。
-ms. author: pakrym: mvc ms. date: 01/04/2019 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: migration/logging-nonaspnetcore
-
+title: 2.1 から2.2 または3.0 への移行
+author: pakrym
+description: 2.1 から2.2 または3.0 を使用する non-ASP.NET Core アプリケーションを移行する方法について説明します。
+ms.author: pakrym
+ms.custom: mvc
+ms.date: 01/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/logging-nonaspnetcore
+ms.openlocfilehash: 2fd738ed0e0a06d0793e3c624d40a13725b53cd8
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84274233"
 ---
-
 # <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a>2.1 から2.2 または3.0 への移行
 
 この記事では、 `Microsoft.Extensions.Logging` 2.1 から2.2 または3.0 までを使用する Non-ASP.NET Core アプリケーションを移行するための一般的な手順について説明します。
@@ -65,7 +75,7 @@ using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole())
 }
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [Microsoft... Logging. コンソール NuGet パッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/)。
 * <xref:fundamentals/logging/index>

@@ -4,30 +4,30 @@ Id scaffolder を実行します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューションエクスプローラー**で、プロジェクトを右クリックして >**新しいスキャフォールディング項目**を**追加**> ます。
-* **[Add スキャフォールディング]** ダイアログボックスの左ペインで、[> **Identity** ] を選択して **[add]** を選択します。
-* **[Id の追加]** ダイアログボックスで、必要なオプションを選択します。
-  * 既存のレイアウトページを選択するか、レイアウトファイルが正しくないマークアップで上書きされます。 既存の *\_Layout*ファイルが選択されている場合、そのファイルは上書きされ**ません**。
-
- 例: MVC プロジェクトの Razor Pages `~/Views/Shared/_Layout.cshtml` の `~/Pages/Shared/_Layout.cshtml`
+* **ソリューションエクスプローラー**で、プロジェクトを右クリックし、[ **Add** > **New スキャフォールディング Item**] > ます。
+* [ **Add スキャフォールディング**] ダイアログボックスの左ペインで、[ **Identity** add] を選択し > **Add**ます。
+* [ **Id の追加**] ダイアログボックスで、必要なオプションを選択します。
+  * レイアウトファイルが正しくないマークアップで上書きされないように、既存のレイアウトページを選択します。 既存の* \_ Layout*ファイルが選択されている場合、そのファイルは上書きされ**ません**。 次に例を示します。
+    * `~/Pages/Shared/_Layout.cshtml`既存の Razor Pages インフラストラクチャを使用する Razor Pages または Blazor Server プロジェクトの場合
+    * `~/Views/Shared/_Layout.cshtml`mvc プロジェクトの場合、または既存の MVC インフラストラクチャを使用する Blazor Server プロジェクトの場合
 * 既存のデータコンテキストを使用するには、オーバーライドするファイルを少なくとも1つ選択します。 データコンテキストを追加するには、少なくとも1つのファイルを選択する必要があります。
   * データコンテキストクラスを選択します。
   * **[追加]** を選択します。
 * 新しいユーザーコンテキストを作成し、場合によっては Id のカスタムユーザークラスを作成するには、次のようにします。
-  * [ **+** ] ボタンを選択して、新しい**データコンテキストクラス**を作成します。
+  * **+** 新しい**データコンテキストクラス**を作成するには、このボタンをクリックします。 既定値をそのまま使用するか、クラス (など) を指定し `MyApplication.Data.ApplicationDbContext` ます。
   * **[追加]** を選択します。
 
 注: 新しいユーザーコンテキストを作成している場合は、上書きするファイルを選択する必要はありません。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-ASP.NET Core scaffolder を以前インストールしていない場合は、今すぐインストールします。
+ASP.NET Core scaffolder をまだインストールしていない場合は、ここでインストールします。
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-必須の NuGet パッケージ参照をプロジェクト (\*.csproj) ファイルに追加します。 プロジェクト ディレクトリに、次のコマンドを実行します。
+必要な NuGet パッケージ参照をプロジェクトファイル (*.csproj*) に追加します。 プロジェクトディレクトリで次のコマンドを実行します。
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -38,7 +38,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 ```
 
-Identity scaffolder オプションを一覧表示するには、次のコマンドを実行します。
+次のコマンドを実行して、Identity scaffolder オプションの一覧を表示します。
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
@@ -49,16 +49,16 @@ dotnet aspnet-codegenerator identity -h
 プロジェクトフォルダーで、必要なオプションを指定して Id scaffolder を実行します。 たとえば、既定の UI とファイルの最小数で id を設定するには、次のコマンドを実行します。 DB コンテキストの正しい完全修飾名を使用します。
 
 ```dotnetcli
-dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login"
+dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login"
 ```
 
-PowerShell では、コマンドの区切り記号としてセミコロンを使用します。 PowerShell を使用する場合は、ファイルの一覧でセミコロンをエスケープするか、ファイルの一覧を二重引用符で囲みます。 例 :
+PowerShell では、コマンドの区切り記号としてセミコロンを使用します。 PowerShell を使用する場合は、ファイルの一覧でセミコロンをエスケープするか、ファイルの一覧を二重引用符で囲みます。 次に例を示します。
 
 ```dotnetcli
-dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
+dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-`--files` フラグまたは `--useDefaultUI` フラグを指定せずに Identity scaffolder を実行すると、使用可能なすべての Id UI ページがプロジェクト内に作成されます。
+フラグやフラグを指定せずに Identity scaffolder を実行すると、 `--files` `--useDefaultUI` 使用可能なすべての id UI ページがプロジェクトに作成されます。
 
 ---
 
@@ -70,37 +70,37 @@ Id scaffolder を実行します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューションエクスプローラー**で、プロジェクトを右クリックして >**新しいスキャフォールディング項目**を**追加**> ます。
-* **[Add スキャフォールディング]** ダイアログボックスの左ペインで、[> **Identity** ] を選択して **[add]** を選択します。
-* **[Id の追加]** ダイアログボックスで、必要なオプションを選択します。
-  * 既存のレイアウトページを選択するか、レイアウトファイルが正しくないマークアップで上書きされます。 既存の *\_Layout*ファイルが選択されている場合、そのファイルは上書きされ**ません**。
-
- 例: MVC プロジェクトの Razor Pages `~/Views/Shared/_Layout.cshtml` の `~/Pages/Shared/_Layout.cshtml`
+* **ソリューションエクスプローラー**で、プロジェクトを右クリックし、[ **Add** > **New スキャフォールディング Item**] > ます。
+* [ **Add スキャフォールディング**] ダイアログボックスの左ペインで、[ **Identity** add] を選択し > **Add**ます。
+* [ **Id の追加**] ダイアログボックスで、必要なオプションを選択します。
+  * 既存のレイアウトページを選択するか、レイアウトファイルが正しくないマークアップで上書きされます。 既存の* \_ Layout*ファイルが選択されている場合、そのファイルは上書きされ**ません**。 次に例を示します。
+    * `~/Pages/Shared/_Layout.cshtml`Razor Pages
+    * `~/Views/Shared/_Layout.cshtml`MVC プロジェクトの場合
 * 既存のデータコンテキストを使用するには、オーバーライドするファイルを少なくとも1つ選択します。 データコンテキストを追加するには、少なくとも1つのファイルを選択する必要があります。
   * データコンテキストクラスを選択します。
   * **[追加]** を選択します。
 * 新しいユーザーコンテキストを作成し、場合によっては Id のカスタムユーザークラスを作成するには、次のようにします。
-  * [ **+** ] ボタンを選択して、新しい**データコンテキストクラス**を作成します。
+  * **+** 新しい**データコンテキストクラス**を作成するには、このボタンをクリックします。 既定値をそのまま使用するか、クラス (など) を指定し `MyApplication.Data.ApplicationDbContext` ます。
   * **[追加]** を選択します。
 
 注: 新しいユーザーコンテキストを作成している場合は、上書きするファイルを選択する必要はありません。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-ASP.NET Core scaffolder を以前インストールしていない場合は、今すぐインストールします。
+ASP.NET Core scaffolder をまだインストールしていない場合は、ここでインストールします。
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-[VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/)にパッケージ参照を追加し、プロジェクト (\*.csproj) ファイルに追加してください。 プロジェクト ディレクトリに、次のコマンドを実行します。
+[VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/)にパッケージ参照を追加し、プロジェクトファイル (*.csproj*) に追加してください。 プロジェクトディレクトリで次のコマンドを実行します。
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-Identity scaffolder オプションを一覧表示するには、次のコマンドを実行します。
+次のコマンドを実行して、Identity scaffolder オプションの一覧を表示します。
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
@@ -109,16 +109,16 @@ dotnet aspnet-codegenerator identity -h
 プロジェクトフォルダーで、必要なオプションを指定して Id scaffolder を実行します。 たとえば、既定の UI とファイルの最小数で id を設定するには、次のコマンドを実行します。 DB コンテキストの正しい完全修飾名を使用します。
 
 ```dotnetcli
-dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login"
+dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login"
 ```
 
-PowerShell では、コマンドの区切り記号としてセミコロンを使用します。 PowerShell を使用する場合は、ファイルの一覧でセミコロンをエスケープするか、ファイルの一覧を二重引用符で囲みます。 例 :
+PowerShell では、コマンドの区切り記号としてセミコロンを使用します。 PowerShell を使用する場合は、ファイルの一覧でセミコロンをエスケープするか、ファイルの一覧を二重引用符で囲みます。 次に例を示します。
 
 ```dotnetcli
-dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
+dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-`--files` フラグまたは `--useDefaultUI` フラグを指定せずに Identity scaffolder を実行すると、使用可能なすべての Id UI ページがプロジェクト内に作成されます。
+フラグやフラグを指定せずに Identity scaffolder を実行すると、 `--files` `--useDefaultUI` 使用可能なすべての id UI ページがプロジェクトに作成されます。
 
 ---
 

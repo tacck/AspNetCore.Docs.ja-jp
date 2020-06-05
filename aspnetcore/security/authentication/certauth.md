@@ -1,17 +1,29 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core で証明書認証を構成する
+author: blowdart
+description: IIS と http.sys の ASP.NET Core で証明書認証を構成する方法について説明します。
+monikerRange: '>= aspnetcore-3.0'
+ms.author: bdorrans
+ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/certauth
+ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454611"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core の[証明書認証](https://tools.ietf.org/html/rfc5246#section-7.4.4)に似た実装が含まれています。 証明書の認証は、TLS レベルで実行されますが、その前に ASP.NET Core になります。 より正確には、これは証明書を検証し、その証明書をに解決できるイベントを提供する認証ハンドラーです `ClaimsPrincipal` 。 
+`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core の[証明書認証](https://tools.ietf.org/html/rfc5246#section-7.4.4)に似た実装が含まれています。 証明書の認証は、ASP.NET Core に到達するずっと前に TLS レベルで実行されます。 より正確には、これは証明書を検証し、その証明書をに解決できるイベントを提供する認証ハンドラーです `ClaimsPrincipal` 。 
 
-証明書認証用に[ホストを構成](#configure-your-host-to-require-certificates)します。これは、IIS、Kestrel、Azure Web Apps など、使用している他のすべてのものになります。
+証明書認証用に[サーバーを構成](#configure-your-server-to-require-certificates)します。これは、IIS、Kestrel、Azure Web Apps など、使用している他の任意のものです。
 
 ## <a name="proxy-and-load-balancer-scenarios"></a>プロキシとロードバランサーのシナリオ
 
@@ -22,9 +34,9 @@ title: author: description: monikerRange: ms.author: ms.date: no-loc:
 
 プロキシとロードバランサーを使用する環境での証明書認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
 
-## <a name="get-started"></a>作業開始
+## <a name="get-started"></a>はじめに
 
-HTTPS 証明書を取得して適用し、証明書を要求するように[ホストを構成](#configure-your-host-to-require-certificates)します。
+HTTPS 証明書を取得して適用し、証明書を要求するように[サーバーを構成](#configure-your-server-to-require-certificates)します。
 
 Web アプリで、パッケージへの参照を追加し `Microsoft.AspNetCore.Authentication.Certificate` ます。 次に、 `Startup.ConfigureServices` メソッドで、オプションを指定してを呼び出し `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 、 `OnCertificateValidated` 要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換 `ClaimsPrincipal` し、プロパティに設定し `context.Principal` ます。
 
@@ -183,7 +195,7 @@ services.AddAuthentication(
 
 概念的には、証明書の検証は承認に関する問題です。 内部ではなく、承認ポリシーの発行者や拇印などのチェックを追加すること `OnCertificateValidated` は、まったく可能です。
 
-## <a name="configure-your-host-to-require-certificates"></a>証明書を要求するようにホストを構成する
+## <a name="configure-your-server-to-require-certificates"></a>証明書を要求するようにサーバーを構成する
 
 ### <a name="kestrel"></a>Kestrel
 

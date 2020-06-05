@@ -1,12 +1,23 @@
 ---
-title: ASP.NET Core web API author でのコントローラーアクションの戻り値の型: scottaddie description: ASP.NET Core web API でのさまざまなコントローラーアクションメソッドの戻り値の型の使用について説明します。
-ms. author: scaddie ms. カスタム: mvc ms. date: 02/03/2020 no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: web api/アクション-戻り値の型
-
+title: ASP.NET Core Web API のコントローラー アクションの戻り値の型
+author: scottaddie
+description: ASP.NET Core Web API でのさまざまなコントローラー アクション メソッドの戻り値の型の使用について説明します。
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 02/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/action-return-types
+ms.openlocfilehash: 57bc91feb9c4242dbea120ee00db1cba46784c61
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253787"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core Web API のコントローラー アクションの戻り値の型
 

@@ -5,7 +5,7 @@ description: HTTP REPL .NET Core グローバル ツールを使用して、ASP.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/11/2019
+ms.date: 05/20/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4d0200cd412cce6eda473a64d132d74d8641db34
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777099"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452214"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL を使用して Web API をテストする
 
@@ -36,13 +36,13 @@ HTTP Read-Eval-Print Loop (REPL) は:
 * [GET](#test-http-get-requests)
 * [矢印](#test-http-head-requests)
 * [オプション](#test-http-options-requests)
-* [PATCH](#test-http-patch-requests)
+* [KB830347](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
 先に進むには、[サンプル ASP.NET Core Web API を表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -56,7 +56,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 [.Net Core グローバル ツール](/dotnet/core/tools/global-tools#install-a-global-tool)は、[Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet パッケージからインストールされます。
 
-## <a name="usage"></a>使用方法
+## <a name="usage"></a>使用法
 
 ツールのインストールが正常に完了したら、次のコマンドを実行して HTTP REPL を開始します。
 
@@ -396,7 +396,7 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 `get` コマンドには以下のオプションを使用できます。
 
@@ -480,7 +480,7 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -550,7 +550,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -560,7 +560,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 HTTP PUT 要求を発行するには、次のようにします。
 
-1. *省略可能*: コマンド`get`を実行して、変更前にデータを表示します。
+1. *省略可能*: コマンドを実行し `get` て、変更前にデータを表示します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -622,7 +622,7 @@ HTTP PUT 要求を発行するには、次のようにします。
     Server: Kestrel
     ```
 
-1. *省略可能*: コマンド`get`を発行して変更を確認します。 たとえば、テキスト エディターで「Cherry」と入力すると、`get` は次を返します。
+1. *省略可能*: コマンドを発行し `get` て変更を確認します。 たとえば、テキスト エディターで「Cherry」と入力すると、`get` は次を返します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -665,7 +665,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -673,7 +673,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 HTTP DELETE 要求を発行するには、次のようにします。
 
-1. *省略可能*: コマンド`get`を実行して、変更前にデータを表示します。
+1. *省略可能*: コマンドを実行し `get` て、変更前にデータを表示します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -713,7 +713,7 @@ HTTP DELETE 要求を発行するには、次のようにします。
     Server: Kestrel
     ```
 
-1. *省略可能*: コマンド`get`を発行して変更を確認します。 この例では、`get` は次を返します。
+1. *省略可能*: コマンドを発行し `get` て変更を確認します。 この例では、`get` は次を返します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -752,7 +752,7 @@ patch <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -772,7 +772,7 @@ head <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:bod
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -790,7 +790,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -820,7 +820,23 @@ HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使
 
 ## <a name="test-secured-endpoints"></a>セキュリティで保護されたエンドポイントをテストする
 
-HTTP REPL では、セキュリティで保護されたエンドポイントの、HTTP 要求ヘッダーを使用したテストがサポートされています。 サポートされている認証および承認スキームの例としては、基本認証、JWT ベアラー トークン、ダイジェスト認証などがあります。 たとえば、次のコマンドを使用して、ベアラー トークンをエンドポイントに送信できます。
+HTTP REPL は、ログインしているユーザーの既定の資格情報を使用する方法と HTTP 要求ヘッダーを使用する方法の2つの方法で、セキュリティで保護されたエンドポイントのテストをサポートしています。 
+
+### <a name="default-credentials"></a>既定の資格情報
+
+テスト対象の web API が IIS でホストされ、Windows 認証で保護されているシナリオについて考えてみます。 ツールを実行するユーザーの資格情報が、テスト対象の HTTP エンドポイントに送信されるようにします。 ログインしているユーザーの既定の資格情報を渡すには、次のようにします。
+
+1. 次の `httpClient.useDefaultCredentials` ように設定し `true` ます。
+
+    ```console
+    pref set httpClient.useDefaultCredentials true
+    ```
+
+1. Web API に別の要求を送信する前に、ツールを終了して再起動します。
+
+### <a name="http-request-headers"></a>HTTP 要求ヘッダー
+
+サポートされている認証および承認スキームの例としては、基本認証、JWT ベアラー トークン、ダイジェスト認証などがあります。 たとえば、次のコマンドを使用して、ベアラー トークンをエンドポイントに送信できます。
 
 ```console
 set header Authorization "bearer <TOKEN VALUE>"
@@ -830,25 +846,25 @@ Azure でホストされたエンドポイントにアクセスしたり、[Azur
 
 1. Azure へのログイン:
 
-    ```azcli
+    ```azurecli
     az login
     ```
 
 1. 次のコマンドで、サブスクリプション ID を取得します。
 
-    ```azcli
+    ```azurecli
     az account show --query id
     ```
 
 1. サブスクリプション ID をコピーし、次のコマンドを実行します。
 
-    ```azcli
+    ```azurecli
     az account set --subscription "<SUBSCRIPTION ID>"
     ```
 
 1. 次のコマンドで、ベアラー トークンを取得します。
 
-    ```azcli
+    ```azurecli
     az account get-access-token --query accessToken
     ```
 

@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Web API から ASP.NET Core への移行
+author: ardalis
+description: Web API の実装を ASP.NET 4.x Web API から ASP.NET Core MVC に移行する方法について説明します。
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/webapi
+ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145552"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API から ASP.NET Core への移行
 
@@ -47,14 +59,14 @@ Visual Studio で新しい空のソリューションを作成し、移行する
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. 空の**ソリューション**テンプレートを選択し、[**次へ**] を選択します。
-1. ソリューションに*WebAPIMigration*という名前を指定します。 **[作成]** を選択します。
+1. ソリューションに*WebAPIMigration*という名前を指定します。 **［作成］** を選択します
 1. 既存の製品*アプリ*プロジェクトをソリューションに追加します。
 
 移行先の新しい API プロジェクトを追加します。
 
 1. 新しい**ASP.NET Core Web アプリケーション**プロジェクトをソリューションに追加します。
 1. [**新しいプロジェクトの構成**] ダイアログで、プロジェクトに*Productscore*という名前を付け、[**作成**] を選択します。
-1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 **[API]** プロジェクト テンプレートを選択し、**[作成]** を選択します。
+1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 **[API]** プロジェクト テンプレートを選択し、 **[作成]** を選択します。
 1. 新しい*Productscore*プロジェクトから*WeatherForecast.cs*と*Controllers/WeatherForecastController*サンプルファイルを削除します。
 
 ソリューションに2つのプロジェクトが含まれるようになりました。 次のセクションでは、 *Productscore*プロジェクトの内容を*productscore*プロジェクトに移行する方法について説明します。
@@ -68,7 +80,7 @@ ASP.NET Core では、 *App_Start*フォルダーや*global.asax*ファイルは
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、「<xref:fundamentals/startup>」を参照してください。
+詳細については、 <xref:fundamentals/startup> を参照してください。
 
 ## <a name="migrate-models-and-controllers"></a>モデルとコントローラーの移行
 
@@ -128,9 +140,9 @@ ASP.NET Core *API*プロジェクトテンプレートには、生成された�
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)アクションに属性を適用し `GetAllProducts` ます。
     * `[HttpGet("{id}")]`アクションに属性を適用し `GetProduct` ます。
 
-移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
+移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 を参照します。 `/api/products/1` 最初の製品が表示されます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -139,7 +151,7 @@ ASP.NET Core *API*プロジェクトテンプレートには、生成された�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>前提条件
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -181,7 +193,7 @@ ASP.NET Core では使用しません。
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、「<xref:fundamentals/startup>」を参照してください。
+詳細については、 <xref:fundamentals/startup> を参照してください。
 
 ASP.NET Core MVC では、がで呼び出されるときに、既定で属性ルーティングが組み込まれてい <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*> `Startup.Configure` ます。 次の呼び出しを実行すると、製品 `UseMvc` *アプリ*プロジェクトの*App_Start*となります。
 
@@ -241,7 +253,7 @@ ASP.NET Core には、次のコンポーネントは存在しません。
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)アクションに属性を適用し `GetAllProducts` ます。
     * `[HttpGet("{id}")]`アクションに属性を適用し `GetProduct` ます。
 
-移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
+移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 を参照します。 `/api/products/1` 最初の製品が表示されます。
 
 ## <a name="compatibility-shim"></a>互換性 shim
 
