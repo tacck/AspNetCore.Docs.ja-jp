@@ -1168,7 +1168,7 @@
       uid: performance/performance-best-practices
     - name: メモリと GC
       uid: performance/memory
-    - name: 応答キャッシュ
+    - name: キャッシュ
       items:
         - name: 概要
           uid: performance/caching/response
