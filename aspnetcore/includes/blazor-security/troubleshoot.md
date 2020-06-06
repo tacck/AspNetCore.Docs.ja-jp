@@ -16,8 +16,12 @@ Cookie とサイトデータは、アプリの更新間で保持され、テス�
 * カスタムコマンドを使用して、Visual Studio でブラウザーを incognito またはプライベートモードで開きます。
   * Visual Studio の [**実行**] ボタンから [**ブラウザーを使用して参照**] ダイアログボックスを開きます。
   * **[追加]** ボタンを選びます。
-  * **Program**フィールドにブラウザーへのパスを指定します。
-  * [**引数**] フィールドに、ブラウザーが incognito モードまたはプライベートモードで開くために使用するコマンドラインオプション、およびアプリの URL を指定します。 次に例を示します。
+  * **Program**フィールドにブラウザーへのパスを指定します。 次の実行可能パスは、Windows 10 の一般的なインストール場所です。 ブラウザーが別の場所にインストールされている場合、または Windows 10 を使用していない場合は、ブラウザーの実行可能ファイルへのパスを指定します。
+    * Microsoft Edge:`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome:`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox:`C:\Program Files\Mozilla Firefox\firefox.exe`
+  * [**引数**] フィールドに、ブラウザーが incognito モードまたはプライベートモードで開くために使用するコマンドラインオプションを指定します。 ブラウザーによっては、アプリの URL が必要になる場合があります。
+    * Microsoft Edge:`-inprivate`
     * Google Chrome:`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox:`-private -url https://localhost:5001`
   * [**フレンドリ名**] フィールドに名前を入力します。 たとえば、「 `Firefox Auth Testing` 」のように入力します。

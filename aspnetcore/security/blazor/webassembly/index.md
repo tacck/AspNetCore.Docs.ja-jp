@@ -1,12 +1,24 @@
 ---
-title:'セキュリティで保護された ASP.NET Core Blazor WebAssembly' 作成者: guardrex 説明:’シングル ページ アプリケーション (SPA) として Blazor WebAssemlby アプリをセキュリティで保護する方法について説明します。’
-monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date:06/01/2020 no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: security/blazor/webassembly/index
-
+title: ASP.NET Core Blazor WebAssembly をセキュリティで保護する
+author: guardrex
+description: シングル ページ アプリケーション (SPA) として Blazor WebAssemlby アプリをセキュリティで保護する方法について説明します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/index
+ms.openlocfilehash: ce780afe3e69d2526698cf3694fe70394fc17847
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253475"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をセキュリティで保護する
 
