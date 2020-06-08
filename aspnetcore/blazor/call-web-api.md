@@ -1,35 +1,47 @@
 ---
-title:'ASP.NET Core Blazor WebAssembly から Web API を呼び出す' author: description:'クロス オリジン リソース共有 (CORS) 要求の作成など、JSON ヘルパーを使用して Blazor WebAssembly アプリから Web API を呼び出す方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: "title:'ASP.NET Core Blazor WebAssembly から Web API を呼び出す' author: guardrex description:'クロス オリジン リソース共有 (CORS) 要求の作成など、JSON ヘルパーを使用して Blazor WebAssembly アプリから Web API を呼び出す方法について説明します。'"
+author: guardrex
+description: "monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date:05/28/2020 no-loc:"
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/call-web-api
+ms.openlocfilehash: 4f3fd1fca075098a94756757474b2cad3cc99775
+ms.sourcegitcommit: d8c35c37c90f81bd2cd7ae5e1700f2fede1b4b75
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84214771"
 ---
-# <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor から Web API を呼び出す
+# <a name="call-a-web-api-from-aspnet-core-blazor"></a>'Blazor'
 
-作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Juan De la Cruz](https://github.com/juandelacruz23)
+'Identity'
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) アプリは、事前に構成された <xref:System.Net.Http.HttpClient> サービスを使用して Web API を呼び出します。 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) オプションを含めることができる要求は、Blazor JSON ヘルパーまたは <xref:System.Net.Http.HttpRequestMessage> を使用して作成ます。 Blazor WebAssembly アプリの <xref:System.Net.Http.HttpClient> サービスは、発行元のサーバーに要求を戻すことに重点を置いています。 このトピックのガイダンスは、Blazor WebAssembly アプリにのみ関連します。
+'Let's Encrypt' 'Razor' 'SignalR' uid: blazor/call-web-api ASP.NET Core Blazor から Web API を呼び出す
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) アプリは、<xref:System.Net.Http.HttpClient> インスタンスを使用して Web API を呼び出します。これは通常、<xref:System.Net.Http.IHttpClientFactory> を使用して作成されます。 このトピックのガイダンスは、Blazor Server アプリには関係しません。 Blazor Server アプリの開発時には、<xref:fundamentals/http-requests> のガイダンスに従ってください。
+作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Juan De la Cruz](https://github.com/juandelacruz23) [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) アプリは、事前に構成された <xref:System.Net.Http.HttpClient> サービスを使用して Web API を呼び出します。 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) オプションを含めることができる要求は、Blazor JSON ヘルパーまたは <xref:System.Net.Http.HttpRequestMessage> を使用して作成ます。
+
+Blazor WebAssembly アプリの <xref:System.Net.Http.HttpClient> サービスは、発行元のサーバーに要求を戻すことに重点を置いています。
+
+このトピックのガイダンスは、Blazor WebAssembly アプリにのみ関連します。
+
+* [Blazor Server](xref:blazor/hosting-models#blazor-server) アプリは、<xref:System.Net.Http.HttpClient> インスタンスを使用して Web API を呼び出します。これは通常、<xref:System.Net.Http.IHttpClientFactory> を使用して作成されます。
+* このトピックのガイダンスは、Blazor Server アプリには関係しません。
+
+## <a name="packages"></a>Blazor Server アプリの開発時には、<xref:fundamentals/http-requests> のガイダンスに従ってください。
 
 [サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([ダウンロード方法](xref:index#how-to-download-a-sample)):*BlazorWebAssemblySample* アプリを選択します。
 
-*BlazorWebAssemblySample* サンプル アプリ内の以下のコンポーネントを参照します。
+## <a name="add-the-httpclient-service"></a>*BlazorWebAssemblySample* サンプル アプリ内の以下のコンポーネントを参照します。
 
-* Web API の呼び出し (*Pages/CallWebAPI.razor*)
-* HTTP 要求テスター (*Components/HTTPRequestTester.razor*)
-
-## <a name="packages"></a>パッケージ
-
-プロジェクト ファイルで [System.Net.Http.Json](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet パッケージを参照します。
-
-## <a name="add-the-httpclient-service"></a>HttpClient サービスを追加する
-
-`Program.Main` で、<xref:System.Net.Http.HttpClient> サービスがまだ存在しない場合は追加します。
+Web API の呼び出し (*Pages/CallWebAPI.razor*)
 
 ```csharp
 builder.Services.AddTransient(sp => 
@@ -39,26 +51,26 @@ builder.Services.AddTransient(sp =>
     });
 ```
 
-## <a name="httpclient-and-json-helpers"></a>HttpClient と JSON ヘルパー
+## <a name="httpclient-and-json-helpers"></a>HTTP 要求テスター (*Components/HTTPRequestTester.razor*)
 
-Blazor WebAssembly アプリでは、[HttpClient](xref:fundamentals/http-requests) は、要求を要求元のサーバーに返すための構成済みのサービスとして利用できます。
+パッケージ
 
-Blazor Server アプリには、既定では <xref:System.Net.Http.HttpClient> サービスが含まれません。 [HttpClient ファクトリ インフラストラクチャ](xref:fundamentals/http-requests)を使用して、アプリに <xref:System.Net.Http.HttpClient> を提供します。
+プロジェクト ファイルで [System.Net.Http.Json](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet パッケージを参照します。 HttpClient サービスを追加する
 
-<xref:System.Net.Http.HttpClient> と JSON のヘルパーは、サード パーティの Web API エンドポイントを呼び出すためにも使用されます。 <xref:System.Net.Http.HttpClient> は、ブラウザーの [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) を使用して実装されており、同一生成元ポリシーの適用を含め、その制限に従います。
+`Program.Main` で、<xref:System.Net.Http.HttpClient> サービスがまだ存在しない場合は追加します。 HttpClient と JSON ヘルパー
 
-クライアントのベース アドレスは、生成元のサーバーのアドレスに設定されます。 <xref:System.Net.Http.HttpClient> インスタンスは [`@inject`](xref:mvc/views/razor#inject) ディレクティブを使用して挿入します。
+Blazor WebAssembly アプリでは、[HttpClient](xref:fundamentals/http-requests) は、要求を要求元のサーバーに返すための構成済みのサービスとして利用できます。 Blazor Server アプリには、既定では <xref:System.Net.Http.HttpClient> サービスが含まれません。
 
 ```razor
 @using System.Net.Http
 @inject HttpClient Http
 ```
 
-以降の例では、Todo Web API によって、(CRUD) 操作の作成、読み取り、更新、および削除が処理されます。 これらの例は、以下を格納する `TodoItem` クラスに基づいています。
+[HttpClient ファクトリ インフラストラクチャ](xref:fundamentals/http-requests)を使用して、アプリに <xref:System.Net.Http.HttpClient> を提供します。 <xref:System.Net.Http.HttpClient> と JSON のヘルパーは、サード パーティの Web API エンドポイントを呼び出すためにも使用されます。
 
-* ID (`Id`、`long`):項目の一意の ID。
-* 名前 (`Name`、`string`):項目の名前。
-* 状態 (`IsComplete`、`bool`):Todo 項目が終了したかどうかを示します。
+* <xref:System.Net.Http.HttpClient> は、ブラウザーの [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) を使用して実装されており、同一生成元ポリシーの適用を含め、その制限に従います。
+* クライアントのベース アドレスは、生成元のサーバーのアドレスに設定されます。
+* <xref:System.Net.Http.HttpClient> インスタンスは [`@inject`](xref:mvc/views/razor#inject) ディレクティブを使用して挿入します。
 
 ```csharp
 private class TodoItem
@@ -69,11 +81,11 @@ private class TodoItem
 }
 ```
 
-JSON のヘルパー メソッドは、要求を URI (次の例では Web API) に送信し、応答を処理します。
+以降の例では、Todo Web API によって、(CRUD) 操作の作成、読み取り、更新、および削除が処理されます。
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>:HTTP GET 要求を送信し、JSON 応答本文を解析してオブジェクトを作成します。
+* これらの例は、以下を格納する `TodoItem` クラスに基づいています。
 
-  次のコードでは、コンポーネントによって `todoItems` が表示されます。 `GetTodoItems` メソッドは、コンポーネントのレンダリングが終了したとき ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)) にトリガーされます。 完全な例についてはサンプル アプリを参照してください。
+  ID (`Id`、`long`):項目の一意の ID。 名前 (`Name`、`string`):項目の名前。 状態 (`IsComplete`、`bool`):Todo 項目が終了したかどうかを示します。
 
   ```razor
   @using System.Net.Http
@@ -87,9 +99,9 @@ JSON のヘルパー メソッドは、要求を URI (次の例では Web API) �
   }
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>:JSON でエンコードされたコンテンツを含め、HTTP POST 要求を送信し、JSON 応答本文を解析してオブジェクトを作成します。
+* JSON のヘルパー メソッドは、要求を URI (次の例では Web API) に送信し、応答を処理します。
 
-  次のコードでは、コンポーネントのバインドされた要素によって `newItemName` が提供されています。 `AddItem` メソッドは、`<button>` 要素を選択することにでトリガーされます。 完全な例についてはサンプル アプリを参照してください。
+  <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>:HTTP GET 要求を送信し、JSON 応答本文を解析してオブジェクトを作成します。 次のコードでは、コンポーネントによって `todoItems` が表示されます。 `GetTodoItems` メソッドは、コンポーネントのレンダリングが終了したとき ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)) にトリガーされます。
 
   ```razor
   @using System.Net.Http
@@ -109,15 +121,15 @@ JSON のヘルパー メソッドは、要求を URI (次の例では Web API) �
   }
   ```
   
-  <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> を呼び出すと、<xref:System.Net.Http.HttpResponseMessage> が返されます。 応答メッセージから JSON コンテンツを逆シリアル化するには、`ReadFromJsonAsync<T>` 拡張メソッドを使用します。
+  完全な例についてはサンプル アプリを参照してください。 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>:JSON でエンコードされたコンテンツを含め、HTTP POST 要求を送信し、JSON 応答本文を解析してオブジェクトを作成します。
   
   ```csharp
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>:JSON でエンコードされたコンテンツを含め、HTTP PUT 要求を送信します。
+* 次のコードでは、コンポーネントのバインドされた要素によって `newItemName` が提供されています。
 
-  次のコードでは、`Name` および `IsCompleted` の `editItem` 値が、コンポーネントのバインドされた要素によって提供されています。 項目の `Id` は、UI の別の部分で項目が選択され、`EditItem` が呼び出されたときに設定されます。 `SaveItem` メソッドは、Save `<button>` 要素を選択することでトリガーされます。 完全な例についてはサンプル アプリを参照してください。
+  `AddItem` メソッドは、`<button>` 要素を選択することにでトリガーされます。 完全な例についてはサンプル アプリを参照してください。 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> を呼び出すと、<xref:System.Net.Http.HttpResponseMessage> が返されます。 応答メッセージから JSON コンテンツを逆シリアル化するには、`ReadFromJsonAsync<T>` 拡張メソッドを使用します。
 
   ```razor
   @using System.Net.Http
@@ -140,15 +152,15 @@ JSON のヘルパー メソッドは、要求を URI (次の例では Web API) �
   }
   ```
   
-  <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> を呼び出すと、<xref:System.Net.Http.HttpResponseMessage> が返されます。 応答メッセージから JSON コンテンツを逆シリアル化するには、<xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 拡張メソッドを使用します。
+  <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>:JSON でエンコードされたコンテンツを含め、HTTP PUT 要求を送信します。 次のコードでは、`Name` および `IsCompleted` の `editItem` 値が、コンポーネントのバインドされた要素によって提供されています。
   
   ```csharp
   var content = response.content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<xref:System.Net.Http> には、HTTP 要求を送信し、HTTP 応答を受信するための追加の拡張メソッドが含まれています。 <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> は、HTTP DELETE 要求を Web API に送信するために使用します。
+項目の `Id` は、UI の別の部分で項目が選択され、`EditItem` が呼び出されたときに設定されます。 `SaveItem` メソッドは、Save `<button>` 要素を選択することでトリガーされます。
 
-次のコードでは、Delete `<button>` 要素で `DeleteItem` メソッドを呼び出しています。 バインドされた `<input>` 要素では、削除する項目の `id` が提供されます。 完全な例についてはサンプル アプリを参照してください。
+完全な例についてはサンプル アプリを参照してください。 <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> を呼び出すと、<xref:System.Net.Http.HttpResponseMessage> が返されます。 応答メッセージから JSON コンテンツを逆シリアル化するには、<xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> 拡張メソッドを使用します。
 
 ```razor
 @using System.Net.Http
@@ -165,18 +177,20 @@ JSON のヘルパー メソッドは、要求を URI (次の例では Web API) �
 }
 ```
 
-## <a name="named-httpclient-with-ihttpclientfactory"></a>IHttpClientFactory を使用する名前付き HttpClient
+## <a name="named-httpclient-with-ihttpclientfactory"></a><xref:System.Net.Http> には、HTTP 要求を送信し、HTTP 応答を受信するための追加の拡張メソッドが含まれています。
 
-<xref:System.Net.Http.IHttpClientFactory> サービスおよび名前付き <xref:System.Net.Http.HttpClient> の構成がサポートされています。
+<xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> は、HTTP DELETE 要求を Web API に送信するために使用します。
 
-`Program.Main` (*Program.cs*):
+次のコードでは、Delete `<button>` 要素で `DeleteItem` メソッドを呼び出しています。
+
+バインドされた `<input>` 要素では、削除する項目の `id` が提供されます。
 
 ```csharp
 builder.Services.AddHttpClient("ServerAPI", client => 
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-`FetchData` コンポーネント (*Pages/FetchData.razor*):
+完全な例についてはサンプル アプリを参照してください。
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -196,11 +210,11 @@ builder.Services.AddHttpClient("ServerAPI", client =>
 }
 ```
 
-## <a name="typed-httpclient"></a>型指定された HttpClient
+## <a name="typed-httpclient"></a>IHttpClientFactory を使用する名前付き HttpClient
 
-型指定された <xref:System.Net.Http.HttpClient> では、1 つ以上のアプリの <xref:System.Net.Http.HttpClient> インスタンス (既定または名前付き) を使用して、1 つ以上の Web API エンドポイントからデータを返します。
+<xref:System.Net.Http.IHttpClientFactory> サービスおよび名前付き <xref:System.Net.Http.HttpClient> の構成がサポートされています。
 
-*WeatherForecastClient.cs*:
+プロジェクト ファイルで [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet パッケージを参照します。
 
 ```csharp
 using System.Net.Http;
@@ -242,9 +256,9 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-コンポーネントによって型指定された <xref:System.Net.Http.HttpClient> が挿入され、Web API が呼び出されます。
-
 `FetchData` コンポーネント (*Pages/FetchData.razor*):
+
+型指定された HttpClient
 
 ```razor
 @inject WeatherForecastClient Client
@@ -261,15 +275,15 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 }
 ```
 
-## <a name="handle-errors"></a>エラーの処理
+## <a name="handle-errors"></a>型指定された <xref:System.Net.Http.HttpClient> では、1 つ以上のアプリの <xref:System.Net.Http.HttpClient> インスタンス (既定または名前付き) を使用して、1 つ以上の Web API エンドポイントからデータを返します。
 
-Web API の操作中にエラーが発生した場合は、開発者コードで処理できます。 たとえば、<xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> では、`Content-Type` が `application/json` のサーバー API からの JSON 応答が想定されています。 応答が JSON 形式ではない場合、コンテンツ検証により <xref:System.NotSupportedException> がスローされます。
+*WeatherForecastClient.cs*: `Program.Main` (*Program.cs*): コンポーネントによって型指定された <xref:System.Net.Http.HttpClient> が挿入され、Web API が呼び出されます。
 
-次の例では、天気予報データ要求の URI エンドポイントのスペルが間違っています。 URI を `WeatherForecast` にする必要がありますが、呼び出しでは `WeatherForcast` と表示されています ("e" がありません)。
+`FetchData` コンポーネント (*Pages/FetchData.razor*): エラーの処理
 
-<xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> の呼び出しでは、JSON が返されることが想定されていますが、`Content-Type` が `text/html` のサーバー上の未処理の例外に対して、サーバーから HTML が返されます。 パスが見つからず、ミドルウェアから要求のページまたはビューを提供できないため、サーバー上で未処理の例外が発生します。
+Web API の操作中にエラーが発生した場合は、開発者コードで処理できます。 たとえば、<xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> では、`Content-Type` が `application/json` のサーバー API からの JSON 応答が想定されています。
 
-クライアント上の <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> では、応答コンテンツが非 JSON であると検証されると <xref:System.NotSupportedException> がスローされます。 例外は `catch` ブロックでキャッチされます。ここでカスタム ロジックを使用してエラーをログに記録したり、わかりやすいエラー メッセージをユーザーに表示したりすることができます。
+応答が JSON 形式ではない場合、コンテンツ検証により <xref:System.NotSupportedException> がスローされます。 次の例では、天気予報データ要求の URI エンドポイントのスペルが間違っています。
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -287,22 +301,22 @@ protected override async Task OnInitializedAsync()
 ```
 
 > [!NOTE]
-> 前の例は、デモンストレーションを目的としています。 エンドポイントが存在しない場合や、サーバー上で未処理の例外が発生した場合でも、JSON を返すように Web API サーバー アプリを構成できます。
+> URI を `WeatherForecast` にする必要がありますが、呼び出しでは `WeatherForcast` と表示されています ("e" がありません)。 <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> の呼び出しでは、JSON が返されることが想定されていますが、`Content-Type` が `text/html` のサーバー上の未処理の例外に対して、サーバーから HTML が返されます。
 
-詳細については、「<xref:blazor/handle-errors>」を参照してください。
+パスが見つからず、ミドルウェアから要求のページまたはビューを提供できないため、サーバー上で未処理の例外が発生します。
 
-## <a name="cross-origin-resource-sharing-cors"></a>クロスオリジン リソース共有 (CORS)
+## <a name="cross-origin-resource-sharing-cors"></a>クライアント上の <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> では、応答コンテンツが非 JSON であると検証されると <xref:System.NotSupportedException> がスローされます。
 
-Web ページでは、ブラウザーのセキュリティにより、その Web ページを提供したドメインと異なるドメインに対して要求を行うことはできません。 この制限は、*同一オリジン ポリシー*と呼ばれます。 同一オリジン ポリシーにより、悪意のあるサイトが別のサイトから機密データを読み取れないようになっています。 オリジンが異なるエンドポイントへの要求をブラウザーから行うには、*エンドポイント*で[クロス オリジン リソース共有 (CORS)](https://www.w3.org/TR/cors/) を有効にする必要があります。
+例外は `catch` ブロックでキャッチされます。ここでカスタム ロジックを使用してエラーをログに記録したり、わかりやすいエラー メッセージをユーザーに表示したりすることができます。 前の例は、デモンストレーションを目的としています。 エンドポイントが存在しない場合や、サーバー上で未処理の例外が発生した場合でも、JSON を返すように Web API サーバー アプリを構成できます。 詳細については、「<xref:blazor/handle-errors>」を参照してください。
 
-[Blazor WebAssembly サンプル アプリ (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) は、呼び出し Web API コンポーネント (*Pages/CallWebAPI.razor*) で CORS を使用する具体的な方法を示しています。
+クロスオリジン リソース共有 (CORS)
 
-他のサイトがアプリに対してクロス オリジン リソース共有 (CORS) 要求を行えるようにするには、「<xref:security/cors>」を参照してください。
+Web ページでは、ブラウザーのセキュリティにより、その Web ページを提供したドメインと異なるドメインに対して要求を行うことはできません。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>この制限は、*同一オリジン ポリシー*と呼ばれます。
 
-* <xref:security/blazor/webassembly/additional-scenarios>:<xref:System.Net.Http.HttpClient> を使用してセキュリティで保護された Web API 要求を作成する方法について説明します。
+* 同一オリジン ポリシーにより、悪意のあるサイトが別のサイトから機密データを読み取れないようになっています。
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
-* [Kestrel HTTPS エンドポイントの構成](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [W3C におけるクロスオリジン リソース共有 (CORS)](https://www.w3.org/TR/cors/)
+* オリジンが異なるエンドポイントへの要求をブラウザーから行うには、*エンドポイント*で[クロス オリジン リソース共有 (CORS)](https://www.w3.org/TR/cors/) を有効にする必要があります。
+* [Blazor WebAssembly サンプル アプリ (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) は、呼び出し Web API コンポーネント (*Pages/CallWebAPI.razor*) で CORS を使用する具体的な方法を示しています。

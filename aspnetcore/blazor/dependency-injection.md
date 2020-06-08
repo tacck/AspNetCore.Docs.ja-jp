@@ -1,90 +1,53 @@
 ---
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: "title:'ASP.NET Core Blazor 依存関係の挿入' author: guardrex description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'"
+author: guardrex
+description: "monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date:05/19/2020 no-loc:"
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/dependency-injection
+ms.openlocfilehash: d5b0747fb0505499197d1751511600bd91fed41d
+ms.sourcegitcommit: 5fe724d143825ca799e5bd03fb45b632ea4aa7d5
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84271784"
 ---
-# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 依存関係の挿入
+# <a name="aspnet-core-blazor-dependency-injection"></a>'Blazor'
 
-作成者: [Rainer Stropek](https://www.timecockpit.com)、[Mike Rousos](https://github.com/mjrousos)
+'Identity'
 
-Blazor では、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) がサポートされています。 アプリでは、組み込みサービスをコンポーネントに挿入することにより、サービスを使用できます。 また、アプリでは、カスタム サービスを定義して登録し、DI によってアプリ全体でそれを使用できるようにすることもできます。
+'Let's Encrypt' 'Razor' 'SignalR' uid: blazor/dependency-injection
 
-DI は、中央の場所で構成されたサービスにアクセスするための手法です。 これは、Blazor アプリで次のような場合に役立ちます。
+ASP.NET Core Blazor 依存関係の挿入 作成者: [Rainer Stropek](https://www.timecockpit.com)、[Mike Rousos](https://github.com/mjrousos)
 
-* サービス クラスの 1 つのインスタンスを、多数のコンポーネント間で共有します。これは、"*シングルトン*" サービスと呼ばれます。
-* 参照の抽象化を使用することで、具象サービス クラスからコンポーネントを切り離します。 たとえば、アプリ内のデータにアクセスするためのインターフェイス `IDataAccess` について考えます。 このインターフェイスは、具象クラス `DataAccess` によって実装され、アプリのサービス コンテナーにサービスとして登録されます。 コンポーネントで DI を使用して `IDataAccess` の実装を受け取ると、コンポーネントは具象型に結合されません。 たとえば単体テストでのモック実装の場合など、実装をスワップすることができます。
+* Blazor では、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) がサポートされています。
+* アプリでは、組み込みサービスをコンポーネントに挿入することにより、サービスを使用できます。 また、アプリでは、カスタム サービスを定義して登録し、DI によってアプリ全体でそれを使用できるようにすることもできます。 DI は、中央の場所で構成されたサービスにアクセスするための手法です。 これは、Blazor アプリで次のような場合に役立ちます。 サービス クラスの 1 つのインスタンスを、多数のコンポーネント間で共有します。これは、"*シングルトン*" サービスと呼ばれます。
 
-## <a name="default-services"></a>既定のサービス
+## <a name="default-services"></a>参照の抽象化を使用することで、具象サービス クラスからコンポーネントを切り離します。
 
-既定のサービスは、アプリのサービス コレクションに自動的に追加されます。
+たとえば、アプリ内のデータにアクセスするためのインターフェイス `IDataAccess` について考えます。
 
-| サービス | 有効期間 | 説明 |
-| ---
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+| このインターフェイスは、具象クラス `DataAccess` によって実装され、アプリのサービス コンテナーにサービスとして登録されます。 | コンポーネントで DI を使用して `IDataAccess` の実装を受け取ると、コンポーネントは具象型に結合されません。 | たとえば単体テストでのモック実装の場合など、実装をスワップすることができます。 |
+| ------- | -------- | ----------- |
+| <xref:System.Net.Http.HttpClient> | 既定のサービス | 既定のサービスは、アプリのサービス コレクションに自動的に追加されます。<br><br>サービス<br><br>有効期間 説明<br><br>一時的 |
+| <xref:Microsoft.JSInterop.IJSRuntime> | URI によって識別されるリソースに HTTP 要求を送信し、そのリソースから HTTP 応答を受信するためのメソッドが提供されます。<br>Blazor WebAssembly アプリの <xref:System.Net.Http.HttpClient> のインスタンスでは、バックグラウンドでの HTTP トラフィックの処理にブラウザーが使用されます。 | Blazor サーバー アプリには、既定でサービスとして構成される <xref:System.Net.Http.HttpClient> は含まれません。 Blazor サーバー アプリには <xref:System.Net.Http.HttpClient> を指定します。 |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager> | 詳細については、「<xref:blazor/call-web-api>」を参照してください。<br>シングルトン (Blazor WebAssembly) | スコープ (Blazor サーバー) JavaScript の呼び出しがディスパッチされる JavaScript ランタイムのインスタンスを表します。 |
 
----- | --- title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+詳細については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。 シングルトン (Blazor WebAssembly)
 
--
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+## <a name="add-services-to-an-app"></a>スコープ (Blazor サーバー)
 
----- | --- title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+### <a name="blazor-webassembly"></a>URI とナビゲーション状態を操作するためのヘルパーが含まれます。
 
--
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | | <xref:System.Net.Http.HttpClient> | 一時的 | URI によって識別されるリソースに HTTP 要求を送信し、そのリソースから HTTP 応答を受信するためのメソッドが提供されます。<br><br>Blazor WebAssembly アプリの <xref:System.Net.Http.HttpClient> のインスタンスでは、バックグラウンドでの HTTP トラフィックの処理にブラウザーが使用されます。<br><br>Blazor サーバー アプリには、既定でサービスとして構成される <xref:System.Net.Http.HttpClient> は含まれません。 Blazor サーバー アプリには <xref:System.Net.Http.HttpClient> を指定します。<br><br>詳細については、「<xref:blazor/call-web-api>」を参照してください。 | | <xref:Microsoft.JSInterop.IJSRuntime> | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | JavaScript の呼び出しがディスパッチされる JavaScript ランタイムのインスタンスを表します。 詳細については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。 | | <xref:Microsoft.AspNetCore.Components.NavigationManager> | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | URI とナビゲーション状態を操作するためのヘルパーが含まれます。 詳細については、「[URI およびナビゲーション状態ヘルパー](xref:blazor/routing#uri-and-navigation-state-helpers)」を参照してください。 |
-
-カスタム サービス プロバイダーでは、表に示されている既定のサービスは自動的に提供されません。 カスタム サービス プロバイダーを使用し、表に示されているいずれかのサービスが必要な場合は、必要なサービスを新しいサービス プロバイダーに追加します。
-
-## <a name="add-services-to-an-app"></a>サービスをアプリに追加する
-
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
-
-*Program.cs* の `Main` メソッドで、アプリのサービス コレクション用のサービスを構成します。 次の例では、`MyDependency` の実装が `IMyDependency` に登録されます。
+詳細については、「[URI およびナビゲーション状態ヘルパー](xref:blazor/routing#uri-and-navigation-state-helpers)」を参照してください。 カスタム サービス プロバイダーでは、表に示されている既定のサービスは自動的に提供されません。
 
 ```csharp
 public class Program
@@ -100,7 +63,7 @@ public class Program
 }
 ```
 
-ホストが構築されると、コンポーネントがレンダリングされる前に、ルート DI スコープからサービスにアクセスできるようになります。 これは、コンテンツをレンダリングする前に初期化ロジックを実行する場合に役に立ちます。
+カスタム サービス プロバイダーを使用し、表に示されているいずれかのサービスが必要な場合は、必要なサービスを新しいサービス プロバイダーに追加します。 サービスをアプリに追加する
 
 ```csharp
 public class Program
@@ -121,7 +84,7 @@ public class Program
 }
 ```
 
-また、ホストでは、アプリの中央構成インスタンスも提供されます。 前の例を基にして、天気予報サービスの URL を、既定の構成ソース (*appsettings.json* など) から `InitializeWeatherAsync` に渡します。
+Blazor WebAssembly *Program.cs* の `Main` メソッドで、アプリのサービス コレクション用のサービスを構成します。
 
 ```csharp
 public class Program
@@ -143,9 +106,9 @@ public class Program
 }
 ```
 
-### <a name="blazor-server"></a>Blazor サーバー
+### <a name="blazor-server"></a>次の例では、`MyDependency` の実装が `IMyDependency` に登録されます。
 
-新しいアプリを作成した後、`Startup.ConfigureServices` メソッドを調べます。
+ホストが構築されると、コンポーネントがレンダリングされる前に、ルート DI スコープからサービスにアクセスできるようになります。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -154,7 +117,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A> メソッドには、サービス記述子オブジェクト (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>) のリストである <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> が渡されます。 サービスは、サービス コレクションにサービス記述子を提供することによって追加されます。 次の例では、`IDataAccess` インターフェイスとその具象実装 `DataAccess` での概念を示します。
+これは、コンテンツをレンダリングする前に初期化ロジックを実行する場合に役に立ちます。 また、ホストでは、アプリの中央構成インスタンスも提供されます。 前の例を基にして、天気予報サービスの URL を、既定の構成ソース (*appsettings.json* など) から `InitializeWeatherAsync` に渡します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -163,75 +126,34 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### <a name="service-lifetime"></a>サービスの有効期間
+### <a name="service-lifetime"></a>Blazor サーバー
 
-サービスは、次の表に示す有効期間で構成できます。
+新しいアプリを作成した後、`Startup.ConfigureServices` メソッドを調べます。
 
-| 有効期間 | 説明 |
-| ---
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+| <xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A> メソッドには、サービス記述子オブジェクト (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>) のリストである <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> が渡されます。 | サービスは、サービス コレクションにサービス記述子を提供することによって追加されます。 |
+| -------- | ----------- |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | 次の例では、`IDataAccess` インターフェイスとその具象実装 `DataAccess` での概念を示します。 サービスの有効期間 サービスは、次の表に示す有効期間で構成できます。 有効期間 説明 |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | 現在、Blazor WebAssembly には DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。 |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | ただし、Blazor サーバー ホスティング モデルでは、`Scoped` 有効期間がサポートされています。 |
 
--
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+Blazor サーバー アプリでは、スコープ サービスの登録は "*接続*" にスコープされます。 このため、現在の目的がブラウザーでクライアント側を実行する場合でも、現在のユーザーにスコープする必要があるサービスの場合は、スコープ サービスを使用することが推奨されます。
 
----- | --- title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+## <a name="request-a-service-in-a-component"></a>DI では、サービスの "*単一インスタンス*" が作成されます。
 
--
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+`Singleton` サービスを必要とするすべてのコンポーネントは、同じサービスのインスタンスを受け取ります。 コンポーネントは、サービス コンテナーから `Transient` サービスのインスタンスを取得するたびに、サービスの "*新しいインスタンス*" を受け取ります。
 
--
-title:'ASP.NET Core Blazor 依存関係の挿入' author: description:'Blazor アプリでコンポーネントにサービスを挿入する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+* DI システムは、ASP.NET Core の DI システムが基になっています。
+* 詳細については、「<xref:fundamentals/dependency-injection>」を参照してください。 コンポーネント内のサービスを要求する サービスがサービス コレクションに追加された後、[\@inject](xref:mvc/views/razor#inject) Razor ディレクティブを使用して、サービスをコンポーネントに挿入します。
 
------- | | 現在、<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly には DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。 ただし、Blazor サーバー ホスティング モデルでは、`Scoped` 有効期間がサポートされています。 Blazor サーバー アプリでは、スコープ サービスの登録は "*接続*" にスコープされます。 このため、現在の目的がブラウザーでクライアント側を実行する場合でも、現在のユーザーにスコープする必要があるサービスの場合は、スコープ サービスを使用することが推奨されます。 | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI では、サービスの "*単一インスタンス*" が作成されます。 `Singleton` サービスを必要とするすべてのコンポーネントは、同じサービスのインスタンスを受け取ります。 | | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | コンポーネントは、サービス コンテナーから `Transient` サービスのインスタンスを取得するたびに、サービスの "*新しいインスタンス*" を受け取ります。 |
+[`@inject`](xref:mvc/views/razor#inject) には、次の 2 つのパラメーターがあります。
 
-DI システムは、ASP.NET Core の DI システムが基になっています。 詳細については、「<xref:fundamentals/dependency-injection>」を参照してください。
+型:挿入するサービスの型。
 
-## <a name="request-a-service-in-a-component"></a>コンポーネント内のサービスを要求する
-
-サービスがサービス コレクションに追加された後、[\@inject](xref:mvc/views/razor#inject) Razor ディレクティブを使用して、サービスをコンポーネントに挿入します。 [`@inject`](xref:mvc/views/razor#inject) には、次の 2 つのパラメーターがあります。
-
-* 型:挿入するサービスの型。
-* プロパティ:挿入されたアプリ サービスを受け取るプロパティの名前。 プロパティを手動で作成する必要はありません。 プロパティはコンパイラによって作成されます。
-
-詳細については、「<xref:mvc/views/dependency-injection>」を参照してください。
-
-異なるサービスを挿入するには、複数の [`@inject`](xref:mvc/views/razor#inject) ステートメントを使用します。
-
-次の例は、[`@inject`](xref:mvc/views/razor#inject) を使用する方法を示しています。 `Services.IDataAccess` を実装するサービスを、コンポーネントのプロパティ `DataRepository` に挿入します。 コードによって `IDataAccess` 抽象化だけが使用されていることに注意してください。
+プロパティ:挿入されたアプリ サービスを受け取るプロパティの名前。 プロパティを手動で作成する必要はありません。 プロパティはコンパイラによって作成されます。
 
 [!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,20)]
 
-内部的には、生成されたプロパティ (`DataRepository`) によって、[`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性が使用されます。 通常、この属性を直接使用することはありません。 コンポーネントで基底クラスが必要であり、基底クラスで挿入されたプロパティも必要な場合は、[`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性を手動で追加します。
+詳細については、「<xref:mvc/views/dependency-injection>」を参照してください。 異なるサービスを挿入するには、複数の [`@inject`](xref:mvc/views/razor#inject) ステートメントを使用します。 次の例は、[`@inject`](xref:mvc/views/razor#inject) を使用する方法を示しています。
 
 ```csharp
 public class ComponentBase : IComponent
@@ -243,7 +165,7 @@ public class ComponentBase : IComponent
 }
 ```
 
-基底クラスから派生されたコンポーネントでは、[`@inject`](xref:mvc/views/razor#inject) ディレクティブは必要ありません。 基底クラスの <xref:Microsoft.AspNetCore.Components.InjectAttribute> で十分です。
+`Services.IDataAccess` を実装するサービスを、コンポーネントのプロパティ `DataRepository` に挿入します。 コードによって `IDataAccess` 抽象化だけが使用されていることに注意してください。
 
 ```razor
 @page "/demo"
@@ -252,9 +174,9 @@ public class ComponentBase : IComponent
 <h1>Demo Component</h1>
 ```
 
-## <a name="use-di-in-services"></a>サービスで DI を使用する
+## <a name="use-di-in-services"></a>内部的には、生成されたプロパティ (`DataRepository`) によって、[`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性が使用されます。
 
-複雑なサービスでは、追加のサービスが必要になる場合があります。 前の例では、`DataAccess` で <xref:System.Net.Http.HttpClient> の既定のサービスが必要になる場合があります。 [`@inject`](xref:mvc/views/razor#inject) (または [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性) は、サービスでは使用できません。 代わりに、"*コンストラクター挿入*" を使用する必要があります。 サービスのコンストラクターにパラメーターを追加することによって、必要なサービスが追加されます。 DI では、サービスを作成するときに、コンストラクターで必要なサービスが認識され、それに応じてサービスが提供されます。
+通常、この属性を直接使用することはありません。 コンポーネントで基底クラスが必要であり、基底クラスで挿入されたプロパティも必要な場合は、[`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性を手動で追加します。 基底クラスから派生されたコンポーネントでは、[`@inject`](xref:mvc/views/razor#inject) ディレクティブは必要ありません。 基底クラスの <xref:Microsoft.AspNetCore.Components.InjectAttribute> で十分です。 サービスで DI を使用する 複雑なサービスでは、追加のサービスが必要になる場合があります。
 
 ```csharp
 public class DataAccess : IDataAccess
@@ -268,26 +190,26 @@ public class DataAccess : IDataAccess
 }
 ```
 
-コンストラクター挿入の前提条件:
+前の例では、`DataAccess` で <xref:System.Net.Http.HttpClient> の既定のサービスが必要になる場合があります。
 
-* DI によってすべての引数を満たすことができるコンストラクターが 1 つ存在する必要があります。 DI で満たすことができない追加のパラメーターは、既定値が指定されている場合に許可されます。
-* 該当するコンストラクターは、*public* である必要があります。
-* 該当するコンストラクターが 1 つ存在する必要があります。 あいまいさがある場合は、DI で例外がスローされます。
+* [`@inject`](xref:mvc/views/razor#inject) (または [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性) は、サービスでは使用できません。 代わりに、"*コンストラクター挿入*" を使用する必要があります。
+* サービスのコンストラクターにパラメーターを追加することによって、必要なサービスが追加されます。
+* DI では、サービスを作成するときに、コンストラクターで必要なサービスが認識され、それに応じてサービスが提供されます。 コンストラクター挿入の前提条件:
 
-## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>DI スコープを管理するためのユーティリティの基本コンポーネント クラス
+## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>DI によってすべての引数を満たすことができるコンストラクターが 1 つ存在する必要があります。
 
-ASP.NET Core アプリでは、スコープ サービスは通常、現在の要求にスコープされます。 要求が完了すると、スコープ サービスまたは一時サービスは DI システムによって破棄されます。 Blazor サーバー アプリでは、要求スコープはクライアント接続の期間を通して保持されるため、一時サービスとスコープ サービスが予想よりはるかに長く存続する可能性があります。 Blazor WebAssembly アプリでは、スコープ付きの有効期間で登録されたサービスはシングルトンとして扱われるため、通常の ASP.NET Core アプリのスコープ サービスより長く存続します。
+DI で満たすことができない追加のパラメーターは、既定値が指定されている場合に許可されます。 該当するコンストラクターは、*public* である必要があります。 該当するコンストラクターが 1 つ存在する必要があります。 あいまいさがある場合は、DI で例外がスローされます。
 
-Blazor アプリでサービスの有効期間を制限するには、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> 型を使用します。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase> は <xref:Microsoft.AspNetCore.Components.ComponentBase> から派生された抽象型であり、コンポーネントの有効期間に対応する DI スコープを作成します。 このスコープを使用すると、スコープ付きの有効期間で DI サービスを使用し、コンポーネントと同じ期間だけ持続させることができます。 コンポーネントが破棄されると、コンポーネントのスコープ サービス プロバイダーからのサービスも破棄されます。 これは、次のようなサービスに役立ちます。
+DI スコープを管理するためのユーティリティの基本コンポーネント クラス ASP.NET Core アプリでは、スコープ サービスは通常、現在の要求にスコープされます。 要求が完了すると、スコープ サービスまたは一時サービスは DI システムによって破棄されます。 Blazor サーバー アプリでは、要求スコープはクライアント接続の期間を通して保持されるため、一時サービスとスコープ サービスが予想よりはるかに長く存続する可能性があります。 Blazor WebAssembly アプリでは、スコープ付きの有効期間で登録されたサービスはシングルトンとして扱われるため、通常の ASP.NET Core アプリのスコープ サービスより長く存続します。
 
-* 一時的な有効期間が不適切であるため、コンポーネント内で再利用する必要がある。
-* シングルトンの有効期間が不適切であるため、コンポーネント間で共有してはならない。
+* Blazor アプリでサービスの有効期間を制限するには、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> 型を使用します。
+* <xref:Microsoft.AspNetCore.Components.OwningComponentBase> は <xref:Microsoft.AspNetCore.Components.ComponentBase> から派生された抽象型であり、コンポーネントの有効期間に対応する DI スコープを作成します。
 
-<xref:Microsoft.AspNetCore.Components.OwningComponentBase> 型には、使用できるバージョンが 2 つあります。
+このスコープを使用すると、スコープ付きの有効期間で DI サービスを使用し、コンポーネントと同じ期間だけ持続させることができます。
 
-* <xref:Microsoft.AspNetCore.Components.OwningComponentBase> は、<xref:Microsoft.AspNetCore.Components.ComponentBase> 型の抽象的で破棄可能な子であり、<xref:System.IServiceProvider>型の保護された <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> プロパティがあります。 このプロバイダーを使用すると、コンポーネントの有効期間にスコープが設定されているサービスを解決できます。
+* コンポーネントが破棄されると、コンポーネントのスコープ サービス プロバイダーからのサービスも破棄されます。 これは、次のようなサービスに役立ちます。
 
-  [`@inject`](xref:mvc/views/razor#inject) または [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性を使用してコンポーネントに挿入された DI サービスは、コンポーネントのスコープでは作成されません。 コンポーネントのスコープを使用するには、<xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> または <xref:System.IServiceProvider.GetService%2A> を使用してサービスを解決する必要があります。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> プロバイダーを使用して解決されたすべてのサービスには、同じスコープから提供される依存関係があります。
+  一時的な有効期間が不適切であるため、コンポーネント内で再利用する必要がある。 シングルトンの有効期間が不適切であるため、コンポーネント間で共有してはならない。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase> 型には、使用できるバージョンが 2 つあります。
 
   ```razor
   @page "/preferences"
@@ -315,7 +237,7 @@ Blazor アプリでサービスの有効期間を制限するには、<xref:Micr
   }
   ```
 
-* <xref:Microsoft.AspNetCore.Components.OwningComponentBase> から派生する <xref:Microsoft.AspNetCore.Components.OwningComponentBase%601> では、スコープ DI プロバイダーから `T` のインスタンスを返すプロパティ <xref:Microsoft.AspNetCore.Components.OwningComponentBase%601.Service%2A> が追加されます。 この型は、アプリで 1 つのプライマリ サービスをコンポーネントのスコープを使用して DI コンテナーに要求するときに、<xref:System.IServiceProvider> のインスタンスを使用せずにスコープ サービスにアクセスするための便利な方法です。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> プロパティを使用できるので、必要に応じて、アプリで他の型のサービスを取得できます。
+* <xref:Microsoft.AspNetCore.Components.OwningComponentBase> は、<xref:Microsoft.AspNetCore.Components.ComponentBase> 型の抽象的で破棄可能な子であり、<xref:System.IServiceProvider>型の保護された <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> プロパティがあります。 このプロバイダーを使用すると、コンポーネントの有効期間にスコープが設定されているサービスを解決できます。 [`@inject`](xref:mvc/views/razor#inject) または [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性を使用してコンポーネントに挿入された DI サービスは、コンポーネントのスコープでは作成されません。
 
   ```razor
   @page "/users"
@@ -332,18 +254,18 @@ Blazor アプリでサービスの有効期間を制限するには、<xref:Micr
   </ul>
   ```
 
-## <a name="use-of-entity-framework-dbcontext-from-di"></a>DI からの Entity Framework の DbContext の使用
+## <a name="use-of-entity-framework-dbcontext-from-di"></a>コンポーネントのスコープを使用するには、<xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> または <xref:System.IServiceProvider.GetService%2A> を使用してサービスを解決する必要があります。
 
-Web アプリで DI から取得する一般的なサービスの型の 1 つは、Entity Framework (EF) の <xref:Microsoft.EntityFrameworkCore.DbContext> オブジェクトです。 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> を使用して EF サービスを登録すると、既定ではスコープ サービスとして <xref:Microsoft.EntityFrameworkCore.DbContext> が追加されます。 スコープ サービスとして登録すると、<xref:Microsoft.EntityFrameworkCore.DbContext> のインスタンスの有効期間が長くなり、アプリ全体で共有されるため、Blazor アプリで問題が発生する可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッドセーフではなく、同時に使用することはできません。
+<xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> プロバイダーを使用して解決されたすべてのサービスには、同じスコープから提供される依存関係があります。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase> から派生する <xref:Microsoft.AspNetCore.Components.OwningComponentBase%601> では、スコープ DI プロバイダーから `T` のインスタンスを返すプロパティ <xref:Microsoft.AspNetCore.Components.OwningComponentBase%601.Service%2A> が追加されます。 この型は、アプリで 1 つのプライマリ サービスをコンポーネントのスコープを使用して DI コンテナーに要求するときに、<xref:System.IServiceProvider> のインスタンスを使用せずにスコープ サービスにアクセスするための便利な方法です。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> プロパティを使用できるので、必要に応じて、アプリで他の型のサービスを取得できます。
 
-アプリによっては、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> を使用して <xref:Microsoft.EntityFrameworkCore.DbContext> のスコープを 1 つのコンポーネントに限定することで、問題が解決する "*場合があります*"。 コンポーネントで <xref:Microsoft.EntityFrameworkCore.DbContext> が並列に使用されていない場合は、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> からコンポーネントを派生させ、<xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> から <xref:Microsoft.EntityFrameworkCore.DbContext> を取得すれば、次のことが保証されるため、他には何も必要ありません。
+DI からの Entity Framework の DbContext の使用 Web アプリで DI から取得する一般的なサービスの型の 1 つは、Entity Framework (EF) の <xref:Microsoft.EntityFrameworkCore.DbContext> オブジェクトです。
+
+* <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> を使用して EF サービスを登録すると、既定ではスコープ サービスとして <xref:Microsoft.EntityFrameworkCore.DbContext> が追加されます。
+* スコープ サービスとして登録すると、<xref:Microsoft.EntityFrameworkCore.DbContext> のインスタンスの有効期間が長くなり、アプリ全体で共有されるため、Blazor アプリで問題が発生する可能性があります。
+
+<xref:Microsoft.EntityFrameworkCore.DbContext> はスレッドセーフではなく、同時に使用することはできません。 アプリによっては、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> を使用して <xref:Microsoft.EntityFrameworkCore.DbContext> のスコープを 1 つのコンポーネントに限定することで、問題が解決する "*場合があります*"。 コンポーネントで <xref:Microsoft.EntityFrameworkCore.DbContext> が並列に使用されていない場合は、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> からコンポーネントを派生させ、<xref:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices> から <xref:Microsoft.EntityFrameworkCore.DbContext> を取得すれば、次のことが保証されるため、他には何も必要ありません。
 
 * 個別のコンポーネントで <xref:Microsoft.EntityFrameworkCore.DbContext> が共有されません。
-* <xref:Microsoft.EntityFrameworkCore.DbContext> は、それに依存するコンポーネントと同じ期間だけ存在します。
-
-1 つのコンポーネントで <xref:Microsoft.EntityFrameworkCore.DbContext> が同時に使用される可能性がある場合は (たとえば、ユーザーがボタンを選択するたび)、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> を使用しても、EF の同時操作に関する問題を回避することはできません。 その場合は、論理 EF 操作ごとに別の <xref:Microsoft.EntityFrameworkCore.DbContext> を使用します。 次のいずれかの方法を使用します。
-
-* 引数として <xref:Microsoft.EntityFrameworkCore.DbContextOptions%601> を使用して、<xref:Microsoft.EntityFrameworkCore.DbContext> を直接作成します。これは DI から取得でき、スレッドセーフです。
 
     ```razor
     @page "/example"
@@ -377,8 +299,8 @@ Web アプリで DI から取得する一般的なサービスの型の 1 つは
     }
     ```
 
-* 一時的な有効期間を使用して、サービス コンテナーに <xref:Microsoft.EntityFrameworkCore.DbContext> を登録します。
-  * コンテキストを登録するときに、<xref:Microsoft.OData.ServiceLifetime.Transient?displayProperty=nameWithType> を使用します。 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張メソッドは、<xref:Microsoft.Extensions.DependencyInjection.ServiceLifetime> 型の 2 つの省略可能なパラメーターを受け取ります。 この方法を使用するには、`contextLifetime` パラメーターだけを <xref:Microsoft.OData.ServiceLifetime.Transient?displayProperty=nameWithType> にする必要があります。 `optionsLifetime` は、既定値である <xref:Microsoft.OData.ServiceLifetime.Scoped?displayProperty=nameWithType> のままにできます。
+* <xref:Microsoft.EntityFrameworkCore.DbContext> は、それに依存するコンポーネントと同じ期間だけ存在します。
+  * 1 つのコンポーネントで <xref:Microsoft.EntityFrameworkCore.DbContext> が同時に使用される可能性がある場合は (たとえば、ユーザーがボタンを選択するたび)、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> を使用しても、EF の同時操作に関する問題を回避することはできません。 その場合は、論理 EF 操作ごとに別の <xref:Microsoft.EntityFrameworkCore.DbContext> を使用します。 次のいずれかの方法を使用します。 引数として <xref:Microsoft.EntityFrameworkCore.DbContextOptions%601> を使用して、<xref:Microsoft.EntityFrameworkCore.DbContext> を直接作成します。これは DI から取得でき、スレッドセーフです。
 
     ```csharp
     services.AddDbContext<AppDbContext>(options =>
@@ -386,7 +308,7 @@ Web アプリで DI から取得する一般的なサービスの型の 1 つは
          ServiceLifetime.Transient);
     ```  
 
-  * 一時的な <xref:Microsoft.EntityFrameworkCore.DbContext> は、複数の EF 操作を並列に実行しないコンポーネントに、通常通りに ([`@inject`](xref:mvc/views/razor#inject) を使用して) 挿入できます。 複数の EF 操作を同時に実行する可能性がある場合は、<xref:Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService%2A> を使用して、並列操作ごとに個別の <xref:Microsoft.EntityFrameworkCore.DbContext> オブジェクトを要求できます。
+  * 一時的な有効期間を使用して、サービス コンテナーに <xref:Microsoft.EntityFrameworkCore.DbContext> を登録します。 コンテキストを登録するときに、<xref:Microsoft.OData.ServiceLifetime.Transient?displayProperty=nameWithType> を使用します。
 
     ```razor
     @page "/example"
@@ -421,7 +343,8 @@ Web アプリで DI から取得する一般的なサービスの型の 1 つは
     }
     ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a><xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張メソッドは、<xref:Microsoft.Extensions.DependencyInjection.ServiceLifetime> 型の 2 つの省略可能なパラメーターを受け取ります。
 
 * <xref:fundamentals/dependency-injection>
+* この方法を使用するには、`contextLifetime` パラメーターだけを <xref:Microsoft.OData.ServiceLifetime.Transient?displayProperty=nameWithType> にする必要があります。
 * <xref:mvc/views/dependency-injection>

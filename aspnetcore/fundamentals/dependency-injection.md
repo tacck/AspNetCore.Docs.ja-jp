@@ -1,27 +1,40 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: 'title:ASP.NET Core での依存関係の挿入 author: rick-anderson description:ASP.NET Core で依存関係の挿入を実装する方法とそれを使う方法について説明します。'
+author: rick-anderson
+description: "monikerRange: '>= aspnetcore-2.1' ms.author: riande ms.custom: mvc ms.date:05/14/2020 no-loc:"
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/14/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/dependency-injection
+ms.openlocfilehash: db0a23e2db34de60308ea9be021a190278dee4aa
+ms.sourcegitcommit: 5fe724d143825ca799e5bd03fb45b632ea4aa7d5
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84271905"
 ---
-# <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
+# <a name="dependency-injection-in-aspnet-core"></a>'Blazor'
 
-作成者: [Steve Smith](https://ardalis.com/)、[Scott Addie](https://scottaddie.com)
+'Identity'
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core では依存関係の挿入 (DI) ソフトウェア設計パターンがサポートされています。これは、クラスとその依存関係の間で[制御の反転 (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) を実現するための手法です。
+'Let's Encrypt'
 
-MVC コントローラー内部における依存関係の挿入に固有の情報については、<xref:mvc/controllers/dependency-injection> をご覧ください。
+'Razor'
 
-[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
+'SignalR' uid: fundamentals/dependency-injection
 
-## <a name="overview-of-dependency-injection"></a>依存関係の挿入の概要
+## <a name="overview-of-dependency-injection"></a>ASP.NET Core での依存関係の挿入
 
-"*依存関係*" とは、他のオブジェクトが必要とする任意のオブジェクトのことです。 アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+作成者: [Steve Smith](https://ardalis.com/)、[Scott Addie](https://scottaddie.com)、[Brandon Dahler](https://github.com/brandondahler) ASP.NET Core では依存関係の挿入 (DI) ソフトウェア設計パターンがサポートされています。これは、クラスとその依存関係の間で[制御の反転 (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) を実現するための手法です。
 
 ```csharp
 public class MyDependency
@@ -40,7 +53,7 @@ public class MyDependency
 }
 ```
 
-クラスで `WriteMessage` メソッドを使用できるようにするために、`MyDependency` クラスのインスタンスを作成することができます。 `MyDependency` クラスは `IndexModel` クラスの依存関係です。
+MVC コントローラー内部における依存関係の挿入に固有の情報については、<xref:mvc/controllers/dependency-injection> をご覧ください。 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 ```csharp
 public class IndexModel : PageModel
@@ -55,44 +68,44 @@ public class IndexModel : PageModel
 }
 ```
 
-このクラスは `MyDependency` のインスタンスを作成し、これに直接依存しています。 コードの依存関係 (前の例など) には問題が含まれ、次の理由から回避する必要があります。
+依存関係の挿入の概要 "*依存関係*" とは、他のオブジェクトが必要とする任意のオブジェクトのことです。
 
-* `MyDependency` を別の実装で置き換えるには、クラスを変更する必要があります。
-* `MyDependency` が依存関係を含んでいる場合、これらはクラスによって構成する必要があります。 複数のクラスが `MyDependency` に依存している大規模なプロジェクトでは、構成コードがアプリ全体に分散するようになります。
-* このような実装では、単体テストを行うことが困難です。 アプリはモックまたはスタブの `MyDependency` クラスを使用する必要がありますが、この方法では不可能です。
+* アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+* クラスで `WriteMessage` メソッドを使用できるようにするために、`MyDependency` クラスのインスタンスを作成することができます。 `MyDependency` クラスは `IndexModel` クラスの依存関係です。
+* このクラスは `MyDependency` のインスタンスを作成し、これに直接依存しています。 コードの依存関係 (前の例など) には問題が含まれ、次の理由から回避する必要があります。
 
-依存関係の挿入は、次の方法によってこれらの問題に対応します。
+`MyDependency` を別の実装で置き換えるには、クラスを変更する必要があります。
 
-* 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
-* サービス コンテナー内の依存関係の登録。 ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。 サービスはアプリの `Startup.ConfigureServices` メソッドに登録されています。
-* サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
+* `MyDependency` が依存関係を含んでいる場合、これらはクラスによって構成する必要があります。
+* 複数のクラスが `MyDependency` に依存している大規模なプロジェクトでは、構成コードがアプリ全体に分散するようになります。 このような実装では、単体テストを行うことが困難です。 アプリはモックまたはスタブの `MyDependency` クラスを使用する必要がありますが、この方法では不可能です。
+* 依存関係の挿入は、次の方法によってこれらの問題に対応します。 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、サービスがアプリに提供するメソッドが `IMyDependency` インターフェイスによって定義されます。
+サービス コンテナー内の依存関係の登録。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 
-このインターフェイスは、具象型 `MyDependency` によって実装されます。
+ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。
+サービスはアプリの `Startup.ConfigureServices` メソッドに登録されています。 サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、サービスがアプリに提供するメソッドが `IMyDependency` インターフェイスによって定義されます。 このインターフェイスは、具象型 `MyDependency` によって実装されます。
 
-`IMyDependency` と `ILogger<TCategoryName>` をサービス コンテナーに登録する必要があります。 `IMyDependency` は `Startup.ConfigureServices` に登録されます。 `ILogger<TCategoryName>` はログ記録の抽象化インフラストラクチャによって登録されます。したがって、これは、フレームワークによって既定で登録される[フレームワークが提供するサービス](#framework-provided-services)です。
+`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。
 
-コンテナーでは、[(ジェネリック) オープン型](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)を活用し、すべての [(ジェネリック) 構築型](/dotnet/csharp/language-reference/language-specification/types#constructed-types)を登録する必要をなくすことで、`ILogger<TCategoryName>` を解決します。
+コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。
 
 ```csharp
 services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 ```
 
-サンプル アプリにおいて、`IMyDependency` サービスは `MyDependency` 具象型を使用して登録されます。 登録によって、サービスの有効期間が 1 つの要求の有効期間に範囲設定されます。 [サービスの有効期間](#service-lifetimes)については、このトピックの後半で説明します。
+解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。 `IMyDependency` と `ILogger<TCategoryName>` をサービス コンテナーに登録する必要があります。 `IMyDependency` は `Startup.ConfigureServices` に登録されます。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> 各 `services.Add{SERVICE_NAME}` 拡張メソッドは、サービスを追加 (および場合によっては構成) します。 たとえば、`services.AddMvc()` はサービスの Razor Pages と必須の MVC を追加します。 アプリをこの規則に従わせることをお勧めします。 拡張メソッドを [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 名前空間に配置して、サービス登録のグループをカプセル化します。
+> `ILogger<TCategoryName>` はログ記録の抽象化インフラストラクチャによって登録されます。したがって、これは、フレームワークによって既定で登録される[フレームワークが提供するサービス](#framework-provided-services)です。 コンテナーでは、[(ジェネリック) オープン型](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)を活用し、すべての [(ジェネリック) 構築型](/dotnet/csharp/language-reference/language-specification/types#constructed-types)を登録する必要をなくすことで、`ILogger<TCategoryName>` を解決します。 サンプル アプリにおいて、`IMyDependency` サービスは `MyDependency` 具象型を使用して登録されます。 登録によって、サービスの有効期間が 1 つの要求の有効期間に範囲設定されます。
 
-サービスのコンストラクターで[ビルトイン型](/dotnet/csharp/language-reference/keywords/built-in-types-table) (`string` など) が必要な場合は、[構成](xref:fundamentals/configuration/index)や[オプション パターン](xref:fundamentals/configuration/options)を使って型を挿入することができます。
+[サービスの有効期間](#service-lifetimes)については、このトピックの後半で説明します。
 
 ```csharp
 public class MyDependency : IMyDependency
@@ -108,21 +121,21 @@ public class MyDependency : IMyDependency
 }
 ```
 
-クラスのコンストラクター経由でサービスのインスタンスが要求されます。サービスはプライベート フィールドに割り当てられて使用されます。 このフィールドは、クラス全体で必要に応じてサービスにアクセスするために使用されます。
+各 `services.Add{SERVICE_NAME}` 拡張メソッドは、サービスを追加 (および場合によっては構成) します。 たとえば、`services.AddMvc()` はサービスの Razor Pages と必須の MVC を追加します。
 
-サンプル アプリでは、`IMyDependency` インスタンスが要求され、サービスの `WriteMessage` メソッドを呼び出すために使用されます。
+アプリをこの規則に従わせることをお勧めします。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3,6,13,29-30)]
 
-## <a name="services-injected-into-startup"></a>Startup に挿入されるサービス
+## <a name="services-injected-into-startup"></a>拡張メソッドを [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 名前空間に配置して、サービス登録のグループをカプセル化します。
 
-汎用ホスト (<xref:Microsoft.Extensions.Hosting.IHostBuilder>) を使用すると、次のサービスの種類のみを `Startup` コンストラクターに挿入できます。
+サービスのコンストラクターで[ビルトイン型](/dotnet/csharp/language-reference/keywords/built-in-types-table) (`string` など) が必要な場合は、[構成](xref:fundamentals/configuration/index)や[オプション パターン](xref:fundamentals/configuration/options)を使って型を挿入することができます。
 
 * `IWebHostEnvironment`
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
-サービスは `Startup.Configure` に挿入できます。
+クラスのコンストラクター経由でサービスのインスタンスが要求されます。サービスはプライベート フィールドに割り当てられて使用されます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
@@ -131,65 +144,32 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-詳細については、「<xref:fundamentals/startup>」を参照してください。
+このフィールドは、クラス全体で必要に応じてサービスにアクセスするために使用されます。
 
-## <a name="framework-provided-services"></a>フレームワークが提供するサービス
+## <a name="framework-provided-services"></a>サンプル アプリでは、`IMyDependency` インスタンスが要求され、サービスの `WriteMessage` メソッドを呼び出すために使用されます。
 
-`Startup.ConfigureServices` メソッドでは、Entity Framework Core や ASP.NET Core MVC のようなプラットフォーム機能など、アプリが使うサービスを定義する必要があります。 最初に、`ConfigureServices` に提供される `IServiceCollection` には、フレームワークによって定義されたサービスがあります ([ホストの構成方法](xref:fundamentals/index#host)によって異なります)。 ASP.NET Core テンプレートに基づくアプリが、フレームワークによって登録された何百ものサービスを持つことも珍しくありません。 次の表に、フレームワークによって登録されたサービスのごく一部のサンプルを示します。
+Startup に挿入されるサービス 汎用ホスト (<xref:Microsoft.Extensions.Hosting.IHostBuilder>) を使用すると、次のサービスの種類のみを `Startup` コンストラクターに挿入できます。 サービスは `Startup.Configure` に挿入できます。 詳細については、「<xref:fundamentals/startup>」を参照してください。
 
-| サービスの種類 | 有効期間 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+| フレームワークが提供するサービス | `Startup.ConfigureServices` メソッドでは、Entity Framework Core や ASP.NET Core MVC のようなプラットフォーム機能など、アプリが使うサービスを定義する必要があります。 |
+| ------------ | -------- |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 最初に、`ConfigureServices` に提供される `IServiceCollection` には、フレームワークによって定義されたサービスがあります ([ホストの構成方法](xref:fundamentals/index#host)によって異なります)。 |
+| `IHostApplicationLifetime` | ASP.NET Core テンプレートに基づくアプリが、フレームワークによって登録された何百ものサービスを持つことも珍しくありません。 |
+| `IWebHostEnvironment` | 次の表に、フレームワークによって登録されたサービスのごく一部のサンプルを示します。 |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | サービスの種類 |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 有効期間 |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | 一時的 |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | 一時的 |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | 一時的 |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | シングルトン |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | シングルトン |
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+## <a name="register-additional-services-with-extension-methods"></a>シングルトン
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 一時的 | | `IHostApplicationLifetime` | シングルトン | | `IWebHostEnvironment` | シングルトン | | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | シングルトン | | <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 一時的 | | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | シングルトン | | <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | 一時的 | | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | シングルトン | | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | シングルトン | | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | シングルトン | | <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | 一時的 | | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | シングルトン | | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | シングルトン | | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | シングルトン |
-
-## <a name="register-additional-services-with-extension-methods"></a>拡張メソッドを使用した追加サービスの登録する
-
-サービス (および必要であればサービスが依存するサービス) を登録するためにサービス コレクションの拡張メソッドを使用できる場合は、1 つの `Add{SERVICE_NAME}` 拡張メソッドを使用してそのサービスが必要とするすべてのサービスを登録することが規則です。 次のコードは、拡張メソッド [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) と <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> を使用して、コンテナーに追加のサービスを追加する方法の例です。
+一時的 シングルトン
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -207,231 +187,47 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-詳細については、API ドキュメントにある <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> クラスを参照してください。
+シングルトン
 
-## <a name="service-lifetimes"></a>サービスの有効期間
+## <a name="service-lifetimes"></a>シングルトン
 
-登録される各サービスの適切な有効期間を選択します。 ASP.NET Core サービスは、次の有効期間で構成できます。
+拡張メソッドを使用した追加サービスの登録する サービス (および必要であればサービスが依存するサービス) を登録するためにサービス コレクションの拡張メソッドを使用できる場合は、1 つの `Add{SERVICE_NAME}` 拡張メソッドを使用してそのサービスが必要とするすべてのサービスを登録することが規則です。
 
-### <a name="transient"></a>一時的
+### <a name="transient"></a>次のコードは、拡張メソッド [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) と <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> を使用して、コンテナーに追加のサービスを追加する方法の例です。
 
-有効期間が一時的なサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>) は、サービス コンテナーから要求されるたびに作成されます。 この有効期間は、軽量でステートレスのサービスに最適です。
+詳細については、API ドキュメントにある <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> クラスを参照してください。 サービスの有効期間
 
-### <a name="scoped"></a>スコープ
+### <a name="scoped"></a>登録される各サービスの適切な有効期間を選択します。
 
-有効期間がスコープのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) は、クライアント要求 (接続) ごとに 1 回作成されます。
-
-> [!WARNING]
-> ミドルウェアでスコープ サービスを使用している場合、サービスを `Invoke` または `InvokeAsync` メソッドに追加します。 コンストラクターを使用して挿入すると、サービスがシングルトンのように動作するよう強制されるので、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用した挿入は行わないでください。 詳細については、「<xref:fundamentals/middleware/write#per-request-middleware-dependencies>」を参照してください。
-
-### <a name="singleton"></a>シングルトン
-
-有効期間がシングルトンのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>) は、最初に要求されたときに作成されます (または、`Startup.ConfigureServices` が実行されて、サービス登録でインスタンスが指定された場合)。 以降の要求は、すべて同じインスタンスを使用します。 アプリをシングルトンで動作させる必要がある場合は、サービス コンテナーによるサービスの有効期間の管理を許可することをお勧めします。 クラス内のオブジェクトの有効期間を管理するために、シングルトンの設計パターンを実装してユーザー コードを提供しないでください。
+ASP.NET Core サービスは、次の有効期間で構成できます。
 
 > [!WARNING]
-> シングルトンからスコープ サービスを解決するのは危険です。 後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。
+> 一時的 有効期間が一時的なサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>) は、サービス コンテナーから要求されるたびに作成されます。 この有効期間は、軽量でステートレスのサービスに最適です。
 
-## <a name="service-registration-methods"></a>サービス登録メソッド
+### <a name="singleton"></a>スコープ
 
-サービス登録拡張メソッドでは、特定のシナリオで役立つオーバーロードが提供されます。
+有効期間がスコープのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) は、クライアント要求 (接続) ごとに 1 回作成されます。 ミドルウェアでスコープ サービスを使用している場合、サービスを `Invoke` または `InvokeAsync` メソッドに追加します。 コンストラクターを使用して挿入すると、サービスがシングルトンのように動作するよう強制されるので、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用した挿入は行わないでください。 詳細については、「<xref:fundamentals/middleware/write#per-request-middleware-dependencies>」を参照してください。
 
-| メソッド | 自動<br>object<br>破棄 | 複数<br>実装 | 引数を渡す |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+> [!WARNING]
+> シングルトン 有効期間がシングルトンのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>) は、最初に要求されたときに作成されます (または、`Startup.ConfigureServices` が実行されて、サービス登録でインスタンスが指定された場合)。
 
---- | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+## <a name="service-registration-methods"></a>以降の要求は、すべて同じインスタンスを使用します。
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+アプリをシングルトンで動作させる必要がある場合は、サービス コンテナーによるサービスの有効期間の管理を許可することをお勧めします。
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+| クラス内のオブジェクトの有効期間を管理するために、シングルトンの設計パターンを実装してユーザー コードを提供しないでください。 | シングルトンからスコープ サービスを解決するのは危険です。<br>後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。<br>サービス登録メソッド | サービス登録拡張メソッドでは、特定のシナリオで役立つオーバーロードが提供されます。<br>メソッド | 自動 |
+| ------ | :-----------------------------: | :-------------------------: | :-------: |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>object<br>`services.AddSingleton<IMyDep, MyDep>();` | 破棄 | 複数 | 実装 |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>引数を渡す<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | 例: | はい | はい |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>いいえ<br>`services.AddSingleton<MyDep>();` | 次に例を示します。 | はい | はい |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>はい<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | 例: | はい | いいえ |
+| `AddSingleton(new {IMPLEMENTATION})`<br>いいえ<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | 次に例を示します。 | いいえ | はい |
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+はい 次に例を示します。
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+いいえ
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-----: | | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>例:<br>`services.AddSingleton<IMyDep, MyDep>();` | はい | はい | いいえ | | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>次に例を示します。<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | はい | はい | はい | | `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>例:<br>`services.AddSingleton<MyDep>();` | はい | いいえ | いいえ | | `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>次に例を示します。<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | いいえ | はい | はい | | `AddSingleton(new {IMPLEMENTATION})`<br>次に例を示します。<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | いいえ | いいえ | はい |
-
-型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。 実装が複数の場合の一般的なシナリオとしては、[テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)します。
-
-`TryAdd{LIFETIME}` メソッドでは、登録された実装がまだ存在しない場合にのみサービスが登録されます。
-
-次の例の最初の行では、`IMyDependency` に `MyDependency` を登録します。 2 行目では何も行われません。`IMyDependency` には登録された実装が既に含まれているからです。
+いいえ はい
 
 ```csharp
 services.AddSingleton<IMyDependency, MyDependency>();
@@ -439,16 +235,16 @@ services.AddSingleton<IMyDependency, MyDependency>();
 services.TryAddSingleton<IMyDependency, DifferentDependency>();
 ```
 
-詳細については次を参照してください:
+型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。
 
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAdd*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddTransient*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton*>
 
-[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。 一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
+実装が複数の場合の一般的なシナリオとしては、[テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)します。 `TryAdd{LIFETIME}` メソッドでは、登録された実装がまだ存在しない場合にのみサービスが登録されます。 次の例の最初の行では、`IMyDependency` に `MyDependency` を登録します。 2 行目では何も行われません。`IMyDependency` には登録された実装が既に含まれているからです。
 
-次の例の最初の行では、`IMyDep1` に `MyDep` を登録します。 2 行目では `IMyDep2` に `MyDep` を登録します。 3 行目では何も行われません。`IMyDep1` には `MyDep` の登録済みの実装が既に含まれているからです。
+詳細については次を参照してください: [TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。
 
 ```csharp
 public interface IMyDep1 {}
@@ -462,53 +258,60 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep2, MyDep>());
 services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 ```
 
-### <a name="constructor-injection-behavior"></a>コンストラクターの挿入の動作
+### <a name="constructor-injection-behavior"></a>サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。
 
-サービスは 2 つのメカニズムによって解決できます。
+一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
 
 * <xref:System.IServiceProvider>
-* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>:依存関係の挿入コンテナーにサービスを登録することなくオブジェクトの作成を許可します。 `ActivatorUtilities` はユーザー側の抽象化 (タグ ヘルパー、MVC コントローラー、モデル バインダーなど) で使用されます。
+* 次の例の最初の行では、`IMyDep1` に `MyDep` を登録します。 2 行目では `IMyDep2` に `MyDep` を登録します。
 
-コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。
+3 行目では何も行われません。`IMyDep1` には `MyDep` の登録済みの実装が既に含まれているからです。
 
-`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。
+コンストラクターの挿入の動作
 
-`ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。 コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
+サービスは 2 つのメカニズムによって解決できます。 <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>:依存関係の挿入コンテナーにサービスを登録することなくオブジェクトの作成を許可します。
 
-## <a name="entity-framework-contexts"></a>Entity Framework コンテキスト
+## <a name="entity-framework-contexts"></a>`ActivatorUtilities` はユーザー側の抽象化 (タグ ヘルパー、MVC コントローラー、モデル バインダーなど) で使用されます。
 
-Entity Framework コンテキストでは通常、[範囲が指定された有効期間](#service-lifetimes)が利用され、サービス コンテナーに追加されます。これは、Web アプリ データベース操作は通常、その範囲がクライアント要求に設定されるためです。 データベース コンテキストの登録時、[AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) オーバーロードによって有効期間が指定されなかった場合、既定の有効期間が範囲となります。 有効期間が与えられたサービスの場合、サービスより有効期間が短いデータベース コンテキストを使用できません。
+コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。 `IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。 `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。
 
-## <a name="lifetime-and-registration-options"></a>有効期間と登録のオプション
+## <a name="lifetime-and-registration-options"></a>コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
 
-有効期間と登録のオプションの違いを示すために、タスクを一意の識別子 `OperationId` を備えた操作として表す、次のインターフェイスについて考えます。 次のインターフェイスに対して操作のサービスの有効期間がどのように構成されているかに応じて、コンテナーは、クラスに要求されたときに、サービスの同じインスタンスか別のインスタンスを提供します。
+Entity Framework コンテキスト Entity Framework コンテキストでは通常、[範囲が指定された有効期間](#service-lifetimes)が利用され、サービス コンテナーに追加されます。これは、Web アプリ データベース操作は通常、その範囲がクライアント要求に設定されるためです。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IOperation.cs?name=snippet1)]
 
-インターフェイスは `Operation` クラス内で実装されます。 指定されない場合、`Operation` コンストラクターは GUID を生成します。
+データベース コンテキストの登録時、[AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) オーバーロードによって有効期間が指定されなかった場合、既定の有効期間が範囲となります。 有効期間が与えられたサービスの場合、サービスより有効期間が短いデータベース コンテキストを使用できません。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Models/Operation.cs?name=snippet1)]
 
-`OperationService` が登録されます。これは、その他の `Operation` 型のそれぞれに依存します。 依存関係の挿入を経由して `OperationService` が要求される場合、これは各サービスの新しいインスタンスか、依存関係のあるサービスの有効期間に基づく既存のインスタンスを受信します。
+有効期間と登録のオプション 有効期間と登録のオプションの違いを示すために、タスクを一意の識別子 `OperationId` を備えた操作として表す、次のインターフェイスについて考えます。
 
-* コンテナーからの要求時に一時的なサービスが作成されるとき、`IOperationTransient` サービスの `OperationId` と `OperationService` の `OperationId` は異なります。 `OperationService` は `IOperationTransient` クラスの新しいインスタンスを受け取ります。 新しいインスタンスは異なる `OperationId` を生成します。
-* クライアント要求ごとにスコープ サービスが作成されるとき、`IOperationScoped` サービスの `OperationId` は、クライアント要求内の `OperationService` のものと同じになります。 クライアント要求間で、両方のサービスは異なる `OperationId` 値を共有します。
-* シングルトンとシングルトン インスタンスのサービスが 1 回作成され、すべてのクライアント要求とすべてのサービス間で使用されるとき、`OperationId` はすべてのサービス要求の間で一定です。
+* 次のインターフェイスに対して操作のサービスの有効期間がどのように構成されているかに応じて、コンテナーは、クラスに要求されたときに、サービスの同じインスタンスか別のインスタンスを提供します。 インターフェイスは `Operation` クラス内で実装されます。 指定されない場合、`Operation` コンストラクターは GUID を生成します。
+* `OperationService` が登録されます。これは、その他の `Operation` 型のそれぞれに依存します。 依存関係の挿入を経由して `OperationService` が要求される場合、これは各サービスの新しいインスタンスか、依存関係のあるサービスの有効期間に基づく既存のインスタンスを受信します。
+* コンテナーからの要求時に一時的なサービスが作成されるとき、`IOperationTransient` サービスの `OperationId` と `OperationService` の `OperationId` は異なります。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
 
-`Startup.ConfigureServices` では、各型が名前で指定されている有効期間に従ってコンテナーに追加されます。
+`OperationService` は `IOperationTransient` クラスの新しいインスタンスを受け取ります。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=6-9,12)]
 
-`IOperationSingletonInstance` サービスは、`Guid.Empty` の既知の ID を持った特定のインスタンスを使用しています。 この型が使用されるタイミングは明らかです (その GUID はすべてゼロです)。
+新しいインスタンスは異なる `OperationId` を生成します。 クライアント要求ごとにスコープ サービスが作成されるとき、`IOperationScoped` サービスの `OperationId` は、クライアント要求内の `OperationService` のものと同じになります。
 
-サンプル アプリでは、個々の要求内、および個々の要求間におけるオブジェクトの有効期間が示されます。 サンプル アプリの `IndexModel` には、各種類の `IOperation` 型と `OperationService` が必要です。 次に、ページ モデル クラスとサービスのすべての `OperationId` 値が、プロパティの割り当てを通じてページに表示されます。
+クライアント要求間で、両方のサービスは異なる `OperationId` 値を共有します。 シングルトンとシングルトン インスタンスのサービスが 1 回作成され、すべてのクライアント要求とすべてのサービス間で使用されるとき、`OperationId` はすべてのサービス要求の間で一定です。 `Startup.ConfigureServices` では、各型が名前で指定されている有効期間に従ってコンテナーに追加されます。
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=7-11,14-18,21-25)]
 
-2 つの要求の結果を、以下の 2 つの出力に示します。
+`IOperationSingletonInstance` サービスは、`Guid.Empty` の既知の ID を持った特定のインスタンスを使用しています。
 
+この型が使用されるタイミングは明らかです (その GUID はすべてゼロです)。
+
+サンプル アプリでは、個々の要求内、および個々の要求間におけるオブジェクトの有効期間が示されます。
+
+サンプル アプリの `IndexModel` には、各種類の `IOperation` 型と `OperationService` が必要です。  
+次に、ページ モデル クラスとサービスのすべての `OperationId` 値が、プロパティの割り当てを通じてページに表示されます。  
+2 つの要求の結果を、以下の 2 つの出力に示します。  
 **最初の要求:**
 
 コントローラーの操作:
@@ -520,11 +323,11 @@ Entity Framework コンテキストでは通常、[範囲が指定された有�
 
 `OperationService` の操作:
 
-一時的: c6b049eb-1318-4e31-90f1-eb2dd849ff64  
+一時的: c6b049eb-1318-4e31-90f1-eb2dd849ff64
+
 スコープ:5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
 シングルトン:01271bc1-9e31-48e7-8f7c-7261b040ded9  
-インスタンス:00000000-0000-0000-0000-000000000000
-
+インスタンス:00000000-0000-0000-0000-000000000000  
 **2 番目の要求:**
 
 コントローラーの操作:
@@ -536,20 +339,13 @@ Entity Framework コンテキストでは通常、[範囲が指定された有�
 
 `OperationService` の操作:
 
-一時的: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
-スコープ:31e820c5-4834-4d22-83fc-a60118acb9f4  
-シングルトン:01271bc1-9e31-48e7-8f7c-7261b040ded9  
-インスタンス:00000000-0000-0000-0000-000000000000
+* 一時的: c4cbacb8-36a2-436d-81c8-8c1b78808aaf スコープ:31e820c5-4834-4d22-83fc-a60118acb9f4 シングルトン:01271bc1-9e31-48e7-8f7c-7261b040ded9
+* インスタンス:00000000-0000-0000-0000-000000000000
+* 要求内および要求間で、どの `OperationId` 値が変化しているかを確認してください。
 
-要求内および要求間で、どの `OperationId` 値が変化しているかを確認してください。
+## <a name="call-services-from-main"></a>"*一時的な*" オブジェクトは常に異なります。
 
-* "*一時的な*" オブジェクトは常に異なります。 1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。
-* *Scoped* オブジェクトは、1 つのクライアント要求内では同じですが、複数のクライアント要求間では異なります。
-* "*シングルトン*" オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
-
-## <a name="call-services-from-main"></a>main からサービスを呼び出す
-
-[IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) を使用して <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> を作成し、アプリのスコープ内のスコープ サービスを解決します。 この方法は、起動時に初期化タスクを実行するために、スコープ サービスにアクセスするのに便利です。 次の例では、`Program.Main` で `MyScopedService` のコンテキストを取得する方法を示します。
+1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。 *Scoped* オブジェクトは、1 つのクライアント要求内では同じですが、複数のクライアント要求間では異なります。
 
 ```csharp
 using System;
@@ -592,46 +388,46 @@ public class Program
 }
 ```
 
-## <a name="scope-validation"></a>スコープの検証
+## <a name="scope-validation"></a>"*シングルトン*" オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
 
-アプリが開発環境で実行されていて、ホストを構築するために [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings) が呼び出される場合、既定のサービス プロバイダーによって次を確認するためのチェックが実行されます。
+main からサービスを呼び出す
 
-* スコープ サービスが、ルート サービス プロバイダーによって直接的または間接的に解決されない。
-* スコープ サービスが、シングルトンに直接または間接に挿入されない。
+* [IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) を使用して <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> を作成し、アプリのスコープ内のスコープ サービスを解決します。
+* この方法は、起動時に初期化タスクを実行するために、スコープ サービスにアクセスするのに便利です。
 
-<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> が呼び出されると、ルート サービス プロバイダーが作成されます。 ルート サービス プロバイダーの有効期間は、プロバイダーがアプリで開始されるとアプリとサーバーの有効期間に対応し、アプリのシャットダウンには破棄されます。
+次の例では、`Program.Main` で `MyScopedService` のコンテキストを取得する方法を示します。 スコープの検証
 
-スコープ サービスは、それを作成したコンテナーによって破棄されます。 ルート コンテナーにスコープ サービスが作成されると、サービスはアプリ/サーバーのシャットダウン時に、ルート コンテナーによってのみ破棄されるため、サービスの有効期間は実質的にシングルトンに昇格されます。 `BuildServiceProvider` が呼び出されると、サービス スコープの検証がこれらの状況をキャッチします。
+アプリが開発環境で実行されていて、ホストを構築するために [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings) が呼び出される場合、既定のサービス プロバイダーによって次を確認するためのチェックが実行されます。 スコープ サービスが、ルート サービス プロバイダーによって直接的または間接的に解決されない。 スコープ サービスが、シングルトンに直接または間接に挿入されない。
 
-詳細については、「<xref:fundamentals/host/web-host#scope-validation>」を参照してください。
+<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> が呼び出されると、ルート サービス プロバイダーが作成されます。
 
-## <a name="request-services"></a>要求サービス
+## <a name="request-services"></a>ルート サービス プロバイダーの有効期間は、プロバイダーがアプリで開始されるとアプリとサーバーの有効期間に対応し、アプリのシャットダウンには破棄されます。
 
-`HttpContext` からの ASP.NET Core 要求内で使用可能なサービスは、[HttpContext.RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) コレクションを通じて公開されます。
+スコープ サービスは、それを作成したコンテナーによって破棄されます。
 
-要求サービスは、アプリの一部として構成および要求されるサービスを表します。 オブジェクトで依存関係を指定すると、これらは `ApplicationServices` ではなく `RequestServices` で検出された型で満たされます。
+ルート コンテナーにスコープ サービスが作成されると、サービスはアプリ/サーバーのシャットダウン時に、ルート コンテナーによってのみ破棄されるため、サービスの有効期間は実質的にシングルトンに昇格されます。 `BuildServiceProvider` が呼び出されると、サービス スコープの検証がこれらの状況をキャッチします。
 
-一般に、アプリから直接これらのプロパティを使用しないでください。 代わりに、クラスのコンストラクターを介してクラスに必要な型を要求し、フレームワークに依存関係を挿入させます。 これにより、テストしやすいクラスが生成されます。
+詳細については、「<xref:fundamentals/host/web-host#scope-validation>」を参照してください。 要求サービス `HttpContext` からの ASP.NET Core 要求内で使用可能なサービスは、[HttpContext.RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) コレクションを通じて公開されます。
 
 > [!NOTE]
-> コンストラクターのパラメーターとして依存関係を要求し、`RequestServices` コレクションにアクセスするようにします。
+> 要求サービスは、アプリの一部として構成および要求されるサービスを表します。
 
-## <a name="design-services-for-dependency-injection"></a>依存関係の挿入のためのサービスの設計
+## <a name="design-services-for-dependency-injection"></a>オブジェクトで依存関係を指定すると、これらは `ApplicationServices` ではなく `RequestServices` で検出された型で満たされます。
 
-ベスト プラクティスは次のとおりです。
+一般に、アプリから直接これらのプロパティを使用しないでください。
 
+* 代わりに、クラスのコンストラクターを介してクラスに必要な型を要求し、フレームワークに依存関係を挿入させます。
+* これにより、テストしやすいクラスが生成されます。 コンストラクターのパラメーターとして依存関係を要求し、`RequestServices` コレクションにアクセスするようにします。
+* 依存関係の挿入のためのサービスの設計 ベスト プラクティスは次のとおりです。
 * 各依存関係を取得するために依存関係の挿入を使用するようサービスを設計します。
-* ステートフル、静的クラス、およびメンバーは避けてください。 代わりにシングルトン サービスを使用するようにアプリを設計し、グローバルな状態を作成しないようにします。
-* サービス内部で依存関係のあるクラスを直接インスタンス化することを回避します。 直接のインスタンス化は、コードの固有の実装につながります。
-* アプリのクラスを、小さく、十分に要素に分割された、テストしやすいものにします。
 
-クラスに含まれる挿入される依存関係が多すぎるように見える場合、これは通常、クラスが担当する役割が多すぎて、[単一責任の原則 (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility) に違反していることのサインです。 責任の一部を新しいクラスに移動することにより、クラスのリファクタリングを試みます。 Razor Pages のページ モデル クラスと MVC コントローラー クラスは、UI の問題に集中する必要があることに留意します。 ビジネス ルールとデータ アクセスの実装の詳細は、これらの[個別の問題](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)に適したクラスに分離する必要があります。
+ステートフル、静的クラス、およびメンバーは避けてください。 代わりにシングルトン サービスを使用するようにアプリを設計し、グローバルな状態を作成しないようにします。 サービス内部で依存関係のあるクラスを直接インスタンス化することを回避します。 直接のインスタンス化は、コードの固有の実装につながります。
 
-### <a name="disposal-of-services"></a>サービスの破棄
+### <a name="disposal-of-services"></a>アプリのクラスを、小さく、十分に要素に分割された、テストしやすいものにします。
 
-コンテナーは、作成する <xref:System.IDisposable> 型の <xref:System.IDisposable.Dispose*> を呼び出します。 ユーザー コードによってコンテナーに追加されたインスタンスは、自動的に破棄されません。
+クラスに含まれる挿入される依存関係が多すぎるように見える場合、これは通常、クラスが担当する役割が多すぎて、[単一責任の原則 (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility) に違反していることのサインです。 責任の一部を新しいクラスに移動することにより、クラスのリファクタリングを試みます。
 
-次の例では、サービスがサービス コンテナーによって作成され、自動的に破棄されます。
+Razor Pages のページ モデル クラスと MVC コントローラー クラスは、UI の問題に集中する必要があることに留意します。
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -648,12 +444,12 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-次に例を示します。
+ビジネス ルールとデータ アクセスの実装の詳細は、これらの[個別の問題](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)に適したクラスに分離する必要があります。
 
-* サービス インスタンスは、サービス コンテナーによって作成されるわけではありません。
-* サービスの有効期間は、フレームワークによって認識されません。
-* フレームワークでは、サービスが自動的に破棄されることはありません。
-* サービスが開発者コードで明示的に破棄されていない場合は、アプリがシャットダウンするまで保持されます。
+* サービスの破棄
+* コンテナーは、作成する <xref:System.IDisposable> 型の <xref:System.IDisposable.Dispose*> を呼び出します。
+* ユーザー コードによってコンテナーに追加されたインスタンスは、自動的に破棄されません。
+* 次の例では、サービスがサービス コンテナーによって作成され、自動的に破棄されます。
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -666,46 +462,79 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-サービス破棄オプションについては、「[Four ways to dispose IDisposables in ASP.NET Core](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)」(ASP.NET Core で IDisposables を破棄する 4 つの方法) を参照してください。
+### <a name="idisposable-guidance-for-transient-and-shared-instances"></a>次に例を示します。
 
-## <a name="default-service-container-replacement"></a>既定のサービス コンテナーの置換
+#### <a name="transient-limited-lifetime"></a>サービス インスタンスは、サービス コンテナーによって作成されるわけではありません。
 
-組み込みのサービス コンテナーは、フレームワークと、ほとんどのコンシューマー アプリのニーズに対応することを目的としたものです。 組み込みコンテナーでサポートされない、以下のような特定の機能が必要な場合を除き、組み込みコンテナーを使用することをお勧めします。
+サービスの有効期間は、フレームワークによって認識されません。
 
+フレームワークでは、サービスが自動的に破棄されることはありません。
+
+* サービスが開発者コードで明示的に破棄されていない場合は、アプリがシャットダウンするまで保持されます。
+* 一時的なインスタンスと共有インスタンスのための IDisposable ガイダンス
+
+一時的で限定的な有効期間
+
+**シナリオ** アプリには、次のいずれかのシナリオに対して一時的な有効期間を持つ <xref:System.IDisposable> インスタンスが必要です。 インスタンスは、ルート スコープで解決されます。
+
+* インスタンスは、スコープが終了する前に破棄する必要があります。
+* **解決方法**
+
+#### <a name="shared-instance-limited-lifetime"></a>ファクトリ パターンを使用して、親スコープの外部にインスタンスを作成します。
+
+このような状況では、通常、アプリケーションには、最終的な型のコンストラクターを直接呼び出す `Create` メソッドがあります。
+
+最終的な型に他の依存関係がある場合、ファクトリは次のことができます。
+
+そのコンストラクターで <xref:System.IServiceProvider> を受け取る。
+
+<xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance%2A?displayProperty=nameWithType> を使用してコンテナー外部でインスタンスをインスタンス化し、同時にコンテナーを依存関係のために使用する。 共有インスタンス、限定的な有効期間 **シナリオ** アプリでは、複数のサービスにわたって共有 <xref:System.IDisposable> インスタンスが必要ですが、<xref:System.IDisposable> の有効期間は限られています。
+
+#### <a name="general-guidelines"></a>**解決方法**
+
+* インスタンスをスコープ付きの有効期間に登録します。 <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> を使用してを開始し、新しい <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> を作成します。
+* スコープの <xref:System.IServiceProvider> を使用して必要なサービスを取得します。 有効期間が終了するときにスコープを破棄します。
+* 一般的なガイドライン <xref:System.IDisposable> インスタンスは、一時的なスコープを使用して登録しないでください。
+* 代わりに、ファクトリ パターンを使用します。 一時的またはスコープ付きの <xref:System.IDisposable> インスタンスをルート スコープ内で解決しないでください。
+
+## <a name="default-service-container-replacement"></a>唯一の一般的な例外は、アプリが <xref:System.IServiceProvider> を作成/再作成し、破棄する場合です。これは理想的なパターンではありません。
+
+DI を使用して <xref:System.IDisposable> 依存関係を受け取る場合、受信側が <xref:System.IDisposable> 自体を実装する必要はありません。 <xref:System.IDisposable> 依存関係の受信側は、その依存関係で <xref:System.IDisposable.Dispose%2A> を呼び出してはなりません。
+
+* サービスの有効期間を制御するには、スコープを使用する必要があります。
+* スコープは階層構造ではなく、スコープ間に特別な接続はありません。
+* 既定のサービス コンテナーの置換
+* 組み込みのサービス コンテナーは、フレームワークと、ほとんどのコンシューマー アプリのニーズに対応することを目的としたものです。
+* 組み込みコンテナーでサポートされない、以下のような特定の機能が必要な場合を除き、組み込みコンテナーを使用することをお勧めします。
 * プロパティの挿入
-* 名前に基づく挿入
+
+名前に基づく挿入
+
 * 子コンテナー
 * 有効期間のカスタム管理
 * 遅延初期化に対する `Func<T>` のサポート
 * 規則に基づく登録
-
-次のサードパーティ コンテナーは ASP.NET Core アプリで使用できます。
-
+* 次のサードパーティ コンテナーは ASP.NET Core アプリで使用できます。
 * [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
 * [DryIoc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
-* [Grace](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
-* [LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
-* [Lamar](https://jasperfx.github.io/lamar/)
-* [Stashbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
-* [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
-### <a name="thread-safety"></a>スレッド セーフ
+### <a name="thread-safety"></a>[Grace](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
 
-スレッド セーフのシングルトン サービスを作成します。 シングルトン サービスに一時的サービスへの依存関係がある場合、シングルトンによる一時的サービスの使い方によっては、一時的サービスもスレッド セーフであることが必要な場合があります。
+[LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection) [Lamar](https://jasperfx.github.io/lamar/)
 
-1 つのサービスのファクトリ メソッド (例: [AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*) に対する 2 番目の引数) をスレッド セーフにする必要はありません。 型 (`static`) のコンストラクターのように、1 つのスレッドによって 1 回呼び出されることが保証されます。
+[Stashbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection) [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
-## <a name="recommendations"></a>推奨事項
+## <a name="recommendations"></a>スレッド セーフ
 
-* `async/await` および `Task` ベースのサービスの解決はサポートされていません。 C# では非同期コンストラクターがサポートされていないため、推奨パターンは、サービスを同期的に解決した後に、非同期メソッドを使用することです。
+* スレッド セーフのシングルトン サービスを作成します。 シングルトン サービスに一時的サービスへの依存関係がある場合、シングルトンによる一時的サービスの使い方によっては、一時的サービスもスレッド セーフであることが必要な場合があります。
 
-* データと構成をサービス コンテナーに直接格納しないようにします。 たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。 同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。 実際のアイテムを DI 経由で要求することをお勧めします。
+* 1 つのサービスのファクトリ メソッド (例: [AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*) に対する 2 番目の引数) をスレッド セーフにする必要はありません。 型 (`static`) のコンストラクターのように、1 つのスレッドによって 1 回呼び出されることが保証されます。 推奨事項 `async/await` および `Task` ベースのサービスの解決はサポートされていません。 C# では非同期コンストラクターがサポートされていないため、推奨パターンは、サービスを同期的に解決した後に、非同期メソッドを使用することです。
 
-* サービスへの静的なアクセスを回避します (たとえば、他所で使用するための [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) の静的な型指定)。
+* データと構成をサービス コンテナーに直接格納しないようにします。
 
-* *サービス ロケーター パターン*の使用は避けてください。 たとえば、サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService*> を呼び出さないでください。
+* たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。
 
-  **正しくない:**
+  同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。
 
   ```csharp
   public class MyClass()
@@ -721,7 +550,7 @@ public void ConfigureServices(IServiceCollection services)
   }
   ```
 
-  **正しい**:
+  実際のアイテムを DI 経由で要求することをお勧めします。
 
   ```csharp
   public class MyClass
@@ -742,21 +571,21 @@ public void ConfigureServices(IServiceCollection services)
   }
   ```
 
-* 回避すべき別のサービス ロケーターのバリエーションは、実行時に依存関係を解決するファクトリを挿入することです。 この両方のプラクティスによって、複数の[制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)方式が組み合わせられます。
+* サービスへの静的なアクセスを回避します (たとえば、他所で使用するための [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) の静的な型指定)。 *サービス ロケーター パターン*の使用は避けてください。
 
-* `HttpContext` への静的なアクセスを回避します (たとえば [IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext))。
+* たとえば、サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService*> を呼び出さないでください。
 
-どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです&mdash;ほとんどがフレームワーク自体の内の特殊なケースです。
+**正しくない:** **正しい**:
 
-DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
+回避すべき別のサービス ロケーターのバリエーションは、実行時に依存関係を解決するファクトリを挿入することです。 この両方のプラクティスによって、複数の[制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)方式が組み合わせられます。
 
-## <a name="recommended-patterns-for-multi-tenancy-in-di"></a>DI でのマルチテナントの推奨パターン
+## <a name="recommended-patterns-for-multi-tenancy-in-di"></a>`HttpContext` への静的なアクセスを回避します (たとえば [IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext))。
 
-[Orchard Core](https://github.com/OrchardCMS/OrchardCore) はマルチテナント機能があります。 詳細については、[Orchard Core のドキュメント](https://docs.orchardcore.net/en/dev/)を参照してください。
+どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです。ほとんどがフレームワーク自体の内の特殊なケースです。
 
-CMS 固有の機能を使用せずに Orchard Core Framework のみを使用してモジュラーおよびマルチテナント アプリを構築する方法の例については、 https://github.com/OrchardCMS/OrchardCore.Samples のサンプル アプリを参照してください。
+DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
@@ -764,24 +593,25 @@ CMS 固有の機能を使用せずに Orchard Core Framework のみを使用し�
 * <xref:blazor/dependency-injection>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
-* [依存関係の挿入による ASP.NET Core でのクリーンなコードの作成 (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
-* [明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
-* [制御の反転コンテナーと依存関係の挿入パターン (Martin Fowler)](https://www.martinfowler.com/articles/injection.html)
-* [ASP.NET Core DI 内の複数のインターフェイスにサービスを登録する方法](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
+* DI でのマルチテナントの推奨パターン
+* [Orchard Core](https://github.com/OrchardCMS/OrchardCore) はマルチテナント機能があります。
+* 詳細については、[Orchard Core のドキュメント](https://docs.orchardcore.net/en/dev/)を参照してください。
+* CMS 固有の機能を使用せずに Orchard Core Framework のみを使用してモジュラーおよびマルチテナント アプリを構築する方法の例については、 https://github.com/OrchardCMS/OrchardCore.Samples のサンプル アプリを参照してください。
+* その他の技術情報
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core では依存関係の挿入 (DI) ソフトウェア設計パターンがサポートされています。これは、クラスとその依存関係の間で[制御の反転 (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) を実現するための手法です。
+[ASP.NET Core で IDisposables を破棄する 4 つの方法](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)
 
-MVC コントローラー内部における依存関係の挿入に固有の情報については、<xref:mvc/controllers/dependency-injection> をご覧ください。
+[依存関係の挿入による ASP.NET Core でのクリーンなコードの作成 (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
 
-[サンプル コードを表示またはダウンロード](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
+[明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
 
-## <a name="overview-of-dependency-injection"></a>依存関係の挿入の概要
+## <a name="overview-of-dependency-injection"></a>[制御の反転コンテナーと依存関係の挿入パターン (Martin Fowler)](https://www.martinfowler.com/articles/injection.html)
 
-"*依存関係*" とは、他のオブジェクトが必要とする任意のオブジェクトのことです。 アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+[ASP.NET Core DI 内の複数のインターフェイスにサービスを登録する方法](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/) ASP.NET Core では依存関係の挿入 (DI) ソフトウェア設計パターンがサポートされています。これは、クラスとその依存関係の間で[制御の反転 (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) を実現するための手法です。
 
 ```csharp
 public class MyDependency
@@ -800,7 +630,7 @@ public class MyDependency
 }
 ```
 
-クラスで `WriteMessage` メソッドを使用できるようにするために、`MyDependency` クラスのインスタンスを作成することができます。 `MyDependency` クラスは `IndexModel` クラスの依存関係です。
+MVC コントローラー内部における依存関係の挿入に固有の情報については、<xref:mvc/controllers/dependency-injection> をご覧ください。 [サンプル コードを表示またはダウンロード](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 ```csharp
 public class IndexModel : PageModel
@@ -815,44 +645,44 @@ public class IndexModel : PageModel
 }
 ```
 
-このクラスは `MyDependency` のインスタンスを作成し、これに直接依存しています。 コードの依存関係 (前の例など) には問題が含まれ、次の理由から回避する必要があります。
+依存関係の挿入の概要 "*依存関係*" とは、他のオブジェクトが必要とする任意のオブジェクトのことです。
 
-* `MyDependency` を別の実装で置き換えるには、クラスを変更する必要があります。
-* `MyDependency` が依存関係を含んでいる場合、これらはクラスによって構成する必要があります。 複数のクラスが `MyDependency` に依存している大規模なプロジェクトでは、構成コードがアプリ全体に分散するようになります。
-* このような実装では、単体テストを行うことが困難です。 アプリはモックまたはスタブの `MyDependency` クラスを使用する必要がありますが、この方法では不可能です。
+* アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+* クラスで `WriteMessage` メソッドを使用できるようにするために、`MyDependency` クラスのインスタンスを作成することができます。 `MyDependency` クラスは `IndexModel` クラスの依存関係です。
+* このクラスは `MyDependency` のインスタンスを作成し、これに直接依存しています。 コードの依存関係 (前の例など) には問題が含まれ、次の理由から回避する必要があります。
 
-依存関係の挿入は、次の方法によってこれらの問題に対応します。
+`MyDependency` を別の実装で置き換えるには、クラスを変更する必要があります。
 
-* 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
-* サービス コンテナー内の依存関係の登録。 ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。 サービスはアプリの `Startup.ConfigureServices` メソッドに登録されています。
-* サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
+* `MyDependency` が依存関係を含んでいる場合、これらはクラスによって構成する必要があります。
+* 複数のクラスが `MyDependency` に依存している大規模なプロジェクトでは、構成コードがアプリ全体に分散するようになります。 このような実装では、単体テストを行うことが困難です。 アプリはモックまたはスタブの `MyDependency` クラスを使用する必要がありますが、この方法では不可能です。
+* 依存関係の挿入は、次の方法によってこれらの問題に対応します。 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
 
-[サンプル アプリ](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、サービスがアプリに提供するメソッドが `IMyDependency` インターフェイスによって定義されます。
+サービス コンテナー内の依存関係の登録。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 
-このインターフェイスは、具象型 `MyDependency` によって実装されます。
+ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。
+サービスはアプリの `Startup.ConfigureServices` メソッドに登録されています。 サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。 [サンプル アプリ](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、サービスがアプリに提供するメソッドが `IMyDependency` インターフェイスによって定義されます。 このインターフェイスは、具象型 `MyDependency` によって実装されます。
 
-`IMyDependency` と `ILogger<TCategoryName>` をサービス コンテナーに登録する必要があります。 `IMyDependency` は `Startup.ConfigureServices` に登録されます。 `ILogger<TCategoryName>` はログ記録の抽象化インフラストラクチャによって登録されます。したがって、これは、フレームワークによって既定で登録される[フレームワークが提供するサービス](#framework-provided-services)です。
+`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。
 
-コンテナーでは、[(ジェネリック) オープン型](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)を活用し、すべての [(ジェネリック) 構築型](/dotnet/csharp/language-reference/language-specification/types#constructed-types)を登録する必要をなくすことで、`ILogger<TCategoryName>` を解決します。
+コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。
 
 ```csharp
 services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 ```
 
-サンプル アプリにおいて、`IMyDependency` サービスは `MyDependency` 具象型を使用して登録されます。 登録によって、サービスの有効期間が 1 つの要求の有効期間に範囲設定されます。 [サービスの有効期間](#service-lifetimes)については、このトピックの後半で説明します。
+解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。 `IMyDependency` と `ILogger<TCategoryName>` をサービス コンテナーに登録する必要があります。 `IMyDependency` は `Startup.ConfigureServices` に登録されます。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> 各 `services.Add{SERVICE_NAME}` 拡張メソッドは、サービスを追加 (および場合によっては構成) します。 たとえば、`services.AddMvc()` はサービスの Razor Pages と必須の MVC を追加します。 アプリをこの規則に従わせることをお勧めします。 拡張メソッドを [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 名前空間に配置して、サービス登録のグループをカプセル化します。
+> `ILogger<TCategoryName>` はログ記録の抽象化インフラストラクチャによって登録されます。したがって、これは、フレームワークによって既定で登録される[フレームワークが提供するサービス](#framework-provided-services)です。 コンテナーでは、[(ジェネリック) オープン型](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)を活用し、すべての [(ジェネリック) 構築型](/dotnet/csharp/language-reference/language-specification/types#constructed-types)を登録する必要をなくすことで、`ILogger<TCategoryName>` を解決します。 サンプル アプリにおいて、`IMyDependency` サービスは `MyDependency` 具象型を使用して登録されます。 登録によって、サービスの有効期間が 1 つの要求の有効期間に範囲設定されます。
 
-サービスのコンストラクターで[ビルトイン型](/dotnet/csharp/language-reference/keywords/built-in-types-table) (`string` など) が必要な場合は、[構成](xref:fundamentals/configuration/index)や[オプション パターン](xref:fundamentals/configuration/options)を使って型を挿入することができます。
+[サービスの有効期間](#service-lifetimes)については、このトピックの後半で説明します。
 
 ```csharp
 public class MyDependency : IMyDependency
@@ -868,21 +698,21 @@ public class MyDependency : IMyDependency
 }
 ```
 
-クラスのコンストラクター経由でサービスのインスタンスが要求されます。サービスはプライベート フィールドに割り当てられて使用されます。 このフィールドは、クラス全体で必要に応じてサービスにアクセスするために使用されます。
+各 `services.Add{SERVICE_NAME}` 拡張メソッドは、サービスを追加 (および場合によっては構成) します。 たとえば、`services.AddMvc()` はサービスの Razor Pages と必須の MVC を追加します。
 
-サンプル アプリでは、`IMyDependency` インスタンスが要求され、サービスの `WriteMessage` メソッドを呼び出すために使用されます。
+アプリをこの規則に従わせることをお勧めします。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3,6,13,29-30)]
 
-## <a name="services-injected-into-startup"></a>Startup に挿入されるサービス
+## <a name="services-injected-into-startup"></a>拡張メソッドを [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 名前空間に配置して、サービス登録のグループをカプセル化します。
 
-汎用ホスト (<xref:Microsoft.Extensions.Hosting.IHostBuilder>) を使用すると、次のサービスの種類のみを `Startup` コンストラクターに挿入できます。
+サービスのコンストラクターで[ビルトイン型](/dotnet/csharp/language-reference/keywords/built-in-types-table) (`string` など) が必要な場合は、[構成](xref:fundamentals/configuration/index)や[オプション パターン](xref:fundamentals/configuration/options)を使って型を挿入することができます。
 
 * `IWebHostEnvironment`
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
-サービスは `Startup.Configure` に挿入できます。
+クラスのコンストラクター経由でサービスのインスタンスが要求されます。サービスはプライベート フィールドに割り当てられて使用されます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
@@ -891,65 +721,32 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-詳細については、「<xref:fundamentals/startup>」を参照してください。
+このフィールドは、クラス全体で必要に応じてサービスにアクセスするために使用されます。
 
-## <a name="framework-provided-services"></a>フレームワークが提供するサービス
+## <a name="framework-provided-services"></a>サンプル アプリでは、`IMyDependency` インスタンスが要求され、サービスの `WriteMessage` メソッドを呼び出すために使用されます。
 
-`Startup.ConfigureServices` メソッドでは、Entity Framework Core や ASP.NET Core MVC のようなプラットフォーム機能など、アプリが使うサービスを定義する必要があります。 最初に、`ConfigureServices` に提供される `IServiceCollection` には、フレームワークによって定義されたサービスがあります ([ホストの構成方法](xref:fundamentals/index#host)によって異なります)。 ASP.NET Core テンプレートに基づくアプリが、フレームワークによって登録された何百ものサービスを持つことも珍しくありません。 次の表に、フレームワークによって登録されたサービスのごく一部のサンプルを示します。
+Startup に挿入されるサービス 汎用ホスト (<xref:Microsoft.Extensions.Hosting.IHostBuilder>) を使用すると、次のサービスの種類のみを `Startup` コンストラクターに挿入できます。 サービスは `Startup.Configure` に挿入できます。 詳細については、「<xref:fundamentals/startup>」を参照してください。
 
-| サービスの種類 | 有効期間 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+| フレームワークが提供するサービス | `Startup.ConfigureServices` メソッドでは、Entity Framework Core や ASP.NET Core MVC のようなプラットフォーム機能など、アプリが使うサービスを定義する必要があります。 |
+| ------------ | -------- |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 最初に、`ConfigureServices` に提供される `IServiceCollection` には、フレームワークによって定義されたサービスがあります ([ホストの構成方法](xref:fundamentals/index#host)によって異なります)。 |
+| <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | ASP.NET Core テンプレートに基づくアプリが、フレームワークによって登録された何百ものサービスを持つことも珍しくありません。 |
+| <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | 次の表に、フレームワークによって登録されたサービスのごく一部のサンプルを示します。 |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | サービスの種類 |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 有効期間 |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | 一時的 |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | 一時的 |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | シングルトン |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | 一時的 |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | シングルトン |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | シングルトン |
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+## <a name="register-additional-services-with-extension-methods"></a>シングルトン
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 一時的 | | <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | シングルトン | | <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | シングルトン | | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | シングルトン | | <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 一時的 | | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | シングルトン | | <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | 一時的 | | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | シングルトン | | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | シングルトン | | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | シングルトン | | <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | 一時的 | | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | シングルトン | | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | シングルトン | | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | シングルトン |
-
-## <a name="register-additional-services-with-extension-methods"></a>拡張メソッドを使用した追加サービスの登録する
-
-サービス (および必要であればサービスが依存するサービス) を登録するためにサービス コレクションの拡張メソッドを使用できる場合は、1 つの `Add{SERVICE_NAME}` 拡張メソッドを使用してそのサービスが必要とするすべてのサービスを登録することが規則です。 次のコードは、拡張メソッド [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) と <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> を使用して、コンテナーに追加のサービスを追加する方法の例です。
+一時的 シングルトン
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -967,231 +764,47 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-詳細については、API ドキュメントにある <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> クラスを参照してください。
+シングルトン
 
-## <a name="service-lifetimes"></a>サービスの有効期間
+## <a name="service-lifetimes"></a>シングルトン
 
-登録される各サービスの適切な有効期間を選択します。 ASP.NET Core サービスは、次の有効期間で構成できます。
+拡張メソッドを使用した追加サービスの登録する サービス (および必要であればサービスが依存するサービス) を登録するためにサービス コレクションの拡張メソッドを使用できる場合は、1 つの `Add{SERVICE_NAME}` 拡張メソッドを使用してそのサービスが必要とするすべてのサービスを登録することが規則です。
 
-### <a name="transient"></a>一時的
+### <a name="transient"></a>次のコードは、拡張メソッド [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) と <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> を使用して、コンテナーに追加のサービスを追加する方法の例です。
 
-有効期間が一時的なサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>) は、サービス コンテナーから要求されるたびに作成されます。 この有効期間は、軽量でステートレスのサービスに最適です。
+詳細については、API ドキュメントにある <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> クラスを参照してください。 サービスの有効期間
 
-### <a name="scoped"></a>スコープ
+### <a name="scoped"></a>登録される各サービスの適切な有効期間を選択します。
 
-有効期間がスコープのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) は、クライアント要求 (接続) ごとに 1 回作成されます。
-
-> [!WARNING]
-> ミドルウェアでスコープ サービスを使用している場合、サービスを `Invoke` または `InvokeAsync` メソッドに追加します。 コンストラクターを使用して挿入すると、サービスがシングルトンのように動作するよう強制されるので、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用した挿入は行わないでください。 詳細については、「<xref:fundamentals/middleware/write#per-request-middleware-dependencies>」を参照してください。
-
-### <a name="singleton"></a>シングルトン
-
-有効期間がシングルトンのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>) は、最初に要求されたときに作成されます (または、`Startup.ConfigureServices` が実行されて、サービス登録でインスタンスが指定された場合)。 以降の要求は、すべて同じインスタンスを使用します。 アプリをシングルトンで動作させる必要がある場合は、サービス コンテナーによるサービスの有効期間の管理を許可することをお勧めします。 クラス内のオブジェクトの有効期間を管理するために、シングルトンの設計パターンを実装してユーザー コードを提供しないでください。
+ASP.NET Core サービスは、次の有効期間で構成できます。
 
 > [!WARNING]
-> シングルトンからスコープ サービスを解決するのは危険です。 後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。
+> 一時的 有効期間が一時的なサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>) は、サービス コンテナーから要求されるたびに作成されます。 この有効期間は、軽量でステートレスのサービスに最適です。
 
-## <a name="service-registration-methods"></a>サービス登録メソッド
+### <a name="singleton"></a>スコープ
 
-サービス登録拡張メソッドでは、特定のシナリオで役立つオーバーロードが提供されます。
+有効期間がスコープのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) は、クライアント要求 (接続) ごとに 1 回作成されます。 ミドルウェアでスコープ サービスを使用している場合、サービスを `Invoke` または `InvokeAsync` メソッドに追加します。 コンストラクターを使用して挿入すると、サービスがシングルトンのように動作するよう強制されるので、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用した挿入は行わないでください。 詳細については、「<xref:fundamentals/middleware/write#per-request-middleware-dependencies>」を参照してください。
 
-| メソッド | 自動<br>object<br>破棄 | 複数<br>実装 | 引数を渡す |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+> [!WARNING]
+> シングルトン 有効期間がシングルトンのサービス (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>) は、最初に要求されたときに作成されます (または、`Startup.ConfigureServices` が実行されて、サービス登録でインスタンスが指定された場合)。
 
---- | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+## <a name="service-registration-methods"></a>以降の要求は、すべて同じインスタンスを使用します。
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+アプリをシングルトンで動作させる必要がある場合は、サービス コンテナーによるサービスの有効期間の管理を許可することをお勧めします。
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+| クラス内のオブジェクトの有効期間を管理するために、シングルトンの設計パターンを実装してユーザー コードを提供しないでください。 | シングルトンからスコープ サービスを解決するのは危険です。<br>後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。<br>サービス登録メソッド | サービス登録拡張メソッドでは、特定のシナリオで役立つオーバーロードが提供されます。<br>メソッド | 自動 |
+| ------ | :-----------------------------: | :-------------------------: | :-------: |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>object<br>`services.AddSingleton<IMyDep, MyDep>();` | 破棄 | 複数 | 実装 |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>引数を渡す<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | 例: | はい | はい |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>いいえ<br>`services.AddSingleton<MyDep>();` | 次に例を示します。 | はい | はい |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>はい<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | 例: | はい | いいえ |
+| `AddSingleton(new {IMPLEMENTATION})`<br>いいえ<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | 次に例を示します。 | いいえ | はい |
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+はい 次に例を示します。
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
+いいえ
 
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--------------: | :--- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-----: | | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>例:<br>`services.AddSingleton<IMyDep, MyDep>();` | はい | はい | いいえ | | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>次に例を示します。<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | はい | はい | はい | | `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>例:<br>`services.AddSingleton<MyDep>();` | はい | いいえ | いいえ | | `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>次に例を示します。<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | いいえ | はい | はい | | `AddSingleton(new {IMPLEMENTATION})`<br>次に例を示します。<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | いいえ | いいえ | はい |
-
-型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。 実装が複数の場合の一般的なシナリオとしては、[テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)します。
-
-`TryAdd{LIFETIME}` メソッドでは、登録された実装がまだ存在しない場合にのみサービスが登録されます。
-
-次の例の最初の行では、`IMyDependency` に `MyDependency` を登録します。 2 行目では何も行われません。`IMyDependency` には登録された実装が既に含まれているからです。
+いいえ はい
 
 ```csharp
 services.AddSingleton<IMyDependency, MyDependency>();
@@ -1199,16 +812,16 @@ services.AddSingleton<IMyDependency, MyDependency>();
 services.TryAddSingleton<IMyDependency, DifferentDependency>();
 ```
 
-詳細については次を参照してください:
+型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。
 
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAdd*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddTransient*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton*>
 
-[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。 一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
+実装が複数の場合の一般的なシナリオとしては、[テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)します。 `TryAdd{LIFETIME}` メソッドでは、登録された実装がまだ存在しない場合にのみサービスが登録されます。 次の例の最初の行では、`IMyDependency` に `MyDependency` を登録します。 2 行目では何も行われません。`IMyDependency` には登録された実装が既に含まれているからです。
 
-次の例の最初の行では、`IMyDep1` に `MyDep` を登録します。 2 行目では `IMyDep2` に `MyDep` を登録します。 3 行目では何も行われません。`IMyDep1` には `MyDep` の登録済みの実装が既に含まれているからです。
+詳細については次を参照してください: [TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。
 
 ```csharp
 public interface IMyDep1 {}
@@ -1222,53 +835,60 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep2, MyDep>());
 services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 ```
 
-### <a name="constructor-injection-behavior"></a>コンストラクターの挿入の動作
+### <a name="constructor-injection-behavior"></a>サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。
 
-サービスは 2 つのメカニズムによって解決できます。
+一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
 
 * <xref:System.IServiceProvider>
-* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>:依存関係の挿入コンテナーにサービスを登録することなくオブジェクトの作成を許可します。 `ActivatorUtilities` はユーザー側の抽象化 (タグ ヘルパー、MVC コントローラー、モデル バインダーなど) で使用されます。
+* 次の例の最初の行では、`IMyDep1` に `MyDep` を登録します。 2 行目では `IMyDep2` に `MyDep` を登録します。
 
-コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。
+3 行目では何も行われません。`IMyDep1` には `MyDep` の登録済みの実装が既に含まれているからです。
 
-`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。
+コンストラクターの挿入の動作
 
-`ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。 コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
+サービスは 2 つのメカニズムによって解決できます。 <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>:依存関係の挿入コンテナーにサービスを登録することなくオブジェクトの作成を許可します。
 
-## <a name="entity-framework-contexts"></a>Entity Framework コンテキスト
+## <a name="entity-framework-contexts"></a>`ActivatorUtilities` はユーザー側の抽象化 (タグ ヘルパー、MVC コントローラー、モデル バインダーなど) で使用されます。
 
-Entity Framework コンテキストでは通常、[範囲が指定された有効期間](#service-lifetimes)が利用され、サービス コンテナーに追加されます。これは、Web アプリ データベース操作は通常、その範囲がクライアント要求に設定されるためです。 データベース コンテキストの登録時、[AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) オーバーロードによって有効期間が指定されなかった場合、既定の有効期間が範囲となります。 有効期間が与えられたサービスの場合、サービスより有効期間が短いデータベース コンテキストを使用できません。
+コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。 `IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。 `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。
 
-## <a name="lifetime-and-registration-options"></a>有効期間と登録のオプション
+## <a name="lifetime-and-registration-options"></a>コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
 
-有効期間と登録のオプションの違いを示すために、タスクを一意の識別子 `OperationId` を備えた操作として表す、次のインターフェイスについて考えます。 次のインターフェイスに対して操作のサービスの有効期間がどのように構成されているかに応じて、コンテナーは、クラスに要求されたときに、サービスの同じインスタンスか別のインスタンスを提供します。
+Entity Framework コンテキスト Entity Framework コンテキストでは通常、[範囲が指定された有効期間](#service-lifetimes)が利用され、サービス コンテナーに追加されます。これは、Web アプリ データベース操作は通常、その範囲がクライアント要求に設定されるためです。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IOperation.cs?name=snippet1)]
 
-インターフェイスは `Operation` クラス内で実装されます。 指定されない場合、`Operation` コンストラクターは GUID を生成します。
+データベース コンテキストの登録時、[AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) オーバーロードによって有効期間が指定されなかった場合、既定の有効期間が範囲となります。 有効期間が与えられたサービスの場合、サービスより有効期間が短いデータベース コンテキストを使用できません。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Models/Operation.cs?name=snippet1)]
 
-`OperationService` が登録されます。これは、その他の `Operation` 型のそれぞれに依存します。 依存関係の挿入を経由して `OperationService` が要求される場合、これは各サービスの新しいインスタンスか、依存関係のあるサービスの有効期間に基づく既存のインスタンスを受信します。
+有効期間と登録のオプション 有効期間と登録のオプションの違いを示すために、タスクを一意の識別子 `OperationId` を備えた操作として表す、次のインターフェイスについて考えます。
 
-* コンテナーからの要求時に一時的なサービスが作成されるとき、`IOperationTransient` サービスの `OperationId` と `OperationService` の `OperationId` は異なります。 `OperationService` は `IOperationTransient` クラスの新しいインスタンスを受け取ります。 新しいインスタンスは異なる `OperationId` を生成します。
-* クライアント要求ごとにスコープ サービスが作成されるとき、`IOperationScoped` サービスの `OperationId` は、クライアント要求内の `OperationService` のものと同じになります。 クライアント要求間で、両方のサービスは異なる `OperationId` 値を共有します。
-* シングルトンとシングルトン インスタンスのサービスが 1 回作成され、すべてのクライアント要求とすべてのサービス間で使用されるとき、`OperationId` はすべてのサービス要求の間で一定です。
+* 次のインターフェイスに対して操作のサービスの有効期間がどのように構成されているかに応じて、コンテナーは、クラスに要求されたときに、サービスの同じインスタンスか別のインスタンスを提供します。 インターフェイスは `Operation` クラス内で実装されます。 指定されない場合、`Operation` コンストラクターは GUID を生成します。
+* `OperationService` が登録されます。これは、その他の `Operation` 型のそれぞれに依存します。 依存関係の挿入を経由して `OperationService` が要求される場合、これは各サービスの新しいインスタンスか、依存関係のあるサービスの有効期間に基づく既存のインスタンスを受信します。
+* コンテナーからの要求時に一時的なサービスが作成されるとき、`IOperationTransient` サービスの `OperationId` と `OperationService` の `OperationId` は異なります。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
 
-`Startup.ConfigureServices` では、各型が名前で指定されている有効期間に従ってコンテナーに追加されます。
+`OperationService` は `IOperationTransient` クラスの新しいインスタンスを受け取ります。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=6-9,12)]
 
-`IOperationSingletonInstance` サービスは、`Guid.Empty` の既知の ID を持った特定のインスタンスを使用しています。 この型が使用されるタイミングは明らかです (その GUID はすべてゼロです)。
+新しいインスタンスは異なる `OperationId` を生成します。 クライアント要求ごとにスコープ サービスが作成されるとき、`IOperationScoped` サービスの `OperationId` は、クライアント要求内の `OperationService` のものと同じになります。
 
-サンプル アプリでは、個々の要求内、および個々の要求間におけるオブジェクトの有効期間が示されます。 サンプル アプリの `IndexModel` には、各種類の `IOperation` 型と `OperationService` が必要です。 次に、ページ モデル クラスとサービスのすべての `OperationId` 値が、プロパティの割り当てを通じてページに表示されます。
+クライアント要求間で、両方のサービスは異なる `OperationId` 値を共有します。 シングルトンとシングルトン インスタンスのサービスが 1 回作成され、すべてのクライアント要求とすべてのサービス間で使用されるとき、`OperationId` はすべてのサービス要求の間で一定です。 `Startup.ConfigureServices` では、各型が名前で指定されている有効期間に従ってコンテナーに追加されます。
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=7-11,14-18,21-25)]
 
-2 つの要求の結果を、以下の 2 つの出力に示します。
+`IOperationSingletonInstance` サービスは、`Guid.Empty` の既知の ID を持った特定のインスタンスを使用しています。
 
+この型が使用されるタイミングは明らかです (その GUID はすべてゼロです)。
+
+サンプル アプリでは、個々の要求内、および個々の要求間におけるオブジェクトの有効期間が示されます。
+
+サンプル アプリの `IndexModel` には、各種類の `IOperation` 型と `OperationService` が必要です。  
+次に、ページ モデル クラスとサービスのすべての `OperationId` 値が、プロパティの割り当てを通じてページに表示されます。  
+2 つの要求の結果を、以下の 2 つの出力に示します。  
 **最初の要求:**
 
 コントローラーの操作:
@@ -1280,11 +900,11 @@ Entity Framework コンテキストでは通常、[範囲が指定された有�
 
 `OperationService` の操作:
 
-一時的: c6b049eb-1318-4e31-90f1-eb2dd849ff64  
+一時的: c6b049eb-1318-4e31-90f1-eb2dd849ff64
+
 スコープ:5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
 シングルトン:01271bc1-9e31-48e7-8f7c-7261b040ded9  
-インスタンス:00000000-0000-0000-0000-000000000000
-
+インスタンス:00000000-0000-0000-0000-000000000000  
 **2 番目の要求:**
 
 コントローラーの操作:
@@ -1296,20 +916,13 @@ Entity Framework コンテキストでは通常、[範囲が指定された有�
 
 `OperationService` の操作:
 
-一時的: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
-スコープ:31e820c5-4834-4d22-83fc-a60118acb9f4  
-シングルトン:01271bc1-9e31-48e7-8f7c-7261b040ded9  
-インスタンス:00000000-0000-0000-0000-000000000000
+* 一時的: c4cbacb8-36a2-436d-81c8-8c1b78808aaf スコープ:31e820c5-4834-4d22-83fc-a60118acb9f4 シングルトン:01271bc1-9e31-48e7-8f7c-7261b040ded9
+* インスタンス:00000000-0000-0000-0000-000000000000
+* 要求内および要求間で、どの `OperationId` 値が変化しているかを確認してください。
 
-要求内および要求間で、どの `OperationId` 値が変化しているかを確認してください。
+## <a name="call-services-from-main"></a>"*一時的な*" オブジェクトは常に異なります。
 
-* "*一時的な*" オブジェクトは常に異なります。 1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。
-* *Scoped* オブジェクトは、1 つのクライアント要求内では同じですが、複数のクライアント要求間では異なります。
-* "*シングルトン*" オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
-
-## <a name="call-services-from-main"></a>main からサービスを呼び出す
-
-[IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) を使用して <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> を作成し、アプリのスコープ内のスコープ サービスを解決します。 この方法は、起動時に初期化タスクを実行するために、スコープ サービスにアクセスするのに便利です。 次の例では、`Program.Main` で `MyScopedService` のコンテキストを取得する方法を示します。
+1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。 *Scoped* オブジェクトは、1 つのクライアント要求内では同じですが、複数のクライアント要求間では異なります。
 
 ```csharp
 using System;
@@ -1350,46 +963,46 @@ public class Program
 }
 ```
 
-## <a name="scope-validation"></a>スコープの検証
+## <a name="scope-validation"></a>"*シングルトン*" オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
 
-アプリが開発環境で実行されている場合、既定のサービス プロバイダーは次を確認するためのチェックを実行します。
+main からサービスを呼び出す
 
-* スコープ サービスが、ルート サービス プロバイダーによって直接的または間接的に解決されない。
-* スコープ サービスが、シングルトンに直接または間接に挿入されない。
+* [IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) を使用して <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> を作成し、アプリのスコープ内のスコープ サービスを解決します。
+* この方法は、起動時に初期化タスクを実行するために、スコープ サービスにアクセスするのに便利です。
 
-<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> が呼び出されると、ルート サービス プロバイダーが作成されます。 ルート サービス プロバイダーの有効期間は、プロバイダーがアプリで開始されるとアプリとサーバーの有効期間に対応し、アプリのシャットダウンには破棄されます。
+次の例では、`Program.Main` で `MyScopedService` のコンテキストを取得する方法を示します。 スコープの検証
 
-スコープ サービスは、それを作成したコンテナーによって破棄されます。 ルート コンテナーにスコープ サービスが作成されると、サービスはアプリ/サーバーのシャットダウン時に、ルート コンテナーによってのみ破棄されるため、サービスの有効期間は実質的にシングルトンに昇格されます。 `BuildServiceProvider` が呼び出されると、サービス スコープの検証がこれらの状況をキャッチします。
+アプリが開発環境で実行されている場合、既定のサービス プロバイダーは次を確認するためのチェックを実行します。 スコープ サービスが、ルート サービス プロバイダーによって直接的または間接的に解決されない。 スコープ サービスが、シングルトンに直接または間接に挿入されない。
 
-詳細については、「<xref:fundamentals/host/web-host#scope-validation>」を参照してください。
+<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> が呼び出されると、ルート サービス プロバイダーが作成されます。
 
-## <a name="request-services"></a>要求サービス
+## <a name="request-services"></a>ルート サービス プロバイダーの有効期間は、プロバイダーがアプリで開始されるとアプリとサーバーの有効期間に対応し、アプリのシャットダウンには破棄されます。
 
-`HttpContext` からの ASP.NET Core 要求内で使用可能なサービスは、[HttpContext.RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) コレクションを通じて公開されます。
+スコープ サービスは、それを作成したコンテナーによって破棄されます。
 
-要求サービスは、アプリの一部として構成および要求されるサービスを表します。 オブジェクトで依存関係を指定すると、これらは `ApplicationServices` ではなく `RequestServices` で検出された型で満たされます。
+ルート コンテナーにスコープ サービスが作成されると、サービスはアプリ/サーバーのシャットダウン時に、ルート コンテナーによってのみ破棄されるため、サービスの有効期間は実質的にシングルトンに昇格されます。 `BuildServiceProvider` が呼び出されると、サービス スコープの検証がこれらの状況をキャッチします。
 
-一般に、アプリから直接これらのプロパティを使用しないでください。 代わりに、クラスのコンストラクターを介してクラスに必要な型を要求し、フレームワークに依存関係を挿入させます。 これにより、テストしやすいクラスが生成されます。
+詳細については、「<xref:fundamentals/host/web-host#scope-validation>」を参照してください。 要求サービス `HttpContext` からの ASP.NET Core 要求内で使用可能なサービスは、[HttpContext.RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) コレクションを通じて公開されます。
 
 > [!NOTE]
-> コンストラクターのパラメーターとして依存関係を要求し、`RequestServices` コレクションにアクセスするようにします。
+> 要求サービスは、アプリの一部として構成および要求されるサービスを表します。
 
-## <a name="design-services-for-dependency-injection"></a>依存関係の挿入のためのサービスの設計
+## <a name="design-services-for-dependency-injection"></a>オブジェクトで依存関係を指定すると、これらは `ApplicationServices` ではなく `RequestServices` で検出された型で満たされます。
 
-ベスト プラクティスは次のとおりです。
+一般に、アプリから直接これらのプロパティを使用しないでください。
 
+* 代わりに、クラスのコンストラクターを介してクラスに必要な型を要求し、フレームワークに依存関係を挿入させます。
+* これにより、テストしやすいクラスが生成されます。 コンストラクターのパラメーターとして依存関係を要求し、`RequestServices` コレクションにアクセスするようにします。
+* 依存関係の挿入のためのサービスの設計 ベスト プラクティスは次のとおりです。
 * 各依存関係を取得するために依存関係の挿入を使用するようサービスを設計します。
-* ステートフル、静的クラス、およびメンバーは避けてください。 代わりにシングルトン サービスを使用するようにアプリを設計し、グローバルな状態を作成しないようにします。
-* サービス内部で依存関係のあるクラスを直接インスタンス化することを回避します。 直接のインスタンス化は、コードの固有の実装につながります。
-* アプリのクラスを、小さく、十分に要素に分割された、テストしやすいものにします。
 
-クラスに含まれる挿入される依存関係が多すぎるように見える場合、これは通常、クラスが担当する役割が多すぎて、[単一責任の原則 (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility) に違反していることのサインです。 責任の一部を新しいクラスに移動することにより、クラスのリファクタリングを試みます。 Razor Pages のページ モデル クラスと MVC コントローラー クラスは、UI の問題に集中する必要があることに留意します。 ビジネス ルールとデータ アクセスの実装の詳細は、これらの[個別の問題](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)に適したクラスに分離する必要があります。
+ステートフル、静的クラス、およびメンバーは避けてください。 代わりにシングルトン サービスを使用するようにアプリを設計し、グローバルな状態を作成しないようにします。 サービス内部で依存関係のあるクラスを直接インスタンス化することを回避します。 直接のインスタンス化は、コードの固有の実装につながります。
 
-### <a name="disposal-of-services"></a>サービスの破棄
+### <a name="disposal-of-services"></a>アプリのクラスを、小さく、十分に要素に分割された、テストしやすいものにします。
 
-コンテナーは、作成する <xref:System.IDisposable> 型の <xref:System.IDisposable.Dispose*> を呼び出します。 ユーザー コードによってコンテナーに追加されたインスタンスは、自動的に破棄されません。
+クラスに含まれる挿入される依存関係が多すぎるように見える場合、これは通常、クラスが担当する役割が多すぎて、[単一責任の原則 (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility) に違反していることのサインです。 責任の一部を新しいクラスに移動することにより、クラスのリファクタリングを試みます。
 
-次の例では、サービスがサービス コンテナーによって作成され、自動的に破棄されます。
+Razor Pages のページ モデル クラスと MVC コントローラー クラスは、UI の問題に集中する必要があることに留意します。
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -1406,12 +1019,12 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-次に例を示します。
+ビジネス ルールとデータ アクセスの実装の詳細は、これらの[個別の問題](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)に適したクラスに分離する必要があります。
 
-* サービス インスタンスは、サービス コンテナーによって作成されるわけではありません。
-* サービスの有効期間は、フレームワークによって認識されません。
-* フレームワークでは、サービスが自動的に破棄されることはありません。
-* サービスが開発者コードで明示的に破棄されていない場合は、アプリがシャットダウンするまで保持されます。
+* サービスの破棄
+* コンテナーは、作成する <xref:System.IDisposable> 型の <xref:System.IDisposable.Dispose*> を呼び出します。
+* ユーザー コードによってコンテナーに追加されたインスタンスは、自動的に破棄されません。
+* 次の例では、サービスがサービス コンテナーによって作成され、自動的に破棄されます。
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -1424,46 +1037,81 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="default-service-container-replacement"></a>既定のサービス コンテナーの置換
+### <a name="idisposable-guidance-for-transient-and-shared-instances"></a>次に例を示します。
 
-組み込みのサービス コンテナーは、フレームワークと、ほとんどのコンシューマー アプリのニーズに対応することを目的としたものです。 組み込みコンテナーでサポートされない、以下のような特定の機能が必要な場合を除き、組み込みコンテナーを使用することをお勧めします。
+#### <a name="transient-limited-lifetime"></a>サービス インスタンスは、サービス コンテナーによって作成されるわけではありません。
 
+サービスの有効期間は、フレームワークによって認識されません。
+
+フレームワークでは、サービスが自動的に破棄されることはありません。
+
+* サービスが開発者コードで明示的に破棄されていない場合は、アプリがシャットダウンするまで保持されます。
+* 一時的なインスタンスと共有インスタンスのための IDisposable ガイダンス
+
+一時的で限定的な有効期間
+
+**シナリオ** アプリには、次のいずれかのシナリオに対して一時的な有効期間を持つ <xref:System.IDisposable> インスタンスが必要です。 インスタンスは、ルート スコープで解決されます。
+
+* インスタンスは、スコープが終了する前に破棄する必要があります。
+* **解決方法**
+
+#### <a name="shared-instance-limited-lifetime"></a>ファクトリ パターンを使用して、親スコープの外部にインスタンスを作成します。
+
+このような状況では、通常、アプリケーションには、最終的な型のコンストラクターを直接呼び出す `Create` メソッドがあります。
+
+最終的な型に他の依存関係がある場合、ファクトリは次のことができます。
+
+そのコンストラクターで <xref:System.IServiceProvider> を受け取る。
+
+<xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance%2A?displayProperty=nameWithType> を使用してコンテナー外部でインスタンスをインスタンス化し、同時にコンテナーを依存関係のために使用する。 共有インスタンス、限定的な有効期間 **シナリオ** アプリでは、複数のサービスにわたって共有 <xref:System.IDisposable> インスタンスが必要ですが、<xref:System.IDisposable> の有効期間は限られています。
+
+#### <a name="general-guidelines"></a>**解決方法**
+
+* インスタンスをスコープ付きの有効期間に登録します。 <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope%2A?displayProperty=nameWithType> を使用してを開始し、新しい <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> を作成します。
+* スコープの <xref:System.IServiceProvider> を使用して必要なサービスを取得します。 有効期間が終了するときにスコープを破棄します。
+* 一般的なガイドライン <xref:System.IDisposable> インスタンスは、一時的なスコープを使用して登録しないでください。
+* 代わりに、ファクトリ パターンを使用します。 一時的またはスコープ付きの <xref:System.IDisposable> インスタンスをルート スコープ内で解決しないでください。
+
+## <a name="default-service-container-replacement"></a>唯一の一般的な例外は、アプリが <xref:System.IServiceProvider> を作成/再作成し、破棄する場合です。これは理想的なパターンではありません。
+
+DI を使用して <xref:System.IDisposable> 依存関係を受け取る場合、受信側が <xref:System.IDisposable> 自体を実装する必要はありません。 <xref:System.IDisposable> 依存関係の受信側は、その依存関係で <xref:System.IDisposable.Dispose%2A> を呼び出してはなりません。
+
+* サービスの有効期間を制御するには、スコープを使用する必要があります。
+* スコープは階層構造ではなく、スコープ間に特別な接続はありません。
+* 既定のサービス コンテナーの置換
+* 組み込みのサービス コンテナーは、フレームワークと、ほとんどのコンシューマー アプリのニーズに対応することを目的としたものです。
+* 組み込みコンテナーでサポートされない、以下のような特定の機能が必要な場合を除き、組み込みコンテナーを使用することをお勧めします。
 * プロパティの挿入
-* 名前に基づく挿入
+
+名前に基づく挿入
+
 * 子コンテナー
 * 有効期間のカスタム管理
 * 遅延初期化に対する `Func<T>` のサポート
 * 規則に基づく登録
-
-次のサードパーティ コンテナーは ASP.NET Core アプリで使用できます。
-
+* 次のサードパーティ コンテナーは ASP.NET Core アプリで使用できます。
 * [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
 * [DryIoc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
-* [Grace](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
-* [LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
-* [Lamar](https://jasperfx.github.io/lamar/)
-* [Stashbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
-* [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
-### <a name="thread-safety"></a>スレッド セーフ
+### <a name="thread-safety"></a>[Grace](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
 
-スレッド セーフのシングルトン サービスを作成します。 シングルトン サービスに一時的サービスへの依存関係がある場合、シングルトンによる一時的サービスの使い方によっては、一時的サービスもスレッド セーフであることが必要な場合があります。
+[LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection) [Lamar](https://jasperfx.github.io/lamar/)
 
-1 つのサービスのファクトリ メソッド (例: [AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*) に対する 2 番目の引数) をスレッド セーフにする必要はありません。 型 (`static`) のコンストラクターのように、1 つのスレッドによって 1 回呼び出されることが保証されます。
+[Stashbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection) [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
-## <a name="recommendations"></a>推奨事項
+## <a name="recommendations"></a>スレッド セーフ
 
-* `async/await` および `Task` ベースのサービスの解決はサポートされていません。 C# では非同期コンストラクターがサポートされていないため、推奨パターンは、サービスを同期的に解決した後に、非同期メソッドを使用することです。
+* スレッド セーフのシングルトン サービスを作成します。 シングルトン サービスに一時的サービスへの依存関係がある場合、シングルトンによる一時的サービスの使い方によっては、一時的サービスもスレッド セーフであることが必要な場合があります。
 
-* データと構成をサービス コンテナーに直接格納しないようにします。 たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。 同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。 実際のアイテムを DI 経由で要求することをお勧めします。
+* 1 つのサービスのファクトリ メソッド (例: [AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*) に対する 2 番目の引数) をスレッド セーフにする必要はありません。 型 (`static`) のコンストラクターのように、1 つのスレッドによって 1 回呼び出されることが保証されます。 推奨事項 `async/await` および `Task` ベースのサービスの解決はサポートされていません。 C# では非同期コンストラクターがサポートされていないため、推奨パターンは、サービスを同期的に解決した後に、非同期メソッドを使用することです。
 
-* サービスへの静的なアクセスを回避します (たとえば、他所で使用するための [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) の静的な型指定)。
+* データと構成をサービス コンテナーに直接格納しないようにします。
 
-* *サービス ロケーター パターン*は、[制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)戦略が混在しているので使用しないでください。
+* たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。
 
-  * サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService*> を呼び出さないでください。
+  * 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。
 
-    **正しくない:**
+    同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。
 
     ```csharp
     public class MyClass()
@@ -1479,7 +1127,7 @@ public void ConfigureServices(IServiceCollection services)
     }
     ```
 
-    **正しい**:
+    実際のアイテムを DI 経由で要求することをお勧めします。
 
     ```csharp
     public class MyClass
@@ -1500,15 +1148,15 @@ public void ConfigureServices(IServiceCollection services)
     }
     ```
 
-  * <xref:System.IServiceProvider.GetService*> を使用して、実行時に依存関係を解決するファクトリを挿入しないでください。
+  * サービスへの静的なアクセスを回避します (たとえば、他所で使用するための [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) の静的な型指定)。
 
-* `HttpContext` への静的なアクセスを回避します (たとえば [IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext))。
+* *サービス ロケーター パターン*は、[制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)戦略が混在しているので使用しないでください。
 
-どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです&mdash;ほとんどがフレームワーク自体の内の特殊なケースです。
+サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService*> を呼び出さないでください。 **正しくない:**
 
-DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
+**正しい**: <xref:System.IServiceProvider.GetService*> を使用して、実行時に依存関係を解決するファクトリを挿入しないでください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>`HttpContext` への静的なアクセスを回避します (たとえば [IHttpContextAccessor.HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext))。
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
@@ -1516,9 +1164,10 @@ DI は静的/グローバル オブジェクト アクセス パターンの*代
 * <xref:blazor/dependency-injection>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
-* [依存関係の挿入による ASP.NET Core でのクリーンなコードの作成 (MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
-* [明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
-* [制御の反転コンテナーと依存関係の挿入パターン (Martin Fowler)](https://www.martinfowler.com/articles/injection.html)
-* [ASP.NET Core DI 内の複数のインターフェイスにサービスを登録する方法](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
+* どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。
+* 例外はまれです。ほとんどがフレームワーク自体の内の特殊なケースです。
+* DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。
+* 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
+* その他の技術情報
 
 ::: moniker-end
