@@ -5,7 +5,7 @@ description: Blazor アプリをホストおよび展開する方法を説明し
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,18 +13,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 9d57b81cd813d02a65b6d3a39c7f1a1aa8a069c7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 482b066d347c2c572b0ffb78ccab1ac391195823
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775168"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452240"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor のホストと展開
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 ## <a name="publish-the-app"></a>アプリの発行
 
@@ -56,9 +54,9 @@ dotnet publish -c Release
 発行場所:
 
 * Blazor WebAssembly
-  * スタンドアロン &ndash; アプリは " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 アプリを静的サイトとして展開するには、*wwwroot* フォルダーの内容を静的サイトのホストにコピーします。
-  * ホステッド &ndash; クライアント Blazor WebAssembly アプリは、サーバ ーアプリの他の静的な Web アセットと共に、サーバー アプリの " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 *publish* フォルダーの内容をホストに展開します。
-* Blazor サーバー &ndash; アプリは " */bin/Release/{ターゲット フレームワーク}/publish*" フォルダーに発行されます。 *publish* フォルダーの内容をホストに展開します。
+  * スタンドアロン: アプリは " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 アプリを静的サイトとして展開するには、*wwwroot* フォルダーの内容を静的サイトのホストにコピーします。
+  * ホストされている: クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 *publish* フォルダーの内容をホストに展開します。
+* Blazor サーバー: アプリは " */bin/Release/{ターゲット フレームワーク}/publish*" フォルダーに発行されます。 *publish* フォルダーの内容をホストに展開します。
 
 フォルダー内のアセットは、Web サーバーに展開されます。 展開のプロセスが手動であるか自動であるかは、ご使用の展開ツールによって異なります。
 

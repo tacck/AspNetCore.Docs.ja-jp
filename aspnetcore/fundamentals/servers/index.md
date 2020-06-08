@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 74affbb7d18d80e2e55714df100d820aed2ce427
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d57fcd5883a869c5421b88321d4a279f3f938c9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776182"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452149"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core での Web サーバーの実装
 
@@ -30,7 +30,7 @@ ASP.NET Core アプリは、インプロセス HTTP サーバー実装を使用�
 
 Kestrel は、ASP.NET Core のプロジェクト テンプレートにより指定された既定の Web サーバーです。
 
-Kestrel を使用する: 
+Kestrel を使用する:
 
 * これ自体で、インターネットを含むネットワークから直接要求を処理するエッジ サーバーとして。
 
@@ -158,9 +158,9 @@ HTTP.sys の構成のガイダンスについては、「<xref:fundamentals/serv
 
 統合開発環境 (IDE) またはエディターでアプリが開始されると、サーバーが起動されます。
 
-* [Visual Studio](https://visualstudio.microsoft.com) &ndash; 起動プロファイルを使用して、[IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)またはコンソールで、アプリとサーバーを開始できます。
-* [Visual Studio Code](https://code.visualstudio.com/) &ndash; CoreCLR デバッガーをアクティブにする [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode) によって、アプリとサーバーが開始されます。
-* [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) &ndash; アプリとサーバーは、[Mono Soft-Mode Debugger](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/) によって開始されます。
+* [Visual Studio](https://visualstudio.microsoft.com):起動プロファイルを使用して、[IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)またはコンソールで、アプリとサーバーを開始できます。
+* [Visual Studio Code](https://code.visualstudio.com/):CoreCLR デバッガーをアクティブにする [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode) によって、アプリとサーバーが開始されます。
+* [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/): アプリとサーバーは、[Mono Soft-Mode Debugger](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/) によって開始されます。
 
 コマンド プロンプトからプロジェクトのフォルダーでアプリを起動すると、[dotnet run](/dotnet/core/tools/dotnet-run) によってアプリとサーバーが起動されます (Kestrel および HTTP.sys のみ)。 この構成は、`Debug` (既定) または `Release` のどちらかに設定された `-c|--configuration` オプションによって指定されます。
 

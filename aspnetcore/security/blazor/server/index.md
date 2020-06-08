@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: bbd8b6fcd357b8929bf097450854d98fbea2570e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5ba7bbde49bfc232795d375a1ec644825a0dee1e
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772636"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454637"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor サーバー アプリをセキュリティで保護する
 
@@ -37,8 +37,8 @@ Blazor サーバー プロジェクト テンプレートは、プロジェク�
 ダイアログが開き、他の ASP.NET Core プロジェクトで使用できるものと同じ一連の認証メカニズムが表示されます。
 
 * **認証なし**
-* **個人のユーザー アカウント** &ndash; ユーザー アカウントは次に格納できます。
-  * ASP.NET Core の [ID](xref:security/authentication/identity) システムを使用するアプリ内。
+* **個人のユーザー アカウント**: ユーザーアカウントは次のように格納できます。
+  * ASP.NET Core の [Identity](xref:security/authentication/identity) システムを使用するアプリ内。
   * [Azure AD B2C](xref:security/authentication/azure-ad-b2c)。
 * **職場または学校アカウント**
 * **Windows 認証**
@@ -56,7 +56,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | 認証メカニズム | 説明 |
 | ------------------------ | ----------- |
 | `None` (既定値)         | 認証なし |
-| `Individual`             | ASP.NET Core ID を使用してアプリに格納されているユーザー |
+| `Individual`             | ASP.NET Core Identity を使用してアプリに格納されているユーザー |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c) に格納されているユーザー |
 | `SingleOrg`              | 単一のテナントに対する組織認証 |
 | `MultiOrg`               | 複数のテナントに対する組織認証 |
@@ -75,7 +75,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 1. **[Configure your new Blazor Server App]\(新しい Blazor サーバー アプリの構成\)** ステップで、 **[認証]** ドロップダウンから **[Individual Authentication (in-app)]\(個別認証 (アプリ内)\)** を選択します。
 
-1. ASP.NET Core ID を使用してアプリに格納されている個々のユーザーに対して、アプリが作成されます。
+1. ASP.NET Core Identity を使用してアプリに格納されている個々のユーザーに対して、アプリが作成されます。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -90,7 +90,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 | 認証メカニズム | 説明 |
 | ------------------------ | ----------- |
 | `None` (既定値)         | 認証なし |
-| `Individual`             | ASP.NET Core ID を使用してアプリに格納されているユーザー |
+| `Individual`             | ASP.NET Core Identity を使用してアプリに格納されているユーザー |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c) に格納されているユーザー |
 | `SingleOrg`              | 単一のテナントに対する組織認証 |
 | `MultiOrg`               | 複数のテナントに対する組織認証 |
@@ -108,3 +108,10 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ## <a name="secure-an-existing-app"></a>既存のアプリをセキュリティで保護する
 
 Blazor サーバー アプリは、ASP.NET Core アプリと同じ方法でセキュリティ用に構成されています。 詳細については、<xref:security/index> の記事を参照してください。
+
+## <a name="scaffold-identity"></a>スキャフォールディング Identity
+
+スキャフォールディングを Blazor サーバープロジェクトに Identity します。
+
+* [既存の承認がありません](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization)。
+* [承認があります](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization)。
