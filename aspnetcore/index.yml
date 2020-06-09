@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: ASP.NET Core ドキュメント
+title: ASP.NET ドキュメント
 summary: ASP.NET Core を使用して、高速、安全、クロスプラットフォーム、クラウドベースの Web アプリとサービスを作成する方法について説明します。 チュートリアル、サンプル コード、基本事項、API リファレンスなどを参照できます。
 brand: aspnet
 metadata:
-  title: ASP.NET Core ドキュメント
+  title: ASP.NET ドキュメント
   description: ASP.NET Core を使用して、高速、安全、クロスプラットフォーム、クラウドベースの Web アプリとサービスを作成する方法について説明します。 チュートリアル、サンプル コード、基本事項、API リファレンスなどを参照できます。
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 06/03/2020
-  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
-  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
+  ms.date: 06/05/2020
+  ms.openlocfilehash: 25b5387c8956ea7931751525ea954f6f702c0cde
+  ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
   ms.translationtype: HT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 06/04/2020
-  ms.locfileid: "84355425"
+  ms.lasthandoff: 06/08/2020
+  ms.locfileid: "84507325"
 highlightedContent:
   items:
   - title: 任意のプラットフォームに 5 分で ASP.NET Core アプリを作成する
@@ -44,7 +44,7 @@ highlightedContent:
     url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: ASP.NET Core MVC アプリの開発
-  summary: 対話型 Web アプリ、Web API、MVC パターンのアプリ、リアルタイム アプリなどを選択してください。 ASP.NET 4.x のドキュメントについては、「[ASP.NET](https://docs.microsoft.com/aspnet/overview)」を参照してください。
+  summary: 対話型 Web アプリ、Web API、MVC パターンのアプリ、リアルタイム アプリなどを選択してください
   items:
   - title: 対話型のクライアント側 Blazor アプリ
     summary: WebAssembly を活用する再利用可能な UI コンポーネントを使用した開発で、ほぼネイティブなパフォーマンスを実現します
