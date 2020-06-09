@@ -1,12 +1,24 @@
 ---
-title: ' ASP.NET Core Blazor webassembly パフォーマンスのベストプラクティス ' 作成者: 説明: ' ASP.NET Core webasapp のパフォーマンスを向上させ Blazor 、一般的なパフォーマンスの問題を回避するためのヒント。 "
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Blazorパフォーマンスのベストプラクティスを ASP.NET Core
+author: pranavkm
+description: ASP.NET Core アプリのパフォーマンスを向上させ Blazor 、一般的なパフォーマンスの問題を回避するためのヒントです。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/blazor/webassembly-best-practices
+ms.openlocfilehash: 950d87a6f09e998e47e96c93c5d68bb3f19ddafb
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529633"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Blazorパフォーマンスのベストプラクティスを ASP.NET Core
 
@@ -131,6 +143,12 @@ Blazor<xref:Microsoft.JSInterop.IJSRuntime>サーバーアプリで利用可能�
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="compression"></a>圧縮
+
+BlazorWebassembly が公開されると、発行時に出力が静的に圧縮され、アプリのサイズが縮小され、実行時の圧縮のオーバーヘッドが解消されます。 Blazorは、コンテンツの negotation を実行し、静的に圧縮されたファイルを提供するために、サーバーに依存します。
+
+アプリがデプロイされたら、アプリが圧縮ファイルを提供していることを確認します。 ブラウザーの開発者ツールの [ネットワーク] タブを調べ、ファイルがまたはで提供されていることを確認し `Content-Encoding: br` `Content-Encoding: gz` ます。 ホストが圧縮ファイルを提供していない場合は、「」の手順に従い <xref:host-and-deploy/blazor/webassembly#compression> ます。
 
 ### <a name="disable-unused-features"></a>使用されていない機能を無効にする
 
