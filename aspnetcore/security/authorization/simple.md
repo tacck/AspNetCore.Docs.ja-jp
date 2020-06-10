@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84272126"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652957"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core での単純な承認
 
@@ -79,3 +79,24 @@ public class AccountController : Controller
 
 > [!WARNING]
 > `[AllowAnonymous]`すべての承認ステートメントをバイパスします。 `[AllowAnonymous]`との `[Authorize]` 属性を組み合わせると、 `[Authorize]` 属性は無視されます。 たとえば `[AllowAnonymous]` 、コントローラーレベルでを適用した場合、 `[Authorize]` 同じコントローラー (またはその中のアクション) の属性はすべて無視されます。
+
+<a name="aarp"></a>
+
+## <a name="authorize-attribute-and-razor-pages"></a>属性とページを承認する Razor
+
+は、 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ページハンドラーには適用でき***ません*** Razor 。 たとえば、は、、 `[Authorize]` `OnGet` `OnPost` または他のページハンドラーには適用できません。
+
+ページハンドラーメソッドに承認を適用するには、次の2つの方法を使用でき Razor ます。
+
+* 異なる承認を必要とするページハンドラーには、個別のページを使用します。 共有コンテンツを1つまたは複数の[部分ビュー](xref:mvc/views/partial)に移動しました。 可能な場合は、これが推奨される方法です。
+* 共通ページを共有する必要があるコンテンツには、 [Iasyncpagefilter. Onpageハンドラ Selectionasync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A)の一部として承認を実行するフィルターを記述します。 [Pageハンドラ auth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub プロジェクトは、次の方法を示しています。
+  * [Authorizepageハンドラフィルター](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizePageHandlerFilter.cs)は、承認フィルターを実装します。[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]
+
+  * [[Authorizepagehandler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16)属性がページハンドラーに適用され `OnGet` ます。[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]
+
+> [!WARNING]
+> [Pageハンドラ auth](https://github.com/pranavkm/PageHandlerAuth)サンプルアプローチでは、次の***ことはできません***。
+> * ページ、ページモデル、またはグローバルに適用された承認属性を使用して構成します。 承認属性を作成すると、ページに1つ以上のインスタンスが適用されている場合に、認証と承認が複数回実行 `AuthorizeAttribute` `AuthorizeFilter` されます。
+> * ASP.NET Core 認証および承認システムの残りの部分と連携して作業します。 この方法を使用してアプリケーションに対して正しく動作することを確認する必要があります。
+
+ページハンドラーでをサポートする予定はありません `AuthorizeAttribute` Razor 。 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106586"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652996"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core 用のカスタムストレージプロバイダーIdentity
 
@@ -25,7 +25,7 @@ ms.locfileid: "84106586"
 
 ASP.NET Core Identity は拡張可能なシステムであり、カスタム記憶域プロバイダーを作成してアプリに接続することができます。 このトピックでは、ASP.NET Core 用にカスタマイズされた記憶域プロバイダーを作成する方法について説明し Identity ます。 この記事では、独自の記憶域プロバイダーを作成するための重要な概念について説明しますが、詳細な手順については説明しません。
 
-[GitHub のサンプルを表示またはダウンロードしてください](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)。
+[GitHub のサンプルを表示またはダウンロードしてください](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample)。
 
 ## <a name="introduction"></a>はじめに
 
