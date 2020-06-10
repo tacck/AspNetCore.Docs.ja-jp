@@ -11,20 +11,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84272126"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652957"
 ---
-# <a name="simple-authorization-in-aspnet-core"></a><span data-ttu-id="83f55-103">ASP.NET Core での単純な承認</span><span class="sxs-lookup"><span data-stu-id="83f55-103">Simple authorization in ASP.NET Core</span></span>
+# <a name="simple-authorization-in-aspnet-core"></a><span data-ttu-id="6e112-103">ASP.NET Core での単純な承認</span><span class="sxs-lookup"><span data-stu-id="6e112-103">Simple authorization in ASP.NET Core</span></span>
 
 <a name="security-authorization-simple"></a>
 
-<span data-ttu-id="83f55-104">ASP.NET Core での承認は <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> 、とそのさまざまなパラメーターで制御されます。</span><span class="sxs-lookup"><span data-stu-id="83f55-104">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="83f55-105">最も単純な形式では、 `[Authorize]` コントローラー、アクション、またはページに属性を適用する Razor ことで、そのコンポーネントへのアクセスが認証されたユーザーに制限されます。</span><span class="sxs-lookup"><span data-stu-id="83f55-105">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or Razor Page, limits access to that component to any authenticated user.</span></span>
+<span data-ttu-id="6e112-104">ASP.NET Core での承認は <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> 、とそのさまざまなパラメーターで制御されます。</span><span class="sxs-lookup"><span data-stu-id="6e112-104">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="6e112-105">最も単純な形式では、 `[Authorize]` コントローラー、アクション、またはページに属性を適用する Razor ことで、そのコンポーネントへのアクセスが認証されたユーザーに制限されます。</span><span class="sxs-lookup"><span data-stu-id="6e112-105">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or Razor Page, limits access to that component to any authenticated user.</span></span>
 
-<span data-ttu-id="83f55-106">たとえば、次のコードは、へのアクセスを認証された `AccountController` ユーザーに制限します。</span><span class="sxs-lookup"><span data-stu-id="83f55-106">For example, the following code limits access to the `AccountController` to any authenticated user.</span></span>
+<span data-ttu-id="6e112-106">たとえば、次のコードは、へのアクセスを認証された `AccountController` ユーザーに制限します。</span><span class="sxs-lookup"><span data-stu-id="6e112-106">For example, the following code limits access to the `AccountController` to any authenticated user.</span></span>
 
 ```csharp
 [Authorize]
@@ -40,7 +40,7 @@ public class AccountController : Controller
 }
 ```
 
-<span data-ttu-id="83f55-107">コントローラーではなくアクションに承認を適用する場合は、 `AuthorizeAttribute` アクション自体に属性を適用します。</span><span class="sxs-lookup"><span data-stu-id="83f55-107">If you want to apply authorization to an action rather than the controller, apply the `AuthorizeAttribute` attribute to the action itself:</span></span>
+<span data-ttu-id="6e112-107">コントローラーではなくアクションに承認を適用する場合は、 `AuthorizeAttribute` アクション自体に属性を適用します。</span><span class="sxs-lookup"><span data-stu-id="6e112-107">If you want to apply authorization to an action rather than the controller, apply the `AuthorizeAttribute` attribute to the action itself:</span></span>
 
 ```csharp
 public class AccountController : Controller
@@ -56,9 +56,9 @@ public class AccountController : Controller
 }
 ```
 
-<span data-ttu-id="83f55-108">これで、認証されたユーザーのみが関数にアクセスできるようになりました `Logout` 。</span><span class="sxs-lookup"><span data-stu-id="83f55-108">Now only authenticated users can access the `Logout` function.</span></span>
+<span data-ttu-id="6e112-108">これで、認証されたユーザーのみが関数にアクセスできるようになりました `Logout` 。</span><span class="sxs-lookup"><span data-stu-id="6e112-108">Now only authenticated users can access the `Logout` function.</span></span>
 
-<span data-ttu-id="83f55-109">属性を使用して、認証され `AllowAnonymous` ていないユーザーによる個々のアクションへのアクセスを許可することもできます。</span><span class="sxs-lookup"><span data-stu-id="83f55-109">You can also use the `AllowAnonymous` attribute to allow access by non-authenticated users to individual actions.</span></span> <span data-ttu-id="83f55-110">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="83f55-110">For example:</span></span>
+<span data-ttu-id="6e112-109">属性を使用して、認証され `AllowAnonymous` ていないユーザーによる個々のアクションへのアクセスを許可することもできます。</span><span class="sxs-lookup"><span data-stu-id="6e112-109">You can also use the `AllowAnonymous` attribute to allow access by non-authenticated users to individual actions.</span></span> <span data-ttu-id="6e112-110">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="6e112-110">For example:</span></span>
 
 ```csharp
 [Authorize]
@@ -75,7 +75,28 @@ public class AccountController : Controller
 }
 ```
 
-<span data-ttu-id="83f55-111">これにより、認証済みのユーザー `AccountController` または認証 `Login` されていない/匿名の状態に関係なく、すべてのユーザーがアクセスできるアクションを除き、に対して認証されたユーザーのみが許可されます。</span><span class="sxs-lookup"><span data-stu-id="83f55-111">This would allow only authenticated users to the `AccountController`, except for the `Login` action, which is accessible by everyone, regardless of their authenticated or unauthenticated / anonymous status.</span></span>
+<span data-ttu-id="6e112-111">これにより、認証済みのユーザー `AccountController` または認証 `Login` されていない/匿名の状態に関係なく、すべてのユーザーがアクセスできるアクションを除き、に対して認証されたユーザーのみが許可されます。</span><span class="sxs-lookup"><span data-stu-id="6e112-111">This would allow only authenticated users to the `AccountController`, except for the `Login` action, which is accessible by everyone, regardless of their authenticated or unauthenticated / anonymous status.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="83f55-112">`[AllowAnonymous]`すべての承認ステートメントをバイパスします。</span><span class="sxs-lookup"><span data-stu-id="83f55-112">`[AllowAnonymous]` bypasses all authorization statements.</span></span> <span data-ttu-id="83f55-113">`[AllowAnonymous]`との `[Authorize]` 属性を組み合わせると、 `[Authorize]` 属性は無視されます。</span><span class="sxs-lookup"><span data-stu-id="83f55-113">If you combine `[AllowAnonymous]` and any `[Authorize]` attribute, the `[Authorize]` attributes are ignored.</span></span> <span data-ttu-id="83f55-114">たとえば `[AllowAnonymous]` 、コントローラーレベルでを適用した場合、 `[Authorize]` 同じコントローラー (またはその中のアクション) の属性はすべて無視されます。</span><span class="sxs-lookup"><span data-stu-id="83f55-114">For example if you apply `[AllowAnonymous]` at the controller level, any `[Authorize]` attributes on the same controller (or on any action within it) is ignored.</span></span>
+> <span data-ttu-id="6e112-112">`[AllowAnonymous]`すべての承認ステートメントをバイパスします。</span><span class="sxs-lookup"><span data-stu-id="6e112-112">`[AllowAnonymous]` bypasses all authorization statements.</span></span> <span data-ttu-id="6e112-113">`[AllowAnonymous]`との `[Authorize]` 属性を組み合わせると、 `[Authorize]` 属性は無視されます。</span><span class="sxs-lookup"><span data-stu-id="6e112-113">If you combine `[AllowAnonymous]` and any `[Authorize]` attribute, the `[Authorize]` attributes are ignored.</span></span> <span data-ttu-id="6e112-114">たとえば `[AllowAnonymous]` 、コントローラーレベルでを適用した場合、 `[Authorize]` 同じコントローラー (またはその中のアクション) の属性はすべて無視されます。</span><span class="sxs-lookup"><span data-stu-id="6e112-114">For example if you apply `[AllowAnonymous]` at the controller level, any `[Authorize]` attributes on the same controller (or on any action within it) is ignored.</span></span>
+
+<a name="aarp"></a>
+
+## <a name="authorize-attribute-and-razor-pages"></a><span data-ttu-id="6e112-115">属性とページを承認する Razor</span><span class="sxs-lookup"><span data-stu-id="6e112-115">Authorize attribute and Razor Pages</span></span>
+
+<span data-ttu-id="6e112-116">は、 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ページハンドラーには適用でき***ません*** Razor 。</span><span class="sxs-lookup"><span data-stu-id="6e112-116">The <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> can ***not*** be applied to Razor Page handlers.</span></span> <span data-ttu-id="6e112-117">たとえば、は、、 `[Authorize]` `OnGet` `OnPost` または他のページハンドラーには適用できません。</span><span class="sxs-lookup"><span data-stu-id="6e112-117">For example, `[Authorize]` can't be applied to `OnGet`, `OnPost`, or any other page handler.</span></span>
+
+<span data-ttu-id="6e112-118">ページハンドラーメソッドに承認を適用するには、次の2つの方法を使用でき Razor ます。</span><span class="sxs-lookup"><span data-stu-id="6e112-118">The following two approaches can be used to apply authorization to Razor Page handler methods:</span></span>
+
+* <span data-ttu-id="6e112-119">異なる承認を必要とするページハンドラーには、個別のページを使用します。</span><span class="sxs-lookup"><span data-stu-id="6e112-119">Use separate pages for page handlers requiring different authorization.</span></span> <span data-ttu-id="6e112-120">共有コンテンツを1つまたは複数の[部分ビュー](xref:mvc/views/partial)に移動しました。</span><span class="sxs-lookup"><span data-stu-id="6e112-120">Moved shared content into one or more [partial views](xref:mvc/views/partial).</span></span> <span data-ttu-id="6e112-121">可能な場合は、これが推奨される方法です。</span><span class="sxs-lookup"><span data-stu-id="6e112-121">When possible, this is the recommended approach.</span></span>
+* <span data-ttu-id="6e112-122">共通ページを共有する必要があるコンテンツには、 [Iasyncpagefilter. Onpageハンドラ Selectionasync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A)の一部として承認を実行するフィルターを記述します。</span><span class="sxs-lookup"><span data-stu-id="6e112-122">For content that must share a common page, write a filter that performs authorization as part of [IAsyncPageFilter.OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A).</span></span> <span data-ttu-id="6e112-123">[Pageハンドラ auth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub プロジェクトは、次の方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="6e112-123">The [PageHandlerAuth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub project demonstrates this approach:</span></span>
+  * <span data-ttu-id="6e112-124">[Authorizepageハンドラフィルター](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizePageHandlerFilter.cs)は、承認フィルターを実装します。[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]</span><span class="sxs-lookup"><span data-stu-id="6e112-124">The [AuthorizePageHandlerFilter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizePageHandlerFilter.cs) implements the authorization filter: [!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]</span></span>
+
+  * <span data-ttu-id="6e112-125">[[Authorizepagehandler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16)属性がページハンドラーに適用され `OnGet` ます。[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]</span><span class="sxs-lookup"><span data-stu-id="6e112-125">The [[AuthorizePageHandler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16) attribute is applied to the `OnGet` page handler: [!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]</span></span>
+
+> [!WARNING]
+> <span data-ttu-id="6e112-126">[Pageハンドラ auth](https://github.com/pranavkm/PageHandlerAuth)サンプルアプローチでは、次の***ことはできません***。</span><span class="sxs-lookup"><span data-stu-id="6e112-126">The [PageHandlerAuth](https://github.com/pranavkm/PageHandlerAuth) sample approach does ***not***:</span></span>
+> * <span data-ttu-id="6e112-127">ページ、ページモデル、またはグローバルに適用された承認属性を使用して構成します。</span><span class="sxs-lookup"><span data-stu-id="6e112-127">Compose with authorization attributes applied to the page, page model, or globally.</span></span> <span data-ttu-id="6e112-128">承認属性を作成すると、ページに1つ以上のインスタンスが適用されている場合に、認証と承認が複数回実行 `AuthorizeAttribute` `AuthorizeFilter` されます。</span><span class="sxs-lookup"><span data-stu-id="6e112-128">Composing authorization attributes results in authentication and authorization executing multiple times when you have one more `AuthorizeAttribute` or `AuthorizeFilter` instances also applied to the page.</span></span>
+> * <span data-ttu-id="6e112-129">ASP.NET Core 認証および承認システムの残りの部分と連携して作業します。</span><span class="sxs-lookup"><span data-stu-id="6e112-129">Work in conjunction with the rest of ASP.NET Core authentication and authorization system.</span></span> <span data-ttu-id="6e112-130">この方法を使用してアプリケーションに対して正しく動作することを確認する必要があります。</span><span class="sxs-lookup"><span data-stu-id="6e112-130">You must verify using this approach works correctly for your application.</span></span>
+
+<span data-ttu-id="6e112-131">ページハンドラーでをサポートする予定はありません `AuthorizeAttribute` Razor 。</span><span class="sxs-lookup"><span data-stu-id="6e112-131">There are no plans to support the `AuthorizeAttribute` on Razor Page handlers.</span></span> 
