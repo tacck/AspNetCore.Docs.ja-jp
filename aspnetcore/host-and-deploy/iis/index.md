@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: IIS を使用した Windows での ASP.NET Core のホスト
+author: rick-anderson
+description: Windows Server インターネット インフォメーション サービス (IIS) での ASP.NET Core アプリをホストする方法を説明します。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 5/7/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/iis/index
+ms.openlocfilehash: 878af251a30fe284293e5293d2059199b42de272
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106105"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS を使用した Windows での ASP.NET Core のホスト
 
@@ -134,118 +147,11 @@ services.Configure<IISServerOptions>(options =>
 ```
 
 | オプション                         | 既定値 | 設定 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------------- | :-----: | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | `AutomaticAuthentication`      | `true`  | `true` の場合、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が IIS サーバーによって設定されます。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 | | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 | | `AllowSynchronousIO`           | `false` | `HttpContext.Request` および `HttpContext.Response` に対して同期 I/O が許可されるかどうか。 | | `MaxRequestBodySize`           | `30000000`  | `HttpRequest` の最大要求本文サイズを取得または設定します。 IIS 自体に、`IISServerOptions` に設定された `MaxRequestBodySize` の前に処理される上限 `maxAllowedContentLength` があることに注意してください。 `MaxRequestBodySize` を変更しても、`maxAllowedContentLength` に影響はありません。 `maxAllowedContentLength`を引き上げるには、*web.config* 内にエントリを追加して `maxAllowedContentLength` をより高い値に設定します。 詳細については、「[Configuration (構成)](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration)」を参照してください。 |
+| ------------------------------ | :-----: | ------- |
+| `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
+| `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
+| `AllowSynchronousIO`           | `false` | `HttpContext.Request` および `HttpContext.Response` に対して同期 I/O が許可されるか。 |
+| `MaxRequestBodySize`           | `30000000`  | `HttpRequest` の最大要求本文サイズを取得または設定します。 IIS 自体に、`IISServerOptions` に設定された `MaxRequestBodySize` の前に処理される上限 `maxAllowedContentLength` があることに注意してください。 `MaxRequestBodySize` を変更しても、`maxAllowedContentLength` に影響はありません。 `maxAllowedContentLength`を引き上げるには、*web.config* 内にエントリを追加して `maxAllowedContentLength` をより高い値に設定します。 詳細については、「[Configuration (構成)](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration)」を参照してください。 |
 
 **アウトプロセス ホスティング モデル**
 
@@ -259,118 +165,10 @@ services.Configure<IISOptions>(options =>
 ```
 
 | オプション                         | 既定値 | 設定 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------------- | :-----: | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 | | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 | | `ForwardClientCertificate`     | `true`  | `true` の場合、`MS-ASPNETCORE-CLIENTCERT` 要求ヘッダーが指定されていると、`HttpContext.Connection.ClientCertificate` が設定されます。 |
+| ------------------------------ | :-----: | ------- |
+| `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 |
+| `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
+| `ForwardClientCertificate`     | `true`  | `true` の場合、`MS-ASPNETCORE-CLIENTCERT` 要求ヘッダーが指定されていると、`HttpContext.Connection.ClientCertificate` が設定されます。 |
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>プロキシ サーバーとロード バランサーのシナリオ
 
@@ -660,9 +458,9 @@ ASP.NET Core アプリでは [IIS 仮想ディレクトリ](/iis/get-started/pla
 
 ASP.NET Core アプリは [IIS サブアプリケーション (サブアプリ)](/iis/get-started/planning-your-iis-architecture/understanding-sites-applications-and-virtual-directories-on-iis#applications) としてホスティングできます。 サブアプリのパスは、ルート アプリの URL の一部になります。
 
-サブアプリ内にある静的アセットのリンクでは、チルダとスラッシュの表記 (`~/`) を使う必要があります。チルダとスラッシュの表記により[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)がトリガーされ、作成される相対リンクにサブアプリのパスベースが付加されます。`/subapp_path` にあるサブアプリの場合、`src="~/image.png"` を使ってリンクされる画像は `src="/subapp_path/image.png"` として作成されます。ルート アプリの静的ファイル ミドルウェアでは、静的ファイル要求は処理されません。この要求は、サブアプリの静的ファイル ミドルウェアによって処理されます。
+サブアプリ内にある静的資産のリンクでは、チルダとスラッシュの表記 (`~/`) を使う必要があります。 チルダとスラッシュの表記により[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)がトリガーされ、作成される相対リンクにサブアプリのパスベースが付加されます。 `/subapp_path` にあるサブアプリの場合、`src="~/image.png"` を使ってリンクされる画像は `src="/subapp_path/image.png"` として作成されます。 ルート アプリの静的ファイル ミドルウェアでは、静的ファイル要求は処理されません。 この要求は、サブアプリの静的ファイル ミドルウェアによって処理されます。
 
-静的アセットの `src` 属性が絶対パス (たとえば `src="/image.png"`) に設定されている場合、リンクはサブアプリのパスベースなしで作成されます。ルート アプリの静的ファイル ミドルウェアでは、ルート アプリの [Web ルート](xref:fundamentals/index#web-root)からアセットを提供しようとしますが、ルート アプリから静的アセットを利用できる場合を除いて *404 - Not Found* 応答が返されます。
+静的資産の `src` 属性が絶対パス (たとえば `src="/image.png"`) に設定されている場合、リンクはサブアプリのパスベースなしで作成されます。 ルート アプリの静的ファイル ミドルウェアでは、ルート アプリの [Web ルート](xref:fundamentals/index#web-root)から資産を提供しようとしますが、ルート アプリから静的資産を利用できる場合を除いて *404 - Not Found* 応答が返されます。
 
 ある ASP.NET Core アプリを別の ASP.NET Core アプリの下でサブアプリとしてホスティングするには:
 
@@ -971,118 +769,9 @@ services.Configure<IISServerOptions>(options =>
 ```
 
 | オプション                         | 既定値 | 設定 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------------- | :-----: | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | `AutomaticAuthentication`      | `true`  | `true` の場合、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が IIS サーバーによって設定されます。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 | | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
+| ------------------------------ | :-----: | ------- |
+| `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
+| `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
 
 **アウトプロセス ホスティング モデル**
 
@@ -1096,118 +785,10 @@ services.Configure<IISOptions>(options =>
 ```
 
 | オプション                         | 既定値 | 設定 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------------- | :-----: | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 | | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 | | `ForwardClientCertificate`     | `true`  | `true` の場合、`MS-ASPNETCORE-CLIENTCERT` 要求ヘッダーが指定されていると、`HttpContext.Connection.ClientCertificate` が設定されます。 |
+| ------------------------------ | :-----: | ------- |
+| `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 |
+| `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
+| `ForwardClientCertificate`     | `true`  | `true` の場合、`MS-ASPNETCORE-CLIENTCERT` 要求ヘッダーが指定されていると、`HttpContext.Connection.ClientCertificate` が設定されます。 |
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>プロキシ サーバーとロード バランサーのシナリオ
 
@@ -1477,9 +1058,9 @@ ASP.NET Core アプリでは [IIS 仮想ディレクトリ](/iis/get-started/pla
 
 ASP.NET Core アプリは [IIS サブアプリケーション (サブアプリ)](/iis/get-started/planning-your-iis-architecture/understanding-sites-applications-and-virtual-directories-on-iis#applications) としてホスティングできます。 サブアプリのパスは、ルート アプリの URL の一部になります。
 
-サブアプリ内にある静的アセットのリンクでは、チルダとスラッシュの表記 (`~/`) を使う必要があります。チルダとスラッシュの表記により[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)がトリガーされ、作成される相対リンクにサブアプリのパスベースが付加されます。`/subapp_path` にあるサブアプリの場合、`src="~/image.png"` を使ってリンクされる画像は `src="/subapp_path/image.png"` として作成されます。ルート アプリの静的ファイル ミドルウェアでは、静的ファイル要求は処理されません。この要求は、サブアプリの静的ファイル ミドルウェアによって処理されます。
+サブアプリ内にある静的資産のリンクでは、チルダとスラッシュの表記 (`~/`) を使う必要があります。 チルダとスラッシュの表記により[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)がトリガーされ、作成される相対リンクにサブアプリのパスベースが付加されます。 `/subapp_path` にあるサブアプリの場合、`src="~/image.png"` を使ってリンクされる画像は `src="/subapp_path/image.png"` として作成されます。 ルート アプリの静的ファイル ミドルウェアでは、静的ファイル要求は処理されません。 この要求は、サブアプリの静的ファイル ミドルウェアによって処理されます。
 
-静的アセットの `src` 属性が絶対パス (たとえば `src="/image.png"`) に設定されている場合、リンクはサブアプリのパスベースなしで作成されます。ルート アプリの静的ファイル ミドルウェアでは、ルート アプリの [Web ルート](xref:fundamentals/index#web-root)からアセットを提供しようとしますが、ルート アプリから静的アセットを利用できる場合を除いて *404 - Not Found* 応答が返されます。
+静的資産の `src` 属性が絶対パス (たとえば `src="/image.png"`) に設定されている場合、リンクはサブアプリのパスベースなしで作成されます。 ルート アプリの静的ファイル ミドルウェアでは、ルート アプリの [Web ルート](xref:fundamentals/index#web-root)から資産を提供しようとしますが、ルート アプリから静的資産を利用できる場合を除いて *404 - Not Found* 応答が返されます。
 
 ある ASP.NET Core アプリを別の ASP.NET Core アプリの下でサブアプリとしてホスティングするには:
 
@@ -1758,118 +1339,9 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ### <a name="iis-options"></a>IIS のオプション
 
 | オプション                         | 既定値 | 設定 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------------- | :-----: | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | `AutomaticAuthentication`      | `true`  | `true` の場合、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が IIS サーバーによって設定されます。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 | | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
+| ------------------------------ | :-----: | ------- |
+| `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
+| `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
 
 IIS オプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> に含めます。 次の例では、アプリが `HttpContext.Connection.ClientCertificate` を設定できません。
 
@@ -1881,118 +1353,10 @@ services.Configure<IISOptions>(options =>
 ```
 
 | オプション                         | 既定値 | 設定 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------------- | :-----: | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | | `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 | | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 | | `ForwardClientCertificate`     | `true`  | `true` の場合、`MS-ASPNETCORE-CLIENTCERT` 要求ヘッダーが指定されていると、`HttpContext.Connection.ClientCertificate` が設定されます。 |
+| ------------------------------ | :-----: | ------- |
+| `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 |
+| `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
+| `ForwardClientCertificate`     | `true`  | `true` の場合、`MS-ASPNETCORE-CLIENTCERT` 要求ヘッダーが指定されていると、`HttpContext.Connection.ClientCertificate` が設定されます。 |
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>プロキシ サーバーとロード バランサーのシナリオ
 
@@ -2295,9 +1659,9 @@ ASP.NET Core アプリの下に ASP.NET Core 以外のサブアプリをホス�
 </configuration>
 ```
 
-サブアプリ内にある静的アセットのリンクでは、チルダとスラッシュの表記 (`~/`) を使う必要があります。チルダとスラッシュの表記により[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)がトリガーされ、作成される相対リンクにサブアプリのパスベースが付加されます。`/subapp_path` にあるサブアプリの場合、`src="~/image.png"` を使ってリンクされる画像は `src="/subapp_path/image.png"` として作成されます。ルート アプリの静的ファイル ミドルウェアでは、静的ファイル要求は処理されません。この要求は、サブアプリの静的ファイル ミドルウェアによって処理されます。
+サブアプリ内にある静的資産のリンクでは、チルダとスラッシュの表記 (`~/`) を使う必要があります。 チルダとスラッシュの表記により[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)がトリガーされ、作成される相対リンクにサブアプリのパスベースが付加されます。 `/subapp_path` にあるサブアプリの場合、`src="~/image.png"` を使ってリンクされる画像は `src="/subapp_path/image.png"` として作成されます。 ルート アプリの静的ファイル ミドルウェアでは、静的ファイル要求は処理されません。 この要求は、サブアプリの静的ファイル ミドルウェアによって処理されます。
 
-静的アセットの `src` 属性が絶対パス (たとえば `src="/image.png"`) に設定されている場合、リンクはサブアプリのパスベースなしで作成されます。ルート アプリの静的ファイル ミドルウェアでは、ルート アプリの [Web ルート](xref:fundamentals/index#web-root)からアセットを提供しようとしますが、ルート アプリから静的アセットを利用できる場合を除いて *404 - Not Found* 応答が返されます。
+静的資産の `src` 属性が絶対パス (たとえば `src="/image.png"`) に設定されている場合、リンクはサブアプリのパスベースなしで作成されます。 ルート アプリの静的ファイル ミドルウェアでは、ルート アプリの [Web ルート](xref:fundamentals/index#web-root)から資産を提供しようとしますが、ルート アプリから静的資産を利用できる場合を除いて *404 - Not Found* 応答が返されます。
 
 ある ASP.NET Core アプリを別の ASP.NET Core アプリの下でサブアプリとしてホスティングするには:
 
