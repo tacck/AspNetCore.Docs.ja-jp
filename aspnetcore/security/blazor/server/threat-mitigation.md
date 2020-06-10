@@ -1,12 +1,24 @@
 ---
-タイトル: ' ASP.NET Core サーバーの脅威軽減ガイダンス Blazor : 説明: ' サーバーアプリに対するセキュリティ上の脅威を軽減する方法について説明 Blazor します。 '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core サーバーの脅威軽減のガイダンス Blazor
+author: guardrex
+description: サーバーアプリに対するセキュリティ上の脅威を軽減する方法について説明 Blazor します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/05/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/threat-mitigation
+ms.openlocfilehash: 06f9cc2d70367ea90a519ddd508a156e88adcb61
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864632"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core サーバーの脅威軽減のガイダンス Blazor
 
@@ -140,7 +152,7 @@ JavaScript から .NET メソッドへの呼び出しを信頼しません。 .N
   * ユーザーが指定したデータをパラメーターで JavaScript 呼び出しに渡すことは避けてください。 パラメーターにデータを渡す必要がある場合は、JavaScript コードが[クロスサイトスクリプティング (XSS)](#cross-site-scripting-xss)の脆弱性を導入せずにデータを渡すことを確認してください。 たとえば、要素のプロパティを設定することによって、ユーザー指定のデータをドキュメントオブジェクトモデル (DOM) に書き込まないで `innerHTML` ください。 [コンテンツセキュリティポリシー (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)を使用して `eval` 、およびその他の安全でない JavaScript プリミティブを無効にすることを検討してください。
 * フレームワークのディスパッチ実装の上に .NET 呼び出しのカスタムディスパッチを実装しないようにします。 ブラウザーへの .NET メソッドの公開は高度なシナリオであり、一般的な開発では推奨されません Blazor 。
 
-### <a name="events"></a>events
+### <a name="events"></a>イベント
 
 イベントは、サーバーアプリへのエントリポイントを提供 Blazor します。 Web アプリでエンドポイントを保護する場合と同じ規則が、サーバーアプリのイベント処理に適用され Blazor ます。 悪意のあるクライアントは、イベントのペイロードとして送信するデータを送信できます。
 

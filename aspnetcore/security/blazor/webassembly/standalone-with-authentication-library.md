@@ -1,11 +1,24 @@
 ---
-title: ' Blazor 認証ライブラリを使用して ASP.NET Core webassembly スタンドアロンアプリをセキュリティで保護する ' 作成者: 説明:: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/standalone-with-authentication-library
+ms.openlocfilehash: efd63c2fc533175b034b8311c2b7a6b9e6f4375b
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851119"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor認証ライブラリを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
@@ -138,7 +151,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [セキュリティで保護された既定のクライアントを使用するアプリ内の認証されていない web API 要求](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

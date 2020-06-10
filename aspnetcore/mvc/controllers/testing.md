@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core のコントローラーのロジックをテストする
+author: ardalis
+description: Moq と xUnit を使って ASP.NET Core のコントローラーのロジックをテストする方法を説明します。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 11/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/controllers/testing
+ms.openlocfilehash: 4f7fa2deee9111823f60e344f46c54036779ae53
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106716"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core でコントローラーのロジックの単体テストを行う
 
@@ -337,7 +350,7 @@ ASP.NET Core 2.1 以降では、 [actionresult \<T> ](xref:web-api/action-return
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:test/integration-tests>
 * [Visual Studio で単体テストを作成して実行する](/visualstudio/test/unit-test-your-code)

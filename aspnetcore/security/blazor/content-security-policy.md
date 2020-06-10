@@ -1,12 +1,24 @@
 ---
-title: ' ASP.NET Core にコンテンツセキュリティポリシーを適用し Blazor ます。説明: ' ASP.NET Core アプリでコンテンツセキュリティポリシー (CSP) を使用し Blazor てクロスサイトスクリプティング (XSS) 攻撃から保護する方法について説明します。 '
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core のコンテンツセキュリティポリシーを適用するBlazor
+author: guardrex
+description: ASP.NET Core アプリでコンテンツセキュリティポリシー (CSP) を使用し Blazor て、クロスサイトスクリプティング (XSS) 攻撃から保護する方法について説明します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/content-security-policy
+ms.openlocfilehash: 8615b199373ca856c252b9f843e3635770367e4a
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106391"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core のコンテンツセキュリティポリシーを適用するBlazor
 
@@ -147,7 +159,7 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
   * ブロックされた項目を許可するようにポリシーを変更する方法。
 * ポリシーが完全に有効になるのは、クライアントのブラウザーが含まれているすべてのディレクティブをサポートしている場合のみです。 現在のブラウザーのサポートマトリックスについては、「[使用可能: コンテンツ-セキュリティ-ポリシー](https://caniuse.com/#search=Content-Security-Policy)」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [MDN web ドキュメント: コンテンツ-セキュリティ-ポリシー](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy)
 * [コンテンツセキュリティポリシーレベル2](https://www.w3.org/TR/CSP2/)

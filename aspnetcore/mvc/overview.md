@@ -1,11 +1,22 @@
 ---
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core MVC の概要
+author: ardalis
+description: ASP.NET Core MVC が、モデル ビュー コントローラー デザイン パターンを使用して、Web アプリと API をビルドするための豊富なフレームワークであることについて説明します。
+ms.author: riande
+ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/overview
+ms.openlocfilehash: ae382feb152f490e46df969887401060965d8c4e
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106534"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -50,7 +61,7 @@ ASP.NET Core MVC フレームワークは、ASP.NET Core と共に使用する�
 
 ASP.NET Core MVC では、明確な関心の分離を可能にする動的な Web サイトをビルドするためのパターン ベースの方法を提供します。 ここでは、マークアップのフル コントロールが提供され、TDD 向けの開発をサポートし、最新の Web 標準を使用することができます。
 
-## <a name="features"></a>機能
+## <a name="features"></a>特徴
 
 ASP.NET Core MVC には、以下が含まれます。
 

@@ -1,12 +1,23 @@
 ---
-title: ' ASP.NET Core のカスタム記憶域プロバイダー Identity 作成者: 説明: ' ASP.NET Core 用にカスタム記憶域プロバイダーを構成する方法について説明 Identity します。 '
-ms. 作成者: ms. カスタム: ms. 日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core 用のカスタムストレージプロバイダーIdentity
+author: ardalis
+description: ASP.NET Core 用にカスタム記憶域プロバイダーを構成する方法について説明 Identity します。
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/identity-custom-storage-providers
+ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106586"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core 用のカスタムストレージプロバイダーIdentity
 

@@ -1,11 +1,22 @@
 ---
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core でのコントローラー アクションへのルーティング
+author: rick-anderson
+description: ASP.NET Core MVC でルーティング ミドルウェアを使って、受信した要求の URL を照合し、アクションにマップする方法について説明します。
+ms.author: riande
+ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/controllers/routing
+ms.openlocfilehash: 0078ed5d4aa30ff7a7b76af8dffd015f2557e165
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83998654"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core でのコントローラー アクションへのルーティング
 
@@ -414,104 +425,11 @@ REST Api では、属性ルーティングを使用して、アプリの機能�
 次の表では、上記のコードの属性について説明し `[Route]` ます。
 
 | 属性               | との組み合わせ`[Route("Home")]` | ルートテンプレートを定義します |
-| ---
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---------- |---タイトル: 作成者: 説明: ms. author: ms. 日付: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- |---タイトル: 作成者: 説明: ms. author: ms. 日付: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒、作成者: ミリ秒。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------ || `[Route("")]` |はい |`"Home"` |
-|`[Route("Index")]` |はい |`"Home/Index"` |
-|`[Route("/")]` | **いいえ** | `""` |
- | `[Route("About")]` |はい |`"Home/About"`|
+| ----------------- | ------------ | --------- |
+| `[Route("")]` | はい | `"Home"` |
+| `[Route("Index")]` | はい | `"Home/Index"` |
+| `[Route("/")]` | **いいえ** | `""` |
+| `[Route("About")]` | はい | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -801,7 +719,7 @@ result: /UrlGeneration/Destination
 
 既定のルートでは、この問題が発生する可能性があり `{controller}/{action}/{id?}` ます。 この問題は、常にとの値が明示的に指定されているため、実際にはめったにあり `Url.Action` `controller` `action` ません。
 
-[Url](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)のいくつかのオーバーロードでは、ルート値オブジェクトを使用し `controller` て、および以外のルートパラメーターの値を指定します。 `action` ルート値オブジェクトは、と共によく使用され `id` ます。 たとえば、「 `Url.Action("Buy", "Products", new { id = 17 })` 」のように入力します。 ルート値オブジェクト:
+[Url](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)のいくつかのオーバーロードでは、ルート値オブジェクトを使用し `controller` て、および以外のルートパラメーターの値を指定します。 `action` ルート値オブジェクトは、と共によく使用され `id` ます。 たとえば、`Url.Action("Buy", "Products", new { id = 17 })` のようにします。 ルート値オブジェクト:
 
 * 慣例により、通常は匿名型のオブジェクトです。
 * には、 `IDictionary<>` または[POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)を指定できます。

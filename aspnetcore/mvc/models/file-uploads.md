@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core でファイルをアップロードする
+author: rick-anderson
+description: モデル バインドとストリーミングを使用して、ASP.NET Core MVC でファイルをアップロードする方法。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/models/file-uploads
+ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83838319"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
@@ -82,7 +95,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 ファイルをアップロードするための一般的な 2 つの方法は、バッファーリングとストリーミングです。
 
-**Buffering**
+**バッファリング**
 
 ファイル全体が <xref:Microsoft.AspNetCore.Http.IFormFile> に読み込まれます。これは、ファイルの処理または保存に使用される C# でのファイルの表現です。
 
@@ -707,7 +720,7 @@ Kestrel によってホストされるアプリには、他の Kestrel の制限
 </system.webServer>
 ```
 
-この設定は IIS にのみ適用されます。 Kestrel でホストする場合、既定ではこの動作は発生しません。 詳細については、「[要求制限 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)」を参照してください。
+この設定は IIS にのみ適用されます。 Kestrel でホストする場合、既定ではこの動作は発生しません。 詳細については、「[要求の制限 \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)」を参照してください。
 
 ASP.NET Core モジュールでの制限または IIS 要求フィルター モジュールの存在により、アップロードが 2 または 4 GB に制限される場合があります。 詳細については、「[サイズが 2 GB を超えるファイルをアップロードできない (dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711)」を参照してください。
 
@@ -811,7 +824,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 ファイルをアップロードするための一般的な 2 つの方法は、バッファーリングとストリーミングです。
 
-**Buffering**
+**バッファリング**
 
 ファイル全体が <xref:Microsoft.AspNetCore.Http.IFormFile> に読み込まれます。これは、ファイルの処理または保存に使用される C# でのファイルの表現です。
 
@@ -1429,7 +1442,7 @@ Kestrel によってホストされるアプリには、他の Kestrel の制限
 </system.webServer>
 ```
 
-この設定は IIS にのみ適用されます。 Kestrel でホストする場合、既定ではこの動作は発生しません。 詳細については、「[要求制限 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)」を参照してください。
+この設定は IIS にのみ適用されます。 Kestrel でホストする場合、既定ではこの動作は発生しません。 詳細については、「[要求の制限 \<requestLimits> ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)」を参照してください。
 
 ASP.NET Core モジュールでの制限または IIS 要求フィルター モジュールの存在により、アップロードが 2 または 4 GB に制限される場合があります。 詳細については、「[サイズが 2 GB を超えるファイルをアップロードできない (dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711)」を参照してください。
 
@@ -1463,7 +1476,7 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [HTTP 接続要求をドレインしています](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)

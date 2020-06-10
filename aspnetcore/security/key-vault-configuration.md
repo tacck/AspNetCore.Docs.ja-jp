@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core の構成プロバイダーの Azure Key Vault
+author: rick-anderson
+description: Azure Key Vault 構成プロバイダーを使用して、実行時に読み込まれる名前と値のペアを使用してアプリを構成する方法について説明します。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/key-vault-configuration
+ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106677"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core の構成プロバイダーの Azure Key Vault
 
@@ -207,78 +220,11 @@ config.AddAzureKeyVault(
 ```
 
 | プロパティ         | 説明 |
-| ---
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--------- |---title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | |`Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>値を取得するために使用する。 | |`Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>シークレットの読み込みを制御するために使用されるインスタンス。 | |`ReloadInterval` | `Timespan`キーコンテナーのポーリングによって変更が試行されるまでの待機時間。 既定値はです `null` (構成は再読み込みされません)。 | |`Vault`          |Key vault URI。 |
+| ---------------- | ----------- |
+| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>値を取得するために使用する。 |
+| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>シークレットの読み込みを制御するために使用されるインスタンス。 |
+| `ReloadInterval` | `Timespan`キーコンテナーのポーリングによって変更が試行されるまでの待機時間。 既定値はです `null` (構成は再読み込みされません)。 |
+| `Vault`          | Key vault URI。 |
 
 ## <a name="use-a-key-name-prefix"></a>キー名のプレフィックスを使用する
 
@@ -412,7 +358,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
@@ -739,7 +685,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)

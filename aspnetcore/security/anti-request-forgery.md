@@ -1,11 +1,23 @@
 ---
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core でのクロスサイト要求偽造 (XSRF/CSRF) 攻撃を防ぐ
+author: steve-smith
+description: 悪意のある web サイトがクライアントブラウザーとアプリの間の対話に影響を与える可能性がある web アプリに対する攻撃を防ぐ方法について説明します。
+ms.author: riande
+ms.custom: mvc
+ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/anti-request-forgery
+ms.openlocfilehash: 89a7a12c943933f745793eeccb4f3d2e4856063f
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105910"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core でのクロスサイト要求偽造 (XSRF/CSRF) 攻撃を防ぐ
 
@@ -205,38 +217,11 @@ services.AddAntiforgery(options =>
 &dagger;`Cookie` [Cookiebuilder](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder)クラスのプロパティを使用して、アンチ偽造プロパティを設定します。
 
 | オプション | 説明 |
-| ---
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---- |---タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms. 日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | |[Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) |アンチ偽造 cookie の作成に使用する設定を決定します。 | |[Formfieldname](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) |アンチ偽造システムがビューで偽造防止トークンをレンダリングするために使用する非表示フォームフィールドの名前。 | |[ヘッド ername](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) |アンチ偽造システムによって使用されるヘッダーの名前。 の場合 `null` 、システムはフォームデータのみを考慮します。 | |[SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) |ヘッダーの生成を抑制するかどうかを指定し `X-Frame-Options` ます。 既定では、ヘッダーは値 "SAMEORIGIN" を使用して生成されます。 既定値は、`false` です。 |
+| ------ | ----------- |
+| [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | アンチ偽造 cookie の作成に使用する設定を決定します。 |
+| [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | アンチ偽造システムがビューで偽造防止トークンをレンダリングするために使用する非表示フォームフィールドの名前。 |
+| [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | アンチ偽造システムによって使用されるヘッダーの名前。 の場合 `null` 、システムはフォームデータのみを考慮します。 |
+| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | ヘッダーの生成を抑制するかどうかを指定し `X-Frame-Options` ます。 既定では、ヘッダーは値 "SAMEORIGIN" を使用して生成されます。 既定値は `false` です。 |
 
 ::: moniker-end
 
@@ -256,38 +241,15 @@ services.AddAntiforgery(options =>
 ```
 
 | オプション | 説明 |
-| ---
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---- |---タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms. 日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-タイトル: 作成者: 説明: ミリ秒。作成者: ms. カスタム: ms。日付: なし:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | |[Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) |アンチ偽造 cookie の作成に使用する設定を決定します。 | |[Cookiedomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) |クッキーのドメイン。 既定値は、`null` です。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、"Cookie. ドメイン" をお勧めします。 | |[CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) |クッキーの名前。 設定されていない場合、システムは、 [Defaultcookieprefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) ("で始まる一意の名前を生成します。AspNetCore。 ")。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、Cookie.Name をお勧めします。 | |[Cookiepath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) |クッキーに設定されたパス。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、Cookie. Path をお勧めします。 | |[Formfieldname](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) |アンチ偽造システムがビューで偽造防止トークンをレンダリングするために使用する非表示フォームフィールドの名前。 | |[ヘッド ername](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) |アンチ偽造システムによって使用されるヘッダーの名前。 の場合 `null` 、システムはフォームデータのみを考慮します。 | |[RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) |偽造防止システムによって HTTPS が要求されるかどうかを指定します。 `true`の場合、HTTPS 以外の要求は失敗します。 既定値は、`false` です。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、Cookie の SecurePolicy を設定することをお勧めします。 | |[SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) |ヘッダーの生成を抑制するかどうかを指定し `X-Frame-Options` ます。 既定では、ヘッダーは値 "SAMEORIGIN" を使用して生成されます。 既定値は、`false` です。 |
+| ------ | ----------- |
+| [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | アンチ偽造 cookie の作成に使用する設定を決定します。 |
+| [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | Cookie のドメイン。 既定値は `null` です。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、"Cookie. ドメイン" をお勧めします。 |
+| [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | クッキーの名前。 設定されていない場合、システムは、 [Defaultcookieprefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) ("で始まる一意の名前を生成します。AspNetCore。 ")。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、Cookie.Name をお勧めします。 |
+| [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | クッキーに設定されたパス。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、Cookie. Path をお勧めします。 |
+| [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | アンチ偽造システムがビューで偽造防止トークンをレンダリングするために使用する非表示フォームフィールドの名前。 |
+| [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | アンチ偽造システムによって使用されるヘッダーの名前。 の場合 `null` 、システムはフォームデータのみを考慮します。 |
+| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | 偽造防止システムによって HTTPS が要求されるかどうかを指定します。 `true`の場合、HTTPS 以外の要求は失敗します。 既定値は `false` です。 このプロパティは互換性のために残されていますが、今後のバージョンでは削除される予定です。 別の方法として、Cookie の SecurePolicy を設定することをお勧めします。 |
+| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | ヘッダーの生成を抑制するかどうかを指定し `X-Frame-Options` ます。 既定では、ヘッダーは値 "SAMEORIGIN" を使用して生成されます。 既定値は `false` です。 |
 
 ::: moniker-end
 
@@ -525,7 +487,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [Iアンチ Forgeryadditionaldataprovider](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider)型を使用すると、開発者は各トークンの追加データをラウンドトリップさせることで、csrf システムの動作を拡張できます。 [Getadditionaldata](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.getadditionaldata)メソッドは、フィールドトークンが生成されるたびに呼び出され、戻り値は生成されたトークン内に埋め込まれます。 実装者は、タイムスタンプ、nonce、またはその他の値を返し、 [Validateadditionaldata](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.validateadditionaldata)を呼び出して、トークンが検証されたときにこのデータを検証することができます。 クライアントのユーザー名は、生成されたトークンに既に埋め込まれているため、この情報を含める必要はありません。 トークンに追加データが含まれていても構成されていない場合 `IAntiForgeryAdditionalDataProvider` 、補足データは検証されません。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Open Web Application Security Project](https://www.owasp.org/index.php/Main_Page) (owasp) での[csrf](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 。
 * <xref:host-and-deploy/web-farm>

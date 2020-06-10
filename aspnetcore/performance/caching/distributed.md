@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms. author: ms. custom: ms. date: no loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core での分散キャッシュ
+author: rick-anderson
+description: 特にクラウドまたはサーバーファーム環境で、ASP.NET Core 分散キャッシュを使用してアプリのパフォーマンスとスケーラビリティを向上させる方法について説明します。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/caching/distributed
+ms.openlocfilehash: d655e48f9504d337b0ffdbd6819f32101730310b
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106703"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core での分散キャッシュ
 
@@ -166,7 +179,7 @@ NCache を構成するには:
 
 SQL Server が分散キャッシュバッキングストアとして使用されている場合、キャッシュに同じデータベースを使用すると、アプリの通常のデータストレージと取得が両方のパフォーマンスに悪影響を与える可能性があります。 分散キャッシュバッキングストアには専用の SQL Server インスタンスを使用することをお勧めします。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Azure での Redis Cache](/azure/azure-cache-for-redis/)
 * [Azure での SQL Database](/azure/sql-database/)
@@ -336,7 +349,7 @@ NCache を構成するには:
 
 SQL Server が分散キャッシュバッキングストアとして使用されている場合、キャッシュに同じデータベースを使用すると、アプリの通常のデータストレージと取得が両方のパフォーマンスに悪影響を与える可能性があります。 分散キャッシュバッキングストアには専用の SQL Server インスタンスを使用することをお勧めします。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Azure での Redis Cache](/azure/azure-cache-for-redis/)
 * [Azure での SQL Database](/azure/sql-database/)
@@ -512,7 +525,7 @@ NCache を構成するには:
 
 SQL Server が分散キャッシュバッキングストアとして使用されている場合、キャッシュに同じデータベースを使用すると、アプリの通常のデータストレージと取得が両方のパフォーマンスに悪影響を与える可能性があります。 分散キャッシュバッキングストアには専用の SQL Server インスタンスを使用することをお勧めします。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Azure での Redis Cache](/azure/azure-cache-for-redis/)
 * [Azure での SQL Database](/azure/sql-database/)
