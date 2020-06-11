@@ -1,11 +1,24 @@
 ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core でのファイル プロバイダー
+author: rick-anderson
+description: ASP.NET Core がファイル プロバイダーを使用してファイル システムへのアクセスを抽象化する方法について説明します。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/06/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/file-providers
+ms.openlocfilehash: 1e243d31a1c6b1f6ac6c9f7966ce07ecb01ceae5
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106184"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core でのファイル プロバイダー
 
@@ -47,70 +60,10 @@ ASP.NET Core は、ファイル プロバイダーを使用してファイル �
 次の表に、`IFileProvider` の実装の一覧を示します。
 
 | 実装 | 説明 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | | [CompositeFileProvider](#compositefileprovider) | その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリに対するアクセスを結合する場合に使用されます。 | | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリ内に埋め込まれているファイルにアクセスするために使用されます。 | | [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために使用されます。 |
+| -------------- | ----------- |
+| [CompositeFileProvider](#compositefileprovider) | その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリへのアクセスを結合するために使用します。 |
+| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリに埋め込まれているファイルにアクセスする場合に使用します。 |
+| [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために使用します。 |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
@@ -170,46 +123,10 @@ var manifestEmbeddedProvider =
 * 埋め込みファイルのマニフェストを含む埋め込みリソースに名前を付けます。
 
 | オーバーロード | 説明 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | | `ManifestEmbeddedFileProvider(Assembly, String)` | 任意指定の `root` 相対パス パラメーターを受け入れます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 任意指定の `root` 相対パス パラメーターと `lastModified` 日付 (<xref:System.DateTimeOffset>) パラメーターを受け入れます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 任意指定の `root` 相対パス、`lastModified` 日付、および `manifestName` パラメーターを受け入れます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
+| -------- | ----------- |
+| `ManifestEmbeddedFileProvider(Assembly, String)` | 必要に応じて相対パスのパラメーター `root` を指定できます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 |
+| `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 必要に応じて、相対パス パラメーター `root` および日付パラメーター `lastModified` (<xref:System.DateTimeOffset>) を指定できます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 |
+| `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 必要に応じて、相対パス `root`、日付 `lastModified`、`manifestName` パラメーターを指定できます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
 
 ### <a name="compositefileprovider"></a>CompositeFileProvider
 
@@ -250,40 +167,11 @@ Docker コンテナーやネットワーク共有など、一部のファイル 
 次の表は、glob パターンの一般的な例を示しています。
 
 |パターン  |説明  |
-|---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------|---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------|
-|`directory/file.txt`|特定のディレクトリ内の特定のファイルと一致します。||`directory/*.txt`|特定のディレクトリ内で、拡張子が *.txt* のすべてのファイルと一致します。| |`directory/*/appsettings.json`|*directory* フォルダーの 1 つ下のレベルのディレクトリ内のすべての *appsettings.json* ファイルと一致します。| |`directory/**/*.txt`|*directory* フォルダーの下にある、拡張子が *.txt* のすべてのファイルと一致します。|
+|---------|---------|
+|`directory/file.txt`|特定のディレクトリ内の特定のファイルを照合します。|
+|`directory/*.txt`|特定のディレクトリ内の *.txt* 拡張子を持つすべてのファイルを照合します。|
+|`directory/*/appsettings.json`|*directory* フォルダーのちょうど 1 つ下のレベルにあるディレクトリ内のすべての *appsettings.json* ファイルを照合します。|
+|`directory/**/*.txt`|*directory* フォルダーの下の任意の場所にある、 *.txt* 拡張子を持つすべてのファイルを照合します。|
 
 ::: moniker-end
 
@@ -323,70 +211,10 @@ ASP.NET Core は、ファイル プロバイダーを使用してファイル �
 利用できる `IFileProvider` の実装は 3 つあります。
 
 | 実装 | 説明 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-------- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | | [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために、物理プロバイダーが使用されます。 | | [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリに埋め込まれているファイルにアクセスするために、マニフェストが埋め込まれたプロバイダーが使用されます。 | | [CompositeFileProvider](#compositefileprovider) | その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリに対するアクセスを結合するために、コンポジット プロバイダーが使用されます。 |
+| -------------- | ----------- |
+| [PhysicalFileProvider](#physicalfileprovider) | システムの物理ファイルにアクセスするために、物理プロバイダーが使用されます。 |
+| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | アセンブリに埋め込まれているファイルにアクセスするために、マニフェストが埋め込まれたプロバイダーが使用されます。 |
+| [CompositeFileProvider](#compositefileprovider) | コンポジット プロパイダーは、その他の 1 つまたは複数のプロバイダーからのファイルおよびディレクトリに対するアクセスを結合する場合に使用されます。 |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
@@ -442,46 +270,10 @@ var manifestEmbeddedProvider =
 * 埋め込みファイルのマニフェストを含む埋め込みリソースに名前を付けます。
 
 | オーバーロード | 説明 |
-| ---
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----- | --- title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title: author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------- | | `ManifestEmbeddedFileProvider(Assembly, String)` | 任意指定の `root` 相対パス パラメーターを受け入れます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 任意指定の `root` 相対パス パラメーターと `lastModified` 日付 (<xref:System.DateTimeOffset>) パラメーターを受け入れます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 | | `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 任意指定の `root` 相対パス、`lastModified` 日付、および `manifestName` パラメーターを受け入れます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
+| -------- | ----------- |
+| `ManifestEmbeddedFileProvider(Assembly, String)` | 必要に応じて相対パスのパラメーター `root` を指定できます。 `root` を指定して、<xref:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents*> の呼び出しのスコープを指定したパス以下のリソースに設定します。 |
+| `ManifestEmbeddedFileProvider(Assembly, String, DateTimeOffset)` | 必要に応じて、相対パス パラメーター `root` および日付パラメーター `lastModified` (<xref:System.DateTimeOffset>) を指定できます。 `lastModified` の日付では、<xref:Microsoft.Extensions.FileProviders.IFileProvider> によって返される <xref:Microsoft.Extensions.FileProviders.IFileInfo> インスタンスの最終更新日のスコープを設定します。 |
+| `ManifestEmbeddedFileProvider(Assembly, String, String, DateTimeOffset)` | 必要に応じて、相対パス `root`、日付 `lastModified`、`manifestName` パラメーターを指定できます。 `manifestName` は、マニフェストを含む埋め込みリソースの名前を表します。 |
 
 ### <a name="compositefileprovider"></a>CompositeFileProvider
 

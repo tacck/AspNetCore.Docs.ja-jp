@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 0541a85756e0084f4a420a0742ad923d732a9365
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: a4676803361d71a3199b2cd1232d0ced8c93db5f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850553"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451941"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>チュートリアル: ASP.NET Core で gRPC のクライアントとサーバーを作成する
 
@@ -85,7 +85,7 @@ ms.locfileid: "82850553"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-ターミナルから、次のコマンドを実行します。
+端末から、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet new grpc -o GrpcGreeter
@@ -124,11 +124,11 @@ info: Microsoft.Hosting.Lifetime[0]
 
 *GrpcGreeter*プロジェクト ファイル:
 
-* *greet.proto* &ndash; *Protos/greet.proto* ファイルでは `Greeter` gRPC が定義されており、このファイルは gRPC サーバー資産を生成するために使用されます。 詳細については、「[gRPC の概要](xref:grpc/index)」を参照してください。
+* *greet.proto*:*Protos/greet.proto* ファイルは、`Greeter` gRPC を定義し、gRPC サーバー資産を生成するために使用されます。 詳細については、「[gRPC の概要](xref:grpc/index)」を参照してください。
 * *Services* フォルダー:`Greeter` サービスの実装が含まれます。
-* *appSettings.json* &ndash; Kestrel で使用されるプロトコルなどの構成データが含まれています。 詳細については、「<xref:fundamentals/configuration/index>」を参照してください。
-* *Program.cs* &ndash; gRPC サービスのエントリ ポイントが含まれています。 詳細については、「<xref:fundamentals/host/generic-host>」を参照してください。
-* *Startup.cs* &ndash; アプリの動作を構成するコードが含まれています。 詳細については、[アプリの Startup](xref:fundamentals/startup)に関するページを参照してください。
+* *appSettings.json*:Kestrel で使用されるプロトコルなどの構成データが含まれています。 詳細については、「<xref:fundamentals/configuration/index>」を参照してください。
+* *Program.cs*:gRPC サービスのエントリ ポイントが含まれています。 詳細については、「<xref:fundamentals/host/generic-host>」を参照してください。
+* *Startup.cs*:アプリの動作を構成するコードが含まれています。 詳細については、[アプリの Startup](xref:fundamentals/startup)に関するページを参照してください。
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>.NET コンソール アプリで gRPC クライアントを作成する
 

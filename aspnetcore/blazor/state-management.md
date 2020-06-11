@@ -1,12 +1,24 @@
 ---
-title:'ASP.NET Core Blazor 状態管理' author: description:'Blazor サーバー アプリで状態を維持する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor 状態管理
+author: guardrex
+description: Blazor Server アプリで状態を維持する方法について説明します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/state-management
+ms.openlocfilehash: cfc2867baa03cbc0bedc9ad4a90244ec007094d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105663"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 状態管理
 

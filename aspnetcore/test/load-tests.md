@@ -1,11 +1,23 @@
 ---
-title: author: description: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core のロード テスト/ストレス テスト
+author: Jeremy-Meng
+description: ASP.NET Core アプリのロード テストとストレス テストを行うために、いくつかの注目すべきツールとアプローチについて説明します。
+ms.author: riande
+ms.custom: mvc
+ms.date: 4/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: test/loadtests
+ms.openlocfilehash: f0c930a7689c7288a58cfc3ca630d3cd324bf2cd
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106807"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core のロード テスト/ストレス テスト
 

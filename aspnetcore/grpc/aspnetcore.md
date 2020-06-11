@@ -12,16 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: c14ae1fb3c2e046ae577c63824eebb4411a6e804
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: fa38ec9f9cf882b1a62f74879b7d49706ee150ce
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776221"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452383"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>ASP.NET Core を使用した gRPC サービス
 
 このドキュメントでは、ASP.NET Core を使用して gRPC サービスを開始する方法について説明します。
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
@@ -130,7 +132,6 @@ gRPC API は、メソッド、ホスト、ヘッダー、トレーラーなど�
 
 [!code-csharp[](~/grpc/aspnetcore/sample/GrcpService/GreeterService2.cs?highlight=6-7&name=snippet)]
 
-[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

@@ -1,12 +1,24 @@
 ---
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor の高度なシナリオ
+author: guardrex
+description: Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/advanced-scenarios
+ms.openlocfilehash: 3345f545e230ada78e6c66fc9eb049060d5794d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851160"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor の高度なシナリオ
 
@@ -150,73 +162,15 @@ builder.AddContent(1, "Second");
 コードを初めて実行するときに、`someFlag` が `true` の場合、ビルダーは以下を受け取ります。
 
 | シーケンス | 種類      | データ   |
-| :---
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------ | :----: | | 0        | テキスト ノード | 最初  | | 1        | テキスト ノード | 2 番目 |
+| :------: | --------- | :----: |
+| 0        | テキスト ノード | First  |
+| 1        | テキスト ノード | Second |
 
 `someFlag` が `false` になり、マークアップが再びレンダリングされるとします。 今度は、ビルダーは以下を受け取ります。
 
 | シーケンス | 種類       | データ   |
-| :---
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------ | :----: | | 1        | テキスト ノード  | 2 番目 |
+| :------: | ---------- | :----: |
+| 1        | テキスト ノード  | Second |
 
 ランタイムで差分を実行すると、シーケンス `0` の項目が削除されたことが認識されるため、次のような単純な "*編集スクリプト*" が生成されます。
 
@@ -240,72 +194,15 @@ builder.AddContent(seq++, "Second");
 最初の出力は次のようになります。
 
 | シーケンス | 種類      | データ   |
-| :---
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------ | :----: | | 0        | テキスト ノード | 最初  | | 1        | テキスト ノード | 2 番目 |
+| :------: | --------- | :----: |
+| 0        | テキスト ノード | First  |
+| 1        | テキスト ノード | Second |
 
 この結果は前のケースと同じであるため、否定的な問題は存在しません。 `someFlag` は 2 番目のレンダリングでは `false` で、出力は次のようになります。
 
 | シーケンス | 種類      | データ   |
-| :---
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----: | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
------ | --- title:'ASP.NET Core Blazor の高度なシナリオ' author: description:'Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
---- | | 0        | テキスト ノード | 2 番目 |
+| :------: | --------- | ------ |
+| 0        | テキスト ノード | Second |
 
 今度は、差分アルゴリズムによって、"*2 つ*" の変更が発生したことが認識され、アルゴリズムによって次の編集スクリプトが生成されます。
 

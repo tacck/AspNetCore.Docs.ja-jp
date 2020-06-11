@@ -1,5 +1,9 @@
 <a name="dc"></a>
 
+### <a name="add-nuget-packages-and-ef-tools"></a>NuGet パッケージと EF ツールを追加します。
+
+[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
+
 ### <a name="add-a-database-context-class"></a>データベース コンテキスト クラスの追加
 
 RazorPagesMovie プロジェクトで、*Data* という名前の新しいフォルダーを作成します。 次の `RazorPagesMovieContext` クラスを *Data* フォルダーに追加します。
@@ -17,10 +21,6 @@ RazorPagesMovie プロジェクトで、*Data* という名前の新しいフォ
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
-
-### <a name="add-nuget-packages-and-ef-tools"></a>NuGet パッケージと EF ツールを追加します。
-
-[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 <a name="reg"></a>
 

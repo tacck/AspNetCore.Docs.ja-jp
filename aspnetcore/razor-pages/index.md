@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 6939d285838a6dd971f530c1d65d73273b5b14e7
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
+ms.openlocfilehash: 70f5da1dad9b4c0b9526a7688862637291be9a68
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424561"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652576"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core での Razor ページの概要
 
@@ -65,9 +65,9 @@ Razor ページ プロジェクトを作成する詳細な手順については�
 
 ---
 
-## <a name="razor-pages"></a>Razor ページ
+## <a name="razor-pages"></a>Razor Pages
 
-Razor ページは *Startup.cs* で有効になっています。
+Razor ページは "*Startup.cs*" で有効になっています。
 
 [!code-cs[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -75,7 +75,7 @@ Razor ページは *Startup.cs* で有効になっています。
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [Razor ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。 違いは [`@page`](xref:mvc/views/razor#page) ディレクティブにあります。 `@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。 `@page` はページで最初の Razor ディレクティブである必要があります。 `@page` はその他の [Razor](xref:mvc/views/razor) コンストラクトの動作に影響します。 Razor Pages ファイル名には *.cshtml* サフィックスが付きます。
+上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [Razor ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。 違いは [`@page`](xref:mvc/views/razor#page) ディレクティブにあります。 `@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。 `@page` はページ上で最初の Razor ディレクティブである必要があります。 `@page` はその他の [Razor](xref:mvc/views/razor) コンストラクトの動作に影響します。 Razor ページのファイル名には " *.cshtml*" サフィックスが付きます。
 
 `PageModel` クラスを使用している類似したページが、次の 2 つのファイルにあります。 *Pages/Index2.cshtml* ファイル:
 
@@ -85,7 +85,7 @@ Razor ページは *Startup.cs* で有効になっています。
 
 [!code-cs[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-規則により、`PageModel` クラス ファイルは、Razor ページ ファイルと同じ名前に *.cs* が付加された名前になります。 たとえば、上の Razor ページは *Pages/Index2.cshtml* になります。 `PageModel` クラスを含むファイル名は、*Pages/Index2.cshtml.cs* になります。
+規則により、`PageModel` クラス ファイルは、Razor ページ ファイルと同じ名前に " *.cs*" が付加された名前になります。 たとえば、上の Razor ページは "*Pages/Index2.cshtml*" になります。 `PageModel` クラスを含むファイル名は、*Pages/Index2.cshtml.cs* になります。
 
 URL パスのページへの関連付けは、ファイル システム内のページの場所によって決定されます。 次の表に、Razor ページ パスと一致 URL を示します。
 
@@ -98,12 +98,12 @@ URL パスのページへの関連付けは、ファイル システム内のペ
 
 メモ:
 
-* 既定では、ランタイムが *Pages* フォルダー内で Razor ページ ファイルを検索します。
+* 既定では、ランタイムが "*Pages*" フォルダー内で Razor ページ ファイルを検索します。
 * `Index` は、URL にページが含まれない場合の既定のページになります。
 
 ## <a name="write-a-basic-form"></a>基本フォームを作成する
 
-Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。 [モデル バインド](xref:mvc/models/model-binding)、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで*機能します*。 `Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。
+Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。 [モデル バインド](xref:mvc/models/model-binding)、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで "*機能します*"。 `Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。
 
 このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) ファイルで `DbContext` が初期化されます。
 
@@ -134,7 +134,7 @@ db コンテキスト:
 
 このページには、(ユーザーがフォームを投稿したときに) `POST` 要求で実行される `OnPostAsync` "*ハンドラー メソッド*" があります。 任意の HTTP 動詞のハンドラー メソッドを追加できます。 最も一般的なハンドラーは次のとおりです。
 
-* ページに必要な状態を初期化するための `OnGet`。 前のコードでは、`OnGet` メソッドにより *CreateModel.cshtml* Razor ページが表示されます。
+* ページに必要な状態を初期化するための `OnGet`。 前のコードでは、`OnGet` メソッドにより "*CreateModel.cshtml*" Razor ページが表示されます。
 * フォームの送信を処理するための `OnPost`。
 
 `Async` 名前付けサフィックスは省略可能ですが、非同期関数の規則でよく使用されます。 上記のコードは、Razor ページでは一般的です。
@@ -191,7 +191,7 @@ db コンテキスト:
 
 `[BindProperty]` は、クライアントが変更するべきではないプロパティを含むモデルで使用**しないで**ください。 詳細については、「[過剰ポスティング](xref:data/ef-rp/crud#overposting)」をご覧ください。
 
-既定では、Razor Pages はプロパティを非 `GET` 動詞とのみバインドします。 プロパティにバインドすると、HTTP データをモデル型に変換する目的でコードを記述する必要がなくなります。 同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。
+既定では、Razor ページはプロパティを非 `GET` 動詞とのみバインドします。 プロパティにバインドすると、HTTP データをモデル型に変換する目的でコードを記述する必要がなくなります。 同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -334,19 +334,19 @@ HTML で削除ボタンがレンダリングされる場合、その [formaction
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
-`OnHead` ハンドラーが定義されていない場合、Razor Pages は `OnGet` ハンドラーの呼び出しにフォールバックします。
+`OnHead` ハンドラーが定義されていない場合、Razor ページは `OnGet` ハンドラーの呼び出しにフォールバックします。
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF と Razor ページ
+## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF および Razor ページ
 
-Razor Pages は、[偽造防止検証](xref:security/anti-request-forgery)によって保護されます。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) により HTML フォーム要素に偽造防止トークンが挿入されます。
+Razor ページは、[偽造防止検証](xref:security/anti-request-forgery)によって保護されます。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) により HTML フォーム要素に偽造防止トークンが挿入されます。
 
 <a name="layout"></a>
 
 ## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用
 
-ページは、Razor ビュー エンジンのすべての機能で動作します。 レイアウト、パーシャル、テンプレート、タグ ヘルパー、 *_ViewStart.cshtml*、 *_ViewImports.cshtml* は、従来の Razor ビューの場合と同じように動作します。
+ページは、Razor ビュー エンジンのすべての機能で動作します。 レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml*"、" *_ViewImports.cshtml*" は、従来の Razor ビューの場合と同じように動作します。
 
 これらの機能の一部を利用してこのページをまとめてみましょう。
 
@@ -366,13 +366,13 @@ Razor Pages は、[偽造防止検証](xref:security/anti-request-forgery)によ
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
-レイアウトは、*Pages/Shared* フォルダーにあります。 ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。 *Pages/Shared* フォルダー内のレイアウトは、*Pages* フォルダー配下の任意の Razor ページから使用できます。
+レイアウトは、*Pages/Shared* フォルダーにあります。 ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。 "*Pages/Shared*" フォルダー内のレイアウトは、"*Pages*" フォルダー配下の任意の Razor ページから使用できます。
 
 レイアウト ファイルは *Pages/Shared* フォルダーに入ります。
 
 レイアウト ファイルを *Views/Shared* フォルダー内に配置**しない**ことをお勧めします。 *Views/Shared* は MVC ビュー パターンです。 Razor ページは、パス規則ではなく、フォルダー階層に依存することを意図しています。
 
-Razor ページからのビュー検索には、*Pages* フォルダーが含まれます。 MVC コントローラーで使用されているレイアウト、テンプレート、パーシャルと、従来の Razor ビューは*機能します*。
+Razor ページからのビュー検索には、"*Pages*" フォルダーが含まれます。 MVC コントローラーで使用されているレイアウト、テンプレート、パーシャルと、従来の Razor ビューは "*機能します*"。
 
 *Pages/_ViewImports.cshtml* ファイルを追加します。
 
@@ -398,7 +398,7 @@ Razor ページからのビュー検索には、*Pages* フォルダーが含ま
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
 
-*Pages/Customers/Edit.cshtml* Razor ページの生成された名前空間は、`PageModel` クラスと同じです。
+"*Pages/Customers/Edit.cshtml*" Razor ページの生成された名前空間は、`PageModel` クラスと同じです。
 
 `@namespace` は "*従来の Razor ビューでも機能します。* "
 
@@ -412,7 +412,7 @@ Razor ページからのビュー検索には、*Pages* フォルダーが含ま
 
 前のコードでは、 *_ViewImports.cshtml* によって名前空間とタグ ヘルパーがインポートされました。 レイアウト ファイルによって JavaScript ファイルがインポートされました。
 
-[Razor ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする *Pages/_ValidationScriptsPartial.cshtml* が含まれています。
+[Razor ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする "*Pages/_ValidationScriptsPartial.cshtml*" が含まれています。
 
 部分ビューの詳細については、「<xref:mvc/views/partial>」を参照してください。
 
@@ -583,13 +583,13 @@ URL 内のクエリ文字列 `?handler=JoinList` が気に入らない場合は�
 
 ビューをプリコンパイルするには、[Razor ビューのコンパイル](xref:mvc/views/view-compilation)に関するページをご覧ください。
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Razor ページをコンテンツのルートに指定する
+### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Razor Pages をコンテンツのルートに指定する
 
-Razor ページのルートは既定で */Pages* ディレクトリです。 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> を追加して、Razor Pages をアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) に置くように指定します。
+Razor Pages のルートは既定で */Pages* ディレクトリです。 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> を追加して、Razor ページをアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) に置くように指定します。
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Razor ページをカスタム ルート ディレクトリに指定する
+### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Razor Pages をカスタム ルート ディレクトリに指定する
 
 (相対パスを指定して) Razor ページをアプリのカスタム ルート ディレクトリに置くように指定するには、<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> を追加します。
 
@@ -598,6 +598,7 @@ Razor ページのルートは既定で */Pages* ディレクトリです。 <xr
 ## <a name="additional-resources"></a>その他の技術情報
 
 * この概要に基づく、[Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するページをご覧ください
+* [属性と Razor ページを承認する](xref:security/authorization/simple#aarp)
 * [サンプル コードのダウンロードまたは表示](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
 * <xref:mvc/views/razor>
@@ -657,9 +658,9 @@ Visual Studio for Mac から生成された *.csproj* ファイルを開きま�
 
 ---
 
-## <a name="razor-pages"></a>Razor ページ
+## <a name="razor-pages"></a>Razor Pages
 
-Razor ページは *Startup.cs* で有効になっています。
+Razor ページは "*Startup.cs*" で有効になっています。
 
 [!code-cs[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -667,7 +668,7 @@ Razor ページは *Startup.cs* で有効になっています。
 
 [!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [Razor ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。 違いは、`@page` ディレクティブにあります。 `@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。 `@page` はページで最初の Razor ディレクティブである必要があります。 `@page` はその他の Razor コンストラクトの動作に影響します。
+上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [Razor ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。 違いは、`@page` ディレクティブにあります。 `@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。 `@page` はページ上で最初の Razor ディレクティブである必要があります。 `@page` はその他の Razor コンストラクトの動作に影響します。
 
 `PageModel` クラスを使用している類似したページが、次の 2 つのファイルにあります。 *Pages/Index2.cshtml* ファイル:
 
@@ -677,7 +678,7 @@ Razor ページは *Startup.cs* で有効になっています。
 
 [!code-cs[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-規則により、`PageModel` クラス ファイルは、Razor ページ ファイルと同じ名前に *.cs* が付加された名前になります。 たとえば、上の Razor ページは *Pages/Index2.cshtml* になります。 `PageModel` クラスを含むファイル名は、*Pages/Index2.cshtml.cs* になります。
+規則により、`PageModel` クラス ファイルは、Razor ページ ファイルと同じ名前に " *.cs*" が付加された名前になります。 たとえば、上の Razor ページは "*Pages/Index2.cshtml*" になります。 `PageModel` クラスを含むファイル名は、*Pages/Index2.cshtml.cs* になります。
 
 URL パスのページへの関連付けは、ファイル システム内のページの場所によって決定されます。 次の表に、Razor ページ パスと一致 URL を示します。
 
@@ -690,12 +691,12 @@ URL パスのページへの関連付けは、ファイル システム内のペ
 
 メモ:
 
-* 既定では、ランタイムが *Pages* フォルダー内で Razor ページ ファイルを検索します。
+* 既定では、ランタイムが "*Pages*" フォルダー内で Razor ページ ファイルを検索します。
 * `Index` は、URL にページが含まれない場合の既定のページになります。
 
 ## <a name="write-a-basic-form"></a>基本フォームを作成する
 
-Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。 [モデル バインド](xref:mvc/models/model-binding)、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで*機能します*。 `Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。
+Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。 [モデル バインド](xref:mvc/models/model-binding)、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで "*機能します*"。 `Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。
 
 このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) ファイルで `DbContext` が初期化されます。
 
@@ -755,7 +756,7 @@ db コンテキスト:
 
 [!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
-既定では、Razor Pages はプロパティを非 `GET` 動詞とのみバインドします。 プロパティをバインドすることで、記述すべきコードの量を削減できます。 同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。
+既定では、Razor ページはプロパティを非 `GET` 動詞とのみバインドします。 プロパティをバインドすることで、記述すべきコードの量を削減できます。 同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -836,7 +837,7 @@ public void OnHead()
 }
 ```
 
-ASP.NET Core 2.1 以降では、`OnHead` ハンドラーが定義されていない場合、Razor Pages は `OnGet` ハンドラーの呼び出しにフォールバックします。 この動作は、`Startup.ConfigureServices` での [SetCompatibilityVersion](xref:mvc/compatibility-version) への呼び出しによって有効になります。
+ASP.NET Core 2.1 以降では、`OnHead` ハンドラーが定義されていない場合、Razor ページは `OnGet` ハンドラーの呼び出しにフォールバックします。 この動作は、`Startup.ConfigureServices` での [SetCompatibilityVersion](xref:mvc/compatibility-version) への呼び出しによって有効になります。
 
 ```csharp
 services.AddMvc()
@@ -857,7 +858,7 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF と Razor ページ
+## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF および Razor ページ
 
 [偽造防止検証](xref:security/anti-request-forgery)のためにコードを記述する必要はありません。 偽造防止トークンの生成と検証は、自動的に Razor ページに含まれます。
 
@@ -865,7 +866,7 @@ services.AddMvc()
 
 ## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用
 
-ページは、Razor ビュー エンジンのすべての機能で動作します。 レイアウト、パーシャル、テンプレート、タグ ヘルパー、 *_ViewStart.cshtml*、 *_ViewImports.cshtml* は、従来の Razor ビューと同じように動作します。
+ページは、Razor ビュー エンジンのすべての機能で動作します。 レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml*"、" *_ViewImports.cshtml*" は、従来の Razor ビューと同じように動作します。
 
 これらの機能の一部を利用してこのページをまとめてみましょう。
 
@@ -884,13 +885,13 @@ services.AddMvc()
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
-レイアウトは、*Pages/Shared* フォルダーにあります。 ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。 *Pages/Shared* フォルダー内のレイアウトは、*Pages* フォルダー配下の任意の Razor ページから使用できます。
+レイアウトは、*Pages/Shared* フォルダーにあります。 ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。 "*Pages/Shared*" フォルダー内のレイアウトは、"*Pages*" フォルダー配下の任意の Razor ページから使用できます。
 
 レイアウト ファイルは *Pages/Shared* フォルダーに入ります。
 
 レイアウト ファイルを *Views/Shared* フォルダー内に配置**しない**ことをお勧めします。 *Views/Shared* は MVC ビュー パターンです。 Razor ページは、パス規則ではなく、フォルダー階層に依存することを意図しています。
 
-Razor ページからのビュー検索には、*Pages* フォルダーが含まれます。 MVC コントローラーで使用しているレイアウト、テンプレート、およびパーシャルと、従来の Razor ビューは*機能します*。
+Razor ページからのビュー検索には、"*Pages*" フォルダーが含まれます。 MVC コントローラーで使用しているレイアウト、テンプレート、およびパーシャルと、従来の Razor ビューは "*機能します*"。
 
 *Pages/_ViewImports.cshtml* ファイルを追加します。
 
@@ -916,7 +917,7 @@ Razor ページからのビュー検索には、*Pages* フォルダーが含ま
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
 
-*Pages/Customers/Edit.cshtml* Razor ページの生成された名前空間は、`PageModel` クラスと同じです。
+"*Pages/Customers/Edit.cshtml*" Razor ページの生成された名前空間は、`PageModel` クラスと同じです。
 
 `@namespace` は "*従来の Razor ビューでも機能します。* "
 
@@ -928,7 +929,7 @@ Razor ページからのビュー検索には、*Pages* フォルダーが含ま
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
 
-[Razor ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする *Pages/_ValidationScriptsPartial.cshtml* が含まれています。
+[Razor ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする "*Pages/_ValidationScriptsPartial.cshtml*" が含まれています。
 
 部分ビューの詳細については、「<xref:mvc/views/partial>」を参照してください。
 
@@ -1119,6 +1120,7 @@ services.AddMvc()
 
 ## <a name="additional-resources"></a>その他の技術情報
 
+* [属性と Razor ページを承認する](xref:security/authorization/simple#aarp)
 * <xref:index>
 * <xref:mvc/views/razor>
 * <xref:mvc/controllers/areas>

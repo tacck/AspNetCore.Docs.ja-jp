@@ -1,11 +1,24 @@
 ---
-title:'ASP.NET Core Blazor テンプレート コンポーネント' author: description: monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor テンプレート コンポーネント
+author: guardrex
+description: テンプレート コンポーネントで 1 つまたは複数の UI テンプレートをパラメーターとして受け取る方法について学習します。これは、コンポーネントのレンダリング ロジックの一部として使用できます。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 03/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/templated-components
+ms.openlocfilehash: 8c970387fa79b02127c8a2375195373148749679
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851890"
 ---
 # <a name="aspnet-core-blazor-templated-components"></a>ASP.NET Core Blazor テンプレート コンポーネント
 

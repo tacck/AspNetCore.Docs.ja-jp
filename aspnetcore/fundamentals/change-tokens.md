@@ -1,11 +1,23 @@
 ---
-title: author: description: monikerRange: ms.author: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core で変更トークンを使用して変更を検出する
+author: rick-anderson
+description: 変更トークンを使用して変更を追跡する方法を説明します。
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.date: 10/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/change-tokens
+ms.openlocfilehash: f581e26b0d11923d9cf099700c4338c99e68bb59
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106612"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core で変更トークンを使用して変更を検出する
 

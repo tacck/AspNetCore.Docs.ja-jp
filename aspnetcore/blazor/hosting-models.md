@@ -1,12 +1,24 @@
 ---
-title:'ASP.NET Core Blazor のホスティング モデル' author: description:'Blazor WebAssembly と Blazor サーバーのホスティング モデルについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor のホスティング モデル
+author: guardrex
+description: Blazor WebAssembly と Blazor サーバーのホスティング モデルについて学習します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/hosting-models
+ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105494"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
@@ -20,7 +32,7 @@ Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタ
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。アプリがブラウザー UI スレッド上で直接実行されます。UI の更新とイベントの処理は、同じプロセス内で行われます。アプリのアセットは、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
+Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
 
 ![Blazor WebAssembly:Blazor アプリは、ブラウザー内の UI スレッドで実行されます。](hosting-models/_static/blazor-webassembly.png)
 
