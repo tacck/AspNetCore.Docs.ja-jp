@@ -75,7 +75,7 @@
               uid: tutorials/first-mvc-app/new-field
             - name: 検証の追加
               uid: tutorials/first-mvc-app/validation
-            - name: Details メソッドと Delete メソッドの確認
+            - name: 詳細の確認と削除
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial
