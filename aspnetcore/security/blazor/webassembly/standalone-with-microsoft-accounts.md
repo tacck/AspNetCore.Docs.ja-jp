@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: e4c49f899d5988dc42b16c16eb5114613c7204ba
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 113a0aaba89b90922a9ccd58da13aabeecec0081
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83852339"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724316"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>BlazorMicrosoft アカウントを使用して ASP.NET Core webasスタンドアロンアプリをセキュリティで保護する
 
@@ -33,7 +33,7 @@ Azure portal の**Azure Active Directory**  >  **アプリの登録**領域に A
 1. アプリの**名前**を指定します ( ** Blazor スタンドアロン AAD Microsoft アカウント**など)。
 1. [**サポートされているアカウントの種類**] で、**任意の組織ディレクトリのアカウント**を選択します。
 1. [**リダイレクト uri** ] ドロップダウンを [ **Web** ] に設定し、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、[**デバッグ**] パネルのアプリの [プロパティ] にあります。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 このトピックの後半では、リダイレクト URI を更新するようにユーザーに IIS Express 通知するために、このトピックの後半でコメントを表示します。
-1. [ **Permissions**  >  **求めるプロンプト to openid and offline_access permissions** ] チェックボックスをオフにします。
+1. [**権限**  >  **を openid に付与する] チェックボックスと [アクセス許可を offline_access する**] チェックボックスをオフにします。
 1. **[登録]** を選択します。
 
 アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
@@ -63,7 +63,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "commo
 アプリを作成すると、次のことができるようになります。
 
 * Microsoft アカウントを使用してアプリにログインします。
-* Microsoft Api のアクセストークンを要求します。 詳細については次を参照してください:
+* Microsoft Api のアクセストークンを要求します。 詳細については、次を参照してください。
   * [アクセストークンスコープ](#access-token-scopes)
   * [クイックスタート: Web api を公開するようにアプリケーションを構成](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)する。
 
@@ -95,7 +95,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 メソッドは、 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。
 
-構成は*wwwroot/appsettings*ファイルによって提供されます。
+構成は、ファイル*の wwwroot/appsettings.js*によって提供されます。
 
 ```json
 {

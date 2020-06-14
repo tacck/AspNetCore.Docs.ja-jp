@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: b369bf0e9b20bcb87345e3e10c314ae6227464d1
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 9a63d6ca0ab6b71875212d54035dfb5cf94a8cad
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84215087"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724303"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C を使用して ASP.NET Core webasのホスト型アプリをセキュリティで保護する
 
@@ -45,7 +45,7 @@ ms.locfileid: "84215087"
 1. アプリの**名前**を指定します (たとえば、 ** Blazor Server AAD B2C**)。
 1. **サポートされているアカウントの種類**については、[マルチテナント] オプションを選択します。**組織ディレクトリ内のアカウントまたは任意の id プロバイダーを選択します。Azure AD B2C を使用してユーザーを認証します。**
 1. このシナリオでは、*サーバー API アプリ*に**リダイレクト uri**は必要ないため、ドロップダウンは [ **Web** ] に設定し、リダイレクト uri は入力しないでください。
-1. **アクセス許可**によって  >  **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。
+1. **アクセス許可**が  >  **openid に管理者の同意を付与し、offline_access アクセス許可**が有効になっていることを確認します。
 1. **[登録]** を選択します。
 
 次の情報を記録します。
@@ -77,7 +77,7 @@ ms.locfileid: "84215087"
 1. アプリの**名前**( ** Blazor クライアント AAD B2C**など) を指定します。
 1. **サポートされているアカウントの種類**については、[マルチテナント] オプションを選択します。**組織ディレクトリ内のアカウントまたは任意の id プロバイダーを選択します。Azure AD B2C を使用してユーザーを認証します。**
 1. [**リダイレクト uri** ] ドロップダウンを [ **Web** ] に設定し、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、サーバーアプリの [**デバッグ**] パネルの [プロパティ] にあります。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 「[アプリを作成](#create-the-app)する」セクションにコメントが表示され、ユーザーにリダイレクト URI の更新を IIS Express ように通知します。
-1. **アクセス許可**によって  >  **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。
+1. **アクセス許可**が  >  **openid に管理者の同意を付与し、offline_access アクセス許可**が有効になっていることを確認します。
 1. **[登録]** を選択します。
 
 アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
@@ -95,8 +95,8 @@ ms.locfileid: "84215087"
 1. [**名前**] 列から*サーバー API アプリ*を選択します ( ** Blazor サーバー AAD B2C**など)。
 1. **API**の一覧を開きます。
 1. API へのアクセスを有効にします (たとえば、 `API.Access` )。
-1. **[アクセス許可の追加]** を選択します。
-1. [ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。 **[はい]** をクリックして操作を確定します。
+1. **[アクセス許可の追加]** を選択します.
+1. [ **{テナント名} の管理者コンテンツを付与**] ボタンを選択します。 **[はい]** を選択して確定します。
 
 [**ホーム**  >  **Azure AD B2C**  >  **ユーザーフロー**:
 
@@ -180,7 +180,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="app-settings"></a>アプリの設定
 
-*Appsettings*ファイルには、アクセストークンの検証に使用される JWT ベアラーハンドラーを構成するためのオプションが含まれています。
+ファイル*のappsettings.js*には、アクセストークンの検証に使用する JWT ベアラーハンドラーを構成するためのオプションが含まれています。
 
 ```json
 {
@@ -273,7 +273,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 メソッドは、 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリを構成するために必要な値は、アプリを登録するときに Azure Portal AAD 構成から取得できます。
 
-構成は*wwwroot/appsettings*ファイルによって提供されます。
+構成は、ファイル*の wwwroot/appsettings.js*によって提供されます。
 
 ```json
 {
@@ -365,7 +365,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [セキュリティで保護された既定のクライアントを使用するアプリ内の認証されていない web API 要求](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

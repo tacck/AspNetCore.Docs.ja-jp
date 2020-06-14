@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 116e5d27e7585e9168db433480c3a5e9d08379f3
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454674"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724290"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core プロジェクトでのスキャフォールディング
 
@@ -195,7 +195,7 @@ Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます
 * 認証トークンがプロビジョニングされ、認証 cookie に保存されると、コンポーネントに渡すことができます。
 * Razorコンポーネントでを直接使用することはできない `HttpContext` ため、のログアウトエンドポイントをに送信するための[要求防止偽造 (XSRF) トークン](xref:security/anti-request-forgery)を取得する方法はありません Identity `/Identity/Account/Logout` 。 XSRF トークンは、コンポーネントに渡すことができます。
 
-詳細については、 <xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app> を参照してください。
+詳細については、「<xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>」を参照してください。
 
 *Pages/_Host cshtml*ファイルで、クラスおよびクラスに追加した後、トークンを設定し `InitialApplicationState` `TokenProvider` ます。
 
@@ -229,7 +229,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 クラスの場合 `Startup` :
 
 * ページサービスがに追加されていることを確認 Razor `Startup.ConfigureServices` します。
-* [TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app)を使用する場合は、サービスを登録します。
+* [TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)を使用する場合は、サービスを登録します。
 * `UseDatabaseErrorPage`開発環境用のアプリケーションビルダーでを呼び出し `Startup.Configure` ます。
 * `UseAuthentication`との後にを呼び出し `UseAuthorization` `UseRouting` ます。
 * ページのエンドポイントを追加 Razor します。
@@ -253,7 +253,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 }
 ```
 
-`LoginDisplay`アプリの*共有*フォルダーにコンポーネント (*logindisplay. razor*) を追加します。 [TokenProvider サービス](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app)は、ログアウトエンドポイントにポストする HTML フォームの XSRF トークンを提供し Identity ます。
+`LoginDisplay`アプリの*共有*フォルダーにコンポーネント (*logindisplay. razor*) を追加します。 [TokenProvider サービス](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)は、ログアウトエンドポイントにポストする HTML フォームの XSRF トークンを提供し Identity ます。
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -398,7 +398,9 @@ cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
 -->
-## <a name="disable-register-page"></a>登録の無効化ページ
+## <a name="disable-a-page"></a>ページを無効にする
+
+このセクションでは、登録ページを無効にする方法について説明しますが、この方法を使用して任意のページを無効にすることができます。
 
 ユーザー登録を無効にするには:
 
@@ -418,13 +420,13 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 * *区分///////// Identity ////* から登録リンクをコメントアウトまたは削除します。
 
-```cshtml
-@*
-<p>
-    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-</p>
-*@
-```
+  ```cshtml
+  @*
+  <p>
+      <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+  </p>
+  *@
+  ```
 
 * [*区分/ページ/ Identity アカウント/* 登録の確認] ページを更新します。
 
@@ -468,7 +470,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 静的なアセットが web ルートに発行されないようにするに Identity は、「」を参照してください <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> 。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 
@@ -482,7 +484,7 @@ ASP.NET Core 2.1 以降では、 [ Razor クラスライブラリ](xref:razor-pa
 
 Scaffolder は、必要なコードの大部分を生成しますが、プロセスを完了するにはプロジェクトを更新する必要があります。 このドキュメントでは、スキャフォールディングの更新を完了するために必要な手順について説明し Identity ます。
 
-Scaffolder を Identity 実行すると、 *ScaffoldingReadme*ファイルがプロジェクトディレクトリに作成されます。 *ScaffoldingReadme*ファイルには、スキャフォールディングの更新を完了するために必要な手順に関する一般的な指示が含まれてい Identity ます。 このドキュメントには、 *ScaffoldingReadme*ファイルよりも完全な手順が含まれています。
+Scaffolder を Identity 実行すると、プロジェクトディレクトリに*ScaffoldingReadme.txt*ファイルが作成されます。 *ScaffoldingReadme.txt*ファイルには、スキャフォールディングの更新を完了するために必要な手順に関する一般的な指示が含まれてい Identity ます。 このドキュメントには、 *ScaffoldingReadme.txt*ファイルよりも完全な手順が含まれています。
 
 ファイルの違いを示すソース管理システムを使用して、変更を元に戻すことをお勧めします。 Scaffolder を実行した後に変更を確認し Identity ます。
 
@@ -709,7 +711,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 同様の方法で、運用環境のシナリオにも対応できます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 

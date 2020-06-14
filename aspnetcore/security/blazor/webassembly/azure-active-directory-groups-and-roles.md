@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 87cdf02a6f6babc869d90658e6a7cd54db73bb68
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451876"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756029"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD グループ、管理者ロール、およびユーザー定義のロール
 
@@ -27,7 +27,7 @@ ms.locfileid: "84451876"
 Azure Active Directory (AAD) には、ASP.NET Core と組み合わせることができるいくつかの承認方法が用意されてい Identity ます。
 
 * ユーザー定義グループ
-  * Security
+  * セキュリティ
   * O365
   * Distribution
 * ロール
@@ -164,7 +164,7 @@ AAD ロールオブジェクト Id の完全な一覧については、「 [aad 
 </AuthorizeView>
 ```
 
-コンポーネント全体へのアクセスは、[ `[Authorize]` ] 属性ディレクティブ] (xref: security/blazor/index # 承認属性) () を使用して、ポリシーに基づいて行うことができ <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ます。
+コンポーネント全体へのアクセスは、 [ `[Authorize]` 属性ディレクティブ](xref:security/blazor/index#authorize-attribute)() を使用して、ポリシーに基づいて行うことができ <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ます。
 
 ```razor
 @page "/"
@@ -246,7 +246,7 @@ builder.Services.AddMsalAuthentication(options =>
 コンポーネントの承認方法は、この時点で機能します。 コンポーネント内のすべての承認メカニズムは、ロールを使用して `admin` ユーザーを承認できます。
 
 * [Authorizeview コンポーネント](xref:security/blazor/index#authorizeview-component)(例: `<AuthorizeView Roles="admin">` )
-* [ `[Authorize]` ] 属性ディレクティブ](xref: security/blazor/index # 承認-属性)( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (例: `@attribute [Authorize(Roles = "admin")]` )
+* [ `[Authorize]` attribute ディレクティブ](xref:security/blazor/index#authorize-attribute)( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (例: `@attribute [Authorize(Roles = "admin")]` )
 * [手続き型ロジック](xref:security/blazor/index#procedural-logic)(例: `if (user.IsInRole("admin")) { ... }` )
 
   複数のロールテストがサポートされています。

@@ -5,7 +5,7 @@ description: ASP.NET Core アプリから診断を収集する方法について
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: signalr
-ms.date: 06/08/2020
+ms.date: 06/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507317"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755964"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core でのログ記録と診断SignalR
 
@@ -38,7 +38,7 @@ SignalR2つの logger カテゴリを使用します。
 * `Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
 * `Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、サーバー送信イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR
 
-から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、前のプレフィックスを*appsettings*ファイルのレベルに構成し `LogLevel` `Logging` ます。
+から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を*appsettings.js*のファイルのレベルに構成し `LogLevel` `Logging` ます。
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -110,6 +110,8 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 > クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
 
 .NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。 これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。 ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。 ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。
+
+Webassembly に .NET クライアントのログ記録を追加する方法に Blazor ついては、「」を参照してください <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging> 。
 
 ### <a name="console-logging"></a>[コンソールのログ記録]
 

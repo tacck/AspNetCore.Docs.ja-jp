@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 911eeffbe632d8f285d54ae78b62f17851205e83
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ec35614e3bc4b5b6422b254dfe579c1cb7ca8310
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84214960"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724394"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>BlazorAzure Active Directory B2C を使用して ASP.NET Core のスタンドアロンアプリをセキュリティで保護する
 
@@ -41,7 +41,7 @@ Blazor認証に[AZURE ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/ov
 1. アプリの**名前**を指定します ( ** Blazor スタンドアロン AAD B2C**など)。
 1. **サポートされているアカウントの種類**については、[マルチテナント] オプションを選択します。**組織ディレクトリ内のアカウントまたは任意の id プロバイダーを選択します。Azure AD B2C を使用してユーザーを認証します。**
 1. [**リダイレクト uri** ] ドロップダウンを [ **Web** ] に設定し、[リダイレクト uri] を指定します `https://localhost:{PORT}/authentication/login-callback` 。 Kestrel で実行されているアプリの既定のポートは5001です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、[**デバッグ**] パネルのアプリの [プロパティ] にあります。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 このトピックの後半では、リダイレクト URI を更新するようにユーザーに IIS Express 通知するために、このトピックの後半でコメントを表示します。
-1. **アクセス許可**によって  >  **、管理者求めるプロンプトが openid に付与され offline_access アクセス許可**が有効になっていることを確認します。
+1. **アクセス許可**が  >  **openid に管理者の同意を付与し、offline_access アクセス許可**が有効になっていることを確認します。
 1. **[登録]** を選択します。
 
 アプリケーション ID (クライアント ID) を記録します (たとえば、 `11111111-1111-1111-1111-111111111111` )。
@@ -111,7 +111,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 メソッドは、 <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> コールバックを受け入れて、アプリの認証に必要なパラメーターを構成します。 アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。
 
-構成は*wwwroot/appsettings*ファイルによって提供されます。
+構成は、ファイル*の wwwroot/appsettings.js*によって提供されます。
 
 ```json
 {
@@ -182,7 +182,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/blazor/webassembly/additional-scenarios>
 * [セキュリティで保護された既定のクライアントを使用するアプリ内の認証されていない web API 要求](xref:security/blazor/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)

@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core で証明書認証を構成する
 author: blowdart
-description: IIS と http.sys の ASP.NET Core で証明書認証を構成する方法について説明します。
+description: IIS および HTTP.sys の ASP.NET Core で証明書認証を構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454611"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724251"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -557,3 +557,36 @@ namespace AspNetCoreCertificateAuthApi
     }
 }
 ```
+
+<a name="occ"></a>
+
+## <a name="optional-client-certificates"></a>オプションのクライアント証明書
+
+このセクションでは、証明書を使用してアプリのサブセットを保護する必要があるアプリについて説明します。 たとえば、 Razor アプリ内のページまたはコントローラーにクライアント証明書が必要な場合があります。 これにより、クライアント証明書としての問題が示されます。
+  
+* は TLS 機能であり、HTTP 機能ではありません。
+* は接続ごとにネゴシエートされます。 HTTP データを使用できるようにするには、接続の開始時にネゴシエートする必要があります。 接続の開始時には、Server Name Indication (SNI) のみ &dagger; が認識されます。 クライアント証明書とサーバー証明書は、接続の最初の要求の前にネゴシエートされ、通常、要求は再ネゴシエートできません。 再ネゴシエーションは、HTTP/2 では禁止されています。
+
+ASP.NET Core 5 preview 4 以降では、オプションのクライアント証明書の便利なサポートが追加されています。 詳細については、[オプションの証明書のサンプル](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)を参照してください。
+
+次の方法では、オプションのクライアント証明書がサポートされます。
+
+* ドメインとサブドメインのバインドを設定します。
+  * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
+  * 詳細については、次を参照してください。
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * 注 Kestrel では、現在、1つのバインドで複数の TLS 構成がサポートされていません。一意の Ip またはポートを持つ2つのバインドが必要です。 「https://github.com/dotnet/runtime/issues/31097」を参照してください。
+    * IIS
+      * [IIS のホスト](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [IIS でのセキュリティの構成](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys: [Windows Server の構成](xref:fundamentals/servers/httpsys#configure-windows-server)
+* クライアント証明書を必要としていない web アプリへの要求の場合:
+  * クライアント証明書で保護されたサブドメインを使用して同じページにリダイレクトします。
+  * たとえば、にリダイレクト `myClient.contoso.com/requestedPage` します。 への要求は `myClient.contoso.com/requestedPage` とは異なるホスト名であるため、 `contoso.com/requestedPage` クライアントは別の接続を確立し、クライアント証明書を提供します。
+  * 詳細については、「<xref:security/authorization/introduction>」を参照してください。
+
+[この GitHub ディスカッション](https://github.com/dotnet/AspNetCore.Docs/issues/18720)の問題では、オプションのクライアント証明書に関する質問、コメント、その他のフィードバックを残しておきます。
+
+&dagger;Server Name Indication (SNI) は、SSL ネゴシエーションの一部として仮想ドメインを含めるための TLS 拡張機能です。 これは実質的に、仮想ドメイン名またはホスト名を使用してネットワークエンドポイントを識別できることを意味します。

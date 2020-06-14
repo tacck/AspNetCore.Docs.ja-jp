@@ -7,12 +7,13 @@
 >
 > このバグが発生するケースの例については、GitHub のバグ [18677](https://github.com/dotnet/aspnetcore/issues/18677) および [16579](https://github.com/dotnet/aspnetcore/issues/16579) を参照してください。
 >
-> このバグについてはオプトイン修正が計画されています。 このドキュメントは、修正プログラムがリリースされたときに更新されます。 修正プログラムがリリースされると、次のコードによって、このバグを修正する内部スイッチが設定されます。
+> このバグのオプトイン修正は、 [.Net Core 3.1.301 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core/3.1)に含まれています。 次のコードは、このバグを修正する内部スイッチを設定します。
 >
 >```
 >public static void Main(string[] args)
 >{
->    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", true);
+>    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 
+>                          true);
 >    CreateHostBuilder(args).Build().Run();
 >}
 >// Remaining code removed for brevity.

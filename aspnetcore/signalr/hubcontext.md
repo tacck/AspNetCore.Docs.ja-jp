@@ -1,63 +1,96 @@
 ---
-title: SignalR HubContext
+title: SignalRHubContext
 author: bradygaster
-description: ハブの外部からのクライアントに通知を送信するための ASP.NET Core SignalR HubContext サービスを使用する方法について説明します。
+description: ASP.NET Core HubContext サービスを使用し SignalR て、ハブの外部からクライアントに通知を送信する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/01/2018
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 7ec52d4711fc191dcb83120cf54b1dc28c41f947
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 336173866e9346d836bb31955644d07403fc238d
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894479"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756055"
 ---
-# <a name="send-messages-from-outside-a-hub"></a>ハブの外部からのメッセージ送信
+# <a name="send-messages-from-outside-a-hub"></a>ハブの外部からメッセージを送信する
 
 作成者: [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
-SignalR ハブは、SignalR のサーバーに接続しているクライアントにメッセージを送信するための中核となる抽象化です。 `IHubContext`サービスを使用して、アプリ内の他の場所からメッセージを送信することもできます。 この記事は、ハブの外部からのクライアントに通知を送信するために SignalR の`IHubContext`にアクセスする方法を説明します。
+SignalRハブは、サーバーに接続されたクライアントにメッセージを送信するための中核的な抽象化です SignalR 。 また、サービスを使用して、アプリ内の他の場所からメッセージを送信することもでき `IHubContext` ます。 この記事では、にアクセスして、 SignalR `IHubContext` ハブの外部からクライアントに通知を送信する方法について説明します。
 
-[サンプルコードの表示またはダウンロード](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(ダウンロードする方法)](xref:index#how-to-download-a-sample)
+[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
-## <a name="get-an-instance-of-ihubcontext"></a>IHubContext インスタンスの取得
+## <a name="get-an-instance-of-ihubcontext"></a>IHubContext のインスタンスを取得する
 
-ASP.NET Core SignalRでは 依存関係の挿入を介して`IHubContext`インスタンスにアクセスすることができます。 コントローラー、ミドルウェア、またはその他の DI サービスに`IHubContext`インスタンスを挿入できます。 クライアントへのメッセージ送信にインスタンスを使用します。
+ASP.NET Core では SignalR 、依存関係の挿入によってのインスタンスにアクセスでき `IHubContext` ます。 のインスタンスは、 `IHubContext` コントローラー、ミドルウェア、またはその他の DI サービスに挿入できます。 インスタンスを使用して、クライアントにメッセージを送信します。
 
 > [!NOTE]
-> これは GlobalHost を使用して`IHubContext`へのアクセスを提供した ASP.NET 4.x SignalR とは異なります。 ASP.NET Core には、このグローバルシングルトンの必要性を取り除く依存関係挿入フレームワークがあります。
+> これ SignalR は、GlobalHost を使用してへのアクセスを提供する ASP.NET 4.x とは異なり `IHubContext` ます。 ASP.NET Core には、このグローバルシングルトンの必要性を排除する依存関係挿入フレームワークがあります。
 
-### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>コントローラーへの IHubContext インスタンスの挿入
+### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>コントローラーで IHubContext のインスタンスを挿入する
 
-コンストラクターに`IHubContext`を追加することでコントローラーにそのインスタンスを挿入できます。
+のインスタンス `IHubContext` を、コンストラクターに追加することによって、コントローラーに挿入できます。
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=12-19,57)]
 
-これで、`IHubContext`インスタンスにアクセスすると、ハブ自体の中のようにハブメソッドを呼び出すことができます。
+では、のインスタンスにアクセスできるようになったので、ハブ `IHubContext` 自体と同じようにハブメソッドを呼び出すことができます。
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=21-25)]
 
-### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>ミドルウェア内での IHubContext インスタンスの取得
+### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>ミドルウェアで IHubContext のインスタンスを取得する
 
-ミドルウェア パイプライン内で`IHubContext`にアクセスするには次のようにします。
+次のよう `IHubContext` にミドルウェアパイプライン内のにアクセスします。
 
 ```csharp
 app.Use(async (context, next) =>
 {
     var hubContext = context.RequestServices
-                            .GetRequiredService<IHubContext<MyHub>>();
+                            .GetRequiredService<IHubContext<ChatHub>>();
     //...
+    
+    if (next != null)
+    {
+        await next.Invoke();
+    }
 });
 ```
 
 > [!NOTE]
-> `Hub`クラスの外部からハブ メソッドが呼び出されるときは、呼び出しに関連付けられている呼び出し元はありません。 そのため `ConnectionId`、`Caller`、および`Others`プロパティへアクセスすることはできません。
+> ハブメソッドがクラスの外部から呼び出された場合 `Hub` 、呼び出しに関連付けられている呼び出し元はありません。 そのため、、、およびの各プロパティにアクセスすることはできません `ConnectionId` `Caller` `Others` 。
 
-### <a name="inject-a-strongly-typed-hubcontext"></a>厳密に型指定された HubContext の挿入
+### <a name="get-an-instance-of-ihubcontext-from-ihost"></a>IHost から IHubContext のインスタンスを取得する
 
-厳密に型指定された HubContext を挿入するには、ハブが`Hub<T>`を継承していることを確認します。 `IHubContext<THub>`ではなく`IHubContext<THub, T>`インターフェースを使用して挿入します。
+`IHubContext`Web ホストからへのアクセスは、サードパーティの依存関係挿入フレームワークを使用するなど、ASP.NET Core の外部の領域と統合する場合に役立ちます。
+
+```csharp
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
+            var hubContext = host.Services.GetService(typeof(IHubContext<ChatHub>));
+            host.Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+```
+
+### <a name="inject-a-strongly-typed-hubcontext"></a>厳密に型指定された HubContext を挿入する
+
+厳密に型指定された HubContext を挿入するには、ハブがから継承されていることを確認し `Hub<T>` ます。 ではなく、インターフェイスを使用して挿入 `IHubContext<THub, T>` `IHubContext<THub>` します。
 
 ```csharp
 public class ChatController : Controller
@@ -76,8 +109,8 @@ public class ChatController : Controller
 }
 ```
 
-## <a name="related-resources"></a>関連資料
+## <a name="related-resources"></a>関連リソース
 
 * [開始するには](xref:tutorials/signalr)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

@@ -1,7 +1,7 @@
 ---
-title: と ASP.NET Core SignalRの違いSignalR
+title: SignalRと ASP.NET Core の違いSignalR
 author: bradygaster
-description: と ASP.NET Core SignalRの違いSignalR
+description: SignalRと ASP.NET Core の違いSignalR
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
@@ -12,25 +12,25 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: 58d134ae971bace178561322f1c8a6351432be03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b5899f816dc5a5f8ff4c3f05c8e2c54ded5fc47b
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772580"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756042"
 ---
-# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR と ASP.NET Core SignalR の違い
+# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR と ASP.NET Core の違いSignalR
 
-ASP.NET Core SignalR は、ASP.NET SignalR のクライアントまたはサーバーと互換性がありません。 この記事では ASP.NET Core SignalR で削除または変更された機能について詳しく説明します。
+ASP.NET Core SignalR は、ASP.NET のクライアントまたはサーバーと互換性がありません SignalR 。 この記事では、ASP.NET Core で削除または変更された機能について詳しく説明 SignalR します。
 
-## <a name="how-to-identify-the-signalr-version"></a>SignalR のバージョンを識別する方法
+## <a name="how-to-identify-the-signalr-version"></a>バージョンを識別する方法 SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
-|                      | ASP.NET SignalR | ASP.NET Core SignalR |
+|                      | ASP.NETSignalR | ASP.NET CoreSignalR |
 | -------------------- | --------------- | -------------------- |
-| サーバー NuGet パッケージ | [SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [なし] : [AspNetCore](xref:fundamentals/metapackage-app)共有フレームワークに含まれています。 |
-| クライアント NuGet パッケージ | [SignalR (Microsoft AspNet. クライアント)](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[SignalR (Microsoft AspNet)](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore. SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
+| サーバー NuGet パッケージ | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [なし] : [AspNetCore](xref:fundamentals/metapackage-app)共有フレームワークに含まれています。 |
+| クライアント NuGet パッケージ | [Microsoft SignalR . AspNet.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft SignalR . AspNet.NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR .Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | JavaScript クライアント npm パッケージ | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
 | Java クライアント | [GitHub リポジトリ](https://github.com/SignalR/java-client)(非推奨)  | Maven パッケージ[signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
 | サーバーアプリの種類 | ASP.NET (System.web) または OWIN 自己ホスト | ASP.NET Core |
@@ -40,10 +40,10 @@ ASP.NET Core SignalR は、ASP.NET SignalR のクライアントまたはサー�
 
 ::: moniker range="<= aspnetcore-2.2"
 
-|                      | ASP.NET SignalR | ASP.NET Core SignalR |
+|                      | ASP.NETSignalR | ASP.NET CoreSignalR |
 | -------------------- | --------------- | -------------------- |
 | サーバー NuGet パッケージ | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.net Core)<br>[AspNetCore。SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
-| クライアント NuGet パッケージ | [Microsoft AspNet。SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft AspNet。SignalR.NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore。SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
+| クライアント NuGet パッケージ | [Microsoft SignalR . AspNet.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft SignalR . AspNet.NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR .Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | JavaScript クライアント npm パッケージ | [signalr](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
 | Java クライアント | [GitHub リポジトリ](https://github.com/SignalR/java-client)(非推奨)  | Maven パッケージ[signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
 | サーバーアプリの種類 | ASP.NET (System.web) または OWIN 自己ホスト | ASP.NET Core |
@@ -57,24 +57,24 @@ ASP.NET Core SignalR は、ASP.NET SignalR のクライアントまたはサー�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET SignalRの場合:
+ASP.NET の場合 SignalR :
 
-* 既定ではSignalR 、は、接続が切断された場合にサーバーへの再接続を試みます。 
+* 既定では、は、 SignalR 接続が切断された場合にサーバーへの再接続を試みます。 
 
-ASP.NET Core SignalR:
+ASP.NET Core SignalR :
 
 * 自動再接続は、 [.net クライアント](xref:signalr/dotnet-client#automatically-reconnect)と[JavaScript クライアント](xref:signalr/javascript-client#automatically-reconnect)の両方にオプトインされています。
 
 ```csharp
 HubConnection connection = new HubConnectionBuilder()
-    .WithUrl(new Uri("http://127.0.0.1:5000/chatHub"))
+    .WithUrl(new Uri("http://127.0.0.1:5000/chathub"))
     .WithAutomaticReconnect()
     .Build();
 ```
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect()
     .build();
 ```
@@ -83,23 +83,23 @@ const connection = new signalR.HubConnectionBuilder()
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 3.0 より前でSignalRは、は自動再接続をサポートしていません。 クライアントが切断されている場合、ユーザーは新しい接続を明示的に開始して再接続する必要があります。 ASP.NET SignalRではSignalR 、接続が切断された場合、はサーバーへの再接続を試みます。
+ASP.NET Core 3.0 より前では、は自動再接続をサポートして SignalR いません。 クライアントが切断されている場合、ユーザーは新しい接続を明示的に開始して再接続する必要があります。 ASP.NET では SignalR 、 SignalR 接続が切断された場合、はサーバーへの再接続を試みます。
 
 ::: moniker-end
 
 ### <a name="protocol-support"></a>プロトコルのサポート
 
-ASP.NET Core SignalRは、 [messagepack](xref:signalr/messagepackhubprotocol)に基づく新しいバイナリプロトコルだけでなく、JSON もサポートしています。 さらに、カスタムプロトコルを作成することもできます。
+ASP.NET Core SignalR は、 [messagepack](xref:signalr/messagepackhubprotocol)に基づく新しいバイナリプロトコルだけでなく、JSON もサポートしています。 さらに、カスタムプロトコルを作成することもできます。
 
 ### <a name="transports"></a>トランスポート
 
-永続的フレーム転送は ASP.NET Core SignalRではサポートされていません。
+永続的フレーム転送は ASP.NET Core ではサポートされていません SignalR 。
 
 ## <a name="differences-on-the-server"></a>サーバーの相違点
 
-ASP.NET Core SignalRサーバー側ライブラリは、 [AspNetCore](xref:fundamentals/metapackage-app)に含まれています。これは、と MVC プロジェクトの両方Razorの**ASP.NET Core Web アプリケーション**テンプレートで使用されます。
+ASP.NET Core SignalR サーバー側ライブラリは、 [AspNetCore](xref:fundamentals/metapackage-app)に含まれています。これは、と MVC プロジェクトの両方の**ASP.NET Core Web アプリケーション**テンプレートで使用されます。 Razor
 
-ASP.NET Core SignalRは ASP.NET Core ミドルウェアです。 のを<xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddSignalR%2A> `Startup.ConfigureServices`呼び出すことによって構成する必要があります。
+ASP.NET Core SignalR は ASP.NET Core ミドルウェアです。 のを呼び出すことによって構成する必要があり <xref:Microsoft.Extensions.DependencyInjection.SignalRDependencyInjectionExtensions.AddSignalR%2A> `Startup.ConfigureServices` ます。
 
 ```csharp
 services.AddSignalR()
@@ -107,7 +107,7 @@ services.AddSignalR()
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ルーティングを構成するには、メソッド内の<xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> `Startup.Configure`メソッド呼び出し内のハブにルートをマップします。
+ルーティングを構成するには、メソッド内のメソッド呼び出し内のハブにルートをマップし <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> `Startup.Configure` ます。
 
 ```csharp
 app.UseRouting();
@@ -122,7 +122,7 @@ app.UseEndpoints(endpoints =>
 
 ::: moniker range="<= aspnetcore-2.2"
 
-ルーティングを構成するには、メソッド内の<xref:Microsoft.AspNetCore.Builder.SignalRAppBuilderExtensions.UseSignalR%2A> `Startup.Configure`メソッド呼び出し内のハブにルートをマップします。
+ルーティングを構成するには、メソッド内のメソッド呼び出し内のハブにルートをマップし <xref:Microsoft.AspNetCore.Builder.SignalRAppBuilderExtensions.UseSignalR%2A> `Startup.Configure` ます。
 
 ```csharp
 app.UseSignalR(routes =>
@@ -135,43 +135,43 @@ app.UseSignalR(routes =>
 
 ### <a name="sticky-sessions"></a>固定セッション
 
-ASP.NET SignalRのスケールアウトモデルを使用すると、クライアントは再接続し、ファーム内の任意のサーバーにメッセージを送信できます。 ASP.NET Core SignalRでは、クライアントは接続中に同じサーバーと通信する必要があります。 Redis を使用したスケールアウトの場合、これは固定セッションが必要であることを意味します。 [Azure SignalRサービス](/azure/azure-signalr/)を使用したスケールアウトでは、サービスがクライアントへの接続を処理するため、固定セッションは必要ありません。
+ASP.NET のスケールアウトモデルを SignalR 使用すると、クライアントは再接続し、ファーム内の任意のサーバーにメッセージを送信できます。 ASP.NET Core では、 SignalR クライアントは接続中に同じサーバーと通信する必要があります。 Redis を使用したスケールアウトの場合、これは固定セッションが必要であることを意味します。 [Azure SignalR サービス](/azure/azure-signalr/)を使用したスケールアウトでは、サービスがクライアントへの接続を処理するため、固定セッションは必要ありません。
 
 ### <a name="single-hub-per-connection"></a>接続ごとに1つのハブ
 
-ASP.NET Core SignalRでは、接続モデルが単純化されています。 複数のハブへのアクセスを共有するために使用される単一の接続ではなく、1つのハブに直接接続されます。
+ASP.NET Core では SignalR 、接続モデルが単純化されています。 複数のハブへのアクセスを共有するために使用される単一の接続ではなく、1つのハブに直接接続されます。
 
 ### <a name="streaming"></a>ストリーミング
 
-ASP.NET Core SignalRは、ハブからクライアントへの[データのストリーミング](xref:signalr/streaming)をサポートするようになりました。
+ASP.NET Core は、 SignalR ハブからクライアントへの[データのストリーミング](xref:signalr/streaming)をサポートするようになりました。
 
 ### <a name="state"></a>State
 
-クライアントとハブ (多くの場合はと呼ばれ`HubState`ます) の間で任意の状態を渡す機能は削除されており、進行状況メッセージもサポートされています。 現時点では、対応するハブプロキシはありません。
+クライアントとハブ (多くの場合はと呼ばれます) の間で任意の状態を渡す機能は `HubState` 削除されており、進行状況メッセージもサポートされています。 現時点では、対応するハブプロキシはありません。
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection の削除
 
-ASP.NET Core SignalRでは、 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118))クラスは削除されています。
+ASP.NET Core では SignalR 、 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118))クラスは削除されています。
 
 ### <a name="globalhost"></a>GlobalHost
 
-ASP.NET Core には、フレームワークに依存関係の挿入 (DI) が組み込まれています。 サービスは DI を使用して[HubContext](xref:signalr/hubcontext)にアクセスできます。 を`GlobalHost` `HubContext`取得するために ASP.NET SignalR SignalRで使用されるオブジェクトが ASP.NET Core に存在しません。
+ASP.NET Core には、フレームワークに依存関係の挿入 (DI) が組み込まれています。 サービスは DI を使用して[HubContext](xref:signalr/hubcontext)にアクセスできます。 `GlobalHost`を取得するために ASP.NET で使用されるオブジェクトが SignalR `HubContext` ASP.NET Core に存在しません SignalR 。
 
 ### <a name="hubpipeline"></a>HubPipeline
 
-ASP.NET Core SignalRはモジュールを`HubPipeline`サポートしていません。
+ASP.NET Core SignalR はモジュールをサポートしていません `HubPipeline` 。
 
 ## <a name="differences-on-the-client"></a>クライアントの相違点
 
 ### <a name="typescript"></a>TypeScript
 
-ASP.NET Core SignalRクライアントは[TypeScript](https://www.typescriptlang.org/)で記述されています。 Javascript[クライアント](xref:signalr/javascript-client)を使用する場合は、javascript または TypeScript で記述できます。
+ASP.NET Core SignalR クライアントは[TypeScript](https://www.typescriptlang.org/)で記述されています。 Javascript[クライアント](xref:signalr/javascript-client)を使用する場合は、javascript または TypeScript で記述できます。
 
 ### <a name="the-javascript-client-is-hosted-at-npm"></a>JavaScript クライアントは npm でホストされます。
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション**テンプレートには含まれていません。 Npm パッケージを取得してインストール`@microsoft/signalr`するには、npm を使用します。
+ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション**テンプレートには含まれていません。 Npm パッケージを取得してインストールするには、npm を使用し `@microsoft/signalr` ます。
 
 ```console
 npm init -y
@@ -182,7 +182,7 @@ npm install @microsoft/signalr
 
 ::: moniker range="<= aspnetcore-2.2"
 
-ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション**テンプレートには含まれていません。 Npm パッケージを取得してインストール`@aspnet/signalr`するには、npm を使用します。
+ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション**テンプレートには含まれていません。 Npm パッケージを取得してインストールするには、npm を使用し `@aspnet/signalr` ます。
 
 ```console
 npm init -y
@@ -197,13 +197,13 @@ JQuery への依存関係は削除されましたが、プロジェクトは引�
 
 ### <a name="internet-explorer-support"></a>Internet Explorer のサポート
 
-ASP.NET Core SignalRには、Microsoft internet explorer 11 以降 ( SignalR ASP.NET でサポートされている microsoft internet explorer 8 以降) が必要です。
+ASP.NET Core に SignalR は、Microsoft Internet explorer 11 以降 (ASP.NET SignalR でサポートされている Microsoft internet explorer 8 以降) が必要です。
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript クライアントメソッドの構文
 
 ::: moniker range=">= aspnetcore-3.0"
 
-JavaScript の構文は、ASP.NET バージョンのから変更SignalRされました。 `$connection`オブジェクトを使用するのではなく、 [HubConnectionBuilder](/javascript/api/@aspnet/signalr/hubconnectionbuilder) API を使用して接続を作成します。
+JavaScript の構文は、ASP.NET バージョンのから変更されました SignalR 。 オブジェクトを使用するのではなく `$connection` 、 [HubConnectionBuilder](/javascript/api/@aspnet/signalr/hubconnectionbuilder) API を使用して接続を作成します。
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -217,7 +217,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 ::: moniker range="<= aspnetcore-2.2"
 
-JavaScript の構文は、ASP.NET バージョンのから変更SignalRされました。 `$connection`オブジェクトを使用するのではなく、 [HubConnectionBuilder](/javascript/api/@microsoft/signalr/hubconnectionbuilder) API を使用して接続を作成します。
+JavaScript の構文は、ASP.NET バージョンのから変更されました SignalR 。 オブジェクトを使用するのではなく `$connection` 、 [HubConnectionBuilder](/javascript/api/@microsoft/signalr/hubconnectionbuilder) API を使用して接続を作成します。
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -259,9 +259,9 @@ connection.start().catch(err => console.error(err));
 
 ### <a name="net-and-other-clients"></a>.NET とその他のクライアント
 
-[AspNetCore.SignalR.クライアント](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client)NuGet パッケージには、ASP.NET Core SignalR用の .net クライアントライブラリが含まれています。
+[AspNetCore. SignalR .クライアント](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client)NuGet パッケージには、ASP.NET Core 用の .net クライアントライブラリが含まれてい SignalR ます。
 
-ハブへ<xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>の接続のインスタンスを作成して構築するには、を使用します。
+<xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>ハブへの接続のインスタンスを作成して構築するには、を使用します。
 
 ```csharp
 connection = new HubConnectionBuilder()
@@ -271,7 +271,7 @@ connection = new HubConnectionBuilder()
 
 ## <a name="scaleout-differences"></a>スケールアウトの相違点
 
-ASP.NET SignalRは SQL Server と Redis をサポートしています。 ASP.NET Core SignalRではSignalR 、Azure サービスと Redis がサポートされています。
+ASP.NET は SignalR SQL Server と Redis をサポートしています。 ASP.NET Core SignalR では SignalR 、Azure サービスと Redis がサポートされています。
 
 ### <a name="aspnet"></a>ASP.NET
 
@@ -281,12 +281,12 @@ ASP.NET SignalRは SQL Server と Redis をサポートしています。 ASP.NE
 
 ### <a name="aspnet-core"></a>ASP.NET Core
 
-* [Azure SignalRサービス](/azure/azure-signalr/)
+* [Azure SignalR サービス](/azure/azure-signalr/)
 * [Redis バックプレーン](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)

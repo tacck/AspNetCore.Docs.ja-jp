@@ -11,30 +11,30 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 2831fd2edd029043e9457cd213e32f1a82c2872e
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
+ms.openlocfilehash: 53ca2a650eb6a3be0ff137953df5a546e9f0b282
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424420"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756133"
 ---
-# <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core の Razor 構文リファレンス
+# <a name="razor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core の構文リファレンス
 
 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)、 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor は、Web ページにサーバー ベースのコードを埋め込むためのマークアップ構文です。 Razor 構文は、Razor マークアップ、C#、HTML で構成されます。 通常、Razor を含むファイルのファイル拡張子は *.cshtml* です。 Razor は [Razor コンポーネント](xref:blazor/components) ファイル (*.razor*) にもあります。
+Razorは、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml*は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components)ファイル (*razor*) にもあります。
 
 ## <a name="rendering-html"></a>HTML のレンダリング
 
-Razor の既定の言語は HTML です。 Razor マークアップからの HTML のレンダリングは、HTML ファイルからの HTML のレンダリングと同じです。 *.cshtml* Razor ファイル内の HTML マークアップは、サーバーによって変更されずにレンダリングされます。
+既定の Razor 言語は HTML です。 マークアップから html をレンダリング Razor することは、html ファイルから html をレンダリングする場合と同じです。 ファイル*内の*HTML マークアップ Razor は、サーバーによって変更されずに表示されます。
 
 ## <a name="razor-syntax"></a>Razor の構文
 
-Razor は C# をサポートし、`@` 記号を使って HTML から C# に移行します。 Razor は C# の式を評価し、それらを HTML の出力でレンダリングします。
+RazorC# をサポートし、シンボルを使用して `@` HTML から c# に移行します。 RazorC# の式を評価し、HTML 出力に表示します。
 
-`@` 記号の後に [Razor の予約済みキーワード](#razor-reserved-keywords)が続いている場合は、Razor 固有のマークアップに移行します。 それ以外の場合は、普通の C# に移行します。
+記号の `@` 後に[ Razor 予約済みのキーワード](#razor-reserved-keywords)がある場合は、 Razor 固有のマークアップに遷移します。 それ以外の場合は、普通の C# に移行します。
 
-Razor マークアップで `@` 記号をエスケープするには、`@` 記号をもう 1 つ使います。
+マークアップでシンボルをエスケープするには `@` Razor 、2番目のシンボルを使用し `@` ます。
 
 ```cshtml
 <p>@@Username</p>
@@ -46,7 +46,7 @@ HTML では、コードは 1 つの `@` 記号でレンダリングされます�
 <p>@Username</p>
 ```
 
-メール アドレスを含む HTML の属性とコンテンツは、`@` 記号を遷移文字として扱いません。 次の例のメール アドレスは、Razor の解析ではそのまま残ります。
+メール アドレスを含む HTML の属性とコンテンツは、`@` 記号を遷移文字として扱いません。 次の例の電子メールアドレスは、解析によってそのまま残り Razor ます。
 
 ```cshtml
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
@@ -54,7 +54,7 @@ HTML では、コードは 1 つの `@` 記号でレンダリングされます�
 
 ## <a name="implicit-razor-expressions"></a>暗黙的な Razor 式
 
-Razor の暗黙的な式は、`@` で始まって C# のコードが続きます。
+暗黙的 Razor な式の先頭に `@` は、次の C# コードが続きます。
 
 ```cshtml
 <p>@DateTime.Now</p>
@@ -78,11 +78,11 @@ C# の `await` キーワードを除き、暗黙的な式にスペースを含�
 * The "int" element wasn't closed. All elements must be either self-closing or have a matching end tag. ("int" 要素が閉じられませんでした。すべての要素は、自己終了するか、対応する終了タグが存在する必要があります。)
 * メソッド グループ 'GenericMethod' を非デリゲート型 'object' に変換することはできません。 このメソッドを呼び出しますか?
 
-ジェネリック メソッドの呼び出しは、[明示的な Razor 式](#explicit-razor-expressions)または [Razor コード ブロック](#razor-code-blocks)にラップする必要があります。
+ジェネリックメソッドの呼び出しは、[明示的な Razor 式](#explicit-razor-expressions)または[ Razor コードブロック](#razor-code-blocks)でラップする必要があります。
 
 ## <a name="explicit-razor-expressions"></a>明示的な Razor 式
 
-明示的な Razor 式は、`@` 記号とバランスの取れたかっこ記号で構成されます。 1 週間前の時刻を表示するには、次の Razor マークアップを使います。
+明示的な Razor 式は、 `@` 均衡かっこ付きの記号で構成されます。 先週の時間を表示するには、次の Razor マークアップを使用します。
 
 ```cshtml
 <p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))</p>
@@ -153,9 +153,9 @@ HTML はブラウザーで次のように表示されます。
 <span>Hello World</span>
 ```
 
-## <a name="razor-code-blocks"></a>Razor コード ブロック
+## <a name="razor-code-blocks"></a>Razorコードブロック
 
-Razor コード ブロックは、`@` で始まり、`{}` で囲まれています。 式とは異なり、コード ブロック内の C# コードはレンダリングされません。 ビュー内のコード ブロックと式は同じスコープを共有し、次の順序で定義されます。
+Razorコードブロックはで始まり `@` 、で囲まれて `{}` います。 式とは異なり、コード ブロック内の C# コードはレンダリングされません。 ビュー内のコード ブロックと式は同じスコープを共有し、次の順序で定義されます。
 
 ```cshtml
 @{
@@ -205,7 +205,7 @@ Razor コード ブロックは、`@` で始まり、`{}` で囲まれていま�
 
 ### <a name="implicit-transitions"></a>暗黙の移行
 
-コード ブロック内の既定の言語は C# ですが、Razor ページは HTML に移行して戻ることがあります。
+コードブロックの既定の言語は C# ですが、 Razor ページは HTML に戻ることができます。
 
 ```cshtml
 @{
@@ -216,7 +216,7 @@ Razor コード ブロックは、`@` で始まり、`{}` で囲まれていま�
 
 ### <a name="explicit-delimited-transition"></a>明示的に区切られた遷移
 
-HTML をレンダリングする必要のあるコード ブロックのサブセクションを定義するには、レンダリングする文字を Razor の `<text>` タグで囲みます。
+HTML を表示する必要があるコードブロックのサブセクションを定義するには、タグを使用して、表示する文字を囲み Razor `<text>` ます。
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -226,7 +226,7 @@ HTML をレンダリングする必要のあるコード ブロックのサブ�
 }
 ```
 
-HTML タグによって囲まれていない HTML をレンダリングするには、この方法を使います。 HTML タグまたは Razor タグがない場合、Razor ラインタイム エラーが発生します。
+HTML タグによって囲まれていない HTML をレンダリングするには、この方法を使います。 HTML またはタグがないと Razor 、 Razor ランタイムエラーが発生します。
 
 `<text>` タグは、内容をレンダリングするときに空白文字を制御するのに便利です。
 
@@ -245,15 +245,15 @@ HTML タグによって囲まれていない HTML をレンダリングするに
 }
 ```
 
-コードに `@:` がないと、Razor ランタイム エラーが生成されます。
+コードにを指定しないと `@:` 、 Razor ランタイムエラーが生成されます。
 
-Razor ファイルに余分な `@` 文字があると、ブロックの後続のステートメントでコンパイラ エラーが発生することがあります。 これらのコンパイラ エラーは、実際のエラーは報告されたエラーより前で発生しているため、理解するのが難しい場合があります。 このエラーは、複数の暗黙的/明示的な式を 1 つのコード ブロックに結合した後で発生することがよくあります。
+`@`ファイルに余分な文字が含まれ Razor ていると、ステートメントの後のブロックで、コンパイラエラーが発生する可能性があります。 これらのコンパイラ エラーは、実際のエラーは報告されたエラーより前で発生しているため、理解するのが難しい場合があります。 このエラーは、複数の暗黙的/明示的な式を 1 つのコード ブロックに結合した後で発生することがよくあります。
 
 ## <a name="control-structures"></a>制御構造
 
 制御構造は、コード ブロックの拡張機能です。 コード ブロックのすべての側面 (マークアップへの遷移、インライン C# ) が、次の構造にも適用されます。
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>条件付き \@if、else if、else、\@switch
+### <a name="conditionals-if-else-if-else-and-switch"></a>条件`@if, else if, else, and @switch`
 
 `@if` は、いつコードを実行するかを制御します。
 
@@ -298,7 +298,7 @@ else
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>ループ処理 \@for、\@foreach、\@while、\@do while
+### <a name="looping-for-foreach-while-and-do-while"></a>サウンド`@for, @foreach, @while, and @do while`
 
 ループ制御ステートメントを使って、テンプレート化された HTML をレンダリングできます。 人の一覧をレンダリングするには:
 
@@ -364,9 +364,9 @@ else
 } while (i < people.Length);
 ```
 
-### <a name="compound-using"></a>複合 \@using
+### <a name="compound-using"></a>複合 `@using`
 
-C# では、オブジェクトを確実に破棄するために `using` オブジェクトが使われています。 Razor では、同じメカニズムが、追加コンテンツを含む HTML ヘルパーを作成するために使われています。 次のコードの HTML ヘルパーは、`@using` ステートメントを含む `<form>` タグをレンダリングします。
+C# では、オブジェクトを確実に破棄するために `using` オブジェクトが使われています。 で Razor は、同じメカニズムを使用して、追加のコンテンツを含む HTML ヘルパーを作成します。 次のコードの HTML ヘルパーは、`@using` ステートメントを含む `<form>` タグをレンダリングします。
 
 ```cshtml
 @using (Html.BeginForm())
@@ -378,15 +378,15 @@ C# では、オブジェクトを確実に破棄するために `using` オブ�
 }
 ```
 
-### <a name="try-catch-finally"></a>\@try、catch、finally
+### `@try, catch, finally`
 
 例外処理は C# に似ています。
 
 [!code-cshtml[](razor/sample/Views/Home/Contact7.cshtml)]
 
-### <a name="lock"></a>\@lock
+### `@lock`
 
-Razor には、重要なセクションを lock ステートメントで保護する機能があります。
+Razorには、次のように、重要なセクションを lock ステートメントで保護する機能があります。
 
 ```cshtml
 @lock (SomeLock)
@@ -397,7 +397,7 @@ Razor には、重要なセクションを lock ステートメントで保護�
 
 ### <a name="comments"></a>コメント
 
-Razor は、C# と HTML のコメントをサポートしています。
+RazorC# および HTML コメントをサポートしています。
 
 ```cshtml
 @{
@@ -413,7 +413,7 @@ Razor は、C# と HTML のコメントをサポートしています。
 <!-- HTML comment -->
 ```
 
-Razor のコメントは、Web ページがレンダリングされる前に、サーバーによって削除されます。 Razor では、`@*  *@` を使ってコメントを区切ります。 次のコードはコメント化されているため、サーバーはどのマークアップもレンダリングしません。
+Razorコメントは、web ページが表示される前にサーバーによって削除されます。 Razorは `@*  *@` 、を使用してコメントを区切ります。 次のコードはコメント化されているため、サーバーはどのマークアップもレンダリングしません。
 
 ```cshtml
 @*
@@ -427,9 +427,9 @@ Razor のコメントは、Web ページがレンダリングされる前に、�
 
 ## <a name="directives"></a>ディレクティブ
 
-Razor のディレクティブは、`@` 記号の後の予約キーワードによる暗黙的な式で表されます。 通常、ディレクティブは、ビューの解析方法を変更したり、異なる機能を有効にしたりします。
+Razorディレクティブは、記号の後に予約済みのキーワードを持つ暗黙的な式で表され `@` ます。 通常、ディレクティブは、ビューの解析方法を変更したり、異なる機能を有効にしたりします。
 
-Razor がビューのコードを生成する方法を理解すると、ディレクティブの動作を理解しやすくなります。
+が Razor ビューのコードを生成する方法を理解すると、ディレクティブのしくみを理解しやすくなります。
 
 [!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
@@ -449,9 +449,9 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-後の「[ビューに対して生成された Razor C# クラスを調べる](#inspect-the-razor-c-class-generated-for-a-view)」セクションでは、この生成されたクラスを表示する方法について説明します。
+この記事の後半で、「 [ Razor ビューに対して生成された C# クラスを調べる](#inspect-the-razor-c-class-generated-for-a-view)」セクションでは、この生成されたクラスを表示する方法について説明します。
 
-### <a name="attribute"></a>\@attribute
+### `@attribute`
 
 `@attribute` ディレクティブでは、指定された属性が生成されたページまたはビューのクラスに追加されます。 次の例では、`[Authorize]` 属性が追加されます。
 
@@ -461,11 +461,11 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="code"></a>\@code
+### `@code`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@code` ブロックにより、[Razor コンポーネント](xref:blazor/components)では、C# メンバー (フィールド、プロパティ、メソッド) をコンポーネントに追加できます。
+この `@code` ブロックにより、 [ Razor コンポーネント](xref:blazor/components)は、コンポーネントに C# のメンバー (フィールド、プロパティ、およびメソッド) を追加できます。
 
 ```razor
 @code {
@@ -473,11 +473,11 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Razor コンポーネントの場合、 `@code` はのエイリアスであり、よりも優先され [`@functions`](#functions) `@functions` ます。 複数の `@code` ブロックが許容されます。
+コンポーネントの場合 Razor 、 `@code` はのエイリアスであり、よりも優先され [`@functions`](#functions) `@functions` ます。 複数の `@code` ブロックが許容されます。
 
 ::: moniker-end
 
-### <a name="functions"></a>\@functions
+### `@functions`
 
 `@functions` ディレクティブでは、生成されたクラスに C# メンバー (フィールド、プロパティ、メソッド) を追加できます。
 
@@ -489,7 +489,7 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor コンポーネント](xref:blazor/components)では、`@functions` ではなく `@code` を使用して C# メンバーを追加します。
+[ [ Razor コンポーネント](xref:blazor/components)] で、を使用して `@code` `@functions` C# メンバーを追加します。
 
 ::: moniker-end
 
@@ -532,7 +532,7 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 <p>Name: <strong>Martin Luther King, Jr.</strong></p>
 ```
 
-### <a name="implements"></a>\@implements
+### `@implements`
 
 `@implements` ディレクティブでは、生成されたクラスのインターフェイスが実装されます。
 
@@ -554,7 +554,7 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 
 ::: moniker-end
 
-### <a name="inherits"></a>\@inherits
+### `@inherits`
 
 `@inherits` ディレクティブは、ビューが継承するクラスの完全な制御を提供します。
 
@@ -562,7 +562,7 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 @inherits TypeNameOfClassToInheritFrom
 ```
 
-次のコードは、カスタム Razor ページ型です。
+次のコードは、カスタム Razor ページの種類です。
 
 [!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
 
@@ -597,23 +597,23 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 </div>
 ```
 
-### <a name="inject"></a>\@inject
+### `@inject`
 
-`@inject` ディレクティブを使うと、Razor ページで[サービス コンテナー](xref:fundamentals/dependency-injection)からビューにサービスを挿入できます。 詳しくは、「[ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)」をご覧ください。
+ディレクティブを使用すると、サービス `@inject` Razor [コンテナー](xref:fundamentals/dependency-injection)からビューにサービスを挿入できます。 詳しくは、「[ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)」をご覧ください。
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="layout"></a>\@layout
+### `@layout`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@layout` ディレクティブにより、Razor コンポーネントのレイアウトが指定されます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、「<xref:blazor/layouts>」を参照してください。
+ディレクティブは、 `@layout` コンポーネントのレイアウトを指定し Razor ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、「<xref:blazor/layouts>」を参照してください。
 
 ::: moniker-end
 
-### <a name="model"></a>\@model
+### `@model`
 
-"*このシナリオは、MVC ビューと Razor Pages (.cshtml) にのみ適用されます。*"
+*このシナリオは、MVC ビューおよび Razor ページ (cshtml) にのみ適用されます。*
 
 `@model` ディレクティブにより、ビューまたはページに渡されるモデルの型が指定されます。
 
@@ -621,7 +621,7 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 @model TypeNameOfModel
 ```
 
-個々のユーザー アカウントで作成された ASP.NET Core MVC または Razor Pages アプリでは、*Views/Account/Login.cshtml* に次のモデル宣言が含まれています。
+Razor個々のユーザーアカウントで作成された ASP.NET CORE MVC またはページアプリでは、 *Views/Account/Login. cshtml*には次のモデル宣言が含まれています。
 
 ```cshtml
 @model LoginViewModel
@@ -633,7 +633,7 @@ Razor コンポーネントの場合、 `@code` はのエイリアスであり�
 public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-Razor では、ビューに渡されるモデルにアクセスするための `Model` プロパティが公開されています。
+Razor`Model`ビューに渡されるモデルにアクセスするためのプロパティを公開します。
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
@@ -641,18 +641,18 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 `@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「[厳密に型指定されたモデルと @model キーワード](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)」を参照してください。
 
-### <a name="namespace"></a>\@namespace
+### `@namespace`
 
 `@namespace` ディレクティブ:
 
-* 生成された Razor ページ、MVC ビュー、または Razor コンポーネントのクラスの名前空間を設定します。
-* ディレクトリ ツリーで最も近いインポート ファイル (*_ViewImports.cshtml* (ビューまたはページ) または *_Imports.razor* (Razor コンポーネント)) から、ページ、ビュー、またはコンポーネント クラスのルート派生名前空間を設定します。
+* 生成された Razor ページ、MVC ビュー、またはコンポーネントのクラスの名前空間を設定し Razor ます。
+* ページ、ビュー、またはコンポーネントクラスのルート派生名前空間を、ディレクトリツリー内の最も近いインポートファイル、 *_ViewImports* (ビューまたはページ)、または *_Imports razor* ( Razor コンポーネント) に設定します。
 
 ```cshtml
 @namespace Your.Namespace.Here
 ```
 
-次の表に示す Razor Pages の例の場合:
+次の表に示すページの例については、「」を参照して Razor ください。
 
 * 各ページで *Pages/_ViewImports.cshtml* がインポートされます。
 * *Pages/_ViewImports.cshtml* に `@namespace Hello.World` が含まれます。
@@ -664,7 +664,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Hello.World.MorePages.EvenMorePages` |
 
-前のリレーションシップは、MVC ビューと Razor コンポーネントで使用されるインポート ファイルに適用されます。
+前のリレーションシップは、MVC ビューおよびコンポーネントで使用されるファイルのインポートに適用され Razor ます。
 
 複数のインポート ファイルに `@namespace` ディレクティブがあるとき、ディレクトリ ツリーでページ、ビュー、またはコンポーネントに最も近いファイルがルート名前空間の設定に使用されます。
 
@@ -676,30 +676,30 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Another.Planet`        |
 
-### <a name="page"></a>\@page
+### `@page`
 
 ::: moniker range=">= aspnetcore-3.0"
 
 `@page` ディレクティブには、それが表示されるファイルの型によって、さまざまな効果があります。 ディレクティブ:
 
-* *.cshtml* ファイルでは、ファイルが Razor Page であることを示します。 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
-* Razor コンポーネントで要求を直接処理することを指定します。 詳細については、「<xref:blazor/routing>」を参照してください。
+* の場合は、ファイルがページであることを示し*ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
+* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/routing>」を参照してください。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-*.cshtml* ファイルの最初の行にある `@page` ディレクティブは、ファイルが Razor Page であることを示します。 詳細については、「<xref:razor-pages/index>」を参照してください。
+`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し*ます。* Razor 詳細については、「<xref:razor-pages/index>」を参照してください。
 
 ::: moniker-end
 
-### <a name="section"></a>\@section
+### `@section`
 
-"*このシナリオは、MVC ビューと Razor Pages (.cshtml) にのみ適用されます。*"
+*このシナリオは、MVC ビューおよび Razor ページ (cshtml) にのみ適用されます。*
 
-`@section` ディレクティブを [MVC および Razor Pages レイアウト](xref:mvc/views/layout)と組み合わせて使用すると、HTML ページのさまざまな部分のコンテンツをビューやページでレンダリングできます。 詳細については、「<xref:mvc/views/layout>」を参照してください。
+ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout)と組み合わせて使用されます。 詳細については、「<xref:mvc/views/layout>」を参照してください。
 
-### <a name="using"></a>\@using
+### `@using`
 
 `@using` ディレクティブは、生成されるビューに C# の `using` ディレクティブを追加します。
 
@@ -707,7 +707,7 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor コンポーネント](xref:blazor/components)で `@using` は、は、どのコンポーネントがスコープ内にあるかも制御します。
+[ Razor コンポーネント](xref:blazor/components)で `@using` は、スコープ内のコンポーネントも制御します。
 
 ::: moniker-end
 
@@ -715,39 +715,39 @@ Razor では、ビューに渡されるモデルにアクセスするための `
 
 ## <a name="directive-attributes"></a>ディレクティブ属性
 
-Razor ディレクティブの属性は、記号の後に予約済みのキーワードを持つ暗黙的な式で表され `@` ます。 通常、ディレクティブ属性は、要素の解析方法を変更したり、さまざまな機能を有効にしたりします。
+Razorディレクティブ属性は、記号の後に予約済みのキーワードを使用した暗黙的な式によって表され `@` ます。 通常、ディレクティブ属性は、要素の解析方法を変更したり、さまざまな機能を有効にしたりします。
 
-### <a name="attributes"></a>\@attributes
+### `@attributes`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 `@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、「<xref:blazor/components#attribute-splatting-and-arbitrary-parameters>」を参照してください。
 
-### <a name="bind"></a>\@bind
+### `@bind`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、「<xref:blazor/data-binding>」を参照してください。
 
-### <a name="onevent"></a>\@on{EVENT}
+### `@on{EVENT}`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-Razor からは、コンポーネントのイベント処理機能が提供されます。 詳細については、「<xref:blazor/event-handling>」を参照してください。
+Razorコンポーネントのイベント処理機能を提供します。 詳細については、「<xref:blazor/event-handling>」を参照してください。
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.1"
 
-### <a name="oneventpreventdefault"></a>\@on{EVENT}:preventDefault
+### `@on{EVENT}:preventDefault`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 イベントの既定のアクションを禁止します。
 
-### <a name="oneventstoppropagation"></a>\@on{EVENT}:stopPropagation
+### `@on{EVENT}:stopPropagation`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 イベントのイベント伝達を停止します。
 
@@ -755,35 +755,35 @@ Razor からは、コンポーネントのイベント処理機能が提供さ�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="key"></a>\@key
+### `@key`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 `@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、「<xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>」を参照してください。
 
-### <a name="ref"></a>\@ref
+### `@ref`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、「<xref:blazor/components#capture-references-to-components>」を参照してください。
 
-### <a name="typeparam"></a>\@typeparam
+### `@typeparam`
 
-"*このシナリオは、Razor コンポーネント (.razor) にのみ適用されます。*"
+*このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
 `@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、「<xref:blazor/templated-components#generic-typed-components>」を参照してください。
 
 ::: moniker-end
 
-## <a name="templated-razor-delegates"></a>テンプレート化された Razor デリゲート
+## <a name="templated-razor-delegates"></a>テンプレート化 Razor デリゲート
 
-Razor テンプレートを使用すると、次の形式で UI スニペットを定義できます。
+Razorテンプレートを使用すると、次の形式で UI スニペットを定義できます。
 
 ```cshtml
 @<tag>...</tag>
 ```
 
-次の例では、テンプレート化された Razor デリゲートを <xref:System.Func%602> として指定する方法を示します。 デリゲートによってカプセル化されるメソッドのパラメーターに対しては、[dynamic 型](/dotnet/csharp/programming-guide/types/using-type-dynamic)を指定します。 デリゲートの戻り値としては、[object 型](/dotnet/csharp/language-reference/keywords/object)を指定します。 テンプレートは、`Name` プロパティを持つ `Pet` の <xref:System.Collections.Generic.List%601> で使用されます。
+次の例は、テンプレート化されたデリゲートをとして指定する方法を示してい Razor <xref:System.Func%602> ます。 デリゲートによってカプセル化されるメソッドのパラメーターに対しては、[dynamic 型](/dotnet/csharp/programming-guide/types/using-type-dynamic)を指定します。 デリゲートの戻り値としては、[object 型](/dotnet/csharp/language-reference/keywords/object)を指定します。 テンプレートは、`Name` プロパティを持つ `Pet` の <xref:System.Collections.Generic.List%601> で使用されます。
 
 ```csharp
 public class Pet
@@ -822,7 +822,7 @@ public class Pet
 <p>You have a pet named <strong>K-9</strong>.</p>
 ```
 
-メソッドへの引数としてインライン Razor テンプレートを指定することもできます。 次の例では、`Repeat` メソッドは Razor テンプレートを受け取ります。 メソッドは、テンプレートを使用して、リストから提供される項目の繰り返しで HTML コンテンツを生成します。
+Razorメソッドの引数としてインラインテンプレートを指定することもできます。 次の例では、 `Repeat` メソッドがテンプレートを受け取り Razor ます。 メソッドは、テンプレートを使用して、リストから提供される項目の繰り返しで HTML コンテンツを生成します。
 
 ```cshtml
 @using Microsoft.AspNetCore.Html
@@ -876,11 +876,11 @@ public class Pet
 
 ## <a name="tag-helpers"></a>タグ ヘルパー
 
-"*このシナリオは、MVC ビューと Razor Pages (.cshtml) にのみ適用されます。*"
+*このシナリオは、MVC ビューおよび Razor ページ (cshtml) にのみ適用されます。*
 
 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)に関する 3 つのディレクティブがあります。
 
-| ディレクティブ | 関数 |
+| ディレクティブ | 機能 |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | ビューでタグ ヘルパーを使えるようにします。 |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 前に追加したタグ ヘルパーをビューから削除します。 |
@@ -890,38 +890,38 @@ public class Pet
 
 ### <a name="razor-keywords"></a>Razorkeywords
 
-* page (ASP.NET Core 2.1 以降を必要とします)
-* namespace
-* functions
-* 継承
-* model
-* section
-* helper (現在は ASP.NET Core ではサポートされていません)
+* `page`(ASP.NET Core 2.1 以降が必要)
+* `namespace`
+* `functions`
+* `inherits`
+* `model`
+* `section`
+* `helper`(現在 ASP.NET Core ではサポートされていません)
 
 Razorキーワードは、でエスケープされ `@(Razor Keyword)` ます (たとえば、 `@(functions)` )。
 
 ### <a name="c-razor-keywords"></a>C# の Razor キーワード
 
-* case
-* do
-* default
-* 対象
-* foreach
-* if
-* else
-* lock
-* switch
-* 試す
-* catch
-* finally
-* using
-* while
+* `case`
+* `do`
+* `default`
+* `for`
+* `foreach`
+* `if`
+* `else`
+* `lock`
+* `switch`
+* `try`
+* `catch`
+* `finally`
+* `using`
+* `while`
 
 C# の Razor キーワードは、を使用してダブルエスケープする必要があり `@(@C# Razor Keyword)` ます (例: `@(@case)` )。 最初のは、 `@` パーサーをエスケープし Razor ます。 2 番目の `@` は、C# パーサーをエスケープします。
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>予約済みキーワードがで使用されていませんRazor
 
-* class
+* `class`
 
 ## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Razorビューに対して生成された C# クラスを検査する
 
@@ -931,35 +931,39 @@ C# の Razor キーワードは、を使用してダブルエスケープする�
 
 .NET Core 2.1 を対象とする ASP.NET Core 2.1 ページプロジェクトでは、次のディレクトリ構造について考えてみ Razor ます。
 
-* **場所**
-  * **管理者**
-    * **トピック**
-      * *Index.cshtml*
-      * *Index.cshtml.cs*
-* **トピック**
-  * **共用**
-    * *_Layout. cshtml*
-  * *_ViewImports.cshtml*
-  * *_ViewStart. cshtml*
-  * *Index.cshtml*
-  * *Index.cshtml.cs*
+```
+ Areas/
+   Admin/
+     Pages/
+       Index.cshtml
+       Index.cshtml.cs
+ Pages/
+   Shared/
+     _Layout.cshtml
+   _ViewImports.cshtml
+   _ViewStart.cshtml
+   Index.cshtml
+   Index.cshtml.cs
+  ```
 
 *Debug* 構成でプロジェクトを作成すると、次の *obj* ディレクトリが生成されます。
 
-* **obj**
-  * **デバック**
-    * **netcoreapp2.1/**
-      * **Razor/**
-        * **場所**
-          * **管理者**
-            * **トピック**
-              * *Index.g.cshtml.cs*
-        * **トピック**
-          * **共用**
-            * *_Layout.g.cshtml.cs*
-          * *_ViewImports.g.cshtml.cs*
-          * *_ViewStart.g.cshtml.cs*
-          * *Index.g.cshtml.cs*
+```
+ obj/
+   Debug/
+     netcoreapp2.1/
+       Razor/
+         Areas/
+           Admin/
+             Pages/
+               Index.g.cshtml.cs
+         Pages/
+           Shared/
+             _Layout.g.cshtml.cs
+           _ViewImports.g.cshtml.cs
+           _ViewStart.g.cshtml.cs
+           Index.g.cshtml.cs
+```
 
 *Pages/Index. cshtml*の生成されたクラスを表示するには、 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs*を開きます。
 
@@ -997,6 +1001,6 @@ Razorビューエンジンは、ビューに対して大文字と小文字を区
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 を[使用した ASP.NET Web プログラミング Razor の概要構文には、](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)構文を使用したプログラミングの多くのサンプルが用意されて Razor います。

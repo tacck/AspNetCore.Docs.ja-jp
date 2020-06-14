@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8d4488b3953a8c87033d3a092b656409a0c6a52d
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451746"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724368"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core でのアカウントの確認とパスワードの回復
 
@@ -63,7 +63,7 @@ dotnet run
 
 このチュートリアルでは、 [Sendgrid](https://sendgrid.com)を使用して電子メールを送信します。 電子メールを送信するには、SendGrid アカウントとキーが必要です。 他の電子メールプロバイダーを使用することもできます。 SendGrid または別の電子メールサービスを使用して電子メールを送信することをお勧めします。 SMTP のセキュリティを保護し、正しく設定することは困難です。
 
-SendGrid アカウント my には、[送信者の追加](https://sendgrid.com/docs/ui/sending-email/senders/)が必要です。
+SendGrid アカウントでは、[送信者の追加](https://sendgrid.com/docs/ui/sending-email/senders/)が必要になる場合があります。
 
 セキュリティで保護された電子メールキーを取得するクラスを作成します。 このサンプルでは、*サービス/認証の Enderoptions を作成します。*
 
@@ -80,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows では、シークレットマネージャーはキーと値のペアを*シークレットの json*ファイルに格納します。 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>`
+Windows では、シークレットマネージャーは、キーと値のペアをディレクトリ内のファイル*のsecrets.js*に格納 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` します。
 
-*シークレットの json*ファイルの内容は暗号化されていません。 次のマークアップは、*シークレットの json*ファイルを示しています。 `SendGridKey`値は削除されています。
+ファイルの*secrets.js*の内容が暗号化されていません。 次のマークアップは、ファイル*のsecrets.js*を示しています。 `SendGridKey`値は削除されています。
 
 ```json
 {
@@ -286,9 +286,9 @@ C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows では、シークレットマネージャーはキーと値のペアを*シークレットの json*ファイルに格納します。 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>`
+Windows では、シークレットマネージャーは、キーと値のペアをディレクトリ内のファイル*のsecrets.js*に格納 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` します。
 
-*シークレットの json*ファイルの内容は暗号化されていません。 次のマークアップは、*シークレットの json*ファイルを示しています。 `SendGridKey`値は削除されています。
+ファイルの*secrets.js*の内容が暗号化されていません。 次のマークアップは、ファイル*のsecrets.js*を示しています。 `SendGridKey`値は削除されています。
 
 ```json
 {

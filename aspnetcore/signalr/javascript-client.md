@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 4b3a4b2323b7f221d9cd1aab1c56d1d9828eb916
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: cb2b3ddc3eba2d6e1ea91c1e7f6715ffa9ad1b08
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106456"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756016"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
@@ -43,7 +43,7 @@ npm init -y
 npm install @microsoft/signalr
 ```
 
-npm は、 *node_modules \\ @microsoft\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *Signalr*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
+npm は、 *node_modules \\ @microsoft\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *signalr.js*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
 
 ::: moniker-end
 
@@ -54,7 +54,7 @@ npm init -y
 npm install @aspnet/signalr
 ```
 
-npm は、 *node_modules \\ @aspnet\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *Signalr*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
+npm は、 *node_modules \\ @aspnet\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *signalr.js*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
 
 ::: moniker-end
 
@@ -172,7 +172,7 @@ SignalRとで定義されたメソッド名と引数を照合することによ�
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect()
     .build();
 ```
@@ -246,7 +246,7 @@ connection.onclose(error => {
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect([0, 0, 10000])
     .build();
 
@@ -269,7 +269,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect({
         nextRetryDelayInMilliseconds: retryContext => {
             if (retryContext.elapsedMilliseconds < 60000) {
