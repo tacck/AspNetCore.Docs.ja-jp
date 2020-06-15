@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Razor ページに検証を追加する
+title: パート 8、ASP.NET Core Razor ページへの検証の追加
 author: rick-anderson
-description: ASP.NET Core で Razor ページに検証を追加する方法について調べます。
+description: Razor ページのチュートリアル シリーズのパート 8。
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773776"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652839"
 ---
-# <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor ページに検証を追加する
+# <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>パート 8、ASP.NET Core Razor ページへの検証の追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -73,7 +73,7 @@ ASP.NET Core によって検証規則が自動的に適用されるようにす�
 
 無効な値を含む各フィールドに、検証エラー メッセージが自動的に表示されることがわかります。 エラーは、(JavaScript と jQuery を使用している) クライアント側とサーバー側 (ユーザーが JavaScript を無効にしている場合) の両方に適用されます。
 
-大きな利点は、[Create]/(作成/) ページまたは [Edit]/(編集/) ページの変更が**必要ない**ことです。 一度 DataAnnotations がモデルに適用されると、検証 UI は有効化されます。 このチュートリアルで作成した Razor ページは、(`Movie` モデル クラスのプロパティの検証属性を使用して) 検証規則を自動的に抽出します。 [Edit]/(編集/) ページを使用して検証をテストすると、同じ検証が適用されます。
+大きな利点は、[Create]/(作成/) ページまたは [Edit]/(編集/) ページの変更が**必要ない**ことです。 一度 DataAnnotations がモデルに適用されると、検証 UI は有効化されます。 このチュートリアルで作成した Razor ページは、(`Movie` モデル クラスのプロパティの検証属性を使用して) 検証規則を自動的に抽出しました。 [Edit]/(編集/) ページを使用して検証をテストすると、同じ検証が適用されます。
 
 クライアント側の検証エラーがなくなるまで、フォーム データはサーバーにポストされません。 次のうち 1 つまたは複数の方法で、フォーム データがポストされていないことを確認します。
 
@@ -152,7 +152,7 @@ public DateTime ReleaseDate { get; set; }
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-[Razor Pages と EF Core の概要](xref:data/ef-rp/intro)に関するページでは、Razor Pages での EF Core 操作についてより詳しく説明されています。
+[Razor ページと EF Core の概要](xref:data/ef-rp/intro)に関するページでは、Razor ページでの EF Core 操作についてより詳しく説明されています。
 
 ### <a name="apply-migrations"></a>移行を適用する
 

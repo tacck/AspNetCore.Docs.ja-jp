@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC アプリへの検索の追加
+title: パート 7、ASP.NET Core MVC アプリへの検索の追加
 author: rick-anderson
-description: 基本的な ASP.NET Core MVC アプリに検索を追加する方法を示します
+description: ASP.NET Core MVC のチュートリアル シリーズのパート 7。
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 00213f9ffab13f23099e60240fa236bd1b41427f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 83bd904f90190456d42453653d3420c4c572fe8c
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775337"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652765"
 ---
-# <a name="add-search-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC アプリへの検索の追加
+# <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>パート 7、ASP.NET Core MVC アプリへの検索の追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 

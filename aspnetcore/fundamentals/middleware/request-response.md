@@ -5,7 +5,7 @@ description: ASP.NET Core で要求本文の読み取りと応答本文の書き
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jukotali
 ms.custom: mvc
-ms.date: 08/29/2019
+ms.date: 5/29/2019
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: f16bc7ec61c10600fe72a763fef96987210fbe76
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: fed9e48cdb2b33805cb05243de706b5c86853328
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776000"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84548533"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core での要求と応答の操作
 
@@ -26,7 +26,7 @@ ms.locfileid: "82776000"
 
 この記事では、要求本文からの読み取りと、応答本文への書き込みを行う方法について説明します。 ミドルウェアを作成するときは、これらの操作のコードが必要になることがあります。 操作は MVC と Razor Pages によって処理されるため、ミドルウェアの作成以外では、通常、カスタムコードは必要ありません。
 
-要求と応答の本文には 2 つの抽象化があります: <xref:System.IO.Stream> と <xref:System.IO.Pipelines.Pipe> です。 要求の読み取りでは、[HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body) は <xref:System.IO.Stream> に、`HttpRequest.BodyReader` は <xref:System.IO.Pipelines.PipeReader> になります。 応答の書き込みでは、[HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body) は <xref:System.IO.Stream>、`HttpResponse.BodyWriter` は <xref:System.IO.Pipelines.PipeWriter> になります。
+要求と応答の本文には 2 つの抽象化があります: <xref:System.IO.Stream> と <xref:System.IO.Pipelines.Pipe> です。 要求の読み取りでは、<xref:Microsoft.AspNetCore.Http.HttpRequest.Body?displayProperty=nameWithType> が <xref:System.IO.Stream> で、`HttpRequest.BodyReader` が <xref:System.IO.Pipelines.PipeReader> です。 応答の書き込みでは、<xref:Microsoft.AspNetCore.Http.HttpResponse.Body?displayProperty=nameWithType> が <xref:System.IO.Stream> で、`HttpResponse.BodyWriter` が <xref:System.IO.Pipelines.PipeWriter> です。
 
 [パイプライン](/dotnet/standard/io/pipelines)は、ストリームよりも推奨されます。 一部の単純な操作ではストリームの方が使いやすい場合がありますが、パイプラインの方がパフォーマンスに優れていて、ほとんどのシナリオでより簡単に使えます。 ASP.NET Core では、内部的にストリームではなくパイプラインが使われ始めています。 その例は次のとおりです。
 
@@ -41,7 +41,13 @@ ms.locfileid: "82776000"
 
 要求本文全体を、改行で分割した文字列のリストとして読み取るミドルウェアを作成したいとします。 単純なストリームの実装は、次の例のようになります。
 
+> [!WARNING]
+> コード例を次に示します。
+> * 要求本文の読み取りにパイプが使用されない問題を示します。
+> * 実稼働アプリで使用する意図はありません。
+
 [!code-csharp[](request-response/samples/3.x/RequestResponseSample/Startup.cs?name=GetListOfStringsFromStream)]
+
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 このコードで動作しますが、いくつか問題があります。
@@ -50,6 +56,11 @@ ms.locfileid: "82776000"
 * 例では、改行で分割する前に文字列全体を読み取っています。 バイト配列内で改行をチェックした方がより効率的です。
 
 これらの問題をいくつか修正した例を次に示します。
+
+> [!WARNING]
+> コード例を次に示します。
+> * 全部の問題が解消されるわけではありませんが、前のコードの一部の問題を解決する策を示します。
+> * 実稼働アプリで使用する意図はありません。
 
 [!code-csharp[](request-response/samples/3.x/RequestResponseSample/Startup.cs?name=GetListOfStringsFromStreamMoreEfficient)]
 
@@ -67,7 +78,7 @@ ms.locfileid: "82776000"
 
 ## <a name="pipelines"></a>パイプライン
 
-同じシナリオを、`PipeReader` を使って処理する方法を次の例に示します。
+同じシナリオを、[PipeReader](/dotnet/standard/io/pipelines#pipe) を使って処理する方法を次の例に示します。
 
 [!code-csharp[](request-response/samples/3.x/RequestResponseSample/Startup.cs?name=GetListOfStringFromPipe)]
 
@@ -75,11 +86,11 @@ ms.locfileid: "82776000"
 
 * 使われていないバイトを `PipeReader` で処理するため、文字列バッファーが不要です。
 * エンコードされた文字列は、返される文字列のリストに直接追加されます。
-* 文字列で使うメモリを除いて、文字列の作成に関する割り当てが発生しません (`ToArray()` の呼び出しを除く)。
+* `ToArray` 呼び出しと、文字列で使用されるメモリを除き、文字列作成では割り当てが発生しません。
 
 ## <a name="adapters"></a>アダプター
 
-`Body` と `BodyReader/BodyWriter` の両方のプロパティが、`HttpRequest` と `HttpResponse` で使用できます。 `Body` を別のストリームに設定すると、新しいアダプターのセットにより、各種類が別のものに自動的に適応します。 `HttpRequest.Body` を新しいストリームに設定した場合、`HttpRequest.BodyReader` は自動的に、`HttpRequest.Body` をラップする新しい `PipeReader` に設定されます。
+`HttpRequest` と `HttpResponse` には、`Body`、`BodyReader`、`BodyWriter` プロパティを利用できます。 `Body` を別のストリームに設定すると、新しいアダプターのセットにより、各種類が別のものに自動的に適応します。 `HttpRequest.Body` を新しいストリームに設定した場合、`HttpRequest.BodyReader` は自動的に、`HttpRequest.Body` をラップする新しい `PipeReader` に設定されます。
 
 ## <a name="startasync"></a>StartAsync
 
@@ -87,5 +98,7 @@ ms.locfileid: "82776000"
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [System.IO.Pipelines の概要](https://devblogs.microsoft.com/dotnet/system-io-pipelines-high-performance-io-in-net/)
+* [.NET の System.IO.Pipelines](/dotnet/standard/io/pipelines)
 * <xref:fundamentals/middleware/write>
+
+<!-- Test with Postman or other tool. See image in static directory. -->

@@ -5,7 +5,7 @@ description: Blazor WebAssembly で ASP.NET Core SignalR を使用するチャ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,20 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 720f534426cc0e2b32778e49050c7f7d75ecd60d
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773789"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679593"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly で ASP.NET Core SignalR を使用する
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-このチュートリアルでは、Blazor WebAssembly で SignalR を使用してリアルタイム アプリを構築するための基本について説明します。 以下の方法について説明します。
+このチュートリアルでは、Blazor WebAssembly と共に SignalR を使用してリアルタイム アプリをビルドするための基礎について説明します。 以下の方法について説明します。
 
 > [!div class="checklist"]
 > * Blazor WebAssembly でホストされるアプリ プロジェクトを作成する
@@ -43,7 +41,8 @@ ms.locfileid: "82773789"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
+* **ASP.NET および Web 開発**ワークロードを含む [Visual Studio 2019 16.6 以降](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -51,7 +50,8 @@ ms.locfileid: "82773789"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
+* [Visual Studio for Mac バージョン 8.6 以降](https://visualstudio.microsoft.com/vs/mac/)
+* [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -59,21 +59,18 @@ ms.locfileid: "82773789"
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>ホストされる Blazor WebAssembly アプリ プロジェクトを作成する
-
-Visual Studio バージョン 16.6 Preview 2 以降を使用していない場合は、[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) テンプレートをインストールします。 Blazor WebAssembly がプレビュー段階にある間、[Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) パッケージにはプレビュー バージョンが用意されています。 コマンド シェルで次のコマンドを実行します。
-
-```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
-```
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>ホストされた Blazor WebAssembly アプリ プロジェクトを作成する
 
 使用するツールに向けたガイダンスに従ってください。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
+> [!NOTE]
+> Visual Studio 16.6 以降と .NET Core SDK 3.1.300 以降が必要です。
+
 1. 新しいプロジェクトを作成します。
 
-1. **[Blazor アプリ]** を選択し、 **[次へ]** を選択します。
+1. **[Blazor アプリ]** を選択し、 **[次へ]** を選択します
 
 1. **[プロジェクト名]** フィールドに「BlazorSignalRApp」と入力します。 **[場所]** エントリが正しいことを確認します。または、プロジェクトの場所を指定します。 **[作成]** を選択します。
 
@@ -100,13 +97,28 @@ dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.2
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. コマンド シェルで次のコマンドを実行します。
+1. 最新バージョンの [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/) をインストールし、次の手順を実行します。
 
-   ```dotnetcli
-   dotnet new blazorwasm --hosted --output BlazorSignalRApp
-   ```
+1. **[ファイル]**  >  **[新しいソリューション]** を選択するか、 **[スタート ウィンドウ]** から**新しい**プロジェクトを作成します。
 
-1. Visual Studio for Mac で、プロジェクト フォルダーに移動してプロジェクトのソリューション ファイル ( *.sln*) を開くことで、プロジェクトを開きます。
+1. サイドバーで、 **[Web and Console]\(Web とコンソール\)**  >  **[アプリ]** の順に選択します。
+
+1. **[Blazor WebAssembly アプリ]** テンプレートを選択します。 **[次へ]** を選択します。
+
+   次の構成を確認します。
+
+   * **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されている
+   * **[認証]** が **[認証なし]** に設定されている
+
+   **[ASP.NET Core Hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。
+
+   **[次へ]** を選択します。
+
+1. **[プロジェクト名]** フィールドで、アプリに `BlazorSignalRApp` という名前を付けます。 **[作成]** を選択します。
+
+   開発証明書を信頼することを求めるメッセージが表示されたら、証明書を信頼して続行します。 証明書を信頼するには、ユーザーとキーチェーンのパスワードが必要です。
+
+1. プロジェクト フォルダーに移動し、プロジェクトのソリューション ファイル ( *.sln*) を開いてプロジェクトを開きます。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -128,7 +140,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 1. **[参照]** を選択した状態で、検索ボックスに「Microsoft.AspNetCore.SignalR.Client」と入力します。
 
-1. 検索結果から `Microsoft.AspNetCore.SignalR.Client` パッケージを選択し、 **[インストール]** を選択します。
+1. 検索結果で、[Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) パッケージを選択し、 **[インストール]** を選択します。
 
 1. **[変更のプレビュー]** ダイアログ ボックスが表示されたら、 **[OK]** を選択します。
 
@@ -150,7 +162,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. **[参照]** を選択した状態で、検索ボックスに「Microsoft.AspNetCore.SignalR.Client」と入力します。
 
-1. 検索結果の `Microsoft.AspNetCore.SignalR.Client` パッケージの横にあるチェック ボックスをオンにし、 **[パッケージの追加]** を選択します。
+1. 検索結果で、[Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) パッケージの横にあるチェック ボックスをオンにし、 **[パッケージの追加]** を選択します。
 
 1. **[ライセンスの同意]** ダイアログが表示されたら、ライセンス条項に同意する場合は **[同意する]** を選択します。
 
@@ -171,7 +183,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>SignalR ハブのサービスとエンドポイントを追加する
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>サービスと SignalR ハブのエンドポイントを追加する
 
 1. **BlazorSignalRApp.Server** プロジェクトで、*Startup.cs* ファイルを開きます。
 
@@ -185,7 +197,10 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. `Startup.Configure` で、コントローラーのエンドポイントとクライアント側のフォールバックのエンドポイントの間に、ハブのエンドポイントを追加します。
+1. `Startup.Configure`の場合:
+
+   * 処理パイプラインの構成の上部にある応答圧縮ミドルウェアを使用します。
+   * コントローラーのエンドポイントとクライアント側のフォールバックのエンドポイントの間に、ハブのエンドポイントを追加します。
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
@@ -209,7 +224,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、 **[送信]** ボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -227,19 +242,19 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、 **[送信]** ボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. **[ソリューション]** サイド バーで、**BlazorSignalRApp.Server** プロジェクトを選択します。 <kbd>⌘</kbd>+<kbd>↩</kbd>* * を押して、デバッグしてアプリを実行するか、<kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd> を押して、デバッグなしでアプリを実行します。
+1. **[ソリューション]** サイド バーで、**BlazorSignalRApp.Server** プロジェクトを選択します。 <kbd>⌘</kbd>+<kbd>↩</kbd> を押して、デバッグしてアプリを実行するか、<kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd> を押して、デバッグなしでアプリを実行します。
 
 1. アドレス バーから URL をコピーし、別のブラウザー インスタンスまたはタブを開き、アドレス バーに URL を貼り付けます。
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、 **[送信]** ボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -256,7 +271,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、 **[送信]** ボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -281,3 +296,4 @@ Blazor アプリの構築について詳しくは、Blazor のドキュメント
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:signalr/introduction>
+* [認証のための SignalR のクロスオリジンネゴシエーション](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

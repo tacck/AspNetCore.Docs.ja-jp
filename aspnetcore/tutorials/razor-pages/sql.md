@@ -1,7 +1,7 @@
 ---
-title: データベースと ASP.NET Core を使用する
+title: 'パート 4: データベースと ASP.NET Core を使用する'
 author: rick-anderson
-description: データベースと ASP.NET Core の使用について説明します。
+description: Razor ページのチュートリアル シリーズのパート 4。
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 159588ec750f0ede534522aa9397fc2aefb58cd6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 21ae2ed4e91a0b3e52b1cdad1f4f4686c50614ba
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775610"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652975"
 ---
-# <a name="work-with-a-database-and-aspnet-core"></a>データベースと ASP.NET Core を使用する
+# <a name="part-4-with-a-database-and-aspnet-core"></a>パート 4: データベースと ASP.NET Core を使用する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Joe Audette](https://twitter.com/joeaudette)
 
@@ -148,7 +148,7 @@ DB 内のすべてのレコードを削除します (そのため Seed メソッ
 
 > [!div class="step-by-step"]
 > [前へ:スキャフォールディングされた Razor Pages](xref:tutorials/razor-pages/page)
-> [次:ページの更新](xref:tutorials/razor-pages/da1)
+> [次: ページの更新](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end
 

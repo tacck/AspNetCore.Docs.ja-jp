@@ -5,7 +5,7 @@ description: ASP.NET Core を使用して Blazor サーバー アプリをホス
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/03/2020
+ms.date: 06/04/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: e69b91035c65739dde724330e83793c0b8b5481a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8c06d3a4d0d75a3e2fd9f699af38a23833fa8bce
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775155"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419945"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Blazor サーバーをホストおよびデプロイする
 
@@ -147,6 +147,41 @@ http {
 * [WebSocket プロキシとしての NGINX](https://www.nginx.com/blog/websocket-nginx/)
 * [WebSocket プロキシ](http://nginx.org/docs/http/websocket.html)
 * <xref:host-and-deploy/linux-nginx>
+
+## <a name="linux-with-apache"></a>Apache を使用した Linux
+
+Linux 上の Apache の背後に Blazor アプリをホストするには、HTTP および Websocket トラフィック用に `ProxyPass` を構成します。
+
+次に例を示します。
+
+* Kestrel サーバーは、ホスト コンピューター上で実行されています。
+* このアプリは、ポート 5000 でトラフィックをリッスンします。
+
+```
+ProxyRequests       On
+ProxyPreserveHost   On
+ProxyPassMatch      ^/_blazor/(.*) http://localhost:5000/_blazor/$1
+ProxyPass           /_blazor ws://localhost:5000/_blazor
+ProxyPass           / http://localhost:5000/
+ProxyPassReverse    / http://localhost:5000/
+```
+
+次のモジュールを有効にします。
+
+```
+a2enmod   proxy
+a2enmod   proxy_wstunnel
+```
+
+WebSockets エラーをブラウザ コンソールで確認します。 エラーの例:
+
+* Firefox は ws://the-domain-name.tld/_blazor?id=XXX のサーバーに接続を確立できません。
+* エラー :'WebSockets' の転送の開始に失敗しました。エラー :転送のエラーがありました。
+* エラー :'LongPolling' の転送の開始に失敗しました。TypeError: this.transport は定義されていません
+* エラー :利用可能ないかなる転送を使用しても、サーバーに接続できませんでした。 WebSockets が失敗しました
+* エラー :接続が 'Connected' 状態ではない場合、データは送信できません。
+
+詳細については、[Apache のドキュメント](https://httpd.apache.org/docs/current/mod/mod_proxy.html)を参照してください。
 
 ### <a name="measure-network-latency"></a>ネットワーク待機時間の測定
 

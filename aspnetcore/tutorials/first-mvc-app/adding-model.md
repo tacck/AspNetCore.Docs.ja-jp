@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC アプリへのモデルの追加
+title: パート 4、ASP.NET Core MVC アプリにモデルを追加する
 author: rick-anderson
-description: 単純な ASP.NET Core アプリケーションにモデルを追加します。
+description: ASP.NET Core MVC のチュートリアル シリーズのパート 4。
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 1347659ee25e2b85b0a479f6bbcc5eb1a956fab2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 29f70d6bd1d5c1223ef35b4e24e5b9c0a8465d1d
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776761"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652384"
 ---
-# <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC アプリへのモデルの追加
+# <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>パート 4、ASP.NET Core MVC アプリにモデルを追加する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Tom Dykstra](https://github.com/tdykstra)
 
@@ -119,7 +119,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## <a name="register-the-database-context"></a>データベース コンテキストの登録
 
-ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。 サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録する必要があります。 これらのサービスを必要とするコンポーネント (Razor ページなど) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。 このセクションでは、DI コンテナーにデータベース コンテキストを登録します。
+ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。 サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録する必要があります。 これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。 このセクションでは、DI コンテナーにデータベース コンテキストを登録します。
 
 *Startup.cs* の先頭に次の `using` ステートメントを追加します。
 
@@ -585,7 +585,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>依存関係挿入に登録されるコンテキストを調べる
 
-ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。 サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録されます。 これらのサービスを必要とするコンポーネント (Razor ページなど) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。
+ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。 サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録されます。 これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

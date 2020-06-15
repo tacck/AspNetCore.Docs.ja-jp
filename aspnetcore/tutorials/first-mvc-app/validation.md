@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC アプリへの検証の追加
+title: パート 9、ASP.NET Core MVC アプリに検証を追加する
 author: rick-anderson
-description: ASP.NET Core アプリに検証を追加する方法
+description: ASP.NET Core MVC のチュートリアル シリーズのパート 9。
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 6e46a4ace7c99096f1a7d47946a21fd7a5c657e7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70cc66955fdaee6ff93648523c2977587e6b05d6
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776195"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652448"
 ---
-# <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC アプリへの検証の追加
+# <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>パート 9、ASP.NET Core MVC アプリに検証を追加する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -55,7 +55,7 @@ MVC と Entity Framework Core Code First が提供している検証のサポー
 
 コントローラーまたはビューのコードを更新しなくても検証 UI が生成する仕組みが気になるかもしれません。 次のコードでは、2 つの `Create` メソッドが示されています。
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
 
 最初の (HTTP GET の) `Create` アクション メソッドは、初期の作成フォームを表示します。 2 番目の (`[HttpPost]`) バージョンは、フォームの送信を処理します。 2 番目の `Create` メソッド (`[HttpPost]` バージョン) は、`ModelState.IsValid` を呼び出してムービーに検証エラーがあるかどうかを確認します。 このメソッドを呼び出すと、オブジェクトに適用されているすべての検証属性が評価されます。 オブジェクトに検証エラーがある場合、`Create` メソッドはフォームを再表示します。 エラーがない場合、メソッドはデータベースに新しいムービーを保存します。 このムービーの例では、クライアント側で検証エラーが検出されると、フォームはサーバーに送信されません。クライアント側検証エラーがある場合、2 番目の `Create` メソッドは呼び出されません。 ブラウザーで JavaScript を無効にすると、クライアントの検証が無効になり、HTTP POST の `Create` メソッドの `ModelState.IsValid` での検証エラーの検出をテストできます。
 
@@ -89,7 +89,7 @@ JavaScript を無効にした後、無効なデータを送信して、デバッ
 
 *Movie.cs* ファイルを開き、`Movie` クラスを調べます。 `System.ComponentModel.DataAnnotations` 名前空間には、組み込みの検証属性セットに加え、書式設定の属性もあります。 リリース日と価格のフィールドには、`DataType` 列挙値が既に適用されています。 次のコードでは、適切な `DataType` 属性が設定された `ReleaseDate` プロパティと `Price` プロパティを示します。
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
 `DataType` 属性は、ビュー エンジンに対して、データの書式設定のヒントのみを提供します (また、URL の場合に `<a>`、電子メールの場合に `<a href="mailto:EmailAddress.com">` などの要素/属性を提供します)。 `RegularExpression` 属性を使って、データの書式を検証することができます。 `DataType` 属性は、データベースの組み込み型よりも具体的なデータ型を指定するために使用されます。これらは検証属性ではありません。 この例では、追跡する必要があるのは日付のみであり、時刻は必要ありません。 `DataType` 列挙型は、Date、Time、PhoneNumber、Currency、EmailAddress など、多くの型のために用意されています。 また、`DataType` 属性を使用して、アプリケーションで型固有の機能を自動的に提供することもできます。 たとえば、`mailto:` リンクを `DataType.EmailAddress` に作成したり、HTML5 をサポートするブラウザーで `DataType.Date` に日付セレクターを提供したりできます。 `DataType` 属性は、HTML 5 ブラウザーが認識できる HTML 5 `data-` ("データ ダッシュ" と読みます) 属性を出力します。 `DataType` 属性は、検証を**提供していません**。
 
@@ -102,7 +102,7 @@ JavaScript を無効にした後、無効なデータを送信して、デバッ
 public DateTime ReleaseDate { get; set; }
 ```
 
-`ApplyFormatInEditMode` の設定では、編集用にテキスト ボックスに値を表示するときにも適用する必要がある書式設定を指定します  (フィールドによっては適用したくないこともあります。たとえば、通貨値の場合、おそらく編集用テキスト ボックスに通貨記号は必要ありません)。
+`ApplyFormatInEditMode` の設定では、編集用にテキスト ボックスに値を表示するときにも適用する必要がある書式設定を指定します (フィールドによっては適用したくないこともあります。たとえば、通貨値の場合、おそらく編集用テキスト ボックスに通貨記号は必要ありません)。
 
 `DisplayFormat` 属性を単独で使うことができますが、一般的に、`DataType` 属性を使うことが推奨されます。 `DataType` 属性は、画面でのレンダリング方法とは異なり、データのセマンティクスを伝達します。また、DisplayFormat にはない、次の利点があります。
 

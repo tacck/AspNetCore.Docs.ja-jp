@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core の Razor ページと EF Core - 関連データの更新 - 7/8
+title: パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
 author: rick-anderson
-description: このチュートリアルでは、外部キー フィールドとナビゲーション プロパティを更新することで関連データを更新します。
+description: Razor ページと Entity Framework チュートリアル シリーズのパート 7。
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d86e57d50c414e4baabd00ca9675aa66266342ca
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645458"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652602"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>ASP.NET Core の Razor ページと EF Core - 関連データの更新 - 7/8
+# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -57,7 +63,7 @@ Create と Edit のページ モデル クラスは、`DepartmentNamePageModel` 
 * `TryUpdateModelAsync` を使用して[過剰ポスティング](xref:data/ef-rp/crud#overposting)を防止します。
 * `ViewData["DepartmentID"]` を削除します。 基底クラスからの `DepartmentNameSL` は厳密に型指定されたモデルであり、Razor ページによって使用されます。 厳密に型指定されたモデルは、弱く型指定されたモデルよりも優先されます。 詳細については、「[弱い型指定のデータ (ViewData と ViewBag)](xref:mvc/views/overview#VD_VB)」を参照してください。
 
-### <a name="update-the-course-create-razor-page"></a>Course/Create Razor ページを更新する
+### <a name="update-the-course-create-razor-page"></a>Course Create Razor ページを更新する
 
 次のコードで *Pages/Courses/Create.cshtml* を更新します。
 
@@ -70,7 +76,7 @@ Create と Edit のページ モデル クラスは、`DepartmentNamePageModel` 
 * [Select Department]\(部門の選択\) オプションを追加します。 この変更により、部門がまだ選択されていないとき、最初の部門ではなく、[Select Department]\(部門の選択\) がドロップダウンに表示されます。
 * 部門が選択されていない場合に、検証メッセージを追加します。
 
-Razor ページは[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)を使用します。
+Razor ページでは[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)を使用します。
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -84,7 +90,7 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 変更は、Create ページ モデルで行われたものと似ています。 上記のコードでは、ドロップダウン リストでその部門を選択する `PopulateDepartmentsDropDownList` が部門 ID で渡されます。
 
-### <a name="update-the-course-edit-razor-page"></a>Course/Edit Razor ページを更新する
+### <a name="update-the-course-edit-razor-page"></a>Course Edit Razor ページを更新する
 
 次のコードで *Pages/Courses/Edit.cshtml* を更新します。
 
@@ -104,7 +110,7 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 ### <a name="update-the-course-page-models"></a>Course ページ モデルを更新する
 
-*を追加する次のコードで*Pages/Courses/Delete.cshtml.cs`AsNoTracking` を更新します。
+`AsNoTracking` を追加する次のコードで *Pages/Courses/Delete.cshtml.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Delete.cshtml.cs?highlight=29)]
 
@@ -148,9 +154,9 @@ Create、Edit、Details、Delete の各ページをテストします。
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_All)]
 
-`InstructorCoursesPageModel` は、Edit と Create のページ モデルに使用する基底クラスです。 `PopulateAssignedCourseData` は、`Course` に設定するためのすべての `AssignedCourseDataList` エンティティを読み取ります。 コースごとに、コードは `CourseID`、タイトル、およびインストラクターがコースに割り当てられているかどうかを設定します。 [HashSet](/dotnet/api/system.collections.generic.hashset-1) は効率的な検索のために使用されます。
+`InstructorCoursesPageModel` は、Edit と Create のページ モデルに使用する基底クラスです。 `PopulateAssignedCourseData` は、`AssignedCourseDataList` に設定するためのすべての `Course` エンティティを読み取ります。 コースごとに、コードは `CourseID`、タイトル、およびインストラクターがコースに割り当てられているかどうかを設定します。 [HashSet](/dotnet/api/system.collections.generic.hashset-1) は効率的な検索のために使用されます。
 
-Razor ページには Course エンティティのコレクションがないため、モデル バインダーでは `CourseAssignments` ナビゲーション プロパティを自動的に更新できません。 モデル バインダーを使用する代わりに、新しい `CourseAssignments` メソッドで `UpdateInstructorCourses` ナビゲーション プロパティを更新します。 そのため、モデル バインドから `CourseAssignments` プロパティを除外する必要があります。 これを行うために、`TryUpdateModel` を呼び出すコードを変更する必要はありません。これは、ホワイトリストのオーバーロードを使用していて、`CourseAssignments` がインクルード リスト内にないためです。
+Razor ページには Course エンティティのコレクションがないため、モデル バインダーは `CourseAssignments` ナビゲーション プロパティを自動的に更新できません。 モデル バインダーを使用する代わりに、新しい `UpdateInstructorCourses` メソッドで `CourseAssignments` ナビゲーション プロパティを更新します。 そのため、モデル バインドから `CourseAssignments` プロパティを除外する必要があります。 これを行うために、`TryUpdateModel` を呼び出すコードを変更する必要はありません。これは、ホワイトリストのオーバーロードを使用していて、`CourseAssignments` がインクルード リスト内にないためです。
 
 チェック ボックスが選択されていない場合、`UpdateInstructorCourses` のコードは空のコレクションを使用して `CourseAssignments` ナビゲーション プロパティを初期化し、次を返します。
 
@@ -182,14 +188,14 @@ Razor ページには Course エンティティのコレクションがないた
 
 上記のコードでは次の操作が行われます。
 
-* `Instructor`、`OfficeAssignment`、`CourseAssignment` ナビゲーション プロパティの一括読み込みを使用し、現在の `CourseAssignment.Course` エンティティをデータベースから取得します。
+* `OfficeAssignment`、`CourseAssignment`、`CourseAssignment.Course` ナビゲーション プロパティの一括読み込みを使用し、現在の `Instructor` エンティティをデータベースから取得します。
 * モデル バインダーからの値を使用して、取得した `Instructor` エンティティを更新します。 `TryUpdateModel` は[過剰ポスティング](xref:data/ef-rp/crud#overposting)を防止します。
 * オフィスの場所が空白の場合は、`Instructor.OfficeAssignment` を null に設定します。 `Instructor.OfficeAssignment` が null の場合、`OfficeAssignment` テーブル内の関連する行が削除されます。
-* `PopulateAssignedCourseData` ビュー モデル クラスを利用し、チェック ボックスの情報を提供する目的で、`OnGetAsync` で `AssignedCourseData` を呼び出します。
-* 編集中の Instructor エンティティにチェック ボックスからの情報を適用する目的で、`UpdateInstructorCourses` で `OnPostAsync` を呼び出します。
-* `PopulateAssignedCourseData` が失敗した場合、`UpdateInstructorCourses` で `OnPostAsync` と `TryUpdateModel` を呼び出します。 このようなメソッド呼び出しにより、エラー メッセージと共に再表示されたとき、ページに入力された割り当て済みコース データが復元されます。
+* `AssignedCourseData` ビュー モデル クラスを利用し、チェック ボックスの情報を提供する目的で、`OnGetAsync` で `PopulateAssignedCourseData` を呼び出します。
+* 編集中の Instructor エンティティにチェック ボックスからの情報を適用する目的で、`OnPostAsync` で `UpdateInstructorCourses` を呼び出します。
+* `TryUpdateModel` が失敗した場合、`OnPostAsync` で `PopulateAssignedCourseData` と `UpdateInstructorCourses` を呼び出します。 このようなメソッド呼び出しにより、エラー メッセージと共に再表示されたとき、ページに入力された割り当て済みコース データが復元されます。
 
-### <a name="update-the-instructor-edit-razor-page"></a>Instructor/Edit Razor ページを更新する
+### <a name="update-the-instructor-edit-razor-page"></a>Instructor Edit Razor ページを更新する
 
 次のコードで *Pages/Instructors/Edit.cshtml* を更新します。
 
@@ -199,13 +205,13 @@ Razor ページには Course エンティティのコレクションがないた
 
 チェック ボックスが最初にレンダリングされるときに、インストラクターに割り当てられているコースが選択されます。
 
-注: インストラクター コース データを編集するためにここで採用されている方法は、コースの数が限られている場合にはうまく機能します。 非常に大きいコレクションの場合、別の UI と別の更新方法の方が有効で効率的な場合があります。
+メモ:インストラクター コース データを編集するためにここで採用されている方法は、コースの数が限られている場合にはうまく機能します。 非常に大きいコレクションの場合、別の UI と別の更新方法の方が有効で効率的な場合があります。
 
 アプリを実行し、更新された Instructors/Edit ページをテストします。 一部のコース割り当てを変更します。 変更が Index ページに反映されます。
 
 ### <a name="update-the-instructor-create-page"></a>Instructor/Create ページを更新する
 
-Instructor/Create ページ モデルと Razor ページを次のように Edit ページに似たコードで更新します。
+Instructor Create ページ モデルと Razor ページを次のように Edit ページに似たコードで更新します。
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
@@ -287,7 +293,7 @@ Create と Edit のページ モデル クラスは、`DepartmentNamePageModel` 
 * [Select Department]\(部門の選択\) オプションを追加します。 この変更により、最初の部門ではなく、[Select Department]\(部門の選択\) がレンダリングされます。
 * 部門が選択されていない場合に、検証メッセージを追加します。
 
-Razor ページは[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)を使用します。
+Razor ページでは[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)を使用します。
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
@@ -321,13 +327,13 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 
-`OnGetAsync`Pages/Courses/Details.cshtml.cs*ファイルで* メソッドを更新します。
+*Pages/Courses/Details.cshtml.cs* ファイルで `OnGetAsync` メソッドを更新します。
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Details.cshtml.cs?name=snippet)]
 
 ### <a name="modify-the-delete-and-details-pages"></a>Delete ページと Details ページを変更する
 
-次のマークアップを使用して、Delete Razor ページを更新します。
+次のマークアップを使用して、[削除] Razor ページを更新します。
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Delete.cshtml?highlight=15-20)]
 
@@ -355,7 +361,7 @@ Create、Edit、Details、Delete の各ページをテストします。
 
 上記のコードでは次の操作が行われます。
 
-* `Instructor` ナビゲーション プロパティの一括読み込みを使用して、現在の `OfficeAssignment` エンティティをデータベースから取得します。
+* `OfficeAssignment` ナビゲーション プロパティの一括読み込みを使用して、現在の `Instructor` エンティティをデータベースから取得します。
 * モデル バインダーからの値を使用して、取得した `Instructor` エンティティを更新します。 `TryUpdateModel` は[過剰ポスティング](xref:data/ef-rp/crud#overposting)を防止します。
 * オフィスの場所が空白の場合は、`Instructor.OfficeAssignment` を null に設定します。 `Instructor.OfficeAssignment` が null の場合、`OfficeAssignment` テーブル内の関連する行が削除されます。
 
@@ -392,7 +398,7 @@ Create、Edit、Details、Delete の各ページをテストします。
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/InstructorCoursesPageModel.cshtml.cs)]
 
-`InstructorCoursesPageModel` は、Edit と Create のページ モデルに使用する基底クラスです。 `PopulateAssignedCourseData` は、`Course` に設定するためのすべての `AssignedCourseDataList` エンティティを読み取ります。 コースごとに、コードは `CourseID`、タイトル、およびインストラクターがコースに割り当てられているかどうかを設定します。 効率的な参照を作成するために [HashSet](/dotnet/api/system.collections.generic.hashset-1) が使用されています。
+`InstructorCoursesPageModel` は、Edit と Create のページ モデルに使用する基底クラスです。 `PopulateAssignedCourseData` は、`AssignedCourseDataList` に設定するためのすべての `Course` エンティティを読み取ります。 コースごとに、コードは `CourseID`、タイトル、およびインストラクターがコースに割り当てられているかどうかを設定します。 効率的な参照を作成するために [HashSet](/dotnet/api/system.collections.generic.hashset-1) が使用されています。
 
 ### <a name="instructors-edit-page-model"></a>Instructors/Edit ページ モデル
 
@@ -416,7 +422,7 @@ Instructor Razor ビューを更新します。
 
 アプリを実行し、更新された Instructors/Edit ページをテストします。 一部のコース割り当てを変更します。 変更が Index ページに反映されます。
 
-注: インストラクター コース データを編集するためにここで採用されている方法は、コースの数が限られている場合にはうまく機能します。 非常に大きいコレクションの場合、別の UI と別の更新方法の方が有効で効率的な場合があります。
+メモ:インストラクター コース データを編集するためにここで採用されている方法は、コースの数が限られている場合にはうまく機能します。 非常に大きいコレクションの場合、別の UI と別の更新方法の方が有効で効率的な場合があります。
 
 ### <a name="update-the-instructors-create-page"></a>Instructors/Create ページを更新する
 
@@ -426,15 +432,15 @@ Instructor Razor ビューを更新します。
 
 上記のコードは、*Pages/Instructors/Edit.cshtml.cs* コードに似ています。
 
-次のマークアップを使用して、Instructors/Create Razor ページを更新します。
+次のマークアップを使用して、Instructor Create Razor ページを更新します。
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 
 Instructors/Create ページをテストします。
 
-## <a name="update-the-delete-page"></a>Delete ページを更新する
+## <a name="update-the-delete-page"></a>[削除] ページを更新する
 
-次のコードを使用して、[削除] ページ モデルを更新します。
+次のコードを使用して、Delete ページ モデルを更新します。
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Delete.cshtml.cs?highlight=5,40-999)]
 

@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core のコントローラーのメソッドとビュー
+title: 'パート 6: ASP.NET Core のコントローラーのメソッドとビュー'
 author: rick-anderson
-description: ASP.NET Core でコントローラー メソッド、ビュー、DataAnnotations を使用する方法について説明します。
+description: 'パート 6: ASP.NET Core MVC アプリにモデルを追加する'
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 444c870fcf9e866f0c382e32af174442d11d3af5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 50b527cee19f19316fd9034759c05817010fefbb
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777580"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653021"
 ---
-# <a name="controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core のコントローラーのメソッドとビュー
+# <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>パート 6: ASP.NET Core のコントローラーのメソッドとビュー
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 

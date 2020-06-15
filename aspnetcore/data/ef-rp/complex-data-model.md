@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core の Razor ページと EF Core - データ モデル - 5/8
+title: パート 5、ASP.NET Core の Razor ページと EF Core - データ モデル
 author: rick-anderson
-description: このチュートリアルでは、エンティティとリレーションシップをさらに追加し、書式設定、検証、マッピングの規則を指定してデータ モデルをカスタマイズします。
+description: Razor Pages と Entity Framework チュートリアル シリーズのパート 5。
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 1d81a0444487c6396bb32381ed2cb26d44312c3a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f44ca9857ea127cf7e662e2712cc6d4b460450e9
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650210"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652503"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core の Razor ページと EF Core - データ モデル - 5/8
+# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>パート 5、ASP.NET Core の Razor ページと EF Core - データ モデル
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -81,7 +87,7 @@ ms.locfileid: "78650210"
 * ブラウザーで HTML5 機能を有効にすることができます。 たとえば、カレンダー コントロール、ロケールに適した通貨記号、メール リンク、クライアント側の入力検証を表示します。
 * 既定では、ブラウザーで、ロケールに基づいて正しい書式を使用してデータがレンダリングされます。
 
-詳細については、[\<入力> タグ ヘルパーに関するドキュメント](xref:mvc/views/working-with-forms#the-input-tag-helper)を参照してください。
+詳細については、[\<input> タグ ヘルパーに関するドキュメント](xref:mvc/views/working-with-forms#the-input-tag-helper)を参照してください。
 
 ### <a name="the-stringlength-attribute"></a>StringLength 属性
 
@@ -96,7 +102,7 @@ ms.locfileid: "78650210"
 `StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) 属性は、入力に制限を適用するために使用できます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -771,7 +777,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 * ブラウザーで HTML5 機能を有効にすることができます。 たとえば、カレンダー コントロール、ロケールに適した通貨記号、メール リンク、クライアント側の入力検証などを表示します。
 * 既定では、ブラウザーで、ロケールに基づいて正しい書式を使用してデータがレンダリングされます。
 
-詳細については、[\<入力> タグ ヘルパーに関するドキュメント](xref:mvc/views/working-with-forms#the-input-tag-helper)を参照してください。
+詳細については、[\<input> タグ ヘルパーに関するドキュメント](xref:mvc/views/working-with-forms#the-input-tag-helper)を参照してください。
 
 アプリを実行します。 Students インデックス ページに移動します。 時刻は表示されなくなりました。 `Student` モデルを使用するすべてのビューに、時刻なしの日付が表示されます。
 
@@ -788,7 +794,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 上のコードでは、名前で使用可能な文字数を 50 に制限します。 `StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) 属性は、入力に制限を適用するために使用されます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 次のようにアプリを実行します。

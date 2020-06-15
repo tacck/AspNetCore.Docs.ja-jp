@@ -1,5 +1,5 @@
 ---
-title: 'チュートリアル: ASP.NET Core の Razor Pages の概要'
+title: "\"チュートリアル: ASP.NET Core の Razor Pages の概要\""
 author: rick-anderson
 description: このチュートリアル シリーズでは、ASP.NET Core で Razor ページを使用する方法を示します。 モデルの作成、Razor ページのコードの生成、Entity Framework Core と SQL Server を使用したデータ アクセス、検索機能の追加、入力検証の追加、移行を使用したモデルの更新の方法について学習します。
 ms.author: riande
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 8ed12b1778673962fe0b174e005bd6d8a7f54168
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3b8ccf639bb91234f81c67750fffa170e52d636f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774874"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452347"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>チュートリアル: ASP.NET Core の Razor ページの概要
+# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>チュートリアル: ASP.NET Core の Razor Pages の概要
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -58,7 +58,7 @@ ms.locfileid: "82774874"
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Razor ページ Web アプリを作成する
+## <a name="create-a-razor-pages-web-app"></a>Razor Pages Web アプリを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -92,7 +92,7 @@ ms.locfileid: "82774874"
   * `dotnet new` コマンド: *RazorPagesMovie* フォルダーに新しい Razor Pages プロジェクトが作成されます。
   * `code` コマンドは、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーを開きます。
 
-* 状態バーの OmniSharp フレーム アイコンが緑色になり、"**[Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?]\(ビルドとデバッグに必要なアセットが 'RazorPagesMovie' にありません。追加しますか?\)** " という内容のダイアログ ボックスが表示されたら、 **[Yes]\(はい\)** を選択します。
+* 状態バーの OmniSharp フレーム アイコンが緑色になり、"**ビルドとデバッグに必要な資産が 'RazorPagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、 **[はい]** を選択します。
 
   *launch.json* ファイルと *tasks.json* ファイルを格納している *.vscode* ディレクトリが、プロジェクトのルート ディレクトリに追加されます。
 
@@ -100,19 +100,24 @@ ms.locfileid: "82774874"
 
 * **[ファイル]** > **[新しいソリューション]** の順に選択します。
 
-![macOS の新しいソリューション](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
+  ![macOS の新しいソリューション](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* **[.NET Core]** > **[アプリ]** > **[Web アプリケーション]** > **[次へ]** の順に選択します。
+* バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]** 、 **[アプリ]** 、 **[Web アプリケーション]** 、 **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]\(Web とコンソール\)** 、 **[アプリ]** 、 **[Web アプリケーション]** 、 **[次へ]** の順に選択します。
 
-  ![macOS の [新しいプロジェクト] ダイアログ](razor-pages-start/_static/webapp.png)
+  ![macOS Web アプリ テンプレートの選択](razor-pages-start/_static/web_app_template_vsmac.png)
 
-* **[Configure your new Web Application]\(新しい Web アプリケーションを構成する\)** ダイアログで、 **[ターゲット フレームワーク]** を **[.NET Core 3.1]** に設定します。
+* 次の構成を確認します。
+
+  * **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されている
+  * **[認証]** が **[認証なし]** に設定されている
+   
+  **[次へ]** を選択します。
 
   ![macOS .NET Core 3.1 の選択](razor-pages-start/_static/targetframework3.png)
 
 * プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。
 
-  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
+  ![macOS でプロジェクトに名前を付ける](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -128,9 +133,9 @@ ms.locfileid: "82774874"
 
 ### <a name="pages-folder"></a>Pages フォルダー
 
-Razor ページとサポート ファイルが格納されます。 各 Razor ページは、次のファイルのペアとなります。
+Razor ページとサポート ファイルが含まれます。 各 Razor ページは、次のファイルのペアとなります。
 
-* *.cshtml* ファイル: HTML マークアップと、Razor 構文を使用した C# コードが保存されます。
+* *.cshtml* ファイル: HTML マークアップと、Razor 構文を使用した C# コードが含まれます。
 * *.cshtml.cs* ファイル: ページ イベントを処理する C# コードが保存されます。
 
 サポート ファイルには、アンダー スコアで始まる名前が付けられます。 たとえば、 *_Layout.cshtml* ファイルでは、すべてのページに共通の UI 要素が構成されます。 このファイルでは、ページの上部に表示されるナビゲーション メニューと、ページの下部に表示される著作権の通知が設定されます。 詳細については、「<xref:mvc/views/layout>」を参照してください。
@@ -199,7 +204,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Razor ページ Web アプリを作成する
+## <a name="create-a-razor-pages-web-app"></a>Razor Pages Web アプリを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -247,9 +252,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
 ![macOS の新しいソリューション](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* **[.NET Core]** > **[アプリ]** > **[Web アプリケーション]** > **[次へ]** の順に選択します。
-
-  ![macOS の [新しいプロジェクト] ダイアログ](razor-pages-start/_static/webapp.png)
+* バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]** 、 **[アプリ]** 、 **[Web アプリケーション]** 、 **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]\(Web とコンソール\)** 、 **[アプリ]** 、 **[Web アプリケーション]** 、 **[次へ]** の順に選択します。
 
 * **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、 **[ターゲット フレームワーク]** を **[.NET Core 3.1]** に設定します。
 

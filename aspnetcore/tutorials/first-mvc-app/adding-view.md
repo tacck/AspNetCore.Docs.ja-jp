@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC アプリへのビューの追加
+title: パート 3、ASP.NET Core MVC アプリへのビューの追加
 author: rick-anderson
-description: 単純な ASP.NET Core MVC アプリにビューを追加する
+description: ASP.NET Core MVC のチュートリアル シリーズのパート 3。
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: c89e0f0428fa7556fcd6b75cdfc1dd19109ec1c8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3976ecba1a6bbf30c3147bf1cef78c5ced5bec62
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774601"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652825"
 ---
-# <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC アプリへのビューの追加
+# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>パート 3、ASP.NET Core MVC アプリへのビューの追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -46,7 +46,7 @@ ms.locfileid: "82774601"
 
   * 右上の検索ボックスに「*view*」と入力します。
 
-  * **[Razor ビュー]** を選択します。
+  * **[Razor ビュー]** を選択します
 
   * **[名前]** ボックスの値、*Index.cshtml* を維持します。
 
@@ -76,11 +76,11 @@ ms.locfileid: "82774601"
 
 ---
 
-*Views/HelloWorld/Index.cshtml* Razor ビュー ファイルの内容を次のコードに置き換えます。
+*Views/HelloWorld/Index.cshtml* Razor ビュー ファイルを次の内容に置き換えます。
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-`https://localhost:{PORT}/HelloWorld` に移動します。 `HelloWorldController` の `Index` メソッドでは多くのことは行いませんでした。つまり、ステートメント `return View();` を実行し、メソッドでビュー テンプレート ファイルを使用して、ブラウザーへの応答をレンダリングするよう指定しただけです。 ビュー テンプレートのファイル名が指定されていないため、MVC では既定のビュー ファイルが使われました。 既定のビュー ファイルはメソッド (`Index`) と同じ名前なので、 */Views/HelloWorld/Index.cshtml* が使われます。 次のイメージは、ビューにハード コーディングされた "Hello from our View Template!" という文字列を示しています。
+`https://localhost:{PORT}/HelloWorld` に移動します。 `HelloWorldController` の `Index` メソッドでは多くのことは行いませんでした。つまり、ステートメント `return View();` を実行し、メソッドでビュー テンプレート ファイルを使用して、ブラウザーへの応答をレンダリングするよう指定しただけです。 ビュー テンプレートのファイル名が指定されていないため、MVC では既定のビュー ファイルが使われました。 既定のビュー ファイルはメソッド (`Index`) と同じ名前なので、 */Views/HelloWorld/Index.cshtml* のビュー テンプレートが使われます。 次のイメージは、ビューにハード コーディングされた "Hello from our View Template!" という文字列を示しています。
 
 ![ブラウザー ウィンドウ](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -203,7 +203,7 @@ ms.locfileid: "82774601"
 
   * 右上の検索ボックスに「*view*」と入力します。
 
-  * **[Razor ビュー]** を選択します。
+  * **[Razor ビュー]** を選択します
 
   * **[名前]** ボックスの値、*Index.cshtml* を維持します。
 

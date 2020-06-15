@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Razor Pages への検索の追加
+title: パート 6、ASP.NET Core Razor ページへの検索の追加
 author: rick-anderson
-description: ASP.NET Core Razor Pages に検索を追加する方法を示します
+description: Razor ページのチュートリアル シリーズのパート 6。
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: baa5e1cb2098a60155a4196f0e602feeff04f102
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8c5fba8596f401f1232e8dcb4659041c2a413151
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774999"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652559"
 ---
-# <a name="add-search-to-aspnet-core-razor-pages"></a>ASP.NET Core Razor Pages への検索の追加
+# <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>パート 6、ASP.NET Core Razor ページへの検索の追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 

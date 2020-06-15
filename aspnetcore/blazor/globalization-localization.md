@@ -1,12 +1,24 @@
 ---
-title:'ASP.NET Core Blazor のグローバリゼーションとローカリゼーション' author: description:'複数のカルチャと言語のユーザーが Razor コンポーネントにアクセスできるようにする方法について学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
+author: guardrex
+description: 複数のカルチャと言語でユーザーが Razor コンポーネントにアクセスできるようにする方法について学習します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/globalization-localization
+ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419737"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -74,34 +86,39 @@ Blazor サーバー アプリは、[ローカライズ ミドルウェア](xref:
 
 #### <a name="cookies"></a>クッキー
 
-ローカライズ カルチャの Cookie では、ユーザーのカルチャを保持できます。 Cookie は、アプリのホスト ページ (*Pages/Host. cshtml*) の `OnGet` メソッドによって作成されます。 ローカライズ ミドルウェアでは、後続の要求で Cookie を読み取り、ユーザーのカルチャを設定します。 
+ローカライズ カルチャの Cookie では、ユーザーのカルチャを保持できます。 ローカライズ ミドルウェアでは、後続の要求で Cookie を読み取り、ユーザーのカルチャを設定します。 
 
 Cookie を使用すると、WebSocket 接続によってカルチャを正しく伝達できることを確実にします。 ローカライズ スキームが URL パスまたはクエリ文字列に基づいている場合は、スキームが WebSocket を使用できない可能性があるため、カルチャを保持できません。 したがって、ローカライズ カルチャの Cookie を使用することをお勧めします。
 
 カルチャがローカライズ Cookie で保持されている場合は、任意の手法を使用してカルチャを割り当てることができます。 アプリにサーバー側 ASP.NET Core 用に確立されたローカライズ スキームが既にある場合は、アプリの既存のローカライズ インフラストラクチャを引き続き使用し、アプリのスキーム内にローカライズ カルチャ Cookie を設定します。
 
-次の例では、ローカライズ ミドルウェアによって読み取ることができる Cookie で現在のカルチャを設定する方法を示します。 Blazor サーバーアプリで次の内容を使用して、*Pages/Host.cshtml.cs* ファイルを作成します。
+次の例では、ローカライズ ミドルウェアによって読み取ることができる Cookie で現在のカルチャを設定する方法を示します。 *Pages/_Host.cshtml* ファイルの開いている `<body>` タグのすぐ下に、Razor 式を作成します。
 
-```csharp
-public class HostModel : PageModel
-{
-    public void OnGet()
-    {
-        HttpContext.Response.Cookies.Append(
+```cshtml
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+...
+
+<body>
+    @{
+        this.HttpContext.Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(
                 new RequestCulture(
                     CultureInfo.CurrentCulture,
                     CultureInfo.CurrentUICulture)));
     }
-}
+
+    ...
+</body>
 ```
 
 ローカライズは、次の一連のイベントでアプリによって処理されます。
 
 1. ブラウザーによって、アプリに最初の HTTP 要求が送信されます。
 1. カルチャは、ローカライズ ミドルウェアによって割り当てられます。
-1. *_Host.cshtml.cs* の `OnGet` メソッドによって、応答の一部として Cookie にカルチャが保持されます。
+1. `_Host` ページ ( *_Host.cshtml*) の Razor 式によって、応答の一部として Cookie にカルチャが保持されます。
 1. ブラウザーによって、WebSocket 接続が開かれ、対話型の Blazor サーバー セッションが作成されます。
 1. ローカライズ ミドルウェアによって、Cookie が読み取られ、カルチャが割り当てられます。
 1. Blazor サーバー セッションは、正しいカルチャで開始されます。
@@ -135,6 +152,25 @@ public class CultureController : Controller
 
 > [!WARNING]
 > <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> アクションの結果を使用して、オープン リダイレクト攻撃を防ぎます。 詳細については、「<xref:security/preventing-open-redirects>」を参照してください。
+
+アプリがコントローラー アクションを処理するように構成されていない場合:
+
+* 次のように `Startup.ConfigureServices` のサービス コレクションに MVC サービスを追加します。
+
+  ```csharp
+  services.AddControllers();
+  ```
+
+* 次のように `Startup.Configure` にコントローラーのエンドポイント ルーティングを追加します。
+
+  ```csharp
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+      endpoints.MapBlazorHub();
+      endpoints.MapFallbackToPage("/_Host");
+  });
+  ```
 
 次のコンポーネントでは、ユーザーがカルチャを選択したときに、最初のリダイレクトを実行する方法の例を示します。
 

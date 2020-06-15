@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0b28e99d9c56d92e157e9010880e58ec5165196a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c2b76b59ae775b9268fa77019bf8420e5e4108b6
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774986"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452290"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -89,7 +89,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
    code -r MvcMovie
    ```
 
-  * "**Required assets to build and debug are missing from 'MvcMovie'. Add them?\(ビルドとデバッグに必要なアセットが 'MvcMovie' にありません。追加しますか?\)**" という内容のダイアログ ボックスが表示されたら、  **[Yes]\(はい\)** を選択します
+  * "**ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
 
   * `dotnet new mvc -o MvcMovie`: *MvcMovie* フォルダー内に新しい ASP.NET Core MVC プロジェクトを作成します。
   * `code -r MvcMovie`:Visual Studio Code で *MvcMovie.csproj* プロジェクト ファイルを読み込みます。
@@ -98,17 +98,24 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
 
 * **[ファイル]** > **[新しいソリューション]** の順に選択します。
 
-  ![macOS の新しいソリューション](./start-mvc/_static/new_project_vsmac.png)
+  ![macOS の新しいソリューション](start-mvc/_static/new_project_vsmac.png)
 
-* **[.NET Core]** > **[アプリ]** > **[Web アプリケーション (モデル ビュー コントローラー)]** > **[次へ]** の順に選択します。
+* バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]** 、 **[アプリ]** 、 **[Web アプリケーション (Model-View-Controller)]** 、 **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]\(Web とコンソール\)** 、 **[アプリ]** 、 **[Web アプリケーション (Model-View-Controller)]** 、 **[次へ]** の順に選択します。
 
-  ![macOS の [新しいプロジェクト] ダイアログ](./start-mvc/_static/new_project_mvc_vsmac.png)
+  ![macOS Web アプリ テンプレートの選択](start-mvc/_static/web_app_template_vsmac.png)
 
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、 **[.NET Core 3.1]** の **[ターゲット フレームワーク]** を設定します。
+* 次の構成を確認します。
 
-  ![macOS .NET Core 3.1 の選択](./start-mvc/_static/new_project_31_vsmac.png)
+  * **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されている
+  * **[認証]** が **[認証なし]** に設定されている
+   
+  **[次へ]** を選択します。
+
+  ![macOS .NET Core 3.1 の選択](start-mvc/_static/new_project_31_vsmac.png)
 
 * プロジェクトに **MvcMovie** という名前を付けて、 **[作成]** を選択します。
+
+  ![macOS でプロジェクトに名前を付ける](start-mvc/_static/MvcMovie.png)
 
 ---
 
@@ -237,7 +244,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
    code -r MvcMovie
    ```
 
-  * "**Required assets to build and debug are missing from 'MvcMovie'. Add them?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
+  * "**ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
 
   * `dotnet new mvc -o MvcMovie`: *MvcMovie* フォルダー内に新しい ASP.NET Core MVC プロジェクトを作成します。
   * `code -r MvcMovie`:Visual Studio Code で *MvcMovie.csproj* プロジェクト ファイルを読み込みます。
@@ -248,9 +255,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
 
   ![macOS の新しいソリューション](./start-mvc/_static/new_project_vsmac.png)
 
-* **[.NET Core]** > **[アプリ]** > **[Web アプリケーション (モデル ビュー コントローラー)]** > **[次へ]** の順に選択します。
-
-  ![macOS の [新しいプロジェクト] ダイアログ](./start-mvc/_static/new_project_mvc_vsmac.png)
+* バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]** 、 **[アプリ]** 、 **[Web アプリケーション (Model-View-Controller)]** 、 **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]\(Web とコンソール\)** 、 **[アプリ]** 、 **[Web アプリケーション (Model-View-Controller)]** 、 **[次へ]** の順に選択します。
 
 * **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、 **[.NET Core 2.2]** という既定の **[ターゲット フレームワーク]** を受け入れます。
 

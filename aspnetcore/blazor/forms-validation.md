@@ -1,12 +1,24 @@
 ---
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor のフォームと検証
+author: guardrex
+description: Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/forms-validation
+ms.openlocfilehash: 707686cdc4ceb6605d6214eeeee0f6dd2e121c90
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679528"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -62,114 +74,13 @@ public class ExampleModel
 一連の組み込みの入力コンポーネントを、ユーザー入力の受信と検証に使用できます。 入力は、それらが変更されたときとフォームが送信されたときに検証されます。 次の表に、使用できる入力コンポーネントを示しています。
 
 | 入力コンポーネント | &hellip; とレンダリング |
-| ---
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--------- | --- title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor のフォームと検証' 作成者: 説明:'Blazor でフォームとフィールドの検証シナリオを使用する方法について説明します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------- | | <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| --------------- | ------------------- |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
 
 すべての入力コンポーネント (<xref:Microsoft.AspNetCore.Components.Forms.EditForm> を含む) で、任意の属性がサポートされています。 コンポーネント パラメーターに一致しない属性は、レンダリングされる HTML 要素に追加されます。
 
@@ -335,7 +246,9 @@ public class Starship
 
 `change` イベントではなく、`input` イベントを使用するカスタム コンポーネントを作成するには、<xref:Microsoft.AspNetCore.Components.Forms.InputText> コンポーネントを使用します。
 
-次のマークアップでコンポーネントを作成し、<xref:Microsoft.AspNetCore.Components.Forms.InputText> を使用する場合と同様に、コンポーネントを使用します。
+次の例では、`CustomInputText` コンポーネントでフレームワークの `InputText` コンポーネントが継承され、イベント バインディング (<xref:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder%2A>) が `oninput` イベントに設定されます。
+
+*Shared/CustomInputText.razor*:
 
 ```razor
 @inherits InputText
@@ -343,9 +256,48 @@ public class Starship
 <input 
     @attributes="AdditionalAttributes" 
     class="@CssClass" 
-    value="@CurrentValue" 
+    value="@CurrentValue"
     @oninput="EventCallback.Factory.CreateBinder<string>(
-        this, __value => CurrentValueAsString = __value, CurrentValueAsString)" />
+         this, __value => CurrentValueAsString = __value, 
+         CurrentValueAsString)" />
+```
+
+`CustomInputText` コンポーネントは、<xref:Microsoft.AspNetCore.Components.Forms.InputText> が使用される場所であればどこでも使用できます。
+
+*Pages/TestForm.razor*:
+
+```razor
+@page  "/testform"
+@using System.ComponentModel.DataAnnotations;
+
+<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <CustomInputText @bind-Value="exampleModel.Name" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+<p>
+    CurrentValue: @exampleModel.Name
+</p>
+
+@code {
+    private ExampleModel exampleModel = new ExampleModel();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+
+    public class ExampleModel
+    {
+        [Required]
+        [StringLength(10, ErrorMessage = "Name is too long.")]
+        public string Name { get; set; }
+    }
+}
 ```
 
 ## <a name="work-with-radio-buttons"></a>オプション ボタンの操作

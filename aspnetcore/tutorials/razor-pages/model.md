@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core での Razor Pages アプリへのモデルの追加
+title: 'パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する'
 author: rick-anderson
-description: Entity Framework Core (EF Core) を利用し、データベースでムービーを管理するためのクラスを追加する方法について説明します。
+description: Razor ページのチュートリアル シリーズのパート 2。
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: d093d7c4dc1b355c0042f300f70a830653b168c0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d3f7d355625ce20a0cb45c785fbab259a5655c63
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769833"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652925"
 ---
-# <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core での Razor ページ アプリへのモデルの追加
+# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -82,7 +82,7 @@ ms.locfileid: "82769833"
 
 ![前の手順からのイメージ。](model/_static/sca.png)
 
-**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor Pages (CRUD)]** > **[追加]** を選択します。
+**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 
 ![前の手順からのイメージ。](model/_static/add_scaffold.png)
 
@@ -300,7 +300,7 @@ Login failed for user 'User-name'.
 
 > [!div class="step-by-step"]
 > [前へ:はじめに](xref:tutorials/razor-pages/razor-pages-start)
-> [次: スキャフォールディングされた Razor Pages](xref:tutorials/razor-pages/page)
+> [次: スキャフォールディングされた Razor ページ](xref:tutorials/razor-pages/page)
 
 ::: moniker-end
 
@@ -363,7 +363,7 @@ Login failed for user 'User-name'.
 
 ![前の手順からのイメージ。](model/_static/sca.png)
 
-**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor Pages (CRUD)]** > **[追加]** を選択します。
+**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 
 ![前の手順からのイメージ。](model/_static/add_scaffold.png)
 
@@ -466,7 +466,7 @@ Update-Database
 
 `Add-Migration` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます (*RazorPagesMovieContext.cs* ファイル内)。 `InitialCreate` 引数は、移行の名前を指定するために使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が使用されます。 詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。
 
-`Update-Database` コマンドは、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドを実行します。 `Up` メソッドにより、データベースが作成されます。
+`Update-Database` コマンドによって、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドが実行されます。 `Up` メソッドにより、データベースが作成されます。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 

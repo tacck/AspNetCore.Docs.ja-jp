@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core の Razor Pages と EF Core - 並べ替え、フィルター、ページング - 3/8
+title: パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
 author: rick-anderson
-description: このチュートリアルでは、ASP.NET Core および Entity Framework Core を使用して並べ替え、フィルター、ページング機能を Razor ページに追加します。
+description: Razor ページと Entity Framework チュートリアル シリーズのパート 3。
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 9563f3ef52ce429eb0a58b468acb8e9cd7b276e2
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 99b14c99cb99d106604f1a4edacf1da0a2d6125c
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645494"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652592"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>ASP.NET Core の Razor Pages と EF Core - 並べ替え、フィルター、ページング - 3/8
+# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -45,7 +51,7 @@ ms.locfileid: "78645494"
 
 インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
 
-`NameSort` および `DateSort` は、Razor Page で、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
+`NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -92,7 +98,7 @@ ms.locfileid: "78645494"
 
 Students インデックス ページにフィルターを追加するには
 
-* テキスト ボックスと [送信] ボタンが、Razor Page に追加されます。 テキスト ボックスは、名と姓で検索文字列を指定します。
+* テキスト ボックスと [送信] ボタンが、Razor ページに追加されます。 テキスト ボックスは、名と姓で検索文字列を指定します。
 * テキスト ボックスの値を使用するようにページ モデルが更新されます。
 
 ### <a name="update-the-ongetasync-method"></a>OnGetAsync メソッドの更新
@@ -126,7 +132,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 詳細については、「[Sqlite プロバイダーで大文字と小文字を区別しないクエリを使用する方法](https://github.com/aspnet/EntityFrameworkCore/issues/11414)」を参照してください。
 
-### <a name="update-the-razor-page"></a>Razor Page の更新
+### <a name="update-the-razor-page"></a>Razor ページを更新する
 
 *Pages/Students/Index.cshtml* のコードを置き換えて、 **[検索]** ボタンと類別されたクロムを作成します。
 
@@ -187,9 +193,9 @@ https://localhost:<port>/Students?SearchString=an
 
 ページングのリンクをクリックすると、ページ インデックス変数に表示するページ番号が含まれます。
 
-`CurrentSort` プロパティでは、現在の並べ替え順序を含む Razor Page を提供します。 ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。
+`CurrentSort` プロパティでは、現在の並べ替え順序を含む Razor ページを提供します。 ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。
 
-`CurrentFilter` プロパティでは、現在のフィルター文字列を含む Razor Page を提供します。 `CurrentFilter` 値:
+`CurrentFilter` プロパティでは、現在のフィルター文字列を含む Razor ページを提供します。 `CurrentFilter` 値:
 
 * ページングの中に、フィルターの設定を維持するために、ページング リンクに含まれている必要があります。
 * ページがリダイレクトされるときに、テキスト ボックスに復元される必要があります。
@@ -199,11 +205,11 @@ https://localhost:<port>/Students?SearchString=an
   * 検索文字列が変更されます。
   * `searchString` パラメーターは null ではありません。
 
-  `PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor Page に渡されます。
+  `PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor ページに渡されます。
 
   `PaginatedList.CreateAsync` 呼び出しの `pageIndex` の後の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
 
-### <a name="add-paging-links-to-the-razor-page"></a>Razor Page にページングのリンクを追加する
+### <a name="add-paging-links-to-the-razor-page"></a>Razor ページにページングのリンクを追加する
 
 *Students/Index.cshtml* のコードを次のコードに置き換えます。 変更が強調表示されています。
 
@@ -239,7 +245,7 @@ https://localhost:<port>/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Razor Page の作成
+### <a name="create-the-razor-page"></a>Razor ページを作成する
 
 次のコードを使用して、*Pages/About.cshtml* ファイルを作成します。
 
@@ -294,7 +300,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
 
-`NameSort` および `DateSort` は、Razor Page で、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
+`NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -354,7 +360,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 Students インデックス ページにフィルターを追加するには
 
-* テキスト ボックスと [送信] ボタンが、Razor Page に追加されます。 テキスト ボックスは、名と姓で検索文字列を指定します。
+* テキスト ボックスと [送信] ボタンが、Razor ページに追加されます。 テキスト ボックスは、名と姓で検索文字列を指定します。
 * テキスト ボックスの値を使用するようにページ モデルが更新されます。
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a>Index メソッドにフィルター機能を追加する
@@ -439,9 +445,9 @@ http://localhost:5000/Students?SearchString=an
 
 ページングのリンクをクリックすると、ページ インデックス変数に表示するページ番号が含まれます。
 
-`CurrentSort` は、現在の並べ替え順序を含む Razor Page を提供します。 ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。
+`CurrentSort` は、現在の並べ替え順序を含む Razor ページを提供します。 ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。
 
-`CurrentFilter` は、現在のフィルター文字列を含む Razor Page を提供します。 `CurrentFilter` 値:
+`CurrentFilter` は、現在のフィルター文字列を含む Razor ページを提供します。 `CurrentFilter` 値:
 
 * ページングの中に、フィルターの設定を維持するために、ページング リンクに含まれている必要があります。
 * ページがリダイレクトされるときに、テキスト ボックスに復元される必要があります。
@@ -453,13 +459,13 @@ http://localhost:5000/Students?SearchString=an
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage3)]
 
-`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor Page に渡されます。
+`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor ページに渡されます。
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage4)]
 
 `PaginatedList.CreateAsync` の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>Student Razor Page にページングのリンクを追加する
+## <a name="add-paging-links-to-the-student-razor-page"></a>学生の Razor ページにページングのリンクを追加する
 
 *Students/Index.cshtml* 内のマークアップを更新する 変更が強調表示されています。
 
@@ -513,7 +519,7 @@ ASP.NET Core 2.2 の Web テンプレートには、About ページが含まれ�
 
 LINQ ステートメントは、登録日で受講者エンティティをグループ化し、各グループ内のエンティティの数を計算して、結果を `EnrollmentDateGroup` ビュー モデル オブジェクトのコレクションに格納します。
 
-### <a name="modify-the-about-razor-page"></a>About Razor Page ページを変更します。
+### <a name="modify-the-about-razor-page"></a>About Razor ページを変更する
 
 *Pages/About.cshtml* ファイルのコードを次のコードに置き換えます。
 

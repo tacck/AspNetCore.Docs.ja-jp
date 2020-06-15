@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 5e617a201cbd133e695bdadc08dc6c797f97b6be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 10d6f0bd6f6b95efbe868e4bc21513460e1f0b67
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773628"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652478"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>チュートリアル: 複合データ モデルを作成する - ASP.NET MVC と EF Core
 
@@ -78,7 +78,7 @@ ms.locfileid: "82773628"
 
 * ブラウザーの既定では、ロケールに基づいて正しい書式を使ってデータがレンダリングされます。
 
-詳細については、[\<入力> タグ ヘルパーに関するドキュメント](../../mvc/views/working-with-forms.md#the-input-tag-helper)を参照してください。
+詳細については、[\<input> タグ ヘルパーに関するドキュメント](../../mvc/views/working-with-forms.md#the-input-tag-helper)を参照してください。
 
 アプリを実行し、Students インデックス ページに移動すると、登録日の時刻が表示されなくなっていることがわかります。 Student モデルを使用するどのビューでも同様です。
 
@@ -95,7 +95,7 @@ ms.locfileid: "82773628"
 `StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 `RegularExpression` 属性を使用して、入力に制限を適用することができます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 `MaxLength` 属性は、`StringLength` 属性と同様の機能を提供しますが、クライアント側の検証は提供しません。

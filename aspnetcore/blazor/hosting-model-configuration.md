@@ -1,11 +1,11 @@
 ---
-title: "title:'ASP.NET Core Blazor ホスティング モデルの構成' author: guardrex description:'Razor コンポーネントを Razor Pages および MVC アプリに統合する方法など、Blazor ホスティング モデルの構成について学習します。'"
+title: ASP.NET Core Blazor ホスティング モデルの構成
 author: guardrex
-description: "monikerRange: '>= aspnetcore-3.1' ms.author: riande ms.custom: mvc ms.date:05/28/2020 no-loc:"
+description: Razor コンポーネントを Razor Pages および MVC アプリに統合する方法など、Blazor ホスティング モデルの構成について学習します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,30 +13,30 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: e3b8b91a570210e77f307c49f7be21eeab714daa
-ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
+ms.openlocfilehash: 3cef67806ce0e2e045122bdc962e93795be68572
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84355111"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679580"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>'Blazor'
+# <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
-'Identity'
+作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
-'Let's Encrypt'
+この記事では、ホスティング モデルの構成について説明します。
 
-## <a name="blazor-webassembly"></a>'Razor'
+## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-### <a name="environment"></a>'SignalR' uid: blazor/hosting-model-configuration
+### <a name="environment"></a>環境
 
-ASP.NET Core Blazor ホスティング モデルの構成 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
+アプリをローカルで実行する場合、環境は既定で開発に設定されます。 アプリが発行されると、環境は既定で実稼働になります。
 
-この記事では、ホスティング モデルの構成について説明します。 Blazor WebAssembly 環境 アプリをローカルで実行する場合、環境は既定で開発に設定されます。
+ホストされている Blazor WebAssembly アプリは、`blazor-environment` ヘッダーを追加して環境をブラウザーに送信するミドルウェアを介して、サーバーから環境を取得します。 ヘッダーの値は環境です。 ホストされた Blazor アプリとサーバー アプリによって、同じ環境が共有されます。 環境の構成方法などの詳細については、「<xref:fundamentals/environments>」を参照してください。
 
-アプリが発行されると、環境は既定で実稼働になります。 ホストされている Blazor WebAssembly アプリは、`blazor-environment` ヘッダーを追加して環境をブラウザーに送信するミドルウェアを介して、サーバーから環境を取得します。
+ローカルで実行されているスタンドアロン アプリの場合、開発サーバーでは `blazor-environment` ヘッダーが追加され、開発環境が指定されます。 他のホスト環境の環境を指定するには、`blazor-environment` ヘッダーを追加します。
 
-ヘッダーの値は環境です。 ホストされた Blazor アプリとサーバー アプリによって、同じ環境が共有されます。
+次の IIS の例では、発行された *web.config* ファイルにカスタム ヘッダーを追加しています。 *web.config* ファイルは、*bin/Release/{TARGET FRAMEWORK}/publish* フォルダーにあります。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -55,9 +55,9 @@ ASP.NET Core Blazor ホスティング モデルの構成 作成者: [Daniel Rot
 ```
 
 > [!NOTE]
-> 環境の構成方法などの詳細については、「<xref:fundamentals/environments>」を参照してください。
+> アプリが *publish* フォルダーに発行されたときに上書きされない IIS 用のカスタム *web.config* ファイルを使用するには、「ASP.NET Core Blazor WebAssembly をホストしてデプロイする<xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>」を参照してください。
 
-ローカルで実行されているスタンドアロン アプリの場合、開発サーバーでは `blazor-environment` ヘッダーが追加され、開発環境が指定されます。
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> を挿入し、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> プロパティを読み取ることで、コンポーネント内のアプリの環境を取得します。
 
 ```razor
 @page "/"
@@ -69,7 +69,7 @@ ASP.NET Core Blazor ホスティング モデルの構成 作成者: [Daniel Rot
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-他のホスト環境の環境を指定するには、`blazor-environment` ヘッダーを追加します。
+起動時に、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> では、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> プロパティを使用して <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> が公開されます。これにより、開発者は環境固有のロジックをコードに含めることができます。
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -78,7 +78,7 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-次の IIS の例では、発行された *web.config* ファイルにカスタム ヘッダーを追加しています。
+次の便利な拡張メソッドを使用すると、現在の環境で開発、運用、ステージング、およびカスタムの環境名を確認できます。
 
 * `IsDevelopment()`
 * `IsProduction()`
@@ -97,25 +97,25 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-*web.config* ファイルは、*bin/Release/{TARGET FRAMEWORK}/publish* フォルダーにあります。
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> プロパティは、<xref:Microsoft.AspNetCore.Components.NavigationManager> サービスを利用できないときの起動時に使用できます。
 
-### <a name="configuration"></a>アプリが *publish* フォルダーに発行されたときに上書きされない IIS 用のカスタム *web.config* ファイルを使用するには、「ASP.NET Core Blazor WebAssembly をホストしてデプロイする<xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>」を参照してください。
+### <a name="configuration"></a>構成
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> を挿入し、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> プロパティを読み取ることで、コンポーネント内のアプリの環境を取得します。
+Blazor WebAssembly では、以下から構成を読み込みます。
 
-* 起動時に、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> では、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> プロパティを使用して <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> が公開されます。これにより、開発者は環境固有のロジックをコードに含めることができます。
-  * 次の便利な拡張メソッドを使用すると、現在の環境で開発、運用、ステージング、およびカスタムの環境名を確認できます。
-  * <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> プロパティは、<xref:Microsoft.AspNetCore.Components.NavigationManager> サービスを利用できないときの起動時に使用できます。
-* 構成 Blazor WebAssembly では、以下から構成を読み込みます。 既定のアプリ設定ファイル
+* 既定のアプリ設定ファイル
+  * *wwwroot/appsettings.json*
+  * *wwwroot/appsettings.{ENVIRONMENT}.json*
+* アプリによって登録されたその他の[構成プロバイダー](xref:fundamentals/configuration/index)。 すべてのプロバイダーが Blazor WebAssembly アプリに適しているわけではありません。 どのプロバイダーが Blazor WebAssembly でサポートされているかについては、「[Blazor WASM の構成プロバイダーの明確化 (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134)」で追跡されています。
 
 > [!WARNING]
-> *wwwroot/appsettings.json* *wwwroot/appsettings.{ENVIRONMENT}.json*
+> Blazor WebAssembly アプリでの構成は、ユーザーに表示されます。 **アプリのシークレットや資格情報を構成に保存しないでください。**
 
-アプリによって登録されたその他の[構成プロバイダー](xref:fundamentals/configuration/index)。
+構成プロバイダーの詳細については、「<xref:fundamentals/configuration/index>」を参照してください。
 
-#### <a name="app-settings-configuration"></a>すべてのプロバイダーが Blazor WebAssembly アプリに適しているわけではありません。
+#### <a name="app-settings-configuration"></a>アプリ設定の構成
 
-どのプロバイダーが Blazor WebAssembly でサポートされているかについては、「[Blazor WASM の構成プロバイダーの明確化 (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134)」で追跡されています。
+*wwwroot/appsettings.json*:
 
 ```json
 {
@@ -123,7 +123,7 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 }
 ```
 
-Blazor WebAssembly アプリでの構成は、ユーザーに表示されます。
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
 
 ```razor
 @page "/"
@@ -135,11 +135,11 @@ Blazor WebAssembly アプリでの構成は、ユーザーに表示されます�
 <p>Message: @Configuration["message"]</p>
 ```
 
-#### <a name="provider-configuration"></a>**アプリのシークレットや資格情報を構成に保存しないでください。**
+#### <a name="provider-configuration"></a>プロバイダーの構成
 
-構成プロバイダーの詳細については、「<xref:fundamentals/configuration/index>」を参照してください。
+次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> を使用して追加の構成を指定します。
 
-アプリ設定の構成
+`Program.Main`:
 
 ```csharp
 using Microsoft.Extensions.Configuration.Memory;
@@ -163,7 +163,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 builder.Configuration.Add(memoryConfig);
 ```
 
-*wwwroot/appsettings.json*:
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
 
 ```razor
 @page "/"
@@ -188,9 +188,9 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。 プロバイダーの構成
+その他の構成ファイルを *wwwroot* フォルダーから構成に読み取るには、<xref:System.Net.Http.HttpClient> を使用してファイルの内容を取得します。 この方法を使用する場合、既存の <xref:System.Net.Http.HttpClient> サービスの登録では、次の例に示すように、作成されたローカル クライアントを使用してファイルを読み取ることができます。
 
-次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> を使用して追加の構成を指定します。
+*wwwroot/cars.json*:
 
 ```json
 {
@@ -218,9 +218,9 @@ using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
 ```
 
-#### <a name="authentication-configuration"></a>構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
+#### <a name="authentication-configuration"></a>認証の構成
 
-その他の構成ファイルを *wwwroot* フォルダーから構成に読み取るには、<xref:System.Net.Http.HttpClient> を使用してファイルの内容を取得します。
+*wwwroot/appsettings.json*:
 
 ```json
 {
@@ -231,22 +231,22 @@ builder.Configuration.AddJsonStream(stream);
 }
 ```
 
-この方法を使用する場合、既存の <xref:System.Net.Http.HttpClient> サービスの登録では、次の例に示すように、作成されたローカル クライアントを使用してファイルを読み取ることができます。
+`Program.Main`:
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
     builder.Configuration.Bind("Local", options.ProviderOptions));
 ```
 
-#### <a name="logging-configuration"></a>*wwwroot/cars.json*:
+#### <a name="logging-configuration"></a>ログの構成
 
-`Program.Main`:
+[Microsoft.Extensions.Logging.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/) のパッケージ参照を追加します。
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-認証の構成
+*wwwroot/appsettings.json*:
 
 ```json
 {
@@ -260,7 +260,7 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-*wwwroot/appsettings.json*:
+`Program.Main`:
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -271,34 +271,65 @@ builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 ```
 
-#### <a name="host-builder-configuration"></a>`Program.Main`:
+#### <a name="host-builder-configuration"></a>ホスト ビルダーの構成
 
-ログの構成
+`Program.Main`:
 
 ```csharp
 var hostname = builder.Configuration["HostName"];
 ```
 
-#### <a name="cached-configuration"></a>[Microsoft.Extensions.Logging.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/) のパッケージ参照を追加します。
+#### <a name="cached-configuration"></a>キャッシュされた構成
 
-*wwwroot/appsettings.json*: `Program.Main`: ホスト ビルダーの構成
+構成ファイルは、オフラインで使用できるようにキャッシュされます。 [プログレッシブ Web アプリケーション (PWA)](xref:blazor/progressive-web-app) では、新しい展開を作成するときにのみ構成ファイルを更新できます。 次の理由により、展開間で構成ファイルを編集しても意味がありません。
 
-* `Program.Main`:
-* キャッシュされた構成
+* ユーザーには、引き続き使用するファイルのキャッシュされたバージョンがあります。
+* PWA の *service-worker.js* ファイルと *service-worker-assets.js* ファイルは、コンパイル時に再構築される必要があります。これにより、ユーザーの次回のオンライン アクセス時に、アプリが再展開されたことが通知されます。
 
-構成ファイルは、オフラインで使用できるようにキャッシュされます。
+PWA によるバックグラウンド更新の処理方法の詳細については、「<xref:blazor/progressive-web-app#background-updates>」を参照してください。
 
-### <a name="logging"></a>[プログレッシブ Web アプリケーション (PWA)](xref:blazor/progressive-web-app) では、新しい展開を作成するときにのみ構成ファイルを更新できます。
-
-次の理由により、展開間で構成ファイルを編集しても意味がありません。
-
-## <a name="blazor-server"></a>ユーザーには、引き続き使用するファイルのキャッシュされたバージョンがあります。
-
-### <a name="reflect-the-connection-state-in-the-ui"></a>PWA の *service-worker.js* ファイルと *service-worker-assets.js* ファイルは、コンパイル時に再構築される必要があります。これにより、ユーザーの次回のオンライン アクセス時に、アプリが再展開されたことが通知されます。
-
-PWA によるバックグラウンド更新の処理方法の詳細については、「<xref:blazor/progressive-web-app#background-updates>」を参照してください。 ログの記録
+### <a name="logging"></a>ログの記録
 
 Blazor WebAssembly ログ記録の詳細については、「<xref:fundamentals/logging/index#create-logs-in-blazor>」を参照してください。
+
+### <a name="signalr-cross-origin-negotiation-for-authentication"></a>認証のための SignalR のクロスオリジンネゴシエーション
+
+Cookie や HTTP 認証ヘッダーなどの資格情報を送信するように SignalR の基となるクライアントを構成するには:
+
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> を使用して、クロスオリジン [フェッチ](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch)要求に <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> を設定します。
+
+  ```csharp
+  public class IncludeRequestCredentialsMessagHandler : DelegatingHandler
+  {
+      protected override Task<HttpResponseMessage> SendAsync(
+          HttpRequestMessage request, CancellationToken cancellationToken)
+      {
+          request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+          return base.SendAsync(request, cancellationToken);
+      }
+  }
+  ```
+
+* <xref:System.Net.Http.HttpMessageHandler> を <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> オプションに割り当てます。
+
+  ```csharp
+  var client = new HubConnectionBuilder()
+      .WithUrl(new Uri("http://signalr.example.com"), options =>
+      {
+          options.HttpMessageHandlerFactory = innerHandler => 
+              new IncludeRequestCredentialsMessagHandler { InnerHandler = innerHandler };
+      }).Build();
+  ```
+
+詳細については、「<xref:signalr/configuration#configure-additional-options>」を参照してください。
+
+## <a name="blazor-server"></a>Blazor サーバー
+
+### <a name="reflect-the-connection-state-in-the-ui"></a>UI に接続状態を反映する
+
+接続が失われたことがクライアントで検出されると、クライアントによって再接続が試行される間、ユーザーに対して既定の UI が表示されます。 再接続に失敗した場合、ユーザーには再試行のオプションが表示されます。
+
+UI をカスタマイズするには、 *_Host.cshtml* Razor ページの `<body>` に、`components-reconnect-modal` の `id` を持つ要素を定義します。
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -306,18 +337,18 @@ Blazor WebAssembly ログ記録の詳細については、「<xref:fundamentals/
 </div>
 ```
 
-Blazor サーバー
+次の表では、`components-reconnect-modal` 要素に適用される CSS クラスについて説明します。
 
-| UI に接続状態を反映する                       | 接続が失われたことがクライアントで検出されると、クライアントによって再接続が試行される間、ユーザーに対して既定の UI が表示されます。 |
+| CSS クラス                       | 示す内容&hellip; |
 | ------------------------------- | ----------------- |
-| `components-reconnect-show`     | 再接続に失敗した場合、ユーザーには再試行のオプションが表示されます。 UI をカスタマイズするには、 *_Host.cshtml* Razor ページの `<body>` に、`components-reconnect-modal` の `id` を持つ要素を定義します。 次の表では、`components-reconnect-modal` 要素に適用される CSS クラスについて説明します。 |
-| `components-reconnect-hide`     | CSS クラス 示す内容&hellip; |
-| `components-reconnect-failed`   | 接続が失われました。 クライアントによって再接続が試行されています。 |
-| `components-reconnect-rejected` | モーダルを表示します。 サーバーへのアクティブな接続が再確立されます。 モーダルを非表示にします。 再接続に失敗しました。ネットワーク障害が原因である可能性があります。<ul><li>再接続を試みるには、`window.Blazor.reconnect()` を呼び出します。</li><li>再接続が拒否されました。 サーバーに到達したが接続が拒否されたため、サーバー上のユーザーの状態が失われました。</li><li>アプリを再度読み込むには、`location.reload()` を呼び出します。</li></ul> |
+| `components-reconnect-show`     | 接続が失われました。 クライアントによって再接続が試行されています。 モーダルを表示します。 |
+| `components-reconnect-hide`     | サーバーへのアクティブな接続が再確立されます。 モーダルを非表示にします。 |
+| `components-reconnect-failed`   | 再接続に失敗しました。ネットワーク障害が原因である可能性があります。 再接続を試みるには、`window.Blazor.reconnect()` を呼び出します。 |
+| `components-reconnect-rejected` | 再接続が拒否されました。 サーバーに到達したが接続が拒否されたため、サーバー上のユーザーの状態が失われました。 アプリを再度読み込むには、`location.reload()` を呼び出します。 この接続状態は、次の場合に発生する可能性があります。<ul><li>サーバー側回線でクラッシュが発生した場合。</li><li>クライアントが長時間切断されているため、サーバーでユーザーの状態が削除された場合。 ユーザーが対話しているコンポーネントのインスタンスは破棄されます。</li><li>サーバーが再起動されたか、アプリのワーカー プロセスがリサイクルされた場合。</li></ul> |
 
-### <a name="render-mode"></a>この接続状態は、次の場合に発生する可能性があります。
+### <a name="render-mode"></a>表示モード
 
-サーバー側回線でクラッシュが発生した場合。 クライアントが長時間切断されているため、サーバーでユーザーの状態が削除された場合。
+Blazor サーバー アプリは、サーバーへのクライアント接続が確立される前に、サーバー上の UI をプリレンダリングするよう既定で設定されます。 これは、 *_Host.cshtml* Razor ページで設定されます。
 
 ```cshtml
 <body>
@@ -329,27 +360,27 @@ Blazor サーバー
 </body>
 ```
 
-ユーザーが対話しているコンポーネントのインスタンスは破棄されます。
+<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> によって、コンポーネントに対して以下の構成が行われます。
 
-* サーバーが再起動されたか、アプリのワーカー プロセスがリサイクルされた場合。
-* 表示モード
+* ページに事前レンダリングするかどうか。
+* ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
 
-| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Blazor サーバー アプリは、サーバーへのクライアント接続が確立される前に、サーバー上の UI をプリレンダリングするよう既定で設定されます。 |
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | 説明 |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | これは、 *_Host.cshtml* Razor ページで設定されます。 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> によって、コンポーネントに対して以下の構成が行われます。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | ページに事前レンダリングするかどうか。 ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。 説明 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | コンポーネントを静的 HTML にレンダリングし、Blazor Server アプリのマーカーを含めます。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | コンポーネントを静的 HTML にレンダリングし、Blazor Server アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | コンポーネントを静的 HTML にレンダリングします。 |
 
-このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。
+静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
 
-### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor Server アプリのマーカーをレンダリングします。
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor サーバー アプリ用に SignalR クライアントを構成する
 
-コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。
+場合によっては、Blazor サーバー アプリによって使用される SignalR クライアントを構成する必要があります。 たとえば、接続の問題を診断するために SignalR クライアントのログ記録を構成できます。
 
-コンポーネントを静的 HTML にレンダリングします。
+*Pages/_Host* ファイルで SignalR クライアントを構成するには、次の手順に従います。
 
-* 静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
-* Blazor サーバー アプリ用に SignalR クライアントを構成する
+* `blazor.server.js` スクリプトの `<script>` タグに `autostart="false"` 属性を追加します。
+* `Blazor.start` を呼び出し、SignalR ビルダーを指定する構成オブジェクトを渡します。
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
@@ -362,6 +393,6 @@ Blazor サーバー
 </script>
 ```
 
-### <a name="logging"></a>場合によっては、Blazor サーバー アプリによって使用される SignalR クライアントを構成する必要があります。
+### <a name="logging"></a>ログの記録
 
-たとえば、接続の問題を診断するために SignalR クライアントのログ記録を構成できます。
+Blazor サーバー ログのサポートの詳細については、「<xref:fundamentals/logging/index#create-logs-in-blazor>」を参照してください。

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ddc14aba14e31c5530cda14b4792736da001246a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2fcfd46057935cadac76c558a78729a1c096ffc0
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767240"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451827"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -108,11 +108,13 @@ ms.locfileid: "82767240"
 
   ![macOS の新しいソリューション](first-web-api-mac/_static/sln.png)
 
-* **[.NET Core]** > **[アプリ]** > **[API]** > **[次へ]** の順に選択します。
+* バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]**  >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]** \(Web とコンソール\) >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。
 
-  ![macOS の [新しいプロジェクト] ダイアログ](first-web-api-mac/_static/1.png)
-  
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、* *[.NET Core 3.1]* の **[ターゲット フレームワーク]** を選択します。
+  ![macOS での API テンプレートの選択](first-web-api-mac/_static/api_template.png)
+
+* **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されていることを確認します。 **[次へ]** を選択します。
+
+  ![macOS .NET Core 3.1 の選択](first-web-api-mac/_static/api_31_config.png)
 
 * **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
@@ -422,7 +424,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 ## <a name="return-values"></a>戻り値
 
-`GetTodoItems` メソッドと `GetTodoItem` メソッドの戻り値の型は、[ActionResult\<T> 型です](xref:web-api/action-return-types#actionresultt-type)。 ASP.NET Core は自動的にオブジェクトを [JSON](https://www.json.org/) にシリアル化して、応答メッセージの本文に JSON を書き込みます。 この戻り値の型の応答コードは 200 で、ハンドルされない例外がないものと想定します。 ハンドルされない例外は 5xx エラーに変換されます。
+`GetTodoItems` と `GetTodoItem` メソッドの戻り値の型は、[ActionResult\<T> 型](xref:web-api/action-return-types#actionresultt-type)です。 ASP.NET Core は自動的にオブジェクトを [JSON](https://www.json.org/) にシリアル化して、応答メッセージの本文に JSON を書き込みます。 この戻り値の型の応答コードは 200 で、ハンドルされない例外がないものと想定します。 ハンドルされない例外は 5xx エラーに変換されます。
 
 `ActionResult` 戻り値の型は、幅広い範囲の HTTP 状態コードを表すことができます。 たとえば、`GetTodoItem` は、次の 2 つの異なる状態値を返す可能性があります。
 
@@ -580,7 +582,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
   これらのコマンドでは、新しい Web API プロジェクトが作成され、新しいプロジェクト フォルダー内に Visual Studio Code の新しいインスタンスが開かれます。
 
-* ダイアログ ボックスで、プロジェクトに必要なアセットを追加するかどうかを確認されたら、 **[はい]** を選択します。
+* ダイアログ ボックスで、プロジェクトに必要な資産を追加するかどうかを確認されたら、 **[はい]** を選択します。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
@@ -588,9 +590,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
   ![macOS の新しいソリューション](first-web-api-mac/_static/sln.png)
 
-* **[.NET Core]** > **[アプリ]** > **[API]** > **[次へ]** の順に選択します。
-
-  ![macOS の [新しいプロジェクト] ダイアログ](first-web-api-mac/_static/1.png)
+* バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]**  >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]** \(Web とコンソール\) >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。
   
 * **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログ ボックスで、既定の**ターゲット フレームワーク** * *.NET Core 2.2* を受け入れます。
 
@@ -771,7 +771,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 ## <a name="return-values"></a>戻り値
 
-`GetTodoItems` メソッドと `GetTodoItem` メソッドの戻り値の型は、[ActionResult\<T> 型です](xref:web-api/action-return-types#actionresultt-type)。 ASP.NET Core は自動的にオブジェクトを [JSON](https://www.json.org/) にシリアル化して、応答メッセージの本文に JSON を書き込みます。 この戻り値の型の応答コードは 200 で、ハンドルされない例外がないものと想定します。 ハンドルされない例外は 5xx エラーに変換されます。
+`GetTodoItems` と `GetTodoItem` メソッドの戻り値の型は、[ActionResult\<T> 型](xref:web-api/action-return-types#actionresultt-type)です。 ASP.NET Core は自動的にオブジェクトを [JSON](https://www.json.org/) にシリアル化して、応答メッセージの本文に JSON を書き込みます。 この戻り値の型の応答コードは 200 で、ハンドルされない例外がないものと想定します。 ハンドルされない例外は 5xx エラーに変換されます。
 
 `ActionResult` 戻り値の型は、幅広い範囲の HTTP 状態コードを表すことができます。 たとえば、`GetTodoItem` は、次の 2 つの異なる状態値を返す可能性があります。
 

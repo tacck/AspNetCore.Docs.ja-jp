@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core の Razor ページと EF Core - コンカレンシー - 8/8
+title: パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー
 author: rick-anderson
-description: このチュートリアルでは、複数のユーザーが同じエンティティを同時に更新するときの競合の処理方法について説明します。
+description: Razor Pages と Entity Framework チュートリアル シリーズのパート 8。
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: c4d43f26ba80e7922c3cbd37d9a5f8e1561b11ad
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: fb6a59a11cf31dff4866d5f5294cd9f15b173add
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78645878"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652432"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core の Razor ページと EF Core - コンカレンシー - 8/8
+# <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)、[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -154,7 +160,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* ターミナルで次のコマンドを実行します。
+* 端末で次のコマンドを実行します。
 
   ```dotnetcli
   dotnet ef migrations add RowVersion
@@ -188,7 +194,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
   * ランダムな BLOB 値を使用して既存の行を更新します。
   * 行が更新されるたびに RowVersion 列をランダムな BLOB 値に設定するデータベース トリガーを追加します。
 
-* ターミナルで次のコマンドを実行します。
+* 端末で次のコマンドを実行します。
 
   ```dotnetcli
   dotnet ef database update
@@ -272,7 +278,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
-`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。 Razor ページでは、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。
+`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。 Razor ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。
 
 ### <a name="update-the-razor-page"></a>Razor ページを更新する
 
@@ -327,7 +333,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 * DbUpdateConcurrencyException 例外がスローされます。
 * `OnGetAsync` が `concurrencyError` と共に呼び出されます。
 
-### <a name="update-the-delete-razor-page"></a>Delete Razor ページを更新する
+### <a name="update-the-delete-razor-page"></a>[削除] Razor ページを更新する
 
 次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
 
@@ -568,7 +574,7 @@ Index ページを更新するために、次を実行します。
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
-`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。 Razor ページでは、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。
+`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。 Razor ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。
 
 ## <a name="update-the-edit-page"></a>[編集] ページを更新する
 

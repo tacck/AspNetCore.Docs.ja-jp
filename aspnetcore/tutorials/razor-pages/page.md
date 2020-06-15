@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core でスキャフォールディングされた Razor ページ
+title: パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
 author: rick-anderson
-description: スキャフォールディングによって生成された Razor ページについて説明します。
+description: Razor ページのチュートリアル シリーズのパート 3。
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 22afbc729cc73427b3d04bee379534cda38b39bd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6195982f902c17d835d2675c1231eed347d603c2
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774848"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652815"
 ---
-# <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core でスキャフォールディングされた Razor ページ
+# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -50,7 +50,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="the-page-directive"></a>@page ディレクティブ
 
-`@page` Razor ディレクティブを使うと、ファイルが MVC アクションになります。つまり、これで要求を処理できます。 `@page` はページで最初の Razor ディレクティブである必要があります。 `@page` は、Razor 固有のマークアップへの移行の例です。 詳細については、「[Razor syntax](xref:mvc/views/razor#razor-syntax)」 (Razor の構文) を参照してください。
+`@page` Razor ディレクティブを使うと、ファイルが MVC アクションになります。つまり、これで要求を処理できます。 `@page` はページ上で最初の Razor ディレクティブである必要があります。 `@page` は、Razor 固有のマークアップへの移行の例です。 詳細については、「[Razor の構文](xref:mvc/views/razor#razor-syntax)」を参照してください。
 
 次の HTML ヘルパーで使用されるラムダ式を確認します。
 
@@ -151,7 +151,7 @@ changing in in the next step.
 
 モデル エラーがない場合、データは保存され、ブラウザーはインデックス ページにリダイレクトされます。
 
-### <a name="the-create-razor-page"></a>[作成] Razor ページ
+### <a name="the-create-razor-page"></a>Razor の作成ページ
 
 次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 
@@ -229,7 +229,7 @@ Visual Studio に、タグ ヘルパーで使用される独特な太字のフ�
 
 Razor ページは `PageModel` から派生します。 慣例により、`PageModel` 派生クラスは `<PageName>Model` と呼ばれます。 コンストラクターは[依存性の注入](xref:fundamentals/dependency-injection)を使用して、`RazorPagesMovieContext` をページに追加します。 スキャフォールディングされたページではすべてこのパターンに従います。 Entity Framework での非同期プログラミングの詳細については、「[非同期コード](xref:data/ef-rp/intro#asynchronous-code)」を参照してください。
 
-ページに対して要求が行われると、`OnGetAsync` メソッドは Razor ページにムービーのリストを返します。 Razor ページで `OnGetAsync` または `OnGet` が呼び出され、ページの状態が初期化されます。 この場合、`OnGetAsync` でムービーのリストを取得し、表示します。
+ページに対して要求が行われると、`OnGetAsync` メソッドは Razor ページにムービーのリストを返します。 `OnGetAsync` または `OnGet` が Razor ページで呼び出され、ページの状態が初期化されます。 この場合、`OnGetAsync` でムービーのリストを取得し、表示します。
 
 `OnGet` が `void` を返す場合、または `OnGetAsync` が `Task` を返す場合、return メソッドは使用されません。 戻り値の型が `IActionResult` または `Task<IActionResult>` の場合は、return ステートメントを指定する必要があります。 たとえば、*Pages/Movies/Create.cshtml.cs* `OnPostAsync` メソッドでは、次のようになります。
 
@@ -241,7 +241,7 @@ Razor ページは `PageModel` から派生します。 慣例により、`PageM
 
 Razor では、HTML から C# または Razor 固有のマークアップに移行できます。 `@` シンボルの後に [Razor で予約済みのキーワード](xref:mvc/views/razor#razor-reserved-keywords)が続いている場合は、Razor 固有のマークアップに移行します。それ以外の場合は、C# に移行します。
 
-`@page` Razor ディレクティブはファイルを MVC アクションに分割します。これは、要求を処理できることを意味します。 `@page` はページで最初の Razor ディレクティブである必要があります。 `@page` は、Razor 固有のマークアップへの移行の例です。 詳細については、「[Razor syntax](xref:mvc/views/razor#razor-syntax)」 (Razor の構文) を参照してください。
+`@page` Razor ディレクティブを使うと、ファイルが MVC アクションになります。つまり、これで要求を処理できます。 `@page` はページ上で最初の Razor ディレクティブである必要があります。 `@page` は、Razor 固有のマークアップへの移行の例です。 詳細については、「[Razor の構文](xref:mvc/views/razor#razor-syntax)」を参照してください。
 
 次の HTML ヘルパーで使用されるラムダ式を確認します。
 
@@ -337,7 +337,7 @@ changing in in the next step.
 
 モデル エラーがない場合、データは保存され、ブラウザーはインデックス ページにリダイレクトされます。
 
-### <a name="the-create-razor-page"></a>[作成] Razor ページ
+### <a name="the-create-razor-page"></a>Razor の作成ページ
 
 次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 

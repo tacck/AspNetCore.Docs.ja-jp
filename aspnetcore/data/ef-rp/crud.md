@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core の Razor ページと EF Core - CRUD - 2/8
+title: パート 2、ASP.NET Core の Razor Pages と EF Core - CRUD
 author: rick-anderson
-description: EF Core で作成、読み取り、更新、削除を行う方法を示します。
+description: Razor Pages と Entity Framework チュートリアル シリーズのパート 2。
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 62e35639d5e3d43bd20c9f92b75fa101d7914f82
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78650150"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652358"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>ASP.NET Core の Razor ページと EF Core - CRUD - 2/8
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>パート 2、ASP.NET Core の Razor Pages と EF Core - CRUD
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -90,7 +96,7 @@ Create ページのスキャフォールディングされた `OnPostAsync` コ�
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-アプリの作成または更新の Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` を設定することが可能です。 ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。 元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。
+アプリの作成または更新の Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。 ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。 元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。
 
 `Secret` フォーム フィールドに対してハッカーが指定した値はいずれも、データベース内で更新されます。 次の図では、Fiddler ツールを使用して、ポストされたフォームの値に `Secret` フィールド (値 "OverPost" を含む) が追加されています。
 
@@ -104,7 +110,7 @@ Create ページのスキャフォールディングされた `OnPostAsync` コ�
 
 アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。 ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。 ビュー モデルには、使用する UI に必要なプロパティのみが含まれています (たとえば、Create ページ)。
 
-一部のアプリでは、ビュー モデルに加えて、Razor ページのページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。 
+一部のアプリでは、ビュー モデルに加えて、Razor Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。 
 
 次の `Student` ビュー モデルを考えてみます。
 
@@ -167,7 +173,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 * データベース例外がキャッチされます。
 * [削除] ページの `OnGetAsync` メソッドが、`saveChangesError=true` を指定して呼び出されます。
 
-Delete Razor ページ (*Pages/Students/Delete.cshtml*) にエラー メッセージを追加します。
+[削除] Razor ページ (*Pages/Students/Delete.cshtml*) にエラー メッセージを追加します。
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -185,9 +191,9 @@ Delete Razor ページ (*Pages/Students/Delete.cshtml*) にエラー メッセ�
 
 このチュートリアルでは、スキャフォールディング CRUD (作成、読み取り、更新、削除) コードのレビューとカスタマイズを行います。
 
-複雑さを最小限に抑え、これらのチュートリアルを通して主眼を EF Core に置くために、EF Core コードはページ モデルで使用されています。 一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (Razor ページ) とデータ アクセス層との間に抽象化レイヤーを作成しています。
+複雑さを最小限に抑え、これらのチュートリアルを通して主眼を EF Core に置くために、EF Core コードはページ モデルで使用されています。 一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (Razor Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。
 
-このチュートリアルでは、*Student* フォルダー内の [作成]、[編集]、[削除]、[詳細] の各 Razor Pages を確認します。
+このチュートリアルでは、*Students* フォルダー内の [作成]、[編集]、[削除]、[詳細] の各 Razor Pages を確認します。
 
 スキャフォールディング コードでは、[作成]、[編集]、[削除] ページに対して次のパターンを使用します。
 
@@ -298,7 +304,7 @@ Students インデックス ページのスキャフォールディング コー
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-アプリの [作成]/[更新] Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` を設定することが可能です。 ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。 元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。
+アプリの作成または更新の Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。 ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。 元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。
 
 `Secret` フォーム フィールドに対してハッカーが指定した値はいずれも、DB 内で更新されます。 次の図では、Fiddler ツールを使用して、ポストされたフォームの値に `Secret` フィールド (値 "OverPost" を含む) が追加されています。
 
@@ -310,7 +316,7 @@ Students インデックス ページのスキャフォールディング コー
 
 ### <a name="view-model"></a>ビュー モデル
 
-ビュー モデルには、通常、アプリケーションで使用されるモデルに含まれるプロパティのサブセットが含まれています。 アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。 ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。 ビュー モデルには、UI レイヤーで必要なプロパティのみが含まれています (たとえば、[作成] ページ)。 一部のアプリでは、ビュー モデルに加えて、Razor ページのページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。 次の `Student` ビュー モデルを考えてみます。
+ビュー モデルには、通常、アプリケーションで使用されるモデルに含まれるプロパティのサブセットが含まれています。 アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。 ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。 ビュー モデルには、UI レイヤーで必要なプロパティのみが含まれています (たとえば、[作成] ページ)。 一部のアプリでは、ビュー モデルに加えて、Razor Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。 次の `Student` ビュー モデルを考えてみます。
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
@@ -324,7 +330,7 @@ Students インデックス ページのスキャフォールディング コー
 
 `StudentVM` を使用するには、`Student` ではなく `StudentVM` を使用するように [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) を更新する必要があります。
 
-Razor ページで、`PageModel` 派生クラスはビュー モデルです。
+Razor Pages で、`PageModel` 派生クラスはビュー モデルです。
 
 ## <a name="update-the-edit-page"></a>[編集] ページを更新する
 
@@ -399,7 +405,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 
 [受講者]/[インデックス] またはその他のリンクが機能しません。
 
-Razor ページに正しい `@page` ディレクティブが含まれていることを確認します。 たとえば、[受講者]/[インデックス] Razor ページにルート テンプレートを含めることは**できません**。
+Razor ページに正しい `@page` ディレクティブが含まれていることを確認します。 たとえば、Students/Index Razor ページにルート テンプレートを含めることは**できません**。
 
 ```cshtml
 @page "{id:int}"

@@ -1,19 +1,25 @@
 ---
-title: ASP.NET Core の Razor ページと EF Core - 関連データの読み込み - 6/8
+title: パート 6、ASP.NET Core の Razor ページと EF Core - 関連データの読み込み
 author: rick-anderson
-description: このチュートリアルでは、関連データ (Entity Framework がナビゲーション プロパティに読み込むデータ) の読み取りと表示を行います。
+description: Razor ページと Entity Framework チュートリアル シリーズのパート 6。
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 0835dbf6b5434e4224d9f56ea3335df4b5d9e119
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277328"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652616"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core の Razor ページと EF Core - 関連データの読み込み - 6/8
+# <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>パート 6、ASP.NET Core の Razor ページと EF Core - 関連データの読み込み
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 

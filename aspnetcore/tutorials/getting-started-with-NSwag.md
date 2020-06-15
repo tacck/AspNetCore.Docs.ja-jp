@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 50096ae6a77d5f8b07e6be795d9401fcbfd421e3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cd4cc6778de7d2156243dc91fba64b2bdb79cf08
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776709"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452123"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag と ASP.NET Core の概要
 
@@ -107,11 +107,11 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 
 次のオプションのいずれかを選択することで、NSwag のコード生成機能を活用できます。
 
-* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) &ndash; API のクライアント コードを C# または TypeScript で生成するための Windows デスクトップ アプリ。
+* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio):API のクライアント コードを C# または TypeScript で生成するための Windows デスクトップ アプリ。
 * [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) または [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) NuGet パッケージ。これは、プロジェクト内でコードを生成するために使用します。
 * [コマンド ライン](https://github.com/RicoSuter/NSwag/wiki/CommandLine)からの NSwag。
 * [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild) NuGet パッケージ。
-* [Unchase OpenAPI (Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) &ndash; C# または TypeScript で API クライアント コードを生成するための Visual Studio の接続済みサービス。 NSwag を使用した OpenAPI サービス用の C# コントローラーも生成されます。
+* [Unchase OpenAPI (Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice):C# または TypeScript で API クライアント コードを生成するための Visual Studio の接続済みサービス。 NSwag を使用した OpenAPI サービス用の C# コントローラーも生成されます。
 
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio を使用したコード生成
 
