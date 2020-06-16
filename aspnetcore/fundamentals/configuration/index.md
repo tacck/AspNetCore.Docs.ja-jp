@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: ead9cb8c852ac768c8fe1f9066eb73ac1203c4ce
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454702"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776541"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -56,7 +56,7 @@ ASP.NET Core の構成は、1つまたは複数の[構成プロバイダー](#cp
 1. [環境変数構成プロバイダー](#evcp)を使用する環境変数。
 1. [コマンドライン構成プロバイダー](#command-line)を使用するコマンドライン引数。
 
-後から追加される構成プロバイダーは、それ以前のキー設定をオーバーライドします。 たとえば、`MyKey` が *appsettings.json* と環境の両方で設定されている場合、環境の値が使用されます。 既定の構成プロバイダーを使用すると、[コマンドライン構成プロバイダー](#command-line-configuration-provider) が他のすべてのプロバイダーをオーバーライドします。
+後から追加される構成プロバイダーは、それ以前のキー設定をオーバーライドします。 たとえば、`MyKey` が *appsettings.json* と環境の両方で設定されている場合、環境の値が使用されます。 既定の構成プロバイダーを使用すると、[コマンドライン構成プロバイダー](#clcp) が他のすべてのプロバイダーをオーバーライドします。
 
 `CreateDefaultBuilder` の詳細については、[既定のビルダー設定](xref:fundamentals/host/generic-host#default-builder-settings)を参照してください。
 
