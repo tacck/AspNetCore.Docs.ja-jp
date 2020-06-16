@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 2dfaba166617c5d0a224f4b47028c141e59ce47f
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: d56be93c4dd46b4712fe793ccd453807517a2022
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652915"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724335"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>パート 8、ASP.NET Core MVC アプリへの新しいフィールドの追加
 
@@ -137,10 +137,7 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-アプリを実行し、`Rating` フィールドでムービーを作成、編集、表示できることを確認します。 アプリを更新する:
-
-* `Rating` フィールドをビュー テンプレートの `Edit`、`Details`、`Delete` に追加します。
-* `MoviesController` の Edit アクション メソッドでバインドを更新します。
+アプリを実行し、`Rating` フィールドでムービーを作成、編集、表示できることを確認します。
 
 > [!div class="step-by-step"]
 > [前へ](search.md)
