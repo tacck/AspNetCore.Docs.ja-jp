@@ -1,12 +1,24 @@
 ---
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
+title: ASP.NET Core Blazor でサポートされているプラットフォーム
+author: guardrex
+description: ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/supported-platforms
+ms.openlocfilehash: c10132c87c93346af89c548363e786967609f3da
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "83607980"
 ---
 # <a name="aspnet-core-blazor-supported-platforms"></a>ASP.NET Core Blazor でサポートされているプラットフォーム
 
@@ -17,345 +29,24 @@ monikerRange: ms.author: ms.custom: ms.date: no-loc:
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 | ブラウザー                          | バージョン               |
-| ---
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------------- | :--- title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-----------: | | Microsoft Edge                   | 最新               | | Mozilla Firefox                  | 最新               | | Google Chrome (Android を含む) | 最新               | | Safari (iOS を含む)            | 最新               | | Microsoft Internet Explorer      | サポートされていません&dagger; |
+| -------------------------------- | :-------------------: |
+| Microsoft Edge                   | [現在]               |
+| Mozilla Firefox                  | [現在]               |
+| Google Chrome (Android を含む) | [現在]               |
+| Safari (iOS を含む)            | [現在]               |
+| Microsoft Internet Explorer      | サポートされていません&dagger; |
 
 &dagger;Microsoft Internet Explorer は [WebAssembly](https://webassembly.org) をサポートしていません。
 
 ### <a name="blazor-server"></a>Blazor サーバー
 
 | ブラウザー                          | バージョン    |
-| ---
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
----------------- | :--- title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
--
-title:'ASP.NET Core Blazor でサポートされているプラットフォーム' author: description:'ASP.NET Core Blazor でサポートされているプラットフォームについて学習します。'
-monikerRange: ms.author: ms.custom: ms.date: no-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- 'SignalR' uid: 
-
-----: | | Microsoft Edge                   | 最新    | | Mozilla Firefox                  | 最新    | | Google Chrome (Android を含む) | 最新    | | Safari (iOS を含む)            | 最新    | | Microsoft Internet Explorer      | 11&dagger; |
+| -------------------------------- | :--------: |
+| Microsoft Edge                   | [現在]    |
+| Mozilla Firefox                  | [現在]    |
+| Google Chrome (Android を含む) | [現在]    |
+| Safari (iOS を含む)            | [現在]    |
+| Microsoft Internet Explorer      | 11&dagger; |
 
 &dagger;追加のポリフィルが必要です (たとえば、[Polyfill.io](https://polyfill.io/v3/) バンドルによって Promise を追加できます)。
 

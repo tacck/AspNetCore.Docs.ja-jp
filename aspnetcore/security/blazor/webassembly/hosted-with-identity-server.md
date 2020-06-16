@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ade2d88c6a2d59e169c9019e871982a74ae46b33
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: c85843c04688beefe7ea87d9e8b281d14ab85bc5
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452318"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776515"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Blazorサーバーを使用して ASP.NET Core webasのホスト型アプリをセキュリティで保護する Identity
 
@@ -30,7 +30,7 @@ ms.locfileid: "84452318"
 
 Visual Studio で次の操作を行います。
 
-1. ** Blazor 新しいアプリを作成し**ます。 詳細については、 <xref:blazor/get-started> を参照してください。
+1. ** Blazor 新しいアプリを作成し**ます。 詳細については、「<xref:blazor/get-started>」を参照してください。
 1. [**新しい Blazor アプリの作成**] ダイアログで、[**認証**] セクションの [**変更**] を選択します。
 1. **個々のユーザーアカウント**を選択し、 **[OK]** をクリックします。
 1. [**詳細設定**] セクションで [ホストされている**ASP.NET Core** ] チェックボックスをオンにします。
@@ -132,7 +132,7 @@ dotnet new blazorwasm -au Individual -ho
 
 ### <a name="app-settings-files"></a>アプリ設定ファイル
 
-プロジェクトルートのアプリ設定ファイル (*appsettings. json*) で、 `IdentityServer` 構成されているクライアントの一覧を説明するセクションです。 次の例には、1つのクライアントがあります。 クライアント名はアプリケーション名に対応し、OAuth パラメーターに規約によってマップされ `ClientId` ます。 プロファイルは、構成されているアプリの種類を示します。 プロファイルは、サーバーの構成プロセスを簡略化する規則を推進するために、内部的に使用されます。 <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+プロジェクトルートのアプリ設定ファイル (*appsettings.js*) では、 `IdentityServer` 構成されているクライアントの一覧がセクションに示されます。 次の例には、1つのクライアントがあります。 クライアント名はアプリケーション名に対応し、OAuth パラメーターに規約によってマップされ `ClientId` ます。 プロファイルは、構成されているアプリの種類を示します。 プロファイルは、サーバーの構成プロセスを簡略化する規則を推進するために、内部的に使用されます。 <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
 ```json
 "IdentityServer": {
@@ -143,6 +143,8 @@ dotnet new blazorwasm -au Individual -ho
   }
 }
 ```
+
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 (など `BlazorSample.Client` ) です。
 
 ## <a name="client-app-configuration"></a>クライアントアプリの構成
 
@@ -425,7 +427,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Azure App Service への配置](xref:security/authentication/identity/spa#deploy-to-production)
 * [Key Vault から証明書をインポートする (Azure ドキュメント)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)

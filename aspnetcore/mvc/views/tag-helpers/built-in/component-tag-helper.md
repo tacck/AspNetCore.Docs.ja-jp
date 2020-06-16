@@ -2,7 +2,7 @@
 title: ASP.NET Core のコンポーネントタグヘルパー
 author: guardrex
 ms.author: riande
-description: ASP.NET Core コンポーネントタグヘルパーを使用して、ページおよびRazorビューでコンポーネントを表示する方法について説明します。
+description: ASP.NET Core コンポーネントタグヘルパーを使用して、 Razor ページおよびビューでコンポーネントを表示する方法について説明します。
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 4e003e5ed5e7863d8a218c0f02bb37e214e31910
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b6e3890e13ef5ad20098d3907b6895046087aeca
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773930"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776502"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core のコンポーネントタグヘルパー
 
@@ -27,11 +27,11 @@ ms.locfileid: "82773930"
 
 ## <a name="prerequisites"></a>前提条件
 
-記事の「*ページとビューでコンポーネントを使用するためにアプリを準備する*」セクションのガイダンスに従ってください。 <xref:blazor/integrate-components#prepare-the-app>
+記事の「*ページとビューでコンポーネントを使用するためにアプリを準備する*」セクションのガイダンスに従って <xref:blazor/integrate-components#prepare-the-app> ください。
 
 ## <a name="component-tag-helper"></a>コンポーネントタグヘルパー
 
-次のコンポーネントタグヘルパーは、 `Counter`ページまたはビューでコンポーネントをレンダリングします。
+次のコンポーネントタグヘルパーは、 `Counter` ページまたはビューでコンポーネントをレンダリングします。
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -42,9 +42,9 @@ ms.locfileid: "82773930"
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-前の例では、 `Counter`コンポーネントがアプリの*Pages*フォルダー内にあることを前提としています。
+前の例では、 `Counter` コンポーネントがアプリの*Pages*フォルダー内にあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 (など `@using BlazorSample.Pages` ) です。
 
-コンポーネントタグヘルパーは、コンポーネントにパラメーターを渡すこともできます。 チェックボックスの`ColorfulCheckbox`ラベルの色とサイズを設定する次のコンポーネントについて考えてみます。
+コンポーネントタグヘルパーは、コンポーネントにパラメーターを渡すこともできます。 `ColorfulCheckbox`チェックボックスのラベルの色とサイズを設定する次のコンポーネントについて考えてみます。
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -72,7 +72,7 @@ ms.locfileid: "82773930"
 }
 ```
 
-コンポーネント`Size`タグ`int`ヘルパーで`Color`は`string`、() および ()[コンポーネントパラメーター](xref:blazor/components#component-parameters)を設定できます。
+コンポーネント `Size` `int` タグヘルパーでは、() および `Color` ( `string` )[コンポーネントパラメーター](xref:blazor/components#component-parameters)を設定できます。
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -84,7 +84,7 @@ ms.locfileid: "82773930"
     param-Size="14" param-Color="@("blue")" />
 ```
 
-前の例では、 `ColorfulCheckbox`コンポーネントがアプリの*共有*フォルダーにあることを前提としています。
+前の例では、 `ColorfulCheckbox` コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 (など `@using BlazorSample.Shared` ) です。
 
 ページまたはビューには、次の HTML が表示されます。
 
@@ -95,9 +95,9 @@ ms.locfileid: "82773930"
 </label>
 ```
 
-前の`param-Color`例のように、引用符で囲まれた文字列を渡すには、[明示的な Razor 式](xref:mvc/views/razor#explicit-razor-expressions)が必要です。 `string`型の値に対する Razor 解析動作は、属性が`param-*` `object`型であるため、属性には適用されません。
+前の例のように、引用符で囲まれた文字列を渡すには、[明示的な Razor 式](xref:mvc/views/razor#explicit-razor-expressions)が必要です `param-Color` 。 Razor型の値の解析動作は、属性 `string` が型であるため、属性には適用されません `param-*` `object` 。
 
-パラメーターの型は、JSON シリアル化可能である必要があります。これは通常、型が既定のコンストラクターと設定可能なプロパティを持つ必要があることを意味します。 たとえば、前の例では`Size`と`Color`の値を指定できます。これは、 `Size`と`Color`の型がプリミティブ`int`型`string`(と) であり、JSON シリアライザーでサポートされているためです。
+パラメーターの型は、JSON シリアル化可能である必要があります。これは通常、型が既定のコンストラクターと設定可能なプロパティを持つ必要があることを意味します。 たとえば、前の例ではとの値を指定できます `Size` `Color` 。これは、 `Size` との型 `Color` がプリミティブ型 (と) であり、 `int` `string` JSON シリアライザーでサポートされているためです。
 
 次の例では、クラスオブジェクトがコンポーネントに渡されます。
 
@@ -151,9 +151,9 @@ public class MyClass
     param-MyObject="@myObject" />
 ```
 
-前の例では、 `MyComponent`コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 `MyClass`は、アプリの名前空間 (`{APP ASSEMBLY}`) にあります。
+前の例では、 `MyComponent` コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 ( `@using BlazorSample` やなど `@using BlazorSample.Shared` ) です。 `MyClass`は、アプリの名前空間にあります。
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> により、コンポーネントに対して次の構成が行われます。
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、コンポーネントに対して以下の構成が行われます。
 
 * ページに事前レンダリングするかどうか。
 * ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
