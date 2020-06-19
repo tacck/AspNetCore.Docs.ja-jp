@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724290"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103042"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core プロジェクトでのスキャフォールディング
 
@@ -195,7 +195,7 @@ Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます
 * 認証トークンがプロビジョニングされ、認証 cookie に保存されると、コンポーネントに渡すことができます。
 * Razorコンポーネントでを直接使用することはできない `HttpContext` ため、のログアウトエンドポイントをに送信するための[要求防止偽造 (XSRF) トークン](xref:security/anti-request-forgery)を取得する方法はありません Identity `/Identity/Account/Logout` 。 XSRF トークンは、コンポーネントに渡すことができます。
 
-詳細については、「<xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>」を参照してください。
+詳細については、「<xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>」を参照してください。
 
 *Pages/_Host cshtml*ファイルで、クラスおよびクラスに追加した後、トークンを設定し `InitialApplicationState` `TokenProvider` ます。
 
@@ -229,7 +229,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 クラスの場合 `Startup` :
 
 * ページサービスがに追加されていることを確認 Razor `Startup.ConfigureServices` します。
-* [TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)を使用する場合は、サービスを登録します。
+* [TokenProvider](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)を使用する場合は、サービスを登録します。
 * `UseDatabaseErrorPage`開発環境用のアプリケーションビルダーでを呼び出し `Startup.Configure` ます。
 * `UseAuthentication`との後にを呼び出し `UseAuthorization` `UseRouting` ます。
 * ページのエンドポイントを追加 Razor します。
@@ -253,7 +253,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 }
 ```
 
-`LoginDisplay`アプリの*共有*フォルダーにコンポーネント (*logindisplay. razor*) を追加します。 [TokenProvider サービス](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)は、ログアウトエンドポイントにポストする HTML フォームの XSRF トークンを提供し Identity ます。
+`LoginDisplay`アプリの*共有*フォルダーにコンポーネント (*logindisplay. razor*) を追加します。 [TokenProvider サービス](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app)は、ログアウトエンドポイントにポストする HTML フォームの XSRF トークンを提供し Identity ます。
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

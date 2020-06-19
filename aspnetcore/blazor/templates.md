@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3a491e43aec8291fcf03696b53240bd33e0deda1
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105533"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102494"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -80,7 +80,7 @@ dotnet new blazorserver --help
 
 * *Shared* フォルダー:アプリで使用する他の UI コンポーネント ( *.razor*) を含みます。
   * `MainLayout` (*MainLayout.razor*):アプリのレイアウト コンポーネント。
-  * `NavMenu` (*NavMenu.razor*):サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [NavLink コンポーネント](xref:blazor/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
+  * `NavMenu` (*NavMenu.razor*):サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [NavLink コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
 
 * *_Imports.razor*:名前空間の [`@using`](xref:mvc/views/razor#using) ディレクティブなど、アプリのコンポーネント ( *.razor*) に含める一般的な Razor ディレクティブが含まれます。
 

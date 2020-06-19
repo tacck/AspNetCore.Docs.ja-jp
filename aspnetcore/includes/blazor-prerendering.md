@@ -2,7 +2,7 @@
 ---
 Blazor サーバー アプリをプリレンダリングしている間、ブラウザーとの接続が確立されていないため、JavaScript への呼び出しなどの特定のアクションは実行できません。 コンポーネントは、プリレンダリング時に異なるレンダリングが必要になる場合があります。
 
-ブラウザーとの接続が確立されるまで JavaScript の相互運用呼び出しを遅らせるために、[OnAfterRenderAsync コンポーネント ライフサイクル イベント](xref:blazor/lifecycle#after-component-render)を使用できます。 このイベントは、アプリが完全にレンダリングされ、クライアント接続が確立された後にのみ呼び出されます。
+ブラウザーとの接続が確立されるまで JavaScript の相互運用呼び出しを遅らせるために、[OnAfterRenderAsync コンポーネント ライフサイクル イベント](xref:blazor/components/lifecycle#after-component-render)を使用できます。 このイベントは、アプリが完全にレンダリングされ、クライアント接続が確立された後にのみ呼び出されます。
 
 ```cshtml
 @using Microsoft.JSInterop
@@ -39,7 +39,7 @@ Blazor サーバー アプリをプリレンダリングしている間、ブラ
 
 <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> が呼び出されるとき、`ElementRef` は、以前のライフサイクル メソッドではなく <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> でのみ使用されます。コンポーネントがレンダリングされるまで JavaScript 要素が存在しないためです。
 
-[StateHasChanged](xref:blazor/lifecycle#state-changes) は、JavaScript の相互運用呼び出しから取得された新しい状態でコンポーネントを再度レンダリングするために呼び出されます。 `StateHasChanged` は `infoFromJs`が `null` である場合にのみ呼び出されるため、このコードで無限ループが作成されることはありません。
+[StateHasChanged](xref:blazor/components/lifecycle#state-changes) は、JavaScript の相互運用呼び出しから取得された新しい状態でコンポーネントを再度レンダリングするために呼び出されます。 `StateHasChanged` は `infoFromJs`が `null` である場合にのみ呼び出されるため、このコードで無限ループが作成されることはありません。
 
 ```cshtml
 @page "/prerendered-interop"

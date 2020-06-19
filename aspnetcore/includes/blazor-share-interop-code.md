@@ -6,4 +6,4 @@ JS 相互運用コードは、クラス ライブラリに含めて NuGet パッ
 
 ビルド済みの NuGet パッケージは、NuGet パッケージの参照と同じ方法で、アプリのプロジェクト ファイルで参照されます。 パッケージが復元されたら、アプリ コードを C# と同じように JavaScript に呼び出すことができます。
 
-詳細については、「<xref:blazor/class-libraries>」を参照してください。
+詳細については、「<xref:blazor/components/class-libraries>」を参照してください。

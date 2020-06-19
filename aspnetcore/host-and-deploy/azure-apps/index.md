@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 8195702a3de93bafc76dff61939dfc70d4e896b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cc12dc2bc6720652866227dc2bbcbcf4e8af793d
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775246"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074232"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service に ASP.NET Core アプリを展開する
 
@@ -87,17 +87,20 @@ A シリーズ コンピューティング (Basic) 以上のホスティング�
 
 ## <a name="override-app-configuration-using-the-azure-portal"></a>Azure Portal を使用してアプリの構成をオーバーライドする
 
-Azure Portal のアプリの設定により、アプリの環境変数の設定が許可されます。 環境変数は、[環境変数構成プロバイダー](xref:fundamentals/configuration/index#environment-variables-configuration-provider)で使用できます。
+::: moniker range=">= aspnetcore-3.0"
+
+Azure Portal のアプリの設定により、アプリの環境変数の設定が許可されます。 環境変数は、[環境変数構成プロバイダー](xref:fundamentals/configuration/index#environment-variables)で使用できます。
 
 Azure Portal でアプリの設定が作成または変更され、 **[保存]** ボタンが選択された場合、Azure アプリは再起動されます。 環境変数は、サービスが再起動された後にアプリに適用されます。
 
-::: moniker range=">= aspnetcore-3.0"
-
-アプリで[汎用ホスト](xref:fundamentals/host/generic-host)を使用する場合、ホストをビルドするために <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> が呼び出されると、環境変数がアプリの構成に読み込まれます。 詳細については、<xref:fundamentals/host/generic-host> および「[Environment Variables Configuration Provider](xref:fundamentals/configuration/index#environment-variables-configuration-provider)」(環境変数構成プロバイダー) をご覧ください。
+アプリで[汎用ホスト](xref:fundamentals/host/generic-host)を使用する場合、ホストをビルドするために <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> が呼び出されると、環境変数がアプリの構成に読み込まれます。 詳細については、<xref:fundamentals/host/generic-host> および「[Environment Variables Configuration Provider](xref:fundamentals/configuration/index#environment-variables)」(環境変数構成プロバイダー) をご覧ください。
 
 ::: moniker-end
-
 ::: moniker range="< aspnetcore-3.0"
+
+Azure Portal のアプリの設定により、アプリの環境変数の設定が許可されます。 環境変数は、[環境変数構成プロバイダー](xref:fundamentals/configuration/index#environment-variables-configuration-provider)で使用できます。
+
+Azure Portal でアプリの設定が作成または変更され、 **[保存]** ボタンが選択された場合、Azure アプリは再起動されます。 環境変数は、サービスが再起動された後にアプリに適用されます。
 
 アプリで [Web ホスト](xref:fundamentals/host/web-host)を使用する場合、ホストをビルドするために <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> が呼び出されると、環境変数がアプリの構成に読み込まれます。 詳細については、<xref:fundamentals/host/web-host> および「[Environment Variables Configuration Provider](xref:fundamentals/configuration/index#environment-variables-configuration-provider)」(環境変数構成プロバイダー) をご覧ください。
 
@@ -185,7 +188,7 @@ App Service デプロイ センターを使用して Azure DevOps ビルドを�
 
 プレビュー ランタイムを対象とする[自己完結型の展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) では、展開でプレビュー ランタイムを保持します。
 
-自己完結型アプリを展開する場合: 
+自己完結型アプリを展開する場合:
 
 * Azure App Service のサイトには、[プレビュー サイト拡張機能](#install-the-preview-site-extension)は必要ありません。
 * アプリは、[フレームワークに依存する展開 (FDD)](/dotnet/core/deploying#framework-dependent-deployments-fdd) に発行するときとは異なる方法に従って、発行される必要があります。

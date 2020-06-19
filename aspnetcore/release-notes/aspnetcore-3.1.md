@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 6a03e35495e2ae545dc0a3cdd38578b433d8df6b
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507245"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102585"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1 の新機能
 
@@ -25,7 +25,7 @@ ms.locfileid: "84507245"
 
 ## <a name="partial-class-support-for-razor-components"></a>Razor コンポーネントの部分クラスのサポート
 
-Razor コンポーネントが部分クラスとして生成されるようになりました。 Razor コンポーネントのコードは、単一ファイル内のコンポーネントのすべてのコードを定義するのではなく、部分クラスとして定義された分離コード ファイルを使用して記述できます。 詳細については、「[部分クラスのサポート](xref:blazor/components#partial-class-support)」を参照してください。
+Razor コンポーネントが部分クラスとして生成されるようになりました。 Razor コンポーネントのコードは、単一ファイル内のコンポーネントのすべてのコードを定義するのではなく、部分クラスとして定義された分離コード ファイルを使用して記述できます。 詳細については、「[部分クラスのサポート](xref:blazor/components/index#partial-class-support)」を参照してください。
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor コンポーネント タグ ヘルパーと最上位レベルのコンポーネントへのパラメーターの引き渡し
 
@@ -46,7 +46,7 @@ Blazor 初回のレンダリング時に、サーバーアプリで最上位レ�
     param-IncrementAmount="10" />
 ```
 
-詳細については、[コンポーネントの Razor Pages と MVC アプリへの統合](xref:blazor/integrate-components)に関するページを参照してください。
+詳細については、[コンポーネントの Razor Pages と MVC アプリへの統合](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps)に関するページを参照してください。
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>Http.sys での共有キューのサポート
 
@@ -66,7 +66,7 @@ SameSite Cookie の動作が、今後のブラウザーの変更を反映する�
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-詳細については、「[既定のアクションを禁止する](xref:blazor/event-handling#prevent-default-actions)」を参照してください。
+詳細については、「[既定のアクションを禁止する](xref:blazor/components/event-handling#prevent-default-actions)」を参照してください。
 
 ## <a name="stop-event-propagation-in-blazor-apps"></a>Blazor アプリでのイベント伝達を停止する
 
@@ -86,7 +86,7 @@ SameSite Cookie の動作が、今後のブラウザーの変更を反映する�
 }
 ```
 
-詳細については、「[イベントの伝達の停止](xref:blazor/event-handling#stop-event-propagation)」を参照してください。
+詳細については、「[イベントの伝達の停止](xref:blazor/components/event-handling#stop-event-propagation)」を参照してください。
 
 ## <a name="detailed-errors-during-blazor-app-development"></a>Blazor アプリの開発中の詳細なエラー
 
@@ -95,4 +95,4 @@ SameSite Cookie の動作が、今後のブラウザーの変更を反映する�
 * 開発中は、金色のバーによってブラウザー コンソールが表示され、そこで例外を確認できます。
 * 実稼働環境では、金色のバーによって、エラーが発生したことがユーザーに通知され、ブラウザーの更新が推奨されます。
 
-詳細については、「[開発中の詳細なエラー](xref:blazor/handle-errors#detailed-errors-during-development)」を参照してください。
+詳細については、「[開発中の詳細なエラー](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development)」を参照してください。

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 865b2e58b38c16a54815ce0923a78ac98f2247f1
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 46a1ccbb3b5eeaf1beb3e33bca1b6c7065d6d56a
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355371"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074217"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -31,7 +31,7 @@ ASP.NET Core MVC では、応答データの書式設定がサポートされま
 
 アクションの結果には、<xref:Microsoft.AspNetCore.Mvc.JsonResult> や <xref:Microsoft.AspNetCore.Mvc.ContentResult> のように、特定の形式に固有となる型があります。 アクションでは、クライアントの設定に関係なく、特定の形式で書式設定された結果を返すことができます。 たとえば、`JsonResult` を返すと、JSON 形式のデータが返されます。 `ContentResult` または文字列を返すと、プレーンテキスト形式の文字列データが返されます。
 
-アクションが特定の型を返す必要はありません。 ASP.NET Core によって、すべてのオブジェクトの戻り値がサポートされます。  型が <xref:Microsoft.AspNetCore.Mvc.IActionResult> ではないオブジェクトを返すアクションからの結果は、適切な <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 実装を利用してシリアル化されます。 詳細については、 <xref:web-api/action-return-types> を参照してください。
+アクションが特定の型を返す必要はありません。 ASP.NET Core によって、すべてのオブジェクトの戻り値がサポートされます。  型が <xref:Microsoft.AspNetCore.Mvc.IActionResult> ではないオブジェクトを返すアクションからの結果は、適切な <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 実装を利用してシリアル化されます。 詳細については、「<xref:web-api/action-return-types>」を参照してください。
 
 組み込みヘルパー メソッド <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> では、JSON 形式のデータが返されます。[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
@@ -40,7 +40,7 @@ ASP.NET Core MVC では、応答データの書式設定がサポートされま
 * **content-type:** `application/json; charset=utf-8` を含む応答ヘッダーが表示されます。
 * 要求ヘッダーが表示されます。 たとえば、`Accept` ヘッダーです。 `Accept` ヘッダーは前のコードでは無視されます。
 
-プレーンテキストで書式設定されたデータを返すには、<xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> と <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> ヘルパーを使用します。
+プレーンテキストで書式設定されたデータを返すには、<xref:Microsoft.AspNetCore.Mvc.ContentResult> と <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Content%2A> ヘルパーを使用します。
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_about)]
 

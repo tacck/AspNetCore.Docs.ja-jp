@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 26d371161bf5f926e50cbc141ccfaac40ee96977
-ms.sourcegitcommit: ff5c47beded9264c1395beb9c905f826261f3ba3
+ms.openlocfilehash: 6d9d8cf6ca9ca3afc570c2c68510125200b96c60
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83440179"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074456"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs の認証と承認
 
 ASP.NET Core 3.0 以降では、API 承認のサポートを使用して、シングルページアプリ (spa) で認証を提供します。 Identityユーザーを認証および格納するための ASP.NET Core は、OPEN ID Connect を実装するため[に、](https://identityserver.io/)ユーザーと組み合わせて使用されます。
 
-認証パラメーターが、 **Web アプリケーション (モデルビューコントローラー)** (MVC) および**web アプリケーション**(ページ) プロジェクトテンプレートの認証パラメーターに似た**角度**で、**応答**するプロジェクトテンプレートに追加されました Razor 。 許可されるパラメーター値は、 **None**および**個人**です。 この時点では、対応する **.js および Redux**プロジェクトテンプレートで認証パラメーターがサポートされていません。
+認証パラメーターが、 **Web アプリケーション (モデルビューコントローラー)** (MVC) および**web アプリケーション**(ページ) プロジェクトテンプレートの認証パラメーターに似た**角度**で、**応答**するプロジェクトテンプレートに追加されました Razor 。 許可されるパラメーター値は、 **None**および**個人**です。 **React.js と Redux**プロジェクトテンプレートでは、現時点では認証パラメーターがサポートされていません。
 
 ## <a name="create-an-app-with-api-authorization-support"></a>API authorization サポートを使用してアプリを作成する
 
@@ -49,6 +49,8 @@ dotnet new react -o <output_directory_name> -au Individual
 次のセクションでは、認証のサポートが含まれている場合のプロジェクトへの追加について説明します。
 
 ### <a name="startup-class"></a>スタートアップ クラス
+
+次のコード例は、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet パッケージに依存しています。 この例では、および拡張メソッドを使用して、API の認証と承認を構成し <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> ます。 認証を使用して、応答または角速度の SPA プロジェクトテンプレートを使用するプロジェクトには、このパッケージへの参照が含まれます。
 
 クラスには `Startup` 、次の追加機能があります。
 
@@ -115,7 +117,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="appsettingsjson"></a>appsettings.json
 
-プロジェクトルートの*appsettings*ファイルには、 `IdentityServer` 構成されたクライアントの一覧を説明する新しいセクションがあります。 次の例には、1つのクライアントがあります。 クライアント名はアプリケーション名に対応し、OAuth パラメーターに規約によってマップされ `ClientId` ます。 プロファイルは、構成されているアプリの種類を示します。 サーバーの構成プロセスを簡略化する規則を実現するために、内部的に使用されます。 「[アプリケーションプロファイル](#application-profiles)」セクションで説明されているように、使用可能なプロファイルがいくつかあります。
+プロジェクトルートの*appsettings.js*のファイルには、 `IdentityServer` 構成されたクライアントの一覧を説明する新しいセクションがあります。 次の例には、1つのクライアントがあります。 クライアント名はアプリケーション名に対応し、OAuth パラメーターに規約によってマップされ `ClientId` ます。 プロファイルは、構成されているアプリの種類を示します。 サーバーの構成プロセスを簡略化する規則を実現するために、内部的に使用されます。 「[アプリケーションプロファイル](#application-profiles)」セクションで説明されているように、使用可能なプロファイルがいくつかあります。
 
 ```json
 "IdentityServer": {
@@ -127,9 +129,9 @@ dotnet new react -o <output_directory_name> -au Individual
 }
 ```
 
-### <a name="appsettingsdevelopmentjson"></a>appsettings.開発. json
+### <a name="appsettingsdevelopmentjson"></a>appsettings.Development.js
 
-Appsettings で *。プロジェクトルートの開発用 json*ファイルには、トークンの `IdentityServer` 署名に使用されるキーについて説明するセクションがあります。 運用環境にデプロイする場合は、「[運用環境にデプロイする](#deploy-to-production)」セクションで説明されているように、アプリと共にキーをプロビジョニングしてデプロイする必要があります。
+プロジェクトルートの*appsettings.Development.js*のファイルには、 `IdentityServer` トークンの署名に使用されるキーについて説明するセクションがあります。 運用環境にデプロイする場合は、「[運用環境にデプロイする](#deploy-to-production)」セクションで説明されているように、アプリと共にキーをプロビジョニングしてデプロイする必要があります。
 
 ```json
 "IdentityServer": {
@@ -159,12 +161,12 @@ Appsettings で *。プロジェクトルートの開発用 json*ファイルに
 応答テンプレートでの認証と API 承認のサポートは、 *ClientApp\src\components\api-authorization*ディレクトリにあります。 これは、次の要素で構成されています。
 
 * 4つのコンポーネント:
-  * *.Js*: アプリのログインフローを処理します。
-  * *Logout*: アプリのログアウトフローを処理します。
-  * *Loginmenu js*: 次のリンクのセットのいずれかを表示するウィジェット。
+  * *Login.js*: アプリのログインフローを処理します。
+  * *Logout.js*: アプリのログアウトフローを処理します。
+  * *LoginMenu.js*: 次のリンクのセットのいずれかを表示するウィジェット。
     * ユーザーが認証されると、ユーザープロファイルの管理とログアウトのリンクがあります。
     * ユーザーが認証されていない場合の登録とログインリンク。
-  * *AuthorizeRoute*: パラメーターに示されているコンポーネントを表示する前に、ユーザーを認証する必要があるルートコンポーネント。 `Component`
+  * *AuthorizeRoute.js*: パラメーターに示されているコンポーネントを表示する前に、ユーザーを認証する必要があるルートコンポーネント。 `Component`
 * `authService` `AuthorizeService` 認証プロセスの下位レベルの詳細を処理し、認証されたユーザーに関する情報をアプリの残りの部分に公開する、クラスのエクスポートされたインスタンス。
 
 これで、ソリューションの主要なコンポーネントを確認できました。次は、アプリの個々のシナリオについて詳しく見ていきましょう。
@@ -280,7 +282,7 @@ async populateWeatherData() {
 
 このセクションでは、証明書ストアに格納されている証明書を使用して Azure App Service するためのアプリの展開について説明します。 証明書ストアから証明書を読み込むようにアプリを変更するには、後の手順で Azure portal でアプリを構成するときに、Standard レベルのサービスプラン以上が必要です。
 
-アプリの*appsettings*ファイルで、セクションを変更し `IdentityServer` て、キーの詳細を含めます。
+アプリの*appsettings.js*ファイルで、セクションを変更して、 `IdentityServer` キーの詳細を含めます。
 
 ```json
 "IdentityServer": {

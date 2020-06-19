@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 09866f1fd56a4d0747ef3814c85ab5070cfb8d59
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 809bdc777b6307314a7bcde82ab5e0c6888db99b
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756120"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074455"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 構成
 
@@ -196,8 +196,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **または** `information` | `LogLevel.Information` |
-| `warn` **または** `warning`     | `LogLevel.Warning`     |
+| `info`**または**`information` | `LogLevel.Information` |
+| `warn`**または**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -337,11 +337,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | Empty | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | Empty | すべての HTTP 要求と共に送信する資格情報。 |
+| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
+| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
 | `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 | `HttpMessageHandlerFactory` | `null` | `HttpMessageHandler`HTTP 要求を送信するために使用されるを構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、または新しいインスタンスを返し `HttpMessageHandler` ます。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
 | `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
@@ -352,6 +352,8 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript オプション | 既定値 | 説明 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
+| `headers` | `null` | すべての HTTP 要求と共に送信されるヘッダーのディクショナリ。 ブラウザーでヘッダーを送信することは、Websocket やストリームでは機能しません <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> 。 |
+| `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
 | `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
 | `withCredentials` | `true` | CORS 要求と共に資格情報を送信するかどうかを指定します。 Azure App Service は固定セッションに cookie を使用します。このオプションを正しく動作させるには、このオプションを有効にする必要があります。 での CORS の詳細につい SignalR ては、「」を参照してください <xref:signalr/security#cross-origin-resource-sharing> 。 |
 
@@ -361,7 +363,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `withHeader` `withHeaders` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
@@ -582,8 +584,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **または** `information` | `LogLevel.Information` |
-| `warn` **または** `warning`     | `LogLevel.Warning`     |
+| `info`**または**`information` | `LogLevel.Information` |
+| `warn`**または**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -688,7 +690,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | Description |
+| オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -698,7 +700,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | Description |
+| オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバー上のセットにメッセージを送信していない場合、 `ClientTimeoutInterval` サーバーはクライアントを切断したと見なします。 |
@@ -719,15 +721,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | Description |
+| .NET オプション |  既定値 | 説明 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | Empty | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | Empty | すべての HTTP 要求と共に送信する資格情報。 |
+| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
+| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
 | `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 | `HttpMessageHandlerFactory` | `null` | `HttpMessageHandler`HTTP 要求を送信するために使用されるを構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、または新しいインスタンスを返し `HttpMessageHandler` ます。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
 | `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
@@ -738,6 +740,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript オプション | 既定値 | 説明 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
+| `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
 | `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -746,7 +749,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `withHeader` `withHeaders` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
@@ -966,8 +969,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **または** `information` | `LogLevel.Information` |
-| `warn` **または** `warning`     | `LogLevel.Warning`     |
+| `info`**または**`information` | `LogLevel.Information` |
+| `warn`**または**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1107,11 +1110,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | Empty | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | Empty | すべての HTTP 要求と共に送信する資格情報。 |
+| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
+| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
 | `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 | `HttpMessageHandlerFactory` | `null` | `HttpMessageHandler`HTTP 要求を送信するために使用されるを構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、または新しいインスタンスを返し `HttpMessageHandler` ます。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
 | `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
@@ -1122,6 +1125,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript オプション | 既定値 | 説明 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
+| `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
 | `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1130,7 +1134,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `withHeader` `withHeaders` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
@@ -1455,11 +1459,11 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | Empty | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | Empty | すべての HTTP 要求と共に送信する資格情報。 |
+| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
+| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
 | `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 | `HttpMessageHandlerFactory` | `null` | `HttpMessageHandler`HTTP 要求を送信するために使用されるを構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、または新しいインスタンスを返し `HttpMessageHandler` ます。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
 | `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
@@ -1470,6 +1474,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript オプション | 既定値 | 説明 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
+| `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
 | `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1478,7 +1483,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `withHeader` `withHeaders` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 
@@ -1765,7 +1770,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | Description |
+| オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -1774,7 +1779,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | Description |
+| オプション | 既定値 | 説明 |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 
@@ -1793,15 +1798,15 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | Description |
+| .NET オプション |  既定値 | 説明 |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `ClientCertificates` | Empty | 認証要求に送信する TLS 証明書のコレクション。 |
-| `Cookies` | Empty | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
-| `Credentials` | Empty | すべての HTTP 要求と共に送信する資格情報。 |
+| `ClientCertificates` | 空 | 認証要求に送信する TLS 証明書のコレクション。 |
+| `Cookies` | 空 | すべての HTTP 要求と共に送信する HTTP クッキーのコレクション。 |
+| `Credentials` | 空 | すべての HTTP 要求と共に送信する資格情報。 |
 | `CloseTimeout` | 5 秒 | Websocket のみ。 サーバーが終了要求を確認するのを終了した後にクライアントが待機する最大時間。 この時間内にサーバーが終了を認識しない場合、クライアントは切断されます。 |
-| `Headers` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `Headers` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 | `HttpMessageHandlerFactory` | `null` | `HttpMessageHandler`HTTP 要求を送信するために使用されるを構成または置き換えるために使用できるデリゲート。 WebSocket 接続には使用されません。 このデリゲートは null 以外の値を返す必要があり、パラメーターとして既定値を受け取ります。 既定値の設定を変更して返すか、または新しいインスタンスを返し `HttpMessageHandler` ます。 **ハンドラーを置き換えるときに、提供されたハンドラーから保持する設定をコピーしてください。それ以外の場合、構成されているオプション (Cookie やヘッダーなど) は新しいハンドラーに適用されません。** |
 | `Proxy` | `null` | HTTP 要求を送信するときに使用する HTTP プロキシ。 |
 | `UseDefaultCredentials` | `false` | このブール値を設定すると、HTTP および Websocket 要求の既定の資格情報が送信されます。 これにより、Windows 認証を使用できるようになります。 |
@@ -1812,6 +1817,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | JavaScript オプション | 既定値 | 説明 |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
+| `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
 | `skipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -1820,7 +1826,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
-| `withHeader` `withHeaders` | Empty | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
+| `withHeader` `withHeaders` | 空 | すべての HTTP 要求と共に送信する追加の HTTP ヘッダーのマップ。 |
 
 ---
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 51c86639ef904aae1730a698758cd6b8867a445a
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776541"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074288"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -730,7 +730,7 @@ Index: 5  Value: value5
 [Web ホスト](xref:fundamentals/host/web-host)を使用する場合の既定の構成の詳細については、[このトピックの ASP.NET Core 2.2 バージョン](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2)を参照してください。
 
 * ホストの構成は、次から提供されます。
-  * [環境変数構成プロバイダー](#environment-variables-configuration-provider)を使用する、プレフィックス `DOTNET_` (`DOTNET_ENVIRONMENT` など) が付いた環境変数。 構成のキーと値のペアが読み込まれるときに、プレフィックス (`DOTNET_`) は削除されます。
+  * [環境変数構成プロバイダー](#environment-variables)を使用する、プレフィックス `DOTNET_` (`DOTNET_ENVIRONMENT` など) が付いた環境変数。 構成のキーと値のペアが読み込まれるときに、プレフィックス (`DOTNET_`) は削除されます。
   * [コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。
 * Web ホストの既定の構成が確立されます (`ConfigureWebHostDefaults`)。
   * Kestrel は Web サーバーとして使用され、アプリの構成プロバイダーを使用して構成されます。

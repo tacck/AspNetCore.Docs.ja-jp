@@ -15,4 +15,4 @@ Blazor アプリに要求状態を渡す方法としては、アプリの初期�
 * アプリに渡されるデータを保持するために、ルート コンポーネントでパラメーターを定義します。
 * アプリ内のユーザー固有のデータを使用します。または、アプリ全体で使用できるようにそのデータを <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> 内のスコープ サービスにコピーします。
 
-詳細およびプログラム例については、「<xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>」を参照してください。
+詳細およびプログラム例については、「<xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>」を参照してください。

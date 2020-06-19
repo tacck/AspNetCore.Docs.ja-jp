@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: cb3ee4f3bf9061d212c1fee85f3f4a22946be097
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105780"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074430"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core の正常性チェック
 
@@ -560,7 +560,7 @@ dotnet run --scenario writer
 
 `MapHealthChecks` でポートを指定する URL パターンを使用して `RequireHost` を呼び出し、指定されたポートに正常性チェック要求を制限します。 これは通常、サービスを監視するためのポートを公開する目的で、コンテナー環境で使用されます。
 
-サンプル アプリによって、[環境変数構成プロバイダー](xref:fundamentals/configuration/index#environment-variables-configuration-provider)を使用してポートが設定されます。 ポートは *launchSettings.json* ファイルに設定され、環境変数を介して構成プロバイダーに渡されます。 管理ポートで要求を待つようにサーバーを設定する必要もあります。
+サンプル アプリによって、[環境変数構成プロバイダー](xref:fundamentals/configuration/index#environment-variables)を使用してポートが設定されます。 ポートは *launchSettings.json* ファイルに設定され、環境変数を介して構成プロバイダーに渡されます。 管理ポートで要求を待つようにサーバーを設定する必要もあります。
 
 サンプル アプリを使用し、管理ポート設定を実演するには、*Properties* フォルダーで *launchSettings.json* ファイルを作成します。
 
@@ -789,7 +789,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-詳細については、「<xref:fundamentals/middleware/index#use-run-and-map>」を参照してください。
+詳細については、「<xref:fundamentals/middleware/index#branch-the-middleware-pipeline>」を参照してください。
 
 ::: moniker-end
 

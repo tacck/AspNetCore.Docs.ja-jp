@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: ae382feb152f490e46df969887401060965d8c4e
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: fcd81544385702ce72ff5fc8ae2de34d0f7afb37
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106534"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102992"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -66,7 +66,7 @@ ASP.NET Core MVC では、明確な関心の分離を可能にする動的な We
 ASP.NET Core MVC には、以下が含まれます。
 
 * [ルーティング](#routing)
-* [モデル バインド](#model-binding)
+* [モデルバインド](#model-binding)
 * [モデルの検証](#model-validation)
 * [依存関係の挿入](../fundamentals/dependency-injection.md)
 * [フィルター](#filters)
@@ -264,4 +264,4 @@ RazorMVC のビューは、モデルに基づいて厳密に型指定できま�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。*")
-* <xref:blazor/integrate-components>
+* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 53ca2a650eb6a3be0ff137953df5a546e9f0b282
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: e85c9d384361f9169035e6a3ab8770e1a96b8650
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756133"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102719"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core の構文リファレンス
 
 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)、 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razorは、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml*は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components)ファイル (*razor*) にもあります。
+Razorは、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml*は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル (*razor*) にもあります。
 
 ## <a name="rendering-html"></a>HTML のレンダリング
 
@@ -465,7 +465,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-この `@code` ブロックにより、 [ Razor コンポーネント](xref:blazor/components)は、コンポーネントに C# のメンバー (フィールド、プロパティ、およびメソッド) を追加できます。
+この `@code` ブロックにより、 [ Razor コンポーネント](xref:blazor/components/index)は、コンポーネントに C# のメンバー (フィールド、プロパティ、およびメソッド) を追加できます。
 
 ```razor
 @code {
@@ -489,7 +489,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[ [ Razor コンポーネント](xref:blazor/components)] で、を使用して `@code` `@functions` C# メンバーを追加します。
+[ [ Razor コンポーネント](xref:blazor/components/index)] で、を使用して `@code` `@functions` C# メンバーを追加します。
 
 ::: moniker-end
 
@@ -683,7 +683,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 `@page` ディレクティブには、それが表示されるファイルの型によって、さまざまな効果があります。 ディレクティブ:
 
 * の場合は、ファイルがページであることを示し*ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
-* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/routing>」を参照してください。
+* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
 ::: moniker-end
 
@@ -707,7 +707,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[ Razor コンポーネント](xref:blazor/components)で `@using` は、スコープ内のコンポーネントも制御します。
+[ Razor コンポーネント](xref:blazor/components/index)で `@using` は、スコープ内のコンポーネントも制御します。
 
 ::: moniker-end
 
@@ -721,19 +721,19 @@ Razorディレクティブ属性は、記号の後に予約済みのキーワー
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、「<xref:blazor/components#attribute-splatting-and-arbitrary-parameters>」を参照してください。
+`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、「<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>」を参照してください。
 
 ### `@bind`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、「<xref:blazor/data-binding>」を参照してください。
+コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、「<xref:blazor/components/data-binding>」を参照してください。
 
 ### `@on{EVENT}`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-Razorコンポーネントのイベント処理機能を提供します。 詳細については、「<xref:blazor/event-handling>」を参照してください。
+Razorコンポーネントのイベント処理機能を提供します。 詳細については、「<xref:blazor/components/event-handling>」を参照してください。
 
 ::: moniker-end
 
@@ -759,19 +759,19 @@ Razorコンポーネントのイベント処理機能を提供します。 詳�
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、「<xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>」を参照してください。
+`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、「<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>」を参照してください。
 
 ### `@ref`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、「<xref:blazor/components#capture-references-to-components>」を参照してください。
+コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、「<xref:blazor/components/index#capture-references-to-components>」を参照してください。
 
 ### `@typeparam`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、「<xref:blazor/templated-components#generic-typed-components>」を参照してください。
+`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、「<xref:blazor/components/templated-components#generic-typed-components>」を参照してください。
 
 ::: moniker-end
 

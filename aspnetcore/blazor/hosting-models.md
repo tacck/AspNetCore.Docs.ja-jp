@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105494"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102272"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
@@ -28,7 +28,7 @@ Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタ
 
 この記事で説明されているホスティング モデルのプロジェクトを作成するには、「<xref:blazor/get-started>」を参照してください。
 
-詳細な構成については、「<xref:blazor/hosting-model-configuration>」を参照してください。
+詳細な構成については、「<xref:blazor/fundamentals/configuration>」を参照してください。
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
@@ -116,7 +116,7 @@ Blazor の UI の更新は、次の方法でトリガーされます。
 
 グラフが再レンダリングされ、UI *diff* (相違) が計算されます。 この diff は、クライアントで UI を更新するために必要な DOM 編集の最小セットです。 diff はバイナリ形式でクライアントに送信され、ブラウザーによって適用されます。
 
-コンポーネントは、ユーザーがクライアント上でコンポーネントから移動すると破棄されます。 ユーザーがコンポーネントを操作している間、コンポーネントの状態 (サービス、リソース) はサーバーのメモリに保持されている必要があります。 多くのコンポーネントの状態はサーバーによって同時に維持される場合があるため、メモリ不足の問題に対処する必要があります。 サーバー メモリを最大限に活用できるよう Blazor サーバー アプリを作成する方法については、「<xref:security/blazor/server/threat-mitigation>」を参照してください。
+コンポーネントは、ユーザーがクライアント上でコンポーネントから移動すると破棄されます。 ユーザーがコンポーネントを操作している間、コンポーネントの状態 (サービス、リソース) はサーバーのメモリに保持されている必要があります。 多くのコンポーネントの状態はサーバーによって同時に維持される場合があるため、メモリ不足の問題に対処する必要があります。 サーバー メモリを最大限に活用できるよう Blazor サーバー アプリを作成する方法については、「<xref:blazor/security/server/threat-mitigation>」を参照してください。
 
 ### <a name="circuits"></a>回線
 
@@ -136,10 +136,10 @@ UI 遅延時間とは、アクションが開始されてから UI が更新さ�
 
 メモリ使用量も、アプリ遅延時間の一因となる場合があります。 メモリ使用量が増加すると、ガベージ コレクションまたはディスクへのメモリのページングが頻繁に発生します。どちらの場合も、アプリのパフォーマンスが低下し、その結果、UI 遅延時間が長くなります。
 
-Blazor サーバー アプリは、ネットワーク遅延時間とメモリ使用量を低減することで、UI 遅延時間を最小限に抑えるように最適化する必要があります。 ネットワーク遅延時間を測定する方法については、「<xref:host-and-deploy/blazor/server#measure-network-latency>」を参照してください。 SignalR と Blazor の詳細については、以下を参照してください。
+Blazor サーバー アプリは、ネットワーク遅延時間とメモリ使用量を低減することで、UI 遅延時間を最小限に抑えるように最適化する必要があります。 ネットワーク遅延時間を測定する方法については、「<xref:blazor/host-and-deploy/server#measure-network-latency>」を参照してください。 SignalR と Blazor の詳細については、以下を参照してください。
 
-* <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server/threat-mitigation>
+* <xref:blazor/host-and-deploy/server>
+* <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>サーバーへの接続
 
@@ -147,7 +147,7 @@ Blazor サーバー アプリには、サーバーへのアクティブな Signa
 
 最初のクライアント要求への応答として、Blazor サーバー アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、クライアントを同じサーバーに再接続する必要があります。 複数のバックエンド サーバーを使用する Blazor サーバー アプリでは、SignalR 接続に "*スティッキー セッション*" を実装する必要があります。
 
-Blazor サーバー アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 Azure SignalR サービスでは、サービスの `ServerStickyMode` オプションまたは構成値を `Required` に設定することにより、スティッキー セッションが有効になります。 詳細については、「<xref:host-and-deploy/blazor/server#signalr-configuration>」を参照してください。
+Blazor サーバー アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 Azure SignalR サービスでは、サービスの `ServerStickyMode` オプションまたは構成値を `Required` に設定することにより、スティッキー セッションが有効になります。 詳細については、「<xref:blazor/host-and-deploy/server#signalr-configuration>」を参照してください。
 
 IIS を使用すると、スティッキー セッションはアプリケーション要求ルーティングによって有効になります。 詳しくは、「[アプリケーション要求ルーティングを使用した HTTP 負荷分散](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)」をご覧ください。
 
@@ -155,5 +155,5 @@ IIS を使用すると、スティッキー セッションはアプリケーシ
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
-* <xref:blazor/hosting-model-configuration>
+* <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

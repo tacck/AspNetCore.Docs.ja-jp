@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: cfc2867baa03cbc0bedc9ad4a90244ec007094d6
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105663"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102500"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
@@ -99,7 +99,7 @@ Azure データ ストレージ オプションに関する詳細については
 * ユーザーがページを手動で再読み込みした。
 * Web サーバーが利用できなくなり、別のサーバーに接続する目的で、ページの再読み込みがユーザーに強制される。
 
-`@page` ディレクティブで URL パターンを定義する方法については、「<xref:blazor/routing>」を参照してください。
+`@page` ディレクティブで URL パターンを定義する方法については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
 ### <a name="client-side-in-the-browser"></a>ブラウザーのクライアント側
 
@@ -196,7 +196,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-コンポーネントのパラメーターにナビゲーションの状態が含まれている場合、`ProtectedSessionStore.GetAsync` を呼び出し、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ではなく、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> で結果を割り当てます。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> は、コンポーネントが最初にインスタンス化されたときに 1 回だけ呼び出されます。 後で、その同じページにいるとき、ユーザーが別の URL に移動しても <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> が再び呼び出されることはありません。 詳細については、「<xref:blazor/lifecycle>」を参照してください。
+コンポーネントのパラメーターにナビゲーションの状態が含まれている場合、`ProtectedSessionStore.GetAsync` を呼び出し、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ではなく、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> で結果を割り当てます。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> は、コンポーネントが最初にインスタンス化されたときに 1 回だけ呼び出されます。 後で、その同じページにいるとき、ユーザーが別の URL に移動しても <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> が再び呼び出されることはありません。 詳細については、「<xref:blazor/components/lifecycle>」を参照してください。
 
 > [!WARNING]
 > このセクションの例は、サーバーでプリレンダリングが有効になっていない場合に機能します。 プリレンダリングが有効になっている場合、次のようなエラーが発生します。

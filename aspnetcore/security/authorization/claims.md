@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: de8ab915e6a8529c7401f89fad067ec33d5d0713
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 41e19896e9c43ca67aa8b1af1c6c88c9c9c20373
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774419"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074482"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core での要求ベースの承認
 
 <a name="security-authorization-claims-based"></a>
 
-Id が作成されると、信頼されたパーティによって発行された1つまたは複数の要求が割り当てられる場合があります。 クレームは、サブジェクトの内容を表す名前と値のペアであり、サブジェクトが実行できる内容ではありません。 たとえば、ローカル運転免許証機関によって発行された運転免許証があるとします。 運転免許証には、お客様のドライバーのライセンスがあります。 この場合、要求名`DateOfBirth`はになります。要求の値は生の日付になります。 `8th June 1970`たとえば、発行者は運転免許証となります。 クレームベースの承認では、最も単純にクレームの値を確認し、その値に基づいてリソースへのアクセスを許可します。 たとえば、夜のクラブへのアクセスが必要な場合、承認プロセスは次のようになります。
+Id が作成されると、信頼されたパーティによって発行された1つまたは複数の要求が割り当てられる場合があります。 クレームは、サブジェクトの内容を表す名前と値のペアであり、サブジェクトが実行できる内容ではありません。 たとえば、ローカル運転免許証機関によって発行された運転免許証があるとします。 運転免許証には、お客様のドライバーのライセンスがあります。 この場合、要求名はになります `DateOfBirth` 。要求の値は生の日付になり `8th June 1970` ます。たとえば、発行者は運転免許証となります。 クレームベースの承認では、最も単純にクレームの値を確認し、その値に基づいてリソースへのアクセスを許可します。 たとえば、夜のクラブへのアクセスが必要な場合、承認プロセスは次のようになります。
 
 ドアのセキュリティ担当者は、お客様がアクセス権を付与する前に、誕生日の請求日の値と、発行者 (運転免許機関) を信頼するかどうかを評価します。
 
@@ -34,7 +34,7 @@ Id には複数の値を持つ複数の要求を含めることができ、同�
 
 最も単純な種類の要求ポリシーでは、要求の存在を検索し、値を確認しません。
 
-まず、ポリシーをビルドして登録する必要があります。 これは、承認サービス構成の一部として行われます。これ`ConfigureServices()`は通常、 *Startup.cs*ファイルに含まれています。
+まず、ポリシーをビルドして登録する必要があります。 これは、承認サービス構成の一部として行われます。これは通常、 `ConfigureServices()` *Startup.cs*ファイルに含まれています。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -69,9 +69,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-この場合、ポリシー `EmployeeOnly`は、現在の id に対する`EmployeeNumber`クレームの有無を確認します。
+この場合、ポリシーは、 `EmployeeOnly` 現在の id に対するクレームの有無を確認し `EmployeeNumber` ます。
 
-次に、 `Policy` `AuthorizeAttribute`属性のプロパティを使用してポリシーを適用し、ポリシー名を指定します。
+次に、属性のプロパティを使用してポリシーを適用し、 `Policy` `AuthorizeAttribute` ポリシー名を指定します。
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -93,7 +93,7 @@ public class VacationController : Controller
 }
 ```
 
-`AuthorizeAttribute`属性によって保護されているコントローラーがあり、特定の`AllowAnonymousAttribute`アクションへの匿名アクセスを許可する場合は、属性を適用します。
+属性によって保護されているコントローラーがあり `AuthorizeAttribute` 、特定のアクションへの匿名アクセスを許可する場合は、属性を適用し `AllowAnonymousAttribute` ます。
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -148,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 ::: moniker-end
 ### <a name="add-a-generic-claim-check"></a>汎用要求チェックの追加
 
-要求値が単一の値ではない場合、または変換が必要な場合は、 [Requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion)を使用します。 詳細については、「 [func を使用してポリシーを満たす](xref:security/authorization/policies#using-a-func-to-fulfill-a-policy)」を参照してください。
+要求値が単一の値ではない場合、または変換が必要な場合は、 [Requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion)を使用します。 詳細については、「 [func を使用してポリシーを満たす](xref:security/authorization/policies#use-a-func-to-fulfill-a-policy)」を参照してください。
 
 ## <a name="multiple-policy-evaluation"></a>複数のポリシーの評価
 
@@ -169,6 +169,6 @@ public class SalaryController : Controller
 }
 ```
 
-上の例では、 `EmployeeOnly`ポリシーを満たす id は、その`Payslip`ポリシーがコントローラーに適用されると、アクションにアクセスできます。 ただし、 `UpdateSalary`アクションを呼び出すためには、id *both*は`EmployeeOnly`ポリシーと`HumanResources`ポリシーの両方を満たす必要があります。
+上の例では、ポリシーを満たす id は、 `EmployeeOnly` `Payslip` そのポリシーがコントローラーに適用されると、アクションにアクセスできます。 ただし、アクションを呼び出すために `UpdateSalary` は、id はポリシーとポリシーの*両方*を満たす必要があり `EmployeeOnly` `HumanResources` ます。
 
 誕生日の請求書を取得するなど、より複雑なポリシーが必要な場合は、年数を計算し、その年齢を確認してから、[カスタムポリシーハンドラー](xref:security/authorization/policies)を記述する必要があります。

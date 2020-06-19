@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 26202c45e49e64117d35fe6f1e9a65c4acc170fb
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: de04992c3e3c7ce2dc73eee801484d5e3930fa3a
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105091"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102457"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -222,7 +222,7 @@ public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRu
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
-> `username` 変数は、コンポーネントがレンダリングされた後にのみ設定されます。 未入力の <xref:Microsoft.AspNetCore.Components.ElementReference> が JavaScript コードに渡された場合、JavaScript コードは `null` の値を受け取ります。 コンポーネントのレンダリングが完了した後に要素参照を操作する (要素に初期フォーカスを設定する) には、[OnAfterRenderAsync または OnAfterRender コンポーネント ライフサイクル メソッド](xref:blazor/lifecycle#after-component-render)を使用します。
+> `username` 変数は、コンポーネントがレンダリングされた後にのみ設定されます。 未入力の <xref:Microsoft.AspNetCore.Components.ElementReference> が JavaScript コードに渡された場合、JavaScript コードは `null` の値を受け取ります。 コンポーネントのレンダリングが完了した後に要素参照を操作する (要素に初期フォーカスを設定する) には、[OnAfterRenderAsync または OnAfterRender コンポーネント ライフサイクル メソッド](xref:blazor/components/lifecycle#after-component-render)を使用します。
 
 ジェネリック型を操作して値を返す場合は、<xref:System.Threading.Tasks.ValueTask%601> を使用します。
 
@@ -459,7 +459,7 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-リソース枯渇の詳細については、「<xref:security/blazor/server/threat-mitigation>」を参照してください。
+リソース枯渇の詳細については、「<xref:blazor/security/server/threat-mitigation>」を参照してください。
 
 [!INCLUDE[](~/includes/blazor-share-interop-code.md)]
 

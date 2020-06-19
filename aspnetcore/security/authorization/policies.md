@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 3b6fcef91355bf22e5aa185652d9489a44998db0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 533bddc9c4499dad99cfdb3089045ea10aed4548
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777502"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074155"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core でのポリシーベースの承認
 
@@ -25,15 +25,15 @@ ms.locfileid: "82777502"
 
 内部的には、[ロールベースの承認](xref:security/authorization/roles)と[要求ベースの承認](xref:security/authorization/claims)では、要件、要件ハンドラー、および事前に構成されたポリシーを使用します。 これらの構成要素は、コードでの承認評価の式をサポートします。 結果として、より充実した再利用可能な承認の構造が得られます。
 
-承認ポリシーは、1つまたは複数の要件で構成されます。 認証サービス構成の一部として、 `Startup.ConfigureServices`メソッドに登録されます。
+承認ポリシーは、1つまたは複数の要件で構成されます。 認証サービス構成の一部として、メソッドに登録され `Startup.ConfigureServices` ます。
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53, 58)]
 
-前の例では、"AtLeast21" ポリシーが作成されています。 最小期間の要件&mdash;が1つあります。これは、要件にパラメーターとして指定されます。
+前の例では、"AtLeast21" ポリシーが作成されています。 最小期間の要件が1つあり &mdash; ます。これは、要件にパラメーターとして指定されます。
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-承認が成功したかどうかを判断<xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>するプライマリサービスは次のとおりです。
+承認が成功したかどうかを判断するプライマリサービスは <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> 次のとおりです。
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
 
@@ -41,7 +41,7 @@ ms.locfileid: "82777502"
 
 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement>は、メソッドを持たないマーカーサービスであり、認証が成功したかどうかを追跡するためのメカニズムを備えています。
 
-各<xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler>は、要件が満たされているかどうかを確認します。
+各 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> は、要件が満たされているかどうかを確認します。
 <!--The following code is a copy/paste from 
 https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
 
@@ -60,7 +60,7 @@ public interface IAuthorizationHandler
 }
 ```
 
-クラス<xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext>は、要件が満たされているかどうかを示すためにハンドラーが使用するものです。
+クラスは、 <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> 要件が満たされているかどうかを示すためにハンドラーが使用するものです。
 
 ```csharp
  context.Succeed(requirement)
@@ -89,7 +89,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-一般的`ConfigureServices`なコードを次に示します。
+一般的なコードを次に示し `ConfigureServices` ます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -111,27 +111,27 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-承認<xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>に`[Authorize(Policy = "Something")]`はまたはを使用します。
+<xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>承認にはまたはを使用 `[Authorize(Policy = "Something")]` します。
 
-## <a name="applying-policies-to-mvc-controllers"></a>MVC コントローラーへのポリシーの適用
+## <a name="apply-policies-to-mvc-controllers"></a>MVC コントローラーにポリシーを適用する
 
-ページを使用しRazorている場合は、このドキュメントの「[ページへRazorのポリシーの適用](#applying-policies-to-razor-pages)」を参照してください。
+ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
 
-ポリシーは、 `[Authorize]`ポリシー名を持つ属性を使用して、コントローラーに適用されます。 次に例を示します。
+ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>ページへのRazorポリシーの適用
+## <a name="apply-policies-to-razor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは、ポリシー Razor名を持つ属性`[Authorize]`を使用して、ページに適用されます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-ポリシーは、[承認規則](xref:security/authorization/razor-pages-authorization)をRazor使用してページに適用することもできます。
+ポリシーは Razor 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。
 
 ## <a name="requirements"></a>必要条件
 
-承認要件とは、ポリシーが現在のユーザープリンシパルを評価するために使用できるデータパラメーターのコレクションです。 "AtLeast21" ポリシーでは、最小有効期間を1つ&mdash;のパラメーターとして指定する必要があります。 要件には、空のマーカーインターフェイスである[IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)が実装されています。 パラメーター化された最小年齢要件は、次のように実装できます。
+承認要件とは、ポリシーが現在のユーザープリンシパルを評価するために使用できるデータパラメーターのコレクションです。 "AtLeast21" ポリシーでは、最小有効期間を1つのパラメーターとして指定する必要が &mdash; あります。 要件には、空のマーカーインターフェイスである[IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)が実装されています。 パラメーター化された最小年齢要件は、次のように実装できます。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
@@ -146,7 +146,7 @@ public void ConfigureServices(IServiceCollection services)
 
 承認ハンドラーは、要件のプロパティを評価する役割を担います。 承認ハンドラーは、指定された[authorizationhandler コンテキスト](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext)に対して要件を評価して、アクセスが許可されているかどうかを判断します。
 
-要件には、[複数のハンドラー](#security-authorization-policies-based-multiple-handlers)を含めることができます。 ハンドラーは[Authorizationhandler\<trequirement>](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)を継承できます`TRequirement` 。ここで、は処理する必要がある要件です。 また、1つのハンドラーで[IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler)を実装して、複数の種類の要件を処理することもできます。
+要件には、[複数のハンドラー](#security-authorization-policies-based-multiple-handlers)を含めることができます。 ハンドラーは[Authorizationhandler \<TRequirement> ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)を継承できます。ここで、 `TRequirement` は処理する必要がある要件です。 また、1つのハンドラーで[IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler)を実装して、複数の種類の要件を処理することもできます。
 
 ### <a name="use-a-handler-for-one-requirement"></a>1つの要件に対してハンドラーを使用する
 
@@ -156,7 +156,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/MinimumAgeHandler.cs?name=snippet_MinimumAgeHandlerClass)]
 
-前のコードは、現在のユーザープリンシパルが、既知の信頼された発行者によって発行された生年月日を持っているかどうかを判断します。 要求が欠落している場合は、承認を行うことができません。この場合、完了したタスクが返されます。 クレームが存在する場合は、ユーザーの年齢が計算されます。 ユーザーが要件によって定義された最小経過期間を満たしている場合、承認は成功したと見なされます。 承認が成功すると`context.Succeed` 、は、その唯一のパラメーターとして満たされた要件で呼び出されます。
+前のコードは、現在のユーザープリンシパルが、既知の信頼された発行者によって発行された生年月日を持っているかどうかを判断します。 要求が欠落している場合は、承認を行うことができません。この場合、完了したタスクが返されます。 クレームが存在する場合は、ユーザーの年齢が計算されます。 ユーザーが要件によって定義された最小経過期間を満たしている場合、承認は成功したと見なされます。 承認が成功すると、 `context.Succeed` は、その唯一のパラメーターとして満たされた要件で呼び出されます。
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>複数の要件に対してハンドラーを使用する
 
@@ -164,7 +164,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-上記のコードは、成功とマークされていない要件を含むプロパティを[pendingrequirements 要件](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;にたどります。 要件と`ReadPermission`して、要求されたリソースにアクセスするには、ユーザーが所有者またはスポンサーである必要があります。 `EditPermission`または`DeletePermission`要件の場合は、要求されたリソースにアクセスするための所有者である必要があります。
+上記のコードは[PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)、 &mdash; 成功とマークされていない要件を含むプロパティを pendingrequirements 要件にたどります。 要件として `ReadPermission` 、要求されたリソースにアクセスするには、ユーザーが所有者またはスポンサーである必要があります。 または要件の場合は、 `EditPermission` `DeletePermission` 要求されたリソースにアクセスするための所有者である必要があります。
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
@@ -174,19 +174,19 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
-前のコードで`MinimumAgeHandler`は、を呼び出す`services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`ことによってシングルトンとして登録されます。 ハンドラーは、組み込みの[サービス有効期間](xref:fundamentals/dependency-injection#service-lifetimes)のいずれかを使用して登録できます。
+前のコードでは、を `MinimumAgeHandler` 呼び出すことによってシングルトンとして登録され `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();` ます。 ハンドラーは、組み込みの[サービス有効期間](xref:fundamentals/dependency-injection#service-lifetimes)のいずれかを使用して登録できます。
 
 ## <a name="what-should-a-handler-return"></a>ハンドラーが返すもの
 
-[ハンドラー](#security-authorization-handler-example)の例`Handle`のメソッドは値を返さないことに注意してください。 成功または失敗のいずれかの状態はどのように示されますか。
+`Handle`[ハンドラーの例](#security-authorization-handler-example)のメソッドは値を返さないことに注意してください。 成功または失敗のいずれかの状態はどのように示されますか。
 
-* ハンドラーはを呼び出し`context.Succeed(IAuthorizationRequirement requirement)`て成功を示し、正常に検証された要件を渡します。
+* ハンドラーはを呼び出して成功を示し `context.Succeed(IAuthorizationRequirement requirement)` 、正常に検証された要件を渡します。
 
 * 同じ要件の他のハンドラーが成功する可能性があるため、通常、ハンドラーはエラーを処理する必要はありません。
 
-* エラーを保証するには、他の要件ハンドラーが`context.Fail`成功したとしても、を呼び出します。
+* エラーを保証するには、他の要件ハンドラーが成功したとしても、を呼び出し `context.Fail` ます。
 
-ハンドラーがまたは`context.Succeed` `context.Fail`を呼び出すと、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に`false`設定すると、 [Invokeハンドラの terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)プロパティ (ASP.NET Core 1.1 以降で使用可能) が呼び出されたときに`context.Fail`ハンドラーの実行をショートサーキットします。 `InvokeHandlersAfterFailure`既定値`true`はです。この場合、すべてのハンドラーが呼び出されます。
+ハンドラーが `context.Succeed` またはを呼び出すと `context.Fail` 、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に設定すると `false` 、 [Invokeハンドラの terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)プロパティ (ASP.NET Core 1.1 以降で使用可能) が呼び出されたときにハンドラーの実行をショートサーキットし `context.Fail` ます。 `InvokeHandlersAfterFailure`既定値は `true` です。この場合、すべてのハンドラーが呼び出されます。
 
 > [!NOTE]
 > 認証ハンドラーは、認証が失敗した場合でも呼び出されます。
@@ -209,23 +209,35 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/TemporaryStickerHandler.cs?name=snippet_TemporaryStickerHandlerClass)]
 
-両方のハンドラーが[登録](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)されていることを確認します。 ポリシーによってが評価された`BuildingEntryRequirement`ときにいずれかのハンドラーが成功した場合、ポリシーの評価は成功します。
+両方のハンドラーが[登録](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)されていることを確認します。 ポリシーによってが評価されたときにいずれかのハンドラーが成功した場合 `BuildingEntryRequirement` 、ポリシーの評価は成功します。
 
-## <a name="using-a-func-to-fulfill-a-policy"></a>Func を使用してポリシーを満たす
+## <a name="use-a-func-to-fulfill-a-policy"></a>Func を使用してポリシーを満たす
 
-ポリシーを実現することは、コード内で簡単に行うことができます。 ポリシービルダーを使用`Func<AuthorizationHandlerContext, bool>` `RequireAssertion`してポリシーを構成するときに、を指定することができます。
+ポリシーを実現することは、コード内で簡単に行うことができます。 ポリシー `Func<AuthorizationHandlerContext, bool>` ビルダーを使用してポリシーを構成するときに、を指定することができ `RequireAssertion` ます。
 
-たとえば、前`BadgeEntryHandler`のは次のように書き換えることができます。
+たとえば、前のは次のように `BadgeEntryHandler` 書き換えることができます。
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=42-43,47-53)]
 
-## <a name="accessing-mvc-request-context-in-handlers"></a>ハンドラーでの MVC 要求コンテキストへのアクセス
+## <a name="access-mvc-request-context-in-handlers"></a>ハンドラーの MVC 要求コンテキストへのアクセス
 
-承認`HandleRequirementAsync`ハンドラーに実装するメソッドには、 `AuthorizationHandlerContext`とという2つの`TRequirement`パラメーターがあります。 MVC や Jabbr などのフレームワークは、の`Resource`プロパティに任意のオブジェクトを追加し`AuthorizationHandlerContext`て、追加情報を渡すことができます。
+`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
 
-たとえば、MVC は、 `Resource`プロパティに[authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext)のインスタンスを渡します。 このプロパティは、 `HttpContext` `RouteData`、、および MVC とRazorページによって提供されるすべてのものへのアクセスを提供します。
+エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。 エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。 次に例を示します。
 
-`Resource`プロパティの使用はフレームワーク固有です。 プロパティの情報を`Resource`使用すると、承認ポリシーが特定のフレームワークに限定されます。 キーワードを使用し`Resource`てプロパティをキャストし、キャストが成功したことを確認して、他のフレームワーク`InvalidCastException`で実行したときにコードがクラッシュしないようにする必要があります。 `is`
+```csharp
+if (context.Resource is Endpoint endpoint)
+{
+   var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
+   ...
+}
+```
+
+エンドポイントは、現在のへのアクセスを提供しません `HttpContext` 。 エンドポイントルーティングを使用する場合は、を使用して、 `IHttpContextAcessor` `HttpContext` 承認ハンドラー内でにアクセスします。 詳細については、「[カスタムコンポーネントからの HttpContext の使用](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components)」を参照してください。
+
+従来のルーティングでは、または MVC の承認フィルターの一部として承認が行われた場合、の値 `Resource` は <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> インスタンスになります。 このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し Razor ます。
+
+プロパティの使用 `Resource` はフレームワーク固有です。 プロパティの情報を使用すると、 `Resource` 承認ポリシーが特定のフレームワークに限定されます。 `Resource`キーワードを使用してプロパティをキャストし、キャストが成功したことを確認して、 `is` `InvalidCastException` 他のフレームワークで実行したときにコードがクラッシュしないようにする必要があります。
 
 ```csharp
 // Requires the following import:
@@ -243,23 +255,25 @@ if (context.Resource is AuthorizationFilterContext mvcContext)
 
 内部的には、[ロールベースの承認](xref:security/authorization/roles)と[要求ベースの承認](xref:security/authorization/claims)では、要件、要件ハンドラー、および事前に構成されたポリシーを使用します。 これらの構成要素は、コードでの承認評価の式をサポートします。 結果として、より充実した再利用可能な承認の構造が得られます。
 
-承認ポリシーは、1つまたは複数の要件で構成されます。 認証サービス構成の一部として、 `Startup.ConfigureServices`メソッドに登録されます。
+承認ポリシーは、1つまたは複数の要件で構成されます。 認証サービス構成の一部として、メソッドに登録され `Startup.ConfigureServices` ます。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,66)]
 
-前の例では、"AtLeast21" ポリシーが作成されています。 最小期間の要件&mdash;が1つあります。これは、要件にパラメーターとして指定されます。
+前の例では、"AtLeast21" ポリシーが作成されています。 最小期間の要件が1つあり &mdash; ます。これは、要件にパラメーターとして指定されます。
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-承認が成功したかどうかを判断<xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>するプライマリサービスは次のとおりです。
+承認が成功したかどうかを判断するプライマリサービスは <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> 次のとおりです。
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 上記のコードは、 [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)の2つのメソッドを強調表示しています。
 
 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement>は、メソッドを持たないマーカーサービスであり、認証が成功したかどうかを追跡するためのメカニズムを備えています。
 
-各<xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler>は、要件が満たされているかどうかを確認します。
+各 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> は、要件が満たされているかどうかを確認します。
 <!--The following code is a copy/paste from 
 https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
 
@@ -278,7 +292,7 @@ public interface IAuthorizationHandler
 }
 ```
 
-クラス<xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext>は、要件が満たされているかどうかを示すためにハンドラーが使用するものです。
+クラスは、 <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> 要件が満たされているかどうかを示すためにハンドラーが使用するものです。
 
 ```csharp
  context.Succeed(requirement)
@@ -307,7 +321,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-一般的`ConfigureServices`なコードを次に示します。
+一般的なコードを次に示し `ConfigureServices` ます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -328,27 +342,27 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-承認<xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>に`[Authorize(Policy = "Something")]`はまたはを使用します。
+<xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>承認にはまたはを使用 `[Authorize(Policy = "Something")]` します。
 
-## <a name="applying-policies-to-mvc-controllers"></a>MVC コントローラーへのポリシーの適用
+## <a name="apply-policies-to-mvc-controllers"></a>MVC コントローラーにポリシーを適用する
 
-ページを使用しRazorている場合は、このドキュメントの「[ページへRazorのポリシーの適用](#applying-policies-to-razor-pages)」を参照してください。
+ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
 
-ポリシーは、 `[Authorize]`ポリシー名を持つ属性を使用して、コントローラーに適用されます。 次に例を示します。
+ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>ページへのRazorポリシーの適用
+## <a name="apply-policies-to-razor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは、ポリシー Razor名を持つ属性`[Authorize]`を使用して、ページに適用されます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-ポリシーは、[承認規則](xref:security/authorization/razor-pages-authorization)をRazor使用してページに適用することもできます。
+ポリシーは Razor 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。
 
 ## <a name="requirements"></a>必要条件
 
-承認要件とは、ポリシーが現在のユーザープリンシパルを評価するために使用できるデータパラメーターのコレクションです。 "AtLeast21" ポリシーでは、最小有効期間を1つ&mdash;のパラメーターとして指定する必要があります。 要件には、空のマーカーインターフェイスである[IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)が実装されています。 パラメーター化された最小年齢要件は、次のように実装できます。
+承認要件とは、ポリシーが現在のユーザープリンシパルを評価するために使用できるデータパラメーターのコレクションです。 "AtLeast21" ポリシーでは、最小有効期間を1つのパラメーターとして指定する必要が &mdash; あります。 要件には、空のマーカーインターフェイスである[IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)が実装されています。 パラメーター化された最小年齢要件は、次のように実装できます。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
@@ -363,7 +377,7 @@ public void ConfigureServices(IServiceCollection services)
 
 承認ハンドラーは、要件のプロパティを評価する役割を担います。 承認ハンドラーは、指定された[authorizationhandler コンテキスト](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext)に対して要件を評価して、アクセスが許可されているかどうかを判断します。
 
-要件には、[複数のハンドラー](#security-authorization-policies-based-multiple-handlers)を含めることができます。 ハンドラーは[Authorizationhandler\<trequirement>](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)を継承できます`TRequirement` 。ここで、は処理する必要がある要件です。 また、1つのハンドラーで[IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler)を実装して、複数の種類の要件を処理することもできます。
+要件には、[複数のハンドラー](#security-authorization-policies-based-multiple-handlers)を含めることができます。 ハンドラーは[Authorizationhandler \<TRequirement> ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)を継承できます。ここで、 `TRequirement` は処理する必要がある要件です。 また、1つのハンドラーで[IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler)を実装して、複数の種類の要件を処理することもできます。
 
 ### <a name="use-a-handler-for-one-requirement"></a>1つの要件に対してハンドラーを使用する
 
@@ -373,7 +387,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/MinimumAgeHandler.cs?name=snippet_MinimumAgeHandlerClass)]
 
-前のコードは、現在のユーザープリンシパルが、既知の信頼された発行者によって発行された生年月日を持っているかどうかを判断します。 要求が欠落している場合は、承認を行うことができません。この場合、完了したタスクが返されます。 クレームが存在する場合は、ユーザーの年齢が計算されます。 ユーザーが要件によって定義された最小経過期間を満たしている場合、承認は成功したと見なされます。 承認が成功すると`context.Succeed` 、は、その唯一のパラメーターとして満たされた要件で呼び出されます。
+前のコードは、現在のユーザープリンシパルが、既知の信頼された発行者によって発行された生年月日を持っているかどうかを判断します。 要求が欠落している場合は、承認を行うことができません。この場合、完了したタスクが返されます。 クレームが存在する場合は、ユーザーの年齢が計算されます。 ユーザーが要件によって定義された最小経過期間を満たしている場合、承認は成功したと見なされます。 承認が成功すると、 `context.Succeed` は、その唯一のパラメーターとして満たされた要件で呼び出されます。
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>複数の要件に対してハンドラーを使用する
 
@@ -381,7 +395,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-上記のコードは、成功とマークされていない要件を含むプロパティを[pendingrequirements 要件](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;にたどります。 要件と`ReadPermission`して、要求されたリソースにアクセスするには、ユーザーが所有者またはスポンサーである必要があります。 `EditPermission`または`DeletePermission`要件の場合は、要求されたリソースにアクセスするための所有者である必要があります。
+上記のコードは[PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)、 &mdash; 成功とマークされていない要件を含むプロパティを pendingrequirements 要件にたどります。 要件として `ReadPermission` 、要求されたリソースにアクセスするには、ユーザーが所有者またはスポンサーである必要があります。 または要件の場合は、 `EditPermission` `DeletePermission` 要求されたリソースにアクセスするための所有者である必要があります。
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
@@ -391,19 +405,19 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
-前のコードで`MinimumAgeHandler`は、を呼び出す`services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`ことによってシングルトンとして登録されます。 ハンドラーは、組み込みの[サービス有効期間](xref:fundamentals/dependency-injection#service-lifetimes)のいずれかを使用して登録できます。
+前のコードでは、を `MinimumAgeHandler` 呼び出すことによってシングルトンとして登録され `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();` ます。 ハンドラーは、組み込みの[サービス有効期間](xref:fundamentals/dependency-injection#service-lifetimes)のいずれかを使用して登録できます。
 
 ## <a name="what-should-a-handler-return"></a>ハンドラーが返すもの
 
-[ハンドラー](#security-authorization-handler-example)の例`Handle`のメソッドは値を返さないことに注意してください。 成功または失敗のいずれかの状態はどのように示されますか。
+`Handle`[ハンドラーの例](#security-authorization-handler-example)のメソッドは値を返さないことに注意してください。 成功または失敗のいずれかの状態はどのように示されますか。
 
-* ハンドラーはを呼び出し`context.Succeed(IAuthorizationRequirement requirement)`て成功を示し、正常に検証された要件を渡します。
+* ハンドラーはを呼び出して成功を示し `context.Succeed(IAuthorizationRequirement requirement)` 、正常に検証された要件を渡します。
 
 * 同じ要件の他のハンドラーが成功する可能性があるため、通常、ハンドラーはエラーを処理する必要はありません。
 
-* エラーを保証するには、他の要件ハンドラーが`context.Fail`成功したとしても、を呼び出します。
+* エラーを保証するには、他の要件ハンドラーが成功したとしても、を呼び出し `context.Fail` ます。
 
-ハンドラーがまたは`context.Succeed` `context.Fail`を呼び出すと、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に`false`設定すると、 [Invokeハンドラの terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)プロパティ (ASP.NET Core 1.1 以降で使用可能) が呼び出されたときに`context.Fail`ハンドラーの実行をショートサーキットします。 `InvokeHandlersAfterFailure`既定値`true`はです。この場合、すべてのハンドラーが呼び出されます。
+ハンドラーが `context.Succeed` またはを呼び出すと `context.Fail` 、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に設定すると `false` 、 [Invokeハンドラの terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure)プロパティ (ASP.NET Core 1.1 以降で使用可能) が呼び出されたときにハンドラーの実行をショートサーキットし `context.Fail` ます。 `InvokeHandlersAfterFailure`既定値は `true` です。この場合、すべてのハンドラーが呼び出されます。
 
 > [!NOTE]
 > 認証ハンドラーは、認証が失敗した場合でも呼び出されます。
@@ -426,33 +440,23 @@ public void ConfigureServices(IServiceCollection services)
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/TemporaryStickerHandler.cs?name=snippet_TemporaryStickerHandlerClass)]
 
-両方のハンドラーが[登録](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)されていることを確認します。 ポリシーによってが評価された`BuildingEntryRequirement`ときにいずれかのハンドラーが成功した場合、ポリシーの評価は成功します。
+両方のハンドラーが[登録](xref:security/authorization/policies#security-authorization-policies-based-handler-registration)されていることを確認します。 ポリシーによってが評価されたときにいずれかのハンドラーが成功した場合 `BuildingEntryRequirement` 、ポリシーの評価は成功します。
 
-## <a name="using-a-func-to-fulfill-a-policy"></a>Func を使用してポリシーを満たす
+## <a name="use-a-func-to-fulfill-a-policy"></a>Func を使用してポリシーを満たす
 
-ポリシーを実現することは、コード内で簡単に行うことができます。 ポリシービルダーを使用`Func<AuthorizationHandlerContext, bool>` `RequireAssertion`してポリシーを構成するときに、を指定することができます。
+ポリシーを実現することは、コード内で簡単に行うことができます。 ポリシー `Func<AuthorizationHandlerContext, bool>` ビルダーを使用してポリシーを構成するときに、を指定することができ `RequireAssertion` ます。
 
-たとえば、前`BadgeEntryHandler`のは次のように書き換えることができます。
+たとえば、前のは次のように `BadgeEntryHandler` 書き換えることができます。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=50-51,55-61)]
 
-## <a name="accessing-mvc-request-context-in-handlers"></a>ハンドラーでの MVC 要求コンテキストへのアクセス
+## <a name="access-mvc-request-context-in-handlers"></a>ハンドラーの MVC 要求コンテキストへのアクセス
 
-承認`HandleRequirementAsync`ハンドラーに実装するメソッドには、 `AuthorizationHandlerContext`とという2つの`TRequirement`パラメーターがあります。 MVC やSignalRなどのフレームワークは、の`Resource`プロパティに任意のオブジェクトを追加し`AuthorizationHandlerContext`て、追加情報を渡すことができます。
+`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
 
-エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource`プロパティはの<xref:Microsoft.AspNetCore.Http.Endpoint>インスタンスです。 エンドポイントを使用して、ルーティング先のリソースの基になるを調べることができます。 次に例を示します。
+たとえば、MVC は、プロパティに[Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext)のインスタンスを渡し `Resource` ます。 このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し Razor ます。
 
-```csharp
-if (context.Resource is Endpoint endpoint)
-{
-   var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
-   ...
-}
-```
-
-従来のルーティングでは、または MVC の承認フィルターの一部として承認が`Resource`行われ<xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext>た場合、の値はインスタンスになります。 このプロパティは、 `HttpContext` `RouteData`、、および MVC とRazorページによって提供されるすべてのものへのアクセスを提供します。
-
-`Resource`プロパティの使用はフレームワーク固有です。 プロパティの情報を`Resource`使用すると、承認ポリシーが特定のフレームワークに限定されます。 キーワードを使用し`Resource`てプロパティをキャストし、キャストが成功したことを確認して、他のフレームワーク`InvalidCastException`で実行したときにコードがクラッシュしないようにする必要があります。 `is`
+プロパティの使用 `Resource` はフレームワーク固有です。 プロパティの情報を使用すると、 `Resource` 承認ポリシーが特定のフレームワークに限定されます。 `Resource`キーワードを使用してプロパティをキャストし、キャストが成功したことを確認して、 `is` `InvalidCastException` 他のフレームワークで実行したときにコードがクラッシュしないようにする必要があります。
 
 ```csharp
 // Requires the following import:
