@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 08229283882928c4cc733de19840d25872846c97
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452032"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102332"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor の概要
 
@@ -162,7 +162,7 @@ HTML 構文を使用して、別のコンポーネントにコンポーネント
 
 アプリを実行します。 ホームページには、`Counter` コンポーネントによって提供される独自のカウンターがあります。
 
-コンポーネント パラメーターは、属性または [子コンテンツ](xref:blazor/components#child-content)を使用して指定されます。これにより、子コンポーネントのプロパティを設定できます。 `Counter` コンポーネントにパラメーターを追加するには、コンポーネントの `@code` ブロックを更新します。
+コンポーネント パラメーターは、属性または [子コンテンツ](xref:blazor/components/index#child-content)を使用して指定されます。これにより、子コンポーネントのプロパティを設定できます。 `Counter` コンポーネントにパラメーターを追加するには、コンポーネントの `@code` ブロックを更新します。
 
 * 属性 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) を使用して、`IncrementAmount` のためのパブリック プロパティを追加します。
 * `currentCount` の値を増やすときに `IncrementAmount` を使うように `IncrementCount` メソッドを変更します。
