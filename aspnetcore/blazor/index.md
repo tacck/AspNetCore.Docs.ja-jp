@@ -5,7 +5,7 @@ description: ASP.NET Core アプリ内に .NET を使った対話型のクライ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 05/19/2020
+ms.date: 06/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 086629f88ad04faed812bd16683e7d073f3e8ede
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102278"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122075"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor の概要
 
@@ -149,7 +149,7 @@ Blazor では、UI の更新プログラムを適用する方法からコンポ�
 
 ## <a name="code-sharing-and-net-standard"></a>コードの共有と .NET Standard
 
-Blazor では [.NET Standard 2.0](/dotnet/standard/net-standard) が実装されます。 .NET Standard は、.NET 実装全体で共通した .NET API の標準仕様です。 .NET Standard のクラス ライブラリは、Blazor、.NET Framework、.NET Core、Xamarin、Mono、Unity など、さまざまな .NET プラットフォーム全体で共有することができます。
+Blazor は [.NET Standard 2.1](/dotnet/standard/net-standard) を実装します。これにより、Blazor プロジェクトは .NET Standard 2.1 以前の仕様に準拠するライブラリを参照できます。 .NET Standard は、.NET 実装全体で共通した .NET API の標準仕様です。 .NET Standard のクラス ライブラリは、Blazor、.NET Framework、.NET Core、Xamarin、Mono、Unity など、さまざまな .NET プラットフォーム全体で共有することができます。
 
 Web ブラウザー内で使用できない API (たとえば、ファイル システムへのアクセス、ソケットを開く機能、スレッドなど) からは、<xref:System.PlatformNotSupportedException> がスローされます。
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 745eca9788d95c9a123e51a737b34dccdc65d8d4
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: b2468220d0c059a94a085357f2be7bbb3b89adc4
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876232"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074191"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core のミドルウェア
 
@@ -49,7 +49,7 @@ ASP.NET Core 要求パイプラインは、順番に呼び出される一連の�
 
 [!code-csharp[](index/snapshot/Middleware/Startup.cs)]
 
-複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します  *next* パラメーターを "*呼び出さない*" ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
+複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します *next* パラメーターを "*呼び出さない*" ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=5-10)]
 
@@ -184,6 +184,10 @@ public void Configure(IApplicationBuilder app)
 
 SPA の詳細については、[React](xref:spa/react) と [Angular](xref:spa/angular) プロジェクト テンプレートのガイドを参照してください。
 
+### <a name="forwarded-headers-middleware-order"></a>Forwarded Headers Middleware の順序
+
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
+
 ## <a name="branch-the-middleware-pipeline"></a>ミドルウェア パイプラインを分岐する
 
 <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map*> 拡張メソッドは、パイプラインを分岐する規則として使われます。 `Map` は、指定された要求パスの一致に基づいて、要求パイプラインを分岐します。 要求パスが指定されたパスで開始する場合、分岐が実行されます。
@@ -252,7 +256,7 @@ ASP.NET Core には、次のミドルウェア コンポーネントが付属し
 | [HTTP メソッドのオーバーライド](xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions) | メソッドをオーバーライドする受信 POST 要求を許可します。 | 更新されたメソッドを使うコンポーネントの前。 |
 | [HTTPS リダイレクト](xref:security/enforcing-ssl#require-https) | すべての HTTP 要求を HTTPS にリダイレクトします。 | URL を使うコンポーネントの前。 |
 | [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | 特殊な応答ヘッダーを追加するセキュリティ拡張機能のミドルウェア。 | 応答が送信される前と要求を変更するコンポーネントの後。 次に例を示します。 転送されるヘッダー、URL リライト。 |
-| [MVC](xref:mvc/overview) | MVC/Razor Pages で要求を処理します。 | 要求がルートと一致した場合の終端。 |
+| [MVC](xref:mvc/overview) | MVC または Razor Pages で要求を処理します。 | 要求がルートと一致した場合の終端。 |
 | [OWIN](xref:fundamentals/owin) | OWIN ベースのアプリ、サーバー、およびミドルウェアと相互運用します。 | OWIN ミドルウェアが要求を完全に処理した場合の終端。 |
 | [応答キャッシュ](xref:performance/caching/middleware) | 応答のキャッシュのサポートを提供します。 | キャッシュが必要なコンポーネントの前。 |
 | [応答圧縮](xref:performance/response-compression) | 応答の圧縮のサポートを提供します。 | 圧縮が必要なコンポーネントの前。 |
@@ -305,7 +309,7 @@ ASP.NET Core 要求パイプラインは、順番に呼び出される一連の�
 
 最初の <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run*> デリゲートが、パイプラインを終了します。
 
-複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します  *next* パラメーターを "*呼び出さない*" ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
+複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します *next* パラメーターを "*呼び出さない*" ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs)]
 
