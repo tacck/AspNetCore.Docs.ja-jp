@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: f29d15fc1e2d2ad84526598be14638110f08614e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774783"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85241012"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core の ObjectPool を使用したオブジェクトの再利用
 
@@ -31,7 +31,7 @@ ms.locfileid: "82774783"
 - 限られたリソースを表します。
 - 予測と頻繁に使用されます。
 
-たとえば、ASP.NET Core framework では、インスタンスを再利用<xref:System.Text.StringBuilder>するために、いくつかの場所でオブジェクトプールを使用します。 `StringBuilder`は、独自のバッファーを割り当てて管理し、文字データを保持します。 ASP.NET Core が機能`StringBuilder`を実装するために定期的に使用し、それらを再利用することによって、パフォーマンスが向上します。
+たとえば、ASP.NET Core framework では、インスタンスを再利用するために、いくつかの場所でオブジェクトプールを使用し <xref:System.Text.StringBuilder> ます。 `StringBuilder`は、独自のバッファーを割り当てて管理し、文字データを保持します。 ASP.NET Core `StringBuilder` が機能を実装するために定期的に使用し、それらを再利用することによって、パフォーマンスが向上します。
 
 オブジェクトプーリングでは、常にパフォーマンスが向上するわけではありません。
 
@@ -40,7 +40,7 @@ ms.locfileid: "82774783"
 
 オブジェクトプールは、アプリまたはライブラリの現実的なシナリオを使用してパフォーマンスデータを収集した後にのみ使用してください。
 
-**警告: は`ObjectPool`を実装`IDisposable`していません。破棄が必要な型では使用しないことをお勧めします。**
+**警告: はを `ObjectPool` 実装していません `IDisposable` 。破棄が必要な型では使用しないことをお勧めします。**
 
 **注: ObjectPool では、割り当てられるオブジェクトの数に制限は設定されません。これにより、保持するオブジェクトの数に制限が適用されます。**
 
@@ -57,22 +57,24 @@ ObjectPool は、次のような複数の方法でアプリで使用できます
 
 * プールをインスタンス化しています。
 * [依存関係の挿入](xref:fundamentals/dependency-injection)(DI) にプールをインスタンスとして登録する。
-* を DI `ObjectPoolProvider<>`に登録し、ファクトリとして使用します。
+* を `ObjectPoolProvider<>` DI に登録し、ファクトリとして使用します。
 
 ## <a name="how-to-use-objectpool"></a>ObjectPool の使用方法
 
-オブジェクト<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>を取得し<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> 、オブジェクトを返すには、を呼び出します。  すべてのオブジェクトを返す必要はありません。 オブジェクトを返さない場合は、ガベージコレクションが実行されます。
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>オブジェクトを取得し、オブジェクトを返すには、を呼び出し <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> ます。  すべてのオブジェクトを返す必要はありません。 オブジェクトを返さない場合は、ガベージコレクションが実行されます。
 
 ## <a name="objectpool-sample"></a>ObjectPool サンプル
 
 コード例を次に示します。
 
-* `ObjectPoolProvider` [依存関係挿入](xref:fundamentals/dependency-injection)(DI) コンテナーにを追加します。
-* DI コンテナーに`ObjectPool<StringBuilder>`を追加して構成します。
-* を`BirthdayMiddleware`追加します。
+* `ObjectPoolProvider`[依存関係挿入](xref:fundamentals/dependency-injection)(DI) コンテナーにを追加します。
+* DI コンテナーにを追加して構成し `ObjectPool<StringBuilder>` ます。
+* を追加し `BirthdayMiddleware` ます。
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
 次のコードはを実装します。`BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]

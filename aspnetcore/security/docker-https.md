@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 74d4a215b81259674fa6c14bdc8f306a3508f71a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 096e679846899fd742fa2a353f1313976c0e11fb
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775129"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240964"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする
 
@@ -32,7 +32,7 @@ ms.locfileid: "82775129"
 
 このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce)以降の[docker クライアント](https://www.docker.com/products/docker)が必要です。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download)以降が必要です。
 
@@ -40,14 +40,14 @@ ms.locfileid: "82775129"
 
 ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。 [Let's Encrypt](https://letsencrypt.org/)は、無料の証明書を提供する証明機関です。
 
-このドキュメントでは、事前に構築さ`localhost`れたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用します。 手順は、実稼働証明書の使用に似ています。
+このドキュメントでは、事前に構築されたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用 `localhost` します。 手順は、実稼働証明書の使用に似ています。
 
 実稼働証明書の場合:
 
 * `dotnet dev-certs`ツールは必要ありません。
 * 手順で使用した場所に証明書を保存する必要はありません。 任意の場所を使用できますが、証明書をサイトディレクトリ内に格納することはお勧めしません。
 
-次のセクションに記載されている手順では、Docker の`-v`コマンドラインオプションを使用して証明書をコンテナーにマウントします。 `COPY` *Dockerfile*でコマンドを使用してコンテナーイメージに証明書を追加することもできますが、この方法はお勧めしません。 証明書をイメージにコピーすることは、次の理由から推奨されません。
+次のセクションに記載されている手順では、Docker のコマンドラインオプションを使用して証明書をコンテナーにマウントし `-v` ます。 Dockerfile でコマンドを使用してコンテナーイメージに証明書を追加することもでき `COPY` ますが、この方法はお勧めしません。 *Dockerfile* 証明書をイメージにコピーすることは、次の理由から推奨されません。
 
 * 開発者の証明書を使用したテストで同じイメージを使用するのは困難です。
 * 実稼働証明書を使用してホストする場合、同じイメージを使用するのは困難です。
@@ -66,14 +66,16 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-上記のコマンドで、を`{ password here }`パスワードに置き換えます。
+上記のコマンドで、を `{ password here }` パスワードに置き換えます。
 
-HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
+コマンドシェルで HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
+
+[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。
 
 パスワードは、証明書に使用されているパスワードと一致している必要があります。
 
@@ -88,7 +90,7 @@ dotnet dev-certs https --trust
 
 `dotnet dev-certs https --trust`は、macOS と Windows でのみサポートされています。 ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。 ブラウザーで証明書を信頼する必要があると考えられます。
 
-上記のコマンドで、を`{ password here }`パスワードに置き換えます。
+上記のコマンドで、を `{ password here }` パスワードに置き換えます。
 
 HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
 
@@ -108,7 +110,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-上記のコマンドで、を`{ password here }`パスワードに置き換えます。
+上記のコマンドで、を `{ password here }` パスワードに置き換えます。 [PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。
 
 HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。
 
@@ -117,4 +119,4 @@ docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=\https\aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:C:\https\ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-パスワードは、証明書に使用されているパスワードと一致している必要があります。
+パスワードは、証明書に使用されているパスワードと一致している必要があります。 [PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。
