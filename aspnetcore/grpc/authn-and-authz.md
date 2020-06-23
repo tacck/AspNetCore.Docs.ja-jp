@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: f9d2e73f57d69e1eb5039019dc9e64193cf67820
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 61ddcdc75a627fe777fab88b41bdbc4c7f9be9f3
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105793"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84723991"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core のための gRPC での認証と承認
 
@@ -117,7 +117,7 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 別の方法として、クライアントから認証のためにクライアント証明書を提供することもできます。 [証明書の認証](https://tools.ietf.org/html/rfc5246#section-7.4.4)は、ASP.NET Core に到達するずっと前に TLS レベルで実行されます。 要求が ASP.NET Core に到達すると、[クライアント証明書の認証パッケージ](xref:security/authentication/certauth)によって、証明書を `ClaimsPrincipal` に解決できるようになります。
 
 > [!NOTE]
-> ホストは、クライアント証明書を受け入れるように構成する必要があります。 Kestrel、IIS、および Azure でのクライアント証明書の受け付けについては、「[証明書を要求するようにホストを構成する](xref:security/authentication/certauth#configure-your-host-to-require-certificates)」を参照してください。
+> クライアント証明書を受け入れるようにサーバーを構成します。 Kestrel、IIS、および Azure でのクライアント証明書の受け入れについては、「<xref:security/authentication/certauth#configure-your-server-to-require-certificates>」を参照してください。
 
 .NET gRPC クライアントでは、クライアント証明書は `HttpClientHandler` に追加されます。これがその後、gRPC クライアントの作成に使用されます。
 
