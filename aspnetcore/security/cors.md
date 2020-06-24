@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: a78aff2d2e16f36ed034e6af110d7ed763271583
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 1a52a2425eeba2bc62253e96fe6d2465562c154e
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105754"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292764"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core でのクロスオリジン要求 (CORS) を有効にする
 
@@ -64,6 +64,9 @@ CORS を有効にするには、次の3つの方法があります。
 
 名前付きポリシーで[[Enablecors]](#attr)属性を使用すると、CORS をサポートするエンドポイントを制限するための最も細かい制御が可能になります。
 
+> [!WARNING]
+> <xref:Owin.CorsExtensions.UseCors%2A>を使用する場合は、前にを呼び出す必要があり <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> `UseResponseCaching` ます。
+
 各方法の詳細については、次のセクションで説明します。
 
 <a name="np"></a>
@@ -72,7 +75,7 @@ CORS を有効にするには、次の3つの方法があります。
 
 CORS ミドルウェアは、クロスオリジン要求を処理します。 次のコードは、指定されたオリジンを持つすべてのアプリのエンドポイントに CORS ポリシーを適用します。
 
-[!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,31)]
+[!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,32)]
 
 上記のコードでは次の操作が行われます。
 
@@ -80,6 +83,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 * 拡張メソッドを呼び出し、 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> CORS ポリシーを指定し `_myAllowSpecificOrigins` ます。 `UseCors`CORS ミドルウェアを追加します。 への呼び出しは `UseCors` `UseRouting` 、の後、の前に配置する必要があり `UseAuthorization` ます。 詳細については、「[ミドルウェアの順序](xref:fundamentals/middleware/index#middleware-order)」を参照してください。
 * <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)を使用してを呼び出します。 ラムダはオブジェクトを受け取り <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> ます。 などの[構成オプション](#cors-policy-options)に `WithOrigins` ついては、この記事の後半で説明します。
 * `_myAllowSpecificOrigins`すべてのコントローラーエンドポイントに対して CORS ポリシーを有効にします。 特定のエンドポイントに CORS ポリシーを適用するには、「[エンドポイントルーティング](#ecors)」を参照してください。
+* [応答キャッシュミドルウェア](xref:performance/caching/middleware)を使用する場合は、の <xref:Owin.CorsExtensions.UseCors%2A> 前にを呼び出し <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> ます。
 
 エンドポイントルーティングでは、CORS ミドルウェアをとの呼び出しの間で実行するように構成する**必要があり** `UseRouting` `UseEndpoints` ます。
 
@@ -551,7 +555,7 @@ IIS に展開する場合、サーバーが匿名アクセスを許可するよ�
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet)]
 
-[Mydisplayrouteinfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs)は、 [Rick](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet パッケージによって提供され、ルート情報を表示します。
+[Mydisplayrouteinfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs)は、Rick.Doc. [routeinfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet パッケージによって提供され、ルート情報を表示します。
 
 次のいずれかの方法を使用して、上記のサンプルコードをテストします。
 
@@ -611,7 +615,7 @@ C:\Program Files\Git\mingw64\bin\
 
 配置されたサンプルの[テストページ](https://cors1.azurewebsites.net/test?number=2)から、前のコードをテストします。 [**コントローラー** ] ドロップダウンリストで、[**プレフライト**] を選択し、[**コントローラーの設定**] をクリックします。 エンドポイントに対するすべての CORS 呼び出しが `TodoItems2Controller` 成功します。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -1017,7 +1021,7 @@ CORS が有効なエンドポイントは、 [Fiddler](https://www.telerik.com/f
 
 IIS に展開する場合、サーバーが匿名アクセスを許可するように構成されていない場合、CORS は Windows 認証の前に実行する必要があります。 このシナリオをサポートするには、アプリ用に[IIS CORS モジュール](https://www.iis.net/downloads/microsoft/iis-cors-module)をインストールして構成する必要があります。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
