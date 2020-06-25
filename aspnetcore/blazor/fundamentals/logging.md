@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: b0448d5f6e5e16a726eb2274dcacb4dfa8314b5d
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103327"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240875"
 ---
 # <a name="aspnet-core-blazor-logging"></a>ASP.NET Core Blazor のログ
 
@@ -39,7 +39,7 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 `Logging` プロパティは型 <xref:Microsoft.Extensions.Logging.ILoggingBuilder> であるため、<xref:Microsoft.Extensions.Logging.ILoggingBuilder> で使用できるすべての拡張メソッドを `Logging` で使用することもできます。
 
-ログの構成は、アプリの設定ファイルから読み込むことができます。 詳細については、「<xref:blazor/fundamentals/logging>」を参照してください。
+ログの構成は、アプリの設定ファイルから読み込むことができます。 詳細については、「<xref:blazor/fundamentals/configuration#logging-configuration>」を参照してください。
 
 ## <a name="blazor-server"></a>Blazor サーバー
 
