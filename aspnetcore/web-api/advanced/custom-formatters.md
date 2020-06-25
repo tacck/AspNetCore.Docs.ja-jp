@@ -11,57 +11,55 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 0836fc288a015adb9a6223c5a2b681b1b03bded4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 89fbb9d52d99d0eff6656eb6a5a9b4e1c01bc65c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777320"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347087"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API のカスタム フォーマッタ
 
-著者: [Tom Dykstra](https://github.com/tdykstra)
+[Kirk Larkin](https://twitter.com/serpent5)と[Tom Dykstra](https://github.com/tdykstra)。
 
 ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web API でのデータ交換をサポートしています。 入力フォーマッタは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。 出力フォーマッタは、[応答を書式設定](xref:web-api/advanced/formatting)するために使用されます。
 
 フレームワークには、JSON および XML 用の組み込みの入力および出力フォーマッタが用意されています。 プレーン テキスト用の組み込みの出力フォーマッタが用意されていますが、プレーン テキスト用の入力フォーマッタは用意されていません。
 
-この記事では、カスタム フォーマッタを作成して、追加形式のサポートを追加する方法を示します。 プレーン テキスト用のカスタムの入力フォーマッタの例については、GitHub の [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) を参照してください。
+この記事では、カスタム フォーマッタを作成して、追加形式のサポートを追加する方法を示します。 カスタムプレーンテキスト入力フォーマッタの例については、GitHub の[TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs)を参照してください。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 ## <a name="when-to-use-custom-formatters"></a>カスタム フォーマッタを使用するタイミング
 
-組み込みフォーマッタでサポートされていないコンテンツの種類を[コンテンツ ネゴシエーション](xref:web-api/advanced/formatting#content-negotiation) プロセスでサポートする場合は、カスタム フォーマッタを使用します。
-
-たとえば、Web API の一部のクライアントが [Protobuf](https://github.com/google/protobuf) 形式を処理できる場合、より効率的であるため、それらのクライアントで Protobuf を使用することができます。 あるいは、Web API を使用して、[vCard](https://wikipedia.org/wiki/VCard) 形式 (連絡先データを交換する場合に一般的に使用される) で連絡先の名前とアドレスを送信することもできます。 この記事で提供するサンプル アプリでは単純な vCard フォーマッタを実装します。
+カスタムフォーマッタを使用して、組み込みのフォーマッタによって処理されないコンテンツの種類のサポートを追加します。
 
 ## <a name="overview-of-how-to-use-a-custom-formatter"></a>カスタム フォーマッタの使用方法の概要
 
-カスタム フォーマッタを作成して使用する手順を以下に示します。
+カスタムフォーマッタを作成するには:
 
-* クライアントに送信するデータをシリアル化する場合は、出力フォーマッタ クラスを作成します。
-* クライアントから受信したデータを逆シリアル化する場合は、入力フォーマッタ クラスを作成します。
-* フォーマッタのインスタンスを [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions) の `InputFormatters` および `OutputFormatters` コレクションに追加します。
-
-次のセクションでは、これらの各手順のガイダンスとコード例を提供します。
+* クライアントに送信されるデータをシリアル化するには、出力フォーマッタクラスを作成します。
+* クライアントから受信したデータを deserialzing するには、入力フォーマッタクラスを作成します。
+* フォーマッタクラスのインスタンスを、 `InputFormatters` `OutputFormatters` [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions)のコレクションおよびコレクションに追加します。
 
 ## <a name="how-to-create-a-custom-formatter-class"></a>カスタム フォーマッタ クラスの作成方法
 
 フォーマッタを作成する場合は、次のようにします。
 
-* クラスを適切な基底クラスから派生させます。
+* クラスを適切な基底クラスから派生させます。 このサンプルアプリは、およびから派生して <xref:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter> <xref:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter> います。
 * コンストラクターで有効なメディアの種類とエンコーディングを指定します。
-* `CanReadType`/`CanWriteType` メソッドのオーバーライド
-* `ReadRequestBodyAsync`/`WriteResponseBodyAsync` メソッドのオーバーライド
+* <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> および <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> メソッドをオーバーライドします。
+* <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> および `WriteResponseBodyAsync` メソッドをオーバーライドします。
+
+次のコードは、サンプルのクラスを示してい `VcardOutputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)
+
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=snippet)]
   
 ### <a name="derive-from-the-appropriate-base-class"></a>適切な基底クラスからの派生
 
 メディアの種類がテキスト (vCard など) の場合は、[TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) または [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) 基底クラスから派生させます。
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
-
-入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
 
 種類がバイナリである場合は、[InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) または [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) 基底クラスから派生させます。
 
@@ -69,63 +67,87 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 コンストラクターで、`SupportedMediaTypes` および `SupportedEncodings` コレクションに追加して、有効なメディアの種類とエンコーディングを指定します。
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=ctor&highlight=3,5-6)]
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=ctor)]
 
-入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。
+フォーマッタクラスは、依存関係にコンストラクターの挿入を使用でき**ません**。 たとえば、を `ILogger<VcardOutputFormatter>` パラメーターとしてコンストラクターに追加することはできません。 サービスにアクセスするには、メソッドに渡されるコンテキストオブジェクトを使用します。 この記事のコード例と[サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)では、この方法を示しています。
 
-> [!NOTE]
-> フォーマッタ クラスでコンストラクターの依存関係の挿入を行うことはできません。 たとえば、コンストラクターにロガー パラメーターを追加して、ロガーを取得することはできません。 サービスにアクセスするには、メソッドに渡されるコンテキスト オブジェクトを使用する必要があります。 [以下](#read-write)のコード例でこの方法を示します。
+### <a name="override-canreadtype-and-canwritetype"></a>CanReadType と Canreadtype のオーバーライド
 
-### <a name="override-canreadtypecanwritetype"></a>CanReadType/CanWriteType のオーバーライド
+メソッドまたはメソッドをオーバーライドして、逆シリアル化またはシリアル化を行う型を指定し `CanReadType` `CanWriteType` ます。 たとえば、型から vCard テキストを作成 `Contact` し、その逆も同様にします。
 
-`CanReadType` または `CanWriteType` メソッドをオーバーライドして、逆シリアル化またはシリアル化できる種類を指定します。 たとえば、vCard テキストを `Contact` の種類からのみ作成できます (その逆も可)。
-
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
-
-入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
 
 #### <a name="the-canwriteresult-method"></a>CanWriteResult メソッド
 
-一部のシナリオでは、`CanWriteType` の代わりに `CanWriteResult` をオーバーライドする必要があります。 次のすべての条件が満たされている場合は、`CanWriteResult` を使用します。
+一部のシナリオでは、をで `CanWriteResult` はなくオーバーライドする必要があり `CanWriteType` ます。 次のすべての条件が満たされている場合は、`CanWriteResult` を使用します。
 
-* アクション メソッドはモデル クラスを返します。
+* アクションメソッドは、モデルクラスを返します。
 * 実行時に返される可能性がある派生クラスがあります。
-* アクションが返した派生クラスを実行時に把握する必要があります。
+* アクションによって返される派生クラスは、実行時に既知である必要があります。
 
-たとえば、アクション メソッド シグネチャが `Person` の種類を返したとします。ただし、この場合、`Person` から派生した `Student` または `Instructor` の種類を返す可能性があります。 フォーマッタで `Student` オブジェクトのみを処理する場合は、`CanWriteResult` メソッドに提供されたコンテキスト オブジェクトで [Object](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) の種類を確認します。 アクション メソッドが `IActionResult` を返す場合は、`CanWriteResult` を使用する必要がないことに注意してください。この場合、`CanWriteType` メソッドはランタイム型を受け取ります。
+たとえば、次のようなアクションメソッドがあるとします。
+
+* シグネチャは型を返し `Person` ます。
+* `Student`は、 `Instructor` から派生した型または型を返すことができ `Person` ます。 
+
+フォーマッタがオブジェクトのみを処理するようにするには、 `Student` メソッドに提供されたコンテキストオブジェクトの[オブジェクト](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object)の型を確認し `CanWriteResult` ます。 アクションメソッドがを返す場合 `IActionResult` :
+
+* を使用する必要はありません `CanWriteResult` 。
+* メソッドは、 `CanWriteType` ランタイム型を受け取ります。
 
 <a id="read-write"></a>
 
-### <a name="override-readrequestbodyasyncwriteresponsebodyasync"></a>ReadRequestBodyAsync/WriteResponseBodyAsync のオーバーライド
+### <a name="override-readrequestbodyasync-and-writeresponsebodyasync"></a>ReadRequestBodyAsync と WriteResponseBodyAsync のオーバーライド
 
-`ReadRequestBodyAsync` または `WriteResponseBodyAsync` で実際に逆シリアル化またはシリアル化を行います。 次の例で強調表示されている行は、依存関係の挿入コンテナーからサービスを取得する方法を示しています (コンストラクター パラメーターからは取得できません)。
+逆シリアル化またはシリアル化は、またはで実行され `ReadRequestBodyAsync` `WriteResponseBodyAsync` ます。 次の例は、依存関係挿入コンテナーからサービスを取得する方法を示しています。 コンストラクターのパラメーターからサービスを取得できません。
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=writeresponse&highlight=3-4)]
-
-入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=writeresponse)]
 
 ## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a>カスタム フォーマッタを使用するように MVC を構成する方法
 
 カスタム フォーマッタを使用するには、`InputFormatters` または `OutputFormatters` コレクションにフォーマッタ クラスのインスタンスを追加します。
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](custom-formatters/3.1sample/Startup.cs?name=mvcoptions)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](custom-formatters/sample/Startup.cs?name=mvcoptions&highlight=3-4)]
+
+::: moniker-end
 
 フォーマッタは、挿入した順序で評価されます。 最初のものが優先されます。
 
-## <a name="next-steps"></a>次のステップ
+## <a name="the-completed-vcardinputformatter-class"></a>完成した `VcardInputFormatter` クラス
 
-* [このドキュメント用のサンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)。このアプリを使用して、シンプルな vCard の入力と出力フォーマッタを実装します。 アプリでは、次の例のように vCard の読み取りと書き込みを行います。
+次のコードは、サンプルのクラスを示してい `VcardInputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)
+
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardInputFormatter.cs?name=snippet)]
+
+## <a name="test-the-app"></a>アプリのテスト
+
+[この記事のサンプルアプリを実行](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します。これにより、基本的な vCard 入力フォーマッタと出力フォーマッタが実装されます。 アプリは次のような Vcard を読み取り、書き込みます。
 
 ```
 BEGIN:VCARD
 VERSION:2.1
 N:Davolio;Nancy
 FN:Nancy Davolio
-no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR]
-uid:20293482-9240-4d68-b475-325df4a83728
 END:VCARD
 ```
 
-vCard の出力を表示するには、アプリケーションを実行し、Accept ヘッダー "text/vcard" を指定して Get 要求を `http://localhost:63313/api/contacts/` (Visual Studio から実行する場合) または `http://localhost:5000/api/contacts/` (コマンドラインから実行する場合) に送信します。
+VCard の出力を表示するには、アプリを実行し、Accept ヘッダーを含む Get 要求をに送信し `text/vcard` `https://localhost:5001/api/contacts` ます。
 
-連絡先のメモリ内コレクションに vCard を追加するには、本文に vCard テキストを指定し、Content-Type ヘッダー"text/vcard" を指定して、同じ URL に Post 要求を送信します (書式は前述の例と同じ)。
+アドレス帳のメモリ内コレクションに vCard を追加するには、次のようにします。
+
+* `Post`Postman などのツールを使用してに要求を送信し `/api/contacts` ます。
+* `Content-Type` ヘッダーを `text/vcard` に設定します。
+* `vCard`本文には、前の例のように書式設定されたテキストを設定します。
+
+## <a name="additional-resources"></a>その他の技術情報
+
+* <xref:web-api/advanced/formatting>
+* <xref:grpc/dotnet-grpc>

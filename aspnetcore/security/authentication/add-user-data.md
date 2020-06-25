@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core プロジェクトIdentityでのユーザーデータの追加、ダウンロード、および削除
+title: ASP.NET Core プロジェクトでのユーザーデータの追加、ダウンロード、および削除 Identity
 author: rick-anderson
-description: ASP.NET Core プロジェクト内のにIdentityカスタムユーザーデータを追加する方法について説明します。 GDPR ごとのデータを削除します。
+description: ASP.NET Core プロジェクト内のにカスタムユーザーデータを追加する方法について説明 Identity します。 GDPR ごとのデータを削除します。
 ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
@@ -12,23 +12,23 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 29c23e10d11eb1042b64fc071c221a9ead857fcc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6b4de0a47cd7882852512040a08832942f20aa4c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777333"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347113"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>ASP.NET Core プロジェクトで Id にカスタムユーザーデータを追加、ダウンロード、および削除する
+# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>カスタムユーザーデータを Identity ASP.NET Core プロジェクトに追加、ダウンロード、および削除する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 この記事では、次の方法について説明します。
 
 * カスタムユーザーデータを ASP.NET Core web アプリに追加します。
-* カスタムユーザーデータモデルを<xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute>属性でマークして、自動的にダウンロードおよび削除できるようにします。 データをダウンロードして削除できるようにすると、 [GDPR](xref:security/gdpr)の要件を満たすことができます。
+* カスタムユーザーデータモデルを属性でマークして、 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 自動的にダウンロードおよび削除できるようにします。 データをダウンロードして削除できるようにすると、 [GDPR](xref:security/gdpr)の要件を満たすことができます。
 
-プロジェクトサンプルは Razor Pages web アプリから作成されますが、この手順は ASP.NET Core MVC web アプリの場合と似ています。
+プロジェクトサンプルは、ページ web アプリから作成され Razor ますが、手順は ASP.NET CORE MVC web アプリの場合と似ています。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -46,16 +46,16 @@ ms.locfileid: "82777333"
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a>Razor Web アプリの作成
+## <a name="create-a-razor-web-app"></a>Web アプリを作成する Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-3.0"
 
 * Visual Studio の **[ファイル]** メニューから、**[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに**WebApp1**という名前を付けます。
-* **ASP.NET Core Web アプリケーション** >の選択- **OK**
+* **ASP.NET Core Web アプリケーション**の選択- > **OK**
 * ドロップダウンで**ASP.NET Core 3.0**を選択します。
-* **Web アプリケーション** >の選択- **OK**
+* **Web アプリケーション**の選択- > **OK**
 * プロジェクトをビルドして実行します。
 
 ::: moniker-end
@@ -63,9 +63,9 @@ ms.locfileid: "82777333"
 ::: moniker range="< aspnetcore-3.0"
 
 * Visual Studio の **[ファイル]** メニューから、**[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに**WebApp1**という名前を付けます。
-* **ASP.NET Core Web アプリケーション** >の選択- **OK**
+* **ASP.NET Core Web アプリケーション**の選択- > **OK**
 * ドロップダウンで**ASP.NET Core 2.2**を選択します。
-* **Web アプリケーション** >の選択- **OK**
+* **Web アプリケーション**の選択- > **OK**
 * プロジェクトをビルドして実行します。
 
 ::: moniker-end
@@ -79,20 +79,20 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a>Id scaffolder を実行します。
+## <a name="run-the-identity-scaffolder"></a>Scaffolder を実行します。 Identity
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューションエクスプローラー**で、プロジェクトを右クリックし、[ **Add** > **New スキャフォールディング Item**] > ます。
-* [ **Add スキャフォールディング**] ダイアログボックスの左ペインで、[ **Identity** > **add**] を選択します。
-* [ **Id の追加**] ダイアログボックスで、次のオプションを選択します。
+* **ソリューションエクスプローラー**で、プロジェクトを右クリックし、[ **Add**  >  **New スキャフォールディング Item**] > ます。
+* [**スキャフォールディングの追加**] ダイアログボックスの左ペインで、[追加] を選択し **Identity**  >  **Add**ます。
+* [**追加 Identity ** ] ダイアログで、次のオプションを選択します。
   * 既存のレイアウト _Layout ファイルを選択し*ます。*
   * 上書きする以下のファイルを選択してください:
     * **アカウント/登録**
     * **アカウント/管理/インデックス**
-  * 新しい**+** **データコンテキストクラス**を作成するには、このボタンをクリックします。 型 (プロジェクトの名前が**WebApp1**の場合は**WebApp1Context** ) をそのまま使用します。
-  * 新しい**+** **ユーザークラス**を作成するには、このボタンを選択します。 型を受け入れます (プロジェクトの名前が**WebApp1**の場合は**WebApp1User** ) >**追加**] を使用します。
-* **[追加]** を選択します。
+  * **+** 新しい**データコンテキストクラス**を作成するには、このボタンをクリックします。 型 (プロジェクトの名前が**WebApp1**の場合は**WebApp1Context** ) をそのまま使用します。
+  * **+** 新しい**ユーザークラス**を作成するには、このボタンを選択します。 型を受け入れます (プロジェクトの名前が**WebApp1**の場合は**WebApp1User** ) >**追加**] を使用します。
+* **[追加]** を選びます。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -109,13 +109,13 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-次のコマンドを実行して、Identity scaffolder オプションの一覧を表示します。
+次のコマンドを実行して、scaffolder オプションの一覧を表示し Identity ます。
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-プロジェクトフォルダーで、Id scaffolder を実行します。
+プロジェクトフォルダーで、scaffolder を実行し Identity ます。
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
@@ -126,18 +126,18 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 [移行、UseAuthentication、および layout](xref:security/authentication/scaffold-identity#efm)の指示に従って、次の手順を実行します。
 
 * 移行を作成し、データベースを更新します。
-* `UseAuthentication` を `Startup.Configure` に追加します。
-* レイアウト`<partial name="_LoginPartial" />`ファイルにを追加します。
+* `UseAuthentication` に `Startup.Configure` を追加します。
+* `<partial name="_LoginPartial" />`レイアウトファイルにを追加します。
 * アプリをテストします。
   * ユーザーを登録する
   * [**ログアウト**] リンクの横にある新しいユーザー名を選択します。 場合によっては、ウィンドウを展開するか、ナビゲーションバーのアイコンを選択して、ユーザー名とその他のリンクを表示する必要があります。
   * [ **Personal Data** ] タブを選択します。
-  * [Download] \ (**ダウンロード**\) ボタンを選択して、"お持ちの*データ. json*ファイル" を確認します。
+  * [**ダウンロード**] ボタンを選択し、ファイルの*PersonalData.js*を調べます。
   * [**削除**] ボタンをテストします。これにより、ログオンしているユーザーが削除されます。
 
-## <a name="add-custom-user-data-to-the-identity-db"></a>Id DB にカスタムユーザーデータを追加する
+## <a name="add-custom-user-data-to-the-identity-db"></a>DB にカスタムユーザーデータを追加する Identity
 
-カスタムプロパティ`IdentityUser`を使用して、派生クラスを更新します。 プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は*Areas/Identity/Data/WebApp1User*になります。 次のコードを使用して、ファイルを更新します。
+`IdentityUser`カスタムプロパティを使用して、派生クラスを更新します。 プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は*Areas/ Identity /Data/WebApp1User.cs*になります。 次のコードを使用して、ファイルを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -153,18 +153,18 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 プロパティ[は、次のよう](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute)になります。
 
-* *区分/id/ページ/アカウント/管理/* 削除のデータが呼び出さ`UserManager.Delete`れたときに削除されます。
-* ダウンロードされたデータには、[*区分/id/ページ]/[アカウント*]/[管理]/[データの追加]/[データの管理/ダウンロード] ページがあります。
+* *区分/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml*ページがを呼び出したときに削除され Razor `UserManager.Delete` ます。
+* ダウンロードされたデータには、[区分]、[ページ]、*および [ Identity Manage/Download] の各*ページで含まれ Razor ます。
 
 ### <a name="update-the-accountmanageindexcshtml-page"></a>Account/Manage/Index. cshtml ページを更新する
 
-次の`InputModel`強調表示されたコードを使用して、*区分/id/ページ/アカウント/管理/インデックス*のを更新します。
+次の `InputModel` 強調表示されたコードを使用して、*区分/ Identity /Pages/Account/Manage/Index.cshtml.cs*のを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-次の強調表示されたマークアップを使用して、*区分/id/ページ/アカウント/管理/インデックス*を更新します。
+次の強調表示されているマークアップを使用して、*区分//////////また Identity *は更新プログラムを更新します。
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
@@ -174,7 +174,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-次の強調表示されたマークアップを使用して、*区分/id/ページ/アカウント/管理/インデックス*を更新します。
+次の強調表示されているマークアップを使用して、*区分//////////また Identity *は更新プログラムを更新します。
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
@@ -182,13 +182,13 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ### <a name="update-the-accountregistercshtml-page"></a>Account/Register. cshtml ページを更新する
 
-次の`InputModel`強調表示されたコードを使用して、[*区分/id/ページ/アカウント/登録*] のを更新します。
+次の `InputModel` 強調表示されたコードを使用して、*区分/ Identity /Pages/Account/Register.cshtml.cs*のを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-次の強調表示されたマークアップを使用して、*区分/id/ページ/アカウント/登録*を更新します。
+次の強調表示されたマークアップを使用して、*区分//[///////////////また Identity *はの
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -198,7 +198,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-次の強調表示されたマークアップを使用して、*区分/id/ページ/アカウント/登録*を更新します。
+次の強調表示されたマークアップを使用して、*区分//[///////////////また Identity *はの
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -232,12 +232,15 @@ dotnet ef database update
 アプリをテストします。
 
 * 新しいユーザーを登録します。
-* `/Identity/Account/Manage`ページ上のカスタムユーザーデータを表示します。
-* `/Identity/Account/Manage/PersonalData`ページからユーザーの個人データをダウンロードして表示します。
+* ページ上のカスタムユーザーデータを表示し `/Identity/Account/Manage` ます。
+* ページからユーザーの個人データをダウンロードして表示し `/Identity/Account/Manage/PersonalData` ます。
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>IUserClaimsPrincipalFactory を使用Identityしてにクレームを追加する<ApplicationUser>
+## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>IdentityIUserClaimsPrincipalFactory を使用してにクレームを追加する<ApplicationUser>
 
-インターフェイスを使用して、 Identity `IUserClaimsPrincipalFactory<T>`追加の要求を ASP.NET Core に追加することができます。 このクラスは、 `Startup.ConfigureServices`メソッドでアプリに追加できます。 次のように、クラスのカスタム実装を追加します。
+> [!NOTE]
+> このセクションは、前のチュートリアルの拡張機能ではありません。 チュートリアルを使用してビルドされたアプリに次の手順を適用するには、 [GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/18797)を参照してください。
+
+インターフェイスを使用して、追加の要求を ASP.NET Core に追加することができ Identity `IUserClaimsPrincipalFactory<T>` ます。 このクラスは、メソッドでアプリに追加でき `Startup.ConfigureServices` ます。 次のように、クラスのカスタム実装を追加します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -250,7 +253,7 @@ public void ConfigureServices(IServiceCollection services)
         AdditionalUserClaimsPrincipalFactory>();
 ```
 
-デモコードでは、 `ApplicationUser`クラスを使用します。 このクラスは、 `IsAdmin`追加の要求を追加するために使用されるプロパティを追加します。
+デモコードでは、クラスを使用し `ApplicationUser` ます。 このクラス `IsAdmin` は、追加の要求を追加するために使用されるプロパティを追加します。
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -259,7 +262,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-`AdditionalUserClaimsPrincipalFactory` は、`UserClaimsPrincipalFactory` インターフェイスを実装します。 新しいロールクレームがに追加され`ClaimsPrincipal`ます。
+`AdditionalUserClaimsPrincipalFactory` は、`UserClaimsPrincipalFactory` インターフェイスを実装します。 新しいロールクレームがに追加され `ClaimsPrincipal` ます。
 
 ```csharp
 public class AdditionalUserClaimsPrincipalFactory 
@@ -293,7 +296,7 @@ public class AdditionalUserClaimsPrincipalFactory
 }
 ```
 
-その後、追加の要求をアプリで使用できます。 Razorページでは、 `IAuthorizationService`インスタンスを使用して要求値にアクセスできます。
+その後、追加の要求をアプリで使用できます。 ページでは、 Razor `IAuthorizationService` インスタンスを使用して要求値にアクセスできます。
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
