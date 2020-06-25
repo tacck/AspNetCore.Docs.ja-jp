@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/loadtests
-ms.openlocfilehash: f0c930a7689c7288a58cfc3ca630d3cd324bf2cd
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 0ec69ad783a4e545ea95ddcb928d03ba6a2e0050
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106807"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074378"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core のロード テスト/ストレス テスト
 
@@ -29,15 +29,7 @@ ms.locfileid: "84106807"
 
 ストレス テストでは、負荷がかかっているアプリが障害から復旧し、期待される動作に適切に戻ることができるかどうかを判断します。 ストレスをかけるアプリは、通常の状況では実行されません。
 
-Visual Studio 2019 は、ロード テスト機能を備えた最後のバージョンの Visual Studio です。 今後、ロード テスト ツールを必要とするお客様には、Apache JMeter、Akamai CloudTest、BlazeMeter などの代替のツールを推奨します。 詳細については、「[Visual Studio 2019 リリース ノート](/visualstudio/releases/2019/release-notes-v16.0#test-tools)」を参照してください。
-
-## <a name="visual-studio-tools"></a>Visual Studio ツール
-
-ユーザーは、Visual Studio を使用して Web パフォーマンス テストおよびロード テストを作成、開発、およびデバッグできます。 Web ブラウザーでアクションを記録してテストを作成するオプションを使用できます。
-
-Visual Studio 2017 を使用してロード テスト プロジェクトを作成、構成、および実行する方法については、「[クイックスタート: ロード テスト プロジェクトを作成する](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017)」を参照してください。
-
-ロード テストは、オンプレミスで実行するように構成することも、Azure DevOps を使用してクラウドで実行するように構成することもできます。
+Visual Studio 2019 では、[ロード テストを廃止](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/)する計画が発表されました。 対応する Azure DevOps のクラウドベースのロード テスト サービスは終了しています。
 
 ## <a name="third-party-tools"></a>サードパーティ製のツール
 
@@ -51,4 +43,3 @@ Visual Studio 2017 を使用してロード テスト プロジェクトを作�
 * [West Wind WebSurge](https://websurge.west-wind.com/)
 * [Netling](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
-

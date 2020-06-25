@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776488"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103024"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>クラス ライブラリで ASP.NET Core API を使用する
 
@@ -46,13 +46,13 @@ ASP.NET Core を参照するには、次の `<FrameworkReference>` 要素をプ�
 
 ASP.NET Core を参照するためのこの方法は、.NET Core 3.x を対象とするプロジェクトでのみサポートされます。
 
-## <a name="include-blazor-extensibility"></a>Blazor 拡張機能を組み込む
+## <a name="include-blazor-extensibility"></a>Blazor 拡張機能を含める
 
-Blazor では、WebAssembly (WASM) とサーバーの[ホスティング モデル](xref:blazor/hosting-models)がサポートされます。 特別な理由がない限り、[Razor コンポーネント](xref:blazor/components)は両方のホスティング モデルをサポートする必要があります。 Razor コンポーネント ライブラリは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
+Blazor は、WebAssembly (WASM) [ホスティング モデル](xref:blazor/hosting-models)と Server ホスティング モデルをサポートします。 特別な理由がない限り、[Razor コンポーネント](xref:blazor/components/index)は両方のホスティング モデルをサポートする必要があります。 Razor コンポーネント ライブラリでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
 
 ### <a name="support-both-hosting-models"></a>両方のホスティング モデルをサポートする
 
-[Blazor サーバー](xref:blazor/hosting-models#blazor-server) プロジェクトと [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) プロジェクトの両方で Razor コンポーネントの使用をサポートするには、エディターに応じて次の手順を使用します。
+[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトと [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) プロジェクトの両方で Razor コンポーネントの使用をサポートするには、ご使用のエディターに応じて次の手順を使用します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -86,7 +86,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a>特定のホスティング モデルをサポートする
 
-1 つの Blazor ホスティング モデルだけをサポートするのは、あまり一般的ではありません。 たとえば、[Blazor サーバー](xref:blazor/hosting-models#blazor-server) プロジェクトでのみ Razor コンポーネントの使用をサポートするには、次のようにします。
+1 つの Blazor ホスティング モデルだけをサポートするのは、あまり一般的ではありません。 たとえば、[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトでのみ Razor コンポーネントの使用をサポートするには、次の操作を行います。
 
 * .NET Core 3.x を対象とします。
 * 共有フレームワークの `<FrameworkReference>` 要素を追加します。
@@ -95,21 +95,21 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-Razor コンポーネントを含むライブラリの詳細については、「[ASP.NET Core Razor components class libraries](xref:blazor/class-libraries)」 (ASP.NET Core Razor コンポーネント クラス ライブラリ) を参照してください。
+Razor コンポーネントを含むライブラリの詳細については、「[ASP.NET Core Razor コンポーネント クラス ライブラリ](xref:blazor/components/class-libraries)」を参照してください。
 
 ## <a name="include-mvc-extensibility"></a>MVC 拡張機能を含める
 
 このセクションでは、次のものを含むライブラリの推奨事項について概要を説明します。
 
-* [Razor ビューまたは Razor ページ](#razor-views-or-razor-pages)
+* [Razor ビューまたは Razor Pages](#razor-views-or-razor-pages)
 * [タグ ヘルパー](#tag-helpers)
 * [ビューのコンポーネント](#view-components)
 
 このセクションでは、MVC の複数のバージョンをサポートするマルチターゲット機能については説明しません。 複数の ASP.NET Core バージョンのサポートに関するガイダンスについては、「[複数のバージョンの ASP.NET Core をサポートする](#support-multiple-aspnet-core-versions)」を参照してください。
 
-### <a name="razor-views-or-razor-pages"></a>Razor ビューまたは Razor ページ
+### <a name="razor-views-or-razor-pages"></a>Razor ビューまたは Razor Pages
 
-[Razor ビュー](xref:mvc/views/overview)または [Razor ページ](xref:razor-pages/index)を含むプロジェクトでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
+[Razor ビュー](xref:mvc/views/overview)または [Razor Pages](xref:razor-pages/index) を含むプロジェクトでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
 
 プロジェクトが .NET Core 3.x を対象とする場合、次のものが必要です。
 
@@ -286,6 +286,6 @@ public class ScriptInliningTagHelper : TagHelper
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:razor-pages/ui-class>
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>
 * [.NET 実装のサポート](/dotnet/standard/net-standard#net-implementation-support)
 * [.NET サポート ポリシー](https://dotnet.microsoft.com/platform/support/policy)

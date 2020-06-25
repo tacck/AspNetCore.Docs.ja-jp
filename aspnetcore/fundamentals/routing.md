@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: f99ac6aea7bd959473fdbbfeec6ba19d4dad4ff3
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: f4bba10f7ce0b5a95c2aed8644aed18fa0637457
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106547"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074503"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -563,7 +563,7 @@ ASP.NET Core フレームワークでは、正規表現コンストラクター�
 
 ルーティングで使用される正規表現は、多くの場合、`^` 文字で始まり、これは文字列の開始位置と一致します。 この式は、多くの場合、`$` 文字で終わり、文字列の末尾と一致します。 `^` 文字と `$` 文字により、正規表現がルート パラメーター値全体に一致することが保証されます。 `^` 文字と `$` 文字がなければ、意図に反し、正規表現は文字列内のあらゆる部分文字列に一致してしまいます。 下の表では、一致または不一致の理由を例を示し説明します。
 
-| 正規表現   | String    | 一致したもの | コメント               |
+| 式   | String    | 一致したもの | コメント               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | はい   | サブ文字列の一致     |
 | `[a-z]{2}`   | 123abc456 | はい   | サブ文字列の一致     |
@@ -833,7 +833,7 @@ ASP.NET Core 3.0 の時点では、以前の ASP.NET Core バージョンで使�
 * [[Authorize] 属性を使用して認証をテストする](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [[Authorize] 属性を使用してスキームを選択する](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
-* [[Authorize] 属性を使用してポリシーを適用する](xref:security/authorization/policies#applying-policies-to-mvc-controllers)
+* [[Authorize] 属性を使用してポリシーを適用する](xref:security/authorization/policies#apply-policies-to-mvc-controllers)
 * <xref:security/authorization/roles>
 
 <a name="hostmatch"></a>
@@ -1484,7 +1484,7 @@ ASP.NET Core フレームワークでは、正規表現コンストラクター�
 
 ルーティングで使用される正規表現は、多くの場合、キャレット文字 `^` で始まり、文字列の開始位置と一致します。 表現は、多くの場合、ドル記号 `$` で終わり、文字列の末尾と一致します。 `^` 文字と `$` 文字により、正規表現はルート パラメーター値全体に一致します。 `^` 文字と `$` 文字がなければ、正規表現は、文字列内のあらゆる部分文字列に一致します。それは多くの場合、意図に反することです。 下の表では例を示し、それらが一致する、または一致しない理由について説明します。
 
-| 正規表現   | String    | 一致したもの | コメント               |
+| 式   | String    | 一致したもの | コメント               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | はい   | サブ文字列の一致     |
 | `[a-z]{2}`   | 123abc456 | はい   | サブ文字列の一致     |
@@ -1928,7 +1928,7 @@ ASP.NET Core フレームワークでは、正規表現コンストラクター�
 
 ルーティングで使用される正規表現は、多くの場合、キャレット (`^`) 文字で始まり、文字列の開始位置と一致します。 表現は、多くの場合、ドル記号 (`$`) で終わり、文字列の末尾と一致します。 `^` 文字と `$` 文字により、正規表現はルート パラメーター値全体に一致します。 `^` 文字と `$` 文字がなければ、正規表現は、文字列内のあらゆる部分文字列に一致します。それは多くの場合、意図に反することです。 下の表では例を示し、それらが一致する、または一致しない理由について説明します。
 
-| 正規表現   | String    | 一致したもの | コメント               |
+| 式   | String    | 一致したもの | コメント               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | はい   | サブ文字列の一致     |
 | `[a-z]{2}`   | 123abc456 | はい   | サブ文字列の一致     |
