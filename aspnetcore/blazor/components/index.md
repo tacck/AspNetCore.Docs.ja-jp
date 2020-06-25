@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a97fbe07251a61b30985695e3d207f0e3c3a777b
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103132"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242435"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -30,7 +30,7 @@ Blazor アプリは *コンポーネント*を使用してビルドします。 
 
 ## <a name="component-classes"></a>コンポーネント クラス
 
-コンポーネントは、C# と HTML マークアップの組み合わせを使用して、[Razor](xref:mvc/views/razor) コンポーネント ファイル ( *.razor*) で実装します。 Blazor のコンポーネントは、正式には *Razor コンポーネント* と呼ばれます。
+コンポーネントは、C# と HTML マークアップの組み合わせを使用して、[Razor](xref:mvc/views/razor) コンポーネント ファイル (`.razor`) で実装します。 Blazor のコンポーネントは、正式には *Razor コンポーネント* と呼ばれます。
 
 ### <a name="razor-syntax"></a>Razor の構文
 
@@ -43,7 +43,7 @@ Razor 構文でコンテンツにアクセスする場合は、次のセクシ�
 
 ### <a name="names"></a>名前
 
-コンポーネントの名前は、大文字で始める必要があります。 たとえば、*MyCoolComponent.razor* は有効で、*myCoolComponent.razor* は無効です。
+コンポーネントの名前は、大文字で始める必要があります。 たとえば、`MyCoolComponent.razor` は有効で、`myCoolComponent.razor` は無効です。
 
 ### <a name="routing"></a>ルーティング
 
@@ -77,16 +77,16 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 コンポーネントが最初にレンダリングされた後に、コンポーネントがイベントに応答して、レンダリング ツリーを再生成します。 Blazor によって新旧のレンダリング ツリーが比較され、ブラウザーのドキュメント オブジェクト モデル (DOM) に変更が適用されます。
 
-コンポーネントは通常の C# クラスであり、プロジェクト内の任意の場所に配置できます。 Web ページを生成するコンポーネントは、通常、*Pages* フォルダーに存在します。 ページ以外のコンポーネントは、多くの場合に、*Shared* フォルダー、またはプロジェクトに追加されたカスタム フォルダーに配置されます。
+コンポーネントは通常の C# クラスであり、プロジェクト内の任意の場所に配置できます。 Web ページを生成するコンポーネントは、通常、`Pages` フォルダーに存在します。 ページ以外のコンポーネントは、多くの場合、`Shared` フォルダー、またはプロジェクトに追加されたカスタム フォルダーに配置されます。
 
 ### <a name="namespaces"></a>名前空間
 
-一般に、コンポーネントの名前空間は、アプリのルート名前空間と、アプリ内のコンポーネントの場所 (フォルダー) から派生します。 アプリのルート名前空間が `BlazorApp` で、`Counter` コンポーネントが *Pages* フォルダーに存在する場合:
+一般に、コンポーネントの名前空間は、アプリのルート名前空間と、アプリ内のコンポーネントの場所 (フォルダー) から派生します。 アプリのルート名前空間が `BlazorApp` で、`Counter` コンポーネントが `Pages` フォルダーに存在する場合:
 
 * `Counter` コンポーネントの名前空間は `BlazorApp.Pages` になります。
 * コンポーネントの完全修飾型名は `BlazorApp.Pages.Counter` になります。
 
-コンポーネントを保持するカスタム フォルダーの場合は、[`@using`][2] ディレクティブを親コンポーネントまたはアプリの *_Imports.razor* ファイルに追加します。 次の例では、*Components* フォルダー内のコンポーネントを使用できるようにします。
+コンポーネントを保持するカスタム フォルダーの場合は、[`@using`][2] ディレクティブを親コンポーネントまたはアプリの `_Imports.razor` ファイルに追加します。 次の例では、`Components` フォルダー内のコンポーネントを使用できるようにします。
 
 ```razor
 @using BlazorApp.Components
@@ -100,16 +100,16 @@ Blazor でのルーティングは、アプリ内のアクセス可能な各コ�
 
 Razor で作成されるコンポーネントの名前空間は、次に基づきます (優先順)。
 
-* Razor ファイル ( *.razor*) マークアップ内の [`@namespace`][8] の指定 (`@namespace BlazorSample.MyNamespace`)。
+* Razor ファイル (`.razor`) マークアップ内の [`@namespace`][8] の指定 (`@namespace BlazorSample.MyNamespace`)。
 * プロジェクト ファイル内のプロジェクトの `RootNamespace` (`<RootNamespace>BlazorSample</RootNamespace>`)。
-* プロジェクト ファイルのファイル名 ( *.csproj*) から取得されたプロジェクト名、およびプロジェクト ルートからコンポーネントへのパス。 たとえば、フレームワークでは *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample.csproj*) が名前空間 `BlazorSample.Pages` に解決されます。 コンポーネントは C# の名前のバインド規則に従います。 この例の `Index` コンポーネントの場合、スコープ内のコンポーネントは、次のすべてのコンポーネントです。
-  * 同じ *Pages* フォルダー内。
+* プロジェクト ファイルのファイル名 (`.csproj`) から取得されたプロジェクト名、およびプロジェクト ルートからコンポーネントへのパス。 たとえば、フレームワークでは `{PROJECT ROOT}/Pages/Index.razor` (`BlazorSample.csproj`) が名前空間 `BlazorSample.Pages` に解決されます。 コンポーネントは C# の名前のバインド規則に従います。 この例の `Index` コンポーネントの場合、スコープ内のコンポーネントは、次のすべてのコンポーネントです。
+  * 同じフォルダー (`Pages`) に含まれるもの。
   * 別の名前空間を明示的に指定しない、プロジェクトのルート内のコンポーネント。
 
 > [!NOTE]
 > `global::` 修飾はサポートされていません。
 >
-> 別名が付けられた [using](/dotnet/csharp/language-reference/keywords/using-statement) ステートメント (`@using Foo = Bar` など) によるコンポーネントのインポートはサポートされていません。
+> 別名が付けられた [`using`](/dotnet/csharp/language-reference/keywords/using-statement) ステートメント (`@using Foo = Bar` など) によるコンポーネントのインポートはサポートされていません。
 >
 > 部分修飾名はサポートされていません。 たとえば、`<Shared.NavMenu></Shared.NavMenu>` による `@using BlazorSample` の追加と `NavMenu` コンポーネント (`NavMenu.razor`) の参照はサポートされていません。
 
@@ -122,7 +122,7 @@ Razor コンポーネントは、部分クラスとして生成されます。 R
 
 次の例は、Blazor テンプレートから生成されたアプリ内の [`@code`][1] ブロックを含む既定の `Counter` コンポーネントを示しています。 HTML マークアップ、Razor コード、C# コードは、同じファイル内にあります。
 
-*Counter.razor*:
+`Pages/Counter.razor`:
 
 ```razor
 @page "/counter"
@@ -145,7 +145,7 @@ Razor コンポーネントは、部分クラスとして生成されます。 R
 
 `Counter` コンポーネントは、部分クラスを含む分離コード ファイルを使用して作成することもできます。
 
-*Counter.razor*:
+`Pages/Counter.razor`:
 
 ```razor
 @page "/counter"
@@ -157,7 +157,7 @@ Razor コンポーネントは、部分クラスとして生成されます。 R
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
 
-*Counter.razor.cs*:
+`Counter.razor.cs`:
 
 ```csharp
 namespace BlazorApp.Pages
@@ -189,7 +189,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 [`@inherits`][6] ディレクティブを使用して、コンポーネントの基本クラスを指定できます。 次の例は、コンポーネントが基本クラス `BlazorRocksBase` を継承して、コンポーネントのプロパティとメソッドを提供する方法を示しています。 基本クラスは <xref:Microsoft.AspNetCore.Components.ComponentBase> から派生する必要があります。
 
-*Pages/BlazorRocks.razor*:
+`Pages/BlazorRocks.razor`:
 
 ```razor
 @page "/BlazorRocks"
@@ -198,7 +198,7 @@ using Microsoft.AspNetCore.Components.Web;
 <h1>@BlazorRocksText</h1>
 ```
 
-*BlazorRocksBase.cs*:
+`BlazorRocksBase.cs`:
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -217,13 +217,13 @@ namespace BlazorSample
 
 コンポーネントには、HTML 要素構文を使用して宣言することで、他のコンポーネントを含めることができます。 コンポーネントを使うためのマークアップは、そのコンポーネントの種類をタグ名とする HTML タグのようになります。
 
-*Index.razor* の次のマークアップは、`HeadingComponent` インスタンスをレンダリングします。
+`Pages/Index.razor` の次のマークアップでは、`HeadingComponent` インスタンスがレンダリングされます。
 
 ```razor
 <HeadingComponent />
 ```
 
-*Components/HeadingComponent.razor*:
+`Components/HeadingComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/HeadingComponent.razor)]
 
@@ -235,25 +235,25 @@ namespace BlazorSample
 
 コンポーネントでは、[`@page`][9] ディレクティブに指定されたルート テンプレートからルート パラメーターを受け取ることができます。 ルーターでは、ルート パラメーターを使用して、対応するコンポーネント パラメーターが設定されます。
 
-*Pages/RouteParameter.razor*:
+`Pages/RouteParameter.razor`:
 
 [!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
 オプションのパラメーターはサポートされていないため、前の例では 2 つの [`@page`][9] ディレクティブが適用されます。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の [`@page`][9] ディレクティブでは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
 
-複数のフォルダー境界をまたいだパスをキャプチャする "*キャッチオール*" パラメーター構文 (`*`/`**`) は、Razor コンポーネント ( *.razor*) ではサポートされて**いません**。
+複数のフォルダー境界をまたいだパスをキャプチャする "*キャッチオール*" パラメーター構文 (`*`/`**`) は、Razor コンポーネント (`.razor`) ではサポートされて**いません**。
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
 コンポーネントには、*コンポーネント パラメーター*を指定できます。このパラメーターは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
 
-*Components/ChildComponent.razor*:
+`Components/ChildComponent.razor`:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
 サンプル アプリの次の例では、`ParentComponent` によって `ChildComponent` の `Title` プロパティの値を設定しています。
 
-*Pages/ParentComponent.razor*:
+`Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
@@ -266,7 +266,7 @@ namespace BlazorSample
 
 次の例では、`ChildComponent` に、レンダリングする UI のセグメントを表す <xref:Microsoft.AspNetCore.Components.RenderFragment> を表す `ChildContent` プロパティがあります。 コンテンツをレンダリングする必要があるコンポーネントのマークアップに、`ChildContent` の値を配置します。 `ChildContent` の値は、親コンポーネントから受け取られ、ブートストラップ パネルの `panel-body` 内にレンダリングされます。
 
-*Components/ChildComponent.razor*:
+`Components/ChildComponent.razor`:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
@@ -275,7 +275,7 @@ namespace BlazorSample
 
 サンプル アプリの `ParentComponent` では、コンテンツを `<ChildComponent>` タグ内に配置することによって、`ChildComponent` をレンダリングするためのコンテンツを提供できます。
 
-*Pages/ParentComponent.razor*:
+`Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=7-8)]
 
@@ -351,13 +351,13 @@ namespace BlazorSample
 
 要素属性の位置を基準とした [`@attributes`][3] の位置は重要です。 [`@attributes`][3] が要素にスプラッティングされると、属性は右から左 (最後から最初) に処理されます。 `Child` コンポーネントを使用する次のコンポーネントの例を考えます。
 
-*ParentComponent.razor*:
+`ParentComponent.razor`:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent.razor*:
+`ChildComponent.razor`:
 
 ```razor
 <div @attributes="AdditionalAttributes" extra="5" />
@@ -374,13 +374,13 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 次の例では、`Child` コンポーネントの `<div>` で、`extra` と [`@attributes`][3] の順序が逆になります。
 
-*ParentComponent.razor*:
+`ParentComponent.razor`:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent.razor*:
+`ChildComponent.razor`:
 
 ```razor
 <div extra="5" @attributes="AdditionalAttributes" />
@@ -418,7 +418,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 コンポーネントがレンダリングされると、`loginDialog` フィールドに `MyLoginDialog` 子コンポーネント インスタンスが設定されます。 これにより、コンポーネント インスタンスに対し、.NET メソッドを呼び出すことができます。
 
 > [!IMPORTANT]
-> `loginDialog` 変数は、コンポーネントがレンダリングされた後にのみ設定され、その出力には `MyLoginDialog` 要素が含まれます。 この時点まで、何も参照できません。 コンポーネントのレンダリングが完了した後にコンポーネント参照を操作するには、[OnAfterRenderAsync メソッドまたは OnAfterRender メソッド](xref:blazor/components/lifecycle#after-component-render)を使用します。
+> `loginDialog` 変数は、コンポーネントがレンダリングされた後にのみ設定され、その出力には `MyLoginDialog` 要素が含まれます。 この時点まで、何も参照できません。 コンポーネントのレンダリングが完了した後にコンポーネント参照を操作するには、[`OnAfterRenderAsync`メソッドまたは `OnAfterRender` メソッド](xref:blazor/components/lifecycle#after-component-render)を使用します。
 
 ループ内のコンポーネントを参照するには、「[Capture references to multiple similar child-components](https://github.com/dotnet/aspnetcore/issues/13358)」(複数の類似した子コンポーネントへの参照をキャプチャする) (dotnet/aspnetcore #13358) を参照してください。
 
@@ -706,7 +706,7 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 詳細については、「<xref:mvc/views/razor>」を参照してください。
 
 > [!WARNING]
-> .NET 型が `bool` の場合、[aria-pressed](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) などの一部の HTML 属性が正しく機能しません。 そのような場合は、`bool` ではなく `string` 型を使用します。
+> .NET 型が `bool` の場合、[`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) などの一部の HTML 属性が正しく機能しません。 そのような場合は、`bool` ではなく `string` 型を使用します。
 
 ## <a name="raw-html"></a>生 HTML
 
@@ -762,9 +762,9 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 
 ## <a name="static-assets"></a>静的な資産
 
-Blazor は、プロジェクトの [Web ルート (wwwroot) フォルダー](xref:fundamentals/index#web-root)に静的アセットを配置する ASP.NET Core アプリの規則に従います。
+Blazor は、プロジェクトの [`web root (wwwroot)` フォルダー](xref:fundamentals/index#web-root)に静的アセットを配置する ASP.NET Core アプリの規則に従います。
 
-静的アセットの Web ルートを参照するには、ベース相対パス (`/`) を使用します。 次の例では、*logo.png* が物理的に *{PROJECT ROOT}/wwwroot/images* フォルダーに置かれています。
+静的アセットの Web ルートを参照するには、ベース相対パス (`/`) を使用します。 次の例では、`logo.png` が物理的に `{PROJECT ROOT}/wwwroot/images` フォルダーに配置されています。
 
 ```razor
 <img alt="Company logo" src="/images/logo.png" />
@@ -776,17 +776,17 @@ Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) は�
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>タグ ヘルパーはコンポーネントでサポートされない
 
-[タグ ヘルパー](xref:mvc/views/tag-helpers/intro) は、Razor コンポーネント ( *.razor* ファイル) でサポートされていません。 Blazor にタグ ヘルパーのような機能を提供するには、タグ ヘルパーと同じ機能を持つコンポーネントを作成し、代わりにそのコンポーネントを使用します。
+[`Tag Helpers`](xref:mvc/views/tag-helpers/intro) は、Razor コンポーネント (`.razor` ファイル) ではサポートされていません。 Blazor にタグ ヘルパーのような機能を提供するには、タグ ヘルパーと同じ機能を持つコンポーネントを作成し、代わりにそのコンポーネントを使用します。
 
 ## <a name="scalable-vector-graphics-svg-images"></a>スケーラブル ベクター グラフィックス (SVG) イメージ
 
-Blazor は HTML をレンダリングするため、スケーラブル ベクター グラフィックス (SVG) イメージ ( *.svg*) などのブラウザーでサポートされているイメージは、`<img>` タグを介してサポートされます。
+Blazor では HTML がレンダリングされるため、スケーラブル ベクター グラフィックス (SVG) 画像 (`.svg`) などのブラウザーでサポートされている画像は、`<img>` タグを介してサポートされます。
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-同様に、SVG イメージは、スタイルシート ファイル ( *.css*) の CSS 規則でサポートされています。
+同様に、SVG 画像は、スタイルシート ファイル (`.css`) の CSS 規則でサポートされています。
 
 ```css
 .my-element {
@@ -794,7 +794,7 @@ Blazor は HTML をレンダリングするため、スケーラブル ベクタ
 }
 ```
 
-ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル ( *.razor*) に直接配置した場合、基本的なイメージ レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
+ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル (`.razor`) に直接配置した場合、基本的な画像レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

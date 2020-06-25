@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 8c5e6c6ba741cae2634e2852e9ca141a0a7c33ce
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 14cf614bf5d4f2ad6a34c49cb08277a2deae8d00
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103125"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242951"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
@@ -48,8 +48,8 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 
 以下を追加します。
 
-* アプリのプロジェクト ファイルに、[Microsoft.AspNetCore.Components.Authorization](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) のパッケージ参照。
-* アプリの *_Imports.razor*ファイルに、`Microsoft.AspNetCore.Components.Authorization` 名前空間。
+* アプリのプロジェクト ファイルに、[`Microsoft.AspNetCore.Components.Authorization`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) のパッケージ参照。
+* アプリの `_Imports.razor` ファイルに、`Microsoft.AspNetCore.Components.Authorization` 名前空間。
 
 認証を処理するために、組み込みまたはカスタムの <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> サービスの実装について、以降のセクションで説明します。
 
@@ -67,7 +67,7 @@ Blazor サーバー アプリは、SignalR を使用して作成されたリア�
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> は、認証状態を取得するために <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントと <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> コンポーネントによって使用される基となるサービスです。
 
-通常、<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> は直接使用しません。 この記事で後述する [AuthorizeView コンポーネント](#authorizeview-component)または [Task\<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) のアプローチを使用します。 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> を直接使用することの主な欠点は、基となる認証状態データが変更されてもコンポーネントに自動的に通知されないことです。
+通常、<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> は直接使用しません。 この記事で後述する [`AuthorizeView` コンポーネント](#authorizeview-component)または [`Task<AuthenticationState>`](#expose-the-authentication-state-as-a-cascading-parameter) のアプローチを使用します。 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> を直接使用することの主な欠点は、基となる認証状態データが変更されてもコンポーネントに自動的に通知されないことです。
 
 次の例に示すように、<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> サービスから現在のユーザーの <xref:System.Security.Claims.ClaimsPrincipal> データを提供できます。
 
@@ -149,7 +149,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 }
 ```
 
-Blazor WebAssembly アプリでは、`CustomAuthStateProvider` サービスは *Program.cs* の `Main` に登録されています。
+Blazor WebAssembly アプリでは、`CustomAuthStateProvider` サービスは `Program.cs` の `Main` に登録されています。
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -207,7 +207,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 `user.Identity.IsAuthenticated` が `true` である場合、要求を列挙し、役割のメンバーシップを評価できます。
 
-`App` コンポーネント (*App.razor*) 内の <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> および <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> コンポーネントを使用して、`Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` カスケード パラメーターを設定します。
+`App` コンポーネント (`App.razor`) 内の <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> および <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> コンポーネントを使用して、`Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>` カスケード パラメーターを設定します。
 
 ```razor
 <CascadingAuthenticationState>
@@ -275,7 +275,7 @@ Blazor サーバー アプリでは、オプションと承認のためのサー
 </AuthorizeView>
 ```
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、`NavMenu` コンポーネント (*Shared/NavMenu.razor*) で使用して [NavLink コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) のリスト項目 (`<li>...</li>`) を表示できますが、この方法では、表示された出力からリスト項目が削除されるだけであることに注意してください。 ユーザーがコンポーネントに移動するのを防ぐことはできません。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、`NavMenu` コンポーネント (`Shared/NavMenu.razor`) で使用して [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) のリスト項目 (`<li>...</li>`) を表示できますが、この方法では、表示された出力からリスト項目が削除されるだけであることに注意してください。 ユーザーがコンポーネントに移動するのを防ぐことはできません。
 
 `<Authorized>` および `<NotAuthorized>` タグには、他の対話型コンポーネントなど、任意の項目を含めることができます。
 
@@ -380,7 +380,7 @@ You can only see this if you're signed in.
 * ユーザーはコンポーネントに適用されている [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 条件に失敗します。 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性については、「[`[Authorize]` 属性](#authorize-attribute)」セクションを参照してください。
 * 非同期認証が実行中です。
 
-既定の Blazor サーバー プロジェクト テンプレートでは、`App` component (*App.razor*) によりカスタム コンテンツの設定方法が示されます。
+既定の Blazor サーバー プロジェクト テンプレートでは、`App` component (`App.razor`) によりカスタム コンテンツの設定方法が示されます。
 
 ```razor
 <CascadingAuthenticationState>
@@ -419,7 +419,7 @@ Not authorized.
 
 ## <a name="notification-about-authentication-state-changes"></a>認証状態の変更に関する通知
 
-基となる認証状態データが変わったとアプリで判断された場合 (たとえば、ユーザーがサインアウトした、または別のユーザーがロールを変更したなど)、[カスタムの AuthenticationStateProvider](#implement-a-custom-authenticationstateprovider) はオプションで <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 基底クラスのメソッド <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.NotifyAuthenticationStateChanged%2A> を呼び出すことができます。 これにより、新しいデータを使用して再表示するように、認証状態データ (<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> など) がコンシューマーに通知されます。
+基となる認証状態データが変わったとアプリに判断された場合 (たとえば、ユーザーがサインアウトした、または別のユーザーがロールを変更したなど)、[カスタムの `AuthenticationStateProvider`](#implement-a-custom-authenticationstateprovider) では必要に応じて <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> 基底クラスのメソッド <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.NotifyAuthenticationStateChanged%2A> を呼び出すことができます。 これにより、新しいデータを使用して再表示するように、認証状態データ (<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> など) がコンシューマーに通知されます。
 
 ## <a name="procedural-logic"></a>手続き型ロジック
 
@@ -467,17 +467,17 @@ Not authorized.
 > @using Microsoft.AspNetCore.Components.Authorization
 > ```
 >
-> これらの名前空間は、アプリの *_Imports.razor* ファイルに追加することで、グローバルに提供できます。
+> これらの名前空間は、アプリの `_Imports.razor` ファイルに追加することで、グローバルに提供できます。
 
 ## <a name="troubleshoot-errors"></a>エラーのトラブルシューティング
 
 一般的なエラー:
 
-* **承認には、型 Task\<AuthenticationState> のカスケード パラメーターが必要です。これを実行するには CascadingAuthenticationState の使用を検討します。**
+* **承認には、型 `Task\<AuthenticationState>` のカスケード パラメーターが必要です。これを実行するには `CascadingAuthenticationState` の使用を検討します。**
 
 * `authenticationStateTask` **に対して**`null` 値を受け取ります
 
-認証が有効な Blazor サーバー テンプレートを使用してプロジェクトが作成されなかった可能性があります。 UI ツリーの一部に `<CascadingAuthenticationState>` をラップします。たとえば、`App` コンポーネント (*App.razor*) で次のようにします。
+認証が有効な Blazor サーバー テンプレートを使用してプロジェクトが作成されなかった可能性があります。 UI ツリーの一部に `<CascadingAuthenticationState>` をラップします。たとえば、`App` コンポーネント (`App.razor`) で次のようにします。
 
 ```razor
 <CascadingAuthenticationState>

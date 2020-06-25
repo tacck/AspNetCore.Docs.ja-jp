@@ -1,25 +1,31 @@
 ---
-title: ASP.NET Core での Entity Framework Core を使用した Razor ページ - チュートリアル 1/8
+title: ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 author: rick-anderson
-description: Entity Framework Core を使用して Razor ページ アプリを作成する方法について説明します
+description: Entity Framework Core を使用して Razor Pages アプリを作成する方法について説明します
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: a6915da23124b7ed4bfaa982692635f9fc75f96a
+ms.sourcegitcommit: 726b8c5cf92e6f6a4d0205787b19307e889d6240
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661617"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "82967515"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor ページ - チュートリアル 1/8
+# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-これは、[ASP.NET Core Razor Pages](xref:razor-pages/index) アプリで Entity Framework (EF) Core の使用方法を示す一連のチュートリアルの 1 番目です。 このチュートリアルでは、架空の Contoso University の Web サイトを構築します。 サイトには、学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれます。 このチュートリアルでは、コード ファーストのアプローチを使用します。 データベース ファーストのアプローチを使用してこのチュートリアルを実行する方法の詳細については、[こちらの Github イシュー](https://github.com/dotnet/AspNetCore.Docs/issues/16897)をご覧ください。
+これは、[ASP.NET Core Razor Pages](xref:razor-pages/index) アプリでの Entity Framework (EF) Core の使用方法を示す一連のチュートリアルの 1 番目です。 このチュートリアルでは、架空の Contoso University の Web サイトを構築します。 サイトには、学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれます。 このチュートリアルでは、コード ファーストのアプローチを使用します。 データベース ファーストのアプローチを使用してこのチュートリアルを実行する方法の詳細については、[こちらの Github イシュー](https://github.com/dotnet/AspNetCore.Docs/issues/16897)をご覧ください。
 
 [完成したアプリをダウンロードまたは表示します。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [ダウンロードの方法はこちらをご覧ください。](xref:index#how-to-download-a-sample)
 
@@ -65,7 +71,6 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 完成したプロジェクトをダウンロードした後にアプリを実行するには:
 
-* 名前に *SQLite* がある 3 つのファイルと 1 つのフォルダーを削除します。
 * プロジェクトをビルドします。
 * パッケージ マネージャー コンソール (PMC) で、次のコマンドを実行します。
 
@@ -83,6 +88,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 * *Startup.cs* を削除し、*StartupSQLite.cs* の名前を *Startup.cs* に変更します。
 * *appSettings.json* を削除し、*appSettingsSQLite.json* の名前を *appSettings.json* に変更します。
 * *Migrations* フォルダーを削除し、*MigrationsSQL* の名前を *Migrations* に変更します。
+* `#if SQLiteVersion` のグローバル検索を実行し、`#if SQLiteVersion` と関連する `#endif` ステートメントを削除します。
 * プロジェクトをビルドします。
 * プロジェクト フォルダーのコマンド プロンプトで、次のコマンドを実行します。
 
@@ -204,13 +210,13 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 このセクションでは、ASP.NET Core スキャフォールディング ツールを使用して、次のものを生成します。
 
 * EF Core *コンテキスト* クラス。 コンテキストは、定められたデータ モデルに対し、Entity Framework 機能を調整するメイン クラスです。 これは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生します。
-* `Student` エンティティの CRUD (Create, Read, Update, and Delete/作成、読み取り、更新と削除) 操作を処理する Razor ページ。
+* `Student` エンティティの作成、読み取り、更新、および削除 (CRUD) 操作を処理する Razor ページ。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Pages* フォルダー内に *Students* フォルダーを作成します。
 * **ソリューション エクスプローラー**で、*Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
-* **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor Pages (CRUD)]** > **[追加]** を選択します。
+* **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 * **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。
   * **[モデル クラス]** ドロップダウンで、 **[Student (ContosoUniversity.Models)]** を選択します。
   * **Data context class** 行で、 **+** (+) 記号を選択します。
@@ -306,20 +312,20 @@ LocalDB は SQL Server Express データベース エンジンの軽量版であ
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-強調表示されたコードで、各エンティティ セットの [DbSet\< TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 EF Core 用語で:
+強調表示されたコードによって、各エンティティ セットの [DbSet\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 EF Core 用語で:
 
 * エンティティ セットは通常、データベース テーブルに対応します。
 * エンティティはテーブル内の行に対応します。
 
 エンティティ セットには複数のエンティティが含まれているため、DBSet プロパティは複数形の名前にする必要があります。 スキャフォールディング ツールによって `Student` DBSet を作成したので、このステップでこれを複数形の `Students` に変更します。 
 
-Razor Pages コードを新しい DBSet 名と一致させるには、プロジェクト全体で `_context.Student` を `_context.Students` にグローバルに変更します。  8 回の出現があります。
+Razor Pages のコードを新しい DBSet 名と一致させるには、プロジェクト全体で `_context.Student` を `_context.Students` にグローバルに変更します。  8 回の出現があります。
 
 プロジェクトをビルドし、コンパイラ エラーがないことを確認します。
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。 サービス (EF Core データベース コンテキストなど) は、アプリケーションの起動時に依存関係の挿入に登録されます。 これらのサービスを必要とするコンポーネント (Razor ページなど) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。
+ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。 サービス (EF Core データベース コンテキストなど) は、アプリケーションの起動時に依存関係の挿入に登録されます。 これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。
 
 スキャフォールディング ツールにより、コンテキスト クラスが依存関係挿入コンテナーに自動的に登録されました。
 
@@ -367,7 +373,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 `EnsureCreated` メソッドは、空のデータベースを作成します。 このセクションでは、データベースにテスト データを入力するコードを追加します。
 
 次のコードを使用して、*Data/DbInitializer.cs* を作成します。
-
+<!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
   このコードは、データベースに学生が存在するかどうかを確認します。 学生が存在しない場合は、テスト データがデータベースに追加されます。 パフォーマンスを最適化するために、`List<T>` コレクションではなく配列にテスト データを作成します。
@@ -472,7 +478,7 @@ Contoso University のサンプル Web アプリでは、Entity Framework (EF) C
 
 ---
 
-[Razor ページ](xref:razor-pages/index)に関する知識。 Razor ページのプログラミングが初めての場合、このシリーズを始める前に[こちらの入門編](xref:tutorials/razor-pages/razor-pages-start)を完了してください。
+[Razor Pages](xref:razor-pages/index) に関する知識。 そのプログラミング経験をお持ちでない場合は、このシリーズを始める前に [Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するチュートリアルを完了してください。
 
 ## <a name="troubleshooting"></a>トラブルシューティング
 
@@ -498,7 +504,7 @@ Contoso University のサンプル Web アプリでは、Entity Framework (EF) C
 * 新しい ASP.NET Core Web アプリケーションを作成します。 プロジェクトに **ContosoUniversity** という名前を付けます。 このプロジェクトに *ContosoUniversity* という名前を付けることは重要です。そうすることでコードをコピーしたり貼り付けるときに名前空間が一致します。
 * ドロップダウン リストで **[ASP.NET Core 2.1]** を選択してから、 **[Web アプリケーション]** を選択します。
 
-前の手順の画像については、「[Razor Web アプリの作成](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)」を参照してください。
+前の手順の画像については、[Razor Web アプリの作成](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)に関する記事をご覧ください。
 アプリを実行します。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -591,7 +597,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **ソリューション エクスプローラー**で、*Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
-* **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor Pages (CRUD)]** > **[追加]** を選択します。
+* **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 
 **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。
 
@@ -630,7 +636,7 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>依存関係挿入に登録されるコンテキストを調べる
 
-ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。 サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に依存関係挿入に登録されます。 これらのサービスを必要とするコンポーネント (Razor ページなど) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 db コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。
+ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。 サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に依存関係挿入に登録されます。 これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 db コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。
 
 スキャフォールディング ツールが自動的に DB コンテキストを作成し、依存関係挿入コンテナーと共に登録します。
 
@@ -678,7 +684,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 [!code-csharp[](intro/samples/cu21/Data/SchoolContext.cs?name=snippet_Intro&highlight=12-14)]
 
-強調表示されたコードで、各エンティティ セットの [DbSet\< TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 EF Core 用語で:
+強調表示されたコードによって、各エンティティ セットの [DbSet\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 EF Core 用語で:
 
 * エンティティ セットは通常、DB テーブルに対応します。
 * エンティティはテーブル内の行に対応します。

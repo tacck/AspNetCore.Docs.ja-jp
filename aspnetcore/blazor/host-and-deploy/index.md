@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 3a3c5ab5365e5b4312dd3fd516f4906155911cc9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0cd21e6b4930fb6112aa448a8a44be80cc8fbf61
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103128"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243565"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor のホストと展開
 
@@ -32,16 +32,16 @@ ms.locfileid: "85103128"
 
 1. **[ビルド]**  >  **[Publish {APPLICATION}]\({アプリケーション} を発行する\)** を選択します。
 1. *[publish target]\(発行先\)* を選択します。 ローカルに発行するには、 **[フォルダー]** を選択します。
-1. **[フォルダーの選択]** フィールド内で既定の場所を受け入れるか、または別の場所を指定します。 **[発行]** ボタンを選びます。
+1. **[フォルダーの選択]** フィールド内で既定の場所を受け入れるか、または別の場所を指定します。 **[`Publish`]** ボタンを選択します。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 1. **[ビルド]**  >  **[Publish to Folder]\(フォルダーに発行\)** を選択します。
-1. 発行されたアセットを受信するフォルダーを確認し、 **[Publish]\(発行\)** を選択します。
+1. 発行されたアセットを受信するフォルダーを確認し、 **[`Publish`]** を選択します。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドを使用して、リリース構成によってアプリを発行します。
+[`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドを使用して、リリース構成でアプリを発行します。
 
 ```dotnetcli
 dotnet publish -c Release
@@ -54,9 +54,9 @@ dotnet publish -c Release
 発行場所:
 
 * Blazor WebAssembly
-  * スタンドアロン: アプリは " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 アプリを静的サイトとして展開するには、*wwwroot* フォルダーの内容を静的サイトのホストにコピーします。
-  * ホストされている: クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの " */bin/Release/{ターゲット フレームワーク}/publish/wwwroot*" フォルダーに発行されます。 *publish* フォルダーの内容をホストに展開します。
-* Blazor サーバー: アプリは " */bin/Release/{ターゲット フレームワーク}/publish*" フォルダーに発行されます。 *publish* フォルダーの内容をホストに展開します。
+  * スタンドアロン: アプリは `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。 アプリを静的サイトとして展開するには、`wwwroot` フォルダーの内容を静的サイトのホストにコピーします。
+  * ホストされている: クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。 `publish` フォルダーの内容をホストに展開します。
+* Blazor サーバー: アプリは `/bin/Release/{TARGET FRAMEWORK}/publish` フォルダーに発行されます。 `publish` フォルダーの内容をホストに展開します。
 
 フォルダー内のアセットは、Web サーバーに展開されます。 展開のプロセスが手動であるか自動であるかは、ご使用の展開ツールによって異なります。
 
@@ -65,15 +65,15 @@ dotnet publish -c Release
 *アプリのベース パス*とは、アプリのルート URL パスのことです。 次の ASP.NET Core アプリと Blazor サブアプリについて考えてみましょう。
 
 * ASP.NET Core アプリは `MyApp` と命名します。
-  * このアプリは、物理的に *d:/MyApp* にあります。
+  * このアプリは、物理的に `d:/MyApp` に存在します。
   * 要求は、`https://www.contoso.com/{MYAPP RESOURCE}` で受信されます。
 * `CoolApp` という名前の Blazor アプリは `MyApp` のサブアプリです。
-  * このサブアプリは、物理的に *d:/MyApp/CoolApp* にあります。
+  * このサブアプリは、物理的に `d:/MyApp/CoolApp` に存在します。
   * 要求は、`https://www.contoso.com/CoolApp/{COOLAPP RESOURCE}` で受信されます。
 
 `CoolApp` に対して構成を追加指定しない場合、このシナリオではサブ アプリにはそれがサーバー上のどこの場所にあるかわかりません。 たとえば、相対 URL パス `/CoolApp/` にあることがわからない場合、アプリはそのリソースに対する正しい相対 URL を作成できません。
 
-`<base>` タグの `href` 属性は、Blazor アプリのベース パスの `https://www.contoso.com/CoolApp/` に構成を指定するため、*Pages/_Host.cshtml* ファイル (Blazor サーバー) または *wwwroot/index.html* ファイル (Blazor WebAssembly) の相対ルート パスに設定されます。
+`<base>` タグの `href` 属性は、Blazor アプリのベース パス `https://www.contoso.com/CoolApp/` に構成を指定するため、`Pages/_Host.cshtml` ファイル (Blazor サーバー) または `wwwroot/index.html` ファイル (Blazor WebAssembly) の相対ルート パスに設定されます。
 
 ```html
 <base href="/CoolApp/">
@@ -89,7 +89,7 @@ app.UsePathBase("/CoolApp");
 
 多くのホスティング シナリオでは、アプリへの相対 URL パスは、アプリのルートです。 これらの場合、アプリの相対 URL ベース パスにフォワード スラッシュ (`<base href="/" />`) が付きます。これは、Blazor アプリの既定の構成です。 GitHub ページと IIS サブアプリなど、その他のホスティング シナリオの場合、アプリのベースパスは、アプリへのサーバーの相対 URL パスに設定する必要があります。
 
-アプリのベース パスを設定するには、*Pages/_Host.cshtml* ファイル (Blazor サーバー) または *wwwroot/index.html* ファイル (Blazor WebAssembly) の `<head>` タグ要素内の `<base>` を更新します。 `href` 属性値を `/{RELATIVE URL PATH}/` (末尾にスラッシュが必要) に設定します。ここで、`{RELATIVE URL PATH}` は、アプリの完全な相対 URL パスです。
+アプリのベース パスを設定するには、`Pages/_Host.cshtml` ファイル (Blazor サーバー) または `wwwroot/index.html` ファイル (Blazor WebAssembly) の `<head>` タグ要素内の `<base>` タグを更新します。 `href` 属性値を `/{RELATIVE URL PATH}/` (末尾にスラッシュが必要) に設定します。ここで、`{RELATIVE URL PATH}` は、アプリの完全な相対 URL パスです。
 
 ルート以外の相対 URL パスが構成されている Blazor WebAssembly アプリの場合 (例: `<base href="/CoolApp/">`)、そのアプリは*ローカルで実行*されると自身のリソースを見つけることができません。 ローカルでの開発およびテスト中は、実行時の `<base>` タグの `href` 値と一致する*パス ベース*引数を指定することで、この問題を克服することができます。 末尾にはスラッシュを含めないでください。 アプリをローカルで実行しているときにパス ベースの引数を渡すには、アプリのディレクトリから `--pathbase` オプションを指定して `dotnet run` コマンドを実行します。
 
