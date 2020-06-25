@@ -11,121 +11,143 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 0836fc288a015adb9a6223c5a2b681b1b03bded4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 89fbb9d52d99d0eff6656eb6a5a9b4e1c01bc65c
+ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777320"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85347087"
 ---
-# <a name="custom-formatters-in-aspnet-core-web-api"></a><span data-ttu-id="1f5cf-103">ASP.NET Core Web API のカスタム フォーマッタ</span><span class="sxs-lookup"><span data-stu-id="1f5cf-103">Custom formatters in ASP.NET Core Web API</span></span>
+# <a name="custom-formatters-in-aspnet-core-web-api"></a><span data-ttu-id="96447-103">ASP.NET Core Web API のカスタム フォーマッタ</span><span class="sxs-lookup"><span data-stu-id="96447-103">Custom formatters in ASP.NET Core Web API</span></span>
 
-<span data-ttu-id="1f5cf-104">著者: [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="1f5cf-104">By [Tom Dykstra](https://github.com/tdykstra)</span></span>
+<span data-ttu-id="96447-104">[Kirk Larkin](https://twitter.com/serpent5)と[Tom Dykstra](https://github.com/tdykstra)。</span><span class="sxs-lookup"><span data-stu-id="96447-104">By [Kirk Larkin](https://twitter.com/serpent5) and [Tom Dykstra](https://github.com/tdykstra).</span></span>
 
-<span data-ttu-id="1f5cf-105">ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web API でのデータ交換をサポートしています。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-105">ASP.NET Core MVC supports data exchange in Web APIs using input and output formatters.</span></span> <span data-ttu-id="1f5cf-106">入力フォーマッタは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-106">Input formatters are used by [Model Binding](xref:mvc/models/model-binding).</span></span> <span data-ttu-id="1f5cf-107">出力フォーマッタは、[応答を書式設定](xref:web-api/advanced/formatting)するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-107">Output formatters are used to [format responses](xref:web-api/advanced/formatting).</span></span>
+<span data-ttu-id="96447-105">ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web API でのデータ交換をサポートしています。</span><span class="sxs-lookup"><span data-stu-id="96447-105">ASP.NET Core MVC supports data exchange in Web APIs using input and output formatters.</span></span> <span data-ttu-id="96447-106">入力フォーマッタは、[モデル バインド](xref:mvc/models/model-binding)によって使用されます。</span><span class="sxs-lookup"><span data-stu-id="96447-106">Input formatters are used by [Model Binding](xref:mvc/models/model-binding).</span></span> <span data-ttu-id="96447-107">出力フォーマッタは、[応答を書式設定](xref:web-api/advanced/formatting)するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="96447-107">Output formatters are used to [format responses](xref:web-api/advanced/formatting).</span></span>
 
-<span data-ttu-id="1f5cf-108">フレームワークには、JSON および XML 用の組み込みの入力および出力フォーマッタが用意されています。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-108">The framework provides built-in input and output formatters for JSON and XML.</span></span> <span data-ttu-id="1f5cf-109">プレーン テキスト用の組み込みの出力フォーマッタが用意されていますが、プレーン テキスト用の入力フォーマッタは用意されていません。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-109">It provides a built-in output formatter for plain text, but doesn't provide an input formatter for plain text.</span></span>
+<span data-ttu-id="96447-108">フレームワークには、JSON および XML 用の組み込みの入力および出力フォーマッタが用意されています。</span><span class="sxs-lookup"><span data-stu-id="96447-108">The framework provides built-in input and output formatters for JSON and XML.</span></span> <span data-ttu-id="96447-109">プレーン テキスト用の組み込みの出力フォーマッタが用意されていますが、プレーン テキスト用の入力フォーマッタは用意されていません。</span><span class="sxs-lookup"><span data-stu-id="96447-109">It provides a built-in output formatter for plain text, but doesn't provide an input formatter for plain text.</span></span>
 
-<span data-ttu-id="1f5cf-110">この記事では、カスタム フォーマッタを作成して、追加形式のサポートを追加する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-110">This article shows how to add support for additional formats by creating custom formatters.</span></span> <span data-ttu-id="1f5cf-111">プレーン テキスト用のカスタムの入力フォーマッタの例については、GitHub の [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-111">For an example of a custom input formatter for plain text, see [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) on GitHub.</span></span>
+<span data-ttu-id="96447-110">この記事では、カスタム フォーマッタを作成して、追加形式のサポートを追加する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="96447-110">This article shows how to add support for additional formats by creating custom formatters.</span></span> <span data-ttu-id="96447-111">カスタムプレーンテキスト入力フォーマッタの例については、GitHub の[TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="96447-111">For an example of a custom plain text input formatter, see [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs) on GitHub.</span></span>
 
-<span data-ttu-id="1f5cf-112">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-112">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="96447-112">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="96447-112">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="when-to-use-custom-formatters"></a><span data-ttu-id="1f5cf-113">カスタム フォーマッタを使用するタイミング</span><span class="sxs-lookup"><span data-stu-id="1f5cf-113">When to use custom formatters</span></span>
+## <a name="when-to-use-custom-formatters"></a><span data-ttu-id="96447-113">カスタム フォーマッタを使用するタイミング</span><span class="sxs-lookup"><span data-stu-id="96447-113">When to use custom formatters</span></span>
 
-<span data-ttu-id="1f5cf-114">組み込みフォーマッタでサポートされていないコンテンツの種類を[コンテンツ ネゴシエーション](xref:web-api/advanced/formatting#content-negotiation) プロセスでサポートする場合は、カスタム フォーマッタを使用します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-114">Use a custom formatter when you want the [content negotiation](xref:web-api/advanced/formatting#content-negotiation) process to support a content type that isn't supported by the built-in formatters.</span></span>
+<span data-ttu-id="96447-114">カスタムフォーマッタを使用して、組み込みのフォーマッタによって処理されないコンテンツの種類のサポートを追加します。</span><span class="sxs-lookup"><span data-stu-id="96447-114">Use a custom formatter to add support for a content type that isn't handled by the bult-in formatters.</span></span>
 
-<span data-ttu-id="1f5cf-115">たとえば、Web API の一部のクライアントが [Protobuf](https://github.com/google/protobuf) 形式を処理できる場合、より効率的であるため、それらのクライアントで Protobuf を使用することができます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-115">For example, if some of the clients for your web API can handle the [Protobuf](https://github.com/google/protobuf) format, you might want to use Protobuf with those clients because it's more efficient.</span></span> <span data-ttu-id="1f5cf-116">あるいは、Web API を使用して、[vCard](https://wikipedia.org/wiki/VCard) 形式 (連絡先データを交換する場合に一般的に使用される) で連絡先の名前とアドレスを送信することもできます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-116">Or you might want your web API to send contact names and addresses in [vCard](https://wikipedia.org/wiki/VCard) format, a commonly used format for exchanging contact data.</span></span> <span data-ttu-id="1f5cf-117">この記事で提供するサンプル アプリでは単純な vCard フォーマッタを実装します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-117">The sample app provided with this article implements a simple vCard formatter.</span></span>
+## <a name="overview-of-how-to-use-a-custom-formatter"></a><span data-ttu-id="96447-115">カスタム フォーマッタの使用方法の概要</span><span class="sxs-lookup"><span data-stu-id="96447-115">Overview of how to use a custom formatter</span></span>
 
-## <a name="overview-of-how-to-use-a-custom-formatter"></a><span data-ttu-id="1f5cf-118">カスタム フォーマッタの使用方法の概要</span><span class="sxs-lookup"><span data-stu-id="1f5cf-118">Overview of how to use a custom formatter</span></span>
+<span data-ttu-id="96447-116">カスタムフォーマッタを作成するには:</span><span class="sxs-lookup"><span data-stu-id="96447-116">To create a custom formatter:</span></span>
 
-<span data-ttu-id="1f5cf-119">カスタム フォーマッタを作成して使用する手順を以下に示します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-119">Here are the steps to create and use a custom formatter:</span></span>
+* <span data-ttu-id="96447-117">クライアントに送信されるデータをシリアル化するには、出力フォーマッタクラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="96447-117">For serializing data sent to the client, create an output formatter class.</span></span>
+* <span data-ttu-id="96447-118">クライアントから受信したデータを deserialzing するには、入力フォーマッタクラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="96447-118">For deserialzing data received from the client, create an input formatter class.</span></span>
+* <span data-ttu-id="96447-119">フォーマッタクラスのインスタンスを、 `InputFormatters` `OutputFormatters` [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions)のコレクションおよびコレクションに追加します。</span><span class="sxs-lookup"><span data-stu-id="96447-119">Add instances of formatter classes to the `InputFormatters` and `OutputFormatters` collections in [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions).</span></span>
 
-* <span data-ttu-id="1f5cf-120">クライアントに送信するデータをシリアル化する場合は、出力フォーマッタ クラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-120">Create an output formatter class if you want to serialize data to send to the client.</span></span>
-* <span data-ttu-id="1f5cf-121">クライアントから受信したデータを逆シリアル化する場合は、入力フォーマッタ クラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-121">Create an input formatter class if you want to deserialize data received from the client.</span></span>
-* <span data-ttu-id="1f5cf-122">フォーマッタのインスタンスを [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions) の `InputFormatters` および `OutputFormatters` コレクションに追加します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-122">Add instances of your formatters to the `InputFormatters` and `OutputFormatters` collections in [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions).</span></span>
+## <a name="how-to-create-a-custom-formatter-class"></a><span data-ttu-id="96447-120">カスタム フォーマッタ クラスの作成方法</span><span class="sxs-lookup"><span data-stu-id="96447-120">How to create a custom formatter class</span></span>
 
-<span data-ttu-id="1f5cf-123">次のセクションでは、これらの各手順のガイダンスとコード例を提供します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-123">The following sections provide guidance and code examples for each of these steps.</span></span>
+<span data-ttu-id="96447-121">フォーマッタを作成する場合は、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="96447-121">To create a formatter:</span></span>
 
-## <a name="how-to-create-a-custom-formatter-class"></a><span data-ttu-id="1f5cf-124">カスタム フォーマッタ クラスの作成方法</span><span class="sxs-lookup"><span data-stu-id="1f5cf-124">How to create a custom formatter class</span></span>
+* <span data-ttu-id="96447-122">クラスを適切な基底クラスから派生させます。</span><span class="sxs-lookup"><span data-stu-id="96447-122">Derive the class from the appropriate base class.</span></span> <span data-ttu-id="96447-123">このサンプルアプリは、およびから派生して <xref:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter> <xref:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter> います。</span><span class="sxs-lookup"><span data-stu-id="96447-123">The sample app derives from <xref:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter> and <xref:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter>.</span></span>
+* <span data-ttu-id="96447-124">コンストラクターで有効なメディアの種類とエンコーディングを指定します。</span><span class="sxs-lookup"><span data-stu-id="96447-124">Specify valid media types and encodings in the constructor.</span></span>
+* <span data-ttu-id="96447-125"><xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> および <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> メソッドをオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="96447-125">Override the <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> and <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> methods.</span></span>
+* <span data-ttu-id="96447-126"><xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> および `WriteResponseBodyAsync` メソッドをオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="96447-126">Override the <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> and `WriteResponseBodyAsync` methods.</span></span>
 
-<span data-ttu-id="1f5cf-125">フォーマッタを作成する場合は、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-125">To create a formatter:</span></span>
+<span data-ttu-id="96447-127">次のコードは、サンプルのクラスを示してい `VcardOutputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)</span><span class="sxs-lookup"><span data-stu-id="96447-127">The following code shows the `VcardOutputFormatter` class from the [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample):</span></span>
 
-* <span data-ttu-id="1f5cf-126">クラスを適切な基底クラスから派生させます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-126">Derive the class from the appropriate base class.</span></span>
-* <span data-ttu-id="1f5cf-127">コンストラクターで有効なメディアの種類とエンコーディングを指定します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-127">Specify valid media types and encodings in the constructor.</span></span>
-* <span data-ttu-id="1f5cf-128">`CanReadType`/`CanWriteType` メソッドのオーバーライド</span><span class="sxs-lookup"><span data-stu-id="1f5cf-128">Override `CanReadType`/`CanWriteType` methods</span></span>
-* <span data-ttu-id="1f5cf-129">`ReadRequestBodyAsync`/`WriteResponseBodyAsync` メソッドのオーバーライド</span><span class="sxs-lookup"><span data-stu-id="1f5cf-129">Override `ReadRequestBodyAsync`/`WriteResponseBodyAsync` methods</span></span>
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=snippet)]
   
-### <a name="derive-from-the-appropriate-base-class"></a><span data-ttu-id="1f5cf-130">適切な基底クラスからの派生</span><span class="sxs-lookup"><span data-stu-id="1f5cf-130">Derive from the appropriate base class</span></span>
+### <a name="derive-from-the-appropriate-base-class"></a><span data-ttu-id="96447-128">適切な基底クラスからの派生</span><span class="sxs-lookup"><span data-stu-id="96447-128">Derive from the appropriate base class</span></span>
 
-<span data-ttu-id="1f5cf-131">メディアの種類がテキスト (vCard など) の場合は、[TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) または [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) 基底クラスから派生させます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-131">For text media types (for example, vCard), derive from the [TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) or [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) base class.</span></span>
+<span data-ttu-id="96447-129">メディアの種類がテキスト (vCard など) の場合は、[TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) または [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) 基底クラスから派生させます。</span><span class="sxs-lookup"><span data-stu-id="96447-129">For text media types (for example, vCard), derive from the [TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) or [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) base class.</span></span>
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
 
-<span data-ttu-id="1f5cf-132">入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-132">For an input formatter example, see the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).</span></span>
+<span data-ttu-id="96447-130">種類がバイナリである場合は、[InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) または [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) 基底クラスから派生させます。</span><span class="sxs-lookup"><span data-stu-id="96447-130">For binary types, derive from the [InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) or [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) base class.</span></span>
 
-<span data-ttu-id="1f5cf-133">種類がバイナリである場合は、[InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) または [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) 基底クラスから派生させます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-133">For binary types, derive from the [InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) or [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) base class.</span></span>
+### <a name="specify-valid-media-types-and-encodings"></a><span data-ttu-id="96447-131">有効なメディアの種類とエンコーディングの指定</span><span class="sxs-lookup"><span data-stu-id="96447-131">Specify valid media types and encodings</span></span>
 
-### <a name="specify-valid-media-types-and-encodings"></a><span data-ttu-id="1f5cf-134">有効なメディアの種類とエンコーディングの指定</span><span class="sxs-lookup"><span data-stu-id="1f5cf-134">Specify valid media types and encodings</span></span>
+<span data-ttu-id="96447-132">コンストラクターで、`SupportedMediaTypes` および `SupportedEncodings` コレクションに追加して、有効なメディアの種類とエンコーディングを指定します。</span><span class="sxs-lookup"><span data-stu-id="96447-132">In the constructor, specify valid media types and encodings by adding to the `SupportedMediaTypes` and `SupportedEncodings` collections.</span></span>
 
-<span data-ttu-id="1f5cf-135">コンストラクターで、`SupportedMediaTypes` および `SupportedEncodings` コレクションに追加して、有効なメディアの種類とエンコーディングを指定します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-135">In the constructor, specify valid media types and encodings by adding to the `SupportedMediaTypes` and `SupportedEncodings` collections.</span></span>
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=ctor)]
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=ctor&highlight=3,5-6)]
+<span data-ttu-id="96447-133">フォーマッタクラスは、依存関係にコンストラクターの挿入を使用でき**ません**。</span><span class="sxs-lookup"><span data-stu-id="96447-133">A formatter class can **not** use constructor injection for its dependencies.</span></span> <span data-ttu-id="96447-134">たとえば、を `ILogger<VcardOutputFormatter>` パラメーターとしてコンストラクターに追加することはできません。</span><span class="sxs-lookup"><span data-stu-id="96447-134">For example, `ILogger<VcardOutputFormatter>` cannot be added as a parameter to the constructor.</span></span> <span data-ttu-id="96447-135">サービスにアクセスするには、メソッドに渡されるコンテキストオブジェクトを使用します。</span><span class="sxs-lookup"><span data-stu-id="96447-135">To access services, use the context object that gets passed in to the methods.</span></span> <span data-ttu-id="96447-136">この記事のコード例と[サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)では、この方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="96447-136">A code example in this article and the [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample) show how to do this.</span></span>
 
-<span data-ttu-id="1f5cf-136">入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-136">For an input formatter example, see the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).</span></span>
+### <a name="override-canreadtype-and-canwritetype"></a><span data-ttu-id="96447-137">CanReadType と Canreadtype のオーバーライド</span><span class="sxs-lookup"><span data-stu-id="96447-137">Override CanReadType and CanWriteType</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="1f5cf-137">フォーマッタ クラスでコンストラクターの依存関係の挿入を行うことはできません。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-137">You can't do constructor dependency injection in a formatter class.</span></span> <span data-ttu-id="1f5cf-138">たとえば、コンストラクターにロガー パラメーターを追加して、ロガーを取得することはできません。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-138">For example, you can't get a logger by adding a logger parameter to the constructor.</span></span> <span data-ttu-id="1f5cf-139">サービスにアクセスするには、メソッドに渡されるコンテキスト オブジェクトを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-139">To access services, you have to use the context object that gets passed in to your methods.</span></span> <span data-ttu-id="1f5cf-140">[以下](#read-write)のコード例でこの方法を示します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-140">A code example [below](#read-write) shows how to do this.</span></span>
+<span data-ttu-id="96447-138">メソッドまたはメソッドをオーバーライドして、逆シリアル化またはシリアル化を行う型を指定し `CanReadType` `CanWriteType` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-138">Specify the type to deserialize into or serialize from by overriding the `CanReadType` or `CanWriteType` methods.</span></span> <span data-ttu-id="96447-139">たとえば、型から vCard テキストを作成 `Contact` し、その逆も同様にします。</span><span class="sxs-lookup"><span data-stu-id="96447-139">For example, creating vCard text from a `Contact` type and vice versa.</span></span>
 
-### <a name="override-canreadtypecanwritetype"></a><span data-ttu-id="1f5cf-141">CanReadType/CanWriteType のオーバーライド</span><span class="sxs-lookup"><span data-stu-id="1f5cf-141">Override CanReadType/CanWriteType</span></span>
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
 
-<span data-ttu-id="1f5cf-142">`CanReadType` または `CanWriteType` メソッドをオーバーライドして、逆シリアル化またはシリアル化できる種類を指定します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-142">Specify the type you can deserialize into or serialize from by overriding the `CanReadType` or `CanWriteType` methods.</span></span> <span data-ttu-id="1f5cf-143">たとえば、vCard テキストを `Contact` の種類からのみ作成できます (その逆も可)。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-143">For example, you might only be able to create vCard text from a `Contact` type and vice versa.</span></span>
+#### <a name="the-canwriteresult-method"></a><span data-ttu-id="96447-140">CanWriteResult メソッド</span><span class="sxs-lookup"><span data-stu-id="96447-140">The CanWriteResult method</span></span>
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
+<span data-ttu-id="96447-141">一部のシナリオでは、をで `CanWriteResult` はなくオーバーライドする必要があり `CanWriteType` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-141">In some scenarios, `CanWriteResult` must be overridden rather than `CanWriteType`.</span></span> <span data-ttu-id="96447-142">次のすべての条件が満たされている場合は、`CanWriteResult` を使用します。</span><span class="sxs-lookup"><span data-stu-id="96447-142">Use `CanWriteResult` if the following conditions are true:</span></span>
 
-<span data-ttu-id="1f5cf-144">入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-144">For an input formatter example, see the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).</span></span>
+* <span data-ttu-id="96447-143">アクションメソッドは、モデルクラスを返します。</span><span class="sxs-lookup"><span data-stu-id="96447-143">The action method returns a model class.</span></span>
+* <span data-ttu-id="96447-144">実行時に返される可能性がある派生クラスがあります。</span><span class="sxs-lookup"><span data-stu-id="96447-144">There are derived classes which might be returned at runtime.</span></span>
+* <span data-ttu-id="96447-145">アクションによって返される派生クラスは、実行時に既知である必要があります。</span><span class="sxs-lookup"><span data-stu-id="96447-145">The derived class returned by the action must be known at runtime.</span></span>
 
-#### <a name="the-canwriteresult-method"></a><span data-ttu-id="1f5cf-145">CanWriteResult メソッド</span><span class="sxs-lookup"><span data-stu-id="1f5cf-145">The CanWriteResult method</span></span>
+<span data-ttu-id="96447-146">たとえば、次のようなアクションメソッドがあるとします。</span><span class="sxs-lookup"><span data-stu-id="96447-146">For example, suppose the action method:</span></span>
 
-<span data-ttu-id="1f5cf-146">一部のシナリオでは、`CanWriteType` の代わりに `CanWriteResult` をオーバーライドする必要があります。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-146">In some scenarios you have to override `CanWriteResult` instead of `CanWriteType`.</span></span> <span data-ttu-id="1f5cf-147">次のすべての条件が満たされている場合は、`CanWriteResult` を使用します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-147">Use `CanWriteResult` if the following conditions are true:</span></span>
+* <span data-ttu-id="96447-147">シグネチャは型を返し `Person` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-147">Signature returns a `Person` type.</span></span>
+* <span data-ttu-id="96447-148">`Student`は、 `Instructor` から派生した型または型を返すことができ `Person` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-148">Can return a `Student` or `Instructor` type that derives from `Person`.</span></span> 
 
-* <span data-ttu-id="1f5cf-148">アクション メソッドはモデル クラスを返します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-148">Your action method returns a model class.</span></span>
-* <span data-ttu-id="1f5cf-149">実行時に返される可能性がある派生クラスがあります。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-149">There are derived classes which might be returned at runtime.</span></span>
-* <span data-ttu-id="1f5cf-150">アクションが返した派生クラスを実行時に把握する必要があります。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-150">You need to know at runtime which derived class was returned by the action.</span></span>
+<span data-ttu-id="96447-149">フォーマッタがオブジェクトのみを処理するようにするには、 `Student` メソッドに提供されたコンテキストオブジェクトの[オブジェクト](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object)の型を確認し `CanWriteResult` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-149">For the formatter to handle only `Student` objects, check the type of [Object](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) in the context object provided to the `CanWriteResult` method.</span></span> <span data-ttu-id="96447-150">アクションメソッドがを返す場合 `IActionResult` :</span><span class="sxs-lookup"><span data-stu-id="96447-150">When the action method returns `IActionResult`:</span></span>
 
-<span data-ttu-id="1f5cf-151">たとえば、アクション メソッド シグネチャが `Person` の種類を返したとします。ただし、この場合、`Person` から派生した `Student` または `Instructor` の種類を返す可能性があります。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-151">For example, suppose your action method signature returns a `Person` type, but it may return a `Student` or `Instructor` type that derives from `Person`.</span></span> <span data-ttu-id="1f5cf-152">フォーマッタで `Student` オブジェクトのみを処理する場合は、`CanWriteResult` メソッドに提供されたコンテキスト オブジェクトで [Object](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) の種類を確認します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-152">If you want your formatter to handle only `Student` objects, check the type of [Object](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) in the context object provided to the `CanWriteResult` method.</span></span> <span data-ttu-id="1f5cf-153">アクション メソッドが `IActionResult` を返す場合は、`CanWriteResult` を使用する必要がないことに注意してください。この場合、`CanWriteType` メソッドはランタイム型を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-153">Note that it's not necessary to use `CanWriteResult` when the action method returns `IActionResult`; in that case, the `CanWriteType` method receives the runtime type.</span></span>
+* <span data-ttu-id="96447-151">を使用する必要はありません `CanWriteResult` 。</span><span class="sxs-lookup"><span data-stu-id="96447-151">It's not necessary to use `CanWriteResult`.</span></span>
+* <span data-ttu-id="96447-152">メソッドは、 `CanWriteType` ランタイム型を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="96447-152">The `CanWriteType` method receives the runtime type.</span></span>
 
 <a id="read-write"></a>
 
-### <a name="override-readrequestbodyasyncwriteresponsebodyasync"></a><span data-ttu-id="1f5cf-154">ReadRequestBodyAsync/WriteResponseBodyAsync のオーバーライド</span><span class="sxs-lookup"><span data-stu-id="1f5cf-154">Override ReadRequestBodyAsync/WriteResponseBodyAsync</span></span>
+### <a name="override-readrequestbodyasync-and-writeresponsebodyasync"></a><span data-ttu-id="96447-153">ReadRequestBodyAsync と WriteResponseBodyAsync のオーバーライド</span><span class="sxs-lookup"><span data-stu-id="96447-153">Override ReadRequestBodyAsync and WriteResponseBodyAsync</span></span>
 
-<span data-ttu-id="1f5cf-155">`ReadRequestBodyAsync` または `WriteResponseBodyAsync` で実際に逆シリアル化またはシリアル化を行います。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-155">You do the actual work of deserializing or serializing in `ReadRequestBodyAsync` or `WriteResponseBodyAsync`.</span></span> <span data-ttu-id="1f5cf-156">次の例で強調表示されている行は、依存関係の挿入コンテナーからサービスを取得する方法を示しています (コンストラクター パラメーターからは取得できません)。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-156">The highlighted lines in the following example show how to get services from the dependency injection container (you can't get them from constructor parameters).</span></span>
+<span data-ttu-id="96447-154">逆シリアル化またはシリアル化は、またはで実行され `ReadRequestBodyAsync` `WriteResponseBodyAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-154">Deserialization or serialization is performed in `ReadRequestBodyAsync` or `WriteResponseBodyAsync`.</span></span> <span data-ttu-id="96447-155">次の例は、依存関係挿入コンテナーからサービスを取得する方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="96447-155">The following example shows how to get services from the dependency injection container.</span></span> <span data-ttu-id="96447-156">コンストラクターのパラメーターからサービスを取得できません。</span><span class="sxs-lookup"><span data-stu-id="96447-156">Services can't be obtained from constructor parameters.</span></span>
 
-[!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=writeresponse&highlight=3-4)]
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=writeresponse)]
 
-<span data-ttu-id="1f5cf-157">入力フォーマッタの例として、「[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-157">For an input formatter example, see the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample).</span></span>
+## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a><span data-ttu-id="96447-157">カスタム フォーマッタを使用するように MVC を構成する方法</span><span class="sxs-lookup"><span data-stu-id="96447-157">How to configure MVC to use a custom formatter</span></span>
 
-## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a><span data-ttu-id="1f5cf-158">カスタム フォーマッタを使用するように MVC を構成する方法</span><span class="sxs-lookup"><span data-stu-id="1f5cf-158">How to configure MVC to use a custom formatter</span></span>
+<span data-ttu-id="96447-158">カスタム フォーマッタを使用するには、`InputFormatters` または `OutputFormatters` コレクションにフォーマッタ クラスのインスタンスを追加します。</span><span class="sxs-lookup"><span data-stu-id="96447-158">To use a custom formatter, add an instance of the formatter class to the `InputFormatters` or `OutputFormatters` collection.</span></span>
 
-<span data-ttu-id="1f5cf-159">カスタム フォーマッタを使用するには、`InputFormatters` または `OutputFormatters` コレクションにフォーマッタ クラスのインスタンスを追加します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-159">To use a custom formatter, add an instance of the formatter class to the `InputFormatters` or `OutputFormatters` collection.</span></span>
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](custom-formatters/3.1sample/Startup.cs?name=mvcoptions)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!code-csharp[](custom-formatters/sample/Startup.cs?name=mvcoptions&highlight=3-4)]
 
-<span data-ttu-id="1f5cf-160">フォーマッタは、挿入した順序で評価されます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-160">Formatters are evaluated in the order you insert them.</span></span> <span data-ttu-id="1f5cf-161">最初のものが優先されます。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-161">The first one takes precedence.</span></span>
+::: moniker-end
 
-## <a name="next-steps"></a><span data-ttu-id="1f5cf-162">次のステップ</span><span class="sxs-lookup"><span data-stu-id="1f5cf-162">Next steps</span></span>
+<span data-ttu-id="96447-159">フォーマッタは、挿入した順序で評価されます。</span><span class="sxs-lookup"><span data-stu-id="96447-159">Formatters are evaluated in the order you insert them.</span></span> <span data-ttu-id="96447-160">最初のものが優先されます。</span><span class="sxs-lookup"><span data-stu-id="96447-160">The first one takes precedence.</span></span>
 
-* <span data-ttu-id="1f5cf-163">[このドキュメント用のサンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)。このアプリを使用して、シンプルな vCard の入力と出力フォーマッタを実装します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-163">[Sample app for this doc](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample), which implements simple vCard input and output formatters.</span></span> <span data-ttu-id="1f5cf-164">アプリでは、次の例のように vCard の読み取りと書き込みを行います。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-164">The apps reads and writes vCards that look like the following example:</span></span>
+## <a name="the-completed-vcardinputformatter-class"></a><span data-ttu-id="96447-161">完成した `VcardInputFormatter` クラス</span><span class="sxs-lookup"><span data-stu-id="96447-161">The completed `VcardInputFormatter` class</span></span>
+
+<span data-ttu-id="96447-162">次のコードは、サンプルのクラスを示してい `VcardInputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)</span><span class="sxs-lookup"><span data-stu-id="96447-162">The following code shows the `VcardInputFormatter` class from the [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample):</span></span>
+
+[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardInputFormatter.cs?name=snippet)]
+
+## <a name="test-the-app"></a><span data-ttu-id="96447-163">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="96447-163">Test the app</span></span>
+
+<span data-ttu-id="96447-164">[この記事のサンプルアプリを実行](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します。これにより、基本的な vCard 入力フォーマッタと出力フォーマッタが実装されます。</span><span class="sxs-lookup"><span data-stu-id="96447-164">[Run the sample app for this article](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample), which implements basic vCard input and output formatters.</span></span> <span data-ttu-id="96447-165">アプリは次のような Vcard を読み取り、書き込みます。</span><span class="sxs-lookup"><span data-stu-id="96447-165">The app reads and writes vCards similar to the following:</span></span>
 
 ```
 BEGIN:VCARD
 VERSION:2.1
 N:Davolio;Nancy
 FN:Nancy Davolio
-no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR]
-uid:20293482-9240-4d68-b475-325df4a83728
 END:VCARD
 ```
 
-<span data-ttu-id="1f5cf-165">vCard の出力を表示するには、アプリケーションを実行し、Accept ヘッダー "text/vcard" を指定して Get 要求を `http://localhost:63313/api/contacts/` (Visual Studio から実行する場合) または `http://localhost:5000/api/contacts/` (コマンドラインから実行する場合) に送信します。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-165">To see vCard output, run the application and send a Get request with Accept header "text/vcard" to `http://localhost:63313/api/contacts/` (when running from Visual Studio) or `http://localhost:5000/api/contacts/` (when running from the command line).</span></span>
+<span data-ttu-id="96447-166">VCard の出力を表示するには、アプリを実行し、Accept ヘッダーを含む Get 要求をに送信し `text/vcard` `https://localhost:5001/api/contacts` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-166">To see vCard output, run the app and send a Get request with Accept header `text/vcard` to `https://localhost:5001/api/contacts`.</span></span>
 
-<span data-ttu-id="1f5cf-166">連絡先のメモリ内コレクションに vCard を追加するには、本文に vCard テキストを指定し、Content-Type ヘッダー"text/vcard" を指定して、同じ URL に Post 要求を送信します (書式は前述の例と同じ)。</span><span class="sxs-lookup"><span data-stu-id="1f5cf-166">To add a vCard to the in-memory collection of contacts, send a Post request to the same URL, with Content-Type header "text/vcard" and with vCard text in the body, formatted like the example above.</span></span>
+<span data-ttu-id="96447-167">アドレス帳のメモリ内コレクションに vCard を追加するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="96447-167">To add a vCard to the in-memory collection of contacts:</span></span>
+
+* <span data-ttu-id="96447-168">`Post`Postman などのツールを使用してに要求を送信し `/api/contacts` ます。</span><span class="sxs-lookup"><span data-stu-id="96447-168">Send a `Post` request to `/api/contacts` with a tool like Postman.</span></span>
+* <span data-ttu-id="96447-169">`Content-Type` ヘッダーを `text/vcard` に設定します。</span><span class="sxs-lookup"><span data-stu-id="96447-169">Set the `Content-Type` header to `text/vcard`.</span></span>
+* <span data-ttu-id="96447-170">`vCard`本文には、前の例のように書式設定されたテキストを設定します。</span><span class="sxs-lookup"><span data-stu-id="96447-170">Set `vCard` text in the body, formatted like the preceding example.</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="96447-171">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="96447-171">Additional resources</span></span>
+
+* <xref:web-api/advanced/formatting>
+* <xref:grpc/dotnet-grpc>
