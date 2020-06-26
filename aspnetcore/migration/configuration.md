@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/configuration
-ms.openlocfilehash: f65db927d79224695861101aff00897315c6e0b2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9be321850b14847973877fb6a32217bd2dbb5171
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777229"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399817"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>構成を ASP.NET Core に移行する
 
@@ -28,27 +30,27 @@ ms.locfileid: "82777229"
 
 ## <a name="setup-configuration"></a>セットアップの構成
 
-ASP.NET Core は、以前のバージョンの ASP.NET が使用されていた*global.asax* *および web.config ファイルを使用*しなくなりました。 以前のバージョンの ASP.NET では、アプリケーションのスタートアップロジックは`Application_StartUp` *global.asax*内のメソッドに配置されていました。 その後、ASP.NET MVC では、 *Startup.cs*ファイルがプロジェクトのルートに含まれていました。また、アプリケーションの起動時に呼び出されました。 ASP.NET Core は、すべてのスタートアップロジックを*Startup.cs*ファイルに配置することによって、この方法を完全に採用しています。
+ASP.NET Core は、以前のバージョンの ASP.NET が使用されていた*global.asax および* *web.config*ファイルを使用しなくなりました。 以前のバージョンの ASP.NET では、アプリケーションのスタートアップロジックは global.asax 内のメソッドに配置されていま `Application_StartUp` した。 *Global.asax* その後、ASP.NET MVC では、 *Startup.cs*ファイルがプロジェクトのルートに含まれていました。また、アプリケーションの起動時に呼び出されました。 ASP.NET Core は、すべてのスタートアップロジックを*Startup.cs*ファイルに配置することによって、この方法を完全に採用しています。
 
-Web.config*ファイルも*ASP.NET Core で置き換えられました。 *Startup.cs*で説明されているアプリケーションのスタートアップ手順の一部として、構成自体を構成できるようになりました。 構成でも XML ファイルを利用できますが、通常は ASP.NET Core プロジェクトは、構成値を JSON 形式のファイル (たとえば、 *appsettings*) に配置します。 ASP.NET Core の構成システムは、環境変数に簡単にアクセスすることもできます。これにより、環境固有の値に対して[より安全かつ堅牢な場所](xref:security/app-secrets)を提供できます。 これは、ソース管理にチェックインしない接続文字列や API キーなどのシークレットに特に当てはまります。 ASP.NET Core の構成の詳細については、「[構成](xref:fundamentals/configuration/index)」を参照してください。
+*web.config*ファイルも ASP.NET Core で置き換えられました。 *Startup.cs*で説明されているアプリケーションのスタートアップ手順の一部として、構成自体を構成できるようになりました。 構成では引き続き XML ファイルを利用できますが、通常 ASP.NET Core プロジェクトでは、 *appsettings.jsなどの*JSON 形式のファイルに構成値が配置されます。 ASP.NET Core の構成システムは、環境変数に簡単にアクセスすることもできます。これにより、環境固有の値に対して[より安全かつ堅牢な場所](xref:security/app-secrets)を提供できます。 これは、ソース管理にチェックインしない接続文字列や API キーなどのシークレットに特に当てはまります。 ASP.NET Core の構成の詳細については、「[構成](xref:fundamentals/configuration/index)」を参照してください。
 
 この記事では、[前の記事](xref:migration/mvc)の部分的に移行された ASP.NET Core プロジェクトから始めます。 構成を設定するには、次のコンストラクターとプロパティをプロジェクトのルートにある*Startup.cs*ファイルに追加します。
 
 [!code-csharp[](configuration/samples/WebApp1/src/WebApp1/Startup.cs?range=11-16)]
 
-この時点で、 *Startup.cs*ファイルはコンパイルされません。ただし、次`using`のステートメントを追加する必要があるためです。
+この時点で、 *Startup.cs*ファイルはコンパイルされません。ただし、次のステートメントを追加する必要があるためです `using` 。
 
 ```csharp
 using Microsoft.Extensions.Configuration;
 ```
 
-適切な項目テンプレートを使用して、プロジェクトのルートに*appsettings*ファイルを追加します。
+適切な項目テンプレートを使用して、ファイルの*appsettings.js*をプロジェクトのルートに追加します。
 
 ![AppSettings JSON の追加](configuration/_static/add-appsettings-json.png)
 
-## <a name="migrate-configuration-settings-from-webconfig"></a>Web.config から構成設定を移行する
+## <a name="migrate-configuration-settings-from-webconfig"></a>web.config から構成設定を移行する
 
-ASP.NET MVC プロジェクトで*は、必要*なデータベース接続文字列が web.config の`<connectionStrings>`要素に含まれていました。 この ASP.NET Core プロジェクトでは、この情報を*appsettings*ファイルに格納します。 *Appsettings*を開き、次のものが既に含まれていることに注意してください。
+ASP.NET MVC プロジェクトには、要素内の*web.config*に必要なデータベース接続文字列が含まれていました `<connectionStrings>` 。 この ASP.NET Core プロジェクトでは、この情報をファイルの*appsettings.js*に保存します。 *appsettings.js*を開くと、次のものが既に含まれていることに注意してください。
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 
@@ -56,4 +58,4 @@ ASP.NET MVC プロジェクトで*は、必要*なデータベース接続文字
 
 ## <a name="summary"></a>まとめ
 
-ASP.NET Core によって、アプリケーションのすべてのスタートアップロジックが1つのファイルに配置されます。このファイルで、必要なサービスと依存関係を定義して構成することができます。 *Web.config ファイルは*、JSON などのさまざまなファイル形式や環境変数を利用できる柔軟な構成機能に置き換えられています。
+ASP.NET Core によって、アプリケーションのすべてのスタートアップロジックが1つのファイルに配置されます。このファイルで、必要なサービスと依存関係を定義して構成することができます。 *web.config*ファイルは、JSON などのさまざまなファイル形式や環境変数を利用できる柔軟な構成機能に置き換えられます。

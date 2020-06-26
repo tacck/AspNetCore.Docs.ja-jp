@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/24/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: df1daa68a3e18f7aad4507ce9526d76ff6a2114d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4b8e393542c56502a825000773bbf714d91e4128
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773917"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399232"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>ASP.NET Core の分散キャッシュ タグ ヘルパー
 
@@ -54,7 +56,7 @@ ms.locfileid: "82773917"
 | -------------- | ------------------------------------- |
 | String         | `my-distributed-cache-unique-key-101` |
 
-`name` は必須です。 格納された各キャッシュ インスタンスごとにキーとして `name` 属性が使用されます。 ページのページ名と場所Razor Razorに基づいて各インスタンスにキャッシュキーを割り当てるキャッシュタグヘルパーとは異なり、分散キャッシュタグヘルパーは、属性`name`に対してのみ、キーの基礎となります。
+`name` は必須です。 格納された各キャッシュ インスタンスごとにキーとして `name` 属性が使用されます。 ページのページ名と場所に基づいて各インスタンスにキャッシュキーを割り当てるキャッシュタグヘルパーとは異なり Razor Razor 、分散キャッシュタグヘルパーは、属性に対してのみ、キーの基礎と `name` なります。
 
 例:
 

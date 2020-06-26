@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 12/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 2e604cd1869ea077fc0465df91ec083b9db83763
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768971"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400155"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core でのモデル バインド
 
@@ -29,10 +31,10 @@ ms.locfileid: "82768971"
 
 ## <a name="what-is-model-binding"></a>モデル バインドとは何か
 
-コントローラーとRazorページは、HTTP 要求から取得されたデータを処理します。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
+コントローラーと Razor ページは、HTTP 要求から取得されたデータを処理します。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
 
 * ルート データ、フォーム フィールド、クエリ文字列などのさまざまなソースからデータを取得します。
-* メソッドパラメーターおよびパブリックプロパティのRazorデータをコントローラーおよびページに提供します。
+* Razorメソッドパラメーターおよびパブリックプロパティのデータをコントローラーおよびページに提供します。
 * 文字列データを .NET 型に変換します。
 * 複合型のプロパティを更新します。
 
@@ -61,12 +63,12 @@ http://contoso.com/api/pets/2?DogsOnly=true
 
 上記の例で、モデル バインディング ターゲットは単純型のメソッド パラメーターになっています。 ターゲットは複合型のプロパティになる場合もあります。 各プロパティが正常にバインドされたら、そのプロパティに対して[モデル検証](xref:mvc/models/validation)が行われます。 どのようなデータがモデルにバインドされているかを示す記録、バインド エラー、または検証のエラーは、[ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) または [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) に格納されます。 このプロセスが正常終了したかどうかを確認するために、アプリでは [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) フラグが調べられます。
 
-## <a name="targets"></a>対象サーバー
+## <a name="targets"></a>ターゲット
 
 モデル バインドでは、次の種類のターゲットの値について検索が試みられます。
 
 * 要求のルーティング先であるコントローラー アクション メソッドのパラメーター。
-* 要求がルーティングRazorされるページハンドラーメソッドのパラメーター。 
+* Razor要求がルーティングされるページハンドラーメソッドのパラメーター。 
 * 属性によって指定されている場合は、コントローラーまたは `PageModel` クラスのパブリック プロパティ。
 
 ### <a name="bindproperty-attribute"></a>[BindProperty] 属性
@@ -87,13 +89,13 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
 
-## <a name="sources"></a>ソース
+## <a name="sources"></a>変換元
 
 既定では、モデル バインドでは HTTP 要求内の次のソースからキーと値のペアの形式でデータが取得されます。
 
 1. フォーム フィールド
 1. 要求本文 ([[ApiController] 属性を持つコントローラー](xref:web-api/index#binding-source-parameter-inference) の場合)。
-1. データのルーティング
+1. ルート データ
 1. クエリ文字列パラメーター
 1. アップロード済みのファイル
 
@@ -174,7 +176,7 @@ public class Pet
 * 複合型の場合、モデル バインドでは、プロパティを設定せずに既定のコンストラクターを使用して、インスタンスが作成されます。
 * 配列は `Array.Empty<T>()` に設定されます。例外として、`byte[]` 配列は `null` に設定されます。
 
-モデルプロパティのフォームフィールドに何も見つからない場合にモデルの状態を無効にする必要[`[BindRequired]`](#bindrequired-attribute)がある場合は、属性を使用します。
+モデルプロパティのフォームフィールドに何も見つからない場合にモデルの状態を無効にする必要がある場合は、属性を使用し [`[BindRequired]`](#bindrequired-attribute) ます。
 
 この `[BindRequired]` 動作は、要求本文内の JSON または XML データに対してではなく、ポストされたフォーム データからのモデル バインドに適用されることに注意してください。 要求本文データは、[入力フォーマッタ](#input-formatters)によって処理されます。
 
@@ -184,11 +186,11 @@ public class Pet
 
 `[ApiController]` 属性を持つ API コントローラーでは、モデル状態が無効であると、HTTP 400 の自動応答が生成されます。
 
-Razorページで、次のエラーメッセージが表示されたページを再び表示します。
+ページで、次のエラーメッセージが表示さ Razor れたページを再び表示します。
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-クライアント側の検証では、 Razorページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチします。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
+クライアント側の検証では、ページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチ Razor します。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
 
 上のコードでページが再表示されると、無効な入力はフォーム フィールドに表示されません。 これは、モデル プロパティが null または既定値に設定されているためです。 無効な入力はエラー メッセージに表示されます。 しかし、フォーム フィールドに不適切なデータを再表示したい場合は、モデル プロパティを文字列にしてデータ変換を手動で行うことを検討してください。
 
@@ -201,9 +203,9 @@ Razorページで、次のエラーメッセージが表示されたページを
 * [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
-* [/](xref:System.ComponentModel.DateTimeConverter)
+* [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [10 進数](xref:System.ComponentModel.DecimalConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
@@ -492,7 +494,7 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> では、フォーム本文、クエリ文字列、およびルート データからデータを取得するために、値プロバイダーが使用されます。 `TryUpdateModelAsync` は通常、次のようになります。 
 
-* 過剰ポストRazorを防ぐために、コントローラーとビューを使用してページおよび MVC アプリで使用します。
+* Razor過剰ポストを防ぐために、コントローラーとビューを使用してページおよび MVC アプリで使用します。
 * フォーム データ、クエリ文字列、およびルート データから使用される場合を除き、Web API では使用されません。 JSON を使用する Web API エンドポイントでは、[入力フォーマッタ](#input-formatters)を使用して要求本文がオブジェクトに逆シリアル化されます。
 
 詳細については、「[TryUpdateModelAsync](xref:data/ef-rp/crud#TryUpdateModelAsync)」をご覧ください。
@@ -501,7 +503,7 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 この属性の名前は、データ ソースを指定するモデル バインド属性のパターンに従います。 ただし、それは、値プロバイダーからのデータ バインドを説明するものではありません。 [依存関係挿入](xref:fundamentals/dependency-injection)コンテナーから型のインスタンスが取得されます。 その目的は、特定のメソッドが呼び出された場合にのみサービスを必要するときにコンストラクターの挿入の代替手段を提供することにあります。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
@@ -515,10 +517,10 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 ## <a name="what-is-model-binding"></a>モデル バインドとは何か
 
-コントローラーとRazorページは、HTTP 要求から取得されたデータを処理します。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
+コントローラーと Razor ページは、HTTP 要求から取得されたデータを処理します。 たとえば、ルート データからはレコード キーが提供され、ポストされたフォーム フィールドからはモデルのプロパティ用の値が提供されます。 これらの各値を取得してそれらを文字列から .NET 型に変換するためのコードを記述するのは、面倒で間違いも起こりやすいでしょう。 モデル バインドを使用すれば、このプロセスを自動化できます。 モデル バインド システムでは次のことが行われます。
 
 * ルート データ、フォーム フィールド、クエリ文字列などのさまざまなソースからデータを取得します。
-* メソッドパラメーターおよびパブリックプロパティのRazorデータをコントローラーおよびページに提供します。
+* Razorメソッドパラメーターおよびパブリックプロパティのデータをコントローラーおよびページに提供します。
 * 文字列データを .NET 型に変換します。
 * 複合型のプロパティを更新します。
 
@@ -547,12 +549,12 @@ http://contoso.com/api/pets/2?DogsOnly=true
 
 上記の例で、モデル バインディング ターゲットは単純型のメソッド パラメーターになっています。 ターゲットは複合型のプロパティになる場合もあります。 各プロパティが正常にバインドされたら、そのプロパティに対して[モデル検証](xref:mvc/models/validation)が行われます。 どのようなデータがモデルにバインドされているかを示す記録、バインド エラー、または検証のエラーは、[ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) または [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) に格納されます。 このプロセスが正常終了したかどうかを確認するために、アプリでは [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) フラグが調べられます。
 
-## <a name="targets"></a>対象サーバー
+## <a name="targets"></a>ターゲット
 
 モデル バインドでは、次の種類のターゲットの値について検索が試みられます。
 
 * 要求のルーティング先であるコントローラー アクション メソッドのパラメーター。
-* 要求がルーティングRazorされるページハンドラーメソッドのパラメーター。 
+* Razor要求がルーティングされるページハンドラーメソッドのパラメーター。 
 * 属性によって指定されている場合は、コントローラーまたは `PageModel` クラスのパブリック プロパティ。
 
 ### <a name="bindproperty-attribute"></a>[BindProperty] 属性
@@ -573,13 +575,13 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
 
-## <a name="sources"></a>ソース
+## <a name="sources"></a>変換元
 
 既定では、モデル バインドでは HTTP 要求内の次のソースからキーと値のペアの形式でデータが取得されます。
 
 1. フォーム フィールド
 1. 要求本文 ([[ApiController] 属性を持つコントローラー](xref:web-api/index#binding-source-parameter-inference) の場合)。
-1. データのルーティング
+1. ルート データ
 1. クエリ文字列パラメーター
 1. アップロード済みのファイル
 
@@ -660,7 +662,7 @@ public class Pet
 * 複合型の場合、モデル バインドでは、プロパティを設定せずに既定のコンストラクターを使用して、インスタンスが作成されます。
 * 配列は `Array.Empty<T>()` に設定されます。例外として、`byte[]` 配列は `null` に設定されます。
 
-モデルプロパティのフォームフィールドに何も見つからない場合にモデルの状態を無効にする必要[`[BindRequired]`](#bindrequired-attribute)がある場合は、属性を使用します。
+モデルプロパティのフォームフィールドに何も見つからない場合にモデルの状態を無効にする必要がある場合は、属性を使用し [`[BindRequired]`](#bindrequired-attribute) ます。
 
 この `[BindRequired]` 動作は、要求本文内の JSON または XML データに対してではなく、ポストされたフォーム データからのモデル バインドに適用されることに注意してください。 要求本文データは、[入力フォーマッタ](#input-formatters)によって処理されます。
 
@@ -670,11 +672,11 @@ public class Pet
 
 `[ApiController]` 属性を持つ API コントローラーでは、モデル状態が無効であると、HTTP 400 の自動応答が生成されます。
 
-Razorページで、次のエラーメッセージが表示されたページを再び表示します。
+ページで、次のエラーメッセージが表示さ Razor れたページを再び表示します。
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-クライアント側の検証では、 Razorページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチします。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
+クライアント側の検証では、ページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチ Razor します。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
 
 上のコードでページが再表示されると、無効な入力はフォーム フィールドに表示されません。 これは、モデル プロパティが null または既定値に設定されているためです。 無効な入力はエラー メッセージに表示されます。 しかし、フォーム フィールドに不適切なデータを再表示したい場合は、モデル プロパティを文字列にしてデータ変換を手動で行うことを検討してください。
 
@@ -687,9 +689,9 @@ Razorページで、次のエラーメッセージが表示されたページを
 * [Boolean](xref:System.ComponentModel.BooleanConverter)
 * [Byte](xref:System.ComponentModel.ByteConverter)、[SByte](xref:System.ComponentModel.SByteConverter)
 * [Char](xref:System.ComponentModel.CharConverter)
-* [/](xref:System.ComponentModel.DateTimeConverter)
+* [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [10 進数](xref:System.ComponentModel.DecimalConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)

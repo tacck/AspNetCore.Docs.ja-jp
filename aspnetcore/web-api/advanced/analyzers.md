@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 530ce2d2a7f67f549f6d188a0c571a5d58518377
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1f44fd65836cc42ffb2303890eefb053b61c4c30
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776247"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399466"
 ---
 # <a name="use-web-api-analyzers"></a>Web API アナライザーを使用する
 
@@ -53,10 +55,10 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[**パッケージ マネージャー コンソール**] ウィンドウから:
-  * **[表示]** > ** [その他のウィンドウ]** > **[パッケージ マネージャー コンソール]** に移動します。
+**[パッケージ マネージャー コンソール]** ウィンドウから:
+  * [ **View** > **その他の Windows** > **パッケージマネージャーコンソール**の表示] にアクセスします。
   * *ApiConventions.csproj* ファイルが存在するディレクトリに移動します。
-  * たとえば、次のコマンドを実行します。
+  * 次のコマンドを実行します。
 
     ```powershell
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -64,7 +66,7 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* [パッケージの**追加**] **Solution Pad** >の [*パッケージ*] フォルダーを右クリックします。
+* [パッケージの*Packages* **Solution Pad** > **追加**] Solution Pad の [パッケージ] フォルダーを右クリックします。
 * [**パッケージの追加**] ウィンドウの [**ソース**] ドロップダウンを [nuget.org] に設定します。
 * 検索ボックスに「Microsoft.AspNetCore.Mvc.Api.Analyzers」と入力します。
 * 結果ウィンドウから "Microsoft.AspNetCore.Mvc.Api.Analyzers" パッケージを選択して、[**パッケージを追加**] をクリックします。
@@ -93,7 +95,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 OpenAPI ドキュメントには、アクションによって返される可能性のある状態コードと応答の種類が含まれます。 ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> や <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> などの属性がアクションの文書化に使用されます。 Web API の文書化の詳細については、<xref:tutorials/web-api-help-pages-using-swagger> を参照してください。
 
-パッケージのいずれかのアナライザーが、<xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> の注釈が付けられたコントローラーを検査し、応答全体を文書化していないアクションを特定します。 次の例を確認してください。
+パッケージのいずれかのアナライザーが、<xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> の注釈が付けられたコントローラーを検査し、応答全体を文書化していないアクションを特定します。 次に例を示します。
 
 [!code-csharp[](conventions/sample/Controllers/ContactsController.cs?name=missing404docs&highlight=10)]
 

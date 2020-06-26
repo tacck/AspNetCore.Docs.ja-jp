@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103042"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400818"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core プロジェクトでのスキャフォールディング
 
@@ -178,7 +180,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor 既存の承認のないサーバープロジェクトへのスキャフォールディング
+## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Server 既存の承認なしでプロジェクトにスキャフォールディング
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -289,11 +291,11 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 ### <a name="style-authentication-endpoints"></a>認証エンドポイントのスタイルを適用する
 
-Blazorサーバーは Razor ページ Identity ページを使用するため、ビジターがページとコンポーネントの間を移動すると、UI のスタイルが変更され Identity ます。 Incongruous スタイルに対処するには、次の2つのオプションがあります。
+ではページページが使用されるため、 Blazor Server Razor Identity ビジターがページとコンポーネントの間を移動すると、UI のスタイルが変更され Identity ます。 Incongruous スタイルに対処するには、次の2つのオプションがあります。
 
 #### <a name="build-identity-components"></a>ビルド Identity コンポーネント
 
-ページではなくコンポーネントを使用する方法 Identity は、コンポーネントを構築することです Identity 。 `SignInManager`とは `UserManager` コンポーネントでサポートされていないため Razor 、サーバーアプリの API エンドポイントを使用して、 Blazor ユーザーアカウントの操作を処理します。
+ページではなくコンポーネントを使用する方法 Identity は、コンポーネントを構築することです Identity 。 `SignInManager`とは `UserManager` コンポーネントでサポートされていないため Razor 、アプリの API エンドポイントを使用して、 Blazor Server ユーザーアカウントの操作を処理します。
 
 #### <a name="use-a-custom-layout-with-blazor-app-styles"></a>アプリスタイルでカスタムレイアウトを使用する Blazor
 
@@ -360,7 +362,7 @@ Identityページのレイアウトとスタイルを変更して、既定のテ
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor 承認を使用したサーバープロジェクトへのスキャフォールディング
+## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Server 承認を使用してプロジェクトにスキャフォールディング
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -470,7 +472,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 静的なアセットが web ルートに発行されないようにするに Identity は、「」を参照してください <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> 。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 
@@ -711,7 +713,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 同様の方法で、運用環境のシナリオにも対応できます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 

@@ -6,17 +6,19 @@ ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 96ee703da4ced69c5d9c703139e33b76b5dcdff1
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074141"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399167"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core でのモデルのカスタマイズ
 
@@ -56,7 +58,7 @@ ASP.NET Core には、開発時エラーページハンドラーがあります�
 
 モデルは、 Identity 次のエンティティ型で構成されます。
 
-|エンティティの種類|説明                                                  |
+|エンティティの種類|[説明]                                                  |
 |-----------|-------------------------------------------------------------|
 |`User`     |ユーザーを表します。                                         |
 |`Role`     |ロールを表します。                                           |
@@ -361,7 +363,7 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については、次を参照してください。
+ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については次を参照してください:
 
 * [スキャフォールディングIdentity](xref:security/authentication/scaffold-identity)
 * [カスタムユーザーデータを追加、ダウンロード、および削除するIdentity](xref:security/authentication/add-user-data)
@@ -737,7 +739,7 @@ public class ApplicationDbContext
 }
 ```
 
-注:
+メモ:
 
 * この例には、 `UserRole` ユーザーからロールへの多対多リレーションシップを移動するために必要な join エンティティも含まれています。
 * 型ではなく型が使用されていることを反映するように、ナビゲーションプロパティの型を変更することを忘れないで `ApplicationXxx` `IdentityXxx` ください。

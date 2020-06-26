@@ -7,27 +7,29 @@ ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 1bce6b9cdc876062b050eae6eb3c4acf0127ce92
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777125"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399713"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core の部分ビュー
 
 作成者: [Steve Smith](https://ardalis.com/)、[Maher JENDOUBI](https://twitter.com/maherjend)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Scott Sauber](https://twitter.com/scottsauber)
 
-部分ビューは、 [Razor](xref:mvc/views/razor)別のマークアップファイルの表示出力*内*に HTML 出力を表示するマークアップファイル (*cshtml*) です。
+部分ビューは、 [Razor](xref:mvc/views/razor) 別のマークアップファイルの表示出力*内*に HTML 出力を表示するマークアップファイル (*cshtml*) です。
 
 ::: moniker range=">= aspnetcore-2.1"
 
-*部分ビュー*という用語は、マークアップファイルが*ビュー*と呼ばれる MVC アプリを開発する場合やRazor 、マークアップファイルが*ページ*と呼ばれるページアプリを開発する場合に使用します。 このトピックでは、一般的に MVC Razorビューとページページを*マークアップファイル*と呼びます。
+*部分ビュー*という用語は、マークアップファイルが*ビュー*と呼ばれる MVC アプリを開発する場合や、 Razor マークアップファイルが*ページ*と呼ばれるページアプリを開発する場合に使用します。 このトピックでは、一般的に MVC ビューと Razor ページページを*マークアップファイル*と呼びます。
 
 ::: moniker-end
 
@@ -52,9 +54,9 @@ ms.locfileid: "82777125"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-部分ビューは、 *Views*フォルダー (MVC) または*pages*フォルダー (Razorページ) 内に保持されている、 *cshtml*マークアップファイルです。
+部分ビューは、 *Views*フォルダー (MVC) または*pages*フォルダー (ページ) 内に保持されている、 *cshtml*マークアップファイルです。 Razor
 
-ASP.NET Core MVC では、コントローラーの <xref:Microsoft.AspNetCore.Mvc.ViewResult> が、ビューまたは部分ビューのどちらかを返すことができます。 ページRazorでは、 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>は<xref:Microsoft.AspNetCore.Mvc.PartialViewResult>オブジェクトとして表される部分ビューを返すことができます。 部分ビューの参照と表示については、「[部分ビューを参照する](#reference-a-partial-view)」セクションで説明します。
+ASP.NET Core MVC では、コントローラーの <xref:Microsoft.AspNetCore.Mvc.ViewResult> が、ビューまたは部分ビューのどちらかを返すことができます。 Razorページでは、は <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> オブジェクトとして表される部分ビューを返すことができ <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> ます。 部分ビューの参照と表示については、「[部分ビューを参照する](#reference-a-partial-view)」セクションで説明します。
 
 MVC ビューやページ レンダリングとは異なり、部分ビューは *_ViewStart.cshtml* を実行しません。 *_ViewStart.cshtml* の詳細については、<xref:mvc/views/layout> を参照してください。
 
@@ -78,9 +80,9 @@ MVC ビューのレンダリングとは異なり、部分ビューは *_ViewSta
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>PageModel Razorページで部分ビューを使用する
+### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>PageModel ページで部分ビューを使用する Razor
 
-ASP.NET Core 2.0 または2.1 で、次のハンドラーメソッドは、 * \_authorpartialrp. cshtml*部分ビューを応答にレンダリングします。
+ASP.NET Core 2.0 または2.1 で、次のハンドラーメソッドは、 * \_ authorpartialrp. cshtml*部分ビューを応答にレンダリングします。
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -207,7 +209,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 @await Html.PartialAsync("../Account/_LoginPartial.cshtml")
 ```
 
-代わりに、<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartialAsync*> を使って部分ビューをレンダリングすることもできます。 このメソッドは <xref:Microsoft.AspNetCore.Html.IHtmlContent> を返しません。 レンダリングされた出力を直接応答にストリーミングします。 メソッドは結果を返さないため、 Razorコードブロック内で呼び出す必要があります。
+代わりに、<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartialAsync*> を使って部分ビューをレンダリングすることもできます。 このメソッドは <xref:Microsoft.AspNetCore.Html.IHtmlContent> を返しません。 レンダリングされた出力を直接応答にストリーミングします。 メソッドは結果を返さないため、コードブロック内で呼び出す必要があり Razor ます。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Home/Discovery.cshtml?name=snippet_RenderPartialAsync)]
 
@@ -269,10 +271,10 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 * 部分ビューが異なるフォルダー内にある場合は、同じファイル名の別の部分ビューが許可されます。
 * ファイル拡張子を指定せずに部分ビューを名前で参照しており、かつ、部分ビューが呼び出し元のフォルダーと *Shared* フォルダーの両方に存在する場合、呼び出し元のフォルダーにある部分ビューが、部分ビューとして機能します。 部分ビューが呼び出し元のフォルダーに存在しない場合、部分ビューは *Shared* フォルダーから提供されます。 *Shared* フォルダーの部分ビューは、"*共有の部分ビュー*" または "*既定の部分ビュー*" と呼ばれます。
-* 部分ビューは、呼び出しによって循環参照が形成されていない場合に、部分ビューを*連結*&mdash;して別の部分ビューを呼び出すことができます。 相対パスは常に、ファイルのルートや親ではなく、現在のファイルを基準とします。
+* 部分ビューは、 *chained* &mdash; 呼び出しによって循環参照が形成されていない場合に、部分ビューを連結して別の部分ビューを呼び出すことができます。 相対パスは常に、ファイルのルートや親ではなく、現在のファイルを基準とします。
 
 > [!NOTE]
-> 部分[Razor](xref:mvc/views/razor) `section`ビューで定義されたは、親マークアップファイルからは見えません。 `section` は定義されている部分ビューにのみ表示されます。
+> [Razor](xref:mvc/views/razor) `section` 部分ビューで定義されたは、親マークアップファイルからは見えません。 `section` は定義されている部分ビューにのみ表示されます。
 
 ## <a name="access-data-from-partial-views"></a>部分ビューからデータにアクセスする
 

@@ -1,24 +1,26 @@
 ---
-title: ASP.NET Core のアプリケーションパーツをRazor使用して、コントローラー、ビュー、ページなどを共有する
+title: RazorASP.NET Core のアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 author: rick-anderson
-description: ASP.NET Core のアプリケーションパーツをRazor使用して、コントローラー、ビュー、ページなどを共有する
+description: RazorASP.NET Core のアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 68991a3df5e09b63dc52bdadae55f055a721ad3c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774406"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399752"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>アプリケーションパーツを使用しRazorて、コントローラー、ビュー、ページなどを共有する
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Razorアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -26,9 +28,9 @@ ms.locfileid: "82774406"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-"*アプリケーション パーツ*" は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示Razor 、ヘルパー、ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
+"*アプリケーション パーツ*" は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
 
-"[機能プロバイダー](#fp)" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、 Razorビュー、ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
+"[機能プロバイダー](#fp)" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
 
 ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機能を読み込みます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> クラスは、アセンブリでバックアップされるアプリケーション パーツを表します。
 
@@ -46,7 +48,7 @@ ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機�
 
 ### <a name="include-views"></a>ビューを含める
 
-クラスライブラリを使用して、アセンブリにビューを含めます。 [ Razor ](xref:razor-pages/ui-class)
+[ Razor クラスライブラリ](xref:razor-pages/ui-class)を使用して、アセンブリにビューを含めます。
 
 ### <a name="prevent-loading-resources"></a>リソースの読み込みを防ぐ
 
@@ -116,9 +118,9 @@ View Components:
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-"*アプリケーション パーツ*" は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示Razor 、ヘルパー、ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
+"*アプリケーション パーツ*" は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
 
-"*機能プロバイダー*" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、 Razorビュー、ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
+"*機能プロバイダー*" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
 
 ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機能を読み込みます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> クラスは、アセンブリでバックアップされるアプリケーション パーツを表します。
 
@@ -136,7 +138,7 @@ ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機�
 
 ### <a name="include-views"></a>ビューを含める
 
-クラスライブラリを使用して、アセンブリにビューを含めます。 [ Razor ](xref:razor-pages/ui-class)
+[ Razor クラスライブラリ](xref:razor-pages/ui-class)を使用して、アセンブリにビューを含めます。
 
 ### <a name="prevent-loading-resources"></a>リソースの読み込みを防ぐ
 
@@ -154,7 +156,7 @@ ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機�
 
 アプリケーション機能プロバイダーはアプリケーション パーツを調べ、これらのパーツの機能を提供します。 次の ASP.NET Core 機能には組み込みの機能プロバイダーがあります。
 
-* [Controllers](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
+* [コントローラー](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
 * [タグ ヘルパー](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
 * [コンポーネントの表示](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 

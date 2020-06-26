@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773943"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399284"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC のキャッシュ タグ ヘルパー
 
@@ -39,11 +41,11 @@ ms.locfileid: "82773943"
 
 ### <a name="enabled"></a>enabled
 
-| 属性の種類  | 例        | Default |
+| 属性の種類  | 例        | 既定値 |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`enabled` によってキャッシュ タグ ヘルパーで囲まれた内容をキャッシュするかどうかが決定されます。 既定では、 `true`です。 `false` に設定すると、作成された出力はキャッシュ**されません**。
+`enabled` によってキャッシュ タグ ヘルパーで囲まれた内容をキャッシュするかどうかが決定されます。 既定値は、`true` です。 `false` に設定すると、作成された出力はキャッシュ**されません**。
 
 例:
 
@@ -71,7 +73,7 @@ ms.locfileid: "82773943"
 
 ### <a name="expires-after"></a>expires-after
 
-| 属性の種類 | 例                      | Default    |
+| 属性の種類 | 例                      | 既定値    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 分 |
 
@@ -85,7 +87,7 @@ ms.locfileid: "82773943"
 </cache>
 ```
 
-Razor ビュー エンジンでは、`expires-after` の規定値が 20 分に設定されます。
+Razorビューエンジンは、既定 `expires-after` 値を20分に設定します。
 
 ### <a name="expires-sliding"></a>expires-sliding
 
@@ -169,7 +171,7 @@ routes.MapRoute(
 
 `vary-by-cookie` には、Cookie 値が変化したときにキャッシュの更新をトリガーする、コンマで区切った Cookie 名のリストを指定します。
 
-次の例では、ASP.NET Core ID に関連付けられている Cookie を監視します。 ユーザーが認証されると、Id Cookie の変更によってキャッシュの更新がトリガーされます。
+次の例では、ASP.NET Core に関連付けられている cookie を監視し Identity ます。 ユーザーが認証されると、cookie の変更によって Identity キャッシュの更新がトリガーされます。
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -179,11 +181,11 @@ routes.MapRoute(
 
 ### <a name="vary-by-user"></a>vary-by-user
 
-| 属性の種類  | 例        | Default |
+| 属性の種類  | 例        | 既定値 |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`vary-by-user` では、サインインしているユーザー (またはコンテキストのプリンシパル) が変化したときにキャッシュをリセットするかどうかを指定します。 現在のユーザーは要求コンテキストのプリンシパルとも呼ばれ、`@User.Identity.Name` を参照することにより Razor ビューで表示できます。
+`vary-by-user` では、サインインしているユーザー (またはコンテキストのプリンシパル) が変化したときにキャッシュをリセットするかどうかを指定します。 現在のユーザーは、要求コンテキストプリンシパルとも呼ばれ、を参照すること Razor によってビューで表示でき `@User.Identity.Name` ます。
 
 次の例では、現在ログインしているユーザーを監視して、キャッシュの更新をトリガーします。
 
@@ -228,7 +230,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| 属性の種類      | 例                               | Default  |
+| 属性の種類      | 例                               | 既定値  |
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 

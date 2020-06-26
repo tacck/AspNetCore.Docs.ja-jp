@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: df978d49201ba1010ddf13b1b9a63ae27116616e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: c088cb7dd4f446b6a42c63357ccf2a080d852382
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103088"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399245"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core のコンポーネントタグヘルパー
 
@@ -42,7 +44,7 @@ ms.locfileid: "85103088"
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-前の例では、 `Counter` コンポーネントがアプリの*Pages*フォルダー内にあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 (など `@using BlazorSample.Pages` ) です。
+前の例では、 `Counter` コンポーネントがアプリの*Pages*フォルダー内にあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `@using BlazorSample.Pages`)。
 
 コンポーネントタグヘルパーは、コンポーネントにパラメーターを渡すこともできます。 `ColorfulCheckbox`チェックボックスのラベルの色とサイズを設定する次のコンポーネントについて考えてみます。
 
@@ -84,7 +86,7 @@ ms.locfileid: "85103088"
     param-Size="14" param-Color="@("blue")" />
 ```
 
-前の例では、 `ColorfulCheckbox` コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 (など `@using BlazorSample.Shared` ) です。
+前の例では、 `ColorfulCheckbox` コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `@using BlazorSample.Shared`)。
 
 ページまたはビューには、次の HTML が表示されます。
 
@@ -160,8 +162,8 @@ public class MyClass
 
 | 表示モード | 説明 |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | コンポーネントを静的 HTML にレンダリングし、Blazor Server アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | コンポーネントを静的 HTML にレンダリングし、アプリのマーカーを含め Blazor Server ます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | アプリのマーカーをレンダリング Blazor Server します。 コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | コンポーネントを静的 HTML にレンダリングします。 |
 
 ページとビューはコンポーネントを使用できますが、逆の場合は真実ではありません。 コンポーネントでは、ビューおよびページ固有の機能 (部分ビューやセクションなど) を使用できません。 コンポーネントの部分ビューのロジックを使用するには、部分ビューのロジックをコンポーネントにします。

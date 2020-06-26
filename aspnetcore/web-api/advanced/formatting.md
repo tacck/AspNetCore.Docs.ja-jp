@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 46a1ccbb3b5eeaf1beb3e33bca1b6c7065d6d56a
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074217"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400363"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -161,7 +163,7 @@ ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを
 
 一部の機能は `System.Text.Json` ベースのフォーマッタでうまく動作せず、`Newtonsoft.Json` ベースのフォーマッタの参照が必要となる場合があります。 アプリが以下の場合には、`Newtonsoft.Json` ベースのフォーマッタの使用を続けます。
 
-* `Newtonsoft.Json` 属性を使用する。 たとえば、`[JsonProperty]` または `[JsonIgnore]` です。
+* `Newtonsoft.Json` 属性を使用する。 たとえば、`[JsonProperty]` または `[JsonIgnore]` のようにします。
 * シリアル化の設定をカスタマイズする。
 * `Newtonsoft.Json` で提供される機能に依存する。
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings` を構成する。 ASP.NET Core 3.0 より前は、`JsonResult.SerializerSettings`が `Newtonsoft.Json` に固有の `JsonSerializerSettings` のインスタンスを受け入れます。
