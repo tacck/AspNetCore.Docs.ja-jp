@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 6d9d8cf6ca9ca3afc570c2c68510125200b96c60
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 86f9b0a3efea5315092d1c6435a1b764fbec0a1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074456"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402989"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs の認証と承認
 
@@ -73,7 +75,7 @@ dotnet new react -o <output_directory_name> -au Individual
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * 次のように追加のヘルパーメソッドを使用して認証し `AddIdentityServerJwt` ます。これにより、アプリは、サービスによって生成された JWT トークンを検証します。
+  * IdentityServer によって生成された JWT トークンを検証するようにアプリを構成する `AddIdentityServerJwt` ヘルパー メソッドが追加された Authentication。
 
     ```csharp
     services.AddAuthentication()
@@ -95,11 +97,11 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="addapiauthorization"></a>AddApiAuthorization
 
-このヘルパーメソッドは、サポートされる構成を使用するようにサーバーを構成します。 サービスは、アプリのセキュリティの問題を処理するための強力で拡張可能なフレームワークです。 同時に、最も一般的なシナリオでは不必要な複雑さを公開します。 そのため、適切な出発点と見なされる一連の規則と構成オプションが用意されています。 認証を変更する必要がある場合でも、ユーザーのニーズに合わせて認証をカスタマイズするために、ユーザーサーバーの能力を最大限に活用できます。
+このヘルパーメソッドは、サポートされる構成を使用するようにサーバーを構成します。 IdentityServer は、アプリのセキュリティの問題を処理するための強力で拡張可能なフレームワークです。 同時に、最も一般的なシナリオでは不必要な複雑さを公開します。 そのため、適切な出発点と見なされる一連の規則と構成オプションが用意されています。 認証を変更する必要がある場合でも、ユーザーのニーズに合わせて認証をカスタマイズするために、ユーザーサーバーの能力を最大限に活用できます。
 
 ### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
-このヘルパーメソッドは、アプリのポリシースキームを既定の認証ハンドラーとして構成します。 このポリシーは、 Identity Identity URL スペース "/" のサブパスにルーティングされるすべての要求を処理できるように構成されてい Identity ます。 は、 `JwtBearerHandler` 他のすべての要求を処理します。 さらに、このメソッドは `<<ApplicationName>>API` API リソースをの既定のスコープに登録 `<<ApplicationName>>API` し、JWT ベアラートークンミドルウェアを構成して、アプリのために、サービスによって発行されたトークンを検証します。
+このヘルパーメソッドは、アプリのポリシースキームを既定の認証ハンドラーとして構成します。 このポリシーは、 Identity Identity URL スペース "/" のサブパスにルーティングされるすべての要求を処理できるように構成されてい Identity ます。 それ以外のすべての要求は、`JwtBearerHandler` で処理されます。 さらに、このメソッドは `<<ApplicationName>>API` API リソースをの既定のスコープに登録 `<<ApplicationName>>API` し、JWT ベアラートークンミドルウェアを構成して、アプリのために、サービスによって発行されたトークンを検証します。
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
@@ -117,7 +119,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="appsettingsjson"></a>appsettings.json
 
-プロジェクトルートの*appsettings.js*のファイルには、 `IdentityServer` 構成されたクライアントの一覧を説明する新しいセクションがあります。 次の例には、1つのクライアントがあります。 クライアント名はアプリケーション名に対応し、OAuth パラメーターに規約によってマップされ `ClientId` ます。 プロファイルは、構成されているアプリの種類を示します。 サーバーの構成プロセスを簡略化する規則を実現するために、内部的に使用されます。 「[アプリケーションプロファイル](#application-profiles)」セクションで説明されているように、使用可能なプロファイルがいくつかあります。
+プロジェクトルートの*appsettings.js*のファイルには、 `IdentityServer` 構成されたクライアントの一覧を説明する新しいセクションがあります。 次の例には、1 つのクライアントがあります。 クライアント名はアプリケーション名に対応し、規則によって OAuth の `ClientId` パラメーターにマップされます。 構成対象のアプリの種類は、プロファイルによって示されています。 サーバーの構成プロセスを簡略化する規則を実現するために、内部的に使用されます。 「[アプリケーションプロファイル](#application-profiles)」セクションで説明されているように、使用可能なプロファイルがいくつかあります。
 
 ```json
 "IdentityServer": {

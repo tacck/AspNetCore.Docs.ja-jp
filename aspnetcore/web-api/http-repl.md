@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ead745ae8843173bb25b94672005cc6ce295db2e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452214"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403379"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL を使用して Web API をテストする
 
@@ -36,7 +38,7 @@ HTTP Read-Eval-Print Loop (REPL) は:
 * [GET](#test-http-get-requests)
 * [矢印](#test-http-head-requests)
 * [オプション](#test-http-options-requests)
-* [KB830347](#test-http-patch-requests)
+* [PATCH](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
@@ -371,9 +373,9 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 HTTP REPL には既定の相対パスのセットがあり、`connect` コマンドで `--swagger` オプションが指定されていないときは、その相対パスを使用して Swagger ドキュメントが検索されます。 これらの相対パスは、`connect` コマンドで指定されているルート パスおよびベース パスと組み合わされます。 既定の相対パスは次のとおりです。
 
-- *swagger. json*
-- *swagger/v1/swagger. json*
-- */swagger.json*
+- *swagger.js*
+- *swagger/v1/swagger.jsオン*
+- */swagger.js*
 - */swagger/v1/swagger.json*
 
 環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。 値としては、パイプで区切られた相対パスのリストを指定する必要があります。 次に例を示します。
@@ -1058,7 +1060,7 @@ https://localhost:5001/~ clear
 https://localhost:5001/~
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [REST API 要求](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HTTP REPL GitHub リポジトリ](https://github.com/dotnet/HttpRepl)

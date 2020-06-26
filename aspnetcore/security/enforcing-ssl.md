@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 26e6fb38cf31b5a2d5c88c19347c867641eb55df
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8247d66900a0c15b3b386dca021c5c5922d26e71
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451733"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404563"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -108,7 +110,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
-  * 次のようにして、 *appsettings*にトップレベルのエントリを追加します。
+  * appsettings.jsにトップレベルのエントリを追加するには、次*の*操作を行います。
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -122,7 +124,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
-  * 次のようにして、 *appsettings*にトップレベルのエントリを追加します。
+  * appsettings.jsにトップレベルのエントリを追加するには、次*の*操作を行います。
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -130,16 +132,16 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
 ::: moniker-end
 
-* 開発では、 *launchsettings. json*に HTTPS URL を設定します。 IIS Express が使用されている場合は、HTTPS を有効にします。
+* 開発では、 *launchsettings.js*で HTTPS URL を設定します。 IIS Express が使用されている場合は、HTTPS を有効にします。
 
-* [Kestrel](xref:fundamentals/servers/kestrel) [サーバーまたは http.sys サーバー](xref:fundamentals/servers/httpsys)の公開エッジデプロイの HTTPS URL エンドポイントを構成します。 アプリケーションで使用される**HTTPS ポートは1つ**だけです。 ミドルウェアは、を使用してポートを検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。
+* [Kestrel](xref:fundamentals/servers/kestrel)サーバーまたは[HTTP.sys](xref:fundamentals/servers/httpsys)サーバーの公開エッジデプロイの HTTPS URL エンドポイントを構成します。 アプリケーションで使用される**HTTPS ポートは1つ**だけです。 ミドルウェアは、を使用してポートを検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。
 
 > [!NOTE]
 > リバースプロキシ構成でアプリを実行する場合、は <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 使用できません。 このセクションで説明する他の方法のいずれかを使用して、ポートを設定します。
 
 ### <a name="edge-deployments"></a>Edge の展開 
 
-Kestrel または http.sys が公開エッジサーバーとして使用されている場合、Kestrel または http.sys が両方でリッスンするように構成されている必要があります。
+Kestrel または HTTP.sys が公開エッジサーバーとして使用されている場合、Kestrel または HTTP.sys が両方でリッスンするように構成されている必要があります。
 
 * クライアントがリダイレクトされるセキュリティで保護されたポート (通常、運用環境では443、開発では 5001)。
 * セキュリティで保護されていないポート (通常、運用環境では80、開発では 5000)。
@@ -319,7 +321,7 @@ HTTPS/HSTS をオプトアウトするには、次のようにします。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-`--no-https` オプションを使用します。 例
+`--no-https` オプションを使用します。 次に例を示します。
 
 ```dotnetcli
 dotnet new webapp --no-https
@@ -437,7 +439,7 @@ Visual Studio での証明書の問題のトラブルシューティングにつ
 
 IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [**修復**] を選択します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)します。
 
-## <a name="additional-information"></a>追加情報
+## <a name="additional-information"></a>関連情報
 
 * <xref:host-and-deploy/proxy-load-balancer>
 * [Apache: HTTPS 構成を使用した Linux での ASP.NET Core のホスト](xref:host-and-deploy/linux-apache#https-configuration)

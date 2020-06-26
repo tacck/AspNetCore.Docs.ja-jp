@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/11/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de34968f21eec28cf375ee9f75d3cb8b212c7e70
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776423"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404276"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core でのコア暗号化の拡張性
 
@@ -126,10 +128,10 @@ I認証 Atedの暗号化機能と I認証機能の主な違いは、記述子が
 
 記述子は、ExportToXml ルーチンを使用してシリアル化できます。 このルーチンは、2つのプロパティを含む XmlSerializedDescriptorInfo を返します。これは、記述子の XElement 表現と、対応する XElement でこの記述子をやり直すするために使用できる[I認証 Ated Tordescriptor デシリアライザー](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer)を表す型です。
 
-シリアル化された記述子には、暗号化キーマテリアルなどの機密情報が含まれている場合があります。 データ保護システムには、ストレージに保存する前に、情報を暗号化するためのサポートが組み込まれています。 これを活用するために、記述子は、属性名が "requiresEncryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>")、値が "true" である機密情報を含む要素をマークする必要があります。
+シリアル化された記述子には、暗号化キーマテリアルなどの機密情報が含まれている場合があります。 データ保護システムには、ストレージに保存する前に、情報を暗号化するためのサポートが組み込まれています。 これを活用するために、記述子は、属性名が "requiresEncryption" (xmlns " <http://schemas.asp.net/2015/03/dataProtection> ")、値が "true" である機密情報を含む要素をマークする必要があります。
 
 >[!TIP]
-> この属性を設定するためのヘルパー API があります。 MarkAsRequiresEncryption () という名前空間にある XElement () を呼び出します。このメソッドは、AspNetCore です。
+> この属性を設定するためのヘルパー API があります。 名前空間 Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel にある拡張メソッド XElement MarkAsRequiresEncryption () を呼び出します。
 
 シリアル化された記述子に機密情報が含まれていない場合もあります。 HSM に暗号化キーが格納されている場合は、もう一度考慮してください。 HSM はプレーンテキスト形式でマテリアルを公開しないため、シリアル化時にキーマテリアルを書き込むことはできません。 代わりに、記述子はキーのラップされたバージョン (HSM がこの方法でエクスポートを許可している場合)、またはキーに固有の一意の識別子を書き込む場合があります。
 

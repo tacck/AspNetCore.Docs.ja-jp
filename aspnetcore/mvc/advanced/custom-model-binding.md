@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 109bebe79c9e77d26b02ca27367b8ff33191a4b4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 54080191d76df674444019d43180a7f9d84b471c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776696"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403639"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core でのカスタム モデル バインド
 

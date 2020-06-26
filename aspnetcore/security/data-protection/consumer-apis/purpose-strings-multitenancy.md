@@ -6,25 +6,27 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/purpose-strings-multitenancy
-ms.openlocfilehash: 73edb8082d2df263bc1e6d73fee1360fa6840514
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8f069da500e7bc06e4b8712fbf7b86d90a815758
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776774"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404380"
 ---
 # <a name="purpose-hierarchy-and-multi-tenancy-in-aspnet-core"></a>ASP.NET Core の目的階層とマルチテナント
 
-`IDataProtector`は暗黙的に`IDataProtectionProvider`もあるため、目的を連結することができます。 この意味では`provider.CreateProtector([ "purpose1", "purpose2" ])` 、はと`provider.CreateProtector("purpose1").CreateProtector("purpose2")`同じです。
+`IDataProtector`は暗黙的にもあるため `IDataProtectionProvider` 、目的を連結することができます。 この意味で `provider.CreateProtector([ "purpose1", "purpose2" ])` は、はと同じです `provider.CreateProtector("purpose1").CreateProtector("purpose2")` 。
 
-これにより、データ保護システムを通じて、いくつかの興味深い階層関係を実現できます。 前の例の[Contoso. Messaging. securemessage](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose)コンポーネントでは、最初に1回`provider.CreateProtector("Contoso.Messaging.SecureMessage")`呼び出し、その結果をプライベート`_myProvider`フィールドにキャッシュできます。 将来`_myProvider.CreateProtector("User: username")`のプロテクターは、の呼び出しを使用して作成できます。これらのプロテクターは、個々のメッセージをセキュリティで保護するために使用されます。
+これにより、データ保護システムを通じて、いくつかの興味深い階層関係を実現できます。 前の例の[Contoso. Messaging. securemessage](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose)コンポーネントでは、最初に `provider.CreateProtector("Contoso.Messaging.SecureMessage")` 1 回呼び出し、その結果をプライベートフィールドにキャッシュできます `_myProvider` 。 将来のプロテクターは、の呼び出しを使用 `_myProvider.CreateProtector("User: username")` して作成できます。これらのプロテクターは、個々のメッセージをセキュリティで保護するために使用されます。
 
-これを反転させることもできます。 複数のテナントをホストする単一の論理アプリケーションがあるとします (CMS は妥当と思われます)。各テナントは独自の認証および状態管理システムを使用して構成できます。 包括的なアプリケーションには単一のマスタープロバイダーがあり、 `provider.CreateProtector("Tenant 1")`と`provider.CreateProtector("Tenant 2")`を呼び出して、各テナントにデータ保護システムの分離されたスライスを与えます。 その後、テナントは独自のプロテクターを独自のニーズに基づいて派生させることができますが、システム内の他のテナントと競合するプロテクターを作成するのがいかに難しいかは関係ありません。 グラフィックでは、次のように表されます。
+これを反転させることもできます。 複数のテナントをホストする単一の論理アプリケーションがあるとします (CMS は妥当と思われます)。各テナントは独自の認証および状態管理システムを使用して構成できます。 包括的なアプリケーションには単一のマスタープロバイダーがあり、とを呼び出して、 `provider.CreateProtector("Tenant 1")` `provider.CreateProtector("Tenant 2")` 各テナントにデータ保護システムの分離されたスライスを与えます。 その後、テナントは独自のプロテクターを独自のニーズに基づいて派生させることができますが、システム内の他のテナントと競合するプロテクターを作成するのがいかに難しいかは関係ありません。 グラフィックでは、次のように表されます。
 
 ![マルチテナントの目的](purpose-strings-multitenancy/_static/purposes-multi-tenancy.png)
 

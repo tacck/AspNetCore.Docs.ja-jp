@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 1967fb1942b4003d498800f6cf4c9dd280aca24e
-ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
+ms.openlocfilehash: 8eec361efbc3c7dca6c0bef65b6f6b40b3b46798
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83393851"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404614"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 内のメモリ内のキャッシュ
 
@@ -190,7 +192,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 
 などの[バックグラウンドサービス](xref:fundamentals/host/hosted-services)を使用して <xref:Microsoft.Extensions.Hosting.IHostedService> キャッシュを更新します。 バックグラウンドサービスでは、エントリを再計算して、準備ができたときにのみキャッシュに割り当てることができます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>

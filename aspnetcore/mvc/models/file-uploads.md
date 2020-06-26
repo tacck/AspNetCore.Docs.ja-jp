@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83838319"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404601"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
@@ -189,7 +191,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 [Fetch API がサポートされていない](https://caniuse.com/#feat=fetch)クライアントに対して JavaScript でフォーム POST を実行するには、次のいずれかの方法を使用します。
 
 * Fetch Polyfill を使用します (例: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))。
-* `XMLHttpRequest`を使用します。 次に例を示します。
+* `XMLHttpRequest` を使用してください。 次に例を示します。
 
   ```javascript
   <script>
@@ -248,7 +250,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次に例を示します。
+次のような例です。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -918,7 +920,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 [Fetch API がサポートされていない](https://caniuse.com/#feat=fetch)クライアントに対して JavaScript でフォーム POST を実行するには、次のいずれかの方法を使用します。
 
 * Fetch Polyfill を使用します (例: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))。
-* `XMLHttpRequest`を使用します。 次に例を示します。
+* `XMLHttpRequest` を使用してください。 次に例を示します。
 
   ```javascript
   <script>
@@ -977,7 +979,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次に例を示します。
+次のような例です。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -1476,7 +1478,7 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [HTTP 接続要求をドレインしています](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)

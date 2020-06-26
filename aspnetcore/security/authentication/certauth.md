@@ -7,17 +7,19 @@ ms.author: bdorrans
 ms.date: 01/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: 493046e288c6b1ccd8e41f15a8e6e532a10a4adc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724251"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403197"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -573,7 +575,7 @@ ASP.NET Core 5 preview 4 以降では、オプションのクライアント証�
 
 * ドメインとサブドメインのバインドを設定します。
   * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
-  * 詳細については、次を参照してください。
+  * 詳細については次を参照してください:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
