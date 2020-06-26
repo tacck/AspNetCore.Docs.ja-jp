@@ -6,34 +6,36 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b0d6c91adfb5dc273aeb662cb2c249626ef1d3c6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777528"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405433"
 ---
-# <a name="introduction-to-authorization-in-aspnet-core"></a><span data-ttu-id="883a4-103">ASP.NET Core での承認の概要</span><span class="sxs-lookup"><span data-stu-id="883a4-103">Introduction to authorization in ASP.NET Core</span></span>
+# <a name="introduction-to-authorization-in-aspnet-core"></a><span data-ttu-id="34f84-103">ASP.NET Core での承認の概要</span><span class="sxs-lookup"><span data-stu-id="34f84-103">Introduction to authorization in ASP.NET Core</span></span>
 
 <a name="security-authorization-introduction"></a>
 
-<span data-ttu-id="883a4-104">承認とは、ユーザーが実行できる操作を決定するプロセスを指します。</span><span class="sxs-lookup"><span data-stu-id="883a4-104">Authorization refers to the process that determines what a user is able to do.</span></span> <span data-ttu-id="883a4-105">たとえば、管理ユーザーは、ドキュメントライブラリの作成、ドキュメントの追加、ドキュメントの編集、および削除を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="883a4-105">For example, an administrative user is allowed to create a document library, add documents, edit documents, and delete them.</span></span> <span data-ttu-id="883a4-106">ライブラリを操作する管理者以外のユーザーは、ドキュメントの読み取りのみが許可されています。</span><span class="sxs-lookup"><span data-stu-id="883a4-106">A non-administrative user working with the library is only authorized to read the documents.</span></span>
+<span data-ttu-id="34f84-104">承認とは、ユーザーが実行できる操作を決定するプロセスを指します。</span><span class="sxs-lookup"><span data-stu-id="34f84-104">Authorization refers to the process that determines what a user is able to do.</span></span> <span data-ttu-id="34f84-105">たとえば、管理ユーザーは、ドキュメントライブラリの作成、ドキュメントの追加、ドキュメントの編集、および削除を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="34f84-105">For example, an administrative user is allowed to create a document library, add documents, edit documents, and delete them.</span></span> <span data-ttu-id="34f84-106">ライブラリを操作する管理者以外のユーザーは、ドキュメントの読み取りのみが許可されています。</span><span class="sxs-lookup"><span data-stu-id="34f84-106">A non-administrative user working with the library is only authorized to read the documents.</span></span>
 
-<span data-ttu-id="883a4-107">認証は直交しており、認証から独立しています。</span><span class="sxs-lookup"><span data-stu-id="883a4-107">Authorization is orthogonal and independent from authentication.</span></span> <span data-ttu-id="883a4-108">ただし、承認には認証メカニズムが必要です。</span><span class="sxs-lookup"><span data-stu-id="883a4-108">However, authorization requires an authentication mechanism.</span></span> <span data-ttu-id="883a4-109">認証は、ユーザーを突き止めるするプロセスです。</span><span class="sxs-lookup"><span data-stu-id="883a4-109">Authentication is the process of ascertaining who a user is.</span></span> <span data-ttu-id="883a4-110">承認では、現在のユーザーのために 1 つ以上の ID を作成する場合があります。</span><span class="sxs-lookup"><span data-stu-id="883a4-110">Authentication may create one or more identities for the current user.</span></span>
+<span data-ttu-id="34f84-107">認証は直交しており、認証から独立しています。</span><span class="sxs-lookup"><span data-stu-id="34f84-107">Authorization is orthogonal and independent from authentication.</span></span> <span data-ttu-id="34f84-108">ただし、承認には認証メカニズムが必要です。</span><span class="sxs-lookup"><span data-stu-id="34f84-108">However, authorization requires an authentication mechanism.</span></span> <span data-ttu-id="34f84-109">認証は、ユーザーを突き止めるするプロセスです。</span><span class="sxs-lookup"><span data-stu-id="34f84-109">Authentication is the process of ascertaining who a user is.</span></span> <span data-ttu-id="34f84-110">承認では、現在のユーザーのために 1 つ以上の ID を作成する場合があります。</span><span class="sxs-lookup"><span data-stu-id="34f84-110">Authentication may create one or more identities for the current user.</span></span>
 
-<span data-ttu-id="883a4-111">ASP.NET Core での認証の詳細について<xref:security/authentication/index>は、「」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="883a4-111">For more information about authentication in ASP.NET Core, see <xref:security/authentication/index>.</span></span>
+<span data-ttu-id="34f84-111">ASP.NET Core での認証の詳細については、「」を参照してください <xref:security/authentication/index> 。</span><span class="sxs-lookup"><span data-stu-id="34f84-111">For more information about authentication in ASP.NET Core, see <xref:security/authentication/index>.</span></span>
 
-## <a name="authorization-types"></a><span data-ttu-id="883a4-112">承認の種類</span><span class="sxs-lookup"><span data-stu-id="883a4-112">Authorization types</span></span>
+## <a name="authorization-types"></a><span data-ttu-id="34f84-112">承認の種類</span><span class="sxs-lookup"><span data-stu-id="34f84-112">Authorization types</span></span>
 
-<span data-ttu-id="883a4-113">ASP.NET Core 承認は、単純な宣言型の[役割](xref:security/authorization/roles)と豊富な[ポリシーベース](xref:security/authorization/policies)のモデルを提供します。</span><span class="sxs-lookup"><span data-stu-id="883a4-113">ASP.NET Core authorization provides a simple, declarative [role](xref:security/authorization/roles) and a rich [policy-based](xref:security/authorization/policies) model.</span></span> <span data-ttu-id="883a4-114">承認は要件で表現され、ハンドラーは要件に対してユーザーの要求を評価します。</span><span class="sxs-lookup"><span data-stu-id="883a4-114">Authorization is expressed in requirements, and handlers evaluate a user's claims against requirements.</span></span> <span data-ttu-id="883a4-115">命令型チェックは、ユーザーがアクセスしようとしているリソースのユーザー id とプロパティの両方を評価する単純なポリシーまたはポリシーに基づいて行うことができます。</span><span class="sxs-lookup"><span data-stu-id="883a4-115">Imperative checks can be based on simple policies or policies which evaluate both the user identity and properties of the resource that the user is attempting to access.</span></span>
+<span data-ttu-id="34f84-113">ASP.NET Core 承認は、単純な宣言型の[役割](xref:security/authorization/roles)と豊富な[ポリシーベース](xref:security/authorization/policies)のモデルを提供します。</span><span class="sxs-lookup"><span data-stu-id="34f84-113">ASP.NET Core authorization provides a simple, declarative [role](xref:security/authorization/roles) and a rich [policy-based](xref:security/authorization/policies) model.</span></span> <span data-ttu-id="34f84-114">承認は要件で表現され、ハンドラーは要件に対してユーザーの要求を評価します。</span><span class="sxs-lookup"><span data-stu-id="34f84-114">Authorization is expressed in requirements, and handlers evaluate a user's claims against requirements.</span></span> <span data-ttu-id="34f84-115">命令型チェックは、ユーザーがアクセスしようとしているリソースのユーザー id とプロパティの両方を評価する単純なポリシーまたはポリシーに基づいて行うことができます。</span><span class="sxs-lookup"><span data-stu-id="34f84-115">Imperative checks can be based on simple policies or policies which evaluate both the user identity and properties of the resource that the user is attempting to access.</span></span>
 
-## <a name="namespaces"></a><span data-ttu-id="883a4-116">名前空間</span><span class="sxs-lookup"><span data-stu-id="883a4-116">Namespaces</span></span>
+## <a name="namespaces"></a><span data-ttu-id="34f84-116">名前空間</span><span class="sxs-lookup"><span data-stu-id="34f84-116">Namespaces</span></span>
 
-<span data-ttu-id="883a4-117">属性`AuthorizeAttribute`と`AllowAnonymousAttribute`属性を含む承認コンポーネントは、 `Microsoft.AspNetCore.Authorization`名前空間にあります。</span><span class="sxs-lookup"><span data-stu-id="883a4-117">Authorization components, including the `AuthorizeAttribute` and `AllowAnonymousAttribute` attributes, are found in the `Microsoft.AspNetCore.Authorization` namespace.</span></span>
+<span data-ttu-id="34f84-117">属性と属性を含む承認コンポーネント `AuthorizeAttribute` `AllowAnonymousAttribute` は、 `Microsoft.AspNetCore.Authorization` 名前空間にあります。</span><span class="sxs-lookup"><span data-stu-id="34f84-117">Authorization components, including the `AuthorizeAttribute` and `AllowAnonymousAttribute` attributes, are found in the `Microsoft.AspNetCore.Authorization` namespace.</span></span>
 
-<span data-ttu-id="883a4-118">[単純な承認](xref:security/authorization/simple)に関するドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="883a4-118">Consult the documentation on [simple authorization](xref:security/authorization/simple).</span></span>
+<span data-ttu-id="34f84-118">[単純な承認](xref:security/authorization/simple)に関するドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="34f84-118">Consult the documentation on [simple authorization](xref:security/authorization/simple).</span></span>
