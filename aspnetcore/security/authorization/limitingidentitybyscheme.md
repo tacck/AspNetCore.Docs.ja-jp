@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 69b6412f249355573faa785743b124a67ecb8b9e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777515"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406018"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>ASP.NET Core で特定のスキームを使用して承認する
 
@@ -44,11 +46,11 @@ public void ConfigureServices(IServiceCollection services)
 上記のコードでは、2つの認証ハンドラーが追加されています。1つは cookie 用で、もう1つはベアラー用です。
 
 >[!NOTE]
->既定のスキームを指定すると`HttpContext.User` 、プロパティはその id に設定されます。 この動作が望ましくない場合は、のパラメーターなしの`AddAuthentication`形式を呼び出して無効にします。
+>既定のスキームを指定すると、 `HttpContext.User` プロパティはその id に設定されます。 この動作が望ましくない場合は、のパラメーターなしの形式を呼び出して無効に `AddAuthentication` します。
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>認証属性を使用したスキームの選択
 
-承認の時点で、アプリは使用するハンドラーを示します。 認証スキームのコンマ区切りの一覧をに`[Authorize]`渡して、アプリが承認するハンドラーを選択します。 `[Authorize]`属性は、既定値が構成されているかどうかに関係なく、使用する認証スキームを指定します。 次に例を示します。
+承認の時点で、アプリは使用するハンドラーを示します。 認証スキームのコンマ区切りの一覧をに渡して、アプリが承認するハンドラーを選択し `[Authorize]` ます。 属性は、 `[Authorize]` 既定値が構成されているかどうかに関係なく、使用する認証スキームを指定します。 次に例を示します。
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -73,7 +75,7 @@ public class MixedController : Controller
 
 ## <a name="selecting-the-scheme-with-policies"></a>ポリシーを使用したスキームの選択
 
-[ポリシー](xref:security/authorization/policies)で目的のスキームを指定する場合は、ポリシーを追加する`AuthenticationSchemes`ときにコレクションを設定できます。
+[ポリシー](xref:security/authorization/policies)で目的のスキームを指定する場合は、ポリシーを追加するときにコレクションを設定でき `AuthenticationSchemes` ます。
 
 ```csharp
 services.AddAuthorization(options =>
@@ -87,7 +89,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-前の例では、"Over18" ポリシーは "ベアラー" ハンドラーによって作成された id に対してのみ実行されます。 `[Authorize]`属性の`Policy`プロパティを設定して、ポリシーを使用します。
+前の例では、"Over18" ポリシーは "ベアラー" ハンドラーによって作成された id に対してのみ実行されます。 属性のプロパティを設定して、ポリシーを使用し `[Authorize]` `Policy` ます。
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -100,7 +102,7 @@ public class RegistrationController : Controller
 
 アプリによっては、複数の種類の認証をサポートする必要がある場合があります。 たとえば、アプリは Azure Active Directory とユーザーデータベースからユーザーを認証する場合があります。 もう1つの例として、Active Directory フェデレーションサービス (AD FS) と Azure Active Directory B2C の両方からユーザーを認証するアプリがあります。 この場合、アプリはいくつかの発行者から JWT ベアラートークンを受け入れる必要があります。
 
-同意するすべての認証スキームを追加します。 たとえば、の`Startup.ConfigureServices`次のコードは、発行者が異なる2つの JWT ベアラー認証スキームを追加します。
+同意するすべての認証スキームを追加します。 たとえば、の次のコードは、 `Startup.ConfigureServices` 発行者が異なる2つの JWT ベアラー認証スキームを追加します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -122,7 +124,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> 既定の認証スキーム`JwtBearerDefaults.AuthenticationScheme`では、JWT ベアラー認証が1つだけ登録されます。 追加の認証は、一意の認証スキームを使用して登録する必要があります。
+> 既定の認証スキームでは、JWT ベアラー認証が1つだけ登録され `JwtBearerDefaults.AuthenticationScheme` ます。 追加の認証は、一意の認証スキームを使用して登録する必要があります。
 
 次の手順では、両方の認証方式を受け入れるように既定の承認ポリシーを更新します。 次に例を示します。
 
@@ -143,6 +145,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-既定の承認ポリシーがオーバーライドされると、コントローラーで`[Authorize]`属性を使用できるようになります。 コントローラーは、最初または2番目の発行者によって発行された JWT の要求を受け入れます。
+既定の承認ポリシーがオーバーライドされると、コントローラーで属性を使用できるようになり `[Authorize]` ます。 コントローラーは、最初または2番目の発行者によって発行された JWT の要求を受け入れます。
 
 ::: moniker-end

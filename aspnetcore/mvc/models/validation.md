@@ -1,31 +1,33 @@
 ---
 title: ASP.NET Core MVC でのモデルの検証
 author: rick-anderson
-description: ASP.NET Core MVC とRazorページでのモデルの検証について説明します。
+description: ASP.NET Core MVC とページでのモデルの検証について説明し Razor ます。
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 56c8d799b98cc09b8cfff12744c6eeb46af4f8e6
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: e76ddad795237991c49bf2a3b1ca840795989260
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003163"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404913"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC とRazorページ ASP.NET Core でのモデルの検証
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC とページ ASP.NET Core でのモデルの検証 Razor
 
 ::: moniker range=">= aspnetcore-3.0"
 
 作成者: [Kirk Larkin](https://github.com/serpent5)
 
-この記事では、ASP.NET Core MVC またはRazorページアプリでユーザー入力を検証する方法について説明します。
+この記事では、ASP.NET Core MVC またはページアプリでユーザー入力を検証する方法について説明し Razor ます。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -33,7 +35,7 @@ ms.locfileid: "83003163"
 
 モデルの状態では、モデル バインドとモデル検証の 2 つのサブシステムで発生したエラーが表されます。 [モデルバインド](model-binding.md)から発生するエラーは、通常、データ変換エラーです。 たとえば、"x" は整数フィールドに入力されます。 モデルの検証は、モデル バインド後に行われ、データがビジネス ルールに準拠していないエラーを報告します。 たとえば、1 から 5 の評価を想定したフィールドに 0 が入力されたとします。
 
-モデルバインドとモデル検証は、どちらもコントローラーアクションまたはRazorページハンドラーメソッドの実行前に行われます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
+モデルバインドとモデル検証は、どちらもコントローラーアクションまたはページハンドラーメソッドの実行前に行わ Razor れます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -61,10 +63,10 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 * `[Phone]`: プロパティに電話番号の書式が設定されていることを検証します。
 * `[Range]`: プロパティ値が指定した範囲内にあることを検証します。
 * `[RegularExpression]`: プロパティ値が指定した正規表現に一致することを検証します。
-* `[Required]`: フィールドが null でないことを検証します。 この属性の動作の詳細については、「 [ `[Required]`属性](#required-attribute)」を参照してください。
+* `[Required]`: フィールドが null でないことを検証します。 この属性の動作の詳細については、「 [ `[Required]` 属性](#required-attribute)」を参照してください。
 * `[StringLength]`: 文字列プロパティの値が、指定された長さの制限を超えていないことを検証します。
 * `[Url]`: プロパティに URL 形式があることを検証します。
-* `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]`属性](#remote-attribute)」を参照してください。
+* `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]` 属性](#remote-attribute)」を参照してください。
 
 検証属性の完全な一覧については、[System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 名前空間で確認できます。
 
@@ -100,7 +102,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 
 ただし、null 非許容型プロパティに対するモデル バインドは失敗する場合があり、`The value '' is invalid` などのエラー メッセージが表示されます。 null 非許容型のサーバー側検証に対してカスタム エラー メッセージを指定するには、次のオプションがあります。
 
-* フィールドを null 許容型にします (たとえば、`decimal` の代わりに `decimal?` を使用)。 [Nullable\<T>](/dotnet/csharp/programming-guide/nullable-types/) 値の型は、標準の null 許容型と同様に扱われます。
+* フィールドを null 許容型にします (たとえば、`decimal` の代わりに `decimal?` を使用)。 [Null \<T> ](/dotnet/csharp/programming-guide/nullable-types/)値を許容値型は、標準の null 許容型と同様に扱われます。
 * 次の例に示すように、モデル バインドで使用される既定のエラー メッセージを指定します。
 
   [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_Configuration&highlight=5-6)]
@@ -248,7 +250,7 @@ public string MiddleName { get; set; }
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Views/Shared/_ValidationScriptsPartial.cshtml?name=snippet_Scripts)]
 
-[Jquery の控えめな検証](https://github.com/aspnet/jquery-validation-unobtrusive)スクリプトは、広く使われている[jquery validation](https://jqueryvalidation.org/)プラグインを基盤とするカスタム Microsoft フロントエンドライブラリです。 jQuery Unobtrusive Validation を使用しないと、同じ検証ロジックを 2 か所でコーディングする必要があります。1 つはモデル プロパティでのサーバー側検証属性で、もう 1 つはクライアント側スクリプトです。 代わりに、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)および [HTML ヘルパー](xref:mvc/views/overview)では、モデル プロパティの検証属性と型メタデータを使用して、検証の必要なフォーム要素に対する HTML 5 の `data-` 属性がレンダリングされます。 jQuery の控えめな検証`data-`では、属性を解析し、そのロジックを JQuery の検証に渡します。これにより、サーバー側の検証ロジックがクライアントに効果的に "コピー" されます。 次に示すように、タグ ヘルパーを使用して、クライアントで検証エラーを表示できます。
+[Jquery の控えめな検証](https://github.com/aspnet/jquery-validation-unobtrusive)スクリプトは、広く使われている[jquery validation](https://jqueryvalidation.org/)プラグインを基盤とするカスタム Microsoft フロントエンドライブラリです。 jQuery Unobtrusive Validation を使用しないと、同じ検証ロジックを 2 か所でコーディングする必要があります。1 つはモデル プロパティでのサーバー側検証属性で、もう 1 つはクライアント側スクリプトです。 代わりに、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)および [HTML ヘルパー](xref:mvc/views/overview)では、モデル プロパティの検証属性と型メタデータを使用して、検証の必要なフォーム要素に対する HTML 5 の `data-` 属性がレンダリングされます。 jQuery の控えめな検証では、属性を解析し、その `data-` ロジックを jQuery の検証に渡します。これにより、サーバー側の検証ロジックがクライアントに効果的に "コピー" されます。 次に示すように、タグ ヘルパーを使用して、クライアントで検証エラーを表示できます。
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml?name=snippet_ReleaseDate&highlight=3-4)]
 
@@ -265,7 +267,7 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jquery の控えめな検証は、この値を jquery Validation [required ()](https://jqueryvalidation.org/required-method/)メソッドに渡します。これにより、そのメッセージが付随** \<するスパン>** 要素に表示されます。
+HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery の控えめな検証では、この値を jQuery Validation [required ()](https://jqueryvalidation.org/required-method/)メソッドに渡します。これにより、そのメッセージが付随する要素に表示され **\<span>** ます。
 
 `[DataType]` 属性によってオーバーライドされていない限り、データ型の検証はプロパティの .NET 型に基づいて行われます。 ブラウザーには独自の既定のエラー メッセージがありますが、jQuery Validation Unobtrusive Validation パッケージでそれらのメッセージをオーバーライドできます。 `[DataType]` 属性と `[EmailAddress]` などのサブクラスを使用して、エラー メッセージを指定できます。
 
@@ -319,7 +321,7 @@ $.get({
 
 ## <a name="custom-client-side-validation"></a>カスタム クライアント側検証
 
-カスタムのクライアント側検証を行うには`data-` 、カスタム jQuery 検証アダプターを使用する HTML 属性を生成します。 次のサンプルのアダプター コードは、この記事で前に導入した `[ClassicMovie]` および `[ClassicMovieWithClientValidator]` 属性用に記述されたものです。
+カスタムのクライアント側検証を行うには `data-` 、カスタム JQuery 検証アダプターを使用する HTML 属性を生成します。 次のサンプルのアダプター コードは、この記事で前に導入した `[ClassicMovie]` および `[ClassicMovieWithClientValidator]` 属性用に記述されたものです。
 
 [!code-javascript[](validation/samples/3.x/ValidationSample/wwwroot/js/classicMovieValidator.js)]
 
@@ -351,7 +353,7 @@ $.get({
 
 HTML に `data-` 属性をレンダリングするこの方法は、サンプル アプリの `ClassicMovie` 属性で使用されています。 この方法を使用してクライアント検証を追加するには、次のようにします。
 
-1. カスタム検証属性の属性アダプター クラスを作成します。 [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2) からクラスを派生します。 次の例で示すように、レンダリングされた出力に `data-` 属性を追加する `AddValidation` メソッドを作成します。
+1. カスタム検証属性の属性アダプター クラスを作成します。 [Attributeadapterbase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)からクラスを派生させます。 次の例で示すように、レンダリングされた出力に `data-` 属性を追加する `AddValidation` メソッドを作成します。
 
    [!code-csharp[](validation/samples/3.x/ValidationSample/Validation/ClassicMovieAttributeAdapter.cs?name=snippet_Class)]
 
@@ -373,7 +375,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 ## <a name="disable-client-side-validation"></a>クライアント側検証を無効にする
 
-次のコードは、ページ内Razorのクライアント検証を無効にします。
+次のコードは、ページ内のクライアント検証を無効にし Razor ます。
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -382,7 +384,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 * すべての *.cshtml* ファイル内の `_ValidationScriptsPartial` への参照をコメントアウトします。
 * *Pages\Shared\_ValidationScriptsPartial.cshtml* ファイルの内容を削除します。
 
-上記の方法では、ASP.NET Core Identity Razorクラスライブラリをクライアント側で検証することはできません。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。
+上記の方法では、ASP.NET Core クラスライブラリをクライアント側で検証することはできません Identity Razor 。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -393,7 +395,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 ::: moniker range="< aspnetcore-3.0"
 
-この記事では、ASP.NET Core MVC またはRazorページアプリでユーザー入力を検証する方法について説明します。
+この記事では、ASP.NET Core MVC またはページアプリでユーザー入力を検証する方法について説明し Razor ます。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -401,7 +403,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 モデルの状態では、モデル バインドとモデル検証の 2 つのサブシステムで発生したエラーが表されます。 [モデル バインド](model-binding.md)で発生するエラーは、一般に、データ変換エラーです (たとえば、整数が必要なフィールドに "x" が入力された場合)。 モデル検証は、モデル バインドの後で行われて、データがビジネス ルールに従っていないエラーが報告されます (たとえば、1 から 5 までのレーティングが必要なフィールドに 0 が入力された場合)。
 
-モデルバインドと検証の両方が、コントローラーアクションまたはRazorページハンドラーメソッドの実行前に行われます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
+モデルバインドと検証の両方が、コントローラーアクションまたはページハンドラーメソッドの実行前に行わ Razor れます。 Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。 通常、Web アプリではエラー メッセージを含むページを再表示します。
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -424,17 +426,17 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 組み込みの検証属性には次のものがあります。
 
 * `[CreditCard]`: プロパティにクレジットカード形式があることを検証します。
-* `[Compare]`: モデル内の2つのプロパティが一致することを検証します。 たとえば、*Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。 [スキャフォールディングIdentity ](xref:security/authentication/scaffold-identity)を参照して、レジスタコードを確認してください。
+* `[Compare]`: モデル内の2つのプロパティが一致することを検証します。 たとえば、*Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。 [スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)を参照してください。
 * `[EmailAddress]`: プロパティが電子メール形式であることを検証します。
 * `[Phone]`: プロパティに電話番号の書式が設定されていることを検証します。
 * `[Range]`: プロパティ値が指定した範囲内にあることを検証します。
 * `[RegularExpression]`: プロパティ値が指定した正規表現に一致することを検証します。
-* `[Required]`: フィールドが null でないことを検証します。 この属性の動作の詳細については、「 [ `[Required]`属性](#required-attribute)」を参照してください。
+* `[Required]`: フィールドが null でないことを検証します。 この属性の動作の詳細については、「 [ `[Required]` 属性](#required-attribute)」を参照してください。
 * `[StringLength]`: 文字列プロパティの値が、指定された長さの制限を超えていないことを検証します。
 * `[Url]`: プロパティに URL 形式があることを検証します。
-* `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]`属性](#remote-attribute)」を参照してください。
+* `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]` 属性](#remote-attribute)」を参照してください。
 
-クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/corefx/issues/42487)のページを参照してください。
+クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/corefx/issues/42487)します。
 
 検証属性の完全な一覧については、[System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 名前空間で確認できます。
 
@@ -466,7 +468,7 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 
 ただし、null 非許容型プロパティに対するモデル バインドは失敗する場合があり、`The value '' is invalid` などのエラー メッセージが表示されます。 null 非許容型のサーバー側検証に対してカスタム エラー メッセージを指定するには、次のオプションがあります。
 
-* フィールドを null 許容型にします (たとえば、`decimal` の代わりに `decimal?` を使用)。 [Nullable\<T>](/dotnet/csharp/programming-guide/nullable-types/) 値の型は、標準の null 許容型と同様に扱われます。
+* フィールドを null 許容型にします (たとえば、`decimal` の代わりに `decimal?` を使用)。 [Null \<T> ](/dotnet/csharp/programming-guide/nullable-types/)値を許容値型は、標準の null 許容型と同様に扱われます。
 * 次の例に示すように、モデル バインドで使用される既定のエラー メッセージを指定します。
 
   [!code-csharp[](validation/samples/2.x/ValidationSample/Startup.cs?name=snippet_MaxModelValidationErrors&highlight=4-5)]
@@ -640,7 +642,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-HTML 出力の `data-` 属性が、`ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery Unobtrusive Validation はこの値を jQuery Validate の [required()](https://jqueryvalidation.org/required-method/) メソッドに渡し、このメソッドは付随する **\<span>** 要素にそのメッセージを表示します。
+HTML 出力の `data-` 属性が、`ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery の控えめな検証は、この値を jQuery Validate [required ()](https://jqueryvalidation.org/required-method/)メソッドに渡します。このメソッドは、付随する要素にそのメッセージを表示し **\<span>** ます。
 
 `[DataType]` 属性によってオーバーライドされていない限り、データ型の検証はプロパティの .NET 型に基づいて行われます。 ブラウザーには独自の既定のエラー メッセージがありますが、jQuery Validation Unobtrusive Validation パッケージでそれらのメッセージをオーバーライドできます。 `[DataType]` 属性と `[EmailAddress]` などのサブクラスを使用して、エラー メッセージを指定できます。
 
@@ -722,7 +724,7 @@ $.get({
 
 HTML に `data-` 属性をレンダリングするこの方法は、サンプル アプリの `ClassicMovie` 属性で使用されています。 この方法を使用してクライアント検証を追加するには、次のようにします。
 
-1. カスタム検証属性の属性アダプター クラスを作成します。 [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2) からクラスを派生します。 次の例で示すように、レンダリングされた出力に `data-` 属性を追加する `AddValidation` メソッドを作成します。
+1. カスタム検証属性の属性アダプター クラスを作成します。 [Attributeadapterbase \<T> ](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)からクラスを派生させます。 次の例で示すように、レンダリングされた出力に `data-` 属性を追加する `AddValidation` メソッドを作成します。
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttributeAdapter.cs?name=snippet_ClassicMovieAttributeAdapter)]
 
@@ -748,13 +750,13 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-ページ内Razor :
+ページ内 Razor :
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 
 クライアント検証を無効にするもう 1 つのオプションは、*.cshtml* ファイルで `_ValidationScriptsPartial` への参照をコメントにすることです。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [System.ComponentModel.DataAnnotations 名前空間](xref:System.ComponentModel.DataAnnotations)
 * [モデルバインド](model-binding.md)

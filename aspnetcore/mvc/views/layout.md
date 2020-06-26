@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/30/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766486"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406655"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core でのレイアウト
 
@@ -28,7 +30,7 @@ ms.locfileid: "82766486"
 * ディレクティブを共有する。
 * ページまたはビューを表示する前に、共通のコードを実行する。
 
-このドキュメントでは、MVC を ASP.NET Core するための2つRazorの異なるアプローチのレイアウトについて説明します。ビューにはページとコントローラーがあります。 このトピックでは、違いは最小限です。
+このドキュメントでは、MVC を ASP.NET Core するための2つの異なるアプローチのレイアウトについて説明します。 Razor ビューにはページとコントローラーがあります。 このトピックでは、違いは最小限です。
 
 * Razorページは*ページ*フォルダーにあります。
 * ビューを含むコントローラーでは、*Views* フォルダーをビューに使用します。
@@ -59,11 +61,11 @@ ms.locfileid: "82766486"
 
 ## <a name="specifying-a-layout"></a>レイアウトの指定
 
-Razorビューには`Layout`プロパティがあります。 個々のビューは、このプロパティを設定することでレイアウトを指定します。
+Razorビューには `Layout` プロパティがあります。 個々のビューは、このプロパティを設定することでレイアウトを指定します。
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-指定されるレイアウトでは、完全なパス (例: */Pages/Shared/_Layout.cshtml*、*/Views/Shared/_Layout.cshtml*) または部分パス (例: `_Layout`) を使用できます。 部分名を指定すると、ビュー Razorエンジンは標準の検出プロセスを使用してレイアウトファイルを検索します。 ハンドラー メソッド (またはコントローラー) が存在するフォルダーが最初に検索され、その後で *Shared* フォルダーが検索されます。 この検出プロセスは、[部分ビュー](xref:mvc/views/partial#partial-view-discovery)の検出に使用されるのと同じプロセスです。
+指定されるレイアウトでは、完全なパス (例: */Pages/Shared/_Layout.cshtml*、*/Views/Shared/_Layout.cshtml*) または部分パス (例: `_Layout`) を使用できます。 部分名を指定すると、 Razor ビューエンジンは標準の検出プロセスを使用してレイアウトファイルを検索します。 ハンドラー メソッド (またはコントローラー) が存在するフォルダーが最初に検索され、その後で *Shared* フォルダーが検索されます。 この検出プロセスは、[部分ビュー](xref:mvc/views/partial#partial-view-discovery)の検出に使用されるのと同じプロセスです。
 
 既定では、すべてのレイアウトで `RenderBody` を呼び出す必要があります。 `RenderBody` への呼び出しが配置されると、ビューのコンテンツがレンダリングされます。
 
@@ -79,9 +81,9 @@ Razorビューには`Layout`プロパティがあります。 個々のビュー
 @RenderSection("Scripts", required: false)
 ```
 
-必須のセクションが見つからない場合、例外がスローされます。 個々のビューでは、 `@section` Razor構文を使用して、セクション内に表示されるコンテンツを指定します。 ページまたはビューでセクションを定義する場合は、レンダリングされる必要があります (そうしないと、エラーが発生します)。
+必須のセクションが見つからない場合、例外がスローされます。 個々のビューでは、構文を使用して、セクション内に表示されるコンテンツを指定し `@section` Razor ます。 ページまたはビューでセクションを定義する場合は、レンダリングされる必要があります (そうしないと、エラーが発生します)。
 
-ページビュー `@section`の定義Razorの例を次に示します。
+`@section`ページビューの定義の例を Razor 次に示します。
 
 ```html
 @section Scripts {
@@ -99,23 +101,23 @@ Razorビューには`Layout`プロパティがあります。 個々のビュー
 }
 ```
 
-前のマークアップは、[スキャフォールディングIdentity](xref:security/authentication/scaffold-identity)によって生成されました。
+前のマークアップは、[スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)によって生成されました。
 
 ページまたはビューで定義されたセクションは、そのイミディエイト レイアウト ページでのみ使用できます。 これらは、部分、ビュー コンポーネント、またはビュー システムの他の部分からは参照できません。
 
 ### <a name="ignoring-sections"></a>セクションの無視
 
-既定では、コンテンツ ページの本文とすべてのセクションがレイアウト ページですべてレンダリングされる必要があります。 ビュー Razorエンジンは、本文と各セクションがレンダリングされているかどうかを追跡することによってこれを適用します。
+既定では、コンテンツ ページの本文とすべてのセクションがレイアウト ページですべてレンダリングされる必要があります。 Razorビューエンジンは、本文と各セクションがレンダリングされているかどうかを追跡することによってこれを適用します。
 
 本文またはセクションを無視するようにビュー エンジンに指示するには、`IgnoreBody` メソッドと `IgnoreSection` メソッドを呼び出します。
 
-Razorページ内の本文とすべてのセクションは、表示または無視する必要があります。
+ページ内の本文とすべてのセクションは、 Razor 表示または無視する必要があります。
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a>共有ディレクティブのインポート
 
-ビューおよびページではRazor 、ディレクティブを使用して名前空間をインポートし、[依存関係の挿入](dependency-injection.md)を使用できます。 多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。 `_ViewImports` ファイルは、次のディレクティブをサポートします。
+ビューおよびページでは Razor 、ディレクティブを使用して名前空間をインポートし、[依存関係の挿入](dependency-injection.md)を使用できます。 多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。 `_ViewImports` ファイルは、次のディレクティブをサポートします。
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -125,7 +127,7 @@ Razorページ内の本文とすべてのセクションは、表示または無
 * `@inherits`
 * `@inject`
 
-ファイルは、関数やRazorセクション定義などの他の機能をサポートしていません。
+ファイルは、関数やセクション定義などの他の機能をサポートしていません Razor 。
 
 `_ViewImports.cshtml` ファイルのサンプル:
 

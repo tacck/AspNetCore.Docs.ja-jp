@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 5e31d2e6611321bec7442534ce41350de10478e0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 61503a1a87b5d5eea36586108b65304236cf799a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768664"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405641"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core のアプリケーション モデルの使用
 
@@ -69,7 +71,7 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 * コンテキストにアクション メソッド パラメーターを追加する
 * ルートおよびその他の属性を適用する
 
-いくつかの組み込みの動作は、`DefaultApplicationModelProvider` によって実装されます。 このプロバイダーは、、、および[`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel)の各インスタンスを参照[`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel)するを構築する役割を担います。 `DefaultApplicationModelProvider` クラスは、今後変更する可能性がある変更される、内部フレームワークの実装についての詳細です。 
+いくつかの組み込みの動作は、`DefaultApplicationModelProvider` によって実装されます。 このプロバイダーは、、、およびの各インスタンスを参照するを構築する役割を担い [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel) [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) ます。 `DefaultApplicationModelProvider` クラスは、今後変更する可能性がある変更される、内部フレームワークの実装についての詳細です。 
 
 `AuthorizationApplicationModelProvider` は、`AuthorizeFilter` 属性および `AllowAnonymousFilter` 属性に関連付けられた動作を適用します。 [これらの属性については、こちらを参照してください](xref:security/authorization/simple)。
 
@@ -86,7 +88,7 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-規則を適用するには、それらを MVC オプションに`Attribute`追加するか、を実装してコントローラー、アクション、またはアクション[`Filters`](xref:mvc/controllers/filters)パラメーターに適用します (に似ています)。 フィルターとは異なり、規則は、各要求の一部としてではなく、アプリの起動時にのみ実行されます。
+規則を適用するには、それらを MVC オプションに追加するか、 `Attribute` を実装してコントローラー、アクション、またはアクションパラメーターに適用します (に似て [`Filters`](xref:mvc/controllers/filters) います)。 フィルターとは異なり、規則は、各要求の一部としてではなく、アプリの起動時にのみ実行されます。
 
 ### <a name="sample-modifying-the-applicationmodel"></a>サンプル: ApplicationModel を変更する
 
@@ -206,7 +208,7 @@ Shim が提供するこの規則は、それに特定の属性が適用された
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>アプリをドキュメント化するための ApiExplorer の使用
 
-アプリケーションモデルは、アプリ[`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel)の構造を走査するために使用できる各レベルのプロパティを公開します。 これは、[Swagger などのツールを使用して、Web API のヘルプ ページを生成する](xref:tutorials/web-api-help-pages-using-swagger)ために使用できます。 `ApiExplorer` プロパティは、アプリのモデルのどの部分を公開するか指定するために設定できる `IsVisible` プロパティを公開します。 この設定は、次の規則を使用して構成できます。
+アプリケーションモデルは、 [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) アプリの構造を走査するために使用できる各レベルのプロパティを公開します。 これは、[Swagger などのツールを使用して、Web API のヘルプ ページを生成する](xref:tutorials/web-api-help-pages-using-swagger)ために使用できます。 `ApiExplorer` プロパティは、アプリのモデルのどの部分を公開するか指定するために設定できる `IsVisible` プロパティを公開します。 この設定は、次の規則を使用して構成できます。
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

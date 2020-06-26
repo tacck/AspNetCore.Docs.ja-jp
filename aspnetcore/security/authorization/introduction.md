@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b0d6c91adfb5dc273aeb662cb2c249626ef1d3c6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777528"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405433"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>ASP.NET Core での承認の概要
 
@@ -26,7 +28,7 @@ ms.locfileid: "82777528"
 
 認証は直交しており、認証から独立しています。 ただし、承認には認証メカニズムが必要です。 認証は、ユーザーを突き止めるするプロセスです。 承認では、現在のユーザーのために 1 つ以上の ID を作成する場合があります。
 
-ASP.NET Core での認証の詳細について<xref:security/authentication/index>は、「」を参照してください。
+ASP.NET Core での認証の詳細については、「」を参照してください <xref:security/authentication/index> 。
 
 ## <a name="authorization-types"></a>承認の種類
 
@@ -34,6 +36,6 @@ ASP.NET Core 承認は、単純な宣言型の[役割](xref:security/authorizati
 
 ## <a name="namespaces"></a>名前空間
 
-属性`AuthorizeAttribute`と`AllowAnonymousAttribute`属性を含む承認コンポーネントは、 `Microsoft.AspNetCore.Authorization`名前空間にあります。
+属性と属性を含む承認コンポーネント `AuthorizeAttribute` `AllowAnonymousAttribute` は、 `Microsoft.AspNetCore.Authorization` 名前空間にあります。
 
 [単純な承認](xref:security/authorization/simple)に関するドキュメントを参照してください。

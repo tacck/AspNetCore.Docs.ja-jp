@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: 98b93731d40b47be8d7d5050afc7c74d25a7e1dc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c51098ec02e5a337fd6607e970d3bf78ffcd568a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776273"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405524"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET から ASP.NET Core 2.0 への移行
 
@@ -25,7 +27,7 @@ ms.locfileid: "82776273"
 
 この記事は、ASP.NET アプリケーションを ASP.NET Core 2.0 に移行するための参考ガイドです。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 .Net のダウンロードから、次の**いずれか**をインストールし[ます。 Windows](https://dotnet.microsoft.com/download):
 
@@ -48,7 +50,7 @@ ASP.NET Core 2.0 プロジェクトを使うと、開発者は、.NET Core と .
 </ItemGroup>
 ```
 
-メタパッケージを使うと、メタパッケージ内で参照されているパッケージはアプリでは展開されません。 .NET Core ランタイム ストアにはこれらのアセットが含まれており、パフォーマンス向上のためにプリコンパイルされています。 詳細<xref:fundamentals/metapackage>については、「」を参照してください。
+メタパッケージを使うと、メタパッケージ内で参照されているパッケージはアプリでは展開されません。 .NET Core ランタイム ストアにはこれらのアセットが含まれており、パフォーマンス向上のためにプリコンパイルされています。 詳細については、「」を参照してください <xref:fundamentals/metapackage> 。
 
 ## <a name="project-structure-differences"></a>プロジェクトの構造の違い
 
@@ -72,7 +74,7 @@ ASP.NET Core では、アプリをブートストラップする新しいメカ�
 
 これにより既定のルートが構成され、既定では Json 経由の XmlSerialization です。 必要に応じて、このパイプラインに他のミドルウェアを追加します (サービスの読み込み、構成設定、静的ファイルなど)。
 
-ASP.NET Core は同様のアプローチを使いますが、エントリを処理するために OWIN には依存しません。 代わりに、(コンソール アプリケーションと同じように) *Program.cs の * `Main` メソッドを通して行われ、そこから `Startup` が読み込まれます。
+ASP.NET Core は同様のアプローチを使いますが、エントリを処理するために OWIN には依存しません。 代わりに、(コンソール アプリケーションと同じように) *Program.cs* の `Main` メソッドを通して行われ、そこから `Startup` が読み込まれます。
 
 [!code-csharp[](samples/program.cs)]
 
@@ -88,7 +90,7 @@ ASP.NET Core は同様のアプローチを使いますが、エントリを処�
 
 ホストとアプリケーションは切り離されており、将来別のプラットフォームに柔軟に移動できます。
 
-ASP.NET Core のスタートアップとミドルウェアの詳細なリファレンスについては、 <xref:fundamentals/startup>「」を参照してください。
+ASP.NET Core のスタートアップとミドルウェアの詳細なリファレンスについては、「」を参照してください <xref:fundamentals/startup> 。
 
 ## <a name="storing-configurations"></a>保存の構成
 
@@ -119,7 +121,7 @@ ASP.NET Core では、アプリケーションの構成データを任意のフ�
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
 ```
 
-**注:** ASP.NET Core 構成の詳細なリファレンスについては、「 <xref:fundamentals/configuration/index>」を参照してください。
+**注:** ASP.NET Core 構成の詳細なリファレンスについては、「」を参照してください <xref:fundamentals/configuration/index> 。
 
 ## <a name="native-dependency-injection"></a>ネイティブな依存性の注入
 
@@ -127,7 +129,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 ASP.NET アプリケーションでは、開発者はサードパーティのライブラリを使用して依存関係の挿入を実装します。 [Unity](https://github.com/unitycontainer/unity) はそのようなライブラリの 1 つであり、Microsoft Patterns & Practices によって提供されます。
 
-Unity を使用した依存関係の挿入の設定`IDependencyResolver`の例は`UnityContainer`、をラップするを実装することです。
+Unity を使用した依存関係の挿入の設定の例は `IDependencyResolver` 、をラップするを実装することです `UnityContainer` 。
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -139,13 +141,13 @@ Unity を使用した依存関係の挿入の設定`IDependencyResolver`の例�
 
 [!code-csharp[](samples/sample5.cs)]
 
-依存関係の挿入は ASP.NET Core の一部であるため、でサービスを`Startup.ConfigureServices`追加できます。
+依存関係の挿入は ASP.NET Core の一部であるため、でサービスを追加でき `Startup.ConfigureServices` ます。
 
 [!code-csharp[](samples/configure-services.cs)]
 
 Unity でそうであったように、リポジトリは任意の場所に挿入できます。
 
-ASP.NET Core での依存関係の挿入の詳細に<xref:fundamentals/dependency-injection>ついては、「」を参照してください。
+ASP.NET Core での依存関係の挿入の詳細については、「」を参照してください <xref:fundamentals/dependency-injection> 。
 
 ## <a name="serving-static-files"></a>静的ファイルの提供
 
@@ -153,7 +155,7 @@ Web 開発の重要な部分は、静的なクライアント側アセットを�
 
 ASP.NET では、静的ファイルはさまざまなディレクトリに保存され、ビューで参照されます。
 
-ASP.NET Core では、静的ファイルは、特に構成されていない限り、"web ルート" (*&lt;コンテンツルート&gt;/wwwroot*) に格納されます。 ファイルは、`Startup.Configure` から `UseStaticFiles` 拡張メソッドを呼び出すことによって、要求パイプラインに読み込まれます。
+ASP.NET Core では、構成が変更されていない限り、静的ファイルは "Web ルート" ( *&lt;コンテンツ ルート&gt;/wwwroot*) に保存されます。 ファイルは、`Startup.Configure` から `UseStaticFiles` 拡張メソッドを呼び出すことによって、要求パイプラインに読み込まれます。
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -161,8 +163,8 @@ ASP.NET Core では、静的ファイルは、特に構成されていない限�
 
 たとえば、*wwwroot/images* フォルダー内のイメージ アセットには、ブラウザーから `http://<app>/images/<imageFileName>` などの場所でアクセスできます。
 
-**注:** ASP.NET Core での静的ファイルの提供に関する詳細なリファレンスについて<xref:fundamentals/static-files>は、「」を参照してください。
+**注:** ASP.NET Core での静的ファイルの提供に関する詳細なリファレンスについては、「」を参照してください <xref:fundamentals/static-files> 。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [.NET Core にライブラリを移植する](/dotnet/core/porting/libraries)

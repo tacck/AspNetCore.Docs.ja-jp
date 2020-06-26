@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: aee4152bed50576f087862142e7ce9f261c7da19
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0cc452b25392fe92c87ef346b2e16350fb3ec19a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775454"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405888"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core でのビューへの依存関係の挿入
 
@@ -110,6 +112,6 @@ ASP.NET Core では、ビューへの[依存関係の挿入](xref:fundamentals/d
 
 既存のサービスを拡張する場合、独自に既存の実装から継承したり、ラップしたりするときに、この技術を使用できます。
 
-## <a name="see-also"></a>参照
+## <a name="see-also"></a>関連項目
 
 * Simon Timms のブログ: [ルックアップ データをビューに取り込む](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)

@@ -6,23 +6,25 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777450"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407097"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core でのデータ保護のキー管理と有効期間
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-## <a name="key-management"></a>キー管理
+## <a name="key-management"></a>キーの管理
 
 アプリは、運用環境を検出し、キーの構成を独自に処理しようとします。
 
@@ -44,7 +46,7 @@ ms.locfileid: "82777450"
 
 1. これらの条件のいずれも一致しない場合、キーは現在のプロセスの外部では保持されません。 プロセスがシャットダウンされると、生成されたすべてのキーが失われます。
 
-開発者は常にフルコントロールを使用し、キーの格納方法と場所をオーバーライドできます。 上記の最初の3つのオプションでは、ASP.NET ** \<machineKey>** 自動生成ルーチンが過去にどのように動作したかに似た、ほとんどのアプリに適した既定値が提供されます。 最後のフォールバックオプションは、キーの永続化が必要な場合に、開発者が事前に[構成](xref:security/data-protection/configuration/overview)を指定することを必要とする唯一のシナリオですが、このフォールバックはまれな状況でのみ発生します。
+開発者は常にフルコントロールを使用し、キーの格納方法と場所をオーバーライドできます。 上記の最初の3つのオプションでは、ASP.NET の自動生成ルーチンが過去にどのように動作したかに類似した、ほとんどのアプリに適した既定値が提供され **\<machineKey>** ます。 最後のフォールバックオプションは、キーの永続化が必要な場合に、開発者が事前に[構成](xref:security/data-protection/configuration/overview)を指定することを必要とする唯一のシナリオですが、このフォールバックはまれな状況でのみ発生します。
 
 Docker コンテナーでホストする場合、キーは、Docker ボリューム (共有ボリュームまたはコンテナーの有効期間を超えて保持されるホストマウントボリューム)、または[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)や[Redis](https://redis.io/)などの外部プロバイダーのフォルダーに保存する必要があります。 アプリが共有ネットワークボリュームにアクセスできない場合は、web ファームのシナリオでも外部プロバイダーが役立ちます (詳細については、「 [Persistkeystofilesystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) 」を参照してください)。
 

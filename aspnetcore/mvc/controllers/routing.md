@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 3/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 0078ed5d4aa30ff7a7b76af8dffd015f2557e165
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: b917671053313c74acfff36518e8f36d5ef2eb22
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83998654"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405485"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core でのコントローラー アクションへのルーティング
 
@@ -466,7 +468,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo3Controller.cs?name=snippet3& highlight=2)]
 
-上記のコードでは、によって `/home` エンドポイントが実行され `HomeController.Index` ます。 にアクセスするには `MyDemoController.MyIndex` 、を要求 `/home/MyIndex` します。 **注**: 
+上記のコードでは、によって `/home` エンドポイントが実行され `HomeController.Index` ます。 にアクセスするには `MyDemoController.MyIndex` 、を要求 `/home/MyIndex` します。 **注**:
 
 * 上記のコードは、ルーティング設計の一例または不十分です。 これは、プロパティを示すために使用されていま `Order` した。
 * `Order`プロパティはあいまいさを解決するだけで、そのテンプレートは一致しません。 テンプレートを削除することをお勧めし `[Route("Home")]` ます。

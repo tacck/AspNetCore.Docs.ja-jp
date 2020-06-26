@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: db6f8e867fc83a211170aa59f5bad604d9c2730d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776117"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406395"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core のメモリ管理とガベージコレクション (GC)
 
@@ -135,7 +137,7 @@ public ActionResult<string> GetBigString()
 * **WORKSTATION GC**: デスクトップ用に最適化されています。
 * **サーバー GC**。 ASP.NET Core アプリの既定の GC。 サーバーに合わせて最適化されます。
 
-GC モードは、プロジェクトファイルまたは発行されたアプリの*runtimeconfig. json*ファイルで明示的に設定できます。 次のマークアップは`ServerGarbageCollection` 、プロジェクトファイルの設定を示しています。
+GC モードは、プロジェクトファイルまたは発行されたアプリの*runtimeconfig.js*ファイルで明示的に設定できます。 次のマークアップは、プロジェクトファイルの設定を示してい `ServerGarbageCollection` ます。
 
 ```xml
 <PropertyGroup>
@@ -143,7 +145,7 @@ GC モードは、プロジェクトファイルまたは発行されたアプ�
 </PropertyGroup>
 ```
 
-プロジェクト`ServerGarbageCollection`ファイルでを変更するには、アプリを再構築する必要があります。
+プロジェクトファイルでを変更するに `ServerGarbageCollection` は、アプリを再構築する必要があります。
 
 **注:** サーバーのガベージコレクションは、コアが1つのマシンでは使用でき**ません**。 詳細については、「<xref:System.Runtime.GCSettings.IsServerGC>」を参照してください。
 
@@ -186,23 +188,23 @@ public ActionResult<string> GetStaticString()
 上記のコードでは次の操作が行われます。
 
 * は、一般的なメモリリークの例です。
-* 頻繁な呼び出しでは、 `OutOfMemory`例外によりプロセスがクラッシュするまで、アプリのメモリが増加します。
+* 頻繁な呼び出しでは、例外によりプロセスがクラッシュするまで、アプリのメモリが増加し `OutOfMemory` ます。
 
 ![前のグラフ](memory/_static/eternal.png)
 
 前の図では、次のようになります。
 
-* エンドポイントを`/api/staticstring`ロードテストすると、メモリが直線的に増加します。
+* エンドポイントをロードテストする `/api/staticstring` と、メモリが直線的に増加します。
 * GC は、ジェネレーション2のコレクションを呼び出すことによって、メモリの負荷が増加したときにメモリの解放を試みます。
 * GC では、リークしたメモリを解放できません。 割り当てられたワーキングセットは時間と共に増加します。
 
-キャッシュなどの一部のシナリオでは、メモリ不足によってオブジェクト参照が強制的に解放されるまで、オブジェクト参照を保持する必要があります。 クラス<xref:System.WeakReference>は、この種のキャッシュコードに使用できます。 `WeakReference`オブジェクトはメモリ負荷の下で収集されます。 の既定の<xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>実装で`WeakReference`は、が使用されます。
+キャッシュなどの一部のシナリオでは、メモリ不足によってオブジェクト参照が強制的に解放されるまで、オブジェクト参照を保持する必要があります。 クラスは、 <xref:System.WeakReference> この種のキャッシュコードに使用できます。 `WeakReference`オブジェクトはメモリ負荷の下で収集されます。 の既定の実装では、が <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> 使用さ `WeakReference` れます。
 
 ### <a name="native-memory"></a>ネイティブメモリ
 
 .NET Core オブジェクトの中には、ネイティブメモリに依存しているものがあります。 GC でネイティブメモリを収集することはでき**ません**。 ネイティブメモリを使用している .NET オブジェクトは、ネイティブコードを使用して解放する必要があります。
 
-.NET には<xref:System.IDisposable> 、開発者がネイティブメモリを解放できるようにするインターフェイスが用意されています。 が呼び出さ<xref:System.IDisposable.Dispose*>れていない場合でも、 `Dispose` [ファイナライザー](/dotnet/csharp/programming-guide/classes-and-structs/destructors)の実行時に、正しく実装されたクラスが呼び出されます。
+.NET には、 <xref:System.IDisposable> 開発者がネイティブメモリを解放できるようにするインターフェイスが用意されています。 <xref:System.IDisposable.Dispose*>が呼び出されていない場合でも、 `Dispose` [ファイナライザー](/dotnet/csharp/programming-guide/classes-and-structs/destructors)の実行時に、正しく実装されたクラスが呼び出されます。
 
 次のコードがあるとします。
 
@@ -217,7 +219,7 @@ public void GetFileProvider()
 
 [Physicalfileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0)はマネージクラスであるため、すべてのインスタンスが要求の最後に収集されます。
 
-次の図は、API を`fileprovider`継続的に呼び出すときのメモリプロファイルを示しています。
+次の図は、API を継続的に呼び出すときのメモリプロファイルを示して `fileprovider` います。
 
 ![前のグラフ](memory/_static/fileprovider.png)
 
@@ -226,7 +228,7 @@ public void GetFileProvider()
 次のいずれかの方法で、ユーザーコードで同じリークが発生する可能性があります。
 
 * クラスを正しく解放できません。
-* 破棄する依存オブジェクト`Dispose`のメソッドを呼び出そうとしていません。
+* `Dispose`破棄する依存オブジェクトのメソッドを呼び出そうとしていません。
 
 ### <a name="large-objects-heap"></a>ラージオブジェクトヒープ
 
@@ -248,7 +250,7 @@ GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.Compa
 GC.Collect();
 ```
 
-LOH <xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode>の圧縮の詳細については、「」を参照してください。
+LOH の圧縮の詳細については、「」を参照してください <xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode> 。
 
 .NET Core 3.0 以降を使用するコンテナーでは、LOH が自動的に圧縮されます。
 
@@ -262,15 +264,15 @@ public int GetLOH1(int size)
 }
 ```
 
-次のグラフは、 `/api/loh/84975`エンドポイントを呼び出したときの、最大負荷下でのメモリプロファイルを示しています。
+次のグラフは、エンドポイントを呼び出したときの、最大負荷下でのメモリプロファイルを示してい `/api/loh/84975` ます。
 
 ![前のグラフ](memory/_static/loh1.png)
 
-次のグラフは、 `/api/loh/84976`エンドポイントの呼び出しのメモリプロファイルを示しています。 *1 バイトだけ*割り当てられます。
+次のグラフは、エンドポイントの呼び出しのメモリプロファイルを示してい `/api/loh/84976` ます。 *1 バイトだけ*割り当てられます。
 
 ![前のグラフ](memory/_static/loh2.png)
 
-注: `byte[]`構造体にはオーバーヘッドバイトがあります。 そのため、84976バイトは85000の制限をトリガーします。
+注: `byte[]` 構造体にはオーバーヘッドバイトがあります。 そのため、84976バイトは85000の制限をトリガーします。
 
 前の2つのグラフを比較します。
 
@@ -287,23 +289,23 @@ public int GetLOH1(int size)
 * [ResponseCaching/Streams/StreamUtilities .cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-詳細については、次を参照してください。
+詳細については次を参照してください:
 
 * [大きなオブジェクトヒープが漏れています](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [大きなオブジェクトヒープ](/dotnet/standard/garbage-collection/large-object-heap)
 
 ### <a name="httpclient"></a>HttpClient
 
-を誤っ<xref:System.Net.Http.HttpClient>て使用すると、リソースリークが発生する可能性があります。 データベース接続、ソケット、ファイルハンドルなどのシステムリソース:
+を誤って使用する <xref:System.Net.Http.HttpClient> と、リソースリークが発生する可能性があります。 データベース接続、ソケット、ファイルハンドルなどのシステムリソース:
 
 * はメモリよりも不足しています。
 * メモリよりもリークが発生した場合、より問題が発生します。
 
-経験豊富な .NET 開発者<xref:System.IDisposable.Dispose*>は、を実装<xref:System.IDisposable>するオブジェクトに対してを呼び出すことがわかっています。 を実装`IDisposable`するオブジェクトを破棄しないと、メモリリークやシステムリソースのリークが発生します。
+経験豊富な .NET 開発者は、を <xref:System.IDisposable.Dispose*> 実装するオブジェクトに対してを呼び出すことがわかって <xref:System.IDisposable> います。 を実装するオブジェクトを破棄 `IDisposable` しないと、メモリリークやシステムリソースのリークが発生します。
 
-`HttpClient`は`IDisposable`を実装しますが、すべての呼び出しで破棄することはでき**ません**。 代わりに、 `HttpClient`を再利用する必要があります。
+`HttpClient`は `IDisposable` を実装しますが、すべての呼び出しで破棄することはでき**ません**。 代わりに、を `HttpClient` 再利用する必要があります。
 
-次のエンドポイントは、すべての`HttpClient`要求に対して新しいインスタンスを作成し、破棄します。
+次のエンドポイントは、 `HttpClient` すべての要求に対して新しいインスタンスを作成し、破棄します。
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -333,7 +335,7 @@ System.Net.Http.HttpRequestException: Only one usage of each socket address
 
 `HttpClient`インスタンスが破棄されている場合でも、オペレーティングシステムによって実際のネットワーク接続が解放されるまでに時間がかかります。 新しい接続を継続的に作成することで、_ポートの枯渇_が発生します。 各クライアント接続には、独自のクライアントポートが必要です。
 
-ポートの枯渇を防ぐ方法の1つは、 `HttpClient`同じインスタンスを再利用することです。
+ポートの枯渇を防ぐ方法の1つは、同じインスタンスを再利用することです `HttpClient` 。
 
 ```csharp
 private static readonly HttpClient _httpClient = new HttpClient();
@@ -348,14 +350,14 @@ public async Task<int> GetHttpClient2(string url)
 
 `HttpClient`インスタンスは、アプリが停止したときに解放されます。 この例では、すべての破棄可能なリソースを使用後に破棄する必要がないことを示しています。
 
-`HttpClient`インスタンスの有効期間をより適切に処理する方法については、次を参照してください。
+インスタンスの有効期間をより適切に処理する方法については、次を参照してください `HttpClient` 。
 
 * [HttpClient と有効期間の管理](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
 * [HTTPClient ファクトリのブログ](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
 ### <a name="object-pooling"></a>オブジェクトプール
 
-前の例では、 `HttpClient`インスタンスを静的にし、すべての要求で再利用する方法を示しました。 再利用すると、リソースが不足するのを防ぐことができます。
+前の例では、 `HttpClient` インスタンスを静的にし、すべての要求で再利用する方法を示しました。 再利用すると、リソースが不足するのを防ぐことができます。
 
 オブジェクトプール:
 
@@ -366,7 +368,7 @@ public async Task<int> GetHttpClient2(string url)
 
 NuGet パッケージの[Microsoft extension. ObjectPool](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/)には、このようなプールの管理に役立つクラスが含まれています。
 
-次の API エンドポイントは`byte` 、各要求に対してランダムな数値を格納するバッファーをインスタンス化します。
+次の API エンドポイントは、 `byte` 各要求に対してランダムな数値を格納するバッファーをインスタンス化します。
 
 ```csharp
         [HttpGet("array/{size}")]
@@ -386,7 +388,7 @@ NuGet パッケージの[Microsoft extension. ObjectPool](https://www.nuget.org/
 
 前のグラフでは、ジェネレーション0のコレクションは1秒間に約1回発生します。
 
-上記のコードは、 `byte` [arraypool\<T>](xref:System.Buffers.ArrayPool`1)を使用してバッファーをプールすることによって最適化できます。 静的インスタンスは、要求間で再利用されます。
+上記のコードは、 `byte` [arraypool \<T> ](xref:System.Buffers.ArrayPool`1)を使用してバッファーをプールすることによって最適化できます。 静的インスタンスは、要求間で再利用されます。
 
 この方法の違いは、プールされたオブジェクトが API から返されることです。 ということは：
 
@@ -398,7 +400,7 @@ NuGet パッケージの[Microsoft extension. ObjectPool](https://www.nuget.org/
 * プールされた配列を破棄可能なオブジェクトにカプセル化します。
 * プールされたオブジェクトを[httpcontext.current](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)に登録します。
 
-`RegisterForDispose`は、HTTP 要求が`Dispose`完了したときにのみ解放されるように、ターゲットオブジェクトでを呼び出すことを処理します。
+`RegisterForDispose`は、 `Dispose` HTTP 要求が完了したときにのみ解放されるように、ターゲットオブジェクトでを呼び出すことを処理します。
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();
@@ -438,7 +440,7 @@ public byte[] GetPooledArray(int size)
 
 主な違いは、バイトが割り当てられ、その結果、ジェネレーション0のコレクションがはるかに少ないことです。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [ガベージ コレクション](/dotnet/standard/garbage-collection/)
 * [同時実行ビジュアライザーを使用したさまざまな GC モードについて](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

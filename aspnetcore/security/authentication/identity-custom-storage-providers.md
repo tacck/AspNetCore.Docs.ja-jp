@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652996"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404744"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core 用のカスタムストレージプロバイダーIdentity
 
@@ -75,7 +77,7 @@ Web サイトの登録済みユーザー。 [ユーザー](/dotnet/api/microsoft
 
 ユーザーのログイン時に使用する外部認証プロバイダー (Facebook や Microsoft アカウントなど) に関する情報。 [例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
 
-### <a name="roles"></a>ロール
+### <a name="roles"></a>役割
 
 サイトの承認グループ。 ロール Id とロール名 ("Admin" や "Employee" など) が含まれます。 [例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
 
@@ -241,7 +243,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>リファレンス
+## <a name="references"></a>References
 
 * [ASP.NET 4.x 用のカスタムストレージプロバイダーIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
 * [ASP.NET Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): このリポジトリには、コミュニティによって管理されるストアプロバイダーへのリンクが含まれています。

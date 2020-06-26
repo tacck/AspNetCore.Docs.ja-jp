@@ -1,32 +1,34 @@
 ---
 title: ASP.NET Core SignalR の概要
 author: bradygaster
-description: ASP.NET Core SignalRライブラリを通じて、リアルタイムの機能をアプリに簡単に追加する方法について説明します。
+description: ASP.NET Core ライブラリを通じて、 SignalR リアルタイムの機能をアプリに簡単に追加する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 4e968659d23330c4b1403ab998dda9c9e6ebe080
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775779"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404952"
 ---
 # <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core SignalR の概要
 
-## <a name="what-is-signalr"></a>SignalR概要
+## <a name="what-is-signalr"></a>SignalR の概要
 
-ASP.NET Core SignalRは、リアルタイムの web 機能をアプリに簡単に追加できるオープンソースライブラリです。 リアルタイム web 機能を使用すると、サーバー側のコードでクライアントにコンテンツを瞬時にプッシュできます。
+ASP.NET Core SignalR は、リアルタイムの web 機能をアプリに簡単に追加できるオープンソースライブラリです。 リアルタイム web 機能を使用すると、サーバー側のコードでクライアントにコンテンツを瞬時にプッシュできます。
 
-最適な候補SignalR:
+最適な候補 SignalR :
 
 * サーバーからの頻繁な更新が必要なアプリ。 たとえば、ゲーム、ソーシャル ネットワーク、投票、オークション、マップ、GPS などのアプリです。
 * ダッシュボードと監視アプリ。 たとえば、会社のダッシュボード、売上の即時更新、トラベル アラートなどです。
@@ -35,7 +37,7 @@ ASP.NET Core SignalRは、リアルタイムの web 機能をアプリに簡単�
 
 SignalRサーバー間の[リモートプロシージャ呼び出し (RPC)](https://wikipedia.org/wiki/Remote_procedure_call)を作成するための API を提供します。 Rpc は、サーバー側 .NET Core コードからクライアントで JavaScript 関数を呼び出します。
 
-ASP.NET Core のの一部のSignalR機能を次に示します。
+ASP.NET Core のの一部の機能を次に示し SignalR ます。
 
 * 接続管理を自動的に処理します。
 * 接続されているすべてのクライアントに同時にメッセージを送信します。 たとえば、チャットルームなどです。
@@ -62,9 +64,9 @@ SignalRは、*ハブ*を使用してクライアントとサーバー間の通�
 
 ハブは、クライアント側のメソッドの名前とパラメーターを含むメッセージを送信することによって、クライアント側のコードを呼び出します。 メソッドパラメーターとして送信されるオブジェクトは、構成されたプロトコルを使用して逆シリアル化されます。 クライアントは、クライアント側コードのメソッドと名前を一致させようとします。 クライアントが一致を検出すると、メソッドを呼び出し、逆シリアル化されたパラメーターデータに渡します。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
-* [For ASP.NET Core をSignalR使ってみる](xref:tutorials/signalr)
+* [For ASP.NET Core を使ってみる SignalR](xref:tutorials/signalr)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)
 * [ハブ](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)

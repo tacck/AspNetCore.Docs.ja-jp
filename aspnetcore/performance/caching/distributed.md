@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: d655e48f9504d337b0ffdbd6819f32101730310b
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 56c67178bd5c63f08a812357a4f8e672dd483994
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106703"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405394"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core での分散キャッシュ
 
@@ -107,7 +109,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(およびオプションで、 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> および <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) はソース管理の外部に格納されます (たとえば、[シークレットマネージャー](xref:security/app-secrets)または*appsettings*appsettings に格納され / *ます。 {ENVIRONMENT} json*ファイル)。 接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、[シークレットマネージャー](xref:security/app-secrets)によって、または appsettings*にappsettings.js*に格納され / *ます。 {ENVIRONMENT} json*ファイル)。 接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
@@ -179,7 +181,7 @@ NCache を構成するには:
 
 SQL Server が分散キャッシュバッキングストアとして使用されている場合、キャッシュに同じデータベースを使用すると、アプリの通常のデータストレージと取得が両方のパフォーマンスに悪影響を与える可能性があります。 分散キャッシュバッキングストアには専用の SQL Server インスタンスを使用することをお勧めします。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [Azure での Redis Cache](/azure/azure-cache-for-redis/)
 * [Azure での SQL Database](/azure/sql-database/)
@@ -277,7 +279,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(およびオプションで、 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> および <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) はソース管理の外部に格納されます (たとえば、[シークレットマネージャー](xref:security/app-secrets)または*appsettings*appsettings に格納され / *ます。 {ENVIRONMENT} json*ファイル)。 接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、[シークレットマネージャー](xref:security/app-secrets)によって、または appsettings*にappsettings.js*に格納され / *ます。 {ENVIRONMENT} json*ファイル)。 接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
@@ -349,7 +351,7 @@ NCache を構成するには:
 
 SQL Server が分散キャッシュバッキングストアとして使用されている場合、キャッシュに同じデータベースを使用すると、アプリの通常のデータストレージと取得が両方のパフォーマンスに悪影響を与える可能性があります。 分散キャッシュバッキングストアには専用の SQL Server インスタンスを使用することをお勧めします。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [Azure での Redis Cache](/azure/azure-cache-for-redis/)
 * [Azure での SQL Database](/azure/sql-database/)
@@ -447,7 +449,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(およびオプションで、 <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> および <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) はソース管理の外部に格納されます (たとえば、[シークレットマネージャー](xref:security/app-secrets)または*appsettings*appsettings に格納され / *ます。 {ENVIRONMENT} json*ファイル)。 接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。
+> <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、[シークレットマネージャー](xref:security/app-secrets)によって、または appsettings*にappsettings.js*に格納され / *ます。 {ENVIRONMENT} json*ファイル)。 接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
@@ -525,7 +527,7 @@ NCache を構成するには:
 
 SQL Server が分散キャッシュバッキングストアとして使用されている場合、キャッシュに同じデータベースを使用すると、アプリの通常のデータストレージと取得が両方のパフォーマンスに悪影響を与える可能性があります。 分散キャッシュバッキングストアには専用の SQL Server インスタンスを使用することをお勧めします。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [Azure での Redis Cache](/azure/azure-cache-for-redis/)
 * [Azure での SQL Database](/azure/sql-database/)

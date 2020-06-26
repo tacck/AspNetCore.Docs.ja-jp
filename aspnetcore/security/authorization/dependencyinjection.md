@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: 16285f6f731455d6e45a04f82437793891a77668
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d12253ad1c1442c0db5cd497393daabe280fae8d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775121"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406356"
 ---
 # <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a>ASP.NET Core の要件ハンドラーでの依存関係の挿入
 
@@ -26,7 +28,7 @@ ms.locfileid: "82775121"
 
 承認ハンドラー内で評価するルールのリポジトリがあり、そのリポジトリがサービスコレクションに登録されているとします。 承認は、それを解決してコンストラクターに挿入します。
 
-たとえば、ASP を使用する場合を考えてみます。ハンドラーに挿入`ILoggerFactory`する NET のログ記録インフラストラクチャ。 このようなハンドラーは次のようになります。
+たとえば、ASP を使用する場合を考えてみます。ハンドラーに挿入する NET のログ記録インフラストラクチャ `ILoggerFactory` 。 このようなハンドラーは次のようになります。
 
 ```csharp
 public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
@@ -47,13 +49,13 @@ public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
    }
    ```
 
-ハンドラーは次のように`services.AddSingleton()`登録します。
+ハンドラーは次のように登録し `services.AddSingleton()` ます。
 
 ```csharp
 services.AddSingleton<IAuthorizationHandler, LoggingAuthorizationHandler>();
 ```
 
-アプリケーションの起動時にハンドラーのインスタンスが作成され、DI によって、登録`ILoggerFactory`されたがコンストラクターに挿入されます。
+アプリケーションの起動時にハンドラーのインスタンスが作成され、DI によって、登録されたがコンストラクターに挿入され `ILoggerFactory` ます。
 
 > [!NOTE]
 > Entity Framework を使用するハンドラーをシングルトンとして登録することはできません。

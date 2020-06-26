@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/31/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/samples
-ms.openlocfilehash: 7cd0fe60d7917abda7d8ac0e071deca13a4136ce
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95915c28b132a1a48fb772b2663794754006627f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776553"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405355"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>ASP.NET Core の認証サンプル
 
@@ -39,7 +41,7 @@ ms.locfileid: "82776553"
 * [ブランチ](https://github.com/dotnet/AspNetCore)を選択してください。 たとえば、`release/3.1` のように指定します。
 * [ASP.NET Core リポジトリ](https://github.com/dotnet/AspNetCore)を複製またはダウンロードします。
 * ASP.NET Core リポジトリの複製に一致する[.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core)バージョンがインストールされていることを確認します。
-* *AspNetCore/src/Security/samples*のサンプルに移動し、で`dotnet run`サンプルを実行します。
+* *AspNetCore/src/Security/samples*のサンプルに移動し、でサンプルを実行し `dotnet run` ます。
 
 ::: moniker-end
 
@@ -60,6 +62,6 @@ ms.locfileid: "82776553"
 * [ブランチ](https://github.com/dotnet/AspNetCore)を選択してください。 たとえば、`release/2.2` のように指定します。
 * [ASP.NET Core リポジトリ](https://github.com/dotnet/AspNetCore)を複製またはダウンロードします。
 * ASP.NET Core リポジトリの複製に一致する[.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core)バージョンがインストールされていることを確認します。
-* *AspNetCore/src/Security/samples*のサンプルに移動し、で`dotnet run`サンプルを実行します。
+* *AspNetCore/src/Security/samples*のサンプルに移動し、でサンプルを実行し `dotnet run` ます。
 
 ::: moniker-end

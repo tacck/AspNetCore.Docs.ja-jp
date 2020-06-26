@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 336173866e9346d836bb31955644d07403fc238d
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756055"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405810"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>ハブの外部からメッセージを送信する
 
@@ -112,5 +114,5 @@ public class ChatController : Controller
 ## <a name="related-resources"></a>関連リソース
 
 * [開始するには](xref:tutorials/signalr)
-* [取って代わり](xref:signalr/hubs)
+* [ハブ](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

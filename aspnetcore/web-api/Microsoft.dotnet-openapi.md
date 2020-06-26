@@ -7,17 +7,19 @@ ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 1924fb8ee5ac1ba8dc31d2175a336c8333c81fb2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eb8d6a1dc70b2aabf495bdb359e243c91e94289f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775714"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404796"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>OpenAPI ツールを使用した ASP.NET Core アプリの開発
 
@@ -35,7 +37,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ## <a name="add"></a>追加
 
-このページのいずれかのコマンドを使用して OpenAPI 参照を`<OpenApiReference />`追加すると、 *.csproj*ファイルに次のような要素が追加されます。
+このページのいずれかのコマンドを使用して OpenAPI 参照を追加すると、 `<OpenApiReference />` *.csproj*ファイルに次のような要素が追加されます。
 
 ```xml
 <OpenApiReference Include="openapi.json" />
@@ -60,7 +62,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="add-file"></a>ファイルの追加
 
-#### <a name="options"></a>Options
+#### <a name="options"></a>オプション
 
 | 短いオプション| 長いオプション| 説明 | 例 |
 |-------|------|-------|---------|
@@ -70,13 +72,13 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 #### <a name="arguments"></a>引数
 
-|  引数  | 説明 | 例 |
+|  引数  | [説明] | 例 |
 |-------------|-------------|---------|
 | source-file | 参照の作成元のソース。 OpenAPI ファイルである必要があります。 |dotnet openapi add file *.\OpenAPI.json* |
 
 ### <a name="add-url"></a>URL の追加
 
-#### <a name="options"></a>Options
+#### <a name="options"></a>オプション
 
 | 短いオプション| 長いオプション| 説明 | 例 |
 |-------|------|-------------|---------|
@@ -87,15 +89,15 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 #### <a name="arguments"></a>引数
 
-|  引数  | 説明 | 例 |
+|  引数  | [説明] | 例 |
 |-------------|-------------|---------|
 | source-URL | 参照の作成元のソース。 URL である必要があります。 |dotnet openapi add url `https://contoso.com/openapi.json` |
 
-## <a name="remove"></a>[削除]
+## <a name="remove"></a>削除
 
 指定したファイル名と一致する OpenAPI 参照を *.csproj* ファイルから削除します。 OpenAPI 参照が削除されると、クライアントは生成されません。 ローカルの *.json* および *.yaml* ファイルは削除されます。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 | 短いオプション| 長いオプション| 説明| 例 |
 |-------|------|------------|---------|
@@ -104,15 +106,15 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="arguments"></a>引数
 
-|  引数  | 説明| 例 |
+|  引数  | [説明]| 例 |
 | ------------|------------|---------|
 | source-file | 削除する参照のソース。 |dotnet openapi remove *.\OpenAPI.json* |
 
-## <a name="refresh"></a>最新の情報に更新
+## <a name="refresh"></a>更新
 
 ダウンロード URL の最新のコンテンツを使用してダウンロードされたファイルのローカル バージョンを更新します。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 | 短いオプション| 長いオプション| 説明 | 例 |
 |-------|------|-------------|---------|

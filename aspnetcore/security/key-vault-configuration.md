@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106677"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406876"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core の構成プロバイダーの Azure Key Vault
 
@@ -35,7 +37,7 @@ By [Andrew Stanton-看護師](https://github.com/anurse)
 
 ## <a name="packages"></a>パッケージ
 
-パッケージ[への参照を、パッケージへ](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/)の参照を追加します。
+パッケージ参照を[Microsoft.Extensions.Configuration に追加します。AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/)パッケージ。
 
 ## <a name="sample-app"></a>サンプル アプリ
 
@@ -129,11 +131,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. Azure AD でアプリを選択します。
    1. [**証明書 & シークレット**] に移動します。
    1. 公開キーを含む証明書をアップロードするには、[**証明書のアップロード**] を選択します。 *.Cer*、 *pem*、または *.crt*証明書を使用できます。
-1. Key vault 名、アプリケーション ID、および証明書の拇印をアプリの*appsettings*ファイルに格納します。
+1. Key vault 名、アプリケーション ID、および証明書の拇印を、アプリの*appsettings.jsファイルに*保存します。
 1. Azure portal の**キーコンテナー**に移動します。
 1. Azure Key Vault セクションで、[運用環境のシークレットストレージ](#secret-storage-in-the-production-environment-with-azure-key-vault)に作成したキーコンテナーを選択します。
-1. [**アクセスポリシー**] を選択します。
-1. [**アクセスポリシーの追加**] を選択します。
+1. **[アクセス ポリシー]** を選択します。
+1. **[アクセス ポリシーの追加]** を選択します。
 1. [**シークレットのアクセス許可**] を開き、アプリに**Get**および**List**アクセス許可を提供します。
 1. [**プリンシパルの選択**] を選択し、名前で登録済みのアプリを選択します。 **[選択]** ボタンを選択します。
 1. **[OK]** を選択します。
@@ -147,7 +149,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X.509 証明書は OS によって管理されます。 アプリは、 <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings*ファイルによって指定された値を使用してを呼び出します。
+X.509 証明書は OS によって管理されます。 アプリは <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 、ファイルの*appsettings.js*によって指定された値を使用してを呼び出します。
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -169,7 +171,7 @@ X.509 証明書は OS によって管理されます。 アプリは、 <xref:Mi
 
 このサンプルアプリでは、 `#define` *Program.cs*ファイルの先頭にあるステートメントがに設定されている場合に、Azure リソースの管理対象 id を使用し `Managed` ます。
 
-アプリの*appsettings*ファイルにコンテナー名を入力します。 このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。 アプリが Azure にデプロイされ、Azure は、 *appsettings*ファイルに格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証します。
+アプリの*appsettings.jsファイルに*コンテナー名を入力します。 このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。 アプリが Azure にデプロイされます。 Azure は、 *appsettings.jsファイルに*格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証します。
 
 サンプルアプリを Azure App Service にデプロイします。
 
@@ -219,7 +221,7 @@ config.AddAzureKeyVault(
     });
 ```
 
-| プロパティ         | 説明 |
+| プロパティ         | [説明] |
 | ---------------- | ----------- |
 | `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>値を取得するために使用する。 |
 | `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>シークレットの読み込みを制御するために使用されるインスタンス。 |
@@ -324,7 +326,7 @@ JSON ファイルによって提供される次の[Serilog](https://serilog.net/
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| キー | 値 |
+| Key | [値] |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -358,7 +360,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
@@ -381,7 +383,7 @@ Configuration.Reload();
 
 ## <a name="packages"></a>パッケージ
 
-パッケージ[への参照を、パッケージへ](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/)の参照を追加します。
+パッケージ参照を[Microsoft.Extensions.Configuration に追加します。AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/)パッケージ。
 
 ## <a name="sample-app"></a>サンプル アプリ
 
@@ -475,11 +477,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. Azure AD でアプリを選択します。
    1. [**証明書 & シークレット**] に移動します。
    1. 公開キーを含む証明書をアップロードするには、[**証明書のアップロード**] を選択します。 *.Cer*、 *pem*、または *.crt*証明書を使用できます。
-1. Key vault 名、アプリケーション ID、および証明書の拇印をアプリの*appsettings*ファイルに格納します。
+1. Key vault 名、アプリケーション ID、および証明書の拇印を、アプリの*appsettings.jsファイルに*保存します。
 1. Azure portal の**キーコンテナー**に移動します。
 1. Azure Key Vault セクションで、[運用環境のシークレットストレージ](#secret-storage-in-the-production-environment-with-azure-key-vault)に作成したキーコンテナーを選択します。
-1. [**アクセスポリシー**] を選択します。
-1. [**アクセスポリシーの追加**] を選択します。
+1. **[アクセス ポリシー]** を選択します。
+1. **[アクセス ポリシーの追加]** を選択します。
 1. [**シークレットのアクセス許可**] を開き、アプリに**Get**および**List**アクセス許可を提供します。
 1. [**プリンシパルの選択**] を選択し、名前で登録済みのアプリを選択します。 **[選択]** ボタンを選択します。
 1. **[OK]** を選択します。
@@ -493,7 +495,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X.509 証明書は OS によって管理されます。 アプリは、 <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings*ファイルによって指定された値を使用してを呼び出します。
+X.509 証明書は OS によって管理されます。 アプリは <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 、ファイルの*appsettings.js*によって指定された値を使用してを呼び出します。
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -515,7 +517,7 @@ X.509 証明書は OS によって管理されます。 アプリは、 <xref:Mi
 
 このサンプルアプリでは、 `#define` *Program.cs*ファイルの先頭にあるステートメントがに設定されている場合に、Azure リソースの管理対象 id を使用し `Managed` ます。
 
-アプリの*appsettings*ファイルにコンテナー名を入力します。 このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。 アプリが Azure にデプロイされ、Azure は、 *appsettings*ファイルに格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証します。
+アプリの*appsettings.jsファイルに*コンテナー名を入力します。 このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。 アプリが Azure にデプロイされます。 Azure は、 *appsettings.jsファイルに*格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証します。
 
 サンプルアプリを Azure App Service にデプロイします。
 
@@ -651,7 +653,7 @@ JSON ファイルによって提供される次の[Serilog](https://serilog.net/
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| キー | 値 |
+| Key | [値] |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -685,7 +687,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)

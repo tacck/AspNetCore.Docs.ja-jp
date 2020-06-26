@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core SignalR 構成
+title: ASP.NET Core SignalR の構成
 author: bradygaster
 description: ASP.NET Core アプリを構成する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
@@ -8,19 +8,21 @@ ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 809bdc777b6307314a7bcde82ab5e0c6888db99b
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: c711c2163908e3fdd20e3bb497f333ebd495d921
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074455"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406837"
 ---
-# <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 構成
+# <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR の構成
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -71,7 +73,7 @@ MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/micros
 
 次の表では、ハブを構成するためのオプションについて説明し SignalR ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30 秒 | サーバーは、この間隔で (キープアライブを含む) メッセージを受信していない場合に、クライアントが切断されていると見なします。 クライアントが実際に切断されているとマークされるまでに、このタイムアウト間隔より長くかかることがあります。これは、この実装方法によるものです。 推奨値は、値の倍精度浮動小数点数です `KeepAliveInterval` 。|
 | `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -126,7 +128,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ApplicationMaxBufferSize` | 32 KB | サーバーがバック圧力を適用する前に、クライアントから受信した最大バイト数。 この値を大きくすると、バック圧力を適用せずに、より大きいメッセージをサーバーがより迅速に受信できるようになりますが、メモリ使用量が増加する可能性があります。 |
 | `AuthorizationData` | `Authorize`ハブクラスに適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
@@ -138,13 +140,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 長いポーリングトランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `LongPolling` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
 
 WebSocket トランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `WebSockets` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
 | `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
@@ -196,8 +198,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**または**`information` | `LogLevel.Information` |
-| `warn`**または**`warning`     | `LogLevel.Warning`     |
+| `info` **または** `information` | `LogLevel.Information` |
+| `warn` **または** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -302,7 +304,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -312,7 +314,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバー上のセットにメッセージを送信していない場合、 `ClientTimeoutInterval` サーバーはクライアントを切断したと見なします。 |
@@ -333,7 +335,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | 説明 |
+| .NET オプション |  既定値 | [説明] |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -349,7 +351,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | 既定値 | 説明 |
+| JavaScript オプション | 既定値 | [説明] |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `headers` | `null` | すべての HTTP 要求と共に送信されるヘッダーのディクショナリ。 ブラウザーでヘッダーを送信することは、Websocket やストリームでは機能しません <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> 。 |
@@ -359,7 +361,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="java"></a>[Java](#tab/java)
 
-| Java オプション | 既定値 | 説明 |
+| Java オプション | 既定値 | [説明] |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -400,7 +402,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -459,7 +461,7 @@ MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/micros
 
 次の表では、ハブを構成するためのオプションについて説明し SignalR ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30 秒 | サーバーは、この間隔で (キープアライブを含む) メッセージを受信していない場合に、クライアントが切断されていると見なします。 クライアントが実際に切断されているとマークされるまでに、このタイムアウト間隔より長くかかることがあります。これは、この実装方法によるものです。 推奨値は、値の倍精度浮動小数点数です `KeepAliveInterval` 。|
 | `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -514,7 +516,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ApplicationMaxBufferSize` | 32 KB | サーバーがバック圧力を適用する前に、クライアントから受信した最大バイト数。 この値を大きくすると、バック圧力を適用せずに、より大きいメッセージをサーバーがより迅速に受信できるようになりますが、メモリ使用量が増加する可能性があります。 |
 | `AuthorizationData` | `Authorize`ハブクラスに適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
@@ -526,13 +528,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 長いポーリングトランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `LongPolling` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
 
 WebSocket トランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `WebSockets` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
 | `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
@@ -584,8 +586,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**または**`information` | `LogLevel.Information` |
-| `warn`**または**`warning`     | `LogLevel.Warning`     |
+| `info` **または** `information` | `LogLevel.Information` |
+| `warn` **または** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -690,7 +692,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -700,7 +702,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバー上のセットにメッセージを送信していない場合、 `ClientTimeoutInterval` サーバーはクライアントを切断したと見なします。 |
@@ -721,7 +723,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | 説明 |
+| .NET オプション |  既定値 | [説明] |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -737,7 +739,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | 既定値 | 説明 |
+| JavaScript オプション | 既定値 | [説明] |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
@@ -745,7 +747,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="java"></a>[Java](#tab/java)
 
-| Java オプション | 既定値 | 説明 |
+| Java オプション | 既定値 | [説明] |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -786,7 +788,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -845,7 +847,7 @@ MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/micros
 
 次の表では、ハブを構成するためのオプションについて説明し SignalR ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30 秒 | サーバーは、この間隔で (キープアライブを含む) メッセージを受信していない場合に、クライアントが切断されていると見なします。 クライアントが実際に切断されているとマークされるまでに、このタイムアウト間隔より長くかかることがあります。これは、この実装方法によるものです。 推奨値は、値の倍精度浮動小数点数です `KeepAliveInterval` 。|
 | `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -900,7 +902,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ApplicationMaxBufferSize` | 32 KB | サーバーがバック圧力を適用する前に、クライアントから受信した最大バイト数。 この値を大きくすると、バック圧力を適用せずに、より大きいメッセージをサーバーがより迅速に受信できるようになりますが、メモリ使用量が増加する可能性があります。 |
 | `AuthorizationData` | `Authorize`ハブクラスに適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
@@ -911,13 +913,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 長いポーリングトランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `LongPolling` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
 
 WebSocket トランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `WebSockets` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
 | `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
@@ -969,8 +971,8 @@ let connection = new signalR.HubConnectionBuilder()
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**または**`information` | `LogLevel.Information` |
-| `warn`**または**`warning`     | `LogLevel.Warning`     |
+| `info` **または** `information` | `LogLevel.Information` |
+| `warn` **または** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1075,7 +1077,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -1085,7 +1087,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバー上のセットにメッセージを送信していない場合、 `ClientTimeoutInterval` サーバーはクライアントを切断したと見なします。 |
@@ -1106,7 +1108,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | 説明 |
+| .NET オプション |  既定値 | [説明] |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -1122,7 +1124,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | 既定値 | 説明 |
+| JavaScript オプション | 既定値 | [説明] |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
@@ -1130,7 +1132,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="java"></a>[Java](#tab/java)
 
-| Java オプション | 既定値 | 説明 |
+| Java オプション | 既定値 | [説明] |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -1171,7 +1173,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1228,7 +1230,7 @@ MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/micros
 
 次の表では、ハブを構成するためのオプションについて説明し SignalR ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30 秒 | サーバーは、この間隔で (キープアライブを含む) メッセージを受信していない場合に、クライアントが切断されていると見なします。 クライアントが実際に切断されているとマークされるまでに、このタイムアウト間隔より長くかかることがあります。これは、この実装方法によるものです。 推奨値は、値の倍精度浮動小数点数です `KeepAliveInterval` 。|
 | `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -1281,7 +1283,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ApplicationMaxBufferSize` | 32 KB | クライアントから受信した、サーバーがバッファーする最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを受け取れますが、メモリの消費に悪影響を与える可能性があります。 |
 | `AuthorizationData` | `Authorize`ハブクラスに適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
@@ -1292,13 +1294,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 長いポーリングトランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `LongPolling` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
 
 WebSocket トランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `WebSockets` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
 | `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
@@ -1424,7 +1426,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -1434,7 +1436,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `keepAliveIntervalInMilliseconds` | 15秒 (15000 ミリ秒) | クライアントが ping メッセージを送信する間隔を決定します。 クライアントからメッセージを送信すると、タイマーが間隔の開始日にリセットされます。 クライアントがサーバー上のセットにメッセージを送信していない場合、 `ClientTimeoutInterval` サーバーはクライアントを切断したと見なします。 |
@@ -1455,7 +1457,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | 説明 |
+| .NET オプション |  既定値 | [説明] |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -1471,7 +1473,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | 既定値 | 説明 |
+| JavaScript オプション | 既定値 | [説明] |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
@@ -1479,7 +1481,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="java"></a>[Java](#tab/java)
 
-| Java オプション | 既定値 | 説明 |
+| Java オプション | 既定値 | [説明] |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -1520,7 +1522,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1577,7 +1579,7 @@ MessagePack のシリアル化は、 [Addmessagepackprotocol](/dotnet/api/micros
 
 次の表では、ハブを構成するためのオプションについて説明し SignalR ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `HandshakeTimeout` | 15 秒 | この期間内にクライアントが初期ハンドシェイクメッセージを送信しない場合、接続は閉じられます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
 | `KeepAliveInterval` | 15 秒 | サーバーがこの間隔内にメッセージを送信していない場合は、接続を開いたままにするために ping メッセージが自動的に送信されます。 変更する場合は、 `KeepAliveInterval` クライアントの設定を変更し `ServerTimeout` / `serverTimeoutInMilliseconds` ます。 推奨 `ServerTimeout` / `serverTimeoutInMilliseconds` 値は、値の倍精度浮動小数点数です `KeepAliveInterval` 。  |
@@ -1629,7 +1631,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 次の表では、ASP.NET Core SignalR の詳細な HTTP オプションを構成するためのオプションについて説明します。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ApplicationMaxBufferSize` | 32 KB | クライアントから受信した、サーバーがバッファーする最大バイト数。 この値を大きくすると、サーバーはより大きなメッセージを受け取れますが、メモリの消費に悪影響を与える可能性があります。 |
 | `AuthorizationData` | `Authorize`ハブクラスに適用された属性から自動的に収集されるデータ。 | クライアントがハブへの接続を承認されているかどうかを判断するために使用される[Iauthorizedata](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizedata)オブジェクトの一覧。 |
@@ -1640,13 +1642,13 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 長いポーリングトランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `LongPolling` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `PollTimeout` | 90秒 | 1回のポーリング要求を終了する前に、サーバーがクライアントへのメッセージ送信を待機する最大時間。 この値を小さくすると、クライアントは新しいポーリング要求をより頻繁に発行します。 |
 
 WebSocket トランスポートには、次のプロパティを使用して構成できる追加のオプションがあり `WebSockets` ます。
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `CloseTimeout` | 5 秒 | サーバーが閉じられた後、この期間内にクライアントが閉じるのに失敗した場合、接続は終了します。 |
 | `SubProtocolSelector` | `null` | `Sec-WebSocket-Protocol`ヘッダーをカスタム値に設定するために使用できるデリゲート。 デリゲートは、クライアントから要求された値を入力として受け取り、目的の値を返すことが想定されています。 |
@@ -1770,7 +1772,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔でメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 | `HandshakeTimeout` | 15 秒 | 初期サーバーハンドシェイクのタイムアウト。 サーバーがこの間隔でハンドシェイク応答を送信しない場合、クライアントはハンドシェイクをキャンセルし、 `Closed` (JavaScript で) イベントをトリガーし `onclose` ます。 これは、ネットワーク待ち時間が非常に長いためにハンドシェイクのタイムアウトエラーが発生している場合にのみ変更する必要がある詳細設定です。 ハンドシェイクプロセスの詳細については、「 [ SignalR Hub プロトコルの仕様](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)」を参照してください。 |
@@ -1779,7 +1781,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| オプション | 既定値 | 説明 |
+| オプション | 既定値 | [説明] |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30秒 (3万ミリ秒) | サーバーの利用状況のタイムアウト。 サーバーがこの間隔内にメッセージを送信しなかった場合、クライアントはサーバーを切断したと見なし、イベントをトリガーし `onclose` ます。 この値は、ping メッセージをサーバーから送信**し**、タイムアウト間隔内にクライアントが受信するのに十分な大きさである必要があります。 推奨値は、 `KeepAliveInterval` ping が到着するまでの時間を考慮して、サーバーの値の少なくとも2倍の値です。 |
 
@@ -1798,7 +1800,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="net"></a>[.NET](#tab/dotnet)
 
-| .NET オプション |  既定値 | 説明 |
+| .NET オプション |  既定値 | [説明] |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `SkipNegotiation` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
@@ -1814,7 +1816,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
-| JavaScript オプション | 既定値 | 説明 |
+| JavaScript オプション | 既定値 | [説明] |
 | ----------------- | ------------- | ----------- |
 | `accessTokenFactory` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `logMessageContent` | `null` | `true`クライアントによって送受信されたメッセージのバイト数または文字数をログに記録するには、をに設定します。 |
@@ -1822,7 +1824,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
 
 # <a name="java"></a>[Java](#tab/java)
 
-| Java オプション | 既定値 | 説明 |
+| Java オプション | 既定値 | [説明] |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 要求でベアラー認証トークンとして指定された文字列を返す関数。 |
 | `shouldSkipNegotiate` | `false` | ネゴシエーションの手順をスキップするには、これをに設定 `true` します。 **Websocket トランスポートが有効なトランスポートのみである場合にのみサポートされ**ます。 Azure サービスを使用している場合、この設定を有効にすることはできません SignalR 。 |
