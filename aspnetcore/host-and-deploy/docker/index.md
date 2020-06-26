@@ -7,43 +7,45 @@ ms.custom: mvc
 ms.date: 01/08/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: 94996f279929f6e3837efb613c99927edbd9143e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 14758c0d35841a077b36578786402c80fa3c3b1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774588"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408059"
 ---
-# <a name="host-aspnet-core-in-docker-containers"></a><span data-ttu-id="d3d53-103">Docker コンテナーで ASP.NET Core をホストする</span><span class="sxs-lookup"><span data-stu-id="d3d53-103">Host ASP.NET Core in Docker containers</span></span>
+# <a name="host-aspnet-core-in-docker-containers"></a><span data-ttu-id="16385-103">Docker コンテナーで ASP.NET Core をホストする</span><span class="sxs-lookup"><span data-stu-id="16385-103">Host ASP.NET Core in Docker containers</span></span>
 
-<span data-ttu-id="d3d53-104">以下の記事では、Docker での ASP.NET Core アプリのホスティングについて説明されています。</span><span class="sxs-lookup"><span data-stu-id="d3d53-104">The following articles are available for learning about hosting ASP.NET Core apps in Docker:</span></span>
+<span data-ttu-id="16385-104">以下の記事では、Docker での ASP.NET Core アプリのホスティングについて説明されています。</span><span class="sxs-lookup"><span data-stu-id="16385-104">The following articles are available for learning about hosting ASP.NET Core apps in Docker:</span></span>
 
-[<span data-ttu-id="d3d53-105">コンテナーと Docker の概要</span><span class="sxs-lookup"><span data-stu-id="d3d53-105">Introduction to Containers and Docker</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/index)  
-<span data-ttu-id="d3d53-106">コンテナリゼーションは、ソフトウェア開発のアプローチであり、アプリケーションまたはサービス、その依存関係、その構成がコンテナー イメージとしてどのようにパッケージ化されるかを示します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-106">See how containerization is an approach to software development in which an application or service, its dependencies, and its configuration are packaged together as a container image.</span></span> <span data-ttu-id="d3d53-107">イメージは、テストしてからホストに展開することができます。</span><span class="sxs-lookup"><span data-stu-id="d3d53-107">The image can be tested and then deployed to a host.</span></span>
+[<span data-ttu-id="16385-105">コンテナーと Docker の概要</span><span class="sxs-lookup"><span data-stu-id="16385-105">Introduction to Containers and Docker</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/index)  
+<span data-ttu-id="16385-106">コンテナリゼーションは、ソフトウェア開発のアプローチであり、アプリケーションまたはサービス、その依存関係、その構成がコンテナー イメージとしてどのようにパッケージ化されるかを示します。</span><span class="sxs-lookup"><span data-stu-id="16385-106">See how containerization is an approach to software development in which an application or service, its dependencies, and its configuration are packaged together as a container image.</span></span> <span data-ttu-id="16385-107">イメージは、テストしてからホストに展開することができます。</span><span class="sxs-lookup"><span data-stu-id="16385-107">The image can be tested and then deployed to a host.</span></span>
 
-[<span data-ttu-id="d3d53-108">Docker について</span><span class="sxs-lookup"><span data-stu-id="d3d53-108">What is Docker</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-defined)  
-<span data-ttu-id="d3d53-109">オープン ソース プロジェクトの Docker が、クラウドまたはオンプレミスで実行できる移植可能な自己完結型のコンテナーとしてアプリの展開を自動化するしくみを説明します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-109">Discover how Docker is an open-source project for automating the deployment of apps as portable, self-sufficient containers that can run on the cloud or on-premises.</span></span>
+[<span data-ttu-id="16385-108">Docker について</span><span class="sxs-lookup"><span data-stu-id="16385-108">What is Docker</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-defined)  
+<span data-ttu-id="16385-109">オープン ソース プロジェクトの Docker が、クラウドまたはオンプレミスで実行できる移植可能な自己完結型のコンテナーとしてアプリの展開を自動化するしくみを説明します。</span><span class="sxs-lookup"><span data-stu-id="16385-109">Discover how Docker is an open-source project for automating the deployment of apps as portable, self-sufficient containers that can run on the cloud or on-premises.</span></span>
 
-[<span data-ttu-id="d3d53-110">Docker に関する用語</span><span class="sxs-lookup"><span data-stu-id="d3d53-110">Docker Terminology</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-terminology)  
-<span data-ttu-id="d3d53-111">Docker 技術の用語と定義について学習します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-111">Learn terms and definitions for Docker technology.</span></span>
+[<span data-ttu-id="16385-110">Docker に関する用語</span><span class="sxs-lookup"><span data-stu-id="16385-110">Docker Terminology</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-terminology)  
+<span data-ttu-id="16385-111">Docker 技術の用語と定義について学習します。</span><span class="sxs-lookup"><span data-stu-id="16385-111">Learn terms and definitions for Docker technology.</span></span>
 
-[<span data-ttu-id="d3d53-112">Docker のコンテナー、イメージ、およびレジストリ</span><span class="sxs-lookup"><span data-stu-id="d3d53-112">Docker containers, images, and registries</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-containers-images-registries)  
-<span data-ttu-id="d3d53-113">環境全体での一貫性のある展開のため、Docker コンテナー イメージがイメージ レジストリに保存されるしくみを確認します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-113">Find out how Docker container images are stored in an image registry for consistent deployment across environments.</span></span>
+[<span data-ttu-id="16385-112">Docker のコンテナー、イメージ、およびレジストリ</span><span class="sxs-lookup"><span data-stu-id="16385-112">Docker containers, images, and registries</span></span>](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-containers-images-registries)  
+<span data-ttu-id="16385-113">環境全体での一貫性のある展開のため、Docker コンテナー イメージがイメージ レジストリに保存されるしくみを確認します。</span><span class="sxs-lookup"><span data-stu-id="16385-113">Find out how Docker container images are stored in an image registry for consistent deployment across environments.</span></span>
 
-<span data-ttu-id="d3d53-114"><xref:host-and-deploy/docker/building-net-docker-images> ASP.NET Core アプリをビルドし、Docker で動作させる方法について学習します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-114"><xref:host-and-deploy/docker/building-net-docker-images> Learn how to build and dockerize an ASP.NET Core app.</span></span> <span data-ttu-id="d3d53-115">Microsoft によって管理される Docker イメージを確認し、ユース ケースを調査します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-115">Explore Docker images maintained by Microsoft and examine use cases.</span></span>
+<span data-ttu-id="16385-114"><xref:host-and-deploy/docker/building-net-docker-images> ASP.NET Core アプリをビルドし、Docker で動作させる方法について学習します。</span><span class="sxs-lookup"><span data-stu-id="16385-114"><xref:host-and-deploy/docker/building-net-docker-images> Learn how to build and dockerize an ASP.NET Core app.</span></span> <span data-ttu-id="16385-115">Microsoft によって管理される Docker イメージを確認し、ユース ケースを調査します。</span><span class="sxs-lookup"><span data-stu-id="16385-115">Explore Docker images maintained by Microsoft and examine use cases.</span></span>
 
-[<span data-ttu-id="d3d53-116">Visual Studio コンテナー ツール</span><span class="sxs-lookup"><span data-stu-id="d3d53-116">Visual Studio Container Tools</span></span>](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
-<span data-ttu-id="d3d53-117">Docker for Windows 上での .NET Framework または .NET Core のいずれかをターゲットとする ASP.NET Core アプリのビルド、デバッグ、および実行が Visual Studio によってどのようにサポートされるかについて説明します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-117">Discover how Visual Studio supports building, debugging, and running ASP.NET Core apps targeting either .NET Framework or .NET Core on Docker for Windows.</span></span> <span data-ttu-id="d3d53-118">Windows と Linux の両方のコンテナーがサポートされます。</span><span class="sxs-lookup"><span data-stu-id="d3d53-118">Both Windows and Linux containers are supported.</span></span>
+[<span data-ttu-id="16385-116">Visual Studio コンテナー ツール</span><span class="sxs-lookup"><span data-stu-id="16385-116">Visual Studio Container Tools</span></span>](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
+<span data-ttu-id="16385-117">Docker for Windows 上での .NET Framework または .NET Core のいずれかをターゲットとする ASP.NET Core アプリのビルド、デバッグ、および実行が Visual Studio によってどのようにサポートされるかについて説明します。</span><span class="sxs-lookup"><span data-stu-id="16385-117">Discover how Visual Studio supports building, debugging, and running ASP.NET Core apps targeting either .NET Framework or .NET Core on Docker for Windows.</span></span> <span data-ttu-id="16385-118">Windows と Linux の両方のコンテナーがサポートされます。</span><span class="sxs-lookup"><span data-stu-id="16385-118">Both Windows and Linux containers are supported.</span></span>
 
-[<span data-ttu-id="d3d53-119">Azure Container Registry に発行する</span><span class="sxs-lookup"><span data-stu-id="d3d53-119">Publish to Azure Container Registry</span></span>](/azure/vs-azure-tools-docker-hosting-web-apps-in-docker)  
-<span data-ttu-id="d3d53-120">Visual Studio Container Tools 拡張機能を使用して、PowerShell を使用する Azure で Docker ホストに ASP.NET Core アプリを展開する方法を確認します。</span><span class="sxs-lookup"><span data-stu-id="d3d53-120">Find out how to use the Visual Studio Container Tools extension to deploy an ASP.NET Core app to a Docker host on Azure using PowerShell.</span></span>
+[<span data-ttu-id="16385-119">Azure Container Registry に発行する</span><span class="sxs-lookup"><span data-stu-id="16385-119">Publish to Azure Container Registry</span></span>](/azure/vs-azure-tools-docker-hosting-web-apps-in-docker)  
+<span data-ttu-id="16385-120">Visual Studio Container Tools 拡張機能を使用して、PowerShell を使用する Azure で Docker ホストに ASP.NET Core アプリを展開する方法を確認します。</span><span class="sxs-lookup"><span data-stu-id="16385-120">Find out how to use the Visual Studio Container Tools extension to deploy an ASP.NET Core app to a Docker host on Azure using PowerShell.</span></span>
 
-[<span data-ttu-id="d3d53-121">プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する</span><span class="sxs-lookup"><span data-stu-id="d3d53-121">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](xref:host-and-deploy/proxy-load-balancer)  
-<span data-ttu-id="d3d53-122">プロキシ サーバーとロード バランサーの背後でホストされているアプリでは、追加の構成が必要になる場合があります。</span><span class="sxs-lookup"><span data-stu-id="d3d53-122">Additional configuration might be required for apps hosted behind proxy servers and load balancers.</span></span> <span data-ttu-id="d3d53-123">プロキシ経由で要求を渡すと、スキームやクライアントの IP アドレスなど、元の要求に関する情報が不明になることがよくあります。</span><span class="sxs-lookup"><span data-stu-id="d3d53-123">Passing requests through a proxy often obscures information about the original request, such as the scheme and client IP.</span></span> <span data-ttu-id="d3d53-124">その場合、要求に関する情報をアプリに手動で転送しなければならないことがあります。</span><span class="sxs-lookup"><span data-stu-id="d3d53-124">It might be necessary to forwarded some information about the request manually to the app.</span></span>
+[<span data-ttu-id="16385-121">プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する</span><span class="sxs-lookup"><span data-stu-id="16385-121">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](xref:host-and-deploy/proxy-load-balancer)  
+<span data-ttu-id="16385-122">プロキシ サーバーとロード バランサーの背後でホストされているアプリでは、追加の構成が必要になる場合があります。</span><span class="sxs-lookup"><span data-stu-id="16385-122">Additional configuration might be required for apps hosted behind proxy servers and load balancers.</span></span> <span data-ttu-id="16385-123">プロキシ経由で要求を渡すと、スキームやクライアントの IP アドレスなど、元の要求に関する情報が不明になることがよくあります。</span><span class="sxs-lookup"><span data-stu-id="16385-123">Passing requests through a proxy often obscures information about the original request, such as the scheme and client IP.</span></span> <span data-ttu-id="16385-124">その場合、要求に関する情報をアプリに手動で転送しなければならないことがあります。</span><span class="sxs-lookup"><span data-stu-id="16385-124">It might be necessary to forwarded some information about the request manually to the app.</span></span>
 
-<span data-ttu-id="d3d53-125">[Docker と小さなコンテナーを使用しての GC](xref:performance/memory#sc) 小さなコンテナーを使用しての GC の選択について。</span><span class="sxs-lookup"><span data-stu-id="d3d53-125">[GC using Docker and small containers](xref:performance/memory#sc) Discusses GC selection with small containers.</span></span>
+<span data-ttu-id="16385-125">[Docker と小さなコンテナーを使用しての GC](xref:performance/memory#sc) 小さなコンテナーを使用しての GC の選択について。</span><span class="sxs-lookup"><span data-stu-id="16385-125">[GC using Docker and small containers](xref:performance/memory#sc) Discusses GC selection with small containers.</span></span>

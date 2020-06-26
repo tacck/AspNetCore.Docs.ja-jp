@@ -6,22 +6,24 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/index
-ms.openlocfilehash: 7b73f4ba9315ad662c59f421668c0ed78602526a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5f28e3b23932cf812ef62f6b7a43c083ec20a4d0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775766"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404237"
 ---
-# <a name="aspnet-core-data-protection-extensibility-apis"></a><span data-ttu-id="17821-103">ASP.NET Core データ保護の拡張性 API</span><span class="sxs-lookup"><span data-stu-id="17821-103">ASP.NET Core Data Protection extensibility APIs</span></span>
+# <a name="aspnet-core-data-protection-extensibility-apis"></a><span data-ttu-id="74388-103">ASP.NET Core データ保護の拡張性 API</span><span class="sxs-lookup"><span data-stu-id="74388-103">ASP.NET Core Data Protection extensibility APIs</span></span>
 
-* [<span data-ttu-id="17821-104">Core の暗号の拡張性</span><span class="sxs-lookup"><span data-stu-id="17821-104">Core cryptography extensibility</span></span>](xref:security/data-protection/extensibility/core-crypto)
+* [<span data-ttu-id="74388-104">Core の暗号の拡張性</span><span class="sxs-lookup"><span data-stu-id="74388-104">Core cryptography extensibility</span></span>](xref:security/data-protection/extensibility/core-crypto)
 
-* [<span data-ttu-id="17821-105">キー管理の拡張性</span><span class="sxs-lookup"><span data-stu-id="17821-105">Key management extensibility</span></span>](xref:security/data-protection/extensibility/key-management)
+* [<span data-ttu-id="74388-105">キー管理の拡張性</span><span class="sxs-lookup"><span data-stu-id="74388-105">Key management extensibility</span></span>](xref:security/data-protection/extensibility/key-management)
 
-* [<span data-ttu-id="17821-106">その他の API</span><span class="sxs-lookup"><span data-stu-id="17821-106">Miscellaneous APIs</span></span>](xref:security/data-protection/extensibility/misc-apis)
+* [<span data-ttu-id="74388-106">その他の API</span><span class="sxs-lookup"><span data-stu-id="74388-106">Miscellaneous APIs</span></span>](xref:security/data-protection/extensibility/misc-apis)
