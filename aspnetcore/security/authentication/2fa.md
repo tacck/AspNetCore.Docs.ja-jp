@@ -8,17 +8,19 @@ ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e33f22356de983c8c4e0211822d5027a33b48de6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775831"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408579"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core での SMS による2要素認証
 
@@ -33,7 +35,7 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT)および[スイス-開発者
 
 ## <a name="create-a-new-aspnet-core-project"></a>新しい ASP.NET Core プロジェクトを作成する
 
-個々のユーザーアカウントを使用し`Web2FA`て、という名前の新しい ASP.NET Core web アプリを作成します。 「」の<xref:security/enforcing-ssl>手順に従って、HTTPS を設定し、要求します。
+`Web2FA`個々のユーザーアカウントを使用して、という名前の新しい ASP.NET Core web アプリを作成します。 「」の手順に従っ <xref:security/enforcing-ssl> て、HTTPS を設定し、要求します。
 
 ### <a name="create-an-sms-account"></a>SMS アカウントの作成
 
@@ -49,7 +51,7 @@ Twilio アカウントの [ダッシュボード] タブで、**アカウント 
 
 アカウントの設定から**ユーザーキー**に移動し、**パスワード**と共にコピーします。
 
-これらの値は、後で、キー `SMSAccountIdentification`と`SMSAccountPassword`内の secret manager ツールを使用してに格納します。
+これらの値は、後で、キーと内の secret manager ツールを使用してに格納し `SMSAccountIdentification` `SMSAccountPassword` ます。
 
 #### <a name="specifying-senderid--originator"></a>SenderID/オリジネータの指定
 
@@ -57,7 +59,7 @@ Twilio アカウントの [ダッシュボード] タブで、**アカウント 
 
 **Aspsms:**[発信元のロック解除] メニュー内で、1つ以上の発信者をロック解除するか、英数字の発信者を選択します (すべてのネットワークでサポートされていません)。
 
-この値は、後でキー `SMSAccountFrom`内にシークレットマネージャーツールで格納します。
+この値は、後でキー内にシークレットマネージャーツールで格納し `SMSAccountFrom` ます。
 
 ### <a name="provide-credentials-for-the-sms-service"></a>SMS サービスの資格情報を指定する
 
@@ -67,7 +69,7 @@ Twilio アカウントの [ダッシュボード] タブで、**アカウント 
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-`SMSAccountIdentification`、、 `SMSAccountPassword`および`SMSAccountFrom`を[secret manager ツール](xref:security/app-secrets)を使用して設定します。 次に例を示します。
+、、 `SMSAccountIdentification` `SMSAccountPassword` およびを `SMSAccountFrom` [secret manager ツール](xref:security/app-secrets)を使用して設定します。 次に例を示します。
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -94,13 +96,13 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>使用するスタートアップの構成`SMSoptions`
 
-Startup.cs `SMSoptions`の`ConfigureServices`メソッドで、サービスコンテナーにを追加*Startup.cs*します。
+`SMSoptions`Startup.cs のメソッドで、サービスコンテナーにを追加し `ConfigureServices` ます。 *Startup.cs*
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
 ### <a name="enable-two-factor-authentication"></a>2 要素認証を有効にする
 
-*Views/Manage/Index. cshtml* Razorビューファイルを開き、コメント文字を削除します (マークアップがコメントアウトされることはありません)。
+*Views/Manage/Index. cshtml* Razor ビューファイルを開き、コメント文字を削除します (マークアップがコメントアウトされることはありません)。
 
 ## <a name="log-in-with-two-factor-authentication"></a>2要素認証を使用してログインする
 
@@ -108,7 +110,7 @@ Startup.cs `SMSoptions`の`ConfigureServices`メソッドで、サービスコ�
 
 ![Microsoft Edge で開いている Web アプリケーション登録ビュー](2fa/_static/login2fa1.png)
 
-* [コントローラーの管理] で`Index`アクションメソッドをアクティブにするユーザー名をタップします。 次に、[電話番号の**追加**] リンクをタップします。
+* [コントローラーの管理] でアクションメソッドをアクティブにするユーザー名をタップし `Index` ます。 次に、[電話番号の**追加**] リンクをタップします。
 
 ![[管理] の [追加] リンク](2fa/_static/login2fa2.png)
 
@@ -152,7 +154,7 @@ Startup.cs `SMSoptions`の`ConfigureServices`メソッドで、サービスコ�
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
-[PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync)がに設定`lockoutOnFailure`さ`true`れていることを確認します。
+[PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync)がに設定されていること `lockoutOnFailure` を確認し `true` ます。
 
 ```csharp
 var result = await _signInManager.PasswordSignInAsync(

@@ -7,17 +7,19 @@ ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 6b4de0a47cd7882852512040a08832942f20aa4c
-ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
+ms.openlocfilehash: e5c23cc49a52b8772a43853e9e953dd416d69f69
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85347113"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408735"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>カスタムユーザーデータを Identity ASP.NET Core プロジェクトに追加、ダウンロード、および削除する
 

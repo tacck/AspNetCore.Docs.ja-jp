@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84145552"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407227"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API から ASP.NET Core への移行
 
@@ -59,7 +61,7 @@ Visual Studio で新しい空のソリューションを作成し、移行する
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. 空の**ソリューション**テンプレートを選択し、[**次へ**] を選択します。
-1. ソリューションに*WebAPIMigration*という名前を指定します。 **［作成］** を選択します
+1. ソリューションに*WebAPIMigration*という名前を指定します。 **[作成]** を選択します。
 1. 既存の製品*アプリ*プロジェクトをソリューションに追加します。
 
 移行先の新しい API プロジェクトを追加します。
@@ -73,14 +75,14 @@ Visual Studio で新しい空のソリューションを作成し、移行する
 
 ## <a name="migrate-configuration"></a>構成の移行
 
-ASP.NET Core では、 *App_Start*フォルダーや*global.asax*ファイルは使用しません。 また、web.config*ファイルは*発行時に追加されます。
+ASP.NET Core では、 *App_Start*フォルダーや*global.asax*ファイルは使用しません。 また、 *web.config*ファイルは発行時に追加されます。
 
 `Startup` クラス:
 
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、 <xref:fundamentals/startup> を参照してください。
+詳細については、「<xref:fundamentals/startup>」を参照してください。
 
 ## <a name="migrate-models-and-controllers"></a>モデルとコントローラーの移行
 
@@ -140,9 +142,9 @@ ASP.NET Core *API*プロジェクトテンプレートには、生成された�
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)アクションに属性を適用し `GetAllProducts` ます。
     * `[HttpGet("{id}")]`アクションに属性を適用し `GetProduct` ます。
 
-移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 を参照します。 `/api/products/1` 最初の製品が表示されます。
+移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -151,7 +153,7 @@ ASP.NET Core *API*プロジェクトテンプレートには、生成された�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -186,14 +188,14 @@ Visual Studio で次の手順を実行します。
 ASP.NET Core では使用しません。
 
 * *App_Start*フォルダーまたは*global.asax*ファイル
-* *web.config ファイルは*発行時に追加されます。
+* *web.config*ファイルは発行時に追加されます。
 
 `Startup` クラス:
 
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、 <xref:fundamentals/startup> を参照してください。
+詳細については、「<xref:fundamentals/startup>」を参照してください。
 
 ASP.NET Core MVC では、がで呼び出されるときに、既定で属性ルーティングが組み込まれてい <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*> `Startup.Configure` ます。 次の呼び出しを実行すると、製品 `UseMvc` *アプリ*プロジェクトの*App_Start*となります。
 
@@ -253,7 +255,7 @@ ASP.NET Core には、次のコンポーネントは存在しません。
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)アクションに属性を適用し `GetAllProducts` ます。
     * `[HttpGet("{id}")]`アクションに属性を適用し `GetProduct` ます。
 
-移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 を参照します。 `/api/products/1` 最初の製品が表示されます。
+移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
 
 ## <a name="compatibility-shim"></a>互換性 shim
 

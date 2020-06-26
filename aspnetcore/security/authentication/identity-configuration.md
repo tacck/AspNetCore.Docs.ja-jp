@@ -1,32 +1,34 @@
 ---
 title: ASP.NET Core の構成Identity
 author: AdrienTorris
-description: ASP.NET Core Identityの既定値について理解しIdentity 、カスタム値を使用するようにプロパティを構成する方法について説明します。
+description: ASP.NET Core の Identity 既定値について理解し、 Identity カスタム値を使用するようにプロパティを構成する方法について説明します。
 ms.author: riande
 ms.date: 02/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b88f2627eabc536f2d3b8e677020a67bfd1a40ba
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775649"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408969"
 ---
-# <a name="configure-aspnet-core-identity"></a>ASP.NET Core Id の構成
+# <a name="configure-aspnet-core-identity"></a>ASP.NET Core の構成Identity
 
-ASP.NET Core Id では、パスワードポリシー、ロックアウト、cookie の構成などの設定に既定値を使用します。 これらの設定は、 `Startup`クラスでオーバーライドできます。
+ASP.NET Core Identity は、パスワードポリシー、ロックアウト、cookie の構成などの設定に既定値を使用します。 これらの設定は、クラスでオーバーライドでき `Startup` ます。
 
-## <a name="identity-options"></a>Id オプション
+## <a name="identity-options"></a>Identityオプション
 
-Id システムを構成するために使用できるオプションを[指定します](/dotnet/api/microsoft.aspnetcore.identity.identityoptions)。 `IdentityOptions`または`AddIdentity` `AddDefaultIdentity`を呼び出し**た後**に設定する必要があります。
+指定され[たクラスは、](/dotnet/api/microsoft.aspnetcore.identity.identityoptions)システムの構成に使用できるオプションを表し Identity ます。 `IdentityOptions`またはを呼び出し**た後**に設定する必要があり `AddIdentity` `AddDefaultIdentity` ます。
 
-### <a name="claims-identity"></a>要求 Id
+### <a name="claims-identity"></a>保険Identity
 
 [ClaimsIdentity](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity)は、次の表に示すプロパティを使用して[ClaimsIdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions)を指定します。
 
@@ -43,9 +45,9 @@ Id システムを構成するために使用できるオプションを[指定�
 
 [!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
-上記のコードは、 `Login` id テンプレートに基づいています。 
+上記のコードは、テンプレートに基づいてい `Login` Identity ます。 
 
-ロックアウトオプションは、 `StartUp.ConfigureServices`次の方法で設定されます。
+ロックアウトオプションは、次の方法で設定され `StartUp.ConfigureServices` ます。
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
@@ -63,7 +65,7 @@ Id システムを構成するために使用できるオプションを[指定�
 
 ### <a name="password"></a>Password
 
-既定では、Id を使用するには、パスワードに大文字と小文字、数字、英数字以外の文字を含める必要があります。 パスワードの長さは6文字以上である必要があります。 [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions)は、で`Startup.ConfigureServices`設定できます。
+既定では、 Identity パスワードの大文字と小文字、数字、英数字以外の文字を使用する必要があります。 パスワードの長さは6文字以上である必要があります。 [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions)は、で設定でき `Startup.ConfigureServices` ます。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -112,7 +114,7 @@ Id システムを構成するために使用できるオプションを[指定�
 
 ### <a name="sign-in"></a>サインイン
 
-次のコードは`SignIn` 、設定 (既定値) を設定します。
+次のコードは、 `SignIn` 設定 (既定値) を設定します。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -137,16 +139,16 @@ Id システムを構成するために使用できるオプションを[指定�
 
 [トークンオプション。トークン](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens)は、テーブルに示されているプロパティを使用して[tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions)を指定します。
 
-|                                                        プロパティ                                                         |                                                                                      説明                                                                                      |
+|                                                        プロパティ                                                         |                                                                                      [説明]                                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       認証子を使用`AuthenticatorTokenProvider`して2要素サインインを検証するために使用するを取得または設定します。                                       |
-|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     電子メール変更の`ChangeEmailTokenProvider`確認メールで使用されるトークンを生成するために使用されるを取得または設定します。                                     |
-| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      電話番号を変更`ChangePhoneNumberTokenProvider`するときに使用するトークンを生成するために使用するを取得または設定します。                                      |
+|     [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       `AuthenticatorTokenProvider`認証子を使用して2要素サインインを検証するために使用するを取得または設定します。                                       |
+|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     `ChangeEmailTokenProvider`電子メール変更の確認メールで使用されるトークンを生成するために使用されるを取得または設定します。                                     |
+| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      `ChangePhoneNumberTokenProvider`電話番号を変更するときに使用するトークンを生成するために使用するを取得または設定します。                                      |
 | [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             アカウントの確認メールで使用されるトークンを生成するために使用されるトークンプロバイダーを取得または設定します。                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | パスワードリセット電子メールで使用されるトークンを生成するために使用される[IUserTwoFactorTokenProvider\<tuser>](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1)を取得または設定します。 |
+|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | パスワードリセット電子メールで使用されるトークンを生成するために使用される[IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1)を取得または設定します。 |
 |                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                プロバイダーの名前として使用されるキーを使用して[ユーザートークンプロバイダー](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor)を構築するために使用されます。                 |
 
-### <a name="user"></a>User
+### <a name="user"></a>ユーザー
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_user)]
 
@@ -159,7 +161,7 @@ Id システムを構成するために使用できるオプションを[指定�
 
 ### <a name="cookie-settings"></a>Cookie の設定
 
-で`Startup.ConfigureServices`アプリの cookie を構成します。 また`AddIdentity`は`AddDefaultIdentity`を呼び出し**た後、** [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)を呼び出す必要があります。
+でアプリの cookie を構成 `Startup.ConfigureServices` します。 またはを呼び出し**た後、** [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)を呼び出す必要があり `AddIdentity` `AddDefaultIdentity` ます。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -185,12 +187,12 @@ Id システムを構成するために使用できるオプションを[指定�
 
 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>パスワードハッシュのオプションを取得または設定します。
 
-| オプション | 説明 |
+| オプション | [説明] |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー*と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合<xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> 、メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、*新しいパスワード*のハッシュに影響します。 |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 を使用してパスワードをハッシュするときに使用されるイテレーションの数。 この値は、がに<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>設定されている場合にのみ使用されます。 値は正の整数である必要があり`10000`、既定値はです。 |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー*と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合、 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、*新しいパスワード*のハッシュに影響します。 |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 を使用してパスワードをハッシュするときに使用されるイテレーションの数。 この値は、がに設定されている場合にのみ使用され <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> ます。 値は正の整数である必要があり、既定値は `10000` です。 |
 
-次の例では、 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount>が`12000`の`Startup.ConfigureServices`に設定されています。
+次の例では、 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> がのに設定されてい `12000` `Startup.ConfigureServices` ます。
 
 ```csharp
 // using Microsoft.AspNetCore.Identity;

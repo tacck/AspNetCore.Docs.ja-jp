@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 04/08/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: d284927e8ff4315b813fe36b9c335d8bd75ece11
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032b3f9ccea2ae361a8f2fd12538ffb901310247
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776865"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408904"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core のキー格納形式
 
@@ -27,7 +29,7 @@ ms.locfileid: "82776865"
 * Windows: *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*
 * macOS/Linux: *$HOME/.aspnet/dataprotection-keys*
 
-## <a name="the-key-element"></a>\<キー> 要素
+## <a name="the-key-element"></a>\<key> 要素
 
 キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。 規則によるキーのファイル名は**キー {guid} .xml です**。ここで、{guid} はキーの id です。 このようなファイルには1つのキーが含まれています。 ファイルの形式は次のとおりです。
 
@@ -52,33 +54,33 @@ ms.locfileid: "82776865"
 </key>
 ```
 
-Key \<> 要素には、次の属性と子要素が含まれています。
+要素には \<key> 、次の属性と子要素が含まれています。
 
 * キー id。この値は権限のあるものとして扱われます。ファイル名は、人間が読みやすくするための単なる言えです。
 
-* \<キー> 要素のバージョン。現在は1で修正されています。
+* \<key>現在1で修正されている要素のバージョン。
 
 * キーの作成、アクティブ化、および有効期限。
 
-* この\<キーに含まれる認証済み暗号化の実装に関する情報を格納する記述子> 要素。
+* \<descriptor>このキーに含まれている認証済み暗号化の実装に関する情報を格納している要素。
 
 上の例では、キーの id は {80732141-ec8f-4b80-af9c-c4d2d1ff8901} であり、2015年3月19日に作成され、アクティブ化され、90日の有効期間があります。 (場合によっては、ライセンス認証日が、この例のように作成日よりも少し前になることがあります。 これは、Api が動作し、実際には無害であることが原因です)。
 
-## <a name="the-descriptor-element"></a>\<記述子> 要素
+## <a name="the-descriptor-element"></a>\<descriptor> 要素
 
-外部\<記述子> 要素には、deserializerType 属性が含まれています。これは、I認証 Ated Tordescriptor デシリアライザーを実装する型のアセンブリ修飾名です。 この型は、内部\<記述子> 要素を読み取り、内に格納されている情報を解析します。
+Outer 要素には \<descriptor> 、deserializerType 属性が含まれています。これは、i認証 Ated Tor記述子デシリアライザーを実装する型のアセンブリ修飾名です。 この型は、内部要素を読み取り、内に格納されて \<descriptor> いる情報を解析します。
 
-\<記述子> 要素の特定の形式は、キーによってカプセル化される認証済みの暗号化機能の実装によって異なります。また、各デシリアライザー型には、これに対して若干異なる形式が必要です。 ただし、一般に、この要素にはアルゴリズム情報 (名前、型、Oid、または類似) とシークレットキーマテリアルが含まれます。 上の例では、記述子は、このキーが AES-256-CBC encryption + HMACSHA256 検証をラップすることを指定しています。
+要素の特定の形式は、 \<descriptor> キーによってカプセル化される認証済みの暗号化機能の実装によって異なります。また、各デシリアライザー型では、この形式が若干異なることが想定されます。 ただし、一般に、この要素にはアルゴリズム情報 (名前、型、Oid、または類似) とシークレットキーマテリアルが含まれます。 上の例では、記述子は、このキーが AES-256-CBC encryption + HMACSHA256 検証をラップすることを指定しています。
 
-## <a name="the-encryptedsecret-element"></a>\<Encryptedsecret> 要素
+## <a name="the-encryptedsecret-element"></a>\<encryptedSecret> 要素
 
-暗号化された形式の秘密キーマテリアルを含む** &lt;&gt; encryptedsecret**要素は、保存[時のシークレットの暗号化が有効になっ](xref:security/data-protection/implementation/key-encryption-at-rest)ている場合に存在する可能性があります。 属性`decryptorType`は、 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。 この型は、内部** &lt;の encryptedKey&gt; **要素を読み取り、復号化して元のプレーンテキストを回復する役割を担います。
+暗号化された形式の秘密キーマテリアルを含む** &lt; encryptedsecret &gt; **要素は、保存[時のシークレットの暗号化が有効になっ](xref:security/data-protection/implementation/key-encryption-at-rest)ている場合に存在する可能性があります。 属性 `decryptorType` は、 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。 この型は、内部の** &lt; encryptedKey &gt; **要素を読み取り、復号化して元のプレーンテキストを回復する役割を担います。
 
-と`<descriptor>`同様に、 `<encryptedSecret>`要素の特定の形式は、使用されている保存時の暗号化メカニズムに依存します。 上の例では、コメントごとに Windows DPAPI を使用してマスターキーが暗号化されています。
+と同様に、 `<descriptor>` 要素の特定の形式は、使用されて `<encryptedSecret>` いる保存時の暗号化メカニズムに依存します。 上の例では、コメントごとに Windows DPAPI を使用してマスターキーが暗号化されています。
 
-## <a name="the-revocation-element"></a>\<失効> 要素
+## <a name="the-revocation-element"></a>\<revocation> 要素
 
-失効は、キーリポジトリの最上位レベルのオブジェクトとして存在します。 慣例により、失効はファイル名の**失効-{timestamp} .xml** (特定の日付より前のすべてのキーを取り消す場合) または**失効-{guid} .xml** (特定のキーを取り消す場合) を持ちます。 各ファイルには、 \<1 つの失効> 要素が含まれます。
+失効は、キーリポジトリの最上位レベルのオブジェクトとして存在します。 慣例により、失効はファイル名の**失効-{timestamp} .xml** (特定の日付より前のすべてのキーを取り消す場合) または**失効-{guid} .xml** (特定のキーを取り消す場合) を持ちます。 各ファイルには1つの要素が含まれてい \<revocation> ます。
 
 個々のキーの失効の場合、ファイルの内容は次のようになります。
 
@@ -103,4 +105,4 @@ Key \<> 要素には、次の属性と子要素が含まれています。
 </revocation>
 ```
 
-\<理由> 要素がシステムによって読み取られることはありません。 これは、ユーザーが判読できる失効の理由を格納するための便利な場所です。
+\<reason>要素がシステムによって読み取られることはありません。 これは、ユーザーが判読できる失効の理由を格納するための便利な場所です。

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: d3207969dfbeb9a81e0da88f38a38c6889bbfba9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d92707ff06125a4b65f1ec18e402f5fe86547b5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775870"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407916"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core の部分タグ ヘルパー
 
@@ -30,7 +32,7 @@ ms.locfileid: "82775870"
 
 ## <a name="overview"></a>概要
 
-部分タグヘルパーは、ページおよび MVC アプリでRazor [部分ビュー](xref:mvc/views/partial)を表示するために使用されます。 考慮事項:
+部分タグヘルパーは、ページおよび MVC アプリで[部分ビュー](xref:mvc/views/partial)を表示するために使用され Razor ます。 考慮事項:
 
 * ASP.NET Core 2.1 以降を必要とします。
 * [HTML ヘルパー構文](xref:mvc/views/partial#reference-a-partial-view)の代替です。
@@ -57,7 +59,7 @@ ms.locfileid: "82775870"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
-## <a name="for"></a>for
+## <a name="for"></a>対象
 
 `for` 属性によって、現在のモデルに対して評価する [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression) が割り当てられます。 `ModelExpression` によって `@Model.` 構文が推論されます。 たとえば、`for="Product"` の代わりに `for="@Model.Product"` を使用できます。 この既定の推論動作は、`@` シンボルを使用してインライン式を定義することでオーバーライドされます。
 
@@ -69,7 +71,7 @@ ms.locfileid: "82775870"
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Pages/Product.cshtml.cs?highlight=8)]
 
-## <a name="model"></a>model
+## <a name="model"></a>対象となるのは、モデル
 
 `model` 属性によって、部分ビューに渡すモデル インスタンスが割り当てられます。 `model` 属性は [for](#for) 属性と共に使用できません。
 

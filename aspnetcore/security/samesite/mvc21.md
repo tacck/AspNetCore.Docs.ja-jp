@@ -8,21 +8,23 @@ ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 6a53c0d3c0a314c4137f071cf50062182b654658
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4239321531f3a7696a15b1dea164450ea0860c2b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777307"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409060"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie のサンプル
 
-ASP.NET Core 2.1 には[SameSite](https://www.owasp.org/index.php/SameSite)属性のサポートが組み込まれていますが、元の標準に書き込まれました。 [パッチを適用](https://github.com/dotnet/aspnetcore/issues/8212)した動作に`SameSite.None`よって、の意味が変更され`None`、値がまったく出力されるのではなく、の値を持つ sameSite 属性が出力されます。 値を出力しない場合は、cookie の`SameSite`プロパティを-1 に設定します。
+ASP.NET Core 2.1 には[SameSite](https://www.owasp.org/index.php/SameSite)属性のサポートが組み込まれていますが、元の標準に書き込まれました。 [パッチを適用](https://github.com/dotnet/aspnetcore/issues/8212)した動作によって、の意味が変更され、 `SameSite.None` `None` 値がまったく出力されるのではなく、の値を持つ sameSite 属性が出力されます。 値を出力しない場合は、cookie のプロパティを `SameSite` -1 に設定します。
 
 ## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a>SameSite 属性の書き込み
 
@@ -69,21 +71,21 @@ services.AddSession(options =>
 });
 ```
 
-上記のコードでは、cookie 認証とセッション状態の両方で、sameSite `None`属性をに設定し、 `None`値を使用して属性を出力し、さらに Secure 属性を true に設定しています。
+上記のコードでは、cookie 認証とセッション状態の両方で、sameSite 属性をに設定し `None` 、値を使用して属性を出力 `None` し、さらに Secure 属性を true に設定しています。
 
 ### <a name="run-the-sample"></a>サンプルを実行する
 
-[サンプルプロジェクト](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)を実行する場合は、最初のページにブラウザーデバッガーを読み込み、それを使用してサイトの cookie のコレクションを表示します。 これを行うには、Edge で`F12` [] を`Application`クリックし、タブを選択して`Cookies` 、 `Storage`セクションのオプションの下にあるサイトの URL をクリックします。
+[サンプルプロジェクト](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)を実行する場合は、最初のページにブラウザーデバッガーを読み込み、それを使用してサイトの cookie のコレクションを表示します。 これを行うには、Edge で [] をクリックし、タブを選択して、 `F12` セクションの `Application` オプションの下にあるサイトの URL をクリックし `Cookies` `Storage` ます。
 
 ![ブラウザーデバッガーの Cookie の一覧](BrowserDebugger.png)
 
-上の図から、[Create SameSite Cookie] ボタンをクリックしたときにサンプルによって作成された cookie の SameSite 属性値`Lax`が、[サンプルコード](#sampleCode)で設定されている値と一致していることがわかります。
+上の図から、[Create SameSite Cookie] ボタンをクリックしたときにサンプルによって作成された cookie の SameSite 属性値が、 `Lax` [サンプルコード](#sampleCode)で設定されている値と一致していることがわかります。
 
 ## <a name="intercepting-cookies"></a><a name="interception"></a>Cookie の傍受
 
-Cookie をインターセプトするには、ユーザーのブラウザーエージェントでのサポートに応じて none 値を調整するために、 `CookiePolicy`ミドルウェアを使用する必要があります。 クッキーを書き込み、内で`ConfigureServices()`構成されるコンポーネントの**前に**、これを http 要求パイプラインに配置する必要があります。
+Cookie をインターセプトするには、ユーザーのブラウザーエージェントでのサポートに応じて none 値を調整するために、ミドルウェアを使用する必要があり `CookiePolicy` ます。 クッキーを書き込み、内で構成されるコンポーネントの**前に**、これを http 要求パイプラインに配置する必要があり `ConfigureServices()` ます。
 
-パイプラインに挿入するには、 `app.UseCookiePolicy()` Startup.cs の`Configure(IApplicationBuilder, IHostingEnvironment)`メソッドで[Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)を使用します。 次に例を示します。
+パイプラインに挿入するには、 `app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)のメソッドでを使用します。 次に例を示します。
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -113,7 +115,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-次に、 `ConfigureServices(IServiceCollection services)` cookie が追加または削除されたときにヘルパークラスを呼び出すように cookie ポリシーを構成します。 次に例を示します。
+次に、cookie `ConfigureServices(IServiceCollection services)` が追加または削除されたときにヘルパークラスを呼び出すように cookie ポリシーを構成します。 次に例を示します。
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -142,12 +144,12 @@ private void CheckSameSite(HttpContext httpContext, CookieOptions options)
 }
 ```
 
-ヘルパー関数`CheckSameSite(HttpContext, CookieOptions)`:
+ヘルパー関数 `CheckSameSite(HttpContext, CookieOptions)` :
 
 * は、要求に cookie が追加されたとき、または要求から削除されたときに呼び出されます。
-* `SameSite`プロパティがに`None`設定されているかどうかを確認します。
-* が`SameSite`に`None`設定されていて、現在のユーザーエージェントが none 属性値をサポートしていないことがわかっている場合。 このチェックは、 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs)クラスを使用して行います。
-  * プロパティ`SameSite`をに設定して値を出力しないように設定します。`(SameSiteMode)(-1)`
+* プロパティがに設定されているかどうかを確認し `SameSite` `None` ます。
+* `SameSite`がに設定され `None` ていて、現在のユーザーエージェントが none 属性値をサポートしていないことがわかっている場合。 このチェックは、 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs)クラスを使用して行います。
+  * `SameSite`プロパティをに設定して値を出力しないように設定します。`(SameSiteMode)(-1)`
 
 ## <a name="targeting-net-framework"></a>.NET Framework のターゲット設定
 
@@ -164,6 +166,6 @@ ASP.NET Core と System.web (ASP.NET Classic) には、SameSite の独立した�
 
 ### <a name="more-information"></a>詳細情報
  
-[Chrome 更新プログラム](https://www.chromium.org/updates/same-site)
-[ASP.NET Core SameSite ドキュメント](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1)
-[ASP.NET Core 2.1 SameSite 変更アナウンス](https://github.com/dotnet/aspnetcore/issues/8212)
+[Chrome の更新](https://www.chromium.org/updates/same-site) 
+[ASP.NET Core SameSite のドキュメント](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) 
+[ASP.NET Core 2.1 SameSite 変更のお知らせ](https://github.com/dotnet/aspnetcore/issues/8212)

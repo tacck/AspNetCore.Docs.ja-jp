@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/misc-apis
-ms.openlocfilehash: a07ccc3645a9a8132fd5290e7c43f353f74aca05
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e9de92233468e9e07791df608b1c37ffb3b29949
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776982"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408501"
 ---
 # <a name="miscellaneous-aspnet-core-data-protection-apis"></a>その他の ASP.NET Core データ保護 Api
 
@@ -27,7 +29,7 @@ ms.locfileid: "82776982"
 
 ## <a name="isecret"></a>ISecret
 
-インターフェイス`ISecret`は、暗号化キーマテリアルなどのシークレット値を表します。 次の API サーフェイスが含まれています。
+インターフェイスは、 `ISecret` 暗号化キーマテリアルなどのシークレット値を表します。 次の API サーフェイスが含まれています。
 
 * `Length`: `int`
 
@@ -35,6 +37,6 @@ ms.locfileid: "82776982"
 
 * `WriteSecretIntoBuffer(ArraySegment<byte> buffer)`: `void`
 
-メソッド`WriteSecretIntoBuffer`は、指定されたバッファーに生のシークレット値を設定します。 この API がを`byte[]`直接返すのではなく、パラメーターとしてバッファーを受け取る理由は、呼び出し元がバッファーオブジェクトをピン留めして、秘密の露出をマネージガベージコレクターに制限する可能性があるためです。
+メソッドは、指定された `WriteSecretIntoBuffer` バッファーに生のシークレット値を設定します。 この API がを直接返すのではなく、パラメーターとしてバッファーを受け取る理由は、 `byte[]` 呼び出し元がバッファーオブジェクトをピン留めして、秘密の露出をマネージガベージコレクターに制限する可能性があるためです。
 
-この`Secret`型は、の`ISecret`具象実装であり、シークレット値はインプロセスメモリに格納されます。 Windows プラットフォームでは、シークレット値は[CryptProtectMemory](https://msdn.microsoft.com/library/windows/desktop/aa380262(v=vs.85).aspx)を使用して暗号化されます。
+この `Secret` 型は、の具象実装であり、 `ISecret` シークレット値はインプロセスメモリに格納されます。 Windows プラットフォームでは、シークレット値は[CryptProtectMemory](https://msdn.microsoft.com/library/windows/desktop/aa380262(v=vs.85).aspx)を使用して暗号化されます。

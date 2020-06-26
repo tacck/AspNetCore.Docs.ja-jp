@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 7bc3b9535055e3fccf23ffa4638bd29676910348
-ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
+ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382570"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409086"
 ---
 # <a name="host-aspnet-core-signalr-in-background-services"></a>SignalRバックグラウンドサービスでのホスト ASP.NET Core
 
@@ -31,12 +33,12 @@ ms.locfileid: "83382570"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[サンプルコードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x)[する (ダウンロードする方法)](xref:index#how-to-download-a-sample)
+[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-[サンプルコードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2)[する (ダウンロードする方法)](xref:index#how-to-download-a-sample)
+[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
 ::: moniker-end
 
@@ -62,7 +64,7 @@ SignalRバックグラウンドワーカープロセスのコンテキストで 
 厳密に型指定されたハブの詳細については、「 [ SignalR のハブを使用](xref:signalr/hubs#strongly-typed-hubs)した ASP.NET Core」を参照してください。
 
 > [!NOTE]
-> この機能は[ハブ \< t>](xref:Microsoft.AspNetCore.SignalR.Hub`1)クラスに限定されません。 [Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)など、[ハブ](xref:Microsoft.AspNetCore.SignalR.Hub)から継承するクラスはすべて機能します。
+> この機能は[ハブ \<T> ](xref:Microsoft.AspNetCore.SignalR.Hub`1)クラスに限定されません。 [Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)など、[ハブ](xref:Microsoft.AspNetCore.SignalR.Hub)から継承するクラスはすべて機能します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -154,7 +156,7 @@ public partial class ClockHubClient : IClock, IHostedService
 
 ## <a name="additional-resources"></a>その他の資料
 
-* [作業開始](xref:tutorials/signalr)
+* [開始するには](xref:tutorials/signalr)
 * [ハブ](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [厳密に型指定されたハブ](xref:signalr/hubs#strongly-typed-hubs)

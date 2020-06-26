@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 068b471c1f5fa5f0ca87dd7b028badf70f8c1b67
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122166"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408293"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core フィルター
 
@@ -184,12 +186,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 | シーケンス | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラーまたは Razor ページ| `OnActionExecuting` |
 | 3 | メソッド | `OnActionExecuting` |
 | 4 | メソッド | `OnActionExecuted` |
 | 5 | コントローラーまたは Razor ページ | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | グローバル | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>コントローラー レベルのフィルター
 
@@ -728,12 +730,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 | シーケンス | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラー | `OnActionExecuting` |
 | 3 | メソッド | `OnActionExecuting` |
 | 4 | メソッド | `OnActionExecuted` |
 | 5 | コントローラー | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | グローバル | `OnActionExecuted` |
 
 このシーケンスが示すもの:
 
@@ -790,8 +792,8 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | メソッド | 0 | `OnActionExecuting` |
 | 2 | コントローラー | 1  | `OnActionExecuting` |
-| 3 | Global | 2  | `OnActionExecuting` |
-| 4 | Global | 2  | `OnActionExecuted` |
+| 3 | グローバル | 2  | `OnActionExecuting` |
+| 4 | グローバル | 2  | `OnActionExecuted` |
 | 5 | コントローラー | 1  | `OnActionExecuted` |
 | 6 | メソッド | 0  | `OnActionExecuted` |
 

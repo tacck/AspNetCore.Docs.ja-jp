@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 1ffaf61bb21f44681f530e35e746a30e9e158c6d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a6d99e4a8f05125e6e7968b088c5b7e29cb75e6c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777268"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407565"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core を使用してネイティブ モバイル アプリのバックエンド サービスを作成する
 
@@ -158,6 +160,6 @@ Postman を使用してテストするには、動詞を PUT に変更します�
 
 API の共通ポリシーを特定した場合、通常はそのポリシーを[フィルター](../mvc/controllers/filters.md)にカプセル化できます。 詳細については、[ASP.NET Core MVC アプリケーションで一般的な API ポリシーをカプセル化する方法](https://msdn.microsoft.com/magazine/mt767699.aspx)に関するページを参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [認証と承認](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)

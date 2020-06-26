@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 04/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: e83019a0f905fa9cd0f0c39960b787bc5b13b64f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775389"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408176"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core パフォーマンスのベストプラクティス
 
@@ -49,9 +51,9 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 
 * [ホットコードパス](#understand-hot-code-paths)を非同期にします。
 * 非同期 API が使用可能な場合は、データアクセス、i/o、長時間実行される操作 Api を非同期に呼び出します。 Synchronus API を非同期にするために、 [Run](/dotnet/api/system.threading.tasks.task.run) **を使用しないでください。**
-* コントローラー/Razorページのアクションを非同期にします。 非同期[/await](/dotnet/csharp/programming-guide/concepts/async/)パターンを活用するために、呼び出し履歴全体が非同期になります。
+* コントローラー/ Razor ページのアクションを非同期にします。 非同期[/await](/dotnet/csharp/programming-guide/concepts/async/)パターンを活用するために、呼び出し履歴全体が非同期になります。
 
-[Perfview](https://github.com/Microsoft/perfview)などのプロファイラーを使用して、[スレッドプール](/windows/desktop/procthread/thread-pools)に頻繁に追加されるスレッドを見つけることができます。 イベント`Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`は、スレッドプールに追加されたスレッドを示します。 <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+[Perfview](https://github.com/Microsoft/perfview)などのプロファイラーを使用して、[スレッドプール](/windows/desktop/procthread/thread-pools)に頻繁に追加されるスレッドを見つけることができます。 イベントは、スレッド `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` プールに追加されたスレッドを示します。 <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
 ## <a name="minimize-large-object-allocations"></a>大きなオブジェクトの割り当てを最小限にする
 
@@ -60,7 +62,7 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 推奨事項:
 
 * 頻繁に使用されるラージオブジェクトをキャッシュすること**を検討してください。** 大きなオブジェクトをキャッシュすると、コストのかかる割り当てを防ぐことができます。
-* 大きな配列を格納する**には、** [arraypool\<T>](/dotnet/api/system.buffers.arraypool-1)を使用してバッファーをプールします。
+* 大きな配列を格納する**には、** [arraypool \<T> ](/dotnet/api/system.buffers.arraypool-1)を使用してバッファーをプールします。
 * [ホットコードパス](#understand-hot-code-paths)には、有効期間が短い大きなオブジェクトを多数割り当て**ない**でください。
 
 前述のようなメモリの問題は、 [Perfview](https://github.com/Microsoft/perfview)でガベージコレクション (GC) の統計を確認して調べることによって診断できます。
@@ -82,7 +84,7 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 * 少し古いデータが許容される場合は、データベースまたはリモートサービスから取得した頻繁にアクセスされるデータをキャッシュすること**を検討してください。** シナリオに応じて、 [Memorycache](xref:performance/caching/memory)または[microsoft.web.distributedcache](xref:performance/caching/distributed)を使用します。 詳細については、「<xref:performance/caching/response>」を参照してください。
 * ネットワークラウンドトリップ**を最小限に**抑えます。 目的は、複数の呼び出しではなく、1回の呼び出しで必要なデータを取得することです。
 * 読み取り専用の目的でデータにアクセスする場合**は**、Entity Framework Core で[追跡なしのクエリ](/ef/core/querying/tracking#no-tracking-queries)を使用します。 EF Core は、追跡しないクエリの結果をより効率的に返すことができます。
-* (、 `.Select`、または`.Sum`ステートメントを使用`.Where`して) LINQ クエリのフィルター処理と集計を**実行**し、データベースによってフィルター処理が実行されるようにします。
+* (、、またはステートメントを使用して) LINQ クエリのフィルター処理と集計を**実行**し、 `.Where` `.Select` `.Sum` データベースによってフィルター処理が実行されるようにします。
 * EF Core に**よってクライアント**上の一部のクエリ演算子が解決されるため、クエリの実行効率が悪くなることがあります。 詳細については、「[クライアント評価のパフォーマンスの問題](/ef/core/querying/client-eval#client-evaluation-performance-issues)」を参照してください。
 * コレクションに対してプロジェクションクエリを使用しないでください。これにより、"N + 1" 個の SQL クエリが実行される可能性が**あり**ます。 詳細については、「[相関サブクエリの最適化](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries)」を参照してください。
 
@@ -97,12 +99,12 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 
 ## <a name="pool-http-connections-with-httpclientfactory"></a>HttpClientFactory を使用して HTTP 接続をプールする
 
-[Httpclient](/dotnet/api/system.net.http.httpclient)は`IDisposable`インターフェイスを実装していますが、再利用できるように設計されています。 閉じ`HttpClient`られたインスタンスは、 `TIME_WAIT`短時間にわたって状態でソケットを開いたままにします。 `HttpClient`オブジェクトを作成および破棄するコードパスが頻繁に使用される場合、アプリは使用可能なソケットを消費する可能性があります。 [HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)は、この問題の解決策として ASP.NET Core 2.1 で導入されました。 これは、パフォーマンスと信頼性を最適化するために、プール HTTP 接続を処理します。
+[Httpclient](/dotnet/api/system.net.http.httpclient)はインターフェイスを実装してい `IDisposable` ますが、再利用できるように設計されています。 閉じら `HttpClient` れたインスタンスは、短時間にわたって状態でソケットを開いたままに `TIME_WAIT` します。 オブジェクトを作成および破棄するコードパス `HttpClient` が頻繁に使用される場合、アプリは使用可能なソケットを消費する可能性があります。 [HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)は、この問題の解決策として ASP.NET Core 2.1 で導入されました。 これは、パフォーマンスと信頼性を最適化するために、プール HTTP 接続を処理します。
 
 推奨事項:
 
-* インスタンスを`HttpClient`直接作成して破棄**しないで**ください。
-* インスタンスを[HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)取得`HttpClient`するに**は**、HttpClientFactory を使用します。 詳細については、「[HttpClientFactory を使用して回復力の高い HTTP 要求を実装する](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)」を参照してください。
+* インスタンスを直接作成して破棄**しないで**ください `HttpClient` 。
+* インスタンスを取得するに**は**、 [HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)を使用し `HttpClient` ます。 詳細については、「[HttpClientFactory を使用して回復力の高い HTTP 要求を実装する](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)」を参照してください。
 
 ## <a name="keep-common-code-paths-fast"></a>共通コードパスを高速に保つ
 
@@ -124,7 +126,7 @@ ASP.NET Core アプリに対するほとんどの要求は、必要なサービ�
 
 * 通常の HTTP 要求処理の一部として、長時間実行されるタスクが完了するまで待機しない**で**ください。
 * [バックグラウンドサービス](xref:fundamentals/host/hosted-services)で長時間実行される要求や、 [Azure 関数](/azure/azure-functions/)を使用したアウトプロセスを処理すること**を検討してください。** 特に、CPU を集中的に使用するタスクには、アウトプロセスの完了が役立ちます。
-* クライアントとの非同期通信には[SignalR](xref:signalr/introduction)、などのリアルタイム通信オプション**を使用し**ます。
+* クライアントとの非同期通信には、などのリアルタイム通信オプション**を使用し** [SignalR](xref:signalr/introduction) ます。
 
 ## <a name="minify-client-assets"></a>クライアント資産の縮小
 
@@ -144,7 +146,7 @@ ASP.NET Core アプリに対するほとんどの要求は、必要なサービ�
 
 ## <a name="use-the-latest-aspnet-core-release"></a>最新の ASP.NET Core リリースを使用する
 
-ASP.NET Core の新しいリリースにはそれぞれ、パフォーマンスが向上しています。 .NET Core と ASP.NET Core での最適化により、新しいバージョンの方が以前のバージョンより高い値になります。 たとえば、.NET Core 2.1 では、享受[>\<](https://msdn.microsoft.com/magazine/mt814808.aspx)からのコンパイルされた正規表現とのサポートが追加されています。 ASP.NET Core 2.2 では、HTTP/2 のサポートが追加されました。 [ASP.NET Core 3.0](xref:aspnetcore-3.0)では、メモリ使用量を減らし、スループットを向上させる多くの機能強化が加えられています。 パフォーマンスが優先される場合は、現在のバージョンの ASP.NET Core にアップグレードすることを検討してください。
+ASP.NET Core の新しいリリースにはそれぞれ、パフォーマンスが向上しています。 .NET Core と ASP.NET Core での最適化により、新しいバージョンの方が以前のバージョンより高い値になります。 たとえば、.NET Core 2.1 では、コンパイルされた正規表現と享受を[スパン \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)からサポートするようになりました。 ASP.NET Core 2.2 では、HTTP/2 のサポートが追加されました。 [ASP.NET Core 3.0](xref:aspnetcore-3.0)では、メモリ使用量を減らし、スループットを向上させる多くの機能強化が加えられています。 パフォーマンスが優先される場合は、現在のバージョンの ASP.NET Core にアップグレードすることを検討してください。
 
 ## <a name="minimize-exceptions"></a>例外を最小化する
 
@@ -164,16 +166,16 @@ Application Insights などのアプリ診断ツールを使用すると、ア�
 
 ## <a name="avoid-synchronous-read-or-write-on-httprequesthttpresponse-body"></a>HttpRequest/Httpresponse.cache 本体で同期読み取りまたは書き込みを回避する
 
-ASP.NET Core の i/o はすべて非同期です。 サーバーは、 `Stream`同期と非同期の両方のオーバーロードを持つインターフェイスを実装します。 スレッドプールのスレッドがブロックされないようにするために、非同期のものを使用することをお勧めします。 ブロックしているスレッドは、スレッドプールの枯渇につながる可能性があります。
+ASP.NET Core の i/o はすべて非同期です。 サーバーは、 `Stream` 同期と非同期の両方のオーバーロードを持つインターフェイスを実装します。 スレッドプールのスレッドがブロックされないようにするために、非同期のものを使用することをお勧めします。 ブロックしているスレッドは、スレッドプールの枯渇につながる可能性があります。
 
-**この**操作は避けてください。次の例では<xref:System.IO.StreamReader.ReadToEnd*>、を使用します。 このメソッドは、現在のスレッドが結果を待機するのをブロックします。 非同期的な[同期](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**この**操作は避けてください。次の例では、を使用し <xref:System.IO.StreamReader.ReadToEnd*> ます。 このメソッドは、現在のスレッドが結果を待機するのをブロックします。 非同期的な[同期](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 )の例を次に示します。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet1)]
 
-上記のコードでは`Get` 、は、HTTP 要求の本体全体をメモリに同期的に読み取ります。 クライアントが低速でアップロードしている場合、アプリは非同期で同期を実行しています。 Kestrel では同期読み取りがサポート**されてい**ないため、アプリは非同期経由で同期します。
+上記のコードでは、は、 `Get` HTTP 要求の本体全体をメモリに同期的に読み取ります。 クライアントが低速でアップロードしている場合、アプリは非同期で同期を実行しています。 Kestrel では同期読み取りがサポート**されてい**ないため、アプリは非同期経由で同期します。
 
-次の**手順を実行します。** 次の例で<xref:System.IO.StreamReader.ReadToEndAsync*>は、を使用して、読み取り中にスレッドをブロックしません。
+次の**手順を実行します。** 次の例では、を使用して、 <xref:System.IO.StreamReader.ReadToEndAsync*> 読み取り中にスレッドをブロックしません。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet2)]
 
@@ -190,18 +192,18 @@ ASP.NET Core の i/o はすべて非同期です。 サーバーは、 `Stream`�
 
 ## <a name="prefer-readformasync-over-requestform"></a>要求で ReadFormAsync を優先します。フォーム
 
-`HttpContext.Request.ReadFormAsync` の代わりに `HttpContext.Request.Form` を使用します。
+`HttpContext.Request.ReadFormAsync` の代わりに `HttpContext.Request.Form`を使用します。
 `HttpContext.Request.Form`は、次の条件で安全に読み取ることができます。
 
-* フォームは`ReadFormAsync`、の呼び出しによって読み取られました。
+* フォームは、の呼び出しによって読み取られました。 `ReadFormAsync`
 * キャッシュされたフォーム値はを使用して読み取られています`HttpContext.Request.Form`
 
-**この**操作は避けてください。次の例で`HttpContext.Request.Form`は、を使用します。  `HttpContext.Request.Form`[非同期の同期](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+**この**操作は避けてください。次の例では、 `HttpContext.Request.Form` を使用します。  `HttpContext.Request.Form`[非同期の同期](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 )を使用し、スレッドプールの枯渇につながる可能性があります。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
 
-次の**手順を実行します。** 次の例で`HttpContext.Request.ReadFormAsync`は、を使用してフォーム本文を非同期に読み取ります。
+次の**手順を実行します。** 次の例では、を使用して `HttpContext.Request.ReadFormAsync` フォーム本文を非同期に読み取ります。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet2)]
 
@@ -218,7 +220,7 @@ ASP.NET Core の i/o はすべて非同期です。 サーバーは、 `Stream`�
 
 > ラージオブジェクトが割り当てられると、ジェネレーション2のオブジェクトとしてマークされます。 小さいオブジェクトの場合は Gen 0 として生成されません。 結果として、LOH でメモリが不足していると、LOH だけでなく、マネージヒープ全体が GC によってクリーンアップされます。 そのため、LOH を含む Gen 0、Gen 1、Gen 2 をクリーンアップします。 これはフルガベージコレクションと呼ばれ、最も時間のかかるガベージコレクションです。 多くのアプリケーションでは、許容される可能性があります。 しかし、高パフォーマンスの web サーバーでは、平均的な web 要求を処理するために大量のメモリバッファーが必要になることはありません (ソケットからの読み取り、圧縮解除、JSON & のデコードなど)。
 
-大規模な要求または応答の本文を 1 `byte[]`つ`string`のまたはに格納するネイティブ:
+大規模な要求または応答の本文を1つのまたはに格納するネイティブ `byte[]` `string` :
 
 * LOH の領域がすぐに不足する可能性があります。
 * 完全な Gc が実行されているため、アプリのパフォーマンスの問題が発生する可能性があります。
@@ -232,7 +234,7 @@ ASP.NET Core の i/o はすべて非同期です。 サーバーは、 `Stream`�
 > [!WARNING]
 > 要求が大きい場合、メモリ不足 (OOM) 状態になる可能性があります。 OOM を使用すると、サービス拒否が発生する可能性があります。  詳細については、このドキュメントの「[大きな要求本文または応答本文をメモリに読み込む](#arlb)ことを避ける」を参照してください。
 
-ASP.NET Core 3.0 は<xref:System.Text.Json> 、JSON のシリアル化に既定でを使用します。 <xref:System.Text.Json>:
+ASP.NET Core 3.0 は <xref:System.Text.Json> 、JSON のシリアル化に既定でを使用します。 <xref:System.Text.Json>:
 
 * 非同期で JSON の読み取りと書き込みを行います。
 * UTF-8 テキスト用に最適化されています。
@@ -240,24 +242,24 @@ ASP.NET Core 3.0 は<xref:System.Text.Json> 、JSON のシリアル化に既定�
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>フィールドに IHttpContextAccessor を格納しない
 
-[IHttpContextAccessor](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)は、要求スレッドから`HttpContext`アクセスされたときに、アクティブな要求のを返します。 `IHttpContextAccessor.HttpContext`をフィールドまたは変数に格納することはでき**ません**。
+[IHttpContextAccessor](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)は、 `HttpContext` 要求スレッドからアクセスされたときに、アクティブな要求のを返します。 を `IHttpContextAccessor.HttpContext` フィールドまたは変数に格納することはでき**ません**。
 
-**この**操作は避けてください。次の例では`HttpContext` 、をフィールドに格納し、後でそれを使用しようとします。
+**この**操作は避けてください。次の例では、を `HttpContext` フィールドに格納し、後でそれを使用しようとします。
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet1)]
 
-上記のコードでは、コンストラクター内で`HttpContext` null または正しくないが頻繁にキャプチャされます。
+上記のコードでは、コンストラクター内で null または正しくないが頻繁にキャプチャされ `HttpContext` ます。
 
 次の**手順を実行します。** 次に例を示します。
 
-* をフィールド<xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>に格納します。
-* は、 `HttpContext`正しい時刻にフィールドを使用し、 `null`をチェックします。
+* を <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> フィールドに格納します。
+* は、 `HttpContext` 正しい時刻にフィールドを使用し、をチェックし `null` ます。
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet2)]
 
 ## <a name="do-not-access-httpcontext-from-multiple-threads"></a>複数のスレッドから HttpContext にアクセスしない
 
-`HttpContext`はスレッドセーフでは*ありません*。 複数`HttpContext`のスレッドから同時にアクセスすると、ハング、クラッシュ、データ破損などの未定義の動作が発生する可能性があります。
+`HttpContext`はスレッドセーフでは*ありません*。 `HttpContext`複数のスレッドから同時にアクセスすると、ハング、クラッシュ、データ破損などの未定義の動作が発生する可能性があります。
 
 **この**操作は避けてください。次の例では、3つの並列要求を行い、発信 HTTP 要求の前後に受信要求パスをログに記録します。 要求パスは、複数のスレッドから同時にアクセスされる可能性があります。
 
@@ -269,26 +271,26 @@ ASP.NET Core 3.0 は<xref:System.Text.Json> 、JSON のシリアル化に既定�
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>要求の完了後に HttpContext を使用しない
 
-`HttpContext`は、ASP.NET Core パイプラインにアクティブな HTTP 要求がある限り有効です。 ASP.NET Core パイプライン全体は、すべての要求を実行するデリゲートの非同期チェーンです。 このチェーン`Task`から返されたが完了する`HttpContext`と、がリサイクルされます。
+`HttpContext`は、ASP.NET Core パイプラインにアクティブな HTTP 要求がある限り有効です。 ASP.NET Core パイプライン全体は、すべての要求を実行するデリゲートの非同期チェーンです。 `Task`このチェーンから返されたが完了すると、 `HttpContext` がリサイクルされます。
 
-**この**操作は避けてください。次の例で`async void`は、最初`await`のに到達したときに HTTP 要求が完了するように、を使用しています。
+**この**操作は避けてください。次の例では、 `async void` 最初のに到達したときに HTTP 要求が完了するように、を使用して `await` います。
 
 * これは、ASP.NET Core アプリでは**常**に不適切な方法です。
-* HTTP 要求`HttpResponse`が完了した後に、にアクセスします。
+* `HttpResponse`HTTP 要求が完了した後に、にアクセスします。
 * プロセスをクラッシュさせる。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncBadVoidController.cs?name=snippet1)]
 
-次の**手順を実行します。** 次の例では`Task` 、をフレームワークに返します。そのため、アクションが完了するまで HTTP 要求は完了しません。
+次の**手順を実行します。** 次の例では、を `Task` フレームワークに返します。そのため、アクションが完了するまで HTTP 要求は完了しません。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncSecondController.cs?name=snippet1)]
 
 ## <a name="do-not-capture-the-httpcontext-in-background-threads"></a>バックグラウンドスレッドで HttpContext をキャプチャしない
 
-**この**操作は避けてください。次の例は、 `HttpContext` `Controller`プロパティからをキャプチャしていることを示しています。 作業項目は次のようになる可能性があるため、この方法は不適切です。
+**この**操作は避けてください。次の例は、プロパティからをキャプチャしていることを示してい `HttpContext` `Controller` ます。 作業項目は次のようになる可能性があるため、この方法は不適切です。
 
 * 要求スコープの外部で実行します。
-* 間違っ`HttpContext`たを読み取ろうとしました。
+* 間違ったを読み取ろうとしました `HttpContext` 。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetFirstController.cs?name=snippet1)]
 
@@ -303,23 +305,23 @@ ASP.NET Core 3.0 は<xref:System.Text.Json> 、JSON のシリアル化に既定�
 
 ## <a name="do-not-capture-services-injected-into-the-controllers-on-background-threads"></a>バックグラウンドスレッドでコントローラーに挿入されたサービスをキャプチャしない
 
-**この**操作は避けてください。次の例は、 `DbContext` `Controller`アクションパラメーターからをキャプチャすることを示しています。 これは不適切な方法です。  この作業項目は、要求スコープの外部で実行される可能性があります。 は`ContosoDbContext`要求に対してスコープが設定され`ObjectDisposedException`、結果としてが生成されます。
+**この**操作は避けてください。次の例は、アクションパラメーターからをキャプチャすることを示してい `DbContext` `Controller` ます。 これは不適切な方法です。  この作業項目は、要求スコープの外部で実行される可能性があります。 は `ContosoDbContext` 要求に対してスコープが設定され、結果としてが生成され `ObjectDisposedException` ます。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet1)]
 
 次の**手順を実行します。** 次に例を示します。
 
-* バックグラウンド作業<xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>項目のスコープを作成するために、を挿入します。 `IServiceScopeFactory`はシングルトンです。
+* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>バックグラウンド作業項目のスコープを作成するために、を挿入します。 `IServiceScopeFactory`はシングルトンです。
 * バックグラウンドスレッドで新しい依存関係挿入スコープを作成します。
 * コントローラーから何も参照していません。
-* は、受信`ContosoDbContext`要求からをキャプチャしません。
+* は、受信要求からをキャプチャしません `ContosoDbContext` 。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2)]
 
 次の強調表示されたコード。
 
 * バックグラウンド操作の有効期間のスコープを作成し、そこからサービスを解決します。
-* は`ContosoDbContext` 、正しいスコープからを使用します。
+* は `ContosoDbContext` 、正しいスコープからを使用します。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2&highlight=9-16)]
 
@@ -334,13 +336,13 @@ ASP.NET Core は、HTTP 応答の本文をバッファーしません。 最初�
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet1)]
 
-前のコードでは`context.Response.Headers["test"] = "test value";` 、が応答に書き込ま`next()`れた場合、は例外をスローします。
+前のコードでは、 `context.Response.Headers["test"] = "test value";` が応答に書き込まれた場合、は例外をスロー `next()` します。
 
 次の**手順を実行します。** 次の例では、ヘッダーを変更する前に、HTTP 応答が開始されたかどうかを確認します。
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet2)]
 
-次の**手順を実行します。** 次の例で`HttpResponse.OnStarting`は、を使用して、応答ヘッダーをクライアントにフラッシュする前にヘッダーを設定します。
+次の**手順を実行します。** 次の例では、を使用して、 `HttpResponse.OnStarting` 応答ヘッダーをクライアントにフラッシュする前にヘッダーを設定します。
 
 応答が開始されていないかどうかを確認すると、応答ヘッダーが書き込まれる直前に呼び出されるコールバックを登録できます。 応答が開始されていないかどうかを確認しています:
 

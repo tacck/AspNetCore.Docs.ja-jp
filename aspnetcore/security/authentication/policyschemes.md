@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: ddedf62c5e8363bd93c9948fd2d3418abc566539
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767318"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408761"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core のポリシースキーム
 
@@ -25,7 +27,7 @@ ms.locfileid: "82767318"
 * 任意の認証アクションを別のスキームに簡単に転送できます。
 * 要求に基づいて動的に転送します。
 
-派生<xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions>と関連付けられている[authenticationhandler\<TOptions](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)を使用するすべての認証方式は、次の>ます。
+派生 <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> と関連付けられた[ \<TOptions> authenticationhandler](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)を使用するすべての認証方式:
 
 * は、2.1 以降の ASP.NET Core で自動的にポリシースキームになります。
 * は、スキームのオプションを構成することによって有効にすることができます。

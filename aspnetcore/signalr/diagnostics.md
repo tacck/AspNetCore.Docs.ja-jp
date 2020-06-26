@@ -8,17 +8,19 @@ ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102946"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409099"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core でのログ記録と診断SignalR
 
@@ -111,7 +113,7 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 
 .NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。 これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。 ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。 ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。
 
-Webassembly に .NET クライアントのログ記録を追加する方法に Blazor ついては、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。
+.NET クライアントのログ記録をアプリに追加するに Blazor WebAssembly は、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。
 
 ### <a name="console-logging"></a>[コンソールのログ記録]
 
@@ -220,7 +222,7 @@ GitHub の問題に診断ファイルを添付するには、名前を変更し�
 
 SignalRサーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。
 
-| 名前                    | 説明                 |
+| 名前                    | [説明]                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 開始された接続の合計   |
 | `connections-stopped`   | 停止した接続の合計数   |
@@ -245,7 +247,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

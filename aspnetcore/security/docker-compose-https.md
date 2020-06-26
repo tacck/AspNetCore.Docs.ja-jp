@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 533d86fb17e3c89fdca59685b090645a11ba5473
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b282af3b9c657bda4432f0d60f100f65fa7cbae9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775142"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408618"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>HTTPS 経由の Docker Compose を使用した ASP.NET Core イメージのホスト
 
@@ -31,7 +33,7 @@ ms.locfileid: "82775142"
 
 このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce)以降の[docker クライアント](https://www.docker.com/products/docker)が必要です。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>必須コンポーネント
 
 このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download)以降が必要です。
 
@@ -39,14 +41,14 @@ ms.locfileid: "82775142"
 
 ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。 [Let's Encrypt](https://letsencrypt.org/)は、無料の証明書を提供する証明機関です。
 
-このドキュメントでは、事前に構築さ`localhost`れたイメージをホストするために[自己署名の開発証明書](https://wikipedia.org/wiki/Self-signed_certificate)を使用します。 手順は、実稼働証明書の使用に似ています。
+このドキュメントでは、事前に構築されたイメージをホストするために[自己署名の開発証明書](https://wikipedia.org/wiki/Self-signed_certificate)を使用 `localhost` します。 手順は、実稼働証明書の使用に似ています。
 
 実稼働証明書の場合:
 
 * `dotnet dev-certs`ツールは必要ありません。
 * 手順で使用した場所に証明書を保存する必要はありません。 サイトディレクトリの外部にある任意の場所に証明書を格納します。
 
-次のセクションに記載されている手順では、 `volumes` *docker-compose.yml*のプロパティを使用して、証明書をコンテナーにマウントします。 `COPY` *Dockerfile*でコマンドを使用してコンテナーイメージに証明書を追加することもできますが、この方法はお勧めしません。 証明書をイメージにコピーすることは、次の理由から推奨されません。
+次のセクションに記載されている手順では、 `volumes` *docker-compose.yml*のプロパティを使用して、証明書をコンテナーにマウントします。 Dockerfile でコマンドを使用してコンテナーイメージに証明書を追加することもでき `COPY` ますが、この方法はお勧めしません。 *Dockerfile* 証明書をイメージにコピーすることは、次の理由から推奨されません。
 
 * これにより、開発者証明書でのテストに同じイメージを使用することが難しくなります。
 * これにより、運用証明書でのホストに同じイメージを使用することが難しくなります。
@@ -65,7 +67,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-上記のコマンドで、を`{ password here }`パスワードに置き換えます。
+上記のコマンドで、を `{ password here }` パスワードに置き換えます。
 
 次の内容を含む_docker-compose.yml_ファイルを作成します。
 
@@ -105,7 +107,7 @@ dotnet dev-certs https --trust
 
 `dotnet dev-certs https --trust`は、macOS と Windows でのみサポートされています。 ディストリビューションでサポートされている方法で Linux 上の証明書を信頼する必要があります。 ブラウザーで証明書を信頼する必要があると考えられます。
 
-上記のコマンドで、を`{ password here }`パスワードに置き換えます。
+上記のコマンドで、を `{ password here }` パスワードに置き換えます。
 
 次の内容を含む_docker-compose.yml_ファイルを作成します。
 
@@ -143,7 +145,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-上記のコマンドで、を`{ password here }`パスワードに置き換えます。
+上記のコマンドで、を `{ password here }` パスワードに置き換えます。
 
 次の内容を含む_docker-compose.yml_ファイルを作成します。
 

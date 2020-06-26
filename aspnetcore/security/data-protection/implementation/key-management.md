@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 68913d13c97ba6be73dabf79e03c146a37388ad3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776904"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408943"
 ---
 # <a name="key-management-in-aspnet-core"></a>ASP.NET Core でのキー管理
 
@@ -65,7 +67,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-また、管理者は既定のシステム全体を変更することもできます`SetDefaultKeyLifetime` 。ただし、の明示的な呼び出しでは、システム全体のポリシーがオーバーライドされます。 既定のキーの有効期間を7日より短くすることはできません。
+また、管理者は既定のシステム全体を変更することもできます。ただし、の明示的な呼び出しで `SetDefaultKeyLifetime` は、システム全体のポリシーがオーバーライドされます。 既定のキーの有効期間を7日より短くすることはできません。
 
 ## <a name="automatic-key-ring-refresh"></a>キーリングの自動更新
 
@@ -74,11 +76,11 @@ services.AddDataProtection()
 >[!WARNING]
 > 開発者は、キー管理 Api を直接使用する必要はほとんどありません (これがある場合)。 データ保護システムは、前述のように自動キー管理を実行します。
 
-データ保護システムは、キーリング`IKeyManager`の検査と変更を行うために使用できるインターフェイスを公開します。 の`IDataProtectionProvider`インスタンスを提供した DI システムでは、の`IKeyManager`インスタンスを使用することもできます。 または、次の例`IKeyManager`のように`IServiceProvider` 、から直接をプルすることもできます。
+データ保護システムは、 `IKeyManager` キーリングの検査と変更を行うために使用できるインターフェイスを公開します。 のインスタンスを提供した DI システムでは、のインスタンスを使用する `IDataProtectionProvider` こともでき `IKeyManager` ます。 または、 `IKeyManager` 次の例のように、から直接をプルすることもでき `IServiceProvider` ます。
 
-キーリングを変更する操作 (新しいキーを明示的に作成するか、または失効を実行する) は、メモリ内キャッシュを無効にします。 次にまたは`Protect` `Unprotect`を呼び出すと、データ保護システムがキーリングを再度読み込み、キャッシュを再作成します。
+キーリングを変更する操作 (新しいキーを明示的に作成するか、または失効を実行する) は、メモリ内キャッシュを無効にします。 次にまたはを呼び出すと、 `Protect` `Unprotect` データ保護システムがキーリングを再度読み込み、キャッシュを再作成します。
 
-次のサンプルでは、 `IKeyManager`インターフェイスを使用して、キーリングを検査および操作します。これには、既存のキーの取り消しや、新しいキーの手動生成が含まれます。
+次のサンプルでは、インターフェイスを使用して、 `IKeyManager` キーリングを検査および操作します。これには、既存のキーの取り消しや、新しいキーの手動生成が含まれます。
 
 [!code-csharp[](key-management/samples/key-management.cs)]
 

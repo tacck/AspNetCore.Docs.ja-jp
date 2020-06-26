@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 7923a81e72124cfb0e11e3c1ac327c1e32194b21
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5b74205bc7b17d61edbb73cf309f6e24e4318391
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776501"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409008"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core のクライアント IP セーフセーフ
 
@@ -28,7 +30,7 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 * ミドルウェアを使用して、すべての要求のリモート IP アドレスを確認します。
 * 特定のコントローラーまたはアクションメソッドに対する要求のリモート IP アドレスを確認するための MVC アクションフィルター。
-* Razorページフィルターを使用して、ページのRazor要求のリモート IP アドレスを確認します。
+* Razorページフィルターを使用して、ページの要求のリモート IP アドレスを確認し Razor ます。
 
 どちらの場合も、承認済みのクライアント IP アドレスを含む文字列は、アプリ設定に格納されます。 ミドルウェアまたはフィルター:
 
@@ -43,16 +45,16 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 サンプルアプリでは、IP アドレスのセーフセーフは次のとおりです。
 
-* Appsettings ファイルの`AdminSafeList`プロパティによっ*appsettings.json*て定義されます。
+* ファイルのappsettings.jsのプロパティによって定義され `AdminSafeList` ます。 *appsettings.json*
 * [インターネットプロトコルバージョン 4 (IPv4)](https://wikipedia.org/wiki/IPv4)と[インターネットプロトコルバージョン 6 (IPv6)](https://wikipedia.org/wiki/IPv6)の両方のアドレスを含むことができる、セミコロンで区切られた文字列。
 
 [!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
 
-前の例では`127.0.0.1` 、および`192.168.1.5`の IPv4 アドレスと、(の`::1` `0:0:0:0:0:0:0:1`圧縮形式) の IPv6 ループバックアドレスが許可されています。
+前の例では、およびの IPv4 アドレスと、 `127.0.0.1` `192.168.1.5` `::1` (の圧縮形式) の IPv6 ループバックアドレスが許可されてい `0:0:0:0:0:0:0:1` ます。
 
 ## <a name="middleware"></a>ミドルウェア
 
-メソッド`Startup.Configure`は、カスタム`AdminSafeListMiddleware`ミドルウェア型をアプリの要求パイプラインに追加します。 セーフセーフは、.NET Core 構成プロバイダーを使用して取得され、コンストラクターパラメーターとして渡されます。
+メソッドは、 `Startup.Configure` カスタム `AdminSafeListMiddleware` ミドルウェア型をアプリの要求パイプラインに追加します。 セーフセーフは、.NET Core 構成プロバイダーを使用して取得され、コンストラクターパラメーターとして渡されます。
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Startup.cs?name=snippet_ConfigureAddMiddleware)]
 
@@ -66,7 +68,7 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
-で`Startup.ConfigureServices`、アクションフィルターを MVC フィルターコレクションに追加します。 次の例では、 `ClientIpCheckActionFilter`アクションフィルターを追加します。 セーフセーフとコンソールロガーインスタンスは、コンストラクターパラメーターとして渡されます。
+で `Startup.ConfigureServices` 、アクションフィルターを MVC フィルターコレクションに追加します。 次の例では、 `ClientIpCheckActionFilter` アクションフィルターを追加します。 セーフセーフとコンソールロガーインスタンスは、コンストラクターパラメーターとして渡されます。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -84,9 +86,9 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Controllers/ValuesController.cs?name=snippet_ActionFilter&highlight=1)]
 
-サンプルアプリでは、アクションフィルターがコントローラーの`Get`アクションメソッドに適用されます。 以下を送信してアプリをテストする場合:
+サンプルアプリでは、アクションフィルターがコントローラーのアクションメソッドに適用され `Get` ます。 以下を送信してアプリをテストする場合:
 
-* HTTP GET 要求では、 `[ServiceFilter]`属性によってクライアントの IP アドレスが検証されます。 `Get`アクションメソッドへのアクセスが許可されている場合、次のコンソール出力のバリエーションがアクションフィルターとアクションメソッドによって生成されます。
+* HTTP GET 要求では、 `[ServiceFilter]` 属性によってクライアントの IP アドレスが検証されます。 アクションメソッドへのアクセスが許可されている場合 `Get` 、次のコンソール出力のバリエーションがアクションフィルターとアクションメソッドによって生成されます。
 
     ```
     dbug: ClientIpSafelistComponents.Filters.ClientIpCheckActionFilter[0]
@@ -95,15 +97,15 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
           successful HTTP GET    
     ```
 
-* GET `AdminSafeListMiddleware`以外の HTTP 要求動詞は、クライアントの IP アドレスを検証します。
+* GET 以外の HTTP 要求動詞は、 `AdminSafeListMiddleware` クライアントの IP アドレスを検証します。
 
 ## <a name="razor-pages-filter"></a>Razorページフィルター
 
-Razorページアプリに対してセーフデマンドによるアクセス制御が必要な場合Razorは、ページフィルターを使用します。 次に例を示します。
+ページアプリに対してセーフデマンドによるアクセス制御が必要な場合は Razor 、ページフィルターを使用し Razor ます。 次に例を示します。
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
-で`Startup.ConfigureServices`、MVC フィルター Razorコレクションに追加してページフィルターを有効にします。 次の例では、 `ClientIpCheckPageFilter` Razorページフィルターが追加されています。 セーフセーフとコンソールロガーインスタンスは、コンストラクターパラメーターとして渡されます。
+で `Startup.ConfigureServices` 、 Razor MVC フィルターコレクションに追加してページフィルターを有効にします。 次の例では、 `ClientIpCheckPageFilter` Razor ページフィルターが追加されています。 セーフセーフとコンソールロガーインスタンスは、コンストラクターパラメーターとして渡されます。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -117,14 +119,14 @@ Razorページアプリに対してセーフデマンドによるアクセス制
 
 ::: moniker-end
 
-サンプルアプリの*インデックス* Razorページが要求されると、 Razorページフィルターによってクライアントの IP アドレスが検証されます。 フィルターによって、次のようなコンソール出力のバリエーションが生成されます。
+サンプルアプリの*インデックス* Razor ページが要求されると、ページフィルターによって Razor クライアントの IP アドレスが検証されます。 フィルターによって、次のようなコンソール出力のバリエーションが生成されます。
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]
       Remote IpAddress: ::1
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/middleware/index>
 * [アクション フィルター](xref:mvc/controllers/filters#action-filters)

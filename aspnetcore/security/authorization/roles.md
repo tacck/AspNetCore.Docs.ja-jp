@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 01d4239377b128f711a110a821e1afea58ca14a7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5d2ea6b9be0c993d62fa75fb8b471b5923747bac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776540"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407864"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core でのロールベースの承認
 
@@ -26,9 +28,9 @@ Id が作成されると、1つまたは複数のロールに属することが�
 
 ## <a name="adding-role-checks"></a>ロールチェックの追加
 
-ロールベースの承認チェックは宣言&mdash;型です。開発者は、コントローラーまたはコントローラー内のアクションに対してコード内にそれらを埋め込み、要求されたリソースにアクセスするために、現在のユーザーがメンバーである必要があるロールを指定します。
+ロールベースの承認チェックは宣言型です &mdash; 。開発者は、コントローラーまたはコントローラー内のアクションに対してコード内にそれらを埋め込み、要求されたリソースにアクセスするために、現在のユーザーがメンバーである必要があるロールを指定します。
 
-たとえば、次のコードは、のアクションへのアクセスを`AdministrationController` 、 `Administrator`ロールのメンバーであるユーザーに制限します。
+たとえば、次のコードは、のアクションへのアクセスを、 `AdministrationController` ロールのメンバーであるユーザーに制限し `Administrator` ます。
 
 ```csharp
 [Authorize(Roles = "Administrator")]
@@ -46,9 +48,9 @@ public class SalaryController : Controller
 }
 ```
 
-このコントローラーにアクセスできるのは、 `HRManager`ロールまたは`Finance`ロールのメンバーであるユーザーだけです。
+このコントローラーにアクセスできるのは、ロールまたはロールのメンバーであるユーザーだけ `HRManager` `Finance` です。
 
-複数の属性を適用する場合、アクセスするユーザーは、指定されたすべてのロールのメンバーである必要があります。次の例では、ユーザーが`PowerUser`と`ControlPanelUser`の両方のロールのメンバーである必要があります。
+複数の属性を適用する場合、アクセスするユーザーは、指定されたすべてのロールのメンバーである必要があります。次の例では、ユーザーがとの両方のロールのメンバーである必要があり `PowerUser` `ControlPanelUser` ます。
 
 ```csharp
 [Authorize(Roles = "PowerUser")]
@@ -75,7 +77,7 @@ public class ControlPanelController : Controller
 }
 ```
 
-前のコードスニペットでは、 `Administrator`ロールのメンバー、 `PowerUser`またはロールはコントローラーと`SetTime`アクションにアクセスできますが、ロール`Administrator`のメンバーだけが`ShutDown`アクションにアクセスできます。
+前のコードスニペットでは、ロールのメンバー、 `Administrator` または `PowerUser` ロールはコントローラーとアクションにアクセスできますが、ロール `SetTime` のメンバーだけが `Administrator` アクションにアクセスでき `ShutDown` ます。
 
 コントローラーをロックダウンすることもできますが、個々のアクションへの認証されていない匿名アクセスが許可されます。
 
@@ -96,10 +98,10 @@ public class ControlPanelController : Controller
 
 ::: moniker range=">= aspnetcore-2.0"
 
-ページRazorの場合、 `AuthorizeAttribute`は次のいずれかの方法で適用できます。
+ページの場合 Razor 、は `AuthorizeAttribute` 次のいずれかの方法で適用できます。
 
 * [規則](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)の使用、または
-* を`PageModel`インスタンス`AuthorizeAttribute`に適用します。
+* `AuthorizeAttribute`をインスタンスに適用し `PageModel` ます。
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -112,7 +114,7 @@ public class UpdateModel : PageModel
 ```
 
 > [!IMPORTANT]
-> フィルター属性 (を`AuthorizeAttribute`含む) は、PageModel にのみ適用でき、特定のページハンドラーメソッドには適用できません。
+> フィルター属性 (を含む) は `AuthorizeAttribute` 、PageModel にのみ適用でき、特定のページハンドラーメソッドには適用できません。
 ::: moniker-end
 
 <a name="security-authorization-role-policy"></a>
@@ -152,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 ::: moniker-end
 
-ポリシーは、 `AuthorizeAttribute`属性の`Policy`プロパティを使用して適用されます。
+ポリシーは、属性のプロパティを使用して適用され `Policy` `AuthorizeAttribute` ます。
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -162,14 +164,14 @@ public IActionResult Shutdown()
 }
 ```
 
-要件に複数の許可されたロールを指定する場合は、メソッドの`RequireRole`パラメーターとして指定できます。
+要件に複数の許可されたロールを指定する場合は、メソッドのパラメーターとして指定でき `RequireRole` ます。
 
 ```csharp
 options.AddPolicy("ElevatedRights", policy =>
                   policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
 ```
 
-この例では、、、 `Administrator` `PowerUser`または`BackupAdministrator`ロールに属しているユーザーを承認します。
+この例 `Administrator` では、、、またはロールに属しているユーザーを承認 `PowerUser` `BackupAdministrator` します。
 
 ### <a name="add-role-services-to-identity"></a>役割サービスの追加先Identity
 

@@ -1,83 +1,91 @@
 ---
-title: SignalR の API の設計に関する考慮事項
+title: SignalRAPI の設計に関する考慮事項
 author: anurse
-description: アプリのバージョン間で互換性のための SignalR の Api を設計する方法について説明します。
+description: SignalRアプリのバージョン間の互換性を確保するために api をデザインする方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 11/06/2018
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 3f17bf055b793e8fc91fbcc15f668928ca261f77
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9ad8d30da552d3d3084534b8c7ca57386ad111ac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897809"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407799"
 ---
-# <a name="signalr-api-design-considerations"></a>SignalR の API の設計に関する考慮事項
+# <a name="signalr-api-design-considerations"></a>SignalRAPI の設計に関する考慮事項
 
-作成者: [Andrew Stanton-Nurse](https://twitter.com/anurse)
+By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
-この記事では、SignalR ベースの API を構築するためのガイダンスを提供します。
+この記事では、ベースの Api を構築するためのガイダンスを提供 SignalR します。
 
-## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>カスタム オブジェクトのパラメーターを使用して、下位互換性を確保するには
+## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>カスタムオブジェクトパラメーターを使用して下位互換性を確保する
 
-(クライアントまたはサーバー上の) SignalR ハブ メソッドにパラメーターの追加することは、 *互換性に影響がある変更* です。 これは、適切な数のパラメーターのないメソッドを呼び出そうとすると、以前のクライアント/サーバーはエラーが発生することを意味します。 ただし、カスタムオブジェクトのパラメーターにプロパティを追加することは互換性に影響が**ありません**。 クライアントまたはサーバー上の変更に対応する互換性のある API を設計するために使用できます。
+SignalRクライアントまたはサーバー上のハブメソッドにパラメーターを追加することは、*互換性に影響する変更*点です。 これは、適切な数のパラメーターを指定せずにメソッドを呼び出そうとすると、古いクライアントまたはサーバーがエラーを受け取ることを意味します。 ただし、カスタムオブジェクトパラメーターにプロパティを追加することは、互換性に影響する変更点では**ありません**。 これは、クライアントまたはサーバーでの変更に対して回復力のある互換性のある Api を設計するために使用できます。
 
-たとえば、次のようにサーバー側 API があるとします。
+たとえば、次のようなサーバー側 API を考えてみます。
 
 [!code-csharp[ParameterBasedOldVersion](api-design/sample/Samples.cs?name=ParameterBasedOldVersion)]
 
-JavaScript クライアントは、このメソッドを使用してを呼び出す`invoke`次のようにします。
+JavaScript クライアントは、次のようにを使用してこのメソッドを呼び出し `invoke` ます。
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-後でサーバー メソッドに 2 番目のパラメーターを追加する場合、古いクライアントは、このパラメーターの値を指定しません。 例:
+後でサーバーメソッドに2番目のパラメーターを追加した場合、古いクライアントはこのパラメーター値を提供しません。 次に例を示します。
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 
-古いクライアントがこのメソッドを呼び出す際は、このようなエラーが表示されます。
+古いクライアントがこのメソッドを呼び出そうとすると、次のようなエラーが表示されます。
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
-サーバーでは、このようなログ メッセージが表示されます。
+サーバーでは、次のようなログメッセージが表示されます。
 
 ```
 System.IO.InvalidDataException: Invocation provides 1 argument(s) but target expects 2.
 ```
 
-古いクライアントでは、1 つのパラメーターのみ送信されますが、新しいサーバー API には 2 つのパラメーターが必要です。 カスタム オブジェクトをパラメーターとして使用すると柔軟性が向上します。 カスタム オブジェクトを使用して元の API のデザインを変更しましょう。
+古いクライアントは1つのパラメーターのみを送信しましたが、新しいサーバー API では2つのパラメーターが必要でした。 カスタムオブジェクトをパラメーターとして使用すると、柔軟性が向上します。 カスタムオブジェクトを使用するように元の API を再設計してみましょう。
 
 [!code-csharp[ObjectBasedOldVersion](api-design/sample/Samples.cs?name=ObjectBasedOldVersion)]
 
-ここで、クライアントはメソッドの呼び出しにオブジェクトを使用します。
+次に、クライアントはオブジェクトを使用してメソッドを呼び出します。
 
 [!code-typescript[CallWithObject](api-design/sample/Samples.ts?name=CallWithObject)]
 
-パラメーターを追加する代わりに、`TotalLengthRequest` オブジェクトにプロパティを追加します。
+パラメーターを追加するのではなく、オブジェクトにプロパティを追加し `TotalLengthRequest` ます。
 
 [!code-csharp[ObjectBasedNewVersion](api-design/sample/Samples.cs?name=ObjectBasedNewVersion&highlight=4,9-13)]
 
-古いクライアントが 1 つのパラメーターを送信するときは、`Param2` プロパティは `null` になります。 `Param2` が `null` であることをチェックして古いクライアントから送信されたメッセージであることを検出し、既定値を適用することができます。 新しいクライアントは、両方のパラメーターを送信できます。
+古いクライアントが1つのパラメーターを送信した場合、余分な `Param2` プロパティは残され `null` ます。 古いクライアントによって送信されたメッセージを検出するには、で `Param2` を確認 `null` し、既定値を適用します。 新しいクライアントは、両方のパラメーターを送信できます。
 
 [!code-typescript[CallWithObjectNew](api-design/sample/Samples.ts?name=CallWithObjectNew)]
 
-同じ手法では、クライアントで定義されているメソッドに対して機能します。 サーバー側からは、カスタム オブジェクトを送信できます。
+クライアントで定義されているメソッドでも、同じ手法が機能します。 サーバー側からカスタムオブジェクトを送信することができます。
 
 [!code-csharp[ClientSideObjectBasedOld](api-design/sample/Samples.cs?name=ClientSideObjectBasedOld)]
 
-クライアント側では、`Message` パラメーターを使用するのではなく、プロパティにアクセスします。
+クライアント側では、パラメーターを使用するの `Message` ではなく、プロパティにアクセスします。
 
 [!code-typescript[OnWithObjectOld](api-design/sample/Samples.ts?name=OnWithObjectOld)]
 
-後からメッセージ送信者をペイロードに追加する場合は、オブジェクトにプロパティを追加します。
+後でメッセージの送信者をペイロードに追加する場合は、オブジェクトにプロパティを追加します。
 
 [!code-csharp[ClientSideObjectBasedNew](api-design/sample/Samples.cs?name=ClientSideObjectBasedNew&highlight=5)]
 
-古いクライアントには `Sender` 値が必要ないためそれを無視します。 新しいクライアントは新しいプロパティを読み取るために更新して、それを受け取ることができます。
+古いクライアントは値を予期して `Sender` いないため、無視されます。 新しいクライアントは、を更新して新しいプロパティを読み取ることでそれを受け入れることができます。
 
 [!code-typescript[OnWithObjectNew](api-design/sample/Samples.ts?name=OnWithObjectNew&highlight=2-5)]
 
-この場合は、新しいクライアントは `Sender` の値を提供しない古いサーバーに対してトレラントです。 古いサーバーは `Sender` の値を提供しないため、クライアントはアクセスする前に存在するかどうかを確認します。
+この場合、新しいクライアントは、値を提供しない古いサーバーも許容され `Sender` ます。 古いサーバーでは値が提供されないため `Sender` 、クライアントは、アクセスする前に存在するかどうかを確認します。

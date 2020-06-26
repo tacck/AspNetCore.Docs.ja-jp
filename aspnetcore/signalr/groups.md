@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: dfa989654069bc85f0a936751dbabe384c63e917
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "83549999"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408514"
 ---
 # <a name="manage-users-and-groups-in-signalr"></a>でのユーザーとグループの管理SignalR
 
@@ -26,7 +28,7 @@ ms.locfileid: "83549999"
 
 SignalR特定のユーザーに関連付けられているすべての接続、および名前付きの接続グループにメッセージを送信できるようにします。
 
-[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
+[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
 ## <a name="users-in-signalr"></a>のユーザーSignalR
 

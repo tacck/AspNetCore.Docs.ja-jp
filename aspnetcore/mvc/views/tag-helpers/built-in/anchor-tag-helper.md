@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af0f07a0f50a79f25b6a14459402f9dd8b59dae2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773966"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408254"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core のアンカー タグ ヘルパー
 
@@ -145,7 +147,7 @@ MVC ビューは、次のように、アクションによって提供される�
 
 [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 属性は、キー/値ペアのディクショナリの作成をサポートします。 キーはパラメーターの名前で、値はパラメーターの値です。
 
-次の例では、ディクショナリが初期化され、 Razorビューに渡されます。 データがモデルによって渡される場合もあります。
+次の例では、ディクショナリが初期化され、ビューに渡され Razor ます。 データがモデルによって渡される場合もあります。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -179,7 +181,7 @@ MVC ビューは、次のように、アクションによって提供される�
 
 [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 属性は、適切なルートの設定に使用する領域名を設定します。 `asp-area` 属性によってどのようにルートの再マップが行われるかの例を以下に示します。
 
-#### <a name="usage-in-razor-pages"></a>使用 ( Razorページで)
+#### <a name="usage-in-razor-pages"></a>使用 ( Razor ページで)
 
 Razorページ領域は ASP.NET Core 2.1 以降でサポートされています。
 
@@ -189,13 +191,13 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
   * **wwwroot**
   * **領域**
     * **セッション**
-      * **トピック**
+      * **ページ**
         * *\_ViewStart. cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
-  * **トピック**
+  * **ページ**
 
-[*セッション*領域の*インデックス* Razor ] ページを参照するマークアップは次のとおりです。
+[*セッション*領域の*インデックス*] ページを参照するマークアップ Razor は次のとおりです。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -206,7 +208,7 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
 ```
 
 > [!TIP]
-> Razor Pages アプリの領域をサポートするには、で`Startup.ConfigureServices`次のいずれかの操作を行います。
+> Pages アプリの領域をサポートするには Razor 、で次のいずれかの操作を行い `Startup.ConfigureServices` ます。
 >
 > * [互換性バージョン](xref:mvc/compatibility-version)に 2.1 以降を設定します。
 > * [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) プロパティに `true` を設定します。
@@ -221,14 +223,14 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
   * **wwwroot**
   * **領域**
     * **ブログ**
-      * **Controllers**
+      * **コントローラー**
         * *HomeController.cs*
       * **ビュー**
         * **ホーム**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
         * *\_ViewStart. cshtml*
-  * **Controllers**
+  * **コントローラー**
 
 `asp-area` を [ブログ] に設定すると、このアンカー タグの関連付けられているコントローラーとビューのルートに、ディレクトリ *Areas/Blogs* のプレフィックスが付けられます。 *AboutBlog* ビューを参照するマークアップは次のとおりです。
 
@@ -273,9 +275,9 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
 
 ### <a name="asp-page"></a>asp-page
 
-[Asp ページ](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*)属性は、ページでRazor使用されます。 アンカー タグの `href` 属性の値を特定のページに設定するために使用します。 ページ名の前にスラッシュ "/" を付けると URL が作成されます。
+[Asp ページ](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*)属性は、ページで使用され Razor ます。 アンカー タグの `href` 属性の値を特定のページに設定するために使用します。 ページ名の前にスラッシュ "/" を付けると URL が作成されます。
 
-次の例では、出席者Razorページを参照しています。
+次の例では、出席者ページを参照してい Razor ます。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -297,7 +299,7 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-[Asp ページハンドラー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*)属性は、ページでRazor使用されます。 特定のページ ハンドラーへのリンクが目的です。
+[Asp ページハンドラー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*)属性は、ページで使用され Razor ます。 特定のページ ハンドラーへのリンクが目的です。
 
 次のページ ハンドラーがあるとします。
 
