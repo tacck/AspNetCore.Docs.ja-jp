@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 796d7da76da6723ea996b57510da9c45ab21b3e7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 79022af0e6ee1294e12c21492bc81bc40482a3fb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775922"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403964"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core のホストと展開
 
@@ -40,7 +42,7 @@ ms.locfileid: "82775922"
 
 .NET Core アプリは、*自己完結型展開*または*フレームワーク依存展開*として発行できます。 アプリが自己完結型の場合、.NET ランタイムを含むアセンブリ ファイルが *publish* フォルダーに含まれています。 アプリがフレームワークに依存する場合、.NET ランタイムのファイルは含まれていません。これは、サーバーにインストールされている .NET のバージョンへの参照がアプリに含まれていないためです。 既定の展開モデルはフレームワークに依存します。 詳細については、「[.NET Core アプリケーションの展開](/dotnet/core/deploying/)」を参照してください。
 
-*.exe* ファイルと *.dll* ファイルに加え、ASP.NET Core アプリの *publish* フォルダーには、通常、構成ファイル、静的アセット、および MVC ビューが含まれています。 詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。
+*.exe* ファイルと *.dll* ファイルに加え、ASP.NET Core アプリの *publish* フォルダーには、通常、構成ファイル、静的資産、および MVC ビューが含まれています。 詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。
 
 ## <a name="set-up-a-process-manager"></a>プロセス マネージャーを設定する
 
@@ -118,7 +120,7 @@ Web ファーム環境 (たとえば、スケーラビリティのためのア�
 
 .NET Core アプリは、*自己完結型展開*または*フレームワーク依存展開*として発行できます。 アプリが自己完結型の場合、.NET ランタイムを含むアセンブリ ファイルが *publish* フォルダーに含まれています。 アプリがフレームワークに依存する場合、.NET ランタイムのファイルは含まれていません。これは、サーバーにインストールされている .NET のバージョンへの参照がアプリに含まれていないためです。 既定の展開モデルはフレームワークに依存します。 詳細については、「[.NET Core アプリケーションの展開](/dotnet/core/deploying/)」を参照してください。
 
-*.exe* ファイルと *.dll* ファイルに加え、ASP.NET Core アプリの *publish* フォルダーには、通常、構成ファイル、静的アセット、および MVC ビューが含まれています。 詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。
+*.exe* ファイルと *.dll* ファイルに加え、ASP.NET Core アプリの *publish* フォルダーには、通常、構成ファイル、静的資産、および MVC ビューが含まれています。 詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。
 
 ## <a name="set-up-a-process-manager"></a>プロセス マネージャーを設定する
 

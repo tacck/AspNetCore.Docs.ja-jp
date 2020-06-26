@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/index
-ms.openlocfilehash: 103cd3529fa25c9e4c7e1afe32fef1f84748dd71
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 75eea8721910b5ecba4578440a5290599bdc1735
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777476"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408007"
 ---
 # <a name="compatibility-in-aspnet-core"></a>ASP.NET Core の互換性
 

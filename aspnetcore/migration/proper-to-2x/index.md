@@ -6,17 +6,19 @@ ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 985c08e0994314cec8d52a6651681c93aca96514
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 59c513038d41779a4cf56a70045f9e72f8008d28
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766512"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407721"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET から ASP.NET Core への移行
 

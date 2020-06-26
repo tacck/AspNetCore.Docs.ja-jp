@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/6/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 81a0da65215bc41f6dfad0de28a95bdc455bd8fb
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: 69c253171c51e08802b82415245a66921168ec80
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292790"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404263"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core のミドルウェア
 

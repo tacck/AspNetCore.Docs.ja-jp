@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/Index
-ms.openlocfilehash: 2caf4a20302fa4d94b5eab7f814d7e22b048fbc8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8ada1e5aff7e4a4ff53ca0ba9852a404fdc71189
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777398"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407461"
 ---
 # <a name="aspnet-core-built-in-tag-helpers"></a>ASP.NET Core の組み込みタグ ヘルパー
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/12/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/index
-ms.openlocfilehash: 2d9330867357cecbf58be808cdfcb01b6bb25eb1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9dfe20731fcec14fd359833b9a893f9305fecc10
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777437"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400701"
 ---
 # <a name="data-protection-configuration-in-aspnet-core"></a>ASP.NET Core のデータ保護構成
 

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: 4e47bd91ce15836035d3e8f0a8ceed264f308b22
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a58d48d390eefdc26cf3feb394874b0ba733e9f3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768638"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408345"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core の認証の概要
 
@@ -70,13 +72,13 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="authentication-handler"></a>認証ハンドラー
 
-認証ハンドラーは: 
+認証ハンドラーは:
 
 * スキームの動作を実装する型です。
 * <xref:Microsoft.AspNetCore.Authentication.IAuthenticationHandler> または <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> から派生しています。
 * ユーザーを認証するための主要な役割を担います。
 
-認証スキームの構成と受信要求コンテキストに基づき、認証ハンドラーは: 
+認証スキームの構成と受信要求コンテキストに基づき、認証ハンドラーは:
 
 * 認証が成功した場合に、ユーザーの ID を表す <xref:Microsoft.AspNetCore.Authentication.AuthenticationTicket> オブジェクトを構築します。
 * 認証に失敗した場合は、'no result' または 'failure' を返します。
@@ -84,7 +86,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   * アクセスが許可されていない (禁止)。
   * 認証されていない (チャレンジ)。
 
-### <a name="authenticate"></a>Authenticate
+### <a name="authenticate"></a>認証
 
 認証スキームの認証アクションは、要求コンテキストに基づいてユーザーの ID を構築する役割を担います。 認証が成功したかどうかを示す <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> を返します。成功した場合は、認証チケットに含まれるユーザーの ID です。 以下を参照してください。<xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A> 認証の例を以下に示します。
 
