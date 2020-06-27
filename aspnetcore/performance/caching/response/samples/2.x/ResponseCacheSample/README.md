@@ -1,3 +1,0 @@
-# <a name="aspnet-core-response-cache-sample"></a><span data-ttu-id="fe949-101">ASP.NET Core Response Cache サンプル</span><span class="sxs-lookup"><span data-stu-id="fe949-101">ASP.NET Core Response Cache Sample</span></span>
-
-<span data-ttu-id="fe949-102">このサンプルでは、 [ASP.NET Core で応答キャッシュ](https://docs.microsoft.com/aspnet/core/performance/caching/response)に付随する ASP.NET Core での応答キャッシュの使用方法を示します。</span><span class="sxs-lookup"><span data-stu-id="fe949-102">This sample illustrates the usage of response caching in ASP.NET Core to accompany [Response caching in ASP.NET Core](https://docs.microsoft.com/aspnet/core/performance/caching/response).</span></span>
