@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84239207"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242772"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -51,13 +51,13 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio と Visual Studio Code のデバッグを有効にする
 
-既存の Blazor WebAssembly アプリのデバッグを有効にするには、スタートアップ プロジェクトの *launchSettings. json* ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。
+既存の Blazor WebAssembly アプリのデバッグを有効にするには、スタートアップ プロジェクトの `launchSettings.json` ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-更新されると、*launchSettings. json* ファイルは次の例のようになります。
+更新されると、`launchSettings.json` ファイルは次の例のようになります。
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -74,8 +74,8 @@ Visual Studio で Blazor WebAssembly アプリをデバッグするには、次�
 
 1. ASP.NET Core でホストされる新しい Blazor WebAssembly アプリを作成します。
 1. <kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。
-1. `IncrementCount` メソッドで *Counter.razor* にブレークポイントを設定します。
-1. **[カウンター]** タブに移動し、ボタンを選択してブレークポイントをヒットします。
+1. `Pages/Counter.razor` の `IncrementCount` メソッドにブレークポイントを設定します。
+1. **`Counter`** タブに移動し、ボタンを選択してブレークポイントをヒットします。
 
    ![デバッグ カウンター](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
@@ -87,9 +87,9 @@ Visual Studio で Blazor WebAssembly アプリをデバッグするには、次�
 
 Blazor WebAssembly アプリのデバッグ中に、サーバー コードをデバッグすることもできます。
 
-1. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> の *FetchData.razor* ページにブレークポイントを設定します。
+1. `Pages/FetchData.razor` ページの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> にブレークポイントを設定します。
 1. `Get` アクション メソッドの `WeatherForecastController` にブレークポイントを設定します。
-1. **フェッチ データ** タブに移動し、サーバーへの HTTP 要求を発行する直前に `FetchData` コンポーネント内の最初のブレークポイントをヒットします。
+1. **`Fetch Data`** タブに移動し、サーバーへの HTTP 要求を発行する直前に `FetchData` コンポーネント内の最初のブレークポイントをヒットします。
 
    ![フェッチ データをデバッグする](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
@@ -145,11 +145,11 @@ Visual Studio Code で Blazor WebAssembly アプリをデバッグするには�
 
 1. 選択ウィンドウで、ホストされているソリューション内の *Server* プロジェクトを選択します。
 
-*launch.json* ファイルが、デバッガーを起動するための起動構成を使用して生成されます。
+`launch.json` ファイルが、デバッガーを起動するための起動構成を使用して生成されます。
 
 ### <a name="attach-to-an-existing-debugging-session"></a>既存のデバッグセッションにアタッチする
 
-実行中の Blazor アプリにアタッチするには、次のように構成された *launch.json* ファイルを作成します。
+実行中の Blazor アプリにアタッチするには、次のように構成された `launch.json` ファイルを作成します。
 
 ```json
 {
@@ -222,7 +222,7 @@ Visual Studio Code で Blazor WebAssembly アプリをデバッグするには�
 
 1. リモート デバッグが有効な状態で、ブラウザーを実行する必要があります。 リモート デバッグが無効になっている場合、 **[Unable to find debuggable browser tab] (デバッグ可能なブラウザー タブが見つかりません)** というエラー ページが生成されます。 エラー ページには、Blazor デバッグ プロキシがアプリに接続できるように、デバッグ ポートを開いた状態でブラウザーを実行するための手順が記載されています。 *すべてのブラウザー インスタンス*を閉じ、指示に従ってブラウザーを再起動します。
 
-リモート デバッグが有効な状態でブラウザーを実行すると、デバッグ用のキーボード ショートカットによって新しいデバッガー タブが開きます。少しすると、 **[ソース]** タブに、アプリ内の .NET アセンブリの一覧が表示されます。 各アセンブリを展開して、デバッグに使用できる *.cs*/ *.razor* ソース ファイルを見つけます。 ブレークポイントを設定し、アプリのタブに戻ります。コードの実行時にブレークポイントにヒットします。 ブレークポイントにヒットした後、コード全体をステップ実行する (<kbd>F10</kbd>) か、コードの実行を普通に再開 (<kbd>F8</kbd>) します。
+リモート デバッグが有効な状態でブラウザーを実行すると、デバッグ用のキーボード ショートカットによって新しいデバッガー タブが開きます。少しすると、 **[ソース]** タブに、アプリ内の .NET アセンブリの一覧が表示されます。 各アセンブリを展開して、デバッグに使用できる `.cs`/`.razor` ソース ファイルを見つけます。 ブレークポイントを設定し、アプリのタブに戻ります。コードの実行時にブレークポイントにヒットします。 ブレークポイントにヒットした後、コード全体をステップ実行する (<kbd>F10</kbd>) か、コードの実行を普通に再開 (<kbd>F8</kbd>) します。
 
 Blazor は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/devtools-protocol/)を実装し、.NET 固有の情報によってプロトコルを拡張するデバッグ プロキシを備えています。 デバッグ用のキーボード ショートカットが押されると、Blazor はプロキシで Chrome DevTools を指し示します。 プロキシは、デバッグしようとしているブラウザー ウィンドウに接続します (そのためリモート デバッグを有効にする必要があります)。
 

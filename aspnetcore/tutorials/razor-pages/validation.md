@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652839"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122114"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>パート 8、ASP.NET Core Razor ページへの検証の追加
 
@@ -140,7 +140,7 @@ public DateTime ReleaseDate { get; set; }
 * ブラウザーの既定では、ロケールに基づいて正しい書式を使ってデータがレンダリングされます。
 * `DataType` 属性を使用すると、ASP.NET Core フレームワークで、適切なフィールド テンプレートを選択し、データをレンダリングすることができます。 `DisplayFormat` を単独で使用する場合、文字列テンプレートが使用されます。
 
-注: jQuery の検証は、`Range` 属性と `DateTime` では機能しません。 たとえば、次のコードでは、指定した範囲内の日付であっても、クライアント側の検証エラーが常に表示されます。
+**注:** jQuery の検証は、`Range` 属性と `DateTime` では機能しません。 たとえば、次のコードでは、指定した範囲内の日付であっても、クライアント側の検証エラーが常に表示されます。
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a54f92d1c951792e599992b82e6b6d5c85549292
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102272"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243500"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
@@ -36,9 +36,9 @@ Blazor のプリンシパル ホスティング モデルは、WebAssembly 上�
 
 ![Blazor WebAssembly:Blazor アプリは、ブラウザー内の UI スレッドで実行されます。](hosting-models/_static/blazor-webassembly.png)
 
-クライアント側のホスティング モデルを使用して Blazor アプリを作成するには、 **Blazor WebAssembly アプリ** テンプレート ([dotnet new blazorwasm](/dotnet/core/tools/dotnet-new)) を使用します。
+クライアント側のホスティング モデルを使用して Blazor アプリを作成するには、 **Blazor WebAssembly アプリ** テンプレート ([`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new)) を使用します。
 
-**Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ([dotnet new blazorwasm --hosted](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
+**Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
 
 テンプレートには、次の処理を行う `blazor.webassembly.js` スクリプトが含まれます。
 
@@ -67,7 +67,7 @@ Blazor サーバーのホスティング モデルを使用すると、アプリ
 
 ![ブラウザーは、SignalR 接続を介してサーバー上のアプリ (ASP.NET Core アプリ内でホストされている) とやりとりします。](hosting-models/_static/blazor-server.png)
 
-Blazor サーバー ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor サーバー アプリ** テンプレート ([dotnet new blazorserver](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor サーバー アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
+Blazor サーバー ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor Server アプリ** テンプレート ([`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor サーバー アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
 
 ASP.NET Core アプリにより、次の項目を追加するためにアプリの `Startup` クラスが参照されます。
 

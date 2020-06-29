@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 073a2a85369a100352a163693c5cba907203059e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a94dcd818c3f4e19ace57fad6390a84e704192bd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103234"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242967"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor サーバーの脅威の緩和のガイダンス
 
@@ -134,7 +134,7 @@ Blazor クライアントは、セッションごとに 1 つの接続を確立�
 
 上記のシナリオを防止するために、次の予防措置を講じてください。
 
-* 呼び出し中に発生する可能性のあるエラーを考慮するために、[try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメント内に JS 相互運用機能呼び出しをラップします。 詳細については、「<xref:blazor/fundamentals/handle-errors#javascript-interop>」を参照してください。
+* 呼び出し中に発生する可能性のあるエラーを考慮するために、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ステートメント内に JS 相互運用呼び出しをラップします。 詳細については、「<xref:blazor/fundamentals/handle-errors#javascript-interop>」を参照してください。
 * アクションを実行する前に、JS 相互運用の呼び出しから返されたデータ (エラー メッセージを含む) を検証します。
 
 ### <a name="net-methods-invoked-from-the-browser"></a>ブラウザーから呼び出される .NET メソッド
@@ -302,7 +302,7 @@ ASP.NET Core アプリをセキュリティで保護するためのガイダン�
 JavaScript では、以下を使用して詳細なエラーを有効にします。
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>。
-* `DetailedErrors` 構成キーを `true` に設定します。これはアプリ設定ファイル (*appsettings.json*) で設定できます。 このキーは、値を `true` にした `ASPNETCORE_DETAILEDERRORS` 環境変数を使用することで設定することもできます。
+* `DetailedErrors` 構成キーを `true` に設定します。これはアプリ設定ファイル (`appsettings.json`) で設定できます。 このキーは、値を `true` にした `ASPNETCORE_DETAILEDERRORS` 環境変数を使用することで設定することもできます。
 
 > [!WARNING]
 > インターネット上でクライアントにエラー情報を公開することは、常に回避すべきセキュリティ リスクです。
@@ -348,7 +348,7 @@ Blazor サーバー フレームワークでは、前述のいくつかの脅威
 * JavaScript と .NET メソッドの間では、どちらの方向でも JS 相互運用呼び出しの入力を信頼しないでください。
 * 引数または結果が正しく逆シリアル化された場合でも、引数と結果の内容が有効であることを検証するのはアプリの役割です。
 
-XSS の脆弱性が存在するには、アプリがレンダリングされたページにユーザー入力を組み込む必要があります。 Blazor サーバー コンポーネントでは、 *.razor* ファイルのマークアップが手続き型 C# ロジックに変換されるコンパイル時のステップが実行されます。 実行時に、C# ロジックによって、要素、テキスト、および子コンポーネントを記述する "*レンダリング ツリー*" が構築されます。 これは、JavaScript 命令のシーケンスを通じてブラウザーの DOM に適用されます (または、プリレンダリングの場合は HTML にシリアル化されます)。
+XSS の脆弱性が存在するには、アプリがレンダリングされたページにユーザー入力を組み込む必要があります。 Blazor サーバー コンポーネントでは、`.razor` ファイルのマークアップが手続き型 C# ロジックに変換されるコンパイル時のステップが実行されます。 実行時に、C# ロジックによって、要素、テキスト、および子コンポーネントを記述する "*レンダリング ツリー*" が構築されます。 これは、JavaScript 命令のシーケンスを通じてブラウザーの DOM に適用されます (または、プリレンダリングの場合は HTML にシリアル化されます)。
 
 * 通常の Razor 構文 (`@someStringValue` など) を使用してレンダリングされたユーザー入力では、XSS 脆弱性は公開されません。これは、Razor 構文が、テキストのみを書き込むことができるコマンドを使用して DOM に追加されるためです。 値に HTML マークアップが含まれている場合でも、値は静的なテキストとして表示されます。 プリレンダリング時に、出力は HTML エンコードされ、コンテンツも静的テキストとして表示されます。
 * スクリプト タグは許可されていないため、アプリのコンポーネント レンダリング ツリーに含めることはできません。 コンポーネントのマークアップにスクリプト タグが含まれていると、コンパイル時のエラーが生成されます。

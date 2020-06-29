@@ -1,9 +1,9 @@
-コンポーネント `LoginDisplay` (*Shared/logindisplay*) は、 `MainLayout` コンポーネント (*shared/mainlayout*) にレンダリングされ、次の動作を管理します。
+`LoginDisplay` コンポーネント (`Shared/LoginDisplay.razor`) は `MainLayout` コンポーネント (`Shared/MainLayout.razor`) でレンダリングされます。このコンポーネントによって次の動作が管理されます。
 
 * 認証されたユーザーの場合:
-  * 現在のユーザー名を表示します。
-  * アプリからログアウトするためのボタンが用意されています。
-* 匿名ユーザーの場合、にログインするオプションが用意されています。
+  * 現在のユーザー名が表示されます。
+  * アプリからログアウトするためのボタンが用意されます。
+* 匿名ユーザーの場合は、ログインするオプションが用意されます。
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

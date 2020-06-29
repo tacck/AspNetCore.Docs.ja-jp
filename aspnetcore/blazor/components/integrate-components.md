@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 78d524bc0271fd2640302bb0de78571ab688bef5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c71067528fb34ab141bb1ee846716834204ee40
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103373"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242460"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する
 
@@ -37,7 +37,7 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
 
 既存の Razor Pages や MVC アプリでは、Razor コンポーネントをページとビューに統合できます。
 
-1. アプリのレイアウト ファイル ( *_Layout.cshtml*) で次のことを行います。
+1. アプリのレイアウト ファイル (`_Layout.cshtml`) で:
 
    * 次の `<base>` タグを `<head>` 要素に追加します。
 
@@ -47,7 +47,7 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
 
      前の例の `href` 値 (*アプリ ベースのパス*) は、アプリがルート URL パス (`/`) に置かれていることを前提としています。 アプリがサブアプリケーションになっている場合は、記事 <xref:blazor/host-and-deploy/index#app-base-path> の「*アプリのベース パス*」セクションのガイダンスに従ってください。
 
-     *_Layout.cshtml* ファイルは、Razor Pages アプリの *Pages/Shared* フォルダーまたは MVC アプリの *Views/Shared* フォルダーにあります。
+     `_Layout.cshtml` ファイルは、Razor Pages アプリの *Pages/Shared* フォルダーまたは MVC アプリの *Views/Shared* フォルダーにあります。
 
    * *blazor.server.js* スクリプトの `<script>` タグを、終了 `</body>` タグの直前に追加します。
 
@@ -57,7 +57,7 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
 
      フレームワークによって *blazor.server.js* スクリプトがアプリに追加されます。 手動でアプリにスクリプトを追加する必要はありません。
 
-1. 次の内容を含む *_Imports.razor* ファイルをプロジェクトのルート フォルダーに追加します (最後の名前空間 `MyAppNamespace` をアプリの名前空間に変更します)。
+1. 次の内容を含む `_Imports.razor` ファイルをプロジェクトのルート フォルダーに追加します (最後の名前空間 `MyAppNamespace` をアプリの名前空間に変更します)。
 
    ```razor
    @using System.Net.Http
@@ -92,7 +92,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
 
 1. 「[アプリを準備する](#prepare-the-app)」セクションのガイダンスに従ってください。
 
-1. 次の内容の *App.razor* ファイルをプロジェクト ルートに追加します。
+1. 次の内容の `App.razor` ファイルをプロジェクト ルートに追加します。
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -108,7 +108,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
    </Router>
    ```
 
-1. 次の内容の *_Host.cshtml* ファイルを *Pages* フォルダーに追加します。
+1. 次の内容の `_Host.cshtml` ファイルを `Pages` フォルダーに追加します。
 
    ```cshtml
    @page "/blazor"
@@ -121,7 +121,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
    </app>
    ```
 
-   コンポーネントは、そのレイアウトで共有される *_Layout.cshtml* ファイルを使用します。
+   コンポーネントでは、そのレイアウトで共有される `_Layout.cshtml` ファイルが使用されます。
 
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、`App` コンポーネントに対して以下の構成が行われます。
 
@@ -136,7 +136,7 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
 
    コンポーネント タグ ヘルパーの詳細については、「ASP.NET コアのコンポーネント タグ ヘルパー<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
 
-1. *_Host.cshtml* ページの優先度が低いルートを、`Startup.Configure` 内のエンドポイント構成に追加します。
+1. `_Host.cshtml` ページの優先度が低いルートを、`Startup.Configure` 内のエンドポイント構成に追加します。
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -167,7 +167,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
 
 1. 「[アプリを準備する](#prepare-the-app)」セクションのガイダンスに従ってください。
 
-1. 次の内容の *App.razor* ファイルを、プロジェクトのルートに追加します。
+1. 次の内容の `App.razor` ファイルを、プロジェクトのルートに追加します。
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -183,7 +183,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    </Router>
    ```
 
-1. 次の内容の *_Host.cshtml* ファイルを *Views/Home* フォルダーに追加します。
+1. 次の内容の `_Host.cshtml` ファイルを `Views/Home` フォルダーに追加します。
 
    ```cshtml
    @{
@@ -195,7 +195,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    </app>
    ```
 
-   コンポーネントは、そのレイアウトで共有される *_Layout.cshtml* ファイルを使用します。
+   コンポーネントでは、そのレイアウトで共有される `_Layout.cshtml` ファイルが使用されます。
    
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、`App` コンポーネントに対して以下の構成が行われます。
 
@@ -219,7 +219,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    }
    ```
 
-1. `Startup.Configure` 内のエンドポイント構成に *_Host.cshtml* ビューを返すコントローラー アクションのために、優先度が低いルートを追加します。
+1. `Startup.Configure` 内のエンドポイント構成に `_Host.cshtml` ビューを返すコントローラー アクションのために、優先度が低いルートを追加します。
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -230,7 +230,7 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
    });
    ```
 
-1. *Pages* フォルダーを作成し、アプリにルーティング可能なコンポーネントを追加します。 次に例を示します。
+1. `Pages` フォルダーを作成し、アプリにルーティング可能なコンポーネントを追加します。 次に例を示します。
 
    ```razor
    @page "/counter"
@@ -299,7 +299,7 @@ Razor ページまたはビューには、ステートフル対話型コンポ�
 
 ## <a name="component-namespaces"></a>コンポーネントの名前空間
 
-カスタム フォルダーを使用してアプリのコンポーネントを保持する場合は、フォルダーを表す名前空間を、ページまたはビューのいずれかに追加するか、 *_ViewImports.cshtml* ファイルに追加します。 次に例を示します。
+カスタム フォルダーを使用してアプリのコンポーネントを保持する場合は、フォルダーを表す名前空間を、ページまたはビューのいずれかに追加するか、`_ViewImports.cshtml` ファイルに追加します。 次に例を示します。
 
 * `MyAppNamespace` をアプリの名前空間に変更します。
 * コンポーネントを保持するために *Components* という名前のフォルダーを使用していない場合は、`Components` を、コンポーネントが置かれているフォルダーに変更します。
@@ -308,6 +308,6 @@ Razor ページまたはビューには、ステートフル対話型コンポ�
 @using MyAppNamespace.Components
 ```
 
-*_ViewImports.cshtml* ファイルは、Razor Pages アプリの *Pages* フォルダーまたは MVC アプリの *Views* フォルダーにあります。
+`_ViewImports.cshtml` ファイルは、Razor Pages アプリの `Pages` フォルダーまたは MVC アプリの `Views` フォルダーにあります。
 
 詳細については、「<xref:blazor/components/index#namespaces>」を参照してください。

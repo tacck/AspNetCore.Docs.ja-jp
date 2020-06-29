@@ -1,8 +1,8 @@
-`App`コンポーネント (*app.xaml*) は、 `App` Blazor Server apps に含まれるコンポーネントに似ています。
+`App` コンポーネント (`App.razor`) は、Blazor Server アプリにある `App` コンポーネントに似ています。
 
-* <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>コンポーネントは、 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> アプリの残りの部分へのの公開を管理します。
-* コンポーネントは、 <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> 現在のユーザーが特定のページにアクセスする権限を持っていること、またはコンポーネントを表示する権限を持っていることを確認し `RedirectToLogin` ます。
-* このコンポーネントは、許可されて `RedirectToLogin` いないユーザーのログインページへのリダイレクトを管理します。
+* <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> コンポーネントによって、アプリの残りの部分に <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> を公開する動作が管理されます。
+* <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> コンポーネントによって、現在のユーザーには所与のページへのアクセスが許可されます。それ以外では、`RedirectToLogin` コンポーネントがレンダリングされます。
+* `RedirectToLogin` コンポーネントによって、承認されていないユーザーのログイン ページへのリダイレクトが管理されます。
 
 ```razor
 <CascadingAuthenticationState>

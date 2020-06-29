@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102315"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242811"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
 
@@ -75,7 +75,7 @@ iOS では、Safari の **[共有]** ボタンとその **[ホーム画面に追
 
 !['MyBlazorPwa' アプリは、Google Chrome でアドレス バーなしで実行されます。](progressive-web-app/_static/image3.png)
 
-ウィンドウのタイトル、配色、アイコン、またはその他の詳細をカスタマイズするには、プロジェクトの *wwwroot* ディレクトリ内の *manifest.json* ファイルを参照してください。 このファイルのスキーマは、Web 標準によって定義されます。 詳細については、[MDN Web ドキュメント:Web アプリ マニフェスト](https://developer.mozilla.org/docs/Web/Manifest)を参照してください。
+ウィンドウのタイトル、配色、アイコン、またはその他の詳細をカスタマイズするには、プロジェクトの `wwwroot` ディレクトリにある `manifest.json` ファイルを参照してください。 このファイルのスキーマは、Web 標準によって定義されます。 詳細については、[MDN Web ドキュメント:Web アプリ マニフェスト](https://developer.mozilla.org/docs/Web/Manifest)を参照してください。
 
 ## <a name="offline-support"></a>オフライン サポート
 
@@ -110,17 +110,17 @@ iOS では、Safari の **[共有]** ボタンとその **[ホーム画面に追
 
 Blazor の PWA テンプレートでは、次の 2 つのサービス ワーカー ファイルが生成されます。
 
-* *wwwroot/service-worker.js*: 開発時に使用されます。
-* *wwwroot/service-worker.published.js*: アプリが公開された後に使用されます。
+* `wwwroot/service-worker.js`: 開発中に使用されます。
+* `wwwroot/service-worker.published.js`: アプリが発行された後に使用されます。
 
 2 つのサービス ワーカー ファイル間でロジックを共有するには、次のアプローチを検討してください。
 
 * 共通のロジックを保持する 3 番目の JavaScript ファイルを追加する。
-* [self.importScripts](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts) を使用して、共通のロジックを両方のサービス ワーカー ファイルに読み込む。
+* [`self.importScripts`](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts) を使用して、共通のロジックを両方のサービス ワーカー ファイルに読み込む。
 
 ### <a name="cache-first-fetch-strategy"></a>キャッシュ優先のフェッチ戦略
 
-組み込みの *service-worker.published.js* サービス ワーカーでは、*キャッシュ優先*戦略を使用して要求が解決されます。 これは、ユーザーがネットワークにアクセスできるかどうか、またはサーバーで使用可能な新しいコンテンツがあるかどうかに関係なく、サービス ワーカーがキャッシュされたコンテンツを返すことを意味します。
+組み込みの `service-worker.published.js` サービス ワーカーでは、"*キャッシュ優先*" 戦略を使用して要求が解決されます。 これは、ユーザーがネットワークにアクセスできるかどうか、またはサーバーで使用可能な新しいコンテンツがあるかどうかに関係なく、サービス ワーカーがキャッシュされたコンテンツを返すことを意味します。
 
 キャッシュ優先の戦略が重要な理由は、次のとおりです。
 
@@ -139,9 +139,9 @@ Blazor の PWA テンプレートでは、次の 2 つのサービス ワーカ�
 
 Blazor PWA テンプレートを使用すると、ユーザーがアクセスしてネットワークに接続するたびに、バックグラウンドで自動的に自己更新を試行するアプリが生成されます。 このしくみは次のとおりです。
 
-* コンパイル中に、プロジェクトによって "*サービス ワーカー アセット マニフェスト*" が生成されます。 既定では、この名前は *service-worker-assets.js* です。 マニフェストには、アプリがオフラインで動作するために必要なすべての静的リソース (.NET アセンブリ、JavaScript ファイル、CSS など) が、そのコンテンツ ハッシュと共にリストされています。 リソース リストは、キャッシュするリソースを認識できるように、サービス ワーカーによって読み込まれます。
-* ユーザーがアプリにアクセスするたびに、ブラウザーによって *service-worker.js* と *service-worker-assets.js* がバックグラウンドで再要求されます。 ファイルは、インストールされている既存のサービス ワーカーとバイト単位で比較されます。 サーバーがこれらのファイルのいずれかに対して変更されたコンテンツを返す場合、サービス ワーカーはそれ自体の新しいバージョンをインストールしようとします。
-* サービス ワーカーでは、それ自体の新しいバージョンをインストールするときに、オフライン リソース用に新しい別のキャッシュが作成され、そのキャッシュに *service-worker-assets.js* にリストされたリソースの入力が開始されます。 このロジックは、*service-worker.published.js* 内の `onInstall` 関数に実装されています。
+* コンパイル中に、プロジェクトによって "*サービス ワーカー アセット マニフェスト*" が生成されます。 既定では、これは `service-worker-assets.js` と呼ばれます。 マニフェストには、アプリがオフラインで動作するために必要なすべての静的リソース (.NET アセンブリ、JavaScript ファイル、CSS など) が、そのコンテンツ ハッシュと共にリストされています。 リソース リストは、キャッシュするリソースを認識できるように、サービス ワーカーによって読み込まれます。
+* ユーザーがアプリにアクセスするたびに、ブラウザーによって `service-worker.js` と `service-worker-assets.js` がバックグラウンドで再要求されます。 ファイルは、インストールされている既存のサービス ワーカーとバイト単位で比較されます。 サーバーがこれらのファイルのいずれかに対して変更されたコンテンツを返す場合、サービス ワーカーはそれ自体の新しいバージョンをインストールしようとします。
+* サービス ワーカーでは、それ自体の新しいバージョンをインストールするときに、オフライン リソース用に新しい別のキャッシュが作成され、そのキャッシュに `service-worker-assets.js` にリストされたリソースの入力が開始されます。 このロジックは、`service-worker.published.js` 内の `onInstall` 関数に実装されています。
 * すべてのリソースがエラーなしで読み込まれ、すべてのコンテンツ ハッシュが一致すると、プロセスは正常に完了します。 成功した場合、新しいサービス ワーカーは、"*アクティブ化を待機している*" 状態になります。 ユーザーがアプリを閉じると (アプリのタブやウィンドウが残っていない状態)、新しいサービス ワーカーが "*アクティブ*" になり、後続のアプリへのアクセスに使用されます。 古いサービス ワーカーとそのキャッシュは削除されます。
 * プロセスが正常に完了しなかった場合、新しいサービス ワーカー インスタンスは破棄されます。 ユーザーが次にアクセスすると (このとき、要求を完了できるほどクライアントのネットワーク接続が良好であることが望ましい)、更新プロセスがもう一度試行されます。
 
@@ -149,7 +149,7 @@ Blazor PWA テンプレートを使用すると、ユーザーがアクセスし
 
 ### <a name="how-requests-are-resolved"></a>要求の解決方法
 
-「[キャッシュ優先のフェッチ戦略](#cache-first-fetch-strategy)」セクションで説明したように、既定のサービス ワーカーでは "*キャッシュ優先*" 戦略が使用されます。これは、キャッシュされたコンテンツがあればそれが提供されることを意味します。 特定の URL に対してキャッシュされたコンテンツがない場合 (バックエンド API からデータを要求する場合など)、サービス ワーカーは通常のネットワーク要求にフォールバックします。 サーバーに到達可能な場合は、ネットワーク要求は成功します。 このロジックは、*service-worker.published.js* 内の `onFetch` 関数内に実装されています。
+「[キャッシュ優先のフェッチ戦略](#cache-first-fetch-strategy)」セクションで説明したように、既定のサービス ワーカーでは "*キャッシュ優先*" 戦略が使用されます。これは、キャッシュされたコンテンツがあればそれが提供されることを意味します。 特定の URL に対してキャッシュされたコンテンツがない場合 (バックエンド API からデータを要求する場合など)、サービス ワーカーは通常のネットワーク要求にフォールバックします。 サーバーに到達可能な場合は、ネットワーク要求は成功します。 このロジックは、`service-worker.published.js` 内の `onFetch` 関数内に実装されています。
 
 アプリの Razor コンポーネントがバックエンド API からのデータの要求に依存しており、ネットワークが利用できないことが原因で失敗した要求に対してわかりやすいユーザー エクスペリエンスを提供する場合は、アプリのコンポーネント内にロジックを実装します。 たとえば、<xref:System.Net.Http.HttpClient> 要求について `try/catch` を使用します。
 
@@ -157,12 +157,12 @@ Blazor PWA テンプレートを使用すると、ユーザーがアクセスし
 
 ユーザーが最初に `/counter` などの URL、またはアプリ内の他のディープ リンクに移動すると、どうなるかを考えます。 このような場合は、`/counter` としてキャッシュされたコンテンツを返すのではなく、ブラウザーでキャッシュされたコンテンツを `/index.html` として読み込み、Blazor WebAssembly アプリを起動する必要があります。 これらの初期要求は、次の対語として、"*ナビゲーション*" 要求と呼ばれます。
 
-* *subresource* は、画像、スタイルシート、またはその他のファイルを要求します。
-* *fetch/XHR* は API データを要求します。
+* `subresource` からは、画像、スタイルシート、またはその他のファイルが要求されます。
+* `fetch/XHR` からは API データが要求されます。
 
-既定のサービス ワーカーには、ナビゲーション要求用の特殊なケースのロジックが含まれています。 サービス ワーカーは、要求された URL に関係なく、`/index.html` のキャッシュされたコンテンツを返すことで要求を解決します。 このロジックは、*service-worker.published.js* 内の `onFetch` 関数に実装されています。
+既定のサービス ワーカーには、ナビゲーション要求用の特殊なケースのロジックが含まれています。 サービス ワーカーは、要求された URL に関係なく、`/index.html` のキャッシュされたコンテンツを返すことで要求を解決します。 このロジックは、`service-worker.published.js` 内の `onFetch` 関数に実装されています。
 
-サーバーでレンダリングされた HTML を返す (キャッシュからの `/index.html` を提供するのではなく) 必要がある特定の URL がアプリにある場合は、サービス ワーカーのロジックを編集する必要があります。 `/Identity/` を含むすべての URL を、サーバーに対する通常のオンライン専用の要求として処理する必要がある場合は、*service-worker.published.js* `onFetch` ロジックを変更します。 次のコードを見つけます。
+サーバーでレンダリングされた HTML を返す (キャッシュからの `/index.html` を提供するのではなく) 必要がある特定の URL がアプリにある場合は、サービス ワーカーのロジックを編集する必要があります。 `/Identity/` を含むすべての URL を、サーバーに対する通常のオンライン専用の要求として処理する必要がある場合は、`service-worker.published.js` `onFetch` ロジックを変更します。 次のコードを見つけます。
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -185,16 +185,16 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-ファイルは *wwwroot* 出力ディレクトリに配置されるため、ブラウザーでは `/service-worker-assets.js` を要求することによってこのファイルを取得できます。 このファイルの内容を表示するには、テキスト エディターで */bin/Debug/{TARGET FRAMEWORK}/wwwroot/service-worker-assets.js* を開きます。 ただし、ファイルは各ビルドで再生成されるため、編集しないでください。
+ファイルは `wwwroot` 出力ディレクトリに配置されるため、ブラウザーでは `/service-worker-assets.js` を要求することによって、このファイルを取得できます。 このファイルの内容を表示するには、テキスト エディターで `/bin/Debug/{TARGET FRAMEWORK}/wwwroot/service-worker-assets.js` を開きます。 ただし、ファイルは各ビルドで再生成されるため、編集しないでください。
 
 既定では、このマニフェストには次の項目がリストされています。
 
 * .NET アセンブリや .NET WebAssembly アセンブリ ランタイム ファイルなど、オフラインで機能するために必要な、Blazor 管理対象リソース。
-* アプリの *wwwroot* ディレクトリに公開するためのすべてのリソース (画像、スタイルシート、JavaScript ファイルなど)。外部プロジェクトや NuGet パッケージによって提供される静的な Web アセットが含まれます。
+* アプリの `wwwroot` ディレクトリに公開するためのすべてのリソース (画像、スタイルシート、JavaScript ファイルなど)。外部プロジェクトや NuGet パッケージによって提供される静的な Web アセットが含まれます。
 
-サービス ワーカーによってフェッチおよびキャッシュされるリソースを制御するには、*service-worker.published.js* 内の `onInstall` でロジックを編集します。 既定では、 *.html*、 *.css*、 *.js*、 *.wasm* などの一般的な Web ファイル名の拡張子に一致するファイルのほか、Blazor WebAssembly に固有のファイルの種類 ( *.dll*、 *.pdb*) がサービス ワーカーによってフェッチおよびキャッシュされます。
+サービス ワーカーによってフェッチおよびキャッシュされるリソースを制御するには、`service-worker.published.js` 内の `onInstall` でロジックを編集します。 既定では、`.html`、`.css`、`.js`、`.wasm` などの一般的な Web ファイル名の拡張子に一致するファイルのほか、Blazor WebAssembly に固有のファイルの種類 (`.dll`、`.pdb`) がサービス ワーカーによってフェッチおよびキャッシュされます。
 
-アプリの *wwwroot* ディレクトリに存在しない追加のリソースを含めるには、次の例に示すように、追加の MSBuild `ItemGroup` エントリを定義します。
+アプリの `wwwroot` ディレクトリに存在しない追加のリソースを含めるには、次の例に示すように、追加の MSBuild `ItemGroup` エントリを定義します。
 
 ```xml
 <ItemGroup>
@@ -206,7 +206,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 `AssetUrl` メタデータにより、ブラウザーでキャッシュするリソースをフェッチするときに使用されるベース相対 URL が指定されます。 これは、ディスク上の元のソース ファイル名に依存しないものにすることができます。
 
 > [!IMPORTANT]
-> `ServiceWorkerAssetsManifestItem` を追加しても、ファイルはアプリの *wwwroot* ディレクトリに公開されません。 公開の出力は個別に制御する必要があります。 `ServiceWorkerAssetsManifestItem` では、サービス ワーカー アセット マニフェストに追加のエントリが表示されるだけです。
+> `ServiceWorkerAssetsManifestItem` を追加しても、ファイルはアプリの `wwwroot` ディレクトリに公開されません。 公開の出力は個別に制御する必要があります。 `ServiceWorkerAssetsManifestItem` では、サービス ワーカー アセット マニフェストに追加のエントリが表示されるだけです。
 
 ## <a name="push-notifications"></a>プッシュ通知
 
@@ -264,11 +264,11 @@ Web 開発者は、ユーザーが、配置された最新バージョンの Web
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>サービス ワーカー アセット マニフェストのすべてのコンテンツが既定でキャッシュされる
 
-「[アセット キャッシュの制御](#control-asset-caching)」セクションで説明したように、ファイル *service-worker-assets.js* はビルド時に生成され、サービス ワーカーでフェッチおよびキャッシュする必要があるすべてのアセットがリストされます。
+「[アセット キャッシュの制御](#control-asset-caching)」セクションで説明したように、ファイル `service-worker-assets.js` はビルド時に生成され、サービス ワーカーでフェッチおよびキャッシュする必要があるすべてのアセットがリストされます。
 
-既定では、このリストには *wwwroot* に出力されるすべての項目 (外部のパッケージとプロジェクトによって提供されるコンテンツを含む) が含まれるので、コンテンツの数が多くなりすぎないように注意する必要があります。 *wwwroot* ディレクトリに数百万のイメージが含まれている場合、サービス ワーカーはそれらすべてをフェッチおよびキャッシュしようとするため、帯域幅が過剰に消費されて、正常に完了しない可能性が高くなります。
+既定では、このリストには `wwwroot` に出力されるすべての項目 (外部のパッケージとプロジェクトによって提供されるコンテンツを含む) が含まれるので、コンテンツの数が多くなりすぎないように注意する必要があります。 `wwwroot` ディレクトリに数百万のイメージが含まれている場合、サービス ワーカーはそれらすべてをフェッチおよびキャッシュしようとするため、帯域幅が過剰に消費されて、正常に完了しない可能性が高くなります。
 
-*service-worker.published.js* 内の `onInstall` 関数を編集することで、マニフェストのコンテンツのどのサブセットをフェッチおよびキャッシュするかを制御する任意のロジックを実装します。
+`service-worker.published.js` 内の `onInstall` 関数を編集することで、マニフェストのコンテンツのどのサブセットをフェッチおよびキャッシュするかを制御する任意のロジックを実装します。
 
 ### <a name="interaction-with-authentication"></a>認証との相互作用
 
@@ -287,11 +287,11 @@ PWA テンプレートは、認証と組み合わせて使用できます。 オ
 * アプリがオフラインのときに操作をキューに格納し、アプリがオンラインに戻ったときにそれらを適用します。
 * サインアウト中に、格納されているユーザーをクリアします。
 
-[CarChecker](https://github.com/SteveSandersonMS/CarChecker) サンプル アプリは、前述の方法を示しています。 アプリの次の部分を参照してください。
+[`CarChecker`](https://github.com/SteveSandersonMS/CarChecker) サンプル アプリは、前述の方法を示しています。 アプリの次の部分を参照してください。
 
-* `OfflineAccountClaimsPrincipalFactory` (*Client/Data/OfflineAccountClaimsPrincipalFactory.cs*)
-* `LocalVehiclesStore` (*Client/Data/LocalVehiclesStore.cs*)
-* `LoginStatus` コンポーネント (*Client/Shared/LoginStatus.razor*)
+* `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
+* `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
+* `LoginStatus` コンポーネント (`Client/Shared/LoginStatus.razor`)
 
 ## <a name="additional-resources"></a>その他の技術情報
 

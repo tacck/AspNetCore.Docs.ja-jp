@@ -1,6 +1,6 @@
-`RedirectToLogin`コンポーネント (*Shared/redirecttologin. razor*):
+`RedirectToLogin` コンポーネント (`Shared/RedirectToLogin.razor`) は:
 
-* 承認されていないユーザーのログインページへのリダイレクトを管理します。
+* 承認されていないユーザーのログイン ページへのリダイレクトを管理します。
 * 認証が成功した場合にそのページに戻ることができるように、ユーザーがアクセスしようとしている現在の URL を保持します。
 
 ```razor

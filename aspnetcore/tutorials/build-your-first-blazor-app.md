@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 0b9854b3848a204b28d0427bef08364be0139069
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102844"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292777"
 ---
 # <a name="build-your-first-blazor-app"></a>最初の Blazor アプリをビルドする
 
@@ -36,15 +36,15 @@ ms.locfileid: "85102844"
 
 ## <a name="build-components"></a>コンポーネントを構築する
 
-1. <xref:blazor/get-started> の記事にあるガイダンスに従って、このチュートリアルの Blazor プロジェクトを作成します。 プロジェクトに *ToDoList* という名前を付けます。
+1. <xref:blazor/get-started> の記事にあるガイダンスに従って、このチュートリアルの Blazor プロジェクトを作成します。 プロジェクトに `ToDoList` という名前を付けます。
 
-1. *Pages* フォルダー内にあるアプリの 3 つのページそれぞれを参照します。ホーム、カウンター、データのフェッチです。 これらのページは Razor コンポーネント ファイル *Index.razor*、*Counter.razor*、*FetchData.razor* によって実装されています。
+1. `Pages` フォルダー内にあるアプリの 3 つのページ `Home`、`Counter`、`Fetch data` それぞれを閲覧します。 3 つのページは、Razor コンポーネント ファイル `Index.razor`、`Counter.razor`、`FetchData.razor` で実装されます。
 
-1. Counter ページ上で **[クリックしてください]** ボタンを選択し、ページを更新することなくカウンターをインクリメントします。 Web ページでカウンターをインクリメントする場合、通常は JavaScript を記述することが必要です。 Blazor を使用すると、代わりに C# を記述できます。
+1. `Counter` ページで、ページを更新することなくカウンターをインクリメントするボタンを選択します。 Web ページでカウンターをインクリメントする場合、通常は JavaScript を記述することが必要です。 Blazor を使用すると、代わりに C# を記述できます。
 
-1. *Counter.razor* ファイルで `Counter` コンポーネントの実装を調べます。
+1. `Counter.razor` ファイルで `Counter` コンポーネントの実装を調べます。
 
-   *Pages/Counter.razor*:
+   `Pages/Counter.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter1.razor)]
 
@@ -52,7 +52,7 @@ ms.locfileid: "85102844"
 
    コンポーネント クラスのメンバーは、`@code` ブロック内で定義されています。 `@code` ブロック内では、イベント処理や他のコンポーネント ロジックの定義のために、コンポーネントの状態 (プロパティ、フィールド) とメソッドを指定します。 これらのメンバーは、コンポーネントのレンダリング ロジックの一部として、またイベントを処理するために使われます。
 
-   **[クリックしてください]** ボタンを選択すると:
+   カウンター インクリメント ボタンが選択されているとき:
 
    * `Counter` コンポーネントの登録済みの `onclick` ハンドラーが呼び出されます (`IncrementCount` メソッドです)。
    * `Counter` コンポーネントによりそのレンダリング ツリーが再生成されます。
@@ -63,17 +63,17 @@ ms.locfileid: "85102844"
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter2.razor?highlight=14)]
 
-1. アプリをリビルドして実行し、変更を確認します。 **[クリックしてください]** ボタンを選択します。 カウンターは、2 ずつインクリメントされます。
+1. アプリをリビルドして実行し、変更を確認します。 ボタンを選択します。 カウンターは、2 ずつインクリメントされます。
 
 ## <a name="use-components"></a>コンポーネントを使う
 
 HTML 構文を使用して、別のコンポーネント内にコンポーネントを含めます。
 
-1. `Index` コンポーネント (*Index.razor*) に `<Counter />` 要素を追加することで、アプリの `Index` コンポーネントに `Counter` コンポーネントを追加します。
+1. `Index` コンポーネント (`Index.razor`) に `<Counter />` 要素を追加することで、アプリの `Index` コンポーネントに `Counter` コンポーネントを追加します。
 
    このエクスペリエンスのために Blazor WebAssembly を使用している場合、`SurveyPrompt` コンポーネントによって `Index` コンポーネントが使用されます。 `<SurveyPrompt>` 要素を `<Counter />` 要素に置き換えます。 このエクスペリエンスに Blazor サーバー アプリを使用している場合は、`<Counter />` 要素を `Index` コンポーネントに追加します。
 
-   *Pages/Index.razor*:
+   `Pages/Index.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -88,7 +88,7 @@ HTML 構文を使用して、別のコンポーネント内にコンポーネン
    * [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を使用してパブリック `IncrementAmount` プロパティを追加します。
    * `currentCount` の値を増やすときに `IncrementAmount` プロパティを使うように `IncrementCount` メソッドを変更します。
 
-   *Pages/Counter.razor*:
+   `Pages/Counter.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter.razor?highlight=13,17)]
 
@@ -99,15 +99,15 @@ HTML 構文を使用して、別のコンポーネント内にコンポーネン
 
 1. 属性を使って、`Index` コンポーネントの `<Counter>` 要素に `IncrementAmount` パラメーターを指定します。 カウンターを 10 ずつインクリメントするように値を設定します。
 
-   *Pages/Index.razor*:
+   `Pages/Index.razor`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-1. `Index` コンポーネントを再度読み込みます。 カウンターは、 **[クリックしてください]** ボタンを選択するたびに 10 ずつインクリメントされます。 `Counter` コンポーネントにあるカウンターは、継続して 1 ずつインクリメントされます。
+1. `Index` コンポーネントを再度読み込みます。 カウンターは、ボタンを選択するたびに 10 ずつインクリメントされます。 `Counter` コンポーネントにあるカウンターは、継続して 1 ずつインクリメントされます。
 
 ## <a name="route-to-components"></a>コンポーネントにルーティングする
 
-*Counter.razor* ファイルの上部にある `@page` ディレクティブは、`Counter` コンポーネントがルーティング エンドポイントであることを指定しています。 `Counter` コンポーネントによって `/counter` に送信された要求が処理されます。 `@page` ディレクティブがない場合、ルーティングされた要求はコンポーネントでは処理されませんが、そのコンポーネントは他のコンポーネントから引き続き使用できます。
+`Counter.razor` ファイルの上部にある `@page` ディレクティブは、`Counter` コンポーネントがルーティング エンドポイントであることを指定しています。 `Counter` コンポーネントによって `/counter` に送信された要求が処理されます。 `@page` ディレクティブがない場合、ルーティングされた要求はコンポーネントでは処理されませんが、そのコンポーネントは他のコンポーネントから引き続き使用できます。
 
 ## <a name="dependency-injection"></a>依存関係の挿入
 
@@ -119,7 +119,7 @@ Blazor サーバー アプリを使用している場合、`WeatherForecastServi
 
 `FetchData` コンポーネントに `WeatherForecastService` サービスのインスタンスを挿入するために、[`@inject`](xref:mvc/views/razor#inject) ディレクティブが使われています。
 
-*Pages/FetchData.razor*:
+`Pages/FetchData.razor`:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1.razor?highlight=3)]
 
@@ -129,9 +129,9 @@ Blazor サーバー アプリを使用している場合、`WeatherForecastServi
 
 ### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly のエクスペリエンス
 
-Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォルダー内の *weather.json* ファイルから天気予報データを取得するために、<xref:System.Net.Http.HttpClient> が挿入されます。
+Blazor WebAssembly アプリを使用する場合、`wwwroot/sample-data` フォルダー内の `weather.json` ファイルから天気予報データを取得するために、<xref:System.Net.Http.HttpClient> が挿入されます。
 
-*Pages/FetchData.razor*:
+`Pages/FetchData.razor`:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-9)]
 
@@ -143,7 +143,7 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
 
 シンプルな ToDo リストを実装したアプリに新しいコンポーネントを追加します。
 
-1. 新しい `Todo` Razor コンポーネントを、*Pages* フォルダー内のアプリに追加します。 Visual Studio を使用している場合、**Pages** フォルダーを右クリックし、 **[追加]**  >  **[新しい項目]**  >  **[Razor コンポーネント]** の順に選択します。 コンポーネントのファイルに "*Todo.razor*" という名前を指定します。 その他の開発環境では、"*Todo.razor*" という名前の **Pages** フォルダーに空のファイルを追加します。
+1. 新しい `Todo` Razor コンポーネントを、`Pages` フォルダー内のアプリに追加します。 Visual Studio を使用している場合、`Pages` フォルダーを右クリックし、 **[追加]** 、 **[新しい項目]** 、 **[Razor コンポーネント]** の順に選択します。 コンポーネントのファイルに `Todo.razor` という名前を指定します。 その他の開発環境では、`Todo.razor` という名前の `Pages` フォルダーに空のファイルを追加します。 Razor コンポーネント ファイル名の先頭文字を大文字にする必要があります。そのため、`Todo` コンポーネント ファイルの名前が大文字の `T` で始まることを確認します。
 
 1. コンポーネントに最初のマークアップを指定します。
 
@@ -155,9 +155,9 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
 
 1. ナビゲーション バーに `Todo` コンポーネントを追加します。
 
-   アプリのレイアウトでは、`NavMenu` コンポーネント (*Shared/NavMenu.csthml*) が使用されます。 レイアウトは、アプリ内でのコンテンツの重複を回避するために使うコンポーネントです。
+   `NavMenu` コンポーネント (`Shared/NavMenu.razor`) はアプリのレイアウトで使用されます。 レイアウトは、アプリ内でのコンテンツの重複を回避するために使うコンポーネントです。
 
-   *Shared/NavMenu.csthml* ファイル内で、既存のリスト アイテムの下に以下のリスト アイテムのマークアップを追加して、`Todo` コンポーネント用の `<NavLink>` 要素を追加します。
+   `Shared/NavMenu.razor` ファイル内で、既存のリスト アイテムの下に以下のリスト アイテムのマークアップを追加し、`Todo` コンポーネント用の `<NavLink>` 要素を追加します。
 
    ```razor
    <li class="nav-item px-3">
@@ -169,11 +169,11 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
 
 1. アプリケーションをリビルドして実行します。 新しい Todo ページに移動して、`Todo` コンポーネントへのリンクが機能することを確認します。
 
-1. Todo アイテムを表すクラスを保持するために、プロジェクトのルートに *TodoItem.cs* ファイルを追加します。 `TodoItem` クラス用に次の C# コードを使います。
+1. Todo アイテムを表すクラスを保持するために、プロジェクトのルートに `TodoItem.cs` ファイルを追加します。 `TodoItem` クラス用に次の C# コードを使います。
 
    [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
-1. `Todo` コンポーネントに戻ります (*Pages/Todo.razor*)。
+1. `Todo` コンポーネント (`Pages/Todo.razor`) に戻ります。
 
    * Todo 項目用のフィールドを `@code` ブロックに追加します。 `Todo` コンポーネントでは、このフィールドを使って ToDo リストの状態を維持します。
    * 各 Todo アイテムをリスト アイテム (`<li>`) としてレンダリングするために、順序のないリストのマークアップと `foreach` ループを追加します。
@@ -184,7 +184,7 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. アプリケーションをリビルドして実行します。 **[Add todo]\(ToDo の追加\)** ボタンを選択しても何も起こりません。ボタンにイベント ハンドラーが関連付けられていないためです。
+1. アプリケーションをリビルドして実行します。 **`Add todo`** ボタンを選択しても何も起こりません。ボタンにイベント ハンドラーが関連付けられていないためです。
 
 1. `Todo` コンポーネントに `AddTodo` メソッドを追加し、`@onclick` 属性を使ってこれをボタンの選択用に登録します。 ボタンを選択すると C# のメソッド `AddTodo` が呼び出されます。
 
@@ -214,7 +214,7 @@ Blazor WebAssembly アプリを使用する場合、*wwwroot/sample-data* フォ
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
-1. 完成した `Todo` コンポーネント (*Pages/Todo.razor*):
+1. 完成した `Todo` コンポーネント (`Pages/Todo.razor`):
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 

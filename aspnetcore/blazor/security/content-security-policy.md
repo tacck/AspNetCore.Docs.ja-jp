@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 63359260766846ccf14ececfae82bf02cc598cf9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103232"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242980"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core Blazor のコンテンツ セキュリティ ポリシーを適用する
 
@@ -85,7 +85,7 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-*wwwroot/index.html* ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
+`wwwroot/index.html` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
 
 ```html
 <meta http-equiv="Content-Security-Policy" 
@@ -108,7 +108,7 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
 
 ### <a name="blazor-server"></a>Blazor サーバー
 
-*Pages/_Host.cshtml* ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
+`Pages/_Host.cshtml` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 

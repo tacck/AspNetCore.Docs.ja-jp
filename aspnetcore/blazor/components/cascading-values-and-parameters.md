@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 70f379b3b0e48dbb340f319f3346bbbf44588740
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 43fbaa6284fa45dee46a693ed858ed06130600b6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103370"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242382"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor の値とパラメーターのカスケード
 
@@ -30,7 +30,7 @@ ms.locfileid: "85103370"
 
 次のサンプル アプリの例では、`ThemeInfo` クラスで、コンポーネント階層の下位に伝達されるテーマ情報を指定して、アプリの特定の部分にあるすべてのボタンが同じスタイルを共有するようにしています。
 
-*UIThemeClasses/ThemeInfo.cs*:
+`UIThemeClasses/ThemeInfo.cs`:
 
 ```csharp
 public class ThemeInfo
@@ -144,7 +144,7 @@ public class ThemeInfo
 
 ### <a name="tabset-example"></a>TabSet の例
 
-パラメーターのカスケードによって、コンポーネント階層全体でコンポーネントを連携させることもできます。 たとえば、サンプル アプリの次の *TabSet* の例を考えてみましょう。
+パラメーターのカスケードによって、コンポーネント階層全体でコンポーネントを連携させることもできます。 たとえば、サンプル アプリの次の `TabSet` の例を考えてみましょう。
 
 このサンプル アプリには、タブに実装されている `ITab` インターフェイスがあります。
 

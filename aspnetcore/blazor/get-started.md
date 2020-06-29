@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102332"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243604"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor の概要
 
@@ -70,7 +70,7 @@ Blazor を始めるには、選択したツールのガイダンスに従いま�
 
    2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor サーバー*については、「<xref:blazor/hosting-models>」を参照してください。
 
-1. Visual Studio Code で *WebApplication1* フォルダーを開きます。
+1. Visual Studio Code で `WebApplication1` フォルダーを開きます。
 
 1. IDE によって、プロジェクトをビルドおよびデバッグするためにアセットを追加するよう要求されます。 **[はい]** を選択します。
 
@@ -137,15 +137,15 @@ Blazor を始めるには、選択したツールのガイダンスに従いま�
 * カウンター
 * Fetch data (データのフェッチ)
 
-Counter ページ上で **[クリックしてください]** ボタンを選択し、ページを更新することなくカウンターをインクリメントします。 Web ページでカウンターをインクリメントするには、通常、JavaScript を記述することが必要ですが、Blazor では C# を使用できます。
+Counter ページで、ページを更新することなくカウンターをインクリメントするボタンを選択します。 Web ページでカウンターをインクリメントするには、通常、JavaScript を記述することが必要ですが、Blazor では C# を使用できます。
 
-*Pages/Counter.razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 ブラウザーで `/counter` の要求があると、上部の `@page` ディレクティブで指定されているように、`Counter` コンポーネントによってそのコンテンツがレンダリングされます。 コンポーネントは、レンダリング ツリーのメモリ内表現としてレンダリングされ、柔軟かつ効率的な方法で UI を更新するために利用できるようになります。
 
-**[クリックしてください]** ボタンを選択するたびに:
+ボタンを選択するたびに:
 
 * `onclick` イベントが発生します。
 * `IncrementCount` メソッドが呼び出されます。
@@ -156,7 +156,7 @@ Counter ページ上で **[クリックしてください]** ボタンを選択�
 
 HTML 構文を使用して、別のコンポーネントにコンポーネントを追加します。 たとえば、`Index` コンポーネントに `<Counter />` 要素を追加することで、アプリのホームページに `Counter` コンポーネントを追加します。
 
-*Pages/Index.razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -167,17 +167,17 @@ HTML 構文を使用して、別のコンポーネントにコンポーネント
 * 属性 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) を使用して、`IncrementAmount` のためのパブリック プロパティを追加します。
 * `currentCount` の値を増やすときに `IncrementAmount` を使うように `IncrementCount` メソッドを変更します。
 
-*Pages/Counter.razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 属性を使用して、`Index` コンポーネントの `<Counter>` 要素内に `IncrementAmount` を指定します。
 
-*Pages/Index.razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-アプリを実行します。 `Index` コンポーネントは、 **[クリックしてください]** ボタンが選択されるたびに 10 ずつインクリメントされる独自のカウンターを持っています。 `/counter` にある `Counter` コンポーネント (*Counter.razor*) は、引き続き 1 ずつインクリメントされます。
+アプリを実行します。 `Index` コンポーネントには、ボタンが選択されるたびに 10 ずつインクリメントされる独自のカウンターがあります。 `/counter` にある `Counter` コンポーネント (`Pages/Counter.razor`) は、引き続き 1 ずつインクリメントされます。
 
 ## <a name="next-steps"></a>次の手順
 

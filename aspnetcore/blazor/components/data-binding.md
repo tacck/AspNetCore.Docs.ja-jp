@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: c901ba0cbcd79bb14cb32a6a56a2595d159f8678
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103362"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242499"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
@@ -240,10 +240,10 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
 
 チェーン バインドは、ページの要素で [`@bind`](xref:mvc/views/razor#bind) 構文を使用して実装することはできません。 イベント ハンドラーと値は、個別に指定する必要があります。 ただし、親コンポーネントでは、[`@bind`](xref:mvc/views/razor#bind) 構文をコンポーネントのパラメーターと共に使用できます。
 
-次の `PasswordField` コンポーネント (*PasswordField.razor*) は、以下のことを行います。
+次の `PasswordField` コンポーネント (`PasswordField.razor`) では、次を実行します。
 
 * `Password` プロパティに `<input>` 要素の値を設定します。
-* [EventCallback](xref:blazor/components/event-handling#eventcallback) を使用して、`Password` プロパティの変更を親コンポーネントに公開します。
+* [`EventCallback`](xref:blazor/components/event-handling#eventcallback) を使用して、`Password` プロパティの変更を親コンポーネントに公開します。
 * `onclick` イベントは、`ToggleShowPassword` メソッドをトリガーするために使用します。 詳細については、「<xref:blazor/components/event-handling>」を参照してください。
 
 ```razor

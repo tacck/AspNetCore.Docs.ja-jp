@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 99ebe43da191153aa98cce6bae8fe98035bc7d6f
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: ed49ba13842f2b5805250d8c12535397c542cfd4
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103409"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242876"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD のグループ、管理者ロール、ユーザー定義ロール
 
@@ -45,7 +45,7 @@ Azure Active Directory (AAD) には、ASP.NET Core Identity と組み合わせ�
 `groups` メンバーシップ要求を提供するように Azure portal でアプリを構成するには、次の Azure の記事を参照してください。 ユーザー定義 AAD グループと組み込み管理者ロールにユーザーを割り当てます。
 
 * [Azure AD セキュリティ グループを使用したロール](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
-* [groupMembershipClaims 属性](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
+* [`groupMembershipClaims` 属性](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 次の例では、ユーザーは AAD の組み込み "*課金管理者*" ロールに割り当てられているものとします。
 
@@ -53,7 +53,7 @@ AAD によって送信される単一の `groups` 要求では、ユーザーの
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張して、グループとロールの配列プロパティを含めます。
 
-*CustomUserAccount.cs*:
+`CustomUserAccount.cs`:
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -115,7 +115,7 @@ public class CustomUserFactory
 
 元の `groups` 要求はフレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
 
-スタンドアロン アプリまたはホストされているソリューションのクライアント アプリの `Program.Main` (*Program.cs*) に、ファクトリを登録します。
+スタンドアロン アプリまたはホストされているソリューションのクライアント アプリの `Program.Main` (`Program.cs`) に、ファクトリを登録します。
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -145,7 +145,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 
 次の例のアプリでは、前述のポリシーを使用してユーザーを承認します。
 
-[AuthorizeView コンポーネント](xref:blazor/security/index#authorizeview-component)ではポリシーが使用されます。
+[`AuthorizeView` コンポーネント](xref:blazor/security/index#authorizeview-component)ではポリシーが使用されます。
 
 ```razor
 <AuthorizeView Policy="BillingAdministrator">
@@ -245,7 +245,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 この時点でコンポーネントの承認方法が機能しています。 コンポーネント内のすべての承認メカニズムで、`admin` ロールを使用してユーザーを承認できます。
 
-* [AuthorizeView コンポーネント](xref:blazor/security/index#authorizeview-component) (例: `<AuthorizeView Roles="admin">`)
+* [`AuthorizeView` コンポーネント](xref:blazor/security/index#authorizeview-component) (例: `<AuthorizeView Roles="admin">`)
 * [`[Authorize]` 属性ディレクティブ](xref:blazor/security/index#authorize-attribute) (<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>) (例: `@attribute [Authorize(Roles = "admin")]`)
 * [手続き型ロジック](xref:blazor/security/index#procedural-logic) (例: `if (user.IsInRole("admin")) { ... }`)
 

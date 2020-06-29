@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 59adcce972b503a6aa6e596bc9bff63225961f84
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102500"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243201"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
@@ -135,7 +135,7 @@ ASP.NET Core の[データ保護](xref:security/data-protection/introduction)を
 
 ## <a name="protected-browser-storage-experimental-package"></a>Protected Browser Storage 試験用パッケージ
 
-NuGet パッケージには `localStorage` や `sessionStorage` の[データを保護する](xref:security/data-protection/introduction)ものがありますが、その一例が [Microsoft.AspNetCore.ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) です。
+NuGet パッケージには `localStorage` や `sessionStorage` の[データを保護する](xref:security/data-protection/introduction)ものがありますが、その一例が [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) です。
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage` はサポートのない試験用パッケージであり、現時点では運用環境での使用に適していません。
@@ -144,8 +144,8 @@ NuGet パッケージには `localStorage` や `sessionStorage` の[データを
 
 `Microsoft.AspNetCore.ProtectedBrowserStorage` パッケージをインストールするには:
 
-1. Blazor Server アプリ プロジェクトで、[Microsoft.AspNetCore.ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) にパッケージ参照を追加します。
-1. 最上位 HTML (たとえば、デフォルト プロジェクト テンプレートの *Pages/_Host.cshtml* ファイルで) で、次の `<script>` タグを追加します。
+1. Blazor Server アプリ プロジェクトで、[`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) へのパッケージ参照を追加します。
+1. 最上位 HTML (たとえば、デフォルト プロジェクト テンプレートの `Pages/_Host.cshtml` ファイルで) で、次の `<script>` タグを追加します。
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
@@ -171,7 +171,7 @@ NuGet パッケージには `localStorage` や `sessionStorage` の[データを
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-`@using` ステートメントは、コンポーネントの代わりに、 *_Imports.razor* ファイルに入れることができます。 *_Imports.razor* ファイルを使用すると、アプリの中の大きなセグメントで、あるいはアプリ全体で名前空間を利用できます。
+`@using` ステートメントは、コンポーネントの代わりに、`_Imports.razor` ファイルに入れることができます。 `_Imports.razor` ファイルを使用すると、アプリの中の大きなセグメントで、あるいはアプリ全体で名前空間を利用できます。
 
 プロジェクト テンプレートの `Counter` コンポーネントに `currentCount` 値を保持するには、`ProtectedSessionStore.SetAsync` を使用するように `IncrementCount` メソッドを変更します。
 
@@ -215,7 +215,7 @@ protected override async Task OnInitializedAsync()
 private int? currentCount;
 ```
 
-カウントや **[インクリメント]** ボタンを無条件で表示するのではなく、データが読み込まれる場合にのみこれらの要素を表示するように選択します。
+カウントや **`Increment`** ボタンを無条件で表示するのではなく、データが読み込まれる場合にのみこれらの要素を表示するように選択します。
 
 ```razor
 @if (currentCount.HasValue)
@@ -243,7 +243,7 @@ else
 
 このエラーを解決する方法の 1 つは、プリレンダリングを無効にすることです。 これは通常、ブラウザーベースのストレージがアプリで頻繁に使用される場合、最良の選択肢となります。 プリレンダリングによってさらに複雑になり、アプリにとっては良いことがありません。アプリでは `localStorage` または `sessionStorage` が利用できなければ、役に立つコンテンツをプリレンダリングできないからです。
 
-プリレンダリングを無効にするには、*Pages/_Host cshtml* ファイルを開き、[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)の `render-mode` を <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> に変更します。
+プリレンダリングを無効にするには、`Pages/_Host.cshtml` ファイルを開き、[コンポーネント タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)の `render-mode` を <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> に変更します。
 
 プリレンダリングは、`localStorage` や `sessionStorage` を使用しない他のページでは役に立つかもしれません。 プリレンダリングを有効にしておくには、ブラウザーが回線に接続されるまで読み込み操作を延期します。 次はカウンター値を格納する例です。
 
@@ -326,7 +326,7 @@ else
 
 `CounterStateProvider` コンポーネントによって読み込み段階が処理されます。読み込みが完了するまで、その子コンテンツがレンダリングされることはありません。
 
-`CounterStateProvider` コンポーネントを使用するには、カウンター状態にアクセスする必要がある他のコンポーネントをコンポーネントのインスタンスでラップします。 アプリに含まれるすべてのコンポーネントが状態にアクセスできるようにするには、`App` コンポーネント (*App.razor*) で <xref:Microsoft.AspNetCore.Components.Routing.Router> を `CounterStateProvider` コンポーネントでラップします。
+`CounterStateProvider` コンポーネントを使用するには、カウンター状態にアクセスする必要がある他のコンポーネントをコンポーネントのインスタンスでラップします。 アプリに含まれるすべてのコンポーネントが状態にアクセスできるようにするには、`App` コンポーネント (`App.razor`) で <xref:Microsoft.AspNetCore.Components.Routing.Router> を `CounterStateProvider` コンポーネントでラップします。
 
 ```razor
 <CounterStateProvider>

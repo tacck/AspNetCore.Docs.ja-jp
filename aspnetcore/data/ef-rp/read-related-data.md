@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 5ffb57f21c89e21fcbb14b933cb0d0cb29d9c71b
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652616"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240945"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>パート 6、ASP.NET Core の Razor ページと EF Core - 関連データの読み込み
 
@@ -52,7 +52,7 @@ EF Core がエンティティのナビゲーション プロパティに関連�
 
   ![分離したクエリの例](read-related-data/_static/separate-queries.png)
 
-  メモ:EF Core は、コンテキスト インスタンスに以前に読み込まれたその他のエンティティに対して、ナビゲーション プロパティを自動的に修正します。 ナビゲーション プロパティのデータが明示的に含まれ*ない*場合でも、関連エンティティの一部またはすべてが以前に読み込まれていれば、プロパティを設定することができます。
+  **注:** EF Core は、コンテキスト インスタンスに以前に読み込まれたその他のエンティティに対して、ナビゲーション プロパティを自動的に修正します。 ナビゲーション プロパティのデータが明示的に含まれ*ない*場合でも、関連エンティティの一部またはすべてが以前に読み込まれていれば、プロパティを設定することができます。
 
 * [明示的読み込み](/ef/core/querying/related-data#explicit-loading)。 エンティティが最初に読み込まれるときに、関連データは取得されません。 必要なときに関連するデータを取得するコードを記述する必要があります。 分離したクエリによる明示的読み込みにより、複数のクエリがデータベースに送信されます。 明示的読み込みでは、コードで読み込まれるナビゲーション プロパティを指定します。 明示的読み込みを行うには、`Load` メソッドを使用します。 次に例を示します。
 
@@ -231,7 +231,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
 
 選択されたインストラクターがビュー モデルのインストラクターのリストから取得されます。 ビュー モデルの `Courses` プロパティが `Course` エンティティと共にそのインストラクターの `CourseAssignments` ナビゲーション プロパティから読み込まれます。
 
-`Where` メソッドはコレクションを返します。 しかし、この場合は、フィルターによって 1 つのエンティティが選択されます。 そのため、`Single` メソッドはコレクションを 1 つの `Instructor` エンティティに変換するために呼び出されます。 `Instructor` エンティティは `CourseAssignments` プロパティへのアクセスを提供します。 `CourseAssignments` は関連する `Course` エンティティへのアクセスを提供します。
+`Where` メソッドはコレクションを返します。 ただし、この場合、フィルターによってエンティティが 1 つ選択されます。そのため、コレクションを 1 つの `Instructor` エンティティに変換する目的で `Single` メソッドが呼び出されます。 `Instructor` エンティティは `CourseAssignments` プロパティへのアクセスを提供します。 `CourseAssignments` は関連する `Course` エンティティへのアクセスを提供します。
 
 ![インストラクター対コース m:M](complex-data-model/_static/courseassignment.png)
 

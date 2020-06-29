@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408189"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459767"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core での応答のキャッシュ
 
@@ -39,7 +39,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 共通の `Cache-Control` ディレクティブを次の表に示します。
 
-| ディレクティブ                                                       | 操作 |
+| ディレクティブ                                                       | アクション |
 | --------------------------------------------------------------- | ------ |
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | キャッシュは応答を格納できます。 |
 | [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 応答は、共有キャッシュによって格納されていない必要があります。 プライベートキャッシュは、応答を格納して再利用できます。 |
@@ -176,7 +176,17 @@ Cache-Control: public,max-age=10
 
 キャッシュプロファイルを設定します。 次の例は、サンプルアプリの30秒のキャッシュプロファイルを示してい `Startup.ConfigureServices` ます。
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](response/samples/3.x/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 サンプルアプリの Cache4 ページモデルは、キャッシュプロファイルを参照し `Default30` ます。
 
@@ -184,9 +194,9 @@ Cache-Control: public,max-age=10
 
 は、 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> 次のように適用できます。
 
-* Razorページハンドラー (クラス): ハンドラーメソッドに属性を適用することはできません。
-* MVC コントローラー (クラス)。
-* MVC アクション (メソッド): メソッドレベルの属性は、クラスレベルの属性で指定された設定をオーバーライドします。
+* Razorページ: ハンドラーメソッドに属性を適用することはできません。
+* MVC コントローラー。
+* MVC アクションメソッド: メソッドレベルの属性は、クラスレベルの属性で指定された設定をオーバーライドします。
 
 結果のヘッダーは、キャッシュプロファイルによって Cache4 ページの応答に適用され `Default30` ます。
 

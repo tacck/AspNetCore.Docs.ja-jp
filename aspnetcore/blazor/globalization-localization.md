@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 42b61c9af0c1809ecb7d9a45ec8edfa815e2df22
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102326"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243591"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -71,7 +71,7 @@ Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://devel
 
 既定では、Blazor WebAssembly に対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
 
-Blazor で既定で選択されるカルチャは、ほとんどのユーザーにとって十分と考えられますが、ユーザーが優先ロケールを指定する手段を提供することを検討してください。 カルチャ ピッカーを使用した Blazor WebAssembly サンプル アプリについては、[LocSample](https://github.com/pranavkm/LocSample) ローカライズのサンプル アプリを参照してください。
+Blazor で既定で選択されるカルチャは、ほとんどのユーザーにとって十分と考えられますが、ユーザーが優先ロケールを指定する手段を提供することを検討してください。 カルチャ ピッカーを使用した Blazor WebAssembly サンプル アプリについては、[`LocSample`](https://github.com/pranavkm/LocSample) ローカライズのサンプル アプリを参照してください。
 
 ### <a name="blazor-server"></a>Blazor サーバー
 
@@ -92,7 +92,7 @@ Cookie を使用すると、WebSocket 接続によってカルチャを正しく
 
 カルチャがローカライズ Cookie で保持されている場合は、任意の手法を使用してカルチャを割り当てることができます。 アプリにサーバー側 ASP.NET Core 用に確立されたローカライズ スキームが既にある場合は、アプリの既存のローカライズ インフラストラクチャを引き続き使用し、アプリのスキーム内にローカライズ カルチャ Cookie を設定します。
 
-次の例では、ローカライズ ミドルウェアによって読み取ることができる Cookie で現在のカルチャを設定する方法を示します。 *Pages/_Host.cshtml* ファイルの開いている `<body>` タグのすぐ下に、Razor 式を作成します。
+次の例では、ローカライズ ミドルウェアによって読み取ることができる Cookie で現在のカルチャを設定する方法を示します。 `Pages/_Host.cshtml` ファイルの開いている `<body>` タグのすぐ下に、Razor 式を作成します。
 
 ```cshtml
 @using System.Globalization
@@ -118,7 +118,7 @@ Cookie を使用すると、WebSocket 接続によってカルチャを正しく
 
 1. ブラウザーによって、アプリに最初の HTTP 要求が送信されます。
 1. カルチャは、ローカライズ ミドルウェアによって割り当てられます。
-1. `_Host` ページ ( *_Host.cshtml*) の Razor 式によって、応答の一部として Cookie にカルチャが保持されます。
+1. `_Host` ページ (`_Host.cshtml`) の Razor 式によって、応答の一部として Cookie にカルチャが保持されます。
 1. ブラウザーによって、WebSocket 接続が開かれ、対話型の Blazor サーバー セッションが作成されます。
 1. ローカライズ ミドルウェアによって、Cookie が読み取られ、カルチャが割り当てられます。
 1. Blazor サーバー セッションは、正しいカルチャで開始されます。
