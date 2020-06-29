@@ -1,7 +1,7 @@
-<span data-ttu-id="fede4-101">`RedirectToLogin`コンポーネント (*Shared/redirecttologin. razor*):</span><span class="sxs-lookup"><span data-stu-id="fede4-101">The `RedirectToLogin` component (*Shared/RedirectToLogin.razor*):</span></span>
+<span data-ttu-id="b91bd-101">`RedirectToLogin` コンポーネント (`Shared/RedirectToLogin.razor`) は:</span><span class="sxs-lookup"><span data-stu-id="b91bd-101">The `RedirectToLogin` component (`Shared/RedirectToLogin.razor`):</span></span>
 
-* <span data-ttu-id="fede4-102">承認されていないユーザーのログインページへのリダイレクトを管理します。</span><span class="sxs-lookup"><span data-stu-id="fede4-102">Manages redirecting unauthorized users to the login page.</span></span>
-* <span data-ttu-id="fede4-103">認証が成功した場合にそのページに戻ることができるように、ユーザーがアクセスしようとしている現在の URL を保持します。</span><span class="sxs-lookup"><span data-stu-id="fede4-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
+* <span data-ttu-id="b91bd-102">承認されていないユーザーのログイン ページへのリダイレクトを管理します。</span><span class="sxs-lookup"><span data-stu-id="b91bd-102">Manages redirecting unauthorized users to the login page.</span></span>
+* <span data-ttu-id="b91bd-103">認証が成功した場合にそのページに戻ることができるように、ユーザーがアクセスしようとしている現在の URL を保持します。</span><span class="sxs-lookup"><span data-stu-id="b91bd-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
 
 ```razor
 @inject NavigationManager Navigation

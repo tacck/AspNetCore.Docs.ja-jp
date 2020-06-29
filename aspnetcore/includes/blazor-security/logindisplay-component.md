@@ -1,9 +1,9 @@
-<span data-ttu-id="2948e-101">コンポーネント `LoginDisplay` (*Shared/logindisplay*) は、 `MainLayout` コンポーネント (*shared/mainlayout*) にレンダリングされ、次の動作を管理します。</span><span class="sxs-lookup"><span data-stu-id="2948e-101">The `LoginDisplay` component (*Shared/LoginDisplay.razor*) is rendered in the `MainLayout` component (*Shared/MainLayout.razor*) and manages the following behaviors:</span></span>
+<span data-ttu-id="8350b-101">`LoginDisplay` コンポーネント (`Shared/LoginDisplay.razor`) は `MainLayout` コンポーネント (`Shared/MainLayout.razor`) でレンダリングされます。このコンポーネントによって次の動作が管理されます。</span><span class="sxs-lookup"><span data-stu-id="8350b-101">The `LoginDisplay` component (`Shared/LoginDisplay.razor`) is rendered in the `MainLayout` component (`Shared/MainLayout.razor`) and manages the following behaviors:</span></span>
 
-* <span data-ttu-id="2948e-102">認証されたユーザーの場合:</span><span class="sxs-lookup"><span data-stu-id="2948e-102">For authenticated users:</span></span>
-  * <span data-ttu-id="2948e-103">現在のユーザー名を表示します。</span><span class="sxs-lookup"><span data-stu-id="2948e-103">Displays the current username.</span></span>
-  * <span data-ttu-id="2948e-104">アプリからログアウトするためのボタンが用意されています。</span><span class="sxs-lookup"><span data-stu-id="2948e-104">Offers a button to log out of the app.</span></span>
-* <span data-ttu-id="2948e-105">匿名ユーザーの場合、にログインするオプションが用意されています。</span><span class="sxs-lookup"><span data-stu-id="2948e-105">For anonymous users, offers the option to log in.</span></span>
+* <span data-ttu-id="8350b-102">認証されたユーザーの場合:</span><span class="sxs-lookup"><span data-stu-id="8350b-102">For authenticated users:</span></span>
+  * <span data-ttu-id="8350b-103">現在のユーザー名が表示されます。</span><span class="sxs-lookup"><span data-stu-id="8350b-103">Displays the current username.</span></span>
+  * <span data-ttu-id="8350b-104">アプリからログアウトするためのボタンが用意されます。</span><span class="sxs-lookup"><span data-stu-id="8350b-104">Offers a button to log out of the app.</span></span>
+* <span data-ttu-id="8350b-105">匿名ユーザーの場合は、ログインするオプションが用意されます。</span><span class="sxs-lookup"><span data-stu-id="8350b-105">For anonymous users, offers the option to log in.</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
