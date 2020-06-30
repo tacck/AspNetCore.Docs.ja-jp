@@ -5,20 +5,22 @@ description: データへのバインド、イベントの処理、コンポー�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/11/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 02e3f7f5442a5abde0b13b7bba14d9d0f29c1de7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242435"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399089"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -427,11 +429,24 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 > [!NOTE]
 > 子コンポーネントの状態を変えるためにコンポーネント参照を使用**しない**でください。 代わりに、通常の宣言型パラメーターを使用して、子コンポーネントにデータを渡します。 通常の宣言型パラメーターを使用すると、子コンポーネントが正しいタイミングで自動的にレンダリングされます。
 
-## <a name="invoke-component-methods-externally-to-update-state"></a>状態を更新するために外部でコンポーネント メソッドを呼び出す
+## <a name="synchronization-context"></a>同期コンテキスト
 
 Blazor では、同期コンテキスト (<xref:System.Threading.SynchronizationContext>) を使用して、1 つの実行の論理スレッドを強制します。 コンポーネントの[ライフサイクル メソッド](xref:blazor/components/lifecycle)と、Blazor によって発生するすべてのイベント コールバックは、同期コンテキストで実行されます。
 
-Blazor サーバーの同期コンテキストでは、ブラウザーの WebAssembly モデル (シングル スレッド) と厳密に一致するように、シングルスレッド環境のエミュレートが試行されます。 どの時点でも、作業は 1 つのスレッドでのみ実行され、1 つの論理スレッドであるという印象になります。 2 つの操作が同時に実行されることはありません。
+Blazor Server の同期コンテキストでは、ブラウザーの WebAssembly モデル (シングル スレッド) と厳密に一致するように、シングルスレッド環境のエミュレートが試行されます。 どの時点でも、作業は 1 つのスレッドでのみ実行され、1 つの論理スレッドであるという印象になります。 2 つの操作が同時に実行されることはありません。
+
+### <a name="avoid-thread-blocking-calls"></a>スレッドをブロックする呼び出しを避ける
+
+一般に、次のメソッドは呼び出さないでください。 次のメソッドでは、スレッドがブロックされます。そのため、基になる <xref:System.Threading.Tasks.Task> が完了するまで、アプリの動作が再開されなくなります。
+
+* <xref:System.Threading.Tasks.Task%601.Result%2A>
+* <xref:System.Threading.Tasks.Task.Wait%2A>
+* <xref:System.Threading.Tasks.Task.WaitAny%2A>
+* <xref:System.Threading.Tasks.Task.WaitAll%2A>
+* <xref:System.Threading.Thread.Sleep%2A>
+* <xref:System.Runtime.CompilerServices.TaskAwaiter.GetResult%2A>
+
+### <a name="invoke-component-methods-externally-to-update-state"></a>状態を更新するために外部でコンポーネント メソッドを呼び出す
 
 タイマーやその他の通知などの外部のイベントに基づいてコンポーネントを更新する必要がある場合は、`InvokeAsync` メソッドを使用します。これにより、Blazor の同期コンテキストにディスパッチされます。 たとえば、リッスンしているコンポーネントに、更新状態を通知できる*通知サービス* を考えてみます。
 
@@ -459,7 +474,7 @@ public class NotifierService
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* Blazor サーバーで、`Startup.ConfigureServices` にサービスを登録します。
+* Blazor Server で、`Startup.ConfigureServices` にサービスを登録します。
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -798,7 +813,7 @@ Blazor では HTML がレンダリングされるため、スケーラブル ベ
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* <xref:blazor/security/server/threat-mitigation>:リソース不足に対処する必要がある Blazor サーバー アプリの構築に関するガイダンスが含まれています。
+* <xref:blazor/security/server/threat-mitigation>:リソース不足に対処する必要がある Blazor Server アプリの構築に関するガイダンスが含まれています。
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

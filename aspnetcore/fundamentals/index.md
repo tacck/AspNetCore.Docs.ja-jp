@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: 0f0e97246b6e1381b85866bd831ee9b4b150650d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c797ce8bcb22aec2b56df2f3b108da4cbfde263d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774328"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403301"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core の基礎
 
@@ -172,7 +174,7 @@ ASP.NET Core では、組み込みやサード パーティ製のさまざまな
 
 ## <a name="routing"></a>ルーティング
 
-*ルート*とは、ハンドラーにマップされている URL のパターンです。 このハンドラーは一般的には Razor Pages、MVC コントローラーのアクション メソッドまたはミドルウェアです。 ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。
+*ルート*とは、ハンドラーにマップされている URL のパターンです。 このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。 ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。
 
 詳細については、「<xref:fundamentals/routing>」を参照してください。
 
@@ -223,7 +225,7 @@ Web ルートは、次のような、パブリックで静的なリソース フ
 
 既定では、静的ファイルは Web ルート ディレクトリとそのサブディレクトリからのみ提供されます。 Web ルートのパスの既定値は、 *{コンテンツ ルート}/wwwroot* です。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別の Web ルートを指定します。 詳細については、「[Web ルート](xref:fundamentals/host/generic-host#webroot)」を参照してください。
 
-プロジェクト ファイル内の [\<コンテンツ > プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content) を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* とそのサブディレクトリにコンテンツを公開しないようにします。
+プロジェクト ファイル内の [\<Content> プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content)を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* とそのサブディレクトリにコンテンツを公開しないようにします。
 
 ```xml
 <ItemGroup>
@@ -481,7 +483,7 @@ Web ルートは、次のような、パブリックで非コードの静的な�
 
 Web ルートのパスの既定値は、" *{コンテンツ ルート}/wwwroot*" ですが、[ホストの構築](#host)時に別の Web ルートを指定することも可能です。 詳細については、「[Web ルート](xref:fundamentals/host/web-host#web-root)」を参照してください。
 
-プロジェクト ファイル内の [\<コンテンツ > プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content) を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* ディレクトリおよびサブディレクトリにコンテンツを公開しないようにします。
+プロジェクト ファイル内の [\<Content> プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content)を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* ディレクトリおよびサブディレクトリにコンテンツを公開しないようにします。
 
 ```xml
 <ItemGroup>

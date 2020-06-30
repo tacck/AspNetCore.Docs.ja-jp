@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: 565cde233d6fc5f085ae1709e167e73980d5c3c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776234"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403366"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>チュートリアル: ASP.NET Core の概要
 
@@ -29,7 +31,7 @@ ms.locfileid: "82776234"
 > * Web アプリ プロジェクトを作成する。
 > * 開発証明書を信頼します。
 > * アプリを実行します。
-> * Razor ページを編集する。
+> * Razor ページを編集します。
 
 最後に、作業用の Web アプリがご利用のローカル コンピューター上で実行されるようにします。
 

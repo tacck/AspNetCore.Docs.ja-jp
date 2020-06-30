@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a2c068df85290a59d45432cb168b2c882b59405b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777151"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405368"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Facebook、Google、ASP.NET Core での外部プロバイダーの認証
 
@@ -27,7 +29,7 @@ ms.locfileid: "82777151"
 
 以下のセクションでは、[Facebook](xref:security/authentication/facebook-logins)、[Twitter](xref:security/authentication/twitter-logins)、[Google](xref:security/authentication/google-logins)、および [Microsoft](xref:security/authentication/microsoft-logins) の各プロバイダーを対象とします。また、この記事で作成するスタート プロジェクトを使用します。 他のプロバイダーは、[AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers)、[AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) などのサードパーティ パッケージで利用できます。
 
-既存の資格情報でユーザーがサインインできるようになると: 
+既存の資格情報でユーザーがサインインできるようになると:
 
 * ユーザーにとって便利です。
 * サインイン プロセスの複雑な管理の多くが、サード パーティに移ります。
@@ -63,7 +65,7 @@ ms.locfileid: "82777151"
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * `dotnet new` コマンドでは、*WebApp1* フォルダーに新しい Razor Pages プロジェクトが作成されます。
+  * `dotnet new` コマンドを使用すると、*WebApp1* フォルダーに新しい Razor Pages プロジェクトが作成されます。
   * `-au Individual` によって、個々の認証に対するコードを作成します。
   * `-uld` では、Windows 用の SQL Server Express の軽量バージョンである、LocalDB を使用します。 `-uld` を省略して SQLite を使用します。
   * `code` コマンドでは、Visual Studio Code の新しいインスタンス内に *WebApp1* フォルダーが開かれます。
