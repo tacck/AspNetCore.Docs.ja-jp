@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 97cbc5f68d20c06e92a56ead85c8377d4e8ef582
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404588"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793565"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>IdentityASP.NET Core の概要
 
@@ -93,7 +93,11 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-SQLite を使用する場合、この手順で移行する必要はありません。 LocalDB の場合は、次のコマンドを実行します。
+SQLite を使用する場合、この手順で移行する必要はありません。
+
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
+
+LocalDB の場合は、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet ef database update
@@ -238,11 +242,11 @@ Post は*Pages/Shared/_LoginPartial*に指定されています。
 </Target>
 ```
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 * [ASP.NET Core Identity ソースコード](https://github.com/dotnet/aspnetcore/tree/master/src/Identity)
 * SQLite を使用したの構成の詳細については、こちらの[GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/5131)を参照してください Identity 。
-* [設定Identity](xref:security/authentication/identity-configuration)
+* [Identity を構成する](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>
@@ -429,10 +433,10 @@ Post は*Pages/Shared/_LoginPartial*に指定されています。
 
 パスワードの最小要件を設定するサンプルについては、「[構成](#pw)」を参照してください。
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 * SQLite を使用したの構成の詳細については、こちらの[GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/5131)を参照してください Identity 。
-* [設定Identity](xref:security/authentication/identity-configuration)
+* [Identity を構成する](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

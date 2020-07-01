@@ -3,7 +3,7 @@ title: ASP.NET Core Web API のカスタム フォーマッタ
 author: rick-anderson
 description: ASP.NET Core で Web API のカスタム フォーマッタを作成して使用する方法を説明します。
 ms.author: riande
-ms.date: 02/08/2017
+ms.date: 06/25/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 27819f77cf86c946ab0415d3583dfbab80a24cf5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c6ec73c028c7003a40b2f09b631bdc2c976686fa
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408865"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793358"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API のカスタム フォーマッタ
 
@@ -30,7 +30,7 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 この記事では、カスタム フォーマッタを作成して、追加形式のサポートを追加する方法を示します。 カスタムプレーンテキスト入力フォーマッタの例については、GitHub の[TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs)を参照してください。
 
-[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
+[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 ## <a name="when-to-use-custom-formatters"></a>カスタム フォーマッタを使用するタイミング
 
@@ -41,8 +41,8 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 カスタムフォーマッタを作成するには:
 
 * クライアントに送信されるデータをシリアル化するには、出力フォーマッタクラスを作成します。
-* クライアントから受信したデータを deserialzing するには、入力フォーマッタクラスを作成します。
-* フォーマッタクラスのインスタンスを、 `InputFormatters` `OutputFormatters` [MvcOptions](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions)のコレクションおよびコレクションに追加します。
+* クライアントから受信したデータを逆シリアル化するには、入力フォーマッタクラスを作成します。
+* のコレクションおよびのコレクションに、フォーマッタクラスのインスタンスを追加 `InputFormatters` `OutputFormatters` <xref:Microsoft.AspNetCore.Mvc.MvcOptions> します。
 
 ## <a name="how-to-create-a-custom-formatter-class"></a>カスタム フォーマッタ クラスの作成方法
 
@@ -53,31 +53,31 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 * <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType%2A> および <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType%2A> メソッドをオーバーライドします。
 * <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync%2A> および `WriteResponseBodyAsync` メソッドをオーバーライドします。
 
-次のコードは、サンプルのクラスを示してい `VcardOutputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)
+次のコードは、サンプルのクラスを示してい `VcardOutputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=snippet)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_Class)]
   
 ### <a name="derive-from-the-appropriate-base-class"></a>適切な基底クラスからの派生
 
-メディアの種類がテキスト (vCard など) の場合は、[TextInputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textinputformatter) または [TextOutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.textoutputformatter) 基底クラスから派生させます。
+テキストメディアの種類 (たとえば、vCard) の場合 <xref:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter> は、またはの基底クラスから派生し <xref:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter> ます。
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_ClassDeclaration)]
 
-種類がバイナリである場合は、[InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) または [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) 基底クラスから派生させます。
+バイナリ型の場合 <xref:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter> は、またはの基底クラスから派生し <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter> ます。
 
 ### <a name="specify-valid-media-types-and-encodings"></a>有効なメディアの種類とエンコーディングの指定
 
 コンストラクターで、`SupportedMediaTypes` および `SupportedEncodings` コレクションに追加して、有効なメディアの種類とエンコーディングを指定します。
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=ctor)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_ctor)]
 
-フォーマッタクラスは、依存関係にコンストラクターの挿入を使用でき**ません**。 たとえば、を `ILogger<VcardOutputFormatter>` パラメーターとしてコンストラクターに追加することはできません。 サービスにアクセスするには、メソッドに渡されるコンテキストオブジェクトを使用します。 この記事のコード例と[サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)では、この方法を示しています。
+フォーマッタクラスは、依存関係にコンストラクターの挿入を使用でき**ません**。 たとえば、を `ILogger<VcardOutputFormatter>` パラメーターとしてコンストラクターに追加することはできません。 サービスにアクセスするには、メソッドに渡されるコンテキストオブジェクトを使用します。 この記事のコード例と[サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)では、この方法を示しています。
 
 ### <a name="override-canreadtype-and-canwritetype"></a>CanReadType と Canreadtype のオーバーライド
 
 メソッドまたはメソッドをオーバーライドして、逆シリアル化またはシリアル化を行う型を指定し `CanReadType` `CanWriteType` ます。 たとえば、型から vCard テキストを作成 `Contact` し、その逆も同様にします。
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_CanWriteType)]
 
 #### <a name="the-canwriteresult-method"></a>CanWriteResult メソッド
 
@@ -92,7 +92,7 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 * シグネチャは型を返し `Person` ます。
 * `Student`は、 `Instructor` から派生した型または型を返すことができ `Person` ます。 
 
-フォーマッタがオブジェクトのみを処理するようにするには、 `Student` メソッドに提供されたコンテキストオブジェクトの[オブジェクト](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object)の型を確認し `CanWriteResult` ます。 アクションメソッドがを返す場合 `IActionResult` :
+フォーマッタがオブジェクトのみを処理するようにするには、 `Student` <xref:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.Object> メソッドに提供されたコンテキストオブジェクトのの型を確認し `CanWriteResult` ます。 アクションメソッドがを返す場合 `IActionResult` :
 
 * を使用する必要はありません `CanWriteResult` 。
 * メソッドは、 `CanWriteType` ランタイム型を受け取ります。
@@ -103,7 +103,7 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 逆シリアル化またはシリアル化は、またはで実行され `ReadRequestBodyAsync` `WriteResponseBodyAsync` ます。 次の例は、依存関係挿入コンテナーからサービスを取得する方法を示しています。 コンストラクターのパラメーターからサービスを取得できません。
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardOutputFormatter.cs?name=writeresponse)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardOutputFormatter.cs?name=snippet_WriteResponseBodyAsync)]
 
 ## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a>カスタム フォーマッタを使用するように MVC を構成する方法
 
@@ -111,27 +111,27 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](custom-formatters/3.1sample/Startup.cs?name=mvcoptions)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!code-csharp[](custom-formatters/sample/Startup.cs?name=mvcoptions&highlight=3-4)]
+[!code-csharp[](custom-formatters/samples/2.x/CustomFormattersSample/Startup.cs?name=mvcoptions&highlight=3-4)]
 
 ::: moniker-end
 
 フォーマッタは、挿入した順序で評価されます。 最初のものが優先されます。
 
-## <a name="the-completed-vcardinputformatter-class"></a>完成した `VcardInputFormatter` クラス
+## <a name="the-complete-vcardinputformatter-class"></a>完全な `VcardInputFormatter` クラス
 
-次のコードは、サンプルのクラスを示してい `VcardInputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/3.1sample)
+次のコードは、サンプルのクラスを示してい `VcardInputFormatter` ます。 [sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)
 
-[!code-csharp[](custom-formatters/3.1sample/Formatters/VcardInputFormatter.cs?name=snippet)]
+[!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardInputFormatter.cs?name=snippet_Class)]
 
 ## <a name="test-the-app"></a>アプリのテスト
 
-[この記事のサンプルアプリを実行](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)します。これにより、基本的な vCard 入力フォーマッタと出力フォーマッタが実装されます。 アプリは次のような Vcard を読み取り、書き込みます。
+[この記事のサンプルアプリを実行](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)します。これにより、基本的な vCard 入力フォーマッタと出力フォーマッタが実装されます。 アプリは次のような Vcard を読み取り、書き込みます。
 
 ```
 BEGIN:VCARD

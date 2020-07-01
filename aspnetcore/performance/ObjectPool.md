@@ -14,16 +14,16 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 8244acb39a345875d80c5528a822de23f78b6e38
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9df7f370eb550172493478bcd8d94a9541926fec
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403548"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793555"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core の ObjectPool を使用したオブジェクトの再利用
 
-([上田 Gordon](https://twitter.com/stevejgordon)、[ライアン Nowak](https://github.com/rynowak)、 [Rick Anderson](https://twitter.com/RickAndMSFT) )
+[上田 Gordon](https://twitter.com/stevejgordon)、[ライアン Nowak](https://github.com/rynowak)、および[Günther](https://github.com/gfoidl)があります。
 
 <xref:Microsoft.Extensions.ObjectPool>は、オブジェクトのガベージコレクションを許可するのではなく、オブジェクトのグループをメモリに保持して再利用できるようにする ASP.NET Core インフラストラクチャの一部です。
 
@@ -42,7 +42,9 @@ ms.locfileid: "85403548"
 
 オブジェクトプールは、アプリまたはライブラリの現実的なシナリオを使用してパフォーマンスデータを収集した後にのみ使用してください。
 
-**警告: はを `ObjectPool` 実装していません `IDisposable` 。破棄が必要な型では使用しないことをお勧めします。**
+::: moniker range="< aspnetcore-3.0"
+**警告: はを `ObjectPool` 実装していません `IDisposable` 。破棄が必要な型では使用しないことをお勧めします。** `ObjectPool`ASP.NET Core 3.0 以降では、をサポートして `IDisposable` います。
+::: moniker-end
 
 **注: ObjectPool では、割り当てられるオブジェクトの数に制限は設定されません。これにより、保持するオブジェクトの数に制限が適用されます。**
 
@@ -63,7 +65,20 @@ ObjectPool は、次のような複数の方法でアプリで使用できます
 
 ## <a name="how-to-use-objectpool"></a>ObjectPool の使用方法
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>オブジェクトを取得し、オブジェクトを返すには、を呼び出し <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> ます。  すべてのオブジェクトを返す必要はありません。 オブジェクトを返さない場合は、ガベージコレクションが実行されます。
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Get*>オブジェクトを取得し、オブジェクトを返すには、を呼び出し <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> ます。  すべてのオブジェクトを返す必要はありません。 オブジェクトを返さない場合は、ガベージコレクションが実行されます。
+
+::: moniker range=">= aspnetcore-3.0"
+<xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider>が使用され、を実装する場合 `T` `IDisposable` :
+
+* プールに返され***ない***項目は破棄されます。
+* プールが DI によって破棄されると、プール内のすべての項目が破棄されます。
+
+注: プールが破棄された後:
+
+* を呼び出す `Get` と、がスローさ `ObjectDisposedException` れます。
+* `return`指定された項目を破棄します。
+
+::: moniker-end
 
 ## <a name="objectpool-sample"></a>ObjectPool サンプル
 
