@@ -7,17 +7,19 @@ ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: 0990013947be2cee5045deac92efc3c6bcf12e03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1e4e5cd6a4a687ecacf0c4803784e68aee228498
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768836"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404211"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>dotnet-grpc を使用して Protobuf 参照を管理する
 
@@ -41,7 +43,7 @@ dotnet tool install -g dotnet-grpc
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Protobuf 参照は、C# クライアントやサーバーのアセットを生成するために使用されます。`dotnet-grpc` ツールは以下のことが可能です。
+Protobuf 参照は、C# クライアントやサーバーの資産を生成するために使用されます。 `dotnet-grpc` ツールは以下のことが可能です。
 
 * ディスク上のローカル ファイルから Protobuf 参照を作成します。
 * URL で指定されたリモート ファイルから Protobuf 参照を作成します。

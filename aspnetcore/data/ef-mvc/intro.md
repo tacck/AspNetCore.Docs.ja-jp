@@ -8,17 +8,19 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773550"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403223"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>チュートリアル: ASP.NET MVC Web アプリでの EF Core の概要
 
@@ -318,7 +320,7 @@ SSOX で **(localdb)\MSSQLLocalDB > Databases** をクリックし、*appsetting
 
 ![SSOX の Student テーブル](intro/_static/ssox-student-table.png)
 
-データベース ファイルの *.mdf* と *.ldf* は *C:\Users\\\<ユーザー名>* フォルダーにあります。
+*.mdf* データベース ファイルと *.ldf* データベース ファイルは *C:\Users\\\<yourusername>* フォルダーにあります。
 
 アプリの起動時に実行される初期化子メソッドで `EnsureCreated` を呼び出すため、`Student` クラスを変更し、データベースを削除し、アプリケーションを再実行できます。変更に合わせてデータベースが自動的に再作成されます。 たとえば、`Student` クラスに `EmailAddress` プロパティを追加する場合、再作成されたテーブルに新しい `EmailAddress` 列が表示されます。
 
@@ -332,9 +334,9 @@ SSOX で **(localdb)\MSSQLLocalDB > Databases** をクリックし、*appsetting
 
 * ID または classnameID という名前が付けられているエンティティ プロパティは主キーのプロパティとして認識されます。
 
-* *\<ナビゲーション プロパティ名>\<主キー プロパティ名>* という名前 (たとえば、`Student` ナビゲーション プロパティの場合、`Student` エンティティの主キーが `ID` なので、`StudentID` となります) が付いている場合、プロパティは外部キー プロパティとして解釈されます。 外部キー プロパティにも *\<主キー プロパティ名>* という単純な名前を付けることができます (たとえば、`Enrollment` エンティティの主キーが `EnrollmentID` なので `EnrollmentID`)。
+* *\<navigation property name>\<primary key property name>* という名前が付いている場合、プロパティは外部キー プロパティとして解釈されます。たとえば、`Student` ナビゲーション プロパティの `StudentID` です。`Student` エンティティの主キーが `ID` であるためです。 外部キーにも *\<primary key property name>* という単純な名前を付けることができます。たとえば、`EnrollmentID` です。`Enrollment` エンティティの主キーが `EnrollmentID` であるためです。
 
-規約の動作はオーバーライドできます。 たとえば、このチュートリアルで先に見たように、テーブル名を明示的に指定できます。 また、列名を設定し、任意のプロパティを主キーまたは外部キーとして設定できます。これについては、このシリーズの[後のチュートリアル](complex-data-model.md)で学習します。
+従来の動作をオーバーライドできます。 たとえば、このチュートリアルで先に見たように、テーブル名を明示的に指定できます。 また、列名を設定し、任意のプロパティを主キーまたは外部キーとして設定できます。これについては、このシリーズの[後のチュートリアル](complex-data-model.md)で学習します。
 
 ## <a name="asynchronous-code"></a>非同期コード
 

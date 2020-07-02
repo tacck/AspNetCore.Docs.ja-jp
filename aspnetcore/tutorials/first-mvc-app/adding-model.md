@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 29f70d6bd1d5c1223ef35b4e24e5b9c0a8465d1d
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 0974abfe632fd897c08435b82a7c695534cc3139
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652384"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793609"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>パート 4、ASP.NET Core MVC アプリにモデルを追加する
 
@@ -259,6 +261,8 @@ Update-Database
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
+
 次の .NET Core CLI コマンドを実行します。
 
 ```dotnetcli
@@ -269,8 +273,6 @@ dotnet ef database update
 * `ef migrations add InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。
 
 * `ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。 このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
-
-[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
 ---
 

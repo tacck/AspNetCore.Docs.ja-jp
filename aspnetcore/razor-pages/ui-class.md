@@ -7,17 +7,19 @@ ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: adfcc281f285892583ab8a21c014d6fcb120af9c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1d37ebaa913a2815b79b16875049bbf91f9fb941
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102833"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404393"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core の Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成
 

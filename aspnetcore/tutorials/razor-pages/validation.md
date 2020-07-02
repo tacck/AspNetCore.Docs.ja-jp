@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 1bc9b2b081c58392bd2c226ebedc804b43810bc2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122114"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408852"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>パート 8、ASP.NET Core Razor ページへの検証の追加
 

@@ -1,8 +1,8 @@
 ## <a name="debug-diagnostics"></a>デバッグ診断
 
-詳細なルーティング診断出力を行うには、`Logging:LogLevel:Microsoft` を `Debug` に設定してください。 たとえば、開発環境では、*appsettings.Development.json* を次のように設定します。
+詳細なルーティング診断出力を行うには、`Logging:LogLevel:Microsoft` を `Debug` に設定してください。 開発環境で、appsettings.Development.jsのログレベルを次*の*ように設定します。
 
-```JSON
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -12,3 +12,4 @@
     }
   }
 }
+```

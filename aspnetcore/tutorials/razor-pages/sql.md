@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 7/22/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 21ae2ed4e91a0b3e52b1cdad1f4f4686c50614ba
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 68764a5b8c908012cc0053aa4e3ea071f2ce423d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652975"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400909"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>パート 4: データベースと ASP.NET Core を使用する
 

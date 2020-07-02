@@ -1,22 +1,24 @@
 ---
-title: "\"チュートリアル: ASP.NET Core の Razor Pages の概要\""
+title: 'チュートリアル: ASP.NET Core の Razor Pages の概要'
 author: rick-anderson
 description: このチュートリアル シリーズでは、ASP.NET Core で Razor ページを使用する方法を示します。 モデルの作成、Razor ページのコードの生成、Entity Framework Core と SQL Server を使用したデータ アクセス、検索機能の追加、入力検証の追加、移行を使用したモデルの更新の方法について学習します。
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 3b8ccf639bb91234f81c67750fffa170e52d636f
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 97e3f60480bc8e7e88c8361e5b13f02d98765d9e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452347"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405303"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>チュートリアル: ASP.NET Core の Razor Pages の概要
 

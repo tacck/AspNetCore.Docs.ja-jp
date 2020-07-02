@@ -7,17 +7,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: d9cd3a74c35d531b5e8c91fc7f922b0cdf8e9558
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 45aabc644fbeaeaa31d534877ba93cb0611f3f34
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773511"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401338"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>チュートリアル: 並べ替え、フィルター処理、ページングを追加する - ASP.NET MVC と EF Core
 
@@ -97,9 +99,9 @@ Students インデックス ページにフィルターを追加するには、�
 `searchString` パラメーターを `Index` メソッドに追加しました。 インデックス ビューに追加するテキスト ボックスから検索する文字列値を受け取ります。 さらに LINQ ステートメントに where 句を追加し、姓または名に検索文字列を含む受講者のみを選択します。 where 句を追加するステートメントは、検索する値がある場合にのみ、実行されます。
 
 > [!NOTE]
-> ここで、`IQueryable` オブジェクトに対して `Where` メソッドを呼び出し、フィルターがサーバーで処理されます。 一部のシナリオでは、`Where` メソッドをメモリ内コレクションの拡張メソッドとして呼び出す場合があります  (たとえば、EF `DbSet` の代わりに `IEnumerable` コレクションを返すリポジトリ メソッドを参照するように参照を `_context.Students` に変更する場合)。結果は、通常同じになりますが、場合によっては異なる場合があります。
+> ここで、`IQueryable` オブジェクトに対して `Where` メソッドを呼び出し、フィルターがサーバーで処理されます。 一部のシナリオでは、`Where` メソッドをメモリ内コレクションの拡張メソッドとして呼び出す場合があります (たとえば、EF `DbSet` の代わりに `IEnumerable` コレクションを返すリポジトリ メソッドを参照するように参照を `_context.Students` に変更する場合)。結果は、通常同じになりますが、場合によっては異なる場合があります。
 >
->たとえば、.NET Framework の `Contains` メソッドの実装は、既定では大文字小文字を区別する比較を実行しますが、SQL Server では、これは SQL Server インスタンスの照合順序の設定によって決まります。 その設定は、既定では大文字小文字を区別しません。 `ToUpper` を呼び出して、テストで明示的に大文字小文字を区別しないようにすることができます。*Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())* 。 これにより、`IQueryable` オブジェクトの代わりに `IEnumerable` コレクションを返すリポジトリを使用するように後でコードを変更した場合でも確実に同じ結果になるようにすることができます  (`IEnumerable` コレクションに対して `Contains` メソッドを呼び出したときには、.NET Framework の実装を取得します。`IQueryable` オブジェクトに対して呼び出したときには、データベース プロバイダーの実装を取得します)。ただし、このソリューションではパフォーマンスが低下します。 `ToUpper` コードは、TSQL SELECT ステートメントの WHERE 句に関数を格納します。 これにより、オプティマイザーはインデックスを使用できなくなります。 ほとんどの場合、SQL は大文字小文字を区別しないようにインストールされているため、大文字小文字を区別するデータストアに移行するまで `ToUpper` コードを避けることをお勧めします。
+>たとえば、.NET Framework の `Contains` メソッドの実装は、既定では大文字小文字を区別する比較を実行しますが、SQL Server では、これは SQL Server インスタンスの照合順序の設定によって決まります。 その設定は、既定では大文字小文字を区別しません。 `ToUpper` を呼び出して、テストで明示的に大文字小文字を区別しないようにすることができます。*Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())* 。 これにより、`IQueryable` オブジェクトの代わりに `IEnumerable` コレクションを返すリポジトリを使用するように後でコードを変更した場合でも確実に同じ結果になるようにすることができます (`IEnumerable` コレクションに対して `Contains` メソッドを呼び出したときには、.NET Framework の実装を取得します。`IQueryable` オブジェクトに対して呼び出したときには、データベース プロバイダーの実装を取得します)。ただし、このソリューションではパフォーマンスが低下します。 `ToUpper` コードは、TSQL SELECT ステートメントの WHERE 句に関数を格納します。 これにより、オプティマイザーはインデックスを使用できなくなります。 ほとんどの場合、SQL は大文字小文字を区別しないようにインストールされているため、大文字小文字を区別するデータストアに移行するまで `ToUpper` コードを避けることをお勧めします。
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Students インデックス ビューに [Search] ボックスを追加する
 
