@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 06/05/2020
-  ms.openlocfilehash: 25b5387c8956ea7931751525ea954f6f702c0cde
-  ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+  ms.openlocfilehash: c90bd79b68252505120a0b28bce2a2b5b9d627d7
+  ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
   ms.translationtype: HT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 06/08/2020
-  ms.locfileid: "84507325"
+  ms.lasthandoff: 07/03/2020
+  ms.locfileid: "85944519"
 highlightedContent:
   items:
   - title: 任意のプラットフォームに 5 分で ASP.NET Core アプリを作成する
@@ -52,10 +52,10 @@ conceptualContent:
     - url: blazor/index.md
       itemType: overview
       text: 概要
-    - url: blazor/get-started.md
+    - url: https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro
       itemType: get-started
-      text: 最初の Blazor アプリを作成する
-    - url: tutorials/build-your-first-blazor-app.md
+      text: 最初の Blazor アプリを構築する
+    - url: tutorials/build-a-blazor-app.md
       itemType: get-started
       text: 再利用可能なコンポーネントを使用して最初の Blazor アプリを構築する
     - url: blazor/hosting-models.md
