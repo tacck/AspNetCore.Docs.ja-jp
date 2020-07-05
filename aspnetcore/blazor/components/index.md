@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d25dc3441c2373655558dfc101b899252a280814
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 0a8335461b4c9cd628d9c65b97f7ab6a74487fca
+ms.sourcegitcommit: 7f423602a1475736f61fc361327d4de0976c9649
 ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944446"
+ms.locfileid: "85950896"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Tobias Bartsch](https://www.aveo-solutions.com/)
 
-[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/../common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
+[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 Blazor アプリは *コンポーネント*を使用してビルドします。 コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型のチャンクです。 コンポーネントには、データの挿入や UI イベントへの応答に必要な HTML マークアップと、処理ロジックが含まれます。 コンポーネントは、柔軟性があり、軽量です。 それらを入れ子にしたり、再利用したり、プロジェクト間で共有したりできます。
 
@@ -49,7 +49,7 @@ Razor 構文でコンテンツにアクセスする場合は、次のセクシ�
 
 ### <a name="routing"></a>ルーティング
 
-Blazor でのルーティングは、アプリ内のアクセス可能な各コンポーネントへのルート テンプレートを提供することで実現します。 [`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
+Blazor でのルーティングは、アプリ内のアクセス可能な各コンポーネントへのルート テンプレートを提供することで実現します。 [`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。 詳細については、<xref:blazor/fundamentals/routing> を参照してください。
 
 ```razor
 @page "/ParentComponent"
@@ -534,7 +534,7 @@ public class NotifierService
 
 要素またはコンポーネントのリストをレンダリングし、その後に要素またはコンポーネントが変更された場合、Blazor の比較アルゴリズムでは、前のどの要素やコンポーネントを保持できるか、およびモデル オブジェクトをそれらにどのようにマップするかを決定する必要があります。 通常、このプロセスは自動で、無視できますが、プロセスの制御が必要になる場合があります。
 
-次に例を示します。
+次の例を確認してください。
 
 ```csharp
 @foreach (var person in People)
@@ -733,7 +733,7 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 <input type="checkbox" />
 ```
 
-詳細については、「<xref:mvc/views/razor>」を参照してください。
+詳細については、<xref:mvc/views/razor> を参照してください。
 
 > [!WARNING]
 > .NET 型が `bool` の場合、[`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) などの一部の HTML 属性が正しく機能しません。 そのような場合は、`bool` ではなく `string` 型を使用します。
@@ -826,7 +826,7 @@ Blazor では HTML がレンダリングされるため、スケーラブル ベ
 
 ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル (`.razor`) に直接配置した場合、基本的な画像レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:blazor/security/server/threat-mitigation>:リソース不足に対処する必要がある Blazor Server アプリの構築に関するガイダンスが含まれています。
 
