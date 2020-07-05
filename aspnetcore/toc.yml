@@ -79,7 +79,7 @@
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial
-          uid: tutorials/first-blazor-app
+          uid: tutorials/build-a-blazor-app
     - name: Web API アプリ
       items:
         - name: Web API の作成
@@ -285,14 +285,14 @@
           uid: blazor/index
         - name: サポートされているプラットフォーム
           uid: blazor/supported-platforms
-        - name: 作業開始
-          uid: blazor/get-started
+        - name: ツール
+          uid: blazor/tooling
         - name: ホスティング モデル
           uid: blazor/hosting-models
         - name: チュートリアル
           items:
-            - name: 最初のアプリをビルドする
-              uid: tutorials/first-blazor-app
+            - name: Blazor の Todo リスト アプリを作成する
+              uid: tutorials/build-a-blazor-app
             - name: Blazor WebAssembly による SignalR
               uid: tutorials/signalr-blazor-webassembly
         - name: テンプレート

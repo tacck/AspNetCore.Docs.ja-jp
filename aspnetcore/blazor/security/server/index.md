@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ab3baad30f78c5d5e2f969b3292d4886fcd0406d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 69a24fc955a0f2fb524ec817eb50372052f538a1
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402313"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944257"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>ASP.NET Core Blazor Server アプリをセキュリティで保護する
 
@@ -34,7 +34,7 @@ Blazor Server プロジェクト テンプレートは、プロジェクトの�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-認証メカニズムを使用して新しい Blazor Server プロジェクトを作成するには、<xref:blazor/get-started> の記事の Visual Studio のガイダンスに従ってください。
+認証メカニズムを使用して新しい Blazor Server プロジェクトを作成するには、<xref:blazor/tooling> の Visual Studio のガイダンスに従ってください。
 
 **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで **[Blazor Server アプリ]** テンプレートを選択した後、 **[認証]** の下の **[変更]** を選択します。
 
@@ -49,7 +49,7 @@ Blazor Server プロジェクト テンプレートは、プロジェクトの�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-認証メカニズムを使用して新しい Blazor Server プロジェクトを作成するには、<xref:blazor/get-started> の記事の Visual Studio Code のガイダンスに従ってください。
+認証メカニズムを使用して新しい Blazor Server プロジェクトを作成するには、<xref:blazor/tooling> の Visual Studio Code のガイダンスに従ってください。
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -75,7 +75,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. <xref:blazor/get-started> の記事に記載されている Visual Studio for Mac のガイダンスに従ってください。
+1. <xref:blazor/tooling> に記載されている Visual Studio for Mac のガイダンスに従ってください。
 
 1. **[新しい Blazor Server アプリの構成]** ステップで、 **[認証]** ドロップダウンから **[Individual Authentication (in-app)]\(個別認証 (アプリ内)\)** を選択します。
 
@@ -83,7 +83,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-認証メカニズムを使用して新しい Blazor Server プロジェクトを作成するには、<xref:blazor/get-started> の記事に記載されている .NET Core CLI のガイダンスに従ってください。
+コマンド シェルで次のコマンドを使用し、認証メカニズムを使って新しい Blazor Server プロジェクトを作成します。
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}

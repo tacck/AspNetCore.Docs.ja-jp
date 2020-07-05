@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 5e413fad090ff2cb5e1379bf7311caf159a57a4b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5a9ed8d6737352f56be78039a895a85f22dec361
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408592"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944646"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -183,6 +183,10 @@ dotnet run
 詳細については、「[Azure アプリ: Azure Portal を使用してアプリの構成をオーバーライドする](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal)」を参照してください。
 
 Azure データベース接続文字列の詳細については、「[接続文字列のプレフィックス](#constr)」を参照してください。
+
+### <a name="environment-variables-set-in-launchsettingsjson"></a>launchSettings.json で設定された環境変数
+
+*launchSettings.json* に設定されている環境変数で、システム環境に設定されているそれらがオーバーライドされます。
 
 <a name="clcp"></a>
 
@@ -750,6 +754,8 @@ Index: 5  Value: value5
 * *web.config* はサーバー構成ファイルです。次のトピックで説明されています。
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
+
+*launchSettings.json* に設定されている環境変数で、システム環境に設定されているそれらがオーバーライドされます。
 
 以前のバージョンの ASP.NET からアプリの構成を移行する方法について詳しくは、<xref:migration/proper-to-2x/index#store-configurations> をご覧ください。
 
