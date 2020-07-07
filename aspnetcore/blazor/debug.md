@@ -5,20 +5,21 @@ description: Blazor アプリをデバッグする方法について説明しま
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/31/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 9fe51b8c7eafdd62cc6fc1a820135d9ee5ff010e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242772"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401013"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -72,7 +73,7 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 Visual Studio で Blazor WebAssembly アプリをデバッグするには、次のようにします。
 
-1. ASP.NET Core でホストされる新しい Blazor WebAssembly アプリを作成します。
+1. 新しい ASP.NET Core でホストされる Blazor WebAssembly アプリを作成します。
 1. <kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。
 1. `Pages/Counter.razor` の `IncrementCount` メソッドにブレークポイントを設定します。
 1. **`Counter`** タブに移動し、ボタンを選択してブレークポイントをヒットします。
@@ -111,7 +112,7 @@ Visual Studio Code で Blazor WebAssembly アプリをデバッグするには�
 
 ![JS プレビュー デバッガー](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
 
-### <a name="debug-standalone-blazor-webassembly"></a>スタンドアロンの Blazor WebAssembly のデバッグ
+### <a name="debug-standalone-blazor-webassembly"></a>スタンドアロン Blazor WebAssembly のデバッグ
 
 1. VS Code でスタンドアロンの Blazor WebAssembly アプリを開きます。
 
@@ -168,7 +169,7 @@ Visual Studio Code で Blazor WebAssembly アプリをデバッグするには�
 
 | オプション    | 説明 |
 | --------- | ----------- |
-| `request` | `launch` を使用して、Blazor WebAssembly アプリにデバッグ セッションを起動してアタッチするか、`attach` を使用して既に実行中のアプリにデバッグセッションをアタッチします。 |
+| `request` | `launch` を使用して、Blazor WebAssembly アプリにデバッグ セッションを起動してアタッチするか、`attach` を使用して既に実行中のアプリにデバッグ セッションをアタッチします。 |
 | `url`     | デバッグ時にブラウザーで開く URL。 既定値は `https://localhost:5001` です。 |
 | `browser` | デバッグ セッション用に起動するブラウザー。 `edge` または `chrome` に設定します。 既定値は `chrome` です。 |
 | `trace`   | JS デバッガーからログを生成するために使用されます。 ログを生成するには `true` に設定します。 |
@@ -236,3 +237,4 @@ Blazor は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/
 
 * **[デバッガー]** タブで、ブラウザー内の開発者ツールを開きます。 コンソールで `localStorage.clear()` を実行して、任意のブレークポイントを削除します。
 * ASP.NET Core HTTPS 開発証明書がインストールされ、信頼されていることを確認します。 詳細については、「<xref:security/enforcing-ssl#troubleshoot-certificate-problems>」を参照してください。
+* Visual Studio では、 **[ツール]**  >  **[オプション]**  >  **[デバッグ]**  >  **[全般]** で **[Enable JavaScript debugging for ASP.NET (Chrome, Edge and IE)] (ASP.NET (Chrome、Edge、IE) の JavaScript デバッグを有効にする)** オプションをオンにする必要があります。 これは、Visual Studio の既定の設定です。 デバッグが機能していない場合は、オプションがオンになっていることを確認します。

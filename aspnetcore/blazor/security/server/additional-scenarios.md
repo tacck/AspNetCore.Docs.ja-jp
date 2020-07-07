@@ -1,34 +1,35 @@
 ---
-title: ASP.NET Core Blazor サーバーのセキュリティに関するその他のシナリオ
+title: ASP.NET Core Blazor Server のセキュリティに関するその他のシナリオ
 author: guardrex
-description: セキュリティに関するその他のシナリオ用に Blazor サーバーを構成する方法について説明します。
+description: セキュリティに関するその他のシナリオ用に Blazor Server を構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 7f92f82d6e78771494b9f2358ee19153502f8dcb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 46de9a22dec540b8dfda7583b7a3c5c2dcbbc549
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243045"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402326"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor サーバーのセキュリティに関するその他のシナリオ
+# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server のセキュリティに関するその他のシナリオ
 
 作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazor サーバー アプリにトークンを渡す
+## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazor Server アプリにトークンを渡す
 
-Blazor サーバー アプリの Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 `Startup.ConfigureServices` の完全な例を含むサンプル コードについては、「[サーバー側の Blazor アプリケーションにトークンを渡す](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
+Blazor Server アプリの Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 `Startup.ConfigureServices` の完全な例を含むサンプル コードについては、「[サーバー側の Blazor アプリケーションにトークンを渡す](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
 
-通常の Razor Pages や MVC アプリの場合と同じように、Blazor サーバー アプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
+通常の Razor Pages や MVC アプリの場合と同じように、Blazor Server アプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

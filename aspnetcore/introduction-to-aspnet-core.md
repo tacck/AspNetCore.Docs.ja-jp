@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 7f46051193681ecac59428b77ca1e36830c7bb63
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "84466990"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408202"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core の概要
 
@@ -43,8 +44,8 @@ ASP.NET Core は、インターネットに接続された最新のクラウド�
 ASP.NET Core MVC は、[Web API](xref:tutorials/first-web-api) と [Web アプリ](xref:tutorials/razor-pages/index)を構築する機能を備えています。
 
 * [モデル ビュー コントローラー (MVC) パターン](xref:mvc/overview)は、Web API と Web アプリをテスト可能にするのに役立ちます。
-* [Razor ページ](xref:razor-pages/index)はページ ベースのプログラミング モデルであり、Web UI の開発を容易にし、生産性を高めます。
-* [Razor マークアップ](xref:mvc/views/razor)では、[Razor ページ](xref:razor-pages/index)および [MVC ビュー](xref:mvc/views/overview)用に生産性の高い構文が提供されます。
+* [Razor Pages](xref:razor-pages/index) はページ ベースのプログラミング モデルであり、Web UI の開発を容易にし、生産性を高めます。
+* [Razor マークアップ](xref:mvc/views/razor)では、[Razor Pages](xref:razor-pages/index) および [MVC ビュー](xref:mvc/views/overview)用に生産性の高い構文が提供されます。
 * [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、Razor ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。
 * [複数のデータ形式とコンテンツ ネゴシエーション](xref:web-api/advanced/formatting)の組み込みサポートにより、Web API はブラウザーやモバイル デバイスなどのさまざまなクライアントと接続できます。
 * [モデル バインド](xref:mvc/models/model-binding)は、HTTP 要求からアクション メソッドのパラメーターにデータを自動的にマップします。
@@ -76,7 +77,7 @@ ASP.NET Core アプリを開発する場合の概要として、次の順序で�
 
    |アプリの種類  |シナリオ  |チュートリアル  |
    |----------|----------|----------|
-   |Web アプリ                   | 新しいサーバー側 Web UI 開発 |[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start) |
+   |Web アプリ                   | 新しいサーバー側 Web UI 開発 |[Razor Pages の使用を開始する](xref:tutorials/razor-pages/razor-pages-start) |
    |Web アプリ                   | MVC アプリの保守管理 |[MVC の概要](xref:tutorials/first-mvc-app/start-mvc)|
    |Web アプリ                   | クライアント Web UI 開発 |[Blazor の概要](xref:tutorials/first-blazor-app) |
    |Web API                   | RESTful HTTP サービス |[Web API の作成](xref:tutorials/first-web-api)&dagger; |
@@ -122,8 +123,8 @@ ASP.NET Core は、インターネットに接続された最新のクラウド�
 ASP.NET Core MVC は、[Web API](xref:tutorials/first-web-api) と [Web アプリ](xref:tutorials/razor-pages/index)を構築する機能を備えています。
 
 * [モデル ビュー コントローラー (MVC) パターン](xref:mvc/overview)は、Web API と Web アプリをテスト可能にするのに役立ちます。
-* [Razor ページ](xref:razor-pages/index)はページ ベースのプログラミング モデルであり、Web UI の開発を容易にし、生産性を高めます。
-* [Razor マークアップ](xref:mvc/views/razor)では、[Razor ページ](xref:razor-pages/index)および [MVC ビュー](xref:mvc/views/overview)用に生産性の高い構文が提供されます。
+* [Razor Pages](xref:razor-pages/index) はページ ベースのプログラミング モデルであり、Web UI の開発を容易にし、生産性を高めます。
+* [Razor マークアップ](xref:mvc/views/razor)では、[Razor Pages](xref:razor-pages/index) および [MVC ビュー](xref:mvc/views/overview)用に生産性の高い構文が提供されます。
 * [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、Razor ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。
 * [複数のデータ形式とコンテンツ ネゴシエーション](xref:web-api/advanced/formatting)の組み込みサポートにより、Web API はブラウザーやモバイル デバイスなどのさまざまなクライアントと接続できます。
 * [モデル バインド](xref:mvc/models/model-binding)は、HTTP 要求からアクション メソッドのパラメーターにデータを自動的にマップします。
@@ -164,7 +165,7 @@ ASP.NET Core アプリを開発する場合の概要として、次の順序で�
 
    |アプリの種類  |シナリオ  |チュートリアル  |
    |----------|----------|----------|
-   |Web アプリ                   | 新規の開発        |[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start) |
+   |Web アプリ                   | 新規の開発        |[Razor Pages の使用を開始する](xref:tutorials/razor-pages/razor-pages-start) |
    |Web アプリ                   | MVC アプリの管理 |[MVC の概要](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[Web API の作成](xref:tutorials/first-web-api)&dagger; |
    |リアルタイムのアプリ             |                            |[SignalR の概要](xref:tutorials/signalr) |

@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: f2588665c26887a6e3864866425b887e97e656d5
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
-ms.translationtype: HT
+ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755873"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408215"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 の新機能
 
@@ -43,9 +44,9 @@ Blazor フレームワークでサポートされるシナリオ:
 
 詳細については、「<xref:blazor/index>」を参照してください。
 
-### <a name="blazor-server"></a>Blazor サーバー
+### Blazor Server
 
-Blazor では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。 Blazor サーバーでは、ASP.NET Core アプリでサーバー上の Razor コンポーネントをホストするためのサポートが提供されます。 UI の更新は SignalR 接続を介して処理されます。 Blazor サーバーは ASP.NET Core 3.0 でサポートされています。
+Blazor では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。 Blazor Server では、ASP.NET Core アプリでサーバー上の Razor コンポーネントをホストするためのサポートが提供されます。 UI の更新は SignalR 接続を介して処理されます。 Blazor Server は ASP.NET Core 3.0 でサポートされています。
 
 ### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly (プレビュー)
 

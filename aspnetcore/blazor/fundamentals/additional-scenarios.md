@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 72a8b59b06e40f6f85abe41217ae564f82c8d89c
-ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
-ms.translationtype: HT
+ms.openlocfilehash: 236dffd829bcd7c30ae1145242ce07cd8e9857e6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85347074"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402950"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
@@ -86,7 +87,7 @@ UI をカスタマイズするには、`_Host.cshtml` Razor ページの `<body>
 
 *このセクションは Blazor Server に適用されます。*
 
-Blazor サーバー アプリは、サーバーへのクライアント接続が確立される前に、サーバー上の UI をプリレンダリングするよう既定で設定されます。 これは `_Host.cshtml` Razor ページで設定します。
+Blazor Server アプリは、サーバーへのクライアント接続が確立される前に、サーバー上の UI をプリレンダリングするよう既定で設定されます。 これは `_Host.cshtml` Razor ページで設定します。
 
 ```cshtml
 <body>
@@ -111,11 +112,11 @@ Blazor サーバー アプリは、サーバーへのクライアント接続が
 
 静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor サーバー アプリ用に SignalR クライアントを構成する
+## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor Server アプリ用に SignalR クライアントを構成する
 
 *このセクションは Blazor Server に適用されます。*
 
-場合によっては、Blazor サーバー アプリによって使用される SignalR クライアントを構成する必要があります。 たとえば、接続の問題を診断するために SignalR クライアントのログ記録を構成できます。
+場合によっては、Blazor Server アプリによって使用される SignalR クライアントを構成する必要があります。 たとえば、接続の問題を診断するために SignalR クライアントのログ記録を構成できます。
 
 `Pages/_Host.cshtml` ファイルで SignalR クライアントを構成するには:
 

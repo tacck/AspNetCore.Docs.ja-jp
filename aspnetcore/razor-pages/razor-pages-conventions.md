@@ -6,13 +6,20 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 6124554d5f9859179edfb5c545cf0b082369c0c9
-ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
-ms.translationtype: HT
+ms.openlocfilehash: 308ca4401289a55e5dba8d61de50644cb2a53433
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81642733"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405251"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>ASP.NET Core での Razor ページのルートとアプリの規則
 
@@ -81,7 +88,7 @@ Razor Pages ルーティングと MVC コントローラー ルーティング�
 
 ## <a name="model-conventions"></a>モデルの規則
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> の委任を追加すると、Razor ページに適用される[モデルの規則](xref:mvc/controllers/application-model#conventions)を追加できます。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> の委任を追加すると、Razor Pages に適用される[モデルの規則](xref:mvc/controllers/application-model#conventions)を追加できます。
 
 ### <a name="add-a-route-model-convention-to-all-pages"></a>すべてのページにルート モデル規則を追加する
 
@@ -264,7 +271,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ページ アプリ モデルは、*OtherPages* フォルダーの Page2 ページにつながるセグメントの相対パスを確認するために使用されます。 条件を満たすと、ヘッダーが追加されます。 満たさない場合は、`EmptyFilter` が適用されます。
 
-`EmptyFilter` は[アクション フィルター](xref:mvc/controllers/filters#action-filters)です。 アクション フィルターは Razor ページによって無視されるため、パスに `OtherPages/Page2` が含まれない場合、`EmptyFilter` には意図されたような効果はありません。
+`EmptyFilter` は[アクション フィルター](xref:mvc/controllers/filters#action-filters)です。 アクション フィルターは Razor Pages によって無視されるため、パスに `OtherPages/Page2` が含まれない場合、`EmptyFilter` には意図されたような効果はありません。
 
 `localhost:5000/OtherPages/Page2` でサンプルの Page2 ページを要求し、そのヘッダーを調べて結果を確認します。
 
@@ -272,7 +279,7 @@ public void ConfigureServices(IServiceCollection services)
 
 **フィルター ファクトリの構成**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> では、すべての Razor ページに[フィルター](xref:mvc/controllers/filters)を適用するように、指定したファクトリを構成します。
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> では、すべての Razor Pages に[フィルター](xref:mvc/controllers/filters)を適用するように、指定したファクトリを構成します。
 
 サンプル アプリでは、アプリのページに対する 2 つの値と共にヘッダー (`FilterFactoryHeader`) を追加して、[フィルター ファクトリ](xref:mvc/controllers/filters#ifilterfactory)を使用する例を提供します。
 
@@ -288,9 +295,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="mvc-filters-and-the-page-filter-ipagefilter"></a>MVC フィルターとページ フィルター (IPageFilter)
 
-Razor ページはハンドラー メソッドを使用するため、MVC [アクション フィルター](xref:mvc/controllers/filters#action-filters)は Razor ページによって無視されます。 使用できるその他の種類の MVC フィルターは次のとおりです。[承認](xref:mvc/controllers/filters#authorization-filters)、[例外](xref:mvc/controllers/filters#exception-filters)、[リソース](xref:mvc/controllers/filters#resource-filters)、および[結果](xref:mvc/controllers/filters#result-filters)。 詳細については、「[フィルター](xref:mvc/controllers/filters)」トピックを参照してください。
+Razor Pages はハンドラー メソッドを使用するため、MVC [アクション フィルター](xref:mvc/controllers/filters#action-filters)は Razor Pages によって無視されます。 使用できるその他の種類の MVC フィルターは次のとおりです。[承認](xref:mvc/controllers/filters#authorization-filters)、[例外](xref:mvc/controllers/filters#exception-filters)、[リソース](xref:mvc/controllers/filters#resource-filters)、および[結果](xref:mvc/controllers/filters#result-filters)。 詳細については、「[フィルター](xref:mvc/controllers/filters)」トピックを参照してください。
 
-ページ フィルター (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) は、Razor ページに適用されるフィルターの 1 つです。 詳細については、[Razor ページのフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
+ページ フィルター (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) は、Razor Pages に適用されるフィルターの 1 つです。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -364,7 +371,7 @@ Razor Pages ルーティングと MVC コントローラー ルーティング�
 
 ## <a name="model-conventions"></a>モデルの規則
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> の委任を追加すると、Razor ページに適用される[モデルの規則](xref:mvc/controllers/application-model#conventions)を追加できます。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> の委任を追加すると、Razor Pages に適用される[モデルの規則](xref:mvc/controllers/application-model#conventions)を追加できます。
 
 ### <a name="add-a-route-model-convention-to-all-pages"></a>すべてのページにルート モデル規則を追加する
 
@@ -554,7 +561,7 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 ページ アプリ モデルは、*OtherPages* フォルダーの Page2 ページにつながるセグメントの相対パスを確認するために使用されます。 条件を満たすと、ヘッダーが追加されます。 満たさない場合は、`EmptyFilter` が適用されます。
 
-`EmptyFilter` は[アクション フィルター](xref:mvc/controllers/filters#action-filters)です。 アクション フィルターは Razor ページによって無視されるため、パスに `OtherPages/Page2` が含まれない場合、`EmptyFilter` には意図されたような効果はありません。
+`EmptyFilter` は[アクション フィルター](xref:mvc/controllers/filters#action-filters)です。 アクション フィルターは Razor Pages によって無視されるため、パスに `OtherPages/Page2` が含まれない場合、`EmptyFilter` には意図されたような効果はありません。
 
 `localhost:5000/OtherPages/Page2` でサンプルの Page2 ページを要求し、そのヘッダーを調べて結果を確認します。
 
@@ -562,7 +569,7 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 **フィルター ファクトリの構成**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> では、すべての Razor ページに[フィルター](xref:mvc/controllers/filters)を適用するように、指定したファクトリを構成します。
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> では、すべての Razor Pages に[フィルター](xref:mvc/controllers/filters)を適用するように、指定したファクトリを構成します。
 
 サンプル アプリでは、アプリのページに対する 2 つの値と共にヘッダー (`FilterFactoryHeader`) を追加して、[フィルター ファクトリ](xref:mvc/controllers/filters#ifilterfactory)を使用する例を提供します。
 
@@ -578,9 +585,9 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 ## <a name="mvc-filters-and-the-page-filter-ipagefilter"></a>MVC フィルターとページ フィルター (IPageFilter)
 
-Razor ページはハンドラー メソッドを使用するため、MVC [アクション フィルター](xref:mvc/controllers/filters#action-filters)は Razor ページによって無視されます。 使用できるその他の種類の MVC フィルターは次のとおりです。[承認](xref:mvc/controllers/filters#authorization-filters)、[例外](xref:mvc/controllers/filters#exception-filters)、[リソース](xref:mvc/controllers/filters#resource-filters)、および[結果](xref:mvc/controllers/filters#result-filters)。 詳細については、「[フィルター](xref:mvc/controllers/filters)」トピックを参照してください。
+Razor Pages はハンドラー メソッドを使用するため、MVC [アクション フィルター](xref:mvc/controllers/filters#action-filters)は Razor Pages によって無視されます。 使用できるその他の種類の MVC フィルターは次のとおりです。[承認](xref:mvc/controllers/filters#authorization-filters)、[例外](xref:mvc/controllers/filters#exception-filters)、[リソース](xref:mvc/controllers/filters#resource-filters)、および[結果](xref:mvc/controllers/filters#result-filters)。 詳細については、「[フィルター](xref:mvc/controllers/filters)」トピックを参照してください。
 
-ページ フィルター (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) は、Razor ページに適用されるフィルターの 1 つです。 詳細については、[Razor ページのフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
+ページ フィルター (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) は、Razor Pages に適用されるフィルターの 1 つです。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -654,7 +661,7 @@ Razor Pages ルーティングと MVC コントローラー ルーティング�
 
 ## <a name="model-conventions"></a>モデルの規則
 
-<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> の委任を追加すると、Razor ページに適用される[モデルの規則](xref:mvc/controllers/application-model#conventions)を追加できます。
+<xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> の委任を追加すると、Razor Pages に適用される[モデルの規則](xref:mvc/controllers/application-model#conventions)を追加できます。
 
 ### <a name="add-a-route-model-convention-to-all-pages"></a>すべてのページにルート モデル規則を追加する
 
@@ -810,7 +817,7 @@ Razor Pages のオプション (<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorP
 
 ページ アプリ モデルは、*OtherPages* フォルダーの Page2 ページにつながるセグメントの相対パスを確認するために使用されます。 条件を満たすと、ヘッダーが追加されます。 満たさない場合は、`EmptyFilter` が適用されます。
 
-`EmptyFilter` は[アクション フィルター](xref:mvc/controllers/filters#action-filters)です。 アクション フィルターは Razor ページによって無視されるため、パスに `OtherPages/Page2` が含まれない場合、`EmptyFilter` には意図されたような効果はありません。
+`EmptyFilter` は[アクション フィルター](xref:mvc/controllers/filters#action-filters)です。 アクション フィルターは Razor Pages によって無視されるため、パスに `OtherPages/Page2` が含まれない場合、`EmptyFilter` には意図されたような効果はありません。
 
 `localhost:5000/OtherPages/Page2` でサンプルの Page2 ページを要求し、そのヘッダーを調べて結果を確認します。
 
@@ -818,7 +825,7 @@ Razor Pages のオプション (<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorP
 
 **フィルター ファクトリの構成**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> では、すべての Razor ページに[フィルター](xref:mvc/controllers/filters)を適用するように、指定したファクトリを構成します。
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> では、すべての Razor Pages に[フィルター](xref:mvc/controllers/filters)を適用するように、指定したファクトリを構成します。
 
 サンプル アプリでは、アプリのページに対する 2 つの値と共にヘッダー (`FilterFactoryHeader`) を追加して、[フィルター ファクトリ](xref:mvc/controllers/filters#ifilterfactory)を使用する例を提供します。
 
@@ -834,9 +841,9 @@ Razor Pages のオプション (<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorP
 
 ## <a name="mvc-filters-and-the-page-filter-ipagefilter"></a>MVC フィルターとページ フィルター (IPageFilter)
 
-Razor ページはハンドラー メソッドを使用するため、MVC [アクション フィルター](xref:mvc/controllers/filters#action-filters)は Razor ページによって無視されます。 使用できるその他の種類の MVC フィルターは次のとおりです。[承認](xref:mvc/controllers/filters#authorization-filters)、[例外](xref:mvc/controllers/filters#exception-filters)、[リソース](xref:mvc/controllers/filters#resource-filters)、および[結果](xref:mvc/controllers/filters#result-filters)。 詳細については、「[フィルター](xref:mvc/controllers/filters)」トピックを参照してください。
+Razor Pages はハンドラー メソッドを使用するため、MVC [アクション フィルター](xref:mvc/controllers/filters#action-filters)は Razor Pages によって無視されます。 使用できるその他の種類の MVC フィルターは次のとおりです。[承認](xref:mvc/controllers/filters#authorization-filters)、[例外](xref:mvc/controllers/filters#exception-filters)、[リソース](xref:mvc/controllers/filters#resource-filters)、および[結果](xref:mvc/controllers/filters#result-filters)。 詳細については、「[フィルター](xref:mvc/controllers/filters)」トピックを参照してください。
 
-ページ フィルター (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) は、Razor ページに適用されるフィルターの 1 つです。 詳細については、[Razor ページのフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
+ページ フィルター (<xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter>) は、Razor Pages に適用されるフィルターの 1 つです。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

@@ -1,24 +1,25 @@
 ---
 title: ASP.NET Core Blazor WebAssembly パフォーマンスに関するベスト プラクティス
 author: pranavkm
-description: ASP.NET Core Blazor WebAssembly アプリのパフォーマンスの向上、および一般的なパフォーマンスの問題の回避のためのヒント。
+description: ASP.NET Core Blazor WebAssembly アプリのパフォーマンスの向上、および一般的なパフォーマンスの問題回避のためのヒント。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/08/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: f7bd0d356030e6ddb95c77d7376995320e3ec40e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243032"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401884"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly パフォーマンスに関するベスト プラクティス
 
@@ -38,7 +39,7 @@ Blazor の差分検出アルゴリズムでは、コンポーネントが変更�
 }
 ```
 
-ほとんどのアプリでは細かい制御は必要ありませんが、<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> を使用して、UI イベントに応答するコンポーネントを選択的にレンダリングすることもできます。
+ほとんどのアプリでは細かい制御は必要ありませんが、<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> を使用すると、UI イベントに応答するコンポーネントを選択的にレンダリングできます。 多数のコンポーネントがレンダリングされるシナリオでは、<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> を使用することが重要な場合もあります。 1 つのグリッドについて考えてみます。グリッドの 1 つのセルにある 1 つのコンポーネントで <xref:Microsoft.AspNetCore.Components.EventCallback> を使用すると、グリッドに対して <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されます。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> を呼び出すと、すべての子コンポーネントが再レンダリングされます。 再レンダリングが必要なセルの数が少ない場合は、<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> を使用して、不要なレンダリングによってパフォーマンスが低下しないようにします。
 
 次に例を示します。
 
@@ -93,7 +94,7 @@ Blazor の JS 相互運用の実装は <xref:System.Text.Json> に依存しま�
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>必要に応じて、同期およびマーシャリング解除された JS 相互運用 API を使用する
 
-Blazor WebAssembly では、Blazor サーバー アプリで使用できる 1 つのバージョンに対して、<xref:Microsoft.JSInterop.IJSRuntime> の 2 つの追加バージョンが提供されています。
+Blazor WebAssembly では、Blazor Server アプリで使用できる 1 つのバージョンに対して、<xref:Microsoft.JSInterop.IJSRuntime> の 2 つの追加バージョンが提供されています。
 
 * <xref:Microsoft.JSInterop.IJSInProcessRuntime> を使用して、JS 相互運用呼び出しを同期的に呼び出すことができます。この場合、非同期バージョンよりもオーバーヘッドが少なくなります。
 

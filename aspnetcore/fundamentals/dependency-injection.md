@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/21/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 34ed08a5b49b56fd37628032ac73fe03a34448e6
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
-ms.translationtype: HT
+ms.openlocfilehash: 2074aa75029cf27922b43545ec18c0cd8a50eb02
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240849"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793343"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
 
@@ -414,6 +415,8 @@ public class Program
 要求サービスは、アプリの一部として構成および要求されるサービスを表します。 オブジェクトで依存関係を指定すると、これらは `ApplicationServices` ではなく `RequestServices` で検出された型で満たされます。
 
 一般に、アプリから直接これらのプロパティを使用しないでください。 代わりに、クラスのコンストラクターを介してクラスに必要な型を要求し、フレームワークに依存関係を挿入させます。 これにより、テストしやすいクラスが生成されます。
+
+ASP.NET Core では要求ごとにスコープが作成され、`RequestServices` によってスコープ サービス プロバイダーが公開されます。 すべてのスコープ サービスは、要求がアクティブである限り有効です。
 
 > [!NOTE]
 > コンストラクターのパラメーターとして依存関係を要求し、`RequestServices` コレクションにアクセスするようにします。

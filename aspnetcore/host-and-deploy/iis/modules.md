@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 7262b9ea18e4cf6acd278d087fcc44262f8f9c80
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 124f2a629ebd14210cb21351a720e007bba48f02
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775948"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404016"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core での IIS モジュール
 
@@ -60,7 +61,7 @@ ms.locfileid: "82775948"
 | **静的コンテンツ**<br>`StaticFileModule`                                                         | いいえ  | [静的ファイル ミドルウェア](xref:fundamentals/static-files) |
 | **トークン キャッシュ**<br>`TokenCacheModule`                                                          | はい | |
 | **URI キャッシュ**<br>`UriCacheModule`                                                              | はい | |
-| **URL 認証**<br>`UrlAuthorizationModule`                                                | はい | [ASP.NET Core ID](xref:security/authentication/identity) |
+| **URL 認証**<br>`UrlAuthorizationModule`                                                | はい | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | **Windows 認証**<br>`WindowsAuthenticationModule`                                      | はい | |
 
 &#8224; URL リライト モジュールの `isFile` および `isDirectory` 一致タイプは、[ディレクトリ構造](xref:host-and-deploy/directory-structure)の変更のため、ASP.NET Core アプリでは動作しません。
@@ -105,7 +106,7 @@ IIS マネージャーを使って設定を構成すると、アプリの *web.c
 </configuration>
 ```
 
-構成設定を使ってモジュールを無効にする方法について詳しくは、[IIS \<system.webServer >](/iis/configuration/system.webServer/) の "*子要素*" に関するセクションのリンクに従ってください。
+構成設定を使ってモジュールを無効にする方法について詳しくは、[IIS \<system.webServer>](/iis/configuration/system.webServer/) の "*子要素*" に関するセクションのリンクに従ってください。
 
 ### <a name="module-removal"></a>モジュールの削除
 

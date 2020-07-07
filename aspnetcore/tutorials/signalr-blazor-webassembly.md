@@ -1,5 +1,5 @@
 ---
-title: Blazor WebAssembly で ASP.NET Core SignalR を使用する
+title: ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
 author: guardrex
 description: Blazor WebAssembly で ASP.NET Core SignalR を使用するチャット アプリを作成します。
 monikerRange: '>= aspnetcore-3.1'
@@ -8,19 +8,20 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 3f8aeec1e0471bab5034d1dcc8a42023f6b13c0d
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
-ms.translationtype: HT
+ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122101"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408878"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly で ASP.NET Core SignalR を使用する
+# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -59,7 +60,7 @@ ms.locfileid: "85122101"
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>ホストされた Blazor WebAssembly アプリ プロジェクトを作成する
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>ホストされる Blazor WebAssembly アプリ プロジェクトを作成する
 
 使用するツールに向けたガイダンスに従ってください。
 
@@ -74,7 +75,7 @@ ms.locfileid: "85122101"
 
 1. **[プロジェクト名]** フィールドに「`BlazorSignalRApp`」と入力します。 **[場所]** エントリが正しいことを確認します。または、プロジェクトの場所を指定します。 **[作成]** を選択します。
 
-1. **[Blazor WebAssembly アプリ]** テンプレートを選択します。
+1. **Blazor WebAssembly アプリ** テンプレートを選択します。
 
 1. **[詳細設定]** で、 **[ASP.NET Core hosted]\(ASP.NET Core でホストされる\)** チェック ボックスをオンにします。
 
@@ -100,7 +101,7 @@ ms.locfileid: "85122101"
 
 1. サイドバーで、 **[Web and Console]\(Web とコンソール\)**  >  **[アプリ]** の順に選択します。
 
-1. **[Blazor WebAssembly アプリ]** テンプレートを選択します。 **[次へ]** を選択します。
+1. **Blazor WebAssembly アプリ** テンプレートを選択します。 **[次へ]** を選択します。
 
    次の構成を確認します。
 

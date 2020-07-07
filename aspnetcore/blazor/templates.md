@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: ce46d562285b95ff656ed43b3a63ca5e7315f4c8
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 6359a02b23803f26c4a40772c68d39e804396403
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243214"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401897"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -52,14 +53,14 @@ dotnet new blazorserver --help
     * サービスは、ホスト ビルダーの `ConfigureServices` メソッド (`builder.Services.AddSingleton<IMyDependency, MyDependency>();`など) を使用して構成できます。
     * 構成は、ホスト ビルダー (`builder.Configuration`) を使用して指定できます。
 
-* `Startup.cs` (Blazor Server):アプリのスタートアップ ロジックを含みます。 `Startup` クラスには、次の 2 つのメソッドがあります。
+* `Startup.cs` (Blazor Server): アプリのスタートアップ ロジックを含みます。 `Startup` クラスには、次の 2 つのメソッドがあります。
 
   * `ConfigureServices`:アプリの[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)サービスを構成します。 Blazor Server アプリでは、<xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A> を呼び出すことによってサービスが追加されます。`WeatherForecastService` は、サンプルの `FetchData` コンポーネントが使用するためにサービス コンテナーに追加されます。
   * `Configure`:アプリの要求処理パイプラインを構成します。
     * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> は、ブラウザーとのリアルタイム接続用のエンドポイントを設定するために呼び出されます。 この接続は [SignalR](xref:signalr/introduction) で作成されます。これは、アプリにリアルタイム Web 機能を追加するためのフレームワークです。
     * [`MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) は、アプリ (`Pages/_Host.cshtml`) のルート ページを設定し、ナビゲーションを有効にするために呼び出されます。
 
-* `wwwroot/index.html` (Blazor WebAssembly):HTML ページとして実装されるアプリのルート ページ。
+* `wwwroot/index.html` (Blazor WebAssembly): HTML ページとして実装されるアプリのルート ページ。
   * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
   * このページは、ルート `App` コンポーネントを表示する場所を指定します。 `App` コンポーネント (`App.razor`) は、`Startup.Configure` の `AddComponent` メソッドに `app` DOM 要素として指定されます。
   * `_framework/blazor.webassembly.js` JavaScript ファイルが読み込まれます。これは以下のことを行います。
@@ -68,8 +69,8 @@ dotnet new blazorserver --help
 
 * `App.razor`:<xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントを使用してクライアント側のルーティングを設定するアプリのルート コンポーネント。 <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントは、ブラウザーのナビゲーションをインターセプトし、要求されたアドレスに一致するページをレンダリングします。
 
-* `Pages` フォルダー:Blazor アプリと Blazor サーバー アプリのルート Razor ページを構成するルーティング可能なコンポーネントまたはページ (`.razor`) が含まれています。 各ページのルートは、[`@page`](xref:mvc/views/razor#page) ディレクティブを使用して指定します。 テンプレートには以下が含まれています。
-  * `_Host.cshtml` (Blazor Server):Razor ページとして実装されるアプリのルート ページ。
+* `Pages` フォルダー:Blazor アプリと Blazor Server アプリのルート Razor ページを構成するルーティング可能なコンポーネントまたはページ (`.razor`) が含まれています。 各ページのルートは、[`@page`](xref:mvc/views/razor#page) ディレクティブを使用して指定します。 テンプレートには以下が含まれています。
+  * `_Host.cshtml` (Blazor Server): Razor ページとして実装されるアプリのルート ページ。
     * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
     * ブラウザーとサーバーの間のリアルタイム SignalR 接続を設定する `_framework/blazor.server.js` JavaScript ファイルが読み込まれます。
     * [ホスト] ページは、ルート `App` コンポーネント (`App.razor`) を表示する場所を指定します。
@@ -88,4 +89,4 @@ dotnet new blazorserver --help
 
 * `wwwroot`:アプリのパブリックな静的アセットを含むアプリの [Web ルート](xref:fundamentals/index#web-root) フォルダー。
 
-* `appsettings.json` (Blazor Server):アプリの構成設定。
+* `appsettings.json` (Blazor Server): アプリの構成設定。

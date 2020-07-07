@@ -1,18 +1,25 @@
 ---
 title: ASP.NET Core での Razor Pages の単体テスト
 author: rick-anderson
-description: Razor Pages アプリの単体テストを作成する方法を説明します。
+description: Razor Pages アプリの単体テストを作成する方法を学習します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/14/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: 0e217b6b7f15519a3da44f5d074cf80fa96a3b3a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
-ms.translationtype: HT
+ms.openlocfilehash: 756af7f2b14512bd43aefd1a4e63e195c2daa138
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78649574"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407760"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core での Razor Pages の単体テスト
 

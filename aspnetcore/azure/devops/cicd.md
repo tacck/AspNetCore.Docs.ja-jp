@@ -7,17 +7,18 @@ ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: f5b0e0ee1c903de26188815c7dc01ed547cca97e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767136"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400558"
 ---
 # <a name="continuous-integration-and-deployment"></a>継続的インテグレーションと継続的配置
 
@@ -37,12 +38,12 @@ ms.locfileid: "82767136"
 ## <a name="publish-the-apps-code-to-github"></a>アプリのコードを GitHub に発行する
 
 1. ブラウザー ウィンドウを開き、`https://github.com` に移動します。
-1. ヘッダーの **[+]** ドロップダウンをクリックし、 **[New repository]\(新しいリポジトリ\)** を選択します。
+1. ヘッダーの **[+]** ドロップダウンをクリックし、 **[新しいリポジトリ]** を選択します。
 
     ![GitHub の [新しいリポジトリ] オプション](media/cicd/github-new-repo.png)
 
-1. **[Owner]\(所有者\)** ドロップダウンでご自分のアカウントを選択し、 **[Repository name]\(新しいリポジトリ\)** テキストボックスに「*simple-feed-reader*」と入力します。
-1. **[Create repository]\(リポジトリの作成\)** ボタンをクリックします。
+1. **[所有者]** ドロップダウンでご自分のアカウントを選択し、 **[リポジトリ名]** テキストボックスに「*simple-feed-reader*」と入力します。
+1. **[リポジトリの作成]** ボタンをクリックします。
 1. ご利用のローカル コンピューターのコマンド シェルを開きます。 *simple-feed-reader* Git リポジトリが格納されているディレクトリに移動します。
 1. 既存の *origin* リモートを *upstream* に名前変更します。 次のコマンドを実行します。
 
@@ -72,14 +73,14 @@ ms.locfileid: "82767136"
 
     ![Web アプリの検索用語 staging](media/cicd/portal-search-box.png)
 
-1. **[Deployment Center]\(デプロイ センター\)** をクリックします。 新しいパネルが表示されます。 **[Disconnect]\(接続解除\)** をクリックして、前の章で追加したローカル Git ソース管理構成を削除します。 **[Yes]\(はい\)** ボタンをクリックして削除操作を確定します。
+1. **デプロイ センター**をクリックします。 新しいパネルが表示されます。 **[接続解除]** をクリックして、前の章で追加したローカル Git ソース管理構成を削除します。 **[はい]** ボタンをクリックして削除操作を確定します。
 1. *mywebapp<unique_number>* App Service に移動します。 繰り返しますが、ポータルの検索ボックスを使用すれば、App Service をすばやく見つけることができます。
-1. **[Deployment Center]\(デプロイ センター\)** をクリックします。 新しいパネルが表示されます。 **[Disconnect]\(接続解除\)** をクリックして、前の章で追加したローカル Git ソース管理構成を削除します。 **[Yes]\(はい\)** ボタンをクリックして削除操作を確定します。
+1. **デプロイ センター**をクリックします。 新しいパネルが表示されます。 **[接続解除]** をクリックして、前の章で追加したローカル Git ソース管理構成を削除します。 **[はい]** ボタンをクリックして削除操作を確定します。
 
 ## <a name="create-an-azure-devops-organization"></a>Azure DevOps 組織を作成する
 
 1. ブラウザーを開き、[Azure DevOps 組織作成ページ](https://go.microsoft.com/fwlink/?LinkId=307137)に移動します。
-1. **[Pick a memorable name]\(覚えやすい名前を選んでください\)** テキストボックスに一意の名前を入力して、ご自分の Azure DevOps 組織にアクセスするための URL を作成します。
+1. **[覚えやすい名前を選んでください]** テキストボックスに一意の名前を入力して、ご自分の Azure DevOps 組織にアクセスするための URL を作成します。
 1. コードは GitHub リポジトリでホストされているため、 **[Git]** ラジオ ボタンを選択します。
 1. **[Continue]** をクリックします。 しばらく待つと *MyFirstProject* という名前のアカウントとチームプロジェクトが作成されます。
 
@@ -97,22 +98,22 @@ ms.locfileid: "82767136"
 
 ### <a name="grant-azure-devops-access-to-the-github-repository"></a>GitHub リポジトリへのアクセス権を Azure DevOps に付与する
 
-1. **[build code from an external repository]\(または外部リポジトリからコードを構築する\)** アコーディオンを展開します。 **[Setup Build]\(ビルドのセットアップ\)** ボタンをクリックします。
+1. **[または外部リポジトリからコードを構築する]** アコーディオンを展開します。 **[ビルドのセットアップ]** ボタンをクリックします。
 
     ![[ビルドのセットアップ] ボタン](media/cicd/vsts-setup-build.png)
 
-1. **[Select a source]\(ソースの選択\)** セクションから **[GitHub]** オプションを選択します。
+1. **[ソースの選択]** セクションから **[GitHub]** オプションを選択します。
 
     ![ソースの選択 - GitHub](media/cicd/vsts-select-source.png)
 
-1. ご利用の GitHub リポジトリに Azure DevOps がアクセスできるようにするには、事前に承認が必要です。 **[Connection name]\(ソースの選択\)** テキストボックスに「 *<GitHub_username> GitHub connection*」と入力します。 次に例を示します。
+1. ご利用の GitHub リポジトリに Azure DevOps がアクセスできるようにするには、事前に承認が必要です。 **[接続名]** テキストボックスに「 *<GitHub_username> GitHub connection*」と入力します。 次に例を示します。
 
     ![GitHub 接続名](media/cicd/vsts-repo-authz.png)
 
-1. ご利用の GitHub アカウントで 2 要素認証が有効になっている場合は、個人用アクセス トークンが必要です。 その場合は、 **[Authorize with a GitHub personal access token]\(GitHub 個人用アクセス トークンで認証する\)** リンクをクリックします。 詳細については、[公式の GitHub 個人用アクセストークン作成手順](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)に関するページを参照してください。 必要な権限のスコープは *repo* のみです。 それ以外の場合は、 **[Authorize using OAuth]\(OAuth を使用して承認\)** ボタンをクリックします。
+1. ご利用の GitHub アカウントで 2 要素認証が有効になっている場合は、個人用アクセス トークンが必要です。 その場合は、 **[GitHub 個人用アクセス トークンで認証する]** リンクをクリックします。 詳細については、[公式の GitHub 個人用アクセストークン作成手順](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)に関するページを参照してください。 必要な権限のスコープは *repo* のみです。 それ以外の場合は、 **[OAuth を使用して承認]** ボタンをクリックします。
 1. メッセージが表示されたら、ご自分の GitHub アカウントにサインインします。 次に、[承認] を選択して、ご自分の Azure DevOps 組織へのアクセスを許可します。 成功した場合は、新しいサービス エンドポイントが作成されます。
-1. **[Repository]\(リポジトリ\)** ボタンの横にある省略記号ボタンをクリックします。 一覧から、 *<GitHub_username>/simple-feed-reader* リポジトリを選択します。 **[Select]\(選択\)** ボタンをクリックします。
-1. **[Default branch for manual and scheduled builds]\(手動のビルドとスケジュールされたビルドの既定のブランチ\)** ドロップダウンから *master* ブランチを選択します。 **[Continue]** をクリックします。 テンプレートの選択ページが表示されます。
+1. **[リポジトリ]** ボタンの横にある省略記号ボタンをクリックします。 一覧から、 *<GitHub_username>/simple-feed-reader* リポジトリを選択します。 **[選択]** ボタンをクリックします。
+1. **[手動のビルドとスケジュールされたビルドの既定のブランチ]** ドロップダウンから *master* ブランチを選択します。 **[Continue]** をクリックします。 テンプレートの選択ページが表示されます。
 
 ### <a name="create-the-build-definition"></a>ビルド定義を作成する
 
@@ -120,15 +121,15 @@ ms.locfileid: "82767136"
 
     ![テンプレート ページでの ASP.NET Core の検索](media/cicd/vsts-template-selection.png)
 
-1. テンプレートの検索結果が表示されます。 **[ASP.NET Core]** テンプレートにマウス ポインターを合わせ、 **[Apply]\(適用\)** ボタンをクリックします。
-1. ビルド定義の **[Tasks]\(タスク\)** タブが表示されます。 **[Triggers]\(トリガー\)** タブをクリックします。
-1. **[Enable continuous integration]\(継続的インテグレーションを有効にする\)** ボックスをオンにします。 **[Branch filters]\(ブランチ フィルター\)** セクションで、 **[Type]\(種類\)** ドロップダウンが *[Include]* に設定されていることを確認します。 **[Branch specification]\(ブランチ仕様\)** ドロップダウンを *master* に設定します。
+1. テンプレートの検索結果が表示されます。 **[ASP.NET Core]** テンプレートにマウス ポインターを合わせ、 **[適用]** ボタンをクリックします。
+1. ビルド定義の **[タスク]** タブが表示されます。 **[トリガー]** タブをクリックします。
+1. **[継続的インテグレーションを有効にする]** ボックスをオンにします。 **[ブランチ フィルター]** セクションで、 **[種類]** ドロップダウンが *[Include]* に設定されていることを確認します。 **[ブランチ仕様]** ドロップダウンを *master* に設定します。
 
     ![[継続的インテグレーションを有効にする] に関する設定](media/cicd/vsts-enable-ci.png)
 
     これらの設定を行うと、GitHub リポジトリの *master* ブランチに何らかの変更がプッシュされたときにビルドがトリガーされます。 継続的インテグレーションのテストについては、「[GitHub への変更をコミットし、Azure に自動的にデプロイする](#commit-changes-to-github-and-automatically-deploy-to-azure)」セクションで行います。
 
-1. **[Save & queue]\(保存してキューに登録\)** ボタンをクリックし、 **[Save]\(保存\)** オプションを選択します。
+1. **[保存してキューに登録]** ボタンをクリックし、 **[保存]** オプションを選択します。
 
     ![[保存] ボタン](media/cicd/vsts-save-build.png)
 
@@ -136,11 +137,11 @@ ms.locfileid: "82767136"
 
     ![ビルド定義を保存する - モーダル ダイアログ](media/cicd/vsts-save-modal.png)
 
-    既定のフォルダーである *\\* を使用して、 **[Save]\(保存\)** ボタンをクリックします。
+    既定のフォルダーである *\\* を使用して、 **[保存]** ボタンをクリックします。
 
 ### <a name="create-the-release-pipeline"></a>リリース パイプラインの作成
 
-1. チーム プロジェクトの **[Releases]\(リリース\)** タブをクリックします。 **[New pipeline]\(新しいパイプライン\)** ボタンをクリックします。
+1. チーム プロジェクトの **[リリース]** タブをクリックします。 **[新しいパイプライン]** ボタンをクリックします。
 
     ![[リリース] タブ - [新しい定義] ボタン](media/cicd/vsts-new-release-definition.png)
 
@@ -150,56 +151,56 @@ ms.locfileid: "82767136"
 
     ![リリース パイプライン テンプレートの検索ボックス](media/cicd/vsts-release-template-search.png)
 
-1. テンプレートの検索結果が表示されます。 **[Azure App Service Deployment with Slot]\(スロットを使用した Azure App Service の配置\)** テンプレートにマウス ポインターを合わせ、 **[Apply]\(適用]\)** ボタンをクリックします。 リリース パイプラインの **[Pipeline]\(パイプライン\)** タブが表示されます。
+1. テンプレートの検索結果が表示されます。 **[スロットを使用した Azure App Service の配置]** テンプレートにマウス ポインターを合わせ、 **[適用]** ボタンをクリックします。 リリース パイプラインの **[パイプライン]** タブが表示されます。
 
     ![リリース パイプラインの [パイプライン] タブ](media/cicd/vsts-release-definition-pipeline.png)
 
-1. **[Artifacts]\(成果物\)** ボックスの **[Add]\(追加\)** ボタンをクリックします。 **[Add artifact]\(成果物の追加\)** パネルが表示されます。
+1. **[成果物]** ボックスの **[追加]** ボタンをクリックします。 **[成果物の追加]** パネルが表示されます。
 
     ![リリース パイプライン - [成果物の追加] パネル](media/cicd/vsts-release-add-artifact.png)
 
-1. **[Source type]\(ソースの種類\)** セクションから **[Build]\(ビルド\)** タイルを選択します。 この種類を選択すれば、リリース パイプラインをビルド定義にリンクすることができます。
-1. **[Project]\(プロジェクト\)** ドロップダウンから *[MyFirstProject]* を選択します。
-1. **[Source (Build definition)]\(ソース (ビルド定義)\)** ドロップダウンから、ビルド定義名として *MyFirstProject-ASP.NET Core-CI* を選択します。
-1. **[Default version]\(既定のバージョン\)** ドロップダウンから *[Latest]\(最新\)* を選択します。 このオプションでは、ビルド定義の最新の実行によって生成された成果物がビルドされます。
-1. **[Source alias]\(ソースの別名\)** テキストボックス内のテキストを *Drop* に置き換えます。
-1. **[Add]\(追加\)** ボタンをクリックします。 **[Artifacts]\(成果物\)** セクションが更新され、変更内容が表示されます。
+1. **[ソースの種類]** セクションから **[ビルド]** タイルを選択します。 この種類を選択すれば、リリース パイプラインをビルド定義にリンクすることができます。
+1. **[プロジェクト]** ドロップダウンから *[MyFirstProject]* を選択します。
+1. **[ソース (ビルド定義)]** ドロップダウンから、ビルド定義名として *MyFirstProject-ASP.NET Core-CI* を選択します。
+1. **[既定のバージョン]** ドロップダウンから *[最新]* を選択します。 このオプションでは、ビルド定義の最新の実行によって生成された成果物がビルドされます。
+1. **[ソースの別名]** テキストボックス内のテキストを *Drop* に置き換えます。
+1. **[追加]** ボタンをクリックします。 **[成果物]** セクションが更新され、変更内容が表示されます。
 1. [稲妻] アイコンをクリックして、継続的デプロイを有効にします。
 
     ![リリース パイプラインの成果物 - [稲妻] アイコン](media/cicd/vsts-artifacts-lightning-bolt.png)
 
     このオプションを有効にすると、新しいビルドが使用可能になるたびにデプロイが行われます。
-1. **[Continuous deployment trigger]\(継続的デプロイ トリガー\)** パネルが右側に表示されます。 トグル ボタンをクリックして、この機能を有効にします。 **[Pull request trigger]\(Pull request のトリガー\)** を有効にする必要はありません。
-1. **[Build branch filters]\(ビルド ブランチ フィルター\)** セクションの **[Add]\(追加\)** ドロップダウンをクリックします。 **[Build Definition's default branch]\(ビルド定義の既定のブランチ\)** オプションを選択します。 このフィルターを使用すると、GitHub リポジトリの *master* ブランチからのビルドの場合にのみリリースがトリガーされます。
-1. **[Save]\(保存\)** ボタンをクリックします。 結果として生成された **[Save]\(\)** モーダル ダイアログの **[OK]** ボタンをクリックします。
-1. **[Environment 1]\(環境 1]\)** ボックスをクリックします。 **[Environment]\(環境\)** パネルが右側に表示されます。 **[Environment name]\(環境名\)** テキストボックスのテキスト "*環境 1*" を "*運用*" に変更します。
+1. **[継続的デプロイ トリガー]** パネルが右側に表示されます。 トグル ボタンをクリックして、この機能を有効にします。 **[Pull request のトリガー]** を有効にする必要はありません。
+1. **[ビルド ブランチ フィルター]** セクションの **[追加]** ドロップダウンをクリックします。 **[ビルド定義の既定のブランチ]** オプションを選択します。 このフィルターを使用すると、GitHub リポジトリの *master* ブランチからのビルドの場合にのみリリースがトリガーされます。
+1. **[保存]** ボタンをクリックします。 結果として生成された **[保存]** モーダル ダイアログの **[OK]** ボタンをクリックします。
+1. **[環境 1]** ボックスをクリックします。 **[環境]** パネルが右側に表示されます。 **[環境名]** テキストボックスのテキスト "*環境 1*" を "*運用*" に変更します。
 
    ![リリース パイプライン - [環境名] テキストボックス](media/cicd/vsts-environment-name-textbox.png)
 
-1. **[Production]\(運用\)** ボックスで、 **[1 phase, 2 tasks]\(1 フェーズ、2 タスク\)** リンクをクリックします。
+1. **[運用]** ボックスで、 **[1 フェーズ、2 タスク]** リンクをクリックします。
 
     ![リリース パイプライン - 運用環境リンク.png](media/cicd/vsts-production-link.png)
 
-    その環境の **[Tasks]\(タスク\)** タブが表示されます。
+    その環境の **[タスク]** タブが表示されます。
 1. **[Deploy Azure App Service to Slot]\(Azure App Service をスロットにデプロイ\)** タスクをクリックします。 その設定が右側のパネルに表示されます。
-1. App Service に関連付けられている Azure サブスクリプションを **[Azure subscription]\(Azure サブスクリプション\)** ドロップダウンから選択します。 選択したら、 **[Authorize]\(承認\)** ボタンをクリックします。
-1. **[App type]\(アプリの種類\)** ドロップダウンから *[Web アプリ]* を選択します。
-1. **[App service name]\(App Service の名前\)** ドロップダウンから *mywebapp/<unique_number/>* を選択します。
-1. *[Resource group]\(リソース グループ\)* ドロップダウンから **[AzureTutorial]** を選択します。
-1. **[Slot]\(スロット\)** ドロップダウンから *[ステージング]* を選択します。
-1. **[Save]\(保存\)** ボタンをクリックします。
+1. App Service に関連付けられている Azure サブスクリプションを **[Azure サブスクリプション]** ドロップダウンから選択します。 選択したら、 **[承認]** ボタンをクリックします。
+1. **[アプリの種類]** ドロップダウンから *[Web アプリ]* を選択します。
+1. **[App Service の名前]** ドロップダウンから *mywebapp/<unique_number/>* を選択します。
+1. *[リソース グループ]* ドロップダウンから **[AzureTutorial]** を選択します。
+1. **[スロット]** ドロップダウンから *[ステージング]* を選択します。
+1. **[保存]** ボタンをクリックします。
 1. 既定のリリース パイプライン名にマウス ポインターを合わせます。 それを編集するには、鉛筆アイコンをクリックします。 名前として *MyFirstProject-ASP.NET Core-CD* を使用します。
 
     ![リリース パイプラインの名前](media/cicd/vsts-release-definition-name.png)
 
-1. **[Save]\(保存\)** ボタンをクリックします。
+1. **[保存]** ボタンをクリックします。
 
 ## <a name="commit-changes-to-github-and-automatically-deploy-to-azure"></a>GitHub への変更をコミットし、Azure に自動的にデプロイする
 
 1. Visual Studio で *SimpleFeedReader.sln* を開きます。
 1. ソリューション エクスプローラーで *Pages\Index.cshtml* を開きます。 `<h2>Simple Feed Reader - V3</h2>` を `<h2>Simple Feed Reader - V4</h2>` に変更します。
 1. **Ctrl** + **Shift** + **B** キーを押して、アプリをビルドします。
-1. GitHub リポジトリにファイルをコミットします。 Visual Studio の *[チーム エクスプローラー]* タブの **[Changes]\(変更\)** ページを使用するか、ローカル コンピューターのコマンド シェルを使用して以下を実行します。
+1. GitHub リポジトリにファイルをコミットします。 Visual Studio の *[チーム エクスプローラー]* タブの **[変更]** ページを使用するか、ローカル コンピューターのコマンド シェルを使用して以下を実行します。
 
     ```console
     git commit -a -m "upgraded to V4"
@@ -215,11 +216,11 @@ ms.locfileid: "82767136"
 
     ![master ブランチでの GitHub コミット](media/cicd/github-commit.png)
 
-    ビルド定義の **[Triggers]\(トリガー\)** タブで継続的インテグレーションが有効になっているため、ビルドがトリガーされます。
+    ビルド定義の **[トリガー]** タブで継続的インテグレーションが有効になっているため、ビルドがトリガーされます。
 
     ![継続的インテグレーションを有効にする](media/cicd/enable-ci.png)
 
-1. Azure DevOps Services で、 **[Azure Pipelines]** > **[Builds]\(ビルド\)** ページの **[Queued]\(キューに登録済み\)** タブに移動します。 キューに登録されたビルドに、ビルドをトリガーしたブランチとコミットが表示されます。
+1. Azure DevOps Services で、 **[Azure Pipelines]**  >  **[ビルド]** ページの **[キューに登録済み]** タブに移動します。 キューに登録されたビルドに、ビルドをトリガーしたブランチとコミットが表示されます。
 
     ![キューに登録されたビルド](media/cicd/build-queued.png)
 
@@ -231,23 +232,23 @@ ms.locfileid: "82767136"
 
 ### <a name="build-definition"></a>ビルド定義
 
-ビルド定義は *MyFirstProject-ASP.NET Core-CI* という名前で作成しました。 完了時には、発行するアセットを含む *.zip* ファイルがビルドによって生成されます。 それらのアセットはリリース パイプラインによって Azure にデプロイされます。
+ビルド定義は *MyFirstProject-ASP.NET Core-CI* という名前で作成しました。 完了時には、発行する資産を含む *.zip* ファイルがビルドによって生成されます。 それらの資産はリリース パイプラインによって Azure にデプロイされます。
 
-ビルド定義の **[Tasks]\(タスク\)** タブには、使用されている個々のステップが一覧表示されます。 ビルド タスクは 5 つあります。
+ビルド定義の **[タスク]** タブには、使用されている個々のステップが一覧表示されます。 ビルド タスクは 5 つあります。
 
 ![ビルド定義タスク](media/cicd/build-definition-tasks.png)
 
-1. **Restore\(復元\)** &mdash; `dotnet restore` コマンドを実行して、アプリの NuGet パッケージが復元されます。 使用される既定のパッケージ フィードは nuget.org です。
-1. **Build\(ビルド\)** &mdash; `dotnet build --configuration release` コマンドを実行して、アプリのコードがコンパイルされます。 この `--configuration` オプションは、コードの最適化されたバージョン (運用環境へのデプロイに適している) を生成するために使用されます。 たとえば、デバッグ構成が必要な場合は、ビルド定義の **[Variables]\(変数\)** タブで *BuildConfiguration* 変数を変更します。
-1. **Test\(テスト\)** &mdash; `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` コマンドを実行して、アプリの単体テストが実行されます。 単体テストは、`**/*Tests/*.csproj` glob パターンに一致する C# プロジェクト内で実行されます。 `--results-directory` オプションで指定された場所にある *.trx* ファイルにテスト結果が保存されます。 いずれかのテストが失敗した場合、ビルドは失敗し、デプロイは行われません。
+1. **復元** &mdash; `dotnet restore` コマンドを実行して、アプリの NuGet パッケージが復元されます。 使用される既定のパッケージ フィードは nuget.org です。
+1. **ビルド** &mdash; `dotnet build --configuration release` コマンドを実行して、アプリのコードがコンパイルされます。 この `--configuration` オプションは、コードの最適化されたバージョン (運用環境へのデプロイに適している) を生成するために使用されます。 たとえば、デバッグ構成が必要な場合は、ビルド定義の **[変数]** タブで *BuildConfiguration* 変数を変更します。
+1. **テスト** &mdash; `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` コマンドを実行して、アプリの単体テストが実行されます。 単体テストは、`**/*Tests/*.csproj` glob パターンに一致する C# プロジェクト内で実行されます。 `--results-directory` オプションで指定された場所にある *.trx* ファイルにテスト結果が保存されます。 いずれかのテストが失敗した場合、ビルドは失敗し、デプロイは行われません。
 
     > [!NOTE]
-    > 単体テストが機能していることを確認するには、テストの 1 つを意図的に中断するように *SimpleFeedReader.Tests\Services\NewsServiceTests.cs* を変更します。 たとえば、`Returns_News_Stories_Given_Valid_Uri` メソッド内で `Assert.True(result.Count > 0);` を `Assert.False(result.Count > 0);` に変更します。 変更をコミットして GitHub にプッシュします。 ビルドがトリガーされますが失敗します。 ビルド パイプラインの状態が **[failed]\(失敗\)** に変わります。 変更を元に戻し、コミットして、もう一度プッシュします。 ビルドは成功します。
+    > 単体テストが機能していることを確認するには、テストの 1 つを意図的に中断するように *SimpleFeedReader.Tests\Services\NewsServiceTests.cs* を変更します。 たとえば、`Returns_News_Stories_Given_Valid_Uri` メソッド内で `Assert.True(result.Count > 0);` を `Assert.False(result.Count > 0);` に変更します。 変更をコミットして GitHub にプッシュします。 ビルドがトリガーされますが失敗します。 ビルド パイプラインの状態が **[失敗]** に変わります。 変更を元に戻し、コミットして、もう一度プッシュします。 ビルドは成功します。
 
-1. **Publish\(発行\)** &mdash; `dotnet publish --configuration release --output <local_path_on_build_agent>` コマンドを実行して、デプロイする成果物を含む *.zip* ファイルが生成されます。 `--output` オプションによって *.zip* ファイルの発行場所が指定されます。 その場所は、`$(build.artifactstagingdirectory)` という名前の[定義済みの変数](/azure/devops/pipelines/build/variables)を渡すことによって指定されます。 その変数は、ビルド エージェント上のローカル パス (*c:\agent\_work\1\a* など) に展開されます。
-1. **Publish Artifact\(成果物の発行\)** &mdash; **Publish\(発行\)** タスクによって生成された *.zip* ファイルを発行します。 このタスクでは、 *.zip* ファイルの場所をパラメーターとして受け取ります。それは定義済みの変数 `$(build.artifactstagingdirectory)` です。 *.zip* ファイルは、*drop* という名前のフォルダーとして発行されます。
+1. **発行** &mdash; `dotnet publish --configuration release --output <local_path_on_build_agent>` コマンドを実行して、デプロイする成果物を含む *.zip* ファイルが生成されます。 `--output` オプションによって *.zip* ファイルの発行場所が指定されます。 その場所は、`$(build.artifactstagingdirectory)` という名前の[定義済みの変数](/azure/devops/pipelines/build/variables)を渡すことによって指定されます。 その変数は、ビルド エージェント上のローカル パス (*c:\agent\_work\1\a* など) に展開されます。
+1. **成果物の発行** &mdash; **発行**タスクによって生成された *.zip* ファイルを発行します。 このタスクでは、 *.zip* ファイルの場所をパラメーターとして受け取ります。それは定義済みの変数 `$(build.artifactstagingdirectory)` です。 *.zip* ファイルは、*drop* という名前のフォルダーとして発行されます。
 
-ビルド定義の **[Summary]\(概要\)** リンクをクリックして、ビルドの定義に関する履歴を表示します。
+ビルド定義の **[概要]** リンクをクリックして、ビルドの定義に関する履歴を表示します。
 
 ![ビルド定義の履歴を示すスクリーンショット](media/cicd/build-definition-summary.png)
 
@@ -255,11 +256,11 @@ ms.locfileid: "82767136"
 
 ![ビルド定義の概要ページを示すスクリーンショット](media/cicd/build-definition-completed.png)
 
-この特定のビルドの概要が表示されます。 **[Artifacts]\(成果物\)** タブをクリックすると、ビルドによって生成された *drop* フォルダーが一覧に表示されていることがわかります。
+この特定のビルドの概要が表示されます。 **[成果物]** タブをクリックすると、ビルドによって生成された *drop* フォルダーが一覧に表示されていることがわかります。
 
 ![ビルド定義の成果物を示すスクリーンショット - drop フォルダー](media/cicd/build-definition-artifacts.png)
 
-**[Download]\(ダウンロード\)** および **[Explore]\(エクスプローラ\)** リンクを使用して、発行された成果物を検査します。
+**[ダウンロード]** および **[探索]** リンクを使用して、発行された成果物を検査します。
 
 ### <a name="release-pipeline"></a>リリース パイプライン
 
@@ -267,11 +268,11 @@ ms.locfileid: "82767136"
 
 ![リリース パイプラインの概要を示すスクリーンショット](media/cicd/release-definition-overview.png)
 
-リリース パイプラインの 2 つの主要なコンポーネントは、 **[Artifacts]\(成果物\)** と **[Environments]\(環境\)** です。 **[Artifacts]\(成果物\)** セクションのボックスをクリックすると、次のパネルが表示されます。
+リリース パイプラインの 2 つの主要なコンポーネントは、 **[成果物]** と **[環境]** です。 **[成果物]** セクションのボックスをクリックすると、次のパネルが表示されます。
 
 ![リリース パイプラインの成果物を示すスクリーンショット](media/cicd/release-definition-artifacts.png)
 
-**[Source (Build definition)]\(ソース (ビルド定義)\)** の値は、このリリース パイプラインがリンクされているビルド定義を表します。 ビルド定義が正常に実行された場合に生成される *.zip* ファイルは、Azure にデプロイするための "*Production\(運用\)*" 環境に提供されます。 *[Production]\(運用\)* 環境ボックス内の *[1 phase, 2 tasks ]\(1 フェーズ、2 タスク\)* リンクをクリックすると、リリース パイプラインのタスクが表示されます。
+**[ソース (ビルド定義)]** の値は、このリリース パイプラインがリンクされているビルド定義を表します。 ビルド定義が正常に実行された場合に生成される *.zip* ファイルは、Azure にデプロイするための "*運用*" 環境に提供されます。 *[運用]* 環境ボックス内の *[1 フェーズ、2 タスク]* リンクをクリックすると、リリース パイプラインのタスクが表示されます。
 
 ![リリース パイプラインのタスクを示すスクリーンショット](media/cicd/release-definition-tasks.png)
 
@@ -279,13 +280,13 @@ ms.locfileid: "82767136"
 
 ![リリース パイプラインのデプロイ タスクを示すスクリーンショット](media/cicd/release-definition-task1.png)
 
-デプロイ タスクでは、Azure サブスクリプション、サービスの種類、Web アプリ名、リソース グループ、デプロイ スロットが定義されます。 **[Package or folder]\(パッケージまたはフォルダー\)** テキストボックスには、*mywebapp\<unique_number\>* という Web アプリの "*ステージング*" スロットに抽出されてデプロイされる *.zip* ファイル パスが保持されています。
+デプロイ タスクでは、Azure サブスクリプション、サービスの種類、Web アプリ名、リソース グループ、デプロイ スロットが定義されます。 **[パッケージまたはフォルダー]** テキストボックスには、*mywebapp\<unique_number\>* という Web アプリの "*ステージング*" スロットに抽出されてデプロイされる *.zip* ファイル パスが保持されています。
 
 スロット スワップ タスクをクリックすると、次のタスク構成が表示されます。
 
 ![リリース パイプラインのスロット スワップ タスクを示すスクリーン ショット](media/cicd/release-definition-task2.png)
 
-サブスクリプション、リソース グループ、サービスの種類、Web アプリ名、デプロイ スロットの詳細が提供されます。 **[Swap with Production]\(本稼働とのスワップ\)** チェック ボックスがオンになっています。 したがって、"*ステージング*" スロットにデプロイされたビットは運用環境にスワップされます。
+サブスクリプション、リソース グループ、サービスの種類、Web アプリ名、デプロイ スロットの詳細が提供されます。 **[本稼働とのスワップ]** チェック ボックスがオンになっています。 したがって、"*ステージング*" スロットにデプロイされたビットは運用環境にスワップされます。
 
 ## <a name="additional-reading"></a>その他の参考資料
 

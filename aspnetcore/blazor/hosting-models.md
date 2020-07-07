@@ -1,36 +1,37 @@
 ---
 title: ASP.NET Core Blazor のホスティング モデル
 author: guardrex
-description: Blazor WebAssembly と Blazor サーバーのホスティング モデルについて学習します。
+description: Blazor WebAssembly と Blazor Server のホスティング モデルを理解します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a54f92d1c951792e599992b82e6b6d5c85549292
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: ba43ff052fbd290412fa27cf57ace3ee3491f8d0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243500"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402560"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
 作成者: [Daniel Roth](https://github.com/danroth27)
 
-Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタイム ( *Blazor WebAssembly*) 上のブラウザーのクライアント側で、または ASP.NET Core ( *Blazor サーバー*) のサーバー側で実行されるように設計された Web フレームワークです。 ホスティング モデルに関係なく、アプリ モデルとコンポーネント モデルは "*同じ*" です。
+Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタイム ( *Blazor WebAssembly* ) 上のブラウザーのクライアント側で、または ASP.NET Core ( *Blazor Server* ) のサーバー側で実行されるように設計された Web フレームワークです。 ホスティング モデルに関係なく、アプリ モデルとコンポーネント モデルは "*同じ*" です。
 
 この記事で説明されているホスティング モデルのプロジェクトを作成するには、「<xref:blazor/get-started>」を参照してください。
 
 詳細な構成については、「<xref:blazor/fundamentals/configuration>」を参照してください。
 
-## <a name="blazor-webassembly"></a>Blazor WebAssembly
+## Blazor WebAssembly
 
 Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
 
@@ -61,13 +62,13 @@ Blazor WebAssembly ホスティングには、次の欠点があります。
 
 Blazor でホストされているアプリ モデルでは、[Docker コンテナー](/dotnet/standard/microservices-architecture/container-docker-introduction/index)がサポートされています。 Visual Studio でサーバー プロジェクトを右クリックし、 **[追加]**  >  **[Docker サポート]** を選択します。
 
-## <a name="blazor-server"></a>Blazor サーバー
+## Blazor Server
 
-Blazor サーバーのホスティング モデルを使用すると、アプリは ASP.NET Core アプリ内からサーバー上で実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
+Blazor Server ホスティング モデルを使用すると、アプリは ASP.NET Core アプリ内からサーバー上で実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
 
 ![ブラウザーは、SignalR 接続を介してサーバー上のアプリ (ASP.NET Core アプリ内でホストされている) とやりとりします。](hosting-models/_static/blazor-server.png)
 
-Blazor サーバー ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor Server アプリ** テンプレート ([`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor サーバー アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
+Blazor Server ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor Server アプリ** テンプレート ([`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor Server アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
 
 ASP.NET Core アプリにより、次の項目を追加するためにアプリの `Startup` クラスが参照されます。
 
@@ -76,15 +77,15 @@ ASP.NET Core アプリにより、次の項目を追加するためにアプリ�
 
 `blazor.server.js` スクリプトにより、クライアント接続が確立されます。 アプリケーションの状態は、必要に応じてアプリによって永続化および復元する必要があります (ネットワーク接続が切断された場合など)。 `blazor.server.js` スクリプトは、ASP.NET Core 共有フレームワークの埋め込みリソースから提供されます。
 
-Blazor サーバー ホスティング モデルには、次のいくつかの利点があります。
+Blazor Server ホスティング モデルには、次のいくつかの利点があります。
 
 * ダウンロード サイズが Blazor WebAssembly アプリよりもかなり小さく、アプリの読み込み時間が大幅に短縮されます。
 * このアプリでは、.NET Core と互換性のあるすべての API の使用を含め、サーバーの機能を最大限に活用できます。
 * サーバー上の .NET Core はアプリの実行に使用されるため、デバッグなどの既存の .NET ツールは想定どおりに動作します。
-* シン クライアントがサポートされています。 たとえば、Blazor サーバー アプリは、WebAssembly がサポートされていないブラウザーや、リソースが制限されたデバイスで動作します。
+* シン クライアントがサポートされています。 たとえば、Blazor Server アプリは、WebAssembly がサポートされていないブラウザーや、リソースが制限されたデバイスで動作します。
 * アプリのコンポーネント コードを含め、アプリの .NET/C# コード ベースがクライアントに提供されません。
 
-Blazor サーバー ホスティングには、次の欠点があります。
+Blazor Server ホスティングには、次の欠点があります。
 
 * 通常、遅延時間が長くなります。 すべてのユーザーの操作にネットワーク ホップが関与します。
 * オフライン サポートがありません。 クライアント接続が失敗すると、アプリの動作が停止します。
@@ -95,7 +96,7 @@ Blazor Server アプリ モデルでは、[Docker コンテナー](/dotnet/stand
 
 ### <a name="comparison-to-server-rendered-ui"></a>サーバーでレンダリングされる UI との比較
 
-Blazor サーバー アプリを理解する方法の 1 つは、Razor ビューまたは Razor Pages を使用して ASP.NET Core アプリで UI をレンダリングするための従来のモデルとの違いを理解することです。 どちらのモデルでも、Razor 言語を使用して HTML コンテンツが記述されますが、マークアップのレンダリング方法が大きく異なります。
+Blazor Server アプリを理解する方法の 1 つは、Razor ビューまたは Razor Pages を使用して ASP.NET Core アプリで UI をレンダリングするための従来のモデルとの違いを理解することです。 どちらのモデルでも、Razor 言語を使用して HTML コンテンツが記述されますが、マークアップのレンダリング方法が大きく異なります。
 
 Razor ページまたはビューがレンダリングされると、Razor コードのすべての行で HTML がテキスト形式で出力されます。 レンダリング後、サーバーでは、生成されたすべての状態を含むページ インスタンスまたはビュー インスタンスが破棄されます。 たとえば、サーバーの検証に失敗して検証の概要が表示される場合など、ページに対する別の要求が発生すると、次の処理が行われます。
 
@@ -116,38 +117,38 @@ Blazor の UI の更新は、次の方法でトリガーされます。
 
 グラフが再レンダリングされ、UI *diff* (相違) が計算されます。 この diff は、クライアントで UI を更新するために必要な DOM 編集の最小セットです。 diff はバイナリ形式でクライアントに送信され、ブラウザーによって適用されます。
 
-コンポーネントは、ユーザーがクライアント上でコンポーネントから移動すると破棄されます。 ユーザーがコンポーネントを操作している間、コンポーネントの状態 (サービス、リソース) はサーバーのメモリに保持されている必要があります。 多くのコンポーネントの状態はサーバーによって同時に維持される場合があるため、メモリ不足の問題に対処する必要があります。 サーバー メモリを最大限に活用できるよう Blazor サーバー アプリを作成する方法については、「<xref:blazor/security/server/threat-mitigation>」を参照してください。
+コンポーネントは、ユーザーがクライアント上でコンポーネントから移動すると破棄されます。 ユーザーがコンポーネントを操作している間、コンポーネントの状態 (サービス、リソース) はサーバーのメモリに保持されている必要があります。 多くのコンポーネントの状態はサーバーによって同時に維持される場合があるため、メモリ不足の問題に対処する必要があります。 サーバー メモリを最大限に活用できるよう Blazor Server アプリを作成する方法については、「<xref:blazor/security/server/threat-mitigation>」を参照してください。
 
 ### <a name="circuits"></a>回線
 
-Blazor サーバー アプリは、[ASP.NET Core SignalR](xref:signalr/introduction) 上に構築されています。 各クライアントは、"*回線*" と呼ばれる 1 つ以上の SignalR 接続を介してサーバーと通信します。 回線は、一時的なネットワーク中断が許容される SignalR 接続を介した Blazor の抽象化です。 Blazor クライアントで、SignalR 接続が切断されていることが確認されると、新しい SignalR 接続を使用してサーバーへの再接続が試行されます。
+Blazor Server アプリは、[ASP.NET Core SignalR](xref:signalr/introduction) 上に構築されています。 各クライアントは、"*回線*" と呼ばれる 1 つ以上の SignalR 接続を介してサーバーと通信します。 回線は、一時的なネットワーク中断が許容される SignalR 接続を介した Blazor の抽象化です。 Blazor クライアントで、SignalR 接続が切断されていることが確認されると、新しい SignalR 接続を使用してサーバーへの再接続が試行されます。
 
-Blazor サーバー アプリに接続されている各ブラウザー画面 (ブラウザー タブまたは iframe) では、SignalR 接続が使用されます。 これは、サーバーでレンダリングされる一般的なアプリとの、もう 1 つの重要な違いです。 サーバーでレンダリングされるアプリでは、複数のブラウザー画面で同じアプリを開いても、通常、サーバー上で追加のリソースは要求されません。 Blazor サーバー アプリでは、ブラウザー画面ごとに、個別の回線とコンポーネント状態の個別のインスタンスをサーバーで管理する必要があります。
+Blazor Server アプリに接続されている各ブラウザー画面 (ブラウザー タブまたは iframe) では、SignalR 接続が使用されます。 これは、サーバーでレンダリングされる一般的なアプリとの、もう 1 つの重要な違いです。 サーバーでレンダリングされるアプリでは、複数のブラウザー画面で同じアプリを開いても、通常、サーバー上で追加のリソースは要求されません。 Blazor Server アプリでは、ブラウザー画面ごとに、個別の回線とコンポーネント状態の個別のインスタンスをサーバーで管理する必要があります。
 
-Blazor では、ブラウザー タブを閉じるか、または外部 URL に移動して "*正常に終了*" することが検討されます。 正常な終了が行われた場合は、回線と関連リソースが直ちに解放されます。 ネットワークの中断などにより、クライアントが正常に切断されないこともあります。 Blazor サーバーでは、クライアントが再接続できるように、切断された回線が格納されます (その間隔は設定できます)。
+Blazor では、ブラウザー タブを閉じるか、または外部 URL に移動して "*正常に終了*" することが検討されます。 正常な終了が行われた場合は、回線と関連リソースが直ちに解放されます。 ネットワークの中断などにより、クライアントが正常に切断されないこともあります。 Blazor Server では、クライアントが再接続できるように、切断された回線が格納されます (その間隔は設定できます)。
 
-Blazor サーバーを使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 詳細については、「<xref:blazor/advanced-scenarios#blazor-server-circuit-handler>」を参照してください。
+Blazor Server を使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 詳細については、「<xref:blazor/advanced-scenarios#blazor-server-circuit-handler>」を参照してください。
 
 ### <a name="ui-latency"></a>UI 遅延時間
 
-UI 遅延時間とは、アクションが開始されてから UI が更新されるまでにかかる時間のことです。 ユーザーに対するアプリの応答性を高めるには、UI 遅延時間の値を小さくすることが不可欠です。 Blazor サーバー アプリでは、各アクションがサーバーに送信され、処理されて、UI diff が返されます。 したがって、UI 遅延時間は、アクションの処理時のネットワーク遅延時間とサーバー遅延時間の合計になります。
+UI 遅延時間とは、アクションが開始されてから UI が更新されるまでにかかる時間のことです。 ユーザーに対するアプリの応答性を高めるには、UI 遅延時間の値を小さくすることが不可欠です。 Blazor Server アプリでは、各アクションがサーバーに送信され、処理されて、UI diff が返されます。 したがって、UI 遅延時間は、アクションの処理時のネットワーク遅延時間とサーバー遅延時間の合計になります。
 
 企業のプライベート ネットワークに限定された基幹業務アプリでは、通常、ネットワーク遅延時間によってユーザーが遅延を感じる度合いはわずかです。 インターネット経由で展開されたアプリでは、特にユーザーが地理的に広く分散している場合、ユーザーが遅延を感じる可能性があります。
 
 メモリ使用量も、アプリ遅延時間の一因となる場合があります。 メモリ使用量が増加すると、ガベージ コレクションまたはディスクへのメモリのページングが頻繁に発生します。どちらの場合も、アプリのパフォーマンスが低下し、その結果、UI 遅延時間が長くなります。
 
-Blazor サーバー アプリは、ネットワーク遅延時間とメモリ使用量を低減することで、UI 遅延時間を最小限に抑えるように最適化する必要があります。 ネットワーク遅延時間を測定する方法については、「<xref:blazor/host-and-deploy/server#measure-network-latency>」を参照してください。 SignalR と Blazor の詳細については、以下を参照してください。
+Blazor Server アプリは、ネットワーク遅延時間とメモリ使用量を低減することで、UI 遅延時間を最小限に抑えるように最適化する必要があります。 ネットワーク遅延時間を測定する方法については、「<xref:blazor/host-and-deploy/server#measure-network-latency>」を参照してください。 SignalR と Blazor の詳細については、以下を参照してください。
 
 * <xref:blazor/host-and-deploy/server>
 * <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>サーバーへの接続
 
-Blazor サーバー アプリには、サーバーへのアクティブな SignalR 接続が必要です。 接続が失われた場合、アプリではサーバーへの再接続が試行されます。 クライアントの状態がまだメモリ内にある限り、クライアント セッションは状態を失うことなく再開されます。
+Blazor Server アプリには、サーバーへのアクティブな SignalR 接続が必要です。 接続が失われた場合、アプリではサーバーへの再接続が試行されます。 クライアントの状態がまだメモリ内にある限り、クライアント セッションは状態を失うことなく再開されます。
 
-最初のクライアント要求への応答として、Blazor サーバー アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、クライアントを同じサーバーに再接続する必要があります。 複数のバックエンド サーバーを使用する Blazor サーバー アプリでは、SignalR 接続に "*スティッキー セッション*" を実装する必要があります。
+最初のクライアント要求への応答として、Blazor Server アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、クライアントを同じサーバーに再接続する必要があります。 複数のバックエンド サーバーを使用する Blazor Server アプリでは、SignalR 接続に "*スティッキー セッション*" を実装する必要があります。
 
-Blazor サーバー アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 Azure SignalR サービスでは、サービスの `ServerStickyMode` オプションまたは構成値を `Required` に設定することにより、スティッキー セッションが有効になります。 詳細については、「<xref:blazor/host-and-deploy/server#signalr-configuration>」を参照してください。
+Blazor Server アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 Azure SignalR サービスでは、サービスの `ServerStickyMode` オプションまたは構成値を `Required` に設定することにより、スティッキー セッションが有効になります。 詳細については、「<xref:blazor/host-and-deploy/server#signalr-configuration>」を参照してください。
 
 IIS を使用すると、スティッキー セッションはアプリケーション要求ルーティングによって有効になります。 詳しくは、「[アプリケーション要求ルーティングを使用した HTTP 負荷分散](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)」をご覧ください。
 

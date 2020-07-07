@@ -8,17 +8,18 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 65bd5157bb3909f8352debcb1a6dfa7d888eec0e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769924"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401832"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>ASP.NET Core で JavaScript サービスを使用してシングル ページ アプリケーションを作成する
 
@@ -46,7 +47,7 @@ JavaScript サービスは、次の 2 つの異なる NuGet パッケージで�
 
 * サーバーで JavaScript を実行する
 * SPA フレームワークまたは SPA ライブラリを使用する
-* Webpack を使用してクライアント側のアセットを構築する
+* Webpack を使用してクライアント側の資産を構築する
 
 この記事では、SpaServices パッケージを使用することに重点を置いて説明します。
 
@@ -103,7 +104,7 @@ npm i -S aspnet-prerendering
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/_ViewImports.cshtml?highlight=3)]
 
-タグヘルパーは、Razor ビューで HTML に似た構文を利用することで、低レベルの API と直接通信する複雑な部分を抽象化します。
+タグ ヘルパーは、Razor ビューで HTML に似た構文を利用することで、低レベルの API と直接通信する複雑な部分を抽象化します。
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=5)]
 

@@ -8,25 +8,26 @@ ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d4ebab0d8fc2ee48fa4d9c8b1f1b8e5cbf43cab9
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242446"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400220"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor の高度なシナリオ
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Blazor サーバー回線ハンドラー
+## <a name="blazor-server-circuit-handler"></a>Blazor Server 回線ハンドラー
 
-Blazor サーバーを使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 回線ハンドラーは、`CircuitHandler` から派生させ、そのクラスをアプリのサービス コンテナーに登録することで実装します。 次の回線ハンドラーの例では、開いている SignalR 接続を追跡します。
+Blazor Server を使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 回線ハンドラーは、`CircuitHandler` から派生させ、そのクラスをアプリのサービス コンテナーに登録することで実装します。 次の回線ハンドラーの例では、開いている SignalR 接続を追跡します。
 
 ```csharp
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-カスタム回線ハンドラーのメソッドでハンドルされない例外がスローされる場合は、その例外は Blazor サーバー回線にとって致命的です。 ハンドラーのコードまたはメソッドで例外が許容されるようにするには、エラー処理とログを含む 1 つ以上の [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントでコードをラップします。
+カスタム回線ハンドラーのメソッドでハンドルされない例外がスローされる場合は、その例外は Blazor Server 回線にとって致命的です。 ハンドラーのコードまたはメソッドで例外が許容されるようにするには、エラー処理とログを含む 1 つ以上の [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントでコードをラップします。
 
 ユーザーが切断し、フレームワークで回線の状態がクリーンアップされていることが原因で回線が終了すると、フレームワークによって回線の DI スコープが破棄されます。 スコープが破棄されると、<xref:System.IDisposable?displayProperty=fullName> を実装するサーキットスコープの DI サービスはすべて破棄されます。 破棄中にいずれかの DI サービスでハンドルされない例外がスローされると、フレームワークによって例外がログに記録されます。
 
@@ -221,14 +222,14 @@ builder.AddContent(seq++, "Second");
 * シーケンス番号がハードコードされている場合、差分アルゴリズムでは、シーケンス番号の値が増えることだけが要求されます。 初期値とギャップは関係ありません。 合理的な選択肢の 1 つは、コード行番号をシーケンス番号として使用するか、ゼロから開始し、1 つずつまたは 100 ずつ (または任意の間隔で) 増やすことです。 
 * Blazor ではシーケンス番号が使用されていますが、他のツリー差分 UI フレームワークでは使用されていません。 シーケンス番号を使用すると、差分がはるかに高速になります。また、Blazor には、`.razor` ファイルを作成する開発者に対して、シーケンス番号を自動的に処理するコンパイル ステップの利点があります。
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor サーバー アプリで大規模なデータ転送を実行する
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor Server アプリで大規模なデータ転送を実行する
 
 シナリオによっては、JavaScript と Blazor 間で大量のデータを転送する必要があります。 通常、大規模なデータ転送は次の場合に発生します。
 
 * ブラウザー ファイル システム API が、ファイルをアップロードまたはダウンロードするために使用されている場合。
 * サードパーティのライブラリとの相互運用が必要な場合。
 
-Blazor サーバーでは、パフォーマンスの問題を引き起こす可能性がある 1 つの大きなメッセージを渡すことができないように制限されています。
+Blazor Server では、パフォーマンスの問題を引き起こす可能性がある 1 つの大きなメッセージを渡すことができないように制限されています。
 
 JavaScript と Blazor 間でデータを転送するコードを開発するときは、次のガイダンスを考慮してください。
 

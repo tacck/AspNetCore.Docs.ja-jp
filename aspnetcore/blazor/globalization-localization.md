@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243591"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402729"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -63,19 +64,19 @@ Blazor の [`@bind`](xref:mvc/views/razor#bind) 機能は、ユーザーの現�
 
 ## <a name="localization"></a>ローカリゼーション
 
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
+### Blazor WebAssembly
 
 Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)を使用してカルチャが設定されます。
 
 カルチャを明示的に構成するには、`Program.Main` で <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> と <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> を設定します。
 
-既定では、Blazor WebAssembly に対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
+既定では、Blazor WebAssembly アプリに対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
 
 Blazor で既定で選択されるカルチャは、ほとんどのユーザーにとって十分と考えられますが、ユーザーが優先ロケールを指定する手段を提供することを検討してください。 カルチャ ピッカーを使用した Blazor WebAssembly サンプル アプリについては、[`LocSample`](https://github.com/pranavkm/LocSample) ローカライズのサンプル アプリを参照してください。
 
-### <a name="blazor-server"></a>Blazor サーバー
+### Blazor Server
 
-Blazor サーバー アプリは、[ローカライズ ミドルウェア](xref:fundamentals/localization#localization-middleware)を使用してローカライズされます。 ミドルウェアによって、アプリからリソースを要求するユーザーに対して適切なカルチャが選択されます。
+Blazor Server アプリは、[ローカライズ ミドルウェア](xref:fundamentals/localization#localization-middleware)を使用してローカライズされます。 ミドルウェアによって、アプリからリソースを要求するユーザーに対して適切なカルチャが選択されます。
 
 カルチャは、次のいずれかの方法を使用して設定できます。
 
@@ -119,9 +120,9 @@ Cookie を使用すると、WebSocket 接続によってカルチャを正しく
 1. ブラウザーによって、アプリに最初の HTTP 要求が送信されます。
 1. カルチャは、ローカライズ ミドルウェアによって割り当てられます。
 1. `_Host` ページ (`_Host.cshtml`) の Razor 式によって、応答の一部として Cookie にカルチャが保持されます。
-1. ブラウザーによって、WebSocket 接続が開かれ、対話型の Blazor サーバー セッションが作成されます。
+1. ブラウザーによって、WebSocket 接続が開かれ、対話型の Blazor Server セッションが作成されます。
 1. ローカライズ ミドルウェアによって、Cookie が読み取られ、カルチャが割り当てられます。
-1. Blazor サーバー セッションは、正しいカルチャで開始されます。
+1. Blazor Server セッションは、正しいカルチャで開始されます。
 
 #### <a name="provide-ui-to-choose-the-culture"></a>カルチャを選択するための UI を提供する
 

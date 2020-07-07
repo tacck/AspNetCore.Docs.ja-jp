@@ -6,17 +6,18 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: b51973e82bb1bd382be68a501c40ba613217fb03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: fc871e22f9bd5a9c137008f1d87019542c45b5d2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773641"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401767"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core での Grunt の使用
 
@@ -100,7 +101,7 @@ Grunt は、スクリプトの縮小、TypeScript のコンパイル、コード
     ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > NPM では、依存関係を整理するために[セマンティック バージョニング](https://semver.org/)が使用されます。 セマンティック バージョニングは SemVer とも呼ばれ、\<メジャー>.\<マイナー>.\<パッチ> の番号設定によってパッケージを識別するものです。 Intellisense では、いくつかの共通の選択肢だけを表示することで、セマンティック バージョニングが簡略化されています。 Intellisense の一覧の一番上にある項目 (上の例では 0.4.5) は、最新の安定バージョンのパッケージと見なされます。 キャレット (^) 記号は最新のメジャー バージョンと一致し、チルダ (~) は最新のマイナー バージョンと一致します。 SemVer で提供される完全な表現のガイドとして、[NPM SemVer バージョン パーサーのリファレンス](https://www.npmjs.com/package/semver)を参照してください。
+    > NPM では、依存関係を整理するために[セマンティック バージョニング](https://semver.org/)が使用されます。 セマンティック バージョニングは SemVer とも呼ばれ、\<major>.\<minor>.\<patch> の番号設定によってパッケージを識別するものです。Intellisense では、いくつかの共通の選択肢だけを表示することで、セマンティック バージョニングが簡略化されています。 Intellisense の一覧の一番上にある項目 (上の例では 0.4.5) は、最新の安定バージョンのパッケージと見なされます。 キャレット (^) 記号は最新のメジャー バージョンと一致し、チルダ (~) は最新のマイナー バージョンと一致します。 SemVer で提供される完全な表現のガイドとして、[NPM SemVer バージョン パーサーのリファレンス](https://www.npmjs.com/package/semver)を参照してください。
 
 3. 次の例に示すように、*clean*、*jshint*、*concat*、*uglify*、および *watch* に対して grunt-contrib-\* パッケージを読み込むよう、さらに依存関係を追加します。 バージョンは例と一致している必要はありません。
 
@@ -210,7 +211,7 @@ Grunt は、*Gruntfile.js* という名前のマニフェストを使用して�
 
 1. 次のコードを使用して、`uglify` タスクを追加します。
 
-    このタスクでは、temp ディレクトリにある *combined.js* ファイルが縮小され、標準の名前付け規則 *\<ファイル名\>.min.js* に従って、結果ファイルが wwwroot/lib に作成されます。
+    このタスクでは、temp ディレクトリにある *combined.js* ファイルが縮小され、標準の名前付け規則 *\<file name\>.min.js* に従って、結果ファイルが wwwroot/lib に作成されます。
 
     ```javascript
     uglify: {

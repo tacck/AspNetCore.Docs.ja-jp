@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: aa79ce604539b4f09d6f17d4f43da28a6b615f53
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774575"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407890"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS に ASP.NET Core アプリを発行する
 
@@ -65,7 +66,7 @@ ms.locfileid: "82774575"
 
 1. **[サイト名]** を指定し、 **[物理パス]** には作成したアプリの配置フォルダーを設定します。 **[バインド]** の構成を指定して **[OK]** を選択し、Web サイトを作成します。
 
-## <a name="create-an-aspnet-core-razor-pages-app"></a>ASP.NET Core Razor ページ アプリを作成する
+## <a name="create-an-aspnet-core-razor-pages-app"></a>ASP.NET Core Razor Pages アプリを作成する
 
 <xref:getting-started> チュートリアルに従い、Razor Pages アプリを作成します。
 

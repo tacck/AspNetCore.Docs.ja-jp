@@ -7,17 +7,18 @@ ms.custom: mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 3af36a37124968e13952e8bf5de1b643265a4a5b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: a94b1e0b5ce2a24cf22eb665c9bcd03c25ffa67f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766889"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400376"
 ---
 # <a name="monitor-and-debug"></a>監視とデバッグ
 

@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 0e99e2e3e2dafae0c35d2cfe6903bf4f511f5dc1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242798"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402885"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 依存関係の挿入
 
@@ -37,15 +38,15 @@ DI は、中央の場所で構成されたサービスにアクセスするた�
 
 | サービス | 有効期間 | 説明 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | 一時的 | URI によって識別されるリソースに HTTP 要求を送信し、そのリソースから HTTP 応答を受信するためのメソッドが提供されます。<br><br>Blazor WebAssembly アプリの <xref:System.Net.Http.HttpClient> のインスタンスでは、バックグラウンドでの HTTP トラフィックの処理にブラウザーが使用されます。<br><br>Blazor サーバー アプリには、既定でサービスとして構成される <xref:System.Net.Http.HttpClient> は含まれません。 Blazor サーバー アプリには <xref:System.Net.Http.HttpClient> を指定します。<br><br>詳細については、「<xref:blazor/call-web-api>」を参照してください。 |
-| <xref:Microsoft.JSInterop.IJSRuntime> | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor サーバー) | JavaScript の呼び出しがディスパッチされる JavaScript ランタイムのインスタンスを表します。 詳細については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。 |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager> | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor サーバー) | URI とナビゲーション状態を操作するためのヘルパーが含まれます。 詳細については、「[URI およびナビゲーション状態ヘルパー](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers)」を参照してください。 |
+| <xref:System.Net.Http.HttpClient> | 一時的 | URI によって識別されるリソースに HTTP 要求を送信し、そのリソースから HTTP 応答を受信するためのメソッドが提供されます。<br><br>Blazor WebAssembly アプリの <xref:System.Net.Http.HttpClient> のインスタンスでは、バックグラウンドでの HTTP トラフィックの処理にブラウザーが使用されます。<br><br>Blazor Server アプリには、既定でサービスとして構成される <xref:System.Net.Http.HttpClient> は含まれません。 Blazor Server アプリには <xref:System.Net.Http.HttpClient> を指定します。<br><br>詳細については、「<xref:blazor/call-web-api>」を参照してください。 |
+| <xref:Microsoft.JSInterop.IJSRuntime> | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | JavaScript の呼び出しがディスパッチされる JavaScript ランタイムのインスタンスを表します。 詳細については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。 |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager> | シングルトン (Blazor WebAssembly)<br>スコープ (Blazor Server) | URI とナビゲーション状態を操作するためのヘルパーが含まれます。 詳細については、「[URI およびナビゲーション状態ヘルパー](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers)」を参照してください。 |
 
 カスタム サービス プロバイダーでは、表に示されている既定のサービスは自動的に提供されません。 カスタム サービス プロバイダーを使用し、表に示されているいずれかのサービスが必要な場合は、必要なサービスを新しいサービス プロバイダーに追加します。
 
 ## <a name="add-services-to-an-app"></a>サービスをアプリに追加する
 
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
+### Blazor WebAssembly
 
 `Program.cs` の `Main` メソッドで、アプリのサービス コレクション用のサービスを構成します。 次の例では、`MyDependency` の実装が `IMyDependency` に登録されます。
 
@@ -106,7 +107,7 @@ public class Program
 }
 ```
 
-### <a name="blazor-server"></a>Blazor サーバー
+### Blazor Server
 
 新しいアプリを作成した後、`Startup.ConfigureServices` メソッドを調べます。
 
@@ -132,7 +133,7 @@ public void ConfigureServices(IServiceCollection services)
 
 | 有効期間 | 説明 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | 現在、Blazor WebAssembly には DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。 ただし、Blazor サーバー ホスティング モデルでは、`Scoped` 有効期間がサポートされています。 Blazor サーバー アプリでは、スコープ サービスの登録は "*接続*" にスコープされます。 このため、現在の目的がブラウザーでクライアント側を実行する場合でも、現在のユーザーにスコープする必要があるサービスの場合は、スコープ サービスを使用することが推奨されます。 |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | 現在、Blazor WebAssembly アプリには DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。 ただし、Blazor Server ホスティング モデルでは、`Scoped` 有効期間がサポートされています。 Blazor Server アプリでは、スコープ サービスの登録は "*接続*" にスコープされます。 このため、現在の目的がブラウザーでクライアント側を実行する場合でも、現在のユーザーにスコープする必要があるサービスの場合は、スコープ サービスを使用することが推奨されます。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI では、サービスの "*単一インスタンス*" が作成されます。 `Singleton` サービスを必要とするすべてのコンポーネントは、同じサービスのインスタンスを受け取ります。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | コンポーネントは、サービス コンテナーから `Transient` サービスのインスタンスを取得するたびに、サービスの "*新しいインスタンス*" を受け取ります。 |
 
@@ -198,7 +199,10 @@ public class DataAccess : IDataAccess
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>DI スコープを管理するためのユーティリティの基本コンポーネント クラス
 
-ASP.NET Core アプリでは、スコープ サービスは通常、現在の要求にスコープされます。 要求が完了すると、スコープ サービスまたは一時サービスは DI システムによって破棄されます。 Blazor サーバー アプリでは、要求スコープはクライアント接続の期間を通して保持されるため、一時サービスとスコープ サービスが予想よりはるかに長く存続する可能性があります。 Blazor WebAssembly アプリでは、スコープ付きの有効期間で登録されたサービスはシングルトンとして扱われるため、通常の ASP.NET Core アプリのスコープ サービスより長く存続します。
+ASP.NET Core アプリでは、スコープ サービスは通常、現在の要求にスコープされます。 要求が完了すると、スコープ サービスまたは一時サービスは DI システムによって破棄されます。 Blazor Server アプリでは、要求スコープはクライアント接続の期間を通して保持されるため、一時サービスとスコープ サービスが予想よりはるかに長く存続する可能性があります。 Blazor WebAssembly アプリでは、スコープ付きの有効期間で登録されたサービスはシングルトンとして扱われるため、通常の ASP.NET Core アプリのスコープ サービスより長く存続します。
+
+> [!NOTE]
+> アプリ内の破棄可能な一時サービスを検出するには、「[破棄可能な一時サービスの検出](#detect-transient-disposables)」セクションを参照してください。
 
 Blazor アプリでサービスの有効期間を制限するには、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> 型を使用します。 <xref:Microsoft.AspNetCore.Components.OwningComponentBase> は <xref:Microsoft.AspNetCore.Components.ComponentBase> から派生された抽象型であり、コンポーネントの有効期間に対応する DI スコープを作成します。 このスコープを使用すると、スコープ付きの有効期間で DI サービスを使用し、コンポーネントと同じ期間だけ持続させることができます。 コンポーネントが破棄されると、コンポーネントのスコープ サービス プロバイダーからのサービスも破棄されます。 これは、次のようなサービスに役立ちます。
 
@@ -342,6 +346,34 @@ Web アプリで DI から取得する一般的なサービスの型の 1 つは
         }
     }
     ```
+
+## <a name="detect-transient-disposables"></a>破棄可能な一時サービスの検出
+
+次の例は、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> を使用する必要があるアプリ内の破棄可能な一時サービスを検出する方法を示しています。 詳細については、「[DI スコープを管理するためのユーティリティの基本コンポーネント クラス](#utility-base-component-classes-to-manage-a-di-scope)」セクションを参照してください。
+
+### Blazor WebAssembly
+
+`DetectIncorrectUsagesOfTransientDisposables.cs`:
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm.cs)]
+
+次の例では、`TransientDisposable` が検出されます (`Program.cs`)。
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/wasm-program.cs?highlight=6,9,17,22-25)]
+
+### Blazor Server
+
+`DetectIncorrectUsagesOfTransientDisposables.cs`:
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-server.cs)]
+
+`Program`:
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/server-program.cs?highlight=3)]
+
+次の例では、`TransientDependency` が検出されます (`Startup.cs`)。
+
+[!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/server-startup.cs?highlight=6-8,11-32)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

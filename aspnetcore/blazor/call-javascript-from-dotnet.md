@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: f39a1a3b78d8017738f83f4d191c7f11c7a6c9e6
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 8a2df6ca55985a1cff49abb09113e49bfeae6829
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242546"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400519"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -32,7 +33,7 @@ Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出�
 
 .NET から JavaScript を呼び出すには、<xref:Microsoft.JSInterop.IJSRuntime> 抽象化を使用します。 JS 相互運用呼び出しを発行するには、コンポーネントに <xref:Microsoft.JSInterop.IJSRuntime> 抽象化を挿入します。 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> は、JSON シリアル化可能な任意の数の引数と共に呼び出す JavaScript 関数の識別子を受け取ります。 関数の識別子は、グローバル スコープ (`window`) に関連しています。 `window.someScope.someFunction` を呼び出す場合、識別子は `someScope.someFunction` です。 関数は、呼び出す前に登録する必要はありません。 また、戻り値の型 `T` も JSON シリアル化可能である必要があります。 `T` は、返される JSON 型に最適にマップされる .NET 型と一致する必要があります。
 
-Blazor サーバー アプリでプリレンダリングが有効になっている場合、最初のプリレンダリング中に JavaScript を呼び出すことはできません。 JavaScript 相互運用呼び出しは、ブラウザーとの接続が確立されるまで遅延させる必要があります。 詳細については、「[Blazor サーバー アプリがプリレンダリングされていることを検出する](#detect-when-a-blazor-server-app-is-prerendering)」セクションを参照してください。
+Blazor Server アプリでプリレンダリングが有効になっている場合、最初のプリレンダリング中に JavaScript を呼び出すことはできません。 JavaScript 相互運用呼び出しは、ブラウザーとの接続が確立されるまで遅延させる必要があります。 詳細については、「[Blazor Server アプリがプリレンダリングされていることを検出する](#detect-when-a-blazor-server-app-is-prerendering)」セクションを参照してください。
 
 次の例は、JavaScript ベースのデコーダーである [`TextDecoder`](https://developer.mozilla.org/docs/Web/API/TextDecoder) に基づいています。 この例では、開発者コードから既存の JavaScript API に要件をオフロードする C# メソッドから JavaScript 関数を呼び出す方法を示します。 JavaScript 関数は、C# メソッドからバイト配列を受け取り、配列をデコードし、テキストをコンポーネントに返して表示できるようにします。
 
@@ -103,7 +104,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 
 .NET メソッドは、<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> を呼び出して、`exampleJsInterop.js` ファイル内の JavaScript 関数と相互運用します。
 
-<xref:Microsoft.JSInterop.IJSRuntime> 抽象化は、Blazor サーバーのシナリオを可能にするために非同期です。 アプリが Blazor WebAssembly アプリであり、JavaScript 関数を同期的に呼び出す必要がある場合は、<xref:Microsoft.JSInterop.IJSInProcessRuntime> にダウンキャストし、代わりに <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> を呼び出します。 ほとんどの JS 相互運用ライブラリでは、確実にすべてのシナリオでライブラリを使用できるように、非同期 API を使用することをお勧めします。
+<xref:Microsoft.JSInterop.IJSRuntime> 抽象化は、Blazor Server のシナリオを可能にするために非同期です。 アプリが Blazor WebAssembly アプリであり、JavaScript 関数を同期的に呼び出す必要がある場合は、<xref:Microsoft.JSInterop.IJSInProcessRuntime> にダウンキャストし、代わりに <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> を呼び出します。 ほとんどの JS 相互運用ライブラリでは、確実にすべてのシナリオでライブラリを使用できるように、非同期 API を使用することをお勧めします。
 
 サンプル アプリには、JS 相互運用を示すコンポーネントが含まれています。 コンポーネント:
 
@@ -150,7 +151,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 
 [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) または [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) を返す JavaScript 関数は、<xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を指定して呼び出します。
 
-## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>Blazor サーバー アプリがプリレンダリングされていることを検出する
+## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>Blazor Server アプリがプリレンダリングされていることを検出する
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
@@ -248,7 +249,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 * 子コンポーネントがコールバックを登録できるようにします。
 * 渡された要素参照を使用して、登録されたコールバックを<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> イベント中に呼び出します。 間接的には、この方法により、子コンポーネントが親の要素参照とやりとりできるようになります。
 
-次の Blazor WebAssembly の例は、この方法を示しています。
+次の Blazor WebAssembly の例でこのアプローチを示します。
 
 `wwwroot/index.html` の `<head>` では、次のことが行われます。
 
@@ -443,7 +444,7 @@ namespace BlazorSample.Shared
 
 ## <a name="harden-js-interop-calls"></a>JS 相互運用呼び出しの強化
 
-JS 相互運用は、ネットワーク エラーにより失敗する可能性があるため、信頼性の低いものとして扱う必要があります。 既定では、Blazor サーバー アプリでは、サーバー上の JS 相互運用の呼び出しは 1 分後にタイムアウトします。 アプリでより積極的なタイムアウトが許容される場合は、次のいずれかの方法を使用してタイムアウトを設定します。
+JS 相互運用は、ネットワーク エラーにより失敗する可能性があるため、信頼性の低いものとして扱う必要があります。 既定では、Blazor Server アプリでは、サーバー上の JS 相互運用の呼び出しは 1 分後にタイムアウトします。 アプリでより積極的なタイムアウトが許容される場合は、次のいずれかの方法を使用してタイムアウトを設定します。
 
 * `Startup.ConfigureServices` でグローバルに、タイムアウトを指定します。
 
@@ -479,4 +480,4 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent.razor の例 (dotnet/AspNetCore GitHub リポジトリ、3.1 リリース ブランチ)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Blazor サーバー アプリで大規模なデータ転送を実行する](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [Blazor Server アプリで大規模なデータ転送を実行する](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

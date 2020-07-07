@@ -8,21 +8,22 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
-ms.translationtype: HT
+ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240875"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402833"
 ---
 # <a name="aspnet-core-blazor-logging"></a>ASP.NET Core Blazor のログ
 
-## <a name="blazor-webassembly"></a>Blazor WebAssembly
+## Blazor WebAssembly
 
 `Program.Main` の `WebAssemblyHostBuilder.Logging` プロパティを使用して、Blazor WebAssembly アプリでのログ記録を構成します。
 
@@ -41,11 +42,11 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 ログの構成は、アプリの設定ファイルから読み込むことができます。 詳細については、「<xref:blazor/fundamentals/configuration#logging-configuration>」を参照してください。
 
-## <a name="blazor-server"></a>Blazor サーバー
+## Blazor Server
 
 一般的な ASP.NET Core のログ記録のガイダンスについては、「<xref:fundamentals/logging/index>」を参照してください。
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssembly の SignalR .NET クライアントのログ
+## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssembly SignalR .NET クライアント ログ
 
 <xref:Microsoft.Extensions.Logging.ILoggerProvider> を挿入して、<xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> に渡されたログ プロバイダーに `WebAssemblyConsoleLogger` を追加します。 従来の <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> とは異なり、`WebAssemblyConsoleLogger` はブラウザー固有のログ API (例: `console.log`) のラッパーです。 `WebAssemblyConsoleLogger` を使用すると、ブラウザー コンテキスト内の Mono 内でログ記録できるようになります。
 

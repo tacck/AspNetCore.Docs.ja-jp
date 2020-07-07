@@ -1,44 +1,45 @@
 ---
-title: ASP.NET Core Blazor サーバーのホストとデプロイ
+title: ASP.NET Core Blazor Server のホストと展開
 author: guardrex
-description: ASP.NET Core を使用して Blazor サーバー アプリをホストおよびデプロイする方法について学習します。
+description: ASP.NET Core を使用して Blazor Server アプリをホストおよびデプロイする方法について学習します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: c02d005aa5e37bc359e1c104a19c387f1c16fa34
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: e59579046ecbfdbb4cca79bfb0e39d299e26913c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243552"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402599"
 ---
-# <a name="host-and-deploy-blazor-server"></a>Blazor サーバーをホストおよびデプロイする
+# <a name="host-and-deploy-blazor-server"></a>Blazor Server のホストと展開
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)
 
 ## <a name="host-configuration-values"></a>ホストの構成値
 
-[Blazor サーバー アプリ](xref:blazor/hosting-models#blazor-server)では、[汎用ホスト構成値](xref:fundamentals/host/generic-host#host-configuration)を受け入れることができます。
+[Blazor Server アプリ](xref:blazor/hosting-models#blazor-server)では、[汎用ホスト構成値](xref:fundamentals/host/generic-host#host-configuration)を受け入れることができます。
 
 ## <a name="deployment"></a>配置
 
-[Blazor サーバーのホスティング モデル](xref:blazor/hosting-models#blazor-server)を使用する場合、Blazor はサーバー上で ASP.NET Core アプリ内から実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
+[Blazor Server のホスティング モデル](xref:blazor/hosting-models#blazor-server)を使用する場合、Blazor はサーバー上で ASP.NET Core アプリ内から実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
 
-ASP.NET Core アプリをホストできる Web サーバーが必要です。 Visual Studio には **Blazor サーバー アプリ** プロジェクト テンプレートが含まれています ([`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorserverside` テンプレート)。
+ASP.NET Core アプリをホストできる Web サーバーが必要です。 Visual Studio には **Blazor Server アプリ** プロジェクト テンプレートが含まれています ([`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorserverside` テンプレート)。
 
 ## <a name="scalability"></a>スケーラビリティ
 
-Blazor サーバー アプリで使用できるインフラストラクチャを最大限に活用できるようにデプロイを計画します。 Blazor サーバー アプリのスケーラビリティに対処するには、次のリソースを参照してください。
+Blazor Server アプリで使用できるインフラストラクチャを最大限に活用できるようにデプロイを計画します。 Blazor Server アプリのスケーラビリティに対処するには、次のリソースを参照してください。
 
-* [Blazor サーバー アプリの基礎](xref:blazor/hosting-models#blazor-server)
+* [Blazor Server アプリの基礎](xref:blazor/hosting-models#blazor-server)
 * <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="deployment-server"></a>展開サーバー
@@ -54,13 +55,13 @@ Blazor サーバー アプリで使用できるインフラストラクチャを
 
 ### <a name="signalr-configuration"></a>SignalR 構成
 
-Blazor サーバー アプリでは、ブラウザーとの通信に ASP.NET Core SignalR が使用されます。 [SignalR のホストとスケーリングの条件](xref:signalr/publish-to-azure-web-app)は、Blazor サーバー アプリに適用されます。
+Blazor Server アプリでは、ブラウザーとの通信に ASP.NET Core SignalR が使用されます。 [SignalR のホストとスケーリングの条件](xref:signalr/publish-to-azure-web-app)は、Blazor Server アプリに適用されます。
 
 Blazor は、待ち時間、信頼性、および[セキュリティ](xref:signalr/security)が低いために WebSocket を SignalR トランスポートとして使用する場合に最適です。 WebSocket が使用できない場合や、ロング ポーリングを使用するようにアプリが明示的に構成されている場合は、SignalR によってロング ポーリングが使用されます。 Azure App Service にデプロイする場合は、サービスの Azure portal 設定で WebSocket を使用するようにアプリを構成します。 Azure App Service 用にアプリを構成する方法の詳細については、[SignalR の発行ガイドライン](xref:signalr/publish-to-azure-web-app)を参照してください。
 
 #### <a name="azure-signalr-service"></a>Azure SignalR Service
 
-Blazor サーバー アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 さらに、SignalR サービスのグローバル リーチとハイパフォーマンスのデータ センターは、地理的条件による待機時間の短縮に役立ちます。 アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
+Blazor Server アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 さらに、SignalR サービスのグローバル リーチとハイパフォーマンスのデータ センターは、地理的条件による待機時間の短縮に役立ちます。 アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
 
 1. サービスで "*スティッキー セッション*" をサポートできるようにします。それにより、クライアントは[事前レンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値を `Required` に設定します。 通常、アプリでは次の方法の**いずれか 1 つ**を使用して構成を作成します。
 
@@ -84,7 +85,7 @@ Blazor サーバー アプリには [Azure SignalR Service](/azure/azure-signalr
 
      * Azure portal で App Service の **[構成]**  >  **[アプリケーションの設定]** (**名前**: `Azure:SignalR:ServerStickyMode`、**値**: `Required`)。
 
-1. Blazor サーバー アプリ用に、Visual Studio に Azure アプリ発行プロファイルを作成する。
+1. Blazor Server アプリ用に、Visual Studio に Azure アプリ発行プロファイルを作成する。
 1. プロファイルに **Azure SignalR Service** の依存関係を追加する。 Azure サブスクリプションに、アプリに割り当てる既存の Azure SignalR Service のインスタンスがない場合は、 **[新しい Azure SignalR Service のインスタンスを作成する]** を選択して新しいサービス インスタンスをプロビジョニングします。
 1. Azure にアプリを公開します。
 

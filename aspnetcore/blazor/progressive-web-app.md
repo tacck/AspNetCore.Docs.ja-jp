@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242811"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402586"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
 
@@ -65,7 +66,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 ## <a name="installation-and-app-manifest"></a>インストールとアプリ マニフェスト
 
-PWA テンプレートを使用して作成されたアプリにアクセスするときに、ユーザーはアプリを OS のスタート メニュー、ドッキング、またはホーム画面にインストールすることを選択できます。 このオプションがどのように表示されるかは、ユーザーのブラウザーによって異なります。 Edge や Chrome などのデスクトップ Chromium ベースのブラウザーを使用している場合、URL バーに **[追加]** ボタンが表示されます。 ユーザーが **[追加]** ボタンを選択すると、確認のダイアログが表示されます。
+PWA テンプレートを使用して作成されたアプリにアクセスするときに、ユーザーはアプリを OS のスタート メニュー、ドッキング、またはホーム画面にインストールすることを選択できます。 このオプションがどのように表示されるかは、ユーザーのブラウザーによって異なります。 Microsoft Edge や Chrome などのデスクトップ Chromium ベースのブラウザーを使用している場合、URL バーに **[追加]** ボタンが表示されます。 ユーザーが **[追加]** ボタンを選択すると、確認のダイアログが表示されます。
 
 ![Google Chrome の確認ダイアログには、'MyBlazorPwa' アプリの [インストール] ボタンがユーザーに表示されます。](progressive-web-app/_static/image2.png)
 

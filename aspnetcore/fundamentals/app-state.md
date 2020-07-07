@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 4ecbf6920980e293e8c274996c6a4f25e74a5cb7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774809"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403626"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 
@@ -57,7 +58,7 @@ Cookie を発行し、プライバシーの問題を扱うときは、[欧州連
 
 セッション状態は、ユーザーが Web アプリを参照している期間中ユーザー データを格納するための ASP.NET Core のシナリオです。 セッション状態では、アプリで管理されているストアを使用して、クライアントからの要求間でデータを保持します。 セッション データはキャッシュによってバックアップされ、一時的なデータと見なされます。 セッション データがなくても、サイトは機能し続けられる必要があります。 重要なアプリケーションのデータはユーザー データベースに格納し、パフォーマンスの最適化としてのみセッションでキャッシュする必要があります。
 
-[SignalR Hub](xref:signalr/hubs) は HTTP コンテキストとは独立して実行する可能性があるため、[SignalR](xref:signalr/index) アプリではセッションはサポートされていません。 このようなことは、たとえば、長いポーリング要求が HTTP コンテキストの有効期間を超えてハブによって開かれている場合に発生する可能性があります。
+[SignalR ハブ](xref:signalr/hubs)は HTTP コンテキストとは独立して実行する可能性があるため、[SignalR](xref:signalr/index) アプリではセッションはサポートされていません。 このようなことは、たとえば、長いポーリング要求が HTTP コンテキストの有効期間を超えてハブによって開かれている場合に発生する可能性があります。
 
 ASP.NET Core は、セッション ID を含む Cookie をクライアントに提供することで、セッションの状態を維持します。 Cookie セッション ID は:
 
@@ -284,7 +285,7 @@ Cookie ベース TempData プロバイダーは既定で有効になります。
   
 ## <a name="signalr-and-session-state"></a>SignalR とセッション状態
 
-SignalR アプリでは、セッション状態を使用して情報を格納することはできません。 SignalR アプリは、ハブの `Context.Items` に接続ごとの状態を格納できます。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
+SignalR アプリでは、セッション状態を使用して情報を格納することはできません。 SignalR アプリは、ハブ内の `Context.Items` に接続ごとの状態を格納できます。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -329,7 +330,7 @@ Cookie を発行し、プライバシーの問題を扱うときは、[欧州連
 セッション状態は、ユーザーが Web アプリを参照している期間中ユーザー データを格納するための ASP.NET Core のシナリオです。 セッション状態では、アプリで管理されているストアを使用して、クライアントからの要求間でデータを保持します。 セッション データはキャッシュによってバックアップされ、一時的なデータと見なされます。セッション データがなくても、サイトは機能し続けられる必要があります。 重要なアプリケーションのデータはユーザー データベースに格納し、パフォーマンスの最適化としてのみセッションでキャッシュする必要があります。
 
 > [!NOTE]
-> [SignalR Hub](xref:signalr/hubs) は HTTP コンテキストとは独立して実行する可能性があるため、[SignalR](xref:signalr/index) アプリではセッションはサポートされていません。 このようなことは、たとえば、長いポーリング要求が HTTP コンテキストの有効期間を超えてハブによって開かれている場合に発生する可能性があります。
+> [SignalR ハブ](xref:signalr/hubs)は HTTP コンテキストとは独立して実行する可能性があるため、[SignalR](xref:signalr/index) アプリではセッションはサポートされていません。 このようなことは、たとえば、長いポーリング要求が HTTP コンテキストの有効期間を超えてハブによって開かれている場合に発生する可能性があります。
 
 ASP.NET Core は、セッション ID を含む Cookie をクライアントに提供することで、セッションの状態を維持します。Cookie は要求ごとにサーバーに送信されます。 アプリは、セッション ID を使用してセッション データをフェッチします。
 

@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 5c53ac64d3ae1b365b40c519eb119f913d58cad1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242980"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402443"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core Blazor のコンテンツ セキュリティ ポリシーを適用する
 
@@ -38,7 +39,7 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
 
 ## <a name="policy-directives"></a>ポリシー ディレクティブ
 
-最小限として、Blazor アプリの次のディレクティブとソースを指定します。 必要に応じて、ディレクティブとソースを追加してください。 次のディレクティブは、この記事の「[ポリシーの適用](#apply-the-policy)」セクションで使用されます。そこでは、Blazor WebAssembly と Blazor サーバーのセキュリティ ポリシーの例を示しています。
+最小限として、Blazor アプリの次のディレクティブとソースを指定します。 必要に応じて、ディレクティブとソースを追加してください。 次のディレクティブは、この記事の「[ポリシーの適用](#apply-the-policy)」セクションで使用されます。そこでは、Blazor WebAssembly と Blazor Server のセキュリティ ポリシーの例を示しています。
 
 * [base-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): ページの `<base>` タグの URL を制限します。 `self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
 * [block-all-mixed-content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): HTTP と HTTPS の混合コンテンツの読み込みを禁止します。
@@ -50,17 +51,17 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
 * [script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): スクリプトの有効なソースを示します。
   * ブートストラップ スクリプトの `https://stackpath.bootstrapcdn.com/` ホスト ソースを指定します。
   * `self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-  * Blazor WebAssembly アプリでは:
+  * Blazor WebAssembly アプリでは以下のようにします。
     * 次のハッシュを指定して、必要な Blazor WebAssembly のインライン スクリプトの読み込みを許可します。
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * `eval()` および文字列からコードを作成するメソッドを使用するには、`unsafe-eval` を指定します。
-  * Blazor サーバー アプリで、スタイルシートのフォールバック検出を実行するインライン スクリプトの `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` ハッシュを指定します。
+  * Blazor Server アプリでは、スタイルシートのフォールバック検出を実行するインライン スクリプトの `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` ハッシュを指定します。
 * [style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): スタイルシートの有効なソースを示します。
   * ブートストラップ スタイルシートの `https://stackpath.bootstrapcdn.com/` ホスト ソースを指定します。
   * `self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
-  * インライン スタイルの使用を許可するには `unsafe-inline` を指定します。 初期要求後にクライアントとサーバーを再接続するには、Blazor サーバー アプリの UI にインライン宣言が必要です。 今後のリリースでは、`unsafe-inline` が不要になるように、インライン スタイルが削除される可能性があります。
+  * インライン スタイルの使用を許可するには `unsafe-inline` を指定します。 初期要求後にクライアントとサーバーを再接続するには、Blazor Server アプリの UI にインライン宣言が必要です。 今後のリリースでは、`unsafe-inline` が不要になるように、インライン スタイルが削除される可能性があります。
 * [upgrade-insecure-requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): セキュリティで保護されていない (HTTP) ソースからのコンテンツ URL を HTTPS 経由で安全に取得する必要があることを示します。
 
 上記のディレクティブは、Microsoft Internet Explorer 以外のすべてのブラウザーでサポートされています。
@@ -81,9 +82,9 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
 * `content` 属性値にディレクティブを配置します。 各ディレクティブをセミコロン (`;`) で区切ります。
 * 常に `meta` タグを `<head>` のコンテンツに配置します。
 
-次のセクションに、Blazor WebAssembly と Blazor サーバーのポリシーの例を示します。 これらの例は、Blazor のリリースごとにこの記事でバージョン管理されています。 リリースに適したバージョンを使用するには、この Web ページの **[バージョン]** ドロップ ダウン セレクターを使用してドキュメントのバージョンを選択してください。
+次のセクションに、Blazor WebAssembly と Blazor Server のポリシーの例を示します。 これらの例は、Blazor のリリースごとにこの記事でバージョン管理されています。 リリースに適したバージョンを使用するには、この Web ページの **[バージョン]** ドロップ ダウン セレクターを使用してドキュメントのバージョンを選択してください。
 
-### <a name="blazor-webassembly"></a>Blazor WebAssembly
+### Blazor WebAssembly
 
 `wwwroot/index.html` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
 
@@ -106,7 +107,7 @@ CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスク�
                upgrade-insecure-requests;">
 ```
 
-### <a name="blazor-server"></a>Blazor サーバー
+### Blazor Server
 
 `Pages/_Host.cshtml` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
 

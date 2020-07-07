@@ -7,17 +7,18 @@ ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 67a6217055db69fe540412f42411dd3a33bbbe73
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: HT
+ms.openlocfilehash: 49d185ce941d5f8e841224e7de3b72b8350a1c47
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775506"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407903"
 ---
 # <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript と Webpack で ASP.NET Core SignalR を使用する
 
@@ -202,7 +203,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. SignalR ハブを格納するために、プロジェクトルート "*SignalRWebPack/* " に "*Hubs*" という名前の新しいディレクトリを作成します。
+1. SignalR ハブを格納するために、プロジェクト ルート "*SignalRWebPack/* " に "*Hubs*" という名前の新しいディレクトリを作成します。
 
 1. 次のコードを使用して、*Hubs/ChatHub.cs* を作成します。
 

@@ -4,26 +4,32 @@ author: jamesnk
 description: ASP.NET Core で、GRPC-Web を使用してブラウザー アプリから呼び出しできるように、gRPC サービスを構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 05/26/2020
+ms.date: 06/29/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 6f66a94b41e6e13550396e2e19fdf48f9dc63d46
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
-ms.translationtype: HT
+ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106599"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793507"
 ---
 # <a name="use-grpc-in-browser-apps"></a>ブラウザー アプリでの gRPC の使用
 
 作成者: [James Newton-King](https://twitter.com/jamesnk)
 
-ブラウザーベースのアプリから HTTP/2 gRPC サービスを呼び出すことはできません。 [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) は、ブラウザーの JavaScript および Blazor アプリで gRPC サービスを呼び出せるようにするプロトコルです。 この記事では、.NET Core で gRPC-Web を使用する方法について説明します。
+ 既存の ASP.NET Core の gRPC サービスを、[gRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) プロトコルを使用してブラウザー アプリから呼び出せるように構成する方法について説明します。 gRPC-Web を使用すると、ブラウザーの JavaScript および Blazor アプリで gRPC サービスを呼び出せます。 ブラウザーベースのアプリから HTTP/2 gRPC サービスを呼び出すことはできません。 ASP.NET Core でホストされている gRPC サービスは、HTTP/2 gRPC と共に gRPC-Web をサポートするように構成できます。
+
+
+既存の ASP.NET Core アプリに gRPC サービスを追加する手順については、「[ASP.NET Core アプリに gRPC サービスを追加する](xref:grpc/aspnetcore#add-grpc-services-to-an-aspnet-core-app)」を参照してください。
+
+gRPC プロジェクトを作成する手順については、「<xref:tutorials/grpc/grpc-start>」を参照してください。
 
 ## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>ASP.NET Core の gRPC-Web と Envoy
 
@@ -32,7 +38,7 @@ gRPC-Web を ASP.NET Core アプリに追加する方法には、次の 2 つの
 * ASP.NET Core の gRPC HTTP/2 と共に、gRPC-Web をサポートします。 このオプションでは、`Grpc.AspNetCore.Web` パッケージによって提供されるミドルウェアを使用します。
 * [Envoy プロキシ](https://www.envoyproxy.io/)の gRPC-Web サポートを使用して、gRPC-Web を gRPC HTTP/2 に変換します。 変換された呼び出しが、ASP.NET Core アプリに転送されます。
 
-それぞれの方法には、長所と短所があります。 アプリの環境で既にプロキシとして Envoy を使用している場合は、gRPC-Web サポートを提供するためにこれを使用するのも、妥当かもしれません。 ASP.NET Core のみを必要とする gRPC-Web の単純なソリューションが必要な場合は、`Grpc.AspNetCore.Web` を選択することをお勧めします。
+それぞれの方法には、長所と短所があります。 アプリの環境で既にプロキシとして Envoy を使用している場合は、gRPC-Web サポートを提供するために Envoy を使用するのも、妥当かもしれません。 ASP.NET Core のみを必要とする gRPC-Web の基本的なソリューションについては、`Grpc.AspNetCore.Web` を選択することをお勧めします。
 
 ## <a name="configure-grpc-web-in-aspnet-core"></a>ASP.NET Core での gRPC-Web の構成
 
@@ -63,7 +69,7 @@ ASP.NET Core gRPC サービスで gRPC-Web を有効にするには:
 
 ブラウザーのセキュリティにより、Web ページを提供したドメインと異なるドメインに対して、Web ページが要求を行うことはできません。 この制限は、ブラウザー アプリで gRPC-Web 呼び出しを行う場合に適用されます。 たとえば、`https://www.contoso.com` によって提供されるブラウザー アプリでは、`https://services.contoso.com` でホストされている gRPC-Web サービスの呼び出しがブロックされます。 この制限を緩和するには、クロス オリジン リソース共有 (CORS) を使用できます。
 
-ブラウザー アプリでクロス オリジン gRPC-Web 呼び出しを行えるようにするには、[ASP.NET Core で CORS](xref:security/cors) を設定します。 組み込みの CORS サポートを使用し、<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> で gRPC 固有のヘッダーを公開します。
+ブラウザー アプリでクロス オリジン gRPC-Web 呼び出しを行えるようにするには、[ASP.NET Core で CORS](xref:security/cors) を設定します。 組み込みの CORS サポートを使用し、<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders%2A> で gRPC 固有のヘッダーを公開します。
 
 [!code-csharp[](~/grpc/browser/sample/CORS_Startup.cs?name=snippet_1&highlight=5-11,19,24)]
 

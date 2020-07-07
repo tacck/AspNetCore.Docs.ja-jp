@@ -8,17 +8,18 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 3dfaa043fd2e6bc092c2db828563aeaedaa9d272
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
-ms.translationtype: HT
+ms.openlocfilehash: 123b664b87eb41a8f07344608713d9aed7a0aa37
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243539"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402248"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する
 
@@ -42,7 +43,7 @@ ms.locfileid: "85243539"
 「[チュートリアル: Azure Active Directory B2C に Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、"*サーバー API アプリ*" 用の AAD アプリを登録した後、次のようにします。
 
 1. **[Azure Active Directory]**  >  **[アプリの登録]** で、 **[新規登録]** を選択します。
-1. アプリの **[名前]** を指定します (例: **Blazor サーバー AAD B2C**)。
+1. アプリの **[名前]** を指定します (例: **Blazor Server AAD B2C**)。
 1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **[任意の組織ディレクトリ内のアカウントまたは任意の ID プロバイダー。Azure AD B2C でユーザーを認証します。]**
 1. "*サーバー API アプリ*" の場合、このシナリオでは **[リダイレクト URI]** は必要ないので、ドロップダウンは **[Web]** に設定されたままにして、リダイレクト URI は入力しません。
 1. **[アクセス許可]**  >  **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が有効にされていることを確認します。
@@ -92,7 +93,7 @@ ms.locfileid: "85243539"
 **[API のアクセス許可]** で:
 
 1. **[アクセス許可の追加]** を選択し、 **[自分の API]** を選択します。
-1. **[名前]** 列で "*サーバー API アプリ*" を選択します (例: **Blazor サーバー AAD B2C**)。
+1. **[名前]** 列で "*サーバー API アプリ*" を選択します (例: **Blazor Server AAD B2C**)。
 1. **[API]** の一覧を開きます。
 1. API へのアクセスを有効にします (例: `API.Access`)。
 1. **[アクセス許可の追加]** を選択します.
