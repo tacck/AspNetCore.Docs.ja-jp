@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 078392662281253b8b6cfc0d50fddc8d66482b63
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0995cd80c10f638c90a60630378518988ffb89ed
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406895"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060099"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core のコンテキストヘッダー
 
@@ -26,7 +26,7 @@ ms.locfileid: "85406895"
 
 ## <a name="background-and-theory"></a>背景と理論
 
-データ保護システムでは、"キー" は認証された暗号化サービスを提供できるオブジェクトを意味します。 各キーは一意の id (GUID) によって識別され、それにはアルゴリズム情報と entropic マテリアルが含まれます。 各キーは一意のエントロピを伝達することを目的としていますが、システムではこれを強制することはできません。また、キーリング内の既存のキーのアルゴリズム情報を変更することによって、キーリングを手動で変更する可能性がある開発者にも考慮する必要があります。 これらのケースによってセキュリティ要件を達成するために、データ保護システムには[暗号化の俊敏性](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/)の概念があります。これにより、複数の暗号化アルゴリズムで1つの entropic 値を安全に使用できます。
+データ保護システムでは、"キー" は認証された暗号化サービスを提供できるオブジェクトを意味します。 各キーは一意の id (GUID) によって識別され、それにはアルゴリズム情報と entropic マテリアルが含まれます。 各キーは一意のエントロピを伝達することを目的としていますが、システムではこれを強制することはできません。また、キーリング内の既存のキーのアルゴリズム情報を変更することによって、キーリングを手動で変更する可能性がある開発者にも考慮する必要があります。 これらのケースによってセキュリティ要件を達成するために、データ保護システムには[暗号化の俊敏性](https://www.microsoft.com/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption)の概念があります。これにより、複数の暗号化アルゴリズムで1つの entropic 値を安全に使用できます。
 
 暗号化の機敏性をサポートするほとんどのシステムは、ペイロード内のアルゴリズムに関する特定の情報を含めます。 アルゴリズムの OID は、通常、このような場合に適しています。 ただし、1つの問題として、同じアルゴリズムを指定する方法は複数あります。 "AES" (CNG) とマネージ Aes、AesManaged、AesCryptoServiceProvider、AesCng、および RijndaelManaged (特定のパラメーター) クラスはすべて同じものであり、これらのすべてを正しい OID にマッピングする必要があります。 開発者がカスタムアルゴリズム (または AES! の別の実装) を提供する必要がある場合は、その OID を知らせる必要があります。 この追加の登録手順では、システム構成が特に困難になります。
 
@@ -50,21 +50,21 @@ ms.locfileid: "85406895"
 
 * [32 ビット]HMAC アルゴリズムのダイジェストサイズ (バイト、ビッグエンディアン)。
 
-* EncCBC (K_E、IV、"")。これは、空の文字列入力を指定した場合は対称ブロック暗号アルゴリズムの出力、IV はすべてゼロのベクターです。 K_E の構築については、以下で説明します。
+* `EncCBC(K_E, IV, "")`。これは、空の文字列入力を指定した場合は対称ブロック暗号アルゴリズムの出力、IV はすべてゼロのベクターです。 の構築に `K_E` ついては、以下で説明します。
 
-* MAC (K_H、"")。これは HMAC アルゴリズムの出力で、空の文字列入力が指定されています。 K_H の構築については、以下で説明します。
+* `MAC(K_H, "")`。これは HMAC アルゴリズムの出力で、空の文字列入力が指定されています。 の構築に `K_H` ついては、以下で説明します。
 
-理想的には、K_E と K_H のすべてのゼロベクトルを渡すことができます。 ただし、基になるアルゴリズムが、何らかの操作 (特に DES と 3DES) を実行する前に、弱いキーの存在を確認するという状況を回避したいと考えています。
+理想的には、とのすべてのゼロベクトルを渡すことができ `K_E` `K_H` ます。 ただし、基になるアルゴリズムが、何らかの操作 (特に DES と 3DES) を実行する前に、弱いキーの存在を確認するという状況を回避したいと考えています。
 
-代わりに、カウンタモードで NIST SP800-108 KDF を使用します ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5.1 を参照)。長さ0のキー、ラベル、およびコンテキストと HMACSHA512 を基になる PRF として使用します。 派生した |K_E |+ |K_H |出力のバイト数。その後、結果を K_E に分解して K_H します。 数学的には、次のように表されます。
+代わりに、カウンタモードで NIST SP800-108 KDF を使用します ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5.1 を参照)。長さ0のキー、ラベル、およびコンテキストと HMACSHA512 を基になる PRF として使用します。 `| K_E | + | K_H |`出力のバイトを取得し、その結果をと自体に分解し `K_E` `K_H` ます。 数学的には、次のように表されます。
 
-(K_E | |K_H) = SP800_108_CTR (prf = HMACSHA512、key = ""、label = ""、context = "")
+`( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>例: AES-192-CBC + HMACSHA256
 
 例として、対称ブロック暗号アルゴリズムが AES-192-CBC で、検証アルゴリズムが HMACSHA256 の場合を考えてみます。 システムは、次の手順を使用してコンテキストヘッダーを生成します。
 
-まず、let (K_E | |K_H) = SP800_108_CTR (prf = HMACSHA512、key = ""、label = ""、context = "")、where |K_E |= 192 ビットと |K_H |= 指定されたアルゴリズムごとに256ビット。 これにより、K_E = 5BB6..21DD および K_H = A04A..00A9 の例を次に示します。
+まず、 `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` `| K_E | = 192 bits` `| K_H | = 256 bits` 指定されたアルゴリズムごとにとを使用します。 これは `K_E = 5BB6..21DD` 、 `K_H = A04A..00A9` 次の例のとにつながります。
 
 ```
 5B B6 C9 83 13 78 22 1D 8E 10 73 CA CF 65 8E B0
@@ -73,13 +73,13 @@ ms.locfileid: "85406895"
 B7 92 3D BF 59 90 00 A9
 ```
 
-次に、AES-192-CBC 指定された IV = 0 * と、上記と同じ K_E を計算 Enc_CBC (K_E、IV、"") します。
+次に、 `Enc_CBC (K_E, IV, "")` 上記のように、AES-192-CBC を計算し `IV = 0*` `K_E` ます。
 
-結果: = F474B1872B3B53E4721DE19C0841DB6F
+`result := F474B1872B3B53E4721DE19C0841DB6F`
 
-次に、上記の K_H に対して、HMACSHA256 の計算用 MAC (K_H、"") を指定します。
+次に、 `MAC(K_H, "")` 上記の HMACSHA256 を計算し `K_H` ます。
 
-結果: = D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
+`result := D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C`
 
 これにより、以下の完全なコンテキストヘッダーが生成されます。
 
@@ -93,26 +93,26 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 このコンテキストヘッダーは、認証された暗号化アルゴリズムペアの拇印です (AES-192-CBC encryption + HMACSHA256 validation)。 [上記](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components)のコンポーネントは次のとおりです。
 
-* マーカー (00 00)
+* マーカー`(00 00)`
 
-* ブロック暗号キーの長さ (00 00 00 18)
+* ブロック暗号キーの長さ`(00 00 00 18)`
 
-* ブロック暗号ブロックサイズ (00 00 00 10)
+* ブロック暗号ブロックサイズ`(00 00 00 10)`
 
-* HMAC キーの長さ (00 00 00 20)
+* HMAC キーの長さ`(00 00 00 20)`
 
-* HMAC ダイジェストのサイズ (00 00 00 20)
+* HMAC ダイジェストサイズ`(00 00 00 20)`
 
-* ブロック暗号 PRP 出力 (F4 74-DB 6F) および
+* ブロック暗号 PRP 出力 `(F4 74 - DB 6F)` と
 
-* HMAC PRF 出力 (D4 79-end)。
+* HMAC PRF 出力 `(D4 79 - end)` 。
 
 > [!NOTE]
 > CBC モード暗号化 + HMAC 認証コンテキストヘッダーは、アルゴリズムの実装が Windows CNG によって提供されるか、マネージ SymmetricAlgorithm と KeyedHashAlgorithm 型によって提供されるかにかかわらず、同じように構築されます。 これにより、異なるオペレーティングシステムで実行されているアプリケーションは、Os によってアルゴリズムの実装が異なる場合でも、同じコンテキストヘッダーを確実に生成できます。 (実際には、KeyedHashAlgorithm は適切な HMAC である必要はありません。 任意のキー付きハッシュアルゴリズムの種類を使用できます)。
 
 ### <a name="example-3des-192-cbc--hmacsha1"></a>例: 3DES-192-CBC + HMACSHA1
 
-まず、let (K_E | |K_H) = SP800_108_CTR (prf = HMACSHA512、key = ""、label = ""、context = "")、where |K_E |= 192 ビットと |K_H |= 指定されたアルゴリズムごとに160ビット。 これにより、K_E = A219 になります。E2BB および K_H = DC4A..B464 の例を次に示します。
+まず、 `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` `| K_E | = 192 bits` `| K_H | = 160 bits` 指定されたアルゴリズムごとにとを使用します。 これは `K_E = A219..E2BB` 、 `K_H = DC4A..B464` 次の例のとにつながります。
 
 ```
 A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
@@ -120,13 +120,13 @@ A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
 D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 ```
 
-次に、Enc_CBC (K_E, IV, "") を 3DES-192-CBC 指定した IV = 0 * と K_E 上と同じように計算します。
+次に、 `Enc_CBC (K_E, IV, "")` 上記のように、3des-192-CBC を計算し `IV = 0*` `K_E` ます。
 
-結果: = ABB100F81E53E10E
+`result := ABB100F81E53E10E`
 
-次に、上記の K_H に対して、HMACSHA1 の計算用 MAC (K_H、"") を指定します。
+次に、 `MAC(K_H, "")` 上記の HMACSHA1 を計算し `K_H` ます。
 
-結果: = 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
+`result := 76EB189B35CF03461DDF877CD9F4B1B4D63A7555`
 
 これにより、次に示すように、認証された暗号化アルゴリズムペア (3DES-192-CBC encryption + HMACSHA1 validation) の拇印である完全なコンテキストヘッダーが生成されます。
 
@@ -138,19 +138,19 @@ D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 
 コンポーネントは次のように分類されます。
 
-* マーカー (00 00)
+* マーカー`(00 00)`
 
-* ブロック暗号キーの長さ (00 00 00 18)
+* ブロック暗号キーの長さ`(00 00 00 18)`
 
-* ブロック暗号ブロックサイズ (00 00 00 08)
+* ブロック暗号ブロックサイズ`(00 00 00 08)`
 
-* HMAC キーの長さ (00 00 00 14)
+* HMAC キーの長さ`(00 00 00 14)`
 
-* HMAC ダイジェストのサイズ (00 00 00 14)
+* HMAC ダイジェストサイズ`(00 00 00 14)`
 
-* ブロック暗号 PRP 出力 (AB B1-E1 0E) と
+* ブロック暗号 PRP 出力 `(AB B1 - E1 0E)` と
 
-* HMAC PRF 出力 (76 EB-end)。
+* HMAC PRF 出力 `(76 EB - end)` 。
 
 ## <a name="galoiscounter-mode-encryption--authentication"></a>Galois/カウンタモードの暗号化 + 認証
 
@@ -166,21 +166,21 @@ D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 
 * [32 ビット]認証された暗号化関数によって生成される認証タグのサイズ (バイト、ビッグエンディアン)。 (システムの場合は、タグサイズが128ビットに固定されています)。
 
-* [128 ビット]Enc_GCM (K_E、nonce、"") のタグ。これは、空の文字列入力を指定した場合は対称ブロック暗号アルゴリズムの出力であり、nonce は96ビットのすべてゼロベクターです。
+* [128 ビット]のタグ。 `Enc_GCM (K_E, nonce, "")` これは、空の文字列入力が指定された場合は、対称ブロック暗号アルゴリズムの出力であり、nonce は96ビットのすべてゼロベクターです。
 
-K_E は、CBC encryption + HMAC 認証シナリオと同じメカニズムを使用して派生します。 ただし、ここでは K_H がないため、基本的には |K_H |= 0 の場合、アルゴリズムは次の形式に折りたたまれます。
+`K_E`は、CBC encryption + HMAC 認証シナリオと同じメカニズムを使用して派生します。 ただし、ここには何もないので、基本的には `K_H` を持ち、 `| K_H | = 0` アルゴリズムは次の形式に折りたたまれます。
 
-K_E = SP800_108_CTR (prf = HMACSHA512、key = ""、label = ""、context = "")
+`K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-256-gcm"></a>例: AES-256-GCM
 
-最初に K_E = SP800_108_CTR (prf = HMACSHA512、key = ""、label = ""、context = "") を指定します。ここで |K_E |= 256 ビット。
+まず、 `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` where を使用 `| K_E | = 256 bits` します。
 
-K_E: = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+`K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8`
 
-次に、Enc_GCM の認証タグ (K_E、nonce、"") 256 を計算します。これは、上記のように、指定された nonce = 096 と K_E に与えられています。
+次に、上記のように、 `Enc_GCM (K_E, nonce, "")` 指定された AES-256-GCM の認証タグを計算し `nonce = 096` `K_E` ます。
 
-結果: = E7DCCE66DF855A323A6BB7BD7A59BE45
+`result := E7DCCE66DF855A323A6BB7BD7A59BE45`
 
 これにより、以下の完全なコンテキストヘッダーが生成されます。
 
@@ -192,14 +192,14 @@ BE 45
 
 コンポーネントは次のように分類されます。
 
-* マーカー (00 01)
+* マーカー`(00 01)`
 
-* ブロック暗号キーの長さ (00 00 00 20)
+* ブロック暗号キーの長さ`(00 00 00 20)`
 
-* nonce のサイズ (00 00 00 0C)
+* nonce のサイズ`(00 00 00 0C)`
 
-* ブロック暗号ブロックサイズ (00 00 00 10)
+* ブロック暗号ブロックサイズ`(00 00 00 10)`
 
-* 認証タグのサイズ (00 00 00 10) と
+* 認証タグのサイズ `(00 00 00 10)` と
 
-* ブロック暗号 (E7 DC-end) を実行する認証タグ。
+* ブロック暗号を実行する認証タグ `(E7 DC - end)` 。

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408033"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060372"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>ASP.NET Core でのサブキーの派生と認証された暗号化
 
@@ -43,11 +43,11 @@ ms.locfileid: "85408033"
 
 AAD は3つのすべてのコンポーネントの組に対して一意であるため、すべての暗号化操作で KM 自体を使用するのではなく、それを使用して KM から新しいキーを派生させることができます。 を呼び出すたびに `IAuthenticatedEncryptor.Encrypt` 、次のキー派生プロセスが実行されます。
 
-(K_E、K_H) = SP800_108_CTR_HMACSHA512 (K_M、AAD、contextHeader | | keyModifier)
+`( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)`
 
 ここでは、カウンタモードで NIST SP800-108 KDF を呼び出しています ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5.1 を参照)。次のパラメーターがあります。
 
-* キー派生キー (KDK) = K_M
+* キー派生キー (KDK) =`K_M`
 
 * PRF = HMACSHA512
 
@@ -55,28 +55,28 @@ AAD は3つのすべてのコンポーネントの組に対して一意である
 
 * context = contextHeader | |keyModifier
 
-コンテキストヘッダーは可変長で、基本的には K_E と K_H を派生させるアルゴリズムのサムプリントとして機能します。 キー修飾子は、の各呼び出しに対してランダムに生成された128ビット文字列であり、 `Encrypt` KDF への他のすべての入力が定数であっても、KH がこの特定の認証暗号化操作に対して一意であることを保証するために役立ちます。
+コンテキストヘッダーは可変長であり、基本的には、とを派生させるアルゴリズムの拇印として機能し `K_E` `K_H` ます。 キー修飾子は、の各呼び出しに対してランダムに生成された128ビット文字列であり、 `Encrypt` KDF への他のすべての入力が定数であっても、KH がこの特定の認証暗号化操作に対して一意であることを保証するために役立ちます。
 
-CBC モード暗号化 + HMAC 検証操作の場合、|K_E |対称ブロック暗号キーの長さで、|K_H |HMAC ルーチンのダイジェストサイズを示します。 GCM 暗号化 + 検証操作の場合、|K_H |= 0。
+CBC モード暗号化 + HMAC 検証操作の場合、 `| K_E |` は対称ブロック暗号キーの長さで、 `| K_H |` は hmac ルーチンのダイジェストサイズです。 GCM 暗号化 + 検証操作の場合は、 `| K_H | = 0` 。
 
 ## <a name="cbc-mode-encryption--hmac-validation"></a>CBC モード暗号化 + HMAC 検証
 
-上記のメカニズムを使用して K_E が生成されたら、ランダムな初期化ベクターを生成し、対称ブロック暗号アルゴリズムを実行してプレーンテキストを暗号化します。 次に、初期化ベクターと暗号化テキストを、キー K_H で初期化された HMAC ルーチンを使用して実行し、MAC を生成します。 このプロセスと戻り値は、次のようにグラフィカルに表示されます。
+`K_E`上記のメカニズムを使用してが生成されたら、ランダムな初期化ベクターを生成し、対称ブロック暗号アルゴリズムを実行してプレーンテキストを暗号化します。 次に、初期化ベクターと暗号化テキストを、キーで初期化された HMAC ルーチンを通じて実行し、 `K_H` MAC を生成します。 このプロセスと戻り値は、次のようにグラフィカルに表示されます。
 
 ![CBC モードのプロセスと戻り値](subkeyderivation/_static/cbcprocess.png)
 
-*出力: = keyModifier | |iv | |E_cbc (K_E、iv、data) | |HMAC (K_H、iv | |E_cbc (K_E、iv、データ))*
+`output:= keyModifier || iv || E_cbc (K_E,iv,data) || HMAC(K_H, iv || E_cbc (K_E,iv,data))`
 
 > [!NOTE]
 > `IDataProtector.Protect`実装では、出力する[マジックヘッダーとキー id](xref:security/data-protection/implementation/authenticated-encryption-details)が、呼び出し元に返される前に付加されます。 マジックヘッダーとキー id は暗黙的に[AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)に含まれるため、キー修飾子は kdf に入力として渡されるため、最終的に返されるペイロードのすべての1バイトが MAC によって認証されます。
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Galois/カウンタモードの暗号化 + 検証
 
-上記のメカニズムを使用して K_E が生成されたら、ランダムな96ビット nonce を生成し、対称ブロック暗号アルゴリズムを実行してプレーンテキストを暗号化し、128ビット認証タグを生成します。
+`K_E`上記のメカニズムを使用してが生成されたら、ランダムな96ビット nonce を生成し、対称ブロック暗号アルゴリズムを実行してプレーンテキストを暗号化し、128ビット認証タグを生成します。
 
 ![GCM モードのプロセスと戻り値](subkeyderivation/_static/galoisprocess.png)
 
-*出力: = keyModifier | |nonce | |E_gcm (K_E、nonce、データ) | |authTag*
+`output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> GCM は、AAD の概念をネイティブでサポートしていますが、引き続き、元の KDF にのみ AAD を供給し、AAD パラメーターの空の文字列を GCM に渡すことをオプトインします。 この理由は2つのフォールドです。 まず、[機敏性をサポートするため](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers)に、暗号化キーとして直接 K_M を使用しないようにします。 さらに、GCM では、入力に対して非常に厳密な一意性要件が課されます。 GCM 暗号化ルーチンが、同じ (キー、nonce) ペアを持つ2つ以上の個別の入力データセットに対して呼び出される確率は、2 ^ 32 を超えることはできません。 K_E 修正した場合、2 ^ 32 を超える暗号化操作を実行する前に 2 ^ 32 を超える暗号化操作を実行することはできません。 非常に多くの操作が行われているように見えますが、高トラフィックの web サーバーでは、これらのキーの通常の有効期間内に、わずか数日で40億の要求を通過させることができます。 2 ^-32 の確率制限に準拠したままにするため、128ビットのキー修飾子と96ビット nonce が引き続き使用されます。これにより、任意の K_M の使用可能な操作数が大幅に拡張されます。 設計を簡単にするために、CBC 操作と GCM 操作の間で KDF コードパスを共有しています。 AAD は既に KDF で検討されているため、GCM ルーチンに転送する必要はありません。
+> GCM は、AAD の概念をネイティブでサポートしていますが、引き続き、元の KDF にのみ AAD を供給し、AAD パラメーターの空の文字列を GCM に渡すことをオプトインします。 この理由は2つのフォールドです。 まず、[機敏性をサポートするために](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers)、 `K_M` 暗号化キーとして直接使用することは避けたいと考えています。 さらに、GCM では、入力に対して非常に厳密な一意性要件が課されます。 GCM 暗号化ルーチンが、同じ (キー、nonce) ペアを持つ2つ以上の個別の入力データセットに対して呼び出される確率は、2 ^ 32 を超えることはできません。 この問題を解決した場合、2 ^ `K_E` 32 を超える暗号化操作を実行する前に、32の制限の afoul を実行することはできません。 非常に多くの操作が行われているように見えますが、高トラフィックの web サーバーでは、これらのキーの通常の有効期間内に、わずか数日で40億の要求を通過させることができます。 2 ^-32 の確率制限に準拠したままにするため、128ビットのキー修飾子と96ビットの nonce が引き続き使用されます。これにより、任意のの使用可能な操作数が大幅に拡張され `K_M` ます。 設計を簡単にするために、CBC 操作と GCM 操作の間で KDF コードパスを共有しています。 AAD は既に KDF で検討されているため、GCM ルーチンに転送する必要はありません。

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: f039772f4276d0e8bcec2629350eba2ec0e7418c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399687"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059774"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET メンバーシップ認証から ASP.NET Core 2.0 への移行Identity
 
@@ -44,7 +44,7 @@ ASP.NET Core 2.0 は、 [Identity](/aspnet/identity/index) ASP.NET 4.5 で導入
 
 ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity は、新しい ASP.NET Core 2.0 アプリを作成することです。 Visual Studio 2017 で、次の手順を実行します。
 
-1. **[File]**  >  **[New]**  >  **[Project]** の順に選択します。
+1. **[ファイル]**  >  **[新規作成]**  >  **[プロジェクト]** を順に選択します。
 1. *CoreIdentitySample*という名前の新しい**ASP.NET Core Web アプリケーション**プロジェクトを作成します。
 1. ドロップダウンで**ASP.NET Core 2.0**を選択し、[ **Web アプリケーション**] を選択します。 このテンプレートは、 [ Razor Pages](xref:razor-pages/index)アプリを生成します。 [ **OK]** をクリックしてから、[**認証の変更**] をクリックします。
 1. テンプレートに**個別のユーザーアカウント**を選択し Identity ます。 最後に、[ **ok**] をクリックし、[ **ok]** をクリックします。 Visual Studio によって、ASP.NET Core テンプレートを使用してプロジェクトが作成さ Identity れます。
@@ -75,36 +75,33 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
 ### <a name="users"></a>ユーザー
 
-|*Identity<br>dbo.AspNetUsers*        ||*メンバーシップ <br> (dbo. aspnet_Users/dbo. aspnet_Membership)*||
-|----------------------------------------|-----------------------------------------------------------|
-|**フィールド名**                 |**Type**|**フィールド名**                                    |**Type**|
-|`Id`                           |string  |`aspnet_Users.UserId`                             |string  |
-|`UserName`                     |string  |`aspnet_Users.UserName`                           |string  |
-|`Email`                        |string  |`aspnet_Membership.Email`                         |string  |
-|`NormalizedUserName`           |string  |`aspnet_Users.LoweredUserName`                    |string  |
-|`NormalizedEmail`              |string  |`aspnet_Membership.LoweredEmail`                  |string  |
-|`PhoneNumber`                  |string  |`aspnet_Users.MobileAlias`                        |string  |
-|`LockoutEnabled`               |bit     |`aspnet_Membership.IsLockedOut`                   |bit     |
+|Identity<br>( `dbo.AspNetUsers` ) 列  |Type     |メンバーシップ<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 列|Type      |
+|-------------------------------------------|-----------------------------------------------------------------------|
+| `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
+| `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
+| `Email`                         | `string`| `aspnet_Membership.Email`                                  | `string` |
+| `NormalizedUserName`            | `string`| `aspnet_Users.LoweredUserName`                             | `string` |
+| `NormalizedEmail`               | `string`| `aspnet_Membership.LoweredEmail`                           | `string` |
+| `PhoneNumber`                   | `string`| `aspnet_Users.MobileAlias`                                 | `string` |
+| `LockoutEnabled`                | `bit`   | `aspnet_Membership.IsLockedOut`                            | `bit`    |
 
 > [!NOTE]
 > すべてのフィールドマッピングは、メンバーシップから ASP.NET Core への一対一のリレーションシップに似ているとは限りません Identity 。 上の表は、既定のメンバーシップユーザースキーマを取得し、それを ASP.NET Core スキーマにマップして Identity います。 メンバーシップに使用されていたその他のカスタムフィールドは、手動でマップする必要があります。 このマッピングでは、パスワードの条件とパスワード salts の両方が2つの間で移行されないため、パスワードのマップはありません。 **パスワードを null として残し、ユーザーにパスワードのリセットを依頼することをお勧めします。** ASP.NET Core では Identity 、 `LockoutEnd` ユーザーがロックアウトされている場合は、将来の日付に設定する必要があります。これは移行スクリプトに示されています。
 
-### <a name="roles"></a>役割
+### <a name="roles"></a>ロール
 
-|*Identity<br>dbo.AspNetRoles)*        ||*メンバーシップ <br> (dbo. aspnet_Roles)*||
+|Identity<br>( `dbo.AspNetRoles` ) 列|Type|メンバーシップ<br>( `dbo.aspnet_Roles` ) 列|Type|
 |----------------------------------------|-----------------------------------|
-|**フィールド名**                 |**Type**|**フィールド名**   |**Type**         |
-|`Id`                           |string  |`RoleId`         | string          |
-|`Name`                         |string  |`RoleName`       | string          |
-|`NormalizedName`               |string  |`LoweredRoleName`| string          |
+|`Id`                           |`string`|`RoleId`         | `string`        |
+|`Name`                         |`string`|`RoleName`       | `string`        |
+|`NormalizedName`               |`string`|`LoweredRoleName`| `string`        |
 
 ### <a name="user-roles"></a>ユーザー ロール
 
-|*Identity<br>dbo.AspNetUserRoles*||*メンバーシップ <br> (dbo. aspnet_UsersInRoles)*||
-|------------------------------------|------------------------------------------|
-|**フィールド名**           |**Type**  |**フィールド名**|**Type**                   |
-|`RoleId`                 |string    |`RoleId`      |string                     |
-|`UserId`                 |string    |`UserId`      |string                     |
+|Identity<br>( `dbo.AspNetUserRoles` ) 列|Type|メンバーシップ<br>( `dbo.aspnet_UsersInRoles` ) 列|Type|
+|-------------------------|----------|--------------|---------------------------|
+|`RoleId`                 |`string`  |`RoleId`      |`string`                   |
+|`UserId`                 |`string`  |`UserId`      |`string`                   |
 
 *ユーザー*および*ロール*の移行スクリプトを作成する場合は、上記のマッピングテーブルを参照してください。 次の例では、データベースサーバーに2つのデータベースがあることを前提としています。 1つのデータベースには、既存の ASP.NET メンバーシップスキーマとデータが含まれています。 他の*CoreIdentitySample*データベースは、前に説明した手順を使用して作成されました。 詳細については、コメントがインラインで含まれています。
 
@@ -204,6 +201,6 @@ COMMIT TRANSACTION MigrateUsersAndRoles
 
  ![固定ログイン](identity/_static/fixed-login.png)
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 このチュートリアルでは、SQL メンバーシップから ASP.NET Core 2.0 にユーザーを移植する方法について学習しました Identity 。 ASP.NET Core の詳細につい Identity ては、「」[を Identity ](xref:security/authentication/identity)参照してください。
