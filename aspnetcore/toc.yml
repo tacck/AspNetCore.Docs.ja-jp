@@ -369,6 +369,8 @@
           uid: blazor/call-javascript-from-dotnet
         - name: JavaScript から .NET を呼び出す
           uid: blazor/call-dotnet-from-javascript
+        - name: WebAssembly からの Web API の呼び出し
+          uid: blazor/call-web-api
         - name: セキュリティと ID
           items:
             - name: 概要
@@ -409,8 +411,6 @@
           uid: blazor/state-management
         - name: WebAssembly のデバッグ
           uid: blazor/debug
-        - name: WebAssembly からの Web API の呼び出し
-          uid: blazor/call-web-api
         - name: WebAssembly のパフォーマンス
           uid: blazor/webassembly-performance-best-practices
         - name: プログレッシブ Web アプリケーション
