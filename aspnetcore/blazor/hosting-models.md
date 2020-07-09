@@ -15,21 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: ba43ff052fbd290412fa27cf57ace3ee3491f8d0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402560"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944218"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
 作成者: [Daniel Roth](https://github.com/danroth27)
 
 Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタイム ( *Blazor WebAssembly* ) 上のブラウザーのクライアント側で、または ASP.NET Core ( *Blazor Server* ) のサーバー側で実行されるように設計された Web フレームワークです。 ホスティング モデルに関係なく、アプリ モデルとコンポーネント モデルは "*同じ*" です。
-
-この記事で説明されているホスティング モデルのプロジェクトを作成するには、「<xref:blazor/get-started>」を参照してください。
-
-詳細な構成については、「<xref:blazor/fundamentals/configuration>」を参照してください。
 
 ## Blazor WebAssembly
 
@@ -154,7 +151,6 @@ IIS を使用すると、スティッキー セッションはアプリケーシ
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* <xref:blazor/get-started>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 6359a02b23803f26c4a40772c68d39e804396403
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f1b131947a242323295a763ba2f2473af0ccfb4f
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401897"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944531"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -31,8 +32,6 @@ Blazor フレームワークには、Blazor ホスティング モデルのそ�
 * Blazor Server (`blazorserver`)
 
 Blazor のホスティング モデルの詳細については、「<xref:blazor/hosting-models>」を参照してください。
-
-テンプレートから Blazor アプリを作成する手順の詳細については、「<xref:blazor/get-started>」を参照してください。
 
 `--help` オプションを [`dotnet new`](/dotnet/core/tools/dotnet-new) CLI コマンドに渡すことで、テンプレート オプションを使用できます。
 

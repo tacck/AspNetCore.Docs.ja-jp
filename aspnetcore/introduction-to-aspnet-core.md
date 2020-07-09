@@ -14,11 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408202"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944549"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core の概要
 
@@ -79,7 +80,7 @@ ASP.NET Core アプリを開発する場合の概要として、次の順序で�
    |----------|----------|----------|
    |Web アプリ                   | 新しいサーバー側 Web UI 開発 |[Razor Pages の使用を開始する](xref:tutorials/razor-pages/razor-pages-start) |
    |Web アプリ                   | MVC アプリの保守管理 |[MVC の概要](xref:tutorials/first-mvc-app/start-mvc)|
-   |Web アプリ                   | クライアント Web UI 開発 |[Blazor の概要](xref:tutorials/first-blazor-app) |
+   |Web アプリ                   | クライアント Web UI 開発 |[Blazor の概要](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |Web API                   | RESTful HTTP サービス |[Web API の作成](xref:tutorials/first-web-api)&dagger; |
    |リモート プロシージャ コール アプリ | プロトコル バッファーを利用したコントラクト優先サービス |[gRPC サービスの概要](xref:tutorials/grpc/grpc-start) |
    |リアルタイムのアプリ             | サーバーと接続クライアント間での双方向通信 |[SignalR の概要](xref:tutorials/signalr) |
