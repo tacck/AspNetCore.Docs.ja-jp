@@ -320,31 +320,31 @@
             - name: 組み込みコンポーネント
               items:
                 - name: アプリ
-                  uid: blazor/templates
+                  href: blazor/templates.md#blazor-project-structure
                 - name: 認証
-                  uid: blazor/security/webassembly/additional-scenarios
+                  href: blazor/security/webassembly/index.md#authentication-component
                 - name: AuthorizeView
-                  uid: blazor/security/index
+                  href: blazor/security/index.md#authorizeview-component
                 - name: InputCheckbox
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputDate
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputNumber
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputSelect
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputText
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
-                  uid: blazor/forms-validation
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: MainLayout
-                  uid: blazor/layouts
+                  href: blazor/layouts.md#mainlayout-component
                 - name: NavLink
-                  uid: blazor/fundamentals/routing
+                  href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
-                  uid: blazor/fundamentals/routing
+                  href: blazor/fundamentals/routing.md#navlink-component
                 - name: ルーター
-                  uid: blazor/fundamentals/routing
+                  href: blazor/fundamentals/routing.md#route-templates
             - name: 値とパラメーターのカスケード
               uid: blazor/components/cascading-values-and-parameters
             - name: データ バインディング
@@ -927,16 +927,6 @@
     - name: 正常性チェック
       uid: host-and-deploy/health-checks
       displayName: 'deploy, publish'
-    - name: Blazor
-      items:
-        - name: 概要
-          uid: blazor/host-and-deploy/index
-        - name: Blazor WebAssembly
-          uid: blazor/host-and-deploy/webassembly
-        - name: Blazor サーバー
-          uid: blazor/host-and-deploy/server
-        - name: リンカーを構成する
-          uid: blazor/host-and-deploy/configure-linker
 - name: セキュリティと ID
   displayName: 'authentication, authorization'
   items:
@@ -1169,42 +1159,6 @@
       uid: security/ip-safelist
     - name: アプリケーションのセキュリティ - OWASP
       href: 'https://cheatsheetseries.owasp.org/cheatsheets/DotNet_Security_Cheat_Sheet.html'
-    - name: Blazor
-      items:
-        - name: 概要
-          uid: blazor/security/index
-        - name: Blazor WebAssembly
-          items:
-            - name: 概要
-              uid: blazor/security/webassembly/index
-            - name: 認証ライブラリによるスタンドアロン
-              uid: blazor/security/webassembly/standalone-with-authentication-library
-            - name: Microsoft アカウントによるスタンドアロン
-              uid: blazor/security/webassembly/standalone-with-microsoft-accounts
-            - name: AAD によるスタンドアロン
-              uid: blazor/security/webassembly/standalone-with-azure-active-directory
-            - name: AAD B2C によるスタンドアロン
-              uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-            - name: AAD によるホスティング
-              uid: blazor/security/webassembly/hosted-with-azure-active-directory
-            - name: AAD B2C によるホスティング
-              uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-            - name: Identity Server によるホスティング
-              uid: blazor/security/webassembly/hosted-with-identity-server
-            - name: その他のシナリオ
-              uid: blazor/security/webassembly/additional-scenarios
-            - name: AAD グループとロール
-              uid: blazor/security/webassembly/aad-groups-roles
-        - name: Blazor サーバー
-          items:
-            - name: 概要
-              uid: blazor/security/server/index
-            - name: 脅威の緩和
-              uid: blazor/security/server/threat-mitigation
-            - name: その他のシナリオ
-              uid: blazor/security/server/additional-scenarios
-        - name: コンテンツのセキュリティ ポリシー
-          uid: blazor/security/content-security-policy
 - name: パフォーマンス
   items:
     - name: 概要
@@ -1229,8 +1183,6 @@
       uid: performance/diagnostic-tools
     - name: ロード テストおよびストレス テスト
       uid: test/loadtests
-    - name: Blazor WebAssembly
-      uid: blazor/webassembly-performance-best-practices
 - name: グローバリゼーションとローカリゼーション
   items:
     - name: 概要
