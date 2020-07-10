@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 06d5d6e2db1cf3ccb148c24c40c264016d47a0ed
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7a92f2b5bc791f268b897878db08a9f9f4f7bf0c
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406590"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212405"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core のフォームのタグ ヘルパー
 
@@ -45,7 +45,7 @@ ms.locfileid: "85406590"
 
 サンプル:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/RegisterFormOnly.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/RegisterFormOnly.cshtml)]
 
 上記のフォーム タグ ヘルパーで、次の HTML が生成されます。
 
@@ -62,7 +62,7 @@ MVC ランタイムで、フォーム タグ ヘルパーの属性 `asp-controll
 
 `asp-route` タグ ヘルパー属性で、HTML `action` 属性のマークアップを生成することもできます。 `register` という名前の[ルート](../../fundamentals/routing.md)を持つアプリケーションは、登録ページに次のマークアップを使用できます。
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
 *Views/Account* フォルダー (*個々のユーザー アカウント*を使用して新しい Web アプリケーションを作成するときに生成されるフォルダー) のビューの多くには、[asp-route-returnurl](xref:mvc/views/working-with-forms) 属性が含まれています。
 
@@ -81,7 +81,7 @@ MVC ランタイムで、フォーム タグ ヘルパーの属性 `asp-controll
 
 `formaction` の値を制御するためにサポートされている [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 属性:
 
-|属性|[説明]|
+|属性|説明|
 |---|---|
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|コントローラーの名前。|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|アクション メソッドの名前です。|
@@ -89,7 +89,7 @@ MVC ランタイムで、フォーム タグ ヘルパーの属性 `asp-controll
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|ページの名前 Razor 。|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|ページハンドラーの名前 Razor 。|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|ルートの名前です。|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、`asp-route-id="1234"` のようにします。|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、「 `asp-route-id="1234"` 」のように入力します。|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|すべてのルート値です。|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL フラグメントです。|
 
@@ -207,7 +207,7 @@ Type expected
 |.NET 型|入力タイプ|
 |---|---|
 |Bool|type="checkbox"|
-|String|type="text"|
+|文字列型|type="text"|
 |DateTime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|type="number"|
 |Int|type="number"|
@@ -229,7 +229,7 @@ Type expected
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/RegisterInput.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/RegisterInput.cshtml)]
 
 上記のコードで、次の HTML が生成されます。
 
@@ -299,7 +299,7 @@ ASP.NET Core MVC で `ModelExpression` の値が計算されるとき、`ModelSt
 
 このビューでは、`Address.AddressLine1` にバインドしています。
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
 
 `Address.AddressLine1` に対して次の HTML が生成されます。
 
@@ -325,11 +325,11 @@ public IActionResult Edit(int id, int colorIndex)
 
 特定の Razor 要素にアクセスする方法を次に示し `Color` ます。
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
 *Views/Shared/EditorTemplates/String.cshtml* テンプレート:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
 
 `List<T>` を使用するサンプル:
 
@@ -337,11 +337,11 @@ public IActionResult Edit(int id, int colorIndex)
 
 Razorコレクションを反復処理する方法を次に示します。
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
 
 *Views/Shared/EditorTemplates/ToDoItem.cshtml* テンプレート:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
 値を `asp-for` または `Html.DisplayFor` と同じコンテキストで使用する場合は、可能であれば `foreach` を使用する必要があります。 一般に、反復子を割り当てる必要がないため、(使用可能なシナリオでは) `for` の方が `foreach` よりも優れています。ただし、LINQ 式内でのインデクサーの評価はコストが高くなる可能性があるため、最小限に抑える必要があります。
 
@@ -364,7 +364,7 @@ Razorコレクションを反復処理する方法を次に示します。
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/DescriptionViewModel.cs)]
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterTextArea.cshtml?highlight=4)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterTextArea.cshtml?highlight=4)]
 
 次の HTML が生成されます。
 
@@ -400,7 +400,7 @@ Razorコレクションを反復処理する方法を次に示します。
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/SimpleViewModel.cs)]
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterLabel.cshtml?highlight=4)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterLabel.cshtml?highlight=4)]
 
 `<label>` 要素に対して次の HTML が生成されます。
 
@@ -470,7 +470,7 @@ Razorコレクションを反復処理する方法を次に示します。
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterValidation.cshtml?highlight=4,6,8&range=1-10)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterValidation.cshtml?highlight=4,6,8&range=1-10)]
 
 生成される HTML (モデルが有効な場合):
 
@@ -501,7 +501,7 @@ Razorコレクションを反復処理する方法を次に示します。
 
 `Select Tag Helper` `asp-for` は [select](https://www.w3.org/wiki/HTML/Elements/select) 要素のモデル プロパティ名を指定し、`asp-items` は [option](https://www.w3.org/wiki/HTML/Elements/option) 要素を指定します。  次に例を示します。
 
-[!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
 サンプル:
 
@@ -538,7 +538,7 @@ HTTP POST `Index` メソッドによって選択内容が表示されます。
 
 `asp-for` 属性値は特殊なケースであり、(`asp-items` などの) 他のタグ ヘルパー属性とは異なり、`Model` プレフィックスは必須ではありません
 
-[!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
 ### <a name="enum-binding"></a>Enum バインディング
 
@@ -552,7 +552,7 @@ HTTP POST `Index` メソッドによって選択内容が表示されます。
 
 `GetEnumSelectList` メソッドは列挙型の場合に `SelectList` オブジェクトを生成します。
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
 
 より高機能な UI にするために、列挙子リストを `Display` 属性でマークできます。
 
@@ -617,7 +617,7 @@ HTML [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) 要素は、�
 
 次のビューを対象にします。
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
 
 次の HTML が生成されます。
 
@@ -641,17 +641,17 @@ HTML [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) 要素は、�
 
 複数のページで "未指定" オプションを使用しているとわかった場合は、テンプレートを作成して HTML の繰り返しを除去することができます。
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEmptyTemplate.cshtml?highlight=5)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEmptyTemplate.cshtml?highlight=5)]
 
 *Views/Shared/EditorTemplates/CountryViewModel.cshtml* テンプレート:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
 HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 要素の追加は、選択されて*いない*場合にのみ制限されません。 たとえば、次のビューおよびアクション メソッドで、上記のコードのような HTML が生成されます。
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 
-[!code-HTML[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
 
 現在の `Country` 値に応じて、(`selected="selected"` 属性を含む) 正しい `<option>` 要素が選択されます。
 
@@ -670,7 +670,7 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 要素の追加�
  </form>
  ```
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:mvc/views/tag-helpers/intro>
 * [HTML の Form 要素](https://www.w3.org/TR/html401/interact/forms.html)

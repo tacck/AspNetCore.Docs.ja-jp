@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 0a2be31092ab491e23ab9de9be676b5b4d3963ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060281"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212890"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core でのクロスオリジン要求 (CORS) を有効にする
 
@@ -79,7 +79,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,32)]
 
-上記のコードでは次の操作が行われます。
+上記のコードでは、次のことが行われます。
 
 * ポリシー名をに設定 `_myAllowSpecificOrigins` します。 ポリシー名は任意です。
 * 拡張メソッドを呼び出し、 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> CORS ポリシーを指定し `_myAllowSpecificOrigins` ます。 `UseCors`CORS ミドルウェアを追加します。 への呼び出しは `UseCors` `UseRouting` 、の後、の前に配置する必要があり `UseAuthorization` ます。 詳細については、「[ミドルウェアの順序](xref:fundamentals/middleware/index#middleware-order)」を参照してください。
@@ -123,7 +123,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
-上のコードでは以下の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * `app.UseCors`CORS ミドルウェアを有効にします。 既定のポリシーが構成されていないため、 `app.UseCors()` 単独で CORS を有効にすることはできません。
 * `/echo`およびコントローラーエンドポイントは、指定されたポリシーを使用して、クロスオリジン要求を許可します。
@@ -184,7 +184,7 @@ CORS 要求を制限する最も細かい制御:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet&highlight=1,23)]
 
-上記のコードでは次の操作が行われます。
+上記のコードでは、次のことが行われます。
 
 * [エンドポイントルーティング](#ecors)で CORS を有効にしません。
 * [既定の CORS ポリシー](#dp)は定義されていません。
@@ -617,7 +617,7 @@ C:\Program Files\Git\mingw64\bin\
 
 配置されたサンプルの[テストページ](https://cors1.azurewebsites.net/test?number=2)から、前のコードをテストします。 [**コントローラー** ] ドロップダウンリストで、[**プレフライト**] を選択し、[**コントローラーの設定**] をクリックします。 エンドポイントに対するすべての CORS 呼び出しが `TodoItems2Controller` 成功します。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -665,7 +665,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
-上記のコードでは次の操作が行われます。
+上記のコードでは、次のことが行われます。
 
 * ポリシー名を " \_ myallow固有のオリジン" に設定します。 ポリシー名は任意です。
 * <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>CORS を有効にする拡張メソッドを呼び出します。
@@ -998,7 +998,7 @@ CORS をテストするには:
 1. Web アプリプロジェクトを作成 Razor します (ページまたは MVC)。 このサンプルでは、 Razor ページを使用します。 API プロジェクトと同じソリューションに web アプリを作成できます。
 1. 次の強調表示されたコードを*インデックスの cshtml*ファイルに追加します。
 
-  [!code-csharp[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
+  [!code-cshtml[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
 1. 前のコードで、をデプロイされた `url: 'https://<web app>.azurewebsites.net/api/values/1',` アプリの URL に置き換えます。
 1. API プロジェクトをデプロイします。 たとえば、 [Azure にデプロイ](xref:host-and-deploy/azure-apps/index)します。
@@ -1023,7 +1023,7 @@ CORS が有効なエンドポイントは、 [Fiddler](https://www.telerik.com/f
 
 IIS に展開する場合、サーバーが匿名アクセスを許可するように構成されていない場合、CORS は Windows 認証の前に実行する必要があります。 このシナリオをサポートするには、アプリ用に[IIS CORS モジュール](https://www.iis.net/downloads/microsoft/iis-cors-module)をインストールして構成する必要があります。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

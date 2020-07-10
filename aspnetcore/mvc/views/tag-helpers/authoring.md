@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 5e250debb5c4c2ef00b844557d31ed8281d2ff2f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e630bf4b0c121796315be077623abae73d240b37
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407591"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212460"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー作成
 
@@ -87,14 +87,14 @@ ms.locfileid: "85407591"
 
 <!--
 the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
-    [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
+    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
 FQN を使用してタグ ヘルパーをビューに追加するには、最初に FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) を追加してから、**アセンブリ名** (*AuthoringTagHelpers*。`namespace` は不要) を追加します。 ほとんどの開発者は、ワイルドカードの構文を使用する方を選びます。 [タグ ヘルパーの概要](intro.md)に関するページでは、タグ ヘルパーの追加、削除、階層、およびワイルドカードの構文について詳しく説明されています。
 
 1. これらの変更を加えて、*Views/Home/Contact.cshtml* ファイル内のマークアップを更新します。
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. アプリを実行して、お好みのブラウザーを使用して HTML ソースを表示すると、電子メール タグがアンカー マークアップ (`<a>Support</a>` など) に置き換えられていることが確認できます。 *Support* と *Marketing* はリンクとして表示されますが、リンクを機能させる `href` 属性を持っていません。 次のセクションでこれを修正します。
 
@@ -118,7 +118,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 1. これらの変更を加えて、*Views/Home/Contact.cshtml* ファイル内のマークアップを更新します。
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
 1. アプリを実行し、適切なリンクが生成されることを確認します。
 
@@ -147,7 +147,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 1. *Views/Home/Contact.cshtml* ファイルに次の変更を行って、タグ ヘルパーがターゲットの電子メールを取得できるようにします。
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. アプリを実行し、有効な電子メール リンクが生成されることを確認します。
 
@@ -163,7 +163,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 1. `bold` 属性値を含めるように *About.cshtml* ビューを変更します。 完成したコードを以下に示します。
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
 
 1. アプリを実行します。 お好みのブラウザーを使用して、ソースを検査し、マークアップを確認できます。
 
@@ -225,7 +225,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 1. *About.cshtml* ビューに次のマークアップを追加します。 強調表示されたマークアップは、Web サイトの情報を表示します。
 
-   [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
    > Razor次に示すマークアップでは、
@@ -251,7 +251,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 1. *Views/Home/Index.cshtml* ファイルの内容を次のマークアップに置き換えます。
 
-   [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
 
 1. `Home` コントローラーの `Index` メソッドを次のコードで置き換えます。
 
@@ -281,7 +281,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 1. 次のマークアップを *Views/Home/Contact.cshtml* ファイルの末尾に追加します。
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
 
 1. アプリを実行し、タグ ヘルパーがアンカーを正しくレンダリングすることを確認します。
 

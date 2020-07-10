@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e2ae82b9c26771ee5da16b1611026c6d62804bce
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400818"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212942"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core プロジェクトでのスキャフォールディング
 
@@ -48,7 +48,7 @@ Identity新しいデータコンテキストを使用して、既存の個別の
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
 
-上記のコードは、*区分/ Identity /IdentityHostingStartup.cs*で重複するコードをコメントアウトします。
+上記のコードでは、*区分/ Identity / Identity HostingStartup.cs*に複製されたコードをコメントアウトします。
 
 通常、個別のアカウントで作成されたアプリは、新しいデータコンテキストを作成し***ない***ようにする必要があります。
 
@@ -93,7 +93,7 @@ before dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 <a name="efm"></a>
 
@@ -115,7 +115,7 @@ Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます
 
 省略可能: 次のように、ログイン部分 ( `_LoginPartial` ) をレイアウトファイルに追加します。
 
-[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 ## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 承認を使用してプロジェクトにスキャフォールディング
 
@@ -132,7 +132,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-一部 Identity のオプションは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+一部 Identity のオプションは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity既存の承認なしで MVC プロジェクトにスキャフォールディング
 
@@ -154,11 +154,11 @@ dotnet ef database update
 
 省略可能: `_LoginPartial` *Views/Shared/_Layout cshtml*ファイルにログイン部分 () を追加します。
 
-[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 * *Pages/shared/_LoginPartial cshtml*ファイルを*Views/shared/_LoginPartial*に移動します。
 
-Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます。 詳細については、「IHostingStartup」を参照してください。
+Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されます。 詳細については、「IHostingStartup」を参照してください。
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -184,7 +184,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 ### <a name="migrations"></a>移行
 
@@ -304,7 +304,7 @@ Identityページのレイアウトとスタイルを変更して、既定のテ
 > [!NOTE]
 > このセクションの例は、カスタマイズの開始点にすぎません。 最適なユーザーエクスペリエンスを実現するには、追加の作業が必要になる可能性があります。
 
-新しい `NavMenu_IdentityLayout` コンポーネント (*Shared/NavMenu_IdentityLayout razor*) を作成します。 コンポーネントのマークアップとコードについては、アプリのコンポーネントの同じコンテンツを使用し `NavMenu` ます (*共有/ナビゲーションメニュー。 razor*)。 コンポーネントの `NavLink` 自動リダイレクトが `RedirectToLogin` 認証または承認を必要とするコンポーネントに対して失敗するため、匿名にアクセスできないコンポーネントに対してを除去します。
+新しい `NavMenu_IdentityLayout` コンポーネント (*Shared/NavMenu_ Identity Layout*) を作成します。 コンポーネントのマークアップとコードについては、アプリのコンポーネントの同じコンテンツを使用し `NavMenu` ます (*共有/ナビゲーションメニュー。 razor*)。 コンポーネントの `NavLink` 自動リダイレクトが `RedirectToLogin` 認証または承認を必要とするコンポーネントに対して失敗するため、匿名にアクセスできないコンポーネントに対してを除去します。
 
 *Pages/Shared/Layout. cshtml*ファイルで、次の変更を行います。
 
@@ -366,7 +366,7 @@ Identityページのレイアウトとスタイルを変更して、既定のテ
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-一部 Identity のオプションは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+一部 Identity のオプションは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 <a name="full"></a>
 
@@ -472,7 +472,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 静的なアセットが web ルートに発行されないようにするに Identity は、「」を参照してください <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> 。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 
@@ -526,7 +526,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されます。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 <a name="efm"></a>
 
@@ -548,7 +548,7 @@ Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます
 
 省略可能: 次のように、ログイン部分 ( `_LoginPartial` ) をレイアウトファイルに追加します。
 
-[!code-html[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
+[!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
 ## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 承認を使用してプロジェクトにスキャフォールディング
 
@@ -565,7 +565,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-一部 Identity のオプションは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
+一部 Identity のオプションは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity既存の承認なしで MVC プロジェクトにスキャフォールディング
 
@@ -587,11 +587,11 @@ dotnet ef database update
 
 省略可能: `_LoginPartial` *Views/Shared/_Layout cshtml*ファイルにログイン部分 () を追加します。
 
-[!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
+[!code-cshtml[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
 * *Pages/shared/_LoginPartial cshtml*ファイルを*Views/shared/_LoginPartial*に移動します。
 
-Identityは、 *Areas/ Identity /IdentityHostingStartup.cs*で構成されます。 詳細については、「IHostingStartup」を参照してください。
+Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されます。 詳細については、「IHostingStartup」を参照してください。
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -713,7 +713,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 同様の方法で、運用環境のシナリオにも対応できます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 

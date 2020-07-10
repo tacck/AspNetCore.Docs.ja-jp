@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: c767ff4c2a1e0d5d10ccb3ff855126f541c04f64
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ac9f6449e2b7b135318ecf116e1dba7b33ddff83
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408241"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212392"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core のリンク タグ ヘルパー
 
@@ -33,11 +33,11 @@ ms.locfileid: "85408241"
 
 次の Razor マークアップは、 `head` ASP.NET Core web アプリテンプレートを使用して作成されたレイアウトファイルの要素を示しています。
 
-[!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
+[!code-cshtml[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
 次に示すのは、前のコードからレンダリングされた HTML です (非開発環境)。
 
-[!code-csharp[](link-tag-helper/sample/HtmlPage1.html)]
+[!code-html[](link-tag-helper/sample/HtmlPage1.html)]
 
 前のコードでは、リンク タグ ヘルパーによって `<meta name="x-stylesheet-fallback-test" content="" class="sr-only" />` 要素が生成され、要求された *bootstrap.min.css* ファイルが CDN 上にあることを確認するために使用される次の JavaScript も生成されました。 このケースでは、CSS ファイルは存在しており、タグ ヘルパーによって CDN CSS ファイルを含む `<link />` 要素が生成されました。
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 36d8c3dd42ac9d0acdb93bba4bc39ab18ad5c52f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d2791422e50082eab51c0735e2209e5b829d22f2
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400896"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212497"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー
 
@@ -243,7 +243,7 @@ HTML ヘルパーの方法よりも、マークアップがわかりやすく、
 
 たとえば、以下の *Email* グループについて考えてみます。
 
-[!code-csharp[](intro/sample/Register.cshtml?range=12-18)]
+[!code-cshtml[](intro/sample/Register.cshtml?range=12-18)]
 
 "asp-" 属性にはそれぞれ "Email" の値がありますが、"Email" は文字列ではありません。 このコンテキストでは、"Email" は `RegisterViewModel` の C# モデル式のプロパティとなります。
 
@@ -275,7 +275,7 @@ Visual Studio エディターは登録フォームのタグ ヘルパーの方�
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * [タグ ヘルパーの作成](xref:mvc/views/tag-helpers/authoring)
 * [フォームの操作](xref:mvc/views/working-with-forms)

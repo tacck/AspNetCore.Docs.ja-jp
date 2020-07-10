@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: 0ec9aa5f2e1c9d439bbea2ac15ffb50b3e42daca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5fbbb7a468a820ddad30bb4727a261fb01b4a23a
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399336"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212838"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core でのクロスサイト要求偽造 (XSRF/CSRF) 攻撃を防ぐ
 
@@ -389,7 +389,7 @@ Cookie を使用して認証トークンを格納し、サーバーで API 要�
 
 ビューで JavaScript を使用すると、ビュー内からサービスを使用してトークンを作成できます。 ビューに[AspNetCore の偽造](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgery)サービスを挿入し、 [Getandstoretokens](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgery.getandstoretokens)を呼び出します。
 
-[!code-csharp[](anti-request-forgery/sample/MvcSample/Views/Home/Ajax.cshtml?highlight=4-10,12-13,35-36)]
+[!code-cshtml[](anti-request-forgery/sample/MvcSample/Views/Home/Ajax.cshtml?highlight=4-10,12-13,35-36)]
 
 この方法では、サーバーからの cookie の設定やクライアントからの読み取りを直接処理する必要がなくなります。
 
@@ -489,7 +489,7 @@ public void ConfigureServices(IServiceCollection services)
 
 [Iアンチ Forgeryadditionaldataprovider](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider)型を使用すると、開発者は各トークンの追加データをラウンドトリップさせることで、csrf システムの動作を拡張できます。 [Getadditionaldata](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.getadditionaldata)メソッドは、フィールドトークンが生成されるたびに呼び出され、戻り値は生成されたトークン内に埋め込まれます。 実装者は、タイムスタンプ、nonce、またはその他の値を返し、 [Validateadditionaldata](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.validateadditionaldata)を呼び出して、トークンが検証されたときにこのデータを検証することができます。 クライアントのユーザー名は、生成されたトークンに既に埋め込まれているため、この情報を含める必要はありません。 トークンに追加データが含まれていても構成されていない場合 `IAntiForgeryAdditionalDataProvider` 、補足データは検証されません。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Open Web Application Security Project](https://www.owasp.org/index.php/Main_Page) (owasp) での[csrf](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 。
 * <xref:host-and-deploy/web-farm>

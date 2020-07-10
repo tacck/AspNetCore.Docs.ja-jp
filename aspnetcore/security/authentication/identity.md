@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 6ac565bfa4862168fa143417ab5a81c51b620f16
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793565"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212446"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>IdentityASP.NET Core の概要
 
@@ -185,7 +185,7 @@ PowerShell では、コマンドの区切り記号としてセミコロンを使
 
 Post は*Pages/Shared/_LoginPartial*に指定されています。
 
-[!code-csharp[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
+[!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
 ## <a name="test-identity"></a>TestIdentity
 
@@ -216,7 +216,7 @@ Post は*Pages/Shared/_LoginPartial*に指定されています。
 
 パスワードの最小要件を設定するサンプルについては、「[構成](#pw)」を参照してください。
 
-## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity と AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>AddDefault Identity と AddIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>は ASP.NET Core 2.1 で導入されました。 `AddDefaultIdentity`の呼び出しは、次の呼び出しに似ています。
 
@@ -224,7 +224,7 @@ Post は*Pages/Shared/_LoginPartial*に指定されています。
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-詳細については、「 [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 」を参照してください。
+詳細については、「 [Adddefault Identity source](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 」を参照してください。
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>静的アセットの発行を禁止する Identity
 
@@ -271,7 +271,7 @@ IdentitySQL Server データベースを使用して、ユーザー名、パス�
 
 <a name="adi"></a>
 
-## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity と AddIdentity
+## <a name="adddefaultidentity-and-addidentity"></a>AddDefault Identity と AddIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>は ASP.NET Core 2.1 で導入されました。 `AddDefaultIdentity`の呼び出しは、次の呼び出しに似ています。
 
@@ -279,7 +279,7 @@ IdentitySQL Server データベースを使用して、ユーザー名、パス�
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-詳細については、「 [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/2.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 」を参照してください。
+詳細については、「 [Adddefault Identity source](https://github.com/dotnet/AspNetCore/blob/release/2.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 」を参照してください。
 
 ## <a name="create-a-web-app-with-authentication"></a>認証を使用して Web アプリを作成する
 
@@ -346,7 +346,7 @@ Identityは、 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.auth
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
-詳細については、「[クラス](/dotnet/api/microsoft.aspnetcore.identity.identityoptions)と[アプリケーションの起動](xref:fundamentals/startup)」を参照してください。
+詳細については、「 [ Identity オプションクラス](/dotnet/api/microsoft.aspnetcore.identity.identityoptions)」と「[アプリケーションの起動](xref:fundamentals/startup)」を参照してください。
 
 ## <a name="scaffold-register-login-and-logout"></a>スキャフォールディング Register、Login、および LogOut
 
@@ -402,7 +402,7 @@ PowerShell では、コマンドの区切り記号としてセミコロンを使
 
 Post は*Pages/Shared/_LoginPartial*に指定されています。
 
-[!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
+[!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
 ## <a name="test-identity"></a>TestIdentity
 

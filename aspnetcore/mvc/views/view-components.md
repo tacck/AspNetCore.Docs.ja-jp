@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 40902da52217505822abd9bfd889ecafdd4d88e0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407838"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213106"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core のビュー コンポーネント
 
@@ -100,7 +100,7 @@ ms.locfileid: "85407838"
 
 ビューの検索パスをカスタマイズするには、のコレクションを変更し Razor <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> ます。 たとえば、"/Components/{ビュー コンポーネント名}/{ビュー名}" というパス内のビューを検索するには、次のように新しい項目をコレクションに追加します。
 
-[!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
+[!code-csharp[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
 上記のコードでは、プレースホルダー "{0}" はパス "/Components/{ビュー コンポーネント名}/{ビュー名}" を表しています。
 
@@ -351,6 +351,6 @@ public class PriorityList : ViewComponent
 * ViewComponent がマークアップをレンダリングしません。
 * エラーがスローされません。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * [ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)

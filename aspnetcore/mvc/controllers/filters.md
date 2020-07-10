@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408293"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213060"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core フィルター
 
@@ -123,7 +123,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 構成オプションは、[構成システム](xref:fundamentals/configuration/index)から[オプション パターン](xref:fundamentals/configuration/options)を使用して指定されます。 たとえば、*appsettings.json* ファイルから、次のようにします。
 
-[!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
+[!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
 `StartUp.ConfigureServices` では、次のことが行われます。
 
@@ -188,8 +188,8 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラーまたは Razor ページ| `OnActionExecuting` |
-| 3 | メソッド | `OnActionExecuting` |
-| 4 | メソッド | `OnActionExecuted` |
+| 3 | 方法 | `OnActionExecuting` |
+| 4 | 方法 | `OnActionExecuted` |
 | 5 | コントローラーまたは Razor ページ | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -732,8 +732,8 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラー | `OnActionExecuting` |
-| 3 | メソッド | `OnActionExecuting` |
-| 4 | メソッド | `OnActionExecuted` |
+| 3 | 方法 | `OnActionExecuting` |
+| 4 | 方法 | `OnActionExecuted` |
 | 5 | コントローラー | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -790,12 +790,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 | シーケンス | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | メソッド | 0 | `OnActionExecuting` |
+| 1 | 方法 | 0 | `OnActionExecuting` |
 | 2 | コントローラー | 1  | `OnActionExecuting` |
 | 3 | グローバル | 2  | `OnActionExecuting` |
 | 4 | グローバル | 2  | `OnActionExecuted` |
 | 5 | コントローラー | 1  | `OnActionExecuted` |
-| 6 | メソッド | 0  | `OnActionExecuted` |
+| 6 | 方法 | 0  | `OnActionExecuted` |
 
 フィルターの実行順序を決定するときに、`Order` プロパティによりスコープがオーバーライドされます。 最初に順序でフィルターが並べ替えられ、次に同じ順位の優先度を決めるためにスコープが使用されます。 組み込みのフィルターはすべて `IOrderedFilter` を実装し、既定の `Order` 値を 0 に設定します。 組み込みのフィルターの場合、`Order` をゼロ以外の値に設定しない限り、スコープによって順序が決定されます。
 

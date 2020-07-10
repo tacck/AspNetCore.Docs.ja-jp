@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 0fef14388f83d8b4c708194954f2b75b2164b746
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a7041a976ea9f0e99bfd1eba792d0e919eaf6d3
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404497"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212823"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core での EU 一般データ保護規則 (GDPR) のサポート
 
@@ -86,7 +86,7 @@ Razorプロジェクトテンプレートで作成されたページと MVC プ�
 
 * \_ CookieConsentPartial*部分ビューは次のとおりです。
 
-[!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
+[!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 この部分は次のとおりです。
 
@@ -122,7 +122,7 @@ Cookie を保存するための同意が指定されていない場合は、必�
 
 ![[個人データの管理] ページ](gdpr/_static/pd.png)
 
-メモ:
+注:
 
 * コードを生成するには `Account/Manage` 、「[スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)」を参照してください。
 * [**削除**] リンクと [**ダウンロード**] リンクは、既定の id データに対してのみ機能します。 カスタムユーザーデータを作成するアプリは、カスタムユーザーデータを削除/ダウンロードするように拡張する必要があります。 詳細については、「[カスタムユーザーデータの追加、ダウンロード、 Identity および削除」を](xref:security/authentication/add-user-data)参照してください。
@@ -153,7 +153,7 @@ Cookie を保存するための同意が指定されていない場合は、必�
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [Encfs](https://github.com/vgough/encfs)。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [GDPR-ASP.NET Core に Revoke 同意ボタンを追加する](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)
