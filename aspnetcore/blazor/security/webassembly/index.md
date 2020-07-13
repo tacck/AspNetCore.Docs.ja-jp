@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 3fdea9f553cbd37f2c27740487cfe030ebd81937
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402092"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176154"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をセキュリティで保護する
 
@@ -55,6 +55,18 @@ SameSite Cookie の使用など、SPA を認証するためのその他のオプ
 * Blazor WebAssembly アプリでログイン コールバック エンドポイント (`/authentication/login-callback`) が読み込まれると、認証応答が処理されます。
   * 認証プロセスが正常に完了した場合、ユーザーは認証され、必要に応じてユーザーが要求した元の保護された URL に戻されます。
   * 何らかの理由で認証プロセスが失敗した場合、ユーザーはログイン失敗ページ (`/authentication/login-failed`) に送信され、エラーが表示されます。
+
+## <a name="authentication-component"></a>`Authentication` コンポーネント
+
+`Authentication` コンポーネント (`Pages/Authentication.razor`) はリモート認証操作を処理し、次のことをアプリに許可します。
+
+* 認証状態のアプリのルートを構成する。
+* 認証状態の UI コンテンツを設定する。
+* 認証状態を管理する。
+
+ユーザーの登録やサインインなどの認証アクションは、Blazor フレームワークの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore%601> コンポーネントに渡されます。ここでは認証操作全体で状態が保持され、制御されます。
+
+使用例を含む詳細については、「<xref:blazor/security/webassembly/additional-scenarios>」を参照してください。
 
 ## <a name="authorization"></a>承認
 

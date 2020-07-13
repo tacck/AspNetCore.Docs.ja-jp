@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 35873e57171b4d86affcb475ad2d55aef443d3b5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0f2741a78b58d7380fcbe84e97f5a08ef291c27b
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399180"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944506"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
@@ -364,6 +365,7 @@ Password:
 }
 ```
 
-## <a name="radio-buttons"></a>ラジオ ボタン
+## <a name="additional-resources"></a>その他の技術情報
 
-フォームのラジオ ボタンへのバインドの詳細については、「<xref:blazor/forms-validation#work-with-radio-buttons>」を参照してください。
+* [フォーム内のラジオ ボタンへのバインド](xref:blazor/forms-validation#radio-buttons)
+* [フォーム内の C# オブジェクトの `null` 値への `<select>` 要素オプションのバインド](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)

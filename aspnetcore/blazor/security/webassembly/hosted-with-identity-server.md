@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 author: guardrex
-description: '[IdentityServer](https://identityserver.io/) バックエンドを使用して、Visual Studio 内から認証を用いて新しい Blazor ホスト型アプリを作成するには'
+description: '[IdentityServer](https://identityserver.io/) バックエンドを使用して、Visual Studio 内から認証を用いて新しい Blazor ホステッド アプリを作成するには'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,37 +15,54 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 001fa0885c4ef4f365d9849278d3aa36e7657c54
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402209"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147728"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)
 
-この記事では、ユーザーと API 呼び出しの認証に [IdentityServer](https://identityserver.io/) を使用する、Blazor でホストされたアプリを新しく作成する方法について説明します。
+この記事では、ユーザーと API 呼び出しの認証に [IdentityServer](https://identityserver.io/) を使用する、Blazor でホステッド アプリを新しく作成する方法について説明します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio:
+認証メカニズムを使用して新しい Blazor WebAssembly プロジェクトを作成するには:
 
-1. 新しい **Blazor WebAssembly** アプリを作成します。 詳細については、「<xref:blazor/get-started>」を参照してください。
-1. **[新しい Blazor アプリを作成します]** ダイアログで、 **[認証]** セクションの **[変更]** を選択します。
-1. **[個人のユーザー アカウント]** を選択し、 **[OK]** を選択します。
-1. **[詳細設定]** セクションで、 **[ASP.NET Core hosted]\(ASP.NET Core でホストされる\)** チェック ボックスをオンにします。
-1. **[作成]** ボタンを選択します。
+1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで **[Blazor WebAssembly アプリ]** テンプレートを選択した後、 **[認証]** の下の **[変更]** を選択します。
 
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+1. ASP.NET Core の [Identity](xref:security/authentication/identity) システムを使用してアプリ内にユーザーを格納するには、 **[アプリ内のストア ユーザー アカウント]** オプションを使用して、 **[個人のユーザー アカウント]** を選択します。
 
-コマンド シェルでアプリを作成するには、次のコマンドを実行します。
+1. **[詳細設定]** セクションで、 **[ASP.NET Core hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。
+
+# <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code / .NET Core CLI](#tab/visual-studio-code+netcore-cli)
+
+空のフォルダーに認証メカニズムを使用して新しい Blazor WebAssembly プロジェクトを作成するには、`-au|--auth` オプションを使用して `Individual` 認証メカニズムを指定し、ASP.NET Core の [Identity](xref:security/authentication/identity) システムを使用してアプリ内にユーザーを格納します。
 
 ```dotnetcli
-dotnet new blazorwasm -au Individual -ho
+dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 ```
 
-出力場所を指定するには、パスが含まれるコマンド (`-o BlazorSample` など) に出力オプションを含めます。出力場所としてプロジェクト フォルダーが存在しない場合は、作成されます。 また、フォルダー名は、プロジェクトの名前の一部となります。
+| プレースホルダー  | 例        |
+| ------------ | -------------- |
+| `{APP NAME}` | `BlazorSample` |
+
+`-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。
+
+詳細については、.NET Core ガイドの [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを参照してください。
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+認証メカニズムを使用して新しい Blazor WebAssembly プロジェクトを作成するには:
+
+1. **[新しい Blazor WebAssembly アプリの構成]** ステップで、 **[認証]** ドロップダウンから **[Individual Authentication (in-app)]\(個別認証 (アプリ内)\)** を選択します。
+
+1. ASP.NET Core の [Identity](xref:security/authentication/identity) を使用してアプリに格納されている個々のユーザーに対して、アプリが作成されます。
+
+1. **[ASP.NET Core hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。
 
 ---
 
@@ -78,7 +95,7 @@ dotnet new blazorwasm -au Individual -ho
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * IdentityServer によって生成された JWT トークンを検証するようにアプリを構成する <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> ヘルパー メソッドが追加された Authentication。
+  * IdentityServer によって生成された JWT トークンを検証するようにアプリを構成する <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> ヘルパー メソッドが追加された Authentication:
 
     ```csharp
     services.AddAuthentication()

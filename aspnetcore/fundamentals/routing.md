@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 7ac6dc983454153792610a07c1df01fbc38c8d67
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400831"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060346"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -1437,25 +1437,25 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 次の表は、ルート制約の例とそれに求められる動作をまとめたものです。
 
 | 制約 | 例 | 一致の例 | メモ |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`、`-123456789` | 任意の整数と一致します。 |
-| `bool` | `{active:bool}` | `true`、`FALSE` | `true` または 'false と一致します。 大文字と小文字は区別されません |
+|------------|---------|-----------------|-------|
+| `int` | `{id:int}` | `123456789`、`-123456789` | 任意の整数と一致します。|
+| `bool` | `{active:bool}` | `true`、`FALSE` | `true` または `false` に一致する。 大文字と小文字は区別されません|
 | `datetime` | `{dob:datetime}` | `2016-12-31`、`2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。|
 | `decimal` | `{price:decimal}` | `49.99`、`-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
 | `double` | `{weight:double}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
 | `float` | `{weight:float}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`、`{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 有効な `Guid` 値に一致します。 |
-| `long` | `{ticks:long}` | `123456789`、`-123456789` | 有効な `long` 値に一致します。 |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | 4 文字以上の文字列であることが必要です。 |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | 文字列の長さは最大 8 文字です。 |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | 厳密に 12 文字の文字列であることが必要です。 |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | 文字列の長さは 8 文字以上、最大で 16 文字とする必要があります。 |
-| `min(value)` | `{age:min(18)}` | `19` | 18 以上の整数値であることが必要です。 |
-| `max(value)` | `{age:max(120)}` | `91` | 最大値が 120 の整数値。 |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | 整数値は 18 以上、最大で 120 とする必要があります。 |
-| `alpha` | `{name:alpha}` | `Rick` | 文字列は、1 つまたは複数のアルファベット文字 (`a`-`z`) で構成する必要があります。  大文字と小文字は区別されません |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | 文字列は正規表現と一致する必要があります。 正規表現の定義に関するヒントを参照してください。 |
-| `required` | `{name:required}` | `Rick` | URL 生成中、非パラメーターが提示されるように強制するために使用されます。 |
+| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`、`{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 有効な `Guid` 値に一致します。|
+| `long` | `{ticks:long}` | `123456789`、`-123456789` | 有効な `long` 値に一致します。|
+| `minlength(value)` | `{username:minlength(4)}` | `Rick` | 4 文字以上の文字列であることが必要です。|
+| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | 文字列の長さは最大 8 文字です。|
+| `length(length)` | `{filename:length(12)}` | `somefile.txt` | 厳密に 12 文字の文字列であることが必要です。|
+| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | 文字列の長さは 8 文字以上、最大で 16 文字とする必要があります。|
+| `min(value)` | `{age:min(18)}` | `19` | 18 以上の整数値であることが必要です。|
+| `max(value)` | `{age:max(120)}` | `91` | 最大値が 120 の整数値。|
+| `range(min,max)` | `{age:range(18,120)}` | `91` | 整数値は 18 以上、最大で 120 とする必要があります。|
+| `alpha` | `{name:alpha}` | `Rick` | 文字列は、1 つまたは複数のアルファベット文字 (`a`-`z`) で構成する必要があります。 大文字と小文字は区別されません|
+| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | 文字列は正規表現と一致する必要があります。 正規表現の定義に関するヒントを参照してください。|
+| `required` | `{name:required}` | `Rick` | URL 生成中、非パラメーターが提示されるように強制するために使用されます。|
 
 コロンで区切られた複数の制約を単一のパラメーターに適用することができます。 たとえば、次の制約では、パラメーターが 1 以上の整数値に制限されます。
 

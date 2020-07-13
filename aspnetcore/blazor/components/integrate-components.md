@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 29360174ea86623491d5d8aacd4038162855bba8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6aef51a0f8bf4ec2e7cb6115856bc465a90ec2ee
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399063"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059851"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor コンポーネントを Razor Pages と MVC アプリに統合する
 
@@ -50,7 +51,7 @@ Razor コンポーネントは、Razor Pages と MVC アプリに統合できま
 
      `_Layout.cshtml` ファイルは、Razor Pages アプリの *Pages/Shared* フォルダーまたは MVC アプリの *Views/Shared* フォルダーにあります。
 
-   * *blazor.server.js* スクリプトの `<script>` タグを、終了 `</body>` タグの直前に追加します。
+   * *blazor.server.js* スクリプトの終了 `</body>` タグの直前に、`<script>` タグを追加します。
 
      ```html
      <script src="_framework/blazor.server.js"></script>

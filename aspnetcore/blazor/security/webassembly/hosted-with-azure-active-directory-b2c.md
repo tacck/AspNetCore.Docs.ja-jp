@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 123b664b87eb41a8f07344608713d9aed7a0aa37
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b9125526db9a7484aca50f2ffa6175fd99b11453
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402248"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147764"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する
 
@@ -33,10 +34,7 @@ ms.locfileid: "85402248"
 
 「[チュートリアル: Azure Active Directory B2C テナントの作成](/azure/active-directory-b2c/tutorial-create-tenant)」のガイダンスに従って、AAD B2C テナントを作成します。
 
-次の情報を記録しておきます。
-
-* AAD B2C インスタンス (例: 末尾にスラッシュが含まれている `https://contoso.b2clogin.com/`)
-* AAD B2C テナント ドメイン (例: `contoso.onmicrosoft.com`)
+AAD B2C インスタンスを記録しておきます (例: 末尾にスラッシュが含まれている `https://contoso.b2clogin.com/`)。 インスタンスは、Azure B2C アプリの登録のスキームとホストです。これは、Azure portal で **[アプリの登録]** ページから **[エンドポイント]** ウィンドウを開くことによって見つけることができます。
 
 ### <a name="register-a-server-api-app"></a>サーバー API アプリを登録する
 
@@ -51,9 +49,8 @@ ms.locfileid: "85402248"
 
 次の情報を記録しておきます。
 
-* "*サーバー API アプリ*" のアプリケーション ID (クライアント ID) (例: `11111111-1111-1111-1111-111111111111`)
-* ディレクトリ ID (テナント ID) (例: `222222222-2222-2222-2222-222222222222`)
-* AAD テナント ドメイン (例: `contoso.onmicrosoft.com`): ドメインは、Azure portal で登録されているアプリに対する **[ブランド]** ブレードの **[パブリッシャー ドメイン]** として使用できます。
+* "*サーバー API アプリ*" のアプリケーション (クライアント) ID (例: `41451fa7-82d9-4673-8fa5-69eff5a761fd`)
+* AAD プライマリ、パブリッシャー、テナント ドメイン (`contoso.onmicrosoft.com` など):ドメインは、Azure portal で登録されているアプリに対する **[ブランド]** ブレードの **[パブリッシャー ドメイン]** として使用できます。
 
 **[API の公開]** で:
 
@@ -67,8 +64,10 @@ ms.locfileid: "85402248"
 
 次の情報を記録しておきます。
 
-* アプリ ID の URI (例: `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`、`api://11111111-1111-1111-1111-111111111111`、または指定したカスタム値)
+* アプリ ID の URI (例: `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd`、`api://41451fa7-82d9-4673-8fa5-69eff5a761fd`、または指定したカスタム値)
 * 既定のスコープ (例: `API.Access`)
+
+アプリ ID URI では、クライアント アプリにおいて特別な構成が必要になる場合があります。詳細については、このトピックで後述する「[アクセス トークン スコープ](#access-token-scopes)」を参照してください。
 
 ### <a name="register-a-client-app"></a>クライアント アプリを登録する
 
@@ -81,7 +80,7 @@ ms.locfileid: "85402248"
 1. **[アクセス許可]**  >  **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が有効にされていることを確認します。
 1. **[登録]** を選択します。
 
-アプリケーション ID (クライアント ID) を記録しておきます (例: `11111111-1111-1111-1111-111111111111`)。
+アプリケーション (クライアント) ID を記録しておきます (例: `4369008b-21fa-427c-abaa-9b53bf58e538`)。
 
 **[認証]**  >  **[プラットフォーム構成]**  >  **[Web]** で、次を行います。
 
@@ -112,10 +111,21 @@ ms.locfileid: "85402248"
 次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンド シェルでこのコマンドを実行します。
 
 ```dotnetcli
-dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -ssp "{SIGN UP OR SIGN IN POLICY}" --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} -ssp "{SIGN UP OR SIGN IN POLICY}"
 ```
 
-出力場所を指定するには、パスが含まれるコマンド (`-o BlazorSample` など) に出力オプションを含めます。出力場所としてプロジェクト フォルダーが存在しない場合は、作成されます。 また、フォルダー名は、プロジェクトの名前の一部となります。
+| プレースホルダー                   | Azure portal での名前                                     | 例                                |
+| ----------------------------- | ----------------------------------------------------- | -------------------------------------- |
+| `{AAD B2C INSTANCE}`          | インスタンス                                              | `https://contoso.b2clogin.com/`        |
+| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                         |
+| `{CLIENT APP CLIENT ID}`      | "*クライアント アプリ*" のアプリケーション (クライアント) ID          | `4369008b-21fa-427c-abaa-9b53bf58e538` |
+| `{DEFAULT SCOPE}`             | スコープ名                                            | `API.Access`                           |
+| `{SERVER API APP CLIENT ID}`  | "*サーバー API アプリ*" のアプリケーション (クライアント) ID      | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SERVER API APP ID URI}`     | アプリケーション ID URI ([注を参照](#access-token-scopes)) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SIGN UP OR SIGN IN POLICY}` | サインアップまたはサインインのユーザー フロー                             | `B2C_1_signupsignin1`                  |
+| `{TENANT DOMAIN}`             | プライマリ、パブリッシャー、テナント ドメイン                       | `contoso.onmicrosoft.com`              |
+
+`-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。
 
 > [!NOTE]
 > `app-id-uri` オプションにはアプリ ID URI を渡します。ただし、クライアント アプリで構成の変更が必要になる場合があることに注意してください。これについては、「[アクセス トークンのスコープ](#access-token-scopes)」セクションを参照してください。
@@ -125,7 +135,7 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 > [!NOTE]
 > Azure portal では、"*クライアント アプリ*" の **[認証]**  >  **[プラットフォーム構成]**  >  **[Web]**  >  **[リダイレクト URI]** は、既定の設定の Kestrel サーバーで実行されるアプリの場合、ポート 5001 に構成されます。
 >
-> "*クライアント アプリ*" がランダムな IIS Express ポートで実行されている場合、アプリのポートは **[デバッグ]** パネルの "*サーバー アプリ*" のプロパティで確認できます。
+> "*クライアント アプリ*" がランダムな IIS Express ポートで実行されている場合、アプリのポートは **[デバッグ]** パネルの "*サーバー API アプリ*" のプロパティで確認できます。
 >
 > 前にポートを "*クライアント アプリ*" の既知のポートで構成しなかった場合は、Azure portal で "*クライアント アプリ*" の登録に戻り、正しいポートでリダイレクト URI を更新します。
 

@@ -5,7 +5,7 @@ description: Blazor アプリで .NET メソッドから JavaScript 関数を呼
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/07/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 8a2df6ca55985a1cff49abb09113e49bfeae6829
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c22220871fdba7fea43c38fa4bc826c07135ffc
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400519"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060034"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -116,7 +117,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 
 ```razor
 @page "/JSInterop"
-@using BlazorSample.JsInteropClasses
+@using {APP ASSEMBLY}.JsInteropClasses
 @inject IJSRuntime JSRuntime
 
 <h1>JavaScript Interop</h1>
@@ -142,6 +143,8 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
     }
 }
 ```
+
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアプリ アセンブリ名です (例: `BlazorSample`)。
 
 1. コンポーネントの **`Trigger JavaScript Prompt`** ボタンを選択して `TriggerJsPrompt` を実行すると、`wwwroot/exampleJsInterop.js` ファイル内に指定した JavaScript `showPrompt` 関数が呼び出されます。
 1. `showPrompt` 関数は、ユーザー入力 (ユーザーの名前) を受け取ります。これは、HTML エンコードされ、コンポーネントに返されます。 コンポーネントにより、ユーザーの名前がローカル変数 `name` に格納されます。
@@ -290,7 +293,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorSample.Pages
+namespace {APP ASSEMBLY}.Pages
 {
     public partial class Index : 
         ComponentBase, IObservable<ElementReference>, IDisposable
@@ -367,6 +370,8 @@ namespace BlazorSample.Pages
 }
 ```
 
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアプリ アセンブリ名です (例: `BlazorSample`)。
+
 `Shared/SurveyPrompt.razor` (子コンポーネント):
 
 ```razor
@@ -396,7 +401,7 @@ namespace BlazorSample.Pages
 using System;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorSample.Shared
+namespace {APP ASSEMBLY}.Shared
 {
     public partial class SurveyPrompt : 
         ComponentBase, IObserver<ElementReference>, IDisposable
@@ -441,6 +446,8 @@ namespace BlazorSample.Shared
     }
 }
 ```
+
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアプリ アセンブリ名です (例: `BlazorSample`)。
 
 ## <a name="harden-js-interop-calls"></a>JS 相互運用呼び出しの強化
 

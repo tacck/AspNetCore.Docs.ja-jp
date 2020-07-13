@@ -4,7 +4,7 @@ author: RicoSuter
 description: このチュートリアルでは、Swagger を追加して、Web API アプリのドキュメントとヘルプ ページを生成する手順を説明します。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/07/2019
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,18 +14,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 815581bbee3169f04f1da67227f6fa8c7275071b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 66b8278e84df5ee56582254ebe2dc99ada98a9dc
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408813"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060307"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ
 
 作成者: [Christoph Nienaber](https://twitter.com/zuckerthoben) および [Rico Suter](https://blog.rsuter.com/)
 
-Web API を使用する場合、さまざまなメソッドを理解することは開発者にとって困難な場合があります。 [Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org/) とも呼ばれる) では、Web API の役立つドキュメントとヘルプ ページの生成に関する問題を解決します。 Swagger では、対話型のドキュメント、クライアント SDK の生成、API の発見可能性などの利点を提供します。
+Web API を使用する場合、さまざまなメソッドを理解することは開発者にとって困難な場合があります。 [Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org/) とも呼ばれる) では、Web API の役立つドキュメントとヘルプ ページの生成に関する問題が解決されます。 Swagger では、対話型のドキュメント、クライアント SDK の生成、API の発見可能性などの利点を提供します。
 
 この記事では、[Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) と [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger の実装を示します。
 
@@ -37,82 +37,99 @@ Web API を使用する場合、さまざまなメソッドを理解すること
 
 Swagger は、[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API を記述するために、言語に関係なく使える仕様です。 Swagger プロジェクトは、現在、OpenAPI と呼ばれている [OpenAPI イニシアティブ](https://www.openapis.org/)に寄贈されました。 どちらの名前も同様に使用できますが、OpenAPI の使用をお勧めします。 Open API では、実装 (ソース コード、ネットワーク アクセス、ドキュメント) に直接アクセスすることなく、コンピューターと人間の両方がサービスの機能を理解できます。 関連付けられていないサービスに接続するために必要な作業量を最小限にすることが 1 つの目標です。 もう 1 つの目標は、正確にサービスをドキュメント化するために必要な時間を減らすことです。
 
-## <a name="swagger-specification-swaggerjson"></a>Swagger 仕様 (swagger.json)
+## <a name="openapi-specification-openapijson"></a>OpenAPI の仕様 (openapi.json)
 
-Swagger フローの基本は、Swagger 仕様です&mdash;既定では、ドキュメントの名前は *swagger.json* です。 この仕様は、使用しているサービスに基づいて Swagger ツール チェーン (またはサード パーティによるその実装) によって生成されます。 ここでは API の機能と HTTP を使用してアクセスする方法について説明します。 これにより Swagger UI が駆動され、検出とクライアント コードの生成が行えるように、ツール チェーンによって使用されます。 簡略化された Swagger 仕様の例は次のとおりです。
+OpenAPI フローの基本は、OpenAPI の仕様です。既定では、ドキュメントの名前は *openapi.json* です。 それは、サービスに基づいて OpenAPI ツール チェーン (またはサード パーティによるその実装) によって生成されます。 ここでは API の機能と HTTP を使用してアクセスする方法について説明します。 これにより Swagger UI が駆動され、検出とクライアント コードの生成が行えるように、ツール チェーンによって使用されます。 簡略化された OpenAPI の仕様の例は次のとおりです。
 
 ```json
 {
-   "swagger": "2.0",
-   "info": {
-       "version": "v1",
-       "title": "API V1"
-   },
-   "basePath": "/",
-   "paths": {
-       "/api/Todo": {
-           "get": {
-               "tags": [
-                   "Todo"
-               ],
-               "operationId": "ApiTodoGet",
-               "consumes": [],
-               "produces": [
-                   "text/plain",
-                   "application/json",
-                   "text/json"
-               ],
-               "responses": {
-                   "200": {
-                       "description": "Success",
-                       "schema": {
-                           "type": "array",
-                           "items": {
-                               "$ref": "#/definitions/TodoItem"
-                           }
-                       }
-                   }
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Todo": {
+      "get": {
+        "tags": [
+          "Todo"
+        ],
+        "operationId": "ApiTodoGet",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ToDoItem"
+                  }
                 }
-           },
-           "post": {
-               ...
-           }
-       },
-       "/api/Todo/{id}": {
-           "get": {
-               ...
-           },
-           "put": {
-               ...
-           },
-           "delete": {
-               ...
-   },
-   "definitions": {
-       "TodoItem": {
-           "type": "object",
-            "properties": {
-                "id": {
-                    "format": "int64",
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "isComplete": {
-                    "default": false,
-                    "type": "boolean"
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ToDoItem"
+                  }
                 }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ToDoItem"
+                  }
+                }
+              }
             }
-       }
-   },
-   "securityDefinitions": {}
+          }
+        }
+      },
+      "post": {
+        …
+      }
+    },
+    "/api/Todo/{id}": {
+      "get": {
+        …
+      },
+      "put": {
+        …
+      },
+      "delete": {
+        …
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ToDoItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCompleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
 }
 ```
 
 ## <a name="swagger-ui"></a>Swagger UI
 
-[Swagger UI](https://swagger.io/swagger-ui/) では、生成された Swagger 仕様を使用して、サービスに関する情報を提供する Web ベースの UI を提供します。 ミドルウェアの登録呼び出しを使用して ASP.NET Core アプリでホストすることができるように、Swashbuckle と NSwag の両方に埋め込みバージョンの Swagger UI が含まれます。 Web UI は次のようになります。
+[Swagger UI](https://swagger.io/swagger-ui/) には、生成された OpenAPI の仕様を使用してサービスに関する情報が提供される Web ベースの UI が用意されています。 ミドルウェアの登録呼び出しを使用して ASP.NET Core アプリでホストすることができるように、Swashbuckle と NSwag の両方に埋め込みバージョンの Swagger UI が含まれます。 Web UI は次のようになります。
 
 ![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 

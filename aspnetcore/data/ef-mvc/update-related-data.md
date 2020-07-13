@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 59bf94f6818108f09e9af147559fc304f48936bc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401312"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060060"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>チュートリアル: 関連データを更新する - ASP.NET MVC と EF Core
 
@@ -143,7 +143,7 @@ HttpPost `Edit` メソッドを次のコードで置き換え、オフィスの�
 
 * `OfficeAssignment` ナビゲーション プロパティの一括読み込みを使用して、現在の Instructor エンティティをデータベースから取得します。 これは、HttpGet `Edit` メソッドで行ったのと同じです。
 
-* モデル バインダーからの値を使用して、取得した Instructor エンティティを更新します。 `TryUpdateModel` オーバーロードは、含めたいプロパティをホワイトリストに登録できるようにします。 これにより、[2 番目のチュートリアル](crud.md)で説明したように、過剰ポスティングを防止します。
+* モデル バインダーからの値を使用して、取得した Instructor エンティティを更新します。 `TryUpdateModel` オーバーロードでは、含めたいプロパティを宣言できるようになります。 これにより、[2 番目のチュートリアル](crud.md)で説明したように、過剰ポスティングを防止します。
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -211,7 +211,7 @@ Course エンティティと Instructor エンティティ間には、多対多�
 
 現在、メソッドの署名は HttpGet `Edit`メソッドとは異なっているため、メソッド名を `EditPost` から `Edit` に戻します。
 
-ビューには Course エンティティのコレクションがないため、モデル バインダーは `CourseAssignments` ナビゲーション プロパティを自動的に更新できません。 モデル バインダーを使用する代わりに、新しい `UpdateInstructorCourses` メソッドで `CourseAssignments` ナビゲーション プロパティを更新します。 そのため、モデル バインドから `CourseAssignments` プロパティを除外する必要があります。 これを行うために、`TryUpdateModel` を呼び出すコードを変更する必要はありません。これは、ホワイトリストのオーバーロードを使用していて、`CourseAssignments` がインクルード リスト内にないためです。
+ビューには Course エンティティのコレクションがないため、モデル バインダーは `CourseAssignments` ナビゲーション プロパティを自動的に更新できません。 モデル バインダーを使用する代わりに、新しい `UpdateInstructorCourses` メソッドで `CourseAssignments` ナビゲーション プロパティを更新します。 そのため、モデル バインドから `CourseAssignments` プロパティを除外する必要があります。 これを行うために、`TryUpdateModel` を呼び出すコードを変更する必要はありません。これは、明示的な承認を必要とするオーバーロードを使用していて、`CourseAssignments` がインクルード リスト内にないためです。
 
 チェック ボックスが選択されていない場合、`UpdateInstructorCourses` のコードは空のコレクションを使用して `CourseAssignments` ナビゲーション プロパティを初期化し、次を返します。
 

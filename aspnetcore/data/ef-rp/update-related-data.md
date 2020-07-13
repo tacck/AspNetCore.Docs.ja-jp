@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b084404a7fdd8b2fc18c407bd11705ccd1c496c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406304"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060138"
 ---
 # <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
 
@@ -158,7 +158,7 @@ Create、Edit、Details、Delete の各ページをテストします。
 
 `InstructorCoursesPageModel` は、Edit と Create のページ モデルに使用する基底クラスです。 `PopulateAssignedCourseData` は、`AssignedCourseDataList` に設定するためのすべての `Course` エンティティを読み取ります。 コースごとに、コードは `CourseID`、タイトル、およびインストラクターがコースに割り当てられているかどうかを設定します。 [HashSet](/dotnet/api/system.collections.generic.hashset-1) は効率的な検索のために使用されます。
 
-Razor ページには Course エンティティのコレクションがないため、モデル バインダーは `CourseAssignments` ナビゲーション プロパティを自動的に更新できません。 モデル バインダーを使用する代わりに、新しい `UpdateInstructorCourses` メソッドで `CourseAssignments` ナビゲーション プロパティを更新します。 そのため、モデル バインドから `CourseAssignments` プロパティを除外する必要があります。 これを行うために、`TryUpdateModel` を呼び出すコードを変更する必要はありません。これは、ホワイトリストのオーバーロードを使用していて、`CourseAssignments` がインクルード リスト内にないためです。
+Razor ページには Course エンティティのコレクションがないため、モデル バインダーは `CourseAssignments` ナビゲーション プロパティを自動的に更新できません。 モデル バインダーを使用する代わりに、新しい `UpdateInstructorCourses` メソッドで `CourseAssignments` ナビゲーション プロパティを更新します。 そのため、モデル バインドから `CourseAssignments` プロパティを除外する必要があります。 これを行うために、`TryUpdateModel` を呼び出すコードを変更する必要はありません。これは、プロパティが宣言されたオーバーロードを使用していて、`CourseAssignments` がインクルード リスト内にないためです。
 
 チェック ボックスが選択されていない場合、`UpdateInstructorCourses` のコードは空のコレクションを使用して `CourseAssignments` ナビゲーション プロパティを初期化し、次を返します。
 

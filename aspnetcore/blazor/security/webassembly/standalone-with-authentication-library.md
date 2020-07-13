@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: be87257c5f901e9b3d1ba6a8d7c6b811419c433f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 02960e6c7d70be3ea1be3ed9e2280e5b5847c926
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402196"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147674"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>認証ライブラリを使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する
 
@@ -27,15 +28,41 @@ ms.locfileid: "85402196"
 
 *Azure Active Directory (AAD) および Azure Active Directory B2C (AAD B2C) については、このトピックのガイダンスに従わず、この目次ノードの AAD および AAD B2C のトピックを参照してください。*
 
-[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) ライブラリを使用する Blazor WebAssembly スタンドアロン アプリを作成するには、コマンド シェルで次のコマンドを実行します。
+[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) ライブラリを使用する Blazor WebAssembly スタンドアロン アプリを作成するには、選択したツールのガイダンスに従ってください。
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+認証メカニズムを使用して新しい Blazor WebAssembly プロジェクトを作成するには:
+
+1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで **[Blazor WebAssembly アプリ]** テンプレートを選択した後、 **[認証]** の下の **[変更]** を選択します。
+
+1. ASP.NET Core の [Identity](xref:security/authentication/identity) システムを使用してアプリ内にユーザーを格納するには、 **[アプリ内のストア ユーザー アカウント]** オプションを使用して、 **[個人のユーザー アカウント]** を選択します。
+
+# <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code / .NET Core CLI](#tab/visual-studio-code+netcore-cli)
+
+空のフォルダーに、認証メカニズムを使用して新しい Blazor WebAssembly プロジェクトを作成します。 ASP.NET Core の [Identity](xref:security/authentication/identity) システムを使用してアプリ内にユーザーを格納するには、`-au|--auth` オプションを使用して `Individual` 認証メカニズムを指定します。
 
 ```dotnetcli
-dotnet new blazorwasm -au Individual
+dotnet new blazorwasm -au Individual -o {APP NAME}
 ```
 
-出力場所を指定するには、パスが含まれるコマンド (`-o BlazorSample` など) に出力オプションを含めます。出力場所としてプロジェクト フォルダーが存在しない場合は、作成されます。 また、フォルダー名は、プロジェクトの名前の一部となります。
+| プレースホルダー  | 例        |
+| ------------ | -------------- |
+| `{APP NAME}` | `BlazorSample` |
 
-Visual Studio で、[Blazor WebAssembly アプリを作成します](xref:blazor/get-started)。 **[アプリ内のストア ユーザー アカウント]** オプションで、 **[認証]** を **[個人のユーザー アカウント]** に設定します。
+`-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。
+
+詳細については、.NET Core ガイドの [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを参照してください。
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+認証メカニズムを使用して新しい Blazor WebAssembly プロジェクトを作成するには:
+
+1. **[新しい Blazor WebAssembly アプリの構成]** ステップで、 **[認証]** ドロップダウンから **[Individual Authentication (in-app)]\(個別認証 (アプリ内)\)** を選択します。
+
+1. ASP.NET Core の [Identity](xref:security/authentication/identity) を使用してアプリに格納されている個々のユーザーに対して、アプリが作成されます。
+
+---
 
 ## <a name="authentication-package"></a>認証パッケージ
 

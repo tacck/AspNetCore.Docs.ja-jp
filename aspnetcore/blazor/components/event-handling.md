@@ -5,7 +5,7 @@ description: イベント引数の型、イベントのコールバック、既�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 2fce394202be5df9af67e8afca27a0914f410402
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f15f7e0fc7ef460cefffd817a7d0fa40c1f919b2
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399037"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059800"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor のイベント処理
 
@@ -182,7 +183,7 @@ private void ShowMessage(MouseEventArgs e)
 * `ParentComponent` の `ShowMessage` メソッドが呼び出されます。 `messageText` が更新されて、`ParentComponent` に表示されます。
 * コールバックのメソッド (`ShowMessage`) 内に、[`StateHasChanged`](xref:blazor/components/lifecycle#state-changes) の呼び出しは必要ありません。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> は、子イベントが子の中で実行されるイベント ハンドラーでコンポーネントのレンダリングをトリガーするのと同様に、`ParentComponent` を再レンダリングするために自動的に呼び出されます。
 
-<xref:Microsoft.AspNetCore.Components.EventCallback> と <xref:Microsoft.AspNetCore.Components.EventCallback%601> では非同期デリゲートを使用できます。 <xref:Microsoft.AspNetCore.Components.EventCallback%601> は厳密に型指定され、特定の引数型を必要とします。 <xref:Microsoft.AspNetCore.Components.EventCallback> は弱く型指定され、どの引数型でも許されます。
+<xref:Microsoft.AspNetCore.Components.EventCallback> と <xref:Microsoft.AspNetCore.Components.EventCallback%601> では非同期デリゲートを使用できます。 <xref:Microsoft.AspNetCore.Components.EventCallback> は弱く型指定されており、`InvokeAsync(Object)` では任意の型の引数を渡すことができます。 <xref:Microsoft.AspNetCore.Components.EventCallback%601> は厳密に型指定されており、`InvokeAsync(T)` では `TValue` に代入可能な `T` 引数を渡す必要があります。
 
 ```razor
 <ChildComponent 
@@ -228,8 +229,6 @@ await OnClickCallback.InvokeAsync(arg);
 ```razor
 <input @onkeypress:preventDefault="shouldPreventDefault" />
 ```
-
-既定のアクションを止めるためにイベント ハンドラーは必要ありません。 イベント ハンドラーと、既定のアクションを止めるシナリオは、独立して使用できます。
 
 ## <a name="stop-event-propagation"></a>イベント伝達を停止する
 

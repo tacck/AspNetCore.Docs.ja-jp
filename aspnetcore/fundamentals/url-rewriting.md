@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: c41ba2e067c8dc978b1359db548733c5f8890a2b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dbdb7cd86218fd9ba63ae4ac2aa516836d4fd1a1
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408384"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944296"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core の URL リライト ミドルウェア
 
@@ -325,7 +325,7 @@ ASP.NET Core 2.x でリリースされたミドルウェアは、次の IIS URL 
 
 メソッド内で独自のルール ロジックを実装するには、<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> を使用します。 `Add` は <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> を公開し、メソッドで <xref:Microsoft.AspNetCore.Http.HttpContext> を使用できるようにします。 [RewriteContext.Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) は、追加のパイプライン処理の実行方法を決定します。 次の表で説明する <xref:Microsoft.AspNetCore.Rewrite.RuleResult> フィールドのいずれかに値を設定します。
 
-| `RewriteContext.Result`              | アクション                                                           |
+| コンテキストの書き換えの結果               | アクション                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `RuleResult.ContinueRules` (既定値) | ルールの適用を続けます。                                         |
 | `RuleResult.EndResponse`             | ルールの適用を停止し、応答を送信します。                       |
@@ -679,7 +679,7 @@ ASP.NET Core 2.x でリリースされたミドルウェアは、次の IIS URL 
 
 メソッド内で独自のルール ロジックを実装するには、<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> を使用します。 `Add` は <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> を公開し、メソッドで <xref:Microsoft.AspNetCore.Http.HttpContext> を使用できるようにします。 [RewriteContext.Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) は、追加のパイプライン処理の実行方法を決定します。 次の表で説明する <xref:Microsoft.AspNetCore.Rewrite.RuleResult> フィールドのいずれかに値を設定します。
 
-| `RewriteContext.Result`              | アクション                                                           |
+| コンテキストの書き換えの結果               | アクション                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `RuleResult.ContinueRules` (既定値) | ルールの適用を続けます。                                         |
 | `RuleResult.EndResponse`             | ルールの適用を停止し、応答を送信します。                       |

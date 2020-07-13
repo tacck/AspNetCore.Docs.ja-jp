@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor アプリで Razor コンポーネント ライ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 312a265dd251eadf876b4252e3d9f9858adcde1b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b9653356659700ae8396a01b38c04d59a86625f
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400987"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059891"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
@@ -173,6 +174,8 @@ protected override bool ShouldRender()
 ## <a name="state-changes"></a>状態変更
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> は、状態が変更されたことをコンポーネントに通知します。 必要に応じて、<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> を呼び出すと、コンポーネントが再レンダリングされます。
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> は、<xref:Microsoft.AspNetCore.Components.EventCallback> メソッドに対して自動的に呼び出されます。 詳細については、「<xref:blazor/components/event-handling#eventcallback>」を参照してください。
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>レンダリング時の不完全な非同期アクションを処理する
 

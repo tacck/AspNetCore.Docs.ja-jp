@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408878"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147775"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
 
@@ -103,14 +104,7 @@ ms.locfileid: "85408878"
 
 1. **Blazor WebAssembly アプリ** テンプレートを選択します。 **[次へ]** を選択します。
 
-   次の構成を確認します。
-
-   * **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されている
-   * **[認証]** が **[認証なし]** に設定されている
-
-   **[ASP.NET Core Hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。
-
-   **[次へ]** を選択します。
+1. **[認証]** に **[認証なし]** が設定されていることを確認します。 **[ASP.NET Core Hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。 **[次へ]** を選択します。
 
 1. **[プロジェクト名]** フィールドで、アプリに `BlazorSignalRApp` という名前を付けます。 **[作成]** を選択します。
 

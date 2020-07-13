@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 0e99e2e3e2dafae0c35d2cfe6903bf4f511f5dc1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e88a471a35e1c2be5f77407a6c594cd6a97e1737
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402885"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944368"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 依存関係の挿入
 
@@ -51,6 +52,12 @@ DI は、中央の場所で構成されたサービスにアクセスするた�
 `Program.cs` の `Main` メソッドで、アプリのサービス コレクション用のサービスを構成します。 次の例では、`MyDependency` の実装が `IMyDependency` に登録されます。
 
 ```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+
 public class Program
 {
     public static async Task Main(string[] args)
@@ -58,6 +65,9 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<IMyDependency, MyDependency>();
         builder.RootComponents.Add<App>("app");
+        
+        builder.Services.AddTransient(sp => 
+            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
         await builder.Build().RunAsync();
     }
@@ -74,6 +84,9 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
+        
+        builder.Services.AddTransient(sp => 
+            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
         var host = builder.Build();
 
@@ -95,6 +108,9 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
+        
+        builder.Services.AddTransient(sp => 
+            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
         var host = builder.Build();
 
@@ -112,13 +128,17 @@ public class Program
 新しいアプリを作成した後、`Startup.ConfigureServices` メソッドを調べます。
 
 ```csharp
+using Microsoft.Extensions.DependencyInjection;
+
+...
+
 public void ConfigureServices(IServiceCollection services)
 {
-    // Add custom services here
+    ...
 }
 ```
 
-<xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A> メソッドには、サービス記述子オブジェクト (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>) のリストである <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> が渡されます。 サービスは、サービス コレクションにサービス記述子を提供することによって追加されます。 次の例では、`IDataAccess` インターフェイスとその具象実装 `DataAccess` での概念を示します。
+<xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A> メソッドには、サービス記述子オブジェクト (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>) のリストである <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> が渡されます。 サービスは、`ConfigureServices` メソッドでサービス コレクションにサービス記述子を提供することによって追加されます。 次の例では、`IDataAccess` インターフェイスとその具象実装 `DataAccess` での概念を示します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -157,11 +177,13 @@ DI システムは、ASP.NET Core の DI システムが基になっています
 内部的には、生成されたプロパティ (`DataRepository`) によって、[`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性が使用されます。 通常、この属性を直接使用することはありません。 コンポーネントで基底クラスが必要であり、基底クラスで挿入されたプロパティも必要な場合は、[`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性を手動で追加します。
 
 ```csharp
+using Microsoft.AspNetCore.Components;
+
 public class ComponentBase : IComponent
 {
-    // DI works even if using the InjectAttribute in a component's base class.
     [Inject]
     protected IDataAccess DataRepository { get; set; }
+
     ...
 }
 ```
@@ -177,13 +199,11 @@ public class ComponentBase : IComponent
 
 ## <a name="use-di-in-services"></a>サービスで DI を使用する
 
-複雑なサービスでは、追加のサービスが必要になる場合があります。 前の例では、`DataAccess` で <xref:System.Net.Http.HttpClient> の既定のサービスが必要になる場合があります。 [`@inject`](xref:mvc/views/razor#inject) (または [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性) は、サービスでは使用できません。 代わりに、"*コンストラクター挿入*" を使用する必要があります。 サービスのコンストラクターにパラメーターを追加することによって、必要なサービスが追加されます。 DI では、サービスを作成するときに、コンストラクターで必要なサービスが認識され、それに応じてサービスが提供されます。
+複雑なサービスでは、追加のサービスが必要になる場合があります。 前の例では、`DataAccess` で <xref:System.Net.Http.HttpClient> の既定のサービスが必要になる場合があります。 [`@inject`](xref:mvc/views/razor#inject) (または [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) 属性) は、サービスでは使用できません。 代わりに、"*コンストラクター挿入*" を使用する必要があります。 サービスのコンストラクターにパラメーターを追加することによって、必要なサービスが追加されます。 DI では、サービスを作成するときに、コンストラクターで必要なサービスが認識され、それに応じてサービスが提供されます。 次の例では、コンストラクターは DI で <xref:System.Net.Http.HttpClient> を受け取ります。 <xref:System.Net.Http.HttpClient> は既定のサービスです。
 
 ```csharp
 public class DataAccess : IDataAccess
 {
-    // The constructor receives an HttpClient via dependency
-    // injection. HttpClient is a default service.
     public DataAccess(HttpClient client)
     {
         ...

@@ -14,11 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 0a47ed3338ebfbc5361a6082978d407543fb95c5
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: bf6375f8f63bb9db50c423706a48363f53e96549
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459780"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147668"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle と ASP.NET Core の概要
 
@@ -123,7 +124,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 
 前述の `UseSwaggerUI` メソッド呼び出しにより、[静的ファイル ミドルウェア](xref:fundamentals/static-files)が有効になります。 .NET Framework または .NET Core 1.x を対象とする場合は、[Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) NuGet パッケージをプロジェクトに追加します。
 
-アプリを起動し、`http://localhost:<port>/swagger/v1/swagger.json` に移動します。 [Swagger 仕様 (swagger.json)](xref:tutorials/web-api-help-pages-using-swagger#swagger-specification-swaggerjson) に基づき、エンドポイントについて説明するドキュメントが生成され、表示されます。
+アプリを起動し、`http://localhost:<port>/swagger/v1/swagger.json` に移動します。 [OpenAPI 仕様 (openapi.json)](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson) に基づき、エンドポイントについて説明するドキュメントが生成され、表示されます。
 
 Swagger UI は `http://localhost:<port>/swagger` にあります。 Swagger UI から API を探し、他のプログラムに組み込みます。
 

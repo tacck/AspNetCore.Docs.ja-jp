@@ -4,7 +4,7 @@ author: jamesnk
 description: ASP.NET Core で、GRPC-Web を使用してブラウザー アプリから呼び出しできるように、gRPC サービスを構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 06/29/2020
+ms.date: 06/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,11 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 05ff343f7116509128b7370a50bcfa3c67ffb9fe
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793507"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944243"
 ---
 # <a name="use-grpc-in-browser-apps"></a>ブラウザー アプリでの gRPC の使用
 
@@ -78,6 +79,15 @@ ASP.NET Core gRPC サービスで gRPC-Web を有効にするには:
 * `AddCors` を呼び出して CORS サービスを追加し、gRPC 固有のヘッダーを公開する CORS ポリシーを構成します。
 * `UseCors` を呼び出して、ルーティングの後かつエンドポイントの前に CORS ミドルウェアを追加します。
 * `endpoints.MapGrpcService<GreeterService>()` メソッドが `RequiresCors` で CORS をサポートすることを指定します。
+
+### <a name="grpc-web-and-streaming"></a>gRPC-Web とストリーミング
+
+従来の HTTP/2 による gRPC では、すべての方向でストリーミングがサポートされます。 gRPC-Web では、ストリーミングのサポートが制限されています。
+
+* gRPC-Web ブラウザー クライアントでは、クライアント ストリーミング メソッドと双方向ストリーミング メソッドの呼び出しはサポートされていません。
+* Azure App Service および IIS でホストされている ASP.NET Core gRPC サービスでは、双方向ストリーミングはサポートされていません。
+
+gRPC-Web を使用するときは、単項メソッドとサーバー ストリーミング メソッドのみを使用することをお勧めします。
 
 ## <a name="call-grpc-web-from-the-browser"></a>ブラウザーから gRPC-Web を呼び出す
 

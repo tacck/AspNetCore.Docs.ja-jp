@@ -5,7 +5,7 @@ description: Blazor でフォームとフィールドの検証シナリオを使
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 1ed87b4aa2519334d2339b500a615aa96ef4d57d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402963"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059865"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -302,7 +302,7 @@ public class Starship
 }
 ```
 
-## <a name="work-with-radio-buttons"></a>オプション ボタンの操作
+## <a name="radio-buttons"></a>ラジオ ボタン
 
 フォームでオプション ボタンを使用する場合、オプション ボタンはグループとして評価されるため、データ バインディングが他の要素と異なる方法で処理されます。 各オプション ボタンの値は固定ですが、オプション ボタン グループの値は、選択されたオプション ボタンの値です。 以下の例では、次のことを行っています。
 
@@ -390,6 +390,30 @@ public class Starship
 }
 ```
 
+## <a name="binding-select-element-options-to-c-object-null-values"></a>C# オブジェクトの `null` 値への `<select>` 要素オプションのバインド
+
+次の理由により、`<select>` 要素のオプション値を C# オブジェクトの `null` 値として表すよい方法はありません。
+
+* HTML 属性には `null` 値を設定できません。 HTML で `null` に最も近いのは、`<option>` 要素から HTML の `value` 属性を除去することです。
+* `value` 属性のない `<option>` を選択すると、ブラウザーではその `<option>` の要素の "*テキスト コンテンツ*" として値が扱われます。
+
+Blazor フレームワークでは、次の処理が必要になるため、既定の動作の抑制は試みられません。
+
+* フレームワークでの特殊なケースの回避策のチェーンの作成。
+* 現在のフレームワークの動作に対する破壊的変更。
+
+::: moniker range=">= aspnetcore-5.0"
+
+HTML で `null` に最も近いと思われるものは、"*空の文字列*" の `value` です。 Blazor フレームワークでは、`<select>` の値への双方向バインドに対する空の文字列変換として `null` が処理されます。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Blazor フレームワークでは、`<select>` の値への双方向バインドを試みるときに、`null` は空の文字列変換として自動的に処理されません。 詳細については、「[null 値への `<select>` のバインドの修正 (dotnet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221)」を参照してください。
+
+::: moniker-end
+
 ## <a name="validation-support"></a>検証のサポート
 
 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントは、データ注釈を使用した検証サポートをカスケードされた <xref:Microsoft.AspNetCore.Components.Forms.EditContext> にアタッチします。 データ注釈を使用した検証のサポートを有効にするには、この明示的なジェスチャが必要です。 データ注釈と異なる検証システムを使用するには、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> をカスタム実装に置き換えます。 参照ソース [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) での検査に、ASP.NET Core 実装を使用できます。 上記の参照ソースへのリンクからは、リポジトリの `master` ブランチが提供されます。このブランチは、ASP.NET Core の次回リリースのための製品単位の現行開発を表します。 別のリリースのブランチを選択するには、GitHub ブランチ セレクターを使用します (`release/3.1` など)。
@@ -421,6 +445,14 @@ Blazor は 2 種類の検証を実行します。
 
 <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessage%601> コンポーネントと <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> コンポーネントでは、任意の属性をサポートしています。 コンポーネント パラメーターに一致しない属性は、生成された `<div>` 要素または `<ul>` 要素に追加されます。
 
+アプリのスタイルシート (`wwwroot/css/app.css` または `wwwroot/css/site.css`) での検証メッセージのスタイルを制御します。 既定の `validation-message` クラスでは、検証メッセージのテキストの色が赤に設定されます。
+
+```css
+.validation-message {
+    color: red;
+}
+```
+
 ### <a name="custom-validation-attributes"></a>カスタム検証属性
 
 [カスタム検証属性](xref:mvc/models/validation#custom-attributes)を使用するときに、検証結果がフィールドに正しく関連付けられるようにするには、<xref:System.ComponentModel.DataAnnotations.ValidationResult> の作成時に検証コンテキストの <xref:System.ComponentModel.DataAnnotations.ValidationContext.MemberName> を渡します。
@@ -429,7 +461,7 @@ Blazor は 2 種類の検証を実行します。
 using System;
 using System.ComponentModel.DataAnnotations;
 
-private class MyCustomValidator : ValidationAttribute
+private class CustomValidator : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, 
         ValidationContext validationContext)
@@ -441,6 +473,9 @@ private class MyCustomValidator : ValidationAttribute
     }
 }
 ```
+
+> [!NOTE]
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> が `null`です。 `IsValid` メソッドでの検証に対する挿入サービスはサポートされていません。
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazor データ注釈検証パッケージ
 

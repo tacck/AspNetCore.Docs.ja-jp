@@ -5,7 +5,7 @@ description: Blazor アプリの再利用可能なレイアウト コンポー�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 06/23/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: f405bb655b2879bd546420d99ff645401ead92fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402521"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944233"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor レイアウト
 
@@ -80,6 +80,9 @@ Blazor アプリ テンプレートのいずれかに基づくアプリでは、
 `_Imports.razor` ファイルは、Razor ビューおよびページに対する [_ViewImports.cshtml ファイル](xref:mvc/views/layout#importing-shared-directives)に似ていますが、Razor コンポーネント ファイルに限定して適用されます。
 
 `_Imports.razor` にレイアウトを指定すると、ルーターの*既定のレイアウト*として指定されたレイアウトがオーバーライドされます。
+
+> [!WARNING]
+> Razor `@layout` ディレクティブをルート `_Imports.razor` ファイルに追加**しない**でください。アプリでレイアウトが無限ループになります。 既定のアプリ レイアウトを制御するには、`Router` コンポーネントでレイアウトを指定します。 詳細については、「[既定のレイアウト](#default-layout)」セクションを参照してください。
 
 ## <a name="nested-layouts"></a>入れ子になったレイアウト
 
