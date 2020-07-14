@@ -17,6 +17,7 @@ no-loc:
 uid: blazor/security/content-security-policy
 ms.openlocfilehash: 5c53ac64d3ae1b365b40c519eb119f913d58cad1
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402443"
@@ -35,7 +36,7 @@ CSP をアプリに適用するために、開発者は 1 つ以上の `Content-
 
 ポリシーは、ページの読み込み中にブラウザーによって評価されます。 ブラウザーによりページのソースが検査され、コンテンツ セキュリティ ディレクティブの要件を満たしているかどうかが判断されます。 リソースのポリシー ディレクティブが満たされていない場合、ブラウザーでリソースが読み込まれません。 たとえば、サードパーティのスクリプトを許可しないポリシーについて考えてみます。 ページの `src` 属性にサードパーティから発生した `<script>` タグが含まれている場合、ブラウザーによってスクリプトの読み込みが禁止されます。
 
-CSP は、Chrome、Edge、Firefox、Opera、Safari など、最新のデスクトップおよびモバイル ブラウザーのほとんどでサポートされています。 CSP は、Blazor アプリで推奨されています。
+CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新のデスクトップおよびモバイル ブラウザーのほとんどでサポートされています。 CSP は、Blazor アプリで推奨されています。
 
 ## <a name="policy-directives"></a>ポリシー ディレクティブ
 
