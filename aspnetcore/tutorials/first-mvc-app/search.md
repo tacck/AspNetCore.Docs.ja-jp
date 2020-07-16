@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 652ee8c4bfe8980eb09246720f9ddf1743021f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 65bf5e6b022699268f9e7e5677ea8632f1a489c7
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399050"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213132"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>パート 7、ASP.NET Core MVC アプリへの検索の追加
 
@@ -75,7 +75,7 @@ var movies = from m in _context.Movie
 
 *Views/Movies/Index.cshtml* ファイルを開き、以下の強調表示されている `<form>` マークアップを追加します。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
 
 HTML `<form>` タグでは[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)が使用されるため、フォームを送信するときに、フィルター文字列がムービー コントローラーの `Index` アクションに投稿されます。 変更内容を保存してから、フィルターをテストします。
 
@@ -101,7 +101,7 @@ HTML `<form>` タグでは[フォーム タグ ヘルパー](xref:mvc/views/work
 
 検索パラメーターが URL ではなく、要求本文にあるため、その検索情報をキャプチャして、ブックマークしたり、他のユーザーと共有したりすることはできません。 この問題を解決するには、*Views/Movies/Index. cshtml* ファイルに存在する要求が `HTTP GET` であることを指定します。
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
 ここで検索を送信すると、URL に検索クエリ文字列が含まれます。 `HttpPost Index` メソッドがある場合でも、検索時には `HttpGet Index` アクション メソッドにも移動します。
 

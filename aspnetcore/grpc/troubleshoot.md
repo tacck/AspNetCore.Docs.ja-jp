@@ -5,7 +5,7 @@ description: .NET Core で gRPC を使用している場合のエラーのトラ
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 9a3e7269db04b79146686668879bf47f1a7dd6af
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 385291ec6bb6719a5fade927fa9f599af8c94045
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400038"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176172"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core での gRPC のトラブルシューティング
 
@@ -135,13 +135,6 @@ GRPC クライアントでも、TLS を使用しないように構成する必�
 * gRPC ツール パッケージ [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) へのパッケージ参照。
 
 gRPC C# アセットの生成の詳細については、「<xref:grpc/basics>」を参照してください。
-
-既定で、`<Protobuf>` 参照によって、具象クライアントとサービス基本クラスが生成されます。 参照要素の `GrpcServices` 属性を使用して、C# アセットの生成を制限できます。 有効な `GrpcServices` オプションは次のとおりです。
-
-* `Both` (存在しない場合の既定値)
-* `Server`
-* `Client`
-* `None`
 
 gRPC サービスをホストしている ASP.NET Core Web アプリには、生成されたサービス基本クラスのみが必要です。
 

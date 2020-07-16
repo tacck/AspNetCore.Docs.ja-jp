@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408605"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212543"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
 
@@ -337,7 +337,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 *Students/Index.cshtml* のコードを次の強調表示されたコードに置き換えます。
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
 上記のコードでは次の操作が行われます。
 
@@ -393,7 +393,7 @@ Students インデックス ページにフィルターを追加するには
 
 *Pages/Students/Index.cshtml* で、次の強調表示されたコードを追加し、 **[検索]** ボタンと各種のクロムを追加します。
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
 前のコードは、`<form>` [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使用して、検索テキスト ボックスとボタンを追加します。 既定では、`<form>` タグ ヘルパーが POST を使用してフォーム データを送信します。 POST を使用すると、URL ではなく HTTP メッセージの本文でパラメーターが渡されます。 HTTP GET を使用すると、フォームのデータはクエリ文字列として URL で渡されます。 クエリ文字列を使用してデータを渡すことにより、ユーザーが URL にブックマークを設定できます。 アクションの結果として更新されない場合、[W3C のガイドライン](https://www.w3.org/2001/tag/doc/whenToUseGet.html)では、Get の使用が推奨されています。
 
@@ -471,15 +471,15 @@ http://localhost:5000/Students?SearchString=an
 
 *Students/Index.cshtml* 内のマークアップを更新する 変更が強調表示されています。
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
 列ヘッダー リンクは、ユーザーがフィルターの結果内で並べ替えられるように、クエリ文字列を使用して現在の検索文字列を `OnGetAsync` メソッドに渡します。
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
 
 タグ ヘルパーによってページング ボタンが表示されます。
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
 
 アプリを実行して [Students] ページに移動します。
 
@@ -525,7 +525,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 *Pages/About.cshtml* ファイルのコードを次のコードに置き換えます。
 
-[!code-html[](intro/samples/cu21/Pages/About.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/About.cshtml)]
 
 アプリを実行して [About] ページに移動します。 登録の日付ごとの学生の数が、テーブルに表示されます。
 

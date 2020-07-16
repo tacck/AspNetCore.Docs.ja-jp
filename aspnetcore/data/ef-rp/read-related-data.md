@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 14b28f04f4077cb5622858dad1bd18b81b198f3d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405797"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212651"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>パート 6、ASP.NET Core の Razor ページと EF Core - 関連データの読み込み
 
@@ -420,7 +420,7 @@ Course エンティティには、`Department` エンティティを含むナビ
 
 次の強調表示されているマークアップで *Pages/Courses/Index.cshtml* を更新します。
 
-[!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 スキャフォールディング コードに、次の変更が行われました。
 
@@ -515,7 +515,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
 
 次のマークアップを使用して *Pages/Instructors/Index.cshtml* を更新します。
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
 上記のマークアップは、次の変更を加えます。
 
@@ -595,7 +595,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
 
 *Pages/Instructors/Index.cshtml* Razor ページの末尾に次のマークアップを追加します。
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
 上記のマークアップは、インストラクターが選択されたときに、インストラクターに関連するコースのリストを表示します。
 
@@ -611,7 +611,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
 
 *Pages/Instructors/Index.cshtml* を更新します。 ファイルの末尾に次のマークアップを追加します。
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
 上記のマークアップは、選択したコースに登録されている受講者のリストを表示します。
 
