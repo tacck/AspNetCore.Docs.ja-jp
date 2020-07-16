@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: a22bc9f9156b671d7bf17b56b62e384a60b2568b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b473b8575a870b91d83e5494103d39486ef4fee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405264"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213050"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>パート 6: ASP.NET Core のコントローラーのメソッドとビュー
 
@@ -42,7 +42,7 @@ ms.locfileid: "85405264"
 
 **[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、*Views/Movies/Index.cshtml* ファイルで Core MVC アンカー タグ ヘルパーによって生成されます。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、Razor ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。 上のコードでは、`AnchorTagHelper` はコントローラーのアクション メソッドとルート ID から HTML の `href` 属性の値を動的に生成します。好みのブラウザーの **[ソースの表示]** または開発者ツールを使って、生成されたマークアップを確認してください。 生成された HTML の部分を以下に示します。
 
@@ -106,7 +106,7 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 `ValidateAntiForgeryToken` 属性は[リクエスト フォージェリを防ぐ](xref:security/anti-request-forgery)ために使われ、編集ビュー ファイル (*Views/Movies/Edit.cshtml*) で生成されるフォージェリ対策トークンとペアにされます。 編集ビュー ファイルは、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)でフォージェリ対策トークンを生成します。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
 [フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)で生成される非表示のフォージェリ対策トークンは、Movies コントローラーの `Edit` メソッドで `[ValidateAntiForgeryToken]` によって生成されるフォージェリ対策トークンと一致している必要があります。 詳しくは、[リクエスト フォージェリの対策に関する記事](xref:security/anti-request-forgery)をご覧ください。
 
@@ -116,7 +116,7 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 スキャフォールディング システムが編集ビューを作成したときは、そのシステムが `Movie` クラスを調べて、クラスの各プロパティの `<label>` および `<input>` 要素をレンダリングするコードを作成しました。 次の例では、Visual Studio のスキャフォールディング システムによって生成された編集ビューを示します。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
 
 ビュー テンプレートではファイルの先頭に `@model MvcMovie.Models.Movie` ステートメントがあることに注意してください。 `@model MvcMovie.Models.Movie` は、ビューがビュー テンプレートのモデルとして `Movie` 型を期待することを指定します。
 

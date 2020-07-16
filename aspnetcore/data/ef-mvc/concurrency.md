@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f6ee60bf5e75256a9bf330f56b2f09b06f720a85
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401559"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212797"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>チュートリアル: コンカレンシーの処理 - ASP.NET MVC と EF Core
 
@@ -148,7 +148,7 @@ dotnet ef database update
 
 *Views/Departments/Index.cshtml* のコードを次のコードに変更します。
 
-[!code-html[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
 これで見出しが "Departments" に変更され、RowVersion 列が削除され、管理者の名ではなく姓名が表示されます。
 
@@ -198,7 +198,7 @@ _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVer
 
 * ドロップダウン リストに "Select Administrator" オプションを追加します。
 
-[!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
 ## <a name="test-concurrency-conflicts"></a>コンカレンシーの競合をテストする
 
@@ -258,7 +258,7 @@ public async Task<IActionResult> Delete(Department department)
 
 *Views/Departments/Delete.cshtml* で、スキャフォールディングされたコードを次のコードで置き換えます。このコードは、DepartmentID プロパティと RowVersion プロパティのエラー メッセージ フィールドと非表示フィールドを追加します。 変更が強調表示されます。
 
-[!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 これにより、次の変更が行われます。
 
@@ -288,11 +288,11 @@ Details ビューと Create ビューで、スキャフォールディングさ�
 
 RowVersion 列を削除し、管理者の姓名を表示するように *Views/Departments/Details.cshtml* のコードを置換します。
 
-[!code-html[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
 
 ドロップダウン リストに Select オプションを追加するように *Views/Departments/Create.cshtml* のコードを置換します。
 
-[!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## <a name="get-the-code"></a>コードを取得する
 

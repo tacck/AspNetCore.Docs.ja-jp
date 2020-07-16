@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c33ff357ec6b467435325578047ac851a39e533e
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060125"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212721"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>チュートリアル: CRUD 機能を実装する - ASP.NET MVC と EF Core
 
@@ -102,11 +102,11 @@ Index ページでは、Razor ビューのタグ ヘルパーのステートメ�
 
 *Views/Students/Details.cshtml* を開きます。 次の例で示すように、`DisplayNameFor` および `DisplayFor` ヘルパーを使って各フィールドが表示されます。
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
 最後のフィールドの後、終了タグ `</dl>` の直前に、登録の一覧を表示する次のコードを追加します。
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
 
 コードを貼り付けた後でコードのインデントが乱れた場合は、Ctrl + D + K キーを押して修正します。
 
@@ -267,7 +267,7 @@ HttpPost の `Delete` アクション メソッド (名前は `DeleteConfirmed`)
 
 *Views/Student/Delete.cshtml* で、次の例に示すように、h2 見出しと h3 見出しの間にエラー メッセージを追加します。
 
-[!code-html[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
 アプリを実行し、 **[Students]** タブを選んで、 **[Delete]** ハイパーリンクをクリックします。
 

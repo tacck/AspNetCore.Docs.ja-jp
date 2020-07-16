@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 5a2d39af6c921323ae9113fd4aca27dcdedd44a5
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 26aef561ba299403df0dad9893fecd5e2a15ab0e
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793466"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213001"
 ---
 # <a name="net-generic-host"></a>.NET での汎用ホスト
 
@@ -649,7 +650,7 @@ var host = new HostBuilder()
 
 *hostsettings.json*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
 
 追加の構成は、[applicationName](#application-key-name) と [contentRoot](#content-root) キーで指定することができます。
 
@@ -669,15 +670,15 @@ var host = new HostBuilder()
 
 *appsettings.json*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
 *appsettings.Development.json*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
 
 *appsettings.Production.json*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
 
 設定ファイルを出力ディレクトリに移動するには、プロジェクト ファイルの設定ファイルを [MSBuild プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items) として指定します。 サンプル アプリはその JSON アプリ設定ファイルと、次の `<Content>` 項目を含む *hostsettings.json* を移動します。
 

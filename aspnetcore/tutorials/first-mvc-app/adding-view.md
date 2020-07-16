@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 841751ffb834f77184365c3022293dbadc9f6f2c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6a541e9633d3ecc2768744956c3b43d830b0b2b
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403535"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213123"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>パート 3、ASP.NET Core MVC アプリへのビューの追加
 
@@ -80,7 +80,7 @@ ms.locfileid: "85403535"
 
 *Views/HelloWorld/Index.cshtml* Razor ビュー ファイルを次の内容に置き換えます。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
 `https://localhost:{PORT}/HelloWorld` に移動します。 `HelloWorldController` の `Index` メソッドでは多くのことは行いませんでした。つまり、ステートメント `return View();` を実行し、メソッドでビュー テンプレート ファイルを使用して、ブラウザーへの応答をレンダリングするよう指定しただけです。 ビュー テンプレートのファイル名が指定されていないため、MVC では既定のビュー ファイルが使われました。 既定のビュー ファイルはメソッド (`Index`) と同じ名前なので、 */Views/HelloWorld/Index.cshtml* のビュー テンプレートが使われます。 次のイメージは、ビューにハード コーディングされた "Hello from our View Template!" という文字列を示しています。
 
@@ -96,7 +96,7 @@ ms.locfileid: "85403535"
 
 *Views/Shared/_Layout.cshtml* ファイルの内容を次のマークアップに置き換えます。 変更が強調表示されています。
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
 上記のマークアップでは、次の変更が加えられています。
 
@@ -125,7 +125,7 @@ ms.locfileid: "85403535"
 
 *Views/HelloWorld/Index.cshtml* ビュー ファイルのタイトルと `<h2>` 要素を次のように変更します。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
 
 タイトルと `<h2>` 要素は若干異なります。これにより、コードのどの部分によって表示が変更されるのかを確認できます。
 
@@ -161,7 +161,7 @@ ms.locfileid: "85403535"
 
 "Hello" `NumTimes` を表示する *Welcome.cshtml* ビュー テンプレートでループを作成します。 *Views/HelloWorld/Welcome.cshtml* の内容を次のコードに置き換えます。
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
 変更内容を保存し、次の URL を参照します。
 
@@ -237,7 +237,7 @@ ms.locfileid: "85403535"
 
 *Views/HelloWorld/Index.cshtml* Razor ビュー ファイルを次の内容に置き換えます。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
 `https://localhost:{PORT}/HelloWorld` に移動します。 `HelloWorldController` の `Index` メソッドでは多くのことは行いませんでした。つまり、ステートメント `return View();` を実行し、メソッドでビュー テンプレート ファイルを使用して、ブラウザーへの応答をレンダリングするよう指定しただけです。 ビュー テンプレートのファイル名が指定されていないため、MVC では既定のビュー ファイルが使われました。 既定のビュー ファイルはメソッド (`Index`) と同じ名前なので、 */Views/HelloWorld/Index.cshtml* が使われます。 次のイメージは、ビューにハード コーディングされた "Hello from our View Template!" という文字列を示しています。
 
@@ -256,7 +256,7 @@ ms.locfileid: "85403535"
 
 次のマークアップには、強調表示された変更点が示されています。
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
 
 上記のマークアップでは、このアプリで[領域](xref:mvc/controllers/areas)が使用されていないため、`asp-area` [アンカー タグ ヘルパー属性](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)は省略されました。
 
@@ -285,7 +285,7 @@ ms.locfileid: "85403535"
 
 *Views/HelloWorld/Index.cshtml* ビュー ファイルのタイトルと `<h2>` 要素を次のように変更します。
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
 
 タイトルと `<h2>` 要素は若干異なります。これにより、コードのどの部分によって表示が変更されるのかを確認できます。
 
@@ -321,7 +321,7 @@ ms.locfileid: "85403535"
 
 "Hello" `NumTimes` を表示する *Welcome.cshtml* ビュー テンプレートでループを作成します。 *Views/HelloWorld/Welcome.cshtml* の内容を次のコードに置き換えます。
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
 変更内容を保存し、次の URL を参照します。
 

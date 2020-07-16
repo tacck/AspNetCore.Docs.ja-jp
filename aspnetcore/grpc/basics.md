@@ -4,7 +4,7 @@ author: juntaoluo
 description: C# を使用した gRPC サービスを作成する際の基本的な概念について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 07/03/2019
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: 08c755cf078fe71d09e8c7af2cc16f5c427495f1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a99e5c78e291469bdce5c2b5cfa6eec86caa9735
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407292"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176295"
 ---
 # <a name="grpc-services-with-c"></a>C\# を使用した gRPC サービス
 
@@ -50,6 +50,13 @@ Protobuf ファイルの構文の詳細については、[公式ドキュメン�
 *\*.proto* ファイルは、`<Protobuf>` 項目グループにそれを追加することで、プロジェクトに含まれます。
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
+
+既定で、`<Protobuf>` 参照によって、具象クライアントとサービス基本クラスが生成されます。 参照要素の `GrpcServices` 属性を使用して、C# アセットの生成を制限できます。 有効な `GrpcServices` オプションは次のとおりです。
+
+* `Both` (存在しない場合の既定値)
+* `Server`
+* `Client`
+* `None`
 
 ## <a name="c-tooling-support-for-proto-files"></a>.proto ファイルに対する C# ツール サポート
 

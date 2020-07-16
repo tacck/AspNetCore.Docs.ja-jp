@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 45aabc644fbeaeaa31d534877ba93cb0611f3f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 24643931ed84ac257d98ceb8cc6c64d0767cfc14
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401338"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212591"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>チュートリアル: 並べ替え、フィルター処理、ページングを追加する - ASP.NET MVC と EF Core
 
@@ -78,7 +78,7 @@ Students ンデックス ページに並べ替えを追加するには、`Index`
 
 *Views/Students/Index.cshtml* のコードを次のコードに置き換え、列見出しのハイパーリンクを追加します。 変更された行は強調表示されています。
 
-[!code-html[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
 このコードは、`ViewData` プロパティ内の情報を使用して、適切なクエリ文字列使用含むハイパーリンクを設定します。
 
@@ -107,7 +107,7 @@ Students インデックス ページにフィルターを追加するには、�
 
 *Views/Student/Index.cshtml* で、キャプション、テキスト ボックス、 **[Search]** ボタンを作成するために、オープニング テーブル タグの直前に強調表示されたコードを追加します。
 
-[!code-html[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
 このコードは、`<form>` [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使用して、検索テキスト ボックスとボタンを追加します。 既定では、`<form>` タグ ヘルパーは、POST を使用してフォーム データを送信します。これは、パラメーターが、クエリ文字列として URL で渡されるのではなく、HTTP メッセージの本文で渡されることを意味します。 HTTP GET を指定すると、フォーム データがクエリ文字列として URL で渡され、ユーザーが URL をブックマークできるようになります。 アクションの結果として更新されない場合、W3C のガイドラインでは、Get の使用が推奨されます。
 
@@ -186,7 +186,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 *Views/Students/Index.cshtml* で、既存のコードを次のコードに置き換えます。 変更が強調表示されます。
 
-[!code-html[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
 ページの上部にある `@model` ステートメントは、ビューが `List<T>` オブジェクトの代わりに `PaginatedList<T>` オブジェクトを取得するようになったことを指定します。
 
@@ -250,7 +250,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 次のコードを含む *Views/Home/About.cshtml* ファイルを追加します。
 
-[!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Home/About.cshtml)]
 
 アプリを実行して [About] ページに移動します。 登録の日付ごとの学生の数が、テーブルに表示されます。
 

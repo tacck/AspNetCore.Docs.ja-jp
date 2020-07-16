@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: f2e989b2c6370d862b4d1e6550b09cb47b5747c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: abd5c4e474e30c119e2bea9e3cce3d2b277e0daf
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401520"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212743"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>チュートリアル: 関連データを読み取る - ASP.NET MVC と EF Core
 
@@ -83,7 +83,7 @@ Course エンティティには、コースが割り当てられている部門�
 
 *Views/Courses/Index.cshtml* を開いて、テンプレート コードを次のコードに置き換えます。 変更が強調表示されています。
 
-[!code-html[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 スキャフォールディング コードに、次の変更を行いました。
 
@@ -179,7 +179,7 @@ Index メソッドを次のコードに置き換えて、関連データの一�
 
 *Views/Instructors/Index.cshtml* で、テンプレート コードを次のコードに置き換えます。 変更が強調表示されています。
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
 
 既存のコードに次の変更を行いました。
 
@@ -221,7 +221,7 @@ Index メソッドを次のコードに置き換えて、関連データの一�
 
 *Views/Instructors/Index.cshtml* ファイルでは、テーブル要素を閉じた後に (ファイルの終わりに)、次のコードを追加します。 このコードでは、インストラクターが選択されたときに、インストラクターに関連するコースのリストを表示します。
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
 
 このコードでは、ビュー モデルの `Courses` プロパティを読み取り、コースのリストを表示します。 また、選択したコースの ID を `Index` アクション メソッドに送信する、**Select** ハイパーリンクも指定します。
 
@@ -231,7 +231,7 @@ Index メソッドを次のコードに置き換えて、関連データの一�
 
 追加したコード ブロックの後に、次のコードを追加します。 このコードは、コースを選択したときに、コースに登録されている受講者のリストを表示します。
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
 
 このコードは、コースに登録された受講生のリストを表示するために、ビュー モデルの Enrollments プロパティを読み取ります。
 
