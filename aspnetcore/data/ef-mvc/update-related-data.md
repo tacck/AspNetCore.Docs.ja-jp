@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 754ca2f94b1abde30ae650c9c3bcf00499520383
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060060"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212581"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>チュートリアル: 関連データを更新する - ASP.NET MVC と EF Core
 
@@ -87,19 +87,19 @@ Course の Details ページと Delete ページのパフォーマンスを最�
 
 *Views/Courses/Create.cshtml* で、 **[Department]\(部門\)** ドロップダウン リストに [Select Department]\(部門を選択\) オプションを追加し、キャプションを **[DepartmentID]** から **[Department]\(部門\)** に変更し、検証メッセージを追加します。
 
-[!code-html[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
 *Views/Courses/Edit.cshtml* で、*Create.cshtml* で行ったのと同じ変更を [Department]\(部門\) フィールドに加えます。
 
 また、*Views/Courses/Edit.cshtml* で、 **[Title]\(タイトル\)** フィールドの前にコース番号フィールドを追加します。 コース番号は主キーであるため表示されますが、変更することはできません。
 
-[!code-html[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
 Edit ビューには、コース番号の隠しフィールド (`<input type="hidden">`) が既にあります。 `<label>` タグ ヘルパーを追加しても、ユーザーが **[Edit]** ページで **[保存]** をクリックしたときに、ポストされたデータにコース番号が含まれないため、隠しフィールドの必要性はなくなりません。
 
 *Views/Courses/Delete.cshtml* で、上部にコース番号フィールドを追加し、部門 ID を部門名に変更します。
 
-[!code-html[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
 *Views/Courses/Details.cshtml* で、*Delete.cshtml* に行ったのと同じ変更を行います。
 
@@ -171,7 +171,7 @@ HttpPost `Edit` メソッドを次のコードで置き換え、オフィスの�
 
 *Views/Instructors/Edit.cshtml* で、オフィスの場所を編集するための新しいフィールドを、 **[Save]\(保存\)** ボタンの直前に追加します。
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
 アプリを実行し、 **[Instructors]\(インストラクター\)** タブを選択し、インストラクターで **[Edit]\(編集\)** をクリックします。 **[Office Location]\(オフィスの場所\)** を変更し、 **[Save]\(保存\)** をクリックします。
 
@@ -235,7 +235,7 @@ Course エンティティと Instructor エンティティ間には、多対多�
 > [!NOTE]
 > Visual Studio にコードを貼り付けると、改行がコードを分割するように変更される場合があります。 貼り付けた後でコードが変化している場合は、Ctrl + Z キーを 1 回押して、自動書式設定を元に戻してください。 これにより、改行がここに示されているように修正されます。 インデントは完璧である必要はありませんが、`@:</tr><tr>`、`@:<td>`、`@:</td>`、および `@:</tr>` の行は、示されているようにそれぞれ 1 行にする必要があります。そうしないと、ランタイム エラーが発生します。 新しいコードのブロックを選択して、Tab キーを 3 回押して、新しいコードと既存のコードを並べます。 この問題は、Visual Studio 2019 で修正されます。
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
 このコードは、3 つの列を含む HTML テーブルを作成します。 各列には、チェック ボックスとその後に続くキャプションがあります。キャプションは、コース番号とタイトルから構成されます。 チェック ボックスはすべて同じ名前 ("selectedCourses") を持ち、これらをグループとして扱うようにモデル バインダーに通知します。 各チェック ボックスの value 属性は `CourseID` の値に設定されます。 ページがポストされると、モデル バインダーは、選択されたチェック ボックスの `CourseID` 値のみで構成される配列をコントローラーに渡します。
 
@@ -299,7 +299,7 @@ public ICollection<CourseAssignment> CourseAssignments
 
 *Views/Instructor/Create.cshtml* で、オフィスの場所のテキスト ボックスとチェック ボックスを [Submit]\(送信\) ボタンの前のコースに追加します。 Edit ページの場合と同様に、[コードを貼り付けたときに Visual Studio がコードを再フォーマットする場合は、書式設定を修正します](#notepad)。
 
-[!code-html[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 
 アプリを実行し、インストラクターを作成して、テストします。
 

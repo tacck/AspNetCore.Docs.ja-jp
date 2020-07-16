@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: f756d9abfb92fd4d6d51d8762967ac2288b54b2a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0abb5e78e1971925c8e741386c65bdf71a0f0072
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405758"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407633"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API のエラーを処理する
 
@@ -290,11 +290,11 @@ Web API コントローラーでは、モデルの検証が失敗すると、MVC
 1. [ProblemDetailsFactory の実装](#implement-problemdetailsfactory)
 1. [ApiBehaviorOptions.ClientErrorMapping の使用](#use-apibehavioroptionsclienterrormapping)
 
-### <a name="implement-problemdetailsfactory"></a>ProblemDetailsFactory の実装
+### <a name="implement-problemdetailsfactory"></a>`ProblemDetailsFactory` を実装する
 
-MVC は、`Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` を使用して、<xref:Microsoft.AspNetCore.Mvc.ProblemDetails> と <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> のすべてのインスタンスを生成します。 これには、クライアント エラー応答および検証失敗エラー応答と、`Microsoft.AspNetCore.Mvc.ControllerBase.Problem` および <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> ヘルパー メソッドが含まれます。
+MVC は、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory?displayProperty=fullName> を使用して、<xref:Microsoft.AspNetCore.Mvc.ProblemDetails> と <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> のすべてのインスタンスを生成します。 これには、クライアント エラー応答および検証失敗エラー応答と、<xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A?displayProperty=nameWithType> および <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A?displayProperty=nameWithType> ヘルパー メソッドが含まれます。
 
-問題の詳しい応答をカスタマイズするには、`Startup.ConfigureServices`で `ProblemDetailsFactory` のカスタム実装を登録します。
+問題の詳しい応答をカスタマイズするには、`Startup.ConfigureServices`で <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory> のカスタム実装を登録します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)
