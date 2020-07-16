@@ -15,110 +15,110 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: fd2338f433e1651fb974c95b293eaa3fb2009046
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6a83695ff2a9ac7229d1d5086ed13594626476ee
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403106"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407659"
 ---
-# <a name="hosting-aspnet-core-images-with-docker-over-https"></a><span data-ttu-id="7debf-103">HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする</span><span class="sxs-lookup"><span data-stu-id="7debf-103">Hosting ASP.NET Core images with Docker over HTTPS</span></span>
+# <a name="hosting-aspnet-core-images-with-docker-over-https"></a><span data-ttu-id="a2abb-103">HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする</span><span class="sxs-lookup"><span data-stu-id="a2abb-103">Hosting ASP.NET Core images with Docker over HTTPS</span></span>
 
-<span data-ttu-id="7debf-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="7debf-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="a2abb-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="a2abb-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="7debf-105">[既定では、](/aspnet/core/security/enforcing-ssl)ASP.NET Core で HTTPS が使用されます。</span><span class="sxs-lookup"><span data-stu-id="7debf-105">ASP.NET Core uses [HTTPS by default](/aspnet/core/security/enforcing-ssl).</span></span> <span data-ttu-id="7debf-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS)は、信頼、id、および暗号化のための[証明書](https://en.wikipedia.org/wiki/Public_key_certificate)に依存します。</span><span class="sxs-lookup"><span data-stu-id="7debf-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS) relies on [certificates](https://en.wikipedia.org/wiki/Public_key_certificate) for trust, identity, and encryption.</span></span>
+<span data-ttu-id="a2abb-105">[既定では、](/aspnet/core/security/enforcing-ssl)ASP.NET Core で HTTPS が使用されます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-105">ASP.NET Core uses [HTTPS by default](/aspnet/core/security/enforcing-ssl).</span></span> <span data-ttu-id="a2abb-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS)は、信頼、id、および暗号化のための[証明書](https://en.wikipedia.org/wiki/Public_key_certificate)に依存します。</span><span class="sxs-lookup"><span data-stu-id="a2abb-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS) relies on [certificates](https://en.wikipedia.org/wiki/Public_key_certificate) for trust, identity, and encryption.</span></span>
 
-<span data-ttu-id="7debf-107">このドキュメントでは、HTTPS で事前に構築されたコンテナーイメージを実行する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="7debf-107">This document explains how to run pre-built container images with HTTPS.</span></span>
+<span data-ttu-id="a2abb-107">このドキュメントでは、HTTPS で事前に構築されたコンテナーイメージを実行する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="a2abb-107">This document explains how to run pre-built container images with HTTPS.</span></span>
 
-<span data-ttu-id="7debf-108">開発シナリオについては、「 [HTTPS 経由の Docker を使用した ASP.NET Core アプリケーションの開発](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7debf-108">See [Developing ASP.NET Core Applications with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) for development scenarios.</span></span>
+<span data-ttu-id="a2abb-108">開発シナリオについては、「 [HTTPS 経由の Docker を使用した ASP.NET Core アプリケーションの開発](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="a2abb-108">See [Developing ASP.NET Core Applications with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) for development scenarios.</span></span>
 
-<span data-ttu-id="7debf-109">このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce)以降の[docker クライアント](https://www.docker.com/products/docker)が必要です。</span><span class="sxs-lookup"><span data-stu-id="7debf-109">This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://www.docker.com/products/docker).</span></span>
+<span data-ttu-id="a2abb-109">このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce)以降の[docker クライアント](https://www.docker.com/products/docker)が必要です。</span><span class="sxs-lookup"><span data-stu-id="a2abb-109">This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://www.docker.com/products/docker).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="7debf-110">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="7debf-110">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="a2abb-110">[前提条件]</span><span class="sxs-lookup"><span data-stu-id="a2abb-110">Prerequisites</span></span>
 
-<span data-ttu-id="7debf-111">このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download)以降が必要です。</span><span class="sxs-lookup"><span data-stu-id="7debf-111">The [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download) or later is required for some of the instructions in this document.</span></span>
+<span data-ttu-id="a2abb-111">このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download)以降が必要です。</span><span class="sxs-lookup"><span data-stu-id="a2abb-111">The [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download) or later is required for some of the instructions in this document.</span></span>
 
-## <a name="certificates"></a><span data-ttu-id="7debf-112">証明書</span><span class="sxs-lookup"><span data-stu-id="7debf-112">Certificates</span></span>
+## <a name="certificates"></a><span data-ttu-id="a2abb-112">証明書</span><span class="sxs-lookup"><span data-stu-id="a2abb-112">Certificates</span></span>
 
-<span data-ttu-id="7debf-113">ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。</span><span class="sxs-lookup"><span data-stu-id="7debf-113">A certificate from a [certificate authority](https://wikipedia.org/wiki/Certificate_authority) is required for [production hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) for a domain.</span></span> <span data-ttu-id="7debf-114">[Let's Encrypt](https://letsencrypt.org/)は、無料の証明書を提供する証明機関です。</span><span class="sxs-lookup"><span data-stu-id="7debf-114">[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that offers free certificates.</span></span>
+<span data-ttu-id="a2abb-113">ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。</span><span class="sxs-lookup"><span data-stu-id="a2abb-113">A certificate from a [certificate authority](https://wikipedia.org/wiki/Certificate_authority) is required for [production hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) for a domain.</span></span> <span data-ttu-id="a2abb-114">[Let's Encrypt](https://letsencrypt.org/)は、無料の証明書を提供する証明機関です。</span><span class="sxs-lookup"><span data-stu-id="a2abb-114">[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that offers free certificates.</span></span>
 
-<span data-ttu-id="7debf-115">このドキュメントでは、事前に構築されたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用 `localhost` します。</span><span class="sxs-lookup"><span data-stu-id="7debf-115">This document uses [self-signed development certificates](https://en.wikipedia.org/wiki/Self-signed_certificate) for hosting pre-built images over `localhost`.</span></span> <span data-ttu-id="7debf-116">手順は、実稼働証明書の使用に似ています。</span><span class="sxs-lookup"><span data-stu-id="7debf-116">The instructions are similar to using production certificates.</span></span>
+<span data-ttu-id="a2abb-115">このドキュメントでは、事前に構築されたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用 `localhost` します。</span><span class="sxs-lookup"><span data-stu-id="a2abb-115">This document uses [self-signed development certificates](https://en.wikipedia.org/wiki/Self-signed_certificate) for hosting pre-built images over `localhost`.</span></span> <span data-ttu-id="a2abb-116">手順は、実稼働証明書の使用に似ています。</span><span class="sxs-lookup"><span data-stu-id="a2abb-116">The instructions are similar to using production certificates.</span></span>
 
-<span data-ttu-id="7debf-117">実稼働証明書の場合:</span><span class="sxs-lookup"><span data-stu-id="7debf-117">For production certs:</span></span>
+<span data-ttu-id="a2abb-117">実稼働証明書の場合:</span><span class="sxs-lookup"><span data-stu-id="a2abb-117">For production certs:</span></span>
 
-* <span data-ttu-id="7debf-118">`dotnet dev-certs`ツールは必要ありません。</span><span class="sxs-lookup"><span data-stu-id="7debf-118">The `dotnet dev-certs` tool is not required.</span></span>
-* <span data-ttu-id="7debf-119">手順で使用した場所に証明書を保存する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="7debf-119">Certificates do not need to be stored in the location used in the instructions.</span></span> <span data-ttu-id="7debf-120">任意の場所を使用できますが、証明書をサイトディレクトリ内に格納することはお勧めしません。</span><span class="sxs-lookup"><span data-stu-id="7debf-120">Any location should work, although storing certs within your site directory is not recommended.</span></span>
+* <span data-ttu-id="a2abb-118">`dotnet dev-certs`ツールは必要ありません。</span><span class="sxs-lookup"><span data-stu-id="a2abb-118">The `dotnet dev-certs` tool is not required.</span></span>
+* <span data-ttu-id="a2abb-119">手順で使用した場所に証明書を保存する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="a2abb-119">Certificates do not need to be stored in the location used in the instructions.</span></span> <span data-ttu-id="a2abb-120">任意の場所を使用できますが、証明書をサイトディレクトリ内に格納することはお勧めしません。</span><span class="sxs-lookup"><span data-stu-id="a2abb-120">Any location should work, although storing certs within your site directory is not recommended.</span></span>
 
-<span data-ttu-id="7debf-121">次のセクションに記載されている手順では、Docker のコマンドラインオプションを使用して証明書をコンテナーにマウントし `-v` ます。</span><span class="sxs-lookup"><span data-stu-id="7debf-121">The instructions contained in the following section volume mount certificates into containers using Docker's `-v` command-line option.</span></span> <span data-ttu-id="7debf-122">Dockerfile でコマンドを使用してコンテナーイメージに証明書を追加することもでき `COPY` ますが、この方法はお勧めしません。 *Dockerfile*</span><span class="sxs-lookup"><span data-stu-id="7debf-122">You could add certificates into container images with a `COPY` command in a *Dockerfile*, but it's not recommended.</span></span> <span data-ttu-id="7debf-123">証明書をイメージにコピーすることは、次の理由から推奨されません。</span><span class="sxs-lookup"><span data-stu-id="7debf-123">Copying certificates into an image isn't recommended for the following reasons:</span></span>
+<span data-ttu-id="a2abb-121">次のセクションに記載されている手順では、Docker のコマンドラインオプションを使用して証明書をコンテナーにマウントし `-v` ます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-121">The instructions contained in the following section volume mount certificates into containers using Docker's `-v` command-line option.</span></span> <span data-ttu-id="a2abb-122">Dockerfile でコマンドを使用してコンテナーイメージに証明書を追加することもでき `COPY` ますが、この方法はお勧めしません。 *Dockerfile*</span><span class="sxs-lookup"><span data-stu-id="a2abb-122">You could add certificates into container images with a `COPY` command in a *Dockerfile*, but it's not recommended.</span></span> <span data-ttu-id="a2abb-123">証明書をイメージにコピーすることは、次の理由から推奨されません。</span><span class="sxs-lookup"><span data-stu-id="a2abb-123">Copying certificates into an image isn't recommended for the following reasons:</span></span>
 
-* <span data-ttu-id="7debf-124">開発者の証明書を使用したテストで同じイメージを使用するのは困難です。</span><span class="sxs-lookup"><span data-stu-id="7debf-124">It makes difficult to use the same image for testing with developer certificates.</span></span>
-* <span data-ttu-id="7debf-125">実稼働証明書を使用してホストする場合、同じイメージを使用するのは困難です。</span><span class="sxs-lookup"><span data-stu-id="7debf-125">It makes difficult to use the same image for Hosting with production certificates.</span></span>
-* <span data-ttu-id="7debf-126">証明書の公開には大きなリスクがあります。</span><span class="sxs-lookup"><span data-stu-id="7debf-126">There is significant risk of certificate disclosure.</span></span>
+* <span data-ttu-id="a2abb-124">開発者の証明書を使用したテストで同じイメージを使用するのは困難です。</span><span class="sxs-lookup"><span data-stu-id="a2abb-124">It makes difficult to use the same image for testing with developer certificates.</span></span>
+* <span data-ttu-id="a2abb-125">実稼働証明書を使用してホストする場合、同じイメージを使用するのは困難です。</span><span class="sxs-lookup"><span data-stu-id="a2abb-125">It makes difficult to use the same image for Hosting with production certificates.</span></span>
+* <span data-ttu-id="a2abb-126">証明書の公開には大きなリスクがあります。</span><span class="sxs-lookup"><span data-stu-id="a2abb-126">There is significant risk of certificate disclosure.</span></span>
 
-## <a name="running-pre-built-container-images-with-https"></a><span data-ttu-id="7debf-127">HTTPS を使用した既成のコンテナーイメージの実行</span><span class="sxs-lookup"><span data-stu-id="7debf-127">Running pre-built container images with HTTPS</span></span>
+## <a name="running-pre-built-container-images-with-https"></a><span data-ttu-id="a2abb-127">HTTPS を使用した既成のコンテナーイメージの実行</span><span class="sxs-lookup"><span data-stu-id="a2abb-127">Running pre-built container images with HTTPS</span></span>
 
-<span data-ttu-id="7debf-128">オペレーティングシステムの構成については、次の手順に従います。</span><span class="sxs-lookup"><span data-stu-id="7debf-128">Use the following instructions for your operating system configuration.</span></span>
+<span data-ttu-id="a2abb-128">オペレーティングシステムの構成については、次の手順に従います。</span><span class="sxs-lookup"><span data-stu-id="a2abb-128">Use the following instructions for your operating system configuration.</span></span>
 
-### <a name="windows-using-linux-containers"></a><span data-ttu-id="7debf-129">Linux コンテナーを使用した Windows</span><span class="sxs-lookup"><span data-stu-id="7debf-129">Windows using Linux containers</span></span>
+### <a name="windows-using-linux-containers"></a><span data-ttu-id="a2abb-129">Linux コンテナーを使用した Windows</span><span class="sxs-lookup"><span data-stu-id="a2abb-129">Windows using Linux containers</span></span>
 
-<span data-ttu-id="7debf-130">証明書を生成してローカルコンピューターを構成する:</span><span class="sxs-lookup"><span data-stu-id="7debf-130">Generate certificate and configure local machine:</span></span>
+<span data-ttu-id="a2abb-130">証明書を生成してローカルコンピューターを構成する:</span><span class="sxs-lookup"><span data-stu-id="a2abb-130">Generate certificate and configure local machine:</span></span>
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="7debf-131">上記のコマンドで、を `{ password here }` パスワードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="7debf-131">In the preceding commands, replace `{ password here }` with a password.</span></span>
+<span data-ttu-id="a2abb-131">上記のコマンドで、を `{ password here }` パスワードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-131">In the preceding commands, replace `{ password here }` with a password.</span></span>
 
-<span data-ttu-id="7debf-132">コマンドシェルで HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。</span><span class="sxs-lookup"><span data-stu-id="7debf-132">Run the container image with ASP.NET Core configured for HTTPS in a command shell:</span></span>
+<span data-ttu-id="a2abb-132">コマンドシェルで HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。</span><span class="sxs-lookup"><span data-stu-id="a2abb-132">Run the container image with ASP.NET Core configured for HTTPS in a command shell:</span></span>
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-<span data-ttu-id="7debf-133">[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。</span><span class="sxs-lookup"><span data-stu-id="7debf-133">When using [PowerShell](/powershell/scripting/overview), replace `%USERPROFILE%` with `$env:USERPROFILE`.</span></span>
+<span data-ttu-id="a2abb-133">[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-133">When using [PowerShell](/powershell/scripting/overview), replace `%USERPROFILE%` with `$env:USERPROFILE`.</span></span>
 
-<span data-ttu-id="7debf-134">パスワードは、証明書に使用されているパスワードと一致している必要があります。</span><span class="sxs-lookup"><span data-stu-id="7debf-134">The password must match the password used for the certificate.</span></span>
+<span data-ttu-id="a2abb-134">パスワードは、証明書に使用されているパスワードと一致している必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2abb-134">The password must match the password used for the certificate.</span></span>
 
-### <a name="macos-or-linux"></a><span data-ttu-id="7debf-135">macOS または Linux</span><span class="sxs-lookup"><span data-stu-id="7debf-135">macOS or Linux</span></span>
+### <a name="macos-or-linux"></a><span data-ttu-id="a2abb-135">macOS または Linux</span><span class="sxs-lookup"><span data-stu-id="a2abb-135">macOS or Linux</span></span>
 
-<span data-ttu-id="7debf-136">証明書を生成してローカルコンピューターを構成する:</span><span class="sxs-lookup"><span data-stu-id="7debf-136">Generate certificate and configure local machine:</span></span>
+<span data-ttu-id="a2abb-136">証明書を生成してローカルコンピューターを構成する:</span><span class="sxs-lookup"><span data-stu-id="a2abb-136">Generate certificate and configure local machine:</span></span>
 
 ```dotnetcli
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="7debf-137">`dotnet dev-certs https --trust`は、macOS と Windows でのみサポートされています。</span><span class="sxs-lookup"><span data-stu-id="7debf-137">`dotnet dev-certs https --trust` is only supported on macOS and Windows.</span></span> <span data-ttu-id="7debf-138">ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。</span><span class="sxs-lookup"><span data-stu-id="7debf-138">You need to trust certs on Linux in the way that is supported by your distro.</span></span> <span data-ttu-id="7debf-139">ブラウザーで証明書を信頼する必要があると考えられます。</span><span class="sxs-lookup"><span data-stu-id="7debf-139">It is likely that you need to trust the certificate in your browser.</span></span>
+<span data-ttu-id="a2abb-137">`dotnet dev-certs https --trust`は、macOS と Windows でのみサポートされています。</span><span class="sxs-lookup"><span data-stu-id="a2abb-137">`dotnet dev-certs https --trust` is only supported on macOS and Windows.</span></span> <span data-ttu-id="a2abb-138">ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2abb-138">You need to trust certs on Linux in the way that is supported by your distribution.</span></span> <span data-ttu-id="a2abb-139">ブラウザーで証明書を信頼する必要があると考えられます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-139">It is likely that you need to trust the certificate in your browser.</span></span>
 
-<span data-ttu-id="7debf-140">上記のコマンドで、を `{ password here }` パスワードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="7debf-140">In the preceding commands, replace `{ password here }` with a password.</span></span>
+<span data-ttu-id="a2abb-140">上記のコマンドで、を `{ password here }` パスワードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-140">In the preceding commands, replace `{ password here }` with a password.</span></span>
 
-<span data-ttu-id="7debf-141">HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。</span><span class="sxs-lookup"><span data-stu-id="7debf-141">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
+<span data-ttu-id="a2abb-141">HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。</span><span class="sxs-lookup"><span data-stu-id="a2abb-141">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v ${HOME}/.aspnet/https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-<span data-ttu-id="7debf-142">パスワードは、証明書に使用されているパスワードと一致している必要があります。</span><span class="sxs-lookup"><span data-stu-id="7debf-142">The password must match the password used for the certificate.</span></span>
+<span data-ttu-id="a2abb-142">パスワードは、証明書に使用されているパスワードと一致している必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2abb-142">The password must match the password used for the certificate.</span></span>
 
-### <a name="windows-using-windows-containers"></a><span data-ttu-id="7debf-143">Windows コンテナーを使用した windows</span><span class="sxs-lookup"><span data-stu-id="7debf-143">Windows using Windows containers</span></span>
+### <a name="windows-using-windows-containers"></a><span data-ttu-id="a2abb-143">Windows コンテナーを使用した windows</span><span class="sxs-lookup"><span data-stu-id="a2abb-143">Windows using Windows containers</span></span>
 
-<span data-ttu-id="7debf-144">証明書を生成してローカルコンピューターを構成する:</span><span class="sxs-lookup"><span data-stu-id="7debf-144">Generate certificate and configure local machine:</span></span>
+<span data-ttu-id="a2abb-144">証明書を生成してローカルコンピューターを構成する:</span><span class="sxs-lookup"><span data-stu-id="a2abb-144">Generate certificate and configure local machine:</span></span>
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="7debf-145">上記のコマンドで、を `{ password here }` パスワードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="7debf-145">In the preceding commands, replace `{ password here }` with a password.</span></span> <span data-ttu-id="7debf-146">[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。</span><span class="sxs-lookup"><span data-stu-id="7debf-146">When using [PowerShell](/powershell/scripting/overview), replace `%USERPROFILE%` with `$env:USERPROFILE`.</span></span>
+<span data-ttu-id="a2abb-145">上記のコマンドで、を `{ password here }` パスワードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-145">In the preceding commands, replace `{ password here }` with a password.</span></span> <span data-ttu-id="a2abb-146">[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-146">When using [PowerShell](/powershell/scripting/overview), replace `%USERPROFILE%` with `$env:USERPROFILE`.</span></span>
 
-<span data-ttu-id="7debf-147">HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。</span><span class="sxs-lookup"><span data-stu-id="7debf-147">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
+<span data-ttu-id="a2abb-147">HTTPS 用に構成された ASP.NET Core でコンテナーイメージを実行します。</span><span class="sxs-lookup"><span data-stu-id="a2abb-147">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=\https\aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:C:\https\ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-<span data-ttu-id="7debf-148">パスワードは、証明書に使用されているパスワードと一致している必要があります。</span><span class="sxs-lookup"><span data-stu-id="7debf-148">The password must match the password used for the certificate.</span></span> <span data-ttu-id="7debf-149">[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。</span><span class="sxs-lookup"><span data-stu-id="7debf-149">When using [PowerShell](/powershell/scripting/overview), replace `%USERPROFILE%` with `$env:USERPROFILE`.</span></span>
+<span data-ttu-id="a2abb-148">パスワードは、証明書に使用されているパスワードと一致している必要があります。</span><span class="sxs-lookup"><span data-stu-id="a2abb-148">The password must match the password used for the certificate.</span></span> <span data-ttu-id="a2abb-149">[PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。</span><span class="sxs-lookup"><span data-stu-id="a2abb-149">When using [PowerShell](/powershell/scripting/overview), replace `%USERPROFILE%` with `$env:USERPROFILE`.</span></span>
