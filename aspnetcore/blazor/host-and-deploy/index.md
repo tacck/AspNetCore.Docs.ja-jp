@@ -5,7 +5,7 @@ description: Blazor アプリをホストおよび展開する方法を説明し
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 040f9560bd51841063ca2785b0c0730c6bb16002
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 77202cd60d357c27237cdb925e0adc00e66d2e56
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402651"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407711"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor のホストと展開
 
@@ -106,6 +106,20 @@ dotnet run --pathbase=/CoolApp
 ```
 
 Blazor WebAssembly アプリは、`http://localhost:port/CoolApp` でローカルに応答します。
+
+**Blazor Server `MapFallbackToPage` の構成**
+
+`Startup.Configure` で <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> に次のパスを渡します。
+
+```csharp
+endpoints.MapFallbackToPage("/{RELATIVE PATH}/{**path:nonfile}");
+```
+
+`{RELATIVE PATH}` プレースホルダーは、サーバー上の非ルート パスです。 たとえば、アプリの非ルート URL が `https://{HOST}:{PORT}/CoolApp/`) の場合、`CoolApp` がプレースホルダー セグメントです。
+
+```csharp
+endpoints.MapFallbackToPage("/CoolApp/{**path:nonfile}");
+```
 
 ## <a name="deployment"></a>配置
 

@@ -5,7 +5,7 @@ description: データへのバインド、イベントの処理、コンポー�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 07/14/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 23aab2504368559b8d3dd21b3c0896ffc3348e2f
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c444b331f44382db885a8bac33b46dac8505dd20
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059819"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407685"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -280,6 +280,29 @@ namespace BlazorSample
 `Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=7-8)]
+
+Blazor による子コンテンツのレンダリング方法により、`for` ループ内のコンポーネントのレンダリングでは、インクリメントするループ変数が子コンポーネントのコンテンツ内で使用されている場合、ローカル インデックス変数が必要になります。
+>
+> ```razor
+> @for (int c = 0; c < 10; c++)
+> {
+>     var current = c;
+>     <ChildComponent Param1="@c">
+>         Child Content: Count: @current
+>     </ChildComponent>
+> }
+> ```
+>
+> または、<xref:System.Linq.Enumerable.Range%2A?displayProperty=nameWithType> と共に `foreach` ループを使用します。
+>
+> ```razor
+> @foreach(var c in Enumerable.Range(0,10))
+> {
+>     <ChildComponent Param1="@c">
+>         Child Content: Count: @c
+>     </ChildComponent>
+> }
+> ```
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>属性スプラッティングと任意のパラメーター
 
