@@ -4,7 +4,7 @@ author: blowdart
 description: IIS および HTTP.sys の ASP.NET Core で証明書認証を構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 01/02/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 493046e288c6b1ccd8e41f15a8e6e532a10a4adc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403197"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445126"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -36,15 +36,42 @@ ms.locfileid: "85403197"
 
 プロキシとロードバランサーを使用する環境での証明書認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
 
-## <a name="get-started"></a>はじめに
+## <a name="get-started"></a>作業開始
 
 HTTPS 証明書を取得して適用し、証明書を要求するように[サーバーを構成](#configure-your-server-to-require-certificates)します。
 
-Web アプリで、パッケージへの参照を追加し `Microsoft.AspNetCore.Authentication.Certificate` ます。 次に、 `Startup.ConfigureServices` メソッドで、オプションを指定してを呼び出し `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 、 `OnCertificateValidated` 要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換 `ClaimsPrincipal` し、プロパティに設定し `context.Principal` ます。
+Web アプリで、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Certificate)パッケージへの参照を追加します。 次に、 `Startup.ConfigureServices` メソッドで、オプションを指定してを呼び出し `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 、 `OnCertificateValidated` 要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換 `ClaimsPrincipal` し、プロパティに設定し `context.Principal` ます。
 
 認証が失敗した場合、このハンドラーは、 `403 (Forbidden)` 予期したとおりに応答を返し `401 (Unauthorized)` ます。 これは、最初の TLS 接続中に認証が行われるということです。 ハンドラーに到達するまでには遅すぎます。 匿名接続から証明書を使用して接続をアップグレードする方法はありません。
 
 また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 次に例を示します。
+
+::: moniker range=">= aspnetcore-5.0"
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate()
+        // Adding an ICertificateValidationCache results in certificate auth caching the results.
+        // The default implementation uses a memory cache.
+        .AddCertificateCache();
+
+    // All other service configuration
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseAuthentication();
+
+    // All other app configuration
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -52,16 +79,19 @@ public void ConfigureServices(IServiceCollection services)
     services.AddAuthentication(
         CertificateAuthenticationDefaults.AuthenticationScheme)
         .AddCertificate();
-    // All the other service configuration.
+
+    // All other service configuration
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     app.UseAuthentication();
 
-    // All the other app configuration.
+    // All other app configuration
 }
 ```
+
+::: moniker-end
 
 前の例では、証明書認証を追加する既定の方法を示しています。 ハンドラーは、共通の証明書のプロパティを使用してユーザープリンシパルを構築します。
 
@@ -343,7 +373,7 @@ namespace AspNetCoreCertificateAuthApi
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-the-httpclienthandler"></a>証明書と HttpClientHandler を使用して HttpClient を実装する
 
-HttpClientHandler は、HttpClient クラスのコンストラクターに直接追加できます。 HttpClient のインスタンスを作成するときは注意が必要です。 HttpClient は、要求ごとに証明書を送信します。
+は、 `HttpClientHandler` クラスのコンストラクターに直接追加でき `HttpClient` ます。 のインスタンスを作成するときは注意が必要 `HttpClient` です。 次に、は、 `HttpClient` 要求ごとに証明書を送信します。
 
 ```csharp
 private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
@@ -372,7 +402,7 @@ private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-a-named-httpclient-from-ihttpclientfactory"></a>IHttpClientFactory から証明書と名前付き HttpClient を使用して HttpClient を実装する 
 
-次の例では、ハンドラーから ClientCertificates プロパティを使用して、クライアント証明書を HttpClientHandler に追加しています。 このハンドラーは、HttpClient の名前付きインスタンスで ConfigurePrimaryHttpMessageHandler メソッドを使用して使用できます。 これは、ConfigureServices メソッドの Startup クラスに設定されています。
+次の例では、 `HttpClientHandler` ハンドラーのプロパティを使用して、クライアント証明書をに追加し `ClientCertificates` ます。 このハンドラーは、 `HttpClient` メソッドを使用して、の名前付きインスタンスで使用でき `ConfigurePrimaryHttpMessageHandler` ます。 次のように設定されてい `Startup.ConfigureServices` ます。
 
 ```csharp
 var clientCertificate = 
@@ -387,7 +417,7 @@ services.AddHttpClient("namedClient", c =>
 }).ConfigurePrimaryHttpMessageHandler(() => handler);
 ```
 
-IHttpClientFactory を使用すると、ハンドラーと証明書を使用して名前付きインスタンスを取得できます。 インスタンスを取得するには、Startup クラスで定義されているクライアントの名前を持つ CreateClient メソッドを使用します。 HTTP 要求は、クライアントを使用して必要に応じて送信できます。
+その後、を使用して、 `IHttpClientFactory` ハンドラーと証明書を使用して名前付きインスタンスを取得できます。 `CreateClient` `Startup` インスタンスを取得するには、クラスで定義されているクライアントの名前を持つメソッドを使用します。 HTTP 要求は、クライアントを使用して必要に応じて送信できます。
 
 ```csharp
 private readonly IHttpClientFactory _clientFactory;
@@ -562,12 +592,43 @@ namespace AspNetCoreCertificateAuthApi
 
 <a name="occ"></a>
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="certificate-validation-caching"></a>証明書の検証キャッシュ
+
+ASP.NET Core 5.0 以降のバージョンでは、検証結果のキャッシュを有効にする機能がサポートされています。 キャッシュは、検証がコストのかかる操作であるため、証明書の認証のパフォーマンスを大幅に向上させます。
+
+既定では、証明書の認証によってキャッシュが無効になります。 キャッシュを有効にするには、 `AddCertificateCache` 次のようにを呼び出し `Startup.ConfigureServices` ます。
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+            .AddCertificate()
+            .AddCertificateCache(options =>
+            {
+                options.CacheSize = 1024;
+                options.CacheEntryExpiration = TimeSpan.FromMinutes(2);
+            });
+}
+```
+
+既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、`services.AddSingleton<ICertificateValidationCache, YourCache>()` のようにします。
+
+::: moniker-end
+
 ## <a name="optional-client-certificates"></a>オプションのクライアント証明書
 
 このセクションでは、証明書を使用してアプリのサブセットを保護する必要があるアプリについて説明します。 たとえば、 Razor アプリ内のページまたはコントローラーにクライアント証明書が必要な場合があります。 これにより、クライアント証明書としての問題が示されます。
   
 * は TLS 機能であり、HTTP 機能ではありません。
-* は接続ごとにネゴシエートされます。 HTTP データを使用できるようにするには、接続の開始時にネゴシエートする必要があります。 接続の開始時には、Server Name Indication (SNI) のみ &dagger; が認識されます。 クライアント証明書とサーバー証明書は、接続の最初の要求の前にネゴシエートされ、通常、要求は再ネゴシエートできません。 再ネゴシエーションは、HTTP/2 では禁止されています。
+* は接続ごとにネゴシエートされます。 HTTP データを使用できるようにするには、接続の開始時にネゴシエートする必要があります。 接続の開始時には、Server Name Indication (SNI) のみ &dagger; が認識されます。 クライアント証明書とサーバー証明書は、接続の最初の要求の前にネゴシエートされ、通常、要求は再ネゴシエートできません。
+
+TLS 再ネゴシエーションは、オプションのクライアント証明書を実装するための従来の方法でした。 これは、次の理由で推奨されなくなりました。
+- HTTP/1.1 では、POST 要求中に renegotiating を実行すると、要求本文が TCP ウィンドウをいっぱいにして再ネゴシエーションパケットを受信できないデッドロックが発生する可能性があります。
+- HTTP/2 は、再ネゴシエーションを[明示的に禁止](https://tools.ietf.org/html/rfc7540#section-9.2.1)します。
+- TLS 1.3 では再ネゴシエーションのサポートが[削除され](https://tools.ietf.org/html/rfc8740#section-1)ました。
 
 ASP.NET Core 5 preview 4 以降では、オプションのクライアント証明書の便利なサポートが追加されています。 詳細については、[オプションの証明書のサンプル](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)を参照してください。
 
@@ -575,7 +636,7 @@ ASP.NET Core 5 preview 4 以降では、オプションのクライアント証�
 
 * ドメインとサブドメインのバインドを設定します。
   * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
-  * 詳細については次を参照してください:
+  * 詳細については、次を参照してください。
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>

@@ -3,7 +3,7 @@ title: IdentityASP.NET Core の概要
 author: rick-anderson
 description: IdentityASP.NET Core アプリで使用します。 パスワードの要件 (RequireDigit、RequiredLength、RequiredUniqueChars など) を設定する方法について説明します。
 ms.author: riande
-ms.date: 01/15/2020
+ms.date: 7/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 6ac565bfa4862168fa143417ab5a81c51b620f16
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: dd3296db568700a363c427398f02239846a46ada
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212446"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445433"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>IdentityASP.NET Core の概要
 
@@ -37,7 +37,7 @@ ASP.NET Core Identity:
 
 Identityは、通常、ユーザー名、パスワード、およびプロファイルデータを格納するために SQL Server データベースを使用して構成されます。 別の永続ストアを使用することもできます (たとえば、Azure Table Storage)。
 
-このトピックでは、を使用し Identity てユーザーを登録、ログイン、ログアウトする方法について説明します。 注: このテンプレートでは、ユーザー名と電子メールはユーザーに対して同じものとして扱われます。 を使用するアプリを作成する方法の詳細については Identity 、この記事の最後にある「次のステップ」を参照してください。
+このトピックでは、を使用し Identity てユーザーを登録、ログイン、ログアウトする方法について説明します。 注: このテンプレートでは、ユーザー名と電子メールはユーザーに対して同じものとして扱われます。 を使用するアプリを作成する方法の詳細について Identity は、「[次のステップ](#next)」を参照してください。
 
 [Microsoft id プラットフォーム](/azure/active-directory/develop/)は次のとおりです。
 
@@ -117,7 +117,7 @@ dotnet ef database update
 
 サービスはに追加されて `ConfigureServices` います。 一般的なパターンは、すべての `Add{Service}` メソッドを呼び出した後、すべての `services.Configure{Service}` メソッドを呼び出すことです。
 
-[!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configureservices&highlight=10-99)]
+[!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configureservices&highlight=11-99)]
 
 前の強調表示されたコードは、 Identity 既定のオプション値を使用してを構成します。 サービスは、[依存関係の挿入](xref:fundamentals/dependency-injection)によってアプリで使用できるようになります。
 
@@ -129,11 +129,11 @@ Identityは、を呼び出すことによって有効になり <xref:Microsoft.A
 
 およびの詳細に `IdentityOptions` つい `Startup` ては、「」および「アプリケーションの起動」を参照してください <xref:Microsoft.AspNetCore.Identity.IdentityOptions> 。 [Application Startup](xref:fundamentals/startup)
 
-## <a name="scaffold-register-login-and-logout"></a>スキャフォールディング Register、Login、および LogOut
+## <a name="scaffold-register-login-logout-and-registerconfirmation"></a>スキャフォールディング Register、Login、LogOut、および RegisterConfirmation
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Register、Login、および LogOut の各ファイルを追加します。 このセクションに示されているコードを生成するための[ Razor 承認手順を含むプロジェクトに、スキャフォールディング id](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization)に従います。
+、、、およびの各ファイルを追加し `Register` `Login` `LogOut` `RegisterConfirmation` ます。 このセクションに示されているコードを生成するための[ Razor 承認手順を含むプロジェクトに、スキャフォールディング id](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization)に従います。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -141,7 +141,7 @@ Register、Login、および LogOut の各ファイルを追加します。 こ�
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
+dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout;Account.RegisterConfirmation"
 ```
 
 PowerShell では、コマンドの区切り記号としてセミコロンを使用します。 PowerShell を使用する場合は、前の例に示したように、ファイルリスト内のセミコロンをエスケープするか、ファイルリストを二重引用符で囲みます。
@@ -152,13 +152,14 @@ PowerShell では、コマンドの区切り記号としてセミコロンを使
 
 ### <a name="examine-register"></a>レジスタの確認
 
-ユーザーが [**登録**] リンクをクリックすると、 `RegisterModel.OnPostAsync` アクションが呼び出されます。 ユーザーは、オブジェクトに対して[Createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_)によって作成され `_userManager` ます。
+ユーザーがページの [**登録**] ボタンをクリックすると、 `Register` `RegisterModel.OnPostAsync` アクションが呼び出されます。 ユーザーは、オブジェクトに対して[Createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_)によって作成され `_userManager` ます。
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=9)]
 
-ユーザーが正常に作成された場合は、の呼び出しによってユーザーがログインし `_signInManager.SignInAsync` ます。
-
-登録時にすぐにログインできないようにする手順については、「[アカウントの確認](xref:security/authentication/accconfirm#prevent-login-at-registration)」をご覧ください。
+<!-- .NET 5 fixes this, see
+https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+-->
+[!INCLUDE[](~/includes/disableVer.md)]
 
 ### <a name="log-in"></a>ログイン
 
@@ -241,6 +242,8 @@ Post は*Pages/Shared/_LoginPartial*に指定されています。
   </ItemGroup>
 </Target>
 ```
+
+<a name="next"></a>
 
 ## <a name="next-steps"></a>次の手順
 

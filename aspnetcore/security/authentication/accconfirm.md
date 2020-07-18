@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: bf599487fdc3e574f72f1a3d35278cc9c2ce7513
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404653"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464554"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core でのアカウントの確認とパスワードの回復
 
@@ -32,15 +32,9 @@ ms.locfileid: "85404653"
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
 
-::: moniker range="<= aspnetcore-2.0"
+::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 1.1 バージョンについては、[この PDF ファイル](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf)を参照してください。
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
-
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>前提条件
 
 [.NET Core 3.0 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -136,6 +130,16 @@ Startup.cs ファイルのメソッドに次のコードを追加し `ConfigureS
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
 
+## <a name="scaffold-registerconfirmation"></a>スキャフォールディング RegisterConfirmation
+
+[ Identity スキャフォールディング](xref:security/authentication/scaffold-identity)とスキャフォールディングの手順に従い `RegisterConfirmation` ます。
+
+<!-- .NET 5 fixes this, see
+https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+-->
+
+[!INCLUDE[](~/includes/disableVer.md)]
+
 ## <a name="register-confirm-email-and-reset-password"></a>登録、電子メールの確認、およびパスワードのリセット
 
 Web アプリを実行し、アカウントの確認とパスワードの回復フローをテストします。
@@ -225,9 +229,9 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 
 ::: moniker-end
 
-::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
+::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>前提条件
 
 [.NET Core 2.2 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core)
 
@@ -244,8 +248,10 @@ dotnet aspnet-codegenerator identity -dc WebPWrecover.Data.ApplicationDbContext 
 dotnet ef database drop -f
 dotnet ef database update
 dotnet run
-
 ```
+
+> [!NOTE]
+> がで構成されている場合は <xref:Microsoft.AspNetCore.Identity.PasswordOptions> `Startup.ConfigureServices` 、スキャフォールディング pages のプロパティに[ `[StringLength]` 属性](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute)の構成が必要になることがあり `Password` Identity ます。 `InputModel` `Password` プロパティは、 `Areas/Identity/Pages/Account/Register.cshtml.cs` スキャフォールディング後にファイルにあり Identity ます。
 
 ## <a name="test-new-user-registration"></a>新しいユーザー登録をテストする
 
