@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: e905f08f867b73fc37d5fed7138256ac89811312
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 85446ac18608b39c469da766e1a9f2e92a1f5e11
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402404"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445113"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
@@ -320,7 +320,7 @@ UI オプションまたはアクセスを制御するロールやポリシー�
 
 Blazor では、認証状態を "*非同期的に*" 決定することができます。 このアプローチの主なシナリオは、認証のために外部エンドポイントに要求を送信する Blazor WebAssembly アプリです。
 
-認証が進行中の間、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> には既定でコンテンツが表示されません。 認証が行われている間にコンテンツを表示するには、`<Authorizing>` 要素を使用します。
+認証が進行中の間、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> には既定でコンテンツが表示されません。 認証が行われている間にコンテンツを表示するには、`<Authorizing>` タグを使用します。
 
 ```razor
 <AuthorizeView>
@@ -413,7 +413,7 @@ You can only see this if you're signed in.
 
 `<NotFound>`、`<NotAuthorized>`、および `<Authorizing>` タグには、他の対話型コンポーネントなど、任意の項目を含めることができます。
 
-`<NotAuthorized>` 要素が指定されていない場合、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> には次のフォールバック メッセージが使用されます。
+`<NotAuthorized>` タグが指定されていない場合、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> には次のフォールバック メッセージが使用されます。
 
 ```html
 Not authorized.
