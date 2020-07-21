@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445126"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568848"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -36,7 +36,7 @@ ms.locfileid: "86445126"
 
 プロキシとロードバランサーを使用する環境での証明書認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
 
-## <a name="get-started"></a>作業開始
+## <a name="get-started"></a>はじめに
 
 HTTPS 証明書を取得して適用し、証明書を要求するように[サーバーを構成](#configure-your-server-to-require-certificates)します。
 
@@ -614,7 +614,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、`services.AddSingleton<ICertificateValidationCache, YourCache>()` のようにします。
+既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、「 `services.AddSingleton<ICertificateValidationCache, YourCache>()` 」のように入力します。
 
 ::: moniker-end
 
@@ -630,7 +630,7 @@ TLS 再ネゴシエーションは、オプションのクライアント証明�
 - HTTP/2 は、再ネゴシエーションを[明示的に禁止](https://tools.ietf.org/html/rfc7540#section-9.2.1)します。
 - TLS 1.3 では再ネゴシエーションのサポートが[削除され](https://tools.ietf.org/html/rfc8740#section-1)ました。
 
-ASP.NET Core 5 preview 4 以降では、オプションのクライアント証明書の便利なサポートが追加されています。 詳細については、[オプションの証明書のサンプル](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)を参照してください。
+ASP.NET Core 5 preview 7 以降では、オプションのクライアント証明書の便利なサポートが追加されています。 詳細については、[オプションの証明書のサンプル](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)を参照してください。
 
 次の方法では、オプションのクライアント証明書がサポートされます。
 

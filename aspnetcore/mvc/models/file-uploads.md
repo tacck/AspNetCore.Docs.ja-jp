@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404601"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568835"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
@@ -250,7 +250,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次のような例です。
+次に例を示します。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -424,7 +424,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 このサンプルアプリで `GenerateAntiforgeryTokenCookieAttribute` は、とは、ページ `DisableFormValueModelBindingAttribute` `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor 表記規則](xref:razor-pages/razor-pages-conventions)を使用するとのページアプリケーションモデルにフィルターとして適用されます。
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
 モデル バインドではフォームが読み取られないため、フォームからバインドされているパラメーターはバインドされません (クエリ、ルート、ヘッダーは引き続き機能します)。 アクション メソッドでは、`Request` プロパティが直接操作されます。 `MultipartReader` は各セクションを読み取るために使用されます。 キー/値データは `KeyValueAccumulator` に格納されます。 マルチパート セクションが読み取られた後、`KeyValueAccumulator` の内容を使用して、フォーム データがモデル タイプにバインドされます。
 
@@ -621,18 +621,17 @@ public void ConfigureServices(IServiceCollection services)
 RazorPages アプリで、で[規則](xref:razor-pages/razor-pages-conventions)を適用したフィルターを適用し `Startup.ConfigureServices` ます。
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model.Filters.Add(
-                    new RequestFormLimitsAttribute()
-                    {
-                        // Set the limit to 256 MB
-                        MultipartBodyLengthLimit = 268435456
-                    });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model.Filters.Add(
+                new RequestFormLimitsAttribute()
+                {
+                    // Set the limit to 256 MB
+                    MultipartBodyLengthLimit = 268435456
+                });
+});
 ```
 
 Razorページアプリまたは MVC アプリで、ページモデルまたはアクションメソッドにフィルターを適用します。
@@ -669,18 +668,17 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 RazorPages アプリで、で[規則](xref:razor-pages/razor-pages-conventions)を適用したフィルターを適用し `Startup.ConfigureServices` ます。
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model =>
-                {
-                    // Handle requests up to 50 MB
-                    model.Filters.Add(
-                        new RequestSizeLimitAttribute(52428800));
-                });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model =>
+            {
+                // Handle requests up to 50 MB
+                model.Filters.Add(
+                    new RequestSizeLimitAttribute(52428800));
+            });
+});
 ```
 
 Razorページアプリまたは MVC アプリで、フィルターをページハンドラークラスまたはアクションメソッドに適用します。
@@ -979,7 +977,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次のような例です。
+次に例を示します。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -1478,7 +1476,7 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [HTTP 接続要求をドレインしています](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload (ファイルの無制限のアップロード)](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)
