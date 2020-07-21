@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 97e3f60480bc8e7e88c8361e5b13f02d98765d9e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 77b230f14b4eef60d771daf8fe09288a9dd3c69c
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405303"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212991"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>チュートリアル: ASP.NET Core の Razor Pages の概要
 
@@ -92,7 +92,7 @@ ms.locfileid: "85405303"
   ```
 
   * `dotnet new` コマンド: *RazorPagesMovie* フォルダーに新しい Razor Pages プロジェクトが作成されます。
-  * `code` コマンドは、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーを開きます。
+  * `code` コマンドを実行すると、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーが開きます。
 
 * 状態バーの OmniSharp フレーム アイコンが緑色になり、"**ビルドとデバッグに必要な資産が 'RazorPagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、 **[はい]** を選択します。
 
@@ -108,14 +108,12 @@ ms.locfileid: "85405303"
 
   ![macOS Web アプリ テンプレートの選択](razor-pages-start/_static/web_app_template_vsmac.png)
 
-* 次の構成を確認します。
+* **[Configure your new Web Application]\(新しい Web アプリケーションを構成する\)** ダイアログで、次の操作を行います。
 
-  * **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されている
-  * **[認証]** が **[認証なし]** に設定されている
-   
+  * **[認証]** に **[認証なし]** が設定されていることを確認します。
+  * **[ターゲット フレームワーク]** を選択するオプションが表示された場合は、最新の 3.x バージョンを選択します。
+
   **[次へ]** を選択します。
-
-  ![macOS .NET Core 3.1 の選択](razor-pages-start/_static/targetframework3.png)
 
 * プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。
 
@@ -242,7 +240,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
   ```
 
   * `dotnet new` コマンド: *RazorPagesMovie* フォルダーに新しい Razor Pages プロジェクトが作成されます。
-  * `code` コマンドは、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーを開きます。
+  * `code` コマンドを実行すると、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーが開きます。
 
 * 状態バーの OmniSharp フレーム アイコンが緑色になり、"**ビルドとデバッグに必要な資産が 'RazorPagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、 **[はい]** を選択します。
 
@@ -256,9 +254,12 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
 * バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]** 、 **[アプリ]** 、 **[Web アプリケーション]** 、 **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]\(Web とコンソール\)** 、 **[アプリ]** 、 **[Web アプリケーション]** 、 **[次へ]** の順に選択します。
 
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、 **[ターゲット フレームワーク]** を **[.NET Core 3.1]** に設定します。
+* **[Configure your new Web Application]\(新しい Web アプリケーションを構成する\)** ダイアログで、次の操作を行います。
 
-  ![macOS .NET Core 3.0 の選択](razor-pages-start/_static/targetframework3.png)
+  * **[認証]** に **[認証なし]** が設定されていることを確認します。
+  * **[ターゲット フレームワーク]** を選択するオプションが表示された場合は、最新の 2.x バージョンを選択します。
+
+  **[次へ]** を選択します。
 
 * プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。
 

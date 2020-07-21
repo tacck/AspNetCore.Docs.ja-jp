@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor ホスティング モデルの構成におけ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 07/10/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: e62cb2ab865fbf57166d5ec3d1344183c00c2095
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: b28e4e43b88fcf8eab9e8959142cca21223c57ff
+ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059841"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86239635"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
@@ -129,23 +129,107 @@ Blazor Server アプリは、サーバーへのクライアント接続が確立
 
 *このセクションは Blazor Server に適用されます。*
 
-場合によっては、Blazor Server アプリによって使用される SignalR クライアントを構成する必要があります。 たとえば、接続の問題を診断するために SignalR クライアントのログ記録を構成できます。
+`Pages/_Host.cshtml` ファイルで Blazor Server アプリによって使用される SignalR クライアントを構成します。 `Blazor.start` を呼び出すスクリプトを、`_framework/blazor.server.js` スクリプトの後の `</body>` タグ内に配置します。
 
-`Pages/_Host.cshtml` ファイルで SignalR クライアントを構成するには:
+### <a name="logging"></a>ログの記録
+
+SignalR クライアント ログを構成するには:
 
 * `blazor.server.js` スクリプトの `<script>` タグに `autostart="false"` 属性を追加します。
-* `Blazor.start` を呼び出し、SignalR ビルダーを指定する構成オブジェクトを渡します。
+* クライアント ビルダーでログ レベルを指定して `configureLogging` を呼び出す構成オブジェクト (`configureSignalR`) を渡します。
 
-```html
-<script src="_framework/blazor.server.js" autostart="false"></script>
-<script>
-  Blazor.start({
-    configureSignalR: function (builder) {
-      builder.configureLogging("information"); // LogLevel.Information
-    }
-  });
-</script>
+```cshtml
+    ...
+
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script>
+      Blazor.start({
+        configureSignalR: function (builder) {
+          builder.configureLogging("information");
+        }
+      });
+    </script>
+</body>
 ```
+
+前の例で、`information` はログ レベル <xref:Microsoft.Extensions.Logging.LogLevel.Information?displayProperty=nameWithType> と同じです。
+
+### <a name="modify-the-reconnection-handler"></a>再接続ハンドラーを変更する
+
+再接続ハンドラーの回線接続イベントは、次のようなカスタム動作を行うように変更できます。
+
+* 接続が切断された場合にユーザーに通知する。
+* 回線が接続されているときに (クライアントから) ログ記録を実行する。
+
+接続イベントを変更するには:
+
+* `blazor.server.js` スクリプトの `<script>` タグに `autostart="false"` 属性を追加します。
+* 切断された接続 (`onConnectionDown`) および確立または再確立された接続 (`onConnectionUp`) 用に接続の変更に対するコールバックを登録します。 `onConnectionDown` と `onConnectionUp` の**両方**を指定する必要があります。
+
+```cshtml
+    ...
+
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script>
+      Blazor.start({
+        reconnectionHandler: {
+          onConnectionDown: (options, error) => console.error(error);
+          onConnectionUp: () => console.log("Up, up, and away!");
+        }
+      });
+    </script>
+</body>
+```
+
+### <a name="adjust-the-reconnection-retry-count-and-interval"></a>再接続の再試行回数と間隔を調整する
+
+再接続の再試行回数と間隔を調整するには:
+
+* `blazor.server.js` スクリプトの `<script>` タグに `autostart="false"` 属性を追加します。
+* 再試行の回数 (`maxRetries`) と、各再試行で許可されるミリ秒単位の期間 (`retryIntervalMilliseconds`) を設定します。
+
+```cshtml
+    ...
+
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script>
+      Blazor.start({
+        reconnectionOptions: {
+          maxRetries: 3,
+          retryIntervalMilliseconds: 2000
+        }
+      });
+    </script>
+</body>
+```
+
+### <a name="hide-or-replace-the-reconnection-display"></a>再接続の表示を非表示にする、または置き換える
+
+再接続の表示を非表示にするには:
+
+* `blazor.server.js` スクリプトの `<script>` タグに `autostart="false"` 属性を追加します。
+* 再接続ハンドラーの `_reconnectionDisplay` を空のオブジェクト (`{}` または `new Object()`) に設定します。
+
+```cshtml
+    ...
+
+    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script>
+      window.addEventListener('beforeunload', function () {
+        Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
+      });
+    </script>
+</body>
+```
+
+再接続の表示を置き換えるには、前の例の `_reconnectionDisplay` を表示する要素に設定します。
+
+```javascript
+Blazor.defaultReconnectionHandler._reconnectionDisplay = 
+  document.getElementById("{ELEMENT ID}");
+```
+
+プレースホルダー `{ELEMENT ID}` は、表示する HTML 要素の ID です。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

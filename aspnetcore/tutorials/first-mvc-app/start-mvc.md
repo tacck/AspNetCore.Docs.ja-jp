@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 01321d68defafbe79371250669f921307bcfdba6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407045"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213085"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -106,14 +106,12 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
 
   ![macOS Web アプリ テンプレートの選択](start-mvc/_static/web_app_template_vsmac.png)
 
-* 次の構成を確認します。
+* **[Configure your new Web Application]\(新しい Web アプリケーションを構成する\)** ダイアログで、次の操作を行います。
 
-  * **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されている
-  * **[認証]** が **[認証なし]** に設定されている
-   
+  * **[認証]** に **[認証なし]** が設定されていることを確認します。
+  * **[ターゲット フレームワーク]** を選択するオプションが表示された場合は、最新の 3.x バージョンを選択します。
+
   **[次へ]** を選択します。
-
-  ![macOS .NET Core 3.1 の選択](start-mvc/_static/new_project_31_vsmac.png)
 
 * プロジェクトに **MvcMovie** という名前を付けて、 **[作成]** を選択します。
 
@@ -259,9 +257,12 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
 
 * バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]** 、 **[アプリ]** 、 **[Web アプリケーション (Model-View-Controller)]** 、 **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]\(Web とコンソール\)** 、 **[アプリ]** 、 **[Web アプリケーション (Model-View-Controller)]** 、 **[次へ]** の順に選択します。
 
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、 **[.NET Core 2.2]** という既定の **[ターゲット フレームワーク]** を受け入れます。
+* **[Configure your new Web Application]\(新しい Web アプリケーションを構成する\)** ダイアログで、次の操作を行います。
 
-  ![macOS .NET Core 2.2 の選択](./start-mvc/_static/new_project_22_vsmac.png)
+  * **[認証]** に **[認証なし]** が設定されていることを確認します。
+  * **[ターゲット フレームワーク]** を選択するオプションが表示された場合は、最新の 2.x バージョンを選択します。
+
+  **[次へ]** を選択します。
 
 * プロジェクトに **MvcMovie** という名前を付けて、 **[作成]** を選択します。
 

@@ -5,7 +5,7 @@ description: Blazor アプリをデバッグする方法について説明しま
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: c48eb19c5a1759aace112e2afb1637c649173a3d
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059904"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407672"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -48,8 +48,8 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 デバッグには、次のいずれかのブラウザーが必要です。
 
+* Google Chrome (バージョン 70 以降) (既定値)
 * Microsoft Edge (バージョン 80 以降)
-* Google Chrome (バージョン 70 以降)
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio と Visual Studio Code のデバッグを有効にする
 
@@ -133,13 +133,13 @@ Blazor アプリ開発のための Visual Studio Code のインストールの�
 
 ### <a name="debug-hosted-blazor-webassembly"></a>ホストされた Blazor WebAssembly のデバッグ
 
-1. ホストされた Blazor WebAssembly アプリを VS Code で開きます。
+1. VS Code で、ホストされた Blazor WebAssembly アプリのソリューション フォルダーを開きます。
 
 1. プロジェクトの起動構成が設定されていない場合は、次の通知が表示されます。 **[はい]** を選択します。
 
    ![必要なアセットを追加する](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
-1. 選択ウィンドウで、ホストされているソリューション内の *Server* プロジェクトを選択します。
+1. ウィンドウの上部にあるコマンド パレットで、ホストされているソリューション内の *Server* プロジェクトを選択します。
 
 `launch.json` ファイルが、デバッガーを起動するための起動構成を使用して生成されます。
 
@@ -160,7 +160,7 @@ Blazor アプリ開発のための Visual Studio Code のインストールの�
 
 ### <a name="launch-configuration-options"></a>起動構成のオプション
 
-`blazorwasm` デバッグの種類では、次の起動構成オプションがサポートされています。
+`blazorwasm` デバッグの種類では、次の起動構成オプションがサポートされています (`.vscode/launch.json`)。
 
 | オプション    | 説明 |
 | --------- | ----------- |
@@ -198,17 +198,23 @@ Blazor アプリ開発のための Visual Studio Code のインストールの�
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app"></a>ホストされている Blazor WebAssembly アプリを起動してデバッグする
+#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge でホストされている Blazor WebAssembly アプリを起動してデバッグする
+
+ブラウザーの構成の既定値は Google Chrome です。 デバッグに Microsoft Edge を使用する場合は、`browser` を `edge` に設定します。 Google Chrome を使用するには、`browser` オプションを設定しないか、オプションの値を `chrome` に設定します。
 
 ```json
 {
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
-  "name": "Launch and Debug Hosted App",
+  "hosted": true,
   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/MyHostedApp.Server.dll",
-  "cwd": "${workspaceFolder}"
+  "cwd": "${workspaceFolder}/Server",
+  "browser": "edge"
 }
 ```
+
+前の例では、`MyHostedApp.Server.dll` は *Server* アプリのアセンブリです。 `.vscode` フォルダーは、`Client`、`Server`、および `Shared` フォルダーの隣にあるソリューションのフォルダー内にあります。
 
 ## <a name="debug-in-the-browser"></a>ブラウザーでデバッグする
 

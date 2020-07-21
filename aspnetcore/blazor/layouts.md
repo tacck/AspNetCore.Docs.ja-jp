@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 684d7b76c7500ec19c90eb696ec0127692923297
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944233"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176251"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor レイアウト
 
@@ -39,7 +39,11 @@ ms.locfileid: "85944233"
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Blazor アプリ テンプレートのいずれかに基づくアプリでは、`MainLayout` コンポーネント (`MainLayout.razor`) は、アプリの `Shared` フォルダーにあります。
+## <a name="mainlayout-component"></a>`MainLayout` コンポーネント
+
+Blazor プロジェクト テンプレートのいずれかに基づくアプリでは、`MainLayout` コンポーネント (`MainLayout.razor`) は、アプリの `Shared` フォルダーにあります。
+
+[!code-razor[](./common/samples/3.x/BlazorWebAssemblySample/Shared/MainLayout.razor)]
 
 ## <a name="default-layout"></a>既定のレイアウト
 

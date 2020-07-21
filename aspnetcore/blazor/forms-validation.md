@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: b57e2a34f79691f7f2b1ed69cfad25de00c5ca13
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059865"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176213"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -72,6 +72,8 @@ public class ExampleModel
 * <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントは、データ注釈を使用して検証サポートをアタッチします。
 * <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> コンポーネントは、検証メッセージの概要を示します。
 * `HandleValidSubmit` は、フォームが正常に送信される (検証に合格する) とトリガーされます。
+
+## <a name="built-in-forms-components"></a>組み込みフォームのコンポーネント
 
 一連の組み込みの入力コンポーネントを、ユーザー入力の受信と検証に使用できます。 入力は、それらが変更されたときとフォームが送信されたときに検証されます。 次の表に、使用できる入力コンポーネントを示しています。
 

@@ -5,7 +5,7 @@ description: '[IdentityServer](https://identityserver.io/) バックエンドを
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,18 +15,21 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 001fa0885c4ef4f365d9849278d3aa36e7657c54
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: de1f8955693d2e73e624e2513b6ef4e075ff3406
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147728"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407698"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)
 
 この記事では、ユーザーと API 呼び出しの認証に [IdentityServer](https://identityserver.io/) を使用する、Blazor でホステッド アプリを新しく作成する方法について説明します。
+
+> [!NOTE]
+> 既存の外部 Identity サーバー インスタンスを使用するように、スタンドアロンの、またはホストされた Blazor WebAssembly アプリを構成するには、<xref:blazor/security/webassembly/standalone-with-authentication-library> のガイダンスに従ってください。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -148,7 +151,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 `OidcConfigurationController` (`Controllers/OidcConfigurationController.cs`) では、OIDC パラメーターを提供するために、クライアント エンドポイントがプロビジョニングされます。
 
-### <a name="app-settings-files"></a>アプリ設定ファイル
+### <a name="app-settings"></a>アプリの設定
 
 プロジェクト ルートにあるアプリ設定ファイル (`appsettings.json`) の `IdentityServer` セクションには、構成されているクライアントの一覧が記述されてます。 次の例には、1 つのクライアントがあります。 クライアント名はアプリケーション名に対応し、規則によって OAuth の `ClientId` パラメーターにマップされます。 構成対象のアプリの種類は、プロファイルによって示されています。 プロファイルは、サーバーの構成プロセスを簡素化する規則を促進するために、内部的に使用されます。 <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
@@ -177,6 +180,22 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
   Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
   Version="3.2.0" />
 ```
+
+### <a name="httpclient-configuration"></a>`HttpClient` 構成
+
+`Program.Main` (`Program.cs`) では、サーバー API への要求を行うときのアクセス トークンが含まれる <xref:System.Net.Http.HttpClient> インスタンスを提供するように、名前付きの <xref:System.Net.Http.HttpClient> (`HostIS.ServerAPI`) が構成されます。
+
+```csharp
+builder.Services.AddHttpClient("HostIS.ServerAPI", 
+        client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("HostIS.ServerAPI"));
+```
+
+> [!NOTE]
+> Blazor でホストされているソリューションの一部ではない既存の Identity サーバー インスタンスを使用するように Blazor WebAssembly アプリを構成する場合は、<xref:System.Net.Http.HttpClient> ベース アドレスの登録を <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`builder.HostEnvironment.BaseAddress`) からサーバー アプリの API 認証エンドポイント URL に変更します。
 
 ### <a name="api-authorization-support"></a>API の承認のサポート
 

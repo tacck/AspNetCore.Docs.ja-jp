@@ -15,13 +15,13 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/tooling
-zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: 30a76eda0e94ee7bb2b2d3db918bc029865bdf1a
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+zone_pivot_groups: operating-systems
+ms.openlocfilehash: 33245e669b317ed577a8a1652b2eed8f9ea5b915
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147650"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407646"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core Blazor 用のツール
 
@@ -87,7 +87,7 @@ Linux で証明書を信頼するための一元的な方法はありません�
 * `localhost` に対するすべての自己署名証明書を信頼します。
 * ブラウザーの信頼された証明書の一覧に証明書を追加します。
 
-詳細については、ブラウザーおよび Linux ディストリビューションで提供されているガイダンスを参照してください。
+詳細については、お使いのブラウザーおよび Linux ディストリビューションで提供されているガイダンスを参照してください。
 
 ::: zone-end
 

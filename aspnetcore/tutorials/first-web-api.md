@@ -6,20 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: tutorials/first-web-api
-ms.openlocfilehash: 63f91086a7e9d71add7f7a5d58d96f46fa76353c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407786"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212622"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -114,9 +114,7 @@ ms.locfileid: "85407786"
 
   ![macOS での API テンプレートの選択](first-web-api-mac/_static/api_template.png)
 
-* **[ターゲット フレームワーク]** が **[.NET Core 3.1]** に設定されていることを確認します。 **[次へ]** を選択します。
-
-  ![macOS .NET Core 3.1 の選択](first-web-api-mac/_static/api_31_config.png)
+* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **[ターゲット フレームワーク]** を選択します。 **[次へ]** を選択します。
 
 * **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
@@ -594,7 +592,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]**  >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]** \(Web とコンソール\) >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。
   
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログ ボックスで、既定の**ターゲット フレームワーク** * *.NET Core 2.2* を受け入れます。
+* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 2.x **[ターゲット フレームワーク]** を選択します。 **[次へ]** を選択します。
 
 * **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
@@ -960,13 +958,13 @@ To Do アイテムを削除するには、`DELETE` への AJAX 呼び出しで `
 
 ## <a name="add-authentication-support-to-a-web-api"></a>Web API に認証サポートを追加
 
-[!INCLUDE[](~/includes/IdentityServer4.md)]
+[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>[!INCLUDE[](~/includes/IdentityServer4.md)]
 
-[このチュートリアルのサンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples)します。 [ダウンロード方法](xref:index#how-to-download-a-sample)に関するページを参照してください。
+その他の技術情報 [このチュートリアルのサンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples)します。
 
-詳細については、次のリソースを参照してください。
+[ダウンロード方法](xref:index#how-to-download-a-sample)に関するページを参照してください。
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>
@@ -975,4 +973,4 @@ To Do アイテムを削除するには、`DELETE` への AJAX 呼び出しで `
 * <xref:web-api/action-return-types>
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
-* [このチュートリアルの YouTube バージョン](https://www.youtube.com/watch?v=TTkhEyGBfAk)
+* 詳細については、次のリソースを参照してください。

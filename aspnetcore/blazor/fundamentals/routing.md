@@ -5,7 +5,7 @@ description: アプリで要求をルーティングする方法と、NavLink �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2020
+ms.date: 07/14/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: c41736e7c5a3e59a08b579de54f9810381c8df1c
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 4f85c4a9803482f39446dda599f10829c9879f27
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944179"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407763"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor のルーティング
 
@@ -35,6 +35,8 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
 最も一般的な構成は、すべての要求を Razor ページにルーティングすることです。これは、Blazor Server アプリのサーバー側部分のホストとして機能します。 通常、*ホスト* ページは、`_Host.cshtml` という名前になります。 ホスト ファイルに指定されるルートは、ルート照合で低い優先順位で動作するため、*フォールバック ルート*と呼ばれます。 フォールバック ルートは、他のルートが一致しない場合に考慮されます。 これにより、Blazor Server アプリと干渉することなく、他のコントローラーやページをアプリで使用できます。
+
+ルート以外の URL のサーバー ホスト用に <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> を構成する方法の詳細については、<xref:blazor/host-and-deploy/index#app-base-path> をご覧ください。
 
 ## <a name="route-templates"></a>ルート テンプレート
 
@@ -199,6 +201,36 @@ Blazor Server アプリでは、`_Host.cshtml` の既定のルートは `/` (`@p
 <a href="my-page" target="_blank">My page</a>
 ```
 
+> [!WARNING]
+> Blazor による子コンテンツのレンダリング方法により、`for` ループ内の `NavLink` コンポーネントのレンダリングでは、インクリメントするループ変数が `NavLink` (子) コンポーネントのコンテンツ内で使用されている場合、ローカル インデックス変数が必要になります。
+>
+> ```razor
+> @for (int c = 0; c < 10; c++)
+> {
+>     var current = c;
+>     <li ...>
+>         <NavLink ... href="@c">
+>             <span ...></span> @current
+>         </NavLink>
+>     </li>
+> }
+> ```
+>
+> このシナリオでのインデックス変数の使用は、`NavLink` コンポーネントだけでなく、[子コンテンツ](xref:blazor/components/index#child-content)でループ変数を使用する**すべての**子コンポーネントで必須です。
+>
+> または、<xref:System.Linq.Enumerable.Range%2A?displayProperty=nameWithType> と共に `foreach` ループを使用します。
+>
+> ```razor
+> @foreach(var c in Enumerable.Range(0,10))
+> {
+>     <li ...>
+>         <NavLink ... href="@c">
+>             <span ...></span> @c
+>         </NavLink>
+>     </li>
+> }
+> ```
+
 ## <a name="uri-and-navigation-state-helpers"></a>URI およびナビゲーション状態ヘルパー
 
 C# コード内の URI とナビゲーションを操作するには、<xref:Microsoft.AspNetCore.Components.NavigationManager> を使用します。 <xref:Microsoft.AspNetCore.Components.NavigationManager> には、次の表に示すイベントとメソッドがあります。
@@ -262,3 +294,46 @@ public void Dispose()
 * <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>:`true` の場合、Blazor によってブラウザーからナビゲーションがインターセプトされました。 `false` の場合、<xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> によってナビゲーションが発生しました。
 
 コンポーネントの破棄の詳細については、「<xref:blazor/components/lifecycle#component-disposal-with-idisposable>」を参照してください。
+
+## <a name="query-string-and-parse-parameters"></a>クエリ文字列とパラメーターの解析
+
+要求のクエリ文字列は、<xref:Microsoft.AspNetCore.Components.NavigationManager> の <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> プロパティから取得できます。
+
+```razor
+@inject NavigationManager Navigation
+
+...
+
+var query = new Uri(Navigation.Uri).Query;
+```
+
+クエリ文字列のパラメーターを解析するには:
+
+* [Microsoft.AspNetCore.WebUtilities](https://www.nuget.org/packages/Microsoft.AspNetCore.WebUtilities) のパッケージ参照を追加します。
+* <xref:Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery%2A?displayProperty=nameWithType> を使用してクエリ文字列を解析した後に値を取得します。
+
+```razor
+@page "/"
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager NavigationManager
+
+<h1>Query string parse example</h1>
+
+<p>Value: @queryValue</p>
+
+@code {
+    private string queryValue = "Not set";
+
+    protected override void OnInitialized()
+    {
+        var query = new Uri(NavigationManager.Uri).Query;
+
+        if (QueryHelpers.ParseQuery(query).TryGetValue("{KEY}", out var value))
+        {
+            queryValue = value;
+        }
+    }
+}
+```
+
+前の例のプレースホルダー `{KEY}` は、クエリ文字列パラメーターのキーです。 たとえば、URL のキーと値のペア `?ship=Tardis` では、キー `ship` が使用されます。

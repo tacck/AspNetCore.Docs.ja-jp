@@ -14,11 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 4ecbf6920980e293e8c274996c6a4f25e74a5cb7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 30123e043a7c152b5719af8092b2ab42a70d2787
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403626"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407620"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 
@@ -74,7 +75,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 * アプリは、最後の要求から限られた時間だけセッションを維持します。 アプリでは、セッション タイムアウトを設定するか、既定値の 20 分を使用します。 セッション状態は、次のユーザー データの格納に最適です。
   * 特定のセッションに固有である。
   * データがセッション間で永続的に保存される必要がない。
-* セッション データは、[ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear) の実装が呼び出されるか、セッションが期限切れになると、削除されます。
+* セッション データは、<xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> の実装が呼び出されるか、セッションが期限切れになると、削除されます。
 * クライアント ブラウザーが閉じられたこと、またはクライアントでセッション Cookie が削除されるか期限切れになったことを、アプリ コードに通知する既定のメカニズムはありません。
 * セッション状態の Cookie は既定では必須になっていません。 サイトの訪問者が追跡を許可しない限り、セッション状態は機能しません。 詳細については、「<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>」を参照してください。
 
@@ -84,7 +85,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 メモリ内キャッシュ プロバイダーは、アプリが存在するサーバーのメモリにセッション データを格納します。 サーバー ファームのシナリオでは次のようになります。
 
 * "*固定セッション*" を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
-* セッション Cookie は [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) によって暗号化されます。 各コンピューターでセッション Cookie を読み取るには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
+* セッション Cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション Cookie を読み取るには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
 
 ### <a name="configure-session-state"></a>セッション状態を構成する
 
@@ -95,9 +96,9 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 セッション ミドルウェアを有効にするには、`Startup` に次が含まれている必要があります。
 
-* いずれかの [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) メモリ キャッシュ。 `IDistributedCache` 実装はセッションのバックアップ ストアとして利用されます。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
-* `ConfigureServices` での [AddSession](/dotnet/api/microsoft.extensions.dependencyinjection.sessionservicecollectionextensions.addsession) の呼び出し。
-* `Configure` での [UseSession](/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions.usesession#Microsoft_AspNetCore_Builder_SessionMiddlewareExtensions_UseSession_Microsoft_AspNetCore_Builder_IApplicationBuilder_) の呼び出し。
+* いずれかの <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> メモリ キャッシュ。 `IDistributedCache` 実装はセッションのバックアップ ストアとして利用されます。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
+* `ConfigureServices` での <xref:Microsoft.Extensions.DependencyInjection.SessionServiceCollectionExtensions.AddSession%2A> の呼び出し。
+* `Configure` での <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> の呼び出し。
 
 次のコードでは、`IDistributedCache` の既定のメモリ内実装でメモリ内セッション プロバイダーを設定する方法を示します。
 
@@ -115,43 +116,43 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 ### <a name="load-session-state-asynchronously"></a>セッション状態を非同期的に読み込む
 
-[TryGetValue](/dotnet/api/microsoft.aspnetcore.http.isession.trygetvalue)、[Set](/dotnet/api/microsoft.aspnetcore.http.isession.set)、または [Remove](/dotnet/api/microsoft.aspnetcore.http.isession.remove) メソッドの前に、[ISession.LoadAsync](/dotnet/api/microsoft.aspnetcore.http.isession.loadasync) メソッドが明示的に呼び出された場合にのみ、ASP.NET Core の既定のセッション プロバイダーは、基になっている [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) バッキング ストアからセッション レコードを非同期に読み込みます。 `LoadAsync` を最初に呼び出さないと、基になっているセッション レコードは同期的に読み込まれ、パフォーマンスが大幅に低下する可能性があります。
+ASP.NET Core の既定のセッション プロバイダーでは、<xref:Microsoft.AspNetCore.Http.ISession.TryGetValue%2A>、<xref:Microsoft.AspNetCore.Http.ISession.Set%2A>、または <xref:Microsoft.AspNetCore.Http.ISession.Remove%2A> メソッドの前に <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync%2A?displayProperty=nameWithType> メソッドが明示的に呼び出された場合にのみ、基になる <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> バッキング ストアから非同期的にセッション レコードを読み込みます。 `LoadAsync` を最初に呼び出さないと、基になっているセッション レコードは同期的に読み込まれ、パフォーマンスが大幅に低下する可能性があります。
 
-アプリにこのパターンを強制させるには、`TryGetValue`、`Set`、または `Remove` の前に `LoadAsync` メソッドが呼び出されない場合に例外をスローするバージョンで、[DistributedSessionStore](/dotnet/api/microsoft.aspnetcore.session.distributedsessionstore) および [DistributedSession](/dotnet/api/microsoft.aspnetcore.session.distributedsession) の実装をラップします。 ラップしたバージョンをサービス コンテナーに登録します。
+アプリにこのパターンを強制させるには、`TryGetValue`、`Set`、または `Remove` の前に `LoadAsync` メソッドが呼び出されない場合に例外をスローするバージョンで、<xref:Microsoft.AspNetCore.Session.DistributedSessionStore> および <xref:Microsoft.AspNetCore.Session.DistributedSession> の実装をラップします。 ラップしたバージョンをサービス コンテナーに登録します。
 
 ### <a name="session-options"></a>セッション オプション
 
-セッションの既定値をオーバーライドするには、[SessionOptions](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions) を使用します。
+セッションの既定値をオーバーライドするには、<xref:Microsoft.AspNetCore.Builder.SessionOptions> を使用します。
 
 | オプション | 説明 |
 | ------ | ----------- |
-| [Cookie](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookie) | Cookie の作成に使用される設定を決定します。 [Name](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.name) の既定値は [SessionDefaults.CookieName](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiename) (`.AspNetCore.Session`) です。 [Path](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.path) の既定値は [SessionDefaults.CookiePath](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiepath) (`/`) です。 [SameSite](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.samesite) の既定値は [SameSiteMode.Lax](/dotnet/api/microsoft.aspnetcore.http.samesitemode) (`1`) です。 [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) の既定値は `true` です。 [IsEssential](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.isessential) の既定値は `false` です。 |
-| [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、Cookie には適用されません。 既定値は 20 分です。 |
-| [IOTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.iotimeout) | ストアからのセッションの読み込み、またはストアに戻すコミットに対して許容される最大時間です。 この設定は非同期操作にのみ適用できます。 このタイムアウトは、[InfiniteTimeSpan](/dotnet/api/system.threading.timeout.infinitetimespan) を使用して無効にすることができます。 既定値は 1 分です。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Cookie の作成に使用される設定を決定します。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> の既定値は <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> では、既定値が `true` に設定されます。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> では、既定値が `false` に設定されます。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、Cookie には適用されません。 既定値は 20 分です。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | ストアからのセッションの読み込み、またはストアに戻すコミットに対して許容される最大時間です。 この設定は非同期操作にのみ適用できます。 このタイムアウトは、<xref:System.Threading.Timeout.InfiniteTimeSpan> を使用して無効にすることができます。 既定値は 1 分です。 |
 
-セッションは Cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この Cookie は `.AspNetCore.Session` という名前になり、パス `/` を使用します。 Cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません ([HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) の既定値が `true` になるため)。
+セッションは Cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この Cookie は `.AspNetCore.Session` という名前になり、パス `/` を使用します。 Cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません (<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> の既定値が `true` になるため)。
 
 Cookie セッションの既定値をオーバーライドするには、<xref:Microsoft.AspNetCore.Builder.SessionOptions> を使用します。
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Startup2.cs?name=snippet1&highlight=5-10)]
 
-アプリは [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) プロパティを使用し、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間を決定します。 このプロパティは Cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](/dotnet/api/microsoft.aspnetcore.session.sessionmiddleware)を通過するたびにタイムアウトがリセットされます。
+アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは Cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
 
 セッション状態は "*ロックなし*" です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は*一貫性のあるセッション*として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
 
 ### <a name="set-and-get-session-values"></a>セッション値の設定および取得
 
-セッション状態には、Razor Pages の [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) クラスから、または MVC の [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller) クラスの [HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session) でアクセスします。 このプロパティは [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) 実装です。
+セッション状態にアクセスするには、Razor Pages の <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラスか、MVC の <xref:Microsoft.AspNetCore.Mvc.Controller> クラスを <xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType> と共に使用します。 このプロパティは <xref:Microsoft.AspNetCore.Http.ISession> の実装です。
 
-`ISession` の実装では、整数値や文字列値を設定および取得するための複数の拡張メソッドが提供されています。 拡張メソッドは、[Microsoft.AspNetCore.Http](/dotnet/api/microsoft.aspnetcore.http) 名前空間にあります。
+`ISession` の実装では、整数値や文字列値を設定および取得するための複数の拡張メソッドが提供されています。 拡張メソッドは <xref:Microsoft.AspNetCore.Http> 名前空間にあります。
 
 `ISession` 拡張メソッド:
 
-* [Get(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.get)
-* [GetInt32(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getint32)
-* [GetString(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getstring)
-* [SetInt32(ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
-* [SetString(ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
+* [Get(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.Get%2A)
+* [GetInt32(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetInt32%2A)
+* [GetString(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetString%2A)
+* [SetInt32(ISession, String, Int32)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetInt32%2A)
+* [SetString(ISession, String, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetString%2A)
 
 次の例では、`IndexModel.SessionKeyName` キー (サンプル アプリ内の `_Name`) のセッション値を Razor Pages ページで取得します。
 
@@ -169,7 +170,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=18-19,22-23)]
 
-分散キャッシュのシナリオを有効にするには、メモリ内キャッシュを使用する場合であっても、すべてのセッション データをシリアル化する必要があります。 文字列と整数のシリアライザーは、[ISession](/dotnet/api/microsoft.aspnetcore.http.isession) の拡張メソッドによって提供されます。 複合型は、JSON などの別のメカニズムを使ってユーザーがシリアル化する必要があります。
+分散キャッシュのシナリオを有効にするには、メモリ内キャッシュを使用する場合であっても、すべてのセッション データをシリアル化する必要があります。 文字列と整数のシリアライザーは、<xref:Microsoft.AspNetCore.Http.ISession> の拡張メソッドによって提供されます。 複合型は、JSON などの別のメカニズムを使ってユーザーがシリアル化する必要があります。
 
 次のサンプル コードを使用して、オブジェクトをシリアル化します。
 
@@ -212,7 +213,7 @@ ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc
 
 Cookie に TempData を格納するには、Cookie ベースの TempData プロバイダーが既定で使われます。
 
-Cookie データは [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) を使用して暗号化され、[Base64UrlTextEncoder](/dotnet/api/microsoft.aspnetcore.webutilities.base64urltextencoder) でエンコードされ、チャンクされます。 Cookie の最大サイズは、暗号化とチャンク化のため、[4096 バイト](http://www.faqs.org/rfcs/rfc2965.html)未満です。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、Cookie データは圧縮されません。 Cookie ベース TempData プロバイダーの詳細については、「[CookieTempDataProvider](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.cookietempdataprovider)」を参照してください。
+Cookie データは、<xref:Microsoft.AspNetCore.DataProtection.IDataProtector> を使用して暗号化され、<xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> でエンコードされた後、チャンクされます。 Cookie の最大サイズは、暗号化とチャンク化のため、[4096 バイト](http://www.faqs.org/rfcs/rfc2965.html)未満です。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、Cookie データは圧縮されません。 Cookie ベース TempData プロバイダーの詳細については、<xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> を参照してください。
 
 ### <a name="choose-a-tempdata-provider"></a>TempData プロバイダーを選択する
 
@@ -228,9 +229,9 @@ Web ブラウザーなどのほとんどの Web クライアントは、各 Cook
 
 Cookie ベース TempData プロバイダーは既定で有効になります。
 
-セッション ベースの TempData プロバイダーを有効にするには、[AddSessionStateTempDataProvider](/dotnet/api/microsoft.extensions.dependencyinjection.mvcviewfeaturesmvcbuilderextensions.addsessionstatetempdataprovider) 拡張メソッドを使います。 `AddSessionStateTempDataProvider` の呼び出しは 1 つだけ必要です。
+セッション ベースの TempData プロバイダーを有効にするには、<xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> 拡張メソッドを使います。 `AddSessionStateTempDataProvider` の呼び出しは 1 つだけ必要です。
 
-[!code-csharp[](app-state/samples/3.x/SessionSample/Startup3.cs?name=snippet1&highlight=4,6,30)]
+[!code-csharp[](app-state/samples/3.x/SessionSample/Startup3.cs?name=snippet1&highlight=4,6,8,30)]
 
 ## <a name="query-strings"></a>クエリ文字列
 
@@ -244,7 +245,7 @@ Cookie ベース TempData プロバイダーは既定で有効になります。
 
 ## <a name="httpcontextitems"></a>HttpContext.Items
 
-1 つの要求を処理している間データを格納するには、[HttpContext.Items](/dotnet/api/microsoft.aspnetcore.http.httpcontext.items) コレクションを使います。 要求が処理された後、コレクションの内容は破棄されます。 `Items` コレクションは、コンポーネントまたはミドルウェアが要求の間の異なる時点で動作し、パラメーターを受け渡す直接的な方法がない場合に、コンポーネントとミドルウェアが通信できるようにするためによく使われます。
+1 つの要求を処理している間にデータを格納するには、<xref:Microsoft.AspNetCore.Http.HttpContext.Items?displayProperty=nameWithType> コレクションを使います。 要求が処理された後、コレクションの内容は破棄されます。 `Items` コレクションは、コンポーネントまたはミドルウェアが要求の間の異なる時点で動作し、パラメーターを受け渡す直接的な方法がない場合に、コンポーネントとミドルウェアが通信できるようにするためによく使われます。
 
 次の例では、[ミドルウェア](xref:fundamentals/middleware/index)により `isVerified` が `Items` コレクションに追加されます。
 
@@ -341,7 +342,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 * Cookie を受け取り、セッションが期限切れになった場合、同じセッション Cookie を使用する新しいセッションが作成されます。
 * 空のセッションは保持されません。要求と要求の間でセッションを維持するには、少なくとも 1 つの値をセッションが持っている必要があります。 セッションが保持されないと、新しい要求ごとに新しいセッション ID が生成されます。
 * アプリは、最後の要求から限られた時間だけセッションを維持します。 アプリでは、セッション タイムアウトを設定するか、既定値の 20 分を使用します。 セッション状態は、特定のセッションに固有であるが、セッション間で永続的に保持する必要のないユーザー データの格納に最適です。
-* セッション データは、[ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear) の実装が呼び出されるか、セッションが期限切れになると、削除されます。
+* セッション データは、<xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> の実装が呼び出されるか、セッションが期限切れになると、削除されます。
 * クライアント ブラウザーが閉じられたこと、またはクライアントでセッション Cookie が削除されるか期限切れになったことを、アプリ コードに通知する既定のメカニズムはありません。
 * ASP.NET Core MVC と Razor ページのテンプレートには、一般データ保護規制 (GDPR) のサポートが含まれます。 セッション状態の Cookie は既定では必須になっていません。このため、サイトの訪問者が追跡を許可しない限り、セッション状態は機能しません。 詳細については、「<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>」を参照してください。
 
@@ -351,15 +352,15 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 メモリ内キャッシュ プロバイダーは、アプリが存在するサーバーのメモリにセッション データを格納します。 サーバー ファームのシナリオでは次のようになります。
 
 * "*固定セッション*" を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
-* セッション Cookie は [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) によって暗号化されます。 各コンピューターでセッション Cookie を読み取るには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
+* セッション Cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション Cookie を読み取るには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
 
 ### <a name="configure-session-state"></a>セッション状態を構成する
 
 [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) に含まれる [Microsoft.AspNetCore.Session](https://www.nuget.org/packages/Microsoft.AspNetCore.Session/) パッケージは、セッション状態を管理するためのミドルウェアを提供します。 セッション ミドルウェアを有効にするには、`Startup` に次が含まれている必要があります。
 
-* いずれかの [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) メモリ キャッシュ。 `IDistributedCache` 実装はセッションのバックアップ ストアとして利用されます。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
-* `ConfigureServices` での [AddSession](/dotnet/api/microsoft.extensions.dependencyinjection.sessionservicecollectionextensions.addsession) の呼び出し。
-* `Configure` での [UseSession](/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions.usesession#Microsoft_AspNetCore_Builder_SessionMiddlewareExtensions_UseSession_Microsoft_AspNetCore_Builder_IApplicationBuilder_) の呼び出し。
+* いずれかの <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> メモリ キャッシュ。 `IDistributedCache` 実装はセッションのバックアップ ストアとして利用されます。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
+* `ConfigureServices` での <xref:Microsoft.Extensions.DependencyInjection.SessionServiceCollectionExtensions.AddSession%2A> の呼び出し。
+* `Configure` での <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> の呼び出し。
 
 次のコードでは、`IDistributedCache` の既定のメモリ内実装でメモリ内セッション プロバイダーを設定する方法を示します。
 
@@ -367,7 +368,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 ミドルウェアの順序が重要です。 上の例では、`UseMvc` の後で `UseSession` を呼び出すと、`InvalidOperationException` 例外が発生します。 詳細については、[ミドルウェアの順序](xref:fundamentals/middleware/index#order)に関するページをご覧ください。
 
-[HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session) は、セッション状態を構成した後で使用できます。
+<xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType> は、セッション状態を構成した後に使用できます。
 
 `UseSession` を呼び出前に `HttpContext.Session` にアクセスすることはできません。
 
@@ -375,43 +376,43 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 ### <a name="load-session-state-asynchronously"></a>セッション状態を非同期的に読み込む
 
-[TryGetValue](/dotnet/api/microsoft.aspnetcore.http.isession.trygetvalue)、[Set](/dotnet/api/microsoft.aspnetcore.http.isession.set)、または [Remove](/dotnet/api/microsoft.aspnetcore.http.isession.remove) メソッドの前に、[ISession.LoadAsync](/dotnet/api/microsoft.aspnetcore.http.isession.loadasync) メソッドが明示的に呼び出された場合にのみ、ASP.NET Core の既定のセッション プロバイダーは、基になっている [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) バッキング ストアからセッション レコードを非同期に読み込みます。 `LoadAsync` を最初に呼び出さないと、基になっているセッション レコードは同期的に読み込まれ、パフォーマンスが大幅に低下する可能性があります。
+ASP.NET Core の既定のセッション プロバイダーでは、<xref:Microsoft.AspNetCore.Http.ISession.TryGetValue%2A>、<xref:Microsoft.AspNetCore.Http.ISession.Set%2A>、または <xref:Microsoft.AspNetCore.Http.ISession.Remove%2A> メソッドの前に <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync%2A?displayProperty=nameWithType> メソッドが明示的に呼び出された場合にのみ、基になる <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> バッキング ストアから非同期的にセッション レコードを読み込みます。 `LoadAsync` を最初に呼び出さないと、基になっているセッション レコードは同期的に読み込まれ、パフォーマンスが大幅に低下する可能性があります。
 
-アプリにこのパターンを強制させるには、`TryGetValue`、`Set`、または `Remove` の前に `LoadAsync` メソッドが呼び出されない場合に例外をスローするバージョンで、[DistributedSessionStore](/dotnet/api/microsoft.aspnetcore.session.distributedsessionstore) および [DistributedSession](/dotnet/api/microsoft.aspnetcore.session.distributedsession) の実装をラップします。 ラップしたバージョンをサービス コンテナーに登録します。
+アプリにこのパターンを強制させるには、`TryGetValue`、`Set`、または `Remove` の前に `LoadAsync` メソッドが呼び出されない場合に例外をスローするバージョンで、<xref:Microsoft.AspNetCore.Session.DistributedSessionStore> および <xref:Microsoft.AspNetCore.Session.DistributedSession> の実装をラップします。 ラップしたバージョンをサービス コンテナーに登録します。
 
 ### <a name="session-options"></a>セッション オプション
 
-セッションの既定値をオーバーライドするには、[SessionOptions](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions) を使用します。
+セッションの既定値をオーバーライドするには、<xref:Microsoft.AspNetCore.Builder.SessionOptions> を使用します。
 
 | オプション | 説明 |
 | ------ | ----------- |
-| [Cookie](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.cookie) | Cookie の作成に使用される設定を決定します。 [Name](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.name) の既定値は [SessionDefaults.CookieName](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiename) (`.AspNetCore.Session`) です。 [Path](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.path) の既定値は [SessionDefaults.CookiePath](/dotnet/api/microsoft.aspnetcore.session.sessiondefaults.cookiepath) (`/`) です。 [SameSite](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.samesite) の既定値は [SameSiteMode.Lax](/dotnet/api/microsoft.aspnetcore.http.samesitemode) (`1`) です。 [HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) の既定値は `true` です。 [IsEssential](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.isessential) の既定値は `false` です。 |
-| [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、Cookie には適用されません。 既定値は 20 分です。 |
-| [IOTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.iotimeout) | ストアからのセッションの読み込み、またはストアに戻すコミットに対して許容される最大時間です。 この設定は非同期操作にのみ適用できます。 このタイムアウトは、[InfiniteTimeSpan](/dotnet/api/system.threading.timeout.infinitetimespan) を使用して無効にすることができます。 既定値は 1 分です。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Cookie の作成に使用される設定を決定します。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> の既定値は <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> では、既定値が `true` に設定されます。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> では、既定値が `false` に設定されます。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、Cookie には適用されません。 既定値は 20 分です。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | ストアからのセッションの読み込み、またはストアに戻すコミットに対して許容される最大時間です。 この設定は非同期操作にのみ適用できます。 このタイムアウトは、<xref:System.Threading.Timeout.InfiniteTimeSpan> を使用して無効にすることができます。 既定値は 1 分です。 |
 
-セッションは Cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この Cookie は `.AspNetCore.Session` という名前になり、パス `/` を使用します。 Cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません ([HttpOnly](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder.httponly) の既定値が `true` になるため)。
+セッションは Cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この Cookie は `.AspNetCore.Session` という名前になり、パス `/` を使用します。 Cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません (<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> の既定値が `true` になるため)。
 
 Cookie セッションの既定値をオーバーライドするには、`SessionOptions` を使用します。
 
 [!code-csharp[](app-state/samples_snapshot/2.x/SessionSample/Startup.cs?name=snippet1&highlight=14-19)]
 
-アプリは [IdleTimeout](/dotnet/api/microsoft.aspnetcore.builder.sessionoptions.idletimeout) プロパティを使用し、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間を決定します。 このプロパティは Cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](/dotnet/api/microsoft.aspnetcore.session.sessionmiddleware)を通過するたびにタイムアウトがリセットされます。
+アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは Cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
 
 セッション状態は "*ロックなし*" です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は*一貫性のあるセッション*として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
 
 ### <a name="set-and-get-session-values"></a>セッション値の設定および取得
 
-セッション状態には、Razor Pages の [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) クラスから、または MVC の [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller) クラスの [HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session) でアクセスします。 このプロパティは [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) 実装です。
+セッション状態にアクセスするには、Razor Pages の <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラスか、MVC の <xref:Microsoft.AspNetCore.Mvc.Controller> クラスを <xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType> と共に使用します。 このプロパティは <xref:Microsoft.AspNetCore.Http.ISession> の実装です。
 
-`ISession` の実装では、整数値や文字列値を設定および取得するための複数の拡張メソッドが提供されています。 [Microsoft.AspNetCore.Http.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) パッケージがプロジェクトによって参照されている場合、拡張メソッドは [Microsoft.AspNetCore.Http](/dotnet/api/microsoft.aspnetcore.http) 名前空間内にあります (拡張メソッドにアクセスするには、`using Microsoft.AspNetCore.Http;` ステートメントを追加します)。 どちらのパッケージも、[Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)に含まれます。
+`ISession` の実装では、整数値や文字列値を設定および取得するための複数の拡張メソッドが提供されています。 [Microsoft.AspNetCore.Http.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) パッケージがプロジェクトによって参照されている場合、拡張メソッドは <xref:Microsoft.AspNetCore.Http> 名前空間内にあります (拡張メソッドにアクセスするには、`using Microsoft.AspNetCore.Http;` ステートメントを追加します)。 どちらのパッケージも、[Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)に含まれます。
 
 `ISession` 拡張メソッド:
 
-* [Get(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.get)
-* [GetInt32(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getint32)
-* [GetString(ISession, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.getstring)
-* [SetInt32(ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
-* [SetString(ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
+* [Get(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.Get%2A)
+* [GetInt32(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetInt32%2A)
+* [GetString(ISession, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetString%2A)
+* [SetInt32(ISession, String, Int32)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetInt32%2A)
+* [SetString(ISession, String, String)](xref:Microsoft.AspNetCore.Http.SessionExtensions.SetString%2A)
 
 次の例では、`IndexModel.SessionKeyName` キー (サンプル アプリ内の `_Name`) のセッション値を Razor Pages ページで取得します。
 
@@ -429,7 +430,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 [!code-csharp[](app-state/samples/2.x/SessionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=18-19,22-23)]
 
-分散キャッシュのシナリオを有効にするには、メモリ内キャッシュを使用する場合であっても、すべてのセッション データをシリアル化する必要があります。 文字列と整数のシリアライザーは、[ISession](/dotnet/api/microsoft.aspnetcore.http.isession)) の拡張メソッドによって提供されます。 複合型は、JSON などの別のメカニズムを使ってユーザーがシリアル化する必要があります。
+分散キャッシュのシナリオを有効にするには、メモリ内キャッシュを使用する場合であっても、すべてのセッション データをシリアル化する必要があります。 文字列と整数のシリアライザーは、<xref:Microsoft.AspNetCore.Http.ISession>) の拡張メソッドによって提供されます。 複合型は、JSON などの別のメカニズムを使ってユーザーがシリアル化する必要があります。
 
 シリアル化可能なオブジェクトを設定および取得するには、次の拡張メソッドを追加します。
 
@@ -469,7 +470,7 @@ ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc
 
 Cookie に TempData を格納するには、Cookie ベースの TempData プロバイダーが既定で使われます。
 
-Cookie データは [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) を使用して暗号化され、[Base64UrlTextEncoder](/dotnet/api/microsoft.aspnetcore.webutilities.base64urltextencoder) でエンコードされ、チャンクされます。 Cookie はチャンクされるため、ASP.NET Core 1.x の 1 Cookie のサイズ上限は適用されません。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、Cookie データは圧縮されません。 Cookie ベース TempData プロバイダーの詳細については、「[CookieTempDataProvider](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.cookietempdataprovider)」を参照してください。
+Cookie データは、<xref:Microsoft.AspNetCore.DataProtection.IDataProtector> を使用して暗号化され、<xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> でエンコードされた後、チャンクされます。 Cookie はチャンクされるため、ASP.NET Core 1.x の 1 Cookie のサイズ上限は適用されません。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、Cookie データは圧縮されません。 Cookie ベース TempData プロバイダーの詳細については、<xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> を参照してください。
 
 ### <a name="choose-a-tempdata-provider"></a>TempData プロバイダーを選択する
 
@@ -486,7 +487,7 @@ TempData プロバイダーを選択するときの考慮事項:
 
 Cookie ベース TempData プロバイダーは既定で有効になります。
 
-セッション ベースの TempData プロバイダーを有効にするには、[AddSessionStateTempDataProvider](/dotnet/api/microsoft.extensions.dependencyinjection.mvcviewfeaturesmvcbuilderextensions.addsessionstatetempdataprovider) 拡張メソッドを使います。
+セッション ベースの TempData プロバイダーを有効にするには、<xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> 拡張メソッドを使います。
 
 [!code-csharp[](app-state/samples_snapshot_2/2.x/SessionSample/Startup.cs?name=snippet1&highlight=11,13,32)]
 
@@ -507,7 +508,7 @@ Cookie ベース TempData プロバイダーは既定で有効になります。
 
 ## <a name="httpcontextitems"></a>HttpContext.Items
 
-1 つの要求を処理している間データを格納するには、[HttpContext.Items](/dotnet/api/microsoft.aspnetcore.http.httpcontext.items) コレクションを使います。 要求が処理された後、コレクションの内容は破棄されます。 `Items` コレクションは、コンポーネントまたはミドルウェアが要求の間の異なる時点で動作し、パラメーターを受け渡す直接的な方法がない場合に、コンポーネントとミドルウェアが通信できるようにするためによく使われます。
+1 つの要求を処理している間にデータを格納するには、<xref:Microsoft.AspNetCore.Http.HttpContext.Items?displayProperty=nameWithType> コレクションを使います。 要求が処理された後、コレクションの内容は破棄されます。 `Items` コレクションは、コンポーネントまたはミドルウェアが要求の間の異なる時点で動作し、パラメーターを受け渡す直接的な方法がない場合に、コンポーネントとミドルウェアが通信できるようにするためによく使われます。
 
 次の例では、[ミドルウェア](xref:fundamentals/middleware/index)により `isVerified` が `Items` コレクションに追加されます。
 

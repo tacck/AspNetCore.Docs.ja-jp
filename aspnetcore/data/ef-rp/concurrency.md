@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 597f396237151f49a9ae333973e91d8f4f7c6ff1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ff9e01df002ac0fc94ced6d5d093099d66a14f36
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401377"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176280"
 ---
 # <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー
 
@@ -86,7 +86,7 @@ EF Core では、競合が検出されると `DbConcurrencyException` 例外が�
 
 * Update コマンドと Delete コマンドの Where 句で[コンカレンシー トークン](/ef/core/modeling/concurrency)として構成されている列の元の値を含むように、EF Core を構成します。
 
-  `SaveChanges` が呼び出されると、[ConcurrencyCheck](/dotnet/api/system.componentmodel.dataannotations.concurrencycheckattribute) 属性で注釈付けされたプロパティの元の値が Where 句によって検索されます。 行が最初に読み取られてからいずれかのコンカレンシー トークン プロパティが変更されている場合、Update ステートメントでは更新する行が検索されません。 EF Core では、それがコンカレンシーの競合として解釈されます。 データベース テーブルに列がたくさんある場合、この手法では結果的に大量の Where 句が出現し、大量の状態が必要になります。 そのため、この手法は一般的には推奨されません。このチュートリアルでも利用しません。
+  `SaveChanges` が呼び出されると、<xref:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute> 属性で注釈付けされたプロパティの元の値が Where 句によって検索されます。 行が最初に読み取られてからいずれかのコンカレンシー トークン プロパティが変更されている場合、Update ステートメントでは更新する行が検索されません。 EF Core では、それがコンカレンシーの競合として解釈されます。 データベース テーブルに列がたくさんある場合、この手法では結果的に大量の Where 句が出現し、大量の状態が必要になります。 そのため、この手法は一般的には推奨されません。このチュートリアルでも利用しません。
 
 * 行が変更されたタイミングを判断するトラッキング列をデータベース テーブルに追加します。
 
@@ -98,7 +98,7 @@ EF Core では、競合が検出されると `DbConcurrencyException` 例外が�
 
 [!code-csharp[](intro/samples/cu30/Models/Department.cs?highlight=26,27)]
 
-[Timestamp](/dotnet/api/system.componentmodel.dataannotations.timestampattribute) 属性により、列がコンカレンシー トラッキング列として識別されます。 fluent API は、トラッキング プロパティを指定する別の方法です。
+<xref:System.ComponentModel.DataAnnotations.TimestampAttribute> 属性により、列がコンカレンシー トラッキング列として識別されます。 fluent API は、トラッキング プロパティを指定する別の方法です。
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -250,7 +250,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
 
 次のコードでは、更新されたページが表示されます。
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
 
 ## <a name="update-the-edit-page-model"></a>Edit ページ モデルの更新
 
@@ -258,7 +258,7 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_All)]
 
-[OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyentry.originalvalue?view=efcore-2.0#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyEntry_OriginalValue) は、`OnGet` メソッドでフェッチされたときのエンティティの `rowVersion` 値で更新されます。 EF Core では、WHERE 句に元の `RowVersion` 値が含まれる、SQL の UPDATE コマンドが生成されます。 UPDATE コマンドの影響を受ける行がない場合 (元の `RowVersion` 値が含まれる行がない)、`DbUpdateConcurrencyException` 例外がスローされます。
+<xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.OriginalValue> は、`OnGet` メソッドでフェッチされたときのエンティティの `rowVersion` 値で更新されます。 EF Core では、WHERE 句に元の `RowVersion` 値が含まれる、SQL の UPDATE コマンドが生成されます。 UPDATE コマンドの影響を受ける行がない場合 (元の `RowVersion` 値が含まれる行がない)、`DbUpdateConcurrencyException` 例外がスローされます。
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_RowVersion&highlight=17-18)]
 
@@ -282,16 +282,16 @@ SQLite データベースでは、エンティティ プロパティの `[Timest
 
 `ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。 Razor ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。
 
-### <a name="update-the-razor-page"></a>Razor ページを更新する
+### <a name="update-the-edit-page"></a>[編集] ページを更新する
 
 *Pages/Departments/Edit.cshtml* を次のコードで更新します。
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 上記のコードでは次の操作が行われます。
 
 * `page` ディレクティブを `@page` から `@page "{id:int}"` に更新します。
-* 非表示の行バージョンが追加されます。 ポストバックが値をバインドするように、`RowVersion` を追加する必要があります。
+* 非表示の行バージョンが追加されます。 ポストバックによって値がバインドされるように、`RowVersion` を追加する必要があります。
 * デバッグのために、`RowVersion` の最後のバイトが表示されます。
 * `ViewData` を厳密に型指定された `InstructorNameSL` と置換します。
 
@@ -323,7 +323,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 **[保存]** をもう一度クリックします。 2 番目のブラウザー タブに入力した値が保存されます。 Index ページで、保存した値が表示されます。
 
-## <a name="update-the-delete-page"></a>[削除] ページを更新する
+## <a name="update-the-delete-page-model"></a>Delete ページ モデルを更新する
 
 *Pages/Departments/Delete.cshtml.cs* を次のコードで更新します。
 
@@ -335,11 +335,11 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 * DbUpdateConcurrencyException 例外がスローされます。
 * `OnGetAsync` が `concurrencyError` と共に呼び出されます。
 
-### <a name="update-the-delete-razor-page"></a>[削除] Razor ページを更新する
+### <a name="update-the-delete-page"></a>[削除] ページを更新する
 
 次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,42,51)]
 
 上記のコードは、次の変更を加えます。
 
@@ -347,7 +347,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 * エラー メッセージを追加します。
 * **[管理者]** フィールドで FirstMidName が FullName に変更されます。
 * 最後のバイトを表示するよう、`RowVersion` を変更します。
-* 非表示の行バージョンが追加されます。 postgit add back によって値がバインドされるように、`RowVersion` を追加する必要があります。
+* 非表示の行バージョンが追加されます。 ポストバックによって値がバインドされるように、`RowVersion` を追加する必要があります。
 
 ### <a name="test-concurrency-conflicts"></a>コンカレンシーの競合をテストする
 
@@ -365,7 +365,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 Index ページが、値が変更され、rowVersion インジケーターが更新され、ブラウザーに表示されます。 更新された rowVersion インジケーターに注意してください。これは、他方のタブの 2 番目のポストバックに表示されています。
 
-2 番目のタブから、テスト部署を削除します。データベースからの現在の値で、コンカレンシー エラーが表示されます。 **[削除]** をクリックすると、`RowVersion` が更新され、部署が削除されていない限り、エンティティは削除されます。
+2 番目のタブから、テスト部署を削除します。データベースからの現在の値で、コンカレンシー エラーが表示されます。 **[削除]** をクリックすると、`RowVersion` が更新されていない限り、エンティティが削除されます。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -550,7 +550,7 @@ Index ページを更新するために、次を実行します。
 
 次のマークアップは、更新されたページを示しています。
 
-[!code-html[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
 
 ### <a name="update-the-edit-page-model"></a>Edit ページ モデルの更新
 
@@ -582,7 +582,7 @@ Index ページを更新するために、次を実行します。
 
 次のマークアップを使用して *Pages/Departments/Edit.cshtml* を更新します。
 
-[!code-html[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 上のマークアップでは以下の操作が行われます。
 
@@ -637,7 +637,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
 
-[!code-html[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
 
 上記のコードは、次の変更を加えます。
 
@@ -663,7 +663,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 Index ページが、値が変更され、rowVersion インジケーターが更新され、ブラウザーに表示されます。 更新された rowVersion インジケーターに注意してください。これは、他方のタブの 2 番目のポストバックに表示されています。
 
-2 番目のタブから、テスト部署を削除します。データベースからの現在の値で、コンカレンシー エラーが表示されます。 **[削除]** をクリックすると、`RowVersion` が更新され、部署が削除されていない限り、エンティティは削除されます。
+2 番目のタブから、テスト部署を削除します。データベースからの現在の値で、コンカレンシー エラーが表示されます。 **[削除]** をクリックすると、`RowVersion` が更新されていない限り、エンティティが削除されます。
 
 データ モデルを継承する方法については、「[継承](xref:data/ef-mvc/inheritance)」を参照してください。
 
