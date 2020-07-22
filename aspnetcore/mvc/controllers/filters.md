@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213060"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869979"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core フィルター
 
@@ -83,6 +83,8 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 同期フィルターでは、そのパイプライン ステージの前と後にコードが実行されます。 たとえば、<xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*> はアクション メソッドの呼び出し前に呼び出されます。 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*> は、アクション メソッドが戻った後に呼び出されます。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
+
+上記のコードでは、 [Mydebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)は[サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)のユーティリティ関数です。
 
 非同期フィルターでは、`On-Stage-ExecutionAsync` メソッドが定義されます。 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*> の例を次に示します。
 
@@ -184,12 +186,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| シーケンス | フィルターのスコープ | フィルター メソッド |
+| Sequence | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラーまたは Razor ページ| `OnActionExecuting` |
-| 3 | 方法 | `OnActionExecuting` |
-| 4 | 方法 | `OnActionExecuted` |
+| 3 | Method | `OnActionExecuting` |
+| 4 | Method | `OnActionExecuted` |
 | 5 | コントローラーまたは Razor ページ | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -211,6 +213,8 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 * `OnActionExecuting` と `OnActionExecuted` がオーバーライドされます。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
+
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
@@ -728,12 +732,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| シーケンス | フィルターのスコープ | フィルター メソッド |
+| Sequence | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラー | `OnActionExecuting` |
-| 3 | 方法 | `OnActionExecuting` |
-| 4 | 方法 | `OnActionExecuted` |
+| 3 | Method | `OnActionExecuting` |
+| 4 | Method | `OnActionExecuted` |
 | 5 | コントローラー | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -788,14 +792,14 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 上記の例にある同じ 3 つのアクション フィルターを検討してください。 コントローラーとグローバル フィルターの `Order` プロパティが 1 と 2 にそれぞれ設定される場合、実行順序が逆になります。
 
-| シーケンス | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
+| Sequence | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 方法 | 0 | `OnActionExecuting` |
+| 1 | Method | 0 | `OnActionExecuting` |
 | 2 | コントローラー | 1  | `OnActionExecuting` |
 | 3 | グローバル | 2  | `OnActionExecuting` |
 | 4 | グローバル | 2  | `OnActionExecuted` |
 | 5 | コントローラー | 1  | `OnActionExecuted` |
-| 6 | 方法 | 0  | `OnActionExecuted` |
+| 6 | Method | 0  | `OnActionExecuted` |
 
 フィルターの実行順序を決定するときに、`Order` プロパティによりスコープがオーバーライドされます。 最初に順序でフィルターが並べ替えられ、次に同じ順位の優先度を決めるためにスコープが使用されます。 組み込みのフィルターはすべて `IOrderedFilter` を実装し、既定の `Order` 値を 0 に設定します。 組み込みのフィルターの場合、`Order` をゼロ以外の値に設定しない限り、スコープによって順序が決定されます。
 
