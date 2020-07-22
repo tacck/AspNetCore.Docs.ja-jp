@@ -5,7 +5,7 @@ description: ASP.NET Core での Web API の作成の基本について説明し
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/02/2020
+ms.date: 07/20/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c9762d23ff612155846357bfadeaaad492c7299
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404731"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568744"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core を使って Web API を作成する
 
@@ -98,16 +98,12 @@ Web API は、<xref:Microsoft.AspNetCore.Mvc.ControllerBase> から派生した 
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.1"
-
 * [属性ルーティング要件](#attribute-routing-requirement)
 * [自動的な HTTP 400 応答](#automatic-http-400-responses)
 * [バインディング ソース パラメーター推論](#binding-source-parameter-inference)
 * [マルチパート/フォーム データ要求の推論](#multipartform-data-request-inference)
 
 これらの機能では[互換性バージョン](xref:mvc/compatibility-version) 2.1 以降が必要です。
-
-::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>特定のコントローラーにおける属性
 
@@ -232,9 +228,11 @@ ASP.NET Core MVC では、<xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelSta
 
 ::: moniker-end
 
+自動とカスタムの応答を一貫させるには、<xref:System.Web.Http.ApiController.BadRequest%2A> ではなく <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> メソッドを呼び出します。 `ValidationProblem` は <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> オブジェクトと、自動的な応答を返します。
+
 ### <a name="log-automatic-400-responses"></a>自動的な 400 応答を記録する
 
-[「How to log automatic 400 responses on model validation errors (モデル検証エラー時に自動的な 400 応答を記録する方法)」(aspnet/AspNetCore.Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157) を参照してください。
+「[How to log automatic 400 responses on model validation error (dotnet/AspNetCore.Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157)」(モデル検証エラー時に自動的な 400 応答を記録する方法) を参照してください。
 
 ### <a name="disable-automatic-400-response"></a>自動的な 400 応答を無効にする
 
