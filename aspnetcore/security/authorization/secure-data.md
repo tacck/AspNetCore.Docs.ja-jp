@@ -1,35 +1,29 @@
 ---
 title: 承認によって保護されたユーザーデータを含む ASP.NET Core アプリを作成する
 author: rick-anderson
-description: Razor承認によって保護されたユーザーデータを含むページアプリを作成する方法について説明します。 HTTPS、認証、セキュリティ、ASP.NET Core が含まれ Identity ます。
+description: '認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する方法について説明します。 HTTPS、認証、セキュリティ、ASP.NET Core が含まれ :::no-loc(Identity)::: ます。'
 ms.author: riande
-ms.date: 12/18/2018
+ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authorization/secure-data
-ms.openlocfilehash: f50015af864a4a62abd5e2eab508aac915cb6370
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404718"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160279"
 ---
-# <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>承認によって保護されたユーザーデータを含む ASP.NET Core アプリを作成する
+# <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Joe Audette](https://twitter.com/joeaudette)
-
-::: moniker range="<= aspnetcore-1.1"
-
-ASP.NET Core MVC バージョンについては、[この PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf)を参照してください。 このチュートリアルの ASP.NET Core 1.1 バージョンは、[この](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data)フォルダーにあります。 1.1 ASP.NET Core サンプルは、「」[のサンプルに](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2)含まれています。
-
-::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
@@ -77,7 +71,7 @@ ASP.NET Core MVC バージョンについては、[この PDF](https://webpifeed
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>[前提条件]
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -103,11 +97,11 @@ ASP.NET Core MVC バージョンについては、[この PDF](https://webpifeed
 
 ### <a name="tie-the-contact-data-to-the-user"></a>連絡先データをユーザーに関連付ける
 
-ASP.NET ユーザー ID を使用すると、 [Identity](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。 `OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。
+ASP.NET ユーザー ID を使用すると、 [:::no-loc(Identity):::](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。 `OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`データベース内のテーブルのユーザー ID を示し `AspNetUser` [Identity](xref:security/authentication/identity) ます。 フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。
+`OwnerID`データベース内のテーブルのユーザー ID を示し `AspNetUser` [:::no-loc(Identity):::](xref:security/authentication/identity) ます。 フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。
 
 新しい移行を作成し、データベースを更新します。
 
@@ -116,21 +110,39 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-identity"></a>役割サービスの追加先Identity
+### <a name="add-role-services-to-no-locidentity"></a>役割サービスの追加先:::no-loc(Identity):::
 
-役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1)を追加します。
+役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1)を追加します。
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet2&highlight=9)]
 
+<a name="rau"></a>
+
 ### <a name="require-authenticated-users"></a>認証されたユーザーが必要
 
-ユーザーが認証されるようにするには、既定の認証ポリシーを設定します。
+ユーザーが認証されるようにするには、フォールバック認証ポリシーを設定します。
 
-[!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=15-99)] 
+[!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
- Razorページ、コントローラー、またはアクションメソッドレベルで、属性を使用して認証を無効にすることができ `[AllowAnonymous]` ます。 既定の認証ポリシーを設定すると、ユーザーの認証が必要になり、新しく追加されたページとコントローラーは保護され Razor ます。 既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です Razor `[Authorize]` 。
+前の強調表示されたコードは、[フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。 フォールバック認証ポリシーでは***all*** 、 :::no-loc(Razor)::: ページ、コントローラー、または認証属性を持つアクションメソッドを除き、すべてのユーザーの認証が必要です。 たとえば、 :::no-loc(Razor)::: ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。
 
-匿名ユーザーが登録前にサイトに関する情報を取得できるように、 [Allowanonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute)をインデックスおよびプライバシーページに追加します。
+フォールバック認証ポリシー:
+
+* は、認証ポリシーを明示的に指定しないすべての要求に適用されます。 エンドポイントのルーティングによって提供される要求の場合、これには承認属性を指定しないエンドポイントが含まれます。 [静的ファイル](xref:fundamentals/static-files)など、承認ミドルウェアの後に他のミドルウェアによって提供される要求の場合、ポリシーがすべての要求に適用されます。
+
+代替認証ポリシーを設定して、ユーザーが認証を要求するようにすると、新しく追加されたページとコントローラーが保護され :::no-loc(Razor)::: ます。 既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です :::no-loc(Razor)::: `[Authorize]` 。
+
+クラスには <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> も含まれ <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> ます。 は、 `DefaultPolicy` `[Authorize]` ポリシーが指定されていない場合に、属性で使用されるポリシーです。 `[Authorize]`はと異なり、名前付きポリシーを含んでいません `[Authorize(PolicyName="MyPolicy")]` 。
+
+ポリシーの詳細については、「」を参照してください <xref:security/authorization/policies> 。
+
+すべてのユーザーの認証を要求する MVC コントローラーとページの別の方法 :::no-loc(Razor)::: は、承認フィルターを追加することです。
+
+[!code-csharp[](secure-data/samples/final3/Startup2.cs?name=snippet&highlight=14-99)]
+
+上記のコードでは、承認フィルターを使用します。フォールバックポリシーを設定するには、エンドポイントルーティングを使用します。 すべてのユーザーが認証されるようにするには、フォールバックポリシーを設定することをお勧めします。
+
+[AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) `Index` `Privacy` 匿名ユーザーが登録前にサイトに関する情報を取得できるように、allowanonymous をおよびページに追加します。
 
 [!code-csharp[](secure-data/samples/final3/Pages/Index.cshtml.cs?highlight=1,7)]
 
@@ -187,7 +199,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>認証ハンドラーを登録する
 
-Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。 は、 `ContactIsOwnerAuthorizationHandler` [Identity](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。 サービスコレクションにハンドラーを登録し `ContactsController` て、[依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。 の末尾に次のコードを追加し `ConfigureServices` ます。
+Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。 は、 `ContactIsOwnerAuthorizationHandler` [:::no-loc(Identity):::](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。 サービスコレクションにハンドラーを登録し `ContactsController` て、[依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。 の末尾に次のコードを追加し `ConfigureServices` ます。
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -195,7 +207,7 @@ Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/
 
 ## <a name="support-authorization"></a>認証のサポート
 
-このセクションでは、ページを更新 Razor し、操作要件クラスを追加します。
+このセクションでは、ページを更新 :::no-loc(Razor)::: し、操作要件クラスを追加します。
 
 ### <a name="review-the-contact-operations-requirements-class"></a>Contact operation の要件クラスを確認する
 
@@ -203,16 +215,16 @@ Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-razor-pages"></a>連絡先ページの基本クラスを作成する Razor
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>連絡先ページの基本クラスを作成する :::no-loc(Razor):::
 
-[連絡先] ページで使用されるサービスを含む基本クラスを作成 Razor します。 基本クラスは、初期化コードを1つの場所に配置します。
+[連絡先] ページで使用されるサービスを含む基本クラスを作成 :::no-loc(Razor)::: します。 基本クラスは、初期化コードを1つの場所に配置します。
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/DI_BasePageModel.cs)]
 
 上記のコードでは次の操作が行われます。
 
 * `IAuthorizationService`認証ハンドラーにアクセスするためのサービスを追加します。
-* サービスを追加し Identity `UserManager` ます。
+* サービスを追加し :::no-loc(Identity)::: `UserManager` ます。
 * `ApplicationDbContext` を追加します。
 
 ### <a name="update-the-createmodel"></a>CreateModel を更新する
@@ -261,7 +273,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。 リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。 ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。 Razorページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。
+> データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。 リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。 ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。 :::no-loc(Razor):::ページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。
 
 ### <a name="update-details"></a>更新プログラムの詳細
 
@@ -284,7 +296,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 ## <a name="differences-between-challenge-and-forbid"></a>チャレンジと禁止の違い
 
-このアプリでは、認証された[ユーザーを要求](#require-authenticated-users)する既定のポリシーを設定します。 次のコードでは、匿名ユーザーを許可します。 匿名ユーザーは、チャレンジと禁止の違いを示すことができます。
+このアプリでは、認証された[ユーザーを要求](#rau)する既定のポリシーを設定します。 次のコードでは、匿名ユーザーを許可します。 匿名ユーザーは、チャレンジと禁止の違いを示すことができます。
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/Details2.cshtml.cs?name=snippet)]
 
@@ -316,7 +328,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 * マネージャーは、連絡先データを承認/拒否することができます。 このビューには、 `Details` [**承認**] ボタンと [**却下**] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| ユーザー                | アプリによるシード処理 | オプション                                  |
+| User                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -326,7 +338,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 ## <a name="create-the-starter-app"></a>スターターアプリを作成する
 
-* Razor"ContactManager" という名前のページアプリを作成する
+* :::no-loc(Razor):::"ContactManager" という名前のページアプリを作成する
   * **個々のユーザーアカウント**を使用してアプリを作成します。
   * 名前空間がサンプルで使用される名前空間と一致するように、"ContactManager" という名前を指定します。
   * `-uld`SQLite ではなく LocalDB を指定します。
@@ -413,7 +425,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>[前提条件]
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -439,11 +451,11 @@ dotnet ef database update
 
 ### <a name="tie-the-contact-data-to-the-user"></a>連絡先データをユーザーに関連付ける
 
-ASP.NET ユーザー ID を使用すると、 [Identity](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。 `OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。
+ASP.NET ユーザー ID を使用すると、 [:::no-loc(Identity):::](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。 `OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`データベース内のテーブルのユーザー ID を示し `AspNetUser` [Identity](xref:security/authentication/identity) ます。 フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。
+`OwnerID`データベース内のテーブルのユーザー ID を示し `AspNetUser` [:::no-loc(Identity):::](xref:security/authentication/identity) ます。 フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。
 
 新しい移行を作成し、データベースを更新します。
 
@@ -452,11 +464,11 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-identity"></a>役割サービスの追加先Identity
+### <a name="add-role-services-to-no-locidentity"></a>役割サービスの追加先:::no-loc(Identity):::
 
-役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1)を追加します。
+役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1)を追加します。
 
-[!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=12)]
+[!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=11)]
 
 ### <a name="require-authenticated-users"></a>認証されたユーザーが必要
 
@@ -464,7 +476,7 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet&highlight=17-99)] 
 
- Razorページ、コントローラー、またはアクションメソッドレベルで、属性を使用して認証を無効にすることができ `[AllowAnonymous]` ます。 既定の認証ポリシーを設定すると、ユーザーの認証が必要になり、新しく追加されたページとコントローラーは保護され Razor ます。 既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です Razor `[Authorize]` 。
+ :::no-loc(Razor):::ページ、コントローラー、またはアクションメソッドレベルで、属性を使用して認証を無効にすることができ `[AllowAnonymous]` ます。 既定の認証ポリシーを設定すると、ユーザーの認証が必要になり、新しく追加されたページとコントローラーは保護され :::no-loc(Razor)::: ます。 既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です :::no-loc(Razor)::: `[Authorize]` 。
 
 匿名ユーザーが登録前にサイトに関する情報を取得できるように、 [Allowanonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute)を Index、About、および Contact の各ページに追加します。
 
@@ -523,7 +535,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a>認証ハンドラーを登録する
 
-Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。 は、 `ContactIsOwnerAuthorizationHandler` [Identity](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。 サービスコレクションにハンドラーを登録し `ContactsController` て、[依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。 の末尾に次のコードを追加し `ConfigureServices` ます。
+Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。 は、 `ContactIsOwnerAuthorizationHandler` [:::no-loc(Identity):::](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。 サービスコレクションにハンドラーを登録し `ContactsController` て、[依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。 の末尾に次のコードを追加し `ConfigureServices` ます。
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -531,7 +543,7 @@ Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/
 
 ## <a name="support-authorization"></a>認証のサポート
 
-このセクションでは、ページを更新 Razor し、操作要件クラスを追加します。
+このセクションでは、ページを更新 :::no-loc(Razor)::: し、操作要件クラスを追加します。
 
 ### <a name="review-the-contact-operations-requirements-class"></a>Contact operation の要件クラスを確認する
 
@@ -539,16 +551,16 @@ Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-razor-pages"></a>連絡先ページの基本クラスを作成する Razor
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>連絡先ページの基本クラスを作成する :::no-loc(Razor):::
 
-[連絡先] ページで使用されるサービスを含む基本クラスを作成 Razor します。 基本クラスは、初期化コードを1つの場所に配置します。
+[連絡先] ページで使用されるサービスを含む基本クラスを作成 :::no-loc(Razor)::: します。 基本クラスは、初期化コードを1つの場所に配置します。
 
 [!code-csharp[](secure-data/samples/final2.1/Pages/Contacts/DI_BasePageModel.cs)]
 
 上記のコードでは次の操作が行われます。
 
 * `IAuthorizationService`認証ハンドラーにアクセスするためのサービスを追加します。
-* サービスを追加し Identity `UserManager` ます。
+* サービスを追加し :::no-loc(Identity)::: `UserManager` ます。
 * `ApplicationDbContext` を追加します。
 
 ### <a name="update-the-createmodel"></a>CreateModel を更新する
@@ -597,7 +609,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。 リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。 ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。 Razorページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。
+> データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。 リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。 ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。 :::no-loc(Razor):::ページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。
 
 ### <a name="update-details"></a>更新プログラムの詳細
 
@@ -643,7 +655,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 * マネージャーは、連絡先データを承認/拒否することができます。 このビューには、 `Details` [**承認**] ボタンと [**却下**] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| ユーザー                | アプリによるシード処理 | オプション                                  |
+| User                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -653,7 +665,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 ## <a name="create-the-starter-app"></a>スターターアプリを作成する
 
-* Razor"ContactManager" という名前のページアプリを作成する
+* :::no-loc(Razor):::"ContactManager" という名前のページアプリを作成する
   * **個々のユーザーアカウント**を使用してアプリを作成します。
   * 名前空間がサンプルで使用される名前空間と一致するように、"ContactManager" という名前を指定します。
   * `-uld`SQLite ではなく LocalDB を指定します。
@@ -698,7 +710,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>その他の資料
+### <a name="additional-resources"></a>その他のリソース
 
 * [Azure App Service で .NET Core および SQL Database のアプリを作成する](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core の承認ラボ](https://github.com/blowdart/AspNetAuthorizationWorkshop)。 このチュートリアルで紹介するセキュリティ機能の詳細については、このラボを参照してください。

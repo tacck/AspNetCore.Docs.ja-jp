@@ -5,22 +5,22 @@ description: ASP.NET Core Web API を使用したエラー処理について説�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 12/10/2019
+ms.date: 07/23/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: web-api/handle-errors
-ms.openlocfilehash: 0abb5e78e1971925c8e741386c65bdf71a0f0072
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: d9517bc14ced15094f279029abb791477f7a0004
+ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407633"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87159750"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API のエラーを処理する
 
@@ -229,6 +229,8 @@ HTML 形式の応答は、Postman などのツールを使用してテストす�
 1. `HttpResponseExceptionFilter` という名前のアクション フィルターを作成します。
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
+
+    上記のフィルターでは、マジックナンバー10が最大の整数値から減算されています。 この値を減算すると、パイプラインの最後で他のフィルターを実行できます。
 
 1. `Startup.ConfigureServices` に、フィルター コレクションに対するアクション フィルターを追加します。
 
