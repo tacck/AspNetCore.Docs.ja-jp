@@ -1,0 +1,1 @@
+<span data-ttu-id="f67dd-101">すべてのユーザーの認証をグローバルに要求する方法については、「 [authenticated users を要求](xref:security/authorization/secure-data#rau)する」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f67dd-101">For information on how to globally require all users to be authenticated, see [Require authenticated users](xref:security/authorization/secure-data#rau).</span></span>
