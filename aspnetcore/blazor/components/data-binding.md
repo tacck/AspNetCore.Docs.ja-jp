@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0f2741a78b58d7380fcbe84e97f5a08ef291c27b
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 896eed0e55986678b6bb86638ca92b04a77b4fef
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944506"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869940"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
@@ -167,7 +167,7 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.EventCallback%601> についての説明は、<xref:blazor/components/event-handling#eventcallback>にあります。
+<xref:Microsoft.AspNetCore.Components.EventCallback%601> は、コンポーネント パラメーター名の後に `Changed` サフィックス (`{PARAMETER NAME}Changed`) を付けた名前にする必要があります (前の例では `YearChanged`)。 <xref:Microsoft.AspNetCore.Components.EventCallback%601> の詳細については、「<xref:blazor/components/event-handling#eventcallback>」を参照してください。
 
 次の親コンポーネントは、以下を使用します。
 

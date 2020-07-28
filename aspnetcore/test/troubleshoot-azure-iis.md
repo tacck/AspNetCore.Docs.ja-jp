@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 65095f3990c72224d95f1f5fe46d320ab8f12040
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17ada36c40997353528f922bece5acc34ce760d2
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404835"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445386"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service および IIS での ASP.NET Core のトラブルシューティング
 
@@ -298,34 +299,24 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core モジュールの stdout ログ (Azure App Service)
 
-ASP.NET Core モジュールの stdout には、アプリケーション イベント ログでは見つからない有用なエラー メッセージが記録されることがよくあります。 stdout ログを有効にして表示するには:
-
-1. Azure portal で **[問題の診断と解決]** ブレードに移動します。
-1. **[SELECT PROBLEM CATEGORY]\(問題カテゴリの選択\)** で、 **[Web App Down]\(Web アプリのダウン\)** ボタンを選びます。
-1. **[推奨されている解決方法]** > **[Enable Stdout Log Redirection]\(Stdout ログのリダイレクトを有効にする\)** で、 **[Open Kudu Console to edit Web.Config]\(Kudu コンソールを開いて Web.Config を編集する\)** ボタンを選びます。
-1. Kudu の**診断コンソール**で、パス **site** > **wwwroot** へのフォルダーを開きます。 下にスクロールして、一覧の最後にある *web.config* ファイルを表示します。
-1. *web.config* ファイルの隣の鉛筆アイコンをクリックします。
-1. **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
-1. **[保存]** を選んで、更新した *web.config* ファイルを保存します。
-1. アプリに対して要求します。
-1. Azure portal に戻ります。 **[開発ツール]** 領域で **[高度なツール]** ブレードを選びます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
-1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
-1. **LogFiles** フォルダーを選びます。
-1. **[Modified]\(変更日\)** 列を調べて、変更日が最新の stdout ログの鉛筆アイコンを選んで編集します。
-1. ログ ファイルが開くと、エラーが表示されます。
-
-トラブルシューティングが完了したら、stdout ログを無効にします。
-
-1. Kudu の**診断コンソール** で、パス **site** > **wwwroot** に戻り、*web.config* ファイルを表示します。 鉛筆アイコンを選んで **web.config** ファイルを再び開きます。
-1. **stdoutLogEnabled** を `false` に設定します。
-1. **[保存]** を選んでファイルを保存します。
-
-詳細については、「<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>」を参照してください。
-
 > [!WARNING]
 > stdout ログを無効にしないと、アプリまたはサーバーで障害が発生する可能性があります。 ログ ファイルのサイズまたは作成されるログ ファイルの数に制限はありません。 stdout ログは、アプリ起動時の問題のトラブルシューティングにのみ使ってください。
 >
 > 起動後の ASP.NET Core アプリでの一般的なログの場合は、ログ ファイルのサイズを制限し、ログをローテーションするログ ライブラリを使います。 詳細については、「[サードパーティ製のログ プロバイダー](xref:fundamentals/logging/index#third-party-logging-providers)」を参照してください。
+
+ASP.NET Core モジュールの stdout には、アプリケーション イベント ログでは見つからない有用なエラー メッセージが記録されることがよくあります。 stdout ログを有効にして表示するには:
+
+1. Azure portal で Web アプリに移動します。
+1. **[App Service]** ブレードで、検索ボックスに「**kudu**」と入力します。
+1. **[高度なツール]** 、 **[Go]** の順に選択します。
+1. **[デバッグ コンソール]、[CMD]** の順に選択します。
+1. *site/wwwroot* に移動します
+1. 鉛筆アイコンを選択し、*web.config* ファイルを編集します。
+1. `<aspNetCore />` 要素で `stdoutLogEnabled="true"` を設定し、 **[保存]** を選択します。
+
+トラブルシューティングが完了したら、`stdoutLogEnabled="false"` を設定して stdout ログを無効にします。
+
+詳細については、「<xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>」を参照してください。
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core モジュールのデバッグ ログ (Azure App Service)
 
@@ -765,7 +756,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-エラーを示すアプリからのコンソール出力はすべて、Kudu コンソールにパイプされます。
+エラーを表示しているアプリからのコンソール出力は、Kudu コンソールにパイプされます。
 
 #### <a name="test-a-64-bit-x64-app"></a>64 ビット (x64) アプリをテストする
 
@@ -778,7 +769,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
   1. `cd D:\home\site\wwwroot`
   1. アプリを実行します: `{ASSEMBLY NAME}.exe`
 
-エラーを示すアプリからのコンソール出力はすべて、Kudu コンソールにパイプされます。
+エラーを表示しているアプリからのコンソール出力は、Kudu コンソールにパイプされます。
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
@@ -1243,7 +1234,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-エラーを示すアプリからのコンソール出力はすべて、Kudu コンソールにパイプされます。
+エラーを表示しているアプリからのコンソール出力は、Kudu コンソールにパイプされます。
 
 #### <a name="test-a-64-bit-x64-app"></a>64 ビット (x64) アプリをテストする
 
@@ -1256,7 +1247,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
   1. `cd D:\home\site\wwwroot`
   1. アプリを実行します: `{ASSEMBLY NAME}.exe`
 
-エラーを示すアプリからのコンソール出力はすべて、Kudu コンソールにパイプされます。
+エラーを表示しているアプリからのコンソール出力は、Kudu コンソールにパイプされます。
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 

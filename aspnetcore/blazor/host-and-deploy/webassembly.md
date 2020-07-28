@@ -5,7 +5,7 @@ description: ASP.NET Core、Content Delivery Networks (CDN)、ファイル サ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/07/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 2b100ba029c08e0ce68d208df761f22a712fbbfd
-ms.sourcegitcommit: 99c784a873b62fbd97a73c5c07f4fe7a7f5db638
+ms.openlocfilehash: 2a2b0dabc26c14624144ce7eceb5861fe56f1054
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85503514"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445139"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -243,12 +244,30 @@ http {
         listen 80;
 
         location / {
-            root /usr/share/nginx/html;
+            root      /usr/share/nginx/html;
             try_files $uri $uri/ /index.html =404;
         }
     }
 }
 ```
+
+[NGINX バースト レート制限](https://www.nginx.com/blog/rate-limiting-nginx/#bursts)を [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) で設定するとき、アプリによって行われる比較的大量の要求を受け入れる目的で、場合によっては、Blazor WebAssembly アプリの `burst` パラメーター値を大きくする必要があります。 最初に、値を 60 以上に設定します。
+
+```
+http {
+    server {
+        ...
+
+        location / {
+            ...
+
+            limit_req zone=one burst=60 nodelay;
+        }
+    }
+}
+```
+
+"*503 - サービスを利用できません*" という状態コードを要求が受信していることがブラウザー開発者ツールまたはネットワーク トラフィック ツールで示されている場合、この値を増やします。
 
 運用環境での Nginx Web サーバーの構成に関する詳細については、「[Creating NGINX Plus and NGINX Configuration Files](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)」 (NGINX Plus と NGINX 構成ファイルの作成) を参照してください。
 
@@ -439,7 +458,7 @@ Blazor WebAssembly アプリを `loadBootResource` 関数で初期化して、�
   </script>
   ```
 
-* `Promise<Response>`。 ヘッダーに `integrity` パラメーターを渡して、既定の整合性チェックの動作を保持します。
+* `Promise<Response>`. ヘッダーに `integrity` パラメーターを渡して、既定の整合性チェックの動作を保持します。
 
   次の例 (`wwwroot/index.html`) は、カスタム HTTP ヘッダーを送信要求に追加し、`integrity` パラメーターを経由して `fetch` 呼び出しに渡します。
   

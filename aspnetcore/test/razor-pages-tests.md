@@ -5,7 +5,7 @@ description: Razor Pages アプリの単体テストを作成する方法を学�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2019
+ms.date: 7/22/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: 756af7f2b14512bd43aefd1a4e63e195c2daa138
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ed048d600b629335b8267b63b3cfd57b525d608e
+ms.sourcegitcommit: c86b4e2955dc1724f2eaa7c97894ad8b3bf763fb
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407760"
+ms.lasthandoff: 07/22/2020
+ms.locfileid: "86949095"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core での Razor Pages の単体テスト
 
@@ -47,7 +48,7 @@ ASP.NET Core では Razor Pages アプリの単体テストをサポートして
 | メッセージ アプリ | *src/RazorPagesTestSample*         | ユーザーがメッセージの追加、1 つのメッセージの削除、すべてのメッセージの削除、およびメッセージの分析 (メッセージあたりの平均単語数の検出) をできるようにします。 |
 | アプリをテストする    | *tests/RazorPagesTestSample.Tests* | メッセージ アプリの DAL およびインデックス ページ モデルの単体テストに使用されます。 |
 
-IDE の組み込みテスト機能 ([Visual Studio](/visualstudio/test/unit-test-your-code) や [Visual Studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution) など) を使用して、テストを実行できます。 [Visual Studio Code](https://code.visualstudio.com/) またはコマンド ラインを使用する場合は、コマンドプロンプトで *tests/RazorPagesTestSample* フォルダー内の次のコマンドを実行します。
+IDE の組み込みテスト機能 ([Visual Studio](/visualstudio/test/unit-test-your-code) や [Visual Studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution) など) を使用して、テストを実行できます。 [Visual Studio Code](https://code.visualstudio.com/) またはコマンド ラインを使用する場合は、コマンドプロンプトで *tests/RazorPagesTestSample.Tests* フォルダー内の次のコマンドを実行します。
 
 ```dotnetcli
 dotnet test
@@ -69,7 +70,7 @@ dotnet test
 
 ## <a name="test-app-organization"></a>テスト アプリの構成
 
-テスト アプリは、*tests/RazorPagesTestSample.Tests* フォルダー内のコンソールアプリです。
+テスト アプリは、*tests/RazorPagesTestSample.Tests* フォルダー内のコンソール アプリです。
 
 | テスト アプリ フォルダー | 説明 |
 | --------------- | ----------- |
@@ -101,7 +102,7 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-この方法の問題は、各テストでは、前のテストでデータベースがどのような状態になっていても、それを受け取るということです。 相互に干渉しないアトミック単体テストを作成しようとする場合に、これが問題になる可能性があります。 `AppDbContext` でテストごとに新しいデータベース コンテキストを強制的に使用させるには、新しいサービス プロバイダーに基づいた `DbContextOptions` インスタンスを指定します。 テスト アプリでは、その `Utilities` クラスメソッド `TestDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*) を使用してこれを行う方法を示しています。
+この方法の問題は、各テストでは、前のテストでデータベースがどのような状態になっていても、それを受け取るということです。 相互に干渉しないアトミック単体テストを作成しようとする場合に、これが問題になる可能性があります。 `AppDbContext` でテストごとに新しいデータベース コンテキストを強制的に使用させるには、新しいサービス プロバイダーに基づいた `DbContextOptions` インスタンスを指定します。 テスト アプリでは、その `Utilities` クラス メソッド `TestDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*) を使用してこれを行う方法を示しています。
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
@@ -179,7 +180,7 @@ Act ステップで `OnGetAsync` メソッドが実行されると、ページ �
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage` ページモデルの `OnGetAsync` メソッド (*src/RazorPagesTestSample/Pages/Index.cshtml.cs*):
+`IndexPage` ページ モデルの `OnGetAsync` メソッド (*src/RazorPagesTestSample/Pages/Index.cshtml.cs*):
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -231,7 +232,7 @@ ASP.NET Core では Razor Pages アプリの単体テストをサポートして
 | メッセージ アプリ | *src/RazorPagesTestSample*         | ユーザーがメッセージの追加、1 つのメッセージの削除、すべてのメッセージの削除、およびメッセージの分析 (メッセージあたりの平均単語数の検出) をできるようにします。 |
 | アプリをテストする    | *tests/RazorPagesTestSample.Tests* | メッセージ アプリの DAL およびインデックス ページ モデルの単体テストに使用されます。 |
 
-IDE の組み込みテスト機能 ([Visual Studio](/visualstudio/test/unit-test-your-code) や [Visual Studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution) など) を使用して、テストを実行できます。 [Visual Studio Code](https://code.visualstudio.com/) またはコマンド ラインを使用する場合は、コマンドプロンプトで *tests/RazorPagesTestSample* フォルダー内の次のコマンドを実行します。
+IDE の組み込みテスト機能 ([Visual Studio](/visualstudio/test/unit-test-your-code) や [Visual Studio for Mac](/dotnet/core/tutorials/using-on-mac-vs-full-solution) など) を使用して、テストを実行できます。 [Visual Studio Code](https://code.visualstudio.com/) またはコマンド ラインを使用する場合は、コマンドプロンプトで *tests/RazorPagesTestSample.Tests* フォルダー内の次のコマンドを実行します。
 
 ```dotnetcli
 dotnet test
@@ -253,7 +254,7 @@ dotnet test
 
 ## <a name="test-app-organization"></a>テスト アプリの構成
 
-テスト アプリは、*tests/RazorPagesTestSample.Tests* フォルダー内のコンソールアプリです。
+テスト アプリは、*tests/RazorPagesTestSample.Tests* フォルダー内のコンソール アプリです。
 
 | テスト アプリ フォルダー | 説明 |
 | --------------- | ----------- |
@@ -285,7 +286,7 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-この方法の問題は、各テストでは、前のテストでデータベースがどのような状態になっていても、それを受け取るということです。 相互に干渉しないアトミック単体テストを作成しようとする場合に、これが問題になる可能性があります。 `AppDbContext` でテストごとに新しいデータベース コンテキストを強制的に使用させるには、新しいサービス プロバイダーに基づいた `DbContextOptions` インスタンスを指定します。 テスト アプリでは、その `Utilities` クラスメソッド `TestDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*) を使用してこれを行う方法を示しています。
+この方法の問題は、各テストでは、前のテストでデータベースがどのような状態になっていても、それを受け取るということです。 相互に干渉しないアトミック単体テストを作成しようとする場合に、これが問題になる可能性があります。 `AppDbContext` でテストごとに新しいデータベース コンテキストを強制的に使用させるには、新しいサービス プロバイダーに基づいた `DbContextOptions` インスタンスを指定します。 テスト アプリでは、その `Utilities` クラス メソッド `TestDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*) を使用してこれを行う方法を示しています。
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
@@ -363,7 +364,7 @@ Act ステップで `OnGetAsync` メソッドが実行されると、ページ �
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage` ページモデルの `OnGetAsync` メソッド (*src/RazorPagesTestSample/Pages/Index.cshtml.cs*):
+`IndexPage` ページ モデルの `OnGetAsync` メソッド (*src/RazorPagesTestSample/Pages/Index.cshtml.cs*):
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -388,5 +389,6 @@ DAL の `GetMessagesAsync` メソッドでは、このメソッド呼び出し�
 * [XUnit.net の概要:.NET SDK コマンド ラインでの .Net Core の使用](https://xunit.github.io/docs/getting-started-dotnet-core)
 * [Moq](https://github.com/moq/moq4)
 * [Moq クイック スタート](https://github.com/Moq/moq4/wiki/Quickstart)
+* [JustMockLite](https://github.com/telerik/JustMockLite):.NET 開発者向けのモック フレームワーク。 ("*Microsoft では保守管理もサポートも行っていません。* ")
 
 ::: moniker-end

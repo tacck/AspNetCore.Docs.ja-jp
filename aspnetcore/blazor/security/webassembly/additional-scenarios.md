@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 0cf2c2d2ef0d199ca5df6c27ddcc39e84db46ebd
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 79f7b2177d6d07101c73cde841c062b0e1468593
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059761"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445152"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ
 
@@ -59,7 +59,7 @@ public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
 `Program.Main` (`Program.cs`) では、カスタム承認メッセージ ハンドラーを使用して、<xref:System.Net.Http.HttpClient> が構成されます。
 
 ```csharp
-builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
+builder.Services.AddScoped<CustomAuthorizationMessageHandler>();
 
 builder.Services.AddHttpClient("ServerAPI",
         client => client.BaseAddress = new Uri("https://www.example.com/base"))
@@ -108,16 +108,14 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 ...
 
-builder.Services.AddTransient(sp =>
-{
-    return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
-        .ConfigureHandler(
-            authorizedUrls: new [] { "https://www.example.com/base" },
-            scopes: new[] { "example.read", "example.write" }))
-        {
-            BaseAddress = new Uri("https://www.example.com/base")
-        };
-});
+builder.Services.AddScoped(sp => new HttpClient(
+    sp.GetRequiredService<AuthorizationMessageHandler>()
+    .ConfigureHandler(
+        authorizedUrls: new[] { "https://www.example.com/base" },
+        scopes: new[] { "example.read", "example.write" }))
+    {
+        BaseAddress = new Uri("https://www.example.com/base")
+    });
 ```
 
 Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> を以下に割り当てることができます。
@@ -137,7 +135,7 @@ builder.Services.AddHttpClient("ServerAPI",
         client => client.BaseAddress = new Uri("https://www.example.com/base"))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("ServerAPI"));
 ```
 
@@ -904,10 +902,11 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.RootComponents.Add<App>("app");
 
-        builder.Services.AddTransient(new HttpClient 
-        {
-            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
-        });
+        builder.Services.AddScoped(sp => 
+            new HttpClient
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
 
         services.Add...;
 
@@ -1043,3 +1042,79 @@ builder.Services.Configure<JwtBearerOptions>(
 証明機関へのセグメントを追跡することがアプリの OIDC プロバイダー (AAD 以外のプロバイダーなど) にとって適切でない場合は、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> プロパティを直接設定します。 <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> またはアプリ設定ファイル (`appsettings.json`) で `Authority` キーを使用してプロパティを設定します。
 
 ID トークンの要求のリストは、v2.0 エンドポイントで変更されています。 詳細については、「[Microsoft ID プラットフォーム (v2.0) に更新する理由](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)」を参照してください。
+
+## <a name="configure-and-use-grpc-in-components"></a>コンポーネントで gRPC を構成し、使用する
+
+[ASP.NET Core gRPC フレームワーク](xref:grpc/index)を使用するように Blazor WebAssembly アプリを構成するには:
+
+* サーバーで gRPC-Web を有効にします。 詳細については、「<xref:grpc/browser>」を参照してください。
+* アプリのメッセージ ハンドラーに gRPC サービスを登録します。 次の例では、gRPC チュートリアル[ (`Program.Main`) から ](xref:tutorials/grpc/grpc-start#create-a-grpc-service)`GreeterClient` サービスを使用するように、アプリの認可メッセージ ハンドラーが構成されます。
+
+```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
+using {APP ASSEMBLY}.Shared;
+
+...
+
+builder.Services.AddScoped(sp =>
+{
+    var baseAddressMessageHandler = 
+        sp.GetRequiredService<BaseAddressAuthorizationMessageHandler>();
+    baseAddressMessageHandler.InnerHandler = new HttpClientHandler();
+    var grpcWebHandler = 
+        new GrpcWebHandler(GrpcWebMode.GrpcWeb, baseAddressMessageHandler);
+    var channel = GrpcChannel.ForAddress(builder.HostEnvironment.BaseAddress, 
+        new GrpcChannelOptions { HttpHandler = grpcWebHandler });
+
+    return new Greeter.GreeterClient(channel);
+});
+```
+
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `BlazorSample`)。 ホストされている Blazor ソリューションの `Shared` プロジェクトに `.proto` ファイルを置きます。
+
+クライアント アプリのコンポーネントでは、gRPC クライアント (`Pages/Grpc.razor`) を使用し、gRPC 呼び出しを行うことができます。
+
+```razor
+@page "/grpc"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using {APP ASSEMBLY}.Shared
+@inject Greeter.GreeterClient GreeterClient
+
+<h1>Invoke gRPC service</h1>
+
+<p>
+    <input @bind="name" placeholder="Type your name" />
+    <button @onclick="GetGreeting" class="btn btn-primary">Call gRPC service</button>
+</p>
+
+Server response: <strong>@serverResponse</strong>
+
+@code {
+    private string name = "Bert";
+    private string serverResponse;
+
+    private async Task GetGreeting()
+    {
+        try
+        {
+            var request = new HelloRequest { Name = name };
+            var reply = await GreeterClient.SayHelloAsync(request);
+            serverResponse = reply.Message;
+        }
+        catch (Grpc.Core.RpcException ex)
+            when (ex.Status.DebugException is 
+                AccessTokenNotAvailableException tokenEx)
+        {
+            tokenEx.Redirect();
+        }
+    }
+}
+```
+
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `BlazorSample`)。 `Status.DebugException` プロパティを使用するには、[Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) バージョン 2.30.0 以降を使用します。
+
+詳細については、「<xref:grpc/browser>」を参照してください。

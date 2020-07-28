@@ -5,7 +5,7 @@ description: Ubuntu 16.04 でリバース プロキシとして Nginx をセッ�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/10/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c936ff9a7aadd21ce99a0c37184ae8cf911c3070
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8038c63200c7c9aaadb9e0e7a68ae315ff620197
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403977"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445295"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Nginx 搭載の Linux で ASP.NET Core をホストする
 
@@ -394,6 +395,9 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 */etc/nginx/nginx.conf* 構成ファイルを編集します。 この例では、1 つの構成ファイルに `http` セクションと `server` セクションの両方が含まれています。
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
+
+> [!NOTE]
+> アプリによって行われる大量の要求を受け入れる目的で、Blazor WebAssembly アプリの `burst` パラメーター値を大きくする必要があります。 詳細については、「<xref:blazor/host-and-deploy/webassembly#nginx>」を参照してください。
 
 #### <a name="secure-nginx-from-clickjacking"></a>Nginx をクリックジャッキングから守る
 

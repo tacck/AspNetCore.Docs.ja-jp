@@ -15,11 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 308ca4401289a55e5dba8d61de50644cb2a53433
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3cb83d8cfd058c4d0a93ece9a4f19b6407dac384
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405251"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568861"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>ASP.NET Core での Razor ページのルートとアプリの規則
 
@@ -41,28 +42,27 @@ ms.locfileid: "85405251"
 | [ページ ルート アクション規則](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | ルート テンプレートをフォルダー内のページおよび単一ページに追加します。 |
 | [ページ モデル アクション規則](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (フィルター クラス、ラムダ式、またはフィルター ファクトリ)</li></ul> | ヘッダーをフォルダー内のページに追加し、ヘッダーを単一ページに追加し、ヘッダーをアプリのページに追加するように[フィルター ファクトリ](xref:mvc/controllers/filters#ifilterfactory)を構成します。 |
 
-Razor ページの規則を追加および構成するには、`Startup` クラス内のサービス コレクションの <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> に <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 拡張メソッドを使用します。 次の規則の例は、このトピックで後述されます。
+Razor Pages の規則は、`Startup.ConfigureServices` で <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> を構成する <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> のオーバーロードを使用して構成されます。 次の規則の例は、このトピックで後述されます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddRazorPages()
-        .AddRazorPagesOptions(options =>
-        {
-            options.Conventions.Add( ... );
-            options.Conventions.AddFolderRouteModelConvention(
-                "/OtherPages", model => { ... });
-            options.Conventions.AddPageRouteModelConvention(
-                "/About", model => { ... });
-            options.Conventions.AddPageRoute(
-                "/Contact", "TheContactPage/{text?}");
-            options.Conventions.AddFolderApplicationModelConvention(
-                "/OtherPages", model => { ... });
-            options.Conventions.AddPageApplicationModelConvention(
-                "/About", model => { ... });
-            options.Conventions.ConfigureFilter(model => { ... });
-            options.Conventions.ConfigureFilter( ... );
-        });
+    services.AddRazorPages(options =>
+    {
+        options.Conventions.Add( ... );
+        options.Conventions.AddFolderRouteModelConvention(
+            "/OtherPages", model => { ... });
+        options.Conventions.AddPageRouteModelConvention(
+            "/About", model => { ... });
+        options.Conventions.AddPageRoute(
+            "/Contact", "TheContactPage/{text?}");
+        options.Conventions.AddFolderApplicationModelConvention(
+            "/OtherPages", model => { ... });
+        options.Conventions.AddPageApplicationModelConvention(
+            "/About", model => { ... });
+        options.Conventions.ConfigureFilter(model => { ... });
+        options.Conventions.ConfigureFilter( ... );
+    });
 }
 ```
 
@@ -106,7 +106,7 @@ Razor Pages ルーティングと MVC コントローラー ルーティング�
 
 可能な限り、`Order` を設定しないでください。これにより、`Order = 0` が生じます。 正しいルートの選択には、ルーティングを使用してください。
 
-Razor Pages のオプション (<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> の追加など) は、MVC が `Startup.ConfigureServices` のサービス コレクションに追加されたときに追加されます。 例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)を参照してください。
+Razor Pages のオプション (<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> の追加など) は、Razor Pages が `Startup.ConfigureServices` のサービス コレクションに追加されたときに追加されます。 例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)を参照してください。
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -191,13 +191,12 @@ ASP.NET Core によって生成されたページ ルートは、パラメータ
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddRazorPages()
-        .AddRazorPagesOptions(options =>
-        {
-            options.Conventions.Add(
-                new PageRouteTransformerConvention(
-                    new SlugifyParameterTransformer()));
-        });
+    services.AddRazorPages(options =>
+    {
+        options.Conventions.Add(
+            new PageRouteTransformerConvention(
+                new SlugifyParameterTransformer()));
+    });
 }
 ```
 
