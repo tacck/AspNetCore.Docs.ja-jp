@@ -7,9 +7,9 @@
 >
 > このバグが発生するケースの例については、GitHub のバグ [18677](https://github.com/dotnet/aspnetcore/issues/18677) および [16579](https://github.com/dotnet/aspnetcore/issues/16579) を参照してください。
 >
-> このバグのオプトイン修正は、 [.Net Core 3.1.301 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core/3.1)に含まれています。 次のコードは、このバグを修正する内部スイッチを設定します。
+> このバグのオプトイン修正は [.NET Core 3.1.301 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core/3.1)に含まれています。 次のコードにより、このバグを修正する内部スイッチが設定されます。
 >
->```
+>```csharp
 >public static void Main(string[] args)
 >{
 >    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 
