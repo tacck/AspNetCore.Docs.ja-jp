@@ -7,16 +7,17 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: client-side/spa-services
 ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401832"
@@ -104,7 +105,7 @@ npm i -S aspnet-prerendering
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/_ViewImports.cshtml?highlight=3)]
 
-<span data-ttu-id="12c76-149">タグ ヘルパーは、Razor ビューで HTML に似た構文を利用することで、低レベルの API と直接通信する複雑な部分を抽象化します。</span><span class="sxs-lookup"><span data-stu-id="12c76-149">These Tag Helpers abstract away the intricacies of communicating directly with low-level APIs by leveraging an HTML-like syntax inside the Razor view:</span></span>
+<span data-ttu-id="12c76-149">タグ ヘルパーは、[Razor ビューで HTML に似た構文を利用することで、低レベルの API と直接通信する複雑な部分を抽象化します。</span><span class="sxs-lookup"><span data-stu-id="12c76-149">These Tag Helpers abstract away the intricacies of communicating directly with low-level APIs by leveraging an HTML-like syntax inside the [Razor view:</span></span>
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=5)]
 
@@ -120,7 +121,7 @@ npm i -S aspnet-prerendering
 
 ### <a name="asp-prerender-data-tag-helper"></a><span data-ttu-id="12c76-157">asp-prerender-data タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="12c76-157">asp-prerender-data Tag Helper</span></span>
 
-<span data-ttu-id="12c76-158">`asp-prerender-data` タグ ヘルパーと `asp-prerender-module` タグ ヘルパーと組み合わせると、Razor ビューからサーバー側 JavaScript にコンテキスト情報を渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="12c76-158">When coupled with the `asp-prerender-module` Tag Helper, the `asp-prerender-data` Tag Helper can be used to pass contextual information from the Razor view to the server-side JavaScript.</span></span> <span data-ttu-id="12c76-159">たとえば、次のマークアップは、ユーザー データを `main-server` モジュールに渡します。</span><span class="sxs-lookup"><span data-stu-id="12c76-159">For example, the following markup passes user data to the `main-server` module:</span></span>
+<span data-ttu-id="12c76-158">`asp-prerender-data` タグ ヘルパーと `asp-prerender-module` タグ ヘルパーと組み合わせると、[Razor ビューからサーバー側 JavaScript にコンテキスト情報を渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="12c76-158">When coupled with the `asp-prerender-module` Tag Helper, the `asp-prerender-data` Tag Helper can be used to pass contextual information from the [Razor view to the server-side JavaScript.</span></span> <span data-ttu-id="12c76-159">たとえば、次のマークアップは、ユーザー データを `main-server` モジュールに渡します。</span><span class="sxs-lookup"><span data-stu-id="12c76-159">For example, the following markup passes user data to the `main-server` module:</span></span>
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=9-12)]
 

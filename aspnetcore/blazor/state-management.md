@@ -1,31 +1,32 @@
 ---
-title: ASP.NET Core Blazor 状態管理
+title: ASP.NET Core [Blazor 状態管理
 author: guardrex
-description: Blazor Server アプリで状態を維持する方法について説明します。
+description: '[Blazor Server アプリで状態を維持する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/state-management
 ms.openlocfilehash: a6c646425145855538f408ec6cafdb151cd24b86
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401949"
 ---
-# <a name="aspnet-core-blazor-state-management"></a><span data-ttu-id="0ed68-103">ASP.NET Core Blazor 状態管理</span><span class="sxs-lookup"><span data-stu-id="0ed68-103">ASP.NET Core Blazor state management</span></span>
+# <a name="aspnet-core-blazor-state-management"></a><span data-ttu-id="0ed68-103">ASP.NET Core [Blazor 状態管理</span><span class="sxs-lookup"><span data-stu-id="0ed68-103">ASP.NET Core [Blazor state management</span></span>
 
 <span data-ttu-id="0ed68-104">作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)</span><span class="sxs-lookup"><span data-stu-id="0ed68-104">By [Steve Sanderson](https://github.com/SteveSandersonMS)</span></span>
 
-Blazor Server<span data-ttu-id="0ed68-105"> はステートフル アプリ フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="0ed68-105"> is a stateful app framework.</span></span> <span data-ttu-id="0ed68-106">ほとんどの場合、アプリではサーバーとの現在進行中の接続が維持されます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-106">Most of the time, the app maintains an ongoing connection to the server.</span></span> <span data-ttu-id="0ed68-107">ユーザーの状態は、"*回線*" の中のサーバーのメモリに保持されます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-107">The user's state is held in the server's memory in a *circuit*.</span></span> 
+<span data-ttu-id="0ed68-105">[Blazor Server はステートフル アプリ フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="0ed68-105">[Blazor Server is a stateful app framework.</span></span> <span data-ttu-id="0ed68-106">ほとんどの場合、アプリではサーバーとの現在進行中の接続が維持されます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-106">Most of the time, the app maintains an ongoing connection to the server.</span></span> <span data-ttu-id="0ed68-107">ユーザーの状態は、"*回線*" の中のサーバーのメモリに保持されます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-107">The user's state is held in the server's memory in a *circuit*.</span></span> 
 
 <span data-ttu-id="0ed68-108">ユーザーの回線に保存される状態には次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="0ed68-108">Examples of state held for a user's circuit include:</span></span>
 
@@ -34,11 +35,11 @@ Blazor Server<span data-ttu-id="0ed68-105"> はステートフル アプリ フ�
 * <span data-ttu-id="0ed68-111">回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータ。</span><span class="sxs-lookup"><span data-stu-id="0ed68-111">Data held in [dependency injection (DI)](xref:fundamentals/dependency-injection) service instances that are scoped to the circuit.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="0ed68-112">この記事では、Blazor Server アプリの状態維持について取り扱います。</span><span class="sxs-lookup"><span data-stu-id="0ed68-112">This article addresses state persistence in Blazor Server apps.</span></span> Blazor WebAssembly<span data-ttu-id="0ed68-113"> アプリでは、[ブラウザーのクライアント側の状態維持](#client-side-in-the-browser)が利用されますが、この記事に扱う範囲を超えたカスタム ソリューションやサードパーティ製のパッケージが必要です。</span><span class="sxs-lookup"><span data-stu-id="0ed68-113"> apps can take advantage of [client-side state persistence in the browser](#client-side-in-the-browser) but require custom solutions or 3rd party packages beyond the scope of this article.</span></span>
+> <span data-ttu-id="0ed68-112">この記事では、[Blazor Server アプリの状態維持について取り扱います。</span><span class="sxs-lookup"><span data-stu-id="0ed68-112">This article addresses state persistence in [Blazor Server apps.</span></span> <span data-ttu-id="0ed68-113">[Blazor WebAssembly アプリでは、[ブラウザーのクライアント側の状態維持](#client-side-in-the-browser)が利用されますが、この記事に扱う範囲を超えたカスタム ソリューションやサードパーティ製のパッケージが必要です。</span><span class="sxs-lookup"><span data-stu-id="0ed68-113">[Blazor WebAssembly apps can take advantage of [client-side state persistence in the browser](#client-side-in-the-browser) but require custom solutions or 3rd party packages beyond the scope of this article.</span></span>
 
-## <a name="blazor-circuits"></a>Blazor<span data-ttu-id="0ed68-114"> 回線</span><span class="sxs-lookup"><span data-stu-id="0ed68-114"> circuits</span></span>
+## <a name="blazor-circuits"></a><span data-ttu-id="0ed68-114">[Blazor 回線</span><span class="sxs-lookup"><span data-stu-id="0ed68-114">[Blazor circuits</span></span>
 
-<span data-ttu-id="0ed68-115">ユーザーが一時的にネットワークに接続できなくなる場合、Blazor では、ユーザーがアプリを引き続き使用できるよう、そのユーザーを元の回線に再接続が試行されます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-115">If a user experiences a temporary network connection loss, Blazor attempts to reconnect the user to their original circuit so they can continue to use the app.</span></span> <span data-ttu-id="0ed68-116">ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="0ed68-116">However, reconnecting a user to their original circuit in the server's memory isn't always possible:</span></span>
+<span data-ttu-id="0ed68-115">ユーザーが一時的にネットワークに接続できなくなる場合、[Blazor では、ユーザーがアプリを引き続き使用できるよう、そのユーザーを元の回線に再接続が試行されます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-115">If a user experiences a temporary network connection loss, [Blazor attempts to reconnect the user to their original circuit so they can continue to use the app.</span></span> <span data-ttu-id="0ed68-116">ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="0ed68-116">However, reconnecting a user to their original circuit in the server's memory isn't always possible:</span></span>
 
 * <span data-ttu-id="0ed68-117">サーバーでは、切断された回線を永久に保持することはできません。</span><span class="sxs-lookup"><span data-stu-id="0ed68-117">The server can't retain a disconnected circuit forever.</span></span> <span data-ttu-id="0ed68-118">サーバーでは、タイムアウト後、あるいはサーバーがメモリ不足になったとき、切断された回線を解放しなければなりません。</span><span class="sxs-lookup"><span data-stu-id="0ed68-118">The server must release a disconnected circuit after a timeout or when the server is under memory pressure.</span></span>
 * <span data-ttu-id="0ed68-119">マルチサーバーによる負荷が分散された展開環境では、要求を処理するサーバーが突然利用不可能になることがあります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-119">In multiserver, load-balanced deployment environments, any server processing requests may become unavailable at any given time.</span></span> <span data-ttu-id="0ed68-120">個々のサーバーは、それがなくても全体的な要求量を処理できるようになると、作動しなくなったり、自動的に削除されたりすることがあります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-120">Individual servers may fail or be automatically removed when no longer required to handle the overall volume of requests.</span></span> <span data-ttu-id="0ed68-121">ユーザーが再接続を試みたとき、元のサーバーが利用できないことがあります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-121">The original server may not be available when the user attempts to reconnect.</span></span>
@@ -69,7 +70,7 @@ Blazor Server<span data-ttu-id="0ed68-105"> はステートフル アプリ フ�
 
 ## <a name="where-to-persist-state"></a><span data-ttu-id="0ed68-147">状態を維持する場所</span><span class="sxs-lookup"><span data-stu-id="0ed68-147">Where to persist state</span></span>
 
-<span data-ttu-id="0ed68-148">Blazor Server アプリには、一般に、状態を保存する場所が 3 つあります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-148">Three common locations exist for persisting state in a Blazor Server app.</span></span> <span data-ttu-id="0ed68-149">どの手法にもそれに最も適したケースがあり、注意すべきことも異なります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-149">Each approach is best suited to different scenarios and has different caveats:</span></span>
+<span data-ttu-id="0ed68-148">[Blazor Server アプリには、一般に、状態を保存する場所が 3 つあります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-148">Three common locations exist for persisting state in a [Blazor Server app.</span></span> <span data-ttu-id="0ed68-149">どの手法にもそれに最も適したケースがあり、注意すべきことも異なります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-149">Each approach is best suited to different scenarios and has different caveats:</span></span>
 
 * [<span data-ttu-id="0ed68-150">データベースのサーバー側</span><span class="sxs-lookup"><span data-stu-id="0ed68-150">Server-side in a database</span></span>](#server-side-in-a-database)
 * [<span data-ttu-id="0ed68-151">URL</span><span class="sxs-lookup"><span data-stu-id="0ed68-151">URL</span></span>](#url)
@@ -107,7 +108,7 @@ Blazor Server<span data-ttu-id="0ed68-105"> はステートフル アプリ フ�
 <span data-ttu-id="0ed68-173">ユーザーが一時的なデータを頻繁に作成する場合、一般的なバッキング ストアはブラウザーの `localStorage` コレクションと `sessionStorage` コレクションになります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-173">For transient data that the user is actively creating, a common backing store is the browser's `localStorage` and `sessionStorage` collections.</span></span> <span data-ttu-id="0ed68-174">回線が放棄された場合、保存されている状態を管理したり、消去したりすることはアプリに求められません。これはサーバー側ストレージより優れている点です。</span><span class="sxs-lookup"><span data-stu-id="0ed68-174">The app isn't required to manage or clear the stored state if the circuit is abandoned, which is an advantage over server-side storage.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="0ed68-175">このセクションの "クライアント側" は、[Blazor WebAssembly ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)ではなく、ブラウザーのクライアント側シナリオを指します。</span><span class="sxs-lookup"><span data-stu-id="0ed68-175">"Client-side" in this section refers to client-side scenarios in the browser, not the [Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly).</span></span> <span data-ttu-id="0ed68-176">`localStorage` と `sessionStorage` は Blazor WebAssembly アプリで使用できますが、カスタム コードを記述するか、サードパーティ製のパッケージを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-176">`localStorage` and `sessionStorage` can be used in Blazor WebAssembly apps but only by writing custom code or using a 3rd party package.</span></span>
+> <span data-ttu-id="0ed68-175">このセクションの "クライアント側" は、[[Blazor WebAssembly ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)ではなく、ブラウザーのクライアント側シナリオを指します。</span><span class="sxs-lookup"><span data-stu-id="0ed68-175">"Client-side" in this section refers to client-side scenarios in the browser, not the [[Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly).</span></span> <span data-ttu-id="0ed68-176">`localStorage` と `sessionStorage` は [Blazor WebAssembly アプリで使用できますが、カスタム コードを記述するか、サードパーティ製のパッケージを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-176">`localStorage` and `sessionStorage` can be used in [Blazor WebAssembly apps but only by writing custom code or using a 3rd party package.</span></span>
 
 <span data-ttu-id="0ed68-177">`localStorage` と `sessionStorage` は次の点で異なります。</span><span class="sxs-lookup"><span data-stu-id="0ed68-177">`localStorage` and `sessionStorage` differ as follows:</span></span>
 
@@ -125,7 +126,7 @@ Blazor Server<span data-ttu-id="0ed68-105"> はステートフル アプリ フ�
 
 * <span data-ttu-id="0ed68-191">サーバー側データベースの使用に似ていますが、データの読み込みと保存は非同期です。</span><span class="sxs-lookup"><span data-stu-id="0ed68-191">Similar to the use of a server-side database, loading and saving data are asynchronous.</span></span>
 * <span data-ttu-id="0ed68-192">サーバー側データベースとは異なり、プリレンダリング中はストレージを利用できません。プリレンダリング中は、要求されたページがブラウザーに存在しないためです。</span><span class="sxs-lookup"><span data-stu-id="0ed68-192">Unlike a server-side database, storage isn't available during prerendering because the requested page doesn't exist in the browser during the prerendering stage.</span></span>
-* <span data-ttu-id="0ed68-193">Blazor Server アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。</span><span class="sxs-lookup"><span data-stu-id="0ed68-193">Storage of a few kilobytes of data is reasonable to persist for Blazor Server apps.</span></span> <span data-ttu-id="0ed68-194">数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。</span><span class="sxs-lookup"><span data-stu-id="0ed68-194">Beyond a few kilobytes, you must consider the performance implications because the data is loaded and saved across the network.</span></span>
+* <span data-ttu-id="0ed68-193">[Blazor Server アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。</span><span class="sxs-lookup"><span data-stu-id="0ed68-193">Storage of a few kilobytes of data is reasonable to persist for [Blazor Server apps.</span></span> <span data-ttu-id="0ed68-194">数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。</span><span class="sxs-lookup"><span data-stu-id="0ed68-194">Beyond a few kilobytes, you must consider the performance implications because the data is loaded and saved across the network.</span></span>
 * <span data-ttu-id="0ed68-195">ユーザーはデータを見たり、改ざんしたりするかもしれません。</span><span class="sxs-lookup"><span data-stu-id="0ed68-195">Users may view or tamper with the data.</span></span> <span data-ttu-id="0ed68-196">ASP.NET Core [データ保護](xref:security/data-protection/introduction)でこのリスクを軽減できます。</span><span class="sxs-lookup"><span data-stu-id="0ed68-196">ASP.NET Core [Data Protection](xref:security/data-protection/introduction) can mitigate the risk.</span></span>
 
 ## <a name="third-party-browser-storage-solutions"></a><span data-ttu-id="0ed68-197">サードパーティ製ブラウザーのストレージ ソリューション</span><span class="sxs-lookup"><span data-stu-id="0ed68-197">Third-party browser storage solutions</span></span>
@@ -145,7 +146,7 @@ Blazor Server<span data-ttu-id="0ed68-105"> はステートフル アプリ フ�
 
 <span data-ttu-id="0ed68-209">`Microsoft.AspNetCore.ProtectedBrowserStorage` パッケージをインストールするには:</span><span class="sxs-lookup"><span data-stu-id="0ed68-209">To install the `Microsoft.AspNetCore.ProtectedBrowserStorage` package:</span></span>
 
-1. <span data-ttu-id="0ed68-210">Blazor Server アプリ プロジェクトで、[`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) へのパッケージ参照を追加します。</span><span class="sxs-lookup"><span data-stu-id="0ed68-210">In the Blazor Server app project, add a package reference to [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).</span></span>
+1. <span data-ttu-id="0ed68-210">[Blazor Server アプリ プロジェクトで、[`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) へのパッケージ参照を追加します。</span><span class="sxs-lookup"><span data-stu-id="0ed68-210">In the [Blazor Server app project, add a package reference to [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage).</span></span>
 1. <span data-ttu-id="0ed68-211">最上位 HTML (たとえば、デフォルト プロジェクト テンプレートの `Pages/_Host.cshtml` ファイルで) で、次の `<script>` タグを追加します。</span><span class="sxs-lookup"><span data-stu-id="0ed68-211">In the top-level HTML (for example, in the `Pages/_Host.cshtml` file in the default project template), add the following `<script>` tag:</span></span>
 
    ```html

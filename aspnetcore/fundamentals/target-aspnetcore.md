@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85399648"
@@ -39,7 +40,7 @@ ms.locfileid: "85399648"
 
 <span data-ttu-id="d8ef1-116">.NET Core 3.0 のリリースから、多数の ASP.NET Core アセンブリがパッケージとして NuGet に公開されなくなりました。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-116">With the release of .NET Core 3.0, many ASP.NET Core assemblies are no longer published to NuGet as packages.</span></span> <span data-ttu-id="d8ef1-117">代わりに、アセンブリは `Microsoft.AspNetCore.App` 共有フレームワークに含まれ、.NET Core SDK およびランタイム インストーラーと共にインストールされます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-117">Instead, the assemblies are included in the `Microsoft.AspNetCore.App` shared framework, which is installed with the .NET Core SDK and runtime installers.</span></span> <span data-ttu-id="d8ef1-118">公開されなくなったパッケージの一覧については、「[古いパッケージ参照の削除](xref:migration/22-to-30#remove-obsolete-package-references)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-118">For a list of packages no longer being published, see [Remove obsolete package references](xref:migration/22-to-30#remove-obsolete-package-references).</span></span>
 
-<span data-ttu-id="d8ef1-119">.NET Core 3.0 から、`Microsoft.NET.Sdk.Web` MSBuild SDK を使用するプロジェクトは、共有フレームワークを暗黙的に参照します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="d8ef1-120">`Microsoft.NET.Sdk` SDK または `Microsoft.NET.Sdk.Razor` SDK を使用するプロジェクトで共有フレームワーク内の ASP.NET Core API を使用するには、ASP.NET Core を参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.Razor` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
+<span data-ttu-id="d8ef1-119">.NET Core 3.0 から、`Microsoft.NET.Sdk.Web` MSBuild SDK を使用するプロジェクトは、共有フレームワークを暗黙的に参照します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-119">As of .NET Core 3.0, projects using the `Microsoft.NET.Sdk.Web` MSBuild SDK implicitly reference the shared framework.</span></span> <span data-ttu-id="d8ef1-120">`Microsoft.NET.Sdk` SDK または `Microsoft.NET.Sdk.[Razor` SDK を使用するプロジェクトで共有フレームワーク内の ASP.NET Core API を使用するには、ASP.NET Core を参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-120">Projects using the `Microsoft.NET.Sdk` or `Microsoft.NET.Sdk.[Razor` SDK must reference ASP.NET Core to use ASP.NET Core APIs in the shared framework.</span></span>
 
 <span data-ttu-id="d8ef1-121">ASP.NET Core を参照するには、次の `<FrameworkReference>` 要素をプロジェクト ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-121">To reference ASP.NET Core, add the following `<FrameworkReference>` element to your project file:</span></span>
 
@@ -47,17 +48,17 @@ ms.locfileid: "85399648"
 
 <span data-ttu-id="d8ef1-122">ASP.NET Core を参照するためのこの方法は、.NET Core 3.x を対象とするプロジェクトでのみサポートされます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-122">Referencing ASP.NET Core in this manner is only supported for projects targeting .NET Core 3.x.</span></span>
 
-## <a name="include-blazor-extensibility"></a><span data-ttu-id="d8ef1-123">Blazor 拡張機能を含める</span><span class="sxs-lookup"><span data-stu-id="d8ef1-123">Include Blazor extensibility</span></span>
+## <a name="include-blazor-extensibility"></a><span data-ttu-id="d8ef1-123">[Blazor 拡張機能を含める</span><span class="sxs-lookup"><span data-stu-id="d8ef1-123">Include [Blazor extensibility</span></span>
 
-Blazor<span data-ttu-id="d8ef1-124"> は、WebAssembly (WASM) [ホスティング モデル](xref:blazor/hosting-models)と Server ホスティング モデルをサポートします。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-124"> supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="d8ef1-125">特別な理由がない限り、[Razor コンポーネント](xref:blazor/components/index)は両方のホスティング モデルをサポートする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-125">Unless there's a specific reason not to, a [Razor components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="d8ef1-126">Razor コンポーネント ライブラリでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-126">A Razor components library must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="d8ef1-124">[Blazor は、WebAssembly (WASM) [ホスティング モデル](xref:blazor/hosting-models)と Server ホスティング モデルをサポートします。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-124">[Blazor supports WebAssembly (WASM) and Server [hosting models](xref:blazor/hosting-models).</span></span> <span data-ttu-id="d8ef1-125">特別な理由がない限り、[[Razor コンポーネント](xref:blazor/components/index)は両方のホスティング モデルをサポートする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-125">Unless there's a specific reason not to, a [[Razor components](xref:blazor/components/index) library should support both hosting models.</span></span> <span data-ttu-id="d8ef1-126">[Razor コンポーネント ライブラリでは、[Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk) を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-126">A [Razor components library must use the [Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk).</span></span>
 
 ### <a name="support-both-hosting-models"></a><span data-ttu-id="d8ef1-127">両方のホスティング モデルをサポートする</span><span class="sxs-lookup"><span data-stu-id="d8ef1-127">Support both hosting models</span></span>
 
-<span data-ttu-id="d8ef1-128">[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトと [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) プロジェクトの両方で Razor コンポーネントの使用をサポートするには、ご使用のエディターに応じて次の手順を使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-128">To support Razor component consumption from both [Blazor Server](xref:blazor/hosting-models#blazor-server) and [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
+<span data-ttu-id="d8ef1-128">[[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトと [[Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) プロジェクトの両方で [Razor コンポーネントの使用をサポートするには、ご使用のエディターに応じて次の手順を使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-128">To support [Razor component consumption from both [[Blazor Server](xref:blazor/hosting-models#blazor-server) and [[Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) projects, use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="d8ef1-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="d8ef1-129">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="d8ef1-130">**Razor クラス ライブラリ** プロジェクト テンプレートを使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-130">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="d8ef1-131">このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスの選択を解除する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
+<span data-ttu-id="d8ef1-130">**[Razor クラス ライブラリ** プロジェクト テンプレートを使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-130">Use the **[Razor Class Library** project template.</span></span> <span data-ttu-id="d8ef1-131">このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスの選択を解除する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-131">The template's **Support pages and views** checkbox should be deselected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="d8ef1-132">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="d8ef1-132">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -69,7 +70,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="d8ef1-134">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="d8ef1-134">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="d8ef1-135">**Razor クラス ライブラリ** プロジェクト テンプレートを使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-135">Use the **Razor Class Library** project template.</span></span>
+<span data-ttu-id="d8ef1-135">**[Razor クラス ライブラリ** プロジェクト テンプレートを使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-135">Use the **[Razor Class Library** project template.</span></span>
 
 ---
 
@@ -87,7 +88,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a><span data-ttu-id="d8ef1-144">特定のホスティング モデルをサポートする</span><span class="sxs-lookup"><span data-stu-id="d8ef1-144">Support a specific hosting model</span></span>
 
-<span data-ttu-id="d8ef1-145">1 つの Blazor ホスティング モデルだけをサポートするのは、あまり一般的ではありません。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-145">It's far less common to support a single Blazor hosting model.</span></span> <span data-ttu-id="d8ef1-146">たとえば、[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトでのみ Razor コンポーネントの使用をサポートするには、次の操作を行います。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-146">As an example, to support Razor component consumption from [Blazor Server](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
+<span data-ttu-id="d8ef1-145">1 つの [Blazor ホスティング モデルだけをサポートするのは、あまり一般的ではありません。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-145">It's far less common to support a single [Blazor hosting model.</span></span> <span data-ttu-id="d8ef1-146">たとえば、[[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトでのみ [Razor コンポーネントの使用をサポートするには、次の操作を行います。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-146">As an example, to support [Razor component consumption from [[Blazor Server](xref:blazor/hosting-models#blazor-server) projects only:</span></span>
 
 * <span data-ttu-id="d8ef1-147">.NET Core 3.x を対象とします。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-147">Target .NET Core 3.x.</span></span>
 * <span data-ttu-id="d8ef1-148">共有フレームワークの `<FrameworkReference>` 要素を追加します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-148">Add a `<FrameworkReference>` element for the shared framework.</span></span>
@@ -96,32 +97,32 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-<span data-ttu-id="d8ef1-150">Razor コンポーネントを含むライブラリの詳細については、「[ASP.NET Core Razor コンポーネント クラス ライブラリ](xref:blazor/components/class-libraries)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-150">For more information on libraries containing Razor components, see [ASP.NET Core Razor components class libraries](xref:blazor/components/class-libraries).</span></span>
+<span data-ttu-id="d8ef1-150">[Razor コンポーネントを含むライブラリの詳細については、「[ASP.NET Core [Razor コンポーネント クラス ライブラリ](xref:blazor/components/class-libraries)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-150">For more information on libraries containing [Razor components, see [ASP.NET Core [Razor components class libraries](xref:blazor/components/class-libraries).</span></span>
 
 ## <a name="include-mvc-extensibility"></a><span data-ttu-id="d8ef1-151">MVC 拡張機能を含める</span><span class="sxs-lookup"><span data-stu-id="d8ef1-151">Include MVC extensibility</span></span>
 
 <span data-ttu-id="d8ef1-152">このセクションでは、次のものを含むライブラリの推奨事項について概要を説明します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-152">This section outlines recommendations for libraries that include:</span></span>
 
-* <span data-ttu-id="d8ef1-153">[Razor ビューまたは Razor Pages](#razor-views-or-razor-pages)</span><span class="sxs-lookup"><span data-stu-id="d8ef1-153">[Razor views or Razor Pages](#razor-views-or-razor-pages)</span></span>
+* <span data-ttu-id="d8ef1-153">[[Razor ビューまたは [Razor Pages](#razor-views-or-razor-pages)</span><span class="sxs-lookup"><span data-stu-id="d8ef1-153">[[Razor views or [Razor Pages](#razor-views-or-razor-pages)</span></span>
 * [<span data-ttu-id="d8ef1-154">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="d8ef1-154">Tag Helpers</span></span>](#tag-helpers)
 * [<span data-ttu-id="d8ef1-155">ビューのコンポーネント</span><span class="sxs-lookup"><span data-stu-id="d8ef1-155">View components</span></span>](#view-components)
 
 <span data-ttu-id="d8ef1-156">このセクションでは、MVC の複数のバージョンをサポートするマルチターゲット機能については説明しません。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-156">This section doesn't discuss multi-targeting to support multiple versions of MVC.</span></span> <span data-ttu-id="d8ef1-157">複数の ASP.NET Core バージョンのサポートに関するガイダンスについては、「[複数のバージョンの ASP.NET Core をサポートする](#support-multiple-aspnet-core-versions)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-157">For guidance on supporting multiple ASP.NET Core versions, see [Support multiple ASP.NET Core versions](#support-multiple-aspnet-core-versions).</span></span>
 
-### <a name="razor-views-or-razor-pages"></a>Razor<span data-ttu-id="d8ef1-158"> ビューまたは Razor Pages</span><span class="sxs-lookup"><span data-stu-id="d8ef1-158"> views or Razor Pages</span></span>
+### <a name="razor-views-or-razor-pages"></a><span data-ttu-id="d8ef1-158">[Razor ビューまたは [Razor Pages</span><span class="sxs-lookup"><span data-stu-id="d8ef1-158">[Razor views or [Razor Pages</span></span>
 
-<span data-ttu-id="d8ef1-159">[Razor ビュー](xref:mvc/views/overview)または [Razor Pages](xref:razor-pages/index) を含むプロジェクトでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-159">A project that includes [Razor views](xref:mvc/views/overview) or [Razor Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk).</span></span>
+<span data-ttu-id="d8ef1-159">[[Razor ビュー](xref:mvc/views/overview)または [[Razor Pages](xref:razor-pages/index) を含むプロジェクトでは、[Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk) を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-159">A project that includes [[Razor views](xref:mvc/views/overview) or [[Razor Pages](xref:razor-pages/index) must use the [Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk).</span></span>
 
 <span data-ttu-id="d8ef1-160">プロジェクトが .NET Core 3.x を対象とする場合、次のものが必要です。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-160">If the project targets .NET Core 3.x, it requires:</span></span>
 
 * <span data-ttu-id="d8ef1-161">`true` に設定された `AddRazorSupportForMvc` MSBuild プロパティ。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-161">An `AddRazorSupportForMvc` MSBuild property set to `true`.</span></span>
 * <span data-ttu-id="d8ef1-162">共有フレームワークの `<FrameworkReference>` 要素。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-162">A `<FrameworkReference>` element for the shared framework.</span></span>
 
-<span data-ttu-id="d8ef1-163">**Razor クラス ライブラリ** プロジェクト テンプレートは、.NET Core 3.x を対象とするプロジェクトについて、前述の要件を満たしています。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-163">The **Razor Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="d8ef1-164">ご使用のエディターに応じて、次の手順を使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-164">Use the following instructions for your editor.</span></span>
+<span data-ttu-id="d8ef1-163">**[Razor クラス ライブラリ** プロジェクト テンプレートは、.NET Core 3.x を対象とするプロジェクトについて、前述の要件を満たしています。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-163">The **[Razor Class Library** project template satisfies the preceding requirements for projects targeting .NET Core 3.x.</span></span> <span data-ttu-id="d8ef1-164">ご使用のエディターに応じて、次の手順を使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-164">Use the following instructions for your editor.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="d8ef1-165">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="d8ef1-165">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="d8ef1-166">**Razor クラス ライブラリ** プロジェクト テンプレートを使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-166">Use the **Razor Class Library** project template.</span></span> <span data-ttu-id="d8ef1-167">このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスをオンにする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-167">The template's **Support pages and views** checkbox should be selected.</span></span>
+<span data-ttu-id="d8ef1-166">**[Razor クラス ライブラリ** プロジェクト テンプレートを使用します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-166">Use the **[Razor Class Library** project template.</span></span> <span data-ttu-id="d8ef1-167">このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスをオンにする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-167">The template's **Support pages and views** checkbox should be selected.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="d8ef1-168">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="d8ef1-168">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -151,7 +152,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-<span data-ttu-id="d8ef1-180">.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) へのパッケージ参照を追加します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor).</span></span> <span data-ttu-id="d8ef1-181">`Microsoft.AspNetCore.Mvc.Razor` パッケージは共有フレームワークに移動されたため、公開されなくなりました。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-181">The `Microsoft.AspNetCore.Mvc.Razor` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="d8ef1-182">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-182">For example:</span></span>
+<span data-ttu-id="d8ef1-180">.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor) へのパッケージ参照を追加します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-180">If targeting .NET Standard (to support versions earlier than ASP.NET Core 3.x), add a package reference to [Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor).</span></span> <span data-ttu-id="d8ef1-181">`Microsoft.AspNetCore.Mvc.[Razor` パッケージは共有フレームワークに移動されたため、公開されなくなりました。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-181">The `Microsoft.AspNetCore.Mvc.[Razor` package moved into the shared framework and is therefore no longer published.</span></span> <span data-ttu-id="d8ef1-182">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-182">For example:</span></span>
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
@@ -180,8 +181,8 @@ dotnet new razorclasslib -s
 <span data-ttu-id="d8ef1-197">上記のプロジェクト ファイルでは、次のことが実行されます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-197">With the preceding project file:</span></span>
 
 * <span data-ttu-id="d8ef1-198">すべてのコンシューマー向けに `Markdig` パッケージが追加されます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-198">The `Markdig` package is added for all consumers.</span></span>
-* <span data-ttu-id="d8ef1-199">[Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) への参照</span><span class="sxs-lookup"><span data-stu-id="d8ef1-199">A reference to [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)</span></span> <span data-ttu-id="d8ef1-200">が、.NET Framework 4.6.1 以降または .NET Core 2.x を対象とするコンシューマー向けに追加されます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="d8ef1-201">パッケージのバージョン 2.1.0 は、下位互換性のために ASP.NET Core 2.2 で動作します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
-* <span data-ttu-id="d8ef1-202">共有フレームワークは、.NET Core 3.x を対象とするコンシューマー向けに参照されます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="d8ef1-203">`Microsoft.AspNetCore.Mvc.Razor` パッケージは、共有フレームワークに含まれます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-203">The `Microsoft.AspNetCore.Mvc.Razor` package is included in the shared framework.</span></span>
+* <span data-ttu-id="d8ef1-199">[Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor) への参照</span><span class="sxs-lookup"><span data-stu-id="d8ef1-199">A reference to [Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor)</span></span> <span data-ttu-id="d8ef1-200">が、.NET Framework 4.6.1 以降または .NET Core 2.x を対象とするコンシューマー向けに追加されます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-200">is added for consumers targeting .NET Framework 4.6.1 or later or .NET Core 2.x.</span></span> <span data-ttu-id="d8ef1-201">パッケージのバージョン 2.1.0 は、下位互換性のために ASP.NET Core 2.2 で動作します。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-201">Version 2.1.0 of the package works with ASP.NET Core 2.2 because of backwards compatibility.</span></span>
+* <span data-ttu-id="d8ef1-202">共有フレームワークは、.NET Core 3.x を対象とするコンシューマー向けに参照されます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-202">The shared framework is referenced for consumers targeting .NET Core 3.x.</span></span> <span data-ttu-id="d8ef1-203">`Microsoft.AspNetCore.Mvc.[Razor` パッケージは、共有フレームワークに含まれます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-203">The `Microsoft.AspNetCore.Mvc.[Razor` package is included in the shared framework.</span></span>
 
 <span data-ttu-id="d8ef1-204">また、.NET Core 2.1 と .NET Framework 4.6.1 の両方を対象とする場合、代わりに .NET Standard 2.0 を対象とすることもできます。</span><span class="sxs-lookup"><span data-stu-id="d8ef1-204">Alternatively, .NET Standard 2.0 could be targeted instead of targeting both .NET Core 2.1 and .NET Framework 4.6.1:</span></span>
 

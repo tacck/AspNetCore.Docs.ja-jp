@@ -6,13 +6,13 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/policies
 ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -109,7 +109,7 @@ public void ConfigureServices(IServiceCollection services)
 
 
     services.AddControllersWithViews();
-    services.Add:::no-loc(Razor):::Pages();
+    services.AddRazorPages();
 }
 ```
 
@@ -117,21 +117,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a><span data-ttu-id="4ff69-120">MVC コントローラーにポリシーを適用する</span><span class="sxs-lookup"><span data-stu-id="4ff69-120">Apply policies to MVC controllers</span></span>
 
-<span data-ttu-id="4ff69-121">ページを使用している場合は :::no-loc(Razor)::: 、このドキュメントの「 [ :::no-loc(Razor)::: ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="4ff69-121">If you're using :::no-loc(Razor)::: Pages, see [Apply policies to :::no-loc(Razor)::: Pages](#apply-policies-to-razor-pages) in this document.</span></span>
+<span data-ttu-id="4ff69-121">ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="4ff69-121">If you're using Razor Pages, see [Apply policies to Razor Pages](#apply-policies-to-razor-pages) in this document.</span></span>
 
 <span data-ttu-id="4ff69-122">ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-122">Policies are applied to controllers by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="4ff69-123">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-123">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="4ff69-124">ページにポリシーを適用する :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="4ff69-124">Apply policies to :::no-loc(Razor)::: Pages</span></span>
+## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="4ff69-124">ページにポリシーを適用する Razor</span><span class="sxs-lookup"><span data-stu-id="4ff69-124">Apply policies to Razor Pages</span></span>
 
-<span data-ttu-id="4ff69-125">ポリシーは :::no-loc(Razor)::: 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-125">Policies are applied to :::no-loc(Razor)::: Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="4ff69-126">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-126">For example:</span></span>
+<span data-ttu-id="4ff69-125">ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-125">Policies are applied to Razor Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="4ff69-126">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-126">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-<span data-ttu-id="4ff69-127">ポリシーをページハンドラーレベルで適用することはでき***ません***。ポリシーは :::no-loc(Razor)::: ページに適用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="4ff69-127">Policies can ***not*** be applied at the :::no-loc(Razor)::: Page handler level, they must be applied to the Page.</span></span>
+<span data-ttu-id="4ff69-127">ポリシーをページハンドラーレベルで適用することはでき***ません***。ポリシーは Razor ページに適用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="4ff69-127">Policies can ***not*** be applied at the Razor Page handler level, they must be applied to the Page.</span></span>
 
-<span data-ttu-id="4ff69-128">ポリシーは :::no-loc(Razor)::: 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用できます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-128">Policies can be applied to :::no-loc(Razor)::: Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
+<span data-ttu-id="4ff69-128">ポリシーは Razor 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用できます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-128">Policies can be applied to Razor Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
 
 ## <a name="requirements"></a><span data-ttu-id="4ff69-129">要件</span><span class="sxs-lookup"><span data-stu-id="4ff69-129">Requirements</span></span>
 
@@ -225,7 +225,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="access-mvc-request-context-in-handlers"></a><span data-ttu-id="4ff69-185">ハンドラーの MVC 要求コンテキストへのアクセス</span><span class="sxs-lookup"><span data-stu-id="4ff69-185">Access MVC request context in handlers</span></span>
 
-<span data-ttu-id="4ff69-186">`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement`</span><span class="sxs-lookup"><span data-stu-id="4ff69-186">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="4ff69-187">MVC やなどのフレームワークは :::no-loc(SignalR)::: 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-187">Frameworks such as MVC or :::no-loc(SignalR)::: are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
+<span data-ttu-id="4ff69-186">`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement`</span><span class="sxs-lookup"><span data-stu-id="4ff69-186">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="4ff69-187">MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-187">Frameworks such as MVC or SignalR are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
 
 <span data-ttu-id="4ff69-188">エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-188">When using endpoint routing, authorization is typically handled by the Authorization Middleware.</span></span> <span data-ttu-id="4ff69-189">この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。</span><span class="sxs-lookup"><span data-stu-id="4ff69-189">In this case, the `Resource` property is an instance of <xref:Microsoft.AspNetCore.Http.Endpoint>.</span></span> <span data-ttu-id="4ff69-190">エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-190">The endpoint can be used to probe the underlying resource to which you're routing.</span></span> <span data-ttu-id="4ff69-191">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-191">For example:</span></span>
 
@@ -239,7 +239,7 @@ if (context.Resource is Endpoint endpoint)
 
 <span data-ttu-id="4ff69-192">エンドポイントは、現在のへのアクセスを提供しません `HttpContext` 。</span><span class="sxs-lookup"><span data-stu-id="4ff69-192">The endpoint doesn't provide access to the current `HttpContext`.</span></span> <span data-ttu-id="4ff69-193">エンドポイントルーティングを使用する場合は、を使用して、 `IHttpContextAcessor` `HttpContext` 承認ハンドラー内でにアクセスします。</span><span class="sxs-lookup"><span data-stu-id="4ff69-193">When using endpoint routing, use `IHttpContextAcessor` to access `HttpContext` inside of an authorization handler.</span></span> <span data-ttu-id="4ff69-194">詳細については、「[カスタムコンポーネントからの HttpContext の使用](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="4ff69-194">For more information, see [Use HttpContext from custom components](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components).</span></span>
 
-<span data-ttu-id="4ff69-195">従来のルーティングでは、または MVC の承認フィルターの一部として承認が行われた場合、の値 `Resource` は <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> インスタンスになります。</span><span class="sxs-lookup"><span data-stu-id="4ff69-195">With traditional routing, or when authorization happens as part of MVC's authorization filter, the value of `Resource` is an <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> instance.</span></span> <span data-ttu-id="4ff69-196">このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-196">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="4ff69-195">従来のルーティングでは、または MVC の承認フィルターの一部として承認が行われた場合、の値 `Resource` は <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> インスタンスになります。</span><span class="sxs-lookup"><span data-stu-id="4ff69-195">With traditional routing, or when authorization happens as part of MVC's authorization filter, the value of `Resource` is an <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> instance.</span></span> <span data-ttu-id="4ff69-196">このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し Razor ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-196">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and Razor Pages.</span></span>
 
 <span data-ttu-id="4ff69-197">プロパティの使用 `Resource` はフレームワーク固有です。</span><span class="sxs-lookup"><span data-stu-id="4ff69-197">The use of the `Resource` property is framework specific.</span></span> <span data-ttu-id="4ff69-198">プロパティの情報を使用すると、 `Resource` 承認ポリシーが特定のフレームワークに限定されます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-198">Using information in the `Resource` property limits your authorization policies to particular frameworks.</span></span> <span data-ttu-id="4ff69-199">`Resource`キーワードを使用してプロパティをキャストし、キャストが成功したことを確認して、 `is` `InvalidCastException` 他のフレームワークで実行したときにコードがクラッシュしないようにする必要があります。</span><span class="sxs-lookup"><span data-stu-id="4ff69-199">You should cast the `Resource` property using the `is` keyword, and then confirm the cast has succeeded to ensure your code doesn't crash with an `InvalidCastException` when run on other frameworks:</span></span>
 
@@ -353,19 +353,19 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a><span data-ttu-id="4ff69-217">MVC コントローラーにポリシーを適用する</span><span class="sxs-lookup"><span data-stu-id="4ff69-217">Apply policies to MVC controllers</span></span>
 
-<span data-ttu-id="4ff69-218">ページを使用している場合は :::no-loc(Razor)::: 、このドキュメントの「 [ :::no-loc(Razor)::: ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="4ff69-218">If you're using :::no-loc(Razor)::: Pages, see [Apply policies to :::no-loc(Razor)::: Pages](#apply-policies-to-razor-pages) in this document.</span></span>
+<span data-ttu-id="4ff69-218">ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="4ff69-218">If you're using Razor Pages, see [Apply policies to Razor Pages](#apply-policies-to-razor-pages) in this document.</span></span>
 
 <span data-ttu-id="4ff69-219">ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-219">Policies are applied to controllers by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="4ff69-220">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-220">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="4ff69-221">ページにポリシーを適用する :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="4ff69-221">Apply policies to :::no-loc(Razor)::: Pages</span></span>
+## <a name="apply-policies-to-no-locrazor-pages"></a><span data-ttu-id="4ff69-221">ページにポリシーを適用する Razor</span><span class="sxs-lookup"><span data-stu-id="4ff69-221">Apply policies to Razor Pages</span></span>
 
-<span data-ttu-id="4ff69-222">ポリシーは :::no-loc(Razor)::: 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-222">Policies are applied to :::no-loc(Razor)::: Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="4ff69-223">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-223">For example:</span></span>
+<span data-ttu-id="4ff69-222">ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-222">Policies are applied to Razor Pages by using the `[Authorize]` attribute with the policy name.</span></span> <span data-ttu-id="4ff69-223">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4ff69-223">For example:</span></span>
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-<span data-ttu-id="4ff69-224">ポリシーは :::no-loc(Razor)::: 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-224">Policies can also be applied to :::no-loc(Razor)::: Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
+<span data-ttu-id="4ff69-224">ポリシーは Razor 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-224">Policies can also be applied to Razor Pages by using an [authorization convention](xref:security/authorization/razor-pages-authorization).</span></span>
 
 ## <a name="requirements"></a><span data-ttu-id="4ff69-225">要件</span><span class="sxs-lookup"><span data-stu-id="4ff69-225">Requirements</span></span>
 
@@ -459,9 +459,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="access-mvc-request-context-in-handlers"></a><span data-ttu-id="4ff69-281">ハンドラーの MVC 要求コンテキストへのアクセス</span><span class="sxs-lookup"><span data-stu-id="4ff69-281">Access MVC request context in handlers</span></span>
 
-<span data-ttu-id="4ff69-282">`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement`</span><span class="sxs-lookup"><span data-stu-id="4ff69-282">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="4ff69-283">MVC やなどのフレームワークは :::no-loc(SignalR)::: 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-283">Frameworks such as MVC or :::no-loc(SignalR)::: are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
+<span data-ttu-id="4ff69-282">`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement`</span><span class="sxs-lookup"><span data-stu-id="4ff69-282">The `HandleRequirementAsync` method you implement in an authorization handler has two parameters: an `AuthorizationHandlerContext` and the `TRequirement` you are handling.</span></span> <span data-ttu-id="4ff69-283">MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-283">Frameworks such as MVC or SignalR are free to add any object to the `Resource` property on the `AuthorizationHandlerContext` to pass extra information.</span></span>
 
-<span data-ttu-id="4ff69-284">たとえば、MVC は、プロパティに[Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext)のインスタンスを渡し `Resource` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-284">For example, MVC passes an instance of [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) in the `Resource` property.</span></span> <span data-ttu-id="4ff69-285">このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-285">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="4ff69-284">たとえば、MVC は、プロパティに[Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext)のインスタンスを渡し `Resource` ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-284">For example, MVC passes an instance of [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) in the `Resource` property.</span></span> <span data-ttu-id="4ff69-285">このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し Razor ます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-285">This property provides access to `HttpContext`, `RouteData`, and everything else provided by MVC and Razor Pages.</span></span>
 
 <span data-ttu-id="4ff69-286">プロパティの使用 `Resource` はフレームワーク固有です。</span><span class="sxs-lookup"><span data-stu-id="4ff69-286">The use of the `Resource` property is framework specific.</span></span> <span data-ttu-id="4ff69-287">プロパティの情報を使用すると、 `Resource` 承認ポリシーが特定のフレームワークに限定されます。</span><span class="sxs-lookup"><span data-stu-id="4ff69-287">Using information in the `Resource` property limits your authorization policies to particular frameworks.</span></span> <span data-ttu-id="4ff69-288">`Resource`キーワードを使用してプロパティをキャストし、キャストが成功したことを確認して、 `is` `InvalidCastException` 他のフレームワークで実行したときにコードがクラッシュしないようにする必要があります。</span><span class="sxs-lookup"><span data-stu-id="4ff69-288">You should cast the `Resource` property using the `is` keyword, and then confirm the cast has succeeded to ensure your code doesn't crash with an `InvalidCastException` when run on other frameworks:</span></span>
 

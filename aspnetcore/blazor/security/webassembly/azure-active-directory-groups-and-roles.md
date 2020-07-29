@@ -1,22 +1,23 @@
 ---
-title: Azure Active Directory のグループとロールを使用する ASP.NET Core Blazor WebAssembly
+title: Azure Active Directory のグループとロールを使用する ASP.NET Core [Blazor WebAssembly
 author: guardrex
-description: Azure Active Directory のグループとロールを使用するように Blazor WebAssembly を構成する方法を説明します。
+description: Azure Active Directory のグループとロールを使用するように [Blazor WebAssembly を構成する方法を説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/security/webassembly/aad-groups-roles
 ms.openlocfilehash: 6e27b062d7b5a1b72804fe5d4ea31ec65358ce45
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402157"
@@ -25,7 +26,7 @@ ms.locfileid: "85402157"
 
 <span data-ttu-id="73e9e-104">作成者: [Luke Latham](https://github.com/guardrex)、[Javier Calvarro Nelson](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="73e9e-104">By [Luke Latham](https://github.com/guardrex) and [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
 
-<span data-ttu-id="73e9e-105">Azure Active Directory (AAD) には、ASP.NET Core Identity と組み合わせることができる承認方法がいくつか用意されています。</span><span class="sxs-lookup"><span data-stu-id="73e9e-105">Azure Active Directory (AAD) provides several authorization approaches that can be combined with ASP.NET Core Identity:</span></span>
+<span data-ttu-id="73e9e-105">Azure Active Directory (AAD) には、ASP.NET Core [Identity と組み合わせることができる承認方法がいくつか用意されています。</span><span class="sxs-lookup"><span data-stu-id="73e9e-105">Azure Active Directory (AAD) provides several authorization approaches that can be combined with ASP.NET Core [Identity:</span></span>
 
 * <span data-ttu-id="73e9e-106">ユーザー定義グループ</span><span class="sxs-lookup"><span data-stu-id="73e9e-106">User-defined groups</span></span>
   * <span data-ttu-id="73e9e-107">セキュリティ</span><span class="sxs-lookup"><span data-stu-id="73e9e-107">Security</span></span>
@@ -35,7 +36,7 @@ ms.locfileid: "85402157"
   * <span data-ttu-id="73e9e-111">組み込み管理者ロール</span><span class="sxs-lookup"><span data-stu-id="73e9e-111">Built-in Administrative Roles</span></span>
   * <span data-ttu-id="73e9e-112">ユーザー定義ロール</span><span class="sxs-lookup"><span data-stu-id="73e9e-112">User-defined roles</span></span>
 
-<span data-ttu-id="73e9e-113">この記事のガイダンスは、次のトピックで説明されている Blazor WebAssembly AAD デプロイ シナリオに適用されます。</span><span class="sxs-lookup"><span data-stu-id="73e9e-113">The guidance in this article applies to the Blazor WebAssembly AAD deployment scenarios described in the following topics:</span></span>
+<span data-ttu-id="73e9e-113">この記事のガイダンスは、次のトピックで説明されている [Blazor WebAssembly AAD デプロイ シナリオに適用されます。</span><span class="sxs-lookup"><span data-stu-id="73e9e-113">The guidance in this article applies to the [Blazor WebAssembly AAD deployment scenarios described in the following topics:</span></span>
 
 * [<span data-ttu-id="73e9e-114">Microsoft アカウントによるスタンドアロン</span><span class="sxs-lookup"><span data-stu-id="73e9e-114">Standalone with Microsoft Accounts</span></span>](xref:blazor/security/webassembly/standalone-with-microsoft-accounts)
 * [<span data-ttu-id="73e9e-115">AAD によるスタンドアロン</span><span class="sxs-lookup"><span data-stu-id="73e9e-115">Standalone with AAD</span></span>](xref:blazor/security/webassembly/standalone-with-azure-active-directory)
@@ -94,9 +95,9 @@ public class CustomUserFactory
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
-        if (initialUser.Identity.IsAuthenticated)
+        if (initialUser.[Identity.IsAuthenticated)
         {
-            var userIdentity = (ClaimsIdentity)initialUser.Identity;
+            var userIdentity = (ClaimsIdentity)initialUser.[Identity;
 
             foreach (var role in account.Roles)
             {
@@ -285,7 +286,7 @@ builder.Services.AddMsalAuthentication(options =>
 <span data-ttu-id="73e9e-198">ディレクトリ閲覧者</span><span class="sxs-lookup"><span data-stu-id="73e9e-198">Directory readers</span></span> | <span data-ttu-id="73e9e-199">e1fc84a6-7762-4b9b-8e29-518b4adbc23b</span><span class="sxs-lookup"><span data-stu-id="73e9e-199">e1fc84a6-7762-4b9b-8e29-518b4adbc23b</span></span>
 <span data-ttu-id="73e9e-200">Dynamics 365 管理者</span><span class="sxs-lookup"><span data-stu-id="73e9e-200">Dynamics 365 administrator</span></span> | <span data-ttu-id="73e9e-201">f20a9cfa-9fdf-49a8-a977-1afe446a1d6e</span><span class="sxs-lookup"><span data-stu-id="73e9e-201">f20a9cfa-9fdf-49a8-a977-1afe446a1d6e</span></span>
 <span data-ttu-id="73e9e-202">Exchange 管理者</span><span class="sxs-lookup"><span data-stu-id="73e9e-202">Exchange administrator</span></span> | <span data-ttu-id="73e9e-203">b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652</span><span class="sxs-lookup"><span data-stu-id="73e9e-203">b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652</span></span>
-<span data-ttu-id="73e9e-204">外部 IdentityID プロバイダー管理者</span><span class="sxs-lookup"><span data-stu-id="73e9e-204">External Identity Provider administrator</span></span> | <span data-ttu-id="73e9e-205">febfaeb4-e478-407a-b4b3-f4d9716618a2</span><span class="sxs-lookup"><span data-stu-id="73e9e-205">febfaeb4-e478-407a-b4b3-f4d9716618a2</span></span>
+<span data-ttu-id="73e9e-204">外部 [IdentityID プロバイダー管理者</span><span class="sxs-lookup"><span data-stu-id="73e9e-204">External [Identity Provider administrator</span></span> | <span data-ttu-id="73e9e-205">febfaeb4-e478-407a-b4b3-f4d9716618a2</span><span class="sxs-lookup"><span data-stu-id="73e9e-205">febfaeb4-e478-407a-b4b3-f4d9716618a2</span></span>
 <span data-ttu-id="73e9e-206">全体管理者</span><span class="sxs-lookup"><span data-stu-id="73e9e-206">Global administrator</span></span> | <span data-ttu-id="73e9e-207">a45ba61b-44db-462c-924b-3b2719152588</span><span class="sxs-lookup"><span data-stu-id="73e9e-207">a45ba61b-44db-462c-924b-3b2719152588</span></span>
 <span data-ttu-id="73e9e-208">グローバル閲覧者</span><span class="sxs-lookup"><span data-stu-id="73e9e-208">Global reader</span></span> | <span data-ttu-id="73e9e-209">f6903b21-6aba-4124-b44c-76671796b9d5</span><span class="sxs-lookup"><span data-stu-id="73e9e-209">f6903b21-6aba-4124-b44c-76671796b9d5</span></span>
 <span data-ttu-id="73e9e-210">グループ管理者</span><span class="sxs-lookup"><span data-stu-id="73e9e-210">Groups administrator</span></span> | <span data-ttu-id="73e9e-211">158b3e5a-d89d-460b-92b5-3b34985f0197</span><span class="sxs-lookup"><span data-stu-id="73e9e-211">158b3e5a-d89d-460b-92b5-3b34985f0197</span></span>

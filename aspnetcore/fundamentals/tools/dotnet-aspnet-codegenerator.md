@@ -6,16 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85405602"
@@ -63,8 +64,8 @@ dotnet aspnet-codegenerator [-h|--help]
 | ----------------- | ------------ | 
 | <span data-ttu-id="5ce14-120">area</span><span class="sxs-lookup"><span data-stu-id="5ce14-120">area</span></span>      | [<span data-ttu-id="5ce14-121">区分のスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="5ce14-121">Scaffolds an Area</span></span>](/aspnet/core/mvc/controllers/areas) |
   <span data-ttu-id="5ce14-122">コントローラー</span><span class="sxs-lookup"><span data-stu-id="5ce14-122">controller</span></span>| [<span data-ttu-id="5ce14-123">コントローラーのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="5ce14-123">Scaffolds a controller</span></span>](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  <span data-ttu-id="5ce14-124">ID</span><span class="sxs-lookup"><span data-stu-id="5ce14-124">identity</span></span>  | <span data-ttu-id="5ce14-125">[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)</span><span class="sxs-lookup"><span data-stu-id="5ce14-125">[Scaffolds Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span> |
-  <span data-ttu-id="5ce14-126">razorpage</span><span class="sxs-lookup"><span data-stu-id="5ce14-126">razorpage</span></span> | <span data-ttu-id="5ce14-127">[Razor Pages のスキャフォールディング](/aspnet/core/tutorials/razor-pages/model)</span><span class="sxs-lookup"><span data-stu-id="5ce14-127">[Scaffolds Razor Pages](/aspnet/core/tutorials/razor-pages/model)</span></span> |
+  <span data-ttu-id="5ce14-124">ID</span><span class="sxs-lookup"><span data-stu-id="5ce14-124">identity</span></span>  | <span data-ttu-id="5ce14-125">[[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)</span><span class="sxs-lookup"><span data-stu-id="5ce14-125">[Scaffolds [Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span> |
+  <span data-ttu-id="5ce14-126">razorpage</span><span class="sxs-lookup"><span data-stu-id="5ce14-126">razorpage</span></span> | <span data-ttu-id="5ce14-127">[[Razor Pages のスキャフォールディング](/aspnet/core/tutorials/razor-pages/model)</span><span class="sxs-lookup"><span data-stu-id="5ce14-127">[Scaffolds [Razor Pages](/aspnet/core/tutorials/razor-pages/model)</span></span> |
   <span data-ttu-id="5ce14-128">ビュー</span><span class="sxs-lookup"><span data-stu-id="5ce14-128">view</span></span>      | [<span data-ttu-id="5ce14-129">ビューのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="5ce14-129">Scaffolds a view</span></span>](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a><span data-ttu-id="5ce14-130">オプション</span><span class="sxs-lookup"><span data-stu-id="5ce14-130">Options</span></span>
@@ -103,7 +104,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 * <span data-ttu-id="5ce14-144">区分</span><span class="sxs-lookup"><span data-stu-id="5ce14-144">Area</span></span>
 * <span data-ttu-id="5ce14-145">コントローラー</span><span class="sxs-lookup"><span data-stu-id="5ce14-145">Controller</span></span>
-* Identity  
+* [Identity  
 * <span data-ttu-id="5ce14-146">Razorpage</span><span class="sxs-lookup"><span data-stu-id="5ce14-146">Razorpage</span></span>
 * <span data-ttu-id="5ce14-147">View</span><span class="sxs-lookup"><span data-stu-id="5ce14-147">View</span></span>
 
@@ -111,7 +112,7 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ### <a name="area-options"></a><span data-ttu-id="5ce14-148">Area のオプション</span><span class="sxs-lookup"><span data-stu-id="5ce14-148">Area options</span></span>
 
-<span data-ttu-id="5ce14-149">このツールは、コントローラーとビューを含む ASP.NET Core Web プロジェクト用のものです。</span><span class="sxs-lookup"><span data-stu-id="5ce14-149">This tool is intended for ASP.NET Core web projects with controllers and views.</span></span> <span data-ttu-id="5ce14-150">Razor Pages アプリ用ではありません。</span><span class="sxs-lookup"><span data-stu-id="5ce14-150">It's not intended for Razor Pages apps.</span></span>
+<span data-ttu-id="5ce14-149">このツールは、コントローラーとビューを含む ASP.NET Core Web プロジェクト用のものです。</span><span class="sxs-lookup"><span data-stu-id="5ce14-149">This tool is intended for ASP.NET Core web projects with controllers and views.</span></span> <span data-ttu-id="5ce14-150">[Razor Pages アプリ用ではありません。</span><span class="sxs-lookup"><span data-stu-id="5ce14-150">It's not intended for [Razor Pages apps.</span></span>
 
 <span data-ttu-id="5ce14-151">使用方法: `dotnet aspnet-codegenerator area AreaNameToGenerate`</span><span class="sxs-lookup"><span data-stu-id="5ce14-151">Usage: `dotnet aspnet-codegenerator area AreaNameToGenerate`</span></span>
 
@@ -154,7 +155,7 @@ dotnet aspnet-codegenerator controller -h
 
 <a name="rp"></a>
 
-<span data-ttu-id="5ce14-178">新しいページの名前と使用するテンプレートを指定すれば、Razor Pages を個別にスキャフォールディングできます。</span><span class="sxs-lookup"><span data-stu-id="5ce14-178">Razor Pages can be individually scaffolded by specifying the name of the new page and the template to use.</span></span> <span data-ttu-id="5ce14-179">サポートされているテンプレートは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="5ce14-179">The supported templates are:</span></span>
+<span data-ttu-id="5ce14-178">新しいページの名前と使用するテンプレートを指定すれば、[Razor Pages を個別にスキャフォールディングできます。</span><span class="sxs-lookup"><span data-stu-id="5ce14-178">[Razor Pages can be individually scaffolded by specifying the name of the new page and the template to use.</span></span> <span data-ttu-id="5ce14-179">サポートされているテンプレートは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="5ce14-179">The supported templates are:</span></span>
 
 * `Empty`
 * `Create`
@@ -197,6 +198,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 <span data-ttu-id="5ce14-194">`dotnet aspnet-codegenerator razorpage` の例については、[映画モデルのスキャフォールディング](/aspnet/core/tutorials/razor-pages/model)に関する記事をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="5ce14-194">See [Scaffold the movie model](/aspnet/core/tutorials/razor-pages/model) for an example of `dotnet aspnet-codegenerator razorpage`.</span></span>
 
-### Identity
+### [Identity
 
-<span data-ttu-id="5ce14-195">[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)に関する記事を参照してください。</span><span class="sxs-lookup"><span data-stu-id="5ce14-195">See [Scaffold Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span>
+<span data-ttu-id="5ce14-195">[[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)に関する記事を参照してください。</span><span class="sxs-lookup"><span data-stu-id="5ce14-195">See [Scaffold [Identity](/aspnet/core/security/authentication/scaffold-identity)</span></span>

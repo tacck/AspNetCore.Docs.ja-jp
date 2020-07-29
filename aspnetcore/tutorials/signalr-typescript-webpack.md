@@ -1,38 +1,39 @@
 ---
-title: TypeScript と Webpack で ASP.NET Core SignalR を使用する
+title: TypeScript と Webpack で ASP.NET Core [SignalR を使用する
 author: ssougnez
-description: このチュートリアルでは、クライアントが TypeScript で記述された ASP.NET Core SignalR Web アプリをバンドルおよびビルドするために Webpack を構成します。
+description: このチュートリアルでは、クライアントが TypeScript で記述された ASP.NET Core [SignalR Web アプリをバンドルおよびビルドするために Webpack を構成します。
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: tutorials/signalr-typescript-webpack
 ms.openlocfilehash: 49d185ce941d5f8e841224e7de3b72b8350a1c47
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85407903"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a><span data-ttu-id="91a64-103">TypeScript と Webpack で ASP.NET Core SignalR を使用する</span><span class="sxs-lookup"><span data-stu-id="91a64-103">Use ASP.NET Core SignalR with TypeScript and Webpack</span></span>
+# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a><span data-ttu-id="91a64-103">TypeScript と Webpack で ASP.NET Core [SignalR を使用する</span><span class="sxs-lookup"><span data-stu-id="91a64-103">Use ASP.NET Core [SignalR with TypeScript and Webpack</span></span>
 
 <span data-ttu-id="91a64-104">作成者: [Sébastien Sougnez](https://twitter.com/ssougnez)、[Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="91a64-104">By [Sébastien Sougnez](https://twitter.com/ssougnez) and [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
 
-<span data-ttu-id="91a64-105">[Webpack](https://webpack.js.org/) を使用すると、開発者は Web アプリのクライアント側のリソースをバンドルおよびビルドすることができます。</span><span class="sxs-lookup"><span data-stu-id="91a64-105">[Webpack](https://webpack.js.org/) enables developers to bundle and build the client-side resources of a web app.</span></span> <span data-ttu-id="91a64-106">このチュートリアルでは、クライアントが [TypeScript](https://www.typescriptlang.org/) で記述された ASP.NET Core SignalR Web アプリでの Webpack の使用法を示します。</span><span class="sxs-lookup"><span data-stu-id="91a64-106">This tutorial demonstrates using Webpack in an ASP.NET Core SignalR web app whose client is written in [TypeScript](https://www.typescriptlang.org/).</span></span>
+<span data-ttu-id="91a64-105">[Webpack](https://webpack.js.org/) を使用すると、開発者は Web アプリのクライアント側のリソースをバンドルおよびビルドすることができます。</span><span class="sxs-lookup"><span data-stu-id="91a64-105">[Webpack](https://webpack.js.org/) enables developers to bundle and build the client-side resources of a web app.</span></span> <span data-ttu-id="91a64-106">このチュートリアルでは、クライアントが [TypeScript](https://www.typescriptlang.org/) で記述された ASP.NET Core [SignalR Web アプリでの Webpack の使用法を示します。</span><span class="sxs-lookup"><span data-stu-id="91a64-106">This tutorial demonstrates using Webpack in an ASP.NET Core [SignalR web app whose client is written in [TypeScript](https://www.typescriptlang.org/).</span></span>
 
 <span data-ttu-id="91a64-107">このチュートリアルでは、次の作業を行う方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="91a64-107">In this tutorial, you learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="91a64-108">スターター ASP.NET Core SignalR アプリをスキャフォールディングする</span><span class="sxs-lookup"><span data-stu-id="91a64-108">Scaffold a starter ASP.NET Core SignalR app</span></span>
-> * <span data-ttu-id="91a64-109">SignalR TypeScript クライアントを構成する</span><span class="sxs-lookup"><span data-stu-id="91a64-109">Configure the SignalR TypeScript client</span></span>
+> * <span data-ttu-id="91a64-108">スターター ASP.NET Core [SignalR アプリをスキャフォールディングする</span><span class="sxs-lookup"><span data-stu-id="91a64-108">Scaffold a starter ASP.NET Core [SignalR app</span></span>
+> * <span data-ttu-id="91a64-109">[SignalR TypeScript クライアントを構成する</span><span class="sxs-lookup"><span data-stu-id="91a64-109">Configure the [SignalR TypeScript client</span></span>
 > * <span data-ttu-id="91a64-110">Webpack を使用してビルド パイプラインを構成する</span><span class="sxs-lookup"><span data-stu-id="91a64-110">Configure a build pipeline using Webpack</span></span>
-> * <span data-ttu-id="91a64-111">SignalR サーバーを構成する</span><span class="sxs-lookup"><span data-stu-id="91a64-111">Configure the SignalR server</span></span>
+> * <span data-ttu-id="91a64-111">[SignalR サーバーを構成する</span><span class="sxs-lookup"><span data-stu-id="91a64-111">Configure the [SignalR server</span></span>
 > * <span data-ttu-id="91a64-112">クライアントとサーバー間の通信を有効にする</span><span class="sxs-lookup"><span data-stu-id="91a64-112">Enable communication between client and server</span></span>
 
 <span data-ttu-id="91a64-113">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="91a64-113">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
@@ -154,7 +155,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
     <span data-ttu-id="91a64-175">上記のファイルは、Webpack コンパイルを構成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-175">The preceding file configures the Webpack compilation.</span></span> <span data-ttu-id="91a64-176">注目するべき構成の詳細 (一部):</span><span class="sxs-lookup"><span data-stu-id="91a64-176">Some configuration details to note:</span></span>
 
     * <span data-ttu-id="91a64-177">`output` プロパティにより、*dist* の既定値がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="91a64-177">The `output` property overrides the default value of *dist*.</span></span> <span data-ttu-id="91a64-178">代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-178">The bundle is instead emitted in the *wwwroot* directory.</span></span>
-    * <span data-ttu-id="91a64-179">`resolve.extensions` 配列には、SignalR クライアント JavaScript をインポートするための *.js* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="91a64-179">The `resolve.extensions` array includes *.js* to import the SignalR client JavaScript.</span></span>
+    * <span data-ttu-id="91a64-179">`resolve.extensions` 配列には、[SignalR クライアント JavaScript をインポートするための *.js* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="91a64-179">The `resolve.extensions` array includes *.js* to import the [SignalR client JavaScript.</span></span>
 
 1. <span data-ttu-id="91a64-180">プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい "*src*" ディレクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-180">Create a new *src* directory in the project root to store the project's client-side assets.</span></span>
 
@@ -203,7 +204,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. <span data-ttu-id="91a64-203">SignalR ハブを格納するために、プロジェクト ルート "*SignalRWebPack/* " に "*Hubs*" という名前の新しいディレクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-203">Create a new directory named *Hubs* in the project root *SignalRWebPack/* to store the SignalR hub.</span></span>
+1. <span data-ttu-id="91a64-203">[SignalR ハブを格納するために、プロジェクト ルート "*SignalRWebPack/* " に "*Hubs*" という名前の新しいディレクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-203">Create a new directory named *Hubs* in the project root *SignalRWebPack/* to store the [SignalR hub.</span></span>
 
 1. <span data-ttu-id="91a64-204">次のコードを使用して、*Hubs/ChatHub.cs* を作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-204">Create hub *Hubs/ChatHub.cs* with the following code:</span></span>
 
@@ -225,7 +226,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
     <span data-ttu-id="91a64-210">上記のコマンドにより、次がインストールされます。</span><span class="sxs-lookup"><span data-stu-id="91a64-210">The preceding command installs:</span></span>
 
-     * <span data-ttu-id="91a64-211">[SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr)。クライアントがサーバーにメッセージを送信できるようになります。</span><span class="sxs-lookup"><span data-stu-id="91a64-211">The [SignalR TypeScript client](https://www.npmjs.com/package/@microsoft/signalr), which allows the client to send messages to the server.</span></span>
+     * <span data-ttu-id="91a64-211">[[SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr)。クライアントがサーバーにメッセージを送信できるようになります。</span><span class="sxs-lookup"><span data-stu-id="91a64-211">The [[SignalR TypeScript client](https://www.npmjs.com/package/@microsoft/signalr), which allows the client to send messages to the server.</span></span>
      * <span data-ttu-id="91a64-212">Node.js の TypeScript 型定義。Node.js 型のコンパイル時チェックが有効になります。</span><span class="sxs-lookup"><span data-stu-id="91a64-212">The TypeScript type definitions for Node.js, which enables compile-time checking of Node.js types.</span></span>
 
 1. <span data-ttu-id="91a64-213">強調表示されたコードを *src/index.ts* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="91a64-213">Add the highlighted code to the *src/index.ts* file:</span></span>
@@ -234,7 +235,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
     <span data-ttu-id="91a64-214">上記のコードは、サーバーからのメッセージの受信をサポートします。</span><span class="sxs-lookup"><span data-stu-id="91a64-214">The preceding code supports receiving messages from the server.</span></span> <span data-ttu-id="91a64-215">`HubConnectionBuilder` クラスは、サーバー接続を構成するための新しいビルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-215">The `HubConnectionBuilder` class creates a new builder for configuring the server connection.</span></span> <span data-ttu-id="91a64-216">`withUrl` 関数は、ハブ URL を構成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-216">The `withUrl` function configures the hub URL.</span></span>
 
-    SignalR<span data-ttu-id="91a64-217"> により、クライアントとサーバー間でのメッセージのやり取りが可能になります。</span><span class="sxs-lookup"><span data-stu-id="91a64-217"> enables the exchange of messages between a client and a server.</span></span> <span data-ttu-id="91a64-218">各メッセージには特定の名前があります。</span><span class="sxs-lookup"><span data-stu-id="91a64-218">Each message has a specific name.</span></span> <span data-ttu-id="91a64-219">たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。</span><span class="sxs-lookup"><span data-stu-id="91a64-219">For example, messages with the name `messageReceived` can run the logic responsible for displaying the new message in the messages zone.</span></span> <span data-ttu-id="91a64-220">特定のメッセージをリッスンするには、`on` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="91a64-220">Listening to a specific message can be done via the `on` function.</span></span> <span data-ttu-id="91a64-221">任意の数のメッセージ名をリッスンできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-221">Any number of message names can be listened to.</span></span> <span data-ttu-id="91a64-222">作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-222">It's also possible to pass parameters to the message, such as the author's name and the content of the message received.</span></span> <span data-ttu-id="91a64-223">クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-223">Once the client receives a message, a new `div` element is created with the author's name and the message content in its `innerHTML` attribute.</span></span> <span data-ttu-id="91a64-224">これはメッセージを表示する主要な `div` 要素に追加されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-224">It's added to the main `div` element displaying the messages.</span></span>
+    <span data-ttu-id="91a64-217">[SignalR により、クライアントとサーバー間でのメッセージのやり取りが可能になります。</span><span class="sxs-lookup"><span data-stu-id="91a64-217">[SignalR enables the exchange of messages between a client and a server.</span></span> <span data-ttu-id="91a64-218">各メッセージには特定の名前があります。</span><span class="sxs-lookup"><span data-stu-id="91a64-218">Each message has a specific name.</span></span> <span data-ttu-id="91a64-219">たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。</span><span class="sxs-lookup"><span data-stu-id="91a64-219">For example, messages with the name `messageReceived` can run the logic responsible for displaying the new message in the messages zone.</span></span> <span data-ttu-id="91a64-220">特定のメッセージをリッスンするには、`on` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="91a64-220">Listening to a specific message can be done via the `on` function.</span></span> <span data-ttu-id="91a64-221">任意の数のメッセージ名をリッスンできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-221">Any number of message names can be listened to.</span></span> <span data-ttu-id="91a64-222">作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-222">It's also possible to pass parameters to the message, such as the author's name and the content of the message received.</span></span> <span data-ttu-id="91a64-223">クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-223">Once the client receives a message, a new `div` element is created with the author's name and the message content in its `innerHTML` attribute.</span></span> <span data-ttu-id="91a64-224">これはメッセージを表示する主要な `div` 要素に追加されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-224">It's added to the main `div` element displaying the messages.</span></span>
 
 1. <span data-ttu-id="91a64-225">これでクライアントがメッセージを受信できるようになったので、メッセージを送信するように構成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-225">Now that the client can receive a message, configure it to send messages.</span></span> <span data-ttu-id="91a64-226">強調表示されたコードを *src/index.ts* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="91a64-226">Add the highlighted code to the *src/index.ts* file:</span></span>
 
@@ -394,7 +395,7 @@ dotnet new web -o SignalRWebPack
     <span data-ttu-id="91a64-318">上記のファイルは、Webpack コンパイルを構成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-318">The preceding file configures the Webpack compilation.</span></span> <span data-ttu-id="91a64-319">注目するべき構成の詳細 (一部):</span><span class="sxs-lookup"><span data-stu-id="91a64-319">Some configuration details to note:</span></span>
 
     * <span data-ttu-id="91a64-320">`output` プロパティにより、*dist* の既定値がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="91a64-320">The `output` property overrides the default value of *dist*.</span></span> <span data-ttu-id="91a64-321">代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-321">The bundle is instead emitted in the *wwwroot* directory.</span></span>
-    * <span data-ttu-id="91a64-322">`resolve.extensions` 配列には、SignalR クライアント JavaScript をインポートするための *.js* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="91a64-322">The `resolve.extensions` array includes *.js* to import the SignalR client JavaScript.</span></span>
+    * <span data-ttu-id="91a64-322">`resolve.extensions` 配列には、[SignalR クライアント JavaScript をインポートするための *.js* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="91a64-322">The `resolve.extensions` array includes *.js* to import the [SignalR client JavaScript.</span></span>
 
 1. <span data-ttu-id="91a64-323">プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい "*src*" ディレクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-323">Create a new *src* directory in the project root to store the project's client-side assets.</span></span>
 
@@ -435,7 +436,7 @@ dotnet new web -o SignalRWebPack
 
     <span data-ttu-id="91a64-341">上記のコードにより、サーバーが *index.html* ファイルを見つけて提供することができます。ユーザーがファイルの完全な URL または Web アプリのルート URL を入力するかどうかは関係ありません。</span><span class="sxs-lookup"><span data-stu-id="91a64-341">The preceding code allows the server to locate and serve the *index.html* file, whether the user enters its full URL or the root URL of the web app.</span></span>
 
-1. <span data-ttu-id="91a64-342">`Startup.ConfigureServices` で、[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="91a64-342">Call [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="91a64-343">これにより SignalR サービスがプロジェクトに追加されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-343">It adds the SignalR services to the project.</span></span>
+1. <span data-ttu-id="91a64-342">`Startup.ConfigureServices` で、[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="91a64-342">Call [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="91a64-343">これにより [SignalR サービスがプロジェクトに追加されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-343">It adds the [SignalR services to the project.</span></span>
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_AddSignalR)]
 
@@ -443,7 +444,7 @@ dotnet new web -o SignalRWebPack
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_UseSignalR)]
 
-1. <span data-ttu-id="91a64-346">プロジェクト ルートに *Hubs* という新しいディレクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-346">Create a new directory, called *Hubs*, in the project root.</span></span> <span data-ttu-id="91a64-347">その目的は、次の手順で作成される SignalR ハブを格納することです。</span><span class="sxs-lookup"><span data-stu-id="91a64-347">Its purpose is to store the SignalR hub, which is created in the next step.</span></span>
+1. <span data-ttu-id="91a64-346">プロジェクト ルートに *Hubs* という新しいディレクトリを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-346">Create a new directory, called *Hubs*, in the project root.</span></span> <span data-ttu-id="91a64-347">その目的は、次の手順で作成される [SignalR ハブを格納することです。</span><span class="sxs-lookup"><span data-stu-id="91a64-347">Its purpose is to store the [SignalR hub, which is created in the next step.</span></span>
 
 1. <span data-ttu-id="91a64-348">次のコードを使用して、*Hubs/ChatHub.cs* を作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-348">Create hub *Hubs/ChatHub.cs* with the following code:</span></span>
 
@@ -463,7 +464,7 @@ dotnet new web -o SignalRWebPack
     npm install @aspnet/signalr
     ```
 
-    <span data-ttu-id="91a64-355">上記のコマンドにより [SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr) がインストールされ、クライアントがサーバーにメッセージを送信できるようになります。</span><span class="sxs-lookup"><span data-stu-id="91a64-355">The preceding command installs the [SignalR TypeScript client](https://www.npmjs.com/package/@microsoft/signalr), which allows the client to send messages to the server.</span></span>
+    <span data-ttu-id="91a64-355">上記のコマンドにより [[SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr) がインストールされ、クライアントがサーバーにメッセージを送信できるようになります。</span><span class="sxs-lookup"><span data-stu-id="91a64-355">The preceding command installs the [[SignalR TypeScript client](https://www.npmjs.com/package/@microsoft/signalr), which allows the client to send messages to the server.</span></span>
 
 1. <span data-ttu-id="91a64-356">強調表示されたコードを *src/index.ts* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="91a64-356">Add the highlighted code to the *src/index.ts* file:</span></span>
 
@@ -471,7 +472,7 @@ dotnet new web -o SignalRWebPack
 
     <span data-ttu-id="91a64-357">上記のコードは、サーバーからのメッセージの受信をサポートします。</span><span class="sxs-lookup"><span data-stu-id="91a64-357">The preceding code supports receiving messages from the server.</span></span> <span data-ttu-id="91a64-358">`HubConnectionBuilder` クラスは、サーバー接続を構成するための新しいビルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-358">The `HubConnectionBuilder` class creates a new builder for configuring the server connection.</span></span> <span data-ttu-id="91a64-359">`withUrl` 関数は、ハブ URL を構成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-359">The `withUrl` function configures the hub URL.</span></span>
 
-    SignalR<span data-ttu-id="91a64-360"> により、クライアントとサーバー間でのメッセージのやり取りが可能になります。</span><span class="sxs-lookup"><span data-stu-id="91a64-360"> enables the exchange of messages between a client and a server.</span></span> <span data-ttu-id="91a64-361">各メッセージには特定の名前があります。</span><span class="sxs-lookup"><span data-stu-id="91a64-361">Each message has a specific name.</span></span> <span data-ttu-id="91a64-362">たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。</span><span class="sxs-lookup"><span data-stu-id="91a64-362">For example, messages with the name `messageReceived` can run the logic responsible for displaying the new message in the messages zone.</span></span> <span data-ttu-id="91a64-363">特定のメッセージをリッスンするには、`on` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="91a64-363">Listening to a specific message can be done via the `on` function.</span></span> <span data-ttu-id="91a64-364">任意の数のメッセージ名をリッスンできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-364">You can listen to any number of message names.</span></span> <span data-ttu-id="91a64-365">作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-365">It's also possible to pass parameters to the message, such as the author's name and the content of the message received.</span></span> <span data-ttu-id="91a64-366">クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-366">Once the client receives a message, a new `div` element is created with the author's name and the message content in its `innerHTML` attribute.</span></span> <span data-ttu-id="91a64-367">新しいメッセージが、メッセージを表示する主要な `div` 要素に追加されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-367">The new message is added to the main `div` element displaying the messages.</span></span>
+    <span data-ttu-id="91a64-360">[SignalR により、クライアントとサーバー間でのメッセージのやり取りが可能になります。</span><span class="sxs-lookup"><span data-stu-id="91a64-360">[SignalR enables the exchange of messages between a client and a server.</span></span> <span data-ttu-id="91a64-361">各メッセージには特定の名前があります。</span><span class="sxs-lookup"><span data-stu-id="91a64-361">Each message has a specific name.</span></span> <span data-ttu-id="91a64-362">たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。</span><span class="sxs-lookup"><span data-stu-id="91a64-362">For example, messages with the name `messageReceived` can run the logic responsible for displaying the new message in the messages zone.</span></span> <span data-ttu-id="91a64-363">特定のメッセージをリッスンするには、`on` 関数を使用します。</span><span class="sxs-lookup"><span data-stu-id="91a64-363">Listening to a specific message can be done via the `on` function.</span></span> <span data-ttu-id="91a64-364">任意の数のメッセージ名をリッスンできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-364">You can listen to any number of message names.</span></span> <span data-ttu-id="91a64-365">作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="91a64-365">It's also possible to pass parameters to the message, such as the author's name and the content of the message received.</span></span> <span data-ttu-id="91a64-366">クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-366">Once the client receives a message, a new `div` element is created with the author's name and the message content in its `innerHTML` attribute.</span></span> <span data-ttu-id="91a64-367">新しいメッセージが、メッセージを表示する主要な `div` 要素に追加されます。</span><span class="sxs-lookup"><span data-stu-id="91a64-367">The new message is added to the main `div` element displaying the messages.</span></span>
 
 1. <span data-ttu-id="91a64-368">これでクライアントがメッセージを受信できるようになったので、メッセージを送信するように構成します。</span><span class="sxs-lookup"><span data-stu-id="91a64-368">Now that the client can receive a message, configure it to send messages.</span></span> <span data-ttu-id="91a64-369">強調表示されたコードを *src/index.ts* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="91a64-369">Add the highlighted code to the *src/index.ts* file:</span></span>
 

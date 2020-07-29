@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: tutorials/publish-to-iis
 ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85407890"
@@ -66,9 +67,9 @@ ms.locfileid: "85407890"
 
 1. <span data-ttu-id="9cf39-135">**[サイト名]** を指定し、 **[物理パス]** には作成したアプリの配置フォルダーを設定します。</span><span class="sxs-lookup"><span data-stu-id="9cf39-135">Provide a **Site name** and set the **Physical path** to the app's deployment folder that you created.</span></span> <span data-ttu-id="9cf39-136">**[バインド]** の構成を指定して **[OK]** を選択し、Web サイトを作成します。</span><span class="sxs-lookup"><span data-stu-id="9cf39-136">Provide the **Binding** configuration and create the website by selecting **OK**.</span></span>
 
-## <a name="create-an-aspnet-core-razor-pages-app"></a><span data-ttu-id="9cf39-137">ASP.NET Core Razor Pages アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="9cf39-137">Create an ASP.NET Core Razor Pages app</span></span>
+## <a name="create-an-aspnet-core-razor-pages-app"></a><span data-ttu-id="9cf39-137">ASP.NET Core [Razor Pages アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="9cf39-137">Create an ASP.NET Core [Razor Pages app</span></span>
 
-<span data-ttu-id="9cf39-138"><xref:getting-started> チュートリアルに従い、Razor Pages アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="9cf39-138">Follow the <xref:getting-started> tutorial to create a Razor Pages app.</span></span>
+<span data-ttu-id="9cf39-138"><xref:getting-started> チュートリアルに従い、[Razor Pages アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="9cf39-138">Follow the <xref:getting-started> tutorial to create a [Razor Pages app.</span></span>
 
 ## <a name="publish-and-deploy-the-app"></a><span data-ttu-id="9cf39-139">アプリを発行および配置する</span><span class="sxs-lookup"><span data-stu-id="9cf39-139">Publish and deploy the app</span></span>
 

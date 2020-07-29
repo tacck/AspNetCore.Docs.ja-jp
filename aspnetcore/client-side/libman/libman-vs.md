@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: 504c34ccd8813273161b86504700704f8a932538
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85403171"
@@ -67,7 +68,7 @@ ms.locfileid: "85403171"
     * <span data-ttu-id="7c10a-139">*wwwroot* が存在しない場合は、*lib* が使用されます。</span><span class="sxs-lookup"><span data-stu-id="7c10a-139">*lib* is used if *wwwroot* doesn't exist.</span></span>
   * <span data-ttu-id="7c10a-140">プロジェクト フォルダーから起動した場合は、対応するフォルダー名が使用されます。</span><span class="sxs-lookup"><span data-stu-id="7c10a-140">If launched from a project folder, the corresponding folder name is used.</span></span>
 
-  <span data-ttu-id="7c10a-141">提案されるフォルダーには、ライブラリ名がサフィックスとして付けられます。</span><span class="sxs-lookup"><span data-stu-id="7c10a-141">The folder suggestion is suffixed with the library name.</span></span> <span data-ttu-id="7c10a-142">次の表は、Razor Pages プロジェクトに jQuery をインストールするときに提案されるフォルダーを示しています。</span><span class="sxs-lookup"><span data-stu-id="7c10a-142">The following table illustrates folder suggestions when installing jQuery in a Razor Pages project.</span></span>
+  <span data-ttu-id="7c10a-141">提案されるフォルダーには、ライブラリ名がサフィックスとして付けられます。</span><span class="sxs-lookup"><span data-stu-id="7c10a-141">The folder suggestion is suffixed with the library name.</span></span> <span data-ttu-id="7c10a-142">次の表は、[Razor Pages プロジェクトに jQuery をインストールするときに提案されるフォルダーを示しています。</span><span class="sxs-lookup"><span data-stu-id="7c10a-142">The following table illustrates folder suggestions when installing jQuery in a [Razor Pages project.</span></span>
   
   |<span data-ttu-id="7c10a-143">起動場所</span><span class="sxs-lookup"><span data-stu-id="7c10a-143">Launch location</span></span>                           |<span data-ttu-id="7c10a-144">提案されるフォルダー</span><span class="sxs-lookup"><span data-stu-id="7c10a-144">Suggested folder</span></span>      |
   |------------------------------------------|----------------------|

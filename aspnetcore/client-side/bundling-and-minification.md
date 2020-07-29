@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401910"
@@ -70,19 +71,19 @@ ms.locfileid: "85401910"
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a><span data-ttu-id="f97f0-151">バンドルと縮小の戦略を選択する</span><span class="sxs-lookup"><span data-stu-id="f97f0-151">Choose a bundling and minification strategy</span></span>
 
-<span data-ttu-id="f97f0-152">MVC および Razor Pages プロジェクト テンプレートには、JSON 構成ファイルで構成されるバンドルおよび縮小のためのソリューションが用意されています。</span><span class="sxs-lookup"><span data-stu-id="f97f0-152">The MVC and Razor Pages project templates provide a solution for bundling and minification consisting of a JSON configuration file.</span></span> <span data-ttu-id="f97f0-153">[Grunt](xref:client-side/using-grunt) タスク ランナーなどのサードパーティ ツールの場合、同じタスクを実行するにはもう少し複雑です。</span><span class="sxs-lookup"><span data-stu-id="f97f0-153">Third-party tools, such as the [Grunt](xref:client-side/using-grunt) task runner, accomplish the same tasks with a bit more complexity.</span></span> <span data-ttu-id="f97f0-154">サードパーティ製のツールは、リンティングや画像の最適化など、バンドルと縮小を超える処理が開発ワークフローに必要な場合に最適です。</span><span class="sxs-lookup"><span data-stu-id="f97f0-154">A third-party tool is a great fit when your development workflow requires processing beyond bundling and minification&mdash;such as linting and image optimization.</span></span> <span data-ttu-id="f97f0-155">設計時にバンドルと縮小を使用することで、アプリのデプロイ前に縮小されたファイルが作成されます。</span><span class="sxs-lookup"><span data-stu-id="f97f0-155">By using design-time bundling and minification, the minified files are created prior to the app's deployment.</span></span> <span data-ttu-id="f97f0-156">デプロイ前のバンドルと縮小によって、サーバーの負荷が軽減されます。</span><span class="sxs-lookup"><span data-stu-id="f97f0-156">Bundling and minifying before deployment provides the advantage of reduced server load.</span></span> <span data-ttu-id="f97f0-157">ただし、設計時にバンドルと縮小を使用するとビルドの複雑さが増すので、静的ファイルでのみ機能することを認識することが重要です。</span><span class="sxs-lookup"><span data-stu-id="f97f0-157">However, it's important to recognize that design-time bundling and minification increases build complexity and only works with static files.</span></span>
+<span data-ttu-id="f97f0-152">MVC および [Razor Pages プロジェクト テンプレートには、JSON 構成ファイルで構成されるバンドルおよび縮小のためのソリューションが用意されています。</span><span class="sxs-lookup"><span data-stu-id="f97f0-152">The MVC and [Razor Pages project templates provide a solution for bundling and minification consisting of a JSON configuration file.</span></span> <span data-ttu-id="f97f0-153">[Grunt](xref:client-side/using-grunt) タスク ランナーなどのサードパーティ ツールの場合、同じタスクを実行するにはもう少し複雑です。</span><span class="sxs-lookup"><span data-stu-id="f97f0-153">Third-party tools, such as the [Grunt](xref:client-side/using-grunt) task runner, accomplish the same tasks with a bit more complexity.</span></span> <span data-ttu-id="f97f0-154">サードパーティ製のツールは、リンティングや画像の最適化など、バンドルと縮小を超える処理が開発ワークフローに必要な場合に最適です。</span><span class="sxs-lookup"><span data-stu-id="f97f0-154">A third-party tool is a great fit when your development workflow requires processing beyond bundling and minification&mdash;such as linting and image optimization.</span></span> <span data-ttu-id="f97f0-155">設計時にバンドルと縮小を使用することで、アプリのデプロイ前に縮小されたファイルが作成されます。</span><span class="sxs-lookup"><span data-stu-id="f97f0-155">By using design-time bundling and minification, the minified files are created prior to the app's deployment.</span></span> <span data-ttu-id="f97f0-156">デプロイ前のバンドルと縮小によって、サーバーの負荷が軽減されます。</span><span class="sxs-lookup"><span data-stu-id="f97f0-156">Bundling and minifying before deployment provides the advantage of reduced server load.</span></span> <span data-ttu-id="f97f0-157">ただし、設計時にバンドルと縮小を使用するとビルドの複雑さが増すので、静的ファイルでのみ機能することを認識することが重要です。</span><span class="sxs-lookup"><span data-stu-id="f97f0-157">However, it's important to recognize that design-time bundling and minification increases build complexity and only works with static files.</span></span>
 
 ## <a name="configure-bundling-and-minification"></a><span data-ttu-id="f97f0-158">バンドルと縮小を構成する</span><span class="sxs-lookup"><span data-stu-id="f97f0-158">Configure bundling and minification</span></span>
 
 ::: moniker range="<= aspnetcore-2.0"
 
-<span data-ttu-id="f97f0-159">ASP.NET Core 2.0 以前では、MVC および Razor Pages プロジェクト テンプレートには、各バンドルのオプションが定義された *bundleconfig.json* 構成ファイルが用意されています。</span><span class="sxs-lookup"><span data-stu-id="f97f0-159">In ASP.NET Core 2.0 or earlier, the MVC and Razor Pages project templates provide a *bundleconfig.json* configuration file that defines the options for each bundle:</span></span>
+<span data-ttu-id="f97f0-159">ASP.NET Core 2.0 以前では、MVC および [Razor Pages プロジェクト テンプレートには、各バンドルのオプションが定義された *bundleconfig.json* 構成ファイルが用意されています。</span><span class="sxs-lookup"><span data-stu-id="f97f0-159">In ASP.NET Core 2.0 or earlier, the MVC and [Razor Pages project templates provide a *bundleconfig.json* configuration file that defines the options for each bundle:</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-<span data-ttu-id="f97f0-160">ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または Razor Pages プロジェクトのルートに追加します。</span><span class="sxs-lookup"><span data-stu-id="f97f0-160">In ASP.NET Core 2.1 or later, add a new JSON file, named *bundleconfig.json*, to the MVC or Razor Pages project root.</span></span> <span data-ttu-id="f97f0-161">開始点としてそのファイルに次の JSON を含めます。</span><span class="sxs-lookup"><span data-stu-id="f97f0-161">Include the following JSON in that file as a starting point:</span></span>
+<span data-ttu-id="f97f0-160">ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または [Razor Pages プロジェクトのルートに追加します。</span><span class="sxs-lookup"><span data-stu-id="f97f0-160">In ASP.NET Core 2.1 or later, add a new JSON file, named *bundleconfig.json*, to the MVC or [Razor Pages project root.</span></span> <span data-ttu-id="f97f0-161">開始点としてそのファイルに次の JSON を含めます。</span><span class="sxs-lookup"><span data-stu-id="f97f0-161">Include the following JSON in that file as a starting point:</span></span>
 
 ::: moniker-end
 
