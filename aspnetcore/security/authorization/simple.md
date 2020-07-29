@@ -5,13 +5,13 @@ description: 承認属性を使用して、ASP.NET Core コントローラーと
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/simple
 ms.openlocfilehash: 09514032349d489b73d5bb785f11e44ca18b169c
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -24,7 +24,7 @@ ms.locfileid: "87160244"
 
 <a name="security-authorization-simple"></a>
 
-ASP.NET Core での承認は <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> 、とそのさまざまなパラメーターで制御されます。 最も単純な形式では、 `[Authorize]` コントローラー、アクション、またはページに属性を適用する :::no-loc(Razor)::: ことで、そのコンポーネントへのアクセスが認証されたユーザーに制限されます。
+ASP.NET Core での承認は <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> 、とそのさまざまなパラメーターで制御されます。 最も単純な形式では、 `[Authorize]` コントローラー、アクション、またはページに属性を適用する Razor ことで、そのコンポーネントへのアクセスが認証されたユーザーに制限されます。
 
 たとえば、次のコードは、へのアクセスを認証された `AccountController` ユーザーに制限します。
 
@@ -86,11 +86,11 @@ public class AccountController : Controller
 
 <a name="aarp"></a>
 
-## <a name="authorize-attribute-and-no-locrazor-pages"></a>属性と :::no-loc(Razor)::: ページを承認する
+## <a name="authorize-attribute-and-no-locrazor-pages"></a>属性と Razor ページを承認する
 
-は、 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ページハンドラーには適用でき***ません*** :::no-loc(Razor)::: 。 たとえば、は、、 `[Authorize]` `OnGet` `OnPost` または他のページハンドラーには適用できません。 さまざまなハンドラーに対して異なる承認要件を持つページに ASP.NET Core MVC コントローラーを使用することを検討してください。
+は、 <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ページハンドラーには適用でき***ません*** Razor 。 たとえば、は、、 `[Authorize]` `OnGet` `OnPost` または他のページハンドラーには適用できません。 さまざまなハンドラーに対して異なる承認要件を持つページに ASP.NET Core MVC コントローラーを使用することを検討してください。
 
-ページハンドラーメソッドに承認を適用するには、次の2つの方法を使用でき :::no-loc(Razor)::: ます。
+ページハンドラーメソッドに承認を適用するには、次の2つの方法を使用でき Razor ます。
 
 * 異なる承認を必要とするページハンドラーには、個別のページを使用します。 共有コンテンツを1つまたは複数の[部分ビュー](xref:mvc/views/partial)に移動しました。 可能な場合は、これが推奨される方法です。
 * 共通ページを共有する必要があるコンテンツには、 [Iasyncpagefilter. Onpageハンドラ Selectionasync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A)の一部として承認を実行するフィルターを記述します。 [Pageハンドラ auth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) GitHub プロジェクトは、次の方法を示しています。
@@ -103,4 +103,4 @@ public class AccountController : Controller
 > * ページ、ページモデル、またはグローバルに適用された承認属性を使用して構成します。 承認属性を作成すると、ページに1つ以上のインスタンスが適用されている場合に、認証と承認が複数回実行 `AuthorizeAttribute` `AuthorizeFilter` されます。
 > * ASP.NET Core 認証および承認システムの残りの部分と連携して作業します。 この方法を使用してアプリケーションに対して正しく動作することを確認する必要があります。
 
-ページハンドラーでをサポートする予定はありません `AuthorizeAttribute` :::no-loc(Razor)::: 。 
+ページハンドラーでをサポートする予定はありません `AuthorizeAttribute` Razor 。 

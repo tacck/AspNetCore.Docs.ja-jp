@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: 504c34ccd8813273161b86504700704f8a932538
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85403171"
@@ -67,7 +68,7 @@ Visual Studio には、ASP.NET Core プロジェクトでの [LibMan](xref:clien
     * *wwwroot* が存在しない場合は、*lib* が使用されます。
   * プロジェクト フォルダーから起動した場合は、対応するフォルダー名が使用されます。
 
-  提案されるフォルダーには、ライブラリ名がサフィックスとして付けられます。 次の表は、Razor Pages プロジェクトに jQuery をインストールするときに提案されるフォルダーを示しています。
+  提案されるフォルダーには、ライブラリ名がサフィックスとして付けられます。 次の表は、[Razor Pages プロジェクトに jQuery をインストールするときに提案されるフォルダーを示しています。
   
   |起動場所                           |提案されるフォルダー      |
   |------------------------------------------|----------------------|

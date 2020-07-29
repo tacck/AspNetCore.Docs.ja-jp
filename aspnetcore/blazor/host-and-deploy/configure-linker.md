@@ -1,37 +1,38 @@
 ---
-title: ASP.NET Core Blazor 用のリンカーを構成する
+title: ASP.NET Core [Blazor 用のリンカーを構成する
 author: guardrex
-description: Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。
+description: '[Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/host-and-deploy/configure-linker
 ms.openlocfilehash: 568efe9971aefc11841c42789ac7f2af3004003f
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402703"
 ---
-# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor 用のリンカーを構成する
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core [Blazor 用のリンカーを構成する
 
 作成者: [Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssembly では、ビルド中に[中間言語 (IL)](/dotnet/standard/managed-code#intermediate-language--execution) のリンクが実行されて、アプリの出力アセンブリから不要な IL がトリミングされます。 デバッグ構成でビルドすると、リンカーは無効になります。 リンカーを有効にするには、アプリをリリース構成でビルドする必要があります。 Blazor WebAssembly アプリを配置する場合は、リリースでビルドすることをお勧めします。 
+[Blazor WebAssembly では、ビルド中に[中間言語 (IL)](/dotnet/standard/managed-code#intermediate-language--execution) のリンクが実行されて、アプリの出力アセンブリから不要な IL がトリミングされます。 デバッグ構成でビルドすると、リンカーは無効になります。 リンカーを有効にするには、アプリをリリース構成でビルドする必要があります。 [Blazor WebAssembly アプリを配置する場合は、リリースでビルドすることをお勧めします。 
 
 アプリをリンクするとサイズが最適化されますが、悪影響を及ぼす可能性があります。 リフレクションや関連する動的機能を使用するアプリは、トリミングされたときに中断する可能性があります。リンカーがこの動的な動作を認識せず、通常は実行時にリフレクションに必要な型を特定できないためです。 そのようなアプリをトリミングするには、コードと、アプリが依存しているパッケージまたはフレームワークのリフレクションで必要なすべての型を、リンカーに通知する必要があります。 
 
 トリミングされたアプリが配置後に正しく動作するには、開発中にアプリのリリース ビルドを頻繁にテストすることが重要です。
 
-Blazor アプリのリンクは、次の MSBuild 機能を使用して構成できます。
+[Blazor アプリのリンクは、次の MSBuild 機能を使用して構成できます。
 
 * [MSBuild プロパティ](#control-linking-with-an-msbuild-property)を使ってリンクをグローバルに構成する。
 * [構成ファイル](#control-linking-with-a-configuration-file)を使ってアセンブリごとにリンクを制御する。
@@ -61,7 +62,7 @@ XML の構成ファイルを用意してそのファイルをプロジェクト 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  This file specifies which parts of the BCL or Blazor packages must not be
+  This file specifies which parts of the BCL or [Blazor packages must not be
   stripped by the IL Linker even if they aren't referenced by user code.
 -->
 <linker>
@@ -106,7 +107,7 @@ XML の構成ファイルを用意してそのファイルをプロジェクト 
 
 ### <a name="configure-the-linker-for-internationalization"></a>国際化用にリンカーを構成する
 
-既定では、Blazor WebAssembly アプリに対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。
+既定では、[Blazor WebAssembly アプリに対する [Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。
 
 保持される I18N アセンブリを制御するには、プロジェクト ファイルで MSBuild のプロパティ `<BlazorWebAssemblyI18NAssemblies>` を設定します。
 

@@ -1,38 +1,39 @@
 ---
-title: TypeScript と Webpack で ASP.NET Core SignalR を使用する
+title: TypeScript と Webpack で ASP.NET Core [SignalR を使用する
 author: ssougnez
-description: このチュートリアルでは、クライアントが TypeScript で記述された ASP.NET Core SignalR Web アプリをバンドルおよびビルドするために Webpack を構成します。
+description: このチュートリアルでは、クライアントが TypeScript で記述された ASP.NET Core [SignalR Web アプリをバンドルおよびビルドするために Webpack を構成します。
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: tutorials/signalr-typescript-webpack
 ms.openlocfilehash: 49d185ce941d5f8e841224e7de3b72b8350a1c47
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85407903"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript と Webpack で ASP.NET Core SignalR を使用する
+# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript と Webpack で ASP.NET Core [SignalR を使用する
 
 作成者: [Sébastien Sougnez](https://twitter.com/ssougnez)、[Scott Addie](https://twitter.com/Scott_Addie)
 
-[Webpack](https://webpack.js.org/) を使用すると、開発者は Web アプリのクライアント側のリソースをバンドルおよびビルドすることができます。 このチュートリアルでは、クライアントが [TypeScript](https://www.typescriptlang.org/) で記述された ASP.NET Core SignalR Web アプリでの Webpack の使用法を示します。
+[Webpack](https://webpack.js.org/) を使用すると、開発者は Web アプリのクライアント側のリソースをバンドルおよびビルドすることができます。 このチュートリアルでは、クライアントが [TypeScript](https://www.typescriptlang.org/) で記述された ASP.NET Core [SignalR Web アプリでの Webpack の使用法を示します。
 
 このチュートリアルでは、次の作業を行う方法について説明します。
 
 > [!div class="checklist"]
-> * スターター ASP.NET Core SignalR アプリをスキャフォールディングする
-> * SignalR TypeScript クライアントを構成する
+> * スターター ASP.NET Core [SignalR アプリをスキャフォールディングする
+> * [SignalR TypeScript クライアントを構成する
 > * Webpack を使用してビルド パイプラインを構成する
-> * SignalR サーバーを構成する
+> * [SignalR サーバーを構成する
 > * クライアントとサーバー間の通信を有効にする
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
@@ -154,7 +155,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
     上記のファイルは、Webpack コンパイルを構成します。 注目するべき構成の詳細 (一部):
 
     * `output` プロパティにより、*dist* の既定値がオーバーライドされます。 代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。
-    * `resolve.extensions` 配列には、SignalR クライアント JavaScript をインポートするための *.js* が含まれています。
+    * `resolve.extensions` 配列には、[SignalR クライアント JavaScript をインポートするための *.js* が含まれています。
 
 1. プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい "*src*" ディレクトリを作成します。
 
@@ -203,7 +204,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. SignalR ハブを格納するために、プロジェクト ルート "*SignalRWebPack/* " に "*Hubs*" という名前の新しいディレクトリを作成します。
+1. [SignalR ハブを格納するために、プロジェクト ルート "*SignalRWebPack/* " に "*Hubs*" という名前の新しいディレクトリを作成します。
 
 1. 次のコードを使用して、*Hubs/ChatHub.cs* を作成します。
 
@@ -225,7 +226,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
     上記のコマンドにより、次がインストールされます。
 
-     * [SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr)。クライアントがサーバーにメッセージを送信できるようになります。
+     * [[SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr)。クライアントがサーバーにメッセージを送信できるようになります。
      * Node.js の TypeScript 型定義。Node.js 型のコンパイル時チェックが有効になります。
 
 1. 強調表示されたコードを *src/index.ts* ファイルに追加します。
@@ -234,7 +235,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
     上記のコードは、サーバーからのメッセージの受信をサポートします。 `HubConnectionBuilder` クラスは、サーバー接続を構成するための新しいビルダーを作成します。 `withUrl` 関数は、ハブ URL を構成します。
 
-    SignalR により、クライアントとサーバー間でのメッセージのやり取りが可能になります。 各メッセージには特定の名前があります。 たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。 特定のメッセージをリッスンするには、`on` 関数を使用します。 任意の数のメッセージ名をリッスンできます。 作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。 クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。 これはメッセージを表示する主要な `div` 要素に追加されます。
+    [SignalR により、クライアントとサーバー間でのメッセージのやり取りが可能になります。 各メッセージには特定の名前があります。 たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。 特定のメッセージをリッスンするには、`on` 関数を使用します。 任意の数のメッセージ名をリッスンできます。 作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。 クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。 これはメッセージを表示する主要な `div` 要素に追加されます。
 
 1. これでクライアントがメッセージを受信できるようになったので、メッセージを送信するように構成します。 強調表示されたコードを *src/index.ts* ファイルに追加します。
 
@@ -394,7 +395,7 @@ dotnet new web -o SignalRWebPack
     上記のファイルは、Webpack コンパイルを構成します。 注目するべき構成の詳細 (一部):
 
     * `output` プロパティにより、*dist* の既定値がオーバーライドされます。 代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。
-    * `resolve.extensions` 配列には、SignalR クライアント JavaScript をインポートするための *.js* が含まれています。
+    * `resolve.extensions` 配列には、[SignalR クライアント JavaScript をインポートするための *.js* が含まれています。
 
 1. プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい "*src*" ディレクトリを作成します。
 
@@ -435,7 +436,7 @@ dotnet new web -o SignalRWebPack
 
     上記のコードにより、サーバーが *index.html* ファイルを見つけて提供することができます。ユーザーがファイルの完全な URL または Web アプリのルート URL を入力するかどうかは関係ありません。
 
-1. `Startup.ConfigureServices` で、[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) を呼び出します。 これにより SignalR サービスがプロジェクトに追加されます。
+1. `Startup.ConfigureServices` で、[AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) を呼び出します。 これにより [SignalR サービスがプロジェクトに追加されます。
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_AddSignalR)]
 
@@ -443,7 +444,7 @@ dotnet new web -o SignalRWebPack
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_UseSignalR)]
 
-1. プロジェクト ルートに *Hubs* という新しいディレクトリを作成します。 その目的は、次の手順で作成される SignalR ハブを格納することです。
+1. プロジェクト ルートに *Hubs* という新しいディレクトリを作成します。 その目的は、次の手順で作成される [SignalR ハブを格納することです。
 
 1. 次のコードを使用して、*Hubs/ChatHub.cs* を作成します。
 
@@ -463,7 +464,7 @@ dotnet new web -o SignalRWebPack
     npm install @aspnet/signalr
     ```
 
-    上記のコマンドにより [SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr) がインストールされ、クライアントがサーバーにメッセージを送信できるようになります。
+    上記のコマンドにより [[SignalR TypeScript クライアント](https://www.npmjs.com/package/@microsoft/signalr) がインストールされ、クライアントがサーバーにメッセージを送信できるようになります。
 
 1. 強調表示されたコードを *src/index.ts* ファイルに追加します。
 
@@ -471,7 +472,7 @@ dotnet new web -o SignalRWebPack
 
     上記のコードは、サーバーからのメッセージの受信をサポートします。 `HubConnectionBuilder` クラスは、サーバー接続を構成するための新しいビルダーを作成します。 `withUrl` 関数は、ハブ URL を構成します。
 
-    SignalR により、クライアントとサーバー間でのメッセージのやり取りが可能になります。 各メッセージには特定の名前があります。 たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。 特定のメッセージをリッスンするには、`on` 関数を使用します。 任意の数のメッセージ名をリッスンできます。 作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。 クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。 新しいメッセージが、メッセージを表示する主要な `div` 要素に追加されます。
+    [SignalR により、クライアントとサーバー間でのメッセージのやり取りが可能になります。 各メッセージには特定の名前があります。 たとえば、`messageReceived` という名前のメッセージは、メッセージ ゾーンに新しいメッセージを表示するためのロジックを実行できます。 特定のメッセージをリッスンするには、`on` 関数を使用します。 任意の数のメッセージ名をリッスンできます。 作成者の名前や受信したメッセージの内容など、パラメーターをメッセージに渡すこともできます。 クライアントがメッセージを受信すると、`innerHTML` 属性に作成者の名前とメッセージ コンテンツを持つ新しい `div` 要素が作成されます。 新しいメッセージが、メッセージを表示する主要な `div` 要素に追加されます。
 
 1. これでクライアントがメッセージを受信できるようになったので、メッセージを送信するように構成します。 強調表示されたコードを *src/index.ts* ファイルに追加します。
 

@@ -5,16 +5,17 @@ description: ASP.NET Core がコンテンツをさまざまな言語と文化に
 ms.author: riande
 ms.date: 11/30/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/localization
 ms.openlocfilehash: 412cd7a39a0eed6800e15d235102ed367da5f746
 ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 07/01/2020
 ms.locfileid: "85793476"
@@ -74,7 +75,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップがあるとします。
+`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、[Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の [Razor マークアップがあるとします。
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -162,7 +163,7 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 | Resources/Controllers.HomeController.fr.resx | ドット  |
 | Resources/Controllers/HomeController.fr.resx  | パス |
 
-Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
+[Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 [Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
 * Resources/Views/Home/About.fr.resx
 
@@ -333,7 +334,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して [Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 
@@ -428,7 +429,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップがあるとします。
+`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、[Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の [Razor マークアップがあるとします。
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -516,7 +517,7 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 | Resources/Controllers.HomeController.fr.resx | ドット  |
 | Resources/Controllers/HomeController.fr.resx  | パス |
 
-Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
+[Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 [Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
 * Resources/Views/Home/About.fr.resx
 
@@ -689,7 +690,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して [Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 
@@ -783,7 +784,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
-`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の Razor マークアップがあるとします。
+`IViewLocalizer` の既定の実装は、ビューのファイル名に基づいてリソース ファイルを見つけます。 グローバルな共有リソース ファイルを使用するオプションはありません。 `ViewLocalizer` は、`IHtmlLocalizer` を使用してローカライザーを実装するので、[Razor は、ローカライズされた文字列を HTML エンコードしません。 リソース文字列をパラメーター化することができます。`IViewLocalizer` は、パラメーターを HTML エンコードしますが、リソース文字列は HTML エンコードしません。 次の [Razor マークアップがあるとします。
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -871,7 +872,7 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 | Resources/Controllers.HomeController.fr.resx | ドット  |
 | Resources/Controllers/HomeController.fr.resx  | パス |
 
-Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
+[Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 [Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
 * Resources/Views/Home/About.fr.resx
 
@@ -1067,7 +1068,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して [Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 

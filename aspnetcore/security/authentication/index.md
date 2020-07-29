@@ -6,13 +6,13 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/index
 ms.openlocfilehash: a230e1ae85a54ddf16900b2ee7ed4a18d45e4ea2
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -49,7 +49,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 複数のスキームが使用される場合、認可ポリシー (または認可属性) で、ユーザーの認証時に使用する[認証スキーム (複数可) を指定する](xref:security/authorization/limitingidentitybyscheme)ことができます。 上記の例では、Cookie 認証スキームを使用する場合に名前を指定しています (既定では `CookieAuthenticationDefaults.AuthenticationScheme` ですが、`AddCookie` を呼び出すときに別の名前を指定することもできます)。
 
-場合によっては、`AddAuthentication` の呼び出しが、他の拡張メソッドによって自動的に行われます。 たとえば、ASP.NET Core の [ASP.NET Core :::no-loc(Identity):::](xref:security/authentication/identity) を使用する場合、`AddAuthentication` が内部的に呼び出されます。
+場合によっては、`AddAuthentication` の呼び出しが、他の拡張メソッドによって自動的に行われます。 たとえば、ASP.NET Core の [ASP.NET Core Identity](xref:security/authentication/identity) を使用する場合、`AddAuthentication` が内部的に呼び出されます。
 
 認証ミドルウェアは、アプリの `IApplicationBuilder` の <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 拡張メソッドを呼び出すことによって `Startup.Configure` に追加されます。 `UseAuthentication` を呼び出すと、以前に登録された認証スキームを使用するミドルウェアが登録されます。 認証されているユーザーに依存するすべてのミドルウェアの前に `UseAuthentication` を呼び出します。 エンドポイント ルーティングを使用する場合は、次のタイミングで `UseAuthentication` の呼び出しを行う必要があります。
 

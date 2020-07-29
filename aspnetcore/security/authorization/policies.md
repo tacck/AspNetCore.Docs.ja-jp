@@ -6,13 +6,13 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/policies
 ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -109,7 +109,7 @@ public void ConfigureServices(IServiceCollection services)
 
 
     services.AddControllersWithViews();
-    services.Add:::no-loc(Razor):::Pages();
+    services.AddRazorPages();
 }
 ```
 
@@ -117,21 +117,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a>MVC コントローラーにポリシーを適用する
 
-ページを使用している場合は :::no-loc(Razor)::: 、このドキュメントの「 [ :::no-loc(Razor)::: ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
+ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
 
 ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する :::no-loc(Razor):::
+## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは :::no-loc(Razor)::: 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-ポリシーをページハンドラーレベルで適用することはでき***ません***。ポリシーは :::no-loc(Razor)::: ページに適用する必要があります。
+ポリシーをページハンドラーレベルで適用することはでき***ません***。ポリシーは Razor ページに適用する必要があります。
 
-ポリシーは :::no-loc(Razor)::: 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用できます。
+ポリシーは Razor 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用できます。
 
 ## <a name="requirements"></a>要件
 
@@ -225,7 +225,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="access-mvc-request-context-in-handlers"></a>ハンドラーの MVC 要求コンテキストへのアクセス
 
-`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは :::no-loc(SignalR)::: 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
+`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
 
 エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。 エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。 次に例を示します。
 
@@ -239,7 +239,7 @@ if (context.Resource is Endpoint endpoint)
 
 エンドポイントは、現在のへのアクセスを提供しません `HttpContext` 。 エンドポイントルーティングを使用する場合は、を使用して、 `IHttpContextAcessor` `HttpContext` 承認ハンドラー内でにアクセスします。 詳細については、「[カスタムコンポーネントからの HttpContext の使用](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components)」を参照してください。
 
-従来のルーティングでは、または MVC の承認フィルターの一部として承認が行われた場合、の値 `Resource` は <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> インスタンスになります。 このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し :::no-loc(Razor)::: ます。
+従来のルーティングでは、または MVC の承認フィルターの一部として承認が行われた場合、の値 `Resource` は <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> インスタンスになります。 このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し Razor ます。
 
 プロパティの使用 `Resource` はフレームワーク固有です。 プロパティの情報を使用すると、 `Resource` 承認ポリシーが特定のフレームワークに限定されます。 `Resource`キーワードを使用してプロパティをキャストし、キャストが成功したことを確認して、 `is` `InvalidCastException` 他のフレームワークで実行したときにコードがクラッシュしないようにする必要があります。
 
@@ -353,19 +353,19 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="apply-policies-to-mvc-controllers"></a>MVC コントローラーにポリシーを適用する
 
-ページを使用している場合は :::no-loc(Razor)::: 、このドキュメントの「 [ :::no-loc(Razor)::: ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
+ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
 
 ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する :::no-loc(Razor):::
+## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは :::no-loc(Razor)::: 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-ポリシーは :::no-loc(Razor)::: 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。
+ポリシーは Razor 、[承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。
 
 ## <a name="requirements"></a>要件
 
@@ -459,9 +459,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="access-mvc-request-context-in-handlers"></a>ハンドラーの MVC 要求コンテキストへのアクセス
 
-`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは :::no-loc(SignalR)::: 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
+`HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
 
-たとえば、MVC は、プロパティに[Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext)のインスタンスを渡し `Resource` ます。 このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し :::no-loc(Razor)::: ます。
+たとえば、MVC は、プロパティに[Authorizationfiltercontext](/dotnet/api/?term=AuthorizationFilterContext)のインスタンスを渡し `Resource` ます。 このプロパティは、、 `HttpContext` `RouteData` 、および MVC とページによって提供されるすべてのものへのアクセスを提供し Razor ます。
 
 プロパティの使用 `Resource` はフレームワーク固有です。 プロパティの情報を使用すると、 `Resource` 承認ポリシーが特定のフレームワークに限定されます。 `Resource`キーワードを使用してプロパティをキャストし、キャストが成功したことを確認して、 `is` `InvalidCastException` 他のフレームワークで実行したときにコードがクラッシュしないようにする必要があります。
 

@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/startup
 ms.openlocfilehash: 0d1bf0dd23b7f3b99d6e9383ffc72291c1b138ec
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85400714"
@@ -40,7 +41,7 @@ ASP.NET Core アプリケーションでは `Startup` クラスが使用され�
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-上記のサンプルは [Razor Pages](xref:razor-pages/index) 用です。MVC バージョンは似ています。
+上記のサンプルは [[Razor Pages](xref:razor-pages/index) 用です。MVC バージョンは似ています。
 
 
 アプリの[ホスト](xref:fundamentals/index#host)がビルドされるときに、`Startup` クラスが指定されます。 `Startup` クラスは通常、ホスト ビルダーで [WebHostBuilderExtensions.UseStartup\<TStartup>](xref:Microsoft.AspNetCore.Hosting.WebHostBuilderExtensions.UseStartup*) メソッドを呼び出すことで指定されます。
@@ -92,12 +93,12 @@ ASP.NET Core アプリケーションでは `Startup` クラスが使用され�
 * [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [HTTPS リダイレクト](xref:security/enforcing-ssl)
 * [静的ファイル](xref:fundamentals/static-files)
-* ASP.NET Core [MVC](xref:mvc/overview) と [Razor ページ](xref:razor-pages/index)
+* ASP.NET Core [MVC](xref:mvc/overview) と [[Razor ページ](xref:razor-pages/index)
 
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
-上記のサンプルは [Razor Pages](xref:razor-pages/index) 用です。MVC バージョンは似ています。
+上記のサンプルは [[Razor Pages](xref:razor-pages/index) 用です。MVC バージョンは似ています。
 
 各 `Use` 拡張メソッドによって、要求パイプラインに 1 つまたは複数のミドルウェア コンポーネントが追加されます。 たとえば、<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*> では、[静的ファイル](xref:fundamentals/static-files)を提供するように、[ミドルウェア](xref:fundamentals/middleware/index)を構成します。
 
@@ -226,7 +227,7 @@ ASP.NET Core アプリケーションでは `Startup` クラスが使用され�
 * [HTTP Strict Transport Security (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)
 * [HTTPS リダイレクト](xref:security/enforcing-ssl)
 * [静的ファイル](xref:fundamentals/static-files)
-* ASP.NET Core [MVC](xref:mvc/overview) と [Razor ページ](xref:razor-pages/index)
+* ASP.NET Core [MVC](xref:mvc/overview) と [[Razor ページ](xref:razor-pages/index)
 * [一般データ保護規制 (GDPR)](xref:security/gdpr)
 
 [!code-csharp[](startup/sample_snapshot/Startup4.cs)]

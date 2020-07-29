@@ -1,35 +1,36 @@
 ---
-title: ASP.NET Core Blazor Server のセキュリティに関するその他のシナリオ
+title: ASP.NET Core [Blazor Server のセキュリティに関するその他のシナリオ
 author: guardrex
-description: セキュリティに関するその他のシナリオ用に Blazor Server を構成する方法について説明します。
+description: セキュリティに関するその他のシナリオ用に [Blazor Server を構成する方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/security/server/additional-scenarios
 ms.openlocfilehash: 46de9a22dec540b8dfda7583b7a3c5c2dcbbc549
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85402326"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server のセキュリティに関するその他のシナリオ
+# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core [Blazor Server のセキュリティに関するその他のシナリオ
 
 作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>Blazor Server アプリにトークンを渡す
+## <a name="pass-tokens-to-a-blazor-server-app"></a>[Blazor Server アプリにトークンを渡す
 
-Blazor Server アプリの Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 `Startup.ConfigureServices` の完全な例を含むサンプル コードについては、「[サーバー側の Blazor アプリケーションにトークンを渡す](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
+[Blazor Server アプリの [Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。 `Startup.ConfigureServices` の完全な例を含むサンプル コードについては、「[サーバー側の [Blazor アプリケーションにトークンを渡す](https://github.com/javiercn/blazor-server-aad-sample)」を参照してください。
 
-通常の Razor Pages や MVC アプリの場合と同じように、Blazor Server アプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
+通常の [Razor Pages や MVC アプリの場合と同じように、[Blazor Server アプリを認証します。 トークンをプロビジョニングし、認証 cookie に保存します。 次に例を示します。
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -57,7 +58,7 @@ public class InitialApplicationState
 }
 ```
 
-[依存関係の挿入 (DI)](xref:blazor/fundamentals/dependency-injection) からトークンを解決するために Blazor アプリ内で使用できる**スコープを持つ**トークン プロバイダー サービスを定義します。
+[依存関係の挿入 (DI)](xref:blazor/fundamentals/dependency-injection) からトークンを解決するために [Blazor アプリ内で使用できる**スコープを持つ**トークン プロバイダー サービスを定義します。
 
 ```csharp
 public class TokenProvider
@@ -151,7 +152,7 @@ public class WeatherForecastService
 
 ## <a name="set-the-authentication-scheme"></a>認証スキームを設定する
 
-複数の認証ミドルウェアを使用していることにより、複数の認証スキームがあるアプリの場合、Blazor で使用されるスキームを、`Startup.Configure` のエンドポイント構成で明示的に設定できます。 次の例では、Azure Active Directory スキームを設定します。
+複数の認証ミドルウェアを使用していることにより、複数の認証スキームがあるアプリの場合、[Blazor で使用されるスキームを、`Startup.Configure` のエンドポイント構成で明示的に設定できます。 次の例では、Azure Active Directory スキームを設定します。
 
 ```csharp
 endpoints.MapBlazorHub().RequireAuthorization(
@@ -163,7 +164,7 @@ endpoints.MapBlazorHub().RequireAuthorization(
 
 ## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Open ID Connect (OIDC) v2.0 エンドポイントを使用する
 
-認証ライブラリと Blazor テンプレートでは、Open ID Connect (OIDC) v1.0 エンドポイントが使用されます。 v2.0 エンドポイントを使用するには、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> で <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> オプションを構成します。
+認証ライブラリと [Blazor テンプレートでは、Open ID Connect (OIDC) v1.0 エンドポイントが使用されます。 v2.0 エンドポイントを使用するには、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> で <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> オプションを構成します。
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 

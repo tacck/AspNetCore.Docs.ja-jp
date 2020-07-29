@@ -7,16 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/error-handling
 ms.openlocfilehash: 857b4935816d0010fa425ce98f938c87eb35a581
 ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 07/01/2020
 ms.locfileid: "85793448"
@@ -60,7 +61,7 @@ ms.locfileid: "85793448"
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtml*) と <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラス (`ErrorModel`) が *Pages* フォルダー内に用意されています。 MVC アプリの場合、プロジェクト テンプレートにはエラー アクション メソッドとエラー ビューが含まれています。 アクション メソッドを次に示します。
+[Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtml*) と <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラス (`ErrorModel`) が *Pages* フォルダー内に用意されています。 MVC アプリの場合、プロジェクト テンプレートにはエラー アクション メソッドとエラー ビューが含まれています。 アクション メソッドを次に示します。
 
 ```csharp
 [AllowAnonymous]
@@ -140,7 +141,7 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithRedirect)]
 
-次の例で示すように、URL テンプレートには状態コード用の `{0}` プレースホルダーを含めることができます。 URL テンプレートがチルダ (~) で始まっている場合、チルダはアプリの `PathBase` に置き換えられます。 アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは Razor ページを作成します。 Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
+次の例で示すように、URL テンプレートには状態コード用の `{0}` プレースホルダーを含めることができます。 URL テンプレートがチルダ (~) で始まっている場合、チルダはアプリの `PathBase` に置き換えられます。 アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは [Razor ページを作成します。 [Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
 
 この方法は、次のようなアプリで一般的に使用されます。
 
@@ -156,14 +157,14 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithReExecute)]
 
-アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは Razor ページを作成します。 Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
+アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは [Razor ページを作成します。 [Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
 
 この方法は、次のようなアプリで一般的に使用されます。
 
 * 別のエンドポイントにリダイレクトすることなく要求を処理する。 Web アプリの場合は、クライアントのブラウザーのアドレス バーに、初めに要求されていたエンドポイントが反映されます。
 * 元の状態コードを保持し、応答で返す。
 
-URL とクエリ文字列のテンプレートには、状態コード用のプレースホルダー (`{0}`) を含めることができます。 URL テンプレートの先頭には、スラッシュ (`/`) を付ける必要があります。 パスでプレースホルダーを使う場合は、エンドポイント (ページまたはコントローラー) でパスのセグメントを処理できることを確認します。 たとえば、エラー用の Razor ページでは、`@page` ディレクティブの付いた省略可能なパスのセグメント値を受け入れる必要があります。
+URL とクエリ文字列のテンプレートには、状態コード用のプレースホルダー (`{0}`) を含めることができます。 URL テンプレートの先頭には、スラッシュ (`/`) を付ける必要があります。 パスでプレースホルダーを使う場合は、エンドポイント (ページまたはコントローラー) でパスのセグメントを処理できることを確認します。 たとえば、エラー用の [Razor ページでは、`@page` ディレクティブの付いた省略可能なパスのセグメント値を受け入れる必要があります。
 
 ```cshtml
 @page "{code?}"
@@ -177,7 +178,7 @@ URL とクエリ文字列のテンプレートには、状態コード用のプ�
 
 MVC コントローラーまたはアクション メソッドの状態コード ページを無効にするには、[`[SkipStatusCodePages]`](xref:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute) 属性を使用します。
 
-Razor Pages ハンドラー メソッドまたは MVC コントローラーの特定の要求に対して状態コード ページを無効にするには、<xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature> を使用します。
+[Razor Pages ハンドラー メソッドまたは MVC コントローラーの特定の要求に対して状態コード ページを無効にするには、<xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature> を使用します。
 
 ```csharp
 var statusCodePagesFeature = HttpContext.Features.Get<IStatusCodePagesFeature>();
@@ -232,7 +233,7 @@ if (env.IsDevelopment())
 
 ## <a name="exception-filters"></a>例外フィルター
 
-MVC アプリでは、例外フィルターをグローバルに、またはコントローラーやアクションの単位で構成できます。 Razor Pages アプリでは、グローバルに、またはページ モデルの単位で構成できます。 このようなフィルターはコントローラー アクションや別のフィルターの実行中に発生する未処理の例外を処理します。 詳細については、「<xref:mvc/controllers/filters#exception-filters>」を参照してください。
+MVC アプリでは、例外フィルターをグローバルに、またはコントローラーやアクションの単位で構成できます。 [Razor Pages アプリでは、グローバルに、またはページ モデルの単位で構成できます。 このようなフィルターはコントローラー アクションや別のフィルターの実行中に発生する未処理の例外を処理します。 詳細については、「<xref:mvc/controllers/filters#exception-filters>」を参照してください。
 
 > [!TIP]
 > 例外フィルターは、MVC アクション内で発生した例外をトラップする場合は便利ですが、例外処理ミドルウェアほど柔軟ではありません。 ミドルウェアの使用をお勧めします。 選択された MVC アクションに応じて異なる方法でエラー処理を実行する必要がある場合にのみ、フィルターを使用します。

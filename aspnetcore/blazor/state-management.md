@@ -1,31 +1,32 @@
 ---
-title: ASP.NET Core Blazor 状態管理
+title: ASP.NET Core [Blazor 状態管理
 author: guardrex
-description: Blazor Server アプリで状態を維持する方法について説明します。
+description: '[Blazor Server アプリで状態を維持する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: blazor/state-management
 ms.openlocfilehash: a6c646425145855538f408ec6cafdb151cd24b86
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401949"
 ---
-# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 状態管理
+# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core [Blazor 状態管理
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Blazor Server はステートフル アプリ フレームワークです。 ほとんどの場合、アプリではサーバーとの現在進行中の接続が維持されます。 ユーザーの状態は、"*回線*" の中のサーバーのメモリに保持されます。 
+[Blazor Server はステートフル アプリ フレームワークです。 ほとんどの場合、アプリではサーバーとの現在進行中の接続が維持されます。 ユーザーの状態は、"*回線*" の中のサーバーのメモリに保持されます。 
 
 ユーザーの回線に保存される状態には次のとおりです。
 
@@ -34,11 +35,11 @@ Blazor Server はステートフル アプリ フレームワークです。 ほ
 * 回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータ。
 
 > [!NOTE]
-> この記事では、Blazor Server アプリの状態維持について取り扱います。 Blazor WebAssembly アプリでは、[ブラウザーのクライアント側の状態維持](#client-side-in-the-browser)が利用されますが、この記事に扱う範囲を超えたカスタム ソリューションやサードパーティ製のパッケージが必要です。
+> この記事では、[Blazor Server アプリの状態維持について取り扱います。 [Blazor WebAssembly アプリでは、[ブラウザーのクライアント側の状態維持](#client-side-in-the-browser)が利用されますが、この記事に扱う範囲を超えたカスタム ソリューションやサードパーティ製のパッケージが必要です。
 
-## <a name="blazor-circuits"></a>Blazor 回線
+## <a name="blazor-circuits"></a>[Blazor 回線
 
-ユーザーが一時的にネットワークに接続できなくなる場合、Blazor では、ユーザーがアプリを引き続き使用できるよう、そのユーザーを元の回線に再接続が試行されます。 ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。
+ユーザーが一時的にネットワークに接続できなくなる場合、[Blazor では、ユーザーがアプリを引き続き使用できるよう、そのユーザーを元の回線に再接続が試行されます。 ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。
 
 * サーバーでは、切断された回線を永久に保持することはできません。 サーバーでは、タイムアウト後、あるいはサーバーがメモリ不足になったとき、切断された回線を解放しなければなりません。
 * マルチサーバーによる負荷が分散された展開環境では、要求を処理するサーバーが突然利用不可能になることがあります。 個々のサーバーは、それがなくても全体的な要求量を処理できるようになると、作動しなくなったり、自動的に削除されたりすることがあります。 ユーザーが再接続を試みたとき、元のサーバーが利用できないことがあります。
@@ -69,7 +70,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ほ
 
 ## <a name="where-to-persist-state"></a>状態を維持する場所
 
-Blazor Server アプリには、一般に、状態を保存する場所が 3 つあります。 どの手法にもそれに最も適したケースがあり、注意すべきことも異なります。
+[Blazor Server アプリには、一般に、状態を保存する場所が 3 つあります。 どの手法にもそれに最も適したケースがあり、注意すべきことも異なります。
 
 * [データベースのサーバー側](#server-side-in-a-database)
 * [URL](#url)
@@ -107,7 +108,7 @@ Azure データ ストレージ オプションに関する詳細については
 ユーザーが一時的なデータを頻繁に作成する場合、一般的なバッキング ストアはブラウザーの `localStorage` コレクションと `sessionStorage` コレクションになります。 回線が放棄された場合、保存されている状態を管理したり、消去したりすることはアプリに求められません。これはサーバー側ストレージより優れている点です。
 
 > [!NOTE]
-> このセクションの "クライアント側" は、[Blazor WebAssembly ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)ではなく、ブラウザーのクライアント側シナリオを指します。 `localStorage` と `sessionStorage` は Blazor WebAssembly アプリで使用できますが、カスタム コードを記述するか、サードパーティ製のパッケージを使用する必要があります。
+> このセクションの "クライアント側" は、[[Blazor WebAssembly ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)ではなく、ブラウザーのクライアント側シナリオを指します。 `localStorage` と `sessionStorage` は [Blazor WebAssembly アプリで使用できますが、カスタム コードを記述するか、サードパーティ製のパッケージを使用する必要があります。
 
 `localStorage` と `sessionStorage` は次の点で異なります。
 
@@ -125,7 +126,7 @@ Azure データ ストレージ オプションに関する詳細については
 
 * サーバー側データベースの使用に似ていますが、データの読み込みと保存は非同期です。
 * サーバー側データベースとは異なり、プリレンダリング中はストレージを利用できません。プリレンダリング中は、要求されたページがブラウザーに存在しないためです。
-* Blazor Server アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。 数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。
+* [Blazor Server アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。 数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。
 * ユーザーはデータを見たり、改ざんしたりするかもしれません。 ASP.NET Core [データ保護](xref:security/data-protection/introduction)でこのリスクを軽減できます。
 
 ## <a name="third-party-browser-storage-solutions"></a>サードパーティ製ブラウザーのストレージ ソリューション
@@ -145,7 +146,7 @@ NuGet パッケージには `localStorage` や `sessionStorage` の[データを
 
 `Microsoft.AspNetCore.ProtectedBrowserStorage` パッケージをインストールするには:
 
-1. Blazor Server アプリ プロジェクトで、[`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) へのパッケージ参照を追加します。
+1. [Blazor Server アプリ プロジェクトで、[`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) へのパッケージ参照を追加します。
 1. 最上位 HTML (たとえば、デフォルト プロジェクト テンプレートの `Pages/_Host.cshtml` ファイルで) で、次の `<script>` タグを追加します。
 
    ```html

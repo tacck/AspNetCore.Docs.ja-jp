@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85401910"
@@ -70,19 +71,19 @@ ms.locfileid: "85401910"
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>バンドルと縮小の戦略を選択する
 
-MVC および Razor Pages プロジェクト テンプレートには、JSON 構成ファイルで構成されるバンドルおよび縮小のためのソリューションが用意されています。 [Grunt](xref:client-side/using-grunt) タスク ランナーなどのサードパーティ ツールの場合、同じタスクを実行するにはもう少し複雑です。 サードパーティ製のツールは、リンティングや画像の最適化など、バンドルと縮小を超える処理が開発ワークフローに必要な場合に最適です。 設計時にバンドルと縮小を使用することで、アプリのデプロイ前に縮小されたファイルが作成されます。 デプロイ前のバンドルと縮小によって、サーバーの負荷が軽減されます。 ただし、設計時にバンドルと縮小を使用するとビルドの複雑さが増すので、静的ファイルでのみ機能することを認識することが重要です。
+MVC および [Razor Pages プロジェクト テンプレートには、JSON 構成ファイルで構成されるバンドルおよび縮小のためのソリューションが用意されています。 [Grunt](xref:client-side/using-grunt) タスク ランナーなどのサードパーティ ツールの場合、同じタスクを実行するにはもう少し複雑です。 サードパーティ製のツールは、リンティングや画像の最適化など、バンドルと縮小を超える処理が開発ワークフローに必要な場合に最適です。 設計時にバンドルと縮小を使用することで、アプリのデプロイ前に縮小されたファイルが作成されます。 デプロイ前のバンドルと縮小によって、サーバーの負荷が軽減されます。 ただし、設計時にバンドルと縮小を使用するとビルドの複雑さが増すので、静的ファイルでのみ機能することを認識することが重要です。
 
 ## <a name="configure-bundling-and-minification"></a>バンドルと縮小を構成する
 
 ::: moniker range="<= aspnetcore-2.0"
 
-ASP.NET Core 2.0 以前では、MVC および Razor Pages プロジェクト テンプレートには、各バンドルのオプションが定義された *bundleconfig.json* 構成ファイルが用意されています。
+ASP.NET Core 2.0 以前では、MVC および [Razor Pages プロジェクト テンプレートには、各バンドルのオプションが定義された *bundleconfig.json* 構成ファイルが用意されています。
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または Razor Pages プロジェクトのルートに追加します。 開始点としてそのファイルに次の JSON を含めます。
+ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または [Razor Pages プロジェクトのルートに追加します。 開始点としてそのファイルに次の JSON を含めます。
 
 ::: moniker-end
 

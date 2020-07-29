@@ -6,16 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85399648"
@@ -39,7 +40,7 @@ ASP.NET Core のプレビュー リリースが利用可能になると、破壊
 
 .NET Core 3.0 のリリースから、多数の ASP.NET Core アセンブリがパッケージとして NuGet に公開されなくなりました。 代わりに、アセンブリは `Microsoft.AspNetCore.App` 共有フレームワークに含まれ、.NET Core SDK およびランタイム インストーラーと共にインストールされます。 公開されなくなったパッケージの一覧については、「[古いパッケージ参照の削除](xref:migration/22-to-30#remove-obsolete-package-references)」を参照してください。
 
-.NET Core 3.0 から、`Microsoft.NET.Sdk.Web` MSBuild SDK を使用するプロジェクトは、共有フレームワークを暗黙的に参照します。 `Microsoft.NET.Sdk` SDK または `Microsoft.NET.Sdk.Razor` SDK を使用するプロジェクトで共有フレームワーク内の ASP.NET Core API を使用するには、ASP.NET Core を参照する必要があります。
+.NET Core 3.0 から、`Microsoft.NET.Sdk.Web` MSBuild SDK を使用するプロジェクトは、共有フレームワークを暗黙的に参照します。 `Microsoft.NET.Sdk` SDK または `Microsoft.NET.Sdk.[Razor` SDK を使用するプロジェクトで共有フレームワーク内の ASP.NET Core API を使用するには、ASP.NET Core を参照する必要があります。
 
 ASP.NET Core を参照するには、次の `<FrameworkReference>` 要素をプロジェクト ファイルに追加します。
 
@@ -47,17 +48,17 @@ ASP.NET Core を参照するには、次の `<FrameworkReference>` 要素をプ�
 
 ASP.NET Core を参照するためのこの方法は、.NET Core 3.x を対象とするプロジェクトでのみサポートされます。
 
-## <a name="include-blazor-extensibility"></a>Blazor 拡張機能を含める
+## <a name="include-blazor-extensibility"></a>[Blazor 拡張機能を含める
 
-Blazor は、WebAssembly (WASM) [ホスティング モデル](xref:blazor/hosting-models)と Server ホスティング モデルをサポートします。 特別な理由がない限り、[Razor コンポーネント](xref:blazor/components/index)は両方のホスティング モデルをサポートする必要があります。 Razor コンポーネント ライブラリでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
+[Blazor は、WebAssembly (WASM) [ホスティング モデル](xref:blazor/hosting-models)と Server ホスティング モデルをサポートします。 特別な理由がない限り、[[Razor コンポーネント](xref:blazor/components/index)は両方のホスティング モデルをサポートする必要があります。 [Razor コンポーネント ライブラリでは、[Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
 
 ### <a name="support-both-hosting-models"></a>両方のホスティング モデルをサポートする
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトと [Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) プロジェクトの両方で Razor コンポーネントの使用をサポートするには、ご使用のエディターに応じて次の手順を使用します。
+[[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトと [[Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) プロジェクトの両方で [Razor コンポーネントの使用をサポートするには、ご使用のエディターに応じて次の手順を使用します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Razor クラス ライブラリ** プロジェクト テンプレートを使用します。 このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスの選択を解除する必要があります。
+**[Razor クラス ライブラリ** プロジェクト テンプレートを使用します。 このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスの選択を解除する必要があります。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -69,7 +70,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-**Razor クラス ライブラリ** プロジェクト テンプレートを使用します。
+**[Razor クラス ライブラリ** プロジェクト テンプレートを使用します。
 
 ---
 
@@ -87,7 +88,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a>特定のホスティング モデルをサポートする
 
-1 つの Blazor ホスティング モデルだけをサポートするのは、あまり一般的ではありません。 たとえば、[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトでのみ Razor コンポーネントの使用をサポートするには、次の操作を行います。
+1 つの [Blazor ホスティング モデルだけをサポートするのは、あまり一般的ではありません。 たとえば、[[Blazor Server](xref:blazor/hosting-models#blazor-server) プロジェクトでのみ [Razor コンポーネントの使用をサポートするには、次の操作を行います。
 
 * .NET Core 3.x を対象とします。
 * 共有フレームワークの `<FrameworkReference>` 要素を追加します。
@@ -96,32 +97,32 @@ dotnet new razorclasslib
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-Razor コンポーネントを含むライブラリの詳細については、「[ASP.NET Core Razor コンポーネント クラス ライブラリ](xref:blazor/components/class-libraries)」を参照してください。
+[Razor コンポーネントを含むライブラリの詳細については、「[ASP.NET Core [Razor コンポーネント クラス ライブラリ](xref:blazor/components/class-libraries)」を参照してください。
 
 ## <a name="include-mvc-extensibility"></a>MVC 拡張機能を含める
 
 このセクションでは、次のものを含むライブラリの推奨事項について概要を説明します。
 
-* [Razor ビューまたは Razor Pages](#razor-views-or-razor-pages)
+* [[Razor ビューまたは [Razor Pages](#razor-views-or-razor-pages)
 * [タグ ヘルパー](#tag-helpers)
 * [ビューのコンポーネント](#view-components)
 
 このセクションでは、MVC の複数のバージョンをサポートするマルチターゲット機能については説明しません。 複数の ASP.NET Core バージョンのサポートに関するガイダンスについては、「[複数のバージョンの ASP.NET Core をサポートする](#support-multiple-aspnet-core-versions)」を参照してください。
 
-### <a name="razor-views-or-razor-pages"></a>Razor ビューまたは Razor Pages
+### <a name="razor-views-or-razor-pages"></a>[Razor ビューまたは [Razor Pages
 
-[Razor ビュー](xref:mvc/views/overview)または [Razor Pages](xref:razor-pages/index) を含むプロジェクトでは、[Microsoft.NET.Sdk.Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
+[[Razor ビュー](xref:mvc/views/overview)または [[Razor Pages](xref:razor-pages/index) を含むプロジェクトでは、[Microsoft.NET.Sdk.[Razor SDK](xref:razor-pages/sdk) を使用する必要があります。
 
 プロジェクトが .NET Core 3.x を対象とする場合、次のものが必要です。
 
 * `true` に設定された `AddRazorSupportForMvc` MSBuild プロパティ。
 * 共有フレームワークの `<FrameworkReference>` 要素。
 
-**Razor クラス ライブラリ** プロジェクト テンプレートは、.NET Core 3.x を対象とするプロジェクトについて、前述の要件を満たしています。 ご使用のエディターに応じて、次の手順を使用します。
+**[Razor クラス ライブラリ** プロジェクト テンプレートは、.NET Core 3.x を対象とするプロジェクトについて、前述の要件を満たしています。 ご使用のエディターに応じて、次の手順を使用します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Razor クラス ライブラリ** プロジェクト テンプレートを使用します。 このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスをオンにする必要があります。
+**[Razor クラス ライブラリ** プロジェクト テンプレートを使用します。 このテンプレートの **[Support pages and views]\(ページとビューのサポート\)** チェックボックスをオンにする必要があります。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -151,7 +152,7 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) へのパッケージ参照を追加します。 `Microsoft.AspNetCore.Mvc.Razor` パッケージは共有フレームワークに移動されたため、公開されなくなりました。 次に例を示します。
+.NET Standard を対象とする場合 (ASP.NET Core 3.x より前のバージョンをサポートするため)、[Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor) へのパッケージ参照を追加します。 `Microsoft.AspNetCore.Mvc.[Razor` パッケージは共有フレームワークに移動されたため、公開されなくなりました。 次に例を示します。
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
@@ -180,8 +181,8 @@ ASP.NET Core の複数のバリアントをサポートするライブラリを�
 上記のプロジェクト ファイルでは、次のことが実行されます。
 
 * すべてのコンシューマー向けに `Markdig` パッケージが追加されます。
-* [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) への参照 が、.NET Framework 4.6.1 以降または .NET Core 2.x を対象とするコンシューマー向けに追加されます。 パッケージのバージョン 2.1.0 は、下位互換性のために ASP.NET Core 2.2 で動作します。
-* 共有フレームワークは、.NET Core 3.x を対象とするコンシューマー向けに参照されます。 `Microsoft.AspNetCore.Mvc.Razor` パッケージは、共有フレームワークに含まれます。
+* [Microsoft.AspNetCore.Mvc.[Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.[Razor) への参照 が、.NET Framework 4.6.1 以降または .NET Core 2.x を対象とするコンシューマー向けに追加されます。 パッケージのバージョン 2.1.0 は、下位互換性のために ASP.NET Core 2.2 で動作します。
+* 共有フレームワークは、.NET Core 3.x を対象とするコンシューマー向けに参照されます。 `Microsoft.AspNetCore.Mvc.[Razor` パッケージは、共有フレームワークに含まれます。
 
 また、.NET Core 2.1 と .NET Framework 4.6.1 の両方を対象とする場合、代わりに .NET Standard 2.0 を対象とすることもできます。
 

@@ -6,16 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- '[Blazor'
+- '[Blazor Server'
+- '[Blazor WebAssembly'
+- '[Identity'
+- "[Let's Encrypt"
+- '[Razor'
+- '[SignalR'
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
 ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "85405602"
@@ -63,8 +64,8 @@ dotnet aspnet-codegenerator [-h|--help]
 | ----------------- | ------------ | 
 | area      | [区分のスキャフォールディング](/aspnet/core/mvc/controllers/areas) |
   コントローラー| [コントローラーのスキャフォールディング](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  ID  | [Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Razor Pages のスキャフォールディング](/aspnet/core/tutorials/razor-pages/model) |
+  ID  | [[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity) |
+  razorpage | [[Razor Pages のスキャフォールディング](/aspnet/core/tutorials/razor-pages/model) |
   ビュー      | [ビューのスキャフォールディング](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>オプション
@@ -103,7 +104,7 @@ NuGet パッケージのディレクトリを指定します。
 
 * 区分
 * コントローラー
-* Identity  
+* [Identity  
 * Razorpage
 * View
 
@@ -111,7 +112,7 @@ NuGet パッケージのディレクトリを指定します。
 
 ### <a name="area-options"></a>Area のオプション
 
-このツールは、コントローラーとビューを含む ASP.NET Core Web プロジェクト用のものです。 Razor Pages アプリ用ではありません。
+このツールは、コントローラーとビューを含む ASP.NET Core Web プロジェクト用のものです。 [Razor Pages アプリ用ではありません。
 
 使用方法: `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
@@ -154,7 +155,7 @@ dotnet aspnet-codegenerator controller -h
 
 <a name="rp"></a>
 
-新しいページの名前と使用するテンプレートを指定すれば、Razor Pages を個別にスキャフォールディングできます。 サポートされているテンプレートは次のとおりです。
+新しいページの名前と使用するテンプレートを指定すれば、[Razor Pages を個別にスキャフォールディングできます。 サポートされているテンプレートは次のとおりです。
 
 * `Empty`
 * `Create`
@@ -197,6 +198,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 `dotnet aspnet-codegenerator razorpage` の例については、[映画モデルのスキャフォールディング](/aspnet/core/tutorials/razor-pages/model)に関する記事をご覧ください。
 
-### Identity
+### [Identity
 
-[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)に関する記事を参照してください。
+[[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)に関する記事を参照してください。
