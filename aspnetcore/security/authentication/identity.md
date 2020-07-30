@@ -14,10 +14,10 @@ no-loc:
 - SignalR
 uid: security/authentication/identity
 ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/24/2020
+ms.lasthandoff: 07/28/2020
 ms.locfileid: "87160305"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>IdentityASP.NET Core の概要
