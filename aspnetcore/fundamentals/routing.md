@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176206"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303613"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -831,7 +831,7 @@ ASP.NET Core 3.0 の時点では、以前の ASP.NET Core バージョンで使�
 次のリンクでは、エンドポイント メタデータの構成に関する情報を提供します。
 
 * [エンドポイント ルーティングで CORS を有効にする](xref:security/cors#enable-cors-with-endpoint-routing)
-* カスタム `[MinimumAgeAuthorize]` 属性を使用する [IAuthorizationPolicyProvider のサンプル](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider)
+* カスタム `[MinimumAgeAuthorize]` 属性を使用する [IAuthorizationPolicyProvider のサンプル](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider)
 * [[Authorize] 属性を使用して認証をテストする](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [[Authorize] 属性を使用してスキームを選択する](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
