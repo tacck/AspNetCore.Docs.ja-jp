@@ -1,43 +1,60 @@
 ---
-title: ASP.NET Core での Windows 認証を構成します。
+title: ASP.NET Core で Windows 認証を構成する
 author: scottaddie
-description: ASP.NET Core での IIS と HTTP.sys は Windows 認証を構成する方法について説明します。
+description: IIS および HTTP.sys の ASP.NET Core で Windows 認証を構成する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 07/01/2019
+ms.date: 02/26/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 30f1f554a29412ed6b84115d457d2da1aba91c17
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.openlocfilehash: 8f6dc8620df04bcebe996119869ca2e498cffccc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500507"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "87330686"
 ---
-# <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core での Windows 認証を構成します。
+# <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core で Windows 認証を構成する
 
-によって[Scott Addie](https://twitter.com/Scott_Addie)と[Luke Latham](https://github.com/guardrex)
+作成者: [Scott Addie](https://twitter.com/Scott_Addie)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Windows 認証 (Negotiate、Kerberos、または NTLM 認証とも呼ばれます) でホストされている ASP.NET Core アプリ用に構成できます[IIS](xref:host-and-deploy/iis/index)、 [Kestrel](xref:fundamentals/servers/kestrel)、または[HTTP.sys](xref:fundamentals/servers/httpsys).
+Windows 認証 (Negotiate、Kerberos、または NTLM 認証とも呼ばれます) は、 [IIS](xref:host-and-deploy/iis/index)、 [kestrel](xref:fundamentals/servers/kestrel)、 [HTTP.sys](xref:fundamentals/servers/httpsys)でホストされている ASP.NET Core アプリに対して構成できます。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Windows 認証 (Negotiate、Kerberos、または NTLM 認証とも呼ばれます) でホストされている ASP.NET Core アプリ用に構成できます[IIS](xref:host-and-deploy/iis/index)または[HTTP.sys](xref:fundamentals/servers/httpsys)します。
+Windows 認証 (Negotiate、Kerberos、または NTLM 認証とも呼ばれます) は、 [IIS](xref:host-and-deploy/iis/index)または[HTTP.sys](xref:fundamentals/servers/httpsys)でホストされる ASP.NET Core アプリ用に構成できます。
 
 ::: moniker-end
 
-Windows 認証は、ASP.NET Core アプリのユーザーを認証するオペレーティング システムに依存します。 ユーザーを識別するために Active Directory ドメインの id または Windows アカウントを使用して、企業ネットワークで、サーバーの実行時に、Windows 認証を使用できます。 Windows 認証は、同じ Windows ドメインに属しているユーザー、クライアント アプリ、および web サーバーのイントラネット環境に最適です。
+Windows 認証では、オペレーティングシステムに依存して ASP.NET Core アプリのユーザーを認証します。 サーバーが企業ネットワーク上で Active Directory ドメイン id または Windows アカウントを使用してユーザーを識別する場合は、Windows 認証を使用できます。 Windows 認証は、ユーザー、クライアントアプリ、および web サーバーが同じ Windows ドメインに属しているイントラネット環境に最適です。
 
 > [!NOTE]
-> Http/2 では、Windows 認証はサポートされていません。 Http/2 の応答の認証チャレンジを送信できますが、クライアントは、http/1.1 に、認証する前にダウン グレードする必要があります。
+> Windows 認証は、HTTP/2 ではサポートされていません。 認証チャレンジは HTTP/2 応答で送信できますが、認証する前にクライアントを HTTP/1.1 にダウングレードする必要があります。
 
-## <a name="iisiis-express"></a>IIS または IIS Express
+## <a name="proxy-and-load-balancer-scenarios"></a>プロキシとロードバランサーのシナリオ
 
-認証サービスを呼び出すことによって追加<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>(<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName>名前空間) で`Startup.ConfigureServices`:
+Windows 認証は、主にイントラネットで使用されるステートフルなシナリオであり、プロキシまたはロードバランサーは通常、クライアントとサーバー間のトラフィックを処理しません。 プロキシまたはロードバランサーが使用されている場合、Windows 認証はプロキシまたはロードバランサーの場合にのみ機能します。
+
+* 認証を処理します。
+* 認証情報に対して動作するユーザー認証情報をアプリに渡します (要求ヘッダーなど)。
+
+プロキシとロードバランサーを使用する環境での Windows 認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
+
+## <a name="iisiis-express"></a>IIS/IIS Express
+
+<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>で (名前空間) を呼び出して認証サービスを追加し <xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> `Startup.ConfigureServices` ます。
 
 ```csharp
 services.AddAuthentication(IISDefaults.AuthenticationScheme);
@@ -45,169 +62,170 @@ services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
 ### <a name="launch-settings-debugger"></a>起動設定 (デバッガー)
 
-起動設定の構成にのみ影響、 *Properties/launchSettings.json* IIS Express 用のファイルし、IIS の Windows 認証を構成しません。 サーバーの構成については、 [IIS](#iis)セクション。
+起動設定の構成は、IIS Express のファイルの*プロパティ/launchSettings.jsに*のみ影響し、Windows 認証用に IIS を構成することはありません。 サーバーの構成については、「 [IIS](#iis) 」セクションを参照してください。
 
-**Web アプリケーション**を更新する Windows 認証をサポートする Visual Studio または .NET Core CLI を使用して利用可能なテンプレートを構成することができます、 *Properties/launchSettings.json*ファイル自動的に。
+Visual Studio または .NET Core CLI で使用できる**Web アプリケーション**テンプレートは、Windows 認証をサポートするように構成できます。これにより、ファイルの*プロパティや launchSettings.js*が自動的に更新されます。
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **新しいプロジェクト**
 
 1. 新しいプロジェクトを作成します。
 1. **[ASP.NET Core Web アプリケーション]** を選択します。 **[次へ]** を選択します。
-1. 名前を入力、**プロジェクト名**フィールド。 確認、**場所**エントリが正しいか、プロジェクトの場所を指定します。 **[作成]** を選択します。
-1. 選択**変更** **認証**します。
-1. **認証の変更**ウィンドウで、 **Windows 認証**します。 **[OK]** を選択します。
+1. [**プロジェクト名**] フィールドに名前を入力します。 **[場所]** エントリが正しいことを確認します。または、プロジェクトの場所を指定します。 **[作成]** を選択します。
+1. [**認証**] で [**変更**] を選択します。
+1. [**認証の変更**] ウィンドウで、[ **Windows 認証**] を選択します。 **[OK]** を選択します。
 1. **[Web アプリケーション]** を選択します。
-1. **[作成]** を選択します。
+1. **［作成］** を選択します
 
-アプリを実行します。 ユーザー名は、レンダリングされたアプリのユーザー インターフェイスに表示されます。
+アプリケーションを実行します。 ユーザー名は、表示されるアプリのユーザーインターフェイスに表示されます。
 
 **既存のプロジェクト**
 
-プロジェクトのプロパティは、Windows 認証を有効にして、匿名認証を無効にします。
+プロジェクトのプロパティは、Windows 認証を有効にし、匿名認証を無効にします。
 
 1. **ソリューション エクスプローラー**でプロジェクトを右クリックして、 **[プロパティ]** を選択します。
 1. **[デバッグ]** タブを選択します。
-1. チェック ボックスをオフ**匿名認証を有効にする**します。
-1. チェック ボックスをオン**Windows 認証を有効にする**します。
-1. 保存して、プロパティ ページを閉じます。
+1. [**匿名認証を有効にする**] のチェックボックスをオフにします。
+1. [ **Windows 認証を有効にする**] チェックボックスをオンにします。
+1. プロパティページを保存して閉じます。
 
-プロパティを構成する代わりに、`iisSettings`のノード、 *launchSettings.json*ファイル。
+または、ファイルのlaunchSettings.jsのノードでプロパティを構成することもでき `iisSettings` ます。 *launchSettings.json*
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
-# <a name="visual-studio-code--net-core-clitabvisual-studio-codenetcore-cli"></a>[Visual Studio Code / .NET Core CLI](#tab/visual-studio-code+netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 **新しいプロジェクト**
 
-実行、[新しい dotnet](/dotnet/core/tools/dotnet-new)コマンドと、`webapp`引数 (ASP.NET Core Web アプリ) と`--auth Windows`スイッチします。
+引数 (ASP.NET Core Web App) を指定して[dotnet new](/dotnet/core/tools/dotnet-new)コマンドを実行 `webapp` し、スイッチを指定し `--auth Windows` ます。
 
-```console
+```dotnetcli
 dotnet new webapp --auth Windows
 ```
 
 **既存のプロジェクト**
 
-更新プログラム、`iisSettings`のノード、 *launchSettings.json*ファイル。
+ファイルの `iisSettings` *launchSettings.js*のノードを更新します。
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
 ---
 
-既存のプロジェクトを変更する場合は、プロジェクト ファイルにはへのパッケージ参照が含まれていることを確認、 [Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)**または**、 [Microsoft.AspNetCore.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) NuGet パッケージ。
+既存のプロジェクトを変更する場合は、プロジェクトファイルに[AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)**また**は[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) NuGet パッケージのパッケージ参照が含まれていることを確認します。
 
 ### <a name="iis"></a>IIS
 
-IIS を使用して、 [ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)ASP.NET Core アプリをホストします。 使用した IIS の Windows 認証が構成されている、 *web.config*ファイル。 以下のセクションで表示する方法。
+IIS では、 [ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)を使用して ASP.NET Core アプリをホストします。 Windows 認証は、 *web.config*ファイルを介して IIS 用に構成されます。 以下のセクションでは、その方法について説明します。
 
-* ローカルの提供*web.config*ファイルをアプリが展開されると、サーバーで Windows 認証をアクティブにします。
-* IIS マネージャーを使用して、構成、 *web.config*サーバーに既に展開されている ASP.NET Core アプリのファイル。
+* アプリの展開時にサーバーで Windows 認証をアクティブ化するローカル*web.config*ファイルを指定します。
+* サーバーに既に配置されている ASP.NET Core アプリの*web.config*ファイルを構成するには、IIS マネージャーを使用します。
 
-これをいない場合は、ASP.NET Core アプリをホストする IIS を有効にします。 詳細については、「 <xref:host-and-deploy/iis/index> 」を参照してください。
+まだインストールしていない場合は、IIS で ASP.NET Core アプリをホストできるようにします。 詳細については、「<xref:host-and-deploy/iis/index>」を参照してください。
 
-Windows 認証の IIS の役割サービスを有効にします。 詳細については、[(手順 2 参照)、IIS の役割サービスで Windows 認証を有効にする](xref:host-and-deploy/iis/index#iis-configuration)を参照してください。
+Windows 認証で IIS 役割サービスを有効にします。 詳細については、「 [IIS 役割サービスで Windows 認証を有効にする (手順2参照)](xref:host-and-deploy/iis/index#iis-configuration)」を参照してください。
 
-[IIS 統合ミドルウェア](xref:host-and-deploy/iis/index#enable-the-iisintegration-components)既定で自動的に要求の認証に構成されます。 詳細については、次を参照してください。 [ASP.NET Core の IIS と Windows ホスト。IIS のオプション (AutomaticAuthentication)](xref:host-and-deploy/iis/index#iis-options)します。
+[IIS 統合ミドルウェア](xref:host-and-deploy/iis/index#enable-the-iisintegration-components)は、既定で自動的に要求を認証するように構成されています。 詳細については、「 [iis を使用した Windows でのホスト ASP.NET Core: iis オプション (自動認証)](xref:host-and-deploy/iis/index#iis-options)」を参照してください。
 
-ASP.NET Core モジュールは、既定では、アプリに Windows 認証トークンを転送するように構成されます。 詳細については、次を参照してください。 [ASP.NET Core モジュール構成リファレンス。AspNetCore 要素の属性](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element)します。
+ASP.NET Core モジュールは、既定で Windows 認証トークンをアプリに転送するように構成されています。 詳細については、「 [ASP.NET Core モジュール構成リファレンス: aspNetCore 要素の属性](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element)」を参照してください。
 
-使用**か**の次の方法。
+次の**いずれか**の方法を使用します。
 
-* **発行して、プロジェクトを配置する前に**次の追加*web.config*ファイルをプロジェクトのルート。
+* **プロジェクトを発行して配置する前に、** 次の*web.config*ファイルをプロジェクトのルートに追加します。
 
   [!code-xml[](windowsauth/sample_snapshot/web_2.config)]
 
-  プロジェクトが .NET Core SDK によって公開されると (なし、`<IsTransformWebConfigDisabled>`プロパティに設定`true`プロジェクト ファイル内)、公開された*web.config*ファイルが含まれています、`<location><system.webServer><security><authentication>`セクション。 詳細については、`<IsTransformWebConfigDisabled>`プロパティを参照してください<xref:host-and-deploy/iis/index#webconfig-file>します。
+  プロジェクトが .NET Core SDK によって発行された場合 (プロジェクトファイルのプロパティがに設定されていない場合 `<IsTransformWebConfigDisabled>` `true` )、発行された*web.config*ファイルにはセクションが含まれ `<location><system.webServer><security><authentication>` ます。 プロパティの詳細につい `<IsTransformWebConfigDisabled>` ては、「」を参照してください <xref:host-and-deploy/iis/index#webconfig-file> 。
 
-* **発行し、プロジェクトを配置した後**サーバー側の構成、IIS マネージャーでを実行します。
+* **プロジェクトを発行および配置した後、** IIS マネージャーを使用してサーバー側の構成を実行します。
 
-  1. IIS マネージャーで、下にある IIS サイトを選択して、**サイト**のノード、**接続**サイドバーです。
-  1. ダブルクリック**認証**で、 **IIS**領域。
-  1. 選択**匿名認証**します。 選択**を無効にする**で、**アクション**サイドバーです。
-  1. 選択**Windows 認証**します。 選択**を有効にする**で、**アクション**サイドバーです。
+  1. IIS マネージャーで、[**接続**] サイドバーの [**サイト**] ノードの下の [iis] サイトを選択します。
+  1. **IIS**領域で [**認証**] をダブルクリックします。
+  1. [**匿名認証**] を選択します。 [**アクション**] サイドバーで [**無効**] を選択します。
+  1. **[Windows 認証]** をクリックします。 [**アクション**] サイドバーで [**有効化**] を選択します。
 
-  これらのアクションが実行したときに、IIS マネージャーは、アプリを変更します*web.config*ファイル。 A`<system.webServer><security><authentication>`ノードが更新された設定を使用した追加`anonymousAuthentication`と`windowsAuthentication`:
+  これらの操作を実行すると、IIS マネージャーによって、アプリの*web.config*ファイルが変更されます。 `<system.webServer><security><authentication>`ノードは、およびの更新された設定を使用して追加され `anonymousAuthentication` `windowsAuthentication` ます。
 
   [!code-xml[](windowsauth/sample_snapshot/web_1.config?highlight=4-5)]
 
-  `<system.webServer>`セクションに追加、 *web.config*ファイルを IIS マネージャーでは、アプリの外部で`<location>`は .NET Core SDK により、アプリが公開されるときに追加されたセクションです。 外部のセクションが追加されるため、`<location>`ノード、いずれかで、設定が継承されます[サブ アプリ](xref:host-and-deploy/iis/index#sub-applications)現在のアプリにします。 継承を防ぐためには、移動、追加した`<security>`内のセクション、 `<location><system.webServer>` .NET Core SDK が提供されているセクション。
+  `<system.webServer>`IIS マネージャーによって*web.config*ファイルに追加されたセクションは、 `<location>` アプリの発行時に .NET Core SDK によって追加されたアプリのセクションの外部にあります。 セクションはノードの外側に追加されるため `<location>` 、設定は[サブアプリ](xref:host-and-deploy/iis/index#sub-applications)によって現在のアプリに継承されます。 継承を防止するには、 `<security>` .NET Core SDK 提供されたセクション内に追加されたセクションを移動し `<location><system.webServer>` ます。
 
-  IIS マネージャーを使用するには、IIS の構成を追加する、影響を受けるのみアプリの*web.config*サーバー上のファイル。 場合、アプリの後続の配置は、サーバーの設定を上書き可能性があります、サーバーのコピーの*web.config*はプロジェクトの置き換え*web.config*ファイル。 使用**か**の設定を管理する次の方法。
+  Iis マネージャーを使用して IIS 構成を追加すると、サーバー上のアプリの*web.config*ファイルにのみ影響します。 サーバーの*web.config*のコピーがプロジェクトの*web.config*ファイルで置き換えられた場合、その後のアプリの展開では、サーバーの設定が上書きされる可能性があります。 設定を管理するには、次の**いずれか**の方法を使用します。
 
-  * 設定をリセットする IIS マネージャーを使用して、 *web.config*ファイルについては、展開で、ファイルが上書きされます。
-  * 追加、 *web.config ファイル*アプリの設定でローカルにします。
+  * 展開時にファイルが上書きされた後、IIS マネージャーを使用して、 *web.config*ファイルの設定をリセットします。
+  * 設定を使用して、アプリケーションに*web.config ファイル*をローカルに追加します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="kestrel"></a>Kestrel
 
- [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate)と NuGet パッケージを使用する[Kestrel](xref:fundamentals/servers/kestrel) Negotiate、Kerberos、および NTLM を使用して、Windows、Linux、macOS で Windows 認証をサポートします。
+Windows、Linux、macOS で Negotiate と Kerberos を使用した Windows 認証をサポートするために、 [Kestrel](xref:fundamentals/servers/kestrel)と共に[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) NuGet パッケージを使用できます。
 
 > [!WARNING]
-> 接続で要求間で資格情報を保持できます。 *ネゴシエート、プロキシは、Kestrel での 1 対 1 の接続のアフィニティ (固定接続) を保持しない限り、認証をプロキシで使用しないでください。*
+> 資格情報は、接続時に要求間で永続化できます。 *プロキシが Kestrel と1:1 の接続関係 (永続的な接続) を維持していない限り、プロキシでネゴシエート認証を使用することはできません。*
 
 > [!NOTE]
-> ネゴシエート ハンドラーは、基になるサーバーが Windows 認証をネイティブにサポートし、有効になっている場合を検出します。 サーバーは、Windows 認証をサポートしています。 無効になっている場合は、サーバーの実装を有効にするように求めるエラーがスローされます。 サーバーで Windows 認証が有効な場合に、ネゴシエート ハンドラーが透過的に転送します。
+> Negotiate ハンドラーは、基になるサーバーが Windows 認証をネイティブでサポートしているかどうかを検出します (有効になっている場合)。 サーバーが Windows 認証をサポートしていても無効になっている場合は、サーバーの実装を有効にするように求めるエラーがスローされます。 サーバーで Windows 認証が有効になっている場合は、ネゴシエートハンドラーによって透過的に転送されます。
 
- 認証サービスを呼び出すことによって追加<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>(`Microsoft.AspNetCore.Authentication.Negotiate`名前空間) と`AddNegotitate`(`Microsoft.AspNetCore.Authentication.Negotiate`名前空間) で`Startup.ConfigureServices`:
+でおよびを呼び出して、認証サービスを追加 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> し <xref:Microsoft.Extensions.DependencyInjection.NegotiateExtensions.AddNegotiate*> `Startup.ConfigureServices` ます。
 
  ```csharp
+// using Microsoft.AspNetCore.Authentication.Negotiate;
+// using Microsoft.Extensions.DependencyInjection;
+
 services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 ```
 
-認証ミドルウェアを呼び出すことによって追加<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>で`Startup.Configure`:
+でを呼び出して認証ミドルウェアを追加し <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> `Startup.Configure` ます。
 
  ```csharp
 app.UseAuthentication();
-
-app.UseMvc();
 ```
 
-ミドルウェアの詳細については、次を参照してください。<xref:fundamentals/middleware/index>します。
+ミドルウェアの詳細については、「」を参照してください <xref:fundamentals/middleware/index> 。
 
-匿名の要求が許可されます。 使用[ASP.NET Core の承認](xref:security/authorization/introduction)課題の匿名認証を要求します。
+匿名要求が許可されます。 [ASP.NET Core 承認](xref:security/authorization/introduction)を使用して、認証のための匿名要求をチャレンジします。
 
-### <a name="windows-environment-configuration"></a>Windows 環境の構成
+### <a name="windows-environment-configuration"></a>Windows 環境構成
 
-[Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate)コンポーネントは、ユーザー モード認証を実行します。 サービス プリンシパル名 (Spn) は、マシン アカウントではなく、サービスを実行するユーザー アカウントに追加する必要があります。 実行`setspn -S HTTP/mysrevername.mydomain.com myuser`管理コマンド シェルでします。
+[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate)コンポーネントは、ユーザーモード認証を実行します。 サービスプリンシパル名 (Spn) は、コンピューターアカウントではなく、サービスを実行しているユーザーアカウントに追加する必要があります。 `setspn -S HTTP/myservername.mydomain.com myuser`管理コマンドシェルでを実行します。
 
-### <a name="linux-and-macos-environment-configuration"></a>Linux と macOS の環境の構成
+### <a name="linux-and-macos-environment-configuration"></a>Linux および macOS 環境構成
 
-Linux または macOS マシンを Windows ドメインに参加するための手順については、 [Windows 認証に Kerberos を使用して、SQL server の Azure Data Studio の接続](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller)記事。 手順については、ドメイン上の Linux マシンのコンピューター アカウントを作成します。 そのコンピューター アカウントに Spn を追加する必要があります。
+Linux または macOS コンピューターを Windows ドメインに参加させる手順については、「 [windows 認証を使用した SQL Server への Azure Data Studio の接続](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller)」を参照してください。 この手順では、ドメイン上の Linux マシン用のコンピューターアカウントを作成します。 Spn をそのコンピューターアカウントに追加する必要があります。
 
 > [!NOTE]
-> ガイダンスに従うと、 [Windows 認証に Kerberos を使用して、SQL server の Azure Data Studio の接続](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller)に関する記事で、置き換える`python-software-properties`で`python3-software-properties`必要な場合。
+> 「 [Windows 認証を使用して SQL Server に Azure Data Studio 接続する-Kerberos](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) 」のガイダンスに従っている場合は、必要に応じ `python-software-properties` てをに置き換え `python3-software-properties` ます。
 
-Linux または macOS マシンをドメインに参加すると、追加の手順が提供する必要が、 [keytab ファイル](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/)Spn で。
+Linux または macOS コンピューターがドメインに参加したら、次の手順に従って、[キータブファイル](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/)に spn を指定する必要があります。
 
-* ドメイン コント ローラーで、コンピューター アカウントに新しい web サービスの Spn を追加します。
+* ドメインコントローラーで、新しい web サービス Spn をコンピューターアカウントに追加します。
   * `setspn -S HTTP/mywebservice.mydomain.com mymachine`
   * `setspn -S HTTP/mywebservice@MYDOMAIN.COM mymachine`
-* 使用[ktpass](/windows-server/administration/windows-commands/ktpass) keytab ファイルを生成します。
+* [Ktpass](/windows-server/administration/windows-commands/ktpass)を使用して、キータブファイルを生成します。
   * `ktpass -princ HTTP/mywebservice.mydomain.com@MYDOMAIN.COM -pass myKeyTabFilePassword -mapuser MYDOMAIN\mymachine$ -pType KRB5_NT_PRINCIPAL -out c:\temp\mymachine.HTTP.keytab -crypto AES256-SHA1`
-  * 一部のフィールドで指定されなければなりません大文字のとおりです。
-* Linux または macOS マシンに keytab ファイルをコピーします。
-* 環境変数を介して keytab ファイルを選択します。 `export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
-* 呼び出す`klist`を現在使用可能な Spn を表示します。
+  * 一部のフィールドは、示されているとおりに大文字で指定する必要があります。
+* キータブファイルを Linux または macOS マシンにコピーします。
+* 環境変数を使用して、キーボックスファイルを選択します。`export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
+* `klist`を呼び出して、現在使用可能な spn を表示します。
 
 > [!NOTE]
-> Keytab ファイルは、ドメイン アクセスの資格情報を含み、適切に保護する必要があります。
+> キータブファイルにはドメインアクセス資格情報が含まれており、それに従って保護する必要があります。
 
 ::: moniker-end
 
 ## <a name="httpsys"></a>HTTP.sys
 
-[HTTP.sys](xref:fundamentals/servers/httpsys) Negotiate、NTLM、または基本認証を使用してカーネル モードの Windows 認証をサポートします。
+[HTTP.sys](xref:fundamentals/servers/httpsys)は、ネゴシエート、NTLM、または基本認証を使用したカーネルモードの Windows 認証をサポートしています。
 
-認証サービスを呼び出すことによって追加<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>(<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName>名前空間) で`Startup.ConfigureServices`:
+<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>で (名前空間) を呼び出して認証サービスを追加し <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> `Startup.ConfigureServices` ます。
 
 ```csharp
 services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
 ```
 
-Windows 認証を使用した HTTP.sys を使用するアプリの web ホストを構成する (*Program.cs*)。 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*> <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName>名前空間。
+Windows 認証 (*Program.cs*) で HTTP.sys を使用するようにアプリの web ホストを構成します。 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*>は <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> 名前空間にあります。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -225,34 +243,34 @@ Windows 認証を使用した HTTP.sys を使用するアプリの web ホスト
 > HTTP.sys では、Kerberos 認証プロトコルを使用したカーネル モード認証に処理が委任されます。 Kerberos および HTTP.sys ではユーザー モード認証がサポートされていません。 Active Directory から取得され、クライアントによって、ユーザーを認証するサーバーに転送される Kerberos トークン/チケットを暗号化解除するには、コンピューター アカウントを使用する必要があります。 アプリのユーザーではなく、ホストのサービス プリンシパル名 (SPN) を登録します。
 
 > [!NOTE]
-> HTTP.sys は、Nano Server バージョン 1709 以降でサポートされていません。 Nano Server の Windows 認証と HTTP.sys を使用する、 [(microsoft/windowsservercore) の Server Core コンテナー](https://hub.docker.com/r/microsoft/windowsservercore/)します。 Server Core の詳細については、[Windows Server の Server Core インストール オプションとは何ですか?](/windows-server/administration/server-core/what-is-server-core)を参照してください。
+> HTTP.sys は、Nano Server バージョン1709以降ではサポートされていません。 Nano Server で Windows 認証と HTTP.sys を使用するには、 [Server Core (microsoft/windowsservercore) コンテナー](https://hub.docker.com/r/microsoft/windowsservercore/)を使用します。 Server Core の詳細については、「 [Windows server の Server core インストールオプション](/windows-server/administration/server-core/what-is-server-core)について」を参照してください。
 
-## <a name="authorize-users"></a>ユーザーを認証します。
+## <a name="authorize-users"></a>ユーザーの承認
 
-匿名アクセスの構成の状態にする方法が決定します、`[Authorize]`と`[AllowAnonymous]`属性は、アプリで使用します。 次の 2 つのセクションでは、匿名アクセスの許可されていないと、許可されている構成の状態を処理する方法について説明します。
+匿名アクセスの構成の状態によって、 `[Authorize]` アプリで属性と属性がどのように使用されるかが決まり `[AllowAnonymous]` ます。 次の2つのセクションでは、匿名アクセスの許可されていない構成と許可される構成の状態の処理方法について説明します。
 
-### <a name="disallow-anonymous-access"></a>匿名アクセスを禁止します。
+### <a name="disallow-anonymous-access"></a>匿名アクセスを許可しない
 
-Windows 認証が有効になっており、匿名アクセスが無効になっているときに、`[Authorize]`と`[AllowAnonymous]`属性は影響ありません。 匿名アクセスを禁止する IIS サイトを構成する場合、要求がアプリに到達しません。 このため、`[AllowAnonymous]`属性には適用されません。
+Windows 認証が有効になっていて、匿名アクセスが無効になっている場合、 `[Authorize]` `[AllowAnonymous]` 属性と属性は影響を与えません。 IIS サイトが匿名アクセスを許可しないように構成されている場合、要求はアプリに到達しません。 このため、属性は `[AllowAnonymous]` 適用されません。
 
-### <a name="allow-anonymous-access"></a>匿名アクセスを許可します。
+### <a name="allow-anonymous-access"></a>匿名アクセスを許可する
 
-Windows 認証と匿名アクセスの両方が有効になっているときに使用して、`[Authorize]`と`[AllowAnonymous]`属性。 `[Authorize]`属性では、認証を必要とするアプリのエンドポイントをセキュリティで保護できます。 `[AllowAnonymous]`属性のオーバーライド、`[Authorize]`への匿名アクセスを許可するアプリ内の属性。 属性の使用方法の詳細を参照してください。<xref:security/authorization/simple>します。
+Windows 認証と匿名アクセスの両方が有効になっている場合は、 `[Authorize]` 属性と属性を使用し `[AllowAnonymous]` ます。 `[Authorize]`属性を使用すると、認証を必要とするアプリのエンドポイントをセキュリティで保護することができます。 属性は、 `[AllowAnonymous]` `[Authorize]` 匿名アクセスを許可するアプリの属性よりも優先されます。 属性の使用の詳細については、「」を参照してください <xref:security/authorization/simple> 。
 
 > [!NOTE]
-> 既定では、ページにアクセスするための承認を持たないユーザーには、空の HTTP 403 応答が表示されます。 [StatusCodePages ミドルウェア](xref:fundamentals/error-handling#usestatuscodepages)「アクセスが拒否されました」のより優れたエクスペリエンスをユーザーに提供するように構成できます。
+> 既定では、ページにアクセスする権限を持たないユーザーには、空の HTTP 403 応答が表示されます。 [Statuscodepages ページミドルウェア](xref:fundamentals/error-handling#usestatuscodepages)は、ユーザーが "アクセス拒否" のエクスペリエンスを向上させるように構成できます。
 
 ## <a name="impersonation"></a>偽装
 
-ASP.NET Core では、権限借用を実装しません。 アプリは、アプリ プールまたはプロセス id を使用して、すべての要求をアプリの id で実行します。 使用の場合は、アプリは、ユーザーの代理としてアクションを実行する必要があります、 [WindowsIdentity.RunImpersonated](xref:System.Security.Principal.WindowsIdentity.RunImpersonated*)で、[ターミナル インライン ミドルウェア](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)で`Startup.Configure`します。 このコンテキストで 1 つのアクションを実行し、コンテキストを閉じます。
+ASP.NET Core が偽装を実装していません。 アプリは、アプリプールまたはプロセス id を使用して、すべての要求に対してアプリの id で実行されます。 アプリでユーザーに代わってアクションを実行する必要がある場合は、の[ターミナルインラインミドルウェア](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)で[WindowsIdentity](xref:System.Security.Principal.WindowsIdentity.RunImpersonated*)を使用します `Startup.Configure` 。 このコンテキストで1つのアクションを実行し、コンテキストを閉じます。
 
 [!code-csharp[](windowsauth/sample_snapshot/Startup.cs?highlight=10-19)]
 
-`RunImpersonated` 非同期操作をサポートしていないし、複雑なシナリオでは使用しないでください。 全体要求またはミドルウェアのチェーンをラッピングされていないサポートなど、お勧めします。
+`RunImpersonated`は非同期操作をサポートしていないため、複雑なシナリオでは使用できません。 たとえば、要求またはミドルウェアチェーン全体のラップはサポートされていないか、推奨されません。
 
 ::: moniker range=">= aspnetcore-3.0"
 
-中に、 [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate)パッケージが Windows での認証ができるように、Linux、および macOS での偽装は、Windows でのみサポートされます。
+[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate)パッケージは Windows、Linux、および macOS での認証を有効にしますが、偽装は windows でのみサポートされています。
 
 ::: moniker-end
 
@@ -260,13 +278,13 @@ ASP.NET Core では、権限借用を実装しません。 アプリは、アプ
 
 ::: moniker range=">= aspnetcore-3.0"
 
-IIS でホストする場合<xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*>されていないユーザーを初期化するために内部的に呼び出されます。 そのため、認証のたびに要求を変換するための <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> 実装は既定で有効になっていません。 要求の変換を有効にするためのコード例と詳細については、次を参照してください。<xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>します。
+IIS でホストする場合、は、 <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> ユーザーを初期化するために内部では呼び出されません。 そのため、認証のたびに要求を変換するための <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> 実装は既定で有効になっていません。 クレーム変換をアクティブにするコード例については、「」を参照してください <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model> 。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-IIS のインプロセス モードでホストする場合<xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*>されていないユーザーを初期化するために内部的に呼び出されます。 そのため、認証のたびに要求を変換するための <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> 実装は既定で有効になっていません。 詳細については、インプロセスをホストする場合は、クレームの変換をアクティブにするためのコード例を参照してください。<xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>します。
+IIS インプロセスモードでホストする場合、は、 <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> ユーザーを初期化するために内部的に呼び出されません。 そのため、認証のたびに要求を変換するための <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> 実装は既定で有効になっていません。 インプロセスをホストするときに要求変換をアクティブにするコード例と詳細については、「」を参照してください <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model> 。
 
 ::: moniker-end
 
