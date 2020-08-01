@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 6e47e627915bd8988d161f7d5af4a89f3671c0a7
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: a08993a7909d67be34446815b10d32089d9e0629
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445451"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444151"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -675,7 +675,7 @@ Index: 5  Value: value5
 
 次のコードでは、*Program.cs* でカスタムの `EFConfigurationProvider` を使用する方法を示します。
 
-[!code-csharp[](index/samples/3.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
+[!code-csharp[](index/samples_snippets/3.x/ConfigurationSample/Program.cs?highlight=7-8)]
 
 <a name="acs"></a>
 
@@ -687,7 +687,7 @@ Index: 5  Value: value5
 
 起動時の簡易メソッドを使用して構成にアクセスする例については、[アプリ起動時の簡易メソッド](xref:fundamentals/startup#convenience-methods)に関連する記事をご覧ください。
 
-## <a name="access-configuration-in-razor-pages"></a>Razor ページの構成にアクセスする
+## <a name="access-configuration-in-no-locrazor-pages"></a>Razor ページの構成にアクセスする
 
 次のコードでは Razor ページの構成データが表示されます:
 
@@ -1060,8 +1060,8 @@ ASP.NET Core テンプレートに基づくアプリの場合、`AddCommandLine`
 | キーのプレフィックス               | 例                                                |
 | ------------------------ | ------------------------------------------------------ |
 | プレフィックスなし                | `CommandLineKey1=value1`                               |
-| 2 つのダッシュ (`--`)        | `--CommandLineKey2=value2`、`--CommandLineKey2 value2` |
-| スラッシュ (`/`)      | `/CommandLineKey3=value3`、`/CommandLineKey3 value3`   |
+| 2 つのダッシュ (`--`)        | `--CommandLineKey2=value2`, `--CommandLineKey2 value2` |
+| スラッシュ (`/`)      | `/CommandLineKey3=value3`, `/CommandLineKey3 value3`   |
 
 同じコマンド内のコマンド ライン引数で、等号を使用するキーと値のペアと、スペースを使用するキーと値のペアを混在させないでください。
 
@@ -1108,7 +1108,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 スイッチ マッピング ディクショナリが作成されると、以下の表に示すデータが含まれます。
 
-| Key       | [値]             |
+| Key       | 値             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -1685,7 +1685,7 @@ config.AddJsonFile(
 
 表に示すキーと値のペアが構成に読み込まれます。
 
-| Key             | [値]  |
+| Key             | 値  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
@@ -1708,7 +1708,7 @@ JSON ファイルに配列が含まれる場合、配列要素の構成キーは
 
 JSON 構成プロバイダーは、次のキーと値のペアに構成データを読み取ります。
 
-| Key                     | [値]  |
+| Key                     | 値  |
 | ----------------------- | :----: |
 | json_array:key          | valueA |
 | json_array:subsection:0 | valueB |
@@ -1799,7 +1799,7 @@ public class Startup
 
 起動時の簡易メソッドを使用して構成にアクセスする例については、[アプリ起動時の簡易メソッド](xref:fundamentals/startup#convenience-methods)に関連する記事をご覧ください。
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Razor Pages ページまたは MVC ビューで構成にアクセスする
+## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>Razor Pages ページまたは MVC ビューで構成にアクセスする
 
 Razor Pages ページまたは MVC ビューで構成設定にアクセスするには、[Microsoft.Extensions.Configuration](xref:Microsoft.Extensions.Configuration) 名前空間に [using ディレクティブ](xref:mvc/views/razor#using) ([C# リファレンス: using ディレクティブ](/dotnet/csharp/language-reference/keywords/using-directive)) を追加して、<xref:Microsoft.Extensions.Configuration.IConfiguration> をページまたはビューに挿入します。
 
