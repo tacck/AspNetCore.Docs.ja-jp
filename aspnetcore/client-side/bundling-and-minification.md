@@ -4,22 +4,22 @@ author: scottaddie
 description: バンドルと縮小の手法を適用して、ASP.NET Core Web アプリケーションの静的リソースを最適化する方法について説明します。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 04/15/2020
+ms.date: 07/23/2020
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5db6ab3d790257c677c0a4ed7e605eb39c2982ed
+ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401910"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87159722"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core での静的資産のバンドルと縮小
 
@@ -71,19 +71,19 @@ ms.locfileid: "85401910"
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>バンドルと縮小の戦略を選択する
 
-MVC および [Razor Pages プロジェクト テンプレートには、JSON 構成ファイルで構成されるバンドルおよび縮小のためのソリューションが用意されています。 [Grunt](xref:client-side/using-grunt) タスク ランナーなどのサードパーティ ツールの場合、同じタスクを実行するにはもう少し複雑です。 サードパーティ製のツールは、リンティングや画像の最適化など、バンドルと縮小を超える処理が開発ワークフローに必要な場合に最適です。 設計時にバンドルと縮小を使用することで、アプリのデプロイ前に縮小されたファイルが作成されます。 デプロイ前のバンドルと縮小によって、サーバーの負荷が軽減されます。 ただし、設計時にバンドルと縮小を使用するとビルドの複雑さが増すので、静的ファイルでのみ機能することを認識することが重要です。
+MVC および Razor Pages プロジェクト テンプレートには、JSON 構成ファイルで構成されるバンドルおよび縮小のためのソリューションが用意されています。 [Grunt](xref:client-side/using-grunt) タスク ランナーなどのサードパーティ ツールの場合、同じタスクを実行するにはもう少し複雑です。 サードパーティ製のツールは、リンティングや画像の最適化など、バンドルと縮小を超える処理が開発ワークフローに必要な場合に最適です。 設計時にバンドルと縮小を使用することで、アプリのデプロイ前に縮小されたファイルが作成されます。 デプロイ前のバンドルと縮小によって、サーバーの負荷が軽減されます。 ただし、設計時にバンドルと縮小を使用するとビルドの複雑さが増すので、静的ファイルでのみ機能することを認識することが重要です。
 
 ## <a name="configure-bundling-and-minification"></a>バンドルと縮小を構成する
 
 ::: moniker range="<= aspnetcore-2.0"
 
-ASP.NET Core 2.0 以前では、MVC および [Razor Pages プロジェクト テンプレートには、各バンドルのオプションが定義された *bundleconfig.json* 構成ファイルが用意されています。
+ASP.NET Core 2.0 以前では、MVC および Razor Pages プロジェクト テンプレートには、各バンドルのオプションが定義された *bundleconfig.json* 構成ファイルが用意されています。
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または [Razor Pages プロジェクトのルートに追加します。 開始点としてそのファイルに次の JSON を含めます。
+ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または Razor Pages プロジェクトのルートに追加します。 開始点としてそのファイルに次の JSON を含めます。
 
 ::: moniker-end
 
@@ -174,13 +174,13 @@ ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい 
 
 *package.json* と同じレベルで次のコマンドを実行して、依存関係をインストールします。
 
-```console
+```bash
 npm i
 ```
 
 グローバルな依存関係として Gulp CLI をインストールします。
 
-```console
+```bash
 npm i -g gulp-cli
 ```
 
@@ -190,9 +190,12 @@ npm i -g gulp-cli
 
 ### <a name="run-gulp-tasks"></a>Gulp タスクを実行する
 
-Visual Studio でプロジェクトをビルドする前に Gulp 縮小タスクをトリガーするには、次の [MSBuild ターゲット](/visualstudio/msbuild/msbuild-targets)を *.csproj ファイルに追加します。
+Visual Studio でプロジェクトをビルドする前に Gulp 縮小タスクをトリガーするには:
 
-[!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
+1. [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) NuGet パッケージをインストールします。
+1. 次の [MSBuild ターゲット](/visualstudio/msbuild/msbuild-targets)をプロジェクト ファイルに追加します。
+
+    [!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
 
 この例では、`MyPreCompileTarget` ターゲット内で定義されたタスクは、事前に定義された `Build` ターゲットの前に実行されます。 次のような出力が Visual Studio の出力ウィンドウに表示されます。
 

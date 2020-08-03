@@ -5,7 +5,7 @@ Blazor サーバー アプリはサーバー メモリに存在します。 こ�
 
 Blazor アプリでは、ステートフル シングルトン サービスを使用できます (特に専用に設計されている場合)。 たとえば、メモリ キャッシュをシングルトンとして使用するのは問題ありません。これは、使用されるキャッシュ キーをユーザーが制御できない場合に、特定のエントリにアクセスするためにキーが必要になるためです。
 
-**また、セキュリティ上の理由から、Blazor アプリ内で <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> を使用することはできません。** Blazor アプリは ASP.NET Core パイプラインのコンテキスト外で実行されるため、<xref:Microsoft.AspNetCore.Http.HttpContext> は <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 内で使用できるとは限りません。また、Blazor アプリを開始したコンテキストが保持されるとも保証されません。
+**また、セキュリティ上の理由から、Blazor アプリ内で <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> を使用することはできません。** Blazor アプリは、ASP.NET Core パイプラインのコンテキストの外部で実行されます。 <xref:Microsoft.AspNetCore.Http.HttpContext> は、<xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 内で使用できるとは限りません。また、Blazor アプリが開始されたコンテキストが保持されることも保証されません。
 
 Blazor アプリに要求状態を渡す方法としては、アプリの初期レンダリングでルート コンポーネントのパラメーターを使用することをお勧めします。
 

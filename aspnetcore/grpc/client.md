@@ -4,7 +4,7 @@ author: jamesnk
 description: .NET gRPC クライアントを使用して gRPC サービスを呼び出す方法について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 04/21/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9ebe36cdb17e858fd82216b090e3e89169197101
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0d8856bba5afaaed4d9552480e4ae5dcbb7704d5
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406187"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303548"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
@@ -50,6 +50,19 @@ var counterClient = new Count.CounterClient(channel);
 // Use clients to call gRPC services
 ```
 
+### <a name="configure-tls"></a>TLS の構成
+
+gRPC クライアントでは、呼び出されたサービスと同じ接続レベルのセキュリティを使用する必要があります。 gRPC クライアントのトランスポート層セキュリティ (TLS) は、gRPC チャネルの作成時に構成されます。 gRPC クライアントによってサービスが呼び出され、そのチャネルとサービスの接続レベルのセキュリティが一致しなかった場合、エラーがスローされます。
+
+TLS を使用するように gRPC チャネルを構成するには、サーバー アドレスが `https` で始まることを確認します。 たとえば、`GrpcChannel.ForAddress("https://localhost:5001")` では HTTPS プロトコルが使用されます。 gRPC チャネルでは、TLS によってセキュリティで保護された接続が自動的にネゴシエートされ、安全な接続を使用して gRPC 呼び出しが行われます。
+
+> [!TIP]
+> gRPC では、TLS 経由のクライアント証明書認証がサポートされています。 gRPC チャネルを使用したクライアント証明書の構成について詳しくは、<xref:grpc/authn-and-authz#client-certificate-authentication> を参照してください。
+
+セキュリティで保護されていない gRPC サービスを呼び出すには、サーバー アドレスが `http` で始まることを確認します。 たとえば、`GrpcChannel.ForAddress("http://localhost:5000")` では HTTP プロトコルが使用されます。 .NET Core 3.1 以降では、[.NET クライアントで安全でない gRPC サービスを呼び出す](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)場合、追加の構成が必要です。
+
+### <a name="client-performance"></a>クライアント パフォーマンス
+
 チャネルおよびクライアントのパフォーマンスと使用状況:
 
 * チャネルの作成は、コストのかかる操作となる場合があります。 チャネルを gRPC 呼び出しのために再利用すると、パフォーマンス上のメリットがあります。
@@ -59,9 +72,6 @@ var counterClient = new Count.CounterClient(channel);
 * チャネルから作成されたクライアントは、複数の同時呼び出しを行えます。
 
 `GrpcChannel.ForAddress` は、gRPC クライアントを作成する際の唯一のオプションではありません。 ASP.NET Core アプリから gRPC サービスを呼び出そうとしている場合は、[gRPC クライアント ファクトリの統合](xref:grpc/clientfactory)を検討してください。 gRPC と `HttpClientFactory` の統合により、gRPC クライアントを一元的に作成する別の方法が得られます。
-
-> [!NOTE]
-> [.NET クライアントで安全でない gRPC サービスを呼び出す](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)には、追加の構成が必要です。
 
 > [!NOTE]
 > 現在のところ、`Grpc.Net.Client` による HTTP/2 を介した gRPC の呼び出しは、Xamarin ではサポートされていません。 将来の Xamarin のリリースで HTTP/2 のサポートを向上させるために作業を進めています。 [Grpc.Core](https://www.nuget.org/packages/Grpc.Core) と [gRPC-Web](xref:grpc/browser) は、現在でも機能する実行可能な代替手段です。
@@ -196,7 +206,7 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 
 var trailers = call.GetTrailers();
-var myValue = trailers.First(e => e.Key == "my-trailer-name");
+var myValue = trailers.GetValue("my-trailer-name");
 ```
 
 サーバーと双方向のストリーミング呼び出しでは、`GetTrailers()` を呼び出す前に応答ストリームの待機を完了する必要があります。
@@ -212,7 +222,7 @@ await foreach (var response in call.ResponseStream.ReadAllAsync())
 }
 
 var trailers = call.GetTrailers();
-var myValue = trailers.First(e => e.Key == "my-trailer-name");
+var myValue = trailers.GetValue("my-trailer-name");
 ```
 
 gRPC トレーラーには、`RpcException` からもアクセスできます。 サービスでは、OK でない gRPC の状態と共にトレーラーが返される場合があります。 このような状況では、トレーラーは、gRPC クライアントによってスローされた例外から取得されます。
@@ -230,12 +240,12 @@ try
     // Greeting: Hello World
 
     var trailers = call.GetTrailers();
-    myValue = trailers.First(e => e.Key == "my-trailer-name");
+    myValue = trailers.GetValue("my-trailer-name");
 }
 catch (RpcException ex)
 {
     var trailers = ex.Trailers;
-    myValue = trailers.First(e => e.Key == "my-trailer-name");
+    myValue = trailers.GetValue("my-trailer-name");
 }
 ```
 

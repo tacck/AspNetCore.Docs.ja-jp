@@ -5,7 +5,7 @@ description: Blazor アプリをデバッグする方法について説明しま
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/15/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: b4199c3a99af5875c5d9a87f29f7c7e2758ffd71
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407672"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303561"
 ---
-# <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
 [Daniel Roth](https://github.com/danroth27)
 
@@ -105,19 +105,19 @@ Blazor WebAssembly アプリのデバッグ中に、サーバー コードをデ
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-Blazor アプリ開発のための Visual Studio Code のインストールの詳細については、「<xref:blazor/tooling>」を参照してください。
-
-### <a name="debug-standalone-blazor-webassembly"></a>スタンドアロン Blazor WebAssembly のデバッグ
+### <a name="debug-standalone-no-locblazor-webassembly"></a>スタンドアロン Blazor WebAssembly のデバッグ
 
 1. VS Code でスタンドアロンの Blazor WebAssembly アプリを開きます。
 
-   デバッグを有効にするために追加の設定が必要であるという次の通知が表示された場合は、以下のようにします。
+   デバッグを有効にするために追加の設定が必要であることを示す、次の通知が表示される場合があります。
    
-   * 正しい拡張機能がインストールされていることを確認します。
-   * JavaScript のプレビュー デバッグが有効になっていることを確認します。
-   * ウィンドウを再度読み込みます。
-
    ![追加の設定が必要](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+   
+   通知を受信した場合:
+
+   * 最新の [C# for Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)がインストールされていることを確認します。 インストールされている拡張機能を確認するには、メニュー バーから **[表示]**  >  **[拡張機能]** を開くか、**アクティビティ** サイド バーにある**拡張機能**アイコンを選択します。
+   * JavaScript のプレビュー デバッグが有効になっていることを確認します。 メニュー バーから設定を開きます ( **[ファイル]**  >  **[ユーザー設定]**  >  **[設定]** )。 キーワード「`debug preview`」を使用して検索します。 検索結果で、 **[デバッグ] > [JavaScript:Use Preview]\(JavaScript: 使用プレビュー\)** のチェック ボックスがオンになっていることを確認します。
+   * ウィンドウを再度読み込みます。
 
 1. <kbd>F5</kbd> キーボード ショートカットまたはメニュー項目を使用してデバッグを開始します。
 
@@ -131,7 +131,7 @@ Blazor アプリ開発のための Visual Studio Code のインストールの�
 
    ![VS Code のデバッグ カウンター](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-blazor-webassembly"></a>ホストされた Blazor WebAssembly のデバッグ
+### <a name="debug-hosted-no-locblazor-webassembly"></a>ホストされた Blazor WebAssembly のデバッグ
 
 1. VS Code で、ホストされた Blazor WebAssembly アプリのソリューション フォルダーを開きます。
 
@@ -177,7 +177,7 @@ Blazor アプリ開発のための Visual Studio Code のインストールの�
 
 ### <a name="example-launch-configurations"></a>起動構成の例
 
-#### <a name="launch-and-debug-a-standalone-blazor-webassembly-app"></a>スタンドアロン Blazor WebAssembly アプリを起動してデバッグする
+#### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>スタンドアロン Blazor WebAssembly アプリを起動してデバッグする
 
 ```json
 {
@@ -198,7 +198,7 @@ Blazor アプリ開発のための Visual Studio Code のインストールの�
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge でホストされている Blazor WebAssembly アプリを起動してデバッグする
+#### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge でホストされている Blazor WebAssembly アプリを起動してデバッグする
 
 ブラウザーの構成の既定値は Google Chrome です。 デバッグに Microsoft Edge を使用する場合は、`browser` を `edge` に設定します。 Google Chrome を使用するには、`browser` オプションを設定しないか、オプションの値を `chrome` に設定します。
 
