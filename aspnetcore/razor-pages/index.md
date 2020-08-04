@@ -14,14 +14,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: e7e9bc76a2bba1c15b32c97f0f3629285f256499
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: bd9f991a2aba32cbbeb193ad422005f910e6795b
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568706"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444077"
 ---
-# <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core での Razor ページの概要
+# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>ASP.NET Core での Razor ページの概要
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -51,7 +51,7 @@ Razor ページを利用することで、ページのコーディングに今�
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>Razor ページ プロジェクトを作成する
+## <a name="create-a-no-locrazor-pages-project"></a>Razor ページ プロジェクトを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -67,7 +67,7 @@ Razor ページ プロジェクトを作成する詳細な手順については�
 
 ---
 
-## <a name="razor-pages"></a>Razor Pages
+## <a name="no-locrazor-pages"></a>Razor Pages
 
 Razor ページは "*Startup.cs*" で有効になっています。
 
@@ -108,6 +108,8 @@ URL パスのページへの関連付けは、ファイル システム内のペ
 Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。 [モデル バインド](xref:mvc/models/model-binding)、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで "*機能します*"。 `Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。
 
 このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) ファイルで `DbContext` が初期化されます。
+
+インメモリ データベースには、`Microsoft.EntityFrameworkCore.InMemory` NuGet パッケージが必要です。
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
 
@@ -340,13 +342,13 @@ HTML で削除ボタンがレンダリングされる場合、その [formaction
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF および Razor ページ
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF および Razor ページ
 
 Razor ページは、[偽造防止検証](xref:security/anti-request-forgery)によって保護されます。 [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) により HTML フォーム要素に偽造防止トークンが挿入されます。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用
 
 ページは、Razor ビュー エンジンのすべての機能で動作します。 レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml*"、" *_ViewImports.cshtml*" は、従来の Razor ビューの場合と同じように動作します。
 
@@ -585,13 +587,13 @@ URL 内のクエリ文字列 `?handler=JoinList` が気に入らない場合は�
 
 ビューをプリコンパイルするには、[Razor ビューのコンパイル](xref:mvc/views/view-compilation)に関するページをご覧ください。
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Razor Pages をコンテンツのルートに指定する
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>Razor Pages をコンテンツのルートに指定する
 
 Razor Pages のルートは既定で */Pages* ディレクトリです。 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> を追加して、Razor ページをアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) に置くように指定します。
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Razor Pages をカスタム ルート ディレクトリに指定する
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>Razor Pages をカスタム ルート ディレクトリに指定する
 
 (相対パスを指定して) Razor ページをアプリのカスタム ルート ディレクトリに置くように指定するには、<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> を追加します。
 
@@ -642,7 +644,7 @@ Razor ページは、ページ コーディングに重点を置いたシナリ�
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>Razor ページ プロジェクトを作成する
+## <a name="create-a-no-locrazor-pages-project"></a>Razor ページ プロジェクトを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -660,7 +662,7 @@ Visual Studio for Mac から生成された *.csproj* ファイルを開きま�
 
 ---
 
-## <a name="razor-pages"></a>Razor Pages
+## <a name="no-locrazor-pages"></a>Razor Pages
 
 Razor ページは "*Startup.cs*" で有効になっています。
 
@@ -860,13 +862,13 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF および Razor ページ
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF および Razor ページ
 
 [偽造防止検証](xref:security/anti-request-forgery)のためにコードを記述する必要はありません。 偽造防止トークンの生成と検証は、自動的に Razor ページに含まれます。
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用
 
 ページは、Razor ビュー エンジンのすべての機能で動作します。 レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml*"、" *_ViewImports.cshtml*" は、従来の Razor ビューと同じように動作します。
 
@@ -1094,7 +1096,7 @@ URL 内のクエリ文字列 `?handler=JoinList` が気に入らない場合は�
 
 この概要に基づく、[Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するページをご覧ください
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Razor Pages をコンテンツのルートに指定する
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>Razor Pages をコンテンツのルートに指定する
 
 Razor Pages のルートは既定で */Pages* ディレクトリです。 [WithRazorPagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) を [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) に追加して、Razor Pages をアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) に置くように指定します。
 
@@ -1107,7 +1109,7 @@ services.AddMvc()
     .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Razor Pages をカスタム ルート ディレクトリに指定する
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>Razor Pages をカスタム ルート ディレクトリに指定する
 
 (相対パスを指定して) Razor Pages をアプリのカスタム ルート ディレクトリに指定するには、[WithRazorPagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) を [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) に追加します。
 
