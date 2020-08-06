@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: a08993a7909d67be34446815b10d32089d9e0629
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 9f143523a6d02ac018ad2a869cc9d768ee25681f
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444151"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819264"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -356,6 +356,35 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | キー: `ConnectionStrings:{KEY}_ProviderName`:<br>値: `System.Data.SqlClient`  |
 | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | キー: `ConnectionStrings:{KEY}_ProviderName`:<br>値: `System.Data.SqlClient`  |
 
+## <a name="file-configuration-provider"></a>ファイル構成プロバイダー
+
+<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> は、ファイル システムから構成を読み込むための基本クラスです。 以下の構成プロバイダーは `FileConfigurationProvider` から派生したものです：
+
+* [INI 構成プロバイダー](#ini-configuration-provider)
+* [JSON 構成プロバイダー](#jcp)
+* [XML 構成プロバイダー](#xml-configuration-provider)
+
+### <a name="ini-configuration-provider"></a>INI 構成プロバイダー
+
+<xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> では、実行時に INI ファイルのキーと値のペアから構成が読み込まれます。
+
+次のコードは、すべての構成プロバイダーをクリアし、いくつかの構成プロバイダーを追加します：
+
+[!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
+
+上記のコードでは、*MyIniConfig.ini* と *MyIniConfig*.`Environment`.*ini* ファイルの設定は、以下の設定によってオーバーライドされます：
+
+* [環境変数構成プロバイダー](#evcp)
+* [コマンドライン構成プロバイダー](#clcp)。
+
+[サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) には、次の *MyIniConfig* ファイルが含まれます：
+
+[!code-ini[](index/samples/3.x/ConfigSample/MyIniConfig.ini)]
+
+[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) の次のコードでは、上記の構成設定のいくつかが表示されます:
+
+[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
+
 <a name="jcp"></a>
 
 ### <a name="json-configuration-provider"></a>JSON 構成プロバイダー
@@ -398,35 +427,6 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
 <a name="fcp"></a>
-
-## <a name="file-configuration-provider"></a>ファイル構成プロバイダー
-
-<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> は、ファイル システムから構成を読み込むための基本クラスです。 以下の構成プロバイダーは `FileConfigurationProvider` から派生したものです：
-
-* [INI 構成プロバイダー](#ini-configuration-provider)
-* [JSON 構成プロバイダー](#jcp)
-* [XML 構成プロバイダー](#xml-configuration-provider)
-
-### <a name="ini-configuration-provider"></a>INI 構成プロバイダー
-
-<xref:Microsoft.Extensions.Configuration.Ini.IniConfigurationProvider> では、実行時に INI ファイルのキーと値のペアから構成が読み込まれます。
-
-次のコードは、すべての構成プロバイダーをクリアし、いくつかの構成プロバイダーを追加します：
-
-[!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
-
-上記のコードでは、*MyIniConfig.ini* と *MyIniConfig*.`Environment`.*ini* ファイルの設定は、以下の設定によってオーバーライドされます：
-
-* [環境変数構成プロバイダー](#evcp)
-* [コマンドライン構成プロバイダー](#clcp)。
-
-[サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) には、次の *MyIniConfig* ファイルが含まれます：
-
-[!code-ini[](index/samples/3.x/ConfigSample/MyIniConfig.ini)]
-
-[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) の次のコードでは、上記の構成設定のいくつかが表示されます:
-
-[!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
 
 ### <a name="xml-configuration-provider"></a>XML 構成プロバイダー
 

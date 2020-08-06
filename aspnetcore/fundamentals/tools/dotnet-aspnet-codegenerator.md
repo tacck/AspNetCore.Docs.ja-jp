@@ -6,20 +6,20 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af151b65d3fefb5863529de1cd97c6315f11ca82
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405602"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444122"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -60,13 +60,13 @@ dotnet aspnet-codegenerator [-h|--help]
 
 実行するコード ジェネレーター。 次のジェネレーターを使用できます。
 
-| Generator | 操作 |
-| ----------------- | ------------ | 
-| area      | [区分のスキャフォールディング](/aspnet/core/mvc/controllers/areas) |
-  コントローラー| [コントローラーのスキャフォールディング](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  ID  | [[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [[Razor Pages のスキャフォールディング](/aspnet/core/tutorials/razor-pages/model) |
-  ビュー      | [ビューのスキャフォールディング](/aspnet/core/mvc/views/overview) |
+| Generator  | 操作                                                            |
+| ---------- | -------------------------------------------------------------------- |
+| area       | [区分のスキャフォールディング](xref:mvc/controllers/areas)                      |
+| コントローラー | [コントローラーのスキャフォールディング](xref:tutorials/first-mvc-app/adding-model)  |
+| ID   | [Identity のスキャフォールディング](xref:security/authentication/scaffold-identity) |
+| razorpage  | [Razor Pages のスキャフォールディング](xref:tutorials/razor-pages/model)            |
+| ビュー       | [ビューのスキャフォールディング](xref:mvc/views/overview)                          |
 
 ## <a name="options"></a>オプション
 
@@ -104,7 +104,7 @@ NuGet パッケージのディレクトリを指定します。
 
 * 区分
 * コントローラー
-* [Identity  
+* Identity  
 * Razorpage
 * View
 
@@ -112,7 +112,7 @@ NuGet パッケージのディレクトリを指定します。
 
 ### <a name="area-options"></a>Area のオプション
 
-このツールは、コントローラーとビューを含む ASP.NET Core Web プロジェクト用のものです。 [Razor Pages アプリ用ではありません。
+このツールは、コントローラーとビューを含む ASP.NET Core Web プロジェクト用のものです。 Razor Pages アプリ用ではありません。
 
 使用方法: `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
@@ -135,13 +135,13 @@ NuGet パッケージのディレクトリを指定します。
 
 `aspnet-codegenerator controller` に固有のオプションの一覧を次の表に示します。
 
-| オプション               | 説明|
-| ----------------- | ------------ |
-| --controllerName または -name | コントローラーの名前です。 |
-| --useAsyncActions または -async | 非同期コントローラー アクションを生成します。 |
-| --noViews または -nv | ビューを生成**しません**。 |
-| --restWithNoViews または -api  | REST スタイルの API でコントローラーを生成します。 `noViews` を前提とし、ビュー関連のオプションはすべて無視されます。 |
-| --readWriteActions または -actions | モデルなしで読み取り/書き込みアクションを備えたコントローラーを生成します。 |
+| オプション                         | 説明                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| --controllerName または -name      | コントローラーの名前です。                                                                                   |
+| --useAsyncActions または -async    | 非同期コントローラー アクションを生成します。                                                                        |
+| --noViews または -nv               | ビューを生成**しません**。                                                                                    |
+| --restWithNoViews または -api      | REST スタイルの API でコントローラーを生成します。 `noViews` を前提とし、ビュー関連のオプションはすべて無視されます。 |
+| --readWriteActions または -actions | モデルなしで読み取り/書き込みアクションを備えたコントローラーを生成します。                                              |
 
 `aspnet-codegenerator controller` コマンドに関するヘルプを取得するには、`-h` スイッチを使います。
 
@@ -149,13 +149,13 @@ NuGet パッケージのディレクトリを指定します。
 dotnet aspnet-codegenerator controller -h
 ```
 
-`dotnet aspnet-codegenerator controller` の例については、[映画モデルのスキャフォールディング](/aspnet/core/tutorials/razor-pages/model)に関する記事をご覧ください。
+`dotnet aspnet-codegenerator controller` の例については、[映画モデルのスキャフォールディング](xref:tutorials/first-mvc-app/adding-model)に関する記事をご覧ください。
 
-### <a name="razorpage"></a>Razorpage
+### <a name="no-locrazorpage"></a>Razorpage
 
 <a name="rp"></a>
 
-新しいページの名前と使用するテンプレートを指定すれば、[Razor Pages を個別にスキャフォールディングできます。 サポートされているテンプレートは次のとおりです。
+新しいページの名前と使用するテンプレートを指定すれば、Razor Pages を個別にスキャフォールディングできます。 サポートされているテンプレートは次のとおりです。
 
 * `Empty`
 * `Create`
@@ -184,11 +184,11 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 
 `aspnet-codegenerator razorpage` に固有のオプションの一覧を次の表に示します。
 
-| オプション               | 説明|
-| ----------------- | ------------ |
-|   --namespaceName または -namespace | 生成された PageModel に対して使用する名前空間の名前です |
-| --partialView または -partial | 部分ビューを生成します。 これを指定した場合、レイアウトのオプション -l と -udl は無視されます。 |
-| --noPageModel または -npm | 空のテンプレートの PageModel クラスを生成しない動作に切り替えます |
+| オプション                        | 説明                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------- |
+| --namespaceName または -namespace | 生成された PageModel に対して使用する名前空間の名前です                          |
+| --partialView または -partial     | 部分ビューを生成します。 これを指定した場合、レイアウトのオプション -l と -udl は無視されます。 |
+| --noPageModel または -npm         | 空のテンプレートの PageModel クラスを生成しない動作に切り替えます                           |
 
 `aspnet-codegenerator razorpage` コマンドに関するヘルプを取得するには、`-h` スイッチを使います。
 
@@ -196,8 +196,8 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-`dotnet aspnet-codegenerator razorpage` の例については、[映画モデルのスキャフォールディング](/aspnet/core/tutorials/razor-pages/model)に関する記事をご覧ください。
+`dotnet aspnet-codegenerator razorpage` の例については、[映画モデルのスキャフォールディング](xref:tutorials/razor-pages/model)に関する記事をご覧ください。
 
-### [Identity
+### Identity
 
-[[Identity のスキャフォールディング](/aspnet/core/security/authentication/scaffold-identity)に関する記事を参照してください。
+[Identity のスキャフォールディング](xref:security/authentication/scaffold-identity)に関する記事を参照してください。
