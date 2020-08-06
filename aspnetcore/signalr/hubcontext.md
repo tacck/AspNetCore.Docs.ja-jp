@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d38cb5b3e818879d3ec40a927acfdd69dc85377a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405810"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819251"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>ハブの外部からメッセージを送信する
 
@@ -28,7 +28,7 @@ ms.locfileid: "85405810"
 
 SignalRハブは、サーバーに接続されたクライアントにメッセージを送信するための中核的な抽象化です SignalR 。 また、サービスを使用して、アプリ内の他の場所からメッセージを送信することもでき `IHubContext` ます。 この記事では、にアクセスして、 SignalR `IHubContext` ハブの外部からクライアントに通知を送信する方法について説明します。
 
-[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) ([ダウンロード方法](xref:index#how-to-download-a-sample))
+[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
 
 ## <a name="get-an-instance-of-ihubcontext"></a>IHubContext のインスタンスを取得する
 
@@ -70,7 +70,7 @@ app.Use(async (context, next) =>
 
 ### <a name="get-an-instance-of-ihubcontext-from-ihost"></a>IHost から IHubContext のインスタンスを取得する
 
-`IHubContext`Web ホストからへのアクセスは、サードパーティの依存関係挿入フレームワークを使用するなど、ASP.NET Core の外部の領域と統合する場合に役立ちます。
+`IHubContext`Web ホストからへのアクセスは、サードパーティの依存関係挿入フレームワークを使用するなど、ASP.NET Core 外部の領域と統合する場合に役立ちます。
 
 ```csharp
     public class Program
@@ -114,5 +114,5 @@ public class ChatController : Controller
 ## <a name="related-resources"></a>関連リソース
 
 * [開始するには](xref:tutorials/signalr)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

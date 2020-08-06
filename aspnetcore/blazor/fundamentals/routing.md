@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 4f85c4a9803482f39446dda599f10829c9879f27
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: f7110688a7a03dd0cf533fa5f9759af3363169f8
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407763"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818938"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor のルーティング
+# <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor のルーティング
 
 作成者: [Luke Latham](https://github.com/guardrex)
 
@@ -43,7 +43,7 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントでは、指定されたルートによる各コンポーネントへのルーティングが可能になります。 <xref:Microsoft.AspNetCore.Components.Routing.Router> コンポーネントは `App.razor` ファイルに表示されます。
 
 ```razor
-<Router AppAssembly="typeof(Startup).Assembly">
+<Router AppAssembly="@typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
@@ -100,7 +100,7 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 
 ```razor
 <Router
-    AppAssembly="typeof(Program).Assembly"
+    AppAssembly="@typeof(Program).Assembly"
     AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
     ...
 </Router>
@@ -144,14 +144,14 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 
 | 制約 | 例           | 一致の例                                                                  | インバリアント<br>カルチャ<br>一致 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`、`FALSE`                                                                  | いいえ                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`、`2016-12-31 7:32pm`                                                | はい                              |
-| `decimal`  | `{price:decimal}` | `49.99`、`-1,000.01`                                                             | はい                              |
-| `double`   | `{weight:double}` | `1.234`、`-1,001.01e8`                                                           | はい                              |
-| `float`    | `{weight:float}`  | `1.234`、`-1,001.01e8`                                                           | はい                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`、`{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | いいえ                               |
-| `int`      | `{id:int}`        | `123456789`、`-123456789`                                                        | はい                              |
-| `long`     | `{ticks:long}`    | `123456789`、`-123456789`                                                        | はい                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | いいえ                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | はい                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | はい                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | はい                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | はい                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | いいえ                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | はい                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | はい                              |
 
 > [!WARNING]
 > URL の妥当性を検証し、CLR 型 (`int` や <xref:System.DateTime> など) に変換されるルート制約では、常にインバリアント カルチャが使用されます。 これらの制約では、URL がローカライズ不可であることが前提となります。
