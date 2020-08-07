@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408176"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913885"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core パフォーマンスのベストプラクティス
 
@@ -50,7 +50,7 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 **操作**:
 
 * [ホットコードパス](#understand-hot-code-paths)を非同期にします。
-* 非同期 API が使用可能な場合は、データアクセス、i/o、長時間実行される操作 Api を非同期に呼び出します。 Synchronus API を非同期にするために、 [Run](/dotnet/api/system.threading.tasks.task.run) **を使用しないでください。**
+* 非同期 API が使用可能な場合は、データアクセス、i/o、長時間実行される操作 Api を非同期に呼び出します。 同期 API を非同期にするには、Run**を使用しないでください** [。](/dotnet/api/system.threading.tasks.task.run)
 * コントローラー/ Razor ページのアクションを非同期にします。 非同期[/await](/dotnet/csharp/programming-guide/concepts/async/)パターンを活用するために、呼び出し履歴全体が非同期になります。
 
 [Perfview](https://github.com/Microsoft/perfview)などのプロファイラーを使用して、[スレッドプール](/windows/desktop/procthread/thread-pools)に頻繁に追加されるスレッドを見つけることができます。 イベントは、スレッド `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` プールに追加されたスレッドを示します。 <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -108,7 +108,7 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 
 ## <a name="keep-common-code-paths-fast"></a>共通コードパスを高速に保つ
 
-すべてのコードが高速になるようにします。 頻繁に呼び出されるコードパスは、最適化するうえで最も重要なものです。 次の設定があります。
+すべてのコードが高速になるようにします。 頻繁に呼び出されるコードパスは、最適化するうえで最も重要なものです。 これには以下が含まれます。
 
 * アプリケーションの要求処理パイプラインのミドルウェアコンポーネント (特に、ミドルウェアはパイプラインの早い段階で実行されます)。 これらのコンポーネントは、パフォーマンスに大きな影響を与えます。
 * 要求ごとに、または要求ごとに複数回実行されるコード。 たとえば、カスタムログ、承認ハンドラー、または一時的なサービスの初期化などです。
@@ -146,7 +146,7 @@ ASP.NET Core アプリに対するほとんどの要求は、必要なサービ�
 
 ## <a name="use-the-latest-aspnet-core-release"></a>最新の ASP.NET Core リリースを使用する
 
-ASP.NET Core の新しいリリースにはそれぞれ、パフォーマンスが向上しています。 .NET Core と ASP.NET Core での最適化により、新しいバージョンの方が以前のバージョンより高い値になります。 たとえば、.NET Core 2.1 では、コンパイルされた正規表現と享受を[スパン \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)からサポートするようになりました。 ASP.NET Core 2.2 では、HTTP/2 のサポートが追加されました。 [ASP.NET Core 3.0](xref:aspnetcore-3.0)では、メモリ使用量を減らし、スループットを向上させる多くの機能強化が加えられています。 パフォーマンスが優先される場合は、現在のバージョンの ASP.NET Core にアップグレードすることを検討してください。
+ASP.NET Core の新しいリリースにはそれぞれ、パフォーマンスが向上しています。 .NET Core と ASP.NET Core での最適化により、新しいバージョンの方が以前のバージョンより高い値になります。 たとえば、.NET Core 2.1 では、コンパイルされた正規表現と享受を[スパン \<T> ](/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay)からサポートするようになりました。 ASP.NET Core 2.2 では、HTTP/2 のサポートが追加されました。 [ASP.NET Core 3.0](xref:aspnetcore-3.0)では、メモリ使用量を減らし、スループットを向上させる多くの機能強化が加えられています。 パフォーマンスが優先される場合は、現在のバージョンの ASP.NET Core にアップグレードすることを検討してください。
 
 ## <a name="minimize-exceptions"></a>例外を最小化する
 
@@ -192,7 +192,7 @@ ASP.NET Core の i/o はすべて非同期です。 サーバーは、 `Stream` 
 
 ## <a name="prefer-readformasync-over-requestform"></a>要求で ReadFormAsync を優先します。フォーム
 
-`HttpContext.Request.ReadFormAsync` の代わりに `HttpContext.Request.Form`を使用します。
+`HttpContext.Request.Form` ではなく `HttpContext.Request.ReadFormAsync` を使用します。
 `HttpContext.Request.Form`は、次の条件で安全に読み取ることができます。
 
 * フォームは、の呼び出しによって読み取られました。 `ReadFormAsync`

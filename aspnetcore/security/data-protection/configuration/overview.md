@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 65ef506d5857afb71113a0309613a2cbd82893be
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 096862b7149679c14e3d1ca17d38468a14e438a2
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399544"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913868"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core データ保護の構成
 
@@ -357,7 +357,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズ >= 64 ビットである必要があります。また、PKCS #7 パディングによる CBC モードの暗号化をサポートしている必要があります。 ハッシュアルゴリズムのダイジェストサイズは >= 128 ビットである必要があり、BCRYPT \_ ALG \_ HANDLE \_ HMAC フラグフラグを使用して開くことがサポートされている必要があり \_ ます。 \*プロバイダーのプロパティを null に設定すると、指定したアルゴリズムの既定のプロバイダーを使用できます。 詳細については、 [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx)のドキュメントを参照してください。
+> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズ >= 64 ビットである必要があります。また、PKCS #7 パディングによる CBC モードの暗号化をサポートしている必要があります。 ハッシュアルゴリズムのダイジェストサイズは >= 128 ビットである必要があり、BCRYPT \_ ALG \_ HANDLE \_ HMAC フラグフラグを使用して開くことがサポートされている必要があり \_ ます。 \*プロバイダーのプロパティを null に設定すると、指定したアルゴリズムの既定のプロバイダーを使用できます。 詳細については、 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider)のドキュメントを参照してください。
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -400,7 +400,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズは正確に128ビットである必要があり、GCM 暗号化をサポートしている必要があります。 指定されたアルゴリズムの既定のプロバイダーを使用するには、 [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider)プロパティを null に設定します。 詳細については、 [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx)のドキュメントを参照してください。
+> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズは正確に128ビットである必要があり、GCM 暗号化をサポートしている必要があります。 指定されたアルゴリズムの既定のプロバイダーを使用するには、 [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider)プロパティを null に設定します。 詳細については、 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider)のドキュメントを参照してください。
 
 ### <a name="specifying-other-custom-algorithms"></a>その他のカスタムアルゴリズムの指定
 
@@ -415,7 +415,7 @@ services.AddDataProtection()
 
 ## <a name="persisting-keys-with-redis"></a>Redis でのキーの永続化
 
-キーを格納するには、 [Redis データの永続](/azure/azure-cache-for-redis/cache-how-to-premium-persistence)化をサポートする redis のバージョンのみを使用する必要があります。 [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction)は永続的で、キーを格納するために使用できます。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/AspNetCore/issues/13476)します。
+キーを格納するには、 [Redis データの永続](/azure/azure-cache-for-redis/cache-how-to-premium-persistence)化をサポートする redis のバージョンのみを使用する必要があります。 [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction)は永続的で、キーを格納するために使用できます。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/AspNetCore/issues/13476)のページを参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

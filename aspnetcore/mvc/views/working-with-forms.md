@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 7a92f2b5bc791f268b897878db08a9f9f4f7bf0c
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 833939417c4973c61eca4d41aaeabe7856680190
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212405"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913861"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core のフォームのタグ ヘルパー
 
@@ -89,7 +89,7 @@ MVC ランタイムで、フォーム タグ ヘルパーの属性 `asp-controll
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|ページの名前 Razor 。|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|ページハンドラーの名前 Razor 。|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|ルートの名前です。|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、「 `asp-route-id="1234"` 」のように入力します。|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、`asp-route-id="1234"` のようにします。|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|すべてのルート値です。|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL フラグメントです。|
 
@@ -191,26 +191,26 @@ public class HomeController : Controller
 
 * 厳密な型指定を提供します。 プロパティの名前が変更され、タグ ヘルパーを更新しない場合は、次のようなエラーが表示されます。
 
-```
-An error occurred during the compilation of a resource required to process
-this request. Please review the following specific error details and modify
-your source code appropriately.
+  ```
+  An error occurred during the compilation of a resource required to process
+  this request. Please review the following specific error details and modify
+  your source code appropriately.
 
-Type expected
- 'RegisterViewModel' does not contain a definition for 'Email' and no
- extension method 'Email' accepting a first argument of type 'RegisterViewModel'
- could be found (are you missing a using directive or an assembly reference?)
-```
+  Type expected
+   'RegisterViewModel' does not contain a definition for 'Email' and no
+   extension method 'Email' accepting a first argument of type 'RegisterViewModel'
+   could be found (are you missing a using directive or an assembly reference?)
+  ```
 
 `Input` タグ ヘルパーは、.NET 型に基づいて HTML `type` 属性を設定します。 次の表は、一般的な.NET 型と生成される HTML 型の一部をまとめたものです (すべての .NET 型を網羅した一覧ではありません)。
 
 |.NET 型|入力タイプ|
 |---|---|
 |Bool|type="checkbox"|
-|文字列型|type="text"|
+|String|type="text"|
 |DateTime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|type="number"|
-|Int|type="number"|
+|int|type="number"|
 |Single、Double|type="number"|
 
 次の表は、入力タグ ヘルパーが特定の入力の型にマップする一般的な[データ注釈](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter)属性の一部をまとめたものです (すべての検証属性を網羅した一覧ではありません)。

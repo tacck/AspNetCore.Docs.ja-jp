@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399531"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913818"
 ---
 # <a name="aspnet-core-data-protection"></a>データ保護の ASP.NET Core
 
@@ -53,7 +53,7 @@ ASP.NET Core データ保護スタックは、 &lt; &gt; ASP.NET 1.x-4.X の mac
 
 これらの原則を念頭に置いて、シンプルで使い[やすい](xref:security/data-protection/using-data-protection)データ保護スタックを開発しました。
 
-ASP.NET Core データ保護 Api は、主に機密ペイロードの永続的な永続化のためのものではありません。 [WINDOWS CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx)や[Azure Rights Management](/rights-management/)などのその他のテクノロジは、無期限のストレージのシナリオに適しています。また、強力なキー管理機能も備えています。 ただし、社外秘データの長期的な保護には、ASP.NET Core データ保護 Api を使用した開発者の禁止はありません。
+ASP.NET Core データ保護 Api は、主に機密ペイロードの永続的な永続化のためのものではありません。 [WINDOWS CNG DPAPI](/windows/win32/seccng/cng-dpapi)や[Azure Rights Management](/rights-management/)などのその他のテクノロジは、無期限のストレージのシナリオに適しています。また、強力なキー管理機能も備えています。 ただし、社外秘データの長期的な保護には、ASP.NET Core データ保護 Api を使用した開発者の禁止はありません。
 
 ## <a name="audience"></a>対象ユーザー
 

@@ -14,18 +14,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/dangerous-unprotect
-ms.openlocfilehash: a0b5bb29c509e8cc999b998776da3ab4ec27ec29
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 55a7ec4052b3ab47d5ff41bbce3fc3f9662f609c
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408397"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913848"
 ---
 # <a name="unprotect-payloads-whose-keys-have-been-revoked-in-aspnet-core"></a>キーが取り消されたペイロードの保護解除 ASP.NET Core
 
 <a name="data-protection-consumer-apis-dangerous-unprotect"></a>
 
-ASP.NET Core データ保護 Api は、主に機密ペイロードの永続的な永続化のためのものではありません。 [WINDOWS CNG DPAPI](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx)や[Azure Rights Management](/rights-management/)などのその他のテクノロジは、無期限のストレージのシナリオに適しています。また、強力なキー管理機能も備えています。 ただし、社外秘データの長期的な保護には、ASP.NET Core データ保護 Api を使用した開発者の禁止はありません。 キーがキーリングから削除されることはありません。そのため、キーが `IDataProtector.Unprotect` 使用可能で有効である限り、常に既存のペイロードを回復できます。
+ASP.NET Core データ保護 Api は、主に機密ペイロードの永続的な永続化のためのものではありません。 [WINDOWS CNG DPAPI](/windows/win32/seccng/cng-dpapi)や[Azure Rights Management](/rights-management/)などのその他のテクノロジは、無期限のストレージのシナリオに適しています。また、強力なキー管理機能も備えています。 ただし、社外秘データの長期的な保護には、ASP.NET Core データ保護 Api を使用した開発者の禁止はありません。 キーがキーリングから削除されることはありません。そのため、キーが `IDataProtector.Unprotect` 使用可能で有効である限り、常に既存のペイロードを回復できます。
 
 ただし、 `IDataProtector.Unprotect` この場合は例外がスローされるため、開発者が取り消されたキーで保護されたデータの保護を解除しようとすると、問題が発生します。 これは、短期間または一時的なペイロード (認証トークンなど) では問題になる可能性があります。これらの種類のペイロードはシステムによって簡単に再作成でき、少なくともサイトビジターが再度ログインする必要があるためです。 しかし、永続化されたペイロードの場合、throw を使用すると、 `Unprotect` 許容できないデータ損失につながる可能性があります。
 
