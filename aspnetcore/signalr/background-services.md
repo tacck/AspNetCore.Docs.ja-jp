@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409086"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022382"
 ---
-# <a name="host-aspnet-core-signalr-in-background-services"></a>SignalRバックグラウンドサービスでのホスト ASP.NET Core
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalRバックグラウンドサービスでのホスト ASP.NET Core
 
 [Brady](https://twitter.com/bradygaster)による
 
@@ -33,16 +35,16 @@ ms.locfileid: "85409086"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) ([ダウンロード方法](xref:index#how-to-download-a-sample))
+[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) ([ダウンロード方法](xref:index#how-to-download-a-sample))
+[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
 
 ::: moniker-end
 
-## <a name="enable-signalr-in-startup"></a>スタートアップで有効にする SignalR
+## <a name="enable-no-locsignalr-in-startup"></a>スタートアップで有効にする SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -90,7 +92,7 @@ SignalRバックグラウンドワーカープロセスのコンテキストで 
 
 ::: moniker-end
 
-## <a name="call-a-signalr-hub-from-a-background-service"></a>SignalRバックグラウンドサービスからハブを呼び出す
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a>SignalRバックグラウンドサービスからハブを呼び出す
 
 起動時に、クラスはを使用して `Worker` `BackgroundService` 有効になり `AddHostedService` ます。
 
@@ -113,7 +115,7 @@ SignalRはフェーズ中にも有効に `Startup` なるため、各ハブは A
 
 `ExecuteAsync`バックグラウンドサービスでメソッドが繰り返し呼び出されると、サーバーの現在の日付と時刻が、を使用して接続されたクライアントに送信され `ClockHub` ます。
 
-## <a name="react-to-signalr-events-with-background-services"></a>SignalRバックグラウンドサービスを使用したイベントへの対応
+## <a name="react-to-no-locsignalr-events-with-background-services"></a>SignalRバックグラウンドサービスを使用したイベントへの対応
 
 用の JavaScript クライアントを使用するシングルページアプリの場合と同様に、.NET デスクトップアプリではを使用してを使用できますが、またはの実装を使用して SignalR <xref:signalr/dotnet-client> `BackgroundService` `IHostedService` ハブに接続し、イベントに応答することもでき SignalR ます。
 
@@ -154,9 +156,9 @@ public partial class ClockHubClient : IClock, IHostedService
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [開始するには](xref:tutorials/signalr)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [厳密に型指定されたハブ](xref:signalr/hubs#strongly-typed-hubs)

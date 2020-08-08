@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 0c952502d58744bbbe06c92f51bd51bd547fb8ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213106"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020952"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core のビュー コンポーネント
 
@@ -189,7 +191,7 @@ ASP.NET Core 1.1 以降の場合は、[タグ ヘルパー](xref:mvc/views/tag-h
 * `InvokeAsync` ではビューから呼び出すことができるメソッドを表示し、任意の数の引数を取得できます。
 * `InvokeAsync` メソッドでは、`isDone` と `maxPriority` パラメーターを満たす `ToDo` 項目のセットを返します。
 
-### <a name="create-the-view-component-razor-view"></a>ビューコンポーネントビューを作成する Razor
+### <a name="create-the-view-component-no-locrazor-view"></a>ビューコンポーネントビューを作成する Razor
 
 * *Views/Shared/Components* フォルダーを作成します。 このフォルダーは、*Components* という名前にする**必要があります**。
 
@@ -351,6 +353,6 @@ public class PriorityList : ViewComponent
 * ViewComponent がマークアップをレンダリングしません。
 * エラーがスローされません。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)

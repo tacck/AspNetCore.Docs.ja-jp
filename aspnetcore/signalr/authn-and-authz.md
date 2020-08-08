@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 794465ceb69f47ee3d5cc8c100b321cb958d9cfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1e022c510dda3e39dd02d607f1d9c493aecdeb5a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407136"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021563"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core での認証と承認SignalR
+# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>ASP.NET Core での認証と承認SignalR
 
 By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
 [サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
-## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>ハブに接続しているユーザーを認証する SignalR
+## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>ハブに接続しているユーザーを認証する SignalR
 
 SignalR[ASP.NET Core 認証](xref:security/authentication/identity)と共に使用して、ユーザーを各接続に関連付けることができます。 ハブでは、 [HubConnectionContext](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user)プロパティから認証データにアクセスできます。 認証を使用すると、ユーザーに関連付けられているすべての接続で、ハブがメソッドを呼び出すことができます。 詳細については、「 [」の SignalR 「ユーザーとグループの管理](xref:signalr/groups)」を参照してください。 複数の接続を1人のユーザーに関連付けることができます。
 
@@ -86,15 +88,15 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="cookie-authentication"></a>Cookie 認証
+### <a name="no-loccookie-authentication"></a>Cookie 認証
 
-ブラウザーベースのアプリでは、cookie 認証によって、既存のユーザーの資格情報を自動的に接続に渡すことができ SignalR ます。 ブラウザークライアントを使用する場合、追加の構成は必要ありません。 ユーザーがアプリにログインしている場合、 SignalR 接続は自動的にこの認証を継承します。
+ブラウザーベースのアプリでは、 cookie 認証によって既存のユーザーの資格情報を自動的に接続に渡すことができ SignalR ます。 ブラウザークライアントを使用する場合、追加の構成は必要ありません。 ユーザーがアプリにログインしている場合、 SignalR 接続は自動的にこの認証を継承します。
 
-Cookie はアクセストークンを送信するためのブラウザー固有の方法ですが、ブラウザー以外のクライアントは送信できます。 [.Net クライアント](xref:signalr/dotnet-client)を使用する場合、 `Cookies` プロパティを `.WithUrl` 呼び出しでクッキーを指定するように構成できます。 ただし、.NET クライアントから cookie 認証を使用するには、アプリが cookie の認証データを交換するための API を提供する必要があります。
+Cookieは、アクセストークンを送信するためのブラウザー固有の方法ですが、ブラウザー以外のクライアントはそれらを送信できます。 [.Net クライアント](xref:signalr/dotnet-client)を使用する場合は、 `Cookies` `.WithUrl` を指定するための呼び出しでプロパティを構成でき cookie ます。 ただし、 cookie .net クライアントから認証を使用するには、アプリケーションがの認証データを交換するための API を提供する必要があり cookie ます。
 
 ### <a name="bearer-token-authentication"></a>ベアラー トークン認証
 
-クライアントは、cookie を使用する代わりにアクセストークンを提供できます。 サーバーはトークンを検証し、それを使用してユーザーを識別します。 この検証は、接続が確立された場合にのみ実行されます。 接続の有効期間中は、トークンの失効を確認するためにサーバーが自動的に再検証されることはありません。
+クライアントは、を使用する代わりに、アクセストークンを提供でき cookie ます。 サーバーはトークンを検証し、それを使用してユーザーを識別します。 この検証は、接続が確立された場合にのみ実行されます。 接続の有効期間中は、トークンの失効を確認するためにサーバーが自動的に再検証されることはありません。
 
 サーバーでは、[JWT ベアラー ミドルウェア](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)を使用してベアラー トークン認証が構成されます。
 
@@ -125,11 +127,11 @@ var connection = new HubConnectionBuilder()
 > [!NOTE]
 > クエリ文字列は、ブラウザー API の制限により、Websocket およびサーバーから送信されたイベントと接続するときにブラウザーで使用されます。 HTTPS を使用する場合、クエリ文字列の値は TLS 接続によって保護されます。 ただし、多くのサーバーはクエリ文字列の値をログに記録します。 詳細については、「 [ASP.NET Core SignalR のセキュリティに関する考慮事項](xref:signalr/security)」を参照してください。 SignalRはヘッダーを使用して、トークンをサポートする環境 (.NET や Java クライアントなど) でトークンを送信します。
 
-### <a name="cookies-vs-bearer-tokens"></a>Cookie とベアラートークン 
+### <a name="no-loccookies-vs-bearer-tokens"></a>Cookies およびベアラートークン 
 
-Cookie は、ブラウザーに固有のものです。 他の種類のクライアントから送信すると、ベアラートークンの送信と比較して複雑さが増します。 そのため、アプリがブラウザークライアントからのユーザーの認証のみを必要とする場合を除き、cookie 認証は推奨されません。 ベアラートークン認証は、ブラウザークライアント以外のクライアントを使用する場合に推奨される方法です。
+Cookieは、ブラウザーに固有のものです。 他の種類のクライアントから送信すると、ベアラートークンの送信と比較して複雑さが増します。 その cookie ため、アプリがブラウザークライアントからのユーザーの認証のみを必要とする場合を除き、認証は推奨されません。 ベアラートークン認証は、ブラウザークライアント以外のクライアントを使用する場合に推奨される方法です。
 
-### <a name="windows-authentication"></a>Windows 認証
+### <a name="windows-authentication"></a>[Windows 認証]
 
 アプリで[Windows 認証](xref:security/authentication/windowsauth)が構成されている場合、は SignalR その id を使用してハブをセキュリティで保護することができます。 ただし、個々のユーザーにメッセージを送信するには、カスタムユーザー ID プロバイダーを追加する必要があります。 Windows 認証システムは、"名前識別子" 要求を提供しません。 SignalRは、要求を使用してユーザー名を決定します。
 
@@ -296,7 +298,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [ASP.NET Core でのベアラートークン認証](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [リソースベースの承認](xref:security/authorization/resourcebased)

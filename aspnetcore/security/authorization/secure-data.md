@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160279"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021187"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する
 
@@ -71,7 +73,7 @@ ms.locfileid: "87160279"
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -425,7 +427,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 

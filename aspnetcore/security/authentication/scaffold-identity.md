@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a8ca520d84d382b95cd4c0e2962ba4e5c922049e
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464567"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022330"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>IdentityASP.NET Core プロジェクトでのスキャフォールディング
+# <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>IdentityASP.NET Core プロジェクトでのスキャフォールディング
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -52,7 +54,7 @@ Identity新しいデータコンテキストを使用して、既存の個別の
 
 通常、個別のアカウントで作成されたアプリは、新しいデータコンテキストを作成し***ない***ようにする必要があります。
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Identity空のプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Identity空のプロジェクトにスキャフォールディング
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -64,7 +66,7 @@ Identity新しいデータコンテキストを使用して、既存の個別の
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identity Razor 既存の承認なしでプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Identity Razor 既存の承認なしでプロジェクトにスキャフォールディング
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -117,7 +119,7 @@ Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されま�
 
 [!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 承認を使用してプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Identity Razor 承認を使用してプロジェクトにスキャフォールディング
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -134,7 +136,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 一部 Identity のオプションは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity既存の承認なしで MVC プロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Identity既存の承認なしで MVC プロジェクトにスキャフォールディング
 
 <!--
 set projNam=MvcNoAuth
@@ -168,7 +170,7 @@ Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されま�
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Identity承認を使用した MVC プロジェクトへのスキャフォールディング
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Identity承認を使用した MVC プロジェクトへのスキャフォールディング
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -180,7 +182,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Server 既存の承認なしでプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-without-existing-authorization"></a>Identity Blazor Server 既存の承認なしでプロジェクトにスキャフォールディング
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -194,7 +196,7 @@ Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されま�
 
 トークンは、次のようにコンポーネントに渡すことができます。
 
-* 認証トークンがプロビジョニングされ、認証 cookie に保存されると、コンポーネントに渡すことができます。
+* 認証トークンがプロビジョニングされ、認証に保存されると cookie 、コンポーネントに渡すことができます。
 * Razorコンポーネントでを直接使用することはできない `HttpContext` ため、のログアウトエンドポイントをに送信するための[要求防止偽造 (XSRF) トークン](xref:security/anti-request-forgery)を取得する方法はありません Identity `/Identity/Account/Logout` 。 XSRF トークンは、コンポーネントに渡すことができます。
 
 詳細については、「<xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>」を参照してください。
@@ -293,11 +295,11 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 ではページページが使用されるため、 Blazor Server Razor Identity ビジターがページとコンポーネントの間を移動すると、UI のスタイルが変更され Identity ます。 Incongruous スタイルに対処するには、次の2つのオプションがあります。
 
-#### <a name="build-identity-components"></a>ビルド Identity コンポーネント
+#### <a name="build-no-locidentity-components"></a>ビルド Identity コンポーネント
 
 ページではなくコンポーネントを使用する方法 Identity は、コンポーネントを構築することです Identity 。 `SignInManager`とは `UserManager` コンポーネントでサポートされていないため Razor 、アプリの API エンドポイントを使用して、 Blazor Server ユーザーアカウントの操作を処理します。
 
-#### <a name="use-a-custom-layout-with-blazor-app-styles"></a>アプリスタイルでカスタムレイアウトを使用する Blazor
+#### <a name="use-a-custom-layout-with-no-locblazor-app-styles"></a>アプリスタイルでカスタムレイアウトを使用する Blazor
 
 Identityページのレイアウトとスタイルを変更して、既定のテーマを使用するページを生成することができ Blazor ます。
 
@@ -362,7 +364,7 @@ Identityページのレイアウトとスタイルを変更して、既定のテ
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Server 承認を使用してプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-with-authorization"></a>Identity Blazor Server 承認を使用してプロジェクトにスキャフォールディング
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -370,7 +372,7 @@ Identityページのレイアウトとスタイルを変更して、既定のテ
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>完全な Identity UI ソースの作成
+## <a name="create-full-no-locidentity-ui-source"></a>完全な Identity UI ソースの作成
 
 UI の完全な制御を維持するには、scaffolder を実行し、 Identity Identity [**すべてのファイルを上書き**する] を選択します。
 
@@ -414,7 +416,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ユーザー登録を無効にするには:
 
-* スキャフォールディング Identity 。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 次に例を示します。
+* スキャフォールディング Identity 。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 例:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -476,11 +478,11 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 同様の方法で、運用環境のシナリオにも対応できます。
 
-## <a name="prevent-publish-of-static-identity-assets"></a>静的アセットの発行を禁止する Identity
+## <a name="prevent-publish-of-static-no-locidentity-assets"></a>静的アセットの発行を禁止する Identity
 
 静的なアセットが web ルートに発行されないようにするに Identity は、「」を参照してください <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> 。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 
@@ -501,7 +503,7 @@ Scaffolder を Identity 実行すると、プロジェクトディレクトリ�
 > [!NOTE]
 > サービスは、 [2 要素認証](xref:security/authentication/identity-enable-qrcodes)、アカウントの[確認とパスワードの回復](xref:security/authentication/accconfirm)、およびの他のセキュリティ機能を使用する場合に必要です Identity 。 サービスまたはサービススタブは、スキャフォールディング時に生成されません Identity 。 これらの機能を有効にするサービスは、手動で追加する必要があります。 たとえば、「[電子メールの確認を要求する](xref:security/authentication/accconfirm#require-email-confirmation)」を参照してください。
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Identity空のプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Identity空のプロジェクトにスキャフォールディング
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -513,7 +515,7 @@ Scaffolder を Identity 実行すると、プロジェクトディレクトリ�
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identity Razor 既存の承認なしでプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Identity Razor 既存の承認なしでプロジェクトにスキャフォールディング
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -558,7 +560,7 @@ Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されま�
 
 [!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor 承認を使用してプロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Identity Razor 承認を使用してプロジェクトにスキャフォールディング
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -575,7 +577,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 一部 Identity のオプションは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されています。 詳細については、「 [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration)」を参照してください。
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identity既存の承認なしで MVC プロジェクトにスキャフォールディング
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Identity既存の承認なしで MVC プロジェクトにスキャフォールディング
 
 <!--
 set projNam=MvcNoAuth
@@ -609,7 +611,7 @@ Identityは、 *Areas/ Identity / Identity HostingStartup.cs*で構成されま�
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Identity承認を使用した MVC プロジェクトへのスキャフォールディング
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Identity承認を使用した MVC プロジェクトへのスキャフォールディング
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -625,7 +627,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>完全な Identity UI ソースの作成
+## <a name="create-full-no-locidentity-ui-source"></a>完全な Identity UI ソースの作成
 
 UI の完全な制御を維持するには、scaffolder を実行し、 Identity Identity [**すべてのファイルを上書き**する] を選択します。
 
@@ -667,7 +669,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ユーザー登録を無効にするには:
 
-* スキャフォールディング Identity 。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 次に例を示します。
+* スキャフォールディング Identity 。 Account、Account. Login、および Account. RegisterConfirmation を含めます。 例:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -729,7 +731,7 @@ Web アプリの外部にユーザーを追加するためのメカニズムを�
 
 同様の方法で、運用環境のシナリオにも対応できます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [ASP.NET Core 2.1 以降に認証コードが変更された](xref:migration/20_21#changes-to-authentication-code)
 

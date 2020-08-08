@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 20561b2608b343d0c0bcf545cc9c48d1886b7cb9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406876"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022018"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core の構成プロバイダーの Azure Key Vault
 
@@ -85,7 +87,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
    * コード ブロックの右上隅にある **[使ってみる]** を選択します。 テキストボックス内の検索文字列 "Azure CLI" を使用します。
    * [ **Cloud Shell の起動**] ボタンを使用して、ブラウザーで Cloud Shell を開きます。
-   * Azure portal の右上隅にあるメニューの **[Cloud Shell]** ボタンを選択します。
+   * Azure portal の右上隅にあるメニューの [ **Cloud Shell** ] ボタンを選択します。
 
    詳細については、「 [Azure Cloud Shell の](/azure/cloud-shell/overview) [Azure CLI](/cli/azure/)と概要」を参照してください。
 
@@ -221,7 +223,7 @@ config.AddAzureKeyVault(
     });
 ```
 
-| プロパティ         | [説明] |
+| プロパティ         | 説明 |
 | ---------------- | ----------- |
 | `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>値を取得するために使用する。 |
 | `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>シークレットの読み込みを制御するために使用されるインスタンス。 |
@@ -326,7 +328,7 @@ JSON ファイルによって提供される次の[Serilog](https://serilog.net/
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| Key | [値] |
+| キー | 値 |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -360,7 +362,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
@@ -431,7 +433,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
    * コード ブロックの右上隅にある **[使ってみる]** を選択します。 テキストボックス内の検索文字列 "Azure CLI" を使用します。
    * [ **Cloud Shell の起動**] ボタンを使用して、ブラウザーで Cloud Shell を開きます。
-   * Azure portal の右上隅にあるメニューの **[Cloud Shell]** ボタンを選択します。
+   * Azure portal の右上隅にあるメニューの [ **Cloud Shell** ] ボタンを選択します。
 
    詳細については、「 [Azure Cloud Shell の](/azure/cloud-shell/overview) [Azure CLI](/cli/azure/)と概要」を参照してください。
 
@@ -653,7 +655,7 @@ JSON ファイルによって提供される次の[Serilog](https://serilog.net/
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| Key | [値] |
+| キー | 値 |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -687,7 +689,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)

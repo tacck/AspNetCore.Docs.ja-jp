@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a1182b793c7d05a11f0b5f16f4d406a9063f023
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408514"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021030"
 ---
-# <a name="manage-users-and-groups-in-signalr"></a>でのユーザーとグループの管理SignalR
+# <a name="manage-users-and-groups-in-no-locsignalr"></a>でのユーザーとグループの管理SignalR
 
 [Brennan Conroy](https://github.com/BrennanConroy)
 
 SignalR特定のユーザーに関連付けられているすべての接続、および名前付きの接続グループにメッセージを送信できるようにします。
 
-[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) ([ダウンロード方法](xref:index#how-to-download-a-sample))
+[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
 
-## <a name="users-in-signalr"></a>のユーザーSignalR
+## <a name="users-in-no-locsignalr"></a>のユーザーSignalR
 
 の1人のユーザー SignalR がアプリに対して複数の接続を持つことができます。 たとえば、ユーザーは自分のデスクトップや電話に接続することができます。 各デバイスには個別の接続があり SignalR ますが、これらはすべて同じユーザーに関連付けられています。 ユーザーにメッセージが送信されると、そのユーザーに関連付けられているすべての接続がメッセージを受信します。 接続のユーザー識別子には、ハブのプロパティからアクセスでき `Context.UserIdentifier` ます。
 
@@ -43,7 +45,7 @@ SignalR特定のユーザーに関連付けられているすべての接続、�
 
 [!code-csharp[Configure service](groups/sample/Hubs/ChatHub.cs?range=29-32)]
 
-## <a name="groups-in-signalr"></a>のグループSignalR
+## <a name="groups-in-no-locsignalr"></a>のグループSignalR
 
 グループとは、名前に関連付けられている接続のコレクションです。 メッセージは、グループ内のすべての接続に送信できます。 グループはアプリケーションによって管理されるため、接続または複数の接続に送信する方法としては、グループをお勧めします。 接続は、複数のグループのメンバーになることができます。 グループは、各部屋をグループとして表すことができるチャットアプリケーションのようなものに最適です。 接続は、メソッドとメソッドを使用してグループに追加されるか、グループから削除され `AddToGroupAsync` `RemoveFromGroupAsync` ます。
 
@@ -59,5 +61,5 @@ SignalR特定のユーザーに関連付けられているすべての接続、�
 ## <a name="related-resources"></a>関連リソース
 
 * [開始するには](xref:tutorials/signalr)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

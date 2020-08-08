@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405030"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022369"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API における Json パッチ
 
@@ -34,7 +36,7 @@ ms.locfileid: "85405030"
 アプリで JSON 修正プログラムのサポートを有効にするには、次の手順を実行します。
 
 1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet パッケージをインストールします。
-1. `Startup.ConfigureServices`を呼び出すようにプロジェクトのメソッドを更新し <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> ます。 次に例を示します。
+1. `Startup.ConfigureServices`を呼び出すようにプロジェクトのメソッドを更新し <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> ます。 例:
 
     ```csharp
     services
@@ -110,7 +112,7 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のようにします。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のように指定します。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 `add`配列の末尾には、 `-` インデックス番号ではなくハイフン () を使用し `/addresses/-` ます。
 
@@ -245,7 +247,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードを取得する
+## <a name="get-the-code"></a>コードの入手
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -256,7 +258,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)
@@ -322,7 +324,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のようにします。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のように指定します。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列の末尾への `add` では、インデックス番号ではなく、`/addresses/-` のようにハイフン (-) を使用します。
 
@@ -457,7 +459,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードを取得する
+## <a name="get-the-code"></a>コードの入手
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -468,7 +470,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)

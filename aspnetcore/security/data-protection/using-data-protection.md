@@ -5,6 +5,8 @@ description: ASP.NET Core データ保護 Api を使用して、アプリのデ�
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/using-data-protection
-ms.openlocfilehash: 1b0dc6756de55d9ce35eb08ca037e4d4b1fede75
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0d088e0e974742e51d9ca39a5cec5b84b46f5d21
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405615"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022434"
 ---
 # <a name="get-started-with-the-data-protection-apis-in-aspnet-core"></a>ASP.NET Core でのデータ保護 Api の概要
 
@@ -41,4 +43,4 @@ ASP.NET Core やなど、ほとんどのフレームワークとアプリケー�
 >[!TIP]
 > との `IDataProtectionProvider` インスタンス `IDataProtector` は、複数の呼び出し元に対してスレッドセーフです。 コンポーネントがへの呼び出しによってへの参照を取得すると、その `IDataProtector` `CreateProtector` 参照がとの複数の呼び出しに使用されることを意図して `Protect` `Unprotect` います。
 >
->保護された `Unprotect` ペイロードを検証または解読できない場合、の呼び出しは system.security.cryptography.cryptographicexception> をスローします。 コンポーネントによっては、保護解除操作中のエラーを無視することが必要になる場合があります。認証クッキーを読み取るコンポーネントは、このエラーを処理し、要求を完全に失敗させるのではなく、cookie がまったくないかのように要求を処理することがあります。 この動作を必要とするコンポーネントは、すべての例外を飲み込みするのではなく、System.security.cryptography.cryptographicexception> を明示的にキャッチする必要があります。
+>保護された `Unprotect` ペイロードを検証または解読できない場合、の呼び出しは system.security.cryptography.cryptographicexception> をスローします。 コンポーネントによっては、保護解除操作中のエラーを無視することが必要になる場合があります。認証を読み取るコンポーネントは、 cookie このエラーを処理し、要求を cookie 完全に失敗させるのではなく、まったく存在しないかのように要求を処理することがあります。 この動作を必要とするコンポーネントは、すべての例外を飲み込みするのではなく、System.security.cryptography.cryptographicexception> を明示的にキャッチする必要があります。

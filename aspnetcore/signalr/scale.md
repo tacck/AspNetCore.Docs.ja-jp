@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: cfa1a4c67649e1816f510a33cc53e559c4a59153
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2d128d54dc9b1189124563e45d72d74b19704ab1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408683"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022525"
 ---
-# <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR のホストとスケーリング
+# <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR のホストとスケーリング
 
 [Andrew](https://twitter.com/anurse)、 [Brady](https://twitter.com/bradygaster)、および[Tom Dykstra](https://github.com/tdykstra)によって、
 
@@ -48,7 +50,7 @@ Web サーバーがサポートできる同時 TCP 接続の数は制限され�
 
 によって接続関連のリソースが頻繁に使用 SignalR される場合、同じサーバー上でホストされている他の web アプリに影響を与えることがあります。 SignalRが開いていて、最後に使用可能な TCP 接続が保持されている場合、同じサーバー上の他の web アプリにも使用できる接続がありません。
 
-サーバーの接続が不足している場合は、ランダムソケットエラーと接続リセットエラーが表示されます。 次に例を示します。
+サーバーの接続が不足している場合は、ランダムソケットエラーと接続リセットエラーが表示されます。 例:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -62,15 +64,15 @@ An attempt was made to access a socket in a way forbidden by its access permissi
 
 を使用するアプリでは、 SignalR すべての接続を追跡する必要があります。これにより、サーバーファームに関する問題が発生します。 サーバーを追加すると、他のサーバーが認識していない新しい接続が取得されます。 たとえば、 SignalR 次の図の各サーバーでは、他のサーバー上の接続が認識されません。 SignalRいずれかのサーバーですべてのクライアントにメッセージを送信する場合、メッセージは、そのサーバーに接続されているクライアントのみに送信されます。
 
-![SignalRバックプレーンを使用しないスケーリング](scale/_static/scale-no-backplane.png)
+![スケーリング::: なし (SignalR)::: バックプレーンなし](scale/_static/scale-no-backplane.png)
 
 この問題を解決するためのオプションは、 [Azure SignalR サービス](#azure-signalr-service)と[Redis バックプレーン](#redis-backplane)です。
 
-## <a name="azure-signalr-service"></a>Azure SignalR Service
+## <a name="azure-no-locsignalr-service"></a>Azure SignalR Service
 
 Azure SignalR サービスは、バックプレーンではなくプロキシです。 クライアントがサーバーへの接続を開始するたびに、クライアントはサービスに接続するためにリダイレクトされます。 このプロセスを次の図に示します。
 
-![Azure サービスへの接続を確立する SignalR](scale/_static/azure-signalr-service-one-connection.png)
+![Azure::: no loc (SignalR)::: Service への接続を確立しています](scale/_static/azure-signalr-service-one-connection.png)
 
 その結果、次の図に示すように、サービスはすべてのクライアント接続を管理しますが、各サーバーにはサービスへの接続数をごくわずかにする必要があります。
 
@@ -126,7 +128,7 @@ proxy_set_header Connection $connection_upgrade;
 
 詳細については、「[WebSocket プロキシとしての NGINX](https://www.nginx.com/blog/websocket-nginx/)」を参照してください。
 
-## <a name="third-party-signalr-backplane-providers"></a>サードパーティ製 SignalR バックプレーンプロバイダー
+## <a name="third-party-no-locsignalr-backplane-providers"></a>サードパーティ製 SignalR バックプレーンプロバイダー
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)

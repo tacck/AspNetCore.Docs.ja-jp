@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 833939417c4973c61eca4d41aaeabe7856680190
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 3f5b0287a4f9c6c6c05a47297e3e602b80bf6015
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913861"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021485"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core のフォームのタグ ヘルパー
 
@@ -89,7 +91,7 @@ MVC ランタイムで、フォーム タグ ヘルパーの属性 `asp-controll
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|ページの名前 Razor 。|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|ページハンドラーの名前 Razor 。|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|ルートの名前です。|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、`asp-route-id="1234"` のようにします。|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、`asp-route-id="1234"` のように指定します。|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|すべてのルート値です。|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL フラグメントです。|
 
@@ -462,7 +464,7 @@ Razorコレクションを反復処理する方法を次に示します。
 |--- |--- |
 |ValidationSummary.All|プロパティとモデル レベル|
 |ValidationSummary.ModelOnly|モデル|
-|ValidationSummary.None|なし|
+|ValidationSummary.None|None|
 
 ### <a name="sample"></a>サンプル
 
@@ -499,7 +501,7 @@ Razorコレクションを反復処理する方法を次に示します。
 
 * HTML ヘルパーの代替の `Html.DropDownListFor` と `Html.ListBoxFor` があります
 
-`Select Tag Helper` `asp-for` は [select](https://www.w3.org/wiki/HTML/Elements/select) 要素のモデル プロパティ名を指定し、`asp-items` は [option](https://www.w3.org/wiki/HTML/Elements/option) 要素を指定します。  次に例を示します。
+`Select Tag Helper` `asp-for` は [select](https://www.w3.org/wiki/HTML/Elements/select) 要素のモデル プロパティ名を指定し、`asp-items` は [option](https://www.w3.org/wiki/HTML/Elements/option) 要素を指定します。  例:
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -670,7 +672,7 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 要素の追加�
  </form>
  ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:mvc/views/tag-helpers/intro>
 * [HTML の Form 要素](https://www.w3.org/TR/html401/interact/forms.html)

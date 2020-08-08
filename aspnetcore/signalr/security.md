@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 4e125fd6c4ad2cd4989d692dd28a63638218ee57
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400415"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022473"
 ---
-# <a name="security-considerations-in-aspnet-core-signalr"></a>ASP.NET Core のセキュリティに関する考慮事項SignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>ASP.NET Core のセキュリティに関する考慮事項SignalR
 
 By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
@@ -30,7 +32,7 @@ By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
 ## <a name="cross-origin-resource-sharing"></a>クロス オリジン リソース共有
 
-[クロスオリジンリソース共有 (CORS)](https://www.w3.org/TR/cors/)を使用して、ブラウザーでクロスオリジン接続を許可することができ SignalR ます。 JavaScript コードがアプリとは別のドメインでホストされている場合 SignalR 、javascript がアプリに接続できるようにするには、 [CORS ミドルウェア](xref:security/cors)を有効にする必要があり SignalR ます。 信頼または制御するドメインからのクロスオリジン要求を許可します。 次に例を示します。
+[クロスオリジンリソース共有 (CORS)](https://www.w3.org/TR/cors/)を使用して、ブラウザーでクロスオリジン接続を許可することができ SignalR ます。 JavaScript コードがアプリとは別のドメインでホストされている場合 SignalR 、javascript がアプリに接続できるようにするには、 [CORS ミドルウェア](xref:security/cors)を有効にする必要があり SignalR ます。 信頼または制御するドメインからのクロスオリジン要求を許可します。 例:
 
 * サイトがホストされている`http://www.example.com`
 * SignalRアプリがホストされている`http://signalr.example.com`
@@ -41,12 +43,12 @@ CORS の構成の詳細については、「[クロスオリジン要求 (cors) 
 
 * 想定される特定のオリジンを許可します。 配信元を許可することは可能ですが、安全でも推奨され**ません**。
 * HTTP メソッド `GET` と `POST` が許可されている必要があります。
-* Cookie ベースの固定セッションが正常に機能するためには、資格情報を許可する必要があります。 認証が使用されていない場合でも、有効にする必要があります。
+* cookieベースの固定セッションが正常に機能するためには、資格情報を許可する必要があります。 認証が使用されていない場合でも、有効にする必要があります。
 
 ::: moniker range=">= aspnetcore-5.0"
 
 ただし、5.0 では、資格情報を使用しないように TypeScript クライアントでオプションを提供しています。
-資格情報を使用しないオプションは、100% がわかっている場合にのみ使用してください。 Cookie のような資格情報は、アプリでは不要です (複数のサーバーを固定セッションで使用する場合は、azure app service によって cookie が使用されます)。
+資格情報を使用しないオプションは、100% がわかっている場合にのみ使用してください。のような資格情報 Cookie は、アプリでは必要ありません ( cookie では、複数のサーバーを使用して固定セッションを使用している場合、azure app service によって使用されます)。
 
 ::: moniker-end
 
@@ -120,7 +122,7 @@ ASP.NET Core 2.1 以降では、前に配置したカスタムミドルウェア
 
 ## <a name="access-token-logging"></a>アクセストークンのログ記録
 
-Websocket またはサーバー送信イベントを使用する場合、ブラウザークライアントはクエリ文字列にアクセストークンを送信します。 一般に、クエリ文字列を使用してアクセストークンを受け取ることは、標準ヘッダーを使用するようにセキュリティで保護され `Authorization` ます。 クライアントとサーバー間のセキュリティで保護されたエンドツーエンド接続を確保するには、常に HTTPS を使用します。 多くの web サーバーでは、クエリ文字列を含め、各要求の URL がログに記録されます。 Url をログに記録すると、アクセストークンがログに記録される場合があります。 では、各要求の URL が既定でログに記録されます。これには、クエリ文字列が含まれます。 ASP.NET Core 次に例を示します。
+Websocket またはサーバー送信イベントを使用する場合、ブラウザークライアントはクエリ文字列にアクセストークンを送信します。 一般に、クエリ文字列を使用してアクセストークンを受け取ることは、標準ヘッダーを使用するようにセキュリティで保護され `Authorization` ます。 クライアントとサーバー間のセキュリティで保護されたエンドツーエンド接続を確保するには、常に HTTPS を使用します。 多くの web サーバーでは、クエリ文字列を含め、各要求の URL がログに記録されます。 Url をログに記録すると、アクセストークンがログに記録される場合があります。 では、各要求の URL が既定でログに記録されます。これには、クエリ文字列が含まれます。 ASP.NET Core 例:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

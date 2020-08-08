@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: d38cb5b3e818879d3ec40a927acfdd69dc85377a
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: b9adc54c1928d6ec11f707b2bd5e1e297973f1ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819251"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021927"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>ハブの外部からメッセージを送信する
 

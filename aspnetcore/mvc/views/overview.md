@@ -5,6 +5,8 @@ description: ビューがアプリのデータ表示と、ASP.NET Core MVC で�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: b646908c070a51aac2e376c2acaa8e0e091790b0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8630df0ad8ea556c6edf0ab251b3c86493f751e2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400467"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020874"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC のビュー
 
@@ -371,11 +373,11 @@ public IActionResult SomeAction()
 
 * `ViewData`
   * は[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)から派生しているため、、、、などの便利なディクショナリプロパティを持つことができ `ContainsKey` `Add` `Remove` `Clear` ます。
-  * ディクショナリ内のキーは文字列なので、空白が許可されます。 例 : `ViewData["Some Key With Whitespace"]`
+  * ディクショナリ内のキーは文字列なので、空白が許可されます。 例: `ViewData["Some Key With Whitespace"]`
   * `ViewData` を使用するには、ビューで `string` 以外のすべての型をキャストする必要があります。
 * `ViewBag`
   * [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) から派生するため、ドット表記 (`@ViewBag.SomeKey = <value or object>`) を使用して動的プロパティを作成できます。キャストは必要ありません。 `ViewBag` の構文は、コントローラーとビューへの追加を高速化します。
-  * null 値のチェックを簡素化します。 例 : `@ViewBag.Person?.Name`
+  * null 値のチェックを簡素化します。 例: `@ViewBag.Person?.Name`
 
 **ViewData または ViewBag を使用する場合**
 

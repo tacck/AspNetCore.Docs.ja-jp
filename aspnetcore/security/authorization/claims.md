@@ -5,6 +5,8 @@ description: ASP.NET Core アプリで承認の要求チェックを追加する
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 404e26f0fb5e71dbc22b1c08a2f8caf8461ad7e1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 639cacbab2688adfe769ef2c6954ea877cf0c66a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406382"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022356"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core での要求ベースの承認
 
@@ -154,7 +156,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="multiple-policy-evaluation"></a>複数のポリシーの評価
 
-複数のポリシーをコントローラーまたはアクションに適用する場合は、アクセスが許可される前にすべてのポリシーを渡す必要があります。 次に例を示します。
+複数のポリシーをコントローラーまたはアクションに適用する場合は、アクセスが許可される前にすべてのポリシーを渡す必要があります。 例:
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: e319872799ef4994b55ba941956836f0848dd76d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5f55b56bd35a583e1f078a5a281788b68412e4f7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408540"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021693"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>ASP.NET Core のキー管理機能拡張
 
@@ -29,7 +31,7 @@ ms.locfileid: "85408540"
 > [!WARNING]
 > 次のインターフェイスのいずれかを実装する型は、複数の呼び出し元に対してスレッドセーフである必要があります。
 
-## <a name="key"></a>Key
+## <a name="key"></a>キー
 
 `IKey`インターフェイスは、cryptosystem のキーの基本的な表現です。 ここでは、"暗号化キーマテリアル" の意味ではなく、抽象的な意味で用語キーが使用されます。 キーには、次のプロパティがあります。
 

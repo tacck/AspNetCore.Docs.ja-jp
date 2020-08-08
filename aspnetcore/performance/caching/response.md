@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459767"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021342"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core での応答のキャッシュ
 
@@ -49,7 +51,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 キャッシュでロールを果たすその他のキャッシュヘッダーを次の表に示します。
 
-| Header                                                     | 関数 |
+| ヘッダー                                                     | 機能 |
 | ---------------------------------------------------------- | -------- |
 | [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 配信元サーバーで応答が生成または正常に検証されてからの、秒単位の推定時間。 |
 | [経過](https://tools.ietf.org/html/rfc7234#section-5.3) | 応答が古くなったと見なされるまでの時間。 |
@@ -101,7 +103,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 プロパティを設定するには、[応答キャッシュミドルウェア](xref:performance/caching/middleware)を有効にする必要があり <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> ます。 それ以外の場合は、ランタイム例外がスローされます。 プロパティに対応する HTTP ヘッダーがありません <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> 。 プロパティは、応答キャッシュミドルウェアによって処理される HTTP 機能です。 ミドルウェアがキャッシュされた応答を提供するには、クエリ文字列とクエリ文字列の値が以前の要求と一致している必要があります。 たとえば、次の表に示すような一連の要求と結果を考えてみましょう。
 
-| 要求                          | 結果                    |
+| Request                          | 結果                    |
 | -------------------------------- | ------------------------- |
 | `http://example.com?key1=value1` | サーバーから返されます。 |
 | `http://example.com?key1=value1` | ミドルウェアから返されます。 |
@@ -132,8 +134,8 @@ Vary: User-Agent
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>その他のほとんどのプロパティをオーバーライドします。 このプロパティがに設定されている場合 `true` 、 `Cache-Control` ヘッダーはに設定され `no-store` ます。 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>がに設定されている場合 `None` :
 
-* `Cache-Control` は `no-store,no-cache` に設定されます。
-* `Pragma` は `no-cache` に設定されます。
+* `Cache-Control` が `no-store,no-cache` に設定されます。
+* `Pragma` が `no-cache` に設定されます。
 
 がで、がである場合、 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> `false` およびは <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> `None` `Cache-Control` `Pragma` に設定され `no-cache` ます。
 
@@ -204,7 +206,7 @@ Cache-Control: public,max-age=10
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [キャッシュへの応答の格納](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

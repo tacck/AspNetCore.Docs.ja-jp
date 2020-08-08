@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: a11e6325143b9db57d6fbd1cd67478dc1dd6122d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568835"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021251"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
@@ -109,7 +111,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 小さいファイルのバッファーリングについては、後のセクションで説明します。
 
 * [物理ストレージ](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [[データベース]](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [データベース](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **ストリーミング**
 
@@ -250,7 +252,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次に例を示します。
+次のような例です。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -414,7 +416,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 次の例では、JavaScript を使用してファイルをコントローラーのアクションにストリーミングする方法を示します。 ファイルの偽造防止トークンは、カスタム フィルター属性を使用して生成され、要求本文ではなくクライアント HTTP ヘッダーに渡されます。 アクション メソッドではアップロードされたデータが直接処理されるため、フォーム モデル バインドは別のカスタム フィルターでは無効になります。 アクション内では、フォームのコンテンツが `MultipartReader` を使用して読み取られます。その場合、各 `MultipartSection` が読み取られ、必要に応じて、ファイルが処理されるかコンテンツが格納されます。 マルチパート セクションが読み取られた後、アクションで独自のモデル バインドが実行されます。
 
-最初のページ応答ではフォームが読み込まれ、Cookie に偽造防止トークンが保存されます (`GenerateAntiforgeryTokenCookieAttribute` 属性を使用)。 その属性では、ASP.NET Core の組み込みの[偽造防止サポート](xref:security/anti-request-forgery)を使用して、要求トークンで Cookie が設定されます。
+最初のページ応答では、フォームが読み込まれ、(属性を使用して) にアンチ偽造トークンが保存され cookie `GenerateAntiforgeryTokenCookieAttribute` ます。 属性は、ASP.NET Core の組み込みの[アンチ偽造サポート](xref:security/anti-request-forgery)を使用して、要求トークンを使用してを設定し cookie ます。
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -464,7 +466,7 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 ### <a name="file-extension-validation"></a>ファイル拡張子の検証
 
-アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 次に例を示します。
+アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 例:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -567,7 +569,7 @@ if (formFile.Length > _fileSizeLimit)
 
 フォームデータを Razor ポストするか、JavaScript の直接を使用する非フォームでは `FormData` 、フォームの要素で指定された名前、または `FormData` コントローラーのアクション内のパラメーターの名前と一致する必要があります。
 
-次に例を示します。
+次の例では
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 
@@ -836,7 +838,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 小さいファイルのバッファーリングについては、後のセクションで説明します。
 
 * [物理ストレージ](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [[データベース]](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [データベース](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **ストリーミング**
 
@@ -977,7 +979,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 > [!NOTE]
 > バインドでは、名前でフォーム ファイルが照合されます。 たとえば、HTML の `<input type="file" name="formFile">` の `name` の値は、バインドされた C# のパラメーター/プロパティと一致する必要があります (`FormFile`)。 詳細については、「[name 属性の値を POST メソッドのパラメーター名に一致させる](#match-name-attribute-value-to-parameter-name-of-post-method)」を参照してください。
 
-次に例を示します。
+次のような例です。
 
 * アップロードされた 1 つ以上のファイルをループします。
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) 使用して、ファイル名を含むファイルの完全なパスを返します。 
@@ -1141,7 +1143,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 次の例では、JavaScript を使用してファイルをコントローラーのアクションにストリーミングする方法を示します。 ファイルの偽造防止トークンは、カスタム フィルター属性を使用して生成され、要求本文ではなくクライアント HTTP ヘッダーに渡されます。 アクション メソッドではアップロードされたデータが直接処理されるため、フォーム モデル バインドは別のカスタム フィルターでは無効になります。 アクション内では、フォームのコンテンツが `MultipartReader` を使用して読み取られます。その場合、各 `MultipartSection` が読み取られ、必要に応じて、ファイルが処理されるかコンテンツが格納されます。 マルチパート セクションが読み取られた後、アクションで独自のモデル バインドが実行されます。
 
-最初のページ応答ではフォームが読み込まれ、Cookie に偽造防止トークンが保存されます (`GenerateAntiforgeryTokenCookieAttribute` 属性を使用)。 その属性では、ASP.NET Core の組み込みの[偽造防止サポート](xref:security/anti-request-forgery)を使用して、要求トークンで Cookie が設定されます。
+最初のページ応答では、フォームが読み込まれ、(属性を使用して) にアンチ偽造トークンが保存され cookie `GenerateAntiforgeryTokenCookieAttribute` ます。 属性は、ASP.NET Core の組み込みの[アンチ偽造サポート](xref:security/anti-request-forgery)を使用して、要求トークンを使用してを設定し cookie ます。
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -1191,7 +1193,7 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 ### <a name="file-extension-validation"></a>ファイル拡張子の検証
 
-アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 次に例を示します。
+アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 例:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1294,7 +1296,7 @@ if (formFile.Length > _fileSizeLimit)
 
 フォームデータを Razor ポストするか、JavaScript の直接を使用する非フォームでは `FormData` 、フォームの要素で指定された名前、または `FormData` コントローラーのアクション内のパラメーターの名前と一致する必要があります。
 
-次に例を示します。
+次の例では
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 

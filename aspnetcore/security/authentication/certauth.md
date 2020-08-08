@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568848"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021953"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -44,7 +46,7 @@ Web アプリで、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNet
 
 認証が失敗した場合、このハンドラーは、 `403 (Forbidden)` 予期したとおりに応答を返し `401 (Unauthorized)` ます。 これは、最初の TLS 接続中に認証が行われるということです。 ハンドラーに到達するまでには遅すぎます。 匿名接続から証明書を使用して接続をアップグレードする方法はありません。
 
-また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 次に例を示します。
+また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 例:
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -614,7 +616,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、「 `services.AddSingleton<ICertificateValidationCache, YourCache>()` 」のように入力します。
+既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、`services.AddSingleton<ICertificateValidationCache, YourCache>()` のように指定します。
 
 ::: moniker-end
 
@@ -636,7 +638,7 @@ ASP.NET Core 5 preview 7 以降では、オプションのクライアント証�
 
 * ドメインとサブドメインのバインドを設定します。
   * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
-  * 詳細については、次を参照してください。
+  * 詳細については次を参照してください:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>

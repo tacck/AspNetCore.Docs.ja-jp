@@ -5,6 +5,8 @@ description: IdentityASP.NET Core アプリで使用します。 パスワード
 ms.author: riande
 ms.date: 7/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 67bf24d8f871c4e80ed91f5f437895fe29e09087
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87160305"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021238"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>IdentityASP.NET Core の概要
 
@@ -48,7 +50,7 @@ Identityは、通常、ユーザー名、パスワード、およびプロファ
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-サンプルコード ([ダウンロード方法)](xref:index#how-to-download-a-sample)を[表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)します。
+[サンプルコードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 <a name="adi"></a>
 
@@ -77,7 +79,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-生成されたプロジェクトでは、 [ Razor クラスライブラリ](xref:razor-pages/ui-class)として[ASP.NET Core Identity ](xref:security/authentication/identity)が提供されます。 Identity Razor クラスライブラリは、領域と共にエンドポイントを公開し `Identity` ます。 次に例を示します。
+生成されたプロジェクトでは、 [ Razor クラスライブラリ](xref:razor-pages/ui-class)として[ASP.NET Core Identity ](xref:security/authentication/identity)が提供されます。 Identity Razor クラスライブラリは、領域と共にエンドポイントを公開し `Identity` ます。 例:
 
 * /Identity/Account/Login
 * /Identity/アカウント/ログアウト
@@ -184,7 +186,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 前のコードでは、 `return RedirectToPage();` ブラウザーが新しい要求を実行し、ユーザーの id が更新されるように、コードをリダイレクトにする必要があります。
 
-[Signoutasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)者は、cookie に格納されているユーザーの要求をクリアします。
+[署名](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)は、に格納されているユーザーの要求をクリア cookie します。
 
 Post は*Pages/Shared/_LoginPartial*に指定されています。
 
@@ -270,7 +272,7 @@ ASP.NET Core Identity は ASP.NET Core アプリにログイン機能を追加�
 
 IdentitySQL Server データベースを使用して、ユーザー名、パスワード、およびプロファイルデータを格納するように構成できます。 別の永続ストアを使用することもできます (たとえば、Azure Table Storage)。
 
-サンプルコード ([ダウンロード方法)](xref:index#how-to-download-a-sample)を[表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/)します。
+[サンプルコードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 このトピックでは、を使用し Identity てユーザーを登録、ログイン、ログアウトする方法について説明します。 を使用するアプリを作成する方法の詳細については Identity 、この記事の最後にある「次のステップ」を参照してください。
 
@@ -305,7 +307,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-生成されたプロジェクトでは、 [ Razor クラスライブラリ](xref:razor-pages/ui-class)として[ASP.NET Core Identity ](xref:security/authentication/identity)が提供されます。 Identity Razor クラスライブラリは、領域と共にエンドポイントを公開し `Identity` ます。 次に例を示します。
+生成されたプロジェクトでは、 [ Razor クラスライブラリ](xref:razor-pages/ui-class)として[ASP.NET Core Identity ](xref:security/authentication/identity)が提供されます。 Identity Razor クラスライブラリは、領域と共にエンドポイントを公開し `Identity` ます。 例:
 
 * /Identity/Account/Login
 * /Identity/アカウント/ログアウト
@@ -403,7 +405,7 @@ PowerShell では、コマンドの区切り記号としてセミコロンを使
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Logout.cshtml.cs)]
 
-[Signoutasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)者は、cookie に格納されているユーザーの要求をクリアします。
+[署名](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync)は、に格納されているユーザーの要求をクリア cookie します。
 
 Post は*Pages/Shared/_LoginPartial*に指定されています。
 

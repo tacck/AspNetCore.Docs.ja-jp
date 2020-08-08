@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: 91dab7764e6915ccacacf73f74861faaee532777
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e303679190a7d7f42d8525541cec031ba090fd7a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406226"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022304"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core で WS-FEDERATION を使用してユーザーを認証する
 
@@ -88,9 +90,9 @@ ASP.NET Core アプリの場合、WS-FEDERATION のサポートは[AspNetCore](h
 
 ![Azure Active Directory: アプリの登録のプロパティ](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-aspnet-core-identity"></a>ASP.NET Core せずに WS-FEDERATION を使用するIdentity
+## <a name="use-ws-federation-without-aspnet-core-no-locidentity"></a>ASP.NET Core せずに WS-FEDERATION を使用するIdentity
 
-WS-FEDERATION ミドルウェアは、なしで使用でき Identity ます。 次に例を示します。
+WS-FEDERATION ミドルウェアは、なしで使用でき Identity ます。 例:
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -99,7 +101,7 @@ WS-FEDERATION ミドルウェアは、なしで使用でき Identity ます。 �
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>ASP.NET Core の外部ログインプロバイダーとして WS-FEDERATION を追加します。Identity
+## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-no-locidentity"></a>ASP.NET Core の外部ログインプロバイダーとして WS-FEDERATION を追加します。Identity
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)への依存関係をプロジェクトに追加します。
 * WS-FEDERATION の追加先 `Startup.ConfigureServices` :

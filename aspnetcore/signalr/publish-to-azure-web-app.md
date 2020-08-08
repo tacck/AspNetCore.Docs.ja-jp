@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3163a2743c544d0a07d92eb7547e77c3b200ac83
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408839"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022538"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>SignalRAzure App Service に ASP.NET Core アプリを発行する
+# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalRAzure App Service に ASP.NET Core アプリを発行する
 
 [Brady](https://twitter.com/bradygaster)による
 
@@ -43,16 +45,16 @@ ms.locfileid: "85408839"
 
    [ **App Service の作成**] ダイアログで、次の表に記載されている情報を入力し、[**作成**] を選択します。
 
-   | 項目               | 説明 |
+   | Item               | 説明 |
    | ------------------ | ----------- |
-   | **名前**           | アプリの一意の名前。 |
-   | **サブスクリプション**   | アプリが使用する Azure サブスクリプション。 |
-   | **リソース グループ** | アプリが所属する関連リソースのグループ。 |
+   | **Name**           | アプリの一意の名前。 |
+   | **[サブスクリプション]**   | アプリが使用する Azure サブスクリプション。 |
+   | **[リソース グループ]** | アプリが所属する関連リソースのグループ。 |
    | **ホスティング プラン**   | Web アプリの料金プラン。 |
 
 1. [**依存関係**の追加] ドロップダウンリストで**Azure SignalR サービス**を選択し  >  **Add**ます。
 
-   ![SignalR[追加] ドロップダウンリストでの Azure サービスの選択を示す [依存関係] 領域](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![[追加] ドロップダウンリストに表示されている Azure::: no-loc (SignalR)::: Service の選択を示す [依存関係] 領域](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. [ **Azure SignalR サービス**] ダイアログで、[**新しい Azure SignalR サービスインスタンスの作成**] を選択します。
 
@@ -78,7 +80,7 @@ Preview .NET Core リリースを対象とするアプリをデプロイする�
 
 Azure サービスを使用せずにホストされるアプリの場合は SignalR 、次を有効にします。
 
-* [ARR アフィニティ](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html)は、ユーザーから同じ App Service インスタンスに要求をルーティングします。 既定の設定は**On**です。
+* [ARR Affinity]( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie -(ARR- cookie ) -for-Azure-web-apps.html) ユーザーから同じ App Service インスタンスに要求をルーティングします。 既定の設定は**On**です。
 * Web ソケットトランスポートを機能させるための[Web ソケット](xref:fundamentals/websockets)。 既定の設定は [**オフ**] です。
 
 1. Azure portal で、 **App Services**内の web アプリに移動します。
@@ -90,7 +92,7 @@ Azure サービスを使用せずにホストされるアプリの場合は Sign
 
 Web ソケットとその他のトランスポートは、選択した App Service プランに基づいて制限されます。 詳細については、azure[サブスクリプションとサービスの制限、クォータ、制約](/azure/azure-subscription-service-limits#app-service-limits)に関する記事の*azure Cloud Services の制限*と*App Service の制限事項*に関するセクションを参照してください。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [Azure サービスとは SignalR](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>

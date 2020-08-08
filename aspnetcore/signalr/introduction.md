@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6f3cec83c9af5ec6e820db4a15061eddac613f36
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404952"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022174"
 ---
-# <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core SignalR の概要
+# <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core SignalR の概要
 
-## <a name="what-is-signalr"></a>SignalR の概要
+## <a name="what-is-no-locsignalr"></a>SignalR の概要
 
 ASP.NET Core SignalR は、リアルタイムの web 機能をアプリに簡単に追加できるオープンソースライブラリです。 リアルタイム web 機能を使用すると、サーバー側のコードでクライアントにコンテンツを瞬時にプッシュできます。
 
@@ -64,9 +66,9 @@ SignalRは、*ハブ*を使用してクライアントとサーバー間の通�
 
 ハブは、クライアント側のメソッドの名前とパラメーターを含むメッセージを送信することによって、クライアント側のコードを呼び出します。 メソッドパラメーターとして送信されるオブジェクトは、構成されたプロトコルを使用して逆シリアル化されます。 クライアントは、クライアント側コードのメソッドと名前を一致させようとします。 クライアントが一致を検出すると、メソッドを呼び出し、逆シリアル化されたパラメーターデータに渡します。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [For ASP.NET Core を使ってみる SignalR](xref:tutorials/signalr)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)

@@ -5,6 +5,8 @@ description: この記事では、ASP.NET Core の基になる Entity Framework 
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4e6d91de013755f1ae998e36481f4c3b659270ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399167"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022005"
 ---
-# <a name="identity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core でのモデルのカスタマイズ
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core でのモデルのカスタマイズ
 
 [Arthur ヴィッカース](https://github.com/ajcvickers)
 
 ASP.NET Core Identity は ASP.NET Core アプリでユーザーアカウントを管理および格納するためのフレームワークを提供します。 Identityは、認証メカニズムとして**個々のユーザーアカウント**が選択されたときにプロジェクトに追加されます。 既定では、は Identity Entity Framework (EF) コアデータモデルを使用します。 この記事では、モデルをカスタマイズする方法について説明し Identity ます。
 
-## <a name="identity-and-ef-core-migrations"></a>Identityおよび EF Core 移行
+## <a name="no-locidentity-and-ef-core-migrations"></a>Identityおよび EF Core 移行
 
 モデルを調べる前に、 Identity [EF Core の移行](/ef/core/managing-schemas/migrations/)を使用してデータベースを作成および更新する方法を理解しておくと役に立ちます。 最上位レベルでは、プロセスは次のようになります。
 
@@ -52,13 +54,13 @@ ASP.NET Core には、開発時エラーページハンドラーがあります�
 
 モデルが変更されたときに、上記の手順を繰り返します。
 
-## <a name="the-identity-model"></a>Identityモデル
+## <a name="the-no-locidentity-model"></a>Identityモデル
 
 ### <a name="entity-types"></a>エンティティの種類
 
 モデルは、 Identity 次のエンティティ型で構成されます。
 
-|エンティティの種類|[説明]                                                  |
+|エンティティの種類|説明                                                  |
 |-----------|-------------------------------------------------------------|
 |`User`     |ユーザーを表します。                                         |
 |`Role`     |ロールを表します。                                           |
@@ -217,7 +219,7 @@ Identity上に示した各エンティティ型に対して、既定の[共通�
 
 これらの型を直接使用するのではなく、アプリケーション独自の型の基底クラスとして型を使用できます。 `DbContext`によって定義さ Identity れるクラスはジェネリックであるため、モデル内の1つ以上のエンティティ型に異なる CLR 型を使用できます。 これらのジェネリック型を使用すると、 `User` 主キー (PK) データ型を変更することもできます。
 
-ロールのサポートを使用する場合は Identity 、 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> クラスを使用する必要があります。 次に例を示します。
+ロールのサポートを使用する場合は Identity 、 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> クラスを使用する必要があります。 例:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -355,7 +357,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-*区分/ Identity /IdentityHostingStartup.cs*を更新するか `Startup.ConfigureServices` 、をに置き換え `IdentityUser` `ApplicationUser` ます。
+*区分/ Identity / Identity HostingStartup.cs*を更新するか `Startup.ConfigureServices` 、を `IdentityUser` に置き換え `ApplicationUser` ます。
 
 ```csharp
 services.AddIdentity<ApplicationUser>()
@@ -432,7 +434,7 @@ PK の種類を変更するには、次の手順に従います。
 
     ::: moniker-end
 
-4. カスタムクラスが使用されている場合は `ApplicationUser` 、継承元のクラスを更新し `IdentityUser` ます。 次に例を示します。
+4. カスタムクラスが使用されている場合は `ApplicationUser` 、継承元のクラスを更新し `IdentityUser` ます。 例:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -500,7 +502,7 @@ PK の種類を変更するには、次の手順に従います。
 
     ::: moniker-end
 
-5. カスタムクラスが使用されている場合は `ApplicationRole` 、継承元のクラスを更新し `IdentityRole<TKey>` ます。 次に例を示します。
+5. カスタムクラスが使用されている場合は `ApplicationRole` 、継承元のクラスを更新し `IdentityRole<TKey>` ます。 例:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -949,7 +951,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>別のスキーマにマップする
 
-スキーマは、データベースプロバイダーによって動作が異なります。 SQL Server の場合、既定では*dbo*スキーマのすべてのテーブルが作成されます。 テーブルは、別のスキーマで作成できます。 次に例を示します。
+スキーマは、データベースプロバイダーによって動作が異なります。 SQL Server の場合、既定では*dbo*スキーマのすべてのテーブルが作成されます。 テーブルは、別のスキーマで作成できます。 例:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -985,7 +987,7 @@ services
 
 エンティティ型へのナビゲーションプロパティの追加に関するガイダンスについては、前の例を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/authentication/scaffold-identity>
 

@@ -5,6 +5,8 @@ description: クロスサイトスクリプティング (XSS) と、ASP.NET Core
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: a94fe1612c023468238f09a91ddb0346b65d52ba
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 24fab313c3af30cfd4143ba29a33ba25bfcdf9a9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408020"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021810"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core でクロスサイトスクリプティング (XSS) を防止する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-クロスサイトスクリプティング (XSS) はセキュリティの脆弱性であり、攻撃者がクライアント側のスクリプト (通常は JavaScript) を web ページに配置できるようにします。 他のユーザーが影響を受けるページを読み込むと、攻撃者のスクリプトが実行されるので、攻撃者は cookie やセッショントークンを盗んだり、DOM 操作を通じて web ページの内容を変更したり、ブラウザーを別のページにリダイレクトしたりできます。 XSS 脆弱性は一般的に、アプリケーションがユーザー入力を受け取り、それを検証、エンコード、またはエスケープせずにページに出力するときに発生します。
+クロスサイトスクリプティング (XSS) はセキュリティの脆弱性であり、攻撃者がクライアント側のスクリプト (通常は JavaScript) を web ページに配置できるようにします。 他のユーザーが影響を受けたページを読み込むと、攻撃者のスクリプトが実行され、攻撃者が s およびセッショントークンを盗むことができ cookie ます。また、DOM 操作を通じて web ページの内容を変更したり、ブラウザーを別のページにリダイレクトしたりすることができます。 XSS 脆弱性は一般的に、アプリケーションがユーザー入力を受け取り、それを検証、エンコード、またはエスケープせずにページに出力するときに発生します。
 
 ## <a name="protecting-your-application-against-xss"></a>XSS からアプリケーションを保護する
 
@@ -40,7 +42,7 @@ ms.locfileid: "85408020"
 
 5. 信頼されていないデータを URL クエリ文字列に含める前に、URL がエンコードされていることを確認してください。
 
-## <a name="html-encoding-using-razor"></a>を使用した HTML エンコードRazor
+## <a name="html-encoding-using-no-locrazor"></a>を使用した HTML エンコードRazor
 
 RazorMVC で使用されるエンジンでは、そのような処理を回避することが難しい場合を除き、変数からのすべての出力ソースが自動的にエンコードされます。 ディレクティブを使用すると、常に HTML 属性のエンコード規則が使用さ *@* れます。 Html 属性のエンコードは HTML エンコーディングのスーパーセットなので、HTML エンコーディングと HTML 属性のどちらを使用する必要があるかについては、それを気にする必要はありません。 信頼されていない入力を JavaScript に直接挿入しようとする場合は、HTML コンテキストでのみ @ を使用する必要があります。 タグヘルパーでは、タグパラメーターで使用する入力もエンコードされます。
 
@@ -63,9 +65,9 @@ RazorMVC で使用されるエンジンでは、そのような処理を回避�
 >[!WARNING]
 > MVC ASP.NET Core は、 `HtmlString` 出力時に自動的にエンコードされないクラスを提供します。 これは XSS 脆弱性を公開するため、信頼されていない入力と組み合わせて使用しないでください。
 
-## <a name="javascript-encoding-using-razor"></a>を使用した JavaScript のエンコードRazor
+## <a name="javascript-encoding-using-no-locrazor"></a>を使用した JavaScript のエンコードRazor
 
-JavaScript に値を挿入して、ビューで処理することが必要になる場合があります。 これには、2 つの方法があります。 値を挿入する最も安全な方法は、タグのデータ属性に値を配置し、JavaScript で値を取得することです。 次に例を示します。
+JavaScript に値を挿入して、ビューで処理することが必要になる場合があります。 これには、2 つの方法があります。 値を挿入する最も安全な方法は、タグのデータ属性に値を配置し、JavaScript で値を取得することです。 例:
 
 ```cshtml
 @{
@@ -174,7 +176,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>エンコード URL パラメーター
 
-信頼できない入力を含む URL クエリ文字列を値として作成する場合は、を使用して `UrlEncoder` 値をエンコードします。 たとえば、オブジェクトに適用された
+信頼できない入力を含む URL クエリ文字列を値として作成する場合は、を使用して `UrlEncoder` 値をエンコードします。 たとえば、
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

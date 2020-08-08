@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409099"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021836"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core でのログ記録と診断SignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断SignalR
 
 By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
@@ -102,11 +104,11 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 
 詳細設定を構成すると、ログはブラウザーコンソール (または NodeJS アプリの標準出力) に書き込まれます。
 
-カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。 実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。 次に例を示します。
+カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。 実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。 例:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
-## <a name="net-client-logging"></a>.NET クライアントのログ記録
+## <a name="net-client-logging"></a> .NET クライアント ログ
 
 > [!WARNING]
 > クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
@@ -218,11 +220,11 @@ GitHub の問題に診断ファイルを添付するには、名前を変更し�
 
 メトリックは、一定期間のデータ測定値を表します。 たとえば、1秒あたりの要求です。 メトリックデータを使用すると、アプリの状態を高レベルで監視できます。 .NET gRPC メトリックは <xref:System.Diagnostics.Tracing.EventCounter> を使用して出力されます。
 
-### <a name="signalr-server-metrics"></a>SignalRサーバーメトリック
+### <a name="no-locsignalr-server-metrics"></a>SignalRサーバーメトリック
 
 SignalRサーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。
 
-| 名前                    | [説明]                 |
+| 名前                    | 説明                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 開始された接続の合計   |
 | `connections-stopped`   | 停止した接続の合計数   |
@@ -247,7 +249,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

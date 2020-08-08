@@ -5,6 +5,8 @@ description: 電子メールの確認とパスワードのリセットを使用�
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 7016c2c1997d961f4b3d3cf513fc1769bd65247b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464554"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021615"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core でのアカウントの確認とパスワードの回復
 
@@ -67,7 +69,7 @@ SendGrid アカウントでは、[送信者の追加](https://sendgrid.com/docs/
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid ユーザーシークレットの構成
 
-とを `SendGridUser` 、 `SendGridKey` [シークレットマネージャーツール](xref:security/app-secrets)を使用して設定します。 次に例を示します。
+とを `SendGridUser` 、 `SendGridKey` [シークレットマネージャーツール](xref:security/app-secrets)を使用して設定します。 例:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -235,7 +237,7 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 
 [.NET Core 2.2 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-identity"></a>Web アプリとスキャフォールディングを作成するIdentity
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Web アプリとスキャフォールディングを作成するIdentity
 
 認証を使用して web アプリを作成するには、次のコマンドを実行します。
 
@@ -287,7 +289,7 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid ユーザーシークレットの構成
 
-とを `SendGridUser` 、 `SendGridKey` [シークレットマネージャーツール](xref:security/app-secrets)を使用して設定します。 次に例を示します。
+とを `SendGridUser` 、 `SendGridKey` [シークレットマネージャーツール](xref:security/app-secrets)を使用して設定します。 例:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT

@@ -5,6 +5,8 @@ description: ASP.NET Core のオープンソースの認証オプションを検
 ms.author: riande
 ms.date: 10/28/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/community
-ms.openlocfilehash: 8f99294b6aa51eae350b3fa3f356b0b4807d0e58
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a4e32f8525447e0adb543730cd26296775d40e11
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403132"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020991"
 ---
 # <a name="community-oss-authentication-options-for-aspnet-core"></a>ASP.NET Core のコミュニティ OSS 認証オプション
 
@@ -28,11 +30,11 @@ ms.locfileid: "85403132"
 
 次の一覧はアルファベット順に並べ替えられています。
 
-| 名前 | [説明] |
+| 名前 | 説明 |
 | ---- | ----------- |
 | [AspNet. Security. OpenIdConnect. サーバー (ASOS)](https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Server) | ASOS は、ASP.NET Core および OWIN/Katana 用の低レベルのプロトコル優先の OpenID Connect サーバーフレームワークです。 |
 | [Gluu サーバー](https://gluu.org/) | Id、アクセス管理 (IAM)、シングルサインオン (SSO) 用のエンタープライズ対応のオープンソースソフトウェア。 詳細については、 [Gluu の製品ドキュメント](https://gluu.org/docs/)を参照してください。 |
-| [IdentityServer](https://identityserver.io/) | サービスは、openid Connect と OAuth 2.0 フレームワークを ASP.NET Core に使用します。これは、OpenID Foundation および .NET Foundation のガバナンスによって正式に認定されています。 詳細については、「 [Welcome To IdentityServer4 (ドキュメント)](https://identityserver4.readthedocs.io/en/latest/)」を参照してください。 |
+| [IdentityServer](https://identityserver.io/) | Identityサーバーは ASP.NET Core 用の OpenID Connect および OAuth 2.0 フレームワークであり、OpenID Foundation および .NET Foundation のガバナンスによって正式に認定されています。 詳細については、「 [Welcome to Identity サーバー 4 (ドキュメント)](https://identityserver4.readthedocs.io/en/latest/)」を参照してください。 |
 | [OpenIddict](https://github.com/openiddict/openiddict-core) | OpenIddict は、ASP.NET Core 用の使いやすい OpenID Connect サーバーです。 |
 
 プロバイダーを追加するには、[このページを編集](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Faspnet%2FDocs%2Fedit%2Fmaster%2Faspnetcore%2Fsecurity%2Fauthentication%2Fcommunity.md)します。

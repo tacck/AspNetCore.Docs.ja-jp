@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406395"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020939"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core のメモリ管理とガベージコレクション (GC)
 
@@ -355,7 +357,7 @@ public async Task<int> GetHttpClient2(string url)
 * [HttpClient と有効期間の管理](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
 * [HTTPClient ファクトリのブログ](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
-### <a name="object-pooling"></a>オブジェクトプール
+### <a name="object-pooling"></a>オブジェクト プーリング
 
 前の例では、 `HttpClient` インスタンスを静的にし、すべての要求で再利用する方法を示しました。 再利用すると、リソースが不足するのを防ぐことができます。
 
@@ -440,7 +442,7 @@ public byte[] GetPooledArray(int size)
 
 主な違いは、バイトが割り当てられ、その結果、ジェネレーション0のコレクションがはるかに少ないことです。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [ガベージ コレクション](/dotnet/standard/garbage-collection/)
 * [同時実行ビジュアライザーを使用したさまざまな GC モードについて](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

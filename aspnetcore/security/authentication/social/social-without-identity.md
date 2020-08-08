@@ -5,6 +5,8 @@ description: ASP.NET Core のない Facebook、Google、Twitter などのアカ�
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: ed908526604b04f9aebb93935aa3ad4719621526
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 73055a262ac69c0fd6a7f59e77d23121e71ea3dd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406044"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021667"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>ASP.NET Core せずにソーシャルサインインプロバイダー認証を使用するIdentity
+# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-no-locidentity"></a>ASP.NET Core せずにソーシャルサインインプロバイダー認証を使用するIdentity
 
 [Kirk Larkin](https://twitter.com/serpent5)と[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -51,13 +53,13 @@ ms.locfileid: "85406044"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-アプリの `DefaultScheme` を[Cookieauthenticationdefaults に設定します。 authenticationscheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("cookie") は、これらの拡張メソッドの既定のスキームとして cookie を使用するようにアプリを構成します。 アプリのを <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") に設定すると、に対する呼び出しの既定のスキームとして Google を使用するようにアプリが構成されます `ChallengeAsync` 。 `DefaultChallengeScheme``DefaultScheme`をオーバーライドします。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>設定時にオーバーライドされる追加のプロパティについては、「」を参照してください `DefaultScheme` 。
+アプリの `DefaultScheme` を[ Cookie authenticationdefaults に設定します。 authenticationdefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") は、 Cookie これらの拡張メソッドの既定のスキームとして s を使用するようにアプリを構成します。 アプリのを <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") に設定すると、に対する呼び出しの既定のスキームとして Google を使用するようにアプリが構成されます `ChallengeAsync` 。 `DefaultChallengeScheme``DefaultScheme`をオーバーライドします。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>設定時にオーバーライドされる追加のプロパティについては、「」を参照してください `DefaultScheme` 。
 
 で、とを呼び出してから `Startup.Configure` `UseAuthentication` を呼び出し `UseAuthorization` `UseRouting` `UseEndpoints` ます。 これにより、プロパティが設定され、 `HttpContext.User` 要求の承認ミドルウェアが実行されます。
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Startup.cs?name=snippet2&highlight=3-4)]
 
-認証方式の詳細については、「[認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 Cookie 認証の詳細については、「」を参照してください <xref:security/authentication/cookie> 。
+認証方式の詳細については、「[認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 認証の詳細につい cookie ては、「」を参照してください <xref:security/authentication/cookie> 。
 
 ## <a name="apply-authorization"></a>承認の適用
 
@@ -67,13 +69,13 @@ ms.locfileid: "85406044"
 
 ## <a name="sign-out"></a>サインアウト
 
-現在のユーザーをサインアウトして cookie を削除するには、 [Signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス*ページにページハンドラーを追加します。
+現在のユーザーをサインアウトし、を削除するに cookie は、 [signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス*ページにページハンドラーを追加します。
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
 への呼び出しで認証スキームが指定されていないことに注意して `SignOutAsync` ください。 `DefaultScheme`のアプリ `CookieAuthenticationDefaults.AuthenticationScheme` はフォールバックとして使用されます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -106,13 +108,13 @@ ms.locfileid: "85406044"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-アプリの `DefaultScheme` を[Cookieauthenticationdefaults に設定します。 authenticationscheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("cookie") は、これらの拡張メソッドの既定のスキームとして cookie を使用するようにアプリを構成します。 アプリのを <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") に設定すると、に対する呼び出しの既定のスキームとして Google を使用するようにアプリが構成されます `ChallengeAsync` 。 `DefaultChallengeScheme``DefaultScheme`をオーバーライドします。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>設定時にオーバーライドされる追加のプロパティについては、「」を参照してください `DefaultScheme` 。
+アプリの `DefaultScheme` を[ Cookie authenticationdefaults に設定します。 authenticationdefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") は、 Cookie これらの拡張メソッドの既定のスキームとして s を使用するようにアプリを構成します。 アプリのを <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") に設定すると、に対する呼び出しの既定のスキームとして Google を使用するようにアプリが構成されます `ChallengeAsync` 。 `DefaultChallengeScheme``DefaultScheme`をオーバーライドします。 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>設定時にオーバーライドされる追加のプロパティについては、「」を参照してください `DefaultScheme` 。
 
 メソッドで、 `Configure` メソッドを呼び出し `UseAuthentication` て、プロパティを設定する認証ミドルウェアを呼び出し `HttpContext.User` ます。 `UseAuthentication`またはを呼び出す前に、メソッドを呼び出し `UseMvcWithDefaultRoute` `UseMvc` ます。
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Startup.cs?name=snippet2)]
 
-認証方式の詳細については、「[認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 Cookie 認証の詳細については、「」を参照してください <xref:security/authentication/cookie> 。
+認証方式の詳細については、「[認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 認証の詳細につい cookie ては、「」を参照してください <xref:security/authentication/cookie> 。
 
 ## <a name="apply-authorization"></a>承認の適用
 
@@ -122,13 +124,13 @@ ms.locfileid: "85406044"
 
 ## <a name="sign-out"></a>サインアウト
 
-現在のユーザーをサインアウトして cookie を削除するには、 [Signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス*ページにページハンドラーを追加します。
+現在のユーザーをサインアウトし、を削除するに cookie は、 [signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス*ページにページハンドラーを追加します。
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
 への呼び出しで認証スキームが指定されていないことに注意して `SignOutAsync` ください。 `DefaultScheme`のアプリ `CookieAuthenticationDefaults.AuthenticationScheme` はフォールバックとして使用されます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>

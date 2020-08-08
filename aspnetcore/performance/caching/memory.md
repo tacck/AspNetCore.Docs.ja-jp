@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 8eec361efbc3c7dca6c0bef65b6f6b40b3b46798
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 131fd5f2d09b20814cbd557d6b6d873ce15501db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404614"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021225"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 内のメモリ内のキャッシュ
 
@@ -118,7 +120,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 
 インスタンスでは、 `MemoryCache` 必要に応じてサイズ制限を指定して適用できます。 キャッシュには、エントリのサイズを測定する機構がないため、キャッシュサイズの制限には定義済みの測定単位がありません。 キャッシュサイズの制限が設定されている場合、すべてのエントリでサイズを指定する必要があります。 ASP.NET Core ランタイムでは、メモリ負荷に基づいてキャッシュサイズが制限されません。 キャッシュサイズを制限するのは開発者だけです。 指定されたサイズは、開発者が選択した単位で示されます。
 
-次に例を示します。
+例:
 
 * Web アプリが主に文字列をキャッシュしている場合は、各キャッシュエントリのサイズを文字列の長さにすることができます。
 * アプリでは、すべてのエントリのサイズを1と指定することができ、サイズ制限はエントリの数です。
@@ -192,7 +194,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 
 などの[バックグラウンドサービス](xref:fundamentals/host/hosted-services)を使用して <xref:Microsoft.Extensions.Hosting.IHostedService> キャッシュを更新します。 バックグラウンドサービスでは、エントリを再計算して、準備ができたときにのみキャッシュに割り当てることができます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>
@@ -294,7 +296,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 
 インスタンスでは、 `MemoryCache` 必要に応じてサイズ制限を指定して適用できます。 キャッシュには、エントリのサイズを測定する機構がないため、キャッシュサイズの制限には定義済みの測定単位がありません。 キャッシュサイズの制限が設定されている場合、すべてのエントリでサイズを指定する必要があります。 ASP.NET Core ランタイムでは、メモリ負荷に基づいてキャッシュサイズが制限されません。 キャッシュサイズを制限するのは開発者だけです。 指定されたサイズは、開発者が選択した単位で示されます。
 
-次に例を示します。
+例:
 
 * Web アプリが主に文字列をキャッシュしている場合は、各キャッシュエントリのサイズを文字列の長さにすることができます。
 * アプリでは、すべてのエントリのサイズを1と指定することができ、サイズ制限はエントリの数です。
@@ -363,7 +365,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 
 などの[バックグラウンドサービス](xref:fundamentals/host/hosted-services)を使用して <xref:Microsoft.Extensions.Hosting.IHostedService> キャッシュを更新します。 バックグラウンドサービスでは、エントリを再計算して、準備ができたときにのみキャッシュに割り当てることができます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>

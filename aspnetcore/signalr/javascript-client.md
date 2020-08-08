@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 8c7acad42f3a49ccf1bc60f8ae5b4f68a602d97b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 04200ced41113eb9a68cefc2f485f2d3798476c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406928"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022343"
 ---
-# <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
 作成者: [Rachel Appel](https://twitter.com/rachelappel)
 
@@ -30,7 +32,7 @@ ASP.NET Core SignalR JavaScript クライアントライブラリを使用する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="install-the-signalr-client-package"></a>クライアントパッケージをインストールする SignalR
+## <a name="install-the-no-locsignalr-client-package"></a>クライアントパッケージをインストールする SignalR
 
 SignalRJavaScript クライアントライブラリは[npm](https://www.npmjs.com/)パッケージとして配信されます。 次のセクションでは、さまざまな方法でクライアントライブラリをインストールする方法について説明します。
 
@@ -60,7 +62,7 @@ npm は、 *node_modules \\ @aspnet\signalr\dist\browser *フォルダーにパ�
 
 ::: moniker-end
 
-SignalR要素で JavaScript クライアントを参照し `<script>` ます。 次に例を示します。
+SignalR要素で JavaScript クライアントを参照し `<script>` ます。 例:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -68,7 +70,7 @@ SignalR要素で JavaScript クライアントを参照し `<script>` ます。 
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network を使用する (CDN)
 
-Npm の前提条件なしでクライアントライブラリを使用するには、CDN でホストされるクライアントライブラリのコピーを参照します。 次に例を示します。
+Npm の前提条件なしでクライアントライブラリを使用するには、CDN でホストされるクライアントライブラリのコピーを参照します。 例:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -309,12 +311,12 @@ const connection = new signalR.HubConnectionBuilder()
 
 実際の実装では、指数バックオフを使用するか、指定された回数の再試行を行います。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [JavaScript API リファレンス](/javascript/api/?view=signalr-js-latest)
 * [JavaScript のチュートリアル](xref:tutorials/signalr)
 * [WebPack と TypeScript のチュートリアル](xref:tutorials/signalr-typescript-webpack)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [クロスオリジン要求 (CORS)](xref:security/cors)

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399713"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020835"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core の部分ビュー
 
@@ -80,7 +82,7 @@ MVC ビューのレンダリングとは異なり、部分ビューは *_ViewSta
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>PageModel ページで部分ビューを使用する Razor
+### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>PageModel ページで部分ビューを使用する Razor
 
 ASP.NET Core 2.0 または2.1 で、次のハンドラーメソッドは、 * \_ authorpartialrp. cshtml*部分ビューを応答にレンダリングします。
 
@@ -345,7 +347,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 >
 > しかし、広義では、我々が献身することはできない...
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 ::: moniker range=">= aspnetcore-2.1"
 

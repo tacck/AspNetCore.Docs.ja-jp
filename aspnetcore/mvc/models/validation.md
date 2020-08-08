@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: e76ddad795237991c49bf2a3b1ca840795989260
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c0edf56c966cb90c1c308f300a8944d392fdc0e7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404913"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020978"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>MVC とページ ASP.NET Core でのモデルの検証 Razor
+# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>MVC とページ ASP.NET Core でのモデルの検証 Razor
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,13 +74,13 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 
 ### <a name="error-messages"></a>エラー メッセージ
 
-検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 次に例を示します。
+検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 例:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 次に例を示します。
+内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 例:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -436,19 +438,19 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 * `[Url]`: プロパティに URL 形式があることを検証します。
 * `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]` 属性](#remote-attribute)」を参照してください。
 
-クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/corefx/issues/42487)します。
+クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/corefx/issues/42487)のページを参照してください。
 
 検証属性の完全な一覧については、[System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 名前空間で確認できます。
 
 ### <a name="error-messages"></a>エラー メッセージ
 
-検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 次に例を示します。
+検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 例:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 次に例を示します。
+内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 例:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -756,7 +758,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 クライアント検証を無効にするもう 1 つのオプションは、*.cshtml* ファイルで `_ValidationScriptsPartial` への参照をコメントにすることです。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [System.ComponentModel.DataAnnotations 名前空間](xref:System.ComponentModel.DataAnnotations)
 * [モデルバインド](model-binding.md)

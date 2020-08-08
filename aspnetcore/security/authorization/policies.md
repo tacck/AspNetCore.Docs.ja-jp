@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 03d6e7fdc4ab4b5e4925508952bfd6c835d90486
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160170"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021277"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core でのポリシーベースの承認
 
@@ -119,13 +121,13 @@ public void ConfigureServices(IServiceCollection services)
 
 ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
 
-ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 例:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 例:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -174,7 +176,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="handler-registration"></a>ハンドラーの登録
 
-ハンドラーは、構成中にサービスコレクションに登録されます。 次に例を示します。
+ハンドラーは、構成中にサービスコレクションに登録されます。 例:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -227,7 +229,7 @@ public void ConfigureServices(IServiceCollection services)
 
 `HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
 
-エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。 エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。 次に例を示します。
+エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。 エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。 例:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -355,13 +357,13 @@ public void ConfigureServices(IServiceCollection services)
 
 ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages)」を参照してください。
 
-ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 例:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 例:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -408,7 +410,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="handler-registration"></a>ハンドラーの登録
 
-ハンドラーは、構成中にサービスコレクションに登録されます。 次に例を示します。
+ハンドラーは、構成中にサービスコレクションに登録されます。 例:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 

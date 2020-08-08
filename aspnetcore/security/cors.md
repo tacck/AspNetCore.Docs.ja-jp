@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: ee640ded37f40175e3e150f713fa970e9705b62c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212890"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021108"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core でのクロスオリジン要求 (CORS) を有効にする
 
@@ -79,7 +81,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,32)]
 
-上記のコードでは、次のことが行われます。
+上記のコードでは次の操作が行われます。
 
 * ポリシー名をに設定 `_myAllowSpecificOrigins` します。 ポリシー名は任意です。
 * 拡張メソッドを呼び出し、 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> CORS ポリシーを指定し `_myAllowSpecificOrigins` ます。 `UseCors`CORS ミドルウェアを追加します。 への呼び出しは `UseCors` `UseRouting` 、の後、の前に配置する必要があり `UseAuthorization` ます。 詳細については、「[ミドルウェアの順序](xref:fundamentals/middleware/index#middleware-order)」を参照してください。
@@ -123,7 +125,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
-上記のコードにより、次のことが行われます。
+上のコードでは以下の操作が行われます。
 
 * `app.UseCors`CORS ミドルウェアを有効にします。 既定のポリシーが構成されていないため、 `app.UseCors()` 単独で CORS を有効にすることはできません。
 * `/echo`およびコントローラーエンドポイントは、指定されたポリシーを使用して、クロスオリジン要求を許可します。
@@ -184,7 +186,7 @@ CORS 要求を制限する最も細かい制御:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet&highlight=1,23)]
 
-上記のコードでは、次のことが行われます。
+上記のコードでは次の操作が行われます。
 
 * [エンドポイントルーティング](#ecors)で CORS を有効にしません。
 * [既定の CORS ポリシー](#dp)は定義されていません。
@@ -272,7 +274,7 @@ CORS 仕様は、これらのヘッダーの*単純な応答ヘッダー*を呼�
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a>クロスオリジン要求の資格情報
 
-資格情報では、CORS 要求で特別な処理を行う必要があります。 既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。 資格情報には、cookie と HTTP 認証スキームが含まれます。 クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。
+資格情報では、CORS 要求で特別な処理を行う必要があります。 既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。 資格情報には cookie 、および HTTP 認証スキームが含まれます。 クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。
 
 直接の使用 `XMLHttpRequest` :
 
@@ -617,7 +619,7 @@ C:\Program Files\Git\mingw64\bin\
 
 配置されたサンプルの[テストページ](https://cors1.azurewebsites.net/test?number=2)から、前のコードをテストします。 [**コントローラー** ] ドロップダウンリストで、[**プレフライト**] を選択し、[**コントローラーの設定**] をクリックします。 エンドポイントに対するすべての CORS 呼び出しが `TodoItems2Controller` 成功します。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
@@ -665,7 +667,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
-上記のコードでは、次のことが行われます。
+上記のコードでは次の操作が行われます。
 
 * ポリシー名を " \_ myallow固有のオリジン" に設定します。 ポリシー名は任意です。
 * <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>CORS を有効にする拡張メソッドを呼び出します。
@@ -819,7 +821,7 @@ CORS 仕様は、これらのヘッダーの*単純な応答ヘッダー*を呼�
 
 ### <a name="credentials-in-cross-origin-requests"></a>クロスオリジン要求の資格情報
 
-資格情報では、CORS 要求で特別な処理を行う必要があります。 既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。 資格情報には、cookie と HTTP 認証スキームが含まれます。 クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。
+資格情報では、CORS 要求で特別な処理を行う必要があります。 既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。 資格情報には cookie 、および HTTP 認証スキームが含まれます。 クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。
 
 直接の使用 `XMLHttpRequest` :
 
@@ -988,7 +990,7 @@ Test message
 CORS をテストするには:
 
 1. [API プロジェクトを作成](xref:tutorials/first-web-api)します。 または、[サンプルをダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)することもできます。
-1. このドキュメントのいずれかの方法を使用して CORS を有効にします。 次に例を示します。
+1. このドキュメントのいずれかの方法を使用して CORS を有効にします。 例:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 
@@ -1023,7 +1025,7 @@ CORS が有効なエンドポイントは、 [Fiddler](https://www.telerik.com/f
 
 IIS に展開する場合、サーバーが匿名アクセスを許可するように構成されていない場合、CORS は Windows 認証の前に実行する必要があります。 このシナリオをサポートするには、アプリ用に[IIS CORS モジュール](https://www.iis.net/downloads/microsoft/iis-cors-module)をインストールして構成する必要があります。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)

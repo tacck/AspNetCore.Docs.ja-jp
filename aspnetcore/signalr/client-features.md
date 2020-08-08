@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 10752e8cace82dc08721af7d38c0250182e9bfb0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4f5fa2f4ff1ac3d00b04845aedc26fb0118b9991
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408488"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021472"
 ---
-# <a name="aspnet-core-signalr-clients"></a>ASP.NET Core SignalR クライアント
+# <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR クライアント
 
 ## <a name="versioning-support-and-compatibility"></a>バージョン管理、サポート、および互換性
 
@@ -57,9 +59,9 @@ SignalRクライアントはサーバーコンポーネントと共に出荷さ�
 
 その他のクライアント機能の有効化のサポートは[、microsoft の問題追跡ツール](https://github.com/dotnet/AspNetCore/issues)で追跡されます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [For ASP.NET Core を使ってみる SignalR](xref:tutorials/signalr)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)

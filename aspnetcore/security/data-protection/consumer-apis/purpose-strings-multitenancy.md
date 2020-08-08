@@ -5,6 +5,8 @@ description: ASP.NET Core データ保護 Api に関連する、目的の文字�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/purpose-strings-multitenancy
-ms.openlocfilehash: 8f069da500e7bc06e4b8712fbf7b86d90a815758
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4d442d3020c0d67b40ebd101442e5c84dcd4dbc6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404380"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022226"
 ---
 # <a name="purpose-hierarchy-and-multi-tenancy-in-aspnet-core"></a>ASP.NET Core の目的階層とマルチテナント
 

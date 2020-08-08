@@ -5,6 +5,8 @@ description: ロールを承認属性に渡すことによって、ASP.NET Core 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 5d2ea6b9be0c993d62fa75fb8b471b5923747bac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 44e5f9a2a429c9f4a510d2f3e564ddd6bbe77205
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407864"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021121"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core でのロールベースの承認
 
@@ -173,7 +175,7 @@ options.AddPolicy("ElevatedRights", policy =>
 
 この例 `Administrator` では、、、またはロールに属しているユーザーを承認 `PowerUser` `BackupAdministrator` します。
 
-### <a name="add-role-services-to-identity"></a>役割サービスの追加先Identity
+### <a name="add-role-services-to-no-locidentity"></a>役割サービスの追加先Identity
 
 役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1)を追加します。
 

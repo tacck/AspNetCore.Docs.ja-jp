@@ -5,6 +5,8 @@ description: ASP.NET Core MVC が、モデル ビュー コントローラー �
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 68a0b14eb0897f6ff6e24e74b1fe5536bee1adfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405849"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021446"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -63,7 +65,7 @@ ASP.NET Core MVC フレームワークは、ASP.NET Core と共に使用する�
 
 ASP.NET Core MVC では、明確な関心の分離を可能にする動的な Web サイトをビルドするためのパターン ベースの方法を提供します。 ここでは、マークアップのフル コントロールが提供され、TDD 向けの開発をサポートし、最新の Web 標準を使用することができます。
 
-## <a name="features"></a>特徴
+## <a name="features"></a>機能
 
 ASP.NET Core MVC には、以下が含まれます。
 
@@ -194,7 +196,7 @@ Web サイトのビルドに最適なプラットフォームというだけで�
 
 フレームワークでインターフェイスと依存関係の挿入を使用して、単体テストに適するようにします。また、フレームワークには、[統合テスト](xref:test/integration-tests)もすばやく簡単にする機能 (Entity Framework の TestHost と InMemory プロバイダーなど) が含まれます。 詳細については、[コントローラー ロジックのテスト方法](controllers/testing.md)に関するページを参照してください。
 
-### <a name="razor-view-engine"></a>Razorビューエンジン
+### <a name="no-locrazor-view-engine"></a>Razorビューエンジン
 
 [MVC ビュー ASP.NET Core](views/overview.md)ビューを表示するために[ Razor ビューエンジン](views/razor.md)を使用します。 Razorは、埋め込み C# コードを使用してビューを定義するための、コンパクトで表現力豊かな滑らかなテンプレートマークアップ言語です。 Razorは、サーバー上の web コンテンツを動的に生成するために使用されます。 サーバー コードを、クライアント側のコンテンツとコードにクリーンに混在させることができます。
 
@@ -265,5 +267,5 @@ RazorMVC のビューは、モデルに基づいて厳密に型指定できま�
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。*")
+* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。* ")
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

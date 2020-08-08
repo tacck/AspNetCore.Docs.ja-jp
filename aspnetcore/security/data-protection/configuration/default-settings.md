@@ -5,6 +5,8 @@ description: ASP.NET Core におけるデータ保護のキー管理と有効期
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,25 +15,25 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407097"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021381"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core でのデータ保護のキー管理と有効期間
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-## <a name="key-management"></a>キーの管理
+## <a name="key-management"></a>キー管理
 
 アプリは、運用環境を検出し、キーの構成を独自に処理しようとします。
 
 1. アプリが[Azure アプリ](https://azure.microsoft.com/services/app-service/)でホストされている場合、キーは *%HOME%\ASP.NET\DataProtection-Keys*フォルダーに保存されます。 このフォルダーはネットワーク ストレージにバックアップされ、アプリをホストしているすべてのマシンで同期されています。
    * 保存中のキーは保護されていません。
    * *Dataprotection キー*フォルダーは、単一のデプロイスロット内のアプリのすべてのインスタンスにキーリングを提供します。
-   * ステージングや運用などの別のデプロイ スロットでは、キー リングが共有されません。 デプロイスロット間でスワップする場合 (運用環境へのステージングまたは A/B テストを使用する場合など)、データ保護を使用するすべてのアプリは、前のスロット内のキーリングを使用して格納されたデータの暗号化を解除することはできません。 これにより、ユーザーは、データ保護を使用して cookie を保護するため、標準の ASP.NET Core cookie 認証を使用するアプリからログアウトされることになります。 スロットに依存しないキーリングが必要な場合は、Azure Blob Storage、Azure Key Vault、SQL ストア、Redis cache などの外部キーリングプロバイダーを使用します。
+   * ステージングや運用などの別のデプロイ スロットでは、キー リングが共有されません。 デプロイスロット間でスワップする場合 (運用環境へのステージングまたは A/B テストを使用する場合など)、データ保護を使用するすべてのアプリは、前のスロット内のキーリングを使用して格納されたデータの暗号化を解除することはできません。 これにより、ユーザーは、 cookie データ保護を使用してを保護するので、標準 ASP.NET Core 認証を使用するアプリからログアウトされ cookie ます。 スロットに依存しないキーリングが必要な場合は、Azure Blob Storage、Azure Key Vault、SQL ストア、Redis cache などの外部キーリングプロバイダーを使用します。
 
 1. ユーザープロファイルが使用可能な場合、キーは *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys*フォルダーに保存されます。 オペレーティングシステムが Windows の場合、キーは DPAPI を使用して保存時に暗号化されます。
 
@@ -61,7 +63,7 @@ Docker コンテナーでホストする場合、キーは、Docker ボリュー
 
 使用される既定のペイロード保護アルゴリズムは、HMACSHA256 の場合は AES-256-CBC、信頼性を確保する場合はです。 90日ごとに変更された512ビットのマスターキーは、ペイロードごとにこれらのアルゴリズムに使用される2つのサブキーを派生させるために使用されます。 詳細については、「[サブキーの派生](xref:security/data-protection/implementation/subkeyderivation#additional-authenticated-data-and-subkey-derivation)」を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/data-protection/extensibility/key-management>
 * <xref:host-and-deploy/web-farm>

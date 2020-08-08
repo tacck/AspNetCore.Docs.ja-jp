@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: ead745ae8843173bb25b94672005cc6ce295db2e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0fb19aa19703e68812b83f0631f029dd66a3d64e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403379"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021329"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL を使用して Web API をテストする
 
@@ -38,7 +40,7 @@ HTTP Read-Eval-Print Loop (REPL) は:
 * [GET](#test-http-get-requests)
 * [矢印](#test-http-head-requests)
 * [オプション](#test-http-options-requests)
-* [PATCH](#test-http-patch-requests)
+* [KB830347](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
@@ -58,7 +60,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 [.Net Core グローバル ツール](/dotnet/core/tools/global-tools#install-a-global-tool)は、[Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet パッケージからインストールされます。
 
-## <a name="usage"></a>使用法
+## <a name="usage"></a>使用方法
 
 ツールのインストールが正常に完了したら、次のコマンドを実行して HTTP REPL を開始します。
 
@@ -142,7 +144,7 @@ HTTP REPL では、コマンド補完が提供されています。 <kbd>Tab</kb
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` は、Web API のベース URI です。 次に例を示します。
+`<ROOT URI>` は、Web API のベース URI です。 例:
 
 ```console
 httprepl https://localhost:5001
@@ -154,7 +156,7 @@ httprepl https://localhost:5001
 connect <ROOT URI>
 ```
 
-次に例を示します。
+例:
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -168,7 +170,7 @@ connect <ROOT URI>
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-次に例を示します。
+例:
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -207,7 +209,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-または、`ui` コマンドを実行して、ブラウザーで Web API の Swagger UI ページを開きます。 次に例を示します。
+または、`ui` コマンドを実行して、ブラウザーで Web API の Swagger UI ページを開きます。 例:
 
 ```console
 https://localhost:5001/~ ui
@@ -251,7 +253,7 @@ HTTP REPL の既定の[色](#set-color-preferences)はカスタマイズでき�
 
 ### <a name="view-the-settings"></a>設定を表示する
 
-使用可能な設定を表示するには、`pref get` コマンドを実行します。 次に例を示します。
+使用可能な設定を表示するには、`pref get` コマンドを実行します。 例:
 
 ```console
 https://localhost:5001/~ pref get
@@ -289,7 +291,7 @@ https://localhost:5001/people~ pref set colors.json White
 
 ### <a name="set-indentation-size"></a>インデントのサイズを設定する
 
-応答インデント サイズのカスタマイズは、現在、JSON でのみサポートされています。 既定のサイズは 2 つのスペースです。 次に例を示します。
+応答インデント サイズのカスタマイズは、現在、JSON でのみサポートされています。 既定のサイズは 2 つのスペースです。 例:
 
 ```json
 [
@@ -378,7 +380,7 @@ HTTP REPL には既定の相対パスのセットがあり、`connect` コマン
 - */swagger.js*
 - */swagger/v1/swagger.json*
 
-環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。 値としては、パイプで区切られた相対パスのリストを指定する必要があります。 次に例を示します。
+環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。 値としては、パイプで区切られた相対パスのリストを指定する必要があります。 例:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -498,7 +500,7 @@ HTTP POST 要求を発行するには、次のようにします。
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 次に例を示します。
+    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 例:
 
     ```json
     {
@@ -594,7 +596,7 @@ HTTP PUT 要求を発行するには、次のようにします。
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 次に例を示します。
+    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 例:
 
     ```json
     {
@@ -800,7 +802,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使用します。
 
-* HTTP 要求でインラインを設定します。 次に例を示します。
+* HTTP 要求でインラインを設定します。 例:
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -808,13 +810,13 @@ HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使
     
     上記の方法では、個別の HTTP 要求ヘッダーごとに独自の `-h` オプションが必要です。
 
-* HTTP 要求を送信する前に設定します。 次に例を示します。
+* HTTP 要求を送信する前に設定します。 例:
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    要求を送信する前にヘッダーを設定すると、コマンド シェル セッションの間はヘッダーが設定されたままになります。 ヘッダーをクリアするには、空の値を指定します。 次に例を示します。
+    要求を送信する前にヘッダーを設定すると、コマンド シェル セッションの間はヘッダーが設定されたままになります。 ヘッダーをクリアするには、空の値を指定します。 例:
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -924,14 +926,14 @@ Azure でホストされたエンドポイントにアクセスしたり、[Azur
 
 ### <a name="enable-request-display"></a>要求の表示を有効にする
 
-`echo on` コマンドを実行して、送信中の HTTP 要求を表示します。 次に例を示します。
+`echo on` コマンドを実行して、送信中の HTTP 要求を表示します。 例:
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-現在のセッションの後続の HTTP 要求では、要求ヘッダーが表示されます。 次に例を示します。
+現在のセッションの後続の HTTP 要求では、要求ヘッダーが表示されます。 例:
 
 ```console
 https://localhost:5001/people~ post
@@ -969,7 +971,7 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>要求の表示を無効にする
 
-`echo off` コマンドを実行して、送信中の HTTP 要求の表示を抑制します。 次に例を示します。
+`echo off` コマンドを実行して、送信中の HTTP 要求の表示を抑制します。 例:
 
 ```console
 https://localhost:5001/people~ echo off
@@ -978,7 +980,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>[スクリプトの実行]
 
-HTTP REPL コマンドの同じセットを頻繁に実行する場合は、それらをテキスト ファイルに格納することを検討してください。 ファイル内のコマンドは、コマンド ラインで手動で実行した場合と同じ形式になります。 これらのコマンドは、`run` コマンドを使用してバッチ方式で実行できます。 次に例を示します。
+HTTP REPL コマンドの同じセットを頻繁に実行する場合は、それらをテキスト ファイルに格納することを検討してください。 ファイル内のコマンドは、コマンド ラインで手動で実行した場合と同じ形式になります。 これらのコマンドは、`run` コマンドを使用してバッチ方式で実行できます。 例:
 
 1. 改行で区切られた一連のコマンドを含むテキスト ファイルを作成します。 例として、次のコマンドを含む *people-script.txt* ファイルについて考えてみましょう。
 
@@ -990,13 +992,13 @@ HTTP REPL コマンドの同じセットを頻繁に実行する場合は、そ�
     get 1
     ```
 
-1. `run` コマンドを実行し、テキスト ファイルのパスを渡します。 次に例を示します。
+1. `run` コマンドを実行し、テキスト ファイルのパスを渡します。 例:
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt
     ```
 
-    次のような出力が表示されます。
+    次の出力が表示されます。
 
     ```console
     https://localhost:5001/~ set base https://localhost:5001
@@ -1060,7 +1062,7 @@ https://localhost:5001/~ clear
 https://localhost:5001/~
 ```
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [REST API 要求](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HTTP REPL GitHub リポジトリ](https://github.com/dotnet/HttpRepl)

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404744"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021537"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core 用のカスタムストレージプロバイダーIdentity
+# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>ASP.NET Core 用のカスタムストレージプロバイダーIdentity
 
 作成者: [Steve Smith](https://ardalis.com/)
 
@@ -31,7 +33,7 @@ ASP.NET Core Identity は拡張可能なシステムであり、カスタム記�
 
 ## <a name="introduction"></a>はじめに
 
-既定では、ASP.NET Core Identity システムは Entity Framework Core を使用して SQL Server データベースにユーザー情報を格納します。 多くのアプリでは、この方法が適しています。 ただし、別の永続化メカニズムまたはデータスキーマを使用することをお勧めします。 次に例を示します。
+既定では、ASP.NET Core Identity システムは Entity Framework Core を使用して SQL Server データベースにユーザー情報を格納します。 多くのアプリでは、この方法が適しています。 ただし、別の永続化メカニズムまたはデータスキーマを使用することをお勧めします。 例:
 
 * [Azure Table Storage](/azure/storage/)または別のデータストアを使用します。
 * データベーステーブルの構造が異なります。 
@@ -47,7 +49,7 @@ ASP.NET Core Identity は、Visual Studio の [個々のユーザーアカウン
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-identity-architecture"></a>ASP.NET Core Identity アーキテクチャ
+## <a name="the-aspnet-core-no-locidentity-architecture"></a>ASP.NET Core Identity アーキテクチャ
 
 ASP.NET Core Identity は、マネージャーとストアと呼ばれるクラスで構成されます。 *マネージャー*は、アプリ開発者がユーザーの作成などの操作を実行するために使用する高レベルのクラスです Identity 。 *ストア*は、ユーザーやロールなどのエンティティがどのように永続化されるかを指定する下位レベルのクラスです。 ストアはリポジトリパターンに従い、永続化メカニズムと密接に結び付いています。 マネージャーはストアから切り離されています。つまり、アプリケーションコードを変更することなく永続化メカニズムを置き換えることができます (構成を除く)。
 
@@ -61,13 +63,13 @@ ASP.NET Core Identity は、マネージャーとストアと呼ばれるクラ�
 
 [新しいストレージプロバイダーを使用するようにアプリを再構成](#reconfigure-app-to-use-a-new-storage-provider)する `UserManager` カスタムストアでとをインスタンス化する方法について説明し `RoleManager` ます。
 
-## <a name="aspnet-core-identity-stores-data-types"></a>Identityデータ型を格納 ASP.NET Core
+## <a name="aspnet-core-no-locidentity-stores-data-types"></a>Identityデータ型を格納 ASP.NET Core
 
 [ASP.NET Core Identity ](https://github.com/aspnet/identity)データ型の詳細については、次のセクションを参考にしてください。
 
 ### <a name="users"></a>ユーザー
 
-Web サイトの登録済みユーザー。 [ユーザー](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)の種類は、独自のカスタム型の例として拡張または使用できます。 独自のカスタム id ストレージソリューションを実装するために、特定の型から継承する必要はありません。
+Web サイトの登録済みユーザー。 [ Identity ユーザー](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)の種類は、独自のカスタム型の例として拡張または使用できます。 独自のカスタム id ストレージソリューションを実装するために、特定の型から継承する必要はありません。
 
 ### <a name="user-claims"></a>ユーザー要求
 
@@ -77,7 +79,7 @@ Web サイトの登録済みユーザー。 [ユーザー](/dotnet/api/microsoft
 
 ユーザーのログイン時に使用する外部認証プロバイダー (Facebook や Microsoft アカウントなど) に関する情報。 [例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)
 
-### <a name="roles"></a>役割
+### <a name="roles"></a>ロール
 
 サイトの承認グループ。 ロール Id とロール名 ("Admin" や "Employee" など) が含まれます。 [例](/dotnet/api/microsoft.aspnet.identity.corecompat.identityrole)
 
@@ -123,7 +125,7 @@ Web サイトの登録済みユーザー。 [ユーザー](/dotnet/api/microsoft
 
 ## <a name="customize-the-user-class"></a>ユーザークラスをカスタマイズする
 
-ストレージプロバイダーを実装する場合は、ユーザークラスを作成します。このクラスは、[ユーザークラスに](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)相当します。
+ストレージプロバイダーを実装する場合は、 [ Identity user クラス](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser)と同等のユーザークラスを作成します。
 
 少なくとも、ユーザークラスにはプロパティとプロパティが含まれている必要があり `Id` `UserName` ます。
 
@@ -177,7 +179,7 @@ Web サイトの登録済みユーザー。 [ユーザー](/dotnet/api/microsoft
 * **IQueryableUserStore**  
  [Iqueryableuserstore &lt; tuser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1)インターフェイスは、クエリ可能なユーザーストアを提供するために実装するメンバーを定義します。
 
-アプリケーションで必要なインターフェイスだけを実装します。 次に例を示します。
+アプリケーションで必要なインターフェイスだけを実装します。 例:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -191,9 +193,9 @@ public class UserStore : IUserStore<IdentityUser>,
 }
 ```
 
-### <a name="identityuserclaim-identityuserlogin-and-identityuserrole"></a>ユーザー Id、ユーザー名、およびユーザー名
+### <a name="no-locidentityuserclaim-no-locidentityuserlogin-and-no-locidentityuserrole"></a>IdentityUserClaim、 Identity userclaim、および Identity UserRole
 
-名前空間には、ユーザー `Microsoft.AspNet.Identity.EntityFramework` [id](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)クラスの実装が含まれてい[IdentityUserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1)ます。 [IdentityUserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1) これらの機能を使用している場合は、これらのクラスの独自のバージョンを作成し、アプリのプロパティを定義することができます。 ただし、基本操作 (ユーザーの要求の追加や削除など) を実行するときに、これらのエンティティをメモリに読み込まない方が効率的な場合もあります。 代わりに、バックエンドストアクラスは、データソースでこれらの操作を直接実行できます。 たとえば、メソッドは、メソッドを呼び出して、 `UserStore.GetClaimsAsync` `userClaimTable.FindByUserId(user.Id)` そのテーブルに対してクエリを直接実行し、クレームの一覧を返すことができます。
+名前空間には、 `Microsoft.AspNet.Identity.EntityFramework` [ Identity userclaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1)、 [ Identity userclaim](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)、および[ Identity UserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1)クラスの実装が含まれています。 これらの機能を使用している場合は、これらのクラスの独自のバージョンを作成し、アプリのプロパティを定義することができます。 ただし、基本操作 (ユーザーの要求の追加や削除など) を実行するときに、これらのエンティティをメモリに読み込まない方が効率的な場合もあります。 代わりに、バックエンドストアクラスは、データソースでこれらの操作を直接実行できます。 たとえば、メソッドは、メソッドを呼び出して、 `UserStore.GetClaimsAsync` `userClaimTable.FindByUserId(user.Id)` そのテーブルに対してクエリを直接実行し、クレームの一覧を返すことができます。
 
 ## <a name="customize-the-role-class"></a>ロールクラスをカスタマイズする
 
@@ -219,7 +221,7 @@ public class UserStore : IUserStore<IdentityUser>,
 1. `Microsoft.AspNetCore.EntityFramework.Identity`NuGet パッケージを削除します。
 1. ストレージプロバイダーが別のプロジェクトまたはパッケージに存在する場合は、その記憶域プロバイダーへの参照を追加します。
 1. へのすべての参照を、 `Microsoft.AspNetCore.EntityFramework.Identity` ストレージプロバイダーの名前空間の using ステートメントに置き換えます。
-1. メソッドで、 `ConfigureServices` `AddIdentity` カスタム型を使用するようにメソッドを変更します。 この目的のために独自の拡張メソッドを作成できます。 例については、「 [IdentityServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) 」を参照してください。
+1. メソッドで、 `ConfigureServices` `AddIdentity` カスタム型を使用するようにメソッドを変更します。 この目的のために独自の拡張メソッドを作成できます。 例については、「 [ Identity ServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) 」を参照してください。
 1. ロールを使用している場合は、 `RoleManager` クラスを使用するようにを更新し `RoleStore` ます。
 1. 接続文字列と資格情報をアプリの構成に更新します。
 

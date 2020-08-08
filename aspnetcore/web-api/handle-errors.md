@@ -7,6 +7,8 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 07/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: d9517bc14ced15094f279029abb791477f7a0004
-ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
+ms.openlocfilehash: a17db9de5f19d11853fb3f9f8c45ade8391ff600
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87159750"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021498"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API のエラーを処理する
 
@@ -42,7 +44,7 @@ curl -i https://localhost:5001/weatherforecast/chicago
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 3.0 以降では、クライアントにより HTML 形式の出力が要求されない場合、開発者例外ページにはテキスト形式の応答が表示されます。 次のような出力が表示されます。
+ASP.NET Core 3.0 以降では、クライアントにより HTML 形式の出力が要求されない場合、開発者例外ページにはテキスト形式の応答が表示されます。 次の出力が表示されます。
 
 ```console
 HTTP/1.1 500 Internal Server Error
@@ -76,7 +78,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-代わりに HTML 形式の応答を表示するには、`Accept` HTTP 要求ヘッダーを `text/html` のメディアの種類に設定します。 次に例を示します。
+代わりに HTML 形式の応答を表示するには、`Accept` HTTP 要求ヘッダーを `text/html` のメディアの種類に設定します。 例:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago

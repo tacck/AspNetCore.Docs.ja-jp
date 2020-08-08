@@ -5,6 +5,8 @@ description: ASP.NET Core データ保護を使用するすべてのアプリに
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 1bde6d90a52ab8873777b5320540251170eaade6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f4b8dc379c0219ff9fc363df55df1103ef40a5ce
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404887"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022408"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>ASP.NET Core でのデータ保護コンピューター全体のポリシーサポート
 
@@ -39,7 +41,7 @@ Windows で実行している場合、データ保護システムでは、ASP.NE
 
 サポートされている値を以下に示します。
 
-| 値              | Type   | [説明] |
+| 値              | 種類   | 説明 |
 | ------------------ | :----: | ----------- |
 | EncryptionType     | string | データ保護に使用するアルゴリズムを指定します。 値は CNG、CNG、または管理されている必要があります。詳細については、後述します。 |
 | DefaultKeyLifetime | DWORD  | 新しく生成されたキーの有効期間を指定します。 値は日数で指定し、>= 7 にする必要があります。 |
@@ -49,7 +51,7 @@ Windows で実行している場合、データ保護システムでは、ASP.NE
 
 EncryptionType が CNG-CBC の場合、システムは、Windows CNG によって提供されるサービスとの信頼性を確保するために、CBC モードの対称ブロック暗号を使用するように構成されています (詳細については、「[カスタム WINDOWS cng アルゴリズムの指定](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms)」を参照してください)。 次の追加の値がサポートされており、それぞれが CngCbcAuthenticatedEncryptionSettings 型のプロパティに対応しています。
 
-| 値                       | Type   | [説明] |
+| 値                       | 種類   | 説明 |
 | --------------------------- | :----: | ----------- |
 | [EncryptionAlgorithm]         | string | CNG によって認識される対称ブロック暗号アルゴリズムの名前。 このアルゴリズムは、CBC モードで開かれています。 |
 | EncryptionAlgorithmProvider | string | アルゴリズム EncryptionAlgorithm を生成できる CNG プロバイダー実装の名前。 |
@@ -59,7 +61,7 @@ EncryptionType が CNG-CBC の場合、システムは、Windows CNG によっ�
 
 EncryptionType が CNG-GCM の場合、システムは、Windows CNG によって提供されるサービスとの機密性および信頼性を確保するために、Galois/カウンタモードの対称ブロック暗号を使用するように構成されています (詳細については、「[カスタム WINDOWS cng アルゴリズムの指定](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms)」を参照してください)。 次の追加の値がサポートされており、それぞれが CngGcmAuthenticatedEncryptionSettings 型のプロパティに対応しています。
 
-| 値                       | Type   | [説明] |
+| 値                       | 種類   | 説明 |
 | --------------------------- | :----: | ----------- |
 | [EncryptionAlgorithm]         | string | CNG によって認識される対称ブロック暗号アルゴリズムの名前。 このアルゴリズムは、Galois/カウンタモードで開かれています。 |
 | EncryptionAlgorithmProvider | string | アルゴリズム EncryptionAlgorithm を生成できる CNG プロバイダー実装の名前。 |
@@ -67,7 +69,7 @@ EncryptionType が CNG-GCM の場合、システムは、Windows CNG によっ�
 
 EncryptionType が管理されている場合、システムは、機密性と KeyedHashAlgorithm に対してマネージ SymmetricAlgorithm を使用するように構成されています (詳細については、「[カスタムマネージアルゴリズムの指定](xref:security/data-protection/configuration/overview#specifying-custom-managed-algorithms)」を参照してください)。 次の追加の値がサポートされており、それぞれが ManagedAuthenticatedEncryptionSettings 型のプロパティに対応しています。
 
-| 値                      | Type   | [説明] |
+| 値                      | 種類   | 説明 |
 | -------------------------- | :----: | ----------- |
 | EncryptionAlgorithmType    | string | SymmetricAlgorithm を実装する型のアセンブリ修飾名。 |
 | EncryptionAlgorithmKeySize | DWORD  | 対称暗号化アルゴリズム用に派生させるキーの長さ (ビット単位)。 |

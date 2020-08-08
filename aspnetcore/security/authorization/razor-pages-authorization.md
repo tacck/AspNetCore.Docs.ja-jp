@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 0f4022e46993c6a957d3d0c133b3db56fa650edc
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 5e0c76ea6c6b4af8e24693b1bfe8ac28bf2ce3a9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568822"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022278"
 ---
-# <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>RazorASP.NET Core でのページ承認規則
+# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>RazorASP.NET Core でのページ承認規則
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -30,7 +32,7 @@ ms.locfileid: "86568822"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このサンプルアプリでは、 [ASP.NET Core Identity を使用せずに cookie 認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、ASP.NET Core を使用するアプリにも同様に適用され Identity ます。 ASP.NET Core を使用するには Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
+このサンプルアプリでは、 [ cookie ASP.NET Core Identity を使用せずに認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、ASP.NET Core を使用するアプリにも同様に適用され Identity ます。 ASP.NET Core を使用するには Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
 
 ## <a name="require-authorization-to-access-a-page"></a>ページへのアクセスに承認を要求する
 
@@ -142,7 +144,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このサンプルアプリでは、 [ASP.NET Core Identity を使用せずに cookie 認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、ASP.NET Core を使用するアプリにも同様に適用され Identity ます。 ASP.NET Core を使用するには Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
+このサンプルアプリでは、 [ cookie ASP.NET Core Identity を使用せずに認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、ASP.NET Core を使用するアプリにも同様に適用され Identity ます。 ASP.NET Core を使用するには Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
 
 ## <a name="require-authorization-to-access-a-page"></a>ページへのアクセスに承認を要求する
 

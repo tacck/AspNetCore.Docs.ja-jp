@@ -5,6 +5,8 @@ description: 個々のユーザーアカウントで作成された ASP.NET Core
 ms.author: riande
 ms.date: 12/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 6d3743fc31c29bed5075ac29381aea51a64a908c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b72612c12d52cfc1736c141bdad95ace6c84546
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406252"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022291"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>個々のユーザーアカウントで作成された ASP.NET Core プロジェクトに基づくアーティクル
 
@@ -71,12 +73,12 @@ Windows 認証は、オプションを使用して .NET Core CLI の新しい we
 
 | オプション | 認証の種類 | 詳細情報のリンク |
  | ----------------- | ------------ | ---------- |
-| なし            |  認証なし | | 
+| None            |  認証なし | | 
 | 個人      |  個々の認証 | <xref:security/authentication/identity>
 | IndividualB2C   |  Azure AD B2C を使用したクラウドホストの個々の認証 | [Azure AD B2C](/azure/active-directory-b2c/) |
 | SingleOrg       |  単一のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | MultiOrg        |  複数のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-| Windows         |  Windows 認証 | [Windows 認証](xref:security/authentication/windowsauth)
+| Windows         |  [Windows 認証] | [Windows 認証](xref:security/authentication/windowsauth)
 
 ## <a name="visual-studio-new-webapp-authentication-options"></a>Visual Studio の新しい webapp 認証オプション
 
@@ -84,14 +86,14 @@ Windows 認証は、オプションを使用して .NET Core CLI の新しい we
 
 | オプション | 認証の種類 | 詳細情報のリンク |
  | ----------------- | ------------ | ---------- |
-| なし            |  認証なし | | 
+| None            |  認証なし | | 
 | 個々のユーザーアカウント/アプリ内のユーザーアカウントを格納する |  個々の認証 | <xref:security/authentication/identity> |
 | 個々のユーザーアカウント/クラウド内の既存のユーザーストアに接続する |  Azure AD B2C を使用したクラウドホストの個々の認証 | [Azure AD B2C](/azure/active-directory-b2c/) |
 | 職場または学校のクラウド/単一組織  |  単一のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | 職場または学校のクラウド/複数の組織 |  複数のテナントに対する組織認証 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-| Windows         |  Windows 認証 | [Windows 認証](xref:security/authentication/windowsauth)
+| Windows         |  [Windows 認証] | [Windows 認証](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 次の記事では、個々のユーザーアカウントを使用する ASP.NET Core テンプレートで生成されたコードを使用する方法について説明します。
 
