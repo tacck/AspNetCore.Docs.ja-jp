@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,105 +16,105 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408696"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015336"
 ---
-# <a name="migrate-from-aspnet-core-1x-to-20"></a><span data-ttu-id="cfc58-103">ASP.NET Core 1.x から 2.0 への移行</span><span class="sxs-lookup"><span data-stu-id="cfc58-103">Migrate from ASP.NET Core 1.x to 2.0</span></span>
+# <a name="migrate-from-aspnet-core-1x-to-20"></a><span data-ttu-id="25f12-103">ASP.NET Core 1.x から 2.0 への移行</span><span class="sxs-lookup"><span data-stu-id="25f12-103">Migrate from ASP.NET Core 1.x to 2.0</span></span>
 
-<span data-ttu-id="cfc58-104">作成者: [Scott Addie](https://github.com/scottaddie)</span><span class="sxs-lookup"><span data-stu-id="cfc58-104">By [Scott Addie](https://github.com/scottaddie)</span></span>
+<span data-ttu-id="25f12-104">作成者: [Scott Addie](https://github.com/scottaddie)</span><span class="sxs-lookup"><span data-stu-id="25f12-104">By [Scott Addie](https://github.com/scottaddie)</span></span>
 
-<span data-ttu-id="cfc58-105">この記事では、既存の ASP.NET Core 1.x プロジェクトを ASP.NET Core 2.0 に更新する手順を説明します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-105">In this article, we walk you through updating an existing ASP.NET Core 1.x project to ASP.NET Core 2.0.</span></span> <span data-ttu-id="cfc58-106">アプリケーションを ASP.NET Core 2.0 に移行すると、[多数の新機能を利用したり、パフォーマンスを向上させたりすることができます](xref:aspnetcore-2.0)。</span><span class="sxs-lookup"><span data-stu-id="cfc58-106">Migrating your application to ASP.NET Core 2.0 enables you to take advantage of [many new features and performance improvements](xref:aspnetcore-2.0).</span></span>
+<span data-ttu-id="25f12-105">この記事では、既存の ASP.NET Core 1.x プロジェクトを ASP.NET Core 2.0 に更新する手順を説明します。</span><span class="sxs-lookup"><span data-stu-id="25f12-105">In this article, we walk you through updating an existing ASP.NET Core 1.x project to ASP.NET Core 2.0.</span></span> <span data-ttu-id="25f12-106">アプリケーションを ASP.NET Core 2.0 に移行すると、[多数の新機能を利用したり、パフォーマンスを向上させたりすることができます](xref:aspnetcore-2.0)。</span><span class="sxs-lookup"><span data-stu-id="25f12-106">Migrating your application to ASP.NET Core 2.0 enables you to take advantage of [many new features and performance improvements](xref:aspnetcore-2.0).</span></span>
 
-<span data-ttu-id="cfc58-107">既存の ASP.NET Core 1.x アプリケーションは、バージョン固有のプロジェクト テンプレートには基づいていません。</span><span class="sxs-lookup"><span data-stu-id="cfc58-107">Existing ASP.NET Core 1.x applications are based off of version-specific project templates.</span></span> <span data-ttu-id="cfc58-108">ASP.NET Core のフレームワークの進化に伴い、プロジェクト テンプレートと、それに含まれるスタート コードも進化しています。</span><span class="sxs-lookup"><span data-stu-id="cfc58-108">As the ASP.NET Core framework evolves, so do the project templates and the starter code contained within them.</span></span> <span data-ttu-id="cfc58-109">ASP.NET Core のフレームワークを更新するだけでなく、アプリケーションのコードも更新する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-109">In addition to updating the ASP.NET Core framework, you need to update the code for your application.</span></span>
+<span data-ttu-id="25f12-107">既存の ASP.NET Core 1.x アプリケーションは、バージョン固有のプロジェクト テンプレートには基づいていません。</span><span class="sxs-lookup"><span data-stu-id="25f12-107">Existing ASP.NET Core 1.x applications are based off of version-specific project templates.</span></span> <span data-ttu-id="25f12-108">ASP.NET Core のフレームワークの進化に伴い、プロジェクト テンプレートと、それに含まれるスタート コードも進化しています。</span><span class="sxs-lookup"><span data-stu-id="25f12-108">As the ASP.NET Core framework evolves, so do the project templates and the starter code contained within them.</span></span> <span data-ttu-id="25f12-109">ASP.NET Core のフレームワークを更新するだけでなく、アプリケーションのコードも更新する必要があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-109">In addition to updating the ASP.NET Core framework, you need to update the code for your application.</span></span>
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a><span data-ttu-id="cfc58-110">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="cfc58-110">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="25f12-110">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="25f12-110">Prerequisites</span></span>
 
-<span data-ttu-id="cfc58-111">「[ASP.NET Core の概要](xref:getting-started)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cfc58-111">See [Get Started with ASP.NET Core](xref:getting-started).</span></span>
+<span data-ttu-id="25f12-111">「[ASP.NET Core の概要](xref:getting-started)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="25f12-111">See [Get Started with ASP.NET Core](xref:getting-started).</span></span>
 
 <a name="tfm"></a>
 
-## <a name="update-target-framework-moniker-tfm"></a><span data-ttu-id="cfc58-112">ターゲット フレームワーク モニカー (TFM) の更新</span><span class="sxs-lookup"><span data-stu-id="cfc58-112">Update Target Framework Moniker (TFM)</span></span>
+## <a name="update-target-framework-moniker-tfm"></a><span data-ttu-id="25f12-112">ターゲット フレームワーク モニカー (TFM) の更新</span><span class="sxs-lookup"><span data-stu-id="25f12-112">Update Target Framework Moniker (TFM)</span></span>
 
-<span data-ttu-id="cfc58-113">.NET Core をターゲットとするプロジェクトでは、.NET Core 2.0 以上のバージョンの [TFM](/dotnet/standard/frameworks) を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-113">Projects targeting .NET Core should use the [TFM](/dotnet/standard/frameworks) of a version greater than or equal to .NET Core 2.0.</span></span> <span data-ttu-id="cfc58-114">*.csproj* ファイルで `<TargetFramework>` ノードを探し、その内側のテキストを `netcoreapp2.0` に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-114">Search for the `<TargetFramework>` node in the *.csproj* file, and replace its inner text with `netcoreapp2.0`:</span></span>
+<span data-ttu-id="25f12-113">.NET Core をターゲットとするプロジェクトでは、.NET Core 2.0 以上のバージョンの [TFM](/dotnet/standard/frameworks) を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-113">Projects targeting .NET Core should use the [TFM](/dotnet/standard/frameworks) of a version greater than or equal to .NET Core 2.0.</span></span> <span data-ttu-id="25f12-114">*.csproj* ファイルで `<TargetFramework>` ノードを探し、その内側のテキストを `netcoreapp2.0` に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="25f12-114">Search for the `<TargetFramework>` node in the *.csproj* file, and replace its inner text with `netcoreapp2.0`:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=3)]
 
-<span data-ttu-id="cfc58-115">.NET Framework をターゲットとするプロジェクトでは、.NET Framework 4.6.1 以上の TFM バージョンを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-115">Projects targeting .NET Framework should use the TFM of a version greater than or equal to .NET Framework 4.6.1.</span></span> <span data-ttu-id="cfc58-116">*.csproj* ファイルで `<TargetFramework>` ノードを探し、その内側のテキストを `net461` に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-116">Search for the `<TargetFramework>` node in the *.csproj* file, and replace its inner text with `net461`:</span></span>
+<span data-ttu-id="25f12-115">.NET Framework をターゲットとするプロジェクトでは、.NET Framework 4.6.1 以上の TFM バージョンを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-115">Projects targeting .NET Framework should use the TFM of a version greater than or equal to .NET Framework 4.6.1.</span></span> <span data-ttu-id="25f12-116">*.csproj* ファイルで `<TargetFramework>` ノードを探し、その内側のテキストを `net461` に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="25f12-116">Search for the `<TargetFramework>` node in the *.csproj* file, and replace its inner text with `net461`:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=4)]
 
 > [!NOTE]
-> <span data-ttu-id="cfc58-117">.NET Core 1.x よりセキュリティ上外部からアクセスできるところの多い .NET core 2.0</span><span class="sxs-lookup"><span data-stu-id="cfc58-117">.NET Core 2.0 offers a much larger surface area than .NET Core 1.x.</span></span> <span data-ttu-id="cfc58-118">NET Core 1.x に API がないためだけに .NET Framework をターゲットにする場合、.NET Core 2.0 をターゲットにすると機能します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-118">If you're targeting .NET Framework solely because of missing APIs in .NET Core 1.x, targeting .NET Core 2.0 is likely to work.</span></span>
+> <span data-ttu-id="25f12-117">.NET Core 1.x よりセキュリティ上外部からアクセスできるところの多い .NET core 2.0</span><span class="sxs-lookup"><span data-stu-id="25f12-117">.NET Core 2.0 offers a much larger surface area than .NET Core 1.x.</span></span> <span data-ttu-id="25f12-118">NET Core 1.x に API がないためだけに .NET Framework をターゲットにする場合、.NET Core 2.0 をターゲットにすると機能します。</span><span class="sxs-lookup"><span data-stu-id="25f12-118">If you're targeting .NET Framework solely because of missing APIs in .NET Core 1.x, targeting .NET Core 2.0 is likely to work.</span></span>
 
-<span data-ttu-id="cfc58-119">プロジェクト ファイルに `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>` が含まれている場合は、[こちらの GitHub の問題](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cfc58-119">If the project file contains `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`, see [this GitHub issue](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268).</span></span>
+<span data-ttu-id="25f12-119">プロジェクト ファイルに `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>` が含まれている場合は、[こちらの GitHub の問題](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="25f12-119">If the project file contains `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`, see [this GitHub issue](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268).</span></span>
 
 <a name="global-json"></a>
 
-## <a name="update-net-core-sdk-version-in-globaljson"></a><span data-ttu-id="cfc58-120">global.json での .NET Core SDK バージョンの更新</span><span class="sxs-lookup"><span data-stu-id="cfc58-120">Update .NET Core SDK version in global.json</span></span>
+## <a name="update-net-core-sdk-version-in-globaljson"></a><span data-ttu-id="25f12-120">global.json での .NET Core SDK バージョンの更新</span><span class="sxs-lookup"><span data-stu-id="25f12-120">Update .NET Core SDK version in global.json</span></span>
 
-<span data-ttu-id="cfc58-121">使用するソリューションが [global.json](/dotnet/core/tools/global-json) ファイルに依存して特定の .NET Core SDK バージョンをターゲットにしている場合、その `version` プロパティを更新して、コンピューターにインストールされている 2.0 バージョンが使用されるようにします。</span><span class="sxs-lookup"><span data-stu-id="cfc58-121">If your solution relies upon a [global.json](/dotnet/core/tools/global-json) file to target a specific .NET Core SDK version, update its `version` property to use the 2.0 version installed on your machine:</span></span>
+<span data-ttu-id="25f12-121">使用するソリューションが [global.json](/dotnet/core/tools/global-json) ファイルに依存して特定の .NET Core SDK バージョンをターゲットにしている場合、その `version` プロパティを更新して、コンピューターにインストールされている 2.0 バージョンが使用されるようにします。</span><span class="sxs-lookup"><span data-stu-id="25f12-121">If your solution relies upon a [global.json](/dotnet/core/tools/global-json) file to target a specific .NET Core SDK version, update its `version` property to use the 2.0 version installed on your machine:</span></span>
 
 [!code-json[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/global.json?highlight=3)]
 
 <a name="package-reference"></a>
 
-## <a name="update-package-references"></a><span data-ttu-id="cfc58-122">パッケージ参照の更新</span><span class="sxs-lookup"><span data-stu-id="cfc58-122">Update package references</span></span>
+## <a name="update-package-references"></a><span data-ttu-id="25f12-122">パッケージ参照の更新</span><span class="sxs-lookup"><span data-stu-id="25f12-122">Update package references</span></span>
 
-<span data-ttu-id="cfc58-123">1\.x プロジェクト内の *.csproj* ファイルには、プロジェクトによって使用される各 NuGet パッケージの一覧があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-123">The *.csproj* file in a 1.x project lists each NuGet package used by the project.</span></span>
+<span data-ttu-id="25f12-123">1\.x プロジェクト内の *.csproj* ファイルには、プロジェクトによって使用される各 NuGet パッケージの一覧があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-123">The *.csproj* file in a 1.x project lists each NuGet package used by the project.</span></span>
 
-<span data-ttu-id="cfc58-124">.NET Core 2.0 をターゲットとする ASP.NET Core 2.0 プロジェクトでは、 *.csproj* ファイル内の 1 つの[メタパッケージ](xref:fundamentals/metapackage)への参照によってパッケージのコレクションが置き換えられます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-124">In an ASP.NET Core 2.0 project targeting .NET Core 2.0, a single [metapackage](xref:fundamentals/metapackage) reference in the *.csproj* file replaces the collection of packages:</span></span>
+<span data-ttu-id="25f12-124">.NET Core 2.0 をターゲットとする ASP.NET Core 2.0 プロジェクトでは、 *.csproj* ファイル内の 1 つの[メタパッケージ](xref:fundamentals/metapackage)への参照によってパッケージのコレクションが置き換えられます。</span><span class="sxs-lookup"><span data-stu-id="25f12-124">In an ASP.NET Core 2.0 project targeting .NET Core 2.0, a single [metapackage](xref:fundamentals/metapackage) reference in the *.csproj* file replaces the collection of packages:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=8-10)]
 
-<span data-ttu-id="cfc58-125">メタパッケージには、ASP.NET Core 2.0 および Entity Framework Core 2.0 のすべての機能が含まれます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-125">All the features of ASP.NET Core 2.0 and Entity Framework Core 2.0 are included in the metapackage.</span></span>
+<span data-ttu-id="25f12-125">メタパッケージには、ASP.NET Core 2.0 および Entity Framework Core 2.0 のすべての機能が含まれます。</span><span class="sxs-lookup"><span data-stu-id="25f12-125">All the features of ASP.NET Core 2.0 and Entity Framework Core 2.0 are included in the metapackage.</span></span>
 
-<span data-ttu-id="cfc58-126">.NET Framework をターゲットとする ASP.NET Core 2.0 プロジェクトは、個々の NuGet パッケージを参照し続ける必要があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-126">ASP.NET Core 2.0 projects targeting .NET Framework should continue to reference individual NuGet packages.</span></span> <span data-ttu-id="cfc58-127">各 `<PackageReference />` ノードの `Version` 属性を 2.0.0 に更新します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-127">Update the `Version` attribute of each `<PackageReference />` node to 2.0.0.</span></span>
+<span data-ttu-id="25f12-126">.NET Framework をターゲットとする ASP.NET Core 2.0 プロジェクトは、個々の NuGet パッケージを参照し続ける必要があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-126">ASP.NET Core 2.0 projects targeting .NET Framework should continue to reference individual NuGet packages.</span></span> <span data-ttu-id="25f12-127">各 `<PackageReference />` ノードの `Version` 属性を 2.0.0 に更新します。</span><span class="sxs-lookup"><span data-stu-id="25f12-127">Update the `Version` attribute of each `<PackageReference />` node to 2.0.0.</span></span>
 
-<span data-ttu-id="cfc58-128">たとえば、.NET Framework をターゲットとする一般的な ASP.NET Core 2.0 プロジェクトで使用される `<PackageReference />` ノードの一覧を次に示します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-128">For example, here's the list of `<PackageReference />` nodes used in a typical ASP.NET Core 2.0 project targeting .NET Framework:</span></span>
+<span data-ttu-id="25f12-128">たとえば、.NET Framework をターゲットとする一般的な ASP.NET Core 2.0 プロジェクトで使用される `<PackageReference />` ノードの一覧を次に示します。</span><span class="sxs-lookup"><span data-stu-id="25f12-128">For example, here's the list of `<PackageReference />` nodes used in a typical ASP.NET Core 2.0 project targeting .NET Framework:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=9-22)]
 
 <a name="dot-net-cli-tool-reference"></a>
 
-## <a name="update-net-core-cli-tools"></a><span data-ttu-id="cfc58-129">.NET Core CLI ツールの更新</span><span class="sxs-lookup"><span data-stu-id="cfc58-129">Update .NET Core CLI tools</span></span>
+## <a name="update-net-core-cli-tools"></a><span data-ttu-id="25f12-129">.NET Core CLI ツールの更新</span><span class="sxs-lookup"><span data-stu-id="25f12-129">Update .NET Core CLI tools</span></span>
 
-<span data-ttu-id="cfc58-130">*.csproj* ファイルで、`<DotNetCliToolReference />` ノードのそれぞれの `Version` 属性を 2.0.0 に更新します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-130">In the *.csproj* file, update the `Version` attribute of each `<DotNetCliToolReference />` node to 2.0.0.</span></span>
+<span data-ttu-id="25f12-130">*.csproj* ファイルで、`<DotNetCliToolReference />` ノードのそれぞれの `Version` 属性を 2.0.0 に更新します。</span><span class="sxs-lookup"><span data-stu-id="25f12-130">In the *.csproj* file, update the `Version` attribute of each `<DotNetCliToolReference />` node to 2.0.0.</span></span>
 
-<span data-ttu-id="cfc58-131">たとえば、.NET Core 2.0 をターゲットとする一般的な ASP.NET Core 2.0 プロジェクトで使用される CLI ツールの一覧を次に示します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-131">For example, here's the list of CLI tools used in a typical ASP.NET Core 2.0 project targeting .NET Core 2.0:</span></span>
+<span data-ttu-id="25f12-131">たとえば、.NET Core 2.0 をターゲットとする一般的な ASP.NET Core 2.0 プロジェクトで使用される CLI ツールの一覧を次に示します。</span><span class="sxs-lookup"><span data-stu-id="25f12-131">For example, here's the list of CLI tools used in a typical ASP.NET Core 2.0 project targeting .NET Core 2.0:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=12-16)]
 
 <a name="package-target-fallback"></a>
 
-## <a name="rename-package-target-fallback-property"></a><span data-ttu-id="cfc58-132">Package Target Fallback プロパティの名前変更</span><span class="sxs-lookup"><span data-stu-id="cfc58-132">Rename Package Target Fallback property</span></span>
+## <a name="rename-package-target-fallback-property"></a><span data-ttu-id="25f12-132">Package Target Fallback プロパティの名前変更</span><span class="sxs-lookup"><span data-stu-id="25f12-132">Rename Package Target Fallback property</span></span>
 
-<span data-ttu-id="cfc58-133">1\.x プロジェクトの *.csproj* ファイルでは、`PackageTargetFallback` ノードと変数を使用していました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-133">The *.csproj* file of a 1.x project used a `PackageTargetFallback` node and variable:</span></span>
+<span data-ttu-id="25f12-133">1\.x プロジェクトの *.csproj* ファイルでは、`PackageTargetFallback` ノードと変数を使用していました。</span><span class="sxs-lookup"><span data-stu-id="25f12-133">The *.csproj* file of a 1.x project used a `PackageTargetFallback` node and variable:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=5)]
 
-<span data-ttu-id="cfc58-134">ノードと変数の両方を `AssetTargetFallback` に名前変更します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-134">Rename both the node and variable to `AssetTargetFallback`:</span></span>
+<span data-ttu-id="25f12-134">ノードと変数の両方を `AssetTargetFallback` に名前変更します。</span><span class="sxs-lookup"><span data-stu-id="25f12-134">Rename both the node and variable to `AssetTargetFallback`:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=4)]
 
 <a name="program-cs"></a>
 
-## <a name="update-main-method-in-programcs"></a><span data-ttu-id="cfc58-135">Program.cs の Main メソッドの更新</span><span class="sxs-lookup"><span data-stu-id="cfc58-135">Update Main method in Program.cs</span></span>
+## <a name="update-main-method-in-programcs"></a><span data-ttu-id="25f12-135">Program.cs の Main メソッドの更新</span><span class="sxs-lookup"><span data-stu-id="25f12-135">Update Main method in Program.cs</span></span>
 
-<span data-ttu-id="cfc58-136">1\.x プロジェクトでは、*Program.cs* の `Main` メソッドは次のようでした。</span><span class="sxs-lookup"><span data-stu-id="cfc58-136">In 1.x projects, the `Main` method of *Program.cs* looked like this:</span></span>
+<span data-ttu-id="25f12-136">1\.x プロジェクトでは、*Program.cs* の `Main` メソッドは次のようでした。</span><span class="sxs-lookup"><span data-stu-id="25f12-136">In 1.x projects, the `Main` method of *Program.cs* looked like this:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-<span data-ttu-id="cfc58-137">2\.0 プロジェクトでは、*Program.cs* の `Main` メソッドは次のように簡素化されました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-137">In 2.0 projects, the `Main` method of *Program.cs* has been simplified:</span></span>
+<span data-ttu-id="25f12-137">2\.0 プロジェクトでは、*Program.cs* の `Main` メソッドは次のように簡素化されました。</span><span class="sxs-lookup"><span data-stu-id="25f12-137">In 2.0 projects, the `Main` method of *Program.cs* has been simplified:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
-<span data-ttu-id="cfc58-138">この新しい 2.0 のパターンの導入は強く推奨され、これらの動作には、[Entity Framework (EF) Core Migrations](xref:data/ef-mvc/migrations) のような製品機能が必要です。</span><span class="sxs-lookup"><span data-stu-id="cfc58-138">The adoption of this new 2.0 pattern is highly recommended and is required for product features like [Entity Framework (EF) Core Migrations](xref:data/ef-mvc/migrations) to work.</span></span> <span data-ttu-id="cfc58-139">たとえば、パッケージ マネージャーのコンソール ウィンドウから `Update-Database` を実行したり、(ASP.NET Core 2.0 に変換されたプロジェクトで) コマンドラインから `dotnet ef database update` を実行したりすると、次のエラーが発生します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-139">For example, running `Update-Database` from the Package Manager Console window or `dotnet ef database update` from the command line (on projects converted to ASP.NET Core 2.0) generates the following error:</span></span>
+<span data-ttu-id="25f12-138">この新しい 2.0 のパターンの導入は強く推奨され、これらの動作には、[Entity Framework (EF) Core Migrations](xref:data/ef-mvc/migrations) のような製品機能が必要です。</span><span class="sxs-lookup"><span data-stu-id="25f12-138">The adoption of this new 2.0 pattern is highly recommended and is required for product features like [Entity Framework (EF) Core Migrations](xref:data/ef-mvc/migrations) to work.</span></span> <span data-ttu-id="25f12-139">たとえば、パッケージ マネージャーのコンソール ウィンドウから `Update-Database` を実行したり、(ASP.NET Core 2.0 に変換されたプロジェクトで) コマンドラインから `dotnet ef database update` を実行したりすると、次のエラーが発生します。</span><span class="sxs-lookup"><span data-stu-id="25f12-139">For example, running `Update-Database` from the Package Manager Console window or `dotnet ef database update` from the command line (on projects converted to ASP.NET Core 2.0) generates the following error:</span></span>
 
 ```
 Unable to create an object of type '<Context>'. Add an implementation of 'IDesignTimeDbContextFactory<Context>' to the project, or see https://go.microsoft.com/fwlink/?linkid=851728 for additional patterns supported at design time.
@@ -120,88 +122,88 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 <a name="add-modify-configuration"></a>
 
-## <a name="add-configuration-providers"></a><span data-ttu-id="cfc58-140">構成プロバイダーの追加</span><span class="sxs-lookup"><span data-stu-id="cfc58-140">Add configuration providers</span></span>
+## <a name="add-configuration-providers"></a><span data-ttu-id="25f12-140">構成プロバイダーの追加</span><span class="sxs-lookup"><span data-stu-id="25f12-140">Add configuration providers</span></span>
 
-<span data-ttu-id="cfc58-141">1\.x プロジェクトでは、アプリへの構成プロバイダーの追加は `Startup` コンストラクターを使用して実行しました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-141">In 1.x projects, adding configuration providers to an app was accomplished via the `Startup` constructor.</span></span> <span data-ttu-id="cfc58-142">この手順には `ConfigurationBuilder` のインスタンスの作成、適用可能なプロバイダー (環境変数、アプリの設定など) の読み込み、`IConfigurationRoot` のメンバーの初期化などが伴いました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-142">The steps involved creating an instance of `ConfigurationBuilder`, loading applicable providers (environment variables, app settings, etc.), and initializing a member of `IConfigurationRoot`.</span></span>
+<span data-ttu-id="25f12-141">1\.x プロジェクトでは、アプリへの構成プロバイダーの追加は `Startup` コンストラクターを使用して実行しました。</span><span class="sxs-lookup"><span data-stu-id="25f12-141">In 1.x projects, adding configuration providers to an app was accomplished via the `Startup` constructor.</span></span> <span data-ttu-id="25f12-142">この手順には `ConfigurationBuilder` のインスタンスの作成、適用可能なプロバイダー (環境変数、アプリの設定など) の読み込み、`IConfigurationRoot` のメンバーの初期化などが伴いました。</span><span class="sxs-lookup"><span data-stu-id="25f12-142">The steps involved creating an instance of `ConfigurationBuilder`, loading applicable providers (environment variables, app settings, etc.), and initializing a member of `IConfigurationRoot`.</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-<span data-ttu-id="cfc58-143">前の例では、`IHostingEnvironment.EnvironmentName` プロパティに一致する *appsettings.json* とすべての *appsettings.\<EnvironmentName\>.json* ファイルから、構成設定を含む `Configuration` メンバーを読み込んでいます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-143">The preceding example loads the `Configuration` member with configuration settings from *appsettings.json* as well as any *appsettings.\<EnvironmentName\>.json* file matching the `IHostingEnvironment.EnvironmentName` property.</span></span> <span data-ttu-id="cfc58-144">これらのファイルの場所は *Startup.cs* と同じパスです。</span><span class="sxs-lookup"><span data-stu-id="cfc58-144">The location of these files is at the same path as *Startup.cs*.</span></span>
+<span data-ttu-id="25f12-143">前の例では、`IHostingEnvironment.EnvironmentName` プロパティに一致する *appsettings.json* とすべての *appsettings.\<EnvironmentName\>.json* ファイルから、構成設定を含む `Configuration` メンバーを読み込んでいます。</span><span class="sxs-lookup"><span data-stu-id="25f12-143">The preceding example loads the `Configuration` member with configuration settings from *appsettings.json* as well as any *appsettings.\<EnvironmentName\>.json* file matching the `IHostingEnvironment.EnvironmentName` property.</span></span> <span data-ttu-id="25f12-144">これらのファイルの場所は *Startup.cs* と同じパスです。</span><span class="sxs-lookup"><span data-stu-id="25f12-144">The location of these files is at the same path as *Startup.cs*.</span></span>
 
-<span data-ttu-id="cfc58-145">2\.0 プロジェクトでは、1.x プロジェクトに固有の定型句による構成コードがバックグラウンドで実行されていました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-145">In 2.0 projects, the boilerplate configuration code inherent to 1.x projects runs behind-the-scenes.</span></span> <span data-ttu-id="cfc58-146">たとえば、環境変数とアプリの設定は起動時に読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-146">For example, environment variables and app settings are loaded at startup.</span></span> <span data-ttu-id="cfc58-147">同等の *Startup.cs* コードは、挿入されたインスタンスによって `IConfiguration` の初期化に削減されます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-147">The equivalent *Startup.cs* code is reduced to `IConfiguration` initialization with the injected instance:</span></span>
+<span data-ttu-id="25f12-145">2\.0 プロジェクトでは、1.x プロジェクトに固有の定型句による構成コードがバックグラウンドで実行されていました。</span><span class="sxs-lookup"><span data-stu-id="25f12-145">In 2.0 projects, the boilerplate configuration code inherent to 1.x projects runs behind-the-scenes.</span></span> <span data-ttu-id="25f12-146">たとえば、環境変数とアプリの設定は起動時に読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="25f12-146">For example, environment variables and app settings are loaded at startup.</span></span> <span data-ttu-id="25f12-147">同等の *Startup.cs* コードは、挿入されたインスタンスによって `IConfiguration` の初期化に削減されます。</span><span class="sxs-lookup"><span data-stu-id="25f12-147">The equivalent *Startup.cs* code is reduced to `IConfiguration` initialization with the injected instance:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-<span data-ttu-id="cfc58-148">`WebHostBuilder.CreateDefaultBuilder` によって追加された既定のプロバイダーを削除するには、`ConfigureAppConfiguration` の内部の `IConfigurationBuilder.Sources` プロパティで `Clear` メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-148">To remove the default providers added by `WebHostBuilder.CreateDefaultBuilder`, invoke the `Clear` method on the `IConfigurationBuilder.Sources` property inside of `ConfigureAppConfiguration`.</span></span> <span data-ttu-id="cfc58-149">プロバイダーを戻すには、*Program.cs* の `ConfigureAppConfiguration` メソッドを利用します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-149">To add providers back, utilize the `ConfigureAppConfiguration` method in *Program.cs*:</span></span>
+<span data-ttu-id="25f12-148">`WebHostBuilder.CreateDefaultBuilder` によって追加された既定のプロバイダーを削除するには、`ConfigureAppConfiguration` の内部の `IConfigurationBuilder.Sources` プロパティで `Clear` メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="25f12-148">To remove the default providers added by `WebHostBuilder.CreateDefaultBuilder`, invoke the `Clear` method on the `IConfigurationBuilder.Sources` property inside of `ConfigureAppConfiguration`.</span></span> <span data-ttu-id="25f12-149">プロバイダーを戻すには、*Program.cs* の `ConfigureAppConfiguration` メソッドを利用します。</span><span class="sxs-lookup"><span data-stu-id="25f12-149">To add providers back, utilize the `ConfigureAppConfiguration` method in *Program.cs*:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
-<span data-ttu-id="cfc58-150">前のコード スニペットの `CreateDefaultBuilder` メソッドで使用される構成は、[こちら](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152)で確認できます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-150">The configuration used by the `CreateDefaultBuilder` method in the preceding code snippet can be seen [here](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152).</span></span>
+<span data-ttu-id="25f12-150">前のコード スニペットの `CreateDefaultBuilder` メソッドで使用される構成は、[こちら](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152)で確認できます。</span><span class="sxs-lookup"><span data-stu-id="25f12-150">The configuration used by the `CreateDefaultBuilder` method in the preceding code snippet can be seen [here](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152).</span></span>
 
-<span data-ttu-id="cfc58-151">詳細については、「[ASP.NET Core の構成](xref:fundamentals/configuration/index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cfc58-151">For more information, see [Configuration in ASP.NET Core](xref:fundamentals/configuration/index).</span></span>
+<span data-ttu-id="25f12-151">詳細については、「[ASP.NET Core の構成](xref:fundamentals/configuration/index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="25f12-151">For more information, see [Configuration in ASP.NET Core](xref:fundamentals/configuration/index).</span></span>
 
 <a name="db-init-code"></a>
 
-## <a name="move-database-initialization-code"></a><span data-ttu-id="cfc58-152">データベース初期化コードの移動</span><span class="sxs-lookup"><span data-stu-id="cfc58-152">Move database initialization code</span></span>
+## <a name="move-database-initialization-code"></a><span data-ttu-id="25f12-152">データベース初期化コードの移動</span><span class="sxs-lookup"><span data-stu-id="25f12-152">Move database initialization code</span></span>
 
-<span data-ttu-id="cfc58-153">EF Core 1.x を利用する 1.x プロジェクトで、`dotnet ef migrations add` のようなコマンドは以下を行います。</span><span class="sxs-lookup"><span data-stu-id="cfc58-153">In 1.x projects using EF Core 1.x, a command such as `dotnet ef migrations add` does the following:</span></span>
+<span data-ttu-id="25f12-153">EF Core 1.x を利用する 1.x プロジェクトで、`dotnet ef migrations add` のようなコマンドは以下を行います。</span><span class="sxs-lookup"><span data-stu-id="25f12-153">In 1.x projects using EF Core 1.x, a command such as `dotnet ef migrations add` does the following:</span></span>
 
-1. <span data-ttu-id="cfc58-154">`Startup` インスタンスをインスタンス化する</span><span class="sxs-lookup"><span data-stu-id="cfc58-154">Instantiates a `Startup` instance</span></span>
-1. <span data-ttu-id="cfc58-155">`ConfigureServices` メソッドを呼び出し、依存性の注入にすべてのサービスを登録する (`DbContext` タイプを含める)</span><span class="sxs-lookup"><span data-stu-id="cfc58-155">Invokes the `ConfigureServices` method to register all services with dependency injection (including `DbContext` types)</span></span>
-1. <span data-ttu-id="cfc58-156">その必要なタスクを実行する</span><span class="sxs-lookup"><span data-stu-id="cfc58-156">Performs its requisite tasks</span></span>
+1. <span data-ttu-id="25f12-154">`Startup` インスタンスをインスタンス化する</span><span class="sxs-lookup"><span data-stu-id="25f12-154">Instantiates a `Startup` instance</span></span>
+1. <span data-ttu-id="25f12-155">`ConfigureServices` メソッドを呼び出し、依存性の注入にすべてのサービスを登録する (`DbContext` タイプを含める)</span><span class="sxs-lookup"><span data-stu-id="25f12-155">Invokes the `ConfigureServices` method to register all services with dependency injection (including `DbContext` types)</span></span>
+1. <span data-ttu-id="25f12-156">その必要なタスクを実行する</span><span class="sxs-lookup"><span data-stu-id="25f12-156">Performs its requisite tasks</span></span>
 
-<span data-ttu-id="cfc58-157">EF Core 2.0 を使用する 2.0 プロジェクトでは、`Program.BuildWebHost` が呼び出され、アプリケーション サービスを取得します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-157">In 2.0 projects using EF Core 2.0, `Program.BuildWebHost` is invoked to obtain the application services.</span></span> <span data-ttu-id="cfc58-158">1\.x とは異なり、`Startup.Configure` を呼び出すという副作用が加わります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-158">Unlike 1.x, this has the additional side effect of invoking `Startup.Configure`.</span></span> <span data-ttu-id="cfc58-159">1\.x アプリがその `Configure` メソッドでデータベース初期化コードを呼び出すと、予想外の問題が発生することがあります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-159">If your 1.x app invoked database initialization code in its `Configure` method, unexpected problems can occur.</span></span> <span data-ttu-id="cfc58-160">たとえば、データベースがまだ存在しない場合、EF Core 移行コマンド実行前にシード処理コードが実行されます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-160">For example, if the database doesn't yet exist, the seeding code runs before the EF Core Migrations command execution.</span></span> <span data-ttu-id="cfc58-161">この問題が原因で、データベースがまだ存在しない場合に `dotnet ef migrations list` コマンドが失敗します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-161">This problem causes a `dotnet ef migrations list` command to fail if the database doesn't yet exist.</span></span>
+<span data-ttu-id="25f12-157">EF Core 2.0 を使用する 2.0 プロジェクトでは、`Program.BuildWebHost` が呼び出され、アプリケーション サービスを取得します。</span><span class="sxs-lookup"><span data-stu-id="25f12-157">In 2.0 projects using EF Core 2.0, `Program.BuildWebHost` is invoked to obtain the application services.</span></span> <span data-ttu-id="25f12-158">1\.x とは異なり、`Startup.Configure` を呼び出すという副作用が加わります。</span><span class="sxs-lookup"><span data-stu-id="25f12-158">Unlike 1.x, this has the additional side effect of invoking `Startup.Configure`.</span></span> <span data-ttu-id="25f12-159">1\.x アプリがその `Configure` メソッドでデータベース初期化コードを呼び出すと、予想外の問題が発生することがあります。</span><span class="sxs-lookup"><span data-stu-id="25f12-159">If your 1.x app invoked database initialization code in its `Configure` method, unexpected problems can occur.</span></span> <span data-ttu-id="25f12-160">たとえば、データベースがまだ存在しない場合、EF Core 移行コマンド実行前にシード処理コードが実行されます。</span><span class="sxs-lookup"><span data-stu-id="25f12-160">For example, if the database doesn't yet exist, the seeding code runs before the EF Core Migrations command execution.</span></span> <span data-ttu-id="25f12-161">この問題が原因で、データベースがまだ存在しない場合に `dotnet ef migrations list` コマンドが失敗します。</span><span class="sxs-lookup"><span data-stu-id="25f12-161">This problem causes a `dotnet ef migrations list` command to fail if the database doesn't yet exist.</span></span>
 
-<span data-ttu-id="cfc58-162">*Startup.cs* の `Configure` メソッドで次の 1.x シード処理初期化コードを検討してください。</span><span class="sxs-lookup"><span data-stu-id="cfc58-162">Consider the following 1.x seed initialization code in the `Configure` method of *Startup.cs*:</span></span>
+<span data-ttu-id="25f12-162">*Startup.cs* の `Configure` メソッドで次の 1.x シード処理初期化コードを検討してください。</span><span class="sxs-lookup"><span data-stu-id="25f12-162">Consider the following 1.x seed initialization code in the `Configure` method of *Startup.cs*:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
-<span data-ttu-id="cfc58-163">2\.0 プロジェクトでは、*Program.cs* の `Main` メソッドに `SeedData.Initialize` 呼び出しを移動します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-163">In 2.0 projects, move the `SeedData.Initialize` call to the `Main` method of *Program.cs*:</span></span>
+<span data-ttu-id="25f12-163">2\.0 プロジェクトでは、*Program.cs* の `Main` メソッドに `SeedData.Initialize` 呼び出しを移動します。</span><span class="sxs-lookup"><span data-stu-id="25f12-163">In 2.0 projects, move the `SeedData.Initialize` call to the `Main` method of *Program.cs*:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-<span data-ttu-id="cfc58-164">2\.0 以降、`BuildWebHost` で Web ホストのビルドと構成以外を行うことは正しくない使用例となります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-164">As of 2.0, it's bad practice to do anything in `BuildWebHost` except build and configure the web host.</span></span> <span data-ttu-id="cfc58-165">アプリケーションの実行に関するあらゆることは `BuildWebHost` &mdash; の外側で、一般的には *Program.cs* の `Main` メソッドで処理する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-165">Anything that's about running the application should be handled outside of `BuildWebHost` &mdash; typically in the `Main` method of *Program.cs*.</span></span>
+<span data-ttu-id="25f12-164">2\.0 以降、`BuildWebHost` で Web ホストのビルドと構成以外を行うことは正しくない使用例となります。</span><span class="sxs-lookup"><span data-stu-id="25f12-164">As of 2.0, it's bad practice to do anything in `BuildWebHost` except build and configure the web host.</span></span> <span data-ttu-id="25f12-165">アプリケーションの実行に関するあらゆることは `BuildWebHost` &mdash; の外側で、一般的には *Program.cs* の `Main` メソッドで処理する必要があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-165">Anything that's about running the application should be handled outside of `BuildWebHost` &mdash; typically in the `Main` method of *Program.cs*.</span></span>
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a><span data-ttu-id="cfc58-166">Razor ビュー コンパイル設定の確認</span><span class="sxs-lookup"><span data-stu-id="cfc58-166">Review Razor view compilation setting</span></span>
+## <a name="review-no-locrazor-view-compilation-setting"></a><span data-ttu-id="25f12-166">Razor ビュー コンパイル設定の確認</span><span class="sxs-lookup"><span data-stu-id="25f12-166">Review Razor view compilation setting</span></span>
 
-<span data-ttu-id="cfc58-167">ユーザーに最も重要なことは、アプリケーションを高速に起動することとパブリッシュされたバンドル数を少なくすることです。</span><span class="sxs-lookup"><span data-stu-id="cfc58-167">Faster application startup time and smaller published bundles are of utmost importance to you.</span></span> <span data-ttu-id="cfc58-168">これらの理由から、ASP.NET Core 2.0 では [Razor ビュー コンパイル](xref:mvc/views/view-compilation)が既定で有効になっています。</span><span class="sxs-lookup"><span data-stu-id="cfc58-168">For these reasons, [Razor view compilation](xref:mvc/views/view-compilation) is enabled by default in ASP.NET Core 2.0.</span></span>
+<span data-ttu-id="25f12-167">ユーザーに最も重要なことは、アプリケーションを高速に起動することとパブリッシュされたバンドル数を少なくすることです。</span><span class="sxs-lookup"><span data-stu-id="25f12-167">Faster application startup time and smaller published bundles are of utmost importance to you.</span></span> <span data-ttu-id="25f12-168">これらの理由から、ASP.NET Core 2.0 では [Razor ビュー コンパイル](xref:mvc/views/view-compilation)が既定で有効になっています。</span><span class="sxs-lookup"><span data-stu-id="25f12-168">For these reasons, [Razor view compilation](xref:mvc/views/view-compilation) is enabled by default in ASP.NET Core 2.0.</span></span>
 
-<span data-ttu-id="cfc58-169">`MvcRazorCompileOnPublish` プロパティを true に設定する必要がなくなりました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-169">Setting the `MvcRazorCompileOnPublish` property to true is no longer required.</span></span> <span data-ttu-id="cfc58-170">ビューのコンパイルを無効にしている場合を除き、 *.csproj* ファイルからこのプロパティが削除されている場合があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-170">Unless you're disabling view compilation, the property may be removed from the *.csproj* file.</span></span>
+<span data-ttu-id="25f12-169">`MvcRazorCompileOnPublish` プロパティを true に設定する必要がなくなりました。</span><span class="sxs-lookup"><span data-stu-id="25f12-169">Setting the `MvcRazorCompileOnPublish` property to true is no longer required.</span></span> <span data-ttu-id="25f12-170">ビューのコンパイルを無効にしている場合を除き、 *.csproj* ファイルからこのプロパティが削除されている場合があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-170">Unless you're disabling view compilation, the property may be removed from the *.csproj* file.</span></span>
 
-<span data-ttu-id="cfc58-171">.NET Framework をターゲットとする場合は、継続して *.csproj* ファイルの [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) NuGet パッケージを明示的に参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-171">When targeting .NET Framework, you still need to explicitly reference the [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) NuGet package in your *.csproj* file:</span></span>
+<span data-ttu-id="25f12-171">.NET Framework をターゲットとする場合は、継続して *.csproj* ファイルの [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) NuGet パッケージを明示的に参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-171">When targeting .NET Framework, you still need to explicitly reference the [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) NuGet package in your *.csproj* file:</span></span>
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
 <a name="app-insights"></a>
 
-## <a name="rely-on-application-insights-light-up-features"></a><span data-ttu-id="cfc58-172">Application Insights の "Light-Up" 機能の利用</span><span class="sxs-lookup"><span data-stu-id="cfc58-172">Rely on Application Insights "light-up" features</span></span>
+## <a name="rely-on-application-insights-light-up-features"></a><span data-ttu-id="25f12-172">Application Insights の "Light-Up" 機能の利用</span><span class="sxs-lookup"><span data-stu-id="25f12-172">Rely on Application Insights "light-up" features</span></span>
 
-<span data-ttu-id="cfc58-173">アプリケーション パフォーマンスのインストルメンテーションは、楽に設定できることが重要です。</span><span class="sxs-lookup"><span data-stu-id="cfc58-173">Effortless setup of application performance instrumentation is important.</span></span> <span data-ttu-id="cfc58-174">Visual Studio 2017 のツールの新しい [Application Insights](/azure/application-insights/app-insights-overview) "light-up" 機能が利用できるようになりました。</span><span class="sxs-lookup"><span data-stu-id="cfc58-174">You can now rely on the new [Application Insights](/azure/application-insights/app-insights-overview) "light-up" features available in the Visual Studio 2017 tooling.</span></span>
+<span data-ttu-id="25f12-173">アプリケーション パフォーマンスのインストルメンテーションは、楽に設定できることが重要です。</span><span class="sxs-lookup"><span data-stu-id="25f12-173">Effortless setup of application performance instrumentation is important.</span></span> <span data-ttu-id="25f12-174">Visual Studio 2017 のツールの新しい [Application Insights](/azure/application-insights/app-insights-overview) "light-up" 機能が利用できるようになりました。</span><span class="sxs-lookup"><span data-stu-id="25f12-174">You can now rely on the new [Application Insights](/azure/application-insights/app-insights-overview) "light-up" features available in the Visual Studio 2017 tooling.</span></span>
 
-<span data-ttu-id="cfc58-175">Visual Studio 2017 で作成された ASP.NET Core 1.1 プロジェクトには、既定で Application Insights が追加されています。</span><span class="sxs-lookup"><span data-stu-id="cfc58-175">ASP.NET Core 1.1 projects created in Visual Studio 2017 added Application Insights by default.</span></span> <span data-ttu-id="cfc58-176">*Program.cs* と *Startup.cs* 外で、Application Insights SDK を直接使用していない場合、次の手順に従います。</span><span class="sxs-lookup"><span data-stu-id="cfc58-176">If you're not using the Application Insights SDK directly, outside of *Program.cs* and *Startup.cs*, follow these steps:</span></span>
+<span data-ttu-id="25f12-175">Visual Studio 2017 で作成された ASP.NET Core 1.1 プロジェクトには、既定で Application Insights が追加されています。</span><span class="sxs-lookup"><span data-stu-id="25f12-175">ASP.NET Core 1.1 projects created in Visual Studio 2017 added Application Insights by default.</span></span> <span data-ttu-id="25f12-176">*Program.cs* と *Startup.cs* 外で、Application Insights SDK を直接使用していない場合、次の手順に従います。</span><span class="sxs-lookup"><span data-stu-id="25f12-176">If you're not using the Application Insights SDK directly, outside of *Program.cs* and *Startup.cs*, follow these steps:</span></span>
 
-1. <span data-ttu-id="cfc58-177">.NET Core をターゲットにする場合、 *.csproj* ファイルから次の `<PackageReference />` ノードを削除します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-177">If targeting .NET Core, remove the following `<PackageReference />` node from the *.csproj* file:</span></span>
+1. <span data-ttu-id="25f12-177">.NET Core をターゲットにする場合、 *.csproj* ファイルから次の `<PackageReference />` ノードを削除します。</span><span class="sxs-lookup"><span data-stu-id="25f12-177">If targeting .NET Core, remove the following `<PackageReference />` node from the *.csproj* file:</span></span>
 
     [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=10)]
 
-2. <span data-ttu-id="cfc58-178">.NET Core をターゲットにする場合、*Program.cs* から `UseApplicationInsights` 拡張メソッド呼び出しを削除します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-178">If targeting .NET Core, remove the `UseApplicationInsights` extension method invocation from *Program.cs*:</span></span>
+2. <span data-ttu-id="25f12-178">.NET Core をターゲットにする場合、*Program.cs* から `UseApplicationInsights` 拡張メソッド呼び出しを削除します。</span><span class="sxs-lookup"><span data-stu-id="25f12-178">If targeting .NET Core, remove the `UseApplicationInsights` extension method invocation from *Program.cs*:</span></span>
 
     [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCsMain&highlight=8)]
 
-3. <span data-ttu-id="cfc58-179">*_Layout.cshtml* から Application Insights のクライアント側 API 呼び出しを削除します。</span><span class="sxs-lookup"><span data-stu-id="cfc58-179">Remove the Application Insights client-side API call from *_Layout.cshtml*.</span></span> <span data-ttu-id="cfc58-180">これによって、次の 2 つのコード行が作成されます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-180">It comprises the following two lines of code:</span></span>
+3. <span data-ttu-id="25f12-179">*_Layout.cshtml* から Application Insights のクライアント側 API 呼び出しを削除します。</span><span class="sxs-lookup"><span data-stu-id="25f12-179">Remove the Application Insights client-side API call from *_Layout.cshtml*.</span></span> <span data-ttu-id="25f12-180">これによって、次の 2 つのコード行が作成されます。</span><span class="sxs-lookup"><span data-stu-id="25f12-180">It comprises the following two lines of code:</span></span>
 
     [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Shared/_Layout.cshtml?range=1,19&dedent=4)]
 
-<span data-ttu-id="cfc58-181">Application Insights SDK を直接使用している場合は、それを継続してください。</span><span class="sxs-lookup"><span data-stu-id="cfc58-181">If you are using the Application Insights SDK directly, continue to do so.</span></span> <span data-ttu-id="cfc58-182">2\.0 の[メタパッケージ](xref:fundamentals/metapackage)には、Application Insights の最新バージョンが含まれているので、以前のバージョンを参照している場合、パッケージのダウングレード エラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="cfc58-182">The 2.0 [metapackage](xref:fundamentals/metapackage) includes the latest version of Application Insights, so a package downgrade error appears if you're referencing an older version.</span></span>
+<span data-ttu-id="25f12-181">Application Insights SDK を直接使用している場合は、それを継続してください。</span><span class="sxs-lookup"><span data-stu-id="25f12-181">If you are using the Application Insights SDK directly, continue to do so.</span></span> <span data-ttu-id="25f12-182">2\.0 の[メタパッケージ](xref:fundamentals/metapackage)には、Application Insights の最新バージョンが含まれているので、以前のバージョンを参照している場合、パッケージのダウングレード エラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="25f12-182">The 2.0 [metapackage](xref:fundamentals/metapackage) includes the latest version of Application Insights, so a package downgrade error appears if you're referencing an older version.</span></span>
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a><span data-ttu-id="cfc58-183">認証、Identity の機能強化の採用</span><span class="sxs-lookup"><span data-stu-id="cfc58-183">Adopt authentication/Identity improvements</span></span>
+## <a name="adopt-authenticationno-locidentity-improvements"></a><span data-ttu-id="25f12-183">認証、Identity の機能強化の採用</span><span class="sxs-lookup"><span data-stu-id="25f12-183">Adopt authentication/Identity improvements</span></span>
 
-<span data-ttu-id="cfc58-184">ASP.NET Core 2.0 には、新しい認証モデルと ASP.NET Core Identity への大幅な変更があります。</span><span class="sxs-lookup"><span data-stu-id="cfc58-184">ASP.NET Core 2.0 has a new authentication model and a number of significant changes to ASP.NET Core Identity.</span></span> <span data-ttu-id="cfc58-185">個々のユーザー アカウントを有効にしてプロジェクトを作成した場合や認証または Identity を手動で追加した場合、「IdentityASP.NET Core 2.0 への認証と [ の移行](xref:migration/1x-to-2x/identity-2x)」 を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cfc58-185">If you created your project with Individual User Accounts enabled, or if you have manually added authentication or Identity, see [Migrate Authentication and Identity to ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x).</span></span>
+<span data-ttu-id="25f12-184">ASP.NET Core 2.0 には、新しい認証モデルと ASP.NET Core Identity への大幅な変更があります。</span><span class="sxs-lookup"><span data-stu-id="25f12-184">ASP.NET Core 2.0 has a new authentication model and a number of significant changes to ASP.NET Core Identity.</span></span> <span data-ttu-id="25f12-185">個々のユーザー アカウントを有効にしてプロジェクトを作成した場合や認証または Identity を手動で追加した場合、「IdentityASP.NET Core 2.0 への認証と [ の移行](xref:migration/1x-to-2x/identity-2x)」 を参照してください。</span><span class="sxs-lookup"><span data-stu-id="25f12-185">If you created your project with Individual User Accounts enabled, or if you have manually added authentication or Identity, see [Migrate Authentication and Identity to ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x).</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="cfc58-186">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="cfc58-186">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="25f12-186">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="25f12-186">Additional resources</span></span>
 
-* [<span data-ttu-id="cfc58-187">ASP.NET Core 2.0 での互換性に影響する変更点</span><span class="sxs-lookup"><span data-stu-id="cfc58-187">Breaking Changes in ASP.NET Core 2.0</span></span>](https://github.com/aspnet/announcements/issues?page=1&q=is%3Aissue+is%3Aopen+label%3A2.0.0+label%3A%22Breaking+change%22&utf8=%E2%9C%93)
+* [<span data-ttu-id="25f12-187">ASP.NET Core 2.0 での互換性に影響する変更点</span><span class="sxs-lookup"><span data-stu-id="25f12-187">Breaking Changes in ASP.NET Core 2.0</span></span>](https://github.com/aspnet/announcements/issues?page=1&q=is%3Aissue+is%3Aopen+label%3A2.0.0+label%3A%22Breaking+change%22&utf8=%E2%9C%93)
