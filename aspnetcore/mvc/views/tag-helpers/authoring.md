@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: e630bf4b0c121796315be077623abae73d240b37
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: d40b37a4ca8acf57b662124597a8ebc3b90bffd2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212460"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018168"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー作成
 
@@ -39,7 +41,7 @@ ms.locfileid: "86212460"
 
 ## <a name="a-minimal-tag-helper"></a>最小のタグ ヘルパー
 
-このセクションでは、電子メール タグを更新するタグ ヘルパーを記述します。 次に例を示します。
+このセクションでは、電子メール タグを更新するタグ ヘルパーを記述します。 例:
 
 ```html
 <email>Support</email>
@@ -165,7 +167,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
 
-1. アプリを実行します。 お好みのブラウザーを使用して、ソースを検査し、マークアップを確認できます。
+1. アプリケーションを実行します。 お好みのブラウザーを使用して、ソースを検査し、マークアップを確認できます。
 
    上記の `[HtmlTargetElement]` 属性は、"bold" という属性名を提供する HTML マークアップのみをターゲットにしています。 `<bold>` 要素は、タグ ヘルパーによって変更されませんでした。
 
@@ -289,7 +291,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinker.cs?highlight=15-34&range=7-34)]
 
-1. アプリを実行します。 www テキストはリンクとしてレンダリングされていますが、HTTP テキストはそのようになっていないことに注目してください。 両方のクラスにブレークポイントを配置すると、HTTP タグ ヘルパー クラスが最初に実行されることがわかります。 問題は、タグ ヘルパーの出力がキャッシュされ、WWW タグ ヘルパーを実行するときに、WWW タグ ヘルパーが HTTP タグ ヘルパーからのキャッシュされた出力を上書きすることです。 タグ ヘルパーの実行順序を制御する方法については、このチュートリアルで後ほど説明します。 コードを次のように修正します。
+1. アプリケーションを実行します。 www テキストはリンクとしてレンダリングされていますが、HTTP テキストはそのようになっていないことに注目してください。 両方のクラスにブレークポイントを配置すると、HTTP タグ ヘルパー クラスが最初に実行されることがわかります。 問題は、タグ ヘルパーの出力がキャッシュされ、WWW タグ ヘルパーを実行するときに、WWW タグ ヘルパーが HTTP タグ ヘルパーからのキャッシュされた出力を上書きすることです。 タグ ヘルパーの実行順序を制御する方法については、このチュートリアルで後ほど説明します。 コードを次のように修正します。
 
    [!code-csharp[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinkerCopy.cs?highlight=5,6,10,21,22,26&range=8-37)]
 

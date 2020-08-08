@@ -5,6 +5,8 @@ description: ASP.NET Core で MVC ビューへの依存関係の挿入をサポ�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 335eac4b1533f4156e00f9d0140f921fa492e71a
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 4ed3e1334994c815996bd3db073fab5e544e2ca8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212972"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018222"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core でのビューへの依存関係の挿入
 
@@ -112,6 +114,6 @@ ASP.NET Core では、ビューへの[依存関係の挿入](xref:fundamentals/d
 
 既存のサービスを拡張する場合、独自に既存の実装から継承したり、ラップしたりするときに、この技術を使用できます。
 
-## <a name="see-also"></a>関連項目
+## <a name="see-also"></a>参照
 
 * Simon Timms のブログ: [ルックアップ データをビューに取り込む](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)

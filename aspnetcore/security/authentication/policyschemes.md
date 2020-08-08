@@ -5,6 +5,8 @@ description: 認証ポリシースキームを使用すると、単一の論理�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ddee613bf9c603542f17adf59a835a2ddbdc25a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408761"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017806"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core のポリシースキーム
 
-認証ポリシースキームを使用すると、単一の論理認証スキームを使用して、複数の方法を使用することが容易になります。 たとえば、ポリシースキームは、問題には Google 認証を使用し、それ以外の場合は cookie 認証を使用します。 認証ポリシーのスキームによって次のようになります。
+認証ポリシースキームを使用すると、単一の論理認証スキームを使用して、複数の方法を使用することが容易になります。 たとえば、ポリシースキームでは、問題には Google 認証を使用し、それ以外の場合は認証を使用し cookie ます。 認証ポリシーのスキームによって次のようになります。
 
 * 任意の認証アクションを別のスキームに簡単に転送できます。
 * 要求に基づいて動的に転送します。
@@ -36,11 +38,11 @@ ms.locfileid: "85408761"
 
 ## <a name="examples"></a>例
 
-次の例は、下位レベルのスキームを結合する上位のスキームを示しています。 Google 認証はチャレンジに使用され、その他のすべてに cookie 認証が使用されます。
+次の例は、下位レベルのスキームを結合する上位のスキームを示しています。 Google 認証はチャレンジに使用され、その cookie 他すべてに認証が使用されます。
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-次の例では、要求ごとにスキームを動的に選択できます。 つまり、cookie と API 認証を混在させる方法は次のようになります。
+次の例では、要求ごとにスキームを動的に選択できます。 つまり、s と API 認証を混在させる方法を cookie 次に示します。
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 

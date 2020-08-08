@@ -5,6 +5,8 @@ description: 区分は ASP.NET MVC の機能であり、関連する機能を別
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f4471f54e92b940ecb0eabab82f03e0c77a0509f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406408"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018443"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core の区分
 
@@ -67,8 +69,8 @@ ms.locfileid: "85406408"
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * Views
-        * ホーム
+      * ビュー
+        * Home
           * Index.cshtml
         * 管理する
           * Index.cshtml
@@ -76,8 +78,8 @@ ms.locfileid: "85406408"
     * サービス
       * Controllers
         * HomeController.cs
-      * Views
-        * ホーム
+      * ビュー
+        * Home
           * Index.cshtml
 
 区分を使用するとき、前述のレイアウトが一般的ですが、このフォルダー構造を使用するにはビュー ファイルのみが求められます。 ビューの検出では、一致する区分ビュー ファイルを次の順序で検索します。
@@ -162,24 +164,24 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>ページがある領域 Razor
+## <a name="areas-with-no-locrazor-pages"></a>ページがある領域 Razor
 
 ページがある領域には、 Razor `Areas/<area name>/Pages` アプリのルートにフォルダーが必要です。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)では次のフォルダー構造が使われます。
 
 * プロジェクト名
   * Areas
     * 製品
-      * Pages
+      * ページ
         * _ViewImports
         * 詳細
         * インデックス
     * サービス
-      * Pages
+      * ページ
         * 管理する
           * 詳細
           * インデックス
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>ページと領域を含むリンク生成 Razor
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>ページと領域を含むリンク生成 Razor
 
 [サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)の次のコードでは、区分を指定したリンクの生成を示しています (例: `asp-area="Products"`)。
 
@@ -222,7 +224,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 詳細については、「[タグ ヘルパーのスコープの管理](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)」と「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」をご覧ください。
 
-### <a name="shared-layout-for-razor-pages-areas"></a>ページ領域の共有レイアウト Razor
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>ページ領域の共有レイアウト Razor
 
 アプリ全体で共通レイアウトを共有するには、アプリケーションのルート フォルダーに *_ViewStart.cshtml* を移動します。
 
@@ -269,8 +271,8 @@ URL スペースがすべての区分で統一されている場合、ルート 
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * Views
-        * ホーム
+      * ビュー
+        * Home
           * Index.cshtml
         * 管理する
           * Index.cshtml
@@ -278,8 +280,8 @@ URL スペースがすべての区分で統一されている場合、ルート 
     * サービス
       * Controllers
         * HomeController.cs
-      * Views
-        * ホーム
+      * ビュー
+        * Home
           * Index.cshtml
 
 区分を使用するとき、前述のレイアウトが一般的ですが、このフォルダー構造を使用するにはビュー ファイルのみが求められます。 ビューの検出では、一致する区分ビュー ファイルを次の順序で検索します。
@@ -349,24 +351,24 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>ページがある領域 Razor
+## <a name="areas-with-no-locrazor-pages"></a>ページがある領域 Razor
 
 ページがある領域には、 Razor `Areas/<area name>/Pages` アプリのルートにフォルダーが必要です。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)では次のフォルダー構造が使われます。
 
 * プロジェクト名
   * Areas
     * 製品
-      * Pages
+      * ページ
         * _ViewImports
         * 詳細
         * インデックス
     * サービス
-      * Pages
+      * ページ
         * 管理する
           * 詳細
           * インデックス
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>ページと領域を含むリンク生成 Razor
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>ページと領域を含むリンク生成 Razor
 
 [サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)の次のコードでは、区分を指定したリンクの生成を示しています (例: `asp-area="Products"`)。
 
@@ -411,7 +413,7 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 
 詳細については、「[タグ ヘルパーのスコープの管理](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)」と「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」をご覧ください。
 
-### <a name="shared-layout-for-razor-pages-areas"></a>ページ領域の共有レイアウト Razor
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>ページ領域の共有レイアウト Razor
 
 アプリ全体で共通レイアウトを共有するには、アプリケーションのルート フォルダーに *_ViewStart.cshtml* を移動します。
 
