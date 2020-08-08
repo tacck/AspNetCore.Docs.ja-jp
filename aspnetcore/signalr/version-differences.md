@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: b5b5686f87d6e511672f6a50db7be8e2613a8a9e
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: f52bf6c82cd5125e0905d9bcbda5dd5499d6455e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060151"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020042"
 ---
-# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR と ASP.NET Core の違いSignalR
+# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR と ASP.NET Core の違いSignalR
 
 ASP.NET Core SignalR は、ASP.NET のクライアントまたはサーバーと互換性がありません SignalR 。 この記事では、ASP.NET Core で削除または変更された機能について詳しく説明 SignalR します。
 
-## <a name="how-to-identify-the-signalr-version"></a>バージョンを識別する方法 SignalR
+## <a name="how-to-identify-the-no-locsignalr-version"></a>バージョンを識別する方法 SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -143,7 +145,7 @@ ASP.NET のスケールアウトモデルを SignalR 使用すると、クライ
 
 ASP.NET Core では SignalR 、接続モデルが単純化されています。 複数のハブへのアクセスを共有するために使用される単一の接続ではなく、1つのハブに直接接続されます。
 
-### <a name="streaming"></a>ストリーム
+### <a name="streaming"></a>ストリーミング
 
 ASP.NET Core は、 SignalR ハブからクライアントへの[データのストリーミング](xref:signalr/streaming)をサポートするようになりました。
 
@@ -288,7 +290,7 @@ ASP.NET は SignalR SQL Server と Redis をサポートしています。 ASP.N
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)

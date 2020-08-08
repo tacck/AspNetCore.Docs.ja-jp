@@ -5,6 +5,8 @@ description: RazorASP.NET Core のアプリケーションパーツを使用し�
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 690ef0843f567dc2335f4d51436e428207fd6eb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399752"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019574"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Razorアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a>Razorアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機�
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
 機能プロバイダーは <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1> から継承されます。ここで `T` は機能の種類です。 機能プロバイダーは、前述の機能の種類のいずれについても実装できます。 `ApplicationPartManager.FeatureProviders` の機能プロバイダーの順序が実行時の動作に影響することがあります。 後から追加されたプロバイダーは、前に追加されたプロバイダーによって行われたアクションに対応できます。
 

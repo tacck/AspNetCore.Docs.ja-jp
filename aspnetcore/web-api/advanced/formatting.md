@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400363"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019938"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -143,7 +145,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 次に例を示します。
+出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 例:
 
 ```csharp
 public IActionResult Get()
@@ -163,7 +165,7 @@ ASP.NET Core 3.0 より前、既定では、`Newtonsoft.Json` パッケージを
 
 一部の機能は `System.Text.Json` ベースのフォーマッタでうまく動作せず、`Newtonsoft.Json` ベースのフォーマッタの参照が必要となる場合があります。 アプリが以下の場合には、`Newtonsoft.Json` ベースのフォーマッタの使用を続けます。
 
-* `Newtonsoft.Json` 属性を使用する。 たとえば、`[JsonProperty]` または `[JsonIgnore]` のようにします。
+* `Newtonsoft.Json` 属性を使用する。  たとえば、`[JsonProperty]` または `[JsonIgnore]` です。
 * シリアル化の設定をカスタマイズする。
 * `Newtonsoft.Json` で提供される機能に依存する。
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings` を構成する。 ASP.NET Core 3.0 より前は、`JsonResult.SerializerSettings`が `Newtonsoft.Json` に固有の `JsonSerializerSettings` のインスタンスを受け入れます。
@@ -182,7 +184,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 次に例を示します。
+出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 例:
 
 ```csharp
 public IActionResult Get()
@@ -238,7 +240,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 `StringOutputFormatter` がない場合は、組み込みの JSON フォーマッタによって戻り値の型 `string` が書式設定されます。 組み込みの JSON フォーマッタが削除され、XML フォーマッタを使用できる場合は、XML フォーマッタによって戻り値の型 `string` が書式設定されます。 それ以外の場合は、戻り値の型 `string` で `406 Not Acceptable` が返されます。
 
-`HttpNoContentOutputFormatter` がない場合、構成されているフォーマッタを利用し、null オブジェクトが書式設定されます。 次に例を示します。
+`HttpNoContentOutputFormatter` がない場合、構成されているフォーマッタを利用し、null オブジェクトが書式設定されます。 例:
 
 * JSON フォーマッタは、本文が `null` の応答を返します。
 * XML フォーマッタは、属性 `xsi:nil="true"` が設定された空の XML 要素を返します。
@@ -250,7 +252,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 * クエリ文字列またはパスの一部。
 * .xml または .json など形式固有のファイル拡張子の使用。
 
-要求パスからのマッピングは、API で使用されるルートに指定する必要があります。 次に例を示します。
+要求パスからのマッピングは、API で使用されるルートに指定する必要があります。 例:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

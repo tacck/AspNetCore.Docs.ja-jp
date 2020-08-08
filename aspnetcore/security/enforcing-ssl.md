@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 8247d66900a0c15b3b386dca021c5c5922d26e71
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5dcdf50ff9f750e4966ed3bdf24a71b9f433240a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404563"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019002"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -437,7 +439,7 @@ Visual Studio での証明書の問題のトラブルシューティングにつ
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express Visual Studio で使用される SSL 証明書
 
-IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [**修復**] を選択します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)します。
+IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [**修復**] を選択します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)のページを参照してください。
 
 ## <a name="additional-information"></a>関連情報
 

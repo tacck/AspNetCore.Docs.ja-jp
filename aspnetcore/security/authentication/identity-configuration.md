@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 5c999b426742cf75b1997f5b40223e2dda112901
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160291"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020601"
 ---
 # <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core の構成Identity
 
-ASP.NET Core Identity は、パスワードポリシー、ロックアウト、cookie の構成などの設定に既定値を使用します。 これらの設定は、クラスでオーバーライドでき `Startup` ます。
+ASP.NET Core Identity は、パスワードポリシー、ロックアウト、構成などの設定に既定値を使用し cookie ます。 これらの設定は、クラスでオーバーライドでき `Startup` ます。
 
 ## <a name="no-locidentity-options"></a>Identityオプション
 
@@ -64,7 +66,7 @@ ASP.NET Core Identity は、パスワードポリシー、ロックアウト、c
 | [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan) | ロックアウトが発生したときにユーザーがロックアウトされる時間。 | 5 分 |
 | [Max失敗した Accessattempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts) | ロックアウトが有効になっている場合に、ユーザーがロックアウトされるまでのアクセス試行の失敗回数。 | 5 |
 
-### <a name="password"></a>パスワード
+### <a name="password"></a>Password
 
 既定では、 Identity パスワードの大文字と小文字、数字、英数字以外の文字を使用する必要があります。 パスワードの長さは6文字以上である必要があります。
 
@@ -105,7 +107,7 @@ ASP.NET Core Identity は、パスワードポリシー、ロックアウト、c
 
 [ Identity オプション。トークン](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens)は、テーブルに示されているプロパティを使用して[tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions)を指定します。
 
-| プロパティ | [説明] |
+| プロパティ | 説明 |
 | -------- | ----------- |
 | [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider) | `AuthenticatorTokenProvider`認証子を使用して2要素サインインを検証するために使用するを取得または設定します。 |
 | [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider) | `ChangeEmailTokenProvider`電子メール変更の確認メールで使用されるトークンを生成するために使用されるを取得または設定します。 |
@@ -125,19 +127,19 @@ ASP.NET Core Identity は、パスワードポリシー、ロックアウト、c
 | [AllowedUserNameCharacters](/dotnet/api/microsoft.aspnetcore.identity.useroptions.allowedusernamecharacters) | ユーザー名に使用できる文字。 | abcdefghijklmnopqrstuvwxyz<br>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>0123456789<br>-.\_@+ |
 | [RequireUniqueEmail](/dotnet/api/microsoft.aspnetcore.identity.useroptions.requireuniqueemail) | 各ユーザーが一意の電子メールを持っている必要があります。 | `false` |
 
-### <a name="cookie-settings"></a>Cookie の設定
+### <a name="no-loccookie-settings"></a>Cookie の設定
 
-でアプリの cookie を構成 `Startup.ConfigureServices` します。 またはを呼び出し**た後、** [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)を呼び出す必要があり `AddIdentity` `AddDefaultIdentity` ます。
+アプリの cookie をで構成し `Startup.ConfigureServices` ます。 [ConfigureApplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)またはを呼び出し**た後**に、を呼び出す必要があり `AddIdentity` `AddDefaultIdentity` ます。
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
-詳細については、「 [Cookieauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)」を参照してください。
+詳細については、「 [ Cookie authenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions)」を参照してください。
 
 ## <a name="password-hasher-options"></a>パスワードの Hasher オプション
 
 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>パスワードハッシュのオプションを取得または設定します。
 
-| オプション | [説明] |
+| オプション | 説明 |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー*と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合、 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、*新しいパスワード*のハッシュに影響します。 |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 を使用してパスワードをハッシュするときに使用されるイテレーションの数。 この値は、がに設定されている場合にのみ使用され <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> ます。 値は正の整数である必要があり、既定値は `10000` です。 |

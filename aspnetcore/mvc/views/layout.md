@@ -5,6 +5,8 @@ description: 共通レイアウトの使用方法、ディレクティブの共�
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406655"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020445"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core でのレイアウト
 
@@ -41,7 +43,7 @@ ms.locfileid: "85406655"
 
 ![ページ レイアウトの例](layout/_static/page-layout.png)
 
-スクリプトやスタイルシートなどの共通の HTML 構造体も、アプリ内の多くのページでよく使用されます。 これらの共有要素をすべて *layout* ファイルで定義することで、アプリ内で使用する任意のビューで参照できるようになります。 レイアウトにより、ビュー内の重複コードが減ります。
+スクリプトやスタイルシートなどの共通の HTML 構造も、アプリ内の多くのページで頻繁に使用されます。 これらの共有要素はすべて*レイアウト*ファイルで定義され、アプリ内で使用される任意のビューで参照できます。 レイアウトにより、ビュー内の重複するコードを削減できます。
 
 規則により、ASP.NET Core アプリの既定のレイアウトには *_Layout.cshtml* という名前が付けられます。 テンプレートを使用すると、次のような新しい ASP.NET Core プロジェクトのレイアウト ファイルが作成されます。
 
@@ -53,7 +55,7 @@ ms.locfileid: "85406655"
 
   ![ソリューション エクスプローラーの Views フォルダー](layout/_static/mvc-web-project-views.png)
 
-レイアウトでは、アプリのビューの最上位のテンプレートが定義されています。 アプリでは、レイアウトは必要ありません。 アプリでは、それぞれ異なるレイアウトを指定するさまざまなビューを使用して、複数のレイアウトを定義できます。
+レイアウトでは、アプリのビューの最上位のテンプレートが定義されています。 アプリにはレイアウトは必要ありません。 アプリでは、異なるレイアウトを指定するさまざまなビューで、複数のレイアウトを定義できます。
 
 次のコードでは、コントローラーとビューを含むテンプレートで作成されたプロジェクトのレイアウト ファイルを示します。
 

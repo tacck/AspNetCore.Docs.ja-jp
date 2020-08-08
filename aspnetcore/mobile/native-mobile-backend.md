@@ -5,6 +5,8 @@ description: ASP.NET Core MVC を使用してネイティブ モバイル アプ
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: b719c64e6976e65a725b28ae3f6c245f2f4874a4
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 75943a15878634568830db74f895653571c54d0f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913603"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019431"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core を使用してネイティブ モバイル アプリのバックエンド サービスを作成する
 
@@ -34,7 +36,7 @@ ms.locfileid: "87913603"
 
 ![Android スマートフォン上で動作する To Do Rest アプリケーション](native-mobile-backend/_static/todo-android.png)
 
-### <a name="features"></a>特徴
+### <a name="features"></a>機能
 
 この ToDoRest アプリは、To-Do 項目の一覧表示、追加、削除、更新をサポートしています。 各項目には、ID、名前、メモ、完了したかどうかを示すプロパティがあります。
 
@@ -160,6 +162,6 @@ Postman を使用してテストするには、動詞を PUT に変更します�
 
 API の共通ポリシーを特定した場合、通常はそのポリシーを[フィルター](../mvc/controllers/filters.md)にカプセル化できます。 詳細については、[ASP.NET Core MVC アプリケーションで一般的な API ポリシーをカプセル化する方法](/archive/msdn-magazine/2016/august/asp-net-core-real-world-asp-net-core-mvc-filters)に関するページを参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [認証と承認](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: 54e86479b9f9f0acc861769f9ab78958f79acfd3
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a03598f887d628c8a2b6720d99826d4aef4e52fa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400142"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020003"
 ---
-# <a name="aspnet-core-signalr-net-client"></a>ASP.NET Core SignalR .Net クライアント
+# <a name="aspnet-core-no-locsignalr-net-client"></a>ASP.NET Core SignalR .Net クライアント
 
 ASP.NET Core SignalR .net クライアントライブラリを使用すると、 SignalR .net アプリからハブと通信できます。
 
@@ -30,7 +32,7 @@ ASP.NET Core SignalR .net クライアントライブラリを使用すると、
 
 この記事のコードサンプルは、ASP.NET Core .Net クライアントを使用する WPF アプリです SignalR 。
 
-## <a name="install-the-signalr-net-client-package"></a>SignalR.Net クライアントパッケージをインストールする
+## <a name="install-the-no-locsignalr-net-client-package"></a>SignalR.Net クライアントパッケージをインストールする
 
 [AspNetCore. SignalR .クライアント](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client)パッケージは、.net クライアントがハブに接続するために必要です SignalR 。
 
@@ -262,9 +264,9 @@ Try-catch ステートメントを使用してエラーを処理します。 オ
 
 [!code-csharp[Logging](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ErrorHandling)]
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
-* [ハブ](xref:signalr/hubs)
+* [取って代わり](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [Azure SignalR サービスのサーバーレスドキュメント](/azure/azure-signalr/signalr-concept-serverless-development-config)

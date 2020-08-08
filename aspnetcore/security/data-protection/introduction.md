@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: b29711e8e1ef1558731ba58ca2ff14000af19ca2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913818"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019357"
 ---
 # <a name="aspnet-core-data-protection"></a>データ保護の ASP.NET Core
 
@@ -31,7 +33,7 @@ ASP.NET Core データ保護スタックは、 &lt; &gt; ASP.NET 1.x-4.X の mac
 
 全体的な問題の説明は、1つの文で簡潔に記述できます。後で取得するために信頼できる情報を保持する必要がありますが、永続化メカニズムを信頼していません。 Web 用語では、"信頼された状態を信頼されていないクライアント経由でラウンドトリップする必要がある" として記述されている可能性があります。
 
-この例では、認証 cookie またはベアラートークンが使用されています。 サーバーは "I am Groot と" xyz アクセス許可 "トークンを生成し、クライアントに渡します。 将来の日付では、クライアントはそのトークンをサーバーに返しますが、サーバーでは、クライアントがトークンを偽造していないことを保証する必要があります。 そのため、最初の要件: 信頼性 ( 整合性、改ざん防止)。
+この例では、認証またはベアラートークンが使用されてい cookie ます。 サーバーは "I am Groot と" xyz アクセス許可 "トークンを生成し、クライアントに渡します。 将来の日付では、クライアントはそのトークンをサーバーに返しますが、サーバーでは、クライアントがトークンを偽造していないことを保証する必要があります。 そのため、最初の要件: 信頼性 ( 整合性、改ざん防止)。
 
 永続化された状態はサーバーによって信頼されているため、この状態には、オペレーティング環境に固有の情報が含まれている可能性があります。 ファイルパス、アクセス許可、ハンドルまたはその他の間接参照、またはサーバー固有のその他のデータの形式を使用できます。 通常、このような情報は、信頼されていないクライアントに公開することはできません。 そのため、2番目の要件は機密性です。
 

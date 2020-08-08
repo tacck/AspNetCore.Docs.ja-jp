@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399284"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018755"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC のキャッシュ タグ ヘルパー
 
@@ -41,11 +43,11 @@ ms.locfileid: "85399284"
 
 ### <a name="enabled"></a>enabled
 
-| 属性の種類  | 例        | 既定値 |
+| 属性の種類  | 例        | Default |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`enabled` によってキャッシュ タグ ヘルパーで囲まれた内容をキャッシュするかどうかが決定されます。 既定値は、`true` です。 `false` に設定すると、作成された出力はキャッシュ**されません**。
+`enabled` によってキャッシュ タグ ヘルパーで囲まれた内容をキャッシュするかどうかが決定されます。 既定では、 `true`です。 `false` に設定すると、作成された出力はキャッシュ**されません**。
 
 例:
 
@@ -73,7 +75,7 @@ ms.locfileid: "85399284"
 
 ### <a name="expires-after"></a>expires-after
 
-| 属性の種類 | 例                      | 既定値    |
+| 属性の種類 | 例                      | 既定    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 分 |
 
@@ -163,15 +165,15 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-cookie"></a>vary-by-cookie
+### <a name="vary-by-no-loccookie"></a>異なる方法-cookie
 
 | 属性の種類 | 例                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
 | String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie` には、Cookie 値が変化したときにキャッシュの更新をトリガーする、コンマで区切った Cookie 名のリストを指定します。
+`vary-by-cookie`cookie値が変更されたときにキャッシュの更新をトリガーする名前のコンマ区切りの一覧を受け取り cookie ます。
 
-次の例では、ASP.NET Core に関連付けられている cookie を監視し Identity ます。 ユーザーが認証されると、cookie の変更によって Identity キャッシュの更新がトリガーされます。
+次の例では、 cookie ASP.NET Core に関連付けられているを監視し Identity ます。 ユーザーが認証されると、の変更によって Identity cookie キャッシュ更新がトリガーされます。
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -181,7 +183,7 @@ routes.MapRoute(
 
 ### <a name="vary-by-user"></a>vary-by-user
 
-| 属性の種類  | 例        | 既定値 |
+| 属性の種類  | 例        | Default |
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
@@ -195,7 +197,7 @@ routes.MapRoute(
 </cache>
 ```
 
-この属性を使って、ユーザーがサインインしてからサインアウトするまでキャッシュの内容を保持します。 値を `true` に設定すると、認証サイクルによって認証されたユーザーのキャッシュが無効にされます。 ユーザーが認証されると新しい一意の Cookie 値が生成されるため、キャッシュは無効になります。 Cookie が存在しない場合、または Cookie の有効期限が切れている場合は、キャッシュは匿名状態で保持されます。 ユーザーが認証**されない**場合、キャッシュは保持されます。
+この属性を使って、ユーザーがサインインしてからサインアウトするまでキャッシュの内容を保持します。 値を `true` に設定すると、認証サイクルによって認証されたユーザーのキャッシュが無効にされます。 ユーザーが認証されると、新しい一意の値が生成されるため、キャッシュは無効になり cookie ます。 が存在しない場合 cookie 、またはが期限切れになった場合、匿名状態のキャッシュが保持され cookie ます。 ユーザーが認証**されない**場合、キャッシュは保持されます。
 
 ### <a name="vary-by"></a>vary-by
 
@@ -230,7 +232,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| 属性の種類      | 例                               | 既定値  |
+| 属性の種類      | 例                               | Default  |
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 
@@ -248,7 +250,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 キャッシュ タグ ヘルパーは、[メモリ キャッシュ サービス](xref:performance/caching/memory)に依存します。 サービスが追加されていない場合、キャッシュ タグ ヘルパーによってサービスが追加されます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:performance/caching/memory>
 * <xref:security/authentication/identity>
