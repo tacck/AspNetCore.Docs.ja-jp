@@ -5,6 +5,8 @@ description: ASP.NET MVC プロジェクトから ASP.NET Core MVC プロジェ�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/configuration
-ms.openlocfilehash: 9be321850b14847973877fb6a32217bd2dbb5171
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7c1f2feb40e115d71fb087201acdf52197a52c88
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399817"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015102"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>構成を ASP.NET Core に移行する
 

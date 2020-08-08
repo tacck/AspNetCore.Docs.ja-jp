@@ -7,6 +7,8 @@ ms.author: mimengis
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: 27ab8cc1b6e419b59aadb97a8a1fbdddc3579276
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ec1d83853b1596824914328d546c6c68cce3bfe7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408800"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012554"
 ---
-# <a name="aspnet-core-signalr-java-client"></a>SignalRJava クライアントの ASP.NET Core
+# <a name="aspnet-core-no-locsignalr-java-client"></a>SignalRJava クライアントの ASP.NET Core
 
 作成者: [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
@@ -32,7 +34,7 @@ Java クライアントを使用すると、 SignalR Android アプリを含む 
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/java-client/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="install-the-signalr-java-client-package"></a>SignalRJava クライアントパッケージをインストールする
+## <a name="install-the-no-locsignalr-java-client-package"></a>SignalRJava クライアントパッケージをインストールする
 
 *Signalr*の JAR ファイルを使用すると、クライアントはハブに接続でき SignalR ます。 最新の JAR ファイルのバージョン番号を確認するには、 [Maven の検索結果](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr)を参照してください。
 
@@ -121,7 +123,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [Java API リファレンス](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
 * <xref:signalr/hubs>

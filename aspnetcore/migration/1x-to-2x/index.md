@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408696"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015336"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x から 2.0 への移行
 
@@ -164,7 +166,7 @@ EF Core 2.0 を使用する 2.0 プロジェクトでは、`Program.BuildWebHost
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>Razor ビュー コンパイル設定の確認
+## <a name="review-no-locrazor-view-compilation-setting"></a>Razor ビュー コンパイル設定の確認
 
 ユーザーに最も重要なことは、アプリケーションを高速に起動することとパブリッシュされたバンドル数を少なくすることです。 これらの理由から、ASP.NET Core 2.0 では [Razor ビュー コンパイル](xref:mvc/views/view-compilation)が既定で有効になっています。
 
@@ -198,7 +200,7 @@ Application Insights SDK を直接使用している場合は、それを継続�
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>認証、Identity の機能強化の採用
+## <a name="adopt-authenticationno-locidentity-improvements"></a>認証、Identity の機能強化の採用
 
 ASP.NET Core 2.0 には、新しい認証モデルと ASP.NET Core Identity への大幅な変更があります。 個々のユーザー アカウントを有効にしてプロジェクトを作成した場合や認証または Identity を手動で追加した場合、「IdentityASP.NET Core 2.0 への認証と [ の移行](xref:migration/1x-to-2x/identity-2x)」 を参照してください。
 

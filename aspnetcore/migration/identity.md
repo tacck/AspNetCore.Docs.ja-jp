@@ -5,6 +5,8 @@ description: ASP.NET MVC プロジェクトから ASP.NET Core MVC プロジェ�
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 995de894bc77c4db5e5683b36e691b0c5a3463d3
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a6cc1e612dbf59dc2db2eca165dd1a03ab92f81
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403756"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014933"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core"></a>認証および Identity ASP.NET Core への移行
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>認証および Identity ASP.NET Core への移行
 
 作成者: [Steve Smith](https://ardalis.com/)
 
 前の記事では、 [ASP.NET mvc プロジェクトから ASP.NET CORE mvc に構成を移行](xref:migration/configuration)しています。 この記事では、登録、ログイン、およびユーザー管理機能を移行します。
 
-## <a name="configure-identity-and-membership"></a>Identityメンバーシップを構成する
+## <a name="configure-no-locidentity-and-membership"></a>Identityメンバーシップを構成する
 
-ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォルダーにある*Startup.Auth.cs*と*IdentityConfig.cs*の ASP.NET を使用して構成されます。 ASP.NET Core MVC では、これらの機能は*Startup.cs*で構成されています。
+ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォルダーにある*Startup.Auth.cs*と* Identity Config.cs*の ASP.NET を使用して構成されます。 ASP.NET Core MVC では、これらの機能は*Startup.cs*で構成されています。
 
 次の NuGet パッケージをインストールします。
 
@@ -53,7 +55,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-この時点で、上記のコードでは、ASP.NET MVC プロジェクトからまだ移行していない2つの型が参照されています。 `ApplicationDbContext` `ApplicationUser` ASP.NET Core プロジェクトに新しい*モデル*フォルダーを作成し、これらの型に対応する2つのクラスを追加します。 これらのクラスの ASP.NET MVC バージョンは */Models/IdentityModels.cs*にありますが、移行されたプロジェクトのクラスごとに1つのファイルを使用します。これはより明確であるためです。
+この時点で、上記のコードでは、ASP.NET MVC プロジェクトからまだ移行していない2つの型が参照されています。 `ApplicationDbContext` `ApplicationUser` ASP.NET Core プロジェクトに新しい*モデル*フォルダーを作成し、これらの型に対応する2つのクラスを追加します。 これらのクラスの ASP.NET MVC バージョンは */Models/ Identity Models.cs*にありますが、移行されたプロジェクトのクラスごとに1つのファイルを使用します。これはより明確であるためです。
 
 *ApplicationUser.cs*:
 

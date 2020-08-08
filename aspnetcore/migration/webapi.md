@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407227"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014816"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API から ASP.NET Core への移行
 
@@ -61,7 +63,7 @@ Visual Studio で新しい空のソリューションを作成し、移行する
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. 空の**ソリューション**テンプレートを選択し、[**次へ**] を選択します。
-1. ソリューションに*WebAPIMigration*という名前を指定します。 **[作成]** を選択します。
+1. ソリューションに*WebAPIMigration*という名前を指定します。 **［作成］** を選択します
 1. 既存の製品*アプリ*プロジェクトをソリューションに追加します。
 
 移行先の新しい API プロジェクトを追加します。
@@ -77,7 +79,7 @@ Visual Studio で新しい空のソリューションを作成し、移行する
 
 ASP.NET Core では、 *App_Start*フォルダーや*global.asax*ファイルは使用しません。 また、 *web.config*ファイルは発行時に追加されます。
 
-`Startup` クラス:
+`Startup` クラスでは次のことが行われます。
 
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
@@ -144,7 +146,7 @@ ASP.NET Core *API*プロジェクトテンプレートには、生成された�
 
 移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -153,7 +155,7 @@ ASP.NET Core *API*プロジェクトテンプレートには、生成された�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>前提条件
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -190,7 +192,7 @@ ASP.NET Core では使用しません。
 * *App_Start*フォルダーまたは*global.asax*ファイル
 * *web.config*ファイルは発行時に追加されます。
 
-`Startup` クラス:
+`Startup` クラスでは次のことが行われます。
 
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
@@ -288,7 +290,7 @@ Web API 互換性 shim は、大規模な ASP.NET 4.x Web API プロジェクト
 1. でを呼び出して、互換性 shim のサービスをアプリの DI コンテナーに登録 `services.AddMvc().AddWebApiConventions()` `Startup.ConfigureServices` します。
 1. アプリの呼び出しのでを使用して、web API 固有のルートを定義し `MapWebApiRoute` `IRouteBuilder` `IApplicationBuilder.UseMvc` ます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

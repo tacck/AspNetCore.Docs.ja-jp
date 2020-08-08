@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059774"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014894"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET メンバーシップ認証から ASP.NET Core 2.0 への移行Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>ASP.NET メンバーシップ認証から ASP.NET Core 2.0 への移行Identity
 
 著者: [Isaac Levin](https://isaaclevin.com)
 
@@ -38,14 +40,14 @@ ASP.NET 2.0 より前の開発者は、アプリの認証と承認のプロセ�
 
 既存のアプリを ASP.NET Core 2.0 に移行するには、 Identity これらのテーブルのデータを新しいスキーマによって使用されるテーブルに移行する必要があり Identity ます。
 
-## <a name="aspnet-core-identity-20-schema"></a>ASP.NET Core Identity 2.0 スキーマ
+## <a name="aspnet-core-no-locidentity-20-schema"></a>ASP.NET Core Identity 2.0 スキーマ
 
 ASP.NET Core 2.0 は、 [Identity](/aspnet/identity/index) ASP.NET 4.5 で導入された原則に従います。 原則は共有されていますが、ASP.NET Core のバージョン間でもフレームワーク間の実装は異なります (「[認証の移行」および「 Identity ASP.NET Core 2.0 への移行](xref:migration/1x-to-2x/index)」を参照してください)。
 
 ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity は、新しい ASP.NET Core 2.0 アプリを作成することです。 Visual Studio 2017 で、次の手順を実行します。
 
-1. **[ファイル]**  >  **[新規作成]**  >  **[プロジェクト]** を順に選択します。
-1. *CoreIdentitySample*という名前の新しい**ASP.NET Core Web アプリケーション**プロジェクトを作成します。
+1. **[File]**  >  **[New]**  >  **[Project]** の順に選択します。
+1. *Core Identity Sample*という名前の新しい**ASP.NET Core Web アプリケーション**プロジェクトを作成します。
 1. ドロップダウンで**ASP.NET Core 2.0**を選択し、[ **Web アプリケーション**] を選択します。 このテンプレートは、 [ Razor Pages](xref:razor-pages/index)アプリを生成します。 [ **OK]** をクリックしてから、[**認証の変更**] をクリックします。
 1. テンプレートに**個別のユーザーアカウント**を選択し Identity ます。 最後に、[ **ok**] をクリックし、[ **ok]** をクリックします。 Visual Studio によって、ASP.NET Core テンプレートを使用してプロジェクトが作成さ Identity れます。
 1. [**ツール**] [  >  **NuGet パッケージマネージャー**] [  >  **パッケージマネージャーコンソール**] を選択して、[**パッケージマネージャーコンソール**(PMC)] ウィンドウを開きます。
@@ -67,7 +69,7 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
     この `Update-Database` コマンドは、スキーマで指定されたデータベースと、アプリの初期化に必要なデータを作成しました。 次の図は、前の手順で作成されたテーブル構造を示しています。
 
-    ![Identityテーブル](identity/_static/identity-tables.png)
+    ![::: no-loc (Identity)::: Tables](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>スキーマを移行する
 
@@ -75,7 +77,7 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
 ### <a name="users"></a>ユーザー
 
-|Identity<br>( `dbo.AspNetUsers` ) 列  |Type     |メンバーシップ<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 列|Type      |
+|Identity<br>( `dbo.AspNetUsers` ) 列  |種類     |Membership<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 列|種類      |
 |-------------------------------------------|-----------------------------------------------------------------------|
 | `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
 | `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
@@ -90,7 +92,7 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
 ### <a name="roles"></a>ロール
 
-|Identity<br>( `dbo.AspNetRoles` ) 列|Type|メンバーシップ<br>( `dbo.aspnet_Roles` ) 列|Type|
+|Identity<br>( `dbo.AspNetRoles` ) 列|種類|Membership<br>( `dbo.aspnet_Roles` ) 列|種類|
 |----------------------------------------|-----------------------------------|
 |`Id`                           |`string`|`RoleId`         | `string`        |
 |`Name`                         |`string`|`RoleName`       | `string`        |
@@ -98,12 +100,12 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
 ### <a name="user-roles"></a>ユーザー ロール
 
-|Identity<br>( `dbo.AspNetUserRoles` ) 列|Type|メンバーシップ<br>( `dbo.aspnet_UsersInRoles` ) 列|Type|
+|Identity<br>( `dbo.AspNetUserRoles` ) 列|種類|Membership<br>( `dbo.aspnet_UsersInRoles` ) 列|種類|
 |-------------------------|----------|--------------|---------------------------|
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-*ユーザー*および*ロール*の移行スクリプトを作成する場合は、上記のマッピングテーブルを参照してください。 次の例では、データベースサーバーに2つのデータベースがあることを前提としています。 1つのデータベースには、既存の ASP.NET メンバーシップスキーマとデータが含まれています。 他の*CoreIdentitySample*データベースは、前に説明した手順を使用して作成されました。 詳細については、コメントがインラインで含まれています。
+*ユーザー*および*ロール*の移行スクリプトを作成する場合は、上記のマッピングテーブルを参照してください。 次の例では、データベースサーバーに2つのデータベースがあることを前提としています。 1つのデータベースには、既存の ASP.NET メンバーシップスキーマとデータが含まれています。 もう1つの*コア Identity サンプル*データベースは、前に説明した手順を使用して作成されました。 詳細については、コメントがインラインで含まれています。
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB
@@ -201,6 +203,6 @@ COMMIT TRANSACTION MigrateUsersAndRoles
 
  ![固定ログイン](identity/_static/fixed-login.png)
 
-## <a name="next-steps"></a>次の手順
+## <a name="next-steps"></a>次のステップ
 
 このチュートリアルでは、SQL メンバーシップから ASP.NET Core 2.0 にユーザーを移植する方法について学習しました Identity 。 ASP.NET Core の詳細につい Identity ては、「」[を Identity ](xref:security/authentication/identity)参照してください。

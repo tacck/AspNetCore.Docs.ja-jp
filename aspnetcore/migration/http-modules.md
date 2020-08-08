@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403652"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014985"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP ハンドラーとモジュールを ASP.NET Core ミドルウェアに移行する
 
@@ -291,7 +293,7 @@ HttpContext は次のように変換さ**れます。**
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext。クッキー**は次のように変換されます。
+**HttpContext. 要求。 Cookies**は次のように変換します。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -374,9 +376,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-**HttpContext。クッキー**
+**CookieHttpContext。2$s**
 
-Cookie は、cookie の*セットクッキー*応答ヘッダーでブラウザーに移動します。 そのため、cookie を送信するには、応答ヘッダーの送信に使用するのと同じコールバックが必要です。
+Cookieは、*セット Cookie *応答ヘッダー内のブラウザーに移動します。 そのため、を送信するには、 cookie 応答ヘッダーの送信に使用するのと同じコールバックが必要です。
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -390,7 +392,7 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [HTTP ハンドラーと HTTP モジュールの概要](/iis/configuration/system.webserver/)
 * [構成](xref:fundamentals/configuration/index)

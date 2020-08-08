@@ -5,6 +5,8 @@ description: ASP.NET MVC プロジェクトの ASP.NET Core MVC への移行を�
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6a645d0e5959b4301ee7d2bcfc692f7499574dc4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17f2a2532c58c3796835328260231d63f8fb2e40
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407324"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015050"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC から ASP.NET Core MVC への移行
 
@@ -35,7 +37,7 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 
 構成とコードの移行につい Identity ては、「 [ASP.NET Core への構成の移行](xref:migration/configuration)」および「[認証の移行」および「 Identity ASP.NET Core への移行](xref:migration/identity)」を参照してください
 
-## <a name="prerequisites"></a>必須コンポーネント
+## <a name="prerequisites"></a>前提条件
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -45,7 +47,7 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. [ **ASP.NET Web アプリケーション (.NET Framework)** ] を選択し、[**次へ**] を選択します。
-1. 名前空間が次の手順で作成した ASP.NET Core プロジェクトと一致するように、プロジェクトに*WebApp1*という名前を指定します。 **[作成]** を選択します。
+1. 名前空間が次の手順で作成した ASP.NET Core プロジェクトと一致するように、プロジェクトに*WebApp1*という名前を指定します。 **［作成］** を選択します
 1. [ **MVC**] を選択し、[**作成**] を選択します。
 
 ## <a name="create-the-aspnet-core-project"></a>ASP.NET Core プロジェクトを作成する
@@ -56,7 +58,7 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. [ **ASP.NET Web Core Web アプリケーション**] を選択し、[**次へ**] を選択します。
 1. [**新しいプロジェクトの構成**] ダイアログで、プロジェクトに*WebApp1*という名前を設定します。
-1. 同じプロジェクト名を使用するように、場所を前のプロジェクトとは別のディレクトリに設定します。 同じ名前空間を使用すると、2つのプロジェクト間でコードを簡単にコピーできるようになります。 **[作成]** を選択します。
+1. 同じプロジェクト名を使用するように、場所を前のプロジェクトとは別のディレクトリに設定します。 同じ名前空間を使用すると、2つのプロジェクト間でコードを簡単にコピーできるようになります。 **［作成］** を選択します
 1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 [ **Web アプリケーション (モデルビューコントローラー)** ] プロジェクトテンプレートを選択し、[**作成**] を選択します。
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>MVC を使用するように ASP.NET Core サイトを構成する
@@ -106,7 +108,7 @@ ASP.NET Core *WebApp1*プロジェクトには、ASP.NET MVC プロジェクト�
 各コントローラーエンドポイントはテストできます。ただし、レイアウトとスタイルについては、ドキュメントの後半で説明します。
 
 1. ASP.NET Core アプリを実行します。
-1. 現在のポート番号を ASP.NET Core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET Core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` のようにします。
+1. 現在のポート番号を ASP.NET Core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET Core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` のように指定します。
 
 ## <a name="migrate-static-content"></a>静的コンテンツの移行
 
@@ -264,7 +266,7 @@ ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換しま
 <h1>Hello world!</h1>
 ```
 
-アプリを実行します。
+アプリケーションを実行します。
 
 ![Microsoft Edge で開いている Web アプリ](mvc/_static/hello-world.png)
 
@@ -296,7 +298,7 @@ ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換しま
 
 レイアウトファイルとスタイルはまだ移行されていないため、表示されたビューには、ビューファイルのコンテンツのみが含まれます。 ビューとビューに対して生成されたレイアウトファイルは、 `About` `Contact` まだ使用できません。
 
-現在のポート番号を ASP.NET core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` のように指定します。
+現在のポート番号を ASP.NET core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` です。
 
 ![連絡先ページ](mvc/_static/contact-page.png)
 
@@ -369,7 +371,7 @@ JQuery および Bootstrap JavaScript インクルードの置換マークアッ
 
 ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換します。 通常、サーバーに関する機密情報が漏えいするのを防ぐために、エラーの詳細はこれらの応答に含まれていません。 詳細については、「[開発者向け例外ページ](xref:fundamentals/error-handling#developer-exception-page)」を参照してください。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -450,7 +452,7 @@ ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換しま
 <h1>Hello world!</h1>
 ```
 
-アプリを実行します。
+アプリケーションを実行します。
 
 ![Microsoft Edge で開いている Web アプリ](mvc/_static/hello-world.png)
 
@@ -482,7 +484,7 @@ ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換しま
 
 レイアウトファイルとスタイルはまだ移行されていないため、表示されたビューには、ビューファイルのコンテンツのみが含まれます。 ビューとビューに対して生成されたレイアウトファイルは、 `About` `Contact` まだ使用できません。
 
-* 現在のポート番号を ASP.NET core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` のように指定します。
+* 現在のポート番号を ASP.NET core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` です。
 
 ![連絡先ページ](mvc/_static/contact-page.png)
 
@@ -555,7 +557,7 @@ JQuery および Bootstrap JavaScript インクルードの置換マークアッ
 
 ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換します。 通常、サーバーに関する機密情報が漏えいするのを防ぐために、エラーの詳細はこれらの応答に含まれていません。 詳細については、「[開発者向け例外ページ](xref:fundamentals/error-handling#developer-exception-page)」を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

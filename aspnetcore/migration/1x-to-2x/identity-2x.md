@@ -5,6 +5,8 @@ description: この記事では ASP.NET Core 1.x 認証と ASP.NET Core 2.0 に�
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: dacf6fa7191f51f36b9ba65a90746a26f958fc03
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408670"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015291"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>認証と Identity ASP.NET Core 2.0 への移行
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>認証と Identity ASP.NET Core 2.0 への移行
 
 [Scott Addie](https://github.com/scottaddie)および[hao Kung](https://github.com/HaoK)
 
@@ -86,19 +88,19 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 次に、各主要な認証スキームの2.0 移行手順を示します。
 
-### <a name="cookie-based-authentication"></a>Cookie ベースの認証
+### <a name="no-loccookie-based-authentication"></a>Cookieベースの認証
 
 次の2つのオプションのいずれかを選択し、 *Startup.cs*で必要な変更を行います。
 
-1. Cookie を使用するIdentity
+1. cookieでを使用するIdentity
     - `UseIdentity` `UseAuthentication` メソッド内のをに置き換え `Configure` ます。
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - メソッドでメソッドを呼び出して、 `AddIdentity` `ConfigureServices` cookie 認証サービスを追加します。
-    - 必要に応じて、 `ConfigureApplicationCookie` メソッドでメソッドまたはメソッドを呼び出して、 `ConfigureExternalCookie` `ConfigureServices` cookie の設定を調整し Identity ます。
+    - `AddIdentity`メソッドでメソッドを呼び出して `ConfigureServices` 、認証サービスを追加し cookie ます。
+    - 必要に応じて、 `ConfigureApplicationCookie` メソッドでメソッドまたはメソッドを呼び出して、設定を調整し `ConfigureExternalCookie` `ConfigureServices` Identity cookie ます。
 
         ```csharp
         services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -108,7 +110,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. Cookie を使用しないIdentity
+2. を cookie 指定せずにを使用するIdentity
     - メソッドの `UseCookieAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
         ```csharp
@@ -277,7 +279,7 @@ Microsoft アカウント認証の詳細については、 [GitHub の問題](ht
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-前のコードスニペットでは、既定のスキームは `CookieAuthenticationDefaults.AuthenticationScheme` ("cookie") に設定されています。
+前のコードスニペットでは、既定のスキームは `CookieAuthenticationDefaults.AuthenticationScheme` ("s") に設定されて Cookie います。
 
 または、オーバーロードされたバージョンのメソッドを使用して、複数の `AddAuthentication` プロパティを設定します。 次のオーバーロードされたメソッドの例では、既定のスキームはに設定されて `CookieAuthenticationDefaults.AuthenticationScheme` います。 認証方式は、個々の `[Authorize]` 属性または承認ポリシー内で指定することもできます。
 
@@ -293,7 +295,7 @@ services.AddAuthentication(options =>
 - ユーザーが自動的にサインインするようにするには
 - `[Authorize]`スキーマを指定せずに属性または承認ポリシーを使用する
 
-この規則の例外は `AddIdentity` メソッドです。 このメソッドは、cookie を追加し、既定の認証およびチャレンジスキームをアプリケーションクッキーに設定し `IdentityConstants.ApplicationScheme` ます。 また、既定のサインインスキームを外部 cookie に設定し `IdentityConstants.ExternalScheme` ます。
+この規則の例外は `AddIdentity` メソッドです。 このメソッドは、を追加 cookie し、既定の認証およびチャレンジのスキームをアプリケーションに設定し cookie `IdentityConstants.ApplicationScheme` ます。 また、既定のサインインスキームが外部に設定され cookie `IdentityConstants.ExternalScheme` ます。
 
 <a name="obsolete-interface"></a>
 
@@ -342,11 +344,11 @@ Windows 認証には、次の2つのバリエーションがあります。
 
 <a name="identity-cookie-options"></a>
 
-## <a name="identitycookieoptions-instances"></a>Identity Cookieoptions インスタンス
+## <a name="no-locidentityno-loccookieoptions-instances"></a>IdentityCookieオプションのインスタンス
 
-2.0 の変更の副作用は、cookie オプションのインスタンスの代わりに名前付きオプションを使用するように切り替えることです。 Cookie スキーム名をカスタマイズする機能 Identity は削除されます。
+2.0 の変更の副作用は、オプションのインスタンスの代わりに名前付きオプションを使用するように切り替えることです cookie 。 スキーム名をカスタマイズする機能 Identity cookie は削除されます。
 
-たとえば、1.x プロジェクトでは、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用し `IdentityCookieOptions` て、パラメーターを*AccountController.cs*および*ManageController.cs*に渡します。 外部クッキー認証スキームは、指定されたインスタンスからアクセスされます。
+たとえば、1.x プロジェクトでは、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用し `IdentityCookieOptions` て、パラメーターを*AccountController.cs*および*ManageController.cs*に渡します。 外部 cookie 認証スキームは、指定されたインスタンスからアクセスされます。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -368,7 +370,7 @@ Windows 認証には、次の2つのバリエーションがあります。
 
 <a name="navigation-properties"></a>
 
-## <a name="add-identityuser-poco-navigation-properties"></a>ユーザーの POCO ナビゲーションプロパティの追加
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a>Identityユーザー POCO ナビゲーションプロパティの追加
 
 基本 POCO (Plain Old CLR Object) の Entity Framework (EF) コアナビゲーションプロパティ `IdentityUser` が削除されました。 1.x プロジェクトでこれらのプロパティを使用していた場合は、手動で2.0 プロジェクトに追加します。
 
@@ -456,6 +458,6 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 <a name="additional-resources"></a>
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 詳細については、GitHub で[の Auth 2.0 の問題の説明](https://github.com/aspnet/Security/issues/1338)を参照してください。
