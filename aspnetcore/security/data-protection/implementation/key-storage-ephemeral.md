@@ -5,6 +5,8 @@ description: ASP.NET Core 短期データ保護プロバイダーの実装の詳
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-ephemeral
-ms.openlocfilehash: baec19ef0c0b1e2bf5c176bf1b3c2245de0d3dd0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f51553385d9481a1e96fe3e1a14e51e470b0e735
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408917"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018261"
 ---
-# <a name="ephemeral-data-protection-providers-in-aspnet-core"></a><span data-ttu-id="7a827-103">ASP.NET Core の短期データ保護プロバイダー</span><span class="sxs-lookup"><span data-stu-id="7a827-103">Ephemeral data protection providers in ASP.NET Core</span></span>
+# <a name="ephemeral-data-protection-providers-in-aspnet-core"></a><span data-ttu-id="dc83d-103">ASP.NET Core の短期データ保護プロバイダー</span><span class="sxs-lookup"><span data-stu-id="dc83d-103">Ephemeral data protection providers in ASP.NET Core</span></span>
 
 <a name="data-protection-implementation-key-storage-ephemeral"></a>
 
-<span data-ttu-id="7a827-104">アプリケーションに使い捨てが必要なシナリオがあり `IDataProtectionProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="7a827-104">There are scenarios where an application needs a throwaway `IDataProtectionProvider`.</span></span> <span data-ttu-id="7a827-105">たとえば、開発者が1回限りのコンソールアプリケーションを試している場合や、アプリケーション自体が一時的なものである場合があります (スクリプトまたは単体テストプロジェクト)。</span><span class="sxs-lookup"><span data-stu-id="7a827-105">For example, the developer might just be experimenting in a one-off console application, or the application itself is transient (it's scripted or a unit test project).</span></span> <span data-ttu-id="7a827-106">これらのシナリオをサポートするために、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/)パッケージには型が含まれてい `EphemeralDataProtectionProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="7a827-106">To support these scenarios the [Microsoft.AspNetCore.DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) package includes a type `EphemeralDataProtectionProvider`.</span></span> <span data-ttu-id="7a827-107">この型は、 `IDataProtectionProvider` キーリポジトリがメモリ内にのみ保持され、バッキングストアに書き出されないの基本実装を提供します。</span><span class="sxs-lookup"><span data-stu-id="7a827-107">This type provides a basic implementation of `IDataProtectionProvider` whose key repository is held solely in-memory and isn't written out to any backing store.</span></span>
+<span data-ttu-id="dc83d-104">アプリケーションに使い捨てが必要なシナリオがあり `IDataProtectionProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="dc83d-104">There are scenarios where an application needs a throwaway `IDataProtectionProvider`.</span></span> <span data-ttu-id="dc83d-105">たとえば、開発者が1回限りのコンソールアプリケーションを試している場合や、アプリケーション自体が一時的なものである場合があります (スクリプトまたは単体テストプロジェクト)。</span><span class="sxs-lookup"><span data-stu-id="dc83d-105">For example, the developer might just be experimenting in a one-off console application, or the application itself is transient (it's scripted or a unit test project).</span></span> <span data-ttu-id="dc83d-106">これらのシナリオをサポートするために、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/)パッケージには型が含まれてい `EphemeralDataProtectionProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="dc83d-106">To support these scenarios the [Microsoft.AspNetCore.DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) package includes a type `EphemeralDataProtectionProvider`.</span></span> <span data-ttu-id="dc83d-107">この型は、 `IDataProtectionProvider` キーリポジトリがメモリ内にのみ保持され、バッキングストアに書き出されないの基本実装を提供します。</span><span class="sxs-lookup"><span data-stu-id="dc83d-107">This type provides a basic implementation of `IDataProtectionProvider` whose key repository is held solely in-memory and isn't written out to any backing store.</span></span>
 
-<span data-ttu-id="7a827-108">の各インスタンス `EphemeralDataProtectionProvider` は、独自の一意のマスターキーを使用します。</span><span class="sxs-lookup"><span data-stu-id="7a827-108">Each instance of `EphemeralDataProtectionProvider` uses its own unique master key.</span></span> <span data-ttu-id="7a827-109">したがって、をルートとするが、 `IDataProtector` `EphemeralDataProtectionProvider` 保護されたペイロードを生成する場合、同じインスタンスをルートとする同等の `IDataProtector` (同じ[目的](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes)のチェーンが指定されている) によってのみ、そのペイロードを保護することができ `EphemeralDataProtectionProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="7a827-109">Therefore, if an `IDataProtector` rooted at an `EphemeralDataProtectionProvider` generates a protected payload, that payload can only be unprotected by an equivalent `IDataProtector` (given the same [purpose](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) chain) rooted at the same `EphemeralDataProtectionProvider` instance.</span></span>
+<span data-ttu-id="dc83d-108">の各インスタンス `EphemeralDataProtectionProvider` は、独自の一意のマスターキーを使用します。</span><span class="sxs-lookup"><span data-stu-id="dc83d-108">Each instance of `EphemeralDataProtectionProvider` uses its own unique master key.</span></span> <span data-ttu-id="dc83d-109">したがって、をルートとするが、 `IDataProtector` `EphemeralDataProtectionProvider` 保護されたペイロードを生成する場合、同じインスタンスをルートとする同等の `IDataProtector` (同じ[目的](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes)のチェーンが指定されている) によってのみ、そのペイロードを保護することができ `EphemeralDataProtectionProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="dc83d-109">Therefore, if an `IDataProtector` rooted at an `EphemeralDataProtectionProvider` generates a protected payload, that payload can only be unprotected by an equivalent `IDataProtector` (given the same [purpose](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) chain) rooted at the same `EphemeralDataProtectionProvider` instance.</span></span>
 
-<span data-ttu-id="7a827-110">をインスタンス化 `EphemeralDataProtectionProvider` し、それを使用してデータを保護および保護解除する例を次に示します。</span><span class="sxs-lookup"><span data-stu-id="7a827-110">The following sample demonstrates instantiating an `EphemeralDataProtectionProvider` and using it to protect and unprotect data.</span></span>
+<span data-ttu-id="dc83d-110">をインスタンス化 `EphemeralDataProtectionProvider` し、それを使用してデータを保護および保護解除する例を次に示します。</span><span class="sxs-lookup"><span data-stu-id="dc83d-110">The following sample demonstrates instantiating an `EphemeralDataProtectionProvider` and using it to protect and unprotect data.</span></span>
 
 ```csharp
 using System;
