@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,224 +17,224 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409099"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021836"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a><span data-ttu-id="75b21-103">ASP.NET Core でのログ記録と診断SignalR</span><span class="sxs-lookup"><span data-stu-id="75b21-103">Logging and diagnostics in ASP.NET Core SignalR</span></span>
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="5641c-103">ASP.NET Core でのログ記録と診断SignalR</span><span class="sxs-lookup"><span data-stu-id="5641c-103">Logging and diagnostics in ASP.NET Core SignalR</span></span>
 
-<span data-ttu-id="75b21-104">By [Andrew Stanton-看護師](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="75b21-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
+<span data-ttu-id="5641c-104">By [Andrew Stanton-看護師](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="5641c-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="75b21-105">この記事では、ASP.NET Core アプリから診断情報を収集して問題のトラブルシューティングを行うためのガイダンスを提供 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="75b21-105">This article provides guidance for gathering diagnostics from your ASP.NET Core SignalR app to help troubleshoot issues.</span></span>
+<span data-ttu-id="5641c-105">この記事では、ASP.NET Core アプリから診断情報を収集して問題のトラブルシューティングを行うためのガイダンスを提供 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="5641c-105">This article provides guidance for gathering diagnostics from your ASP.NET Core SignalR app to help troubleshoot issues.</span></span>
 
-## <a name="server-side-logging"></a><span data-ttu-id="75b21-106">サーバー側のログ記録</span><span class="sxs-lookup"><span data-stu-id="75b21-106">Server-side logging</span></span>
+## <a name="server-side-logging"></a><span data-ttu-id="5641c-106">サーバー側のログ記録</span><span class="sxs-lookup"><span data-stu-id="5641c-106">Server-side logging</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="75b21-107">サーバー側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-107">Server-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="75b21-108">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。</span><span class="sxs-lookup"><span data-stu-id="75b21-108">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
+> <span data-ttu-id="5641c-107">サーバー側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-107">Server-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="5641c-108">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。</span><span class="sxs-lookup"><span data-stu-id="5641c-108">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="75b21-109">SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。</span><span class="sxs-lookup"><span data-stu-id="75b21-109">Since SignalR is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="75b21-110">既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。</span><span class="sxs-lookup"><span data-stu-id="75b21-110">In the default configuration, SignalR logs very little information, but this can configured.</span></span> <span data-ttu-id="75b21-111">ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="75b21-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
+<span data-ttu-id="5641c-109">SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。</span><span class="sxs-lookup"><span data-stu-id="5641c-109">Since SignalR is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="5641c-110">既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。</span><span class="sxs-lookup"><span data-stu-id="5641c-110">In the default configuration, SignalR logs very little information, but this can configured.</span></span> <span data-ttu-id="5641c-111">ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="5641c-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
 
-SignalR<span data-ttu-id="75b21-112">2つの logger カテゴリを使用します。</span><span class="sxs-lookup"><span data-stu-id="75b21-112"> uses two logger categories:</span></span>
+<span data-ttu-id="5641c-112">SignalR2つの logger カテゴリを使用します。</span><span class="sxs-lookup"><span data-stu-id="5641c-112">SignalR uses two logger categories:</span></span>
 
-* <span data-ttu-id="75b21-113">`Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。</span><span class="sxs-lookup"><span data-stu-id="75b21-113">`Microsoft.AspNetCore.SignalR`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
-* <span data-ttu-id="75b21-114">`Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、サーバー送信イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR</span><span class="sxs-lookup"><span data-stu-id="75b21-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level SignalR infrastructure.</span></span>
+* <span data-ttu-id="5641c-113">`Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。</span><span class="sxs-lookup"><span data-stu-id="5641c-113">`Microsoft.AspNetCore.SignalR`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
+* <span data-ttu-id="5641c-114">`Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、サーバー送信イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR</span><span class="sxs-lookup"><span data-stu-id="5641c-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level SignalR infrastructure.</span></span>
 
-<span data-ttu-id="75b21-115">から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を*appsettings.js*のファイルのレベルに構成し `LogLevel` `Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-115">To enable detailed logs from SignalR, configure both of the preceding prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
+<span data-ttu-id="5641c-115">から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を*appsettings.js*のファイルのレベルに構成し `LogLevel` `Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-115">To enable detailed logs from SignalR, configure both of the preceding prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
-<span data-ttu-id="75b21-116">これは、メソッドのコードで構成することもでき `CreateWebHostBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-116">You can also configure this in code in your `CreateWebHostBuilder` method:</span></span>
+<span data-ttu-id="5641c-116">これは、メソッドのコードで構成することもでき `CreateWebHostBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-116">You can also configure this in code in your `CreateWebHostBuilder` method:</span></span>
 
 [!code-csharp[](diagnostics/logging-config-code.cs?highlight=5-6)]
 
-<span data-ttu-id="75b21-117">JSON ベースの構成を使用していない場合は、構成システムで次の構成値を設定します。</span><span class="sxs-lookup"><span data-stu-id="75b21-117">If you aren't using JSON-based configuration, set the following configuration values in your configuration system:</span></span>
+<span data-ttu-id="5641c-117">JSON ベースの構成を使用していない場合は、構成システムで次の構成値を設定します。</span><span class="sxs-lookup"><span data-stu-id="5641c-117">If you aren't using JSON-based configuration, set the following configuration values in your configuration system:</span></span>
 
 * `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-<span data-ttu-id="75b21-118">構成システムのドキュメントを調べて、入れ子になった構成値を指定する方法を確認してください。</span><span class="sxs-lookup"><span data-stu-id="75b21-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="75b21-119">たとえば、環境変数の使用時には、`:` の代わりに 2 つの `_` 文字を使用します (例: `Logging__LogLevel__Microsoft.AspNetCore.SignalR`)。</span><span class="sxs-lookup"><span data-stu-id="75b21-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).</span></span>
+<span data-ttu-id="5641c-118">構成システムのドキュメントを調べて、入れ子になった構成値を指定する方法を確認してください。</span><span class="sxs-lookup"><span data-stu-id="5641c-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="5641c-119">たとえば、環境変数の使用時には、`:` の代わりに 2 つの `_` 文字を使用します (例: `Logging__LogLevel__Microsoft.AspNetCore.SignalR`)。</span><span class="sxs-lookup"><span data-stu-id="5641c-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).</span></span>
 
-<span data-ttu-id="75b21-120">アプリのより詳細な診断情報を収集する場合は、`Debug` レベルを使用することが推奨されます。</span><span class="sxs-lookup"><span data-stu-id="75b21-120">We recommend using the `Debug` level when gathering more detailed diagnostics for your app.</span></span> <span data-ttu-id="75b21-121">`Trace` レベルでは非常に低レベルの診断情報が生成されるため、アプリの問題を診断するために必要となることはまれです。</span><span class="sxs-lookup"><span data-stu-id="75b21-121">The `Trace` level produces very low-level diagnostics and is rarely needed to diagnose issues in your app.</span></span>
+<span data-ttu-id="5641c-120">アプリのより詳細な診断情報を収集する場合は、`Debug` レベルを使用することが推奨されます。</span><span class="sxs-lookup"><span data-stu-id="5641c-120">We recommend using the `Debug` level when gathering more detailed diagnostics for your app.</span></span> <span data-ttu-id="5641c-121">`Trace` レベルでは非常に低レベルの診断情報が生成されるため、アプリの問題を診断するために必要となることはまれです。</span><span class="sxs-lookup"><span data-stu-id="5641c-121">The `Trace` level produces very low-level diagnostics and is rarely needed to diagnose issues in your app.</span></span>
 
-## <a name="access-server-side-logs"></a><span data-ttu-id="75b21-122">サーバー側ログにアクセスする</span><span class="sxs-lookup"><span data-stu-id="75b21-122">Access server-side logs</span></span>
+## <a name="access-server-side-logs"></a><span data-ttu-id="5641c-122">サーバー側ログにアクセスする</span><span class="sxs-lookup"><span data-stu-id="5641c-122">Access server-side logs</span></span>
 
-<span data-ttu-id="75b21-123">サーバー側のログにアクセスする方法は、実行環境によって異なります。</span><span class="sxs-lookup"><span data-stu-id="75b21-123">How you access server-side logs depends on the environment in which you're running.</span></span>
+<span data-ttu-id="5641c-123">サーバー側のログにアクセスする方法は、実行環境によって異なります。</span><span class="sxs-lookup"><span data-stu-id="5641c-123">How you access server-side logs depends on the environment in which you're running.</span></span>
 
-### <a name="as-a-console-app-outside-iis"></a><span data-ttu-id="75b21-124">IIS の外部のコンソールアプリとして</span><span class="sxs-lookup"><span data-stu-id="75b21-124">As a console app outside IIS</span></span>
+### <a name="as-a-console-app-outside-iis"></a><span data-ttu-id="5641c-124">IIS の外部のコンソールアプリとして</span><span class="sxs-lookup"><span data-stu-id="5641c-124">As a console app outside IIS</span></span>
 
-<span data-ttu-id="75b21-125">コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> SignalR<span data-ttu-id="75b21-126">ログはコンソールに表示されます。</span><span class="sxs-lookup"><span data-stu-id="75b21-126"> logs will appear in the console.</span></span>
+<span data-ttu-id="5641c-125">コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="5641c-126">SignalRログはコンソールに表示されます。</span><span class="sxs-lookup"><span data-stu-id="5641c-126">SignalR logs will appear in the console.</span></span>
 
-### <a name="within-iis-express-from-visual-studio"></a><span data-ttu-id="75b21-127">Visual Studio から IIS Express 内</span><span class="sxs-lookup"><span data-stu-id="75b21-127">Within IIS Express from Visual Studio</span></span>
+### <a name="within-iis-express-from-visual-studio"></a><span data-ttu-id="5641c-127">Visual Studio から IIS Express 内</span><span class="sxs-lookup"><span data-stu-id="5641c-127">Within IIS Express from Visual Studio</span></span>
 
-<span data-ttu-id="75b21-128">Visual Studio では、[**出力**] ウィンドウにログ出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="75b21-128">Visual Studio displays the log output in the **Output** window.</span></span> <span data-ttu-id="75b21-129">[ **ASP.NET Core Web サーバー** ] ドロップダウンオプションを選択します。</span><span class="sxs-lookup"><span data-stu-id="75b21-129">Select the **ASP.NET Core Web Server** drop down option.</span></span>
+<span data-ttu-id="5641c-128">Visual Studio では、[**出力**] ウィンドウにログ出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="5641c-128">Visual Studio displays the log output in the **Output** window.</span></span> <span data-ttu-id="5641c-129">[ **ASP.NET Core Web サーバー** ] ドロップダウンオプションを選択します。</span><span class="sxs-lookup"><span data-stu-id="5641c-129">Select the **ASP.NET Core Web Server** drop down option.</span></span>
 
-### <a name="azure-app-service"></a><span data-ttu-id="75b21-130">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="75b21-130">Azure App Service</span></span>
+### <a name="azure-app-service"></a><span data-ttu-id="5641c-130">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="5641c-130">Azure App Service</span></span>
 
-<span data-ttu-id="75b21-131">Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル**をに構成し `Verbose` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-131">Enable the **Application Logging (Filesystem)** option in the **Diagnostics logs** section of the Azure App Service portal and configure the **Level** to `Verbose`.</span></span> <span data-ttu-id="75b21-132">ログは、**ログストリーミング**サービスおよび App Service のファイルシステムのログで使用できます。</span><span class="sxs-lookup"><span data-stu-id="75b21-132">Logs should be available from the **Log streaming** service and in logs on the file system of the App Service.</span></span> <span data-ttu-id="75b21-133">詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="75b21-133">For more information, see [Azure log streaming](xref:fundamentals/logging/index#azure-log-streaming).</span></span>
+<span data-ttu-id="5641c-131">Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル**をに構成し `Verbose` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-131">Enable the **Application Logging (Filesystem)** option in the **Diagnostics logs** section of the Azure App Service portal and configure the **Level** to `Verbose`.</span></span> <span data-ttu-id="5641c-132">ログは、**ログストリーミング**サービスおよび App Service のファイルシステムのログで使用できます。</span><span class="sxs-lookup"><span data-stu-id="5641c-132">Logs should be available from the **Log streaming** service and in logs on the file system of the App Service.</span></span> <span data-ttu-id="5641c-133">詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="5641c-133">For more information, see [Azure log streaming](xref:fundamentals/logging/index#azure-log-streaming).</span></span>
 
-### <a name="other-environments"></a><span data-ttu-id="75b21-134">その他の環境</span><span class="sxs-lookup"><span data-stu-id="75b21-134">Other environments</span></span>
+### <a name="other-environments"></a><span data-ttu-id="5641c-134">その他の環境</span><span class="sxs-lookup"><span data-stu-id="5641c-134">Other environments</span></span>
 
-<span data-ttu-id="75b21-135">アプリが別の環境 (Docker、Kubernetes、Windows サービスなど) にデプロイされる場合は、その環境に適したログ プロバイダーを構成する方法についての詳細を、「<xref:fundamentals/logging/index>」で確認してください。</span><span class="sxs-lookup"><span data-stu-id="75b21-135">If the app is deployed to another environment (for example, Docker, Kubernetes, or Windows Service), see <xref:fundamentals/logging/index> for more information on how to configure logging providers suitable for the environment.</span></span>
+<span data-ttu-id="5641c-135">アプリが別の環境 (Docker、Kubernetes、Windows サービスなど) にデプロイされる場合は、その環境に適したログ プロバイダーを構成する方法についての詳細を、「<xref:fundamentals/logging/index>」で確認してください。</span><span class="sxs-lookup"><span data-stu-id="5641c-135">If the app is deployed to another environment (for example, Docker, Kubernetes, or Windows Service), see <xref:fundamentals/logging/index> for more information on how to configure logging providers suitable for the environment.</span></span>
 
-## <a name="javascript-client-logging"></a><span data-ttu-id="75b21-136">JavaScript クライアントのログ記録</span><span class="sxs-lookup"><span data-stu-id="75b21-136">JavaScript client logging</span></span>
+## <a name="javascript-client-logging"></a><span data-ttu-id="5641c-136">JavaScript クライアントのログ記録</span><span class="sxs-lookup"><span data-stu-id="5641c-136">JavaScript client logging</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="75b21-137">クライアント側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-137">Client-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="75b21-138">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。</span><span class="sxs-lookup"><span data-stu-id="75b21-138">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
+> <span data-ttu-id="5641c-137">クライアント側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-137">Client-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="5641c-138">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。</span><span class="sxs-lookup"><span data-stu-id="5641c-138">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="75b21-139">JavaScript クライアントを使用する場合は、でメソッドを使用してログオプションを構成でき `configureLogging` `HubConnectionBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-139">When using the JavaScript client, you can configure logging options using the `configureLogging` method on `HubConnectionBuilder`:</span></span>
+<span data-ttu-id="5641c-139">JavaScript クライアントを使用する場合は、でメソッドを使用してログオプションを構成でき `configureLogging` `HubConnectionBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-139">When using the JavaScript client, you can configure logging options using the `configureLogging` method on `HubConnectionBuilder`:</span></span>
 
 [!code-javascript[](diagnostics/logging-config-js.js?highlight=3)]
 
-<span data-ttu-id="75b21-140">完全にログ記録を無効にするには、メソッドでを指定し `signalR.LogLevel.None` `configureLogging` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-140">To disable logging entirely, specify `signalR.LogLevel.None` in the `configureLogging` method.</span></span>
+<span data-ttu-id="5641c-140">完全にログ記録を無効にするには、メソッドでを指定し `signalR.LogLevel.None` `configureLogging` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-140">To disable logging entirely, specify `signalR.LogLevel.None` in the `configureLogging` method.</span></span>
 
-<span data-ttu-id="75b21-141">次の表は、JavaScript クライアントで使用できるログレベルを示しています。</span><span class="sxs-lookup"><span data-stu-id="75b21-141">The following table shows log levels available to the JavaScript client.</span></span> <span data-ttu-id="75b21-142">ログレベルをこれらの値のいずれかに設定すると、そのレベルおよびテーブル内のすべてのレベルでログ記録が有効になります。</span><span class="sxs-lookup"><span data-stu-id="75b21-142">Setting the log level to one of these values enables logging at that level and all levels above it in the table.</span></span>
+<span data-ttu-id="5641c-141">次の表は、JavaScript クライアントで使用できるログレベルを示しています。</span><span class="sxs-lookup"><span data-stu-id="5641c-141">The following table shows log levels available to the JavaScript client.</span></span> <span data-ttu-id="5641c-142">ログレベルをこれらの値のいずれかに設定すると、そのレベルおよびテーブル内のすべてのレベルでログ記録が有効になります。</span><span class="sxs-lookup"><span data-stu-id="5641c-142">Setting the log level to one of these values enables logging at that level and all levels above it in the table.</span></span>
 
-| <span data-ttu-id="75b21-143">Level</span><span class="sxs-lookup"><span data-stu-id="75b21-143">Level</span></span> | <span data-ttu-id="75b21-144">説明</span><span class="sxs-lookup"><span data-stu-id="75b21-144">Description</span></span> |
+| <span data-ttu-id="5641c-143">Level</span><span class="sxs-lookup"><span data-stu-id="5641c-143">Level</span></span> | <span data-ttu-id="5641c-144">説明</span><span class="sxs-lookup"><span data-stu-id="5641c-144">Description</span></span> |
 | ----- | ----------- |
-| `None` | <span data-ttu-id="75b21-145">メッセージはログに記録されません。</span><span class="sxs-lookup"><span data-stu-id="75b21-145">No messages are logged.</span></span> |
-| `Critical` | <span data-ttu-id="75b21-146">アプリ全体でエラーが発生したことを示すメッセージ。</span><span class="sxs-lookup"><span data-stu-id="75b21-146">Messages that indicate a failure in the entire app.</span></span> |
-| `Error` | <span data-ttu-id="75b21-147">現在の操作でエラーが発生したことを示すメッセージ。</span><span class="sxs-lookup"><span data-stu-id="75b21-147">Messages that indicate a failure in the current operation.</span></span> |
-| `Warning` | <span data-ttu-id="75b21-148">致命的ではない問題を示すメッセージ。</span><span class="sxs-lookup"><span data-stu-id="75b21-148">Messages that indicate a non-fatal problem.</span></span> |
-| `Information` | <span data-ttu-id="75b21-149">情報メッセージ。</span><span class="sxs-lookup"><span data-stu-id="75b21-149">Informational messages.</span></span> |
-| `Debug` | <span data-ttu-id="75b21-150">デバッグに役立つ診断メッセージ。</span><span class="sxs-lookup"><span data-stu-id="75b21-150">Diagnostic messages useful for debugging.</span></span> |
-| `Trace` | <span data-ttu-id="75b21-151">特定の問題を診断するために設計された、非常に詳細な診断メッセージ。</span><span class="sxs-lookup"><span data-stu-id="75b21-151">Very detailed diagnostic messages designed for diagnosing specific issues.</span></span> |
+| `None` | <span data-ttu-id="5641c-145">メッセージはログに記録されません。</span><span class="sxs-lookup"><span data-stu-id="5641c-145">No messages are logged.</span></span> |
+| `Critical` | <span data-ttu-id="5641c-146">アプリ全体でエラーが発生したことを示すメッセージ。</span><span class="sxs-lookup"><span data-stu-id="5641c-146">Messages that indicate a failure in the entire app.</span></span> |
+| `Error` | <span data-ttu-id="5641c-147">現在の操作でエラーが発生したことを示すメッセージ。</span><span class="sxs-lookup"><span data-stu-id="5641c-147">Messages that indicate a failure in the current operation.</span></span> |
+| `Warning` | <span data-ttu-id="5641c-148">致命的ではない問題を示すメッセージ。</span><span class="sxs-lookup"><span data-stu-id="5641c-148">Messages that indicate a non-fatal problem.</span></span> |
+| `Information` | <span data-ttu-id="5641c-149">情報メッセージ。</span><span class="sxs-lookup"><span data-stu-id="5641c-149">Informational messages.</span></span> |
+| `Debug` | <span data-ttu-id="5641c-150">デバッグに役立つ診断メッセージ。</span><span class="sxs-lookup"><span data-stu-id="5641c-150">Diagnostic messages useful for debugging.</span></span> |
+| `Trace` | <span data-ttu-id="5641c-151">特定の問題を診断するために設計された、非常に詳細な診断メッセージ。</span><span class="sxs-lookup"><span data-stu-id="5641c-151">Very detailed diagnostic messages designed for diagnosing specific issues.</span></span> |
 
-<span data-ttu-id="75b21-152">詳細設定を構成すると、ログはブラウザーコンソール (または NodeJS アプリの標準出力) に書き込まれます。</span><span class="sxs-lookup"><span data-stu-id="75b21-152">Once you've configured the verbosity, the logs will be written to the Browser Console (or Standard Output in a NodeJS app).</span></span>
+<span data-ttu-id="5641c-152">詳細設定を構成すると、ログはブラウザーコンソール (または NodeJS アプリの標準出力) に書き込まれます。</span><span class="sxs-lookup"><span data-stu-id="5641c-152">Once you've configured the verbosity, the logs will be written to the Browser Console (or Standard Output in a NodeJS app).</span></span>
 
-<span data-ttu-id="75b21-153">カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-153">If you want to send logs to a custom logging system, you can provide a JavaScript object implementing the `ILogger` interface.</span></span> <span data-ttu-id="75b21-154">実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。</span><span class="sxs-lookup"><span data-stu-id="75b21-154">The only method that needs to be implemented is `log`, which takes the level of the event and the message associated with the event.</span></span> <span data-ttu-id="75b21-155">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="75b21-155">For example:</span></span>
+<span data-ttu-id="5641c-153">カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-153">If you want to send logs to a custom logging system, you can provide a JavaScript object implementing the `ILogger` interface.</span></span> <span data-ttu-id="5641c-154">実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。</span><span class="sxs-lookup"><span data-stu-id="5641c-154">The only method that needs to be implemented is `log`, which takes the level of the event and the message associated with the event.</span></span> <span data-ttu-id="5641c-155">例:</span><span class="sxs-lookup"><span data-stu-id="5641c-155">For example:</span></span>
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
-## <a name="net-client-logging"></a><span data-ttu-id="75b21-156">.NET クライアントのログ記録</span><span class="sxs-lookup"><span data-stu-id="75b21-156">.NET client logging</span></span>
+## <a name="net-client-logging"></a><span data-ttu-id="5641c-156"> .NET クライアント ログ</span><span class="sxs-lookup"><span data-stu-id="5641c-156">.NET client logging</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="75b21-157">クライアント側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-157">Client-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="75b21-158">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。</span><span class="sxs-lookup"><span data-stu-id="75b21-158">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
+> <span data-ttu-id="5641c-157">クライアント側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-157">Client-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="5641c-158">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。</span><span class="sxs-lookup"><span data-stu-id="5641c-158">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="75b21-159">.NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-159">To get logs from the .NET client, you can use the `ConfigureLogging` method on `HubConnectionBuilder`.</span></span> <span data-ttu-id="75b21-160">これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-160">This works the same way as the `ConfigureLogging` method on `WebHostBuilder` and `HostBuilder`.</span></span> <span data-ttu-id="75b21-161">ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。</span><span class="sxs-lookup"><span data-stu-id="75b21-161">You can configure the same logging providers you use in ASP.NET Core.</span></span> <span data-ttu-id="75b21-162">ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-162">However, you have to manually install and enable the NuGet packages for the individual logging providers.</span></span>
+<span data-ttu-id="5641c-159">.NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-159">To get logs from the .NET client, you can use the `ConfigureLogging` method on `HubConnectionBuilder`.</span></span> <span data-ttu-id="5641c-160">これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-160">This works the same way as the `ConfigureLogging` method on `WebHostBuilder` and `HostBuilder`.</span></span> <span data-ttu-id="5641c-161">ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。</span><span class="sxs-lookup"><span data-stu-id="5641c-161">You can configure the same logging providers you use in ASP.NET Core.</span></span> <span data-ttu-id="5641c-162">ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-162">However, you have to manually install and enable the NuGet packages for the individual logging providers.</span></span>
 
-<span data-ttu-id="75b21-163">.NET クライアントのログ記録をアプリに追加するに Blazor WebAssembly は、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。</span><span class="sxs-lookup"><span data-stu-id="75b21-163">To add .NET client logging to a Blazor WebAssembly app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
+<span data-ttu-id="5641c-163">.NET クライアントのログ記録をアプリに追加するに Blazor WebAssembly は、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。</span><span class="sxs-lookup"><span data-stu-id="5641c-163">To add .NET client logging to a Blazor WebAssembly app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
 
-### <a name="console-logging"></a><span data-ttu-id="75b21-164">[コンソールのログ記録]</span><span class="sxs-lookup"><span data-stu-id="75b21-164">Console logging</span></span>
+### <a name="console-logging"></a><span data-ttu-id="5641c-164">[コンソールのログ記録]</span><span class="sxs-lookup"><span data-stu-id="5641c-164">Console logging</span></span>
 
-<span data-ttu-id="75b21-165">コンソールのログ記録を有効にするには[、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console)追加します。</span><span class="sxs-lookup"><span data-stu-id="75b21-165">In order to enable Console logging, add the [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) package.</span></span> <span data-ttu-id="75b21-166">次に、メソッドを使用し `AddConsole` て、コンソールロガーを構成します。</span><span class="sxs-lookup"><span data-stu-id="75b21-166">Then, use the `AddConsole` method to configure the console logger:</span></span>
+<span data-ttu-id="5641c-165">コンソールのログ記録を有効にするには[、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console)追加します。</span><span class="sxs-lookup"><span data-stu-id="5641c-165">In order to enable Console logging, add the [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) package.</span></span> <span data-ttu-id="5641c-166">次に、メソッドを使用し `AddConsole` て、コンソールロガーを構成します。</span><span class="sxs-lookup"><span data-stu-id="5641c-166">Then, use the `AddConsole` method to configure the console logger:</span></span>
 
 [!code-csharp[](diagnostics/net-client-console-log.cs?highlight=6)]
 
-### <a name="debug-output-window-logging"></a><span data-ttu-id="75b21-167">デバッグ出力ウィンドウのログ記録</span><span class="sxs-lookup"><span data-stu-id="75b21-167">Debug output window logging</span></span>
+### <a name="debug-output-window-logging"></a><span data-ttu-id="5641c-167">デバッグ出力ウィンドウのログ記録</span><span class="sxs-lookup"><span data-stu-id="5641c-167">Debug output window logging</span></span>
 
-<span data-ttu-id="75b21-168">また、ログを構成して、Visual Studio の [**出力**] ウィンドウにアクセスすることもできます。</span><span class="sxs-lookup"><span data-stu-id="75b21-168">You can also configure logs to go to the **Output** window in Visual Studio.</span></span> <span data-ttu-id="75b21-169">次のよう[に、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug)インストールして、メソッドを使用します。 `AddDebug`</span><span class="sxs-lookup"><span data-stu-id="75b21-169">Install the [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug) package and use the `AddDebug` method:</span></span>
+<span data-ttu-id="5641c-168">また、ログを構成して、Visual Studio の [**出力**] ウィンドウにアクセスすることもできます。</span><span class="sxs-lookup"><span data-stu-id="5641c-168">You can also configure logs to go to the **Output** window in Visual Studio.</span></span> <span data-ttu-id="5641c-169">次のよう[に、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug)インストールして、メソッドを使用します。 `AddDebug`</span><span class="sxs-lookup"><span data-stu-id="5641c-169">Install the [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug) package and use the `AddDebug` method:</span></span>
 
 [!code-csharp[](diagnostics/net-client-debug-log.cs?highlight=6)]
 
-### <a name="other-logging-providers"></a><span data-ttu-id="75b21-170">その他のログプロバイダー</span><span class="sxs-lookup"><span data-stu-id="75b21-170">Other logging providers</span></span>
+### <a name="other-logging-providers"></a><span data-ttu-id="5641c-170">その他のログプロバイダー</span><span class="sxs-lookup"><span data-stu-id="5641c-170">Other logging providers</span></span>
 
-SignalR<span data-ttu-id="75b21-171">では、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-171"> supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="75b21-172">ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
+<span data-ttu-id="5641c-171">SignalRでは、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-171">SignalR supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="5641c-172">ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
-### <a name="control-verbosity"></a><span data-ttu-id="75b21-173">コントロールの詳細度</span><span class="sxs-lookup"><span data-stu-id="75b21-173">Control verbosity</span></span>
+### <a name="control-verbosity"></a><span data-ttu-id="5641c-173">コントロールの詳細度</span><span class="sxs-lookup"><span data-stu-id="5641c-173">Control verbosity</span></span>
 
-<span data-ttu-id="75b21-174">アプリ内の他の場所からログを記録している場合は、既定のレベルをに変更すると、詳細が表示されない場合 `Debug` があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="75b21-175">フィルターを使用して、ログのログ記録レベルを構成でき SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-175">You can use a Filter to configure the logging level for SignalR logs.</span></span> <span data-ttu-id="75b21-176">これは、サーバーの場合とほぼ同じ方法でコードで行うことができます。</span><span class="sxs-lookup"><span data-stu-id="75b21-176">This can be done in code, in much the same way as on the server:</span></span>
+<span data-ttu-id="5641c-174">アプリ内の他の場所からログを記録している場合は、既定のレベルをに変更すると、詳細が表示されない場合 `Debug` があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="5641c-175">フィルターを使用して、ログのログ記録レベルを構成でき SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-175">You can use a Filter to configure the logging level for SignalR logs.</span></span> <span data-ttu-id="5641c-176">これは、サーバーの場合とほぼ同じ方法でコードで行うことができます。</span><span class="sxs-lookup"><span data-stu-id="5641c-176">This can be done in code, in much the same way as on the server:</span></span>
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
-## <a name="network-traces"></a><span data-ttu-id="75b21-177">ネットワーク トレース</span><span class="sxs-lookup"><span data-stu-id="75b21-177">Network traces</span></span>
+## <a name="network-traces"></a><span data-ttu-id="5641c-177">ネットワーク トレース</span><span class="sxs-lookup"><span data-stu-id="5641c-177">Network traces</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="75b21-178">ネットワークトレースには、アプリによって送信されたすべてのメッセージの完全な内容が含まれています。</span><span class="sxs-lookup"><span data-stu-id="75b21-178">A network trace contains the full contents of every message sent by your app.</span></span> <span data-ttu-id="75b21-179">実稼働アプリから GitHub などのパブリックフォーラムに生のネットワークトレースを投稿**しない**でください。</span><span class="sxs-lookup"><span data-stu-id="75b21-179">**Never** post raw network traces from production apps to public forums like GitHub.</span></span>
+> <span data-ttu-id="5641c-178">ネットワークトレースには、アプリによって送信されたすべてのメッセージの完全な内容が含まれています。</span><span class="sxs-lookup"><span data-stu-id="5641c-178">A network trace contains the full contents of every message sent by your app.</span></span> <span data-ttu-id="5641c-179">実稼働アプリから GitHub などのパブリックフォーラムに生のネットワークトレースを投稿**しない**でください。</span><span class="sxs-lookup"><span data-stu-id="5641c-179">**Never** post raw network traces from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="75b21-180">問題が発生した場合は、ネットワークトレースを使用すると、役に立つ情報が得られることがあります。</span><span class="sxs-lookup"><span data-stu-id="75b21-180">If you encounter an issue, a network trace can sometimes provide a lot of helpful information.</span></span> <span data-ttu-id="75b21-181">これは、問題の追跡ツールで問題をファイルする場合に特に便利です。</span><span class="sxs-lookup"><span data-stu-id="75b21-181">This is particularly useful if you're going to file an issue on our issue tracker.</span></span>
+<span data-ttu-id="5641c-180">問題が発生した場合は、ネットワークトレースを使用すると、役に立つ情報が得られることがあります。</span><span class="sxs-lookup"><span data-stu-id="5641c-180">If you encounter an issue, a network trace can sometimes provide a lot of helpful information.</span></span> <span data-ttu-id="5641c-181">これは、問題の追跡ツールで問題をファイルする場合に特に便利です。</span><span class="sxs-lookup"><span data-stu-id="5641c-181">This is particularly useful if you're going to file an issue on our issue tracker.</span></span>
 
-## <a name="collect-a-network-trace-with-fiddler-preferred-option"></a><span data-ttu-id="75b21-182">Fiddler を使用してネットワークトレースを収集する (推奨オプション)</span><span class="sxs-lookup"><span data-stu-id="75b21-182">Collect a network trace with Fiddler (preferred option)</span></span>
+## <a name="collect-a-network-trace-with-fiddler-preferred-option"></a><span data-ttu-id="5641c-182">Fiddler を使用してネットワークトレースを収集する (推奨オプション)</span><span class="sxs-lookup"><span data-stu-id="5641c-182">Collect a network trace with Fiddler (preferred option)</span></span>
 
-<span data-ttu-id="75b21-183">この方法は、すべてのアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="75b21-183">This method works for all apps.</span></span>
+<span data-ttu-id="5641c-183">この方法は、すべてのアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="5641c-183">This method works for all apps.</span></span>
 
-<span data-ttu-id="75b21-184">Fiddler は、HTTP トレースを収集するための非常に強力なツールです。</span><span class="sxs-lookup"><span data-stu-id="75b21-184">Fiddler is a very powerful tool for collecting HTTP traces.</span></span> <span data-ttu-id="75b21-185">[Telerik.com/fiddler](https://www.telerik.com/fiddler)からインストールして起動し、アプリを実行して問題を再現します。</span><span class="sxs-lookup"><span data-stu-id="75b21-185">Install it from [telerik.com/fiddler](https://www.telerik.com/fiddler), launch it, and then run your app and reproduce the issue.</span></span> <span data-ttu-id="75b21-186">Fiddler は Windows で使用でき、macOS と Linux のベータ版があります。</span><span class="sxs-lookup"><span data-stu-id="75b21-186">Fiddler is available for Windows, and there are beta versions for macOS and Linux.</span></span>
+<span data-ttu-id="5641c-184">Fiddler は、HTTP トレースを収集するための非常に強力なツールです。</span><span class="sxs-lookup"><span data-stu-id="5641c-184">Fiddler is a very powerful tool for collecting HTTP traces.</span></span> <span data-ttu-id="5641c-185">[Telerik.com/fiddler](https://www.telerik.com/fiddler)からインストールして起動し、アプリを実行して問題を再現します。</span><span class="sxs-lookup"><span data-stu-id="5641c-185">Install it from [telerik.com/fiddler](https://www.telerik.com/fiddler), launch it, and then run your app and reproduce the issue.</span></span> <span data-ttu-id="5641c-186">Fiddler は Windows で使用でき、macOS と Linux のベータ版があります。</span><span class="sxs-lookup"><span data-stu-id="5641c-186">Fiddler is available for Windows, and there are beta versions for macOS and Linux.</span></span>
 
-<span data-ttu-id="75b21-187">HTTPS を使用して接続する場合は、Fiddler が HTTPS トラフィックの暗号化を解除できるようにするための追加の手順がいくつかあります。</span><span class="sxs-lookup"><span data-stu-id="75b21-187">If you connect using HTTPS, there are some extra steps to ensure Fiddler can decrypt the HTTPS traffic.</span></span> <span data-ttu-id="75b21-188">詳細については、 [Fiddler のドキュメント](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="75b21-188">For more details, see the [Fiddler documentation](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS).</span></span>
+<span data-ttu-id="5641c-187">HTTPS を使用して接続する場合は、Fiddler が HTTPS トラフィックの暗号化を解除できるようにするための追加の手順がいくつかあります。</span><span class="sxs-lookup"><span data-stu-id="5641c-187">If you connect using HTTPS, there are some extra steps to ensure Fiddler can decrypt the HTTPS traffic.</span></span> <span data-ttu-id="5641c-188">詳細については、 [Fiddler のドキュメント](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="5641c-188">For more details, see the [Fiddler documentation](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS).</span></span>
 
-<span data-ttu-id="75b21-189">トレースを収集したら、[**ファイル**  >  **Save**  >  ] メニューの [**すべてのセッション**を保存] をクリックして、トレースをエクスポートできます。</span><span class="sxs-lookup"><span data-stu-id="75b21-189">Once you've collected the trace, you can export the trace by choosing **File** > **Save** > **All Sessions** from the menu bar.</span></span>
+<span data-ttu-id="5641c-189">トレースを収集したら、[**ファイル**  >  **Save**  >  ] メニューの [**すべてのセッション**を保存] をクリックして、トレースをエクスポートできます。</span><span class="sxs-lookup"><span data-stu-id="5641c-189">Once you've collected the trace, you can export the trace by choosing **File** > **Save** > **All Sessions** from the menu bar.</span></span>
 
 ![Fiddler からすべてのセッションをエクスポートしています](diagnostics/fiddler-export.png)
 
-## <a name="collect-a-network-trace-with-tcpdump-macos-and-linux-only"></a><span data-ttu-id="75b21-191">Tcpdump を使用してネットワークトレースを収集する (macOS および Linux のみ)</span><span class="sxs-lookup"><span data-stu-id="75b21-191">Collect a network trace with tcpdump (macOS and Linux only)</span></span>
+## <a name="collect-a-network-trace-with-tcpdump-macos-and-linux-only"></a><span data-ttu-id="5641c-191">Tcpdump を使用してネットワークトレースを収集する (macOS および Linux のみ)</span><span class="sxs-lookup"><span data-stu-id="5641c-191">Collect a network trace with tcpdump (macOS and Linux only)</span></span>
 
-<span data-ttu-id="75b21-192">この方法は、すべてのアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="75b21-192">This method works for all apps.</span></span>
+<span data-ttu-id="5641c-192">この方法は、すべてのアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="5641c-192">This method works for all apps.</span></span>
 
-<span data-ttu-id="75b21-193">コマンドシェルから次のコマンドを実行して、tcpdump を使用して未加工の TCP トレースを収集できます。</span><span class="sxs-lookup"><span data-stu-id="75b21-193">You can collect raw TCP traces using tcpdump by running the following command from a command shell.</span></span> <span data-ttu-id="75b21-194">`root`アクセス許可のエラーが表示された場合は、コマンドにまたはのプレフィックスを付ける必要があり `sudo` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-194">You may need to be `root` or prefix the command with `sudo` if you get a permissions error:</span></span>
+<span data-ttu-id="5641c-193">コマンドシェルから次のコマンドを実行して、tcpdump を使用して未加工の TCP トレースを収集できます。</span><span class="sxs-lookup"><span data-stu-id="5641c-193">You can collect raw TCP traces using tcpdump by running the following command from a command shell.</span></span> <span data-ttu-id="5641c-194">`root`アクセス許可のエラーが表示された場合は、コマンドにまたはのプレフィックスを付ける必要があり `sudo` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-194">You may need to be `root` or prefix the command with `sudo` if you get a permissions error:</span></span>
 
 ```console
 tcpdump -i [interface] -w trace.pcap
 ```
 
-<span data-ttu-id="75b21-195">を `[interface]` キャプチャするネットワークインターフェイスで置き換えます。</span><span class="sxs-lookup"><span data-stu-id="75b21-195">Replace `[interface]` with the network interface you wish to capture on.</span></span> <span data-ttu-id="75b21-196">通常は、 `/dev/eth0` (標準イーサネットインターフェイスの場合) または `/dev/lo0` (localhost トラフィックの場合) のようになります。</span><span class="sxs-lookup"><span data-stu-id="75b21-196">Usually, this is something like `/dev/eth0` (for your standard Ethernet interface) or `/dev/lo0` (for localhost traffic).</span></span> <span data-ttu-id="75b21-197">詳細については、 `tcpdump` ホストシステムの man ページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="75b21-197">For more information, see the `tcpdump` man page on your host system.</span></span>
+<span data-ttu-id="5641c-195">を `[interface]` キャプチャするネットワークインターフェイスで置き換えます。</span><span class="sxs-lookup"><span data-stu-id="5641c-195">Replace `[interface]` with the network interface you wish to capture on.</span></span> <span data-ttu-id="5641c-196">通常は、 `/dev/eth0` (標準イーサネットインターフェイスの場合) または `/dev/lo0` (localhost トラフィックの場合) のようになります。</span><span class="sxs-lookup"><span data-stu-id="5641c-196">Usually, this is something like `/dev/eth0` (for your standard Ethernet interface) or `/dev/lo0` (for localhost traffic).</span></span> <span data-ttu-id="5641c-197">詳細については、 `tcpdump` ホストシステムの man ページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="5641c-197">For more information, see the `tcpdump` man page on your host system.</span></span>
 
-## <a name="collect-a-network-trace-in-the-browser"></a><span data-ttu-id="75b21-198">ブラウザーでネットワークトレースを収集する</span><span class="sxs-lookup"><span data-stu-id="75b21-198">Collect a network trace in the browser</span></span>
+## <a name="collect-a-network-trace-in-the-browser"></a><span data-ttu-id="5641c-198">ブラウザーでネットワークトレースを収集する</span><span class="sxs-lookup"><span data-stu-id="5641c-198">Collect a network trace in the browser</span></span>
 
-<span data-ttu-id="75b21-199">この方法は、ブラウザーベースのアプリに対してのみ機能します。</span><span class="sxs-lookup"><span data-stu-id="75b21-199">This method only works for browser-based apps.</span></span>
+<span data-ttu-id="5641c-199">この方法は、ブラウザーベースのアプリに対してのみ機能します。</span><span class="sxs-lookup"><span data-stu-id="5641c-199">This method only works for browser-based apps.</span></span>
 
-<span data-ttu-id="75b21-200">ほとんどのブラウザーには、ブラウザーとサーバー間のネットワークアクティビティをキャプチャできる [ネットワーク] タブがあり開発者ツール。</span><span class="sxs-lookup"><span data-stu-id="75b21-200">Most browser Developer Tools have a "Network" tab that allows you to capture network activity between the browser and the server.</span></span> <span data-ttu-id="75b21-201">ただし、これらのトレースには、WebSocket およびサーバー送信のイベントメッセージは含まれません。</span><span class="sxs-lookup"><span data-stu-id="75b21-201">However, these traces don't include WebSocket and Server-Sent Event messages.</span></span> <span data-ttu-id="75b21-202">これらのトランスポートを使用している場合は、Fiddler や TcpDump などのツールを使用することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="75b21-202">If you are using those transports, using a tool like Fiddler or TcpDump (described below) is a better approach.</span></span>
+<span data-ttu-id="5641c-200">ほとんどのブラウザーには、ブラウザーとサーバー間のネットワークアクティビティをキャプチャできる [ネットワーク] タブがあり開発者ツール。</span><span class="sxs-lookup"><span data-stu-id="5641c-200">Most browser Developer Tools have a "Network" tab that allows you to capture network activity between the browser and the server.</span></span> <span data-ttu-id="5641c-201">ただし、これらのトレースには、WebSocket およびサーバー送信のイベントメッセージは含まれません。</span><span class="sxs-lookup"><span data-stu-id="5641c-201">However, these traces don't include WebSocket and Server-Sent Event messages.</span></span> <span data-ttu-id="5641c-202">これらのトランスポートを使用している場合は、Fiddler や TcpDump などのツールを使用することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="5641c-202">If you are using those transports, using a tool like Fiddler or TcpDump (described below) is a better approach.</span></span>
 
-### <a name="microsoft-edge-and-internet-explorer"></a><span data-ttu-id="75b21-203">Microsoft Edge と Internet Explorer</span><span class="sxs-lookup"><span data-stu-id="75b21-203">Microsoft Edge and Internet Explorer</span></span>
+### <a name="microsoft-edge-and-internet-explorer"></a><span data-ttu-id="5641c-203">Microsoft Edge と Internet Explorer</span><span class="sxs-lookup"><span data-stu-id="5641c-203">Microsoft Edge and Internet Explorer</span></span>
 
-<span data-ttu-id="75b21-204">(この手順は、Edge と Internet Explorer の両方で同じです)。</span><span class="sxs-lookup"><span data-stu-id="75b21-204">(The instructions are the same for both Edge and Internet Explorer)</span></span>
+<span data-ttu-id="5641c-204">(この手順は、Edge と Internet Explorer の両方で同じです)。</span><span class="sxs-lookup"><span data-stu-id="5641c-204">(The instructions are the same for both Edge and Internet Explorer)</span></span>
 
-1. <span data-ttu-id="75b21-205">F12 キーを押して開発ツールを開きます。</span><span class="sxs-lookup"><span data-stu-id="75b21-205">Press F12 to open the Dev Tools</span></span>
-2. <span data-ttu-id="75b21-206">[ネットワーク] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="75b21-206">Click the Network Tab</span></span>
-3. <span data-ttu-id="75b21-207">必要に応じてページを更新し、問題を再現します</span><span class="sxs-lookup"><span data-stu-id="75b21-207">Refresh the page (if needed) and reproduce the problem</span></span>
-4. <span data-ttu-id="75b21-208">ツールバーの [保存] アイコンをクリックして、トレースを "HAR" ファイルとしてエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="75b21-208">Click the Save icon in the toolbar to export the trace as a "HAR" file:</span></span>
+1. <span data-ttu-id="5641c-205">F12 キーを押して開発ツールを開きます。</span><span class="sxs-lookup"><span data-stu-id="5641c-205">Press F12 to open the Dev Tools</span></span>
+2. <span data-ttu-id="5641c-206">[ネットワーク] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="5641c-206">Click the Network Tab</span></span>
+3. <span data-ttu-id="5641c-207">必要に応じてページを更新し、問題を再現します</span><span class="sxs-lookup"><span data-stu-id="5641c-207">Refresh the page (if needed) and reproduce the problem</span></span>
+4. <span data-ttu-id="5641c-208">ツールバーの [保存] アイコンをクリックして、トレースを "HAR" ファイルとしてエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="5641c-208">Click the Save icon in the toolbar to export the trace as a "HAR" file:</span></span>
 
 ![Microsoft Edge Dev Tools の [ネットワーク] タブの [保存] アイコン](diagnostics/ie-edge-har-export.png)
 
-### <a name="google-chrome"></a><span data-ttu-id="75b21-210">Google Chrome</span><span class="sxs-lookup"><span data-stu-id="75b21-210">Google Chrome</span></span>
+### <a name="google-chrome"></a><span data-ttu-id="5641c-210">Google Chrome</span><span class="sxs-lookup"><span data-stu-id="5641c-210">Google Chrome</span></span>
 
-1. <span data-ttu-id="75b21-211">F12 キーを押して開発ツールを開きます。</span><span class="sxs-lookup"><span data-stu-id="75b21-211">Press F12 to open the Dev Tools</span></span>
-2. <span data-ttu-id="75b21-212">[ネットワーク] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="75b21-212">Click the Network Tab</span></span>
-3. <span data-ttu-id="75b21-213">必要に応じてページを更新し、問題を再現します</span><span class="sxs-lookup"><span data-stu-id="75b21-213">Refresh the page (if needed) and reproduce the problem</span></span>
-4. <span data-ttu-id="75b21-214">要求の一覧の任意の場所を右クリックし、[コンテンツと共に HAR として保存] を選択します。</span><span class="sxs-lookup"><span data-stu-id="75b21-214">Right click anywhere in the list of requests and choose "Save as HAR with content":</span></span>
+1. <span data-ttu-id="5641c-211">F12 キーを押して開発ツールを開きます。</span><span class="sxs-lookup"><span data-stu-id="5641c-211">Press F12 to open the Dev Tools</span></span>
+2. <span data-ttu-id="5641c-212">[ネットワーク] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="5641c-212">Click the Network Tab</span></span>
+3. <span data-ttu-id="5641c-213">必要に応じてページを更新し、問題を再現します</span><span class="sxs-lookup"><span data-stu-id="5641c-213">Refresh the page (if needed) and reproduce the problem</span></span>
+4. <span data-ttu-id="5641c-214">要求の一覧の任意の場所を右クリックし、[コンテンツと共に HAR として保存] を選択します。</span><span class="sxs-lookup"><span data-stu-id="5641c-214">Right click anywhere in the list of requests and choose "Save as HAR with content":</span></span>
 
 ![Google Chrome Dev ツールの [ネットワーク] タブの [HAR として保存] オプション](diagnostics/chrome-har-export.png)
 
-### <a name="mozilla-firefox"></a><span data-ttu-id="75b21-216">Mozilla Firefox</span><span class="sxs-lookup"><span data-stu-id="75b21-216">Mozilla Firefox</span></span>
+### <a name="mozilla-firefox"></a><span data-ttu-id="5641c-216">Mozilla Firefox</span><span class="sxs-lookup"><span data-stu-id="5641c-216">Mozilla Firefox</span></span>
 
-1. <span data-ttu-id="75b21-217">F12 キーを押して開発ツールを開きます。</span><span class="sxs-lookup"><span data-stu-id="75b21-217">Press F12 to open the Dev Tools</span></span>
-2. <span data-ttu-id="75b21-218">[ネットワーク] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="75b21-218">Click the Network Tab</span></span>
-3. <span data-ttu-id="75b21-219">必要に応じてページを更新し、問題を再現します</span><span class="sxs-lookup"><span data-stu-id="75b21-219">Refresh the page (if needed) and reproduce the problem</span></span>
-4. <span data-ttu-id="75b21-220">要求の一覧の任意の場所を右クリックし、[すべてを HAR として保存] を選択します。</span><span class="sxs-lookup"><span data-stu-id="75b21-220">Right click anywhere in the list of requests and choose "Save All As HAR"</span></span>
+1. <span data-ttu-id="5641c-217">F12 キーを押して開発ツールを開きます。</span><span class="sxs-lookup"><span data-stu-id="5641c-217">Press F12 to open the Dev Tools</span></span>
+2. <span data-ttu-id="5641c-218">[ネットワーク] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="5641c-218">Click the Network Tab</span></span>
+3. <span data-ttu-id="5641c-219">必要に応じてページを更新し、問題を再現します</span><span class="sxs-lookup"><span data-stu-id="5641c-219">Refresh the page (if needed) and reproduce the problem</span></span>
+4. <span data-ttu-id="5641c-220">要求の一覧の任意の場所を右クリックし、[すべてを HAR として保存] を選択します。</span><span class="sxs-lookup"><span data-stu-id="5641c-220">Right click anywhere in the list of requests and choose "Save All As HAR"</span></span>
 
 ![Mozilla Firefox Dev Tools [ネットワーク] タブの [すべてを HAR として保存] オプション](diagnostics/firefox-har-export.png)
 
-## <a name="attach-diagnostics-files-to-github-issues"></a><span data-ttu-id="75b21-222">診断ファイルを GitHub の問題にアタッチする</span><span class="sxs-lookup"><span data-stu-id="75b21-222">Attach diagnostics files to GitHub issues</span></span>
+## <a name="attach-diagnostics-files-to-github-issues"></a><span data-ttu-id="5641c-222">診断ファイルを GitHub の問題にアタッチする</span><span class="sxs-lookup"><span data-stu-id="5641c-222">Attach diagnostics files to GitHub issues</span></span>
 
-<span data-ttu-id="75b21-223">GitHub の問題に診断ファイルを添付するには、名前を変更して拡張機能を設定し、 `.txt` 問題にドラッグアンドドロップします。</span><span class="sxs-lookup"><span data-stu-id="75b21-223">You can attach Diagnostics files to GitHub issues by renaming them so they have a `.txt` extension and then dragging and dropping them on to the issue.</span></span>
+<span data-ttu-id="5641c-223">GitHub の問題に診断ファイルを添付するには、名前を変更して拡張機能を設定し、 `.txt` 問題にドラッグアンドドロップします。</span><span class="sxs-lookup"><span data-stu-id="5641c-223">You can attach Diagnostics files to GitHub issues by renaming them so they have a `.txt` extension and then dragging and dropping them on to the issue.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="75b21-224">ログファイルやネットワークトレースの内容を GitHub の問題に貼り付けることは避けてください。</span><span class="sxs-lookup"><span data-stu-id="75b21-224">Please don't paste the content of log files or network traces into a GitHub issue.</span></span> <span data-ttu-id="75b21-225">これらのログとトレースは非常に大きくなる可能性があり、GitHub は通常、これらを切り捨てます。</span><span class="sxs-lookup"><span data-stu-id="75b21-225">These logs and traces can be quite large, and GitHub usually truncates them.</span></span>
+> <span data-ttu-id="5641c-224">ログファイルやネットワークトレースの内容を GitHub の問題に貼り付けることは避けてください。</span><span class="sxs-lookup"><span data-stu-id="5641c-224">Please don't paste the content of log files or network traces into a GitHub issue.</span></span> <span data-ttu-id="5641c-225">これらのログとトレースは非常に大きくなる可能性があり、GitHub は通常、これらを切り捨てます。</span><span class="sxs-lookup"><span data-stu-id="5641c-225">These logs and traces can be quite large, and GitHub usually truncates them.</span></span>
 
 ![GitHub の問題にログファイルをドラッグする](diagnostics/attaching-diagnostics-files.png)
 
-## <a name="metrics"></a><span data-ttu-id="75b21-227">メトリック</span><span class="sxs-lookup"><span data-stu-id="75b21-227">Metrics</span></span>
+## <a name="metrics"></a><span data-ttu-id="5641c-227">メトリック</span><span class="sxs-lookup"><span data-stu-id="5641c-227">Metrics</span></span>
 
-<span data-ttu-id="75b21-228">メトリックは、一定期間のデータ測定値を表します。</span><span class="sxs-lookup"><span data-stu-id="75b21-228">Metrics is a representation of data measures over intervals of time.</span></span> <span data-ttu-id="75b21-229">たとえば、1秒あたりの要求です。</span><span class="sxs-lookup"><span data-stu-id="75b21-229">For example, requests per second.</span></span> <span data-ttu-id="75b21-230">メトリックデータを使用すると、アプリの状態を高レベルで監視できます。</span><span class="sxs-lookup"><span data-stu-id="75b21-230">Metrics data allows observation of the state of an app at a high level.</span></span> <span data-ttu-id="75b21-231">.NET gRPC メトリックは <xref:System.Diagnostics.Tracing.EventCounter> を使用して出力されます。</span><span class="sxs-lookup"><span data-stu-id="75b21-231">.NET gRPC metrics are emitted using <xref:System.Diagnostics.Tracing.EventCounter>.</span></span>
+<span data-ttu-id="5641c-228">メトリックは、一定期間のデータ測定値を表します。</span><span class="sxs-lookup"><span data-stu-id="5641c-228">Metrics is a representation of data measures over intervals of time.</span></span> <span data-ttu-id="5641c-229">たとえば、1秒あたりの要求です。</span><span class="sxs-lookup"><span data-stu-id="5641c-229">For example, requests per second.</span></span> <span data-ttu-id="5641c-230">メトリックデータを使用すると、アプリの状態を高レベルで監視できます。</span><span class="sxs-lookup"><span data-stu-id="5641c-230">Metrics data allows observation of the state of an app at a high level.</span></span> <span data-ttu-id="5641c-231">.NET gRPC メトリックは <xref:System.Diagnostics.Tracing.EventCounter> を使用して出力されます。</span><span class="sxs-lookup"><span data-stu-id="5641c-231">.NET gRPC metrics are emitted using <xref:System.Diagnostics.Tracing.EventCounter>.</span></span>
 
-### <a name="signalr-server-metrics"></a>SignalR<span data-ttu-id="75b21-232">サーバーメトリック</span><span class="sxs-lookup"><span data-stu-id="75b21-232"> server metrics</span></span>
+### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="5641c-232">SignalRサーバーメトリック</span><span class="sxs-lookup"><span data-stu-id="5641c-232">SignalR server metrics</span></span>
 
-SignalR<span data-ttu-id="75b21-233">サーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-233"> server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
+<span data-ttu-id="5641c-233">SignalRサーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-233">SignalR server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
 
-| <span data-ttu-id="75b21-234">名前</span><span class="sxs-lookup"><span data-stu-id="75b21-234">Name</span></span>                    | <span data-ttu-id="75b21-235">[説明]</span><span class="sxs-lookup"><span data-stu-id="75b21-235">Description</span></span>                 |
+| <span data-ttu-id="5641c-234">名前</span><span class="sxs-lookup"><span data-stu-id="5641c-234">Name</span></span>                    | <span data-ttu-id="5641c-235">説明</span><span class="sxs-lookup"><span data-stu-id="5641c-235">Description</span></span>                 |
 |-------------------------|-----------------------------|
-| `connections-started`   | <span data-ttu-id="75b21-236">開始された接続の合計</span><span class="sxs-lookup"><span data-stu-id="75b21-236">Total connections started</span></span>   |
-| `connections-stopped`   | <span data-ttu-id="75b21-237">停止した接続の合計数</span><span class="sxs-lookup"><span data-stu-id="75b21-237">Total connections stopped</span></span>   |
-| `connections-timed-out` | <span data-ttu-id="75b21-238">タイムアウトした接続の合計数</span><span class="sxs-lookup"><span data-stu-id="75b21-238">Total connections timed out</span></span> |
-| `current-connections`   | <span data-ttu-id="75b21-239">現在の接続数</span><span class="sxs-lookup"><span data-stu-id="75b21-239">Current connections</span></span>         |
-| `connections-duration`  | <span data-ttu-id="75b21-240">平均接続時間</span><span class="sxs-lookup"><span data-stu-id="75b21-240">Average connection duration</span></span> |
+| `connections-started`   | <span data-ttu-id="5641c-236">開始された接続の合計</span><span class="sxs-lookup"><span data-stu-id="5641c-236">Total connections started</span></span>   |
+| `connections-stopped`   | <span data-ttu-id="5641c-237">停止した接続の合計数</span><span class="sxs-lookup"><span data-stu-id="5641c-237">Total connections stopped</span></span>   |
+| `connections-timed-out` | <span data-ttu-id="5641c-238">タイムアウトした接続の合計数</span><span class="sxs-lookup"><span data-stu-id="5641c-238">Total connections timed out</span></span> |
+| `current-connections`   | <span data-ttu-id="5641c-239">現在の接続数</span><span class="sxs-lookup"><span data-stu-id="5641c-239">Current connections</span></span>         |
+| `connections-duration`  | <span data-ttu-id="5641c-240">平均接続時間</span><span class="sxs-lookup"><span data-stu-id="5641c-240">Average connection duration</span></span> |
 
-### <a name="observe-metrics"></a><span data-ttu-id="75b21-241">メトリックを観察する</span><span class="sxs-lookup"><span data-stu-id="75b21-241">Observe metrics</span></span>
+### <a name="observe-metrics"></a><span data-ttu-id="5641c-241">メトリックを観察する</span><span class="sxs-lookup"><span data-stu-id="5641c-241">Observe metrics</span></span>
 
-<span data-ttu-id="75b21-242">[dotnet-counters](/dotnet/core/diagnostics/dotnet-counters) は、アドホックな正常性監視と最初のレベルのパフォーマンス調査を目的としたパフォーマンス監視ツールです。</span><span class="sxs-lookup"><span data-stu-id="75b21-242">[dotnet-counters](/dotnet/core/diagnostics/dotnet-counters) is a performance monitoring tool for ad-hoc health monitoring and first-level performance investigation.</span></span> <span data-ttu-id="75b21-243">プロバイダー名としてを使用して .NET アプリを監視し `Microsoft.AspNetCore.Http.Connections` ます。</span><span class="sxs-lookup"><span data-stu-id="75b21-243">Monitor a .NET app with `Microsoft.AspNetCore.Http.Connections` as the provider name.</span></span> <span data-ttu-id="75b21-244">たとえば、次のように入力します。</span><span class="sxs-lookup"><span data-stu-id="75b21-244">For example:</span></span>
+<span data-ttu-id="5641c-242">[dotnet-counters](/dotnet/core/diagnostics/dotnet-counters) は、アドホックな正常性監視と最初のレベルのパフォーマンス調査を目的としたパフォーマンス監視ツールです。</span><span class="sxs-lookup"><span data-stu-id="5641c-242">[dotnet-counters](/dotnet/core/diagnostics/dotnet-counters) is a performance monitoring tool for ad-hoc health monitoring and first-level performance investigation.</span></span> <span data-ttu-id="5641c-243">プロバイダー名としてを使用して .NET アプリを監視し `Microsoft.AspNetCore.Http.Connections` ます。</span><span class="sxs-lookup"><span data-stu-id="5641c-243">Monitor a .NET app with `Microsoft.AspNetCore.Http.Connections` as the provider name.</span></span> <span data-ttu-id="5641c-244">たとえば、次のように入力します。</span><span class="sxs-lookup"><span data-stu-id="5641c-244">For example:</span></span>
 
 ```console
 > dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections
@@ -247,7 +249,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="75b21-245">その他の資料</span><span class="sxs-lookup"><span data-stu-id="75b21-245">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="5641c-245">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="5641c-245">Additional resources</span></span>
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

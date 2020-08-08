@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,56 +17,56 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409086"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022382"
 ---
-# <a name="host-aspnet-core-signalr-in-background-services"></a><span data-ttu-id="8a30b-103">SignalRバックグラウンドサービスでのホスト ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="8a30b-103">Host ASP.NET Core SignalR in background services</span></span>
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a><span data-ttu-id="583c8-103">SignalRバックグラウンドサービスでのホスト ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="583c8-103">Host ASP.NET Core SignalR in background services</span></span>
 
-<span data-ttu-id="8a30b-104">[Brady](https://twitter.com/bradygaster)による</span><span class="sxs-lookup"><span data-stu-id="8a30b-104">By [Brady Gaster](https://twitter.com/bradygaster)</span></span>
+<span data-ttu-id="583c8-104">[Brady](https://twitter.com/bradygaster)による</span><span class="sxs-lookup"><span data-stu-id="583c8-104">By [Brady Gaster](https://twitter.com/bradygaster)</span></span>
 
-<span data-ttu-id="8a30b-105">この記事では、次のガイダンスを提供します。</span><span class="sxs-lookup"><span data-stu-id="8a30b-105">This article provides guidance for:</span></span>
+<span data-ttu-id="583c8-105">この記事では、次のガイダンスを提供します。</span><span class="sxs-lookup"><span data-stu-id="583c8-105">This article provides guidance for:</span></span>
 
-* <span data-ttu-id="8a30b-106">SignalRASP.NET Core でホストされたバックグラウンドワーカープロセスを使用してハブをホストする。</span><span class="sxs-lookup"><span data-stu-id="8a30b-106">Hosting SignalR Hubs using a background worker process hosted with ASP.NET Core.</span></span>
-* <span data-ttu-id="8a30b-107">.NET Core [Backgroundservice](xref:Microsoft.Extensions.Hosting.BackgroundService)内から接続されたクライアントにメッセージを送信する。</span><span class="sxs-lookup"><span data-stu-id="8a30b-107">Sending messages to connected clients from within a .NET Core [BackgroundService](xref:Microsoft.Extensions.Hosting.BackgroundService).</span></span>
+* <span data-ttu-id="583c8-106">SignalRASP.NET Core でホストされたバックグラウンドワーカープロセスを使用してハブをホストする。</span><span class="sxs-lookup"><span data-stu-id="583c8-106">Hosting SignalR Hubs using a background worker process hosted with ASP.NET Core.</span></span>
+* <span data-ttu-id="583c8-107">.NET Core [Backgroundservice](xref:Microsoft.Extensions.Hosting.BackgroundService)内から接続されたクライアントにメッセージを送信する。</span><span class="sxs-lookup"><span data-stu-id="583c8-107">Sending messages to connected clients from within a .NET Core [BackgroundService](xref:Microsoft.Extensions.Hosting.BackgroundService).</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="8a30b-108">[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) ([ダウンロード方法](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="8a30b-108">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
+<span data-ttu-id="583c8-108">[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。</span><span class="sxs-lookup"><span data-stu-id="583c8-108">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/3.x) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="8a30b-109">[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) ([ダウンロード方法](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="8a30b-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
+<span data-ttu-id="583c8-109">[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。</span><span class="sxs-lookup"><span data-stu-id="583c8-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/samples/2.2) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
 
 ::: moniker-end
 
-## <a name="enable-signalr-in-startup"></a><span data-ttu-id="8a30b-110">スタートアップで有効にする SignalR</span><span class="sxs-lookup"><span data-stu-id="8a30b-110">Enable SignalR in startup</span></span>
+## <a name="enable-no-locsignalr-in-startup"></a><span data-ttu-id="583c8-110">スタートアップで有効にする SignalR</span><span class="sxs-lookup"><span data-stu-id="583c8-110">Enable SignalR in startup</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="8a30b-111">SignalRバックグラウンドワーカープロセスのコンテキストで ASP.NET Core ハブをホストすることは、ASP.NET Core web アプリでハブをホストすることと同じです。</span><span class="sxs-lookup"><span data-stu-id="8a30b-111">Hosting ASP.NET Core SignalR Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="8a30b-112">メソッドで `Startup.ConfigureServices` を呼び出すと、を `services.AddSignalR` サポートするために必要なサービスが ASP.NET Core 依存関係挿入 (DI) 層に追加され SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-112">In the `Startup.ConfigureServices` method, calling `services.AddSignalR` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support SignalR.</span></span> <span data-ttu-id="8a30b-113">では、 `Startup.Configure` `MapHub` メソッドがコールバックで呼び出され、 `UseEndpoints` ASP.NET Core 要求パイプラインのハブエンドポイントに接続します。</span><span class="sxs-lookup"><span data-stu-id="8a30b-113">In `Startup.Configure`, the `MapHub` method is called in the `UseEndpoints` callback to connect the Hub endpoints in the ASP.NET Core request pipeline.</span></span>
+<span data-ttu-id="583c8-111">SignalRバックグラウンドワーカープロセスのコンテキストで ASP.NET Core ハブをホストすることは、ASP.NET Core web アプリでハブをホストすることと同じです。</span><span class="sxs-lookup"><span data-stu-id="583c8-111">Hosting ASP.NET Core SignalR Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="583c8-112">メソッドで `Startup.ConfigureServices` を呼び出すと、を `services.AddSignalR` サポートするために必要なサービスが ASP.NET Core 依存関係挿入 (DI) 層に追加され SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-112">In the `Startup.ConfigureServices` method, calling `services.AddSignalR` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support SignalR.</span></span> <span data-ttu-id="583c8-113">では、 `Startup.Configure` `MapHub` メソッドがコールバックで呼び出され、 `UseEndpoints` ASP.NET Core 要求パイプラインのハブエンドポイントに接続します。</span><span class="sxs-lookup"><span data-stu-id="583c8-113">In `Startup.Configure`, the `MapHub` method is called in the `UseEndpoints` callback to connect the Hub endpoints in the ASP.NET Core request pipeline.</span></span>
 
 [!code-csharp[Startup](background-service/samples/3.x/Server/Startup.cs?name=Startup)]
 
 ::: moniker-end
 ::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="8a30b-114">SignalRバックグラウンドワーカープロセスのコンテキストで ASP.NET Core ハブをホストすることは、ASP.NET Core web アプリでハブをホストすることと同じです。</span><span class="sxs-lookup"><span data-stu-id="8a30b-114">Hosting ASP.NET Core SignalR Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="8a30b-115">メソッドで `Startup.ConfigureServices` を呼び出すと、を `services.AddSignalR` サポートするために必要なサービスが ASP.NET Core 依存関係挿入 (DI) 層に追加され SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-115">In the `Startup.ConfigureServices` method, calling `services.AddSignalR` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support SignalR.</span></span> <span data-ttu-id="8a30b-116">で `Startup.Configure` は、 `UseSignalR` メソッドを呼び出して、ASP.NET Core 要求パイプラインのハブエンドポイントを接続します。</span><span class="sxs-lookup"><span data-stu-id="8a30b-116">In `Startup.Configure`, the `UseSignalR` method is called to connect the Hub endpoint(s) in the ASP.NET Core request pipeline.</span></span>
+<span data-ttu-id="583c8-114">SignalRバックグラウンドワーカープロセスのコンテキストで ASP.NET Core ハブをホストすることは、ASP.NET Core web アプリでハブをホストすることと同じです。</span><span class="sxs-lookup"><span data-stu-id="583c8-114">Hosting ASP.NET Core SignalR Hubs in the context of a background worker process is identical to hosting a Hub in an ASP.NET Core web app.</span></span> <span data-ttu-id="583c8-115">メソッドで `Startup.ConfigureServices` を呼び出すと、を `services.AddSignalR` サポートするために必要なサービスが ASP.NET Core 依存関係挿入 (DI) 層に追加され SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-115">In the `Startup.ConfigureServices` method, calling `services.AddSignalR` adds the required services to the ASP.NET Core Dependency Injection (DI) layer to support SignalR.</span></span> <span data-ttu-id="583c8-116">で `Startup.Configure` は、 `UseSignalR` メソッドを呼び出して、ASP.NET Core 要求パイプラインのハブエンドポイントを接続します。</span><span class="sxs-lookup"><span data-stu-id="583c8-116">In `Startup.Configure`, the `UseSignalR` method is called to connect the Hub endpoint(s) in the ASP.NET Core request pipeline.</span></span>
 
 [!code-csharp[Startup](background-service/samples/2.2/Server/Startup.cs?name=Startup)]
 
 ::: moniker-end
 
-<span data-ttu-id="8a30b-117">前の例では、 `ClockHub` クラスは、 `Hub<T>` 厳密に型指定されたハブを作成するクラスを実装しています。</span><span class="sxs-lookup"><span data-stu-id="8a30b-117">In the preceding example, the `ClockHub` class implements the `Hub<T>` class to create a strongly typed Hub.</span></span> <span data-ttu-id="8a30b-118">は、 `ClockHub` `Startup` エンドポイントでの要求に応答するようにクラスで構成されてい `/hubs/clock` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-118">The `ClockHub` has been configured in the `Startup` class to respond to requests at the endpoint `/hubs/clock`.</span></span>
+<span data-ttu-id="583c8-117">前の例では、 `ClockHub` クラスは、 `Hub<T>` 厳密に型指定されたハブを作成するクラスを実装しています。</span><span class="sxs-lookup"><span data-stu-id="583c8-117">In the preceding example, the `ClockHub` class implements the `Hub<T>` class to create a strongly typed Hub.</span></span> <span data-ttu-id="583c8-118">は、 `ClockHub` `Startup` エンドポイントでの要求に応答するようにクラスで構成されてい `/hubs/clock` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-118">The `ClockHub` has been configured in the `Startup` class to respond to requests at the endpoint `/hubs/clock`.</span></span>
 
-<span data-ttu-id="8a30b-119">厳密に型指定されたハブの詳細については、「 [ SignalR のハブを使用](xref:signalr/hubs#strongly-typed-hubs)した ASP.NET Core」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="8a30b-119">For more information on strongly typed Hubs, see [Use hubs in SignalR for ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs).</span></span>
+<span data-ttu-id="583c8-119">厳密に型指定されたハブの詳細については、「 [ SignalR のハブを使用](xref:signalr/hubs#strongly-typed-hubs)した ASP.NET Core」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="583c8-119">For more information on strongly typed Hubs, see [Use hubs in SignalR for ASP.NET Core](xref:signalr/hubs#strongly-typed-hubs).</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="8a30b-120">この機能は[ハブ \<T> ](xref:Microsoft.AspNetCore.SignalR.Hub`1)クラスに限定されません。</span><span class="sxs-lookup"><span data-stu-id="8a30b-120">This functionality isn't limited to the [Hub\<T>](xref:Microsoft.AspNetCore.SignalR.Hub`1) class.</span></span> <span data-ttu-id="8a30b-121">[Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)など、[ハブ](xref:Microsoft.AspNetCore.SignalR.Hub)から継承するクラスはすべて機能します。</span><span class="sxs-lookup"><span data-stu-id="8a30b-121">Any class that inherits from [Hub](xref:Microsoft.AspNetCore.SignalR.Hub), such as [DynamicHub](xref:Microsoft.AspNetCore.SignalR.DynamicHub), works.</span></span>
+> <span data-ttu-id="583c8-120">この機能は[ハブ \<T> ](xref:Microsoft.AspNetCore.SignalR.Hub`1)クラスに限定されません。</span><span class="sxs-lookup"><span data-stu-id="583c8-120">This functionality isn't limited to the [Hub\<T>](xref:Microsoft.AspNetCore.SignalR.Hub`1) class.</span></span> <span data-ttu-id="583c8-121">[Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)など、[ハブ](xref:Microsoft.AspNetCore.SignalR.Hub)から継承するクラスはすべて機能します。</span><span class="sxs-lookup"><span data-stu-id="583c8-121">Any class that inherits from [Hub](xref:Microsoft.AspNetCore.SignalR.Hub), such as [DynamicHub](xref:Microsoft.AspNetCore.SignalR.DynamicHub), works.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -77,7 +79,7 @@ ms.locfileid: "85409086"
 
 ::: moniker-end
 
-<span data-ttu-id="8a30b-122">厳密に型指定されたによって使用されるインターフェイスは、 `ClockHub` `IClock` インターフェイスです。</span><span class="sxs-lookup"><span data-stu-id="8a30b-122">The interface used by the strongly typed `ClockHub` is the `IClock` interface.</span></span>
+<span data-ttu-id="583c8-122">厳密に型指定されたによって使用されるインターフェイスは、 `ClockHub` `IClock` インターフェイスです。</span><span class="sxs-lookup"><span data-stu-id="583c8-122">The interface used by the strongly typed `ClockHub` is the `IClock` interface.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -90,15 +92,15 @@ ms.locfileid: "85409086"
 
 ::: moniker-end
 
-## <a name="call-a-signalr-hub-from-a-background-service"></a><span data-ttu-id="8a30b-123">SignalRバックグラウンドサービスからハブを呼び出す</span><span class="sxs-lookup"><span data-stu-id="8a30b-123">Call a SignalR Hub from a background service</span></span>
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a><span data-ttu-id="583c8-123">SignalRバックグラウンドサービスからハブを呼び出す</span><span class="sxs-lookup"><span data-stu-id="583c8-123">Call a SignalR Hub from a background service</span></span>
 
-<span data-ttu-id="8a30b-124">起動時に、クラスはを使用して `Worker` `BackgroundService` 有効になり `AddHostedService` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-124">During startup, the `Worker` class, a `BackgroundService`, is enabled using `AddHostedService`.</span></span>
+<span data-ttu-id="583c8-124">起動時に、クラスはを使用して `Worker` `BackgroundService` 有効になり `AddHostedService` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-124">During startup, the `Worker` class, a `BackgroundService`, is enabled using `AddHostedService`.</span></span>
 
 ```csharp
 services.AddHostedService<Worker>();
 ```
 
-<span data-ttu-id="8a30b-125">SignalRはフェーズ中にも有効に `Startup` なるため、各ハブは ASP.NET CORE の HTTP 要求パイプライン内の個々のエンドポイントにアタッチされます。各ハブは、サーバー上のによって表され `IHubContext<T>` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-125">Since SignalR is also enabled up during the `Startup` phase, in which each Hub is attached to an individual endpoint in ASP.NET Core's HTTP request pipeline, each Hub is represented by an `IHubContext<T>` on the server.</span></span> <span data-ttu-id="8a30b-126">ASP.NET Core の DI 機能を使用して、クラス、MVC コントローラークラス、ページモデルなどのホスト層によってインスタンス化された他のクラスは、 `BackgroundService` Razor 構築中にのインスタンスを受け入れることによって、サーバー側ハブへの参照を取得でき `IHubContext<ClockHub, IClock>` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-126">Using ASP.NET Core's DI features, other classes instantiated by the hosting layer, like `BackgroundService` classes, MVC Controller classes, or Razor page models, can get references to server-side Hubs by accepting instances of `IHubContext<ClockHub, IClock>` during construction.</span></span>
+<span data-ttu-id="583c8-125">SignalRはフェーズ中にも有効に `Startup` なるため、各ハブは ASP.NET CORE の HTTP 要求パイプライン内の個々のエンドポイントにアタッチされます。各ハブは、サーバー上のによって表され `IHubContext<T>` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-125">Since SignalR is also enabled up during the `Startup` phase, in which each Hub is attached to an individual endpoint in ASP.NET Core's HTTP request pipeline, each Hub is represented by an `IHubContext<T>` on the server.</span></span> <span data-ttu-id="583c8-126">ASP.NET Core の DI 機能を使用して、クラス、MVC コントローラークラス、ページモデルなどのホスト層によってインスタンス化された他のクラスは、 `BackgroundService` Razor 構築中にのインスタンスを受け入れることによって、サーバー側ハブへの参照を取得でき `IHubContext<ClockHub, IClock>` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-126">Using ASP.NET Core's DI features, other classes instantiated by the hosting layer, like `BackgroundService` classes, MVC Controller classes, or Razor page models, can get references to server-side Hubs by accepting instances of `IHubContext<ClockHub, IClock>` during construction.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -111,13 +113,13 @@ services.AddHostedService<Worker>();
 
 ::: moniker-end
 
-<span data-ttu-id="8a30b-127">`ExecuteAsync`バックグラウンドサービスでメソッドが繰り返し呼び出されると、サーバーの現在の日付と時刻が、を使用して接続されたクライアントに送信され `ClockHub` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-127">As the `ExecuteAsync` method is called iteratively in the background service, the server's current date and time are sent to the connected clients using the `ClockHub`.</span></span>
+<span data-ttu-id="583c8-127">`ExecuteAsync`バックグラウンドサービスでメソッドが繰り返し呼び出されると、サーバーの現在の日付と時刻が、を使用して接続されたクライアントに送信され `ClockHub` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-127">As the `ExecuteAsync` method is called iteratively in the background service, the server's current date and time are sent to the connected clients using the `ClockHub`.</span></span>
 
-## <a name="react-to-signalr-events-with-background-services"></a><span data-ttu-id="8a30b-128">SignalRバックグラウンドサービスを使用したイベントへの対応</span><span class="sxs-lookup"><span data-stu-id="8a30b-128">React to SignalR events with background services</span></span>
+## <a name="react-to-no-locsignalr-events-with-background-services"></a><span data-ttu-id="583c8-128">SignalRバックグラウンドサービスを使用したイベントへの対応</span><span class="sxs-lookup"><span data-stu-id="583c8-128">React to SignalR events with background services</span></span>
 
-<span data-ttu-id="8a30b-129">用の JavaScript クライアントを使用するシングルページアプリの場合と同様に、.NET デスクトップアプリではを使用してを使用できますが、またはの実装を使用して SignalR <xref:signalr/dotnet-client> `BackgroundService` `IHostedService` ハブに接続し、イベントに応答することもでき SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-129">Like a Single Page App using the JavaScript client for SignalR or a .NET desktop app can do using the using the <xref:signalr/dotnet-client>, a `BackgroundService` or `IHostedService` implementation can also be used to connect to SignalR Hubs and respond to events.</span></span>
+<span data-ttu-id="583c8-129">用の JavaScript クライアントを使用するシングルページアプリの場合と同様に、.NET デスクトップアプリではを使用してを使用できますが、またはの実装を使用して SignalR <xref:signalr/dotnet-client> `BackgroundService` `IHostedService` ハブに接続し、イベントに応答することもでき SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-129">Like a Single Page App using the JavaScript client for SignalR or a .NET desktop app can do using the using the <xref:signalr/dotnet-client>, a `BackgroundService` or `IHostedService` implementation can also be used to connect to SignalR Hubs and respond to events.</span></span>
 
-<span data-ttu-id="8a30b-130">クラスは、 `ClockHubClient` インターフェイスとインターフェイスの両方を実装し `IClock` `IHostedService` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-130">The `ClockHubClient` class implements both the `IClock` interface and the `IHostedService` interface.</span></span> <span data-ttu-id="8a30b-131">このようにして、の実行中にを有効に `Startup` し、サーバーからハブイベントに応答することができます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-131">This way it can be enabled during `Startup` to run continuously and respond to Hub events from the server.</span></span>
+<span data-ttu-id="583c8-130">クラスは、 `ClockHubClient` インターフェイスとインターフェイスの両方を実装し `IClock` `IHostedService` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-130">The `ClockHubClient` class implements both the `IClock` interface and the `IHostedService` interface.</span></span> <span data-ttu-id="583c8-131">このようにして、の実行中にを有効に `Startup` し、サーバーからハブイベントに応答することができます。</span><span class="sxs-lookup"><span data-stu-id="583c8-131">This way it can be enabled during `Startup` to run continuously and respond to Hub events from the server.</span></span>
 
 ```csharp
 public partial class ClockHubClient : IClock, IHostedService
@@ -125,17 +127,17 @@ public partial class ClockHubClient : IClock, IHostedService
 }
 ```
 
-<span data-ttu-id="8a30b-132">初期化中に、によっ `ClockHubClient` てのインスタンスが作成され、その `HubConnection` `IClock.ShowTime` メソッドがハブのイベントのハンドラーとして有効になり `ShowTime` ます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-132">During initialization, the `ClockHubClient` creates an instance of a `HubConnection` and enables the `IClock.ShowTime` method as the handler for the Hub's `ShowTime` event.</span></span>
+<span data-ttu-id="583c8-132">初期化中に、によっ `ClockHubClient` てのインスタンスが作成され、その `HubConnection` `IClock.ShowTime` メソッドがハブのイベントのハンドラーとして有効になり `ShowTime` ます。</span><span class="sxs-lookup"><span data-stu-id="583c8-132">During initialization, the `ClockHubClient` creates an instance of a `HubConnection` and enables the `IClock.ShowTime` method as the handler for the Hub's `ShowTime` event.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[The ClockHubClient constructor](background-service/samples/3.x/Clients.ConsoleTwo/ClockHubClient.cs?name=ClockHubClientCtor)]
 
-<span data-ttu-id="8a30b-133">実装では `IHostedService.StartAsync` 、 `HubConnection` が非同期的に開始されます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-133">In the `IHostedService.StartAsync` implementation, the `HubConnection` is started asynchronously.</span></span>
+<span data-ttu-id="583c8-133">実装では `IHostedService.StartAsync` 、 `HubConnection` が非同期的に開始されます。</span><span class="sxs-lookup"><span data-stu-id="583c8-133">In the `IHostedService.StartAsync` implementation, the `HubConnection` is started asynchronously.</span></span>
 
 [!code-csharp[StartAsync method](background-service/samples/3.x/Clients.ConsoleTwo/ClockHubClient.cs?name=StartAsync)]
 
-<span data-ttu-id="8a30b-134">メソッドの実行中 `IHostedService.StopAsync` 、は `HubConnection` 非同期的に破棄されます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-134">During the `IHostedService.StopAsync` method, the `HubConnection` is disposed of asynchronously.</span></span>
+<span data-ttu-id="583c8-134">メソッドの実行中 `IHostedService.StopAsync` 、は `HubConnection` 非同期的に破棄されます。</span><span class="sxs-lookup"><span data-stu-id="583c8-134">During the `IHostedService.StopAsync` method, the `HubConnection` is disposed of asynchronously.</span></span>
 
 [!code-csharp[StopAsync method](background-service/samples/3.x/Clients.ConsoleTwo/ClockHubClient.cs?name=StopAsync)]
 
@@ -144,19 +146,19 @@ public partial class ClockHubClient : IClock, IHostedService
 
 [!code-csharp[The ClockHubClient constructor](background-service/samples/2.2/Clients.ConsoleTwo/ClockHubClient.cs?name=ClockHubClientCtor)]
 
-<span data-ttu-id="8a30b-135">実装では `IHostedService.StartAsync` 、 `HubConnection` が非同期的に開始されます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-135">In the `IHostedService.StartAsync` implementation, the `HubConnection` is started asynchronously.</span></span>
+<span data-ttu-id="583c8-135">実装では `IHostedService.StartAsync` 、 `HubConnection` が非同期的に開始されます。</span><span class="sxs-lookup"><span data-stu-id="583c8-135">In the `IHostedService.StartAsync` implementation, the `HubConnection` is started asynchronously.</span></span>
 
 [!code-csharp[StartAsync method](background-service/samples/2.2/Clients.ConsoleTwo/ClockHubClient.cs?name=StartAsync)]
 
-<span data-ttu-id="8a30b-136">メソッドの実行中 `IHostedService.StopAsync` 、は `HubConnection` 非同期的に破棄されます。</span><span class="sxs-lookup"><span data-stu-id="8a30b-136">During the `IHostedService.StopAsync` method, the `HubConnection` is disposed of asynchronously.</span></span>
+<span data-ttu-id="583c8-136">メソッドの実行中 `IHostedService.StopAsync` 、は `HubConnection` 非同期的に破棄されます。</span><span class="sxs-lookup"><span data-stu-id="583c8-136">During the `IHostedService.StopAsync` method, the `HubConnection` is disposed of asynchronously.</span></span>
 
 [!code-csharp[StopAsync method](background-service/samples/2.2/Clients.ConsoleTwo/ClockHubClient.cs?name=StopAsync)]
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="8a30b-137">その他の資料</span><span class="sxs-lookup"><span data-stu-id="8a30b-137">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="583c8-137">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="583c8-137">Additional resources</span></span>
 
-* [<span data-ttu-id="8a30b-138">開始するには</span><span class="sxs-lookup"><span data-stu-id="8a30b-138">Get started</span></span>](xref:tutorials/signalr)
-* [<span data-ttu-id="8a30b-139">ハブ</span><span class="sxs-lookup"><span data-stu-id="8a30b-139">Hubs</span></span>](xref:signalr/hubs)
-* [<span data-ttu-id="8a30b-140">Azure に発行する</span><span class="sxs-lookup"><span data-stu-id="8a30b-140">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
-* [<span data-ttu-id="8a30b-141">厳密に型指定されたハブ</span><span class="sxs-lookup"><span data-stu-id="8a30b-141">Strongly typed Hubs</span></span>](xref:signalr/hubs#strongly-typed-hubs)
+* [<span data-ttu-id="583c8-138">開始するには</span><span class="sxs-lookup"><span data-stu-id="583c8-138">Get started</span></span>](xref:tutorials/signalr)
+* [<span data-ttu-id="583c8-139">取って代わり</span><span class="sxs-lookup"><span data-stu-id="583c8-139">Hubs</span></span>](xref:signalr/hubs)
+* [<span data-ttu-id="583c8-140">Azure に発行する</span><span class="sxs-lookup"><span data-stu-id="583c8-140">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
+* [<span data-ttu-id="583c8-141">厳密に型指定されたハブ</span><span class="sxs-lookup"><span data-stu-id="583c8-141">Strongly typed Hubs</span></span>](xref:signalr/hubs#strongly-typed-hubs)
