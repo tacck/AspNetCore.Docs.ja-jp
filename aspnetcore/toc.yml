@@ -337,14 +337,20 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: Link
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: MainLayout
                   href: blazor/layouts.md#mainlayout-component
+                - name: Meta
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: NavLink
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: ルーター
                   href: blazor/fundamentals/routing.md#route-templates
+                - name: タイトル
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
             - name: 値とパラメーターのカスケード
               uid: blazor/components/cascading-values-and-parameters
             - name: データ バインディング
@@ -411,6 +417,8 @@
           uid: blazor/state-management
         - name: WebAssembly のデバッグ
           uid: blazor/debug
+        - name: WebAssembly による遅延読み込みアセンブリ
+          uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly のパフォーマンス
           uid: blazor/webassembly-performance-best-practices
         - name: プログレッシブ Web アプリケーション
@@ -790,7 +798,7 @@
           href: /visualstudio/azure/vs-azure-tools-connected-services-storage
         - name: BLOB ストレージ
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: Queue ストレージ
+        - name: ストレージ
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-queues?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
         - name: Table ストレージ
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
