@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 951ae53876edf345af1a3eb32cb9be1b9668fa53
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0594303f3ae8c57a0a7776900e6b2a6781c919db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404172"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015830"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS を使用した Windows での ASP.NET Core のホスト
 
@@ -148,7 +150,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| オプション                         | 既定値 | 設定 |
+| オプション                         | Default | 設定 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
@@ -166,7 +168,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| オプション                         | 既定値 | 設定 |
+| オプション                         | Default | 設定 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
@@ -510,7 +512,7 @@ ASP.NET Core アプリは、他の構成プロバイダーを使用して構成�
 
 IIS の **[Web サイトの追加]** ダイアログの既定では、アプリケーションごとに 1 つのアプリケーション プールです。 **[サイト名]** を指定すると、入力したテキストが自動的に **[アプリケーション プール]** テキストボックスに設定されます。 サイトが追加されるときに、そのサイト名を使用して新しいアプリ プールが作成されます。
 
-## <a name="application-pool-identity"></a>アプリケーション プール Identity
+## <a name="application-pool-no-locidentity"></a>アプリケーション プール Identity
 
 アプリ プール ID アカウントを使用すると、ドメインやローカル アカウントを作成して管理する必要なく、一意のアカウントでアプリを実行できます。 IIS 8.0 以降の IIS 管理者ワーカー プロセス (WAS) は、新しいアプリ プールの名前で仮想アカウントを作成し、既定によってアプリ プールのワーカー プロセスをこのアカウントで実行します。 IIS 管理コンソールにあるアプリ プールの **[詳細設定]** で、**ApplicationPoolIdentity** が使用されるように **Identity** を確実に設定します。
 
@@ -770,7 +772,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| オプション                         | 既定値 | 設定 |
+| オプション                         | Default | 設定 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
@@ -786,7 +788,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| オプション                         | 既定値 | 設定 |
+| オプション                         | Default | 設定 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
@@ -1110,7 +1112,7 @@ ASP.NET Core アプリは、他の構成プロバイダーを使用して構成�
 
 IIS の **[Web サイトの追加]** ダイアログの既定では、アプリケーションごとに 1 つのアプリケーション プールです。 **[サイト名]** を指定すると、入力したテキストが自動的に **[アプリケーション プール]** テキストボックスに設定されます。 サイトが追加されるときに、そのサイト名を使用して新しいアプリ プールが作成されます。
 
-## <a name="application-pool-identity"></a>アプリケーション プール Identity
+## <a name="application-pool-no-locidentity"></a>アプリケーション プール Identity
 
 アプリ プール ID アカウントを使用すると、ドメインやローカル アカウントを作成して管理する必要なく、一意のアカウントでアプリを実行できます。 IIS 8.0 以降の IIS 管理者ワーカー プロセス (WAS) は、新しいアプリ プールの名前で仮想アカウントを作成し、既定によってアプリ プールのワーカー プロセスをこのアカウントで実行します。 IIS 管理コンソールにあるアプリ プールの **[詳細設定]** で、**ApplicationPoolIdentity** が使用されるように **Identity** を確実に設定します。
 
@@ -1340,7 +1342,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 ### <a name="iis-options"></a>IIS のオプション
 
-| オプション                         | 既定値 | 設定 |
+| オプション                         | Default | 設定 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
@@ -1354,7 +1356,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| オプション                         | 既定値 | 設定 |
+| オプション                         | Default | 設定 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true` の場合、[IIS 統合ミドルウェア](#enable-the-iisintegration-components)によって、[Windows 認証](xref:security/authentication/windowsauth)で認証された `HttpContext.User` が設定されます。 `false` の場合、ミドルウェアは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときに課題に応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、「[Windows 認証](xref:security/authentication/windowsauth)」のトピックを参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
@@ -1706,7 +1708,7 @@ ASP.NET Core アプリは、他の構成プロバイダーを使用して構成�
 
 サーバーで複数の Web サイトをホストする場合は、アプリをそれぞれ専用のアプリ プールで実行して、アプリを相互に分離することをお勧めします。 IIS の **[Web サイトの追加]** ダイアログはこの構成の既定です。 **[サイト名]** を指定すると、入力したテキストが自動的に **[アプリケーション プール]** テキストボックスに設定されます。 サイトが追加されるときに、そのサイト名を使用して新しいアプリ プールが作成されます。
 
-## <a name="application-pool-identity"></a>アプリケーション プール Identity
+## <a name="application-pool-no-locidentity"></a>アプリケーション プール Identity
 
 アプリ プール ID アカウントを使用すると、ドメインやローカル アカウントを作成して管理する必要なく、一意のアカウントでアプリを実行できます。 IIS 8.0 以降の IIS 管理者ワーカー プロセス (WAS) は、新しいアプリ プールの名前で仮想アカウントを作成し、既定によってアプリ プールのワーカー プロセスをこのアカウントで実行します。 IIS 管理コンソールにあるアプリ プールの **[詳細設定]** で、**ApplicationPoolIdentity** が使用されるように **Identity** を確実に設定します。
 

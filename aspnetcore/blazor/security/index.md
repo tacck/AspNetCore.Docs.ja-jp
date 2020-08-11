@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 85446ac18608b39c469da766e1a9f2e92a1f5e11
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: d2ebb5d3c3a1c3629a5bf563aecfd6fc147715d6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445113"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014023"
 ---
-# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
+# <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)、[Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +46,7 @@ Blazor WebAssembly アプリはクライアント上で実行されます。 承
 
 Blazor は、既存の ASP.NET Core 認証メカニズムを使用してユーザーの ID を証明します。 詳細なメカニズムは、Blazor アプリのホスティング方法、Blazor WebAssembly サーバーか Blazor Server かによって異なります。
 
-### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly 認証
+### <a name="no-locblazor-webassembly-authentication"></a>Blazor WebAssembly 認証
 
 Blazor WebAssembly アプリでは、ユーザーがすべてのクライアント側コードを変更できるため、認証チェックがバイパスされる可能性があります。 JavaScript SPA フレームワークや任意のオペレーティング システム用のネイティブ アプリを含め、すべてのクライアント側アプリのテクノロジにも同じことが当てはまります。
 
@@ -53,19 +55,19 @@ Blazor WebAssembly アプリでは、ユーザーがすべてのクライアン�
 * アプリのプロジェクト ファイルに、[`Microsoft.AspNetCore.Components.Authorization`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) のパッケージ参照。
 * アプリの `_Imports.razor` ファイルに、`Microsoft.AspNetCore.Components.Authorization` 名前空間。
 
-認証を処理するために、組み込みまたはカスタムの <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> サービスの実装について、以降のセクションで説明します。
+認証を処理するために、組み込みまたはカスタムの <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> サービスの使用について、以降のセクションで説明します。
 
 アプリの作成と構成の詳細については、「<xref:blazor/security/webassembly/index>」を参照してください。
 
-### <a name="blazor-server-authentication"></a>Blazor Server 認証
+### <a name="no-locblazor-server-authentication"></a>Blazor Server 認証
 
-Blazor Server アプリは、SignalR を使用して作成されたリアルタイム接続を介して動作します。 [SignalR ベースのアプリの認証](xref:signalr/authn-and-authz)は、接続が確立したときに処理されます。 認証は、Cookie または他のベアラー トークンに基づいています。
+Blazor Server アプリは、SignalR を使用して作成されたリアルタイム接続を介して動作します。 [SignalR ベースのアプリの認証](xref:signalr/authn-and-authz)は、接続が確立したときに処理されます。 認証は、cookie または他のベアラー トークンに基づいている場合があります。
+
+Blazor Server アプリの組み込みの <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> サービスでは、ASP.NET Core の `HttpContext.User` から認証状態データが取得されます。 このようにして、認証状態は既存の ASP.NET Core 認証メカニズムと統合されます。
 
 アプリの作成と構成の詳細については、「<xref:blazor/security/server/index>」を参照してください。
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider サービス
-
-組み込みの <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> サーバー アプリでは、ASP.NET Core の `HttpContext.User` から認証状態データが取得されます。 このようにして、認証状態は既存の ASP.NET Core 認証メカニズムと統合されます。
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> は、認証状態を取得するために <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントと <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> コンポーネントによって使用される基となるサービスです。
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 7b0212ce6463d00a4c5cc87e2b36e1e7e7c5a54e
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 560f25c9acabe2860bcaaddcdb42e2b15842a29d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445412"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017078"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core のミドルウェア
 
@@ -251,7 +253,7 @@ ASP.NET Core には、次のミドルウェア コンポーネントが付属し
 | ---------- | ----------- | ----- |
 | [認証](xref:security/authentication/identity) | 認証のサポートを提供します。 | `HttpContext.User` が必要な場所の前。 OAuth コールバックの終端。 |
 | [承認](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | 承認のサポートを提供します。 | 認証ミドルウェアの直後。 |
-| [Cookie のポリシー](xref:security/gdpr) | 個人情報の保存に関してユーザーからの同意を追跡し、`secure` や `SameSite` など、Cookie フィールドの最小要件を適用します。 | Cookie を発行するミドルウェアの前。 次に例を示します。 認証、セッション、MVC (TempData) |
+| [Cookie ポリシー](xref:security/gdpr) | 個人情報の保存に関してユーザーからの同意を追跡し、`secure` や `SameSite` など、cookie フィールドの最小要件を適用します。 | cookie を発行するミドルウェアの前。 次に例を示します。 認証、セッション、MVC (TempData) |
 | [CORS](xref:security/cors) | クロス オリジン リソース共有を構成します。 | CORS を使うコンポーネントの前。 現時点では、[こちらのバグ](https://github.com/dotnet/aspnetcore/issues/23218)のため、`UseResponseCaching` の前に `UseCors` を追加する必要があります。|
 | [診断](xref:fundamentals/error-handling) | 開発者の例外ページ、例外処理、状態コード ページ、および新しいアプリの既定の Web ページを提供する複数の独立したミドルウェア。 | エラーを生成するコンポーネントの前。 例外または新しいアプリ用の既定の Web ページの提供の終端。 |
 | [転送されるヘッダー](xref:host-and-deploy/proxy-load-balancer) | プロキシされたヘッダーを現在の要求に転送します。 | 更新されたフィールドを使用するコンポーネントの前。 例: スキーム、ホスト、クライアント IP、メソッド。 |
@@ -457,7 +459,7 @@ ASP.NET Core には、次のミドルウェア コンポーネントが付属し
 | ミドルウェア | 説明 | 順番 |
 | ---------- | ----------- | ----- |
 | [認証](xref:security/authentication/identity) | 認証のサポートを提供します。 | `HttpContext.User` が必要な場所の前。 OAuth コールバックの終端。 |
-| [Cookie のポリシー](xref:security/gdpr) | 個人情報の保存に関してユーザーからの同意を追跡し、`secure` や `SameSite` など、Cookie フィールドの最小要件を適用します。 | Cookie を発行するミドルウェアの前。 次に例を示します。 認証、セッション、MVC (TempData) |
+| [Cookie ポリシー](xref:security/gdpr) | 個人情報の保存に関してユーザーからの同意を追跡し、`secure` や `SameSite` など、cookie フィールドの最小要件を適用します。 | cookie を発行するミドルウェアの前。 次に例を示します。 認証、セッション、MVC (TempData) |
 | [CORS](xref:security/cors) | クロス オリジン リソース共有を構成します。 | CORS を使うコンポーネントの前。 |
 | [診断](xref:fundamentals/error-handling) | 開発者の例外ページ、例外処理、状態コード ページ、および新しいアプリの既定の Web ページを提供する複数の独立したミドルウェア。 | エラーを生成するコンポーネントの前。 例外または新しいアプリ用の既定の Web ページの提供の終端。 |
 | [転送されるヘッダー](xref:host-and-deploy/proxy-load-balancer) | プロキシされたヘッダーを現在の要求に転送します。 | 更新されたフィールドを使用するコンポーネントの前。 例: スキーム、ホスト、クライアント IP、メソッド。 |

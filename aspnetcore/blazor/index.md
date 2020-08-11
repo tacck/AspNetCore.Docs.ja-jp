@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ad543087243658f09a23e4f6d957d0c6aa77b361
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402573"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014179"
 ---
-# <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core Blazor の概要
+# <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor の概要
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -118,7 +120,7 @@ Blazor WebAssembly は、.NET を使って対話型のクライアント側 Web 
 
 WebAssembly コードを使用すると、JavaScript を介してブラウザーの全機能にアクセスでき、"*JavaScript の相互運用性*" (または、"*JavaScript 相互運用*") と呼ばれています。 ブラウザーの WebAssembly 経由で実行される .NET コードは、ブラウザーの JavaScript サンドボックス内で実行されます。その際、クライアント コンピューター上での悪意のある操作に対して、サンドボックスに備わった保護が適用されます。
 
-![Blazor WebAssembly では、WebAssembly を使用してブラウザー内で .NET コードが実行されます。](index/_static/blazor-webassembly.png)
+![Blazor WebAssembly は WebAssembly を使用してブラウザーで .NET コードを実行します。](index/_static/blazor-webassembly.png)
 
 Blazor WebAssembly アプリをビルドしてブラウザーで実行する場合:
 
