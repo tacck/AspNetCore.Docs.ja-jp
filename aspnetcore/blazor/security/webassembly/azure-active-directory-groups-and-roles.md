@@ -1,32 +1,32 @@
 ---
-title: Azure Active Directory のグループとロールを使用する ASP.NET Core [Blazor WebAssembly
+title: Azure Active Directory のグループとロールを使用する ASP.NET Core Blazor WebAssembly
 author: guardrex
-description: Azure Active Directory のグループとロールを使用するように [Blazor WebAssembly を構成する方法を説明します。
+description: Azure Active Directory のグループとロールを使用するように Blazor WebAssembly を構成する方法を説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/28/2020
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 6e27b062d7b5a1b72804fe5d4ea31ec65358ce45
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 68071be9fb9f7a097c0c3693293bf8295e0173f1
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402157"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818808"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD のグループ、管理者ロール、ユーザー定義ロール
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Javier Calvarro Nelson](https://github.com/javiercn)
 
-Azure Active Directory (AAD) には、ASP.NET Core [Identity と組み合わせることができる承認方法がいくつか用意されています。
+Azure Active Directory (AAD) には、ASP.NET Core Identity と組み合わせることができる承認方法がいくつか用意されています。
 
 * ユーザー定義グループ
   * セキュリティ
@@ -36,13 +36,25 @@ Azure Active Directory (AAD) には、ASP.NET Core [Identity と組み合わせ�
   * 組み込み管理者ロール
   * ユーザー定義ロール
 
-この記事のガイダンスは、次のトピックで説明されている [Blazor WebAssembly AAD デプロイ シナリオに適用されます。
+この記事のガイダンスは、次のトピックで説明されている Blazor WebAssembly AAD デプロイ シナリオに適用されます。
 
 * [Microsoft アカウントによるスタンドアロン](xref:blazor/security/webassembly/standalone-with-microsoft-accounts)
 * [AAD によるスタンドアロン](xref:blazor/security/webassembly/standalone-with-azure-active-directory)
 * [AAD によるホスティング](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
 
-### <a name="user-defined-groups-and-built-in-administrative-roles"></a>ユーザー定義グループと組み込み管理者ロール
+## <a name="microsoft-graph-api-permission"></a>Microsoft Graph API のアクセス許可
+
+6 つ以上の組み込みの AAD 管理者ロールおよびセキュリティ グループ メンバーシップを持つアプリ ユーザーの場合は、[Microsoft Graph API](/graph/use-the-api) の呼び出しが必須です。
+
+Graph API の呼び出しを許可するには、Azure portal で次の [Graph API アクセス許可](/graph/permissions-reference)を、ホストされている Blazor ソリューションのスタンドアロンまたはクライアント アプリに付与します。
+
+* `Directory.Read.All`
+* `Directory.ReadWrite.All`
+* `Directory.AccessAsUser.All`
+
+`Directory.Read.All` は、最小特権アクセス許可であり、この記事で説明する例に使用されているアクセス許可です。
+
+## <a name="user-defined-groups-and-built-in-administrative-roles"></a>ユーザー定義グループと組み込み管理者ロール
 
 `groups` メンバーシップ要求を提供するように Azure portal でアプリを構成するには、次の Azure の記事を参照してください。 ユーザー定義 AAD グループと組み込み管理者ロールにユーザーを割り当てます。
 
@@ -53,7 +65,9 @@ Azure Active Directory (AAD) には、ASP.NET Core [Identity と組み合わせ�
 
 AAD によって送信される単一の `groups` 要求では、ユーザーのグループとロールが JSON 配列内のオブジェクト ID (GUID) として示されます。 アプリでは、グループとロールの JSON 配列を、アプリで[ポリシー](xref:security/authorization/policies)を作成できる個々の `group` 要求に変換する必要があります。
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張して、グループとロールの配列プロパティを含めます。
+割り当てられている組み込みの Azure 管理者ロールとユーザー定義グループの数が 5 つを超えると、`groups` 要求を送信するのではなく、`true` 値を持つ `hasgroups` 要求が AAD から送信されます。 ユーザーに割り当てられているロールとグループが 5 つを超える可能性があるアプリでは、ユーザーのロールとグループを取得するために、個別の Graph API 呼び出しを行う必要があります。 この記事で提供している実装例は、このシナリオに対処するものです。 詳細については、`groups` および `hasgroups` 要求の情報について [Microsoft ID プラットフォーム アクセス トークン: ペイロードの要求](/azure/active-directory/develop/access-tokens#payload-claims)に関する記事を参照してください。
+
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張して、グループとロールの配列プロパティを含めます。 各プロパティには空の配列を割り当てます。これにより、これらのプロパティを後で `foreach` ループ内で使用する場合に `null` を確認しなくても済むようになります。
 
 `CustomUserAccount.cs`:
 
@@ -64,29 +78,98 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 public class CustomUserAccount : RemoteUserAccount
 {
     [JsonPropertyName("groups")]
-    public string[] Groups { get; set; }
+    public string[] Groups { get; set; } = new string[] { };
 
     [JsonPropertyName("roles")]
-    public string[] Roles { get; set; }
+    public string[] Roles { get; set; } = new string[] { };
 }
 ```
 
-スタンドアロン アプリまたはホストされているソリューションのクライアント アプリで、カスタム ユーザー ファクトリを作成します。 次のファクトリも、`roles` 要求配列を処理するように構成されます。これについては、「[ユーザー定義ロール](#user-defined-roles)」セクションで説明します。
+ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリで、カスタム <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> クラスを作成します。 ロールとグループの情報を取得する Graph API 呼び出しには、正しいスコープ (アクセス許可) を使用します。
+
+`GraphAPIAuthorizationMessageHandler.cs`:
 
 ```csharp
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
+{
+    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
+        NavigationManager navigationManager)
+        : base(provider, navigationManager)
+    {
+        ConfigureHandler(
+            authorizedUrls: new[] { "https://graph.microsoft.com" },
+            scopes: new[] { "https://graph.microsoft.com/Directory.Read.All" });
+    }
+}
+```
+
+`Program.Main` (`Program.cs`) では、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> 実装サービスを追加し、さらに Graph API 要求を行うための名前付き <xref:System.Net.Http.HttpClient> を追加します。 次の例では、クライアントに `GraphAPI` という名前を付けています。
+
+```csharp
+builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
+
+builder.Services.AddHttpClient("GraphAPI",
+        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
+    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
+```
+
+Graph API 呼び出しから Open Data Protocol (OData) ロールおよびグループを受信するように AAD ディレクトリ オブジェクト クラスを作成します。 OData は JSON 形式で届きます。<xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> の呼び出しによって `DirectoryObjects` クラスのインスタンスが作成されます。
+
+`DirectoryObjects.cs`:
+
+```csharp
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
+public class DirectoryObjects
+{
+    [JsonPropertyName("@odata.context")]
+    public string Context { get; set; }
+
+    [JsonPropertyName("value")]
+    public List<Value> Values { get; set; }
+}
+
+public class Value
+{
+    [JsonPropertyName("@odata.type")]
+    public string Type { get; set; }
+
+    [JsonPropertyName("id")]
+    public string Id { get; set; }
+}
+```
+
+ロールとグループの要求を処理するカスタム ユーザー ファクトリを作成します。 次の実装例では、「[ユーザー定義ロール](#user-defined-roles)」セクションで説明する `roles` 要求の配列も処理します。 `hasgroups` 要求が存在する場合は、名前付きの <xref:System.Net.Http.HttpClient> を使用して、ユーザーのロールとグループを取得するために Graph API に承認された要求を送信します。 この実装では、Microsoft Identity Platform v1.0 エンドポイント `https://graph.microsoft.com/v1.0/me/memberOf` ([API ドキュメント](/graph/api/user-list-memberof)) を使用します。 このトピックのガイダンスが Identity v2.0 用に更新されるのは、MSAL パッケージが v2.0 用にアップグレードされたときです。
+
+`CustomAccountFactory.cs`:
+
+```csharp
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+using Microsoft.Extensions.Logging;
 
 public class CustomUserFactory
     : AccountClaimsPrincipalFactory<CustomUserAccount>
 {
-    public CustomUserFactory(NavigationManager navigationManager,
-        IAccessTokenProviderAccessor accessor)
+    private readonly ILogger<CustomUserFactory> _logger;
+    private readonly IHttpClientFactory _clientFactory;
+
+    public CustomUserFactory(IAccessTokenProviderAccessor accessor, 
+        IHttpClientFactory clientFactory, 
+        ILogger<CustomUserFactory> logger)
         : base(accessor)
     {
+        _clientFactory = clientFactory;
+        _logger = logger;
     }
 
     public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
@@ -95,18 +178,56 @@ public class CustomUserFactory
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
-        if (initialUser.[Identity.IsAuthenticated)
+        if (initialUser.Identity.IsAuthenticated)
         {
-            var userIdentity = (ClaimsIdentity)initialUser.[Identity;
+            var userIdentity = (ClaimsIdentity)initialUser.Identity;
 
             foreach (var role in account.Roles)
             {
                 userIdentity.AddClaim(new Claim("role", role));
             }
 
-            foreach (var group in account.Groups)
+            if (userIdentity.HasClaim(c => c.Type == "hasgroups"))
             {
-                userIdentity.AddClaim(new Claim("group", group));
+                try
+                {
+                    var client = _clientFactory.CreateClient("GraphAPI");
+
+                    var response = await client.GetAsync("v1.0/me/memberOf");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userObjects = await response.Content
+                            .ReadFromJsonAsync<DirectoryObjects>();
+
+                        foreach (var obj in userObjects?.Values)
+                        {
+                            userIdentity.AddClaim(new Claim("group", obj.Id));
+                        }
+
+                        var claim = userIdentity.Claims.FirstOrDefault(
+                            c => c.Type == "hasgroups");
+
+                        userIdentity.RemoveClaim(claim);
+                    }
+                    else
+                    {
+                        _logger.LogError("Graph API request failure: {REASON}", 
+                            response.ReasonPhrase);
+                    }
+                }
+                catch (AccessTokenNotAvailableException exception)
+                {
+                    _logger.LogError("Graph API access token failure: {MESSAGE}", 
+                        exception.Message);
+                }
+            }
+            else
+            {
+                foreach (var group in account.Groups)
+                {
+                    userIdentity.AddClaim(new Claim("group", group));
+                }
             }
         }
 
@@ -115,9 +236,18 @@ public class CustomUserFactory
 }
 ```
 
-元の `groups` 要求はフレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
+元の `groups` 要求は (存在する場合) フレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
 
-スタンドアロン アプリまたはホストされているソリューションのクライアント アプリの `Program.Main` (`Program.cs`) に、ファクトリを登録します。
+> [!NOTE]
+> この例のアプローチは次のとおりです。
+>
+> * カスタム <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> クラスを追加して、アクセス トークンを送信要求にアタッチします。
+> * セキュリティで保護された外部 Web API エンドポイントに Web API 要求を送信するために、名前付きの <xref:System.Net.Http.HttpClient> を追加します。
+> * 名前付きの <xref:System.Net.Http.HttpClient> を使用して、承認された要求を送信します。
+>
+> このアプローチの一般的な対象範囲については、記事 <xref:blazor/security/webassembly/additional-scenarios#custom-authorizationmessagehandler-class> を参照してください。
+
+ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリの `Program.Main` (`Program.cs`) に、ファクトリを登録します。 アプリの追加のスコープとして `Directory.Read.All` アクセス許可スコープに同意します。
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -126,8 +256,9 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     builder.Configuration.Bind("AzureAd", 
         options.ProviderOptions.Authentication);
     options.ProviderOptions.DefaultAccessTokenScopes.Add("...");
-    
-    ...
+
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Directory.Read.All");
 })
 .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, CustomUserAccount, 
     CustomUserFactory>();
@@ -214,7 +345,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 }
 ```
 
-### <a name="user-defined-roles"></a>ユーザー定義ロール
+## <a name="user-defined-roles"></a>ユーザー定義ロール
 
 ユーザー定義ロールを使用するように、AAD 登録済みアプリを構成することもできます。
 
@@ -232,9 +363,9 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 
 AAD によって送信される単一の `roles` 要求では、ユーザー定義のロールは JSON 配列内の `appRoles` の `value` として示されます。 アプリでは、ロールの JSON 配列を個々の `role` 要求に変換する必要があります。
 
-「[ユーザー定義グループと組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションで示されている `CustomUserFactory` は、JSON 配列値を持つ `roles` 要求に対して動作するように設定されます。 「[ユーザー定義グループと組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションで示されているように、スタンドアロン アプリまたはホストされているソリューションのクライアント アプリで `CustomUserFactory` を追加して登録します。 元の `roles` 要求はフレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
+「[ユーザー定義グループと組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションで示されている `CustomUserFactory` は、JSON 配列値を持つ `roles` 要求に対して動作するように設定されます。 「[ユーザー定義グループと組み込み管理者ロール](#user-defined-groups-and-built-in-administrative-roles)」セクションで示されているように、ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリで `CustomUserFactory` を追加して登録します。 元の `roles` 要求はフレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
 
-スタンドアロン アプリまたはホストされているソリューションのクライアント アプリの `Program.Main` で、ロール要求として "`role`" という名前の要求を指定します。
+ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリの `Program.Main` で、ロール要求として "`role`" という名前の要求を指定します。
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -286,7 +417,7 @@ B2C ユーザー フロー属性管理者 | dd0baca0-a535-48c1-b871-8431abe16452
 ディレクトリ閲覧者 | e1fc84a6-7762-4b9b-8e29-518b4adbc23b
 Dynamics 365 管理者 | f20a9cfa-9fdf-49a8-a977-1afe446a1d6e
 Exchange 管理者 | b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652
-外部 [IdentityID プロバイダー管理者 | febfaeb4-e478-407a-b4b3-f4d9716618a2
+外部 IdentityID プロバイダー管理者 | febfaeb4-e478-407a-b4b3-f4d9716618a2
 全体管理者 | a45ba61b-44db-462c-924b-3b2719152588
 グローバル閲覧者 | f6903b21-6aba-4124-b44c-76671796b9d5
 グループ管理者 | 158b3e5a-d89d-460b-92b5-3b34985f0197

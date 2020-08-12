@@ -6,58 +6,58 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cebfc88a8a8313bfd975001b50db6e41b6939aed
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408215"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819145"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0 の新機能
 
 この記事では、ASP.NET Core 3.0 の最も大きな変更点について説明します。また、その変更点のドキュメントへのリンクも示します。
 
-## [Blazor
+## Blazor
 
-[Blazor は、.NET を使って対話型のクライアント側 Web UI を構築するための ASP.NET Core の新しいフレームワークです。
+Blazor は、.NET を使って対話型のクライアント側 Web UI を構築するための ASP.NET Core の新しいフレームワークです。
 
 * JavaScript の代わりに C# を使って、優れた対話型 UI を作成します。
 * .NET で記述された、サーバー側とクライアント側のアプリのロジックを共有します。
 * モバイル ブラウザーを含めた広範なブラウザーのサポートのために、HTML および CSS として UI をレンダリングします。
 
-[Blazor フレームワークでサポートされるシナリオ:
+Blazor フレームワークでサポートされるシナリオ:
 
-* 再利用可能な UI コンポーネント ([Razor コンポーネント)
+* 再利用可能な UI コンポーネント (Razor コンポーネント)
 * クライアント側のルーティング
 * コンポーネントのレイアウト
 * 依存関係の挿入のサポート
 * フォームと検証
-* [Razor クラス ライブラリを使用したコンポーネント ライブラリの構築
+* Razor クラス ライブラリを使用したコンポーネント ライブラリの構築
 * JavaScript 相互運用
 
 詳細については、「<xref:blazor/index>」を参照してください。
 
-### [Blazor Server
+### Blazor Server
 
-[Blazor では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。 [Blazor Server では、ASP.NET Core アプリでサーバー上の [Razor コンポーネントをホストするためのサポートが提供されます。 UI の更新は [SignalR 接続を介して処理されます。 [Blazor Server は ASP.NET Core 3.0 でサポートされています。
+Blazor では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。 Blazor Server では、ASP.NET Core アプリでサーバー上の Razor コンポーネントをホストするためのサポートが提供されます。 UI の更新は SignalR 接続を介して処理されます。 Blazor Server は ASP.NET Core 3.0 でサポートされています。
 
-### <a name="blazor-webassembly-preview"></a>[Blazor WebAssembly (プレビュー)
+### <a name="no-locblazor-webassembly-preview"></a>Blazor WebAssembly (プレビュー)
 
-[Blazor アプリは、WebAssembly ベースの .NET ランタイムを使用してブラウザーで直接実行することもできます。 [Blazor WebAssembly はプレビュー段階であり、ASP.NET Core 3.0 ではサポートされて "*いません*"。 [Blazor WebAssembly は、ASP.NET Core の今後のリリースでサポートされる予定です。
+Blazor アプリは、WebAssembly ベースの .NET ランタイムを使用してブラウザーで直接実行することもできます。 Blazor WebAssembly はプレビュー段階であり、ASP.NET Core 3.0 ではサポートされて "*いません*"。 Blazor WebAssembly は、ASP.NET Core の今後のリリースでサポートされる予定です。
 
-### <a name="razor-components"></a>[Razor のコンポーネント
+### <a name="no-locrazor-components"></a>Razor のコンポーネント
 
-[Blazor アプリはコンポーネントから構築されています。 コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型チャンクです。 コンポーネントは、UI レンダリング ロジックとクライアント側のイベント ハンドラーを定義する通常の .NET クラスです。 JavaScript を使用せずに、機能豊富な対話型 Web アプリを作成できます。
+Blazor アプリはコンポーネントから構築されています。 コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型チャンクです。 コンポーネントは、UI レンダリング ロジックとクライアント側のイベント ハンドラーを定義する通常の .NET クラスです。 JavaScript を使用せずに、機能豊富な対話型 Web アプリを作成できます。
 
-通常、[Blazor のコンポーネントは、HTML と C# が自然に融合している [Razor 構文を使用して作成されます。 [Razor コンポーネントは、両方とも [Razor を使用するという点で [Razor Pages および MVC ビューに似ています。 要求 - 応答モデルに基づくページやビューとは異なり、コンポーネントは特に UI コンポジションを処理するために使われます。
+通常、Blazor のコンポーネントは、HTML と C# が自然に融合している Razor 構文を使用して作成されます。 Razor コンポーネントは、両方とも Razor を使用するという点で Razor Pages および MVC ビューに似ています。 要求 - 応答モデルに基づくページやビューとは異なり、コンポーネントは特に UI コンポジションを処理するために使われます。
 
 ## <a name="grpc"></a>gRPC
 
@@ -84,11 +84,11 @@ ASP.NET Core 3.0 の gRPC 機能には次のものが含まれます。
 
 詳細については、「<xref:grpc/index>」を参照してください。
 
-## [SignalR
+## SignalR
 
-移行の手順については、[[SignalR コードの更新](xref:migration/22-to-30#signalr)に関するページを参照してください。 現在、[SignalR は `System.Text.Json` を使用して JSON メッセージのシリアル化および逆シリアル化を行います。 `Newtonsoft.Json` ベースのシリアライザーを復元する手順については、「[Newtonsoft.Json に切り替える](xref:migration/22-to-30#switch-to-newtonsoftjson)」を参照してください。
+移行の手順については、[SignalR コードの更新](xref:migration/22-to-30#signalr)に関するページを参照してください。 現在、SignalR は `System.Text.Json` を使用して JSON メッセージのシリアル化および逆シリアル化を行います。 `Newtonsoft.Json` ベースのシリアライザーを復元する手順については、「[Newtonsoft.Json に切り替える](xref:migration/22-to-30#switch-to-newtonsoftjson)」を参照してください。
 
-[SignalR 対応の JavaScript および .NET クライアントには、自動再接続のサポートが追加されました。 既定では、クライアントはすぐに再接続を試行し、必要に応じて 2 秒後、10 秒後、30 秒後に再試行します。 クライアントが正常に再接続すると、新しい接続 ID を受け取ります。 自動再接続はオプトインです。
+SignalR 対応の JavaScript および .NET クライアントには、自動再接続のサポートが追加されました。 既定では、クライアントはすぐに再接続を試行し、必要に応じて 2 秒後、10 秒後、30 秒後に再試行します。 クライアントが正常に再接続すると、新しい接続 ID を受け取ります。 自動再接続はオプトインです。
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -113,7 +113,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 再接続の試行中に、再接続が試行されていることをユーザーに通知するようにアプリ UI を更新します。
 
-接続が中断されたときに UI にフィードバックを提供するため、次のイベント ハンドラーを含むように [SignalR クライアント API が拡張されました。
+接続が中断されたときに UI にフィードバックを提供するため、次のイベント ハンドラーを含むように SignalR クライアント API が拡張されました。
 
 * `onreconnecting`:これによって、開発者が UI を無効にしたり、アプリがオフラインであることをユーザーに知らせたりすることができます。
 * `onreconnected`:これによって、接続が再確立したときに開発者が UI を更新できます。
@@ -140,7 +140,7 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-[SignalR 3.0 以降では、ハブ メソッドが承認を必要とする場合に、承認ハンドラーにカスタム リソースが提供されます。 リソースは `HubInvocationContext` のインスタンスです。 `HubInvocationContext` には次のものが含まれます。
+SignalR 3.0 以降では、ハブ メソッドが承認を必要とする場合に、承認ハンドラーにカスタム リソースが提供されます。 リソースは `HubInvocationContext` のインスタンスです。 `HubInvocationContext` には次のものが含まれます。
 
 * `HubCallerContext`
 * 呼び出されているハブ メソッドの名前。
@@ -157,12 +157,12 @@ public class DomainRestrictedRequirement :
         DomainRestrictedRequirement requirement,
         HubInvocationContext resource)
     {
-        if (context.User?.[Identity?.Name == null)
+        if (context.User?.Identity?.Name == null)
         {
             return Task.CompletedTask;
         }
 
-        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.[Identity.Name))
+        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.Identity.Name))
         {
             context.Succeed(requirement);
         }
@@ -230,7 +230,7 @@ services
     });
 ```
 
-[SignalR ハブでは[エンドポイント ルーティング](xref:fundamentals/routing)が使用されます。 [SignalR ハブ接続は以前は明示的に実行されました。
+SignalR ハブでは[エンドポイント ルーティング](xref:fundamentals/routing)が使用されます。 SignalR ハブ接続は以前は明示的に実行されました。
 
 ```csharp
 app.UseSignalR(routes =>
@@ -239,7 +239,7 @@ app.UseSignalR(routes =>
 });
 ```
 
-以前のバージョンでは、開発者はさまざまな場所でコントローラー、[Razor ページ、ハブを関連付ける必要がありました。 明示的な接続によって、ほぼ同一のルーティング セグメントがいくつも生成されます。
+以前のバージョンでは、開発者はさまざまな場所でコントローラー、Razor ページ、ハブを関連付ける必要がありました。 明示的な接続によって、ほぼ同一のルーティング セグメントがいくつも生成されます。
 
 ```csharp
 app.UseSignalR(routes =>
@@ -253,7 +253,7 @@ app.UseRouting(routes =>
 });
 ```
 
-[SignalR 3.0 ハブは、エンドポイント ルーティングを介してルーティングできます。 エンドポイント ルーティングでは、通常、すべてのルーティングを `UseRouting` に構成できます。
+SignalR 3.0 ハブは、エンドポイント ルーティングを介してルーティングできます。 エンドポイント ルーティングでは、通常、すべてのルーティングを `UseRouting` に構成できます。
 
 ```csharp
 app.UseRouting(routes =>
@@ -263,7 +263,7 @@ app.UseRouting(routes =>
 });
 ```
 
-ASP.NET Core 3.0 [SignalR で追加されたもの:
+ASP.NET Core 3.0 SignalR で追加されたもの:
 
 クライアントとサーバー間のストリーミング。 クライアントとサーバー間のストリーミングでは、サーバー側メソッドが `IAsyncEnumerable<T>` または `ChannelReader<T>` のインスタンスを受け取ることができます。 次 C# の例では、ハブの `UploadStream` メソッドがクライアントから文字列のストリームを受け取ります。
 
@@ -294,7 +294,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-JavaScript クライアント アプリは、上記の `UploadStream` ハブ メソッドの `stream` 引数のために [SignalR `Subject` (または [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) を使用します。
+JavaScript クライアント アプリは、上記の `UploadStream` ハブ メソッドの `stream` 引数のために SignalR `Subject` (または [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) を使用します。
 
 ```javascript
 let subject = new signalR.Subject();
@@ -320,16 +320,16 @@ subject.complete();
 
 Json.NET を ASP.NET Core 3.0 に追加するには、「[Newtonsoft.Json ベースの JSON 形式のサポートを追加する](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support)」を参照してください。
 
-## <a name="new-razor-directives"></a>新しい [Razor ディレクティブ
+## <a name="new-no-locrazor-directives"></a>新しい Razor ディレクティブ
 
-次の一覧には、新しい [Razor ディレクティブが含まれます。
+次の一覧には、新しい Razor ディレクティブが含まれます。
 
 * [`@attribute`](xref:mvc/views/razor#attribute):`@attribute` ディレクティブでは、指定された属性が生成されたページまたはビューのクラスに適用されます。 たとえば、`@attribute [Authorize]` のようにします。
 * [`@implements`](xref:mvc/views/razor#implements):`@implements` ディレクティブでは、生成されたクラスのインターフェイスが実装されます。 たとえば、`@implements IDisposable` のようにします。
 
-## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 では、Web API と SPA の認証と承認がサポートされています
+## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 では、Web API と SPA の認証と承認がサポートされています
 
-ASP.NET Core 3.0 では、Web API 認証のサポートの使用により、シングルページ アプリ (SPA) での認証が提供されます。 ユーザーを認証および格納するための ASP.NET Core [Identity が [IdentityServer4](https://identityserver.io/) と組み合わされ、Open ID Connect が実装されます。
+ASP.NET Core 3.0 では、Web API 認証のサポートの使用により、シングルページ アプリ (SPA) での認証が提供されます。 ユーザーを認証および格納するための ASP.NET Core Identity が [IdentityServer4](https://identityserver.io/) と組み合わされ、OpenID Connect が実装されます。
 
 IdentityServer4 は、ASP.NET Core 3.0 用の OpenID Connect および OAuth 2.0 フレームワークです。 これにより、次のセキュリティ機能が有効になります。
 
@@ -400,14 +400,14 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="template-changes"></a>テンプレートの変更
 
-Web UI テンプレート ([Razor Pages、コントローラーとビューを含む MVC) では、以下が削除されています。
+Web UI テンプレート (Razor Pages、コントローラーとビューを含む MVC) では、以下が削除されています。
 
 * Cookie 同意 UI は含まれなくなりました。 ASP.NET Core 3.0 テンプレートで生成されるアプリで Cookie 同意機能を有効にするには、「<xref:security/gdpr>」を参照してください。
 * スクリプトと関連する静的アセットは、CDN を使用する代わりに、ローカル ファイルとして参照されるようになりました。 詳細については、「[現在、スクリプトと関連する静的アセットは、現在の環境に基づいた CDN を使用する代わりに、ローカル ファイルとして参照される (aspnet/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350)」を参照してください。
 
 Angular テンプレートは、Angular 8 を使用するように更新されました。
 
-[Razor クラス ライブラリ (RCL) テンプレートは [Razor コンポーネント開発での既定です。 Visual Studio の新しいテンプレート オプションによって、ページとビューのテンプレート サポートが提供されます。 コマンド シェルでテンプレートから RCL を作成するときは、`--support-pages-and-views` オプション (`dotnet new razorclasslib --support-pages-and-views`) を渡します。
+Razor クラス ライブラリ (RCL) テンプレートは Razor コンポーネント開発での既定です。 Visual Studio の新しいテンプレート オプションによって、ページとビューのテンプレート サポートが提供されます。 コマンド シェルでテンプレートから RCL を作成するときは、`--support-pages-and-views` オプション (`dotnet new razorclasslib --support-pages-and-views`) を渡します。
 
 ## <a name="generic-host"></a>汎用ホスト
 

@@ -5,7 +5,7 @@ description: セキュリティに関するその他のシナリオ用に Blazor
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/24/2020
+ms.date: 08/03/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,29 +15,79 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 79f7b2177d6d07101c73cde841c062b0e1468593
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 81ab2bb139dfcbea712d4eb51acfc9d7f6767d46
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445152"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818834"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ
+# <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>送信要求にトークンを添付する
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> サービスを <xref:System.Net.Http.HttpClient> と共に使用して、アクセス トークンを送信要求に添付することができます。 トークンは、既存の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> サービスを使用して取得します。 トークンを取得できない場合は、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> がスローされます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> には、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> メソッドがあります。このメソッドを使用すると、ユーザーを ID プロバイダーに移動して、新しいトークンを取得できます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> は、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> メソッドを使用して、承認された URL、スコープ、および戻り先 URL で構成できます。
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> は、送信 <xref:System.Net.Http.HttpResponseMessage> インスタンスにアクセス トークンをアタッチするために使用される <xref:System.Net.Http.DelegatingHandler> です。 トークンは、フレームワークによって登録されている <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> サービスを使用して取得されます。 トークンを取得できない場合は、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> がスローされます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> には、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> メソッドがあります。このメソッドを使用すると、ユーザーを ID プロバイダーに移動して、新しいトークンを取得できます。
 
-送信要求のメッセージ ハンドラーの構成を行うには、次のいずれかの方法を使用します。
+便宜上、フレームワークには、アプリのベース アドレスを承認された URL として使用して事前構成が行われた <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> が用意されています。 **アクセス トークンは、要求 URI がアプリのベース URI 内にある場合にのみ追加されます。** 送信要求 URI がアプリのベース URI 内にない場合は、[カスタム `AuthorizationMessageHandler` クラス (*推奨*) ](#custom-authorizationmessagehandler-class) を使用するか、または [`AuthorizationMessageHandler`](#configure-authorizationmessagehandler) を構成します。
 
-* [カスタム `AuthorizationMessageHandler` クラス](#custom-authorizationmessagehandler-class) (*推奨*)
-* [`AuthorizationMessageHandler` を構成する](#configure-authorizationmessagehandler)
+> [!NOTE]
+> サーバー API アクセス用のクライアント アプリ構成に加えて、クライアントとサーバーが同じベース アドレス内に存在しない場合にクロスオリジン要求 (CORS) がサーバー API によって許可される必要があります。 サーバー側の CORS 構成の詳細については、この記事で後述する「[クロスオリジン リソース共有 (CORS)](#cross-origin-resource-sharing-cors)」セクションを参照してください。
 
-### <a name="custom-authorizationmessagehandler-class"></a>カスタム AuthorizationMessageHandler クラス
+次の例では
 
-次の例では、<xref:System.Net.Http.HttpClient> の構成を行うために使用できる <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> が、カスタム クラスによって拡張されます。
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A> によって、<xref:System.Net.Http.IHttpClientFactory> および関連サービスがサービス コレクションに追加され、名前付き <xref:System.Net.Http.HttpClient> (`ServerAPI`) が構成されます。 <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> は、要求を送信するときのリソース URI のベース アドレスです。 <xref:System.Net.Http.IHttpClientFactory> は、[`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) NuGet パッケージによって提供されます。
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> は、送信 <xref:System.Net.Http.HttpResponseMessage> インスタンスにアクセス トークンをアタッチするために使用される <xref:System.Net.Http.DelegatingHandler> です。 アクセス トークンは、要求 URI がアプリのベース URI 内にある場合にのみ追加されます。
+* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType> では、名前付き <xref:System.Net.Http.HttpClient> (`ServerAPI`) に対応する構成を使用して、送信要求用に <xref:System.Net.Http.HttpClient> インスタンスが作成および構成されます。
+
+```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
+builder.Services.AddHttpClient("ServerAPI", 
+        client => client.BaseAddress = new Uri("https://www.example.com/base"))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("ServerAPI"));
+```
+
+Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、要求 URI は既定ではアプリのベース URI 内にあります。 したがって、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は、プロジェクト テンプレートから生成されたアプリ内の <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。
+
+構成された <xref:System.Net.Http.HttpClient> を使用し、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) パターンを使用して、承認された要求を行います。
+
+```razor
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Client
+
+...
+
+protected override async Task OnInitializedAsync()
+{
+    private ExampleType[] examples;
+
+    try
+    {
+        examples = 
+            await Client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
+
+        ...
+    }
+    catch (AccessTokenNotAvailableException exception)
+    {
+        exception.Redirect();
+    }
+}
+```
+
+### <a name="custom-authorizationmessagehandler-class"></a>カスタム `AuthorizationMessageHandler` クラス
+
+*このセクションのこのガイダンスは、アプリのベース URI 内に存在しない URI に対して送信要求を行うクライアント アプリに推奨されます。*
+
+次の例では、カスタム クラスによって、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> が、<xref:System.Net.Http.HttpClient> 用の <xref:System.Net.Http.DelegatingHandler> として使用するために拡張されます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> によって、アクセス トークンを使用して送信 HTTP 要求を承認できるように、このハンドラーが構成されます。 アクセス トークンがアタッチされるのは、承認された URL の少なくとも 1 つが要求 URI (<xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType>) のベースである場合に限られます。
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -56,7 +106,7 @@ public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-`Program.Main` (`Program.cs`) では、カスタム承認メッセージ ハンドラーを使用して、<xref:System.Net.Http.HttpClient> が構成されます。
+`Program.Main` (`Program.cs`) では、`CustomAuthorizationMessageHandler` がスコープされたサービスとして登録され、名前付き <xref:System.Net.Http.HttpClient> によって作成された送信 <xref:System.Net.Http.HttpResponseMessage> インスタンスの <xref:System.Net.Http.DelegatingHandler> として構成されます。
 
 ```csharp
 builder.Services.AddScoped<CustomAuthorizationMessageHandler>();
@@ -66,9 +116,9 @@ builder.Services.AddHttpClient("ServerAPI",
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) を <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てることができます。
+Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。
 
-構成が行われた <xref:System.Net.Http.HttpClient> を使用し、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) パターンを使用して、承認された要求を行います。 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) パッケージ) を使用してクライアントが作成される場合にサーバー API への要求を行うと、アクセス トークンが含まれるインスタンスが <xref:System.Net.Http.HttpClient> に提供されます。
+構成が行われた <xref:System.Net.Http.HttpClient> を使用し、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) パターンを使用して、承認された要求を行います。 <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) パッケージ) を使用してクライアントが作成される場合にサーバー API への要求を行うと、アクセス トークンが含まれるインスタンスが <xref:System.Net.Http.HttpClient> に提供されます。 要求 URI が次の例 (`ExampleAPIMethod`) のように相対 URI である場合、それは、クライアント アプリから要求があったときに <xref:System.Net.Http.HttpClient.BaseAddress> に結合されます。
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -85,7 +135,7 @@ Blazor WebAssembly のホステッド テンプレートに基づく Blazor ア�
             var client = ClientFactory.CreateClient("ServerAPI");
 
             examples = 
-                await client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+                await client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
 
             ...
         }
@@ -93,12 +143,13 @@ Blazor WebAssembly のホステッド テンプレートに基づく Blazor ア�
         {
             exception.Redirect();
         }
-        
     }
 }
 ```
 
-### <a name="configure-authorizationmessagehandler"></a>AuthorizationMessageHandler を構成する
+### <a name="configure-authorizationmessagehandler"></a>`AuthorizationMessageHandler` を構成する
+
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> メソッドを使用すれば、承認された URL、スコープ、および戻り先 URL で <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> を構成できます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> によって、アクセス トークンを使用して送信 HTTP 要求を承認できるように、ハンドラーが構成されます。 アクセス トークンがアタッチされるのは、承認された URL の少なくとも 1 つが要求 URI (<xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType>) のベースである場合に限られます。 要求 URI が相対 URI である場合、これは <xref:System.Net.Http.HttpClient.BaseAddress> に結合されます。
 
 次の例では、`Program.Main` (`Program.cs`) で、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> によって <xref:System.Net.Http.HttpClient> が構成されます。
 
@@ -118,58 +169,12 @@ builder.Services.AddScoped(sp => new HttpClient(
     });
 ```
 
-Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> を以下に割り当てることができます。
+Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> は既定では以下に割り当てられます。
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`)。
 * `authorizedUrls` 配列の URL。
 
-便宜上、アプリのベース アドレスを承認された URL として使用して事前構成が行われた <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> が含まれています。 認証が有効な Blazor WebAssembly テンプレートでは、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> を使用して <xref:System.Net.Http.HttpClient> を設定するためのサーバー API プロジェクトで、<xref:System.Net.Http.IHttpClientFactory> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) パッケージ) が使用されます。
-
-```csharp
-using System.Net.Http;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-...
-
-builder.Services.AddHttpClient("ServerAPI", 
-        client => client.BaseAddress = new Uri("https://www.example.com/base"))
-    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("ServerAPI"));
-```
-
-Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) を <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てることができます。
-
-前の例では、<xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> を使用してクライアントが作成される場合にサーバー プロジェクトへの要求を行うと、アクセス トークンが含まれるインスタンスが <xref:System.Net.Http.HttpClient> に提供されています。
-
-構成された <xref:System.Net.Http.HttpClient> を使用し、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) パターンを使用して、承認された要求を行います。
-
-```razor
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Client
-
-...
-
-protected override async Task OnInitializedAsync()
-{
-    private ExampleType[] examples;
-
-    try
-    {
-        examples = 
-            await Client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
-
-        ...
-    }
-    catch (AccessTokenNotAvailableException exception)
-    {
-        exception.Redirect();
-    }
-}
-```
-
-## <a name="typed-httpclient"></a>型指定された HttpClient
+## <a name="typed-httpclient"></a>型指定された `HttpClient`
 
 単一クラス内のすべての HTTP およびトークンの取得に関する問題を処理する、型指定されたクライアントを定義できます。
 
@@ -225,7 +230,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) を <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てることができます。
+Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。
 
 `FetchData` コンポーネント (`Pages/FetchData.razor`):
 
@@ -240,7 +245,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="configure-the-httpclient-handler"></a>HttpClient ハンドラーを構成する
+## <a name="configure-the-httpclient-handler"></a>`HttpClient` ハンドラーを構成する
 
 ハンドラーは、送信 HTTP 要求の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> を使用して、さらに構成を行うことができます。
 
@@ -255,7 +260,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> を以下に割り当てることができます。
+Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> は既定では以下に割り当てられます。
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`)。
 * `authorizedUrls` 配列の URL。
@@ -271,7 +276,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
     client => client.BaseAddress = new Uri("https://www.example.com/base"));
 ```
 
-Blazor WebAssembly のホステッド テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) を <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てることができます。
+Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。
 
 前述の登録は、セキュリティで保護された既定の <xref:System.Net.Http.HttpClient> 登録に追加されます。
 
@@ -350,7 +355,7 @@ if (tokenResult.TryGetToken(out var token))
 * `token` を使用する場合は `true`。
 * トークンが取得されない場合は `false`。
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 要求オプションを使用する HttpClient と HttpRequestMessage
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient` および `HttpRequestMessage` と Fetch API 要求オプション
 
 Blazor WebAssembly アプリで WebAssembly を実行するときに、[`HttpClient`](xref:fundamentals/http-requests) ([API ドキュメント](xref:System.Net.Http.HttpClient)) および <xref:System.Net.Http.HttpRequestMessage> を使用して要求をカスタマイズできます。 たとえば、HTTP メソッドや要求ヘッダーを指定できます。 次のコンポーネントでは、サーバー上の To Do List API エンドポイントに `POST` 要求を行い、応答本文を表示します。
 
@@ -456,11 +461,13 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
+Blazor のホストされたプロジェクト テンプレートに基づくホスト型 Blazor ソリューションでは、クライアントおよびサーバー アプリ用に同じベース アドレスが使用されます。 クライアント アプリの <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> は、既定では `builder.HostEnvironment.BaseAddress` の URI に設定されます。 Blazor のホストされたプロジェクト テンプレートから作成されるホスト型アプリの既定の構成では、CORS 構成は**必須ではありません**。 サーバー プロジェクトでホストされておらず、サーバー アプリのベース アドレスを共有していない追加のクライアント アプリでは、サーバー プロジェクト内の CORS 構成は**必須です**。
+
 詳細については、「<xref:security/cors>」と、サンプル アプリの HTTP 要求テスター コンポーネント (`Components/HTTPRequestTester.razor`) を参照してください。
 
 ## <a name="handle-token-request-errors"></a>トークン要求エラーを処理する
 
-シングル ページ アプリケーション (SPA) で Open ID Connect (OIDC) を使用してユーザーが認証されると、ユーザーが資格情報を入力したときに設定されるセッション Cookie の形式で、SPA 内および IdentityID プロバイダー (IP) 内で、認証状態がローカルに維持されます。
+シングル ページ アプリケーション (SPA) で OpenID Connect (OIDC) を使用してユーザーが認証されると、ユーザーが資格情報を入力したときに設定されるセッション Cookie の形式で、SPA 内および IdentityID プロバイダー (IP) 内で、認証状態がローカルに維持されます。
 
 通常、IP によってユーザーに出力されるトークンが有効なのは短時間のため (通常は約 1 時間)、クライアント アプリでは定期的に新しいトークンをフェッチする必要があります。 それ以外の場合は、許可されたトークンの有効期限が切れると、ユーザーがログアウトします。 ほとんどの場合、OIDC クライアントでは、ユーザーに対して認証の再要求を行うことなく、新しいトークンをプロビジョニングできます。これは、認証状態または IP 内に保持される "セッション" によるものです。
 
@@ -552,7 +559,7 @@ app.UseCors(policy =>
 
 認証操作中に、ブラウザーが IP にリダイレクトされる前に、アプリの状態を保存することが必要になる場合があります。 状態コンテナーを使用していて、認証が成功した後に状態を復元する場合には、このようなことが起こる可能性があります。 カスタム認証状態オブジェクトを使用して、アプリ固有の状態、またはその参照を保持し、認証操作が正常に完了した後で、その状態を復元することができます。 このアプローチの例を次に示します。
 
-状態コンテナー クラスは、アプリの状態値を保持するプロパティを使用して、アプリ内に作成されます。 次の例では、コンテナーを使用して、既定のテンプレートの `Counter` コンポーネント (`Pages/Counter.razor`) のカウンター値を維持します。 コンテナーをシリアル化および逆シリアル化するためのメソッドは、<xref:System.Text.Json> に基づいています。
+状態コンテナー クラスは、アプリの状態値を保持するプロパティを使用して、アプリ内に作成されます。 次の例では、コンテナーを使用して、既定のプロジェクト テンプレートの `Counter` コンポーネント (`Pages/Counter.razor`) のカウンター値を維持します。 コンテナーをシリアル化および逆シリアル化するためのメソッドは、<xref:System.Text.Json> に基づいています。
 
 ```csharp
 using System.Text.Json;
@@ -1015,9 +1022,9 @@ app.UseEndpoints(endpoints =>
 * サーバーでは、更新トークンを格納し、アプリからサードパーティ リソースへのアクセスが決して失われないようにすることができます。
 * アプリでは、より機密性の高いアクセス許可を含む可能性のあるサーバーからのアクセス トークンをリークさせることはできません。
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Open ID Connect (OIDC) v2.0 エンドポイントを使用する
+## <a name="use-openid-connect-oidc-v20-endpoints"></a>OpenID Connect (OIDC) v2.0 エンドポイントを使用する
 
-認証ライブラリと Blazor テンプレートでは、Open ID Connect (OIDC) v1.0 エンドポイントが使用されます。 v2.0 エンドポイントを使用するには、JWT ベアラー <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> オプションの構成を行います。 次の例では、<xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> プロパティに `v2.0` セグメントを追加することで、v2.0 に対して AAD の構成が行われます。
+認証ライブラリと Blazor プロジェクト テンプレートでは、Open ID Connect (OIDC) v1.0 エンドポイントが使用されます。 v2.0 エンドポイントを使用するには、JWT ベアラー <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> オプションの構成を行います。 次の例では、<xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> プロパティに `v2.0` セグメントを追加することで、v2.0 に対して AAD の構成が行われます。
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(

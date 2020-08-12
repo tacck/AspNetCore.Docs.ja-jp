@@ -5,7 +5,7 @@ description: ASP.NET Core、Content Delivery Networks (CDN)、ファイル サ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 08/03/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 2a2b0dabc26c14624144ce7eceb5861fe56f1054
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 9d596e38a1d8350cd4a27f2fec4b262a0edf1015
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445139"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818847"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)、[Ben Adams](https://twitter.com/ben_a_adams)、[Safia Abdalla](https://safia.rocks)
 
@@ -48,32 +48,32 @@ Blazor は、適切な圧縮ファイルにサービスを提供するため、�
 * IIS の `web.config` の圧縮構成については、[IIS の「Brotli と Gzip の圧縮」](#brotli-and-gzip-compression)セクションを参照してください。 
 * GitHub ページなど、静的に圧縮されたファイル コンテント ネゴシエーションをサポートしない静的ホスティング ソリューションでホストするとき、Brotli 圧縮ファイルをフェッチし、デコードするようにアプリを構成することを検討してください。
 
-  * アプリの [google/brotli GitHub リポジトリ](https://github.com/google/brotli/)から Brotli デコーダーを参照します。
+  * [google/brotli GitHub リポジトリ](https://github.com/google/brotli)から、JavaScript Brotli デコーダーを入手します。 2020 年 7 月の時点で、デコーダー ファイルは `decode.min.js` という名前で、リポジトリの [`js` フォルダー](https://github.com/google/brotli/tree/master/js)にあります。
   * そのデコーダーを使用するようにアプリを更新します。 `wwwroot/index.html` の終了 `<body>` タグの中にあるマークアップを次に変更します。
   
     ```html
-    <script src="brotli.decode.min.js"></script>
+    <script src="decode.min.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
-    Blazor.start({
-      loadBootResource: function (type, name, defaultUri, integrity) {
-        if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
-          return (async function () {
-            const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
-            if (!response.ok) {
-              throw new Error(response.statusText);
-            }
-            const originalResponseBuffer = await response.arrayBuffer();
-            const originalResponseArray = new Int8Array(originalResponseBuffer);
-            const decompressedResponseArray = BrotliDecode(originalResponseArray);
-            const contentType = type === 
-              'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
-            return new Response(decompressedResponseArray, 
-              { headers: { 'content-type': contentType } });
-          })();
+      Blazor.start({
+        loadBootResource: function (type, name, defaultUri, integrity) {
+          if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+            return (async function () {
+              const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+              if (!response.ok) {
+                throw new Error(response.statusText);
+              }
+              const originalResponseBuffer = await response.arrayBuffer();
+              const originalResponseArray = new Int8Array(originalResponseBuffer);
+              const decompressedResponseArray = BrotliDecode(originalResponseArray);
+              const contentType = type === 
+                'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+              return new Response(decompressedResponseArray, 
+                { headers: { 'content-type': contentType } });
+            })();
+          }
         }
-      }
-    });
+      });
     </script>
     ```
  
@@ -116,6 +116,289 @@ IIS サーバーに展開する場合は、アプリで発行される `web.conf
 ASP.NET Core アプリでのホストと展開の詳細については、「<xref:host-and-deploy/index>」を参照してください。
 
 Azure App Service の展開については、「<xref:tutorials/publish-to-azure-webapp-using-vs>」を参照してください。
+
+## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a>複数の Blazor WebAssembly アプリによるホストされた展開
+
+### <a name="app-configuration"></a>アプリの構成
+
+複数の Blazor WebAssembly アプリを提供するようにホストされた Blazor ソリューションを構成するには:
+
+* 既存のホストされた Blazor ソリューションを使用するか、Blazor のホストされたプロジェクト テンプレートから新しいソリューションを作成します。
+
+* クライアント アプリのプロジェクト ファイルで、値が `FirstApp` の `<PropertyGroup>` に `<StaticWebAssetBasePath>` プロパティを追加して、プロジェクトの静的アセットの基本パスを設定します。
+
+  ```xml
+  <PropertyGroup>
+    ...
+    <StaticWebAssetBasePath>FirstApp</StaticWebAssetBasePath>
+  </PropertyGroup>
+  ```
+
+* ソリューションに 2 つ目のクライアント アプリを追加します。
+
+  * `SecondClient` という名前のフォルダーをソリューションのフォルダーに追加します。
+  * Blazor WebAssembly プロジェクト テンプレートから `SecondClient` フォルダーに `SecondBlazorApp.Client` という名前の Blazor WebAssembly アプリを作成します。
+  * アプリのプロジェクト ファイル内で:
+
+    * 値が `SecondApp` の `<PropertyGroup>` に `<StaticWebAssetBasePath>` プロパティを追加します。
+
+      ```xml
+      <PropertyGroup>
+        ...
+        <StaticWebAssetBasePath>SecondApp</StaticWebAssetBasePath>
+      </PropertyGroup>
+      ```
+
+    * `Shared` プロジェクトにプロジェクト参照を追加します。
+
+      ```xml
+      <ItemGroup>
+        <ProjectReference Include="..\Shared\{SOLUTION NAME}.Shared.csproj" />
+      </ItemGroup>
+      ```
+
+      プレースホルダー `{SOLUTION NAME}` は、ソリューションの名前です。
+
+* サーバー アプリのプロジェクト ファイルで、追加したクライアン トアプリに対するプロジェクト参照を作成します。
+
+  ```xml
+  <ItemGroup>
+    ...
+    <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
+  </ItemGroup>
+  ```
+
+* サーバー アプリの `Properties/launchSettings.json` ファイルで、ポート 5001 と 5002 でクライアント アプリにアクセスするように、Kestrel プロファイル (`{SOLUTION NAME}.Server`) の `applicationUrl` を構成します。
+
+  ```json
+  "applicationUrl": "https://localhost:5001;https://localhost:5002",
+  ```
+
+* サーバー アプリの `Startup.Configure` メソッド (`Startup.cs`) で、<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> の呼び出しの後にある次の行を削除します。
+
+  ```csharp
+  app.UseBlazorFrameworkFiles();
+  app.UseStaticFiles();
+
+  app.UseRouting();
+
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapRazorPages();
+      endpoints.MapControllers();
+      endpoints.MapFallbackToFile("index.html");
+  });
+  ```
+
+  要求をクライアント アプリにマップするミドルウェアを追加します。 次の例では、ミドルウェアが以下のときに実行されるように構成します。
+
+  * 要求のポートが、元のクライアント アプリの場合は 5001、追加されたクライアント アプリの場合は 5002 である。
+  * 要求のホストが、元のクライアント アプリの場合は `firstapp.com`、追加されたクライアント アプリの場合は `secondapp.com` である。
+
+    > [!NOTE]
+    > このセクションで示されている例では、以下に対する追加構成が必要です。
+    >
+    > * 例のホスト ドメイン `firstapp.com` および `secondapp.com` でのアプリへのアクセス。
+    > * クライアント アプリで TLS セキュリティ (HTTPS) を有効にするための証明書。
+    >
+    > 必要な構成はこの記事の範囲を超えており、ソリューションのホスト方法によって異なります。 詳細については、[ホストと展開に関する記事](xref:host-and-deploy/index)を参照してください。
+
+  前に行を削除した場所に、次のコードを配置します。
+
+  ```csharp
+  app.MapWhen(ctx => ctx.Request.Host.Port == 5001 || 
+      ctx.Request.Host.Equals("firstapp.com"), first =>
+  {
+      first.Use((ctx, nxt) =>
+      {
+          ctx.Request.Path = "/FirstApp" + ctx.Request.Path;
+          return nxt();
+      });
+
+      first.UseBlazorFrameworkFiles("/FirstApp");
+      first.UseStaticFiles();
+      first.UseStaticFiles("/FirstApp");
+      first.UseRouting();
+
+      first.UseEndpoints(endpoints =>
+      {
+          endpoints.MapControllers();
+          endpoints.MapFallbackToFile("/FirstApp/{*path:nonfile}", 
+              "FirstApp/index.html");
+      });
+  });
+  
+  app.MapWhen(ctx => ctx.Request.Host.Port == 5002 || 
+      ctx.Request.Host.Equals("secondapp.com"), second =>
+  {
+      second.Use((ctx, nxt) =>
+      {
+          ctx.Request.Path = "/SecondApp" + ctx.Request.Path;
+          return nxt();
+      });
+
+      second.UseBlazorFrameworkFiles("/SecondApp");
+      second.UseStaticFiles();
+      second.UseStaticFiles("/SecondApp");
+      second.UseRouting();
+
+      second.UseEndpoints(endpoints =>
+      {
+          endpoints.MapControllers();
+          endpoints.MapFallbackToFile("/SecondApp/{*path:nonfile}", 
+              "SecondApp/index.html");
+      });
+  });
+  ```
+
+* サーバー アプリの天気予報コントローラー (`Controllers/WeatherForecastController.cs`) で、`WeatherForecastController` に対する既存のルート (`[Route("[controller]")]`) を次のルートに置き換えます。
+
+  ```csharp
+  [Route("FirstApp/[controller]")]
+  [Route("SecondApp/[controller]")]
+  ```
+
+  前にサーバー アプリの `Startup.Configure` メソッドに追加したミドルウェアでは、`/WeatherForecast` に対する受信要求が、ポート (5001/5002) またはドメイン (`firstapp.com`/`secondapp.com`) に応じて、`/FirstApp/WeatherForecast` または `/SecondApp/WeatherForecast` に変更されます。 前のコントローラー ルートは、サーバー アプリからクライアント アプリに気象データを返すために必要です。
+
+### <a name="static-assets-and-class-libraries"></a>静的アセットとクラス ライブラリ
+
+静的アセットには、次の方法を使用します。
+
+* アセットがクライアント アプリの `wwwroot` フォルダー内にある場合は、通常どおりにパスを指定します。
+
+  ```razor
+  <img alt="..." src="/{ASSET FILE NAME}" />
+  ```
+
+* アセットが [Razor クラス ライブラリ (RCL)](xref:blazor/components/class-libraries) の `wwwroot` フォルダーにある場合は、[RCL の記事](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)のガイダンスに従って、クライアント アプリの静的アセットを参照します。
+
+  ```razor
+  <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
+  ```
+
+::: moniker range=">= aspnetcore-5.0"
+
+クラス ライブラリによってクライアント アプリに提供されるコンポーネントは、通常どおりに参照されます。 いずれかのコンポーネントでスタイルシートまたは JavaScript ファイルが必要な場合は、次のいずれかの方法を使用して、静的アセットを取得します。
+
+* クライアント アプリの `wwwroot/index.html` ファイルでは、静的アセットに (`<link>`) リンクできます。
+* コンポーネントでは、フレームワークの [`Link` コンポーネント](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)を使用して、静的アセットを取得できます。
+
+次の例では上記の方法を示します。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+クラス ライブラリによってクライアント アプリに提供されるコンポーネントは、通常どおりに参照されます。 スタイルシートまたは JavaScript ファイルが必要なコンポーネントがある場合は、クライアント アプリの `wwwroot/index.html` ファイルに正しい静的アセットのリンクを含める必要があります。 次の例ではこれらの方法を示します。
+
+::: moniker-end
+
+次の `Jeep` コンポーネントをクライアント アプリのいずれかに追加します。 `Jeep` コンポーネントでは次のものが使用されています。
+
+* クライアント アプリの `wwwroot` フォルダーにある画像 (`jeep-cj.png`)。
+* [追加された Razor コンポーネント ライブラリ](xref:blazor/components/class-libraries) (`JeepImage`) の `wwwroot` フォルダーにある画像 (`jeep-yj.png`)。
+* この例のコンポーネント (`Component1`) は、`JeepImage` ライブラリがソリューションに追加されると、RCL プロジェクト テンプレートによって自動的に作成されます。
+
+```razor
+@page "/Jeep"
+
+<h1>1979 Jeep CJ-5&trade;</h1>
+
+<p>
+    <img alt="1979 Jeep CJ-5&trade;" src="/jeep-cj.png" />
+</p>
+
+<h1>1991 Jeep YJ&trade;</h1>
+
+<p>
+    <img alt="1991 Jeep YJ&trade;" src="_content/JeepImage/jeep-yj.png" />
+</p>
+
+<p>
+    <em>Jeep CJ-5</em> and <em>Jeep YJ</em> are a trademarks of 
+    <a href="https://www.fcagroup.com">Fiat Chrysler Automobiles</a>.
+</p>
+
+<JeepImage.Component1 />
+```
+
+> [!WARNING]
+> 画像を所有している場合を除き、車両の画像を公開**しないでください**。 そうしないと、著作権侵害のリスクがあります。
+
+::: moniker range=">= aspnetcore-5.0"
+
+ライブラリの `jeep-yj.png` 画像を、ライブラリの `Component1` コンポーネント (`Component1.razor`) に追加することもできます。 `my-component` CSS クラスをクライアント アプリのページに提供するには、フレームワークの [`Link` コンポーネント](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)を使用して、ライブラリのスタイルシートにリンクします。
+
+```razor
+<div class="my-component">
+    <Link href="_content/JeepImage/styles.css" rel="stylesheet" />
+
+    <h1>JeepImage.Component1</h1>
+
+    <p>
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
+    </p>
+
+    <p>
+        <img alt="1991 Jeep YJ&trade;" src="_content/JeepImage/jeep-yj.png" />
+    </p>
+</div>
+```
+
+[`Link` コンポーネント](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)を使用する代わりに、クライアント アプリの `wwwroot/index.html` ファイルからスタイルシートを読み込むこともできます。 この方法を使用すると、クライアント アプリのすべてのコンポーネントでスタイルシートを使用できるようになります。
+
+```html
+<head>
+    ...
+    <link href="_content/JeepImage/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+ライブラリの `jeep-yj.png` 画像は、ライブラリの `Component1` コンポーネント (`Component1.razor`) に追加することもできます。
+
+```razor
+<div class="my-component">
+    <h1>JeepImage.Component1</h1>
+
+    <p>
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
+    </p>
+
+    <p>
+        <img alt="1991 Jeep YJ&trade;" src="_content/JeepImage/jeep-yj.png" />
+    </p>
+</div>
+```
+
+クライアント アプリの `wwwroot/index.html` ファイルでは、次の `<link>` タグを追加してライブラリのスタイルシートを要求します。
+
+```html
+<head>
+    ...
+    <link href="_content/JeepImage/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+クライアント アプリの `NavMenu` コンポーネント (`Shared/NavMenu.razor`) に、`Jeep` コンポーネントへのナビゲーションを追加します。
+
+```razor
+<li class="nav-item px-3">
+    <NavLink class="nav-link" href="Jeep">
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Jeep
+    </NavLink>
+</li>
+```
+
+RCL の詳細については、以下を参照してください。
+
+* <xref:blazor/components/class-libraries>
+* <xref:razor-pages/ui-class>
 
 ## <a name="standalone-deployment"></a>スタンドアロン展開
 
@@ -333,9 +616,15 @@ Blazor WebAssembly アプリを CentOS 7 以降にデプロイするには:
 
 ### <a name="github-pages"></a>GitHub ページ
 
-URL の書き換えを処理するために、`404.html` ファイルを、要求を `index.html` ページにリダイレクトするスクリプトと共に追加します。 コミュニティが提供する実装例については、「[Single Page Apps for GitHub Pages](https://spa-github-pages.rafrex.com/)」(GitHub ページ用の単一ページ アプリ) ([rafrex/spa-github-pages on GitHub](https://github.com/rafrex/spa-github-pages#readme)) を参照してください。 コミュニティのアプローチの使用例については、[GitHub 上の blazor-demo/blazor-demo.github.io に関するページ](https://github.com/blazor-demo/blazor-demo.github.io) ([ライブ サイト](https://blazor-demo.github.io/)) を参照してください。
+URL の書き換えを処理するために、`wwwroot/404.html` ファイルを、要求を `index.html` ページにリダイレクトするスクリプトと共に追加します。 例については、[SteveSandersonMS/BlazorOnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)を参照してください。
 
-組織のサイトではなくプロジェクトのサイトを使用している場合、`index.html` 内の `<base>` タグを追加または更新します。 `href` 属性の値を、GitHub リポジトリの名前の末尾にスラッシュを付けたもの (例: `my-repository/`) に設定します。
+* [`wwwroot/404.html`](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/wwwroot/404.html)
+* [ライブ サイト](https://stevesandersonms.github.io/BlazorOnGitHubPages/)
+
+組織のサイトではなくプロジェクトのサイトを使用しているときは、`wwwroot/index.html` 内の `<base>` タグを更新します。 `href` 属性の値を、GitHub リポジトリの名前の末尾にスラッシュを付けたもの (例: `/my-repository/`) に設定します。 [SteveSandersonMS/BlazorOnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)では、[`.github/workflows/main.yml` 構成ファイル](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml)による発行時に、基本 `href` が更新されます。
+
+> [!NOTE]
+> [SteveSandersonMS/BlazorOnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)は、.NET Foundation または Microsoft では、所有、管理、またはサポートされていません。
 
 ## <a name="host-configuration-values"></a>ホストの構成値
 
@@ -552,4 +841,3 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 ```
 
 フィードバックを提供するには、[aspnetcore/issue #5477](https://github.com/dotnet/aspnetcore/issues/5477) を参照してください。
- 

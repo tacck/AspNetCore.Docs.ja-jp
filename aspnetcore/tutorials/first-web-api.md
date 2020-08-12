@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 2383934070a65b8131e890a170186b736d3fcec0
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: b6a189907f521d7d9d18c1373747a13ab38a621f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869992"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444159"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -238,7 +238,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 * **[参照]** タブを選択し、検索ボックスに「**Microsoft.EntityFrameworkCore.SqlServer**」と入力します。
 * 左側のウィンドウで、 **[Microsoft.EntityFrameworkCore.SqlServer]** を選択します。
 * 右側のウィンドウで **[プロジェクト]** チェックボックスをオンにして、 **[インストール]** を選択します。
-* 前の手順を使用して `Microsoft.EntityFrameworkCore.InMemory` NuGet パッケージを追加します。
+* 前の手順を使用して、**Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
 
 ![NuGet パッケージ マネージャー](first-web-api/_static/vs3NuGet.png)
 
@@ -304,7 +304,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 生成されたコードでは次の操作が行われます。
 
-* クラスを [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 属性でマークします。 この属性は、コントローラーが Web API 要求に応答することを示します。 属性によって有効化される特定の動作については、「<xref:web-api/index>」 を参照してください。
+* クラスを [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 属性でマークします。 この属性は、コントローラーが Web API 要求に応答することを示します。 属性によって有効化される特定の動作については、「<xref:web-api/index>」 を参照してください。
 * DI を使用して、データベース コンテキスト (`TodoContext`) をコントローラーに挿入します。 データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。
 
 ASP.NET Core テンプレートの対象は次のとおりです。
@@ -320,7 +320,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-[`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) 属性が示すように、上記のコードは HTTP POST メソッドです。 このメソッドは、HTTP 要求の本文から To Do アイテムの値を取得します。
+[`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) 属性が示すように、上記のコードは HTTP POST メソッドです。 このメソッドは、HTTP 要求の本文から To Do アイテムの値を取得します。
 
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> メソッド:
 
@@ -409,7 +409,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 ## <a name="routing-and-url-paths"></a>ルーティングと URL パス
 
-[`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) 属性は、HTTP GET 要求に応答するメソッドを表します。 各メソッドの URL パスは次のように構成されます。
+[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) 属性は、HTTP GET 要求に応答するメソッドを表します。 各メソッドの URL パスは次のように構成されます。
 
 * コントローラーの `Route` 属性でテンプレート文字列を使用します。
 
@@ -428,7 +428,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 `ActionResult` 戻り値の型は、幅広い範囲の HTTP 状態コードを表すことができます。 たとえば、`GetTodoItem` は、次の 2 つの異なる状態値を返す可能性があります。
 
-* 要求された ID と一致するアイテムがない場合、メソッドは 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) エラー コードを返します。
+* 要求された ID と一致するアイテムがない場合、メソッドは 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> エラー コードを返します。
 * それ以外の場合、メソッドは JSON 応答本文で 200 を返します。 戻り値が `item` の場合、HTTP 200 応答が返されます。
 
 ## <a name="the-puttodoitem-method"></a>PutTodoItem メソッド
@@ -720,7 +720,7 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 上記のコードでは次の操作が行われます。
 
 * メソッドを使用せず、API コントローラー クラスを定義します。
-* クラスを [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 属性でマークします。 この属性は、コントローラーが Web API 要求に応答することを示します。 属性によって有効化される特定の動作については、「<xref:web-api/index>」 を参照してください。
+* クラスを [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 属性でマークします。 この属性は、コントローラーが Web API 要求に応答することを示します。 属性によって有効化される特定の動作については、「<xref:web-api/index>」 を参照してください。
 * DI を使用して、データベース コンテキスト (`TodoContext`) をコントローラーに挿入します。 データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。
 * 追加データベースが空の場合、`Item1` という名前のアイテムをデータベースにします。 このコードはコンストラクター内にあるので、新しい HTTP 要求が行われるたびに実行されます。 すべてのアイテムを削除した場合、コンストラクターは、次回に API メソッドが呼び出されたときに `Item1` をもう一度作成します。 そのため、削除が実際には機能していても、機能しなかったように見える場合があります。
 
@@ -756,7 +756,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 ## <a name="routing-and-url-paths"></a>ルーティングと URL パス
 
-[`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute) 属性は、HTTP GET 要求に応答するメソッドを表します。 各メソッドの URL パスは次のように構成されます。
+[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute) 属性は、HTTP GET 要求に応答するメソッドを表します。 各メソッドの URL パスは次のように構成されます。
 
 * コントローラーの `Route` 属性でテンプレート文字列を使用します。
 
@@ -775,7 +775,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 `ActionResult` 戻り値の型は、幅広い範囲の HTTP 状態コードを表すことができます。 たとえば、`GetTodoItem` は、次の 2 つの異なる状態値を返す可能性があります。
 
-* 要求された ID と一致するアイテムがない場合、メソッドは 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) エラー コードを返します。
+* 要求された ID と一致するアイテムがない場合、メソッドは 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> エラー コードを返します。
 * それ以外の場合、メソッドは JSON 応答本文で 200 を返します。 戻り値が `item` の場合、HTTP 200 応答が返されます。
 
 ## <a name="test-the-gettodoitems-method"></a>GetTodoItems メソッドのテスト
@@ -814,7 +814,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-[`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) 属性が示すように、上記のコードは HTTP POST メソッドです。 このメソッドは、HTTP 要求の本文から To Do アイテムの値を取得します。
+[`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) 属性が示すように、上記のコードは HTTP POST メソッドです。 このメソッドは、HTTP 要求の本文から To Do アイテムの値を取得します。
 
 `CreatedAtAction` メソッド:
 
@@ -907,7 +907,7 @@ Postman を使用して、To Do アイテムを削除します。
 
 このセクションでは、JavaScript を使用して Web API を呼び出す HTML ページを追加します。 jQuery によって要求が開始されます。 JavaScript により、Web API の応答からの詳細を使ってページが更新されます。
 
-*Startup.cs* を次の強調表示されたコードで更新して、[静的ファイルを提供](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)し、[既定のファイル マッピングを有効にする](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)ためのアプリを構成します。
+*Startup.cs* を次の強調表示されたコードで更新して、[静的ファイルを提供](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)し、[既定のファイル マッピングを有効にする](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)ためのアプリを構成します。
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
@@ -960,11 +960,11 @@ To Do アイテムを削除するには、`DELETE` への AJAX 呼び出しで `
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>[!INCLUDE[](~/includes/IdentityServer4.md)]
+## <a name="additional-resources"></a>その他の技術情報
 
-その他の技術情報 [このチュートリアルのサンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples)します。
+[このチュートリアルのサンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples)します。 [ダウンロード方法](xref:index#how-to-download-a-sample)に関するページを参照してください。
 
-[ダウンロード方法](xref:index#how-to-download-a-sample)に関するページを参照してください。
+詳細については、次のリソースを参照してください。
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>
@@ -973,4 +973,4 @@ To Do アイテムを削除するには、`DELETE` への AJAX 呼び出しで `
 * <xref:web-api/action-return-types>
 * <xref:host-and-deploy/azure-apps/index>
 * <xref:host-and-deploy/index>
-* 詳細については、次のリソースを参照してください。
+* [このチュートリアルの YouTube バージョン](https://www.youtube.com/watch?v=TTkhEyGBfAk)

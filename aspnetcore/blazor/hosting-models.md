@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 6e3753131388c294130f11aa913a0bb7e8127fa3
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944218"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818951"
 ---
-# <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
+# <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
 作成者: [Daniel Roth](https://github.com/danroth27)
 
@@ -57,13 +57,13 @@ Blazor WebAssembly ホスティングには、次の欠点があります。
 * ダウンロード サイズが大きくなり、アプリの読み込みに時間がかかります。
 * .NET ランタイムとツールのサポートが十分ではありません。 たとえば、[.NET Standard](/dotnet/standard/net-standard) のサポートとデバッグには制限があります。
 
-Blazor でホストされているアプリ モデルでは、[Docker コンテナー](/dotnet/standard/microservices-architecture/container-docker-introduction/index)がサポートされています。 Visual Studio でサーバー プロジェクトを右クリックし、 **[追加]**  >  **[Docker サポート]** を選択します。
+ホストされている Blazor アプリ モデルでは、[Docker コンテナー](/dotnet/standard/microservices-architecture/container-docker-introduction/index)がサポートされています。 Visual Studio でサーバー プロジェクトを右クリックし、 **[追加]**  >  **[Docker サポート]** を選択します。
 
 ## Blazor Server
 
 Blazor Server ホスティング モデルを使用すると、アプリは ASP.NET Core アプリ内からサーバー上で実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
 
-![ブラウザーは、SignalR 接続を介してサーバー上のアプリ (ASP.NET Core アプリ内でホストされている) とやりとりします。](hosting-models/_static/blazor-server.png)
+![ブラウザーとサーバー上のアプリ (ASP.NET Core アプリ内でホストされている) とのやりとりは、SignalR 接続を介して行われます。](hosting-models/_static/blazor-server.png)
 
 Blazor Server ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor Server アプリ** テンプレート ([`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor Server アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
 

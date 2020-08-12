@@ -5,7 +5,7 @@ description: Blazor アプリをデバッグする方法について説明しま
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/27/2020
+ms.date: 07/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b4199c3a99af5875c5d9a87f29f7c7e2758ffd71
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: cb0a8737fb975db285986d18b995e488f09580e8
+ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303561"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526291"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -245,3 +245,33 @@ Blazor は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/
 * **[デバッガー]** タブで、ブラウザー内の開発者ツールを開きます。 コンソールで `localStorage.clear()` を実行して、任意のブレークポイントを削除します。
 * ASP.NET Core HTTPS 開発証明書がインストールされ、信頼されていることを確認します。 詳細については、「<xref:security/enforcing-ssl#troubleshoot-certificate-problems>」を参照してください。
 * Visual Studio では、 **[ツール]**  >  **[オプション]**  >  **[デバッグ]**  >  **[全般]** で **[Enable JavaScript debugging for ASP.NET (Chrome, Edge and IE)] (ASP.NET (Chrome、Edge、IE) の JavaScript デバッグを有効にする)** オプションをオンにする必要があります。 これは、Visual Studio の既定の設定です。 デバッグが機能していない場合は、オプションがオンになっていることを確認します。
+
+### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}` 内のブレークポイントにヒットしない
+
+Blazor フレームワークのデバッグ プロキシは、起動に少し時間がかかります。そのため、[`OnInitialized{Async}` ライフサイクル メソッド](xref:blazor/components/lifecycle#component-initialization-methods)内のブレークポイントにヒットしない可能性があります。 デバッグ プロキシが起動してブレークポイントにヒットするまでの時間を確保するために、メソッド本体の開始に対して遅延を追加することをお勧めします。 [`if` コンパイラ ディレクティブ](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)に基づいて遅延を含めると、アプリのリリース ビルドに対しては遅延が存在しないようにすることができます。
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:
+
+```csharp
+protected override void OnInitialized()
+{
+#if DEBUG
+    Thread.Sleep(10000)
+#endif
+
+    ...
+}
+```
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>:
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+#if DEBUG
+    await Task.Delay(10000)
+#endif
+
+    ...
+}
+```

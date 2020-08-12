@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 5c22220871fdba7fea43c38fa4bc826c07135ffc
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: f3afa9592422da911799a137f9943631ed12ab59
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060034"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819127"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -154,7 +154,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 
 [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) または [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) を返す JavaScript 関数は、<xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を指定して呼び出します。
 
-## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>Blazor Server アプリがプリレンダリングされていることを検出する
+## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Blazor Server アプリがプリレンダリングされていることを検出する
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
@@ -178,7 +178,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 ```
 
 > [!WARNING]
-> Blazor とやりとりしない空の要素のコンテンツを変化させるには、要素参照のみを使用します。 このシナリオは、サードパーティの API が要素にコンテンツを提供する場合に便利です。 Blazor は要素とやりとりしないため、Blazor の要素表現と DOM との間に競合が発生する可能性がありません。
+> Blazor とやりとりしない空の要素のコンテンツを変化させるには、要素参照のみを使用します。 このシナリオは、サードパーティの API から要素にコンテンツが提供される場合に便利です。 Blazor は要素とやりとりしないため、Blazor の要素表現と DOM との間に競合が発生する可能性がありません。
 >
 > 次の例では、Blazor が DOM とやりとりしてこの要素のリスト項目 (`<li>`) を設定するため、順序なしリスト (`ul`) のコンテンツを変化させるのは "*危険*" です。
 >

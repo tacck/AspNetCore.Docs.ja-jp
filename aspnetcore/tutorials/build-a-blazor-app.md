@@ -5,7 +5,7 @@ description: Blazor アプリを段階的に構築します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2020
+ms.date: 07/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 174a8e561701bb3ebd68ed05e42dfc3d70a9b450
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: b58c0c3db685d0a5b082aaf2eb434635bd10e2eb
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176232"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444037"
 ---
-# <a name="build-a-blazor-todo-list-app"></a>Blazor Todo リスト アプリを構築する
+# <a name="build-a-no-locblazor-todo-list-app"></a>Blazor Todo リスト アプリを構築する
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -32,9 +32,15 @@ ms.locfileid: "86176232"
 > * Todo リストの Blazor アプリ プロジェクトを作成する
 > * Razor コンポーネントを変更する
 > * コンポーネントでイベント処理とデータ バインディングを使用する
-> * Blazor アプリで依存関係の挿入 (DI) とルーティングを使用する
+> * Blazor アプリでルーティングを使用する
 
 このチュートリアルの最後には、動作する ToDo リスト アプリが完成します。
+
+## <a name="prerequisites"></a>前提条件
+
+[!INCLUDE[](~/includes/3.1-SDK.md)]
+
+## <a name="create-a-todo-list-no-locblazor-app"></a>ToDo リスト Blazor アプリを作成する
 
 1. コマンド シェルで `TodoList` という名前の新しい Blazor アプリを作成します。
 
@@ -140,7 +146,7 @@ ms.locfileid: "86176232"
 > * Todo リストの Blazor アプリ プロジェクトを作成する
 > * Razor コンポーネントを変更する
 > * コンポーネントでイベント処理とデータ バインディングを使用する
-> * Blazor アプリで依存関係の挿入 (DI) とルーティングを使用する
+> * Blazor アプリでルーティングを使用する
 
 ASP.NET Core Blazor 用のツールについて学習します。
 

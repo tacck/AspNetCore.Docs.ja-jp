@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
+title: ホストされている ASP.NET Core Blazor WebAssembly アプリを Identity Server でセキュリティ保護する
 author: guardrex
-description: '[IdentityServer](https://identityserver.io/) バックエンドを使用して、Visual Studio 内から認証を用いて新しい Blazor ホステッド アプリを作成するには'
+description: '[IdentityServer](https://identityserver.io/) バックエンドを使用する Visual Studio 内からの認証を用いた、ホストされている Blazor ソリューションを新しく作成するには'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: a27d31345cfe6a4212e3c61d0d99ae6745eab052
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 87424f413ab21ae51fc1b1b2033069f5a41da566
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445178"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818886"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)
 
-この記事では、ユーザーと API 呼び出しの認証に [IdentityServer](https://identityserver.io/) を使用する、Blazor でホステッド アプリを新しく作成する方法について説明します。
+この記事では、ユーザーと API 呼び出しの認証に [IdentityServer](https://identityserver.io/) を使用する、ホストされている Blazorソリューションを新しく作成する方法について説明します。
 
 > [!NOTE]
 > 既存の外部 Identity サーバー インスタンスを使用するように、スタンドアロンの、またはホストされた Blazor WebAssembly アプリを構成するには、<xref:blazor/security/webassembly/standalone-with-authentication-library> のガイダンスに従ってください。
@@ -107,7 +107,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 * `Startup.Configure`の場合:
 
-  * IdentityServer のミドルウェアでは、Open ID Connect (OIDC) のエンドポイントが公開されます。
+  * IdentityServer のミドルウェアによって、OpenID Connect (OIDC) のエンドポイントが公開されます。
 
     ```csharp
     app.UseIdentityServer();
@@ -130,7 +130,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> ヘルパー メソッドでは、ASP.NET Core シナリオ対応に [IdentityServer](https://identityserver.io/) が構成されます。 IdentityServer は、アプリのセキュリティの問題を処理するための強力で拡張可能なフレームワークです。 IdentityServer を使用すると、ほとんどの一般的なシナリオには必要のない複雑さが発生します。 そのため、使用開始時に適切であると考えられる一連の規則と構成オプションが用意されています。 認証のニーズが変わったら、IdentityServer のあらゆる機能を利用し、アプリの要件に合わせて認証をカスタマイズできます。
 
-### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
+### <a name="addno-locidentityserverjwt"></a>AddIdentityServerJwt
 
 <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> ヘルパー メソッドでは、アプリに対するポリシー スキームが既定の認証ハンドラーとして構成されます。 そのポリシーは、Identity の URL 空間 `/Identity` のサブパスにルーティングされたすべての要求を Identity で処理できるように構成されています。 それ以外のすべての要求は、<xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> で処理されます。 さらに、このメソッドでは次のことが行われます。
 
@@ -195,7 +195,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
 ```
 
 > [!NOTE]
-> Blazor でホストされているソリューションの一部ではない既存の Identity サーバー インスタンスを使用するように Blazor WebAssembly アプリを構成する場合は、<xref:System.Net.Http.HttpClient> ベース アドレスの登録を <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`builder.HostEnvironment.BaseAddress`) からサーバー アプリの API 認証エンドポイント URL に変更します。
+> ホストされている Blazorソリューションの一部ではない既存の Identity Server インスタンスを使用するように Blazor WebAssembly アプリを構成する場合は、<xref:System.Net.Http.HttpClient> ベース アドレスの登録を <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`builder.HostEnvironment.BaseAddress`) からサーバー アプリの API 認証エンドポイント URL に変更します。
 
 ### <a name="api-authorization-support"></a>API の承認のサポート
 
@@ -364,7 +364,7 @@ services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 
-### <a name="configure-identity-server"></a>Identity Server を構成する
+### <a name="configure-no-locidentity-server"></a>Identity Server を構成する
 
 次の方法の**いずれか**を使用します。
 

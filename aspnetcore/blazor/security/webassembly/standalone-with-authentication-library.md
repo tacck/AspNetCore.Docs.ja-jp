@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 02960e6c7d70be3ea1be3ed9e2280e5b5847c926
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: d3611e26414f5dd1103ca9af15b17f9813023e21
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147674"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818860"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>認証ライブラリを使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>認証ライブラリを使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)
 
@@ -100,7 +100,7 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-スタンドアロン アプリの認証サポートは、Open ID Connect (OIDC) を使用して提供されます。 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> メソッドでは、OIDC を使用してアプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。 アプリの構成に必要な値は、OIDC に準拠する IP から取得できます。 アプリを登録するときに値を取得します。これは通常、オンライン ポータルで実行されます。
+スタンドアロン アプリの認証サポートは、OpenID Connect (OIDC) を使用して提供されます。 <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> メソッドでは、OIDC を使用してアプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。 アプリの構成に必要な値は、OIDC に準拠する IP から取得できます。 アプリを登録するときに値を取得します。これは通常、オンライン ポータルで実行されます。
 
 ## <a name="access-token-scopes"></a>アクセス トークン スコープ
 

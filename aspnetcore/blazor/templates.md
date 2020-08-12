@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor アプリ テンプレートと Blazor プロ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 08/04/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f1b131947a242323295a763ba2f2473af0ccfb4f
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 65d6a3156419b57eae6c7e41a9778fa25fd88f4f
+ms.sourcegitcommit: 6eacadf1be61679ab8e6f781ece76b7395512879
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944531"
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87758529"
 ---
-# <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor テンプレート
+# <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor テンプレート
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -40,17 +40,16 @@ dotnet new blazorwasm --help
 dotnet new blazorserver --help
 ```
 
-## <a name="blazor-project-structure"></a>Blazor プロジェクトの構造
+## <a name="no-locblazor-project-structure"></a>Blazor プロジェクトの構造
 
-次のファイルとフォルダーは、Blazor テンプレートから生成された Blazor アプリを構成します。
+Blazor プロジェクト テンプレートから生成された Blazor アプリは、次のファイルとフォルダーで構成されます。
 
 * `Program.cs`:以下を設定するアプリのエントリ ポイント。
 
   * ASP.NET Core [ホスト](xref:fundamentals/host/generic-host) (Blazor Server)
   * WebAssembly ホスト (Blazor WebAssembly):このファイルのコードは、Blazor WebAssembly テンプレート (`blazorwasm`) から作成されたアプリに固有です。
-    * `App` コンポーネント (アプリのルート コンポーネント) は、`Add` メソッドの `app` DOM 要素として指定されます。
-    * サービスは、ホスト ビルダーの `ConfigureServices` メソッド (`builder.Services.AddSingleton<IMyDependency, MyDependency>();`など) を使用して構成できます。
-    * 構成は、ホスト ビルダー (`builder.Configuration`) を使用して指定できます。
+    * `App` コンポーネントは、アプリのルート コンポーネントです。 `App` コンポーネントは、ルート コンポーネント コレクション (`builder.RootComponents.Add<App>("app")`) に対する `app` DOM 要素 (`<app>...</app>`) として指定されます。
+    * [サービス](xref:blazor/fundamentals/dependency-injection)が追加され、構成されます (例: `builder.Services.AddSingleton<IMyDependency, MyDependency>()`)。
 
 * `Startup.cs` (Blazor Server): アプリのスタートアップ ロジックを含みます。 `Startup` クラスには、次の 2 つのメソッドがあります。
 
@@ -61,7 +60,7 @@ dotnet new blazorserver --help
 
 * `wwwroot/index.html` (Blazor WebAssembly): HTML ページとして実装されるアプリのルート ページ。
   * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
-  * このページは、ルート `App` コンポーネントを表示する場所を指定します。 `App` コンポーネント (`App.razor`) は、`Startup.Configure` の `AddComponent` メソッドに `app` DOM 要素として指定されます。
+  * このページは、ルート `App` コンポーネントを表示する場所を指定します。 コンポーネントは `app` DOM 要素 (`<app>...</app>`) の位置に表示されます。
   * `_framework/blazor.webassembly.js` JavaScript ファイルが読み込まれます。これは以下のことを行います。
     * .NET ランタイム、アプリ、およびアプリの依存関係のダウンロード。
     * アプリを実行するランタイムの初期化。
@@ -77,9 +76,11 @@ dotnet new blazorserver --help
   * `Error` (`Error.razor`、Blazor Server アプリのみ):アプリでハンドルされない例外が発生したときに表示されます。
   * `FetchData` (`Pages/FetchData.razor`):フェッチ データ ページを実装します。
   * `Index` (`Pages/Index.razor`):ホーム ページを実装します。
+  
+* `Properties/launchSettings.json`:[開発環境の構成](xref:fundamentals/environments#development-and-launchsettingsjson)を保持します。
 
 * `Shared` フォルダー:アプリで使用する他の UI コンポーネント (`.razor`) を含みます。
-  * `MainLayout` (`MainLayout.razor`):アプリのレイアウト コンポーネント。
+  * `MainLayout` (`MainLayout.razor`): アプリの[レイアウト コンポーネント](xref:blazor/layouts)。
   * `NavMenu` (`NavMenu.razor`):サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
 
 * `_Imports.razor`:名前空間の [`@using`](xref:mvc/views/razor#using) ディレクティブなど、アプリのコンポーネント (`.razor`) に含める一般的な Razor ディレクティブが含まれます。
@@ -88,4 +89,4 @@ dotnet new blazorserver --help
 
 * `wwwroot`:アプリのパブリックな静的アセットを含むアプリの [Web ルート](xref:fundamentals/index#web-root) フォルダー。
 
-* `appsettings.json` (Blazor Server): アプリの構成設定。
+* `appsettings.json`:アプリの[構成設定](xref:blazor/fundamentals/configuration)を保持します。 Blazor WebAssembly アプリの場合、アプリ設定ファイルは `wwwroot` フォルダーにあります。 Blazor Server アプリの場合、アプリ設定ファイルはプロジェクト ルートにあります。

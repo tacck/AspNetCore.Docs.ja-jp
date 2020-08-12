@@ -5,7 +5,7 @@ description: 外部コンポーネント ライブラリから、コンポーネ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: b172059407f9a08dacc0fadd804864c7aee7fb90
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 8293d61f88f53e55d94b114ca2143fdfb6fd8468
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944495"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819068"
 ---
-# <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor コンポーネント クラス ライブラリ
+# <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor コンポーネント クラス ライブラリ
 
 作成者: [Simon Timms](https://github.com/stimms)
 
@@ -41,7 +41,7 @@ ms.locfileid: "85944495"
 1. 新しいプロジェクトを作成します。
 1. **[Razor クラス ライブラリ]** を選択します。 **[次へ]** を選択します。
 1. **[新しい Razor クラス ライブラリを作成します]** ダイアログで **[作成]** を選択します。
-1. **[プロジェクト名]** フィールドにプロジェクト名を入力するか、既定のプロジェクト名をそのまま使用します。 このトピックの例では、プロジェクト名 `MyComponentLib1` を使用します。 **[作成]** を選択します。
+1. **[プロジェクト名]** フィールドにプロジェクト名を入力するか、既定のプロジェクト名をそのまま使用します。 このトピックの例では、プロジェクト名 `ComponentLibrary` を使用します。 **[作成]** を選択します。
 1. RCL をソリューションに追加します。
    1. ソリューションを右クリックします。 **[追加]**  >  **[既存のプロジェクト]** を選択します。
    1. RCL のプロジェクト ファイルに移動します。
@@ -61,10 +61,10 @@ ms.locfileid: "85944495"
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. コマンド シェルで [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用して、 **Razor クラス ライブラリ** テンプレート (`razorclasslib`) を使用します。 次の例では、`MyComponentLib1` という名前の RCL が作成されます。 コマンドの実行時に、`MyComponentLib1` を保持するフォルダーが自動的に作成されます。
+1. コマンド シェルで [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用して、 **Razor クラス ライブラリ** テンプレート (`razorclasslib`) を使用します。 次の例では、`ComponentLibrary` という名前の RCL が作成されます。 コマンドの実行時に、`ComponentLibrary` を保持するフォルダーが自動的に作成されます。
 
    ```dotnetcli
-   dotnet new razorclasslib -o MyComponentLib1
+   dotnet new razorclasslib -o ComponentLibrary
    ```
 
    > [!NOTE]
@@ -91,35 +91,82 @@ ms.locfileid: "85944495"
 * 名前空間と完全な型名を使用します。
 * Razor の [`@using`](xref:mvc/views/razor#using) ディレクティブを使用します。 個々のコンポーネントを名前で追加することができます。
 
-次の例で、`MyComponentLib1` は `SalesReport` コンポーネントを含むコンポーネント ライブラリです。
+次の例で、`ComponentLibrary` は `Component1` コンポーネント (`Component1.razor`) を含むコンポーネント ライブラリです。 `Component1` コンポーネントは、ライブラリの作成時に RCL プロジェクト テンプレートによって自動的に追加されるサンプルのコンポーネントです。
 
-名前空間と完全な型名を使用して、`SalesReport` コンポーネントを参照できます。
+`Component1` コンポーネントをその名前空間を使用して参照します。
 
 ```razor
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<MyComponentLib1.SalesReport />
+<ComponentLibrary.Component1 />
 ```
 
-また、ライブラリが `@using` ディレクティブを使用して、スコープ内に取り込まれている場合も、このコンポーネントを参照できます。
+または、[`@using`](xref:mvc/views/razor#using) ディレクティブを使用してライブラリをスコープ内に取り込み、名前空間なしでコンポーネントを使用します。
 
 ```razor
-@using MyComponentLib1
+@using ComponentLibrary
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SalesReport />
+<Component1 />
 ```
 
-プロジェクト全体でライブラリのコンポーネントを使用できるようにするには、最上位の `_Import.razor` ファイルに `@using MyComponentLib1` ディレクティブを含めます。 ディレクティブを任意のレベルの `_Import.razor` ファイルに追加して、名前空間をフォルダー内の 1 つまたは複数のページに適用します。
+必要に応じて、最上位の `_Import.razor` ファイルに `@using ComponentLibrary` ディレクティブを含めて、プロジェクト全体でライブラリのコンポーネントを使用できるようにします。 ディレクティブを任意のレベルの `_Import.razor` ファイルに追加して、名前空間をフォルダー内の 1 つのコンポーネントまたは複数のコンポーネントに適用します。
 
-## <a name="create-a-razor-components-class-library-with-static-assets"></a>静的アセットを含む Razor コンポーネント クラス ライブラリを作成する
+::: moniker range=">= aspnetcore-5.0"
+
+`Component1` の `my-component`CSS クラスをコンポーネントに提供するには、フレームワークの `Component1.razor` 内の [`Link` コンポーネント](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)を使用して、ライブラリのスタイルシートにリンクします。
+
+```razor
+<div class="my-component">
+    <Link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+
+    <p>
+        This Blazor component is defined in the <strong>ComponentLibrary</strong> package.
+    </p>
+</div>
+```
+
+アプリ全体にスタイルシートを提供するには、アプリの `wwwroot/index.html` ファイル (Blazor WebAssembly) または `Pages/_Host.cshtml` ファイル (Blazor Server) 内でライブラリのスタイルシートにリンクすることもできます。
+
+```html
+<head>
+    ...
+    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+</head>
+```
+
+`Link` コンポーネントが子コンポーネントで使用されている場合、`Link` コンポーネントを持つ子がレンダリングされていれば、親コンポーネントのその他の子コンポーネントでもリンクされたアセットを使用できます。 子コンポーネントで `Link`コンポーネントを使用することと、`wwwroot/index.html` または `Pages/_Host.cshtml` に `<link>` HTML タグを配置することの違いは、フレームワーク コンポーネントのレンダリングされた HTML タグが次のようになることです。
+
+* アプリケーションの状態によって変更できます。 ハードコーディングされた `<link>` HTML タグは、アプリケーションの状態によって変更することはできません。
+* 親コンポーネントがレンダリングされなくなると、HTML `<head>` から削除されます。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Component1` の `my-component`CSS クラスを提供するには、アプリの `wwwroot/index.html` ファイル (Blazor WebAssembly) または `Pages/_Host.cshtml` ファイル (Blazor Server) 内でライブラリのスタイルシートにリンクします。
+
+```html
+<head>
+    ...
+    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>静的アセットを含む Razor コンポーネント クラス ライブラリを作成する
 
 RCL には、静的アセットを含めることができます。 静的アセットは、ライブラリを使用するすべてのアプリで使用できます。 詳細については、「<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>」を参照してください。
+
+## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>複数のホスト型 Blazor アプリにコンポーネントと静的アセットを提供する
+
+詳細については、「<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>」を参照してください。
 
 ## <a name="build-pack-and-ship-to-nuget"></a>ビルド、パック、NuGet への配布
 

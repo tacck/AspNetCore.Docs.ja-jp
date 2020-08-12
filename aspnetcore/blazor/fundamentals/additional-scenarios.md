@@ -15,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b28e4e43b88fcf8eab9e8959142cca21223c57ff
-ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
+ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86239635"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819003"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
+# <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
-作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
+作成者: [Daniel Roth](https://github.com/danroth27)、[Mackinnon Buck](https://github.com/MackinnonBuck)、[Luke Latham](https://github.com/guardrex)
 
 この記事では、ホスティング モデルの構成について説明します。
 
-### <a name="signalr-cross-origin-negotiation-for-authentication"></a>認証のための SignalR のクロスオリジンネゴシエーション
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>認証のための SignalR のクロスオリジンネゴシエーション
 
 *このセクションは Blazor WebAssembly に適用されます。*
 
@@ -125,7 +125,7 @@ Blazor Server アプリは、サーバーへのクライアント接続が確立
 
 静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Blazor Server アプリ用に SignalR クライアントを構成する
+## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>Blazor Server アプリ用に SignalR クライアントを構成する
 
 *このセクションは Blazor Server に適用されます。*
 
@@ -141,7 +141,7 @@ SignalR クライアント ログを構成するには:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         configureSignalR: function (builder) {
@@ -169,7 +169,7 @@ SignalR クライアント ログを構成するには:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionHandler: {
@@ -191,7 +191,7 @@ SignalR クライアント ログを構成するには:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionOptions: {
@@ -213,7 +213,7 @@ SignalR クライアント ログを構成するには:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
@@ -231,6 +231,41 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 プレースホルダー `{ELEMENT ID}` は、表示する HTML 要素の ID です。
 
-## <a name="additional-resources"></a>その他の技術情報
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="influence-html-head-tag-elements"></a>HTML `<head>` タグ要素に影響を与える
+
+*このセクションは Blazor WebAssembly および Blazor Server に適用されます。*
+
+レンダリングされるときに、`Title`、`Link`、および `Meta` コンポーネントによって HTML `<head>` タグ要素のデータが追加または更新されます。
+
+```razor
+@using Microsoft.AspNetCore.Components.Web.Extensions.Head
+
+<Title Value="{TITLE}" />
+<Link href="{URL}" rel="stylesheet" />
+<Meta content="{DESCRIPTION}" name="description" />
+```
+
+前の例では、`{TITLE}`、`{URL}`、および `{DESCRIPTION}` のプレースホルダーは、文字列値、Razor 変数、または Razor 式です。
+
+次の特徴があります。
+
+* サーバー側の事前レンダリングがサポートされています。
+* `Value` パラメーターは、`Title` コンポーネントの唯一の有効なパラメーターです。
+* `Meta` および `Link` コンポーネントに提供されている HTML 属性は、[追加の属性](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters)にキャプチャされ、レンダリングされた HTML タグに渡されます。
+* 複数の `Title` コンポーネントの場合、ページのタイトルには、レンダリングされた最後の `Title` コンポーネントの `Value` が反映されます。
+* 複数の `Meta` または `Link` コンポーネントが同一の属性に含まれている場合、`Meta` または `Link` コンポーネントごとに 1 つの HTML タグがレンダリングされます。 2 つの `Meta` または `Link` コンポーネントが、同じレンダリングされた HTML タグを参照することはできません。
+* 既存の `Meta` または `Link` コンポーネントのパラメーターに対する変更は、それらのレンダリングされる HTML タグに反映されます。
+* `Link` または `Meta` コンポーネントがレンダリングされなくなり、フレームワークによって破棄されると、それらのレンダリングされた HTML タグは削除されます。
+
+フレームワーク コンポーネントの 1 つが子コンポーネントで使用されている場合、そのフレームワーク コンポーネントを含む子コンポーネントがレンダリングされていれば、レンダリングされた HTML タグは親コンポーネントのその他の子コンポーネントに影響を与えます。 子コンポーネントでこれらのフレームワーク コンポーネントの 1 つを使用することと、`wwwroot/index.html` または `Pages/_Host.cshtml` に HTML タグを配置することの違いは、フレームワーク コンポーネントのレンダリングされた HTML タグが次のようになることです。
+
+* アプリケーションの状態によって変更できます。 ハードコーディングされた HTML タグは、アプリケーションの状態によって変更することはできません。
+* 親コンポーネントがレンダリングされなくなると、HTML `<head>` から削除されます。
+
+::: moniker-end
+
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/logging/index>

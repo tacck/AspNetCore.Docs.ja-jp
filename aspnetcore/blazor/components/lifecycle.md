@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 6b9653356659700ae8396a01b38c04d59a86625f
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 92fd893963f049e014325d4f55affa789979647a
+ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059891"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526278"
 ---
-# <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
+# <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
 著者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 
@@ -90,7 +90,7 @@ Blazor Server アプリをプリレンダリングしている間、ブラウザ
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> または <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> が呼び出されます。
 
-* コンポーネントが <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> または <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> で初期化された後。
+* コンポーネントが <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> または <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> で初期化された後。
 * 親コンポーネントが再レンダリングし、次のものを提供するとき:
   * 少なくとも 1 つのパラメーターが変更された既知のプリミティブ不変型のみ。
   * 任意の複合型のパラメーター。 フレームワークは、複合型のパラメーターの値が内部で変更されているかどうかを認識できないため、パラメーター セットは変更済みとして扱われます。
@@ -187,37 +187,6 @@ Blazor Server テンプレートの `Pages/FetchData.razor` は以下のよう�
 
 [!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
 
-## <a name="component-disposal-with-idisposable"></a>IDisposable を使用したコンポーネントの破棄
-
-コンポーネントが <xref:System.IDisposable> を実装している場合は、コンポーネントが UI から削除されると、[`Dispose` メソッド](/dotnet/standard/garbage-collection/implementing-dispose)が呼び出されます。 次のコンポーネントでは、`@implements IDisposable` および `Dispose` メソッドが使用されます。
-
-```razor
-@using System
-@implements IDisposable
-
-...
-
-@code {
-    public void Dispose()
-    {
-        ...
-    }
-}
-```
-
-> [!NOTE]
-> `Dispose` では、<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> の呼び出しはサポートされていません。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> は、レンダラーの破棄の一部として呼び出されることがあるため、その時点での UI 更新の要求はサポートされていません。
-
-.NET イベントからイベント ハンドラーのサブスクライブを解除します。 次の [Blazor フォーム](xref:blazor/forms-validation)の例は、`Dispose` メソッドでイベント ハンドラーをアンフックする方法を示しています。
-
-* プライベート フィールドとラムダのアプローチ
-
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
-
-* プライベート メソッドのアプローチ
-
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
-
 ## <a name="handle-errors"></a>エラーの処理
 
 ライフサイクル メソッド実行中のエラー処理の詳細については、「<xref:blazor/fundamentals/handle-errors#lifecycle-methods>」を参照してください。
@@ -285,6 +254,37 @@ public class WeatherForecastService
 ## <a name="detect-when-the-app-is-prerendering"></a>アプリがプリレンダリングされていることを検出する
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="component-disposal-with-idisposable"></a>IDisposable を使用したコンポーネントの破棄
+
+コンポーネントが <xref:System.IDisposable> を実装している場合は、コンポーネントが UI から削除されると、[`Dispose` メソッド](/dotnet/standard/garbage-collection/implementing-dispose)が呼び出されます。 破棄は、[コンポーネントの初期化](#component-initialization-methods)中など、いつでも実行できます。 次のコンポーネントでは、`@implements IDisposable` および `Dispose` メソッドが使用されます。
+
+```razor
+@using System
+@implements IDisposable
+
+...
+
+@code {
+    public void Dispose()
+    {
+        ...
+    }
+}
+```
+
+> [!NOTE]
+> `Dispose` では、<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> の呼び出しはサポートされていません。 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> は、レンダラーの破棄の一部として呼び出されることがあるため、その時点での UI 更新の要求はサポートされていません。
+
+.NET イベントからイベント ハンドラーのサブスクライブを解除します。 次の [Blazor フォーム](xref:blazor/forms-validation)の例は、`Dispose` メソッドでイベント ハンドラーをアンフックする方法を示しています。
+
+* プライベート フィールドとラムダのアプローチ
+
+  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+
+* プライベート メソッドのアプローチ
+
+  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="cancelable-background-work"></a>取り消し可能なバックグラウンド作業
 

@@ -5,7 +5,7 @@ description: アプリの設定、認証、ログの構成など、Blazor アプ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 07/29/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,24 +15,29 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: f78803a3954feb98a39f26874b9de0aa08dc6327
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 9ae0dcc16b9debd47a61010953243b0abe499c4f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445217"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87443970"
 ---
-# <a name="aspnet-core-blazor-configuration"></a>ASP.NET Core Blazor の構成
+# <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor の構成
 
 > [!NOTE]
 > このトピックの対象は、Blazor WebAssembly です。 ASP.NET Core アプリの構成に関する一般的なガイダンスについては、「<xref:fundamentals/configuration/index>」を参照してください。
 
-Blazor WebAssembly は次から構成を読み込みます。
+Blazor WebAssembly では既定で、アプリ設定ファイルから構成が読み込まれます。
 
-* 既定のアプリ設定ファイル
-  * `wwwroot/appsettings.json`
-  * `wwwroot/appsettings.{ENVIRONMENT}.json`
-* アプリによって登録されたその他の[構成プロバイダー](xref:fundamentals/configuration/index)。 すべてのプロバイダーが Blazor WebAssembly アプリに適しているわけではありません。 どのプロバイダーが Blazor WebAssembly でサポートされているかについては、「[Blazor WASM の構成プロバイダーの明確化 (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134)」で追跡されています。
+* `wwwroot/appsettings.json`
+* `wwwroot/appsettings.{ENVIRONMENT}.json`
+
+アプリによって登録されたその他の構成プロバイダーから構成を取得することもできます。
+
+すべてのプロバイダーまたはプロバイダー機能が Blazor WebAssembly アプリに適しているわけではありません。
+
+* [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration): クライアント シークレットのシナリオでは、プロバイダーはマネージド ID およびアプリケーション ID (クライアント ID) に対してはサポートされていません。 クライアント シークレットを使用したアプリケーション ID は、ASP.NET Core アプリ、特に Blazor WebAssembly アプリについては推奨されません。これは、クライアント シークレットをサービスにアクセスするためにクライアント側でセキュリティで保護することができないためです。
+* [Azure App Configuration プロバイダー](/azure/azure-app-configuration/quickstart-aspnet-core-app): このプロバイダーは Blazor WebAssembly アプリに適していません。これは、Blazor WebAssembly アプリは Azure 内のサーバー上では実行されないためです。
 
 > [!WARNING]
 > Blazor WebAssembly アプリでの構成は、ユーザーに表示されます。 **アプリのシークレットや資格情報を構成に保存しないでください。**
@@ -61,7 +66,31 @@ Blazor WebAssembly は次から構成を読み込みます。
 <p>Message: @Configuration["message"]</p>
 ```
 
-## <a name="provider-configuration"></a>プロバイダーの構成
+## <a name="custom-configuration-provider-with-ef-core"></a>EF Core を使用したカスタム構成プロバイダー
+
+「<xref:fundamentals/configuration/index#custom-configuration-provider>」で説明されている EF Core を使用したカスタム構成プロバイダーは、Blazor WebAssembly アプリで動作します。
+
+`Program.Main` (`Program.cs`) で次のコードを使用して、例の構成プロバイダーを追加します。
+
+```csharp
+builder.Configuration.AddEFConfiguration(
+    options => options.UseInMemoryDatabase("InMemoryDb"));
+```
+
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
+
+```razor
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<ul>
+    <li>@Configuration["quote1"]</li>
+    <li>@Configuration["quote2"]</li>
+    <li>@Configuration["quote3"]</li>
+</ul>
+```
+
+## <a name="memory-configuration-source"></a>メモリ構成のソース
 
 次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> を使用して追加の構成を指定します。
 
