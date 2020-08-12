@@ -163,9 +163,14 @@
         - name: Web API アプリ >>
           displayName: tutorial
           href: /learn/modules/build-web-api-net-core/
-        - name: クラウドネイティブ マイクロサービス >>
-          displayName: 'tutorial, kubernetes, aks, acr, docker'
-          href: /learn/modules/microservices-aspnet-core/
+        - name: クラウドネイティブ マイクロサービス
+          items:
+            - name: 作成と配置 >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-aspnet-core/
+            - name: 回復性の実装 >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-resiliency-aspnet-core/
         - name: データ アクセス >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1191,6 +1196,8 @@
       uid: performance/diagnostic-tools
     - name: ロード テストおよびストレス テスト
       uid: test/loadtests
+    - name: イベント カウンター
+      href: /dotnet/core/diagnostics/event-counter-perf
 - name: グローバリゼーションとローカリゼーション
   items:
     - name: 概要
