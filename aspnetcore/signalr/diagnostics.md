@@ -4,7 +4,7 @@ author: anurse
 description: ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
-ms.custom: signalr
+ms.custom: devx-track-csharp, signalr
 ms.date: 06/12/2020
 no-loc:
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 922b2ca0aa7933e1010db7ca319631766ffbf753
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021836"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130536"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断SignalR
 
@@ -104,7 +104,7 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 
 詳細設定を構成すると、ログはブラウザーコンソール (または NodeJS アプリの標準出力) に書き込まれます。
 
-カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。 実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。 例:
+カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。 実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。 次に例を示します。
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
