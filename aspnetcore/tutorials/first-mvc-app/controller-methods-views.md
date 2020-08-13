@@ -5,6 +5,8 @@ description: 'パート 6: ASP.NET Core MVC アプリにモデルを追加する
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b473b8575a870b91d83e5494103d39486ef4fee1
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213050"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021069"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>パート 6: ASP.NET Core のコントローラーのメソッドとビュー
 

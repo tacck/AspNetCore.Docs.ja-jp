@@ -6,28 +6,30 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: bf041965b009d5c10b96ad4f2a349c6efb346eb5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3fb524748b9e2aa2c12b64f67a7960c4f0f911b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408163"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021160"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 の新機能
 
 この記事では、ASP.NET Core 2.1 の最も大きな変更点について説明します。また、その変更点のドキュメントへのリンクも示します。
 
-## [SignalR
+## SignalR
 
-ASP.NET Core 2.1 用に [SignalR を書き直しました。 ASP.NET Core [SignalR には、多くの改善点が含まれています。
+ASP.NET Core 2.1 用に SignalR を書き直しました。 ASP.NET Core SignalR には、多くの改善点が含まれています。
 
 * 簡略化されたスケール アウト モデル。
 * jQuery への依存関係がない新しい JavaScript クライアント。
@@ -36,24 +38,24 @@ ASP.NET Core 2.1 用に [SignalR を書き直しました。 ASP.NET Core [Signa
 * 新しいストリーミング応答モデル。
 * ベア WebSocket に基づいたクライアントのサポート。
 
-詳細については、[ASP.NET Core [SignalR](xref:signalr/introduction) に関する記事を参照してください。
+詳細については、[ASP.NET Core SignalR](xref:signalr/introduction) に関する記事を参照してください。
 
-## <a name="razor-class-libraries"></a>[Razor クラス ライブラリ
+## <a name="no-locrazor-class-libraries"></a>Razor クラス ライブラリ
 
-ASP.NET Core 2.1 を使用すると、[Razor ベースの UI をビルドしてライブラリに含め、複数のプロジェクトとの間で共有することが容易になります。 新しい [Razor SDK を使用すると、NuGet パッケージにパッケージ化できるクラス ライブラリ プロジェクトに [Razor ファイルをビルドすることができます。 アプリにより、ライブラリ内のビューとページを自動的に検出して、オーバーライドすることができます。 ビルドに [Razor コンパイルを統合すると、次のことが可能になります。
+ASP.NET Core 2.1 を使用すると、Razor ベースの UI をビルドしてライブラリに含め、複数のプロジェクトとの間で共有することが容易になります。 新しい Razor SDK を使用すると、NuGet パッケージにパッケージ化できるクラス ライブラリ プロジェクトに Razor ファイルをビルドすることができます。 アプリにより、ライブラリ内のビューとページを自動的に検出して、オーバーライドすることができます。 ビルドに Razor コンパイルを統合すると、次のことが可能になります。
 
 * アプリの起動時間が大幅に短縮されます。
-* 実行時の [Razor ビューとページへの高速更新は、反復開発ワークフローの一部として引き続き利用できます。
+* 実行時の Razor ビューとページへの高速更新は、反復開発ワークフローの一部として引き続き利用できます。
 
-詳細については、[[Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成](xref:razor-pages/ui-class)に関するページを参照してください。
+詳細については、[Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成](xref:razor-pages/ui-class)に関するページを参照してください。
 
-## <a name="identity-ui-library--scaffolding"></a>[Identity の UI ライブラリとスキャフォールディング
+## <a name="no-locidentity-ui-library--scaffolding"></a>Identity の UI ライブラリとスキャフォールディング
 
-ASP.NET Core 2.1 では、[ASP.NET Core [Identity](xref:security/authentication/identity) を [[Razor クラス ライブラリ](xref:razor-pages/ui-class)として提供しています。 [Identity を含むアプリでは、新しい [Identity スキャフォルダーを適用して、[Identity [Razor クラス ライブラリ (RCL) に含まれるソース コードを選択的に追加することができます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、[Identity RCL の同じコードよりも優先されます。
+ASP.NET Core 2.1 では、[ASP.NET Core Identity](xref:security/authentication/identity) を [Razor クラス ライブラリ](xref:razor-pages/ui-class)として提供しています。 Identity を含むアプリでは、新しい Identity スキャフォルダーを適用して、Identity Razor クラス ライブラリ (RCL) に含まれるソース コードを選択的に追加することができます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、Identity RCL の同じコードよりも優先されます。
 
-認証が含まれて**いない**アプリでは、[Identity スキャフォルダーを適用して RCL [Identity パッケージを追加できます。 生成される [Identity コードの選択オプションがあります。
+認証が含まれて**いない**アプリでは、Identity スキャフォルダーを適用して RCL Identity パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
 
-詳細については、「[ASP.NET Core プロジェクトの [Identity のスキャフォールディング](xref:security/authentication/scaffold-identity)」を参照してください。
+詳細については、「[ASP.NET Core プロジェクトの Identity のスキャフォールディング](xref:security/authentication/scaffold-identity)」を参照してください。
 
 ## <a name="https"></a>HTTPS
 
@@ -159,17 +161,17 @@ Angular テンプレートは Angular CLI に基づいており、React テン�
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="razor-pages-search-for-razor-assets"></a>[Razor Pages での [Razor アセットの検索
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>Razor Pages での Razor アセットの検索
 
-2\.1 では、[Razor Pages によって、次のディレクトリ内の [Razor アセット (レイアウトや部分など) が次の順序で検索されます。
+2\.1 では、Razor Pages によって、次のディレクトリ内の Razor アセット (レイアウトや部分など) が次の順序で検索されます。
 
 1. 現在の Pages フォルダー
 1. */Pages/Shared/*
 1. */Views/Shared/*
 
-## <a name="razor-pages-in-an-area"></a>区分での [Razor Pages
+## <a name="no-locrazor-pages-in-an-area"></a>区分での Razor Pages
 
-[Razor Pages が、[区分](xref:mvc/controllers/areas)をサポートするようになりました。 区分の例を表示するには、個々のユーザー アカウントで新しい [Razor Pages Web アプリを作成します。 個々のユーザー アカウントを使用した [Razor Pages Web アプリには、 */Areas/[Identity/Pages* が含まれます。
+Razor Pages が、[区分](xref:mvc/controllers/areas)をサポートするようになりました。 区分の例を表示するには、個々のユーザー アカウントで新しい Razor Pages Web アプリを作成します。 個々のユーザー アカウントを使用した Razor Pages Web アプリには、 */Areas/Identity/Pages* が含まれます。
 
 ## <a name="mvc-compatibility-version"></a>MVC 互換バージョン
 

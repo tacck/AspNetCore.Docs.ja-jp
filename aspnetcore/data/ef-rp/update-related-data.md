@@ -5,6 +5,8 @@ description: Razor ページと Entity Framework チュートリアル シリー
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060138"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017741"
 ---
-# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -65,7 +67,7 @@ Create と Edit のページ モデル クラスは、`DepartmentNamePageModel` 
 * `TryUpdateModelAsync` を使用して[過剰ポスティング](xref:data/ef-rp/crud#overposting)を防止します。
 * `ViewData["DepartmentID"]` を削除します。 基底クラスからの `DepartmentNameSL` は厳密に型指定されたモデルであり、Razor ページによって使用されます。 厳密に型指定されたモデルは、弱く型指定されたモデルよりも優先されます。 詳細については、「[弱い型指定のデータ (ViewData と ViewBag)](xref:mvc/views/overview#VD_VB)」を参照してください。
 
-### <a name="update-the-course-create-razor-page"></a>Course Create Razor ページを更新する
+### <a name="update-the-course-create-no-locrazor-page"></a>Course Create Razor ページを更新する
 
 次のコードで *Pages/Courses/Create.cshtml* を更新します。
 
@@ -92,7 +94,7 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 変更は、Create ページ モデルで行われたものと似ています。 上記のコードでは、ドロップダウン リストでその部門を選択する `PopulateDepartmentsDropDownList` が部門 ID で渡されます。
 
-### <a name="update-the-course-edit-razor-page"></a>Course Edit Razor ページを更新する
+### <a name="update-the-course-edit-no-locrazor-page"></a>Course Edit Razor ページを更新する
 
 次のコードで *Pages/Courses/Edit.cshtml* を更新します。
 
@@ -120,7 +122,7 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>Course Razor ページを更新する
+### <a name="update-the-course-no-locrazor-pages"></a>Course Razor ページを更新する
 
 次のコードで *Pages/Courses/Delete.cshtml* を更新します。
 
@@ -197,7 +199,7 @@ Razor ページには Course エンティティのコレクションがないた
 * 編集中の Instructor エンティティにチェック ボックスからの情報を適用する目的で、`OnPostAsync` で `UpdateInstructorCourses` を呼び出します。
 * `TryUpdateModel` が失敗した場合、`OnPostAsync` で `PopulateAssignedCourseData` と `UpdateInstructorCourses` を呼び出します。 このようなメソッド呼び出しにより、エラー メッセージと共に再表示されたとき、ページに入力された割り当て済みコース データが復元されます。
 
-### <a name="update-the-instructor-edit-razor-page"></a>Instructor Edit Razor ページを更新する
+### <a name="update-the-instructor-edit-no-locrazor-page"></a>Instructor Edit Razor ページを更新する
 
 次のコードで *Pages/Instructors/Edit.cshtml* を更新します。
 

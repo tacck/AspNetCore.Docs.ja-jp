@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212543"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017728"
 ---
-# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
 
 作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -134,7 +136,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 詳細については、「[Sqlite プロバイダーで大文字と小文字を区別しないクエリを使用する方法](https://github.com/aspnet/EntityFrameworkCore/issues/11414)」を参照してください。
 
-### <a name="update-the-razor-page"></a>Razor ページを更新する
+### <a name="update-the-no-locrazor-page"></a>Razor ページを更新する
 
 *Pages/Students/Index.cshtml* のコードを置き換えて、 **[検索]** ボタンと類別されたクロムを作成します。
 
@@ -211,7 +213,7 @@ https://localhost:<port>/Students?SearchString=an
 
   `PaginatedList.CreateAsync` 呼び出しの `pageIndex` の後の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
 
-### <a name="add-paging-links-to-the-razor-page"></a>Razor ページにページングのリンクを追加する
+### <a name="add-paging-links-to-the-no-locrazor-page"></a>Razor ページにページングのリンクを追加する
 
 *Students/Index.cshtml* のコードを次のコードに置き換えます。 変更が強調表示されています。
 
@@ -247,7 +249,7 @@ https://localhost:<port>/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Razor ページを作成する
+### <a name="create-the-no-locrazor-page"></a>Razor ページを作成する
 
 次のコードを使用して、*Pages/About.cshtml* ファイルを作成します。
 
@@ -467,7 +469,7 @@ http://localhost:5000/Students?SearchString=an
 
 `PaginatedList.CreateAsync` の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>学生の Razor ページにページングのリンクを追加する
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>学生の Razor ページにページングのリンクを追加する
 
 *Students/Index.cshtml* 内のマークアップを更新する 変更が強調表示されています。
 
@@ -521,7 +523,7 @@ ASP.NET Core 2.2 の Web テンプレートには、About ページが含まれ�
 
 LINQ ステートメントは、登録日で受講者エンティティをグループ化し、各グループ内のエンティティの数を計算して、結果を `EnrollmentDateGroup` ビュー モデル オブジェクトのコレクションに格納します。
 
-### <a name="modify-the-about-razor-page"></a>About Razor ページを変更する
+### <a name="modify-the-about-no-locrazor-page"></a>About Razor ページを変更する
 
 *Pages/About.cshtml* ファイルのコードを次のコードに置き換えます。
 

@@ -6,20 +6,22 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: test/troubleshoot
-ms.openlocfilehash: f3c975567ee9ea5a1d9f317d3bc77997f68be928
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a05b5f85ee9e399daf35c32dabe0149be38ff6c2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85398998"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021355"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>ASP.NET Core プロジェクトのトラブルシューティングとデバッグ
 
@@ -83,7 +85,7 @@ ASP.NET Core の **[新しいプロジェクト]** ダイアログに、次の�
 
 * 要求 :メソッド、スキーム、ホスト、パス ベース、パス、クエリ文字列、ヘッダー
 * 接続:リモート IP アドレス、リモート ポート、ローカル IP アドレス、ローカル ポート、クライアント証明書
-* [Identity:名前、表示名
+* Identity:名前、表示名
 * 構成設定
 * 環境変数
 
@@ -125,8 +127,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env,
             sb.Append($"LocalPort: {context.Connection.LocalPort}{nl}");
             sb.Append($"ClientCert: {context.Connection.ClientCertificate}{nl}{nl}");
 
-            sb.Append($"[Identity{rule}");
-            sb.Append($"User: {context.User.[Identity.Name}{nl}");
+            sb.Append($"Identity{rule}");
+            sb.Append($"User: {context.User.Identity.Name}{nl}");
             var scheme = await authSchemeProvider
                 .GetSchemeAsync(IISDefaults.AuthenticationScheme);
             sb.Append($"DisplayName: {scheme?.DisplayName}{nl}{nl}");

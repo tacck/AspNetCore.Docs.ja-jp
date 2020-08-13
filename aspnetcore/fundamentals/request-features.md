@@ -5,6 +5,8 @@ description: ASP.NET Core のインターフェイスに定義されている HT
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 21e78c6c1d05eb3b2ce8ade1b950b15823fa0e83
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4b6b34724bc848578293e586da12ead63c96cfbd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407279"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016792"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core での要求機能
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 97d8606ba6bef0bb8bf23d1553c7cb5681fbdbd8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1ec51bf054f1f0d60ed27ee280f436e6d4c8c4b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404367"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021198"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0 の新機能
 
 この記事では、ASP.NET Core 2.0 の最も大きな変更点について説明します。また、その変更点のドキュメントへのリンクも示します。
 
-## <a name="razor-pages"></a>Razor Pages
+## <a name="no-locrazor-pages"></a>Razor Pages
 
 Razor Pages は、ページ コーディングに重点を置いたシナリオをより簡略化し、生産性を高める ASP.NET Core MVC の新機能です。
 
@@ -72,7 +74,7 @@ ASP.NET Core 2.0 には、既定で依存性の注入 (DI) システムにログ
 
 計画されているドキュメントの状態については、「[GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/3054)」 (GitHub の問題) を参照してください。
 
-## <a name="identity-update"></a>Identity の更新
+## <a name="no-locidentity-update"></a>Identity の更新
 
 ASP.NET Core 2.0 で Identity を使用し、簡単にセキュリティで保護された Web API をビルドできるようになりました。 [Microsoft 認証ライブラリ (MSAL)](https://www.nuget.org/packages/Microsoft.Identity.Client) を使用して Web API にアクセスするアクセス トークンを取得することができます。
 
@@ -136,7 +138,7 @@ Razor ビューのプリコンパイルは発行時に既定で有効になっ�
 
 詳細については、[ASP.NET Core での Razor ビューのコンパイルとプリコンパイル](xref:mvc/views/view-compilation)に関するページを参照してください。
 
-## <a name="razor-support-for-c-71"></a>C# 7.1 での Razor サポート
+## <a name="no-locrazor-support-for-c-71"></a>C# 7.1 での Razor サポート
 
 Razor ビュー エンジンが更新され、新しい Roslyn コンパイラで使用できるようになりました。 これには、既定の式、推定タプル名、およびジェネリック パターン マッチングのような C# 7.1 の機能のサポートが含まれています。 プロジェクトで C# 7.1 を使用する場合、プロジェクト ファイルに次のプロパティを追加し、ソリューションを再読み込みします。
 

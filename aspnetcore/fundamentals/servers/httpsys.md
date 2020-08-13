@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 27ee69130bc455ab2570556091692053d59e89a5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 384b6559b4ee6140da5cf785ffda3978aafbb132
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408228"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016766"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core での HTTP.sys Web サーバーの実装
 
@@ -169,7 +171,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    `UrlPrefixes` の設定は `UseUrls`/`urls`/`ASPNETCORE_URLS` の設定をオーバーライドします。 したがって、`UseUrls`、`urls`、および `ASPNETCORE_URLS` 環境変数の利点は、Kestrel と HTTP.sys を簡単に切り替えられることです。
 
-   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)が使用されます。
+   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](/windows/win32/http/urlprefix-strings)が使用されます。
 
    > [!WARNING]
    > 最上位のワイルドカードのバインド ( `http://*:80/` と `http://+:80` ) は使用しては **いけません** 。 最上位のワイルドカードのバインドを使用すると、アプリにセキュリティの脆弱性が生じます。 これは、強力と脆弱の両方のワイルドカードに適用されます。 ワイルドカードではなく、明示的なホスト名か IP アドレスを使用してください。 親ドメイン全体を制御する場合、サブドメインのワイルドカードのバインド (たとえば、`*.mysub.com`) がセキュリティ リスクになることはありません (脆弱である `*.com` とは対照的)。 詳細については、[RFC 7230:セクション 5.4:ホスト](https://tools.ietf.org/html/rfc7230#section-5.4)に関するページを参照してください。
@@ -253,7 +255,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
-   * [UrlPrefix Strings](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx) (UrlPrefix 文字列)
+   * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
 
@@ -272,7 +274,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [HTTP.sys を使用して Windows 認証を有効にする](xref:security/authentication/windowsauth#httpsys)
-* [HTTP サーバー API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP サーバー API](/windows/win32/http/http-api-start-page)
 * [aspnet/HttpSysServer GitHub リポジトリ (ソース コード)](https://github.com/aspnet/HttpSysServer/)
 * [ホスト](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -420,7 +422,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    `UrlPrefixes` の設定は `UseUrls`/`urls`/`ASPNETCORE_URLS` の設定をオーバーライドします。 したがって、`UseUrls`、`urls`、および `ASPNETCORE_URLS` 環境変数の利点は、Kestrel と HTTP.sys を簡単に切り替えられることです。
 
-   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)が使用されます。
+   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](/windows/win32/http/urlprefix-strings)が使用されます。
 
    > [!WARNING]
    > 最上位のワイルドカードのバインド ( `http://*:80/` と `http://+:80` ) は使用しては **いけません** 。 最上位のワイルドカードのバインドを使用すると、アプリにセキュリティの脆弱性が生じます。 これは、強力と脆弱の両方のワイルドカードに適用されます。 ワイルドカードではなく、明示的なホスト名か IP アドレスを使用してください。 親ドメイン全体を制御する場合、サブドメインのワイルドカードのバインド (たとえば、`*.mysub.com`) がセキュリティ リスクになることはありません (脆弱である `*.com` とは対照的)。 詳細については、[RFC 7230:セクション 5.4:ホスト](https://tools.ietf.org/html/rfc7230#section-5.4)に関するページを参照してください。
@@ -504,7 +506,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
-   * [UrlPrefix Strings](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx) (UrlPrefix 文字列)
+   * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
 
@@ -523,7 +525,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [HTTP.sys を使用して Windows 認証を有効にする](xref:security/authentication/windowsauth#httpsys)
-* [HTTP サーバー API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP サーバー API](/windows/win32/http/http-api-start-page)
 * [aspnet/HttpSysServer GitHub リポジトリ (ソース コード)](https://github.com/aspnet/HttpSysServer/)
 * [ホスト](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -673,7 +675,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    `UrlPrefixes` の設定は `UseUrls`/`urls`/`ASPNETCORE_URLS` の設定をオーバーライドします。 したがって、`UseUrls`、`urls`、および `ASPNETCORE_URLS` 環境変数の利点は、Kestrel と HTTP.sys を簡単に切り替えられることです。
 
-   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)が使用されます。
+   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](/windows/win32/http/urlprefix-strings)が使用されます。
 
    > [!WARNING]
    > 最上位のワイルドカードのバインド ( `http://*:80/` と `http://+:80` ) は使用しては **いけません** 。 最上位のワイルドカードのバインドを使用すると、アプリにセキュリティの脆弱性が生じます。 これは、強力と脆弱の両方のワイルドカードに適用されます。 ワイルドカードではなく、明示的なホスト名か IP アドレスを使用してください。 親ドメイン全体を制御する場合、サブドメインのワイルドカードのバインド (たとえば、`*.mysub.com`) がセキュリティ リスクになることはありません (脆弱である `*.com` とは対照的)。 詳細については、[RFC 7230:セクション 5.4:ホスト](https://tools.ietf.org/html/rfc7230#section-5.4)に関するページを参照してください。
@@ -757,7 +759,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
-   * [UrlPrefix Strings](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx) (UrlPrefix 文字列)
+   * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
 
@@ -776,7 +778,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [HTTP.sys を使用して Windows 認証を有効にする](xref:security/authentication/windowsauth#httpsys)
-* [HTTP サーバー API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP サーバー API](/windows/win32/http/http-api-start-page)
 * [aspnet/HttpSysServer GitHub リポジトリ (ソース コード)](https://github.com/aspnet/HttpSysServer/)
 * [ホスト](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -926,7 +928,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    `UrlPrefixes` の設定は `UseUrls`/`urls`/`ASPNETCORE_URLS` の設定をオーバーライドします。 したがって、`UseUrls`、`urls`、および `ASPNETCORE_URLS` 環境変数の利点は、Kestrel と HTTP.sys を簡単に切り替えられることです。
 
-   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)が使用されます。
+   HTTP.sys では、[HTTP サーバー API の UrlPrefix 文字列形式](/windows/win32/http/urlprefix-strings)が使用されます。
 
    > [!WARNING]
    > 最上位のワイルドカードのバインド ( `http://*:80/` と `http://+:80` ) は使用しては **いけません** 。 最上位のワイルドカードのバインドを使用すると、アプリにセキュリティの脆弱性が生じます。 これは、強力と脆弱の両方のワイルドカードに適用されます。 ワイルドカードではなく、明示的なホスト名か IP アドレスを使用してください。 親ドメイン全体を制御する場合、サブドメインのワイルドカードのバインド (たとえば、`*.mysub.com`) がセキュリティ リスクになることはありません (脆弱である `*.com` とは対照的)。 詳細については、[RFC 7230:セクション 5.4:ホスト](https://tools.ietf.org/html/rfc7230#section-5.4)に関するページを参照してください。
@@ -1010,7 +1012,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
-   * [UrlPrefix Strings](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx) (UrlPrefix 文字列)
+   * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
 
@@ -1029,7 +1031,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [HTTP.sys を使用して Windows 認証を有効にする](xref:security/authentication/windowsauth#httpsys)
-* [HTTP サーバー API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP サーバー API](/windows/win32/http/http-api-start-page)
 * [aspnet/HttpSysServer GitHub リポジトリ (ソース コード)](https://github.com/aspnet/HttpSysServer/)
 * [ホスト](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>

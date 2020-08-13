@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: b57e2a34f79691f7f2b1ed69cfad25de00c5ca13
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: 3e719261315ed3a17833da7751d801d79a11ee6c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176213"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014479"
 ---
-# <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
+# <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -479,7 +481,7 @@ private class CustomValidator : ValidationAttribute
 > [!NOTE]
 > <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> が `null`です。 `IsValid` メソッドでの検証に対する挿入サービスはサポートされていません。
 
-### <a name="blazor-data-annotations-validation-package"></a>Blazor データ注釈検証パッケージ
+### <a name="no-locblazor-data-annotations-validation-package"></a>Blazor データ注釈検証パッケージ
 
 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して検証エクスペリエンスのギャップを埋めるパッケージです。 パッケージは現在、*試験段階*です。
 

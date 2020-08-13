@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 1bc9b2b081c58392bd2c226ebedc804b43810bc2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408852"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021524"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>パート 8、ASP.NET Core Razor ページへの検証の追加
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>パート 8、ASP.NET Core Razor ページへの検証の追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -63,7 +65,7 @@ DataAnnotations 名前空間には、クラスまたはプロパティに宣言�
 
 ASP.NET Core によって検証規則が自動的に適用されるようにすると、アプリをより堅牢にできます。 また、ユーザーが何かを検証することを忘れてしまい、データベースに不適切なデータが誤って格納されることもなくなります。
 
-### <a name="validation-error-ui-in-razor-pages"></a>Razor ページの検証エラー UI
+### <a name="validation-error-ui-in-no-locrazor-pages"></a>Razor ページの検証エラー UI
 
 アプリを実行し、[Pages/Movies]/(ページ/ムービー/) に移動します。
 

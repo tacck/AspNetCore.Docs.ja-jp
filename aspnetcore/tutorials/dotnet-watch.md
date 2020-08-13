@@ -5,6 +5,8 @@ description: このチュートリアルでは、.NET Core CLI のファイル �
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 0c81dc2fd83cb9327dad46dab840d4352de89baf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f4987e7eef496f3ba4b8f9bb084816be3b17ada7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409034"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022447"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>ファイル ウォッチャーを使用した ASP.NET Core アプリの開発
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) と [Victor Hurdugaci](https://twitter.com/victorhurdugaci)
 
-[dotnet watch](https://www.nuget.org/packages/dotnet-watch) は、ソース ファイルの変更時に [.NET Core CLI](/dotnet/core/tools) コマンドを実行するツールです。 たとえば、あるファイルを変更すると、コンパイル、テストの実行、展開が開始されます。
+`dotnet watch` は、ソース ファイルの変更時に [.NET Core CLI](/dotnet/core/tools) コマンドを実行するツールです。 たとえば、あるファイルを変更すると、コンパイル、テストの実行、展開が開始されます。
 
 このチュートリアルでは、エンドポイントが 2 つの既存の Web API を利用します。合計を返すエンドポイントと積を返すエンドポイントです。 積のメソッドにはバグがあり、このチュートリアルで修正します。
 

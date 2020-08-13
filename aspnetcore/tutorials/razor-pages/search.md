@@ -5,6 +5,8 @@ description: Razor ページのチュートリアル シリーズのパート 6�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: b0ee3294a4646b199f85d6a023e152e5eabaa225
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b28d228449549e1071df4100ee2d52626c50845b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408787"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021641"
 ---
-# <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>パート 6、ASP.NET Core Razor ページへの検索の追加
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>パート 6、ASP.NET Core Razor ページへの検索の追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -109,7 +111,7 @@ HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-help
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>ジャンル検索を Razor ページに追加する
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>ジャンル検索を Razor ページに追加する
 
 *Index.cshtml* を次のように変更します。
 
@@ -211,7 +213,7 @@ HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-help
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>ジャンル検索を Razor ページに追加する
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>ジャンル検索を Razor ページに追加する
 
 *Index.cshtml* を次のように変更します。
 

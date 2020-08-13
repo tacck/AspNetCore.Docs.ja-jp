@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 626003ad75333cfaf17a3ea97549ca82650469a8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b8942020e98d0f985e5445bb1816c540bcb7829b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407370"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021407"
 ---
-# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>ASP.NET Core の Razor Pages のフィルター メソッド
+# <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>ASP.NET Core の Razor Pages のフィルター メソッド
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -57,7 +59,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 フィルター インターフェイスの同期と非同期バージョンの**両方ではなく**、**いずれか**を実装します。 フレームワークは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 両方のインターフェイスを実装した場合、非同期メソッドのみが呼び出されます。 ページのオーバーライドでもこの規則は同じです。オーバーライドの同期バージョンまたは非同期バージョンを実装でき、両方はできません。
 
-## <a name="implement-razor-page-filters-globally"></a>Razor ページにフィルターをグローバルに実装する
+## <a name="implement-no-locrazor-page-filters-globally"></a>Razor ページにフィルターをグローバルに実装する
 
 `IAsyncPageFilter` は、次のコードによって実装されます。
 
@@ -81,7 +83,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/StartupSync.cs?name=snippet2)]
 
-## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する
+## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a>フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する
 
 次のコードでは、非同期 Razor ページ フィルターをオーバーライドしています。
 
@@ -149,7 +151,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 > [!NOTE]
 > フィルター インターフェイスの同期と非同期バージョンの両方ではなく、**いずれか**を実装します。 フレームワークは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 両方のインターフェイスを実装した場合、非同期メソッドのみが呼び出されます。 ページのオーバーライドでもこの規則は同じです。オーバーライドの同期バージョンまたは非同期バージョンを実装でき、両方はできません。
 
-## <a name="implement-razor-page-filters-globally"></a>Razor ページにフィルターをグローバルに実装する
+## <a name="implement-no-locrazor-page-filters-globally"></a>Razor ページにフィルターをグローバルに実装する
 
 `IAsyncPageFilter` は、次のコードによって実装されます。
 
@@ -177,7 +179,7 @@ Razor ページ フィルターには、グローバルまたはページ レベ
 
 [!code-csharp[Main](filter/sample/PageFilter/StartupSync.cs?name=snippet2&highlight=11)]
 
-## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する
+## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a>フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する
 
 次のコードでは、同期 Razor ページ フィルターをオーバーライドしています。
 
