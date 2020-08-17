@@ -5,6 +5,8 @@ description: ASP.NET Core アプリのローカライズに関する問題を診
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 48f75b4fbfdb2078f07efeffd8d4105366998876
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 801ae3a708d23308cbf909ceeace160e3c0db1bd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407084"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016467"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>ASP.NET Core のローカライズに関するトラブルシューティング
 
@@ -58,7 +60,7 @@ ASP.NET Core では、ローカライズ リソース ファイルの名前付�
 - 一部の言語の `resx` でリソースが不足しており、その他の言語に存在しています。
 - 引き続き問題が発生する場合は、不足しているリソースの詳細について、ローカライズのログ メッセージ (`Debug` ログ レベル) を確認してください。
 
-_**ヒント:** `CookieRequestCultureProvider` を使用している場合、ローカライズの Cookie 値内のカルチャで単一引用符が使用されないことを確認します。たとえば、`c='en-UK'|uic='en-US'` は無効な Cookie 値ですが、`c=en-UK|uic=en-US` は有効です。_
+_**ヒント:** `CookieRequestCultureProvider` を使用している場合、ローカライズの cookie 値内のカルチャで単一引用符が使用されないことを確認します。たとえば、`c='en-UK'|uic='en-US'` は無効な cookie 値ですが、`c=en-UK|uic=en-US` は有効です。_
 
 ## <a name="resources--class-libraries-issues"></a>リソースとクラス ライブラリに関する問題
 

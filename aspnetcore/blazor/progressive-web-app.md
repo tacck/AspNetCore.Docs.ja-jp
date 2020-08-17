@@ -1,32 +1,34 @@
 ---
-title: ASP.NET Core [Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
+title: ASP.NET Core Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
 author: guardrex
-description: 最新のブラウザー機能を使用してデスクトップ アプリのように動作する、[Blazor ベースのプログレッシブ Web アプリケーション (PWA) をビルドする方法について説明します。
+description: 最新のブラウザー機能を使用してデスクトップ アプリのように動作する、Blazor ベースのプログレッシブ Web アプリケーション (PWA) をビルドする方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402586"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014166"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core [Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly を使用してプログレッシブ Web アプリケーションをビルドする
 
 作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-プログレッシブ Web アプリケーション (PWA) は、通常、最新のブラウザーの API と機能を使用してデスクトップ アプリのように動作するシングル ページ アプリケーション (SPA) です。 [Blazor WebAssembly は、標準ベースのクライアント側 Web アプリ プラットフォームであるため、次の機能に必要な任意のブラウザー API (PWA API を含む) を使用できます。
+プログレッシブ Web アプリケーション (PWA) は、通常、最新のブラウザーの API と機能を使用してデスクトップ アプリのように動作するシングル ページ アプリケーション (SPA) です。 Blazor WebAssembly は、標準ベースのクライアント側 Web アプリ プラットフォームであるため、次の機能に必要な任意のブラウザー API (PWA API を含む) を使用できます。
 
 * ネットワーク速度に関係なく、オフラインで動作し、瞬時に読み込む。
 * ブラウザー ウィンドウだけでなく、独自のアプリ ウィンドウでも実行できる。
@@ -43,7 +45,7 @@ ms.locfileid: "85402586"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**[新しいプロジェクトの作成]** ダイアログで新しい **[Blazor WebAssembly アプリ**を作成するときに、 **[プログレッシブ Web アプリケーション]** チェック ボックスをオンにします。
+**[新しいプロジェクトの作成]** ダイアログで新しい **Blazor WebAssembly アプリ**を作成するときに、 **[プログレッシブ Web アプリケーション]** チェック ボックスをオンにします。
 
 ![Visual Studio の [新しいプロジェクトの作成] ダイアログで [プログレッシブ Web アプリケーション] チェック ボックスが選択されている。](progressive-web-app/_static/image1.png)
 
@@ -87,7 +89,7 @@ iOS では、Safari の **[共有]** ボタンとその **[ホーム画面に追
 > 開発サポートにより、変更してテストするという通常の開発サイクルが妨げられる可能性があります。 そのため、オフライン サポートは、"*公開された*" アプリに対してのみ有効です。 
 
 > [!WARNING]
-> オフライン対応 PWA を配布することを予定している場合は、[重要な警告と注意事項](#caveats-for-offline-pwas)がいくつかあります。 これらのシナリオはオフラインの PWA に固有のものであり、[Blazor に固有のものではありません。 オフライン対応アプリがどのように動作するかを想定する前に、これらの注意事項を読んで理解しておいてください。
+> オフライン対応 PWA を配布することを予定している場合は、[重要な警告と注意事項](#caveats-for-offline-pwas)がいくつかあります。 これらのシナリオはオフラインの PWA に固有のものであり、Blazor に固有のものではありません。 オフライン対応アプリがどのように動作するかを想定する前に、これらの注意事項を読んで理解しておいてください。
 
 オフライン サポートのしくみを確認するには、次の手順を行います。
 
@@ -108,9 +110,9 @@ iOS では、Safari の **[共有]** ボタンとその **[ホーム画面に追
 
    ![ブラウザー モードのドロップダウンが [オンライン] から [オフライン] に変更されている Google Chrome 開発者ツールの [ネットワーク] タブ。](progressive-web-app/_static/image6.png)
 
-サービス ワーカーを使用したオフライン サポートは、[Blazor 固有ではなく、Web 標準です。 サービス ワーカーの詳細については、[MDN Web ドキュメント:サービス ワーカー API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) を参照してください。 サービス ワーカーの一般的な使用パターンの詳細については、[Google Web:サービス ワーカーのライフサイクル](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)を参照してください。
+サービス ワーカーを使用したオフライン サポートは、Blazor 固有ではなく、Web 標準です。 サービス ワーカーの詳細については、[MDN Web ドキュメント:サービス ワーカー API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) を参照してください。 サービス ワーカーの一般的な使用パターンの詳細については、[Google Web:サービス ワーカーのライフサイクル](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)を参照してください。
 
-[Blazor の PWA テンプレートでは、次の 2 つのサービス ワーカー ファイルが生成されます。
+Blazor の PWA テンプレートでは、次の 2 つのサービス ワーカー ファイルが生成されます。
 
 * `wwwroot/service-worker.js`: 開発中に使用されます。
 * `wwwroot/service-worker.published.js`: アプリが発行された後に使用されます。
@@ -139,7 +141,7 @@ iOS では、Safari の **[共有]** ボタンとその **[ホーム画面に追
 
 メンタル モデルとして、オフラインファーストの PWA は、インストール可能なモバイル アプリのように動作すると考えることができます。 アプリはネットワーク接続に関係なく、すぐに起動しますが、インストールされているアプリ ロジックは、最新バージョンではない可能性がある特定の時点のスナップショットから取得されます。
 
-[Blazor PWA テンプレートを使用すると、ユーザーがアクセスしてネットワークに接続するたびに、バックグラウンドで自動的に自己更新を試行するアプリが生成されます。 このしくみは次のとおりです。
+Blazor PWA テンプレートを使用すると、ユーザーがアクセスしてネットワークに接続するたびに、バックグラウンドで自動的に自己更新を試行するアプリが生成されます。 このしくみは次のとおりです。
 
 * コンパイル中に、プロジェクトによって "*サービス ワーカー アセット マニフェスト*" が生成されます。 既定では、これは `service-worker-assets.js` と呼ばれます。 マニフェストには、アプリがオフラインで動作するために必要なすべての静的リソース (.NET アセンブリ、JavaScript ファイル、CSS など) が、そのコンテンツ ハッシュと共にリストされています。 リソース リストは、キャッシュするリソースを認識できるように、サービス ワーカーによって読み込まれます。
 * ユーザーがアプリにアクセスするたびに、ブラウザーによって `service-worker.js` と `service-worker-assets.js` がバックグラウンドで再要求されます。 ファイルは、インストールされている既存のサービス ワーカーとバイト単位で比較されます。 サーバーがこれらのファイルのいずれかに対して変更されたコンテンツを返す場合、サービス ワーカーはそれ自体の新しいバージョンをインストールしようとします。
@@ -147,24 +149,24 @@ iOS では、Safari の **[共有]** ボタンとその **[ホーム画面に追
 * すべてのリソースがエラーなしで読み込まれ、すべてのコンテンツ ハッシュが一致すると、プロセスは正常に完了します。 成功した場合、新しいサービス ワーカーは、"*アクティブ化を待機している*" 状態になります。 ユーザーがアプリを閉じると (アプリのタブやウィンドウが残っていない状態)、新しいサービス ワーカーが "*アクティブ*" になり、後続のアプリへのアクセスに使用されます。 古いサービス ワーカーとそのキャッシュは削除されます。
 * プロセスが正常に完了しなかった場合、新しいサービス ワーカー インスタンスは破棄されます。 ユーザーが次にアクセスすると (このとき、要求を完了できるほどクライアントのネットワーク接続が良好であることが望ましい)、更新プロセスがもう一度試行されます。
 
-サービス ワーカー ロジックを編集して、このプロセスをカスタマイズします。 上記の動作はいずれも [Blazor 固有のものではなく、PWA テンプレート オプションによって提供される既定のエクスペリエンスにすぎません。 詳細については、[MDN Web ドキュメント:サービス ワーカー API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) を参照してください。
+サービス ワーカー ロジックを編集して、このプロセスをカスタマイズします。 上記の動作はいずれも Blazor 固有のものではなく、PWA テンプレート オプションによって提供される既定のエクスペリエンスにすぎません。 詳細については、[MDN Web ドキュメント:サービス ワーカー API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) を参照してください。
 
 ### <a name="how-requests-are-resolved"></a>要求の解決方法
 
 「[キャッシュ優先のフェッチ戦略](#cache-first-fetch-strategy)」セクションで説明したように、既定のサービス ワーカーでは "*キャッシュ優先*" 戦略が使用されます。これは、キャッシュされたコンテンツがあればそれが提供されることを意味します。 特定の URL に対してキャッシュされたコンテンツがない場合 (バックエンド API からデータを要求する場合など)、サービス ワーカーは通常のネットワーク要求にフォールバックします。 サーバーに到達可能な場合は、ネットワーク要求は成功します。 このロジックは、`service-worker.published.js` 内の `onFetch` 関数内に実装されています。
 
-アプリの [Razor コンポーネントがバックエンド API からのデータの要求に依存しており、ネットワークが利用できないことが原因で失敗した要求に対してわかりやすいユーザー エクスペリエンスを提供する場合は、アプリのコンポーネント内にロジックを実装します。 たとえば、<xref:System.Net.Http.HttpClient> 要求について `try/catch` を使用します。
+アプリの Razor コンポーネントがバックエンド API からのデータの要求に依存しており、ネットワークが利用できないことが原因で失敗した要求に対してわかりやすいユーザー エクスペリエンスを提供する場合は、アプリのコンポーネント内にロジックを実装します。 たとえば、<xref:System.Net.Http.HttpClient> 要求について `try/catch` を使用します。
 
 ### <a name="support-server-rendered-pages"></a>サーバーでレンダリングされるページのサポート
 
-ユーザーが最初に `/counter` などの URL、またはアプリ内の他のディープ リンクに移動すると、どうなるかを考えます。 このような場合は、`/counter` としてキャッシュされたコンテンツを返すのではなく、ブラウザーでキャッシュされたコンテンツを `/index.html` として読み込み、[Blazor WebAssembly アプリを起動する必要があります。 これらの初期要求は、次の対語として、"*ナビゲーション*" 要求と呼ばれます。
+ユーザーが最初に `/counter` などの URL、またはアプリ内の他のディープ リンクに移動すると、どうなるかを考えます。 このような場合は、`/counter` としてキャッシュされたコンテンツを返すのではなく、ブラウザーでキャッシュされたコンテンツを `/index.html` として読み込み、Blazor WebAssembly アプリを起動する必要があります。 これらの初期要求は、次の対語として、"*ナビゲーション*" 要求と呼ばれます。
 
 * `subresource` からは、画像、スタイルシート、またはその他のファイルが要求されます。
 * `fetch/XHR` からは API データが要求されます。
 
 既定のサービス ワーカーには、ナビゲーション要求用の特殊なケースのロジックが含まれています。 サービス ワーカーは、要求された URL に関係なく、`/index.html` のキャッシュされたコンテンツを返すことで要求を解決します。 このロジックは、`service-worker.published.js` 内の `onFetch` 関数に実装されています。
 
-サーバーでレンダリングされた HTML を返す (キャッシュからの `/index.html` を提供するのではなく) 必要がある特定の URL がアプリにある場合は、サービス ワーカーのロジックを編集する必要があります。 `/[Identity/` を含むすべての URL を、サーバーに対する通常のオンライン専用の要求として処理する必要がある場合は、`service-worker.published.js` `onFetch` ロジックを変更します。 次のコードを見つけます。
+サーバーでレンダリングされた HTML を返す (キャッシュからの `/index.html` を提供するのではなく) 必要がある特定の URL がアプリにある場合は、サービス ワーカーのロジックを編集する必要があります。 `/Identity/` を含むすべての URL を、サーバーに対する通常のオンライン専用の要求として処理する必要がある場合は、`service-worker.published.js` `onFetch` ロジックを変更します。 次のコードを見つけます。
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -174,14 +176,14 @@ const shouldServeIndexHtml = event.request.mode === 'navigate';
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate'
-    && !event.request.url.includes('/[Identity/');
+    && !event.request.url.includes('/Identity/');
 ```
 
 この変更を行わないと、ネットワーク接続に関係なく、サービス ワーカーによってこのような URL に対する要求がインターセプトされ、`/index.html` を使用してそれらが解決されます。
 
 ### <a name="control-asset-caching"></a>アセット キャッシュの制御
 
-プロジェクトで `ServiceWorkerAssetsManifest` MSBuild プロパティが定義されている場合、[Blazor のビルド ツールによって、指定された名前でサービス ワーカー アセット マニフェストが生成されます。 既定の PWA テンプレートでは、次のプロパティを含むプロジェクト ファイルが生成されます。
+プロジェクトで `ServiceWorkerAssetsManifest` MSBuild プロパティが定義されている場合、Blazor のビルド ツールによって、指定された名前でサービス ワーカー アセット マニフェストが生成されます。 既定の PWA テンプレートでは、次のプロパティを含むプロジェクト ファイルが生成されます。
 
 ```xml
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
@@ -191,10 +193,10 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 既定では、このマニフェストには次の項目がリストされています。
 
-* .NET アセンブリや .NET WebAssembly アセンブリ ランタイム ファイルなど、オフラインで機能するために必要な、[Blazor 管理対象リソース。
+* .NET アセンブリや .NET WebAssembly アセンブリ ランタイム ファイルなど、オフラインで機能するために必要な、Blazor 管理対象リソース。
 * アプリの `wwwroot` ディレクトリに公開するためのすべてのリソース (画像、スタイルシート、JavaScript ファイルなど)。外部プロジェクトや NuGet パッケージによって提供される静的な Web アセットが含まれます。
 
-サービス ワーカーによってフェッチおよびキャッシュされるリソースを制御するには、`service-worker.published.js` 内の `onInstall` でロジックを編集します。 既定では、`.html`、`.css`、`.js`、`.wasm` などの一般的な Web ファイル名の拡張子に一致するファイルのほか、[Blazor WebAssembly に固有のファイルの種類 (`.dll`、`.pdb`) がサービス ワーカーによってフェッチおよびキャッシュされます。
+サービス ワーカーによってフェッチおよびキャッシュされるリソースを制御するには、`service-worker.published.js` 内の `onInstall` でロジックを編集します。 既定では、`.html`、`.css`、`.js`、`.wasm` などの一般的な Web ファイル名の拡張子に一致するファイルのほか、Blazor WebAssembly に固有のファイルの種類 (`.dll`、`.pdb`) がサービス ワーカーによってフェッチおよびキャッシュされます。
 
 アプリの `wwwroot` ディレクトリに存在しない追加のリソースを含めるには、次の例に示すように、追加の MSBuild `ItemGroup` エントリを定義します。
 
@@ -212,11 +214,11 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 ## <a name="push-notifications"></a>プッシュ通知
 
-他の PWA と同様に、[Blazor WebAssembly PWA では、バックエンド サーバーからプッシュ通知を受信できます。 サーバーは、ユーザーがアプリを積極的に使用していない場合でも、いつでもプッシュ通知を送信できます。 たとえば、別のユーザーが関連するアクションを実行したときに、プッシュ通知を送信できます。
+他の PWA と同様に、Blazor WebAssembly PWA では、バックエンド サーバーからプッシュ通知を受信できます。 サーバーは、ユーザーがアプリを積極的に使用していない場合でも、いつでもプッシュ通知を送信できます。 たとえば、別のユーザーが関連するアクションを実行したときに、プッシュ通知を送信できます。
 
-プッシュ通知を送信するメカニズムは、任意のテクノロジを使用できるバックエンド サーバーによって実装されているため、[Blazor WebAssembly から完全に独立しています。 ASP.NET Core サーバーからプッシュ通知を送信する場合は、[Blazing Pizza ワークショップで行ったのと同様の手法を使用する](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)ことを検討してください。
+プッシュ通知を送信するメカニズムは、任意のテクノロジを使用できるバックエンド サーバーによって実装されているため、Blazor WebAssembly から完全に独立しています。 ASP.NET Core サーバーからプッシュ通知を送信する場合は、[Blazing Pizza ワークショップで行ったのと同様の手法を使用する](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)ことを検討してください。
 
-クライアントでプッシュ通知を受信して表示するメカニズムは、サービス ワーカー JavaScript ファイルに実装されているため、[Blazor WebAssembly にも依存しません。 例として、[Blazing Pizza ワークショップで使用されている方法](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications)を参照してください。
+クライアントでプッシュ通知を受信して表示するメカニズムは、サービス ワーカー JavaScript ファイルに実装されているため、Blazor WebAssembly にも依存しません。 例として、[Blazing Pizza ワークショップで使用されている方法](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications)を参照してください。
 
 ## <a name="caveats-for-offline-pwas"></a>オフラインの PWA に関する注意事項
 
@@ -232,7 +234,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 ### <a name="offline-support-only-when-published"></a>オフライン サポートは公開された場合のみ
 
-開発時には、バックグラウンド更新プロセスを実行せずに、各変更がブラウザーにすぐに反映されることを確認したいことがよくあります。 そのため、[Blazor の PWA テンプレートでは、公開された場合にのみオフライン サポートが有効になります。
+開発時には、バックグラウンド更新プロセスを実行せずに、各変更がブラウザーにすぐに反映されることを確認したいことがよくあります。 そのため、Blazor の PWA テンプレートでは、公開された場合にのみオフライン サポートが有効になります。
 
 オフライン対応アプリをビルドする場合、開発環境でアプリをテストするだけでは不十分です。 アプリがさまざまなネットワークの状態にどのように応答するかを理解するには、アプリが公開された状態でテストする必要があります。
 
@@ -240,7 +242,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 
 ユーザーがすべてのタブでアプリから移動するまで、更新は完了しません。 「[バックグラウンド更新](#background-updates)」セクションで説明したように、アプリに更新プログラムを配置すると、更新されたサービス ワーカー ファイルがブラウザーによってフェッチされ、更新プロセスが開始されます。
 
-多くの開発者は、この更新が完了しても、ユーザーがすべてのタブでアプリケーションから移動しない限り、この更新が有効に**ならない**ことを意外に思うでしょう。 アプリを表示するタブを更新するだけでは、たとえそれがアプリを表示する唯一のタブであっても、十分では**ありません**。 アプリが完全に閉じられるまで、新しいサービス ワーカーは "*アクティブ化の待機中*" 状態のままになります。 **これは [Blazor に固有のものではなく、標準的な Web プラットフォームの動作です。**
+多くの開発者は、この更新が完了しても、ユーザーがすべてのタブでアプリケーションから移動しない限り、この更新が有効に**ならない**ことを意外に思うでしょう。 アプリを表示するタブを更新するだけでは、たとえそれがアプリを表示する唯一のタブであっても、十分では**ありません**。 アプリが完全に閉じられるまで、新しいサービス ワーカーは "*アクティブ化の待機中*" 状態のままになります。 **これは Blazor に固有のものではなく、標準的な Web プラットフォームの動作です。**
 
 これは、サービス ワーカーまたはオフラインでキャッシュされたリソースに対する更新をテストしようとしている開発者にとって、共通の問題となります。 ブラウザーの開発者ツールをチェックインすると、次のような内容が表示されることがあります。
 
@@ -297,4 +299,4 @@ PWA テンプレートは、認証と組み合わせて使用できます。 オ
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [認証のための [SignalR のクロスオリジンネゴシエーション](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [認証のための SignalR のクロスオリジンネゴシエーション](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

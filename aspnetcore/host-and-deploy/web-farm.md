@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 13c4a8e287e4b62a1429f67fbe83ff5b0dc65f52
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 58409b5c47d71c96ece6f4ecfab6f18df47f798b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408280"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015440"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web ファームでの ASP.NET Core のホスト
 
@@ -70,8 +72,8 @@ Web ファーム環境におけるキャッシュのメカニズムでは、Web 
 | -------- | ------------------- |
 | 認証 | データ保護 (<xref:security/data-protection/configuration/overview> を参照)。<br><br>詳細については、次のトピックを参照してください。 <xref:security/authentication/cookie> および <xref:security/cookie-sharing> |
 | Identity | 認証とデータベースの構成。<br><br>詳細については、「<xref:security/authentication/identity>」を参照してください。 |
-| セッション | データ保護 (暗号化された Cookie) (<xref:security/data-protection/configuration/overview> を参照) とキャッシュ (<xref:performance/caching/distributed> を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照してください。 |
-| TempData | データ保護 (暗号化された Cookie) (<xref:security/data-protection/configuration/overview> を参照) またはセッション ([セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「TempData」](xref:fundamentals/app-state#tempdata)を参照してください。 |
+| セッション | データ保護 (暗号化された cookie) (<xref:security/data-protection/configuration/overview> を参照) とキャッシュ (<xref:performance/caching/distributed> を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照してください。 |
+| TempData | データ保護 (暗号化された cookie) (<xref:security/data-protection/configuration/overview> を参照) またはセッション ([セッションと状態の管理に関するページの「セッション状態」](xref:fundamentals/app-state#session-state)を参照)。<br><br>詳細については、[セッションと状態の管理に関するページの「TempData」](xref:fundamentals/app-state#tempdata)を参照してください。 |
 | 偽造防止 | データ保護 (<xref:security/data-protection/configuration/overview> を参照)。<br><br>詳細については、「<xref:security/anti-request-forgery>」を参照してください。 |
 
 ## <a name="troubleshoot"></a>トラブルシューティング
@@ -80,11 +82,11 @@ Web ファーム環境におけるキャッシュのメカニズムでは、Web 
 
 データ保護またはキャッシュが Web ファーム環境用に構成されていない場合、要求の処理中に断続的にエラーが発生します。 このエラーは、ノード間で同じリソースが共有されておらず、ユーザー要求が同じノードにルーティングされない場合があるために発生します。
 
-ユーザーが Cookie 認証を使用してアプリにサインインする場合を考えてみます。 このユーザーは、1 つの Web ファームのノード上にあるアプリにサインインします。 ユーザーの次の要求が、ユーザーがサインインしたノードと同じノードに届いた場合、アプリは認証 Cookie の暗号化を解除して、アプリのリソースへのアクセスを許可することができます。 ユーザーの次の要求が異なるノードに届いた場合、アプリはユーザーがサインインしたノードの認証 Cookie の暗号化を解除できず、要求されたリソースに対する認証は失敗します。
+ユーザーが cookie 認証を使用してアプリにサインインする場合を考えてみます。 このユーザーは、1 つの Web ファームのノード上にあるアプリにサインインします。 ユーザーの次の要求が、ユーザーがサインインしたノードと同じノードに届いた場合、アプリは認証 cookie の暗号化を解除して、アプリのリソースへのアクセスを許可することができます。 ユーザーの次の要求が異なるノードに届いた場合、アプリはユーザーがサインインしたノードの認証 cookie の暗号化を解除できず、要求されたリソースに対する認証は失敗します。
 
 次の現象のいずれかが**断続的に**発生するときは、多くの場合、データ保護またはキャッシュが Web ファーム環境に向けて適切に構成されていないことが問題の原因です。
 
-* 認証の中断:認証 Cookie が正しく構成されていない、または暗号化解除できない。 OAuth (Facebook、Microsoft、Twitter) ログインまたは OpenIdConnect ログインが「関連付けできませんでした」というエラーで失敗する。
+* 認証の中断:認証 cookie が正しく構成されていない、または暗号化解除できない。 OAuth (Facebook、Microsoft、Twitter) ログインまたは OpenIdConnect ログインが「関連付けできませんでした」というエラーで失敗する。
 * 承認の中断: Identity が失われる。
 * セッション状態でデータが失われる。
 * キャッシュされた項目が消える。

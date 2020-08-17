@@ -7,20 +7,22 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 124f2a629ebd14210cb21351a720e007bba48f02
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c526fc779d778cd0f99bcdaae283b6a5a0fe09ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404016"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015609"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core での IIS モジュール
 
@@ -62,7 +64,7 @@ ms.locfileid: "85404016"
 | **静的コンテンツ**<br>`StaticFileModule`                                                         | いいえ  | [静的ファイル ミドルウェア](xref:fundamentals/static-files) |
 | **トークン キャッシュ**<br>`TokenCacheModule`                                                          | はい | |
 | **URI キャッシュ**<br>`UriCacheModule`                                                              | はい | |
-| **URL 認証**<br>`UrlAuthorizationModule`                                                | はい | [ASP.NET Core [Identity](xref:security/authentication/identity) |
+| **URL 認証**<br>`UrlAuthorizationModule`                                                | はい | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | **Windows 認証**<br>`WindowsAuthenticationModule`                                      | はい | |
 
 &#8224; URL リライト モジュールの `isFile` および `isDirectory` 一致タイプは、[ディレクトリ構造](xref:host-and-deploy/directory-structure)の変更のため、ASP.NET Core アプリでは動作しません。
@@ -84,7 +86,7 @@ ms.locfileid: "85404016"
 | セッション                 | [セッション ミドルウェア](xref:fundamentals/app-state) |
 | UrlAuthorization        | |
 | UrlMappingsModule       | [URL リライト ミドルウェア](xref:fundamentals/url-rewriting) |
-| UrlRoutingModule-4.0    | [ASP.NET Core [Identity](xref:security/authentication/identity) |
+| UrlRoutingModule-4.0    | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | WindowsAuthentication   | |
 
 ## <a name="iis-manager-application-changes"></a>IIS マネージャー アプリケーションの変更

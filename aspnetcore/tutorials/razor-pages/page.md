@@ -5,6 +5,8 @@ description: Razor ページのチュートリアル シリーズのパート 3�
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 898f3be045755a0ee14c738b6ffc104408ded7b6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407773"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020393"
 ---
-# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
+# <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -153,7 +155,7 @@ changing in in the next step.
 
 モデル エラーがない場合、データは保存され、ブラウザーはインデックス ページにリダイレクトされます。
 
-### <a name="the-create-razor-page"></a>Razor の作成ページ
+### <a name="the-create-no-locrazor-page"></a>Razor の作成ページ
 
 次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 
@@ -339,7 +341,7 @@ changing in in the next step.
 
 モデル エラーがない場合、データは保存され、ブラウザーはインデックス ページにリダイレクトされます。
 
-### <a name="the-create-razor-page"></a>Razor の作成ページ
+### <a name="the-create-no-locrazor-page"></a>Razor の作成ページ
 
 次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 

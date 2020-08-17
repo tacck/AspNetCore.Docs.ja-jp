@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: ef6ed0911c2615ea543b1c2cea31a9a453f0c604
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444112"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017234"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core で IHttpClientFactory を使用して HTTP 要求を行う
 
@@ -359,14 +361,14 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 - `SocketsHttpHandler` を使用すると、`HttpClient` インスタンス間で接続を共有できます。 この共有によってソケットの枯渇が防止されます。
 - `SocketsHttpHandler` では、古くなった DNS の問題を回避するために `PooledConnectionLifetime` に従って接続を循環されます。
 
-### <a name="cookies"></a>クッキー
+### <a name="no-loccookies"></a>Cookies
 
-`HttpMessageHandler` インスタンスをプールすると、`CookieContainer` オブジェクトが共有されます。 予期せぬ `CookieContainer` オブジェクト共有があると、多くの場合、コードは不適切なものとなります。 Cookie を必要とするアプリの場合は、次のいずれかを検討してください。
+`HttpMessageHandler` インスタンスをプールすると、`CookieContainer` オブジェクトが共有されます。 予期せぬ `CookieContainer` オブジェクト共有があると、多くの場合、コードは不適切なものとなります。 cookie を必要とするアプリの場合は、次のいずれかを検討してください。
 
- - 自動的な Cookie 処理の無効化
+ - 自動的な cookie 処理の無効化
  - `IHttpClientFactory` の回避
 
-<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> を呼び出して、自動的な Cookie 処理を無効にします。
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> を呼び出して、自動的な cookie 処理を無効にします。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -677,14 +679,14 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 - `SocketsHttpHandler` を使用すると、`HttpClient` インスタンス間で接続を共有できます。 この共有によってソケットの枯渇が防止されます。
 - `SocketsHttpHandler` では、古くなった DNS の問題を回避するために `PooledConnectionLifetime` に従って接続を循環されます。
 
-### <a name="cookies"></a>クッキー
+### <a name="no-loccookies"></a>Cookies
 
-`HttpMessageHandler` インスタンスをプールすると、`CookieContainer` オブジェクトが共有されます。 予期せぬ `CookieContainer` オブジェクト共有があると、多くの場合、コードは不適切なものとなります。 Cookie を必要とするアプリの場合は、次のいずれかを検討してください。
+`HttpMessageHandler` インスタンスをプールすると、`CookieContainer` オブジェクトが共有されます。 予期せぬ `CookieContainer` オブジェクト共有があると、多くの場合、コードは不適切なものとなります。 cookie を必要とするアプリの場合は、次のいずれかを検討してください。
 
- - 自動的な Cookie 処理の無効化
+ - 自動的な cookie 処理の無効化
  - `IHttpClientFactory` の回避
 
-<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> を呼び出して、自動的な Cookie 処理を無効にします。
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> を呼び出して、自動的な cookie 処理を無効にします。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -985,14 +987,14 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 - `SocketsHttpHandler` を使用すると、`HttpClient` インスタンス間で接続を共有できます。 この共有によってソケットの枯渇が防止されます。
 - `SocketsHttpHandler` では、古くなった DNS の問題を回避するために `PooledConnectionLifetime` に従って接続を循環されます。
 
-### <a name="cookies"></a>クッキー
+### <a name="no-loccookies"></a>Cookies
 
-`HttpMessageHandler` インスタンスをプールすると、`CookieContainer` オブジェクトが共有されます。 予期せぬ `CookieContainer` オブジェクト共有があると、多くの場合、コードは不適切なものとなります。 Cookie を必要とするアプリの場合は、次のいずれかを検討してください。
+`HttpMessageHandler` インスタンスをプールすると、`CookieContainer` オブジェクトが共有されます。 予期せぬ `CookieContainer` オブジェクト共有があると、多くの場合、コードは不適切なものとなります。 cookie を必要とするアプリの場合は、次のいずれかを検討してください。
 
- - 自動的な Cookie 処理の無効化
+ - 自動的な cookie 処理の無効化
  - `IHttpClientFactory` の回避
 
-<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> を呼び出して、自動的な Cookie 処理を無効にします。
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> を呼び出して、自動的な cookie 処理を無効にします。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 

@@ -5,8 +5,10 @@ description: Blazor WebAssembly と Blazor Server のホスティング モデ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 08/11/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 6e3753131388c294130f11aa913a0bb7e8127fa3
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 14fa13bafa984c0ca7b9fd8cde538042cc0ec2cc
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818951"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130445"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
@@ -30,13 +32,13 @@ Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタ
 
 ## Blazor WebAssembly
 
-Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。
+Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。 このアプリはバックエンド ASP.NET Core アプリのない展開用として開発されているため、"*スタンドアロン Blazor WebAssembly アプリ*" と呼ばれています。
 
 ![Blazor WebAssembly:Blazor アプリは、ブラウザー内の UI スレッドで実行されます。](hosting-models/_static/blazor-webassembly.png)
 
 クライアント側のホスティング モデルを使用して Blazor アプリを作成するには、 **Blazor WebAssembly アプリ** テンプレート ([`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new)) を使用します。
 
-**Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
+**Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 ASP.NET Core バックエンドのあるアプリは "*ホステッド Blazor WebAssembly アプリ*"と呼ばれています。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
 
 テンプレートには、次の処理を行う `blazor.webassembly.js` スクリプトが含まれます。
 

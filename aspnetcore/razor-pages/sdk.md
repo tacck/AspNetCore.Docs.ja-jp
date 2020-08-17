@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: 56b4d4c13023918a4ac25c8c5d8ad1ee2c346ac6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b960460a50558a11bc47f9a1844931aa32e3d696
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403041"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021420"
 ---
-# <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
+# <a name="aspnet-core-no-locrazor-sdk"></a>ASP.NET Core Razor SDK
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -52,7 +54,7 @@ Razor SDK には、`Include` 属性が `**\*.cshtml` glob パターンに設定�
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 
-## <a name="use-the-razor-sdk"></a>Razor SDK を使用する
+## <a name="use-the-no-locrazor-sdk"></a>Razor SDK を使用する
 
 ほとんどの Web アプリでは、明示的に Razor SDK を参照する必要がありません。
 
@@ -177,13 +179,13 @@ Razor SDK では、次の 2 つの主要なターゲットが定義されてい�
 * `RazorCompile`:生成された *.cs* ファイルを、Razor アセンブリにコンパイルします。 このターゲットの前または後に実行できる追加のターゲットを指定するには、`RazorCompileDependsOn` を使用します。
 * `RazorComponentGenerate`:コードにより、`RazorComponent` 項目要素のための *.cs* ファイルが生成されます。 このターゲットの前または後に実行できる追加のターゲットを指定するには、`RazorComponentGenerateDependsOn` プロパティを使用します。
 
-### <a name="runtime-compilation-of-razor-views"></a>Razor ビューの実行時のコンパイル
+### <a name="runtime-compilation-of-no-locrazor-views"></a>Razor ビューの実行時のコンパイル
 
 * 既定では、Razor SDK からは、実行時のコンパイルを実行するために必要な参照アセンブリは公開されません。 この結果、アプリケーション モデルが実行時のコンパイルに依存している場合には、コンパイルが失敗します。たとえば、アプリが公開後に埋め込まれたビューを使用したり、ビューを変更したりする場合などです。 `CopyRefAssembliesToPublishDirectory` を `true` に設定して、参照アセンブリの公開を続行します。
 
 * Web アプリの場合は、アプリが `Microsoft.NET.Sdk.Web` SDK をターゲットにしていることを確認します。
 
-## <a name="razor-language-version"></a>Razor 言語バージョン
+## <a name="no-locrazor-language-version"></a>Razor 言語バージョン
 
 `Microsoft.NET.Sdk.Web` SDK をターゲットとする場合、Razor 言語バージョンは、アプリのターゲット フレームワークのバージョンから推論されます。 `Microsoft.NET.Sdk.Razor` SDK をターゲットとするプロジェクトの場合や、推論される値とは異なる Razor 言語バージョンを必要とするまれなアプリの場合は、アプリのプロジェクト ファイルで `<RazorLangVersion>` プロパティを設定することで、バージョンを構成できます。
 

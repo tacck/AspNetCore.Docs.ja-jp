@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 81ab2bb139dfcbea712d4eb51acfc9d7f6767d46
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 15531c39a66a9f6dfd0f5c20cf960e4db5a78074
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818834"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013802"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ
 
@@ -444,7 +446,7 @@ Fetch API オプションの詳細については、[MDN の Web ドキュメン
 
 ## <a name="cross-origin-resource-sharing-cors"></a>クロスオリジン リソース共有 (CORS)
 
-CORS 要求で資格情報 (承認 cookie/ヘッダー) を送信するときには、CORS ポリシーで `Authorization` ヘッダーが許可されている必要があります。
+CORS 要求で資格情報 (承認 cookie またはヘッダー) を送信するときには、CORS ポリシーで `Authorization` ヘッダーが許可されている必要があります。
 
 次のポリシーには、以下についての構成が含まれています。
 
@@ -467,13 +469,13 @@ Blazor のホストされたプロジェクト テンプレートに基づくホ
 
 ## <a name="handle-token-request-errors"></a>トークン要求エラーを処理する
 
-シングル ページ アプリケーション (SPA) で OpenID Connect (OIDC) を使用してユーザーが認証されると、ユーザーが資格情報を入力したときに設定されるセッション Cookie の形式で、SPA 内および IdentityID プロバイダー (IP) 内で、認証状態がローカルに維持されます。
+シングル ページ アプリケーション (SPA) で OpenID Connect (OIDC) を使用してユーザーが認証されると、ユーザーが資格情報を入力したときに設定されるセッション cookie の形式で、SPA 内および Identity プロバイダー (IP) 内で、認証状態がローカルに維持されます。
 
 通常、IP によってユーザーに出力されるトークンが有効なのは短時間のため (通常は約 1 時間)、クライアント アプリでは定期的に新しいトークンをフェッチする必要があります。 それ以外の場合は、許可されたトークンの有効期限が切れると、ユーザーがログアウトします。 ほとんどの場合、OIDC クライアントでは、ユーザーに対して認証の再要求を行うことなく、新しいトークンをプロビジョニングできます。これは、認証状態または IP 内に保持される "セッション" によるものです。
 
 場合によっては、ユーザーの介入なしに、クライアントでトークンを取得できないことがあります。たとえば、何らかの理由でユーザーが明示的に IP からログアウトした場合などです。 このシナリオは、ユーザーが `https://login.microsoftonline.com` にアクセスしてログアウトした場合に発生します。これらのシナリオでは、ユーザーがログアウトしたことを、アプリはすぐに認識しません。クライアントで保持されるトークンは、有効でなくなった可能性があります。 また、クライアントでは、現在のトークンの有効期限が切れた後に、ユーザーの介入なしに新しいトークンをプロビジョニングすることはできません。
 
-これらのシナリオは、トークンベースの認証に固有のものではありません。 これらは、SPA の性質の一部です。 また、認証 Cookie が削除されると、Cookie を使用する SPA でサーバー API を呼び出すこともできません。
+これらのシナリオは、トークンベースの認証に固有のものではありません。 これらは、SPA の性質の一部です。 また、認証 cookie が削除されると、cookie を使用する SPA でサーバー API を呼び出すこともできません。
 
 保護されたリソースに対する API 呼び出しをアプリで実行するときは、次の点に注意する必要があります。
 

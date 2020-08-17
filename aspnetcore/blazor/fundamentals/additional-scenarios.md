@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819003"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014465"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
@@ -32,7 +34,7 @@ ms.locfileid: "87819003"
 
 *このセクションは Blazor WebAssembly に適用されます。*
 
-Cookie や HTTP 認証ヘッダーなどの資格情報を送信するように SignalR の基となるクライアントを構成するには:
+cookie や HTTP 認証ヘッダーなどの資格情報を送信するように SignalR の基となるクライアントを構成するには:
 
 * <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> を使用して、クロスオリジン [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) 要求に <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> を設定します。
 
@@ -231,11 +233,9 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 プレースホルダー `{ELEMENT ID}` は、表示する HTML 要素の ID です。
 
-::: moniker range=">= aspnetcore-5.0"
-
 ## <a name="influence-html-head-tag-elements"></a>HTML `<head>` タグ要素に影響を与える
 
-*このセクションは Blazor WebAssembly および Blazor Server に適用されます。*
+*このセクションは、今後予定されている、Blazor WebAssembly と Blazor Server の ASP.NET Core 5.0 リリースに適用されます。*
 
 レンダリングされるときに、`Title`、`Link`、および `Meta` コンポーネントによって HTML `<head>` タグ要素のデータが追加または更新されます。
 
@@ -263,8 +263,6 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 * アプリケーションの状態によって変更できます。 ハードコーディングされた HTML タグは、アプリケーションの状態によって変更することはできません。
 * 親コンポーネントがレンダリングされなくなると、HTML `<head>` から削除されます。
-
-::: moniker-end
 
 ## <a name="additional-resources"></a>その他のリソース
 

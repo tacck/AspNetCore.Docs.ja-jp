@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 30123e043a7c152b5719af8092b2ab42a70d2787
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: c05129c0f239fb28c83ab1c561dd910305eeb54b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407620"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017637"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 
@@ -37,23 +39,23 @@ HTTP はステートレス プロトコルです。 既定で、HTTP 要求は�
 
 | 格納の方法 | 格納のメカニズム |
 | ---------------- | ----------------- |
-| [Cookie](#cookies) | HTTP Cookie。 サーバー側アプリ コードを使って格納されたデータを含めることができます。 |
-| [セッション状態](#session-state) | HTTP Cookie とサーバー側アプリ コード |
-| [TempData](#tempdata) | HTTP Cookie またはセッション状態 |
+| [Cookie ](#cookies) | HTTP cookie。 サーバー側アプリ コードを使って格納されたデータを含めることができます。 |
+| [セッション状態](#session-state) | HTTP cookie とサーバー側アプリ コード |
+| [TempData](#tempdata) | HTTP cookie またはセッション状態 |
 | [クエリ文字列](#query-strings) | HTTP クエリ文字列 |
 | [非表示フィールド](#hidden-fields) | HTTP フォーム フィールド |
 | [HttpContext.Items](#httpcontextitems) | サーバー側アプリ コード |
 | [キャッシュ](#cache) | サーバー側アプリ コード |
 
-## <a name="cookies"></a>クッキー
+## <a name="no-loccookies"></a>Cookies
 
-Cookie は、要求と要求の間でデータを格納します。 Cookie は要求ごとに送信されるために、そのサイズは最小に抑える必要があります。 理想的には、識別子だけを Cookie に格納し、データはアプリで格納します。 ほとんどのブラウザーで Cookie のサイズは 4096 バイトに制限されています。 ドメインごとに使用できる Cookie の数も制限されています。
+Cookie には、要求と要求の間でデータが格納されます。 cookie は要求ごとに送信されるために、そのサイズは最小に抑える必要があります。 理想的には、識別子だけを cookie に格納し、データはアプリで格納します。 ほとんどのブラウザーで cookie のサイズは 4096 バイトに制限されています。 ドメインごとに使用できる cookie の数も制限されています。
 
-Cookie は改ざんされる可能性があるため、アプリで検証する必要があります。 Cookie は、ユーザーが削除でき、クライアント上で期限切れになります。 ただし、Cookie は一般に、クライアントでデータを永続化するときに最も持続性のある形式です。
+cookie は改ざんされる可能性があるため、アプリで検証する必要があります。 Cookie は、ユーザーが削除でき、クライアント上で期限切れになります。 ただし、cookie は一般に、クライアントでデータを永続化するときに最も持続性のある形式です。
 
-Cookie は、多くの場合、パーソナル化に利用されます。既知のユーザーのためにコンテンツをカスタマイズします。 ユーザーは識別されるだけであり、ほとんどの場合は認証されません。 Cookie には、ユーザーの名前、アカウント名、または GUID などの一意のユーザー ID を格納できます。 Cookie は、好みの Web サイトの背景色など、ユーザーの個人用設定にアクセスするために使用できます。
+Cookie は、多くの場合、パーソナル化に利用されます。既知のユーザーのためにコンテンツをカスタマイズします。 ユーザーは識別されるだけであり、ほとんどの場合は認証されません。 cookie には、ユーザーの名前、アカウント名、または GUID などの一意のユーザー ID を格納できます。 cookie は、好みの Web サイトの背景色など、ユーザーの個人用設定にアクセスするために使用できます。
 
-Cookie を発行し、プライバシーの問題を扱うときは、[欧州連合の一般データ保護規則 (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) を参照してください。 詳細については、「[General Data Protection Regulation (GDPR) support in ASP.NET Core](xref:security/gdpr)」(ASP.NET Core での一般データ保護規則 (GDPR) のサポート) をご覧ください。
+cookie を発行し、プライバシーの問題を扱うときは、[欧州連合の一般データ保護規則 (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) を参照してください。 詳細については、「[General Data Protection Regulation (GDPR) support in ASP.NET Core](xref:security/gdpr)」(ASP.NET Core での一般データ保護規則 (GDPR) のサポート) をご覧ください。
 
 ## <a name="session-state"></a>セッション状態
 
@@ -61,31 +63,31 @@ Cookie を発行し、プライバシーの問題を扱うときは、[欧州連
 
 [SignalR ハブ](xref:signalr/hubs)は HTTP コンテキストとは独立して実行する可能性があるため、[SignalR](xref:signalr/index) アプリではセッションはサポートされていません。 このようなことは、たとえば、長いポーリング要求が HTTP コンテキストの有効期間を超えてハブによって開かれている場合に発生する可能性があります。
 
-ASP.NET Core は、セッション ID を含む Cookie をクライアントに提供することで、セッションの状態を維持します。 Cookie セッション ID は:
+ASP.NET Core により、セッション ID を含む cookie がクライアントに提供されて、セッションの状態が維持されます。 cookie セッション ID:
 
 * 各要求でアプリに送信されます。
 * アプリによってセッション データをフェッチするために使用されます。
 
 セッション状態は次の動作を示します。
 
-* セッション Cookie は、ブラウザーに固有です。 セッションはブラウザー間で共有されません。
-* セッション Cookie は、ブラウザー セッションが終了するときに削除されます。
-* Cookie を受け取り、セッションが期限切れになった場合、同じセッション Cookie を使用する新しいセッションが作成されます。
+* セッション cookie は、ブラウザーに固有です。 セッションはブラウザー間で共有されません。
+* セッション cookie は、ブラウザー セッションが終了するときに削除されます。
+* cookie を受け取り、セッションが期限切れになった場合、同じセッション cookie を使用する新しいセッションが作成されます。
 * 空のセッションは保持されません。 要求間でセッションを維持するには、少なくとも 1 つの値をセッションが持っている必要があります。 セッションが保持されないと、新しい要求ごとに新しいセッション ID が生成されます。
 * アプリは、最後の要求から限られた時間だけセッションを維持します。 アプリでは、セッション タイムアウトを設定するか、既定値の 20 分を使用します。 セッション状態は、次のユーザー データの格納に最適です。
   * 特定のセッションに固有である。
   * データがセッション間で永続的に保存される必要がない。
 * セッション データは、<xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> の実装が呼び出されるか、セッションが期限切れになると、削除されます。
-* クライアント ブラウザーが閉じられたこと、またはクライアントでセッション Cookie が削除されるか期限切れになったことを、アプリ コードに通知する既定のメカニズムはありません。
-* セッション状態の Cookie は既定では必須になっていません。 サイトの訪問者が追跡を許可しない限り、セッション状態は機能しません。 詳細については、「<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>」を参照してください。
+* クライアント ブラウザーが閉じられたこと、またはクライアントでセッション cookie が削除されるか期限切れになったことを、アプリ コードに通知する既定のメカニズムはありません。
+* セッション状態の cookie は既定では必須としてマークされていません。 サイトの訪問者が追跡を許可しない限り、セッション状態は機能しません。 詳細については、「<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>」を参照してください。
 
 > [!WARNING]
-> セッション状態には機密データを保存しないでください。 ユーザーがブラウザーを閉じず、セッション Cookie がクリアされない可能性があります。 一部のブラウザーでは、ブラウザー ウィンドウの間で有効なセッションの Cookie が維持されます。 セッションが 1 人のユーザーに制限されないことがあります。 次のユーザーが、同じセッション Cookie でアプリを閲覧し続けることがあります。
+> セッション状態には機密データを保存しないでください。 ユーザーがブラウザーを閉じず、セッション cookie がクリアされない可能性があります。 一部のブラウザーでは、ブラウザーのウィンドウ間で有効なセッションの cookie が維持されます。 セッションが 1 人のユーザーに制限されないことがあります。 次のユーザーが、同じセッション cookie でアプリを閲覧し続けることがあります。
 
 メモリ内キャッシュ プロバイダーは、アプリが存在するサーバーのメモリにセッション データを格納します。 サーバー ファームのシナリオでは次のようになります。
 
 * "*固定セッション*" を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
-* セッション Cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション Cookie を読み取るには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
+* セッション cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション cookie が読み取られるようにするには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
 
 ### <a name="configure-session-state"></a>セッション状態を構成する
 
@@ -112,7 +114,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 `UseSession` を呼び出前に `HttpContext.Session` にアクセスすることはできません。
 
-アプリが応答ストリームへの書き込みを開始した後では、新しいセッション Cookie を含む新しいセッションを作成できません。 例外は Web サーバー ログに記録され、ブラウザーには表示されません。
+アプリが応答ストリームへの書き込みを開始した後では、新しいセッション cookie を含む新しいセッションを作成できません。 例外は Web サーバー ログに記録され、ブラウザーには表示されません。
 
 ### <a name="load-session-state-asynchronously"></a>セッション状態を非同期的に読み込む
 
@@ -126,17 +128,17 @@ ASP.NET Core の既定のセッション プロバイダーでは、<xref:Micros
 
 | オプション | 説明 |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Cookie の作成に使用される設定を決定します。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> の既定値は <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> では、既定値が `true` に設定されます。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> では、既定値が `false` に設定されます。 |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、Cookie には適用されません。 既定値は 20 分です。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | cookie の作成に使用される設定を決定します。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> の既定値は <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> では、既定値が `true` に設定されます。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> では、既定値が `false` に設定されます。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、cookie には適用されません。 既定値は 20 分です。 |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | ストアからのセッションの読み込み、またはストアに戻すコミットに対して許容される最大時間です。 この設定は非同期操作にのみ適用できます。 このタイムアウトは、<xref:System.Threading.Timeout.InfiniteTimeSpan> を使用して無効にすることができます。 既定値は 1 分です。 |
 
-セッションは Cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この Cookie は `.AspNetCore.Session` という名前になり、パス `/` を使用します。 Cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません (<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> の既定値が `true` になるため)。
+セッションは cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この cookie は `.AspNetCore.Session` という名前であり、パス `/` が使用されます。 cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません (<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> の既定値が `true` になるため)。
 
-Cookie セッションの既定値をオーバーライドするには、<xref:Microsoft.AspNetCore.Builder.SessionOptions> を使用します。
+cookie セッションの既定値をオーバーライドするには、<xref:Microsoft.AspNetCore.Builder.SessionOptions> を使用します。
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Startup2.cs?name=snippet1&highlight=5-10)]
 
-アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは Cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
+アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
 
 セッション状態は "*ロックなし*" です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は*一貫性のあるセッション*として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
 
@@ -185,7 +187,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) または Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> が発行されます。 このプロパティには、別の要求で読み取られるまでデータが格納されます。 [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) メソッドと [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) メソッドを使用すると、要求の最後に削除せずにデータを調べることができます。 [Keep](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) によって、リテンション期間についてディクショナリ内のすべての項目がマークされます。 `TempData` は次のようになります。
 
 * 複数の要求に対してデータが必要な場合のリダイレクトに役立ちます。
-* `TempData` プロバイダーによって Cookie またはセッション状態を使用して実装されます。
+* `TempData` プロバイダーによって cookie またはセッション状態を使用して実装されます。
 
 ## <a name="tempdata-samples"></a>TempData のサンプル
 
@@ -211,23 +213,23 @@ ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc
 
 ### <a name="tempdata-providers"></a>TempData プロバイダー
 
-Cookie に TempData を格納するには、Cookie ベースの TempData プロバイダーが既定で使われます。
+cookie に TempData を格納するには、既定では、cookie ベースの TempData プロバイダーが使われます。
 
-Cookie データは、<xref:Microsoft.AspNetCore.DataProtection.IDataProtector> を使用して暗号化され、<xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> でエンコードされた後、チャンクされます。 Cookie の最大サイズは、暗号化とチャンク化のため、[4096 バイト](http://www.faqs.org/rfcs/rfc2965.html)未満です。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、Cookie データは圧縮されません。 Cookie ベース TempData プロバイダーの詳細については、<xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> を参照してください。
+cookie データは、<xref:Microsoft.AspNetCore.DataProtection.IDataProtector> を使用して暗号化され、<xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> でエンコードされた後、チャンクされます。 cookie の最大サイズは、暗号化とチャンクのため、[4096](http://www.faqs.org/rfcs/rfc2965.html) バイト未満です。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、cookie データは圧縮されません。 cookie ベース TempData プロバイダーの詳細については、<xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> に関する記事を参照してください。
 
 ### <a name="choose-a-tempdata-provider"></a>TempData プロバイダーを選択する
 
 TempData プロバイダーを選択するときの考慮事項:
 
 * アプリは既にセッション状態を使っているかどうか。 その場合、データのサイズを超えて、セッション状態 TempData プロバイダーがそのアプリにコストを追加することはありません。
-* アプリでは、比較的少量のデータに対して (最大 500 バイト) TempData がわずかばかり使用されているか。 該当する場合、Cookie TempData プロバイダーは TempData を送信する要求ごとに少額のコストを追加します。 該当しない場合、セッション状態 TempData プロバイダーは便利かもしれません。TempData が尽きるまで、要求のたびに大量のデータをラウンドトリップすることが回避されます。
-* アプリは複数サーバーのサーバー ファームで実行しているか。 そうである場合は、データ保護の外部で Cookie TempData プロバイダーを使用するために、追加の構成は必要ありません (<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事を参照)。
+* アプリでは、比較的少量のデータに対して (最大 500 バイト) TempData がわずかばかり使用されているか。 該当する場合、cookie TempData プロバイダーによって TempData を送信する要求ごとに少額のコストが追加されます。 該当しない場合、セッション状態 TempData プロバイダーは便利かもしれません。TempData が尽きるまで、要求のたびに大量のデータをラウンドトリップすることが回避されます。
+* アプリは複数サーバーのサーバー ファームで実行しているか。 そうである場合は、データ保護の外部で cookie TempData プロバイダーを使用するために、追加の構成は必要ありません (「<xref:security/data-protection/introduction>」および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事を参照)。
 
-Web ブラウザーなどのほとんどの Web クライアントは、各 Cookie の最大サイズと Cookie の合計数に上限を課します。 Cookie TempData プロバイダーを使用するとき、アプリで[それらの上限](http://www.faqs.org/rfcs/rfc2965.html)が超えないことを確認してください。 データの合計サイズを考慮してください。 暗号化とチャンクによる Cookie のサイズの増加を考慮してください。
+Web ブラウザーなどのほとんどの Web クライアントによって、各 cookie の最大サイズと cookie の合計数に上限が設けられます。 cookie TempData プロバイダーを使用するとき、アプリで[それらの上限](http://www.faqs.org/rfcs/rfc2965.html)が超えないことを確認してください。 データの合計サイズを考慮してください。 暗号化とチャンクによる cookie のサイズの増加を考慮してください。
 
 ### <a name="configure-the-tempdata-provider"></a>TempData プロバイダーを構成する
 
-Cookie ベース TempData プロバイダーは既定で有効になります。
+cookie ベース TempData プロバイダーは既定で有効になります。
 
 セッション ベースの TempData プロバイダーを有効にするには、<xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> 拡張メソッドを使います。 `AddSessionStateTempDataProvider` の呼び出しは 1 つだけ必要です。
 
@@ -284,7 +286,7 @@ Cookie ベース TempData プロバイダーは既定で有効になります。
 
 エラーを確認するための推奨される方法は、アプリがセッションへの書き込みを終了したら、`await feature.Session.CommitAsync` を呼び出すことです。 バッキング ストアが利用できない場合、<xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*> は例外をスローします。 `CommitAsync` が失敗した場合、アプリは例外を処理できます。 <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*> は、データ ストアが利用できない場合に同じ条件でスローします。
   
-## <a name="signalr-and-session-state"></a>SignalR とセッション状態
+## <a name="no-locsignalr-and-session-state"></a>SignalR とセッション状態
 
 SignalR アプリでは、セッション状態を使用して情報を格納することはできません。 SignalR アプリは、ハブ内の `Context.Items` に接続ごとの状態を格納できます。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
@@ -307,24 +309,24 @@ HTTP はステートレス プロトコルです。 手順を追加しないと�
 
 | 格納の方法 | 格納のメカニズム |
 | ---------------- | ----------------- |
-| [Cookie](#cookies) | HTTP Cookie (サーバー側アプリのコードを使って格納されるデータを含む場合があります) |
-| [セッション状態](#session-state) | HTTP Cookie とサーバー側アプリ コード |
-| [TempData](#tempdata) | HTTP Cookie またはセッション状態 |
+| [Cookie ](#cookies) | HTTP cookie (サーバー側アプリ コードを使って格納されたデータを含めることができます) |
+| [セッション状態](#session-state) | HTTP cookie とサーバー側アプリ コード |
+| [TempData](#tempdata) | HTTP cookie またはセッション状態 |
 | [クエリ文字列](#query-strings) | HTTP クエリ文字列 |
 | [非表示フィールド](#hidden-fields) | HTTP フォーム フィールド |
 | [HttpContext.Items](#httpcontextitems) | サーバー側アプリ コード |
 | [キャッシュ](#cache) | サーバー側アプリ コード |
 | [依存性の注入](#dependency-injection) | サーバー側アプリ コード |
 
-## <a name="cookies"></a>クッキー
+## <a name="no-loccookies"></a>Cookies
 
-Cookie は、要求と要求の間でデータを格納します。 Cookie は要求ごとに送信されるために、そのサイズは最小に抑える必要があります。 理想的には、識別子だけを Cookie に格納し、データはアプリで格納します。 ほとんどのブラウザーで Cookie のサイズは 4096 バイトに制限されています。 ドメインごとに使用できる Cookie の数も制限されています。
+Cookie には、要求と要求の間でデータが格納されます。 cookie は要求ごとに送信されるために、そのサイズは最小に抑える必要があります。 理想的には、識別子だけを cookie に格納し、データはアプリで格納します。 ほとんどのブラウザーで cookie のサイズは 4096 バイトに制限されています。 ドメインごとに使用できる cookie の数も制限されています。
 
-Cookie は改ざんされる可能性があるため、アプリで検証する必要があります。 Cookie は、ユーザーが削除でき、クライアント上で期限切れになります。 ただし、Cookie は一般に、クライアントでデータを永続化するときに最も持続性のある形式です。
+cookie は改ざんされる可能性があるため、アプリで検証する必要があります。 Cookie は、ユーザーが削除でき、クライアント上で期限切れになります。 ただし、cookie は一般に、クライアントでデータを永続化するときに最も持続性のある形式です。
 
-Cookie は、多くの場合、パーソナル化に利用されます。既知のユーザーのためにコンテンツをカスタマイズします。 ユーザーは識別されるだけであり、ほとんどの場合は認証されません。 Cookie には、ユーザーの名前、アカウント名、または一意ユーザー ID (GUID など) を格納できます。 その後は、優先される Web サイトの背景色など、ユーザーの個人用設定に Cookie を使ってアクセスできます。
+Cookie は、多くの場合、パーソナル化に利用されます。既知のユーザーのためにコンテンツをカスタマイズします。 ユーザーは識別されるだけであり、ほとんどの場合は認証されません。 cookie には、ユーザーの名前、アカウント名、または一意のユーザー ID (GUID など) を格納できます。 その後は、優先される Web サイトの背景色など、ユーザーの個人用設定に cookie を使ってアクセスできます。
 
-Cookie を発行し、プライバシーの問題を扱うときは、[欧州連合の一般データ保護規則 (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) に留意してください。 詳細については、「[General Data Protection Regulation (GDPR) support in ASP.NET Core](xref:security/gdpr)」(ASP.NET Core での一般データ保護規則 (GDPR) のサポート) をご覧ください。
+cookie を発行し、プライバシーの問題を扱うときは、[欧州連合の一般データ保護規則 (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) に留意してください。 詳細については、「[General Data Protection Regulation (GDPR) support in ASP.NET Core](xref:security/gdpr)」(ASP.NET Core での一般データ保護規則 (GDPR) のサポート) をご覧ください。
 
 ## <a name="session-state"></a>セッション状態
 
@@ -333,26 +335,26 @@ Cookie を発行し、プライバシーの問題を扱うときは、[欧州連
 > [!NOTE]
 > [SignalR ハブ](xref:signalr/hubs)は HTTP コンテキストとは独立して実行する可能性があるため、[SignalR](xref:signalr/index) アプリではセッションはサポートされていません。 このようなことは、たとえば、長いポーリング要求が HTTP コンテキストの有効期間を超えてハブによって開かれている場合に発生する可能性があります。
 
-ASP.NET Core は、セッション ID を含む Cookie をクライアントに提供することで、セッションの状態を維持します。Cookie は要求ごとにサーバーに送信されます。 アプリは、セッション ID を使用してセッション データをフェッチします。
+ASP.NET Core は、セッション ID を含み、要求ごとに各アプリに送信される cookie がクライアントに提供されて、セッションの状態が維持されます。 アプリは、セッション ID を使用してセッション データをフェッチします。
 
 セッション状態は次の動作を示します。
 
-* セッション Cookie はブラウザーに固有であるため、セッションはブラウザー間では共有されません。
-* セッション Cookie は、ブラウザー セッションが終了するときに削除されます。
-* Cookie を受け取り、セッションが期限切れになった場合、同じセッション Cookie を使用する新しいセッションが作成されます。
+* セッション cookie はブラウザーに固有であるため、セッションはブラウザー間では共有されません。
+* セッション cookie は、ブラウザー セッションが終了するときに削除されます。
+* cookie を受け取り、セッションが期限切れになった場合、同じセッション cookie を使用する新しいセッションが作成されます。
 * 空のセッションは保持されません。要求と要求の間でセッションを維持するには、少なくとも 1 つの値をセッションが持っている必要があります。 セッションが保持されないと、新しい要求ごとに新しいセッション ID が生成されます。
 * アプリは、最後の要求から限られた時間だけセッションを維持します。 アプリでは、セッション タイムアウトを設定するか、既定値の 20 分を使用します。 セッション状態は、特定のセッションに固有であるが、セッション間で永続的に保持する必要のないユーザー データの格納に最適です。
 * セッション データは、<xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> の実装が呼び出されるか、セッションが期限切れになると、削除されます。
-* クライアント ブラウザーが閉じられたこと、またはクライアントでセッション Cookie が削除されるか期限切れになったことを、アプリ コードに通知する既定のメカニズムはありません。
-* ASP.NET Core MVC と Razor ページのテンプレートには、一般データ保護規制 (GDPR) のサポートが含まれます。 セッション状態の Cookie は既定では必須になっていません。このため、サイトの訪問者が追跡を許可しない限り、セッション状態は機能しません。 詳細については、「<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>」を参照してください。
+* クライアント ブラウザーが閉じられたこと、またはクライアントでセッション cookie が削除されるか期限切れになったことを、アプリ コードに通知する既定のメカニズムはありません。
+* ASP.NET Core MVC と Razor ページのテンプレートには、一般データ保護規制 (GDPR) のサポートが含まれます。 セッション状態の cookie は既定では必須になっていません。このため、サイトの訪問者が追跡を許可しない限り、セッション状態は機能しません。 詳細については、「<xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>」を参照してください。
 
 > [!WARNING]
-> セッション状態には機密データを保存しないでください。 ユーザーがブラウザーを閉じず、セッション Cookie がクリアされない可能性があります。 一部のブラウザーでは、ブラウザー ウィンドウの間で有効なセッションの Cookie が維持されます。 セッションが 1 人のユーザーに制限されず、次のユーザーが同じセッション Cookie でアプリの閲覧を続けることがあります。
+> セッション状態には機密データを保存しないでください。 ユーザーがブラウザーを閉じず、セッション cookie がクリアされない可能性があります。 一部のブラウザーでは、ブラウザーのウィンドウ間で有効なセッションの cookie が維持されます。 セッションが 1 人のユーザーに制限されず&mdash;次のユーザーが同じセッション cookie でアプリの閲覧を続けることがあります。
 
 メモリ内キャッシュ プロバイダーは、アプリが存在するサーバーのメモリにセッション データを格納します。 サーバー ファームのシナリオでは次のようになります。
 
 * "*固定セッション*" を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
-* セッション Cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション Cookie を読み取るには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
+* セッション cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション cookie が読み取られるようにするには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
 
 ### <a name="configure-session-state"></a>セッション状態を構成する
 
@@ -372,7 +374,7 @@ ASP.NET Core は、セッション ID を含む Cookie をクライアントに�
 
 `UseSession` を呼び出前に `HttpContext.Session` にアクセスすることはできません。
 
-アプリが応答ストリームへの書き込みを開始した後では、新しいセッション Cookie を含む新しいセッションを作成できません。 例外は Web サーバー ログに記録され、ブラウザーには表示されません。
+アプリが応答ストリームへの書き込みを開始した後では、新しいセッション cookie を含む新しいセッションを作成できません。 例外は Web サーバー ログに記録され、ブラウザーには表示されません。
 
 ### <a name="load-session-state-asynchronously"></a>セッション状態を非同期的に読み込む
 
@@ -386,17 +388,17 @@ ASP.NET Core の既定のセッション プロバイダーでは、<xref:Micros
 
 | オプション | 説明 |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Cookie の作成に使用される設定を決定します。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> の既定値は <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> では、既定値が `true` に設定されます。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> では、既定値が `false` に設定されます。 |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、Cookie には適用されません。 既定値は 20 分です。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | cookie の作成に使用される設定を決定します。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> (`.AspNetCore.Session`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> の既定値は <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> (`/`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> の既定値は <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> (`1`) です。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> では、既定値が `true` に設定されます。 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> では、既定値が `false` に設定されます。 |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` は、内容を破棄されることなくセッションがアイドル状態になっていることのできる最大時間を示します。 セッションへのアクセスがあるたびに、タイムアウトはリセットされます。 この設定はセッションの内容にのみ適用され、cookie には適用されません。 既定値は 20 分です。 |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | ストアからのセッションの読み込み、またはストアに戻すコミットに対して許容される最大時間です。 この設定は非同期操作にのみ適用できます。 このタイムアウトは、<xref:System.Threading.Timeout.InfiniteTimeSpan> を使用して無効にすることができます。 既定値は 1 分です。 |
 
-セッションは Cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この Cookie は `.AspNetCore.Session` という名前になり、パス `/` を使用します。 Cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません (<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> の既定値が `true` になるため)。
+セッションは cookie を利用し、1 つのブラウザーからの要求を追跡し、識別します。 既定では、この cookie は `.AspNetCore.Session` という名前であり、パス `/` が使用されます。 cookie の既定値ではドメインが指定されないため、ページのクライアント側スクリプトには使用できません (<xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> の既定値が `true` になるため)。
 
-Cookie セッションの既定値をオーバーライドするには、`SessionOptions` を使用します。
+cookie セッションの既定値をオーバーライドするには、`SessionOptions` を使用します。
 
 [!code-csharp[](app-state/samples_snapshot/2.x/SessionSample/Startup.cs?name=snippet1&highlight=14-19)]
 
-アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは Cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
+アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
 
 セッション状態は "*ロックなし*" です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は*一貫性のあるセッション*として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
 
@@ -442,7 +444,7 @@ Name: @HttpContext.Session.GetString(IndexModel.SessionKeyName)
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) または Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> が発行されます。 このプロパティには、別の要求で読み取られるまでデータが格納されます。 [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) メソッドと [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) メソッドを使用すると、要求の最後に削除せずにデータを調べることができます。 [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) によって、リテンション期間についてディクショナリ内のすべての項目がマークされます。 `TempData` は特に、複数の要求にデータが必要な場合のリダイレクトに役立ちます。 `TempData` は、`TempData` プロバイダーによって Cookie またはセッション状態を使用して実装されます。
+ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) または Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> が発行されます。 このプロパティには、別の要求で読み取られるまでデータが格納されます。 [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) メソッドと [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) メソッドを使用すると、要求の最後に削除せずにデータを調べることができます。 [Keep()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) によって、リテンション期間についてディクショナリ内のすべての項目がマークされます。 `TempData` は特に、複数の要求にデータが必要な場合のリダイレクトに役立ちます。 `TempData` は、`TempData` プロバイダーによって cookie またはセッション状態を使用して実装されます。
 
 ## <a name="tempdata-samples"></a>TempData のサンプル
 
@@ -468,24 +470,24 @@ ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc
 
 ### <a name="tempdata-providers"></a>TempData プロバイダー
 
-Cookie に TempData を格納するには、Cookie ベースの TempData プロバイダーが既定で使われます。
+cookie に TempData を格納するには、既定では、cookie ベースの TempData プロバイダーが使われます。
 
-Cookie データは、<xref:Microsoft.AspNetCore.DataProtection.IDataProtector> を使用して暗号化され、<xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> でエンコードされた後、チャンクされます。 Cookie はチャンクされるため、ASP.NET Core 1.x の 1 Cookie のサイズ上限は適用されません。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、Cookie データは圧縮されません。 Cookie ベース TempData プロバイダーの詳細については、<xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> を参照してください。
+cookie データは、<xref:Microsoft.AspNetCore.DataProtection.IDataProtector> を使用して暗号化され、<xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> でエンコードされた後、チャンクされます。 cookie はチャンクされるため、ASP.NET Core 1.x の 1 cookie のサイズ上限は適用されません。 暗号化されているデータを圧縮すると、[CRIME](https://wikipedia.org/wiki/CRIME_(security_exploit)) 攻撃や [BREACH](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃など、セキュリティ上の問題を起す可能性があるため、cookie データは圧縮されません。 cookie ベース TempData プロバイダーの詳細については、<xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> に関する記事を参照してください。
 
 ### <a name="choose-a-tempdata-provider"></a>TempData プロバイダーを選択する
 
 TempData プロバイダーを選択するときの考慮事項:
 
 1. アプリは既にセッション状態を使っているかどうか。 使っている場合、(データのサイズを除き) セッション状態 TempData プロバイダーがそのアプリにコストを追加することはありません。
-2. アプリでは、比較的少量のデータに対して (最大 500 バイト) TempData がわずかばかり使用されているか。 該当する場合、Cookie TempData プロバイダーは TempData を送信する要求ごとに少額のコストを追加します。 該当しない場合、セッション状態 TempData プロバイダーは便利かもしれません。TempData が尽きるまで、要求のたびに大量のデータをラウンドトリップすることが回避されます。
-3. アプリは複数サーバーのサーバー ファームで実行しているか。 そうである場合は、データ保護の外部で Cookie TempData プロバイダーを使用するために、追加の構成は必要ありません (<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事を参照)。
+2. アプリでは、比較的少量のデータに対して (最大 500 バイト) TempData がわずかばかり使用されているか。 該当する場合、cookie TempData プロバイダーによって TempData を送信する要求ごとに少額のコストが追加されます。 該当しない場合、セッション状態 TempData プロバイダーは便利かもしれません。TempData が尽きるまで、要求のたびに大量のデータをラウンドトリップすることが回避されます。
+3. アプリは複数サーバーのサーバー ファームで実行しているか。 そうである場合は、データ保護の外部で cookie TempData プロバイダーを使用するために、追加の構成は必要ありません (「<xref:security/data-protection/introduction>」および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事を参照)。
 
 > [!NOTE]
-> ほとんどの Web クライアント (Web ブラウザーなど) は、各 Cookie の最大サイズ、Cookie の合計数、または両方に上限を課します。 Cookie TempData プロバイダーを使用するとき、アプリでそれらの上限が超えないことを確認してください。 データの合計サイズを考慮してください。 暗号化とチャンクによる Cookie のサイズの増加を考慮してください。
+> Web ブラウザーなどのほとんどの Web クライアントによって、各 cookie の最大サイズ、cookie の合計数、またはその両方に上限が設けられます。 cookie TempData プロバイダーを使用するとき、アプリでそれらの上限が超えないことを確認してください。 データの合計サイズを考慮してください。 暗号化とチャンクによる cookie のサイズの増加を考慮してください。
 
 ### <a name="configure-the-tempdata-provider"></a>TempData プロバイダーを構成する
 
-Cookie ベース TempData プロバイダーは既定で有効になります。
+cookie ベース TempData プロバイダーは既定で有効になります。
 
 セッション ベースの TempData プロバイダーを有効にするには、<xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> 拡張メソッドを使います。
 
@@ -595,7 +597,7 @@ app.Run(async (context) =>
 
   エラーを確認するための推奨される方法は、アプリがセッションへの書き込みを終了したら、アプリ コードから `await feature.Session.CommitAsync();` を呼び出すことです。 バッキング ストアが利用できない場合、`CommitAsync` は例外をスローします。 `CommitAsync` が失敗した場合、アプリは例外を処理できます。 `LoadAsync` は、データ ストアが利用できない場合に同じ条件で例外をスローします。
   
-## <a name="signalr-and-session-state"></a>SignalR とセッション状態
+## <a name="no-locsignalr-and-session-state"></a>SignalR とセッション状態
 
 SignalR アプリでは、セッション状態を使用して情報を格納することはできません。 SignalR アプリは、ハブ内の `Context.Items` に接続ごとの状態を格納できます。 <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 

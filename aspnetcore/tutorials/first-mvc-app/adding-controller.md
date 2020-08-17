@@ -5,6 +5,8 @@ description: ASP.NET Core MVC のチュートリアル シリーズのパート 
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 30272900b2ff19879921f1954a1c9b3eba203ca4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400454"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051811"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>パート 2: ASP.NET Core MVC アプリにコントローラーを追加する
 
@@ -45,7 +47,7 @@ MVC パターンは、これらの要素間の疎結合を提供しながら、�
 * **ソリューション エクスプローラー**で、 **[コントローラー] を右クリックし、[追加]、[コントローラー]、[コンテキスト メニュー] の順に選択します。** 
   ![コンテキスト メニュー](adding-controller/_static/add_controller.png)
 
-* **[スキャフォールディングを追加]** ダイアログ ボックスで、 **[MVC コント ローラー - 空]** を選択します。
+* **[スキャフォールディングを追加]** ダイアログ ボックスで、 **[コントローラー クラス - 空]** を選択します。
 
   ![MVC コント ローラーを追加し、名前を付けます](adding-controller/_static/ac.png)
 
@@ -62,7 +64,7 @@ MVC パターンは、これらの要素間の疎結合を提供しながら、�
 **ソリューション エクスプローラー**で、 **[Controllers] を右クリックし、[追加]、[新しいファイル]** の順に選択します。
 ![コンテキスト メニュー](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-**[ASP.NET Core]** と **[MVC コントローラー クラス]** を選択します。
+**[ASP.NET Core]** と **[コントローラー クラス]** を選択します。
 
 コントローラーに「**HelloWorldController**」という名前を付けます。
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 3d7ae49142849c589a1a20c33d30e87747ad1935
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147775"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021628"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
+# <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
@@ -61,7 +63,7 @@ ms.locfileid: "86147775"
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>ホストされる Blazor WebAssembly アプリ プロジェクトを作成する
+## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a>ホストされる Blazor WebAssembly アプリ プロジェクトを作成する
 
 使用するツールに向けたガイダンスに従ってください。
 
@@ -122,7 +124,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ---
 
-## <a name="add-the-signalr-client-library"></a>SignalR クライアント ライブラリを追加する
+## <a name="add-the-no-locsignalr-client-library"></a>SignalR クライアント ライブラリを追加する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -169,13 +171,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
-## <a name="add-a-signalr-hub"></a>SignalR ハブを追加する
+## <a name="add-a-no-locsignalr-hub"></a>SignalR ハブを追加する
 
 `BlazorSignalRApp.Server` プロジェクトで、`Hubs` (複数形) フォルダーを作成し、次の `ChatHub` クラス (`Hubs/ChatHub.cs`) を追加します。
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>サービスと SignalR ハブのエンドポイントを追加する
+## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a>サービスと SignalR ハブのエンドポイントを追加する
 
 1. `BlazorSignalRApp.Server` プロジェクトで、`Startup.cs` ファイルを開きます。
 
@@ -196,7 +198,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
-## <a name="add-razor-component-code-for-chat"></a>チャット用の Razor コンポーネント コードを追加する
+## <a name="add-no-locrazor-component-code-for-chat"></a>チャット用の Razor コンポーネント コードを追加する
 
 1. `BlazorSignalRApp.Client` プロジェクトで、`Pages/Index.razor` ファイルを開きます。
 
@@ -216,7 +218,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、メッセージを送信するボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -234,7 +236,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、メッセージを送信するボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -246,7 +248,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、メッセージを送信するボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -263,7 +265,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. いずれかのブラウザーを選択し、名前とメッセージを入力し、メッセージを送信するボタンを選択します。 両方のページに、その名前とメッセージが瞬時に表示されます。
 
-   交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた ![SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![交換されたメッセージを示す、2 つのブラウザー ウィンドウで開かれた SignalR Blazor WebAssembly サンプル アプリ。](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    引用:*Star Trek VI:The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 

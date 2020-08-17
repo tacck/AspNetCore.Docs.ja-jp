@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: aeebc7d5a7cbfaaab6d48b8da76d35c47c2c552b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 480120718959a364ce8008949c3b76c558c0e995
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407851"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130588"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>カスタム ASP.NET Core ミドルウェアを記述する
 
@@ -83,6 +85,8 @@ public class CustomMiddleware
 }
 ```
 
+[有効期間と登録のオプション](xref:fundamentals/dependency-injection#lifetime-and-registration-options)には、"*スコープ付き*" 有効期間サービスを含むミドルウェアの完全なサンプルが含まれています。
+
 ## <a name="middleware-extension-method"></a>ミドルウェア拡張メソッド
 
 次の拡張メソッドは、<xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> を介してミドルウェアを公開します。
@@ -95,6 +99,7 @@ public class CustomMiddleware
 
 ## <a name="additional-resources"></a>その他の技術情報
 
+* [有効期間と登録のオプション](xref:fundamentals/dependency-injection#lifetime-and-registration-options)には、*スコープ*、*一時*、*シングルトン* 有効期間サービスを含むミドルウェアの完全なサンプルが含まれています。
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

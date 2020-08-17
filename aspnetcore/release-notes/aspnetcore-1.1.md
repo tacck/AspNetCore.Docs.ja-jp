@@ -5,6 +5,8 @@ description: ASP.NET Core 1.1 の新機能について説明します。
 ms.author: riande
 ms.date: 12/18/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-1.1
-ms.openlocfilehash: ea9605c60e05f2a9cea962aa744850e07ef4d2f5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9b3e0a368fdcd9e1044cfe6bf6a13ca11d3039cc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403665"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020666"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>ASP.NET Core 1.1 の新機能
 

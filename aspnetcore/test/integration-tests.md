@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: c050665f630c0973abe6c9d08a4652597441639f
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 508c2d2cb668f5dbf416d341c1d9a966f9d16fd4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445282"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021043"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core での統合テスト
 
@@ -140,11 +142,11 @@ SUT の [環境](xref:fundamentals/environments) が設定されていない場�
 
 次のテスト クラス `BasicTests` は、`WebApplicationFactory` を使用して SUT をブートストラップし、テスト メソッド `Get_EndpointsReturnSuccessAndCorrectContentType` に [HttpClient](/dotnet/api/system.net.http.httpclient) を提供します。 このメソッドは、複数のアプリ ページで応答状態コードが成功かどうか (200-299 の範囲の状態コード) と、`Content-Type` ヘッダーが `text/html; charset=utf-8` であるかどうかを確認します。
 
-[CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) は `HttpClient` のインスタンスを作成します。このインスタンスは、自動的にリダイレクトに従い、Cookie を処理します。
+[CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) は `HttpClient` のインスタンスを作成します。このインスタンスは、自動的にリダイレクトに従い、cookie を処理します。
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
 
-既定では、[GDPR 同意ポリシー](xref:security/gdpr)が有効になっている場合、要求間で必須でない Cookie は保持されません。 TempData プロバイダーで使用されているような必須ではない Cookie を保持するには、テストに必須であることをマークします。 Cookie を必須としてマークする手順については、[必須 Cookie](xref:security/gdpr#essential-cookies) に関する記事をご覧ください。
+既定では、[GDPR 同意ポリシー](xref:security/gdpr)が有効になっている場合、要求間で必須でない cookie は保持されません。 TempData プロバイダーで使用されているような必須ではない cookie を保持するには、テストに必須であることをマークします。 cookie を必須としてマークする手順については、[必須 cookie](xref:security/gdpr#essential-cookies) に関する記事をご覧ください。
 
 ## <a name="customize-webapplicationfactory"></a>WebApplicationFactory のカスタマイズ
 
@@ -188,8 +190,8 @@ Web ホストの構成は、`WebApplicationFactory` から継承して 1 つ以�
 SUT に対する POST 要求は、アプリの[偽造防止データ保護システム](xref:security/data-protection/introduction)によって自動的に行われる偽造防止チェックを満たす必要があります。 テストで POST 要求を実行するには、テスト アプリで次のことを行う必要があります。
 
 1. ページに対して要求を行います。
-1. 応答の偽造防止 Cookie と要求検証トークンを解析します。
-1. 偽造防止 Cookie と要求検証トークンを使用して POST 要求を行います。
+1. 応答の偽造防止 cookie と要求検証トークンを解析します。
+1. 偽造防止 cookie と要求検証トークンを使用して POST 要求を行います。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)の `SendAsync` ヘルパー拡張メソッド (*Helpers/HttpClientExtensions.cs*) と `GetDocumentAsync` ヘルパー メソッド (*Helpers/HtmlHelpers.cs*) は、次のメソッドで [AngleSharp](https://anglesharp.github.io/) パーサーを使用して偽造防止チェック処理を行います。
 
@@ -200,7 +202,7 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
   * 送信ボタン (`IHtmlElement`) とフォームの値 (`IEnumerable<KeyValuePair<string, string>>`)
 
 > [!NOTE]
-> [AngleSharp](https://anglesharp.github.io/) は、このトピックとサンプル アプリのデモンストレーションのために使用するサードパーティ製の解析ライブラリです。 ASP.NET Core アプリの統合テストでは、AngleSharp はサポートされていないか、必要ありません。 [Html Agility Pack (HAP)](https://html-agility-pack.net/) などの他のパーサーを使用することもできます。 もう 1 つの方法として、偽造防止システムの要求検証トークンを処理するコードを記述し、偽造防止 Cookie を直接処理する方法もあります。
+> [AngleSharp](https://anglesharp.github.io/) は、このトピックとサンプル アプリのデモンストレーションのために使用するサードパーティ製の解析ライブラリです。 ASP.NET Core アプリの統合テストでは、AngleSharp はサポートされていないか、必要ありません。 [Html Agility Pack (HAP)](https://html-agility-pack.net/) などの他のパーサーを使用することもできます。 もう 1 つの方法として、偽造防止システムの要求検証トークンを処理するコードを記述し、偽造防止 cookie を直接処理する方法もあります。
 
 ## <a name="customize-the-client-with-withwebhostbuilder"></a>WithWebHostBuilder を使用したクライアントのカスタマイズ
 
@@ -220,7 +222,7 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` インスタンスがリダイレクト応答に自動的に従うかどうかを取得または設定します。 | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` インスタンスのベース アドレスを取得または設定します。 | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが Cookie を処理する必要があるかどうかを取得または設定します。 | `true` |
+| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが cookie を処理する必要があるかどうかを取得または設定します。 | `true` |
 | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` インスタンスが従う必要があるリダイレクト応答の最大数を取得または設定します。 | 7 |
 
 `WebApplicationFactoryClientOptions` クラスを作成し、それを [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) メソッドに渡します (既定値については、コード例を参照してください)。
@@ -522,11 +524,11 @@ SUT の [環境](xref:fundamentals/environments) が設定されていない場�
 
 次のテスト クラス `BasicTests` は、`WebApplicationFactory` を使用して SUT をブートストラップし、テスト メソッド `Get_EndpointsReturnSuccessAndCorrectContentType` に [HttpClient](/dotnet/api/system.net.http.httpclient) を提供します。 このメソッドは、複数のアプリ ページで応答状態コードが成功かどうか (200-299 の範囲の状態コード) と、`Content-Type` ヘッダーが `text/html; charset=utf-8` であるかどうかを確認します。
 
-[CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) は `HttpClient` のインスタンスを作成します。このインスタンスは、自動的にリダイレクトに従い、Cookie を処理します。
+[CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) は `HttpClient` のインスタンスを作成します。このインスタンスは、自動的にリダイレクトに従い、cookie を処理します。
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
 
-既定では、[GDPR 同意ポリシー](xref:security/gdpr)が有効になっている場合、要求間で必須でない Cookie は保持されません。 TempData プロバイダーで使用されているような必須ではない Cookie を保持するには、テストに必須であることをマークします。 Cookie を必須としてマークする手順については、[必須 Cookie](xref:security/gdpr#essential-cookies) に関する記事をご覧ください。
+既定では、[GDPR 同意ポリシー](xref:security/gdpr)が有効になっている場合、要求間で必須でない cookie は保持されません。 TempData プロバイダーで使用されているような必須ではない cookie を保持するには、テストに必須であることをマークします。 cookie を必須としてマークする手順については、[必須 cookie](xref:security/gdpr#essential-cookies) に関する記事をご覧ください。
 
 ## <a name="customize-webapplicationfactory"></a>WebApplicationFactory のカスタマイズ
 
@@ -551,8 +553,8 @@ Web ホストの構成は、`WebApplicationFactory` から継承して 1 つ以�
 SUT に対する POST 要求は、アプリの[偽造防止データ保護システム](xref:security/data-protection/introduction)によって自動的に行われる偽造防止チェックを満たす必要があります。 テストで POST 要求を実行するには、テスト アプリで次のことを行う必要があります。
 
 1. ページに対して要求を行います。
-1. 応答の偽造防止 Cookie と要求検証トークンを解析します。
-1. 偽造防止 Cookie と要求検証トークンを使用して POST 要求を行います。
+1. 応答の偽造防止 cookie と要求検証トークンを解析します。
+1. 偽造防止 cookie と要求検証トークンを使用して POST 要求を行います。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)の `SendAsync` ヘルパー拡張メソッド (*Helpers/HttpClientExtensions.cs*) と `GetDocumentAsync` ヘルパー メソッド (*Helpers/HtmlHelpers.cs*) は、次のメソッドで [AngleSharp](https://anglesharp.github.io/) パーサーを使用して偽造防止チェック処理を行います。
 
@@ -563,7 +565,7 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
   * 送信ボタン (`IHtmlElement`) とフォームの値 (`IEnumerable<KeyValuePair<string, string>>`)
 
 > [!NOTE]
-> [AngleSharp](https://anglesharp.github.io/) は、このトピックとサンプル アプリのデモンストレーションのために使用するサードパーティ製の解析ライブラリです。 ASP.NET Core アプリの統合テストでは、AngleSharp はサポートされていないか、必要ありません。 [Html Agility Pack (HAP)](https://html-agility-pack.net/) などの他のパーサーを使用することもできます。 もう 1 つの方法として、偽造防止システムの要求検証トークンを処理するコードを記述し、偽造防止 Cookie を直接処理する方法もあります。
+> [AngleSharp](https://anglesharp.github.io/) は、このトピックとサンプル アプリのデモンストレーションのために使用するサードパーティ製の解析ライブラリです。 ASP.NET Core アプリの統合テストでは、AngleSharp はサポートされていないか、必要ありません。 [Html Agility Pack (HAP)](https://html-agility-pack.net/) などの他のパーサーを使用することもできます。 もう 1 つの方法として、偽造防止システムの要求検証トークンを処理するコードを記述し、偽造防止 cookie を直接処理する方法もあります。
 
 ## <a name="customize-the-client-with-withwebhostbuilder"></a>WithWebHostBuilder を使用したクライアントのカスタマイズ
 
@@ -583,7 +585,7 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` インスタンスがリダイレクト応答に自動的に従うかどうかを取得または設定します。 | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` インスタンスのベース アドレスを取得または設定します。 | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが Cookie を処理する必要があるかどうかを取得または設定します。 | `true` |
+| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` インスタンスが cookie を処理する必要があるかどうかを取得または設定します。 | `true` |
 | [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` インスタンスが従う必要があるリダイレクト応答の最大数を取得または設定します。 | 7 |
 
 `WebApplicationFactoryClientOptions` クラスを作成し、それを [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) メソッドに渡します (既定値については、コード例を参照してください)。

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/5/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: d4512c9fa136e518fa0230c0cf9c607519eed6d8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2b8ac1d6c6cdeee14b74c5b14206bff51982c711
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399453"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017247"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>ASP.NET Core で HttpContext にアクセスする
 
 ASP.NET Core アプリでは、<xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> インターフェイスと、その既定の実装 <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> を介して `HttpContext` にアクセスします。 `IHttpContextAccessor` を使用する必要があるのは、サービス内の `HttpContext` にアクセスする必要がある場合のみです。
 
-## <a name="use-httpcontext-from-razor-pages"></a>Razor Pages から HttpContext を使用する
+## <a name="use-httpcontext-from-no-locrazor-pages"></a>Razor Pages から HttpContext を使用する
 
 Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> では、<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> プロパティが公開されます。
 
@@ -42,7 +44,7 @@ public class AboutModel : PageModel
 }
 ```
 
-## <a name="use-httpcontext-from-a-razor-view"></a>Razor ビューから HttpContext を使用する
+## <a name="use-httpcontext-from-a-no-locrazor-view"></a>Razor ビューから HttpContext を使用する
 
 Razor ビューでは、[RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) プロパティを使用して、ビューに直接 `HttpContext` が公開されます。 次の例では、Windows 認証を使用して、イントラネット アプリで現在のユーザー名を取得します。
 
@@ -173,6 +175,6 @@ public class EmailController : Controller
 }
 ```
 
-## <a name="blazor-and-shared-state"></a>Blazor と共有状態
+## <a name="no-locblazor-and-shared-state"></a>Blazor と共有状態
 
 [!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]

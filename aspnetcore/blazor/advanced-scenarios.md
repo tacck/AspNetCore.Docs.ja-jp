@@ -1,34 +1,36 @@
 ---
-title: ASP.NET Core [Blazor の高度なシナリオ
+title: ASP.NET Core Blazor の高度なシナリオ
 author: guardrex
-description: '[Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。'
+description: Blazor の高度なシナリオについて説明します。これには、手動の RenderTreeBuilder ロジックをアプリに組み込む方法などが含まれます。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
-- '[Blazor'
-- '[Blazor Server'
-- '[Blazor WebAssembly'
-- '[Identity'
-- "[Let's Encrypt"
-- '[Razor'
-- '[SignalR'
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4bd73acd821a8791d7f6cc93545edc2e39a6f2c7
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400220"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051785"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core [Blazor の高度なシナリオ
+# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core Blazor の高度なシナリオ
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>[Blazor Server 回線ハンドラー
+## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server 回線ハンドラー
 
-[Blazor Server を使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 回線ハンドラーは、`CircuitHandler` から派生させ、そのクラスをアプリのサービス コンテナーに登録することで実装します。 次の回線ハンドラーの例では、開いている [SignalR 接続を追跡します。
+Blazor Server を使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 回線ハンドラーは、`CircuitHandler` から派生させ、そのクラスをアプリのサービス コンテナーに登録することで実装します。 次の回線ハンドラーの例では、開いている SignalR 接続を追跡します。
 
 ```csharp
 using System.Collections.Generic;
@@ -70,7 +72,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-カスタム回線ハンドラーのメソッドでハンドルされない例外がスローされる場合は、その例外は [Blazor Server 回線にとって致命的です。 ハンドラーのコードまたはメソッドで例外が許容されるようにするには、エラー処理とログを含む 1 つ以上の [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントでコードをラップします。
+カスタム回線ハンドラーのメソッドでハンドルされない例外がスローされる場合は、その例外は Blazor Server 回線にとって致命的です。 ハンドラーのコードまたはメソッドで例外が許容されるようにするには、エラー処理とログを含む 1 つ以上の [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントでコードをラップします。
 
 ユーザーが切断し、フレームワークで回線の状態がクリーンアップされていることが原因で回線が終了すると、フレームワークによって回線の DI スコープが破棄されます。 スコープが破棄されると、<xref:System.IDisposable?displayProperty=fullName> を実装するサーキットスコープの DI サービスはすべて破棄されます。 破棄中にいずれかの DI サービスでハンドルされない例外がスローされると、フレームワークによって例外がログに記録されます。
 
@@ -95,7 +97,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-次の例では、`CreateComponent` メソッド内のループによって、3 つの `PetDetails` コンポーネントが生成されます。 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> メソッドを呼び出してコンポーネント (`OpenComponent` と `AddAttribute`) を作成する場合、シーケンス番号はソース コードの行番号になります。 [Blazor の差分アルゴリズムは、個別の呼び出しではなく、個別のコード行に対応するシーケンス番号に依存しています。 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> メソッドを使用してコンポーネントを作成する場合は、シーケンス番号の引数をハードコードします。 **計算またはカウンターを使用してシーケンス番号を生成すると、パフォーマンスが低下する可能性があります。** 詳細については、「[シーケンス番号は実行順序ではなくコード行番号に関係する](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)」セクションを参照してください。
+次の例では、`CreateComponent` メソッド内のループによって、3 つの `PetDetails` コンポーネントが生成されます。 シーケンス番号のある <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> メソッドでは、シーケンス番号はソース コードの行番号です。 Blazor の差分アルゴリズムは、個別の呼び出しではなく、個別のコード行に対応するシーケンス番号に依存しています。 <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> メソッドを使用してコンポーネントを作成する場合は、シーケンス番号の引数をハードコードします。 **計算またはカウンターを使用してシーケンス番号を生成すると、パフォーマンスが低下する可能性があります。** 詳細については、「[シーケンス番号は実行順序ではなくコード行番号に関係する](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order)」セクションを参照してください。
 
 `BuiltContent` コンポーネント:
 
@@ -131,15 +133,15 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!WARNING]
-> <xref:Microsoft.AspNetCore.Components.RenderTree> の型により、レンダリング操作の "*結果*" の処理が許可されます。 これらは、[Blazor フレームワーク実装の内部的な詳細です。 これらの型は "*不安定*" と考えるべきで、今後のリリースで変更される可能性があります。
+> <xref:Microsoft.AspNetCore.Components.RenderTree> の型により、レンダリング操作の "*結果*" の処理が許可されます。 これらは、Blazor フレームワーク実装の内部的な詳細です。 これらの型は "*不安定*" と考えるべきで、今後のリリースで変更される可能性があります。
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>シーケンス番号は実行順序ではなくコード行番号に関係する
 
-[Razor コンポーネント ファイル (`.razor`) は常にコンパイルされます。 コンパイル ステップは、実行時にアプリのパフォーマンスを向上させる情報を挿入するために使用できるため、コンパイルの方がコードを解釈するよりも潜在的な利点があります。
+Razor コンポーネント ファイル (`.razor`) は常にコンパイルされます。 コンパイル ステップは、実行時にアプリのパフォーマンスを向上させる情報を挿入するために使用できるため、コンパイルの方がコードを解釈するよりも潜在的な利点があります。
 
 これらの機能強化の主な例として、"*シーケンス番号*" があります。 シーケンス番号は、出力がコードの個別の順序付けられたどの行からのものかをランタイムに示します。 ランタイムでは、この情報を使用して、効率的なツリーの差分を線形時間で生成します。これは、一般的なツリーの差分アルゴリズムで通常にできるよりもかなり高速です。
 
-次の [Razor コンポーネント (`.razor`) ファイルについて考えてみましょう。
+次の Razor コンポーネント (`.razor`) ファイルについて考えてみましょう。
 
 ```razor
 @if (someFlag)
@@ -221,18 +223,18 @@ builder.AddContent(seq++, "Second");
 * コンパイル時にキャプチャされない限り、必要な情報が存在しないため、実行時にフレームワークで独自のシーケンス番号を自動的に作成することはできません。
 * 手動で実装された <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ロジックの長いブロックは記述しないでください。 `.razor` ファイルを優先し、コンパイラがシーケンス番号を処理できるようにします。 手動の <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> ロジックを回避できない場合は、長いブロックのコードを <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A>/<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> 呼び出しでラップされたより小さな部分に分割します。 各リージョンには独自のシーケンス番号の個別のスペースがあるため、各リージョン内でゼロ (または他の任意の数) から再開できます。
 * シーケンス番号がハードコードされている場合、差分アルゴリズムでは、シーケンス番号の値が増えることだけが要求されます。 初期値とギャップは関係ありません。 合理的な選択肢の 1 つは、コード行番号をシーケンス番号として使用するか、ゼロから開始し、1 つずつまたは 100 ずつ (または任意の間隔で) 増やすことです。 
-* [Blazor ではシーケンス番号が使用されていますが、他のツリー差分 UI フレームワークでは使用されていません。 シーケンス番号を使用すると、差分がはるかに高速になります。また、[Blazor には、`.razor` ファイルを作成する開発者に対して、シーケンス番号を自動的に処理するコンパイル ステップの利点があります。
+* Blazor ではシーケンス番号が使用されていますが、他のツリー差分 UI フレームワークでは使用されていません。 シーケンス番号を使用すると、差分がはるかに高速になります。また、Blazor には、`.razor` ファイルを作成する開発者に対して、シーケンス番号を自動的に処理するコンパイル ステップの利点があります。
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>[Blazor Server アプリで大規模なデータ転送を実行する
+## <a name="perform-large-data-transfers-in-no-locblazor-server-apps"></a>Blazor Server アプリで大規模なデータ転送を実行する
 
-シナリオによっては、JavaScript と [Blazor 間で大量のデータを転送する必要があります。 通常、大規模なデータ転送は次の場合に発生します。
+シナリオによっては、JavaScript と Blazor 間で大量のデータを転送する必要があります。 通常、大規模なデータ転送は次の場合に発生します。
 
 * ブラウザー ファイル システム API が、ファイルをアップロードまたはダウンロードするために使用されている場合。
 * サードパーティのライブラリとの相互運用が必要な場合。
 
-[Blazor Server では、パフォーマンスの問題を引き起こす可能性がある 1 つの大きなメッセージを渡すことができないように制限されています。
+Blazor Server では、パフォーマンスの問題を引き起こす可能性がある 1 つの大きなメッセージを渡すことができないように制限されています。
 
-JavaScript と [Blazor 間でデータを転送するコードを開発するときは、次のガイダンスを考慮してください。
+JavaScript と Blazor 間でデータを転送するコードを開発するときは、次のガイダンスを考慮してください。
 
 * データをより小さな部分にスライスし、すべてのデータがサーバーによって受信されるまでデータ セグメントを順番に送信します。
 * JavaScript および C# コードで大きなオブジェクトを割り当てないでください。
