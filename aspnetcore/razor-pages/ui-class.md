@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 1d37ebaa913a2815b79b16875049bbf91f9fb941
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 042ef8dcc7135e0c60baec972d405380d85a6a10
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404393"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019223"
 ---
-# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core の Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成
+# <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>ASP.NET Core の Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -31,7 +33,7 @@ Razor ビュー、ページ、コントローラー、ページ モデル、[Raz
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="create-a-class-library-containing-razor-ui"></a>Razor UI を含むクラス ライブラリの作成
+## <a name="create-a-class-library-containing-no-locrazor-ui"></a>Razor UI を含むクラス ライブラリの作成
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -73,7 +75,7 @@ Web アプリと RCL の両方にビュー、部分ビュー、Razor ページ�
 
 サンプル ダウンロードの *WebApp1/Areas/MyFeature2* の名前を *WebApp1/Areas/MyFeature* に変更し、優先設定をテストします。
 
-*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 部分ビューを *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml* ビューにコピーします。 新しい場所を示すようにマークアップを更新します。 アプリをビルドして実行し、アプリの部分ビューが使用されていることを確認します。
+*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 部分ビューを *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml* にコピーします。 新しい場所を示すようにマークアップを更新します。 アプリをビルドして実行し、アプリの部分ビューが使用されていることを確認します。
 
 ### <a name="rcl-pages-layout"></a>RCL ページのレイアウト
 
@@ -82,7 +84,7 @@ RCL コンテンツを Web アプリの *Pages* フォルダーの一部であ�
 * *RazorUIClassLib/Pages*
 * *RazorUIClassLib/Pages/Shared*
 
-たとえば、*RazorUIClassLib/Pages/Shared* に、 *_Header.cshtml* と *_Footer.cshtml* の 2 つの部分ファイルが含まれているとします。 これらの `<partial>` タグを *_Layout.cshtml* ファイルに追加できます。
+*RazorUIClassLib/Pages/Shared* に 2 つの部分ファイル、 *_Header.cshtml* と *_Footer.cshtml* が含まれているとします。 これらの `<partial>` タグを *_Layout.cshtml* ファイルに追加できます。
 
 ```cshtml
 <body>
@@ -198,7 +200,7 @@ Razor ビュー、ページ、コントローラー、ページ モデル、[Raz
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="create-a-class-library-containing-razor-ui"></a>Razor UI を含むクラス ライブラリの作成
+## <a name="create-a-class-library-containing-no-locrazor-ui"></a>Razor UI を含むクラス ライブラリの作成
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -235,7 +237,7 @@ RCL は次によって参照できます。
 * NuGet パッケージ。 「[Creating NuGet packages](/nuget/create-packages/creating-a-package)」 (NuGet パッケージの作成)、「[dotnet add package](/dotnet/core/tools/dotnet-add-package)」、「[Create and publish a NuGet package](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)」 (NuGet パッケージの作成と公開) を参照してください。
 * *{ProjectName}.csproj*. 「[dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)」を参照してください。
 
-## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>チュートリアル: RCL プロジェクトを作成し、Razor Pages プロジェクトから使用する
+## <a name="walkthrough-create-an-rcl-project-and-use-from-a-no-locrazor-pages-project"></a>チュートリアル: RCL プロジェクトを作成し、Razor Pages プロジェクトから使用する
 
 作成しなくても、[完全なプロジェクト](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)をダウンロードしてテストできます。 サンプル ダウンロードには、プロジェクトのテストを簡単にする追加のコードやリンクが含まれています。 GitHub の問題に関するフィードバックは[こちら](https://github.com/dotnet/AspNetCore.Docs/issues/6098)で扱っています。ダウンロード サンプルと段階的指示の違いについてコメントを投稿できます。
 
@@ -275,7 +277,7 @@ RCL プロジェクトの作成:
 
 * Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** を選択します。
-* アプリに **RazorUIClassLib** という名前を付け> **[OK]** を選択します。
+* アプリに **RazorUIClassLib** という名前を付け、 **[OK]** を選択します。
 * **ASP.NET Core 2.1** 以降が選択されていることを確認します。
 * **[Razor クラス ライブラリ]** > **[OK]** の順に選択します。
 * *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* という名前が付いた Razor 部分ビュー ファイルを追加します。
@@ -300,7 +302,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 ---
 
-### <a name="add-razor-files-and-folders-to-the-project"></a>Razor ファイルとフォルダーをプロジェクトに追加する
+### <a name="add-no-locrazor-files-and-folders-to-the-project"></a>Razor ファイルとフォルダーをプロジェクトに追加する
 
 * *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* のマークアップを次のコードに変更します。
 
@@ -324,9 +326,9 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
   dotnet build RazorUIClassLib
   ```
 
-ビルド出力には、*RazorUIClassLib.dll* と *RazorUIClassLib.Views.dll* が含まれています。 *RazorUIClassLib.Views.dll* には、コンパイル済みの Razor コンテンツが含まれています。
+ビルド出力には、 *RazorUIClassLib.dll* と *RazorUIClassLib.Views.dll* が含まれています。 *RazorUIClassLib.Views.dll* には、コンパイル済みの Razor コンテンツが含まれています。
 
-### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>Razor ページ プロジェクトから Razor UI ライブラリを使用します。
+### <a name="use-the-no-locrazor-ui-library-from-a-no-locrazor-pages-project"></a>Razor ページ プロジェクトから Razor UI ライブラリを使用します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -342,7 +344,7 @@ Razor ページ Web アプリの作成:
 * **ソリューション エクスプローラー**で、**WebApp1** を右クリックし、 **[ビルド依存関係]** > **[プロジェクトの依存関係]** の順に選択します。
 * **WebApp1** の依存関係として **RazorUIClassLib** を選択します。
 * **ソリューション エクスプローラー**で、**WebApp1** を右クリックし、 **[追加]** > **[参照]** の順に選択します。
-* **[参照マネージャー]** ダイアログで、 **[RazorUIClassLib]** をオンにして> **[OK]** を選択します。
+* **[参照マネージャー]** ダイアログで、 **[RazorUIClassLib]** をオンにして **[OK]** を選択します。
 
 アプリを実行します。
 
@@ -377,7 +379,7 @@ Web アプリと RCL の両方にビュー、部分ビュー、Razor ページ�
 
 サンプル ダウンロードの *WebApp1/Areas/MyFeature2* の名前を *WebApp1/Areas/MyFeature* に変更し、優先設定をテストします。
 
-*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 部分ビューを *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml* ビューにコピーします。 新しい場所を示すようにマークアップを更新します。 アプリをビルドして実行し、アプリの部分ビューが使用されていることを確認します。
+*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml* 部分ビューを *WebApp1/Areas/MyFeature/Pages/Shared/_Message.cshtml* にコピーします。 新しい場所を示すようにマークアップを更新します。 アプリをビルドして実行し、アプリの部分ビューが使用されていることを確認します。
 
 ### <a name="rcl-pages-layout"></a>RCL ページのレイアウト
 
@@ -386,7 +388,7 @@ RCL コンテンツを Web アプリの *Pages* フォルダーの一部であ�
 * *RazorUIClassLib/Pages*
 * *RazorUIClassLib/Pages/Shared*
 
-たとえば、*RazorUIClassLib/Pages/Shared* に、 *_Header.cshtml* と *_Footer.cshtml* の 2 つの部分ファイルが含まれているとします。 これらの `<partial>` タグを *_Layout.cshtml* ファイルに追加できます。
+*RazorUIClassLib/Pages/Shared* に 2 つの部分ファイル、 *_Header.cshtml* と *_Footer.cshtml* が含まれているとします。 これらの `<partial>` タグを *_Layout.cshtml* ファイルに追加できます。
 
 ```cshtml
 <body>

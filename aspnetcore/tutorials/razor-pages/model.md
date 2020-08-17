@@ -5,6 +5,8 @@ description: Razor ページのチュートリアル シリーズのパート 2�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 053e35e78b2bf58fded49c9a2860060d6a81c544
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b50f46863a6dabb01bcf0976a42abb504e6f7b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408111"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020458"
 ---
-# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する
+# <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,7 +40,7 @@ ms.locfileid: "85408111"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
 
 *Models* フォルダーを右クリックします。 **[追加]**  >  **[クラス]** の順に選択します。 クラスに **Movie** と名前を付けます。
 
@@ -55,7 +57,7 @@ ms.locfileid: "85408111"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* Solution Pad で、**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** > **[新しいフォルダー]** の順に選択します。フォルダーに「*Models*」という名前を付けます。
+* Solution Pad で、 **RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。フォルダーに「*Models*」という名前を付けます。
 * *Models* フォルダーを右クリックし、 **[追加]** > **[新しいファイル]** の順に選択します。
 * **[新しいファイル]** ダイアログで次を実行します。
 
@@ -145,7 +147,7 @@ ms.locfileid: "85408111"
 **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。
 
 * **[モデル クラス]** ドロップ ダウンで、 **[Movie (RazorPagesMovie.Models)]** を選択するか、または入力します。
-* **データ コンテキスト クラス**行で、新しいクラスの名前「RazorPagesMovie.**Data**.RazorPagesMovieContext」を入力します。 [この変更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html)は必須ではありません。 これにより、正しい名前空間を使用してデータベース コンテキスト クラスが作成されます。
+* **データ コンテキスト クラス**行で、新しいクラスの名前「RazorPagesMovie.**Data**.RazorPagesMovieContext」と入力します。 [この変更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html)は必須ではありません。 これにより、正しい名前空間を使用してデータベース コンテキスト クラスが作成されます。
 * **[追加]** を選びます。
 
 ![前の手順からのイメージ。](model/_static/arpMac.png)
@@ -319,7 +321,7 @@ Login failed for user 'User-name'.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
 
 *Models* フォルダーを右クリックします。 **[追加]**  >  **[クラス]** の順に選択します。 クラスに **Movie** と名前を付けます。
 
@@ -336,7 +338,7 @@ Login failed for user 'User-name'.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* ソリューション エクスプローラーで、**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+* ソリューション エクスプローラーで、 **RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
 * *Models* フォルダーを右クリックし、 **[追加]** > **[新しいファイル]** の順に選択します。
 * **[新しいファイル]** ダイアログで次を実行します。
 
@@ -422,7 +424,7 @@ to use Data, it should not use models. That will make the namespace the same for
 **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。
 
 * **[モデル クラス]** ドロップ ダウンで、 **[Movie]** を選択するか、または入力します。
-* **データ コンテキスト クラス** 行で、 **[RazorPagesMovieContext]** を選択または入力します。これにより、新しい db コンテキスト クラスが正しい名前空間で作成されます。 このクラスでは、**RazorPagesMovie.Models.RazorPagesMovieContext** となります。
+* **データ コンテキスト クラス** 行で、 **[RazorPagesMovieContext]** を選択または入力します。これにより、新しい db コンテキスト クラスが正しい名前空間で作成されます。 このクラスでは、 **RazorPagesMovie.Models.RazorPagesMovieContext** となります。
 * **[追加]** を選びます。
 
 ![前の手順からのイメージ。](model/_static/arpMac.png)
@@ -466,7 +468,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます (*RazorPagesMovieContext.cs* ファイル内)。 `InitialCreate` 引数は、移行の名前を指定するために使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が使用されます。 詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。
+`Add-Migration` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます ( *RazorPagesMovieContext.cs* ファイル内)。 `InitialCreate` 引数は、移行の名前を指定するために使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が使用されます。 詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。
 
 `Update-Database` コマンドによって、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドが実行されます。 `Up` メソッドにより、データベースが作成されます。
 
