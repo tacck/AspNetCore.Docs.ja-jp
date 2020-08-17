@@ -4,9 +4,11 @@ author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 07/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,87 +17,87 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 9cd6097dfaa31a1329d3ea8ca6293b33e3bdb3c3
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: fa73075650a23d90e2e546335c06c4d50a29d34a
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147721"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130263"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory"></a><span data-ttu-id="c2052-102">Azure Active Directory を使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する</span><span class="sxs-lookup"><span data-stu-id="c2052-102">Secure an ASP.NET Core Blazor WebAssembly standalone app with Azure Active Directory</span></span>
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a><span data-ttu-id="6ef60-102">Azure Active Directory を使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する</span><span class="sxs-lookup"><span data-stu-id="6ef60-102">Secure an ASP.NET Core Blazor WebAssembly standalone app with Azure Active Directory</span></span>
 
-<span data-ttu-id="c2052-103">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="c2052-103">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="6ef60-103">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="6ef60-103">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="c2052-104">認証用に [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) を使用する Blazor WebAssembly スタンドアロン アプリを作成する方法:</span><span class="sxs-lookup"><span data-stu-id="c2052-104">To create a Blazor WebAssembly standalone app that uses [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) for authentication:</span></span>
+<span data-ttu-id="6ef60-104">認証用に [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) を使用する [スタンドアロン Blazor WebAssembly アプリ](xref:blazor/hosting-models#blazor-webassembly)を作成する方法:</span><span class="sxs-lookup"><span data-stu-id="6ef60-104">To create a [standalone Blazor WebAssembly app](xref:blazor/hosting-models#blazor-webassembly) that uses [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) for authentication:</span></span>
 
-<span data-ttu-id="c2052-105">[AAD テナントと Web アプリケーションを作成する](/azure/active-directory/develop/v2-overview):</span><span class="sxs-lookup"><span data-stu-id="c2052-105">[Create an AAD tenant and web application](/azure/active-directory/develop/v2-overview):</span></span>
+<span data-ttu-id="6ef60-105">[AAD テナントと Web アプリケーションを作成する](/azure/active-directory/develop/v2-overview):</span><span class="sxs-lookup"><span data-stu-id="6ef60-105">[Create an AAD tenant and web application](/azure/active-directory/develop/v2-overview):</span></span>
 
-<span data-ttu-id="c2052-106">Azure portal の **[Azure Active Directory]**  >  **[アプリの登録]** 領域に AAD アプリを登録します。</span><span class="sxs-lookup"><span data-stu-id="c2052-106">Register a AAD app in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
+<span data-ttu-id="6ef60-106">Azure portal の **[Azure Active Directory]**  >  **[アプリの登録]** 領域に AAD アプリを登録します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-106">Register a AAD app in the **Azure Active Directory** > **App registrations** area of the Azure portal:</span></span>
 
-1. <span data-ttu-id="c2052-107">アプリの**名前**を指定します (例: **Blazor スタンドアロン AAD**)。</span><span class="sxs-lookup"><span data-stu-id="c2052-107">Provide a **Name** for the app (for example, **Blazor Standalone AAD**).</span></span>
-1. <span data-ttu-id="c2052-108">**[サポートされているアカウントの種類]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="c2052-108">Choose a **Supported account types**.</span></span> <span data-ttu-id="c2052-109">このエクスペリエンスでは、 **[この組織のディレクトリ内のアカウントのみ]** を選択できます。</span><span class="sxs-lookup"><span data-stu-id="c2052-109">You may select **Accounts in this organizational directory only** for this experience.</span></span>
-1. <span data-ttu-id="c2052-110">**[リダイレクト URI]** ドロップ ダウンの設定を **[Web]** のままとし、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。</span><span class="sxs-lookup"><span data-stu-id="c2052-110">Leave the **Redirect URI** drop down set to **Web** and provide the following redirect URI: `https://localhost:{PORT}/authentication/login-callback`.</span></span> <span data-ttu-id="c2052-111">Kestrel で実行されているアプリの既定のポートは 5001 です。</span><span class="sxs-lookup"><span data-stu-id="c2052-111">The default port for an app running on Kestrel is 5001.</span></span> <span data-ttu-id="c2052-112">アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。</span><span class="sxs-lookup"><span data-stu-id="c2052-112">If the app is run on a different Kestrel port, use the app's port.</span></span> <span data-ttu-id="c2052-113">IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルのアプリのプロパティで確認できます。</span><span class="sxs-lookup"><span data-stu-id="c2052-113">For IIS Express, the randomly generated port for the app can be found in the app's properties in the **Debug** panel.</span></span> <span data-ttu-id="c2052-114">この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。</span><span class="sxs-lookup"><span data-stu-id="c2052-114">Since the app doesn't exist at this point and the IIS Express port isn't known, return to this step after the app is created and update the redirect URI.</span></span> <span data-ttu-id="c2052-115">このトピックの後半で、IIS Express ユーザーにリダイレクト URI を更新するよう促す注意が表示されます。</span><span class="sxs-lookup"><span data-stu-id="c2052-115">A remark appears later in this topic to remind IIS Express users to update the redirect URI.</span></span>
-1. <span data-ttu-id="c2052-116">**[アクセス許可]**  >  **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** チェックボックスをオフにします。</span><span class="sxs-lookup"><span data-stu-id="c2052-116">Disable the **Permissions** > **Grant admin consent to openid and offline_access permissions** check box.</span></span>
-1. <span data-ttu-id="c2052-117">**[登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="c2052-117">Select **Register**.</span></span>
+1. <span data-ttu-id="6ef60-107">アプリの**名前**を指定します (例: **Blazor スタンドアロン AAD**)。</span><span class="sxs-lookup"><span data-stu-id="6ef60-107">Provide a **Name** for the app (for example, **Blazor Standalone AAD**).</span></span>
+1. <span data-ttu-id="6ef60-108">**[サポートされているアカウントの種類]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-108">Choose a **Supported account types**.</span></span> <span data-ttu-id="6ef60-109">このエクスペリエンスでは、 **[この組織のディレクトリ内のアカウントのみ]** を選択できます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-109">You may select **Accounts in this organizational directory only** for this experience.</span></span>
+1. <span data-ttu-id="6ef60-110">**[リダイレクト URI]** ドロップ ダウンの設定を **[Web]** のままとし、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。</span><span class="sxs-lookup"><span data-stu-id="6ef60-110">Leave the **Redirect URI** drop down set to **Web** and provide the following redirect URI: `https://localhost:{PORT}/authentication/login-callback`.</span></span> <span data-ttu-id="6ef60-111">Kestrel で実行されているアプリの既定のポートは 5001 です。</span><span class="sxs-lookup"><span data-stu-id="6ef60-111">The default port for an app running on Kestrel is 5001.</span></span> <span data-ttu-id="6ef60-112">アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-112">If the app is run on a different Kestrel port, use the app's port.</span></span> <span data-ttu-id="6ef60-113">IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルのアプリのプロパティで確認できます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-113">For IIS Express, the randomly generated port for the app can be found in the app's properties in the **Debug** panel.</span></span> <span data-ttu-id="6ef60-114">この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。</span><span class="sxs-lookup"><span data-stu-id="6ef60-114">Since the app doesn't exist at this point and the IIS Express port isn't known, return to this step after the app is created and update the redirect URI.</span></span> <span data-ttu-id="6ef60-115">このトピックの後半で、IIS Express ユーザーにリダイレクト URI を更新するよう促す注意が表示されます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-115">A remark appears later in this topic to remind IIS Express users to update the redirect URI.</span></span>
+1. <span data-ttu-id="6ef60-116">**[アクセス許可]**  >  **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** チェックボックスをオフにします。</span><span class="sxs-lookup"><span data-stu-id="6ef60-116">Disable the **Permissions** > **Grant admin consent to openid and offline_access permissions** check box.</span></span>
+1. <span data-ttu-id="6ef60-117">**[登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-117">Select **Register**.</span></span>
 
-<span data-ttu-id="c2052-118">次の情報を記録しておきます。</span><span class="sxs-lookup"><span data-stu-id="c2052-118">Record the following information:</span></span>
+<span data-ttu-id="6ef60-118">次の情報を記録しておきます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-118">Record the following information:</span></span>
 
-* <span data-ttu-id="c2052-119">アプリケーション (クライアント) ID (例: `41451fa7-82d9-4673-8fa5-69eff5a761fd`)</span><span class="sxs-lookup"><span data-stu-id="c2052-119">Application (client) ID (for example, `41451fa7-82d9-4673-8fa5-69eff5a761fd`)</span></span>
-* <span data-ttu-id="c2052-120">ディレクトリ (テナント) ID (例: `e86c78e2-8bb4-4c41-aefd-918e0565a45e`)</span><span class="sxs-lookup"><span data-stu-id="c2052-120">Directory (tenant) ID (for example, `e86c78e2-8bb4-4c41-aefd-918e0565a45e`)</span></span>
+* <span data-ttu-id="6ef60-119">アプリケーション (クライアント) ID (例: `41451fa7-82d9-4673-8fa5-69eff5a761fd`)</span><span class="sxs-lookup"><span data-stu-id="6ef60-119">Application (client) ID (for example, `41451fa7-82d9-4673-8fa5-69eff5a761fd`)</span></span>
+* <span data-ttu-id="6ef60-120">ディレクトリ (テナント) ID (例: `e86c78e2-8bb4-4c41-aefd-918e0565a45e`)</span><span class="sxs-lookup"><span data-stu-id="6ef60-120">Directory (tenant) ID (for example, `e86c78e2-8bb4-4c41-aefd-918e0565a45e`)</span></span>
 
-<span data-ttu-id="c2052-121">**[認証]**  >  **[プラットフォーム構成]**  >  **[Web]** で、次を行います。</span><span class="sxs-lookup"><span data-stu-id="c2052-121">In **Authentication** > **Platform configurations** > **Web**:</span></span>
+<span data-ttu-id="6ef60-121">**[認証]**  >  **[プラットフォーム構成]**  >  **[Web]** で、次を行います。</span><span class="sxs-lookup"><span data-stu-id="6ef60-121">In **Authentication** > **Platform configurations** > **Web**:</span></span>
 
-1. <span data-ttu-id="c2052-122">**[リダイレクト URI]** が`https://localhost:{PORT}/authentication/login-callback` であることを確認します。</span><span class="sxs-lookup"><span data-stu-id="c2052-122">Confirm the **Redirect URI** of `https://localhost:{PORT}/authentication/login-callback` is present.</span></span>
-1. <span data-ttu-id="c2052-123">**[暗黙の付与]** で、 **[アクセス トークン]** と **[ID トークン]** のチェック ボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="c2052-123">For **Implicit grant**, select the check boxes for **Access tokens** and **ID tokens**.</span></span>
-1. <span data-ttu-id="c2052-124">アプリの残りの既定値は、このエクスペリエンスで使用可能です。</span><span class="sxs-lookup"><span data-stu-id="c2052-124">The remaining defaults for the app are acceptable for this experience.</span></span>
-1. <span data-ttu-id="c2052-125">**[保存]** ボタンを選択します。</span><span class="sxs-lookup"><span data-stu-id="c2052-125">Select the **Save** button.</span></span>
+1. <span data-ttu-id="6ef60-122">**[リダイレクト URI]** が`https://localhost:{PORT}/authentication/login-callback` であることを確認します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-122">Confirm the **Redirect URI** of `https://localhost:{PORT}/authentication/login-callback` is present.</span></span>
+1. <span data-ttu-id="6ef60-123">**[暗黙の付与]** で、 **[アクセス トークン]** と **[ID トークン]** のチェック ボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="6ef60-123">For **Implicit grant**, select the check boxes for **Access tokens** and **ID tokens**.</span></span>
+1. <span data-ttu-id="6ef60-124">アプリの残りの既定値は、このエクスペリエンスで使用可能です。</span><span class="sxs-lookup"><span data-stu-id="6ef60-124">The remaining defaults for the app are acceptable for this experience.</span></span>
+1. <span data-ttu-id="6ef60-125">**[保存]** ボタンを選択します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-125">Select the **Save** button.</span></span>
 
-<span data-ttu-id="c2052-126">空のフォルダーにアプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="c2052-126">Create the app in an empty folder.</span></span> <span data-ttu-id="c2052-127">次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンド シェルでこのコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="c2052-127">Replace the placeholders in the following command with the information recorded earlier and execute the command in a command shell:</span></span>
+<span data-ttu-id="6ef60-126">空のフォルダーにアプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-126">Create the app in an empty folder.</span></span> <span data-ttu-id="6ef60-127">次のコマンドのプレースホルダーを、前に記録した情報に置き換え、コマンド シェルでこのコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-127">Replace the placeholders in the following command with the information recorded earlier and execute the command in a command shell:</span></span>
 
 ```dotnetcli
 dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --tenant-id "{TENANT ID}"
 ```
 
-| <span data-ttu-id="c2052-128">プレースホルダー</span><span class="sxs-lookup"><span data-stu-id="c2052-128">Placeholder</span></span>   | <span data-ttu-id="c2052-129">Azure portal での名前</span><span class="sxs-lookup"><span data-stu-id="c2052-129">Azure portal name</span></span>       | <span data-ttu-id="c2052-130">例</span><span class="sxs-lookup"><span data-stu-id="c2052-130">Example</span></span>                                |
+| <span data-ttu-id="6ef60-128">プレースホルダー</span><span class="sxs-lookup"><span data-stu-id="6ef60-128">Placeholder</span></span>   | <span data-ttu-id="6ef60-129">Azure portal での名前</span><span class="sxs-lookup"><span data-stu-id="6ef60-129">Azure portal name</span></span>       | <span data-ttu-id="6ef60-130">例</span><span class="sxs-lookup"><span data-stu-id="6ef60-130">Example</span></span>                                |
 | ------------- | ----------------------- | -------------------------------------- |
 | `{APP NAME}`  | &mdash;                 | `BlazorSample`                         |
-| `{CLIENT ID}` | <span data-ttu-id="c2052-131">アプリケーション (クライアント) ID</span><span class="sxs-lookup"><span data-stu-id="c2052-131">Application (client) ID</span></span> | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{TENANT ID}` | <span data-ttu-id="c2052-132">ディレクトリ (テナント) ID</span><span class="sxs-lookup"><span data-stu-id="c2052-132">Directory (tenant) ID</span></span>   | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
+| `{CLIENT ID}` | <span data-ttu-id="6ef60-131">アプリケーション (クライアント) ID</span><span class="sxs-lookup"><span data-stu-id="6ef60-131">Application (client) ID</span></span> | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{TENANT ID}` | <span data-ttu-id="6ef60-132">ディレクトリ (テナント) ID</span><span class="sxs-lookup"><span data-stu-id="6ef60-132">Directory (tenant) ID</span></span>   | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
 
-<span data-ttu-id="c2052-133">`-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。</span><span class="sxs-lookup"><span data-stu-id="c2052-133">The output location specified with the `-o|--output` option creates a project folder if it doesn't exist and becomes part of the app's name.</span></span>
+<span data-ttu-id="6ef60-133">`-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。</span><span class="sxs-lookup"><span data-stu-id="6ef60-133">The output location specified with the `-o|--output` option creates a project folder if it doesn't exist and becomes part of the app's name.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="c2052-134">Azure portal では、アプリの **[認証]**  >  **[プラットフォーム構成]**  >  **[Web]**  >  **[リダイレクト URI]** は、既定の設定の Kestrel サーバーで実行されるアプリの場合、ポート 5001 に構成されます。</span><span class="sxs-lookup"><span data-stu-id="c2052-134">In the Azure portal, the app's **Authentication** > **Platform configurations** > **Web** > **Redirect URI** is configured for port 5001 for apps that run on the Kestrel server with default settings.</span></span>
+> <span data-ttu-id="6ef60-134">Azure portal では、アプリの **[認証]**  >  **[プラットフォーム構成]**  >  **[Web]**  >  **[リダイレクト URI]** は、既定の設定の Kestrel サーバーで実行されるアプリの場合、ポート 5001 に構成されます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-134">In the Azure portal, the app's **Authentication** > **Platform configurations** > **Web** > **Redirect URI** is configured for port 5001 for apps that run on the Kestrel server with default settings.</span></span>
 >
-> <span data-ttu-id="c2052-135">アプリがランダム IIS Express ポートで実行されている場合、アプリのポートは **[デバッグ]** パネルのアプリのプロパティで確認できます。</span><span class="sxs-lookup"><span data-stu-id="c2052-135">If the app is run on a random IIS Express port, the port for the app can be found in the app's properties in the **Debug** panel.</span></span>
+> <span data-ttu-id="6ef60-135">アプリがランダム IIS Express ポートで実行されている場合、アプリのポートは **[デバッグ]** パネルのアプリのプロパティで確認できます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-135">If the app is run on a random IIS Express port, the port for the app can be found in the app's properties in the **Debug** panel.</span></span>
 >
-> <span data-ttu-id="c2052-136">ポートがアプリの既知のポートで事前に構成されていない場合は、Azure portal でアプリの登録に戻り、正しいポートでリダイレクト URI を更新します。</span><span class="sxs-lookup"><span data-stu-id="c2052-136">If the port wasn't configured earlier with the app's known port, return to the app's registration in the Azure portal and update the redirect URI with the correct port.</span></span>
+> <span data-ttu-id="6ef60-136">ポートがアプリの既知のポートで事前に構成されていない場合は、Azure portal でアプリの登録に戻り、正しいポートでリダイレクト URI を更新します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-136">If the port wasn't configured earlier with the app's known port, return to the app's registration in the Azure portal and update the redirect URI with the correct port.</span></span>
 
-<span data-ttu-id="c2052-137">アプリを作成すると、次のことができるようになります。</span><span class="sxs-lookup"><span data-stu-id="c2052-137">After creating the app, you should be able to:</span></span>
+<span data-ttu-id="6ef60-137">アプリを作成すると、次のことができるようになります。</span><span class="sxs-lookup"><span data-stu-id="6ef60-137">After creating the app, you should be able to:</span></span>
 
-* <span data-ttu-id="c2052-138">AAD ユーザー アカウントを使用してアプリにログインする。</span><span class="sxs-lookup"><span data-stu-id="c2052-138">Log into the app using an AAD user account.</span></span>
-* <span data-ttu-id="c2052-139">Microsoft API のアクセス トークンを要求する。</span><span class="sxs-lookup"><span data-stu-id="c2052-139">Request access tokens for Microsoft APIs.</span></span> <span data-ttu-id="c2052-140">詳細については次を参照してください:</span><span class="sxs-lookup"><span data-stu-id="c2052-140">For more information, see:</span></span>
-  * [<span data-ttu-id="c2052-141">アクセス トークン スコープ</span><span class="sxs-lookup"><span data-stu-id="c2052-141">Access token scopes</span></span>](#access-token-scopes)
-  * <span data-ttu-id="c2052-142">[クイック スタート:Web API を公開するようにアプリケーションを構成する](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2052-142">[Quickstart: Configure an application to expose web APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).</span></span>
+* <span data-ttu-id="6ef60-138">AAD ユーザー アカウントを使用してアプリにログインする。</span><span class="sxs-lookup"><span data-stu-id="6ef60-138">Log into the app using an AAD user account.</span></span>
+* <span data-ttu-id="6ef60-139">Microsoft API のアクセス トークンを要求する。</span><span class="sxs-lookup"><span data-stu-id="6ef60-139">Request access tokens for Microsoft APIs.</span></span> <span data-ttu-id="6ef60-140">詳細については次を参照してください:</span><span class="sxs-lookup"><span data-stu-id="6ef60-140">For more information, see:</span></span>
+  * [<span data-ttu-id="6ef60-141">アクセス トークン スコープ</span><span class="sxs-lookup"><span data-stu-id="6ef60-141">Access token scopes</span></span>](#access-token-scopes)
+  * <span data-ttu-id="6ef60-142">[クイック スタート:Web API を公開するようにアプリケーションを構成する](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="6ef60-142">[Quickstart: Configure an application to expose web APIs](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).</span></span>
 
-## <a name="authentication-package"></a><span data-ttu-id="c2052-143">認証パッケージ</span><span class="sxs-lookup"><span data-stu-id="c2052-143">Authentication package</span></span>
+## <a name="authentication-package"></a><span data-ttu-id="6ef60-143">認証パッケージ</span><span class="sxs-lookup"><span data-stu-id="6ef60-143">Authentication package</span></span>
 
-<span data-ttu-id="c2052-144">職場または学校アカウント (`SingleOrg`) を使用するようにアプリを作成すると、アプリは [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) ([`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)) のパッケージ参照を自動的に受け取ります。</span><span class="sxs-lookup"><span data-stu-id="c2052-144">When an app is created to use Work or School Accounts (`SingleOrg`), the app automatically receives a package reference for the [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) ([`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)).</span></span> <span data-ttu-id="c2052-145">このパッケージには、アプリでユーザーを認証し、保護された API を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。</span><span class="sxs-lookup"><span data-stu-id="c2052-145">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
+<span data-ttu-id="6ef60-144">職場または学校アカウント (`SingleOrg`) を使用するようにアプリを作成すると、アプリは [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) ([`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)) のパッケージ参照を自動的に受け取ります。</span><span class="sxs-lookup"><span data-stu-id="6ef60-144">When an app is created to use Work or School Accounts (`SingleOrg`), the app automatically receives a package reference for the [Microsoft Authentication Library](/azure/active-directory/develop/msal-overview) ([`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/)).</span></span> <span data-ttu-id="6ef60-145">このパッケージには、アプリでユーザーを認証し、保護された API を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。</span><span class="sxs-lookup"><span data-stu-id="6ef60-145">The package provides a set of primitives that help the app authenticate users and obtain tokens to call protected APIs.</span></span>
 
-<span data-ttu-id="c2052-146">アプリに認証を追加する場合は、アプリのプロジェクト ファイルにパッケージを手動で追加します。</span><span class="sxs-lookup"><span data-stu-id="c2052-146">If adding authentication to an app, manually add the package to the app's project file:</span></span>
+<span data-ttu-id="6ef60-146">アプリに認証を追加する場合は、アプリのプロジェクト ファイルにパッケージを手動で追加します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-146">If adding authentication to an app, manually add the package to the app's project file:</span></span>
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
   Version="3.2.0" />
 ```
 
-<span data-ttu-id="c2052-147">[`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) パッケージによって、[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) パッケージがアプリに推移的に追加されます。</span><span class="sxs-lookup"><span data-stu-id="c2052-147">The [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) package transitively adds the [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) package to the app.</span></span>
+<span data-ttu-id="6ef60-147">[`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) パッケージによって、[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) パッケージがアプリに推移的に追加されます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-147">The [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) package transitively adds the [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) package to the app.</span></span>
 
-## <a name="authentication-service-support"></a><span data-ttu-id="c2052-148">認証サービスのサポート</span><span class="sxs-lookup"><span data-stu-id="c2052-148">Authentication service support</span></span>
+## <a name="authentication-service-support"></a><span data-ttu-id="6ef60-148">認証サービスのサポート</span><span class="sxs-lookup"><span data-stu-id="6ef60-148">Authentication service support</span></span>
 
-<span data-ttu-id="c2052-149">ユーザーの認証に対するサポートは、[`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) パッケージによって提供される <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> 拡張メソッドを使用して、サービス コンテナーに登録されます。</span><span class="sxs-lookup"><span data-stu-id="c2052-149">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> extension method provided by the [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) package.</span></span> <span data-ttu-id="c2052-150">このメソッドでは、アプリが IdentityID プロバイダー (IP) とやり取りするために必要なサービスが設定されます。</span><span class="sxs-lookup"><span data-stu-id="c2052-150">This method sets up the services required for the app to interact with the Identity Provider (IP).</span></span>
+<span data-ttu-id="6ef60-149">ユーザーの認証に対するサポートは、[`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) パッケージによって提供される <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> 拡張メソッドを使用して、サービス コンテナーに登録されます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-149">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> extension method provided by the [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal/) package.</span></span> <span data-ttu-id="6ef60-150">このメソッドでは、アプリが IdentityID プロバイダー (IP) とやり取りするために必要なサービスが設定されます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-150">This method sets up the services required for the app to interact with the Identity Provider (IP).</span></span>
 
-<span data-ttu-id="c2052-151">`Program.cs`:</span><span class="sxs-lookup"><span data-stu-id="c2052-151">`Program.cs`:</span></span>
+<span data-ttu-id="6ef60-151">`Program.cs`:</span><span class="sxs-lookup"><span data-stu-id="6ef60-151">`Program.cs`:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -104,9 +106,9 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-<span data-ttu-id="c2052-152"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> メソッドでは、アプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。</span><span class="sxs-lookup"><span data-stu-id="c2052-152">The <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="c2052-153">アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。</span><span class="sxs-lookup"><span data-stu-id="c2052-153">The values required for configuring the app can be obtained from the AAD configuration when you register the app.</span></span>
+<span data-ttu-id="6ef60-152"><xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> メソッドでは、アプリを認証するために必要なパラメーターを構成するためのコールバックを受け入れます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-152">The <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> method accepts a callback to configure the parameters required to authenticate an app.</span></span> <span data-ttu-id="6ef60-153">アプリを構成するために必要な値は、アプリを登録するときに AAD 構成から取得できます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-153">The values required for configuring the app can be obtained from the AAD configuration when you register the app.</span></span>
 
-<span data-ttu-id="c2052-154">構成は `wwwroot/appsettings.json` ファイルによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="c2052-154">Configuration is supplied by the `wwwroot/appsettings.json` file:</span></span>
+<span data-ttu-id="6ef60-154">構成は `wwwroot/appsettings.json` ファイルによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="6ef60-154">Configuration is supplied by the `wwwroot/appsettings.json` file:</span></span>
 
 ```json
 {
@@ -118,7 +120,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="c2052-155">例:</span><span class="sxs-lookup"><span data-stu-id="c2052-155">Example:</span></span>
+<span data-ttu-id="6ef60-155">例:</span><span class="sxs-lookup"><span data-stu-id="6ef60-155">Example:</span></span>
 
 ```json
 {
@@ -130,9 +132,9 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-## <a name="access-token-scopes"></a><span data-ttu-id="c2052-156">アクセス トークン スコープ</span><span class="sxs-lookup"><span data-stu-id="c2052-156">Access token scopes</span></span>
+## <a name="access-token-scopes"></a><span data-ttu-id="6ef60-156">アクセス トークン スコープ</span><span class="sxs-lookup"><span data-stu-id="6ef60-156">Access token scopes</span></span>
 
-<span data-ttu-id="c2052-157">Blazor WebAssembly テンプレートでは、セキュリティで保護された API のアクセス トークンを要求するようにアプリが自動的に構成されるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="c2052-157">The Blazor WebAssembly template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="c2052-158">サインイン フローの一部としてアクセス トークンをプロビジョニングするには、<xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions> の既定のアクセス トークン スコープにスコープを追加します。</span><span class="sxs-lookup"><span data-stu-id="c2052-158">To provision an access token as part of the sign-in flow, add the scope to the default access token scopes of the <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions>:</span></span>
+<span data-ttu-id="6ef60-157">Blazor WebAssembly テンプレートでは、セキュリティで保護された API のアクセス トークンを要求するようにアプリが自動的に構成されるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="6ef60-157">The Blazor WebAssembly template doesn't automatically configure the app to request an access token for a secure API.</span></span> <span data-ttu-id="6ef60-158">サインイン フローの一部としてアクセス トークンをプロビジョニングするには、<xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions> の既定のアクセス トークン スコープにスコープを追加します。</span><span class="sxs-lookup"><span data-stu-id="6ef60-158">To provision an access token as part of the sign-in flow, add the scope to the default access token scopes of the <xref:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions>:</span></span>
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -144,41 +146,41 @@ builder.Services.AddMsalAuthentication(options =>
 
 [!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
-<span data-ttu-id="c2052-159">詳細については、"*その他のシナリオ*" に関する記事の次のセクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2052-159">For more information, see the following sections of the *Additional scenarios* article:</span></span>
+<span data-ttu-id="6ef60-159">詳細については、"*その他のシナリオ*" に関する記事の次のセクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="6ef60-159">For more information, see the following sections of the *Additional scenarios* article:</span></span>
 
-* [<span data-ttu-id="c2052-160">追加のアクセス トークンを要求する</span><span class="sxs-lookup"><span data-stu-id="c2052-160">Request additional access tokens</span></span>](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
-* [<span data-ttu-id="c2052-161">送信要求にトークンを添付する</span><span class="sxs-lookup"><span data-stu-id="c2052-161">Attach tokens to outgoing requests</span></span>](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
+* [<span data-ttu-id="6ef60-160">追加のアクセス トークンを要求する</span><span class="sxs-lookup"><span data-stu-id="6ef60-160">Request additional access tokens</span></span>](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
+* [<span data-ttu-id="6ef60-161">送信要求にトークンを添付する</span><span class="sxs-lookup"><span data-stu-id="6ef60-161">Attach tokens to outgoing requests</span></span>](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
-## <a name="imports-file"></a><span data-ttu-id="c2052-162">インポート ファイル</span><span class="sxs-lookup"><span data-stu-id="c2052-162">Imports file</span></span>
+## <a name="imports-file"></a><span data-ttu-id="6ef60-162">インポート ファイル</span><span class="sxs-lookup"><span data-stu-id="6ef60-162">Imports file</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
-## <a name="index-page"></a><span data-ttu-id="c2052-163">インデックス ページ</span><span class="sxs-lookup"><span data-stu-id="c2052-163">Index page</span></span>
+## <a name="index-page"></a><span data-ttu-id="6ef60-163">インデックス ページ</span><span class="sxs-lookup"><span data-stu-id="6ef60-163">Index page</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
-## <a name="app-component"></a><span data-ttu-id="c2052-164">アプリ コンポーネント</span><span class="sxs-lookup"><span data-stu-id="c2052-164">App component</span></span>
+## <a name="app-component"></a><span data-ttu-id="6ef60-164">アプリ コンポーネント</span><span class="sxs-lookup"><span data-stu-id="6ef60-164">App component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
-## <a name="redirecttologin-component"></a><span data-ttu-id="c2052-165">RedirectToLogin コンポーネント</span><span class="sxs-lookup"><span data-stu-id="c2052-165">RedirectToLogin component</span></span>
+## <a name="redirecttologin-component"></a><span data-ttu-id="6ef60-165">RedirectToLogin コンポーネント</span><span class="sxs-lookup"><span data-stu-id="6ef60-165">RedirectToLogin component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
 
-## <a name="logindisplay-component"></a><span data-ttu-id="c2052-166">LoginDisplay コンポーネント</span><span class="sxs-lookup"><span data-stu-id="c2052-166">LoginDisplay component</span></span>
+## <a name="logindisplay-component"></a><span data-ttu-id="6ef60-166">LoginDisplay コンポーネント</span><span class="sxs-lookup"><span data-stu-id="6ef60-166">LoginDisplay component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
 
-## <a name="authentication-component"></a><span data-ttu-id="c2052-167">認証コンポーネント</span><span class="sxs-lookup"><span data-stu-id="c2052-167">Authentication component</span></span>
+## <a name="authentication-component"></a><span data-ttu-id="6ef60-167">認証コンポーネント</span><span class="sxs-lookup"><span data-stu-id="6ef60-167">Authentication component</span></span>
 
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a><span data-ttu-id="c2052-168">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="c2052-168">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="6ef60-168">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="6ef60-168">Additional resources</span></span>
 
 * <xref:blazor/security/webassembly/additional-scenarios>
-* [<span data-ttu-id="c2052-169">セキュリティで保護された既定のクライアントを使用する、アプリ内の認証または承認されていない Web API 要求</span><span class="sxs-lookup"><span data-stu-id="c2052-169">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
+* [<span data-ttu-id="6ef60-169">セキュリティで保護された既定のクライアントを使用する、アプリ内の認証または承認されていない Web API 要求</span><span class="sxs-lookup"><span data-stu-id="6ef60-169">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>](xref:blazor/security/webassembly/additional-scenarios#unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client)
 * <xref:blazor/security/webassembly/aad-groups-roles>
 * <xref:security/authentication/azure-active-directory/index>
-* [<span data-ttu-id="c2052-170">Microsoft ID プラットフォームのドキュメント</span><span class="sxs-lookup"><span data-stu-id="c2052-170">Microsoft identity platform documentation</span></span>](/azure/active-directory/develop/)
+* [<span data-ttu-id="6ef60-170">Microsoft ID プラットフォームのドキュメント</span><span class="sxs-lookup"><span data-stu-id="6ef60-170">Microsoft identity platform documentation</span></span>](/azure/active-directory/develop/)
