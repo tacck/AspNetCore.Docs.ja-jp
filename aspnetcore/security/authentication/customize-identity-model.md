@@ -1,5 +1,5 @@
 ---
-title: IdentityASP.NET Core でのモデルのカスタマイズ
+title: Identity ASP.NET Core でのモデルのカスタマイズ
 author: ajcvickers
 description: この記事では、ASP.NET Core の基になる Entity Framework Core データモデルをカスタマイズする方法について説明し Identity ます。
 ms.author: avickers
@@ -15,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 4e6d91de013755f1ae998e36481f4c3b659270ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022005"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504672"
 ---
-# <a name="no-locidentity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core でのモデルのカスタマイズ
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core でのモデルのカスタマイズ
 
 [Arthur ヴィッカース](https://github.com/ajcvickers)
 
-ASP.NET Core Identity は ASP.NET Core アプリでユーザーアカウントを管理および格納するためのフレームワークを提供します。 Identityは、認証メカニズムとして**個々のユーザーアカウント**が選択されたときにプロジェクトに追加されます。 既定では、は Identity Entity Framework (EF) コアデータモデルを使用します。 この記事では、モデルをカスタマイズする方法について説明し Identity ます。
+ASP.NET Core Identity は ASP.NET Core アプリでユーザーアカウントを管理および格納するためのフレームワークを提供します。 Identity は、認証メカニズムとして **個々のユーザーアカウント** が選択されたときにプロジェクトに追加されます。 既定では、は Identity Entity Framework (EF) コアデータモデルを使用します。 この記事では、モデルをカスタマイズする方法について説明し Identity ます。
 
-## <a name="no-locidentity-and-ef-core-migrations"></a>Identityおよび EF Core 移行
+## <a name="no-locidentity-and-ef-core-migrations"></a>Identity および EF Core 移行
 
-モデルを調べる前に、 Identity [EF Core の移行](/ef/core/managing-schemas/migrations/)を使用してデータベースを作成および更新する方法を理解しておくと役に立ちます。 最上位レベルでは、プロセスは次のようになります。
+モデルを調べる前に、 Identity [EF Core の移行](/ef/core/managing-schemas/migrations/) を使用してデータベースを作成および更新する方法を理解しておくと役に立ちます。 最上位レベルでは、プロセスは次のようになります。
 
 1. [コードでデータモデル](/ef/core/modeling/)を定義または更新します。
 1. このモデルをデータベースに適用できる変更に変換するには、移行を追加します。
@@ -40,9 +40,9 @@ ASP.NET Core Identity は ASP.NET Core アプリでユーザーアカウント�
 
 移行を追加して適用するには、次のいずれかの方法を使用します。
 
-* Visual Studio を使用している場合は、[**パッケージマネージャーコンソール**(PMC)] ウィンドウ。 詳細については、「 [EF CORE PMC ツール](/ef/core/miscellaneous/cli/powershell)」を参照してください。
+* Visual Studio を使用している場合は、[ **パッケージマネージャーコンソール** (PMC)] ウィンドウ。 詳細については、「 [EF CORE PMC ツール](/ef/core/miscellaneous/cli/powershell)」を参照してください。
 * コマンドラインを使用している場合は、.NET Core CLI ます。 詳細については、「 [EF Core .net コマンドラインツール](/ef/core/miscellaneous/cli/dotnet)」を参照してください。
-* アプリの実行時に、エラーページの [**移行の適用**] ボタンをクリックします。
+* アプリの実行時に、エラーページの [ **移行の適用** ] ボタンをクリックします。
 
 ASP.NET Core には、開発時エラーページハンドラーがあります。 ハンドラーは、アプリの実行時に移行を適用できます。 実稼働アプリでは、通常、移行から SQL スクリプトを生成し、制御されたアプリとデータベースの配置の一部としてデータベースの変更をデプロイします。
 
@@ -50,7 +50,7 @@ ASP.NET Core には、開発時エラーページハンドラーがあります�
 
 * `Update-Database`PMC でを実行します。
 * `dotnet ef database update`コマンドシェルでを実行します。
-* アプリの実行時に、エラーページの [**移行の適用**] ボタンをクリックします。
+* アプリの実行時に、エラーページの [ **移行の適用** ] ボタンをクリックします。
 
 モデルが変更されたときに、上記の手順を繰り返します。
 
@@ -207,7 +207,7 @@ builder.Entity<TUserRole>(b =>
 
 ### <a name="model-generic-types"></a>モデルのジェネリック型
 
-Identity上に示した各エンティティ型に対して、既定の[共通言語ランタイム](/dotnet/standard/glossary#clr)(CLR) 型を定義します。 これらの型のすべてにプレフィックスが付いてい *Identity* ます。
+Identity 上に示した各エンティティ型に対して、既定の [共通言語ランタイム](/dotnet/standard/glossary#clr) (CLR) 型を定義します。 これらの型のすべてにプレフィックスが付いてい *Identity* ます。
 
 * `IdentityUser`
 * `IdentityRole`
@@ -219,7 +219,7 @@ Identity上に示した各エンティティ型に対して、既定の[共通�
 
 これらの型を直接使用するのではなく、アプリケーション独自の型の基底クラスとして型を使用できます。 `DbContext`によって定義さ Identity れるクラスはジェネリックであるため、モデル内の1つ以上のエンティティ型に異なる CLR 型を使用できます。 これらのジェネリック型を使用すると、 `User` 主キー (PK) データ型を変更することもできます。
 
-ロールのサポートを使用する場合は Identity 、 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> クラスを使用する必要があります。 例:
+ロールのサポートを使用する場合は Identity 、 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> クラスを使用する必要があります。 次に例を示します。
 
 ```csharp
 // Uses all the built-in Identity types
@@ -299,7 +299,7 @@ public abstract class IdentityUserContext<
 
 ## <a name="customize-the-model"></a>モデルをカスタマイズする
 
-モデルのカスタマイズの開始点は、適切なコンテキスト型から派生することです。 「[モデルのジェネリック型](#model-generic-types)」を参照してください。 このコンテキストの種類は通常と呼ばれ、 `ApplicationDbContext` ASP.NET Core テンプレートによって作成されます。
+モデルのカスタマイズの開始点は、適切なコンテキスト型から派生することです。 「 [モデルのジェネリック型](#model-generic-types) 」を参照してください。 このコンテキストの種類は通常と呼ばれ、 `ApplicationDbContext` ASP.NET Core テンプレートによって作成されます。
 
 このコンテキストは、次の2つの方法でモデルを構成するために使用されます。
 
@@ -320,7 +320,7 @@ dotnet ef migrations add CreateIdentitySchema
 dotnet ef database update
  -->
 
-[カスタムユーザーデータ](xref:security/authentication/add-user-data)は、から継承することによってサポートされ `IdentityUser` ます。 この型には、次のような名前が付いてい `ApplicationUser` ます。
+[カスタムユーザーデータ](xref:security/authentication/add-user-data) は、から継承することによってサポートされ `IdentityUser` ます。 この型には、次のような名前が付いてい `ApplicationUser` ます。
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -367,8 +367,8 @@ services.AddIdentity<ApplicationUser>()
 
 ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については次を参照してください:
 
-* [スキャフォールディングIdentity](xref:security/authentication/scaffold-identity)
-* [カスタムユーザーデータを追加、ダウンロード、および削除するIdentity](xref:security/authentication/add-user-data)
+* [スキャフォールディング Identity](xref:security/authentication/scaffold-identity)
+* [カスタムユーザーデータを追加、ダウンロード、および削除する Identity](xref:security/authentication/add-user-data)
 
 ### <a name="change-the-primary-key-type"></a>主キーの種類を変更する
 
@@ -403,7 +403,7 @@ PK の種類を変更するには、次の手順に従います。
 
     ::: moniker-end
 
-    `Startup.ConfigureServices`汎用ユーザーを使用するには、次のように更新する必要があります。
+    `Startup.ConfigureServices` 汎用ユーザーを使用するには、次のように更新する必要があります。
 
     ::: moniker range=">= aspnetcore-2.1"
 
@@ -434,7 +434,7 @@ PK の種類を変更するには、次の手順に従います。
 
     ::: moniker-end
 
-4. カスタムクラスが使用されている場合は `ApplicationUser` 、継承元のクラスを更新し `IdentityUser` ます。 例:
+4. カスタムクラスが使用されている場合は `ApplicationUser` 、継承元のクラスを更新し `IdentityUser` ます。 次に例を示します。
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -472,7 +472,7 @@ PK の種類を変更するには、次の手順に従います。
             .AddDefaultTokenProviders();
     ```
 
-    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)オブジェクトを分析することによって推論されます。
+    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
     ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
 
@@ -486,7 +486,7 @@ PK の種類を変更するには、次の手順に従います。
             .AddDefaultTokenProviders();
     ```
 
-    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)オブジェクトを分析することによって推論されます。
+    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
     ::: moniker-end
 
@@ -502,7 +502,7 @@ PK の種類を変更するには、次の手順に従います。
 
     ::: moniker-end
 
-5. カスタムクラスが使用されている場合は `ApplicationRole` 、継承元のクラスを更新し `IdentityRole<TKey>` ます。 例:
+5. カスタムクラスが使用されている場合は `ApplicationRole` 、継承元のクラスを更新し `IdentityRole<TKey>` ます。 次に例を示します。
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -516,7 +516,7 @@ PK の種類を変更するには、次の手順に従います。
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
-    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)オブジェクトを分析することによって推論されます。
+    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
     ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
 
@@ -530,7 +530,7 @@ PK の種類を変更するには、次の手順に従います。
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)オブジェクトを分析することによって推論されます。
+    主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
     ::: moniker-end
 
@@ -561,7 +561,7 @@ builder.Entity<TUser>(b =>
 });
 ```
 
-このリレーションシップの FK は、プロパティとして指定され `UserClaim.UserId` ます。 `HasMany`および `WithOne` は、ナビゲーションプロパティを使用せずにリレーションシップを作成するための引数なしで呼び出されます。
+このリレーションシップの FK は、プロパティとして指定され `UserClaim.UserId` ます。 `HasMany` および `WithOne` は、ナビゲーションプロパティを使用せずにリレーションシップを作成するための引数なしで呼び出されます。
 
 `ApplicationUser`関連するをユーザーから参照できるようにするナビゲーションプロパティをに追加し `UserClaims` ます。
 
@@ -572,7 +572,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-のは、 `TKey` `IdentityUserClaim<TKey>` ユーザーの PK に対して指定された型です。 この場合、 `TKey` は `string` 既定値が使用されているためです。 エンティティ型の PK 型では**ありません** `UserClaim` 。
+のは、 `TKey` `IdentityUserClaim<TKey>` ユーザーの PK に対して指定された型です。 この場合、 `TKey` は `string` 既定値が使用されているためです。 エンティティ型の PK 型では **ありません** `UserClaim` 。
 
 ナビゲーションプロパティが存在するようになったので、次のように構成する必要があり `OnModelCreating` ます。
 
@@ -744,8 +744,8 @@ public class ApplicationDbContext
 メモ:
 
 * この例には、 `UserRole` ユーザーからロールへの多対多リレーションシップを移動するために必要な join エンティティも含まれています。
-* 型ではなく型が使用されていることを反映するように、ナビゲーションプロパティの型を変更することを忘れないで `ApplicationXxx` `IdentityXxx` ください。
-* ジェネリック定義でを使用することを忘れない `ApplicationXxx` で `ApplicationContext` ください。
+* 型ではなく型が使用されていることを反映するように、ナビゲーションプロパティの型を変更することを忘れないで `Application{...}` `Identity{...}` ください。
+* ジェネリック定義でを使用することを忘れない `Application{...}` で `ApplicationContext` ください。
 
 ### <a name="add-all-navigation-properties"></a>すべてのナビゲーションプロパティの追加
 
@@ -926,7 +926,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-一部の種類のデータベース列は、特定の*ファセット*を使用して構成でき `string` ます (許容される最大長など)。 次の例では、モデルのいくつかのプロパティの列の最大長を設定し `string` ます。
+一部の種類のデータベース列は、特定の *ファセット* を使用して構成でき `string` ます (許容される最大長など)。 次の例では、モデルのいくつかのプロパティの列の最大長を設定し `string` ます。
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -951,7 +951,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>別のスキーマにマップする
 
-スキーマは、データベースプロバイダーによって動作が異なります。 SQL Server の場合、既定では*dbo*スキーマのすべてのテーブルが作成されます。 テーブルは、別のスキーマで作成できます。 例:
+スキーマは、データベースプロバイダーによって動作が異なります。 SQL Server の場合、既定では *dbo* スキーマのすべてのテーブルが作成されます。 テーブルは、別のスキーマで作成できます。 次に例を示します。
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -987,7 +987,7 @@ services
 
 エンティティ型へのナビゲーションプロパティの追加に関するガイダンスについては、前の例を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/authentication/scaffold-identity>
 

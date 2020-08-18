@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: ec1d83853b1596824914328d546c6c68cce3bfe7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 36994c9e579dc365de543c9b27bc8b7bfd34c81c
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012554"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504776"
 ---
 # <a name="aspnet-core-no-locsignalr-java-client"></a>SignalRJava クライアントの ASP.NET Core
 
@@ -38,13 +38,13 @@ Java クライアントを使用すると、 SignalR Android アプリを含む 
 
 *Signalr*の JAR ファイルを使用すると、クライアントはハブに接続でき SignalR ます。 最新の JAR ファイルのバージョン番号を確認するには、 [Maven の検索結果](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr)を参照してください。
 
-Gradle を使用する場合は、 `dependencies` *Gradle*ファイルのセクションに次の行を追加します。
+Gradle を使用する場合は、 `dependencies` *Gradle* ファイルのセクションに次の行を追加します。
 
 ```gradle
 implementation 'com.microsoft.signalr:signalr:1.0.0'
 ```
 
-Maven を使用する場合は、 `<dependencies>` *pom.xml*ファイルの要素内に次の行を追加します。
+Maven を使用する場合は、 `<dependencies>` *pom.xml* ファイルの要素内に次の行を追加します。
 
 [!code-xml[pom.xml dependency element](java-client/sample/pom.xml?name=snippet_dependencyElement)]
 
@@ -61,7 +61,7 @@ Maven を使用する場合は、 `<dependencies>` *pom.xml*ファイルの要�
 [!code-java[send method](java-client/sample/src/main/java/Chat.java?range=28)]
 
 > [!NOTE]
-> SignalR*サーバーレスモード*で Azure サービスを使用している場合は、クライアントからハブメソッドを呼び出すことはできません。 詳細については、 [ SignalR サービスのドキュメント](/azure/azure-signalr/signalr-concept-serverless-development-config)を参照してください。
+> クライアントからのハブメソッドの呼び出しは、Azure SignalR サービスを *既定* のモードで使用している場合にのみサポートされます。 詳細については、「 [よく寄せられる質問 (azure Signalr GitHub リポジトリ)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose)」を参照してください。
 
 ## <a name="call-client-methods-from-hub"></a>ハブからクライアントメソッドを呼び出す
 
@@ -92,7 +92,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 クライアント機能の Android SDK 互換性については SignalR 、ターゲット Android SDK バージョンを指定するときに、次の項目を考慮してください。
 
 * SignalRJava クライアントは、ANDROID API レベル16以降で実行されます。
-* Azure サービスでは SignalR TLS 1.2 が必要であり、SHA-1 ベース[の SignalR ](/azure/azure-signalr/signalr-overview)暗号スイートはサポートされていないため、azure サービスを介して接続するには Android API レベル20以降が必要になります。 Android では、API レベル20で[SHA-256 (およびそれ以降) の暗号スイートのサポートが追加されました](https://developer.android.com/reference/javax/net/ssl/SSLSocket)。
+* Azure サービスでは SignalR TLS 1.2 が必要であり、SHA-1 ベース [の SignalR ](/azure/azure-signalr/signalr-overview) 暗号スイートはサポートされていないため、azure サービスを介して接続するには Android API レベル20以降が必要になります。 Android では、API レベル20で [SHA-256 (およびそれ以降) の暗号スイートのサポートが追加されました](https://developer.android.com/reference/javax/net/ssl/SSLSocket) 。
 
 ## <a name="configure-bearer-token-authentication"></a>ベアラートークン認証を構成する
 
@@ -123,7 +123,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Java API リファレンス](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
 * <xref:signalr/hubs>
