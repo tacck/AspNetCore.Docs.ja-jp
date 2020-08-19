@@ -1156,7 +1156,7 @@
       uid: security/anti-request-forgery
     - name: オープン リダイレクト攻撃の防止
       uid: security/preventing-open-redirects
-    - name: クロスサイト スクリプティングの防止
+    - name: クロスサイト スクリプティング (XSS) の防止
       uid: security/cross-site-scripting
     - name: クロスオリジン要求 (CORS) の有効化
       uid: security/cors
