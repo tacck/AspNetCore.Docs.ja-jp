@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: d80bce204b467d436a3580933718147bc3fbe75c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bc28eb3096e88455347f68ca381c9a280d5a153e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022486"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633657"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>ASP.NET Core スケールアウトのために Redis バックプレーンを設定する SignalR
 
 [Andrew](https://twitter.com/anurse)、 [Brady](https://twitter.com/bradygaster)、および[Tom Dykstra](https://github.com/tdykstra)によって、
 
-この記事では、 SignalR ASP.NET Core アプリをスケールアウトするために使用する[Redis](https://redis.io/)サーバーの設定の具体的な側面について説明 SignalR します。
+この記事では、 SignalR ASP.NET Core アプリをスケールアウトするために使用する [Redis](https://redis.io/) サーバーの設定の具体的な側面について説明 SignalR します。
 
 ## <a name="set-up-a-redis-backplane"></a>Redis バックプレーンを設定する
 
@@ -54,7 +55,7 @@ ms.locfileid: "88022486"
 
 * 必要に応じてオプションを構成します。
  
-  ほとんどのオプションは、接続文字列または[configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options)オブジェクトで設定できます。 で指定されたオプション `ConfigurationOptions` は、接続文字列で設定されたオプションよりも優先されます。
+  ほとんどのオプションは、接続文字列または [configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) オブジェクトで設定できます。 で指定されたオプション `ConfigurationOptions` は、接続文字列で設定されたオプションよりも優先されます。
 
   次の例は、オブジェクトのオプションを設定する方法を示して `ConfigurationOptions` います。 この例では、次の手順で説明するように、複数のアプリが同じ Redis インスタンスを共有できるように、チャネルプレフィックスを追加します。
 
@@ -73,8 +74,8 @@ ms.locfileid: "88022486"
 
 * アプリで、 SignalR 次のいずれかの NuGet パッケージをインストールします。
 
-  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`-StackExchange に依存します。 Redis 2. X.X. これは ASP.NET Core 2.2 以降で推奨されるパッケージです。
-  * `Microsoft.AspNetCore.SignalR.Redis`-StackExchange に依存します。 Redis 1. X.X. このパッケージは ASP.NET Core 3.0 以降には含まれていません。
+  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis` -StackExchange に依存します。 Redis 2. X.X. これは ASP.NET Core 2.2 以降で推奨されるパッケージです。
+  * `Microsoft.AspNetCore.SignalR.Redis` -StackExchange に依存します。 Redis 1. X.X. このパッケージは ASP.NET Core 3.0 以降には含まれていません。
 
 * メソッドで `Startup.ConfigureServices` 、次の <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> ように呼び出します。
 
@@ -86,7 +87,7 @@ ms.locfileid: "88022486"
 
 * 必要に応じてオプションを構成します。
  
-  ほとんどのオプションは、接続文字列または[configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options)オブジェクトで設定できます。 で指定されたオプション `ConfigurationOptions` は、接続文字列で設定されたオプションよりも優先されます。
+  ほとんどのオプションは、接続文字列または [configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) オブジェクトで設定できます。 で指定されたオプション `ConfigurationOptions` は、接続文字列で設定されたオプションよりも優先されます。
 
   次の例は、オブジェクトのオプションを設定する方法を示して `ConfigurationOptions` います。 この例では、次の手順で説明するように、複数のアプリが同じ Redis インスタンスを共有できるように、チャネルプレフィックスを追加します。
 
@@ -119,7 +120,7 @@ ms.locfileid: "88022486"
   
 * 必要に応じてオプションを構成します。
  
-  ほとんどのオプションは、接続文字列または[configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options)オブジェクトで設定できます。 で指定されたオプション `ConfigurationOptions` は、接続文字列で設定されたオプションよりも優先されます。
+  ほとんどのオプションは、接続文字列または [configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) オブジェクトで設定できます。 で指定されたオプション `ConfigurationOptions` は、接続文字列で設定されたオプションよりも優先されます。
 
   次の例は、オブジェクトのオプションを設定する方法を示して `ConfigurationOptions` います。 この例では、次の手順で説明するように、複数のアプリが同じ Redis インスタンスを共有できるように、チャネルプレフィックスを追加します。
 
@@ -155,9 +156,9 @@ Redis サーバーがダウンすると、は SignalR メッセージが配信�
 * *ハブメソッド ' MethodName ' を呼び出すことができませんでした*
 * *Redis への接続に失敗しました*
 
-SignalRは、サーバーがバックアップされたときにメッセージを送信するようにメッセージをバッファリングしません。 Redis サーバーが停止している間に送信されたメッセージはすべて失われます。
+SignalR は、サーバーがバックアップされたときにメッセージを送信するようにメッセージをバッファリングしません。 Redis サーバーが停止している間に送信されたメッセージはすべて失われます。
 
-SignalRRedis サーバーが再び使用可能になったときに、自動的に再接続します。
+SignalR Redis サーバーが再び使用可能になったときに、自動的に再接続します。
 
 ### <a name="custom-behavior-for-connection-failures"></a>接続エラーのカスタム動作
 
@@ -230,7 +231,7 @@ services.AddSignalR()
 
 ## <a name="redis-clustering"></a>Redis クラスタリング
 
-[Redis クラスタリング](https://redis.io/topics/cluster-spec)は、複数の redis サーバーを使用して高可用性を実現するための方法です。 クラスタリングは正式にはサポートされていませんが、動作する可能性があります。
+[Redis クラスタリング](https://redis.io/topics/cluster-spec) は、複数の redis サーバーを使用して高可用性を実現するための方法です。 クラスタリングは正式にはサポートされていませんが、動作する可能性があります。
 
 ## <a name="next-steps"></a>次のステップ
 

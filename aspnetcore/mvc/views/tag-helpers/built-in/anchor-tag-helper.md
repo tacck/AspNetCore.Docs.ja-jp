@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 25f1716b5c80492edb72bc9555954c9c93c02a49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcb58e2e0bfc6598edeb8c7f79986c3faf84e316
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018767"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633930"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core のアンカー タグ ヘルパー
 
@@ -185,7 +186,7 @@ MVC ビューは、次のように、アクションによって提供される�
 
 #### <a name="usage-in-no-locrazor-pages"></a>使用 ( Razor ページで)
 
-Razorページ領域は ASP.NET Core 2.1 以降でサポートされています。
+Razor ページ領域は ASP.NET Core 2.1 以降でサポートされています。
 
 次のディレクトリ階層があるとします。
 
@@ -199,7 +200,7 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
         * *Index.cshtml.cs*
   * **ページ**
 
-[*セッション*領域の*インデックス*] ページを参照するマークアップ Razor は次のとおりです。
+[ *セッション* 領域の *インデックス*] ページを参照するマークアップ Razor は次のとおりです。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -251,7 +252,7 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
 
 ### <a name="asp-protocol"></a>asp-protocol
 
-[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 属性は URL に (`https` などの) プロトコルを指定するためにあります。 例:
+[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 属性は URL に (`https` などの) プロトコルを指定するためにあります。 次に例を示します。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -265,7 +266,7 @@ Razorページ領域は ASP.NET Core 2.1 以降でサポートされています
 
 ### <a name="asp-host"></a>asp-host
 
-[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 属性は URL のホスト名を指定するためにあります。 例:
+[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 属性は URL のホスト名を指定するためにあります。 次に例を示します。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 

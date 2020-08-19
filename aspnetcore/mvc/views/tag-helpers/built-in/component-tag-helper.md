@@ -6,6 +6,7 @@ description: ASP.NET Core コンポーネントタグヘルパーを使用して
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 09291b537e35d00df6f8006aaccdf4db12acfaea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1a0422da6bd48049cac73debe7d335da91e311be
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018690"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633917"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core のコンポーネントタグヘルパー
 
@@ -31,7 +32,7 @@ ms.locfileid: "88018690"
 
 ## <a name="prerequisites"></a>前提条件
 
-記事の「*ページとビューでコンポーネントを使用するためにアプリを準備する*」セクションのガイダンスに従って <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> ください。
+記事の「 *ページとビューでコンポーネントを使用するためにアプリを準備する* 」セクションのガイダンスに従って <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> ください。
 
 ## <a name="component-tag-helper"></a>コンポーネントタグヘルパー
 
@@ -46,7 +47,7 @@ ms.locfileid: "88018690"
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-前の例では、 `Counter` コンポーネントがアプリの*Pages*フォルダー内にあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `@using BlazorSample.Pages`)。
+前の例では、 `Counter` コンポーネントがアプリの *Pages* フォルダー内にあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `@using BlazorSample.Pages`)。
 
 コンポーネントタグヘルパーは、コンポーネントにパラメーターを渡すこともできます。 `ColorfulCheckbox`チェックボックスのラベルの色とサイズを設定する次のコンポーネントについて考えてみます。
 
@@ -76,7 +77,7 @@ ms.locfileid: "88018690"
 }
 ```
 
-コンポーネント `Size` `int` タグヘルパーでは、() および `Color` ( `string` )[コンポーネントパラメーター](xref:blazor/components/index#component-parameters)を設定できます。
+コンポーネント `Size` `int` タグヘルパーでは、() および `Color` ( `string` ) [コンポーネントパラメーター](xref:blazor/components/index#component-parameters) を設定できます。
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -88,7 +89,7 @@ ms.locfileid: "88018690"
     param-Size="14" param-Color="@("blue")" />
 ```
 
-前の例では、 `ColorfulCheckbox` コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `@using BlazorSample.Shared`)。
+前の例では、 `ColorfulCheckbox` コンポーネントがアプリの *共有* フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `@using BlazorSample.Shared`)。
 
 ページまたはビューには、次の HTML が表示されます。
 
@@ -99,7 +100,7 @@ ms.locfileid: "88018690"
 </label>
 ```
 
-前の例のように、引用符で囲まれた文字列を渡すには、[明示的な Razor 式](xref:mvc/views/razor#explicit-razor-expressions)が必要です `param-Color` 。 Razor型の値の解析動作は、属性 `string` が型であるため、属性には適用されません `param-*` `object` 。
+前の例のように、引用符で囲まれた文字列を渡すには、 [明示的な Razor 式](xref:mvc/views/razor#explicit-razor-expressions)が必要です `param-Color` 。 Razor型の値の解析動作は、属性 `string` が型であるため、属性には適用されません `param-*` `object` 。
 
 パラメーターの型は、JSON シリアル化可能である必要があります。これは通常、型が既定のコンストラクターと設定可能なプロパティを持つ必要があることを意味します。 たとえば、前の例ではとの値を指定できます `Size` `Color` 。これは、 `Size` との型 `Color` がプリミティブ型 (と) であり、 `int` `string` JSON シリアライザーでサポートされているためです。
 
@@ -155,7 +156,7 @@ public class MyClass
     param-MyObject="@myObject" />
 ```
 
-前の例では、 `MyComponent` コンポーネントがアプリの*共有*フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 ( `@using BlazorSample` やなど `@using BlazorSample.Shared` ) です。 `MyClass`は、アプリの名前空間にあります。
+前の例では、 `MyComponent` コンポーネントがアプリの *共有* フォルダーにあることを前提としています。 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名 ( `@using BlazorSample` やなど `@using BlazorSample.Shared` ) です。 `MyClass` は、アプリの名前空間にあります。
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> によって、コンポーネントに対して以下の構成が行われます。
 

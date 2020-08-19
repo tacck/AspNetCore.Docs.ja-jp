@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 75c1ea3a6087f89a200d1f73b1ff65080c819ccd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 621be5351acb251335a42f57e8ea670af1b35a87
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021771"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634450"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core のクライアント IP セーフセーフ
 
-By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https://github.com/tdykstra)
+By [Damien Bowden](https://twitter.com/damien_bod) および [Tom Dykstra](https://github.com/tdykstra)
  
 この記事では、ASP.NET Core アプリで IP アドレスセーフリスト (許可一覧とも呼ばれます) を実装する3つの方法を示します。 付随するサンプルアプリでは、3つの方法すべてを示しています。 使用できるもの:
 
 * ミドルウェアを使用して、すべての要求のリモート IP アドレスを確認します。
 * 特定のコントローラーまたはアクションメソッドに対する要求のリモート IP アドレスを確認するための MVC アクションフィルター。
-* Razorページフィルターを使用して、ページの要求のリモート IP アドレスを確認し Razor ます。
+* Razor ページフィルターを使用して、ページの要求のリモート IP アドレスを確認し Razor ます。
 
 どちらの場合も、承認済みのクライアント IP アドレスを含む文字列は、アプリ設定に格納されます。 ミドルウェアまたはフィルター:
 
@@ -66,7 +67,7 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 ## <a name="action-filter"></a>アクションフィルター
 
-特定の MVC コントローラーまたはアクションメソッドに対して、[セーフ] を選択したアクセス制御が必要な場合は、アクションフィルターを使用します。 例:
+特定の MVC コントローラーまたはアクションメソッドに対して、[セーフ] を選択したアクセス制御が必要な場合は、アクションフィルターを使用します。 次に例を示します。
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
@@ -84,7 +85,7 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 ::: moniker-end
 
-次に、 [[servicefilter]](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute)属性を使用して、アクションフィルターをコントローラーまたはアクションメソッドに適用できます。
+次に、 [[servicefilter]](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute) 属性を使用して、アクションフィルターをコントローラーまたはアクションメソッドに適用できます。
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Controllers/ValuesController.cs?name=snippet_ActionFilter&highlight=1)]
 
@@ -101,9 +102,9 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 * GET 以外の HTTP 要求動詞は、 `AdminSafeListMiddleware` クライアントの IP アドレスを検証します。
 
-## <a name="no-locrazor-pages-filter"></a>Razorページフィルター
+## <a name="no-locrazor-pages-filter"></a>Razor ページフィルター
 
-ページアプリに対してセーフデマンドによるアクセス制御が必要な場合は Razor 、ページフィルターを使用し Razor ます。 例:
+ページアプリに対してセーフデマンドによるアクセス制御が必要な場合は Razor 、ページフィルターを使用し Razor ます。 次に例を示します。
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
@@ -121,7 +122,7 @@ By [Damien Bowden](https://twitter.com/damien_bod)および[Tom Dykstra](https:/
 
 ::: moniker-end
 
-サンプルアプリの*インデックス* Razor ページが要求されると、ページフィルターによって Razor クライアントの IP アドレスが検証されます。 フィルターによって、次のようなコンソール出力のバリエーションが生成されます。
+サンプルアプリの *インデックス* Razor ページが要求されると、ページフィルターによって Razor クライアントの IP アドレスが検証されます。 フィルターによって、次のようなコンソール出力のバリエーションが生成されます。
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]

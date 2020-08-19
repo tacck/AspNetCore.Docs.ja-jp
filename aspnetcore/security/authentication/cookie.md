@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core のない認証を使用する cookieIdentity
+title: 認証を使用 cookie しない ASP.NET Core Identity
 author: rick-anderson
-description: ASP.NET Core なしで認証を使用する方法について説明 cookie Identity します。
+description: を使用せずに認証を使用する方法について説明 cookie ASP.NET Core Identity します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 02/11/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,38 +17,38 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 325bc3dcd48517d93d5f6f2d56e92651c780d759
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2e9eb58837d74343d8de6903372146570b43f330
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021888"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627144"
 ---
-# <a name="use-no-loccookie-authentication-without-aspnet-core-no-locidentity"></a>ASP.NET Core のない認証を使用する cookieIdentity
+# <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>認証を使用 cookie しない ASP.NET Core Identity
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core Identity は、ログインを作成および管理するためのフル機能を備えた完全な認証プロバイダーです。 ただし、 cookie ASP.NET Core のないベースの認証プロバイダーを Identity 使用することもできます。 詳細については、「<xref:security/authentication/identity>」を参照してください。
+ASP.NET Core Identity は、ログインを作成および管理するための完全な機能を備えた完全な認証プロバイダーです。 ただし、を cookie 使用しないベースの認証プロバイダーを ASP.NET Core Identity 使用することはできません。 詳細については、「<xref:security/authentication/identity>」を参照してください。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-サンプルアプリでのデモンストレーションのために、架空のユーザーであるマリア Rodriguez のユーザーアカウントは、アプリにハードコードされています。 **電子メール**アドレスと任意のパスワードを使用して、 `maria.rodriguez@contoso.com` ユーザーにサインインします。 ユーザーは、 `AuthenticateUser` *Pages/Account/Login. cshtml. .cs*ファイルのメソッドで認証されます。 実際の例では、ユーザーはデータベースに対して認証されます。
+サンプルアプリでのデモンストレーションのために、架空のユーザーであるマリア Rodriguez のユーザーアカウントは、アプリにハードコードされています。 **電子メール**アドレスと任意のパスワードを使用して、 `maria.rodriguez@contoso.com` ユーザーにサインインします。 ユーザーは、 `AuthenticateUser` *Pages/Account/Login. cshtml. .cs* ファイルのメソッドで認証されます。 実際の例では、ユーザーはデータベースに対して認証されます。
 
 ## <a name="configuration"></a>構成
 
-アプリで[AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)が使用されていない場合は、 [AspNetCore Cookie のプロジェクトファイルにパッケージ参照を作成します。s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/)パッケージ。
+アプリで [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)が使用されていない場合は、 [AspNetCore Cookie のプロジェクトファイルにパッケージ参照を作成します。s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) パッケージ。
 
 メソッドで、メソッド `Startup.ConfigureServices` とメソッドを使用して認証ミドルウェアサービスを作成し <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> ます。
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Startup.cs?name=snippet1)]
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>に渡されたは、 `AddAuthentication` アプリの既定の認証スキームを設定します。 `AuthenticationScheme`は、認証の複数のインスタンスがあり cookie 、[特定のスキームで承認](xref:security/authorization/limitingidentitybyscheme)する場合に便利です。 `AuthenticationScheme`を[ Cookie authenticationdefaults に設定します。 authenticationdefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)は、スキームの値として "s" を提供します。 Cookie スキームを区別する任意の文字列値を指定できます。
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme> に渡されたは、 `AddAuthentication` アプリの既定の認証スキームを設定します。 `AuthenticationScheme` は、認証の複数のインスタンスがあり cookie 、 [特定のスキームで承認](xref:security/authorization/limitingidentitybyscheme)する場合に便利です。 `AuthenticationScheme`を[ Cookie authenticationdefaults に設定します。 authenticationdefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)は、スキームの値として "s" を提供します。 Cookie スキームを区別する任意の文字列値を指定できます。
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
 
 で、とを呼び出して、 `Startup.Configure` `UseAuthentication` プロパティを `UseAuthorization` 設定し、 `HttpContext.User` 要求の承認ミドルウェアを実行します。 `UseAuthentication`を `UseAuthorization` 呼び出す前に、メソッドとメソッドを呼び出し `UseEndpoints` ます。
 
@@ -65,7 +66,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     });
 ```
 
-## <a name="no-loccookie-policy-middleware"></a>Cookieポリシーミドルウェア
+## <a name="no-loccookie-policy-middleware"></a>Cookie ポリシーミドルウェア
 
 ポリシー [ Cookie ミドルウェア](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware)は cookie 、ポリシー機能を有効にします。 アプリ処理パイプラインへのミドルウェアの追加は順序に依存しており、 &mdash; パイプラインに登録されている下流コンポーネントにのみ影響します。
 
@@ -92,7 +93,7 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 | SameSiteMode 厳密でない      | SameSiteMode なし<br>SameSiteMode 厳密でない<br>SameSiteMode Strict | SameSiteMode 厳密でない<br>SameSiteMode 厳密でない<br>SameSiteMode Strict |
 | SameSiteMode Strict   | SameSiteMode なし<br>SameSiteMode 厳密でない<br>SameSiteMode Strict | SameSiteMode Strict<br>SameSiteMode Strict<br>SameSiteMode Strict |
 
-## <a name="create-an-authentication-no-loccookie"></a>認証を作成するcookie
+## <a name="create-an-authentication-no-loccookie"></a>認証を作成する cookie
 
 保持しているユーザー情報を作成するに cookie は、を構築 <xref:System.Security.Claims.ClaimsPrincipal> します。 ユーザー情報はにシリアル化され、に格納され cookie ます。 
 
@@ -102,11 +103,11 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
-`SignInAsync`暗号化されたを作成 cookie し、現在の応答に追加します。 が指定されていない場合は `AuthenticationScheme` 、既定のスキームが使用されます。
+`SignInAsync` 暗号化されたを作成 cookie し、現在の応答に追加します。 が指定されていない場合は `AuthenticationScheme` 、既定のスキームが使用されます。
 
-<xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.RedirectUri>は、既定ではいくつかの特定のパス (ログインパスやログアウトパスなど) でのみ使用されます。 詳細については、「 [ Cookie authenticationhandler source](https://github.com/dotnet/aspnetcore/blob/f2e6e6ff334176540ef0b3291122e359c2106d1a/src/Security/Authentication/Cookies/src/CookieAuthenticationHandler.cs#L334)」を参照してください。
+<xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.RedirectUri> は、既定ではいくつかの特定のパス (ログインパスやログアウトパスなど) でのみ使用されます。 詳細については、「 [ Cookie authenticationhandler source](https://github.com/dotnet/aspnetcore/blob/f2e6e6ff334176540ef0b3291122e359c2106d1a/src/Security/Authentication/Cookies/src/CookieAuthenticationHandler.cs#L334)」を参照してください。
 
-暗号化には ASP.NET Core の[データ保護](xref:security/data-protection/using-data-protection)システムが使用されます。 複数のコンピューターでホストされているアプリの場合、アプリ間で負荷を分散する場合、または web ファームを使用する場合は、同じキーリングとアプリ識別子を使用するように[データ保護を構成](xref:security/data-protection/configuration/overview)します。
+暗号化には ASP.NET Core の [データ保護](xref:security/data-protection/using-data-protection) システムが使用されます。 複数のコンピューターでホストされているアプリの場合、アプリ間で負荷を分散する場合、または web ファームを使用する場合は、同じキーリングとアプリ識別子を使用するように [データ保護を構成](xref:security/data-protection/configuration/overview) します。
 
 ## <a name="sign-out"></a>サインアウト
 
@@ -190,7 +191,7 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 }
 ```
 
-サービス登録時にイベントインスタンスを cookie メソッドに登録 `Startup.ConfigureServices` します。 クラスの[スコープ付きサービス登録](xref:fundamentals/dependency-injection#service-lifetimes)を指定し `CustomCookieAuthenticationEvents` ます。
+サービス登録時にイベントインスタンスを cookie メソッドに登録 `Startup.ConfigureServices` します。 クラスの [スコープ付きサービス登録](xref:fundamentals/dependency-injection#service-lifetimes) を指定し `CustomCookieAuthenticationEvents` ます。
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -250,25 +251,25 @@ await HttpContext.SignInAsync(
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core Identity は、ログインを作成および管理するためのフル機能を備えた完全な認証プロバイダーです。 ただし、 cookie ASP.NET Core のないベースの認証認証プロバイダーを Identity 使用することもできます。 詳細については、「<xref:security/authentication/identity>」を参照してください。
+ASP.NET Core Identity は、ログインを作成および管理するための完全な機能を備えた完全な認証プロバイダーです。 ただし、を cookie 使用しないベースの認証認証プロバイダーを ASP.NET Core Identity 使用することはできません。 詳細については、「<xref:security/authentication/identity>」を参照してください。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-サンプルアプリでのデモンストレーションのために、架空のユーザーであるマリア Rodriguez のユーザーアカウントは、アプリにハードコードされています。 **電子メール**アドレスと任意のパスワードを使用して、 `maria.rodriguez@contoso.com` ユーザーにサインインします。 ユーザーは、 `AuthenticateUser` *Pages/Account/Login. cshtml. .cs*ファイルのメソッドで認証されます。 実際の例では、ユーザーはデータベースに対して認証されます。
+サンプルアプリでのデモンストレーションのために、架空のユーザーであるマリア Rodriguez のユーザーアカウントは、アプリにハードコードされています。 **電子メール**アドレスと任意のパスワードを使用して、 `maria.rodriguez@contoso.com` ユーザーにサインインします。 ユーザーは、 `AuthenticateUser` *Pages/Account/Login. cshtml. .cs* ファイルのメソッドで認証されます。 実際の例では、ユーザーはデータベースに対して認証されます。
 
 ## <a name="configuration"></a>構成
 
-アプリで[AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)が使用されていない場合は、 [AspNetCore Cookie のプロジェクトファイルにパッケージ参照を作成します。s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/)パッケージ。
+アプリで [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)が使用されていない場合は、 [AspNetCore Cookie のプロジェクトファイルにパッケージ参照を作成します。s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) パッケージ。
 
 メソッドで、メソッド `Startup.ConfigureServices` とメソッドを使用して認証ミドルウェアサービスを作成し <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> ます。
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Startup.cs?name=snippet1)]
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>に渡されたは、 `AddAuthentication` アプリの既定の認証スキームを設定します。 `AuthenticationScheme`は、認証の複数のインスタンスがあり cookie 、[特定のスキームで承認](xref:security/authorization/limitingidentitybyscheme)する場合に便利です。 `AuthenticationScheme`を[ Cookie authenticationdefaults に設定します。 authenticationdefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)は、スキームの値として "s" を提供します。 Cookie スキームを区別する任意の文字列値を指定できます。
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme> に渡されたは、 `AddAuthentication` アプリの既定の認証スキームを設定します。 `AuthenticationScheme` は、認証の複数のインスタンスがあり cookie 、 [特定のスキームで承認](xref:security/authorization/limitingidentitybyscheme)する場合に便利です。 `AuthenticationScheme`を[ Cookie authenticationdefaults に設定します。 authenticationdefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)は、スキームの値として "s" を提供します。 Cookie スキームを区別する任意の文字列値を指定できます。
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
 
 メソッドで、 `Startup.Configure` メソッドを呼び出し `UseAuthentication` て、プロパティを設定する認証ミドルウェアを呼び出し `HttpContext.User` ます。 `UseAuthentication`またはを呼び出す前に、メソッドを呼び出し `UseMvcWithDefaultRoute` `UseMvc` ます。
 
@@ -286,7 +287,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     });
 ```
 
-## <a name="no-loccookie-policy-middleware"></a>Cookieポリシーミドルウェア
+## <a name="no-loccookie-policy-middleware"></a>Cookie ポリシーミドルウェア
 
 ポリシー [ Cookie ミドルウェア](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware)は cookie 、ポリシー機能を有効にします。 アプリ処理パイプラインへのミドルウェアの追加は順序に依存しており、 &mdash; パイプラインに登録されている下流コンポーネントにのみ影響します。
 
@@ -313,7 +314,7 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 | SameSiteMode 厳密でない      | SameSiteMode なし<br>SameSiteMode 厳密でない<br>SameSiteMode Strict | SameSiteMode 厳密でない<br>SameSiteMode 厳密でない<br>SameSiteMode Strict |
 | SameSiteMode Strict   | SameSiteMode なし<br>SameSiteMode 厳密でない<br>SameSiteMode Strict | SameSiteMode Strict<br>SameSiteMode Strict<br>SameSiteMode Strict |
 
-## <a name="create-an-authentication-no-loccookie"></a>認証を作成するcookie
+## <a name="create-an-authentication-no-loccookie"></a>認証を作成する cookie
 
 保持しているユーザー情報を作成するに cookie は、を構築 <xref:System.Security.Claims.ClaimsPrincipal> します。 ユーザー情報はにシリアル化され、に格納され cookie ます。 
 
@@ -321,9 +322,9 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
 
-`SignInAsync`暗号化されたを作成 cookie し、現在の応答に追加します。 が指定されていない場合は `AuthenticationScheme` 、既定のスキームが使用されます。
+`SignInAsync` 暗号化されたを作成 cookie し、現在の応答に追加します。 が指定されていない場合は `AuthenticationScheme` 、既定のスキームが使用されます。
 
-暗号化には ASP.NET Core の[データ保護](xref:security/data-protection/using-data-protection)システムが使用されます。 複数のコンピューターでホストされているアプリの場合、アプリ間で負荷を分散する場合、または web ファームを使用する場合は、同じキーリングとアプリ識別子を使用するように[データ保護を構成](xref:security/data-protection/configuration/overview)します。
+暗号化には ASP.NET Core の [データ保護](xref:security/data-protection/using-data-protection) システムが使用されます。 複数のコンピューターでホストされているアプリの場合、アプリ間で負荷を分散する場合、または web ファームを使用する場合は、同じキーリングとアプリ識別子を使用するように [データ保護を構成](xref:security/data-protection/configuration/overview) します。
 
 ## <a name="sign-out"></a>サインアウト
 
@@ -407,7 +408,7 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 }
 ```
 
-サービス登録時にイベントインスタンスを cookie メソッドに登録 `Startup.ConfigureServices` します。 クラスの[スコープ付きサービス登録](xref:fundamentals/dependency-injection#service-lifetimes)を指定し `CustomCookieAuthenticationEvents` ます。
+サービス登録時にイベントインスタンスを cookie メソッドに登録 `Startup.ConfigureServices` します。 クラスの [スコープ付きサービス登録](xref:fundamentals/dependency-injection#service-lifetimes) を指定し `CustomCookieAuthenticationEvents` ます。
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

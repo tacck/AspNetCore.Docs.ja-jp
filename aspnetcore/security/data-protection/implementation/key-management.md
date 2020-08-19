@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護キー管理 Api の実装の詳細に�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: c81e328d8774bfbd1309f854715fcda2152f9eeb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7cc0c7203dbc7b607bb7359990b75b000bb09b7e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021212"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634398"
 ---
 # <a name="key-management-in-aspnet-core"></a>ASP.NET Core でのキー管理
 
@@ -36,7 +37,7 @@ ms.locfileid: "88021212"
 
 * [失効]-キーが侵害され、新しい保護操作に使用されないようにする必要があります。
 
-受信したペイロードの保護を解除するために、作成されたキー、アクティブなキー、および期限切れのキーがすべて使用される 既定では、失効したキーを使用してペイロードの保護を解除することはできませんが、アプリケーション開発者は必要に応じて[この動作をオーバーライド](xref:security/data-protection/consumer-apis/dangerous-unprotect#data-protection-consumer-apis-dangerous-unprotect)できます。
+受信したペイロードの保護を解除するために、作成されたキー、アクティブなキー、および期限切れのキーがすべて使用される 既定では、失効したキーを使用してペイロードの保護を解除することはできませんが、アプリケーション開発者は必要に応じて [この動作をオーバーライド](xref:security/data-protection/consumer-apis/dangerous-unprotect#data-protection-consumer-apis-dangerous-unprotect) できます。
 
 >[!WARNING]
 > 開発者がキーリングからキーを削除しようとしている可能性があります (たとえば、対応するファイルをファイルシステムから削除します)。 その時点で、キーによって保護されているすべてのデータは完全に undecipherable されており、取り消し済みキーがある場合のような緊急オーバーライドはありません。 キーを削除することは本当に破壊的な動作であり、そのため、データ保護システムはこの操作を実行するためのファーストクラス API を公開しません。
@@ -45,11 +46,11 @@ ms.locfileid: "88021212"
 
 データ保護システムは、バッキングリポジトリからキーリングを読み取るときに、キーリングから "default" キーの検索を試みます。 既定のキーは、新しい保護操作に使用されます。
 
-一般的なヒューリスティックは、データ保護システムが、最新のアクティブ化日を既定のキーとしてキーを選択することです。 (サーバー間のクロックスキューを可能にするための小さなファッジ要因があります)。キーの有効期限が切れた場合や失効した場合、またアプリケーションが自動キー生成を無効にしていない場合は、次の[キーの有効期限とローリング](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management-expiration)ポリシーに従って、即時ライセンス認証を使用して新しいキーが生成されます。
+一般的なヒューリスティックは、データ保護システムが、最新のアクティブ化日を既定のキーとしてキーを選択することです。 (サーバー間のクロックスキューを可能にするための小さなファッジ要因があります)。キーの有効期限が切れた場合や失効した場合、またアプリケーションが自動キー生成を無効にしていない場合は、次の [キーの有効期限とローリング](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management-expiration) ポリシーに従って、即時ライセンス認証を使用して新しいキーが生成されます。
 
 データ保護システムが別のキーにフォールバックするのではなく、直ちに新しいキーを生成するのは、新しいキーの生成が、新しいキーの前にアクティブ化されたすべてのキーの暗黙的な有効期限として扱われるためです。 一般的な考え方としては、新しいキーが古いキーよりも異なるアルゴリズムまたは暗号化された保存メカニズムを使用して構成されている可能性があります。また、システムは最新の構成を優先する必要があります。
 
-例外が発生しています。 アプリケーション開発者が[自動キー生成を無効](xref:security/data-protection/configuration/overview#disableautomatickeygeneration)にしている場合は、データ保護システムが既定のキーとして何かを選択する必要があります。 このフォールバックシナリオでは、システムは、最新のライセンス認証日を持つ非失効キーを選択します。これは、クラスター内の他のコンピューターに反映されるまでの時間があるキーに対して設定されます。 フォールバックシステムによって、有効期限が切れた既定のキーが最終的に選択される可能性があります。 フォールバックシステムは、既定のキーとして取り消しキーを選択することはありません。キーリングが空であるか、すべてのキーが取り消されている場合、初期化時にエラーが発生します。
+例外が発生しています。 アプリケーション開発者が [自動キー生成を無効](xref:security/data-protection/configuration/overview#disableautomatickeygeneration)にしている場合は、データ保護システムが既定のキーとして何かを選択する必要があります。 このフォールバックシナリオでは、システムは、最新のライセンス認証日を持つ非失効キーを選択します。これは、クラスター内の他のコンピューターに反映されるまでの時間があるキーに対して設定されます。 フォールバックシステムによって、有効期限が切れた既定のキーが最終的に選択される可能性があります。 フォールバックシステムは、既定のキーとして取り消しキーを選択することはありません。キーリングが空であるか、すべてのキーが取り消されている場合、初期化時にエラーが発生します。
 
 <a name="data-protection-implementation-key-management-expiration"></a>
 

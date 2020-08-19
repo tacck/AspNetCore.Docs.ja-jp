@@ -5,6 +5,7 @@ description: この記事では ASP.NET Core 1.x 認証と ASP.NET Core 2.0 に�
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 63f2fadc328650063078339467e65c6b0e97a08e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015291"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634320"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>認証と Identity ASP.NET Core 2.0 への移行
 
@@ -110,7 +111,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. を cookie 指定せずにを使用するIdentity
+2. を cookie 指定せずにを使用する Identity
     - メソッドの `UseCookieAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
         ```csharp
@@ -271,7 +272,7 @@ Microsoft アカウント認証の詳細については、 [GitHub の問題](ht
 
 ### <a name="setting-default-authentication-schemes"></a>既定の認証方式を設定する
 
-1.x では、 `AutomaticAuthenticate` `AutomaticChallenge` [authenticationoptions](/dotnet/api/Microsoft.AspNetCore.Builder.AuthenticationOptions?view=aspnetcore-1.1)基本クラスのプロパティとプロパティが、1つの認証スキームで設定されることを意図していました。 これを実施するための適切な方法はありませんでした。
+1.x では、 `AutomaticAuthenticate` `AutomaticChallenge` [authenticationoptions](/dotnet/api/Microsoft.AspNetCore.Builder.AuthenticationOptions?view=aspnetcore-1.1) 基本クラスのプロパティとプロパティが、1つの認証スキームで設定されることを意図していました。 これを実施するための適切な方法はありませんでした。
 
 2.0 では、これら2つのプロパティは個別のインスタンスのプロパティとして削除されてい `AuthenticationOptions` ます。 これらは、 `AddAuthentication` Startup.cs のメソッド内のメソッド呼び出しで構成でき `ConfigureServices` ます。 *Startup.cs*
 
@@ -318,7 +319,7 @@ services.AddAuthentication(options =>
 Windows 認証には、次の2つのバリエーションがあります。
 
 * ホストは、認証されたユーザーのみを許可します。 このバリエーションは、2.0 の変更の影響を受けません。
-* ホストは、匿名ユーザーと認証済みユーザーの両方を許可します。 このバリエーションは、2.0 の変更の影響を受けます。 たとえば、アプリでは、 [IIS](xref:host-and-deploy/iis/index)または[HTTP.sys](xref:fundamentals/servers/httpsys)レイヤーで匿名ユーザーを許可する必要がありますが、コントローラーレベルでユーザーを承認する必要があります。 このシナリオでは、メソッドで既定のスキームを設定し `Startup.ConfigureServices` ます。
+* ホストは、匿名ユーザーと認証済みユーザーの両方を許可します。 このバリエーションは、2.0 の変更の影響を受けます。 たとえば、アプリでは、 [IIS](xref:host-and-deploy/iis/index) または [HTTP.sys](xref:fundamentals/servers/httpsys) レイヤーで匿名ユーザーを許可する必要がありますが、コントローラーレベルでユーザーを承認する必要があります。 このシナリオでは、メソッドで既定のスキームを設定し `Startup.ConfigureServices` ます。
 
   [AspNetCore 統合](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IISIntegration/)では、既定のスキームを次のように設定します。 `IISDefaults.AuthenticationScheme`
 
@@ -340,7 +341,7 @@ Windows 認証には、次の2つのバリエーションがあります。
 
   > `System.InvalidOperationException`: AuthenticationScheme が指定されていません。 DefaultChallengeScheme が見つかりませんでした。
 
-詳細については、「<xref:security/authentication/windowsauth>」を参照してください。
+詳細については、<xref:security/authentication/windowsauth> を参照してください。
 
 <a name="identity-cookie-options"></a>
 
@@ -348,7 +349,7 @@ Windows 認証には、次の2つのバリエーションがあります。
 
 2.0 の変更の副作用は、オプションのインスタンスの代わりに名前付きオプションを使用するように切り替えることです cookie 。 スキーム名をカスタマイズする機能 Identity cookie は削除されます。
 
-たとえば、1.x プロジェクトでは、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)を使用し `IdentityCookieOptions` て、パラメーターを*AccountController.cs*および*ManageController.cs*に渡します。 外部 cookie 認証スキームは、指定されたインスタンスからアクセスされます。
+たとえば、1.x プロジェクトでは、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection) を使用し `IdentityCookieOptions` て、パラメーターを *AccountController.cs* および *ManageController.cs*に渡します。 外部 cookie 認証スキームは、指定されたインスタンスからアクセスされます。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -432,7 +433,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemes)]
 
-このメソッドは*Views/Account/Login. cshtml*にも表示されます。
+このメソッドは *Views/Account/Login. cshtml* にも表示されます。
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemes&highlight=2)]
 
@@ -460,4 +461,4 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 ## <a name="additional-resources"></a>その他のリソース
 
-詳細については、GitHub で[の Auth 2.0 の問題の説明](https://github.com/aspnet/Security/issues/1338)を参照してください。
+詳細については、GitHub で [の Auth 2.0 の問題の説明](https://github.com/aspnet/Security/issues/1338) を参照してください。

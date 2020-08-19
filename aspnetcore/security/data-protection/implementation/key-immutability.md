@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護のキー不変 Api の実装の詳細�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-immutability
-ms.openlocfilehash: 51d7538a98ac2847f018ff1907bb5333bd132f32
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 32925a3ef6d52a7be3a852cefe670c15d545b490
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022395"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627625"
 ---
 # <a name="key-immutability-and-key-settings-in-aspnet-core"></a>ASP.NET Core のキーの不変性とキー設定
 
@@ -28,7 +29,7 @@ ms.locfileid: "88022395"
 
 この動作の1つの結果として、キーがバッキングストアに書き込まれると、変更できなくなります。 作成、アクティブ化、および有効期限の日付は変更できませんが、を使用して取り消すことができ `IKeyManager` ます。 さらに、基になるアルゴリズム情報、マスターキーマテリアル、および保存時の暗号化プロパティも変更できません。
 
-キーの永続化に影響する設定が開発者によって変更された場合、これらの変更は、次にキーが生成されるまで有効になりません `IKeyManager.CreateNewKey` 。これは、またはデータ保護システム独自の[自動キー生成](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management)動作を使用した明示的な呼び出しによって行われます。 キーの永続化に影響する設定は次のとおりです。
+キーの永続化に影響する設定が開発者によって変更された場合、これらの変更は、次にキーが生成されるまで有効になりません `IKeyManager.CreateNewKey` 。これは、またはデータ保護システム独自の [自動キー生成](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) 動作を使用した明示的な呼び出しによって行われます。 キーの永続化に影響する設定は次のとおりです。
 
 * [既定のキーの有効期間](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management)
 
