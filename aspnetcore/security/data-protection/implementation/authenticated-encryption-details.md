@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護で認証された暗号化の実装の
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,36 +16,36 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: ebd784b493b7f283df2cc84a39113e3d714472a0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ed75ab235a95a88bbe60615526137b4c2bb719ef
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022070"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630849"
 ---
-# <a name="authenticated-encryption-details-in-aspnet-core"></a><span data-ttu-id="b67bd-103">ASP.NET Core での認証された暗号化の詳細</span><span class="sxs-lookup"><span data-stu-id="b67bd-103">Authenticated encryption details in ASP.NET Core</span></span>
+# <a name="authenticated-encryption-details-in-aspnet-core"></a><span data-ttu-id="38a27-103">ASP.NET Core での認証された暗号化の詳細</span><span class="sxs-lookup"><span data-stu-id="38a27-103">Authenticated encryption details in ASP.NET Core</span></span>
 
 <a name="data-protection-implementation-authenticated-encryption-details"></a>
 
-<span data-ttu-id="b67bd-104">IDataProtector の呼び出しは、認証された暗号化操作です。</span><span class="sxs-lookup"><span data-stu-id="b67bd-104">Calls to IDataProtector.Protect are authenticated encryption operations.</span></span> <span data-ttu-id="b67bd-105">Protect メソッドは、機密性と信頼性の両方を提供します。これは、ルート IDataProtectionProvider からこの特定の IDataProtector インスタンスを派生させるために使用された目的のチェーンに関連付けられています。</span><span class="sxs-lookup"><span data-stu-id="b67bd-105">The Protect method offers both confidentiality and authenticity, and it's tied to the purpose chain that was used to derive this particular IDataProtector instance from its root IDataProtectionProvider.</span></span>
+<span data-ttu-id="38a27-104">IDataProtector の呼び出しは、認証された暗号化操作です。</span><span class="sxs-lookup"><span data-stu-id="38a27-104">Calls to IDataProtector.Protect are authenticated encryption operations.</span></span> <span data-ttu-id="38a27-105">Protect メソッドは、機密性と信頼性の両方を提供します。これは、ルート IDataProtectionProvider からこの特定の IDataProtector インスタンスを派生させるために使用された目的のチェーンに関連付けられています。</span><span class="sxs-lookup"><span data-stu-id="38a27-105">The Protect method offers both confidentiality and authenticity, and it's tied to the purpose chain that was used to derive this particular IDataProtector instance from its root IDataProtectionProvider.</span></span>
 
-<span data-ttu-id="b67bd-106">IDataProtector は byte [] プレーンテキストパラメーターを受け取り、byte [] 保護されたペイロードを生成します。その形式を次に示します。</span><span class="sxs-lookup"><span data-stu-id="b67bd-106">IDataProtector.Protect takes a byte[] plaintext parameter and produces a byte[] protected payload, whose format is described below.</span></span> <span data-ttu-id="b67bd-107">(文字列の plaintext パラメーターを受け取り、文字列で保護されたペイロードを返す拡張メソッドのオーバーロードもあります。</span><span class="sxs-lookup"><span data-stu-id="b67bd-107">(There's also an extension method overload which takes a string plaintext parameter and returns a string protected payload.</span></span> <span data-ttu-id="b67bd-108">この API が使用されている場合、保護されたペイロード形式の構造は次のようになりますが、 [base64url エンコード](https://tools.ietf.org/html/rfc4648#section-5)されます)。</span><span class="sxs-lookup"><span data-stu-id="b67bd-108">If this API is used the protected payload format will still have the below structure, but it will be [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5).)</span></span>
+<span data-ttu-id="38a27-106">IDataProtector は byte [] プレーンテキストパラメーターを受け取り、byte [] 保護されたペイロードを生成します。その形式を次に示します。</span><span class="sxs-lookup"><span data-stu-id="38a27-106">IDataProtector.Protect takes a byte[] plaintext parameter and produces a byte[] protected payload, whose format is described below.</span></span> <span data-ttu-id="38a27-107">(文字列の plaintext パラメーターを受け取り、文字列で保護されたペイロードを返す拡張メソッドのオーバーロードもあります。</span><span class="sxs-lookup"><span data-stu-id="38a27-107">(There's also an extension method overload which takes a string plaintext parameter and returns a string protected payload.</span></span> <span data-ttu-id="38a27-108">この API が使用されている場合、保護されたペイロード形式の構造は次のようになりますが、 [base64url エンコード](https://tools.ietf.org/html/rfc4648#section-5)されます)。</span><span class="sxs-lookup"><span data-stu-id="38a27-108">If this API is used the protected payload format will still have the below structure, but it will be [base64url-encoded](https://tools.ietf.org/html/rfc4648#section-5).)</span></span>
 
-## <a name="protected-payload-format"></a><span data-ttu-id="b67bd-109">保護されたペイロード形式</span><span class="sxs-lookup"><span data-stu-id="b67bd-109">Protected payload format</span></span>
+## <a name="protected-payload-format"></a><span data-ttu-id="38a27-109">保護されたペイロード形式</span><span class="sxs-lookup"><span data-stu-id="38a27-109">Protected payload format</span></span>
 
-<span data-ttu-id="b67bd-110">保護されたペイロード形式は、次の3つの主要コンポーネントで構成されます。</span><span class="sxs-lookup"><span data-stu-id="b67bd-110">The protected payload format consists of three primary components:</span></span>
+<span data-ttu-id="38a27-110">保護されたペイロード形式は、次の3つの主要コンポーネントで構成されます。</span><span class="sxs-lookup"><span data-stu-id="38a27-110">The protected payload format consists of three primary components:</span></span>
 
-* <span data-ttu-id="b67bd-111">データ保護システムのバージョンを識別する32ビットマジックヘッダー。</span><span class="sxs-lookup"><span data-stu-id="b67bd-111">A 32-bit magic header that identifies the version of the data protection system.</span></span>
+* <span data-ttu-id="38a27-111">データ保護システムのバージョンを識別する32ビットマジックヘッダー。</span><span class="sxs-lookup"><span data-stu-id="38a27-111">A 32-bit magic header that identifies the version of the data protection system.</span></span>
 
-* <span data-ttu-id="b67bd-112">この特定のペイロードを保護するために使用されるキーを識別する、128ビットのキー id。</span><span class="sxs-lookup"><span data-stu-id="b67bd-112">A 128-bit key id that identifies the key used to protect this particular payload.</span></span>
+* <span data-ttu-id="38a27-112">この特定のペイロードを保護するために使用されるキーを識別する、128ビットのキー id。</span><span class="sxs-lookup"><span data-stu-id="38a27-112">A 128-bit key id that identifies the key used to protect this particular payload.</span></span>
 
-* <span data-ttu-id="b67bd-113">保護されたペイロードの残りの部分は、[このキーによってカプセル化](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)された暗号化機能に固有です。</span><span class="sxs-lookup"><span data-stu-id="b67bd-113">The remainder of the protected payload is [specific to the encryptor encapsulated by this key](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation).</span></span> <span data-ttu-id="b67bd-114">次の例では、キーは AES-256-CBC + HMACSHA256 暗号化機能を表し、ペイロードはさらに次のように細分化されています。</span><span class="sxs-lookup"><span data-stu-id="b67bd-114">In the example below, the key represents an AES-256-CBC + HMACSHA256 encryptor, and the payload is further subdivided as follows:</span></span>
-  * <span data-ttu-id="b67bd-115">128ビットのキー修飾子。</span><span class="sxs-lookup"><span data-stu-id="b67bd-115">A 128-bit key modifier.</span></span>
-  * <span data-ttu-id="b67bd-116">128ビットの初期化ベクター。</span><span class="sxs-lookup"><span data-stu-id="b67bd-116">A 128-bit initialization vector.</span></span>
-  * <span data-ttu-id="b67bd-117">48バイトの AES-256-CBC 出力。</span><span class="sxs-lookup"><span data-stu-id="b67bd-117">48 bytes of AES-256-CBC output.</span></span>
-  * <span data-ttu-id="b67bd-118">HMACSHA256 authentication タグ。</span><span class="sxs-lookup"><span data-stu-id="b67bd-118">An HMACSHA256 authentication tag.</span></span>
+* <span data-ttu-id="38a27-113">保護されたペイロードの残りの部分は、 [このキーによってカプセル化](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)された暗号化機能に固有です。</span><span class="sxs-lookup"><span data-stu-id="38a27-113">The remainder of the protected payload is [specific to the encryptor encapsulated by this key](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation).</span></span> <span data-ttu-id="38a27-114">次の例では、キーは AES-256-CBC + HMACSHA256 暗号化機能を表し、ペイロードはさらに次のように細分化されています。</span><span class="sxs-lookup"><span data-stu-id="38a27-114">In the example below, the key represents an AES-256-CBC + HMACSHA256 encryptor, and the payload is further subdivided as follows:</span></span>
+  * <span data-ttu-id="38a27-115">128ビットのキー修飾子。</span><span class="sxs-lookup"><span data-stu-id="38a27-115">A 128-bit key modifier.</span></span>
+  * <span data-ttu-id="38a27-116">128ビットの初期化ベクター。</span><span class="sxs-lookup"><span data-stu-id="38a27-116">A 128-bit initialization vector.</span></span>
+  * <span data-ttu-id="38a27-117">48バイトの AES-256-CBC 出力。</span><span class="sxs-lookup"><span data-stu-id="38a27-117">48 bytes of AES-256-CBC output.</span></span>
+  * <span data-ttu-id="38a27-118">HMACSHA256 authentication タグ。</span><span class="sxs-lookup"><span data-stu-id="38a27-118">An HMACSHA256 authentication tag.</span></span>
 
-<span data-ttu-id="b67bd-119">保護されたペイロードの例を次に示します。</span><span class="sxs-lookup"><span data-stu-id="b67bd-119">A sample protected payload is illustrated below.</span></span>
+<span data-ttu-id="38a27-119">保護されたペイロードの例を次に示します。</span><span class="sxs-lookup"><span data-stu-id="38a27-119">A sample protected payload is illustrated below.</span></span>
 
 ```
 09 F0 C9 F0 80 9C 81 0C 19 66 19 40 95 36 53 F8
@@ -58,11 +59,11 @@ AA FF EE 57 57 2F 40 4C 3F 7F CC 9D CC D9 32 3E
 52 C9 74 A0
 ```
 
-<span data-ttu-id="b67bd-120">最初の32ビットより上のペイロード形式から、または4バイトがバージョンを識別するマジックヘッダー (09 F0 C9 F0)</span><span class="sxs-lookup"><span data-stu-id="b67bd-120">From the payload format above the first 32 bits, or 4 bytes are the magic header identifying the version (09 F0 C9 F0)</span></span>
+<span data-ttu-id="38a27-120">最初の32ビットより上のペイロード形式から、または4バイトがバージョンを識別するマジックヘッダー (09 F0 C9 F0)</span><span class="sxs-lookup"><span data-stu-id="38a27-120">From the payload format above the first 32 bits, or 4 bytes are the magic header identifying the version (09 F0 C9 F0)</span></span>
 
-<span data-ttu-id="b67bd-121">次の128ビット、または16バイトはキー識別子です (80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57)</span><span class="sxs-lookup"><span data-stu-id="b67bd-121">The next 128 bits, or 16 bytes is the key identifier (80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57)</span></span>
+<span data-ttu-id="38a27-121">次の128ビット、または16バイトはキー識別子です (80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57)</span><span class="sxs-lookup"><span data-stu-id="38a27-121">The next 128 bits, or 16 bytes is the key identifier (80 9C 81 0C 19 66 19 40 95 36 53 F8 AA FF EE 57)</span></span>
 
-<span data-ttu-id="b67bd-122">残りはペイロードを含み、使用される形式に固有のものです。</span><span class="sxs-lookup"><span data-stu-id="b67bd-122">The remainder contains the payload and is specific to the format used.</span></span>
+<span data-ttu-id="38a27-122">残りはペイロードを含み、使用される形式に固有のものです。</span><span class="sxs-lookup"><span data-stu-id="38a27-122">The remainder contains the payload and is specific to the format used.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="b67bd-123">特定のキーに対して保護されているすべてのペイロードは、同じ20バイト (マジック値, キー id) ヘッダーで開始されます。</span><span class="sxs-lookup"><span data-stu-id="b67bd-123">All payloads protected to a given key will begin with the same 20-byte (magic value, key id) header.</span></span> <span data-ttu-id="b67bd-124">管理者は、この事実を診断のために使用して、ペイロードが生成されたことを概算することができます。</span><span class="sxs-lookup"><span data-stu-id="b67bd-124">Administrators can use this fact for diagnostic purposes to approximate when a payload was generated.</span></span> <span data-ttu-id="b67bd-125">たとえば、上記のペイロードはキー {0c819c80-6619-4019-9536-53f8aaffee57} に対応しています。</span><span class="sxs-lookup"><span data-stu-id="b67bd-125">For example, the payload above corresponds to key {0c819c80-6619-4019-9536-53f8aaffee57}.</span></span> <span data-ttu-id="b67bd-126">キーリポジトリを確認した後に、この特定のキーのライセンス認証日が2015-01-01 であり、その有効期限が2015-03-01 であることがわかった場合は、ペイロード (改ざんされていない場合) がそのウィンドウ内に生成されたと見なすことができます。どちらの側にも小さなファッジ因子を与えてください。</span><span class="sxs-lookup"><span data-stu-id="b67bd-126">If after checking the key repository you find that this specific key's activation date was 2015-01-01 and its expiration date was 2015-03-01, then it's reasonable to assume that the payload (if not tampered with) was generated within that window, give or take a small fudge factor on either side.</span></span>
+> <span data-ttu-id="38a27-123">特定のキーに対して保護されているすべてのペイロードは、同じ20バイト (マジック値, キー id) ヘッダーで開始されます。</span><span class="sxs-lookup"><span data-stu-id="38a27-123">All payloads protected to a given key will begin with the same 20-byte (magic value, key id) header.</span></span> <span data-ttu-id="38a27-124">管理者は、この事実を診断のために使用して、ペイロードが生成されたことを概算することができます。</span><span class="sxs-lookup"><span data-stu-id="38a27-124">Administrators can use this fact for diagnostic purposes to approximate when a payload was generated.</span></span> <span data-ttu-id="38a27-125">たとえば、上記のペイロードはキー {0c819c80-6619-4019-9536-53f8aaffee57} に対応しています。</span><span class="sxs-lookup"><span data-stu-id="38a27-125">For example, the payload above corresponds to key {0c819c80-6619-4019-9536-53f8aaffee57}.</span></span> <span data-ttu-id="38a27-126">キーリポジトリを確認した後に、この特定のキーのライセンス認証日が2015-01-01 であり、その有効期限が2015-03-01 であることがわかった場合は、ペイロード (改ざんされていない場合) がそのウィンドウ内に生成されたと見なすことができます。どちらの側にも小さなファッジ因子を与えてください。</span><span class="sxs-lookup"><span data-stu-id="38a27-126">If after checking the key repository you find that this specific key's activation date was 2015-01-01 and its expiration date was 2015-03-01, then it's reasonable to assume that the payload (if not tampered with) was generated within that window, give or take a small fudge factor on either side.</span></span>
