@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護 Api で目的の文字列を使用す�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,24 +16,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/purpose-strings
-ms.openlocfilehash: 33139f6e5e36aed2cb54738fbd2487969844edc7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1119c45570338f629a3ab7adbd43361529aa23e7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018404"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626923"
 ---
 # <a name="purpose-strings-in-aspnet-core"></a>ASP.NET Core の目的の文字列
 
 <a name="data-protection-consumer-apis-purposes"></a>
 
-を使用するコンポーネント `IDataProtectionProvider` は、一意の*目的*のパラメーターをメソッドに渡す必要があり `CreateProtector` ます。 目的の*パラメーター*は、暗号化コンシューマー間の分離を提供するため、データ保護システムのセキュリティに固有のものです。これは、ルート暗号化キーが同じ場合でも同様です。
+を使用するコンポーネント `IDataProtectionProvider` は、一意の *目的* のパラメーターをメソッドに渡す必要があり `CreateProtector` ます。 目的の *パラメーター* は、暗号化コンシューマー間の分離を提供するため、データ保護システムのセキュリティに固有のものです。これは、ルート暗号化キーが同じ場合でも同様です。
 
 コンシューマーが目的を指定する場合は、目的の文字列をルート暗号化キーと共に使用して、そのコンシューマーに固有の暗号化サブキーを派生させます。 これにより、アプリケーション内の他のすべての暗号化コンシューマーからコンシューマーが分離されます。その他のコンポーネントはペイロードを読み取ることができず、他のコンポーネントのペイロードを読み取ることはできません。 また、この分離により、コンポーネントに対する攻撃のすべての実行可能なカテゴリがレンダリングされます。
 
 ![目的の図の例](purpose-strings/_static/purposes.png)
 
-上の図では、 `IDataProtector` インスタンス A と B は互いのペイロードを読み取る**ことができません**。
+上の図では、 `IDataProtector` インスタンス A と B は互いのペイロードを読み取る **ことができません** 。
 
 目的の文字列は、シークレットである必要はありません。 これは、他の適切に動作するコンポーネントが同じ目的の文字列を提供することがないという意味で、単に一意である必要があります。
 

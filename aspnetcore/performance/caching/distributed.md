@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 64a4b6f606a4f5f8e73ef08f53cbb6e4003245aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020679"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626728"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core での分散キャッシュ
 
@@ -36,7 +37,7 @@ ms.locfileid: "88020679"
 
 キャッシュされたデータが分散されると、データは次のようになります。
 
-* は、複数のサーバーに対する複数の要求にわたっ*て一貫し*ています。
+* は、複数のサーバーに対する複数の要求にわたっ *て一貫し* ています。
 * サーバーの再起動とアプリのデプロイが行われます。
 * はローカルメモリを使用しません。
 
@@ -46,11 +47,11 @@ ms.locfileid: "88020679"
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
-SQL Server 分散キャッシュを使用するには、パッケージ[への参照を追加します](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)。
+SQL Server 分散キャッシュを使用するには、パッケージ [への参照を追加します](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) 。
 
-Redis 分散キャッシュを使用するには、 [StackExchangeRedis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)パッケージへのパッケージ参照を追加します。
+Redis 分散キャッシュを使用するには、 [StackExchangeRedis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis) パッケージへのパッケージ参照を追加します。
 
-NCache 分散キャッシュを使用するには、パッケージ参照を[Ncache. Microsoft. Extensions. cache-control. OpenSource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource)パッケージに追加します。
+NCache 分散キャッシュを使用するには、パッケージ参照を [Ncache. Microsoft. Extensions. cache-control. OpenSource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource) パッケージに追加します。
 
 ## <a name="idistributedcache-interface"></a>IDistributedCache インターフェイス
 
@@ -115,7 +116,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
-[Redis](https://redis.io/)は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの[Azure Redis Cache](https://azure.microsoft.com/services/cache/)を構成できます。
+[Redis](https://redis.io/) は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの [Azure Redis Cache](https://azure.microsoft.com/services/cache/) を構成できます。
 
 アプリでは、 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> の開発以外の環境でインスタンス () を使用して、キャッシュの実装を構成し <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ます。
 
@@ -128,7 +129,7 @@ Redis をローカルコンピューターにインストールするには、�
 
 ### <a name="distributed-ncache-cache"></a>分散 NCache キャッシュ
 
-[Ncache](https://github.com/Alachisoft/NCache)は、.NET および .net Core でネイティブに開発されたオープンソースのメモリ内分散キャッシュです。 NCache はローカルに動作し、Azure または他のホスティングプラットフォームで実行される ASP.NET Core アプリの分散キャッシュクラスターとして構成されます。
+[Ncache](https://github.com/Alachisoft/NCache) は、.NET および .net Core でネイティブに開発されたオープンソースのメモリ内分散キャッシュです。 NCache はローカルに動作し、Azure または他のホスティングプラットフォームで実行される ASP.NET Core アプリの分散キャッシュクラスターとして構成されます。
 
 NCache をローカルコンピューターにインストールして構成するには、「 [ncache はじめに Guide For Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/)」を参照してください。
 
@@ -149,7 +150,7 @@ NCache を構成するには:
 
 ## <a name="use-the-distributed-cache"></a>分散キャッシュを使用する
 
-インターフェイスを使用するには <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、アプリの任意のコンストラクターからのインスタンスを要求し <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ます。 インスタンスは、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)によって提供されます。
+インターフェイスを使用するには <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、アプリの任意のコンストラクターからのインスタンスを要求し <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ます。 インスタンスは、 [依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)によって提供されます。
 
 サンプルアプリが起動すると、 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> がに挿入され `Startup.Configure` ます。 現在の時刻はを使用してキャッシュされ <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> ます (詳細については、「 [Generic Host: IHostApplicationLifetime](xref:fundamentals/host/generic-host#ihostapplicationlifetime)」を参照してください)。
 
@@ -157,16 +158,16 @@ NCache を構成するには:
 
 サンプルアプリは <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、 `IndexModel` インデックスページで使用するために、に挿入されます。
 
-インデックスページが読み込まれるたびに、キャッシュがでキャッシュされた時間についてチェックされ `OnGetAsync` ます。 キャッシュされた時間が経過していない場合は、時間が表示されます。 キャッシュされた時間が最後にアクセスされてから20秒経過した場合 (このページが最後に読み込まれたとき)、ページにはキャッシュされた*時間*が表示されます。
+インデックスページが読み込まれるたびに、キャッシュがでキャッシュされた時間についてチェックされ `OnGetAsync` ます。 キャッシュされた時間が経過していない場合は、時間が表示されます。 キャッシュされた時間が最後にアクセスされてから20秒経過した場合 (このページが最後に読み込まれたとき)、ページにはキャッシュされた *時間*が表示されます。
 
-[キャッシュされた時間の**リセット**] ボタンを選択して、キャッシュされた時刻を現在の時刻に直ちに更新します。 このボタンをクリックすると、ハンドラーメソッドがトリガーさ `OnPostResetCachedTime` れます。
+[キャッシュされた時間の **リセット** ] ボタンを選択して、キャッシュされた時刻を現在の時刻に直ちに更新します。 このボタンをクリックすると、ハンドラーメソッドがトリガーさ `OnPostResetCachedTime` れます。
 
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
 > インスタンスに対してシングルトンまたはスコープ設定された有効期間を使用する必要はありません <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> (少なくとも組み込み実装の場合)。
 >
-> また、DI を使用する代わりに、必要に応じてインスタンスを作成することもできます <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> が、コードでインスタンスを作成すると、コードのテストが難しくなり、[明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に違反する可能性があります。
+> また、DI を使用する代わりに、必要に応じてインスタンスを作成することもできます <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> が、コードでインスタンスを作成すると、コードのテストが難しくなり、 [明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に違反する可能性があります。
 
 ## <a name="recommendations"></a>推奨事項
 
@@ -174,7 +175,7 @@ NCache を構成するには:
 
 * 既存のインフラストラクチャ
 * パフォーマンス要件
-* コスト
+* Cost
 * チームエクスペリエンス
 
 キャッシュソリューションは、通常、キャッシュされたデータを高速に取得するためにインメモリストレージに依存しますが、メモリは限られたリソースであり、拡張にはコストがかかります。 一般的に使用されるデータのみをキャッシュに格納します。
@@ -206,7 +207,7 @@ SQL Server が分散キャッシュバッキングストアとして使用され
 
 キャッシュされたデータが分散されると、データは次のようになります。
 
-* は、複数のサーバーに対する複数の要求にわたっ*て一貫し*ています。
+* は、複数のサーバーに対する複数の要求にわたっ *て一貫し* ています。
 * サーバーの再起動とアプリのデプロイが行われます。
 * はローカルメモリを使用しません。
 
@@ -216,11 +217,11 @@ SQL Server が分散キャッシュバッキングストアとして使用され
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
-SQL Server 分散キャッシュを使用するには、[メタパッケージ](xref:fundamentals/metapackage-app)を参照するか、AspNetCore[パッケージへのパッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)参照を追加します。
+SQL Server 分散キャッシュを使用するには、 [メタパッケージ](xref:fundamentals/metapackage-app) を参照するか、AspNetCore [パッケージへのパッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) 参照を追加します。
 
-Redis 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)を参照し、 [StackExchangeRedis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)パッケージへのパッケージ参照を追加します。 Redis パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイルで redis パッケージを個別に参照する必要があります。
+Redis 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app) を参照し、 [StackExchangeRedis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis) パッケージへのパッケージ参照を追加します。 Redis パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイルで redis パッケージを個別に参照する必要があります。
 
-NCache 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)を参照し、パッケージ参照を ncache.. [opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource)パッケージに追加します。 NCache パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイル内で個別に NCache パッケージを参照する必要があります。
+NCache 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app) を参照し、パッケージ参照を ncache.. [opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource) パッケージに追加します。 NCache パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイル内で個別に NCache パッケージを参照する必要があります。
 
 ## <a name="idistributedcache-interface"></a>IDistributedCache インターフェイス
 
@@ -285,7 +286,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
-[Redis](https://redis.io/)は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの[Azure Redis Cache](https://azure.microsoft.com/services/cache/)を構成できます。
+[Redis](https://redis.io/) は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの [Azure Redis Cache](https://azure.microsoft.com/services/cache/) を構成できます。
 
 アプリでは、 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> の開発以外の環境でインスタンス () を使用して、キャッシュの実装を構成し <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ます。
 
@@ -298,7 +299,7 @@ Redis をローカルコンピューターにインストールするには、�
 
 ### <a name="distributed-ncache-cache"></a>分散 NCache キャッシュ
 
-[Ncache](https://github.com/Alachisoft/NCache)は、.NET および .net Core でネイティブに開発されたオープンソースのメモリ内分散キャッシュです。 NCache はローカルに動作し、Azure または他のホスティングプラットフォームで実行される ASP.NET Core アプリの分散キャッシュクラスターとして構成されます。
+[Ncache](https://github.com/Alachisoft/NCache) は、.NET および .net Core でネイティブに開発されたオープンソースのメモリ内分散キャッシュです。 NCache はローカルに動作し、Azure または他のホスティングプラットフォームで実行される ASP.NET Core アプリの分散キャッシュクラスターとして構成されます。
 
 NCache をローカルコンピューターにインストールして構成するには、「 [ncache はじめに Guide For Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/)」を参照してください。
 
@@ -319,7 +320,7 @@ NCache を構成するには:
 
 ## <a name="use-the-distributed-cache"></a>分散キャッシュを使用する
 
-インターフェイスを使用するには <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、アプリの任意のコンストラクターからのインスタンスを要求し <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ます。 インスタンスは、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)によって提供されます。
+インターフェイスを使用するには <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、アプリの任意のコンストラクターからのインスタンスを要求し <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ます。 インスタンスは、 [依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)によって提供されます。
 
 サンプルアプリが起動すると、 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> がに挿入され `Startup.Configure` ます。 現在の時刻はを使用してキャッシュされ <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> ます (詳細については、「 [Web Host: IApplicationLifetime インターフェイス](xref:fundamentals/host/web-host#iapplicationlifetime-interface)」を参照してください)。
 
@@ -327,16 +328,16 @@ NCache を構成するには:
 
 サンプルアプリは <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、 `IndexModel` インデックスページで使用するために、に挿入されます。
 
-インデックスページが読み込まれるたびに、キャッシュがでキャッシュされた時間についてチェックされ `OnGetAsync` ます。 キャッシュされた時間が経過していない場合は、時間が表示されます。 キャッシュされた時間が最後にアクセスされてから20秒経過した場合 (このページが最後に読み込まれたとき)、ページにはキャッシュされた*時間*が表示されます。
+インデックスページが読み込まれるたびに、キャッシュがでキャッシュされた時間についてチェックされ `OnGetAsync` ます。 キャッシュされた時間が経過していない場合は、時間が表示されます。 キャッシュされた時間が最後にアクセスされてから20秒経過した場合 (このページが最後に読み込まれたとき)、ページにはキャッシュされた *時間*が表示されます。
 
-[キャッシュされた時間の**リセット**] ボタンを選択して、キャッシュされた時刻を現在の時刻に直ちに更新します。 このボタンをクリックすると、ハンドラーメソッドがトリガーさ `OnPostResetCachedTime` れます。
+[キャッシュされた時間の **リセット** ] ボタンを選択して、キャッシュされた時刻を現在の時刻に直ちに更新します。 このボタンをクリックすると、ハンドラーメソッドがトリガーさ `OnPostResetCachedTime` れます。
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
 > インスタンスに対してシングルトンまたはスコープ設定された有効期間を使用する必要はありません <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> (少なくとも組み込み実装の場合)。
 >
-> また、DI を使用する代わりに、必要に応じてインスタンスを作成することもできます <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> が、コードでインスタンスを作成すると、コードのテストが難しくなり、[明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に違反する可能性があります。
+> また、DI を使用する代わりに、必要に応じてインスタンスを作成することもできます <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> が、コードでインスタンスを作成すると、コードのテストが難しくなり、 [明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に違反する可能性があります。
 
 ## <a name="recommendations"></a>推奨事項
 
@@ -344,7 +345,7 @@ NCache を構成するには:
 
 * 既存のインフラストラクチャ
 * パフォーマンス要件
-* コスト
+* Cost
 * チームエクスペリエンス
 
 キャッシュソリューションは、通常、キャッシュされたデータを高速に取得するためにインメモリストレージに依存しますが、メモリは限られたリソースであり、拡張にはコストがかかります。 一般的に使用されるデータのみをキャッシュに格納します。
@@ -376,7 +377,7 @@ SQL Server が分散キャッシュバッキングストアとして使用され
 
 キャッシュされたデータが分散されると、データは次のようになります。
 
-* は、複数のサーバーに対する複数の要求にわたっ*て一貫し*ています。
+* は、複数のサーバーに対する複数の要求にわたっ *て一貫し* ています。
 * サーバーの再起動とアプリのデプロイが行われます。
 * はローカルメモリを使用しません。
 
@@ -386,11 +387,11 @@ SQL Server が分散キャッシュバッキングストアとして使用され
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
-SQL Server 分散キャッシュを使用するには、[メタパッケージ](xref:fundamentals/metapackage-app)を参照するか、AspNetCore[パッケージへのパッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)参照を追加します。
+SQL Server 分散キャッシュを使用するには、 [メタパッケージ](xref:fundamentals/metapackage-app) を参照するか、AspNetCore [パッケージへのパッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) 参照を追加します。
 
-Redis 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)を参照し[て、パッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Redis)参照をパッケージに追加します。 Redis パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイルで redis パッケージを個別に参照する必要があります。
+Redis 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app) を参照し [て、パッケージ](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Redis) 参照をパッケージに追加します。 Redis パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイルで redis パッケージを個別に参照する必要があります。
 
-NCache 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)を参照し、パッケージ参照を ncache.. [opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource)パッケージに追加します。 NCache パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイル内で個別に NCache パッケージを参照する必要があります。
+NCache 分散キャッシュを使用するには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app) を参照し、パッケージ参照を ncache.. [opensource](https://www.nuget.org/packages/NCache.Microsoft.Extensions.Caching.OpenSource) パッケージに追加します。 NCache パッケージはパッケージに含まれていない `Microsoft.AspNetCore.App` ため、プロジェクトファイル内で個別に NCache パッケージを参照する必要があります。
 
 ## <a name="idistributedcache-interface"></a>IDistributedCache インターフェイス
 
@@ -455,7 +456,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
-[Redis](https://redis.io/)は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの[Azure Redis Cache](https://azure.microsoft.com/services/cache/)を構成できます。
+[Redis](https://redis.io/) は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの [Azure Redis Cache](https://azure.microsoft.com/services/cache/) を構成できます。
 
 アプリは、インスタンス () を使用してキャッシュの実装を構成し <xref:Microsoft.Extensions.Caching.Redis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.RedisCacheServiceCollectionExtensions.AddDistributedRedisCache*> ます。
 
@@ -474,7 +475,7 @@ Redis をローカルコンピューターにインストールするには、�
 
 ### <a name="distributed-ncache-cache"></a>分散 NCache キャッシュ
 
-[Ncache](https://github.com/Alachisoft/NCache)は、.NET および .net Core でネイティブに開発されたオープンソースのメモリ内分散キャッシュです。 NCache はローカルに動作し、Azure または他のホスティングプラットフォームで実行される ASP.NET Core アプリの分散キャッシュクラスターとして構成されます。
+[Ncache](https://github.com/Alachisoft/NCache) は、.NET および .net Core でネイティブに開発されたオープンソースのメモリ内分散キャッシュです。 NCache はローカルに動作し、Azure または他のホスティングプラットフォームで実行される ASP.NET Core アプリの分散キャッシュクラスターとして構成されます。
 
 NCache をローカルコンピューターにインストールして構成するには、「 [ncache はじめに Guide For Windows](https://www.alachisoft.com/resources/docs/ncache-oss/getting-started-guide-windows/)」を参照してください。
 
@@ -495,7 +496,7 @@ NCache を構成するには:
 
 ## <a name="use-the-distributed-cache"></a>分散キャッシュを使用する
 
-インターフェイスを使用するには <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、アプリの任意のコンストラクターからのインスタンスを要求し <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ます。 インスタンスは、[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)によって提供されます。
+インターフェイスを使用するには <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、アプリの任意のコンストラクターからのインスタンスを要求し <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> ます。 インスタンスは、 [依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)によって提供されます。
 
 サンプルアプリが起動すると、 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> がに挿入され `Startup.Configure` ます。 現在の時刻はを使用してキャッシュされ <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime> ます (詳細については、「 [Web Host: IApplicationLifetime インターフェイス](xref:fundamentals/host/web-host#iapplicationlifetime-interface)」を参照してください)。
 
@@ -503,16 +504,16 @@ NCache を構成するには:
 
 サンプルアプリは <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 、 `IndexModel` インデックスページで使用するために、に挿入されます。
 
-インデックスページが読み込まれるたびに、キャッシュがでキャッシュされた時間についてチェックされ `OnGetAsync` ます。 キャッシュされた時間が経過していない場合は、時間が表示されます。 キャッシュされた時間が最後にアクセスされてから20秒経過した場合 (このページが最後に読み込まれたとき)、ページにはキャッシュされた*時間*が表示されます。
+インデックスページが読み込まれるたびに、キャッシュがでキャッシュされた時間についてチェックされ `OnGetAsync` ます。 キャッシュされた時間が経過していない場合は、時間が表示されます。 キャッシュされた時間が最後にアクセスされてから20秒経過した場合 (このページが最後に読み込まれたとき)、ページにはキャッシュされた *時間*が表示されます。
 
-[キャッシュされた時間の**リセット**] ボタンを選択して、キャッシュされた時刻を現在の時刻に直ちに更新します。 このボタンをクリックすると、ハンドラーメソッドがトリガーさ `OnPostResetCachedTime` れます。
+[キャッシュされた時間の **リセット** ] ボタンを選択して、キャッシュされた時刻を現在の時刻に直ちに更新します。 このボタンをクリックすると、ハンドラーメソッドがトリガーさ `OnPostResetCachedTime` れます。
 
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Pages/Index.cshtml.cs?name=snippet_IndexModel&highlight=7,14-20,25-29)]
 
 > [!NOTE]
 > インスタンスに対してシングルトンまたはスコープ設定された有効期間を使用する必要はありません <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> (少なくとも組み込み実装の場合)。
 >
-> また、DI を使用する代わりに、必要に応じてインスタンスを作成することもできます <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> が、コードでインスタンスを作成すると、コードのテストが難しくなり、[明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に違反する可能性があります。
+> また、DI を使用する代わりに、必要に応じてインスタンスを作成することもできます <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> が、コードでインスタンスを作成すると、コードのテストが難しくなり、 [明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に違反する可能性があります。
 
 ## <a name="recommendations"></a>推奨事項
 
@@ -520,7 +521,7 @@ NCache を構成するには:
 
 * 既存のインフラストラクチャ
 * パフォーマンス要件
-* コスト
+* Cost
 * チームエクスペリエンス
 
 キャッシュソリューションは、通常、キャッシュされたデータを高速に取得するためにインメモリストレージに依存しますが、メモリは限られたリソースであり、拡張にはコストがかかります。 一般的に使用されるデータのみをキャッシュに格納します。

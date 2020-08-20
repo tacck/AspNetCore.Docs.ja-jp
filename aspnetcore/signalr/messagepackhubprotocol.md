@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 8e590c87f75d35cbafde1adbc87dea9c45eac92d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ab9bd11e37182f5b24db5595d5d050f4cc0e32da
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022551"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626650"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core には、の MessagePack ハブプロトコルを使用します。 SignalR
 
 ::: moniker range=">= aspnetcore-5.0"
 
-この記事では、「[作業の開始](xref:tutorials/signalr)」で説明されているトピックについての知識がある読者を想定しています。
+この記事では、「 [作業の開始](xref:tutorials/signalr)」で説明されているトピックについての知識がある読者を想定しています。
 
 ## <a name="what-is-messagepack"></a>MessagePack とは
 
-[Messagepack](https://msgpack.org/index.html)は、高速でコンパクトなバイナリシリアル化形式です。 これは、 [JSON](https://www.json.org/)と比較して小さいメッセージを作成するため、パフォーマンスと帯域幅が問題になる場合に便利です。 バイナリメッセージは、ネットワークトレースとログを参照するときに、MessagePack パーサーを通じてバイトが渡されない限り、読み取ることができません。 SignalRには、MessagePack 形式のサポートが組み込まれており、クライアントとサーバーが使用する Api が用意されています。
+[Messagepack](https://msgpack.org/index.html) は、高速でコンパクトなバイナリシリアル化形式です。 これは、 [JSON](https://www.json.org/)と比較して小さいメッセージを作成するため、パフォーマンスと帯域幅が問題になる場合に便利です。 バイナリメッセージは、ネットワークトレースとログを参照するときに、MessagePack パーサーを通じてバイトが渡されない限り、読み取ることができません。 SignalR には、MessagePack 形式のサポートが組み込まれており、クライアントとサーバーが使用する Api が用意されています。
 
 ## <a name="configure-messagepack-on-the-server"></a>サーバーでの MessagePack の構成
 
@@ -92,7 +93,7 @@ Npm パッケージをインストールした後、モジュールは JavaScrip
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-ブラウザーで `msgpack5` も、ライブラリを参照する必要があります。 タグを使用して `<script>` 参照を作成します。 ライブラリは*node_modules\msgpack5\dist\msgpack5.js*にあります。
+ブラウザーで `msgpack5` も、ライブラリを参照する必要があります。 タグを使用して `<script>` 参照を作成します。 ライブラリは *node_modules\msgpack5\dist\msgpack5.js*にあります。
 
 > [!NOTE]
 > 要素を使用する場合 `<script>` 、順序は重要です。 *msgpack5.js*する前に*signalr-protocol-msgpack.js*が参照されている場合は、messagepack に接続しようとするとエラーが発生します。 *signalr-protocol-msgpack.js*する前に*signalr.js*も必要です。
@@ -131,7 +132,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 例:
+JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 次に例を示します。
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -145,7 +146,7 @@ MessagePack プロトコルで `Kind` は、の値をエンコードする方法
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>MinValue は、JavaScript の MessagePack ではサポートされていません
 
-JavaScript クライアントによって使用される[msgpack5](https://github.com/mcollina/msgpack5)ライブラリは、 SignalR messagepack の型をサポートしていません `timestamp96` 。 この型は、非常に大きな日付値をエンコードするために使用されます (過去またはそれ以降の非常に早い段階)。 の値 `DateTime.MinValue` はで `January 1, 0001` あり、値でエンコードする必要があり `timestamp96` ます。 このため、 `DateTime.MinValue` JavaScript クライアントへの送信はサポートされていません。 `DateTime.MinValue`が JavaScript クライアントによって受信されると、次のエラーがスローされます。
+JavaScript クライアントによって使用される [msgpack5](https://github.com/mcollina/msgpack5) ライブラリは、 SignalR messagepack の型をサポートしていません `timestamp96` 。 この型は、非常に大きな日付値をエンコードするために使用されます (過去またはそれ以降の非常に早い段階)。 の値 `DateTime.MinValue` はで `January 1, 0001` あり、値でエンコードする必要があり `timestamp96` ます。 このため、 `DateTime.MinValue` JavaScript クライアントへの送信はサポートされていません。 `DateTime.MinValue`が JavaScript クライアントによって受信されると、次のエラーがスローされます。
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
@@ -157,7 +158,7 @@ Uncaught Error: unable to find ext type 255 at decoder.js:427
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"事前に" コンパイル環境での MessagePack のサポート
 
-.NET クライアントとサーバーで使用される[Messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90)ライブラリは、コード生成を使用してシリアル化を最適化します。 その結果、"事前に" コンパイル (Xamarin iOS や Unity など) を使用する環境では、既定ではサポートされません。 これらの環境では、シリアライザー/デシリアライザーコードを "事前に生成する" ことで MessagePack を使用することができます。 詳細については、 [MessagePack-CSharp のドキュメント](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin)を参照してください。 シリアライザーを事前に生成したら、に渡された構成デリゲートを使用してそれらを登録でき `AddMessagePackProtocol` ます。
+.NET クライアントとサーバーで使用される [Messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90) ライブラリは、コード生成を使用してシリアル化を最適化します。 その結果、"事前に" コンパイル (Xamarin iOS や Unity など) を使用する環境では、既定ではサポートされません。 これらの環境では、シリアライザー/デシリアライザーコードを "事前に生成する" ことで MessagePack を使用することができます。 詳細については、 [MessagePack-CSharp のドキュメント](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin)を参照してください。 シリアライザーを事前に生成したら、に渡された構成デリゲートを使用してそれらを登録でき `AddMessagePackProtocol` ます。
 
 ```csharp
 services.AddSignalR()
@@ -185,7 +186,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 ## <a name="related-resources"></a>関連リソース
 
-* [Get Started (概要)](xref:tutorials/signalr)
+* [作業の開始](xref:tutorials/signalr)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 
@@ -193,11 +194,11 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-この記事では、「[作業の開始](xref:tutorials/signalr)」で説明されているトピックについての知識がある読者を想定しています。
+この記事では、「 [作業の開始](xref:tutorials/signalr)」で説明されているトピックについての知識がある読者を想定しています。
 
 ## <a name="what-is-messagepack"></a>MessagePack とは
 
-[Messagepack](https://msgpack.org/index.html)は、高速でコンパクトなバイナリシリアル化形式です。 これは、 [JSON](https://www.json.org/)と比較して小さいメッセージを作成するため、パフォーマンスと帯域幅が問題になる場合に便利です。 バイナリメッセージは、ネットワークトレースとログを参照するときに、MessagePack パーサーを通じてバイトが渡されない限り、読み取ることができません。 SignalRには、MessagePack 形式のサポートが組み込まれており、クライアントとサーバーが使用する Api が用意されています。
+[Messagepack](https://msgpack.org/index.html) は、高速でコンパクトなバイナリシリアル化形式です。 これは、 [JSON](https://www.json.org/)と比較して小さいメッセージを作成するため、パフォーマンスと帯域幅が問題になる場合に便利です。 バイナリメッセージは、ネットワークトレースとログを参照するときに、MessagePack パーサーを通じてバイトが渡されない限り、読み取ることができません。 SignalR には、MessagePack 形式のサポートが組み込まれており、クライアントとサーバーが使用する Api が用意されています。
 
 ## <a name="configure-messagepack-on-the-server"></a>サーバーでの MessagePack の構成
 
@@ -267,7 +268,7 @@ Npm パッケージをインストールした後、モジュールは JavaScrip
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-ブラウザーで `msgpack5` も、ライブラリを参照する必要があります。 タグを使用して `<script>` 参照を作成します。 ライブラリは*node_modules\msgpack5\dist\msgpack5.js*にあります。
+ブラウザーで `msgpack5` も、ライブラリを参照する必要があります。 タグを使用して `<script>` 参照を作成します。 ライブラリは *node_modules\msgpack5\dist\msgpack5.js*にあります。
 
 > [!NOTE]
 > 要素を使用する場合 `<script>` 、順序は重要です。 *msgpack5.js*する前に*signalr-protocol-msgpack.js*が参照されている場合は、messagepack に接続しようとするとエラーが発生します。 *signalr-protocol-msgpack.js*する前に*signalr.js*も必要です。
@@ -306,7 +307,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 例:
+JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 次に例を示します。
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -322,7 +323,7 @@ MessagePack プロトコルで `Kind` は、の値をエンコードする方法
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>MinValue は、JavaScript の MessagePack ではサポートされていません
 
-JavaScript クライアントによって使用される[msgpack5](https://github.com/mcollina/msgpack5)ライブラリは、 SignalR messagepack の型をサポートしていません `timestamp96` 。 この型は、非常に大きな日付値をエンコードするために使用されます (過去またはそれ以降の非常に早い段階)。 の値 `DateTime.MinValue` はで `January 1, 0001` あり、値でエンコードする必要があり `timestamp96` ます。 このため、 `DateTime.MinValue` JavaScript クライアントへの送信はサポートされていません。 `DateTime.MinValue`が JavaScript クライアントによって受信されると、次のエラーがスローされます。
+JavaScript クライアントによって使用される [msgpack5](https://github.com/mcollina/msgpack5) ライブラリは、 SignalR messagepack の型をサポートしていません `timestamp96` 。 この型は、非常に大きな日付値をエンコードするために使用されます (過去またはそれ以降の非常に早い段階)。 の値 `DateTime.MinValue` はで `January 1, 0001` あり、値でエンコードする必要があり `timestamp96` ます。 このため、 `DateTime.MinValue` JavaScript クライアントへの送信はサポートされていません。 `DateTime.MinValue`が JavaScript クライアントによって受信されると、次のエラーがスローされます。
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
@@ -334,7 +335,7 @@ Uncaught Error: unable to find ext type 255 at decoder.js:427
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"事前に" コンパイル環境での MessagePack のサポート
 
-.NET クライアントとサーバーで使用される[Messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80)ライブラリは、コード生成を使用してシリアル化を最適化します。 その結果、"事前に" コンパイル (Xamarin iOS や Unity など) を使用する環境では、既定ではサポートされません。 これらの環境では、シリアライザー/デシリアライザーコードを "事前に生成する" ことで MessagePack を使用することができます。 詳細については、 [MessagePack-CSharp のドキュメント](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)を参照してください。 シリアライザーを事前に生成したら、に渡された構成デリゲートを使用してそれらを登録でき `AddMessagePackProtocol` ます。
+.NET クライアントとサーバーで使用される [Messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) ライブラリは、コード生成を使用してシリアル化を最適化します。 その結果、"事前に" コンパイル (Xamarin iOS や Unity など) を使用する環境では、既定ではサポートされません。 これらの環境では、シリアライザー/デシリアライザーコードを "事前に生成する" ことで MessagePack を使用することができます。 詳細については、 [MessagePack-CSharp のドキュメント](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)を参照してください。 シリアライザーを事前に生成したら、に渡された構成デリゲートを使用してそれらを登録でき `AddMessagePackProtocol` ます。
 
 ```csharp
 services.AddSignalR()
@@ -360,7 +361,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 ## <a name="related-resources"></a>関連リソース
 
-* [Get Started (概要)](xref:tutorials/signalr)
+* [作業の開始](xref:tutorials/signalr)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 
@@ -368,11 +369,11 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 ::: moniker range="< aspnetcore-3.0"
 
-この記事では、「[作業の開始](xref:tutorials/signalr)」で説明されているトピックについての知識がある読者を想定しています。
+この記事では、「 [作業の開始](xref:tutorials/signalr)」で説明されているトピックについての知識がある読者を想定しています。
 
 ## <a name="what-is-messagepack"></a>MessagePack とは
 
-[Messagepack](https://msgpack.org/index.html)は、高速でコンパクトなバイナリシリアル化形式です。 これは、 [JSON](https://www.json.org/)と比較して小さいメッセージを作成するため、パフォーマンスと帯域幅が問題になる場合に便利です。 バイナリメッセージは、ネットワークトレースとログを参照するときに、MessagePack パーサーを通じてバイトが渡されない限り、読み取ることができません。 SignalRには、MessagePack 形式のサポートが組み込まれており、クライアントとサーバーが使用する Api が用意されています。
+[Messagepack](https://msgpack.org/index.html) は、高速でコンパクトなバイナリシリアル化形式です。 これは、 [JSON](https://www.json.org/)と比較して小さいメッセージを作成するため、パフォーマンスと帯域幅が問題になる場合に便利です。 バイナリメッセージは、ネットワークトレースとログを参照するときに、MessagePack パーサーを通じてバイトが渡されない限り、読み取ることができません。 SignalR には、MessagePack 形式のサポートが組み込まれており、クライアントとサーバーが使用する Api が用意されています。
 
 ## <a name="configure-messagepack-on-the-server"></a>サーバーでの MessagePack の構成
 
@@ -442,7 +443,7 @@ Npm パッケージをインストールした後、モジュールは JavaScrip
 
 *node_modules\\@aspnet\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js*
 
-ブラウザーで `msgpack5` も、ライブラリを参照する必要があります。 タグを使用して `<script>` 参照を作成します。 ライブラリは*node_modules\msgpack5\dist\msgpack5.js*にあります。
+ブラウザーで `msgpack5` も、ライブラリを参照する必要があります。 タグを使用して `<script>` 参照を作成します。 ライブラリは *node_modules\msgpack5\dist\msgpack5.js*にあります。
 
 > [!NOTE]
 > 要素を使用する場合 `<script>` 、順序は重要です。 *msgpack5.js*する前に*signalr-protocol-msgpack.js*が参照されている場合は、messagepack に接続しようとするとエラーが発生します。 *signalr-protocol-msgpack.js*する前に*signalr.js*も必要です。
@@ -481,7 +482,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 例:
+JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 次に例を示します。
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -497,7 +498,7 @@ MessagePack プロトコルで `Kind` は、の値をエンコードする方法
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>MinValue は、JavaScript の MessagePack ではサポートされていません
 
-JavaScript クライアントによって使用される[msgpack5](https://github.com/mcollina/msgpack5)ライブラリは、 SignalR messagepack の型をサポートしていません `timestamp96` 。 この型は、非常に大きな日付値をエンコードするために使用されます (過去またはそれ以降の非常に早い段階)。 の値は `DateTime.MinValue` 、 `January 1, 0001` 値でエンコードする必要があり `timestamp96` ます。 このため、 `DateTime.MinValue` JavaScript クライアントへの送信はサポートされていません。 `DateTime.MinValue`が JavaScript クライアントによって受信されると、次のエラーがスローされます。
+JavaScript クライアントによって使用される [msgpack5](https://github.com/mcollina/msgpack5) ライブラリは、 SignalR messagepack の型をサポートしていません `timestamp96` 。 この型は、非常に大きな日付値をエンコードするために使用されます (過去またはそれ以降の非常に早い段階)。 の値は `DateTime.MinValue` 、 `January 1, 0001` 値でエンコードする必要があり `timestamp96` ます。 このため、 `DateTime.MinValue` JavaScript クライアントへの送信はサポートされていません。 `DateTime.MinValue`が JavaScript クライアントによって受信されると、次のエラーがスローされます。
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
@@ -509,7 +510,7 @@ Uncaught Error: unable to find ext type 255 at decoder.js:427
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"事前に" コンパイル環境での MessagePack のサポート
 
-.NET クライアントとサーバーで使用される[Messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80)ライブラリは、コード生成を使用してシリアル化を最適化します。 その結果、"事前に" コンパイル (Xamarin iOS や Unity など) を使用する環境では、既定ではサポートされません。 これらの環境では、シリアライザー/デシリアライザーコードを "事前に生成する" ことで MessagePack を使用することができます。 詳細については、 [MessagePack-CSharp のドキュメント](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)を参照してください。 シリアライザーを事前に生成したら、に渡された構成デリゲートを使用してそれらを登録でき `AddMessagePackProtocol` ます。
+.NET クライアントとサーバーで使用される [Messagepack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) ライブラリは、コード生成を使用してシリアル化を最適化します。 その結果、"事前に" コンパイル (Xamarin iOS や Unity など) を使用する環境では、既定ではサポートされません。 これらの環境では、シリアライザー/デシリアライザーコードを "事前に生成する" ことで MessagePack を使用することができます。 詳細については、 [MessagePack-CSharp のドキュメント](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)を参照してください。 シリアライザーを事前に生成したら、に渡された構成デリゲートを使用してそれらを登録でき `AddMessagePackProtocol` ます。
 
 ```csharp
 services.AddSignalR()
@@ -535,7 +536,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 ## <a name="related-resources"></a>関連リソース
 
-* [Get Started (概要)](xref:tutorials/signalr)
+* [作業の開始](xref:tutorials/signalr)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 

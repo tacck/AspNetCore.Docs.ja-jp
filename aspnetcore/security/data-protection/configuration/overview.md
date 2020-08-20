@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 0ff211624b7cf363da393a627c761302d9f3d8ed
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: aa7f6f3c1ff8042bd11bba485a2d7b8aaa6ef88a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019756"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626715"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core データ保護の構成
 
-データ保護システムが初期化されると、運用環境に基づいて[既定の設定](xref:security/data-protection/configuration/default-settings)が適用されます。 これらの設定は、通常、1台のコンピューターで実行されるアプリに適しています。 開発者が既定の設定を変更する場合があります。
+データ保護システムが初期化されると、運用環境に基づいて [既定の設定](xref:security/data-protection/configuration/default-settings) が適用されます。 これらの設定は、通常、1台のコンピューターで実行されるアプリに適しています。 開発者が既定の設定を変更する場合があります。
 
 * アプリは複数のコンピューターに分散されています。
 * コンプライアンス上の理由で。
@@ -35,7 +36,7 @@ ms.locfileid: "88019756"
 > [!WARNING]
 > 構成ファイルと同様に、データ保護キーリングは適切なアクセス許可を使用して保護する必要があります。 保存時のキーの暗号化は選択できますが、攻撃者によって新しいキーが作成されるのを防ぐことはできません。 その結果、アプリのセキュリティが影響を受けます。 データ保護を使用して構成されたストレージの場所は、構成ファイルを保護する場合と同様に、アプリ自体に限定されます。 たとえば、キーリングをディスクに保存する場合は、ファイルシステムのアクセス許可を使用します。 Web アプリが実行されている id のみが、そのディレクトリへの読み取り、書き込み、および作成のアクセス権を持っていることを確認します。 Azure Blob Storage を使用する場合は、web アプリのみが Blob ストア内の新しいエントリの読み取り、書き込み、または作成を行うことができます。
 >
-> 拡張メソッド[Adddataprotection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection)は[IDataProtectionBuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)を返します。 `IDataProtectionBuilder`データ保護オプションを構成するために連結できる拡張メソッドを公開します。
+> 拡張メソッド [Adddataprotection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) は [IDataProtectionBuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)を返します。 `IDataProtectionBuilder` データ保護オプションを構成するために連結できる拡張メソッドを公開します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -61,15 +62,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-キーリングのストレージの場所を設定します (たとえば、 [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage))。 を呼び出すと、 `ProtectKeysWithAzureKeyVault` キーリングストレージの場所を含む自動データ保護設定を無効にする[IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor)が実装されるため、場所を設定する必要があります。 前の例では、Azure Blob Storage を使用してキーリングを永続化しています。 詳細については、「[キー記憶域プロバイダー: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)」を参照してください。 キーリングを[Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)でローカルに永続化することもできます。
+キーリングのストレージの場所を設定します (たとえば、 [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage))。 を呼び出すと、 `ProtectKeysWithAzureKeyVault` キーリングストレージの場所を含む自動データ保護設定を無効にする [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) が実装されるため、場所を設定する必要があります。 前の例では、Azure Blob Storage を使用してキーリングを永続化しています。 詳細については、「 [キー記憶域プロバイダー: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)」を参照してください。 キーリングを [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)でローカルに永続化することもできます。
 
-はキーの `keyIdentifier` 暗号化に使用される key vault キー識別子です。 たとえば、内のという名前の key vault で作成されたキーには、 `dataprotection` `contosokeyvault` キー識別子があり `https://contosokeyvault.vault.azure.net/keys/dataprotection/` ます。 キーコンテナーへの**ラップ解除キー**と**ラップキー**のアクセス許可をアプリに提供します。
+はキーの `keyIdentifier` 暗号化に使用される key vault キー識別子です。 たとえば、内のという名前の key vault で作成されたキーには、 `dataprotection` `contosokeyvault` キー識別子があり `https://contosokeyvault.vault.azure.net/keys/dataprotection/` ます。 キーコンテナーへの **ラップ解除キー** と **ラップキー** のアクセス許可をアプリに提供します。
 
-`ProtectKeysWithAzureKeyVault`オーバーライド
+`ProtectKeysWithAzureKeyVault` オーバーライド
 
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, KeyVaultClient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_)では、 [KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient)を使用して、データ保護システムが key vault を使用できるようにします。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, KeyVaultClient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) では、 [KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) を使用して、データ保護システムが key vault を使用できるようにします。
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_)では、および X509Certificate を使用して、 `ClientId` データ保護システムで key vault を使用できるようにします。 [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2)
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_)は、とを使用して、 `ClientId` `ClientSecret` データ保護システムが key vault を使用できるようにします。
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) は、とを使用して、 `ClientId` `ClientSecret` データ保護システムが key vault を使用できるようにします。
 
 Keyvault と azure storage の組み合わせを使用してキーを格納および保護する場合、 `System.UriFormatException` キーを格納する blob がまだ存在しない場合はがスローされます。 これは、アプリケーションを実行する前に手動で作成することも、 `.ProtectKeysWithAzureKeyVault()` blob を作成するために最初に実行するときに削除してから、後続の実行用に追加することもできます。 `.ProtectKeysWithAzureKeyVault()`ファイルが適切なスキーマと値で作成されるようにするため、を削除することをお勧めします。
 
@@ -135,7 +136,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-その他の例と組み込みのキー暗号化メカニズムの詳細については、「保存[時のキーの暗号化](xref:security/data-protection/implementation/key-encryption-at-rest)」を参照してください。
+その他の例と組み込みのキー暗号化メカニズムの詳細については、「保存 [時のキーの暗号化](xref:security/data-protection/implementation/key-encryption-at-rest) 」を参照してください。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -172,14 +173,14 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="setapplicationname"></a>SetApplicationName
 
-既定では、データ保護システムは、同じ物理キーリポジトリを共有している場合でも、[コンテンツのルート](xref:fundamentals/index#content-root)パスに基づいて、アプリを相互に分離します。 これにより、アプリは互いの保護されたペイロードを認識できなくなります。
+既定では、データ保護システムは、同じ物理キーリポジトリを共有している場合でも、 [コンテンツのルート](xref:fundamentals/index#content-root) パスに基づいて、アプリを相互に分離します。 これにより、アプリは互いの保護されたペイロードを認識できなくなります。
 
 保護されたペイロードをアプリ間で共有するには:
 
 * <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>各アプリで同じ値を使用してを構成します。
-* アプリ全体で同じバージョンのデータ保護 API スタックを使用します。 アプリのプロジェクトファイルで、次の**いずれか**を実行します。
+* アプリ全体で同じバージョンのデータ保護 API スタックを使用します。 アプリのプロジェクトファイルで、次の **いずれか** を実行します。
   * [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)を介して、同じ共有フレームワークのバージョンを参照します。
-  * 同じ[データ保護パッケージ](xref:security/data-protection/introduction#package-layout)のバージョンを参照します。
+  * 同じ [データ保護パッケージ](xref:security/data-protection/introduction#package-layout) のバージョンを参照します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -214,11 +215,11 @@ public void ConfigureServices(IServiceCollection services)
 
 この分離メカニズムは、アプリが悪意のあるものではないことを前提としています。 悪意のあるアプリは、同じワーカープロセスアカウントで実行されている他のアプリに常に影響を与える可能性があります。 アプリが相互に信頼されていない共有ホスティング環境では、ホスティングプロバイダーはアプリ間の OS レベルの分離を保証するための手順を実行する必要があります。これには、アプリの基になるキーリポジトリの分離も含まれます。
 
-データ保護システムが ASP.NET Core ホストによって提供されない場合 (具象型でインスタンス化する場合など `DataProtectionProvider` )、アプリの分離は既定で無効になります。 アプリの分離が無効になっている場合、同じキーマテリアルによってサポートされるすべてのアプリは、適切な[目的](xref:security/data-protection/consumer-apis/purpose-strings)で提供されている限り、ペイロードを共有できます。 この環境でアプリの分離を提供するには、構成オブジェクトで[Setapplicationname](#setapplicationname)メソッドを呼び出し、アプリごとに一意の名前を指定します。
+データ保護システムが ASP.NET Core ホストによって提供されない場合 (具象型でインスタンス化する場合など `DataProtectionProvider` )、アプリの分離は既定で無効になります。 アプリの分離が無効になっている場合、同じキーマテリアルによってサポートされるすべてのアプリは、適切な [目的](xref:security/data-protection/consumer-apis/purpose-strings)で提供されている限り、ペイロードを共有できます。 この環境でアプリの分離を提供するには、構成オブジェクトで [Setapplicationname](#setapplicationname) メソッドを呼び出し、アプリごとに一意の名前を指定します。
 
 ## <a name="changing-algorithms-with-usecryptographicalgorithms"></a>UseCryptographicAlgorithms を使用したアルゴリズムの変更
 
-データ保護スタックでは、新しく生成されたキーによって使用される既定のアルゴリズムを変更することができます。 これを行う最も簡単な方法は、構成コールバックから[UseCryptographicAlgorithms](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.usecryptographicalgorithms)を呼び出すことです。
+データ保護スタックでは、新しく生成されたキーによって使用される既定のアルゴリズムを変更することができます。 これを行う最も簡単な方法は、構成コールバックから [UseCryptographicAlgorithms](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.usecryptographicalgorithms) を呼び出すことです。
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -248,9 +249,9 @@ services.AddDataProtection()
 
 ::: moniker-end
 
-既定の EncryptionAlgorithm は AES-256-CBC、既定の ValidationAlgorithm は HMACSHA256 です。 既定のポリシーは、[コンピューター全体のポリシー](xref:security/data-protection/configuration/machine-wide-policy)を使用してシステム管理者が設定できますが、を明示的に呼び出すと、 `UseCryptographicAlgorithms` 既定のポリシーが上書きされます。
+既定の EncryptionAlgorithm は AES-256-CBC、既定の ValidationAlgorithm は HMACSHA256 です。 既定のポリシーは、 [コンピューター全体のポリシー](xref:security/data-protection/configuration/machine-wide-policy)を使用してシステム管理者が設定できますが、を明示的に呼び出すと、 `UseCryptographicAlgorithms` 既定のポリシーが上書きされます。
 
-を呼び出す `UseCryptographicAlgorithms` と、定義済みの組み込みリストから目的のアルゴリズムを指定できます。 アルゴリズムの実装について心配する必要はありません。 上記のシナリオでは、Windows で実行されている場合、データ保護システムは AES の CNG 実装を使用しようとします。 それ以外の場合は[、管理された](/dotnet/api/system.security.cryptography.aes)system.object クラスにフォールバックします。
+を呼び出す `UseCryptographicAlgorithms` と、定義済みの組み込みリストから目的のアルゴリズムを指定できます。 アルゴリズムの実装について心配する必要はありません。 上記のシナリオでは、Windows で実行されている場合、データ保護システムは AES の CNG 実装を使用しようとします。 それ以外の場合は [、管理された](/dotnet/api/system.security.cryptography.aes) system.object クラスにフォールバックします。
 
 [UseCustomCryptographicAlgorithms](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.usecustomcryptographicalgorithms)の呼び出しを使用して、手動で実装を指定できます。
 
@@ -261,7 +262,7 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.0"
 
-カスタムマネージアルゴリズムを指定するには、次の実装の種類を指す[Managed認証 Ated暗号化の構成](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.managedauthenticatedencryptorconfiguration)インスタンスを作成します。
+カスタムマネージアルゴリズムを指定するには、次の実装の種類を指す [Managed認証 Ated暗号化の構成](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.managedauthenticatedencryptorconfiguration) インスタンスを作成します。
 
 ```csharp
 serviceCollection.AddDataProtection()
@@ -283,7 +284,7 @@ serviceCollection.AddDataProtection()
 
 ::: moniker range="< aspnetcore-2.0"
 
-カスタムマネージアルゴリズムを指定するには、実装の種類を指す[Managedauthenticatedencryptionsettings](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.managedauthenticatedencryptionsettings)インスタンスを作成します。
+カスタムマネージアルゴリズムを指定するには、実装の種類を指す [Managedauthenticatedencryptionsettings](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.managedauthenticatedencryptionsettings) インスタンスを作成します。
 
 ```csharp
 serviceCollection.AddDataProtection()
@@ -303,7 +304,7 @@ serviceCollection.AddDataProtection()
 
 ::: moniker-end
 
-一般に、 \* 型プロパティは[Symmetricalgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm)と[KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)のインスタンス化された (パブリックのパラメーター化されていない) 実装を指す必要がありますが、システムによって特別なケースによって、便宜上の値が使用さ `typeof(Aes)` れます。
+一般に、 \* 型プロパティは [Symmetricalgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm) と [KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)のインスタンス化された (パブリックのパラメーター化されていない) 実装を指す必要がありますが、システムによって特別なケースによって、便宜上の値が使用さ `typeof(Aes)` れます。
 
 > [!NOTE]
 > SymmetricAlgorithm のキーの長さは、≥128ビットおよびブロックサイズ≥64ビットである必要があります。また、PKCS #7 パディングによる CBC モードの暗号化をサポートする必要があります。 KeyedHashAlgorithm のダイジェストサイズは >= 128 ビットである必要があり、ハッシュアルゴリズムのダイジェストの長さと同じ長さのキーをサポートする必要があります。 KeyedHashAlgorithm は、必ずしも HMAC である必要はありません。
@@ -312,7 +313,7 @@ serviceCollection.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.0"
 
-HMAC 検証で CBC モード暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む[CngCbcAuthenticatedEncryptorConfiguration](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration)インスタンスを作成します。
+HMAC 検証で CBC モード暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む [CngCbcAuthenticatedEncryptorConfiguration](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration) インスタンスを作成します。
 
 ```csharp
 services.AddDataProtection()
@@ -336,7 +337,7 @@ services.AddDataProtection()
 
 ::: moniker range="< aspnetcore-2.0"
 
-HMAC 検証で CBC モード暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む[CngCbcAuthenticatedEncryptionSettings](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.cngcbcauthenticatedencryptionsettings)インスタンスを作成します。
+HMAC 検証で CBC モード暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む [CngCbcAuthenticatedEncryptionSettings](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.cngcbcauthenticatedencryptionsettings) インスタンスを作成します。
 
 ```csharp
 services.AddDataProtection()
@@ -359,11 +360,11 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズ >= 64 ビットである必要があります。また、PKCS #7 パディングによる CBC モードの暗号化をサポートしている必要があります。 ハッシュアルゴリズムのダイジェストサイズは >= 128 ビットである必要があり、BCRYPT \_ ALG \_ HANDLE \_ HMAC フラグフラグを使用して開くことがサポートされている必要があり \_ ます。 \*プロバイダーのプロパティを null に設定すると、指定したアルゴリズムの既定のプロバイダーを使用できます。 詳細については、 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider)のドキュメントを参照してください。
+> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズ >= 64 ビットである必要があります。また、PKCS #7 パディングによる CBC モードの暗号化をサポートしている必要があります。 ハッシュアルゴリズムのダイジェストサイズは >= 128 ビットである必要があり、BCRYPT \_ ALG \_ HANDLE \_ HMAC フラグフラグを使用して開くことがサポートされている必要があり \_ ます。 \*プロバイダーのプロパティを null に設定すると、指定したアルゴリズムの既定のプロバイダーを使用できます。 詳細については、 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider) のドキュメントを参照してください。
 
 ::: moniker range=">= aspnetcore-2.0"
 
-検証で Galois/カウンタモードの暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む[CngGcmAuthenticatedEncryptorConfiguration](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cnggcmauthenticatedencryptorconfiguration)インスタンスを作成します。
+検証で Galois/カウンタモードの暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む [CngGcmAuthenticatedEncryptorConfiguration](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cnggcmauthenticatedencryptorconfiguration) インスタンスを作成します。
 
 ```csharp
 services.AddDataProtection()
@@ -383,7 +384,7 @@ services.AddDataProtection()
 
 ::: moniker range="< aspnetcore-2.0"
 
-検証で Galois/カウンタモードの暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む[CngGcmAuthenticatedEncryptionSettings](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.cnggcmauthenticatedencryptionsettings)インスタンスを作成します。
+検証で Galois/カウンタモードの暗号化を使用してカスタム Windows CNG アルゴリズムを指定するには、アルゴリズム情報を含む [CngGcmAuthenticatedEncryptionSettings](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.cnggcmauthenticatedencryptionsettings) インスタンスを作成します。
 
 ```csharp
 services.AddDataProtection()
@@ -402,7 +403,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズは正確に128ビットである必要があり、GCM 暗号化をサポートしている必要があります。 指定されたアルゴリズムの既定のプロバイダーを使用するには、 [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider)プロパティを null に設定します。 詳細については、 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider)のドキュメントを参照してください。
+> 対称ブロック暗号アルゴリズムのキーの長さは >= 128 ビット、ブロックサイズは正確に128ビットである必要があり、GCM 暗号化をサポートしている必要があります。 指定されたアルゴリズムの既定のプロバイダーを使用するには、 [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) プロパティを null に設定します。 詳細については、 [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider) のドキュメントを参照してください。
 
 ### <a name="specifying-other-custom-algorithms"></a>その他のカスタムアルゴリズムの指定
 
@@ -417,7 +418,7 @@ services.AddDataProtection()
 
 ## <a name="persisting-keys-with-redis"></a>Redis でのキーの永続化
 
-キーを格納するには、 [Redis データの永続](/azure/azure-cache-for-redis/cache-how-to-premium-persistence)化をサポートする redis のバージョンのみを使用する必要があります。 [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction)は永続的で、キーを格納するために使用できます。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/AspNetCore/issues/13476)のページを参照してください。
+キーを格納するには、 [Redis データの永続](/azure/azure-cache-for-redis/cache-how-to-premium-persistence) 化をサポートする redis のバージョンのみを使用する必要があります。 [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction) は永続的で、キーを格納するために使用できます。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/AspNetCore/issues/13476)します。
 
 ## <a name="additional-resources"></a>その他のリソース
 

@@ -5,6 +5,7 @@ description: ASP.NET の machineKey を置き換えて、新しいより安全�
 ms.author: riande
 ms.date: 04/06/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 6b98244f9f288101a971257c9dab50d8895b8881
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8cae0b8f1c4582e272061ff87868b32568dfe595
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018209"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625571"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>ASP.NET Core の ASP.NET machineKey を置き換える
 
@@ -33,9 +34,9 @@ ms.locfileid: "88018209"
 > [!NOTE]
 > 新しいデータ保護システムは、.NET 4.5.1 以降を対象とする既存の ASP.NET アプリケーションにのみインストールできます。 アプリケーションが .NET 4.5 以下を対象としている場合、インストールは失敗します。
 
-新しいデータ保護システムを既存の ASP.NET 4.5.1 + プロジェクトにインストールするには、パッケージ Microsoft.AspNetCore.DataProtection.SystemWeb にインストールします。 これにより、[既定の構成](xref:security/data-protection/configuration/default-settings)設定を使用してデータ保護システムがインスタンス化されます。
+新しいデータ保護システムを既存の ASP.NET 4.5.1 + プロジェクトにインストールするには、パッケージ Microsoft.AspNetCore.DataProtection.SystemWeb にインストールします。 これにより、 [既定の構成](xref:security/data-protection/configuration/default-settings) 設定を使用してデータ保護システムがインスタンス化されます。
 
-パッケージをインストールすると、 *Web.config*に行が挿入されます。これにより、フォーム認証、ビューステート、および ASP.NET の呼び出しなど、[ほとんどの暗号化操作](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)に使用するように指示されます。 挿入された行は次のように読み取られます。
+パッケージをインストールすると、 *Web.config* に行が挿入されます。これにより、フォーム認証、ビューステート、および ASP.NET の呼び出しなど、 [ほとんどの暗号化操作](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)に使用するように指示されます。 挿入された行は次のように読み取られます。
 
 ```xml
 <machineKey compatibilityMode="Framework45" dataProtectorType="..." />

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: e18a2096c3b9fa788ba2a9713d0f25c1e76af2db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 425f1aaf1fa86f10d857c34e621c302f2db258e5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019964"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626793"
 ---
 # <a name="use-web-api-conventions"></a>Web API 規約を使用する
 
@@ -83,7 +84,7 @@ ASP.NET Core MVC 2.2 以降には、一連の既定の規約 <xref:Microsoft.Asp
 
 ### <a name="response-types"></a>応答の種類
 
-これらのメソッドには `[ProducesResponseType]` または `[ProducesDefaultResponseType]` 属性の注釈が付けられています。 例:
+これらのメソッドには `[ProducesResponseType]` または `[ProducesDefaultResponseType]` 属性の注釈が付けられています。 次に例を示します。
 
 ```csharp
 public static class MyAppConventions
@@ -103,7 +104,7 @@ public static class MyAppConventions
 
 ### <a name="naming-requirements"></a>名前付けに関する要件
 
-`[ApiConventionNameMatch]` 属性と `[ApiConventionTypeMatch]` 属性は、適用されるアクションを決定する規約のメソッドに適用することができます。 例:
+`[ApiConventionNameMatch]` 属性と `[ApiConventionTypeMatch]` 属性は、適用されるアクションを決定する規約のメソッドに適用することができます。 次に例を示します。
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]

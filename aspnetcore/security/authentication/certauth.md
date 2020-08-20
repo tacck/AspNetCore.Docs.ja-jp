@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 54780e2d67c70d945fd875c41c8d6483aa358bbf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021953"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627196"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core の[証明書認証](https://tools.ietf.org/html/rfc5246#section-7.4.4)に似た実装が含まれています。 証明書の認証は、ASP.NET Core に到達するずっと前に TLS レベルで実行されます。 より正確には、これは証明書を検証し、その証明書をに解決できるイベントを提供する認証ハンドラーです `ClaimsPrincipal` 。 
+`Microsoft.AspNetCore.Authentication.Certificate` ASP.NET Core の [証明書認証](https://tools.ietf.org/html/rfc5246#section-7.4.4) に似た実装が含まれています。 証明書の認証は、ASP.NET Core に到達するずっと前に TLS レベルで実行されます。 より正確には、これは証明書を検証し、その証明書をに解決できるイベントを提供する認証ハンドラーです `ClaimsPrincipal` 。 
 
 証明書認証用に[サーバーを構成](#configure-your-server-to-require-certificates)します。これは、IIS、Kestrel、Azure Web Apps など、使用している他の任意のものです。
 
@@ -38,15 +39,15 @@ ms.locfileid: "88021953"
 
 プロキシとロードバランサーを使用する環境での証明書認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
 
-## <a name="get-started"></a>はじめに
+## <a name="get-started"></a>作業開始
 
-HTTPS 証明書を取得して適用し、証明書を要求するように[サーバーを構成](#configure-your-server-to-require-certificates)します。
+HTTPS 証明書を取得して適用し、証明書を要求するように [サーバーを構成](#configure-your-server-to-require-certificates) します。
 
-Web アプリで、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Certificate)パッケージへの参照を追加します。 次に、 `Startup.ConfigureServices` メソッドで、オプションを指定してを呼び出し `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 、 `OnCertificateValidated` 要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換 `ClaimsPrincipal` し、プロパティに設定し `context.Principal` ます。
+Web アプリで、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Certificate) パッケージへの参照を追加します。 次に、 `Startup.ConfigureServices` メソッドで、オプションを指定してを呼び出し `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` 、 `OnCertificateValidated` 要求と共に送信されるクライアント証明書に対して補助的な検証を実行するためのデリゲートを提供します。 その情報をに変換 `ClaimsPrincipal` し、プロパティに設定し `context.Principal` ます。
 
 認証が失敗した場合、このハンドラーは、 `403 (Forbidden)` 予期したとおりに応答を返し `401 (Unauthorized)` ます。 これは、最初の TLS 接続中に認証が行われるということです。 ハンドラーに到達するまでには遅すぎます。 匿名接続から証明書を使用して接続をアップグレードする方法はありません。
 
-また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 例:
+また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 次に例を示します。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -264,7 +265,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 
 IIS マネージャーで、次の手順を実行します。
 
-1. [**接続**] タブからサイトを選択します。
+1. [ **接続** ] タブからサイトを選択します。
 1. [**機能ビュー** ] ウィンドウで、[ **SSL 設定**] オプションをダブルクリックします。
 1. [ **SSL が必要**] チェックボックスをオンにし、[**クライアント証明書**] セクションの [**必須**] オプションを選択します。
 
@@ -272,7 +273,7 @@ IIS マネージャーで、次の手順を実行します。
 
 ### <a name="azure-and-custom-web-proxies"></a>Azure とカスタム web プロキシ
 
-証明書転送ミドルウェアを構成する方法については、[ホストを参照し、ドキュメントを展開](xref:host-and-deploy/proxy-load-balancer#certificate-forwarding)してください。
+証明書転送ミドルウェアを構成する方法については、 [ホストを参照し、ドキュメントを展開](xref:host-and-deploy/proxy-load-balancer#certificate-forwarding) してください。
 
 ### <a name="use-certificate-authentication-in-azure-web-apps"></a>Azure Web Apps で証明書認証を使用する
 
@@ -325,7 +326,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-次に、 `Startup.Configure` メソッドはミドルウェアを追加します。 `UseCertificateForwarding`は、およびの呼び出しの前に呼び出され `UseAuthentication` `UseAuthorization` ます。
+次に、 `Startup.Configure` メソッドはミドルウェアを追加します。 `UseCertificateForwarding` は、およびの呼び出しの前に呼び出され `UseAuthentication` `UseAuthorization` ます。
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -616,7 +617,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、`services.AddSingleton<ICertificateValidationCache, YourCache>()` のように指定します。
+既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、「 `services.AddSingleton<ICertificateValidationCache, YourCache>()` 」のように入力します。
 
 ::: moniker-end
 
@@ -629,16 +630,16 @@ public void ConfigureServices(IServiceCollection services)
 
 TLS 再ネゴシエーションは、オプションのクライアント証明書を実装するための従来の方法でした。 これは、次の理由で推奨されなくなりました。
 - HTTP/1.1 では、POST 要求中に renegotiating を実行すると、要求本文が TCP ウィンドウをいっぱいにして再ネゴシエーションパケットを受信できないデッドロックが発生する可能性があります。
-- HTTP/2 は、再ネゴシエーションを[明示的に禁止](https://tools.ietf.org/html/rfc7540#section-9.2.1)します。
-- TLS 1.3 では再ネゴシエーションのサポートが[削除され](https://tools.ietf.org/html/rfc8740#section-1)ました。
+- HTTP/2 は、再ネゴシエーションを [明示的に禁止](https://tools.ietf.org/html/rfc7540#section-9.2.1) します。
+- TLS 1.3 では再ネゴシエーションのサポートが [削除され](https://tools.ietf.org/html/rfc8740#section-1) ました。
 
-ASP.NET Core 5 preview 7 以降では、オプションのクライアント証明書の便利なサポートが追加されています。 詳細については、[オプションの証明書のサンプル](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)を参照してください。
+ASP.NET Core 5 preview 7 以降では、オプションのクライアント証明書の便利なサポートが追加されています。 詳細については、 [オプションの証明書のサンプル](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample)を参照してください。
 
 次の方法では、オプションのクライアント証明書がサポートされます。
 
 * ドメインとサブドメインのバインドを設定します。
   * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
-  * 詳細については次を参照してください:
+  * 詳細については、次を参照してください。
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
@@ -650,8 +651,8 @@ ASP.NET Core 5 preview 7 以降では、オプションのクライアント証�
 * クライアント証明書を必要としていない web アプリへの要求の場合:
   * クライアント証明書で保護されたサブドメインを使用して同じページにリダイレクトします。
   * たとえば、にリダイレクト `myClient.contoso.com/requestedPage` します。 への要求は `myClient.contoso.com/requestedPage` とは異なるホスト名であるため、 `contoso.com/requestedPage` クライアントは別の接続を確立し、クライアント証明書を提供します。
-  * 詳細については、「<xref:security/authorization/introduction>」を参照してください。
+  * 詳細については、<xref:security/authorization/introduction> を参照してください。
 
 [この GitHub ディスカッション](https://github.com/dotnet/AspNetCore.Docs/issues/18720)の問題では、オプションのクライアント証明書に関する質問、コメント、その他のフィードバックを残しておきます。
 
-&dagger;Server Name Indication (SNI) は、SSL ネゴシエーションの一部として仮想ドメインを含めるための TLS 拡張機能です。 これは実質的に、仮想ドメイン名またはホスト名を使用してネットワークエンドポイントを識別できることを意味します。
+&dagger; Server Name Indication (SNI) は、SSL ネゴシエーションの一部として仮想ドメインを含めるための TLS 拡張機能です。 これは実質的に、仮想ドメイン名またはホスト名を使用してネットワークエンドポイントを識別できることを意味します。

@@ -5,6 +5,7 @@ description: クロスサイトスクリプティング (XSS) と、ASP.NET Core
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 24fab313c3af30cfd4143ba29a33ba25bfcdf9a9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec8b321be08447ca634a1e28799f790f723f17d1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021810"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625623"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core でクロスサイトスクリプティング (XSS) を防止する
 
@@ -42,7 +43,7 @@ ms.locfileid: "88021810"
 
 5. 信頼されていないデータを URL クエリ文字列に含める前に、URL がエンコードされていることを確認してください。
 
-## <a name="html-encoding-using-no-locrazor"></a>を使用した HTML エンコードRazor
+## <a name="html-encoding-using-no-locrazor"></a>を使用した HTML エンコード Razor
 
 RazorMVC で使用されるエンジンでは、そのような処理を回避することが難しい場合を除き、変数からのすべての出力ソースが自動的にエンコードされます。 ディレクティブを使用すると、常に HTML 属性のエンコード規則が使用さ *@* れます。 Html 属性のエンコードは HTML エンコーディングのスーパーセットなので、HTML エンコーディングと HTML 属性のどちらを使用する必要があるかについては、それを気にする必要はありません。 信頼されていない入力を JavaScript に直接挿入しようとする場合は、HTML コンテキストでのみ @ を使用する必要があります。 タグヘルパーでは、タグパラメーターで使用する入力もエンコードされます。
 
@@ -56,7 +57,7 @@ RazorMVC で使用されるエンジンでは、そのような処理を回避�
    @untrustedInput
    ```
 
-このビューは、 *Untrustedinput*変数の内容を出力します。 この変数には、XSS 攻撃で使用されるいくつかの文字が含まれてい &lt; &gt; ます。 ソースを調べると、次のようにエンコードされた出力が表示されます。
+このビューは、 *Untrustedinput* 変数の内容を出力します。 この変数には、XSS 攻撃で使用されるいくつかの文字が含まれてい &lt; &gt; ます。 ソースを調べると、次のようにエンコードされた出力が表示されます。
 
 ```html
 &lt;&quot;123&quot;&gt;
@@ -65,9 +66,9 @@ RazorMVC で使用されるエンジンでは、そのような処理を回避�
 >[!WARNING]
 > MVC ASP.NET Core は、 `HtmlString` 出力時に自動的にエンコードされないクラスを提供します。 これは XSS 脆弱性を公開するため、信頼されていない入力と組み合わせて使用しないでください。
 
-## <a name="javascript-encoding-using-no-locrazor"></a>を使用した JavaScript のエンコードRazor
+## <a name="javascript-encoding-using-no-locrazor"></a>を使用した JavaScript のエンコード Razor
 
-JavaScript に値を挿入して、ビューで処理することが必要になる場合があります。 これには、2 つの方法があります。 値を挿入する最も安全な方法は、タグのデータ属性に値を配置し、JavaScript で値を取得することです。 例:
+JavaScript に値を挿入して、ビューで処理することが必要になる場合があります。 これには、2 つの方法があります。 値を挿入する最も安全な方法は、タグのデータ属性に値を配置し、JavaScript で値を取得することです。 次に例を示します。
 
 ```cshtml
 @{
@@ -152,9 +153,9 @@ JavaScript エンコーダーを直接呼び出すこともできます。
 
 ## <a name="accessing-encoders-in-code"></a>コード内のエンコーダーへのアクセス
 
-HTML、JavaScript、および URL エンコーダーは、次の2つの方法でコードで使用できます。[依存関係の挿入](xref:fundamentals/dependency-injection)を使用して挿入することも、名前空間に含まれる既定のエンコーダーを使用することもでき `System.Text.Encodings.Web` ます。 既定のエンコーダーを使用する場合、安全として扱う文字範囲に適用したものは有効になりません。既定のエンコーダーでは、可能な限り安全なエンコーディング規則が使用されます。
+HTML、JavaScript、および URL エンコーダーは、次の2つの方法でコードで使用できます。 [依存関係の挿入](xref:fundamentals/dependency-injection) を使用して挿入することも、名前空間に含まれる既定のエンコーダーを使用することもでき `System.Text.Encodings.Web` ます。 既定のエンコーダーを使用する場合、安全として扱う文字範囲に適用したものは有効になりません。既定のエンコーダーでは、可能な限り安全なエンコーディング規則が使用されます。
 
-DI を使用して構成可能なエンコーダーを使用するには、コンストラクターが*htmlencoder*、 *JavaScriptEncoder* 、および*urlencoder*パラメーターを必要に応じて受け取る必要があります。 次に例を示します。
+DI を使用して構成可能なエンコーダーを使用するには、コンストラクターが *htmlencoder*、 *JavaScriptEncoder* 、および *urlencoder* パラメーターを必要に応じて受け取る必要があります。 次に例を示します。
 
 ```csharp
 public class HomeController : Controller
@@ -176,7 +177,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>エンコード URL パラメーター
 
-信頼できない入力を含む URL クエリ文字列を値として作成する場合は、を使用して `UrlEncoder` 値をエンコードします。 たとえば、
+信頼できない入力を含む URL クエリ文字列を値として作成する場合は、を使用して `UrlEncoder` 値をエンコードします。 たとえば、次のように入力します。
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core でハブフィルターを使用するSignalR
+title: ASP.NET Core でハブフィルターを使用する SignalR
 author: brecon
 description: ASP.NET Core でハブフィルターを使用する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-5.0'
@@ -7,6 +7,7 @@ ms.author: brecon
 ms.custom: mvc
 ms.date: 05/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hub-filters
-ms.openlocfilehash: db6439ab4e61d0412148c5ea72b52d429367491b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c3c44efcb3702f3edb51c821d042c2e7eb1748cd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022148"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626667"
 ---
-# <a name="use-hub-filters-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でハブフィルターを使用するSignalR
+# <a name="use-hub-filters-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でハブフィルターを使用する SignalR
 
 ハブフィルター:
 
@@ -195,7 +196,7 @@ public class CustomFilter : IHubFilter
 
 には、 `HubInvocationContext` 現在のハブメソッドの呼び出しに関する情報が含まれています。
 
-| プロパティ | 説明 | 種類 |
+| プロパティ | 説明 | Type |
 | ------ | ------ | ----------- |
 | `Context ` | には、 `HubCallerContext` 接続に関する情報が含まれています。 | `HubCallerContext` |
 | `Hub` | このハブメソッドの呼び出しに使用されているハブのインスタンス。 | `Hub` |
@@ -208,7 +209,7 @@ public class CustomFilter : IHubFilter
 
 には、 `HubLifetimeContext` およびハブメソッドの情報が含まれてい `OnConnectedAsync` `OnDisconnectedAsync` ます。
 
-| プロパティ | 説明 | 種類 |
+| プロパティ | 説明 | Type |
 | ------ | ------ | ----------- |
 | `Context ` | には、 `HubCallerContext` 接続に関する情報が含まれています。 | `HubCallerContext` |
 | `Hub` | このハブメソッドの呼び出しに使用されているハブのインスタンス。 | `Hub` |

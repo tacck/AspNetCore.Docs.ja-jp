@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 618bb60ea382437b2787adb814f319b1f0cea4ca
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019938"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626533"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -35,7 +36,7 @@ ASP.NET Core MVC では、応答データの書式設定がサポートされま
 
 アクションの結果には、<xref:Microsoft.AspNetCore.Mvc.JsonResult> や <xref:Microsoft.AspNetCore.Mvc.ContentResult> のように、特定の形式に固有となる型があります。 アクションでは、クライアントの設定に関係なく、特定の形式で書式設定された結果を返すことができます。 たとえば、`JsonResult` を返すと、JSON 形式のデータが返されます。 `ContentResult` または文字列を返すと、プレーンテキスト形式の文字列データが返されます。
 
-アクションが特定の型を返す必要はありません。 ASP.NET Core によって、すべてのオブジェクトの戻り値がサポートされます。  型が <xref:Microsoft.AspNetCore.Mvc.IActionResult> ではないオブジェクトを返すアクションからの結果は、適切な <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 実装を利用してシリアル化されます。 詳細については、「<xref:web-api/action-return-types>」を参照してください。
+アクションが特定の型を返す必要はありません。 ASP.NET Core によって、すべてのオブジェクトの戻り値がサポートされます。  型が <xref:Microsoft.AspNetCore.Mvc.IActionResult> ではないオブジェクトを返すアクションからの結果は、適切な <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> 実装を利用してシリアル化されます。 詳細については、<xref:web-api/action-return-types> を参照してください。
 
 組み込みヘルパー メソッド <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> では、JSON 形式のデータが返されます。[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
@@ -145,7 +146,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 例:
+出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 次に例を示します。
 
 ```csharp
 public IActionResult Get()
@@ -184,7 +185,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 例:
+出力のシリアル化オプションは、アクションごとに `JsonResult` を使用して構成することができます。 次に例を示します。
 
 ```csharp
 public IActionResult Get()
@@ -216,7 +217,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 ### <a name="specify-a-format"></a>形式を指定する
 
-応答形式を制限するには、フィルターを適用し [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) ます。 ほとんどの[フィルター](xref:mvc/controllers/filters)と同様に、 `[Produces]` アクション、コントローラー、またはグローバルスコープで適用できます。
+応答形式を制限するには、フィルターを適用し [`[Produces]`](xref:Microsoft.AspNetCore.Mvc.ProducesAttribute) ます。 ほとんどの [フィルター](xref:mvc/controllers/filters)と同様に、 `[Produces]` アクション、コントローラー、またはグローバルスコープで適用できます。
 
 [!code-csharp[](./formatting/3.0sample/Controllers/WeatherForecastController.cs?name=snippet)]
 
@@ -240,7 +241,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 `StringOutputFormatter` がない場合は、組み込みの JSON フォーマッタによって戻り値の型 `string` が書式設定されます。 組み込みの JSON フォーマッタが削除され、XML フォーマッタを使用できる場合は、XML フォーマッタによって戻り値の型 `string` が書式設定されます。 それ以外の場合は、戻り値の型 `string` で `406 Not Acceptable` が返されます。
 
-`HttpNoContentOutputFormatter` がない場合、構成されているフォーマッタを利用し、null オブジェクトが書式設定されます。 例:
+`HttpNoContentOutputFormatter` がない場合、構成されているフォーマッタを利用し、null オブジェクトが書式設定されます。 次に例を示します。
 
 * JSON フォーマッタは、本文が `null` の応答を返します。
 * XML フォーマッタは、属性 `xsi:nil="true"` が設定された空の XML 要素を返します。
@@ -252,7 +253,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 * クエリ文字列またはパスの一部。
 * .xml または .json など形式固有のファイル拡張子の使用。
 
-要求パスからのマッピングは、API で使用されるルートに指定する必要があります。 例:
+要求パスからのマッピングは、API で使用されるルートに指定する必要があります。 次に例を示します。
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

@@ -6,6 +6,7 @@ ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 6a9b80e868a54bd76503a6421c34ae159421699b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 45921deb35452876b0a92a8731da68539a880c1d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022239"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626559"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>OpenAPI ツールを使用した ASP.NET Core アプリの開発
 
@@ -39,7 +40,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ## <a name="add"></a>追加
 
-このページのいずれかのコマンドを使用して OpenAPI 参照を追加すると、 `<OpenApiReference />` *.csproj*ファイルに次のような要素が追加されます。
+このページのいずれかのコマンドを使用して OpenAPI 参照を追加すると、 `<OpenApiReference />` *.csproj* ファイルに次のような要素が追加されます。
 
 ```xml
 <OpenApiReference Include="openapi.json" />
@@ -95,7 +96,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 |-------------|-------------|---------|
 | source-URL | 参照の作成元のソース。 URL である必要があります。 |dotnet openapi add url `https://contoso.com/openapi.json` |
 
-## <a name="remove"></a>削除
+## <a name="remove"></a>[削除]
 
 指定したファイル名と一致する OpenAPI 参照を *.csproj* ファイルから削除します。 OpenAPI 参照が削除されると、クライアントは生成されません。 ローカルの *.json* および *.yaml* ファイルは削除されます。
 
