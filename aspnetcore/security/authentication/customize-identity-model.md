@@ -1,10 +1,11 @@
 ---
 title: Identity ASP.NET Core でのモデルのカスタマイズ
 author: ajcvickers
-description: この記事では、ASP.NET Core の基になる Entity Framework Core データモデルをカスタマイズする方法について説明し Identity ます。
+description: この記事では、の基になる Entity Framework Core データモデルをカスタマイズする方法について説明し ASP.NET Core Identity ます。
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504672"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634307"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core でのモデルのカスタマイズ
 
 [Arthur ヴィッカース](https://github.com/ajcvickers)
 
-ASP.NET Core Identity は ASP.NET Core アプリでユーザーアカウントを管理および格納するためのフレームワークを提供します。 Identity は、認証メカニズムとして **個々のユーザーアカウント** が選択されたときにプロジェクトに追加されます。 既定では、は Identity Entity Framework (EF) コアデータモデルを使用します。 この記事では、モデルをカスタマイズする方法について説明し Identity ます。
+ASP.NET Core Identity ASP.NET Core アプリでユーザーアカウントを管理および格納するためのフレームワークを提供します。 Identity は、認証メカニズムとして **個々のユーザーアカウント** が選択されたときにプロジェクトに追加されます。 既定では、は Identity Entity Framework (EF) コアデータモデルを使用します。 この記事では、モデルをカスタマイズする方法について説明し Identity ます。
 
 ## <a name="no-locidentity-and-ef-core-migrations"></a>Identity および EF Core 移行
 
@@ -365,7 +366,7 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については次を参照してください:
+ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、<xref:security/authentication/scaffold-identity> を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については、次を参照してください。
 
 * [スキャフォールディング Identity](xref:security/authentication/scaffold-identity)
 * [カスタムユーザーデータを追加、ダウンロード、および削除する Identity](xref:security/authentication/add-user-data)
@@ -474,7 +475,7 @@ PK の種類を変更するには、次の手順に従います。
 
     主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
-    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
+    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、<xref:security/authentication/scaffold-identity> を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
 
     ::: moniker-end
 
@@ -518,7 +519,7 @@ PK の種類を変更するには、次の手順に従います。
 
     主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
-    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
+    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、<xref:security/authentication/scaffold-identity> を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
 
     ::: moniker-end
 
@@ -987,7 +988,7 @@ services
 
 エンティティ型へのナビゲーションプロパティの追加に関するガイダンスについては、前の例を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:security/authentication/scaffold-identity>
 

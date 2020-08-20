@@ -5,6 +5,7 @@ description: ASP.NET Core におけるデータ保護のキー管理と有効期
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,27 +16,27 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b4578737a0ea36463b3c44254aad85a484c46090
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021381"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634476"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core でのデータ保護のキー管理と有効期間
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-## <a name="key-management"></a>キー管理
+## <a name="key-management"></a>キーの管理
 
 アプリは、運用環境を検出し、キーの構成を独自に処理しようとします。
 
-1. アプリが[Azure アプリ](https://azure.microsoft.com/services/app-service/)でホストされている場合、キーは *%HOME%\ASP.NET\DataProtection-Keys*フォルダーに保存されます。 このフォルダーはネットワーク ストレージにバックアップされ、アプリをホストしているすべてのマシンで同期されています。
+1. アプリが [Azure アプリ](https://azure.microsoft.com/services/app-service/)でホストされている場合、キーは *%HOME%\ASP.NET\DataProtection-Keys* フォルダーに保存されます。 このフォルダーはネットワーク ストレージにバックアップされ、アプリをホストしているすべてのマシンで同期されています。
    * 保存中のキーは保護されていません。
    * *Dataprotection キー*フォルダーは、単一のデプロイスロット内のアプリのすべてのインスタンスにキーリングを提供します。
    * ステージングや運用などの別のデプロイ スロットでは、キー リングが共有されません。 デプロイスロット間でスワップする場合 (運用環境へのステージングまたは A/B テストを使用する場合など)、データ保護を使用するすべてのアプリは、前のスロット内のキーリングを使用して格納されたデータの暗号化を解除することはできません。 これにより、ユーザーは、 cookie データ保護を使用してを保護するので、標準 ASP.NET Core 認証を使用するアプリからログアウトされ cookie ます。 スロットに依存しないキーリングが必要な場合は、Azure Blob Storage、Azure Key Vault、SQL ストア、Redis cache などの外部キーリングプロバイダーを使用します。
 
-1. ユーザープロファイルが使用可能な場合、キーは *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys*フォルダーに保存されます。 オペレーティングシステムが Windows の場合、キーは DPAPI を使用して保存時に暗号化されます。
+1. ユーザープロファイルが使用可能な場合、キーは *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* フォルダーに保存されます。 オペレーティングシステムが Windows の場合、キーは DPAPI を使用して保存時に暗号化されます。
 
    アプリ プールの [setProfileEnvironment 属性](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration)も有効にする必要があります。 `setProfileEnvironment` の既定値は `true`です。 一部のシナリオ (たとえば、Windows OS) では、`setProfileEnvironment` は `false` に設定されます。 キーが期待どおりにユーザー プロファイル ディレクトリに格納されていない場合:
 
@@ -48,20 +49,20 @@ ms.locfileid: "88021381"
 
 1. これらの条件のいずれも一致しない場合、キーは現在のプロセスの外部では保持されません。 プロセスがシャットダウンされると、生成されたすべてのキーが失われます。
 
-開発者は常にフルコントロールを使用し、キーの格納方法と場所をオーバーライドできます。 上記の最初の3つのオプションでは、ASP.NET の自動生成ルーチンが過去にどのように動作したかに類似した、ほとんどのアプリに適した既定値が提供され **\<machineKey>** ます。 最後のフォールバックオプションは、キーの永続化が必要な場合に、開発者が事前に[構成](xref:security/data-protection/configuration/overview)を指定することを必要とする唯一のシナリオですが、このフォールバックはまれな状況でのみ発生します。
+開発者は常にフルコントロールを使用し、キーの格納方法と場所をオーバーライドできます。 上記の最初の3つのオプションでは、ASP.NET の自動生成ルーチンが過去にどのように動作したかに類似した、ほとんどのアプリに適した既定値が提供され **\<machineKey>** ます。 最後のフォールバックオプションは、キーの永続化が必要な場合に、開発者が事前に [構成](xref:security/data-protection/configuration/overview) を指定することを必要とする唯一のシナリオですが、このフォールバックはまれな状況でのみ発生します。
 
-Docker コンテナーでホストする場合、キーは、Docker ボリューム (共有ボリュームまたはコンテナーの有効期間を超えて保持されるホストマウントボリューム)、または[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)や[Redis](https://redis.io/)などの外部プロバイダーのフォルダーに保存する必要があります。 アプリが共有ネットワークボリュームにアクセスできない場合は、web ファームのシナリオでも外部プロバイダーが役立ちます (詳細については、「 [Persistkeystofilesystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) 」を参照してください)。
+Docker コンテナーでホストする場合、キーは、Docker ボリューム (共有ボリュームまたはコンテナーの有効期間を超えて保持されるホストマウントボリューム)、または [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) や [Redis](https://redis.io/)などの外部プロバイダーのフォルダーに保存する必要があります。 アプリが共有ネットワークボリュームにアクセスできない場合は、web ファームのシナリオでも外部プロバイダーが役立ちます (詳細については、「 [Persistkeystofilesystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) 」を参照してください)。
 
 > [!WARNING]
-> 開発者が上記の規則をオーバーライドし、特定のキーリポジトリでデータ保護システムをポイントする場合、保存時のキーの自動暗号化は無効になります。 保存時の保護は、[構成](xref:security/data-protection/configuration/overview)を使用して再度有効にすることができます。
+> 開発者が上記の規則をオーバーライドし、特定のキーリポジトリでデータ保護システムをポイントする場合、保存時のキーの自動暗号化は無効になります。 保存時の保護は、 [構成](xref:security/data-protection/configuration/overview)を使用して再度有効にすることができます。
 
 ## <a name="key-lifetime"></a>キーの有効期間
 
-既定では、キーの有効期間は90日です。 キーの有効期限が切れると、アプリは自動的に新しいキーを生成し、新しいキーをアクティブなキーとして設定します。 インベントリから削除されたキーがシステムに残っている限り、アプリで保護されているすべてのデータの暗号化を解除できます。 詳細については、「[キー管理](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling)」を参照してください。
+既定では、キーの有効期間は90日です。 キーの有効期限が切れると、アプリは自動的に新しいキーを生成し、新しいキーをアクティブなキーとして設定します。 インベントリから削除されたキーがシステムに残っている限り、アプリで保護されているすべてのデータの暗号化を解除できます。 詳細については、「 [キー管理](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling) 」を参照してください。
 
 ## <a name="default-algorithms"></a>既定のアルゴリズム
 
-使用される既定のペイロード保護アルゴリズムは、HMACSHA256 の場合は AES-256-CBC、信頼性を確保する場合はです。 90日ごとに変更された512ビットのマスターキーは、ペイロードごとにこれらのアルゴリズムに使用される2つのサブキーを派生させるために使用されます。 詳細については、「[サブキーの派生](xref:security/data-protection/implementation/subkeyderivation#additional-authenticated-data-and-subkey-derivation)」を参照してください。
+使用される既定のペイロード保護アルゴリズムは、HMACSHA256 の場合は AES-256-CBC、信頼性を確保する場合はです。 90日ごとに変更された512ビットのマスターキーは、ペイロードごとにこれらのアルゴリズムに使用される2つのサブキーを派生させるために使用されます。 詳細については、「 [サブキーの派生](xref:security/data-protection/implementation/subkeyderivation#additional-authenticated-data-and-subkey-derivation) 」を参照してください。
 
 ## <a name="additional-resources"></a>その他のリソース
 

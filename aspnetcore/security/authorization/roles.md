@@ -5,6 +5,7 @@ description: ロールを承認属性に渡すことによって、ASP.NET Core 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 44e5f9a2a429c9f4a510d2f3e564ddd6bbe77205
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7673bb006c344e6f9baaa3cd99c4bdb4a6fc2862
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021121"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635178"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core でのロールベースの承認
 
@@ -123,7 +124,7 @@ public class UpdateModel : PageModel
 
 ## <a name="policy-based-role-checks"></a>ポリシーベースのロールチェック
 
-ロール要件は、新しいポリシー構文を使用して表すこともできます。ここでは、開発者が承認サービス構成の一部としてスタートアップ時にポリシーを登録します。 これは通常、 `ConfigureServices()` *Startup.cs*ファイル内で発生します。
+ロール要件は、新しいポリシー構文を使用して表すこともできます。ここでは、開発者が承認サービス構成の一部としてスタートアップ時にポリシーを登録します。 これは通常、 `ConfigureServices()` *Startup.cs* ファイル内で発生します。
 
 ::: moniker range=">= aspnetcore-3.0"
 ```csharp
@@ -175,9 +176,9 @@ options.AddPolicy("ElevatedRights", policy =>
 
 この例 `Administrator` では、、、またはロールに属しているユーザーを承認 `PowerUser` `BackupAdministrator` します。
 
-### <a name="add-role-services-to-no-locidentity"></a>役割サービスの追加先Identity
+### <a name="add-role-services-to-no-locidentity"></a>役割サービスの追加先 Identity
 
-役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1)を追加します。
+役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) を追加します。
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](roles/samples/3_0/Startup.cs?name=snippet&highlight=7)]

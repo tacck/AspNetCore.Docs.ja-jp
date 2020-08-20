@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7134344abb5bc724aceb9a2adb117b3749435f55
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019343"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634853"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core フィルター
 
@@ -68,7 +69,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
   *  アクション メソッドが呼び出される直前と直後にコードを実行します。
   * アクションに渡される引数を変更できます。
   * アクションから返された結果を変更できます。
-  * は、ページではサポートされて**いません** Razor 。
+  * は、ページではサポートされて **いません** Razor 。
 
 * [例外フィルター](#exception-filters)では、応答本文への書き込みが行われる前に発生する未処理の例外にグローバル ポリシーが適用されます。
 
@@ -86,7 +87,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-上記のコードでは、 [Mydebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)は[サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)のユーティリティ関数です。
+上記のコードでは、 [Mydebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs) は [サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)のユーティリティ関数です。
 
 非同期フィルターでは、`On-Stage-ExecutionAsync` メソッドが定義されます。 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*> の例を次に示します。
 
@@ -180,20 +181,20 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 フィルターの入れ子の結果として、フィルターの *after* コードが *before* コードと逆の順序で実行されます。 フィルター シーケンス:
 
 * グローバル フィルターの *before* コード。
-  * コントローラーおよびページフィルターの*前*のコード Razor 。
+  * コントローラーおよびページフィルターの *前* のコード Razor 。
     * アクション メソッド フィルターの *before* コード。
     * アクション メソッド フィルターの *after* コード。
-  * コントローラーおよびページフィルターの*後*のコード Razor 。
+  * コントローラーおよびページフィルターの *後* のコード Razor 。
 * グローバル フィルターの *after* コード。
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| Sequence | フィルターのスコープ | フィルター メソッド |
+| シーケンス | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラーまたは Razor ページ| `OnActionExecuting` |
-| 3 | メソッド | `OnActionExecuting` |
-| 4 | メソッド | `OnActionExecuted` |
+| 3 | Method | `OnActionExecuting` |
+| 4 | Method | `OnActionExecuted` |
 | 5 | コントローラーまたは Razor ページ | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -408,7 +409,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 ## <a name="action-filters"></a>アクション フィルター
 
-アクションフィルターは、ページには適用**されません** Razor 。 Razorページは <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> とをサポートし <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> ます。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
+アクションフィルターは、ページには適用 **されません** Razor 。 Razor ページは <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> とをサポートし <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> ます。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
 
 アクション フィルター:
 
@@ -652,7 +653,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> では、残りのフィルター パイプラインの前にコードを実行できます。 たとえば、`OnResourceExecuting` では、モデル バインディングの前にコードを実行できます。
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> では、残りのパイプラインの完了後にコードを実行できます。
 
-* [アクション フィルター](#action-filters)は、個々のアクション メソッドが呼び出される直前と直後にコードを実行できます。 アクションに渡される引数とアクションから返される結果を操作するために使用できます。 アクションフィルターは、ページではサポートされて**いません** Razor 。
+* [アクション フィルター](#action-filters)は、個々のアクション メソッドが呼び出される直前と直後にコードを実行できます。 アクションに渡される引数とアクションから返される結果を操作するために使用できます。 アクションフィルターは、ページではサポートされて **いません** Razor 。
 
 * [例外フィルター](#exception-filters)は、応答本文に何かが書き込まれる前に発生する未処理の例外にグローバル ポリシーを適用するために使用されます。
 
@@ -734,12 +735,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| Sequence | フィルターのスコープ | フィルター メソッド |
+| シーケンス | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラー | `OnActionExecuting` |
-| 3 | メソッド | `OnActionExecuting` |
-| 4 | メソッド | `OnActionExecuted` |
+| 3 | Method | `OnActionExecuting` |
+| 4 | Method | `OnActionExecuted` |
 | 5 | コントローラー | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -794,14 +795,14 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 上記の例にある同じ 3 つのアクション フィルターを検討してください。 コントローラーとグローバル フィルターの `Order` プロパティが 1 と 2 にそれぞれ設定される場合、実行順序が逆になります。
 
-| Sequence | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
+| シーケンス | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | メソッド | 0 | `OnActionExecuting` |
+| 1 | Method | 0 | `OnActionExecuting` |
 | 2 | コントローラー | 1  | `OnActionExecuting` |
 | 3 | グローバル | 2  | `OnActionExecuting` |
 | 4 | グローバル | 2  | `OnActionExecuted` |
 | 5 | コントローラー | 1  | `OnActionExecuted` |
-| 6 | メソッド | 0  | `OnActionExecuted` |
+| 6 | Method | 0  | `OnActionExecuted` |
 
 フィルターの実行順序を決定するときに、`Order` プロパティによりスコープがオーバーライドされます。 最初に順序でフィルターが並べ替えられ、次に同じ順位の優先度を決めるためにスコープが使用されます。 組み込みのフィルターはすべて `IOrderedFilter` を実装し、既定の `Order` 値を 0 に設定します。 組み込みのフィルターの場合、`Order` をゼロ以外の値に設定しない限り、スコープによって順序が決定されます。
 
@@ -942,7 +943,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 ## <a name="action-filters"></a>アクション フィルター
 
 > [!IMPORTANT]
-> アクションフィルターは、ページには適用**されません** Razor 。 Razorページは <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> とをサポートし <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> ます。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
+> アクションフィルターは、ページには適用 **されません** Razor 。 Razor ページは <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> とをサポートし <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> ます。 詳細については、[Razor Pages のフィルター メソッド](xref:razor-pages/filter)に関するページを参照してください。
 
 アクション フィルター:
 

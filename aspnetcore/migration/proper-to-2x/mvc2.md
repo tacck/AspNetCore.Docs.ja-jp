@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc2
-ms.openlocfilehash: afbc5196eaaaa402ddbf50f6330a683ee88984eb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bd2c33d35a3433532b48f6615a81adac8d03b9ee
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014868"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634541"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET から ASP.NET Core 2.0 への移行
 
@@ -31,7 +32,7 @@ ms.locfileid: "88014868"
 
 ## <a name="prerequisites"></a>前提条件
 
-.Net のダウンロードから、次の**いずれか**をインストールし[ます。 Windows](https://dotnet.microsoft.com/download):
+.Net のダウンロードから、次の **いずれか** をインストールし [ます。 Windows](https://dotnet.microsoft.com/download):
 
 * .NET Core SDK
 * Windows 用 Visual Studio
@@ -127,7 +128,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 ## <a name="native-dependency-injection"></a>ネイティブな依存性の注入
 
-大規模で拡張性の高いアプリケーションを構築するときの重要な目標は、コンポーネントとサービスの疎な結合です。 [依存関係の挿入](xref:fundamentals/dependency-injection)は、これを実現するための一般的な手法であり、ASP.NET Core のネイティブコンポーネントです。
+大規模で拡張性の高いアプリケーションを構築するときの重要な目標は、コンポーネントとサービスの疎な結合です。 [依存関係の挿入](xref:fundamentals/dependency-injection) は、これを実現するための一般的な手法であり、ASP.NET Core のネイティブコンポーネントです。
 
 ASP.NET アプリケーションでは、開発者はサードパーティのライブラリを使用して依存関係の挿入を実装します。 [Unity](https://github.com/unitycontainer/unity) はそのようなライブラリの 1 つであり、Microsoft Patterns & Practices によって提供されます。
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 1dd931d0ee654b888814df8a0d0675d32b5c3a20
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020965"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634996"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core での応答圧縮
 
@@ -34,7 +35,7 @@ ms.locfileid: "88020965"
 
 ## <a name="when-to-use-response-compression-middleware"></a>応答圧縮ミドルウェアを使用する場合
 
-IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノロジを使用します。 ミドルウェアのパフォーマンスがサーバーモジュールのパフォーマンスと一致しない場合があります。 [HTTP.sys server](xref:fundamentals/servers/httpsys) Server と[kestrel](xref:fundamentals/servers/kestrel) server では、現在、組み込みの圧縮サポートは提供されていません。
+IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノロジを使用します。 ミドルウェアのパフォーマンスがサーバーモジュールのパフォーマンスと一致しない場合があります。 [HTTP.sys server](xref:fundamentals/servers/httpsys) Server と [kestrel](xref:fundamentals/servers/kestrel) server では、現在、組み込みの圧縮サポートは提供されていません。
 
 次の場合に応答圧縮ミドルウェアを使用します。
 
@@ -52,7 +53,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、 `Accept-Encoding` 要求と共にヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに、 `Content-Encoding` 圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | 説明 |
+| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | 説明 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | あり (既定)        | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -64,11 +65,11 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 詳細については、「 [IANA 公式コンテンツコーディングリスト](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)」を参照してください。
 
-ミドルウェアを使用すると、カスタムヘッダー値の圧縮プロバイダーを追加でき `Accept-Encoding` ます。 詳細については、以下の「[カスタムプロバイダー](#custom-providers) 」を参照してください。
+ミドルウェアを使用すると、カスタムヘッダー値の圧縮プロバイダーを追加でき `Accept-Encoding` ます。 詳細については、以下の「 [カスタムプロバイダー](#custom-providers) 」を参照してください。
 
 ミドルウェアは、 `q` 圧縮スキームの優先順位を決定するためにクライアントから送信されるときに、品質の値 (qvalue,) の重み付けに対応できます。 詳細については、「 [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4)」を参照してください。
 
-圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは*最適*な圧縮によって実現されます。
+圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
 
 次の表では、圧縮されたコンテンツの要求、送信、キャッシュ、および受信に関連するヘッダーについて説明します。
 
@@ -78,7 +79,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 | `Content-Encoding` | ペイロード内のコンテンツのエンコードを示すために、サーバーからクライアントに送信されます。 |
 | `Content-Length`   | 圧縮が発生すると、 `Content-Length` 応答が圧縮されるときに本文の内容が変更されるため、ヘッダーは削除されます。 |
 | `Content-MD5`      | 圧縮が行われると、 `Content-MD5` 本文の内容が変更され、ハッシュが有効でなくなったため、ヘッダーは削除されます。 |
-| `Content-Type`     | コンテンツの MIME の種類を指定します。 すべての応答で、を指定する必要があり `Content-Type` ます。 ミドルウェアは、この値をチェックして、応答を圧縮する必要があるかどうかを判断します。 ミドルウェアはエンコードできる既定の[mime の種類](#mime-types)のセットを指定しますが、mime の種類を置き換えたり追加したりすることができます。 |
+| `Content-Type`     | コンテンツの MIME の種類を指定します。 すべての応答で、を指定する必要があり `Content-Type` ます。 ミドルウェアは、この値をチェックして、応答を圧縮する必要があるかどうかを判断します。 ミドルウェアはエンコードできる既定の [mime の種類](#mime-types) のセットを指定しますが、mime の種類を置き換えたり追加したりすることができます。 |
 | `Vary`             | の値がであるサーバーからクライアントとプロキシに送信された場合 `Accept-Encoding` 、ヘッダーは、 `Vary` 要求のヘッダーの値に基づいて応答をキャッシュ (変更) する必要があることをクライアントまたはプロキシに示し `Accept-Encoding` ます。 ヘッダーを使用してコンテンツを返すと、 `Vary: Accept-Encoding` 圧縮された応答と圧縮されていない応答の両方が個別にキャッシュされることになります。 |
 
 [サンプルアプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)を使用して、応答圧縮ミドルウェアの機能を検証します。 このサンプルでは、次のことを示します。
@@ -86,13 +87,13 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 * Gzip およびカスタム圧縮プロバイダーを使用したアプリ応答の圧縮。
 * 圧縮する mime の種類の既定の一覧に MIME の種類を追加する方法について説明します。
 
-## <a name="package"></a>Package
+## <a name="package"></a>パッケージ
 
-応答圧縮ミドルウェアは、AspNetCore アプリ ASP.NET Core に暗黙的に含まれる[ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)パッケージによって提供されます。
+応答圧縮ミドルウェアは、AspNetCore アプリ ASP.NET Core に暗黙的に含まれる [ResponseCompression](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) パッケージによって提供されます。
 
 ## <a name="configuration"></a>構成
 
-次のコードは、既定の MIME の種類と圧縮プロバイダー ([Brotli](#brotli-compression-provider)と[Gzip](#gzip-compression-provider)) に対して応答圧縮ミドルウェアを有効にする方法を示しています。
+次のコードは、既定の MIME の種類と圧縮プロバイダー ([Brotli](#brotli-compression-provider) と [Gzip](#gzip-compression-provider)) に対して応答圧縮ミドルウェアを有効にする方法を示しています。
 
 ```csharp
 public class Startup
@@ -111,7 +112,7 @@ public class Startup
 
 メモ:
 
-* `app.UseResponseCompression`応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、「<xref:fundamentals/middleware/index#middleware-order>」を参照してください。
+* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、<xref:fundamentals/middleware/index#middleware-order> を参照してください。
 * [Fiddler](https://www.telerik.com/fiddler)、[消火バグ](https://getfirebug.com/)、 [Postman](https://www.getpostman.com/)などのツールを使用して要求ヘッダーを設定 `Accept-Encoding` し、応答ヘッダー、サイズ、および本文を調査します。
 
 ヘッダーを使用せずにサンプルアプリに要求を送信 `Accept-Encoding` し、応答が圧縮されていないことを確認します。 `Content-Encoding` `Vary` 応答にヘッダーとヘッダーが存在しません。
@@ -238,7 +239,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="compression-with-secure-protocol"></a>セキュリティで保護されたプロトコルを使用した圧縮
 
-セキュリティで保護された接続での圧縮された応答は、 `EnableForHttps` 既定では無効になっているオプションを使用して制御できます。 動的に生成されたページで圧縮を使用すると、[犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit))や[侵害](https://wikipedia.org/wiki/BREACH_(security_exploit))攻撃などのセキュリティ上の問題が発生する可能性があります。
+セキュリティで保護された接続での圧縮された応答は、 `EnableForHttps` 既定では無効になっているオプションを使用して制御できます。 動的に生成されたページで圧縮を使用すると、 [犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit)) や [侵害](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃などのセキュリティ上の問題が発生する可能性があります。
 
 ## <a name="adding-the-vary-header"></a>Vary ヘッダーを追加する
 
@@ -250,7 +251,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="working-with-iis-dynamic-compression"></a>IIS 動的圧縮の使用
 
-アプリケーションに対して無効にする、アクティブな IIS 動的圧縮モジュールがサーバーレベルで構成されている場合は、 *web.config*ファイルを追加してモジュールを無効にします。 詳細については、「[Disabling IIS modules](xref:host-and-deploy/iis/modules#disabling-iis-modules)」 (IIS モジュールの無効化) を参照してください。
+アプリケーションに対して無効にする、アクティブな IIS 動的圧縮モジュールがサーバーレベルで構成されている場合は、 *web.config* ファイルを追加してモジュールを無効にします。 詳細については、「[Disabling IIS modules](xref:host-and-deploy/iis/modules#disabling-iis-modules)」 (IIS モジュールの無効化) を参照してください。
 
 ## <a name="troubleshooting"></a>トラブルシューティング
 
@@ -259,7 +260,7 @@ public void ConfigureServices(IServiceCollection services)
 * `Accept-Encoding`ヘッダーには `br` 、設定した `gzip` `*` カスタム圧縮プロバイダーに一致する値、、、またはカスタムエンコーディングが含まれています。 値は、 `identity` または品質値 (qvalue, `q` ) の 0 (ゼロ) に設定することはできません。
 * MIME の種類 ( `Content-Type` ) を設定し、で構成されている mime の種類と一致させる必要があり <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions> ます。
 * 要求にヘッダーを含めることはできません `Content-Range` 。
-* 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、[前述](#compression-with-secure-protocol)の危険に注意してください。*
+* 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、 [前述](#compression-with-secure-protocol) の危険に注意してください。*
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -280,7 +281,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="when-to-use-response-compression-middleware"></a>応答圧縮ミドルウェアを使用する場合
 
-IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノロジを使用します。 ミドルウェアのパフォーマンスがサーバーモジュールのパフォーマンスと一致しない場合があります。 [HTTP.sys server](xref:fundamentals/servers/httpsys) Server と[kestrel](xref:fundamentals/servers/kestrel) server では、現在、組み込みの圧縮サポートは提供されていません。
+IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノロジを使用します。 ミドルウェアのパフォーマンスがサーバーモジュールのパフォーマンスと一致しない場合があります。 [HTTP.sys server](xref:fundamentals/servers/httpsys) Server と [kestrel](xref:fundamentals/servers/kestrel) server では、現在、組み込みの圧縮サポートは提供されていません。
 
 次の場合に応答圧縮ミドルウェアを使用します。
 
@@ -298,7 +299,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、 `Accept-Encoding` 要求と共にヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに、 `Content-Encoding` 圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | 説明 |
+| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | 説明 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | あり (既定)        | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -310,11 +311,11 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 詳細については、「 [IANA 公式コンテンツコーディングリスト](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)」を参照してください。
 
-ミドルウェアを使用すると、カスタムヘッダー値の圧縮プロバイダーを追加でき `Accept-Encoding` ます。 詳細については、以下の「[カスタムプロバイダー](#custom-providers) 」を参照してください。
+ミドルウェアを使用すると、カスタムヘッダー値の圧縮プロバイダーを追加でき `Accept-Encoding` ます。 詳細については、以下の「 [カスタムプロバイダー](#custom-providers) 」を参照してください。
 
 ミドルウェアは、 `q` 圧縮スキームの優先順位を決定するためにクライアントから送信されるときに、品質の値 (qvalue,) の重み付けに対応できます。 詳細については、「 [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4)」を参照してください。
 
-圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは*最適*な圧縮によって実現されます。
+圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
 
 次の表では、圧縮されたコンテンツの要求、送信、キャッシュ、および受信に関連するヘッダーについて説明します。
 
@@ -324,7 +325,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 | `Content-Encoding` | ペイロード内のコンテンツのエンコードを示すために、サーバーからクライアントに送信されます。 |
 | `Content-Length`   | 圧縮が発生すると、 `Content-Length` 応答が圧縮されるときに本文の内容が変更されるため、ヘッダーは削除されます。 |
 | `Content-MD5`      | 圧縮が行われると、 `Content-MD5` 本文の内容が変更され、ハッシュが有効でなくなったため、ヘッダーは削除されます。 |
-| `Content-Type`     | コンテンツの MIME の種類を指定します。 すべての応答で、を指定する必要があり `Content-Type` ます。 ミドルウェアは、この値をチェックして、応答を圧縮する必要があるかどうかを判断します。 ミドルウェアはエンコードできる既定の[mime の種類](#mime-types)のセットを指定しますが、mime の種類を置き換えたり追加したりすることができます。 |
+| `Content-Type`     | コンテンツの MIME の種類を指定します。 すべての応答で、を指定する必要があり `Content-Type` ます。 ミドルウェアは、この値をチェックして、応答を圧縮する必要があるかどうかを判断します。 ミドルウェアはエンコードできる既定の [mime の種類](#mime-types) のセットを指定しますが、mime の種類を置き換えたり追加したりすることができます。 |
 | `Vary`             | の値がであるサーバーからクライアントとプロキシに送信された場合 `Accept-Encoding` 、ヘッダーは、 `Vary` 要求のヘッダーの値に基づいて応答をキャッシュ (変更) する必要があることをクライアントまたはプロキシに示し `Accept-Encoding` ます。 ヘッダーを使用してコンテンツを返すと、 `Vary: Accept-Encoding` 圧縮された応答と圧縮されていない応答の両方が個別にキャッシュされることになります。 |
 
 [サンプルアプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)を使用して、応答圧縮ミドルウェアの機能を検証します。 このサンプルでは、次のことを示します。
@@ -332,13 +333,13 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 * Gzip およびカスタム圧縮プロバイダーを使用したアプリ応答の圧縮。
 * 圧縮する mime の種類の既定の一覧に MIME の種類を追加する方法について説明します。
 
-## <a name="package"></a>Package
+## <a name="package"></a>パッケージ
 
-ミドルウェアをプロジェクトに含めるには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)への参照を追加します。これには、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)パッケージが含まれています。
+ミドルウェアをプロジェクトに含めるには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)への参照を追加します。これには、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) パッケージが含まれています。
 
 ## <a name="configuration"></a>構成
 
-次のコードは、既定の MIME の種類と圧縮プロバイダー ([Brotli](#brotli-compression-provider)と[Gzip](#gzip-compression-provider)) に対して応答圧縮ミドルウェアを有効にする方法を示しています。
+次のコードは、既定の MIME の種類と圧縮プロバイダー ([Brotli](#brotli-compression-provider) と [Gzip](#gzip-compression-provider)) に対して応答圧縮ミドルウェアを有効にする方法を示しています。
 
 ```csharp
 public class Startup
@@ -357,7 +358,7 @@ public class Startup
 
 メモ:
 
-* `app.UseResponseCompression`応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、「<xref:fundamentals/middleware/index#middleware-order>」を参照してください。
+* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、<xref:fundamentals/middleware/index#middleware-order> を参照してください。
 * [Fiddler](https://www.telerik.com/fiddler)、[消火バグ](https://getfirebug.com/)、 [Postman](https://www.getpostman.com/)などのツールを使用して要求ヘッダーを設定 `Accept-Encoding` し、応答ヘッダー、サイズ、および本文を調査します。
 
 ヘッダーを使用せずにサンプルアプリに要求を送信 `Accept-Encoding` し、応答が圧縮されていないことを確認します。 `Content-Encoding` `Vary` 応答にヘッダーとヘッダーが存在しません。
@@ -483,7 +484,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="compression-with-secure-protocol"></a>セキュリティで保護されたプロトコルを使用した圧縮
 
-セキュリティで保護された接続での圧縮された応答は、 `EnableForHttps` 既定では無効になっているオプションを使用して制御できます。 動的に生成されたページで圧縮を使用すると、[犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit))や[侵害](https://wikipedia.org/wiki/BREACH_(security_exploit))攻撃などのセキュリティ上の問題が発生する可能性があります。
+セキュリティで保護された接続での圧縮された応答は、 `EnableForHttps` 既定では無効になっているオプションを使用して制御できます。 動的に生成されたページで圧縮を使用すると、 [犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit)) や [侵害](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃などのセキュリティ上の問題が発生する可能性があります。
 
 ## <a name="adding-the-vary-header"></a>Vary ヘッダーを追加する
 
@@ -495,7 +496,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="working-with-iis-dynamic-compression"></a>IIS 動的圧縮の使用
 
-アプリケーションに対して無効にする、アクティブな IIS 動的圧縮モジュールがサーバーレベルで構成されている場合は、 *web.config*ファイルを追加してモジュールを無効にします。 詳細については、「[Disabling IIS modules](xref:host-and-deploy/iis/modules#disabling-iis-modules)」 (IIS モジュールの無効化) を参照してください。
+アプリケーションに対して無効にする、アクティブな IIS 動的圧縮モジュールがサーバーレベルで構成されている場合は、 *web.config* ファイルを追加してモジュールを無効にします。 詳細については、「[Disabling IIS modules](xref:host-and-deploy/iis/modules#disabling-iis-modules)」 (IIS モジュールの無効化) を参照してください。
 
 ## <a name="troubleshooting"></a>トラブルシューティング
 
@@ -504,7 +505,7 @@ public void ConfigureServices(IServiceCollection services)
 * `Accept-Encoding`ヘッダーには `br` 、設定した `gzip` `*` カスタム圧縮プロバイダーに一致する値、、、またはカスタムエンコーディングが含まれています。 値は、 `identity` または品質値 (qvalue, `q` ) の 0 (ゼロ) に設定することはできません。
 * MIME の種類 ( `Content-Type` ) を設定し、で構成されている mime の種類と一致させる必要があり <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions> ます。
 * 要求にヘッダーを含めることはできません `Content-Range` 。
-* 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、[前述](#compression-with-secure-protocol)の危険に注意してください。*
+* 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、 [前述](#compression-with-secure-protocol) の危険に注意してください。*
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -525,7 +526,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="when-to-use-response-compression-middleware"></a>応答圧縮ミドルウェアを使用する場合
 
-IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノロジを使用します。 ミドルウェアのパフォーマンスがサーバーモジュールのパフォーマンスと一致しない場合があります。 [HTTP.sys server](xref:fundamentals/servers/httpsys) Server と[kestrel](xref:fundamentals/servers/kestrel) server では、現在、組み込みの圧縮サポートは提供されていません。
+IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノロジを使用します。 ミドルウェアのパフォーマンスがサーバーモジュールのパフォーマンスと一致しない場合があります。 [HTTP.sys server](xref:fundamentals/servers/httpsys) Server と [kestrel](xref:fundamentals/servers/kestrel) server では、現在、組み込みの圧縮サポートは提供されていません。
 
 次の場合に応答圧縮ミドルウェアを使用します。
 
@@ -543,7 +544,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、 `Accept-Encoding` 要求と共にヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに、 `Content-Encoding` 圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding`ヘッダー値 | サポートされているミドルウェア | 説明 |
+| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | 説明 |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | いいえ                   | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -555,11 +556,11 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 詳細については、「 [IANA 公式コンテンツコーディングリスト](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)」を参照してください。
 
-ミドルウェアを使用すると、カスタムヘッダー値の圧縮プロバイダーを追加でき `Accept-Encoding` ます。 詳細については、以下の「[カスタムプロバイダー](#custom-providers) 」を参照してください。
+ミドルウェアを使用すると、カスタムヘッダー値の圧縮プロバイダーを追加でき `Accept-Encoding` ます。 詳細については、以下の「 [カスタムプロバイダー](#custom-providers) 」を参照してください。
 
 ミドルウェアは、 `q` 圧縮スキームの優先順位を決定するためにクライアントから送信されるときに、品質の値 (qvalue,) の重み付けに対応できます。 詳細については、「 [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4)」を参照してください。
 
-圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは*最適*な圧縮によって実現されます。
+圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
 
 次の表では、圧縮されたコンテンツの要求、送信、キャッシュ、および受信に関連するヘッダーについて説明します。
 
@@ -569,7 +570,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 | `Content-Encoding` | ペイロード内のコンテンツのエンコードを示すために、サーバーからクライアントに送信されます。 |
 | `Content-Length`   | 圧縮が発生すると、 `Content-Length` 応答が圧縮されるときに本文の内容が変更されるため、ヘッダーは削除されます。 |
 | `Content-MD5`      | 圧縮が行われると、 `Content-MD5` 本文の内容が変更され、ハッシュが有効でなくなったため、ヘッダーは削除されます。 |
-| `Content-Type`     | コンテンツの MIME の種類を指定します。 すべての応答で、を指定する必要があり `Content-Type` ます。 ミドルウェアは、この値をチェックして、応答を圧縮する必要があるかどうかを判断します。 ミドルウェアはエンコードできる既定の[mime の種類](#mime-types)のセットを指定しますが、mime の種類を置き換えたり追加したりすることができます。 |
+| `Content-Type`     | コンテンツの MIME の種類を指定します。 すべての応答で、を指定する必要があり `Content-Type` ます。 ミドルウェアは、この値をチェックして、応答を圧縮する必要があるかどうかを判断します。 ミドルウェアはエンコードできる既定の [mime の種類](#mime-types) のセットを指定しますが、mime の種類を置き換えたり追加したりすることができます。 |
 | `Vary`             | の値がであるサーバーからクライアントとプロキシに送信された場合 `Accept-Encoding` 、ヘッダーは、 `Vary` 要求のヘッダーの値に基づいて応答をキャッシュ (変更) する必要があることをクライアントまたはプロキシに示し `Accept-Encoding` ます。 ヘッダーを使用してコンテンツを返すと、 `Vary: Accept-Encoding` 圧縮された応答と圧縮されていない応答の両方が個別にキャッシュされることになります。 |
 
 [サンプルアプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)を使用して、応答圧縮ミドルウェアの機能を検証します。 このサンプルでは、次のことを示します。
@@ -577,13 +578,13 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 * Gzip およびカスタム圧縮プロバイダーを使用したアプリ応答の圧縮。
 * 圧縮する mime の種類の既定の一覧に MIME の種類を追加する方法について説明します。
 
-## <a name="package"></a>Package
+## <a name="package"></a>パッケージ
 
-ミドルウェアをプロジェクトに含めるには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)への参照を追加します。これには、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/)パッケージが含まれています。
+ミドルウェアをプロジェクトに含めるには、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)への参照を追加します。これには、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCompression/) パッケージが含まれています。
 
 ## <a name="configuration"></a>構成
 
-次のコードは、既定の MIME の種類と[Gzip 圧縮プロバイダー](#gzip-compression-provider)の応答圧縮ミドルウェアを有効にする方法を示しています。
+次のコードは、既定の MIME の種類と [Gzip 圧縮プロバイダー](#gzip-compression-provider)の応答圧縮ミドルウェアを有効にする方法を示しています。
 
 ```csharp
 public class Startup
@@ -602,7 +603,7 @@ public class Startup
 
 メモ:
 
-* `app.UseResponseCompression`応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、「<xref:fundamentals/middleware/index#middleware-order>」を参照してください。
+* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、<xref:fundamentals/middleware/index#middleware-order> を参照してください。
 * [Fiddler](https://www.telerik.com/fiddler)、[消火バグ](https://getfirebug.com/)、 [Postman](https://www.getpostman.com/)などのツールを使用して要求ヘッダーを設定 `Accept-Encoding` し、応答ヘッダー、サイズ、および本文を調査します。
 
 ヘッダーを使用せずにサンプルアプリに要求を送信 `Accept-Encoding` し、応答が圧縮されていないことを確認します。 `Content-Encoding` `Vary` 応答にヘッダーとヘッダーが存在しません。
@@ -688,7 +689,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="compression-with-secure-protocol"></a>セキュリティで保護されたプロトコルを使用した圧縮
 
-セキュリティで保護された接続での圧縮された応答は、 `EnableForHttps` 既定では無効になっているオプションを使用して制御できます。 動的に生成されたページで圧縮を使用すると、[犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit))や[侵害](https://wikipedia.org/wiki/BREACH_(security_exploit))攻撃などのセキュリティ上の問題が発生する可能性があります。
+セキュリティで保護された接続での圧縮された応答は、 `EnableForHttps` 既定では無効になっているオプションを使用して制御できます。 動的に生成されたページで圧縮を使用すると、 [犯罪](https://wikipedia.org/wiki/CRIME_(security_exploit)) や [侵害](https://wikipedia.org/wiki/BREACH_(security_exploit)) 攻撃などのセキュリティ上の問題が発生する可能性があります。
 
 ## <a name="adding-the-vary-header"></a>Vary ヘッダーを追加する
 
@@ -700,7 +701,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="working-with-iis-dynamic-compression"></a>IIS 動的圧縮の使用
 
-アプリケーションに対して無効にする、アクティブな IIS 動的圧縮モジュールがサーバーレベルで構成されている場合は、 *web.config*ファイルを追加してモジュールを無効にします。 詳細については、「[Disabling IIS modules](xref:host-and-deploy/iis/modules#disabling-iis-modules)」 (IIS モジュールの無効化) を参照してください。
+アプリケーションに対して無効にする、アクティブな IIS 動的圧縮モジュールがサーバーレベルで構成されている場合は、 *web.config* ファイルを追加してモジュールを無効にします。 詳細については、「[Disabling IIS modules](xref:host-and-deploy/iis/modules#disabling-iis-modules)」 (IIS モジュールの無効化) を参照してください。
 
 ## <a name="troubleshooting"></a>トラブルシューティング
 
@@ -709,7 +710,7 @@ public void ConfigureServices(IServiceCollection services)
 * `Accept-Encoding`ヘッダーには `gzip` 、設定した `*` カスタム圧縮プロバイダーに一致する値、、またはカスタムエンコーディングが含まれています。 値は、 `identity` または品質値 (qvalue, `q` ) の 0 (ゼロ) に設定することはできません。
 * MIME の種類 ( `Content-Type` ) を設定し、で構成されている mime の種類と一致させる必要があり <xref:Microsoft.AspNetCore.ResponseCompression.ResponseCompressionOptions> ます。
 * 要求にヘッダーを含めることはできません `Content-Range` 。
-* 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、[前述](#compression-with-secure-protocol)の危険に注意してください。*
+* 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、 [前述](#compression-with-secure-protocol) の危険に注意してください。*
 
 ## <a name="additional-resources"></a>その他のリソース
 

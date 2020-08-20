@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 917e698d34a5d4b6c2c3f4737c08f1a590f5df1a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 74c9ae63ffbe39d6ba6e77aee8f6adcc8c8a157a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017949"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634905"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core での開発におけるアプリシークレットの安全な保存
 
@@ -31,13 +32,13 @@ ms.locfileid: "88017949"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このドキュメントでは、開発用コンピューターでの ASP.NET Core アプリの開発時に機密データを格納および取得する方法について説明します。 パスワードやその他の機密データをソースコードに格納しないでください。 運用環境のシークレットは、開発またはテストには使用しないでください。 シークレットはアプリと一緒にデプロイしないでください。 代わりに、環境変数、Azure Key Vault などの制御された方法を使用して、運用環境でシークレットを使用できるようにする必要があります。[Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)を使用して、Azure テストおよび運用シークレットを格納し、保護することができます。
+このドキュメントでは、開発用コンピューターでの ASP.NET Core アプリの開発時に機密データを格納および取得する方法について説明します。 パスワードやその他の機密データをソースコードに格納しないでください。 運用環境のシークレットは、開発またはテストには使用しないでください。 シークレットはアプリと一緒にデプロイしないでください。 代わりに、環境変数、Azure Key Vault などの制御された方法を使用して、運用環境でシークレットを使用できるようにする必要があります。 [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)を使用して、Azure テストおよび運用シークレットを格納し、保護することができます。
 
 ## <a name="environment-variables"></a>環境変数
 
 環境変数は、コードまたはローカル構成ファイルにアプリシークレットを格納しないようにするために使用されます。 環境変数は、以前に指定したすべての構成ソースの構成値を上書きします。
 
-**個々のユーザーアカウント**のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、ファイルのキーを使用してプロジェクトの*appsettings.js*に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
+**個々のユーザーアカウント**のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、ファイルのキーを使用してプロジェクトの *appsettings.js* に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
 
 > [!WARNING]
 > 環境変数は通常、暗号化されていないプレーンテキストで格納されます。 コンピューターまたはプロセスが侵害された場合、信頼されていない相手から環境変数にアクセスできます。 ユーザーシークレットが漏えいしないようにするための追加の手段が必要な場合があります。
@@ -69,7 +70,7 @@ Secret Manager ツールは、値の格納場所や方法などの実装の詳�
 
 ---
 
-上記のファイルパスで、を `<user_secrets_id>` `UserSecretsId` *.csproj*ファイルで指定された値に置き換えます。
+上記のファイルパスで、を `<user_secrets_id>` `UserSecretsId` *.csproj* ファイルで指定された値に置き換えます。
 
 シークレットマネージャーツールで保存したデータの場所または形式に依存するコードは記述しないでください。 これらの実装の詳細は変更される可能性があります。 たとえば、シークレット値は暗号化されませんが、将来の可能性があります。
 
@@ -83,15 +84,15 @@ Secret Manager ツールには .NET Core SDK 3.0.100 以降のコマンドが含
 dotnet user-secrets init
 ```
 
-上のコマンドは、 `UserSecretsId` `PropertyGroup` *.csproj*ファイルの内に要素を追加します。 既定では、の内部テキスト `UserSecretsId` は GUID です。 内部テキストは任意ですが、プロジェクトに固有です。
+上のコマンドは、 `UserSecretsId` `PropertyGroup` *.csproj* ファイルの内に要素を追加します。 既定では、の内部テキスト `UserSecretsId` は GUID です。 内部テキストは任意ですが、プロジェクトに固有です。
 
 [!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
-Visual Studio で、ソリューションエクスプローラーでプロジェクトを右クリックし、コンテキストメニューから [**ユーザーシークレットの管理**] を選択します。 このジェスチャは、 `UserSecretsId` GUID が設定された要素を .csproj ファイルに追加し*ます*。
+Visual Studio で、ソリューションエクスプローラーでプロジェクトを右クリックし、コンテキストメニューから [ **ユーザーシークレットの管理** ] を選択します。 このジェスチャは、 `UserSecretsId` GUID が設定された要素を .csproj ファイルに追加し *ます* 。
 
 ## <a name="set-a-secret"></a>シークレットを設定する
 
-キーとその値で構成されるアプリシークレットを定義します。 シークレットは、プロジェクトの値に関連付けられ `UserSecretsId` ます。 たとえば、 *.csproj*ファイルが存在するディレクトリから次のコマンドを実行します。
+キーとその値で構成されるアプリシークレットを定義します。 シークレットは、プロジェクトの値に関連付けられ `UserSecretsId` ます。 たとえば、 *.csproj* ファイルが存在するディレクトリから次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
@@ -99,7 +100,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 前の例では、コロンは、がプロパティを持つオブジェクトリテラルであることを示して `Movies` い `ServiceApiKey` ます。
 
-シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj*ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 例:
+シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj*ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 次に例を示します。
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -107,7 +108,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio での JSON 構造のフラット化
 
-Visual Studio の [**ユーザーシークレットの管理**] ジェスチャでは、テキストエディターでファイル*のsecrets.js*が開きます。 *secrets.js*の内容を、格納されるキーと値のペアに置き換えます。 例:
+Visual Studio の [ **ユーザーシークレットの管理** ] ジェスチャでは、テキストエディターでファイル * のsecrets.js* が開きます。 *secrets.js*の内容を、格納されるキーと値のペアに置き換えます。 次に例を示します。
 
 ```json
 {
@@ -128,7 +129,7 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 
 ## <a name="set-multiple-secrets"></a>複数のシークレットを設定する
 
-シークレットのバッチは、JSON をコマンドにパイプすることによって設定でき `set` ます。 次の例では、ファイルの内容の*input.js*がコマンドにパイプされてい `set` ます。
+シークレットのバッチは、JSON をコマンドにパイプすることによって設定でき `set` ます。 次の例では、ファイルの内容の *input.js* がコマンドにパイプされてい `set` ます。
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -170,7 +171,7 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-前のシークレットを POCO にマップするには、 `Configuration` API の[オブジェクトグラフバインド](xref:fundamentals/configuration/index#bind-to-an-object-graph)機能を使用します。 次のコードは、カスタム POCO にバインド `MovieSettings` し、 `ServiceApiKey` プロパティ値にアクセスします。
+前のシークレットを POCO にマップするには、 `Configuration` API の [オブジェクトグラフバインド](xref:fundamentals/configuration/index#bind-to-an-object-graph) 機能を使用します。 次のコードは、カスタム POCO にバインド `MovieSettings` し、 `ServiceApiKey` プロパティ値にアクセスします。
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
@@ -180,17 +181,17 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 
 ## <a name="string-replacement-with-secrets"></a>シークレットを使用した文字列の置換
 
-プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、appsettings.jsに格納され*て*いるデータベース接続文字列には、指定したユーザーのパスワードを含めることができます。
+プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、appsettings.jsに格納され * て* いるデータベース接続文字列には、指定したユーザーのパスワードを含めることができます。
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-より安全な方法は、パスワードをシークレットとして保存することです。 例:
+より安全な方法は、パスワードをシークレットとして保存することです。 次に例を示します。
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-appsettings.jsの `Password` 接続文字列からキーと値のペアを*appsettings.json*削除します。 例:
+appsettings.jsの `Password` 接続文字列からキーと値のペアを*appsettings.json*削除します。 次に例を示します。
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -208,14 +209,14 @@ appsettings.jsの `Password` 接続文字列からキーと値のペアを*appse
 dotnet user-secrets list
 ```
 
-次の出力が表示されます。
+次のような出力が表示されます。
 
 ```console
 Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted_Connection=True;MultipleActiveResultSets=true
 Movies:ServiceApiKey = 12345
 ```
 
-前の例では、キー名のコロンは*secrets.js*内のオブジェクト階層を表しています。
+前の例では、キー名のコロンは *secrets.js*内のオブジェクト階層を表しています。
 
 ## <a name="remove-a-single-secret"></a>1つのシークレットを削除する
 
@@ -227,7 +228,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-ファイルのアプリの*secrets.js*は、キーに関連付けられているキーと値のペアを削除するように変更されました `MoviesConnectionString` 。
+ファイルのアプリの *secrets.js* は、キーに関連付けられているキーと値のペアを削除するように変更されました `MoviesConnectionString` 。
 
 ```json
 {
@@ -237,7 +238,7 @@ dotnet user-secrets remove "Movies:ConnectionString"
 }
 ```
 
-`dotnet user-secrets list`次のメッセージが表示されます。
+`dotnet user-secrets list` 次のメッセージが表示されます。
 
 ```console
 Movies:ServiceApiKey = 12345
@@ -253,7 +254,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets clear
 ```
 
-アプリのすべてのユーザーシークレットは、ファイルの*secrets.js*から削除されています。
+アプリのすべてのユーザーシークレットは、ファイルの *secrets.js* から削除されています。
 
 ```json
 {}
@@ -267,7 +268,7 @@ No secrets configured for this application.
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* IIS からシークレットマネージャーにアクセスする方法については、[この問題](https://github.com/dotnet/AspNetCore.Docs/issues/16328)を参照してください。
+* IIS からシークレットマネージャーにアクセスする方法については、 [この問題](https://github.com/dotnet/AspNetCore.Docs/issues/16328) を参照してください。
 * <xref:fundamentals/configuration/index>
 * <xref:security/key-vault-configuration>
 
@@ -279,13 +280,13 @@ No secrets configured for this application.
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このドキュメントでは、開発用コンピューターでの ASP.NET Core アプリの開発時に機密データを格納および取得する方法について説明します。 パスワードやその他の機密データをソースコードに格納しないでください。 運用環境のシークレットは、開発またはテストには使用しないでください。 シークレットはアプリと一緒にデプロイしないでください。 代わりに、環境変数、Azure Key Vault などの制御された方法を使用して、運用環境でシークレットを使用できるようにする必要があります。[Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)を使用して、Azure テストおよび運用シークレットを格納し、保護することができます。
+このドキュメントでは、開発用コンピューターでの ASP.NET Core アプリの開発時に機密データを格納および取得する方法について説明します。 パスワードやその他の機密データをソースコードに格納しないでください。 運用環境のシークレットは、開発またはテストには使用しないでください。 シークレットはアプリと一緒にデプロイしないでください。 代わりに、環境変数、Azure Key Vault などの制御された方法を使用して、運用環境でシークレットを使用できるようにする必要があります。 [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)を使用して、Azure テストおよび運用シークレットを格納し、保護することができます。
 
 ## <a name="environment-variables"></a>環境変数
 
 環境変数は、コードまたはローカル構成ファイルにアプリシークレットを格納しないようにするために使用されます。 環境変数は、以前に指定したすべての構成ソースの構成値を上書きします。
 
-**個々のユーザーアカウント**のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、ファイルのキーを使用してプロジェクトの*appsettings.js*に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
+**個々のユーザーアカウント**のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、ファイルのキーを使用してプロジェクトの *appsettings.js* に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
 
 > [!WARNING]
 > 環境変数は通常、暗号化されていないプレーンテキストで格納されます。 コンピューターまたはプロセスが侵害された場合、信頼されていない相手から環境変数にアクセスできます。 ユーザーシークレットが漏えいしないようにするための追加の手段が必要な場合があります。
@@ -317,7 +318,7 @@ Secret Manager ツールは、値の格納場所や方法などの実装の詳�
 
 ---
 
-上記のファイルパスで、を `<user_secrets_id>` `UserSecretsId` *.csproj*ファイルで指定された値に置き換えます。
+上記のファイルパスで、を `<user_secrets_id>` `UserSecretsId` *.csproj* ファイルで指定された値に置き換えます。
 
 シークレットマネージャーツールで保存したデータの場所または形式に依存するコードは記述しないでください。 これらの実装の詳細は変更される可能性があります。 たとえば、シークレット値は暗号化されませんが、将来の可能性があります。
 
@@ -325,16 +326,16 @@ Secret Manager ツールは、値の格納場所や方法などの実装の詳�
 
 Secret Manager ツールは、ユーザープロファイルに格納されているプロジェクト固有の構成設定を操作します。
 
-ユーザーシークレットを使用するには、 `UserSecretsId` `PropertyGroup` *.csproj*ファイルの内に要素を定義します。 の内部テキスト `UserSecretsId` は任意ですが、プロジェクトに固有です。 通常、開発者はの GUID を生成 `UserSecretsId` します。
+ユーザーシークレットを使用するには、 `UserSecretsId` `PropertyGroup` *.csproj* ファイルの内に要素を定義します。 の内部テキスト `UserSecretsId` は任意ですが、プロジェクトに固有です。 通常、開発者はの GUID を生成 `UserSecretsId` します。
 
 [!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 > [!TIP]
-> Visual Studio で、ソリューションエクスプローラーでプロジェクトを右クリックし、コンテキストメニューから [**ユーザーシークレットの管理**] を選択します。 このジェスチャは、 `UserSecretsId` GUID が設定された要素を .csproj ファイルに追加し*ます*。
+> Visual Studio で、ソリューションエクスプローラーでプロジェクトを右クリックし、コンテキストメニューから [ **ユーザーシークレットの管理** ] を選択します。 このジェスチャは、 `UserSecretsId` GUID が設定された要素を .csproj ファイルに追加し *ます* 。
 
 ## <a name="set-a-secret"></a>シークレットを設定する
 
-キーとその値で構成されるアプリシークレットを定義します。 シークレットは、プロジェクトの値に関連付けられ `UserSecretsId` ます。 たとえば、 *.csproj*ファイルが存在するディレクトリから次のコマンドを実行します。
+キーとその値で構成されるアプリシークレットを定義します。 シークレットは、プロジェクトの値に関連付けられ `UserSecretsId` ます。 たとえば、 *.csproj* ファイルが存在するディレクトリから次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
@@ -342,7 +343,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 前の例では、コロンは、がプロパティを持つオブジェクトリテラルであることを示して `Movies` い `ServiceApiKey` ます。
 
-シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj*ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 例:
+シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj*ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 次に例を示します。
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -350,7 +351,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio での JSON 構造のフラット化
 
-Visual Studio の [**ユーザーシークレットの管理**] ジェスチャでは、テキストエディターでファイル*のsecrets.js*が開きます。 *secrets.js*の内容を、格納されるキーと値のペアに置き換えます。 例:
+Visual Studio の [ **ユーザーシークレットの管理** ] ジェスチャでは、テキストエディターでファイル * のsecrets.js* が開きます。 *secrets.js*の内容を、格納されるキーと値のペアに置き換えます。 次に例を示します。
 
 ```json
 {
@@ -371,7 +372,7 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 
 ## <a name="set-multiple-secrets"></a>複数のシークレットを設定する
 
-シークレットのバッチは、JSON をコマンドにパイプすることによって設定でき `set` ます。 次の例では、ファイルの内容の*input.js*がコマンドにパイプされてい `set` ます。
+シークレットのバッチは、JSON をコマンドにパイプすることによって設定でき `set` ます。 次の例では、ファイルの内容の *input.js* がコマンドにパイプされてい `set` ます。
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -395,7 +396,7 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 
 [ASP.NET Core 構成 API](xref:fundamentals/configuration/index)は、シークレットマネージャーのシークレットへのアクセスを提供します。
 
-プロジェクトが .NET Framework 対象である場合は、Microsoft.Extensions.Configuration をインストールし[ます。UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet パッケージ。
+プロジェクトが .NET Framework 対象である場合は、Microsoft.Extensions.Configuration をインストールし [ ます。UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet パッケージ。
 
 ASP.NET Core 2.0 以降では、プロジェクトがを呼び出して、事前に構成され <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> た既定値でホストの新しいインスタンスを初期化すると、開発モードでユーザーシークレットの構成ソースが自動的に追加されます。 `CreateDefaultBuilder`<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>がの場合、 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> を呼び出し <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development> ます。
 
@@ -415,7 +416,7 @@ ASP.NET Core 2.0 以降では、プロジェクトがを呼び出して、事前
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-前のシークレットを POCO にマップするには、 `Configuration` API の[オブジェクトグラフバインド](xref:fundamentals/configuration/index#bind-to-an-object-graph)機能を使用します。 次のコードは、カスタム POCO にバインド `MovieSettings` し、 `ServiceApiKey` プロパティ値にアクセスします。
+前のシークレットを POCO にマップするには、 `Configuration` API の [オブジェクトグラフバインド](xref:fundamentals/configuration/index#bind-to-an-object-graph) 機能を使用します。 次のコードは、カスタム POCO にバインド `MovieSettings` し、 `ServiceApiKey` プロパティ値にアクセスします。
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
@@ -425,17 +426,17 @@ ASP.NET Core 2.0 以降では、プロジェクトがを呼び出して、事前
 
 ## <a name="string-replacement-with-secrets"></a>シークレットを使用した文字列の置換
 
-プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、appsettings.jsに格納され*て*いるデータベース接続文字列には、指定したユーザーのパスワードを含めることができます。
+プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、appsettings.jsに格納され * て* いるデータベース接続文字列には、指定したユーザーのパスワードを含めることができます。
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-より安全な方法は、パスワードをシークレットとして保存することです。 例:
+より安全な方法は、パスワードをシークレットとして保存することです。 次に例を示します。
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-appsettings.jsの `Password` 接続文字列からキーと値のペアを*appsettings.json*削除します。 例:
+appsettings.jsの `Password` 接続文字列からキーと値のペアを*appsettings.json*削除します。 次に例を示します。
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -453,14 +454,14 @@ appsettings.jsの `Password` 接続文字列からキーと値のペアを*appse
 dotnet user-secrets list
 ```
 
-次の出力が表示されます。
+次のような出力が表示されます。
 
 ```console
 Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted_Connection=True;MultipleActiveResultSets=true
 Movies:ServiceApiKey = 12345
 ```
 
-前の例では、キー名のコロンは*secrets.js*内のオブジェクト階層を表しています。
+前の例では、キー名のコロンは *secrets.js*内のオブジェクト階層を表しています。
 
 ## <a name="remove-a-single-secret"></a>1つのシークレットを削除する
 
@@ -472,7 +473,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-ファイルのアプリの*secrets.js*は、キーに関連付けられているキーと値のペアを削除するように変更されました `MoviesConnectionString` 。
+ファイルのアプリの *secrets.js* は、キーに関連付けられているキーと値のペアを削除するように変更されました `MoviesConnectionString` 。
 
 ```json
 {
@@ -498,7 +499,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets clear
 ```
 
-アプリのすべてのユーザーシークレットは、ファイルの*secrets.js*から削除されています。
+アプリのすべてのユーザーシークレットは、ファイルの *secrets.js* から削除されています。
 
 ```json
 {}
@@ -512,7 +513,7 @@ No secrets configured for this application.
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* IIS からシークレットマネージャーにアクセスする方法については、[この問題](https://github.com/dotnet/AspNetCore.Docs/issues/16328)を参照してください。
+* IIS からシークレットマネージャーにアクセスする方法については、 [この問題](https://github.com/dotnet/AspNetCore.Docs/issues/16328) を参照してください。
 * <xref:fundamentals/configuration/index>
 * <xref:security/key-vault-configuration>
 

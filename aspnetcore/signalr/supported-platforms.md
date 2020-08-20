@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: e6989f431d0d72241a6e1b94759585c02ef7398f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 91fd2553803d855b338b1d1b46d55e1d1e4cc21e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021550"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635152"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>ASP.NET Core SignalR でサポートされているプラットフォーム
 
 ## <a name="server-system-requirements"></a>サーバー システムの要件
 
-SignalRASP.NET Core は、ASP.NET Core がサポートするすべてのサーバープラットフォームをサポートします。
+SignalR ASP.NET Core は、ASP.NET Core がサポートするすべてのサーバープラットフォームをサポートします。
 
 ## <a name="javascript-client"></a>JavaScript クライアント
 
@@ -42,7 +43,7 @@ SignalRASP.NET Core は、ASP.NET Core がサポートするすべてのサー�
 | SafariiOS を含む            | [現在]&dagger; |
 | Microsoft Internet Explorer     | 11              |
 
-&dagger;*Current*は、ブラウザーの最新バージョンを参照します。
+&dagger;*Current* は、ブラウザーの最新バージョンを参照します。
 
 ## <a name="net-client"></a>.NET クライアント
 

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 66b307a3629e18e49b5bb6e65a156054c0002ba8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f52f6ec9c557add2c66105397eb2733a0dcb9e87
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022109"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635191"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>ASP.NET Core で特定のスキームを使用して承認する
 
-シングルページアプリケーション (spa) などの一部のシナリオでは、複数の認証方法を使用するのが一般的です。 たとえば、アプリはベース cookie 認証を使用して、JavaScript 要求のログインと JWT ベアラー認証を使用する場合があります。 場合によっては、アプリに認証ハンドラーのインスタンスが複数存在することがあります。 たとえば、1つのに基本 id が格納されている2つの cookie ハンドラーと、multi-factor authentication (MFA) がトリガーされたときに作成されるハンドラーがあります。 ユーザーが追加のセキュリティを必要とする操作を要求したため、MFA がトリガーされる可能性があります。 ユーザーが MFA を必要とするリソースを要求したときに MFA を適用する方法の詳細については、「MFA を使用した GitHub の問題の[保護」セクション](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)を参照してください。
+シングルページアプリケーション (spa) などの一部のシナリオでは、複数の認証方法を使用するのが一般的です。 たとえば、アプリはベース cookie 認証を使用して、JavaScript 要求のログインと JWT ベアラー認証を使用する場合があります。 場合によっては、アプリに認証ハンドラーのインスタンスが複数存在することがあります。 たとえば、1つのに基本 id が格納されている2つの cookie ハンドラーと、multi-factor authentication (MFA) がトリガーされたときに作成されるハンドラーがあります。 ユーザーが追加のセキュリティを必要とする操作を要求したため、MFA がトリガーされる可能性があります。 ユーザーが MFA を必要とするリソースを要求したときに MFA を適用する方法の詳細については、「MFA を使用した GitHub の問題の [保護」セクション](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)を参照してください。
 
-認証時に認証サービスが構成されると、認証スキームに名前が付けられます。 例:
+認証時に認証サービスが構成されると、認証スキームに名前が付けられます。 次に例を示します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -52,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>認証属性を使用したスキームの選択
 
-承認の時点で、アプリは使用するハンドラーを示します。 認証スキームのコンマ区切りの一覧をに渡して、アプリが承認するハンドラーを選択し `[Authorize]` ます。 属性は、 `[Authorize]` 既定値が構成されているかどうかに関係なく、使用する認証スキームを指定します。 例:
+承認の時点で、アプリは使用するハンドラーを示します。 認証スキームのコンマ区切りの一覧をに渡して、アプリが承認するハンドラーを選択し `[Authorize]` ます。 属性は、 `[Authorize]` 既定値が構成されているかどうかに関係なく、使用する認証スキームを指定します。 次に例を示します。
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -128,7 +129,7 @@ public void ConfigureServices(IServiceCollection services)
 > [!NOTE]
 > 既定の認証スキームでは、JWT ベアラー認証が1つだけ登録され `JwtBearerDefaults.AuthenticationScheme` ます。 追加の認証は、一意の認証スキームを使用して登録する必要があります。
 
-次の手順では、両方の認証方式を受け入れるように既定の承認ポリシーを更新します。 例:
+次の手順では、両方の認証方式を受け入れるように既定の承認ポリシーを更新します。 次に例を示します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

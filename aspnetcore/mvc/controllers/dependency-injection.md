@@ -5,6 +5,7 @@ description: ASP.NET Core の MVC コントローラーが、ASP.NET Core でそ
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: aabb7f893fd9650e2e901dcfdfe845faba391435
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 74c43e4f01e5b0d6923bf06f8859341c49088ef6
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019173"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635243"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core でのコントローラーへの依存関係の挿入
 
@@ -64,7 +65,7 @@ ASP.NET Core の MVC コントローラーは、コンストラクターを使�
 
 コントローラー内からアプリまたは構成の設定にアクセスするのが一般的なパターンです。 <xref:fundamentals/configuration/options> で説明されている*オプション パターン*が設定の管理手法として推奨されています。 通常はコントローラーに <xref:Microsoft.Extensions.Configuration.IConfiguration> を直接挿入しないでください。
 
-オプションを表すクラスを作成します。 例:
+オプションを表すクラスを作成します。 次に例を示します。
 
 [!code-csharp[](dependency-injection/3.1sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -128,7 +129,7 @@ ASP.NET Core の MVC コントローラーは、コンストラクターを使�
 
 コントローラー内からアプリまたは構成の設定にアクセスするのが一般的なパターンです。 <xref:fundamentals/configuration/options> で説明されている*オプション パターン*が設定の管理手法として推奨されています。 通常はコントローラーに <xref:Microsoft.Extensions.Configuration.IConfiguration> を直接挿入しないでください。
 
-オプションを表すクラスを作成します。 例:
+オプションを表すクラスを作成します。 次に例を示します。
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

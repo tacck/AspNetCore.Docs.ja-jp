@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022369"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635399"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API における Json パッチ
 
@@ -36,7 +37,7 @@ ms.locfileid: "88022369"
 アプリで JSON 修正プログラムのサポートを有効にするには、次の手順を実行します。
 
 1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet パッケージをインストールします。
-1. `Startup.ConfigureServices`を呼び出すようにプロジェクトのメソッドを更新し <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> ます。 例:
+1. `Startup.ConfigureServices`を呼び出すようにプロジェクトのメソッドを更新し <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> ます。 次に例を示します。
 
     ```csharp
     services
@@ -112,11 +113,11 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のように指定します。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、「 `"/address/zipCode"` 」のように入力します。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 `add`配列の末尾には、 `-` インデックス番号ではなくハイフン () を使用し `/addresses/-` ます。
 
-### <a name="operations"></a>操作
+### <a name="operations"></a>Operations
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
@@ -247,7 +248,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードの入手
+## <a name="get-the-code"></a>コードを取得する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -256,7 +257,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP メソッド: `PATCH`
 * ヘッダー: `Content-Type: application/json-patch+json`
-* Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
+* Body: *json プロジェクトフォルダーから json 修正* プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -324,11 +325,11 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 ## <a name="path-syntax"></a>パス構文
 
-操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、`"/address/zipCode"` のように指定します。
+操作オブジェクトの [path](https://tools.ietf.org/html/rfc6901) プロパティでは、レベル間にスラッシュを保持します。 たとえば、「 `"/address/zipCode"` 」のように入力します。
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列の末尾への `add` では、インデックス番号ではなく、`/addresses/-` のようにハイフン (-) を使用します。
 
-### <a name="operations"></a>操作
+### <a name="operations"></a>Operations
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
@@ -343,7 +344,7 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 ## <a name="jsonpatch-in-aspnet-core"></a>ASP.NET Core における JSON パッチ
 
-JSON パッチの ASP.NET Core 実装は、[Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet パッケージ内に提供されています。 パッケージは、 [AspnetCore](xref:fundamentals/metapackage-app)メタパッケージに含まれています。
+JSON パッチの ASP.NET Core 実装は、[Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet パッケージ内に提供されています。 パッケージは、 [AspnetCore](xref:fundamentals/metapackage-app) メタパッケージに含まれています。
 
 ## <a name="action-method-code"></a>アクション メソッド コード
 
@@ -459,7 +460,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードの入手
+## <a name="get-the-code"></a>コードを取得する
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -468,7 +469,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP メソッド: `PATCH`
 * ヘッダー: `Content-Type: application/json-patch+json`
-* Body: *json プロジェクトフォルダーから json 修正*プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
+* Body: *json プロジェクトフォルダーから json 修正* プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
 ## <a name="additional-resources"></a>その他のリソース
 

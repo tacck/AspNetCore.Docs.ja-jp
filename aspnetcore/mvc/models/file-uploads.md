@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: a11e6325143b9db57d6fbd1cd67478dc1dd6122d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 93ffa3a5313e63a1e9b98fb5bf9788944254213f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021251"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635217"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core でファイルをアップロードする
 
@@ -34,7 +35,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="security-considerations"></a>セキュリティに関する考慮事項
+## <a name="security-considerations"></a>セキュリティの考慮事項
 
 サーバーにファイルをアップロードする機能をユーザーに提供するときは、十分に注意してください。 攻撃者が次のようなことを試みる可能性があります。
 
@@ -46,9 +47,9 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 * 専用のファイル アップロード領域 (できれば、システム ドライブ以外) にファイルをアップロードします。 専用の場所を使用すると、アップロードされるファイルにセキュリティ制限を適用しやすくなります。 ファイルのアップロード場所に対する実行アクセス許可を無効にします。&dagger;
 * アプリと同じディレクトリ ツリーに、アップロードしたファイルを保持**しないでください**。&dagger;
-* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。 &dagger;HTML は、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりし Razor ます (出力を自動的に HTML エンコードします)。
+* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。 &dagger; HTML は、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりし Razor ます (出力を自動的に HTML エンコードします)。
 * アプリの設計仕様に対して承認されているファイル拡張子のみを許可します。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* クライアント側のチェックがサーバーで実行されていることを確認します。 &dagger;クライアント側のチェックは簡単に回避できます。
+* クライアント側のチェックがサーバーで実行されていることを確認します。 &dagger; クライアント側のチェックは簡単に回避できます。
 * アップロードされたファイルのサイズをチェックします。 サイズの大きなアップロードを防ぐために、最大サイズ制限を設定します。&dagger;
 * 同じ名前でアップロードされたファイルによってファイルが上書きされないようにする必要があるときは、ファイルをアップロードする前に、データベースまたは物理ストレージに対してファイル名を確認します。
 * **ファイルを格納する前に、アップロードされる内容に対してウイルス/マルウェア スキャナーを実行します。**
@@ -93,7 +94,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   * 通常、サービスでは、大抵の場合に単一障害点となるオンプレミス ソリューションより高いスケーラビリティと回復性が提供されます。
   * 大規模なストレージ インフラストラクチャのシナリオでは、サービスのコストが低下する可能性があります。
 
-  詳細については、「[クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。
+  詳細については、「 [クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。
 
 ## <a name="file-upload-scenarios"></a>ファイル アップロードのシナリオ
 
@@ -111,7 +112,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 小さいファイルのバッファーリングについては、後のセクションで説明します。
 
 * [物理ストレージ](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [データベース](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [[データベース]](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **ストリーミング**
 
@@ -238,7 +239,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 >
 > これまでに示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
-> * [セキュリティに関する考慮事項](#security-considerations)
+> * [セキュリティの考慮事項](#security-considerations)
 > * [検証](#validation)
 
 モデル バインドと <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してファイルをアップロードする場合、アクション メソッドでは以下を受け入れることができます。
@@ -409,14 +410,14 @@ public async Task<IActionResult> OnPostUploadAsync()
 >
 > 示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
-> * [セキュリティに関する考慮事項](#security-considerations)
+> * [セキュリティの考慮事項](#security-considerations)
 > * [検証](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>ストリーミングを使用して大きいファイルをアップロードする
 
 次の例では、JavaScript を使用してファイルをコントローラーのアクションにストリーミングする方法を示します。 ファイルの偽造防止トークンは、カスタム フィルター属性を使用して生成され、要求本文ではなくクライアント HTTP ヘッダーに渡されます。 アクション メソッドではアップロードされたデータが直接処理されるため、フォーム モデル バインドは別のカスタム フィルターでは無効になります。 アクション内では、フォームのコンテンツが `MultipartReader` を使用して読み取られます。その場合、各 `MultipartSection` が読み取られ、必要に応じて、ファイルが処理されるかコンテンツが格納されます。 マルチパート セクションが読み取られた後、アクションで独自のモデル バインドが実行されます。
 
-最初のページ応答では、フォームが読み込まれ、(属性を使用して) にアンチ偽造トークンが保存され cookie `GenerateAntiforgeryTokenCookieAttribute` ます。 属性は、ASP.NET Core の組み込みの[アンチ偽造サポート](xref:security/anti-request-forgery)を使用して、要求トークンを使用してを設定し cookie ます。
+最初のページ応答では、フォームが読み込まれ、(属性を使用して) にアンチ偽造トークンが保存され cookie `GenerateAntiforgeryTokenCookieAttribute` ます。 属性は、ASP.NET Core の組み込みの [アンチ偽造サポート](xref:security/anti-request-forgery) を使用して、要求トークンを使用してを設定し cookie ます。
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -466,7 +467,7 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 ### <a name="file-extension-validation"></a>ファイル拡張子の検証
 
-アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 例:
+アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 次に例を示します。
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -512,7 +513,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 ファイルを物理ストレージに保存する場合は、クライアント指定のファイル名を使用しないでください。 [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) または [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) を使用して、ファイルの安全なファイル名を作成し、一時ストレージの完全なパス (ファイル名を含む) を作成します。
 
-Razorプロパティ値が自動的に HTML エンコードされて表示されます。 次のコードは安全に使用できます。
+Razor プロパティ値が自動的に HTML エンコードされて表示されます。 次のコードは安全に使用できます。
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -569,7 +570,7 @@ if (formFile.Length > _fileSizeLimit)
 
 フォームデータを Razor ポストするか、JavaScript の直接を使用する非フォームでは `FormData` 、フォームの要素で指定された名前、または `FormData` コントローラーのアクション内のパラメーターの名前と一致する必要があります。
 
-次の例では
+次に例を示します。
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 
@@ -761,7 +762,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-## <a name="security-considerations"></a>セキュリティに関する考慮事項
+## <a name="security-considerations"></a>セキュリティの考慮事項
 
 サーバーにファイルをアップロードする機能をユーザーに提供するときは、十分に注意してください。 攻撃者が次のようなことを試みる可能性があります。
 
@@ -773,9 +774,9 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 
 * 専用のファイル アップロード領域 (できれば、システム ドライブ以外) にファイルをアップロードします。 専用の場所を使用すると、アップロードされるファイルにセキュリティ制限を適用しやすくなります。 ファイルのアップロード場所に対する実行アクセス許可を無効にします。&dagger;
 * アプリと同じディレクトリ ツリーに、アップロードしたファイルを保持**しないでください**。&dagger;
-* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。 &dagger;HTML は、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりし Razor ます (出力を自動的に HTML エンコードします)。
+* アプリによって決められた安全なファイル名を使用します。 ユーザーが指定したファイル名や、アップロードしたファイルの信頼されていないファイル名を使用しないでください。 &dagger; HTML は、表示時に信頼されていないファイル名をエンコードします。 たとえば、ファイル名をログに記録したり、UI に表示したりし Razor ます (出力を自動的に HTML エンコードします)。
 * アプリの設計仕様に対して承認されているファイル拡張子のみを許可します。&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* クライアント側のチェックがサーバーで実行されていることを確認します。 &dagger;クライアント側のチェックは簡単に回避できます。
+* クライアント側のチェックがサーバーで実行されていることを確認します。 &dagger; クライアント側のチェックは簡単に回避できます。
 * アップロードされたファイルのサイズをチェックします。 サイズの大きなアップロードを防ぐために、最大サイズ制限を設定します。&dagger;
 * 同じ名前でアップロードされたファイルによってファイルが上書きされないようにする必要があるときは、ファイルをアップロードする前に、データベースまたは物理ストレージに対してファイル名を確認します。
 * **ファイルを格納する前に、アップロードされる内容に対してウイルス/マルウェア スキャナーを実行します。**
@@ -820,7 +821,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
   * 通常、サービスでは、大抵の場合に単一障害点となるオンプレミス ソリューションより高いスケーラビリティと回復性が提供されます。
   * 大規模なストレージ インフラストラクチャのシナリオでは、サービスのコストが低下する可能性があります。
 
-  詳細については、「[クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。 そのトピックでは <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> が示されていますが、<xref:System.IO.Stream> を使用する場合は、<xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> を使用して <xref:System.IO.FileStream> を Blob Storage に保存することもできます。
+  詳細については、「 [クイックスタート: .net を使用してオブジェクトストレージに blob を作成する](/azure/storage/blobs/storage-quickstart-blobs-dotnet)」を参照してください。 そのトピックでは <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> が示されていますが、<xref:System.IO.Stream> を使用する場合は、<xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> を使用して <xref:System.IO.FileStream> を Blob Storage に保存することもできます。
 
 ## <a name="file-upload-scenarios"></a>ファイル アップロードのシナリオ
 
@@ -838,7 +839,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 小さいファイルのバッファーリングについては、後のセクションで説明します。
 
 * [物理ストレージ](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [データベース](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [[データベース]](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **ストリーミング**
 
@@ -965,7 +966,7 @@ ASP.NET Core では、小さいファイルの場合はバッファー モデル
 >
 > これまでに示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
-> * [セキュリティに関する考慮事項](#security-considerations)
+> * [セキュリティの考慮事項](#security-considerations)
 > * [検証](#validation)
 
 モデル バインドと <xref:Microsoft.AspNetCore.Http.IFormFile> を使用してファイルをアップロードする場合、アクション メソッドでは以下を受け入れることができます。
@@ -1136,14 +1137,14 @@ public async Task<IActionResult> OnPostUploadAsync()
 >
 > 示した例では、セキュリティ上の考慮事項については考えられていません。 以下のセクションおよび[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)で、追加の情報が提供されています。
 >
-> * [セキュリティに関する考慮事項](#security-considerations)
+> * [セキュリティの考慮事項](#security-considerations)
 > * [検証](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>ストリーミングを使用して大きいファイルをアップロードする
 
 次の例では、JavaScript を使用してファイルをコントローラーのアクションにストリーミングする方法を示します。 ファイルの偽造防止トークンは、カスタム フィルター属性を使用して生成され、要求本文ではなくクライアント HTTP ヘッダーに渡されます。 アクション メソッドではアップロードされたデータが直接処理されるため、フォーム モデル バインドは別のカスタム フィルターでは無効になります。 アクション内では、フォームのコンテンツが `MultipartReader` を使用して読み取られます。その場合、各 `MultipartSection` が読み取られ、必要に応じて、ファイルが処理されるかコンテンツが格納されます。 マルチパート セクションが読み取られた後、アクションで独自のモデル バインドが実行されます。
 
-最初のページ応答では、フォームが読み込まれ、(属性を使用して) にアンチ偽造トークンが保存され cookie `GenerateAntiforgeryTokenCookieAttribute` ます。 属性は、ASP.NET Core の組み込みの[アンチ偽造サポート](xref:security/anti-request-forgery)を使用して、要求トークンを使用してを設定し cookie ます。
+最初のページ応答では、フォームが読み込まれ、(属性を使用して) にアンチ偽造トークンが保存され cookie `GenerateAntiforgeryTokenCookieAttribute` ます。 属性は、ASP.NET Core の組み込みの [アンチ偽造サポート](xref:security/anti-request-forgery) を使用して、要求トークンを使用してを設定し cookie ます。
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
@@ -1193,7 +1194,7 @@ EF Core でデータベースにストリーミングするための完全な `S
 
 ### <a name="file-extension-validation"></a>ファイル拡張子の検証
 
-アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 例:
+アップロードされたファイルの拡張子を、許可されている拡張子のリストで確認する必要があります。 次に例を示します。
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1239,7 +1240,7 @@ using (var reader = new BinaryReader(uploadedFileData))
 
 ファイルを物理ストレージに保存する場合は、クライアント指定のファイル名を使用しないでください。 [Path.GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) または [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*) を使用して、ファイルの安全なファイル名を作成し、一時ストレージの完全なパス (ファイル名を含む) を作成します。
 
-Razorプロパティ値が自動的に HTML エンコードされて表示されます。 次のコードは安全に使用できます。
+Razor プロパティ値が自動的に HTML エンコードされて表示されます。 次のコードは安全に使用できます。
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -1296,7 +1297,7 @@ if (formFile.Length > _fileSizeLimit)
 
 フォームデータを Razor ポストするか、JavaScript の直接を使用する非フォームでは `FormData` 、フォームの要素で指定された名前、または `FormData` コントローラーのアクション内のパラメーターの名前と一致する必要があります。
 
-次の例では
+次に例を示します。
 
 * `<input>` 要素を使用すると、`name` 属性には値 `battlePlans` が設定されます。
 

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 21bd1db322a984b5644b817e82a293b6c0b2d91e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 913f8f1e43586ce71353c080e72be3b80f4c0573
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019330"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634268"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs の認証と承認
 
-ASP.NET Core 3.0 以降では、API 承認のサポートを使用して、シングルページアプリ (spa) で認証を提供します。 Identityユーザーを認証および格納するための ASP.NET Core は、OpenID connect を実装するための[ Identity サーバー](https://identityserver.io/)と組み合わされています。
+ASP.NET Core 3.0 以降では、API 承認のサポートを使用して、シングルページアプリ (spa) で認証を提供します。 ASP.NET Core Identity認証と保存のために、ユーザーを[ Identity サーバー](https://identityserver.io/)と組み合わせて OpenID connect を実装します。
 
-認証パラメーターが、 **Web アプリケーション (モデルビューコントローラー)** (MVC) および**web アプリケーション**(ページ) プロジェクトテンプレートの認証パラメーターに似た**角度**で、**応答**するプロジェクトテンプレートに追加されました Razor 。 許可されるパラメーター値は、 **None**および**個人**です。 **React.js と Redux**プロジェクトテンプレートでは、現時点では認証パラメーターがサポートされていません。
+認証パラメーターが、 **Web アプリケーション (モデルビューコントローラー)** (MVC) および**web アプリケーション**(ページ) プロジェクトテンプレートの認証パラメーターに似た**角度**で、**応答**するプロジェクトテンプレートに追加されました Razor 。 許可されるパラメーター値は、 **None** および **個人**です。 **React.js と Redux**プロジェクトテンプレートでは、現時点では認証パラメーターがサポートされていません。
 
 ## <a name="create-an-app-with-api-authorization-support"></a>API authorization サポートを使用してアプリを作成する
 
@@ -46,7 +47,7 @@ dotnet new angular -o <output_directory_name> -au Individual
 dotnet new react -o <output_directory_name> -au Individual
 ```
 
-前のコマンドは、 *ClientApp*ディレクトリに SPA を含む ASP.NET Core アプリを作成します。
+前のコマンドは、 *ClientApp* ディレクトリに SPA を含む ASP.NET Core アプリを作成します。
 
 ## <a name="general-description-of-the-aspnet-core-components-of-the-app"></a>アプリの ASP.NET Core コンポーネントの一般的な説明
 
@@ -54,12 +55,12 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="startup-class"></a>スタートアップ クラス
 
-次のコード例は、AspNetCore に依存して[い Identity ます。サーバー](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet パッケージ。 この例では、および拡張メソッドを使用して、API の認証と承認を構成し <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> ます。 認証を使用して、応答または角速度の SPA プロジェクトテンプレートを使用するプロジェクトには、このパッケージへの参照が含まれます。
+次のコード例は、AspNetCore に依存して [い Identity ます。サーバー](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet パッケージ。 この例では、および拡張メソッドを使用して、API の認証と承認を構成し <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> ます。 認証を使用して、応答または角速度の SPA プロジェクトテンプレートを使用するプロジェクトには、このパッケージへの参照が含まれます。
 
 クラスには `Startup` 、次の追加機能があります。
 
 * メソッド内 `Startup.ConfigureServices` :
-  * Identity既定の UI では、次のようになります。
+  * Identity 既定の UI では、次のようになります。
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -120,7 +121,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="appsettingsjson"></a>appsettings.json
 
-プロジェクトルートの*appsettings.js*のファイルには、 `IdentityServer` 構成されたクライアントの一覧を説明する新しいセクションがあります。 次の例には、1 つのクライアントがあります。 クライアント名はアプリケーション名に対応し、規則によって OAuth の `ClientId` パラメーターにマップされます。 構成対象のアプリの種類は、プロファイルによって示されています。 サーバーの構成プロセスを簡略化する規則を実現するために、内部的に使用されます。 「[アプリケーションプロファイル](#application-profiles)」セクションで説明されているように、使用可能なプロファイルがいくつかあります。
+プロジェクトルートの *appsettings.js* のファイルには、 `IdentityServer` 構成されたクライアントの一覧を説明する新しいセクションがあります。 次の例には、1 つのクライアントがあります。 クライアント名はアプリケーション名に対応し、規則によって OAuth の `ClientId` パラメーターにマップされます。 構成対象のアプリの種類は、プロファイルによって示されています。 サーバーの構成プロセスを簡略化する規則を実現するために、内部的に使用されます。 「 [アプリケーションプロファイル](#application-profiles) 」セクションで説明されているように、使用可能なプロファイルがいくつかあります。
 
 ```json
 "IdentityServer": {
@@ -134,7 +135,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="appsettingsdevelopmentjson"></a>appsettings.Development.js
 
-プロジェクトルートの*appsettings.Development.js*のファイルには、 `IdentityServer` トークンの署名に使用されるキーについて説明するセクションがあります。 運用環境にデプロイする場合は、「[運用環境にデプロイする](#deploy-to-production)」セクションで説明されているように、アプリと共にキーをプロビジョニングしてデプロイする必要があります。
+プロジェクトルートの *appsettings.Development.js* のファイルには、 `IdentityServer` トークンの署名に使用されるキーについて説明するセクションがあります。 運用環境にデプロイする場合は、「 [運用環境にデプロイする](#deploy-to-production) 」セクションで説明されているように、アプリと共にキーをプロビジョニングしてデプロイする必要があります。
 
 ```json
 "IdentityServer": {
@@ -146,7 +147,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ## <a name="general-description-of-the-angular-app"></a>角度アプリの一般的な説明
 
-角度テンプレートでの認証と API 承認のサポートは、独自の角度モジュールの*Clientapp-authorization*ディレクトリに存在します。 モジュールは、次の要素で構成されています。
+角度テンプレートでの認証と API 承認のサポートは、独自の角度モジュールの *Clientapp-authorization* ディレクトリに存在します。 モジュールは、次の要素で構成されています。
 
 * 3個のコンポーネント:
   * *login. component. ts*: アプリのログインフローを処理します。
@@ -161,7 +162,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ## <a name="general-description-of-the-react-app"></a>反応アプリの一般的な説明
 
-応答テンプレートでの認証と API 承認のサポートは、 *ClientApp\src\components\api-authorization*ディレクトリにあります。 これは、次の要素で構成されています。
+応答テンプレートでの認証と API 承認のサポートは、 *ClientApp\src\components\api-authorization* ディレクトリにあります。 これは、次の要素で構成されています。
 
 * 4つのコンポーネント:
   * *Login.js*: アプリのログインフローを処理します。
@@ -196,7 +197,7 @@ services.Configure<JwtBearerOptions>(
 
 API の JWT ハンドラーは、を使用して認証プロセスを制御できるようにするイベントを発生させ `JwtBearerEvents` ます。 は、API 承認のサポートを提供するために、 `AddIdentityServerJwt` 独自のイベントハンドラーを登録します。
 
-イベントの処理をカスタマイズするには、必要に応じて追加のロジックを使用して既存のイベントハンドラーをラップします。 例:
+イベントの処理をカスタマイズするには、必要に応じて追加のロジックを使用して既存のイベントハンドラーをラップします。 次に例を示します。
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -279,13 +280,13 @@ async populateWeatherData() {
 * トークンの署名に使用する実稼働証明書。
   * この証明書には特定の要件はありません。自己署名証明書、または CA 証明機関を通じてプロビジョニングされた証明書を使用できます。
   * PowerShell や OpenSSL などの標準ツールを使用して生成できます。
-  * ターゲットコンピューターの証明書ストアにインストールすることも、強力なパスワードを使用して *.pfx*ファイルとして展開することもできます。
+  * ターゲットコンピューターの証明書ストアにインストールすることも、強力なパスワードを使用して *.pfx* ファイルとして展開することもできます。
 
 ### <a name="example-deploy-to-azure-app-service"></a>例: Azure App Service に配置する
 
 このセクションでは、証明書ストアに格納されている証明書を使用して Azure App Service するためのアプリの展開について説明します。 証明書ストアから証明書を読み込むようにアプリを変更するには、後の手順で Azure portal でアプリを構成するときに、Standard レベルのサービスプラン以上が必要です。
 
-アプリの*appsettings.js*ファイルで、セクションを変更して、 `IdentityServer` キーの詳細を含めます。
+アプリの *appsettings.js* ファイルで、セクションを変更して、 `IdentityServer` キーの詳細を含めます。
 
 ```json
 "IdentityServer": {
@@ -304,9 +305,9 @@ async populateWeatherData() {
 
 Azure App Service にデプロイするには、「 [azure へのアプリのデプロイ](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure)」の手順に従って、必要な azure リソースを作成し、アプリを運用環境にデプロイする方法を説明します。
 
-前述の手順に従うと、アプリは Azure にデプロイされますが、まだ機能していません。 アプリによって使用される証明書は、Azure portal で構成する必要があります。 証明書のサムプリントを見つけて、「[証明書の読み込み](/azure/app-service/app-service-web-ssl-cert-load#load-the-certificate-in-code)」で説明されている手順に従います。
+前述の手順に従うと、アプリは Azure にデプロイされますが、まだ機能していません。 アプリによって使用される証明書は、Azure portal で構成する必要があります。 証明書のサムプリントを見つけて、「 [証明書の読み込み](/azure/app-service/app-service-web-ssl-cert-load#load-the-certificate-in-code)」で説明されている手順に従います。
 
-これらの手順では SSL について説明していますが、Azure portal には、アプリで使用するプロビジョニング済みの証明書をアップロードできる**プライベート証明書**セクションがあります。
+これらの手順では SSL について説明していますが、Azure portal には、アプリで使用するプロビジョニング済みの証明書をアップロードできる **プライベート証明書** セクションがあります。
 
 Azure portal でアプリとアプリの設定を構成した後、ポータルでアプリを再起動します。
 

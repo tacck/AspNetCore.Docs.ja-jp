@@ -7,6 +7,7 @@ ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: ef664645768dac11d0ed68db03cfbaebbcb8c0d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ce0e7ad30c137562b74dc9fe5c53235e3599e575
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021719"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634359"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core での Facebook 外部ログインセットアップ
 
@@ -31,23 +32,23 @@ ms.locfileid: "88021719"
 <!-- per @rick-anderson and scott addie, don't update images. Remove images and point the customer to the FB set up page. FB needs to maintain  instructions to get key and secret.
 -->
 
-このチュートリアルでは、[前のページ](xref:security/authentication/social/index)で作成したサンプル ASP.NET Core 3.0 プロジェクトを使用して、ユーザーが Facebook アカウントでサインインできるようにする方法を示します。 まず、[正式な手順](https://developers.facebook.com)に従って FACEBOOK アプリ ID を作成します。
+このチュートリアルでは、 [前のページ](xref:security/authentication/social/index)で作成したサンプル ASP.NET Core 3.0 プロジェクトを使用して、ユーザーが Facebook アカウントでサインインできるようにする方法を示します。 まず、 [正式な手順](https://developers.facebook.com)に従って FACEBOOK アプリ ID を作成します。
 
 ## <a name="create-the-app-in-facebook"></a>Facebook でアプリを作成する
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Facebook) NuGet パッケージをプロジェクトに追加します。
 
-* [Facebook 開発者アプリ](https://developers.facebook.com/apps/)のページに移動し、サインインします。 まだ Facebook アカウントを持っていない場合は、ログインページの [ **facebook へのサインアップ**] リンクを使用して作成します。  Facebook アカウントを作成したら、手順に従って Facebook 開発者として登録します。
+* [Facebook 開発者アプリ](https://developers.facebook.com/apps/)のページに移動し、サインインします。 まだ Facebook アカウントを持っていない場合は、ログインページの [ **facebook へのサインアップ** ] リンクを使用して作成します。  Facebook アカウントを作成したら、手順に従って Facebook 開発者として登録します。
 
 * **[マイアプリ**] メニューで、[**アプリの作成**] を選択して新しいアプリ ID を作成します。
 
    ![開発者向け Facebook ポータルを Microsoft Edge で開く](index/_static/FBMyApps.png)
 
-* フォームに入力し、[**アプリ ID の作成**] ボタンをタップします。
+* フォームに入力し、[ **アプリ ID の作成** ] ボタンをタップします。
 
   ![新しいアプリ ID フォームを作成する](index/_static/FBNewAppId.png)
 
-* 新しいアプリカードで、[**製品の追加**] を選択します。  **Facebook ログイン**カードで、 **[セットアップ] をクリックし**ます。 
+* 新しいアプリカードで、[ **製品の追加**] を選択します。  **Facebook ログイン**カードで、 **[セットアップ] をクリックし**ます。 
 
   ![製品のセットアップページ](index/_static/FBProductSetup.png)
 
@@ -55,14 +56,14 @@ ms.locfileid: "88021719"
 
   ![スキップクイックスタート](index/_static/FBSkipQuickStart.png)
 
-* [**クライアントの OAuth 設定**] ページが表示されます。
+* [ **クライアントの OAuth 設定** ] ページが表示されます。
 
   ![[クライアント OAuth 設定] ページ](index/_static/FBOAuthSetup.png)
 
 * [**有効な OAuth リダイレクト uri** ] フィールドに */signin-facebook*を追加して、開発 URI を入力します (例: `https://localhost:44320/signin-facebook` )。 このチュートリアルの後半で構成する Facebook 認証は、OAuth フローを実装するために */signin-facebook* route で要求を自動的に処理します。
 
 > [!NOTE]
-> URI */signin-facebook*は、facebook 認証プロバイダーの既定のコールバックとして設定されます。 [FacebookOptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions)クラスの [継承された[remoteauthenticationoptions]](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)プロパティを使用して Facebook 認証ミドルウェアを構成するときに、既定のコールバック URI を変更できます。
+> URI */signin-facebook* は、facebook 認証プロバイダーの既定のコールバックとして設定されます。 [FacebookOptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions)クラスの [継承された[remoteauthenticationoptions]](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)プロパティを使用して Facebook 認証ミドルウェアを構成するときに、既定のコールバック URI を変更できます。
 
 * **[変更を保存]** をクリックします。
 
@@ -70,13 +71,13 @@ ms.locfileid: "88021719"
 
   このページで、とをメモしておき `App ID` `App Secret` ます。 次のセクションでは、両方を ASP.NET Core アプリケーションに追加します。
 
-* サイトをデプロイするときに、 **Facebook ログイン**のセットアップページを再表示し、新しいパブリック URI を登録する必要があります。
+* サイトをデプロイするときに、 **Facebook ログイン** のセットアップページを再表示し、新しいパブリック URI を登録する必要があります。
 
 ## <a name="store-the-facebook-app-id-and-secret"></a>Facebook アプリ ID とシークレットを保存する
 
-Facebook アプリ ID やシークレット値などの機微な設定を[Secret Manager](xref:security/app-secrets)に保存します。 このサンプルでは、次の手順を使用します。
+Facebook アプリ ID やシークレット値などの機微な設定を [Secret Manager](xref:security/app-secrets)に保存します。 このサンプルでは、次の手順を使用します。
 
-1. 「[シークレットストレージを有効にする](xref:security/app-secrets#enable-secret-storage)」の手順に従って、シークレットストレージのプロジェクトを初期化します。
+1. 「 [シークレットストレージを有効にする](xref:security/app-secrets#enable-secret-storage)」の手順に従って、シークレットストレージのプロジェクトを初期化します。
 1. 秘密キーとシークレットキーを使用して、機密設定をローカルシークレットストアに保存 `Authentication:Facebook:AppId` し `Authentication:Facebook:AppSecret` ます。
 
     ```dotnetcli
@@ -102,9 +103,9 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 
 ## <a name="sign-in-with-facebook"></a>Facebook でサインインする
 
-* アプリを実行し、[**ログイン**] を選択します。 
-* [**別のサービスを使用してログインする**] で、[Facebook] を選択します。
-* 認証のために**Facebook**にリダイレクトされます。
+* アプリを実行し、[ **ログイン**] を選択します。 
+* [ **別のサービスを使用してログインする**] で、[Facebook] を選択します。
+* 認証のために **Facebook** にリダイレクトされます。
 * Facebook の資格情報を入力します。
 * メールを設定できるサイトにリダイレクトされます。
 
@@ -114,7 +115,7 @@ Facebook の資格情報を使用してログインしました。
 
 ## <a name="react-to-cancel-authorize-external-sign-in"></a>外部サインインの承認の取り消しに対処する
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath>ユーザーが要求された承認要求を承認しない場合、ユーザーエージェントへのリダイレクトパスを提供できます。
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath> ユーザーが要求された承認要求を承認しない場合、ユーザーエージェントへのリダイレクトパスを提供できます。
 
 次のコードでは、をに設定してい `AccessDeniedPath` `"/AccessDeniedPathInfo"` ます。
 
@@ -131,7 +132,7 @@ Facebook の資格情報を使用してログインしました。
 * [Facebook.com](https://www.facebook.com/)に移動します。
 * サインインしている場合は、サインアウトする必要があります。
 * アプリを実行し、[Facebook サインイン] を選択します。
-* [**今後**] を選択します。 指定されたページにリダイレクトされ `AccessDeniedPath` ます。
+* [ **今後**] を選択します。 指定されたページにリダイレクトされ `AccessDeniedPath` ます。
 
 <!-- End of React  -->
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -146,11 +147,11 @@ Facebook 認証でサポートされる構成オプションの詳細につい�
 ## <a name="troubleshooting"></a>トラブルシューティング
 
 * **ASP.NET Core 2.x のみ:**Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され*ます。 ' SignInScheme ' オプションを指定する必要があり*ます。 このチュートリアルで使用するプロジェクトテンプレートによって、この処理が確実に行われます。
-* 初期移行を適用してサイトデータベースが作成されていない場合は、*要求エラーの処理中にデータベース操作が失敗*します。 [**移行の適用**] をタップしてデータベースを作成し、更新してエラーを続行します。
+* 初期移行を適用してサイトデータベースが作成されていない場合は、 *要求エラーの処理中にデータベース操作が失敗* します。 [ **移行の適用** ] をタップしてデータベースを作成し、更新してエラーを続行します。
 
 ## <a name="next-steps"></a>次のステップ
 
-* この記事では、Facebook で認証する方法について説明しました。 同様のアプローチに従って、[前のページ](xref:security/authentication/social/index)に一覧表示されている他のプロバイダーとの認証を行うことができます。
+* この記事では、Facebook で認証する方法について説明しました。 同様のアプローチに従って、 [前のページ](xref:security/authentication/social/index)に一覧表示されている他のプロバイダーとの認証を行うことができます。
 
 * Web サイトを Azure web アプリに発行したら、 `AppSecret` Facebook 開発者ポータルでをリセットする必要があります。
 

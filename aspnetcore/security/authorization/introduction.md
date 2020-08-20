@@ -5,6 +5,7 @@ description: 承認の基本と ASP.NET Core アプリでの承認のしくみ�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: 215c61b034abf530010b7beeb58100a1ff0e8eb3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7d7570ead1365588fd582d9bea364685da29a576
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022122"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634437"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>ASP.NET Core での承認の概要
 
@@ -34,7 +35,7 @@ ASP.NET Core での認証の詳細については、「」を参照してくだ�
 
 ## <a name="authorization-types"></a>承認の種類
 
-ASP.NET Core 承認は、単純な宣言型の[役割](xref:security/authorization/roles)と豊富な[ポリシーベース](xref:security/authorization/policies)のモデルを提供します。 承認は要件で表現され、ハンドラーは要件に対してユーザーの要求を評価します。 命令型チェックは、ユーザーがアクセスしようとしているリソースのユーザー id とプロパティの両方を評価する単純なポリシーまたはポリシーに基づいて行うことができます。
+ASP.NET Core 承認は、単純な宣言型の [役割](xref:security/authorization/roles) と豊富な [ポリシーベース](xref:security/authorization/policies) のモデルを提供します。 承認は要件で表現され、ハンドラーは要件に対してユーザーの要求を評価します。 命令型チェックは、ユーザーがアクセスしようとしているリソースのユーザー id とプロパティの両方を評価する単純なポリシーまたはポリシーに基づいて行うことができます。
 
 ## <a name="namespaces"></a>名前空間
 

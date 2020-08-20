@@ -5,6 +5,7 @@ description: I認証 Ated暗号化機能、I認証 ated、Tordescriptor、I認�
 ms.author: riande
 ms.date: 08/11/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: 321e039a4b4692266c6d7ceaff96578db8a74bb5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4c802bc4beb1f1fde812e6c3f55fc43b5d569b66
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021602"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635321"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core でのコア暗号化の拡張性
 
@@ -128,7 +129,7 @@ I認証 Atedの暗号化機能と I認証機能の主な違いは、記述子が
 
 <a name="data-protection-extensibility-core-crypto-exporttoxml"></a>
 
-記述子は、ExportToXml ルーチンを使用してシリアル化できます。 このルーチンは、2つのプロパティを含む XmlSerializedDescriptorInfo を返します。これは、記述子の XElement 表現と、対応する XElement でこの記述子をやり直すするために使用できる[I認証 Ated Tordescriptor デシリアライザー](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer)を表す型です。
+記述子は、ExportToXml ルーチンを使用してシリアル化できます。 このルーチンは、2つのプロパティを含む XmlSerializedDescriptorInfo を返します。これは、記述子の XElement 表現と、対応する XElement でこの記述子をやり直すするために使用できる [I認証 Ated Tordescriptor デシリアライザー](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) を表す型です。
 
 シリアル化された記述子には、暗号化キーマテリアルなどの機密情報が含まれている場合があります。 データ保護システムには、ストレージに保存する前に、情報を暗号化するためのサポートが組み込まれています。 これを活用するために、記述子は、属性名が "requiresEncryption" (xmlns " <http://schemas.asp.net/2015/03/dataProtection> ")、値が "true" である機密情報を含む要素をマークする必要があります。
 
@@ -145,7 +146,7 @@ I認証 Atedの暗号化機能と I認証機能の主な違いは、記述子が
 
 * ImportFromXml (XElement 要素): i Ated暗号化 Tordescriptor
 
-ImportFromXml メソッドは、 [ExportToXml](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-exporttoxml)によって返された XElement を受け取り、元の i ated暗号化された tordescriptor と同等のものを作成します。
+ImportFromXml メソッドは、 [ExportToXml](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-exporttoxml) によって返された XElement を受け取り、元の i ated暗号化された tordescriptor と同等のものを作成します。
 
 I認証を実装する型は、次の2つのパブリックコンストラクターのいずれかを持つ必要があります。
 
@@ -168,7 +169,7 @@ AlgorithmConfiguration はトップレベルファクトリと考えることが
 
 CreateNewDescriptor が呼び出されると、この呼び出しに対してのみ新しいキーマテリアルが作成され、このキーマテリアルをラップする新しい i Ated Tordescriptor が生成され、マテリアルを使用するために必要なアルゴリズム情報が生成されます。 キーマテリアルはソフトウェアで作成でき (また、メモリ内に保持されます)、HSM 内で作成して保持することができます。 重要な点は、CreateNewDescriptor への2回の呼び出しでは、同等の I認証 Ated Tordescriptor インスタンスを作成しないことです。
 
-AlgorithmConfiguration 型は、キー作成ルーチン ([自動キーローリング](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling)など) のエントリポイントとして機能します。 今後のすべてのキーの実装を変更するには、KeyManagementOptions で認証の Ated暗号化 Torconfiguration プロパティを設定します。
+AlgorithmConfiguration 型は、キー作成ルーチン ( [自動キーローリング](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling)など) のエントリポイントとして機能します。 今後のすべてのキーの実装を変更するには、KeyManagementOptions で認証の Ated暗号化 Torconfiguration プロパティを設定します。
 
 # <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
@@ -180,6 +181,6 @@ I認証の暗号化の構成は、トップレベルのファクトリと考え�
 
 CreateNewDescriptor が呼び出されると、この呼び出しに対してのみ新しいキーマテリアルが作成され、このキーマテリアルをラップする新しい i Ated Tordescriptor が生成され、マテリアルを使用するために必要なアルゴリズム情報が生成されます。 キーマテリアルはソフトウェアで作成でき (また、メモリ内に保持されます)、HSM 内で作成して保持することができます。 重要な点は、CreateNewDescriptor への2回の呼び出しでは、同等の I認証 Ated Tordescriptor インスタンスを作成しないことです。
 
-I認証 Ated暗号化の構成の種類は、キー作成ルーチン ([自動キーローリング](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling)など) のエントリポイントとして機能します。 今後のすべてのキーの実装を変更するには、サービスコンテナーにシングルトン I認証 Ated暗号化構成を登録します。
+I認証 Ated暗号化の構成の種類は、キー作成ルーチン ( [自動キーローリング](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling)など) のエントリポイントとして機能します。 今後のすべてのキーの実装を変更するには、サービスコンテナーにシングルトン I認証 Ated暗号化構成を登録します。
 
 ---

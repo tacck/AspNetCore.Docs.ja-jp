@@ -1,5 +1,5 @@
 ---
-title: RazorASP.NET Core でのページ承認規則
+title: Razor ASP.NET Core でのページ承認規則
 author: rick-anderson
 description: ユーザーを承認し、匿名ユーザーがページまたはページのフォルダーにアクセスすることを許可する規則を使用して、ページへのアクセスを制御する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 5e0c76ea6c6b4af8e24693b1bfe8ac28bf2ce3a9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b17717e7b3cbaa64d4ff00661f15439728f161d3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022278"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634892"
 ---
-# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>RazorASP.NET Core でのページ承認規則
+# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>Razor ASP.NET Core でのページ承認規則
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ページアプリでアクセスを制御する方法の1つ Razor は、起動時に承認規則を使用することです。 これらの規則を使用すると、ユーザーを承認し、匿名ユーザーが個々のページやページのフォルダーにアクセスすることを許可できます。 このトピックで説明する規則は、アクセスを制御するための[承認フィルター](xref:mvc/controllers/filters#authorization-filters)を自動的に適用します。
+ページアプリでアクセスを制御する方法の1つ Razor は、起動時に承認規則を使用することです。 これらの規則を使用すると、ユーザーを承認し、匿名ユーザーが個々のページやページのフォルダーにアクセスすることを許可できます。 このトピックで説明する規則は、アクセスを制御するための [承認フィルター](xref:mvc/controllers/filters#authorization-filters) を自動的に適用します。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このサンプルアプリでは、 [ cookie ASP.NET Core Identity を使用せずに認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、ASP.NET Core を使用するアプリにも同様に適用され Identity ます。 ASP.NET Core を使用するには Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
+サンプルアプリでは、を使用[ cookie せず ASP.NET Core Identity に認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、を使用するアプリにも同様に適用され ASP.NET Core Identity ます。 を使用するには ASP.NET Core Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
 
 ## <a name="require-authorization-to-access-a-page"></a>ページへのアクセスに承認を要求する
 
@@ -49,7 +50,7 @@ options.Conventions.AuthorizePage("/Contact", "AtLeast21");
 ```
 
 > [!NOTE]
-> は、 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> フィルター属性を使用してページモデルクラスに適用でき `[Authorize]` ます。 詳細については、「[承認フィルター属性](xref:razor-pages/filter#authorize-filter-attribute)」を参照してください。
+> は、 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> フィルター属性を使用してページモデルクラスに適用でき `[Authorize]` ます。 詳細については、「 [承認フィルター属性](xref:razor-pages/filter#authorize-filter-attribute)」を参照してください。
 
 ## <a name="require-authorization-to-access-a-folder-of-pages"></a>ページのフォルダーにアクセスするには承認が必要です
 
@@ -73,7 +74,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル*領域/ Identity /Pages/Manage/Accounts.cshtml*のページ名は、/ *manage/Accounts*です。
+ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル *領域/ Identity /Pages/Manage/Accounts.cshtml* のページ名は、/ *manage/Accounts*です。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、次のように、 [Authorizeareapage オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)を使用します。
 
@@ -89,7 +90,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 * Identity * [*管理*] の下にあるファイルのフォルダーパスを使用します。
+フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 * Identity * [ *管理*] の下にあるファイルのフォルダーパスを使用します。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、 [AuthorizeAreaFolder オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)を使用します。
 
@@ -140,11 +141,11 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 ::: moniker range="< aspnetcore-3.0"
 
-ページアプリでアクセスを制御する方法の1つ Razor は、起動時に承認規則を使用することです。 これらの規則を使用すると、ユーザーを承認し、匿名ユーザーが個々のページやページのフォルダーにアクセスすることを許可できます。 このトピックで説明する規則は、アクセスを制御するための[承認フィルター](xref:mvc/controllers/filters#authorization-filters)を自動的に適用します。
+ページアプリでアクセスを制御する方法の1つ Razor は、起動時に承認規則を使用することです。 これらの規則を使用すると、ユーザーを承認し、匿名ユーザーが個々のページやページのフォルダーにアクセスすることを許可できます。 このトピックで説明する規則は、アクセスを制御するための [承認フィルター](xref:mvc/controllers/filters#authorization-filters) を自動的に適用します。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-このサンプルアプリでは、 [ cookie ASP.NET Core Identity を使用せずに認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、ASP.NET Core を使用するアプリにも同様に適用され Identity ます。 ASP.NET Core を使用するには Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
+サンプルアプリでは、を使用[ cookie せず ASP.NET Core Identity に認証](xref:security/authentication/cookie)を使用します。 このトピックで示す概念と例は、を使用するアプリにも同様に適用され ASP.NET Core Identity ます。 を使用するには ASP.NET Core Identity 、「」のガイダンスに従って <xref:security/authentication/identity> ください。
 
 ## <a name="require-authorization-to-access-a-page"></a>ページへのアクセスに承認を要求する
 
@@ -161,7 +162,7 @@ options.Conventions.AuthorizePage("/Contact", "AtLeast21");
 ```
 
 > [!NOTE]
-> は、 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> フィルター属性を使用してページモデルクラスに適用でき `[Authorize]` ます。 詳細については、「[承認フィルター属性](xref:razor-pages/filter#authorize-filter-attribute)」を参照してください。
+> は、 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> フィルター属性を使用してページモデルクラスに適用でき `[Authorize]` ます。 詳細については、「 [承認フィルター属性](xref:razor-pages/filter#authorize-filter-attribute)」を参照してください。
 
 ## <a name="require-authorization-to-access-a-folder-of-pages"></a>ページのフォルダーにアクセスするには承認が必要です
 
@@ -185,7 +186,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル*領域/ Identity /Pages/Manage/Accounts.cshtml*のページ名は、/ *manage/Accounts*です。
+ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル *領域/ Identity /Pages/Manage/Accounts.cshtml* のページ名は、/ *manage/Accounts*です。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、次のように、 [Authorizeareapage オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)を使用します。
 
@@ -201,7 +202,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 * Identity * [*管理*] の下にあるファイルのフォルダーパスを使用します。
+フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 * Identity * [ *管理*] の下にあるファイルのフォルダーパスを使用します。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、 [AuthorizeAreaFolder オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)を使用します。
 
