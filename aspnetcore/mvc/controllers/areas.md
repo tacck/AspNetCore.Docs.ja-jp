@@ -5,6 +5,7 @@ description: 区分は ASP.NET MVC の機能であり、関連する機能を別
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 033b57f5406d0344347b2f787fa2b2fbb2da8604
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018443"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630251"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core の区分
 
@@ -44,7 +45,7 @@ ms.locfileid: "88018443"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。 ダウンロード サンプルからは、区分をテストするための基本的なアプリが与えられます。
 
-ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページがある領域](#areas-with-razor-pages)」を参照してください。
+ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページがある領域](#areas-with-razor-pages) 」を参照してください。
 
 ## <a name="areas-for-controllers-with-views"></a>ビューを伴うコントローラーの区分
 
@@ -69,8 +70,8 @@ ms.locfileid: "88018443"
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * ビュー
-        * Home
+      * Views
+        * ホーム
           * Index.cshtml
         * 管理する
           * Index.cshtml
@@ -78,8 +79,8 @@ ms.locfileid: "88018443"
     * サービス
       * Controllers
         * HomeController.cs
-      * ビュー
-        * Home
+      * Views
+        * ホーム
           * Index.cshtml
 
 区分を使用するとき、前述のレイアウトが一般的ですが、このフォルダー構造を使用するにはビュー ファイルのみが求められます。 ビューの検出では、一致する区分ビュー ファイルを次の順序で検索します。
@@ -124,7 +125,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 [!code-cshtml[](areas/31samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-サンプルダウンロードには、次のものを含む[部分ビュー](xref:mvc/views/partial)が含まれています。
+サンプルダウンロードには、次のものを含む [部分ビュー](xref:mvc/views/partial) が含まれています。
 
 * 前のリンク。
 * 前に示した以外のリンク `area` は指定されていません。
@@ -143,16 +144,16 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 ### <a name="application-root-folder"></a>アプリケーションルートフォルダー
 
-アプリケーションルートフォルダーは、ASP.NET Core テンプレートを使用して作成された web アプリ内の*Startup.cs*を含むフォルダーです。
+アプリケーションルートフォルダーは、ASP.NET Core テンプレートを使用して作成された web アプリ内の *Startup.cs* を含むフォルダーです。
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
  /ビュー */_ViewImports*、MVC の場合は、ページの場合は */ページ/_ViewImports*の場合 Razor 、領域内のビューにはインポートされません。 次のいずれかの方法を使用して、ビューをすべてのビューにインポートします。
 
-* [アプリケーションのルートフォルダー](#arf)に _ViewImports を追加し*ます*。 アプリケーションルートフォルダー内の *_ViewImports*は、アプリ内のすべてのビューに適用されます。
-* [区分] の下にある適切な表示フォルダーに _ViewImports ファイルをコピーし*ます*。
+* [アプリケーションのルートフォルダー](#arf)に _ViewImports を追加し*ます*。 アプリケーションルートフォルダー内の *_ViewImports* は、アプリ内のすべてのビューに適用されます。
+* [区分] の下にある適切な表示フォルダーに _ViewImports ファイルをコピーし *ます* 。
 
-通常、 *_ViewImports*のファイルには、、、およびステートメントをインポートする[タグヘルパー](xref:mvc/views/tag-helpers/intro)が含まれています `@using` `@inject` 。 詳細については、「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」を参照してください。
+通常、 *_ViewImports* のファイルには、、、およびステートメントをインポートする [タグヘルパー](xref:mvc/views/tag-helpers/intro) が含まれています `@using` `@inject` 。 詳細については、「 [共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」を参照してください。
 
 <a name="rename"></a>
 
@@ -210,7 +211,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 上のマークアップについて:
 
 * 完全修飾ドメイン名を使ってモデルを指定する必要があります (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`)。
-* [タグヘルパー](xref:mvc/views/tag-helpers/intro)は、によって有効になります。`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+* [タグヘルパー](xref:mvc/views/tag-helpers/intro) は、によって有効になります。 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 サンプル ダウンロードでは、Products 区分に次の *_ViewImports.cshtml* ファイルが含まれています。
 
@@ -246,7 +247,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。 ダウンロード サンプルからは、区分をテストするための基本的なアプリが与えられます。
 
-ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページがある領域](#areas-with-razor-pages)」を参照してください。
+ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページがある領域](#areas-with-razor-pages) 」を参照してください。
 
 ## <a name="areas-for-controllers-with-views"></a>ビューを伴うコントローラーの区分
 
@@ -271,8 +272,8 @@ URL スペースがすべての区分で統一されている場合、ルート 
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * ビュー
-        * Home
+      * Views
+        * ホーム
           * Index.cshtml
         * 管理する
           * Index.cshtml
@@ -280,8 +281,8 @@ URL スペースがすべての区分で統一されている場合、ルート 
     * サービス
       * Controllers
         * HomeController.cs
-      * ビュー
-        * Home
+      * Views
+        * ホーム
           * Index.cshtml
 
 区分を使用するとき、前述のレイアウトが一般的ですが、このフォルダー構造を使用するにはビュー ファイルのみが求められます。 ビューの検出では、一致する区分ビュー ファイルを次の順序で検索します。
@@ -339,7 +340,7 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-標準の場所では、*/Views/_ViewImports.cshtml* は区分に適用されません。 領域で共通の[タグヘルパー](xref:mvc/views/tag-helpers/intro)、、またはを使用するには、 `@using` `@inject` 適切な *_ViewImports cshtml*ファイルが[領域ビューに適用さ](xref:mvc/views/layout#importing-shared-directives)れていることを確認します。 すべてのビューで同じ動作が必要な場合は、*/Views/_ViewImports.cshtml* をアプリケーション ルートに移動します。
+標準の場所では、*/Views/_ViewImports.cshtml* は区分に適用されません。 領域で共通の [タグヘルパー](xref:mvc/views/tag-helpers/intro)、、またはを使用するには、 `@using` `@inject` 適切な *_ViewImports cshtml* ファイルが [領域ビューに適用さ](xref:mvc/views/layout#importing-shared-directives)れていることを確認します。 すべてのビューで同じ動作が必要な場合は、*/Views/_ViewImports.cshtml* をアプリケーション ルートに移動します。
 
 <a name="rename"></a>
 
@@ -399,7 +400,7 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 上のマークアップについて:
 
 * 完全修飾ドメイン名を使ってモデルを指定する必要があります (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`)。
-* [タグヘルパー](xref:mvc/views/tag-helpers/intro)は、によって有効になります。`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+* [タグヘルパー](xref:mvc/views/tag-helpers/intro) は、によって有効になります。 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 サンプル ダウンロードでは、Products 区分に次の *_ViewImports.cshtml* ファイルが含まれています。
 

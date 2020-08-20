@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020835"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630628"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core の部分ビュー
 
@@ -31,7 +32,7 @@ ms.locfileid: "88020835"
 
 ::: moniker range=">= aspnetcore-2.1"
 
-*部分ビュー*という用語は、マークアップファイルが*ビュー*と呼ばれる MVC アプリを開発する場合や、 Razor マークアップファイルが*ページ*と呼ばれるページアプリを開発する場合に使用します。 このトピックでは、一般的に MVC ビューと Razor ページページを*マークアップファイル*と呼びます。
+*部分ビュー*という用語は、マークアップファイルが*ビュー*と呼ばれる MVC アプリを開発する場合や、 Razor マークアップファイルが*ページ*と呼ばれるページアプリを開発する場合に使用します。 このトピックでは、一般的に MVC ビューと Razor ページページを *マークアップファイル*と呼びます。
 
 ::: moniker-end
 
@@ -147,7 +148,7 @@ ASP.NET Core 2.2 以降では、別の方法としてハンドラー メソッ�
 
 次の例では、アプリ ルートから部分ビューを参照しています。 チルダとスラッシュ (`~/`) またはスラッシュ (`/`) から始まるパスは、次のようにアプリ ルートを参照します。
 
-**Razorトピック**
+**Razor トピック**
 
 ```cshtml
 <partial name="~/Pages/Folder/_PartialName.cshtml" />
@@ -167,7 +168,7 @@ ASP.NET Core 2.2 以降では、別の方法としてハンドラー メソッ�
 <partial name="../Account/_PartialName.cshtml" />
 ```
 
-詳細については、「<xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>」を参照してください。
+詳細については、<xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper> を参照してください。
 
 ::: moniker-end
 
@@ -189,7 +190,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**Razorトピック**
+**Razor トピック**
 
 ```cshtml
 @await Html.PartialAsync("~/Pages/Folder/_PartialName.cshtml")
@@ -240,7 +241,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**Razorトピック**
+**Razor トピック**
 
 1. 現在実行中のページのフォルダー
 1. ページのフォルダーの上にあるディレクトリ グラフ
@@ -296,7 +297,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**Razorトピック**
+**Razor トピック**
 
 サンプル アプリの次のマークアップは、*Pages/ArticlesRP/ReadRP.cshtml* ページが元になっています。 ページには、2 つの部分ビューが含まれています。 2 番目の部分ビューは、モデルと `ViewData` を部分ビューに渡します。 `ViewDataDictionary` のコンストラクター オーバーロードは、既存の `ViewData` ディクショナリを維持したまま、新しい `ViewData` ディクショナリを渡すために使用されます。
 

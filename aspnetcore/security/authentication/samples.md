@@ -5,6 +5,7 @@ description: ASP.NET Core リポジトリの認証サンプルへのリンクを
 ms.author: riande
 ms.date: 01/31/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/samples
-ms.openlocfilehash: 71e614eb3d91e8425ec430d775b8a0163dc7258f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 290c956b2035e47e5b34dba15fbec665461dd94a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017793"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630745"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>ASP.NET Core の認証サンプル
 
@@ -31,7 +32,7 @@ ms.locfileid: "88017793"
 [ASP.NET Core リポジトリ](https://github.com/dotnet/AspNetCore)には、 *AspNetCore/src/Security/samples*フォルダーに次の認証サンプルが含まれています。
 
 * [要求の変換](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/ClaimsTransformation)
-* [Cookie認証](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Cookies)
+* [Cookie 認証](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Cookies)
 * [カスタムポリシープロバイダー-IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider)
 * [動的な認証スキームとオプション](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/DynamicSchemes)
 * [外部要求](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/Identity.ExternalClaims)
@@ -42,7 +43,7 @@ ms.locfileid: "88017793"
 
 * [ブランチ](https://github.com/dotnet/AspNetCore)を選択してください。 たとえば、`release/3.1` のように指定します。
 * [ASP.NET Core リポジトリ](https://github.com/dotnet/AspNetCore)を複製またはダウンロードします。
-* ASP.NET Core リポジトリの複製に一致する[.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core)バージョンがインストールされていることを確認します。
+* ASP.NET Core リポジトリの複製に一致する [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) バージョンがインストールされていることを確認します。
 * *AspNetCore/src/Security/samples*のサンプルに移動し、でサンプルを実行し `dotnet run` ます。
 
 ::: moniker-end
@@ -52,7 +53,7 @@ ms.locfileid: "88017793"
 [ASP.NET Core リポジトリ](https://github.com/dotnet/AspNetCore)には、 *AspNetCore/src/Security/samples*フォルダーに次の認証サンプルが含まれています。
 
 * [要求の変換](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/ClaimsTransformation)
-* [Cookie認証](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/Cookies)
+* [Cookie 認証](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/Cookies)
 * [カスタムポリシープロバイダー-IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/2.1.3/src/Security/samples/CustomPolicyProvider)
 * [動的な認証スキームとオプション](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/DynamicSchemes)
 * [外部要求](https://github.com/dotnet/AspNetCore/tree/release/2.1/src/Security/samples/Identity.ExternalClaims)
@@ -63,7 +64,7 @@ ms.locfileid: "88017793"
 
 * [ブランチ](https://github.com/dotnet/AspNetCore)を選択してください。 たとえば、`release/2.1` のように指定します。
 * [ASP.NET Core リポジトリ](https://github.com/dotnet/AspNetCore)を複製またはダウンロードします。
-* ASP.NET Core リポジトリの複製に一致する[.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core)バージョンがインストールされていることを確認します。
+* ASP.NET Core リポジトリの複製に一致する [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) バージョンがインストールされていることを確認します。
 * *AspNetCore/src/Security/samples*のサンプルに移動し、でサンプルを実行し `dotnet run` ます。
 
 ::: moniker-end

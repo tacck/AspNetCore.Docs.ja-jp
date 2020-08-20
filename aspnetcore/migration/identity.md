@@ -5,6 +5,7 @@ description: ASP.NET MVC プロジェクトから ASP.NET Core MVC プロジェ�
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 8a6cc1e612dbf59dc2db2eca165dd1a03ab92f81
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 85674d7ed02f189f78da92bffdf927a3ca21357d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014933"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629510"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>認証および Identity ASP.NET Core への移行
 
@@ -30,7 +31,7 @@ ms.locfileid: "88014933"
 
 ## <a name="configure-no-locidentity-and-membership"></a>Identityメンバーシップを構成する
 
-ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォルダーにある*Startup.Auth.cs*と* Identity Config.cs*の ASP.NET を使用して構成されます。 ASP.NET Core MVC では、これらの機能は*Startup.cs*で構成されています。
+ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォルダーにある*Startup.Auth.cs*と* Identity Config.cs*の ASP.NET を使用して構成されます。 ASP.NET Core MVC では、これらの機能は *Startup.cs*で構成されています。
 
 次の NuGet パッケージをインストールします。
 
@@ -55,7 +56,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-この時点で、上記のコードでは、ASP.NET MVC プロジェクトからまだ移行していない2つの型が参照されています。 `ApplicationDbContext` `ApplicationUser` ASP.NET Core プロジェクトに新しい*モデル*フォルダーを作成し、これらの型に対応する2つのクラスを追加します。 これらのクラスの ASP.NET MVC バージョンは */Models/ Identity Models.cs*にありますが、移行されたプロジェクトのクラスごとに1つのファイルを使用します。これはより明確であるためです。
+この時点で、上記のコードでは、ASP.NET MVC プロジェクトからまだ移行していない2つの型が参照されています。 `ApplicationDbContext` `ApplicationUser` ASP.NET Core プロジェクトに新しい *モデル* フォルダーを作成し、これらの型に対応する2つのクラスを追加します。 これらのクラスの ASP.NET MVC バージョンは */Models/ Identity Models.cs*にありますが、移行されたプロジェクトのクラスごとに1つのファイルを使用します。これはより明確であるためです。
 
 *ApplicationUser.cs*:
 
@@ -98,7 +99,7 @@ namespace NewMvcProject.Models
 
 ASP.NET Core MVC Starter Web プロジェクトには、ユーザーまたはの多くのカスタマイズが含まれていません `ApplicationDbContext` 。 実際のアプリを移行する場合は、アプリのユーザーとクラスのすべてのカスタムプロパティとメソッド、および `DbContext` アプリが使用するその他のモデルクラスも移行する必要があります。 たとえば、にがある場合は、 `DbContext` `DbSet<Album>` クラスを移行する必要があり `Album` ます。
 
-これらのファイルを配置したら、ステートメントを更新して、 *Startup.cs*ファイルをコンパイルすることができ `using` ます。
+これらのファイルを配置したら、ステートメントを更新して、 *Startup.cs* ファイルをコンパイルすることができ `using` ます。
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
@@ -125,9 +126,9 @@ _Layout の行のコメントを解除 `@Html.Partial` *します。*
 </div>
 ```
 
-次に、 Razor *_LoginPartial*という名前の新しいビューを*ビュー/共有*フォルダーに追加します。
+次に、 Razor *_LoginPartial* という名前の新しいビューを *ビュー/共有* フォルダーに追加します。
 
-次のコードを使用して _LoginPartial を更新*します*(すべての内容を置き換えます)。
+次のコードを使用して _LoginPartial を更新 *します* (すべての内容を置き換えます)。
 
 ```cshtml
 @inject SignInManager<ApplicationUser> SignInManager

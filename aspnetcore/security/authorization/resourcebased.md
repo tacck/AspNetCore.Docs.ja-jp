@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: ee9b3e9b0085d58778fdf0c0f9a5d352747d88ba
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bb47f3452d29dfeea0e4d3c4a9c22a06869a3fe7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020133"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631356"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core でのリソースベースの承認
 
@@ -41,15 +42,15 @@ ms.locfileid: "88020133"
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 ::: moniker-end
 
-[承認によって保護されたユーザーデータを含む ASP.NET Core アプリを作成](xref:security/authorization/secure-data)するには、リソースベースの承認を使用するサンプルアプリが含まれています。
+[承認によって保護されたユーザーデータを含む ASP.NET Core アプリを作成](xref:security/authorization/secure-data) するには、リソースベースの承認を使用するサンプルアプリが含まれています。
 
 ## <a name="use-imperative-authorization"></a>強制認証を使用する
 
-承認は[IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice)サービスとして実装され、クラス内のサービスコレクションに登録され `Startup` ます。 サービスは、ページハンドラーまたはアクションへの[依存関係の挿入](xref:fundamentals/dependency-injection)によって利用可能になります。
+承認は [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) サービスとして実装され、クラス内のサービスコレクションに登録され `Startup` ます。 サービスは、ページハンドラーまたはアクションへの [依存関係の挿入](xref:fundamentals/dependency-injection) によって利用可能になります。
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
 
-`IAuthorizationService`2つの `AuthorizeAsync` メソッドオーバーロードがあります。1つはリソースとポリシー名を受け取り、もう1つはリソースを受け入れ、もう1つは評価する要件のリストです。
+`IAuthorizationService` 2つの `AuthorizeAsync` メソッドオーバーロードがあります。1つはリソースとポリシー名を受け取り、もう1つはリソースを受け入れ、もう1つは評価する要件のリストです。
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -79,7 +80,7 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 <a name="security-authorization-resource-based-imperative"></a>
 
-次の例では、セキュリティで保護されるリソースがカスタムオブジェクトに読み込まれ `Document` ます。 `AuthorizeAsync`現在のユーザーが指定されたドキュメントの編集を許可されているかどうかを判断するために、オーバーロードが呼び出されます。 カスタムの "EditPolicy" 承認ポリシーが決定に考慮されます。 承認ポリシーの作成の詳細については[、「カスタムポリシーベースの承認](xref:security/authorization/policies)」を参照してください。
+次の例では、セキュリティで保護されるリソースがカスタムオブジェクトに読み込まれ `Document` ます。 `AuthorizeAsync`現在のユーザーが指定されたドキュメントの編集を許可されているかどうかを判断するために、オーバーロードが呼び出されます。 カスタムの "EditPolicy" 承認ポリシーが決定に考慮されます。 承認ポリシーの作成の詳細については [、「カスタムポリシーベースの承認](xref:security/authorization/policies) 」を参照してください。
 
 > [!NOTE]
 > 次のコードサンプルでは、認証が実行されていることを前提として、プロパティを設定し `User` ます。
@@ -98,7 +99,7 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 ## <a name="write-a-resource-based-handler"></a>リソースベースのハンドラーを記述する
 
-リソースベースの承認のハンドラーを記述することは、[プレーンな要件ハンドラーを記述](xref:security/authorization/policies#security-authorization-policies-based-authorization-handler)する方法とは大きく異なります。 カスタム要件クラスを作成し、要件ハンドラークラスを実装します。 要件クラスの作成の詳細については、「[要件](xref:security/authorization/policies#requirements)」を参照してください。
+リソースベースの承認のハンドラーを記述することは、 [プレーンな要件ハンドラーを記述](xref:security/authorization/policies#security-authorization-policies-based-authorization-handler)する方法とは大きく異なります。 カスタム要件クラスを作成し、要件ハンドラークラスを実装します。 要件クラスの作成の詳細については、「 [要件](xref:security/authorization/policies#requirements)」を参照してください。
 
 ハンドラークラスは、要件とリソースの種類の両方を指定します。 たとえば、とリソースを使用するハンドラーは次の `SameAuthorRequirement` `Document` ようになります。
 
@@ -132,7 +133,7 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 ### <a name="operational-requirements"></a>運用上の要件
 
-CRUD (作成、読み取り、更新、削除) 操作の結果に基づいて意思決定を行う場合は、 [Operationauthorizationrequirement](/dotnet/api/microsoft.aspnetcore.authorization.infrastructure.operationauthorizationrequirement)ヘルパークラスを使用します。 このクラスを使用すると、操作の種類ごとに個別のクラスではなく、1つのハンドラーを記述できます。 これを使用するには、いくつかの操作名を指定します。
+CRUD (作成、読み取り、更新、削除) 操作の結果に基づいて意思決定を行う場合は、 [Operationauthorizationrequirement](/dotnet/api/microsoft.aspnetcore.authorization.infrastructure.operationauthorizationrequirement) ヘルパークラスを使用します。 このクラスを使用すると、操作の種類ごとに個別のクラスではなく、1つのハンドラーを記述できます。 これを使用するには、いくつかの操作名を指定します。
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_OperationsClass)]
 

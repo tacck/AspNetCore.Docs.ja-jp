@@ -5,6 +5,7 @@ description: 共通レイアウトの使用方法、ディレクティブの共�
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020445"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630693"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core でのレイアウト
 
@@ -34,7 +35,7 @@ ms.locfileid: "88020445"
 
 このドキュメントでは、MVC を ASP.NET Core するための2つの異なるアプローチのレイアウトについて説明します。 Razor ビューにはページとコントローラーがあります。 このトピックでは、違いは最小限です。
 
-* Razorページは*ページ*フォルダーにあります。
+* Razor ページは *ページ* フォルダーにあります。
 * ビューを含むコントローラーでは、*Views* フォルダーをビューに使用します。
 
 ## <a name="what-is-a-layout"></a>レイアウトとは
@@ -43,11 +44,11 @@ ms.locfileid: "88020445"
 
 ![ページ レイアウトの例](layout/_static/page-layout.png)
 
-スクリプトやスタイルシートなどの共通の HTML 構造も、アプリ内の多くのページで頻繁に使用されます。 これらの共有要素はすべて*レイアウト*ファイルで定義され、アプリ内で使用される任意のビューで参照できます。 レイアウトにより、ビュー内の重複するコードを削減できます。
+スクリプトやスタイルシートなどの共通の HTML 構造も、アプリ内の多くのページで頻繁に使用されます。 これらの共有要素はすべて *レイアウト* ファイルで定義され、アプリ内で使用される任意のビューで参照できます。 レイアウトにより、ビュー内の重複するコードを削減できます。
 
 規則により、ASP.NET Core アプリの既定のレイアウトには *_Layout.cshtml* という名前が付けられます。 テンプレートを使用すると、次のような新しい ASP.NET Core プロジェクトのレイアウト ファイルが作成されます。
 
-* Razorページ: *pages/Shared/_Layout. cshtml*
+* Razor ページ: *pages/Shared/_Layout. cshtml*
 
   ![ソリューション エクスプローラーの Pages フォルダー](layout/_static/rp-web-project-views.png)
 
@@ -63,7 +64,7 @@ ms.locfileid: "88020445"
 
 ## <a name="specifying-a-layout"></a>レイアウトの指定
 
-Razorビューには `Layout` プロパティがあります。 個々のビューは、このプロパティを設定することでレイアウトを指定します。
+Razor ビューには `Layout` プロパティがあります。 個々のビューは、このプロパティを設定することでレイアウトを指定します。
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
@@ -119,7 +120,7 @@ Razorビューには `Layout` プロパティがあります。 個々のビュ�
 
 ## <a name="importing-shared-directives"></a>共有ディレクティブのインポート
 
-ビューおよびページでは Razor 、ディレクティブを使用して名前空間をインポートし、[依存関係の挿入](dependency-injection.md)を使用できます。 多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。 `_ViewImports` ファイルは、次のディレクティブをサポートします。
+ビューおよびページでは Razor 、ディレクティブを使用して名前空間をインポートし、 [依存関係の挿入](dependency-injection.md)を使用できます。 多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。 `_ViewImports` ファイルは、次のディレクティブをサポートします。
 
 * `@addTagHelper`
 * `@removeTagHelper`

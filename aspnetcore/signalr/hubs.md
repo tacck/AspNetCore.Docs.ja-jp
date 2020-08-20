@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core でハブを使用するSignalR
+title: ASP.NET Core でハブを使用する SignalR
 author: bradygaster
 description: ASP.NET Core でハブを使用する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: bd7432fc29d0cda003abed1f0e522bdddf2e4efc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 71ca0896bc645b7625f60c3a9e8fe321079d524a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022213"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631278"
 ---
 # <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>のハブを SignalR ASP.NET Core に使用する
 
 [Rachel appel](https://twitter.com/rachelappel)および[加山 Griffin](https://twitter.com/1kevgriff)
 
-[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
+[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-a-no-locsignalr-hub"></a>ハブとは SignalR
 
-SignalRハブ API を使用すると、接続されているクライアント上のメソッドをサーバーから呼び出すことができます。 サーバーコードでは、クライアントによって呼び出されるメソッドを定義します。 クライアントコードでは、サーバーから呼び出されるメソッドを定義します。 SignalRは、クライアントとサーバー間のリアルタイム通信とサーバー間の通信を可能にする、バックグラウンドの背後にあるすべての処理を行います。
+SignalRハブ API を使用すると、接続されているクライアント上のメソッドをサーバーから呼び出すことができます。 サーバーコードでは、クライアントによって呼び出されるメソッドを定義します。 クライアントコードでは、サーバーから呼び出されるメソッドを定義します。 SignalR は、クライアントとサーバー間のリアルタイム通信とサーバー間の通信を可能にする、バックグラウンドの背後にあるすべての処理を行います。
 
 ## <a name="configure-no-locsignalr-hubs"></a>ハブの構成 SignalR
 
@@ -76,7 +77,7 @@ public class ChatHub : Hub
 }
 ```
 
-C# のメソッドの場合と同様に、戻り値の型とパラメーター (複合型や配列を含む) を指定できます。 SignalRパラメーターと戻り値の複合オブジェクトおよび配列のシリアル化と逆シリアル化を処理します。
+C# のメソッドの場合と同様に、戻り値の型とパラメーター (複合型や配列を含む) を指定できます。 SignalR パラメーターと戻り値の複合オブジェクトおよび配列のシリアル化と逆シリアル化を処理します。
 
 > [!NOTE]
 > ハブは一時的なものです。
@@ -97,9 +98,9 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 | `Features` | 接続で使用できる機能のコレクションを取得します。 現時点では、ほとんどのシナリオでこのコレクションは必要ないため、詳細には記載されていません。 |
 | `ConnectionAborted` | `CancellationToken`接続が中止されたときに通知するを取得します。 |
 
-`Hub.Context`には、次のメソッドも含まれています。
+`Hub.Context` には、次のメソッドも含まれています。
 
-| メソッド | 説明 |
+| Method | 説明 |
 | ------ | ----------- |
 | `GetHttpContext` | `HttpContext`接続のを返し `null` ます。接続が HTTP 要求に関連付けられていない場合はを返します。 HTTP 接続の場合は、このメソッドを使用して、HTTP ヘッダーやクエリ文字列などの情報を取得できます。 |
 | `Abort` | 接続を中止します。 |
@@ -114,9 +115,9 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 | `Caller` | ハブメソッドを呼び出したクライアントでメソッドを呼び出します。 |
 | `Others` | メソッドを呼び出したクライアントを除く、接続されているすべてのクライアントでメソッドを呼び出します。 |
 
-`Hub.Clients`には、次のメソッドも含まれています。
+`Hub.Clients` には、次のメソッドも含まれています。
 
-| メソッド | 説明 |
+| Method | 説明 |
 | ------ | ----------- |
 | `AllExcept` | 指定された接続を除く、接続されているすべてのクライアントでメソッドを呼び出します |
 | `Client` | 特定の接続されたクライアントでメソッドを呼び出します |
@@ -134,9 +135,9 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 
 特定のクライアントに対する呼び出しを行うには、オブジェクトのプロパティを使用し `Clients` ます。 次の例には、3つのハブメソッドがあります。
 
-* `SendMessage`を使用して、接続されているすべてのクライアントにメッセージを送信し `Clients.All` ます。
-* `SendMessageToCaller`を使用して、メッセージを呼び出し元に返信し `Clients.Caller` ます。
-* `SendMessageToGroups`グループ内のすべてのクライアントにメッセージを送信し `SignalR Users` ます。
+* `SendMessage` を使用して、接続されているすべてのクライアントにメッセージを送信し `Clients.All` ます。
+* `SendMessageToCaller` を使用して、メッセージを呼び出し元に返信し `Clients.Caller` ます。
+* `SendMessageToGroups` グループ内のすべてのクライアントにメッセージを送信し `SignalR Users` ます。
 
 [!code-csharp[Send messages](hubs/sample/hubs/chathub.cs?name=HubMethods)]
 
@@ -154,7 +155,7 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 
 を使用すると `Hub<IChatClient>` 、クライアントメソッドのコンパイル時チェックが有効になります。 これにより、 `Hub<T>` は、インターフェイスで定義されたメソッドへのアクセスのみを提供できるため、マジック文字列を使用した場合に発生する問題を回避できます。
 
-厳密に型指定されたを使用 `Hub<T>` すると、を使用することができなくなり `SendAsync` ます。 インターフェイスで定義されているメソッドは、引き続き非同期として定義できます。 実際、これらの各メソッドはを返す必要があり `Task` ます。 これはインターフェイスであるため、キーワードを使用しないで `async` ください。 例:
+厳密に型指定されたを使用 `Hub<T>` すると、を使用することができなくなり `SendAsync` ます。 インターフェイスで定義されているメソッドは、引き続き非同期として定義できます。 実際、これらの各メソッドはを返す必要があり `Task` ます。 これはインターフェイスであるため、キーワードを使用しないで `async` ください。 次に例を示します。
 
 ```csharp
 public interface IClient
@@ -168,7 +169,7 @@ public interface IClient
 
 ## <a name="change-the-name-of-a-hub-method"></a>ハブメソッドの名前を変更する
 
-既定では、サーバーハブのメソッド名は .NET メソッドの名前です。 ただし、 [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute)属性を使用してこの既定値を変更し、メソッドの名前を手動で指定することができます。 クライアントは、メソッドを呼び出すときに、.NET メソッド名の代わりにこの名前を使用する必要があります。
+既定では、サーバーハブのメソッド名は .NET メソッドの名前です。 ただし、 [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) 属性を使用してこの既定値を変更し、メソッドの名前を手動で指定することができます。 クライアントは、メソッドを呼び出すときに、.NET メソッド名の代わりにこの名前を使用する必要があります。
 
 [!code-csharp[HubMethodName attribute](hubs/sample/hubs/chathub.cs?name=HubMethodName&highlight=1)]
 
@@ -186,27 +187,27 @@ SignalRHUB API は、 `OnConnectedAsync` 接続の `OnDisconnectedAsync` 管理�
 
 ## <a name="handle-errors"></a>エラーの処理
 
-ハブメソッドでスローされた例外は、メソッドを呼び出したクライアントに送信されます。 JavaScript クライアントでは、 `invoke` メソッドは javascript の[約束](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Using_promises)を返します。 クライアントは、を使用して promise にアタッチされたハンドラーでエラーを受信すると `catch` 、それを呼び出し、JavaScript オブジェクトとして渡され `Error` ます。
+ハブメソッドでスローされた例外は、メソッドを呼び出したクライアントに送信されます。 JavaScript クライアントでは、 `invoke` メソッドは javascript の [約束](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Using_promises)を返します。 クライアントは、を使用して promise にアタッチされたハンドラーでエラーを受信すると `catch` 、それを呼び出し、JavaScript オブジェクトとして渡され `Error` ます。
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-ハブが例外をスローした場合、接続は閉じられません。 既定では、は、 SignalR 一般的なエラーメッセージをクライアントに返します。 例:
+ハブが例外をスローした場合、接続は閉じられません。 既定では、は、 SignalR 一般的なエラーメッセージをクライアントに返します。 次に例を示します。
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
 ```
 
-予期しない例外には、データベース接続が失敗したときにトリガーされる例外のデータベースサーバーの名前など、重要な情報が含まれていることがよくあります。 SignalRでは、これらの詳細なエラーメッセージは既定でセキュリティ対策として公開されません。 例外の詳細が抑制される理由の詳細については、「[セキュリティに関する考慮事項](xref:signalr/security#exceptions)」を参照してください。
+予期しない例外には、データベース接続が失敗したときにトリガーされる例外のデータベースサーバーの名前など、重要な情報が含まれていることがよくあります。 SignalR では、これらの詳細なエラーメッセージは既定でセキュリティ対策として公開されません。 例外の詳細が抑制される理由の詳細については、「 [セキュリティに関する考慮事項](xref:signalr/security#exceptions) 」を参照してください。
 
-クライアントに伝達する必要のある*例外的な条件*がある場合は、クラスを使用でき `HubException` ます。 ハブメソッドからをスローすると `HubException` 、 SignalR **は**、メッセージ全体を未変更のままクライアントに送信します。
+クライアントに伝達する必要のある *例外的な条件* がある場合は、クラスを使用でき `HubException` ます。 ハブメソッドからをスローすると `HubException` 、 SignalR **は** 、メッセージ全体を未変更のままクライアントに送信します。
 
 [!code-csharp[ThrowHubException](hubs/sample/hubs/chathub.cs?name=ThrowHubException&highlight=3)]
 
 > [!NOTE]
-> SignalRでは、 `Message` 例外のプロパティのみがクライアントに送信されます。 例外のスタックトレースおよびその他のプロパティは、クライアントでは使用できません。
+> SignalR では、 `Message` 例外のプロパティのみがクライアントに送信されます。 例外のスタックトレースおよびその他のプロパティは、クライアントでは使用できません。
 
 ## <a name="related-resources"></a>関連リソース
 
-* [ASP.NET Core の概要SignalR](xref:signalr/introduction)
+* [ASP.NET Core の概要 SignalR](xref:signalr/introduction)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

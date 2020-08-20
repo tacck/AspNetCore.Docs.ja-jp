@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core でのログ記録と診断SignalR
+title: ASP.NET Core でのログ記録と診断 SignalR
 author: anurse
 description: ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr
 ms.date: 06/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 922b2ca0aa7933e1010db7ca319631766ffbf753
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 649398a3868117b2e7f3358aa25544c99cc625b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130536"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631343"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断SignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断 SignalR
 
 By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
@@ -37,12 +38,12 @@ By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
 SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
-SignalR2つの logger カテゴリを使用します。
+SignalR 2つの logger カテゴリを使用します。
 
 * `Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
 * `Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、サーバー送信イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR
 
-から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を*appsettings.js*のファイルのレベルに構成し `LogLevel` `Logging` ます。
+から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を *appsettings.js* のファイルのレベルに構成し `LogLevel` `Logging` ます。
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -65,15 +66,15 @@ JSON ベースの構成を使用していない場合は、構成システムで
 
 ### <a name="as-a-console-app-outside-iis"></a>IIS の外部のコンソールアプリとして
 
-コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。 SignalRログはコンソールに表示されます。
+コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。 SignalR ログはコンソールに表示されます。
 
 ### <a name="within-iis-express-from-visual-studio"></a>Visual Studio から IIS Express 内
 
-Visual Studio では、[**出力**] ウィンドウにログ出力が表示されます。 [ **ASP.NET Core Web サーバー** ] ドロップダウンオプションを選択します。
+Visual Studio では、[ **出力** ] ウィンドウにログ出力が表示されます。 [ **ASP.NET Core Web サーバー** ] ドロップダウンオプションを選択します。
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル**をに構成し `Verbose` ます。 ログは、**ログストリーミング**サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
+Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル**をに構成し `Verbose` ます。 ログは、 **ログストリーミング** サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
 
 ### <a name="other-environments"></a>その他の環境
 
@@ -119,19 +120,19 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 
 ### <a name="console-logging"></a>[コンソールのログ記録]
 
-コンソールのログ記録を有効にするには[、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console)追加します。 次に、メソッドを使用し `AddConsole` て、コンソールロガーを構成します。
+コンソールのログ記録を有効にするには [、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) 追加します。 次に、メソッドを使用し `AddConsole` て、コンソールロガーを構成します。
 
 [!code-csharp[](diagnostics/net-client-console-log.cs?highlight=6)]
 
 ### <a name="debug-output-window-logging"></a>デバッグ出力ウィンドウのログ記録
 
-また、ログを構成して、Visual Studio の [**出力**] ウィンドウにアクセスすることもできます。 次のよう[に、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug)インストールして、メソッドを使用します。 `AddDebug`
+また、ログを構成して、Visual Studio の [ **出力** ] ウィンドウにアクセスすることもできます。 次のよう[に、パッケージを](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug)インストールして、メソッドを使用します。 `AddDebug`
 
 [!code-csharp[](diagnostics/net-client-debug-log.cs?highlight=6)]
 
 ### <a name="other-logging-providers"></a>その他のログプロバイダー
 
-SignalRでは、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。 ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。
+SignalR では、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。 ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
@@ -220,9 +221,9 @@ GitHub の問題に診断ファイルを添付するには、名前を変更し�
 
 メトリックは、一定期間のデータ測定値を表します。 たとえば、1秒あたりの要求です。 メトリックデータを使用すると、アプリの状態を高レベルで監視できます。 .NET gRPC メトリックは <xref:System.Diagnostics.Tracing.EventCounter> を使用して出力されます。
 
-### <a name="no-locsignalr-server-metrics"></a>SignalRサーバーメトリック
+### <a name="no-locsignalr-server-metrics"></a>SignalR サーバーメトリック
 
-SignalRサーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。
+SignalR サーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。
 
 | 名前                    | 説明                 |
 |-------------------------|-----------------------------|

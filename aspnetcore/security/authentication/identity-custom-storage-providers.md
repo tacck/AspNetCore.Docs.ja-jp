@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core 用のカスタムストレージプロバイダーIdentity
+title: のカスタムストレージプロバイダー ASP.NET Core Identity
 author: ardalis
-description: ASP.NET Core 用にカスタム記憶域プロバイダーを構成する方法について説明 Identity します。
+description: のカスタム記憶域プロバイダーを構成する方法について説明 ASP.NET Core Identity します。
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a8414efeece1afd55d0f30d232ef360d0a21714c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021537"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630134"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>ASP.NET Core 用のカスタムストレージプロバイダーIdentity
+# <a name="custom-storage-providers-for-no-locaspnet-core-identity"></a>のカスタムストレージプロバイダー ASP.NET Core Identity
 
 作成者: [Steve Smith](https://ardalis.com/)
 
-ASP.NET Core Identity は拡張可能なシステムであり、カスタム記憶域プロバイダーを作成してアプリに接続することができます。 このトピックでは、ASP.NET Core 用にカスタマイズされた記憶域プロバイダーを作成する方法について説明し Identity ます。 この記事では、独自の記憶域プロバイダーを作成するための重要な概念について説明しますが、詳細な手順については説明しません。
+ASP.NET Core Identity は拡張可能なシステムであり、カスタム記憶域プロバイダーを作成してアプリに接続することができます。 このトピックでは、用にカスタマイズされた記憶域プロバイダーを作成する方法について説明し ASP.NET Core Identity ます。 この記事では、独自の記憶域プロバイダーを作成するための重要な概念について説明しますが、詳細な手順については説明しません。
 
 [GitHub のサンプルを表示またはダウンロードしてください](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample)。
 
 ## <a name="introduction"></a>はじめに
 
-既定では、ASP.NET Core Identity システムは Entity Framework Core を使用して SQL Server データベースにユーザー情報を格納します。 多くのアプリでは、この方法が適しています。 ただし、別の永続化メカニズムまたはデータスキーマを使用することをお勧めします。 例:
+既定では、 ASP.NET Core Identity システムは Entity Framework Core を使用して、ユーザー情報を SQL Server データベースに格納します。 多くのアプリでは、この方法が適しています。 ただし、別の永続化メカニズムまたはデータスキーマを使用することをお勧めします。 次に例を示します。
 
 * [Azure Table Storage](/azure/storage/)または別のデータストアを使用します。
 * データベーステーブルの構造が異なります。 
@@ -41,7 +42,7 @@ ASP.NET Core Identity は拡張可能なシステムであり、カスタム記�
 
 これらの各ケースでは、ストレージメカニズム用にカスタマイズされたプロバイダーを作成し、そのプロバイダーをアプリに接続できます。
 
-ASP.NET Core Identity は、Visual Studio の [個々のユーザーアカウント] オプションを使用してプロジェクトテンプレートに含まれています。
+ASP.NET Core Identity は、Visual Studio の [個別のユーザーアカウント] オプションを使用してプロジェクトテンプレートに含まれています。
 
 .NET Core CLI を使用する場合は、次のように追加し `-au Individual` ます。
 
@@ -49,9 +50,9 @@ ASP.NET Core Identity は、Visual Studio の [個々のユーザーアカウン
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-no-locidentity-architecture"></a>ASP.NET Core Identity アーキテクチャ
+## <a name="the-no-locaspnet-core-identity-architecture"></a>ASP.NET Core Identityアーキテクチャ
 
-ASP.NET Core Identity は、マネージャーとストアと呼ばれるクラスで構成されます。 *マネージャー*は、アプリ開発者がユーザーの作成などの操作を実行するために使用する高レベルのクラスです Identity 。 *ストア*は、ユーザーやロールなどのエンティティがどのように永続化されるかを指定する下位レベルのクラスです。 ストアはリポジトリパターンに従い、永続化メカニズムと密接に結び付いています。 マネージャーはストアから切り離されています。つまり、アプリケーションコードを変更することなく永続化メカニズムを置き換えることができます (構成を除く)。
+ASP.NET Core Identity は、マネージャーおよびストアと呼ばれるクラスで構成されます。 *マネージャー* は、アプリ開発者がユーザーの作成などの操作を実行するために使用する高レベルのクラスです Identity 。 *ストア* は、ユーザーやロールなどのエンティティがどのように永続化されるかを指定する下位レベルのクラスです。 ストアはリポジトリパターンに従い、永続化メカニズムと密接に結び付いています。 マネージャーはストアから切り離されています。つまり、アプリケーションコードを変更することなく永続化メカニズムを置き換えることができます (構成を除く)。
 
 次の図は、web アプリがマネージャーと対話する方法を示しています。また、ストアはデータアクセス層と対話します。
 
@@ -61,11 +62,11 @@ ASP.NET Core Identity は、マネージャーとストアと呼ばれるクラ�
 
 の新しいインスタンスを作成する場合、 `UserManager` または `RoleManager` ユーザークラスの型を指定し、ストアクラスのインスタンスを引数として渡します。 この方法を使用すると、カスタマイズしたクラスを ASP.NET Core に組み込むことができます。 
 
-[新しいストレージプロバイダーを使用するようにアプリを再構成](#reconfigure-app-to-use-a-new-storage-provider)する `UserManager` カスタムストアでとをインスタンス化する方法について説明し `RoleManager` ます。
+[新しいストレージプロバイダーを使用するようにアプリを再構成](#reconfigure-app-to-use-a-new-storage-provider) する `UserManager` カスタムストアでとをインスタンス化する方法について説明し `RoleManager` ます。
 
-## <a name="aspnet-core-no-locidentity-stores-data-types"></a>Identityデータ型を格納 ASP.NET Core
+## <a name="no-locaspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity データ型を格納します
 
-[ASP.NET Core Identity ](https://github.com/aspnet/identity)データ型の詳細については、次のセクションを参考にしてください。
+[ASP.NET Core Identity](https://github.com/aspnet/identity) データ型の詳細については、次のセクションを参考にしてください。
 
 ### <a name="users"></a>ユーザー
 
@@ -73,7 +74,7 @@ Web サイトの登録済みユーザー。 [ Identity ユーザー](/dotnet/api
 
 ### <a name="user-claims"></a>ユーザー要求
 
-ユーザーの id を表す、ユーザーに関する一連のステートメント (または[要求](/dotnet/api/system.security.claims.claim))。 では、ロールを使用した場合よりも多くのユーザー id を有効にすることができます。
+ユーザーの id を表す、ユーザーに関する一連のステートメント (または [要求](/dotnet/api/system.security.claims.claim))。 では、ロールを使用した場合よりも多くのユーザー id を有効にすることができます。
 
 ### <a name="user-logins"></a>ユーザーログイン
 
@@ -85,11 +86,11 @@ Web サイトの登録済みユーザー。 [ Identity ユーザー](/dotnet/api
 
 ## <a name="the-data-access-layer"></a>データアクセス層
 
-このトピックでは、使用する永続化メカニズムについて理解していること、およびそのメカニズムのエンティティを作成する方法について理解していることを前提としています。 このトピックでは、リポジトリまたはデータアクセスクラスの作成方法の詳細については説明しません。ASP.NET Core を使用する場合の設計上の決定について、いくつかの提案を提供 Identity します。
+このトピックでは、使用する永続化メカニズムについて理解していること、およびそのメカニズムのエンティティを作成する方法について理解していることを前提としています。 このトピックでは、リポジトリまたはデータアクセスクラスの作成方法の詳細については説明しません。を使用する場合の設計上の決定について、いくつかの提案を提供 ASP.NET Core Identity します。
 
-カスタマイズされたストアプロバイダーのデータアクセス層を設計する際には、自由度が高くなります。 アプリで使用する予定の機能に対してのみ、永続化メカニズムを作成する必要があります。 たとえば、アプリでロールを使用していない場合は、ロールまたはユーザーロールの関連付け用のストレージを作成する必要はありません。 テクノロジと既存のインフラストラクチャでは、ASP.NET Core の既定の実装とは大きく異なる構造が必要になる場合があり Identity ます。 データアクセス層では、ストレージ実装の構造を操作するロジックを提供します。
+カスタマイズされたストアプロバイダーのデータアクセス層を設計する際には、自由度が高くなります。 アプリで使用する予定の機能に対してのみ、永続化メカニズムを作成する必要があります。 たとえば、アプリでロールを使用していない場合は、ロールまたはユーザーロールの関連付け用のストレージを作成する必要はありません。 テクノロジと既存のインフラストラクチャでは、の既定の実装とは大きく異なる構造が必要になる場合があり ASP.NET Core Identity ます。 データアクセス層では、ストレージ実装の構造を操作するロジックを提供します。
 
-データアクセス層は、ASP.NET Core からデータソースにデータを保存するためのロジックを提供し Identity ます。 カスタマイズした記憶域プロバイダーのデータアクセス層には、ユーザーとロールの情報を格納するための次のクラスが含まれている場合があります。
+データアクセス層は、からデータソースにデータを保存するためのロジックを提供し ASP.NET Core Identity ます。 カスタマイズした記憶域プロバイダーのデータアクセス層には、ユーザーとロールの情報を格納するための次のクラスが含まれている場合があります。
 
 ### <a name="context-class"></a>Context クラス
 
@@ -117,7 +118,7 @@ Web サイトの登録済みユーザー。 [ Identity ユーザー](/dotnet/api
 
 **ヒント:** アプリで使用する予定のクラスのみを実装します。
 
-データアクセスクラスで、永続化メカニズムのデータ操作を実行するコードを指定します。 たとえば、カスタムプロバイダー内で、*ストア*クラスに新しいユーザーを作成するには、次のコードが必要になることがあります。
+データアクセスクラスで、永続化メカニズムのデータ操作を実行するコードを指定します。 たとえば、カスタムプロバイダー内で、 *ストア* クラスに新しいユーザーを作成するには、次のコードが必要になることがあります。
 
 [!code-csharp[](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs?name=createuser&highlight=7)]
 
@@ -179,7 +180,7 @@ Web サイトの登録済みユーザー。 [ Identity ユーザー](/dotnet/api
 * **IQueryableUserStore**  
  [Iqueryableuserstore &lt; tuser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1)インターフェイスは、クエリ可能なユーザーストアを提供するために実装するメンバーを定義します。
 
-アプリケーションで必要なインターフェイスだけを実装します。 例:
+アプリケーションで必要なインターフェイスだけを実装します。 次に例を示します。
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -247,5 +248,5 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="references"></a>References
 
-* [ASP.NET 4.x 用のカスタムストレージプロバイダーIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
-* [ASP.NET Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): このリポジトリには、コミュニティによって管理されるストアプロバイダーへのリンクが含まれています。
+* [ASP.NET 4.x 用のカスタムストレージプロバイダー Identity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
+* [ASP.NET Core Identity](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): このリポジトリには、コミュニティで管理されているストアプロバイダーへのリンクが含まれています。

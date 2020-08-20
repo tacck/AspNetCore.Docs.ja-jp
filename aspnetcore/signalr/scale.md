@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 2d128d54dc9b1189124563e45d72d74b19704ab1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fc257015a9ee972da90b0f206a60b07bd6cc1f97
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022525"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631109"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR のホストとスケーリング
 
@@ -32,7 +33,7 @@ ms.locfileid: "88022525"
 
 ## <a name="sticky-sessions"></a>固定セッション
 
-SignalRでは、特定の接続に対するすべての HTTP 要求を同じサーバープロセスで処理する必要があります。 SignalRサーバーファーム (複数のサーバー) でが実行されている場合は、"固定セッション" を使用する必要があります。 "固定セッション" は、一部のロードバランサーによってセッションアフィニティとも呼ばれます。 Azure App Service は、[アプリケーション要求ルーティング](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview)処理 (ARR) を使用して要求をルーティングします。 Azure App Service で "ARR Affinity" 設定を有効にすると、"固定セッション" が有効になります。 固定セッションが不要な状況は次のとおりです。
+SignalR では、特定の接続に対するすべての HTTP 要求を同じサーバープロセスで処理する必要があります。 SignalRサーバーファーム (複数のサーバー) でが実行されている場合は、"固定セッション" を使用する必要があります。 "固定セッション" は、一部のロードバランサーによってセッションアフィニティとも呼ばれます。 Azure App Service は、 [アプリケーション要求ルーティング](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) 処理 (ARR) を使用して要求をルーティングします。 Azure App Service で "ARR Affinity" 設定を有効にすると、"固定セッション" が有効になります。 固定セッションが不要な状況は次のとおりです。
 
 1. 単一のサーバーでホストする場合、1つのプロセスで実行します。
 1. Azure サービスを使用する場合 SignalR 。
@@ -44,13 +45,13 @@ SignalRでは、特定の接続に対するすべての HTTP 要求を同じサ�
 
 ## <a name="tcp-connection-resources"></a>TCP 接続リソース
 
-Web サーバーがサポートできる同時 TCP 接続の数は制限されています。 標準 HTTP クライアントは、*一時的*な接続を使用します。 これらの接続は、クライアントがアイドル状態になったときに終了し、後で再度開くことができます。 一方、 SignalR 接続は*永続的*です。 SignalRクライアントがアイドル状態になった場合でも、接続は開いたままになります。 多数のクライアントにサービスを提供する高トラフィックアプリでは、これらの永続的な接続により、サーバーが最大接続数に達する可能性があります。
+Web サーバーがサポートできる同時 TCP 接続の数は制限されています。 標準 HTTP クライアントは、 *一時的* な接続を使用します。 これらの接続は、クライアントがアイドル状態になったときに終了し、後で再度開くことができます。 一方、 SignalR 接続は *永続的*です。 SignalR クライアントがアイドル状態になった場合でも、接続は開いたままになります。 多数のクライアントにサービスを提供する高トラフィックアプリでは、これらの永続的な接続により、サーバーが最大接続数に達する可能性があります。
 
 また、固定接続では、各接続を追跡するために、追加のメモリがいくつか消費されます。
 
 によって接続関連のリソースが頻繁に使用 SignalR される場合、同じサーバー上でホストされている他の web アプリに影響を与えることがあります。 SignalRが開いていて、最後に使用可能な TCP 接続が保持されている場合、同じサーバー上の他の web アプリにも使用できる接続がありません。
 
-サーバーの接続が不足している場合は、ランダムソケットエラーと接続リセットエラーが表示されます。 例:
+サーバーの接続が不足している場合は、ランダムソケットエラーと接続リセットエラーが表示されます。 次に例を示します。
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -66,7 +67,7 @@ An attempt was made to access a socket in a way forbidden by its access permissi
 
 ![スケーリング::: なし (SignalR)::: バックプレーンなし](scale/_static/scale-no-backplane.png)
 
-この問題を解決するためのオプションは、 [Azure SignalR サービス](#azure-signalr-service)と[Redis バックプレーン](#redis-backplane)です。
+この問題を解決するためのオプションは、 [Azure SignalR サービス](#azure-signalr-service) と [Redis バックプレーン](#redis-backplane)です。
 
 ## <a name="azure-no-locsignalr-service"></a>Azure SignalR Service
 
@@ -80,7 +81,7 @@ Azure SignalR サービスは、バックプレーンではなくプロキシで
 
 このスケールアウトのアプローチには、Redis バックプレーンよりもいくつかの利点があります。
 
-* クライアント[アフィニティ](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)とも呼ばれる固定セッションは、接続時にクライアントが Azure サービスに直ちにリダイレクトされるため、必須ではありません SignalR 。
+* クライアント [アフィニティ](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)とも呼ばれる固定セッションは、接続時にクライアントが Azure サービスに直ちにリダイレクトされるため、必須ではありません SignalR 。
 * アプリは、 SignalR 送信されたメッセージの数に基づいてスケールアウトできます。一方、Azure サービスは、 SignalR 任意の数の接続を処理するように自動的に拡張されます。 たとえば、クライアントが何千も存在する可能性はありますが、1秒あたり数個のメッセージしか送信されない場合、 SignalR アプリは接続自体を処理するためだけに複数のサーバーにスケールアウトする必要がありません。
 * アプリでは SignalR 、を使用しないと、web アプリよりもはるかに多くの接続リソースが使用されません SignalR 。
 
@@ -90,7 +91,7 @@ Azure SignalR サービスは、バックプレーンではなくプロキシで
 
 ## <a name="redis-backplane"></a>Redis バックプレーン
 
-[Redis](https://redis.io/)は、パブリッシュ/サブスクライブモデルを持つメッセージングシステムをサポートするメモリ内キー値ストアです。 SignalRRedis バックプレーンは、pub/sub 機能を使用して、メッセージを他のサーバーに転送します。 クライアントが接続を確立すると、接続情報がバックプレーンに渡されます。 サーバーは、すべてのクライアントにメッセージを送信するときに、バックプレーンに送信します。 バックプレーンは、接続されているすべてのクライアントと、それらがあるサーバーを認識します。 このメッセージは、各サーバーを介してすべてのクライアントに送信されます。 このプロセスを次の図に示します。
+[Redis](https://redis.io/) は、パブリッシュ/サブスクライブモデルを持つメッセージングシステムをサポートするメモリ内キー値ストアです。 SignalRRedis バックプレーンは、pub/sub 機能を使用して、メッセージを他のサーバーに転送します。 クライアントが接続を確立すると、接続情報がバックプレーンに渡されます。 サーバーは、すべてのクライアントにメッセージを送信するときに、バックプレーンに送信します。 バックプレーンは、接続されているすべてのクライアントと、それらがあるサーバーを認識します。 このメッセージは、各サーバーを介してすべてのクライアントに送信されます。 このプロセスを次の図に示します。
 
 ![Redis バックプレーン、1つのサーバーからすべてのクライアントに送信されたメッセージ](scale/_static/redis-backplane.png)
 
@@ -99,8 +100,8 @@ Redis バックプレーンは、お客様のインフラストラクチャで�
 前述した Azure SignalR サービスの利点は、Redis バックプレーンの欠点です。
 
 * 次の**両方**が当てはまる場合を除き、固定セッション ([クライアントアフィニティ](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)とも呼ばれます) が必要です。
-  * すべてのクライアントは、Websocket**のみ**を使用するように構成されています。
-  * クライアント構成で[Skipnegotiation 設定](xref:signalr/configuration#configure-additional-options)が有効になっています。 
+  * すべてのクライアントは、Websocket **のみ** を使用するように構成されています。
+  * クライアント構成で [Skipnegotiation 設定](xref:signalr/configuration#configure-additional-options) が有効になっています。 
    サーバーで接続が開始されると、接続はそのサーバー上にとどまります。
 * アプリは、 SignalR 送信されるメッセージが少ない場合でも、クライアントの数に基づいてスケールアウトする必要があります。
 * アプリは、を SignalR 使用しない場合、web アプリよりもはるかに多くの接続リソースを使用 SignalR します。

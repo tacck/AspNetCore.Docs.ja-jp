@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: c0edf56c966cb90c1c308f300a8944d392fdc0e7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e911512c1dce892c670659f04959be89cea067bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020978"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630108"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>MVC とページ ASP.NET Core でのモデルの検証 Razor
 
@@ -74,13 +75,13 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 
 ### <a name="error-messages"></a>エラー メッセージ
 
-検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 例:
+検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 次に例を示します。
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 例:
+内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 次に例を示します。
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -126,7 +127,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 
 リモート検証を実装するには:
 
-1. JavaScript で呼び出すアクション メソッドを作成します。  JQuery Validation[リモート](https://jqueryvalidation.org/remote-method/)メソッドは JSON 応答を想定しています。
+1. JavaScript で呼び出すアクション メソッドを作成します。  JQuery Validation [リモート](https://jqueryvalidation.org/remote-method/) メソッドは JSON 応答を想定しています。
 
    * `true` は、入力データが有効であることを意味します。
    * `false`、`undefined`、または `null` は、入力が有効ではないことを意味します。 既定のエラー メッセージを表示します。
@@ -269,7 +270,7 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery の控えめな検証では、この値を jQuery Validation [required ()](https://jqueryvalidation.org/required-method/)メソッドに渡します。これにより、そのメッセージが付随する要素に表示され **\<span>** ます。
+HTML 出力の `data-` 属性が、`Movie.ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery の控えめな検証では、この値を jQuery Validation [required ()](https://jqueryvalidation.org/required-method/) メソッドに渡します。これにより、そのメッセージが付随する要素に表示され **\<span>** ます。
 
 `[DataType]` 属性によってオーバーライドされていない限り、データ型の検証はプロパティの .NET 型に基づいて行われます。 ブラウザーには独自の既定のエラー メッセージがありますが、jQuery Validation Unobtrusive Validation パッケージでそれらのメッセージをオーバーライドできます。 `[DataType]` 属性と `[EmailAddress]` などのサブクラスを使用して、エラー メッセージを指定できます。
 
@@ -386,7 +387,7 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 * すべての *.cshtml* ファイル内の `_ValidationScriptsPartial` への参照をコメントアウトします。
 * *Pages\Shared\_ValidationScriptsPartial.cshtml* ファイルの内容を削除します。
 
-上記の方法では、ASP.NET Core クラスライブラリをクライアント側で検証することはできません Identity Razor 。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。
+上記の方法では、クライアント側でクラスライブラリを検証することはできません ASP.NET Core Identity Razor 。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
@@ -438,19 +439,19 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 * `[Url]`: プロパティに URL 形式があることを検証します。
 * `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]` 属性](#remote-attribute)」を参照してください。
 
-クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/corefx/issues/42487)のページを参照してください。
+クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/corefx/issues/42487)します。
 
 検証属性の完全な一覧については、[System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 名前空間で確認できます。
 
 ### <a name="error-messages"></a>エラー メッセージ
 
-検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 例:
+検証属性では、無効な入力に対して表示されるエラー メッセージを指定できます。 次に例を示します。
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 例:
+内部的には、属性ではフィールド名のプレースホルダーを指定して `String.Format` が呼び出され、場合によっては追加のプレースホルダーが指定されます。 次に例を示します。
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -644,7 +645,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-HTML 出力の `data-` 属性が、`ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery の控えめな検証は、この値を jQuery Validate [required ()](https://jqueryvalidation.org/required-method/)メソッドに渡します。このメソッドは、付随する要素にそのメッセージを表示し **\<span>** ます。
+HTML 出力の `data-` 属性が、`ReleaseDate` プロパティの検証属性に対応していることに注意してください。 `data-val-required` 属性には、ユーザーが公開日フィールドを入力していない場合に表示されるエラー メッセージが含まれています。 jQuery の控えめな検証は、この値を jQuery Validate [required ()](https://jqueryvalidation.org/required-method/) メソッドに渡します。このメソッドは、付随する要素にそのメッセージを表示し **\<span>** ます。
 
 `[DataType]` 属性によってオーバーライドされていない限り、データ型の検証はプロパティの .NET 型に基づいて行われます。 ブラウザーには独自の既定のエラー メッセージがありますが、jQuery Validation Unobtrusive Validation パッケージでそれらのメッセージをオーバーライドできます。 `[DataType]` 属性と `[EmailAddress]` などのサブクラスを使用して、エラー メッセージを指定できます。
 

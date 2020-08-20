@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護サブキーの派生と認証された
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: ef9c100df69f9f7a1b51819ebb5721cb4f875ffd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d8038142ccb2597eb1c98738307b8b9a842dae5a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019691"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630121"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>ASP.NET Core でのサブキーの派生と認証された暗号化
 
@@ -49,7 +50,7 @@ AAD は3つのすべてのコンポーネントの組に対して一意である
 
 ここでは、カウンタモードで NIST SP800-108 KDF を呼び出しています ( [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5.1 を参照)。次のパラメーターがあります。
 
-* キー派生キー (KDK) =`K_M`
+* キー派生キー (KDK) = `K_M`
 
 * PRF = HMACSHA512
 
@@ -70,7 +71,7 @@ CBC モード暗号化 + HMAC 検証操作の場合、 `| K_E |` は対称ブロ
 `output:= keyModifier || iv || E_cbc (K_E,iv,data) || HMAC(K_H, iv || E_cbc (K_E,iv,data))`
 
 > [!NOTE]
-> `IDataProtector.Protect`実装では、出力する[マジックヘッダーとキー id](xref:security/data-protection/implementation/authenticated-encryption-details)が、呼び出し元に返される前に付加されます。 マジックヘッダーとキー id は暗黙的に[AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)に含まれるため、キー修飾子は kdf に入力として渡されるため、最終的に返されるペイロードのすべての1バイトが MAC によって認証されます。
+> `IDataProtector.Protect`実装では、出力する[マジックヘッダーとキー id](xref:security/data-protection/implementation/authenticated-encryption-details)が、呼び出し元に返される前に付加されます。 マジックヘッダーとキー id は暗黙的に [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)に含まれるため、キー修飾子は kdf に入力として渡されるため、最終的に返されるペイロードのすべての1バイトが MAC によって認証されます。
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Galois/カウンタモードの暗号化 + 検証
 
@@ -81,4 +82,4 @@ CBC モード暗号化 + HMAC 検証操作の場合、 `| K_E |` は対称ブロ
 `output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> GCM は、AAD の概念をネイティブでサポートしていますが、引き続き、元の KDF にのみ AAD を供給し、AAD パラメーターの空の文字列を GCM に渡すことをオプトインします。 この理由は2つのフォールドです。 まず、[機敏性をサポートするために](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers)、 `K_M` 暗号化キーとして直接使用することは避けたいと考えています。 さらに、GCM では、入力に対して非常に厳密な一意性要件が課されます。 GCM 暗号化ルーチンが、同じ (キー、nonce) ペアを持つ2つ以上の個別の入力データセットに対して呼び出される確率は、2 ^ 32 を超えることはできません。 この問題を解決した場合、2 ^ `K_E` 32 を超える暗号化操作を実行する前に、32の制限の afoul を実行することはできません。 非常に多くの操作が行われているように見えますが、高トラフィックの web サーバーでは、これらのキーの通常の有効期間内に、わずか数日で40億の要求を通過させることができます。 2 ^-32 の確率制限に準拠したままにするため、128ビットのキー修飾子と96ビットの nonce が引き続き使用されます。これにより、任意のの使用可能な操作数が大幅に拡張され `K_M` ます。 設計を簡単にするために、CBC 操作と GCM 操作の間で KDF コードパスを共有しています。 AAD は既に KDF で検討されているため、GCM ルーチンに転送する必要はありません。
+> GCM は、AAD の概念をネイティブでサポートしていますが、引き続き、元の KDF にのみ AAD を供給し、AAD パラメーターの空の文字列を GCM に渡すことをオプトインします。 この理由は2つのフォールドです。 まず、 [機敏性をサポートするために](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) 、 `K_M` 暗号化キーとして直接使用することは避けたいと考えています。 さらに、GCM では、入力に対して非常に厳密な一意性要件が課されます。 GCM 暗号化ルーチンが、同じ (キー、nonce) ペアを持つ2つ以上の個別の入力データセットに対して呼び出される確率は、2 ^ 32 を超えることはできません。 この問題を解決した場合、2 ^ `K_E` 32 を超える暗号化操作を実行する前に、32の制限の afoul を実行することはできません。 非常に多くの操作が行われているように見えますが、高トラフィックの web サーバーでは、これらのキーの通常の有効期間内に、わずか数日で40億の要求を通過させることができます。 2 ^-32 の確率制限に準拠したままにするため、128ビットのキー修飾子と96ビットの nonce が引き続き使用されます。これにより、任意のの使用可能な操作数が大幅に拡張され `K_M` ます。 設計を簡単にするために、CBC 操作と GCM 操作の間で KDF コードパスを共有しています。 AAD は既に KDF で検討されているため、GCM ルーチンに転送する必要はありません。

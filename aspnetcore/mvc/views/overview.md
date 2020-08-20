@@ -5,6 +5,7 @@ description: ビューがアプリのデータ表示と、ASP.NET Core MVC で�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 8630df0ad8ea556c6edf0ab251b3c86493f751e2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020874"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630680"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC のビュー
 
@@ -28,7 +29,7 @@ ms.locfileid: "88020874"
 
 このドキュメントでは、ASP.NET Core MVC アプリケーションで使用されるビューについて説明します。 ページの詳細につい Razor ては、「 [ Razor ページの概要](xref:razor-pages/index)」を参照してください。
 
-Model-View-Controller (MVC) パターンでは、*ビュー*がアプリのデータ表示とユーザー操作を処理します。 ビューは、 [ Razor マークアップ](xref:mvc/views/razor)が埋め込まれた HTML テンプレートです。 Razorマークアップは、クライアントに送信される web ページを生成するために HTML マークアップと対話するコードです。
+Model-View-Controller (MVC) パターンでは、*ビュー*がアプリのデータ表示とユーザー操作を処理します。 ビューは、 [ Razor マークアップ](xref:mvc/views/razor)が埋め込まれた HTML テンプレートです。 Razor マークアップは、クライアントに送信される web ページを生成するために HTML マークアップと対話するコードです。
 
 ASP.NET Core MVC では、ビューは、マークアップで[C# プログラミング言語](/dotnet/csharp/)を使用する*cshtml ファイルです。* Razor 通常、ビュー ファイルは、各アプリの[コントローラー](xref:mvc/controllers/actions)の名前が付いたフォルダーにグループ化されます。 これらのフォルダーは、アプリのルートにある *Views* フォルダーに格納されます。
 
@@ -298,7 +299,7 @@ public class HomeController : Controller
 
 `ViewBag`*では Razor 使用できませんページ。*
 
-`ViewBag`は、に格納されているオブジェクトへの動的アクセスを提供する[DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata)オブジェクトです `ViewData` 。 `ViewBag` はキャストを必要としないため、より簡単に使用できます。 次の例は、上記の `ViewData` を使用した時と同じ結果になるように、`ViewBag` を使用する方法を示しています。
+`ViewBag` は、に格納されているオブジェクトへの動的アクセスを提供する [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) オブジェクトです `ViewData` 。 `ViewBag` はキャストを必要としないため、より簡単に使用できます。 次の例は、上記の `ViewData` を使用した時と同じ結果になるように、`ViewBag` を使用する方法を示しています。
 
 ```csharp
 public IActionResult SomeAction()
@@ -369,10 +370,10 @@ public IActionResult SomeAction()
 
 **ViewData と ViewBag の相違点の概要**
 
- `ViewBag`は、ページでは使用できません Razor 。
+ `ViewBag` は、ページでは使用できません Razor 。
 
 * `ViewData`
-  * は[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)から派生しているため、、、、などの便利なディクショナリプロパティを持つことができ `ContainsKey` `Add` `Remove` `Clear` ます。
+  * は [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)から派生しているため、、、、などの便利なディクショナリプロパティを持つことができ `ContainsKey` `Add` `Remove` `Clear` ます。
   * ディクショナリ内のキーは文字列なので、空白が許可されます。 例: `ViewData["Some Key With Whitespace"]`
   * `ViewData` を使用するには、ビューで `string` 以外のすべての型をキャストする必要があります。
 * `ViewBag`

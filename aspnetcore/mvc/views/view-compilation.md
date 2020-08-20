@@ -1,11 +1,12 @@
 ---
-title: RazorASP.NET Core でのファイルのコンパイル
+title: Razor ASP.NET Core でのファイルのコンパイル
 author: rick-anderson
 description: ASP.NET Core アプリでファイルをコンパイルする方法について説明し Razor ます。
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-compilation
-ms.openlocfilehash: fc7924f8f8b321ae017b7acd729fe11c4e0e3c7e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3d76eff93d5c7c53b57136e5183e1ca5287dec81
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021082"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631122"
 ---
-# <a name="no-locrazor-file-compilation-in-aspnet-core"></a>RazorASP.NET Core でのファイルのコンパイル
+# <a name="no-locrazor-file-compilation-in-aspnet-core"></a>Razor ASP.NET Core でのファイルのコンパイル
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -31,7 +32,7 @@ ms.locfileid: "88021082"
 
 Razor拡張子が*cshtml*のファイルは、 [ Razor SDK](xref:razor-pages/sdk)を使用してビルド時と発行時の両方でコンパイルされます。 プロジェクトを構成することによって、必要に応じてランタイムコンパイルを有効にすることができます。
 
-## <a name="no-locrazor-compilation"></a>Razorasp.net
+## <a name="no-locrazor-compilation"></a>Razor asp.net
 
 ファイルのビルド時および発行時のコンパイル Razor は、SDK によって既定で有効になってい Razor ます。 有効にすると、ランタイムコンパイルはビルド時のコンパイルを補完し、 Razor 編集されている場合はファイルを更新できるようにします。
 
@@ -41,10 +42,10 @@ RazorPages および MVC プロジェクトテンプレートには、プロジ�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[**新しい ASP.NET Core web アプリケーションの作成**] ダイアログで次のようにします。
+[ **新しい ASP.NET Core web アプリケーションの作成** ] ダイアログで次のようにします。
 
-1. [ **Web アプリケーション**] プロジェクトテンプレートまたは [ **Web アプリケーション (モデルビューコントローラー)** ] プロジェクトテンプレートを選択します。
-1. [ ** Razor ランタイムコンパイルを有効にする**] チェックボックスをオンにします。
+1. [ **Web アプリケーション** ] プロジェクトテンプレートまたは [ **Web アプリケーション (モデルビューコントローラー)** ] プロジェクトテンプレートを選択します。
+1. [ ** Razor ランタイムコンパイルを有効にする** ] チェックボックスをオンにします。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -61,7 +62,7 @@ dotnet new webapp --razor-runtime-compilation
 既存のプロジェクトのすべての環境に対してランタイムコンパイルを有効にするには、次のようにします。
 
 1. AspNetCore をインストールします。 [ RazorRuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet パッケージ。
-1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、<xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> の呼び出しを含めます。 例:
+1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、<xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> の呼び出しを含めます。 次に例を示します。
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -83,7 +84,7 @@ dotnet new webapp --razor-runtime-compilation
 開発環境でのみランタイムコンパイルを有効にするには、次のようにします。
 
 1. AspNetCore をインストールします。 [ RazorRuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet パッケージ。
-1. launchSettings.jsの [起動プロファイル `environmentVariables` ] セクションを次*のように*変更します。
+1. launchSettings.jsの [起動プロファイル `environmentVariables` ] セクションを次 * のように*変更します。
     * `ASPNETCORE_ENVIRONMENT`がに設定されていることを確認し `"Development"` ます。
     * `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` を `"Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"` に設定します。
 
@@ -91,18 +92,18 @@ dotnet new webapp --razor-runtime-compilation
 
 [!code-json[](~/mvc/views/view-compilation/samples/3.1/launchSettings.json?highlight=15-16,24-25)]
 
-プロジェクトのクラスでコードを変更する必要はありません `Startup` 。 実行時に、ASP.NET Core によって、で[アセンブリレベルの HostingStartup 属性](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute)が検索さ `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` れます。 属性は、 `HostingStartup` 実行するアプリスタートアップコードを指定します。 このスタートアップコードは、ランタイムコンパイルを有効にします。
+プロジェクトのクラスでコードを変更する必要はありません `Startup` 。 実行時に、ASP.NET Core によって、で [アセンブリレベルの HostingStartup 属性](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) が検索さ `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` れます。 属性は、 `HostingStartup` 実行するアプリスタートアップコードを指定します。 このスタートアップコードは、ランタイムコンパイルを有効にします。
 
 ## <a name="enable-runtime-compilation-for-a-no-locrazor-class-library"></a>クラスライブラリのランタイムコンパイルを有効にする Razor
 
-Razorページプロジェクトが*MyClassLib*という名前の[ Razor クラスライブラリ (rcl)](xref:razor-pages/ui-class)を参照するシナリオについて考えてみます。 RCL には、すべてのチームの MVC およびページプロジェクトで使用される *_Layout の cshtml*ファイルが含まれています Razor 。 その RCL の *_Layout*ファイルのランタイムコンパイルを有効にします。 Pages プロジェクトで次の変更を行い Razor ます。
+Razorページプロジェクトが*MyClassLib*という名前の[ Razor クラスライブラリ (rcl)](xref:razor-pages/ui-class)を参照するシナリオについて考えてみます。 RCL には、すべてのチームの MVC およびページプロジェクトで使用される *_Layout の cshtml* ファイルが含まれています Razor 。 その RCL の *_Layout* ファイルのランタイムコンパイルを有効にします。 Pages プロジェクトで次の変更を行い Razor ます。
 
-1. 「[条件付きで既存のプロジェクトのランタイムコンパイルを有効にする」](#conditionally-enable-runtime-compilation-in-an-existing-project)の手順に従って、ランタイムコンパイルを有効にします。
+1. 「 [条件付きで既存のプロジェクトのランタイムコンパイルを有効にする」](#conditionally-enable-runtime-compilation-in-an-existing-project)の手順に従って、ランタイムコンパイルを有効にします。
 1. でランタイムコンパイルオプションを構成し `Startup.ConfigureServices` ます。
 
     [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
 
-    前のコードでは、 *MyClassLib* rcl への絶対パスが構築されています。 [Physicalfileprovider API](xref:fundamentals/file-providers#physicalfileprovider)は、その絶対パスでディレクトリとファイルを検索するために使用されます。 最後に、 `PhysicalFileProvider` インスタンスがファイルプロバイダーコレクションに追加されます。これにより、RCL の*cshtml*ファイルにアクセスできるようになります。
+    前のコードでは、 *MyClassLib* rcl への絶対パスが構築されています。 [Physicalfileprovider API](xref:fundamentals/file-providers#physicalfileprovider)は、その絶対パスでディレクトリとファイルを検索するために使用されます。 最後に、 `PhysicalFileProvider` インスタンスがファイルプロバイダーコレクションに追加されます。これにより、RCL の *cshtml* ファイルにアクセスできるようになります。
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -117,7 +118,7 @@ Razorページプロジェクトが*MyClassLib*という名前の[ Razor クラ�
 
 Razor拡張子が*cshtml*のファイルは、 [ Razor SDK](xref:razor-pages/sdk)を使用してビルド時と発行時の両方でコンパイルされます。 実行時コンパイルは、アプリケーションを構成することで必要に応じて有効にできることがあります。
 
-## <a name="no-locrazor-compilation"></a>Razorasp.net
+## <a name="no-locrazor-compilation"></a>Razor asp.net
 
 ファイルのビルド時および発行時のコンパイル Razor は、SDK によって既定で有効になってい Razor ます。 有効にすると、ランタイムコンパイルはビルド時のコンパイルを補完し、 Razor 編集されている場合はファイルを更新できるようにします。
 
@@ -127,7 +128,7 @@ Razor拡張子が*cshtml*のファイルは、 [ Razor SDK](xref:razor-pages/sdk
 
 1. AspNetCore をインストールします。 [ RazorRuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet パッケージ。
 
-1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、<xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> の呼び出しを含めます。 例:
+1. プロジェクトの `Startup.ConfigureServices` メソッドを更新して、<xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> の呼び出しを含めます。 次に例を示します。
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -165,7 +166,7 @@ Razor拡張子が*cshtml*のファイルは、 [ Razor SDK](xref:razor-pages/sdk
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* プロジェクト間でランタイムコンパイルを行う方法を示すサンプルについては、 [GitHub のランタイムコンパイルサンプル](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation)を参照してください。
+* プロジェクト間でランタイムコンパイルを行う方法を示すサンプルについては、 [GitHub のランタイムコンパイルサンプル](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) を参照してください。
 
 ::: moniker-end
 
@@ -173,18 +174,18 @@ Razor拡張子が*cshtml*のファイルは、 [ Razor SDK](xref:razor-pages/sdk
 
 ファイルは、 Razor 関連付けられた Razor ページまたは MVC ビューが呼び出されたときに、実行時にコンパイルされます。 Razorファイルは、 [ Razor SDK](xref:razor-pages/sdk)を使用してビルド時と発行時の両方でコンパイルされます。
 
-## <a name="no-locrazor-compilation"></a>Razorasp.net
+## <a name="no-locrazor-compilation"></a>Razor asp.net
 
 ファイルのビルドおよび発行時のコンパイル Razor は、SDK によって既定で有効になってい Razor ます。 Razor更新後のファイルの編集は、ビルド時にサポートされます。 既定では、コンパイルされた*Views.dll*と、ファイルのコンパイルに必要なファイルまたは参照アセンブリは、 *.cshtml* Razor アプリと共に配置されます。
 
 > [!IMPORTANT]
 > プリコンパイル ツールは非推奨とされており、ASP.NET Core 3.0 では削除されます。 [ Razor Sdk](xref:razor-pages/sdk)に移行することをお勧めします。
 >
-> SDK は、 Razor プリコンパイル固有のプロパティがプロジェクトファイルに設定されていない場合にのみ有効です。 たとえば、 *.csproj*ファイルの `MvcRazorCompileOnPublish` プロパティをに設定すると、 `true` SDK が無効になり Razor ます。
+> SDK は、 Razor プリコンパイル固有のプロパティがプロジェクトファイルに設定されていない場合にのみ有効です。 たとえば、 *.csproj* ファイルの `MvcRazorCompileOnPublish` プロパティをに設定すると、 `true` SDK が無効になり Razor ます。
 
 ## <a name="runtime-compilation"></a>実行時のコンパイル
 
-ビルド時のコンパイルは、ファイルのランタイムコンパイルによって補完され Razor ます。 ASP.NET Core Razor のファイルの内容が変更されると、MVC によってファイルが再コンパイルさ*れます*。
+ビルド時のコンパイルは、ファイルのランタイムコンパイルによって補完され Razor ます。 ASP.NET Core Razor のファイルの内容が変更されると、MVC によってファイルが再コンパイルさ *れます* 。
 
 ## <a name="additional-resources"></a>その他のリソース
 

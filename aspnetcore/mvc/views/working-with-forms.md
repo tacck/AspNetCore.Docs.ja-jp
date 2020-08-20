@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 3f5b0287a4f9c6c6c05a47297e3e602b80bf6015
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c337e727a4683b0b3c67307af93ef8efa246e2ad
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021485"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631018"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core のフォームのタグ ヘルパー
 
@@ -90,8 +91,8 @@ MVC ランタイムで、フォーム タグ ヘルパーの属性 `asp-controll
 |[asp-area](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|領域の名前です。|
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|ページの名前 Razor 。|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|ページハンドラーの名前 Razor 。|
-|[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|ルートの名前です。|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、`asp-route-id="1234"` のように指定します。|
+|[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|ルートの名前。|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|単一の URL ルート値です。 たとえば、「 `asp-route-id="1234"` 」のように入力します。|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|すべてのルート値です。|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL フラグメントです。|
 
@@ -206,7 +207,7 @@ public class HomeController : Controller
 
 `Input` タグ ヘルパーは、.NET 型に基づいて HTML `type` 属性を設定します。 次の表は、一般的な.NET 型と生成される HTML 型の一部をまとめたものです (すべての .NET 型を網羅した一覧ではありません)。
 
-|.NET 型|入力タイプ|
+|.NET の種類|入力タイプ|
 |---|---|
 |Bool|type="checkbox"|
 |String|type="text"|
@@ -441,7 +442,7 @@ Razorコレクションを反復処理する方法を次に示します。
 一般的に、同じプロパティの場合は、`Input` タグ ヘルパーの後に `Validation Message Tag Helper` を使用します。 こうすることで、エラーの原因となった入力の近くで検証エラー メッセージが表示されます。
 
 > [!NOTE]
-> クライアント側の検証のために、正しい JavaScript および [jQuery](https://jquery.com/) のスクリプト参照を使用したビューを用意する必要があります。 詳細については、「[モデルの検証](../models/validation.md)」を参照してください。
+> クライアント側の検証のために、正しい JavaScript および [jQuery](https://jquery.com/) のスクリプト参照を使用したビューを用意する必要があります。 詳細については、「 [モデルの検証](../models/validation.md) 」を参照してください。
 
 サーバー側の検証エラーが発生した場合 (カスタムのサーバー側の検証がある場合や、クライアント側の検証が無効な場合など)、MVC はそのエラー メッセージを `<span>` 要素の本文として配置します。
 
@@ -464,7 +465,7 @@ Razorコレクションを反復処理する方法を次に示します。
 |--- |--- |
 |ValidationSummary.All|プロパティとモデル レベル|
 |ValidationSummary.ModelOnly|モデル|
-|ValidationSummary.None|None|
+|ValidationSummary.None|なし|
 
 ### <a name="sample"></a>サンプル
 
@@ -501,7 +502,7 @@ Razorコレクションを反復処理する方法を次に示します。
 
 * HTML ヘルパーの代替の `Html.DropDownListFor` と `Html.ListBoxFor` があります
 
-`Select Tag Helper` `asp-for` は [select](https://www.w3.org/wiki/HTML/Elements/select) 要素のモデル プロパティ名を指定し、`asp-items` は [option](https://www.w3.org/wiki/HTML/Elements/option) 要素を指定します。  例:
+`Select Tag Helper` `asp-for` は [select](https://www.w3.org/wiki/HTML/Elements/select) 要素のモデル プロパティ名を指定し、`asp-items` は [option](https://www.w3.org/wiki/HTML/Elements/option) 要素を指定します。  次に例を示します。
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -580,7 +581,7 @@ HTTP POST `Index` メソッドによって選択内容が表示されます。
 
 ### <a name="option-group"></a>オプション グループ
 
-HTML [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) 要素は、ビューモデルに1つ以上のオブジェクトが含まれている場合に生成され `SelectListGroup` ます。
+HTML  [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) 要素は、ビューモデルに1つ以上のオブジェクトが含まれている場合に生成され `SelectListGroup` ます。
 
 `CountryViewModelGroup` は `SelectListItem` 要素を "北米" グループと "ヨーロッパ" グループに分けます。
 
@@ -649,7 +650,7 @@ HTML [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) 要素は、�
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
-HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 要素の追加は、選択されて*いない*場合にのみ制限されません。 たとえば、次のビューおよびアクション メソッドで、上記のコードのような HTML が生成されます。
+HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 要素の追加は、選択されて *いない* 場合にのみ制限されません。 たとえば、次のビューおよびアクション メソッドで、上記のコードのような HTML が生成されます。
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 

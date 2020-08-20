@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護で認証された暗号化の実装の
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: ebd784b493b7f283df2cc84a39113e3d714472a0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ed75ab235a95a88bbe60615526137b4c2bb719ef
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022070"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630849"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>ASP.NET Core での認証された暗号化の詳細
 
@@ -38,7 +39,7 @@ IDataProtector は byte [] プレーンテキストパラメーターを受け�
 
 * この特定のペイロードを保護するために使用されるキーを識別する、128ビットのキー id。
 
-* 保護されたペイロードの残りの部分は、[このキーによってカプセル化](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)された暗号化機能に固有です。 次の例では、キーは AES-256-CBC + HMACSHA256 暗号化機能を表し、ペイロードはさらに次のように細分化されています。
+* 保護されたペイロードの残りの部分は、 [このキーによってカプセル化](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)された暗号化機能に固有です。 次の例では、キーは AES-256-CBC + HMACSHA256 暗号化機能を表し、ペイロードはさらに次のように細分化されています。
   * 128ビットのキー修飾子。
   * 128ビットの初期化ベクター。
   * 48バイトの AES-256-CBC 出力。

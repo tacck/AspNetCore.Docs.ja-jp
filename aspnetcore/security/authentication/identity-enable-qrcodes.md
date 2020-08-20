@@ -5,6 +5,7 @@ description: ASP.NET Core 2 要素認証で動作する TOTP authenticator ア�
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 4ccfd83c273f7179ac26b075eb33f138e724b967
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e61aa925262fc9fe25c7bb2d37958cfaa308aeaf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019561"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630797"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>ASP.NET Core での TOTP authenticator アプリの QR コード生成を有効にする
 
@@ -34,13 +35,13 @@ QR コードには ASP.NET Core 2.0 以降が必要です。
 
 ASP.NET Core には、個々の認証用の authenticator アプリケーションのサポートが付属しています。 2要素認証 (2FA) 認証アプリは、時間ベースのワンタイムパスワードアルゴリズム (TOTP) を使用して、2FA に業界で推奨されるアプローチです。 TOTP を使用した2FA は、SMS 2FA に適しています。 Authenticator アプリには、ユーザー名とパスワードを確認した後に入力する必要がある 6 ~ 8 桁のコードが用意されています。 通常、認証アプリはスマートフォンにインストールされます。
 
-ASP.NET Core web アプリテンプレートでは認証子がサポートされていますが、QRCode の生成はサポートされていません。 QRCode ジェネレーターにより、2FA のセットアップが簡単になります。 このドキュメントでは、[2FA] 構成ページに[QR コード](https://wikipedia.org/wiki/QR_code)生成を追加する手順について説明します。
+ASP.NET Core web アプリテンプレートでは認証子がサポートされていますが、QRCode の生成はサポートされていません。 QRCode ジェネレーターにより、2FA のセットアップが簡単になります。 このドキュメントでは、[2FA] 構成ページに [QR コード](https://wikipedia.org/wiki/QR_code) 生成を追加する手順について説明します。
 
-[Google](xref:security/authentication/google-logins)や[Facebook](xref:security/authentication/facebook-logins)などの外部認証プロバイダーを使用した場合、2要素認証は行われません。 外部ログインは、外部ログインプロバイダーによって提供されるメカニズムによって保護されます。 たとえば、 [Microsoft](xref:security/authentication/microsoft-logins)認証プロバイダーでは、ハードウェアキーまたは別の2fa アプローチが必要です。 既定のテンプレートで "ローカル" 2FA が適用されている場合は、ユーザーは2つの2FA アプローチを満たす必要があります。これは、一般的には使用されないシナリオです。
+[Google](xref:security/authentication/google-logins)や[Facebook](xref:security/authentication/facebook-logins)などの外部認証プロバイダーを使用した場合、2要素認証は行われません。 外部ログインは、外部ログインプロバイダーによって提供されるメカニズムによって保護されます。 たとえば、 [Microsoft](xref:security/authentication/microsoft-logins) 認証プロバイダーでは、ハードウェアキーまたは別の2fa アプローチが必要です。 既定のテンプレートで "ローカル" 2FA が適用されている場合は、ユーザーは2つの2FA アプローチを満たす必要があります。これは、一般的には使用されないシナリオです。
 
 ## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a>2FA 構成ページへの QR コードの追加
 
-この手順では、リポジトリの*qrcode.js*を使用し https://davidshimjs.github.io/qrcodejs/ ます。
+この手順では、リポジトリの *qrcode.js* を使用し https://davidshimjs.github.io/qrcodejs/ ます。
 
 * [qrcode.js javascript ライブラリ](https://davidshimjs.github.io/qrcodejs/)を `wwwroot\lib` プロジェクトのフォルダーにダウンロードします。
 
@@ -49,7 +50,7 @@ ASP.NET Core web アプリテンプレートでは認証子がサポートされ
 ::: moniker range=">= aspnetcore-2.1"
 
 * [ Identity スキャフォールディング](xref:security/authentication/scaffold-identity)に記載されている手順に従って、/Areas//を生成します。 * Identity *
-* /Areas/で、ファイルの最後にあるセクションを見つけます (& a)。この場合は、次の手順を* Identity * `Scripts` 実行します。
+* /Areas/で、ファイルの最後にあるセクションを見つけます (& a)。この場合は、次の手順を * Identity * `Scripts` 実行します。
 
 ::: moniker-end
 
@@ -101,7 +102,7 @@ QR コードのサイト名は、プロジェクトを最初に作成すると�
 
 ::: moniker range="= aspnetcore-2.0"
 
-QR コードのサイト名は、プロジェクトを最初に作成するときに選択したプロジェクト名から取得されます。 これを変更するには `GenerateQrCodeUri(string email, string unformattedKey)` 、 *Pages/Account/Manage/enableauthenticator. cshtml* ( Razor pages) ファイルまたは*Controllers/ManageController* (MVC) ファイルのメソッドを検索します。
+QR コードのサイト名は、プロジェクトを最初に作成するときに選択したプロジェクト名から取得されます。 これを変更するには `GenerateQrCodeUri(string email, string unformattedKey)` 、 *Pages/Account/Manage/enableauthenticator. cshtml* ( Razor pages) ファイルまたは *Controllers/ManageController* (MVC) ファイルのメソッドを検索します。
 
 ::: moniker-end
 
@@ -128,8 +129,8 @@ QR コードライブラリを任意のライブラリに置き換えること�
 
 QR コード用に正しく書式設定された URL は、で入手できます。
 
-* `AuthenticatorUri`モデルのプロパティ。
-* `data-url`要素のプロパティ `qrCodeData` 。
+* `AuthenticatorUri` モデルのプロパティ。
+* `data-url` 要素のプロパティ `qrCodeData` 。
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP クライアントとサーバーの時刻のずれ
 

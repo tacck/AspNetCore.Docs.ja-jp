@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,27 +17,27 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020939"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630667"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core のメモリ管理とガベージコレクション (GC)
 
 [Sébastien Ros](https://github.com/sebastienros)と[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-メモリ管理は、.NET などのマネージフレームワークでも複雑です。 メモリの問題を分析して理解することは困難な場合があります。 この記事の内容は次のとおりです。
+メモリ管理は、.NET などのマネージフレームワークでも複雑です。 メモリの問題を分析して理解することは困難な場合があります。 この記事の内容:
 
-* 多くの*メモリリークが発生*し、GC が動作して*いない*問題が発生しました。 これらの問題のほとんどは、.NET Core でのメモリ消費のしくみを理解していないか、測定方法を理解していないことによって発生しました。
+* 多くの *メモリリークが発生* し、GC が動作して *いない* 問題が発生しました。 これらの問題のほとんどは、.NET Core でのメモリ消費のしくみを理解していないか、測定方法を理解していないことによって発生しました。
 * 問題のあるメモリ使用方法を示し、別のアプローチを提案します。
 
 ## <a name="how-garbage-collection-gc-works-in-net-core"></a>.NET Core でのガベージコレクション (GC) のしくみ
 
 GC は、各セグメントが連続するメモリ範囲であるヒープセグメントを割り当てます。 ヒープに配置されたオブジェクトは、0、1、または2の3つのジェネレーションに分類されます。 生成によって、アプリケーションによって参照されなくなったマネージオブジェクトのメモリを GC が解放する頻度が決まります。 下位の番号付きジェネレーションは、GC の方が頻繁に行われます。
 
-オブジェクトは、有効期間に基づいて、ある世代から別の世代に移動されます。 オブジェクトが長くなると、オブジェクトは上位世代に移動されます。 既に説明したように、より高い世代は GC の方が頻繁に発生します。 短期有効期間オブジェクトは常にジェネレーション0に残ります。 たとえば、web 要求の有効期間中に参照されるオブジェクトは、短時間で終了します。 一般に、アプリケーションレベル[シングルトン](xref:fundamentals/dependency-injection#service-lifetimes)は第2世代に移行します。
+オブジェクトは、有効期間に基づいて、ある世代から別の世代に移動されます。 オブジェクトが長くなると、オブジェクトは上位世代に移動されます。 既に説明したように、より高い世代は GC の方が頻繁に発生します。 短期有効期間オブジェクトは常にジェネレーション0に残ります。 たとえば、web 要求の有効期間中に参照されるオブジェクトは、短時間で終了します。 一般に、アプリケーションレベル [シングルトン](xref:fundamentals/dependency-injection#service-lifetimes) は第2世代に移行します。
 
 ASP.NET Core アプリが開始されると、GC は次のようになります。
 
@@ -139,7 +140,7 @@ public ActionResult<string> GetBigString()
 * **WORKSTATION GC**: デスクトップ用に最適化されています。
 * **サーバー GC**。 ASP.NET Core アプリの既定の GC。 サーバーに合わせて最適化されます。
 
-GC モードは、プロジェクトファイルまたは発行されたアプリの*runtimeconfig.js*ファイルで明示的に設定できます。 次のマークアップは、プロジェクトファイルの設定を示してい `ServerGarbageCollection` ます。
+GC モードは、プロジェクトファイルまたは発行されたアプリの *runtimeconfig.js* ファイルで明示的に設定できます。 次のマークアップは、プロジェクトファイルの設定を示してい `ServerGarbageCollection` ます。
 
 ```xml
 <PropertyGroup>
@@ -149,7 +150,7 @@ GC モードは、プロジェクトファイルまたは発行されたアプ�
 
 プロジェクトファイルでを変更するに `ServerGarbageCollection` は、アプリを再構築する必要があります。
 
-**注:** サーバーのガベージコレクションは、コアが1つのマシンでは使用でき**ません**。 詳細については、「<xref:System.Runtime.GCSettings.IsServerGC>」を参照してください。
+**注:** サーバーのガベージコレクションは、コアが1つのマシンでは使用でき **ません** 。 詳細については、<xref:System.Runtime.GCSettings.IsServerGC> を参照してください。
 
 次の図は、ワークステーション GC を使用した 5K RPS のメモリプロファイルを示しています。
 
@@ -167,7 +168,7 @@ GC モードは、プロジェクトファイルまたは発行されたアプ�
 
 ### <a name="gc-using-docker-and-small-containers"></a>ドッカーと小さなコンテナを使用した GC
 
-1台のコンピューターで複数のコンテナー化されたアプリが実行されている場合、ワークステーションの GC はサーバー GC よりも preformant になる可能性があります。 詳細については、「[小さなコンテナーでのサーバー gc の実行](https://devblogs.microsoft.com/dotnet/running-with-server-gc-in-a-small-container-scenario-part-0/)」と「[小さなコンテナーシナリオでサーバー gc を使用して実行する (パート 1-Gc ヒープのハードリミット)](https://devblogs.microsoft.com/dotnet/running-with-server-gc-in-a-small-container-scenario-part-1-hard-limit-for-the-gc-heap/)」を参照してください。
+1台のコンピューターで複数のコンテナー化されたアプリが実行されている場合、ワークステーションの GC はサーバー GC よりも preformant になる可能性があります。 詳細については、「 [小さなコンテナーでのサーバー gc の実行](https://devblogs.microsoft.com/dotnet/running-with-server-gc-in-a-small-container-scenario-part-0/) 」と「 [小さなコンテナーシナリオでサーバー gc を使用して実行する (パート 1-Gc ヒープのハードリミット)](https://devblogs.microsoft.com/dotnet/running-with-server-gc-in-a-small-container-scenario-part-1-hard-limit-for-the-gc-heap/)」を参照してください。
 
 ### <a name="persistent-object-references"></a>永続的なオブジェクト参照
 
@@ -204,7 +205,7 @@ public ActionResult<string> GetStaticString()
 
 ### <a name="native-memory"></a>ネイティブメモリ
 
-.NET Core オブジェクトの中には、ネイティブメモリに依存しているものがあります。 GC でネイティブメモリを収集することはでき**ません**。 ネイティブメモリを使用している .NET オブジェクトは、ネイティブコードを使用して解放する必要があります。
+.NET Core オブジェクトの中には、ネイティブメモリに依存しているものがあります。 GC でネイティブメモリを収集することはでき **ません** 。 ネイティブメモリを使用している .NET オブジェクトは、ネイティブコードを使用して解放する必要があります。
 
 .NET には、 <xref:System.IDisposable> 開発者がネイティブメモリを解放できるようにするインターフェイスが用意されています。 <xref:System.IDisposable.Dispose*>が呼び出されていない場合でも、 `Dispose` [ファイナライザー](/dotnet/csharp/programming-guide/classes-and-structs/destructors)の実行時に、正しく実装されたクラスが呼び出されます。
 
@@ -219,13 +220,13 @@ public void GetFileProvider()
 }
 ```
 
-[Physicalfileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0)はマネージクラスであるため、すべてのインスタンスが要求の最後に収集されます。
+[Physicalfileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) はマネージクラスであるため、すべてのインスタンスが要求の最後に収集されます。
 
 次の図は、API を継続的に呼び出すときのメモリプロファイルを示して `fileprovider` います。
 
 ![前のグラフ](memory/_static/fileprovider.png)
 
-前のグラフは、このクラスの実装に関する明らかな問題を示しています。これは、メモリ使用量が増加し続けるためです。 これは、[この問題](https://github.com/dotnet/aspnetcore/issues/3110)で追跡されている既知の問題です。
+前のグラフは、このクラスの実装に関する明らかな問題を示しています。これは、メモリ使用量が増加し続けるためです。 これは、 [この問題](https://github.com/dotnet/aspnetcore/issues/3110)で追跡されている既知の問題です。
 
 次のいずれかの方法で、ユーザーコードで同じリークが発生する可能性があります。
 
@@ -234,7 +235,7 @@ public void GetFileProvider()
 
 ### <a name="large-objects-heap"></a>ラージオブジェクトヒープ
 
-メモリの割り当てや空きサイクルが頻繁に発生する場合は、特にメモリの大量のチャンクを割り当てるときにメモリをフラグメント化できます。 オブジェクトは、連続したメモリブロックで割り当てられます。 断片化を軽減するために、GC によってメモリが解放されると、断片化が解消されます。 このプロセスは、**圧縮**と呼ばれます。 圧縮には、オブジェクトの移動が含まれます。 大きなオブジェクトを移動すると、パフォーマンスが低下します。 このため、GC は大きなオブジェクト[ヒープ](/dotnet/standard/garbage-collection/large-object-heap)(LOH) と呼ばれる_大きな_オブジェクト用に特別なメモリゾーンを作成します。 85000バイトを超えるオブジェクト (約 83 KB) は次のとおりです。
+メモリの割り当てや空きサイクルが頻繁に発生する場合は、特にメモリの大量のチャンクを割り当てるときにメモリをフラグメント化できます。 オブジェクトは、連続したメモリブロックで割り当てられます。 断片化を軽減するために、GC によってメモリが解放されると、断片化が解消されます。 このプロセスは、 **圧縮**と呼ばれます。 圧縮には、オブジェクトの移動が含まれます。 大きなオブジェクトを移動すると、パフォーマンスが低下します。 このため、GC は大きなオブジェクト[ヒープ](/dotnet/standard/garbage-collection/large-object-heap)(LOH) と呼ばれる_大きな_オブジェクト用に特別なメモリゾーンを作成します。 85000バイトを超えるオブジェクト (約 83 KB) は次のとおりです。
 
 * LOH に配置されます。
 * 圧縮されていません。
@@ -284,14 +285,14 @@ public int GetLOH1(int size)
 
 一時的なラージオブジェクトは、gen2 Gc を引き起こすため、特に問題になります。
 
-最大のパフォーマンスを向上させるには、大きなオブジェクトの使用を最小限にする必要があります。 可能であれば、大きなオブジェクトを分割します。 たとえば、ASP.NET Core の[応答キャッシュ](xref:performance/caching/response)ミドルウェアでは、キャッシュエントリが85000バイト未満のブロックに分割されます。
+最大のパフォーマンスを向上させるには、大きなオブジェクトの使用を最小限にする必要があります。 可能であれば、大きなオブジェクトを分割します。 たとえば、ASP.NET Core の [応答キャッシュ](xref:performance/caching/response) ミドルウェアでは、キャッシュエントリが85000バイト未満のブロックに分割されます。
 
 次のリンクでは、オブジェクトを LOH の制限下に維持するための ASP.NET Core アプローチについて説明します。
 
 * [ResponseCaching/Streams/StreamUtilities .cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-詳細については次を参照してください:
+詳細については、次を参照してください。
 
 * [大きなオブジェクトヒープが漏れています](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [大きなオブジェクトヒープ](/dotnet/standard/garbage-collection/large-object-heap)
@@ -305,9 +306,9 @@ public int GetLOH1(int size)
 
 経験豊富な .NET 開発者は、を <xref:System.IDisposable.Dispose*> 実装するオブジェクトに対してを呼び出すことがわかって <xref:System.IDisposable> います。 を実装するオブジェクトを破棄 `IDisposable` しないと、メモリリークやシステムリソースのリークが発生します。
 
-`HttpClient`は `IDisposable` を実装しますが、すべての呼び出しで破棄することはでき**ません**。 代わりに、を `HttpClient` 再利用する必要があります。
+`HttpClient` は `IDisposable` を実装しますが、すべての呼び出しで破棄することはでき **ません** 。 代わりに、を `HttpClient` 再利用する必要があります。
 
-次のエンドポイントは、 `HttpClient` すべての要求に対して新しいインスタンスを作成し、破棄します。
+次のエンドポイントは、  `HttpClient` すべての要求に対して新しいインスタンスを作成し、破棄します。
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -335,7 +336,7 @@ System.Net.Http.HttpRequestException: Only one usage of each socket address
     CancellationToken cancellationToken)
 ```
 
-`HttpClient`インスタンスが破棄されている場合でも、オペレーティングシステムによって実際のネットワーク接続が解放されるまでに時間がかかります。 新しい接続を継続的に作成することで、_ポートの枯渇_が発生します。 各クライアント接続には、独自のクライアントポートが必要です。
+`HttpClient`インスタンスが破棄されている場合でも、オペレーティングシステムによって実際のネットワーク接続が解放されるまでに時間がかかります。 新しい接続を継続的に作成することで、 _ポートの枯渇_ が発生します。 各クライアント接続には、独自のクライアントポートが必要です。
 
 ポートの枯渇を防ぐ方法の1つは、同じインスタンスを再利用することです `HttpClient` 。
 
@@ -368,7 +369,7 @@ public async Task<int> GetHttpClient2(string url)
 
 プールは、スレッド間で予約および解放できる事前に初期化されたオブジェクトのコレクションです。 プールでは、制限、事前定義されたサイズ、増加率などの割り当てルールを定義できます。
 
-NuGet パッケージの[Microsoft extension. ObjectPool](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/)には、このようなプールの管理に役立つクラスが含まれています。
+NuGet パッケージの [Microsoft extension. ObjectPool](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/) には、このようなプールの管理に役立つクラスが含まれています。
 
 次の API エンドポイントは、 `byte` 各要求に対してランダムな数値を格納するバッファーをインスタンス化します。
 
@@ -400,9 +401,9 @@ NuGet パッケージの[Microsoft extension. ObjectPool](https://www.nuget.org/
 オブジェクトの破棄を設定するには、次のようにします。
 
 * プールされた配列を破棄可能なオブジェクトにカプセル化します。
-* プールされたオブジェクトを[httpcontext.current](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)に登録します。
+* プールされたオブジェクトを [httpcontext.current](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)に登録します。
 
-`RegisterForDispose`は、 `Dispose` HTTP 要求が完了したときにのみ解放されるように、ターゲットオブジェクトでを呼び出すことを処理します。
+`RegisterForDispose` は、 `Dispose` HTTP 要求が完了したときにのみ解放されるように、ターゲットオブジェクトでを呼び出すことを処理します。
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();
