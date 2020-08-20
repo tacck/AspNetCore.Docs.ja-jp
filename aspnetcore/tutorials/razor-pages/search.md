@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 6�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: b28d228449549e1071df4100ee2d52626c50845b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e899929372697f7a381cd493655309fa3f70f79
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021641"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633852"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>パート 6、ASP.NET Core Razor ページへの検索の追加
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: bb29001e30578e0992e578c2f98cda82c5dcf185
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e03711d970c83c2b7d6cc76039cb0d556a751018
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018664"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628912"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー
 
@@ -455,7 +456,7 @@ John が Edit ページの **[保存]** をクリックします。このとき�
 
 ### <a name="detecting-concurrency-conflicts-on-a-row"></a>行のコンカレンシーの競合の検出
 
-コンカレンシーの競合を検出するために、モデルに [rowversion](/sql/t-sql/data-types/rowversion-transact-sql) 追跡列が追加されました。  `rowversion` は、次のとおりです。
+コンカレンシーの競合を検出するために、モデルに [rowversion](/sql/t-sql/data-types/rowversion-transact-sql) 追跡列が追加されました。  `rowversion` :
 
 * SQL Server 専用です。 他のデータベースには、似たような機能がない場合があります。
 * データベースからフェッチされた以降、エンティティに変更がないことを決定するために使用されます。 

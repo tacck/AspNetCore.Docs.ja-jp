@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 5�
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: d8f1a256bfa3491ff1cc7f38a23c61beb719bd49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022096"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632799"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>パート 5、ASP.NET Core アプリでの生成済みページの更新
 

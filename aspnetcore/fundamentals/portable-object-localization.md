@@ -5,6 +5,7 @@ description: この記事では、Portable Object (PO) ファイルについて�
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 1c60f98ce08c5282986f688487339d378f28aaf7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3919909067593a93384661b37d67bf2d90cd7df8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016805"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634528"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core で Portable Object のローカライズを構成する
 

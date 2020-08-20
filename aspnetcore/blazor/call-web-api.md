@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/24/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: ef31d3d9b3914f3c86aa397ff214778fe295964b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: cffd9e33636f98d50300de851d696ae753c10a0d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012587"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625337"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor から Web API を呼び出す
 
@@ -42,7 +43,7 @@ ms.locfileid: "88012587"
 
 ## <a name="packages"></a>パッケージ
 
-プロジェクト ファイルで [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet パッケージを参照します。
+プロジェクト ファイルで [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) NuGet パッケージを参照します。
 
 ## <a name="add-the-httpclient-service"></a>HttpClient サービスを追加する
 
@@ -186,7 +187,7 @@ JSON のヘルパー メソッドは、要求を URI (次の例では Web API) �
 
 <xref:System.Net.Http.IHttpClientFactory> サービスおよび名前付き <xref:System.Net.Http.HttpClient> の構成がサポートされています。
 
-プロジェクト ファイルで [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet パッケージを参照します。
+プロジェクト ファイルで [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) NuGet パッケージを参照します。
 
 `Program.Main` (`Program.cs`):
 
