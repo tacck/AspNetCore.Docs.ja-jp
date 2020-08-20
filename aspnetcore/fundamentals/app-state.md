@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: c05129c0f239fb28c83ab1c561dd910305eeb54b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 95035ec372ab6adb5bafb40f2b939c549ac6f839
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017637"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633813"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
 
@@ -239,7 +240,7 @@ cookie ベース TempData プロバイダーは既定で有効になります。
 
 限られた量のデータを要求間で渡すことができます。新しい要求のクエリ文字列にそれを追加します。 これは、リンクと埋め込まれた状態がメールまたはソーシャル ネットワークを通して共有されるよう、永久的に状態をキャプチャするのに役立ちます。 URL クエリ文字列はパブリックであるため、機密データにはクエリ文字列を使わないでください。
 
-意図しない共有に加えて、クエリ文字列にデータを含めると、アプリが[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃に晒される可能性があります。 保存されたセッション状態を CSRF 攻撃から保護する必要があります。 詳細については、「[Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks](xref:security/anti-request-forgery)」(クロスサイト リクエスト フォージェリ (XSRF/CSRF) 攻撃の防止) を参照してください。
+意図しない共有に加えて、クエリ文字列にデータを含めると、アプリが[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃に晒される可能性があります。 保存されたセッション状態を CSRF 攻撃から保護する必要があります。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 ## <a name="hidden-fields"></a>非表示フィールド
 
@@ -502,7 +503,7 @@ cookie ベース TempData プロバイダーは既定で有効になります。
 
 限られた量のデータを要求間で渡すことができます。新しい要求のクエリ文字列にそれを追加します。 これは、リンクと埋め込まれた状態がメールまたはソーシャル ネットワークを通して共有されるよう、永久的に状態をキャプチャするのに役立ちます。 URL クエリ文字列はパブリックであるため、機密データにはクエリ文字列を使わないでください。
 
-意図しない共有が発生するだけでなく、クエリ文字列にデータを含めると、[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃の機会を与えてしまいます。認証中、ユーザーをだまして悪意のあるサイトに誘導します。 攻撃者はアプリからユーザー データを盗んだり、ユーザーになりすまして悪意のある行為を行ったりできます。 保存されるアプリまたはセッション状態は CSRF 攻撃を防ぐ必要があります。 詳細については、「[Prevent Cross-Site Request Forgery (XSRF/CSRF) attacks](xref:security/anti-request-forgery)」(クロスサイト リクエスト フォージェリ (XSRF/CSRF) 攻撃の防止) を参照してください。
+意図しない共有が発生するだけでなく、クエリ文字列にデータを含めると、[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃の機会を与えてしまいます。認証中、ユーザーをだまして悪意のあるサイトに誘導します。 攻撃者はアプリからユーザー データを盗んだり、ユーザーになりすまして悪意のある行為を行ったりできます。 保存されるアプリまたはセッション状態は CSRF 攻撃を防ぐ必要があります。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 ## <a name="hidden-fields"></a>非表示フィールド
 

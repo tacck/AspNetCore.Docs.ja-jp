@@ -5,6 +5,7 @@ description: 'パート 6: ASP.NET Core MVC アプリにモデルを追加する
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021069"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632838"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>パート 6: ASP.NET Core のコントローラーのメソッドとビュー
 
@@ -110,7 +111,7 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
-[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)で生成される非表示のフォージェリ対策トークンは、Movies コントローラーの `Edit` メソッドで `[ValidateAntiForgeryToken]` によって生成されるフォージェリ対策トークンと一致している必要があります。 詳しくは、[リクエスト フォージェリの対策に関する記事](xref:security/anti-request-forgery)をご覧ください。
+[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)で生成される非表示のフォージェリ対策トークンは、Movies コントローラーの `Edit` メソッドで `[ValidateAntiForgeryToken]` によって生成されるフォージェリ対策トークンと一致している必要があります。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 `HttpGet Edit` メソッドは、ムービーの `ID` パラメーターを受け取り、Entity Framework の `FindAsync` メソッドを使ってムービーを検索して、選択されたムービーを編集ビューに返します。 ムービーが見つからない場合は、`NotFound` (HTTP 404) が返されます。
 
@@ -161,7 +162,7 @@ Movie コントローラーのすべての `HttpGet` メソッドは、同様の
 * [グローバライズとローカライズ](xref:fundamentals/localization)
 * [Tag Helpers の概要](xref:mvc/views/tag-helpers/intro)
 * [タグ ヘルパーの作成](xref:mvc/views/tag-helpers/authoring)
-* [リクエスト フォージェリの対策](xref:security/anti-request-forgery)
+* <xref:security/anti-request-forgery>
 * [オーバーポスティング攻撃](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)からのコントローラーの保護
 * [ViewModel](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)

@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2c71ea0eaccf4daeb8937dd5839481a506864fbe
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012853"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629211"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>チュートリアル: CRUD 機能を実装する - ASP.NET MVC と EF Core
 
@@ -130,7 +131,7 @@ Index ページでは、Razor ビューのタグ ヘルパーのステートメ�
 
 `Bind` 属性以外では、スキャフォールディングされたコードに対して行った変更は try-catch ブロックだけです。 変更を保存するときに、`DbUpdateException` から派生した例外がキャッチされた場合は、汎用的なエラー メッセージが表示されます。 `DbUpdateException` 例外は、プログラミング エラーではなくアプリケーション外の何かが原因で発生する場合があるので、再試行することをお勧めします。 このサンプルでは実装されていませんが、運用品質のアプリケーションでは例外をログに記録します。 詳細については、「[Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)」(監視とテレメトリ (Azure での実際のクラウド アプリの構築)) の「**Log for insight**」(洞察のためのログ) セクションをご覧ください。
 
-`ValidateAntiForgeryToken` 属性は、クロスサイト リクエスト フォージェリ (CSRF) 攻撃を防ぐのに役立ちます。 トークンは、[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) によってビューに自動的に挿入され、ユーザーがフォームを送信するときに追加されます。 トークンは、`ValidateAntiForgeryToken` 属性によって検証されます。 CSRF については、[リクエスト フォージェリの対策](../../security/anti-request-forgery.md)に関する記事をご覧ください。
+`ValidateAntiForgeryToken` 属性は、クロスサイト リクエスト フォージェリ (CSRF) 攻撃を防ぐのに役立ちます。 トークンは、[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) によってビューに自動的に挿入され、ユーザーがフォームを送信するときに追加されます。 トークンは、`ValidateAntiForgeryToken` 属性によって検証されます。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 <a id="overpost"></a>
 
