@@ -6,6 +6,7 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019158"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633982"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core でのモデル バインド
 
@@ -65,7 +66,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 
 上記の例で、モデル バインディング ターゲットは単純型のメソッド パラメーターになっています。 ターゲットは複合型のプロパティになる場合もあります。 各プロパティが正常にバインドされたら、そのプロパティに対して[モデル検証](xref:mvc/models/validation)が行われます。 どのようなデータがモデルにバインドされているかを示す記録、バインド エラー、または検証のエラーは、[ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) または [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) に格納されます。 このプロセスが正常終了したかどうかを確認するために、アプリでは [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) フラグが調べられます。
 
-## <a name="targets"></a>ターゲット
+## <a name="targets"></a>対象サーバー
 
 モデル バインドでは、次の種類のターゲットの値について検索が試みられます。
 
@@ -108,11 +109,11 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 既定のソースが正しくない場合は、次のいずれかの属性を使用してソースを指定します。
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-クエリ文字列から値を取得します。 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-ルートデータから値を取得します。
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-ポストされたフォームフィールドから値を取得します。
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-要求本文から値を取得します。
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-HTTP ヘッダーから値を取得します。
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -クエリ文字列から値を取得します。 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -ルートデータから値を取得します。
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -ポストされたフォームフィールドから値を取得します。
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) -要求本文から値を取得します。
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -HTTP ヘッダーから値を取得します。
 
 これらの属性: 
 
@@ -163,7 +164,7 @@ public class Pet
 * `IValueProviderFactory` を実装するクラスを作成します。
 * `Startup.ConfigureServices` 内のファクトリ クラスを登録します。
 
-サンプルアプリには、s から値を取得する[値プロバイダー](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs)と[ファクトリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs)の例が含まれてい cookie ます。 `Startup.ConfigureServices` 内の登録コードを次に示します。
+サンプルアプリには、s から値を取得する [値プロバイダー](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) と [ファクトリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) の例が含まれてい cookie ます。 `Startup.ConfigureServices` 内の登録コードを次に示します。
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -210,13 +211,13 @@ public class Pet
 * [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
-* [GUID](xref:System.ComponentModel.GuidConverter)
+* [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter)、[UInt32](xref:System.ComponentModel.UInt32Converter)、[UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [[バージョン]](xref:System.ComponentModel.VersionConverter)
+* [Version](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>複合型
 
@@ -273,30 +274,16 @@ public IActionResult OnPost(
 
 複合型のモデル バインドを制御するために利用できる組み込みの属性がいくつかあります。
 
+* `[Bind]`
 * `[BindRequired]`
 * `[BindNever]`
-* `[Bind]`
 
-> [!NOTE]
-> ポストされたフォーム データが値のソースである場合、これらの属性はモデル バインドに影響します。 ポストされた JSON および XML 要求本文を処理する入力フォーマッタには影響しません。 入力フォーマッタについては、[この記事で後ほど](#input-formatters)説明します。
->
-> [モデル検証](xref:mvc/models/validation#required-attribute)に関するページにある `[Required]` 属性の説明も参照してください。
-
-### <a name="bindrequired-attribute"></a>[BindRequired] 属性
-
-モデルのプロパティにのみに適用でき、メソッドのパラメーターには適用できません。 モデルのプロパティに対してバインドを実行できない場合に、モデル バインドがモデル状態エラーを追加できるようにします。 次に例を示します。
-
-[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
-
-### <a name="bindnever-attribute"></a>[BindNever] 属性
-
-モデルのプロパティにのみに適用でき、メソッドのパラメーターには適用できません。 モデル バインドがモデルのプロパティを設定できないようにします。 次に例を示します。
-
-[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+> [!WARNING]
+> ポストされたフォーム データが値のソースである場合、これらの属性はモデル バインドに影響します。 これらは、ポストされた JSON および XML 要求本文を処理する入力フォーマッタには影響し ***ません*** 。 入力フォーマッタについては、[この記事で後ほど](#input-formatters)説明します。
 
 ### <a name="bind-attribute"></a>[Bind] 属性
 
-クラスまたはメソッド パラメーターに適用できます。 モデルのどのプロパティをモデル バインドに含めるかを指定します。
+クラスまたはメソッド パラメーターに適用できます。 モデルのどのプロパティをモデル バインドに含めるかを指定します。 `[Bind]` 入力フォーマッタには影響し ***ません*** 。
 
 次の例では、任意のハンドラーまたはアクション メソッドが呼び出されると、`Instructor` モデルの指定されたプロパティのみがバインドされます。
 
@@ -314,9 +301,23 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 `[Bind]` 属性を使用すれば、"*作成*" シナリオにおいて過剰ポスティングから保護することができます。 除外されたプロパティはそのままにしておくのではなく null または既定値に設定されるので、この属性は編集シナリオではうまく機能しません。 過剰ポスティングを防ぐ場合は、`[Bind]` 属性ではなくビュー モデルをお勧めします。 詳細については、「[過剰ポスティングに関するセキュリティの注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)」を参照してください。
 
+### <a name="bindrequired-attribute"></a>[BindRequired] 属性
+
+モデルのプロパティにのみに適用でき、メソッドのパラメーターには適用できません。 モデルのプロパティに対してバインドを実行できない場合に、モデル バインドがモデル状態エラーを追加できるようにします。 次に例を示します。
+
+[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
+
+[モデル検証](xref:mvc/models/validation#required-attribute)に関するページにある `[Required]` 属性の説明も参照してください。
+
+### <a name="bindnever-attribute"></a>[BindNever] 属性
+
+モデルのプロパティにのみに適用でき、メソッドのパラメーターには適用できません。 モデル バインドがモデルのプロパティを設定できないようにします。 次に例を示します。
+
+[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+
 ## <a name="collections"></a>コレクション
 
-ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例:
+ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
 * バインドされるパラメーターが `selectedCourses` という名前の配列であるとした場合: 
 
@@ -361,7 +362,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>ディクショナリ
 
-`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例:
+`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
 * ターゲット パラメーターが `selectedCourses` という名前の `Dictionary<int, string>` であるとします: 
 
@@ -551,7 +552,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 
 上記の例で、モデル バインディング ターゲットは単純型のメソッド パラメーターになっています。 ターゲットは複合型のプロパティになる場合もあります。 各プロパティが正常にバインドされたら、そのプロパティに対して[モデル検証](xref:mvc/models/validation)が行われます。 どのようなデータがモデルにバインドされているかを示す記録、バインド エラー、または検証のエラーは、[ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) または [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) に格納されます。 このプロセスが正常終了したかどうかを確認するために、アプリでは [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) フラグが調べられます。
 
-## <a name="targets"></a>ターゲット
+## <a name="targets"></a>対象サーバー
 
 モデル バインドでは、次の種類のターゲットの値について検索が試みられます。
 
@@ -594,11 +595,11 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 既定のソースが正しくない場合は、次のいずれかの属性を使用してソースを指定します。
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-クエリ文字列から値を取得します。 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-ルートデータから値を取得します。
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-ポストされたフォームフィールドから値を取得します。
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-要求本文から値を取得します。
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-HTTP ヘッダーから値を取得します。
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -クエリ文字列から値を取得します。 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -ルートデータから値を取得します。
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -ポストされたフォームフィールドから値を取得します。
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) -要求本文から値を取得します。
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -HTTP ヘッダーから値を取得します。
 
 これらの属性: 
 
@@ -649,7 +650,7 @@ public class Pet
 * `IValueProviderFactory` を実装するクラスを作成します。
 * `Startup.ConfigureServices` 内のファクトリ クラスを登録します。
 
-サンプルアプリには、s から値を取得する[値プロバイダー](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs)と[ファクトリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs)の例が含まれてい cookie ます。 `Startup.ConfigureServices` 内の登録コードを次に示します。
+サンプルアプリには、s から値を取得する [値プロバイダー](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) と [ファクトリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) の例が含まれてい cookie ます。 `Startup.ConfigureServices` 内の登録コードを次に示します。
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
@@ -696,13 +697,13 @@ public class Pet
 * [Decimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
-* [GUID](xref:System.ComponentModel.GuidConverter)
+* [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter)、[Int32](xref:System.ComponentModel.Int32Converter)、[Int64](xref:System.ComponentModel.Int64Converter)
 * [Single](xref:System.ComponentModel.SingleConverter)
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter)、[UInt32](xref:System.ComponentModel.UInt32Converter)、[UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [[バージョン]](xref:System.ComponentModel.VersionConverter)
+* [Version](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>複合型
 
@@ -802,7 +803,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>コレクション
 
-ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例:
+ターゲットが単純型のコレクションである場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
 * バインドされるパラメーターが `selectedCourses` という名前の配列であるとした場合: 
 
@@ -847,7 +848,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>ディクショナリ
 
-`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 例:
+`Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
 * ターゲット パラメーターが `selectedCourses` という名前の `Dictionary<int, string>` であるとします: 
 

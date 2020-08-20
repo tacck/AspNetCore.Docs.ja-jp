@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 571046052dbe131e9cdcf981aaee0921ed8c2ea1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021849"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633033"
 ---
 # <a name="use-web-api-analyzers"></a>Web API アナライザーを使用する
 
@@ -69,7 +70,7 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * [パッケージの*Packages* **Solution Pad** > **追加**] Solution Pad の [パッケージ] フォルダーを右クリックします。
-* [**パッケージの追加**] ウィンドウの [**ソース**] ドロップダウンを [nuget.org] に設定します。
+* [ **パッケージの追加** ] ウィンドウの [ **ソース** ] ドロップダウンを [nuget.org] に設定します。
 * 検索ボックスに「Microsoft.AspNetCore.Mvc.Api.Analyzers」と入力します。
 * 結果ウィンドウから "Microsoft.AspNetCore.Mvc.Api.Analyzers" パッケージを選択して、[**パッケージを追加**] をクリックします。
 

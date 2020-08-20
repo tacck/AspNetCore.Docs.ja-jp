@@ -5,6 +5,7 @@ description: RazorWeb ページにサーバーベースのコードを埋め込�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,26 +16,26 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 4b418c53535965eae6b41f3297b0c6336fb993d5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b62fcb685b1c6d0c504c685c600d0316b32d7f57
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020588"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632500"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core の構文リファレンス
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core の構文リファレンス
 
 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)、 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razorは、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml*は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル (*razor*) にもあります。
+Razor は、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml*は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル (*razor*) にもあります。
 
 ## <a name="rendering-html"></a>HTML のレンダリング
 
-既定の Razor 言語は HTML です。 マークアップから html をレンダリング Razor することは、html ファイルから html をレンダリングする場合と同じです。 ファイル*内の*HTML マークアップ Razor は、サーバーによって変更されずに表示されます。
+既定の Razor 言語は HTML です。 マークアップから html をレンダリング Razor することは、html ファイルから html をレンダリングする場合と同じです。 ファイル *内の*HTML マークアップ Razor は、サーバーによって変更されずに表示されます。
 
 ## <a name="no-locrazor-syntax"></a>Razor の構文
 
-RazorC# をサポートし、シンボルを使用して `@` HTML から c# に移行します。 RazorC# の式を評価し、HTML 出力に表示します。
+Razor C# をサポートし、シンボルを使用して `@` HTML から c# に移行します。 Razor C# の式を評価し、HTML 出力に表示します。
 
 記号の `@` 後に[ Razor 予約済みのキーワード](#razor-reserved-keywords)がある場合は、 Razor 固有のマークアップに遷移します。 それ以外の場合は、普通の C# に移行します。
 
@@ -157,9 +158,9 @@ HTML はブラウザーで次のように表示されます。
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a>Razorコードブロック
+## <a name="no-locrazor-code-blocks"></a>Razor コードブロック
 
-Razorコードブロックはで始まり `@` 、で囲まれて `{}` います。 式とは異なり、コード ブロック内の C# コードはレンダリングされません。 ビュー内のコード ブロックと式は同じスコープを共有し、次の順序で定義されます。
+Razor コードブロックはで始まり `@` 、で囲まれて `{}` います。 式とは異なり、コード ブロック内の C# コードはレンダリングされません。 ビュー内のコード ブロックと式は同じスコープを共有し、次の順序で定義されます。
 
 ```cshtml
 @{
@@ -257,7 +258,7 @@ HTML タグによって囲まれていない HTML をレンダリングするに
 
 制御構造は、コード ブロックの拡張機能です。 コード ブロックのすべての側面 (マークアップへの遷移、インライン C# ) が、次の構造にも適用されます。
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>条件`@if, else if, else, and @switch`
+### <a name="conditionals-if-else-if-else-and-switch"></a>条件 `@if, else if, else, and @switch`
 
 `@if` は、いつコードを実行するかを制御します。
 
@@ -302,7 +303,7 @@ else
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>サウンド`@for, @foreach, @while, and @do while`
+### <a name="looping-for-foreach-while-and-do-while"></a>サウンド `@for, @foreach, @while, and @do while`
 
 ループ制御ステートメントを使って、テンプレート化された HTML をレンダリングできます。 人の一覧をレンダリングするには:
 
@@ -390,7 +391,7 @@ C# では、オブジェクトを確実に破棄するために `using` オブ�
 
 ### `@lock`
 
-Razorには、次のように、重要なセクションを lock ステートメントで保護する機能があります。
+Razor には、次のように、重要なセクションを lock ステートメントで保護する機能があります。
 
 ```cshtml
 @lock (SomeLock)
@@ -399,9 +400,9 @@ Razorには、次のように、重要なセクションを lock ステートメ
 }
 ```
 
-### <a name="comments"></a>コメント
+### <a name="comments"></a>説明
 
-RazorC# および HTML コメントをサポートしています。
+Razor C# および HTML コメントをサポートしています。
 
 ```cshtml
 @{
@@ -417,7 +418,7 @@ RazorC# および HTML コメントをサポートしています。
 <!-- HTML comment -->
 ```
 
-Razorコメントは、web ページが表示される前にサーバーによって削除されます。 Razorは `@*  *@` 、を使用してコメントを区切ります。 次のコードはコメント化されているため、サーバーはどのマークアップもレンダリングしません。
+Razor コメントは、web ページが表示される前にサーバーによって削除されます。 Razor は `@*  *@` 、を使用してコメントを区切ります。 次のコードはコメント化されているため、サーバーはどのマークアップもレンダリングしません。
 
 ```cshtml
 @*
@@ -431,7 +432,7 @@ Razorコメントは、web ページが表示される前にサーバーによ�
 
 ## <a name="directives"></a>ディレクティブ
 
-Razorディレクティブは、記号の後に予約済みのキーワードを持つ暗黙的な式で表され `@` ます。 通常、ディレクティブは、ビューの解析方法を変更したり、異なる機能を有効にしたりします。
+Razor ディレクティブは、記号の後に予約済みのキーワードを持つ暗黙的な式で表され `@` ます。 通常、ディレクティブは、ビューの解析方法を変更したり、異なる機能を有効にしたりします。
 
 が Razor ビューのコードを生成する方法を理解すると、ディレクティブのしくみを理解しやすくなります。
 
@@ -453,7 +454,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-この記事の後半で、「 [ Razor ビューに対して生成された C# クラスを調べる](#inspect-the-razor-c-class-generated-for-a-view)」セクションでは、この生成されたクラスを表示する方法について説明します。
+この記事の後半で、「 [ Razor ビューに対して生成された C# クラスを調べる](#inspect-the-razor-c-class-generated-for-a-view) 」セクションでは、この生成されたクラスを表示する方法について説明します。
 
 ### `@attribute`
 
@@ -497,7 +498,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ::: moniker-end
 
-例:
+次に例を示します。
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -603,7 +604,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ### `@inject`
 
-ディレクティブを使用すると、サービス `@inject` Razor [コンテナー](xref:fundamentals/dependency-injection)からビューにサービスを挿入できます。 詳しくは、「[ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)」をご覧ください。
+ディレクティブを使用すると、サービス `@inject` Razor [コンテナー](xref:fundamentals/dependency-injection) からビューにサービスを挿入できます。 詳しくは、「[ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)」をご覧ください。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -611,7 +612,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-ディレクティブは、 `@layout` コンポーネントのレイアウトを指定し Razor ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、「<xref:blazor/layouts>」を参照してください。
+ディレクティブは、 `@layout` コンポーネントのレイアウトを指定し Razor ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、<xref:blazor/layouts> を参照してください。
 
 ::: moniker-end
 
@@ -643,7 +644,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「[厳密に型指定されたモデルと @model キーワード](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)」を参照してください。
+`@model` ディレクティブにより、`Model` プロパティの型が指定されます。 ディレクティブでは、ビューが派生する生成されたクラスの `T` を `RazorPage<T>` で指定します。 `@model` ディレクティブが指定されていない場合、`Model` プロパティは `dynamic` 型になります。 詳細については、「 [厳密に型指定されたモデルと @model キーワード](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)」を参照してください。
 
 ### `@namespace`
 
@@ -662,7 +663,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 * *Pages/_ViewImports.cshtml* に `@namespace Hello.World` が含まれます。
 * 各ページには、その名前空間のルートとして `Hello.World` が含まれます。
 
-| ページ                                        | 名前空間                             |
+| Page                                        | 名前空間                             |
 | ------------------------------------------- | ------------------------------------- |
 | *Pages/Index. cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
@@ -674,7 +675,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 前の例の *EvenMorePages* フォルダーに `@namespace Another.Planet` が含まれるインポート ファイルがある場合 (または、*Pages/MorePages/EvenMorePages/Page.cshtml* ファイルに `@namespace Another.Planet` が含まれる場合)、結果は次の表のようになります。
 
-| ページ                                        | 名前空間               |
+| Page                                        | 名前空間               |
 | ------------------------------------------- | ----------------------- |
 | *Pages/Index. cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
@@ -687,13 +688,13 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 `@page` ディレクティブには、それが表示されるファイルの型によって、さまざまな効果があります。 ディレクティブ:
 
 * の場合は、ファイルがページであることを示し*ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
-* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
+* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、<xref:blazor/fundamentals/routing> を参照してください。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し*ます。* Razor 詳細については、「<xref:razor-pages/index>」を参照してください。
+`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し*ます。* Razor 詳細については、<xref:razor-pages/index> を参照してください。
 
 ::: moniker-end
 
@@ -701,7 +702,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 *このシナリオは、MVC ビューおよび Razor ページ (cshtml) にのみ適用されます。*
 
-ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout)と組み合わせて使用されます。 詳細については、「<xref:mvc/views/layout>」を参照してください。
+ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout) と組み合わせて使用されます。 詳細については、<xref:mvc/views/layout> を参照してください。
 
 ### `@using`
 
@@ -719,25 +720,25 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 ## <a name="directive-attributes"></a>ディレクティブ属性
 
-Razorディレクティブ属性は、記号の後に予約済みのキーワードを使用した暗黙的な式によって表され `@` ます。 通常、ディレクティブ属性は、要素の解析方法を変更したり、さまざまな機能を有効にしたりします。
+Razor ディレクティブ属性は、記号の後に予約済みのキーワードを使用した暗黙的な式によって表され `@` ます。 通常、ディレクティブ属性は、要素の解析方法を変更したり、さまざまな機能を有効にしたりします。
 
 ### `@attributes`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、「<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>」を参照してください。
+`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters> を参照してください。
 
 ### `@bind`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、「<xref:blazor/components/data-binding>」を参照してください。
+コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、<xref:blazor/components/data-binding> を参照してください。
 
 ### `@on{EVENT}`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-Razorコンポーネントのイベント処理機能を提供します。 詳細については、「<xref:blazor/components/event-handling>」を参照してください。
+Razor コンポーネントのイベント処理機能を提供します。 詳細については、<xref:blazor/components/event-handling> を参照してください。
 
 ::: moniker-end
 
@@ -763,25 +764,25 @@ Razorコンポーネントのイベント処理機能を提供します。 詳�
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、「<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>」を参照してください。
+`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components> を参照してください。
 
 ### `@ref`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、「<xref:blazor/components/index#capture-references-to-components>」を参照してください。
+コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、<xref:blazor/components/index#capture-references-to-components> を参照してください。
 
 ### `@typeparam`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、「<xref:blazor/components/templated-components#generic-typed-components>」を参照してください。
+`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、<xref:blazor/components/templated-components#generic-typed-components> を参照してください。
 
 ::: moniker-end
 
 ## <a name="templated-no-locrazor-delegates"></a>テンプレート化 Razor デリゲート
 
-Razorテンプレートを使用すると、次の形式で UI スニペットを定義できます。
+Razor テンプレートを使用すると、次の形式で UI スニペットを定義できます。
 
 ```cshtml
 @<tag>...</tag>
@@ -890,19 +891,19 @@ Razorメソッドの引数としてインラインテンプレートを指定す
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 前に追加したタグ ヘルパーをビューから削除します。 |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | タグ プレフィックスを指定して、タグ ヘルパーのサポートを有効にしたり、タグ ヘルパーの使用を明示的にしたりします。 |
 
-## <a name="no-locrazor-reserved-keywords"></a>Razor予約済みキーワード
+## <a name="no-locrazor-reserved-keywords"></a>Razor 予約済みキーワード
 
-### <a name="no-locrazor-keywords"></a>Razorkeywords
+### <a name="no-locrazor-keywords"></a>Razor keywords
 
-* `page`(ASP.NET Core 2.1 以降が必要)
+* `page` (ASP.NET Core 2.1 以降が必要)
 * `namespace`
 * `functions`
 * `inherits`
 * `model`
 * `section`
-* `helper`(現在 ASP.NET Core ではサポートされていません)
+* `helper` (現在 ASP.NET Core ではサポートされていません)
 
-Razorキーワードは、でエスケープされ `@(Razor Keyword)` ます (たとえば、 `@(functions)` )。
+Razor キーワードは、でエスケープされ `@(Razor Keyword)` ます (たとえば、 `@(functions)` )。
 
 ### <a name="c-no-locrazor-keywords"></a>C# の Razor キーワード
 
@@ -923,7 +924,7 @@ Razorキーワードは、でエスケープされ `@(Razor Keyword)` ます (�
 
 C# の Razor キーワードは、を使用してダブルエスケープする必要があり `@(@C# Razor Keyword)` ます (例: `@(@case)` )。 最初のは、 `@` パーサーをエスケープし Razor ます。 2 番目の `@` は、C# パーサーをエスケープします。
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a>予約済みキーワードがで使用されていませんRazor
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a>予約済みキーワードがで使用されていません Razor
 
 * `class`
 
@@ -1001,7 +1002,7 @@ Razorビューエンジンは、ビューに対して大文字と小文字を区
 開発者には、ファイル名とディレクトリ名の大文字/小文字の使い分けを、次のものと一致させることをお勧めします。
 
 * 領域、コントローラー、アクションの名前。
-* Razorトピック.
+* Razor トピック.
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 

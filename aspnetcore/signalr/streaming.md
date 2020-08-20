@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core でストリーミングを使用するSignalR
+title: ASP.NET Core でストリーミングを使用する SignalR
 author: bradygaster
 description: クライアントとサーバーの間でデータをストリーミングする方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: e0eabe711fd69e42bd9bfa5e03a92e1df780e4db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022512"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634216"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でストリーミングを使用するSignalR
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でストリーミングを使用する SignalR
 
 [Brennan Conroy](https://github.com/BrennanConroy)
 
@@ -291,7 +292,7 @@ JavaScript クライアントは、を使用してハブでサーバーからク
 
 ### <a name="client-to-server-streaming"></a>クライアントとサーバー間のストリーミング
 
-JavaScript クライアントは、 `Subject` `send` `invoke` `stream` 呼び出されたハブメソッドに応じて、を引数として、、またはに渡すことによって、ハブでクライアントからサーバーへのストリーミングメソッドを呼び出します。 は、の `Subject` ように見えるクラスです `Subject` 。 たとえば、RxJS では、そのライブラリの[サブジェクト](https://rxjs-dev.firebaseapp.com/api/index/class/Subject)クラスを使用できます。
+JavaScript クライアントは、 `Subject` `send` `invoke` `stream` 呼び出されたハブメソッドに応じて、を引数として、、またはに渡すことによって、ハブでクライアントからサーバーへのストリーミングメソッドを呼び出します。 は、の `Subject` ように見えるクラスです `Subject` 。 たとえば、RxJS では、そのライブラリの [サブジェクト](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) クラスを使用できます。
 
 [!code-javascript[Upload javascript](streaming/samples/3.0/wwwroot/js/stream.js?range=41-51)]
 
@@ -303,7 +304,7 @@ JavaScript クライアントは、 `Subject` `send` `invoke` `stream` 呼び出
 
 ### <a name="server-to-client-streaming"></a>サーバーからクライアントへのストリーミング
 
-Java クライアントは、メソッドを使用して SignalR `stream` ストリーミングメソッドを呼び出します。 `stream`3つ以上の引数を受け取ります。
+Java クライアントは、メソッドを使用して SignalR `stream` ストリーミングメソッドを呼び出します。 `stream` 3つ以上の引数を受け取ります。
 
 * ストリーム項目の予期される型。
 * ハブメソッドの名前。
@@ -323,7 +324,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* [取って代わり](xref:signalr/hubs)
+* [ハブ](xref:signalr/hubs)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

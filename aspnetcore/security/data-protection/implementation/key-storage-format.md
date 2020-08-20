@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護のキーストレージ形式の実装
 ms.author: riande
 ms.date: 04/08/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: 289557e2b282c108e023f6d53fa43dab80a906ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: daf86d3e3357d42ddad74d5e2f06e00e0e24db07
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021433"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631993"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core のキー格納形式
 
@@ -33,7 +34,7 @@ ms.locfileid: "88021433"
 
 ## <a name="the-key-element"></a>\<key> 要素
 
-キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。 規則によるキーのファイル名は**キー {guid} .xml です**。ここで、{guid} はキーの id です。 このようなファイルには1つのキーが含まれています。 ファイルの形式は次のとおりです。
+キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。 規則によるキーのファイル名は **キー {guid} .xml です**。ここで、{guid} はキーの id です。 このようなファイルには1つのキーが含まれています。 ファイルの形式は次のとおりです。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,7 +83,7 @@ Outer 要素には \<descriptor> 、deserializerType 属性が含まれていま
 
 ## <a name="the-revocation-element"></a>\<revocation> 要素
 
-失効は、キーリポジトリの最上位レベルのオブジェクトとして存在します。 慣例により、失効はファイル名の**失効-{timestamp} .xml** (特定の日付より前のすべてのキーを取り消す場合) または**失効-{guid} .xml** (特定のキーを取り消す場合) を持ちます。 各ファイルには1つの要素が含まれてい \<revocation> ます。
+失効は、キーリポジトリの最上位レベルのオブジェクトとして存在します。 慣例により、失効はファイル名の **失効-{timestamp} .xml** (特定の日付より前のすべてのキーを取り消す場合) または **失効-{guid} .xml** (特定のキーを取り消す場合) を持ちます。 各ファイルには1つの要素が含まれてい \<revocation> ます。
 
 個々のキーの失効の場合、ファイルの内容は次のようになります。
 

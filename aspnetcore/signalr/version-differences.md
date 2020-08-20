@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: f52bf6c82cd5125e0905d9bcbda5dd5499d6455e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020042"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633007"
 ---
-# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR と ASP.NET Core の違いSignalR
+# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR と ASP.NET Core の違い SignalR
 
 ASP.NET Core SignalR は、ASP.NET のクライアントまたはサーバーと互換性がありません SignalR 。 この記事では、ASP.NET Core で削除または変更された機能について詳しく説明 SignalR します。
 
@@ -31,12 +32,12 @@ ASP.NET Core SignalR は、ASP.NET のクライアントまたはサーバーと
 
 ::: moniker range=">= aspnetcore-3.0"
 
-|                      | ASP.NETSignalR | ASP.NET CoreSignalR |
+|                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
 | **サーバー NuGet パッケージ** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [なし] : [AspNetCore](xref:fundamentals/metapackage-app)共有フレームワークに含まれています。 |
 | **クライアント NuGet パッケージ** | [Microsoft SignalR . AspNet.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft SignalR . AspNet.NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR .Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript クライアント npm パッケージ** | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
-| **Java クライアント** | [GitHub リポジトリ](https://github.com/SignalR/java-client)(非推奨)  | Maven パッケージ[signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| **Java クライアント** | [GitHub リポジトリ](https://github.com/SignalR/java-client) (非推奨)  | Maven パッケージ [signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
 | **サーバーアプリの種類** | ASP.NET (System.web) または OWIN 自己ホスト | ASP.NET Core |
 | **サポートされているサーバープラットフォーム** | .NET Framework 4.5 以降 | .NET Core 3.0 以降 |
 
@@ -44,12 +45,12 @@ ASP.NET Core SignalR は、ASP.NET のクライアントまたはサーバーと
 
 ::: moniker range="<= aspnetcore-2.2"
 
-|                      | ASP.NETSignalR | ASP.NET CoreSignalR |
+|                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
 | **サーバー NuGet パッケージ** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.net Core)<br>[AspNetCore。SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
 | **クライアント NuGet パッケージ** | [Microsoft SignalR . AspNet.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft SignalR . AspNet.NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR .Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript クライアント npm パッケージ** | [signalr](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
-| **Java クライアント** | [GitHub リポジトリ](https://github.com/SignalR/java-client)(非推奨)  | Maven パッケージ[signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| **Java クライアント** | [GitHub リポジトリ](https://github.com/SignalR/java-client) (非推奨)  | Maven パッケージ [signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
 | **サーバーアプリの種類** | ASP.NET (System.web) または OWIN 自己ホスト | ASP.NET Core |
 | **サポートされているサーバープラットフォーム** | .NET Framework 4.5 以降 | .NET Framework 4.6.1 以降<br>.NET Core 2.1 以降 |
 
@@ -67,7 +68,7 @@ ASP.NET の場合 SignalR :
 
 ASP.NET Core SignalR :
 
-* 自動再接続は、 [.net クライアント](xref:signalr/dotnet-client#automatically-reconnect)と[JavaScript クライアント](xref:signalr/javascript-client#automatically-reconnect)の両方にオプトインされています。
+* 自動再接続は、 [.net クライアント](xref:signalr/dotnet-client#automatically-reconnect) と [JavaScript クライアント](xref:signalr/javascript-client#automatically-reconnect)の両方にオプトインされています。
 
 ```csharp
 HubConnection connection = new HubConnectionBuilder()
@@ -145,9 +146,9 @@ ASP.NET のスケールアウトモデルを SignalR 使用すると、クライ
 
 ASP.NET Core では SignalR 、接続モデルが単純化されています。 複数のハブへのアクセスを共有するために使用される単一の接続ではなく、1つのハブに直接接続されます。
 
-### <a name="streaming"></a>ストリーミング
+### <a name="streaming"></a>ストリーム
 
-ASP.NET Core は、 SignalR ハブからクライアントへの[データのストリーミング](xref:signalr/streaming)をサポートするようになりました。
+ASP.NET Core は、 SignalR ハブからクライアントへの [データのストリーミング](xref:signalr/streaming) をサポートするようになりました。
 
 ### <a name="state"></a>State
 
@@ -155,11 +156,11 @@ ASP.NET Core は、 SignalR ハブからクライアントへの[データのス
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection の削除
 
-ASP.NET Core では SignalR 、 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118))クラスは削除されています。
+ASP.NET Core では SignalR 、 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) クラスは削除されています。
 
 ### <a name="globalhost"></a>GlobalHost
 
-ASP.NET Core には、フレームワークに依存関係の挿入 (DI) が組み込まれています。 サービスは DI を使用して[HubContext](xref:signalr/hubcontext)にアクセスできます。 `GlobalHost`を取得するために ASP.NET で使用されるオブジェクトが SignalR `HubContext` ASP.NET Core に存在しません SignalR 。
+ASP.NET Core には、フレームワークに依存関係の挿入 (DI) が組み込まれています。 サービスは DI を使用して [HubContext](xref:signalr/hubcontext)にアクセスできます。 `GlobalHost`を取得するために ASP.NET で使用されるオブジェクトが SignalR `HubContext` ASP.NET Core に存在しません SignalR 。
 
 ### <a name="hubpipeline"></a>HubPipeline
 
@@ -169,13 +170,13 @@ ASP.NET Core SignalR はモジュールをサポートしていません `HubPip
 
 ### <a name="typescript"></a>TypeScript
 
-ASP.NET Core SignalR クライアントは[TypeScript](https://www.typescriptlang.org/)で記述されています。 Javascript[クライアント](xref:signalr/javascript-client)を使用する場合は、javascript または TypeScript で記述できます。
+ASP.NET Core SignalR クライアントは [TypeScript](https://www.typescriptlang.org/)で記述されています。 Javascript [クライアント](xref:signalr/javascript-client)を使用する場合は、javascript または TypeScript で記述できます。
 
 ### <a name="the-javascript-client-is-hosted-at-npm"></a>JavaScript クライアントは npm でホストされます。
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション**テンプレートには含まれていません。 Npm パッケージを取得してインストールするには、npm を使用し `@microsoft/signalr` ます。
+ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション** テンプレートには含まれていません。 Npm パッケージを取得してインストールするには、npm を使用し `@microsoft/signalr` ます。
 
 ```console
 npm init -y
@@ -186,7 +187,7 @@ npm install @microsoft/signalr
 
 ::: moniker range="<= aspnetcore-2.2"
 
-ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション**テンプレートには含まれていません。 Npm パッケージを取得してインストールするには、npm を使用し `@aspnet/signalr` ます。
+ASP.NET のバージョンでは、JavaScript クライアントは Visual Studio の NuGet パッケージを使用して取得されました。 ASP.NET Core のバージョンでは、 [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) npm パッケージに JavaScript ライブラリが含まれています。 このパッケージは、 **ASP.NET Core Web アプリケーション** テンプレートには含まれていません。 Npm パッケージを取得してインストールするには、npm を使用し `@aspnet/signalr` ます。
 
 ```console
 npm init -y
@@ -251,13 +252,13 @@ connection.start().catch(err => console.error(err));
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ハブプロキシが自動的に生成されなくなりました。 代わりに、メソッド名が文字列として[invoke](/javascript/api/@microsoft/signalr/hubconnection#invoke) API に渡されます。
+ハブプロキシが自動的に生成されなくなりました。 代わりに、メソッド名が文字列として [invoke](/javascript/api/@microsoft/signalr/hubconnection#invoke) API に渡されます。
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
 
-ハブプロキシが自動的に生成されなくなりました。 代わりに、メソッド名が文字列として[invoke](/javascript/api/@aspnet/signalr/hubconnection#invoke) API に渡されます。
+ハブプロキシが自動的に生成されなくなりました。 代わりに、メソッド名が文字列として [invoke](/javascript/api/@aspnet/signalr/hubconnection#invoke) API に渡されます。
 
 ::: moniker-end
 
@@ -279,9 +280,9 @@ ASP.NET は SignalR SQL Server と Redis をサポートしています。 ASP.N
 
 ### <a name="aspnet"></a>ASP.NET
 
-* [SignalRAzure Service Bus によるスケールアウト](/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus)
-* [SignalRRedis によるスケールアウト](/aspnet/signalr/overview/performance/scaleout-with-redis)
-* [SignalRSQL Server によるスケールアウト](/aspnet/signalr/overview/performance/scaleout-with-sql-server)
+* [SignalR Azure Service Bus によるスケールアウト](/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus)
+* [SignalR Redis によるスケールアウト](/aspnet/signalr/overview/performance/scaleout-with-redis)
+* [SignalR SQL Server によるスケールアウト](/aspnet/signalr/overview/performance/scaleout-with-sql-server)
 
 ### <a name="aspnet-core"></a>ASP.NET Core
 
@@ -290,7 +291,7 @@ ASP.NET は SignalR SQL Server と Redis をサポートしています。 ASP.N
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* [取って代わり](xref:signalr/hubs)
+* [ハブ](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)

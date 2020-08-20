@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 4285432d48ba11b5069d109c5667192a99fe115e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0a719ae48199f7854ded534446045eb304d4d9f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021784"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632357"
 ---
 # <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>ASP.NET Core 2.1 MVC SameSite cookie サンプル
 
-ASP.NET Core 2.1 には[SameSite](https://www.owasp.org/index.php/SameSite)属性のサポートが組み込まれていますが、元の標準に書き込まれました。 [パッチを適用](https://github.com/dotnet/aspnetcore/issues/8212)した動作によって、の意味が変更され、 `SameSite.None` `None` 値がまったく出力されるのではなく、の値を持つ sameSite 属性が出力されます。 値を出力しない場合は `SameSite` 、のプロパティを cookie -1 に設定します。
+ASP.NET Core 2.1 には [SameSite](https://www.owasp.org/index.php/SameSite) 属性のサポートが組み込まれていますが、元の標準に書き込まれました。 [パッチを適用](https://github.com/dotnet/aspnetcore/issues/8212)した動作によって、の意味が変更され、 `SameSite.None` `None` 値がまったく出力されるのではなく、の値を持つ sameSite 属性が出力されます。 値を出力しない場合は `SameSite` 、のプロパティを cookie -1 に設定します。
 
 [!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
@@ -56,7 +57,7 @@ Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 
 ## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>Cookie認証およびセッション状態の cookie 設定
 
-Cookie認証、セッション状態、および[その他のさまざまなコンポーネント](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1)は、オプションを使用して sameSite オプションを設定し Cookie ます。たとえば、
+Cookie 認証、セッション状態、および [その他のさまざまなコンポーネント](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) は、オプションを使用して sameSite オプションを設定し Cookie ます。たとえば、
 
 ```c#
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -87,9 +88,9 @@ services.AddSession(options =>
 
 ## <a name="intercepting-no-loccookies"></a><a name="interception"></a>をインターセプトしています cookie
 
-S をインターセプトするために cookie 、ユーザーのブラウザーエージェントでのサポートに応じて none 値を調整するには、ミドルウェアを使用する必要があり `CookiePolicy` ます。 これは、を書き込み、内で構成されるコンポーネントの**前に**、http 要求パイプラインに配置する必要があり cookie `ConfigureServices()` ます。
+S をインターセプトするために cookie 、ユーザーのブラウザーエージェントでのサポートに応じて none 値を調整するには、ミドルウェアを使用する必要があり `CookiePolicy` ます。 これは、を書き込み、内で構成されるコンポーネントの **前に** 、http 要求パイプラインに配置する必要があり cookie `ConfigureServices()` ます。
 
-パイプラインに挿入するには、 `app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)のメソッドでを使用します。 例:
+パイプラインに挿入するには、 `app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)のメソッドでを使用します。 次に例を示します。
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -119,7 +120,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-次に、が `ConfigureServices(IServiceCollection services)` cookie 追加または削除されたときにヘルパークラスを呼び出すようにポリシーを構成し cookie ます。 例:
+次に、が `ConfigureServices(IServiceCollection services)` cookie 追加または削除されたときにヘルパークラスを呼び出すようにポリシーを構成し cookie ます。 次に例を示します。
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -152,7 +153,7 @@ private void CheckSameSite(HttpContext httpContext, CookieOptions options)
 
 * は、が要求に追加されたとき、または要求から削除されたときに呼び出され cookie ます。
 * プロパティがに設定されているかどうかを確認し `SameSite` `None` ます。
-* `SameSite`がに設定され `None` ていて、現在のユーザーエージェントが none 属性値をサポートしていないことがわかっている場合。 このチェックは、 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs)クラスを使用して行います。
+* `SameSite`がに設定され `None` ていて、現在のユーザーエージェントが none 属性値をサポートしていないことがわかっている場合。 このチェックは、 [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) クラスを使用して行います。
   * `SameSite`プロパティをに設定して値を出力しないように設定します。`(SameSiteMode)(-1)`
 
 ## <a name="targeting-net-framework"></a>.NET Framework のターゲット設定
@@ -168,7 +169,7 @@ ASP.NET Core と System.web (ASP.NET Classic) には、SameSite の独立した�
 <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.1.14" />
 ```
 
-### <a name="more-information"></a>説明
+### <a name="more-information"></a>詳細情報
  
 [Chrome の更新](https://www.chromium.org/updates/same-site) 
 [ASP.NET Core SameSite のドキュメント](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) 

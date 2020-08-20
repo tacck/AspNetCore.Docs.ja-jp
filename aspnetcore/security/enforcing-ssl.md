@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 5dcdf50ff9f750e4966ed3bdf24a71b9f433240a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019002"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631564"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -39,14 +40,14 @@ API がないと、クライアントが最初の要求で機微なデータを�
 > [!WARNING]
 > ## <a name="api-projects"></a>API プロジェクト
 >
-> 機密情報を受け取る Web Api では[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute`HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
+> 機密情報を受け取る Web Api では[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute` HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
 >
 > * HTTP でリッスンしません。
 > * 状態コード 400 (Bad Request) で接続を閉じ、要求を処理しません。
 >
 > ## <a name="hsts-and-api-projects"></a>HSTS と API プロジェクト
 >
-> HSTS は一般にブラウザー専用の命令であるため、既定の API プロジェクトには[Hsts](#hsts)は含まれません。 電話やデスクトップアプリなどの他の呼び出し元は、命令に従い**ません**。 ブラウザー内でも、HTTP 経由の API に対して認証された単一の呼び出しにより、セキュリティで保護されていないネットワークに対するリスクが生じます。 セキュリティで保護された方法は、HTTPS 経由でのみリッスンして応答するように API プロジェクトを構成することです。
+> HSTS は一般にブラウザー専用の命令であるため、既定の API プロジェクトには [Hsts](#hsts) は含まれません。 電話やデスクトップアプリなどの他の呼び出し元は、命令に従い **ません** 。 ブラウザー内でも、HTTP 経由の API に対して認証された単一の呼び出しにより、セキュリティで保護されていないネットワークに対するリスクが生じます。 セキュリティで保護された方法は、HTTPS 経由でのみリッスンして応答するように API プロジェクトを構成することです。
 
 ::: moniker-end
 
@@ -55,7 +56,7 @@ API がないと、クライアントが最初の要求で機微なデータを�
 > [!WARNING]
 > ## <a name="api-projects"></a>API プロジェクト
 >
-> 機密情報を受け取る Web Api では[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute`HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
+> 機密情報を受け取る Web Api では[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute` HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
 >
 > * HTTP でリッスンしません。
 > * 状態コード 400 (Bad Request) で接続を閉じ、要求を処理しません。
@@ -70,7 +71,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 * HSTS ミドルウェア ([Usehsts](#http-strict-transport-security-protocol-hsts)) を介して、HTTP Strict Transport Security Protocol (hsts) ヘッダーをクライアントに送信します。
 
 > [!NOTE]
-> リバースプロキシ構成で展開されたアプリは、プロキシが接続セキュリティ (HTTPS) を処理できるようにします。 プロキシが HTTPS リダイレクトも処理する場合は、HTTPS リダイレクトミドルウェアを使用する必要はありません。 また、プロキシサーバーが HSTS ヘッダーの書き込みも処理する場合 ( [IIS 10.0 (1709) 以降のネイティブ HSTS のサポート](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)など)、アプリでは Hsts ミドルウェアは必要ありません。 詳細については、「[プロジェクト作成時の HTTPS/HSTS のオプトアウト](#opt-out-of-httpshsts-on-project-creation)」を参照してください。
+> リバースプロキシ構成で展開されたアプリは、プロキシが接続セキュリティ (HTTPS) を処理できるようにします。 プロキシが HTTPS リダイレクトも処理する場合は、HTTPS リダイレクトミドルウェアを使用する必要はありません。 また、プロキシサーバーが HSTS ヘッダーの書き込みも処理する場合 ( [IIS 10.0 (1709) 以降のネイティブ HSTS のサポート](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)など)、アプリでは Hsts ミドルウェアは必要ありません。 詳細については、「 [プロジェクト作成時の HTTPS/HSTS のオプトアウト](#opt-out-of-httpshsts-on-project-creation)」を参照してください。
 
 ### <a name="usehttpsredirection"></a>UseHttpsRedirection
 
@@ -90,10 +91,10 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
 前の強調表示されているコード:
 
-* 既定の[HttpsRedirectionOptions statuscode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)) を使用します。
+* 既定の [HttpsRedirectionOptions statuscode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)) を使用します。
 * [HttpsRedirectionOptions.HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) `ASPNETCORE_HTTPS_PORT` 環境変数または[iserverHttpsRedirectionOptions 機能](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)でオーバーライドされない限り、既定の (null) を使用します。
 
-永続的なリダイレクトではなく、一時的なリダイレクトを使用することをお勧めします。 リンクキャッシュを使用すると、開発環境で不安定な動作が発生する可能性があります。 アプリが非開発環境にあるときに永続的なリダイレクト状態コードを送信する場合は、「運用環境[で永続的なリダイレクトを構成](#configure-permanent-redirects-in-production)する」セクションを参照してください。 [Hsts](#http-strict-transport-security-protocol-hsts)を使用して、セキュリティで保護されたリソース要求のみをアプリケーションに送信する (運用環境のみ) ことをクライアントに通知することをお勧めします。
+永続的なリダイレクトではなく、一時的なリダイレクトを使用することをお勧めします。 リンクキャッシュを使用すると、開発環境で不安定な動作が発生する可能性があります。 アプリが非開発環境にあるときに永続的なリダイレクト状態コードを送信する場合は、「運用環境 [で永続的なリダイレクトを構成](#configure-permanent-redirects-in-production) する」セクションを参照してください。 [Hsts](#http-strict-transport-security-protocol-hsts)を使用して、セキュリティで保護されたリソース要求のみをアプリケーションに送信する (運用環境のみ) ことをクライアントに通知することをお勧めします。
 
 ### <a name="port-configuration"></a>ポート構成
 
@@ -112,7 +113,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
-  * appsettings.jsにトップレベルのエントリを追加するには、次*の*操作を行います。
+  * appsettings.jsにトップレベルのエントリを追加するには、次 * の*操作を行います。
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -126,7 +127,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
-  * appsettings.jsにトップレベルのエントリを追加するには、次*の*操作を行います。
+  * appsettings.jsにトップレベルのエントリを追加するには、次 * の*操作を行います。
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -136,7 +137,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
 * 開発では、 *launchsettings.js*で HTTPS URL を設定します。 IIS Express が使用されている場合は、HTTPS を有効にします。
 
-* [Kestrel](xref:fundamentals/servers/kestrel)サーバーまたは[HTTP.sys](xref:fundamentals/servers/httpsys)サーバーの公開エッジデプロイの HTTPS URL エンドポイントを構成します。 アプリケーションで使用される**HTTPS ポートは1つ**だけです。 ミドルウェアは、を使用してポートを検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。
+* [Kestrel](xref:fundamentals/servers/kestrel)サーバーまたは[HTTP.sys](xref:fundamentals/servers/httpsys)サーバーの公開エッジデプロイの HTTPS URL エンドポイントを構成します。 アプリケーションで使用される **HTTPS ポートは1つ** だけです。 ミドルウェアは、を使用してポートを検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。
 
 > [!NOTE]
 > リバースプロキシ構成でアプリを実行する場合、は <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 使用できません。 このセクションで説明する他の方法のいずれかを使用して、ポートを設定します。
@@ -150,19 +151,19 @@ Kestrel または HTTP.sys が公開エッジサーバーとして使用され�
 
 セキュリティで保護されていない要求をアプリケーションが受信し、セキュリティで保護されたポートにクライアントをリダイレクトするには、セキュリティで保護されていないポートにクライアントがアクセスできる必要があります。
 
-詳細については、「 [Kestrel エンドポイントの構成](xref:fundamentals/servers/kestrel#endpoint-configuration)」または「」を参照してください <xref:fundamentals/servers/httpsys> 。
+詳細については、「 [Kestrel エンドポイントの構成](xref:fundamentals/servers/kestrel#endpoint-configuration) 」または「」を参照してください <xref:fundamentals/servers/httpsys> 。
 
 ### <a name="deployment-scenarios"></a>デプロイメント シナリオ
 
 クライアントとサーバーの間のファイアウォールでは、トラフィック用の通信ポートも開いている必要があります。
 
-リバースプロキシ構成で要求が転送される場合は、HTTPS リダイレクトミドルウェアを呼び出す前に、転送された[ヘッダーミドルウェア](xref:host-and-deploy/proxy-load-balancer)を使用します。 転送されたヘッダーミドルウェアは、 `Request.Scheme` ヘッダーを使用してを更新し `X-Forwarded-Proto` ます。 ミドルウェアは、リダイレクト Uri とその他のセキュリティポリシーを正しく動作させることを許可します。 転送ヘッダーミドルウェアが使用されていない場合、バックエンドアプリは正しいスキームを受信せず、リダイレクトループで終了する可能性があります。 一般的なエンドユーザーエラーメッセージは、リダイレクトされた回数が多すぎることを示しています。
+リバースプロキシ構成で要求が転送される場合は、HTTPS リダイレクトミドルウェアを呼び出す前に、転送された [ヘッダーミドルウェア](xref:host-and-deploy/proxy-load-balancer) を使用します。 転送されたヘッダーミドルウェアは、 `Request.Scheme` ヘッダーを使用してを更新し `X-Forwarded-Proto` ます。 ミドルウェアは、リダイレクト Uri とその他のセキュリティポリシーを正しく動作させることを許可します。 転送ヘッダーミドルウェアが使用されていない場合、バックエンドアプリは正しいスキームを受信せず、リダイレクトループで終了する可能性があります。 一般的なエンドユーザーエラーメッセージは、リダイレクトされた回数が多すぎることを示しています。
 
 Azure App Service にデプロイする場合は、 [「チュートリアル: 既存のカスタム SSL 証明書を Azure Web Apps にバインドする](/azure/app-service/app-service-web-tutorial-custom-ssl)」のガイダンスに従ってください。
 
-### <a name="options"></a>オプション
+### <a name="options"></a>Options
 
-次の強調表示されたコードは、 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection)を呼び出してミドルウェアオプションを構成します。
+次の強調表示されたコードは、 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) を呼び出してミドルウェアオプションを構成します。
 
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -182,12 +183,12 @@ Azure App Service にデプロイする場合は、 [「チュートリアル: �
 
 前の強調表示されているコード:
 
-* HttpsRedirectionOptions をに設定し[ます](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*)。 <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect> これは既定値です。 への割り当てには、クラスのフィールドを使用し <xref:Microsoft.AspNetCore.Http.StatusCodes> `RedirectStatusCode` ます。
+* HttpsRedirectionOptions をに設定し [ます](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) 。 <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect> これは既定値です。 への割り当てには、クラスのフィールドを使用し <xref:Microsoft.AspNetCore.Http.StatusCodes> `RedirectStatusCode` ます。
 * HTTPS ポートを5001に設定します。
 
 #### <a name="configure-permanent-redirects-in-production"></a>運用環境での永続的なリダイレクトの構成
 
-ミドルウェアは、既定ですべてのリダイレクトを使用して[Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)を送信します。 アプリが非開発環境にあるときに永続的なリダイレクト状態コードを送信する場合は、非開発環境の条件付きチェックでミドルウェアオプションの構成をラップします。
+ミドルウェアは、既定ですべてのリダイレクトを使用して [Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect) を送信します。 アプリが非開発環境にあるときに永続的なリダイレクト状態コードを送信する場合は、非開発環境の条件付きチェックでミドルウェアオプションの構成をラップします。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -234,7 +235,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="https-redirection-middleware-alternative-approach"></a>HTTPS リダイレクトミドルウェアの代替アプローチ
 
-HTTPS リダイレクトミドルウェア () を使用する代わりに、 `UseHttpsRedirection` URL リライトミドルウェア () を使用することも `AddRedirectToHttps` できます。 `AddRedirectToHttps`また、リダイレクトの実行時に状態コードとポートを設定することもできます。 詳細については、「 [URL リライトミドルウェア](xref:fundamentals/url-rewriting)」を参照してください。
+HTTPS リダイレクトミドルウェア () を使用する代わりに、 `UseHttpsRedirection` URL リライトミドルウェア () を使用することも `AddRedirectToHttps` できます。 `AddRedirectToHttps` また、リダイレクトの実行時に状態コードとポートを設定することもできます。 詳細については、「 [URL リライトミドルウェア](xref:fundamentals/url-rewriting)」を参照してください。
 
 追加のリダイレクト規則を必要とせずに HTTPS にリダイレクトする場合は、このトピックで説明する HTTPS リダイレクトミドルウェア () を使用することをお勧めし `UseHttpsRedirection` ます。
 
@@ -253,7 +254,7 @@ HSTS はクライアントによって適用されるため、いくつかの制
 * HSTS で HSTS ポリシーを確立するには、少なくとも1つの HTTPS 要求が必要です。
 * アプリケーションは、すべての HTTP 要求を確認し、HTTP 要求をリダイレクトまたは拒否する必要があります。
 
-ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装し `UseHsts` ます。 次のコードは、 `UseHsts` アプリが[開発モード](xref:fundamentals/environments)でない場合にを呼び出します。
+ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装し `UseHsts` ます。 次のコードは、 `UseHsts` アプリが [開発モード](xref:fundamentals/environments)でない場合にを呼び出します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -267,9 +268,9 @@ ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装
 
 ::: moniker-end
 
-`UseHsts`HSTS の設定はブラウザーによって高度なキャッシュが可能であるため、開発では推奨されません。 既定では、は `UseHsts` ローカルループバックアドレスを除外します。
+`UseHsts` HSTS の設定はブラウザーによって高度なキャッシュが可能であるため、開発では推奨されません。 既定では、は `UseHsts` ローカルループバックアドレスを除外します。
 
-初めて HTTPS を実装する運用環境では、メソッドのいずれかを使用して、初期の[HstsOptions](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*)を小さい値に設定します <xref:System.TimeSpan> 。 HTTPS インフラストラクチャを HTTP に戻す必要がある場合に備えて、値を時間から1日以内に設定します。 HTTPS 構成の持続性を確認したら、HSTS の値を増やします。 `max-age` 一般的に使用される値は1年です。
+初めて HTTPS を実装する運用環境では、メソッドのいずれかを使用して、初期の [HstsOptions](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) を小さい値に設定します <xref:System.TimeSpan> 。 HTTPS インフラストラクチャを HTTP に戻す必要がある場合に備えて、値を時間から1日以内に設定します。 HTTPS 構成の持続性を確認したら、HSTS の値を増やします。 `max-age` 一般的に使用される値は1年です。
 
 コード例を次に示します。
 
@@ -287,26 +288,26 @@ ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装
 ::: moniker-end
 
 
-* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは[RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、「[https://hstspreload.org/](https://hstspreload.org/)」を参照してください。
-* HSTS ポリシーをホストサブドメインに適用する[includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)を有効にします。
-* `max-age`ヘッダーのパラメーターを明示的に `Strict-Transport-Security` 60 日に設定します。 設定されていない場合、既定値は30日です。 詳細については、「[最長有効期間」ディレクティブ](https://tools.ietf.org/html/rfc6797#section-6.1.1)を参照してください。
+* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、[https://hstspreload.org/](https://hstspreload.org/) をご覧ください。
+* HSTS ポリシーをホストサブドメインに適用する [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)を有効にします。
+* `max-age`ヘッダーのパラメーターを明示的に `Strict-Transport-Security` 60 日に設定します。 設定されていない場合、既定値は30日です。 詳細については、「 [最長有効期間」ディレクティブ](https://tools.ietf.org/html/rfc6797#section-6.1.1)を参照してください。
 * `example.com`除外するホストの一覧にを追加します。
 
-`UseHsts`次のループバックホストを除外します。
+`UseHsts` 次のループバックホストを除外します。
 
-* `localhost`: IPv4 ループバックアドレス。
-* `127.0.0.1`: IPv4 ループバックアドレス。
-* `[::1]`: IPv6 ループバックアドレス。
+* `localhost` : IPv4 ループバックアドレス。
+* `127.0.0.1` : IPv4 ループバックアドレス。
+* `[::1]` : IPv6 ループバックアドレス。
 
 ## <a name="opt-out-of-httpshsts-on-project-creation"></a>プロジェクト作成時の HTTPS/HSTS のオプトアウト
 
-接続セキュリティがネットワークの公開エッジで処理されるバックエンドサービスのシナリオによっては、各ノードで接続セキュリティを構成する必要がない場合があります。 Visual Studio のテンプレートまたは[dotnet new](/dotnet/core/tools/dotnet-new)コマンドから生成された Web アプリでは、 [HTTPS リダイレクト](#require-https)と[hsts](#http-strict-transport-security-protocol-hsts)が有効になります。 これらのシナリオを必要としないデプロイでは、テンプレートからアプリを作成するときに HTTPS/HSTS をオプトアウトできます。
+接続セキュリティがネットワークの公開エッジで処理されるバックエンドサービスのシナリオによっては、各ノードで接続セキュリティを構成する必要がない場合があります。 Visual Studio のテンプレートまたは [dotnet new](/dotnet/core/tools/dotnet-new) コマンドから生成された Web アプリでは、 [HTTPS リダイレクト](#require-https) と [hsts](#http-strict-transport-security-protocol-hsts)が有効になります。 これらのシナリオを必要としないデプロイでは、テンプレートからアプリを作成するときに HTTPS/HSTS をオプトアウトできます。
 
 HTTPS/HSTS をオプトアウトするには、次のようにします。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
-[ **HTTPS 用に構成**] チェックボックスをオフにします。
+[ **HTTPS 用に構成** ] チェックボックスをオフにします。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -362,6 +363,14 @@ dotnet dev-certs https --help
 
 [こちらの GitHub のイシュー](https://github.com/dotnet/AspNetCore.Docs/issues/6199)を参照してください。
 
+<a name="ssl-linux"></a>
+
+## <a name="trust-https-certificate-on-linux"></a>Linux で HTTPS 証明書を信頼する
+
+<!-- Instructions to be updated by engineering team after 5.0 RTM. -->
+
+Linux の手順については、ディストリビューションのドキュメントを参照してください。
+
 <a name="wsl"></a>
 
 ## <a name="trust-https-certificate-from-windows-subsystem-for-linux"></a>Windows Subsystem for Linux からの HTTPS 証明書を信頼する
@@ -385,7 +394,7 @@ Windows Subsystem for Linux (WSL) は、HTTPS 自己署名証明書を生成し�
 
 ## <a name="troubleshoot-certificate-problems"></a>証明書に関する問題のトラブルシューティング
 
-このセクションでは ASP.NET Core の HTTPS 開発証明書がインストールされ、[信頼](#trust)されているが、証明書が信頼されていないことを示すブラウザーの警告が表示される場合に役立つ情報を提供します。 ASP.NET Core HTTPS 開発証明書は[Kestrel](xref:fundamentals/servers/kestrel)によって使用されます。
+このセクションでは ASP.NET Core の HTTPS 開発証明書がインストールされ、 [信頼](#trust)されているが、証明書が信頼されていないことを示すブラウザーの警告が表示される場合に役立つ情報を提供します。 ASP.NET Core HTTPS 開発証明書は [Kestrel](xref:fundamentals/servers/kestrel)によって使用されます。
 
 ### <a name="all-platforms---certificate-not-trusted"></a>すべてのプラットフォーム-信頼されていない証明書
 
@@ -435,11 +444,11 @@ dotnet dev-certs https --trust
 
 開いているすべてのブラウザーインスタンスを閉じます。 新しいブラウザーウィンドウを開いてアプリを開きます。
 
-Visual Studio での証明書の問題のトラブルシューティングについては、 [IIS Express (dotnet/AspNetCore #16892) を使用した HTTPS エラー](https://github.com/dotnet/AspNetCore/issues/16892)を参照してください。
+Visual Studio での証明書の問題のトラブルシューティングについては、 [IIS Express (dotnet/AspNetCore #16892) を使用した HTTPS エラー](https://github.com/dotnet/AspNetCore/issues/16892) を参照してください。
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express Visual Studio で使用される SSL 証明書
 
-IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [**修復**] を選択します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)のページを参照してください。
+IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [ **修復** ] を選択します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)します。
 
 ## <a name="additional-information"></a>関連情報
 

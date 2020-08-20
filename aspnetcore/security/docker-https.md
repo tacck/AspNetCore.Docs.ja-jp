@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,34 +18,34 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: bba72a8c795312b3f7fe3fbf16514ba9f2448fbf
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e29882414d49c0971bc11c688067878714d3b2d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020341"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634190"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[既定では、](/aspnet/core/security/enforcing-ssl)ASP.NET Core で HTTPS が使用されます。 [HTTPS](https://en.wikipedia.org/wiki/HTTPS)は、信頼、id、および暗号化のための[証明書](https://en.wikipedia.org/wiki/Public_key_certificate)に依存します。
+[既定では、](/aspnet/core/security/enforcing-ssl)ASP.NET Core で HTTPS が使用されます。 [HTTPS](https://en.wikipedia.org/wiki/HTTPS) は、信頼、id、および暗号化のための [証明書](https://en.wikipedia.org/wiki/Public_key_certificate) に依存します。
 
 このドキュメントでは、HTTPS で事前に構築されたコンテナーイメージを実行する方法について説明します。
 
-開発シナリオについては、「 [HTTPS 経由の Docker を使用した ASP.NET Core アプリケーションの開発](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)」を参照してください。
+開発シナリオについては、「 [HTTPS 経由の Docker を使用した ASP.NET Core アプリケーションの開発](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) 」を参照してください。
 
-このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce)以降の[docker クライアント](https://www.docker.com/products/docker)が必要です。
+このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce) 以降の [docker クライアント](https://www.docker.com/products/docker)が必要です。
 
 ## <a name="prerequisites"></a>前提条件
 
-このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download)以降が必要です。
+このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 以降が必要です。
 
 ## <a name="certificates"></a>証明書
 
-ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。 [Let's Encrypt](https://letsencrypt.org/)は、無料の証明書を提供する証明機関です。
+ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。 [Let's Encrypt](https://letsencrypt.org/) は、無料の証明書を提供する証明機関です。
 
-このドキュメントでは、事前に構築されたイメージをホストするために[自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate)を使用 `localhost` します。 手順は、実稼働証明書の使用に似ています。
+このドキュメントでは、事前に構築されたイメージをホストするために [自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate) を使用 `localhost` します。 手順は、実稼働証明書の使用に似ています。
 
 実稼働証明書の場合:
 
@@ -92,7 +93,7 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`は、macOS と Windows でのみサポートされています。 ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。 ブラウザーで証明書を信頼する必要があると考えられます。
+`dotnet dev-certs https --trust` は、macOS と Windows でのみサポートされています。 ディストリビューションでサポートされている方法で、Linux 上の証明書を信頼する必要があります。 ブラウザーで証明書を信頼する必要があると考えられます。
 
 上記のコマンドで、を `{ password here }` パスワードに置き換えます。
 

@@ -5,6 +5,7 @@ description: ASP.NET Core アプリで承認の要求チェックを追加する
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 639cacbab2688adfe769ef2c6954ea877cf0c66a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0615e9f13b0eca7d7ac924d90ae2004e41a51586
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022356"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632604"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core での要求ベースの承認
 
@@ -38,7 +39,7 @@ Id には複数の値を持つ複数の要求を含めることができ、同�
 
 最も単純な種類の要求ポリシーでは、要求の存在を検索し、値を確認しません。
 
-まず、ポリシーをビルドして登録する必要があります。 これは、承認サービス構成の一部として行われます。これは通常、 `ConfigureServices()` *Startup.cs*ファイルに含まれています。
+まず、ポリシーをビルドして登録する必要があります。 これは、承認サービス構成の一部として行われます。これは通常、 `ConfigureServices()` *Startup.cs* ファイルに含まれています。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -156,7 +157,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="multiple-policy-evaluation"></a>複数のポリシーの評価
 
-複数のポリシーをコントローラーまたはアクションに適用する場合は、アクセスが許可される前にすべてのポリシーを渡す必要があります。 例:
+複数のポリシーをコントローラーまたはアクションに適用する場合は、アクセスが許可される前にすべてのポリシーを渡す必要があります。 次に例を示します。
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -173,6 +174,6 @@ public class SalaryController : Controller
 }
 ```
 
-上の例では、ポリシーを満たす id は、 `EmployeeOnly` `Payslip` そのポリシーがコントローラーに適用されると、アクションにアクセスできます。 ただし、アクションを呼び出すために `UpdateSalary` は、id はポリシーとポリシーの*両方*を満たす必要があり `EmployeeOnly` `HumanResources` ます。
+上の例では、ポリシーを満たす id は、 `EmployeeOnly` `Payslip` そのポリシーがコントローラーに適用されると、アクションにアクセスできます。 ただし、アクションを呼び出すために `UpdateSalary` は、id はポリシーとポリシーの *両方* を満たす必要があり `EmployeeOnly` `HumanResources` ます。
 
-誕生日の請求書を取得するなど、より複雑なポリシーが必要な場合は、年数を計算し、その年齢を確認してから、[カスタムポリシーハンドラー](xref:security/authorization/policies)を記述する必要があります。
+誕生日の請求書を取得するなど、より複雑なポリシーが必要な場合は、年数を計算し、その年齢を確認してから、 [カスタムポリシーハンドラー](xref:security/authorization/policies)を記述する必要があります。

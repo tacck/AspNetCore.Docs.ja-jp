@@ -1,5 +1,5 @@
 ---
-title: SignalRHubContext
+title: SignalR HubContext
 author: bradygaster
 description: ASP.NET Core HubContext サービスを使用し SignalR て、ハブの外部からクライアントに通知を送信する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: b9adc54c1928d6ec11f707b2bd5e1e297973f1ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c6a4926be008feb2c9b708c56597070b96d8bd3f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021927"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633020"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>ハブの外部からメッセージを送信する
 
@@ -30,7 +31,7 @@ ms.locfileid: "88021927"
 
 SignalRハブは、サーバーに接続されたクライアントにメッセージを送信するための中核的な抽象化です SignalR 。 また、サービスを使用して、アプリ内の他の場所からメッセージを送信することもでき `IHubContext` ます。 この記事では、にアクセスして、 SignalR `IHubContext` ハブの外部からクライアントに通知を送信する方法について説明します。
 
-[サンプル コードを表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(ダウンロード方法)](xref:index#how-to-download-a-sample)。
+[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) ([ダウンロード方法](xref:index#how-to-download-a-sample))
 
 ## <a name="get-an-instance-of-ihubcontext"></a>IHubContext のインスタンスを取得する
 
@@ -116,5 +117,5 @@ public class ChatController : Controller
 ## <a name="related-resources"></a>関連リソース
 
 * [開始するには](xref:tutorials/signalr)
-* [取って代わり](xref:signalr/hubs)
+* [ハブ](xref:signalr/hubs)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)

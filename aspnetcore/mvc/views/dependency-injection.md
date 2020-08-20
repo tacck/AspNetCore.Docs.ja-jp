@@ -5,6 +5,7 @@ description: ASP.NET Core で MVC ビューへの依存関係の挿入をサポ�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 4ed3e1334994c815996bd3db073fab5e544e2ca8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5ab79740d2068a50e4138e5b86f1622af8ef5ec7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018222"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633605"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core でのビューへの依存関係の挿入
 

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 1f57bc4662296333b3d2c659c057230548541b91
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6997dbfdd5c654e4a8b15a026fd3ec61d024f02d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020406"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632370"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core の ObjectPool を使用したオブジェクトの再利用
 
 [上田 Gordon](https://twitter.com/stevejgordon)、[ライアン Nowak](https://github.com/rynowak)、および[Günther](https://github.com/gfoidl)があります。
 
-<xref:Microsoft.Extensions.ObjectPool>は、オブジェクトのガベージコレクションを許可するのではなく、オブジェクトのグループをメモリに保持して再利用できるようにする ASP.NET Core インフラストラクチャの一部です。
+<xref:Microsoft.Extensions.ObjectPool> は、オブジェクトのガベージコレクションを許可するのではなく、オブジェクトのグループをメモリに保持して再利用できるようにする ASP.NET Core インフラストラクチャの一部です。
 
 管理されているオブジェクトが次のような場合に、オブジェクトプールを使用することができます。
 
@@ -35,7 +36,7 @@ ms.locfileid: "88020406"
 - 限られたリソースを表します。
 - 予測と頻繁に使用されます。
 
-たとえば、ASP.NET Core framework では、インスタンスを再利用するために、いくつかの場所でオブジェクトプールを使用し <xref:System.Text.StringBuilder> ます。 `StringBuilder`は、独自のバッファーを割り当てて管理し、文字データを保持します。 ASP.NET Core `StringBuilder` が機能を実装するために定期的に使用し、それらを再利用することによって、パフォーマンスが向上します。
+たとえば、ASP.NET Core framework では、インスタンスを再利用するために、いくつかの場所でオブジェクトプールを使用し <xref:System.Text.StringBuilder> ます。 `StringBuilder` は、独自のバッファーを割り当てて管理し、文字データを保持します。 ASP.NET Core `StringBuilder` が機能を実装するために定期的に使用し、それらを再利用することによって、パフォーマンスが向上します。
 
 オブジェクトプーリングでは、常にパフォーマンスが向上するわけではありません。
 
@@ -45,18 +46,18 @@ ms.locfileid: "88020406"
 オブジェクトプールは、アプリまたはライブラリの現実的なシナリオを使用してパフォーマンスデータを収集した後にのみ使用してください。
 
 ::: moniker range="< aspnetcore-3.0"
-**警告: はを `ObjectPool` 実装していません `IDisposable` 。破棄が必要な型では使用しないことをお勧めします。** `ObjectPool`ASP.NET Core 3.0 以降では、をサポートして `IDisposable` います。
+**警告: はを `ObjectPool` 実装していません `IDisposable` 。破棄が必要な型では使用しないことをお勧めします。** `ObjectPool` ASP.NET Core 3.0 以降では、をサポートして `IDisposable` います。
 ::: moniker-end
 
 **注: ObjectPool では、割り当てられるオブジェクトの数に制限は設定されません。これにより、保持するオブジェクトの数に制限が適用されます。**
 
 ## <a name="concepts"></a>概念
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>-基本的なオブジェクトプールの抽象化。 オブジェクトを取得して返すために使用します。
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> -基本的なオブジェクトプールの抽象化。 オブジェクトを取得して返すために使用します。
 
-<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601>-オブジェクトの作成方法と、オブジェクトがプールに返されるときの*リセット*方法をカスタマイズするには、これを実装します。 これは、直接構築するオブジェクトプールに渡すことができます...もしくは
+<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> -オブジェクトの作成方法と、オブジェクトがプールに返されるときの *リセット* 方法をカスタマイズするには、これを実装します。 これは、直接構築するオブジェクトプールに渡すことができます...もしくは
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*>オブジェクトプールを作成するためのファクトリとして機能します。
+<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> オブジェクトプールを作成するためのファクトリとして機能します。
 <!-- REview, there is no ObjectPoolProvider<T> -->
 
 ObjectPool は、次のような複数の方法でアプリで使用できます。
@@ -72,13 +73,13 @@ ObjectPool は、次のような複数の方法でアプリで使用できます
 ::: moniker range=">= aspnetcore-3.0"
 <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider>が使用され、を実装する場合 `T` `IDisposable` :
 
-* プールに返され***ない***項目は破棄されます。
+* プールに返され ***ない*** 項目は破棄されます。
 * プールが DI によって破棄されると、プール内のすべての項目が破棄されます。
 
 注: プールが破棄された後:
 
 * を呼び出す `Get` と、がスローさ `ObjectDisposedException` れます。
-* `return`指定された項目を破棄します。
+* `return` 指定された項目を破棄します。
 
 ::: moniker-end
 
@@ -92,7 +93,7 @@ ObjectPool は、次のような複数の方法でアプリで使用できます
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
-次のコードはを実装します。`BirthdayMiddleware`
+次のコードはを実装します。 `BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
 

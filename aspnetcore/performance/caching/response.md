@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021342"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631876"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core での応答のキャッシュ
 
-By [John Luo](https://github.com/JunTaoLuo)、 [Rick Anderson](https://twitter.com/RickAndMSFT)、および[上田 Smith](https://ardalis.com/)
+By [John Luo](https://github.com/JunTaoLuo)、 [Rick Anderson](https://twitter.com/RickAndMSFT)、および [上田 Smith](https://ardalis.com/)
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/response/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -33,11 +34,11 @@ By [John Luo](https://github.com/JunTaoLuo)、 [Rick Anderson](https://twitter.c
 
 [ResponseCache 属性](#responsecache-attribute)は、応答キャッシュヘッダーの設定に関与します。 クライアントと中間プロキシは、 [HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234)での応答をキャッシュするためのヘッダーを優先する必要があります。
 
-HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場合は、[応答キャッシュミドルウェア](xref:performance/caching/middleware)を使用します。 ミドルウェアは、プロパティを使用して、 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> サーバー側のキャッシュ動作に影響を与えることができます。
+HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場合は、 [応答キャッシュミドルウェア](xref:performance/caching/middleware)を使用します。 ミドルウェアは、プロパティを使用して、 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> サーバー側のキャッシュ動作に影響を与えることができます。
 
 ## <a name="http-based-response-caching"></a>HTTP ベースの応答のキャッシュ
 
-[HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234)では、インターネットキャッシュの動作方法について説明します。 キャッシュに使用されるプライマリ HTTP ヘッダーは[cache-control](https://tools.ietf.org/html/rfc7234#section-5.2)で、キャッシュ*ディレクティブ*を指定するために使用されます。 ディレクティブは、要求に応じてキャッシュ動作を制御し、応答としてサーバーからクライアントへの応答を行います。 要求と応答はプロキシサーバーを経由して移動し、プロキシサーバーも HTTP 1.1 キャッシュ仕様に準拠している必要があります。
+[HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234)では、インターネットキャッシュの動作方法について説明します。 キャッシュに使用されるプライマリ HTTP ヘッダーは [cache-control](https://tools.ietf.org/html/rfc7234#section-5.2)で、キャッシュ *ディレクティブ*を指定するために使用されます。 ディレクティブは、要求に応じてキャッシュ動作を制御し、応答としてサーバーからクライアントへの応答を行います。 要求と応答はプロキシサーバーを経由して移動し、プロキシサーバーも HTTP 1.1 キャッシュ仕様に準拠している必要があります。
 
 共通の `Cache-Control` ディレクティブを次の表に示します。
 
@@ -53,7 +54,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 | ヘッダー                                                     | 機能 |
 | ---------------------------------------------------------- | -------- |
-| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 配信元サーバーで応答が生成または正常に検証されてからの、秒単位の推定時間。 |
+| [変更](https://tools.ietf.org/html/rfc7234#section-5.1)     | 配信元サーバーで応答が生成または正常に検証されてからの、秒単位の推定時間。 |
 | [経過](https://tools.ietf.org/html/rfc7234#section-5.3) | 応答が古くなったと見なされるまでの時間。 |
 | [Unmanaged](https://tools.ietf.org/html/rfc7234#section-5.4)  | 動作を設定するために HTTP/1.0 キャッシュとの下位互換性を維持するために存在し `no-cache` ます。 `Cache-Control`ヘッダーが存在する場合、 `Pragma` ヘッダーは無視されます。 |
 | [要因](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | キャッシュされた `Vary` 応答の元の要求と新しい要求の両方ですべてのヘッダーフィールドが一致する場合を除き、キャッシュされた応答を送信しないように指定します。 |
@@ -64,33 +65,33 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 `Cache-Control`HTTP キャッシュの目的を検討する場合は、常にクライアント要求ヘッダーを使用することをお勧めします。 公式仕様では、キャッシュは、クライアント、プロキシ、およびサーバーのネットワーク経由で要求を満たすことの待機時間とネットワークオーバーヘッドを削減することを目的としています。 配信元サーバーの負荷を制御する方法であるとは限りません。
 
-ミドルウェアが公式のキャッシュ仕様に準拠しているため、[応答キャッシュミドルウェア](xref:performance/caching/middleware)を使用する場合、開発者はこのキャッシュ動作を制御することはできません。 [ミドルウェアの計画](https://github.com/dotnet/AspNetCore/issues/2612)された拡張機能は、キャッシュされ `Cache-Control` た応答を提供することを決定するときに、要求のヘッダーを無視するようにミドルウェアを構成する機会です。 計画された拡張機能により、サーバーの負荷をより適切に制御できるようになります。
+ミドルウェアが公式のキャッシュ仕様に準拠しているため、 [応答キャッシュミドルウェア](xref:performance/caching/middleware) を使用する場合、開発者はこのキャッシュ動作を制御することはできません。 [ミドルウェアの計画](https://github.com/dotnet/AspNetCore/issues/2612) された拡張機能は、キャッシュされ `Cache-Control` た応答を提供することを決定するときに、要求のヘッダーを無視するようにミドルウェアを構成する機会です。 計画された拡張機能により、サーバーの負荷をより適切に制御できるようになります。
 
 ## <a name="other-caching-technology-in-aspnet-core"></a>ASP.NET Core のその他のキャッシュテクノロジ
 
 ### <a name="in-memory-caching"></a>メモリ内キャッシュ
 
-インメモリキャッシュは、キャッシュされたデータを格納するためにサーバーメモリを使用します。 この種のキャッシュは、1台のサーバーまたは*固定セッション*を使用している複数のサーバーに適しています。 固定セッションとは、クライアントからの要求が常に同じサーバーにルーティングされて処理されることを意味します。
+インメモリキャッシュは、キャッシュされたデータを格納するためにサーバーメモリを使用します。 この種のキャッシュは、1台のサーバーまたは *固定セッション*を使用している複数のサーバーに適しています。 固定セッションとは、クライアントからの要求が常に同じサーバーにルーティングされて処理されることを意味します。
 
-詳細については、「<xref:performance/caching/memory>」を参照してください。
+詳細については、<xref:performance/caching/memory> を参照してください。
 
 ### <a name="distributed-cache"></a>分散キャッシュ
 
-アプリがクラウドまたはサーバーファームでホストされている場合は、分散キャッシュを使用してデータをメモリに格納します。 キャッシュは、要求を処理するサーバー間で共有されます。 クライアントのキャッシュデータが使用可能な場合、クライアントは、グループ内の任意のサーバーによって処理される要求を送信できます。 ASP.NET Core は、SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)、および[ncache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)分散キャッシュと連動します。
+アプリがクラウドまたはサーバーファームでホストされている場合は、分散キャッシュを使用してデータをメモリに格納します。 キャッシュは、要求を処理するサーバー間で共有されます。 クライアントのキャッシュデータが使用可能な場合、クライアントは、グループ内の任意のサーバーによって処理される要求を送信できます。 ASP.NET Core は、SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)、および [ncache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) 分散キャッシュと連動します。
 
-詳細については、「<xref:performance/caching/distributed>」を参照してください。
+詳細については、<xref:performance/caching/distributed> を参照してください。
 
 ### <a name="cache-tag-helper"></a>キャッシュ タグ ヘルパー
 
 キャッシュタグヘルパーを使用して、MVC ビューまたはページからコンテンツをキャッシュし Razor ます。 キャッシュタグヘルパーは、メモリ内キャッシュを使用してデータを格納します。
 
-詳細については、「<xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>」を参照してください。
+詳細については、<xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper> を参照してください。
 
 ### <a name="distributed-cache-tag-helper"></a>分散キャッシュ タグ ヘルパー
 
-分散 Razor キャッシュタグヘルパーを使用して、分散型クラウドまたは web ファームのシナリオで、MVC ビューまたはページからコンテンツをキャッシュします。 分散キャッシュタグヘルパーは、SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)、または[ncache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)を使用してデータを格納します。
+分散 Razor キャッシュタグヘルパーを使用して、分散型クラウドまたは web ファームのシナリオで、MVC ビューまたはページからコンテンツをキャッシュします。 分散キャッシュタグヘルパーは、SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)、または [ncache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) を使用してデータを格納します。
 
-詳細については、「<xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>」を参照してください。
+詳細については、<xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper> を参照してください。
 
 ## <a name="responsecache-attribute"></a>ResponseCache 属性
 
@@ -99,7 +100,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 > [!WARNING]
 > 認証されたクライアントの情報が含まれているコンテンツのキャッシュを無効にします。 キャッシュは、ユーザーの id またはユーザーがサインインしているかどうかによって変更されないコンテンツに対してのみ有効にする必要があります。
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>指定されたクエリキーのリストの値によって、格納されている応答を変化させる。 1つの値を指定した場合 `*` 、ミドルウェアはすべての要求クエリ文字列パラメーターによって応答を変化させることができます。
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> 指定されたクエリキーのリストの値によって、格納されている応答を変化させる。 1つの値を指定した場合 `*` 、ミドルウェアはすべての要求クエリ文字列パラメーターによって応答を変化させることができます。
 
 プロパティを設定するには、[応答キャッシュミドルウェア](xref:performance/caching/middleware)を有効にする必要があり <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> ます。 それ以外の場合は、ランタイム例外がスローされます。 プロパティに対応する HTTP ヘッダーがありません <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> 。 プロパティは、応答キャッシュミドルウェアによって処理される HTTP 機能です。 ミドルウェアがキャッシュされた応答を提供するには、クエリ文字列とクエリ文字列の値が以前の要求と一致している必要があります。 たとえば、次の表に示すような一連の要求と結果を考えてみましょう。
 
@@ -132,14 +133,14 @@ Vary: User-Agent
 
 ### <a name="nostore-and-locationnone"></a>NoStore と Location。なし
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>その他のほとんどのプロパティをオーバーライドします。 このプロパティがに設定されている場合 `true` 、 `Cache-Control` ヘッダーはに設定され `no-store` ます。 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>がに設定されている場合 `None` :
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> その他のほとんどのプロパティをオーバーライドします。 このプロパティがに設定されている場合 `true` 、 `Cache-Control` ヘッダーはに設定され `no-store` ます。 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>がに設定されている場合 `None` :
 
 * `Cache-Control` が `no-store,no-cache` に設定されます。
 * `Pragma` が `no-cache` に設定されます。
 
 がで、がである場合、 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> `false` およびは <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> `None` `Cache-Control` `Pragma` に設定され `no-cache` ます。
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>は、通常、 `true` エラーページに対してに設定されます。 サンプルアプリの Cache2 ページには、応答を格納しないようにクライアントに指示する応答ヘッダーが生成されます。
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> は、通常、 `true` エラーページに対してに設定されます。 サンプルアプリの Cache2 ページには、応答を格納しないようにクライアントに指示する応答ヘッダーが生成されます。
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache2.cshtml.cs?name=snippet)]
 
@@ -156,11 +157,11 @@ Pragma: no-cache
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>との各オプションは、 `Any` `Client` `Cache-Control` それぞれおよびのヘッダー値に変換さ `public` `private` れます。 [Nostore と Location. None](#nostore-and-locationnone)セクションに記載されているよう <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> に、をに設定する `None` と、との両方の `Cache-Control` `Pragma` ヘッダーがに設定さ `no-cache` れます。
 
-`Location.Any`( `Cache-Control` に設定 `public` )*は、クライアントまたは任意の中間プロキシ*が値 ([応答キャッシュミドルウェア](xref:performance/caching/middleware)を含む) をキャッシュする可能性があることを示します。
+`Location.Any` ( `Cache-Control` に設定 `public` ) *は、クライアントまたは任意の中間プロキシ* が値 ( [応答キャッシュミドルウェア](xref:performance/caching/middleware)を含む) をキャッシュする可能性があることを示します。
 
-`Location.Client`( `Cache-Control` に設定 `private` ) は *、クライアントのみ*が値をキャッシュできることを示します。 [応答キャッシュミドルウェア](xref:performance/caching/middleware)を含め、中間キャッシュで値をキャッシュすることはできません。
+`Location.Client` ( `Cache-Control` に設定 `private` ) は *、クライアントのみ* が値をキャッシュできることを示します。 [応答キャッシュミドルウェア](xref:performance/caching/middleware)を含め、中間キャッシュで値をキャッシュすることはできません。
 
-キャッシュ制御ヘッダーは、応答をキャッシュするタイミングと方法について、クライアントと仲介プロキシに関するガイダンスを提供するだけです。 クライアントとプロキシが[HTTP 1.1 のキャッシュ仕様](https://tools.ietf.org/html/rfc7234)に従うという保証はありません。 [応答キャッシュミドルウェア](xref:performance/caching/middleware)は、常に仕様によって配置されたキャッシュ規則に従います。
+キャッシュ制御ヘッダーは、応答をキャッシュするタイミングと方法について、クライアントと仲介プロキシに関するガイダンスを提供するだけです。 クライアントとプロキシが [HTTP 1.1 のキャッシュ仕様](https://tools.ietf.org/html/rfc7234)に従うという保証はありません。 [応答キャッシュミドルウェア](xref:performance/caching/middleware) は、常に仕様によって配置されたキャッシュ規則に従います。
 
 次の例では、サンプルアプリの Cache3 ページモデルと、を設定し、 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Duration> 既定値のままにして生成されたヘッダーを示し <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> ます。
 
@@ -196,7 +197,7 @@ Cache-Control: public,max-age=10
 
 は、 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> 次のように適用できます。
 
-* Razorページ: ハンドラーメソッドに属性を適用することはできません。
+* Razor ページ: ハンドラーメソッドに属性を適用することはできません。
 * MVC コントローラー。
 * MVC アクションメソッド: メソッドレベルの属性は、クラスレベルの属性で指定された設定をオーバーライドします。
 

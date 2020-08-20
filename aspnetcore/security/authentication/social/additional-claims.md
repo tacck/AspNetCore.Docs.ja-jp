@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: f7a440a13891cd51226cad12924cfc65684632ea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: eeddc75e7bcf368b476f62900c14575c9937e1f7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020185"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631525"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>ASP.NET Core で外部プロバイダーからの追加の要求とトークンを保持する
 
@@ -34,7 +35,7 @@ ASP.NET Core アプリは、Facebook、Google、Microsoft、Twitter などの外
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
-アプリでサポートする外部認証プロバイダーを決定します。 各プロバイダーについて、アプリを登録し、クライアント ID とクライアントシークレットを取得します。 詳細については、「<xref:security/authentication/social/index>」を参照してください。 このサンプルアプリでは、 [Google 認証プロバイダー](xref:security/authentication/google-logins)を使用します。
+アプリでサポートする外部認証プロバイダーを決定します。 各プロバイダーについて、アプリを登録し、クライアント ID とクライアントシークレットを取得します。 詳細については、<xref:security/authentication/social/index> を参照してください。 このサンプルアプリでは、 [Google 認証プロバイダー](xref:security/authentication/google-logins)を使用します。
 
 ## <a name="set-the-client-id-and-client-secret"></a>クライアント ID とクライアントシークレットを設定する
 
@@ -94,7 +95,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ## <a name="save-the-access-token"></a>アクセストークンを保存する
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。 `SaveTokens`は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され cookie ます。
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。 `SaveTokens` は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され cookie ます。
 
 サンプルアプリでは、の値をに設定し `SaveTokens` `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ます。
 
@@ -102,7 +103,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 を実行するときに、 `OnPostConfirmationAsync` の外部プロバイダーからアクセストークン ([Externallogininfo. authenticationtokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) をに格納 `ApplicationUser` `AuthenticationProperties` します。
 
-サンプルアプリでは、アクセストークン `OnPostConfirmationAsync` (新しいユーザー登録) と `OnGetCallbackAsync` (以前に登録されたユーザー) を*Account/externallogin. cshtml. cs*に保存します。
+サンプルアプリでは、アクセストークン `OnPostConfirmationAsync` (新しいユーザー登録) と `OnGetCallbackAsync` (以前に登録されたユーザー) を *Account/externallogin. cshtml. cs*に保存します。
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
@@ -118,11 +119,11 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ユーザーは、から派生し、抽象メソッドを実装することによって、カスタムアクションを定義でき <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction> <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.Run*> ます。
 
-詳細については、「<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>」を参照してください。
+詳細については、<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims> を参照してください。
 
 ## <a name="removal-of-claim-actions-and-claims"></a>要求アクションと要求の削除
 
-[Claimactioncollection。 Remove (String)](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*)は、指定されたのすべての要求アクションを <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> コレクションから削除します。 [DeleteClaim (ClaimActionCollection, String)](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*)は、指定されたの要求を <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> id から削除します。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*>は、主に[OpenID connect (OIDC)](/azure/active-directory/develop/v2-protocols-oidc)と共に使用して、プロトコルによって生成された要求を削除します。
+[Claimactioncollection。 Remove (String)](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*) は、指定されたのすべての要求アクションを <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> コレクションから削除します。 [DeleteClaim (ClaimActionCollection, String)](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*) は、指定されたの要求を <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> id から削除します。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*> は、主に [OpenID connect (OIDC)](/azure/active-directory/develop/v2-protocols-oidc) と共に使用して、プロトコルによって生成された要求を削除します。
 
 ## <a name="sample-app-output"></a>サンプルアプリの出力
 
@@ -174,7 +175,7 @@ ASP.NET Core アプリは、Facebook、Google、Microsoft、Twitter などの外
 
 ## <a name="prerequisites"></a>必須コンポーネント
 
-アプリでサポートする外部認証プロバイダーを決定します。 各プロバイダーについて、アプリを登録し、クライアント ID とクライアントシークレットを取得します。 詳細については、「<xref:security/authentication/social/index>」を参照してください。 このサンプルアプリでは、 [Google 認証プロバイダー](xref:security/authentication/google-logins)を使用します。
+アプリでサポートする外部認証プロバイダーを決定します。 各プロバイダーについて、アプリを登録し、クライアント ID とクライアントシークレットを取得します。 詳細については、<xref:security/authentication/social/index> を参照してください。 このサンプルアプリでは、 [Google 認証プロバイダー](xref:security/authentication/google-logins)を使用します。
 
 ## <a name="set-the-client-id-and-client-secret"></a>クライアント ID とクライアントシークレットを設定する
 
@@ -234,7 +235,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ## <a name="save-the-access-token"></a>アクセストークンを保存する
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。 `SaveTokens`は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され cookie ます。
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。 `SaveTokens` は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され cookie ます。
 
 サンプルアプリでは、の値をに設定し `SaveTokens` `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ます。
 
@@ -242,7 +243,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 を実行するときに、 `OnPostConfirmationAsync` の外部プロバイダーからアクセストークン ([Externallogininfo. authenticationtokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) をに格納 `ApplicationUser` `AuthenticationProperties` します。
 
-サンプルアプリでは、アクセストークン `OnPostConfirmationAsync` (新しいユーザー登録) と `OnGetCallbackAsync` (以前に登録されたユーザー) を*Account/externallogin. cshtml. cs*に保存します。
+サンプルアプリでは、アクセストークン `OnPostConfirmationAsync` (新しいユーザー登録) と `OnGetCallbackAsync` (以前に登録されたユーザー) を *Account/externallogin. cshtml. cs*に保存します。
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
@@ -258,11 +259,11 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 ユーザーは、から派生し、抽象メソッドを実装することによって、カスタムアクションを定義でき <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction> <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.Run*> ます。
 
-詳細については、「<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>」を参照してください。
+詳細については、<xref:Microsoft.AspNetCore.Authentication.OAuth.Claims> を参照してください。
 
 ## <a name="removal-of-claim-actions-and-claims"></a>要求アクションと要求の削除
 
-[Claimactioncollection。 Remove (String)](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*)は、指定されたのすべての要求アクションを <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> コレクションから削除します。 [DeleteClaim (ClaimActionCollection, String)](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*)は、指定されたの要求を <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> id から削除します。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*>は、主に[OpenID connect (OIDC)](/azure/active-directory/develop/v2-protocols-oidc)と共に使用して、プロトコルによって生成された要求を削除します。
+[Claimactioncollection。 Remove (String)](xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimActionCollection.Remove*) は、指定されたのすべての要求アクションを <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> コレクションから削除します。 [DeleteClaim (ClaimActionCollection, String)](xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*) は、指定されたの要求を <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.ClaimType> id から削除します。 <xref:Microsoft.AspNetCore.Authentication.ClaimActionCollectionMapExtensions.DeleteClaim*> は、主に [OpenID connect (OIDC)](/azure/active-directory/develop/v2-protocols-oidc) と共に使用して、プロトコルによって生成された要求を削除します。
 
 ## <a name="sample-app-output"></a>サンプルアプリの出力
 
@@ -308,4 +309,4 @@ Authentication Properties
 
 ## <a name="additional-resources"></a>その他のリソース
 
-* [dotnet/AspNetCore engineering の社会 Alsample アプリ](https://github.com/dotnet/AspNetCore/tree/master/src/Security/Authentication/samples/SocialSample): リンクされたサンプルアプリは、 [Dotnet/AspNetCore GitHub リポジトリの](https://github.com/dotnet/AspNetCore) `master` エンジニアリングブランチにあります。 ブランチには、 `master` ASP.NET Core の次のリリースでアクティブな開発のコードが含まれています。 リリースされたバージョンの ASP.NET Core 用のサンプルアプリのバージョンを表示するには、[**ブランチ**] ドロップダウンリストを使用してリリースブランチを選択します (たとえば、 `release/{X.Y}` )。
+* [dotnet/AspNetCore engineering の社会 Alsample アプリ](https://github.com/dotnet/AspNetCore/tree/master/src/Security/Authentication/samples/SocialSample): リンクされたサンプルアプリは、 [Dotnet/AspNetCore GitHub リポジトリの](https://github.com/dotnet/AspNetCore) `master` エンジニアリングブランチにあります。 ブランチには、 `master` ASP.NET Core の次のリリースでアクティブな開発のコードが含まれています。 リリースされたバージョンの ASP.NET Core 用のサンプルアプリのバージョンを表示するには、[ **ブランチ** ] ドロップダウンリストを使用してリリースブランチを選択します (たとえば、 `release/{X.Y}` )。

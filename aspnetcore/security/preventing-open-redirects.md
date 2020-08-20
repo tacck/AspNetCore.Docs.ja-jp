@@ -5,6 +5,7 @@ description: ASP.NET Core アプリに対するオープンリダイレクト攻
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 3a58c25bbd54803ce0b8c42a2667222d6e14c050
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021017"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633462"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core でのオープンリダイレクト攻撃の防止
 
@@ -64,11 +65,11 @@ public IActionResult SomeAction(string redirectUrl)
 }
 ```
 
-`LocalRedirect`ローカル以外の URL が指定されている場合、は例外をスローします。 それ以外の場合は、メソッドと同じように動作 `Redirect` します。
+`LocalRedirect` ローカル以外の URL が指定されている場合、は例外をスローします。 それ以外の場合は、メソッドと同じように動作 `Redirect` します。
 
 ### <a name="islocalurl"></a>IsLocalUrl
 
-リダイレクトする前に Url をテストするには、 [Islocalurl](/dotnet/api/Microsoft.AspNetCore.Mvc.IUrlHelper.islocalurl#Microsoft_AspNetCore_Mvc_IUrlHelper_IsLocalUrl_System_String_)メソッドを使用します。
+リダイレクトする前に Url をテストするには、 [Islocalurl](/dotnet/api/Microsoft.AspNetCore.Mvc.IUrlHelper.islocalurl#Microsoft_AspNetCore_Mvc_IUrlHelper_IsLocalUrl_System_String_) メソッドを使用します。
 
 次の例では、リダイレクトの前に URL がローカルかどうかを確認する方法を示します。
 

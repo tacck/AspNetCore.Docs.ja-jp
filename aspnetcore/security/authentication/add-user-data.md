@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a71395e82ed15dae753888a438471495208a14da
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020861"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631850"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>カスタムユーザーデータを Identity ASP.NET Core プロジェクトに追加、ダウンロード、および削除する
 
@@ -30,7 +31,7 @@ ms.locfileid: "88020861"
 この記事では、次の方法について説明します。
 
 * カスタムユーザーデータを ASP.NET Core web アプリに追加します。
-* カスタムユーザーデータモデルを属性でマークして、 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 自動的にダウンロードおよび削除できるようにします。 データをダウンロードして削除できるようにすると、 [GDPR](xref:security/gdpr)の要件を満たすことができます。
+* カスタムユーザーデータモデルを属性でマークして、 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 自動的にダウンロードおよび削除できるようにします。 データをダウンロードして削除できるようにすると、 [GDPR](xref:security/gdpr) の要件を満たすことができます。
 
 プロジェクトサンプルは、ページ web アプリから作成され Razor ますが、手順は ASP.NET CORE MVC web アプリの場合と似ています。
 
@@ -58,7 +59,7 @@ ms.locfileid: "88020861"
 
 * Visual Studio の **[ファイル]** メニューから、**[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに**WebApp1**という名前を付けます。
 * **ASP.NET Core Web アプリケーション**の選択- > **OK**
-* ドロップダウンで**ASP.NET Core 3.0**を選択します。
+* ドロップダウンで **ASP.NET Core 3.0** を選択します。
 * **Web アプリケーション**の選択- > **OK**
 * プロジェクトをビルドして実行します。
 
@@ -68,7 +69,7 @@ ms.locfileid: "88020861"
 
 * Visual Studio の **[ファイル]** メニューから、**[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに**WebApp1**という名前を付けます。
 * **ASP.NET Core Web アプリケーション**の選択- > **OK**
-* ドロップダウンで**ASP.NET Core 2.2**を選択します。
+* ドロップダウンで **ASP.NET Core 2.2** を選択します。
 * **Web アプリケーション**の選択- > **OK**
 * プロジェクトをビルドして実行します。
 
@@ -90,7 +91,7 @@ dotnet new webapp -o WebApp1
 * **ソリューションエクスプローラー**で、プロジェクトを右クリックし、[ **Add**  >  **New スキャフォールディング Item**] > ます。
 * [**スキャフォールディングの追加**] ダイアログボックスの左ペインで、[追加] を選択し **Identity**  >  **Add**ます。
 * [**追加 Identity ** ] ダイアログで、次のオプションを選択します。
-  * 既存のレイアウト _Layout ファイルを選択し*ます。*
+  * 既存のレイアウト _Layout ファイルを選択し  *ます。*
   * 上書きする以下のファイルを選択してください:
     * **アカウント/登録**
     * **アカウント/管理/インデックス**
@@ -134,14 +135,14 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 * `<partial name="_LoginPartial" />`レイアウトファイルにを追加します。
 * アプリをテストします。
   * ユーザーを登録する
-  * [**ログアウト**] リンクの横にある新しいユーザー名を選択します。 場合によっては、ウィンドウを展開するか、ナビゲーションバーのアイコンを選択して、ユーザー名とその他のリンクを表示する必要があります。
+  * [ **ログアウト** ] リンクの横にある新しいユーザー名を選択します。 場合によっては、ウィンドウを展開するか、ナビゲーションバーのアイコンを選択して、ユーザー名とその他のリンクを表示する必要があります。
   * [ **Personal Data** ] タブを選択します。
-  * [**ダウンロード**] ボタンを選択し、ファイルの*PersonalData.js*を調べます。
-  * [**削除**] ボタンをテストします。これにより、ログオンしているユーザーが削除されます。
+  * [ **ダウンロード** ] ボタンを選択し、ファイルの *PersonalData.js* を調べます。
+  * [ **削除** ] ボタンをテストします。これにより、ログオンしているユーザーが削除されます。
 
 ## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>DB にカスタムユーザーデータを追加する Identity
 
-`IdentityUser`カスタムプロパティを使用して、派生クラスを更新します。 プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は*Areas/ Identity /Data/WebApp1User.cs*になります。 次のコードを使用して、ファイルを更新します。
+`IdentityUser`カスタムプロパティを使用して、派生クラスを更新します。 プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は *Areas/ Identity /Data/WebApp1User.cs*になります。 次のコードを使用して、ファイルを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -155,20 +156,20 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ::: moniker-end
 
-プロパティ[は、次のよう](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute)になります。
+プロパティ [は、次のよう](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) になります。
 
 * *区分/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml*ページがを呼び出したときに削除され Razor `UserManager.Delete` ます。
-* ダウンロードされたデータには、[区分]、[ページ]、*および [ Identity Manage/Download] の各*ページで含まれ Razor ます。
+* ダウンロードされたデータには、[区分]、[ページ]、 *および [ Identity Manage/Download] の各*ページで含まれ Razor ます。
 
 ### <a name="update-the-accountmanageindexcshtml-page"></a>Account/Manage/Index. cshtml ページを更新する
 
-次の `InputModel` 強調表示されたコードを使用して、*区分/ Identity /Pages/Account/Manage/Index.cshtml.cs*のを更新します。
+次の `InputModel` 強調表示されたコードを使用して、 *区分/ Identity /Pages/Account/Manage/Index.cshtml.cs* のを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-次の強調表示されているマークアップを使用して、*区分//////////また Identity *は更新プログラムを更新します。
+次の強調表示されているマークアップを使用して、 *区分//////////また Identity * は更新プログラムを更新します。
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
@@ -178,7 +179,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-次の強調表示されているマークアップを使用して、*区分//////////また Identity *は更新プログラムを更新します。
+次の強調表示されているマークアップを使用して、 *区分//////////また Identity * は更新プログラムを更新します。
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
@@ -186,13 +187,13 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ### <a name="update-the-accountregistercshtml-page"></a>Account/Register. cshtml ページを更新する
 
-次の `InputModel` 強調表示されたコードを使用して、*区分/ Identity /Pages/Account/Register.cshtml.cs*のを更新します。
+次の `InputModel` 強調表示されたコードを使用して、 *区分/ Identity /Pages/Account/Register.cshtml.cs* のを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-次の強調表示されたマークアップを使用して、*区分//[///////////////また Identity *はの
+次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity * はの
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -202,7 +203,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-次の強調表示されたマークアップを使用して、*区分//[///////////////また Identity *はの
+次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity * はの
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -215,7 +216,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio**パッケージマネージャーコンソール**で次のようにします。
+Visual Studio **パッケージマネージャーコンソール**で次のようにします。
 
 ```powershell
 Add-Migration CustomUserData
@@ -244,7 +245,7 @@ dotnet ef database update
 > [!NOTE]
 > このセクションは、前のチュートリアルの拡張機能ではありません。 チュートリアルを使用してビルドされたアプリに次の手順を適用するには、 [GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/18797)を参照してください。
 
-インターフェイスを使用して、追加の要求を ASP.NET Core に追加することができ Identity `IUserClaimsPrincipalFactory<T>` ます。 このクラスは、メソッドでアプリに追加でき `Startup.ConfigureServices` ます。 次のように、クラスのカスタム実装を追加します。
+インターフェイスを使用して、追加の要求をに追加でき ASP.NET Core Identity `IUserClaimsPrincipalFactory<T>` ます。 このクラスは、メソッドでアプリに追加でき `Startup.ConfigureServices` ます。 次のように、クラスのカスタム実装を追加します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

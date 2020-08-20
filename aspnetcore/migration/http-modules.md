@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014985"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632175"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP ハンドラーとモジュールを ASP.NET Core ミドルウェアに移行する
 
-この記事では、既存の ASP.NET [HTTP モジュールとハンドラーを system.webserver から](/iis/configuration/system.webserver/)ASP.NET Core[ミドルウェア](xref:fundamentals/middleware/index)に移行する方法について説明します。
+この記事では、既存の ASP.NET [HTTP モジュールとハンドラーを system.webserver から](/iis/configuration/system.webserver/) ASP.NET Core [ミドルウェア](xref:fundamentals/middleware/index)に移行する方法について説明します。
 
 ## <a name="modules-and-handlers-revisited"></a>再検討されたモジュールとハンドラー
 
@@ -36,7 +37,7 @@ ms.locfileid: "88014985"
 
 * [IHttpHandler](/dotnet/api/system.web.ihttphandler)を実装するクラス
 
-* 指定されたファイル名または拡張子を持つ要求を処理するために使用され*ます。レポートなどです。*
+* 指定されたファイル名または拡張子を持つ要求を処理するために使用され *ます。レポートなどです。*
 
 * *Web.config*で[構成済み](/iis/configuration/system.webserver/handlers/)
 
@@ -58,7 +59,7 @@ ms.locfileid: "88014985"
 
 2. 同じイベントの場合、 *Web.config*で構成されている順序。
 
-モジュールに加えて、ライフサイクルイベントのハンドラーを*Global.asax.cs*ファイルに追加することができます。 これらのハンドラーは、構成されているモジュールのハンドラーの後に実行されます。
+モジュールに加えて、ライフサイクルイベントのハンドラーを *Global.asax.cs* ファイルに追加することができます。 これらのハンドラーは、構成されているモジュールのハンドラーの後に実行されます。
 
 ## <a name="from-handlers-and-modules-to-middleware"></a>ハンドラーとモジュールからミドルウェアへ
 
@@ -68,16 +69,16 @@ ms.locfileid: "88014985"
 
 * ミドルウェアによってモジュールとハンドラーの両方のロールが取得されています。
 
-* ミドルウェアは、ではなくコードを使用して構成*Web.config*
+* ミドルウェアは、ではなくコードを使用して構成 *Web.config*
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* [パイプライン分岐](xref:fundamentals/middleware/index#branch-the-middleware-pipeline)を使用すると、URL だけでなく、要求ヘッダー、クエリ文字列などに基づいて、特定のミドルウェアに要求を送信できます。
+* [パイプライン分岐](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) を使用すると、URL だけでなく、要求ヘッダー、クエリ文字列などに基づいて、特定のミドルウェアに要求を送信できます。
 
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
 
-* [パイプライン分岐](xref:fundamentals/middleware/index#use-run-and-map)を使用すると、URL だけでなく、要求ヘッダー、クエリ文字列などに基づいて、特定のミドルウェアに要求を送信できます。
+* [パイプライン分岐](xref:fundamentals/middleware/index#use-run-and-map) を使用すると、URL だけでなく、要求ヘッダー、クエリ文字列などに基づいて、特定のミドルウェアに要求を送信できます。
 
 ::: moniker-end
 
@@ -91,7 +92,7 @@ ms.locfileid: "88014985"
 
 **ミドルウェアとモジュールは、別の順序で処理されます。**
 
-* ミドルウェアの順序は、要求パイプラインに挿入される順序に基づいていますが、モジュールの順序は主に[アプリケーションライフサイクル](https://msdn.microsoft.com/library/ms227673.aspx)イベントに基づいています。
+* ミドルウェアの順序は、要求パイプラインに挿入される順序に基づいていますが、モジュールの順序は主に [アプリケーションライフサイクル](https://msdn.microsoft.com/library/ms227673.aspx) イベントに基づいています。
 
 * 応答のミドルウェアの順序は、要求の場合と逆になりますが、モジュールの順序は要求と応答に対して同じです。
 
@@ -113,7 +114,7 @@ ms.locfileid: "88014985"
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddleware.cs?highlight=9,13,20,24,28,30,32)]
 
-前のミドルウェアテンプレートは、[ミドルウェアの作成](xref:fundamentals/middleware/write)に関するセクションから取得されました。
+前のミドルウェアテンプレートは、 [ミドルウェアの作成](xref:fundamentals/middleware/write)に関するセクションから取得されました。
 
 *MyMiddlewareExtensions* helper クラスを使用すると、クラスでミドルウェアを簡単に構成 `Startup` できます。 メソッドは、 `UseMyMiddleware` 要求パイプラインにミドルウェアクラスを追加します。 ミドルウェアが必要とするサービスは、ミドルウェアのコンストラクターに挿入されます。
 
@@ -135,7 +136,7 @@ HTTP モジュールは通常、 *Web.config*を使用して要求パイプラ�
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
-クラスの要求パイプラインに[新しいミドルウェアを追加](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)して、これを変換し `Startup` ます。
+クラスの要求パイプラインに [新しいミドルウェアを追加](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) して、これを変換し `Startup` ます。
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
@@ -159,7 +160,7 @@ ASP.NET Core プロジェクトでは、これを次のようなミドルウェ�
 
 ## <a name="migrating-handler-insertion-into-the-request-pipeline"></a>要求パイプラインへのハンドラー挿入の移行
 
-HTTP ハンドラーの構成は*Web.config*で行われ、次のようになります。
+HTTP ハンドラーの構成は *Web.config* で行われ、次のようになります。
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32,46-48,50,101)]
 
@@ -169,7 +170,7 @@ HTTP ハンドラーの構成は*Web.config*で行われ、次のようになり
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=27-34)]
 
-`MapWhen`次のパラメーターを取得します。
+`MapWhen` 次のパラメーターを取得します。
 
 1. を受け取るラムダ `HttpContext` `true` 。要求が分岐を下位に移動する必要がある場合は、を返します。 これは、拡張機能だけでなく、要求ヘッダー、クエリ文字列パラメーターなどにもブランチ要求を分岐できることを意味します。
 
@@ -181,11 +182,11 @@ HTTP ハンドラーの構成は*Web.config*で行われ、次のようになり
 
 一部のモジュールとハンドラーには、 *Web.config*に格納されている構成オプションがあります。ただし ASP.NET Core では、 *Web.config*の代わりに新しい構成モデルが使用されます。
 
-新しい[構成システム](xref:fundamentals/configuration/index)には、これを解決するための次のオプションが用意されています。
+新しい [構成システム](xref:fundamentals/configuration/index) には、これを解決するための次のオプションが用意されています。
 
 * [次のセクション](#loading-middleware-options-through-direct-injection)で示すように、ミドルウェアにオプションを直接挿入します。
 
-* オプションの[パターン](xref:fundamentals/configuration/options)を使用します。
+* オプションの [パターン](xref:fundamentals/configuration/options)を使用します。
 
 1. ミドルウェアオプションを保持するクラスを作成します。次に例を示します。
 
@@ -193,11 +194,11 @@ HTTP ハンドラーの構成は*Web.config*で行われ、次のようになり
 
 2. オプションの値を格納する
 
-   構成システムでは、オプションの値を任意の場所に格納できます。 ただし、ほとんどのサイトでは*appsettings.js*が使用されているので、次の方法を使用します。
+   構成システムでは、オプションの値を任意の場所に格納できます。 ただし、ほとんどのサイトでは *appsettings.js*が使用されているので、次の方法を使用します。
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
-   *MyMiddlewareOptionsSection*ここにはセクション名があります。 オプションクラスの名前と同じである必要はありません。
+   *MyMiddlewareOptionsSection* ここにはセクション名があります。 オプションクラスの名前と同じである必要はありません。
 
 3. オプションの値を options クラスに関連付ける
 
@@ -221,7 +222,7 @@ HTTP ハンドラーの構成は*Web.config*で行われ、次のようになり
 
    [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Middleware/MyMiddlewareWithParams.cs?name=snippet_MiddlewareWithParams&highlight=4,7,10,15-16)]
 
-   にミドルウェアを追加する[UseMiddleware](#http-modules-usemiddleware)拡張メソッドは、 `IApplicationBuilder` 依存関係の挿入を行います。
+   にミドルウェアを追加する [UseMiddleware](#http-modules-usemiddleware) 拡張メソッドは、 `IApplicationBuilder` 依存関係の挿入を行います。
 
    これはオブジェクトに限定されません `IOptions` 。 ミドルウェアが必要とするその他のオブジェクトは、この方法で挿入できます。
 
@@ -235,7 +236,7 @@ HTTP ハンドラーの構成は*Web.config*で行われ、次のようになり
 
 1. *appsettings.js*に2番目のキーを追加する
 
-   ファイルの*appsettings.js*に2番目のオプションセットを追加するには、新しいキーを使用して、それを一意に識別します。
+   ファイルの *appsettings.js* に2番目のオプションセットを追加するには、新しいキーを使用して、それを一意に識別します。
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
@@ -257,7 +258,7 @@ HTTP ハンドラーの構成は*Web.config*で行われ、次のようになり
 public async Task Invoke(HttpContext context)
 ```
 
-`HttpContext`は ASP.NET Core で大幅に変更されました。 このセクションでは、 [system.web](/dotnet/api/system.web.httpcontext)の最もよく使用されるプロパティを新しいに変換する方法について説明します `Microsoft.AspNetCore.Http.HttpContext` 。
+`HttpContext` は ASP.NET Core で大幅に変更されました。 このセクションでは、 [system.web](/dotnet/api/system.web.httpcontext) の最もよく使用されるプロパティを新しいに変換する方法について説明します `Microsoft.AspNetCore.Http.HttpContext` 。
 
 ### <a name="httpcontext"></a>Httpcontext.current
 
@@ -273,58 +274,58 @@ HttpContext は次のように変換さ**れます。**
 
 ### <a name="httpcontextrequest"></a>HttpContext. 要求
 
-**HttpMethod**は次のように変換されます。
+**HttpMethod** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Method)]
 
-**Httpcontext.current**は次のように変換されます。
+**Httpcontext.current** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Query)]
 
-**Httpcontext. url**と**httpcontext.current url**はに変換されます。
+**Httpcontext. url** と **httpcontext.current url** はに変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Url)]
 
-**HttpContext. IsSecureConnection**は次のように変換されます。
+**HttpContext. IsSecureConnection** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Secure)]
 
-**HttpContext. UserHostAddress**は次のように変換されます。
+**HttpContext. UserHostAddress** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext. 要求。 Cookies**は次のように変換します。
+**HttpContext. 要求。 Cookies** は次のように変換します。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
-**Httpcontext.current**は次のように変換されます。
+**Httpcontext.current** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Route)]
 
-**HttpContext。ヘッダー**は次のように変換されます。
+**HttpContext。ヘッダー** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Headers)]
 
-**UserAgent**は次のように変換されます。
+**UserAgent** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Agent)]
 
-**Httpcontext.current**は次のように変換されます。
+**Httpcontext.current** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Referrer)]
 
-**HttpContext。 ContentType**は次のように変換されます。
+**HttpContext。 ContentType** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Type)]
 
-**HttpContext。フォーム**は次のように変換されます。
+**HttpContext。フォーム** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> コンテンツサブタイプが*url エンコード*または*フォームデータ*の場合にのみ、フォーム値を読み取ります。
+> コンテンツサブタイプが *url エンコード* または *フォームデータ*の場合にのみ、フォーム値を読み取ります。
 
-**InputStream**は次のように変換されます。
+**InputStream** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Input)]
 
@@ -337,7 +338,7 @@ HttpContext は次のように変換さ**れます。**
 
 ### <a name="httpcontextresponse"></a>HttpContext
 
-**Httpcontext.current**は、次のように変換されます。 **statusdescription** :
+**Httpcontext.current** は、次のように変換されます。 **statusdescription** :
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Status)]
 
@@ -349,13 +350,13 @@ HttpContext は次のように変換さ**れます。**
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_RespTypeOnly)]
 
-**出力**は次のように変換されます。
+**出力** は次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Output)]
 
 **TransmitFile**
 
-ファイルの提供については、[こちら](../fundamentals/request-features.md#middleware-and-request-features)を参照してください。
+ファイルの提供については、 [こちら](../fundamentals/request-features.md#middleware-and-request-features)を参照してください。
 
 **HttpContext. 応答ヘッダー**
 

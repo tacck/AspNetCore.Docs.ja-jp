@@ -1,10 +1,11 @@
 ---
-title: Facebook、Google、および外部プロバイダー認証 (ASP.NET Core なし)Identity
+title: Facebook、Google、および外部プロバイダー認証 (なし) ASP.NET Core Identity
 author: rick-anderson
-description: ASP.NET Core のない Facebook、Google、Twitter などのアカウントユーザー認証の使用について説明し Identity ます。
+description: Facebook、Google、Twitter などのアカウントユーザー認証を使用しない場合の説明 ASP.NET Core Identity 。
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,24 +16,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: 73055a262ac69c0fd6a7f59e77d23121e71ea3dd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a91a2f2fb7873e5a672c624e9cf863ae720c8005
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021667"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634229"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-no-locidentity"></a>ASP.NET Core せずにソーシャルサインインプロバイダー認証を使用するIdentity
+# <a name="use-social-sign-in-provider-authentication-without-no-locaspnet-core-identity"></a>ソーシャルサインインプロバイダー認証を使用しない ASP.NET Core Identity
 
 [Kirk Larkin](https://twitter.com/serpent5)と[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:security/authentication/social/index>ユーザーが外部認証プロバイダーからの資格情報を使用して OAuth 2.0 を使用してサインインできるようにする方法について説明します。 このトピックで説明する方法には、 Identity 認証プロバイダーとしての ASP.NET Core が含まれています。
+<xref:security/authentication/social/index> ユーザーが外部認証プロバイダーからの資格情報を使用して OAuth 2.0 を使用してサインインできるようにする方法について説明します。 このトピックで説明する方法は、 ASP.NET Core Identity 認証プロバイダーとして含まれています。
 
-このサンプルでは、ASP.NET Core**なしで**外部認証プロバイダーを使用する方法を示し Identity ます。 これは、ASP.NET Core のすべての機能を必要としない Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
+このサンプルでは、を使用 **せず**に外部認証プロバイダーを使用する方法を示し ASP.NET Core Identity ます。 これは、のすべての機能を必要としない ASP.NET Core Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
 
-このサンプルでは、ユーザーの認証に[Google 認証](xref:security/authentication/google-logins)を使用します。 Google 認証を使用すると、サインインプロセスを管理するための多くの複雑な作業が Google に移ります。 別の外部認証プロバイダーと統合するには、次のトピックを参照してください。
+このサンプルでは、ユーザーの認証に [Google 認証](xref:security/authentication/google-logins) を使用します。 Google 認証を使用すると、サインインプロセスを管理するための多くの複雑な作業が Google に移ります。 別の外部認証プロバイダーと統合するには、次のトピックを参照してください。
 
 * [Facebook での認証](xref:security/authentication/facebook-logins)
 * [Microsoft での認証](xref:security/authentication/microsoft-logins)
@@ -59,17 +60,17 @@ ms.locfileid: "88021667"
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Startup.cs?name=snippet2&highlight=3-4)]
 
-認証方式の詳細については、「[認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 認証の詳細につい cookie ては、「」を参照してください <xref:security/authentication/cookie> 。
+認証方式の詳細については、「 [認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 認証の詳細につい cookie ては、「」を参照してください <xref:security/authentication/cookie> 。
 
 ## <a name="apply-authorization"></a>承認の適用
 
-`AuthorizeAttribute`コントローラー、アクション、またはページに属性を適用して、アプリの認証構成をテストします。 次のコードは、認証されているユーザーへの*プライバシー*ページへのアクセスを制限します。
+`AuthorizeAttribute`コントローラー、アクション、またはページに属性を適用して、アプリの認証構成をテストします。 次のコードは、認証されているユーザーへの *プライバシー* ページへのアクセスを制限します。
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Pages/Privacy.cshtml.cs?name=snippet&highlight=1)]
 
 ## <a name="sign-out"></a>サインアウト
 
-現在のユーザーをサインアウトし、を削除するに cookie は、 [signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス*ページにページハンドラーを追加します。
+現在のユーザーをサインアウトし、を削除するに cookie は、 [signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス* ページにページハンドラーを追加します。
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
@@ -83,11 +84,11 @@ ms.locfileid: "88021667"
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:security/authentication/social/index>ユーザーが外部認証プロバイダーからの資格情報を使用して OAuth 2.0 を使用してサインインできるようにする方法について説明します。 このトピックで説明する方法には、 Identity 認証プロバイダーとしての ASP.NET Core が含まれています。
+<xref:security/authentication/social/index> ユーザーが外部認証プロバイダーからの資格情報を使用して OAuth 2.0 を使用してサインインできるようにする方法について説明します。 このトピックで説明する方法は、 ASP.NET Core Identity 認証プロバイダーとして含まれています。
 
-このサンプルでは、ASP.NET Core**なしで**外部認証プロバイダーを使用する方法を示し Identity ます。 これは、ASP.NET Core のすべての機能を必要としない Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
+このサンプルでは、を使用 **せず**に外部認証プロバイダーを使用する方法を示し ASP.NET Core Identity ます。 これは、のすべての機能を必要としない ASP.NET Core Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
 
-このサンプルでは、ユーザーの認証に[Google 認証](xref:security/authentication/google-logins)を使用します。 Google 認証を使用すると、サインインプロセスを管理するための多くの複雑な作業が Google に移ります。 別の外部認証プロバイダーと統合するには、次のトピックを参照してください。
+このサンプルでは、ユーザーの認証に [Google 認証](xref:security/authentication/google-logins) を使用します。 Google 認証を使用すると、サインインプロセスを管理するための多くの複雑な作業が Google に移ります。 別の外部認証プロバイダーと統合するには、次のトピックを参照してください。
 
 * [Facebook での認証](xref:security/authentication/facebook-logins)
 * [Microsoft での認証](xref:security/authentication/microsoft-logins)
@@ -114,17 +115,17 @@ ms.locfileid: "88021667"
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Startup.cs?name=snippet2)]
 
-認証方式の詳細については、「[認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 認証の詳細につい cookie ては、「」を参照してください <xref:security/authentication/cookie> 。
+認証方式の詳細については、「 [認証の概念](xref:security/authentication/index#authentication-concepts)」を参照してください。 認証の詳細につい cookie ては、「」を参照してください <xref:security/authentication/cookie> 。
 
 ## <a name="apply-authorization"></a>承認の適用
 
-`AuthorizeAttribute`コントローラー、アクション、またはページに属性を適用して、アプリの認証構成をテストします。 次のコードは、認証されているユーザーへの*プライバシー*ページへのアクセスを制限します。
+`AuthorizeAttribute`コントローラー、アクション、またはページに属性を適用して、アプリの認証構成をテストします。 次のコードは、認証されているユーザーへの *プライバシー* ページへのアクセスを制限します。
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Pages/Privacy.cshtml.cs?name=snippet&highlight=1)]
 
 ## <a name="sign-out"></a>サインアウト
 
-現在のユーザーをサインアウトし、を削除するに cookie は、 [signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス*ページにページハンドラーを追加します。
+現在のユーザーをサインアウトし、を削除するに cookie は、 [signoutasync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*)呼び出します。 次のコードは、 `Logout` *インデックス* ページにページハンドラーを追加します。
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 

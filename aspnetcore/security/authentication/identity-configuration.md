@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core の構成Identity
+title: ASP.NET Core Identity を構成する
 author: AdrienTorris
-description: ASP.NET Core の Identity 既定値について理解し、 Identity カスタム値を使用するようにプロパティを構成する方法について説明します。
+description: ASP.NET Core Identity既定値を理解し、カスタム値を使用するようにプロパティを構成する方法について説明し Identity ます。
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020601"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632682"
 ---
-# <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core の構成Identity
+# <a name="configure-no-locaspnet-core-identity"></a>ASP.NET Core Identity を構成する
 
-ASP.NET Core Identity は、パスワードポリシー、ロックアウト、構成などの設定に既定値を使用し cookie ます。 これらの設定は、クラスでオーバーライドでき `Startup` ます。
+ASP.NET Core Identity では、パスワードポリシー、ロックアウト、構成などの設定に既定値が使用さ cookie れます。 これらの設定は、クラスでオーバーライドでき `Startup` ます。
 
-## <a name="no-locidentity-options"></a>Identityオプション
+## <a name="no-locidentity-options"></a>Identity オプション
 
-[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions)クラスは、システムの構成に使用できるオプションを表し Identity ます。 `IdentityOptions`またはを呼び出し**た後**に設定する必要があり `AddIdentity` `AddDefaultIdentity` ます。
+[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions)クラスは、システムの構成に使用できるオプションを表し Identity ます。 `IdentityOptions` またはを呼び出し **た後** に設定する必要があり `AddIdentity` `AddDefaultIdentity` ます。
 
-### <a name="claims-no-locidentity"></a>保険Identity
+### <a name="claims-no-locidentity"></a>保険 Identity
 
 [ Identity オプション。クレーム Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity)は、次の表に示すプロパティを使用して[要求 Identity オプション](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions)を指定します。
 
@@ -44,7 +45,7 @@ ASP.NET Core Identity は、パスワードポリシー、ロックアウト、�
 
 ### <a name="lockout"></a>ロックアウト
 
-ロックアウトは、 [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync#Microsoft_AspNetCore_Identity_SignInManager_1_PasswordSignInAsync_System_String_System_String_System_Boolean_System_Boolean_)メソッドで設定されます。
+ロックアウトは、 [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync#Microsoft_AspNetCore_Identity_SignInManager_1_PasswordSignInAsync_System_String_System_String_System_Boolean_System_Boolean_) メソッドで設定されます。
 
 [!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
@@ -114,7 +115,7 @@ ASP.NET Core Identity は、パスワードポリシー、ロックアウト、�
 | [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) | `ChangePhoneNumberTokenProvider`電話番号を変更するときに使用するトークンを生成するために使用するを取得または設定します。 |
 | [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) | アカウントの確認メールで使用されるトークンを生成するために使用されるトークンプロバイダーを取得または設定します。 |
 | [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider) | パスワードリセット電子メールで使用されるトークンを生成するために使用される[IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1)を取得または設定します。 |
-| [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap) | プロバイダーの名前として使用されるキーを使用して[ユーザートークンプロバイダー](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor)を構築するために使用されます。 |
+| [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap) | プロバイダーの名前として使用されるキーを使用して [ユーザートークンプロバイダー](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) を構築するために使用されます。 |
 
 ### <a name="user"></a>User
 
@@ -137,11 +138,11 @@ ASP.NET Core Identity は、パスワードポリシー、ロックアウト、�
 
 ## <a name="password-hasher-options"></a>パスワードの Hasher オプション
 
-<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>パスワードハッシュのオプションを取得または設定します。
+<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions> パスワードハッシュのオプションを取得または設定します。
 
 | オプション | 説明 |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー*と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合、 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、*新しいパスワード*のハッシュに影響します。 |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー*と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合、 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、 *新しいパスワード*のハッシュに影響します。 |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 を使用してパスワードをハッシュするときに使用されるイテレーションの数。 この値は、がに設定されている場合にのみ使用され <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> ます。 値は正の整数である必要があり、既定値は `10000` です。 |
 
 次の例では、 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> がのに設定されてい `12000` `Startup.ConfigureServices` ます。

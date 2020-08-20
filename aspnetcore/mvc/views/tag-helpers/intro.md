@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 067698687268ac072d8944fd5d9ae47c49fd4a24
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015012"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633098"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー
 
@@ -33,9 +34,9 @@ ms.locfileid: "88015012"
 
 ## <a name="what-tag-helpers-provide"></a>タグ ヘルパーで提供されるもの
 
-**HTML を使いやすい開発エクスペリエンス**ほとんどの場合、 Razor タグヘルパーを使用したマークアップは、標準 HTML のように見えます。 HTML/CSS/JavaScript で精通するフロントエンドデザイナーは、 Razor C# の構文を学習せずに編集でき Razor ます。
+**HTML を使いやすい開発エクスペリエンス** ほとんどの場合、 Razor タグヘルパーを使用したマークアップは、標準 HTML のように見えます。 HTML/CSS/JavaScript で精通するフロントエンドデザイナーは、 Razor C# の構文を学習せずに編集でき Razor ます。
 
-**Html および Razor マークアップを作成するための豊富な IntelliSense 環境**は、html ヘルパーとは対照的に、ビューでのマークアップのサーバー側作成に対する従来のアプローチです Razor 。 2 つの違いの詳細については、「[タグ ヘルパーと HTML ヘルパーの比較](#tag-helpers-compared-to-html-helpers)」を参照してください。 IntelliSense 環境については、「[Intellisense でのタグ ヘルパーのサポート](#intellisense-support-for-tag-helpers)」を参照してください。 C# の構文に慣れている開発者であっても、 Razor タグヘルパーを使用して c# マークアップを記述するよりも生産性が向上 Razor します。
+**Html および Razor マークアップを作成するための豊富な IntelliSense 環境** は、html ヘルパーとは対照的に、ビューでのマークアップのサーバー側作成に対する従来のアプローチです Razor 。 2 つの違いの詳細については、「[タグ ヘルパーと HTML ヘルパーの比較](#tag-helpers-compared-to-html-helpers)」を参照してください。 IntelliSense 環境については、「[Intellisense でのタグ ヘルパーのサポート](#intellisense-support-for-tag-helpers)」を参照してください。 C# の構文に慣れている開発者であっても、 Razor タグヘルパーを使用して c# マークアップを記述するよりも生産性が向上 Razor します。
 
 **生産性を高め、サーバーでのみ使用可能な情報を使用することで、より堅牢で信頼できる保守しやすいコードを生成できる方法** たとえば、これまでは、イメージを変更する際にそのイメージ名を変更することがイメージ更新の理念でした。 パフォーマンス上の理由から、イメージを積極的にキャッシュする必要があり、イメージの名前を変更しない限り、クライアントが古いコピーを取得する危険性があります。 これまでは、イメージの編集後に、名前を変更する必要があり、Web アプリでのイメージへの各参照を更新する必要がありました。 非常に手間がかかるだけでなく、エラーも発生しやすくなります (参照を見逃したり、間違った文字列を誤って入力したりする可能性があります)。組み込みのは、 `ImageTagHelper` 自動的に行うことができます。 `ImageTagHelper` ではイメージ名にバージョン番号を追加できるため、イメージが変更されるたびに、サーバーはそのイメージに対して新しい一意のバージョンを自動的に生成します。 クライアントは現在のイメージを確実に取得できます。 `ImageTagHelper` を使用することで、このような堅牢性と省力化を基本的に自由に実現できます。
 
@@ -201,7 +202,7 @@ IntelliSense では、ページのモデルで使用可能なプロパティと�
 
 ## <a name="tag-helpers-compared-to-html-helpers"></a>タグ ヘルパーと HTML ヘルパーの比較
 
-タグヘルパーはビュー内の HTML 要素にアタッチ Razor されますが、 [html ヘルパー](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)はビューで html と共に混在するメソッドとして呼び出され Razor ます。 RazorCSS クラス "caption" を使用して HTML ラベルを作成する次のマークアップについて考えてみます。
+タグヘルパーはビュー内の HTML 要素にアタッチ Razor されますが、 [html ヘルパー](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers) はビューで html と共に混在するメソッドとして呼び出され Razor ます。 RazorCSS クラス "caption" を使用して HTML ラベルを作成する次のマークアップについて考えてみます。
 
 ```cshtml
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
@@ -227,7 +228,7 @@ new {@class="caption"}
 
 IntelliSense は行全体を書き込む場合に役立ちます。
 
-次のコードイメージは、Visual Studio に含まれている ASP.NET 4.5. x MVC テンプレートから生成された*Views/Account/Register. cshtml*ビューのフォーム部分を示してい Razor ます。
+次のコードイメージは、Visual Studio に含まれている ASP.NET 4.5. x MVC テンプレートから生成された *Views/Account/Register. cshtml*ビューのフォーム部分を示してい Razor ます。
 
 ![image](intro/_static/regCS.png)
 

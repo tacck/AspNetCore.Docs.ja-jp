@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: e6feeb0009034d9ea92f09c44ed0ca882d80fe1b
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 7b11172df902f0d6a26f357755f33c78e7f8d1ff
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504763"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631421"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
@@ -311,7 +312,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 実際の実装では、指数バックオフを使用するか、指定された回数の再試行を行います。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [JavaScript API リファレンス](/javascript/api/?view=signalr-js-latest)
 * [JavaScript のチュートリアル](xref:tutorials/signalr)

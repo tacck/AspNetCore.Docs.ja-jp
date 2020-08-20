@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: f4762871cbae77f690d8478e1342e0d53918eb51
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6ac808d11790ae27e82606b442ff215d95b93e41
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022200"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631369"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>ASP.NET アプリ間での認証の共有 cookie
 
@@ -35,20 +36,20 @@ ms.locfileid: "88022200"
 * 認証 cookie 名は、共通の値に設定され `.AspNet.SharedCookie` ます。
 * `AuthenticationType`は、 `Identity.Application` 明示的にまたは既定でに設定されます。
 * 共通のアプリ名は、データ保護システムがデータ保護キー () を共有できるようにするために使用され `SharedCookieApp` ます。
-* `Identity.Application`は、認証スキームとして使用されます。 どのようなスキームを使用する場合でも、既定のスキームとして、または明示的に設定することによって、共有アプリ*内および*共有アプリ全体で一貫して使用する必要があり cookie ます。 スキームは、の暗号化と復号化に使用される cookie ため、一貫したスキームをアプリ間で使用する必要があります。
-* 一般的な[データ保護キー](xref:security/data-protection/implementation/key-management)の保存場所が使用されます。
+* `Identity.Application` は、認証スキームとして使用されます。 どのようなスキームを使用する場合でも、既定のスキームとして、または明示的に設定することによって、共有アプリ *内および* 共有アプリ全体で一貫して使用する必要があり cookie ます。 スキームは、の暗号化と復号化に使用される cookie ため、一貫したスキームをアプリ間で使用する必要があります。
+* 一般的な [データ保護キー](xref:security/data-protection/implementation/key-management) の保存場所が使用されます。
   * ASP.NET Core アプリでは、を <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> 使用してキーの格納場所を設定します。
-  * .NET Framework アプリでは、 Cookie 認証ミドルウェアはの実装を使用 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> します。 `DataProtectionProvider`には、認証ペイロードデータの暗号化と復号化を行うためのデータ保護サービスが用意されて cookie います。 インスタンスは、 `DataProtectionProvider` アプリの他の部分で使用されるデータ保護システムから分離されています。 [Dataprotectionprovider. Create (DirectoryInfo, Action \<IDataProtectionBuilder> )](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*)は、 <xref:System.IO.DirectoryInfo> データ保護キーの保存場所を指定するを受け入れます。
-* `DataProtectionProvider`には、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) NuGet パッケージが必要です。
+  * .NET Framework アプリでは、 Cookie 認証ミドルウェアはの実装を使用 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> します。 `DataProtectionProvider` には、認証ペイロードデータの暗号化と復号化を行うためのデータ保護サービスが用意されて cookie います。 インスタンスは、 `DataProtectionProvider` アプリの他の部分で使用されるデータ保護システムから分離されています。 [Dataprotectionprovider. Create (DirectoryInfo, Action \<IDataProtectionBuilder> )](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) は、 <xref:System.IO.DirectoryInfo> データ保護キーの保存場所を指定するを受け入れます。
+* `DataProtectionProvider` には、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) NuGet パッケージが必要です。
   * ASP.NET Core 2.x アプリで、 [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)を参照します。
   * .NET Framework アプリで、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/)へのパッケージ参照を追加します。
-* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>共通アプリ名を設定します。
+* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> 共通アプリ名を設定します。
 
-## <a name="share-authentication-no-loccookies-with-aspnet-core-no-locidentity"></a>認証 cookie を ASP.NET Core と共有するIdentity
+## <a name="share-authentication-no-loccookies-with-no-locaspnet-core-identity"></a>認証を共有する cookieASP.NET Core Identity
 
-ASP.NET Core を使用する場合 Identity :
+ASP.NET Core Identity を使うとき:
 
-* データ保護キーとアプリ名は、アプリ間で共有する必要があります。 共通のキー格納場所は、次の例のメソッドに提供され <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> ます。 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>共通の共有アプリ名を構成するには、を使用し `SharedCookieApp` ます (次の例を参考にしてください)。 詳細については、「<xref:security/data-protection/configuration/overview>」を参照してください。
+* データ保護キーとアプリ名は、アプリ間で共有する必要があります。 共通のキー格納場所は、次の例のメソッドに提供され <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> ます。 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>共通の共有アプリ名を構成するには、を使用し `SharedCookieApp` ます (次の例を参考にしてください)。 詳細については、<xref:security/data-protection/configuration/overview> を参照してください。
 * 拡張メソッドを使用して、 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.ConfigureApplicationCookie*> のデータ保護サービスを設定し cookie ます。
 * 既定の認証の種類はです `Identity.Application` 。
 
@@ -64,9 +65,9 @@ services.ConfigureApplicationCookie(options => {
 });
 ```
 
-## <a name="share-authentication-no-loccookies-without-aspnet-core-no-locidentity"></a>ASP.NET Core なしで認証を共有する cookieIdentity
+## <a name="share-authentication-no-loccookies-without-no-locaspnet-core-identity"></a>認証を共有 cookie しない ASP.NET Core Identity
 
-ASP.NET Core なしでを直接使用する場合 cookie Identity は、でデータ保護と認証を構成し `Startup.ConfigureServices` ます。 次の例では、認証の種類がに設定されてい `Identity.Application` ます。
+を使用せずにを直接使用する場合 cookie ASP.NET Core Identity は、でデータ保護と認証を構成し `Startup.ConfigureServices` ます。 次の例では、認証の種類がに設定されてい `Identity.Application` ます。
 
 ```csharp
 services.AddDataProtection()
@@ -105,7 +106,7 @@ options.Cookie.Domain = ".contoso.com";
 
 ## <a name="encrypt-data-protection-keys-at-rest"></a>保存時のデータ保護キーの暗号化
 
-運用環境のデプロイの場合は、 `DataProtectionProvider` DPAPI または X509Certificate を使用して保存時のキーを暗号化するようにを構成します。 詳細については、「<xref:security/data-protection/implementation/key-encryption-at-rest>」を参照してください。 次の例では、証明書の拇印がに提供されてい <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*> ます。
+運用環境のデプロイの場合は、 `DataProtectionProvider` DPAPI または X509Certificate を使用して保存時のキーを暗号化するようにを構成します。 詳細については、<xref:security/data-protection/implementation/key-encryption-at-rest> を参照してください。 次の例では、証明書の拇印がに提供されてい <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*> ます。
 
 ```csharp
 services.AddDataProtection()
@@ -116,13 +117,13 @@ services.AddDataProtection()
 
 Katana 認証ミドルウェアを使用する ASP.NET 4.x アプリは Cookie cookie 、ASP.NET Core 認証ミドルウェアと互換性のある認証を生成するように構成できます Cookie 。 これにより、複数の手順で大規模なサイトの個々のアプリをアップグレードしながら、サイト全体でスムーズに SSO を利用することができます。
 
-アプリで Katana Cookie 認証ミドルウェアを使用すると、 `UseCookieAuthentication` プロジェクトの*Startup.Auth.cs*ファイルでが呼び出されます。 Visual Studio 2013 以降で作成された ASP.NET 4.x web アプリプロジェクトは、既定で Katana 認証ミドルウェアを使用します Cookie 。 `UseCookieAuthentication`は互換性のために残されており、ASP.NET Core アプリではサポートされていませんが、 `UseCookieAuthentication` Katana 認証ミドルウェアを使用する ASP.NET 4.x アプリでを呼び出すこと Cookie は有効です。
+アプリで Katana Cookie 認証ミドルウェアを使用すると、 `UseCookieAuthentication` プロジェクトの *Startup.Auth.cs* ファイルでが呼び出されます。 Visual Studio 2013 以降で作成された ASP.NET 4.x web アプリプロジェクトは、既定で Katana 認証ミドルウェアを使用します Cookie 。 `UseCookieAuthentication`は互換性のために残されており、ASP.NET Core アプリではサポートされていませんが、 `UseCookieAuthentication` Katana 認証ミドルウェアを使用する ASP.NET 4.x アプリでを呼び出すこと Cookie は有効です。
 
 ASP.NET 4.x アプリは .NET Framework 4.5.1 以降を対象にする必要があります。 そうしないと、必要な NuGet パッケージのインストールに失敗します。
 
 cookieASP.NET 4.x アプリと ASP.NET Core アプリの間で認証を共有するには、「 [ cookie ASP.NET Core アプリ間での共有認証](#share-authentication-cookies-with-aspnet-core-identity)」セクションの説明に従って ASP.NET Core アプリを構成し、次のように ASP.NET 4.x アプリを構成します。
 
-アプリのパッケージが最新リリースに更新されていることを確認します。 それぞれの ASP.NET 4.x アプリに[Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.Interop/)パッケージをインストールします。
+アプリのパッケージが最新リリースに更新されていることを確認します。 それぞれの ASP.NET 4.x アプリに [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.Interop/) パッケージをインストールします。
 
 の呼び出しを見つけて変更し `UseCookieAuthentication` ます。
 

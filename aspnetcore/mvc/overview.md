@@ -5,6 +5,7 @@ description: ASP.NET Core MVC が、モデル ビュー コントローラー �
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021446"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633618"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -77,7 +78,7 @@ ASP.NET Core MVC には、以下が含まれます。
 * [領域](#areas)
 * [Web API](#web-apis)
 * [Testability](#testability)
-* [Razorビューエンジン](#razor-view-engine)
+* [Razor ビューエンジン](#razor-view-engine)
 * [厳密に型指定されたビュー](#strongly-typed-views)
 * [タグ ヘルパー](#tag-helpers)
 * [コンポーネントの表示](#view-components)
@@ -182,7 +183,7 @@ public class AccountController : Controller
 
 ### <a name="areas"></a>Areas
 
-[区分](controllers/areas.md)を使用すると、大規模な ASP.NET Core MVC Web アプリをより小さな機能グループに分割することができます。 区分は、アプリケーション内の MVC 構造体となります。 MVC プロジェクトでは、モデル、コント ローラー、ビューなどの論理コンポーネントが異なるフォルダーに保持され、MVC では名前付け規則を使用して、これらのコンポーネントの関係を作成します。 大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。 たとえば、チェックアウト、請求、検索などの複数のビジネスユニットを含む e コマースアプリです。これらの各ユニットには、それぞれ独自の論理コンポーネントビュー、コントローラー、およびモデルがあります。
+[区分](controllers/areas.md) を使用すると、大規模な ASP.NET Core MVC Web アプリをより小さな機能グループに分割することができます。 区分は、アプリケーション内の MVC 構造体となります。 MVC プロジェクトでは、モデル、コント ローラー、ビューなどの論理コンポーネントが異なるフォルダーに保持され、MVC では名前付け規則を使用して、これらのコンポーネントの関係を作成します。 大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。 たとえば、チェックアウト、請求、検索などの複数のビジネスユニットを含む e コマースアプリです。これらの各ユニットには、それぞれ独自の論理コンポーネントビュー、コントローラー、およびモデルがあります。
 
 ### <a name="web-apis"></a>Web API
 
@@ -196,9 +197,9 @@ Web サイトのビルドに最適なプラットフォームというだけで�
 
 フレームワークでインターフェイスと依存関係の挿入を使用して、単体テストに適するようにします。また、フレームワークには、[統合テスト](xref:test/integration-tests)もすばやく簡単にする機能 (Entity Framework の TestHost と InMemory プロバイダーなど) が含まれます。 詳細については、[コントローラー ロジックのテスト方法](controllers/testing.md)に関するページを参照してください。
 
-### <a name="no-locrazor-view-engine"></a>Razorビューエンジン
+### <a name="no-locrazor-view-engine"></a>Razor ビューエンジン
 
-[MVC ビュー ASP.NET Core](views/overview.md)ビューを表示するために[ Razor ビューエンジン](views/razor.md)を使用します。 Razorは、埋め込み C# コードを使用してビューを定義するための、コンパクトで表現力豊かな滑らかなテンプレートマークアップ言語です。 Razorは、サーバー上の web コンテンツを動的に生成するために使用されます。 サーバー コードを、クライアント側のコンテンツとコードにクリーンに混在させることができます。
+[MVC ビュー ASP.NET Core](views/overview.md)ビューを表示するために[ Razor ビューエンジン](views/razor.md)を使用します。 Razor は、埋め込み C# コードを使用してビューを定義するための、コンパクトで表現力豊かな滑らかなテンプレートマークアップ言語です。 Razor は、サーバー上の web コンテンツを動的に生成するために使用されます。 サーバー コードを、クライアント側のコンテンツとコードにクリーンに混在させることができます。
 
 ```cshtml
 <ul>
@@ -212,7 +213,7 @@ Razorビューエンジンを使用すると、[レイアウト](views/layout.md
 
 ### <a name="strongly-typed-views"></a>厳密に型指定されたビュー
 
-RazorMVC のビューは、モデルに基づいて厳密に型指定できます。 コントローラーは、ビューの型チェックと IntelliSense サポートを有効にして、厳密に型指定されたモデルをビューに渡すことができます。
+Razor MVC のビューは、モデルに基づいて厳密に型指定できます。 コントローラーは、ビューの型チェックと IntelliSense サポートを有効にして、厳密に型指定されたモデルをビューに渡すことができます。
 
 たとえば、次のビューでは、モデルの型 `IEnumerable<Product>` をレンダリングします。
 
@@ -228,7 +229,7 @@ RazorMVC のビューは、モデルに基づいて厳密に型指定できま�
 
 ### <a name="tag-helpers"></a>タグ ヘルパー
 
-[タグヘルパー](views/tag-helpers/intro.md)を使用すると、サーバー側コードがファイル内の HTML 要素の作成とレンダリングに参加できるようになり Razor ます。 タグ ヘルパーを使って、カスタム タグ (例: `<environment>`) を定義したり、既存のタグ (例: `<label>`) の動作を変更したりすることができます。 タグ ヘルパーは、要素名とその属性に基づいて特定の要素をバインドします。 タグ ヘルパーでは、HTML の編集操作を保持しながら、サーバー側のレンダリングの利点を提供します。
+[タグヘルパー](views/tag-helpers/intro.md) を使用すると、サーバー側コードがファイル内の HTML 要素の作成とレンダリングに参加できるようになり Razor ます。 タグ ヘルパーを使って、カスタム タグ (例: `<environment>`) を定義したり、既存のタグ (例: `<label>`) の動作を変更したりすることができます。 タグ ヘルパーは、要素名とその属性に基づいて特定の要素をバインドします。 タグ ヘルパーでは、HTML の編集操作を保持しながら、サーバー側のレンダリングの利点を提供します。
 
 フォームやリンクの作成、資産の読み込みなど、一般的なタスクの組み込みのタグ ヘルパーは数多くあります。パブリック GitHub リポジトリで NuGet パッケージとして使用することもできます。 タグ ヘルパーは C# で作成され、要素名、属性名、または親タグに基づく HTML 要素をターゲットとします。 たとえば、組み込みの LinkTagHelper を使用して、`AccountsController` の `Login` へのリンクを作成することができます。
 

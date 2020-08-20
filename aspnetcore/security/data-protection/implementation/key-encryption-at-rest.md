@@ -5,6 +5,7 @@ description: 保存時のデータ保護キーの暗号化 ASP.NET Core の実�
 ms.author: riande
 ms.date: 07/16/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,19 +16,19 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 6e767c5a34f8bf4c512147e7966f7e2c363c57c5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4ca2d998141639406a8283c4c756c05a93251928
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018417"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633681"
 ---
 # <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>ASP.NET Core を使用した Windows および Azure での保存時のキーの暗号化
 
-データ保護システムでは、暗号化キーを保存時に暗号化する方法を[既定で検出するメカニズム](xref:security/data-protection/configuration/default-settings)を使用します。 開発者は検出メカニズムをオーバーライドし、保存時のキーの暗号化方法を手動で指定できます。
+データ保護システムでは、暗号化キーを保存時に暗号化する方法を [既定で検出するメカニズム](xref:security/data-protection/configuration/default-settings) を使用します。 開発者は検出メカニズムをオーバーライドし、保存時のキーの暗号化方法を手動で指定できます。
 
 > [!WARNING]
-> 明示的なキーの[保存場所](xref:security/data-protection/implementation/key-storage-providers)を指定すると、データ保護システムによって、解除の既定のキー暗号化メカニズムが使用されます。 そのため、キーは保存時に暗号化されなくなりました。 運用環境のデプロイで[は、明示的なキー暗号化メカニズムを指定](xref:security/data-protection/implementation/key-encryption-at-rest)することをお勧めします。 保存時暗号化メカニズムのオプションについては、このトピックで説明します。
+> 明示的なキーの [保存場所](xref:security/data-protection/implementation/key-storage-providers)を指定すると、データ保護システムによって、解除の既定のキー暗号化メカニズムが使用されます。 そのため、キーは保存時に暗号化されなくなりました。 運用環境のデプロイで [は、明示的なキー暗号化メカニズムを指定](xref:security/data-protection/implementation/key-encryption-at-rest) することをお勧めします。 保存時暗号化メカニズムのオプションについては、このトピックで説明します。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -52,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 
 **Windows の展開にのみ適用されます。**
 
-Windows DPAPI が使用されている場合、キーマテリアルは[CryptProtectData](/windows/desktop/api/dpapi/nf-dpapi-cryptprotectdata)で暗号化されてから、ストレージに保存されます。 DPAPI は、現在のコンピューターの外部で読み取られることがないデータの適切な暗号化メカニズムです (ただし、これらのキーを Active Directory に戻すことはできますが[、「DPAPI とローミングプロファイル](https://support.microsoft.com/kb/309408/#6)」を参照してください)。 Rest 暗号化キーを構成するには、次のいずれかの[ProtectKeysWithDpapi](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithdpapi)拡張メソッドを呼び出します。
+Windows DPAPI が使用されている場合、キーマテリアルは [CryptProtectData](/windows/desktop/api/dpapi/nf-dpapi-cryptprotectdata) で暗号化されてから、ストレージに保存されます。 DPAPI は、現在のコンピューターの外部で読み取られることがないデータの適切な暗号化メカニズムです (ただし、これらのキーを Active Directory に戻すことはできますが [、「DPAPI とローミングプロファイル](https://support.microsoft.com/kb/309408/#6)」を参照してください)。 Rest 暗号化キーを構成するには、次のいずれかの [ProtectKeysWithDpapi](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithdpapi) 拡張メソッドを呼び出します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -110,7 +111,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-のパラメーターなしのオーバーロードもあり `ProtectKeysWithDpapiNG` ます。 この便利な方法を使用して、"SID = {CURRENT_ACCOUNT_SID}" という規則を指定します。 *CURRENT_ACCOUNT_SID*は現在の Windows ユーザーアカウントの SID です。
+のパラメーターなしのオーバーロードもあり `ProtectKeysWithDpapiNG` ます。 この便利な方法を使用して、"SID = {CURRENT_ACCOUNT_SID}" という規則を指定します。 *CURRENT_ACCOUNT_SID* は現在の Windows ユーザーアカウントの SID です。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -125,7 +126,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="certificate-based-encryption-with-windows-dpapi-ng"></a>Windows DPAPI を使用した証明書ベースの暗号化-NG
 
-アプリが Windows 8.1/Windows Server 2012 R2 以降で実行されている場合は、Windows DPAPI-NG を使用して証明書ベースの暗号化を実行できます。 規則記述子文字列 "CERTIFICATE = HashId: THUMBPRINT" を使用します。ここで、*拇印*は証明書の16進数でエンコードされた SHA1 拇印です。
+アプリが Windows 8.1/Windows Server 2012 R2 以降で実行されている場合は、Windows DPAPI-NG を使用して証明書ベースの暗号化を実行できます。 規則記述子文字列 "CERTIFICATE = HashId: THUMBPRINT" を使用します。ここで、 *拇印* は証明書の16進数でエンコードされた SHA1 拇印です。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -140,4 +141,4 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="custom-key-encryption"></a>カスタムキーの暗号化
 
-インボックス機構が適切でない場合、開発者はカスタム[IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor)を提供することで、独自のキー暗号化メカニズムを指定できます。
+インボックス機構が適切でない場合、開発者はカスタム [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor)を提供することで、独自のキー暗号化メカニズムを指定できます。
