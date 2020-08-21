@@ -1152,7 +1152,7 @@
       uid: security/docker-compose-https
     - name: EU の一般データ保護規制 (GDPR) のサポート
       uid: security/gdpr
-    - name: リクエスト フォージェリの対策
+    - name: クロスサイト リクエスト フォージェリ (XSRF/CSRF) 攻撃の防止
       uid: security/anti-request-forgery
     - name: オープン リダイレクト攻撃の防止
       uid: security/preventing-open-redirects

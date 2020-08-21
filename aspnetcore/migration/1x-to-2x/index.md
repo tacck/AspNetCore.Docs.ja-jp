@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015336"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634346"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x から 2.0 への移行
 
@@ -202,7 +203,7 @@ Application Insights SDK を直接使用している場合は、それを継続�
 
 ## <a name="adopt-authenticationno-locidentity-improvements"></a>認証、Identity の機能強化の採用
 
-ASP.NET Core 2.0 には、新しい認証モデルと ASP.NET Core Identity への大幅な変更があります。 個々のユーザー アカウントを有効にしてプロジェクトを作成した場合や認証または Identity を手動で追加した場合、「IdentityASP.NET Core 2.0 への認証と [ の移行](xref:migration/1x-to-2x/identity-2x)」 を参照してください。
+ASP.NET Core 2.0 には、新しい認証モデルと ASP.NET Core Identity に対する大幅な変更が含まれています。 個々のユーザー アカウントを有効にしてプロジェクトを作成した場合や認証または Identity を手動で追加した場合、「IdentityASP.NET Core 2.0 への認証と [ の移行](xref:migration/1x-to-2x/identity-2x)」 を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: b0258118e116b1686abbebf1c8d89135ae3cb1f6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2511d68dd049ca47dea002d8960e7d2fd0207383
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019317"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632643"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core の認証の概要
 
@@ -51,7 +52,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 複数のスキームが使用される場合、認可ポリシー (または認可属性) で、ユーザーの認証時に使用する[認証スキーム (複数可) を指定する](xref:security/authorization/limitingidentitybyscheme)ことができます。 上記の例では、cookie 認証スキームを使用する場合に名前を指定しています (既定では `CookieAuthenticationDefaults.AuthenticationScheme` ですが、`AddCookie` を呼び出すときに別の名前を指定することもできます)。
 
-場合によっては、`AddAuthentication` の呼び出しが、他の拡張メソッドによって自動的に行われます。 たとえば、ASP.NET Core の [ASP.NET Core Identity](xref:security/authentication/identity) を使用する場合、`AddAuthentication` が内部的に呼び出されます。
+場合によっては、`AddAuthentication` の呼び出しが、他の拡張メソッドによって自動的に行われます。 たとえば、[ASP.NET Core Identity](xref:security/authentication/identity) を使用する場合、`AddAuthentication` が内部的に呼び出されます。
 
 認証ミドルウェアは、アプリの `IApplicationBuilder` の <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 拡張メソッドを呼び出すことによって `Startup.Configure` に追加されます。 `UseAuthentication` を呼び出すと、以前に登録された認証スキームを使用するミドルウェアが登録されます。 認証されているユーザーに依存するすべてのミドルウェアの前に `UseAuthentication` を呼び出します。 エンドポイント ルーティングを使用する場合は、次のタイミングで `UseAuthentication` の呼び出しを行う必要があります。
 

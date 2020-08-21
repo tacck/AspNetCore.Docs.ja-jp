@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/index
-ms.openlocfilehash: ead5863f0656e182d395fc1e0deaf63ff66034cb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0378fd06b5cae5b8911e8a2f41937b28d5444538
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021368"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632864"
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core Security の概要
 
-ASP.NET Core を使用することで、開発者はアプリのセキュリティを簡単に構成して管理することができます。 ASP.NET Core には、認証、承認、データ保護、HTTPS の適用、アプリ シークレット、リクエスト フォージェリの対策保護、および CORS を管理するための機能が含まれています。 これらのセキュリティ機能を使用すれば、堅牢かつセキュアな ASP.NET Core アプリを構築できます。
+ASP.NET Core を使用することで、開発者はアプリのセキュリティを簡単に構成して管理することができます。 ASP.NET Core には、認証、認可、データ保護、HTTPS の適用、アプリ シークレット、XSRF/CSRF の防止、および CORS を管理するための機能が含まれています。 これらのセキュリティ機能を使用すれば、堅牢かつセキュアな ASP.NET Core アプリを構築できます。
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core セキュリティ機能
 
@@ -41,9 +42,9 @@ ASP.NET Core では、組み込みの ID プロバイダーを含むアプリを
 
 ASP.NET Core および EF には、アプリをセキュリティで保護し、セキュリティ違反を防止するのに役立つ機能が含まれています。 以下にリストされているリンクから、Web アプリの最も一般的なセキュリティの脆弱性を回避するための手法の詳細を示すドキュメントにアクセスできます。
 
-* [クロスサイト スクリプト攻撃](xref:security/cross-site-scripting)
+* [クロスサイト スクリプティング (XSS) 攻撃](xref:security/cross-site-scripting)
 * [SQL インジェクション攻撃](/ef/core/querying/raw-sql)
-* [クロスサイト リクエスト フォージェリ (CSRF)](xref:security/anti-request-forgery)
+* [クロスサイト リクエスト フォージェリ (XSRF/CSRF) 攻撃](xref:security/anti-request-forgery)
 * [オープン リダイレクト攻撃](xref:security/preventing-open-redirects)
 
 この他にも知っておく必要がある脆弱性はあります。 詳細については、目次の**セキュリティと Identity** のセクションにある他の記事を参照してください。
