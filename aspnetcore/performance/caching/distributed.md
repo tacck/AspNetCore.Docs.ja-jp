@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626728"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712481"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core での分散キャッシュ
 
@@ -116,16 +116,13 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>分散 Redis Cache
 
-[Redis](https://redis.io/) は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。 Redis はローカルで使用でき、Azure でホストされる ASP.NET Core アプリの [Azure Redis Cache](https://azure.microsoft.com/services/cache/) を構成できます。
+[Redis](https://redis.io/) は、オープンソースのメモリ内データストアであり、多くの場合、分散キャッシュとして使用されます。  Azure でホストされる ASP.NET Core アプリの [Azure Redis Cache](https://azure.microsoft.com/services/cache/) を構成し、ローカル開発に Azure Redis Cache を使用することができます。
 
-アプリでは、 <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> の開発以外の環境でインスタンス () を使用して、キャッシュの実装を構成し <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> `Startup.ConfigureServices` ます。
+アプリは、インスタンス () を使用してキャッシュの実装を構成し <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> ます。
 
-[!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
+詳細については、「[Azure Cache for Redis](/azure/azure-cache-for-redis/cache-overview)」を参照してください。
 
-Redis をローカルコンピューターにインストールするには、次のようにします。
-
-1. [Chocolatey Redis パッケージ](https://chocolatey.org/packages/redis-64/)をインストールします。
-1. `redis-server`コマンドプロンプトからを実行します。
+ローカル Redis cache に対する別のアプローチについては、 [この GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/19542) を参照してください。
 
 ### <a name="distributed-ncache-cache"></a>分散 NCache キャッシュ
 
@@ -175,7 +172,7 @@ NCache を構成するには:
 
 * 既存のインフラストラクチャ
 * パフォーマンス要件
-* Cost
+* コスト
 * チームエクスペリエンス
 
 キャッシュソリューションは、通常、キャッシュされたデータを高速に取得するためにインメモリストレージに依存しますが、メモリは限られたリソースであり、拡張にはコストがかかります。 一般的に使用されるデータのみをキャッシュに格納します。
@@ -345,7 +342,7 @@ NCache を構成するには:
 
 * 既存のインフラストラクチャ
 * パフォーマンス要件
-* Cost
+* コスト
 * チームエクスペリエンス
 
 キャッシュソリューションは、通常、キャッシュされたデータを高速に取得するためにインメモリストレージに依存しますが、メモリは限られたリソースであり、拡張にはコストがかかります。 一般的に使用されるデータのみをキャッシュに格納します。
@@ -521,7 +518,7 @@ NCache を構成するには:
 
 * 既存のインフラストラクチャ
 * パフォーマンス要件
-* Cost
+* コスト
 * チームエクスペリエンス
 
 キャッシュソリューションは、通常、キャッシュされたデータを高速に取得するためにインメモリストレージに依存しますが、メモリは限られたリソースであり、拡張にはコストがかかります。 一般的に使用されるデータのみをキャッシュに格納します。
@@ -544,4 +541,3 @@ SQL Server が分散キャッシュバッキングストアとして使用され
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
- 

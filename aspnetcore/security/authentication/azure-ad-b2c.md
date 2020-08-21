@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: a1bac04944d9671df3f804a9724c9f0fd6f1fb27
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: edacded5df4d5f4819b3657bc7eff99e6d96d394
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633631"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712546"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core の Azure Active Directory B2C を使用したクラウド認証
 
@@ -60,7 +60,7 @@ ms.locfileid: "88633631"
 
 | 設定                       | 値                     | メモ                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                      | *&lt;アプリ名&gt;*        | アプリをコンシューマーに説明するアプリの **名前** を入力します。                                                                                                                                 |
+| **名前**                      | *&lt;アプリ名&gt;*        | アプリをコンシューマーに説明するアプリの **名前** を入力します。                                                                                                                                 |
 | **Web アプリ/Web API を含める** | はい                       |                                                                                                                                                                                                    |
 | **暗黙的フローを許可する**       | はい                       |                                                                                                                                                                                                    |
 | **応答 URL**                 | `https://localhost:44300/signin-oidc` | 応答 URL は、アプリが要求したトークンを Azure AD B2C が返すエンドポイントです。 Visual Studio には、使用する応答 URL が用意されています。 ここでは、「」と入力してフォームを完成させ `https://localhost:44300/signin-oidc` ます。 |
@@ -172,5 +172,5 @@ Visual Studio で、 **F5** キーを押してアプリをビルドして実行�
 * [多要素認証を有効に](/azure/active-directory-b2c/active-directory-b2c-reference-mfa)します。
 * [Microsoft](/azure/active-directory-b2c/active-directory-b2c-setup-msa-app)、 [Facebook](/azure/active-directory-b2c/active-directory-b2c-setup-fb-app)、 [Google](/azure/active-directory-b2c/active-directory-b2c-setup-goog-app)、 [Amazon](/azure/active-directory-b2c/active-directory-b2c-setup-amzn-app)、 [Twitter](/azure/active-directory-b2c/active-directory-b2c-setup-twitter-app)など、その他の id プロバイダーを構成します。
 * [Azure AD Graph API を使用](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-graph-dotnet) して、Azure AD B2C テナントからグループメンバーシップなどの追加のユーザー情報を取得します。
-* [Azure AD B2C を使用して ASP.NET Core WEB API をセキュリティで保護](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/)します。
+* [Azure AD B2C を使用して ASP.NET Core でビルドされた WEB API をセキュリティで保護する方法について説明](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2/tree/master/4-WebApp-your-API/4-2-B2C)します。
 * [チュートリアル: Azure Active Directory B2C を使用して、ASP.NET WEB API へのアクセスを許可](/azure/active-directory-b2c/tutorial-web-api-dotnet)します。
