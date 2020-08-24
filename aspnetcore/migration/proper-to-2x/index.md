@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f1a5af60f8dce83d9622ed9d2c6bcb4b8fc22b73
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634762"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712494"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET から ASP.NET Core への移行
 
@@ -203,6 +203,12 @@ ASP.NET Core では、構成が変更されていない限り、静的ファイ�
     ├── ...
     └── web.config
 ```
+
+## <a name="bind-and-input-formatters"></a>[BIND] と入力フォーマッタ
+
+[以前のバージョンの ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) では、過剰ポスティング攻撃からの保護に `[Bind]` 属性が使用されていました。 [入力フォーマッタ](xref:mvc/models/model-binding#input-formatters)は ASP.NET Core では動作が異なります。 `[Bind]` 属性は、入力フォーマッタと共に使用して JSON または XML を解析するときに、過剰ポスティングを防ぐように設計されなくなりました。 データのソースが `x-www-form-urlencoded` コンテンツ タイプでポストされたフォーム データである場合、これらの属性はモデル バインドに影響します。
+
+JSON 情報をコントローラーにポストし、JSON 入力フォーマッタを使用してデータを解析するアプリの場合は、`[Bind]` 属性を、`[Bind]` 属性で定義されるプロパティと一致するビュー モデルに置き換えることをお勧めします。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

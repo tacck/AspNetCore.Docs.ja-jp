@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
+ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634463"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88746560"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core パフォーマンスのベストプラクティス
 
@@ -32,7 +32,7 @@ ms.locfileid: "88634463"
 
 ## <a name="cache-aggressively"></a>積極的にキャッシュ
 
-キャッシュについては、このドキュメントのいくつかの部分で説明します。 詳細については、<xref:performance/caching/response> を参照してください。
+キャッシュについては、このドキュメントのいくつかの部分で説明します。 詳細については、「<xref:performance/caching/response>」を参照してください。
 
 ## <a name="understand-hot-code-paths"></a>ホットコードパスについて
 
@@ -57,6 +57,12 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 * コントローラー/ Razor ページのアクションを非同期にします。 非同期 [/await](/dotnet/csharp/programming-guide/concepts/async/) パターンを活用するために、呼び出し履歴全体が非同期になります。
 
 [Perfview](https://github.com/Microsoft/perfview)などのプロファイラーを使用して、[スレッドプール](/windows/desktop/procthread/thread-pools)に頻繁に追加されるスレッドを見つけることができます。 イベントは、スレッド `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` プールに追加されたスレッドを示します。 <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+
+## <a name="return-ienumerablet-or-iasyncenumerablet"></a>IEnumerable \<T> または IAsyncEnumerable を返します\<T>
+
+`IEnumerable<T>`アクションから戻ると、シリアライザーによって同期コレクションの反復処理が行われます。 その結果、呼び出しがブロックされ、スレッド プールが枯渇する可能性があります。 同期列挙を回避するには、を使用して列挙可能なを `ToListAsync` 返します。
+
+ASP.NET Core 3.0 以降では、を `IAsyncEnumerable<T>` 非同期的に列挙するの代替手段としてを使用でき `IEnumerable<T>` ます。 詳細については、「 [コントローラーアクションの戻り値の型](xref:web-api/action-return-types#return-ienumerablet-or-iasyncenumerablet)」を参照してください。
 
 ## <a name="minimize-large-object-allocations"></a>大きなオブジェクトの割り当てを最小限にする
 
@@ -84,7 +90,7 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 
 * すべてのデータアクセス Api を非同期**に呼び出します**。
 * 必要以上に多くのデータを取得**しないで**ください。 現在の HTTP 要求に必要なデータだけを返すクエリを記述します。
-* 少し古いデータが許容される場合は、データベースまたはリモートサービスから取得した頻繁にアクセスされるデータをキャッシュすること**を検討してください。** シナリオに応じて、 [Memorycache](xref:performance/caching/memory) または [microsoft.web.distributedcache](xref:performance/caching/distributed)を使用します。 詳細については、<xref:performance/caching/response> を参照してください。
+* 少し古いデータが許容される場合は、データベースまたはリモートサービスから取得した頻繁にアクセスされるデータをキャッシュすること**を検討してください。** シナリオに応じて、 [Memorycache](xref:performance/caching/memory) または [microsoft.web.distributedcache](xref:performance/caching/distributed)を使用します。 詳細については、「<xref:performance/caching/response>」を参照してください。
 * ネットワークラウンドトリップ**を最小限に**抑えます。 目的は、複数の呼び出しではなく、1回の呼び出しで必要なデータを取得することです。
 * 読み取り専用の目的でデータにアクセスする場合**は**、Entity Framework Core で[追跡なしのクエリ](/ef/core/querying/tracking#no-tracking-queries)を使用します。 EF Core は、追跡しないクエリの結果をより効率的に返すことができます。
 * (、、またはステートメントを使用して) LINQ クエリのフィルター処理と集計を**実行**し、 `.Where` `.Select` `.Sum` データベースによってフィルター処理が実行されるようにします。
@@ -111,7 +117,7 @@ ASP.NET Core アプリのパフォーマンスに関する一般的な問題は�
 
 ## <a name="keep-common-code-paths-fast"></a>共通コードパスを高速に保つ
 
-すべてのコードが高速になるようにします。 頻繁に呼び出されるコードパスは、最適化するうえで最も重要なものです。 これには以下が含まれます。
+すべてのコードが高速になるようにします。 頻繁に呼び出されるコードパスは、最適化するうえで最も重要なものです。 次の設定があります。
 
 * アプリケーションの要求処理パイプラインのミドルウェアコンポーネント (特に、ミドルウェアはパイプラインの早い段階で実行されます)。 これらのコンポーネントは、パフォーマンスに大きな影響を与えます。
 * 要求ごとに、または要求ごとに複数回実行されるコード。 たとえば、カスタムログ、承認ハンドラー、または一時的なサービスの初期化などです。
@@ -357,3 +363,11 @@ ASP.NET Core は、HTTP 応答の本文をバッファーしません。 最初�
 ## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>応答本文への書き込みを既に開始している場合は、next () を呼び出さないでください。
 
 コンポーネントは、応答を処理および操作できる場合にのみ呼び出されることを想定しています。
+
+## <a name="use-in-process-hosting-with-iis"></a>IIS でインプロセスホスティングを使用する
+
+インプロセス ホスティング モデルを使用する場合、ASP.NET Core アプリはその IIS ワーカー プロセスと同じプロセスで実行されます。 インプロセスホスティングでは、要求がループバックアダプターを介してプロキシされないため、アウトプロセスホスティングよりパフォーマンスが向上します。 ループバックアダプターは、同じコンピューターに送信されるネットワークトラフィックを返すネットワークインターフェイスです。 IIS では [Windows プロセス アクティブ化サービス (WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was) を使用してプロセス管理が処理されます。
+
+プロジェクトは、既定では ASP.NET Core 3.0 以降のインプロセスホスティングモデルに設定されます。
+
+詳細については、「 [IIS を使用した Windows での ASP.NET Core のホスト](xref:host-and-deploy/iis/index)」を参照してください。
