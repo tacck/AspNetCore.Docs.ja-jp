@@ -5,8 +5,9 @@ description: Blazor アプリで JavaScript 関数から .NET メソッドを呼
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 08/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5a0731b45424ffd8560bb3b0d9123c686ae9e247
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3df0fafe85d6decac3be41d4e25a4db51d8d72d8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012567"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627053"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す
 
@@ -233,11 +234,16 @@ Hello, Blazor!
 * コンポーネントに対して静的メソッド呼び出しを行うには、`invokeMethod` または `invokeMethodAsync` 関数を使用します。
 * コンポーネントの静的メソッドにより、そのインスタンス メソッドへの呼び出しが、呼び出された <xref:System.Action> としてラップされます。
 
+> [!NOTE]
+> 複数のユーザーが同じコンポーネントを同時に使用している可能性がある Blazor Server アプリの場合、ヘルパー クラスを使用してインスタンス メソッドを呼び出します。
+>
+> 詳細については、「[コンポーネント インスタンス メソッド ヘルパー クラス](#component-instance-method-helper-class)」セクションを参照してください。
+
 クライアント側の JavaScript:
 
 ```javascript
 function updateMessageCallerJS() {
-  DotNet.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+  DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
 }
 ```
 
@@ -279,7 +285,70 @@ function updateMessageCallerJS() {
 }
 ```
 
-複数のコンポーネントがあり、それぞれに呼び出すインスタンス メソッドがある場合は、ヘルパー クラスを使用して、各コンポーネントのインスタンス メソッドを (<xref:System.Action> として) 呼び出します。
+インスタンス メソッドに引数を渡すには:
+
+* JS メソッドの呼び出しにパラメーターを追加します。 次の例では、名前がメソッドに渡されます。 必要に応じて、追加のパラメーターを一覧に追加できます。
+
+  ```javascript
+  function updateMessageCallerJS(name) {
+    DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller', name);
+  }
+  ```
+  
+  プレースホルダー `{APP ASSEMBLY}` は、アプリのアプリ アセンブリ名です (例: `BlazorSample`)。
+
+* パラメーターの <xref:System.Action> に適切な型を指定します。 C# メソッドにパラメーター一覧を指定します。 <xref:System.Action> (`UpdateMessage`) をパラメーター (`action.Invoke(name)`) を使用して呼び出します。
+
+  `Pages/JSInteropComponent.razor`:
+
+  ```razor
+  @page "/JSInteropComponent"
+
+  <p>
+      Message: @message
+  </p>
+
+  <p>
+      <button onclick="updateMessageCallerJS('Sarah Jane')">
+          Call JS Method
+      </button>
+  </p>
+
+  @code {
+      private static Action<string> action;
+      private string message = "Select the button.";
+
+      protected override void OnInitialized()
+      {
+          action = UpdateMessage;
+      }
+
+      private void UpdateMessage(string name)
+      {
+          message = $"{name}, UpdateMessage Called!";
+          StateHasChanged();
+      }
+
+      [JSInvokable]
+      public static void UpdateMessageCaller(string name)
+      {
+          action.Invoke(name);
+      }
+  }
+  ```
+
+  **[Call JS Method]\(JS メソッドの呼び出し\)** ボタンを選択したときに `message` を出力します。
+
+  ```
+  Sarah Jane, UpdateMessage Called!
+  ```
+
+## <a name="component-instance-method-helper-class"></a>コンポーネント インスタンス メソッド ヘルパー クラス
+
+ヘルパー クラスは、<xref:System.Action> としてインスタンス メソッドを呼び出すために使用されます。 ヘルパー クラスは、次の場合に役立ちます。
+
+* 同じ種類の複数のコンポーネントが同じページにレンダリングされる。
+* Blazor Server アプリが使用され、複数のユーザーがコンポーネントを同時に使用している可能性があります。
 
 次に例を示します。
 

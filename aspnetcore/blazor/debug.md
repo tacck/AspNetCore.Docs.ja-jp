@@ -5,8 +5,9 @@ description: Blazor アプリをデバッグする方法について説明しま
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5aeb333dc36ebc4c3a324b397793343e0335b1e1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014543"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628366"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -42,7 +43,7 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 現時点では、次の操作を行うことは*できません*。
 
 * 未処理の例外の発生時に中断する。
-* アプリの起動中にブレークポイントにヒットする。
+* デバッグ プロキシが実行される前に、アプリの起動中にブレークポイントにヒットします。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
 
 今後のリリースでは、引き続きデバッグエクス ペリエンスが向上します。
 
@@ -80,7 +81,7 @@ Visual Studio で Blazor WebAssembly アプリをデバッグするには、次�
 1. <kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。
 
    > [!NOTE]
-   > **デバッグなしの開始** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。
+   > **デバッグなしの開始** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
 
 1. `Pages/Counter.razor` の `IncrementCount` メソッドにブレークポイントを設定します。
 1. **`Counter`** タブに移動し、ボタンを選択してブレークポイントをヒットします。
@@ -128,7 +129,7 @@ Blazor WebAssembly アプリのデバッグ中に、サーバー コードをデ
 1. <kbd>F5</kbd> キーボード ショートカットまたはメニュー項目を使用してデバッグを開始します。
 
    > [!NOTE]
-   > **デバッグなしの実行** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。
+   > **デバッグなしの開始** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
 
 1. プロンプトが表示されたら、 **[Blazor WebAssembly Debug]** オプションを選択してデバッグを開始します。
 
@@ -284,3 +285,13 @@ protected override async Task OnInitializedAsync()
     ...
 }
 ```
+
+### <a name="visual-studio-timeout"></a>Visual Studio のタイムアウト
+
+Visual Studio で、タイムアウトに達したことを示すデバッグ アダプターの起動失敗の例外がスローされた場合、レジストリ設定でタイムアウトを調整できます。
+
+```console
+VsRegEdit.exe set "<VSInstallFolder>" HKCU JSDebugger\Options\Debugging "BlazorTimeoutInMilliseconds" dword {TIMEOUT}
+```
+
+上記のコマンドの `{TIMEOUT}` プレースホルダーはミリ秒単位です。 たとえば、1 分は `60000` として割り当てられます。

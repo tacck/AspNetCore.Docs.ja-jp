@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/29/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: 437e7be6b805ad836df60e831f5e0dc0bda4f5a5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1607a80ea12cedd82b5996cf1b09e02e1aada2fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014452"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628808"
 ---
 # <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor の構成
 
@@ -200,11 +201,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logging-configuration"></a>ログの構成
 
-[`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/) のパッケージ参照を追加します。
+[`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) のパッケージ参照を追加します。
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
+
+プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) のパッケージの**バージョン履歴**にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 `wwwroot/appsettings.json`:
 

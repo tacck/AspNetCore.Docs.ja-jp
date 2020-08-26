@@ -4,8 +4,9 @@ author: rick-anderson
 description: ASP.NET Core で Web API をビルドする方法を学習します。
 ms.author: riande
 ms.custom: mvc
-ms.date: 2/25/2020
+ms.date: 08/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ad6eac246e5bc7039158981bbe96036389512e4f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ce0dfdf1ce88b55790d33918a2d20bc19a09b288
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019236"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626897"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -116,7 +117,7 @@ ms.locfileid: "88019236"
 
   ![macOS での API テンプレートの選択](first-web-api-mac/_static/api_template.png)
 
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **[ターゲット フレームワーク]** を選択します。 **[次へ]** を選択します。
+* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク**を選択します。 **[次へ]** を選択します。
 
 * **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
@@ -293,7 +294,8 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 上のコマンドでは以下の操作が行われます。
@@ -324,6 +326,8 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) 属性が示すように、上記のコードは HTTP POST メソッドです。 このメソッドは、HTTP 要求の本文から To Do アイテムの値を取得します。
 
+詳細については、「[Http[Verb] 属性を使用する属性ルーティング](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes)」を参照してください。
+
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> メソッド:
 
 * 成功すると、HTTP 201 状態コードが返されます。 HTTP 201 は、サーバーに新しいリソースを作成する HTTP POST メソッドに対する標準の応答です。
@@ -348,6 +352,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 * 新しい要求を作成します。
 * HTTP メソッドを `POST` に設定します。
+* URI を `https://localhost:<port>/api/TodoItems` に設定します。 たとえば、「 `https://localhost:5001/api/TodoItems` 」のように入力します。
 * **[Body]** タブを選択します。
 * **[raw]** ラジオ ボタンを選択します。
 * 型を **[JSON (application/json)]** に設定します。
@@ -364,15 +369,15 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
   ![Postman での Create 要求](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri"></a>場所ヘッダー URI のテスト
+### <a name="test-the-location-header-uri-with-postman"></a>Postman で Location ヘッダーの URI をテストする
 
 * **[Response]** ウィンドウで、 **[Headers]** タブを選択します。
 * **[Location]** ヘッダー値をコピーします。
 
   ![Postman コンソールの [Headers] タブ](first-web-api/_static/3/create.png)
 
-* メソッドを GET に設定します。
-* URI を貼り付けます (たとえば、`https://localhost:5001/api/TodoItems/1`)。
+* HTTP メソッドを `GET` に設定します。
+* URI を `https://localhost:<port>/api/TodoItems/1` に設定します。 たとえば、「 `https://localhost:5001/api/TodoItems/1` 」のように入力します。
 * **[Send]** を選択します。
 
 ## <a name="examine-the-get-methods"></a>GET メソッドの確認
@@ -403,7 +408,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
 * 新しい要求を作成します。
 * HTTP メソッドを **GET** に設定します。
-* 要求 URL を `https://localhost:<port>/api/TodoItems` に設定します。 たとえば、`https://localhost:5001/api/TodoItems` のようにします。
+* 要求 URI を `https://localhost:<port>/api/TodoItems` に設定します。 たとえば、`https://localhost:5001/api/TodoItems` のようにします。
 * Postman で **[Two pane view]** を設定します。
 * **[Send]** を選択します。
 
@@ -594,7 +599,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]**  >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]** \(Web とコンソール\) >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。
   
-* **[Configure your new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 2.x **[ターゲット フレームワーク]** を選択します。 **[次へ]** を選択します。
+* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 2.x **ターゲット フレームワーク**を選択します。 **[次へ]** を選択します。
 
 * **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
@@ -804,7 +809,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 * 新しい要求を作成します。
   * HTTP メソッドを **GET** に設定します。
-  * 要求 URL を `https://localhost:<port>/api/todo` に設定します。 たとえば、`https://localhost:5001/api/todo` のようにします。
+  * 要求 URI を `https://localhost:<port>/api/todo` に設定します。 たとえば、`https://localhost:5001/api/todo` のようにします。
 * Postman で **[Two pane view]** を設定します。
 * **[Send]** を選択します。
 
@@ -830,6 +835,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 * プロジェクトをビルドします。
 * Postman で、HTTP メソッド名を `POST` に設定します。
+* URI を `https://localhost:<port>/api/TodoItem` に設定します。 たとえば、「 `https://localhost:5001/api/TodoItem` 」のように入力します。
 * **[Body]** タブを選択します。
 * **[raw]** ラジオ ボタンを選択します。
 * 型を **[JSON (application/json)]** に設定します。
@@ -856,7 +862,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
   ![Postman コンソールの [Headers] タブ](first-web-api/_static/pmc2.png)
 
 * メソッドを GET に設定します。
-* URI を貼り付けます (たとえば、`https://localhost:5001/api/Todo/2`)。
+* URI を  `https://localhost:<port>/api/TodoItems/2` に設定します。 たとえば、 `https://localhost:5001/api/TodoItems/2` などです。
 * **[Send]** を選択します。
 
 ## <a name="add-a-puttodoitem-method"></a>PutTodoItem メソッドの追加

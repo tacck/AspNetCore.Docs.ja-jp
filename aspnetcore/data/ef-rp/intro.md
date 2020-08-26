@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 00d5c348b7ab06f9044e6705026e43feb7807ae3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018638"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630304"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 
@@ -89,7 +90,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 完成したプロジェクトをダウンロードした後にアプリを実行するには:
 
 * *ContosoUniversity.csproj* を削除し、*ContosoUniversitySQLite.csproj* の名前を *ContosoUniversity.csproj* に変更します。
-* *Startup.cs* を削除し、*StartupSQLite.cs* の名前を *Startup.cs* に変更します。
+* *Program.cs* で、`StartupSQLite` が使用されるように `#define Startup` をコメント アウトします。
 * *appSettings.json* を削除し、*appSettingsSQLite.json* の名前を *appSettings.json* に変更します。
 * *Migrations* フォルダーを削除し、*MigrationsSQL* の名前を *Migrations* に変更します。
 * `#if SQLiteVersion` のグローバル検索を実行し、`#if SQLiteVersion` と関連する `#endif` ステートメントを削除します。

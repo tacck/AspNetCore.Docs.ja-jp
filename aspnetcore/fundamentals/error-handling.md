@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: 2e6aabda449a24496916c6ea9fcbd38062b54c04
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a1f40bdcdd4f2472aa86b311bfd9302e6aa8adc0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017455"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635100"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core のエラーを処理する
 
@@ -34,7 +35,7 @@ ms.locfileid: "88017455"
 
 ## <a name="developer-exception-page"></a>開発者例外ページ
 
-"*開発者例外ページ*" には、要求の例外に関する詳細な情報が表示されます。 そのページは、[Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)内の [Microsoft.AspNetCore.Diagnostics](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/) パッケージによって使用可能になります。 アプリを開発[環境](xref:fundamentals/environments)で実行するときにページを有効にするには、`Startup.Configure` メソッドにコードを追加します。
+"*開発者例外ページ*" には、要求の例外に関する詳細な情報が表示されます。 このページは、[`Microsoft.AspNetCore.App` 共有フレームワーク](xref:fundamentals/metapackage-app)にある `Microsoft.AspNetCore.Diagnostics` アセンブリによって使用可能になります。 アプリを開発[環境](xref:fundamentals/environments)で実行するときにページを有効にするには、`Startup.Configure` メソッドにコードを追加します。
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=1-4)]
 

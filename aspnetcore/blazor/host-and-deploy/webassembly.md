@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 06059e0f9ff6a3f4073d8d01d1ac541c30ad1ab1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9e3933d8800c00eb135c041bb1c65fbf01d4ef83
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014192"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628041"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -85,6 +86,12 @@ Blazor は、適切な圧縮ファイルにサービスを提供するため、�
 <PropertyGroup>
   <BlazorEnableCompression>false</BlazorEnableCompression>
 </PropertyGroup>
+```
+
+`BlazorEnableCompression` プロパティは、コマンド シェルで次の構文を使用して [`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドに渡すことができます。
+
+```dotnetcli
+dotnet publish -p:BlazorEnableCompression=false
 ```
 
 ## <a name="rewrite-urls-for-correct-routing"></a>正しいルーティングのために URL を書き換える

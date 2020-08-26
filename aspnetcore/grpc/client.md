@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 07/27/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 5aca81da34e5ed51b2dc4f404c1ba4d7377a422f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016246"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634333"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
@@ -136,7 +137,7 @@ await foreach (var response in call.ResponseStream.ReadAllAsync())
 
 ### <a name="client-streaming-call"></a>クライアント ストリーミング呼び出し
 
-クライアント ストリーミング呼び出しは、メッセージを送信するクライアント*なしで*始まります。 クライアントでは、`RequestStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 クライアントがメッセージの送信を完了したら、`RequestStream.CompleteAsync` を呼び出してサービスに通知する必要があります。 サービスが応答メッセージを返すと呼び出しが完了します。
+クライアント ストリーミング呼び出しは、メッセージを送信するクライアント*なしで*始まります。 クライアントでは、`RequestStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 クライアントがメッセージの送信を完了したら、`RequestStream.CompleteAsync()` を呼び出してサービスに通知する必要があります。 サービスが応答メッセージを返すと呼び出しが完了します。
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -188,6 +189,14 @@ Console.WriteLine("Disconnecting");
 await call.RequestStream.CompleteAsync();
 await readTask;
 ```
+
+最適なパフォーマンスを得るため、そしてクライアントとサービスでの不要なエラーを回避するため、双方向のストリーミング呼び出しを正常に完了してみてください。 サーバーが要求ストリームの読み取りを完了し、クライアントが応答ストリームの読み取りを完了すると、双方向呼び出しが正常に完了します。 上記のサンプル呼び出しは、正常に終了する双方向呼び出しの一例です。 この呼び出しでは、クライアントは次を行います。
+
+1. `EchoClient.Echo` を呼び出すことによって、新しい双方向ストリーミング呼び出しを開始します。
+2. `ResponseStream.ReadAllAsync()` を使用してサービスからメッセージを読み取るバックグラウンド タスクを作成します。
+3. `RequestStream.WriteAsync` を使用してサーバーにメッセージを送信します。
+4. `RequestStream.CompleteAsync()` によるメッセージの送信が完了したことをサーバーに通知します。
+5. バックグラウンド タスクがすべての受信メッセージを読み取るまで待機します。
 
 双方向ストリーミング呼び出しの間、クライアントとサービスはいつでも相互にメッセージを送信できます。 双方向呼び出しの操作に最適なクライアント ロジックは、サービス ロジックによってさまざまです。
 

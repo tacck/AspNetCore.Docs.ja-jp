@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 36047844c8c2624c6fd0ee085dfad4a7af0367c5
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: ef5e9e1becb511ef383b22fc96441b0f61537354
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130289"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626221"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 
@@ -173,15 +174,17 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 ### <a name="authentication-package"></a>認証パッケージ
 
-個人のユーザー アカウント (`Individual`) を使用するようにアプリを作成すると、アプリはそのアプリのプロジェクト ファイル内で [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) パッケージのパッケージ参照を自動的に受け取ります。 このパッケージには、アプリでユーザーを認証し、保護された API を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
+個人のユーザー アカウント (`Individual`) を使用するようにアプリを作成すると、アプリはそのアプリのプロジェクト ファイル内で [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) パッケージのパッケージ参照を自動的に受け取ります。 このパッケージには、アプリでユーザーを認証し、保護された API を呼び出すためのトークンを取得するのに役立つ一連のプリミティブが用意されています。
 
 アプリに認証を追加する場合は、アプリのプロジェクト ファイルにパッケージを手動で追加します。
 
 ```xml
 <PackageReference 
   Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
-  Version="3.2.0" />
+  Version="{VERSION}" />
 ```
+
+プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) のパッケージの**バージョン履歴**にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 ### <a name="httpclient-configuration"></a>`HttpClient` 構成
 
@@ -201,7 +204,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
 
 ### <a name="api-authorization-support"></a>API の承認のサポート
 
-ユーザーの認証に対するサポートは、[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) パッケージ内で提供される拡張メソッドによって、サービス コンテナーに接続されます。 このメソッドでは、アプリが既存の承認システムとやり取りするために必要なサービスが設定されます。
+ユーザーの認証に対するサポートは、[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) パッケージ内で提供される拡張メソッドによって、サービス コンテナーに接続されます。 このメソッドでは、アプリが既存の承認システムとやり取りするために必要なサービスが設定されます。
 
 ```csharp
 builder.Services.AddApiAuthorization();

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -14,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016680"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627664"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core の静的ファイル
 
@@ -103,6 +104,19 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、既定では A
 ## <a name="static-file-authorization"></a>静的ファイルの承認
 
 静的ファイル ミドルウェアでは、承認の確認は行いません。 `wwwroot` の下にあるものも含め、このミドルウェアによって提供されるすべてのファイルは、一般に公開されます。 承認に基づいてファイルを提供するには:
+
+* `wwwroot` や既定の静的ファイル ミドルウェアがアクセスできる任意のディレクトリの外にそれらを配置します。
+* `UseAuthorization` の後に `UseStaticFiles` を呼び出し、パスを指定します。
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2)]
+  
+  上記の方法では、ユーザーの認証が必要です。
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-99)]
+
+   [!INCLUDE[](~/includes/requireAuth.md)]
+
+承認に基づいてファイルを提供する別の方法:
 
 * `wwwroot` や静的ファイル ミドルウェアがアクセスできる任意のディレクトリの外にファイルを配置します。
 * 承認が適用されるアクション メソッドを使用して提供し、<xref:Microsoft.AspNetCore.Mvc.FileResult> オブジェクトを返します。
@@ -445,6 +459,8 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupFileExtensionContentTypeProvider.cs?name=snippet_ConfigureMethod&highlight=3-12,19)]
 
 「[MIME content types](https://www.iana.org/assignments/media-types/media-types.xhtml)」 (MIME コンテンツ タイプ) を参照してください。
+
+カスタム <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> を使用する方法、または Blazor サーバー アプリで他の <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> を構成する方法については、<xref:blazor/fundamentals/additional-scenarios#static-files> を参照してください。
 
 ## <a name="non-standard-content-types"></a>非標準のコンテンツ タイプ
 
