@@ -5,8 +5,9 @@ description: Blazor でフォームとフィールドの検証シナリオを使
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 08/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 3e719261315ed3a17833da7751d801d79a11ee6c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4690c279c24ef23806a6e72aece5f7cd821752bc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014479"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628327"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
-作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
+作成者: [Daniel Roth](https://github.com/danroth27)、[Rémi Bourgarel](https://remibou.github.io/)、[Luke Latham](https://github.com/guardrex)
 
 フォームと検証は、Blazor で[データ注釈](xref:mvc/models/validation)を使用してサポートされています。
 
@@ -60,7 +61,7 @@ public class ExampleModel
 
     private void HandleValidSubmit()
     {
-        Console.WriteLine("OnValidSubmit");
+        ...
     }
 }
 ```
@@ -71,7 +72,7 @@ public class ExampleModel
 * <xref:Microsoft.AspNetCore.Components.Forms.InputText> コンポーネントの `@bind-Value` は次のようにバインドします。
   * モデル プロパティ (`exampleModel.Name`) を <xref:Microsoft.AspNetCore.Components.Forms.InputText> コンポーネントの `Value` プロパティへ。 プロパティのバインドの詳細については、<xref:blazor/components/data-binding#parent-to-child-binding-with-component-parameters> を参照してください。
   * 変更イベント デリゲートを <xref:Microsoft.AspNetCore.Components.Forms.InputText> コンポーネントの `ValueChanged` プロパティへ。
-* <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントは、データ注釈を使用して検証サポートをアタッチします。
+* <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> [検証コンポーネント](#validator-components)は、データ注釈を使用して検証サポートをアタッチします。
 * <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> コンポーネントは、検証メッセージの概要を示します。
 * `HandleValidSubmit` は、フォームが正常に送信される (検証に合格する) とトリガーされます。
 
@@ -189,23 +190,31 @@ public class Starship
 </EditForm>
 
 @code {
-    private Starship starship = new Starship();
+    private Starship starship = new Starship() { ProductionDate = DateTime.UtcNow };
 
     private void HandleValidSubmit()
     {
-        Console.WriteLine("OnValidSubmit");
+        ...
     }
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.Forms.EditForm> では、変更されたフィールドと現在の検証メッセージを含む、編集プロセスに関するメタデータを追跡する[カスケード値](xref:blazor/components/cascading-values-and-parameters) として <xref:Microsoft.AspNetCore.Components.Forms.EditContext> を作成します。 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> では、有効な送信と無効な送信用の便利なイベント (<xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit>、<xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit>) も提供しています。 または、<xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> を使用して、カスタム検証コードで検証をトリガーし、フィールド値をチェックします。
+<xref:Microsoft.AspNetCore.Components.Forms.EditForm> では、変更されたフィールドと現在の検証メッセージを含む、編集プロセスに関するメタデータを追跡する[カスケード値](xref:blazor/components/cascading-values-and-parameters) として <xref:Microsoft.AspNetCore.Components.Forms.EditContext> を作成します。
+
+<xref:Microsoft.AspNetCore.Components.Forms.EditContext> **または** <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> の**いずれか**を <xref:Microsoft.AspNetCore.Components.Forms.EditForm> に割り当てます。 両方とも割り当てることはサポートされておらず、**ランタイム エラー**が生成されます。
+
+<xref:Microsoft.AspNetCore.Components.Forms.EditForm> では、有効および無効のフォームを送信するための便利なイベントが提供されます。
+
+* <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit>
+* <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit>
+
+カスタム コードを使用して検証をトリガーし、フィールドの値をチェックするには、<xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> を使用します。
 
 次に例を示します。
 
 * **`Submit`** ボタンが選択されると、`HandleSubmit` メソッドが実行されます。
-* フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext> を使用して、フォームが検証されます。
-* このフォームをさらに検証するには、サーバーで Web API エンドポイントを呼び出す `ServerValidate` メソッドに <xref:Microsoft.AspNetCore.Components.Forms.EditContext> を渡します (*示されていません*)。
-* `isValid` をチェックすることによって、クライアント側とサーバー側の検証の結果に応じて、追加のコードが実行されます。
+* <xref:Microsoft.AspNetCore.Components.Forms.EditContext.Validate%2A?displayProperty=nameWithType> を呼び出して、フォームを検証します。
+* 検証結果に応じて、追加のコードが実行されます。 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> に割り当てられたメソッドにビジネス ロジックを配置します。
 
 ```razor
 <EditForm EditContext="@editContext" OnSubmit="HandleSubmit">
@@ -216,7 +225,7 @@ public class Starship
 </EditForm>
 
 @code {
-    private Starship starship = new Starship();
+    private Starship starship = new Starship() { ProductionDate = DateTime.UtcNow };
     private EditContext editContext;
 
     protected override void OnInitialized()
@@ -226,8 +235,7 @@ public class Starship
 
     private async Task HandleSubmit()
     {
-        var isValid = editContext.Validate() && 
-            await ServerValidate(editContext);
+        var isValid = editContext.Validate();
 
         if (isValid)
         {
@@ -238,15 +246,428 @@ public class Starship
             ...
         }
     }
+}
+```
 
-    private async Task<bool> ServerValidate(EditContext editContext)
+> [!NOTE]
+> 検証メッセージを <xref:Microsoft.AspNetCore.Components.Forms.EditContext> から直接クリアする Framework API は存在しません。 このため、通常、フォームの新しい <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> に検証メッセージを追加することはお勧めしません。 検証メッセージを管理するには、この記事で説明するように、[ビジネス ロジック検証コード](#business-logic-validation)で[検証コンポーネント](#validator-components)を使用します。
+
+## <a name="validator-components"></a>検証コンポーネント
+
+検証コンポーネントでは、フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext>の <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> を管理することで、フォームの検証をサポートします。
+
+Blazor フレームワークでは、[検証属性 (データ注釈)](xref:mvc/models/validation#validation-attributes)に基づいて検証サポートをフォームにアタッチする <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを提供します。 カスタム検証コンポーネントを作成して、同じページの異なるフォームの検証メッセージを処理するか、フォーム処理の異なるステップ (たとえば、クライアント側の検証の後のサーバー側の検証) で同じフォームの検証メッセージを処理します。 このセクションで示す検証コンポーネントの例 (`CustomValidator`) は、この記事の次のセクションで使用します。
+
+* [ビジネス ロジックの検証](#business-logic-validation)
+* [サーバーの検証](#server-validation)
+
+> [!NOTE]
+> 多くの場合、カスタムのデータ注釈検証属性をカスタム検証コンポーネントの代わりに使用できます。 フォームのモデルに適用されるカスタム属性は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用してアクティブ化されます。 サーバー側の検証で使用する場合、モデルに適用されるカスタム属性はすべてサーバー上で実行可能である必要があります。 詳細については、「<xref:mvc/models/validation#alternatives-to-built-in-attributes>」を参照してください。
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase>から検証コンポーネントを作成します。
+
+* フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext> は、コンポーネントの[カスケード パラメーターです](xref:blazor/components/cascading-values-and-parameters)。
+* 検証コンポーネントが初期化されると、フォーム エラーの現在の一覧を保持するために新しい <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> が作成されます。
+* フォームのコンポーネント内の開発者コードで `DisplayErrors` メソッドが呼び出されると、メッセージ ストアでエラーが受け取られます。 そのエラーは、[`Dictionary<string, List<string>>`](xref:System.Collections.Generic.Dictionary`2)内の `DisplayErrors` メソッドに渡されます。 ディクショナリでは、キーは、1 つ以上のエラーがあるフォーム フィールドの名前です。 値は、エラー一覧です。
+* 次のいずれかが発生すると、メッセージはクリアされます。
+  * <xref:Microsoft.AspNetCore.Components.Forms.EditContext> で検証が要求され、<xref:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequested> イベントが発生した場合。 すべてのエラーがクリアされます。
+  * フォームのフィールドが変更され、<xref:Microsoft.AspNetCore.Components.Forms.EditContext.OnFieldChanged> イベントが発生した場合。 そのフィールドのエラーのみがクリアされます。
+  * 開発者コードによって `ClearErrors` メソッドが呼び出された場合。 すべてのエラーがクリアされます。
+
+```csharp
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+
+namespace BlazorSample.Client
+{
+    public class CustomValidator : ComponentBase
     {
-        var serverChecksValid = ...
+        private ValidationMessageStore messageStore;
 
-        return serverChecksValid;
+        [CascadingParameter]
+        private EditContext CurrentEditContext { get; set; }
+
+        protected override void OnInitialized()
+        {
+            if (CurrentEditContext == null)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(CustomValidator)} requires a cascading " +
+                    $"parameter of type {nameof(EditContext)}. " +
+                    $"For example, you can use {nameof(CustomValidator)} " +
+                    $"inside an {nameof(EditForm)}.");
+            }
+
+            messageStore = new ValidationMessageStore(CurrentEditContext);
+
+            CurrentEditContext.OnValidationRequested += (s, e) => 
+                messageStore.Clear();
+            CurrentEditContext.OnFieldChanged += (s, e) => 
+                messageStore.Clear(e.FieldIdentifier);
+        }
+
+        public void DisplayErrors(Dictionary<string, List<string>> errors)
+        {
+            foreach (var err in errors)
+            {
+                messageStore.Add(CurrentEditContext.Field(err.Key), err.Value);
+            }
+
+            CurrentEditContext.NotifyValidationStateChanged();
+        }
+
+        public void ClearErrors()
+        {
+            messageStore.Clear();
+            CurrentEditContext.NotifyValidationStateChanged();
+        }
     }
 }
 ```
+
+## <a name="business-logic-validation"></a>ビジネス ロジックの検証
+
+ビジネス ロジックの検証は、ディクショナリ内のフォーム エラーを受け取る[検証コンポーネント](#validator-components)を使用して実現されます。
+
+次に例を示します。
+
+* この記事の「[検証コンポーネント](#validator-components)」セクションの`CustomValidator` コンポーネントが使用されています。
+* 検証では、ユーザーが`Defense`船の分類 (`Classification`) を選択した場合に船の説明 (`Description`) の値を要求します。
+
+検証メッセージは、コンポーネント内で設定されると、検証コンポーネントの <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> に追加され、<xref:Microsoft.AspNetCore.Components.Forms.EditForm> に表示されます。
+
+```csharp
+@page "/FormsValidation"
+
+<h1>Starfleet Starship Database</h1>
+
+<h2>New Ship Entry Form</h2>
+
+<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <CustomValidator @ref="customValidator" />
+    <ValidationSummary />
+
+    ...
+
+</EditForm>
+
+@code {
+    private CustomValidator customValidator;
+    private Starship starship = new Starship() { ProductionDate = DateTime.UtcNow };
+
+    private void HandleValidSubmit()
+    {
+        customValidator.ClearErrors();
+
+        var errors = new Dictionary<string, List<string>>();
+
+        if (starship.Classification == "Defense" &&
+                string.IsNullOrEmpty(starship.Description))
+        {
+            errors.Add(nameof(starship.Description),
+                new List<string>() { "For a 'Defense' ship classification, " +
+                "'Description' is required." });
+        }
+
+        if (errors.Count() > 0)
+        {
+            customValidator.DisplayErrors(errors);
+        }
+        else
+        {
+            // Process the form
+        }
+    }
+}
+```
+
+> [!NOTE]
+> [検証コンポーネント](#validator-components)を使用する代わりに、データ注釈検証属性を使用することもできます。 フォームのモデルに適用されるカスタム属性は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用してアクティブ化されます。 サーバー側の検証で使用する場合、属性はサーバーで実行できる必要があります。 詳細については、「<xref:mvc/models/validation#alternatives-to-built-in-attributes>」を参照してください。
+
+## <a name="server-validation"></a>サーバーの検証
+
+サーバーの検証は、サーバー[検証コンポーネント](#validator-components)を使用して実現できます。
+
+* <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して、フォーム内のクライアント側の検証を処理します。
+* フォームによってクライアント側の検証が渡されると (<xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> が呼び出されると)、フォーム処理のために、<xref:Microsoft.AspNetCore.Components.Forms.EditContext.Model?displayProperty=nameWithType> がバックエンド サーバー API に送信されます。
+* サーバーでモデルの検証を処理します。
+* サーバー API には、組み込みのフレームワーク データ注釈検証と開発者によって提供されるカスタムの検証ロジックの両方が含まれています。 サーバーで検証が成功すると、フォームが処理され、成功の状態コード (*200 - OK*) が返されます。 検証が失敗すると、失敗の状態コード (*400 - 無効な要求*) とフィールド検証エラーが返されます。
+* 成功時にフォームを無効にするか、エラーを表示します。
+
+次の例は、以下のものに基づいています。
+
+* [Blazorホストされているプロジェクト テンプレート](xref:blazor/hosting-models#blazor-webassembly)によって作成された、ホストされている Blazor ソリューション。 この例は、[セキュリティと Identity のドキュメント](xref:blazor/security/webassembly/index#implementation-guidance)で説明されている、安全でホストされている Blazor ソリューションのいずれかで使用できます。
+* 前述の「[組み込みフォームのコンポーネント](#built-in-forms-components)」セクションの *Starfleet Starship Database* フォーム例。
+* Blazor フレームワークの <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネント。
+* 「[検証コンポーネント](#validator-components)」セクションで示した `CustomValidator` コンポーネント。
+
+次の例では、サーバー API で、ユーザーが `Defense` 船の分類 (`Classification`) を選択した場合に船の説明 (`Description`) の値が提供されるかどうかを検証します。
+
+`Starship` モデルをソリューションの `Shared` プロジェクトに配置して、クライアントとサーバーの両方のアプリでモデルを使用できるようにします。 モデルにはデータ注釈が必要であるため、[`System.ComponentModel.Annotations`](https://www.nuget.org/packages/System.ComponentModel.Annotations) のパッケージ参照を `Shared` プロジェクトのプロジェクト ファイルに追加します。
+
+```xml
+<ItemGroup>
+  <PackageReference Include="System.ComponentModel.Annotations" Version="{VERSION}" />
+</ItemGroup>
+```
+
+パッケージのプレビュー版以外の最新バージョンを確認するには、[NuGet.org](https://www.nuget.org/packages/System.ComponentModel.Annotations)でパッケージの **バージョン履歴**を参照してください。
+
+サーバー API プロジェクトでは、starship 検証要求 (`Controllers/StarshipValidation.cs`) を処理し、失敗した検証のメッセージを返すコントローラーを追加します。
+
+```csharp
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using BlazorSample.Shared;
+
+namespace BlazorSample.Server.Controllers
+{
+    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
+    public class StarshipValidationController : ControllerBase
+    {
+        private readonly ILogger<StarshipValidationController> logger;
+
+        public StarshipValidationController(
+            ILogger<StarshipValidationController> logger)
+        {
+            this.logger = logger;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Starship starship)
+        {
+            try
+            {
+                if (starship.Classification == "Defense" && 
+                    string.IsNullOrEmpty(starship.Description))
+                {
+                    ModelState.AddModelError(nameof(starship.Description),
+                        "For a 'Defense' ship " +
+                        "classification, 'Description' is required.");
+                }
+                else
+                {
+                    // Process the form asynchronously
+                    // async ...
+
+                    return Ok(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Validation Error: {MESSAGE}", ex.Message);
+            }
+
+            return BadRequest(ModelState);
+        }
+    }
+}
+```
+
+サーバーでモデル バインド検証エラーが発生した場合、通常、[`ApiController`](xref:web-api/index) (<xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>) により、[既定の無効な要求応答](xref:web-api/index#default-badrequest-response)と <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> が返されます。 *Starfleet Starship Database* フォームのすべてのフィールドが送信されず、フォームの検証が失敗した場合、次の例に示すように、応答には、検証エラー以外のデータも含まれます。
+
+```json
+{
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "Identifier": ["The Identifier field is required."],
+    "Classification": ["The Classification field is required."],
+    "IsValidatedDesign": ["This form disallows unapproved ships."],
+    "MaximumAccommodation": ["Accommodation invalid (1-100000)."]
+  }
+}
+```
+
+サーバー API によって、前述の既定の JSON 応答が返された場合、クライアントでは、応答を解析して、`errors` ノードの子を取得することができます。 ただし、ファイルの解析は容易ではありません。 JSON を解析するには、フォーム検証エラーを処理するためのエラーの [`Dictionary<string, List<string>>`](xref:System.Collections.Generic.Dictionary`2) を生成するために、<xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> を呼び出した後に追加のコードが必要です。 サーバー API で検証エラーのみを返すのが理想的です。
+
+```json
+{
+  "Identifier": ["The Identifier field is required."],
+  "Classification": ["The Classification field is required."],
+  "IsValidatedDesign": ["This form disallows unapproved ships."],
+  "MaximumAccommodation": ["Accommodation invalid (1-100000)."]
+}
+```
+
+サーバー API の応答を変更して、検証エラーのみが返されるようにするには、`Startup.ConfigureServices` の <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> で注釈が付けられたアクションで呼び出されるデリゲートを変更します。 API エンドポイント (`/StarshipValidation`) の場合、<xref:Microsoft.AspNetCore.Mvc.BadRequestObjectResult> と <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary> が返されます。 他の API エンドポイントの場合、オブジェクトの結果と新しい <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>が返され、既定の動作が保持されます。
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+
+...
+
+services.AddControllersWithViews()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            if (context.HttpContext.Request.Path == "/StarshipValidation")
+            {
+                return new BadRequestObjectResult(context.ModelState);
+            }
+            else
+            {
+                return new BadRequestObjectResult(
+                    new ValidationProblemDetails(context.ModelState));
+            }
+        };
+    });
+```
+
+詳細については、「<xref:web-api/handle-errors#validation-failure-error-response>」を参照してください。
+
+クライアント プロジェクトでは、「[検証コンポーネント](#validator-components)」セクションで示した検証コンポーネントを追加します。
+
+また、*Starfleet Starship Database* フォームが、`CustomValidator` コンポーネントを使用してサーバー検証エラーを示すように更新されます。 サーバー API によって検証メッセージが返されると、それらは、`CustomValidator` コンポーネントの <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore>に追加されます。 エラーは、フォームの <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>で表示するために、フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext> で使用することができます。
+
+```csharp
+@page "/FormValidation"
+@using System.Net
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Microsoft.Extensions.Logging
+@using BlazorSample.Shared
+@attribute [Authorize]
+@inject HttpClient Http
+@inject ILogger<FormValidation> Logger
+
+<h1>Starfleet Starship Database</h1>
+
+<h2>New Ship Entry Form</h2>
+
+<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <CustomValidator @ref="customValidator" />
+    <ValidationSummary />
+
+    <p>
+        <label>
+            Identifier:
+            <InputText @bind-Value="starship.Identifier" disabled="@disabled" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Description (optional):
+            <InputTextArea @bind-Value="starship.Description" 
+                disabled="@disabled" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Primary Classification:
+            <InputSelect @bind-Value="starship.Classification" disabled="@disabled">
+                <option value="">Select classification ...</option>
+                <option value="Exploration">Exploration</option>
+                <option value="Diplomacy">Diplomacy</option>
+                <option value="Defense">Defense</option>
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Maximum Accommodation:
+            <InputNumber @bind-Value="starship.MaximumAccommodation" 
+                disabled="@disabled" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Engineering Approval:
+            <InputCheckbox @bind-Value="starship.IsValidatedDesign" 
+                disabled="@disabled" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Production Date:
+            <InputDate @bind-Value="starship.ProductionDate" disabled="@disabled" />
+        </label>
+    </p>
+
+    <button type="submit" disabled="@disabled">Submit</button>
+
+    <p style="@messageStyles">
+        @message
+    </p>
+
+    <p>
+        <a href="http://www.startrek.com/">Star Trek</a>,
+        &copy;1966-2019 CBS Studios, Inc. and
+        <a href="https://www.paramount.com">Paramount Pictures</a>
+    </p>
+</EditForm>
+
+@code {
+    private bool disabled;
+    private string message;
+    private string messageStyles = "visibility:hidden";
+    private CustomValidator customValidator;
+    private Starship starship = new Starship() { ProductionDate = DateTime.UtcNow };
+
+    private async Task HandleValidSubmit(EditContext editContext)
+    {
+        customValidator.ClearErrors();
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync<Starship>(
+                "StarshipValidation", (Starship)editContext.Model);
+
+            var errors = await response.Content
+                .ReadFromJsonAsync<Dictionary<string, List<string>>>();
+
+            if (response.StatusCode == HttpStatusCode.BadRequest && 
+                errors.Count() > 0)
+            {
+                customValidator.DisplayErrors(errors);
+            }
+            else if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(
+                    $"Validation failed. Status Code: {response.StatusCode}");
+            }
+            else
+            {
+                disabled = true;
+                messageStyles = "color:green";
+                message = "The form has been processed.";
+            }
+        }
+        catch (AccessTokenNotAvailableException ex)
+        {
+            ex.Redirect();
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError("Form processing error: {MESSAGE}", ex.Message);
+            disabled = true;
+            messageStyles = "color:red";
+            message = "There was an error processing the form.";
+        }
+    }
+}
+```
+
+> [!NOTE]
+> [検証コンポーネント](#validator-components)の代わりに、データ注釈検証属性を使用することもできます。 フォームのモデルに適用されるカスタム属性は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用してアクティブ化されます。 サーバー側の検証で使用する場合、属性はサーバーで実行できる必要があります。 詳細については、「<xref:mvc/models/validation#alternatives-to-built-in-attributes>」を参照してください。
+
+> [!NOTE]
+> このセクションで説明したサーバー側の検証は、このドキュメント セットにある、Blazor WebAssemblyでホストされるどのソリューション例にも適しています。
+>
+> * [Azure Active Directory (AAD)](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
+> * [Azure Active Directory (AAD) B2C](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)
+> * [Identity サーバー](xref:blazor/security/webassembly/hosted-with-identity-server)
 
 ## <a name="inputtext-based-on-the-input-event"></a>入力イベントに基づく InputText
 
@@ -294,7 +715,7 @@ public class Starship
 
     private void HandleValidSubmit()
     {
-        Console.WriteLine("OnValidSubmit");
+        ...
     }
 
     public class ExampleModel
@@ -383,7 +804,7 @@ public class Starship
 
     private void HandleValidSubmit()
     {
-        Console.WriteLine("valid");
+        ...
     }
 
     public class Model
@@ -485,6 +906,9 @@ private class CustomValidator : ValidationAttribute
 
 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して検証エクスペリエンスのギャップを埋めるパッケージです。 パッケージは現在、*試験段階*です。
 
+> [!NOTE]
+> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) パッケージには、[Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) に "*リリース候補*" の最新バージョンが含まれています。現時点では、"*試験的*" リリース候補パッケージを継続して使用します。 パッケージのアセンブリは、将来のリリースでフレームワークまたはランタイムのいずれかに移動される可能性があります。 更新の詳細については、[Announcements GitHub リポジトリ](https://github.com/aspnet/Announcements)、[dotnet/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore)、またはこのトピック セクションを参照してください。
+
 ### <a name="compareproperty-attribute"></a>[CompareProperty] 属性
 
 <xref:System.ComponentModel.DataAnnotations.CompareAttribute> は、検証結果を特定のメンバーに関連付けないため、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントで正しく機能しません。 これにより、フィールドレベルの検証と、送信時のモデル全体が検証されたときの動作に一貫性がなくなることがあります。 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) "*試験的*" パッケージでは、これらの制限を回避する追加の検証属性 `ComparePropertyAttribute` が導入されています。 Blazor アプリでは、`[CompareProperty]` は [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) 属性の直接の代わりとなるものです。
@@ -547,6 +971,9 @@ public class ShipDescription
 * コンテキストの <xref:Microsoft.AspNetCore.Components.Forms.EditContext.OnFieldChanged> コールバックでフォームを検証して、送信ボタンを有効または無効にします。
 * `Dispose` メソッドでイベント ハンドラーをアンフックします。 詳細については、「<xref:blazor/components/lifecycle#component-disposal-with-idisposable>」を参照してください。
 
+> [!NOTE]
+> さらに、<xref:Microsoft.AspNetCore.Components.Forms.EditContext>を使用する場合は、<xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> を <xref:Microsoft.AspNetCore.Components.Forms.EditForm>に割り当てないでください。
+
 ```razor
 @implements IDisposable
 
@@ -560,7 +987,7 @@ public class ShipDescription
 </EditForm>
 
 @code {
-    private Starship starship = new Starship();
+    private Starship starship = new Starship() { ProductionDate = DateTime.UtcNow };
     private bool formInvalid = true;
     private EditContext editContext;
 
@@ -619,7 +1046,7 @@ public class ShipDescription
 
 > InvalidOperationException:EditForm には、Model パラメーターまたは EditContext パラメーター (両方ではなく) が必要です。
 
-<xref:Microsoft.AspNetCore.Components.Forms.EditForm> に <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> または <xref:Microsoft.AspNetCore.Components.Forms.EditContext> が指定されていることを確認します。
+<xref:Microsoft.AspNetCore.Components.Forms.EditForm> に、<xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> **または** <xref:Microsoft.AspNetCore.Components.Forms.EditContext> が指定されていることを確認します。 同じフォームに両方を使用しないでください。
 
 フォームに <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> を割り当てるときは、次の例に示すように、そのモデルの種類がインスタンス化されていることを確認します。
 

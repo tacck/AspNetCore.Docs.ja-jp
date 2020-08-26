@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633098"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865353"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー
 
@@ -254,9 +254,9 @@ Visual Studio エディターは登録フォームのタグ ヘルパーの方�
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>タグ ヘルパーと Web サーバー コントロールの比較
 
-* タグ ヘルパーには関連付けられている要素はなく、要素とコンテンツのレンダリングに参加するだけです。 ASP.NET [Web サーバー コントロール](https://msdn.microsoft.com/library/7698y1f0.aspx)はページで宣言され、呼び出されます。
+* タグ ヘルパーには関連付けられている要素はなく、要素とコンテンツのレンダリングに参加するだけです。 ASP.NET <https://docs.microsoft.com/previous-versions/dotnet/netframework-3.0/7698y1f0(v=vs.85)> は、ページで宣言され、呼び出されます。
 
-* [Web サーバー コントロール](https://msdn.microsoft.com/library/zsyt68f1.aspx)には複雑なライフサイクルがあり、これが開発とデバッグを困難にする場合があります。
+* <https://docs.microsoft.com/previous-versions/zsyt68f1(v=vs.140)> 開発とデバッグが困難な、重要度の低いライフサイクルがあること。
 
 * Web サーバー コントロールではクライアント コントロールを使用して、クライアントのドキュメント オブジェクト モデル (DOM) 要素に機能を追加することができます。 タグ ヘルパーには DOM がありません。
 
@@ -278,7 +278,7 @@ Visual Studio エディターは登録フォームのタグ ヘルパーの方�
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [タグ ヘルパーの作成](xref:mvc/views/tag-helpers/authoring)
 * [フォームの操作](xref:mvc/views/working-with-forms)

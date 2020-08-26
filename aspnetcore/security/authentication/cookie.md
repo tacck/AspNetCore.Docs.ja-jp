@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 2e9eb58837d74343d8de6903372146570b43f330
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 48b9c41b468f04134164a9c499e7fadca107cab2
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627144"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865106"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>認証を使用 cookie しない ASP.NET Core Identity
 
@@ -48,7 +48,7 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
 
 で、とを呼び出して、 `Startup.Configure` `UseAuthentication` プロパティを `UseAuthorization` 設定し、 `HttpContext.User` 要求の承認ミドルウェアを実行します。 `UseAuthentication`を `UseAuthorization` 呼び出す前に、メソッドとメソッドを呼び出し `UseEndpoints` ます。
 
@@ -251,7 +251,7 @@ await HttpContext.SignInAsync(
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core Identity は、ログインを作成および管理するための完全な機能を備えた完全な認証プロバイダーです。 ただし、を cookie 使用しないベースの認証認証プロバイダーを ASP.NET Core Identity 使用することはできません。 詳細については、「<xref:security/authentication/identity>」を参照してください。
+ASP.NET Core Identity は、ログインを作成および管理するための完全な機能を備えた完全な認証プロバイダーです。 ただし、を cookie 使用しないベースの認証プロバイダーを ASP.NET Core Identity 使用することはできません。 詳細については、「<xref:security/authentication/identity>」を参照してください。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -269,7 +269,7 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
 
 メソッドで、 `Startup.Configure` メソッドを呼び出し `UseAuthentication` て、プロパティを設定する認証ミドルウェアを呼び出し `HttpContext.User` ます。 `UseAuthentication`またはを呼び出す前に、メソッドを呼び出し `UseMvcWithDefaultRoute` `UseMvc` ます。
 
@@ -466,7 +466,7 @@ await HttpContext.SignInAsync(
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authorization/claims>

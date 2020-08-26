@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 4bef68fffbdfaff023f71964a27ead56863e4192
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7e1151b04f39f637f889e690bccc97eb6f0c91ea
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630433"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865569"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core でのカスタム モデル バインド
 
@@ -127,7 +127,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Startup.cs?name=snippet_ConfigureServices&highlight=5-8)]
 
-モデル バインダーを評価するときに、プロバイダーのコレクションが順序どおりにチェックされます。 バインダーを返す最初のプロバイダーが使用されます。 コレクションの末尾にプロバイダーを追加すると、カスタム バインダーより前に組み込みのモデル バインダーが呼び出される可能性があります。 この例では、カスタム プロバイダーが `Author` アクションの引数で使用されるように、コレクションの先頭に追加されています。
+モデル バインダーを評価するときに、プロバイダーのコレクションが順序どおりにチェックされます。 入力モデルに一致するバインダーを返す最初のプロバイダーが使用されます。 プロバイダーをコレクションの末尾に追加すると、カスタムバインダーが機能する前に、組み込みのモデルバインダーが呼び出される可能性があります。 この例では、カスタムプロバイダーがコレクションの先頭に追加され、常にアクション引数に使用されるようになってい `Author` ます。
 
 ### <a name="polymorphic-model-binding"></a>ポリモーフィック モデル バインド
 

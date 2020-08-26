@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632240"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865130"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC から ASP.NET Core MVC への移行
 
@@ -48,7 +48,7 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. [ **ASP.NET Web アプリケーション (.NET Framework)** ] を選択し、[ **次へ**] を選択します。
-1. 名前空間が次の手順で作成した ASP.NET Core プロジェクトと一致するように、プロジェクトに *WebApp1* という名前を指定します。 **［作成］** を選択します
+1. 名前空間が次の手順で作成した ASP.NET Core プロジェクトと一致するように、プロジェクトに *WebApp1* という名前を指定します。 **[作成]** を選択します。
 1. [ **MVC**] を選択し、[ **作成**] を選択します。
 
 ## <a name="create-the-aspnet-core-project"></a>ASP.NET Core プロジェクトを作成する
@@ -59,7 +59,7 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. [ **ASP.NET Web Core Web アプリケーション** ] を選択し、[ **次へ**] を選択します。
 1. [ **新しいプロジェクトの構成** ] ダイアログで、プロジェクトに *WebApp1*という名前を設定します。
-1. 同じプロジェクト名を使用するように、場所を前のプロジェクトとは別のディレクトリに設定します。 同じ名前空間を使用すると、2つのプロジェクト間でコードを簡単にコピーできるようになります。 **［作成］** を選択します
+1. 同じプロジェクト名を使用するように、場所を前のプロジェクトとは別のディレクトリに設定します。 同じ名前空間を使用すると、2つのプロジェクト間でコードを簡単にコピーできるようになります。 **[作成]** を選択します。
 1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 [ **Web アプリケーション (モデルビューコントローラー)** ] プロジェクトテンプレートを選択し、[ **作成**] を選択します。
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>MVC を使用するように ASP.NET Core サイトを構成する
@@ -77,7 +77,7 @@ ASP.NET Core では、 `Startup` クラスは次のようになります。
 * *Global.asax*を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、<xref:fundamentals/startup> を参照してください。
+詳細については、「<xref:fundamentals/startup>」を参照してください。
 
 ASP.NET Core プロジェクトで、 *Startup.cs* ファイルを開きます。
 
@@ -86,8 +86,8 @@ ASP.NET Core プロジェクトで、 *Startup.cs* ファイルを開きます�
 ASP.NET Core アプリでは、ミドルウェアを使用してフレームワークの機能を選択する必要があります。 テンプレートで生成された以前のコードは、次のサービスとミドルウェアを追加します。
 
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A>拡張メソッドは、コントローラー、API 関連の機能、およびビューの MVC サービスサポートを登録します。 MVC サービスの登録オプションの詳細については、「 [mvc サービスの登録](xref:migration/22-to-30#mvc-service-registration)」を参照してください。
-* <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>拡張メソッドは、静的ファイルハンドラーを追加し `Microsoft.AspNetCore.StaticFiles` ます。 拡張メソッドは、の `UseStaticFiles` 前に呼び出す必要があり `UseRouting` ます。 詳細については、<xref:fundamentals/static-files> を参照してください。
-* <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>拡張メソッドは、ルーティングを追加します。 詳細については、<xref:fundamentals/routing> を参照してください。
+* <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>拡張メソッドは、静的ファイルハンドラーを追加し `Microsoft.AspNetCore.StaticFiles` ます。 拡張メソッドは、の `UseStaticFiles` 前に呼び出す必要があり `UseRouting` ます。 詳細については、「<xref:fundamentals/static-files>」を参照してください。
+* <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>拡張メソッドは、ルーティングを追加します。 詳細については、「<xref:fundamentals/routing>」を参照してください。
 
 この既存の構成には、サンプルの ASP.NET MVC プロジェクトを移行するために必要なものが含まれています。 ASP.NET Core ミドルウェアオプションの詳細については、「」を参照してください <xref:fundamentals/startup> 。
 
@@ -97,7 +97,7 @@ ASP.NET Core プロジェクトでは、新しい空のコントローラーク�
 
 ASP.NET Core *WebApp1* プロジェクトには、ASP.NET MVC プロジェクトと同じ名前の最小サンプルコントローラーとビューが既に含まれています。 これらは、ASP.NET MVC *WebApp1* プロジェクトから移行する ASP.NET mvc コントローラーとビューのプレースホルダーとして機能します。
 
-1. ASP.NET MVC からメソッドをコピーして、 `HomeController` 新しい ASP.NET Core メソッドを置き換え `HomeController` ます。 アクションメソッドの戻り値の型を変更する必要はありません。 ASP.NET MVC 組み込みテンプレートのコントローラーアクションメソッドの戻り値の型は [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx)です。ASP.NET Core MVC では、アクションメソッドは代わりにを返し `IActionResult` ます。 `ActionResult` は、`IActionResult` を実装します。
+1. ASP.NET MVC からメソッドをコピーして、 `HomeController` 新しい ASP.NET Core メソッドを置き換え `HomeController` ます。 アクションメソッドの戻り値の型を変更する必要はありません。 ASP.NET MVC 組み込みテンプレートのコントローラーアクションメソッドの戻り値の型はです <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> 。 ASP.NET CORE mvc では、アクションメソッドは代わりにを返し `IActionResult` ます。 `ActionResult` は、`IActionResult` を実装します。
 1. ASP.NET Core プロジェクトで、 *Views/Home*ディレクトリを右クリックし、[既存項目の**追加**] を選択し > **Existing Item**ます。
 1. [ **既存項目の追加** ] ダイアログで、ASP.NET MVC *WebApp1* プロジェクトの *Views/Home* ディレクトリに移動します。
 1. [*バージョン情報*]、[*連絡先.* *..* ............................... Razor **Add**
@@ -109,7 +109,7 @@ ASP.NET Core *WebApp1* プロジェクトには、ASP.NET MVC プロジェクト
 各コントローラーエンドポイントはテストできます。ただし、レイアウトとスタイルについては、ドキュメントの後半で説明します。
 
 1. ASP.NET Core アプリを実行します。
-1. 現在のポート番号を ASP.NET Core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET Core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、「 `https://localhost:44375/home/about` 」のように入力します。
+1. 現在のポート番号を ASP.NET Core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET Core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` のようにします。
 
 ## <a name="migrate-static-content"></a>静的コンテンツの移行
 
@@ -291,7 +291,7 @@ ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換しま
 
 ## <a name="controllers-and-views"></a>コントローラーとビュー
 
-* ASP.NET MVC の各メソッド `HomeController` を新しいにコピーし `HomeController` ます。 ASP.NET MVC では、組み込みテンプレートのコントローラーアクションメソッドの戻り値の型は [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx)です。ASP.NET Core MVC では、アクションメソッドは代わりにを返し `IActionResult` ます。 `ActionResult``IActionResult`を実装するので、アクションメソッドの戻り値の型を変更する必要はありません。
+* ASP.NET MVC の各メソッド `HomeController` を新しいにコピーし `HomeController` ます。 ASP.NET MVC では、組み込みテンプレートのコントローラーアクションメソッドの戻り値の型はです <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> 。 ASP.NET CORE mvc では、アクションメソッドは代わりにを返し `IActionResult` ます。 `ActionResult``IActionResult`を実装するので、アクションメソッドの戻り値の型を変更する必要はありません。
 
 * ASP.NET MVC プロジェクトの *About. cshtml*、 *Contact.* cshtml、および *Index. cshtml* Razor view ファイルを ASP.NET Core プロジェクトにコピーします。
 
@@ -372,7 +372,7 @@ JQuery および Bootstrap JavaScript インクルードの置換マークアッ
 
 ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換します。 通常、サーバーに関する機密情報が漏えいするのを防ぐために、エラーの詳細はこれらの応答に含まれていません。 詳細については、「 [開発者向け例外ページ](xref:fundamentals/error-handling#developer-exception-page)」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -477,7 +477,7 @@ ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換しま
 
 ## <a name="controllers-and-views"></a>コントローラーとビュー
 
-* ASP.NET MVC の各メソッド `HomeController` を新しいにコピーし `HomeController` ます。 ASP.NET MVC では、組み込みテンプレートのコントローラーアクションメソッドの戻り値の型は [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx)です。ASP.NET Core MVC では、アクションメソッドは代わりにを返し `IActionResult` ます。 `ActionResult``IActionResult`を実装するので、アクションメソッドの戻り値の型を変更する必要はありません。
+* ASP.NET MVC の各メソッド `HomeController` を新しいにコピーし `HomeController` ます。 ASP.NET MVC では、組み込みテンプレートのコントローラーアクションメソッドの戻り値の型はです <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> 。 ASP.NET CORE mvc では、アクションメソッドは代わりにを返し `IActionResult` ます。 `ActionResult``IActionResult`を実装するので、アクションメソッドの戻り値の型を変更する必要はありません。
 
 * ASP.NET MVC プロジェクトの *About. cshtml*、 *Contact.* cshtml、および *Index. cshtml* Razor view ファイルを ASP.NET Core プロジェクトにコピーします。
 
@@ -558,7 +558,7 @@ JQuery および Bootstrap JavaScript インクルードの置換マークアッ
 
 ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換します。 通常、サーバーに関する機密情報が漏えいするのを防ぐために、エラーの詳細はこれらの応答に含まれていません。 詳細については、「 [開発者向け例外ページ](xref:fundamentals/error-handling#developer-exception-page)」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

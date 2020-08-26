@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: b62fcb685b1c6d0c504c685c600d0316b32d7f57
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632500"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865168"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core の構文リファレンス
 
@@ -612,7 +612,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-ディレクティブは、 `@layout` コンポーネントのレイアウトを指定し Razor ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、<xref:blazor/layouts> を参照してください。
+ディレクティブは、 `@layout` コンポーネントのレイアウトを指定し Razor ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、「<xref:blazor/layouts>」を参照してください。
 
 ::: moniker-end
 
@@ -687,14 +687,14 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 `@page` ディレクティブには、それが表示されるファイルの型によって、さまざまな効果があります。 ディレクティブ:
 
-* の場合は、ファイルがページであることを示し*ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
-* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、<xref:blazor/fundamentals/routing> を参照してください。
+* は、ファイルがページであることを示し*ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
+* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し*ます。* Razor 詳細については、<xref:razor-pages/index> を参照してください。
+`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し*ます。* Razor 詳細については、「<xref:razor-pages/index>」を参照してください。
 
 ::: moniker-end
 
@@ -702,7 +702,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 *このシナリオは、MVC ビューおよび Razor ページ (cshtml) にのみ適用されます。*
 
-ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout) と組み合わせて使用されます。 詳細については、<xref:mvc/views/layout> を参照してください。
+ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout) と組み合わせて使用されます。 詳細については、「<xref:mvc/views/layout>」を参照してください。
 
 ### `@using`
 
@@ -726,19 +726,19 @@ Razor ディレクティブ属性は、記号の後に予約済みのキーワ�
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters> を参照してください。
+`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、「<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>」を参照してください。
 
 ### `@bind`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、<xref:blazor/components/data-binding> を参照してください。
+コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、「<xref:blazor/components/data-binding>」を参照してください。
 
 ### `@on{EVENT}`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-Razor コンポーネントのイベント処理機能を提供します。 詳細については、<xref:blazor/components/event-handling> を参照してください。
+Razor コンポーネントのイベント処理機能を提供します。 詳細については、「<xref:blazor/components/event-handling>」を参照してください。
 
 ::: moniker-end
 
@@ -764,19 +764,19 @@ Razor コンポーネントのイベント処理機能を提供します。 詳�
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components> を参照してください。
+`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、「<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>」を参照してください。
 
 ### `@ref`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、<xref:blazor/components/index#capture-references-to-components> を参照してください。
+コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、「<xref:blazor/components/index#capture-references-to-components>」を参照してください。
 
 ### `@typeparam`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、<xref:blazor/components/templated-components#generic-typed-components> を参照してください。
+`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、「<xref:blazor/components/templated-components#generic-typed-components>」を参照してください。
 
 ::: moniker-end
 
@@ -885,7 +885,7 @@ Razorメソッドの引数としてインラインテンプレートを指定す
 
 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)に関する 3 つのディレクティブがあります。
 
-| ディレクティブ | 機能 |
+| ディレクティブ | 関数 |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | ビューでタグ ヘルパーを使えるようにします。 |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 前に追加したタグ ヘルパーをビューから削除します。 |
@@ -1006,6 +1006,6 @@ Razorビューエンジンは、ビューに対して大文字と小文字を区
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 を[使用した ASP.NET Web プログラミング Razor の概要構文には、](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)構文を使用したプログラミングの多くのサンプルが用意されて Razor います。

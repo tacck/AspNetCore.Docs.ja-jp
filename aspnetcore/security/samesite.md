@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: c95952face8763dc9f2dd12312cab1a1bc07528a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632344"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865432"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core での SameSite s の使用
 
@@ -73,11 +73,11 @@ SameSite は、クロスサイトリクエスト偽造 (CSRF) 攻撃に対して
 
 ## <a name="net-core-support-for-the-samesite-attribute"></a>SameSite 属性の .NET Core のサポート
 
-.NET Core 2.2 では、年 12 2019 月に更新プログラムがリリースされたため、SameSite の2019ドラフト標準がサポートされています。 開発者は、プロパティを使用して、sameSite 属性の値をプログラムで制御でき `HttpCookie.SameSite` ます。 `SameSite`プロパティを Strict、厳密でない、または None に設定すると、これらの値はと共にネットワーク上に書き込まれ cookie ます。 この値を (SameSiteMode) (-1) に設定すると、ネットワーク上に、 cookie
+.NET Core 2.2 以降では、年 12 2019 月の更新プログラムのリリース以降、SameSite の2019ドラフト標準がサポートされています。 開発者は、プロパティを使用して、sameSite 属性の値をプログラムで制御でき `HttpCookie.SameSite` ます。 `SameSite`プロパティを Strict、厳密でない、または None に設定すると、これらの値はと共にネットワーク上に書き込まれ cookie ます。 これをに設定すると `(SameSiteMode)(-1)` 、sameSite 属性をネットワークに含める必要があることを示します。 cookie
 
 [!code-csharp[](samesite/snippets/Privacy.cshtml.cs?name=snippet)]
 
-.NET Core 3.0 では、更新された SameSite 値がサポートされ、列挙型に追加の列挙値が追加され `SameSiteMode.Unspecified` `SameSiteMode` ます。
+.NET Core 3.0 以降では、更新された SameSite 値がサポートされ、列挙型に追加の列挙値が追加され `SameSiteMode.Unspecified` `SameSiteMode` ます。
 この新しい値は、で sameSite が送信されないことを示し cookie ます。
 
 ::: moniker-end
@@ -230,7 +230,7 @@ Edge では、古い SameSite 標準がサポートされています。 Edge �
 
 のバージョンに Electron は、古いバージョンの Chromium が含まれています。 たとえば、 Electron チームによって使用されるのバージョンは Chromium 66 であり、以前の動作を示しています。 使用している製品のバージョンで、独自の互換性テストを実行する必要があり Electron ます。 次のセクションの「 [古いブラウザーのサポート](#sob) 」を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [Chromium ブログ: 開発者: 新しい SameSite の準備 = None;セキュリティで保護された Cookie 設定](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite の cookie 説明](https://web.dev/samesite-cookies-explained/)

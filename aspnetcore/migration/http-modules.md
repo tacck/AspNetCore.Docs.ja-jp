@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632175"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865588"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP ハンドラーとモジュールを ASP.NET Core ミドルウェアに移行する
 
@@ -55,7 +55,7 @@ ms.locfileid: "88632175"
 
 **受信要求を処理するモジュールの順序は、次のように決定されます。**
 
-1. [アプリケーションライフサイクル](https://msdn.microsoft.com/library/ms227673.aspx)。 ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest)、 [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)などによって起動されるシリーズイベントです。各モジュールは、1つまたは複数のイベントのハンドラーを作成できます。
+1. は、 <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)> ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest)、 [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)などによって発生するシリーズイベントです。各モジュールは、1つまたは複数のイベントのハンドラーを作成できます。
 
 2. 同じイベントの場合、 *Web.config*で構成されている順序。
 
@@ -92,7 +92,7 @@ ms.locfileid: "88632175"
 
 **ミドルウェアとモジュールは、別の順序で処理されます。**
 
-* ミドルウェアの順序は、要求パイプラインに挿入される順序に基づいていますが、モジュールの順序は主に [アプリケーションライフサイクル](https://msdn.microsoft.com/library/ms227673.aspx) イベントに基づいています。
+* ミドルウェアの順序は、要求パイプラインに挿入される順序に基づいていますが、モジュールの順序は主にイベントに基づいています。 <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>
 
 * 応答のミドルウェアの順序は、要求の場合と逆になりますが、モジュールの順序は要求と応答に対して同じです。
 
@@ -393,7 +393,7 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [HTTP ハンドラーと HTTP モジュールの概要](/iis/configuration/system.webserver/)
 * [構成](xref:fundamentals/configuration/index)

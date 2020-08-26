@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9ec02381b156a6599042d8e504a476036246302
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633644"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865557"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>ASP.NET メンバーシップ認証から ASP.NET Core 2.0 への移行 Identity
 
@@ -35,7 +35,7 @@ ms.locfileid: "88633644"
 
 ## <a name="review-of-membership-schema"></a>メンバーシップスキーマのレビュー
 
-ASP.NET 2.0 より前の開発者は、アプリの認証と承認のプロセス全体を作成しようとしていました。 ASP.NET 2.0 では、メンバーシップが導入され、ASP.NET アプリ内のセキュリティを処理する定型的なソリューションが提供されています。 開発者は、 [aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx) コマンドを使用して、スキーマを SQL Server データベースにブートストラップできるようになりました。 このコマンドを実行すると、次のテーブルがデータベースに作成されます。
+ASP.NET 2.0 より前の開発者は、アプリの認証と承認のプロセス全体を作成しようとしていました。 ASP.NET 2.0 では、メンバーシップが導入され、ASP.NET アプリ内のセキュリティを処理する定型的なソリューションが提供されています。 開発者は、コマンドを使用して、スキーマを SQL Server データベースにブートストラップできるようになりました <https://docs.microsoft.com/previous-versions/ms229862(v=vs.140)> 。 このコマンドを実行すると、次のテーブルがデータベースに作成されます。
 
   ![メンバーシップテーブル](identity/_static/membership-tables.png)
 
@@ -78,7 +78,7 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
 ### <a name="users"></a>ユーザー
 
-|Identity<br>( `dbo.AspNetUsers` ) 列  |Type     |Membership<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 列|Type      |
+|Identity<br>( `dbo.AspNetUsers` ) 列  |種類     |Membership<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) 列|種類      |
 |-------------------------------------------|-----------------------------------------------------------------------|
 | `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
 | `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
@@ -91,9 +91,9 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 > [!NOTE]
 > すべてのフィールドマッピングが、メンバーシップからの一対一のリレーションシップに似ているとは限りません ASP.NET Core Identity 。 上の表は、既定のメンバーシップユーザースキーマを取得し、スキーマにマップして ASP.NET Core Identity います。 メンバーシップに使用されていたその他のカスタムフィールドは、手動でマップする必要があります。 このマッピングでは、パスワードの条件とパスワード salts の両方が2つの間で移行されないため、パスワードのマップはありません。 **パスワードを null として残し、ユーザーにパスワードのリセットを依頼することをお勧めします。** では ASP.NET Core Identity 、 `LockoutEnd` ユーザーがロックアウトされている場合は、将来の日付に設定する必要があります。これは移行スクリプトに示されています。
 
-### <a name="roles"></a>ロール
+### <a name="roles"></a>役割
 
-|Identity<br>( `dbo.AspNetRoles` ) 列|Type|Membership<br>( `dbo.aspnet_Roles` ) 列|Type|
+|Identity<br>( `dbo.AspNetRoles` ) 列|種類|Membership<br>( `dbo.aspnet_Roles` ) 列|種類|
 |----------------------------------------|-----------------------------------|
 |`Id`                           |`string`|`RoleId`         | `string`        |
 |`Name`                         |`string`|`RoleName`       | `string`        |
@@ -101,7 +101,7 @@ ASP.NET Core 2.0 のスキーマを表示する最も簡単な方法 Identity �
 
 ### <a name="user-roles"></a>ユーザー ロール
 
-|Identity<br>( `dbo.AspNetUserRoles` ) 列|Type|Membership<br>( `dbo.aspnet_UsersInRoles` ) 列|Type|
+|Identity<br>( `dbo.AspNetUserRoles` ) 列|種類|Membership<br>( `dbo.aspnet_UsersInRoles` ) 列|種類|
 |-------------------------|----------|--------------|---------------------------|
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
@@ -204,6 +204,6 @@ COMMIT TRANSACTION MigrateUsersAndRoles
 
  ![固定ログイン](identity/_static/fixed-login.png)
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 このチュートリアルでは、SQL メンバーシップから ASP.NET Core 2.0 にユーザーを移植する方法について学習しました Identity 。 の詳細につい ASP.NET Core Identity ては、「の[概要 Identity ](xref:security/authentication/identity)」を参照してください。
