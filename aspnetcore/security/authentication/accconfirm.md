@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
+ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635373"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88906450"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core でのアカウントの確認とパスワードの回復
 
@@ -160,7 +160,13 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 * アカウントの登録に使用した電子メールを入力します。
 * パスワードをリセットするためのリンクを含む電子メールが送信されます。 メールを確認し、リンクをクリックしてパスワードをリセットします。 パスワードが正常にリセットされたら、電子メールと新しいパスワードでサインインできます。
 
-## <a name="change-email-and-activity-timeout"></a>電子メールとアクティビティのタイムアウトを変更する
+<a name="resend"></a>
+
+## <a name="resend-email-confirmation"></a>電子メールの再送信の確認
+
+ASP.NET Core 5.0 以降では、**ログイン**ページの [**電子メールの再送信**] リンクを選択します。
+
+### <a name="change-email-and-activity-timeout"></a>電子メールとアクティビティのタイムアウトを変更する
 
 既定の非アクティブタイムアウトは14日です。 次のコードは、非アクティブタイムアウトを5日間に設定します。
 
@@ -185,10 +191,6 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 カスタムプロバイダーをサービスコンテナーに追加します。
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupEmail.cs?name=snippet1&highlight=10-16)]
-
-### <a name="resend-email-confirmation"></a>電子メールの再送信の確認
-
-[こちらの GitHub のイシュー](https://github.com/dotnet/AspNetCore/issues/5410)を参照してください。
 
 <a name="debug"></a>
 
