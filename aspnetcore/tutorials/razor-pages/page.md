@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633436"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865122"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
 
@@ -98,9 +98,8 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 `"Title"` プロパティは *Pages/Shared/_Layout.cshtml* ファイルで使用されます。 次のマークアップは、 *_Layout.cshtml* ファイルの最初の数行を示しています。
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
 `@*Markup removed for brevity.*@` 行は Razor コメントです。 HTML コメント (`<!-- -->`) とは異なり、Razor コメントはクライアントには送信されません。
@@ -284,9 +283,8 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 "Title" プロパティは *Pages/Shared/_Layout.cshtml* ファイルで使用されます。 次のマークアップは、 *_Layout.cshtml* ファイルの最初の数行を示しています。
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
 `@*Markup removed for brevity.*@` の行は Razor コメントで、レイアウト ファイルには表示されません。 HTML コメント (`<!-- -->`) とは異なり、Razor コメントはクライアントには送信されません。

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: d01c0a1bdf29dbb79c04504d747b319fff710d89
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633761"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876699"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core と Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -51,7 +51,7 @@ ASP.NET Core アプリケーションで Entity Framework 6 を使用するた�
 
 .NET Core プロジェクトは、*Enable-Migrations* などの EF6 コマンドが必要とするすべての機能をサポートしていないため、EF6 コンテキストを ASP.NET Core プロジェクトに配置することはできません。    
 
-EF6 コンテキストを検索するプロジェクトの種類に関係なく、EF6 コマンドライン ツールのみが EF6 コンテキストを使用します。 たとえば、`Scaffold-DbContext` は、Entity Framework Core でのみ使用できます。 データベースを EF6 モデルにリバース エンジニアリングする必要がある場合は、「[Entity Framework Code First to an Existing Database](https://msdn.microsoft.com/jj200620)」 (既存のデータベースに対する Entity Framework Code First) を参照してください。  
+EF6 コンテキストを検索するプロジェクトの種類に関係なく、EF6 コマンドライン ツールのみが EF6 コンテキストを使用します。 たとえば、`Scaffold-DbContext` は、Entity Framework Core でのみ使用できます。 データベースを EF6 モデルにリバース エンジニアリングする必要がある場合は、「<https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database>」 (既存のデータベースに対する Entity Framework Code First) を参照してください。    
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>ASP.NET Core プロジェクトで完全なフレームワークと EF6 を参照する 
 
@@ -67,7 +67,7 @@ EF6 クラス ライブラリ プロジェクトで使用する EF6 コマンド
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContext.cs?name=snippet_Constructor)]   
 
-EF6 コンテキストにはパラメーターなしのコンストラクターがないため、EF6 プロジェクトが [IDbContextFactory](https://msdn.microsoft.com/library/hh506876) の実装を提供する必要があります。 EF6 コマンドライン ツールはその実装を見つけて使用するため、コンテキストをインスタンス化することができます。 次に例を示します。    
+EF6 コンテキストにはパラメーターなしのコンストラクターがないため、EF6 プロジェクトが <https://docs.microsoft.com/dotnet/api/system.data.entity.infrastructure.idbcontextfactory-1?view=entity-framework-6.2.0> の実装を提供する必要があります。 EF6 コマンドライン ツールはその実装を見つけて使用するため、コンテキストをインスタンス化することができます。 次に例を示します。   
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContextFactory.cs?name=snippet_IDbContextFactory)]  
 

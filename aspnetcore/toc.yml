@@ -336,6 +336,10 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputNumber
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: InputRadio
+                  href: blazor/forms-validation.md#built-in-forms-components
+                - name: InputRadioGroup
+                  href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputSelect
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputText
@@ -715,6 +719,8 @@
       uid: grpc/diagnostics
     - name: セキュリティの考慮事項
       uid: grpc/security
+    - name: パフォーマンスのベスト プラクティス
+      uid: grpc/performance
     - name: gRPC サービスのバージョン管理
       uid: grpc/versioning
     - name: dotnet-grpc を使用して Protobuf 参照を管理する

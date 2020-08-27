@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 6ee767ee76b622e15a1dc5a7fe2f3e05f03dabd0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628496"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865283"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -52,7 +52,7 @@ Razor 構文でコンテンツにアクセスする場合は、次のセクシ�
 
 ### <a name="routing"></a>ルーティング
 
-Blazor でのルーティングは、アプリ内のアクセス可能な各コンポーネントへのルート テンプレートを提供することで実現します。 [`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。 詳細については、<xref:blazor/fundamentals/routing> を参照してください。
+Blazor でのルーティングは、アプリ内のアクセス可能な各コンポーネントへのルート テンプレートを提供することで実現します。 [`@page`][9] ディレクティブを含む Razor ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> が指定されます。 実行時に、ルーターによって <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> を持つコンポーネント クラスが検索され、要求された URL に一致するルート テンプレートを使用するコンポーネントがレンダリングされます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
 ```razor
 @page "/ParentComponent"
@@ -249,7 +249,7 @@ namespace BlazorSample
 
 オプションのパラメーターはサポートされていないため、前の例では 2 つの [`@page`][9] ディレクティブが適用されます。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の [`@page`][9] ディレクティブでは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
 
-複数のフォルダー境界をまたいだパスをキャプチャする "*キャッチオール*" パラメーター構文 (`*`/`**`) は、Razor コンポーネント (`.razor`) ではサポートされて**いません**。
+複数のフォルダーにわたりパスをキャプチャするキャッチオール ルート パラメーター (`{*pageRoute}`) の詳細については、「<xref:blazor/fundamentals/routing#catch-all-route-parameters>」を参照してください。
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
@@ -760,7 +760,7 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 <input type="checkbox" />
 ```
 
-詳細については、<xref:mvc/views/razor> を参照してください。
+詳細については、「<xref:mvc/views/razor>」を参照してください。
 
 > [!WARNING]
 > .NET 型が `bool` の場合、[`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) などの一部の HTML 属性が正しく機能しません。 そのような場合は、`bool` ではなく `string` 型を使用します。
@@ -853,7 +853,7 @@ Blazor では HTML がレンダリングされるため、スケーラブル ベ
 
 ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル (`.razor`) に直接配置した場合、基本的な画像レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:blazor/security/server/threat-mitigation>:リソース不足に対処する必要がある Blazor Server アプリの構築に関するガイダンスが含まれています。
 
