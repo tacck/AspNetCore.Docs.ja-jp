@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 04d2f0d289e2c9ec13aeb880df47240bec19d3ec
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 24ba49828db08fdd67723c81ac0c8d9981ab3404
+ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876764"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88945416"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>認証を使用 cookie しない ASP.NET Core Identity
 
@@ -48,7 +48,7 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
 
 で、とを呼び出して、 `Startup.Configure` `UseAuthentication` プロパティを `UseAuthorization` 設定し、 `HttpContext.User` 要求の承認ミドルウェアを実行します。 `UseAuthentication`を `UseAuthorization` 呼び出す前に、メソッドとメソッドを呼び出し `UseEndpoints` ます。
 
@@ -117,7 +117,7 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 
 `CookieAuthenticationDefaults.AuthenticationScheme`(または " Cookie s") がスキームとして使用されていない場合 ("Contoso Cookie " など)、認証プロバイダーを構成するときに使用するスキームを指定します。 それ以外の場合は、既定のスキームが使用されます。
 
-サーバーは、クライアントのブラウザーを制御しません。 ユーザーがブラウザーまたはタブを閉じた場合、サーバーはユーザーをサインアウトできません。 ブラウザーが閉じられたときにユーザーへのサインアウトを実装するには、JavaScript でを検出する必要があります。 「ブラウザーウィンドウのタブを閉じるイベントを検出する方法」を検索します。
+ブラウザーが閉じると、セッションベースのが自動的に削除 cookie され cookie ますが (非持続 s)、個々のタブが閉じられても、 cookie はクリアされません。 サーバーには、タブまたはブラウザーの終了イベントは通知されません。
 
 ## <a name="react-to-back-end-changes"></a>バックエンドの変更に対処する
 
@@ -271,7 +271,7 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
 
 メソッドで、 `Startup.Configure` メソッドを呼び出し `UseAuthentication` て、プロパティを設定する認証ミドルウェアを呼び出し `HttpContext.User` ます。 `UseAuthentication`またはを呼び出す前に、メソッドを呼び出し `UseMvcWithDefaultRoute` `UseMvc` ます。
 
