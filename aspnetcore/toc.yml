@@ -94,6 +94,9 @@
         - name: モバイル用のバックエンド
           displayName: tutorial
           uid: mobile/native-mobile-backend
+        - name: Azure API Management への発行
+          displayName: tutorial
+          uid: tutorials/publish-to-azure-api-management-using-vs
     - name: リアルタイムの Web アプリ
       items:
         - name: JavaScript による SignalR
@@ -702,7 +705,11 @@
         - name: gRPC サービスの概要
           uid: tutorials/grpc/grpc-start
     - name: C# を使用した gRPC サービス
-      uid: grpc/basics
+      items:
+        - name: 概要
+          uid: grpc/basics
+        - name: gRPC サービスの作成
+          uid: grpc/services
     - name: ASP.NET Core を使用した gRPC サービス
       uid: grpc/aspnetcore
     - name: .NET クライアントを使用して gRPC サービスを呼び出す
@@ -711,6 +718,8 @@
       uid: grpc/clientfactory
     - name: ブラウザー アプリでの gRPC の使用
       uid: grpc/browser
+    - name: gRPC を使用したプロセス間通信
+      uid: grpc/interprocess
     - name: 構成
       uid: grpc/configuration
     - name: 認証と承認
@@ -719,6 +728,8 @@
       uid: grpc/diagnostics
     - name: セキュリティの考慮事項
       uid: grpc/security
+    - name: Protobuf メッセージの作成
+      uid: grpc/protobuf
     - name: パフォーマンスのベスト プラクティス
       uid: grpc/performance
     - name: gRPC サービスのバージョン管理
