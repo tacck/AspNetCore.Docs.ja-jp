@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
+ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865168"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89101362"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core の構文リファレンス
 
@@ -131,17 +131,15 @@ C# の `await` キーワードを除き、暗黙的な式にスペースを含�
 @("<span>Hello World</span>")
 ```
 
-このコードでは、次のような HTML がレンダリングされます。
+上記のコードは、次の HTML をレンダリングします。
 
 ```html
 &lt;span&gt;Hello World&lt;/span&gt;
 ```
 
-HTML はブラウザーで次のように表示されます。
+HTML は、プレーンテキストとしてブラウザーに表示されます。
 
-```html
-<span>Hello World</span>
-```
+&lt;スパン &gt; Hello World &lt; /span&gt;
 
 `HtmlHelper.Raw` の出力はエンコードされませんが、HTML マークアップとしてレンダリングされません。
 
@@ -400,7 +398,7 @@ Razor には、次のように、重要なセクションを lock ステート�
 }
 ```
 
-### <a name="comments"></a>説明
+### <a name="comments"></a>コメント
 
 Razor C# および HTML コメントをサポートしています。
 
@@ -498,7 +496,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ::: moniker-end
 
-次に例を示します。
+たとえば、次のように入力します。
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -1006,6 +1004,6 @@ Razorビューエンジンは、ビューに対して大文字と小文字を区
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 を[使用した ASP.NET Web プログラミング Razor の概要構文には、](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)構文を使用したプログラミングの多くのサンプルが用意されて Razor います。

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630667"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102797"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core のメモリ管理とガベージコレクション (GC)
 
@@ -150,7 +150,7 @@ GC モードは、プロジェクトファイルまたは発行されたアプ�
 
 プロジェクトファイルでを変更するに `ServerGarbageCollection` は、アプリを再構築する必要があります。
 
-**注:** サーバーのガベージコレクションは、コアが1つのマシンでは使用でき **ません** 。 詳細については、<xref:System.Runtime.GCSettings.IsServerGC> を参照してください。
+**注:** サーバーのガベージコレクションは、コアが1つのマシンでは使用でき **ません** 。 詳細については、「<xref:System.Runtime.GCSettings.IsServerGC>」を参照してください。
 
 次の図は、ワークステーション GC を使用した 5K RPS のメモリプロファイルを示しています。
 
@@ -235,7 +235,7 @@ public void GetFileProvider()
 
 ### <a name="large-objects-heap"></a>ラージオブジェクトヒープ
 
-メモリの割り当てや空きサイクルが頻繁に発生する場合は、特にメモリの大量のチャンクを割り当てるときにメモリをフラグメント化できます。 オブジェクトは、連続したメモリブロックで割り当てられます。 断片化を軽減するために、GC によってメモリが解放されると、断片化が解消されます。 このプロセスは、 **圧縮**と呼ばれます。 圧縮には、オブジェクトの移動が含まれます。 大きなオブジェクトを移動すると、パフォーマンスが低下します。 このため、GC は大きなオブジェクト[ヒープ](/dotnet/standard/garbage-collection/large-object-heap)(LOH) と呼ばれる_大きな_オブジェクト用に特別なメモリゾーンを作成します。 85000バイトを超えるオブジェクト (約 83 KB) は次のとおりです。
+メモリの割り当てや空きサイクルが頻繁に発生する場合は、特にメモリの大量のチャンクを割り当てるときにメモリをフラグメント化できます。 オブジェクトは、連続したメモリブロックで割り当てられます。 断片化を軽減するために、GC はメモリを解放するときに、メモリを最適化しようとします。 このプロセスは、 **圧縮**と呼ばれます。 圧縮には、オブジェクトの移動が含まれます。 大きなオブジェクトを移動すると、パフォーマンスが低下します。 このため、GC は大きなオブジェクト[ヒープ](/dotnet/standard/garbage-collection/large-object-heap)(LOH) と呼ばれる_大きな_オブジェクト用に特別なメモリゾーンを作成します。 85000バイトを超えるオブジェクト (約 83 KB) は次のとおりです。
 
 * LOH に配置されます。
 * 圧縮されていません。
