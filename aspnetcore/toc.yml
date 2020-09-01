@@ -722,6 +722,8 @@
       uid: grpc/browser
     - name: gRPC を使用したプロセス間通信
       uid: grpc/interprocess
+    - name: gRPC から JSON Web API を作成する
+      uid: grpc/httpapi
     - name: 構成
       uid: grpc/configuration
     - name: 認証と承認
