@@ -5,7 +5,7 @@ description: Blazor アプリを段階的に構築します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630836"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865420"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>Blazor Todo リスト アプリを構築する
 
@@ -51,7 +51,7 @@ ms.locfileid: "88630836"
    dotnet new blazorserver -o TodoList
    ```
 
-   上記のコマンドでは、アプリを保持するための `TodoList` という名前のフォルダーが作成されます。 次のコマンドを使用して、ディレクトリを `TodoList` フォルダーに変更します。
+   上記のコマンドでは、アプリを保持するための `TodoList` という名前のフォルダーが作成されます。 `TodoList` フォルダーは、プロジェクトの*ルート フォルダー*です。 次のコマンドを使用して、ディレクトリを `TodoList` フォルダーに変更します。
 
    ```dotnetcli
    cd TodoList
@@ -64,7 +64,7 @@ ms.locfileid: "88630836"
    ```
 
    > [!IMPORTANT]
-   > Razor コンポーネント ファイル名の先頭文字を大文字にする必要があります。そのため、`Todo` コンポーネント ファイルの名前が大文字の `T` で始まることを確認します。
+   > Razor コンポーネント ファイル名の先頭文字は、大文字である必要があります。 `Pages` フォルダーを開き、`Todo` コンポーネントのファイル名の先頭が大文字 `T` であることを確認します。 ファイル名は `Todo.razor` のはずです。
 
 1. `Pages/Todo.razor` で、コンポーネントの最初のマークアップを指定します。
 
@@ -88,9 +88,9 @@ ms.locfileid: "88630836"
    </li>
    ```
 
-1. アプリケーションをリビルドして実行します。 新しい Todo ページに移動して、`Todo` コンポーネントへのリンクが機能することを確認します。
+1. `TodoList` フォルダーからコマンド シェルで `dotnet run` コマンドを実行して、アプリをビルドして実行します。 新しい Todo ページに移動して、`Todo` コンポーネントへのリンクが機能することを確認します。
 
-1. Todo アイテムを表すクラスを保持するために、プロジェクトのルートに `TodoItem.cs` ファイルを追加します。 `TodoItem` クラス用に次の C# コードを使います。
+1. Todo アイテムを表すクラスを保持するために、プロジェクト (`TodoList` フォルダー) のルートに `TodoItem.cs` ファイルを追加します。 `TodoItem` クラス用に次の C# コードを使います。
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
@@ -105,7 +105,7 @@ ms.locfileid: "88630836"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. アプリケーションをリビルドして実行します。 **`Add todo`** ボタンを選択しても何も起こりません。ボタンにイベント ハンドラーが関連付けられていないためです。
+1. コマンド シェルで実行中のアプリを停止します。 多くのコマンド シェルでは、<kbd>Ctrl</kbd>+<kbd>c</kbd> キーボード コマンドを使用してアプリを停止できます。 `dotnet run` コマンドを使用して、アプリをリビルドして実行します。 **`Add todo`** ボタンを選択しても何も起こりません。ボタンにイベント ハンドラーが関連付けられていないためです。
 
 1. `Todo` コンポーネントに `AddTodo` メソッドを追加し、`@onclick` 属性を使ってこれをボタンの選択用に登録します。 ボタンを選択すると C# のメソッド `AddTodo` が呼び出されます。
 
@@ -123,7 +123,7 @@ ms.locfileid: "88630836"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. アプリケーションをリビルドして実行します。 Todo リストに Todo 項目をいくつか追加して、新しいコードをテストします。
+1. コマンド シェルで実行中のアプリを停止します。 `dotnet run` コマンドを使用して、アプリをリビルドして実行します。 Todo リストに Todo 項目をいくつか追加して、新しいコードをテストします。
 
 1. 各 Todo アイテムのタイトルのテキストは編集可能にすることができます。また、チェック ボックスはユーザーが完了したアイテムを追跡するのに役立ちます。 各 Todo アイテムにチェック ボックス入力を追加し、その値を `IsDone` プロパティにバインドします。 `@todo.Title` を、`@todo.Title` にバインドされた `<input>` 要素に変更します。
 
@@ -139,7 +139,7 @@ ms.locfileid: "88630836"
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. アプリケーションをリビルドして実行します。 Todo アイテムを追加して新しいコードをテストします。
+1. コマンド シェルで実行中のアプリを停止します。 `dotnet run` コマンドを使用して、アプリをリビルドして実行します。 Todo アイテムを追加して新しいコードをテストします。
 
 ## <a name="next-steps"></a>次の手順
 

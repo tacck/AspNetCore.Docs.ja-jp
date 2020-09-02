@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 0c878a05a50e5a6879278ee737ada167669ee0ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626481"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865328"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor のルーティング
 
@@ -169,13 +169,43 @@ Blazor Server アプリでは、`_Host.cshtml` の既定のルートは `/` (`@p
 
 `"/{**path}"` テンプレートには次のものが含まれます。
 
-* 二重アスタリスクの*キャッチオール*構文 (`**`)。スラッシュ (`/`) をエンコードせずに複数のフォルダー境界をまたがるパスをキャプチャします。
+* 二重アスタリスクの "*キャッチオール*" 構文 (`**`)。スラッシュ (`/`) をデコードせずに複数のフォルダー境界にまたがるパスをキャプチャします。
 * `path` ルート パラメーター名。
 
-> [!NOTE]
-> "*キャッチオール*" パラメーター構文 (`*`/`**`) は、Razor コンポーネント (`.razor`) ではサポートされて**いません**。
-
 詳細については、「<xref:fundamentals/routing>」を参照してください。
+
+## <a name="catch-all-route-parameters"></a>キャッチオールのルート パラメーター
+
+::: moniker range=">= aspnetcore-5.0"
+
+*このセクションは、9 月中旬にリリースされる .NET 5 リリース候補 1 (RC1) 以降に適用されます。*
+
+複数のフォルダー境界にまたがるパスをキャプチャするキャッチオール ルート パラメーターが、コンポーネントでサポートされます。 キャッチオール ルート パラメーターは次のとおりであることが必要です。
+
+* ルート セグメント名と一致する名前が付けられている。 名前付けで大文字と小文字は区別されない。
+* `string` 型。 フレームワークによって自動キャストは提供されません。
+* URL の末尾。
+
+```razor
+@page "/page/{*pageRoute}"
+
+@code {
+    [Parameter]
+    public string PageRoute { get; set; }
+}
+```
+
+ルート テンプレートが `/page/{*pageRoute}` の URL `/page/this/is/a/test` の場合、`PageRoute` の値は `this/is/a/test` に設定されます。
+
+キャプチャされたパスのスラッシュとセグメントはデコードされます。 `/page/{*pageRoute}` のルート テンプレートでは、URL `/page/this/is/a%2Ftest%2A` から `this/is/a/test*` が生成されます。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+キャッチオール ルート パラメーターは、9 月中旬にリリースされる .NET 5 リリース候補 1 (RC1) 以降でサポートされます。*
+
+::: moniker-end
 
 ## <a name="navlink-component"></a>NavLink コンポーネント
 
