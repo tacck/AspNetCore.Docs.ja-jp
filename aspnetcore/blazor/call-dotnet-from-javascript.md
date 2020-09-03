@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 3df0fafe85d6decac3be41d4e25a4db51d8d72d8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2a3685dbc654fb8be3420da73e5a62fe729092e6
+ms.sourcegitcommit: ad63e131224f3217bbafff4eb0e6fa1b25294460
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627053"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89199694"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す
 
@@ -222,7 +222,7 @@ Hello, Blazor!
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
-    dotnetHelper.invokeMethod('{APP ASSEMBLY}', 'MyMethod');
+    dotnetHelper.invokeMethodAsync('{APP ASSEMBLY}', 'MyMethod');
     dotnetHelper.dispose();
   }
   ```
@@ -368,7 +368,7 @@ public class MessageUpdateInvokeHelper
 
     public MessageUpdateInvokeHelper(Action action)
     {
-        action = action;
+        this.action = action;
     }
 
     [JSInvokable("{APP ASSEMBLY}")]
@@ -385,10 +385,12 @@ public class MessageUpdateInvokeHelper
 
 ```javascript
 window.updateMessageCallerJS = (dotnetHelper) => {
-    dotnetHelper.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+    dotnetHelper.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
     dotnetHelper.dispose();
 }
 ```
+
+プレースホルダー `{APP ASSEMBLY}` は、アプリのアプリ アセンブリ名です (例: `BlazorSample`)。
 
 `Shared/ListItem.razor`:
 

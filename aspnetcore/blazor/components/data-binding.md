@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 3b41aedcbd0d2c22b20d8fa3a21b8af97d1fbb2c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628561"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280401"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
@@ -79,27 +79,7 @@ Razor コンポーネントはフィールド、プロパティ、または Razo
 
 要素がフォーカスを失ったときに発生する `onchange`とは異なり、テキスト ボックスの値が変更されたときに `oninput` が発生します。
 
-`value` 以外の要素の属性をバインドするには、`@bind-{ATTRIBUTE}:event` 構文で `@bind-{ATTRIBUTE}` を使用します。 次に例を示します。
-
-* コンポーネントが読み込まれると、段落のスタイルは **red** になります (`style="color:red"`)。
-* ユーザーはボックスの値を変更して別の CSS カラー スタイルを反映させ、ページの要素のフォーカスを変更します。 たとえば、ユーザーはボックスの値を `color:blue` に変更し、キーボードの <kbd>Tab</kbd> キーを押します。
-* 要素のフォーカスが変更された場合:
-  * `paragraphStyle` の値は、`<input>` 要素の値から割り当てられます。
-  * 段落スタイルが更新され、`paragraphStyle` の新しいスタイルが反映されます。 スタイルが `color:blue` に更新されると、テキストの色は **blue** に変わります。
-
-```razor
-<p>
-    <input type="text" @bind="paragraphStyle" />
-</p>
-
-<p @bind-style="paragraphStyle" @bind-style:event="onchange">
-    Blazorify the app!
-</p>
-
-@code {
-    private string paragraphStyle = "color:red";
-}
-```
+<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
 
 属性バインディングでは大文字と小文字が区別されます。
 
