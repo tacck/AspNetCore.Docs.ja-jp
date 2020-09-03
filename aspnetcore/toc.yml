@@ -720,8 +720,6 @@
       uid: grpc/clientfactory
     - name: ブラウザー アプリでの gRPC の使用
       uid: grpc/browser
-    - name: gRPC を使用したプロセス間通信
-      uid: grpc/interprocess
     - name: gRPC から JSON Web API を作成する
       uid: grpc/httpapi
     - name: 構成
