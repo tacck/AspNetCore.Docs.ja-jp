@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 0a51647463362d6cfac335688d42d4be013f8b9c
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 2d002e075f9d57654589b540e522307c363d9660
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712515"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153546"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
 
@@ -345,7 +345,6 @@ An `OperationService` is registered that depends on each of the other `Operation
 
 * スコープ付きサービスが、ルート サービス プロバイダーによって解決されない。
 * スコープ付きサービスが、シングルトンに挿入されない。
-* 一時的なサービスが、シングルトンまたはスコープ付きサービスに挿入されない。
 
 <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider%2A> が呼び出されると、ルート サービス プロバイダーが作成されます。 ルート サービス プロバイダーの有効期間は、プロバイダーがアプリで開始されるとアプリの有効期間に対応し、アプリのシャットダウン時には破棄されます。
 
@@ -518,7 +517,7 @@ Service1.Dispose
   [!code-csharp[](dependency-injection/samples/3.x/AntiPattern3/Startup.cs?name=snippet)]
 
 * 破棄可能な一時的なサービスは、破棄のためにコンテナーによってキャプチャされます。 これにより、最上位のコンテナーから解決された場合、メモリ リークが発生する可能性があります。
-* スコープの検証を有効にすることで、アプリにシングルトンをキャプチャするスコープ付きサービスがないようにします。 詳しくは、「[スコープの検証](#scope-validation)」をご覧ください。
+* スコープの検証を有効にすることで、アプリにスコープ付きサービスをキャプチャするシングルトンがないようにします。 詳しくは、「[スコープの検証](#scope-validation)」をご覧ください。
 
 どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです。ほとんどがフレームワーク自体の内の特殊なケースです。
 

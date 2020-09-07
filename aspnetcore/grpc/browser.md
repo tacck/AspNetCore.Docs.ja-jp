@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 8d1f761731ab3840d009eba1ff5316808bafec40
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5c9501b3e7cbdcbb02e3d78d67185a0a75ccba7c
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634411"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379408"
 ---
 # <a name="use-grpc-in-browser-apps"></a>ブラウザー アプリでの gRPC の使用
 
@@ -132,7 +132,32 @@ gRPC-Web を使用するには:
 > [!IMPORTANT]
 > 生成された gRPC クライアントには、単項メソッドを呼び出すための同期メソッドと非同期メソッドがあります。 たとえば、`SayHello` は同期であり、`SayHelloAsync` は非同期です。 Blazor WebAssembly アプリで同期メソッドを呼び出すと、アプリが応答しなくなります。 Blazor WebAssembly では、常に非同期メソッドを使用する必要があります。
 
+### <a name="use-grpc-client-factory-with-grpc-web"></a>gRPC-Web で gRPC クライアント ファクトリを使用する
+
+gRPC-Web と互換性のある .NET クライアントは、gRPC と [HttpClientFactory](xref:System.Net.Http.IHttpClientFactory) の統合を使用して作成できます。
+
+gRPC-Web とクライアント ファクトリを使用するには:
+
+* 次のパッケージのプロジェクト ファイルにパッケージ参照を追加します。
+  * [Grpc.Net.Client.Web](https://www.nuget.org/packages/Grpc.Net.Client.Web)
+  * [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
+* 汎用の `AddGrpcClient` 拡張メソッドを使用して、依存関係の注入 (DI) に gRPC クライアントを登録します。 Blazor WebAssembly アプリでは、サービスは `Program.cs` で DI に登録されます。
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> 拡張メソッドを使用して `GrpcWebHandler` を構成します。
+
+```csharp
+builder.Services
+    .AddGrpcClient<Greet.GreeterClient>((services, options) =>
+    {
+        options.Address = new Uri("https://localhost:5001");
+    })
+    .ConfigurePrimaryHttpMessageHandler(
+        () => new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler()));
+```
+
+詳細については、「<xref:grpc/clientfactory>」を参照してください。
+
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [Web クライアント用 gRPC の GitHub プロジェクト](https://github.com/grpc/grpc-web)
 * <xref:security/cors>
+* <xref:grpc/httpapi>

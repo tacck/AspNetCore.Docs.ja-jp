@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b8149b79c1e7b204e52cc8595d1193b623bb0008
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945525"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102667"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>.NET アプリの Protobuf メッセージを作成する
 
 作成者: [James Newton-King](https://twitter.com/jamesnk) および [Mark Rendle](https://twitter.com/markrendle)
 
-gRPC によって、インターフェイス定義言語 (IDL) として [Protobuf](https://developers.google.com/protocol-buffers) が使用されます。 Protobuf IDL は、gRPC サービスによって送受信されるメッセージを指定するための言語に依存しない形式です。 Protobuf メッセージは、 *.proto* ファイルで定義されます。 このドキュメントでは、Protobuf の概念が .NET にどのようにマップされるかについて説明します。
+gRPC によって、インターフェイス定義言語 (IDL) として [Protobuf](https://developers.google.com/protocol-buffers) が使用されます。 Protobuf IDL は、gRPC サービスによって送受信されるメッセージを指定するための言語に依存しない形式です。 Protobuf メッセージは、 `.proto` ファイルで定義されます。 このドキュメントでは、Protobuf の概念が .NET にどのようにマップされるかについて説明します。
 
 ## <a name="protobuf-messages"></a>Protobuf メッセージ
 
@@ -50,7 +50,7 @@ message Person {
 
 名前に加え、メッセージ定義の各フィールドには一意の番号があります。 フィールドの番号は、メッセージが Protobuf にシリアル化されるときにフィールドを特定するために使用されます。 小さい数をシリアル化する方が、フィールド名全体をシリアル化するよりも高速です。 フィールド番号によってフィールドが特定されるため、変更するときは注意が必要です。 Protobuf メッセージの変更の詳細については、「<xref:grpc/versioning>」を参照してください。
 
-アプリがビルドされると、Protobuf ツールによって、 *.proto* ファイルから .NET 型が生成されます。 `Person` メッセージによって .NET クラスが生成されます。
+アプリがビルドされると、Protobuf ツールによって、 `.proto` ファイルから .NET 型が生成されます。 `Person` メッセージによって .NET クラスが生成されます。
 
 ```csharp
 public class Person
@@ -87,15 +87,15 @@ Protobuf では、さまざまなネイティブ スカラー値の型がサポ�
 
 ### <a name="dates-and-times"></a>日付と時刻
 
-ネイティブ スカラー型では、NET の <xref:System.DateTimeOffset>、<xref:System.DateTime>、<xref:System.TimeSpan> と同等の、日付と時刻の値は提供されません。 これらの型は、いくつかの Protobuf の "既知の型" 拡張機能を使用して指定できます。 これらの拡張機能によって、サポート対象のプラットフォーム全体で複雑なフィールド型に対するコード生成とランタイム サポートが提供されます。
+ネイティブ スカラー型では、NET の <xref:System.DateTimeOffset>、<xref:System.DateTime>、<xref:System.TimeSpan> と同等の、日付と時刻の値は提供されません。 これらの型は、いくつかの Protobuf の "*既知の型*" 拡張機能を使用して指定できます。 これらの拡張機能によって、サポート対象のプラットフォーム全体で複雑なフィールド型に対するコード生成とランタイム サポートが提供されます。
 
 次の表に日付と時刻の型を示します。
 
-| .NET の種類 | Protobuf の既知の型 |
-| ------- | ------------------------ |
+| .NET の種類        | Protobuf の既知の型    |
+| ---------------- | --------------------------- |
 | `DateTimeOffset` | `google.protobuf.Timestamp` |
-| `DateTime` | `google.protobuf.Timestamp` |
-| `TimeSpan` | `google.protobuf.Duration` |
+| `DateTime`       | `google.protobuf.Timestamp` |
+| `TimeSpan`       | `google.protobuf.Duration`  |
 
 ```protobuf  
 syntax = "proto3"
@@ -284,11 +284,17 @@ person.Attributes.Add(attributes);
 
 ## <a name="unstructured-and-conditional-messages"></a>非構造化および条件付きメッセージ
 
-Protobuf はコントラクト優先のメッセージング形式であり、アプリのビルド時にそのアプリのメッセージを *.proto* ファイルで指定する必要があります。 高度なシナリオでは、Protobuf によって、条件付きおよび不明なメッセージをサポートするための言語機能と既知の型が提供されます。
+Protobuf は、コントラクト優先のメッセージング形式です。 アプリがビルドされるときに、アプリのメッセージ (そのフィールドや型を含む) を `.proto` ファイルで指定する必要があります。 Protobuf のコントラクト優先設計は、メッセージ コンテンツを適用する場合に適していますが、次のような厳密なコントラクトが必要ではないシナリオを制限できます。
+
+* ペイロードが不明なメッセージ。 たとえば、何らかのメッセージが含まれる可能性があるフィールドを含むメッセージです。
+* 条件付きメッセージ。 たとえば、gRPC サービスから返されたメッセージは、結果が成功またはエラーになる可能性があります。
+* 動的な値。 たとえば、JSON のような、値の非構造化コレクションが含まれるフィールドを含むメッセージ。
+
+Protobuf には、これらのシナリオをサポートするための言語の機能と型が用意されています。
 
 ### <a name="any"></a>Any
 
-`Any` 型を使用すると、 *.proto* 定義がなくても、埋め込み型としてメッセージを使用できます。 `Any` 型を使用するには、`any.proto` をインポートします。
+`Any` 型を使用すると、 `.proto` 定義がなくても、埋め込み型としてメッセージを使用できます。 `Any` 型を使用するには、`any.proto` をインポートします。
 
 ```protobuf
 import "google/protobuf/any.proto";
@@ -338,7 +344,7 @@ message ResponseMessage {
 `oneof` を使用する場合、生成される C# コードには、どのフィールドが設定されているかを示す列挙型が含まれます。 その列挙型をテストして、どのフィールドが設定されているかを確認することができます。 設定されていないフィールドによって、例外がスローされるのではなく、`null` または既定値が返されます。
 
 ```csharp
-var response = client.GetPersonAsync(new RequestMessage());
+var response = await client.GetPersonAsync(new RequestMessage());
 
 switch (response.ResultCase)
 {
@@ -355,7 +361,7 @@ switch (response.ResultCase)
 
 ### <a name="value"></a>値
 
-`Value` 型は、動的に型指定される値を表します。 `null`、数値、文字列、ブール値、値の辞書 (`Struct`)、または値のリスト (`ValueList`) のいずれかにすることができます。 `Value` は、上記の `oneof` 機能を使用する既知の型です。 `Value` 型を使用するには、`struct.proto` をインポートします。
+`Value` 型は、動的に型指定される値を表します。 `null`、数値、文字列、ブール値、値の辞書 (`Struct`)、または値のリスト (`ValueList`) のいずれかにすることができます。 `Value` は、上記の `oneof` 機能を使用する Protobuf の既知の型です。 `Value` 型を使用するには、`struct.proto` をインポートします。
 
 ```protobuf
 import "google/protobuf/struct.proto";

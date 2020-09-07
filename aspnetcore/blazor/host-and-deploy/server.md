@@ -5,7 +5,7 @@ description: ASP.NET Core を使用して Blazor Server アプリをホストお
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2020
+ms.date: 08/26/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 72a22fc2dd50bbcda230bb1824bb4fe176bf2189
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: afbaad2f27359a4a1cac5c5fe1da16d3e80d038f
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628054"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102654"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Blazor Server のホストと展開
 
@@ -65,7 +65,19 @@ Blazor は、待ち時間、信頼性、および[セキュリティ](xref:signa
 
 #### <a name="azure-no-locsignalr-service"></a>Azure SignalR Service
 
-Blazor Server アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 さらに、SignalR サービスのグローバル リーチとハイパフォーマンスのデータ センターは、地理的条件による待機時間の短縮に役立ちます。 アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
+Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 さらに、SignalR サービスのグローバル リーチとハイパフォーマンスのデータ センターは、地理的条件による待機時間の短縮に役立ちます。
+
+> [!IMPORTANT]
+> [WebSocket](https://wikipedia.org/wiki/WebSocket) が無効になっている場合、Azure App Service では HTTP ロング ポーリングを使用してリアルタイム接続がシミュレートされます。 HTTP ロング ポーリングは、WebSocket を有効にして、クライアントとサーバー間の接続のシミュレーションにポーリングを使用せずに実行する場合よりも著しく遅くなります。
+>
+> Azure App Service にデプロイされた Blazor Server アプリには WebSocket を使用することをお勧めします。 [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) では、既定で WebSocket が使用されます。 アプリで Azure SignalR Service を使用しない場合は、「<xref:signalr/publish-to-azure-web-app#configure-the-app-in-azure-app-service>」を参照してください。
+>
+> 詳細については、次を参照してください。
+>
+> * [Azure SignalR Service とは](/azure/azure-signalr/signalr-overview)
+> * [Azure SignalR Service のパフォーマンス ガイド](/azure-signalr/signalr-concept-performance#performance-factors)
+
+アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
 
 1. サービスで "*スティッキー セッション*" をサポートできるようにします。それにより、クライアントは[事前レンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値を `Required` に設定します。 通常、アプリでは次の方法の**いずれか 1 つ**を使用して構成を作成します。
 
