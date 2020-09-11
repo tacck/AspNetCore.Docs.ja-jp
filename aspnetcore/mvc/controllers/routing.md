@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 83ddb49f60058ecc744163faa2f5c454abc7b42d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630314"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009701"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core でのコントローラー アクションへのルーティング
 
@@ -152,7 +152,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 * 基本的でわかりやすいルーティング スキームをサポートしています。
 * UI ベースのアプリの便利な開始点となります。
-* は、多くの web UI アプリに必要な唯一のルートテンプレートです。 大規模な web UI アプリの場合は、必要な場合は、 [領域](#areas) を使用する別のルートがあります。
+* は、多くの web UI アプリに必要な唯一のルートテンプレートです。 大規模な web UI アプリの場合は、 [領域](#areas) を使用するもう1つのルートが必要になることがよくあります。
 
 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> および <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> :
 
@@ -189,7 +189,7 @@ ASP.NET Core 3.0 以降でのエンドポイントのルーティング:
 
 `/Blog`、 `/Blog/Article` 、および `/Blog/{any-string}` は、ブログルートに一致する唯一の URL パスです。
 
-前の例を次に示します。
+上記の例の場合:
 
 * `blog` ルートは最初に追加されるため、ルートより優先順位が高くなり `default` ます。
 * は、URL の一部としてアーティクル名を持つことが一般的である、 [スラグ](https://developer.mozilla.org/docs/Glossary/Slug) スタイルのルーティングの例です。

@@ -4,7 +4,7 @@ author: rick-anderson
 description: ASP.NET Core でデータ保護を構成する方法について説明します。
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 09/04/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: aa7f6f3c1ff8042bd11bba485a2d7b8aaa6ef88a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 72aa7c210bdff2729be3dabe7a630e578334aef9
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626715"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009714"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core データ保護の構成
 
@@ -42,8 +42,8 @@ ms.locfileid: "88626715"
 
 この記事で使用するデータ保護拡張機能には、次の NuGet パッケージが必要です。
 
-* [AspNetCore (AzureStorage)](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/)
-* [AspNetCore をインポートします。](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureKeyVault/)
+* [Azure.Extensions.AspNetCore.DataProtection.Blobs](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs)
+* [Azure.Extensions.AspNetCore.DataProtection.Keys](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys)
 
 ::: moniker-end
 
@@ -51,7 +51,7 @@ ms.locfileid: "88626715"
 
 ## <a name="protectkeyswithazurekeyvault"></a>ProtectKeysWithAzureKeyVault
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)にキーを格納するには、クラスで[ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault)を使用してシステムを構成し `Startup` ます。
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)にキーを格納するには、クラスで[ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault)を使用してシステムを構成し `Startup` ます。 `blobUriWithSasToken` キーファイルを格納する必要がある完全な URI を指定します。 URI には、クエリ文字列パラメーターとして SAS トークンを含める必要があります。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -72,7 +72,14 @@ public void ConfigureServices(IServiceCollection services)
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_)では、および X509Certificate を使用して、 `ClientId` データ保護システムで key vault を使用できるようにします。 [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2)
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) は、とを使用して、 `ClientId` `ClientSecret` データ保護システムが key vault を使用できるようにします。
 
-Keyvault と azure storage の組み合わせを使用してキーを格納および保護する場合、 `System.UriFormatException` キーを格納する blob がまだ存在しない場合はがスローされます。 これは、アプリケーションを実行する前に手動で作成することも、 `.ProtectKeysWithAzureKeyVault()` blob を作成するために最初に実行するときに削除してから、後続の実行用に追加することもできます。 `.ProtectKeysWithAzureKeyVault()`ファイルが適切なスキーマと値で作成されるようにするため、を削除することをお勧めします。
+アプリが以前の Azure パッケージ (と) を使用していて、 [`Microsoft.AspNetCore.DataProtection.AzureStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage) [`Microsoft.AspNetCore.DataProtection.AzureKeyVault`](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureKeyVault) Azure Key Vault と Azure Storage を組み合わせてキーを格納および保護している場合、 <xref:System.UriFormatException?displayProperty=nameWithType> キーストレージの blob が存在しないと、がスローされます。 Azure portal でアプリを実行する前に blob を手動で作成することも、次の手順を使用することもできます。
+
+1. 最初の実行でのへの呼び出しを削除して、 `ProtectKeysWithAzureKeyVault` blob を適切に作成します。
+1. 後続の実行では、への呼び出しを追加し `ProtectKeysWithAzureKeyVault` ます。
+
+`ProtectKeysWithAzureKeyVault`最初の実行に対してを削除することをお勧めします。これは、適切なスキーマと値が設定された状態でファイルが作成されることを保証するためです。 
+
+提供される API によって blob が存在しない場合に自動的に作成されるため、 [AspNetCore](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) および [AspNetCore](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys) パッケージにアップグレードすることをお勧めします。
 
 ```csharp
 var storageAccount = CloudStorageAccount.Parse("<storage account connection string">);

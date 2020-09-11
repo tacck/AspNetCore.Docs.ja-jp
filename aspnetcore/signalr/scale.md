@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: fc257015a9ee972da90b0f206a60b07bd6cc1f97
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bba965e14058663c3ed9c0f15afc6a8d78997aea
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631109"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009753"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR のホストとスケーリング
 
-[Andrew](https://twitter.com/anurse)、 [Brady](https://twitter.com/bradygaster)、および[Tom Dykstra](https://github.com/tdykstra)によって、
+( [Andrew Stanton](https://twitter.com/anurse))、 [Brady](https://twitter.com/bradygaster)氏、 [Tom Dykstra](https://github.com/tdykstra)
 
 この記事では、ASP.NET Core を使用する高トラフィックアプリのホストとスケーリングに関する考慮事項について説明 SignalR します。
 
@@ -82,7 +82,7 @@ Azure SignalR サービスは、バックプレーンではなくプロキシで
 このスケールアウトのアプローチには、Redis バックプレーンよりもいくつかの利点があります。
 
 * クライアント [アフィニティ](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)とも呼ばれる固定セッションは、接続時にクライアントが Azure サービスに直ちにリダイレクトされるため、必須ではありません SignalR 。
-* アプリは、 SignalR 送信されたメッセージの数に基づいてスケールアウトできます。一方、Azure サービスは、 SignalR 任意の数の接続を処理するように自動的に拡張されます。 たとえば、クライアントが何千も存在する可能性はありますが、1秒あたり数個のメッセージしか送信されない場合、 SignalR アプリは接続自体を処理するためだけに複数のサーバーにスケールアウトする必要がありません。
+* アプリは、 SignalR 送信されたメッセージの数に基づいてスケールアウトできます。一方、Azure サービスは、 SignalR 任意の数の接続を処理するようにスケーリングします。 たとえば、クライアントが何千も存在する可能性はありますが、1秒あたり数個のメッセージしか送信されない場合、 SignalR アプリは接続自体を処理するためだけに複数のサーバーにスケールアウトする必要がありません。
 * アプリでは SignalR 、を使用しないと、web アプリよりもはるかに多くの接続リソースが使用されません SignalR 。
 
 これらの理由から、 SignalR SignalR App Service、vm、コンテナーなど、azure でホストされているすべての ASP.NET Core アプリに対して azure サービスを使用することをお勧めします。
