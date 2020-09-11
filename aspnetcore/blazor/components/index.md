@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865283"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009623"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -266,7 +266,7 @@ namespace BlazorSample
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> コンポーネントのコンテンツが <xref:Microsoft.AspNetCore.Components.RenderFragment> でレンダリングされるときに、独自の "*コンポーネント パラメーター*" を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[`RenderFragment` で上書きされたパラメーター](#overwritten-parameters-with-renderfragment)」セクションをご覧ください。
+> 独自の "*コンポーネント パラメーター*" を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[上書きされたパラメーター](#overwritten-parameters)」セクションをご覧ください。
 
 ## <a name="child-content"></a>子コンテンツ
 
@@ -555,7 +555,7 @@ public class NotifierService
 
 要素またはコンポーネントのリストをレンダリングし、その後に要素またはコンポーネントが変更された場合、Blazor の比較アルゴリズムでは、前のどの要素やコンポーネントを保持できるか、およびモデル オブジェクトをそれらにどのようにマップするかを決定する必要があります。 通常、このプロセスは自動で、無視できますが、プロセスの制御が必要になる場合があります。
 
-次の例を確認してください。
+次に例を示します。
 
 ```csharp
 @foreach (var person in People)
@@ -625,14 +625,9 @@ public class NotifierService
 
 [`@key`][5] に使用される値は確実に競合しないようにしてください。 同じ親要素内で競合する値が検出された場合、Blazor では、古い要素やコンポーネントを新しい要素やコンポーネントに確定的にマップできないため、例外がスローされます。 個別の値 (オブジェクト インスタンスや主キー値など) のみを使用してください。
 
-## <a name="overwritten-parameters-with-renderfragment"></a>`RenderFragment` で上書きされたパラメーター
+## <a name="overwritten-parameters"></a>上書きされたパラメーター
 
-パラメーターは、次のような条件で上書きされます。
-
-* 子コンポーネントのコンテンツが、<xref:Microsoft.AspNetCore.Components.RenderFragment> を使用してレンダリングされる。
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が、親コンポーネントで呼び出される。
-
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されると親コンポーネントがレンダリングされ、新しいパラメーター値が子コンポーネントに指定されるため、パラメーターがリセットされます。
+親コンポーネントの再レンダリング時に、新しいパラメーター値が指定され、通常は既存のパラメーター値が上書きされます。
 
 次が実行される `Expander` コンポーネントについて考えてみましょう。
 
@@ -853,7 +848,7 @@ Blazor では HTML がレンダリングされるため、スケーラブル ベ
 
 ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル (`.razor`) に直接配置した場合、基本的な画像レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:blazor/security/server/threat-mitigation>:リソース不足に対処する必要がある Blazor Server アプリの構築に関するガイダンスが含まれています。
 
