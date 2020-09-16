@@ -447,6 +447,8 @@
               uid: blazor/host-and-deploy/server
             - name: リンカーを構成する
               uid: blazor/host-and-deploy/configure-linker
+            - name: トリマーを構成する
+              uid: blazor/host-and-deploy/configure-trimmer
         - name: Blazor サーバーと EF Core
           uid: blazor/blazor-server-ef-core
         - name: 高度なシナリオ
