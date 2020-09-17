@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631564"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722658"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -109,7 +109,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* `https_port`[ホスト設定](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port)を設定します。
+* `https_port`[ホスト設定](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#https_port)を設定します。
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
@@ -117,7 +117,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
-* [ASPNETCORE_URLS 環境変数](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls)を使用して、セキュリティで保護されたスキームのポートを指定します。 環境変数によってサーバーが構成されます。 ミドルウェアは、を使用して HTTPS ポートを間接的に検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。 リバースプロキシの展開では、この方法は使用できません。
+* [ASPNETCORE_URLS 環境変数](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls)を使用して、セキュリティで保護されたスキームのポートを指定します。 環境変数によってサーバーが構成されます。 ミドルウェアは、を使用して HTTPS ポートを間接的に検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。 リバースプロキシの展開では、この方法は使用できません。
 
 ::: moniker-end
 
@@ -161,7 +161,7 @@ Kestrel または HTTP.sys が公開エッジサーバーとして使用され�
 
 Azure App Service にデプロイする場合は、 [「チュートリアル: 既存のカスタム SSL 証明書を Azure Web Apps にバインドする](/azure/app-service/app-service-web-tutorial-custom-ssl)」のガイダンスに従ってください。
 
-### <a name="options"></a>Options
+### <a name="options"></a>オプション
 
 次の強調表示されたコードは、 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) を呼び出してミドルウェアオプションを構成します。
 
@@ -288,7 +288,7 @@ ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装
 ::: moniker-end
 
 
-* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、[https://hstspreload.org/](https://hstspreload.org/) をご覧ください。
+* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、「[https://hstspreload.org/](https://hstspreload.org/)」を参照してください。
 * HSTS ポリシーをホストサブドメインに適用する [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)を有効にします。
 * `max-age`ヘッダーのパラメーターを明示的に `Strict-Transport-Security` 60 日に設定します。 設定されていない場合、既定値は30日です。 詳細については、「 [最長有効期間」ディレクティブ](https://tools.ietf.org/html/rfc6797#section-6.1.1)を参照してください。
 * `example.com`除外するホストの一覧にを追加します。

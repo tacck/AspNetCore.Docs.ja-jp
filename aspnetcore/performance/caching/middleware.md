@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633449"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722645"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core での応答キャッシュミドルウェア
 
@@ -59,14 +59,14 @@ ms.locfileid: "88633449"
 
 前のヘッダーは応答に書き込まれず、コントローラー、アクション、またはページでオーバーライドされ Razor ます。
 
-* には [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 属性があります。 これは、プロパティが設定されていない場合でも適用されます。 たとえば、 [VaryByHeader](/aspnet/core/performance/caching/response#vary) プロパティを省略すると、対応するヘッダーが応答から削除されます。
+* には [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 属性があります。 これは、プロパティが設定されていない場合でも適用されます。 たとえば、 [VaryByHeader](./response.md#vary) プロパティを省略すると、対応するヘッダーが応答から削除されます。
 
 応答キャッシュミドルウェアは、200 (OK) 状態コードを生成するサーバー応答のみをキャッシュします。 [エラーページ](xref:fundamentals/error-handling)を含むその他の応答は、ミドルウェアによって無視されます。
 
 > [!WARNING]
 > 認証されたクライアントのコンテンツを含む応答は、ミドルウェアがそれらの応答を格納してサービスを提供しないように、キャッシュ不可能としてマークする必要があります。 応答がキャッシュ可能かどうかをミドルウェアが決定する方法の詳細については、「 [キャッシュの条件](#conditions-for-caching) 」を参照してください。
 
-## <a name="options"></a>Options
+## <a name="options"></a>オプション
 
 応答キャッシュのオプションを次の表に示します。
 
@@ -91,7 +91,7 @@ services.AddResponseCaching(options =>
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-MVC/web API コントローラーまたは Razor ページのページモデルを使用する場合、属性は、 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 応答のキャッシュに適切なヘッダーを設定するために必要なパラメーターを指定します。 ミドルウェアを厳密に必要とする属性の唯一のパラメーター `[ResponseCache]` は <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> 、実際の HTTP ヘッダーに対応していません。 詳細については、<xref:performance/caching/response#responsecache-attribute> を参照してください。
+MVC/web API コントローラーまたは Razor ページのページモデルを使用する場合、属性は、 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 応答のキャッシュに適切なヘッダーを設定するために必要なパラメーターを指定します。 ミドルウェアを厳密に必要とする属性の唯一のパラメーター `[ResponseCache]` は <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> 、実際の HTTP ヘッダーに対応していません。 詳細については、「<xref:performance/caching/response#responsecache-attribute>」を参照してください。
 
 属性を使用しない場合は、を使用して `[ResponseCache]` 応答のキャッシュを変化させることができ `VaryByQueryKeys` ます。 を <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> HttpContext から直接使用し[ます。](xref:Microsoft.AspNetCore.Http.HttpContext.Features)
 
@@ -110,7 +110,7 @@ if (responseCachingFeature != null)
 
 次の表は、応答のキャッシュに影響を与える HTTP ヘッダーに関する情報を示しています。
 
-| ヘッダー | 詳細 |
+| ヘッダー | 詳細情報 |
 | ------ | ------- |
 | `Authorization` | ヘッダーが存在する場合、応答はキャッシュされません。 |
 | `Cache-Control` | ミドルウェアは、cache ディレクティブでマークされたキャッシュ応答のみを考慮し `public` ます。 次のパラメーターを使用してキャッシュを制御します。<ul><li>最長有効期間</li><li>最大-古い&#8224;</li><li>最小-新規</li><li>must-revalidate</li><li>no-cache</li><li>ストアなし</li><li>-if-キャッシュ済み</li><li>プライベート</li><li>public</li><li>s-maxage</li><li>プロキシ再検証&#8225;</li></ul>&#8224;に制限が指定されていない場合 `max-stale` 、ミドルウェアは何も実行しません。<br>&#8225;`proxy-revalidate` はと同じ効果があり `must-revalidate` ます。<br><br>詳細については、「 [RFC 7231: Request Cache-control ディレクティブ](https://tools.ietf.org/html/rfc7234#section-5.2.1)」を参照してください。 |
@@ -148,7 +148,7 @@ if (responseCachingFeature != null)
 
 * 要求は、200 (OK) 状態コードでサーバー応答を生成する必要があります。
 * 要求メソッドは GET または HEAD である必要があります。
-* では `Startup.Configure` 、応答キャッシュミドルウェアは、キャッシュを必要とするミドルウェアの前に配置する必要があります。 詳細については、<xref:fundamentals/middleware/index> を参照してください。
+* では `Startup.Configure` 、応答キャッシュミドルウェアは、キャッシュを必要とするミドルウェアの前に配置する必要があります。 詳細については、「<xref:fundamentals/middleware/index>」を参照してください。
 * ヘッダーを指定することはでき `Authorization` ません。
 * `Cache-Control` ヘッダーパラメーターは有効である必要があり、応答はとマークされている必要があり `public` `private` ます。
 * ヘッダーが存在する場合、ヘッダーはヘッダーをオーバーライドするので、ヘッダーが存在しない場合はヘッダーが `Pragma: no-cache` 存在しない必要があり `Cache-Control` `Cache-Control` `Pragma` ます。
@@ -163,7 +163,7 @@ if (responseCachingFeature != null)
 > [!NOTE]
 > クロスサイト要求偽造 (CSRF) 攻撃を防ぐために、セキュリティで保護されたトークンを生成するための偽造防止システムは、 `Cache-Control` `Pragma` 応答がキャッシュされないようにヘッダーとヘッダーをに設定し `no-cache` ます。 HTML フォーム要素の偽造防止トークンを無効にする方法については、「」を参照してください <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration> 。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -203,14 +203,14 @@ if (responseCachingFeature != null)
 
 前のヘッダーは応答に書き込まれず、コントローラー、アクション、またはページでオーバーライドされ Razor ます。
 
-* には [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 属性があります。 これは、プロパティが設定されていない場合でも適用されます。 たとえば、 [VaryByHeader](/aspnet/core/performance/caching/response#vary) プロパティを省略すると、対応するヘッダーが応答から削除されます。
+* には [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 属性があります。 これは、プロパティが設定されていない場合でも適用されます。 たとえば、 [VaryByHeader](./response.md#vary) プロパティを省略すると、対応するヘッダーが応答から削除されます。
 
 応答キャッシュミドルウェアは、200 (OK) 状態コードを生成するサーバー応答のみをキャッシュします。 [エラーページ](xref:fundamentals/error-handling)を含むその他の応答は、ミドルウェアによって無視されます。
 
 > [!WARNING]
 > 認証されたクライアントのコンテンツを含む応答は、ミドルウェアがそれらの応答を格納してサービスを提供しないように、キャッシュ不可能としてマークする必要があります。 応答がキャッシュ可能かどうかをミドルウェアが決定する方法の詳細については、「 [キャッシュの条件](#conditions-for-caching) 」を参照してください。
 
-## <a name="options"></a>Options
+## <a name="options"></a>オプション
 
 応答キャッシュのオプションを次の表に示します。
 
@@ -235,7 +235,7 @@ services.AddResponseCaching(options =>
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-MVC/web API コントローラーまたは Razor ページのページモデルを使用する場合、属性は、 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 応答のキャッシュに適切なヘッダーを設定するために必要なパラメーターを指定します。 ミドルウェアを厳密に必要とする属性の唯一のパラメーター `[ResponseCache]` は <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> 、実際の HTTP ヘッダーに対応していません。 詳細については、<xref:performance/caching/response#responsecache-attribute> を参照してください。
+MVC/web API コントローラーまたは Razor ページのページモデルを使用する場合、属性は、 [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 応答のキャッシュに適切なヘッダーを設定するために必要なパラメーターを指定します。 ミドルウェアを厳密に必要とする属性の唯一のパラメーター `[ResponseCache]` は <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> 、実際の HTTP ヘッダーに対応していません。 詳細については、「<xref:performance/caching/response#responsecache-attribute>」を参照してください。
 
 属性を使用しない場合は、を使用して `[ResponseCache]` 応答のキャッシュを変化させることができ `VaryByQueryKeys` ます。 を <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> HttpContext から直接使用し[ます。](xref:Microsoft.AspNetCore.Http.HttpContext.Features)
 
@@ -254,7 +254,7 @@ if (responseCachingFeature != null)
 
 次の表は、応答のキャッシュに影響を与える HTTP ヘッダーに関する情報を示しています。
 
-| ヘッダー | 詳細 |
+| ヘッダー | 詳細情報 |
 | ------ | ------- |
 | `Authorization` | ヘッダーが存在する場合、応答はキャッシュされません。 |
 | `Cache-Control` | ミドルウェアは、cache ディレクティブでマークされたキャッシュ応答のみを考慮し `public` ます。 次のパラメーターを使用してキャッシュを制御します。<ul><li>最長有効期間</li><li>最大-古い&#8224;</li><li>最小-新規</li><li>must-revalidate</li><li>no-cache</li><li>ストアなし</li><li>-if-キャッシュ済み</li><li>プライベート</li><li>public</li><li>s-maxage</li><li>プロキシ再検証&#8225;</li></ul>&#8224;に制限が指定されていない場合 `max-stale` 、ミドルウェアは何も実行しません。<br>&#8225;`proxy-revalidate` はと同じ効果があり `must-revalidate` ます。<br><br>詳細については、「 [RFC 7231: Request Cache-control ディレクティブ](https://tools.ietf.org/html/rfc7234#section-5.2.1)」を参照してください。 |
@@ -292,7 +292,7 @@ if (responseCachingFeature != null)
 
 * 要求は、200 (OK) 状態コードでサーバー応答を生成する必要があります。
 * 要求メソッドは GET または HEAD である必要があります。
-* では `Startup.Configure` 、応答キャッシュミドルウェアは、キャッシュを必要とするミドルウェアの前に配置する必要があります。 詳細については、<xref:fundamentals/middleware/index> を参照してください。
+* では `Startup.Configure` 、応答キャッシュミドルウェアは、キャッシュを必要とするミドルウェアの前に配置する必要があります。 詳細については、「<xref:fundamentals/middleware/index>」を参照してください。
 * ヘッダーを指定することはでき `Authorization` ません。
 * `Cache-Control` ヘッダーパラメーターは有効である必要があり、応答はとマークされている必要があり `public` `private` ます。
 * ヘッダーが存在する場合、ヘッダーはヘッダーをオーバーライドするので、ヘッダーが存在しない場合はヘッダーが `Pragma: no-cache` 存在しない必要があり `Cache-Control` `Cache-Control` `Pragma` ます。

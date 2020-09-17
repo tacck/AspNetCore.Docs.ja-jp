@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 5e29882414d49c0971bc11c688067878714d3b2d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d9f0b88a5e23b64e151ae1a622914dcae3129af6
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634190"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722749"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[既定では、](/aspnet/core/security/enforcing-ssl)ASP.NET Core で HTTPS が使用されます。 [HTTPS](https://en.wikipedia.org/wiki/HTTPS) は、信頼、id、および暗号化のための [証明書](https://en.wikipedia.org/wiki/Public_key_certificate) に依存します。
+[既定では、](./enforcing-ssl.md)ASP.NET Core で HTTPS が使用されます。 [HTTPS](https://en.wikipedia.org/wiki/HTTPS) は、信頼、id、および暗号化のための [証明書](https://en.wikipedia.org/wiki/Public_key_certificate) に依存します。
 
 このドキュメントでは、HTTPS で事前に構築されたコンテナーイメージを実行する方法について説明します。
 

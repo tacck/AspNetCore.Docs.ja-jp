@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633007"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721789"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR と ASP.NET Core の違い SignalR
 
@@ -150,13 +150,13 @@ ASP.NET Core では SignalR 、接続モデルが単純化されています。 
 
 ASP.NET Core は、 SignalR ハブからクライアントへの [データのストリーミング](xref:signalr/streaming) をサポートするようになりました。
 
-### <a name="state"></a>State
+### <a name="state"></a>状態
 
 クライアントとハブ (多くの場合はと呼ばれます) の間で任意の状態を渡す機能は `HubState` 削除されており、進行状況メッセージもサポートされています。 現時点では、対応するハブプロキシはありません。
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection の削除
 
-ASP.NET Core では SignalR 、 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) クラスは削除されています。
+ASP.NET Core では SignalR 、 [PersistentConnection](/previous-versions/aspnet/jj919047(v=vs.118)) クラスは削除されています。
 
 ### <a name="globalhost"></a>GlobalHost
 
@@ -289,7 +289,7 @@ ASP.NET は SignalR SQL Server と Redis をサポートしています。 ASP.N
 * [Azure SignalR サービス](/azure/azure-signalr/)
 * [Redis バックプレーン](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [ハブ](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)

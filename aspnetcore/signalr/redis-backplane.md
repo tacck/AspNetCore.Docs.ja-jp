@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: bc28eb3096e88455347f68ca381c9a280d5a153e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a57176409c5f9bcc620db7e070f6616951eb9a54
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633657"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722775"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>ASP.NET Core スケールアウトのために Redis バックプレーンを設定する SignalR
 
@@ -42,7 +42,7 @@ ms.locfileid: "88633657"
 
   * <xref:signalr/scale>
   * [Redis のドキュメント](https://redis.io/)
-  * [Azure Redis Cache のドキュメント](https://docs.microsoft.com/azure/redis-cache/)
+  * [Azure Redis Cache のドキュメント](/azure/redis-cache/)
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -233,11 +233,11 @@ services.AddSignalR()
 
 [Redis クラスタリング](https://redis.io/topics/cluster-spec) は、複数の redis サーバーを使用して高可用性を実現するための方法です。 クラスタリングは正式にはサポートされていませんが、動作する可能性があります。
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 詳細については、次のリソースを参照してください。
 
 * <xref:signalr/scale>
 * [Redis のドキュメント](https://redis.io/documentation)
 * [StackExchange Redis のドキュメント](https://stackexchange.github.io/StackExchange.Redis/)
-* [Azure Redis Cache のドキュメント](https://docs.microsoft.com/azure/redis-cache/)
+* [Azure Redis Cache のドキュメント](/azure/redis-cache/)

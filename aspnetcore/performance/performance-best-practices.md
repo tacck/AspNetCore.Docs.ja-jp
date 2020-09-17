@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
-ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
+ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88746560"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722619"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core パフォーマンスのベストプラクティス
 
@@ -42,7 +42,7 @@ ms.locfileid: "88746560"
 
 ASP.NET Core アプリは、多数の要求を同時に処理するように設計する必要があります。 非同期 Api を使用すると、スレッドの小さなプールで、ブロックしている呼び出しを待機せずに、数千の同時要求を処理することができます。 実行時間の長い同期タスクが完了するのを待機するのではなく、スレッドが別の要求で作業できます。
 
-ASP.NET Core アプリのパフォーマンスに関する一般的な問題は、非同期の呼び出しをブロックしていることです。 多くの同期ブロッキング呼び出しは、 [スレッドプールの枯渇](https://blogs.msdn.microsoft.com/vancem/2018/10/16/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall/) と応答時間の低下につながります。
+ASP.NET Core アプリのパフォーマンスに関する一般的な問題は、非同期の呼び出しをブロックしていることです。 多くの同期ブロッキング呼び出しは、 [スレッドプールの枯渇](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) と応答時間の低下につながります。
 
 **実行**しない:
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 7f1d20687f6dd588e125acf3815815c2bcf0cd04
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102797"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722684"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core のメモリ管理とガベージコレクション (GC)
 
@@ -355,7 +355,7 @@ public async Task<int> GetHttpClient2(string url)
 
 インスタンスの有効期間をより適切に処理する方法については、次を参照してください `HttpClient` 。
 
-* [HttpClient と有効期間の管理](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
+* [HttpClient と有効期間の管理](../fundamentals/http-requests.md#httpclient-and-lifetime-management)
 * [HTTPClient ファクトリのブログ](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
 ### <a name="object-pooling"></a>オブジェクト プーリング
@@ -443,7 +443,7 @@ public byte[] GetPooledArray(int size)
 
 主な違いは、バイトが割り当てられ、その結果、ジェネレーション0のコレクションがはるかに少ないことです。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [ガベージ コレクション](/dotnet/standard/garbage-collection/)
 * [同時実行ビジュアライザーを使用したさまざまな GC モードについて](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

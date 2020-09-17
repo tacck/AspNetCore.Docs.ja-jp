@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: df0084411134167df31506a01362a0520821e577
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb8352b11e78582c4a32b67da7dcb701d020b0d9
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631759"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721711"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR クライアント
 
@@ -51,7 +51,7 @@ SignalRクライアントはサーバーコンポーネントと共に出荷さ�
 | Azure SignalR サービスのサポート |2.1.0|1.0.0|1.0.0|1.0.0|
 | [サーバーからクライアントへのストリーミング](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|
 | [クライアントとサーバー間のストリーミング](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
-| 自動再接続 ([.net](/aspnet/core/signalr/dotnet-client?view=aspnetcore-3.0&tabs=visual-studio#handle-lost-connection)、 [JavaScript](/aspnet/core/signalr/javascript-client?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
+| 自動再接続 ([.net](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection)、 [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
 | Websocket トランスポート |2.1.0|1.0.0|1.0.0|1.0.0|
 | サーバー送信イベントトランスポート |2.1.0|1.0.0|1.0.0|❌|
 | 長いポーリングトランスポート |2.1.0|1.0.0|1.0.0|3.0.0|
@@ -60,7 +60,7 @@ SignalRクライアントはサーバーコンポーネントと共に出荷さ�
 
 その他のクライアント機能の有効化のサポートは [、microsoft の問題追跡ツール](https://github.com/dotnet/AspNetCore/issues)で追跡されます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [For ASP.NET Core を使ってみる SignalR](xref:tutorials/signalr)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)

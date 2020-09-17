@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: fb24ca0b3a67ceca03a2666d5a4eb8782e05ba17
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b7d14aa0371fcc01d568cf1e7b9908c4a8d984df
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630355"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722833"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>ASP.NET Core MVC の互換バージョン
 
@@ -37,7 +37,7 @@ ms.locfileid: "88630355"
 * `Version_2_0` から `Version_2_2`までの `CompatibilityVersion` 値は `[Obsolete(...)]` とマークされます。
 * 「[偽造防止、CORS、診断、MVC、ルーティングにおける API の重大な変更](https://github.com/aspnet/Announcements/issues/387)」を参照してください。 この一覧には、互換性スイッチの重大な変更が含まれています。
 
-`SetCompatibilityVersion` が ASP.NET Core 2.x アプリでどのように機能するかを確認するには、[この記事の ASP.NET Core 2.2 バージョン](https://docs.microsoft.com/aspnet/core/mvc/compatibility-version?view=aspnetcore-2.2)を選択します。
+`SetCompatibilityVersion` が ASP.NET Core 2.x アプリでどのように機能するかを確認するには、[この記事の ASP.NET Core 2.2 バージョン](?view=aspnetcore-2.2)を選択します。
 
 ::: moniker-end
 
