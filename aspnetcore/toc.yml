@@ -722,8 +722,8 @@
       uid: grpc/clientfactory
     - name: ブラウザー アプリでの gRPC の使用
       uid: grpc/browser
-    - name: gRPC から JSON Web API を作成する
-      uid: grpc/httpapi
+    - name: 期限とキャンセル
+      uid: grpc/deadlines-cancellation
     - name: 構成
       uid: grpc/configuration
     - name: 認証と承認
@@ -738,12 +738,16 @@
       uid: grpc/versioning
     - name: dotnet-grpc を使用して Protobuf 参照を管理する
       uid: grpc/dotnet-grpc
+    - name: gRPC ツールを使用したサービスのテスト
+      uid: grpc/test-tools
     - name: C コアから gRPC サービスを移行する
       uid: grpc/migration
     - name: ASP.NET Core gRPC に WCF を移行する理由
       uid: grpc/wcf
     - name: HTTP API を使用した gRPC サービスの比較
       uid: grpc/comparison
+    - name: gRPC から JSON Web API を作成する
+      uid: grpc/httpapi
     - name: サンプル
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: トラブルシューティング
