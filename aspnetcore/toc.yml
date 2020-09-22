@@ -337,6 +337,8 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputDate
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: InputFile
+                  href: blazor/file-uploads.md
                 - name: InputNumber
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputRadio
@@ -363,6 +365,8 @@
                   href: blazor/fundamentals/routing.md#route-templates
                 - name: タイトル
                   href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
+                - name: Virtualize
+                  href: blazor/components/virtualization.md
             - name: 値とパラメーターのカスケード
               uid: blazor/components/cascading-values-and-parameters
             - name: データ バインディング
@@ -371,6 +375,8 @@
               uid: blazor/components/event-handling
             - name: ライフサイクル
               uid: blazor/components/lifecycle
+            - name: コンポーネントの仮想化
+              uid: blazor/components/virtualization
             - name: テンプレート コンポーネント
               uid: blazor/components/templated-components
             - name: コンポーネントの統合
@@ -383,6 +389,8 @@
           uid: blazor/layouts
         - name: フォームと検証
           uid: blazor/forms-validation
+        - name: ファイルのアップロード
+          uid: blazor/file-uploads
         - name: .NET から JavaScript を呼び出す
           uid: blazor/call-javascript-from-dotnet
         - name: JavaScript から .NET を呼び出す
@@ -714,16 +722,20 @@
           uid: grpc/services
         - name: Protobuf メッセージの作成
           uid: grpc/protobuf
+        - name: gRPC サービスのバージョン管理
+          uid: grpc/versioning
+    - name: C# を使用して gRPC サービスを呼び出す
+      items:
+        - name: 概要
+          uid: grpc/client
+        - name: gRPC クライアント ファクトリの統合
+          uid: grpc/clientfactory
+        - name: 期限とキャンセル
+          uid: grpc/deadlines-cancellation
     - name: ASP.NET Core を使用した gRPC サービス
       uid: grpc/aspnetcore
-    - name: .NET クライアントを使用して gRPC サービスを呼び出す
-      uid: grpc/client
-    - name: gRPC クライアント ファクトリの統合
-      uid: grpc/clientfactory
     - name: ブラウザー アプリでの gRPC の使用
       uid: grpc/browser
-    - name: 期限とキャンセル
-      uid: grpc/deadlines-cancellation
     - name: 構成
       uid: grpc/configuration
     - name: 認証と承認
@@ -734,11 +746,13 @@
       uid: grpc/security
     - name: パフォーマンスのベスト プラクティス
       uid: grpc/performance
-    - name: gRPC サービスのバージョン管理
-      uid: grpc/versioning
+    - name: プロセス間通信
+      uid: grpc/interprocess
+    - name: gRPC から JSON Web API を作成する
+      uid: grpc/httpapi
     - name: dotnet-grpc を使用して Protobuf 参照を管理する
       uid: grpc/dotnet-grpc
-    - name: gRPC ツールを使用したサービスのテスト
+    - name: gRPCurl を使用して gRPC サービスをテストする
       uid: grpc/test-tools
     - name: C コアから gRPC サービスを移行する
       uid: grpc/migration
@@ -746,8 +760,6 @@
       uid: grpc/wcf
     - name: HTTP API を使用した gRPC サービスの比較
       uid: grpc/comparison
-    - name: gRPC から JSON Web API を作成する
-      uid: grpc/httpapi
     - name: サンプル
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: トラブルシューティング
