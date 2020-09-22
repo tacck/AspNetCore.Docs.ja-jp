@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 3430d842b6a4f7da30370977f72e6f132e28bb7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634255"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847586"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core を使用した Microsoft アカウントの外部ログインセットアップ
 
@@ -41,6 +41,8 @@ Microsoft アカウントがない場合は、[ **作成**] を選択します�
 * **新しい登録**の選択
 * **[名前]** を入力します。
 * **サポートされているアカウントの種類**のオプションを選択します。  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+  * パッケージは、 `MicrosoftAccount` 既定では、"任意の組織ディレクトリ内のアカウント" または "組織ディレクトリと Microsoft アカウントのアカウント" オプションを使用して作成されたアプリ登録をサポートしています。
+  * 他のオプションを使用するには、 `AuthorizationEndpoint` とのメンバーを設定して、 `TokenEndpoint` `MicrosoftAccountOptions` 作成後にアプリ登録の [ **エンドポイント** ] ページに表示される url に Microsoft アカウント認証を初期化します ([ **概要** ] ページの [エンドポイント] をクリックします)。
 * [ **リダイレクト URI**] に、追加した開発 URL を入力し `/signin-microsoft` ます。 たとえば、「 `https://localhost:5001/signin-microsoft` 」のように入力します。 このサンプルの後半で構成されている Microsoft 認証スキームは、OAuth フローを実装するために、ルートで要求を自動的に処理し `/signin-microsoft` ます。
 * **[登録]** を選択します
 
@@ -100,7 +102,7 @@ Microsoft アカウント認証でサポートされる構成オプションの�
 * Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され*ます。 ' SignInScheme ' オプションを指定する必要があり*ます。 このサンプルで使用するプロジェクトテンプレートにより、この処理が確実に行われます。
 * 初期移行を適用してサイトデータベースが作成されていない場合は、 *要求エラーの処理中にデータベース操作が失敗* します。 [ **移行の適用** ] をタップしてデータベースを作成し、更新してエラーを続行します。
 
-## <a name="next-steps"></a>次のステップ
+## <a name="next-steps"></a>次の手順
 
 * この記事では、Microsoft で認証する方法について説明しました。 同様のアプローチに従って、 [前のページ](xref:security/authentication/social/index)に一覧表示されている他のプロバイダーとの認証を行うことができます。
 
