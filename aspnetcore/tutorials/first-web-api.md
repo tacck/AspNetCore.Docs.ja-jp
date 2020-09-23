@@ -16,13 +16,14 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
+- Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 3d83141b8b638a369b08b0fadafccd96c0b48214
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: ebce9f2f4992d83c6b28edb5c771cdfc8a7a0b6a
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876790"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080382"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -197,9 +198,9 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順にクリックします。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -211,11 +212,11 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+* プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
   ![新しいフォルダー](first-web-api-mac/_static/folder.png)
 
-* *Models* フォルダーを右クリックし、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
+* *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
 * クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
 
@@ -247,7 +248,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext データベースコンテキストの追加
 
-* *Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順にクリックします。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -282,8 +283,8 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 * **[Entity Framework を使用したアクションがある API コントローラー]** を選択してから、 **[追加]** を選択します。
 * **[Entity Framework を使用したアクションがある API コントローラー]** ダイアログで次を実行します。
 
-  * **モデル クラス**で **[TodoItem (TodoApi.Models)]** を選択します。
-  * **データ コンテキスト クラス**で **[TodoContext (TodoApi.Models)]** を選択します。
+  * **モデル クラス**で **TodoItem (TodoApi.Models)** を選択します。
+  * **データ コンテキスト クラス**で **TodoContext (TodoApi.Models)** を選択します。
   * **[追加]** を選びます。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -639,9 +640,9 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順にクリックします。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -653,11 +654,11 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+* プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
   ![新しいフォルダー](first-web-api-mac/_static/folder.png)
 
-* *Models* フォルダーを右クリックし、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
+* *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
 * クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
 
@@ -677,7 +678,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順にクリックします。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 

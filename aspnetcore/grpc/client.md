@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634333"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593048"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
@@ -260,7 +260,18 @@ catch (RpcException ex)
 }
 ```
 
+## <a name="configure-deadline"></a>期限の構成
+
+呼び出しを実行できる時間の長さに上限を設けることができるため、gRPC 呼び出しの期限を構成することをお勧めします。 これにより、誤動作しているサービスが永遠に実行されてサーバー リソースが枯渇するのを防ぐことができます。 期限は、信頼性の高いアプリをビルドするための便利なツールです。
+
+gRPC 呼び出しの期限を設定するには、`CallOptions.Deadline` を構成します。
+
+[!code-csharp[](~/grpc/deadlines-cancellation/deadline-client.cs?highlight=7,12)]
+
+詳細については、「<xref:grpc/deadlines-cancellation#deadlines>」を参照してください。
+
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:grpc/clientfactory>
+* <xref:grpc/deadlines-cancellation>
 * <xref:grpc/basics>

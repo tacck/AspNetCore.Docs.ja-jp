@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: 0830214029d59d0820ed3c5806267c766314c74f
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280427"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009675"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
@@ -41,7 +41,7 @@ Blazor のプリンシパル ホスティング モデルは、WebAssembly 上�
 
 **Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 ASP.NET Core バックエンドのあるアプリは "*ホステッド Blazor WebAssembly アプリ*"と呼ばれています。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
 
-テンプレートには、次の処理を行う `blazor.webassembly.js` スクリプトが含まれます。
+`blazor.webassembly.js` スクリプトは、フレームワークによって提供され、次の処理を行います。
 
 * .NET ランタイム、アプリ、およびアプリの依存関係のダウンロード。
 * アプリを実行するランタイムの初期化。
@@ -75,7 +75,7 @@ ASP.NET Core アプリにより、次の項目を追加するためにアプリ�
 * サーバー側サービス。
 * 要求処理パイプラインに対するアプリ。
 
-`blazor.server.js` スクリプトにより、クライアント接続が確立されます。 アプリケーションの状態は、必要に応じてアプリによって永続化および復元する必要があります (ネットワーク接続が切断された場合など)。 `blazor.server.js` スクリプトは、ASP.NET Core 共有フレームワークの埋め込みリソースから提供されます。
+クライアントでは、`blazor.server.js` スクリプトによって、サーバーとの SignalR 接続が確立されます。 スクリプトは、ASP.NET Core 共有フレームワークの埋め込みリソースから、クライアント側のアプリに提供されます。 クライアント側のアプリは、必要に応じて、アプリの状態を永続化および復元する役割を担います。 
 
 Blazor Server ホスティング モデルには、次のいくつかの利点があります。
 

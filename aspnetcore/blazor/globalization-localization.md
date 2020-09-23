@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: deb68b50f408532af22d20ba9b06a9ee3eccb335
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2b8820acba564bdfb85f8338ed5482573960fbb4
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628223"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080278"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -74,7 +74,23 @@ Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://devel
 
 カルチャを明示的に構成するには、`Program.Main` で <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> と <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> を設定します。
 
-既定では、Blazor WebAssembly アプリに対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。 リンカーの動作を制御する方法の詳細とガイダンスについては、「<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
+::: moniker range=">= aspnetcore-5.0"
+
+既定では、Blazor WebAssembly には、ユーザーのカルチャで日付や通貨などの値を表示するために必要なグローバリゼーション リソースがあります。 アプリがローカライズを必要としない場合は、`en-US` カルチャに基づくインバリアント カルチャをサポートするようにアプリを構成することができます。
+
+```xml
+<PropertyGroup>
+  <InvariantGlobalization>true</InvariantGlobalization>
+</PropertyGroup>
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+既定では、Blazor WebAssembly アプリに対する中間言語 (IL) リンカーの構成によって、明示的に要求されたロケールを除き、国際化情報が削除されます。 詳細については、「<xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization>」を参照してください。
+
+::: moniker-end
 
 Blazor で既定で選択されるカルチャは、ほとんどのユーザーにとって十分と考えられますが、ユーザーが優先ロケールを指定する手段を提供することを検討してください。 カルチャ ピッカーを使用した Blazor WebAssembly サンプル アプリについては、[`LocSample`](https://github.com/pranavkm/LocSample) ローカライズのサンプル アプリを参照してください。
 

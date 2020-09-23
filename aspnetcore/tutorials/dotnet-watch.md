@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
+ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635139"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90083454"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>ファイル ウォッチャーを使用した ASP.NET Core アプリの開発
 
@@ -85,11 +85,25 @@ Web ブラウザーで、`http://localhost:<port number>/api/math/sum?a=4&b=5` �
 | コマンド | コマンドと watch |
 | ---- | ----- |
 | dotnet run | dotnet watch run |
-| dotnet run -f netcoreapp2.0 | dotnet watch run -f netcoreapp2.0 |
-| dotnet run -f netcoreapp2.0 -- --arg1 | dotnet watch run -f netcoreapp2.0 -- --arg1 |
+| dotnet run -f netcoreapp3.1 | dotnet watch run -f netcoreapp3.1 |
+| dotnet run -f netcoreapp3.1 -- --arg1 | dotnet watch run -f netcoreapp3.1 -- --arg1 |
 | dotnet test | dotnet watch test |
 
 *WebApp* フォルダーの `dotnet watch run` を実行します。 コンソール出力に、`watch` が起動したことが示されます。
+
+::: moniker range=">= aspnetcore-5.0"
+Web アプリで `dotnet watch run` を実行すると、準備完了後にブラウザーが起動して、そのアプリの URL に移動します。 `dotnet watch` は、これを実行するために、アプリのコンソール出力を読み取り、<xref:Microsoft.AspNetCore.WebHost> によって表示される準備完了メッセージを待機します。
+
+`dotnet watch` によってウォッチ対象のファイルに対する変更が検出されると、ブラウザーが最新の情報に更新されます。 これを行うために、アプリによって作成された HTML 応答を変更するミドルウェアが、watch コマンドによってアプリに挿入されます。 このミドルウェアでは、`dotnet watch` がブラウザーに更新を指示する JavaScript スクリプト ブロックがページに追加されます。 現在、ウォッチ対象のすべてのファイルに対する変更 ( *.html* ファイル、 *.css* ファイルなどの静的コンテンツ) によって、アプリが再ビルドされます。
+
+`dotnet watch`:
+
+* 既定では、ビルドに影響するファイルのみをウォッチします。
+* 追加でウォッチ対象となるファイル (構成により) でも、ビルドが行われます。
+
+構成の詳細については、このドキュメントの「[dotnet-watch の構成](#dotnet-watch-configuration)」を参照してください。
+
+::: moniker-end
 
 > [!NOTE]
 > `dotnet watch --project <PROJECT>` を使用して、ウォッチするプロジェクトを指定することができます。 たとえば、サンプル アプリのルートから `dotnet watch --project WebApp run` を実行すると、*WebApp* プロジェクトも実行されてウォッチされます。
@@ -193,6 +207,17 @@ dotnet watch msbuild /t:Test
 ```
 
 VSTest は、いずれかのテスト プロジェクトでファイルが変更されたときに実行されます。
+
+## <a name="dotnet-watch-configuration"></a>dotnet-watch の構成
+
+一部の構成オプションは、環境変数を通じて `dotnet watch` に渡すことができます。 使用できる変数は、次のとおりです。
+
+| 設定  | 説明 |
+| ------------- | ------------- |
+| `DOTNET_USE_POLLING_FILE_WATCHER`                | "1" または "true" に設定した場合、`dotnet watch` によって、CoreFx の `FileSystemWatcher` ではなく、ポーリング ファイル ウォッチャーが使用されます。 ネットワーク共有または Docker でマウントされたボリューム上のファイルをウォッチするときに使用します。                       |
+| `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | 既定では、復元の実行や、ファイルが変更されるたびにウォッチ対象のファイルのセットの再評価が行われるなどの特定の操作が実行されないようにすることで、`dotnet watch` によってビルドが最適化されます。 "1" または "true" に設定した場合、これらの最適化は無効になります。 |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` は、*launchSettings.json* で構成された `launchBrowser` を使用して、Web アプリ用のブラウザーの起動を試みます。 "1" または "true" に設定した場合、この動作は抑制されます。 |
+| `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` は、ファイルの変更を検出すると、ブラウザーを最新の情報に更新することを試みます。 "1" または "true" に設定した場合、この動作は抑制されます。 `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` が設定されている場合も、この動作は抑制されます。 |
 
 ## <a name="dotnet-watch-in-github"></a>GitHub での `dotnet-watch`
 

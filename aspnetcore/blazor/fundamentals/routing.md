@@ -5,7 +5,7 @@ description: アプリで要求をルーティングする方法と、NavLink �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/14/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 09e7ca9c03103de116c566352496174e97fbc3ce
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865328"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593009"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor のルーティング
 
@@ -161,16 +161,35 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 
 ### <a name="routing-with-urls-that-contain-dots"></a>ドットを含む URL によるルーティング
 
-Blazor Server アプリでは、`_Host.cshtml` の既定のルートは `/` (`@page "/"`) です。 ドット (`.`) を含む要求 URL は、既定のルートによって照合されません。URL がファイルを要求しているように見えるためです。 Blazor アプリにより、存在しない静的ファイルに対して "*404 見つかりません*" 応答が返されます。 ドットを含むルートを使用するには、次のルート テンプレートを使用して `_Host.cshtml` を構成します。
+ホストされている Blazor WebAssembly および Blazor Server アプリの場合、サーバー側の既定のルート テンプレートでは、ファイルが要求されているドット (`.`) が要求 URL の最後のセグメントに含まれていると想定されます (例: `https://localhost.com:5001/example/some.thing`)。 追加の構成がなければ、コンポーネントへのルーティングが意図されている場合は、アプリによって "*404 - 見つかりません*" が返されます。 ドットが含まれる 1 つ以上のパラメーターを指定してルートを使用するには、アプリでカスタム テンプレートを使用してルートを構成する必要があります。
 
-```cshtml
-@page "/{**path}"
+URL の最後のセグメントからルート パラメーターを受け取ることができる次の `Example` コンポーネントについて考えてみます。
+
+```razor
+@page "/example"
+@page "/example/{param}"
+
+<p>
+    Param: @Param
+</p>
+
+@code {
+    [Parameter]
+    public string Param { get; set; }
+}
 ```
 
-`"/{**path}"` テンプレートには次のものが含まれます。
+ホストされている Blazor WebAssembly ソリューションの "*サーバー*" アプリで、`param` パラメーターのドットを使用して要求をルーティングできるようにするには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ファイル ルート テンプレートを追加します。
 
-* 二重アスタリスクの "*キャッチオール*" 構文 (`**`)。スラッシュ (`/`) をデコードせずに複数のフォルダー境界にまたがるパスをキャプチャします。
-* `path` ルート パラメーター名。
+```csharp
+endpoints.MapFallbackToFile("/example/{param?}", "index.html");
+```
+
+`param` パラメーターのドットを使用して要求をルーティングするように Blazor Server アプリを構成するには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ページ ルート テンプレートを追加します。
+
+```csharp
+endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
+```
 
 詳細については、「<xref:fundamentals/routing>」を参照してください。
 
@@ -178,7 +197,7 @@ Blazor Server アプリでは、`_Host.cshtml` の既定のルートは `/` (`@p
 
 ::: moniker range=">= aspnetcore-5.0"
 
-*このセクションは、9 月中旬にリリースされる .NET 5 リリース候補 1 (RC1) 以降に適用されます。*
+"*このセクションは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core に適用されます。* "
 
 複数のフォルダー境界にまたがるパスをキャプチャするキャッチオール ルート パラメーターが、コンポーネントでサポートされます。 キャッチオール ルート パラメーターは次のとおりであることが必要です。
 
@@ -203,7 +222,7 @@ Blazor Server アプリでは、`_Host.cshtml` の既定のルートは `/` (`@p
 
 ::: moniker range="< aspnetcore-5.0"
 
-キャッチオール ルート パラメーターは、9 月中旬にリリースされる .NET 5 リリース候補 1 (RC1) 以降でサポートされます。*
+キャッチオール ルート パラメーターは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core でサポートされます。*
 
 ::: moniker-end
 

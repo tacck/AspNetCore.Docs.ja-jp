@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 6b4c3d55d77af104c969cac0fcbf642f35c7dd7f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: dadf6076e7f07c07381856aa225667a6eb38046a
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865267"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080317"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -708,9 +708,21 @@ URL の書き換えを処理するために、`wwwroot/404.html` ファイルを
   --urls=http://127.0.0.1:0
   ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="configure-the-trimmer"></a>トリマーを構成する
+
+Blazor では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL トリミング設定が各リリース ビルド上で実行されます。 詳細については、「<xref:blazor/host-and-deploy/configure-trimmer>」を参照してください。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ## <a name="configure-the-linker"></a>リンカーを構成する
 
 Blazor では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL リンク設定が各リリース ビルド上で実行されます。 詳細については、「<xref:blazor/host-and-deploy/configure-linker>」を参照してください。
+
+::: moniker-end
 
 ## <a name="custom-boot-resource-loading"></a>カスタム ブート リソースの読み込み
 

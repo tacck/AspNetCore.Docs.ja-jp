@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor WebAssembly アプリでアセンブリの遅�
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/25/2020
+ms.date: 09/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865156"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592905"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core でのアセンブリの遅延読み込みBlazor WebAssembly
 
@@ -42,20 +42,9 @@ Blazor の遅延読み込み機能を使用すると、アプリ アセンブリ
 
 ```xml
 <ItemGroup>
-  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls" />
+  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
 </ItemGroup>
 ```
-
-アプリで使用されるアセンブリだけを遅延読み込みすることができます。 未使用のアセンブリはパブリッシュされた出力からリンカーによって除去されます。
-
-> [!NOTE]
-> 9 月中旬にリリースされる .NET 5 リリース候補 1 (RC1) 以降では、アセンブリ名に拡張子 `.dll` を付ける必要があります。
->
-> ```xml
-> <ItemGroup>
->  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
-> </ItemGroup>
-> ```
 
 ## <a name="router-component"></a>`Router` コンポーネント
 
@@ -114,8 +103,11 @@ Blazor がルーティング可能なコンポーネントを求めて探索す�
 * JS 相互運用を使用して、ネットワーク呼び出しを介してアセンブリをフェッチします。
 * ブラウザー内の WebAssembly で実行されているランタイムにアセンブリを読み込みます。
 
-> [!NOTE]
-> フレームワークの遅延読み込みの実装では、サーバー上でのプリレンダリングがサポートされています。 プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。
+フレームワークの遅延読み込みの実装では、ホストされた Blazor ソリューションでのプリレンダリングによる遅延読み込みがサポートされます。 プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。 "*サーバー*" プロジェクトの `Startup.ConfigureServices` メソッド (`Startup.cs`) に、手動で `LazyAssemblyLoader` を登録します。
+
+```csharp
+services.AddSingleton<LazyAssemblyLoader>();
+```
 
 ### <a name="user-interaction-with-navigating-content"></a>`<Navigating>` コンテンツとのユーザー操作
 

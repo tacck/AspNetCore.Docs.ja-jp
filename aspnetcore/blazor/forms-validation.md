@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: b485a62c61d404a91134f49cf2a49134ec9f5123
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: 5efea1728a1460c728a0d90002fb1504fe5b3bbb
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280388"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593022"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -105,6 +105,9 @@ public class ExampleModel
 | <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+
+> [!NOTE]
+> `InputRadio` と `InputRadioGroup` は、ASP.NET Core 5.0 以降で使用できます。 詳細については、この記事のバージョン 5.0 以降を選択してください。
 
 ::: moniker-end
 
@@ -275,7 +278,7 @@ public class Starship
 
 ## <a name="display-name-support"></a>表示名のサポート
 
-*このセクションは、9 月中旬にリリースされる .NET 5 リリース候補 1 (RC1) 以降に適用されます。*
+"*このセクションは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core に適用されます。* "
 
 次の組み込みコンポーネントでは、`DisplayName` パラメーターを使用した表示名がサポートされています。
 
@@ -390,7 +393,7 @@ namespace BlazorSample.Client
 
 検証メッセージは、コンポーネント内で設定されると、検証コンポーネントの <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> に追加され、<xref:Microsoft.AspNetCore.Components.Forms.EditForm> に表示されます。
 
-```csharp
+```razor
 @page "/FormsValidation"
 
 <h1>Starfleet Starship Database</h1>
@@ -581,7 +584,7 @@ services.AddControllersWithViews()
 
 また、*Starfleet Starship Database* フォームが、`CustomValidator` コンポーネントを使用してサーバー検証エラーを示すように更新されます。 サーバー API によって検証メッセージが返されると、それらは、`CustomValidator` コンポーネントの <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore>に追加されます。 エラーは、フォームの <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>で表示するために、フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext> で使用することができます。
 
-```csharp
+```razor
 @page "/FormValidation"
 @using System.Net
 @using System.Net.Http.Json

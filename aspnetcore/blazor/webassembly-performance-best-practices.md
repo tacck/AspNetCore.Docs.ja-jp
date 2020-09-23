@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor WebAssembly アプリのパフォーマンス�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2020
+ms.date: 09/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 819947be90e7f09c7ba853df1af1f3c7066c0219
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5d3cd1480dd37f437b2d6d5a89af0a842286be95
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625818"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080265"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly パフォーマンスに関するベスト プラクティス
 
@@ -141,9 +141,21 @@ Blazor WebAssembly では、Blazor Server アプリで使用できる 1 つの�
 
 ## <a name="reduce-app-size"></a>アプリのサイズを小さくする
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="intermediate-language-il-trimming"></a>中間言語 (IL) のトリミング
+
+[使用されていないアセンブリを Blazor WebAssembly アプリからトリミング](xref:blazor/host-and-deploy/configure-trimmer)すると、アプリのバイナリで使用されていないコードを削除して、アプリのサイズを縮小することができます。 既定では、アプリケーションの発行時にトリマーが実行されます。 トリミングを活用するには、[-c|--configuration](/dotnet/core/tools/dotnet-publish#options) オプションを `Release` に設定した状態で [`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドを使用して、展開用にアプリを発行します。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ### <a name="intermediate-language-il-linking"></a>中間言語 (IL) のリンク
 
-[Blazor WebAssembly アプリをリンク](xref:blazor/host-and-deploy/configure-linker)すると、アプリのバイナリで使用されていないコードをトリミングすることで、アプリのサイズが縮小されます。 既定では、リンカーは `Release` 構成でビルドする場合にのみ有効になります。 これを活用するには、[-c|--configuration](/dotnet/core/tools/dotnet-publish#options) オプションを `Release` に設定した状態で [`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドを使用して、展開用にアプリを発行します。
+[Blazor WebAssembly アプリをリンク](xref:blazor/host-and-deploy/configure-linker)すると、アプリのバイナリで使用されていないコードをトリミングすることで、アプリのサイズが縮小されます。 既定では、中間言語 (IL) リンカーは、`Release` 構成でビルドする場合にのみ有効になります。 これを活用するには、[-c|--configuration](/dotnet/core/tools/dotnet-publish#options) オプションを `Release` に設定した状態で [`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドを使用して、展開用にアプリを発行します。
+
+::: moniker-end
 
 ```dotnetcli
 dotnet publish -c Release
@@ -171,6 +183,20 @@ Blazor WebAssembly のランタイムには、次の .NET 機能が含まれて�
   </PropertyGroup>
   ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+* 既定では、Blazor WebAssembly には、ユーザーのカルチャで日付や通貨などの値を表示するために必要なグローバリゼーション リソースがあります。 アプリがローカライズを必要としない場合は、`en-US` カルチャに基づく[インバリアント カルチャをサポートするようにアプリを構成する](xref:blazor/globalization-localization)ことができます。
+
+  ```xml
+  <PropertyGroup>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  ```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * <xref:System.StringComparison.InvariantCultureIgnoreCase?displayProperty=nameWithType> などの API を正常に動作させるために、照合順序情報が含まれています。 アプリで照合順序情報を必要としないことが確実な場合は、アプリのプロジェクト ファイル内の `BlazorWebAssemblyPreserveCollationData` MSBuild プロパティを `false` に設定して無効にすることを検討してください。
 
   ```xml
@@ -178,3 +204,5 @@ Blazor WebAssembly のランタイムには、次の .NET 機能が含まれて�
     <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
   </PropertyGroup>
   ```
+
+::: moniker-end

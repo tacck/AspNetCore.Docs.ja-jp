@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 7627d6981fbee66ba19a7065cefb197e50a5fd25
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: e548465b3d79279802fbfacd66c69724d864d14d
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153520"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080330"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server と Entity Framework Core (EFCore)
 
@@ -36,7 +36,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 > [!NOTE]
 > この記事では、Blazor Server アプリでの EF Core について説明します。 Blazor WebAssembly アプリは、ほとんどの直接データベース接続が防止される WebAssembly サンドボックス内で実行されます。 Blazor WebAssembly での EF Core の実行については、この記事では扱いません。
 
-## <a name="sample-app"></a>サンプル アプリ
+<h2 id="sample-app-5x">サンプル アプリ</h2>
 
 このサンプル アプリは、EF Core を使用する Blazor Server アプリのリファレンスとして作成されました。 サンプル アプリには、並べ替えとフィルター処理、削除、追加、更新の各操作を行うグリッドが含まれています。 このサンプルは、EF Core を使用してオプティミスティック同時実行制御を処理する方法を示しています。
 
@@ -51,7 +51,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 > [!NOTE]
 > このトピックのコード例には、表示されていない名前空間とサービスを必要とするものもあります。 Razor の例に必要な [`@using`](xref:mvc/views/razor#using) および [`@inject`](xref:mvc/views/razor#inject) ディレクティブを含む完全に機能するコードを検査するには、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample)を参照してください。
 
-## <a name="database-access"></a>データベース アクセス
+<h2 id="database-access-5x">データベース アクセス</h2>
 
 EF Core では、[データベース アクセスを構成](/ef/core/miscellaneous/configuring-dbcontext)し、"[*作業単位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)" として機能する手段として <xref:Microsoft.EntityFrameworkCore.DbContext> を利用しています。 EF Core には、既定でコンテキストを "*スコープ*" サービスとして登録する ASP.NET Core アプリの <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張機能が用意されています。 Blazor Server アプリでは、インスタンスがユーザーの回線内のコンポーネント全体で共有されるため、スコープ サービスの登録が問題になる可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッド セーフではなく、同時に使用するように設計されていません。 次の理由により、既存の有効期間は不適切です。
 
@@ -91,9 +91,9 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 
   `try` ブロックの `Loading = true;` 行の後に操作を配置します。
 
-* EF Core の[変更追跡](/ef/core/querying/tracking)または[同時実行制御](/ef/core/saving/concurrency)を利用する、より長期間の操作の場合は、[コンポーネントの有効期間にコンテキストの範囲を限定します](#scope-to-the-component-lifetime)。
+* EF Core の[変更追跡](/ef/core/querying/tracking)または[同時実行制御](/ef/core/saving/concurrency)を利用する、より長期間の操作の場合は、[コンポーネントの有効期間にコンテキストの範囲を限定します](#scope-to-the-component-lifetime-5x)。
 
-### <a name="new-dbcontext-instances"></a>新しい DbContext インスタンス
+<h3 id="new-dbcontext-instances-5x">新しい DbContext インスタンス</h3>
 
 新しい <xref:Microsoft.EntityFrameworkCore.DbContext> インスタンスを作成する最も簡単な方法は、`new` を使用して新しいインスタンスを作成することです。 ただし、追加の依存関係を解決する必要があるシナリオがいくつかあります。 たとえば、[`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) を使用してコンテキストを構成することができます。
 
@@ -110,7 +110,7 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 > [!NOTE]
 > `Wrapper` は、`GridWrapper` コンポーネントへの[コンポーネント参照](xref:blazor/components/index#capture-references-to-components)です。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)の `Index` コンポーネント (`Pages/Index.razor`) を参照してください。
 
-### <a name="scope-to-the-component-lifetime"></a>コンポーネントの有効期間の範囲
+<h3 id="scope-to-the-component-lifetime-5x">コンポーネントの有効期間の範囲</h3>
 
 コンポーネントの有効期間中は存在する <xref:Microsoft.EntityFrameworkCore.DbContext> を作成することができます。 これにより、それを[作業単位](https://martinfowler.com/eaaCatalog/unitOfWork.html)として使用し、変更の追跡や同時実行の解決などの組み込み機能を利用することができます。
 ファクトリーを使用してコンテキストを作成し、コンポーネントの有効期間中はそれを追跡できます。 まず <xref:System.IDisposable> を実装し、`Pages/EditContact.razor` に示すようにファクトリを挿入します。
@@ -120,7 +120,7 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 @inject IDbContextFactory<ContactContext> DbFactory
 ```
 
-サンプル アプリでは、コンポーネントが破棄されるときに連絡先も確実に破棄されます。
+サンプル アプリでは、コンポーネントが破棄されるときに、コンテキストも確実に破棄されます。
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
 
@@ -137,7 +137,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 > [!NOTE]
 > この記事では、Blazor Server アプリでの EF Core について説明します。 Blazor WebAssembly アプリは、ほとんどの直接データベース接続が防止される WebAssembly サンドボックス内で実行されます。 Blazor WebAssembly での EF Core の実行については、この記事では扱いません。
 
-## <a name="sample-app"></a>サンプル アプリ
+<h2 id="sample-app-3x">サンプル アプリ</h2>
 
 このサンプル アプリは、EF Core を使用する Blazor Server アプリのリファレンスとして作成されました。 サンプル アプリには、並べ替えとフィルター処理、削除、追加、更新の各操作を行うグリッドが含まれています。 このサンプルは、EF Core を使用してオプティミスティック同時実行制御を処理する方法を示しています。
 
@@ -152,15 +152,13 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 > [!NOTE]
 > このトピックのコード例には、表示されていない名前空間とサービスを必要とするものもあります。 Razor の例に必要な [`@using`](xref:mvc/views/razor#using) および [`@inject`](xref:mvc/views/razor#inject) ディレクティブを含む完全に機能するコードを検査するには、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample)を参照してください。
 
-## <a name="database-access"></a>データベース アクセス
+<h2 id="database-access-3x">データベース アクセス</h2>
 
 EF Core では、[データベース アクセスを構成](/ef/core/miscellaneous/configuring-dbcontext)し、"[*作業単位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)" として機能する手段として <xref:Microsoft.EntityFrameworkCore.DbContext> を利用しています。 EF Core には、既定でコンテキストを "*スコープ*" サービスとして登録する ASP.NET Core アプリの <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張機能が用意されています。 Blazor Server アプリでは、インスタンスがユーザーの回線内のコンポーネント全体で共有されるため、これは問題になる可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッド セーフではなく、同時に使用するように設計されていません。 次の理由により、既存の有効期間は不適切です。
 
 * **[Singleton]\(シングルトン\)** の場合、アプリのすべてのユーザーで状態が共有され、不適切な同時使用につながります。
 * **[範囲指定]** (既定値) の場合、同じユーザーのコンポーネント間で同様の問題が発生します。
 * **[一時的]** の場合、要求ごとに新しいインスタンスが生成されます。ただし、コンポーネントの有効期間が長くなる可能性があるため、意図したよりも時間のかかるコンテキストになります。
-
-## <a name="database-access"></a>データベース アクセス
 
 以下の推奨事項は、Blazor Server アプリで EF Core を使用する上で一貫したアプローチを提供するように設計されています。
 
@@ -194,9 +192,9 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 
   `try` ブロックの `Loading = true;` 行の後に操作を配置します。
 
-* EF Core の[変更追跡](/ef/core/querying/tracking)または[同時実行制御](/ef/core/saving/concurrency)を利用する、より長期間の操作の場合は、[コンポーネントの有効期間にコンテキストの範囲を限定します](#scope-to-the-component-lifetime)。
+* EF Core の[変更追跡](/ef/core/querying/tracking)または[同時実行制御](/ef/core/saving/concurrency)を利用する、より長期間の操作の場合は、[コンポーネントの有効期間にコンテキストの範囲を限定します](#scope-to-the-component-lifetime-3x)。
 
-### <a name="create-new-dbcontext-instances"></a>新しい DbContext インスタンスを作成する
+<h3 id="new-dbcontext-instances-3x">新しい DbContext インスタンス</h3>
 
 新しい <xref:Microsoft.EntityFrameworkCore.DbContext> インスタンスを作成する最も簡単な方法は、`new` を使用して新しいインスタンスを作成することです。 ただし、追加の依存関係を解決する必要があるシナリオがいくつかあります。 たとえば、[`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) を使用してコンテキストを構成することができます。
 
@@ -217,7 +215,7 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 > [!NOTE]
 > `Wrapper` は、`GridWrapper` コンポーネントへの[コンポーネント参照](xref:blazor/components/index#capture-references-to-components)です。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)の `Index` コンポーネント (`Pages/Index.razor`) を参照してください。
 
-### <a name="scope-to-the-component-lifetime"></a>コンポーネントの有効期間の範囲
+<h3 id="scope-to-the-component-lifetime-3x">コンポーネントの有効期間の範囲</h3>
 
 コンポーネントの有効期間中は存在する <xref:Microsoft.EntityFrameworkCore.DbContext> を作成することができます。 これにより、それを[作業単位](https://martinfowler.com/eaaCatalog/unitOfWork.html)として使用し、変更の追跡や同時実行の解決などの組み込み機能を利用することができます。
 ファクトリーを使用してコンテキストを作成し、コンポーネントの有効期間中はそれを追跡できます。 まず <xref:System.IDisposable> を実装し、`Pages/EditContact.razor` に示すようにファクトリを挿入します。
@@ -227,7 +225,7 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 @inject IDbContextFactory<ContactContext> DbFactory
 ```
 
-サンプル アプリでは、コンポーネントが破棄されるときに連絡先も確実に破棄されます。
+サンプル アプリでは、コンポーネントが破棄されるときに、コンテキストも確実に破棄されます。
 
 [!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/EditContact.razor?name=snippet1)]
 
