@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: b06c06fb5e525a0bdc3df1de50236fa8f76daca9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9b36a77730a43c7515fcd2c56621412453784c9d
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635113"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722541"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core での統合テスト
 
@@ -388,7 +388,7 @@ SUT は、次の特性を持つ Razor Pages メッセージ システムです�
 
 &#8224; EF トピック「[InMemory を使用したテスト](/ef/core/miscellaneous/testing/in-memory)」では、MSTest を使用したテストでメモリ内データベースを使用する方法について説明します。 このトピックでは、[xUnit](https://xunit.github.io/) テスト フレームワークを使用します。 テストの概念とテストの実装は、異なるテスト フレームワークでも類似していますが、同一ではありません。
 
-アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor Pages ではこれらの開発パターンがサポートされています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](/aspnet/core/mvc/controllers/testing)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
+アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor Pages ではこれらの開発パターンがサポートされています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](../mvc/controllers/testing.md)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
 
 ### <a name="test-app-organization"></a>テスト アプリの構成
 
@@ -779,7 +779,7 @@ SUT は、次の特性を持つ Razor Pages メッセージ システムです�
 
 &#8224; EF トピック「[InMemory を使用したテスト](/ef/core/miscellaneous/testing/in-memory)」では、MSTest を使用したテストでメモリ内データベースを使用する方法について説明します。 このトピックでは、[xUnit](https://xunit.github.io/) テスト フレームワークを使用します。 テストの概念とテストの実装は、異なるテスト フレームワークでも類似していますが、同一ではありません。
 
-アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor Pages ではこれらの開発パターンがサポートされています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](/aspnet/core/mvc/controllers/testing)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
+アプリはリポジトリ パターンを使用しておらず、[Unit of Work (UoW) パターン](https://martinfowler.com/eaaCatalog/unitOfWork.html)の有効な例ではありませんが、Razor Pages ではこれらの開発パターンがサポートされています。 詳細については、[インフラストラクチャの永続化レイヤーの設計](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design)および[コントローラー ロジックのテスト](../mvc/controllers/testing.md)に関する記事を参照してください (このサンプルはリポジトリ パターンを実装しています)。
 
 ### <a name="test-app-organization"></a>テスト アプリの構成
 

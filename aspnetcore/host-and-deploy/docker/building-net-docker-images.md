@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: dfb807d5e8d8b949feb0ea87f7f6bcecd04817e8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627326"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722859"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 向けの Docker イメージ
 
@@ -264,8 +264,8 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [Docker の build コマンド](https://docs.docker.com/engine/reference/commandline/build)
 * [Docker の run コマンド](https://docs.docker.com/engine/reference/commandline/run)
 * [ASP.NET Core の Docker サンプル](https://github.com/dotnet/dotnet-docker) (このチュートリアルで使用されたものです。)
-* [プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する](/aspnet/core/host-and-deploy/proxy-load-balancer)
-* [Visual Studio Docker ツールの使用](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
+* [プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する](../proxy-load-balancer.md)
+* [Visual Studio Docker ツールの使用](./visual-studio-tools-for-docker.md)
 * [Visual Studio Code でのデバッグ](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
 * [ドッカーと小さなコンテナを使用した GC](xref:performance/memory#sc)
 

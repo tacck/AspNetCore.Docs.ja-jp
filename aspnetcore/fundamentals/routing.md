@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: cf450385db3c7327de233357d4c13d556ee44bad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1b8ccb510927fbc8a40f7424ae1ca4a131799095
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633670"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722885"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -50,7 +50,7 @@ ms.locfileid: "88633670"
 このドキュメントで説明されているエンドポイント ルーティング システムは、ASP.NET Core 3.0 以降に適用されます。 <xref:Microsoft.AspNetCore.Routing.IRouter> に基づく以前のルーティング システムについては、次のいずれかの方法を使用して ASP.NET Core 2.1 バージョンを選択してください。
 
 * 以前のバージョンのバージョン セレクター。
-* [ASP.NET Core 2.1 でのルーティング](https://docs.microsoft.com/aspnet/core/fundamentals/routing?view=aspnetcore-2.1)に関する記事を選択します。
+* [ASP.NET Core 2.1 でのルーティング](?view=aspnetcore-2.1)に関する記事を選択します。
 
 [サンプル コードを表示またはダウンロード](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -507,14 +507,14 @@ URL の生成:
 
 | 制約 | 例 | 一致の例 | メモ |
 | ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`、`-123456789` | あらゆる整数に一致する |
-| `bool` | `{active:bool}` | `true`、`FALSE` | `true` または `false` に一致する。 大文字と小文字は区別されない |
-| `datetime` | `{dob:datetime}` | `2016-12-31`、`2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。 |
-| `decimal` | `{price:decimal}` | `49.99`、`-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
-| `double` | `{weight:double}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
-| `float` | `{weight:float}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
+| `int` | `{id:int}` | `123456789`, `-123456789` | あらゆる整数に一致する |
+| `bool` | `{active:bool}` | `true`, `FALSE` | `true` または `false` に一致する。 大文字と小文字は区別されない |
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。 |
+| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
+| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
+| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
 | `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638` | 有効な `Guid` 値に一致する |
-| `long` | `{ticks:long}` | `123456789`、`-123456789` | 有効な `long` 値に一致する |
+| `long` | `{ticks:long}` | `123456789`, `-123456789` | 有効な `long` 値に一致する |
 | `minlength(value)` | `{username:minlength(4)}` | `Rick` | 4 文字以上の文字列であることが必要 |
 | `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | 8 文字以内の文字列であることが必要 |
 | `length(length)` | `{filename:length(12)}` | `somefile.txt` | 厳密に 12 文字の文字列であることが必要 |
@@ -1025,7 +1025,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-<xref:Microsoft.AspNetCore.Routing.IRouter> ベースのルーティングの詳細については、[このトピックの ASP.NET Core 2.1 バージョン](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1)を参照してください。
+<xref:Microsoft.AspNetCore.Routing.IRouter> ベースのルーティングの詳細については、[このトピックの ASP.NET Core 2.1 バージョン](?view=aspnetcore-2.1)を参照してください。
 
 > [!IMPORTANT]
 > 本文では、ASP.NET Core ルーティングについて詳しく取り上げます。 ASP.NET Core MVC ルーティングの詳細については、「<xref:mvc/controllers/routing>」を参照してください。 Razor Pages のルーティング規則については、「<xref:razor-pages/razor-pages-conventions>」を参照してください。
@@ -1441,14 +1441,14 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 
 | 制約 | 例 | 一致の例 | メモ |
 |------------|---------|-----------------|-------|
-| `int` | `{id:int}` | `123456789`、`-123456789` | 任意の整数と一致します。|
-| `bool` | `{active:bool}` | `true`、`FALSE` | `true` または `false` に一致する。 大文字と小文字は区別されません|
-| `datetime` | `{dob:datetime}` | `2016-12-31`、`2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。|
-| `decimal` | `{price:decimal}` | `49.99`、`-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
-| `double` | `{weight:double}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
-| `float` | `{weight:float}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`、`{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 有効な `Guid` 値に一致します。|
-| `long` | `{ticks:long}` | `123456789`、`-123456789` | 有効な `long` 値に一致します。|
+| `int` | `{id:int}` | `123456789`, `-123456789` | 任意の整数と一致します。|
+| `bool` | `{active:bool}` | `true`, `FALSE` | `true` または `false` に一致する。 大文字と小文字は区別されません|
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。|
+| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
+| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
+| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
+| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 有効な `Guid` 値に一致します。|
+| `long` | `{ticks:long}` | `123456789`, `-123456789` | 有効な `long` 値に一致します。|
 | `minlength(value)` | `{username:minlength(4)}` | `Rick` | 4 文字以上の文字列であることが必要です。|
 | `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | 文字列の長さは最大 8 文字です。|
 | `length(length)` | `{filename:length(12)}` | `somefile.txt` | 厳密に 12 文字の文字列であることが必要です。|
@@ -1557,8 +1557,8 @@ routes.MapRoute(
 
 ASP.NET Core では、生成されたルートと共にパラメーター トランスフォーマーを使用するための API 規則が提供されます。
 
-* ASP.NET Core MVC には、`Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` API 規則が備わっています。 この規則では、指定されたパラメーター トランスフォーマーがアプリ内のすべての属性ルートに適用されます。 パラメーター トランスフォーマーでは、置き換えられる属性ルート トークンが変換されます。 詳細については、「[パラメーター トランスフォーマーを使用してトークンの置換をカスタマイズする](/aspnet/core/mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement)」をご覧ください。
-* Razor Pages には、`Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` API 規則があります。 この規則では、指定されたパラメーター トランスフォーマーが、自動で検出されたすべての Razor Pages に適用されます。 パラメーター トランスフォーマーでは、Razor Pages ルートのフォルダーとファイル名のセグメントが変換されます。 詳細については、[パラメーター トランスフォーマーを使用したページ ルートのカスタマイズ](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes)に関する記事をご覧ください。
+* ASP.NET Core MVC には、`Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` API 規則が備わっています。 この規則では、指定されたパラメーター トランスフォーマーがアプリ内のすべての属性ルートに適用されます。 パラメーター トランスフォーマーでは、置き換えられる属性ルート トークンが変換されます。 詳細については、「[パラメーター トランスフォーマーを使用してトークンの置換をカスタマイズする](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement)」をご覧ください。
+* Razor Pages には、`Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` API 規則があります。 この規則では、指定されたパラメーター トランスフォーマーが、自動で検出されたすべての Razor Pages に適用されます。 パラメーター トランスフォーマーでは、Razor Pages ルートのフォルダーとファイル名のセグメントが変換されます。 詳細については、[パラメーター トランスフォーマーを使用したページ ルートのカスタマイズ](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes)に関する記事をご覧ください。
 
 ## <a name="url-generation-reference"></a>URL 生成参照
 
@@ -1891,14 +1891,14 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 
 | 制約 | 例 | 一致の例 | メモ |
 | ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`、`-123456789` | あらゆる整数に一致する |
-| `bool` | `{active:bool}` | `true`、`FALSE` | `true` または `false` に一致する (大文字と小文字を区別しません) |
-| `datetime` | `{dob:datetime}` | `2016-12-31`、`2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。|
-| `decimal` | `{price:decimal}` | `49.99`、`-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
-| `double` | `{weight:double}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
-| `float` | `{weight:float}` | `1.234`、`-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`、`{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 有効な `Guid` 値に一致する |
-| `long` | `{ticks:long}` | `123456789`、`-123456789` | 有効な `long` 値に一致する |
+| `int` | `{id:int}` | `123456789`, `-123456789` | あらゆる整数に一致する |
+| `bool` | `{active:bool}` | `true`, `FALSE` | `true` または `false` に一致する (大文字と小文字を区別しません) |
+| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | インバリアント カルチャの有効な `DateTime` 値に一致します。 前の警告を参照してください。|
+| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | インバリアント カルチャの有効な `decimal` 値に一致します。 前の警告を参照してください。|
+| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | インバリアント カルチャの有効な `double` 値に一致します。 前の警告を参照してください。|
+| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | インバリアント カルチャの有効な `float` 値に一致します。 前の警告を参照してください。|
+| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | 有効な `Guid` 値に一致する |
+| `long` | `{ticks:long}` | `123456789`, `-123456789` | 有効な `long` 値に一致する |
 | `minlength(value)` | `{username:minlength(4)}` | `Rick` | 4 文字以上の文字列であることが必要 |
 | `maxlength(value)` | `{filename:maxlength(8)}` | `Richard` | 8 文字以内の文字列であることが必要 |
 | `length(length)` | `{filename:length(12)}` | `somefile.txt` | 厳密に 12 文字の文字列であることが必要 |

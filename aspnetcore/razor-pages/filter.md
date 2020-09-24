@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 436d640130b378e2c770322186020c6e252872ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635048"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722515"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>ASP.NET Core の Razor Pages のフィルター メソッド
 
@@ -39,7 +39,7 @@ Razor ページ フィルター
 * ハンドラー メソッドの実行後にコードを実行します。
 * ページまたはグローバルに実装できます。
 * 特定のページ ハンドラー メソッドには適用できません。
-* コンストラクターの依存関係は、[依存関係の挿入](xref:fundamentals/dependency-injection) (DI) によって入力されるようにできます。 詳細については、「[ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute)」と「[TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)」を参照してください。
+* コンストラクターの依存関係は、[依存関係の挿入](xref:fundamentals/dependency-injection) (DI) によって入力されるようにできます。 詳細については、「[ServiceFilterAttribute](../mvc/controllers/filters.md#servicefilterattribute)」と「[TypeFilterAttribute](../mvc/controllers/filters.md#typefilterattribute)」を参照してください。
 
 ページ コンストラクターとミドルウェアにより、ハンドラー メソッドが実行される前にカスタム コードの実行が可能になりますが、<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> とページへのアクセスを可能にするのは Razor ページ フィルターのみです。 ミドルウェアは `HttpContext` にアクセスできますが、"ページ コンテキスト" にはアクセスできません。 フィルターには、`HttpContext` へのアクセスを提供する派生型のパラメーター <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> があります。 ページ フィルターの例を次に示します。応答にヘッダーが追加する[フィルター属性を実装する](#ifa)。これは、コンストラクターやミドルウェアでは実行できません。 ページとそのモデルのインスタンスへのアクセスを含む、ページ コンテキストへのアクセスは、フィルター、ハンドラー、Razor ページの本文を実行するときにのみ利用できます。
 

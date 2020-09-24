@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 5d3cd1480dd37f437b2d6d5a89af0a842286be95
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: d1ad646f82e5c9ba611a60fc9be8378bedef8dee
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080265"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721724"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly パフォーマンスに関するベスト プラクティス
 
@@ -81,10 +81,7 @@ Blazor の差分検出アルゴリズムでは、コンポーネントが変更�
 
 コンポーネントでは、コードとマークアップの再利用可能なフラグメントを生成するための便利なアプローチが提供されます。 一般的には、アプリの要件に最適な個別のコンポーネントを作成することをお勧めします。 注意点の 1 つは、追加の各子コンポーネントが親コンポーネントのレンダリングにかかる合計時間に影響するということです。 ほとんどのアプリでは、追加のオーバーヘッドはごくわずかです。 多数のコンポーネントを生成するアプリでは、レンダリングするコンポーネントの数を制限するなど、処理のオーバーヘッドを減らすための方法の使用を検討する必要があります。
 
-たとえば、コンポーネントを含む数百の行をレンダリングするグリッドまたはリストでは、レンダリングにプロセッサが集中的に使用されます。 コンポーネントのサブセットのみが特定の時点でレンダリングされるように、グリッドまたはリストのレイアウトを仮想化することを検討してください。 コンポーネントのサブセットのレンダリングの例については、[`Virtualization` サンプル アプリ (aspnet/samples GitHub リポジトリ)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization) にある次のコンポーネントを参照してください。
-
-* `Virtualize` コンポーネント ([`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs)): ユーザーのスクロールに基づいて一連の気象データ行をレンダリングするために <xref:Microsoft.AspNetCore.Components.ComponentBase> を実装する、C# で記述されたコンポーネント。
-* `FetchData` コンポーネント ([`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor)): 一度に 25 行の気象データを表示するために、`Virtualize` コンポーネントが使用されます。
+詳細については、「<xref:blazor/components/virtualization>」を参照してください。
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>データをマーシャリングするための JavaScript 相互運用を回避する
 

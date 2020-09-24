@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631135"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722872"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core での HTTP.sys Web サーバーの実装
 
@@ -255,7 +255,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
-   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
+   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
@@ -506,7 +506,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
-   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
+   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
@@ -759,7 +759,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
-   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
+   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。
@@ -1012,7 +1012,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
    以下は、*netsh.exe* のリファレンス ドキュメントです。
 
-   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](https://technet.microsoft.com/library/cc725882.aspx) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
+   * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
 
 1. アプリを実行します。

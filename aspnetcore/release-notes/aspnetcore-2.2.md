@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 1a8599e6d06724ec289ddd4bee94f89d3c78ef91
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 085a26d508af5bdce506ab923a3256046b3894ab
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632383"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722489"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2 の新機能
 
@@ -94,7 +94,7 @@ HTTP/2 は HTTP のセマンティクス (HTTP ヘッダー、メソッドなど
 
 ASP.NET Core 2.2 には SignalR 用の Java クライアントが導入されました。 このクライアントは、Android アプリを含め、Java コードから ASP.NET Core SignalR サーバーへの接続をサポートしています。
 
-詳細については、「[ASP.NET Core SignalR Java クライアント](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2)」を参照してください。
+詳細については、「[ASP.NET Core SignalR Java クライアント](../signalr/java-client.md?view=aspnetcore-2.2)」を参照してください。
 
 ## <a name="cors-improvements"></a>CORS の機能強化
 

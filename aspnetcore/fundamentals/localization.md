@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 478e9e58f265a8c372dd048f9ba8593424050e01
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865441"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722671"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core のグローバリゼーションおよびローカリゼーション
 
@@ -66,7 +66,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 ローカライズされた文字列は、コントローラーまたは領域で仕切るか、1 つのコンテナーにすることができます。 サンプル アプリでは、共有されるリソースのために `SharedResource` というダミー クラスを使用しています。
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 一部の開発者は、`Startup` クラスを使用してグローバル文字列または共有文字列を格納します。 下のサンプルでは、`InfoController` と `SharedResource` のローカライザーが使用されています。
 
@@ -420,7 +420,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 ローカライズされた文字列は、コントローラーまたは領域で仕切るか、1 つのコンテナーにすることができます。 サンプル アプリでは、共有されるリソースのために `SharedResource` というダミー クラスを使用しています。
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 一部の開発者は、`Startup` クラスを使用してグローバル文字列または共有文字列を格納します。 下のサンプルでは、`InfoController` と `SharedResource` のローカライザーが使用されています。
 
@@ -775,7 +775,7 @@ HTML を格納しているリソースには、`IHtmlLocalizer<T>` の実装を�
 
 ローカライズされた文字列は、コントローラーまたは領域で仕切るか、1 つのコンテナーにすることができます。 サンプル アプリでは、共有されるリソースのために `SharedResource` というダミー クラスを使用しています。
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 一部の開発者は、`Startup` クラスを使用してグローバル文字列または共有文字列を格納します。 下のサンプルでは、`InfoController` と `SharedResource` のローカライザーが使用されています。
 

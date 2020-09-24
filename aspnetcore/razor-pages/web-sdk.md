@@ -16,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 163bc2679deda449f97cb4e50da1093e6b1edda4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: fdc2991060050c813efb6dc895cf73ff876bae29
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634814"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722502"
 ---
 # <a name="aspnet-core-web-sdk"></a>ASP.NET Core Web SDK
 
 ### <a name="overview"></a>概要
 
-`Microsoft.NET.Sdk.Web` は、ASP.NET Core アプリをビルドするための [MSBuild プロジェクト SDK](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) です。 この SDK を使用せずに ASP.NET Core アプリをビルドすることもできますが、Web SDK は、
+`Microsoft.NET.Sdk.Web` は、ASP.NET Core アプリをビルドするための [MSBuild プロジェクト SDK](/visualstudio/msbuild/how-to-use-project-sdk) です。 この SDK を使用せずに ASP.NET Core アプリをビルドすることもできますが、Web SDK は、
 
 * 最上級のエクスペリエンスを提供するために作成されています。
 * ほとんどのユーザーに推奨されるターゲットです。

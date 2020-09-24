@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: d922e3a4ad3660bdd1c70dc262acc2f87bdd4214
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 78eb466fcfeb130e411df490f033114b3fdebeef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627001"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722632"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>パート 4、ASP.NET Core の Razor ページと EF Core の移行
 
@@ -132,7 +132,7 @@ context.Database.EnsureCreated();
 
 ## <a name="applying-migrations-in-production"></a>運用環境で移行を適用する
 
-実稼働アプリでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を呼び出さ**ない**ことをお勧めします。 `Migrate` は、サーバー ファームに展開されているアプリから呼び出さないでください。 アプリが複数のサーバー インスタンスにスケールアウトされている場合は、確実にデータベース スキーマの更新が複数のサーバーから行われたり、読み取り/書き込みアクセスと競合したりしないようにするのは困難です。
+実稼働アプリでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を呼び出さ**ない**ことをお勧めします。 `Migrate` は、サーバー ファームに展開されているアプリから呼び出さないでください。 アプリが複数のサーバー インスタンスにスケールアウトされている場合は、確実にデータベース スキーマの更新が複数のサーバーから行われたり、読み取り/書き込みアクセスと競合したりしないようにするのは困難です。
 
 データベースの移行は、展開の一部として制御された方法で行う必要があります。 実稼働データベースの移行には次の方法があります。
 
@@ -295,7 +295,7 @@ context.Database.EnsureCreated();
 
 ## <a name="applying-migrations-in-production"></a>運用環境で移行を適用する
 
-実稼働アプリケーションでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を**呼び出さない**ことをお勧めします。 `Migrate` をサーバー ファームのアプリから呼び出すことはできません。 たとえば、アプリがスケールアウト (アプリの複数のインスタンスを実行する) を使用してクラウドに展開されている場合があります。
+実稼働アプリケーションでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を**呼び出さない**ことをお勧めします。 `Migrate` をサーバー ファームのアプリから呼び出すことはできません。 たとえば、アプリがスケールアウト (アプリの複数のインスタンスを実行する) を使用してクラウドに展開されている場合があります。
 
 データベースの移行は、展開の一部として制御された方法で行う必要があります。 実稼働データベースの移行には次の方法があります。
 

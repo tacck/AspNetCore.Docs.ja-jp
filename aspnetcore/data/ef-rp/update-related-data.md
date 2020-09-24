@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630862"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722820"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
 
@@ -46,7 +46,7 @@ Course/Create および Edit ページのスキャフォールディング コ�
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
 
-上記のコードは、部門名のリストを格納するための [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) を作成します。 `selectedDepartment` を指定すると、`SelectList` でその部門が選択されます。
+上記のコードは、部門名のリストを格納するための [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) を作成します。 `selectedDepartment` を指定すると、`SelectList` でその部門が選択されます。
 
 Create と Edit のページ モデル クラスは、`DepartmentNamePageModel` から派生します。
 
@@ -111,7 +111,7 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Course/Details および Delete ページを更新する
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) は、追跡が必要ない場合に、パフォーマンスを向上させることができます。
+[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) は、追跡が必要ない場合に、パフォーマンスを向上させることができます。
 
 ### <a name="update-the-course-page-models"></a>Course ページ モデルを更新する
 
@@ -263,7 +263,7 @@ Courses/Create ページと Courses/Edit ページにはそれぞれ部門名の
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-上記のコードは、部門名のリストを格納するための [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) を作成します。 `selectedDepartment` を指定すると、`SelectList` でその部門が選択されます。
+上記のコードは、部門名のリストを格納するための [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) を作成します。 `selectedDepartment` を指定すると、`SelectList` でその部門が選択されます。
 
 Create と Edit のページ モデル クラスは、`DepartmentNamePageModel` から派生します。
 
@@ -328,7 +328,7 @@ Create ページをテストします。 Create ページには、部門 ID で�
 
 ## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a>AsNoTracking を Details (詳細) と Delete (削除) のページ モデルに追加する
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) は、追跡が必要ない場合に、パフォーマンスを向上させることができます。 `AsNoTracking` を Details と Delete のページ モデルに追加します。 次のコードは、更新された Delete ページ モデルを示しています。
+[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) は、追跡が必要ない場合に、パフォーマンスを向上させることができます。 `AsNoTracking` を Details と Delete のページ モデルに追加します。 次のコードは、更新された Delete ページ モデルを示しています。
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 

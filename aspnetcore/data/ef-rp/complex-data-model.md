@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 3fab57df84e6902a8041940939c067da41f1674c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 55269c6985534b49cc2567b2d197e46d9b7b1fd7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629731"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722528"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>パート 5、ASP.NET Core の Razor ページと EF Core - データ モデル
 
@@ -70,7 +70,7 @@ ms.locfileid: "88629731"
 
 学生の登録日について、日付のみが関係しますが、現在はすべての Web ページに日付と共に時刻が表示されています。 データ注釈属性を使用すれば、1 つのコードを変更するだけで、データが表示されるすべてのページの表示形式を修正できます。 
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 属性では、データベースの組み込み型よりも具体的なデータ型を指定します。 ここでは、日付と時刻ではなく、日付のみを表示する必要があります。 [DataType 列挙型](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)は、Date、Time、PhoneNumber、Currency、EmailAddress など、多くのデータ型のために用意されています。また、`DataType` 属性を使用して、アプリで型固有の機能を自動的に提供することもできます。 次に例を示します。
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) 属性では、データベースの組み込み型よりも具体的なデータ型を指定します。 ここでは、日付と時刻ではなく、日付のみを表示する必要があります。 [DataType 列挙型](/dotnet/api/system.componentmodel.dataannotations.datatype)は、Date、Time、PhoneNumber、Currency、EmailAddress など、多くのデータ型のために用意されています。また、`DataType` 属性を使用して、アプリで型固有の機能を自動的に提供することもできます。 次に例を示します。
 
 * `mailto:` リンクは `DataType.EmailAddress` に対して自動的に作成されます。
 * ほとんどのブラウザーでは、`DataType.Date` に日付セレクターが提供されます。
@@ -100,11 +100,11 @@ ms.locfileid: "88629731"
 [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
 ```
 
-データ検証規則と検証エラー メッセージは、属性を使用して指定できます。 [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute?view=netframework-4.7.1) 属性では、データ フィールドで使用できる最小文字長と最大文字長を指定します。 示されているコードでは、名前で使用可能な文字数が 50 字以下に制限されます。 文字列の最小長を設定する例は、[後で](#the-required-attribute)示します。
+データ検証規則と検証エラー メッセージは、属性を使用して指定できます。 [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute) 属性では、データ フィールドで使用できる最小文字長と最大文字長を指定します。 示されているコードでは、名前で使用可能な文字数が 50 字以下に制限されます。 文字列の最小長を設定する例は、[後で](#the-required-attribute)示します。
 
 また、`StringLength` 属性ではクライアント側とサーバー側の検証も提供されます。 最小値は、データベース スキーマに影響しません。
 
-`StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) 属性は、入力に制限を適用するために使用できます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
+`StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute) 属性は、入力に制限を適用するために使用できます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
 
 ```csharp
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
@@ -760,7 +760,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 属性では、データベースの組み込み型よりも具体的なデータ型を指定します。 ここでは、日付と時刻ではなく、日付のみを表示する必要があります。 [DataType 列挙型](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)は、Date、Time、PhoneNumber、Currency、EmailAddress など、多くのデータ型のために用意されています。また、`DataType` 属性を使用して、アプリで型固有の機能を自動的に提供することもできます。 次に例を示します。
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) 属性では、データベースの組み込み型よりも具体的なデータ型を指定します。 ここでは、日付と時刻ではなく、日付のみを表示する必要があります。 [DataType 列挙型](/dotnet/api/system.componentmodel.dataannotations.datatype)は、Date、Time、PhoneNumber、Currency、EmailAddress など、多くのデータ型のために用意されています。また、`DataType` 属性を使用して、アプリで型固有の機能を自動的に提供することもできます。 次に例を示します。
 
 * `mailto:` リンクは `DataType.EmailAddress` に対して自動的に作成されます。
 * ほとんどのブラウザーでは、`DataType.Date` に日付セレクターが提供されます。
@@ -790,13 +790,13 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 ### <a name="the-stringlength-attribute"></a>StringLength 属性
 
-データ検証規則と検証エラー メッセージは、属性を使用して指定できます。 [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute?view=netframework-4.7.1) 属性では、データ フィールドで使用できる最小文字長と最大文字長を指定します。 また、`StringLength` 属性ではクライアント側とサーバー側の検証も提供されます。 最小値は、データベース スキーマに影響しません。
+データ検証規則と検証エラー メッセージは、属性を使用して指定できます。 [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute) 属性では、データ フィールドで使用できる最小文字長と最大文字長を指定します。 また、`StringLength` 属性ではクライアント側とサーバー側の検証も提供されます。 最小値は、データベース スキーマに影響しません。
 
 `Student` モデルを次のコードで更新します。
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_StringLength&highlight=10,12)]
 
-上のコードでは、名前で使用可能な文字数を 50 に制限します。 `StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) 属性は、入力に制限を適用するために使用されます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
+上のコードでは、名前で使用可能な文字数を 50 に制限します。 `StringLength` 属性では、ユーザーが名前に空白を入力しないようにすることはできません。 [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute) 属性は、入力に制限を適用するために使用されます。 たとえば、次のコードでは、最初の文字を大文字にし、残りの文字をアルファベット順にすることを要求します。
 
 ```csharp
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]

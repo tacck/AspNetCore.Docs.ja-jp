@@ -2,8 +2,8 @@
 
 ## <a name="visual-studio-help"></a>Visual Studio ヘルプ
 
-* [Visual Studio を使用した C# コードのデバッグについて理解する](https://docs.microsoft.com/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
-* [Visual Studio IDE へようこそ](https://docs.microsoft.com/visualstudio/ide/visual-studio-ide?view=vs-2017)
+* [Visual Studio を使用した C# コードのデバッグについて理解する](/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
+* [Visual Studio IDE へようこそ](/visualstudio/ide/visual-studio-ide?view=vs-2017)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -22,7 +22,7 @@
 
 ## <a name="visual-studio-for-mac-help"></a>Visual Studio for Mac のヘルプ
 
-* [Visual Studio for Mac ツアー](https://docs.microsoft.com/visualstudio/mac/ide-tour)
-* [Visual Studio for Mac の概要](https://docs.microsoft.com/visualstudio/mac/)
+* [Visual Studio for Mac ツアー](/visualstudio/mac/ide-tour)
+* [Visual Studio for Mac の概要](/visualstudio/mac/)
 
 ---
