@@ -5,7 +5,7 @@ description: MessagePack ハブプロトコルを ASP.NET Core に追加 SignalR
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 09/24/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: ab9bd11e37182f5b24db5595d5d050f4cc0e32da
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 15ae8911e2ffba43c7bb885efd153d8b6803bc2a
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626650"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393679"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core には、の MessagePack ハブプロトコルを使用します。 SignalR
 
@@ -72,6 +72,9 @@ services.AddSignalR()
 .NET クライアントで MessagePack を有効にするには、パッケージをインストール `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` し、でを呼び出し `AddMessagePackProtocol` `HubConnectionBuilder` ます。
 
 ```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+
 var hubConnection = new HubConnectionBuilder()
                         .WithUrl("/chathub")
                         .AddMessagePackProtocol()
@@ -184,7 +187,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 この制限の詳細については、「GitHub issue [aspnet/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937)」を参照してください。
 
-## <a name="related-resources"></a>関連リソース
+## <a name="related-resources"></a>関連資料
 
 * [作業の開始](xref:tutorials/signalr)
 * [.NET クライアント](xref:signalr/dotnet-client)
@@ -226,9 +229,11 @@ services.AddSignalR()
 ```
 
 > [!WARNING]
-> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf)を確認し、推奨される修正プログラムを適用することを強くお勧めします。 たとえば、 `MessagePackSecurity.Active` 静的プロパティをに設定し `MessagePackSecurity.UntrustedData` ます。 を設定するには、 `MessagePackSecurity.Active` [バージョンの messagepack の 1.9. x](https://www.nuget.org/packages/MessagePack/1.9.3)を手動でインストールする必要があります。 `MessagePack`1.9. x のアップグレードのバージョンが SignalR 使用する。 `MessagePackSecurity.Active`がに設定されていない場合 `MessagePackSecurity.UntrustedData` 、悪意のあるクライアントによってサービス拒否が発生する可能性があります。 `MessagePackSecurity.Active`次の `Program.Main` コードに示すように、でを設定します。
+> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf)を確認し、推奨される修正プログラムを適用することを強くお勧めします。 たとえば、 `MessagePackSecurity.Active` 静的プロパティをに設定し `MessagePackSecurity.UntrustedData` ます。 を設定するには、 `MessagePackSecurity.Active` [バージョンの messagepack の 1.9. x](https://www.nuget.org/packages/MessagePack/1.9.3)を手動でインストールする必要があります。 `MessagePack`1.9. x のアップグレードのバージョンが SignalR 使用する。 `MessagePack` バージョン2.x では、互換性に影響する変更が導入され、バージョン3.1 以前と互換性がありません SignalR 。 `MessagePackSecurity.Active`がに設定されていない場合 `MessagePackSecurity.UntrustedData` 、悪意のあるクライアントによってサービス拒否が発生する可能性があります。 `MessagePackSecurity.Active`次の `Program.Main` コードに示すように、でを設定します。
 
 ```csharp
+using MessagePack;
+
 public static void Main(string[] args)
 {
   MessagePackSecurity.Active = MessagePackSecurity.UntrustedData;
@@ -247,6 +252,9 @@ public static void Main(string[] args)
 .NET クライアントで MessagePack を有効にするには、パッケージをインストール `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` し、でを呼び出し `AddMessagePackProtocol` `HubConnectionBuilder` ます。
 
 ```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+
 var hubConnection = new HubConnectionBuilder()
                         .WithUrl("/chathub")
                         .AddMessagePackProtocol()
@@ -359,7 +367,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 この制限の詳細については、「GitHub issue [aspnet/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937)」を参照してください。
 
-## <a name="related-resources"></a>関連リソース
+## <a name="related-resources"></a>関連資料
 
 * [作業の開始](xref:tutorials/signalr)
 * [.NET クライアント](xref:signalr/dotnet-client)
@@ -404,6 +412,8 @@ services.AddSignalR()
 > [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf)を確認し、推奨される修正プログラムを適用することを強くお勧めします。 たとえば、 `MessagePackSecurity.Active` 静的プロパティをに設定し `MessagePackSecurity.UntrustedData` ます。 を設定するには、 `MessagePackSecurity.Active` [バージョンの messagepack の 1.9. x](https://www.nuget.org/packages/MessagePack/1.9.3)を手動でインストールする必要があります。 `MessagePack`1.9. x のアップグレードのバージョンが SignalR 使用する。 `MessagePackSecurity.Active`がに設定されていない場合 `MessagePackSecurity.UntrustedData` 、悪意のあるクライアントによってサービス拒否が発生する可能性があります。 `MessagePackSecurity.Active`次の `Program.Main` コードに示すように、でを設定します。
 
 ```csharp
+using MessagePack;
+
 public static void Main(string[] args)
 {
   MessagePackSecurity.Active = MessagePackSecurity.UntrustedData;
@@ -422,6 +432,9 @@ public static void Main(string[] args)
 .NET クライアントで MessagePack を有効にするには、パッケージをインストール `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` し、でを呼び出し `AddMessagePackProtocol` `HubConnectionBuilder` ます。
 
 ```csharp
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
+
 var hubConnection = new HubConnectionBuilder()
                         .WithUrl("/chathub")
                         .AddMessagePackProtocol()
@@ -534,7 +547,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 この制限の詳細については、「GitHub issue [aspnet/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937)」を参照してください。
 
-## <a name="related-resources"></a>関連リソース
+## <a name="related-resources"></a>関連資料
 
 * [作業の開始](xref:tutorials/signalr)
 * [.NET クライアント](xref:signalr/dotnet-client)

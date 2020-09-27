@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e451d511ab7791a05024d88635d8005132ad4edd
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009701"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393926"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core でのコントローラー アクションへのルーティング
 
@@ -277,7 +277,7 @@ REST Api では、属性ルーティングを使用して、アプリの機能�
 
 前のコードで <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> は、 `UseEndpoints` 属性ルーティングコントローラーをマップするために、内でが呼び出されます。
 
-次に例を示します。
+次の例では
 
 * 上記の `Configure` メソッドが使用されます。
 * `HomeController` 既定の従来のルートと同様の Url のセットと一致 `{controller=Home}/{action=Index}/{id?}` します。
@@ -353,7 +353,7 @@ ASP.NET Core には、次のルートテンプレートがあります。
 上のコードでは以下の操作が行われます。
 
 * 各アクションには属性が含まれてい `[HttpGet]` ます。これにより、一致する HTTP GET 要求のみが制限されます。
-* アクションには `GetProduct` テンプレートが含まれ `"{id}"` ているため、 `id` コントローラーのテンプレートに追加され `"api/[controller]"` ます。 メソッドテンプレートは `"api/[controller]/"{id}""` です。 したがって、このアクションでは、の GET 要求のみが、、、などの形式で一致 `/api/test2/xyz` `/api/test2/123` `/api/test2/{any string}` します。
+* アクションには `GetProduct` テンプレートが含まれ `"{id}"` ているため、 `id` コントローラーのテンプレートに追加され `"api/[controller]"` ます。 メソッドテンプレートは `"api/[controller]/"{id}""` です。 したがって、このアクションは、フォーム、、などの GET 要求のみと一致 `/api/test2/xyz` `/api/test2/123` `/api/test2/{any string}` します。
   [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet2)]
 * `GetIntProduct`アクションには、テンプレートが含まれてい `"int/{id:int}")` ます。 `:int`テンプレートの部分では、 `id` 整数に変換できる文字列にルート値を制限します。 GET 要求 `/api/test2/int/abc` :
   * このアクションと一致しません。
@@ -1410,7 +1410,7 @@ MVC アプリケーションでは、規則ルーティングと属性ルーテ�
 
 ## <a name="complex-segments"></a>複雑なセグメント
 
-複雑なセグメント (たとえば、`[Route("/dog{token}cat")]`) は、右から左にリテラルを最短の方法で照合することによって処理されます。 説明については、[ソース コード](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296)をご覧ください。 詳しくは、[こちらの懸案事項](https://github.com/dotnet/AspNetCore.Docs/issues/8197)をご覧ください。
+複雑なセグメント (たとえば、`[Route("/dog{token}cat")]`) は、右から左にリテラルを最短の方法で照合することによって処理されます。 説明については、[ソース コード](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296)をご覧ください。 詳細については、 [この問題](https://github.com/dotnet/AspNetCore.Docs/issues/8197)を参照してください。
 
 <a name="routing-url-gen-ref-label"></a>
 

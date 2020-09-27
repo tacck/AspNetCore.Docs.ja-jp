@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633982"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393887"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core でのモデル バインド
 
@@ -92,7 +92,7 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
 
-## <a name="sources"></a>ソース
+## <a name="sources"></a>変換元
 
 既定では、モデル バインドでは HTTP 要求内の次のソースからキーと値のペアの形式でデータが取得されます。
 
@@ -360,7 +360,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
   添え字番号 (... [0] ... [1] ...) を使用するデータ フォーマットでは、確実にそれらがゼロから始まる連続した番号になるようにする必要があります。 添え字の番号付けで欠落している番号がある場合、欠落している番号の後の項目はすべて無視されます。 たとえば、添え字が 0、1 の並びではなく、0、2 の並びで振られている場合、2 番目の項目は無視されます。
 
-## <a name="dictionaries"></a>ディクショナリ
+## <a name="dictionaries"></a>辞書
 
 `Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 
@@ -393,6 +393,47 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
   * selectedCourses["1050"]="Chemistry"
   * selectedCourses["2000"]="Economics"
+  
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="constructor-binding-and-record-types"></a>コンストラクターのバインドとレコードの種類
+
+モデルバインドでは、複合型にパラメーターなしのコンストラクターが含まれている必要があります。 `System.Text.Json`と `Newtonsoft.Json` ベースの入力フォーマッタはどちらも、パラメーターなしのコンストラクターを持たないクラスの逆シリアル化をサポートしています。 
+
+C# 9 では、レコードの種類が導入されています。これは、ネットワーク上でデータを簡潔に表現するための優れた方法です。 ASP.NET Core は、1つのコンストラクターを使用して、モデルバインドとレコードの種類の検証のサポートを追加します。
+
+```csharp
+public record Person([Required] string Name, [Range(0, 150)] int Age);
+
+public class PersonController
+{
+   public IActionResult Index() => View();
+
+   [HttpPost]
+   public IActionResult Index(Person person)
+   {
+       ...
+   }
+}
+```
+
+`Person/Index.cshtml`:
+
+```cshtml
+@model Person
+
+Name: <input asp-for="Name" />
+...
+Age: <input asp-for="Age" />
+```
+
+レコードの種類を検証するとき、ランタイムは、プロパティではなく、パラメーターに対して明示的に検証メタデータを検索します。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 <a name="glob"></a>
 
@@ -512,6 +553,7 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 * <xref:mvc/advanced/custom-model-binding>
 
 ::: moniker-end
+
 ::: moniker range="< aspnetcore-3.0"
 
 この記事では、モデル バインドとは何か、そのしくみ、その動作のカスタマイズ方法を説明します。
@@ -578,7 +620,7 @@ ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは 
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
 
-## <a name="sources"></a>ソース
+## <a name="sources"></a>変換元
 
 既定では、モデル バインドでは HTTP 要求内の次のソースからキーと値のペアの形式でデータが取得されます。
 
@@ -846,7 +888,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
   添え字番号 (... [0] ... [1] ...) を使用するデータ フォーマットでは、確実にそれらがゼロから始まる連続した番号になるようにする必要があります。 添え字の番号付けで欠落している番号がある場合、欠落している番号の後の項目はすべて無視されます。 たとえば、添え字が 0、1 の並びではなく、0、2 の並びで振られている場合、2 番目の項目は無視されます。
 
-## <a name="dictionaries"></a>ディクショナリ
+## <a name="dictionaries"></a>辞書
 
 `Dictionary` ターゲットの場合、モデル バインドでは *parameter_name* または *property_name* との一致が探索されます。 一致が見つからない場合は、サポートされているいずれかの形式がプレフィックスなしで探索されます。 次に例を示します。
 

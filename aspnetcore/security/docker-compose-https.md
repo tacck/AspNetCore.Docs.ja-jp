@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 71ead7dcce32dab090a9b0b3573aa855d00fa7f1
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: cd46fdcbe10dc0b7829fbe7eaef821889f395df4
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722762"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393705"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>HTTPS 経由の Docker Compose を使用した ASP.NET Core イメージのホスト
 
@@ -36,7 +36,7 @@ ms.locfileid: "90722762"
 
 このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce) 以降の [docker クライアント](https://www.docker.com/products/docker)が必要です。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>[前提条件]
 
 このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 以降が必要です。
 
@@ -74,7 +74,7 @@ dotnet dev-certs https --trust
 
 次の内容を含む _docker-compose.yml_ ファイルを作成します。
 
-```json
+```yaml
 version: '3.4'
 
 services:
@@ -114,7 +114,7 @@ dotnet dev-certs https --trust
 
 次の内容を含む _docker-compose.yml_ ファイルを作成します。
 
-```json
+```yaml
 version: '3.4'
 
 services:
@@ -152,7 +152,7 @@ dotnet dev-certs https --trust
 
 次の内容を含む _docker-compose.yml_ ファイルを作成します。
 
-```json
+```yaml
 version: '3.4'
 
 services:

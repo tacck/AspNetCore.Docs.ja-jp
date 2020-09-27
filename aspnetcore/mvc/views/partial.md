@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630628"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393653"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core の部分ビュー
 
 作成者: [Steve Smith](https://ardalis.com/)、[Maher JENDOUBI](https://twitter.com/maherjend)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Scott Sauber](https://twitter.com/scottsauber)
 
-部分ビューは、 [Razor](xref:mvc/views/razor) 別のマークアップファイルの表示出力*内*に HTML 出力を表示するマークアップファイル (*cshtml*) です。
+部分ビューは、 [Razor](xref:mvc/views/razor) *.cshtml* [`@page`](xref:mvc/views/razor#page) 別のマークアップファイルの表示出力*内で*HTML 出力をレンダリングするディレクティブのないマークアップファイル (cshtml) です。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -57,7 +57,7 @@ ms.locfileid: "88630628"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-部分ビューは、 *Views*フォルダー (MVC) または*pages*フォルダー (ページ) 内に保持されている、 *cshtml*マークアップファイルです。 Razor
+部分ビューは、 *.cshtml* [`@page`](xref:mvc/views/razor#page) *Views*フォルダー (MVC) または*pages*フォルダー ( Razor ページ) 内でディレクティブが保持されていない、cshtml マークアップファイルです。
 
 ASP.NET Core MVC では、コントローラーの <xref:Microsoft.AspNetCore.Mvc.ViewResult> が、ビューまたは部分ビューのどちらかを返すことができます。 Razorページでは、は <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> オブジェクトとして表される部分ビューを返すことができ <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> ます。 部分ビューの参照と表示については、「[部分ビューを参照する](#reference-a-partial-view)」セクションで説明します。
 
@@ -168,7 +168,7 @@ ASP.NET Core 2.2 以降では、別の方法としてハンドラー メソッ�
 <partial name="../Account/_PartialName.cshtml" />
 ```
 
-詳細については、<xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper> を参照してください。
+詳細については、「<xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>」を参照してください。
 
 ::: moniker-end
 
