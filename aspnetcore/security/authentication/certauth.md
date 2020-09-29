@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 54780e2d67c70d945fd875c41c8d6483aa358bbf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 57d46e34993148943b1e9680a372405be9c80605
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627196"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424205"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -47,7 +47,7 @@ Web アプリで、 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNet
 
 認証が失敗した場合、このハンドラーは、 `403 (Forbidden)` 予期したとおりに応答を返し `401 (Unauthorized)` ます。 これは、最初の TLS 接続中に認証が行われるということです。 ハンドラーに到達するまでには遅すぎます。 匿名接続から証明書を使用して接続をアップグレードする方法はありません。
 
-また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 次に例を示します。
+また `app.UseAuthentication();` 、メソッドにを追加 `Startup.Configure` します。 それ以外の場合、は `HttpContext.User` `ClaimsPrincipal` 証明書から作成されるように設定されません。 たとえば、次のように入力します。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -198,7 +198,7 @@ services.AddAuthentication(
             {
                 var validationService =
                     context.HttpContext.RequestServices
-                        .GetService<ICertificateValidationService>();
+                        .GetRequiredService<ICertificateValidationService>();
                 
                 if (validationService.ValidateCertificate(
                     context.ClientCertificate))
@@ -651,7 +651,7 @@ ASP.NET Core 5 preview 7 以降では、オプションのクライアント証�
 * クライアント証明書を必要としていない web アプリへの要求の場合:
   * クライアント証明書で保護されたサブドメインを使用して同じページにリダイレクトします。
   * たとえば、にリダイレクト `myClient.contoso.com/requestedPage` します。 への要求は `myClient.contoso.com/requestedPage` とは異なるホスト名であるため、 `contoso.com/requestedPage` クライアントは別の接続を確立し、クライアント証明書を提供します。
-  * 詳細については、<xref:security/authorization/introduction> を参照してください。
+  * 詳細については、「<xref:security/authorization/introduction>」を参照してください。
 
 [この GitHub ディスカッション](https://github.com/dotnet/AspNetCore.Docs/issues/18720)の問題では、オプションのクライアント証明書に関する質問、コメント、その他のフィードバックを残しておきます。
 

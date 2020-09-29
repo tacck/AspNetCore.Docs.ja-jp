@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 82ed4cc2ce47d3bd85ca9c2ba2bbeb075eaefcef
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635334"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424244"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core でのポリシーベースの承認
 
@@ -122,13 +122,13 @@ public void ConfigureServices(IServiceCollection services)
 
 ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages) 」を参照してください。
 
-ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 たとえば、次のように入力します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 たとえば、次のように入力します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -136,7 +136,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ポリシーは Razor 、 [承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用できます。
 
-## <a name="requirements"></a>必要条件
+## <a name="requirements"></a>要件
 
 承認要件とは、ポリシーが現在のユーザープリンシパルを評価するために使用できるデータパラメーターのコレクションです。 "AtLeast21" ポリシーでは、最小有効期間を1つのパラメーターとして指定する必要が &mdash; あります。 要件には、空のマーカーインターフェイスである [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)が実装されています。 パラメーター化された最小年齢要件は、次のように実装できます。
 
@@ -177,7 +177,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="handler-registration"></a>ハンドラーの登録
 
-ハンドラーは、構成中にサービスコレクションに登録されます。 次に例を示します。
+ハンドラーは、構成中にサービスコレクションに登録されます。 たとえば、次のように入力します。
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -193,7 +193,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * エラーを保証するには、他の要件ハンドラーが成功したとしても、を呼び出し `context.Fail` ます。
 
-ハンドラーが `context.Succeed` またはを呼び出すと `context.Fail` 、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に設定すると `false` 、 [Invokeハンドラの terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) プロパティ (ASP.NET Core 1.1 以降で使用可能) が呼び出されたときにハンドラーの実行をショートサーキットし `context.Fail` ます。 `InvokeHandlersAfterFailure` 既定値は `true` です。この場合、すべてのハンドラーが呼び出されます。
+ハンドラーが `context.Succeed` またはを呼び出すと `context.Fail` 、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に設定すると `false` 、が呼び出されたときに、 [Invokeハンドラ Saf terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) プロパティによってハンドラーの実行がショートサーキット `context.Fail` されます。 `InvokeHandlersAfterFailure` 既定値は `true` です。この場合、すべてのハンドラーが呼び出されます。
 
 > [!NOTE]
 > 認証ハンドラーは、認証が失敗した場合でも呼び出されます。
@@ -230,7 +230,7 @@ public void ConfigureServices(IServiceCollection services)
 
 `HandleRequirementAsync`承認ハンドラーに実装するメソッドには、とという2つのパラメーターがあります。 `AuthorizationHandlerContext` `TRequirement` MVC やなどのフレームワークは SignalR 、のプロパティに任意のオブジェクトを追加して、追加情報を渡すことが `Resource` `AuthorizationHandlerContext` できます。
 
-エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。 エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。 次に例を示します。
+エンドポイントルーティングを使用する場合、承認は通常、承認ミドルウェアによって処理されます。 この場合、 `Resource` プロパティはのインスタンス <xref:Microsoft.AspNetCore.Http.Endpoint> です。 エンドポイントを使用して、ルーティング先の基になるリソースを調べることができます。 たとえば、次のように入力します。
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -358,19 +358,19 @@ public void ConfigureServices(IServiceCollection services)
 
 ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページにポリシーを適用する](#apply-policies-to-razor-pages) 」を参照してください。
 
-ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは、ポリシー名を持つ属性を使用して、コントローラーに適用され `[Authorize]` ます。 たとえば、次のように入力します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>ページにポリシーを適用する Razor
 
-ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 次に例を示します。
+ポリシーは Razor 、ポリシー名を持つ属性を使用して、ページに適用され `[Authorize]` ます。 たとえば、次のように入力します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
 ポリシーは Razor 、 [承認規則](xref:security/authorization/razor-pages-authorization)を使用してページに適用することもできます。
 
-## <a name="requirements"></a>必要条件
+## <a name="requirements"></a>要件
 
 承認要件とは、ポリシーが現在のユーザープリンシパルを評価するために使用できるデータパラメーターのコレクションです。 "AtLeast21" ポリシーでは、最小有効期間を1つのパラメーターとして指定する必要が &mdash; あります。 要件には、空のマーカーインターフェイスである [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)が実装されています。 パラメーター化された最小年齢要件は、次のように実装できます。
 
@@ -411,7 +411,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="handler-registration"></a>ハンドラーの登録
 
-ハンドラーは、構成中にサービスコレクションに登録されます。 次に例を示します。
+ハンドラーは、構成中にサービスコレクションに登録されます。 たとえば、次のように入力します。
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
@@ -427,7 +427,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * エラーを保証するには、他の要件ハンドラーが成功したとしても、を呼び出し `context.Fail` ます。
 
-ハンドラーが `context.Succeed` またはを呼び出すと `context.Fail` 、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に設定すると `false` 、 [Invokeハンドラの terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) プロパティ (ASP.NET Core 1.1 以降で使用可能) が呼び出されたときにハンドラーの実行をショートサーキットし `context.Fail` ます。 `InvokeHandlersAfterFailure` 既定値は `true` です。この場合、すべてのハンドラーが呼び出されます。
+ハンドラーが `context.Succeed` またはを呼び出すと `context.Fail` 、他のすべてのハンドラーが呼び出されます。 これにより、別のハンドラーが要件を正常に検証または失敗した場合でも、ログ記録などの副作用を生成することができます。 に設定すると `false` 、が呼び出されたときに、 [Invokeハンドラ Saf terfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) プロパティによってハンドラーの実行がショートサーキット `context.Fail` されます。 `InvokeHandlersAfterFailure` 既定値は `true` です。この場合、すべてのハンドラーが呼び出されます。
 
 > [!NOTE]
 > 認証ハンドラーは、認証が失敗した場合でも呼び出されます。
