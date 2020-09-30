@@ -5,7 +5,7 @@ description: Blazor でフォームとフィールドの検証シナリオを使
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/18/2020
+ms.date: 09/17/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 5efea1728a1460c728a0d90002fb1504fe5b3bbb
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 63cda3348073418e95dd9a0cbdb62e0b5f606383
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90593022"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721802"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -86,6 +86,7 @@ public class ExampleModel
 | --------------- | ------------------- |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| [`InputFile`](xref:blazor/file-uploads) | `<input type="file">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
 | [`InputRadio`](#radio-buttons) | `<input type="radio">` |
 | [`InputRadioGroup`](#radio-buttons) | `<input type="radio">` |
@@ -239,7 +240,7 @@ public class Starship
 * 検証結果に応じて、追加のコードが実行されます。 <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> に割り当てられたメソッドにビジネス ロジックを配置します。
 
 ```razor
-<EditForm EditContext="@editContext" OnSubmit="HandleSubmit">
+<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
 
     ...
 
@@ -1030,6 +1031,32 @@ private class CustomValidator : ValidationAttribute
 > [!NOTE]
 > <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> が `null`です。 `IsValid` メソッドでの検証に対する挿入サービスはサポートされていません。
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="custom-validation-class-attributes"></a>カスタム検証クラス属性
+
+カスタム検証クラス名は、[Bootstrap](https://getbootstrap.com/) などの CSS フレームワークと統合する場合に便利です。 カスタム検証クラス名を指定するには、`FieldCssClassProvider` から派生したクラスを作成し、そのクラスを <xref:Microsoft.AspNetCore.Components.Forms.EditContext> インスタンスに設定します。
+
+```csharp
+var editContext = new EditContext(model);
+editContext.SetFieldCssClassProvider(new MyFieldClassProvider());
+
+...
+
+private class MyFieldClassProvider : FieldCssClassProvider
+{
+    public override string GetFieldCssClass(EditContext editContext, 
+        in FieldIdentifier fieldIdentifier)
+    {
+        var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
+
+        return isValid ? "good field" : "bad field";
+    }
+}
+```
+
+::: moniker-end
+
 ### <a name="no-locblazor-data-annotations-validation-package"></a>Blazor データ注釈検証パッケージ
 
 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して検証エクスペリエンスのギャップを埋めるパッケージです。 パッケージは現在、*試験段階*です。
@@ -1085,7 +1112,7 @@ public class ShipDescription
     [Required]
     [StringLength(40, ErrorMessage = "Description too long (40 char).")]
     public string ShortDescription { get; set; }
-    
+
     [Required]
     [StringLength(240, ErrorMessage = "Description too long (240 char).")]
     public string LongDescription { get; set; }
@@ -1182,3 +1209,7 @@ public class ShipDescription
 ```csharp
 private ExampleModel exampleModel = new ExampleModel();
 ```
+
+## <a name="additional-resources"></a>その他の技術情報
+
+* <xref:blazor/file-uploads>

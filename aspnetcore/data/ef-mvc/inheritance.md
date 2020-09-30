@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 9a17a2ddbdac6b4fc6ba90804a31915d3b96d707
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 34c4ea28103b9eb12601b383a46091084391f120
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629185"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847599"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>チュートリアル: 継承を実装する - ASP.NET MVC と EF Core
 
@@ -62,6 +62,9 @@ School データ モデル内の `Instructor` および `Student` クラスに�
 1 つのデータベース テーブルからエンティティの継承構造を生成するこのパターンは、Table-per-Hierarchy (TPH) 継承と呼ばれます。
 
 代わりに、継承構造と同じように見えるデータベースを作成することもできます。 たとえば、Person テーブルに名前フィールドのみを含め、データ フィールドが含まれる別の Instructor テーブルと Student テーブルを使用できます。
+
+> [!WARNING]
+> Table Per Type (TPT) は EF Core 3.x ではサポートされていませんが、[EF Core 5.0](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan) で実装されています。
 
 ![Table-Per-Type 継承](inheritance/_static/tpt.png)
 

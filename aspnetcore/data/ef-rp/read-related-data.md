@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 41b2ce35a6910df7587af7ebabe8a4984cda6ae5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: dd00b9d7faf467857ec1e47f4cfb0296d84e5d3f
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634970"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847703"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>パート 6、ASP.NET Core の Razor ページと EF Core - 関連データの読み込み
 
@@ -63,7 +63,7 @@ EF Core がエンティティのナビゲーション プロパティに関連�
 
   ![明示的読み込みの例](read-related-data/_static/explicit-loading.png)
 
-* [遅延読み込み](/ef/core/querying/related-data#lazy-loading)。 [遅延読み込みがバージョン 2.1 内の EF Core に追加されました](/ef/core/querying/related-data#lazy-loading)。 エンティティが最初に読み込まれるときに、関連データは取得されません。 ナビゲーション プロパティに初めてアクセスすると、そのナビゲーション プロパティに必要なデータが自動的に取得されます。 初めてナビゲーション プロパティにアクセスされるたびに、クエリがデータベースに送信されます。
+* [遅延読み込み](/ef/core/querying/related-data#lazy-loading)。 エンティティが最初に読み込まれるときに、関連データは取得されません。 ナビゲーション プロパティに初めてアクセスすると、そのナビゲーション プロパティに必要なデータが自動的に取得されます。 初めてナビゲーション プロパティにアクセスされるたびに、クエリがデータベースに送信されます。 開発者が N + 1 パターンを使用して、親を読み込んで子を列挙する場合など、遅延読み込みでパフォーマンスが低下することがあります。
 
 ## <a name="create-course-pages"></a>Course ページの作成
 

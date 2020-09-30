@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: e98cfc5e95233ce4d1001ab1225fc15e5fd23733
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b69d60e7d0e24f6d3c8032b391c98a6cd1589305
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634502"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770182"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>チュートリアル: ASP.NET Core SignalR の概要
 
@@ -45,15 +45,15 @@ ms.locfileid: "88634502"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
@@ -67,7 +67,7 @@ ms.locfileid: "88634502"
 
 * **[新しいプロジェクトの構成]** ダイアログで、プロジェクトに *SignalRChat* という名前を付けて、 **[作成]** を選択します。
 
-* **[新しい ASP.NET Core Web アプリケーションの作成]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.0]** を選択します。 
+* **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** を選択します。 
 
 * Razor Pages を使用するプロジェクトを作成するには **[Web アプリケーション]** を選択し、次に **[作成]** を選択します。
 
@@ -90,7 +90,7 @@ ms.locfileid: "88634502"
 
 * **[.NET Core] > [アプリ] > [Web アプリケーション]** の順に選択し ( **[Web アプリケーション (Model-View-Controller)]** は選択しないでください)、 **[次へ]** を選択します。
 
-* **[ターゲット フレームワーク]** が **.NET Core 3.0** に設定されていることを確認してから、 **[次へ]** を選択します。
+* **[ターゲット フレームワーク]** が **.NET Core 3.1** に設定されていることを確認してから、 **[次へ]** を選択します。
 
 * プロジェクトに *SignalRChat* という名前を付けて、 **[作成]** を選択します。
 
@@ -98,7 +98,7 @@ ms.locfileid: "88634502"
 
 ## <a name="add-the-no-locsignalr-client-library"></a>SignalR クライアント ライブラリを追加する
 
-SignalR サーバー ライブラリは、ASP.NET Core 3.0 共有フレームワークに含まれています。 JavaScript クライアント ライブラリはプロジェクトに自動的に含まれません。 このチュートリアルでは、ライブラリ マネージャー (LibMan) を使用して *unpkg* からクライアント ライブラリを取得します。 unpkg は、npm (Node.js パッケージ マネージャー) で見つかるものすべてを配信できるコンテンツ配信ネットワーク (CDN) です。
+SignalR サーバー ライブラリは、ASP.NET Core 3.1 共有フレームワークに含まれています。 JavaScript クライアント ライブラリはプロジェクトに自動的に含まれません。 このチュートリアルでは、ライブラリ マネージャー (LibMan) を使用して *unpkg* からクライアント ライブラリを取得します。 unpkg は、npm (Node.js パッケージ マネージャー) で見つかるものすべてを配信できるコンテンツ配信ネットワーク (CDN) です。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 

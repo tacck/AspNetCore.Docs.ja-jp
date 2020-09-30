@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 6515e87845cc5aa101532c18711d175a73581bee
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90593048"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722710"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
@@ -33,7 +33,7 @@ ms.locfileid: "90593048"
 
 ## <a name="configure-grpc-client"></a>gRPC クライアントを構成する
 
-gRPC クライアントは、[ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。
+gRPC クライアントは、[ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。 たとえば、`Greeter` というサービスにより、サービスを呼び出すメソッドを含む `GreeterClient` 型が生成されます。
 
 gRPC クライアントはチャネルから作成されます。 まず `GrpcChannel.ForAddress` を使用してチャネルを作成し、次にそのチャネルを使用して、gRPC クライアントを作成します。
 

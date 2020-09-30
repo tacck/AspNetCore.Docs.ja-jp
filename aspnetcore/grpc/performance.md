@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: a0a1a6901e07fb0074ca403870378f267d3d4403
-ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
+ms.openlocfilehash: 4d50698b8c55f7fb3ef9a2c3102e73e046a22a9c
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89379446"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722846"
 ---
 # <a name="performance-best-practices-with-grpc"></a>gRPC を使用したパフォーマンスのベスト プラクティス
 
@@ -121,6 +121,12 @@ L7 (アプリケーション) プロキシは、L4 (トランスポート) プ�
 * [YARP: リバース プロキシ](https://microsoft.github.io/reverse-proxy/) - .NET で記述されたプレビューのオープン ソース プロキシ。
 
 ::: moniker range=">= aspnetcore-5.0"
+
+## <a name="inter-process-communication"></a>プロセス間通信
+
+クライアントとサービス間の gRPC 呼び出しは、通常、TCP ソケットを介して送信されます。 TCP はネットワーク経由の通信に適していますが、クライアントとサービスが同じコンピューター上にある場合は、[プロセス間通信 (IPC)](https://wikipedia.org/wiki/Inter-process_communication) の方が効率的です。
+
+同じマシン上のプロセス間の gRPC 呼び出しには、UNIX ドメイン ソケットや名前付きパイプなどのトランスポートを使用することを検討してください。 詳細については、「<xref:grpc/interprocess>」を参照してください。
 
 ## <a name="keep-alive-pings"></a>キープ アライブ ping
 
