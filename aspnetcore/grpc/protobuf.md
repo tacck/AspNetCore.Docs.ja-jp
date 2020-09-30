@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102667"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722697"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>.NET アプリの Protobuf メッセージを作成する
 
@@ -85,6 +85,10 @@ Protobuf では、さまざまなネイティブ スカラー値の型がサポ�
 | `string`      | `string`     |
 | `bytes`       | `ByteString` |
 
+スカラー値には常に既定値があり、`null` に設定することはできません。 この制約には、C# クラスである `string` および `ByteString` が含まれます。 `string` 既定値は空の文字列値で、`ByteString` 既定値は空のバイト値です。 これらを `null` に設定しようとすると、エラーがスローされます。
+
+[null 許容型のラッパー](#nullable-types)を使用して null 値をサポートできます。
+
 ### <a name="dates-and-times"></a>日付と時刻
 
 ネイティブ スカラー型では、NET の <xref:System.DateTimeOffset>、<xref:System.DateTime>、<xref:System.TimeSpan> と同等の、日付と時刻の値は提供されません。 これらの型は、いくつかの Protobuf の "*既知の型*" 拡張機能を使用して指定できます。 これらの拡張機能によって、サポート対象のプラットフォーム全体で複雑なフィールド型に対するコード生成とランタイム サポートが提供されます。
@@ -145,19 +149,42 @@ message Person {
 }
 ```
 
-Protobuf によって、生成されたメッセージ プロパティに対して .NET の null 許容型 (`int?` など) が使用されます。
+`wrappers.proto` 型は、生成されたプロパティでは公開されません。 Protobuf により、C# メッセージ内の適切な .NET null 許容型に自動的にマップされます。 たとえば、`google.protobuf.Int32Value` フィールドにより、`int?` プロパティが生成されます。 `string` や `ByteString` などの参照型プロパティは変更されませんが、`null` をエラーなしで割り当てることはできます。
 
 次の表に、ラッパーの型および同等の C# 型の完全な一覧を示します。
 
-| C# 型   | 既知の型のラッパー       |
-| --------- | ----------------------------- |
-| `bool?`   | `google.protobuf.BoolValue`   |
-| `double?` | `google.protobuf.DoubleValue` |
-| `float?`  | `google.protobuf.FloatValue`  |
-| `int?`    | `google.protobuf.Int32Value`  |
-| `long?`   | `google.protobuf.Int64Value`  |
-| `uint?`   | `google.protobuf.UInt32Value` |
-| `ulong?`  | `google.protobuf.UInt64Value` |
+| C# 型      | 既知の型のラッパー       |
+| ------------ | ----------------------------- |
+| `bool?`      | `google.protobuf.BoolValue`   |
+| `double?`    | `google.protobuf.DoubleValue` |
+| `float?`     | `google.protobuf.FloatValue`  |
+| `int?`       | `google.protobuf.Int32Value`  |
+| `long?`      | `google.protobuf.Int64Value`  |
+| `uint?`      | `google.protobuf.UInt32Value` |
+| `ulong?`     | `google.protobuf.UInt64Value` |
+| `string`     | `google.protobuf.StringValue` |
+| `ByteString` | `google.protobuf.BytesValue`  |
+
+### <a name="bytes"></a>バイト
+
+バイナリ ペイロードは、`bytes` スカラー値型の Protobuf でサポートされています。 C# で生成されたプロパティにより、プロパティの型として `ByteString` が使用されます。
+
+`ByteString.CopyFrom(byte[] data)` を使用して、バイト配列から新しいインスタンスを作成します。
+
+```csharp
+var data = await File.ReadAllBytesAsync(path);
+
+var payload = new PayloadResponse();
+payload.Data = ByteString.CopyFrom(data);
+```
+
+`ByteString` データは、`ByteString.Span` または `ByteString.Memory` を使用して直接アクセスされます。 または、`ByteString.ToByteArray()` を呼び出して、インスタンスをバイト配列に変換します。
+
+```csharp
+var payload = await client.GetPayload(new PayloadRequest());
+
+await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
+```
 
 ### <a name="decimals"></a>10 進数
 

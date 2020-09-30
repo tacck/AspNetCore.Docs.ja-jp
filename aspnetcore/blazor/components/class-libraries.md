@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 82969bf92965bfdeb1d1474ab47ca74ecbe6dd97
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: afd1bfffae11520a5d9abccc1d2ee4cf3a46a4bf
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080304"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722463"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor コンポーネント クラス ライブラリ
 
@@ -170,6 +170,43 @@ RCL には、静的アセットを含めることができます。 静的アセ
 ## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>複数のホスト型 Blazor アプリにコンポーネントと静的アセットを提供する
 
 詳細については、「<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>」を参照してください。
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a>Blazor WebAssembly のブラウザー互換性アナライザー
+
+Blazor WebAssembly アプリは完全な .NET API 領域を対象としていますが、ブラウザー サンドボックスの制約により、すべての .NET API が WebAssembly でサポートされているわけではありません。 サポートされていない API は、WebAssembly で実行すると <xref:System.PlatformNotSupportedException> がスローされます。 開発者が、アプリのターゲット プラットフォームでサポートされていない API をアプリで使用すると、プラットフォーム互換性アナライザーから警告を受け取ります。 Blazor WebAssembly アプリの場合、API がブラウザーでサポートされているかどうかが確認されるということです。 互換性アナライザーの .NET フレームワーク API に注釈を付けることは、進行中のプロセスであるため、現在、すべての .NET フレームワーク API に注釈が付けられるわけではありません。
+
+Blazor WebAssembly および Razor クラス ライブラリ プロジェクトでは、`SupportedPlatform` MSBuild 項目でサポートされているプラットフォームとして `browser` を追加することで、ブラウザーの互換性チェックを "*自動的*" に有効にします。 ライブラリ開発者は、`SupportedPlatform` 項目をライブラリのプロジェクト ファイルに手動で追加して、この機能を有効にすることができます。
+
+```xml
+<ItemGroup>
+  <SupportedPlatform Include="browser" />
+</ItemGroup>
+```
+
+ライブラリを作成する場合は、<xref:System.Runtime.Versioning.UnsupportedOSPlatformAttribute> に `browser` を指定して、ブラウザーで特定の API がサポートされていないことを示します。
+
+```csharp
+[UnsupportedOSPlatform("browser")]
+private static string GetLoggingDirectory()
+{
+    ...
+}
+```
+
+詳細については、「[特定のプラットフォームでサポートされていない API に注釈を付ける (dotnet/designs GitHub リポジトリ)」](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms)」参照してください。
+
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a>Blazor JavaScript の分離とオブジェクト参照
+
+Blazor により、標準 [JavaScript モジュール](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)で JavaScript の分離が有効にされます。 JavaScript の分離には、次のような利点があります。
+
+* インポートされる JavaScript によって、グローバル名前空間が汚染されなくなります。
+* ライブラリおよびコンポーネントのコンシューマーは、関連する JavaScript を手動でインポートする必要がありません。
+
+詳細については、「<xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references>」を参照してください。
+
+::: moniker-end
 
 ## <a name="build-pack-and-ship-to-nuget"></a>ビルド、パック、NuGet への配布
 

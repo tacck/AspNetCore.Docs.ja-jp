@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: d20740950f7ac56a3a3b2951b474151aaf9c6f5a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3f0e44bb374214328f589c6ca3952c6d7aab88d8
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631226"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770130"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>HTTP API を使用した gRPC サービスの比較
 
@@ -95,6 +95,7 @@ gRPC は以下のシナリオに適しています。
 * **ポイント ツー ポイントのリアルタイム通信**: gRPC での双方向ストリーミングのサポートは非常に優秀です。 gRPC サービスでは、ポーリングせずにメッセージをリアルタイムにプッシュできます。
 * **多言語環境**: gRPC ツールでは、一般的な開発言語がすべてサポートされているため、gRPC は多言語環境に適した選択肢となっています。
 * **ネットワーク面の制約がある環境**: gRPC メッセージは、軽量なメッセージ形式である Protobuf でシリアル化されます。 gRPC メッセージは常に、同等の JSON メッセージよりも小さくなります。
+* **プロセス間通信 (IPC)** :UNIX ドメイン ソケットや名前付きパイプなどの IPC トランスポートを gRPC と共に使用して、同じマシン上のアプリ間で通信を行うことができます。 詳細については、「<xref:grpc/interprocess>」を参照してください。
 
 ## <a name="grpc-weaknesses"></a>gRPC の短所
 
@@ -102,12 +103,15 @@ gRPC は以下のシナリオに適しています。
 
 現在のところ、ブラウザーから gRPC サービスを直接呼び出すことはできません。 gRPC は HTTP/2 の機能を多用しており、gRPC クライアントをサポートするための Web 要求を通して必要とされるレベルの制御を提供するブラウザーがありません。 たとえば、ブラウザーでは呼び出し元に、HTTP/2 を使用するよう求めたり、基になる HTTP/2 フレームへのアクセスを提供したりすることを許可していません。
 
-[gRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) は、ブラウザーで限定的な gRPC サポートを実現する、gRPC チームが提供する追加のテクノロジです。 gRPC-Web は、最新のブラウザーをすべてサポートする JavaScript クライアントと、サーバー上の gRPC-Web プロキシの2つの部分で構成されています。 gRPC-Web クライアントはプロキシを呼び出し、プロキシは gRPC 要求を gRPC サーバーに転送します。
+gRPC をブラウザー アプリに取り込むには、次の 2 つの一般的な方法があります。
 
-gRPC のすべての機能が gRPC-Web でサポートされているわけではありません。 クライアントと双方向ストリーミングはサポートされておらず、サーバー ストリーミングのサポートは限定的です。
+* [gRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) は、ブラウザーで gRPC サポートを実現する、gRPC チームが提供する追加のテクノロジです。 gRPC-Web を使用すると、ブラウザー アプリは gRPC の高パフォーマンスで低ネットワークの使用を活用できます。 gRPC のすべての機能が gRPC-Web でサポートされているわけではありません。 クライアントと双方向ストリーミングはサポートされておらず、サーバー ストリーミングのサポートは限定的です。
 
-> [!TIP]
-> .NET Core では、gRPC-Web がサポートされています。 詳細については、<xref:grpc/browser> を参照してください。
+  .NET Core では、gRPC-Web がサポートされています。 詳細については、「<xref:grpc/browser>」を参照してください。
+
+* RESTful JSON Web API は、[HTTP メタデータ](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule)を使用して、 *.proto* ファイルに注釈を付けることによって、gRPC サービスから自動的に作成できます。 これにより、アプリで gRPC と JSON の両方の Web API をサポートできるため、両方に個別のサービスを構築する手間を省くことができます。
+
+  .NET Core では、gRPC サービスから JSON Web API を作成するための実験的なサポートが用意されています。 詳細については、「<xref:grpc/httpapi>」を参照してください。
 
 ### <a name="not-human-readable"></a>人が判読できない
 
@@ -123,7 +127,6 @@ gRPC メッセージは、既定では Protobuf でエンコードされます�
 
 * **ブラウザーでアクセスできる API**: gRPC は、ブラウザーで完全にサポートされているわけではありません。 gRPC-Web でブラウザーのサポートを提供可能ですが、制限があり、サーバー プロキシが必要になります。
 * **ブロードキャスト リアルタイム通信**: gRPC ではストリーミングによるリアルタイム通信がサポートされますが、登録済みの接続にメッセージをブロードキャストするという概念がありません。 たとえば、チャット ルーム内のすべてのクライアントに新しいチャット メッセージを送信する必要があるチャット ルーム シナリオでは、クライアントに新しいチャット メッセージを個々にストリーミングするため、それぞれに gRPC 呼び出しが必要です。 [SignalR](xref:signalr/introduction) は、このシナリオの場合に便利なフレームワークです。 SignalR には永続的な接続という概念があり、メッセージをブロードキャストするためのサポートが組み込まれています。
-* **プロセス間通信**:受信 gRPC 呼び出しを受け入れるため、プロセスで HTTP/2 サーバーをホストする必要があります。 Windows の場合、プロセス間通信[パイプ](/dotnet/standard/io/pipe-operations)が高速で軽量な通信方法です。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
