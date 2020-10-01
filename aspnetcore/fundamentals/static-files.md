@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627664"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393939"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core の静的ファイル
 
@@ -127,7 +127,7 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、既定では A
 
 ディレクトリ参照を使用すると、指定したディレクトリ内のディレクトリを一覧表示できます。
 
-ディレクトリ参照は、セキュリティ上の理由から既定で無効になっています。 詳細については、「[注意事項](#sc)」を参照してください。
+ディレクトリ参照は、セキュリティ上の理由から既定で無効になっています。 詳細については、「[注意事項](#considerations)」を参照してください。
 
 ディレクトリ参照を有効にするには、次のメソッドを使用します。
 
@@ -363,7 +363,7 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、ASP.NET Core �
 
 ## <a name="enable-directory-browsing"></a>ディレクトリ参照の有効化
 
-ディレクトリ参照では、Web アプリのユーザーが、ディレクトリ一覧および、指定したディレクトリ内のファイルを参照できるようになります。 ディレクトリ参照は、セキュリティ上の理由から既定で無効になっています (「[注意点](#sc)」を参照)。 `Startup.Configure` で <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> メソッドを呼び出すことで、ディレクトリの参照を有効にします。
+ディレクトリ参照では、Web アプリのユーザーが、ディレクトリ一覧および、指定したディレクトリ内のファイルを参照できるようになります。 ディレクトリ参照は、セキュリティ上の理由から既定で無効になっています (「[注意点](#considerations)」を参照)。 `Startup.Configure` で <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> メソッドを呼び出すことで、ディレクトリの参照を有効にします。
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=12-17)]
 
