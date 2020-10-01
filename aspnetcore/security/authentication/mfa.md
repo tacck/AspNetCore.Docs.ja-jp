@@ -18,16 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: e224f947335ea8ea6ed8887dfadb52202bfd7866
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009506"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606806"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core での multi-factor authentication
 
 [Damien Bowden](https://github.com/damienbod)
+
+[サンプルコードの表示またはダウンロード (damienbod/AspNetCoreHybridFlowWithApi GitHub リポジトリ)](https://github.com/damienbod/AspNetCoreHybridFlowWithApi)
 
 Multi-factor authentication (MFA) は、追加の形式の識別のためにサインインイベント中にユーザーが要求されるプロセスです。 このプロンプトでは、cellphone からコードを入力したり、FIDO2 キーを使用したり、指紋スキャンを提供したりすることができます。 2番目の形式の認証が必要な場合は、セキュリティが強化されます。 追加の要因は、攻撃者が簡単に取得したり複製したりすることはできません。
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 359aa2b9e6b7f826d75f10645b7f2b565ab48b7a
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 6fc586d144547585ef75d653bf54193def5c8b7f
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847690"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606683"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
@@ -277,6 +277,46 @@ const connection = new signalR.HubConnectionBuilder()
 [!code-javascript[](javascript-client/samples/3.x/SignalRChat/wwwroot/chat.js?range=30-40)]
 
 実際の実装では、指数バックオフを使用するか、指定された回数の再試行を行います。
+
+## <a name="troubleshoot-websocket-handshake-errors"></a>WebSocket ハンドシェイクエラーのトラブルシューティング
+
+このセクションでは、ASP.NET Core hub への接続を確立しようとしたときに発生する *"WebSocket ハンドシェイク中のエラー"* 例外について説明し SignalR ます。
+
+### <a name="response-code-400-or-503"></a>応答コード400または503
+
+次のエラーが発生した場合:
+
+```log
+WebSocket connection to 'wss://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 400
+
+Error: Failed to start the connection: Error: There was an error with the transport.
+```
+
+このエラーは、通常、クライアントのみが Websocket トランスポートを使用するために発生しますが、Websocket プロトコルはサーバーで有効になっていません。
+
+### <a name="response-code-307"></a>応答コード307
+
+```log
+WebSocket connection to 'ws://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 307
+```
+
+多くの場合、 SignalR ハブサーバーは次のようになります。
+
+* HTTP と HTTPS の両方をリッスンして応答します。
+* は、でを呼び出して HTTPS を強制するように構成されている `UseHttpsRedirection` `Startup` か、URL 書き換えルールを使用して https を強制します。
+
+このエラーは、を使用してクライアント側で HTTP URL を指定することによって発生することがあり `.withUrl("http://xxx/HubName")` ます。 この場合の修正は、HTTPS URL を使用するようにコードを変更することです。
+
+### <a name="response-code-404"></a>応答コード404
+
+```log
+WebSocket connection to 'wss://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 404
+```
+
+アプリが localhost で動作するが、IIS サーバーに発行した後にこのエラーが返される場合は、次のようになります。
+
+* ASP.NET Core SignalR アプリが IIS サブアプリケーションとしてホストされていることを確認します。
+* JavaScript クライアント側では、サブアプリの pathbase を使用して URL を設定しないで SignalR `.withUrl("/SubAppName/HubName")` ください。
 
 ## <a name="additional-resources"></a>その他のリソース
 
