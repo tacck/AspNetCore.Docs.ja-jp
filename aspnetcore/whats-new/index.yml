@@ -6,17 +6,19 @@ metadata:
   description: ASP.NET Core ドキュメントの新しいコンテンツと更新されたコンテンツについて説明します。
   ms.topic: landing-page
   ms.date: 08/03/2020
-  ms.openlocfilehash: cb0db16ae400573fb5dafb1d2295037f15e0b9e9
-  ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+  ms.openlocfilehash: 9cbd861f0c10d9dae3722478ca5220598b9007a4
+  ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
   ms.translationtype: HT
   ms.contentlocale: ja-JP
-  ms.lasthandoff: 09/17/2020
-  ms.locfileid: "90721646"
+  ms.lasthandoff: 10/01/2020
+  ms.locfileid: "91636765"
 landingContent:
 - title: ASP.NET Core ドキュメントの更新内容の検索
   linkLists:
   - linkListType: whats-new
     links:
+    - text: 2020 年 9 月
+      url: 2020-09.md
     - text: 2020 年 8 月
       url: 2020-08.md
     - text: 2020 年 7 月
@@ -27,8 +29,6 @@ landingContent:
       url: 2020-05.md
     - text: 2020 年 4 月
       url: 2020-04.md
-    - text: 2020 年 3 月
-      url: 2020-03.md
 - title: 参加しよう - ASP.NET Core ドキュメントへの投稿
   linkLists:
   - linkListType: overview
