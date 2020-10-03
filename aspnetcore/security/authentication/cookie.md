@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 24ba49828db08fdd67723c81ac0c8d9981ab3404
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 211b6c7ec0bc7a48671e614427961cb332d06aa3
+ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945416"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91671770"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>認証を使用 cookie しない ASP.NET Core Identity
 
@@ -38,8 +38,6 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 ## <a name="configuration"></a>構成
 
-アプリで [AspNetCore メタパッケージ](xref:fundamentals/metapackage-app)が使用されていない場合は、 [AspNetCore Cookie のプロジェクトファイルにパッケージ参照を作成します。s](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) パッケージ。
-
 メソッドで、メソッド `Startup.ConfigureServices` とメソッドを使用して認証ミドルウェアサービスを作成し <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> ます。
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Startup.cs?name=snippet1)]
@@ -48,7 +46,7 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
 
 で、とを呼び出して、 `Startup.Configure` `UseAuthentication` プロパティを `UseAuthorization` 設定し、 `HttpContext.User` 要求の承認ミドルウェアを実行します。 `UseAuthentication`を `UseAuthorization` 呼び出す前に、メソッドとメソッドを呼び出し `UseEndpoints` ます。
 
@@ -109,7 +107,7 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 
 暗号化には ASP.NET Core の [データ保護](xref:security/data-protection/using-data-protection) システムが使用されます。 複数のコンピューターでホストされているアプリの場合、アプリ間で負荷を分散する場合、または web ファームを使用する場合は、同じキーリングとアプリ識別子を使用するように [データ保護を構成](xref:security/data-protection/configuration/overview) します。
 
-## <a name="sign-out"></a>サインアウト
+## <a name="sign-out"></a>サインアウトする
 
 現在のユーザーをサインアウトして削除するには cookie 、次のように呼び出し <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*> ます。
 
@@ -271,7 +269,7 @@ ASP.NET Core Identity は、ログインを作成および管理するための�
 
 アプリの認証方式は、アプリの認証スキームとは異なり cookie ます。 cookieに認証スキームが指定されていない場合は <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> 、 `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") が使用されます。
 
-認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、「<xref:security/gdpr#essential-cookies>」を参照してください。
+認証 cookie の <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> プロパティは、既定でに設定され `true` ています。 cookieサイトビジターがデータコレクションに同意していない場合は、認証が許可されます。 詳細については、<xref:security/gdpr#essential-cookies> を参照してください。
 
 メソッドで、 `Startup.Configure` メソッドを呼び出し `UseAuthentication` て、プロパティを設定する認証ミドルウェアを呼び出し `HttpContext.User` ます。 `UseAuthentication`またはを呼び出す前に、メソッドを呼び出し `UseMvcWithDefaultRoute` `UseMvc` ます。
 
@@ -328,7 +326,7 @@ Cookieのポリシーミドルウェア設定は、次の表 `MinimumSameSitePol
 
 暗号化には ASP.NET Core の [データ保護](xref:security/data-protection/using-data-protection) システムが使用されます。 複数のコンピューターでホストされているアプリの場合、アプリ間で負荷を分散する場合、または web ファームを使用する場合は、同じキーリングとアプリ識別子を使用するように [データ保護を構成](xref:security/data-protection/configuration/overview) します。
 
-## <a name="sign-out"></a>サインアウト
+## <a name="sign-out"></a>サインアウトする
 
 現在のユーザーをサインアウトして削除するには cookie 、次のように呼び出し <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*> ます。
 
