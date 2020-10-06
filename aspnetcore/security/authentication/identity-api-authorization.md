@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 913f8f1e43586ce71353c080e72be3b80f4c0573
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634268"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754529"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs の認証と承認
 
-ASP.NET Core 3.0 以降では、API 承認のサポートを使用して、シングルページアプリ (spa) で認証を提供します。 ASP.NET Core Identity認証と保存のために、ユーザーを[ Identity サーバー](https://identityserver.io/)と組み合わせて OpenID connect を実装します。
+ASP.NET Core 3.1 以降のテンプレートでは、API 承認のサポートを使用して、シングルページアプリ (spa) で認証を提供します。 ASP.NET Core Identity認証と保存のために、ユーザーを[ Identity サーバー](https://identityserver.io/)と組み合わせて OpenID connect を実装します。
 
 認証パラメーターが、 **Web アプリケーション (モデルビューコントローラー)** (MVC) および**web アプリケーション**(ページ) プロジェクトテンプレートの認証パラメーターに似た**角度**で、**応答**するプロジェクトテンプレートに追加されました Razor 。 許可されるパラメーター値は、 **None** および **個人**です。 **React.js と Redux**プロジェクトテンプレートでは、現時点では認証パラメーターがサポートされていません。
 

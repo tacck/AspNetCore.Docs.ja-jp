@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 91fd2553803d855b338b1d1b46d55e1d1e4cc21e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a342dd787eceadd22ac26b57a3615a6b0b21f461
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635152"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754503"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>ASP.NET Core SignalR でサポートされているプラットフォーム
 
@@ -35,13 +35,12 @@ SignalR ASP.NET Core は、ASP.NET Core がサポートするすべてのサー�
 
 [JavaScript クライアント](xref:signalr/javascript-client)は、nodejs 8 以降のバージョンと次のブラウザーで実行されます。
 
-| ブラウザー                         | バージョン         |
-| ------------------------------- | --------------- |
-| Microsoft Edge                  | [現在]&dagger; |
-| Mozilla Firefox                 | [現在]&dagger; |
-| Google Chrome。Android を含む | 現在の&dagger; |
-| SafariiOS を含む            | [現在]&dagger; |
-| Microsoft Internet Explorer     | 11              |
+| ブラウザー                          | バージョン         |
+| -------------------------------- | --------------- |
+| Apple Safari (iOS を含む)      | [現在]&dagger; |
+| Google Chrome (Android を含む) | [現在]&dagger; |
+| Microsoft Edge                   | [現在]&dagger; |
+| Mozilla Firefox                  | [現在]&dagger; |
 
 &dagger;*Current* は、ブラウザーの最新バージョンを参照します。
 
