@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 9dd8d293e189eebe6b61f6f0b35aee71977d2f77
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722554"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424286"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 
@@ -40,11 +40,11 @@ ms.locfileid: "90722554"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-5.0.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-5.0.md)]
 
 ---
 
@@ -68,49 +68,51 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 ![Students 編集ページ](intro/_static/student-edit30.png)
 
-このサイトの UI スタイルは、組み込みのプロジェクト テンプレートに基づいています。 このチュートリアルでは、UI をカスタマイズする方法ではなく、主に EF Core の使用方法について説明します。
+このサイトの UI スタイルは、組み込みのプロジェクト テンプレートに基づいています。 このチュートリアルでは、UI をカスタマイズする方法ではなく、EF Core と ASP.NET Core の使用方法について主に説明します。
 
-ページの上部にあるリンクを使用して、完成したプロジェクトのソース コードを取得します。 *cu30* フォルダーには、チュートリアルの ASP.NET Core 3.0 バージョン用のコードが含まれています。 チュートリアル 1-7 のコードの状態を反映するファイルは、*cu30snapshots* フォルダー内にあります。
+<!-- 
+Follow the link at the top of the page to get the source code for the completed project. The *cu50* folder has the code for the ASP.NET Core 5.0 version of the tutorial. Files that reflect the state of the code for tutorials 1-7 can be found in the *cu50snapshots* folder.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# [Visual Studio](#tab/visual-studio)
 
-完成したプロジェクトをダウンロードした後にアプリを実行するには:
+To run the app after downloading the completed project:
 
-* プロジェクトをビルドします。
-* パッケージ マネージャー コンソール (PMC) で、次のコマンドを実行します。
+* Build the project.
+* In Package Manager Console (PMC) run the following command:
 
   ```powershell
   Update-Database
   ```
 
-* プロジェクトを実行して、データベースをシードします。
+* Run the project to seed the database.
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# [Visual Studio Code](#tab/visual-studio-code)
 
-完成したプロジェクトをダウンロードした後にアプリを実行するには:
+To run the app after downloading the completed project:
 
-* *ContosoUniversity.csproj* を削除し、*ContosoUniversitySQLite.csproj* の名前を *ContosoUniversity.csproj* に変更します。
-* *Program.cs* で、`StartupSQLite` が使用されるように `#define Startup` をコメント アウトします。
-* *appSettings.json* を削除し、*appSettingsSQLite.json* の名前を *appSettings.json* に変更します。
-* *Migrations* フォルダーを削除し、*MigrationsSQL* の名前を *Migrations* に変更します。
-* `#if SQLiteVersion` のグローバル検索を実行し、`#if SQLiteVersion` と関連する `#endif` ステートメントを削除します。
-* プロジェクトをビルドします。
-* プロジェクト フォルダーのコマンド プロンプトで、次のコマンドを実行します。
+* In *Program.cs*, remove the comments from `// webBuilder.UseStartup<StartupSQLite>();`  so `StartupSQLite` is used.
+* Copy the contents of *appSettingsSQLite.json* into *appSettings.json*.
+* Delete the *Migrations* folder, and rename *MigrationsSQL* to *Migrations*.
+* Do a global search for `#if SQLiteVersion` and remove `#if SQLiteVersion` and the associated `#endif` statement.
+* Build the project.
+* At a command prompt in the project folder, run the following commands:
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef
+  dotnet tool install --global dotnet-ef -v 5.0.0-*
   dotnet ef database update
   ```
 
-* SQLite ツールで、次の SQL ステートメントを実行します。
+* In your SQLite tool, run the following SQL statement:
 
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
 
-* プロジェクトを実行して、データベースをシードします。
+* Run the project to seed the database.
 
 ---
+
+-->
 
 ## <a name="create-the-web-app-project"></a>Web アプリプロジェクトを作成する
 
@@ -119,36 +121,35 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 * Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** を選択します。
 * プロジェクトに *ContosoUniversity* という名前を付けます。 コードをコピーして貼り付けるときに名前空間が一致するように、この正確な名前 (大文字と小文字を含む) を使用することが重要です。
-* ドロップダウン リストで **[.NET Core]** と **[ASP.NET Core 3.0]** を選択してから、 **[Web アプリケーション]** を選択します。
+* ドロップダウン リストで **[.NET Core]** と **[ASP.NET Core 5.0]** を選択してから、 **[Web アプリケーション]** を選択します。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * ターミナルで、プロジェクト フォルダーを作成するフォルダーに移動します。
-
 * 次のコマンドを実行して、Razor Pages プロジェクトと `cd` を新しいプロジェクト フォルダー内に作成します。
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
-  cd ContosoUniversity
+  cd ContosoUniversity  
   ```
 
 ---
 
 ## <a name="set-up-the-site-style"></a>サイトのスタイルを設定する
 
-*Pages/Shared/_Layout.cshtml* を更新して、サイト ヘッダー、フッター、およびメニューを設定します。
+次のコードをコピーして、*Pages/Shared/_Layout.cshtml* ファイルに貼り付けます: [!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
-* "ContosoUniversity" をすべて "Contoso University" に変更します。 これは 3 回出てきます。
+このレイアウト ファイルによってサイト ヘッダー、フッター、およびメニューが設定されます。 上記のコードは、次の変更を加えます。
 
-* **Home** メニューと **Privacy** メニューのエントリを削除し、**About**、**Students**、**Courses**、**Instructors**、**Departments** のエントリを追加します。
+* "ContosoUniversity" をいずれも "Contoso University" へ変更。 これは 3 回出てきます。
+* **[ホーム]** および **[プライバシー]** メニュー エントリが削除されます。
+* **[バージョン情報]** 、 **[学生]** 、 **[コース]** 、 **[講師]** 、および **[部門]** のエントリが追加されます。
 
-変更が強調表示されます。
+*Pages/Index.cshtml* で、ファイルの内容を次のコードに置き換えます。
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Index.cshtml)]
 
-*Pages/Index.cshtml* で、ファイルの中身を次のコードに変更し、ASP.NET Core に関するテキストをこのアプリに関するテキストに変更します。
-
-[!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
+上記のコードでは、ASP.NET Core に関するテキストがこのアプリに関するテキストに置き換えられます。
 
 アプリを実行して、ホームページが表示されることを確認します。
 
@@ -214,51 +215,50 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 
 このセクションでは、ASP.NET Core スキャフォールディング ツールを使用して、次のものを生成します。
 
-* EF Core *コンテキスト* クラス。 コンテキストは、定められたデータ モデルに対し、Entity Framework 機能を調整するメイン クラスです。 これは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生します。
+* EF Core `DbContext` クラス。 コンテキストは、定められたデータ モデルに対し、Entity Framework 機能を調整するメイン クラスです。 これは <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> クラスから派生します。
 * `Student` エンティティの作成、読み取り、更新、および削除 (CRUD) 操作を処理する Razor ページ。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Pages* フォルダー内に *Students* フォルダーを作成します。
+* *Pages/Students* フォルダーを作成します。
 * **ソリューション エクスプローラー**で、*Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
-* **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
+* **[新しいスキャフォールディング アイテムの追加]** ダイアログで次のようにします。
+  * 左側のタブで、 **[インストール済み] > [共通] > [Razor Pages]** の順に選択します。
+  * **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 * **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。
   * **[モデル クラス]** ドロップダウンで、 **[Student (ContosoUniversity.Models)]** を選択します。
   * **Data context class** 行で、 **+** (+) 記号を選択します。
-  * データ コンテキスト名を *ContosoUniversity.Models.ContosoUniversityContext* から *ContosoUniversity.Data.SchoolContext* に変更します。
-  * **[追加]** を選びます。
+    * データ コンテキスト名が、`ContosoUniversityContext` ではなく `SchoolContext` で終わるように変更します。 更新されたコンテキスト名: `ContosoUniversity.Data.SchoolContext`
+   * **[追加]** を選びます。
 
 次のパッケージが自動的にインストールされます。
 
-* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
-* `Microsoft.Extensions.Logging.Debug`
 * `Microsoft.EntityFrameworkCore.Tools`
+* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 次の .NET Core CLI コマンドを実行して、必要な NuGet パッケージをインストールします。
-<!-- TO DO  After testing, Replace with
-[!INCLUDE[](~/includes/includes/add-EF-NuGet-SQLite-CLI.md)]
-remove dotnet tool install --global  below
- -->
+
   ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.SQLite
-  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  dotnet add package Microsoft.EntityFrameworkCore.Tools
-  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-  dotnet add package Microsoft.Extensions.Logging.Debug
+  dotnet add package Microsoft.EntityFrameworkCore.SQLite -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.Design -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.Tools -v 5.0.0-*
+  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v 5.0.0-*
+  dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -v 5.0.0-*  
   ```
 
-  スキャフォールディングには、Microsoft.VisualStudio.Web.CodeGeneration.Design パッケージが必要です。 アプリでは SQL Server は使用されませんが、スキャフォールディング ツールには SQL Server パッケージが必要です。
+   スキャフォールディングには、Microsoft.VisualStudio.Web.CodeGeneration.Design パッケージが必要です。 アプリでは SQL Server は使用されませんが、スキャフォールディング ツールには SQL Server パッケージが必要です。
 
 * *Pages/Students* フォルダーを作成します。
 
 * 次のコマンドを実行して、[aspnet-codegenerator スキャフォールディング ツール](xref:fundamentals/tools/dotnet-aspnet-codegenerator)をインストールします。
 
   ```dotnetcli
-  dotnet tool install --global dotnet-aspnet-codegenerator
+  dotnet tool uninstall --global dotnet-aspnet-codegenerator
+  dotnet tool install --global dotnet-aspnet-codegenerator --version 5.0.0-*  
   ```
 
 * 次のコマンドを実行して、Student ページをスキャフォールディングします。
@@ -266,18 +266,18 @@ remove dotnet tool install --global  below
   **Windows の場合**
 
   ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries -sqlite  
   ```
 
   **macOS または Linux の場合**
 
   ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries -sqlite  
   ```
 
 ---
 
-前の手順で問題が発生した場合は、プロジェクトをビルドし、スキャフォールディング ステップを再試行してください。
+前の手順が失敗した場合は、プロジェクトをビルドし、スキャフォールディング手順を再試行します。
 
 スキャフォールディング プロセスは次のとおりです。
 
@@ -293,19 +293,21 @@ remove dotnet tool install --global  below
 
 ## <a name="database-connection-string"></a>データベース接続文字列
 
+スキャフォールディング ツールを使用すると、*appsettings.json* ファイルに接続文字列が生成されます。
+
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-この接続文字列によって [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されます。 
+この接続文字列によって [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されます。
 
-[!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettings.json?highlight=11)]
 
 LocalDB は SQL Server Express データベース エンジンの軽量版であり、実稼働ではなく、アプリの開発を意図して設計されています。 既定では、LocalDB は `C:/Users/<user>` ディレクトリに *.mdf* ファイルを作成します。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-*CU.db* という名前の SQLite データベース ファイルを指すように接続文字列を変更します。
+SQLite 接続文字列を *CU.db* に短縮します。
 
-[!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettingsSQLite.json?highlight=11)]
 
 ---
 
@@ -313,42 +315,76 @@ LocalDB は SQL Server Express データベース エンジンの軽量版であ
 
 定められたデータ モデルの EF Core 機能を調整するメイン クラスは、データベース コンテキスト クラスです。 コンテキストは、[Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生します。 コンテキストによって、データ モデルに含めるエンティティが指定されます。 このプロジェクトでは、クラスに `SchoolContext` という名前が付けられています。
 
-次のコードを使用して *SchoolContext.cs* を更新します。
+次のコードを使用して *Data/SchoolContext.cs* を更新します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-強調表示されたコードによって、各エンティティ セットの [DbSet\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 EF Core 用語で:
+上記のコードは、単数形の `DbSet<Student> Student` から複数形の `DbSet<Student> Students` に変更されます。 Razor Pages のコードが新しい `DBSet` 名と一致するようにするには、`_context.Student.` から
+`_context.Students.` へとグローバルに変更します。
 
-* エンティティ セットは通常、データベース テーブルに対応します。
-* エンティティはテーブル内の行に対応します。
+8 回の出現があります。
 
-エンティティ セットには複数のエンティティが含まれているため、DBSet プロパティは複数形の名前にする必要があります。 スキャフォールディング ツールによって `Student` DBSet を作成したので、このステップでこれを複数形の `Students` に変更します。 
+エンティティ セットには複数のエンティティが含まれているため、開発者の多くは `DBSet` プロパティ名を複数形にすることを好みます。
 
-Razor Pages のコードを新しい DBSet 名と一致させるには、プロジェクト全体で `_context.Student` を `_context.Students` にグローバルに変更します。  8 回の出現があります。
+強調表示されたコード:
+
+* エンティティ セットごとに [DbSet\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティを作成します。 EF Core 用語で:
+  * エンティティ セットは通常、データベース テーブルに対応します。
+  * エンティティはテーブル内の行に対応します。
+* <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A>. `OnModelCreating`:
+  * `SchoolContext` が初期化されたとき、ただしモデルがロックダウンされてコンテキストの初期化に使用される前に呼び出されます。
+  * チュートリアルの後半で `Student` エンティティが他のエンティティへの参照を取得することから、必須となります。
+  <!-- Review, OnModelCreating needs review -->
 
 プロジェクトをビルドし、コンパイラ エラーがないことを確認します。
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。 サービス (EF Core データベース コンテキストなど) は、アプリケーションの起動時に依存関係の挿入に登録されます。 これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。
+ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。 サービス (`SchoolContext` など) は、アプリの起動時に依存関係の挿入に登録されます。 これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。
 
 スキャフォールディング ツールにより、コンテキスト クラスが依存関係挿入コンテナーに自動的に登録されました。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* `ConfigureServices` では、強調表示された行がスキャフォールダーによって追加されました。
+次の強調表示された行がスキャフォールダーによって追加されました。
 
-  [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
+[!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* `ConfigureServices` では、スキャフォールダーによって追加されたコードが `UseSqlite` を呼び出すことを確認します。
+スキャフォールダーによって追加されたコードが `UseSqlite` を呼び出すことを確認します。
 
-  [!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+[!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+
+運用データベースの使用の詳細については、「[開発用に SQLite を、運用環境に SQL Server を使用する](xref:tutorials/razor-pages/model#use-sqlite-for-development-sql-server-for-production)」を参照してください。
 
 ---
 
 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)が *appsettings.json* ファイルから接続文字列を読み取ります。
+
+### <a name="add-the-database-exception-filter"></a>データベース例外フィルターを追加する
+
+次のコードに示すように、`ConfigureServices` に `AddDatabaseDeveloperPageExceptionFilter` を追加します。
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!code-csharp[Main](intro/samples/cu50/Startup.cs?name=snippet_ConfigureServices&highlight=8)]
+
+[Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージを追加します。
+
+PMC で、次のコマンドを入力して NuGet パッケージを追加します。
+
+```powershell
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.1.20451.17
+```
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!code-csharp[Main](intro/samples/cu50/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=8)]
+
+---
+
+`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore` NuGet パッケージには Entity Framework Core のエラー ページ用の ASP.NET Core ミドルウェアが用意されています。 このミドルウェアは、Entity Framework Core の移行に関するエラーを検出して診断するのに役立ちます。
 
 ## <a name="create-the-database"></a>データベースの作成
 
@@ -383,7 +419,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
   このコードは、データベースに学生が存在するかどうかを確認します。 学生が存在しない場合は、テスト データがデータベースに追加されます。 パフォーマンスを最適化するために、`List<T>` コレクションではなく配列にテスト データを作成します。
 
-* *Program.cs* で、`EnsureCreated` の呼び出しを `DbInitializer.Initialize` の呼び出しに置き換えます。
+*Program.cs* で、`EnsureCreated` の呼び出しを `DbInitializer.Initialize` の呼び出しに置き換えます。
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -395,8 +431,10 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 アプリが実行されている場合は停止し、**パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
 
 ```powershell
-Drop-Database
+Drop-Database -Confirm
 ```
+
+`Y` で応答すると、データベースが削除されます。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -405,7 +443,6 @@ Drop-Database
 ---
 
 * アプリを再起動します。
-
 * Students ページを選択すると、シードされたデータが表示されます。
 
 ## <a name="view-the-database"></a>データベースを表示する
@@ -428,7 +465,7 @@ SQLite ツールを使用して、データベース スキーマとシードさ
 
 ASP.NET Core と EF Core では、非同期プログラミングが既定のモードです。
 
-Web サーバーでは、利用できるスレッド数に限りがあります。負荷が高い状況では、利用できるスレッドが全部使われる可能性があります。 その場合、スレッドが解放されるまでサーバーは新しい要求を処理できません。 同期コードの場合、たくさんのスレッドが関連付けられていても、I/O の完了を待っているため、実際には何の作業も行っていないということがあります。 非同期コードの場合、あるプロセスが I/O の完了を待っているとき、そのスレッドは解放され、サーバーによって他の要求の処理に利用できます。 結果として、非同期コードの場合、サーバー リソースをより効率的に利用できます。サーバーは、より多くのトラフィックを遅延なく処理できます。
+Web サーバーでは、利用できるスレッド数に限りがあります。負荷が高い状況では、利用できるスレッドが全部使われる可能性があります。 その場合、スレッドが解放されるまでサーバーは新しい要求を処理できません。 同期コードの場合、たくさんのスレッドが関連付けられていても、I/O の完了を待っているため、何の作業も行っていないということがあります。 非同期コードの場合、あるプロセスが I/O の完了を待っているとき、そのスレッドは解放され、サーバーによって他の要求の処理に利用できます。 結果として、非同期コードの場合、サーバー リソースをより効率的に利用できます。サーバーは、より多くのトラフィックを遅延なく処理できます。
 
 非同期コードが実行時に発生させるオーバーヘッドは少量です。 トラフィックが少ない場合、パフォーマンスに与える影響は無視して構わない程度です。トラフィックが多い場合、相当なパフォーマンス改善が見込まれます。
 
@@ -455,6 +492,21 @@ EF Core を利用する非同期コードの記述で注意すべき点:
 * 非同期コードのパフォーマンス上の利点を最大限に活用するには、クエリをデータベースに送信させる EF Core メソッドを (ページングなどのための) ライブラリ パッケージで呼び出す場合、そのライブラリ パッケージで非同期が利用されていることを確認します。
 
 .NET での非同期プログラミングの詳細については、「[非同期の概要](/dotnet/standard/async)」と「[Async および Await を使用した非同期プログラミング (C#)](/dotnet/csharp/programming-guide/concepts/async/)」を参照してください。
+
+<!-- Review: See https://github.com/dotnet/AspNetCore.Docs/issues/14528 -->
+## <a name="performance-considerations"></a>パフォーマンスに関する考慮事項
+
+一般に、Web ページで任意の数の行を読み込むべきではありません。 クエリでは、ページングまたは制限アプローチを使用する必要があります。 たとえば、上記のクエリでは `Take` を使用して、返される行を制限できます。
+
+[!code-csharp[Main](intro/samples/cu50snapshots/Index.cshtml.cs?name=snippet)]
+
+ビューで大きいテーブルを列挙すると、列挙の途中でデータベース例外が発生した場合、部分的に構築された HTTP 200 応答が返される可能性があります。
+
+<xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxModelBindingCollectionSize> の既定値は 1024 です。 次のコードでは、`MaxModelBindingCollectionSize` が設定されます。
+
+[!code-csharp[Main](intro/samples/cu50/StartupMaxMBsize.cs?name=snippet_ConfigureServices)]
+
+ページングについては、このチュートリアルで後述します。
 
 ## <a name="next-steps"></a>次の手順
 
@@ -533,7 +585,8 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 * プロジェクト フォルダーのコマンド プロンプトで、次のコマンドを実行します。
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef
+  dotnet tool uninstall --global dotnet-ef
+  dotnet tool install --global dotnet-ef --version 5.0.0-*
   dotnet ef database update
   ```
 
@@ -542,7 +595,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
-
+  
 * プロジェクトを実行して、データベースをシードします。
 
 ---
@@ -599,8 +652,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 ![Student エンティティの図](intro/_static/student-entity.png)
 
-* プロジェクト フォルダー内に *Models* フォルダーを作成します。 
-
+* プロジェクト フォルダー内に *Models* フォルダーを作成します。
 * 次のコードを使用して、*Models/Student.cs* を作成します。
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
@@ -730,7 +782,7 @@ remove dotnet tool install --global  below
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-この接続文字列によって [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されます。 
+*appsettings.json* ファイルでは、接続文字列 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されます。
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -748,7 +800,7 @@ LocalDB は SQL Server Express データベース エンジンの軽量版であ
 
 定められたデータ モデルの EF Core 機能を調整するメイン クラスは、データベース コンテキスト クラスです。 コンテキストは、[Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生します。 コンテキストによって、データ モデルに含めるエンティティが指定されます。 このプロジェクトでは、クラスに `SchoolContext` という名前が付けられています。
 
-次のコードを使用して *SchoolContext.cs* を更新します。
+次のコードを使用して *Data/SchoolContext.cs* を更新します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 

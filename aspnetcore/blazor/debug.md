@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7681deb70610a8fbc27ccda7317b73921646794a
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876777"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393835"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -109,11 +109,55 @@ Blazor WebAssembly アプリをデバッグしている間に、サーバー コ
 > [!NOTE]
 > デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは**ありません**。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
 
+アプリが `/` 以外の[アプリ ベース パス](xref:blazor/host-and-deploy/index#app-base-path)でホストされている場合、`Properties/launchSettings.json` で次のプロパティを更新し、アプリのベース パスを反映させます。
+
+* `applicationUrl`:
+
+  ```json
+  "iisSettings": {
+    ...
+    "iisExpress": {
+      "applicationUrl": "http://localhost:{INSECURE PORT}/{APP BASE PATH}/",
+      "sslPort": {SECURE PORT}
+    }
+  },
+  ```
+
+* 各プロファイルの `inspectUri`:
+
+  ```json
+  "profiles": {
+    ...
+    "{PROFILE 1, 2, ... N}": {
+      ...
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/{APP BASE PATH}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      ...
+    }
+  }
+  ```
+
+前の設定のプレースホルダー:
+
+* `{INSECURE PORT}`:セキュリティで保護されていないポート。 既定では、ランダムな値が提供されますが、カスタム ポートが許可されます。
+* `{APP BASE PATH}`:アプリのベース パス。
+* `{SECURE PORT}`:セキュリティで保護されているポート。 既定では、ランダムな値が提供されますが、カスタム ポートが許可されます。
+* `{PROFILE 1, 2, ... N}`:起動設定プロファイル。 通常、既定では、1 つのアプリから複数のプロファイルが指定されます (たとえば、IIS Express 用のプロファイルと、Kestrel サーバーで使用されるプロジェクト プロファイル)。
+
+次の例では、アプリは `/OAT` でホストされており、アプリ ベース パスは `<base href="/OAT/">` として `wwwroot/index.html` に構成されています。
+
+```json
+"applicationUrl": "http://localhost:{INSECURE PORT}/OAT/",
+```
+
+```json
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/OAT/_framework/debug/ws-proxy?browser={browserInspectUri}",
+```
+
+Blazor WebAssembly アプリにカスタム アプリ ベース パスを使用する方法については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。
+
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<a id="vscode"></a>
-
-## <a name="debug-standalone-no-locblazor-webassembly"></a>スタンドアロン Blazor WebAssembly のデバッグ
+<h2 id="vscode">スタンドアロン Blazor WebAssembly のデバッグ</h2>
 
 1. VS Code でスタンドアロンの Blazor WebAssembly アプリを開きます。
 
@@ -257,7 +301,7 @@ Blazor WebAssembly アプリをデバッグしている間に、サーバー コ
 > [!NOTE]
 > デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは**ありません**。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
 
-詳細については、「[Visual Studio for Mac を使用したデバッグ](/visualstudio/mac/debugging?view=vsmac-2019)」を参照してください。
+詳細については、「[Visual Studio for Mac を使用したデバッグ](/visualstudio/mac/debugging)」を参照してください。
 
 ---
 

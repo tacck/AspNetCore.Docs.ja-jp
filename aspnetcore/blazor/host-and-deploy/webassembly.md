@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: dadf6076e7f07c07381856aa225667a6eb38046a
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: 3436620123618ab32daa44c4a37057aaadb89563
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080317"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393692"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -51,11 +51,15 @@ Blazor は、適切な圧縮ファイルにサービスを提供するため、�
 * IIS の `web.config` の圧縮構成については、[IIS の「Brotli と Gzip の圧縮」](#brotli-and-gzip-compression)セクションを参照してください。 
 * GitHub ページなど、静的に圧縮されたファイル コンテント ネゴシエーションをサポートしない静的ホスティング ソリューションでホストするとき、Brotli 圧縮ファイルをフェッチし、デコードするようにアプリを構成することを検討してください。
 
-  * [google/brotli GitHub リポジトリ](https://github.com/google/brotli)から、JavaScript Brotli デコーダーを入手します。 2020 年 7 月の時点で、デコーダー ファイルは `decode.min.js` という名前で、リポジトリの [`js` フォルダー](https://github.com/google/brotli/tree/master/js)にあります。
+  * [google/brotli GitHub リポジトリ](https://github.com/google/brotli)から、JavaScript Brotli デコーダーを入手します。 2020 年 9 月の時点で、デコーダー ファイルは `decode.js` という名前で、リポジトリの [`js` フォルダー](https://github.com/google/brotli/tree/master/js)にあります。
+  
+    > [!NOTE]
+    > 以前のバージョンは [google/brotli GitHub リポジトリ](https://github.com/google/brotli)の `decode.js` スクリプト (`decode.min.js`) の縮小バージョンにあります。 [Window.BrotliDecode が decode.min.js (google/brotli #844) で設定されない](https://github.com/google/brotli/issues/844)問題が解決されるまで、自分でスクリプトを縮小するか、[npm package](https://www.npmjs.com/package/brotli) を使用してください。 このセクションのサンプル コードでは、スクリプトの**未縮小**バージョンを使用しています。
+
   * そのデコーダーを使用するようにアプリを更新します。 `wwwroot/index.html` の終了タグ `<body>` に含まれるマークアップを次のように変更します。
   
     ```html
-    <script src="decode.min.js"></script>
+    <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
       Blazor.start({
@@ -863,5 +867,3 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 > [!NOTE]
 > 同じアセンブリの名前変更と遅延読み込みについては、<xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> のガイダンスを参照してください。
-
-フィードバックを提供するには、[aspnetcore/issue #5477](https://github.com/dotnet/aspnetcore/issues/5477) を参照してください。

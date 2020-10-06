@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 43794fad36efe44cad6fbb2f1a1cae293a2ddad1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a74f056447839c4cf057948f26a9ece9b5799656
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625961"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606703"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
@@ -58,11 +58,12 @@ Blazor WebAssembly アプリで作成されたユーザー状態は、ブラウ�
 
 ## <a name="where-to-persist-state"></a>状態を維持する場所
 
-一般に、状態を維持するには 3 つの場所があります。
+一般に、状態を維持するために、次のような場所があります。
 
 * [サーバー側ストレージ](#server-side-storage)
 * [URL](#url)
 * [ブラウザー ストレージ](#browser-storage)
+* [メモリ内状態コンテナー サービス](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>サーバー側ストレージ
 
@@ -119,6 +120,10 @@ Azure のデータ ストレージ オプションの詳細については、以
 > [!WARNING]
 > `localStorage` および `sessionStorage` に格納されているデータは、ユーザーによって表示または改ざんされる可能性があります。
 
+## <a name="in-memory-state-container-service"></a>メモリ内状態コンテナー サービス
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
+
 ## <a name="additional-resources"></a>その他のリソース
 
 * [認証操作の前にアプリの状態を保存する](xref:blazor/security/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)
@@ -162,11 +167,12 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 
 ## <a name="where-to-persist-state"></a>状態を維持する場所
 
-一般に、状態を維持するには 3 つの場所があります。
+一般に、状態を維持するために、次のような場所があります。
 
 * [サーバー側ストレージ](#server-side-storage)
 * [URL](#url)
 * [ブラウザー ストレージ](#browser-storage)
+* [メモリ内状態コンテナー サービス](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>サーバー側ストレージ
 
@@ -701,5 +707,9 @@ else
 さまざまな状態オブジェクトを保持し、さまざまな場所でさまざまなオブジェクト サブセットを使用するには、状態をグローバルに保持しないことをお勧めします。
 
 ::: moniker-end
+
+## <a name="in-memory-state-container-service"></a>メモリ内状態コンテナー サービス
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
 ::: zone-end

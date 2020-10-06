@@ -5,7 +5,7 @@ description: Blazor アプリで .NET メソッドから JavaScript 関数を呼
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 09/17/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: e7f23a4b44a0adb1d0b97c88e1d17f96aa2d28bd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: da4ce8a2610fc07d22153f66831d693ae66e0fe5
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625389"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424153"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -36,6 +36,8 @@ Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出�
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 .NET から JavaScript を呼び出すには、<xref:Microsoft.JSInterop.IJSRuntime> 抽象化を使用します。 JS 相互運用呼び出しを発行するには、コンポーネントに <xref:Microsoft.JSInterop.IJSRuntime> 抽象化を挿入します。 <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> は、JSON シリアル化可能な任意の数の引数と共に呼び出す JavaScript 関数の識別子を受け取ります。 関数の識別子は、グローバル スコープ (`window`) に関連しています。 `window.someScope.someFunction` を呼び出す場合、識別子は `someScope.someFunction` です。 関数は、呼び出す前に登録する必要はありません。 また、戻り値の型 `T` も JSON シリアル化可能である必要があります。 `T` は、返される JSON 型に最適にマップされる .NET 型と一致する必要があります。
+
+[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) を返す JavaScript 関数は、<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> と共に呼び出されます。 `InvokeAsync` は Promise のラップを解除し、Promise によって待機された値を返します。
 
 Blazor Server アプリでプリレンダリングが有効になっている場合、最初のプリレンダリング中に JavaScript を呼び出すことはできません。 JavaScript 相互運用呼び出しは、ブラウザーとの接続が確立されるまで遅延させる必要があります。 詳細については、「[Blazor Server アプリがプリレンダリングされていることを検出する](#detect-when-a-blazor-server-app-is-prerendering)」セクションを参照してください。
 
@@ -109,6 +111,13 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 .NET メソッドは、<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> を呼び出して、`exampleJsInterop.js` ファイル内の JavaScript 関数と相互運用します。
 
 <xref:Microsoft.JSInterop.IJSRuntime> 抽象化は、Blazor Server のシナリオを可能にするために非同期です。 アプリが Blazor WebAssembly アプリであり、JavaScript 関数を同期的に呼び出す必要がある場合は、<xref:Microsoft.JSInterop.IJSInProcessRuntime> にダウンキャストし、代わりに <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> を呼び出します。 ほとんどの JS 相互運用ライブラリでは、確実にすべてのシナリオでライブラリを使用できるように、非同期 API を使用することをお勧めします。
+
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> 標準 [JavaScript モジュール](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)で JavaScript の分離を有効にするには、「[Blazor JavaScript の分離とオブジェクト参照](#blazor-javascript-isolation-and-object-references)」セクションを参照してください。
+
+::: moniker-end
 
 サンプル アプリには、JS 相互運用を示すコンポーネントが含まれています。 コンポーネント:
 
@@ -485,6 +494,43 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
 
 * [Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) (循環参照はサポートされていません、テイク 2 (dotnet/aspnetcore #20525))
 * [Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a>Blazor JavaScript の分離とオブジェクト参照
+
+Blazor により、標準 [JavaScript モジュール](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)で JavaScript の分離が有効にされます。 JavaScript の分離には、次のような利点があります。
+
+* インポートされる JavaScript によって、グローバル名前空間が汚染されなくなります。
+* ライブラリおよびコンポーネントのコンシューマーは、関連する JavaScript をインポートする必要がありません。
+
+たとえば、次の JavaScript モジュールにより、ブラウザー プロンプトを表示する JavaScript 関数がエクスポートされます。
+
+```javascript
+export function showPrompt(message) {
+  return prompt(message, 'Type anything here');
+}
+```
+
+前の JavaScript モジュールを静的 Web アセット (`wwwroot/exampleJsInterop.js`) として .NET ライブラリに追加し、<xref:Microsoft.JSInterop.IJSRuntime> サービスを使用してそのモジュールを .NET コードにインポートします。 サービスは、次の例では `jsRuntime` (表示はなし) として挿入されます。
+
+```csharp
+var module = await jsRuntime.InvokeAsync<JSObjectReference>(
+    "import", "./_content/MyComponents/exampleJsInterop.js");
+```
+
+前の例の `import` 識別子は、JavaScript モジュールをインポートするために特別に使用される特殊な識別子です。 安定した静的な Web アセット パスを使用してモジュールを指定します: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}`。 プレースホルダー `{LIBRARY NAME}` は、ライブラリの名前です。 プレースホルダー `{PATH UNDER WWWROOT}` は、`wwwroot` の下にあるスクリプトへのパスです。
+
+<xref:Microsoft.JSInterop.IJSRuntime> により、モジュールが `JSObjectReference` としてインポートされます。これは、.NET コードから JavaScript オブジェクトへの参照を表します。 モジュールからエクスポートされた JavaScript 関数を呼び出すには、`JSObjectReference` を使用します。
+
+```csharp
+public async ValueTask<string> Prompt(string message)
+{
+    return await module.InvokeAsync<string>("showPrompt", message);
+}
+```
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>その他の技術情報
 

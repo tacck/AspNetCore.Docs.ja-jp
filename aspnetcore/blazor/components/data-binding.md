@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: eef08d8236241d2930a1a1a45ca0181669f2432c
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 3f823ca9cf96b7ff439ade59f946db222b7f7e60
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009649"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606695"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
-作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
+作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Steve Sanderson](https://github.com/SteveSandersonMS)
 
 Razor コンポーネントはフィールド、プロパティ、または Razor 式の値が含まれる "[`@bind`](xref:mvc/views/razor#bind)" という名前の HTML 要素属性を使用してデータ バインディング機能を提供します。
 
@@ -313,6 +313,104 @@ Password:
     }
 }
 ```
+
+## <a name="bind-across-more-than-two-components"></a>3 つ以上のコンポーネント間でバインドする
+
+入れ子になった任意の数のコンポーネントをバインドできますが、次のような一方向のデータ フローを考慮する必要があります。
+
+* 変更通知は "*階層をフローアップ*" します。
+* 新しいパラメーター値は "*階層をフローダウン*" します。
+
+一般的な推奨される方法は、基になるデータを親コンポーネントに格納のみすることであり、これにより、更新する必要がある状態に関する混乱を避けることができます。
+
+次のコンポーネントは、前述の概念を示しています。
+
+`ParentComponent.razor`:
+
+```razor
+<h1>Parent Component</h1>
+
+<p>Parent Property: <b>@parentValue</b></p>
+
+<p>
+    <button @onclick="ChangeValue">Change from Parent</button>
+</p>
+
+<ChildComponent @bind-Property="parentValue" />
+
+@code {
+    private string parentValue = "Initial value set in Parent";
+
+    private void ChangeValue()
+    {
+        parentValue = $"Set in Parent {DateTime.Now}";
+    }
+}
+```
+
+`ChildComponent.razor`:
+
+```razor
+<div class="border rounded m-1 p-1">
+    <h2>Child Component</h2>
+
+    <p>Child Property: <b>@Property</b></p>
+
+    <p>
+        <button @onclick="ChangeValue">Change from Child</button>
+    </p>
+
+    <GrandchildComponent @bind-Property="BoundValue" />
+</div>
+
+@code {
+    [Parameter]
+    public string Property { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PropertyChanged { get; set; }
+
+    private string BoundValue
+    {
+        get => Property;
+        set => PropertyChanged.InvokeAsync(value);
+    }
+
+    private Task ChangeValue()
+    {
+        return PropertyChanged.InvokeAsync($"Set in Child {DateTime.Now}");
+    }
+}
+```
+
+`GrandchildComponent.razor`:
+
+```razor
+<div class="border rounded m-1 p-1">
+    <h3>Grandchild Component</h3>
+
+    <p>Grandchild Property: <b>@Property</b></p>
+
+    <p>
+        <button @onclick="ChangeValue">Change from Grandchild</button>
+    </p>
+</div>
+
+@code {
+    [Parameter]
+    public string Property { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PropertyChanged { get; set; }
+
+    private Task ChangeValue()
+    {
+        return PropertyChanged.InvokeAsync($"Set in Grandchild {DateTime.Now}");
+    }
+}
+```
+
+必ずしも入れ子にはなっていないコンポーネント間でメモリ内のデータを共有するのに適した別の方法については、「ASP.NET Core Blazor 状態管理<xref:blazor/state-management#in-memory-state-container-service>」を参照してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

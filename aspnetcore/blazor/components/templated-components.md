@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: 293154658e9d39166213c0a465bed1166ba39b54
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 74601905b7317ad8d9763fe0d747ba36bd0b1389
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628353"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393796"
 ---
 # <a name="aspnet-core-no-locblazor-templated-components"></a>ASP.NET Core Blazor テンプレート コンポーネント
 
@@ -34,11 +34,13 @@ ms.locfileid: "88628353"
 * テーブルのヘッダー、行、フッターのテンプレートをユーザーが指定できるようにするテーブル コンポーネント
 * リスト内の項目をレンダリングするためのテンプレートをユーザーが指定できるようにするリスト コンポーネント
 
+[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
+
 ## <a name="template-parameters"></a>テンプレート パラメーター
 
 <xref:Microsoft.AspNetCore.Components.RenderFragment> または <xref:Microsoft.AspNetCore.Components.RenderFragment%601> の型の 1 つまたは複数のコンポーネント パラメーターを指定することで、テンプレート コンポーネントが定義されます。 レンダー フラグメントは、レンダリングする UI のセグメントを表します。 <xref:Microsoft.AspNetCore.Components.RenderFragment%601> は、レンダー フラグメントが呼び出されたときに指定できる型パラメーターを受け取ります。
 
-`TableTemplate` コンポーネント:
+`TableTemplate` コンポーネント (`TableTemplate.razor`):
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
@@ -55,6 +57,21 @@ ms.locfileid: "88628353"
         <td>@context.Name</td>
     </RowTemplate>
 </TableTemplate>
+
+@code {
+    private List<Pet> pets = new List<Pet>
+    {
+        new Pet { PetId = 2, Name = "Mr. Bigglesworth" },
+        new Pet { PetId = 4, Name = "Salem Saberhagen" },
+        new Pet { PetId = 7, Name = "K-9" }
+    };
+
+    private class Pet
+    {
+        public int PetId { get; set; }
+        public string Name { get; set; }
+    }
+}
 ```
 
 > [!NOTE]
@@ -75,6 +92,10 @@ ms.locfileid: "88628353"
         <td>@pet.Name</td>
     </RowTemplate>
 </TableTemplate>
+
+@code {
+    ...
+}
 ```
 
 または、コンポーネント要素の `Context` 属性を指定することもできます。 指定された `Context` 属性は、指定されたすべてのテンプレート パラメーターに適用されます。 これは、(ラップする子要素を持たない) 暗黙的な子コンテンツのコンテンツ パラメーター名を指定する場合に便利です。 次の例では、`Context` 属性が `TableTemplate` 要素に表示され、すべてのテンプレート パラメーターに適用されます。
@@ -90,11 +111,15 @@ ms.locfileid: "88628353"
         <td>@pet.Name</td>
     </RowTemplate>
 </TableTemplate>
+
+@code {
+    ...
+}
 ```
 
 ## <a name="generic-typed-components"></a>ジェネリック型のコンポーネント
 
-多くの場合、テンプレート コンポーネントはジェネリック型です。 たとえば、ジェエリックの `ListViewTemplate` コンポーネントを使用して、`IEnumerable<T>` 値をレンダリングできます。 ジェネリック コンポーネントを定義するには、[`@typeparam`](xref:mvc/views/razor#typeparam) ディレクティブを使用して、型パラメーターを指定します。
+多くの場合、テンプレート コンポーネントはジェネリック型です。 たとえば、ジェエリックの `ListViewTemplate` コンポーネント (`ListViewTemplate.razor`) を使用して、`IEnumerable<T>` 値をレンダリングできます。 ジェネリック コンポーネントを定義するには、[`@typeparam`](xref:mvc/views/razor#typeparam) ディレクティブを使用して、型パラメーターを指定します。
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
@@ -106,6 +131,20 @@ ms.locfileid: "88628353"
         <li>@pet.Name</li>
     </ItemTemplate>
 </ListViewTemplate>
+
+@code {
+    private List<Pet> pets = new List<Pet>
+    {
+        new Pet { Name = "Mr. Bigglesworth" },
+        new Pet { Name = "Salem Saberhagen" },
+        new Pet { Name = "K-9" }
+    };
+
+    private class Pet
+    {
+        public string Name { get; set; }
+    }
+}
 ```
 
 それ以外の場合は、型パラメーターの名前と一致する属性を使用して、型パラメーターを明示的に指定する必要があります。 次の例では、`TItem="Pet"` によって次の型が指定されます。
@@ -116,4 +155,8 @@ ms.locfileid: "88628353"
         <li>@pet.Name</li>
     </ItemTemplate>
 </ListViewTemplate>
+
+@code {
+    ...
+}
 ```

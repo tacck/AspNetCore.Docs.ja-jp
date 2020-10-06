@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: e874ec6f24d8b03fc6c7133013147498cbbc293a
+ms.sourcegitcommit: 4febe4efaf6e1a7be65d772b500c00fca0af216a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592905"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91451169"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core でのアセンブリの遅延読み込みBlazor WebAssembly
 
@@ -38,7 +38,7 @@ Blazor の遅延読み込み機能を使用すると、アプリ アセンブリ
 
 ## <a name="project-file"></a>プロジェクト ファイル
 
-アプリのプロジェクト ファイル (`.csproj`) 内で、`BlazorWebAssemblyLazyLoad` 項目を使用して、遅延読み込みのマークをアセンブリに付けます。 `.dll` 拡張子を使用せずにアセンブリ名を使用します。 Blazor フレームワークを使用すると、この項目グループによって指定されたアセンブリはアプリの起動時に読み込まれません。 次の例では、大規模なカスタム アセンブリ (`GrantImaharaRobotControls.dll`) に遅延読み込みのマークを付けいています。 遅延読み込みのマークが付けられているアセンブリに依存関係がある場合、それらにはプロジェクト ファイル内でも遅延読み込みのマークを付ける必要があります。
+アプリのプロジェクト ファイル (`.csproj`) 内で、`BlazorWebAssemblyLazyLoad` 項目を使用して、遅延読み込みのマークをアセンブリに付けます。 `.dll` 拡張子が含まれるアセンブリ名を使用します。 Blazor フレームワークを使用すると、この項目グループによって指定されたアセンブリはアプリの起動時に読み込まれません。 次の例では、大規模なカスタム アセンブリ (`GrantImaharaRobotControls.dll`) に遅延読み込みのマークを付けいています。 遅延読み込みのマークが付けられているアセンブリに依存関係がある場合、それらにはプロジェクト ファイル内でも遅延読み込みのマークを付ける必要があります。
 
 ```xml
 <ItemGroup>
@@ -106,7 +106,7 @@ Blazor がルーティング可能なコンポーネントを求めて探索す�
 フレームワークの遅延読み込みの実装では、ホストされた Blazor ソリューションでのプリレンダリングによる遅延読み込みがサポートされます。 プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。 "*サーバー*" プロジェクトの `Startup.ConfigureServices` メソッド (`Startup.cs`) に、手動で `LazyAssemblyLoader` を登録します。
 
 ```csharp
-services.AddSingleton<LazyAssemblyLoader>();
+services.AddScoped<LazyAssemblyLoader>();
 ```
 
 ### <a name="user-interaction-with-navigating-content"></a>`<Navigating>` コンテンツとのユーザー操作

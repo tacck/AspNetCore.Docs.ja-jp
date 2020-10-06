@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 40e615d0698a0ed1d3ef40a222e064d72184f0c8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a0c53755bd56b6c169437ca9f0ea915e46ad79ec
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635295"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606751"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>パート 8、ASP.NET Core MVC アプリへの新しいフィールドの追加
 
@@ -62,7 +62,7 @@ dotnet build
 
 ------
 
-新しいフィールドを `Movie` クラスに追加したので、この新しいプロパティが含まれるように、拘束力のあるホワイト リストを更新する必要があります。 *MoviesController.cs* で、アクション メソッドの `Create` と `Edit` の両方の `[Bind]` 属性を更新し、`Rating` プロパティが含まれるようにします。
+新しいフィールドを `Movie` クラスに追加したので、この新しいプロパティが含まれるようにプロパティ バインディング リストを更新する必要があります。 *MoviesController.cs* で、アクション メソッドの `Create` と `Edit` の両方の `[Bind]` 属性を更新し、`Rating` プロパティが含まれるようにします。
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
