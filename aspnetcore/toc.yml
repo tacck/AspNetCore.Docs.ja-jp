@@ -918,18 +918,36 @@
         - name: ASP.NET Core モジュール
           displayName: 'deploy, publish'
           uid: host-and-deploy/aspnet-core-module
+        - name: インプロセス ホスティング
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/in-process-hosting
+        - name: アウトプロセス ホスティング
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/out-of-process-hosting
+        - name: ホスティング バンドル
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/hosting-bundle
+        - name: web.config ファイル
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/web-config
         - name: Visual Studio での IIS サポート
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/development-time-iis-support
         - name: IIS モジュール
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/modules
+        - name: ログの記録と診断
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/logging-and-diagnostics
         - name: トラブルシューティング
           displayName: 'deploy, publish'
           uid: test/troubleshoot-azure-iis
         - name: エラー リファレンス
           displayName: 'deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference
+        - name: 上級
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/advanced
         - name: web.config を変換する
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/transform-webconfig

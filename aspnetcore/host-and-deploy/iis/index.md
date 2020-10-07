@@ -18,27 +18,69 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: f648837ce42bef4a828d7eda1a6abdfdd8ac07a2
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 7fe3e18b226061260d0c17220ba110bd61486b5f
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91654037"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754698"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS を使用した Windows での ASP.NET Core のホスト
 
-<!-- 
+::: moniker range=">= aspnetcore-5.0"
 
-    NOTE FOR 5.0
-    
-    When making the 5.0 version of this topic, remove the Hosting Bundle
-    direct download section from the (new) <5.0 & >2.2 version and modify 
-    the text and heading for the *Earlier versions of the installer* 
-    section. See the 2.2 version for an example.
-    
--->
+インターネット インフォメーション サービス (IIS) は、Web アプリ (ASP.NET Core を含む) をホストするための、柔軟で安全で管理しやすい Web サーバーです。
 
-::: moniker range=">= aspnetcore-3.0"
+## <a name="supported-platforms"></a>サポートされているプラットフォーム
+
+次のオペレーティング システムがサポートされています。
+
+* Windows 7 以降
+* Windows Server 2012 R2 以降
+
+32 ビット (x86) または 64 ビット (x64) デプロイ用に発行されるアプリがサポートされています。 アプリが次の条件を満たさない限り、32 ビット (x86) .NET Core SDK を使う 32 ビット アプリをデプロイします:
+
+* 64 ビット アプリ用の大規模な仮想メモリ アドレス空間が必要。
+* 大規模な IIS スタック サイズが必要。
+* 64 ビットのネイティブの依存関係がある。
+
+## <a name="install-the-aspnet-core-modulehosting-bundle"></a>ASP.NET Core モジュール/ホスティング モジュールをインストールする
+
+次のリンクを使用してインストーラーをダウンロードします。
+
+[現在の .NET Core ホスティング バンドルのインストーラー (直接ダウンロード)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+
+ASP.NET Core モジュールの詳しいインストール手順については、「[.NET Core ホスティング バンドルのインストール](xref:host-and-deploy/iis/hosting-bundle)」を参照してください。
+
+## <a name="get-started"></a>はじめに
+
+IIS での Web サイトのホスティングの概要については、[ファースト ステップ ガイド](xref:tutorials/publish-to-iis)を参照してください。
+
+Azure App Services での Web サイトのホスティングの概要については、[Azure App Service へのデプロイのガイド](xref:host-and-deploy/azure-apps/index)を参照してください。
+
+## <a name="deployment-resources-for-iis-administrators"></a>IIS 管理者用の展開リソース
+
+* [IIS ドキュメント ](/iis)
+* [IIS での IIS マネージャーの概要](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
+* [.NET Core アプリケーションの展開](/dotnet/core/deploying/)
+* <xref:host-and-deploy/aspnet-core-module>
+* <xref:host-and-deploy/directory-structure>
+* <xref:host-and-deploy/iis/modules>
+* <xref:test/troubleshoot-azure-iis>
+* <xref:host-and-deploy/azure-iis-errors-reference>
+
+## <a name="additional-resources"></a>その他の技術情報
+
+* <xref:test/troubleshoot>
+* <xref:index>
+* [Microsoft IIS 公式サイト](https://www.iis.net/)
+* [Windows Server テクニカル コンテンツ ライブラリ](/windows-server/windows-server)
+* [IIS での HTTP/2](/iis/get-started/whats-new-in-iis-10/http2-on-iis)
+* <xref:host-and-deploy/iis/transform-webconfig>
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 ASP.NET Core アプリを IIS サーバーに発行する手順のチュートリアルについては、<xref:tutorials/publish-to-iis> をご覧ください。
 
@@ -99,7 +141,7 @@ IIS HTTP サーバーによって要求が処理された後は、次のよう�
 
 既存のアプリではインプロセス ホスティングがオプトインされています。 ASP.NET Core Web テンプレートでは、インプロセス ホスティング モデルが使用されます。
 
-`CreateDefaultBuilder` では、<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> メソッドを呼び出し、[CoreCLR](/dotnet/standard/glossary#coreclr) を起動して IIS ワーカー プロセス (*w3wp.exe* または *iisexpress.exe*) 内のアプリをホストすることで、<xref:Microsoft.AspNetCore.Hosting.Server.IServer> インスタンスを追加します。 パフォーマンス テストは、.NET Core アプリのインプロセス ホスティングでは、アプリのアウトプロセス ホスティングや [Kestrel](xref:fundamentals/servers/kestrel) へのプロキシ要求に比べ、スループットの要求が大幅に高くなることを示しています。
+`CreateDefaultBuilder` では、<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> メソッドを呼び出し、[CoreCLR](/dotnet/standard/glossary#coreclr) を起動して IIS ワーカー プロセス (`w3wp.exe` または `iisexpress.exe`) 内のアプリをホストすることで、<xref:Microsoft.AspNetCore.Hosting.Server.IServer> インスタンスを追加します。 パフォーマンス テストは、.NET Core アプリのインプロセス ホスティングでは、アプリのアウトプロセス ホスティングや [Kestrel](xref:fundamentals/servers/kestrel) へのプロキシ要求に比べ、スループットの要求が大幅に高くなることを示しています。
 
 単一ファイルの実行可能ファイルとして公開されたアプリは、インプロセス ホスティング モデルで読み込むことができません。
 
@@ -116,7 +158,7 @@ ASP.NET Core アプリは IIS ワーカー プロセスとは独立したプロ�
 1. モジュールでは、アプリのランダムなポートで Kestrel に要求を転送します。 ランダムなポートは 80 または 443 ではありません。
 
 <!-- make this a bullet list -->
-ASP.NET Core モジュールは、起動時に環境変数によってポートを指定します。 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> 拡張機能は、`http://localhost:{PORT}` でリッスンするようにサーバーを構成します。 追加のチェックが実行され、モジュールから発生していない要求は拒否されます。 モジュールは HTTPS 転送をサポートしていません。 要求は HTTPS を介して IIS によって受信された場合でも HTTP を介して転送されます。
+ASP.NET Core モジュールは、起動時に環境変数によってポートを指定します。 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration%2A> 拡張機能は、`http://localhost:{PORT}` でリッスンするようにサーバーを構成します。 追加のチェックが実行され、モジュールから発生していない要求は拒否されます。 モジュールは HTTPS 転送をサポートしていません。 要求は HTTPS を介して IIS によって受信された場合でも HTTP を介して転送されます。
 
 Kestrel によってモジュールから要求が取り込まれた後、その要求は ASP.NET Core ミドルウェア パイプラインに転送されます。 ミドルウェア パイプラインは要求を処理し、`HttpContext` インスタンスとしてアプリのロジックに渡します。 IIS 統合によって追加されたミドルウェアでは、カーネルへの要求の転送を考慮して、スキーム、リモート IP、およびパスベースが更新されます。 アプリの応答が IIS に戻され、IIS はその応答を、要求を開始した HTTP クライアントに返します。
 
@@ -128,7 +170,7 @@ ASP.NET Core モジュール構成のガイダンスについては、「<xref:h
 
 ### <a name="enable-the-iisintegration-components"></a>IISIntegration コンポーネントを有効にする
 
-`CreateHostBuilder` (*Program.cs*) でホストを構築する場合は、<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> を呼び出して IIS 統合を有効にします。
+`CreateHostBuilder` (`Program.cs`) でホストを構築する場合は、<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> を呼び出して IIS 統合を有効にします。
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -142,7 +184,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 **インプロセス ホスティング モデル**
 
-IIS サーバーのオプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISServerOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> に含めます。 次の例では、AutomaticAuthentication が無効になります。
+IIS サーバーのオプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISServerOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices%2A> に含めます。 次の例では、AutomaticAuthentication が無効になります。
 
 ```csharp
 services.Configure<IISServerOptions>(options => 
@@ -156,11 +198,11 @@ services.Configure<IISServerOptions>(options =>
 | `AutomaticAuthentication`      | `true`  | `true` の場合、IIS サーバーが [Windows 認証](xref:security/authentication/windowsauth)によって認証された `HttpContext.User` を設定します。 `false` の場合、サーバーは `HttpContext.User` の ID を提供するだけで、`AuthenticationScheme` によって明示的に要求されたときにチャレンジに応答します。 `AutomaticAuthentication` を機能させるためには、IIS で Windows 認証を有効にする必要があります。 詳細については、[Windows 認証](xref:security/authentication/windowsauth)に関する記事を参照してください。 |
 | `AuthenticationDisplayName`    | `null`  | ログイン ページでユーザーに表示名が表示されるように設定します。 |
 | `AllowSynchronousIO`           | `false` | `HttpContext.Request` および `HttpContext.Response` に対して同期 I/O が許可されるか。 |
-| `MaxRequestBodySize`           | `30000000`  | `HttpRequest` の最大要求本文サイズを取得または設定します。 IIS 自体に、`IISServerOptions` に設定された `MaxRequestBodySize` の前に処理される上限 `maxAllowedContentLength` があることに注意してください。 `MaxRequestBodySize` を変更しても、`maxAllowedContentLength` に影響はありません。 `maxAllowedContentLength`を引き上げるには、*web.config* 内にエントリを追加して `maxAllowedContentLength` をより高い値に設定します。 詳細については、「[Configuration (構成)](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration)」を参照してください。 |
+| `MaxRequestBodySize`           | `30000000`  | `HttpRequest` の最大要求本文サイズを取得または設定します。 IIS 自体に、`IISServerOptions` に設定された `MaxRequestBodySize` の前に処理される上限 `maxAllowedContentLength` があることに注意してください。 `MaxRequestBodySize` を変更しても、`maxAllowedContentLength` に影響はありません。 `maxAllowedContentLength`を引き上げるには、`web.config` 内にエントリを追加して `maxAllowedContentLength` をより高い値に設定します。 詳細については、「[Configuration (構成)](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration)」を参照してください。 |
 
 **アウトプロセス ホスティング モデル**
 
-IIS オプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> に含めます。 次の例では、アプリが `HttpContext.Connection.ClientCertificate` を設定できません。
+IIS オプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices%2A> に含めます。 次の例では、アプリが `HttpContext.Connection.ClientCertificate` を設定できません。
 
 ```csharp
 services.Configure<IISOptions>(options => 
@@ -186,21 +228,21 @@ services.Configure<IISOptions>(options =>
 
 追加のプロキシ サーバーとロード バランサーの背後でホストされているアプリでは、追加の構成が必要になる場合があります。 詳細については、「[プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する](xref:host-and-deploy/proxy-load-balancer)」を参照してください。
 
-### <a name="webconfig-file"></a>web.config ファイル
+### <a name="webconfig-file"></a>`web.config` ファイル
 
-*web.config* ファイルでは、[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)を設定します。 *web.config* ファイルの作成、変換、および公開は、プロジェクトの公開時に、MSBuild ターゲット (`_TransformWebConfig`) によって処理されます。 このターゲットは、Web SDK ターゲット (`Microsoft.NET.Sdk.Web`) に存在します。 SDK は、プロジェクト ファイルの先頭で設定されています。
+`web.config` ファイルでは、[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)を設定します。 `web.config` ファイルの作成、変換、および公開は、プロジェクトの公開時に、MSBuild ターゲット (`_TransformWebConfig`) によって処理されます。 このターゲットは、Web SDK ターゲット (`Microsoft.NET.Sdk.Web`) に存在します。 SDK は、プロジェクト ファイルの先頭で設定されています。
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-プロジェクト内に *web.config* ファイルが存在しない場合、そのファイルは ASP.NET Core モジュールを構成するための適切な *processPath* と *arguments* を使用して作成され、[発行された出力](xref:host-and-deploy/directory-structure)に移行されます。
+プロジェクト内に `web.config` ファイルが存在しない場合、そのファイルは ASP.NET Core モジュールを構成するための適切な `processPath` と `arguments` を使用して作成され、[発行された出力](xref:host-and-deploy/directory-structure)に移行されます。
 
-プロジェクトに *web.config* ファイルが含まれていない場合、そのファイルは ASP.NET Core モジュールを構成するための正しい *processPath* と *arguments* を使用して作成され、発行された出力に移行されます。 変換によりファイル内の IIS 構成の設定が変わることはありません。
+プロジェクトに `web.config` ファイルが含まれていない場合、そのファイルは ASP.NET Core モジュールを構成するための正しい `processPath` と `arguments` を使用して作成され、発行された出力に移行されます。 変換によりファイル内の IIS 構成の設定が変わることはありません。
 
-*web.config* ファイルは、アクティブな IIS モジュールを制御する追加の IIS 構成設定を提供する可能性があります。 ASP.NET Core アプリを使用して要求を処理できる IIS モジュールの詳細については、[IIS モジュール](xref:host-and-deploy/iis/modules)のトピックを参照してください。
+`web.config` ファイルは、アクティブな IIS モジュールを制御する追加の IIS 構成設定を提供する可能性があります。 ASP.NET Core アプリを使用して要求を処理できる IIS モジュールの詳細については、[IIS モジュール](xref:host-and-deploy/iis/modules)のトピックを参照してください。
 
-Web SDK によって *web.config* ファイルが変換されないようにするため、 **\<IsTransformWebConfigDisabled>** プロパティをプロジェクト ファイルで使用します。
+Web SDK によって `web.config` ファイルが変換されないようにするため、`<IsTransformWebConfigDisabled>` プロパティをプロジェクト ファイルで使用します。
 
 ```xml
 <PropertyGroup>
@@ -208,19 +250,19 @@ Web SDK によって *web.config* ファイルが変換されないようにす�
 </PropertyGroup>
 ```
 
-Web SDK ファイルの変換を無効にすると、 *processPath*と*引数*開発者によって手動で設定する必要があります。 詳細については、「<xref:host-and-deploy/aspnet-core-module>」を参照してください。
+Web SDK ファイルの変換を無効にすると、 `processPath`と`arguments`開発者によって手動で設定する必要があります。 詳細については、<xref:host-and-deploy/aspnet-core-module> を参照してください。
 
-### <a name="webconfig-file-location"></a>web.config ファイルの場所
+### <a name="webconfig-file-location"></a>`web.config` ファイルの場所
 
-[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)を正しく設定するためには、*web.config* ファイルが、展開されるアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) パス (通常はアプリ ベース パス) に存在する必要があります。 これは、IIS に提供される web サイトの物理パスと同じ場所です。 *Web.config* ファイルは、Web 配置を使用して複数のアプリの発行を有効にするため、アプリのルートで必要です。
+[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)を正しく設定するためには、`web.config` ファイルが、展開されるアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) パス (通常はアプリ ベース パス) に存在する必要があります。 これは、IIS に提供される web サイトの物理パスと同じ場所です。 `web.config` ファイルは、Web 配置を使用して複数のアプリの発行を有効にするため、アプリのルートで必要です。
 
-アプリの物理パスには、 *\<assembly>.runtimeconfig.json*、 *\<assembly>.xml* (XML ドキュメントのコメント)、 *\<assembly>.deps.json* などの機密性の高いファイルが存在します。 *web.config* ファイルが存在し、サイトは通常どおり起動した場合、IIS は、これらの機密性の高いファイルが要求された場合にファイルを提供しません。 *web.config*ファイルが存在しないか、不適切な名前が付けられているか、または通常の起動用にサイトを構成できない場合、IIS が機密性の高いファイルを公開する可能性があります。
+アプリの物理パスには、`{ASSEMBLY}.runtimeconfig.json`、`{ASSEMBLY}.xml` (XML ドキュメントのコメント)、`{ASSEMBLY}.deps.json` (プレースホルダー `{ASSEMBLY}` はアセンブリ名) などの機密性の高いファイルが存在します。 `web.config` ファイルが存在し、サイトは通常どおり起動した場合、IIS は、これらの機密性の高いファイルが要求された場合にファイルを提供しません。 `web.config`ファイルが存在しないか、不適切な名前が付けられているか、または通常の起動用にサイトを構成できない場合、IIS が機密性の高いファイルを公開する可能性があります。
 
-***web.config*ファイルは、展開環境に常に存在し、適切な名前が付けられ、通常の起動用にサイトを構成できる必要があります。*web.config* ファイルを運用環境の展開から削除しないでください。**
+**`web.config`ファイルは、展開環境に常に存在し、適切な名前が付けられ、通常の起動用にサイトを構成できる必要があります。`web.config` ファイルを運用環境の展開から削除しないでください。**
 
 ### <a name="transform-webconfig"></a>web.config を変換する
 
-発行時に "*web.config*" を変換する場合は、「<xref:host-and-deploy/iis/transform-webconfig>」を参照してください。 発行時に "*web.config*" を変換して、構成、プロファイル、環境に基づいた環境変数を設定しなければならない場合があります。
+発行時に "`web.config`" を変換する場合は、「<xref:host-and-deploy/iis/transform-webconfig>」を参照してください。 発行時に "`web.config`" を変換して、構成、プロファイル、環境に基づいた環境変数を設定しなければならない場合があります。
 
 ## <a name="iis-configuration"></a>IIS 構成
 
@@ -237,7 +279,7 @@ Web SDK ファイルの変換を無効にすると、 *processPath*と*引数*�
    ![[役割サービスの選択] のステップで既定の役割サービスを選択します。](index/_static/role-services-ws2016.png)
 
    **Windows 認証 (任意)**  
-   Windows 認証を有効にするには、 **[Web サーバー]**  >  **[セキュリティ]** ノードを展開します。 **[Windows 認証]** 機能を選択します。 詳細については、「[Windows 認証 \<windowsAuthentication>](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/)」および [Windows 認証の構成](xref:security/authentication/windowsauth)に関するページを参照してください。
+   Windows 認証を有効にするには、 **[Web サーバー]**  >  **[セキュリティ]** ノードを展開します。 **[Windows 認証]** 機能を選択します。 詳細については、「[Windows 認証 `<windowsAuthentication>`](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/)」および [Windows 認証の構成](xref:security/authentication/windowsauth)に関するページを参照してください。
 
    **Websocket (省略可能)**  
    WebSockets は、ASP.NET Core 1.1 以降でサポートされています。 WebSocket を有効にするには、 **[Web サーバー]**  >  **[アプリケーション開発]** ノードを展開します。 **[WebSocket プロトコル]** 機能を選択します。 詳細については、[WebSockets](xref:fundamentals/websockets) に関するページを参照してください。
@@ -303,7 +345,7 @@ Web SDK ファイルの変換を無効にすると、 *processPath*と*引数*�
    * `OPT_NO_RUNTIME=1`:.NET Core ランタイムのインストールをスキップします。 サーバーが[自己完結型の展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) のみをホストする場合に使用します。
    * `OPT_NO_SHAREDFX=1`:ASP.NET Shared Framework (ASP.NET ランタイム) のインストールをスキップします。 サーバーが[自己完結型の展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) のみをホストする場合に使用します。
    * `OPT_NO_X86=1`:x86 ランタイムのインストールをスキップします。 32 ビット アプリをホストしない場合は、このパラメーターを使用します。 今後、32 ビットと 64 ビットのアプリ両方をホストする可能性がある場合は、このパラメーターを使用せずに、両方のランタイムをインストールします。
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`:共有構成 (*applicationHost.config*) が IIS のインストールと同じマシン上にある場合、IIS 共有構成を使用するためのチェックを無効にします。 "*ASP.NET Core 2.2 以降の Hosting Bundler インストーラーに対してのみ使用できます。* " 詳細については、「<xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>」を参照してください。
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`:共有構成 (`applicationHost.config`) が IIS のインストールと同じマシン上にある場合、IIS 共有構成を使用するためのチェックを無効にします。 "*ASP.NET Core 2.2 以降の Hosting Bundler インストーラーに対してのみ使用できます。* " 詳細については、「<xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>」を参照してください。
 1. システムを再起動するか、コマンドシェルで次のコマンドを実行します。
 
    ```console
@@ -364,7 +406,7 @@ net start w3svc
 
 ## <a name="deploy-the-app"></a>アプリを配置する
 
-「[IIS サイトを作成する](#create-the-iis-site)」セクションで確立された IIS の **[物理パス]** フォルダーにアプリを配置します。 お勧めの配置方法は [Web 配置](/iis/publish/using-web-deploy/introduction-to-web-deploy)ですが、プロジェクトの *publish* フォルダーからホスティング システムの配置フォルダーにアプリを移動するためのオプションはいくつか存在します。
+「[IIS サイトを作成する](#create-the-iis-site)」セクションで確立された IIS の **[物理パス]** フォルダーにアプリを配置します。 お勧めの配置方法は [Web 配置](/iis/publish/using-web-deploy/introduction-to-web-deploy)ですが、プロジェクトの `publish` フォルダーからホスティング システムの配置フォルダーにアプリを移動するためのオプションはいくつか存在します。
 
 ### <a name="web-deploy-with-visual-studio"></a>Visual Studio からのアプリの展開
 
@@ -394,9 +436,9 @@ IIS への ASP.NET Core の展開の詳細については、「[IIS 管理者用
 
 アプリが実行中は、展開フォルダー内のファイルがロックされます。 展開中にロックされたファイルを上書きすることはできません。 展開でロックされているファイルをリリースするには、次の**いずれか**の方法を使用してアプリ プールを停止します。
 
-* Web 配置を使用し、プロジェクト ファイル内の `Microsoft.NET.Sdk.Web` を参照して停止します。 *app_offline.htm* ファイルは、Web アプリのディレクトリのルートに配置されます。 ファイルが存在する場合、ASP.NET Core モジュールはアプリを正常にシャットダウンし、展開中に *app_offline.htm* ファイルを提供します。 詳細については、「[ASP.NET Core モジュール構成リファレンス](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)」を参照してください。
+* Web 配置を使用し、プロジェクト ファイル内の `Microsoft.NET.Sdk.Web` を参照して停止します。 `app_offline.htm` ファイルは、Web アプリのディレクトリのルートに配置されます。 ファイルが存在する場合、ASP.NET Core モジュールはアプリを正常にシャットダウンし、展開中に `app_offline.htm` ファイルを提供します。 詳細については、「[ASP.NET Core モジュール構成リファレンス](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)」を参照してください。
 * サーバー上の IIS マネージャーで手動によりアプリ プールを停止します。
-* PowerShell を使用して *app_offline.html* をドロップします (PowerShell 5 以降が必要)。
+* PowerShell を使用して `app_offline.htm` をドロップします (PowerShell 5 以降が必要)。
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -408,7 +450,6 @@ IIS への ASP.NET Core の展開の詳細については、「[IIS 管理者用
 
   # Restart the AppPool
   Remove-Item -Path $pathToApp app_offline.htm
-
   ```
 
 ## <a name="data-protection"></a>データの保護
@@ -531,7 +572,7 @@ IIS 管理プロセスは、Windows セキュリティ システムでのアプ�
 
 1. **[場所]** ボタンを選択し、システムが選択されていることを確認します。
 
-1. **[選択するオブジェクト名を入力してください]** 領域に、「**IIS AppPool\\<app_pool_name>** 」と入力します。 **[名前の確認]** を選択します。 *DefaultAppPool* で、**IIS AppPool\DefaultAppPool** を使用して名前を確認します。 **[名前の確認]** ボタンが選択されているときには、**DefaultAppPool** の値が、オブジェクト名領域に表示されます。 オブジェクト名の領域に直接アプリケーション プール名を入力することはできません。 オブジェクト名を確認するときには、**IIS AppPool\\<app_pool_name>** の形式を使用します。
+1. **[選択するオブジェクト名を入力してください]** 領域に、「`IIS AppPool\{APP POOL NAME}`」(プレースホルダー `{APP POOL NAME}` はアプリ プール名) を入力します。 **[名前の確認]** を選択します。 *DefaultAppPool* で、`IIS AppPool\DefaultAppPool` を使用して名前を確認します。 **[名前の確認]** ボタンが選択されているときには、`DefaultAppPool` の値が、オブジェクト名領域に表示されます。 オブジェクト名の領域に直接アプリケーション プール名を入力することはできません。 `IIS AppPool\{APP POOL NAME}` 形式を使用します。ここで、プレースホルダー `{APP POOL NAME}` は、オブジェクト名を確認するときのアプリ プール名です。
 
    ![アプリ フォルダーのユーザーまたはグループのダイアログを選択します。[名前の確認] を選択する前に、オブジェクト名領域で "DefaultAppPool" のアプリ プール名が "IIS AppPool\" に適用されます。](index/_static/select-users-or-groups-1.png)
 
@@ -541,7 +582,7 @@ IIS 管理プロセスは、Windows セキュリティ システムでのアプ�
 
 1. 読み取り &amp; 実行アクセス許可は、既定で付与される必要があります。 必要に応じて、追加のアクセス許可を提供します。
 
-**ICACLS** ツールを使用してコマンド プロンプトでアクセス許可を付与することもできます。 たとえば、*DefaultAppPool* を使用する場合、次のコマンドを使用します。
+**ICACLS** ツールを使用してコマンド プロンプトでアクセス許可を付与することもできます。 たとえば、`DefaultAppPool` を使用する場合、次のコマンドを使用します。
 
 ```console
 ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
@@ -549,11 +590,29 @@ ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
 
 詳細については、「[icacls](/windows-server/administration/windows-commands/icacls)」のトピックを参照してください。
 
+## <a name="http2-support"></a>HTTP/2 のサポート
+
+[HTTP/2](https://httpwg.org/specs/rfc7540.html) は、次の IIS 展開シナリオでの ASP.NET Core でサポートされます。
+
+* インプロセス
+  * Windows Server 2016/Windows 10 以降、IIS 10 以降
+  * TLS 1.2 以降の接続
+* アウトプロセス
+  * Windows Server 2016/Windows 10 以降、IIS 10 以降
+  * 一般向けのエッジ サーバーでは HTTP/2 を使用しますが、[Kestrel サーバー](xref:fundamentals/servers/kestrel)へのリバース プロキシ接続では HTTP/1.1 を使用します。
+  * TLS 1.2 以降の接続
+
+インプロセスの展開の場合、HTTP/2 接続が確立されると、[`HttpRequest.Protocol`](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) によって `HTTP/2` が報告されます。 アウトプロセスの展開の場合、HTTP/2 接続が確立されると、[`HttpRequest.Protocol`](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) によって `HTTP/1.1` が報告されます。
+
+インプロセスおよびアウトプロセス ホスティング モデルの詳細については、<xref:host-and-deploy/aspnet-core-module> をご覧ください。
+
+HTTP/2 は既定で有効になっています。 HTTP/2 接続が確立されない場合、接続は HTTP/1.1 にフォールバックします。 IIS 展開での HTTP/2 構成の詳細については、[IIS での HTTP/2](/iis/get-started/whats-new-in-iis-10/http2-on-iis) に関するページを参照してください。
+
 ## <a name="cors-preflight-requests"></a>CORS プレフライト要求
 
 "*このセクションは、.NET Framework をターゲットにした ASP.NET Core アプリにのみ適用されます。* "
 
-.NET Framework をターゲットにした ASP.NET Core アプリの場合、IIS では既定で OPTIONS 要求がアプリに渡されません。 OPTIONS 要求を渡すように *web.config* でアプリの IIS のハンドラーを構成する方法については、[ASP.NET Web API 2 でのクロスオリジン要求の有効化:CORS のしくみ](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)に関する記事をご覧ください。
+.NET Framework をターゲットにした ASP.NET Core アプリの場合、IIS では既定で OPTIONS 要求がアプリに渡されません。 OPTIONS 要求を渡すように `web.config` でアプリの IIS のハンドラーを構成する方法については、[ASP.NET Web API 2 でのクロスオリジン要求の有効化:CORS のしくみ](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)に関する記事をご覧ください。
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>Application Initialization モジュールとアイドル タイムアウト
 
@@ -593,7 +652,7 @@ Windows Server 2008 R2 以降の場合:
   1. アプリを右クリックして、 **[Web サイトの管理]** > **[詳細設定]** の順に選択します。
   1. 既定の **[有効化されたプリロード]** 設定は **[False]** です。 **[有効化されたプリロード]** を **True** に設定します。 **[OK]** を選択します。
 
-* *web.config* を使う場合、`doAppInitAfterRestart` を `true` に設定した `<applicationInitialization>` 要素を、アプリの *web.config* ファイル内の `<system.webServer>` 要素に追加します。
+* `web.config` を使う場合、`doAppInitAfterRestart` を `true` に設定した `<applicationInitialization>` 要素を、アプリの web.config ファイル内の `<system.webServer>` 要素に追加します。
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -708,7 +767,7 @@ IIS HTTP サーバーによって要求が処理された後、その要求は A
 
 インプロセス ホスティングは既存のアプリではオプトインになっていますが、[dotnet new](/dotnet/core/tools/dotnet-new) テンプレートは既定ではすべての IIS および IIS Express シナリオにおいてインプロセス ホスティング モデルに設定されています。
 
-`CreateDefaultBuilder` では、<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> メソッドを呼び出し、[CoreCLR](/dotnet/standard/glossary#coreclr) を起動して IIS ワーカー プロセス (*w3wp.exe* または *iisexpress.exe*) 内のアプリをホストすることで、<xref:Microsoft.AspNetCore.Hosting.Server.IServer> インスタンスを追加します。 パフォーマンス テストは、.NET Core アプリのインプロセス ホスティングでは、アプリのアウトプロセス ホスティングや [Kestrel](xref:fundamentals/servers/kestrel) サーバーへのプロキシ要求に比べ、スループットの要求が大幅に高くなることを示しています。
+`CreateDefaultBuilder` では、<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> メソッドを呼び出し、[CoreCLR](/dotnet/standard/glossary#coreclr) を起動して IIS ワーカー プロセス (*w3wp.exe* または *iisexpress.exe*) 内のアプリをホストすることで、<xref:Microsoft.AspNetCore.Hosting.Server.IServer> インスタンスを追加します。 パフォーマンス テストは、.NET Core アプリのインプロセス ホスティングでは、アプリのアウトプロセス ホスティングや [Kestrel](xref:fundamentals/servers/kestrel) サーバーへのプロキシ要求に比べ、スループットの要求が大幅に高くなることを示しています。
 
 ### <a name="out-of-process-hosting-model"></a>アウト プロセス ホスティング モデル
 
@@ -732,7 +791,7 @@ ASP.NET Core モジュール構成のガイダンスについては、「<xref:h
 
 ### <a name="enable-the-iisintegration-components"></a>IISIntegration コンポーネントを有効にする
 
-`CreateWebHostBuilder` (*Program.cs*) でホストを構築する場合は、<xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> を呼び出して IIS 統合を有効にします。
+`CreateWebHostBuilder` (*Program.cs*) でホストを構築する場合は、<xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> を呼び出して IIS 統合を有効にします。
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -746,7 +805,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 **インプロセス ホスティング モデル**
 
-IIS サーバーのオプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISServerOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> に含めます。 次の例では、AutomaticAuthentication が無効になります。
+IIS サーバーのオプションを構成するには、<xref:Microsoft.AspNetCore.Builder.IISServerOptions> 用のサービス構成を <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices%2A> に含めます。 次の例では、AutomaticAuthentication が無効になります。
 
 ```csharp
 services.Configure<IISServerOptions>(options => 
@@ -1297,7 +1356,7 @@ Kestrel によってモジュールから要求が取り込まれた後、その
 
 `CreateDefaultBuilder` は [Kestrel](xref:fundamentals/servers/kestrel) サーバーを Web サーバーとして構成し、ベース パスとポートを [ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)に構成することで、IIS 統合を有効にします。
 
-ASP.NET Core モジュールでは、バックエンド プロセスに割り当てる動的なポートが生成されます。 `CreateDefaultBuilder` では <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> メソッドが呼び出されます。 `UseIISIntegration` では、localhost の IP アドレス (`127.0.0.1`) で動的なポートをリッスンするように Kestrel が構成されます。 動的なポートが 1234 である場合、Kestrel は `127.0.0.1:1234` でリッスンします。 この構成によって、以下から提供されるその他の URL 構成が置き換えられます。
+ASP.NET Core モジュールでは、バックエンド プロセスに割り当てる動的なポートが生成されます。 `CreateDefaultBuilder` では <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration%2A> メソッドが呼び出されます。 `UseIISIntegration` では、localhost の IP アドレス (`127.0.0.1`) で動的なポートをリッスンするように Kestrel が構成されます。 動的なポートが 1234 である場合、Kestrel は `127.0.0.1:1234` でリッスンします。 この構成によって、以下から提供されるその他の URL 構成が置き換えられます。
 
 * `UseUrls`
 * [Kestrel の Listen API](xref:fundamentals/servers/kestrel#endpoint-configuration)
@@ -1313,7 +1372,7 @@ ASP.NET Core モジュール構成のガイダンスについては、「<xref:h
 
 ### <a name="enable-the-iisintegration-components"></a>IISIntegration コンポーネントを有効にする
 
-`CreateWebHostBuilder` (*Program.cs*) でホストを構築する場合は、<xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> を呼び出して IIS 統合を有効にします。
+`CreateWebHostBuilder` (*Program.cs*) でホストを構築する場合は、<xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> を呼び出して IIS 統合を有効にします。
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
