@@ -5,7 +5,7 @@ description: Blazor Server アプリを ASP.NET Core アプリケーションと
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/02/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6d0f6f859dbaef98c6c8a9c53fe9858705cdc0a
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626455"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805506"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>ASP.NET Core Blazor Server アプリをセキュリティで保護する
 
 作成者: [Luke Latham](https://github.com/guardrex)
 
-Blazor Server アプリは、ASP.NET Core アプリと同じ方法でセキュリティが構成されます。 詳細については、<xref:security/index> の記事を参照してください。 この概要に含まれるトピックは、Blazor Server に特に当てはまります。 
+Blazor Server アプリは、ASP.NET Core アプリと同じ方法でセキュリティが構成されます。 詳細については、<xref:security/index> の記事を参照してください。 この概要に含まれるトピックは、Blazor Server に特に当てはまります。
 
 ## <a name="no-locblazor-server-project-template"></a>Blazor Server プロジェクト テンプレート
 
@@ -108,7 +108,14 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 * プロジェクトのフォルダーを作成します。
 * プロジェクトに名前を付けます。
 
-詳細については、.NET Core ガイドの [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを参照してください。
+詳細情報:
+
+* .NET Core ガイドの [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを参照してください。
+* コマンド シェルで Blazor Server テンプレート (`blazorserver`) のヘルプ コマンドを実行します。
+
+  ```dotnetcli
+  dotnet new blazorserver --help
+  ```
 
 ---
 
@@ -118,3 +125,8 @@ Identity を Blazor Server プロジェクトにスキャフォールディン�
 
 * [既存の承認がありません](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization)。
 * [承認があります](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization)。
+
+## <a name="additional-resources"></a>その他の資料
+
+* [クイック スタート:Microsoft でのサインインを ASP.NET Core Web アプリに追加する](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
+* [クイック スタート:Microsoft ID プラットフォームを使用して ASP.NET Core Web API を保護する](/azure/active-directory/develop/quickstart-v2-aspnet-core-web-api)
