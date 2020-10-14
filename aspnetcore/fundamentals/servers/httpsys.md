@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 8ed9ec3447205107194ffa5c329c0e5ae0fc5553
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722872"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653972"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core での HTTP.sys Web サーバーの実装
 
@@ -271,6 +271,23 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>プロキシ サーバーとロード バランサーのシナリオ
 
 インターネットや企業ネットワークからの要求とやりとりする HTTP.sys でホストされるアプリの場合、プロキシ サーバーやロード バランサーの背後でホストするとき、追加の構成が必要になることがあります。 詳細については、「[プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する](xref:host-and-deploy/proxy-load-balancer)」を参照してください。
+
+## <a name="advanced-http2-features-to-support-grpc"></a>gRPC をサポートする高度な HTTP/2 機能
+
+HTTP.sys 内の追加の HTTP/2 機能によって、gRPC がサポートされています。これには、応答トレーラーやリセット フレームの送信に関するサポートが含まれます。
+
+HTTP.SYS で gRPC を実行するための要件:
+
+* Windows 10、OS Build 19041.508 以降
+* TLS 1.2 以降の接続
+
+### <a name="trailers"></a>予告編
+
+[!INCLUDE[](~/includes/trailers.md)]
+
+### <a name="reset"></a>Reset
+
+[!INCLUDE[](~/includes/reset.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

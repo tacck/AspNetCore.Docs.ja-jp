@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 2d002e075f9d57654589b540e522307c363d9660
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: 99e0109ea4c2526e9f91a8a4df23c4557e9be83a
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153546"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762309"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
 
@@ -34,6 +34,8 @@ ASP.NET Core では依存関係の挿入 (DI) ソフトウェア設計パター�
 MVC コントローラー内部における依存関係の挿入に固有の情報については、<xref:mvc/controllers/dependency-injection> をご覧ください。
 
 オプションとしての依存関係挿入の詳細については、「<xref:fundamentals/configuration/options>」を参照してください。
+
+このトピックでは、ASP.NET Core での依存関係の挿入について説明します。 コンソール アプリで依存関係の挿入を使用することの詳細については、「[.NET での依存関係の挿入](/dotnet/core/extensions/dependency-injection)」を参照してください。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 

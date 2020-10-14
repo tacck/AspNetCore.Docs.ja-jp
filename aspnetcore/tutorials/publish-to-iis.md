@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: 34707def9728211b9c2aa36d255f2467d1e3d661
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 40c47da472257862414ba33be582eb19d3f0b29c
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627794"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754555"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS に ASP.NET Core アプリを発行する
 
@@ -60,15 +60,22 @@ ms.locfileid: "88627794"
 
 1. IIS サーバーでインストーラーを実行します。
 
-1. サーバーを再起動するか、コマンド シェルで **net stop was /y** に続けて **net start w3svc** を実行します。
+1. サーバーを再起動するか、コマンド シェルで `net stop was /y` に続けて `net start w3svc` を実行します。
 
 ## <a name="create-the-iis-site"></a>IIS サイトを作成する
 
-1. IIS サーバーで、アプリの公開フォルダーとファイルを格納するフォルダーを作成します。 以下の手順では、フォルダーのパスはアプリへの物理パスとして IIS に提供されます。
+1. IIS サーバーで、アプリの公開フォルダーとファイルを格納するフォルダーを作成します。 以下の手順では、フォルダーのパスはアプリへの物理パスとして IIS に提供されます。 アプリの配置フォルダーとファイル レイアウトについて詳しくは、<xref:host-and-deploy/directory-structure> をご覧ください。
 
 1. IIS マネージャーの **[接続]** パネルで、サーバーのノードを開きます。 **[サイト]** フォルダーを右クリックします。 コンテキスト メニューで **[Web サイトの追加]** を選択します。
 
 1. **[サイト名]** を指定し、 **[物理パス]** には作成したアプリの配置フォルダーを設定します。 **[バインド]** の構成を指定して **[OK]** を選択し、Web サイトを作成します。
+
+   > [!WARNING]
+   > 最上位のワイルドカードのバインド ( `http://*:80/` と `http://+:80` ) は使用しては **いけません** 。 最上位のワイルドカードのバインドは、セキュリティの脆弱性に対してアプリを切り開くことができます。 これは、強力と脆弱の両方のワイルドカードに適用されます。 ワイルドカードではなく、明示的なホスト名を使用します。 全体の親ドメインを制御する場合、サブドメイン ワイルドカード バインド (たとえば、`*.mysub.com`) にこのセキュリティ リスクはありません (脆弱である `*.com` とは対照的)。 詳細については、[rfc7230 セクション-5.4](https://tools.ietf.org/html/rfc7230#section-5.4) を参照してください。
+
+1. プロセス モデル ID に適切なアクセス許可があることを確認します。
+
+   アプリ プールの既定の ID ( **[プロセス モデル]**  >  **[Identity]** ) を `ApplicationPoolIdentity` から別の ID に変更した場合は、アプリのフォルダー、データベース、その他の必要なリソースにアクセスするために要求されるアクセス許可が新しい ID に設定されていることを確認します。 たとえば、アプリケーション プールには、アプリがファイルの読み取りおよび書き込みを行うフォルダーへの読み取りおよび書き込みアクセスが必要です。
 
 ## <a name="create-an-aspnet-core-no-locrazor-pages-app"></a>ASP.NET Core Razor Pages アプリを作成する
 
@@ -77,7 +84,7 @@ ms.locfileid: "88627794"
 ## <a name="publish-and-deploy-the-app"></a>アプリを発行および配置する
 
 "*アプリを発行する*" とは、サーバーでホストできるコンパイル済みのアプリを生成するということです。 "*アプリを展開する*" とは、発行済みのアプリをホスティング システムに移動するということです。 発行手順は [.NET Core SDK](/dotnet/core/sdk) で処理されます。一方で、展開手順はさまざまな手法で処理できます。 このチュートリアルでは、"*フォルダー*" 展開手法を採用しています。
-
+ 
 * アプリはフォルダーに発行されます。
 * フォルダーの内容が IIS サイトのフォルダーに移動されます (IIS マネージャーのサイトの**物理パス**)。
 
@@ -87,7 +94,7 @@ ms.locfileid: "88627794"
 1. **[発行先を選択]** ダイアログで、 **[フォルダー]** 発行オプションを選択します。
 1. **フォルダーまたはファイル共有**パスを選択します。
    * ネットワーク共有として開発用のコンピューターで利用できる IIS サイトのフォルダーを作成した場合、共有へのパスを指定します。 現在のユーザーに、共有に発行するための書き込みアクセスを与える必要があります。
-   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに *bin/Release/{TARGET FRAMEWORK}/publish* フォルダーの内容を移動します。
+   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -97,14 +104,14 @@ ms.locfileid: "88627794"
    dotnet publish --configuration Release
    ```
 
-1. IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに *bin/Release/{TARGET FRAMEWORK}/publish* フォルダーの内容を移動します。
+1. IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 1. **[ソリューション]** でプロジェクトを右クリックし、 **[発行]**  >  **[フォルダーに発行]** の順に選択します。
 1. **[フォルダーを選択してください]** パスを設定します。
    * ネットワーク共有として開発用のコンピューターで利用できる IIS サイトのフォルダーを作成した場合、共有へのパスを指定します。 現在のユーザーに、共有に発行するための書き込みアクセスを与える必要があります。
-   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに *bin/Release/{TARGET FRAMEWORK}/publish* フォルダーの内容を移動します。
+   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
 
 ---
 
@@ -151,3 +158,15 @@ IIS で ASP.NET Core アプリをホストする方法の詳細については�
 
 * [Microsoft IIS 公式サイト](https://www.iis.net/)
 * [Windows Server テクニカル コンテンツ ライブラリ](/windows-server/windows-server)
+
+### <a name="deployment-resources-for-iis-administrators"></a>IIS 管理者用の展開リソース
+
+* [IIS ドキュメント ](/iis)
+* [IIS での IIS マネージャーの概要](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
+* [.NET Core アプリケーションの展開](/dotnet/core/deploying/)
+* <xref:host-and-deploy/aspnet-core-module>
+* <xref:host-and-deploy/directory-structure>
+* <xref:host-and-deploy/iis/modules>
+* <xref:test/troubleshoot-azure-iis>
+* <xref:host-and-deploy/azure-iis-errors-reference>
+

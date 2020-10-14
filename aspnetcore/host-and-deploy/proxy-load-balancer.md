@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 209f75edc2901422b94c619a505e0b8316aec699
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 2babfb33921412f5da20d2b5060766b7ee483392
+ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865390"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91671757"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する
 
@@ -48,7 +48,7 @@ ASP.NET Core の推奨される構成では、アプリは IIS/ASP.NET Core モ�
 | X-Forwarded-Proto | 開始スキーム (HTTP/HTTPS) の値です。 要求が複数のプロキシを通過している場合、値はスキームのリストである場合もあります。 |
 | X-Forwarded-Host | ホスト ヘッダー フィールドの元の値です。 通常、プロキシはホスト ヘッダーを変更しません。 プロキシにおいてホスト ヘッダーが既知の適切な値であることが検証されない、または既知の適切な値に制限されないシステムに影響を与える、特権の昇格脆弱性については、[マイクロソフト セキュリティ アドバイザリ CVE-2018-0787](https://github.com/aspnet/Announcements/issues/295) をご覧ください。 |
 
-[Microsoft.AspNetCore.HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) パッケージの Forwarded Headers Middleware は、これらのヘッダーを読み取り、<xref:Microsoft.AspNetCore.Http.HttpContext> の関連するフィールドに入力します。
+Forwarded Headers Middleware (<xref:Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersMiddleware>) によって、これらのヘッダーが読み取られ、<xref:Microsoft.AspNetCore.Http.HttpContext> 上の関連するフィールドに入力されます。
 
 ミドルウェアの更新:
 

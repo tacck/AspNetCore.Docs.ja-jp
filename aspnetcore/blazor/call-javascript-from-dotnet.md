@@ -5,7 +5,7 @@ description: Blazor アプリで .NET メソッドから JavaScript 関数を呼
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/17/2020
+ms.date: 10/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: da4ce8a2610fc07d22153f66831d693ae66e0fe5
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424153"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762166"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -515,13 +515,13 @@ export function showPrompt(message) {
 前の JavaScript モジュールを静的 Web アセット (`wwwroot/exampleJsInterop.js`) として .NET ライブラリに追加し、<xref:Microsoft.JSInterop.IJSRuntime> サービスを使用してそのモジュールを .NET コードにインポートします。 サービスは、次の例では `jsRuntime` (表示はなし) として挿入されます。
 
 ```csharp
-var module = await jsRuntime.InvokeAsync<JSObjectReference>(
+var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
 前の例の `import` 識別子は、JavaScript モジュールをインポートするために特別に使用される特殊な識別子です。 安定した静的な Web アセット パスを使用してモジュールを指定します: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}`。 プレースホルダー `{LIBRARY NAME}` は、ライブラリの名前です。 プレースホルダー `{PATH UNDER WWWROOT}` は、`wwwroot` の下にあるスクリプトへのパスです。
 
-<xref:Microsoft.JSInterop.IJSRuntime> により、モジュールが `JSObjectReference` としてインポートされます。これは、.NET コードから JavaScript オブジェクトへの参照を表します。 モジュールからエクスポートされた JavaScript 関数を呼び出すには、`JSObjectReference` を使用します。
+<xref:Microsoft.JSInterop.IJSRuntime> により、モジュールが `IJSObjectReference` としてインポートされます。これは、.NET コードから JavaScript オブジェクトへの参照を表します。 モジュールからエクスポートされた JavaScript 関数を呼び出すには、`IJSObjectReference` を使用します。
 
 ```csharp
 public async ValueTask<string> Prompt(string message)
@@ -529,6 +529,139 @@ public async ValueTask<string> Prompt(string message)
     return await module.InvokeAsync<string>("showPrompt", message);
 }
 ```
+
+`IJSInProcessObjectReference` は、関数を同期的に呼び出すことができる JavaScript オブジェクトへの参照を表します。
+
+`IJSUnmarshalledObjectReference` は、.NET データをシリアル化するオーバーヘッドなしで関数を呼び出すことができる JavaScript オブジェクトへの参照を表します。 これは、パフォーマンスが重要な場合に Blazor WebAssembly で使用できます。
+
+```javascript
+window.unmarshalledInstance = {
+  helloWorld: function (personNamePointer) {
+    const personName = Blazor.platform.readStringField(value, 0);
+    return `Hello ${personName}`;
+  }
+};
+```
+
+```csharp
+var unmarshalledRuntime = (IJSUnmarshalledRuntime)jsRuntime;
+var jsUnmarshalledReference = unmarshalledRuntime
+    .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
+
+string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
+    "helloWorld");
+```
+
+## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>UI をレンダリングする JavaScript ライブラリの使用 (DOM 要素)
+
+ブラウザー DOM 内に表示可能なユーザー インターフェイス要素を生成する JavaScript ライブラリを使用することが必要になる場合があります。 Blazor の差分システムは、DOM 要素のツリーに対する制御に依存しており、外部コードによって DOM ツリーが変更されて、差分を適用するためのメカニズムが無効になるとエラーが発生するため、一見すると、これは困難に思えるかもしれません。 これは、Blazor に固有の制限ではありません。 差分ベースの UI フレームワークでは同じ課題が発生します。
+
+幸い、外部で生成された UI を Blazor コンポーネントの UI に確実に埋め込むのは簡単です。 推奨される方法は、コンポーネントのコード (`.razor` ファイル) で空の要素を生成することです。 Blazor の差分システムに関する限り、要素は常に空であるため、レンダラーによって要素は再帰されず、代わりにその内容はそのままの状態になります。 これにより、外部で管理されている任意の内容を要素に設定しても安全になります。
+
+次の例はこの概念を示したものです。 `if` ステートメント内で、`firstRender` が `true` の場合は、`myElement` に対する何らかの処理を行います。 たとえば、外部の JavaScript ライブラリを呼び出してそれを設定します。 このコンポーネント自体が削除されるまで、要素の内容が Blazor によって操作されることはありません。 コンポーネントが削除されると、コンポーネントの DOM サブツリー全体も削除されます。
+
+```razor
+<h1>Hello! This is a Blazor component rendered at @DateTime.Now</h1>
+
+<div @ref="myElement"></div>
+
+@code {
+    HtmlElement myElement;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ...
+        }
+    }
+}
+```
+
+さらに詳細な例として、[オープンソースの Mapbox API](https://www.mapbox.com/) を使用して対話型マップをレンダリングする次のようなコンポーネントについて考えてみます。
+
+```razor
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div @ref="mapElement" style='width: 400px; height: 300px;'></div>
+
+<button @onclick="() => ShowAsync(51.454514, -2.587910)">Show Bristol, UK</button>
+<button @onclick="() => ShowAsync(35.6762, 139.6503)">Show Tokyo, Japan</button>
+
+@code
+{
+    ElementReference mapElement;
+    IJSObjectReference mapModule;
+    IJSObjectReference mapInstance;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            mapModule = await JS.InvokeAsync<IJSObjectReference>(
+                "import", "./mapComponent.js");
+            mapInstance = await mapModule.InvokeAsync<IJSObjectReference>(
+                "addMapToElement", mapElement);
+        }
+    }
+
+    Task ShowAsync(double latitude, double longitude)
+        => mapModule.InvokeVoidAsync("setMapCenter", mapInstance, latitude, 
+            longitude).AsTask();
+
+    private async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        await mapInstance.DisposeAsync();
+        await mapModule.DisposeAsync();
+    }
+}
+```
+
+`wwwroot/mapComponent.js` に配置する必要のある、対応する JavaScript モジュールは、次のとおりです。
+
+```javascript
+import 'https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js';
+
+// TO MAKE THE MAP APPEAR YOU MUST ADD YOUR ACCESS TOKEN FROM 
+// https://account.mapbox.com
+mapboxgl.accessToken = '{ACCESS TOKEN}';
+
+export function addMapToElement(element) {
+  return new mapboxgl.Map({
+    container: element,
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-74.5, 40],
+    zoom: 9
+  });
+}
+
+export function setMapCenter(map, latitude, longitude) {
+  map.setCenter([longitude, latitude]);
+}
+```
+
+前の例で、文字列 `{ACCESS TOKEN}` は、 https://account.mapbox.com から取得できる有効なアクセス トークンに置き換えます。
+
+正しいスタイルを生成するには、ホストの HTML ページ (`index.html` または `_Host.cshtml`) に次のスタイル シート タグを追加します。
+
+```html
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" />
+```
+
+前の例で生成される対話型のマップ UI で、ユーザーは次のことができます。
+
+* ドラッグしてスクロールまたはズームできます。
+* ボタンをクリックして、あらかじめ定義されている場所に移動します。
+
+![Mapbox による東京の市街地図。英国のブリストルと日本の東京を選択するためのボタンがあります](https://user-images.githubusercontent.com/1101362/94939821-92ef6700-04ca-11eb-858e-fff6df0053ae.png)
+
+理解しておくべき重要な点は次のとおりです。
+
+ * `@ref="mapElement"` が含まれる `<div>` は、Blazor に関する限り空のままになります。 したがって、やがて `mapbox-gl.js` によって設定されたり、内容が変更されたりしても安全です。 この手法は、UI をレンダリングする任意の JavaScript ライブラリで使用できます。 ページの他の部分に手を伸ばして変更しようとしない限り、サードパーティの JavaScript SPA フレームワークのコンポーネントを Blazor コンポーネントの内部に埋め込むことさえできます。 Blazor によって空と見なされない要素を、外部の JavaScript コードで変更することは、安全では "*ありません*"。
+ * このアプローチを使用する場合は、Blazor によって DOM 要素が保持または破棄される方法に関する規則に留意してください。 前の例で、既定では DOM 要素が可能な限り保持されるため、コンポーネントにより安全にボタン クリック イベントが処理され、既存のマップ インスタンスが更新されます。 `@foreach` ループの内側からマップ要素のリストをレンダリングしていた場合は、`@key` を使用して、コンポーネントのインスタンスを確実に保持する必要があります。 そうしないと、リスト データを変更した場合、コンポーネントのインスタンスによって前のインスタンスの状態が望ましくない状態で保持される可能性があります。 詳細については、[@key を使用した要素とコンポーネントの保持](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components)に関する記事を参照してください。
+
+また、前の例では、JavaScript のロジックと依存関係を ES6 モジュール内にカプセル化し、`import` 識別子を使用して動的に読み込むことができる方法が示されています。 詳細については、[JavaScript の分離とオブジェクト参照](#blazor-javascript-isolation-and-object-references)に関する記事を参照してください。
 
 ::: moniker-end
 

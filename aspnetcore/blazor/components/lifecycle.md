@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor アプリで Razor コンポーネント ライ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,48 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 00573f87b65e53a7bfd9cc2aed1d2ed7772b9a4a
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 0acf757c21d444136e7a6d81d5958be5bc72c2fc
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847612"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805545"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
 著者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)
 
 Blazor フレームワークには、同期と非同期のライフサイクル メソッドが含まれています。 コンポーネントの初期化およびレンダリング中にコンポーネントで追加の操作を実行するには、ライフサイクル メソッドをオーバーライドします。
+
+次の図は、Blazor のライフサイクルを示しています。 この記事の後続のセクションで、例を示しながらライフサイクル メソッドを定義します。
+
+コンポーネント ライフサイクル イベント:
+
+1. 要求に対してコンポーネントが初めてレンダリングされる場合は、次のようにします。
+   * コンポーネントのインスタンスを作成します。
+   * プロパティの挿入を実行します。 [`SetParametersAsync`](#before-parameters-are-set) を実行します。
+   * [`OnInitialized{Async}`](#component-initialization-methods) を呼び出します。 <xref:System.Threading.Tasks.Task> が返された場合、<xref:System.Threading.Tasks.Task> を待機してから、コンポーネントがレンダリングされます。 <xref:System.Threading.Tasks.Task> が返されない場合は、コンポーネントをレンダリングします。
+1. [`OnParametersSet{Async}`](#after-parameters-are-set) を呼び出します。 <xref:System.Threading.Tasks.Task> が返された場合、<xref:System.Threading.Tasks.Task> を待機してから、コンポーネントがレンダリングされます。 <xref:System.Threading.Tasks.Task> が返されない場合は、コンポーネントをレンダリングします。
+
+<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:350px;display:block;margin:0 auto">
+
+ドキュメント オブジェクト モデル (DOM) イベント処理:
+
+1. イベント ハンドラーが実行されます。
+1. <xref:System.Threading.Tasks.Task> が返された場合、<xref:System.Threading.Tasks.Task> を待機してから、コンポーネントがレンダリングされます。 <xref:System.Threading.Tasks.Task> が返されない場合は、コンポーネントがレンダリングされます。
+
+<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:350px;display:block;margin:0 auto">
+
+`Render` のライフサイクル:
+
+1. これがコンポーネントの最初のレンダリングでない場合、または [`ShouldRender`](#suppress-ui-refreshing) が `false` として評価された場合は、コンポーネントに対して他の操作を実行しないでください。
+1. レンダリング ツリーの差分を作成し、コンポーネントをレンダリングします。
+1. DOM が更新されるのを待機します。
+1. [`OnAfterRender{Async}`](#after-component-render) を呼び出します。
+
+<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:350px;display:block;margin:0 auto">
+
+Developer によって [`StateHasChanged`](#state-changes) の呼び出しが行われると、結果としてレンダリングが実行されます。
 
 ## <a name="lifecycle-methods"></a>ライフサイクル メソッド
 
@@ -191,7 +221,7 @@ Blazor テンプレートの `FetchData` コンポーネントでは、<xref:Mic
 
 Blazor Server テンプレートの `Pages/FetchData.razor` は以下のようになります。
 
-[!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
+[!code-razor[](lifecycle/samples_snapshot/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="handle-errors"></a>エラーの処理
 
@@ -286,11 +316,11 @@ public class WeatherForecastService
 
 * プライベート フィールドとラムダのアプローチ
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-1.razor?highlight=23,28)]
 
 * プライベート メソッドのアプローチ
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="cancelable-background-work"></a>取り消し可能なバックグラウンド作業
 

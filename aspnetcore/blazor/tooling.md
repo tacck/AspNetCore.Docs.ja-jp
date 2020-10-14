@@ -5,7 +5,7 @@ description: Blazor アプリのビルドに使用できるツールについて
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 09/28/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: d7e3743d12c235c20cc27f6a3263e2994a9e160a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d1626fe753782d524bf75c398c11235c3110633a
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625831"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762153"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor 用のツール
 
@@ -52,13 +52,13 @@ ASP.NET Core HTTPS 開発証明書の信頼の詳細については、「<xref:s
 
 ::: zone pivot="linux"
 
-1. 最新バージョンの [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) をインストールします。 以前に SDK をインストールした場合、コマンド シェルでコマンドを実行し、インストールされているバージョンを判断できます。
+1. 最新バージョンの [.NET Core SDK](https://dotnet.microsoft.com/download) をインストールします。 以前に SDK をインストールした場合、コマンド シェルでコマンドを実行し、インストールされているバージョンを判断できます。
 
    ```dotnetcli
    dotnet --version
    ```
 
-1. [Visual Studio Code](https://code.visualstudio.com/) の最新版をインストールします。
+1. [Visual Studio Code](https://code.visualstudio.com) の最新版をインストールします。
 
 1. 最新の [C# for Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)をインストールします。
 
@@ -90,7 +90,7 @@ Linux で証明書を信頼するための一元的な方法はありません�
 * `localhost` に対するすべての自己署名証明書を信頼します。
 * ブラウザーの信頼された証明書の一覧に証明書を追加します。
 
-詳細については、お使いのブラウザーおよび Linux ディストリビューションで提供されているガイダンスを参照してください。
+詳細については、ご利用のブラウザーの製造元および Linux ディストリビューションによって提供されているガイダンスを参照してください。
 
 ::: zone-end
 

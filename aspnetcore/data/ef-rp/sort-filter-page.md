@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634684"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653894"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
 
@@ -42,25 +42,26 @@ ms.locfileid: "88634684"
 
 *Pages/Students/Index.cshtml.cs* のコードを次のコードに置き換え、並べ替えを追加します。
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All)]
 
 上記のコードでは次の操作が行われます。
 
+* `using System;` の追加を求めます。
 * プロパティを追加して、並べ替えパラメーターを含めます。
 * `Student` プロパティの名前を `Students` に変更します。
 * `OnGetAsync` メソッドのコードを置き換えます。
 
-`OnGetAsync` メソッドでは、URL 内のクエリ文字列から `sortOrder` パラメーターを受け取ります。 (クエリ文字列を含む) URL が[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+`OnGetAsync` メソッドでは、URL 内のクエリ文字列から `sortOrder` パラメーターを受け取ります。 URL とクエリ文字列は、[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
-`sortOrder` パラメーターは "Name" または "Date" です。 `sortOrder` パラメーターの後に必要に応じて "_desc" を続け、降順を指定します。 既定の並べ替え順序は昇順です。
+`sortOrder` パラメーターは `Name` または `Date` のいずれかとなります。 `sortOrder` パラメーターの後には、必要に応じて、降順を指定する `_desc` が置かれます。 既定の並べ替え順序は昇順です。
 
-インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
+インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは、姓の昇順が `default` です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
 
 `NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-このコードでは、C# の条件演算子 [?:](/dotnet/csharp/language-reference/operators/conditional-operator) を使用します。 `?:` 演算子は三項演算子です (3 つのオペランドを受け取ります)。 最初の行は、`sortOrder` が null または空の場合に、`NameSort` を "name_desc" に設定することを指定します。 `sortOrder` が null または空**ではない**場合、`NameSort` は空の文字列に設定されます。
+このコードによって、C# の[条件演算子 ?:](/dotnet/csharp/language-reference/operators/conditional-operator) が使用されています。 `?:` 演算子は三項演算子であり、3 つのオペランドを取ります。 最初の行により、`sortOrder` が null または空の場合に、`NameSort` を `name_desc` に設定することが指定されます。 `sortOrder` が null または空***ではない***場合、`NameSort` は空の文字列に設定されます。
 
 これらの 2 つのステートメントを使用して、次のようにページで列見出しのハイパーリンクを設定することができます。
 
@@ -75,7 +76,7 @@ ms.locfileid: "88634684"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_IQueryable)]
 
-`IQueryable` が作成または変更されるときには、クエリは、データベースに送信されません。 クエリは、`IQueryable` オブジェクトがコレクションに変換されるまで実行されません。 `IQueryable` は、`ToListAsync` などのメソッドを呼び出すことで、コレクションに変換されます。 そのため、`IQueryable` コードの結果として、次のステートメントまで実行されない 1 つのクエリになります。
+`IQueryable` が作成または変更されるときには、クエリはデータベースに送信されません。 クエリは、`IQueryable` オブジェクトがコレクションに変換されるまで実行されません。 `IQueryable` は、`ToListAsync` などのメソッドを呼び出すことで、コレクションに変換されます。 そのため、`IQueryable` コードの結果として、次のステートメントまで実行されない 1 つのクエリになります。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_SortOnlyRtn)]
 
@@ -110,7 +111,7 @@ Students インデックス ページにフィルターを追加するには
 
 *Students/Index.cshtml.cs* のコードを次のコードに置き換え、フィルターを追加します。
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=17,22,26-30)]
 
 上記のコードでは次の操作が行われます。
 
@@ -119,7 +120,7 @@ Students インデックス ページにフィルターを追加するには
 
 ### <a name="iqueryable-vs-ienumerable"></a>IQueryable/IEnumerable
 
-このコードでは、`IQueryable` オブジェクトに対して `Where` メソッドを呼び出し、フィルターがサーバーで処理されます。 一部のシナリオでは、アプリが `Where` メソッドをメモリ内コレクションの拡張メソッドとして呼び出す場合があります。 たとえば、`_context.Students` が EF Core `DbSet` から `IEnumerable` コレクションを返すリポジトリ メソッドに変更されるとします 結果は、通常同じになりますが、場合によっては異なる場合があります。
+このコードでは、`IQueryable` オブジェクトに対して <xref:System.Linq.Queryable.Where%2A> メソッドを呼び出し、フィルターがサーバーで処理されます。 一部のシナリオでは、アプリが `Where` メソッドをメモリ内コレクションの拡張メソッドとして呼び出す場合があります。 たとえば、`_context.Students` が EF Core `DbSet` から `IEnumerable` コレクションを返すリポジトリ メソッドに変更されるとします 結果は、通常同じになりますが、場合によっては異なる場合があります。
 
 たとえば、.NET Framework の `Contains` の実装では、既定では大文字小文字を区別する比較を実行します。 SQL Server で、`Contains` の大文字小文字の区別は、SQL Server インスタンスの照合順序の設定によって決まります。 SQL Server は、既定では大文字小文字を区別しません。 SQLite では、既定で大文字と小文字が区別されます。 `ToUpper` を呼び出して、テストを明示的に大文字小文字を区別しないようにすることができます。
 
@@ -139,7 +140,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 ### <a name="update-the-no-locrazor-page"></a>Razor ページを更新する
 
-*Pages/Students/Index.cshtml* のコードを置き換えて、 **[検索]** ボタンと類別されたクロムを作成します。
+*Pages/Students/Index.cshtml* 内のコードを置き換えて、 **[検索]** ボタンを追加します。
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
@@ -153,8 +154,8 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 URL に検索文字列が含まれることに注意してください。 次に例を示します。
 
-```
-https://localhost:<port>/Students?SearchString=an
+```browser-address-bar
+https://localhost:5001/Students?SearchString=an
 ```
 
 ブックマークがブックマークに設定されている場合、ブックマークにページの URL と `SearchString` クエリ文字列が含まれます。 `form` タグ内に `method="get"` があると、クエリ文字列が生成されます。
@@ -181,15 +182,16 @@ https://localhost:<port>/Students?SearchString=an
 
 *Students/Index.cshtml.cs* のコードを置き換えて、ページングを追加します。
 
-[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=15-20,23-30,57-59)]
 
 上記のコードでは次の操作が行われます。
 
 * `Students` プロパティの型を `IList<Student>` から `PaginatedList<Student>` に変更します。
 * ページ インデックス、現在の `sortOrder`、`currentFilter` を `OnGetAsync` メソッド シグネチャに追加します。
-* 並べ替え順序を CurrentSort プロパティに保存します。
+* 並べ替え順序を `CurrentSort` プロパティに保存します。
 * 新しい検索文字列がある場合に、ページ インデックスを 1 にリセットします。
 * `PaginatedList` クラスを使用して、Student エンティティを取得します。
+* `pageSize` を 3 に設定します。 実際のアプリの場合は、[構成](xref:fundamentals/configuration/index)を使用して、ページ サイズの値が設定されます。
 
 `OnGetAsync` で受け取るパラメーターはすべて、次の場合に null になります。
 
@@ -212,7 +214,7 @@ https://localhost:<port>/Students?SearchString=an
 
   `PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor ページに渡されます。
 
-  `PaginatedList.CreateAsync` 呼び出しの `pageIndex` の後の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
+  `PaginatedList.CreateAsync` 呼び出しの `pageIndex` の後の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `pageIndex ?? 1` からは、`pageIndex` に値が含まれる場合はそれの値が返され、それ以外の場合は 1 が返されます。
 
 ### <a name="add-paging-links-to-the-no-locrazor-page"></a>Razor ページにページングのリンクを追加する
 
@@ -258,7 +260,7 @@ https://localhost:<port>/Students?SearchString=an
 
 ### <a name="create-the-page-model"></a>ページ モデルの作成
 
-次のコードを使用して、*Pages/About.cshtml.cs* ファイルを作成します。
+次のコードを使用して、*Pages/About.cshtml.cs* を更新します。
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 

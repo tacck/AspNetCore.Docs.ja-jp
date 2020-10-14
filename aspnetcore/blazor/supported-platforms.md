@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor でサポートされているプラットフ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 10/01/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,43 +18,63 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: 692ab63bb48dbfa29021d59cdf035e9549d3039c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ffe98636ed200adbf00e89c2c3499eb69792d3f
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625948"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754542"
 ---
 # <a name="aspnet-core-no-locblazor-supported-platforms"></a>ASP.NET Core Blazor でサポートされているプラットフォーム
 
 作成者: [Luke Latham](https://github.com/guardrex)
 
-## <a name="browser-requirements"></a>ブラウザー要件
+::: moniker range=">= aspnetcore-5.0"
 
-### Blazor WebAssembly
+Blazor WebAssembly と Blazor Server は、次の表に示すブラウザーでサポートされています。
+
+| ブラウザー                          | バージョン         |
+| -------------------------------- | --------------- |
+| Apple Safari (iOS を含む)      | [現在]&dagger; |
+| Google Chrome (Android を含む) | [現在]&dagger; |
+| Microsoft Edge                   | [現在]&dagger; |
+| Mozilla Firefox                  | [現在]&dagger; |  
+
+&dagger; *[現在]* は、ブラウザーの最新バージョンを示します。  
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+## Blazor WebAssembly
 
 | ブラウザー                          | バージョン               |
-| -------------------------------- | :-------------------: |
-| Microsoft Edge                   | [現在]               |
-| Mozilla Firefox                  | [現在]               |
-| Google Chrome (Android を含む) | [現在]               |
-| Safari (iOS を含む)            | [現在]               |
-| Microsoft Internet Explorer      | サポートされていません&dagger; |
+| -------------------------------- | --------------------- |
+| Apple Safari (iOS を含む)      | [現在]&dagger;       |
+| Google Chrome (Android を含む) | [現在]&dagger;       |
+| Microsoft Edge                   | [現在]&dagger;       |
+| Microsoft Internet Explorer      | サポートされていません&Dagger; |
+| Mozilla Firefox                  | [現在]&dagger;       |  
 
-&dagger;Microsoft Internet Explorer は [WebAssembly](https://webassembly.org) をサポートしていません。
+&dagger; *[現在]* は、ブラウザーの最新バージョンを示します。  
+&Dagger;Microsoft Internet Explorer は [WebAssembly](https://webassembly.org) をサポートしていません。
 
-### Blazor Server
+## Blazor Server
 
-| ブラウザー                          | バージョン    |
-| -------------------------------- | :--------: |
-| Microsoft Edge                   | [現在]    |
-| Mozilla Firefox                  | [現在]    |
-| Google Chrome (Android を含む) | [現在]    |
-| Safari (iOS を含む)            | [現在]    |
-| Microsoft Internet Explorer      | 11&dagger; |
+| ブラウザー                          | バージョン         |
+| -------------------------------- | --------------- |
+| Apple Safari (iOS を含む)      | [現在]&dagger; |
+| Google Chrome (Android を含む) | [現在]&dagger; |
+| Microsoft Edge                   | [現在]&dagger; |
+| Microsoft Internet Explorer      | 11&Dagger;      |
+| Mozilla Firefox                  | [現在]&dagger; |
 
-&dagger;追加のポリフィルが必要です (たとえば、[`Polyfill.io`](https://polyfill.io/v3/) バンドルによって Promise を追加できます)。
+&dagger; *[現在]* は、ブラウザーの最新バージョンを示します。  
+&Dagger;追加のポリフィルが必要です。 たとえば、[`Polyfill.io`](https://polyfill.io/v3/) バンドルによって Promise を追加できます
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:blazor/hosting-models>
+* <xref:signalr/supported-platforms>
