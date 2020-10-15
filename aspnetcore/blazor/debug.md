@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393835"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900987"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -93,7 +93,7 @@ Visual Studio で Blazor WebAssembly アプリをデバッグするには、次�
    > [!NOTE]
    > **デバッグなしの開始** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
 
-1. "*クライアント*" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
+1. "`*Client*`" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
 1. ブラウザーで `Counter` ページに移動し、 **[Click me]** ボタンを選択して、ブレークポイントで停止させます。
 1. Visual Studio の **[ローカル]** ウィンドウで、`currentCount` フィールドの値を調べます。
 1. <kbd>F5</kbd> キーを押して、実行を続行します。
@@ -180,7 +180,7 @@ Blazor WebAssembly アプリにカスタム アプリ ベース パスを使用�
 
 1. スタンドアロン アプリが起動され、デバッグ ブラウザーが開きます。
 
-1. "*クライアント*" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
+1. "`*Client*`" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
 
 1. ブラウザーで `Counter` ページに移動し、 **[Click me]** ボタンを選択して、ブレークポイントで停止させます。
 
@@ -285,7 +285,7 @@ Visual Studio for Mac で Blazor WebAssembly アプリをデバッグするに�
    > [!IMPORTANT]
    > デバッグ セッション用のブラウザーとしては、Google Chrome または Microsoft Edge を選択する必要があります。
 
-1. "*クライアント*" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
+1. "`*Client*`" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
 1. ブラウザーで `Counter` ページに移動し、 **[Click me]** ボタンを選択して、ブレークポイントで停止させます。
 1. Visual Studio の **[ローカル]** ウィンドウで、`currentCount` フィールドの値を調べます。
 1. <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> キーを押して、実行を続けます。
@@ -345,6 +345,9 @@ Blazor は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/
 * **[デバッガー]** タブで、ブラウザー内の開発者ツールを開きます。 コンソールで `localStorage.clear()` を実行して、任意のブレークポイントを削除します。
 * ASP.NET Core HTTPS 開発証明書がインストールされ、信頼されていることを確認します。 詳細については、「<xref:security/enforcing-ssl#troubleshoot-certificate-problems>」を参照してください。
 * Visual Studio では、 **[ツール]**  >  **[オプション]**  >  **[デバッグ]**  >  **[全般]** で **[Enable JavaScript debugging for ASP.NET (Chrome, Edge and IE)] (ASP.NET (Chrome、Edge、IE) の JavaScript デバッグを有効にする)** オプションをオンにする必要があります。 これは、Visual Studio の既定の設定です。 デバッグが機能していない場合は、オプションがオンになっていることを確認します。
+* ご利用の環境で HTTP プロキシを使用している場合は、プロキシ バイパス設定に `localhost` が含まれていることを確認してください。 これを行うには、次のいずれかに `NO_PROXY` 環境変数を設定します。
+  * プロジェクトの `launchSettings.json` ファイル。
+  * すべてのアプリに適用する場合は、ユーザーまたはシステム環境変数レベルで。 環境変数を使用する場合は、Visual Studio を再起動して変更を有効にしてください。
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}` 内のブレークポイントにヒットしない
 
