@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 7a0c606d82dd625c179ec89e22b9313dfa5d18b4
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: ac666a4c7493140d4ae93047e18202c3d8314c7b
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636778"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900701"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) グループ、管理者ロール、およびユーザー定義ロール
 
@@ -49,7 +49,7 @@ Azure Active Directory (AAD) には、ASP.NET Core Identity と組み合わせ�
 
 6 つ以上の AAD 管理者ロールおよびセキュリティ グループ メンバーシップを持つアプリ ユーザーの場合は、[Microsoft Graph API](/graph/use-the-api) の呼び出しが必須です。
 
-Graph API の呼び出しを許可するには、Azure portal で次の [Graph API アクセス許可](/graph/permissions-reference)を、ホストされている Blazor ソリューションのスタンドアロンまたはクライアント アプリに付与します。
+Graph API の呼び出しを許可するには、Azure portal で次の [Graph API アクセス許可](/graph/permissions-reference)を、ホストされている Blazor ソリューションのスタンドアロンまたは *`Client`* アプリに付与します。
 
 * `Directory.Read.All`
 * `Directory.ReadWrite.All`
@@ -88,7 +88,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリで、カスタム <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> クラスを作成します。 ロールとグループの情報を取得する Graph API 呼び出しには、正しいスコープ (アクセス許可) を使用します。
+ホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリで、カスタム <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> クラスを作成します。 ロールとグループの情報を取得する Graph API 呼び出しには、正しいスコープ (アクセス許可) を使用します。
 
 `GraphAPIAuthorizationMessageHandler.cs`:
 
@@ -250,7 +250,7 @@ public class CustomUserFactory
 >
 > このアプローチの一般的な対象範囲については、記事 <xref:blazor/security/webassembly/additional-scenarios#custom-authorizationmessagehandler-class> を参照してください。
 
-ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリの `Program.Main` (`Program.cs`) に、ファクトリを登録します。 アプリの追加のスコープとして `Directory.Read.All` アクセス許可スコープに同意します。
+ホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリの `Program.Main` (`Program.cs`) に、ファクトリを登録します。 アプリの追加のスコープとして `Directory.Read.All` アクセス許可スコープに同意します。
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -651,9 +651,9 @@ foreach (var entry in groupsAndAzureRoles)
 
 AAD によって送信される単一の `roles` 要求では、ユーザー定義のロールは JSON 配列内の `appRoles` の `value` として示されます。 アプリでは、ロールの JSON 配列を個々の `role` 要求に変換する必要があります。
 
-[ユーザー定義グループと AAD 管理者ロール](#user-defined-groups-and-administrator-roles)に関するセクションで示されている `CustomUserFactory` は、JSON 配列値を持つ `roles` 要求に対して動作するように設定されます。 [ユーザー定義グループと AAD 管理者ロール](#user-defined-groups-and-administrator-roles)に関するセクションで示されているように、ホストされている Blazor ソリューションのスタンドアロン アプリまたはクライアント アプリで `CustomUserFactory` を追加して登録します。 元の `roles` 要求はフレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
+[ユーザー定義グループと AAD 管理者ロール](#user-defined-groups-and-administrator-roles)に関するセクションで示されている `CustomUserFactory` は、JSON 配列値を持つ `roles` 要求に対して動作するように設定されます。 [ユーザー定義グループと AAD 管理者ロール](#user-defined-groups-and-administrator-roles)に関するセクションで示されているように、ホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリに `CustomUserFactory` を追加して登録します。 元の `roles` 要求はフレームワークによって自動的に削除されるため、それを削除するためのコードを提供する必要はありません。
 
-ホストされている Blazor ソリューションのクライアント アプリまたはスタンドアロン アプリの `Program.Main` で、ロール要求として "`role`" という名前の要求を指定します。
+ホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリの `Program.Main` で、ロール要求として "`role`" という名前の要求を指定します。
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>

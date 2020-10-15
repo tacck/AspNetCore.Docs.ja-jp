@@ -21,13 +21,13 @@ Cookie とサイト データは、アプリが更新されても保持され、
     * Google Chrome: `C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
     * Mozilla Firefox: `C:\Program Files\Mozilla Firefox\firefox.exe`
   * **[引数]** フィールドに、ブラウザーをシークレットまたはプライベート モードで開くために使用するコマンドライン オプションを指定します。 ブラウザーによっては、アプリの URL が必要になる場合があります。
-    * Microsoft Edge: `-inprivate`
-    * Google Chrome: `--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox: `-private -url https://localhost:5001`
+    * Microsoft Edge:`-inprivate` を使用してください。
+    * Google Chrome:`--incognito --new-window {URL}` を使用します。プレースホルダー `{URL}` は開く URL (`https://localhost:5001` など) です。
+    * Mozilla Firefox:`-private -url {URL}` を使用します。プレースホルダー `{URL}` は開く URL (`https://localhost:5001` など) です。
   * **[フレンドリ名]** フィールドに名前を指定します。 たとえば、`Firefox Auth Testing` のようにします。
   * **[OK]** ボタンを選択します。
   * アプリでテストを繰り返すたびにブラウザー プロファイルを選択する必要がないようにするには、 **[既定値として設定]** ボタンでプロファイルを既定値として設定します。
-  * アプリ、テスト ユーザー、プロバイダー構成が変更されるたびにブラウザーが IDE によって閉じられていることを確認します。
+  * アプリ、テスト ユーザー、またはプロバイダー構成が変更されるたびに、ブラウザーが IDE によって閉じられていることを確認します。
 
 ### <a name="run-the-server-app"></a>Server アプリを実行する
 
