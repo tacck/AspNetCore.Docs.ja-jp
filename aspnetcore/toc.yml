@@ -177,6 +177,9 @@
             - name: GitHub アクションを使用したデプロイ >>
               display: 'tutorial, kubernetes, aks, acr, docker, devops'
               href: /learn/modules/microservices-devops-aspnet-core/
+            - name: ログと監視 >>
+              display: 'tutorial, kubernetes, aks, acr, docker, serilog'
+              href: /learn/modules/microservices-logging-aspnet-core/
         - name: データ アクセス >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1118,6 +1121,8 @@
           uid: security/authorization/policies
         - name: 承認ポリシー プロバイダー
           uid: security/authorization/iauthorizationpolicyprovider
+        - name: AuthorizationMiddleware の動作のカスタマイズ
+          uid: security/authorization/authorizationmiddlewareresulthandler
         - name: 要件ハンドラーでの依存性の注入
           uid: security/authorization/dependencyinjection
         - name: リソース ベースの承認
