@@ -5,7 +5,7 @@ description: ASP.NET Core、Content Delivery Networks (CDN)、ファイル サ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/25/2020
+ms.date: 10/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 3436620123618ab32daa44c4a37057aaadb89563
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 63954bd2fbb8fdb2e347d552a10adc52263c3ad6
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393692"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900714"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -867,3 +867,76 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 > [!NOTE]
 > 同じアセンブリの名前変更と遅延読み込みについては、<xref:blazor/webassembly-lazy-load-assemblies#onnavigateasync-events-and-renamed-assembly-files> のガイダンスを参照してください。
+
+## <a name="resolve-integrity-check-failures"></a>整合性チェックの失敗を解決する
+
+Blazor WebAssembly によってアプリのスタートアップ ファイルがダウンロードされると、応答に対して整合性チェックを実行するようにブラウザーに指示が出されます。 `blazor.boot.json` ファイルの情報を使用して、`.dll`、`.wasm`、およびその他のファイルに対して想定される SHA-256 ハッシュ値が指定されます。 これには次のような理由で利点があります。
+
+* たとえばユーザーがアプリケーション ファイルをダウンロードしているときに Web サーバーに新しい展開が適用された場合など、一貫性のないファイルのセットを読み込むリスクがなくなります。 不整合なファイルは未定義の動作につながる可能性があります。
+* ユーザーのブラウザーが不整合または無効な応答をキャッシュしないようになります (その場合、ページを手動で更新してもアプリを起動できなくなる可能性があります)。
+* 応答を安全にキャッシュできるようになり、想定される SHA-256 ハッシュ自体が変更されるまでサーバー側の変更がチェックされません。そのため、後続のページ読み込みに伴う要求の数が減り、完了までにかかる時間が大幅に短縮されます。
+
+想定される SHA-256 ハッシュに一致しない応答が Web サーバーから返された場合、ブラウザーの開発者コンソールに次のようなエラーが表示されます。
+
+```
+Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
+```
+
+ほとんどの場合、これは整合性チェック自体に関する問題では "*ありません*"。 代わりにこれは他の問題があることを意味し、整合性チェックによってその他の問題に関する警告が表示されます。
+
+### <a name="diagnosing-integrity-problems"></a>整合性に関する問題の診断
+
+アプリがビルドされると、生成された `blazor.boot.json` マニフェストによって、ビルド出力が生成された時点でのブート リソース (たとえば `.dll`、`.wasm`、およびその他のファイル) の SHA-256 ハッシュが記述されます。 整合性チェックは、`blazor.boot.json` の SHA-256 ハッシュがブラウザーに配信されるファイルと一致している限り成功します。
+
+これに失敗する一般的な理由は次のとおりです。
+
+ * Web サーバーからの応答が、ブラウザーが要求したファイルではなく、エラー (たとえば *404 - Not Found* や *500 - Internal Server Error*) である場合。 これはブラウザーによって、応答エラーとしてではなく整合性チェックの失敗として報告されます。
+ * ファイルのビルドからブラウザーへの配信の間に、何らかによってファイルの内容が変更された場合。 次のような場合に発生します。
+   * ユーザーまたはビルド ツールによって、ビルド出力が手動で変更された場合。
+   * 展開プロセスの何らかの側面によってファイルが変更された場合。 たとえば、Git ベースの展開メカニズムを使用する場合は、Windows でファイルをコミットして Linux でチェックアウトすると、Git によって Windows スタイルの改行コードが Unix スタイルの改行コードに透過的に変換されることに注意してください。 ファイルの改行コードを変更すると、SHA-256 ハッシュが変更されます。 この問題を回避するには、[`.gitattributes` を使用してビルド成果物を `binary` ファイルとして扱う](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes)ことを検討してください。
+   * Web サーバーによるファイル提供の一環として、その内容が変更された場合。 たとえば、一部のコンテンツ配信ネットワーク (CDN) では、HTML の[縮小](xref:client-side/bundling-and-minification#minification)が自動的に試行され、それによって変更されます。 場合によっては、このような機能を無効にする必要があります。
+
+これらのうちどれが自分のケースに当てはまるか診断するには:
+
+ 1. エラー メッセージを確認し、エラーをトリガーしているファイルをメモします。
+ 1. ブラウザーの開発者ツールを開き、 *[ネットワーク]* タブを確認します。必要に応じて、ページを再度読み込み、要求と応答の一覧を表示します。 その一覧でエラーをトリガーしているファイルを見つけます。
+ 1. 応答に含まれる HTTP 状態コードを確認します。 サーバーから *200 - OK* (または別の 2xx 状態コード) 以外のものが返された場合は、サーバー側に診断すべき問題があります。 たとえば、状態コード 403 は承認に関する問題があることを意味しますが、状態コード 500 は、サーバーが未指定のエラーで失敗していることを意味します。 サーバー側のログを参照してアプリを診断し、修正してください。
+ 1. リソースに対する状態コードが *200 - OK* の場合は、ブラウザーの開発者ツールで応答の内容を確認し、その内容が予想されるデータと一致していることを確認します。 たとえば、よくある問題は、他のファイルに対しても要求から `index.html` データが返されるように、ルーティングを誤って構成してしまうことです。 `.wasm` 要求への応答が WebAssembly であり、`.dll` 要求への応答が .NET アセンブリ バイナリであることを確認してください。 そうでない場合、サーバー側のルーティングに関する問題を診断する必要があります。
+
+サーバーから正しいと思われるデータが返されていることを確認した場合は、ファイルのビルドと配布の間で何か別の原因によって内容が変更されています。 これを調査するには:
+
+ * ファイルがビルドされた後にファイルが変更される場合に備えて、ビルド ツールチェーンと展開メカニズムを調べます。 この例としては、前に説明したように、Git によってファイルの改行コードが変換される場合が挙げられます。
+ * 応答を動的に変更する (たとえば、HTML を縮小しようとする) ように設定されている場合があるため、Web サーバーまたは CDN の構成を確認します。 Web サーバーに HTTP 圧縮が実装されていても問題ありません (たとえば `content-encoding: br` や `content-encoding: gzip` が返される場合)。これは展開後の結果には影響しないためです。 ただし、Web サーバーによって圧縮されていないデータが変更される場合は "*問題があります*"。
+
+### <a name="disable-integrity-checking-for-non-pwa-apps"></a>非 PWA アプリの整合性チェックを無効にする
+
+ほとんどの場合、整合性チェックを無効にしないでください。 整合性チェックを無効にしても、予期しない応答の原因となった根本的な問題は解決されず、前述の利点が失われる結果になります。
+
+Web サーバーから一貫した応答が返されるとは限らないため、整合性チェックを無効にするしかないケースがあります。 整合性チェックを無効にするには、Blazor WebAssembly プロジェクトの `.csproj` ファイル内のプロパティ グループに次を追加します。
+
+```xml
+<BlazorCacheBootResources>false</BlazorCacheBootResources>
+```
+
+`BlazorCacheBootResources` により、SHA-256 ハッシュに基づいて `.dll`、`.wasm`、およびその他のファイルをキャッシュする Blazor の既定の動作も無効になります。このプロパティによって、SHA-256 ハッシュの正確性を信頼できないことが指定されるためです。 この設定を使用しても、ブラウザーの通常の HTTP キャッシュによってこれらのファイルがキャッシュされる可能性がありますが、このような状況が発生するかどうかは、Web サーバーの構成と、それによって提供される `cache-control` ヘッダーによって異なります。
+
+> [!NOTE]
+> `BlazorCacheBootResources` プロパティによって[プログレッシブ Web アプリケーション (PWA)](xref:blazor/progressive-web-app) の整合性チェックが無効になることはありません。 PWA に関連するガイダンスについては、「[PWA の整合性チェックを無効にする](#disable-integrity-checking-for-pwas)」セクションをご覧ください。
+
+### <a name="disable-integrity-checking-for-pwas"></a>PWA の整合性チェックを無効にする
+
+Blazor のプログレッシブ Web アプリケーション (PWA) テンプレートには、オフライン使用のためにアプリケーション ファイルをフェッチおよび格納するための推奨される `service-worker.published.js` ファイルが含まれています。 これは通常のアプリの起動メカニズムとは別のプロセスであり、独自の整合性チェック ロジックを備えています。
+
+`service-worker.published.js` ファイル内に、次の行があります。
+
+```javascript
+.map(asset => new Request(asset.url, { integrity: asset.hash }));
+```
+
+整合性チェックを無効にするには、行を次のように変更して `integrity` パラメーターを削除します。
+
+```javascript
+.map(asset => new Request(asset.url));
+```
+
+ここでも、整合性チェックを無効にすることは、整合性チェックによって提供される安全性の保証が失われることを意味します。 たとえば、ユーザーのブラウザーでアプリをキャッシュしている瞬間に、新しいバージョンを展開した場合、古い展開から一部のファイルがキャッシュされ、新しい展開から別のファイルがキャッシュされるリスクがあります。 そのような場合、さらなる更新プログラムを展開するまで、アプリは破損した状態のままになります。

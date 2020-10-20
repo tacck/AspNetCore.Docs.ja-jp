@@ -5,7 +5,7 @@ description: ホストされている ASP.NET Core Blazor WebAssembly アプリ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 58c21f4dbe831e99570ca8b0d7bc78616c1e5bfb
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 6ae8c55fcfc85dc725a7dd20a7dbecba063a13e9
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712377"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900787"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 
@@ -72,7 +72,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 ---
 
-## <a name="server-app-configuration"></a>サーバー アプリの構成
+## <a name="server-app-configuration"></a>*`Server`* アプリの構成
 
 次のセクションでは、認証のサポートが含まれる場合のプロジェクトへの追加について説明します。
 
@@ -170,7 +170,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 
 プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `BlazorSample.Client`)。
 
-## <a name="client-app-configuration"></a>クライアント アプリの構成
+## <a name="client-app-configuration"></a>*`Client`* アプリの構成
 
 ### <a name="authentication-package"></a>認証パッケージ
 
@@ -287,7 +287,7 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="custom-user-factory"></a>カスタム ユーザー ファクトリ
 
-クライアント アプリで、カスタム ユーザー ファクトリを作成します。 Identity Server により、複数のロールが JSON 配列として 1 つの `role` 要求で送信されます。 1 つのロールは、要求内で文字列値として送信されます。 ファクトリにより、ユーザーのロールごとに個別の `role` 要求が作成されます。
+*`Client`* アプリで、カスタム ユーザー ファクトリを作成します。 Identity Server により、複数のロールが JSON 配列として 1 つの `role` 要求で送信されます。 1 つのロールは、要求内で文字列値として送信されます。 ファクトリにより、ユーザーのロールごとに個別の `role` 要求が作成されます。
 
 `CustomUserFactory.cs`:
 
@@ -316,7 +316,7 @@ public class CustomUserFactory
         if (user.Identity.IsAuthenticated)
         {
             var identity = (ClaimsIdentity)user.Identity;
-            var roleClaims = identity.FindAll(identity.RoleClaimType);
+            var roleClaims = identity.FindAll(identity.RoleClaimType).ToArray();
 
             if (roleClaims != null && roleClaims.Any())
             {
@@ -349,14 +349,14 @@ public class CustomUserFactory
 }
 ```
 
-クライアント アプリでは、`Program.Main` (`Program.cs`) にファクトリを登録します。
+*`Client`* アプリでは、`Program.Main` (`Program.cs`) にファクトリを登録します。
 
 ```csharp
 builder.Services.AddApiAuthorization()
     .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
 ```
 
-サーバー アプリでは、Identity ビルダーで <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> を呼び出します。これにより、ロールに関連するサービスが追加されます。
+*`Server`* アプリでは、Identity ビルダーで <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> を呼び出します。これにより、ロールに関連するサービスが追加されます。
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -378,7 +378,7 @@ services.AddDefaultIdentity<ApplicationUser>(options =>
 
 #### <a name="api-authorization-options"></a>API 承認のオプション
 
-サーバー アプリで次のようにします。
+*`Server`* アプリで:
 
 * `name` 要求と `role` 要求を ID トークンとアクセス トークンに挿入するように、Identity Server を構成します。
 * JWT トークン ハンドラーでロールの既定のマッピングを禁止します。
@@ -402,7 +402,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
 #### <a name="profile-service"></a>プロファイル サービス
 
-サーバー アプリで、`ProfileService` の実装を作成します。
+*`Server`* アプリで、`ProfileService` の実装を作成します。
 
 `ProfileService.cs`:
 
@@ -436,7 +436,7 @@ public class ProfileService : IProfileService
 }
 ```
 
-サーバー アプリで、`Startup.ConfigureServices` にプロファイル サービスを登録します。
+*`Server`* アプリで、`Startup.ConfigureServices` にプロファイル サービスを登録します。
 
 ```csharp
 using IdentityServer4.Services;
@@ -448,7 +448,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
 ### <a name="use-authorization-mechanisms"></a>承認メカニズムを使用する
 
-クライアント アプリでは、この時点でコンポーネントの承認方法が機能しています。 コンポーネント内のすべての承認メカニズムで、ロールを使用してユーザーを承認できます。
+*`Client`* アプリでは、この時点でコンポーネントの承認方法が機能しています。 コンポーネント内のすべての承認メカニズムで、ロールを使用してユーザーを承認できます。
 
 * [`AuthorizeView` コンポーネント](xref:blazor/security/index#authorizeview-component) (例: `<AuthorizeView Roles="admin">`)
 * [`[Authorize]` 属性ディレクティブ](xref:blazor/security/index#authorize-attribute) (<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>) (例: `@attribute [Authorize(Roles = "admin")]`)
@@ -463,9 +463,108 @@ services.AddTransient<IProfileService, ProfileService>();
   }
   ```
 
-`User.Identity.Name` には、クライアント アプリにおいてユーザーのユーザー名が設定されます。これは通常、サインイン メール アドレスです。
+`User.Identity.Name` には、 *`Client`* アプリにおいてユーザーのユーザー名が設定されます。これは通常、サインイン メール アドレスです。
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+
+## <a name="host-in-azure-app-service-with-a-custom-domain"></a>カスタム ドメインを使用した Azure App Service でのホスト
+
+次のガイダンスでは、Identity Server を使用してホストされている Blazor WebAssembly アプリを、カスタム ドメインを使用して [Azure App Service](https://azure.microsoft.com/services/app-service/) にデプロイする方法について説明します。
+
+このホスティング シナリオの場合、[Identity Server のトークン署名キー](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)と、サイトの HTTPS でセキュリティ保護されたブラウザーとの通信に、同じ証明書を**使用しないでください**。
+
+* この 2 つの要件に対して異なる証明書を使用することは、それぞれの目的に対して秘密キーが分離されるため、優れたセキュリティ方法です。
+* ブラウザーとの通信に使用される TLS 証明書は、Identity Server のトークン署名に影響を与えることなく、個別に管理されます。
+* カスタム ドメイン バインドのために [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) で App Service アプリに証明書を提供すると、Identity Server で Azure Key Vault からトークン署名用に同じ証明書を取得することはできません。 物理パスから同じ TLS 証明書を使用するように Identity Server を構成することはできますが、セキュリティ証明書をソース管理に置くことは**不適切な方法であり、ほとんどのシナリオで避ける必要があります**。
+
+次のガイダンスでは、自己署名証明書は Identity Server のトークン署名のためだけに Azure Key Vault に作成されます。 Identity Server の構成により、アプリの `My` > `CurrentUser` 証明書ストアを介して、キー コンテナー証明書が使用されます。 カスタム ドメインで HTTPS トラフィックに使用される他の証明書は、Identity Server の署名証明書とは別に作成および構成されます。
+
+カスタム ドメインと HTTPS を使用してホストするようにアプリ、Azure App Service、Azure Key Vault を構成するには:
+
+1. プラン レベル `Basic B1` 以上を使用して、[App Service プラン](/azure/app-service/overview-hosting-plans)を作成します。 App Service でカスタム ドメインを使用するには、`Basic B1` 以上のサービス レベルが必要です。
+1. 組織で管理するサイトの完全修飾ドメイン名 (FQDN) の共通名を使用して (例: `www.contoso.com`)、サイトのセキュリティで保護されたブラウザー通信 (HTTPS プロトコル) 用の PFX 証明書を作成します。 次のように証明書を作成します。
+   * キーで使用
+     * デジタル署名の検証 (`digitalSignature`)
+     * キーの暗号化 (`keyEncipherment`)
+   * 強化および拡張されたキーで使用
+     * クライアント認証 (1.3.6.1.5.5.7.3.2)
+     * サーバー認証 (1.3.6.1.5.5.7.3.1)
+
+   証明書を作成するには、次のいずれかの方法、または他の適切なツールやオンライン サービスを使用します。
+
+   * [Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
+   * [Windows での MakeCert](/windows/desktop/seccrypto/makecert)
+   * [OpenSSL](https://www.openssl.org)
+
+   パスワードを記録しておきます。これは後で Azure Key Vault に証明書をインポートするために使用します。
+
+   Azure Key Vault 証明書の詳細については、[Azure Key Vault のCertificate\(次へ: 証明書\)](/azure/key-vault/certificates/) を選択します。
+1. 新しい Azure キー コンテナーを作成するか、Azure サブスクリプションの既存のキー コンテナーを使用します。
+1. キー コンテナーの **[証明書]** 領域で、PFX サイト証明書をインポートします。 後でアプリの構成に使用するので、証明書のサムプリントを記録しておきます。
+1. Azure Key Vault で、Identity Server のトークン署名用に新しい自己署名証明書を生成します。 証明書の**証明書名**と**サブジェクト**を指定します。 **サブジェクト**は `CN={COMMON NAME}` と指定します。`{COMMON NAME}` プレースホルダーは証明書の共通名です。 共通名には、任意の英数字を使用できます。 たとえば、`CN=IdentityServerSigning` は証明書の有効な**サブジェクト**です。 **[ポリシーの詳細構成]** は既定の設定を使用します。 後でアプリの構成に使用するので、証明書のサムプリントを記録しておきます。
+1. Azure portal で Azure App Service に移動し、次の構成を使用して新しいアプリ サービスを作成します。
+   * **[発行]** は、`Code` に設定します。
+   * **[ランタイム スタック]** は、アプリのランタイムに設定します。
+   * **[SKU とサイズ]** については、App Service のレベルが `Basic B1` 以上であることを確認します。  App Service でカスタム ドメインを使用するには、`Basic B1` 以上のサービス レベルが必要です。
+1. Azure によって App Service が作成された後、アプリの **[構成]** を開き、前に記録した証明書のサムプリントを指定して新しいアプリケーション設定を追加します。 アプリ設定キーは `WEBSITE_LOAD_CERTIFICATES` です。 次の例に示すように、アプリの設定値で証明書のサムプリントを区切るにはコンマを使用します。
+   * キー: `WEBSITE_LOAD_CERTIFICATES`
+   * 値: `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
+
+   Azure portal で、アプリの設定の保存は 2 段階のプロセスです。`WEBSITE_LOAD_CERTIFICATES` のキーと値の設定を保存した後、ブレードの上部にある **[保存]** ボタンを選択します。
+1. アプリの **[TLS/SSL の設定]** を選択します。 **[秘密キー証明書 (.pfx)]** を選択します。 **[Key Vault 証明書のインポート]** プロセスを 2 回使用して、HTTPS 通信用のサイトの証明書と、サイトの自己署名された Identity Server トークン署名証明書の両方をインポートします。
+1. **[カスタム ドメイン]** ブレードに移動します。 ドメイン レジストラーの Web サイトで、**IP アドレス**と**カスタム ドメイン検証 ID** を使用して、ドメインを構成します。 一般的なドメイン構成には次のものが含まれます。
+   * **ホスト**が `@` で、値が Azure portal の IP アドレスである **A レコード**。
+   * **ホスト**が `asuid` で、値が Azure によって生成されて Azure portal によって提供される検証 ID である **TXT レコード**。
+
+   ドメイン レジストラーの Web サイトで変更を正しく保存したことを確認します。 レジストラーの Web サイトによっては、ドメイン レコードを保存するために 2 段階のプロセスが必要な場合があります。1 つ以上のレコードを個別に保存した後、別のボタンを使用してドメインの登録を更新します。
+1. Azure portal の **[カスタム ドメイン]** ブレードに戻ります。 **[カスタム ドメインの追加]** を選択します。 **[A レコード]** オプションを選択します。 ドメインを指定し、 **[検証]** を選択します。 ドメイン レコードが正しく、インターネットを通して反映されている場合、ポータルで **[カスタム ドメインの追加]** ボタンを選択できます。
+
+   ドメイン登録の変更がインターネットのドメイン ネーム サーバー (DNS) 全体に反映されるまで、ドメイン レジストラーによって処理されてから数日かかることがあります。 ドメイン レコードが 3 営業日以内に更新されない場合は、レコードが正しく設定されていることをドメイン レジストラーで確認し、カスタマー サポートに問い合わせてください。
+1. **[カスタム ドメイン]** ブレードで、ドメインの **[SSL 状態]** は `Not Secure` とマークされます。 **[バインドの追加]** リンクを選択します。 キー コンテナーからカスタム ドメイン バインド用のサイトの HTTPS 証明書を選択します。
+1. Visual Studio で、*Server* プロジェクトのアプリ設定ファイル (`appsettings.json` または `appsettings.Production.json`) を開きます。 Identity Server の構成で、次の `Key` セクションを追加します。 `Name` キーに対しては、自己署名証明書の**サブジェクト**を指定します。 次の例の場合、キー コンテナーで割り当てられている証明書の共通名は `IdentityServerSigning` であり、それにより `CN=IdentityServerSigning` という**サブジェクト**が生成されます。
+
+   ```json
+   "IdentityServer": {
+
+     ...
+
+     "Key": {
+       "Type": "Store",
+       "StoreName": "My",
+       "StoreLocation": "CurrentUser",
+       "Name": "CN=IdentityServerSigning"
+     }
+   },
+   ```
+
+1. Visual Studio で、*Server* プロジェクトに対する Azure App Service の "[発行プロファイル](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)" を作成します。 メニュー バーから次のように選択します。 **[ビルド]**  >  **[発行]**  >  **[新規]**  >  **[Azure]**  >  **[Azure App Service]** (Windows または Linux)。 Visual Studio が Azure サブスクリプションに接続されたら、 **[リソースの種類]** で Azure リソースの **[ビュー]** を設定できます。 **[Web アプリ]** の一覧内を移動し、アプリの App Service を見つけて選択します。 **[完了]** を選択します。
+1. Visual Studio が **[発行]** ウィンドウに戻ると、キー コンテナーと SQL Server データベース サービスの依存関係が自動的に検出されます。
+
+   Key Vault サービスの既定の設定で構成を変更する必要はありません。
+
+   テストの目的で、既定では Blazor テンプレートによって構成されるアプリのローカル [SQLite](https://www.sqlite.org/index.html) データベースを、追加の構成を行わずにアプリでデプロイできます。 運用環境で Identity Server 用に別のデータベースを構成する方法については、この記事では説明しません。 詳細については、次のドキュメント セットのデータベース リソースを参照してください。
+   * [App Service](/azure/app-service/)
+   * [Identity サーバー](https://identityserver4.readthedocs.io/en/latest/)
+
+1. ウィンドウの上部にある配置プロファイル名の下にある **[編集]** リンクを選択します。 デプロイ先の URL を、サイトのカスタム ドメイン URL に変更します (例: `https://www.contoso.com`)。 設定を保存します。
+1. アプリの発行 Visual Studio によってブラウザー ウィンドウが開かれ、カスタム ドメインのサイトが要求されます。
+
+Azure のドキュメントには、App Service の TLS バインドでの Azure サービスとカスタム ドメインの使用に関する詳細が含まれています。これには、A レコードの代わりに CNAME レコードを使用する方法の情報も含まれます。 詳細については、次のリソースを参照してください。
+
+* [App Service のドキュメント](/azure/app-service/)
+* [チュートリアル:既存のカスタム DNS 名を Azure App Service にマップする](/azure/app-service/app-service-web-tutorial-custom-domain)
+* [Azure App Service で TLS/SSL バインドを使用してカスタム DNS 名をセキュリティで保護する](/azure/app-service/configure-ssl-bindings)
+* [Azure Key Vault](/azure/key-vault/)
+
+Azure portal でアプリ、アプリの構成、または Azure サービスを変更した後は、アプリのテストを実行するたびに、新しいプライベートまたはシークレットのブラウザー ウィンドウを使用することをお勧めします。 サイトの構成が正しい場合でも、前回のテスト実行から残っている cookie により、サイトをテストするときに認証または承認が失敗する可能性があります。 テストを実行するたびに新しいプライベートまたはシークレットのブラウザー ウィンドウを開くように Visual Studio を構成する方法の詳細については、「[Cookie とサイト データ](#cookies-and-site-data)」セクションを参照してください。
+
+Azure portal で App Service の構成を変更すると、通常、更新は短時間で有効になりますが、すぐにではありません。 場合によっては、構成の変更を有効にするために App Service が再起動されるまでしばらく待つ必要があります。
+
+証明書の読み込みに関する問題のトラブルシューティングを行う場合は、Azure portal の [Kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service) PowerShell コマンド シェルで次のコマンドを実行します。 このコマンドにより、アプリで `My` > `CurrentUser` 証明書ストアからアクセスできる証明書の一覧が提供されます。 出力には、アプリをデバッグするときに役立つ証明書のサブジェクトとサムプリントが含まれています。
+
+```powershell
+Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Subject, Thumbprint, EnhancedKeyUsageList
+```
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 

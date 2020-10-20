@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 36c0915649d9a25cf1b6b2d9ec69c3919aa7bc2c
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: fc902cb5a82fda9fdbed09c40d66a846d9360f6a
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424166"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900740"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server と Entity Framework Core (EFCore)
 
@@ -99,7 +99,7 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 
 依存関係を持つ新しい <xref:Microsoft.EntityFrameworkCore.DbContext> を作成するには、ファクトリを使用することをお勧めします。 EF Core 5.0 以降には、新しいコンテキストを作成するためのファクトリが組み込まれています。
 
-次の例では、[SQLite](https://www.sqlite.org/index.html) を構成し、データのログ記録を有効にします。 このコードでは、拡張メソッドを使用して、DI のデータベース ファクトリを構成し、既定のオプションを指定しています。
+次の例では、[SQLite](https://www.sqlite.org/index.html) を構成し、データのログ記録を有効にします。 このコードでは、[拡張メソッド (`AddDbContextFactory`)](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Data/FactoryExtensions.cs) を使用して、DI のデータベース ファクトリを構成し、既定のオプションを指定しています。
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Startup.cs?name=snippet1)]
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 2881b5d01f3b2e41659e3166a4e77b64a450f017
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592920"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900961"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ
 
@@ -177,7 +177,7 @@ Blazor WebAssembly のホストされたプロジェクト テンプレートに
 
 ### <a name="graph-api-example"></a>Graph API の例
 
-次の例では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を使用して、通話を処理するユーザーの携帯電話番号を取得します。 Azure portal の AAD 領域に Microsoft Graph API `User.Read` のアクセス許可を追加すると、ホストされた Blazor ソリューションのスタンドアロン アプリまたはクライアント アプリ内の名前付きクライアントに対してスコープが構成されます。
+次の例では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を使用して、通話を処理するユーザーの携帯電話番号を取得します。 Azure portal の AAD 領域に Microsoft Graph API `User.Read` のアクセス許可を追加すると、ホストされた Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリ内の名前付きクライアントに対してスコープが構成されます。
 
 > [!NOTE]
 > このセクションの例では、"*コンポーネント コード*" でユーザーの Graph API データを取得します。 Graph API からユーザー要求を作成するには、次のリソースを参照してください。
@@ -1070,7 +1070,7 @@ AAD セキュリティ グループと AAD 管理者ロール、およびカス�
 * 承認が不要なパスをプリレンダリングする。
 * 承認が必要なパスをプリレンダリングしない。
 
-クライアント アプリの `Program` クラス (`Program.cs`) で、共通のサービスの登録を別のメソッド (たとえば、`ConfigureCommonServices`) に組み入れます。
+*`Client`* アプリの `Program` クラス (`Program.cs`) で、共通のサービスの登録を別のメソッド (たとえば、`ConfigureCommonServices`) に組み入れます。
 
 ```csharp
 public class Program
@@ -1130,7 +1130,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-サーバー アプリで、`Pages` フォルダーが存在しない場合は作成します。 サーバー アプリの `Pages` フォルダー内に `_Host.cshtml` ページを作成します。 クライアント アプリの `wwwroot/index.html` ファイルの内容を `Pages/_Host.cshtml` ファイルに貼り付けます。 ファイルの内容を更新します。
+サーバー アプリで、`Pages` フォルダーが存在しない場合は作成します。 サーバー アプリの `Pages` フォルダー内に `_Host.cshtml` ページを作成します。 *`Client`* アプリの `wwwroot/index.html` ファイルの内容を `Pages/_Host.cshtml` ファイルに貼り付けます。 ファイルの内容を更新します。
 
 * ファイルの先頭に、`@page "_Host"` を追加します。
 * `<app>Loading...</app>` タグを次のように置き換えます。
