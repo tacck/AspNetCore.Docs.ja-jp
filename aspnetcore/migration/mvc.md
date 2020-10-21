@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 51228e59284b5edf0554e9929b16deafe08ea31e
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865130"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326625"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC から ASP.NET Core MVC への移行
 
@@ -48,7 +48,7 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 1. [ **ASP.NET Web アプリケーション (.NET Framework)** ] を選択し、[ **次へ**] を選択します。
-1. 名前空間が次の手順で作成した ASP.NET Core プロジェクトと一致するように、プロジェクトに *WebApp1* という名前を指定します。 **[作成]** を選択します。
+1. 名前空間が次の手順で作成した ASP.NET Core プロジェクトと一致するように、プロジェクトに *WebApp1* という名前を指定します。 **［作成］** を選択します
 1. [ **MVC**] を選択し、[ **作成**] を選択します。
 
 ## <a name="create-the-aspnet-core-project"></a>ASP.NET Core プロジェクトを作成する
@@ -57,9 +57,9 @@ ASP.NET MVC からの移行は、複数の手順から成るプロセスです�
 
 1. Visual Studio の2番目のインスタンスを起動します。
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
-1. [ **ASP.NET Web Core Web アプリケーション** ] を選択し、[ **次へ**] を選択します。
+1. **[ASP.NET Core Web アプリケーション]** を選択し、 **[次へ]** を選択します。
 1. [ **新しいプロジェクトの構成** ] ダイアログで、プロジェクトに *WebApp1*という名前を設定します。
-1. 同じプロジェクト名を使用するように、場所を前のプロジェクトとは別のディレクトリに設定します。 同じ名前空間を使用すると、2つのプロジェクト間でコードを簡単にコピーできるようになります。 **[作成]** を選択します。
+1. 同じプロジェクト名を使用するように、場所を前のプロジェクトとは別のディレクトリに設定します。 同じ名前空間を使用すると、2つのプロジェクト間でコードを簡単にコピーできるようになります。 **［作成］** を選択します
 1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 [ **Web アプリケーション (モデルビューコントローラー)** ] プロジェクトテンプレートを選択し、[ **作成**] を選択します。
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>MVC を使用するように ASP.NET Core サイトを構成する
@@ -109,7 +109,7 @@ ASP.NET Core *WebApp1* プロジェクトには、ASP.NET MVC プロジェクト
 各コントローラーエンドポイントはテストできます。ただし、レイアウトとスタイルについては、ドキュメントの後半で説明します。
 
 1. ASP.NET Core アプリを実行します。
-1. 現在のポート番号を ASP.NET Core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET Core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、`https://localhost:44375/home/about` のようにします。
+1. 現在のポート番号を ASP.NET Core プロジェクトで使用されているポート番号に置き換えることによって、実行中の ASP.NET Core アプリのブラウザーから表示されたビューを呼び出します。 たとえば、「 `https://localhost:44375/home/about` 」のように入力します。
 
 ## <a name="migrate-static-content"></a>静的コンテンツの移行
 
@@ -372,7 +372,7 @@ JQuery および Bootstrap JavaScript インクルードの置換マークアッ
 
 ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換します。 通常、サーバーに関する機密情報が漏えいするのを防ぐために、エラーの詳細はこれらの応答に含まれていません。 詳細については、「 [開発者向け例外ページ](xref:fundamentals/error-handling#developer-exception-page)」を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -558,7 +558,7 @@ JQuery および Bootstrap JavaScript インクルードの置換マークアッ
 
 ASP.NET Core は、未処理の例外を HTTP 500 エラー応答に変換します。 通常、サーバーに関する機密情報が漏えいするのを防ぐために、エラーの詳細はこれらの応答に含まれていません。 詳細については、「 [開発者向け例外ページ](xref:fundamentals/error-handling#developer-exception-page)」を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

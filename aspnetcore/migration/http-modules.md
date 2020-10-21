@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 808215d103db9c5d63fe63b6875a222e6b0ba1fa
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865588"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326612"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP ハンドラーとモジュールを ASP.NET Core ミドルウェアに移行する
 
@@ -356,7 +356,7 @@ HttpContext は次のように変換さ**れます。**
 
 **TransmitFile**
 
-ファイルの提供については、 [こちら](../fundamentals/request-features.md#middleware-and-request-features)を参照してください。
+ファイルの提供については、「 [ミドルウェアと要求機能](xref:fundamentals/request-features#middleware-and-request-features)」で説明されています。
 
 **HttpContext. 応答ヘッダー**
 
@@ -393,9 +393,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他のリソース
 
 * [HTTP ハンドラーと HTTP モジュールの概要](/iis/configuration/system.webserver/)
-* [構成](xref:fundamentals/configuration/index)
+* [Configuration](xref:fundamentals/configuration/index)
 * [アプリケーションの起動](xref:fundamentals/startup)
 * [ミドルウェア](xref:fundamentals/middleware/index)
