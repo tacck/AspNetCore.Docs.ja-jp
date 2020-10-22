@@ -705,6 +705,9 @@
     - name: ログの記録と診断
       displayName: signalr
       uid: signalr/diagnostics
+    - name: トラブルシューティング
+      displayName: signalr
+      uid: signalr/troubleshoot
     - name: 仕様
       displayName: 'signalr, specs'
       items:

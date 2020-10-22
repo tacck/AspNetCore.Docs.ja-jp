@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 212d8a80bdc466479c34bc5fbd9c3261ca9d54c4
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 9f67f8104eb5c21f244449ca3a4aaa96c750836d
+ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393913"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92379481"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -520,7 +520,7 @@ Postman を使用して、To Do アイテムを削除します。
 * 削除するオブジェクトの URI (たとえば、`https://localhost:5001/api/TodoItems/1`) を設定します。
 * **[Send]** を選択します。
 
-<a name="over-post"></a>
+<a name="over-post-v5"></a>
 
 ## <a name="prevent-over-posting"></a>過剰な投稿を防止する
 
@@ -1008,6 +1008,7 @@ Postman を使用して、To Do アイテムを削除します。
 * **[Send]** を選択します。
 
 <a name="over-post"></a>
+<a name="over-post-v3"></a>
 
 ## <a name="prevent-over-posting"></a>過剰な投稿を防止する
 
@@ -1389,7 +1390,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
   ![Postman コンソールの [Headers] タブ](first-web-api/_static/pmc2.png)
 
 * メソッドを GET に設定します。
-* URI を  `https://localhost:<port>/api/TodoItems/2` に設定します。 たとえば、 `https://localhost:5001/api/TodoItems/2` などです。
+* URI を `https://localhost:<port>/api/TodoItems/2` に設定します。 たとえば、「 `https://localhost:5001/api/TodoItems/2` 」のように入力します。
 * **[Send]** を選択します。
 
 ## <a name="add-a-puttodoitem-method-21"></a>PutTodoItem メソッド 2.1 の追加

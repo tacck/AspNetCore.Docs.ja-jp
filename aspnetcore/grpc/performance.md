@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 4d50698b8c55f7fb3ef9a2c3102e73e046a22a9c
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: b54d13bfd9207a7b8961c1c4fa9908d3d54a4270
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722846"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113856"
 ---
 # <a name="performance-best-practices-with-grpc"></a>gRPC を使用したパフォーマンスのベスト プラクティス
 
@@ -53,7 +53,7 @@ gRPC クライアント ファクトリには、チャネルを構成するた�
 
 ## <a name="connection-concurrency"></a>接続の同時実行
 
-HTTP/2 接続では、通常、1 つの接続で[同時に実行できるストリームの最大数 (アクティブな HTTP 要求数)](https://http2.github.io/http2-spec/#rfc.section.5.1.2) に制限があります。 既定では、ほとんどのサーバーの同時に実行できるストリームの制限数は 100 に設定されます。
+HTTP/2 接続では、通常、1 つの接続で[同時に実行できるストリームの最大数 (アクティブな HTTP 要求数)](https://httpwg.github.io/specs/rfc7540.html#rfc.section.5.1.2) に制限があります。 既定では、ほとんどのサーバーの同時に実行できるストリームの制限数は 100 に設定されます。
 
 gRPC チャネルは 1 つの HTTP/2 接続を使用し、その接続で同時呼び出しが多重化されます。 アクティブな呼び出しの数が接続ストリームの制限に達すると、追加の呼び出しがクライアントのキューに入れられます。 キューに入れられた呼び出しは、アクティブな呼び出しが完了するのを待ってから送信されます。 高負荷のアプリケーションや、長時間実行されるストリーミング gRPC 呼び出しでは、この制限により、呼び出しキューが原因でパフォーマンスの問題が発生する可能性があります。
 
