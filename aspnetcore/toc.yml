@@ -385,6 +385,8 @@
               uid: blazor/components/virtualization
             - name: テンプレート コンポーネント
               uid: blazor/components/templated-components
+            - name: CSS の分離
+              uid: blazor/components/css-isolation
             - name: コンポーネントの統合
               uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
             - name: コンポーネント ライブラリ
@@ -447,7 +449,7 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly のパフォーマンス
           uid: blazor/webassembly-performance-best-practices
-        - name: テスト
+        - name: テスト コンポーネント
           uid: blazor/test
         - name: プログレッシブ Web アプリケーション
           uid: blazor/progressive-web-app
