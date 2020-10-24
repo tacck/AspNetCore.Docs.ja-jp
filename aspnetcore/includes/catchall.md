@@ -1,3 +1,5 @@
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
 > [!WARNING]
 > ルーティングで[バグ](https://github.com/dotnet/aspnetcore/issues/18677)が原因で、**キャッチオール** パラメーターがルートと正しく一致しない可能性があります。 このバグの影響を受けるアプリには、次の特性があります。
 >
@@ -18,3 +20,5 @@
 >}
 >// Remaining code removed for brevity.
 >```
+
+::: moniker-end

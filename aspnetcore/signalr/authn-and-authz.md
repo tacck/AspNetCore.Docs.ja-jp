@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 3a2ae5c7bc4853bad7b94af0d26ad5cd0358688f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e16efa59a82d0f3cb1a2272ae0c07654ebec6a51
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628936"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491562"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>ASP.NET Core での認証と承認 SignalR
 
@@ -99,8 +99,6 @@ Cookieは、アクセストークンを送信するためのブラウザー固�
 
 クライアントは、を使用する代わりに、アクセストークンを提供でき cookie ます。 サーバーはトークンを検証し、それを使用してユーザーを識別します。 この検証は、接続が確立された場合にのみ実行されます。 接続の有効期間中は、トークンの失効を確認するためにサーバーが自動的に再検証されることはありません。
 
-サーバーでは、[JWT ベアラー ミドルウェア](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)を使用してベアラー トークン認証が構成されます。
-
 JavaScript クライアントでは、 [accessTokenFactory](xref:signalr/configuration#configure-bearer-authentication) オプションを使用してトークンを指定できます。
 
 [!code-typescript[Configure Access Token](authn-and-authz/sample/wwwroot/js/chat.ts?range=52-55)]
@@ -119,14 +117,60 @@ var connection = new HubConnectionBuilder()
 > [!NOTE]
 > 提供するアクセストークン関数は、によって行われる **すべて** の HTTP 要求の前に呼び出され SignalR ます。 接続をアクティブな状態に保つために、トークンを更新する必要がある場合 (接続中に期限切れになる可能性があるため)、この関数内からトークンを取得し、更新されたトークンを返します。
 
-標準の web Api では、ベアラートークンは HTTP ヘッダーで送信されます。 ただし、で SignalR は、一部のトランスポートを使用するときに、これらのヘッダーをブラウザーで設定することはできません。 Websocket およびサーバー送信イベントを使用する場合、トークンはクエリ文字列パラメーターとして送信されます。 サーバーでこれをサポートするには、追加の構成が必要です。
+標準の web Api では、ベアラートークンは HTTP ヘッダーで送信されます。 ただし、で SignalR は、一部のトランスポートを使用するときに、これらのヘッダーをブラウザーで設定することはできません。 Websocket と Server-Sent イベントを使用する場合、トークンはクエリ文字列パラメーターとして送信されます。 
+
+#### <a name="built-in-jwt-authentication"></a>組み込み JWT 認証
+
+サーバーでは、ベアラートークン認証は [JWT ベアラーミドルウェア](xref:Microsoft.Extensions.DependencyInjection.JwtBearerExtensions.AddJwtBearer%2A)を使用して構成されます。
 
 [!code-csharp[Configure Server to accept access token from Query String](authn-and-authz/sample/Startup.cs?name=snippet)]
 
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 > [!NOTE]
-> クエリ文字列は、ブラウザー API の制限により、Websocket およびサーバーから送信されたイベントと接続するときにブラウザーで使用されます。 HTTPS を使用する場合、クエリ文字列の値は TLS 接続によって保護されます。 ただし、多くのサーバーはクエリ文字列の値をログに記録します。 詳細については、「 [ASP.NET Core SignalR のセキュリティに関する考慮事項](xref:signalr/security)」を参照してください。 SignalR はヘッダーを使用して、トークンをサポートする環境 (.NET や Java クライアントなど) でトークンを送信します。
+> クエリ文字列は、ブラウザー API の制限により、Websocket と Server-Sent イベントに接続するときにブラウザーで使用されます。 HTTPS を使用する場合、クエリ文字列の値は TLS 接続によって保護されます。 ただし、多くのサーバーはクエリ文字列の値をログに記録します。 詳細については、「 [ASP.NET Core SignalR のセキュリティに関する考慮事項](xref:signalr/security)」を参照してください。 SignalR はヘッダーを使用して、トークンをサポートする環境 (.NET や Java クライアントなど) でトークンを送信します。
+
+#### <a name="no-locidentity-server-jwt-authentication"></a>Identity サーバー JWT 認証
+
+サーバーを使用する場合は Identity 、 <xref:Microsoft.Extensions.Options.PostConfigureOptions%601> 次のようにサービスをプロジェクトに追加します。
+
+```csharp
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+public class ConfigureJwtBearerOptions : IPostConfigureOptions<JwtBearerOptions>
+{
+    public void PostConfigure(string name, JwtBearerOptions options)
+    {
+        var originalOnMessageReceived = options.Events.OnMessageReceived;
+        options.Events.OnMessageReceived = async context =>
+        {
+            await originalOnMessageReceived(context);
+                
+            if (string.IsNullOrEmpty(context.Token))
+            {
+                var accessToken = context.Request.Query["access_token"];
+                var path = context.HttpContext.Request.Path;
+                
+                if (!string.IsNullOrEmpty(accessToken) && 
+                    path.StartsWithSegments("/hubs"))
+                {
+                    context.Token = accessToken;
+                }
+            }
+        };
+    }
+}
+```
+
+`Startup.ConfigureServices`認証用のサービス ( <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication%2A> ) とサーバーの認証ハンドラー () を追加した後で、にサービスを登録し Identity <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> ます。
+
+```csharp
+services.AddAuthentication()
+    .AddIdentityServerJwt();
+services.TryAddEnumerable(
+    ServiceDescriptor.Singleton<IPostConfigureOptions<JwtBearerOptions>, 
+        ConfigureJwtBearerOptions>());
+```
 
 ### <a name="no-loccookies-vs-bearer-tokens"></a>Cookies およびベアラートークン 
 
@@ -299,7 +343,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET Core でのベアラートークン認証](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [リソースベースの承認](xref:security/authorization/resourcebased)

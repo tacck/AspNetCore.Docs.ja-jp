@@ -4,7 +4,7 @@ author: rick-anderson
 description: Azure Key Vault 構成プロバイダーを使用して、実行時に読み込まれる名前と値のペアを使用してアプリを構成する方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 02/07/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 32967e039671721852b8e421fe5a08763b23e418
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e3adbe127f618b8851b3a83025b27c066947e8b4
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629783"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491575"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core の構成プロバイダーの Azure Key Vault
 
@@ -329,7 +329,7 @@ JSON ファイルによって提供される次の [Serilog](https://serilog.net
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| キー | 値 |
+| Key | 値 |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -363,7 +363,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
@@ -656,7 +656,7 @@ JSON ファイルによって提供される次の [Serilog](https://serilog.net
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| キー | 値 |
+| Key | 値 |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -690,7 +690,7 @@ Configuration.Reload();
 * 読み込みようとしている値の構成キー (名前) が正しくありません。
 * アプリのアクセスポリシーを key vault に追加すると、ポリシーが作成されましたが、**アクセスポリシー** UI で [**保存**] ボタンが選択されていませんでした。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:fundamentals/configuration/index>
 * [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
