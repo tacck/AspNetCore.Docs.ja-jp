@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6f94323873937d1428d6cfa1b0ef15e44611fd47
+ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722859"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92153645"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core 向けの Docker イメージ
 
@@ -99,7 +99,7 @@ ms.locfileid: "90722859"
 
 ## <a name="run-in-a-linux-container"></a>Linux コンテナーでの実行
 
-* Docker クライアント上で、Linux コンテナーに切り替えます。
+* Docker クライアント上で、[Linux コンテナーに切り替えます](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)。
 
 * *dotnet-docker/samples/aspnetapp* にある Dockerfile フォルダーに移動します。
 
@@ -125,7 +125,7 @@ ms.locfileid: "90722859"
 
 ## <a name="run-in-a-windows-container"></a>Windows コンテナーでの実行
 
-* Docker クライアント上で、Windows コンテナーに切り替えます。
+* Docker クライアント上で、[Windows コンテナーに切り替えます](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)。
 
 `dotnet-docker/samples/aspnetapp` にある Docker ファイルのフォルダーに移動します。
 
@@ -255,7 +255,7 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-前の Dockerfile で示されているように、`*.csproj` ファイルは別個の "*レイヤー*" としてコピーおよび復元されます。 `docker build` コマンドを使用してイメージをビルドすると、組み込みのキャッシュが使用されます。 `docker build` コマンドが最後に実行されてから `*.csproj` ファイルが変更されていない場合、`dotnet restore` コマンドを再度実行する必要はありません。 代わりに、対応する `dotnet restore` レイヤーの組み込みキャッシュが再利用されます。 詳細については、「[Dockerfile を記述するためのベスト プラクティス](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)」を参照してください。
+前の Dockerfile で示されているように、`*.csproj` ファイルは別個の " *レイヤー* " としてコピーおよび復元されます。 `docker build` コマンドを使用してイメージをビルドすると、組み込みのキャッシュが使用されます。 `docker build` コマンドが最後に実行されてから `*.csproj` ファイルが変更されていない場合、`dotnet restore` コマンドを再度実行する必要はありません。 代わりに、対応する `dotnet restore` レイヤーの組み込みキャッシュが再利用されます。 詳細については、「[Dockerfile を記述するためのベスト プラクティス](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache)」を参照してください。
 
 ::: moniker-end
 

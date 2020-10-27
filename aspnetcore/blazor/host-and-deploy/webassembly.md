@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 63954bd2fbb8fdb2e347d552a10adc52263c3ad6
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: c3f537ff3b55f295db478cb097bc99023cc71a87
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900714"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326510"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -54,7 +54,7 @@ Blazor は、適切な圧縮ファイルにサービスを提供するため、�
   * [google/brotli GitHub リポジトリ](https://github.com/google/brotli)から、JavaScript Brotli デコーダーを入手します。 2020 年 9 月の時点で、デコーダー ファイルは `decode.js` という名前で、リポジトリの [`js` フォルダー](https://github.com/google/brotli/tree/master/js)にあります。
   
     > [!NOTE]
-    > 以前のバージョンは [google/brotli GitHub リポジトリ](https://github.com/google/brotli)の `decode.js` スクリプト (`decode.min.js`) の縮小バージョンにあります。 [Window.BrotliDecode が decode.min.js (google/brotli #844) で設定されない](https://github.com/google/brotli/issues/844)問題が解決されるまで、自分でスクリプトを縮小するか、[npm package](https://www.npmjs.com/package/brotli) を使用してください。 このセクションのサンプル コードでは、スクリプトの**未縮小**バージョンを使用しています。
+    > 以前のバージョンは [google/brotli GitHub リポジトリ](https://github.com/google/brotli)の `decode.js` スクリプト (`decode.min.js`) の縮小バージョンにあります。 [Window.BrotliDecode が decode.min.js (google/brotli #844) で設定されない](https://github.com/google/brotli/issues/844)問題が解決されるまで、自分でスクリプトを縮小するか、[npm package](https://www.npmjs.com/package/brotli) を使用してください。 このセクションのサンプル コードでは、スクリプトの **未縮小** バージョンを使用しています。
 
   * そのデコーダーを使用するようにアプリを更新します。 `wwwroot/index.html` の終了タグ `<body>` に含まれるマークアップを次のように変更します。
   
@@ -112,9 +112,9 @@ Blazor WebAssembly アプリ内のページ コンポーネントに対するル
 1. `index.html` によりアプリがブートストラップされます。
 1. Blazor のルーターが読み込まれて、Razor `Main` コンポーネントが表示されます。
 
-Main ページでは、`About` コンポーネントへのリンクの選択がクライアント上で動作します。Blazor のルーターにより、インターネット上で `www.contoso.com` に `About` を求めるブラウザーの要求が停止され、レンダリングされた `About` コンポーネント自体が提供されるためです。 " *Blazor WebAssembly アプリ内にある*" 内部エンドポイントへの要求は、すべて同じように動作します。要求によって、サーバーにホストされているインターネット上のリソースに対するブラウザーベースの要求がトリガーされることはありません。 要求は、ルーターによって内部的に処理されます。
+Main ページでは、`About` コンポーネントへのリンクの選択がクライアント上で動作します。Blazor のルーターにより、インターネット上で `www.contoso.com` に `About` を求めるブラウザーの要求が停止され、レンダリングされた `About` コンポーネント自体が提供されるためです。 " *Blazor WebAssembly アプリ内にある* " 内部エンドポイントへの要求は、すべて同じように動作します。要求によって、サーバーにホストされているインターネット上のリソースに対するブラウザーベースの要求がトリガーされることはありません。 要求は、ルーターによって内部的に処理されます。
 
-ブラウザーのアドレス バーを使用して `www.contoso.com/About` の要求が行われた場合、その要求は失敗します。 アプリのインターネット ホスト上にそのようなリソースは存在しないため、"*404 見つかりません*" という応答が返されます。
+ブラウザーのアドレス バーを使用して `www.contoso.com/About` の要求が行われた場合、その要求は失敗します。 アプリのインターネット ホスト上にそのようなリソースは存在しないため、" *404 見つかりません* " という応答が返されます。
 
 ブラウザーではクライアント側ページの要求がインターネットベースのホストに対して行われるため、Web サーバーとホスティング サービスでは、サーバー上に物理的に存在しないリソースに対する `index.html` ページへのすべての要求を、書き換える必要があります。 `index.html` が返されると、アプリの Blazor ルーターがそれを受け取り、正しいリソースで応答します。
 
@@ -122,9 +122,9 @@ IIS サーバーに展開する場合は、アプリで発行される `web.conf
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>ASP.NET Core でのホストされた展開
 
-"*ホストされたデプロイ*" により、Blazor WebAssembly アプリが、Web サーバー上で実行されている [ASP.NET Core アプリ](xref:index)からブラウザーに提供されます。
+" *ホストされたデプロイ* " により、Blazor WebAssembly アプリが、Web サーバー上で実行されている [ASP.NET Core アプリ](xref:index)からブラウザーに提供されます。
 
-クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。 2 つのアプリが一緒に展開されます。 ASP.NET Core アプリをホストできる Web サーバーが必要です。 ホストされている展開の場合、Visual Studio には **Blazor WebAssembly アプリ** プロジェクト テンプレートが含まれており ([`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorwasm` テンプレート)、 **`Hosted`** オプションが選択されています (`dotnet new` コマンドを使用する場合は `-ho|--hosted`)。
+クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。 2 つのアプリが一緒に展開されます。 ASP.NET Core アプリをホストできる Web サーバーが必要です。 ホストされている展開の場合、Visual Studio には **Blazor WebAssembly アプリ** プロジェクト テンプレートが含まれており ( [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorwasm` テンプレート)、 **`Hosted`** オプションが選択されています (`dotnet new` コマンドを使用する場合は `-ho|--hosted`)。
 
 ASP.NET Core アプリでのホストと展開の詳細については、「<xref:host-and-deploy/index>」を参照してください。
 
@@ -336,7 +336,7 @@ Azure App Service の展開については、「<xref:tutorials/publish-to-azure
 ```
 
 > [!WARNING]
-> 画像を所有している場合を除き、車両の画像を公開**しないでください**。 そうしないと、著作権侵害のリスクがあります。
+> 画像を所有している場合を除き、車両の画像を公開 **しないでください** 。 そうしないと、著作権侵害のリスクがあります。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -415,7 +415,7 @@ RCL の詳細については、以下を参照してください。
 
 ## <a name="standalone-deployment"></a>スタンドアロン展開
 
-"*スタンドアロン デプロイ*" により、Blazor WebAssembly アプリが、クライアントによって直接要求される静的ファイルのセットとして提供されます。 任意の静的ファイル サーバーで Blazor アプリを提供できます。
+" *スタンドアロン デプロイ* " により、Blazor WebAssembly アプリが、クライアントによって直接要求される静的ファイルのセットとして提供されます。 任意の静的ファイル サーバーで Blazor アプリを提供できます。
 
 スタンドアロンのデプロイ アセットは、`/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。
 
@@ -450,18 +450,24 @@ Blazor プロジェクトが発行されると、`web.config` ファイルが以
   
 #### <a name="use-a-custom-webconfig"></a>カスタム web.config を使用する
 
-カスタムの `web.config` ファイルを使用するには、カスタムの `web.config` ファイルをプロジェクト フォルダーのルートに配置し、プロジェクトを発行します。
+カスタムの `web.config` ファイルを使用するには、カスタムの `web.config` ファイルをプロジェクト フォルダーのルートに配置します。 アプリのプロジェクト ファイルで `PublishIISAssets` を使用して IIS 固有のアセットを発行するようにプロジェクトを構成し、プロジェクトを発行します。
+
+```xml
+<PropertyGroup>
+  <PublishIISAssets>true</PublishIISAssets>
+</PropertyGroup>
+```
 
 #### <a name="install-the-url-rewrite-module"></a>URL リライト モジュールをインストールする
 
 [URL Rewrite Module](https://www.iis.net/downloads/microsoft/url-rewrite) は、URL の書き換えに必要となります。 このモジュールは既定ではインストールされていません。また、Web サーバー (IIS) の役割サービス機能としてインストールすることはできません。 モジュールは、IIS Web サイトからダウンロードする必要があります。 Web Platform Installer を使用してモジュールをインストールします。
 
-1. ローカルで、[URL Rewrite Module のダウンロード ページ](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)に移動します。 英語版については、**WebPI** を選択して WebPI インストーラーをダウンロードします。 その他の言語版については、サーバーの適切なアーキテクチャ (x86/x64) を選択して、インストーラーをダウンロードします。
+1. ローカルで、[URL Rewrite Module のダウンロード ページ](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)に移動します。 英語版については、 **WebPI** を選択して WebPI インストーラーをダウンロードします。 その他の言語版については、サーバーの適切なアーキテクチャ (x86/x64) を選択して、インストーラーをダウンロードします。
 1. インストーラーをサーバーにコピーします。 インストーラーを実行します。 **[インストール]** ボタンを選択して、ライセンス条項に同意します。 インストールが完了した後、サーバーの再起動は必要はありません。
 
 #### <a name="configure-the-website"></a>Web サイトを構成する
 
-Web サイトの**物理パス**をアプリのフォルダーに設定します。 フォルダーには次のものが含まれます。
+Web サイトの **物理パス** をアプリのフォルダーに設定します。 フォルダーには次のものが含まれます。
 
 * `web.config` ファイル。IIS ではこのファイルを使用して、必要なリダイレクト ルールやファイルのコンテンツの種類など、Web サイトの構成が行われます。
 * アプリの静的なアセット フォルダー。
@@ -504,7 +510,7 @@ Web サイトの**物理パス**をアプリのフォルダーに設定します
 
 #### <a name="troubleshooting"></a>トラブルシューティング
 
-Web サイトの構成にアクセスしようとしたときに、"*500 - 内部サーバー エラー*" という応答が返され、IIS マネージャーによりエラーがスローされた場合は、URL リライト モジュールがインストールされていることを確認します。 モジュールがインストールされていない場合、IIS では `web.config` ファイルを解析できません。 これは、IIS マネージャーによる Web サイトの構成の読み込み、そして Web サイトによる Blazor の静的ファイルの提供を阻止するためのものです。
+Web サイトの構成にアクセスしようとしたときに、" *500 - 内部サーバー エラー* " という応答が返され、IIS マネージャーによりエラーがスローされた場合は、URL リライト モジュールがインストールされていることを確認します。 モジュールがインストールされていない場合、IIS では `web.config` ファイルを解析できません。 これは、IIS マネージャーによる Web サイトの構成の読み込み、そして Web サイトによる Blazor の静的ファイルの提供を阻止するためのものです。
 
 IIS への展開に関するトラブルシューティングの詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
 
@@ -514,8 +520,8 @@ IIS への展開に関するトラブルシューティングの詳細につい�
 
 ストレージ アカウントでホスティングされている静的 Web サイトに Blob service サービスが有効になっているとき:
 
-* **インデックス ドキュメント名**を `index.html` に設定します。
-* **エラー ドキュメント パス**を `index.html` に設定します。 Razor コンポーネントとその他の非ファイル エンドポイントは、Blob service で保管される静的コンテンツの物理パスに置かれません。 このようなリソースの 1 つに対して受け取った要求を Blazor ルーターで処理しなければならないとき、Blob service によって生成された *404 - Not Found* エラーにより、要求が**エラー ドキュメント パス**に転送されます。 `index.html` BLOB が返され、Blazor ルーターでパスが読み込まれ、処理されます。
+* **インデックス ドキュメント名** を `index.html` に設定します。
+* **エラー ドキュメント パス** を `index.html` に設定します。 Razor コンポーネントとその他の非ファイル エンドポイントは、Blob service で保管される静的コンテンツの物理パスに置かれません。 このようなリソースの 1 つに対して受け取った要求を Blazor ルーターで処理しなければならないとき、Blob service によって生成された *404 - Not Found* エラーにより、要求が **エラー ドキュメント パス** に転送されます。 `index.html` BLOB が返され、Blazor ルーターでパスが読み込まれ、処理されます。
 
 ファイルの `Content-Type` ヘッダーに不適切な MIME の種類があるために、実行時にファイルが読み込まれない場合は、次のいずれかの操作を実行します。
 
@@ -563,7 +569,7 @@ http {
 }
 ```
 
-"*503 - サービスを利用できません*" という状態コードを要求が受信していることがブラウザー開発者ツールまたはネットワーク トラフィック ツールで示されている場合、この値を増やします。
+" *503 - サービスを利用できません* " という状態コードを要求が受信していることがブラウザー開発者ツールまたはネットワーク トラフィック ツールで示されている場合、この値を増やします。
 
 運用環境での Nginx Web サーバーの構成に関する詳細については、「[Creating NGINX Plus and NGINX Configuration Files](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)」 (NGINX Plus と NGINX 構成ファイルの作成) を参照してください。
 
@@ -882,7 +888,7 @@ Blazor WebAssembly によってアプリのスタートアップ ファイルが
 Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
 ```
 
-ほとんどの場合、これは整合性チェック自体に関する問題では "*ありません*"。 代わりにこれは他の問題があることを意味し、整合性チェックによってその他の問題に関する警告が表示されます。
+ほとんどの場合、これは整合性チェック自体に関する問題では " *ありません* "。 代わりにこれは他の問題があることを意味し、整合性チェックによってその他の問題に関する警告が表示されます。
 
 ### <a name="diagnosing-integrity-problems"></a>整合性に関する問題の診断
 
@@ -890,7 +896,7 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 
 これに失敗する一般的な理由は次のとおりです。
 
- * Web サーバーからの応答が、ブラウザーが要求したファイルではなく、エラー (たとえば *404 - Not Found* や *500 - Internal Server Error*) である場合。 これはブラウザーによって、応答エラーとしてではなく整合性チェックの失敗として報告されます。
+ * Web サーバーからの応答が、ブラウザーが要求したファイルではなく、エラー (たとえば *404 - Not Found* や *500 - Internal Server Error* ) である場合。 これはブラウザーによって、応答エラーとしてではなく整合性チェックの失敗として報告されます。
  * ファイルのビルドからブラウザーへの配信の間に、何らかによってファイルの内容が変更された場合。 次のような場合に発生します。
    * ユーザーまたはビルド ツールによって、ビルド出力が手動で変更された場合。
    * 展開プロセスの何らかの側面によってファイルが変更された場合。 たとえば、Git ベースの展開メカニズムを使用する場合は、Windows でファイルをコミットして Linux でチェックアウトすると、Git によって Windows スタイルの改行コードが Unix スタイルの改行コードに透過的に変換されることに注意してください。 ファイルの改行コードを変更すると、SHA-256 ハッシュが変更されます。 この問題を回避するには、[`.gitattributes` を使用してビルド成果物を `binary` ファイルとして扱う](https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes)ことを検討してください。
@@ -906,7 +912,7 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 サーバーから正しいと思われるデータが返されていることを確認した場合は、ファイルのビルドと配布の間で何か別の原因によって内容が変更されています。 これを調査するには:
 
  * ファイルがビルドされた後にファイルが変更される場合に備えて、ビルド ツールチェーンと展開メカニズムを調べます。 この例としては、前に説明したように、Git によってファイルの改行コードが変換される場合が挙げられます。
- * 応答を動的に変更する (たとえば、HTML を縮小しようとする) ように設定されている場合があるため、Web サーバーまたは CDN の構成を確認します。 Web サーバーに HTTP 圧縮が実装されていても問題ありません (たとえば `content-encoding: br` や `content-encoding: gzip` が返される場合)。これは展開後の結果には影響しないためです。 ただし、Web サーバーによって圧縮されていないデータが変更される場合は "*問題があります*"。
+ * 応答を動的に変更する (たとえば、HTML を縮小しようとする) ように設定されている場合があるため、Web サーバーまたは CDN の構成を確認します。 Web サーバーに HTTP 圧縮が実装されていても問題ありません (たとえば `content-encoding: br` や `content-encoding: gzip` が返される場合)。これは展開後の結果には影響しないためです。 ただし、Web サーバーによって圧縮されていないデータが変更される場合は " *問題があります* "。
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>非 PWA アプリの整合性チェックを無効にする
 

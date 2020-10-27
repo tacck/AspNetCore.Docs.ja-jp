@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 9d70b292a93a5d19cc25b2fc592ec88ce8262434
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 177112106d143a6826c1f927aac807da0aa9f2b4
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629991"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113830"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -67,7 +67,7 @@ ms.locfileid: "88629991"
 
 * Visual Studio から **[新しいプロジェクトの作成]** を選択します。
 
-* **[ASP.NET Core Web アプリケーション]** を選択し、 **[次へ]** を選択します。
+* **[ASP.NET Core Web アプリケーション]** > **[次へ]** の順に選択します。
 
 ![新しい ASP.NET Core Web アプリケーション](start-mvc/_static/np_2.1.png)
 
@@ -75,7 +75,7 @@ ms.locfileid: "88629991"
 
   ![新しい ASP.NET Core Web アプリケーション](start-mvc/_static/config.png)
 
-* **[Web Application(Model-View-Controller)]\(Web アプリケーション (Model-View-Controller)\)** を選択し、 **[作成]** を選択します。
+* **[Web アプリケーション (モデル ビュー コントローラー)]** を選択します。 ドロップダウン ボックスから **[.NET Core]** と **[ASP.NET Core 3.1]** を選択した後、 **[作成]** を選択します。
 
 ![[新しいプロジェクト] ダイアログ、左ウィンドウの .NET Core、ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
@@ -94,7 +94,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
    code -r MvcMovie
    ```
 
-  * "**ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
+  * " **ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
 
   * `dotnet new mvc -o MvcMovie`: *MvcMovie* フォルダー内に新しい ASP.NET Core MVC プロジェクトを作成します。
   * `code -r MvcMovie`:Visual Studio Code で *MvcMovie.csproj* プロジェクト ファイルを読み込みます。
@@ -158,7 +158,7 @@ Ctrl + F5 キーを押して、デバッガーなしで実行します。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-**[実行]**  >  **[デバッグなしで開始]** の順に選択してアプリを起動します。 Visual Studio for Mac によって [Kestrel](xref:fundamentals/servers/index#kestrel) サーバーが開始され、ブラウザーが起動して `http://localhost:port` にアクセスします。*port* はランダムに選択されたポート番号になります。
+**[実行]**  >  **[デバッグなしで開始]** の順に選択してアプリを起動します。 Visual Studio for Mac によって [Kestrel](xref:fundamentals/servers/index#kestrel) サーバーが開始され、ブラウザーが起動して `http://localhost:port` にアクセスします。 *port* はランダムに選択されたポート番号になります。
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
@@ -247,7 +247,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
    code -r MvcMovie
    ```
 
-  * "**ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
+  * " **ビルドとデバッグに必要な資産が 'MvcMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、  **[はい]** を選択します
 
   * `dotnet new mvc -o MvcMovie`: *MvcMovie* フォルダー内に新しい ASP.NET Core MVC プロジェクトを作成します。
   * `code -r MvcMovie`:Visual Studio Code で *MvcMovie.csproj* プロジェクト ファイルを読み込みます。
@@ -317,7 +317,7 @@ Ctrl + F5 キーを押して、デバッガーなしで実行します。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-**[実行]**  >  **[デバッグなしで開始]** の順に選択してアプリを起動します。 Visual Studio for Mac によって [Kestrel](xref:fundamentals/servers/index#kestrel) サーバーが開始され、ブラウザーが起動して `http://localhost:port` にアクセスします。*port* はランダムに選択されたポート番号になります。
+**[実行]**  >  **[デバッグなしで開始]** の順に選択してアプリを起動します。 Visual Studio for Mac によって [Kestrel](xref:fundamentals/servers/index#kestrel) サーバーが開始され、ブラウザーが起動して `http://localhost:port` にアクセスします。 *port* はランダムに選択されたポート番号になります。
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 

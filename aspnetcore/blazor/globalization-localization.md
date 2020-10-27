@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 2b8820acba564bdfb85f8338ed5482573960fbb4
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080278"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326531"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -36,8 +36,8 @@ ms.locfileid: "90080278"
 
 現在、サポートされている ASP.NET Core のローカライズ シナリオは限られています。
 
-* <xref:Microsoft.Extensions.Localization.IStringLocalizer> と <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> は、Blazor アプリで "*サポートされています*"。
-* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、<xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>、データ注釈のローカライズは ASP.NET Core の MVC シナリオであり、Blazor アプリでは "**サポートされていません**"。
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> と <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> は、Blazor アプリで " *サポートされています* "。
+* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、<xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>、データ注釈のローカライズは ASP.NET Core の MVC シナリオであり、Blazor アプリでは " **サポートされていません** "。
 
 詳細については、「<xref:fundamentals/localization>」を参照してください。
 
@@ -76,7 +76,28 @@ Blazor WebAssembly アプリでは、ユーザーの[言語設定](https://devel
 
 ::: moniker range=">= aspnetcore-5.0"
 
-既定では、Blazor WebAssembly には、ユーザーのカルチャで日付や通貨などの値を表示するために必要なグローバリゼーション リソースがあります。 アプリがローカライズを必要としない場合は、`en-US` カルチャに基づくインバリアント カルチャをサポートするようにアプリを構成することができます。
+既定では、Blazor WebAssembly には、ユーザーのカルチャで日付や通貨などの値を表示するために必要な最小限のグローバリゼーション リソースがあります。 カルチャの動的な変更をサポートする必要があるアプリケーションでは、プロジェクト ファイルで `BlazorWebAssemblyLoadAllGlobalizationData` を構成する必要があります。
+
+```xml
+<PropertyGroup>
+  <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+</PropertyGroup>
+```
+
+Blazor WebAssembly は、`Blazor.start` に渡されるオプションを使用して、特定のアプリケーション カルチャを使用して起動するように構成することもできます。 たとえば、次のサンプルでは、`en-GB` カルチャを使用して起動するように構成されたアプリが示されています。
+
+```html
+<script src="_framework/blazor.webassembly.js" autostart="false"></script>
+<script>
+  Blazor.start({
+    applicationCulture: 'en-GB'
+  });
+</script>
+```
+
+`applicationCulture` の値は、[BCP-47 言語タグ形式](https://tools.ietf.org/html/bcp47)に準拠している必要があります。
+
+アプリがローカライズを必要としない場合は、`en-US` カルチャに基づくインバリアント カルチャをサポートするようにアプリを構成することができます。
 
 ```xml
 <PropertyGroup>
@@ -146,7 +167,7 @@ cookie を使用すると、WebSocket 接続によってカルチャを正しく
 
 #### <a name="provide-ui-to-choose-the-culture"></a>カルチャを選択するための UI を提供する
 
-ユーザーがカルチャを選択できるように UI を提供するには、"*リダイレクト ベースのアプローチ*" をお勧めします。 このプロセスは、セキュリティで保護されたリソースにユーザーがアクセスしようとすると Web アプリで発生する処理に似ています。 ユーザーはサインイン ページにリダイレクトされ、元のリソースに再びリダイレクトされます。 
+ユーザーがカルチャを選択できるように UI を提供するには、" *リダイレクト ベースのアプローチ* " をお勧めします。 このプロセスは、セキュリティで保護されたリソースにユーザーがアクセスしようとすると Web アプリで発生する処理に似ています。 ユーザーはサインイン ページにリダイレクトされ、元のリソースに再びリダイレクトされます。 
 
 アプリでは、コントローラーへのリダイレクトによって、ユーザーが選択したカルチャが保持されます。 コントローラーによって、ユーザーが選択したカルチャが cookie に設定され、ユーザーは元の URI にリダイレクトされます。
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 2f2a41af544bc040bd20e15b057ad8fc7fb16cfe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633969"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113843"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core での gRPC のトラブルシューティング
 
@@ -86,7 +86,7 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="call-insecure-grpc-services-with-net-core-client"></a>.NET Core クライアントで安全でない gRPC サービスを呼び出す
 
-.NET Core クライアントで安全でない gRPC サービスを呼び出すには、追加の構成が必要です。 gRPC クライアントは、`System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` スイッチを `true` に設定し、サーバー アドレスで `http` を使用する必要があります。
+アプリで .NET Core 3.x を使用する場合は、.NET Core クライアントで安全でない gRPC サービスを呼び出すために追加の構成が必要です。 gRPC クライアントは、`System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` スイッチを `true` に設定し、サーバー アドレスで `http` を使用する必要があります。
 
 ```csharp
 // This switch must be set before creating the GrpcChannel/HttpClient.
@@ -98,15 +98,17 @@ var channel = GrpcChannel.ForAddress("http://localhost:5000");
 var client = new Greet.GreeterClient(channel);
 ```
 
+.NET 5 アプリには追加の構成は必要ありませんが、安全でない gRPC サービスを呼び出すには `Grpc.Net.Client` バージョン 2.32.0 以降を使用する必要があります。
+
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>MacOS で ASP.NET Core gRPC アプリを起動できない
 
 Kestrel では、macOS や Windows 7 などの古い Windows バージョンでの TLS による HTTP/2 がサポートされていません。 ASP.NET Core gRPC テンプレートとサンプルでは、既定で TLS を使用しています。 gRPC サーバーを起動しようとすると、次のエラー メッセージが表示されます。
 
 > Unable to bind to https://localhost:5001 on the IPv4 loopback interface:'HTTP/2 over TLS is not supported on macOS due to missing ALPN support.'. (IPv4 ループバック インターフェイスで https://localhost:5001 にバインドできません。'HTTP/2 over TLS は ALPN サポートがないため、macOS でサポートされていません。')
 
-この問題を回避するには、TLS を*使用せずに* HTTP/2 を使用するように Kestrel と gRPC クライアントを構成します。 これは開発時にのみ実行してください。 TLS を使用しないと、gRPC メッセージが暗号化されずに送信されます。
+この問題を回避するには、TLS を *使用せずに* HTTP/2 を使用するように Kestrel と gRPC クライアントを構成します。 これは開発時にのみ実行してください。 TLS を使用しないと、gRPC メッセージが暗号化されずに送信されます。
 
-Kestrel では、*Program.cs* で TLS を使用せずに HTTP/2 エンドポイントを構成する必要があります。
+Kestrel では、 *Program.cs* で TLS を使用せずに HTTP/2 エンドポイントを構成する必要があります。
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -164,7 +166,7 @@ WPF プロジェクトには、gRPC コードの生成が正常に機能しな�
 この問題は次の方法で回避できます。
 
 1. 新しい .NET Core クラス ライブラリ プロジェクトを作成します。
-2. 新しいプロジェクトで、参照を追加して、[ *\*.proto* ファイルからの C# コード生成](xref:grpc/basics#generated-c-assets)を有効にします。
+2. 新しいプロジェクトで、参照を追加して、 [ *\*.proto* ファイルからの C# コード生成](xref:grpc/basics#generated-c-assets)を有効にします。
     * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) パッケージにパッケージ参照を追加します。
     * `<Protobuf>` 項目グループに *\*.proto* ファイルを追加します。
 3. WPF アプリケーションで、新しいプロジェクトに参照を追加します。
