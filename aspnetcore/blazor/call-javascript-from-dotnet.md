@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 3bd881b124e00b91ab0aa9d3eb7531f10ef895f2
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762166"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326494"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
-Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。
+Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、" *JavaScript 相互運用* " (" *JS 相互運用* ") と呼ばれます。
 
 この記事では、.NET から JavaScript 関数を呼び出す方法について説明します。 JavaScript から .NET メソッドを呼び出す方法については、「<xref:blazor/call-dotnet-from-javascript>」を参照してください。
 
@@ -164,7 +164,10 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 
 ## <a name="call-a-void-javascript-function"></a>void JavaScript 関数を呼び出す
 
-[void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) または [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) を返す JavaScript 関数は、<xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を指定して呼び出します。
+次の場合に <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を使用します。
+
+* [void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) または [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) を返す JavaScript 関数。
+* JavaScript 呼び出しの結果を読み取るために .NET が不要な場合。
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Blazor Server アプリがプリレンダリングされていることを検出する
  
@@ -192,7 +195,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 > [!WARNING]
 > Blazor とやりとりしない空の要素のコンテンツを変化させるには、要素参照のみを使用します。 このシナリオは、サードパーティの API から要素にコンテンツが提供される場合に便利です。 Blazor は要素とやりとりしないため、Blazor の要素表現と DOM との間に競合が発生する可能性がありません。
 >
-> 次の例では、Blazor が DOM とやりとりしてこの要素のリスト項目 (`<li>`) を設定するため、順序なしリスト (`ul`) のコンテンツを変化させるのは "*危険*" です。
+> 次の例では、Blazor が DOM とやりとりしてこの要素のリスト項目 (`<li>`) を設定するため、順序なしリスト (`ul`) のコンテンツを変化させるのは " *危険* " です。
 >
 > ```razor
 > <ul ref="MyList">
@@ -205,7 +208,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 >
 > JS 相互運用により要素 `MyList` のコンテンツが変更され、Blazor でその要素に差分を適用しようとした場合、差分は DOM と一致しません。
 
-.NET コードに関しては、<xref:Microsoft.AspNetCore.Components.ElementReference> は不透明なハンドルです。 <xref:Microsoft.AspNetCore.Components.ElementReference> を使用して実行できるのは、JS 相互運用を介して JavaScript コードに渡すこと "*のみ*" です。 これを行うと、JavaScript 側のコードが `HTMLElement` インスタンスを受け取り、通常の DOM API で使用できます。
+.NET コードに関しては、<xref:Microsoft.AspNetCore.Components.ElementReference> は不透明なハンドルです。 <xref:Microsoft.AspNetCore.Components.ElementReference> を使用して実行できるのは、JS 相互運用を介して JavaScript コードに渡すこと " *のみ* " です。 これを行うと、JavaScript 側のコードが `HTMLElement` インスタンスを受け取り、通常の DOM API で使用できます。
 
 たとえば、次のコードでは、要素にフォーカスを設定できるようにする .NET 拡張メソッドを定義しています。
 
@@ -257,9 +260,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 ## <a name="reference-elements-across-components"></a>コンポーネント間で要素を参照する
 
-<xref:Microsoft.AspNetCore.Components.ElementReference> は、コンポーネントの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> メソッドでのみ有効であることが保証されます (要素参照は `struct` です)。そのため、コンポーネント間で要素参照を渡すことはできません。
-
-親コンポーネントが要素参照を他のコンポーネントで使用できるようにするために、親コンポーネントは次のことを実行できます。
+<xref:Microsoft.AspNetCore.Components.ElementReference> インスタンスは、コンポーネントの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> メソッドでのみ有効であることが保証されます (要素参照は `struct` です)。そのため、コンポーネント間で要素参照を渡すことはできません。 親コンポーネントが要素参照を他のコンポーネントで使用できるようにするために、親コンポーネントは次のことを実行できます。
 
 * 子コンポーネントがコールバックを登録できるようにします。
 * 渡された要素参照を使用して、登録されたコールバックを<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> イベント中に呼び出します。 間接的には、この方法により、子コンポーネントが親の要素参照とやりとりできるようになります。
@@ -658,15 +659,40 @@ export function setMapCenter(map, latitude, longitude) {
 
 理解しておくべき重要な点は次のとおりです。
 
- * `@ref="mapElement"` が含まれる `<div>` は、Blazor に関する限り空のままになります。 したがって、やがて `mapbox-gl.js` によって設定されたり、内容が変更されたりしても安全です。 この手法は、UI をレンダリングする任意の JavaScript ライブラリで使用できます。 ページの他の部分に手を伸ばして変更しようとしない限り、サードパーティの JavaScript SPA フレームワークのコンポーネントを Blazor コンポーネントの内部に埋め込むことさえできます。 Blazor によって空と見なされない要素を、外部の JavaScript コードで変更することは、安全では "*ありません*"。
+ * `@ref="mapElement"` が含まれる `<div>` は、Blazor に関する限り空のままになります。 したがって、やがて `mapbox-gl.js` によって設定されたり、内容が変更されたりしても安全です。 この手法は、UI をレンダリングする任意の JavaScript ライブラリで使用できます。 ページの他の部分に手を伸ばして変更しようとしない限り、サードパーティの JavaScript SPA フレームワークのコンポーネントを Blazor コンポーネントの内部に埋め込むことさえできます。 Blazor によって空と見なされない要素を、外部の JavaScript コードで変更することは、安全では " *ありません* "。
  * このアプローチを使用する場合は、Blazor によって DOM 要素が保持または破棄される方法に関する規則に留意してください。 前の例で、既定では DOM 要素が可能な限り保持されるため、コンポーネントにより安全にボタン クリック イベントが処理され、既存のマップ インスタンスが更新されます。 `@foreach` ループの内側からマップ要素のリストをレンダリングしていた場合は、`@key` を使用して、コンポーネントのインスタンスを確実に保持する必要があります。 そうしないと、リスト データを変更した場合、コンポーネントのインスタンスによって前のインスタンスの状態が望ましくない状態で保持される可能性があります。 詳細については、[@key を使用した要素とコンポーネントの保持](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components)に関する記事を参照してください。
 
 また、前の例では、JavaScript のロジックと依存関係を ES6 モジュール内にカプセル化し、`import` 識別子を使用して動的に読み込むことができる方法が示されています。 詳細については、[JavaScript の分離とオブジェクト参照](#blazor-javascript-isolation-and-object-references)に関する記事を参照してください。
 
 ::: moniker-end
 
+## <a name="size-limits-on-js-interop-calls"></a>JS 相互運用呼び出しのサイズ制限
+
+Blazor WebAssembly では、フレームワークによって JS 相互運用呼び出しの入力と出力のサイズが制限されることはありません。
+
+Blazor Server では、JS 相互運用呼び出しの結果が、SignalR (<xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize>) によって適用されるペイロードの最大サイズで制限されます。既定値は 32 KB です。 アプリケーションで <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> よりもペイロードが大きい JS 相互運用呼び出しに応答しようとすると、エラーがスローされます。 <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> を変更することで、制限をより大きく構成できます。 次の例では、受信メッセージの最大サイズを 64 KB (64 * 1024 * 1024) に設定します。
+
+```csharp
+services.AddServerSideBlazor()
+   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
+```
+
+SignalR の制限を増やすと、より多くのサーバー リソースを使用する必要が発生し、悪意のあるユーザーからのより大きなリスクにサーバーがさらされます。 また、大量のコンテンツを文字列またはバイト配列としてメモリに読み取ると、ガベージ コレクターがうまく機能しない割り当てが発生する可能性もあり、その結果、パフォーマンスがさらに低下します。 大きなペイロードを読み取るための 1 つの選択肢は、小さいチャンクでコンテンツを送信し、ペイロードを <xref:System.IO.Stream> として処理することを検討することです。 これは、大量の JSON ペイロードを読み取る場合、またはデータを JavaScript で生バイトとして利用できる場合に使用できます。 Blazor Server で大規模なバイナリ ペイロードを送信する、`InputFile` コンポーネントに似た手法を使用する方法の例については、[Binary Submit サンプル アプリ](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit)を参照してください。
+
+JavaScript と Blazor の間で大量のデータを転送するコードを開発するときは、次のガイダンスを考慮してください。
+
+* データをより小さな部分にスライスし、すべてのデータがサーバーによって受信されるまでデータ セグメントを順番に送信します。
+* JavaScript および C# コードで大きなオブジェクトを割り当てないでください。
+* データを送受信するときに、メイン UI スレッドを長時間ブロックしないでください。
+* プロセスの完了時またはキャンセル時に、消費していたメモリを解放します。
+* セキュリティ上の理由から、次の追加要件を適用します。
+  * 渡すことのできるファイルまたはデータの最大サイズを宣言します。
+  * クライアントからサーバーへの最小アップロード レートを宣言します。
+* データがサーバーによって受信されたら、データは:
+  * すべてのセグメントが収集されるまで、一時的にメモリ バッファーに格納できます。
+  * 直ちに消費できます。 たとえば、データは、データベースに直ちに格納することも、セグメントを受信するたびにディスクに書き込むこともできます。
+
 ## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent.razor の例 (dotnet/AspNetCore GitHub リポジトリ、3.1 リリース ブランチ)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Blazor Server アプリで大規模なデータ転送を実行する](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
