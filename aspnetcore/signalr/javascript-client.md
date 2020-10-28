@@ -4,7 +4,7 @@ author: bradygaster
 description: ASP.NET Core JavaScript クライアントの概要について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 6f611e56ec62ad7aea8a93e4761e1f67d0f76574
-ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
+ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92379460"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690651"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
@@ -41,14 +41,14 @@ SignalRJavaScript クライアントライブラリは[npm](https://www.npmjs.co
 
 ### <a name="install-with-npm"></a>Npm を使用してインストールする
 
-Visual Studio の場合は、ルートフォルダーで、 **パッケージマネージャーコンソール** から次のコマンドを実行します。 Visual Studio Code には、 **統合ターミナル**から次のコマンドを実行します。
+Visual Studio の場合は、ルートフォルダーで、 **パッケージマネージャーコンソール** から次のコマンドを実行します。 Visual Studio Code には、 **統合ターミナル** から次のコマンドを実行します。
 
 ```bash
 npm init -y
 npm install @microsoft/signalr
 ```
 
-npm は、 *node_modules \\ @microsoft\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *signalr.js*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
+npm は、 *node_modules \\ @microsoft\signalr\dist\browser* フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib* フォルダーの下に *signalr* という名前の新しいフォルダーを作成します。 *signalr.js* ファイルを *wwwroot\lib\signalr* フォルダーにコピーします。
 
 SignalR要素で JavaScript クライアントを参照し `<script>` ます。 次に例を示します。
 
@@ -283,7 +283,7 @@ const connection = new signalR.HubConnectionBuilder()
 * [JavaScript API リファレンス](/javascript/api/?view=signalr-js-latest&preserve-view=true )
 * [JavaScript のチュートリアル](xref:tutorials/signalr)
 * [WebPack と TypeScript のチュートリアル](xref:tutorials/signalr-typescript-webpack)
-* [取って代わり](xref:signalr/hubs)
+* [ハブ](xref:signalr/hubs)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [クロスオリジン要求 (CORS)](xref:security/cors)
@@ -306,14 +306,14 @@ SignalRJavaScript クライアントライブラリは[npm](https://www.npmjs.co
 
 ### <a name="install-with-npm"></a>Npm を使用してインストールする
 
-Visual Studio を使用している場合は、ルートフォルダーで、 **パッケージマネージャーコンソール** から次のコマンドを実行します。 Visual Studio Code には、 **統合ターミナル**から次のコマンドを実行します。
+Visual Studio を使用している場合は、ルートフォルダーで、 **パッケージマネージャーコンソール** から次のコマンドを実行します。 Visual Studio Code には、 **統合ターミナル** から次のコマンドを実行します。
 
 ```bash
 npm init -y
 npm install @aspnet/signalr
 ```
 
-npm は、 *node_modules \\ @aspnet\signalr\dist\browser *フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib*フォルダーの下に*signalr*という名前の新しいフォルダーを作成します。 *signalr.js*ファイルを*wwwroot\lib\signalr*フォルダーにコピーします。
+npm は、 *node_modules \\ @aspnet\signalr\dist\browser* フォルダーにパッケージの内容をインストールします。 *Wwwroot \\ lib* フォルダーの下に *signalr* という名前の新しいフォルダーを作成します。 *signalr.js* ファイルを *wwwroot\lib\signalr* フォルダーにコピーします。
 
 SignalR要素で JavaScript クライアントを参照し `<script>` ます。 次に例を示します。
 
@@ -428,7 +428,7 @@ SignalR とで定義されたメソッド名と引数を照合することによ
 * [JavaScript API リファレンス](/javascript/api/?view=signalr-js-latest)
 * [JavaScript のチュートリアル](xref:tutorials/signalr)
 * [WebPack と TypeScript のチュートリアル](xref:tutorials/signalr-typescript-webpack)
-* [取って代わり](xref:signalr/hubs)
+* [ハブ](xref:signalr/hubs)
 * [.NET クライアント](xref:signalr/dotnet-client)
 * [Azure に発行する](xref:signalr/publish-to-azure-web-app)
 * [クロスオリジン要求 (CORS)](xref:security/cors)

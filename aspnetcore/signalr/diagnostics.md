@@ -4,7 +4,7 @@ author: anurse
 description: ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
-ms.custom: devx-track-csharp, signalr
+ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 649398a3868117b2e7f3358aa25544c99cc625b3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 890359c9e9f6c3c60f3105124f52c66b09a8a4fb
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631343"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690680"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断 SignalR
 
@@ -34,14 +34,14 @@ By [Andrew Stanton-看護師](https://twitter.com/anurse)
 ## <a name="server-side-logging"></a>サーバー側のログ記録
 
 > [!WARNING]
-> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
+> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
 
 SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
 SignalR 2つの logger カテゴリを使用します。
 
 * `Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
-* `Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、サーバー送信イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR
+* `Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、Server-Sent イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR
 
 から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を *appsettings.js* のファイルのレベルに構成し `LogLevel` `Logging` ます。
 
@@ -74,7 +74,7 @@ Visual Studio では、[ **出力** ] ウィンドウにログ出力が表示さ
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル**をに構成し `Verbose` ます。 ログは、 **ログストリーミング** サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
+Azure App Service ポータルの [ **診断ログ** ] セクションで [ **アプリケーションログ (ファイルシステム)** ] オプションを有効にし、 **レベル** をに構成し `Verbose` ます。 ログは、 **ログストリーミング** サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
 
 ### <a name="other-environments"></a>その他の環境
 
@@ -83,7 +83,7 @@ Azure App Service ポータルの [**診断ログ**] セクションで [**ア�
 ## <a name="javascript-client-logging"></a>JavaScript クライアントのログ記録
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
 
 JavaScript クライアントを使用する場合は、でメソッドを使用してログオプションを構成でき `configureLogging` `HubConnectionBuilder` ます。
 
@@ -112,7 +112,7 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 ## <a name="net-client-logging"></a> .NET クライアント ログ
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
 
 .NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。 これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。 ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。 ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。
 
@@ -145,7 +145,7 @@ SignalR では、Serilog、Seq、NLog などの他のログ記録プロバイダ
 ## <a name="network-traces"></a>ネットワーク トレース
 
 > [!WARNING]
-> ネットワークトレースには、アプリによって送信されたすべてのメッセージの完全な内容が含まれています。 実稼働アプリから GitHub などのパブリックフォーラムに生のネットワークトレースを投稿**しない**でください。
+> ネットワークトレースには、アプリによって送信されたすべてのメッセージの完全な内容が含まれています。 実稼働アプリから GitHub などのパブリックフォーラムに生のネットワークトレースを投稿 **しない** でください。
 
 問題が発生した場合は、ネットワークトレースを使用すると、役に立つ情報が得られることがあります。 これは、問題の追跡ツールで問題をファイルする場合に特に便利です。
 
@@ -157,7 +157,7 @@ Fiddler は、HTTP トレースを収集するための非常に強力なツー�
 
 HTTPS を使用して接続する場合は、Fiddler が HTTPS トラフィックの暗号化を解除できるようにするための追加の手順がいくつかあります。 詳細については、 [Fiddler のドキュメント](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)を参照してください。
 
-トレースを収集したら、[**ファイル**  >  **Save**  >  ] メニューの [**すべてのセッション**を保存] をクリックして、トレースをエクスポートできます。
+トレースを収集したら、[ **ファイル**  >  **Save**  >  ] メニューの [ **すべてのセッション** を保存] をクリックして、トレースをエクスポートできます。
 
 ![Fiddler からすべてのセッションをエクスポートしています](diagnostics/fiddler-export.png)
 
@@ -177,7 +177,7 @@ tcpdump -i [interface] -w trace.pcap
 
 この方法は、ブラウザーベースのアプリに対してのみ機能します。
 
-ほとんどのブラウザーには、ブラウザーとサーバー間のネットワークアクティビティをキャプチャできる [ネットワーク] タブがあり開発者ツール。 ただし、これらのトレースには、WebSocket およびサーバー送信のイベントメッセージは含まれません。 これらのトランスポートを使用している場合は、Fiddler や TcpDump などのツールを使用することをお勧めします。
+ほとんどのブラウザーには、ブラウザーとサーバー間のネットワークアクティビティをキャプチャできる [ネットワーク] タブがあり開発者ツール。 ただし、これらのトレースには、WebSocket と Server-Sent イベントメッセージは含まれません。 これらのトランスポートを使用している場合は、Fiddler や TcpDump などのツールを使用することをお勧めします。
 
 ### <a name="microsoft-edge-and-internet-explorer"></a>Microsoft Edge と Internet Explorer
 
