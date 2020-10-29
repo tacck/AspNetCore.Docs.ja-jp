@@ -4,7 +4,7 @@ author: guardrex
 description: Blazor アプリで JavaScript 関数から .NET メソッドを呼び出す方法について学習します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 08/12/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 2a3685dbc654fb8be3420da73e5a62fe729092e6
-ms.sourcegitcommit: ad63e131224f3217bbafff4eb0e6fa1b25294460
+ms.openlocfilehash: 4a7c06ed985c290eb4b3ffca6d5ed74c6bc4e031
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89199694"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690297"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で JavaScript 関数から .NET メソッドを呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Shashikant Rudrawadi](http://wisne.co)、[Luke Latham](https://github.com/guardrex)
 
-Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。
+Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、" *JavaScript 相互運用* " (" *JS 相互運用* ") と呼ばれます。
 
 この記事では、JavaScript から .NET メソッドを呼び出す方法について説明します。 .NET から JavaScript 関数を呼び出す方法については、「<xref:blazor/call-javascript-from-dotnet>」を参照してください。
 

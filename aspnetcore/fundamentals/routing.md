@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 46a9fc7776022a29bedf1c88e8230e1fd52d1607
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: e3dd7168e6974f63fa963d3732bc5df41814c70e
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606757"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491622"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core のルーティング
 
@@ -69,7 +69,7 @@ ms.locfileid: "91606757"
 * `UseRouting` では、ルートの照合がミドルウェア パイプラインに追加されます。 このミドルウェアによって、アプリで定義されているエンドポイントのセットが調べられ、要求に基づいて[最適な一致](#urlm)が選択されます。
 * `UseEndpoints` では、エンドポイントの実行がミドルウェア パイプラインに追加されます。 選択されたエンドポイントに関連付けられているデリゲートが実行されます。
 
-前の例には、[MapGet](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*) メソッドを使用する "*コードへのルーティング*" エンドポイントが 1 つ含まれます。
+前の例には、 [MapGet](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*) メソッドを使用する " *コードへのルーティング* " エンドポイントが 1 つ含まれます。
 
 * HTTP `GET` 要求がルート URL `/` に送信された場合:
   * 示されている要求デリゲートが実行されます。
@@ -80,7 +80,7 @@ ms.locfileid: "91606757"
 
 <a name="endpoint"></a>
 
-**エンドポイント**を定義するには、`MapGet` メソッドが使用されます。 エンドポイントとは、次のようなものです。
+**エンドポイント** を定義するには、`MapGet` メソッドが使用されます。 エンドポイントとは、次のようなものです。
 
 * URL と HTTP メソッドを一致させることによって選択できます。
 * デリゲートを実行することによって実行できます。
@@ -96,7 +96,7 @@ ms.locfileid: "91606757"
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/RouteTemplateStartup.cs?name=snippet)]
 
-文字列 `/hello/{name:alpha}` は、**ルート テンプレート**です。 これは、エンドポイントの一致方法を構成するために使用されます。 この場合、テンプレートは次のものと一致します。
+文字列 `/hello/{name:alpha}` は、 **ルート テンプレート** です。 これは、エンドポイントの一致方法を構成するために使用されます。 この場合、テンプレートは次のものと一致します。
 
 * `/hello/Ryan` のような URL
 * `/hello/` で始まり、その後に一連の英字が続く任意の URL パス。  `:alpha` では、英字のみと一致するルート制約が適用されます。 [ルート制約](#route-constraint-reference)については、このドキュメントで後ほど説明します。
@@ -130,14 +130,14 @@ URL パスの 2 番目のセグメント `{name:alpha}` は次のようになり
 
 ### <a name="endpoint-metadata"></a>エンドポイントのメタデータ
 
-前の例には 2 つのエンドポイントがありますが、承認ポリシーがアタッチされているのは正常性チェック エンドポイントだけです。 要求が正常性チェック エンドポイント `/healthz` と一致した場合、承認チェックが実行されます。 これは、エンドポイントに追加のデータをアタッチできることを示しています。 この追加データは、エンドポイントの**メタデータ**と呼ばれます。
+前の例には 2 つのエンドポイントがありますが、承認ポリシーがアタッチされているのは正常性チェック エンドポイントだけです。 要求が正常性チェック エンドポイント `/healthz` と一致した場合、承認チェックが実行されます。 これは、エンドポイントに追加のデータをアタッチできることを示しています。 この追加データは、エンドポイントの **メタデータ** と呼ばれます。
 
 * メタデータは、ルーティング対応ミドルウェアによって処理できます。
 * メタデータには、任意の .NET 型を使用できます。
 
 ## <a name="routing-concepts"></a>ルーティングの概念
 
-ルーティング システムは、ミドルウェア パイプラインを基にして、強力な**エンドポイント**概念を追加することにより、構築されています。 エンドポイントは、ルーティング、承認、および任意の数の ASP.NET Core システムに関して相互に独立している、アプリの機能の単位を表します。
+ルーティング システムは、ミドルウェア パイプラインを基にして、強力な **エンドポイント** 概念を追加することにより、構築されています。 エンドポイントは、ルーティング、承認、および任意の数の ASP.NET Core システムに関して相互に独立している、アプリの機能の単位を表します。
 
 <a name="endpoint"></a>
 
@@ -186,7 +186,7 @@ ASP.NET Core エンドポイントとは次のようなものです。
 
 * `UseRouting` が呼び出される前は、エンドポイントは常に null になっています。
 * 一致が見つかった場合、エンドポイントは `UseRouting` と <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> の間で null 以外の値になります。
-* 一致が見つかると、`UseEndpoints` ミドルウェアは**ターミナル**です。 [ターミナル ミドルウェア](#tm)については、このドキュメントで後ほど定義します。
+* 一致が見つかると、`UseEndpoints` ミドルウェアは **ターミナル** です。 [ターミナル ミドルウェア](#tm)については、このドキュメントで後ほど定義します。
 * `UseEndpoints` の後のミドルウェアは、一致が検出されなかった場合にのみ実行されます。
 
 `UseRouting` ミドルウェアでは、[SetEndpoint](xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.SetEndpoint*) メソッドを使用して、エンドポイントが現在のコンテキストにアタッチされます。 `UseRouting` ミドルウェアをカスタム ロジックに置き換えることができ、その場合でもエンドポイントを使用する利点を得られます。 エンドポイントはミドルウェアのような低レベルのプリミティブであり、ルーティングの実装には結合されません。 ほとんどのアプリでは、`UseRouting` をカスタム ロジックに置き換える必要はありません。
@@ -207,14 +207,14 @@ ASP.NET Core エンドポイントとは次のようなものです。
       * 多くの場合、`UseAuthorization` や `UseCors` によって実行されるセキュリティに関する決定を行います。
     * ミドルウェアとメタデータを組み合わせることで、エンドポイントごとにポリシーを構成できます。
 
-上のコードでは、エンドポイントごとのポリシーをサポートするカスタム ミドルウェアの例が示されています。 ミドルウェアによって、機密データへのアクセスの "*監査ログ*" がコンソールに書き込まれます。 `AuditPolicyAttribute` メタデータを使用して、エンドポイントを "*監査する*" ようにミドルウェアを構成できます。 このサンプルでは、機密としてマークされているエンドポイントのみが監査される "*オプトイン*" パターンを示します。 このロジックの逆を定義して、たとえば安全としてマークされていないすべてのものを監査することができます。 エンドポイント メタデータ システムは柔軟です。 ユース ケースに適したどのような方法でも、このロジックを設計できます。
+上のコードでは、エンドポイントごとのポリシーをサポートするカスタム ミドルウェアの例が示されています。 ミドルウェアによって、機密データへのアクセスの " *監査ログ* " がコンソールに書き込まれます。 `AuditPolicyAttribute` メタデータを使用して、エンドポイントを " *監査する* " ようにミドルウェアを構成できます。 このサンプルでは、機密としてマークされているエンドポイントのみが監査される " *オプトイン* " パターンを示します。 このロジックの逆を定義して、たとえば安全としてマークされていないすべてのものを監査することができます。 エンドポイント メタデータ システムは柔軟です。 ユース ケースに適したどのような方法でも、このロジックを設計できます。
 
-前のサンプル コードは、エンドポイントの基本的な概念を示すことが意図されています。 **サンプルは運用環境での使用は意図されていません**。 より完全なバージョンの "*監査ログ*" ミドルウェアでは、次のことが行われます。
+前のサンプル コードは、エンドポイントの基本的な概念を示すことが意図されています。 **サンプルは運用環境での使用は意図されていません** 。 より完全なバージョンの " *監査ログ* " ミドルウェアでは、次のことが行われます。
 
 * ファイルまたはデータベースにログを記録します。
 * ユーザー、IP アドレス、機密性の高いエンドポイントの名前などの詳細情報が追加されます。
 
-コントローラーや SignalR などのクラスベースのフレームワークで簡単に使用できるように、監査ポリシー メタデータ `AuditPolicyAttribute` は `Attribute` と定義されています。 "*コードへのルーティング*" を使用すると、次のようになります。
+コントローラーや SignalR などのクラスベースのフレームワークで簡単に使用できるように、監査ポリシー メタデータ `AuditPolicyAttribute` は `Attribute` と定義されています。 " *コードへのルーティング* " を使用すると、次のようになります。
 
 * メタデータがビルダー API にアタッチされます。
 * エンドポイントを作成するとき、クラス ベースのフレームワークに、対応するメソッドとクラスのすべての属性が組み込まれます。
@@ -229,7 +229,7 @@ ASP.NET Core エンドポイントとは次のようなものです。
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/TerminalMiddlewareStartup.cs?name=snippet)]
 
-`Approach 1:` で示されているミドルウェアのスタイルは、**ターミナル ミドルウェア**です。 ターミナル ミドルウェアと呼ばれるのは、照合操作を実行するためです。
+`Approach 1:` で示されているミドルウェアのスタイルは、 **ターミナル ミドルウェア** です。 ターミナル ミドルウェアと呼ばれるのは、照合操作を実行するためです。
 
 * 前のサンプルの照合操作は、ミドルウェアの場合は `Path == "/"`、ルーティングの場合は `Path == "/Movie"` です。
 * 照合が成功すると、`next` ミドルウェアを呼び出すのではなく、一部の機能を実行して戻ります。
@@ -303,9 +303,9 @@ ASP.NET Core エンドポイントとは次のようなものです。
 > * `RouteData.Values` を `HttpRequest.RouteValues` に移行します。
 > * `RouteData.DataTokens` を移行して、エンドポイント メタデータから [IDataTokensMetadata](xref:Microsoft.AspNetCore.Routing.IDataTokensMetadata) を取得します。
 
-URL の照合は、構成可能な一連のフェーズで動作します。 各フェーズでの出力は一致のセットとなります。 一致のセットは、次のフェーズでさらに絞り込むことができます。 ルーティングの実装では、一致するエンドポイントの処理順序は保証されません。 一致の可能性のあるものは一度に**すべて**処理されます。 URL 照合フェーズは、次の順序で発生します。 ASP.NET Core:
+URL の照合は、構成可能な一連のフェーズで動作します。 各フェーズでの出力は一致のセットとなります。 一致のセットは、次のフェーズでさらに絞り込むことができます。 ルーティングの実装では、一致するエンドポイントの処理順序は保証されません。 一致の可能性のあるものは一度に **すべて** 処理されます。 URL 照合フェーズは、次の順序で発生します。 ASP.NET Core:
 
-1. エンドポイントのセットおよびそれらのルート テンプレートに対して URL パスを処理し、**すべて**の一致を収集します。
+1. エンドポイントのセットおよびそれらのルート テンプレートに対して URL パスを処理し、 **すべて** の一致を収集します。
 1. 前のリストを取得し、ルート制約が適用されると失敗する一致を削除します。
 1. 前のリストを取得し、[MatcherPolicy](xref:Microsoft.AspNetCore.Routing.MatcherPolicy) インスタンスのセットを失敗させる一致を削除します。
 1. [EndpointSelector](xref:Microsoft.AspNetCore.Routing.Matching.EndpointSelector) を使用して、前のリストから最終的な決定を行います。
@@ -317,7 +317,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 
 <xref:Microsoft.AspNetCore.Routing.Matching.EndpointSelector> に到達するまで、各フェーズで一致するすべてのエンドポイントが処理されます。 `EndpointSelector` は最後のフェーズです。 一致の中から最も優先度の高いエンドポイントが最適な一致として選択されます。 最適な一致と優先度が同じである一致が他にもある場合は、あいまい一致の例外がスローされます。
 
-ルートの優先順位は**より具体的な**ルート テンプレートに、より高い優先度が与えられることに基づいて算出されます。 たとえば、テンプレート `/hello` と `/{message}` を検討してみます。
+ルートの優先順位は **より具体的な** ルート テンプレートに、より高い優先度が与えられることに基づいて算出されます。 たとえば、テンプレート `/hello` と `/{message}` を検討してみます。
 
 * どちらも URL パス `/hello` と一致します。
 * `/hello` の方がより具体的なので、優先度が高くなります。
@@ -339,8 +339,6 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 > 
 > * ルートの概念がありません。
 > * 順序付けが保証されません。 すべてのエンドポイントが一度に処理されます。
->
-> これにより、従来のルーティング システムの使用に行き詰まっている場合、[GitHub のイシューを開いて支援を求めてください](https://github.com/dotnet/aspnetcore/issues)。
 
 <a name="rtp"></a>
 
@@ -359,7 +357,7 @@ URL の照合は、構成可能な一連のフェーズで動作します。 各
 * リテラル テキストを含むセグメントは、パラメーター セグメントよりも具体的であると見なされます。
 * 制約が含まれるパラメーター セグメントは、それが含まれないものよりも具体的であると見なされます。
 * 複雑なセグメントは、制約を含むパラメーター セグメントと同じくらい具体的であると見なされます。
-* キャッチオール パラメーターは、まったく具体的ではありません。 キャッチオール ルートに関する重要な情報については、「[ルート テンプレート参照](#rtr)」の**キャッチオール**を参照してください。
+* キャッチオール パラメーターは、まったく具体的ではありません。 キャッチオール ルートに関する重要な情報については、「 [ルート テンプレート参照](#rtr)」の **キャッチオール** を参照してください。
 
 実際の値のリファレンスについては、[GitHub 上のソース コード](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189)を参照してください。
 
@@ -374,7 +372,7 @@ URL の生成:
 
 エンドポイント ルーティングには、<xref:Microsoft.AspNetCore.Routing.LinkGenerator> API が含まれます。 `LinkGenerator` は [DI](xref:fundamentals/dependency-injection) から使用できるシングルトン サービスです。 `LinkGenerator` API は、実行中の要求のコンテキスト外で使用することができます。 [Mvc.IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) と、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、HTML ヘルパー、[アクション結果](xref:mvc/controllers/actions)など、<xref:Microsoft.AspNetCore.Mvc.IUrlHelper> に依存するシナリオでは `LinkGenerator` API を内部的に使用して、リンク生成機能が提供されます。
 
-リンク ジェネレーターは、**アドレス** と**アドレス スキーム** の概念に基づいています。 アドレス スキームは、リンク生成で考慮すべきエンドポイントを決定する方法です。 たとえば、コントローラーおよび Razor Pages からの、多くのユーザーに馴染みのあるルート名やルート値シナリオは、アドレス スキームとして実装されます。
+リンク ジェネレーターは、 **アドレス** と **アドレス スキーム** の概念に基づいています。 アドレス スキームは、リンク生成で考慮すべきエンドポイントを決定する方法です。 たとえば、コントローラーおよび Razor Pages からの、多くのユーザーに馴染みのあるルート名やルート値シナリオは、アドレス スキームとして実装されます。
 
 リンク ジェネレーターでは、次の拡張メソッドを介して、コントローラーおよび Razor Pages にリンクできます。
 
@@ -438,12 +436,12 @@ URL の生成:
 * `/files/myFile.txt`
 * `/files/myFile`
 
-ルート パラメーターには、**既定値** が含まれることがあります。パラメーター名の後に既定値を指定し、等号 (`=`) で区切ることで指定されます。 たとえば、`{controller=Home}` では、`controller` の既定値として `Home` が定義されます。 パラメーターの URL に値がない場合、既定値が使用されます。 ルート パラメーターは、パラメーター名の終わりに疑問符 (`?`) を追加することでオプションとして扱われます。 たとえば、`id?` のようにします。 省略可能な値と既定のルート パラメーターの違いは次のとおりです。
+ルート パラメーターには、 **既定値** が含まれることがあります。パラメーター名の後に既定値を指定し、等号 (`=`) で区切ることで指定されます。 たとえば、`{controller=Home}` では、`controller` の既定値として `Home` が定義されます。 パラメーターの URL に値がない場合、既定値が使用されます。 ルート パラメーターは、パラメーター名の終わりに疑問符 (`?`) を追加することでオプションとして扱われます。 たとえば、`id?` のようにします。 省略可能な値と既定のルート パラメーターの違いは次のとおりです。
 
 * 既定値を持つルート パラメーターでは常に値が生成されます。
 * 省略可能なパラメーターには、要求 URL によって値が指定された場合にのみ値が含められます。
 
-ルート パラメーターには、URL からバインドされるルート値に一致しなければならないという制約が含まれることがあります。 `:` と制約名をルート パラメーター名の後に追加すると、ルート パラメーターのインライン制約が指定されます。 その制約で引数が要求される場合、制約名の後にかっこ `(...)` で囲まれます。 複数の "*インライン制約*" を指定するには、別の `:` と制約名を追加します。
+ルート パラメーターには、URL からバインドされるルート値に一致しなければならないという制約が含まれることがあります。 `:` と制約名をルート パラメーター名の後に追加すると、ルート パラメーターのインライン制約が指定されます。 その制約で引数が要求される場合、制約名の後にかっこ `(...)` で囲まれます。 複数の " *インライン制約* " を指定するには、別の `:` と制約名を追加します。
 
 制約名と引数が <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> サービスに渡され、URL 処理で使用する <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> のインスタンスが作成されます。 たとえば、ルート テンプレート `blog/{article:minlength(10)}` によって、制約 `minlength` と引数 `10` が指定されます。 ルート制約の詳細とこのフレームワークによって指定される制約のリストについては、「[ルート制約参照](#route-constraint-reference)」セクションを参照してください。
 
@@ -664,7 +662,7 @@ URL の生成プロセスは、[LinkGenerator. GetPathByAddress](xref:Microsoft.
 
 まずは、アドレスを使用して、アドレスの型に一致する [`IEndpointAddressScheme<TAddress>`](xref:Microsoft.AspNetCore.Routing.IEndpointAddressScheme`1) を使用して、一連の候補のエンドポイントが解決されます。
 
-アドレス スキームによって一連の候補が検出されると、URL の生成操作が成功するまで、エンドポイントは順に並べ替えられ、処理されます。 URL が生成される際には、あいまいさの確認は**行われず**、最初に返される結果が最終的な結果になります。
+アドレス スキームによって一連の候補が検出されると、URL の生成操作が成功するまで、エンドポイントは順に並べ替えられ、処理されます。 URL が生成される際には、あいまいさの確認は **行われず** 、最初に返される結果が最終的な結果になります。
 
 ### <a name="troubleshooting-url-generation-with-logging"></a>ログを使用した URL 生成のトラブルシューティング
 
@@ -678,7 +676,7 @@ URL 生成の詳細については、「[URL 生成参照](#ugr)」を参照し�
 
 アドレスとは、次の 2 つの実装を既定で備えた拡張可能な概念です。
 
-* アドレスとして "*エンドポイント名*" (`string`) を使用します。
+* アドレスとして " *エンドポイント名* " (`string`) を使用します。
     * MVC のルート名と同様の機能があります。
     * <xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata> メタデータ型を使用します。
     * 指定された文字列を、登録されているすべてのエンドポイントのメタデータに対して解決します。
@@ -698,7 +696,7 @@ URL 生成の詳細については、「[URL 生成参照](#ugr)」を参照し�
 
 ### <a name="ambient-values-and-explicit-values"></a>アンビエント値と明示的な値
 
-ルーティングは、現在の要求から現在の要求 `HttpContext.Request.RouteValues` のルート値にアクセスします。 現在の要求に関連付けられている値は、**アンビエント値**と呼ばれます。 このドキュメントでは、わかりやすくするために、メソッドに渡されるルート値を**明示的な値**と呼びます。
+ルーティングは、現在の要求から現在の要求 `HttpContext.Request.RouteValues` のルート値にアクセスします。 現在の要求に関連付けられている値は、 **アンビエント値** と呼ばれます。 このドキュメントでは、わかりやすくするために、メソッドに渡されるルート値を **明示的な値** と呼びます。
 
 次の例では、アンビエント値と明示的な値を示しています。 これでは、アンビエント値を現在の要求と明示的な値から提供します (`{ id = 17, }`)。
 
@@ -758,7 +756,7 @@ MVC の <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> の動作により、ここ�
 * エンドポイントが反復処理されます。
 * 最初に成功した結果が返されます。
 
-このプロセスの最初の手順は**ルート値の無効化**と呼ばれます。  ルート値の無効化は、アンビエント値からどのルート値を使用する必要があり、無視する必要があるかをルーティングが決定するプロセスです。 各アンビエント値が検討され、明示的な値と組み合わされるか、または無視されます。
+このプロセスの最初の手順は **ルート値の無効化** と呼ばれます。  ルート値の無効化は、アンビエント値からどのルート値を使用する必要があり、無視する必要があるかをルーティングが決定するプロセスです。 各アンビエント値が検討され、明示的な値と組み合わされるか、または無視されます。
 
 アンビエント値の役割について一番わかりやすい考え方は、一部の一般的なケースでアプリケーション開発者の入力作業が省かれるということです。 従来、アンビエント値が役に立つシナリオは MVC に関連しています。
 
@@ -769,7 +767,7 @@ MVC の <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> の動作により、ここ�
 
 `null` を返す `LinkGenerator` または `IUrlHelper` の呼び出しは、通常、ルート値の無効化について理解していないことが原因で発生します。 ルート値の無効化のトラブルシューティングを行うには、さらにルート値を明示的に指定して、これにより問題が解決されるかどうかを確認します。
 
-ルート値の無効化は、アプリの URL スキームが階層的であり、階層が左から右に形成されていることを前提として機能します。 基本的なコントローラー ルート テンプレート `{controller}/{action}/{id?}` について考えてみましょう。これが実際にどのように動作するかを直感的に理解できます。 値に対する**変更**により、右側に表示されるすべてのルート値が**無効化**されます。 これには、階層に関する前提が反映されています。 アプリに `id` のアンビエント値があり、操作によって `controller` に対して異なる値が指定された場合、
+ルート値の無効化は、アプリの URL スキームが階層的であり、階層が左から右に形成されていることを前提として機能します。 基本的なコントローラー ルート テンプレート `{controller}/{action}/{id?}` について考えてみましょう。これが実際にどのように動作するかを直感的に理解できます。 値に対する **変更** により、右側に表示されるすべてのルート値が **無効化** されます。 これには、階層に関する前提が反映されています。 アプリに `id` のアンビエント値があり、操作によって `controller` に対して異なる値が指定された場合、
 
 * `{controller}` が `{id?}` の左側にあるため、`id` は再利用されません。
 
@@ -784,7 +782,7 @@ MVC の <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> の動作により、ここ�
 * ルート値の階層があります。
 * テンプレートには表示されません。
 
-このような場合は、URL の生成によって**必要な値**の概念が定義されます。 コントローラーおよび Razor Pages によって作成されたエンドポイントには、ルート値の無効化を機能させるために必要な値が指定されています。
+このような場合は、URL の生成によって **必要な値** の概念が定義されます。 コントローラーおよび Razor Pages によって作成されたエンドポイントには、ルート値の無効化を機能させるために必要な値が指定されています。
 
 ルート値の無効化アルゴリズムの詳細は次のとおりです。
 
@@ -797,7 +795,7 @@ MVC の <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> の動作により、ここ�
 
 この時点で、URL の生成操作はルート制約を評価する準備ができています。 許容可能な値のセットがパラメーターの既定値と組み合わされ、制約に提供されます。 すべての制約について合格した場合、操作が続行されます。
 
-次に、**許容可能な値**を使用してルート テンプレートを展開できます。 ルート テンプレートは次のように処理されます。
+次に、 **許容可能な値** を使用してルート テンプレートを展開できます。 ルート テンプレートは次のように処理されます。
 
 * 左から右。
 * 各パラメーターに、許容可能な値が代入されます。
@@ -916,7 +914,7 @@ ASP.NET Core 3.0 では、ほとんどのルーティングが更新され、パ
 
 URL 照合にルーティングを使用するフレームワークを作成するには、まず <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> の上に構築されるユーザー エクスペリエンスを定義します。
 
-<xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> の上に**構築します**。 これにより、ユーザーは、他の ASP.NET Core 機能と混同せずにフレームワークを構成できます。 すべての ASP.NET Core テンプレートには、ルーティングが含まれます。 ルーティングが存在し、ユーザーになじみのあるものとします。
+<xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> の上に **構築します** 。 これにより、ユーザーは、他の ASP.NET Core 機能と混同せずにフレームワークを構成できます。 すべての ASP.NET Core テンプレートには、ルーティングが含まれます。 ルーティングが存在し、ユーザーになじみのあるものとします。
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -928,7 +926,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<xref:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder> を実装する `MapMyFramework(...)` の呼び出しから、シールドの具象型を**返します**。 ほとんどのフレームワーク `Map...` メソッドは、このパターンに従います。 `IEndpointConventionBuilder` インターフェイスは、
+<xref:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder> を実装する `MapMyFramework(...)` の呼び出しから、シールドの具象型を **返します** 。 ほとんどのフレームワーク `Map...` メソッドは、このパターンに従います。 `IEndpointConventionBuilder` インターフェイスは、
 
 * メタデータの構成可能性を許可します。
 * さまざまな拡張メソッドの対象とされています。
@@ -946,17 +944,17 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-独自の <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> を作成することを**検討します**。 `EndpointDataSource` は、エンドポイントのコレクションを宣言および更新するための低レベルのプリミティブです。 `EndpointDataSource` は、コントローラーと Razor Pages によって使用される強力な API です。
+独自の <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> を作成することを **検討します** 。 `EndpointDataSource` は、エンドポイントのコレクションを宣言および更新するための低レベルのプリミティブです。 `EndpointDataSource` は、コントローラーと Razor Pages によって使用される強力な API です。
 
 ルーティング テストには、更新されていないデータ ソースの[基本的な例](https://github.com/aspnet/AspNetCore/blob/master/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17)があります。
 
-既定では、`EndpointDataSource` の登録を**試行しないでください**。 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> にフレームワークを登録するようユーザーに要求してください。 ルーティングの原理では、既定では何も含まれておらず、`UseEndpoints` がエンドポイントを登録する場所です。
+既定では、`EndpointDataSource` の登録を **試行しないでください** 。 <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> にフレームワークを登録するようユーザーに要求してください。 ルーティングの原理では、既定では何も含まれておらず、`UseEndpoints` がエンドポイントを登録する場所です。
 
 ### <a name="creating-routing-integrated-middleware"></a>ルーティング統合ミドルウェアを作成する
 
-メタデータ型をインターフェイスとして定義することを**検討します**。
+メタデータ型をインターフェイスとして定義することを **検討します** 。
 
-クラスおよびメソッドの属性としてメタデータ型を**使用できるようにします**。
+クラスおよびメソッドの属性としてメタデータ型を **使用できるようにします** 。
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet2)]
 
@@ -970,18 +968,18 @@ app.UseEndpoints(endpoints =>
 * インターフェイスが構成可能です。
 * 開発者は、複数のポリシーを結合する独自の型を宣言できます。
 
-次の例に示すように、メタデータを**オーバーライドできるようにします**。
+次の例に示すように、メタデータを **オーバーライドできるようにします** 。
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet)]
 
-これらのガイドラインに従う最善の方法は、**マーカーのメタデータ**を定義しないようにすることです。
+これらのガイドラインに従う最善の方法は、 **マーカーのメタデータ** を定義しないようにすることです。
 
 * メタデータ型が存在するかどうかを確認するだけで終わらせません。
 * メタデータのプロパティを定義し、プロパティを確認します。
 
 メタデータ コレクションが順序付けされ、優先順位によるオーバーライドがサポートされます。 コントローラーの場合、アクション メソッドのメタデータが最も限定的です。
 
-ルーティングを使用する場合もしない場合もミドルウェアが**役立つようにします**。
+ルーティングを使用する場合もしない場合もミドルウェアが **役立つようにします** 。
 
 ```csharp
 app.UseRouting();
@@ -1047,7 +1045,7 @@ Razor Pages アプリでは、既定の規則ルーティングを使用して�
 
 URL 生成サポートを使用すると、アプリを相互にリンクする URL をハード コーディングすることなくアプリを開発できます。 このサポートにより、基本的なルーティング構成を使用して作業を開始し、アプリのリソース レイアウトが決まった後でルートを変更することができます。
 
-ルーティングでは*エンドポイント* (`Endpoint`) を使用して、アプリの論理エンドポイントを表します。
+ルーティングでは *エンドポイント* (`Endpoint`) を使用して、アプリの論理エンドポイントを表します。
 
 エンドポイントでは、要求と、任意のメタデータのコレクションを処理するデリゲートが定義されます。 メタデータは、各エンドポイントにアタッチされている構成とポリシーに基づいて横断的な関心事を実装するために使用されます。
 
@@ -1073,15 +1071,15 @@ URL 生成サポートを使用すると、アプリを相互にリンクする 
 
 ### <a name="url-matching"></a>URL 一致
 
-URL 一致というプロセスでは、ルーティングによって、受信要求が*エンドポイント*に配布されます。 このプロセスは URL パスのデータに基づきますが、要求内のあらゆるデータを考慮することもできます。 アプリの規模を大きくしたり、より複雑にしたりするとき、要求を個別のハンドラーに配布する機能が鍵となります。
+URL 一致というプロセスでは、ルーティングによって、受信要求が *エンドポイント* に配布されます。 このプロセスは URL パスのデータに基づきますが、要求内のあらゆるデータを考慮することもできます。 アプリの規模を大きくしたり、より複雑にしたりするとき、要求を個別のハンドラーに配布する機能が鍵となります。
 
 エンドポイント ルーティングのルーティング システムでは、配布に関するすべての決定が行われます。 ミドルウェアでは選択されたエンドポイントに基づいてポリシーが適用されるため、セキュリティ ポリシーの適用や配布に影響する可能性のある決定は、ルーティング システム内で行うことが重要です。
 
 エンドポイントのデリゲートが実行されると、それまでに実行された要求処理に基づいて、[RouteContext.RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) のプロパティが適切な値に設定されます。
 
-[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values*) は、ルートから生成された*ルート値*のディクショナリです。 この値は通常、URL のトークン化で決定されます。この値を利用してユーザー入力を受け取ったり、アプリ内で決定をさらに配布したりできます。
+[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values*) は、ルートから生成された *ルート値* のディクショナリです。 この値は通常、URL のトークン化で決定されます。この値を利用してユーザー入力を受け取ったり、アプリ内で決定をさらに配布したりできます。
 
-[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) は、一致したルートに関連する追加データのプロパティ バッグです。 一致したルートに基づいてアプリで決定を行えるように、<xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> が提供されます。これは状態データと各ルートの関連付けをサポートするためのものです。 この値は開発者が定義するものです。ルーティングの動作に影響を与えることは**ありません**。 また、[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) に一時退避される値はどのような型でも構いません。一方、[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) の場合は、文字列間で変換できる必要があります。
+[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) は、一致したルートに関連する追加データのプロパティ バッグです。 一致したルートに基づいてアプリで決定を行えるように、<xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> が提供されます。これは状態データと各ルートの関連付けをサポートするためのものです。 この値は開発者が定義するものです。ルーティングの動作に影響を与えることは **ありません** 。 また、[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) に一時退避される値はどのような型でも構いません。一方、[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) の場合は、文字列間で変換できる必要があります。
 
 [RouteData.Routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) は、過去に要求に一致したルートの一覧です。 ルートはルートの中に入れ子にすることができます。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> プロパティは、結果的に一致をもたらしたルートの論理ツリーを通るパスを表します。 一般的に、<xref:Microsoft.AspNetCore.Routing.RouteData.Routers> の最初の項目はルート コレクションであり、これは URL 生成に使用するものです。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> の最後の項目は、一致したルート ハンドラーです。
 
@@ -1093,7 +1091,7 @@ URL 生成は、ルーティングにおいて、一連のルート値に基づ�
 
 エンドポイント ルーティングには、リンク ジェネレーター API (<xref:Microsoft.AspNetCore.Routing.LinkGenerator>) が含まれています。 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> は、[DI](xref:fundamentals/dependency-injection) から取得できるシングルトン サービスです。 API は、実行中の要求のコンテキスト外で使用することができます。 MVC の <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> と、[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、HTML ヘルパー、[アクション結果](xref:mvc/controllers/actions)など、<xref:Microsoft.AspNetCore.Mvc.IUrlHelper> に依存するシナリオではリンク ジェネレーターを使用して、リンク生成機能を提供します。
 
-リンク ジェネレーターは、*アドレス* と*アドレス スキーム* の概念に基づいています。 アドレス スキームは、リンク生成で考慮すべきエンドポイントを決定する方法です。 たとえば、MVC/Razor Pages からの、多くのユーザーに馴染みのあるルート名やルート値シナリオは、アドレス スキームとして実装されます。
+リンク ジェネレーターは、 *アドレス* と *アドレス スキーム* の概念に基づいています。 アドレス スキームは、リンク生成で考慮すべきエンドポイントを決定する方法です。 たとえば、MVC/Razor Pages からの、多くのユーザーに馴染みのあるルート名やルート値シナリオは、アドレス スキームとして実装されます。
 
 リンク ジェネレーターでは、次の拡張メソッドを使用して、MVC/Razor Pages アクションおよびページにリンクできます。
 
@@ -1173,7 +1171,7 @@ ASP.NET Core 2.2 以降でのエンドポイント ルーティングと、ASP.N
 
   `IRouter` ベースのルーティングでは、`BlogController` が存在しない場合や `ReadPost` アクション メソッドがない場合でも、結果は常に `/Blog/ReadPost/17` となります。 予想どおり、アクション メソッドが存在する場合は、ASP.NET Core 2.2 以降のエンドポイント ルーティングで `/Blog/ReadPost/17` が生成されます。 *しかし、アクションが存在しない場合は、エンドポイント ルーティングで空の文字列が生成されます。* 概念的には、エンドポイント ルーティングでは、アクションが存在しない場合はエンドポイントが存在するとは見なされません。
 
-* エンドポイント ルーティングで使用する場合は、リンク生成の*アンビエント値の無効化アルゴリズム* の動作が異なります。
+* エンドポイント ルーティングで使用する場合は、リンク生成の *アンビエント値の無効化アルゴリズム* の動作が異なります。
 
   *アンビエント値の無効化* は、現在実行中の要求からのルート値 (アンビエント値) のうち、どちらがリンク生成操作で使用できのかを判断するアルゴリズムです。 規則ルーティングでは、異なるアクションへのリンク時に余分なルート値が常に無効化されました。 属性ルーティングは、ASP.NET Core 2.2 のリリースより前ではこのように動作しませんでした。 以前のバージョンの ASP.NET Core では、同じルート パラメーター名を使用する別のアクションへのリンクでリンク生成エラーが発生しました。 ASP.NET Core 2.2 以降では、両方の形式のルーティングで、別のアクションへのリンク時に値が無効化されます。
 
@@ -1250,11 +1248,11 @@ routes.MapRoute(
 
 このテンプレートでは URL パスが照合され、ルート値が抽出されます。 たとえば、`/Products/Details/17` というパスでは、`{ controller = Products, action = Details, id = 17 }` というルート値が生成されます。
 
-ルート値は、URL パスをセグメントに分割し、各セグメントと、ルート テンプレートの*ルート パラメーター* 名を照合することで決定されます。 ルート パラメーターが指定されます。 パラメーターは、中かっこ `{ ... }` でパラメーター名を囲むことで定義されます。
+ルート値は、URL パスをセグメントに分割し、各セグメントと、ルート テンプレートの *ルート パラメーター* 名を照合することで決定されます。 ルート パラメーターが指定されます。 パラメーターは、中かっこ `{ ... }` でパラメーター名を囲むことで定義されます。
 
 上のテンプレートでは URL パス `/` の照合も行い、`{ controller = Home, action = Index }` という値を生成します。 これは、ルート パラメーターの `{controller}` と `{action}` に既定値が与えられ、`id` ルート パラメーターが任意であるためです。 ルート パラメーター名の後の等号 (`=`) とそれに続く値により、パラメーターの既定値が定義されます。 ルート パラメーター名の後の疑問符 (`?`) により、オプションのパラメーターが定義されます。
 
-既定値のルート パラメーターはルートが一致するとルート値を*常に*生成します。 省略可能なパラメーターでは、対応する URL パス セグメントがない場合、ルート値は生成されません。 ルート テンプレートのシナリオと構文の詳しい説明については、「[ルート テンプレート参照](#route-template-reference)」セクションを参照してください。
+既定値のルート パラメーターはルートが一致するとルート値を *常に* 生成します。 省略可能なパラメーターでは、対応する URL パス セグメントがない場合、ルート値は生成されません。 ルート テンプレートのシナリオと構文の詳しい説明については、「[ルート テンプレート参照](#route-template-reference)」セクションを参照してください。
 
 次の例では、ルート パラメーター定義 `{id:int}` により、`id` ルート パラメーターの[ルート制約](#route-constraint-reference)が定義されます。
 
@@ -1293,7 +1291,7 @@ routes.MapRoute(
     defaults: new { controller = "Blog", action = "ReadArticle" });
 ```
 
-上記のテンプレートでは `/Blog/All-About-Routing/Introduction` のような URL パスを照合し、値 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }` を抽出します。 `controller` と `action` の既定のルート値は、テンプレートに対応するルート パラメーターがなくても、ルートにより生成されます。 既定値はルート テンプレートで指定できます。 `article` ルート パラメーターは、ルート パラメーター名の前に二重アスタリスク (`**`) があるときに、*キャッチオール* として定義されます。 キャッチオール ルート パラメーターは、URL パスの残りの部分をキャプチャします。空の文字列も照合できます。
+上記のテンプレートでは `/Blog/All-About-Routing/Introduction` のような URL パスを照合し、値 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }` を抽出します。 `controller` と `action` の既定のルート値は、テンプレートに対応するルート パラメーターがなくても、ルートにより生成されます。 既定値はルート テンプレートで指定できます。 `article` ルート パラメーターは、ルート パラメーター名の前に二重アスタリスク (`**`) があるときに、 *キャッチオール* として定義されます。 キャッチオール ルート パラメーターは、URL パスの残りの部分をキャプチャします。空の文字列も照合できます。
 
 次の例では、ルート制約とデータ トークンを追加します。
 
@@ -1383,7 +1381,7 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 
 ## <a name="route-template-reference"></a>ルート テンプレート参照
 
-中括弧 (`{ ... }`) 内のトークンは*ルート パラメーター*を定義します。ルートが一致した場合、これがバインドされます。 1 つのルート セグメントで複数のルート パラメーターを定義できますが、リテラル値で区切る必要があります。 たとえば、`{controller=Home}{action=Index}` は有効なルートになりません。`{controller}` と `{action}` の間にリテラル値がないためです。 このようなルート パラメーターには名前を付ける必要があります。付加的な属性を指定することもあります。
+中括弧 (`{ ... }`) 内のトークンは *ルート パラメーター* を定義します。ルートが一致した場合、これがバインドされます。 1 つのルート セグメントで複数のルート パラメーターを定義できますが、リテラル値で区切る必要があります。 たとえば、`{controller=Home}{action=Index}` は有効なルートになりません。`{controller}` と `{action}` の間にリテラル値がないためです。 このようなルート パラメーターには名前を付ける必要があります。付加的な属性を指定することもあります。
 
 ルート パラメーター以外のリテラル テキスト (`{id}` など) とパス区切り `/` は URL のテキストに一致する必要があります。 テキスト照合は復号された URL パスを基盤とし、大文字と小文字が区別されます。 リテラル ルート パラメーターの区切り記号 (`{` または `}`) を照合するには、文字を繰り返して区切り記号をエスケープします (`{{` または `}}`)。
 
@@ -1392,13 +1390,13 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 * `/files/myFile.txt`
 * `/files/myFile`
 
-ルート パラメーターのプレフィックスとしてアスタリスク (`*`) または二重アスタリスク (`**`) を使用し、URI の残りの部分にバインドできます。 これらは、*キャッチオール* パラメーターと呼ばれています。 たとえば、`blog/{**slug}` は、`/blog` で始まり、その後に (`slug` ルート値に割り当てられる) 任意の値が続くあらゆる URI に一致します。 キャッチオール パラメーターは空の文字列に一致することもあります。
+ルート パラメーターのプレフィックスとしてアスタリスク (`*`) または二重アスタリスク (`**`) を使用し、URI の残りの部分にバインドできます。 これらは、 *キャッチオール* パラメーターと呼ばれています。 たとえば、`blog/{**slug}` は、`/blog` で始まり、その後に (`slug` ルート値に割り当てられる) 任意の値が続くあらゆる URI に一致します。 キャッチオール パラメーターは空の文字列に一致することもあります。
 
 キャッチオール パラメーターでは、パス区切り (`/`) 文字を含め、URL の生成にルートが使用されるときに適切な文字がエスケープされます。 たとえば、ルート値が `{ path = "my/path" }` のルート `foo/{*path}` では、`foo/my%2Fpath` が生成されます。 エスケープされたスラッシュに注意してください。 パス区切り文字をラウンドトリップさせるには、`**` ルート パラメーター プレフィックスを使用します。 `{ path = "my/path" }` のルート `foo/{**path}` では、`foo/my/path` が生成されます。
 
-ルート パラメーターには、*既定値* が含まれることがあります。パラメーター名の後に既定値を指定し、等号 (`=`) で区切ることで指定されます。 たとえば、`{controller=Home}` では、`controller` の既定値として `Home` が定義されます。 パラメーターの URL に値がない場合、既定値が使用されます。 ルート パラメーターは、`id?` のように、パラメーター名の終わりに疑問符 (`?`) を追加することでオプションとして扱われます。 オプション値と既定ルート パラメーターの違いは、既定値を含むルート パラメーターは常に値を生成するのに対し、オプションのパラメーターには、要求 URL によって値が指定されたときにのみ値が与えられることにあります。
+ルート パラメーターには、 *既定値* が含まれることがあります。パラメーター名の後に既定値を指定し、等号 (`=`) で区切ることで指定されます。 たとえば、`{controller=Home}` では、`controller` の既定値として `Home` が定義されます。 パラメーターの URL に値がない場合、既定値が使用されます。 ルート パラメーターは、`id?` のように、パラメーター名の終わりに疑問符 (`?`) を追加することでオプションとして扱われます。 オプション値と既定ルート パラメーターの違いは、既定値を含むルート パラメーターは常に値を生成するのに対し、オプションのパラメーターには、要求 URL によって値が指定されたときにのみ値が与えられることにあります。
 
-ルート パラメーターには、URL からバインドされるルート値に一致しなければならないという制約が含まれることがあります。 コロン (`:`) と制約名をルート パラメーター名の後に追加すると、ルート パラメーターの*インライン制約*が指定されます。 その制約で引数が要求される場合、制約名の後にかっこ (`(...)`) で囲まれます。 別のコロン (`:`) と制約名を追加することで、複数のインライン制約を指定できます。
+ルート パラメーターには、URL からバインドされるルート値に一致しなければならないという制約が含まれることがあります。 コロン (`:`) と制約名をルート パラメーター名の後に追加すると、ルート パラメーターの *インライン制約* が指定されます。 その制約で引数が要求される場合、制約名の後にかっこ (`(...)`) で囲まれます。 別のコロン (`:`) と制約名を追加することで、複数のインライン制約を指定できます。
 
 制約名と引数が <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> サービスに渡され、URL 処理で使用する <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> のインスタンスが作成されます。 たとえば、ルート テンプレート `blog/{article:minlength(10)}` によって、制約 `minlength` と引数 `10` が指定されます。 ルート制約の詳細とこのフレームワークによって指定される制約のリストについては、「[ルート制約参照](#route-constraint-reference)」セクションを参照してください。
 
@@ -1435,7 +1433,7 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 ルート制約は、受信 URL と一致し、URL パスがルート値にトークン化されたときに実行されます。 ルート制約では、通常、ルート テンプレート経由で関連付けられるルート値を調べ、値が許容できるかどうかをはい/いいえで決定します。 一部のルート制約では、ルート値以外のデータを使用し、要求をルーティングできるかどうかが考慮されます。 たとえば、<xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> はその HTTP Verb に基づいて要求を承認または却下します。 制約は、要求のルーティングとリンクの生成で使用されます。
 
 > [!WARNING]
-> **入力の検証**には制約を使用しないでください。 **入力の検証**に制約が使用されると、無効な入力の結果、*400 - Bad Request* と適切なエラー メッセージではなく、*404 - Not Found* が表示されます。 ルート制約は、特定のルートに対する入力の妥当性を検証するためではなく、似たようなルートの**違いを明らかにする**ために使用されます。
+> **入力の検証** には制約を使用しないでください。 **入力の検証** に制約が使用されると、無効な入力の結果、 *400 - Bad Request* と適切なエラー メッセージではなく、 *404 - Not Found* が表示されます。 ルート制約は、特定のルートに対する入力の妥当性を検証するためではなく、似たようなルートの **違いを明らかにする** ために使用されます。
 
 次の表は、ルート制約の例とそれに求められる動作をまとめたものです。
 
@@ -1568,7 +1566,7 @@ ASP.NET Core では、生成されたルートと共にパラメーター トラ
 
 上のサンプルの終わりで生成された <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> は `/package/create/123` です。 ディクショナリにより、"Track Package Route" テンプレート `package/{operation}/{id}` のルート値 `operation` と `id` が提供されます。 詳細については、「[ルーティング ミドルウェアの使用](#use-routing-middleware)」セクションのサンプル コードまたは[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)を参照してください。
 
-<xref:Microsoft.AspNetCore.Routing.VirtualPathContext> コンストラクターの 2 番目のパラメーターは*アンビエント値*の集合です。 アンビエント値は、開発者が要求コンテキスト内で指定する必要がある値の数が制限されるため、使用すると便利です。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 ASP.NET Core MVC アプリの `HomeController` の `About` アクションでは、コントローラー ルート値を指定し、`Index` アクションにリンクする必要はありません。`Home` のアンビエント値が使用されます。
+<xref:Microsoft.AspNetCore.Routing.VirtualPathContext> コンストラクターの 2 番目のパラメーターは *アンビエント値* の集合です。 アンビエント値は、開発者が要求コンテキスト内で指定する必要がある値の数が制限されるため、使用すると便利です。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 ASP.NET Core MVC アプリの `HomeController` の `About` アクションでは、コントローラー ルート値を指定し、`Index` アクションにリンクする必要はありません。`Home` のアンビエント値が使用されます。
 
 パラメーターに一致しないアンビエント値は無視されます。 アンビエント値は、明示的に指定された値でアンビエント値がオーバーライドされる場合にも無視されます。 URL では左から右に照合されます。
 
@@ -1631,7 +1629,7 @@ URL 生成サポートを使用すると、アプリを相互にリンクする 
 
 ルーティングでは <xref:Microsoft.AspNetCore.Routing.IRouter> のルートの実装が次の目的で利用されます。
 
-* 受信要求を*ルート ハンドラー*にマッピングする。
+* 受信要求を *ルート ハンドラー* にマッピングする。
 * 応答で使用される URL を生成する。
 
 既定では、アプリにはルート コレクションが 1 つあります。 要求が到着すると、コレクション内のルートは、コレクションに存在する順序で処理されます。 フレームワークでは、コレクション内の各ルートに対して <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> メソッドを呼び出し、受信要求 URL とコレクション内のルートとの照合を試みます。 応答ではルーティングを使用し、ルート情報に基づいて URL (リダイレクトやリンクなど) を生成できます。そのため、URL をハードコーディングする必要がなく、保守管理が容易になります。
@@ -1649,17 +1647,17 @@ URL 生成サポートを使用すると、アプリを相互にリンクする 
 
 ### <a name="url-matching"></a>URL 一致
 
-URL 一致というプロセスでは、ルーティングによって、受信要求が*ハンドラー*に配布されます。 このプロセスは URL パスのデータに基づきますが、要求内のあらゆるデータを考慮することもできます。 アプリの規模を大きくしたり、より複雑にしたりするとき、要求を個別のハンドラーに配布する機能が鍵となります。
+URL 一致というプロセスでは、ルーティングによって、受信要求が *ハンドラー* に配布されます。 このプロセスは URL パスのデータに基づきますが、要求内のあらゆるデータを考慮することもできます。 アプリの規模を大きくしたり、より複雑にしたりするとき、要求を個別のハンドラーに配布する機能が鍵となります。
 
-受信要求は <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> に入ります。これが各ルートで順に <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> メソッドを呼び出します。 <xref:Microsoft.AspNetCore.Routing.IRouter> インスタンスでは、[RouteContext.Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler*) を非 null の <xref:Microsoft.AspNetCore.Http.RequestDelegate> に設定することで、要求を*処理する*かどうかを選択します。 要求に適したハンドラーがルートに見つかると、ルート処理が停止します。ハンドラーが呼び出され、要求を処理します。 要求を処理するためのルート ハンドラーが見つからない場合、ミドルウェアによって、要求が要求パイプラインの次のミドルウェアに渡されます。
+受信要求は <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> に入ります。これが各ルートで順に <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> メソッドを呼び出します。 <xref:Microsoft.AspNetCore.Routing.IRouter> インスタンスでは、 [RouteContext.Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler*) を非 null の <xref:Microsoft.AspNetCore.Http.RequestDelegate> に設定することで、要求を *処理する* かどうかを選択します。 要求に適したハンドラーがルートに見つかると、ルート処理が停止します。ハンドラーが呼び出され、要求を処理します。 要求を処理するためのルート ハンドラーが見つからない場合、ミドルウェアによって、要求が要求パイプラインの次のミドルウェアに渡されます。
 
 <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> に最初に入力されるのが、現在の要求に関連付けられている [RouteContext.HttpContext](xref:Microsoft.AspNetCore.Routing.RouteContext.HttpContext*) です。 [RouteContext.Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler) と [RouteContext.RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData*) は、ルートが一致した後に設定される出力です。
 
 また、<xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> を呼び出す一致が見つかると、それまでに実行された要求処理に基づいて、[RouteContext.RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) のプロパティが適切な値に設定されます。
 
-[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values*) は、ルートから生成された*ルート値*のディクショナリです。 この値は通常、URL のトークン化で決定されます。この値を利用してユーザー入力を受け取ったり、アプリ内で決定をさらに配布したりできます。
+[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values*) は、ルートから生成された *ルート値* のディクショナリです。 この値は通常、URL のトークン化で決定されます。この値を利用してユーザー入力を受け取ったり、アプリ内で決定をさらに配布したりできます。
 
-[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) は、一致したルートに関連する追加データのプロパティ バッグです。 一致したルートに基づいてアプリで決定を行えるように、<xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> が提供されます。これは状態データと各ルートの関連付けをサポートするためのものです。 この値は開発者が定義するものです。ルーティングの動作に影響を与えることは**ありません**。 また、[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) に一時退避される値はどのような型でも構いません。一方、[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) の場合は、文字列間で変換できる必要があります。
+[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) は、一致したルートに関連する追加データのプロパティ バッグです。 一致したルートに基づいてアプリで決定を行えるように、<xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*> が提供されます。これは状態データと各ルートの関連付けをサポートするためのものです。 この値は開発者が定義するものです。ルーティングの動作に影響を与えることは **ありません** 。 また、[RouteData.DataTokens](xref:Microsoft.AspNetCore.Routing.RouteData.DataTokens*) に一時退避される値はどのような型でも構いません。一方、[RouteData.Values](xref:Microsoft.AspNetCore.Routing.RouteData.Values) の場合は、文字列間で変換できる必要があります。
 
 [RouteData.Routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers) は、過去に要求に一致したルートの一覧です。 ルートはルートの中に入れ子にすることができます。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> プロパティは、結果的に一致をもたらしたルートの論理ツリーを通るパスを表します。 一般的に、<xref:Microsoft.AspNetCore.Routing.RouteData.Routers> の最初の項目はルート コレクションであり、これは URL 生成に使用するものです。 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> の最後の項目は、一致したルート ハンドラーです。
 
@@ -1669,7 +1667,7 @@ URL 一致というプロセスでは、ルーティングによって、受信�
 
 URL 生成は、ルーティングにおいて、一連のルート値に基づいて URL パスを作成するプロセスです。 これにより、ルート ハンドラーとそれにアクセスする URL を論理的に分離できます。
 
-URL 生成は同様の繰り返しプロセスに従いますが、最初にユーザーまたはフレームワーク コードでルート コレクションの <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> メソッドを呼び出します。 非 null の <xref:Microsoft.AspNetCore.Routing.VirtualPathData> が返されるまで、各*ルート* で順番に <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> メソッドが呼び出されます。
+URL 生成は同様の繰り返しプロセスに従いますが、最初にユーザーまたはフレームワーク コードでルート コレクションの <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> メソッドを呼び出します。 非 null の <xref:Microsoft.AspNetCore.Routing.VirtualPathData> が返されるまで、各 *ルート* で順番に <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> メソッドが呼び出されます。
 
 <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> の第一入力:
 
@@ -1684,7 +1682,7 @@ URL 生成は同様の繰り返しプロセスに従いますが、最初にユ�
 
 <xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> の出力は <xref:Microsoft.AspNetCore.Routing.VirtualPathData> です。 <xref:Microsoft.AspNetCore.Routing.VirtualPathData> は <xref:Microsoft.AspNetCore.Routing.RouteData> の並列です。 <xref:Microsoft.AspNetCore.Routing.VirtualPathData> には出力 URL として <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> が含まれ、ルートで設定する追加プロパティがいくつか含まれます。
 
-[VirtualPathData.VirtualPath](xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath*) プロパティには、ルートによって生成された*仮想パス*が含まれます。 必要に応じて、パスをさらに処理する必要がある場合があります。 生成された URL を HTML で表示するには、アプリの基礎パスを先頭に追加する必要があります。
+[VirtualPathData.VirtualPath](xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath*) プロパティには、ルートによって生成された *仮想パス* が含まれます。 必要に応じて、パスをさらに処理する必要がある場合があります。 生成された URL を HTML で表示するには、アプリの基礎パスを先頭に追加する必要があります。
 
 [VirtualPathData.Router](xref:Microsoft.AspNetCore.Routing.VirtualPathData.Router*) は URL を正常に生成したルートの参照です。
 
@@ -1692,7 +1690,7 @@ URL 生成は同様の繰り返しプロセスに従いますが、最初にユ�
 
 ### <a name="create-routes"></a>ルートを作成する
 
-ルーティングにより、<xref:Microsoft.AspNetCore.Routing.IRouter> の標準実装として <xref:Microsoft.AspNetCore.Routing.Route> クラスが与えられます。 <xref:Microsoft.AspNetCore.Routing.Route> では*ルート テンプレート* 構文を利用して、<xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> の呼び出し時に URL パスに対して照合するパターンを定義します。 <xref:Microsoft.AspNetCore.Routing.Route> は同じルート テンプレートを利用し、<xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> の呼び出し時に URL を生成します。
+ルーティングにより、<xref:Microsoft.AspNetCore.Routing.IRouter> の標準実装として <xref:Microsoft.AspNetCore.Routing.Route> クラスが与えられます。 <xref:Microsoft.AspNetCore.Routing.Route> では *ルート テンプレート* 構文を利用して、<xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> の呼び出し時に URL パスに対して照合するパターンを定義します。 <xref:Microsoft.AspNetCore.Routing.Route> は同じルート テンプレートを利用し、<xref:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath*> の呼び出し時に URL を生成します。
 
 ほとんどのアプリは、<xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*> を呼び出すか、<xref:Microsoft.AspNetCore.Routing.IRouteBuilder> で定義されている同様の拡張メソッドの 1 つを呼び出してルートを作成します。 いずれの <xref:Microsoft.AspNetCore.Routing.IRouteBuilder> 拡張メソッドでも、<xref:Microsoft.AspNetCore.Routing.Route> のインスタンスが作成され、それがルート コレクションに追加されます。
 
@@ -1708,11 +1706,11 @@ routes.MapRoute(
 
 このテンプレートでは URL パスが照合され、ルート値が抽出されます。 たとえば、`/Products/Details/17` というパスでは、`{ controller = Products, action = Details, id = 17 }` というルート値が生成されます。
 
-ルート値は、URL パスをセグメントに分割し、各セグメントと、ルート テンプレートの*ルート パラメーター* 名を照合することで決定されます。 ルート パラメーターが指定されます。 パラメーターは、中かっこ `{ ... }` でパラメーター名を囲むことで定義されます。
+ルート値は、URL パスをセグメントに分割し、各セグメントと、ルート テンプレートの *ルート パラメーター* 名を照合することで決定されます。 ルート パラメーターが指定されます。 パラメーターは、中かっこ `{ ... }` でパラメーター名を囲むことで定義されます。
 
 上のテンプレートでは URL パス `/` の照合も行い、`{ controller = Home, action = Index }` という値を生成します。 これは、ルート パラメーターの `{controller}` と `{action}` に既定値が与えられ、`id` ルート パラメーターが任意であるためです。 ルート パラメーター名の後の等号 (`=`) とそれに続く値により、パラメーターの既定値が定義されます。 ルート パラメーター名の後の疑問符 (`?`) により、オプションのパラメーターが定義されます。
 
-既定値のルート パラメーターはルートが一致するとルート値を*常に*生成します。 省略可能なパラメーターでは、対応する URL パス セグメントがない場合、ルート値は生成されません。 ルート テンプレートのシナリオと構文の詳しい説明については、「[ルート テンプレート参照](#route-template-reference)」セクションを参照してください。
+既定値のルート パラメーターはルートが一致するとルート値を *常に* 生成します。 省略可能なパラメーターでは、対応する URL パス セグメントがない場合、ルート値は生成されません。 ルート テンプレートのシナリオと構文の詳しい説明については、「[ルート テンプレート参照](#route-template-reference)」セクションを参照してください。
 
 次の例では、ルート パラメーター定義 `{id:int}` により、`id` ルート パラメーターの[ルート制約](#route-constraint-reference)が定義されます。
 
@@ -1751,7 +1749,7 @@ routes.MapRoute(
     defaults: new { controller = "Blog", action = "ReadArticle" });
 ```
 
-上記のテンプレートでは `/Blog/All-About-Routing/Introduction` のような URL パスを照合し、値 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }` を抽出します。 `controller` と `action` の既定のルート値は、テンプレートに対応するルート パラメーターがなくても、ルートにより生成されます。 既定値はルート テンプレートで指定できます。 `article` ルート パラメーターは、ルート パラメーター名の前にアスタリスク (`*`) があるときに、*キャッチオール* として定義されます。 キャッチオール ルート パラメーターは、URL パスの残りの部分をキャプチャします。空の文字列も照合できます。
+上記のテンプレートでは `/Blog/All-About-Routing/Introduction` のような URL パスを照合し、値 `{ controller = Blog, action = ReadArticle, article = All-About-Routing/Introduction }` を抽出します。 `controller` と `action` の既定のルート値は、テンプレートに対応するルート パラメーターがなくても、ルートにより生成されます。 既定値はルート テンプレートで指定できます。 `article` ルート パラメーターは、ルート パラメーター名の前にアスタリスク (`*`) があるときに、 *キャッチオール* として定義されます。 キャッチオール ルート パラメーターは、URL パスの残りの部分をキャプチャします。空の文字列も照合できます。
 
 次の例では、ルート制約とデータ トークンを追加します。
 
@@ -1839,13 +1837,13 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*>
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>
 
-<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> など、リストされているメソッドの一部では、<xref:Microsoft.AspNetCore.Http.RequestDelegate> が必要です。 <xref:Microsoft.AspNetCore.Http.RequestDelegate> は、ルートが一致したとき、*ルート ハンドラー*として使用されます。 この仲間の他のメソッドでは、ルート ハンドラーとして使用されるミドルウェア パイプラインを構成できます。 `Map*` メソッドで、<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*> などのハンドラーを受け入れない場合、<xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*> が使用されます。
+<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> など、リストされているメソッドの一部では、<xref:Microsoft.AspNetCore.Http.RequestDelegate> が必要です。 <xref:Microsoft.AspNetCore.Http.RequestDelegate> は、ルートが一致したとき、 *ルート ハンドラー* として使用されます。 この仲間の他のメソッドでは、ルート ハンドラーとして使用されるミドルウェア パイプラインを構成できます。 `Map*` メソッドで、<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*> などのハンドラーを受け入れない場合、<xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*> が使用されます。
 
 `Map[Verb]` メソッドは制約を利用し、メソッド名の HTTP Verb にルートを制限します。 たとえば、 <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> や <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>を参照してください。
 
 ## <a name="route-template-reference"></a>ルート テンプレート参照
 
-中括弧 (`{ ... }`) 内のトークンは*ルート パラメーター*を定義します。ルートが一致した場合、これがバインドされます。 1 つのルート セグメントで複数のルート パラメーターを定義できますが、リテラル値で区切る必要があります。 たとえば、`{controller=Home}{action=Index}` は有効なルートになりません。`{controller}` と `{action}` の間にリテラル値がないためです。 このようなルート パラメーターには名前を付ける必要があります。付加的な属性を指定することもあります。
+中括弧 (`{ ... }`) 内のトークンは *ルート パラメーター* を定義します。ルートが一致した場合、これがバインドされます。 1 つのルート セグメントで複数のルート パラメーターを定義できますが、リテラル値で区切る必要があります。 たとえば、`{controller=Home}{action=Index}` は有効なルートになりません。`{controller}` と `{action}` の間にリテラル値がないためです。 このようなルート パラメーターには名前を付ける必要があります。付加的な属性を指定することもあります。
 
 ルート パラメーター以外のリテラル テキスト (`{id}` など) とパス区切り `/` は URL のテキストに一致する必要があります。 テキスト照合は復号された URL パスを基盤とし、大文字と小文字が区別されます。 リテラル ルート パラメーターの区切り記号 (`{` または `}`) を照合するには、文字を繰り返して区切り記号をエスケープします (`{{` または `}}`)。
 
@@ -1854,13 +1852,13 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 * `/files/myFile.txt`
 * `/files/myFile`
 
-ルート パラメーターのプレフィックスとしてアスタリスク (`*`) を使用し、URI の残りの部分にバインドできます。 これは*キャッチオール* パラメーターと呼ばれています。 たとえば、`blog/{*slug}` は、`/blog` で始まり、その後に (`slug` ルート値に割り当てられる) 任意の値が続くあらゆる URI に一致します。 キャッチオール パラメーターは空の文字列に一致することもあります。
+ルート パラメーターのプレフィックスとしてアスタリスク (`*`) を使用し、URI の残りの部分にバインドできます。 これは *キャッチオール* パラメーターと呼ばれています。 たとえば、`blog/{*slug}` は、`/blog` で始まり、その後に (`slug` ルート値に割り当てられる) 任意の値が続くあらゆる URI に一致します。 キャッチオール パラメーターは空の文字列に一致することもあります。
 
 キャッチオール パラメーターでは、パス区切り (`/`) 文字を含め、URL の生成にルートが使用されるときに適切な文字がエスケープされます。 たとえば、ルート値が `{ path = "my/path" }` のルート `foo/{*path}` では、`foo/my%2Fpath` が生成されます。 エスケープされたスラッシュに注意してください。
 
-ルート パラメーターには、*既定値* が含まれることがあります。パラメーター名の後に既定値を指定し、等号 (`=`) で区切ることで指定されます。 たとえば、`{controller=Home}` では、`controller` の既定値として `Home` が定義されます。 パラメーターの URL に値がない場合、既定値が使用されます。 ルート パラメーターは、`id?` のように、パラメーター名の終わりに疑問符 (`?`) を追加することでオプションとして扱われます。 オプション値と既定ルート パラメーターの違いは、既定値を含むルート パラメーターは常に値を生成するのに対し、オプションのパラメーターには、要求 URL によって値が指定されたときにのみ値が与えられることにあります。
+ルート パラメーターには、 *既定値* が含まれることがあります。パラメーター名の後に既定値を指定し、等号 (`=`) で区切ることで指定されます。 たとえば、`{controller=Home}` では、`controller` の既定値として `Home` が定義されます。 パラメーターの URL に値がない場合、既定値が使用されます。 ルート パラメーターは、`id?` のように、パラメーター名の終わりに疑問符 (`?`) を追加することでオプションとして扱われます。 オプション値と既定ルート パラメーターの違いは、既定値を含むルート パラメーターは常に値を生成するのに対し、オプションのパラメーターには、要求 URL によって値が指定されたときにのみ値が与えられることにあります。
 
-ルート パラメーターには、URL からバインドされるルート値に一致しなければならないという制約が含まれることがあります。 コロン (`:`) と制約名をルート パラメーター名の後に追加すると、ルート パラメーターの*インライン制約*が指定されます。 その制約で引数が要求される場合、制約名の後にかっこ (`(...)`) で囲まれます。 別のコロン (`:`) と制約名を追加することで、複数のインライン制約を指定できます。
+ルート パラメーターには、URL からバインドされるルート値に一致しなければならないという制約が含まれることがあります。 コロン (`:`) と制約名をルート パラメーター名の後に追加すると、ルート パラメーターの *インライン制約* が指定されます。 その制約で引数が要求される場合、制約名の後にかっこ (`(...)`) で囲まれます。 別のコロン (`:`) と制約名を追加することで、複数のインライン制約を指定できます。
 
 制約名と引数が <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> サービスに渡され、URL 処理で使用する <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> のインスタンスが作成されます。 たとえば、ルート テンプレート `blog/{article:minlength(10)}` によって、制約 `minlength` と引数 `10` が指定されます。 ルート制約の詳細とこのフレームワークによって指定される制約のリストについては、「[ルート制約参照](#route-constraint-reference)」セクションを参照してください。
 
@@ -1885,7 +1883,7 @@ URL 生成の詳細については、「[URL 生成参照](#url-generation-refer
 ルート制約は、受信 URL と一致し、URL パスがルート値にトークン化されたときに実行されます。 ルート制約では、通常、ルート テンプレート経由で関連付けられるルート値を調べ、値が許容できるかどうかをはい/いいえで決定します。 一部のルート制約では、ルート値以外のデータを使用し、要求をルーティングできるかどうかが考慮されます。 たとえば、<xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> はその HTTP Verb に基づいて要求を承認または却下します。 制約は、要求のルーティングとリンクの生成で使用されます。
 
 > [!WARNING]
-> **入力の検証**には制約を使用しないでください。 **入力の検証**に制約が使用されると、無効な入力の結果、*400 - Bad Request* と適切なエラー メッセージではなく、*404 - Not Found* が表示されます。 ルート制約は、特定のルートに対する入力の妥当性を検証するためではなく、似たようなルートの**違いを明らかにする**ために使用されます。
+> **入力の検証** には制約を使用しないでください。 **入力の検証** に制約が使用されると、無効な入力の結果、 *400 - Bad Request* と適切なエラー メッセージではなく、 *404 - Not Found* が表示されます。 ルート制約は、特定のルートに対する入力の妥当性を検証するためではなく、似たようなルートの **違いを明らかにする** ために使用されます。
 
 次の表は、ルート制約の例とそれに求められる動作をまとめたものです。
 
@@ -1974,7 +1972,7 @@ public ActionResult<string> Get(string id)
 
 上のサンプルの終わりで生成された <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath> は `/package/create/123` です。 ディクショナリにより、"Track Package Route" テンプレート `package/{operation}/{id}` のルート値 `operation` と `id` が提供されます。 詳細については、「[ルーティング ミドルウェアの使用](#use-routing-middleware)」セクションのサンプル コードまたは[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)を参照してください。
 
-<xref:Microsoft.AspNetCore.Routing.VirtualPathContext> コンストラクターの 2 番目のパラメーターは*アンビエント値*の集合です。 アンビエント値は、開発者が要求コンテキスト内で指定する必要がある値の数が制限されるため、使用すると便利です。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 ASP.NET Core MVC アプリの `HomeController` の `About` アクションでは、コントローラー ルート値を指定し、`Index` アクションにリンクする必要はありません。`Home` のアンビエント値が使用されます。
+<xref:Microsoft.AspNetCore.Routing.VirtualPathContext> コンストラクターの 2 番目のパラメーターは *アンビエント値* の集合です。 アンビエント値は、開発者が要求コンテキスト内で指定する必要がある値の数が制限されるため、使用すると便利です。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 ASP.NET Core MVC アプリの `HomeController` の `About` アクションでは、コントローラー ルート値を指定し、`Index` アクションにリンクする必要はありません。`Home` のアンビエント値が使用されます。
 
 パラメーターに一致しないアンビエント値は無視されます。 アンビエント値は、明示的に指定された値でアンビエント値がオーバーライドされる場合にも無視されます。 URL では左から右に照合されます。
 

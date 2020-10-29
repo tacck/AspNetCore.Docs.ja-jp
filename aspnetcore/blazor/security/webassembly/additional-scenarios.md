@@ -5,7 +5,7 @@ description: セキュリティに関するその他のシナリオ用に Blazor
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/03/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 055e248abfadd9092c173e4630e56ea69517da3b
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900961"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690582"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ
 
@@ -33,7 +33,7 @@ ms.locfileid: "91900961"
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> は、送信 <xref:System.Net.Http.HttpResponseMessage> インスタンスにアクセス トークンをアタッチするために使用される <xref:System.Net.Http.DelegatingHandler> です。 トークンは、フレームワークによって登録されている <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> サービスを使用して取得されます。 トークンを取得できない場合は、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> がスローされます。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> には、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> メソッドがあります。このメソッドを使用すると、ユーザーを ID プロバイダーに移動して、新しいトークンを取得できます。
 
-便宜上、フレームワークには、アプリのベース アドレスを承認された URL として使用して事前構成が行われた <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> が用意されています。 **アクセス トークンは、要求 URI がアプリのベース URI 内にある場合にのみ追加されます。** 送信要求 URI がアプリのベース URI 内にない場合は、[カスタム `AuthorizationMessageHandler` クラス (*推奨*) ](#custom-authorizationmessagehandler-class) を使用するか、または [`AuthorizationMessageHandler`](#configure-authorizationmessagehandler) を構成します。
+便宜上、フレームワークには、アプリのベース アドレスを承認された URL として使用して事前構成が行われた <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> が用意されています。 **アクセス トークンは、要求 URI がアプリのベース URI 内にある場合にのみ追加されます。** 送信要求 URI がアプリのベース URI 内にない場合は、 [カスタム `AuthorizationMessageHandler` クラス ( *推奨* )](#custom-authorizationmessagehandler-class) を使用するか、または [`AuthorizationMessageHandler`](#configure-authorizationmessagehandler) を構成します。
 
 > [!NOTE]
 > サーバー API アクセス用のクライアント アプリ構成に加えて、クライアントとサーバーが同じベース アドレス内に存在しない場合にクロスオリジン要求 (CORS) がサーバー API によって許可される必要があります。 サーバー側の CORS 構成の詳細については、この記事で後述する「[クロスオリジン リソース共有 (CORS)](#cross-origin-resource-sharing-cors)」セクションを参照してください。
@@ -174,128 +174,6 @@ Blazor WebAssembly のホストされたプロジェクト テンプレートに
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`)。
 * `authorizedUrls` 配列の URL。
-
-### <a name="graph-api-example"></a>Graph API の例
-
-次の例では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を使用して、通話を処理するユーザーの携帯電話番号を取得します。 Azure portal の AAD 領域に Microsoft Graph API `User.Read` のアクセス許可を追加すると、ホストされた Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリ内の名前付きクライアントに対してスコープが構成されます。
-
-> [!NOTE]
-> このセクションの例では、"*コンポーネント コード*" でユーザーの Graph API データを取得します。 Graph API からユーザー要求を作成するには、次のリソースを参照してください。
->
-> * 「[ユーザーをカスタマイズする](#customize-the-user)」セクション
-> * <xref:blazor/security/webassembly/aad-groups-roles>
-
-`GraphAuthorizationMessageHandler.cs`:
-
-```csharp
-public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
-        NavigationManager navigationManager)
-        : base(provider, navigationManager)
-    {
-        ConfigureHandler(
-            authorizedUrls: new[] { "https://graph.microsoft.com" },
-            scopes: new[] { "https://graph.microsoft.com/User.Read" });
-    }
-}
-```
-
-`Program.Main` (`Program.cs`):
-
-```csharp
-builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
-
-builder.Services.AddHttpClient("GraphAPI",
-        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
-    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
-```
-
-Razor コンポーネント (`Pages/CallUser.razor`) の場合は、次のようになります。
-
-```razor
-@page "/CallUser"
-@using System.ComponentModel.DataAnnotations
-@using System.Text.Json.Serialization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@using Microsoft.Extensions.Logging
-@inject IAccessTokenProvider TokenProvider
-@inject IHttpClientFactory ClientFactory
-@inject ILogger<CallUser> Logger
-@inject ICallProcessor CallProcessor
-
-<h3>Call User</h3>
-
-<EditForm Model="@callInfo" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <p>
-        <label>
-            Message:
-            <InputTextArea @bind-Value="callInfo.Message" />
-        </label>
-    </p>
-
-    <button type="submit">Place call</button>
-
-    <p>
-        @formStatus
-    </p>
-</EditForm>
-
-@code {
-    private string formStatus;
-    private CallInfo callInfo = new CallInfo();
-
-    private async Task HandleValidSubmit()
-    {
-        var tokenResult = await TokenProvider.RequestAccessToken(
-            new AccessTokenRequestOptions
-            {
-                Scopes = new[] { "https://graph.microsoft.com/User.Read" }
-            });
-
-        if (tokenResult.TryGetToken(out var token))
-        {
-            var client = ClientFactory.CreateClient("GraphAPI");
-
-            var userInfo = await client.GetFromJsonAsync<UserInfo>("v1.0/me");
-
-            if (userInfo != null)
-            {
-                CallProcessor.Send(userInfo.MobilePhone, callInfo.Message);
-
-                formStatus = "Form successfully processed.";
-                Logger.LogInformation(
-                    $"Form successfully processed at {DateTime.UtcNow}. " +
-                    $"Mobile Phone: {userInfo.MobilePhone}");
-            }
-        }
-        else
-        {
-            formStatus = "There was a problem processing the form.";
-            Logger.LogError("Token failure");
-        }
-    }
-
-    private class CallInfo
-    {
-        [Required]
-        [StringLength(1000, ErrorMessage = "Message too long (1,000 char limit)")]
-        public string Message { get; set; }
-    }
-
-    private class UserInfo
-    {
-        [JsonPropertyName("mobilePhone")]
-        public string MobilePhone { get; set; }
-    }
-}
-```
-
-> [!NOTE]
-> 前の例では、開発者がカスタム `ICallProcessor` (`CallProcessor`) を実装してキューに配置し、自動呼び出しを行っています。
 
 ## <a name="typed-httpclient"></a>型指定された `HttpClient`
 
@@ -496,7 +374,7 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-Blazor のホストされたプロジェクト テンプレートに基づくホスト型 Blazor ソリューションでは、クライアントおよびサーバー アプリ用に同じベース アドレスが使用されます。 クライアント アプリの <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> は、既定では `builder.HostEnvironment.BaseAddress` の URI に設定されます。 Blazor のホストされたプロジェクト テンプレートから作成されるホスト型アプリの既定の構成では、CORS 構成は**必須ではありません**。 サーバー プロジェクトでホストされておらず、サーバー アプリのベース アドレスを共有していない追加のクライアント アプリでは、サーバー プロジェクト内の CORS 構成は**必須です**。
+Blazor のホストされたプロジェクト テンプレートに基づくホスト型 Blazor ソリューションでは、クライアントおよびサーバー アプリ用に同じベース アドレスが使用されます。 クライアント アプリの <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> は、既定では `builder.HostEnvironment.BaseAddress` の URI に設定されます。 Blazor のホストされたプロジェクト テンプレートから作成されるホスト型アプリの既定の構成では、CORS 構成は **必須ではありません** 。 サーバー プロジェクトでホストされておらず、サーバー アプリのベース アドレスを共有していない追加のクライアント アプリでは、サーバー プロジェクト内の CORS 構成は **必須です** 。
 
 詳細については、「<xref:security/cors>」と、サンプル アプリの HTTP 要求テスター コンポーネント (`Components/HTTPRequestTester.razor`) を参照してください。
 
@@ -931,134 +809,6 @@ public class CustomAccountFactory
           CustomUserAccount, CustomAccountFactory>();
   ```
 
-### <a name="customize-the-user-with-graph-api-claims"></a>Graph API 要求を使用してユーザーをカスタマイズする
-
-次の例では、アプリで <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を使用して、Graph API からユーザーの携帯電話番号要求を作成します。 アプリには、AAD で構成された `User.Read` Graph API アクセス許可 (スコープ) が必要です。
-
-`GraphAuthorizationMessageHandler.cs`:
-
-```csharp
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
-        NavigationManager navigationManager)
-        : base(provider, navigationManager)
-    {
-        ConfigureHandler(
-            authorizedUrls: new[] { "https://graph.microsoft.com" },
-            scopes: new[] { "https://graph.microsoft.com/User.Read" });
-    }
-}
-```
-
-Graph API の名前付き <xref:System.Net.Http.HttpClient> は、`Program.Main` (`Program.cs`) で、`GraphAPIAuthorizationMessageHandler` を使用して作成されます。
-
-```csharp
-using System;
-
-...
-
-builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
-
-builder.Services.AddHttpClient("GraphAPI",
-        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
-    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
-```
-
-`Models/UserInfo.cs`:
-
-```csharp
-using System.Text.Json.Serialization;
-
-public class UserInfo
-{
-    [JsonPropertyName("mobilePhone")]
-    public string MobilePhone { get; set; }
-}
-```
-
-次の `CustomAccountFactory` (`CustomAccountFactory.cs`) では、フレームワークの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> はユーザーのアカウントを表します。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで必要な場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。
-
-```csharp
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
-using Microsoft.Extensions.Logging;
-
-public class CustomAccountFactory
-    : AccountClaimsPrincipalFactory<RemoteUserAccount>
-{
-    private readonly ILogger<CustomAccountFactory> logger;
-    private readonly IHttpClientFactory clientFactory;
-
-    public CustomAccountFactory(IAccessTokenProviderAccessor accessor, 
-        IHttpClientFactory clientFactory, 
-        ILogger<CustomAccountFactory> logger)
-        : base(accessor)
-    {
-        this.clientFactory = clientFactory;
-        this.logger = logger;
-    }
-
-    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
-        RemoteUserAccount account,
-        RemoteAuthenticationUserOptions options)
-    {
-        var initialUser = await base.CreateUserAsync(account, options);
-
-        if (initialUser.Identity.IsAuthenticated)
-        {
-            var userIdentity = (ClaimsIdentity)initialUser.Identity;
-
-            try
-            {
-                var client = clientFactory.CreateClient("GraphAPI");
-
-                var userInfo = await client.GetFromJsonAsync<UserInfo>("v1.0/me");
-
-                if (userInfo != null)
-                {
-                    userIdentity.AddClaim(new Claim("mobilephone", userInfo.MobilePhone));
-                }
-            }
-            catch (AccessTokenNotAvailableException exception)
-            {
-                logger.LogError("Graph API access token failure: {MESSAGE}",
-                    exception.Message);
-            }
-        }
-
-        return initialUser;
-    }
-}
-```
-
-`Program.Main` (`Program.cs`) で、カスタム ファクトリを使用するようにアプリを構成します。 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで使用されている場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。
-
-```csharp
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-...
-
-builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
-    RemoteUserAccount>(options =>
-    {
-        builder.Configuration.Bind("AzureAd", 
-            options.ProviderOptions.Authentication);
-    })
-    .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, RemoteUserAccount, 
-        CustomAccountFactory>();
-```
-
-前の例は、MSAL で AAD 認証が使用されるアプリの場合です。 OIDC と API 認証にも、同様のパターンがあります。 詳細については、「[ペイロード要求を使用してユーザーをカスタマイズする](#customize-the-user-with-a-payload-claim)」セクションの最後に記載されている例を参照してください。
-
 ### <a name="aad-security-groups-and-roles-with-a-custom-user-account-class"></a>カスタム ユーザー アカウント クラスを持つ AAD セキュリティ グループおよびロール
 
 AAD セキュリティ グループと AAD 管理者ロール、およびカスタム ユーザー アカウント クラスを使用するその他の例については、<xref:blazor/security/webassembly/aad-groups-roles> を参照してください。
@@ -1299,4 +1049,5 @@ Server response: <strong>@serverResponse</strong>
 
 ## <a name="additional-resources"></a>その他の技術情報
 
+* <xref:blazor/security/webassembly/graph-api>
 * [`HttpClient` および `HttpRequestMessage` と Fetch API 要求オプション](xref:blazor/call-web-api#httpclient-and-httprequestmessage-with-fetch-api-request-options)

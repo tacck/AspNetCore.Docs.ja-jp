@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 035de12d17b676aac6af42e706f3741937d90fb3
-ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
+ms.openlocfilehash: bf528bb68af25a8c469a0c7710abc7c0b730fce2
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/17/2020
-ms.locfileid: "92153602"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690621"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
@@ -205,7 +205,7 @@ protected override bool ShouldRender()
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> がオーバーライドされる場合でも、コンポーネントは常に最初にレンダリングされます。
 
-詳細については、「<xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders>」を参照してください。
+詳細については、「<xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-rendering-of-component-subtrees>」を参照してください。
 
 ## <a name="state-changes"></a>状態変更
 

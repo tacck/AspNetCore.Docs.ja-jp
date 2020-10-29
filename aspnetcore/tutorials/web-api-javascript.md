@@ -3,7 +3,7 @@ title: 'チュートリアル: JavaScript を使用して ASP.NET Core Web API �
 author: rick-anderson
 description: JavaScript を使用して ASP.NET Core Web API を呼び出す方法について説明します。
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 11/26/2019
 no-loc:
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 3d097d724ac5e2313d24f1f06e47b881f29a4a98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b41288bd63267a9aa7035e25ebc8d838eed5d93b
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633800"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690686"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>チュートリアル: JavaScript を使用して ASP.NET Core Web API を呼び出す
 
@@ -59,11 +59,11 @@ ASP.NET Core 2.2 の場合は、2.2 バージョンの「[JavaScript で Web API
 
 1. *wwwroot* フォルダー内に *js* フォルダーを作成します。
 
-1. *index.html* という名前の HTML ファイルを、*wwwroot* フォルダーに追加します。 *index.html* の内容を、次のマークアップに置き換えます。
+1. *index.html* という名前の HTML ファイルを、 *wwwroot* フォルダーに追加します。 *index.html* の内容を、次のマークアップに置き換えます。
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. *site.js* という名前の JavaScript ファイルを、*wwwroot/js* フォルダーに追加します。 *site.js* の内容を、次のコードに置き換えます。
+1. *site.js* という名前の JavaScript ファイルを、 *wwwroot/js* フォルダーに追加します。 *site.js* の内容を、次のコードに置き換えます。
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
@@ -101,7 +101,7 @@ Web API で正常状態コードが返されると、`getItems` 関数が呼び�
 
 To Do アイテムの更新は追加と似ていますが、2 つの大きな違いがあります。
 
-* ルートに、更新するアイテムの一意の識別子がサフィックスとして付けられます。 たとえば、*api/TodoItems/1* のようになります。
+* ルートに、更新するアイテムの一意の識別子がサフィックスとして付けられます。 たとえば、 *api/TodoItems/1* のようになります。
 * `method` オプションで示されているように、HTTP アクション動詞は PUT です。
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]

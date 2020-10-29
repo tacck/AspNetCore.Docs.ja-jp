@@ -3,7 +3,7 @@ title: 'チュートリアル: ASP.NET Core で Web API を作成する'
 author: rick-anderson
 description: ASP.NET Core で Web API をビルドする方法を学習します。
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 08/13/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 9f67f8104eb5c21f244449ca3a4aaa96c750836d
-ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
+ms.openlocfilehash: 17f04dc9a0bdcf8ff016d83b915c017ff485cb36
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92379481"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690706"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -82,7 +82,7 @@ ms.locfileid: "92379481"
 
 * **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** テンプレートを選択して、 **[次へ]** をクリックします。
-* プロジェクトに「*TodoApi*」という名前を付け、 **[作成]** をクリックします。
+* プロジェクトに「 *TodoApi* 」という名前を付け、 **[作成]** をクリックします。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 5.0]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。
 
 ![VS の [新しいプロジェクト] ダイアログ](first-web-api/_static/5/vs.png)
@@ -118,9 +118,9 @@ ms.locfileid: "92379481"
 
   ![macOS での API テンプレートの選択](first-web-api-mac/_static/api_template.png)
 
-* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク**を選択します。 **[次へ]** を選択します。
+* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
 
-* **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
+* **[プロジェクト名]** に「 *TodoApi* 」と入力し、 **[作成]** を選択します。
 
   ![構成ダイアログ](first-web-api-mac/_static/2.png)
 
@@ -173,7 +173,7 @@ Swagger ページ `/swagger/index.html` が表示されます。 **[取得]**  >
 -->
 Swagger は、Web API の有用なドキュメントやヘルプ ページを生成するために使用されます。 このチュートリアルでは、Web API の作成について説明します。 Swagger の詳細については、<xref:tutorials/web-api-help-pages-using-swagger> を参照してください。
 
-ブラウザーで**要求 URL** をコピーして貼り付けます: `https://localhost:<port>/WeatherForecast`
+ブラウザーで **要求 URL** をコピーして貼り付けます: `https://localhost:<port>/WeatherForecast`
 
 次のような JSON が返されます。
 
@@ -224,13 +224,13 @@ Swagger が削除されているため、上記のマークアップにより、
 
 ## <a name="add-a-model-class"></a>モデル クラスの追加
 
-*モデル*は、アプリが管理するデータを表すクラスのセットです。 このアプリのモデルは、単一の `TodoItem` クラスです。
+*モデル* は、アプリが管理するデータを表すクラスのセットです。 このアプリのモデルは、単一の `TodoItem` クラスです。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
+* **ソリューション エクスプローラー** で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoItem* 」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -248,7 +248,7 @@ Swagger が削除されているため、上記のマークアップにより、
 
 * *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
-* クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
+* クラスに「 *TodoItem* 」という名前を付け、 **[新規]** をクリックします。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -262,7 +262,7 @@ Swagger が削除されているため、上記のマークアップにより、
 
 ## <a name="add-a-database-context"></a>データベース コンテキストの追加
 
-*データベース コンテキスト*は、データ モデルに対して Entity Framework 機能を調整するメイン クラスです。 このクラスは <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> クラスから派生させて作成します。
+*データベース コンテキスト* は、データ モデルに対して Entity Framework 機能を調整するメイン クラスです。 このクラスは <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> クラスから派生させて作成します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -270,19 +270,19 @@ Swagger が削除されているため、上記のマークアップにより、
 
 * **[ツール]** メニューで **[NuGet パッケージ マネージャー]、[ソリューションの NuGet パッケージの管理]** の順に選択します。
 * **[参照]** タブを選択し、「Microsoft.
-**EntityFrameworkCore.SqlServer**」と検索ボックスに入力します。
+**EntityFrameworkCore.SqlServer** 」と検索ボックスに入力します。
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
 * 5\.0 RC バージョンを使用できるように、 **[プレリリースを含める]** チェックボックスをオンにします。 
 * 左側のウィンドウで、 **[Microsoft.EntityFrameworkCore.SqlServer]** を選択します。
 * 右側のウィンドウで **[プロジェクト]** チェックボックスをオンにして、 **[インストール]** を選択します。
-* 前の手順を使用して、**Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
+* 前の手順を使用して、 **Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
 
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Update this image at RTM -->
 ![NuGet パッケージ マネージャー](first-web-api/_static/5/vsNuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext データベースコンテキストの追加
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoContext* 」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -318,8 +318,8 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 * **[Entity Framework を使用したアクションがある API コントローラー]** を選択してから、 **[追加]** を選択します。
 * **[Entity Framework を使用したアクションがある API コントローラー]** ダイアログで次を実行します。
 
-  * **モデル クラス**で **TodoItem (TodoApi.Models)** を選択します。
-  * **データ コンテキスト クラス**で **TodoContext (TodoApi.Models)** を選択します。
+  * **モデル クラス** で **TodoItem (TodoApi.Models)** を選択します。
+  * **データ コンテキスト クラス** で **TodoContext (TodoApi.Models)** を選択します。
   * **[追加]** を選びます。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -462,7 +462,7 @@ Postman でテストするには:
 
   [!code-csharp[](first-web-api/samples/5.x/TodoApi/Controllers/TodoItemsController.cs?name=TodoController&highlight=1)]
 
-* `[controller]` をコントローラーの名前 (慣例では "Controller" サフィックスを除くコントローラー クラス名) に置き換えます。 このサンプルでは、コントローラー クラス名は **TodoItems**Controller なので、コントローラー名は "TodoItems" です。 ASP.NET Core の[ルーティング](xref:mvc/controllers/routing)では、大文字と小文字が区別されません。
+* `[controller]` をコントローラーの名前 (慣例では "Controller" サフィックスを除くコントローラー クラス名) に置き換えます。 このサンプルでは、コントローラー クラス名は **TodoItems** Controller なので、コントローラー名は "TodoItems" です。 ASP.NET Core の[ルーティング](xref:mvc/controllers/routing)では、大文字と小文字が区別されません。
 * `[HttpGet]` 属性にルート テンプレート (たとえば、`[HttpGet("products")]`) がある場合は、それをパスに追加します。 このサンプルではテンプレートを使用しません。 詳細については、「[Http[Verb] 属性を使用する属性ルーティング](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes)」を参照してください。
 
 次の `GetTodoItem` メソッドで、`"{id}"` は To Do アイテムの一意識別子に使用するプレースホルダーの変数です。 `GetTodoItem` が呼び出されると、その `id` パラメーター内のメソッドに URL の `"{id}"` の値が指定されます。
@@ -608,7 +608,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** テンプレートを選択して、 **[次へ]** をクリックします。
-* プロジェクトに「*TodoApi*」という名前を付け、 **[作成]** をクリックします。
+* プロジェクトに「 *TodoApi* 」という名前を付け、 **[作成]** をクリックします。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。
 
 ![VS の [新しいプロジェクト] ダイアログ](first-web-api/_static/vs3.png)
@@ -644,9 +644,9 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
   ![macOS での API テンプレートの選択](first-web-api-mac/_static/api_template.png)
 
-* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク**を選択します。 **[次へ]** を選択します。
+* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
 
-* **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
+* **[プロジェクト名]** に「 *TodoApi* 」と入力し、 **[作成]** を選択します。
 
   ![構成ダイアログ](first-web-api-mac/_static/2.png)
 
@@ -720,13 +720,13 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ## <a name="add-a-model-class"></a>モデル クラスの追加
 
-*モデル*は、アプリが管理するデータを表すクラスのセットです。 このアプリのモデルは、単一の `TodoItem` クラスです。
+*モデル* は、アプリが管理するデータを表すクラスのセットです。 このアプリのモデルは、単一の `TodoItem` クラスです。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
+* **ソリューション エクスプローラー** で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoItem* 」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -744,7 +744,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 * *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
-* クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
+* クラスに「 *TodoItem* 」という名前を付け、 **[新規]** をクリックします。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -758,23 +758,23 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ## <a name="add-a-database-context"></a>データベース コンテキストの追加
 
-*データベース コンテキスト*は、データ モデルに対して Entity Framework 機能を調整するメイン クラスです。 このクラスは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生させて作成します。
+*データベース コンテキスト* は、データ モデルに対して Entity Framework 機能を調整するメイン クラスです。 このクラスは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生させて作成します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="add-nuget-packages"></a>NuGet パッケージを追加する
 
 * **[ツール]** メニューで **[NuGet パッケージ マネージャー]、[ソリューションの NuGet パッケージの管理]** の順に選択します。
-* **[参照]** タブを選択し、検索ボックスに「**Microsoft.EntityFrameworkCore.SqlServer**」と入力します。
+* **[参照]** タブを選択し、検索ボックスに「 **Microsoft.EntityFrameworkCore.SqlServer** 」と入力します。
 * 左側のウィンドウで、 **[Microsoft.EntityFrameworkCore.SqlServer]** を選択します。
 * 右側のウィンドウで **[プロジェクト]** チェックボックスをオンにして、 **[インストール]** を選択します。
-* 前の手順を使用して、**Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
+* 前の手順を使用して、 **Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
 
 ![NuGet パッケージ マネージャー](first-web-api/_static/vs3NuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext データベースコンテキストの追加
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoContext* 」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -790,7 +790,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)コンテナーに登録する必要があります。 コンテナーは、コントローラーにサービスを提供します。
 
-次の強調表示されているコードを使用して、*Startup.cs* を更新します。
+次の強調表示されているコードを使用して、 *Startup.cs* を更新します。
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
@@ -809,8 +809,8 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 * **[Entity Framework を使用したアクションがある API コントローラー]** を選択してから、 **[追加]** を選択します。
 * **[Entity Framework を使用したアクションがある API コントローラー]** ダイアログで次を実行します。
 
-  * **モデル クラス**で **TodoItem (TodoApi.Models)** を選択します。
-  * **データ コンテキスト クラス**で **TodoContext (TodoApi.Models)** を選択します。
+  * **モデル クラス** で **TodoItem (TodoApi.Models)** を選択します。
+  * **データ コンテキスト クラス** で **TodoContext (TodoApi.Models)** を選択します。
   * **[追加]** を選びます。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
@@ -949,7 +949,7 @@ ASP.NET Core テンプレートの対象は次のとおりです。
 
   [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=TodoController&highlight=1)]
 
-* `[controller]` をコントローラーの名前 (慣例では "Controller" サフィックスを除くコントローラー クラス名) に置き換えます。 このサンプルでは、コントローラー クラス名は **TodoItems**Controller なので、コントローラー名は "TodoItems" です。 ASP.NET Core の[ルーティング](xref:mvc/controllers/routing)では、大文字と小文字が区別されません。
+* `[controller]` をコントローラーの名前 (慣例では "Controller" サフィックスを除くコントローラー クラス名) に置き換えます。 このサンプルでは、コントローラー クラス名は **TodoItems** Controller なので、コントローラー名は "TodoItems" です。 ASP.NET Core の[ルーティング](xref:mvc/controllers/routing)では、大文字と小文字が区別されません。
 * `[HttpGet]` 属性にルート テンプレート (たとえば、`[HttpGet("products")]`) がある場合は、それをパスに追加します。 このサンプルではテンプレートを使用しません。 詳細については、「[Http[Verb] 属性を使用する属性ルーティング](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes)」を参照してください。
 
 次の `GetTodoItem` メソッドで、`"{id}"` は To Do アイテムの一意識別子に使用するプレースホルダーの変数です。 `GetTodoItem` が呼び出されると、その `id` パラメーター内のメソッドに URL の `"{id}"` の値が指定されます。
@@ -1099,8 +1099,8 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** テンプレートを選択して、 **[次へ]** をクリックします。
-* プロジェクトに「*TodoApi*」という名前を付け、 **[作成]** をクリックします。
-* **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 2.2]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。 **[Enable Docker Support]\(Docker サポートを有効にする\)** は**選択しないで**ください。
+* プロジェクトに「 *TodoApi* 」という名前を付け、 **[作成]** をクリックします。
+* **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 2.2]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。 **[Enable Docker Support]\(Docker サポートを有効にする\)** は **選択しないで** ください。
 
 ![VS の [新しいプロジェクト] ダイアログ](first-web-api/_static/vs.png)
 
@@ -1127,9 +1127,9 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * バージョン 8.6 より前の Visual Studio for Mac では、 **[.NET Core]**  >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。 バージョン 8.6 以降では、 **[Web and Console]** \(Web とコンソール\) >  **[アプリ]**  >  **[API]**  >  **[次へ]** の順に選択します。
   
-* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 2.x **ターゲット フレームワーク**を選択します。 **[次へ]** を選択します。
+* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 2.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
 
-* **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
+* **[プロジェクト名]** に「 *TodoApi* 」と入力し、 **[作成]** を選択します。
 
   ![構成ダイアログ](first-web-api-mac/_static/2.png)
 
@@ -1163,13 +1163,13 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ## <a name="add-a-model-class-21"></a>モデル クラス 2.1 の追加
 
-*モデル*は、アプリが管理するデータを表すクラスのセットです。 このアプリのモデルは、単一の `TodoItem` クラスです。
+*モデル* は、アプリが管理するデータを表すクラスのセットです。 このアプリのモデルは、単一の `TodoItem` クラスです。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
+* **ソリューション エクスプローラー** で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoItem* 」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -1187,7 +1187,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 * *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
-* クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
+* クラスに「 *TodoItem* 」という名前を付け、 **[新規]** をクリックします。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -1201,11 +1201,11 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ## <a name="add-a-database-context-21"></a>データベース コンテキスト 2.1 の追加
 
-*データベース コンテキスト*は、データ モデルに対して Entity Framework 機能を調整するメイン クラスです。 このクラスは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生させて作成します。
+*データベース コンテキスト* は、データ モデルに対して Entity Framework 機能を調整するメイン クラスです。 このクラスは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生させて作成します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoContext* 」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1221,7 +1221,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)コンテナーに登録する必要があります。 コンテナーは、コントローラーにサービスを提供します。
 
-次の強調表示されているコードを使用して、*Startup.cs* を更新します。
+次の強調表示されているコードを使用して、 *Startup.cs* を更新します。
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
@@ -1238,7 +1238,7 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 * *Controllers* フォルダーを右クリックします。
 * **[追加]** > **[新しい項目]** の順に選択します。
 * **[新しい項目の追加]** ダイアログで、 **[API コントローラー クラス]** テンプレートを選択します。
-* クラスに「*TodoController*」という名前を付け、 **[追加]** を選択します。
+* クラスに「 *TodoController* 」という名前を付け、 **[追加]** を選択します。
 
   ![[新しい項目の追加] ダイアログ。検索ボックスに「controller」と入力されています。Web API コントローラーが選択されています。](first-web-api/_static/new_controller.png)
 
@@ -1297,7 +1297,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=TodoController&highlight=3)]
 
-* `[controller]` をコントローラーの名前 (慣例では "Controller" サフィックスを除くコントローラー クラス名) に置き換えます。 このサンプルでは、コントローラー クラス名は **Todo**Controller なので、コントローラー名は "todo" です。 ASP.NET Core の[ルーティング](xref:mvc/controllers/routing)では、大文字と小文字が区別されません。
+* `[controller]` をコントローラーの名前 (慣例では "Controller" サフィックスを除くコントローラー クラス名) に置き換えます。 このサンプルでは、コントローラー クラス名は **Todo** Controller なので、コントローラー名は "todo" です。 ASP.NET Core の[ルーティング](xref:mvc/controllers/routing)では、大文字と小文字が区別されません。
 * `[HttpGet]` 属性にルート テンプレート (たとえば、`[HttpGet("products")]`) がある場合は、それをパスに追加します。 このサンプルではテンプレートを使用しません。 詳細については、「[Http[Verb] 属性を使用する属性ルーティング](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes)」を参照してください。
 
 次の `GetTodoItem` メソッドで、`"{id}"` は To Do アイテムの一意識別子に使用するプレースホルダーの変数です。 `GetTodoItem` が呼び出されると、その `id` パラメーター内のメソッドに URL の `"{id}"` の値が指定されます。
@@ -1328,7 +1328,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* **[Postman]**  >  **[ユーザー設定]** ( **[全般]** タブ) で、**SSL 証明書の検証**を無効にします。 あるいは、レンチを選択し、 **[設定]** を選択して、SSL 証明書の検証を無効にします。
+* **[Postman]**  >  **[ユーザー設定]** ( **[全般]** タブ) で、 **SSL 証明書の検証** を無効にします。 あるいは、レンチを選択し、 **[設定]** を選択して、SSL 証明書の検証を無効にします。
 
 ---
   
@@ -1443,7 +1443,7 @@ Postman を使用して、To Do アイテムを削除します。
 
 このセクションでは、JavaScript を使用して Web API を呼び出す HTML ページを追加します。 jQuery によって要求が開始されます。 JavaScript により、Web API の応答からの詳細を使ってページが更新されます。
 
-*Startup.cs* を次の強調表示されたコードで更新して、[静的ファイルを提供](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)し、[既定のファイル マッピングを有効にする](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)ためのアプリを構成します。
+*Startup.cs* を次の強調表示されたコードで更新して、 [静的ファイルを提供](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)し、 [既定のファイル マッピングを有効にする](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)ためのアプリを構成します。
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 

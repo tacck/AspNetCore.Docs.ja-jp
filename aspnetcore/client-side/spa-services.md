@@ -4,7 +4,7 @@ author: scottaddie
 description: ASP.NET Core と JavaScript サービスを使用してシングル ページ アプリケーション (SPA) を作成する利点について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: H1Hack27Feb2017
+ms.custom: H1Hack27Feb2017, devx-track-js
 ms.date: 09/06/2019
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 379a8f52dab36d331bc42c1fee8d64b3971e9e91
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 33ae16c033142aa1c0f4cea53ca746e8a6aaf052
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625662"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690661"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>ASP.NET Core で JavaScript サービスを使用してシングル ページ アプリケーションを作成する
 
@@ -84,7 +84,7 @@ SpaServices を使用するには、以下をインストールします。
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
-  * Visual Studio 2017 を使用している Windows では、 **.NET Core クロスプラットフォーム開発**ワークロードを選択すると SDK がインストールされます。
+  * Visual Studio 2017 を使用している Windows では、 **.NET Core クロスプラットフォーム開発** ワークロードを選択すると SDK がインストールされます。
 
 * [Microsoft.AspNetCore.SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices/) NuGet パッケージ
 
@@ -114,11 +114,11 @@ npm i -S aspnet-prerendering
 
 ### <a name="asp-prerender-module-tag-helper"></a>asp-prerender-module タグ ヘルパー
 
-前のコード例で使用されている `asp-prerender-module` タグ ヘルパーは、サーバーの Node.js で *ClientApp/dist/main-server.js* を実行します。 わかりやすくするために、*main-server.js* ファイルは、[Webpack](https://webpack.github.io/) ビルド プロセスで TypeScript から JavaScript へのトランスパイル タスクの成果物とします。 Webpack では `main-server` のエントリ ポイントの別名が定義されています。また、この別名の依存関係グラフの走査は、*ClientApp/boot-server.ts* ファイルから開始します。
+前のコード例で使用されている `asp-prerender-module` タグ ヘルパーは、サーバーの Node.js で *ClientApp/dist/main-server.js* を実行します。 わかりやすくするために、 *main-server.js* ファイルは、 [Webpack](https://webpack.github.io/) ビルド プロセスで TypeScript から JavaScript へのトランスパイル タスクの成果物とします。 Webpack では `main-server` のエントリ ポイントの別名が定義されています。また、この別名の依存関係グラフの走査は、 *ClientApp/boot-server.ts* ファイルから開始します。
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=53)]
 
-次の Angular の例では、*ClientApp/boot-server.ts* ファイルが `aspnet-prerendering` npm パッケージの `createServerRenderer` 関数と `RenderResult` 型を使用して Node.js によるサーバー レンダリングを構成しています。 サーバー側のレンダリング用の HTML マークアップは、resolve 関数呼び出しに渡されます。これは、厳密に型指定された JavaScript の `Promise` オブジェクトでラップされています。 `Promise` オブジェクトは、DOM のプレースホルダー要素に注入する HTML マークアップを非同期にページに渡すという重要な役割を果たしています。
+次の Angular の例では、 *ClientApp/boot-server.ts* ファイルが `aspnet-prerendering` npm パッケージの `createServerRenderer` 関数と `RenderResult` 型を使用して Node.js によるサーバー レンダリングを構成しています。 サーバー側のレンダリング用の HTML マークアップは、resolve 関数呼び出しに渡されます。これは、厳密に型指定された JavaScript の `Promise` オブジェクトでラップされています。 `Promise` オブジェクトは、DOM のプレースホルダー要素に注入する HTML マークアップを非同期にページに渡すという重要な役割を果たしています。
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-34,79-)]
 
@@ -132,7 +132,7 @@ npm i -S aspnet-prerendering
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-タグ ヘルパーで渡されるプロパティ名は、**パスカルケース**表記で表されます。 同じプロパティ名が**キャメルケース**で表される JavaScript とは対照的です。 既定の JSON シリアル化構成が、この違いに対応します。
+タグ ヘルパーで渡されるプロパティ名は、 **パスカルケース** 表記で表されます。 同じプロパティ名が **キャメルケース** で表される JavaScript とは対照的です。 既定の JSON シリアル化構成が、この違いに対応します。
 
 上のコード例を発展させると、サーバーからビューにデータを渡すことができます。そのためには、`resolve` 関数に渡す `globals` プロパティを設定します。
 
@@ -144,7 +144,7 @@ npm i -S aspnet-prerendering
 
 ## <a name="webpack-dev-middleware"></a>Webpack Dev ミドルウェア
 
-[Webpack Dev ミドルウェア](https://webpack.js.org/guides/development/#using-webpack-dev-middleware) は、Webpack が必要に応じてリソースを構築することで、合理化された開発ワークフローを実現します。 ページがブラウザーに再読み込みされると、ミドルウェアはクライアント側のリソースを自動的にコンパイルして提供します。 別の方法として、サードパーティの依存関係またはカスタム コードが変更されたときに、プロジェクトの npm ビルド スクリプトを介して Webpack を手動で呼び出す方法もあります。 次の例では、*package.json* ファイル内の npm ビルド スクリプトを示しています。
+[Webpack Dev ミドルウェア](https://webpack.js.org/guides/development/#using-webpack-dev-middleware) は、Webpack が必要に応じてリソースを構築することで、合理化された開発ワークフローを実現します。 ページがブラウザーに再読み込みされると、ミドルウェアはクライアント側のリソースを自動的にコンパイルして提供します。 別の方法として、サードパーティの依存関係またはカスタム コードが変更されたときに、プロジェクトの npm ビルド スクリプトを介して Webpack を手動で呼び出す方法もあります。 次の例では、 *package.json* ファイル内の npm ビルド スクリプトを示しています。
 
 ```json
 "build": "npm run build:vendor && npm run build:custom",
@@ -160,7 +160,7 @@ npm i -D aspnet-webpack
 
 ### <a name="webpack-dev-middleware-configuration"></a>Webpack Dev ミドルウェアの構成
 
-Webpack Dev ミドルウェアは、*Startup.cs* ファイルの `Configure` メソッドにある次のコードによって、HTTP 要求パイプラインに登録されます。
+Webpack Dev ミドルウェアは、 *Startup.cs* ファイルの `Configure` メソッドにある次のコードによって、HTTP 要求パイプラインに登録されます。
 
 [!code-csharp[](../client-side/spa-services/sample/SpaServicesSampleApp/Startup.cs?name=snippet_WebpackMiddlewareRegistration&highlight=4)]
 
@@ -242,7 +242,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 | MVC ASP.NET Core with React.js            | react      | [C#]     | Web/MVC/SPA |
 | MVC ASP.NET Core with React.js and Redux  | reactredux | [C#]     | Web/MVC/SPA |
 
-SPA テンプレートの 1 つを使用して新しいプロジェクトを作成するには、[dotnet new](/dotnet/core/tools/dotnet-new) コマンドでテンプレートの**短い形式の名前**を指定します。 次のコマンドは、サーバー側用に構成された ASP.NET Core MVC を使用して、Angular アプリケーションを作成します。
+SPA テンプレートの 1 つを使用して新しいプロジェクトを作成するには、 [dotnet new](/dotnet/core/tools/dotnet-new) コマンドでテンプレートの **短い形式の名前** を指定します。 次のコマンドは、サーバー側用に構成された ASP.NET Core MVC を使用して、Angular アプリケーションを作成します。
 
 ```dotnetcli
 dotnet new angular
@@ -252,10 +252,10 @@ dotnet new angular
 
 2 つのプライマリ ランタイム構成モードがあります。
 
-* **開発**:
+* **開発** :
   * デバッグを容易にするソース マップが含まれています。
   * パフォーマンス向上のためにクライアント側のコードを最適化することはしません。
-* **実稼働**:
+* **実稼働** :
   * ソース マップを除外します。
   * バンドルと縮小を使用して、クライアント側のコードを最適化します。
 
@@ -285,7 +285,7 @@ dotnet run
 
 SpaServices テンプレートは、[Karma](https://karma-runner.github.io/1.0/index.html) と [Jasmine](https://jasmine.github.io/) を使用してクライアント側のテストを実行するように事前構成されています。 Jasmine は JavaScript 用の一般的な単体テスト フレームワークであるのに対し、Karma はそれらのテストのテスト ランナーです。 Karma は [Webpack Dev ミドルウェア](#webpack-dev-middleware)と連携するように構成されています。これにより、開発者は、変更が行われるたびにテストを停止して実行する必要がなくなります。 テスト ケースまたはテスト ケース自体に対してコードが実行されているかどうかにかかわらず、テストは自動的に実行されます。
 
-例として、Angular アプリケーションを使用します。*counter.component.spec.ts* ファイルの `CounterComponent` に対し、2 つの Jasmine テスト ケースが既に提供されています。
+例として、Angular アプリケーションを使用します。 *counter.component.spec.ts* ファイルの `CounterComponent` に対し、2 つの Jasmine テスト ケースが既に提供されています。
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 
@@ -295,7 +295,7 @@ SpaServices テンプレートは、[Karma](https://karma-runner.github.io/1.0/i
 npm test
 ```
 
-このスクリプトは、Karma テスト ランナーを起動します。これにより、*karma.conf.js* ファイルで定義されている設定が読み取られます。 その他の設定として、*karma.conf.js* の `files` 配列で実行するテスト ファイルを指定できます。
+このスクリプトは、Karma テスト ランナーを起動します。これにより、 *karma.conf.js* ファイルで定義されている設定が読み取られます。 その他の設定として、 *karma.conf.js* の `files` 配列で実行するテスト ファイルを指定できます。
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/test/karma.conf.js?range=4-5,8-11)]
 
