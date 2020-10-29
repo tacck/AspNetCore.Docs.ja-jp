@@ -5,7 +5,7 @@ description: シングル ページ アプリケーション (SPA) として Bla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: e1af8f1de61edd934505a44e75ea07e0f09a67b5
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 2c160f21ccccb44f9047cf23c67bc191ad1b2b3d
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592957"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690376"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をセキュリティで保護する
 
@@ -91,7 +91,7 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 * `Pages` フォルダー内の各 Razor コンポーネントに属性を追加します。
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> を持つポリシーに <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> を設定することはサポートされて**いません**。
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> を持つポリシーに <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> を設定することはサポートされて **いません** 。
 
 ## <a name="refresh-tokens"></a>更新トークン
 
@@ -108,7 +108,7 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 
 ## <a name="implementation-guidance"></a>実装ガイダンス
 
-この「*概要*」の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。
+この「 *概要* 」の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。
 
 スタンドアロン Blazor WebAssembly アプリ:
 
@@ -123,4 +123,17 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 * [Azure Active Directory (AAD) B2C](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)
 * [Identity サーバー](xref:blazor/security/webassembly/hosted-with-identity-server)
 
-構成の詳細なガイダンスについては、<xref:blazor/security/webassembly/additional-scenarios> を参照してください。
+::: moniker range=">= aspnetcore-5.0"
+
+構成に関するその他のガイダンスについては、次の記事を参照してください。
+
+* <xref:blazor/security/webassembly/additional-scenarios>
+* <xref:blazor/security/webassembly/graph-api>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+構成に関するその他のガイダンスについては、「<xref:blazor/security/webassembly/additional-scenarios>」をご覧ください。
+
+::: moniker-end
