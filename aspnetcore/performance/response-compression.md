@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9327c98c22a4d42d31ea8ba1eb8337153040b5b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634996"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056973"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core での応答圧縮
 
@@ -53,7 +54,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、 `Accept-Encoding` 要求と共にヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに、 `Content-Encoding` 圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | 説明 |
+| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | [説明] |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | あり (既定)        | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -69,7 +70,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 ミドルウェアは、 `q` 圧縮スキームの優先順位を決定するためにクライアントから送信されるときに、品質の値 (qvalue,) の重み付けに対応できます。 詳細については、「 [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4)」を参照してください。
 
-圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
+圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの *効果* は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
 
 次の表では、圧縮されたコンテンツの要求、送信、キャッシュ、および受信に関連するヘッダーについて説明します。
 
@@ -112,16 +113,16 @@ public class Startup
 
 メモ:
 
-* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、<xref:fundamentals/middleware/index#middleware-order> を参照してください。
+* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、「<xref:fundamentals/middleware/index#middleware-order>」を参照してください。
 * [Fiddler](https://www.telerik.com/fiddler)、[消火バグ](https://getfirebug.com/)、 [Postman](https://www.getpostman.com/)などのツールを使用して要求ヘッダーを設定 `Accept-Encoding` し、応答ヘッダー、サイズ、および本文を調査します。
 
 ヘッダーを使用せずにサンプルアプリに要求を送信 `Accept-Encoding` し、応答が圧縮されていないことを確認します。 `Content-Encoding` `Vary` 応答にヘッダーとヘッダーが存在しません。
 
-![Fiddler ウィンドウには、要求の結果が表示され、エンコーディングヘッダーはありません。 応答が圧縮されていません。](response-compression/_static/request-uncompressed.png)
+![Accept-Encoding ヘッダーのない要求の結果を示す Fiddler ウィンドウ。 応答が圧縮されていません。](response-compression/_static/request-uncompressed.png)
 
 ヘッダー (Brotli compression) を使用してサンプルアプリに要求を送信 `Accept-Encoding: br` し、応答が圧縮されていることを確認します。 `Content-Encoding` `Vary` 応答には、ヘッダーとヘッダーが存在します。
 
-![Fiddler ウィンドウには、要求の結果が表示されます。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。 応答は圧縮されます。](response-compression/_static/request-compressed-br.png)
+![Accept-Encoding ヘッダーと br の値を含む要求の結果を示す Fiddler ウィンドウ。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。 応答は圧縮されます。](response-compression/_static/request-compressed-br.png)
 
 ## <a name="providers"></a>プロバイダー
 
@@ -147,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに設定 <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions> します。 Brotli 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | 説明 |
+| Compression Level | [説明] |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -187,7 +188,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに設定 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions> します。 Gzip 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | 説明 |
+| Compression Level | [説明] |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -218,7 +219,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ヘッダーを使用してサンプルアプリに要求を送信し、応答ヘッダーを確認し `Accept-Encoding: mycustomcompression` ます。 `Vary` `Content-Encoding` 応答には、ヘッダーとヘッダーが存在します。 このサンプルでは、応答本文 (表示されません) は圧縮されません。 サンプルのクラスには圧縮実装がありません `CustomCompressionProvider` 。 ただし、このサンプルでは、このような圧縮アルゴリズムを実装する場所を示しています。
 
-![Fiddler ウィンドウには、要求の結果がエンコーディングヘッダーと mycustomcompression の値と共に表示されます。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。](response-compression/_static/request-custom-compression.png)
+![Accept-Encoding ヘッダーと mycustomcompression の値を含む要求の結果を示す Fiddler ウィンドウ。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME タイプ
 
@@ -233,7 +234,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-応答の圧縮ミドルウェアオプションを使用して、MIME の種類を置換または追加します。 などのワイルドカードの MIME 型はサポートされていないことに注意して `text/*` ください。 このサンプルアプリでは、の MIME の種類を追加 `image/svg+xml` し、ASP.NET Core バナーイメージ (*横断幕*) を圧縮して提供します。
+応答の圧縮ミドルウェアオプションを使用して、MIME の種類を置換または追加します。 などのワイルドカードの MIME 型はサポートされていないことに注意して `text/*` ください。 このサンプルアプリでは、の MIME の種類を追加 `image/svg+xml` し、ASP.NET Core バナーイメージ ( *横断幕* ) を圧縮して提供します。
 
 [!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -262,7 +263,7 @@ public void ConfigureServices(IServiceCollection services)
 * 要求にヘッダーを含めることはできません `Content-Range` 。
 * 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、 [前述](#compression-with-secure-protocol) の危険に注意してください。*
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -299,7 +300,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、 `Accept-Encoding` 要求と共にヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに、 `Content-Encoding` 圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | 説明 |
+| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | [説明] |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | あり (既定)        | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -315,7 +316,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 ミドルウェアは、 `q` 圧縮スキームの優先順位を決定するためにクライアントから送信されるときに、品質の値 (qvalue,) の重み付けに対応できます。 詳細については、「 [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4)」を参照してください。
 
-圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
+圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの *効果* は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
 
 次の表では、圧縮されたコンテンツの要求、送信、キャッシュ、および受信に関連するヘッダーについて説明します。
 
@@ -358,16 +359,16 @@ public class Startup
 
 メモ:
 
-* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、<xref:fundamentals/middleware/index#middleware-order> を参照してください。
+* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、「<xref:fundamentals/middleware/index#middleware-order>」を参照してください。
 * [Fiddler](https://www.telerik.com/fiddler)、[消火バグ](https://getfirebug.com/)、 [Postman](https://www.getpostman.com/)などのツールを使用して要求ヘッダーを設定 `Accept-Encoding` し、応答ヘッダー、サイズ、および本文を調査します。
 
 ヘッダーを使用せずにサンプルアプリに要求を送信 `Accept-Encoding` し、応答が圧縮されていないことを確認します。 `Content-Encoding` `Vary` 応答にヘッダーとヘッダーが存在しません。
 
-![Fiddler ウィンドウには、要求の結果が表示され、エンコーディングヘッダーはありません。 応答が圧縮されていません。](response-compression/_static/request-uncompressed.png)
+![Accept-Encoding ヘッダーのない要求の結果を示す Fiddler ウィンドウ。 応答が圧縮されていません。](response-compression/_static/request-uncompressed.png)
 
 ヘッダー (Brotli compression) を使用してサンプルアプリに要求を送信 `Accept-Encoding: br` し、応答が圧縮されていることを確認します。 `Content-Encoding` `Vary` 応答には、ヘッダーとヘッダーが存在します。
 
-![Fiddler ウィンドウには、要求の結果が表示されます。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。 応答は圧縮されます。](response-compression/_static/request-compressed-br.png)
+![Accept-Encoding ヘッダーと br の値を含む要求の結果を示す Fiddler ウィンドウ。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。 応答は圧縮されます。](response-compression/_static/request-compressed-br.png)
 
 ## <a name="providers"></a>プロバイダー
 
@@ -393,7 +394,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに設定 <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions> します。 Brotli 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | 説明 |
+| Compression Level | [説明] |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -433,7 +434,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに設定 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions> します。 Gzip 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | 説明 |
+| Compression Level | [説明] |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -463,7 +464,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ヘッダーを使用してサンプルアプリに要求を送信し、応答ヘッダーを確認し `Accept-Encoding: mycustomcompression` ます。 `Vary` `Content-Encoding` 応答には、ヘッダーとヘッダーが存在します。 このサンプルでは、応答本文 (表示されません) は圧縮されません。 サンプルのクラスには圧縮実装がありません `CustomCompressionProvider` 。 ただし、このサンプルでは、このような圧縮アルゴリズムを実装する場所を示しています。
 
-![Fiddler ウィンドウには、要求の結果がエンコーディングヘッダーと mycustomcompression の値と共に表示されます。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。](response-compression/_static/request-custom-compression.png)
+![Accept-Encoding ヘッダーと mycustomcompression の値を含む要求の結果を示す Fiddler ウィンドウ。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME タイプ
 
@@ -478,7 +479,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-応答の圧縮ミドルウェアオプションを使用して、MIME の種類を置換または追加します。 などのワイルドカードの MIME 型はサポートされていないことに注意して `text/*` ください。 このサンプルアプリでは、の MIME の種類を追加 `image/svg+xml` し、ASP.NET Core バナーイメージ (*横断幕*) を圧縮して提供します。
+応答の圧縮ミドルウェアオプションを使用して、MIME の種類を置換または追加します。 などのワイルドカードの MIME 型はサポートされていないことに注意して `text/*` ください。 このサンプルアプリでは、の MIME の種類を追加 `image/svg+xml` し、ASP.NET Core バナーイメージ ( *横断幕* ) を圧縮して提供します。
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -507,7 +508,7 @@ public void ConfigureServices(IServiceCollection services)
 * 要求にヘッダーを含めることはできません `Content-Range` 。
 * 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、 [前述](#compression-with-secure-protocol) の危険に注意してください。*
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -544,7 +545,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 クライアントは、圧縮されたコンテンツを処理できる場合、 `Accept-Encoding` 要求と共にヘッダーを送信することによって、その機能をサーバーに通知する必要があります。 サーバーは、圧縮されたコンテンツを送信するときに、 `Content-Encoding` 圧縮された応答のエンコード方法に関する情報をヘッダーに含める必要があります。 次の表に、ミドルウェアでサポートされているコンテンツエンコードの表記を示します。
 
-| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | 説明 |
+| `Accept-Encoding` ヘッダー値 | サポートされているミドルウェア | [説明] |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | いいえ                   | [Brotli 圧縮データ形式](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | いいえ                   | [圧縮データ形式の DEFLATE](https://tools.ietf.org/html/rfc1951) |
@@ -560,7 +561,7 @@ IIS、Apache、または Nginx のサーバーベースの応答圧縮テクノ�
 
 ミドルウェアは、 `q` 圧縮スキームの優先順位を決定するためにクライアントから送信されるときに、品質の値 (qvalue,) の重み付けに対応できます。 詳細については、「 [RFC 7231: Accept-Encoding](https://tools.ietf.org/html/rfc7231#section-5.3.4)」を参照してください。
 
-圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの*効果*は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
+圧縮アルゴリズムは、圧縮速度と圧縮の効果のトレードオフの影響を受けます。 このコンテキストの *効果* は、圧縮後の出力のサイズを示します。 最小サイズは *最適* な圧縮によって実現されます。
 
 次の表では、圧縮されたコンテンツの要求、送信、キャッシュ、および受信に関連するヘッダーについて説明します。
 
@@ -603,16 +604,16 @@ public class Startup
 
 メモ:
 
-* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、<xref:fundamentals/middleware/index#middleware-order> を参照してください。
+* `app.UseResponseCompression` 応答を圧縮するミドルウェアの前にを呼び出す必要があります。 詳細については、「<xref:fundamentals/middleware/index#middleware-order>」を参照してください。
 * [Fiddler](https://www.telerik.com/fiddler)、[消火バグ](https://getfirebug.com/)、 [Postman](https://www.getpostman.com/)などのツールを使用して要求ヘッダーを設定 `Accept-Encoding` し、応答ヘッダー、サイズ、および本文を調査します。
 
 ヘッダーを使用せずにサンプルアプリに要求を送信 `Accept-Encoding` し、応答が圧縮されていないことを確認します。 `Content-Encoding` `Vary` 応答にヘッダーとヘッダーが存在しません。
 
-![Fiddler ウィンドウには、要求の結果が表示され、エンコーディングヘッダーはありません。 応答が圧縮されていません。](response-compression/_static/request-uncompressed.png)
+![Accept-Encoding ヘッダーのない要求の結果を示す Fiddler ウィンドウ。 応答が圧縮されていません。](response-compression/_static/request-uncompressed.png)
 
 ヘッダーを使用してサンプルアプリに要求を送信 `Accept-Encoding: gzip` し、応答が圧縮されていることを確認します。 `Content-Encoding` `Vary` 応答には、ヘッダーとヘッダーが存在します。
 
-![Fiddler ウィンドウには、要求の結果がエンコーディングヘッダーと gzip の値で表示されます。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。 応答は圧縮されます。](response-compression/_static/request-compressed.png)
+![Accept-Encoding ヘッダーと gzip の値を持つ要求の結果を示す Fiddler ウィンドウ。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。 応答は圧縮されます。](response-compression/_static/request-compressed.png)
 
 ## <a name="providers"></a>プロバイダー
 
@@ -638,7 +639,7 @@ public void ConfigureServices(IServiceCollection services)
 
 圧縮レベルをに設定 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions> します。 Gzip 圧縮プロバイダーは、既定で最も高速な圧縮レベル ([CompressionLevel](xref:System.IO.Compression.CompressionLevel)) に設定されています。これにより、圧縮率が最も高くなる可能性があります。 最も効率的な圧縮が必要な場合は、最適な圧縮のためにミドルウェアを構成します。
 
-| Compression Level | 説明 |
+| Compression Level | [説明] |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は、結果の出力が最適に圧縮されない場合でも、できるだけ早く完了する必要があります。 |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 圧縮は実行されません。 |
@@ -668,7 +669,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ヘッダーを使用してサンプルアプリに要求を送信し、応答ヘッダーを確認し `Accept-Encoding: mycustomcompression` ます。 `Vary` `Content-Encoding` 応答には、ヘッダーとヘッダーが存在します。 このサンプルでは、応答本文 (表示されません) は圧縮されません。 サンプルのクラスには圧縮実装がありません `CustomCompressionProvider` 。 ただし、このサンプルでは、このような圧縮アルゴリズムを実装する場所を示しています。
 
-![Fiddler ウィンドウには、要求の結果がエンコーディングヘッダーと mycustomcompression の値と共に表示されます。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。](response-compression/_static/request-custom-compression.png)
+![Accept-Encoding ヘッダーと mycustomcompression の値を含む要求の結果を示す Fiddler ウィンドウ。 Vary ヘッダーと Content-type ヘッダーが応答に追加されます。](response-compression/_static/request-custom-compression.png)
 
 ## <a name="mime-types"></a>MIME タイプ
 
@@ -683,7 +684,7 @@ public void ConfigureServices(IServiceCollection services)
 * `text/plain`
 * `text/xml`
 
-応答の圧縮ミドルウェアオプションを使用して、MIME の種類を置換または追加します。 などのワイルドカードの MIME 型はサポートされていないことに注意して `text/*` ください。 このサンプルアプリでは、の MIME の種類を追加 `image/svg+xml` し、ASP.NET Core バナーイメージ (*横断幕*) を圧縮して提供します。
+応答の圧縮ミドルウェアオプションを使用して、MIME の種類を置換または追加します。 などのワイルドカードの MIME 型はサポートされていないことに注意して `text/*` ください。 このサンプルアプリでは、の MIME の種類を追加 `image/svg+xml` し、ASP.NET Core バナーイメージ ( *横断幕* ) を圧縮して提供します。
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -712,7 +713,7 @@ public void ConfigureServices(IServiceCollection services)
 * 要求にヘッダーを含めることはできません `Content-Range` 。
 * 応答圧縮ミドルウェアのオプションで secure protocol (https) が構成されている場合を除き、要求では安全でないプロトコル (http) を使用する必要があります。 *セキュリティで保護されたコンテンツの圧縮を有効にする場合は、 [前述](#compression-with-secure-protocol) の危険に注意してください。*
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

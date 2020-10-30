@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cf0415e7d72e21a48db8bbeb4540f05e0b0a4198
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633033"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057922"
 ---
 # <a name="use-web-api-analyzers"></a>Web API アナライザーを使用する
 
@@ -59,7 +60,7 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **[パッケージ マネージャー コンソール]** ウィンドウから:
-  * [ **View** > **その他の Windows** > **パッケージマネージャーコンソール**の表示] にアクセスします。
+  * [ **View** > **その他の Windows** > **パッケージマネージャーコンソール** の表示] にアクセスします。
   * *ApiConventions.csproj* ファイルが存在するディレクトリに移動します。
   * 次のコマンドを実行します。
 
@@ -69,14 +70,14 @@ ASP.NET Core 3.0 以降、アナライザーは .NET Core SDK に含まれてい
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* [パッケージの*Packages* **Solution Pad** > **追加**] Solution Pad の [パッケージ] フォルダーを右クリックします。
+* [パッケージの *Packages* **Solution Pad** > **追加** ] Solution Pad の [パッケージ] フォルダーを右クリックします。
 * [ **パッケージの追加** ] ウィンドウの [ **ソース** ] ドロップダウンを [nuget.org] に設定します。
 * 検索ボックスに「Microsoft.AspNetCore.Mvc.Api.Analyzers」と入力します。
-* 結果ウィンドウから "Microsoft.AspNetCore.Mvc.Api.Analyzers" パッケージを選択して、[**パッケージを追加**] をクリックします。
+* 結果ウィンドウから "Microsoft.AspNetCore.Mvc.Api.Analyzers" パッケージを選択して、[ **パッケージを追加** ] をクリックします。
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**統合ターミナル**からから次のコマンドを実行します。
+**統合ターミナル** からから次のコマンドを実行します。
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers

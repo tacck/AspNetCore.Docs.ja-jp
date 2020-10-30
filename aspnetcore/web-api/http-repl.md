@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
 ms.date: 05/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: b12f4b10230f2631392011a6e443156bf9a2d843
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: efd2208044ad6392131216266afc34187d738b78
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491445"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058975"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL を使用して Web API をテストする
 
@@ -61,7 +62,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 [.Net Core グローバル ツール](/dotnet/core/tools/global-tools#install-a-global-tool)は、[Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet パッケージからインストールされます。
 
-## <a name="usage"></a>使用法
+## <a name="usage"></a>使用
 
 ツールのインストールが正常に完了したら、次のコマンドを実行して HTTP REPL を開始します。
 
@@ -145,7 +146,7 @@ HTTP REPL では、コマンド補完が提供されています。 <kbd>Tab</kb
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>` は、Web API のベース URI です。 以下に例を示します。
+`<ROOT URI>` は、Web API のベース URI です。 次に例を示します。
 
 ```console
 httprepl https://localhost:5001
@@ -157,7 +158,7 @@ httprepl https://localhost:5001
 connect <ROOT URI>
 ```
 
-以下に例を示します。
+次に例を示します。
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -171,7 +172,7 @@ connect <ROOT URI>
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-以下に例を示します。
+次に例を示します。
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -210,7 +211,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-または、`ui` コマンドを実行して、ブラウザーで Web API の Swagger UI ページを開きます。 以下に例を示します。
+または、`ui` コマンドを実行して、ブラウザーで Web API の Swagger UI ページを開きます。 次に例を示します。
 
 ```console
 https://localhost:5001/~ ui
@@ -254,7 +255,7 @@ HTTP REPL の既定の[色](#set-color-preferences)はカスタマイズでき�
 
 ### <a name="view-the-settings"></a>設定を表示する
 
-使用可能な設定を表示するには、`pref get` コマンドを実行します。 以下に例を示します。
+使用可能な設定を表示するには、`pref get` コマンドを実行します。 次に例を示します。
 
 ```console
 https://localhost:5001/~ pref get
@@ -292,7 +293,7 @@ https://localhost:5001/people~ pref set colors.json White
 
 ### <a name="set-indentation-size"></a>インデントのサイズを設定する
 
-応答インデント サイズのカスタマイズは、現在、JSON でのみサポートされています。 既定のサイズは 2 つのスペースです。 以下に例を示します。
+応答インデント サイズのカスタマイズは、現在、JSON でのみサポートされています。 既定のサイズは 2 つのスペースです。 次に例を示します。
 
 ```json
 [
@@ -381,7 +382,7 @@ HTTP REPL には既定の相対パスのセットがあり、`connect` コマン
 - */swagger.js*
 - */swagger/v1/swagger.json*
 
-環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。 値としては、パイプで区切られた相対パスのリストを指定する必要があります。 以下に例を示します。
+環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。 値としては、パイプで区切られた相対パスのリストを指定する必要があります。 次に例を示します。
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -501,7 +502,7 @@ HTTP POST 要求を発行するには、次のようにします。
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 以下に例を示します。
+    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 次に例を示します。
 
     ```json
     {
@@ -565,7 +566,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 HTTP PUT 要求を発行するには、次のようにします。
 
-1. *省略可能*: コマンドを実行し `get` て、変更前にデータを表示します。
+1. *省略可能* : コマンドを実行し `get` て、変更前にデータを表示します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -597,7 +598,7 @@ HTTP PUT 要求を発行するには、次のようにします。
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 以下に例を示します。
+    前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。 既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。 次に例を示します。
 
     ```json
     {
@@ -627,7 +628,7 @@ HTTP PUT 要求を発行するには、次のようにします。
     Server: Kestrel
     ```
 
-1. *省略可能*: コマンドを発行し `get` て変更を確認します。 たとえば、テキスト エディターで「Cherry」と入力すると、`get` は次を返します。
+1. *省略可能* : コマンドを発行し `get` て変更を確認します。 たとえば、テキスト エディターで「Cherry」と入力すると、`get` は次を返します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -678,7 +679,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 HTTP DELETE 要求を発行するには、次のようにします。
 
-1. *省略可能*: コマンドを実行し `get` て、変更前にデータを表示します。
+1. *省略可能* : コマンドを実行し `get` て、変更前にデータを表示します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -718,7 +719,7 @@ HTTP DELETE 要求を発行するには、次のようにします。
     Server: Kestrel
     ```
 
-1. *省略可能*: コマンドを発行し `get` て変更を確認します。 この例では、`get` は次を返します。
+1. *省略可能* : コマンドを発行し `get` て変更を確認します。 この例では、`get` は次を返します。
 
     ```console
     https://localhost:5001/fruits~ get
@@ -803,7 +804,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使用します。
 
-* HTTP 要求でインラインを設定します。 以下に例を示します。
+* HTTP 要求でインラインを設定します。 次に例を示します。
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -811,13 +812,13 @@ HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使
     
     上記の方法では、個別の HTTP 要求ヘッダーごとに独自の `-h` オプションが必要です。
 
-* HTTP 要求を送信する前に設定します。 以下に例を示します。
+* HTTP 要求を送信する前に設定します。 次に例を示します。
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    要求を送信する前にヘッダーを設定すると、コマンド シェル セッションの間はヘッダーが設定されたままになります。 ヘッダーをクリアするには、空の値を指定します。 以下に例を示します。
+    要求を送信する前にヘッダーを設定すると、コマンド シェル セッションの間はヘッダーが設定されたままになります。 ヘッダーをクリアするには、空の値を指定します。 次に例を示します。
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -927,14 +928,14 @@ Azure でホストされたエンドポイントにアクセスしたり、[Azur
 
 ### <a name="enable-request-display"></a>要求の表示を有効にする
 
-`echo on` コマンドを実行して、送信中の HTTP 要求を表示します。 以下に例を示します。
+`echo on` コマンドを実行して、送信中の HTTP 要求を表示します。 次に例を示します。
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-現在のセッションの後続の HTTP 要求では、要求ヘッダーが表示されます。 以下に例を示します。
+現在のセッションの後続の HTTP 要求では、要求ヘッダーが表示されます。 次に例を示します。
 
 ```console
 https://localhost:5001/people~ post
@@ -972,7 +973,7 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>要求の表示を無効にする
 
-`echo off` コマンドを実行して、送信中の HTTP 要求の表示を抑制します。 以下に例を示します。
+`echo off` コマンドを実行して、送信中の HTTP 要求の表示を抑制します。 次に例を示します。
 
 ```console
 https://localhost:5001/people~ echo off
@@ -981,7 +982,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>[スクリプトの実行]
 
-HTTP REPL コマンドの同じセットを頻繁に実行する場合は、それらをテキスト ファイルに格納することを検討してください。 ファイル内のコマンドは、コマンド ラインで手動で実行した場合と同じ形式になります。 これらのコマンドは、`run` コマンドを使用してバッチ方式で実行できます。 以下に例を示します。
+HTTP REPL コマンドの同じセットを頻繁に実行する場合は、それらをテキスト ファイルに格納することを検討してください。 ファイル内のコマンドは、コマンド ラインで手動で実行した場合と同じ形式になります。 これらのコマンドは、`run` コマンドを使用してバッチ方式で実行できます。 次に例を示します。
 
 1. 改行で区切られた一連のコマンドを含むテキスト ファイルを作成します。 例として、次のコマンドを含む *people-script.txt* ファイルについて考えてみましょう。
 
@@ -993,7 +994,7 @@ HTTP REPL コマンドの同じセットを頻繁に実行する場合は、そ�
     get 1
     ```
 
-1. `run` コマンドを実行し、テキスト ファイルのパスを渡します。 以下に例を示します。
+1. `run` コマンドを実行し、テキスト ファイルのパスを渡します。 次に例を示します。
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt
@@ -1063,7 +1064,7 @@ https://localhost:5001/~ clear
 https://localhost:5001/~
 ```
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [REST API 要求](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HTTP REPL GitHub リポジトリ](https://github.com/dotnet/HttpRepl)

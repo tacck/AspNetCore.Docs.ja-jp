@@ -5,6 +5,7 @@ description: RazorWeb ページにサーバーベースのコードを埋め込�
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
-ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
+ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89101362"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059196"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core の構文リファレンス
 
 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)、 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor は、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml*は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル (*razor*) にもあります。
+Razor は、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml* は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル ( *razor* ) にもあります。
 
 ## <a name="rendering-html"></a>HTML のレンダリング
 
-既定の Razor 言語は HTML です。 マークアップから html をレンダリング Razor することは、html ファイルから html をレンダリングする場合と同じです。 ファイル *内の*HTML マークアップ Razor は、サーバーによって変更されずに表示されます。
+既定の Razor 言語は HTML です。 マークアップから html をレンダリング Razor することは、html ファイルから html をレンダリングする場合と同じです。 ファイル *内の* HTML マークアップ Razor は、サーバーによって変更されずに表示されます。
 
 ## <a name="no-locrazor-syntax"></a>Razor の構文
 
@@ -72,7 +73,7 @@ C# の `await` キーワードを除き、暗黙的な式にスペースを含�
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-暗黙的な式では、山かっこ (`<>`) の内側の文字は HTML タグとして解釈されるため、C# ジェネリックを含めることは**できません**。 次のコードは有効では**ありません**。
+暗黙的な式では、山かっこ (`<>`) の内側の文字は HTML タグとして解釈されるため、C# ジェネリックを含めることは **できません** 。 次のコードは有効では **ありません** 。
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
@@ -496,7 +497,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ::: moniker-end
 
-たとえば、次のように入力します。
+次に例を示します。
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -624,7 +625,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 @model TypeNameOfModel
 ```
 
-Razor個々のユーザーアカウントで作成された ASP.NET CORE MVC またはページアプリでは、 *Views/Account/Login. cshtml*には次のモデル宣言が含まれています。
+Razor個々のユーザーアカウントで作成された ASP.NET CORE MVC またはページアプリでは、 *Views/Account/Login. cshtml* には次のモデル宣言が含まれています。
 
 ```cshtml
 @model LoginViewModel
@@ -661,7 +662,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 * *Pages/_ViewImports.cshtml* に `@namespace Hello.World` が含まれます。
 * 各ページには、その名前空間のルートとして `Hello.World` が含まれます。
 
-| Page                                        | 名前空間                             |
+| ページ                                        | 名前空間                             |
 | ------------------------------------------- | ------------------------------------- |
 | *Pages/Index. cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
@@ -671,9 +672,9 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 複数のインポート ファイルに `@namespace` ディレクティブがあるとき、ディレクトリ ツリーでページ、ビュー、またはコンポーネントに最も近いファイルがルート名前空間の設定に使用されます。
 
-前の例の *EvenMorePages* フォルダーに `@namespace Another.Planet` が含まれるインポート ファイルがある場合 (または、*Pages/MorePages/EvenMorePages/Page.cshtml* ファイルに `@namespace Another.Planet` が含まれる場合)、結果は次の表のようになります。
+前の例の *EvenMorePages* フォルダーに `@namespace Another.Planet` が含まれるインポート ファイルがある場合 (または、 *Pages/MorePages/EvenMorePages/Page.cshtml* ファイルに `@namespace Another.Planet` が含まれる場合)、結果は次の表のようになります。
 
-| Page                                        | 名前空間               |
+| ページ                                        | 名前空間               |
 | ------------------------------------------- | ----------------------- |
 | *Pages/Index. cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
@@ -685,14 +686,14 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 `@page` ディレクティブには、それが表示されるファイルの型によって、さまざまな効果があります。 ディレクティブ:
 
-* は、ファイルがページであることを示し*ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
+* は、ファイルがページであることを示し *ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
 * コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し*ます。* Razor 詳細については、「<xref:razor-pages/index>」を参照してください。
+`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し *ます。* Razor 詳細については、「<xref:razor-pages/index>」を参照してください。
 
 ::: moniker-end
 
@@ -883,7 +884,7 @@ Razorメソッドの引数としてインラインテンプレートを指定す
 
 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)に関する 3 つのディレクティブがあります。
 
-| ディレクティブ | 関数 |
+| ディレクティブ | 機能 |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | ビューでタグ ヘルパーを使えるようにします。 |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 前に追加したタグ ヘルパーをビューから削除します。 |
@@ -930,7 +931,7 @@ C# の Razor キーワードは、を使用してダブルエスケープする�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2.1 以降では、 [ Razor SDK](xref:razor-pages/sdk)によってファイルのコンパイルが処理さ Razor れます。 プロジェクトをビルドすると、SDK によって、 Razor プロジェクトルートに*obj/<build_configuration> Razor /<target_framework_moniker/* ディレクトリが生成されます。 ディレクトリ内のディレクトリ構造は、 *Razor* プロジェクトのディレクトリ構造をミラー化します。
+.NET Core SDK 2.1 以降では、 [ Razor SDK](xref:razor-pages/sdk)によってファイルのコンパイルが処理さ Razor れます。 プロジェクトをビルドすると、SDK によって、 Razor プロジェクトルートに *obj/<build_configuration>Razor /<target_framework_moniker/* ディレクトリが生成されます。 ディレクトリ内のディレクトリ構造は、 *Razor* プロジェクトのディレクトリ構造をミラー化します。
 
 .NET Core 2.1 を対象とする ASP.NET Core 2.1 ページプロジェクトでは、次のディレクトリ構造について考えてみ Razor ます。
 
@@ -968,7 +969,7 @@ C# の Razor キーワードは、を使用してダブルエスケープする�
            Index.g.cshtml.cs
 ```
 
-*Pages/Index. cshtml*の生成されたクラスを表示するには、 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs*を開きます。
+*Pages/Index. cshtml* の生成されたクラスを表示するには、 *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs* を開きます。
 
 ::: moniker-end
 
@@ -993,7 +994,7 @@ C# の Razor キーワードは、を使用してダブルエスケープする�
 Razorビューエンジンは、ビューに対して大文字と小文字を区別して検索を実行します。 ただし、実際の参照は、基になるファイル システムによって決定されます。
 
 * ファイル ベースのソース:
-  * 大文字と小文字が区別されないファイル システムを使っているオペレーティング システム (Windows など) では、物理的なファイル プロバイダーの参照は大文字と小文字を区別しません。 たとえば、`return View("Test")` は、*/Views/Home/Test.cshtml*、*/Views/home/test.cshtml*、その他のすべての大文字と小文字のバリエーションと一致します。
+  * 大文字と小文字が区別されないファイル システムを使っているオペレーティング システム (Windows など) では、物理的なファイル プロバイダーの参照は大文字と小文字を区別しません。 たとえば、`return View("Test")` は、 */Views/Home/Test.cshtml* 、 */Views/home/test.cshtml* 、その他のすべての大文字と小文字のバリエーションと一致します。
   * 大文字と小文字が区別されるファイル システム (たとえば、Linux、OSX、および `EmbeddedFileProvider`) では、参照は大文字と小文字を区別します。 たとえば、`return View("Test")` は */Views/Home/Test.cshtml* だけと一致します。
 * プリコンパイル済みのビュー: ASP.NET Core 2.0 以降では、プリコンパイル済みのビューの参照は、すべてのオペレーティング システムで大文字と小文字を区別しません。 動作は、Windows での物理ファイル プロバイダーの動作と同じです。 2 つのプリコンパイル済みビューの相違点が大文字と小文字の使い分けだけの場合、参照の結果はどちらになるかわかりません。
 
@@ -1004,6 +1005,6 @@ Razorビューエンジンは、ビューに対して大文字と小文字を区
 
 大文字と小文字の使い分けを一致させると、展開は基になっているファイル システムに関係なくビューを検索できます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 を[使用した ASP.NET Web プログラミング Razor の概要構文には、](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c)構文を使用したプログラミングの多くのサンプルが用意されて Razor います。

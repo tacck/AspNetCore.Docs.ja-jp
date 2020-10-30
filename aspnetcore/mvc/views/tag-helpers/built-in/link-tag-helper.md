@@ -6,6 +6,7 @@ description: ASP.NET Core リンク タグ ヘルパーの属性と、HTML リ�
 ms.custom: mvc
 ms.date: 09/24/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: 09507294b90f08bbaf134f611aad0b91504ccffb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7998cec94ebb56cbe6dbc321f7cb499260d6fe74
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635074"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059118"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core のリンク タグ ヘルパー
 
@@ -58,11 +59,11 @@ ms.locfileid: "88635074"
 
 ### <a name="asp-fallback-test-class"></a>asp-fallback-test-class
 
-フォールバック テストで使用するためにスタイルシートに定義されているクラス名。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass> を参照してください。
+フォールバック テストで使用するためにスタイルシートに定義されているクラス名。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>」を参照してください。
 
 ### <a name="asp-fallback-test-property"></a>asp-fallback-test-property
 
-フォールバック テストで使用する CSS プロパティ名。 詳細については、<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty> を参照してください。
+フォールバック テストで使用する CSS プロパティ名。 詳細については、「<xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>」を参照してください。
 
 ### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
 

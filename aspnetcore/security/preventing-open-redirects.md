@@ -5,6 +5,7 @@ description: ASP.NET Core アプリに対するオープンリダイレクト攻
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e546cd852367921c7c694db3639f7a233f606e75
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633462"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058390"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core でのオープンリダイレクト攻撃の防止
 
@@ -39,7 +40,7 @@ Web アプリケーションは、認証を必要とするリソースにアク�
 
 悪意のあるユーザーが、悪意のあるユーザーがユーザーの資格情報や機密情報にアクセスできるようにする攻撃を開発することができます。 攻撃を開始するために、悪意のあるユーザーは、 `returnUrl` URL にクエリ文字列値が追加されたサイトのログインページへのリンクをクリックするようユーザーに仕向けるます。 たとえば、にログインページを含むのアプリについて考えてみ `contoso.com` `http://contoso.com/Account/LogOn?returnUrl=/Home/About` ます。 攻撃は、次の手順を実行します。
 
-1. ユーザーがの悪意のあるリンクをクリックした `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (2 番目の URL は "contoso**1**.com" で、"contoso.com" ではありません)。
+1. ユーザーがの悪意のあるリンクをクリックした `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (2 番目の URL は "contoso **1** .com" で、"contoso.com" ではありません)。
 2. ユーザーは正常にログインしました。
 3. (サイトによって) ユーザーは、 `http://contoso1.com/Account/LogOn` (実際のサイトとまったく同じように見える悪意のあるサイト) にリダイレクトされます。
 4. ユーザーはもう一度ログインし (悪意のあるサイトに資格情報を提供)、実際のサイトにリダイレクトされます。

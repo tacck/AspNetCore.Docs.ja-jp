@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631876"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059014"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core での応答のキャッシュ
 
@@ -38,7 +39,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 ## <a name="http-based-response-caching"></a>HTTP ベースの応答のキャッシュ
 
-[HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234)では、インターネットキャッシュの動作方法について説明します。 キャッシュに使用されるプライマリ HTTP ヘッダーは [cache-control](https://tools.ietf.org/html/rfc7234#section-5.2)で、キャッシュ *ディレクティブ*を指定するために使用されます。 ディレクティブは、要求に応じてキャッシュ動作を制御し、応答としてサーバーからクライアントへの応答を行います。 要求と応答はプロキシサーバーを経由して移動し、プロキシサーバーも HTTP 1.1 キャッシュ仕様に準拠している必要があります。
+[HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234)では、インターネットキャッシュの動作方法について説明します。 キャッシュに使用されるプライマリ HTTP ヘッダーは [cache-control](https://tools.ietf.org/html/rfc7234#section-5.2)で、キャッシュ *ディレクティブ* を指定するために使用されます。 ディレクティブは、要求に応じてキャッシュ動作を制御し、応答としてサーバーからクライアントへの応答を行います。 要求と応答はプロキシサーバーを経由して移動し、プロキシサーバーも HTTP 1.1 キャッシュ仕様に準拠している必要があります。
 
 共通の `Cache-Control` ディレクティブを次の表に示します。
 
@@ -47,21 +48,21 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | キャッシュは応答を格納できます。 |
 | [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 応答は、共有キャッシュによって格納されていない必要があります。 プライベートキャッシュは、応答を格納して再利用できます。 |
 | [最長有効期間](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | クライアントは、指定された秒数よりも有効期間が長い応答を受け入れません。 例: `max-age=60` (60 秒)、 `max-age=2592000` (1 か月) |
-| [キャッシュなし](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **要求時**: キャッシュは、要求を満たすために格納された応答を使用することはできません。 配信元サーバーはクライアントの応答を再生成し、ミドルウェアはキャッシュに格納されている応答を更新します。<br><br>**応答時**: 配信元サーバーで検証を行わずに、後続の要求に応答を使用することはできません。 |
-| [ストアなし](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **要求時**: キャッシュは要求を格納できません。<br><br>**応答**の場合: キャッシュは、応答の一部を格納することはできません。 |
+| [キャッシュなし](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **要求時** : キャッシュは、要求を満たすために格納された応答を使用することはできません。 配信元サーバーはクライアントの応答を再生成し、ミドルウェアはキャッシュに格納されている応答を更新します。<br><br>**応答時** : 配信元サーバーで検証を行わずに、後続の要求に応答を使用することはできません。 |
+| [ストアなし](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **要求時** : キャッシュは要求を格納できません。<br><br>**応答** の場合: キャッシュは、応答の一部を格納することはできません。 |
 
 キャッシュでロールを果たすその他のキャッシュヘッダーを次の表に示します。
 
 | ヘッダー                                                     | 機能 |
 | ---------------------------------------------------------- | -------- |
-| [変更](https://tools.ietf.org/html/rfc7234#section-5.1)     | 配信元サーバーで応答が生成または正常に検証されてからの、秒単位の推定時間。 |
+| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | 配信元サーバーで応答が生成または正常に検証されてからの、秒単位の推定時間。 |
 | [経過](https://tools.ietf.org/html/rfc7234#section-5.3) | 応答が古くなったと見なされるまでの時間。 |
 | [Unmanaged](https://tools.ietf.org/html/rfc7234#section-5.4)  | 動作を設定するために HTTP/1.0 キャッシュとの下位互換性を維持するために存在し `no-cache` ます。 `Cache-Control`ヘッダーが存在する場合、 `Pragma` ヘッダーは無視されます。 |
 | [要因](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | キャッシュされた `Vary` 応答の元の要求と新しい要求の両方ですべてのヘッダーフィールドが一致する場合を除き、キャッシュされた応答を送信しないように指定します。 |
 
-## <a name="http-based-caching-respects-request-cache-control-directives"></a>HTTP ベースのキャッシュは、要求のキャッシュ制御ディレクティブを尊重します。
+## <a name="http-based-caching-respects-request-cache-control-directives"></a>HTTP ベースのキャッシュは、要求 Cache-Control ディレクティブを尊重します
 
-[Cache-control ヘッダーの HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234#section-5.2)では、 `Cache-Control` クライアントから送信された有効なヘッダーを優先するキャッシュが必要です。 クライアントは、ヘッダー値を使用して要求を行い、 `no-cache` すべての要求に対して新しい応答を強制的に生成するようにサーバーに要求できます。
+[Cache-Control ヘッダーの HTTP 1.1 キャッシュ仕様](https://tools.ietf.org/html/rfc7234#section-5.2)では、 `Cache-Control` クライアントによって送信された有効なヘッダーを受け入れるためにキャッシュが必要です。 クライアントは、ヘッダー値を使用して要求を行い、 `no-cache` すべての要求に対して新しい応答を強制的に生成するようにサーバーに要求できます。
 
 `Cache-Control`HTTP キャッシュの目的を検討する場合は、常にクライアント要求ヘッダーを使用することをお勧めします。 公式仕様では、キャッシュは、クライアント、プロキシ、およびサーバーのネットワーク経由で要求を満たすことの待機時間とネットワークオーバーヘッドを削減することを目的としています。 配信元サーバーの負荷を制御する方法であるとは限りません。
 
@@ -71,27 +72,27 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 ### <a name="in-memory-caching"></a>メモリ内キャッシュ
 
-インメモリキャッシュは、キャッシュされたデータを格納するためにサーバーメモリを使用します。 この種のキャッシュは、1台のサーバーまたは *固定セッション*を使用している複数のサーバーに適しています。 固定セッションとは、クライアントからの要求が常に同じサーバーにルーティングされて処理されることを意味します。
+インメモリキャッシュは、キャッシュされたデータを格納するためにサーバーメモリを使用します。 この種のキャッシュは、1台のサーバーまたは *固定セッション* を使用している複数のサーバーに適しています。 固定セッションとは、クライアントからの要求が常に同じサーバーにルーティングされて処理されることを意味します。
 
-詳細については、<xref:performance/caching/memory> を参照してください。
+詳細については、「<xref:performance/caching/memory>」を参照してください。
 
 ### <a name="distributed-cache"></a>分散キャッシュ
 
 アプリがクラウドまたはサーバーファームでホストされている場合は、分散キャッシュを使用してデータをメモリに格納します。 キャッシュは、要求を処理するサーバー間で共有されます。 クライアントのキャッシュデータが使用可能な場合、クライアントは、グループ内の任意のサーバーによって処理される要求を送信できます。 ASP.NET Core は、SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)、および [ncache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) 分散キャッシュと連動します。
 
-詳細については、<xref:performance/caching/distributed> を参照してください。
+詳細については、「<xref:performance/caching/distributed>」を参照してください。
 
 ### <a name="cache-tag-helper"></a>キャッシュ タグ ヘルパー
 
 キャッシュタグヘルパーを使用して、MVC ビューまたはページからコンテンツをキャッシュし Razor ます。 キャッシュタグヘルパーは、メモリ内キャッシュを使用してデータを格納します。
 
-詳細については、<xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper> を参照してください。
+詳細については、「<xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>」を参照してください。
 
 ### <a name="distributed-cache-tag-helper"></a>分散キャッシュ タグ ヘルパー
 
 分散 Razor キャッシュタグヘルパーを使用して、分散型クラウドまたは web ファームのシナリオで、MVC ビューまたはページからコンテンツをキャッシュします。 分散キャッシュタグヘルパーは、SQL Server、 [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)、または [ncache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) を使用してデータを格納します。
 
-詳細については、<xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper> を参照してください。
+詳細については、「<xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>」を参照してください。
 
 ## <a name="responsecache-attribute"></a>ResponseCache 属性
 
@@ -104,7 +105,7 @@ HTTP 1.1 キャッシュ仕様に従ったサーバー側キャッシュの場�
 
 プロパティを設定するには、[応答キャッシュミドルウェア](xref:performance/caching/middleware)を有効にする必要があり <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> ます。 それ以外の場合は、ランタイム例外がスローされます。 プロパティに対応する HTTP ヘッダーがありません <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> 。 プロパティは、応答キャッシュミドルウェアによって処理される HTTP 機能です。 ミドルウェアがキャッシュされた応答を提供するには、クエリ文字列とクエリ文字列の値が以前の要求と一致している必要があります。 たとえば、次の表に示すような一連の要求と結果を考えてみましょう。
 
-| Request                          | 結果                    |
+| 要求                          | 結果                    |
 | -------------------------------- | ------------------------- |
 | `http://example.com?key1=value1` | サーバーから返されます。 |
 | `http://example.com?key1=value1` | ミドルウェアから返されます。 |
@@ -207,7 +208,7 @@ Cache-Control: public,max-age=10
 Cache-Control: public,max-age=30
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [キャッシュへの応答の格納](https://tools.ietf.org/html/rfc7234#section-3)
 * [Cache-control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: e911512c1dce892c670659f04959be89cea067bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 77d49710b9d69f6fbbe92970f1c455de32489444
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630108"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056960"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>MVC とページ ASP.NET Core でのモデルの検証 Razor
 
@@ -175,9 +176,9 @@ public string MiddleName { get; set; }
 
 組み込みの検証属性で処理されないシナリオの場合は、カスタム検証属性を作成できます。 <xref:System.ComponentModel.DataAnnotations.ValidationAttribute> を継承するクラスを作成し、<xref:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid*> メソッドをオーバーライドします。
 
-`IsValid` メソッドは、*value* という名前のオブジェクトを受け取ります。これは、検証対象の入力です。 オーバーロードは `ValidationContext` オブジェクトも受け取ります。これは、モデル バインドによって作成されたモデル インスタンスなどの追加情報を提供します。
+`IsValid` メソッドは、 *value* という名前のオブジェクトを受け取ります。これは、検証対象の入力です。 オーバーロードは `ValidationContext` オブジェクトも受け取ります。これは、モデル バインドによって作成されたモデル インスタンスなどの追加情報を提供します。
 
-次の例では、*Classic* ジャンルの映画の公開日が指定した年より後ではないことを検証します。 `[ClassicMovie]` 属性:
+次の例では、 *Classic* ジャンルの映画の公開日が指定した年より後ではないことを検証します。 `[ClassicMovie]` 属性:
 
 * サーバー上でのみ実行されます。
 * クラシック映画の場合は、公開日が検証されます。
@@ -209,7 +210,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAgeSignature)]
 
-[年齢確認] ページ (*CheckAge.cshtml*) には 2 つのフォームがあります。 最初のフォームでは、`Age` の値 `99` がクエリ文字列パラメーター `https://localhost:5001/Users/CheckAge?Age=99` として送信されます。
+[年齢確認] ページ ( *CheckAge.cshtml* ) には 2 つのフォームがあります。 最初のフォームでは、`Age` の値 `99` がクエリ文字列パラメーター `https://localhost:5001/Users/CheckAge?Age=99` として送信されます。
 
 クエリ文字列の正しく書式設定された `age` パラメーターが送信されると、フォームの有効性が確認されます。
 
@@ -429,7 +430,7 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 組み込みの検証属性には次のものがあります。
 
 * `[CreditCard]`: プロパティにクレジットカード形式があることを検証します。
-* `[Compare]`: モデル内の2つのプロパティが一致することを検証します。 たとえば、*Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。 [スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)を参照してください。
+* `[Compare]`: モデル内の2つのプロパティが一致することを検証します。 たとえば、 *Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。 [スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)を参照してください。
 * `[EmailAddress]`: プロパティが電子メール形式であることを検証します。
 * `[Phone]`: プロパティに電話番号の書式が設定されていることを検証します。
 * `[Range]`: プロパティ値が指定した範囲内にあることを検証します。
@@ -439,7 +440,7 @@ Web API コントローラーでは、`[ApiController]` 属性が設定されて
 * `[Url]`: プロパティに URL 形式があることを検証します。
 * `[Remote]`: サーバーでアクションメソッドを呼び出すことによって、クライアントの入力を検証します。 この属性の動作の詳細については、「 [ `[Remote]` 属性](#remote-attribute)」を参照してください。
 
-クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/corefx/issues/42487)します。
+クライアント側の検証で `[RegularExpression]` 属性を使用する場合、regex はクライアントの JavaScript で実行されます。 これは、[ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 一致の動作が使用されることを意味します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/corefx/issues/42487)のページを参照してください。
 
 検証属性の完全な一覧については、[System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 名前空間で確認できます。
 
@@ -541,9 +542,9 @@ public string MiddleName { get; set; }
 
 組み込みの検証属性で処理されないシナリオの場合は、カスタム検証属性を作成できます。 <xref:System.ComponentModel.DataAnnotations.ValidationAttribute> を継承するクラスを作成し、<xref:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid*> メソッドをオーバーライドします。
 
-`IsValid` メソッドは、*value* という名前のオブジェクトを受け取ります。これは、検証対象の入力です。 オーバーロードは `ValidationContext` オブジェクトも受け取ります。これは、モデル バインドによって作成されたモデル インスタンスなどの追加情報を提供します。
+`IsValid` メソッドは、 *value* という名前のオブジェクトを受け取ります。これは、検証対象の入力です。 オーバーロードは `ValidationContext` オブジェクトも受け取ります。これは、モデル バインドによって作成されたモデル インスタンスなどの追加情報を提供します。
 
-次の例では、*Classic* ジャンルの映画の公開日が指定した年より後ではないことを検証します。 `[ClassicMovie2]` 属性では最初にジャンルがチェックされ、*Classic* である場合にのみ続行されます。 クラシックとして識別された映画については、公開日が属性のコンストラクターに渡された制限より後ではないことがチェックされます。
+次の例では、 *Classic* ジャンルの映画の公開日が指定した年より後ではないことを検証します。 `[ClassicMovie2]` 属性では最初にジャンルがチェックされ、 *Classic* である場合にのみ続行されます。 クラシックとして識別された映画については、公開日が属性のコンストラクターに渡された制限より後ではないことがチェックされます。
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttribute.cs?name=snippet_ClassicMovieAttribute)]
 
@@ -572,7 +573,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAge)]
 
-[年齢確認] ページ (*CheckAge.cshtml*) には 2 つのフォームがあります。 最初のフォームでは、`Age` の値 `99` がクエリ文字列 `https://localhost:5001/Users/CheckAge?Age=99` として送信されます。
+[年齢確認] ページ ( *CheckAge.cshtml* ) には 2 つのフォームがあります。 最初のフォームでは、`Age` の値 `99` がクエリ文字列 `https://localhost:5001/Users/CheckAge?Age=99` として送信されます。
 
 クエリ文字列の正しく書式設定された `age` パラメーターが送信されると、フォームの有効性が確認されます。
 
@@ -757,9 +758,9 @@ HTML に `data-` 属性をレンダリングするこの方法は、サンプル
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 
-クライアント検証を無効にするもう 1 つのオプションは、*.cshtml* ファイルで `_ValidationScriptsPartial` への参照をコメントにすることです。
+クライアント検証を無効にするもう 1 つのオプションは、 *.cshtml* ファイルで `_ValidationScriptsPartial` への参照をコメントにすることです。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [System.ComponentModel.DataAnnotations 名前空間](xref:System.ComponentModel.DataAnnotations)
 * [モデルバインド](model-binding.md)

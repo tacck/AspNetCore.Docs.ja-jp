@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 74c9ae63ffbe39d6ba6e77aee8f6adcc8c8a157a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 174f831583c2ef6cb7f122a22fe855acc8fe3047
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634905"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056869"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core での開発におけるアプリシークレットの安全な保存
 
@@ -38,7 +39,7 @@ ms.locfileid: "88634905"
 
 環境変数は、コードまたはローカル構成ファイルにアプリシークレットを格納しないようにするために使用されます。 環境変数は、以前に指定したすべての構成ソースの構成値を上書きします。
 
-**個々のユーザーアカウント**のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、ファイルのキーを使用してプロジェクトの *appsettings.js* に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
+**個々のユーザーアカウント** のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、プロジェクトのファイル内の *appsettings.json* キーと共に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
 
 > [!WARNING]
 > 環境変数は通常、暗号化されていないプレーンテキストで格納されます。 コンピューターまたはプロセスが侵害された場合、信頼されていない相手から環境変数にアクセスできます。 ユーザーシークレットが漏えいしないようにするための追加の手段が必要な場合があります。
@@ -100,7 +101,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 前の例では、コロンは、がプロパティを持つオブジェクトリテラルであることを示して `Movies` い `ServiceApiKey` ます。
 
-シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj*ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 次に例を示します。
+シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj* ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 次に例を示します。
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -108,7 +109,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio での JSON 構造のフラット化
 
-Visual Studio の [ **ユーザーシークレットの管理** ] ジェスチャでは、テキストエディターでファイル * のsecrets.js* が開きます。 *secrets.js*の内容を、格納されるキーと値のペアに置き換えます。 次に例を示します。
+Visual Studio の [ **ユーザーシークレットの管理** ] ジェスチャでは、テキストエディターでファイル *のsecrets.js* が開きます。 *secrets.js* の内容を、格納されるキーと値のペアに置き換えます。 次に例を示します。
 
 ```json
 {
@@ -181,7 +182,7 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 
 ## <a name="string-replacement-with-secrets"></a>シークレットを使用した文字列の置換
 
-プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、appsettings.jsに格納され * て* いるデータベース接続文字列には、指定したユーザーのパスワードを含めることができます。
+プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、に格納されているデータベース接続文字列には、 *appsettings.json* 指定されたユーザーのパスワードが含まれる場合があります。
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -191,7 +192,7 @@ JSON 構造体は、またはを使用した変更後にフラット化され `d
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-appsettings.jsの `Password` 接続文字列からキーと値のペアを*appsettings.json*削除します。 次に例を示します。
+`Password`の接続文字列からキーと値のペアを削除 *appsettings.json* します。 次に例を示します。
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -203,7 +204,7 @@ appsettings.jsの `Password` 接続文字列からキーと値のペアを*appse
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-*.Csproj*ファイルが存在するディレクトリから、次のコマンドを実行します。
+*.Csproj* ファイルが存在するディレクトリから、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets list
@@ -216,13 +217,13 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-前の例では、キー名のコロンは *secrets.js*内のオブジェクト階層を表しています。
+前の例では、キー名のコロンは *secrets.js* 内のオブジェクト階層を表しています。
 
 ## <a name="remove-a-single-secret"></a>1つのシークレットを削除する
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-*.Csproj*ファイルが存在するディレクトリから、次のコマンドを実行します。
+*.Csproj* ファイルが存在するディレクトリから、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets remove "Movies:ConnectionString"
@@ -248,7 +249,7 @@ Movies:ServiceApiKey = 12345
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-*.Csproj*ファイルが存在するディレクトリから、次のコマンドを実行します。
+*.Csproj* ファイルが存在するディレクトリから、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets clear
@@ -266,7 +267,7 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * IIS からシークレットマネージャーにアクセスする方法については、 [この問題](https://github.com/dotnet/AspNetCore.Docs/issues/16328) を参照してください。
 * <xref:fundamentals/configuration/index>
@@ -286,7 +287,7 @@ No secrets configured for this application.
 
 環境変数は、コードまたはローカル構成ファイルにアプリシークレットを格納しないようにするために使用されます。 環境変数は、以前に指定したすべての構成ソースの構成値を上書きします。
 
-**個々のユーザーアカウント**のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、ファイルのキーを使用してプロジェクトの *appsettings.js* に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
+**個々のユーザーアカウント** のセキュリティが有効になっている ASP.NET Core web アプリを考えてみましょう。 既定のデータベース接続文字列は、プロジェクトのファイル内の *appsettings.json* キーと共に含まれ `DefaultConnection` ます。 既定の接続文字列は LocalDB 用であり、ユーザーモードで実行され、パスワードは必要ありません。 アプリの展開時に、 `DefaultConnection` キー値は環境変数の値でオーバーライドできます。 環境変数には、機密性の高い資格情報を持つ完全な接続文字列が格納される場合があります。
 
 > [!WARNING]
 > 環境変数は通常、暗号化されていないプレーンテキストで格納されます。 コンピューターまたはプロセスが侵害された場合、信頼されていない相手から環境変数にアクセスできます。 ユーザーシークレットが漏えいしないようにするための追加の手段が必要な場合があります。
@@ -343,7 +344,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 前の例では、コロンは、がプロパティを持つオブジェクトリテラルであることを示して `Movies` い `ServiceApiKey` ます。
 
-シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj*ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 次に例を示します。
+シークレットマネージャーツールは、他のディレクトリからも使用できます。 `--project` *.Csproj* ファイルが存在するファイルシステムパスを指定するには、オプションを使用します。 次に例を示します。
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -351,7 +352,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio での JSON 構造のフラット化
 
-Visual Studio の [ **ユーザーシークレットの管理** ] ジェスチャでは、テキストエディターでファイル * のsecrets.js* が開きます。 *secrets.js*の内容を、格納されるキーと値のペアに置き換えます。 次に例を示します。
+Visual Studio の [ **ユーザーシークレットの管理** ] ジェスチャでは、テキストエディターでファイル *のsecrets.js* が開きます。 *secrets.js* の内容を、格納されるキーと値のペアに置き換えます。 次に例を示します。
 
 ```json
 {
@@ -426,7 +427,7 @@ ASP.NET Core 2.0 以降では、プロジェクトがを呼び出して、事前
 
 ## <a name="string-replacement-with-secrets"></a>シークレットを使用した文字列の置換
 
-プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、appsettings.jsに格納され * て* いるデータベース接続文字列には、指定したユーザーのパスワードを含めることができます。
+プレーンテキストでのパスワードの保存は安全ではありません。 たとえば、に格納されているデータベース接続文字列には、 *appsettings.json* 指定されたユーザーのパスワードが含まれる場合があります。
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -436,7 +437,7 @@ ASP.NET Core 2.0 以降では、プロジェクトがを呼び出して、事前
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-appsettings.jsの `Password` 接続文字列からキーと値のペアを*appsettings.json*削除します。 次に例を示します。
+`Password`の接続文字列からキーと値のペアを削除 *appsettings.json* します。 次に例を示します。
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -448,7 +449,7 @@ appsettings.jsの `Password` 接続文字列からキーと値のペアを*appse
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-*.Csproj*ファイルが存在するディレクトリから、次のコマンドを実行します。
+*.Csproj* ファイルが存在するディレクトリから、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets list
@@ -461,13 +462,13 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-前の例では、キー名のコロンは *secrets.js*内のオブジェクト階層を表しています。
+前の例では、キー名のコロンは *secrets.js* 内のオブジェクト階層を表しています。
 
 ## <a name="remove-a-single-secret"></a>1つのシークレットを削除する
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-*.Csproj*ファイルが存在するディレクトリから、次のコマンドを実行します。
+*.Csproj* ファイルが存在するディレクトリから、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets remove "Movies:ConnectionString"
@@ -493,7 +494,7 @@ Movies:ServiceApiKey = 12345
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-*.Csproj*ファイルが存在するディレクトリから、次のコマンドを実行します。
+*.Csproj* ファイルが存在するディレクトリから、次のコマンドを実行します。
 
 ```dotnetcli
 dotnet user-secrets clear
@@ -511,7 +512,7 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * IIS からシークレットマネージャーにアクセスする方法については、 [この問題](https://github.com/dotnet/AspNetCore.Docs/issues/16328) を参照してください。
 * <xref:fundamentals/configuration/index>

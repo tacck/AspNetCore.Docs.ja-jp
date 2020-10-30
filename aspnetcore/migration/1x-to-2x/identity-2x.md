@@ -5,6 +5,7 @@ description: この記事では ASP.NET Core 1.x 認証と ASP.NET Core 2.0 に�
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 63f2fadc328650063078339467e65c6b0e97a08e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cad7582670013661f5fcbfbebad923f0f092462e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634320"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057181"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>認証と Identity ASP.NET Core 2.0 への移行
 
@@ -41,7 +42,7 @@ ASP.NET Core 2.0 には、認証のための新しいモデルが用意されて
 
 1.x プロジェクトでは、認証はミドルウェアを介して構成されます。 ミドルウェアメソッドは、サポートする各認証スキームに対して呼び出されます。
 
-次の 1. x の例では、 Identity *Startup.cs*で Facebook 認証を構成します。
+次の 1. x の例では、 Identity *Startup.cs* で Facebook 認証を構成します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -60,7 +61,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 }
 ```
 
-2.0 プロジェクトでは、認証はサービスを介して構成されます。 各認証スキームは、 `ConfigureServices` *Startup.cs*のメソッドに登録されます。 `UseIdentity`メソッドはに置き換えられ `UseAuthentication` ます。
+2.0 プロジェクトでは、認証はサービスを介して構成されます。 各認証スキームは、 `ConfigureServices` *Startup.cs* のメソッドに登録されます。 `UseIdentity`メソッドはに置き換えられ `UseAuthentication` ます。
 
 次の2.0 の例では、Startup.cs ので Facebook 認証を構成し Identity ます。 *Startup.cs*
 
@@ -91,7 +92,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="no-loccookie-based-authentication"></a>Cookieベースの認証
 
-次の2つのオプションのいずれかを選択し、 *Startup.cs*で必要な変更を行います。
+次の2つのオプションのいずれかを選択し、 *Startup.cs* で必要な変更を行います。
 
 1. cookieでを使用するIdentity
     - `UseIdentity` `UseAuthentication` メソッド内のをに置き換え `Configure` ます。
@@ -133,7 +134,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="jwt-bearer-authentication"></a>JWT ベアラー認証
 
-*Startup.cs*で次の変更を行います。
+*Startup.cs* で次の変更を行います。
 - メソッドの `UseJwtBearerAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
     ```csharp
@@ -155,7 +156,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="openid-connect-oidc-authentication"></a>OpenID Connect (OIDC) 認証
 
-*Startup.cs*で次の変更を行います。
+*Startup.cs* で次の変更を行います。
 
 - メソッドの `UseOpenIdConnectAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
@@ -190,7 +191,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
     
 ### <a name="facebook-authentication"></a>Facebook での認証
 
-*Startup.cs*で次の変更を行います。
+*Startup.cs* で次の変更を行います。
 - メソッドの `UseFacebookAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
     ```csharp
@@ -210,7 +211,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="google-authentication"></a>Google での認証
 
-*Startup.cs*で次の変更を行います。
+*Startup.cs* で次の変更を行います。
 - メソッドの `UseGoogleAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
     ```csharp
@@ -232,7 +233,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 Microsoft アカウント認証の詳細については、 [GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/14455)を参照してください。
 
-*Startup.cs*で次の変更を行います。
+*Startup.cs* で次の変更を行います。
 - メソッドの `UseMicrosoftAccountAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
     ```csharp
@@ -252,7 +253,7 @@ Microsoft アカウント認証の詳細については、 [GitHub の問題](ht
 
 ### <a name="twitter-authentication"></a>Twitter での認証
 
-*Startup.cs*で次の変更を行います。
+*Startup.cs* で次の変更を行います。
 - メソッドの `UseTwitterAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。
 
     ```csharp
@@ -341,7 +342,7 @@ Windows 認証には、次の2つのバリエーションがあります。
 
   > `System.InvalidOperationException`: AuthenticationScheme が指定されていません。 DefaultChallengeScheme が見つかりませんでした。
 
-詳細については、<xref:security/authentication/windowsauth> を参照してください。
+詳細については、「<xref:security/authentication/windowsauth>」を参照してください。
 
 <a name="identity-cookie-options"></a>
 
@@ -349,7 +350,7 @@ Windows 認証には、次の2つのバリエーションがあります。
 
 2.0 の変更の副作用は、オプションのインスタンスの代わりに名前付きオプションを使用するように切り替えることです cookie 。 スキーム名をカスタマイズする機能 Identity cookie は削除されます。
 
-たとえば、1.x プロジェクトでは、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection) を使用し `IdentityCookieOptions` て、パラメーターを *AccountController.cs* および *ManageController.cs*に渡します。 外部 cookie 認証スキームは、指定されたインスタンスからアクセスされます。
+たとえば、1.x プロジェクトでは、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection) を使用し `IdentityCookieOptions` て、パラメーターを *AccountController.cs* および *ManageController.cs* に渡します。 外部 cookie 認証スキームは、指定されたインスタンスからアクセスされます。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -429,7 +430,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 ## <a name="replace-getexternalauthenticationschemes"></a>GetExternalAuthenticationSchemes の置換
 
-`GetExternalAuthenticationSchemes`非同期バージョンを優先するため、同期メソッドが削除されました。 1.x プロジェクトでは、 *Controllers/ManageController*に次のコードが含まれています。
+`GetExternalAuthenticationSchemes`非同期バージョンを優先するため、同期メソッドが削除されました。 1.x プロジェクトでは、 *Controllers/ManageController* に次のコードが含まれています。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemes)]
 
@@ -437,11 +438,11 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemes&highlight=2)]
 
-2.0 プロジェクトでは、メソッドを使用し <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> ます。 *ManageController.cs*の変更は、次のコードのようになります。
+2.0 プロジェクトでは、メソッドを使用し <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> ます。 *ManageController.cs* の変更は、次のコードのようになります。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemesAsync)]
 
-*Login. cshtml*で、 `AuthenticationScheme` ループでアクセスされるプロパティが `foreach` 次のように変更されます。 `Name`
+*Login. cshtml* で、 `AuthenticationScheme` ループでアクセスされるプロパティが `foreach` 次のように変更されます。 `Name`
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemesAsync&highlight=2,19)]
 
@@ -449,7 +450,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 ## <a name="manageloginsviewmodel-property-change"></a>ManageLoginsViewModel プロパティの変更
 
-`ManageLoginsViewModel`オブジェクトは、 `ManageLogins` *ManageController.cs*のアクションで使用されます。 1.x プロジェクトでは、オブジェクトのプロパティの `OtherLogins` 戻り値の型は `IList<AuthenticationDescription>` です。 この戻り値の型をインポートするには、次のものが必要です `Microsoft.AspNetCore.Http.Authentication` 。
+`ManageLoginsViewModel`オブジェクトは、 `ManageLogins` *ManageController.cs* のアクションで使用されます。 1.x プロジェクトでは、オブジェクトのプロパティの `OtherLogins` 戻り値の型は `IList<AuthenticationDescription>` です。 この戻り値の型をインポートするには、次のものが必要です `Microsoft.AspNetCore.Http.Authentication` 。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Models/ManageViewModels/ManageLoginsViewModel.cs?name=snippet_ManageLoginsViewModel&highlight=2,11)]
 
@@ -459,6 +460,6 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 <a name="additional-resources"></a>
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 詳細については、GitHub で [の Auth 2.0 の問題の説明](https://github.com/aspnet/Security/issues/1338) を参照してください。

@@ -6,6 +6,7 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: a3be22134246c76b0a809ddb97b33ff97ace9a5b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393887"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057506"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core でのモデル バインド
 
@@ -80,7 +81,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=3-4)]
 
-### <a name="bindpropertiesattribute"></a>[BindProperties] 属性
+### <a name="bindproperties-attribute"></a>[BindProperties] 属性
 
 ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは `PageModel` クラスに適用できます。これによってモデル バインドはクラスのすべてのパブリック プロパティをターゲットとするように指示されます。
 
@@ -158,7 +159,7 @@ public class Pet
 
 ### <a name="additional-sources"></a>その他のソース
 
-ソース データは、"*値プロバイダー*" によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、またはセッション状態のデータが必要になる場合があり cookie ます。 新しいソースからデータを取得するには: 
+ソース データは、" *値プロバイダー* " によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、またはセッション状態のデータが必要になる場合があり cookie ます。 新しいソースからデータを取得するには: 
 
 * `IValueProvider` を実装するクラスを作成します。
 * `IValueProviderFactory` を実装するクラスを作成します。
@@ -193,7 +194,7 @@ public class Pet
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-クライアント側の検証では、ページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチ Razor します。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
+クライアント側の検証では、ページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチ Razor します。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、 **[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、 **[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
 
 上のコードでページが再表示されると、無効な入力はフォーム フィールドに表示されません。 これは、モデル プロパティが null または既定値に設定されているためです。 無効な入力はエラー メッセージに表示されます。 しかし、フォーム フィールドに不適切なデータを再表示したい場合は、モデル プロパティを文字列にしてデータ変換を手動で行うことを検討してください。
 
@@ -217,7 +218,7 @@ public class Pet
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter)、[UInt32](xref:System.ComponentModel.UInt32Converter)、[UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [Version](xref:System.ComponentModel.VersionConverter)
+* [バージョン](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>複合型
 
@@ -279,11 +280,11 @@ public IActionResult OnPost(
 * `[BindNever]`
 
 > [!WARNING]
-> ポストされたフォーム データが値のソースである場合、これらの属性はモデル バインドに影響します。 これらは、ポストされた JSON および XML 要求本文を処理する入力フォーマッタには影響し ***ません*** 。 入力フォーマッタについては、[この記事で後ほど](#input-formatters)説明します。
+> ポストされたフォーム データが値のソースである場合、これらの属性はモデル バインドに影響します。 これらは、入力フォーマッタに影響を与え **ません** 。これは、ポストされた JSON および XML 要求本文を処理します。 入力フォーマッタについては、[この記事で後ほど](#input-formatters)説明します。
 
 ### <a name="bind-attribute"></a>[Bind] 属性
 
-クラスまたはメソッド パラメーターに適用できます。 モデルのどのプロパティをモデル バインドに含めるかを指定します。 `[Bind]` 入力フォーマッタには影響し ***ません*** 。
+クラスまたはメソッド パラメーターに適用できます。 モデルのどのプロパティをモデル バインドに含めるかを指定します。 `[Bind]` 入力フォーマッタには影響し _*_ません_*_ 。
 
 次の例では、任意のハンドラーまたはアクション メソッドが呼び出されると、`Instructor` モデルの指定されたプロパティのみがバインドされます。
 
@@ -299,7 +300,7 @@ public class Instructor
 public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
 ```
 
-`[Bind]` 属性を使用すれば、"*作成*" シナリオにおいて過剰ポスティングから保護することができます。 除外されたプロパティはそのままにしておくのではなく null または既定値に設定されるので、この属性は編集シナリオではうまく機能しません。 過剰ポスティングを防ぐ場合は、`[Bind]` 属性ではなくビュー モデルをお勧めします。 詳細については、「[過剰ポスティングに関するセキュリティの注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)」を参照してください。
+`[Bind]`属性を使用して、_create * シナリオで過剰ポストを防ぐことができます。 除外されたプロパティはそのままにしておくのではなく null または既定値に設定されるので、この属性は編集シナリオではうまく機能しません。 過剰ポスティングを防ぐ場合は、`[Bind]` 属性ではなくビュー モデルをお勧めします。 詳細については、「[過剰ポスティングに関するセキュリティの注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)」を参照してください。
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 属性
 
@@ -474,7 +475,7 @@ HTTP 要求に含まれたアップロード済みファイル。  また、複�
 
 ## <a name="input-formatters"></a>入力フォーマッタ
 
-要求本文内のデータは、JSON、XML、またはその他のいくつかの形式にすることができます。 このデータを解析するために、モデル バインドでは、特定のコンテンツの種類を処理するように構成された "*入力フォーマッタ*" が使用されます。 既定では、ASP.NET Core には JSON データ処理用の JSON ベースの入力フォーマッタが含まれます。 他のコンテンツの種類については対応する他のフォーマッタを追加することができます。
+要求本文内のデータは、JSON、XML、またはその他のいくつかの形式にすることができます。 このデータを解析するために、モデル バインドでは、特定のコンテンツの種類を処理するように構成された " *入力フォーマッタ* " が使用されます。 既定では、ASP.NET Core には JSON データ処理用の JSON ベースの入力フォーマッタが含まれます。 他のコンテンツの種類については対応する他のフォーマッタを追加することができます。
 
 ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 属性に基づいて入力フォーマッタが選択されます。 属性が存在しない場合は、[Content-Type ヘッダー](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)が使用されます。
 
@@ -547,7 +548,7 @@ ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute
 
 この属性の名前は、データ ソースを指定するモデル バインド属性のパターンに従います。 ただし、それは、値プロバイダーからのデータ バインドを説明するものではありません。 [依存関係挿入](xref:fundamentals/dependency-injection)コンテナーから型のインスタンスが取得されます。 その目的は、特定のメソッドが呼び出された場合にのみサービスを必要するときにコンストラクターの挿入の代替手段を提供することにあります。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
@@ -608,7 +609,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=3-4)]
 
-### <a name="bindpropertiesattribute"></a>[BindProperties] 属性
+### <a name="bindproperties-attribute"></a>[BindProperties] 属性
 
 ASP.NET Core 2.1 以降で使用できます。  コントローラーまたは `PageModel` クラスに適用できます。これによってモデル バインドはクラスのすべてのパブリック プロパティをターゲットとするように指示されます。
 
@@ -686,7 +687,7 @@ public class Pet
 
 ### <a name="additional-sources"></a>その他のソース
 
-ソース データは、"*値プロバイダー*" によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、またはセッション状態のデータが必要になる場合があり cookie ます。 新しいソースからデータを取得するには: 
+ソース データは、" *値プロバイダー* " によってモデル バインド システムに提供されます。 モデル バインド用に、他のソースからデータを取得するカスタムの値プロバイダーを作成して登録することができます。 たとえば、またはセッション状態のデータが必要になる場合があり cookie ます。 新しいソースからデータを取得するには: 
 
 * `IValueProvider` を実装するクラスを作成します。
 * `IValueProviderFactory` を実装するクラスを作成します。
@@ -721,7 +722,7 @@ public class Pet
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-クライアント側の検証では、ページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチ Razor します。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、**[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、**[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
+クライアント側の検証では、ページフォームに送信される可能性のあるほとんどの不適切なデータをキャッチ Razor します。 この検証により、前の強調表示されたコードをトリガーするのが難しくなります。 サンプル アプリには、 **[Submit with Invalid Date]** ボタンが含まれており、これを使用すると、 **[Hire Date]** フィールドに不適切なデータが入力され、そのフォームが送信されます。 このボタンを使用すると、データ変換エラーが発生したときにページを再表示するためのコードがどのように機能するかを表示できます。
 
 上のコードでページが再表示されると、無効な入力はフォーム フィールドに表示されません。 これは、モデル プロパティが null または既定値に設定されているためです。 無効な入力はエラー メッセージに表示されます。 しかし、フォーム フィールドに不適切なデータを再表示したい場合は、モデル プロパティを文字列にしてデータ変換を手動で行うことを検討してください。
 
@@ -745,7 +746,7 @@ public class Pet
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter)、[UInt32](xref:System.ComponentModel.UInt32Converter)、[UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [Version](xref:System.ComponentModel.VersionConverter)
+* [バージョン](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>複合型
 
@@ -841,7 +842,7 @@ public class Instructor
 public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
 ```
 
-`[Bind]` 属性を使用すれば、"*作成*" シナリオにおいて過剰ポスティングから保護することができます。 除外されたプロパティはそのままにしておくのではなく null または既定値に設定されるので、この属性は編集シナリオではうまく機能しません。 過剰ポスティングを防ぐ場合は、`[Bind]` 属性ではなくビュー モデルをお勧めします。 詳細については、「[過剰ポスティングに関するセキュリティの注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)」を参照してください。
+`[Bind]` 属性を使用すれば、" *作成* " シナリオにおいて過剰ポスティングから保護することができます。 除外されたプロパティはそのままにしておくのではなく null または既定値に設定されるので、この属性は編集シナリオではうまく機能しません。 過剰ポスティングを防ぐ場合は、`[Bind]` 属性ではなくビュー モデルをお勧めします。 詳細については、「[過剰ポスティングに関するセキュリティの注意事項](xref:data/ef-mvc/crud#security-note-about-overposting)」を参照してください。
 
 ## <a name="collections"></a>コレクション
 
@@ -961,7 +962,7 @@ HTTP 要求に含まれたアップロード済みファイル。  また、複�
 
 ## <a name="input-formatters"></a>入力フォーマッタ
 
-要求本文内のデータは、JSON、XML、またはその他のいくつかの形式にすることができます。 このデータを解析するために、モデル バインドでは、特定のコンテンツの種類を処理するように構成された "*入力フォーマッタ*" が使用されます。 既定では、ASP.NET Core には JSON データ処理用の JSON ベースの入力フォーマッタが含まれます。 他のコンテンツの種類については対応する他のフォーマッタを追加することができます。
+要求本文内のデータは、JSON、XML、またはその他のいくつかの形式にすることができます。 このデータを解析するために、モデル バインドでは、特定のコンテンツの種類を処理するように構成された " *入力フォーマッタ* " が使用されます。 既定では、ASP.NET Core には JSON データ処理用の JSON ベースの入力フォーマッタが含まれます。 他のコンテンツの種類については対応する他のフォーマッタを追加することができます。
 
 ASP.NET Core では、[Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 属性に基づいて入力フォーマッタが選択されます。 属性が存在しない場合は、[Content-Type ヘッダー](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)が使用されます。
 

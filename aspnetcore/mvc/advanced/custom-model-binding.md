@@ -5,6 +5,7 @@ description: モデル バインドにより ASP.NET Core のモデルの型を�
 ms.author: riande
 ms.date: 01/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 7e1151b04f39f637f889e690bccc97eb6f0c91ea
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 7675e95c43b9ee428ee5fda86ea3ead9815ed645
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865569"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058468"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core でのカスタム モデル バインド
 
@@ -39,7 +40,7 @@ ms.locfileid: "88865569"
 
 ## <a name="model-binding-review"></a>モデル バインドの確認
 
-モデル バインドは、操作の対象とする型に特定の定義を使用します。 *単純型*は、入力の 1 つの文字列から変換されます。 *複合型*は、複数の入力値から変換されます。 フレームワークは、`TypeConverter` の存在の有無によって違いを判断します。 外部リソースを必要としない `string` -> `SomeType` の単純なマッピングがある場合は型コンバーターを作成することをお勧めします。
+モデル バインドは、操作の対象とする型に特定の定義を使用します。 *単純型* は、入力の 1 つの文字列から変換されます。 *複合型* は、複数の入力値から変換されます。 フレームワークは、`TypeConverter` の存在の有無によって違いを判断します。 外部リソースを必要としない `string` -> `SomeType` の単純なマッピングがある場合は型コンバーターを作成することをお勧めします。
 
 独自のカスタム モデル バインダーを作成する前に、既存のモデル バインダーがどのように実装されているかを確認するとよいでしょう。 Base64 でエンコードされた文字列をバイト配列に変換できる、<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinder> の使用を検討してください。 バイト配列は多くの場合、ファイルまたはデータベース BLOB のフィールドとして格納されます。
 
@@ -117,7 +118,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="implementing-a-modelbinderprovider"></a>ModelBinderProvider の実装
 
-属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力**ではなく**、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`Author` または `Author` の型のパラメーターで `ModelBinder` 属性を使用する必要はありません。
+属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力 **ではなく** 、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`Author` または `Author` の型のパラメーターで `ModelBinder` 属性を使用する必要はありません。
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 
@@ -163,7 +164,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ## <a name="model-binding-review"></a>モデル バインドの確認
 
-モデル バインドは、操作の対象とする型に特定の定義を使用します。 *単純型*は、入力の 1 つの文字列から変換されます。 *複合型*は、複数の入力値から変換されます。 フレームワークは、`TypeConverter` の存在の有無によって違いを判断します。 外部リソースを必要としない `string` -> `SomeType` の単純なマッピングがある場合は型コンバーターを作成することをお勧めします。
+モデル バインドは、操作の対象とする型に特定の定義を使用します。 *単純型* は、入力の 1 つの文字列から変換されます。 *複合型* は、複数の入力値から変換されます。 フレームワークは、`TypeConverter` の存在の有無によって違いを判断します。 外部リソースを必要としない `string` -> `SomeType` の単純なマッピングがある場合は型コンバーターを作成することをお勧めします。
 
 独自のカスタム モデル バインダーを作成する前に、既存のモデル バインダーがどのように実装されているかを確認するとよいでしょう。 Base64 でエンコードされた文字列をバイト配列に変換できる、<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinder> の使用を検討してください。 バイト配列は多くの場合、ファイルまたはデータベース BLOB のフィールドとして格納されます。
 
@@ -239,7 +240,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="implementing-a-modelbinderprovider"></a>ModelBinderProvider の実装
 
-属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力**ではなく**、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`Author` または `Author` の型のパラメーターで `ModelBinder` 属性を使用する必要はありません。
+属性を適用する代わりに、`IModelBinderProvider` を実装することができます。 これは、組み込みフレームワーク バインダーの実装方法と同じです。 バインダーが動作する型を指定するときに、バインダーが受け入れる入力 **ではなく** 、生成される引数の型を指定します。 次のバインダー プロバイダーは `AuthorEntityBinder` で動作します。 プロバイダーの MVC のコレクションに追加されるときに、`Author` または `Author` の型のパラメーターで `ModelBinder` 属性を使用する必要はありません。
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 

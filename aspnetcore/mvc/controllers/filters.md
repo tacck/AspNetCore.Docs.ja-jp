@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: eeae167286e793ecd5a547cea0142cf7d8014ece
-ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
+ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91671783"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058507"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core フィルター
 
@@ -30,7 +31,7 @@ ms.locfileid: "91671783"
 
 作成者: [Kirk Larkin](https://github.com/serpent5)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Tom Dykstra](https://github.com/tdykstra/)、[Steve Smith](https://ardalis.com/)
 
-ASP.NET Core で*フィルター*を使用すると、要求処理パイプラインの特定のステージの前または後にコードを実行できます。
+ASP.NET Core で *フィルター* を使用すると、要求処理パイプラインの特定のステージの前または後にコードを実行できます。
 
 組み込みのフィルターでは次のようなタスクが処理されます。
 
@@ -48,7 +49,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 ## <a name="how-filters-work"></a>フィルターのしくみ
 
-*ASP.NET Core のアクション呼び出しパイプライン*内で実行されるフィルターは、*フィルター パイプライン*と呼ばれることがあります。 フィルター パイプラインは、ASP.NET Core が実行するアクションを選択した後に実行されます。
+*ASP.NET Core のアクション呼び出しパイプライン* 内で実行されるフィルターは、 *フィルター パイプライン* と呼ばれることがあります。 フィルター パイプラインは、ASP.NET Core が実行するアクションを選択した後に実行されます。
 
 ![要求は、他のミドルウェア、ルーティング ミドルウェア、アクション選択、およびアクション呼び出しパイプラインを通じて処理されます。 要求の処理は、クライアントに送信される応答になる前に、アクション選択、ルーティング ミドルウェア、およびさまざまな他のミドルウェアを遡って続行されます。](filters/_static/filter-pipeline-1.png)
 
@@ -89,7 +90,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 上記のコードでは、 [Mydebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs) は [サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)のユーティリティ関数です。
 
-非同期フィルターでは、`On-Stage-ExecutionAsync` メソッドが定義されます。 例: <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>
+非同期フィルターでは、`On-Stage-ExecutionAsync` メソッドが定義されます。 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*> の例を次に示します。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
@@ -103,7 +104,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 * 非同期: <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> と <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-フィルター インターフェイスの同期と非同期バージョンの**両方ではなく**、**いずれか**を実装します。 ランタイムは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 非同期インターフェイスと同期インターフェイスの両方が 1 つのクラスで実装される場合、非同期メソッドのみが呼び出されます。 などの抽象クラスを使用する場合は <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 、フィルターの種類ごとに同期メソッドまたは非同期メソッドのみをオーバーライドします。
+フィルター インターフェイスの同期と非同期バージョンの **両方ではなく** 、 **いずれか** を実装します。 ランタイムは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 非同期インターフェイスと同期インターフェイスの両方が 1 つのクラスで実装される場合、非同期メソッドのみが呼び出されます。 などの抽象クラスを使用する場合は <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 、フィルターの種類ごとに同期メソッドまたは非同期メソッドのみをオーバーライドします。
 
 ### <a name="built-in-filter-attributes"></a>組み込みのフィルター属性
 
@@ -126,7 +127,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-構成オプションは、[構成システム](xref:fundamentals/configuration/index)から[オプション パターン](xref:fundamentals/configuration/options)を使用して指定されます。 たとえば、*appsettings.json* ファイルから、次のようにします。
+構成オプションは、[構成システム](xref:fundamentals/configuration/index)から[オプション パターン](xref:fundamentals/configuration/options)を使用して指定されます。 たとえば、 *appsettings.json* ファイルから次のようになります。
 
 [!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
@@ -145,7 +146,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**応答ヘッダー**では、 `author: Rick Anderson` `Editor: Joe Smith` `Sample/Index2` エンドポイントが呼び出されると、とが表示されます。
+**応答ヘッダー** では、 `author: Rick Anderson` `Editor: Joe Smith` `Sample/Index2` エンドポイントが呼び出されると、とが表示されます。
 
 次のコードでは、 `MyActionFilterAttribute` ページにとを適用し `AddHeaderAttribute` Razor ます。
 
@@ -166,7 +167,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 ## <a name="filter-scopes-and-order-of-execution"></a>フィルターのスコープと実行の順序
 
-フィルターは、3 つの*スコープ*のいずれかでパイプラインに追加することができます。
+フィルターは、3 つの *スコープ* のいずれかでパイプラインに追加することができます。
 
 * コントローラー アクションでの属性の使用。 フィルター属性は、ページハンドラーメソッドには適用できません Razor 。
 * コントローラーまたはページで属性を使用し Razor ます。
@@ -189,12 +190,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| シーケンス | フィルターのスコープ | フィルター メソッド |
+| Sequence | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラーまたは Razor ページ| `OnActionExecuting` |
-| 3 | Method | `OnActionExecuting` |
-| 4 | Method | `OnActionExecuted` |
+| 3 | メソッド | `OnActionExecuting` |
+| 4 | メソッド | `OnActionExecuted` |
 | 5 | コントローラーまたは Razor ページ | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -231,7 +232,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   * `MySampleActionFilter.OnActionExecuted`
 * `TestController.OnActionExecuted`
 
-コントローラー レベルのフィルターでは、[Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) プロパティが `int.MinValue` に設定されます。 コントローラー レベルのフィルターは、メソッドにフィルターが適用された後に実行されるように設定することは**できません**。 順序については、次のセクションで説明します。
+コントローラー レベルのフィルターでは、[Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) プロパティが `int.MinValue` に設定されます。 コントローラー レベルのフィルターは、メソッドにフィルターが適用された後に実行されるように設定することは **できません** 。 順序については、次のセクションで説明します。
 
 ページについて Razor は、「 [ Razor フィルターメソッドをオーバーライドしてページフィルターを実装](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods)する」を参照してください。
 
@@ -314,7 +315,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 ロガーは DI から利用できます。 ただし、ログ目的でのみフィルターを作成し、使用することは避けてください。 [組み込みフレームワークのログ機能](xref:fundamentals/logging/index)で通常、ログ記録に必要なものが与えられます。 フィルターに追加されるログ記録:
 
 * ビジネス ドメインの懸念事項やフィルターに固有の動作に焦点を合わせます。
-* アクションやその他のフレームワーク イベントはログに記録**しない**でください。 組み込みのフィルターでは、アクションとフレームワーク イベントが記録されます。
+* アクションやその他のフレームワーク イベントはログに記録 **しない** でください。 組み込みのフィルターでは、アクションとフレームワーク イベントが記録されます。
 
 ### <a name="servicefilterattribute"></a>ServiceFilterAttribute
 
@@ -334,7 +335,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 `ServiceFilterAttribute` を使用するときに、[ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable) を設定します。
 
-* フィルター インスタンスが、それが作成された要求範囲の外で再利用される*可能性がある*ことを示唆します。 ASP.NET Core ランタイムで保証されないこと:
+* フィルター インスタンスが、それが作成された要求範囲の外で再利用される *可能性がある* ことを示唆します。 ASP.NET Core ランタイムで保証されないこと:
 
   * フィルターのインスタンスが 1 つ作成されます。
   * フィルターが後の時点で、DI コンテナーから再要求されることはありません。
@@ -353,7 +354,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 * `TypeFilterAttribute` は必要に応じて、型のコンストラクター引数を受け取ることができます。
 
 `TypeFilterAttribute` を使用するときに、[TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable) を設定します。
-* フィルター インスタンスが、それが作成された要求範囲の外で再利用される*可能性がある*ことを示唆します。 ASP.NET Core ランタイムでは、フィルターの 1 インスタンスが作成されるという保証はありません。
+* フィルター インスタンスが、それが作成された要求範囲の外で再利用される *可能性がある* ことを示唆します。 ASP.NET Core ランタイムでは、フィルターの 1 インスタンスが作成されるという保証はありません。
 
 * シングルトン以外で有効期間があるサービスに依存するフィルターと共に使用しないでください。
 
@@ -380,7 +381,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 承認システムを呼び出します。
 * 要求は承認されません。
 
-承認フィルター内で例外をスロー**しません**。
+承認フィルター内で例外をスロー **しません** 。
 
 * 例外は処理されません。
 * 例外フィルターで例外が処理されません。
@@ -489,7 +490,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * before イベントと after イベントが与えられません。
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> または <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*> を実装します。
 * Razorページまたはコントローラーの作成、[モデルのバインド](xref:mvc/models/model-binding)、アクションフィルター、アクションメソッドで発生する未処理の例外を処理します。
-* リソース フィルター、結果フィルター、または MVC 結果の実行で発生した例外はキャッチ**しません**。
+* リソース フィルター、結果フィルター、または MVC 結果の実行で発生した例外はキャッチ **しません** 。
 
 例外を処理するには、<xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> プロパティを `true` に設定するか、応答を記述します。 これにより、例外の伝達を停止します。 例外フィルターで例外を "成功" に変えることはできません。 それができるのは、アクション フィルターだけです。
 
@@ -498,7 +499,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * アクション内で発生する例外のトラップに適しています。
 * エラー処理ミドルウェアほど柔軟ではありません。
 
-例外処理にはミドルウェアを選択してください。 呼び出されたアクション メソッドに基づいてエラー処理が*異なる*状況でのみ例外フィルターを使用します。 たとえば、アプリには、API エンドポイントとビュー/HTML の両方に対するアクション メソッドがある場合があります。 API エンドポイントは、JSON としてのエラー情報を返す可能性がある一方で、ビュー ベースのアクションがエラー ページを HTML として返す可能性があります。
+例外処理にはミドルウェアを選択してください。 呼び出されたアクション メソッドに基づいてエラー処理が *異なる* 状況でのみ例外フィルターを使用します。 たとえば、アプリには、API エンドポイントとビュー/HTML の両方に対するアクション メソッドがある場合があります。 API エンドポイントは、JSON としてのエラー情報を返す可能性がある一方で、ビュー ベースのアクションがエラー ページを HTML として返す可能性があります。
 
 ## <a name="result-filters"></a>結果フィルター
 
@@ -546,7 +547,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * ショートサーキットが行われる承認フィルターとリソース フィルター。
 * 例外フィルター。
 
-たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に "*422 処理不可エンティティ*" 状態コードを使ってアクションの結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) を設定します。
+たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に " *422 処理不可エンティティ* " 状態コードを使ってアクションの結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) を設定します。
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
@@ -573,7 +574,7 @@ F12 開発者ツールでは、サンプル コードによって追加された
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
 * **内部:**`My header`
 
-上記のコードでは、**internal:** `My header` という応答ヘッダーが作成されます。
+上記のコードでは、 **internal:** `My header` という応答ヘッダーが作成されます。
 
 ### <a name="ifilterfactory-implemented-on-an-attribute"></a>属性に実装された IFilterFactory
 
@@ -622,7 +623,7 @@ What's a non-named attribute?
 
 作成者: [Kirk Larkin](https://github.com/serpent5)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Tom Dykstra](https://github.com/tdykstra/)、[Steve Smith](https://ardalis.com/)
 
-ASP.NET Core で*フィルター*を使用すると、要求処理パイプラインの特定のステージの前または後にコードを実行できます。
+ASP.NET Core で *フィルター* を使用すると、要求処理パイプラインの特定のステージの前または後にコードを実行できます。
 
 組み込みのフィルターでは次のようなタスクが処理されます。
 
@@ -637,7 +638,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 ## <a name="how-filters-work"></a>フィルターのしくみ
 
-*ASP.NET Core のアクション呼び出しパイプライン*内で実行されるフィルターは、*フィルター パイプライン*と呼ばれることがあります。  フィルター パイプラインは、ASP.NET Core が実行するアクションを選択した後に実行されます。
+*ASP.NET Core のアクション呼び出しパイプライン* 内で実行されるフィルターは、 *フィルター パイプライン* と呼ばれることがあります。  フィルター パイプラインは、ASP.NET Core が実行するアクションを選択した後に実行されます。
 
 ![要求は、他のミドルウェア、ルーティング ミドルウェア、アクション選択、ASP.NET Core のアクション呼び出しパイプラインを通じて処理されます。 要求の処理は、クライアントに送信される応答になる前に、アクション選択、ルーティング ミドルウェア、およびさまざまな他のミドルウェアを遡って続行されます。](filters/_static/filter-pipeline-1.png)
 
@@ -681,7 +682,7 @@ ASP.NET Core で*フィルター*を使用すると、要求処理パイプラ�
 
 複数のフィルター ステージのためのインターフェイスを 1 つのクラスで実装できます。 たとえば、<xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> クラスは、`IActionFilter`、`IResultFilter`、およびそれらの非同期バージョンを実装します。
 
-フィルター インターフェイスの同期と非同期バージョンの**両方ではなく**、**いずれか**を実装します。 ランタイムは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 非同期インターフェイスと同期インターフェイスの両方が 1 つのクラスで実装される場合、非同期メソッドのみが呼び出されます。 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> などの抽象クラスを使用する場合は、同期メソッドのみをオーバーライドするか、フィルターの種類ごとに非同期メソッドをオーバーライドします。
+フィルター インターフェイスの同期と非同期バージョンの **両方ではなく** 、 **いずれか** を実装します。 ランタイムは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。 していない場合は、同期インターフェイスのメソッドを呼び出します。 非同期インターフェイスと同期インターフェイスの両方が 1 つのクラスで実装される場合、非同期メソッドのみが呼び出されます。 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> などの抽象クラスを使用する場合は、同期メソッドのみをオーバーライドするか、フィルターの種類ごとに非同期メソッドをオーバーライドします。
 
 ### <a name="built-in-filter-attributes"></a>組み込みのフィルター属性
 
@@ -710,7 +711,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 ## <a name="filter-scopes-and-order-of-execution"></a>フィルターのスコープと実行の順序
 
-フィルターは、3 つの*スコープ*のいずれかでパイプラインに追加することができます。
+フィルターは、3 つの *スコープ* のいずれかでパイプラインに追加することができます。
 
 * アクションで属性を使用します。
 * コントローラーで属性を使用します。
@@ -722,7 +723,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 ### <a name="default-order-of-execution"></a>実行の既定の順序
 
-"*同じ種類のフィルター*" が複数存在する場合は、スコープによって、フィルターの実行の既定の順序が決まります。  グローバル フィルターによってクラス フィルターが囲まれます。 クラス フィルターによってメソッド フィルターが囲まれます。
+" *同じ種類のフィルター* " が複数存在する場合は、スコープによって、フィルターの実行の既定の順序が決まります。  グローバル フィルターによってクラス フィルターが囲まれます。 クラス フィルターによってメソッド フィルターが囲まれます。
 
 フィルターの入れ子の結果として、フィルターの *after* コードが *before* コードと逆の順序で実行されます。 フィルター シーケンス:
 
@@ -735,12 +736,12 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
   
 次の例は、同期アクション フィルターに対してフィルター メソッドが呼び出される順序を示しています。
 
-| シーケンス | フィルターのスコープ | フィルター メソッド |
+| Sequence | フィルターのスコープ | フィルター メソッド |
 |:--------:|:------------:|:-------------:|
 | 1 | グローバル | `OnActionExecuting` |
 | 2 | コントローラー | `OnActionExecuting` |
-| 3 | Method | `OnActionExecuting` |
-| 4 | Method | `OnActionExecuted` |
+| 3 | メソッド | `OnActionExecuting` |
+| 4 | メソッド | `OnActionExecuted` |
 | 5 | コントローラー | `OnActionExecuted` |
 | 6 | グローバル | `OnActionExecuted` |
 
@@ -795,14 +796,14 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 上記の例にある同じ 3 つのアクション フィルターを検討してください。 コントローラーとグローバル フィルターの `Order` プロパティが 1 と 2 にそれぞれ設定される場合、実行順序が逆になります。
 
-| シーケンス | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
+| Sequence | フィルターのスコープ | `Order` プロパティ | フィルター メソッド |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | Method | 0 | `OnActionExecuting` |
+| 1 | メソッド | 0 | `OnActionExecuting` |
 | 2 | コントローラー | 1  | `OnActionExecuting` |
 | 3 | グローバル | 2  | `OnActionExecuting` |
 | 4 | グローバル | 2  | `OnActionExecuted` |
 | 5 | コントローラー | 1  | `OnActionExecuted` |
-| 6 | Method | 0  | `OnActionExecuted` |
+| 6 | メソッド | 0  | `OnActionExecuted` |
 
 フィルターの実行順序を決定するときに、`Order` プロパティによりスコープがオーバーライドされます。 最初に順序でフィルターが並べ替えられ、次に同じ順位の優先度を決めるためにスコープが使用されます。 組み込みのフィルターはすべて `IOrderedFilter` を実装し、既定の `Order` 値を 0 に設定します。 組み込みのフィルターの場合、`Order` をゼロ以外の値に設定しない限り、スコープによって順序が決定されます。
 
@@ -846,7 +847,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 ロガーは DI から利用できます。 ただし、ログ目的でのみフィルターを作成し、使用することは避けてください。 [組み込みフレームワークのログ機能](xref:fundamentals/logging/index)で通常、ログ記録に必要なものが与えられます。 フィルターに追加されるログ記録:
 
 * ビジネス ドメインの懸念事項やフィルターに固有の動作に焦点を合わせます。
-* アクションやその他のフレームワーク イベントはログに記録**しない**でください。 組み込みフィルターでは、アクションとフレームワーク イベントが記録されます。
+* アクションやその他のフレームワーク イベントはログに記録 **しない** でください。 組み込みフィルターでは、アクションとフレームワーク イベントが記録されます。
 
 ### <a name="servicefilterattribute"></a>ServiceFilterAttribute
 
@@ -866,7 +867,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 
 `ServiceFilterAttribute` を使用するときに、[ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable) を設定します。
 
-* フィルター インスタンスが、それが作成された要求範囲の外で再利用される*可能性がある*ことを示唆します。 ASP.NET Core ランタイムで保証されないこと:
+* フィルター インスタンスが、それが作成された要求範囲の外で再利用される *可能性がある* ことを示唆します。 ASP.NET Core ランタイムで保証されないこと:
 
   * フィルターのインスタンスが 1 つ作成されます。
   * フィルターが後の時点で、DI コンテナーから再要求されることはありません。
@@ -885,7 +886,7 @@ ASP.NET Core には、サブクラスを作成したり、カスタマイズし�
 * `TypeFilterAttribute` は必要に応じて、型のコンストラクター引数を受け取ることができます。
 
 `TypeFilterAttribute` を使用するときに、[TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable) を設定します。
-* フィルター インスタンスが、それが作成された要求範囲の外で再利用される*可能性がある*ことを示唆します。 ASP.NET Core ランタイムでは、フィルターの 1 インスタンスが作成されるという保証はありません。
+* フィルター インスタンスが、それが作成された要求範囲の外で再利用される *可能性がある* ことを示唆します。 ASP.NET Core ランタイムでは、フィルターの 1 インスタンスが作成されるという保証はありません。
 
 * シングルトン以外で有効期間があるサービスに依存するフィルターと共に使用しないでください。
 
@@ -913,7 +914,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 承認システムを呼び出します。
 * 要求は承認されません。
 
-承認フィルター内で例外をスロー**しません**。
+承認フィルター内で例外をスロー **しません** 。
 
 * 例外は処理されません。
 * 例外フィルターで例外が処理されません。
@@ -1016,7 +1017,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * before イベントと after イベントが与えられません。
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> または <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*> を実装します。
 * Razorページまたはコントローラーの作成、[モデルのバインド](xref:mvc/models/model-binding)、アクションフィルター、アクションメソッドで発生する未処理の例外を処理します。
-* リソース フィルター、結果フィルター、または MVC 結果の実行で発生した例外はキャッチ**しません**。
+* リソース フィルター、結果フィルター、または MVC 結果の実行で発生した例外はキャッチ **しません** 。
 
 例外を処理するには、<xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> プロパティを `true` に設定するか、応答を記述します。 これにより、例外の伝達を停止します。 例外フィルターで例外を "成功" に変えることはできません。 それができるのは、アクション フィルターだけです。
 
@@ -1025,7 +1026,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * アクション内で発生する例外のトラップに適しています。
 * エラー処理ミドルウェアほど柔軟ではありません。
 
-例外処理にはミドルウェアを選択してください。 呼び出されたアクション メソッドに基づいてエラー処理が*異なる*状況でのみ例外フィルターを使用します。 たとえば、アプリには、API エンドポイントとビュー/HTML の両方に対するアクション メソッドがある場合があります。 API エンドポイントは、JSON としてのエラー情報を返す可能性がある一方で、ビュー ベースのアクションがエラー ページを HTML として返す可能性があります。
+例外処理にはミドルウェアを選択してください。 呼び出されたアクション メソッドに基づいてエラー処理が *異なる* 状況でのみ例外フィルターを使用します。 たとえば、アプリには、API エンドポイントとビュー/HTML の両方に対するアクション メソッドがある場合があります。 API エンドポイントは、JSON としてのエラー情報を返す可能性がある一方で、ビュー ベースのアクションがエラー ページを HTML として返す可能性があります。
 
 ## <a name="result-filters"></a>結果フィルター
 
@@ -1073,7 +1074,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * ショートサーキットが行われる承認フィルターとリソース フィルター。
 * 例外フィルター。
 
-たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に "*422 処理不可エンティティ*" 状態コードを使ってアクションの結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) を設定します。
+たとえば、次のフィルターは常に実行され、コンテンツ ネゴシエーションが失敗した場合に " *422 処理不可エンティティ* " 状態コードを使ってアクションの結果 (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) を設定します。
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
@@ -1096,7 +1097,7 @@ F12 開発者ツールでは、サンプル コードによって追加された
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
 * **内部:**`My header`
 
-上記のコードでは、**internal:** `My header` という応答ヘッダーが作成されます。
+上記のコードでは、 **internal:** `My header` という応答ヘッダーが作成されます。
 
 ### <a name="ifilterfactory-implemented-on-an-attribute"></a>属性に実装された IFilterFactory
 

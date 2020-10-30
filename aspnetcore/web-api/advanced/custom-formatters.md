@@ -5,6 +5,7 @@ description: ASP.NET Core で Web API のカスタム フォーマッタを作�
 ms.author: riande
 ms.date: 06/25/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 9f87d02dd3abe6dca8db495e482ccf9c440a2469
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e4d73fdc0db3faeace5d68b3d71718315e68cae3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627547"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058923"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API のカスタム フォーマッタ
 
@@ -132,7 +133,7 @@ ASP.NET Core MVC は、入力と出力のフォーマッタを使用した Web A
 
 [!code-csharp[](custom-formatters/samples/3.x/CustomFormattersSample/Formatters/VcardInputFormatter.cs?name=snippet_Class)]
 
-## <a name="test-the-app"></a>アプリケーションをテストする
+## <a name="test-the-app"></a>アプリをテストする
 
 [この記事のサンプルアプリを実行](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/samples)します。これにより、基本的な vCard 入力フォーマッタと出力フォーマッタが実装されます。 アプリは次のような Vcard を読み取り、書き込みます。
 

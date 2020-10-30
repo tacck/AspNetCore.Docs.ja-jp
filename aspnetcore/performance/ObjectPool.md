@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 6997dbfdd5c654e4a8b15a026fd3ec61d024f02d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3bbfde6f68a238131149e67ce72f0ddc68a9ea0f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632370"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056908"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core の ObjectPool を使用したオブジェクトの再利用
 
@@ -73,8 +74,8 @@ ObjectPool は、次のような複数の方法でアプリで使用できます
 ::: moniker range=">= aspnetcore-3.0"
 <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider>が使用され、を実装する場合 `T` `IDisposable` :
 
-* プールに返され ***ない*** 項目は破棄されます。
-* プールが DI によって破棄されると、プール内のすべての項目が破棄されます。
+* プールに返される * では **ない** 項目は破棄されます。
+_ プールが DI によって破棄されると、プール内のすべての項目が破棄されます。
 
 注: プールが破棄された後:
 
