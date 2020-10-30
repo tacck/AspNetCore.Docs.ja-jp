@@ -5,6 +5,7 @@ description: RazorASP.NET Core のアプリケーションパーツを使用し�
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 2e86025eaf98c4e2cbbd86a5a353664204c35594
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 33deb5ff794982e0c074186bb2abb88344e8a116
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630420"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061185"
 ---
 # <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a>Razorアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 
@@ -31,7 +32,7 @@ ms.locfileid: "88630420"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-"*アプリケーション パーツ*" は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
+" *アプリケーション パーツ* " は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
 
 "[機能プロバイダー](#fp)" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
 
@@ -55,7 +56,7 @@ ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機�
 
 ### <a name="prevent-loading-resources"></a>リソースの読み込みを防ぐ
 
-アプリケーション パーツを使用して、特定のアセンブリまたは場所にあるソースの読み込みを "*回避*" することができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> コレクションのメンバーを追加または削除して、リソースを非表示にしたり使用可能にしたりします。 `ApplicationParts` コレクションでのエントリの順序は重要ではありません。 `ApplicationPartManager` を構成してから、コンテナーでサービスを構成するために使用します。 たとえば、`AddControllersAsServices` を呼び出す前に `ApplicationPartManager` を構成します。 リソースを削除するには、`ApplicationParts` コレクションに対して `Remove` を呼び出します。
+アプリケーション パーツを使用して、特定のアセンブリまたは場所にあるソースの読み込みを " *回避* " することができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> コレクションのメンバーを追加または削除して、リソースを非表示にしたり使用可能にしたりします。 `ApplicationParts` コレクションでのエントリの順序は重要ではありません。 `ApplicationPartManager` を構成してから、コンテナーでサービスを構成するために使用します。 たとえば、`AddControllersAsServices` を呼び出す前に `ApplicationPartManager` を構成します。 リソースを削除するには、`ApplicationParts` コレクションに対して `Remove` を呼び出します。
 
 `ApplicationPartManager` には次のパーツが含まれています。
 
@@ -121,9 +122,9 @@ View Components:
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-"*アプリケーション パーツ*" は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
+" *アプリケーション パーツ* " は、アプリのリソースを抽象化したものです。 アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) はアプリケーション パーツです。 `AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。
 
-"*機能プロバイダー*" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
+" *機能プロバイダー* " は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。 アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。 たとえば、複数のアプリで共通の機能を共有したいとします。 アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。 複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。
 
 ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機能を読み込みます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> クラスは、アセンブリでバックアップされるアプリケーション パーツを表します。
 
@@ -145,7 +146,7 @@ ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機�
 
 ### <a name="prevent-loading-resources"></a>リソースの読み込みを防ぐ
 
-アプリケーション パーツを使用して、特定のアセンブリまたは場所にあるソースの読み込みを "*回避*" することができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> コレクションのメンバーを追加または削除して、リソースを非表示にしたり使用可能にしたりします。 `ApplicationParts` コレクションでのエントリの順序は重要ではありません。 `ApplicationPartManager` を構成してから、コンテナーでサービスを構成するために使用します。 たとえば、`AddControllersAsServices` を呼び出す前に `ApplicationPartManager` を構成します。 リソースを削除するには、`ApplicationParts` コレクションに対して `Remove` を呼び出します。
+アプリケーション パーツを使用して、特定のアセンブリまたは場所にあるソースの読み込みを " *回避* " することができます。 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> コレクションのメンバーを追加または削除して、リソースを非表示にしたり使用可能にしたりします。 `ApplicationParts` コレクションでのエントリの順序は重要ではありません。 `ApplicationPartManager` を構成してから、コンテナーでサービスを構成するために使用します。 たとえば、`AddControllersAsServices` を呼び出す前に `ApplicationPartManager` を構成します。 リソースを削除するには、`ApplicationParts` コレクションに対して `Remove` を呼び出します。
 
 次のコードでは、<xref:Microsoft.AspNetCore.Mvc.ApplicationParts> を使用してアプリから `MyDependentLibrary` を削除します。[!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
 

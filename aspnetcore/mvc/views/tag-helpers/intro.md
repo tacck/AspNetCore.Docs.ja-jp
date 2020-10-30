@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 781365d99c6d36d8abaec9681128ba712db8cb88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865353"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060665"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー
 
@@ -40,7 +41,7 @@ ms.locfileid: "88865353"
 
 **生産性を高め、サーバーでのみ使用可能な情報を使用することで、より堅牢で信頼できる保守しやすいコードを生成できる方法** たとえば、これまでは、イメージを変更する際にそのイメージ名を変更することがイメージ更新の理念でした。 パフォーマンス上の理由から、イメージを積極的にキャッシュする必要があり、イメージの名前を変更しない限り、クライアントが古いコピーを取得する危険性があります。 これまでは、イメージの編集後に、名前を変更する必要があり、Web アプリでのイメージへの各参照を更新する必要がありました。 非常に手間がかかるだけでなく、エラーも発生しやすくなります (参照を見逃したり、間違った文字列を誤って入力したりする可能性があります)。組み込みのは、 `ImageTagHelper` 自動的に行うことができます。 `ImageTagHelper` ではイメージ名にバージョン番号を追加できるため、イメージが変更されるたびに、サーバーはそのイメージに対して新しい一意のバージョンを自動的に生成します。 クライアントは現在のイメージを確実に取得できます。 `ImageTagHelper` を使用することで、このような堅牢性と省力化を基本的に自由に実現できます。
 
-ほとんどの組み込みタグ ヘルパーは、標準の HTML 要素をターゲットとし、要素に対してサーバー側の属性を提供します。 たとえば、*Views/Account* フォルダーの多くのビューで使用される `<input>` 要素には、`asp-for` 属性が含まれて この属性は、指定されたモデル プロパティの名前をレンダリングされる HTML に抽出します 次のモデルのビューを考えてみましょう Razor 。
+ほとんどの組み込みタグ ヘルパーは、標準の HTML 要素をターゲットとし、要素に対してサーバー側の属性を提供します。 たとえば、 *Views/Account* フォルダーの多くのビューで使用される `<input>` 要素には、`asp-for` 属性が含まれて この属性は、指定されたモデル プロパティの名前をレンダリングされる HTML に抽出します 次のモデルのビューを考えてみましょう Razor 。
 
 ```csharp
 public class Movie
@@ -79,9 +80,9 @@ public class Movie
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-`@addTagHelper` ディレクティブにより、ビューでタグ ヘルパーが使用可能になります。 この場合、ビュー ファイルは *Pages/_ViewImports.cshtml* であり、既定では *Pages* フォルダーとサブフォルダーのすべてのファイルによって継承され、タグ ヘルパーが使用可能になります。 上記のコードではワイルドカード構文 ("\*") を使用して、指定されたアセンブリ (*Microsoft.AspNetCore.Mvc.TagHelpers*) 内のすべてのタグ ヘルパーが、*Views* ディレクトリまたはサブディレクトリ内のすべてのビュー ファイルで使用可能になるように指定します。 `@addTagHelper` の後の最初のパラメーターでは読み込むタグ ヘルパーを指定し (すべてのタグ ヘルパーに対して "\*" を使用)、2 番目のパラメーター "Microsoft.AspNetCore.Mvc.TagHelpers" ではタグ ヘルパーを含むアセンブリを指定します。 *Microsoft.AspNetCore.Mvc.TagHelpers* は、組み込み ASP.NET Core タグ ヘルパーのアセンブリです。
+`@addTagHelper` ディレクティブにより、ビューでタグ ヘルパーが使用可能になります。 この場合、ビュー ファイルは *Pages/_ViewImports.cshtml* であり、既定では *Pages* フォルダーとサブフォルダーのすべてのファイルによって継承され、タグ ヘルパーが使用可能になります。 上記のコードではワイルドカード構文 ("\*") を使用して、指定されたアセンブリ ( *Microsoft.AspNetCore.Mvc.TagHelpers* ) 内のすべてのタグ ヘルパーが、 *Views* ディレクトリまたはサブディレクトリ内のすべてのビュー ファイルで使用可能になるように指定します。 `@addTagHelper` の後の最初のパラメーターでは読み込むタグ ヘルパーを指定し (すべてのタグ ヘルパーに対して "\*" を使用)、2 番目のパラメーター "Microsoft.AspNetCore.Mvc.TagHelpers" ではタグ ヘルパーを含むアセンブリを指定します。 *Microsoft.AspNetCore.Mvc.TagHelpers* は、組み込み ASP.NET Core タグ ヘルパーのアセンブリです。
 
-すべてのタグ ヘルパーをこのプロジェクト (*AuthoringTagHelpers* という名前のアセンブリを作成する) で公開するには、以下を使用します。
+すべてのタグ ヘルパーをこのプロジェクト ( *AuthoringTagHelpers* という名前のアセンブリを作成する) で公開するには、以下を使用します。
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=3)]
 
@@ -93,7 +94,7 @@ public class Movie
 @addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
 ```
 
-FQN を使用してビューにタグ ヘルパーを追加するには、最初に FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) を追加してから、アセンブリ名 (*AuthoringTagHelpers*) を追加します。 ほとんどの開発者は、"\*" ワイルドカード構文を使用するほうを選びます。 ワイルドカード構文を使用することで、FQN のサフィックスとしてワイルドカード文字 "\*" を挿入できます。 たとえば、以下のディレクティブのいずれかで `EmailTagHelper` を取り込みます。
+FQN を使用してビューにタグ ヘルパーを追加するには、最初に FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) を追加してから、アセンブリ名 ( *AuthoringTagHelpers* ) を追加します。 ほとんどの開発者は、"\*" ワイルドカード構文を使用するほうを選びます。 ワイルドカード構文を使用することで、FQN のサフィックスとしてワイルドカード文字 "\*" を挿入できます。 たとえば、以下のディレクティブのいずれかで `EmailTagHelper` を取り込みます。
 
 ```cshtml
 @addTagHelper AuthoringTagHelpers.TagHelpers.E*, AuthoringTagHelpers
@@ -106,11 +107,11 @@ FQN を使用してビューにタグ ヘルパーを追加するには、最初
 
 ### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper` でタグ ヘルパーを削除する
 
-`@removeTagHelper` には `@addTagHelper` と同じ 2 つのパラメーターがあり、以前に追加されたタグ ヘルパーを削除します。 たとえば、特定のビューに適用された `@removeTagHelper` では、指定されたタグ ヘルパーをビューから削除します。 *Views/Folder/_ViewImports.cshtml* ファイルで `@removeTagHelper` を使用すると、*Folder* 内のすべてのビューから指定されたタグ ヘルパーが削除されます。
+`@removeTagHelper` には `@addTagHelper` と同じ 2 つのパラメーターがあり、以前に追加されたタグ ヘルパーを削除します。 たとえば、特定のビューに適用された `@removeTagHelper` では、指定されたタグ ヘルパーをビューから削除します。 *Views/Folder/_ViewImports.cshtml* ファイルで `@removeTagHelper` を使用すると、 *Folder* 内のすべてのビューから指定されたタグ ヘルパーが削除されます。
 
 ### <a name="controlling-tag-helper-scope-with-the-_viewimportscshtml-file"></a>*_ViewImports.cshtml* ファイルによるタグ ヘルパー スコープの制御
 
-*_ViewImports.cshtml* を任意のビュー フォルダーに追加することができ、ビュー エンジンではそのファイルと *Views/_ViewImports.cshtml* ファイルの両方のディレクティブが適用されます。 *Home* ビューに対して空の *Views/Home/_ViewImports.cshtml* ファイルを追加した場合、*_ViewImports.cshtml* ファイルは付加的なものであるため、何も変わりません。 *Views/Home/_ViewImports.cshtml* ファイルに追加する `@addTagHelper` ディレクティブ (既定の *Views/_ViewImports.cshtml* ファイルにはない) では、これらのタグ ヘルパーが *Home* フォルダー内のビューにのみ公開されます。
+*_ViewImports.cshtml* を任意のビュー フォルダーに追加することができ、ビュー エンジンではそのファイルと *Views/_ViewImports.cshtml* ファイルの両方のディレクティブが適用されます。 *Home* ビューに対して空の *Views/Home/_ViewImports.cshtml* ファイルを追加した場合、 *_ViewImports.cshtml* ファイルは付加的なものであるため、何も変わりません。 *Views/Home/_ViewImports.cshtml* ファイルに追加する `@addTagHelper` ディレクティブ (既定の *Views/_ViewImports.cshtml* ファイルにはない) では、これらのタグ ヘルパーが *Home* フォルダー内のビューにのみ公開されます。
 
 <a name="opt-out"></a>
 
@@ -128,7 +129,7 @@ FQN を使用してビューにタグ ヘルパーを追加するには、最初
 
 ### <a name="using-taghelperprefix-to-make-tag-helper-usage-explicit"></a>`@tagHelperPrefix` を使用してタグ ヘルパーの使用状況を明確にする
 
-`@tagHelperPrefix` ディレクティブでは、タグ プレフィックス文字列を指定して、タグ ヘルパーのサポートを有効にしたり、タグ ヘルパーの使用状況を明確にすることができます。 たとえば、*Views/_ViewImports.cshtml* ファイルに次のマークアップを追加できます。
+`@tagHelperPrefix` ディレクティブでは、タグ プレフィックス文字列を指定して、タグ ヘルパーのサポートを有効にしたり、タグ ヘルパーの使用状況を明確にすることができます。 たとえば、 *Views/_ViewImports.cshtml* ファイルに次のマークアップを追加できます。
 
 ```cshtml
 @tagHelperPrefix th:
@@ -190,7 +191,7 @@ IntelliSense ステートメント入力候補では、Tab キーを入力して
 
 ![image](intro/_static/labelaspfor2.png)
 
-Visual Studio の *CompleteWord* ショートカット ([既定](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)は Ctrl + Space) を二重引用符 ("") 内に入力することができ、C# クラスの場合と同じように C# で使用できるようになりました。 IntelliSense では、ページ モデルですべてのメソッドとプロパティが表示されます。 プロパティの種類が `ModelExpression` であるため、メソッドとプロパティを使用できます。 次のイメージでは、`Register` ビューを編集するため、`RegisterViewModel` を使用できます。
+Visual Studio の *CompleteWord* ショートカット ( [既定](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)は Ctrl + Space) を二重引用符 ("") 内に入力することができ、C# クラスの場合と同じように C# で使用できるようになりました。 IntelliSense では、ページ モデルですべてのメソッドとプロパティが表示されます。 プロパティの種類が `ModelExpression` であるため、メソッドとプロパティを使用できます。 次のイメージでは、`Register` ビューを編集するため、`RegisterViewModel` を使用できます。
 
 ![image](intro/_static/intellemail.png)
 
@@ -228,7 +229,7 @@ new {@class="caption"}
 
 IntelliSense は行全体を書き込む場合に役立ちます。
 
-次のコードイメージは、Visual Studio に含まれている ASP.NET 4.5. x MVC テンプレートから生成された *Views/Account/Register. cshtml*ビューのフォーム部分を示してい Razor ます。
+次のコードイメージは、Visual Studio に含まれている ASP.NET 4.5. x MVC テンプレートから生成された *Views/Account/Register. cshtml* ビューのフォーム部分を示してい Razor ます。
 
 ![image](intro/_static/regCS.png)
 
@@ -250,7 +251,7 @@ HTML ヘルパーの方法よりも、マークアップがわかりやすく、
 
 "asp-" 属性にはそれぞれ "Email" の値がありますが、"Email" は文字列ではありません。 このコンテキストでは、"Email" は `RegisterViewModel` の C# モデル式のプロパティとなります。
 
-Visual Studio エディターは登録フォームのタグ ヘルパーの方法で**すべて**のマークアップを書き込む場合に役立ちますが、Visual Studio は HTML ヘルパーの方法ではほとんどのコードに対応できません。 Visual Studio エディターでのタグ ヘルパーの操作の詳細については、「[IntelliSense でのタグ ヘルパーのサポート](#intellisense-support-for-tag-helpers)」を参照してください。
+Visual Studio エディターは登録フォームのタグ ヘルパーの方法で **すべて** のマークアップを書き込む場合に役立ちますが、Visual Studio は HTML ヘルパーの方法ではほとんどのコードに対応できません。 Visual Studio エディターでのタグ ヘルパーの操作の詳細については、「[IntelliSense でのタグ ヘルパーのサポート](#intellisense-support-for-tag-helpers)」を参照してください。
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>タグ ヘルパーと Web サーバー コントロールの比較
 
@@ -272,13 +273,13 @@ Visual Studio エディターは登録フォームのタグ ヘルパーの方�
 
 ## <a name="customizing-the-tag-helper-element-font"></a>タグ ヘルパー要素のフォントのカスタマイズ
 
-[**ツール**  >  **] [オプション]**[  >  **環境**]  >  **[フォントおよび色**] から、フォントと色付けをカスタマイズできます。
+[ **ツール**  >  **] [オプション]** [  >  **環境** ]  >  **[フォントおよび色** ] から、フォントと色付けをカスタマイズできます。
 
 ![image](intro/_static/fontoptions2.png)
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [タグ ヘルパーの作成](xref:mvc/views/tag-helpers/authoring)
 * [フォームの操作](xref:mvc/views/working-with-forms)

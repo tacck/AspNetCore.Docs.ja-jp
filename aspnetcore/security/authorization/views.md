@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/views
-ms.openlocfilehash: 775ebdffe2b0753de18bf07d9ff1193235a45b17
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b3d6e595aa08208f2bf9e95d7070cf9c24802b62
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629887"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061328"
 ---
 # <a name="view-based-authorization-in-aspnet-core-mvc"></a>ASP.NET Core MVC でのビューベースの承認
 
@@ -33,7 +34,7 @@ ms.locfileid: "88629887"
 @inject IAuthorizationService AuthorizationService
 ```
 
-すべてのビューで承認サービスを使用する場合は、 `@inject` ディレクティブを*Views*ディレクトリの *_ViewImports*ファイルに配置します。 詳しくは、「[ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)」をご覧ください。
+すべてのビューで承認サービスを使用する場合は、 `@inject` ディレクティブを *Views* ディレクトリの *_ViewImports* ファイルに配置します。 詳しくは、「[ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)」をご覧ください。
 
 挿入された承認サービスを使用して、 `AuthorizeAsync` [リソースベースの承認](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)時に確認するのとまったく同じ方法でを呼び出します。
 
@@ -57,4 +58,4 @@ ms.locfileid: "88629887"
 前のコードでは、モデルはポリシーの評価で考慮する必要があるリソースとして渡されます。
 
 > [!WARNING]
-> 唯一の承認チェックとして、アプリの UI 要素の表示の切り替えに依存しないでください。 UI 要素を非表示にしても、関連付けられているコントローラーアクションへのアクセスを完全に防ぐことはできません。 たとえば、前のコードスニペットのボタンについて考えてみます。 ユーザー `Edit` は、相対リソース URL が */Document/Edit/1*であることを知っていれば、アクションメソッドを呼び出すことができます。 このため、 `Edit` アクションメソッドは独自の承認チェックを実行する必要があります。
+> 唯一の承認チェックとして、アプリの UI 要素の表示の切り替えに依存しないでください。 UI 要素を非表示にしても、関連付けられているコントローラーアクションへのアクセスを完全に防ぐことはできません。 たとえば、前のコードスニペットのボタンについて考えてみます。 ユーザー `Edit` は、相対リソース URL が */Document/Edit/1* であることを知っていれば、アクションメソッドを呼び出すことができます。 このため、 `Edit` アクションメソッドは独自の承認チェックを実行する必要があります。

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: bb47f3452d29dfeea0e4d3c4a9c22a06869a3fe7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 202ca681a66ddf7f729d8835e2f77da846583df1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631356"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060171"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core でのリソースベースの承認
 
 承認方法は、アクセスされるリソースによって異なります。 Author プロパティを持つドキュメントについて考えてみましょう。 作成者だけがドキュメントを更新できます。 そのため、承認評価を行う前に、データストアからドキュメントを取得する必要があります。
 
-属性の評価は、データバインディングの前、およびドキュメントを読み込むページハンドラーまたはアクションの実行前に行われます。 このような理由から、属性を使用した宣言型の承認は十分では `[Authorize]` ありません。 代わりに、カスタム承認メソッドを、命令型 &mdash; *認証*と呼ばれるスタイルとして呼び出すことができます。
+属性の評価は、データバインディングの前、およびドキュメントを読み込むページハンドラーまたはアクションの実行前に行われます。 このような理由から、属性を使用した宣言型の承認は十分では `[Authorize]` ありません。 代わりに、カスタム承認メソッドを、命令型 &mdash; *認証* と呼ばれるスタイルとして呼び出すことができます。
 
 ::: moniker range=">= aspnetcore-3.0"
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 4a9f1958cd26bb57fcf3944aabacd57c470fb17e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 124f23caa4a757f63a80dfea627304204ba2cdca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626949"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061432"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core の部分タグ ヘルパー
 
@@ -58,7 +59,7 @@ ms.locfileid: "88626949"
 
 `name` 属性は必須です。 レンダリングする部分ビューの名前またはパスを示します。 部分ビュー名が指定されると、[ビューの検出](xref:mvc/views/overview#view-discovery)プロセスが開始します。 明示的なパスが指定されているとき、このプロセスは回避されます。 許容されるすべての `name` 値については、「[部分ビューの検出](xref:mvc/views/partial#partial-view-discovery)」を参照してください。
 
-次のマークアップでは明示的なパスが使用されており、*_ProductPartial.cshtml* が *Shared* フォルダーから読み込まれることを示しています。 [for](#for) 属性を使用し、バインディングのために部分ビューにモデルが渡されます。
+次のマークアップでは明示的なパスが使用されており、 *_ProductPartial.cshtml* が *Shared* フォルダーから読み込まれることを示しています。 [for](#for) 属性を使用し、バインディングのために部分ビューにモデルが渡されます。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
@@ -66,7 +67,7 @@ ms.locfileid: "88626949"
 
 `for` 属性によって、現在のモデルに対して評価する [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression) が割り当てられます。 `ModelExpression` によって `@Model.` 構文が推論されます。 たとえば、`for="Product"` の代わりに `for="@Model.Product"` を使用できます。 この既定の推論動作は、`@` シンボルを使用してインライン式を定義することでオーバーライドされます。
 
-次のマークアップでは、*_ProductPartial.cshtml* が読み込まれます。
+次のマークアップでは、 *_ProductPartial.cshtml* が読み込まれます。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_For)]
 
@@ -92,11 +93,11 @@ ms.locfileid: "88626949"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Shared/_ProductViewDataPartial.cshtml?highlight=5)]
 
-この例では、`ViewData["IsNumberReadOnly"]` の値によって、*Number* フィールドを読み取り専用として表示するかどうかが決定されます。
+この例では、`ViewData["IsNumberReadOnly"]` の値によって、 *Number* フィールドを読み取り専用として表示するかどうかが決定されます。
 
 ## <a name="migrate-from-an-html-helper"></a>HTML ヘルパーから移行する
 
-次のような非同期の HTML ヘルパーの例を考えてみてください。 製品のコレクションが反復処理され、表示されます。 `PartialAsync` メソッドの最初のパラメーターごとに、*_ProductPartial.cshtml* の部分ビューが読み込まれます。 `Product` モデルのインスタンスが、バインディングのために部分ビューに渡されます。
+次のような非同期の HTML ヘルパーの例を考えてみてください。 製品のコレクションが反復処理され、表示されます。 `PartialAsync` メソッドの最初のパラメーターごとに、 *_ProductPartial.cshtml* の部分ビューが読み込まれます。 `Product` モデルのインスタンスが、バインディングのために部分ビューに渡されます。
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Products.cshtml?name=snippet_HtmlHelper&highlight=3)]
 

@@ -5,6 +5,7 @@ description: Facebook、Google、Twitter などのアカウントユーザー認
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: a91a2f2fb7873e5a672c624e9cf863ae720c8005
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cd7545a3ddaccedfa64ef5e9d5458c21c651257a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634229"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060288"
 ---
 # <a name="use-social-sign-in-provider-authentication-without-no-locaspnet-core-identity"></a>ソーシャルサインインプロバイダー認証を使用しない ASP.NET Core Identity
 
@@ -31,7 +32,7 @@ ms.locfileid: "88634229"
 
 <xref:security/authentication/social/index> ユーザーが外部認証プロバイダーからの資格情報を使用して OAuth 2.0 を使用してサインインできるようにする方法について説明します。 このトピックで説明する方法は、 ASP.NET Core Identity 認証プロバイダーとして含まれています。
 
-このサンプルでは、を使用 **せず**に外部認証プロバイダーを使用する方法を示し ASP.NET Core Identity ます。 これは、のすべての機能を必要としない ASP.NET Core Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
+このサンプルでは、を使用 **せず** に外部認証プロバイダーを使用する方法を示し ASP.NET Core Identity ます。 これは、のすべての機能を必要としない ASP.NET Core Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
 
 このサンプルでは、ユーザーの認証に [Google 認証](xref:security/authentication/google-logins) を使用します。 Google 認証を使用すると、サインインプロセスを管理するための多くの複雑な作業が Google に移ります。 別の外部認証プロバイダーと統合するには、次のトピックを参照してください。
 
@@ -76,7 +77,7 @@ ms.locfileid: "88634229"
 
 への呼び出しで認証スキームが指定されていないことに注意して `SignOutAsync` ください。 `DefaultScheme`のアプリ `CookieAuthenticationDefaults.AuthenticationScheme` はフォールバックとして使用されます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -86,7 +87,7 @@ ms.locfileid: "88634229"
 
 <xref:security/authentication/social/index> ユーザーが外部認証プロバイダーからの資格情報を使用して OAuth 2.0 を使用してサインインできるようにする方法について説明します。 このトピックで説明する方法は、 ASP.NET Core Identity 認証プロバイダーとして含まれています。
 
-このサンプルでは、を使用 **せず**に外部認証プロバイダーを使用する方法を示し ASP.NET Core Identity ます。 これは、のすべての機能を必要としない ASP.NET Core Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
+このサンプルでは、を使用 **せず** に外部認証プロバイダーを使用する方法を示し ASP.NET Core Identity ます。 これは、のすべての機能を必要としない ASP.NET Core Identity が、信頼された外部認証プロバイダーとの統合を必要とするアプリに便利です。
 
 このサンプルでは、ユーザーの認証に [Google 認証](xref:security/authentication/google-logins) を使用します。 Google 認証を使用すると、サインインプロセスを管理するための多くの複雑な作業が Google に移ります。 別の外部認証プロバイダーと統合するには、次のトピックを参照してください。
 

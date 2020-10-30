@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: cebaa9ae65557ca5d938c5728882382830deca9d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03008f40fc1c4b323535d08a1bb4c4007bc145f7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629263"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060821"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core でのクロスオリジン要求 (CORS) を有効にする
 
@@ -32,7 +33,7 @@ ms.locfileid: "88629263"
 
 この記事では、ASP.NET Core アプリで CORS を有効にする方法について説明します。
 
-ブラウザーのセキュリティにより、Web ページを提供したドメインと異なるドメインに対して、Web ページが要求を行うことはできません。 この制限は、*同一オリジン ポリシー*と呼ばれます。 同一オリジン ポリシーにより、悪意のあるサイトが別のサイトから機密データを読み取れないようになっています。 場合によっては、他のサイトがアプリに対してクロスオリジン要求を行うことを許可する必要があります。 詳細については、「 [MOZILLA CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS)」を参照してください。
+ブラウザーのセキュリティにより、Web ページを提供したドメインと異なるドメインに対して、Web ページが要求を行うことはできません。 この制限は、 *同一オリジン ポリシー* と呼ばれます。 同一オリジン ポリシーにより、悪意のあるサイトが別のサイトから機密データを読み取れないようになっています。 場合によっては、他のサイトがアプリに対してクロスオリジン要求を行うことを許可する必要があります。 詳細については、「 [MOZILLA CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS)」を参照してください。
 
 [クロスオリジンリソース共有](https://www.w3.org/TR/cors/) (CORS):
 
@@ -120,19 +121,19 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 
 ## <a name="enable-cors-with-endpoint-routing"></a>エンドポイント ルーティングで CORS を有効にする
 
-現在、を使用して、エンドポイントごとに CORS を有効にする `RequireCors` ことは、[自動プレフライト要求](#apf)をサポートして**いません**。 詳細については、こちらの [GitHub の問題](https://github.com/dotnet/aspnetcore/issues/20709) を参照してください。また、 [エンドポイントルーティングと [HttpOptions] を使用](#tcer)して CORS をテストしてください。
+現在、を使用して、エンドポイントごとに CORS を有効にする `RequireCors` ことは、 [自動プレフライト要求](#apf)をサポートして **いません** 。 詳細については、こちらの [GitHub の問題](https://github.com/dotnet/aspnetcore/issues/20709) を参照してください。また、 [エンドポイントルーティングと [HttpOptions] を使用](#tcer)して CORS をテストしてください。
 
 エンドポイントルーティングを使用すると、一連の拡張メソッドを使用して、エンドポイントごとに CORS を有効にすることができ <xref:Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions.RequireCors*> ます。
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
-上のコードでは以下の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * `app.UseCors` CORS ミドルウェアを有効にします。 既定のポリシーが構成されていないため、 `app.UseCors()` 単独で CORS を有効にすることはできません。
 * `/echo`およびコントローラーエンドポイントは、指定されたポリシーを使用して、クロスオリジン要求を許可します。
-* `/echo2`既定のポリシーが指定されていないため、と Razor Pages エンドポイントはクロスオリジン要求を許可し**ません**。
+* `/echo2`既定のポリシーが指定されていないため、と Razor Pages エンドポイントはクロスオリジン要求を許可し **ません** 。
 
-[[Disablecors]](#dc)属性では、を使用してエンドポイントルーティングによって有効にされた CORS は無効になり**ません** `RequireCors` 。
+[[Disablecors]](#dc)属性では、を使用してエンドポイントルーティングによって有効にされた CORS は無効になり **ません** `RequireCors` 。
 
 前述のようなコードをテストする方法については、「 [エンドポイントルーティングを使用した CORS のテスト」および「[HttpOptions]](#tcer) 」を参照してください。
 
@@ -153,7 +154,7 @@ CORS ミドルウェアは、クロスオリジン要求を処理します。 �
 * コントローラー
 * コントローラーアクションメソッド
 
-属性を使用して、さまざまなポリシーをコントローラー、ページモデル、またはアクションメソッドに適用でき `[EnableCors]` ます。 `[EnableCors]`属性がコントローラー、ページモデル、またはアクションメソッドに適用され、CORS がミドルウェアで有効になっている場合、**両方**のポリシーが適用されます。 **ポリシーを組み合わせることはお勧めしません。** `[EnableCors]` **同じアプリ内ではなく、属性またはミドルウェアを使用します。**
+属性を使用して、さまざまなポリシーをコントローラー、ページモデル、またはアクションメソッドに適用でき `[EnableCors]` ます。 `[EnableCors]`属性がコントローラー、ページモデル、またはアクションメソッドに適用され、CORS がミドルウェアで有効になっている場合、 **両方** のポリシーが適用されます。 **ポリシーを組み合わせることはお勧めしません。** `[EnableCors]` **同じアプリ内ではなく、属性またはミドルウェアを使用します。**
 
 次のコードは、各メソッドに異なるポリシーを適用します。
 
@@ -177,7 +178,7 @@ CORS 要求を制限する最も細かい制御:
 
 ### <a name="disable-cors"></a>CORS を無効にする
 
-[[Disablecors]](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute)属性は、[エンドポイントルーティング](#ecors)によって有効にされた CORS を無効にし**ません**。
+[[Disablecors]](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute)属性は、 [エンドポイントルーティング](#ecors)によって有効にされた CORS を無効にし **ません** 。
 
 次のコードでは、CORS ポリシーを定義してい `"MyPolicy"` ます。
 
@@ -213,7 +214,7 @@ CORS 要求を制限する最も細かい制御:
 
 ## <a name="set-the-allowed-origins"></a>許可されるオリジンの設定
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>: 任意のスキーム (または) を持つすべてのオリジンからの CORS 要求を許可 `http` `https` します。 `AllowAnyOrigin`*web サイト*はアプリに対してクロスオリジン要求を行うことができるため、安全ではありません。
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>: 任意のスキーム (または) を持つすべてのオリジンからの CORS 要求を許可 `http` `https` します。 `AllowAnyOrigin`*web サイト* はアプリに対してクロスオリジン要求を行うことができるため、安全ではありません。
 
 > [!NOTE]
 > とを指定すると、 `AllowAnyOrigin` `AllowCredentials` 安全ではない構成で、クロスサイト要求の偽造が発生する可能性があります。 アプリが両方の方法で構成されている場合、CORS サービスは無効な CORS 応答を返します。
@@ -270,7 +271,7 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 * `Last-Modified`
 * `Pragma`
 
-CORS 仕様は、これらのヘッダーの *単純な応答ヘッダー*を呼び出します。 アプリで他のヘッダーを使用できるようにするには、次のように呼び出し <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> ます。
+CORS 仕様は、これらのヘッダーの *単純な応答ヘッダー* を呼び出します。 アプリで他のヘッダーを使用できるようにするには、次のように呼び出し <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> ます。
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a>クロスオリジン要求の資格情報
@@ -333,7 +334,7 @@ I don't like "all CORS enabled domains must be trusted", because it implies that
 
 クライアント要求に対して設定された要求ヘッダーに適用される規則は、オブジェクトに対してを呼び出すことによって、アプリが設定するヘッダーに適用され `setRequestHeader` `XMLHttpRequest` ます。 CORS 仕様は、これらのヘッダー [作成者要求ヘッダー](https://www.w3.org/TR/cors/#author-request-headers)を呼び出します。 このルールは、ブラウザーが設定できるヘッダー (、、など) には適用されません `User-Agent` `Host` `Content-Length` 。
 
-次に示すのは、このドキュメントの「[テスト CORS](#testc) 」セクションの **[Put test]** ボタンから行ったプレフライト要求に似た応答の例です。
+次に示すのは、このドキュメントの「 [テスト CORS](#testc) 」セクションの **[Put test]** ボタンから行ったプレフライト要求に似た応答の例です。
 
 ```
 General:
@@ -483,7 +484,7 @@ Sec-Fetch-Site: cross-site
 User-Agent: Mozilla/5.0 ...
 ```
 
-要求では、 `OPTIONS` サーバーは応答**Response headers**のヘッダーヘッダーを設定し `Access-Control-Allow-Origin: {allowed origin}` ます。 たとえば、デプロイされた [サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI)の [Delete [enablecors]](https://cors1.azurewebsites.net/test?number=2) button 要求には、 `OPTIONS` 次のヘッダーが含まれています。
+要求では、 `OPTIONS` サーバーは応答 **Response headers** のヘッダーヘッダーを設定し `Access-Control-Allow-Origin: {allowed origin}` ます。 たとえば、デプロイされた [サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI)の [Delete [enablecors]](https://cors1.azurewebsites.net/test?number=2) button 要求には、 `OPTIONS` 次のヘッダーが含まれています。
 
 **一般的なヘッダー**
 
@@ -523,7 +524,7 @@ Sec-Fetch-Site: cross-site
 User-Agent: Mozilla/5.0
 ```
 
-上記の **応答ヘッダー**では、サーバーは応答で [アクセス制御-許可](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) ヘッダーを設定します。 `https://cors1.azurewebsites.net`このヘッダーの値は、要求のヘッダーと一致し `Origin` ます。
+上記の **応答ヘッダー** では、サーバーは応答で [アクセス制御-許可](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) ヘッダーを設定します。 `https://cors1.azurewebsites.net`このヘッダーの値は、要求のヘッダーと一致し `Origin` ます。
 
 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>が呼び出されると、 `Access-Control-Allow-Origin: *` ワイルドカード値が返されます。 `AllowAnyOrigin` 任意の発信元を許可します。
 
@@ -571,7 +572,7 @@ IIS に展開する場合、サーバーが匿名アクセスを許可するよ�
 F12 ツールでブラウザーを使用すると、次のようになります。
 
 * [ **値** ] をクリックし、[ **ネットワーク** ] タブでヘッダーを確認します。
-* [ **テストの配置** ] ボタンを選択します。 OPTIONS 要求を表示する方法については、「 [表示オプションの要求](#options) 」を参照してください。 **Put テスト**では、2つの要求、オプションのプレフライト要求、および put 要求が作成されます。
+* [ **テストの配置** ] ボタンを選択します。 OPTIONS 要求を表示する方法については、「 [表示オプションの要求](#options) 」を参照してください。 **Put テスト** では、2つの要求、オプションのプレフライト要求、および put 要求が作成されます。
 * 失敗し **`GetValues2 [DisableCors]`** た CORS 要求をトリガーするには、このボタンを選択します。 ドキュメントに記載されているように、応答は200成功を返しますが、CORS 要求は行われません。 [ **コンソール** ] タブを選択して、CORS エラーを確認します。 ブラウザーによっては、次のようなエラーが表示されます。
 
      `'https://cors1.azurewebsites.net/api/values/GetValues2'`送信元からのフェッチへのアクセス `'https://cors3.azurewebsites.net'` が CORS ポリシーによってブロックされました。要求されたリソースに ' アクセス制御許可-発信元 ' ヘッダーが存在しません。 非透過の応答が要求に対応している場合は、要求のモードを 'no-cors' に設定し、CORS を無効にしてリソースをフェッチしてください。
@@ -596,7 +597,7 @@ C:\Program Files\Git\mingw64\bin\
 
 ### <a name="test-cors-with-endpoint-routing-and-httpoptions"></a>エンドポイントルーティングを使用した CORS のテスト [HttpOptions]
 
-現在、を使用して、エンドポイントごとに CORS を有効にする `RequireCors` ことは、[自動プレフライト要求](#apf)をサポートして**いません**。 [エンドポイントルーティングを使用して CORS を有効に](#ecors)する次のコードについて考えてみます。
+現在、を使用して、エンドポイントごとに CORS を有効にする `RequireCors` ことは、 [自動プレフライト要求](#apf)をサポートして **いません** 。 [エンドポイントルーティングを使用して CORS を有効に](#ecors)する次のコードについて考えてみます。
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPointBugTest.cs?name=snippet2)]
 
@@ -606,7 +607,7 @@ C:\Program Files\Git\mingw64\bin\
 
 配置された[サンプル](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI)の[テストページ](https://cors1.azurewebsites.net/test?number=1)から、前のコードをテストします。
 
-エンドポイントがプレフライト要求に応答して応答するため、 **Delete [EnableCors** **] ボタンは** 正常に終了し `[EnableCors]` ます。 他のエンドポイントは失敗します。 [JavaScript](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI/wwwroot/js/MyJS.js)によってが送信されるため、 **GET**ボタンは失敗します。
+エンドポイントがプレフライト要求に応答して応答するため、 **Delete [EnableCors** **] ボタンは** 正常に終了し `[EnableCors]` ます。 他のエンドポイントは失敗します。 [JavaScript](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI/wwwroot/js/MyJS.js)によってが送信されるため、 **GET** ボタンは失敗します。
 
 ```javascript
  headers: {
@@ -618,11 +619,11 @@ C:\Program Files\Git\mingw64\bin\
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/TodoItems2Controller.cs?name=snippet2)]
 
-配置されたサンプルの [テストページ](https://cors1.azurewebsites.net/test?number=2) から、前のコードをテストします。 [ **コントローラー** ] ドロップダウンリストで、[ **プレフライト** ] を選択し、[ **コントローラーの設定**] をクリックします。 エンドポイントに対するすべての CORS 呼び出しが `TodoItems2Controller` 成功します。
+配置されたサンプルの [テストページ](https://cors1.azurewebsites.net/test?number=2) から、前のコードをテストします。 [ **コントローラー** ] ドロップダウンリストで、[ **プレフライト** ] を選択し、[ **コントローラーの設定** ] をクリックします。 エンドポイントに対するすべての CORS 呼び出しが `TodoItems2Controller` 成功します。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
-* [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
+* [クロスオリジン リソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
 
 ::: moniker-end
@@ -633,7 +634,7 @@ C:\Program Files\Git\mingw64\bin\
 
 この記事では、ASP.NET Core アプリで CORS を有効にする方法について説明します。
 
-ブラウザーのセキュリティにより、Web ページを提供したドメインと異なるドメインに対して、Web ページが要求を行うことはできません。 この制限は、*同一オリジン ポリシー*と呼ばれます。 同一オリジン ポリシーにより、悪意のあるサイトが別のサイトから機密データを読み取れないようになっています。 場合によっては、他のサイトがアプリに対してクロスオリジン要求を行うことを許可する必要があります。 詳細については、「 [MOZILLA CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS)」を参照してください。
+ブラウザーのセキュリティにより、Web ページを提供したドメインと異なるドメインに対して、Web ページが要求を行うことはできません。 この制限は、 *同一オリジン ポリシー* と呼ばれます。 同一オリジン ポリシーにより、悪意のあるサイトが別のサイトから機密データを読み取れないようになっています。 場合によっては、他のサイトがアプリに対してクロスオリジン要求を行うことを許可する必要があります。 詳細については、「 [MOZILLA CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS)」を参照してください。
 
 [クロスオリジンリソース共有](https://www.w3.org/TR/cors/) (CORS):
 
@@ -723,7 +724,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 * コントローラー
 * コントローラーアクションメソッド
 
-属性を使用して、コントローラー/ページモデル/アクションに異なるポリシーを適用でき  `[EnableCors]` ます。 `[EnableCors]`属性がコントローラー/ページモデル/アクションメソッドに適用され、CORS がミドルウェアで有効になっている場合、**両方**のポリシーが適用されます。 ポリシーを組み合わせることはお勧めし **ません** 。 `[EnableCors]`両方では**なく**、属性またはミドルウェアを使用します。 を使用する場合は `[EnableCors]` 、既定のポリシーを定義 **しないで** ください。
+属性を使用して、コントローラー/ページモデル/アクションに異なるポリシーを適用でき  `[EnableCors]` ます。 `[EnableCors]`属性がコントローラー/ページモデル/アクションメソッドに適用され、CORS がミドルウェアで有効になっている場合、 **両方** のポリシーが適用されます。 ポリシーを組み合わせることはお勧めし **ません** 。 `[EnableCors]`両方では **なく** 、属性またはミドルウェアを使用します。 を使用する場合は `[EnableCors]` 、既定のポリシーを定義 **しないで** ください。
 
 次のコードは、各メソッドに異なるポリシーを適用します。
 
@@ -754,7 +755,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="set-the-allowed-origins"></a>許可されるオリジンの設定
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>: 任意のスキーム (または) を持つすべてのオリジンからの CORS 要求を許可 `http` `https` します。 `AllowAnyOrigin`*web サイト*はアプリに対してクロスオリジン要求を行うことができるため、安全ではありません。
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>: 任意のスキーム (または) を持つすべてのオリジンからの CORS 要求を許可 `http` `https` します。 `AllowAnyOrigin`*web サイト* はアプリに対してクロスオリジン要求を行うことができるため、安全ではありません。
 
 > [!NOTE]
 > とを指定すると、 `AllowAnyOrigin` `AllowCredentials` 安全ではない構成で、クロスサイト要求の偽造が発生する可能性があります。 セキュリティで保護されたアプリの場合は、クライアントがサーバーリソースへのアクセスを承認する必要がある場合は、オリジンの正確な一覧を指定します。
@@ -774,7 +775,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ### <a name="set-the-allowed-request-headers"></a>許可された要求ヘッダーを設定する
 
-CORS 要求で特定のヘッダーを送信できるようにするには、 *author 要求ヘッダー*と呼ばれるを呼び出し、 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> 許可されているヘッダーを指定します。
+CORS 要求で特定のヘッダーを送信できるようにするには、 *author 要求ヘッダー* と呼ばれるを呼び出し、 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> 許可されているヘッダーを指定します。
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=55-60&highlight=5)]
 
@@ -816,7 +817,7 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 * `Last-Modified`
 * `Pragma`
 
-CORS 仕様は、これらのヘッダーの *単純な応答ヘッダー*を呼び出します。 アプリで他のヘッダーを使用できるようにするには、次のように呼び出し <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> ます。
+CORS 仕様は、これらのヘッダーの *単純な応答ヘッダー* を呼び出します。 アプリで他のヘッダーを使用できるようにするには、次のように呼び出し <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> ます。
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=73-78&highlight=5)]
 
@@ -867,7 +868,7 @@ I don't like "all CORS enabled domains must be trusted", because it implies that
 
 ### <a name="preflight-requests"></a>プレフライト要求
 
-一部の CORS 要求については、ブラウザーは実際の要求を行う前に追加の要求を送信します。 この要求は *プレフライト要求*と呼ばれます。 次の条件に該当する場合、ブラウザーはプレフライト要求をスキップできます。
+一部の CORS 要求については、ブラウザーは実際の要求を行う前に追加の要求を送信します。 この要求は *プレフライト要求* と呼ばれます。 次の条件に該当する場合、ブラウザーはプレフライト要求をスキップできます。
 
 * 要求メソッドは GET、HEAD、または POST です。
 * アプリで `Accept` は、、、 `Accept-Language` `Content-Language` 、 `Content-Type` 、または `Last-Event-ID` 以外の要求ヘッダーは設定されません。
@@ -876,7 +877,7 @@ I don't like "all CORS enabled domains must be trusted", because it implies that
   * `multipart/form-data`
   * `text/plain`
 
-クライアント要求に対して設定された要求ヘッダーに適用される規則は、オブジェクトに対してを呼び出すことによって、アプリが設定するヘッダーに適用され `setRequestHeader` `XMLHttpRequest` ます。 CORS 仕様は、これらのヘッダー *作成者要求ヘッダー*を呼び出します。 このルールは、ブラウザーが設定できるヘッダー (、、など) には適用されません `User-Agent` `Host` `Content-Length` 。
+クライアント要求に対して設定された要求ヘッダーに適用される規則は、オブジェクトに対してを呼び出すことによって、アプリが設定するヘッダーに適用され `setRequestHeader` `XMLHttpRequest` ます。 CORS 仕様は、これらのヘッダー *作成者要求ヘッダー* を呼び出します。 このルールは、ブラウザーが設定できるヘッダー (、、など) には適用されません `User-Agent` `Host` `Content-Length` 。
 
 プレフライト要求の例を次に示します。
 
@@ -1005,7 +1006,7 @@ CORS をテストするには:
 
 1. 前のコードで、をデプロイされた `url: 'https://<web app>.azurewebsites.net/api/values/1',` アプリの URL に置き換えます。
 1. API プロジェクトをデプロイします。 たとえば、 [Azure にデプロイ](xref:host-and-deploy/azure-apps/index)します。
-1. Razorデスクトップからページまたは MVC アプリを実行し、[**テスト**] ボタンをクリックします。 F12 ツールを使用して、エラーメッセージを確認します。
+1. Razorデスクトップからページまたは MVC アプリを実行し、[ **テスト** ] ボタンをクリックします。 F12 ツールを使用して、エラーメッセージを確認します。
 1. から localhost の配信元を削除 `WithOrigins` し、アプリをデプロイします。 または、別のポートを使用してクライアントアプリを実行します。 たとえば、Visual Studio からを実行します。
 1. クライアントアプリでテストします。 CORS エラーはエラーを返しますが、エラーメッセージは JavaScript では使用できません。 F12 ツールの [コンソール] タブを使用して、エラーを確認します。 ブラウザーによっては、次のようなエラー (F12 ツールコンソール) が表示されます。
 
@@ -1026,9 +1027,9 @@ CORS が有効なエンドポイントは、 [Fiddler](https://www.telerik.com/f
 
 IIS に展開する場合、サーバーが匿名アクセスを許可するように構成されていない場合、CORS は Windows 認証の前に実行する必要があります。 このシナリオをサポートするには、アプリ用に [IIS CORS モジュール](https://www.iis.net/downloads/microsoft/iis-cors-module) をインストールして構成する必要があります。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
-* [クロスオリジンリソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
+* [クロスオリジン リソース共有 (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
 * [IIS CORS モジュールの概要](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
 
 ::: moniker-end

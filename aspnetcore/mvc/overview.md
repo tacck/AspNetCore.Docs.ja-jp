@@ -5,6 +5,7 @@ description: ASP.NET Core MVC が、モデル ビュー コントローラー �
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633618"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059313"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -87,13 +88,13 @@ ASP.NET Core MVC には、以下が含まれます。
 
 ASP.NET Core MVC は、[ASP.NET Core のルーティング](../fundamentals/routing.md)の上にビルドされます。このルーティングは強力な URL マッピング コンポーネントで、わかりやすく検索可能な URL のアプリケーションをビルドできます。 これにより、Web サーバー上のファイルを整理する方法に関係なく、検索エンジンの最適化 (SEO) およびリンクの作成に適しているアプリケーションの URL の名前付けパターンを定義できます。 ルート値制約、既定値、省略可能な値をサポートする、便利なルート テンプレートの構文を使用して、ルートを定義できます。
 
-*規約に基づくルーティング*では、アプリケーションが受け入れる URL 形式、およびそれらの各形式を指定したコントローラー上の特定のアクション メソッドにマップする方法をグローバルに定義することができます。 受信要求を受け取ると、ルーティング エンジンは URL を解析し、定義された URL 形式のいずれかに合わせて、関連するコントローラーのアクション メソッドを呼び出します。
+*規約に基づくルーティング* では、アプリケーションが受け入れる URL 形式、およびそれらの各形式を指定したコントローラー上の特定のアクション メソッドにマップする方法をグローバルに定義することができます。 受信要求を受け取ると、ルーティング エンジンは URL を解析し、定義された URL 形式のいずれかに合わせて、関連するコントローラーのアクション メソッドを呼び出します。
 
 ```csharp
 routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id?}");
 ```
 
-*属性のルーティング*では、アプリケーションのルートを定義する属性でコントローラーとアクションを装飾して、ルーティング情報を指定できます。 つまり、ルート定義は、関連付けられているコントローラーとアクションの横に配置されるということです。
+*属性のルーティング* では、アプリケーションのルートを定義する属性でコントローラーとアクションを装飾して、ルーティング情報を指定できます。 つまり、ルート定義は、関連付けられているコントローラーとアクションの横に配置されるということです。
 
 ```csharp
 [Route("api/[controller]")]
@@ -172,7 +173,7 @@ ASP.NET Core には、[依存関係の挿入 (DI)](../fundamentals/dependency-in
 </html>
 ```
 
-### <a name="filters"></a>フィルター
+### <a name="filters"></a>フィルタ
 
 [フィルター](controllers/filters.md)は、開発者が例外処理や承認など、横断的関心事をカプセル化するのに役立ちます。 フィルターでは、アクション メソッドの前処理と後処理ロジックを実行できるようにします。また、指定した要求の実行パイプライン内のある時点で実行するように構成することもできます。 フィルターは、属性としてコントローラーまたはアクションに適用できます (または、グローバルに実行できます)。 いくつかのフィルター (`Authorize` など) は、フレームワークに含まれます。 `[Authorize]` は MVC 承認フィルターの作成のために使用される属性です.
 
@@ -268,5 +269,5 @@ Razor MVC のビューは、モデルに基づいて厳密に型指定できま�
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。* ")
+* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 (" *Microsoft では保守管理もサポートも行っていません。* ")
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

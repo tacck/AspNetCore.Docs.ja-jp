@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: c1891b8093c5a4c1599cd3c4ed4e5e60e2fd13e8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629003"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060925"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー作成
 
@@ -38,7 +39,7 @@ ms.locfileid: "88629003"
 
 1. **AuthoringTagHelpers** という新しい ASP.NET Core プロジェクトを作成します。 このプロジェクトに認証は必要ありません。
 
-1. タグ ヘルパーを保持する *TagHelpers* というフォルダーを作成します。 *TagHelpers* フォルダーは必須では*ありません*が、あると便利です。 それでは、いくつか単純なタグ ヘルパーを記述してみましょう。
+1. タグ ヘルパーを保持する *TagHelpers* というフォルダーを作成します。 *TagHelpers* フォルダーは必須では *ありません* が、あると便利です。 それでは、いくつか単純なタグ ヘルパーを記述してみましょう。
 
 ## <a name="a-minimal-tag-helper"></a>最小のタグ ヘルパー
 
@@ -60,7 +61,7 @@ ms.locfileid: "88629003"
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * タグ ヘルパーは、ルート クラス名の要素 (クラス名部分から *TagHelper* 部分を引いたもの) をターゲットとする名前付け規則です。 この例では、 **Emailtaghelper** のルート名は *email*であるため、タグは対象になり `<email>` ます。 この命名規則は、ほとんどのタグ ヘルパーで機能します。オーバーライドの方法については、後述します。
+   * タグ ヘルパーは、ルート クラス名の要素 (クラス名部分から *TagHelper* 部分を引いたもの) をターゲットとする名前付け規則です。 この例では、 **Emailtaghelper** のルート名は *email* であるため、タグは対象になり `<email>` ます。 この命名規則は、ほとんどのタグ ヘルパーで機能します。オーバーライドの方法については、後述します。
 
    * `EmailTagHelper` クラスは、`TagHelper` から派生したものです。 `TagHelper` クラスはタグ ヘルパーを記述するためのメソッドとプロパティを提供します。
 
@@ -70,7 +71,7 @@ ms.locfileid: "88629003"
 
    * `Process` (および `ProcessAsync`) の出力パラメーターには、HTML タグとコンテンツの生成に使用された元のソースを代表するステートフル HTML 要素が含まれています。
 
-   * クラス名には **TagHelper** のサフィックスが付けられています。これは必須*ではありません*が、ベスト プラクティスです。 クラスは、次のように宣言できます。
+   * クラス名には **TagHelper** のサフィックスが付けられています。これは必須 *ではありません* が、ベスト プラクティスです。 クラスは、次のように宣言できます。
 
    ```csharp
    public class Email : TagHelper
@@ -93,9 +94,9 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
     [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
-FQN を使用してタグ ヘルパーをビューに追加するには、最初に FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) を追加してから、**アセンブリ名** (*AuthoringTagHelpers*。`namespace` は不要) を追加します。 ほとんどの開発者は、ワイルドカードの構文を使用する方を選びます。 [タグ ヘルパーの概要](intro.md)に関するページでは、タグ ヘルパーの追加、削除、階層、およびワイルドカードの構文について詳しく説明されています。
+FQN を使用してタグ ヘルパーをビューに追加するには、最初に FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) を追加してから、 **アセンブリ名** ( *AuthoringTagHelpers* 。`namespace` は不要) を追加します。 ほとんどの開発者は、ワイルドカードの構文を使用する方を選びます。 [タグ ヘルパーの概要](intro.md)に関するページでは、タグ ヘルパーの追加、削除、階層、およびワイルドカードの構文について詳しく説明されています。
 
-1. これらの変更を加えて、*Views/Home/Contact.cshtml* ファイル内のマークアップを更新します。
+1. これらの変更を加えて、 *Views/Home/Contact.cshtml* ファイル内のマークアップを更新します。
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
@@ -119,7 +120,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
 この方法は、属性 "href" が属性コレクションに現存していない場合に限り、属性 "href" に対して有効です。 `output.Attributes.Add` メソッドを使用してタグ ヘルパー属性をタグ属性のコレクションの末尾に追加することもできます。
 
-1. これらの変更を加えて、*Views/Home/Contact.cshtml* ファイル内のマークアップを更新します。
+1. これらの変更を加えて、 *Views/Home/Contact.cshtml* ファイル内のマークアップを更新します。
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
@@ -172,7 +173,7 @@ FQN を使用してタグ ヘルパーをビューに追加するには、最初
 
    上記の `[HtmlTargetElement]` 属性は、"bold" という属性名を提供する HTML マークアップのみをターゲットにしています。 `<bold>` 要素は、タグ ヘルパーによって変更されませんでした。
 
-1. `[HtmlTargetElement]` 属性の行をコメント アウトすると、既定の `<bold>` タグ (`<bold>` 形式の HTML マークアップ) が再度ターゲットになります。 既定の名前付け規則は、クラス名 **Bold**TagHelper を `<bold>` タグと一致させることに注意してください。
+1. `[HtmlTargetElement]` 属性の行をコメント アウトすると、既定の `<bold>` タグ (`<bold>` 形式の HTML マークアップ) が再度ターゲットになります。 既定の名前付け規則は、クラス名 **Bold** TagHelper を `<bold>` タグと一致させることに注意してください。
 
 1. アプリを実行して、`<bold>` タグがタグ ヘルパーによって処理されることを確認します。
 

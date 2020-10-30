@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 9542a7c0fd16c00f46ee69c5873878a7c70ef626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9319e74d0213b178c2a71be69a0332270d9446c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630329"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061458"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>ASP.NET Core MVC でコントローラーで要求を処理する
 
@@ -31,7 +32,7 @@ ms.locfileid: "88630329"
 
 ## <a name="what-is-a-controller"></a>コントローラーとは何か。
 
-コントローラーは一連のアクションを定義し、グループ化するために使用されます。 アクション (または*アクション メソッド*) は、要求を処理するコントローラーのメソッドです。 コントローラーは、同様のアクションを論理的にグループ化します。 アクションをこのように集めることで、ルーティング、キャッシュ、承認など、一連の共通ルールをまとめて適用できます。 要求は[ルーティング](xref:mvc/controllers/routing)を介してアクションにマッピングされます。
+コントローラーは一連のアクションを定義し、グループ化するために使用されます。 アクション (または *アクション メソッド* ) は、要求を処理するコントローラーのメソッドです。 コントローラーは、同様のアクションを論理的にグループ化します。 アクションをこのように集めることで、ルーティング、キャッシュ、承認など、一連の共通ルールをまとめて適用できます。 要求は[ルーティング](xref:mvc/controllers/routing)を介してアクションにマッピングされます。
 
 コントローラー クラスは慣例で
 
@@ -48,11 +49,11 @@ ms.locfileid: "88630329"
 
 コントローラーは [Explicit Dependencies Principle](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies) に従う必要があります。 この原則を実装するための手法がいくつかあります。 複数のコントローラー アクションに同じサービスが必要な場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)で依存関係を要求する方法を検討してください。 サービスを必要とするアクション メソッドが 1 つだけの場合、[アクションの挿入](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices)で依存関係を要求する方法を検討してください。
 
-**M**odel-**V**iew-**C**ontroller パターン内では、コントローラーは要求の初回処理とモデルのインスタンス化を担います。 一般的に、ビジネスの決定はモデル内で実行するべきです。
+**M** odel- **V** iew- **C** ontroller パターン内では、コントローラーは要求の初回処理とモデルのインスタンス化を担います。 一般的に、ビジネスの決定はモデル内で実行するべきです。
 
 コントローラーはモデルの処理の結果を受け取り (結果があれば)、適切なビューとそれに関連付けられるビュー データを返すか、API 呼び出しの結果を返します。 詳細については、「[Overview of ASP.NET Core MVC](xref:mvc/overview)」(ASP.NET Core MVC の概要) と「[ASP.NET Core MVC と Visual Studio の概要](xref:tutorials/first-mvc-app/start-mvc)」を参照してください。
 
-コントローラーは *UI レベル*の抽象化です。 その役目は、要求データの有効性を確保することと返すビュー (あるいは、API の結果) を選択することです。 要素が十分に考慮されたアプリの場合、データ アクセスやビジネス ロジックは直接含まれません。 そうではなく、コントローラーはサービスにそのような役目を委任します。
+コントローラーは *UI レベル* の抽象化です。 その役目は、要求データの有効性を確保することと返すビュー (あるいは、API の結果) を選択することです。 要素が十分に考慮されたアプリの場合、データ アクセスやビジネス ロジックは直接含まれません。 そうではなく、コントローラーはサービスにそのような役目を委任します。
 
 ## <a name="defining-actions"></a>アクションの定義
 
@@ -60,7 +61,7 @@ ms.locfileid: "88630329"
 
 アクション メソッドには、要求をビジネスにマッピングするためのロジックを含めてください。 ビジネスは通常、コントローラーが[依存関係挿入](xref:mvc/controllers/dependency-injection)を経由してアクセスするサービスとして表されます。 アクションはビジネス アクションの結果をアプリケーションの状態にマッピングします。
 
-アクションは何でも返すことができますが、多くの場合、応答を生成する `IActionResult` のインスタンス (あるいは、非同期メソッドの `Task<IActionResult>`) を返します。 アクション メソッドは、*応答の種類*の選択を担います。 アクションの結果は*応答を行いません*。
+アクションは何でも返すことができますが、多くの場合、応答を生成する `IActionResult` のインスタンス (あるいは、非同期メソッドの `Task<IActionResult>`) を返します。 アクション メソッドは、 *応答の種類* の選択を担います。 アクションの結果は *応答を行いません* 。
 
 ### <a name="controller-helper-methods"></a>コントローラー ヘルパー メソッド
 
@@ -100,13 +101,13 @@ ms.locfileid: "88630329"
 
 #### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. クライアントとネゴシエートされるコンテンツの種類で書式設定された、空でない応答本文が生成されるメソッド
 
-このカテゴリは、**コンテンツ ネゴシエーション**として知られています。 [コンテンツ ネゴシエーション](xref:web-api/advanced/formatting#content-negotiation)は、アクションが [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 型を返すか、[IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 実装以外の何かを返すときに適用されます。 非 `IActionResult` の実装 (`object` など) を返すアクションは、書式設定された応答も返します。
+このカテゴリは、 **コンテンツ ネゴシエーション** として知られています。 [コンテンツ ネゴシエーション](xref:web-api/advanced/formatting#content-negotiation)は、アクションが [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 型を返すか、[IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 実装以外の何かを返すときに適用されます。 非 `IActionResult` の実装 (`object` など) を返すアクションは、書式設定された応答も返します。
 
 この種類のヘルパー メソッドには `BadRequest`、`CreatedAtRoute`、`Ok` などがあります。 このようなメソッドの例として、それぞれ `return BadRequest(modelState);`、`return CreatedAtRoute("routename", values, newobject);`、`return Ok(value);` があります。 `BadRequest` と `Ok` は、値が渡されたときにのみ、コンテンツ ネゴシエーションを実行します。値が渡されなければ、代わりに HTTP ステータス コードという結果の種類としてサービスを提供します。 一方、`CreatedAtRoute` メソッドは常にコンテンツ ネゴシエーションを実行します。そのあらゆるオーバーロードにおいて、値を渡すことが必要になるためです。
 
 ### <a name="cross-cutting-concerns"></a>横断的な問題
 
-アプリケーションは通常、ワークフローの一部を共有します。 たとえば、ショッピング カートにアクセスする際、認証を要求するアプリや一部のページでデータをキャッシュするアプリです。 アクション メソッドの前または後でロジックを実行するには、*フィルター*を使用します。 横断的な問題に対して[フィルター](xref:mvc/controllers/filters)を使うと、重複を減らすことができます。
+アプリケーションは通常、ワークフローの一部を共有します。 たとえば、ショッピング カートにアクセスする際、認証を要求するアプリや一部のページでデータをキャッシュするアプリです。 アクション メソッドの前または後でロジックを実行するには、 *フィルター* を使用します。 横断的な問題に対して[フィルター](xref:mvc/controllers/filters)を使うと、重複を減らすことができます。
 
 `[Authorize]` など、フィルター属性の多くは、求められる詳細度に基づき、コントローラーまたはアクション レベルで適用できます。
 

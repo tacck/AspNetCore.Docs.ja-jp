@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: 6ac808d11790ae27e82606b442ff215d95b93e41
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8f54f2e4894328f8471d5f80c8184839ce47add6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631369"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059690"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>ASP.NET アプリ間での認証の共有 cookie
 
@@ -49,7 +50,7 @@ ms.locfileid: "88631369"
 
 ASP.NET Core Identity を使うとき:
 
-* データ保護キーとアプリ名は、アプリ間で共有する必要があります。 共通のキー格納場所は、次の例のメソッドに提供され <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> ます。 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>共通の共有アプリ名を構成するには、を使用し `SharedCookieApp` ます (次の例を参考にしてください)。 詳細については、<xref:security/data-protection/configuration/overview> を参照してください。
+* データ保護キーとアプリ名は、アプリ間で共有する必要があります。 共通のキー格納場所は、次の例のメソッドに提供され <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> ます。 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>共通の共有アプリ名を構成するには、を使用し `SharedCookieApp` ます (次の例を参考にしてください)。 詳細については、「<xref:security/data-protection/configuration/overview>」を参照してください。
 * 拡張メソッドを使用して、 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.ConfigureApplicationCookie*> のデータ保護サービスを設定し cookie ます。
 * 既定の認証の種類はです `Identity.Application` 。
 
@@ -106,7 +107,7 @@ options.Cookie.Domain = ".contoso.com";
 
 ## <a name="encrypt-data-protection-keys-at-rest"></a>保存時のデータ保護キーの暗号化
 
-運用環境のデプロイの場合は、 `DataProtectionProvider` DPAPI または X509Certificate を使用して保存時のキーを暗号化するようにを構成します。 詳細については、<xref:security/data-protection/implementation/key-encryption-at-rest> を参照してください。 次の例では、証明書の拇印がに提供されてい <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*> ます。
+運用環境のデプロイの場合は、 `DataProtectionProvider` DPAPI または X509Certificate を使用して保存時のキーを暗号化するようにを構成します。 詳細については、「<xref:security/data-protection/implementation/key-encryption-at-rest>」を参照してください。 次の例では、証明書の拇印がに提供されてい <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*> ます。
 
 ```csharp
 services.AddDataProtection()
@@ -134,7 +135,7 @@ cookieASP.NET 4.x アプリと ASP.NET Core アプリの間で認証を共有す
 
 およびを設定していない場合は `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` `http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider` 、 <xref:System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier> 一意のユーザーを識別するクレームをに設定します。
 
-*App_Start/startup.auth.cs*:
+*App_Start/startup.auth.cs* :
 
 ```csharp
 app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -167,9 +168,9 @@ System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier =
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
 ```
 
-ユーザー id を生成するときは、認証の種類 ( `Identity.Application` ) が `AuthenticationType` `UseCookieAuthentication` *App_Start/startup.auth.cs*ので設定されたで定義されている種類と一致している必要があります。
+ユーザー id を生成するときは、認証の種類 ( `Identity.Application` ) が `AuthenticationType` `UseCookieAuthentication` *App_Start/startup.auth.cs* ので設定されたで定義されている種類と一致している必要があります。
 
-*モデル/ IdentityModels.cs*:
+*モデル/ IdentityModels.cs* :
 
 ```csharp
 public class ApplicationUser : IdentityUser

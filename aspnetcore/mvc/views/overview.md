@@ -5,6 +5,7 @@ description: ビューがアプリのデータ表示と、ASP.NET Core MVC で�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630680"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060626"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC のビュー
 
@@ -29,13 +30,13 @@ ms.locfileid: "88630680"
 
 このドキュメントでは、ASP.NET Core MVC アプリケーションで使用されるビューについて説明します。 ページの詳細につい Razor ては、「 [ Razor ページの概要](xref:razor-pages/index)」を参照してください。
 
-Model-View-Controller (MVC) パターンでは、*ビュー*がアプリのデータ表示とユーザー操作を処理します。 ビューは、 [ Razor マークアップ](xref:mvc/views/razor)が埋め込まれた HTML テンプレートです。 Razor マークアップは、クライアントに送信される web ページを生成するために HTML マークアップと対話するコードです。
+Model-View-Controller (MVC) パターンでは、 *ビュー* がアプリのデータ表示とユーザー操作を処理します。 ビューは、 [ Razor マークアップ](xref:mvc/views/razor)が埋め込まれた HTML テンプレートです。 Razor マークアップは、クライアントに送信される web ページを生成するために HTML マークアップと対話するコードです。
 
-ASP.NET Core MVC では、ビューは、マークアップで[C# プログラミング言語](/dotnet/csharp/)を使用する*cshtml ファイルです。* Razor 通常、ビュー ファイルは、各アプリの[コントローラー](xref:mvc/controllers/actions)の名前が付いたフォルダーにグループ化されます。 これらのフォルダーは、アプリのルートにある *Views* フォルダーに格納されます。
+ASP.NET Core MVC では、ビューは、マークアップで [C# プログラミング言語](/dotnet/csharp/)を使用する *cshtml ファイルです。* Razor 通常、ビュー ファイルは、各アプリの[コントローラー](xref:mvc/controllers/actions)の名前が付いたフォルダーにグループ化されます。 これらのフォルダーは、アプリのルートにある *Views* フォルダーに格納されます。
 
 ![Visual Studio のソリューション エクスプローラーで Views フォルダー、Home フォルダーが開かれ、About.cshtml、Contact.cshtml、および Index.cshtml ファイルが示されています。](overview/_static/views_solution_explorer.png)
 
-*ホーム* コントローラーは、*Views* フォルダー内の *Home* フォルダーによって表されます。 *Home* フォルダーには、*About*、*Contact*、*Index* (ホームページ) の Web ページのビューが含まれています。 ユーザーがこれら 3 つの Web ページのうちの 1 つを要求すると、*ホーム* コントローラー内のコントローラー アクションが 3 つのビューからビルドに使用するものを決定して、ユーザーに Web ページを返します。
+*ホーム* コントローラーは、 *Views* フォルダー内の *Home* フォルダーによって表されます。 *Home* フォルダーには、 *About* 、 *Contact* 、 *Index* (ホームページ) の Web ページのビューが含まれています。 ユーザーがこれら 3 つの Web ページのうちの 1 つを要求すると、 *ホーム* コントローラー内のコントローラー アクションが 3 つのビューからビルドに使用するものを決定して、ユーザーに Web ページを返します。
 
 [レイアウト](xref:mvc/views/layout)を使用して、一貫性のある Web ページ セクションを提供し、コードの繰り返しを削減します。 多くの場合、レイアウトには、ヘッダー、ナビゲーションとメニュー要素、フッターが含まれています。 ヘッダーとフッターには通常、多くのメタデータ要素とスクリプトおよびスタイル アセットへのリンクの定型マークアップが含まれます。 レイアウトは、ビューでこの定型マークアップを回避するのに役立ちます。
 
@@ -54,7 +55,7 @@ ASP.NET Core MVC では、ビューは、マークアップで[C# プログラ�
 
 ## <a name="creating-a-view"></a>ビューの作成
 
-コントローラーに固有のビューは、*Views/[ControllerName]* フォルダー内に作成されます。 コントローラー間で共有されるビューは、*Views/Shared* フォルダーに配置されます。 ビューを作成するには、新しいファイルを追加し、このファイルに、関連付けられたコントローラー アクションと同じ名前にファイル拡張子 *.cshtml* を付けた名前を付けます。 *ホーム* コントローラーで、*About* アクションに対応するビューを作成するには、*Views/Home* フォルダー内に *About.cshtml* ファイルを作成します。
+コントローラーに固有のビューは、 *Views/[ControllerName]* フォルダー内に作成されます。 コントローラー間で共有されるビューは、 *Views/Shared* フォルダーに配置されます。 ビューを作成するには、新しいファイルを追加し、このファイルに、関連付けられたコントローラー アクションと同じ名前にファイル拡張子 *.cshtml* を付けた名前を付けます。 *ホーム* コントローラーで、 *About* アクションに対応するビューを作成するには、 *Views/Home* フォルダー内に *About.cshtml* ファイルを作成します。
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
@@ -96,22 +97,22 @@ ASP.NET Core MVC では、ビューは、マークアップで[C# プログラ�
 
 ### <a name="view-discovery"></a>ビューの検出
 
-アクションがビューを返すときに、*ビューの検出*と呼ばれるプロセスが行われます。 このプロセスでは、ビュー名に基づいて、使用するビュー ファイルを決定します。 
+アクションがビューを返すときに、 *ビューの検出* と呼ばれるプロセスが行われます。 このプロセスでは、ビュー名に基づいて、使用するビュー ファイルを決定します。 
 
-`View` メソッド (`return View();`) の既定の動作は、呼び出し元のアクション メソッドと同じ名前を持つビューを返すことです。 たとえば、コントローラーの *About* `ActionResult` メソッド名は、*About.cshtml* という名前のビュー ファイルの検索に使用されます。 ランタイムは最初に、ビューの *Views/[ControllerName]* フォルダーを調べます。 そこで一致するビューが見つからない場合は、ビューの *Shared* フォルダーを検索します。
+`View` メソッド (`return View();`) の既定の動作は、呼び出し元のアクション メソッドと同じ名前を持つビューを返すことです。 たとえば、コントローラーの *About* `ActionResult` メソッド名は、 *About.cshtml* という名前のビュー ファイルの検索に使用されます。 ランタイムは最初に、ビューの *Views/[ControllerName]* フォルダーを調べます。 そこで一致するビューが見つからない場合は、ビューの *Shared* フォルダーを検索します。
 
 `return View();` を使用して `ViewResult` を暗黙的に返すか、`return View("<ViewName>");` を使用してビュー名を `View` メソッドに明示的に渡すかは関係ありません。 どちらの場合も、ビューの検出は、次の順序で一致するビュー ファイルを検索します。
 
    1. *Views/\[ControllerName]/\[ViewName].cshtml*
    1. *Views/Shared/\[ViewName].cshtml*
 
-ビュー名の代わりに、ビュー ファイル パスを指定できます。 アプリのルートから始まる (必要に応じて"/" または "~/" で始まる) 絶対パスを使用する場合は、*.cshtml* 拡張子を指定する必要があります。
+ビュー名の代わりに、ビュー ファイル パスを指定できます。 アプリのルートから始まる (必要に応じて"/" または "~/" で始まる) 絶対パスを使用する場合は、 *.cshtml* 拡張子を指定する必要があります。
 
 ```csharp
 return View("Views/Home/About.cshtml");
 ```
 
-*.cshtml* 拡張子なしで、相対パスを使用して異なるディレクトリ内にあるビューを指定することもできます。 `HomeController` の内部で、相対パスを使用して、*Manage* ビューの *Index* ビューを返すことができます。
+*.cshtml* 拡張子なしで、相対パスを使用して異なるディレクトリ内にあるビューを指定することもできます。 `HomeController` の内部で、相対パスを使用して、 *Manage* ビューの *Index* ビューを返すことができます。
 
 ```csharp
 return View("../Manage/Index");
@@ -144,7 +145,7 @@ return View("./About");
 
 最も確実な方法は、ビューで[モデル](xref:mvc/models/model-binding)の型を指定することです。 このモデルは、一般的に *viewmodel* と呼ばれます。 viewmodel 型のインスタンスをアクションからビューに渡します。
 
-viewmodel を使用してデータをビューに渡すことで、ビューで*厳密な*型チェックを利用できるようになります。 *厳密な型指定* (または*厳密に型指定された*) は、すべての変数および定数に明示的に定義された型 (`string`、`int`、`DateTime` など) があることを意味します。 ビューで使用される型の妥当性は、コンパイル時にチェックされます。
+viewmodel を使用してデータをビューに渡すことで、ビューで *厳密な* 型チェックを利用できるようになります。 *厳密な型指定* (または *厳密に型指定された* ) は、すべての変数および定数に明示的に定義された型 (`string`、`int`、`DateTime` など) があることを意味します。 ビューで使用される型の妥当性は、コンパイル時にチェックされます。
 
 [Visual Studio](https://visualstudio.microsoft.com) と [Visual Studio Code](https://code.visualstudio.com/) では、[IntelliSense](/visualstudio/ide/using-intellisense) と呼ばれる機能を使用して、厳密に型指定されたクラス メンバーを一覧表示します。 viewmodel のプロパティを表示する場合は、viewmodel の変数名に続けてピリオド (`.`) を入力します。 これにより、エラーの少ないコードをより早く記述できます。
 
@@ -181,7 +182,7 @@ public IActionResult Contact()
 }
 ```
 
-ビューに提供できるモデルの型に制限はありません。 Plain Old CLR Object (POCO) viewmodel を、動作 (メソッド) をほとんど定義せずに使用することをお勧めします。 通常、viewmodel クラスは、*Models* フォルダーまたはアプリのルートにある個別の *ViewModels* フォルダーのいずれかに格納されます。 上記の例で使用されている *Address* viewmodel は、*Address.cs* という名前のファイルに格納されている POCO viewmodel です。
+ビューに提供できるモデルの型に制限はありません。 Plain Old CLR Object (POCO) viewmodel を、動作 (メソッド) をほとんど定義せずに使用することをお勧めします。 通常、viewmodel クラスは、 *Models* フォルダーまたはアプリのルートにある個別の *ViewModels* フォルダーのいずれかに格納されます。 上記の例で使用されている *Address* viewmodel は、 *Address.cs* という名前のファイルに格納されている POCO viewmodel です。
 
 ```csharp
 namespace WebApplication1.ViewModels
@@ -205,7 +206,7 @@ viewmodel 型とビジネス モデル型の両方に同じクラスを使用す
 
 `ViewBag`*では Razor 使用できませんページ。*
 
-厳密に型指定されたビューに加え、ビューはデータの*弱く型指定された* (*緩く型指定された*ともいう) コレクションにもアクセスできます。 厳密な型とは異なり、*弱い型* (または*緩い型*) は、使用するデータの型を明示的に宣言しないことを意味します。 弱く型指定されたデータのコレクションを使用して、少量のデータをコントローラーとビュー間でやり取りすることができます。
+厳密に型指定されたビューに加え、ビューはデータの *弱く型指定された* ( *緩く型指定された* ともいう) コレクションにもアクセスできます。 厳密な型とは異なり、 *弱い型* (または *緩い型* ) は、使用するデータの型を明示的に宣言しないことを意味します。 弱く型指定されたデータのコレクションを使用して、少量のデータをコントローラーとビュー間でやり取りすることができます。
 
 | データをやり取りする相手                        | 例                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -344,7 +345,7 @@ public IActionResult SomeAction()
 }
 ```
 
-プロパティを読み取りますが、`ViewData` と `ViewBag` の使用を反転します。 *_Layout.cshtml*ファイルで、`ViewData` を使用してタイトルを取得し、`ViewBag` を使用して説明を取得します。
+プロパティを読み取りますが、`ViewData` と `ViewBag` の使用を反転します。 *_Layout.cshtml* ファイルで、`ViewData` を使用してタイトルを取得し、`ViewBag` を使用して説明を取得します。
 
 ```cshtml
 <!DOCTYPE html>

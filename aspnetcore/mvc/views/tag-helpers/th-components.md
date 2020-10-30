@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: d3bae9cd5b4a5c7315c795229c7eafbf1e44e22d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 15bddd8ce18546bef7ee7e6ec2e32e369d0858a3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627586"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060561"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core のタグ ヘルパー コンポーネント
 
@@ -30,7 +31,7 @@ ms.locfileid: "88627586"
 
 タグ ヘルパー コンポーネントは、サーバー側のコードから HTML 要素を、条件に応じて変更または追加できるタグ ヘルパーです。 この機能は、ASP.NET Core 2.0 以降で使用できます。
 
-ASP.NET Core には、組み込みのタグ ヘルパー コンポーネントが 2 つ (`head` と `body`) 含まれています。 これらは名前空間に配置され、 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> MVC とページの両方で使用でき Razor ます。 タグ ヘルパー コンポーネントには、*_ViewImports.cshtml* でのアプリへの登録は必要ありません。
+ASP.NET Core には、組み込みのタグ ヘルパー コンポーネントが 2 つ (`head` と `body`) 含まれています。 これらは名前空間に配置され、 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> MVC とページの両方で使用でき Razor ます。 タグ ヘルパー コンポーネントには、 *_ViewImports.cshtml* でのアプリへの登録は必要ありません。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -49,7 +50,7 @@ HTML `<head>` 要素内で、CSS ファイルは HTML `<link>` 要素でよく�
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressStyleTagHelperComponent.cs)]
 
-上のコードでは以下の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * `AddressStyleTagHelperComponent` は、<xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent> を実装します。 抽象化では次のことを行います。
   * <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext> を使ってクラスの初期化を許可。
@@ -63,7 +64,7 @@ HTML `<head>` 要素内で、CSS ファイルは HTML `<link>` 要素でよく�
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressScriptTagHelperComponent.cs)]
 
-個別の HTML ファイルを使用して、`<script>` 要素を格納します。 HTML ファイルを使用すると、コードはより整理され、よりメンテナンスしやすくなります。 上のコードでは、*TagHelpers/Templates/AddressToolTipScript.html* のコンテンツを読み取り、タグ ヘルパーの出力でそれを追加します。 *AddressToolTipScript.html* ファイルには、次のマークアップが含まれます。
+個別の HTML ファイルを使用して、`<script>` 要素を格納します。 HTML ファイルを使用すると、コードはより整理され、よりメンテナンスしやすくなります。 上のコードでは、 *TagHelpers/Templates/AddressToolTipScript.html* のコンテンツを読み取り、タグ ヘルパーの出力でそれを追加します。 *AddressToolTipScript.html* ファイルには、次のマークアップが含まれます。
 
 [!code-html[](th-components/samples/RazorPagesSample/TagHelpers/Templates/AddressToolTipScript.html)]
 
@@ -91,7 +92,7 @@ HTML `<head>` 要素内で、CSS ファイルは HTML `<link>` 要素でよく�
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_ITagHelperComponentManager)]
 
-上のコードでは以下の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * `@inject` ディレクティブでは、`ITagHelperComponentManager` のインスタンスが提供されます。 インスタンスは、ファイル内のアクセスダウンストリームに対するという名前の変数に割り当てられ `manager` Razor ます。
 * `AddressTagHelperComponent` のインスタンスは、アプリのタグ ヘルパー コンポーネント コレクションに追加されます。
@@ -112,7 +113,7 @@ HTML `<head>` 要素内で、CSS ファイルは HTML `<link>` 要素でよく�
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 
-上のコードでは以下の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * コンストラクター挿入を使用して、`ITagHelperComponentManager` のインスタンスにアクセスします。
 * `AddressTagHelperComponent` のインスタンスは、アプリのタグ ヘルパー コンポーネント コレクションに追加されます。
@@ -123,7 +124,7 @@ HTML `<head>` 要素内で、CSS ファイルは HTML `<link>` 要素でよく�
 
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> から派生するパブリック クラスを作成します。
 * [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute)クラスに属性を適用します。 ターゲット HTML 要素の名前を指定します。
-* *省略可能*: [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) クラスに属性を適用して、IntelliSense での型の表示を抑制します。
+* *省略可能* : [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) クラスに属性を適用して、IntelliSense での型の表示を抑制します。
 
 次のコードでは、`<address>` HTML 要素をターゲットとするカスタムのタグ ヘルパー コンポーネントが作成されます。
 

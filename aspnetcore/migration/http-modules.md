@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 808215d103db9c5d63fe63b6875a222e6b0ba1fa
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326612"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060704"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP ハンドラーとモジュールを ASP.NET Core ミドルウェアに移行する
 
@@ -39,7 +40,7 @@ ms.locfileid: "92326612"
 
 * 指定されたファイル名または拡張子を持つ要求を処理するために使用され *ます。レポートなどです。*
 
-* *Web.config*で[構成済み](/iis/configuration/system.webserver/handlers/)
+* *Web.config* で [構成済み](/iis/configuration/system.webserver/handlers/)
 
 **モジュールは次のとおりです。**
 
@@ -51,13 +52,13 @@ ms.locfileid: "92326612"
 
 * HTTP 応答に追加することも、独自の応答を作成することもできます。
 
-* *Web.config*で[構成済み](/iis/configuration/system.webserver/modules/)
+* *Web.config* で [構成済み](/iis/configuration/system.webserver/modules/)
 
 **受信要求を処理するモジュールの順序は、次のように決定されます。**
 
 1. は、 <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)> ASP.NET: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest)、 [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest)などによって発生するシリーズイベントです。各モジュールは、1つまたは複数のイベントのハンドラーを作成できます。
 
-2. 同じイベントの場合、 *Web.config*で構成されている順序。
+2. 同じイベントの場合、 *Web.config* で構成されている順序。
 
 モジュールに加えて、ライフサイクルイベントのハンドラーを *Global.asax.cs* ファイルに追加することができます。 これらのハンドラーは、構成されているモジュールのハンドラーの後に実行されます。
 
@@ -65,7 +66,7 @@ ms.locfileid: "92326612"
 
 **ミドルウェアは、HTTP モジュールとハンドラーよりも簡単です。**
 
-* モジュール、ハンドラー、 *Global.asax.cs*、 *Web.config* (IIS 構成を除く) とアプリケーションのライフサイクルが失われる
+* モジュール、ハンドラー、 *Global.asax.cs* 、 *Web.config* (IIS 構成を除く) とアプリケーションのライフサイクルが失われる
 
 * ミドルウェアによってモジュールとハンドラーの両方のロールが取得されています。
 
@@ -132,7 +133,7 @@ ms.locfileid: "92326612"
 
 ## <a name="migrating-module-insertion-into-the-request-pipeline"></a>要求パイプラインへのモジュール挿入の移行
 
-HTTP モジュールは通常、 *Web.config*を使用して要求パイプラインに追加されます。
+HTTP モジュールは通常、 *Web.config* を使用して要求パイプラインに追加されます。
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
@@ -140,7 +141,7 @@ HTTP モジュールは通常、 *Web.config*を使用して要求パイプラ�
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-新しいミドルウェアを挿入するパイプライン内の正確な位置は、モジュール (、など) として処理されたイベント `BeginRequest` `EndRequest` と、 *Web.config*内のモジュールの一覧での順序によって異なります。
+新しいミドルウェアを挿入するパイプライン内の正確な位置は、モジュール (、など) として処理されたイベント `BeginRequest` `EndRequest` と、 *Web.config* 内のモジュールの一覧での順序によって異なります。
 
 前述のように、ASP.NET Core にはアプリケーションのライフサイクルがなく、ミドルウェアによって応答が処理される順序は、モジュールで使用される順序とは異なります。 これにより、順序を決定することが困難になる可能性があります。
 
@@ -180,7 +181,7 @@ HTTP ハンドラーの構成は *Web.config* で行われ、次のようにな�
 
 ## <a name="loading-middleware-options-using-the-options-pattern"></a>オプションパターンを使用したミドルウェアオプションの読み込み
 
-一部のモジュールとハンドラーには、 *Web.config*に格納されている構成オプションがあります。ただし ASP.NET Core では、 *Web.config*の代わりに新しい構成モデルが使用されます。
+一部のモジュールとハンドラーには、 *Web.config* に格納されている構成オプションがあります。ただし ASP.NET Core では、 *Web.config* の代わりに新しい構成モデルが使用されます。
 
 新しい [構成システム](xref:fundamentals/configuration/index) には、これを解決するための次のオプションが用意されています。
 
@@ -194,7 +195,7 @@ HTTP ハンドラーの構成は *Web.config* で行われ、次のようにな�
 
 2. オプションの値を格納する
 
-   構成システムでは、オプションの値を任意の場所に格納できます。 ただし、ほとんどのサイトでは *appsettings.js*が使用されているので、次の方法を使用します。
+   構成システムでは、オプションの値を任意の場所に格納できます。 ただし、ほとんどのサイトではを使用しているので、 *appsettings.json* 次の方法を使用します。
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
@@ -206,7 +207,7 @@ HTTP ハンドラーの構成は *Web.config* で行われ、次のようにな�
 
     クラスを更新し `Startup` ます。
 
-   1. *でappsettings.js*を使用している場合は、コンストラクターの構成ビルダーに追加し `Startup` ます。
+   1. を使用している場合は *appsettings.json* 、コンストラクターの構成ビルダーに追加し `Startup` ます。
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -234,9 +235,9 @@ HTTP ハンドラーの構成は *Web.config* で行われ、次のようにな�
 
 ソリューションでは、オプションオブジェクトをクラスの実際のオプション値で取得 `Startup` し、ミドルウェアの各インスタンスに直接渡すことができます。
 
-1. *appsettings.js*に2番目のキーを追加する
+1. 2番目のキーをに追加します。 *appsettings.json*
 
-   ファイルの *appsettings.js* に2番目のオプションセットを追加するには、新しいキーを使用して、それを一意に識別します。
+   2番目のオプションセットをファイルに追加するには *appsettings.json* 、新しいキーを使用して一意に識別します。
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
@@ -262,7 +263,7 @@ public async Task Invoke(HttpContext context)
 
 ### <a name="httpcontext"></a>Httpcontext.current
 
-HttpContext は次のように変換さ**れます。**
+HttpContext は次のように変換さ **れます。**
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Items)]
 
@@ -323,7 +324,7 @@ HttpContext は次のように変換さ**れます。**
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> コンテンツサブタイプが *url エンコード* または *フォームデータ*の場合にのみ、フォーム値を読み取ります。
+> コンテンツサブタイプが *url エンコード* または *フォームデータ* の場合にのみ、フォーム値を読み取ります。
 
 **InputStream** は次のように変換されます。
 
@@ -342,11 +343,11 @@ HttpContext は次のように変換さ**れます。**
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Status)]
 
-**Httpcontext.current**は、次のように**変換します。**
+**Httpcontext.current** は、次のように **変換します。**
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_RespType)]
 
-また、その独自の**ContentType**にも、次のように変換されます。
+また、その独自の **ContentType** にも、次のように変換されます。
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_RespTypeOnly)]
 
@@ -379,7 +380,7 @@ public async Task Invoke(HttpContext httpContext)
 
 **CookieHttpContext。2$s**
 
-Cookieは、*セット Cookie *応答ヘッダー内のブラウザーに移動します。 そのため、を送信するには、 cookie 応答ヘッダーの送信に使用するのと同じコールバックが必要です。
+Cookieは、 *セット Cookie* 応答ヘッダー内のブラウザーに移動します。 そのため、を送信するには、 cookie 応答ヘッダーの送信に使用するのと同じコールバックが必要です。
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -393,7 +394,7 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [HTTP ハンドラーと HTTP モジュールの概要](/iis/configuration/system.webserver/)
 * [Configuration](xref:fundamentals/configuration/index)

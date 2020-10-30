@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 32ae699c4ef501096a9c4ab7bca6673139910f02
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e0ff97b53d12fbf6c6a89e94704de1aee9d7f9e6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635087"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060587"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core のビュー コンポーネント
 
@@ -53,7 +54,7 @@ ms.locfileid: "88635087"
 
 ビュー コンポーネントは、次の 2 つのパーツで構成されます。クラス (通常、[ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent) から派生) と、クラスで返される結果 (通常はビュー) です。 コントローラーと同様に、ビュー コンポーネントは POCO の場合がありますが、ほとんどの開発者は `ViewComponent` から派生させて、利用できるメソッドとプロパティを活用する必要があります。
 
-ビューコンポーネントがアプリの仕様を満たしているかどうかを検討する場合は、代わりにコンポーネントを使用することを検討してください Razor 。 Razor コンポーネントでは、マークアップと C# コードを組み合わせて、再利用可能な UI ユニットを生成することもできます。 Razor コンポーネントは、クライアント側の UI ロジックとコンポジションを提供するときに、開発者の生産性を高めるように設計されています。 詳細については、<xref:blazor/components/index> を参照してください。
+ビューコンポーネントがアプリの仕様を満たしているかどうかを検討する場合は、代わりにコンポーネントを使用することを検討してください Razor 。 Razor コンポーネントでは、マークアップと C# コードを組み合わせて、再利用可能な UI ユニットを生成することもできます。 Razor コンポーネントは、クライアント側の UI ロジックとコンポジションを提供するときに、開発者の生産性を高めるように設計されています。 詳細については、「<xref:blazor/components/index>」を参照してください。
 
 ## <a name="creating-a-view-component"></a>ビューのコンポーネントを作成する
 
@@ -95,9 +96,9 @@ ms.locfileid: "88635087"
 
 検索パスは、コントローラー + ビューおよびページを使用してプロジェクトに適用され Razor ます。
 
-ビュー コンポーネントの既定のビュー名は、*Default* です。つまり、通常、ビュー ファイルは *Default.cshtml* という名前になるということです。 ビュー コンポーネントの結果を作成したり、`View` メソッドを呼び出したりするときに、別のビュー名を指定することができます。
+ビュー コンポーネントの既定のビュー名は、 *Default* です。つまり、通常、ビュー ファイルは *Default.cshtml* という名前になるということです。 ビュー コンポーネントの結果を作成したり、`View` メソッドを呼び出したりするときに、別のビュー名を指定することができます。
 
-ビュー ファイルに *Default.cshtml* という名前を付けて、"*Views/Shared/Components/{ビュー コンポーネント名}/{ビュー名}*" というパスを使用することをお勧めします。 このサンプルで使用される `PriorityList` ビュー コンポーネントは、ビュー コンポーネント ビューに *Views/Shared/Components/PriorityList/Default.cshtml* を使用します。
+ビュー ファイルに *Default.cshtml* という名前を付けて、" *Views/Shared/Components/{ビュー コンポーネント名}/{ビュー名}* " というパスを使用することをお勧めします。 このサンプルで使用される `PriorityList` ビュー コンポーネントは、ビュー コンポーネント ビューに *Views/Shared/Components/PriorityList/Default.cshtml* を使用します。
 
 ### <a name="customize-the-view-search-path"></a>ビューの検索パスをカスタマイズする
 
@@ -115,7 +116,7 @@ ms.locfileid: "88635087"
 @await Component.InvokeAsync("Name of view component", {Anonymous Type Containing Parameters})
 ```
 
-パラメーターは、`InvokeAsync` メソッドに渡されます。 `PriorityList`記事で開発したビューコンポーネントは、 *Views/ToDo/Index. cshtml*ビューファイルから呼び出されます。 以下では、`InvokeAsync` メソッドは、2 つのパラメーターで呼び出されます。
+パラメーターは、`InvokeAsync` メソッドに渡されます。 `PriorityList`記事で開発したビューコンポーネントは、 *Views/ToDo/Index. cshtml* ビューファイルから呼び出されます。 以下では、`InvokeAsync` メソッドは、2 つのパラメーターで呼び出されます。
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFinal.cshtml?range=35)]
 
@@ -178,8 +179,8 @@ ASP.NET Core 1.1 以降の場合は、[タグ ヘルパー](xref:mvc/views/tag-h
 
 コードに関する注意事項
 
-* ビュー コンポーネント クラスは、プロジェクト内の**任意**のフォルダーに含めることができます。
-* クラス名 PriorityList**ViewComponent** は、サフィックス **ViewComponent** で終わるため、ビューからクラス コンポーネントを参照するときに、ランタイムでは文字列 "PriorityList" を使用します。 これについては、後で詳しく説明します。
+* ビュー コンポーネント クラスは、プロジェクト内の **任意** のフォルダーに含めることができます。
+* クラス名 PriorityList **ViewComponent** は、サフィックス **ViewComponent** で終わるため、ビューからクラス コンポーネントを参照するときに、ランタイムでは文字列 "PriorityList" を使用します。 これについては、後で詳しく説明します。
 * `[ViewComponent]` 属性では、ビュー コンポーネントを参照するために使用する名前を変更できます。 たとえば、クラスに `XYZ` という名前を付けて、`ViewComponent` 属性を適用することができます。
 
   ```csharp
@@ -194,20 +195,20 @@ ASP.NET Core 1.1 以降の場合は、[タグ ヘルパー](xref:mvc/views/tag-h
 
 ### <a name="create-the-view-component-no-locrazor-view"></a>ビューコンポーネントビューを作成する Razor
 
-* *Views/Shared/Components* フォルダーを作成します。 このフォルダーは、*Components* という名前にする**必要があります**。
+* *Views/Shared/Components* フォルダーを作成します。 このフォルダーは、 *Components* という名前にする **必要があります** 。
 
 * *Views/Shared/Components/PriorityList* フォルダーを作成します。 このフォルダー名は、ビュー コンポーネント クラスの名前、または (規則に従い、クラス名に *ViewComponent* サフィックスを使用した場合は) サフィックスを差し引いたクラスの名前に一致する必要があります。 `ViewComponent` 属性を使用した場合は、クラス名は属性の指定に一致する必要があります。
 
-* Views/ *Shared/Components/優先順位リスト/既定の cshtml*ビューを作成し Razor ます。
+* Views/ *Shared/Components/優先順位リスト/既定の cshtml* ビューを作成し Razor ます。
 
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   Razorビューはの一覧を取得し、表示し `TodoItem` ます。 ビュー コンポーネントの `InvokeAsync` メソッドで (サンプルのように) ビューの名前を渡さない場合、*Default* が規則によってビュー名に使用されます。 このチュートリアルの後半で、ビューの名前を渡す方法について示します。 特定のコントローラーの既定のスタイルをオーバーライドするには、コントローラー固有のビューフォルダーにビューを追加します (たとえば、 *Views/ToDo/Components/指定リスト/既定値)*。
+   Razorビューはの一覧を取得し、表示し `TodoItem` ます。 ビュー コンポーネントの `InvokeAsync` メソッドで (サンプルのように) ビューの名前を渡さない場合、 *Default* が規則によってビュー名に使用されます。 このチュートリアルの後半で、ビューの名前を渡す方法について示します。 特定のコントローラーの既定のスタイルをオーバーライドするには、コントローラー固有のビューフォルダーにビューを追加します (たとえば、 *Views/ToDo/Components/指定リスト/既定値)* 。
 
-    ビューコンポーネントがコントローラー固有の場合は、コントローラー固有のフォルダーに追加できます (*Views/ToDo/Components/の優先リスト/既定値*)。
+    ビューコンポーネントがコントローラー固有の場合は、コントローラー固有のフォルダーに追加できます ( *Views/ToDo/Components/の優先リスト/既定値* )。
 
-* `div`Priority list コンポーネントへの呼び出しを含むを*Views/ToDo/index. cshtml*ファイルの一番下に追加します。
+* `div`Priority list コンポーネントへの呼び出しを含むを *Views/ToDo/index. cshtml* ファイルの一番下に追加します。
 
     [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFirst.cshtml?range=34-38)]
 
@@ -248,7 +249,7 @@ PVC ビューがレンダリングされない場合は、4 以上の優先順�
 ### <a name="examine-the-view-path"></a>ビューのパスを調べる
 
 * 優先順位ビューが返されないように、優先順位パラメーターを 3 以下に変更します。
-* *Views/ToDo/Components/の優先リスト/既定値*の名前を一時的*に変更します。*
+* *Views/ToDo/Components/の優先リスト/既定値* の名前を一時的 *に変更します。*
 * アプリをテストすると、次のエラーが表示されます。
 
    ```
@@ -259,8 +260,8 @@ PVC ビューがレンダリングされない場合は、4 以上の優先順�
    EnsureSuccessful
    ```
 
-* *Views/ToDo/components/優先順位リスト/1Default. cshtml*を*views/Shared/Components/優先順位リスト/既定の cshtml*にコピーします。
-* *共有の ToDo ビュー*コンポーネントビューにマークアップを追加して、ビューが*共有*フォルダーからのものであることを示します。
+* *Views/ToDo/components/優先順位リスト/1Default. cshtml* を *views/Shared/Components/優先順位リスト/既定の cshtml* にコピーします。
+* *共有の ToDo ビュー* コンポーネントビューにマークアップを追加して、ビューが *共有* フォルダーからのものであることを示します。
 * **[Shared]** コンポーネント ビューをテストします。
 
 ![[Shared] コンポーネント ビューを含む [ToDo] 出力](view-components/_static/shared.png)
@@ -290,7 +291,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-ビューコンポーネントのファイルには、 Razor メソッドに渡された文字列が一覧表示され `Invoke` ます (*Views/Home/Components/の設定/既定値は cshtml*)。
+ビューコンポーネントのファイルには、 Razor メソッドに渡された文字列が一覧表示され `Invoke` ます ( *Views/Home/Components/の設定/既定値は cshtml* )。
 
 ```cshtml
 @model List<string>
@@ -306,7 +307,7 @@ public class PriorityList : ViewComponent
 
 ::: moniker range=">= aspnetcore-1.1"
 
-ビューコンポーネントは、 Razor 次のいずれかの方法を使用して、ファイル ( *Views/Home/Index. cshtml*など) で呼び出されます。
+ビューコンポーネントは、 Razor 次のいずれかの方法を使用して、ファイル ( *Views/Home/Index. cshtml* など) で呼び出されます。
 
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)
@@ -317,7 +318,7 @@ public class PriorityList : ViewComponent
 
 ::: moniker range="< aspnetcore-1.1"
 
-ビューコンポーネントが Razor ファイル (たとえば、 *Views/Home/Index. cshtml*) で呼び出され <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> ます。
+ビューコンポーネントが Razor ファイル (たとえば、 *Views/Home/Index. cshtml* ) で呼び出され <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> ます。
 
 `Component.InvokeAsync` を呼び出します。
 
@@ -354,6 +355,6 @@ public class PriorityList : ViewComponent
 * ViewComponent がマークアップをレンダリングしません。
 * エラーがスローされません。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [ビューへの依存関係の挿入](xref:mvc/views/dependency-injection)

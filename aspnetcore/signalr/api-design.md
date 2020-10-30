@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 4a838c3a051476bd3d281e133d08b643656ae3b7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 87665a7950edbc70b664230d2f078598e9dbc0aa
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632903"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059651"
 ---
 # <a name="no-locsignalr-api-design-considerations"></a>SignalR API の設計に関する考慮事項
 
@@ -33,7 +34,7 @@ By [Andrew Stanton-看護師](https://twitter.com/anurse)
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>カスタムオブジェクトパラメーターを使用して下位互換性を確保する
 
-SignalRクライアントまたはサーバー上のハブメソッドにパラメーターを追加することは、*互換性に影響する変更*点です。 これは、適切な数のパラメーターを指定せずにメソッドを呼び出そうとすると、古いクライアントまたはサーバーがエラーを受け取ることを意味します。 ただし、カスタムオブジェクトパラメーターにプロパティを追加することは、互換性に影響する変更点では **ありません** 。 これは、クライアントまたはサーバーでの変更に対して回復力のある互換性のある Api を設計するために使用できます。
+SignalRクライアントまたはサーバー上のハブメソッドにパラメーターを追加することは、 *互換性に影響する変更* 点です。 これは、適切な数のパラメーターを指定せずにメソッドを呼び出そうとすると、古いクライアントまたはサーバーがエラーを受け取ることを意味します。 ただし、カスタムオブジェクトパラメーターにプロパティを追加することは、互換性に影響する変更点では **ありません** 。 これは、クライアントまたはサーバーでの変更に対して回復力のある互換性のある Api を設計するために使用できます。
 
 たとえば、次のようなサーバー側 API を考えてみます。
 

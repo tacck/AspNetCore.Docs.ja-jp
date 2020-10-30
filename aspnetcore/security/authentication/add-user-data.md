@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: a71395e82ed15dae753888a438471495208a14da
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a4e1fd780947cfa5f09fb1e03964595fa09f0f18
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631850"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061419"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>カスタムユーザーデータを Identity ASP.NET Core プロジェクトに追加、ダウンロード、および削除する
 
@@ -57,20 +58,20 @@ ms.locfileid: "88631850"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Visual Studio の **[ファイル]** メニューから、**[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに**WebApp1**という名前を付けます。
-* **ASP.NET Core Web アプリケーション**の選択- > **OK**
+* Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに **WebApp1** という名前を付けます。
+* **ASP.NET Core Web アプリケーション** の選択- > **OK**
 * ドロップダウンで **ASP.NET Core 3.0** を選択します。
-* **Web アプリケーション**の選択- > **OK**
+* **Web アプリケーション** の選択- > **OK**
 * プロジェクトをビルドして実行します。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-* Visual Studio の **[ファイル]** メニューから、**[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに**WebApp1**という名前を付けます。
-* **ASP.NET Core Web アプリケーション**の選択- > **OK**
+* Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。 [ダウンロードするサンプル](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data)コードの名前空間と一致させる場合は、プロジェクトに **WebApp1** という名前を付けます。
+* **ASP.NET Core Web アプリケーション** の選択- > **OK**
 * ドロップダウンで **ASP.NET Core 2.2** を選択します。
-* **Web アプリケーション**の選択- > **OK**
+* **Web アプリケーション** の選択- > **OK**
 * プロジェクトをビルドして実行します。
 
 ::: moniker-end
@@ -88,15 +89,15 @@ dotnet new webapp -o WebApp1
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューションエクスプローラー**で、プロジェクトを右クリックし、[ **Add**  >  **New スキャフォールディング Item**] > ます。
-* [**スキャフォールディングの追加**] ダイアログボックスの左ペインで、[追加] を選択し **Identity**  >  **Add**ます。
-* [**追加 Identity ** ] ダイアログで、次のオプションを選択します。
+* **ソリューションエクスプローラー** で、プロジェクトを右クリックし、[ **Add**  >  **New スキャフォールディング Item** ] > ます。
+* [ **スキャフォールディングの追加** ] ダイアログボックスの左ペインで、[追加] を選択し **Identity**  >  **Add** ます。
+* [ **追加 Identity** ] ダイアログで、次のオプションを選択します。
   * 既存のレイアウト _Layout ファイルを選択し  *ます。*
   * 上書きする以下のファイルを選択してください:
     * **アカウント/登録**
     * **アカウント/管理/インデックス**
-  * **+** 新しい**データコンテキストクラス**を作成するには、このボタンをクリックします。 型 (プロジェクトの名前が**WebApp1**の場合は**WebApp1Context** ) をそのまま使用します。
-  * **+** 新しい**ユーザークラス**を作成するには、このボタンを選択します。 型を受け入れます (プロジェクトの名前が**WebApp1**の場合は**WebApp1User** ) >**追加**] を使用します。
+  * **+** 新しい **データコンテキストクラス** を作成するには、このボタンをクリックします。 型 (プロジェクトの名前が **WebApp1** の場合は **WebApp1Context** ) をそのまま使用します。
+  * **+** 新しい **ユーザークラス** を作成するには、このボタンを選択します。 型を受け入れます (プロジェクトの名前が **WebApp1** の場合は **WebApp1User** ) > **追加** ] を使用します。
 * **[追加]** を選択します。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -131,7 +132,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 [移行、UseAuthentication、および layout](xref:security/authentication/scaffold-identity#efm)の指示に従って、次の手順を実行します。
 
 * 移行を作成し、データベースを更新します。
-* `UseAuthentication` に `Startup.Configure` を追加します。
+* `UseAuthentication` を `Startup.Configure` に追加します。
 * `<partial name="_LoginPartial" />`レイアウトファイルにを追加します。
 * アプリをテストします。
   * ユーザーを登録する
@@ -142,7 +143,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 ## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>DB にカスタムユーザーデータを追加する Identity
 
-`IdentityUser`カスタムプロパティを使用して、派生クラスを更新します。 プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は *Areas/ Identity /Data/WebApp1User.cs*になります。 次のコードを使用して、ファイルを更新します。
+`IdentityUser`カスタムプロパティを使用して、派生クラスを更新します。 プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は *Areas/ Identity /Data/WebApp1User.cs* になります。 次のコードを使用して、ファイルを更新します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -158,8 +159,8 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 プロパティ [は、次のよう](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) になります。
 
-* *区分/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml*ページがを呼び出したときに削除され Razor `UserManager.Delete` ます。
-* ダウンロードされたデータには、[区分]、[ページ]、 *および [ Identity Manage/Download] の各*ページで含まれ Razor ます。
+* *区分/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml* ページがを呼び出したときに削除され Razor `UserManager.Delete` ます。
+* ダウンロードされたデータには、[区分]、[ページ]、 *および [ Identity Manage/Download] の各* ページで含まれ Razor ます。
 
 ### <a name="update-the-accountmanageindexcshtml-page"></a>Account/Manage/Index. cshtml ページを更新する
 
@@ -169,7 +170,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-次の強調表示されているマークアップを使用して、 *区分//////////また Identity * は更新プログラムを更新します。
+次の強調表示されているマークアップを使用して、 *区分//////////また Identity* は更新プログラムを更新します。
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
@@ -179,7 +180,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-次の強調表示されているマークアップを使用して、 *区分//////////また Identity * は更新プログラムを更新します。
+次の強調表示されているマークアップを使用して、 *区分//////////また Identity* は更新プログラムを更新します。
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
@@ -193,7 +194,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity * はの
+次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity* はの
 
 [!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -203,7 +204,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 [!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity * はの
+次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity* はの
 
 [!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
@@ -216,7 +217,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio **パッケージマネージャーコンソール**で次のようにします。
+Visual Studio **パッケージマネージャーコンソール** で次のようにします。
 
 ```powershell
 Add-Migration CustomUserData

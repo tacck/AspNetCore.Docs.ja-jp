@@ -5,6 +5,7 @@ description: I認証 Ated暗号化機能、I認証 ated、Tordescriptor、I認�
 ms.author: riande
 ms.date: 08/11/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: 4c802bc4beb1f1fde812e6c3f55fc43b5d569b66
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 99ce283d56a6010ddd846f21e0ca9a9a324d55fc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635321"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060782"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core でのコア暗号化の拡張性
 
@@ -34,7 +35,7 @@ ms.locfileid: "88635321"
 
 ## <a name="iauthenticatedencryptor"></a>I認証 Ated暗号化機能
 
-**Icryptographic atedcryptographic**インターフェイスは、暗号化サブシステムの基本的な構成要素です。 一般に、キーごとに1つの icryptographic Atedcryptographic が存在し、Icryptographic Atedcryptographic インスタンスは暗号化操作を実行するために必要なすべての暗号化キーマテリアルとアルゴリズム情報をラップします。
+**Icryptographic atedcryptographic** インターフェイスは、暗号化サブシステムの基本的な構成要素です。 一般に、キーごとに1つの icryptographic Atedcryptographic が存在し、Icryptographic Atedcryptographic インスタンスは暗号化操作を実行するために必要なすべての暗号化キーマテリアルとアルゴリズム情報をラップします。
 
 その名前が示すように、型は認証された暗号化および復号化サービスを提供します。 次の2つの Api を公開します。
 
@@ -54,7 +55,7 @@ Encrypt メソッドは、読んだりプレーンテキストと認証タグを
 
 # <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-**I認証 Ated暗号化 Torfactory**インターフェイスは、 [i認証 ated暗号化](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)インスタンスを作成する方法を認識する型を表します。 その API は次のとおりです。
+**I認証 Ated暗号化 Torfactory** インターフェイスは、 [i認証 ated暗号化](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)インスタンスを作成する方法を認識する型を表します。 その API は次のとおりです。
 
 * Create暗号化 Torinstance (IKey key): Ikey Ated暗号化機能
 
@@ -81,7 +82,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 # <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-**I認証 atedの Tordescriptor**インターフェイスは、 [i認証 ated暗号化](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)インスタンスを作成する方法を認識する型を表します。 その API は次のとおりです。
+**I認証 atedの Tordescriptor** インターフェイスは、 [i認証 ated暗号化](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor)インスタンスを作成する方法を認識する型を表します。 その API は次のとおりです。
 
 * Create暗号化 Torinstance (): I認証 Ated暗号化機能
 
@@ -115,7 +116,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 
 # <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-**I認証 Atedの Tordescriptor**インターフェイスは、それ自体を XML にエクスポートする方法を認識している型を表します。 その API は次のとおりです。
+**I認証 Atedの Tordescriptor** インターフェイスは、それ自体を XML にエクスポートする方法を認識している型を表します。 その API は次のとおりです。
 
 * ExportToXml() : XmlSerializedDescriptorInfo
 
@@ -142,7 +143,7 @@ I認証 Atedの暗号化機能と I認証機能の主な違いは、記述子が
 
 ## <a name="iauthenticatedencryptordescriptordeserializer"></a>I認証 Ated暗号化 Tor記述子デシリアライザー
 
-**IXElement Ated暗号化 Tordescriptor デシリアライザー**インターフェイスは、I認証 Ated暗号化 tordescriptor インスタンスをから逆シリアル化する方法を認識する型を表します。 1つのメソッドを公開します。
+**IXElement Ated暗号化 Tordescriptor デシリアライザー** インターフェイスは、I認証 Ated暗号化 tordescriptor インスタンスをから逆シリアル化する方法を認識する型を表します。 1つのメソッドを公開します。
 
 * ImportFromXml (XElement 要素): i Ated暗号化 Tordescriptor
 
@@ -161,7 +162,7 @@ I認証を実装する型は、次の2つのパブリックコンストラクタ
 
 # <a name="aspnet-core-2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-**AlgorithmConfiguration**クラスは、 [i Ated暗号化 tordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)インスタンスを作成する方法を認識する型を表します。 1つの API を公開します。
+**AlgorithmConfiguration** クラスは、 [i Ated暗号化 tordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)インスタンスを作成する方法を認識する型を表します。 1つの API を公開します。
 
 * CreateNewDescriptor (): I認証 Ated暗号化 Tordescriptor
 
@@ -173,7 +174,7 @@ AlgorithmConfiguration 型は、キー作成ルーチン ( [自動キーロー�
 
 # <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-**I認証 atedの Torconfiguration**インターフェイスは、 [I認証 Ated暗号化 tordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)インスタンスを作成する方法を認識する型を表します。 1つの API を公開します。
+**I認証 atedの Torconfiguration** インターフェイスは、 [I認証 Ated暗号化 tordescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor)インスタンスを作成する方法を認識する型を表します。 1つの API を公開します。
 
 * CreateNewDescriptor (): I認証 Ated暗号化 Tordescriptor
 

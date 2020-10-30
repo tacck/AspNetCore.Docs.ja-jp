@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: b17717e7b3cbaa64d4ff00661f15439728f161d3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 69e1d639aeb55ae64cc54b1cda402ed6bcbb04ab
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634892"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060184"
 ---
 # <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>Razor ASP.NET Core でのページ承認規則
 
@@ -74,7 +75,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル *領域/ Identity /Pages/Manage/Accounts.cshtml* のページ名は、/ *manage/Accounts*です。
+ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル *領域/ Identity /Pages/Manage/Accounts.cshtml* のページ名は、/ *manage/Accounts* です。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、次のように、 [Authorizeareapage オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)を使用します。
 
@@ -90,7 +91,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 * Identity * [ *管理*] の下にあるファイルのフォルダーパスを使用します。
+フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 *Identity* [ *管理* ] の下にあるファイルのフォルダーパスを使用します。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、 [AuthorizeAreaFolder オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)を使用します。
 
@@ -132,7 +133,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 プライベートページで承認を要求すると失敗します。 との両方 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> がページに適用されると、が優先され、 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> アクセスが制御さ <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> れます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>
@@ -186,7 +187,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル *領域/ Identity /Pages/Manage/Accounts.cshtml* のページ名は、/ *manage/Accounts*です。
+ページ名は、指定された領域のページルートディレクトリを基準とした拡張子のないファイルのパスです。 たとえば、ファイル *領域/ Identity /Pages/Manage/Accounts.cshtml* のページ名は、/ *manage/Accounts* です。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、次のように、 [Authorizeareapage オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)を使用します。
 
@@ -202,7 +203,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 * Identity * [ *管理*] の下にあるファイルのフォルダーパスを使用します。
+フォルダーパスは、指定された領域のページルートディレクトリを基準としたフォルダーのパスです。 たとえば、[区分]、[/]、 *Identity* [ *管理* ] の下にあるファイルのフォルダーパスを使用します。
 
 [承認ポリシー](xref:security/authorization/policies)を指定するには、 [AuthorizeAreaFolder オーバーロード](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)を使用します。
 

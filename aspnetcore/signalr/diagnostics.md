@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 890359c9e9f6c3c60f3105124f52c66b09a8a4fb
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690680"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061315"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断 SignalR
 
@@ -43,7 +44,7 @@ SignalR 2つの logger カテゴリを使用します。
 * `Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。
 * `Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、Server-Sent イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR
 
-から詳細なログを有効にするには SignalR 、の `Debug` サブセクションに次の項目を追加して、上記のプレフィックスの両方を *appsettings.js* のファイルのレベルに構成し `LogLevel` `Logging` ます。
+から詳細なログを有効にするには SignalR 、の `Debug` *appsettings.json* サブセクションに次の項目を追加して、前のプレフィックスをファイル内のレベルに構成し `LogLevel` `Logging` ます。
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -225,7 +226,7 @@ GitHub の問題に診断ファイルを添付するには、名前を変更し�
 
 SignalR サーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。
 
-| 名前                    | 説明                 |
+| Name                    | [説明]                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 開始された接続の合計   |
 | `connections-stopped`   | 停止した接続の合計数   |
@@ -250,7 +251,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

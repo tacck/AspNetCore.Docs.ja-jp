@@ -5,6 +5,7 @@ description: アプリケーションを読み、操作し、ASP.NET Core での
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: f2e86a8607ddd00dc7f4bec36079660f0cd1eea3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a7a654eb43c0dbf375af911d8d5353ac4c04a825
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630290"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060938"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core のアプリケーション モデルの使用
 
 作成者: [Steve Smith](https://ardalis.com/)
 
-ASP.NET Core MVC では、MVC アプリのコンポーネントを表す*アプリケーション モデル*を定義できます。 このモデルを読み、操作し、MVC 要素の動作を変更することができます。 既定で、MVC には、どのクラスがコントローラーとして考慮されるか、それらのクラスのどのメソッドがアクションであるか、パラメーターおよびルーティングがどのように動作するかについて、特定の規則があります。 この動作をアプリのニーズに合うようにカスタマイズして、独自の規則を作成し、それらをグローバルにまたは属性として適用することができます。
+ASP.NET Core MVC では、MVC アプリのコンポーネントを表す *アプリケーション モデル* を定義できます。 このモデルを読み、操作し、MVC 要素の動作を変更することができます。 既定で、MVC には、どのクラスがコントローラーとして考慮されるか、それらのクラスのどのメソッドがアクションであるか、パラメーターおよびルーティングがどのように動作するかについて、特定の規則があります。 この動作をアプリのニーズに合うようにカスタマイズして、独自の規則を作成し、それらをグローバルにまたは属性として適用することができます。
 
 ## <a name="models-and-providers"></a>モデルおよびプロバイダー
 
@@ -141,7 +142,7 @@ ASP.NET Core MVC は、[IApplicationModelProvider](/dotnet/api/microsoft.aspnetc
 
 ### <a name="sample-modifying-the-actionmodel-name"></a>Sample: ActionModel 名を変更する
 
-次の規則は、`ActionModel` が適用されるアクションの*名前*を更新してそれを変更します。 この新しい名前は、属性にパラメーターとして提供されます。 この新しい名前はルーティングによって使用されるので、このアクション メソッドに到達するのに使用されるルートに影響します。
+次の規則は、`ActionModel` が適用されるアクションの *名前* を更新してそれを変更します。 この新しい名前は、属性にパラメーターとして提供されます。 この新しい名前はルーティングによって使用されるので、このアクション メソッドに到達するのに使用されるルートに影響します。
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/CustomActionNameAttribute.cs)]
 

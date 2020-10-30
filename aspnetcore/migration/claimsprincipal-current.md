@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/26/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: 426fd90374a460cb283d0d3ba921e1312fb17940
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3aa0adb299789efbb071cdb934d43832a84cf540
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634073"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059768"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>ClaimsPrincipal からの移行
 
@@ -36,10 +37,10 @@ ASP.NET Core を使用する場合、との両方の値が `ClaimsPrincipal.Curr
 
 現在の認証されたユーザーを ASP.NET Core の代わりに取得するには、次のようないくつかのオプションがあり `ClaimsPrincipal` `ClaimsPrincipal.Current` ます。
 
-* **コントローラーの基本ユーザー**。 MVC コントローラーは、 [ユーザー](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) プロパティを使用して、現在の認証済みユーザーにアクセスできます。
-* **HttpContext. ユーザー**。 現在の `HttpContext` (ミドルウェアなど) にアクセスできるコンポーネントは、現在のユーザーを `ClaimsPrincipal` [HttpContext. user](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)から取得できます。
-* **呼び出し元から渡さ**れました。 現在のにアクセスできないライブラリ `HttpContext` は、コントローラーまたはミドルウェアコンポーネントから呼び出されることが多く、現在のユーザーの id を引数として渡すことができます。
-* **IHttpContextAccessor**。 ASP.NET Core に移行されるプロジェクトが大きすぎて、現在のユーザーの id を必要なすべての場所に簡単に渡すことができない場合があります。 このような場合は、回避策として [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) を使用できます。 `IHttpContextAccessor` は現在のにアクセスでき `HttpContext` ます (存在する場合)。 DI が使用されている場合は、「」を参照してください <xref:fundamentals/httpcontext> 。 ASP.NET Core の DI ドリブンアーキテクチャで動作するようにまだ更新されていないコードで現在のユーザーの id を取得するための短期的なソリューションは次のようになります。
+* **コントローラーの基本ユーザー** 。 MVC コントローラーは、 [ユーザー](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) プロパティを使用して、現在の認証済みユーザーにアクセスできます。
+* **HttpContext. ユーザー** 。 現在の `HttpContext` (ミドルウェアなど) にアクセスできるコンポーネントは、現在のユーザーを `ClaimsPrincipal` [HttpContext. user](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)から取得できます。
+* **呼び出し元から渡さ** れました。 現在のにアクセスできないライブラリ `HttpContext` は、コントローラーまたはミドルウェアコンポーネントから呼び出されることが多く、現在のユーザーの id を引数として渡すことができます。
+* **IHttpContextAccessor** 。 ASP.NET Core に移行されるプロジェクトが大きすぎて、現在のユーザーの id を必要なすべての場所に簡単に渡すことができない場合があります。 このような場合は、回避策として [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) を使用できます。 `IHttpContextAccessor` は現在のにアクセスでき `HttpContext` ます (存在する場合)。 DI が使用されている場合は、「」を参照してください <xref:fundamentals/httpcontext> 。 ASP.NET Core の DI ドリブンアーキテクチャで動作するようにまだ更新されていないコードで現在のユーザーの id を取得するための短期的なソリューションは次のようになります。
 
   * `IHttpContextAccessor`で[Addhttpcontextaccessor](https://github.com/aspnet/Hosting/issues/793)を呼び出して、DI コンテナーで使用できるように `Startup.ConfigureServices` します。
   * 起動時にのインスタンスを取得 `IHttpContextAccessor` し、静的変数に格納します。 インスタンスは、以前に静的プロパティから現在のユーザーを取得していたコードで使用できるようになります。

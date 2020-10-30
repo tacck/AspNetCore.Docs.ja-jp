@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: d2ac5ebf6c469c9ec842e7f3ea4f37069b4efdcb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 810eff7ccb08ecc22ea255bf0a9fe3d22637179f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631598"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060106"
 ---
 # <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalRバックグラウンドサービスでのホスト ASP.NET Core
 
@@ -157,7 +158,7 @@ public partial class ClockHubClient : IClock, IHostedService
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [開始するには](xref:tutorials/signalr)
 * [ハブ](xref:signalr/hubs)

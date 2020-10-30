@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 01fb87205f7855f0995cbcd135b6b01f15835e3b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393653"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060600"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core の部分ビュー
 
 作成者: [Steve Smith](https://ardalis.com/)、[Maher JENDOUBI](https://twitter.com/maherjend)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Scott Sauber](https://twitter.com/scottsauber)
 
-部分ビューは、 [Razor](xref:mvc/views/razor) *.cshtml* [`@page`](xref:mvc/views/razor#page) 別のマークアップファイルの表示出力*内で*HTML 出力をレンダリングするディレクティブのないマークアップファイル (cshtml) です。
+部分ビューは、 [Razor](xref:mvc/views/razor) *.cshtml* [`@page`](xref:mvc/views/razor#page) 別のマークアップファイルの表示出力 *内で* HTML 出力をレンダリングするディレクティブのないマークアップファイル (cshtml) です。
 
 ::: moniker range=">= aspnetcore-2.1"
 
-*部分ビュー*という用語は、マークアップファイルが*ビュー*と呼ばれる MVC アプリを開発する場合や、 Razor マークアップファイルが*ページ*と呼ばれるページアプリを開発する場合に使用します。 このトピックでは、一般的に MVC ビューと Razor ページページを *マークアップファイル*と呼びます。
+*部分ビュー* という用語は、マークアップファイルが *ビュー* と呼ばれる MVC アプリを開発する場合や、 Razor マークアップファイルが *ページ* と呼ばれるページアプリを開発する場合に使用します。 このトピックでは、一般的に MVC ビューと Razor ページページを *マークアップファイル* と呼びます。
 
 ::: moniker-end
 
@@ -57,7 +58,7 @@ ms.locfileid: "91393653"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-部分ビューは、 *.cshtml* [`@page`](xref:mvc/views/razor#page) *Views*フォルダー (MVC) または*pages*フォルダー ( Razor ページ) 内でディレクティブが保持されていない、cshtml マークアップファイルです。
+部分ビューは、 *.cshtml* [`@page`](xref:mvc/views/razor#page) *Views* フォルダー (MVC) または *pages* フォルダー ( Razor ページ) 内でディレクティブが保持されていない、cshtml マークアップファイルです。
 
 ASP.NET Core MVC では、コントローラーの <xref:Microsoft.AspNetCore.Mvc.ViewResult> が、ビューまたは部分ビューのどちらかを返すことができます。 Razorページでは、は <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> オブジェクトとして表される部分ビューを返すことができ <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> ます。 部分ビューの参照と表示については、「[部分ビューを参照する](#reference-a-partial-view)」セクションで説明します。
 
@@ -69,7 +70,7 @@ MVC ビューやページ レンダリングとは異なり、部分ビューは
 
 ::: moniker range="< aspnetcore-2.0"
 
-部分ビューは、*Views* フォルダー内で保持される *.cshtml* マークアップ ファイルです。
+部分ビューは、 *Views* フォルダー内で保持される *.cshtml* マークアップ ファイルです。
 
 コントローラーの <xref:Microsoft.AspNetCore.Mvc.ViewResult> は、ビューまたは部分ビューのどちらかを返すことができます。 部分ビューの参照と表示については、「[部分ビューを参照する](#reference-a-partial-view)」セクションで説明します。
 
@@ -85,7 +86,7 @@ MVC ビューのレンダリングとは異なり、部分ビューは *_ViewSta
 
 ### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>PageModel ページで部分ビューを使用する Razor
 
-ASP.NET Core 2.0 または2.1 で、次のハンドラーメソッドは、 * \_ authorpartialrp. cshtml*部分ビューを応答にレンダリングします。
+ASP.NET Core 2.0 または2.1 で、次のハンドラーメソッドは、 *\_ authorpartialrp. cshtml* 部分ビューを応答にレンダリングします。
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -273,7 +274,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 部分ビューの検索には、次の規則が適用されます。
 
 * 部分ビューが異なるフォルダー内にある場合は、同じファイル名の別の部分ビューが許可されます。
-* ファイル拡張子を指定せずに部分ビューを名前で参照しており、かつ、部分ビューが呼び出し元のフォルダーと *Shared* フォルダーの両方に存在する場合、呼び出し元のフォルダーにある部分ビューが、部分ビューとして機能します。 部分ビューが呼び出し元のフォルダーに存在しない場合、部分ビューは *Shared* フォルダーから提供されます。 *Shared* フォルダーの部分ビューは、"*共有の部分ビュー*" または "*既定の部分ビュー*" と呼ばれます。
+* ファイル拡張子を指定せずに部分ビューを名前で参照しており、かつ、部分ビューが呼び出し元のフォルダーと *Shared* フォルダーの両方に存在する場合、呼び出し元のフォルダーにある部分ビューが、部分ビューとして機能します。 部分ビューが呼び出し元のフォルダーに存在しない場合、部分ビューは *Shared* フォルダーから提供されます。 *Shared* フォルダーの部分ビューは、" *共有の部分ビュー* " または " *既定の部分ビュー* " と呼ばれます。
 * 部分ビューは、 *chained* &mdash; 呼び出しによって循環参照が形成されていない場合に、部分ビューを連結して別の部分ビューを呼び出すことができます。 相対パスは常に、ファイルのルートや親ではなく、現在のファイルを基準とします。
 
 > [!NOTE]
@@ -281,7 +282,7 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 ## <a name="access-data-from-partial-views"></a>部分ビューからデータにアクセスする
 
-部分ビューがインスタンス化されると、親の `ViewData` ディクショナリの*コピー*を取得します。 親ビュー内のデータに対して行われた更新は、親ビューでは保持されません。 部分ビューで変更された `ViewData` は、部分ビューから返されるときに失われます。
+部分ビューがインスタンス化されると、親の `ViewData` ディクショナリの *コピー* を取得します。 親ビュー内のデータに対して行われた更新は、親ビューでは保持されません。 部分ビューで変更された `ViewData` は、部分ビューから返されるときに失われます。
 
 次の例に、[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) のインスタンスを部分ビューに渡す方法を示します。
 
@@ -299,15 +300,15 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 **Razor トピック**
 
-サンプル アプリの次のマークアップは、*Pages/ArticlesRP/ReadRP.cshtml* ページが元になっています。 ページには、2 つの部分ビューが含まれています。 2 番目の部分ビューは、モデルと `ViewData` を部分ビューに渡します。 `ViewDataDictionary` のコンストラクター オーバーロードは、既存の `ViewData` ディクショナリを維持したまま、新しい `ViewData` ディクショナリを渡すために使用されます。
+サンプル アプリの次のマークアップは、 *Pages/ArticlesRP/ReadRP.cshtml* ページが元になっています。 ページには、2 つの部分ビューが含まれています。 2 番目の部分ビューは、モデルと `ViewData` を部分ビューに渡します。 `ViewDataDictionary` のコンストラクター オーバーロードは、既存の `ViewData` ディクショナリを維持したまま、新しい `ViewData` ディクショナリを渡すために使用されます。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Pages/ArticlesRP/ReadRP.cshtml?name=snippet_ReadPartialViewRP&highlight=5,15-20)]
 
-*Pages/Shared/_AuthorPartialRP.cshtml* は、*ReadRP.cshtml* マークアップ ファイルで参照される最初の部分ビューです。
+*Pages/Shared/_AuthorPartialRP.cshtml* は、 *ReadRP.cshtml* マークアップ ファイルで参照される最初の部分ビューです。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Pages/Shared/_AuthorPartialRP.cshtml)]
 
-*Pages/ArticlesRP/_ArticleSectionRP.cshtml* は、*ReadRP.cshtml* マークアップ ファイルで参照される 2 番目の部分ビューです。
+*Pages/ArticlesRP/_ArticleSectionRP.cshtml* は、 *ReadRP.cshtml* マークアップ ファイルで参照される 2 番目の部分ビューです。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Pages/ArticlesRP/_ArticleSectionRP.cshtml)]
 
@@ -315,15 +316,15 @@ HTML ヘルパーを使用している場合、ベスト プラクティスは <
 
 ::: moniker-end
 
-サンプル アプリの以下のマークアップは、*Views/Articles/Read.cshtml* ビューを示しています。 ビューには、2 つの部分ビューが含まれています。 2 番目の部分ビューは、モデルと `ViewData` を部分ビューに渡します。 `ViewDataDictionary` のコンストラクター オーバーロードは、既存の `ViewData` ディクショナリを維持したまま、新しい `ViewData` ディクショナリを渡すために使用されます。
+サンプル アプリの以下のマークアップは、 *Views/Articles/Read.cshtml* ビューを示しています。 ビューには、2 つの部分ビューが含まれています。 2 番目の部分ビューは、モデルと `ViewData` を部分ビューに渡します。 `ViewDataDictionary` のコンストラクター オーバーロードは、既存の `ViewData` ディクショナリを維持したまま、新しい `ViewData` ディクショナリを渡すために使用されます。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/Read.cshtml?name=snippet_ReadPartialView&highlight=5,15-20)]
 
-*Views/Shared/_AuthorPartial.cshtml* は、*Read.cshtml* マークアップ ファイルで参照される最初の部分ビューです。
+*Views/Shared/_AuthorPartial.cshtml* は、 *Read.cshtml* マークアップ ファイルで参照される最初の部分ビューです。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Shared/_AuthorPartial.cshtml)]
 
-*Views/Articles/_ArticleSection.cshtml* は、*Read.cshtml* マークアップ ファイルで参照される 2 番目の部分ビューです。
+*Views/Articles/_ArticleSection.cshtml* は、 *Read.cshtml* マークアップ ファイルで参照される 2 番目の部分ビューです。
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/_ArticleSection.cshtml)]
 

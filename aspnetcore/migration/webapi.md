@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: e3e46f8050ba87c3108885341675c9d2a2cb7847
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 320805c0d40bf06cee384e6d98caea5c420d45bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635165"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061471"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API から ASP.NET Core への移行
 
@@ -40,13 +41,13 @@ ASP.NET 4.x Web API は、ブラウザーやモバイルデバイスを含む広
 
 ## <a name="review-aspnet-4x-web-api-project"></a>ASP.NET 4.x Web API プロジェクトを確認する
 
-この記事では、 [ASP.NET Web API 2 ではじめに](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)で作成された製品*アプリ*プロジェクトを使用します。 そのプロジェクトでは、基本的な ASP.NET 4.x Web API プロジェクトは次のように構成されます。
+この記事では、 [ASP.NET Web API 2 ではじめに](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)で作成された製品 *アプリ* プロジェクトを使用します。 そのプロジェクトでは、基本的な ASP.NET 4.x Web API プロジェクトは次のように構成されます。
 
-*Global.asax.cs*では、次の呼び出しが行われ `WebApiConfig.Register` ます。
+*Global.asax.cs* では、次の呼び出しが行われ `WebApiConfig.Register` ます。
 
 [!code-csharp[](webapi/sample/3.x/ProductsApp/Global.asax.cs?highlight=14)]
 
-`WebApiConfig`クラスは*App_Start*フォルダーにあり、静的メソッドがあり `Register` ます。
+`WebApiConfig`クラスは *App_Start* フォルダーにあり、静的メソッドがあり `Register` ます。
 
 [!code-csharp[](webapi/sample/3.x/ProductsApp/App_Start/WebApiConfig.cs)]
 
@@ -63,16 +64,16 @@ ASP.NET 4.x Web API は、ブラウザーやモバイルデバイスを含む広
 Visual Studio で新しい空のソリューションを作成し、移行する ASP.NET 4.x Web API プロジェクトを追加します。
 
 1. **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
-1. 空の **ソリューション** テンプレートを選択し、[ **次へ**] を選択します。
-1. ソリューションに *WebAPIMigration*という名前を指定します。 **［作成］** を選択します
+1. 空の **ソリューション** テンプレートを選択し、[ **次へ** ] を選択します。
+1. ソリューションに *WebAPIMigration* という名前を指定します。 **［作成］** を選択します
 1. 既存の製品 *アプリ* プロジェクトをソリューションに追加します。
 
 移行先の新しい API プロジェクトを追加します。
 
 1. 新しい **ASP.NET Core Web アプリケーション** プロジェクトをソリューションに追加します。
-1. [ **新しいプロジェクトの構成** ] ダイアログで、プロジェクトに *Productscore*という名前を付け、[ **作成**] を選択します。
+1. [ **新しいプロジェクトの構成** ] ダイアログで、プロジェクトに *Productscore* という名前を付け、[ **作成** ] を選択します。
 1. **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 **[API]** プロジェクト テンプレートを選択し、 **[作成]** を選択します。
-1. 新しい*Productscore*プロジェクトから*WeatherForecast.cs*と*Controllers/WeatherForecastController*サンプルファイルを削除します。
+1. 新しい *Productscore* プロジェクトから *WeatherForecast.cs* と *Controllers/WeatherForecastController* サンプルファイルを削除します。
 
 ソリューションに2つのプロジェクトが含まれるようになりました。 次のセクションでは、 *Productscore* プロジェクトの内容を *productscore* プロジェクトに移行する方法について説明します。
 
@@ -82,10 +83,10 @@ ASP.NET Core では、 *App_Start* フォルダーや *global.asax* ファイル
 
 `Startup` クラス:
 
-* *Global.asax*を置き換えます。
+* *Global.asax* を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、<xref:fundamentals/startup> を参照してください。
+詳細については、「<xref:fundamentals/startup>」を参照してください。
 
 ## <a name="migrate-models-and-controllers"></a>モデルとコントローラーの移行
 
@@ -95,7 +96,7 @@ ASP.NET Core では、 *App_Start* フォルダーや *global.asax* ファイル
 
 `ProductsController`ASP.NET Core のを更新します。
 
-1. *コントローラー/製品コントローラー .cs*と*モデル*フォルダーを元のプロジェクトから新しいプロジェクトにコピーします。
+1. *コントローラー/製品コントローラー .cs* と *モデル* フォルダーを元のプロジェクトから新しいプロジェクトにコピーします。
 1. コピーしたファイルのルート名前空間をに変更し `ProductsCore` ます。
 1. `using ProductsApp.Models;`ステートメントをに更新 `using ProductsCore.Models;` します。
 
@@ -145,9 +146,9 @@ ASP.NET Core *API* プロジェクトテンプレートには、生成された�
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)アクションに属性を適用し `GetAllProducts` ます。
     * `[HttpGet("{id}")]`アクションに属性を適用し `GetProduct` ます。
 
-移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
+移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 [https://www.microsoft.com](`/api/products/1`) を参照します。 最初の製品が表示されます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -156,19 +157,19 @@ ASP.NET Core *API* プロジェクトテンプレートには、生成された�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>[前提条件]
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
 ## <a name="review-aspnet-4x-web-api-project"></a>ASP.NET 4.x Web API プロジェクトを確認する
 
-この記事では、 [ASP.NET Web API 2 ではじめに](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)で作成された製品*アプリ*プロジェクトを使用します。 そのプロジェクトでは、基本的な ASP.NET 4.x Web API プロジェクトは次のように構成されます。
+この記事では、 [ASP.NET Web API 2 ではじめに](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)で作成された製品 *アプリ* プロジェクトを使用します。 そのプロジェクトでは、基本的な ASP.NET 4.x Web API プロジェクトは次のように構成されます。
 
-*Global.asax.cs*では、次の呼び出しが行われ `WebApiConfig.Register` ます。
+*Global.asax.cs* では、次の呼び出しが行われ `WebApiConfig.Register` ます。
 
 [!code-csharp[](webapi/sample/2.x/ProductsApp/Global.asax.cs?highlight=14)]
 
-`WebApiConfig`クラスは*App_Start*フォルダーにあり、静的メソッドがあり `Register` ます。
+`WebApiConfig`クラスは *App_Start* フォルダーにあり、静的メソッドがあり `Register` ます。
 
 [!code-csharp[](webapi/sample/2.x/ProductsApp/App_Start/WebApiConfig.cs)]
 
@@ -180,9 +181,9 @@ ASP.NET Core *API* プロジェクトテンプレートには、生成された�
 
 Visual Studio で次の手順を実行します。
 
-* [**ファイル**] [  >  **新しい**  >  **プロジェクト**] [  >  **その他のプロジェクト**] [  >  **Visual Studio ソリューション**] にアクセスします。 [ **空のソリューション**] を選択し、ソリューションに *WebAPIMigration*という名前を指定します。 **[OK]** をクリックします。
+* [ **ファイル** ] [  >  **新しい**  >  **プロジェクト** ] [  >  **その他のプロジェクト** ] [  >  **Visual Studio ソリューション** ] にアクセスします。 [ **空のソリューション** ] を選択し、ソリューションに *WebAPIMigration* という名前を指定します。 **[OK]** をクリックします。
 * 既存の製品 *アプリ* プロジェクトをソリューションに追加します。
-* 新しい **ASP.NET Core Web アプリケーション** プロジェクトをソリューションに追加します。 ドロップダウンから **.Net Core** ターゲットフレームワークを選択し、[ **API** プロジェクト] テンプレートを選択します。 プロジェクトに *Productscore*という名前を付け、[ **OK** ] ボタンをクリックします。
+* 新しい **ASP.NET Core Web アプリケーション** プロジェクトをソリューションに追加します。 ドロップダウンから **.Net Core** ターゲットフレームワークを選択し、[ **API** プロジェクト] テンプレートを選択します。 プロジェクトに *Productscore* という名前を付け、[ **OK** ] ボタンをクリックします。
 
 ソリューションに2つのプロジェクトが含まれるようになりました。 次のセクションでは、 *Productscore* プロジェクトの内容を *productscore* プロジェクトに移行する方法について説明します。
 
@@ -195,10 +196,10 @@ ASP.NET Core では使用しません。
 
 `Startup` クラス:
 
-* *Global.asax*を置き換えます。
+* *Global.asax* を置き換えます。
 * すべてのアプリスタートアップタスクを処理します。
 
-詳細については、<xref:fundamentals/startup> を参照してください。
+詳細については、「<xref:fundamentals/startup>」を参照してください。
 
 ASP.NET Core MVC では、がで呼び出されるときに、既定で属性ルーティングが組み込まれてい <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*> `Startup.Configure` ます。 次の呼び出しを実行すると、製品 `UseMvc` *アプリ* プロジェクトの *App_Start* となります。
 
@@ -258,7 +259,7 @@ ASP.NET Core には、次のコンポーネントは存在しません。
     * [`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)アクションに属性を適用し `GetAllProducts` ます。
     * `[HttpGet("{id}")]`アクションに属性を適用し `GetProduct` ます。
 
-移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 `/api/products/1` を参照します。 最初の製品が表示されます。
+移行したプロジェクトを実行し、に移動し `/api/products` ます。 3つの製品の完全な一覧が表示されます。 [https://www.microsoft.com](`/api/products/1`) を参照します。 最初の製品が表示されます。
 
 ## <a name="compatibility-shim"></a>互換性 shim
 

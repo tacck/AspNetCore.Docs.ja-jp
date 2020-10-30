@@ -5,6 +5,7 @@ description: ASP.NET Core データ保護のキーストレージ形式の実装
 ms.author: riande
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: daf86d3e3357d42ddad74d5e2f06e00e0e24db07
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a8503964c98d1828dc9d02640a7621b370e679c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631993"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060145"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core のキー格納形式
 
@@ -34,7 +35,7 @@ ms.locfileid: "88631993"
 
 ## <a name="the-key-element"></a>\<key> 要素
 
-キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。 規則によるキーのファイル名は **キー {guid} .xml です**。ここで、{guid} はキーの id です。 このようなファイルには1つのキーが含まれています。 ファイルの形式は次のとおりです。
+キーは、キーリポジトリの最上位レベルのオブジェクトとして存在します。 規則によるキーのファイル名は **キー {guid} .xml です** 。ここで、{guid} はキーの id です。 このようなファイルには1つのキーが含まれています。 ファイルの形式は次のとおりです。
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -77,7 +78,7 @@ Outer 要素には \<descriptor> 、deserializerType 属性が含まれていま
 
 ## <a name="the-encryptedsecret-element"></a>\<encryptedSecret> 要素
 
-暗号化された形式の秘密キーマテリアルを含む** &lt; encryptedsecret &gt; **要素は、保存[時のシークレットの暗号化が有効になっ](xref:security/data-protection/implementation/key-encryption-at-rest)ている場合に存在する可能性があります。 属性 `decryptorType` は、 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。 この型は、内部の** &lt; encryptedKey &gt; **要素を読み取り、復号化して元のプレーンテキストを回復する役割を担います。
+暗号化された形式の秘密キーマテリアルを含む **&lt; encryptedsecret &gt;** 要素は、保存 [時のシークレットの暗号化が有効になっ](xref:security/data-protection/implementation/key-encryption-at-rest)ている場合に存在する可能性があります。 属性 `decryptorType` は、 [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)を実装する型のアセンブリ修飾名です。 この型は、内部の **&lt; encryptedKey &gt;** 要素を読み取り、復号化して元のプレーンテキストを回復する役割を担います。
 
 と同様に、 `<descriptor>` 要素の特定の形式は、使用されて `<encryptedSecret>` いる保存時の暗号化メカニズムに依存します。 上の例では、コメントごとに Windows DPAPI を使用してマスターキーが暗号化されています。
 

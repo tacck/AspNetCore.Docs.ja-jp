@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: db718b8d4c305b75ad52054efde6b2d03f6825ed
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: 08ec018238d18cd253e793267c5b146df8319485
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153533"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060769"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>ASP.NET Core のキー管理機能拡張
 
 このセクションを読む前に、「 [キー管理](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) 」セクションをお読みください。このセクションでは、これらの api の基本的な概念について説明します。
 
-**警告**: 次のインターフェイスのいずれかを実装する型は、複数の呼び出し元に対してスレッドセーフである必要があります。
+**警告** : 次のインターフェイスのいずれかを実装する型は、複数の呼び出し元に対してスレッドセーフである必要があります。
 
 ## <a name="key"></a>キー
 

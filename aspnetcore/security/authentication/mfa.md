@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 873f7d113df84c931ad7fbf2c72aa292e4e87c48
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606806"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060392"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core での multi-factor authentication
 
@@ -151,7 +152,7 @@ namespace IdentityStandaloneMfa
 }
 ```
 
-クラスでサービスのセットアップが変更されたため、の Identity `Startup` レイアウトを Identity 更新する必要があります。 ページを Identity アプリにスキャフォールディングします。 * Identity /アカウント/manage/_Layout*ファイルでレイアウトを定義します。
+クラスでサービスのセットアップが変更されたため、の Identity `Startup` レイアウトを Identity 更新する必要があります。 ページを Identity アプリにスキャフォールディングします。 *Identity /アカウント/manage/_Layout* ファイルでレイアウトを定義します。
 
 ```cshtml
 @{
@@ -332,7 +333,7 @@ You can enable MFA to login here:
 
 メソッドで `Login` `IIdentityServerInteractionService` `_interaction` は、OpenID connect 要求パラメーターにアクセスするためにインターフェイスの実装が使用されます。 パラメーターには `acr_values` 、プロパティを使用してアクセスし `AcrValues` ます。 クライアントがこれを set と共に送信すると `mfa` 、これを確認できます。
 
-MFA が必要であり、のユーザーが MFA を有効にしている場合、 ASP.NET Core Identity ログインは続行されます。 ユーザーが MFA を有効にしていない場合、ユーザーはカスタムビュー *ErrorEnable2FA*にリダイレクトされます。 次 ASP.NET Core Identity に、でユーザーに署名します。
+MFA が必要であり、のユーザーが MFA を有効にしている場合、 ASP.NET Core Identity ログインは続行されます。 ユーザーが MFA を有効にしていない場合、ユーザーはカスタムビュー *ErrorEnable2FA* にリダイレクトされます。 次 ASP.NET Core Identity に、でユーザーに署名します。
 
 ```csharp
 //
@@ -580,7 +581,7 @@ MFA を使用せずにログインする場合 (パスワードのみを使用�
 
 ![require_mfa_oidc_01.png](mfa/_static/require_mfa_oidc_01.png)
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [ASP.NET Core での TOTP authenticator アプリの QR コード生成を有効にする](xref:security/authentication/identity-enable-qrcodes)
 * [Azure Active Directory のパスワードレス認証オプション](/azure/active-directory/authentication/concept-authentication-passwordless)

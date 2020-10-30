@@ -5,6 +5,7 @@ description: ASP.NET MVC プロジェクトから ASP.NET Core MVC プロジェ�
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: c8e6a1a8bf9ef06d98db0e7e0a6a0e5ff393e322
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 8ceff0596c069d815c38b9bb526477a9d1430951
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865539"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060652"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>認証および Identity ASP.NET Core への移行
 
@@ -31,7 +32,7 @@ ms.locfileid: "88865539"
 
 ## <a name="configure-no-locidentity-and-membership"></a>Identityメンバーシップを構成する
 
-ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォルダーにある*Startup.Auth.cs*と* Identity Config.cs*の ASP.NET を使用して構成されます。 ASP.NET Core MVC では、これらの機能は *Startup.cs*で構成されています。
+ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォルダーにある *Startup.Auth.cs* と *Identity Config.cs* の ASP.NET を使用して構成されます。 ASP.NET Core MVC では、これらの機能は *Startup.cs* で構成されています。
 
 次の NuGet パッケージをインストールします。
 
@@ -39,7 +40,7 @@ ASP.NET MVC では、認証と id 機能は、[ Identity *App_Start* ] フォル
 * `Microsoft.AspNetCore.Authentication.Cookies`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 
-*Startup.cs*で、 `Startup.ConfigureServices` Entity Framework とサービスを使用するようにメソッドを更新し Identity ます。
+*Startup.cs* で、 `Startup.ConfigureServices` Entity Framework とサービスを使用するようにメソッドを更新し Identity ます。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -56,9 +57,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-この時点で、上記のコードでは、ASP.NET MVC プロジェクトからまだ移行していない2つの型が参照されています。 `ApplicationDbContext` `ApplicationUser` ASP.NET Core プロジェクトに新しい *モデル* フォルダーを作成し、これらの型に対応する2つのクラスを追加します。 これらのクラスの ASP.NET MVC バージョンは */Models/ Identity Models.cs*にありますが、移行されたプロジェクトのクラスごとに1つのファイルを使用します。これはより明確であるためです。
+この時点で、上記のコードでは、ASP.NET MVC プロジェクトからまだ移行していない2つの型が参照されています。 `ApplicationDbContext` `ApplicationUser` ASP.NET Core プロジェクトに新しい *モデル* フォルダーを作成し、これらの型に対応する2つのクラスを追加します。 これらのクラスの ASP.NET MVC バージョンは */Models/ Identity Models.cs* にありますが、移行されたプロジェクトのクラスごとに1つのファイルを使用します。これはより明確であるためです。
 
-*ApplicationUser.cs*:
+*ApplicationUser.cs* :
 
 ```csharp
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -71,7 +72,7 @@ namespace NewMvcProject.Models
 }
 ```
 
-*ApplicationDbContext.cs*:
+*ApplicationDbContext.cs* :
 
 ```csharp
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -114,7 +115,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 ## <a name="migrate-registration-and-login-logic"></a>登録とログインのロジックを移行する
 
-IdentityEntity Framework と SQL Server を使用して構成されたアプリとデータアクセス用に構成されたサービスを使用して、登録とアプリへのログインのサポートを追加する準備が整いました。 [移行プロセスの前半](xref:migration/mvc#migrate-the-layout-file)で、 *_Layout*の *_LoginPartial*への参照がコメントアウトされていることを思い出してください。 次に、そのコードに戻り、コメントを解除し、ログイン機能をサポートするために必要なコントローラーとビューを追加します。
+IdentityEntity Framework と SQL Server を使用して構成されたアプリとデータアクセス用に構成されたサービスを使用して、登録とアプリへのログインのサポートを追加する準備が整いました。 [移行プロセスの前半](xref:migration/mvc#migrate-the-layout-file)で、 *_Layout* の *_LoginPartial* への参照がコメントアウトされていることを思い出してください。 次に、そのコードに戻り、コメントを解除し、ログイン機能をサポートするために必要なコントローラーとビューを追加します。
 
 _Layout の行のコメントを解除 `@Html.Partial` *します。*
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 7f1d20687f6dd588e125acf3815815c2bcf0cd04
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6d2a89ec7c64728bc585ad235293f2277f9a66f7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722684"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061484"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core のメモリ管理とガベージコレクション (GC)
 
@@ -50,7 +51,7 @@ ASP.NET Core アプリが開始されると、GC は次のようになります�
 
 [GC を呼び出しています。](xref:System.GC.Collect*)明示的に収集:
 
-* 運用 ASP.NET Core アプリでは**実行しないでください。**
+* 運用 ASP.NET Core アプリでは **実行しないでください。**
 * は、メモリリークを調査するときに便利です。
 * 調査時に、GC によってすべての未解決のオブジェクトがメモリから削除されたことを確認し、メモリを測定します。
 
@@ -137,8 +138,8 @@ public ActionResult<string> GetBigString()
 
 .NET ガベージコレクターには、次の2つの異なるモードがあります。
 
-* **WORKSTATION GC**: デスクトップ用に最適化されています。
-* **サーバー GC**。 ASP.NET Core アプリの既定の GC。 サーバーに合わせて最適化されます。
+* **WORKSTATION GC** : デスクトップ用に最適化されています。
+* **サーバー GC** 。 ASP.NET Core アプリの既定の GC。 サーバーに合わせて最適化されます。
 
 GC モードは、プロジェクトファイルまたは発行されたアプリの *runtimeconfig.js* ファイルで明示的に設定できます。 次のマークアップは、プロジェクトファイルの設定を示してい `ServerGarbageCollection` ます。
 
@@ -235,7 +236,7 @@ public void GetFileProvider()
 
 ### <a name="large-objects-heap"></a>ラージオブジェクトヒープ
 
-メモリの割り当てや空きサイクルが頻繁に発生する場合は、特にメモリの大量のチャンクを割り当てるときにメモリをフラグメント化できます。 オブジェクトは、連続したメモリブロックで割り当てられます。 断片化を軽減するために、GC はメモリを解放するときに、メモリを最適化しようとします。 このプロセスは、 **圧縮**と呼ばれます。 圧縮には、オブジェクトの移動が含まれます。 大きなオブジェクトを移動すると、パフォーマンスが低下します。 このため、GC は大きなオブジェクト[ヒープ](/dotnet/standard/garbage-collection/large-object-heap)(LOH) と呼ばれる_大きな_オブジェクト用に特別なメモリゾーンを作成します。 85000バイトを超えるオブジェクト (約 83 KB) は次のとおりです。
+メモリの割り当てや空きサイクルが頻繁に発生する場合は、特にメモリの大量のチャンクを割り当てるときにメモリをフラグメント化できます。 オブジェクトは、連続したメモリブロックで割り当てられます。 断片化を軽減するために、GC はメモリを解放するときに、メモリを最適化しようとします。 このプロセスは、 **圧縮** と呼ばれます。 圧縮には、オブジェクトの移動が含まれます。 大きなオブジェクトを移動すると、パフォーマンスが低下します。 このため、GC は大きなオブジェクト [ヒープ](/dotnet/standard/garbage-collection/large-object-heap)(LOH) と呼ばれる _大きな_ オブジェクト用に特別なメモリゾーンを作成します。 85000バイトを超えるオブジェクト (約 83 KB) は次のとおりです。
 
 * LOH に配置されます。
 * 圧縮されていません。
@@ -271,7 +272,7 @@ public int GetLOH1(int size)
 
 ![前のグラフ](memory/_static/loh1.png)
 
-次のグラフは、エンドポイントの呼び出しのメモリプロファイルを示してい `/api/loh/84976` ます。 *1 バイトだけ*割り当てられます。
+次のグラフは、エンドポイントの呼び出しのメモリプロファイルを示してい `/api/loh/84976` ます。 *1 バイトだけ* 割り当てられます。
 
 ![前のグラフ](memory/_static/loh2.png)
 
@@ -292,7 +293,7 @@ public int GetLOH1(int size)
 * [ResponseCaching/Streams/StreamUtilities .cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-詳細については、次を参照してください。
+詳細については、次をご覧ください。
 
 * [大きなオブジェクトヒープが漏れています](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [大きなオブジェクトヒープ](/dotnet/standard/garbage-collection/large-object-heap)
@@ -393,7 +394,7 @@ NuGet パッケージの [Microsoft extension. ObjectPool](https://www.nuget.org
 
 上記のコードは、 `byte` [arraypool \<T> ](xref:System.Buffers.ArrayPool`1)を使用してバッファーをプールすることによって最適化できます。 静的インスタンスは、要求間で再利用されます。
 
-この方法の違いは、プールされたオブジェクトが API から返されることです。 ということは：
+この方法の違いは、プールされたオブジェクトが API から返されることです。 これは次のことを意味します。
 
 * オブジェクトは、メソッドから戻るとすぐにコントロールから除外されます。
 * オブジェクトを解放することはできません。

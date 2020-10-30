@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: da507974b88c21de22e2c7a56950943207565138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635399"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060548"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API における Json パッチ
 
@@ -53,7 +54,7 @@ ms.locfileid: "88635399"
 
 ## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON 修正プログラム、AddNewtonsoftJson、および System.Text.Js
 
-`AddNewtonsoftJson`すべての `System.Text.Json` JSON コンテンツの書式設定に使用される**all** 、ベースの入力フォーマッタと出力フォーマッタを置き換えます。 を使用して JSON 修正プログラムのサポートを追加するには `Newtonsoft.Json` 、他のフォーマッタを変更せずに、プロジェクトのメソッドを次のように更新し `Startup.ConfigureServices` ます。
+`AddNewtonsoftJson`すべての `System.Text.Json` JSON コンテンツの書式設定に使用される **all** 、ベースの入力フォーマッタと出力フォーマッタを置き換えます。 を使用して JSON 修正プログラムのサポートを追加するには `Newtonsoft.Json` 、他のフォーマッタを変更せずに、プロジェクトのメソッドを次のように更新し `Startup.ConfigureServices` ます。
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
@@ -67,7 +68,7 @@ PUT および [PATCH](https://tools.ietf.org/html/rfc5789) メソッドは、既
 
 ## <a name="json-patch"></a>JSON パッチ
 
-[JSON パッチ](https://tools.ietf.org/html/rfc6902)は、リソースに適用される更新を指定するための形式です。 JSON パッチ ドキュメントには、"*操作*" の配列が含まれます。 各操作は、特定の種類の変更を識別します。 このような変更の例としては、配列要素の追加やプロパティ値の置換などがあります。
+[JSON パッチ](https://tools.ietf.org/html/rfc6902)は、リソースに適用される更新を指定するための形式です。 JSON パッチ ドキュメントには、" *操作* " の配列が含まれます。 各操作は、特定の種類の変更を識別します。 このような変更の例としては、配列要素の追加やプロパティ値の置換などがあります。
 
 たとえば、次の JSON ドキュメントはリソース、リソースの JSON パッチドキュメント、およびパッチ操作の適用結果を表します。
 
@@ -117,11 +118,11 @@ JSON 修正プログラムドキュメントをリソースに適用すること
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 `add`配列の末尾には、 `-` インデックス番号ではなくハイフン () を使用し `/addresses/-` ます。
 
-### <a name="operations"></a>Operations
+### <a name="operations"></a>演算
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|操作  | メモ |
+|操作  | Notes |
 |-----------|--------------------------------|
 | `add`     | プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します。|
 | `remove`  | プロパティまたは配列要素を削除します。 |
@@ -248,7 +249,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードを取得する
+## <a name="get-the-code"></a>コードの入手
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -259,7 +260,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正* プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)
@@ -279,7 +280,7 @@ PUT および [PATCH](https://tools.ietf.org/html/rfc5789) メソッドは、既
 
 ## <a name="json-patch"></a>JSON パッチ
 
-[JSON パッチ](https://tools.ietf.org/html/rfc6902)は、リソースに適用される更新を指定するための形式です。 JSON パッチ ドキュメントには、"*操作*" の配列が含まれます。 各操作では、配列要素の追加やプロパティ値の置換など、特定の種類の変更を識別します。
+[JSON パッチ](https://tools.ietf.org/html/rfc6902)は、リソースに適用される更新を指定するための形式です。 JSON パッチ ドキュメントには、" *操作* " の配列が含まれます。 各操作では、配列要素の追加やプロパティ値の置換など、特定の種類の変更を識別します。
 
 たとえば、次の JSON ドキュメントは、1 つのリソースとそのリソースに対応する JSON パッチ ドキュメント、およびパッチ操作を適用した結果を表しています。
 
@@ -329,11 +330,11 @@ JSON パッチ ドキュメントをリソースに適用することで行わ�
 
 0 から始まるインデックスは、配列の要素を指定するために使用されます。 `addresses` 配列の最初の要素は、`/addresses/0` にあります。 配列の末尾への `add` では、インデックス番号ではなく、`/addresses/-` のようにハイフン (-) を使用します。
 
-### <a name="operations"></a>Operations
+### <a name="operations"></a>演算
 
 次の表は、[JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)に定義されている、サポートされる操作を示しています。
 
-|操作  | メモ |
+|操作  | Notes |
 |-----------|--------------------------------|
 | `add`     | プロパティまたは配列要素を追加します。 既存のプロパティの場合: 値を設定します。|
 | `remove`  | プロパティまたは配列要素を削除します。 |
@@ -460,7 +461,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 
 [!code-json[](jsonpatch/samples/2.2/JSON/test-fail.json)]
 
-## <a name="get-the-code"></a>コードを取得する
+## <a name="get-the-code"></a>コードの入手
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -471,7 +472,7 @@ API コントローラーにおける JSON パッチ用のアクション メソ
 * ヘッダー: `Content-Type: application/json-patch+json`
 * Body: *json プロジェクトフォルダーから json 修正* プログラムドキュメントのサンプルのいずれかをコピーして貼り付けます。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [IETF RFC 5789 PATCH メソッドの仕様](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON パッチの仕様](https://tools.ietf.org/html/rfc6902)
