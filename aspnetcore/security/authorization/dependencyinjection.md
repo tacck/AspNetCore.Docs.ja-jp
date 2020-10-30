@@ -5,33 +5,34 @@ description: 依存関係の挿入を使用して ASP.NET Core アプリに承�
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: 4bc7eb38262c8a94a84aacc978737a778bfd71a1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6598a9c9cfd1e6597fffcc1aa0c53fa493532458
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632565"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060262"
 ---
-# <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a><span data-ttu-id="c978d-103">ASP.NET Core の要件ハンドラーでの依存関係の挿入</span><span class="sxs-lookup"><span data-stu-id="c978d-103">Dependency injection in requirement handlers in ASP.NET Core</span></span>
+# <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a><span data-ttu-id="ff77f-103">ASP.NET Core の要件ハンドラーでの依存関係の挿入</span><span class="sxs-lookup"><span data-stu-id="ff77f-103">Dependency injection in requirement handlers in ASP.NET Core</span></span>
 
 <a name="security-authorization-di"></a>
 
-<span data-ttu-id="c978d-104">[承認ハンドラーは](xref:security/authorization/policies#handler-registration) 、構成中に ( [依存関係の挿入](xref:fundamentals/dependency-injection)を使用して) サービスコレクションに登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c978d-104">[Authorization handlers must be registered](xref:security/authorization/policies#handler-registration) in the service collection during configuration (using [dependency injection](xref:fundamentals/dependency-injection)).</span></span>
+<span data-ttu-id="ff77f-104">[承認ハンドラーは](xref:security/authorization/policies#handler-registration) 、 [依存関係の挿入](xref:fundamentals/dependency-injection)を使用して構成するときに、サービスコレクションに登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="ff77f-104">[Authorization handlers must be registered](xref:security/authorization/policies#handler-registration) in the service collection during configuration using [dependency injection](xref:fundamentals/dependency-injection).</span></span>
 
-<span data-ttu-id="c978d-105">承認ハンドラー内で評価するルールのリポジトリがあり、そのリポジトリがサービスコレクションに登録されているとします。</span><span class="sxs-lookup"><span data-stu-id="c978d-105">Suppose you had a repository of rules you wanted to evaluate inside an authorization handler and that repository was registered in the service collection.</span></span> <span data-ttu-id="c978d-106">承認は、それを解決してコンストラクターに挿入します。</span><span class="sxs-lookup"><span data-stu-id="c978d-106">Authorization will resolve and inject that into your constructor.</span></span>
+<span data-ttu-id="ff77f-105">承認ハンドラー内で評価するルールのリポジトリがあり、そのリポジトリがサービスコレクションに登録されているとします。</span><span class="sxs-lookup"><span data-stu-id="ff77f-105">Suppose you had a repository of rules you wanted to evaluate inside an authorization handler and that repository was registered in the service collection.</span></span> <span data-ttu-id="ff77f-106">承認は、それを解決してコンストラクターに挿入します。</span><span class="sxs-lookup"><span data-stu-id="ff77f-106">Authorization resolves and injects that into the constructor.</span></span>
 
-<span data-ttu-id="c978d-107">たとえば、ASP を使用する場合を考えてみます。ハンドラーに挿入する NET のログ記録インフラストラクチャ `ILoggerFactory` 。</span><span class="sxs-lookup"><span data-stu-id="c978d-107">For example, if you wanted to use ASP.NET's logging infrastructure you would want to inject `ILoggerFactory` into your handler.</span></span> <span data-ttu-id="c978d-108">このようなハンドラーは次のようになります。</span><span class="sxs-lookup"><span data-stu-id="c978d-108">Such a handler might look like:</span></span>
+<span data-ttu-id="ff77f-107">たとえば、ASP を使用します。NET のログ記録インフラストラクチャは、 `ILoggerFactory` ハンドラーに挿入されます。</span><span class="sxs-lookup"><span data-stu-id="ff77f-107">For example, to use ASP.NET's logging infrastructure, inject `ILoggerFactory` into the handler.</span></span> <span data-ttu-id="ff77f-108">このようなハンドラーは、次のコードのようになります。</span><span class="sxs-lookup"><span data-stu-id="ff77f-108">Such a handler might look like the following code:</span></span>
 
 ```csharp
 public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
@@ -52,13 +53,13 @@ public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
    }
    ```
 
-<span data-ttu-id="c978d-109">ハンドラーは次のように登録し `services.AddSingleton()` ます。</span><span class="sxs-lookup"><span data-stu-id="c978d-109">You would register the handler with `services.AddSingleton()`:</span></span>
+<span data-ttu-id="ff77f-109">上記のハンドラーは、任意の [サービスの有効期間](/dotnet/core/extensions/dependency-injection#service-lifetimes)で登録できます。</span><span class="sxs-lookup"><span data-stu-id="ff77f-109">The preceding handler can be registered with any [service lifetime](/dotnet/core/extensions/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="ff77f-110">次のコードでは、を使用し `AddSingleton` て、前のハンドラーを登録します。</span><span class="sxs-lookup"><span data-stu-id="ff77f-110">The following code uses `AddSingleton` to register the preceding handler:</span></span>
 
 ```csharp
 services.AddSingleton<IAuthorizationHandler, LoggingAuthorizationHandler>();
 ```
 
-<span data-ttu-id="c978d-110">アプリケーションの起動時にハンドラーのインスタンスが作成され、DI によって、登録されたがコンストラクターに挿入され `ILoggerFactory` ます。</span><span class="sxs-lookup"><span data-stu-id="c978d-110">An instance of the handler will be created when your application starts, and DI will inject the registered `ILoggerFactory` into your constructor.</span></span>
+<span data-ttu-id="ff77f-111">ハンドラーのインスタンスは、アプリの起動時に作成され、DI はコンストラクターに登録されたを挿入し `ILoggerFactory` ます。</span><span class="sxs-lookup"><span data-stu-id="ff77f-111">An instance of the handler is created when the app starts, and DI injects the registered `ILoggerFactory` into the constructor.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="c978d-111">Entity Framework を使用するハンドラーをシングルトンとして登録することはできません。</span><span class="sxs-lookup"><span data-stu-id="c978d-111">Handlers that use Entity Framework shouldn't be registered as singletons.</span></span>
+> <span data-ttu-id="ff77f-112">Entity Framework を使用するハンドラーをシングルトンとして登録することはできません。</span><span class="sxs-lookup"><span data-stu-id="ff77f-112">Handlers that use Entity Framework shouldn't be registered as singletons.</span></span>
