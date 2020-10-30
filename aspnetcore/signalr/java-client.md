@@ -7,6 +7,7 @@ ms.author: mimengis
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: 5351bcf5adb4a79efc993f48acbb959f113c814f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 638333176ae31b088bdf5ebefe97e87bde6c0d32
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634957"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051461"
 ---
 # <a name="aspnet-core-no-locsignalr-java-client"></a>SignalRJava クライアントの ASP.NET Core
 
@@ -37,7 +38,7 @@ Java クライアントを使用すると、 SignalR Android アプリを含む 
 
 ## <a name="install-the-no-locsignalr-java-client-package"></a>SignalRJava クライアントパッケージをインストールする
 
-*Signalr*の JAR ファイルを使用すると、クライアントはハブに接続でき SignalR ます。 最新の JAR ファイルのバージョン番号を確認するには、 [Maven の検索結果](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr)を参照してください。
+*Signalr* の JAR ファイルを使用すると、クライアントはハブに接続でき SignalR ます。 最新の JAR ファイルのバージョン番号を確認するには、 [Maven の検索結果](https://search.maven.org/search?q=g:com.microsoft.signalr%20AND%20a:signalr)を参照してください。
 
 Gradle を使用する場合は、 `dependencies` *Gradle* ファイルのセクションに次の行を追加します。
 
@@ -124,7 +125,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [Java API リファレンス](/java/api/com.microsoft.signalr?view=aspnet-signalr-java)
 * <xref:signalr/hubs>

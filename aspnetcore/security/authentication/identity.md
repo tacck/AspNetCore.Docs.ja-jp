@@ -5,6 +5,7 @@ description: IdentityASP.NET Core アプリで使用します。 パスワード
 ms.author: riande
 ms.date: 7/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 1d14a3668192a165ea5025ae0575a8e3d6dfd8e4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bfcef860beb07ab81dda1a10a1648491ae187bef
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633254"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052020"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>IdentityASP.NET Core の概要
 
@@ -61,10 +62,10 @@ Identity は、通常、ユーザー名、パスワード、およびプロフ�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [**ファイル**] [新しいプロジェクト] を選択し > **New** > **Project**ます。
+* [ **ファイル** ] [新しいプロジェクト] を選択し > **New** > **Project** ます。
 * **[ASP.NET Core Web アプリケーション]** を選択します。 プロジェクトに **WebApp1** という名前を付け、プロジェクトのダウンロードと同じ名前空間にします。 **[OK]** をクリックします。
-* ASP.NET Core **Web アプリケーション**を選択し、[ **認証の変更**] を選択します。
-* **個々のユーザーアカウント**を選択し、[ **OK]** をクリックします。
+* ASP.NET Core **Web アプリケーション** を選択し、[ **認証の変更** ] を選択します。
+* **個々のユーザーアカウント** を選択し、[ **OK]** をクリックします。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -142,7 +143,7 @@ Identity は、を呼び出すことによって有効になり <xref:Microsoft.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-**WebApp1**という名前のプロジェクトを作成した場合は、次のコマンドを実行します。 それ以外の場合は、の正しい名前空間を使用し `ApplicationDbContext` ます。
+**WebApp1** という名前のプロジェクトを作成した場合は、次のコマンドを実行します。 それ以外の場合は、の正しい名前空間を使用し `ApplicationDbContext` ます。
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -170,7 +171,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 ログインフォームは次の場合に表示されます。
 
-* **ログイン**リンクが選択されています。
+* **ログイン** リンクが選択されています。
 * ユーザーがアクセスを承認されていない、 **または** システムによって認証されていない制限付きページにアクセスしようとしています。
 
 ログインページのフォームが送信されると、 `OnPostAsync` アクションが呼び出されます。 `PasswordSignInAsync` は、オブジェクトで呼び出され `_signInManager` ます。
@@ -189,7 +190,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Ident
 
 [署名](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) は、に格納されているユーザーの要求をクリア cookie します。
 
-Post は *Pages/Shared/_LoginPartial*に指定されています。
+Post は *Pages/Shared/_LoginPartial* に指定されています。
 
 [!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
@@ -295,10 +296,10 @@ Identity SQL Server データベースを使用して、ユーザー名、パス
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [**ファイル**] [新しいプロジェクト] を選択し > **New** > **Project**ます。
+* [ **ファイル** ] [新しいプロジェクト] を選択し > **New** > **Project** ます。
 * **[ASP.NET Core Web アプリケーション]** を選択します。 プロジェクトに **WebApp1** という名前を付け、プロジェクトのダウンロードと同じ名前空間にします。 **[OK]** をクリックします。
-* ASP.NET Core **Web アプリケーション**を選択し、[ **認証の変更**] を選択します。
-* **個々のユーザーアカウント**を選択し、[ **OK]** をクリックします。
+* ASP.NET Core **Web アプリケーション** を選択し、[ **認証の変更** ] を選択します。
+* **個々のユーザーアカウント** を選択し、[ **OK]** をクリックします。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -366,7 +367,7 @@ Register、Login、および LogOut の各ファイルを追加します。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-**WebApp1**という名前のプロジェクトを作成した場合は、次のコマンドを実行します。 それ以外の場合は、の正しい名前空間を使用し `ApplicationDbContext` ます。
+**WebApp1** という名前のプロジェクトを作成した場合は、次のコマンドを実行します。 それ以外の場合は、の正しい名前空間を使用し `ApplicationDbContext` ます。
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -391,7 +392,7 @@ PowerShell では、コマンドの区切り記号としてセミコロンを使
 
 ログインフォームは次の場合に表示されます。
 
-* **ログイン**リンクが選択されています。
+* **ログイン** リンクが選択されています。
 * ユーザーがアクセスを承認されていない、 **または** システムによって認証されていない制限付きページにアクセスしようとしています。
 
 ログインページのフォームが送信されると、 `OnPostAsync` アクションが呼び出されます。 `PasswordSignInAsync` は、オブジェクトで呼び出され `_signInManager` ます。
@@ -408,7 +409,7 @@ PowerShell では、コマンドの区切り記号としてセミコロンを使
 
 [署名](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) は、に格納されているユーザーの要求をクリア cookie します。
 
-Post は *Pages/Shared/_LoginPartial*に指定されています。
+Post は *Pages/Shared/_LoginPartial* に指定されています。
 
 [!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 

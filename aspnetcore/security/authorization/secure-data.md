@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 5f86e514ee6339888171d83ab3117e9b3fcf107e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627820"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051942"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する
 
@@ -44,7 +45,7 @@ ms.locfileid: "88627820"
 
 このドキュメントの画像は、最新のテンプレートと完全には一致しません。
 
-次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を**編集**したりするだけで、 / **Delete** / 連絡先の新しいリンクを**作成**できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
+次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を **編集** したりするだけで、 / **Delete** / 連絡先の新しいリンクを **作成** できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
 
 ![Rick がサインインしていることを示すスクリーンショット](secure-data/_static/rick.png)
 
@@ -74,7 +75,7 @@ ms.locfileid: "88627820"
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>[前提条件]
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -127,11 +128,11 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-前の強調表示されたコードは、 [フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。 フォールバック認証ポリシーでは***all*** 、 Razor ページ、コントローラー、または認証属性を持つアクションメソッドを除き、すべてのユーザーの認証が必要です。 たとえば、 Razor ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。
+前の強調表示されたコードは、 [フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。 フォールバック認証ポリシーでは、 *_all_* Razor 認証属性を持つページ、コントローラー、またはアクションメソッドを除き、* すべての _ ユーザーを認証する必要があります。 たとえば、 Razor ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。
 
 フォールバック認証ポリシー:
 
-* は、認証ポリシーを明示的に指定しないすべての要求に適用されます。 エンドポイントのルーティングによって提供される要求の場合、これには承認属性を指定しないエンドポイントが含まれます。 [静的ファイル](xref:fundamentals/static-files)など、承認ミドルウェアの後に他のミドルウェアによって提供される要求の場合、ポリシーがすべての要求に適用されます。
+_ は、認証ポリシーを明示的に指定しないすべての要求に適用されます。 エンドポイントのルーティングによって提供される要求の場合、これには承認属性を指定しないエンドポイントが含まれます。 [静的ファイル](xref:fundamentals/static-files)など、承認ミドルウェアの後に他のミドルウェアによって提供される要求の場合、ポリシーがすべての要求に適用されます。
 
 代替認証ポリシーを設定して、ユーザーが認証を要求するようにすると、新しく追加されたページとコントローラーが保護され Razor ます。 既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です Razor `[Authorize]` 。
 
@@ -151,7 +152,7 @@ dotnet ef database update
 
 ### <a name="configure-the-test-account"></a>テストアカウントを構成する
 
-クラスは、 `SeedData` 管理者とマネージャーの2つのアカウントを作成します。 これらのアカウントのパスワードを設定するには、 [シークレットマネージャーツール](xref:security/app-secrets) を使用します。 プロジェクトディレクトリ ( *Program.cs*を含むディレクトリ) のパスワードを設定します。
+クラスは、 `SeedData` 管理者とマネージャーの2つのアカウントを作成します。 これらのアカウントのパスワードを設定するには、 [シークレットマネージャーツール](xref:security/app-secrets) を使用します。 プロジェクトディレクトリ ( *Program.cs* を含むディレクトリ) のパスワードを設定します。
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -175,7 +176,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-owner-manager-and-administrator-authorization-handlers"></a>所有者、マネージャー、および管理者の承認ハンドラーを作成する
 
-`ContactIsOwnerAuthorizationHandler`*承認*フォルダーにクラスを作成します。 は、 `ContactIsOwnerAuthorizationHandler` リソースに対して動作しているユーザーがリソースを所有していることを確認します。
+`ContactIsOwnerAuthorizationHandler`*承認* フォルダーにクラスを作成します。 は、 `ContactIsOwnerAuthorizationHandler` リソースに対して動作しているユーザーがリソースを所有していることを確認します。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactIsOwnerAuthorizationHandler.cs)]
 
@@ -190,13 +191,13 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="create-a-manager-authorization-handler"></a>マネージャーの承認ハンドラーを作成する
 
-`ContactManagerAuthorizationHandler`*承認*フォルダーにクラスを作成します。 は、 `ContactManagerAuthorizationHandler` リソースに対して動作しているユーザーがマネージャーであることを確認します。 コンテンツの変更を承認または拒否できるのは、管理者のみです (新規または変更)。
+`ContactManagerAuthorizationHandler`*承認* フォルダーにクラスを作成します。 は、 `ContactManagerAuthorizationHandler` リソースに対して動作しているユーザーがマネージャーであることを確認します。 コンテンツの変更を承認または拒否できるのは、管理者のみです (新規または変更)。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactManagerAuthorizationHandler.cs)]
 
 ### <a name="create-an-administrator-authorization-handler"></a>管理者の承認ハンドラーを作成する
 
-`ContactAdministratorsAuthorizationHandler`*承認*フォルダーにクラスを作成します。 は、 `ContactAdministratorsAuthorizationHandler` リソースに対して動作しているユーザーが管理者であることを確認します。 管理者は、すべての操作を実行できます。
+`ContactAdministratorsAuthorizationHandler`*承認* フォルダーにクラスを作成します。 は、 `ContactAdministratorsAuthorizationHandler` リソースに対して動作しているユーザーが管理者であることを確認します。 管理者は、すべての操作を実行できます。
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactAdministratorsAuthorizationHandler.cs)]
 
@@ -265,13 +266,13 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 現在、UI には、ユーザーが変更できない連絡先の編集と削除のリンクが表示されています。
 
-*ページ/_ViewImports*ファイルに承認サービスを挿入して、すべてのビューで使用できるようにします。
+*ページ/_ViewImports* ファイルに承認サービスを挿入して、すべてのビューで使用できるようにします。
 
 [!code-cshtml[](secure-data/samples/final3/Pages/_ViewImports.cshtml?highlight=6-99)]
 
 前のマークアップは、いくつかのステートメントを追加し `using` ます。
 
-*Pages/Contacts/Index. cshtml*の**編集**と**削除**のリンクを更新して、適切なアクセス許可を持つユーザーにのみ表示されるようにします。
+*Pages/Contacts/Index. cshtml* の **編集** と **削除** のリンクを更新して、適切なアクセス許可を持つユーザーにのみ表示されるようにします。
 
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
@@ -303,7 +304,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/Details2.cshtml.cs?name=snippet)]
 
-上のコードでは以下の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * ユーザーが認証 **されていない** 場合は、 `ChallengeResult` が返されます。 が返されると、 `ChallengeResult` ユーザーはサインインページにリダイレクトされます。
 * ユーザーが認証されているが承認されていない場合は、 `ForbidResult` が返されます。 が返されると、ユーザーは [ `ForbidResult` アクセス拒否] ページにリダイレクトされます。
@@ -331,7 +332,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 * マネージャーは、連絡先データを承認/拒否することができます。 このビューには、 `Details` [ **承認** ] ボタンと [ **却下** ] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| User                | アプリによるシード処理 | Options                                  |
+| User                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -342,7 +343,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 ## <a name="create-the-starter-app"></a>スターターアプリを作成する
 
 * Razor"ContactManager" という名前のページアプリを作成する
-  * **個々のユーザーアカウント**を使用してアプリを作成します。
+  * **個々のユーザーアカウント** を使用してアプリを作成します。
   * 名前空間がサンプルで使用される名前空間と一致するように、"ContactManager" という名前を指定します。
   * `-uld` SQLite ではなく LocalDB を指定します。
 
@@ -368,7 +369,7 @@ dotnet ef database update
 
 コマンドでバグが発生した場合は `dotnet aspnet-codegenerator razorpage` 、 [GitHub の問題](https://github.com/aspnet/Scaffolding/issues/984)を参照してください。
 
-* *Pages/Shared/_Layout cshtml*ファイルで**contactmanager**アンカーを更新します。
+* *Pages/Shared/_Layout cshtml* ファイルで **contactmanager** アンカーを更新します。
 
  ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Contacts/Index">ContactManager</a>
@@ -378,7 +379,7 @@ dotnet ef database update
 
 ### <a name="seed-the-database"></a>データベースのシード
 
-[SeedData](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs)クラスを*Data*フォルダーに追加します。
+[SeedData](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs)クラスを *Data* フォルダーに追加します。
 
 [!code-csharp[](secure-data/samples/starter3/Data/SeedData.cs)]
 
@@ -398,7 +399,7 @@ dotnet ef database update
 * **管理者** は、連絡先データを承認または拒否できます。 承認された連絡先だけがユーザーに表示されます。
 * **管理者** は、任意のデータを承認/拒否したり、編集/削除したりできます。
 
-次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を**編集**したりするだけで、 / **Delete** / 連絡先の新しいリンクを**作成**できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
+次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を **編集** したりするだけで、 / **Delete** / 連絡先の新しいリンクを **作成** できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
 
 ![Rick がサインインしていることを示すスクリーンショット](secure-data/_static/rick.png)
 
@@ -428,7 +429,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>[前提条件]
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -487,7 +488,7 @@ dotnet ef database update
 
 ### <a name="configure-the-test-account"></a>テストアカウントを構成する
 
-クラスは、 `SeedData` 管理者とマネージャーの2つのアカウントを作成します。 これらのアカウントのパスワードを設定するには、 [シークレットマネージャーツール](xref:security/app-secrets) を使用します。 プロジェクトディレクトリ ( *Program.cs*を含むディレクトリ) のパスワードを設定します。
+クラスは、 `SeedData` 管理者とマネージャーの2つのアカウントを作成します。 これらのアカウントのパスワードを設定するには、 [シークレットマネージャーツール](xref:security/app-secrets) を使用します。 プロジェクトディレクトリ ( *Program.cs* を含むディレクトリ) のパスワードを設定します。
 
 ```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
@@ -511,7 +512,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-owner-manager-and-administrator-authorization-handlers"></a>所有者、マネージャー、および管理者の承認ハンドラーを作成する
 
-*承認*フォルダーを作成し、 `ContactIsOwnerAuthorizationHandler` そこにクラスを作成します。 は、 `ContactIsOwnerAuthorizationHandler` リソースに対して動作しているユーザーがリソースを所有していることを確認します。
+*承認* フォルダーを作成し、 `ContactIsOwnerAuthorizationHandler` そこにクラスを作成します。 は、 `ContactIsOwnerAuthorizationHandler` リソースに対して動作しているユーザーがリソースを所有していることを確認します。
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactIsOwnerAuthorizationHandler.cs)]
 
@@ -526,13 +527,13 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="create-a-manager-authorization-handler"></a>マネージャーの承認ハンドラーを作成する
 
-`ContactManagerAuthorizationHandler`*承認*フォルダーにクラスを作成します。 は、 `ContactManagerAuthorizationHandler` リソースに対して動作しているユーザーがマネージャーであることを確認します。 コンテンツの変更を承認または拒否できるのは、管理者のみです (新規または変更)。
+`ContactManagerAuthorizationHandler`*承認* フォルダーにクラスを作成します。 は、 `ContactManagerAuthorizationHandler` リソースに対して動作しているユーザーがマネージャーであることを確認します。 コンテンツの変更を承認または拒否できるのは、管理者のみです (新規または変更)。
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactManagerAuthorizationHandler.cs)]
 
 ### <a name="create-an-administrator-authorization-handler"></a>管理者の承認ハンドラーを作成する
 
-`ContactAdministratorsAuthorizationHandler`*承認*フォルダーにクラスを作成します。 は、 `ContactAdministratorsAuthorizationHandler` リソースに対して動作しているユーザーが管理者であることを確認します。 管理者は、すべての操作を実行できます。
+`ContactAdministratorsAuthorizationHandler`*承認* フォルダーにクラスを作成します。 は、 `ContactAdministratorsAuthorizationHandler` リソースに対して動作しているユーザーが管理者であることを確認します。 管理者は、すべての操作を実行できます。
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactAdministratorsAuthorizationHandler.cs)]
 
@@ -607,7 +608,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 前のマークアップは、いくつかのステートメントを追加し `using` ます。
 
-*Pages/Contacts/Index. cshtml*の**編集**と**削除**のリンクを更新して、適切なアクセス許可を持つユーザーにのみ表示されるようにします。
+*Pages/Contacts/Index. cshtml* の **編集** と **削除** のリンクを更新して、適切なアクセス許可を持つユーザーにのみ表示されるようにします。
 
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
@@ -658,7 +659,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 * マネージャーは、連絡先データを承認/拒否することができます。 このビューには、 `Details` [ **承認** ] ボタンと [ **却下** ] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| User                | アプリによるシード処理 | Options                                  |
+| User                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -669,7 +670,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 ## <a name="create-the-starter-app"></a>スターターアプリを作成する
 
 * Razor"ContactManager" という名前のページアプリを作成する
-  * **個々のユーザーアカウント**を使用してアプリを作成します。
+  * **個々のユーザーアカウント** を使用してアプリを作成します。
   * 名前空間がサンプルで使用される名前空間と一致するように、"ContactManager" という名前を指定します。
   * `-uld` SQLite ではなく LocalDB を指定します。
 
@@ -691,7 +692,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
   dotnet ef database update
   ```
 
-* *Pages/_Layout cshtml*ファイルで**contactmanager**アンカーを更新します。
+* *Pages/_Layout cshtml* ファイルで **contactmanager** アンカーを更新します。
 
   ```cshtml
   <a asp-page="/Contacts/Index" class="navbar-brand">ContactManager</a>
@@ -701,7 +702,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 ### <a name="seed-the-database"></a>データベースのシード
 
-[SeedData](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs)クラスを*Data*フォルダーに追加します。
+[SeedData](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs)クラスを *Data* フォルダーに追加します。
 
 呼び出し `SeedData.Initialize` 元 `Main` :
 
@@ -713,7 +714,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>その他のリソース
+### <a name="additional-resources"></a>その他の資料
 
 * [Azure App Service で .NET Core および SQL Database のアプリを作成する](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core の承認ラボ](https://github.com/blowdart/AspNetAuthorizationWorkshop)。 このチュートリアルで紹介するセキュリティ機能の詳細については、このラボを参照してください。

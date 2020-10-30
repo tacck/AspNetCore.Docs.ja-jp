@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 9/25/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: b7d14aa0371fcc01d568cf1e7b9908c4a8d984df
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 9123bd70dfee1578912f682faf0520735fd55776
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722833"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051292"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>ASP.NET Core MVC の互換バージョン
 
@@ -43,7 +44,7 @@ ms.locfileid: "90722833"
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 2.x アプリで <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> メソッドを使用すると、ASP.NET Core MVC 2.1 または 2.2 に導入されている、互換性に影響する重大な変更をオプトインまたはオプトアウトすることができます。 互換性に影響する可能性のあるこれらの重大な変更は、ほとんどの場合、MVC サブシステムの動作方法と、ランタイムで**ユーザーのコード**が呼び出される方法についてです。 オプトインした場合、最新の動作と ASP.NET Core の最新の動作を得ることができます。
+ASP.NET Core 2.x アプリで <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> メソッドを使用すると、ASP.NET Core MVC 2.1 または 2.2 に導入されている、互換性に影響する重大な変更をオプトインまたはオプトアウトすることができます。 互換性に影響する可能性のあるこれらの重大な変更は、ほとんどの場合、MVC サブシステムの動作方法と、ランタイムで **ユーザーのコード** が呼び出される方法についてです。 オプトインした場合、最新の動作と ASP.NET Core の最新の動作を得ることができます。
 
 次のコードにより、互換性モードは ASP.NET Core 2.2 に設定されます。
 
@@ -56,7 +57,7 @@ ASP.NET Core 2.x アプリで <xref:Microsoft.Extensions.DependencyInjection.Mvc
 * 2.1 以降のすべての変更には該当しません。これは、MVC サブシステムの ASP.NET Core ランタイムの互換性に影響する可能性のある重大な変更のみを対象としています。
 * ASP.NET Core 3.0 には拡張されません。
 
-`SetCompatibilityVersion` を呼び出さ**ない** ASP.NET Core 2.1 および 2.2 アプリの既定の互換性は、2.0 の互換性です。 つまり、`SetCompatibilityVersion` を呼び出さないことは、`SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` を呼び出すことと同じです。
+`SetCompatibilityVersion` を呼び出さ **ない** ASP.NET Core 2.1 および 2.2 アプリの既定の互換性は、2.0 の互換性です。 つまり、`SetCompatibilityVersion` を呼び出さないことは、`SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` を呼び出すことと同じです。
 
 次のコードでは、以下の動作を除き、互換性モードを ASP.NET Core 2.2 に設定します。
 

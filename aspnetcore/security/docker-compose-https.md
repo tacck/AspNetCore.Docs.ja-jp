@@ -7,6 +7,7 @@ ms.author: ravipal
 ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: cd46fdcbe10dc0b7829fbe7eaef821889f395df4
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 37a0142dac1e26afd26dbf2aad46bee20693652e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393705"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051643"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>HTTPS 経由の Docker Compose を使用した ASP.NET Core イメージのホスト
 
@@ -51,7 +52,7 @@ ms.locfileid: "91393705"
 * `dotnet dev-certs`ツールは必要ありません。
 * 手順で使用した場所に証明書を保存する必要はありません。 サイトディレクトリの外部にある任意の場所に証明書を格納します。
 
-次のセクションに記載されている手順では、 `volumes` *docker-compose.yml*のプロパティを使用して、証明書をコンテナーにマウントします。 Dockerfile でコマンドを使用してコンテナーイメージに証明書を追加することもでき `COPY` ますが、この方法はお勧めしません。 *Dockerfile* 証明書をイメージにコピーすることは、次の理由から推奨されません。
+次のセクションに記載されている手順では、 `volumes` *docker-compose.yml* のプロパティを使用して、証明書をコンテナーにマウントします。 Dockerfile でコマンドを使用してコンテナーイメージに証明書を追加することもでき `COPY` ますが、この方法はお勧めしません。 *Dockerfile* 証明書をイメージにコピーすることは、次の理由から推奨されません。
 
 * これにより、開発者証明書でのテストに同じイメージを使用することが難しくなります。
 * これにより、運用証明書でのホストに同じイメージを使用することが難しくなります。

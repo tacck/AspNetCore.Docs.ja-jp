@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865432"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051617"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core での SameSite s の使用
 
@@ -157,7 +158,7 @@ SameSite サポートは、2.0 の ASP.NET Core で最初に [2016 ドラフト�
 
 ## <a name="supporting-older-browsers"></a>古いブラウザーのサポート
 
-2016 SameSite 標準では、不明な値を値として扱う必要があり `SameSite=Strict` ます。 2016 SameSite 標準をサポートする古いブラウザーからアクセスされるアプリは、値がの SameSite プロパティを取得すると破損する可能性があり `None` ます。 Web apps が古いブラウザーをサポートする予定の場合は、ブラウザーの検出を実装する必要があります。 ユーザーエージェントの値が変動し、頻繁に変更されるため、ASP.NET Core はブラウザーの検出を実装しません。 の拡張ポイントでは、 <xref:Microsoft.AspNetCore.CookiePolicy> ユーザーエージェント固有のロジックをプラグインできます。
+2016 SameSite 標準では、不明な値を値として扱う必要があり `SameSite=Strict` ます。 2016 SameSite 標準をサポートする古いブラウザーからアクセスされるアプリは、値がの SameSite プロパティを取得すると破損する可能性があり `None` ます。 Web apps が古いブラウザーをサポートする予定の場合は、ブラウザーの検出を実装する必要があります。 User-Agents 値が非常に揮発性で頻繁に変更されるため、ASP.NET Core はブラウザーの検出を実装しません。 の拡張ポイントでは <xref:Microsoft.AspNetCore.CookiePolicy> User-Agent 特定のロジックにプラグインできます。
 
 で `Startup.Configure` 、を <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*> 呼び出す前、 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> または s を書き込む *任意* のメソッドを呼び出すコードを追加し cookie ます。
 
@@ -201,7 +202,7 @@ SameSite サポートは、2.0 の ASP.NET Core で最初に [2016 ドラフト�
 
 ### <a name="test-with-chrome"></a>Chrome を使用したテスト
 
-Chrome 78 + には一時的な軽減策があるため、誤解を招く結果になります。 Chrome 78 + 一時的な軽減策を使用すると、が cookie 2 分未満になります。 適切なテストフラグが有効になっている Chrome 76 または77では、より正確な結果が得られます。 新しい SameSite の動作をテストするには、[ `chrome://flags/#same-site-by-default-cookies` **有効**に切り替えます。 新しい設定で失敗するように、Chrome の旧バージョン (75 以降) が報告され `None` ます。 このドキュメントの「 [古いブラウザーのサポート](#sob) 」を参照してください。
+Chrome 78 + には一時的な軽減策があるため、誤解を招く結果になります。 Chrome 78 + 一時的な軽減策を使用すると、が cookie 2 分未満になります。 適切なテストフラグが有効になっている Chrome 76 または77では、より正確な結果が得られます。 新しい SameSite の動作をテストするには、[ `chrome://flags/#same-site-by-default-cookies` **有効** に切り替えます。 新しい設定で失敗するように、Chrome の旧バージョン (75 以降) が報告され `None` ます。 このドキュメントの「 [古いブラウザーのサポート](#sob) 」を参照してください。
 
 Google では、以前のバージョンの chrome は使用できません。 「 [Chromium のダウンロード](https://www.chromium.org/getting-involved/download-chromium) 」の手順に従って、Chrome の旧バージョンをテストします。 以前のバージョンの chrome を検索することによって提供されるリンクから Chrome **をダウンロードしないでください** 。
 
@@ -230,7 +231,7 @@ Edge では、古い SameSite 標準がサポートされています。 Edge �
 
 のバージョンに Electron は、古いバージョンの Chromium が含まれています。 たとえば、 Electron チームによって使用されるのバージョンは Chromium 66 であり、以前の動作を示しています。 使用している製品のバージョンで、独自の互換性テストを実行する必要があり Electron ます。 次のセクションの「 [古いブラウザーのサポート](#sob) 」を参照してください。
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>その他の資料
 
 * [Chromium ブログ: 開発者: 新しい SameSite の準備 = None;セキュリティで保護された Cookie 設定](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite の cookie 説明](https://web.dev/samesite-cookies-explained/)

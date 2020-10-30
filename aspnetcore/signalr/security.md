@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 12293c5cb3dc49d505225f1b44e824e9273cfffc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5ecbf07b1527e9c68443870f7fce77adc29a5416
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630992"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050837"
 ---
 # <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>ASP.NET Core のセキュリティに関する考慮事項 SignalR
 
@@ -101,14 +102,14 @@ CORS で提供される保護は、WebSocket には適用されません。 Webs
 
 ::: moniker range="< aspnetcore-2.2"
 
-CORS で提供される保護は、WebSocket には適用されません。 ブラウザーでは以下を実行**しません**。
+CORS で提供される保護は、WebSocket には適用されません。 ブラウザーでは以下を実行 **しません** 。
 
 * CORS の事前要求を実行する。
 * WebSocket 要求を行うときに `Access-Control` ヘッダーに指定された制限を考慮する。
 
 ただし、WebSocket 要求を発行するときにはブラウザーから `Origin` ヘッダーが送信されます。 予期した配信元からの WebSocket のみが許可されるように、アプリケーションでこれらのヘッダーが検証されるように構成する必要があります。
 
-ASP.NET Core 2.1 以降では、前に配置したカスタムミドルウェア ** `UseSignalR` との認証ミドルウェア** を使用して、ヘッダーの検証を行うことができ `Configure` ます。
+ASP.NET Core 2.1 以降では、前に配置したカスタムミドルウェア **`UseSignalR` との認証ミドルウェア** を使用して、ヘッダーの検証を行うことができ `Configure` ます。
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
@@ -123,7 +124,7 @@ ASP.NET Core 2.1 以降では、前に配置したカスタムミドルウェア
 
 ## <a name="access-token-logging"></a>アクセストークンのログ記録
 
-Websocket またはサーバー送信イベントを使用する場合、ブラウザークライアントはクエリ文字列にアクセストークンを送信します。 一般に、クエリ文字列を使用してアクセストークンを受け取ることは、標準ヘッダーを使用するようにセキュリティで保護され `Authorization` ます。 クライアントとサーバー間のセキュリティで保護されたエンドツーエンド接続を確保するには、常に HTTPS を使用します。 多くの web サーバーでは、クエリ文字列を含め、各要求の URL がログに記録されます。 Url をログに記録すると、アクセストークンがログに記録される場合があります。 では、各要求の URL が既定でログに記録されます。これには、クエリ文字列が含まれます。 ASP.NET Core 次に例を示します。
+Websocket または Server-Sent イベントを使用する場合、ブラウザークライアントはクエリ文字列にアクセストークンを送信します。 一般に、クエリ文字列を使用してアクセストークンを受け取ることは、標準ヘッダーを使用するようにセキュリティで保護され `Authorization` ます。 クライアントとサーバー間のセキュリティで保護されたエンドツーエンド接続を確保するには、常に HTTPS を使用します。 多くの web サーバーでは、クエリ文字列を含め、各要求の URL がログに記録されます。 Url をログに記録すると、アクセストークンがログに記録される場合があります。 では、各要求の URL が既定でログに記録されます。これには、クエリ文字列が含まれます。 ASP.NET Core 次に例を示します。
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

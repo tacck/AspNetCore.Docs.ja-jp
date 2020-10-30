@@ -5,6 +5,7 @@ description: この記事では、の基になる Entity Framework Core デー�
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6e520c76a3377e889166ca8d08b75754ef34b6a1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634307"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052046"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core でのモデルのカスタマイズ
 
@@ -61,7 +62,7 @@ ASP.NET Core には、開発時エラーページハンドラーがあります�
 
 モデルは、 Identity 次のエンティティ型で構成されます。
 
-|エンティティの種類|説明                                                  |
+|エンティティの種類|[説明]                                                  |
 |-----------|-------------------------------------------------------------|
 |`User`     |ユーザーを表します。                                         |
 |`Role`     |ロールを表します。                                           |
@@ -83,7 +84,7 @@ ASP.NET Core には、開発時エラーページハンドラーがあります�
 
 ### <a name="default-model-configuration"></a>既定のモデル構成
 
-Identityモデルを構成して使用するために[Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)から継承する多くの*コンテキストクラス*を定義します。 この構成は、コンテキストクラスの[Onmodelcreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating)メソッドで[EF CORE Code First Fluent API](/ef/core/modeling/)を使用して行います。 既定の構成は次のとおりです。
+Identityモデルを構成して使用するために [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)から継承する多くの *コンテキストクラス* を定義します。 この構成は、コンテキストクラスの[Onmodelcreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating)メソッドで[EF CORE Code First Fluent API](/ef/core/modeling/)を使用して行います。 既定の構成は次のとおりです。
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -349,7 +350,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
 クラスでオーバーライドする必要はありません `OnModelCreating` `ApplicationDbContext` 。 EF Core は、 `CustomTag` 規則に従ってプロパティをマップします。 ただし、新しい列を作成するには、データベースを更新する必要があり `CustomTag` ます。 列を作成するには、移行を追加し、「」 [ Identity および「EF Core の移行](#identity-and-ef-core-migrations)」の説明に従ってデータベースを更新します。
 
-*Pages/Shared/_LoginPartial*を更新し、を `IdentityUser` に置き換え `ApplicationUser` ます。
+*Pages/Shared/_LoginPartial* を更新し、を `IdentityUser` に置き換え `ApplicationUser` ます。
 
 ```cshtml
 @using Microsoft.AspNetCore.Identity
@@ -358,7 +359,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-*区分/ Identity / Identity HostingStartup.cs*を更新するか `Startup.ConfigureServices` 、を `IdentityUser` に置き換え `ApplicationUser` ます。
+*区分/ Identity / Identity HostingStartup.cs* を更新するか `Startup.ConfigureServices` 、を `IdentityUser` に置き換え `ApplicationUser` ます。
 
 ```csharp
 services.AddIdentity<ApplicationUser>()
@@ -366,7 +367,7 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、<xref:security/authentication/scaffold-identity> を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については、次を参照してください。
+ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。 詳細については、次をご覧ください。
 
 * [スキャフォールディング Identity](xref:security/authentication/scaffold-identity)
 * [カスタムユーザーデータを追加、ダウンロード、および削除する Identity](xref:security/authentication/add-user-data)
@@ -475,7 +476,7 @@ PK の種類を変更するには、次の手順に従います。
 
     主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
-    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、<xref:security/authentication/scaffold-identity> を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
+    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
 
     ::: moniker-end
 
@@ -519,7 +520,7 @@ PK の種類を変更するには、次の手順に従います。
 
     主キーのデータ型は、 [Dbcontext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) オブジェクトを分析することによって推論されます。
 
-    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、<xref:security/authentication/scaffold-identity> を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
+    ASP.NET Core 2.1 以降では、 Identity がクラスライブラリとして提供され Razor ます。 詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。 そのため、上記のコードでは、を呼び出す必要があり <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> ます。 Scaffolder を Identity 使用してファイルをプロジェクトに追加した場合は、への呼び出しを削除し Identity `AddDefaultUI` ます。
 
     ::: moniker-end
 

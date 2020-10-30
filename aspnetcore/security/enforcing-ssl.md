@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722658"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051123"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -40,7 +41,7 @@ API がないと、クライアントが最初の要求で機微なデータを�
 > [!WARNING]
 > ## <a name="api-projects"></a>API プロジェクト
 >
-> 機密情報を受け取る Web Api では[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute` HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
+> 機密情報を受け取る Web Api では [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute` HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
 >
 > * HTTP でリッスンしません。
 > * 状態コード 400 (Bad Request) で接続を閉じ、要求を処理しません。
@@ -56,7 +57,7 @@ API がないと、クライアントが最初の要求で機微なデータを�
 > [!WARNING]
 > ## <a name="api-projects"></a>API プロジェクト
 >
-> 機密情報を受け取る Web Api では[RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute` HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
+> 機密情報を受け取る Web Api では [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **を使用しないでください。** `RequireHttpsAttribute` HTTP 状態コードを使用して、HTTP から HTTPS にブラウザーをリダイレクトします。 API クライアントは、HTTP から HTTPS へのリダイレクトについて理解したり、従うことはできません。 このようなクライアントは、HTTP 経由で情報を送信する場合があります。 Web Api は次のいずれかを実行する必要があります。
 >
 > * HTTP でリッスンしません。
 > * 状態コード 400 (Bad Request) で接続を閉じ、要求を処理しません。
@@ -113,7 +114,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
-  * appsettings.jsにトップレベルのエントリを追加するには、次 * の*操作を行います。
+  * 最上位レベルのエントリをに追加し *appsettings.json* ます。
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -127,7 +128,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
   * ホスト構成。
   * 環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。
-  * appsettings.jsにトップレベルのエントリを追加するには、次 * の*操作を行います。
+  * 最上位レベルのエントリをに追加し *appsettings.json* ます。
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -135,7 +136,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 
 ::: moniker-end
 
-* 開発では、 *launchsettings.js*で HTTPS URL を設定します。 IIS Express が使用されている場合は、HTTPS を有効にします。
+* 開発では、 *launchsettings.js* で HTTPS URL を設定します。 IIS Express が使用されている場合は、HTTPS を有効にします。
 
 * [Kestrel](xref:fundamentals/servers/kestrel)サーバーまたは[HTTP.sys](xref:fundamentals/servers/httpsys)サーバーの公開エッジデプロイの HTTPS URL エンドポイントを構成します。 アプリケーションで使用される **HTTPS ポートは1つ** だけです。 ミドルウェアは、を使用してポートを検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。
 
@@ -192,7 +193,7 @@ Azure App Service にデプロイする場合は、 [「チュートリアル: �
 
 ::: moniker range=">= aspnetcore-3.0"
 
-*Startup.cs*でサービスを構成する場合:
+*Startup.cs* でサービスを構成する場合:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -213,7 +214,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range="<= aspnetcore-2.2"
 
-*Startup.cs*でサービスを構成する場合:
+*Startup.cs* でサービスを構成する場合:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -288,7 +289,7 @@ ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装
 ::: moniker-end
 
 
-* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、「[https://hstspreload.org/](https://hstspreload.org/)」を参照してください。
+* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、[https://hstspreload.org/](https://hstspreload.org/) を参照してください。
 * HSTS ポリシーをホストサブドメインに適用する [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)を有効にします。
 * `max-age`ヘッダーのパラメーターを明示的に `Strict-Transport-Security` 60 日に設定します。 設定されていない場合、既定値は30日です。 詳細については、「 [最長有効期間」ディレクティブ](https://tools.ietf.org/html/rfc6797#section-6.1.1)を参照してください。
 * `example.com`除外するホストの一覧にを追加します。
@@ -411,14 +412,14 @@ dotnet dev-certs https --trust
 
 ### <a name="docker---certificate-not-trusted"></a>Docker-信頼されていない証明書
 
-* *C:\Users \{ USER} \AppData\Roaming\ASP.NET\Https*フォルダーを削除します。
+* *C:\Users \{ USER} \AppData\Roaming\ASP.NET\Https* フォルダーを削除します。
 * ソリューションをクリーンアップします。 *bin* フォルダーと *obj* フォルダーを削除します。
 * 開発ツールを再起動します。 たとえば、Visual Studio、Visual Studio Code、Visual Studio for Mac などです。
 
 ### <a name="windows---certificate-not-trusted"></a>Windows-信頼されていない証明書
 
 * 証明書ストア内の証明書を確認します。 `localhost`との両方に、 `ASP.NET Core HTTPS development certificate` フレンドリ名を持つ証明書が存在する必要があります。 `Current User > Personal > Certificates``Current User > Trusted root certification authorities > Certificates`
-* 個人証明書と信頼されたルート証明機関の両方から、検出されたすべての証明書を削除します。 IIS Express localhost 証明書**は削除しないでください。**
+* 個人証明書と信頼されたルート証明機関の両方から、検出されたすべての証明書を削除します。 IIS Express localhost 証明書 **は削除しないでください。**
 * 次のコマンドを実行します。
 
 ```dotnetcli
@@ -448,7 +449,7 @@ Visual Studio での証明書の問題のトラブルシューティングにつ
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express Visual Studio で使用される SSL 証明書
 
-IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [ **修復** ] を選択します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)します。
+IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [ **修復** ] を選択します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)のページを参照してください。
 
 ## <a name="additional-information"></a>関連情報
 

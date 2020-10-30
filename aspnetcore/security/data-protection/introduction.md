@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 4f578e30a972b0d4ce5db08b2ec844e270c11406
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5fd5676b286e758f0648d78bf8cb4171e7a98f60
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630082"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051695"
 ---
 # <a name="aspnet-core-data-protection"></a>データ保護の ASP.NET Core
 
@@ -84,7 +85,7 @@ ASP.NET Core データ保護 Api は、主に機密ペイロードの永続的�
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) には、開発者が役に立つがコアパッケージに属さない追加の api が含まれています。 たとえば、このパッケージには、データ保護システムをインスタンス化して、依存関係を挿入せずにファイルシステム上の場所にキーを格納するファクトリメソッドが含まれています (「」を参照してください <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> )。 また、保護されたペイロードの有効期間を制限するための拡張メソッドも含まれています (を参照してください <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector> )。
 
-* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) を既存の ASP.NET 4.x アプリにインストールして、 `<machineKey>` 新しい ASP.NET Core データ保護スタックを使用するように操作をリダイレクトすることができます。 詳細については、<xref:security/data-protection/compatibility/replacing-machinekey> を参照してください。
+* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) を既存の ASP.NET 4.x アプリにインストールして、 `<machineKey>` 新しい ASP.NET Core データ保護スタックを使用するように操作をリダイレクトすることができます。 詳細については、「<xref:security/data-protection/compatibility/replacing-machinekey>」を参照してください。
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) は、PBKDF2 パスワードハッシュルーチンの実装を提供し、ユーザーパスワードを安全に処理する必要があるシステムで使用できます。 詳細については、「<xref:security/data-protection/consumer-apis/password-hashing>」を参照してください。
 

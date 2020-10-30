@@ -5,6 +5,7 @@ description: クロスサイトスクリプティング (XSS) と、ASP.NET Core
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 38e9e102e9ac18ec14bceebf391c11a434492ac9
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456063"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053086"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core でクロスサイトスクリプティング (XSS) を防止する
 
@@ -68,7 +69,7 @@ RazorMVC で使用されるエンジンでは、そのような処理を回避�
 
 ## <a name="javascript-encoding-using-no-locrazor"></a>を使用した JavaScript のエンコード Razor
 
-JavaScript に値を挿入して、ビューで処理することが必要になる場合があります。 これには、2 つの方法があります。 値を挿入する最も安全な方法は、タグのデータ属性に値を配置し、JavaScript で値を取得することです。 たとえば、次のように入力します。
+JavaScript に値を挿入して、ビューで処理することが必要になる場合があります。 これには、2 つの方法があります。 値を挿入する最も安全な方法は、タグのデータ属性に値を配置し、JavaScript で値を取得することです。 次に例を示します。
 
 ```cshtml
 @{
@@ -161,10 +162,9 @@ JavaScript に値を挿入して、ビューで処理することが必要にな
 ```
 
 >[!WARNING]
-> JavaScript で信頼されていない入力を連結し ***て*** DOM 要素を作成したり、 `document.write()` 動的に生成されたコンテンツで使用したりしないでください。
+> DOM 要素を作成したり、動的に生成されたコンテンツを使用したりするために、JavaScript で信頼 **されていない** 入力を連結しないように `document.write()` します。
 >
-> コードが DOM ベースの XSS に公開されないようにするには、次のいずれかの方法を使用します。
-> * `createElement()` また、またはノードなどの適切なメソッドまたはプロパティを使用してプロパティ値を割り当て `node.textContent=` ます。InnerText = '。
+> 次のいずれかの方法を使用して、コードが DOM ベースの XSS: _ に公開されないように `createElement()` し、適切なメソッドまたはノードなどのプロパティを使用してプロパティ値を割り当て `node.textContent=` ます。InnerText = '。
 > * `document.CreateTextNode()` 適切な DOM の場所に追加します。
 > * `element.SetAttribute()`
 > * `element[attribute]=`
@@ -173,7 +173,7 @@ JavaScript に値を挿入して、ビューで処理することが必要にな
 
 HTML、JavaScript、および URL エンコーダーは、次の2つの方法でコードで使用できます。 [依存関係の挿入](xref:fundamentals/dependency-injection) を使用して挿入することも、名前空間に含まれる既定のエンコーダーを使用することもでき `System.Text.Encodings.Web` ます。 既定のエンコーダーを使用する場合、安全として扱う文字範囲に適用したものは有効になりません。既定のエンコーダーでは、可能な限り安全なエンコーディング規則が使用されます。
 
-DI を使用して構成可能なエンコーダーを使用するには、コンストラクターが *htmlencoder*、 *JavaScriptEncoder* 、および *urlencoder* パラメーターを必要に応じて受け取る必要があります。 次に例を示します。
+DI を使用して構成可能なエンコーダーを使用するには、コンストラクターが *htmlencoder* 、 *JavaScriptEncoder* 、および *urlencoder* パラメーターを必要に応じて受け取る必要があります。 次に例を示します。
 
 ```csharp
 public class HomeController : Controller
@@ -195,7 +195,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>エンコード URL パラメーター
 
-信頼できない入力を含む URL クエリ文字列を値として作成する場合は、を使用して `UrlEncoder` 値をエンコードします。 たとえば、オブジェクトに適用された
+信頼できない入力を含む URL クエリ文字列を値として作成する場合は、を使用して `UrlEncoder` 値をエンコードします。 たとえば、次のように入力します。
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

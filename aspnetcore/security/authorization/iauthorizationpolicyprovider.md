@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2d231440847270b3b2fe47fbe29359f494900292
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0f6f628cee0623c21a2a93aa11470005f8c78c58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635204"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053138"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core で IAuthorizationPolicyProvider を使用するカスタム承認ポリシープロバイダー 
 
@@ -36,7 +37,7 @@ ms.locfileid: "88635204"
 * 多数のポリシー (部屋番号や年齢など) を使用すると、個々の承認ポリシーを1つの呼び出しで追加することは意味がありません `AuthorizationOptions.AddPolicy` 。
 * 外部データソース (データベースなど) の情報に基づいて実行時にポリシーを作成するか、別のメカニズムを使用して承認要件を動的に決定します。
 
-[AspNetCore GitHub リポジトリ](https://github.com/dotnet/AspNetCore)から[サンプルコードを表示またはダウンロード](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)します。 Dotnet/AspNetCore リポジトリ ZIP ファイルをダウンロードします。 ファイルを解凍します。 *Src/Security/samples/CustomPolicyProvider*プロジェクトフォルダーに移動します。
+[AspNetCore GitHub リポジトリ](https://github.com/dotnet/AspNetCore)から[サンプルコードを表示またはダウンロード](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)します。 Dotnet/AspNetCore リポジトリ ZIP ファイルをダウンロードします。 ファイルを解凍します。 *Src/Security/samples/CustomPolicyProvider* プロジェクトフォルダーに移動します。
 
 ## <a name="customize-policy-retrieval"></a>ポリシーの取得のカスタマイズ
 
@@ -187,9 +188,9 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 
 ## <a name="use-a-custom-iauthorizationpolicyprovider"></a>カスタム IAuthorizationPolicyProvider を使用する
 
-からカスタムポリシーを使用するには `IAuthorizationPolicyProvider` 、次のことを行う ***必要があり***ます。
+からカスタムポリシーを使用するには `IAuthorizationPolicyProvider` 、 **must** * 次のようにします。
 
-* ポリシーベースの `AuthorizationHandler` 承認シナリオと同様に、適切な型を依存関係の挿入 ( [ポリシーベースの承認](xref:security/authorization/policies#authorization-handlers)で説明) に登録します。
+_ ポリシーベースの `AuthorizationHandler` 承認シナリオと同様に、適切な型を依存関係の挿入 ( [ポリシーベースの承認](xref:security/authorization/policies#authorization-handlers)で説明) に登録します。
 * `IAuthorizationPolicyProvider`のアプリの依存関係挿入サービスコレクションにカスタム型を登録して `Startup.ConfigureServices` 、既定のポリシープロバイダーを置き換えます。
 
   ```csharp

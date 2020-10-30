@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 07/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: d9d5703e6c02ed2b95cbe95d3624cd0647ee239f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0efcf1bbeeb65cf7f4420f8c50fb4adf7d1d016d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631265"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052527"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API のエラーを処理する
 
@@ -126,7 +127,7 @@ HTML 形式の応答は、Postman などのツールを使用してテストす�
 ::: moniker-end
 
 > [!WARNING]
-> **アプリを開発環境で実行するときにのみ**、開発者例外ページを有効にします。 アプリを実稼働環境で実行するときは、詳細な例外情報を公開しません。 環境の構成について詳しくは、「<xref:fundamentals/environments>」をご覧ください。
+> **アプリを開発環境で実行するときにのみ** 、開発者例外ページを有効にします。 アプリを実稼働環境で実行するときは、詳細な例外情報を公開しません。 環境の構成について詳しくは、「<xref:fundamentals/environments>」をご覧ください。
 
 ## <a name="exception-handler"></a>例外ハンドラー
 
@@ -279,7 +280,7 @@ Web API コントローラーでは、モデルの検証が失敗すると、MVC
 
 ## <a name="client-error-response"></a>クライアントのエラー応答
 
-"*エラー結果*" は、HTTP 状態コードが 400 以上の結果として定義されます。 Web API コントローラーの場合、MVC によってエラー結果が <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> を含む結果に変換されます。
+" *エラー結果* " は、HTTP 状態コードが 400 以上の結果として定義されます。 Web API コントローラーの場合、MVC によってエラー結果が <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> を含む結果に変換されます。
 
 ::: moniker range="= aspnetcore-2.1"
 

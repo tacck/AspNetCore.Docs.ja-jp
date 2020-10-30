@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 71ca0896bc645b7625f60c3a9e8fe321079d524a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631278"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050941"
 ---
 # <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>のハブを SignalR ASP.NET Core に使用する
 
@@ -89,7 +90,7 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 
 `Hub`クラスには、 `Context` 接続に関する情報を含む次のプロパティを含むプロパティがあります。
 
-| プロパティ | 説明 |
+| プロパティ | [説明] |
 | ------ | ----------- |
 | `ConnectionId` | によって割り当てられる、接続の一意の ID を取得し SignalR ます。 接続ごとに1つの接続 ID があります。|
 | `UserIdentifier` | [ユーザー識別子](xref:signalr/groups)を取得します。 既定では、は、 SignalR `ClaimTypes.NameIdentifier` `ClaimsPrincipal` 接続に関連付けられているのをユーザー識別子として使用します。 |
@@ -100,7 +101,7 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 
 `Hub.Context` には、次のメソッドも含まれています。
 
-| Method | 説明 |
+| メソッド | 説明 |
 | ------ | ----------- |
 | `GetHttpContext` | `HttpContext`接続のを返し `null` ます。接続が HTTP 要求に関連付けられていない場合はを返します。 HTTP 接続の場合は、このメソッドを使用して、HTTP ヘッダーやクエリ文字列などの情報を取得できます。 |
 | `Abort` | 接続を中止します。 |
@@ -109,7 +110,7 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 
 `Hub`クラスには、 `Clients` サーバーとクライアント間の通信に関する次のプロパティを含むプロパティがあります。
 
-| プロパティ | 説明 |
+| プロパティ | [説明] |
 | ------ | ----------- |
 | `All` | 接続されているすべてのクライアントでメソッドを呼び出します |
 | `Caller` | ハブメソッドを呼び出したクライアントでメソッドを呼び出します。 |
@@ -117,7 +118,7 @@ C# のメソッドの場合と同様に、戻り値の型とパラメーター (
 
 `Hub.Clients` には、次のメソッドも含まれています。
 
-| Method | 説明 |
+| メソッド | 説明 |
 | ------ | ----------- |
 | `AllExcept` | 指定された接続を除く、接続されているすべてのクライアントでメソッドを呼び出します |
 | `Client` | 特定の接続されたクライアントでメソッドを呼び出します |

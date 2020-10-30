@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: b89be93fc33d1eba5c2ad9508adf93fa54014ff8
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 89e3e51373db5f7cff974b7a8c69d06bedf856ca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606788"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052514"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API の応答データの書式設定
 
@@ -80,7 +81,7 @@ ASP.NET Core では、規定で `application/json`、`text/json`、`text/plain` 
 
 ### <a name="the-accept-header"></a>Accept ヘッダー
 
-コンテンツ "*ネゴシエーション*" は、`Accept` ヘッダーが要求に含まれるときに発生します。 要求に Accept ヘッダーが含まれるとき、ASP.NET Core は次のように処理します。
+コンテンツ " *ネゴシエーション* " は、`Accept` ヘッダーが要求に含まれるときに発生します。 要求に Accept ヘッダーが含まれるとき、ASP.NET Core は次のように処理します。
 
 * Accept ヘッダーのメディアの種類を優先順で列挙します。
 * 指定された形式のいずれかで応答を生成できるフォーマッタを見つけようとします。
@@ -238,7 +239,7 @@ XML の書式設定には、[Microsoft.AspNetCore.Mvc.Formatters.Xml](https://ww
 
 ### <a name="special-case-formatters"></a>特殊なケースのフォーマッタ
 
-一部の特殊なケースが組み込みのフォーマッタで実装されます。 既定では、戻り値の型 `string` は *text/plain* として書式設定されます (`Accept` ヘッダー経由で要求された場合は *text/html*)。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> を削除することで削除できます。 フォーマッタは `ConfigureServices` メソッドで削除します。 戻り値の型としてモデル オブジェクトをともなうアクションは、`null` を返すとき、`204 No Content` を返します。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> を削除することで削除できます。 次のコードでは、`StringOutputFormatter` と `HttpNoContentOutputFormatter` が削除されます。
+一部の特殊なケースが組み込みのフォーマッタで実装されます。 既定では、戻り値の型 `string` は *text/plain* として書式設定されます (`Accept` ヘッダー経由で要求された場合は *text/html* )。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter> を削除することで削除できます。 フォーマッタは `ConfigureServices` メソッドで削除します。 戻り値の型としてモデル オブジェクトをともなうアクションは、`null` を返すとき、`204 No Content` を返します。 この動作は <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter> を削除することで削除できます。 次のコードでは、`StringOutputFormatter` と `HttpNoContentOutputFormatter` が削除されます。
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]

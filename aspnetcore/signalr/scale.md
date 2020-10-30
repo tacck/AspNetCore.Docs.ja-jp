@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: d3e9cd23a55702bcf9b002dcce556428683afeca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722567"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052774"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR のホストとスケーリング
 
@@ -37,7 +38,7 @@ SignalR では、特定の接続に対するすべての HTTP 要求を同じサ
 
 1. 単一のサーバーでホストする場合、1つのプロセスで実行します。
 1. Azure サービスを使用する場合 SignalR 。
-1. すべてのクライアントが Websocket**のみ**を使用するように構成され、 [skipnegotiation 設定](xref:signalr/configuration#configure-additional-options)がクライアント構成で有効に**なっている**場合。
+1. すべてのクライアントが Websocket **のみ** を使用するように構成され、 [skipnegotiation 設定](xref:signalr/configuration#configure-additional-options)がクライアント構成で有効に **なっている** 場合。
 
 その他のすべての状況 (Redis バックプレーンを使用する場合を含む) では、サーバー環境を固定セッション用に構成する必要があります。
 
@@ -45,7 +46,7 @@ SignalR では、特定の接続に対するすべての HTTP 要求を同じサ
 
 ## <a name="tcp-connection-resources"></a>TCP 接続リソース
 
-Web サーバーがサポートできる同時 TCP 接続の数は制限されています。 標準 HTTP クライアントは、 *一時的* な接続を使用します。 これらの接続は、クライアントがアイドル状態になったときに終了し、後で再度開くことができます。 一方、 SignalR 接続は *永続的*です。 SignalR クライアントがアイドル状態になった場合でも、接続は開いたままになります。 多数のクライアントにサービスを提供する高トラフィックアプリでは、これらの永続的な接続により、サーバーが最大接続数に達する可能性があります。
+Web サーバーがサポートできる同時 TCP 接続の数は制限されています。 標準 HTTP クライアントは、 *一時的* な接続を使用します。 これらの接続は、クライアントがアイドル状態になったときに終了し、後で再度開くことができます。 一方、 SignalR 接続は *永続的* です。 SignalR クライアントがアイドル状態になった場合でも、接続は開いたままになります。 多数のクライアントにサービスを提供する高トラフィックアプリでは、これらの永続的な接続により、サーバーが最大接続数に達する可能性があります。
 
 また、固定接続では、各接続を追跡するために、追加のメモリがいくつか消費されます。
 
@@ -99,7 +100,7 @@ Redis バックプレーンは、お客様のインフラストラクチャで�
 
 前述した Azure SignalR サービスの利点は、Redis バックプレーンの欠点です。
 
-* 次の**両方**が当てはまる場合を除き、固定セッション ([クライアントアフィニティ](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)とも呼ばれます) が必要です。
+* 次の **両方** が当てはまる場合を除き、固定セッション ( [クライアントアフィニティ](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)とも呼ばれます) が必要です。
   * すべてのクライアントは、Websocket **のみ** を使用するように構成されています。
   * クライアント構成で [Skipnegotiation 設定](xref:signalr/configuration#configure-additional-options) が有効になっています。 
    サーバーで接続が開始されると、接続はそのサーバー上にとどまります。
@@ -111,7 +112,7 @@ Redis バックプレーンは、お客様のインフラストラクチャで�
 Windows 10 と Windows 8.x はクライアントオペレーティングシステムです。 クライアントオペレーティングシステムの IIS では、同時接続数が10個に制限されています。 SignalRの接続は次のとおりです。
 
 * 一時的で、頻繁に再確立されます。
-* 使用されなくなった場合、すぐに**は破棄されません**。
+* 使用されなくなった場合、すぐに **は破棄されません** 。
 
 上記の条件を満たすと、クライアント OS で10個の接続制限に達する可能性が高くなります。 クライアント OS を開発に使用する場合は、次のことをお勧めします。
 
@@ -120,21 +121,92 @@ Windows 10 と Windows 8.x はクライアントオペレーティングシス�
 
 ## <a name="linux-with-nginx"></a>Nginx を使用した Linux
 
-`Connection` `Upgrade` Websocket のプロキシとヘッダーを次のように設定し SignalR ます。
+次の表に、の Websocket、Serverのイベント、および LongPolling を有効にするために最低限必要な設定を示し SignalR ます。
 
 ```nginx
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
+http {
+  map $http_connection $connection_upgrade {
+    "~*Upgrade" $http_connection;
+    default keep-alive;
+}
+
+  server {
+    listen 80;
+    server_name example.com *.example.com;
+
+    # Configure the SignalR Endpoint
+    location /hubroute {
+      # App server url
+      proxy_pass http://localhost:5000;
+
+      # Configuration for WebSockets
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+      proxy_cache off;
+
+      # Configuration for ServerSentEvents
+      proxy_buffering off;
+
+      # Configuration for LongPolling or if your KeepAliveInterval is longer than 60 seconds
+      proxy_read_timeout 100s;
+
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
+  }
+}
 ```
 
-詳細については、「[WebSocket プロキシとしての NGINX](https://www.nginx.com/blog/websocket-nginx/)」を参照してください。
+複数のバックエンドサーバーを使用する場合は、接続時に接続がサーバーを切り替えるのを防ぐために、固定セッションを追加する必要があり SignalR ます。 Nginx では、複数の方法で固定セッションを追加できます。 次に、使用している内容に応じて2つの方法を示します。
+
+前の構成に加えて、次のものも追加されています。 次の例で `backend` は、はサーバーのグループの名前です。
+
+[Nginx オープンソース](https://nginx.org/en/)では、を使用して、 `ip_hash` クライアントの IP アドレスに基づいてサーバーへの接続をルーティングします。
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    ip_hash;
+  }
+}
+```
+
+[Nginx Plus](https://www.nginx.com/products/nginx)では、を使用し `sticky` てを cookie 要求に追加し、ユーザーの要求をサーバーにピン留めします。
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    sticky cookie srv_id expires=max domain=.example.com path=/ httponly;
+  }
+}
+```
+
+最後に、 `proxy_pass http://localhost:5000` セクションの `server` をに変更し `proxy_pass http://backend` ます。
+
+Websocket over Nginx の詳細については、「 [Nginx as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx)」を参照してください。
+
+負荷分散と固定セッションの詳細については、「 [NGINX load balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)」を参照してください。
+
+Nginx の ASP.NET Core の詳細については、次の記事を参照してください。
+* <xref:host-and-deploy/linux-nginx>
 
 ## <a name="third-party-no-locsignalr-backplane-providers"></a>サードパーティ製 SignalR バックプレーンプロバイダー
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
 
-## <a name="next-steps"></a>次の手順
+## <a name="next-steps"></a>次のステップ
 
 詳細については、次のリソースを参照してください。
 

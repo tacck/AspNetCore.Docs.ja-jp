@@ -5,6 +5,7 @@ description: 電子メールの確認とパスワードのリセットを使用�
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
-ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
+ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88906450"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052319"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core でのアカウントの確認とパスワードの回復
 
@@ -37,7 +38,7 @@ ms.locfileid: "88906450"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>[前提条件]
 
 [.NET Core 3.0 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -53,10 +54,10 @@ dotnet run
 
 アプリを実行し、[ **登録** ] リンクを選択して、ユーザーを登録します。 登録されると、 `/Identity/Account/RegisterConfirmation` 電子メールの確認をシミュレートするためのリンクを含む [to] ページにリダイレクトされます。
 
-* [`Click here to confirm your account`]\(ログの一元化\) リンクを選択します。
-* **ログイン**リンクを選択し、同じ資格情報でサインインします。
+* リンクを選択し `Click here to confirm your account` ます。
+* **ログイン** リンクを選択し、同じ資格情報でサインインします。
 * リンクを選択 `Hello YourEmail@provider.com!` すると、ページにリダイレクトされ `/Identity/Account/Manage/PersonalData` ます。
-* 左側の [ **Personal data** ] タブを選択し、[ **削除**] を選択します。
+* 左側の [ **Personal data** ] タブを選択し、[ **削除** ] を選択します。
 
 ### <a name="configure-an-email-provider"></a>電子メールプロバイダーを構成する
 
@@ -64,7 +65,7 @@ dotnet run
 
 SendGrid アカウントでは、 [送信者の追加](https://sendgrid.com/docs/ui/sending-email/senders/)が必要になる場合があります。
 
-セキュリティで保護された電子メールキーを取得するクラスを作成します。 このサンプルでは、*サービス/認証の Enderoptions を作成します。*
+セキュリティで保護された電子メールキーを取得するクラスを作成します。 このサンプルでは、 *サービス/認証の Enderoptions を作成します。*
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -79,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows では、シークレットマネージャーは、キーと値のペアをディレクトリ内のファイル * のsecrets.js* に格納 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` します。
+Windows では、シークレットマネージャーは、キーと値のペアをディレクトリ内のファイル *のsecrets.js* に格納 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` します。
 
-ファイルの *secrets.js* の内容が暗号化されていません。 次のマークアップは、ファイル * のsecrets.js* を示しています。 `SendGridKey`値は削除されています。
+ファイルの *secrets.js* の内容が暗号化されていません。 次のマークアップは、ファイル *のsecrets.js* を示しています。 `SendGridKey`値は削除されています。
 
 ```json
 {
@@ -155,7 +156,7 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 
 ### <a name="test-password-reset"></a>パスワードリセットのテスト
 
-* サインインしている場合は、[ **ログアウト**] を選択します。
+* サインインしている場合は、[ **ログアウト** ] を選択します。
 * [ **ログイン** ] リンクを選択し、[ **パスワードを忘れ** た場合] リンクを選択します。
 * アカウントの登録に使用した電子メールを入力します。
 * パスワードをリセットするためのリンクを含む電子メールが送信されます。 メールを確認し、リンクをクリックしてパスワードをリセットします。 パスワードが正常にリセットされたら、電子メールと新しいパスワードでサインインできます。
@@ -164,7 +165,7 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 
 ## <a name="resend-email-confirmation"></a>電子メールの再送信の確認
 
-ASP.NET Core 5.0 以降では、**ログイン**ページの [**電子メールの再送信**] リンクを選択します。
+ASP.NET Core 5.0 以降では、 **ログイン** ページの [ **電子メールの再送信** ] リンクを選択します。
 
 ### <a name="change-email-and-activity-timeout"></a>電子メールとアクティビティのタイムアウトを変更する
 
@@ -236,7 +237,7 @@ ASP.NET Core 5.0 以降では、**ログイン**ページの [**電子メール�
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>前提条件
+## <a name="prerequisites"></a>[前提条件]
 
 [.NET Core 2.2 SDK 以降](https://dotnet.microsoft.com/download/dotnet-core)
 
@@ -266,7 +267,7 @@ dotnet run
 
 テーブルの `EmailConfirmed` フィールドがであることに注意 `False` してください。
 
-アプリが確認の電子メールを送信するときに、次の手順でもう一度このメールを使用することもできます。 行を右クリックし、[ **削除**] をクリックします。 電子メールエイリアスを削除すると、次の手順が簡単になります。
+アプリが確認の電子メールを送信するときに、次の手順でもう一度このメールを使用することもできます。 行を右クリックし、[ **削除** ] をクリックします。 電子メールエイリアスを削除すると、次の手順が簡単になります。
 
 <a name="prevent-login-at-registration"></a>
 
@@ -286,7 +287,7 @@ dotnet run
 
 このチュートリアルでは、 [Sendgrid](https://sendgrid.com) を使用して電子メールを送信します。 電子メールを送信するには、SendGrid アカウントとキーが必要です。 他の電子メールプロバイダーを使用することもできます。 ASP.NET Core 2.x `System.Net.Mail` には、アプリから電子メールを送信できるようにするが含まれています。 SendGrid または別の電子メールサービスを使用して電子メールを送信することをお勧めします。 SMTP のセキュリティを保護し、正しく設定することは困難です。
 
-セキュリティで保護された電子メールキーを取得するクラスを作成します。 このサンプルでは、*サービス/認証の Enderoptions を作成します。*
+セキュリティで保護された電子メールキーを取得するクラスを作成します。 このサンプルでは、 *サービス/認証の Enderoptions を作成します。*
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
@@ -299,9 +300,9 @@ C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows では、シークレットマネージャーは、キーと値のペアをディレクトリ内のファイル * のsecrets.js* に格納 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` します。
+Windows では、シークレットマネージャーは、キーと値のペアをディレクトリ内のファイル *のsecrets.js* に格納 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` します。
 
-ファイルの *secrets.js* の内容が暗号化されていません。 次のマークアップは、ファイル * のsecrets.js* を示しています。 `SendGridKey`値は削除されています。
+ファイルの *secrets.js* の内容が暗号化されていません。 次のマークアップは、ファイル *のsecrets.js* を示しています。 `SendGridKey`値は削除されています。
 
 ```json
 {
@@ -355,7 +356,7 @@ Startup.cs ファイルのメソッドに次のコードを追加し `ConfigureS
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>アカウントの確認とパスワードの回復を有効にする
 
-このテンプレートには、アカウントの確認とパスワードの回復のためのコードが含まれています。 `OnPostAsync` *Areas/ Identity /Pages/Account/Register.cshtml.cs*でメソッドを検索します。
+このテンプレートには、アカウントの確認とパスワードの回復のためのコードが含まれています。 `OnPostAsync` *Areas/ Identity /Pages/Account/Register.cshtml.cs* でメソッドを検索します。
 
 新しく登録されたユーザーが自動的にサインインしないようにするには、次の行をコメントアウトします。
 
@@ -385,7 +386,7 @@ Web アプリを実行し、アカウントの確認とパスワードの回復�
 
 ### <a name="test-password-reset"></a>パスワードリセットのテスト
 
-* サインインしている場合は、[ **ログアウト**] を選択します。
+* サインインしている場合は、[ **ログアウト** ] を選択します。
 * [ **ログイン** ] リンクを選択し、[ **パスワードを忘れ** た場合] リンクを選択します。
 * アカウントの登録に使用した電子メールを入力します。
 * パスワードをリセットするためのリンクを含む電子メールが送信されます。 メールを確認し、リンクをクリックしてパスワードをリセットします。 パスワードが正常にリセットされたら、電子メールと新しいパスワードでサインインできます。

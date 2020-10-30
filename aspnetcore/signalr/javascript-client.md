@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: b4b1bc6131a6676710adbf2503efe3f304d89a58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690651"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050850"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>ASP.NET Core SignalR JavaScript クライアント
 
@@ -81,6 +82,9 @@ Npm の前提条件なしでクライアントライブラリを使用するに�
 ### <a name="cross-origin-connections"></a>クロスオリジン接続
 
 通常、ブラウザーは、要求されたページと同じドメインからの接続を読み込みます。 ただし、別のドメインへの接続が必要になる場合もあります。
+
+> [!IMPORTANT]
+> クライアントコードでは、相対 URL ではなく絶対 URL を使用する必要があります。 `.withUrl("/chathub")` を `.withUrl("https://myappurl/chathub")` に変更します。
 
 悪意のあるサイトが別のサイトから機密データを読み取れないようにするため、既定では、 [クロスオリジン接続](xref:security/cors) は無効になっています。 クロスオリジン要求を許可するには、クラスで有効にし `Startup` ます。
 
@@ -278,7 +282,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 実際の実装では、指数バックオフを使用するか、指定された回数の再試行を行います。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [JavaScript API リファレンス](/javascript/api/?view=signalr-js-latest&preserve-view=true )
 * [JavaScript のチュートリアル](xref:tutorials/signalr)
@@ -423,7 +427,7 @@ SignalR とで定義されたメソッド名と引数を照合することによ
 
 実際の実装では、指数バックオフを使用するか、指定された回数の再試行を行います。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [JavaScript API リファレンス](/javascript/api/?view=signalr-js-latest)
 * [JavaScript のチュートリアル](xref:tutorials/signalr)

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 35a12cb8d2a9617e51d886e798cff5ee60b0a8ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ec65a2c8362c15716bebd6b22f5639785ba74c98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634710"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051006"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core での EU 一般データ保護規則 (GDPR) のサポート
 
@@ -33,7 +34,7 @@ ASP.NET Core は、一部の [EU 一般データ保護規則 (GDPR)](https://ec.
 ::: moniker range=">= aspnetcore-3.0"
 
 * プロジェクトテンプレートには、拡張ポイントとスタブマークアップが含まれています。これは、お客様のプライバシーやポリシーを使用して置き換えることができ cookie ます。
-* *Pages/privacy. cshtml*ページまたは*Views/Home/privacy*ビューには、サイトのプライバシーポリシーを詳細に説明するページが用意されています。
+* *Pages/privacy. cshtml* ページまたは *Views/Home/privacy* ビューには、サイトのプライバシーポリシーを詳細に説明するページが用意されています。
 
 cookieASP.NET Core 3.0 テンプレートで生成されたアプリの ASP.NET Core 2.2 テンプレートにあるような既定の同意機能を有効にするには、次のようにします。
 
@@ -42,11 +43,11 @@ cookieASP.NET Core 3.0 テンプレートで生成されたアプリの ASP.NET 
 
   [!code-csharp[Main](gdpr/sample/RP3.0/Startup.cs?name=snippet1&highlight=12-19,38)]
 
-* cookie同意部分を *_Layout*ファイルに追加します。
+* cookie同意部分を *_Layout* ファイルに追加します。
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
 
-* * \_ Cookie Conの部分的*なファイルをプロジェクトに追加します。
+* *\_ Cookie Conの部分的* なファイルをプロジェクトに追加します。
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
 
@@ -71,8 +72,8 @@ cookieASP.NET Core 3.0 テンプレートで生成されたアプリの ASP.NET 
 Razor プロジェクトテンプレートで作成されたページと MVC プロジェクトには、次の GDPR サポートが含まれます。
 
 * [ Cookie Policyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions)と[Use Cookie policy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy)は、クラスで設定され `Startup` ます。
-* * \_ Cookie Conの*部分的な部分[ビュー](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)。 このファイルには、[ **Accept** ] ボタンが含まれています。 ユーザーが [ **同意** する] ボタンをクリックすると、store s に同意したことに cookie なります。
-* *Pages/privacy. cshtml*ページまたは*Views/Home/privacy*ビューには、サイトのプライバシーポリシーを詳細に説明するページが用意されています。 * \_ Cookie Con/partial*ファイルは、プライバシーページへのリンクを生成します。
+* *\_ Cookie Conの* 部分的な部分 [ビュー](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)。 このファイルには、[ **Accept** ] ボタンが含まれています。 ユーザーが [ **同意** する] ボタンをクリックすると、store s に同意したことに cookie なります。
+* *Pages/privacy. cshtml* ページまたは *Views/Home/privacy* ビューには、サイトのプライバシーポリシーを詳細に説明するページが用意されています。 *\_ Cookie Con/partial* ファイルは、プライバシーページへのリンクを生成します。
 * 個々のユーザーアカウントで作成されたアプリの場合、[管理] ページに、 [個人ユーザーデータ](#pd)をダウンロードおよび削除するためのリンクが表示されます。
 
 ### <a name="no-loccookiepolicyoptions-and-useno-loccookiepolicy"></a>CookiePolicyOptions と Use Cookie policy
@@ -87,13 +88,13 @@ Razor プロジェクトテンプレートで作成されたページと MVC プ
 
 ### <a name="_no-loccookieconsentpartialcshtml-partial-view"></a>\_CookieConの部分的な部分ビューの表示
 
-* \_ Cookie Conの*部分的な部分ビューは次のようになります。
+*\_ Cookie Conの* 部分的な部分ビューは次のようになります。
 
 [!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 この部分は次のとおりです。
 
-* ユーザーの追跡の状態を取得します。 アプリが同意を要求するように構成されている場合、ユーザーはを追跡する前に同意する必要があり cookie ます。 同意が必要な場合は、 cookie * \_ Layout*ファイルによって作成されたナビゲーションバーの上部に同意パネルが固定されます。
+* ユーザーの追跡の状態を取得します。 アプリが同意を要求するように構成されている場合、ユーザーはを追跡する前に同意する必要があり cookie ます。 同意が必要な場合は、 cookie *\_ Layout* ファイルによって作成されたナビゲーションバーの上部に同意パネルが固定されます。
 * `<p>`プライバシーを要約し、ポリシーを使用するための HTML 要素が用意されて cookie います。
 * サイトのプライバシーポリシーを詳細に説明する [プライバシー] ページまたはビューへのリンクを提供します。
 
@@ -121,7 +122,7 @@ Razor プロジェクトテンプレートで作成されたページと MVC プ
 
 個々のユーザーアカウントで作成されたアプリには、個人データをダウンロードして削除するコードが含まれています。 ASP.NET Core
 
-ユーザー名を選択し、[ **個人データ**] を選択します。
+ユーザー名を選択し、[ **個人データ** ] を選択します。
 
 ![[個人データの管理] ページ](gdpr/_static/pd.png)
 
@@ -156,7 +157,7 @@ Razor プロジェクトテンプレートで作成されたページと MVC プ
   * [eCryptfs](https://launchpad.net/ecryptfs)
   * [Encfs](https://github.com/vgough/encfs)。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [Microsoft.com/GDPR](https://www.microsoft.com/trustcenter/Privacy/GDPR)
 * [GDPR-ASP.NET Core に Revoke 同意ボタンを追加する](https://www.joeaudette.com/blog/2018/08/28/gdpr---adding-a-revoke-consent-button-in-aspnet-core)

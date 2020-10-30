@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ee9e656c2e631c9b5588149e0a75e07108baff1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634112"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051266"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core での SMS による2要素認証
 
@@ -48,17 +49,17 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT) および [スイス-開発�
 
 **Twilio**
 
-Twilio アカウントの [ダッシュボード] タブで、 **アカウント SID** と **認証トークン**をコピーします。
+Twilio アカウントの [ダッシュボード] タブで、 **アカウント SID** と **認証トークン** をコピーします。
 
 **ASPSMS:**
 
-アカウントの設定から **ユーザーキー** に移動し、 **パスワード**と共にコピーします。
+アカウントの設定から **ユーザーキー** に移動し、 **パスワード** と共にコピーします。
 
 これらの値は、後で、キーと内の secret manager ツールを使用してに格納し `SMSAccountIdentification` `SMSAccountPassword` ます。
 
 #### <a name="specifying-senderid--originator"></a>SenderID/オリジネータの指定
 
-**Twilio:** [数値] タブで、Twilio **電話番号**をコピーします。
+**Twilio:** [数値] タブで、Twilio **電話番号** をコピーします。
 
 **Aspsms:** [発信元のロック解除] メニュー内で、1つ以上の発信者をロック解除するか、英数字の発信者を選択します (すべてのネットワークでサポートされていません)。
 
@@ -89,7 +90,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 `Install-Package ASPSMS`
 
-* *サービス/MessageServices .cs*ファイルにコードを追加して、SMS を有効にします。 Twilio または ASPSMS セクションのいずれかを使用します。
+* *サービス/MessageServices .cs* ファイルにコードを追加して、SMS を有効にします。 Twilio または ASPSMS セクションのいずれかを使用します。
 
 **Twilio**  
 [!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_twilio.cs)]
@@ -117,11 +118,11 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ![[管理] の [追加] リンク](2fa/_static/login2fa2.png)
 
-* 確認コードを受信する電話番号を追加し、[ **確認コードの送信**] をタップします。
+* 確認コードを受信する電話番号を追加し、[ **確認コードの送信** ] をタップします。
 
 ![[電話番号の追加] ページ](2fa/_static/login2fa3.png)
 
-* 確認コードを含むテキストメッセージが表示されます。 入力し、[**送信**] をタップします。
+* 確認コードを含むテキストメッセージが表示されます。 入力し、[ **送信** ] をタップします。
 
 ![[電話番号の確認] ページ](2fa/_static/login2fa4.png)
 
@@ -141,13 +142,13 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 * ログインします。
 
-* ユーザーアカウントで2要素認証が有効になっているため、2番目の認証要素を指定する必要があります。 このチュートリアルでは、電話による検証を有効にしました。 組み込みのテンプレートでは、2番目の要素として電子メールを設定することもできます。 QR コードなどの認証については、さらに2つ目の要素を設定できます。 [ **Submit (送信**)」をタップします。
+* ユーザーアカウントで2要素認証が有効になっているため、2番目の認証要素を指定する必要があります。 このチュートリアルでは、電話による検証を有効にしました。 組み込みのテンプレートでは、2番目の要素として電子メールを設定することもできます。 QR コードなどの認証については、さらに2つ目の要素を設定できます。 [ **Submit (送信** )」をタップします。
 
 ![確認コードビューの送信](2fa/_static/login2fa7.png)
 
 * SMS メッセージで取得したコードを入力します。
 
-* [ **このブラウザーを記憶** する] チェックボックスをオンにすると、同じデバイスとブラウザーを使用しているときに2fa を使用してログオンする必要がありません。 2FA を有効にして [ **このブラウザーを記憶** する] をオンにすると、悪意のあるユーザーが自分のデバイスにアクセスできなくても、アカウントへのアクセスを試みる悪意のあるユーザーからの強力な2fa 保護が提供されます。 この操作は、定期的に使用するプライベートデバイスで行うことができます。 [  **このブラウザーを記憶**する] を設定すると、定期的に使用しないデバイスから2fa のセキュリティが強化され、自分のデバイスで2fa を通過する必要がなくなります。
+* [ **このブラウザーを記憶** する] チェックボックスをオンにすると、同じデバイスとブラウザーを使用しているときに2fa を使用してログオンする必要がありません。 2FA を有効にして [ **このブラウザーを記憶** する] をオンにすると、悪意のあるユーザーが自分のデバイスにアクセスできなくても、アカウントへのアクセスを試みる悪意のあるユーザーからの強力な2fa 保護が提供されます。 この操作は、定期的に使用するプライベートデバイスで行うことができます。 [  **このブラウザーを記憶** する] を設定すると、定期的に使用しないデバイスから2fa のセキュリティが強化され、自分のデバイスで2fa を通過する必要がなくなります。
 
 ![ビューの確認](2fa/_static/login2fa8.png)
 

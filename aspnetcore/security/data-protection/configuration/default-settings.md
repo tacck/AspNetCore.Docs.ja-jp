@@ -5,6 +5,7 @@ description: ASP.NET Core におけるデータ保護のキー管理と有効期
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: b4578737a0ea36463b3c44254aad85a484c46090
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1303c5c2c993f1d20383457666aebfa2a583e938
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634476"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053008"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core でのデータ保護のキー管理と有効期間
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-## <a name="key-management"></a>キーの管理
+## <a name="key-management"></a>キー管理
 
 アプリは、運用環境を検出し、キーの構成を独自に処理しようとします。
 
 1. アプリが [Azure アプリ](https://azure.microsoft.com/services/app-service/)でホストされている場合、キーは *%HOME%\ASP.NET\DataProtection-Keys* フォルダーに保存されます。 このフォルダーはネットワーク ストレージにバックアップされ、アプリをホストしているすべてのマシンで同期されています。
    * 保存中のキーは保護されていません。
-   * *Dataprotection キー*フォルダーは、単一のデプロイスロット内のアプリのすべてのインスタンスにキーリングを提供します。
+   * *Dataprotection キー* フォルダーは、単一のデプロイスロット内のアプリのすべてのインスタンスにキーリングを提供します。
    * ステージングや運用などの別のデプロイ スロットでは、キー リングが共有されません。 デプロイスロット間でスワップする場合 (運用環境へのステージングまたは A/B テストを使用する場合など)、データ保護を使用するすべてのアプリは、前のスロット内のキーリングを使用して格納されたデータの暗号化を解除することはできません。 これにより、ユーザーは、 cookie データ保護を使用してを保護するので、標準 ASP.NET Core 認証を使用するアプリからログアウトされ cookie ます。 スロットに依存しないキーリングが必要な場合は、Azure Blob Storage、Azure Key Vault、SQL ストア、Redis cache などの外部キーリングプロバイダーを使用します。
 
 1. ユーザープロファイルが使用可能な場合、キーは *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* フォルダーに保存されます。 オペレーティングシステムが Windows の場合、キーは DPAPI を使用して保存時に暗号化されます。

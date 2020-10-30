@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: ab850fa8afbee9d2664868937362388a03374908
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1810fef903362addcef4a6c9ec53264604f58d2b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634697"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051474"
 ---
 # <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core SignalR の概要
 
@@ -54,7 +55,7 @@ ASP.NET Core のの一部の機能を次に示し SignalR ます。
 SignalR は、リアルタイム通信を処理するための次の手法をサポートしています (正常なフォールバックの順序)。
 
 * [WebSocket](https://tools.ietf.org/html/rfc7118)
-* サーバーから送信されたイベント
+* Server-Sent イベント
 * 長いポーリング
 
 SignalR では、サーバーとクライアントの機能内にある最適なトランスポート方法が自動的に選択されます。
@@ -67,7 +68,7 @@ SignalR は、 *ハブ* を使用してクライアントとサーバー間の�
 
 ハブは、クライアント側のメソッドの名前とパラメーターを含むメッセージを送信することによって、クライアント側のコードを呼び出します。 メソッドパラメーターとして送信されるオブジェクトは、構成されたプロトコルを使用して逆シリアル化されます。 クライアントは、クライアント側コードのメソッドと名前を一致させようとします。 クライアントが一致を検出すると、メソッドを呼び出し、逆シリアル化されたパラメーターデータに渡します。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の資料
 
 * [For ASP.NET Core を使ってみる SignalR](xref:tutorials/signalr)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)

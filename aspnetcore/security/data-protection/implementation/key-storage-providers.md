@@ -5,6 +5,7 @@ description: ASP.NET Core の主要な記憶域プロバイダーと、キーの
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: fb21f7d4d784451096db5c420f2ffd4532c2b490
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36e8bc494125d0770347ddf32390365d83a91d27
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631330"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051747"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core のキー記憶域プロバイダー
 
@@ -121,7 +122,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-詳細については、次のトピックを参照してください。
+詳細については、以下のトピックを参照してください。
 
 * [StackExchange. Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
 * [Azure Redis Cache](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
@@ -131,7 +132,7 @@ public void ConfigureServices(IServiceCollection services)
 
 **Windows の展開にのみ適用されます。**
 
-場合によっては、アプリケーションにファイルシステムへの書き込みアクセス権がないことがあります。 アプリが仮想サービスアカウント ( *w3wp.exe*のアプリプール id など) として実行されているシナリオについて考えてみましょう。 このような場合、管理者は、サービスアカウント id によってアクセス可能なレジストリキーをプロビジョニングできます。 次に示すように、 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) extension メソッドを呼び出します。 暗号化キーを格納する場所を指す [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) を指定します。
+場合によっては、アプリケーションにファイルシステムへの書き込みアクセス権がないことがあります。 アプリが仮想サービスアカウント ( *w3wp.exe* のアプリプール id など) として実行されているシナリオについて考えてみましょう。 このような場合、管理者は、サービスアカウント id によってアクセス可能なレジストリキーをプロビジョニングできます。 次に示すように、 [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) extension メソッドを呼び出します。 暗号化キーを格納する場所を指す [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) を指定します。
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -166,7 +167,7 @@ EF Core プロバイダーを構成するには、 [Persistkeystodbcontext \<TCo
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**パッケージマネージャーコンソール**(PMC) ウィンドウで、次のコマンドを実行します。
+**パッケージマネージャーコンソール** (PMC) ウィンドウで、次のコマンドを実行します。
 
 ```powershell
 Add-Migration AddDataProtectionKeys -Context MyKeysContext

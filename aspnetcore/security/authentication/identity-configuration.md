@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b11a2d584b7275a9065c9915021ac945823531f8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632682"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051994"
 ---
 # <a name="configure-no-locaspnet-core-identity"></a>ASP.NET Core Identity を構成する
 
@@ -108,7 +109,7 @@ ASP.NET Core Identity では、パスワードポリシー、ロックアウト�
 
 [ Identity オプション。トークン](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens)は、テーブルに示されているプロパティを使用して[tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions)を指定します。
 
-| プロパティ | 説明 |
+| プロパティ | [説明] |
 | -------- | ----------- |
 | [AuthenticatorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider) | `AuthenticatorTokenProvider`認証子を使用して2要素サインインを検証するために使用するを取得または設定します。 |
 | [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider) | `ChangeEmailTokenProvider`電子メール変更の確認メールで使用されるトークンを生成するために使用されるを取得または設定します。 |
@@ -130,7 +131,7 @@ ASP.NET Core Identity では、パスワードポリシー、ロックアウト�
 
 ### <a name="no-loccookie-settings"></a>Cookie の設定
 
-アプリの cookie をで構成し `Startup.ConfigureServices` ます。 [ConfigureApplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)またはを呼び出し**た後**に、を呼び出す必要があり `AddIdentity` `AddDefaultIdentity` ます。
+アプリの cookie をで構成し `Startup.ConfigureServices` ます。 [ConfigureApplication Cookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__)またはを呼び出し **た後** に、を呼び出す必要があり `AddIdentity` `AddDefaultIdentity` ます。
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
@@ -140,9 +141,9 @@ ASP.NET Core Identity では、パスワードポリシー、ロックアウト�
 
 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions> パスワードハッシュのオプションを取得または設定します。
 
-| オプション | 説明 |
+| オプション | [説明] |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー*と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合、 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、 *新しいパスワード*のハッシュに影響します。 |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | 新しいパスワードをハッシュするときに使用する互換性モード。 既定値は <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> です。 *形式マーカー* と呼ばれるハッシュされたパスワードの最初のバイトは、パスワードのハッシュに使用されるハッシュアルゴリズムのバージョンを指定します。 ハッシュに対してパスワードを確認する場合、 <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> メソッドは最初のバイトに基づいて適切なアルゴリズムを選択します。 クライアントは、パスワードのハッシュに使用されたアルゴリズムのバージョンに関係なく認証を行うことができます。 互換性モードを設定すると、 *新しいパスワード* のハッシュに影響します。 |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 を使用してパスワードをハッシュするときに使用されるイテレーションの数。 この値は、がに設定されている場合にのみ使用され <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> ます。 値は正の整数である必要があり、既定値は `10000` です。 |
 
 次の例では、 <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> がのに設定されてい `12000` `Startup.ConfigureServices` ます。
