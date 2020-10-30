@@ -7,6 +7,7 @@ ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: ce0e7ad30c137562b74dc9fe5c53235e3599e575
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: be0b655645fd2bd0eab9f9c30a65485f386cead3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634359"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053359"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core での Facebook 外部ログインセットアップ
 
@@ -40,7 +41,7 @@ ms.locfileid: "88634359"
 
 * [Facebook 開発者アプリ](https://developers.facebook.com/apps/)のページに移動し、サインインします。 まだ Facebook アカウントを持っていない場合は、ログインページの [ **facebook へのサインアップ** ] リンクを使用して作成します。  Facebook アカウントを作成したら、手順に従って Facebook 開発者として登録します。
 
-* **[マイアプリ**] メニューで、[**アプリの作成**] を選択して新しいアプリ ID を作成します。
+* **[マイアプリ** ] メニューで、[ **アプリの作成** ] を選択して新しいアプリ ID を作成します。
 
    ![開発者向け Facebook ポータルを Microsoft Edge で開く](index/_static/FBMyApps.png)
 
@@ -48,11 +49,11 @@ ms.locfileid: "88634359"
 
   ![新しいアプリ ID フォームを作成する](index/_static/FBNewAppId.png)
 
-* 新しいアプリカードで、[ **製品の追加**] を選択します。  **Facebook ログイン**カードで、 **[セットアップ] をクリックし**ます。 
+* 新しいアプリカードで、[ **製品の追加** ] を選択します。  **Facebook ログイン** カードで、 **[セットアップ] をクリックし** ます。 
 
   ![製品のセットアップページ](index/_static/FBProductSetup.png)
 
-* **クイックスタート**ウィザードが起動し、最初のページとして **[プラットフォーム] を選択**します。 ここでウィザードをバイパスするには、左下のメニューで [ **FaceBook のログイン****設定**] リンクをクリックします。
+* **クイックスタート** ウィザードが起動し、最初のページとして **[プラットフォーム] を選択** します。 ここでウィザードをバイパスするには、左下のメニューで [ **FaceBook のログイン****設定** ] リンクをクリックします。
 
   ![スキップクイックスタート](index/_static/FBSkipQuickStart.png)
 
@@ -60,14 +61,14 @@ ms.locfileid: "88634359"
 
   ![[クライアント OAuth 設定] ページ](index/_static/FBOAuthSetup.png)
 
-* [**有効な OAuth リダイレクト uri** ] フィールドに */signin-facebook*を追加して、開発 URI を入力します (例: `https://localhost:44320/signin-facebook` )。 このチュートリアルの後半で構成する Facebook 認証は、OAuth フローを実装するために */signin-facebook* route で要求を自動的に処理します。
+* [ **有効な OAuth リダイレクト uri** ] フィールドに */signin-facebook* を追加して、開発 URI を入力します (例: `https://localhost:44320/signin-facebook` )。 このチュートリアルの後半で構成する Facebook 認証は、OAuth フローを実装するために */signin-facebook* route で要求を自動的に処理します。
 
 > [!NOTE]
 > URI */signin-facebook* は、facebook 認証プロバイダーの既定のコールバックとして設定されます。 [FacebookOptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions)クラスの [継承された[remoteauthenticationoptions]](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)プロパティを使用して Facebook 認証ミドルウェアを構成するときに、既定のコールバック URI を変更できます。
 
 * **[変更を保存]** をクリックします。
 
-* **Settings**  >  左側のナビゲーションで、[設定] [**基本**リンク] の順にクリックします。
+* **Settings**  >  左側のナビゲーションで、[設定] [ **基本** リンク] の順にクリックします。
 
   このページで、とをメモしておき `App ID` `App Secret` ます。 次のセクションでは、両方を ASP.NET Core アプリケーションに追加します。
 
@@ -103,8 +104,8 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 
 ## <a name="sign-in-with-facebook"></a>Facebook でサインインする
 
-* アプリを実行し、[ **ログイン**] を選択します。 
-* [ **別のサービスを使用してログインする**] で、[Facebook] を選択します。
+* アプリを実行し、[ **ログイン** ] を選択します。 
+* [ **別のサービスを使用してログインする** ] で、[Facebook] を選択します。
 * 認証のために **Facebook** にリダイレクトされます。
 * Facebook の資格情報を入力します。
 * メールを設定できるサイトにリダイレクトされます。
@@ -132,7 +133,7 @@ Facebook の資格情報を使用してログインしました。
 * [Facebook.com](https://www.facebook.com/)に移動します。
 * サインインしている場合は、サインアウトする必要があります。
 * アプリを実行し、[Facebook サインイン] を選択します。
-* [ **今後**] を選択します。 指定されたページにリダイレクトされ `AccessDeniedPath` ます。
+* [ **今後** ] を選択します。 指定されたページにリダイレクトされ `AccessDeniedPath` ます。
 
 <!-- End of React  -->
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -146,7 +147,7 @@ Facebook 認証でサポートされる構成オプションの詳細につい�
 
 ## <a name="troubleshooting"></a>トラブルシューティング
 
-* **ASP.NET Core 2.x のみ:**Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され*ます。 ' SignInScheme ' オプションを指定する必要があり*ます。 このチュートリアルで使用するプロジェクトテンプレートによって、この処理が確実に行われます。
+* **ASP.NET Core 2.x のみ:**Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され *ます。 ' SignInScheme ' オプションを指定する必要があり* ます。 このチュートリアルで使用するプロジェクトテンプレートによって、この処理が確実に行われます。
 * 初期移行を適用してサイトデータベースが作成されていない場合は、 *要求エラーの処理中にデータベース操作が失敗* します。 [ **移行の適用** ] をタップしてデータベースを作成し、更新してエラーを続行します。
 
 ## <a name="next-steps"></a>次のステップ

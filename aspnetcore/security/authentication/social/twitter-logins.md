@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: da0c5579b0828aee7f1c78ec7f5731db50151e90
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 47926d12ac5f922f2937df164d38ff6eb63cacf1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634060"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053281"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>ASP.NET Core を使用した Twitter の外部サインインセットアップ
 
@@ -37,18 +38,18 @@ ms.locfileid: "88634060"
 
 * に移動し [https://apps.twitter.com/](https://apps.twitter.com/) てサインインします。 まだ Twitter アカウントをお持ちでない場合は、[ **[今すぐサインアップ](https://twitter.com/signup)** ] リンクを使用して作成します。
 
-* [ **アプリの作成**] を選択します。 **アプリ名**、**アプリケーションの説明**、およびパブリック**web サイト**の URI を入力します (これは、ドメイン名を登録するまで一時的な場合があります)。
+* [ **アプリの作成** ] を選択します。 **アプリ名** 、 **アプリケーションの説明** 、およびパブリック **web サイト** の URI を入力します (これは、ドメイン名を登録するまで一時的な場合があります)。
 
-* [ **Twitter でのサインインを有効**にする] の横にあるチェックボックスをオンにします。
+* [ **Twitter でのサインインを有効** にする] の横にあるチェックボックスをオンにします。
 
-* AspNetCore。Identity 既定では、ユーザーは電子メールアドレスを持っている必要があります。 [ **アクセス許可** ] タブにアクセスし、[ **編集** ] ボタンをクリックして、[ **ユーザーに電子メールアドレスを要求**する] の横にあるチェックボックスをオンにします。
+* AspNetCore。Identity 既定では、ユーザーは電子メールアドレスを持っている必要があります。 [ **アクセス許可** ] タブにアクセスし、[ **編集** ] ボタンをクリックして、[ **ユーザーに電子メールアドレスを要求** する] の横にあるチェックボックスをオンにします。
 
-* `/signin-twitter`[**コールバック url** ] フィールドに追加された開発 URI を入力します (例: `https://webapp128.azurewebsites.net/signin-twitter` )。 このサンプルで後で構成される Twitter 認証スキームは、OAuth フローを実装するために、ルートで要求を自動的に処理し `/signin-twitter` ます。
+* `/signin-twitter`[ **コールバック url** ] フィールドに追加された開発 URI を入力します (例: `https://webapp128.azurewebsites.net/signin-twitter` )。 このサンプルで後で構成される Twitter 認証スキームは、OAuth フローを実装するために、ルートで要求を自動的に処理し `/signin-twitter` ます。
 
   > [!NOTE]
   > URI セグメント `/signin-twitter` は、Twitter 認証プロバイダーの既定のコールバックとして設定されます。 [TwitterOptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions)クラスの [継承された[remoteauthenticationoptions]](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)プロパティを使用して、Twitter 認証ミドルウェアを構成するときに、既定のコールバック URI を変更できます。
 
-* フォームの残りの部分を入力し、[ **作成**] を選択します。 新しいアプリケーションの詳細が表示されます。
+* フォームの残りの部分を入力し、[ **作成** ] を選択します。 新しいアプリケーションの詳細が表示されます。
 
 ## <a name="store-the-twitter-consumer-api-key-and-secret"></a>Twitter コンシューマー API キーとシークレットを格納する
 
@@ -68,7 +69,7 @@ Twitter コンシューマー API キーや secret [Manager](xref:security/app-s
 
 ## <a name="configure-twitter-authentication"></a>Twitter 認証の構成
 
-`ConfigureServices` *Startup.cs*ファイルのメソッドに Twitter サービスを追加します。
+`ConfigureServices` *Startup.cs* ファイルのメソッドに Twitter サービスを追加します。
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupTwitter3x.cs?name=snippet&highlight=10-15)]
 
@@ -80,9 +81,9 @@ Twitter 認証でサポートされる構成オプションの詳細について
 
 ## <a name="sign-in-with-twitter"></a>Twitter でのサインイン
 
-アプリを実行し、[ **ログイン**] を選択します。 Twitter でサインインするためのオプションが表示されます。
+アプリを実行し、[ **ログイン** ] を選択します。 Twitter でサインインするためのオプションが表示されます。
 
-**Twitter**をクリックすると、認証のために twitter にリダイレクトされるようになります。
+**Twitter** をクリックすると、認証のために twitter にリダイレクトされるようになります。
 
 Twitter の資格情報を入力すると、電子メールを設定できる web サイトにリダイレクトされます。
 
@@ -98,7 +99,7 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a>トラブルシューティング
 
-* **ASP.NET Core 2.x のみ:**Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され*ます。 ' SignInScheme ' オプションを指定する必要があり*ます。 このサンプルで使用するプロジェクトテンプレートにより、この処理が確実に行われます。
+* **ASP.NET Core 2.x のみ:**Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され *ます。 ' SignInScheme ' オプションを指定する必要があり* ます。 このサンプルで使用するプロジェクトテンプレートにより、この処理が確実に行われます。
 * 初期移行を適用してサイトデータベースが作成されていない場合は、 *要求エラーの処理中にデータベース操作が失敗* します。 [ **移行の適用** ] をタップしてデータベースを作成し、更新してエラーを続行します。
 
 ## <a name="next-steps"></a>次のステップ

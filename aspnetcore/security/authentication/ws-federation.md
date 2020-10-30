@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core で WS-FEDERATION を使用してユーザーを認証する
+title: ASP.NET Core で WS-Federation を使用してユーザーを認証する
 author: chlowell
-description: このチュートリアルでは、ASP.NET Core アプリで WS-FEDERATION を使用する方法について説明します。
+description: このチュートリアルでは、ASP.NET Core アプリで WS-Federation を使用する方法について説明します。
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: 8a593efd799e900483d0337a06e02c3558b63bfb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ed78923a2bdd1ed683a72c0a6f34337a38350035
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634086"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053372"
 ---
-# <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core で WS-FEDERATION を使用してユーザーを認証する
+# <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core で WS-Federation を使用してユーザーを認証する
 
-このチュートリアルでは、ユーザーが Active Directory フェデレーションサービス (AD FS) (ADFS) や [Azure Active Directory](/azure/active-directory/) (AAD) などの ws-federation 認証プロバイダーを使用してサインインできるようにする方法について説明します。 [Facebook、Google、および外部プロバイダー認証](xref:security/authentication/social/index)で説明されている ASP.NET Core サンプルアプリを使用します。
+このチュートリアルでは、ユーザーが Active Directory フェデレーションサービス (AD FS) (ADFS) や [Azure Active Directory](/azure/active-directory/) (AAD) などの WS-Federation 認証プロバイダーを使用してサインインできるようにする方法について説明します。 [Facebook、Google、および外部プロバイダー認証](xref:security/authentication/social/index)で説明されている ASP.NET Core サンプルアプリを使用します。
 
-ASP.NET Core アプリの場合、WS-FEDERATION のサポートは [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)によって提供されます。 このコンポーネントは [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) から移植され、そのコンポーネントの機構の多くを共有します。 ただし、これらのコンポーネントは、いくつかの重要な点で異なります。
+ASP.NET Core アプリの場合、WS-Federation サポートは [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)によって提供されます。 このコンポーネントは [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) から移植され、そのコンポーネントの機構の多くを共有します。 ただし、これらのコンポーネントは、いくつかの重要な点で異なります。
 
 既定では、新しいミドルウェアは次のようになります。
 
-* は、要求されていないログインを許可しません。 WS-FEDERATION プロトコルのこの機能は、XSRF 攻撃に対して脆弱です。 ただし、オプションを使用して有効にすることができ `AllowUnsolicitedLogins` ます。
+* は、要求されていないログインを許可しません。 WS-Federation プロトコルのこの機能は、XSRF 攻撃に対して脆弱です。 ただし、オプションを使用して有効にすることができ `AllowUnsolicitedLogins` ます。
 * では、サインインメッセージのすべてのフォームポストがチェックされません。 に対する要求のみ `CallbackPath` がサインインのチェックが行われます。 `CallbackPath` 既定値はです `/signin-wsfed` が、 [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions)クラスの継承された[remoteauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath)を使用して変更できます。 このパスは、 [Skipun認識要求](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) オプションを有効にすることで、他の認証プロバイダーと共有できます。
 
 ## <a name="register-the-app-with-active-directory"></a>Active Directory にアプリを登録する
@@ -53,7 +54,7 @@ ASP.NET Core アプリの場合、WS-FEDERATION のサポートは [AspNetCore](
 
 ![証明書利用者信頼の追加ウィザード: 証明書の構成](ws-federation/_static/AdfsConfigureCert.png)
 
-* アプリの URL を使用して、WS-FEDERATION パッシブプロトコルのサポートを有効にします。 アプリケーションのポートが正しいことを確認します。
+* アプリの URL を使用して WS-Federation パッシブプロトコルのサポートを有効にします。 アプリケーションのポートが正しいことを確認します。
 
 ![証明書利用者信頼の追加ウィザード: URL の構成](ws-federation/_static/AdfsConfigureUrl.png)
 
@@ -62,38 +63,38 @@ ASP.NET Core アプリの場合、WS-FEDERATION のサポートは [AspNetCore](
 
 * ウィザードの残りの部分で [ **次へ** ] をクリックし、最後 **に終了し** ます。
 
-* ASP.NET Core Identity**名前 ID**要求が必要です。 [ **要求規則の編集** ] ダイアログボックスで、次のいずれかを追加します。
+* ASP.NET Core Identity**名前 ID** 要求が必要です。 [ **要求規則の編集** ] ダイアログボックスで、次のいずれかを追加します。
 
 ![要求規則を編集する](ws-federation/_static/EditClaimRules.png)
 
-* **変換要求規則の追加ウィザード**で、既定の [ **LDAP 属性を要求として送信**] テンプレートを選択したままにして、[**次へ**] をクリックします。 **SAM-Account-name** LDAP 属性を出力方向の要求の**名前 ID**にマッピングする規則を追加します。
+* **変換要求規則の追加ウィザード** で、既定の [ **LDAP 属性を要求として送信** ] テンプレートを選択したままにして、[ **次へ** ] をクリックします。 **SAM-Account-name** LDAP 属性を出力方向の要求の **名前 ID** にマッピングする規則を追加します。
 
 ![変換要求規則の追加ウィザード: 要求規則の構成](ws-federation/_static/AddTransformClaimRule.png)
 
-* [ **Finish**  >  **要求規則の編集**] ウィンドウで [完了 **]** をクリックします。
+* [ **Finish**  >  **要求規則の編集** ] ウィンドウで [完了 **]** をクリックします。
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
 
-* AAD テナントの [アプリの登録] ブレードに移動します。 [ **新しいアプリケーションの登録**] をクリックします。
+* AAD テナントの [アプリの登録] ブレードに移動します。 [ **新しいアプリケーションの登録** ] をクリックします。
 
 ![Azure Active Directory: アプリの登録](ws-federation/_static/AadNewAppRegistration.png)
 
 * アプリ登録の名前を入力します。 これは、ASP.NET Core アプリにとって重要ではありません。
-* **サインオン url**としてアプリがリッスンする url を入力してください:
+* **サインオン url** としてアプリがリッスンする url を入力してください:
 
 ![Azure Active Directory: アプリの登録を作成する](ws-federation/_static/AadCreateAppRegistration.png)
 
-* [ **エンドポイント** ] をクリックして、 **フェデレーションメタデータドキュメント** の URL を確認します。 WS-FEDERATION ミドルウェアは次のようになり `MetadataAddress` ます。
+* [ **エンドポイント** ] をクリックして、 **フェデレーションメタデータドキュメント** の URL を確認します。 WS-Federation ミドルウェアは `MetadataAddress` 次のとおりです。
 
 ![Azure Active Directory: エンドポイント](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* 新しいアプリの登録に移動します。 [ **API を公開する**] をクリックします。 [アプリケーション ID URI **Set**] [  >  **保存**の設定] をクリックします。 **アプリケーション ID の URI**をメモしておきます。 WS-FEDERATION ミドルウェアは次のようになり `Wtrealm` ます。
+* 新しいアプリの登録に移動します。 [ **API を公開する** ] をクリックします。 [アプリケーション ID URI **Set** ] [  >  **保存** の設定] をクリックします。 **アプリケーション ID の URI** をメモしておきます。 WS-Federation ミドルウェアは `Wtrealm` 次のとおりです。
 
 ![Azure Active Directory: アプリの登録のプロパティ](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a>WS-FEDERATION を使用しない ASP.NET Core Identity
+## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a>を指定せずに WS-Federation を使用する ASP.NET Core Identity
 
-WS-FEDERATION ミドルウェアは、なしで使用でき Identity ます。 次に例を示します。
+WS-Federation ミドルウェアは、なしで使用でき Identity ます。 次に例を示します。
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -102,10 +103,10 @@ WS-FEDERATION ミドルウェアは、なしで使用でき Identity ます。 �
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a>の外部ログインプロバイダーとして WS-FEDERATION を追加します。 ASP.NET Core Identity
+## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a>の外部ログインプロバイダーとして WS-Federation を追加します。 ASP.NET Core Identity
 
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)への依存関係をプロジェクトに追加します。
-* WS-FEDERATION の追加先 `Startup.ConfigureServices` :
+* WS-Federation の追加先 `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -117,7 +118,7 @@ WS-FEDERATION ミドルウェアは、なしで使用でき Identity ます。 �
 
 [!INCLUDE [default settings configuration](social/includes/default-settings.md)]
 
-### <a name="log-in-with-ws-federation"></a>WS-FEDERATION を使用してログインする
+### <a name="log-in-with-ws-federation"></a>WS-Federation でログインする
 
 アプリを参照し、nav ヘッダーの [ **ログイン** ] リンクをクリックします。 WsFederation: ログインページでログインするオプションがあります。 ![](ws-federation/_static/WsFederationButton.png)
 
