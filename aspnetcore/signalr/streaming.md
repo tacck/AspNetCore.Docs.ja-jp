@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 11/12/2019
 no-loc:
+- ':::no-loc(appsettings.json):::'
 - ':::no-loc(ASP.NET Core Identity):::'
 - ':::no-loc(cookie):::'
 - ':::no-loc(Cookie):::'
@@ -18,50 +19,50 @@ no-loc:
 - ':::no-loc(Razor):::'
 - ':::no-loc(SignalR):::'
 uid: signalr/streaming
-ms.openlocfilehash: 732198cf07392bda008c9cc1c9768df2500852c0
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 2f21248934395b682adf8060dae4e3d145e52215
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690641"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058208"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="ada54-103">ASP.NET Core でストリーミングを使用する :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="ada54-103">Use streaming in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="6be39-103">ASP.NET Core でストリーミングを使用する :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="6be39-103">Use streaming in ASP.NET Core :::no-loc(SignalR):::</span></span>
 
-<span data-ttu-id="ada54-104">[Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="ada54-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
+<span data-ttu-id="6be39-104">[Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="6be39-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ada54-105">ASP.NET Core :::no-loc(SignalR)::: は、クライアントからサーバー、およびサーバーからクライアントへのストリーミングをサポートします。</span><span class="sxs-lookup"><span data-stu-id="ada54-105">ASP.NET Core :::no-loc(SignalR)::: supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="ada54-106">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="ada54-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="ada54-107">ストリーミング時には、すべてのデータが使用可能になるのを待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントまたはサーバーに送信されます。</span><span class="sxs-lookup"><span data-stu-id="ada54-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
+<span data-ttu-id="6be39-105">ASP.NET Core :::no-loc(SignalR)::: は、クライアントからサーバー、およびサーバーからクライアントへのストリーミングをサポートします。</span><span class="sxs-lookup"><span data-stu-id="6be39-105">ASP.NET Core :::no-loc(SignalR)::: supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="6be39-106">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="6be39-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="6be39-107">ストリーミング時には、すべてのデータが使用可能になるのを待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントまたはサーバーに送信されます。</span><span class="sxs-lookup"><span data-stu-id="6be39-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="ada54-108">ASP.NET Core :::no-loc(SignalR)::: は、サーバーメソッドのストリーミング戻り値をサポートします。</span><span class="sxs-lookup"><span data-stu-id="ada54-108">ASP.NET Core :::no-loc(SignalR)::: supports streaming return values of server methods.</span></span> <span data-ttu-id="ada54-109">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="ada54-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="ada54-110">戻り値がクライアントにストリーミングされると、すべてのデータが使用可能になるまで待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="ada54-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
+<span data-ttu-id="6be39-108">ASP.NET Core :::no-loc(SignalR)::: は、サーバーメソッドのストリーミング戻り値をサポートします。</span><span class="sxs-lookup"><span data-stu-id="6be39-108">ASP.NET Core :::no-loc(SignalR)::: supports streaming return values of server methods.</span></span> <span data-ttu-id="6be39-109">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="6be39-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="6be39-110">戻り値がクライアントにストリーミングされると、すべてのデータが使用可能になるまで待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="6be39-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="ada54-111">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="ada54-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="6be39-111">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="6be39-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="set-up-a-hub-for-streaming"></a><span data-ttu-id="ada54-112">ストリーミング用のハブを設定する</span><span class="sxs-lookup"><span data-stu-id="ada54-112">Set up a hub for streaming</span></span>
+## <a name="set-up-a-hub-for-streaming"></a><span data-ttu-id="6be39-112">ストリーミング用のハブを設定する</span><span class="sxs-lookup"><span data-stu-id="6be39-112">Set up a hub for streaming</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ada54-113">ハブメソッドは、、、 <xref:System.Collections.Generic.IAsyncEnumerable`1> 、またはを返すと、自動的にストリーミングハブメソッドになり <xref:System.Threading.Channels.ChannelReader%601> `Task<IAsyncEnumerable<T>>` `Task<ChannelReader<T>>` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-113">A hub method automatically becomes a streaming hub method when it returns <xref:System.Collections.Generic.IAsyncEnumerable`1>, <xref:System.Threading.Channels.ChannelReader%601>, `Task<IAsyncEnumerable<T>>`, or `Task<ChannelReader<T>>`.</span></span>
+<span data-ttu-id="6be39-113">ハブメソッドは、、、 <xref:System.Collections.Generic.IAsyncEnumerable`1> 、またはを返すと、自動的にストリーミングハブメソッドになり <xref:System.Threading.Channels.ChannelReader%601> `Task<IAsyncEnumerable<T>>` `Task<ChannelReader<T>>` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-113">A hub method automatically becomes a streaming hub method when it returns <xref:System.Collections.Generic.IAsyncEnumerable`1>, <xref:System.Threading.Channels.ChannelReader%601>, `Task<IAsyncEnumerable<T>>`, or `Task<ChannelReader<T>>`.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="ada54-114">ハブメソッドは、またはを返すと、自動的にストリーミングハブメソッドになり <xref:System.Threading.Channels.ChannelReader%601> `Task<ChannelReader<T>>` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-114">A hub method automatically becomes a streaming hub method when it returns a <xref:System.Threading.Channels.ChannelReader%601> or a `Task<ChannelReader<T>>`.</span></span>
+<span data-ttu-id="6be39-114">ハブメソッドは、またはを返すと、自動的にストリーミングハブメソッドになり <xref:System.Threading.Channels.ChannelReader%601> `Task<ChannelReader<T>>` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-114">A hub method automatically becomes a streaming hub method when it returns a <xref:System.Threading.Channels.ChannelReader%601> or a `Task<ChannelReader<T>>`.</span></span>
 
 ::: moniker-end
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="ada54-115">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-115">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="6be39-115">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-115">Server-to-client streaming</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ada54-116">ストリーミングハブのメソッドは `IAsyncEnumerable<T>` 、に加えてを返すことができ `ChannelReader<T>` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-116">Streaming hub methods can return `IAsyncEnumerable<T>` in addition to `ChannelReader<T>`.</span></span> <span data-ttu-id="ada54-117">を返す最も簡単 `IAsyncEnumerable<T>` な方法は、次の例に示すように、ハブメソッドを非同期反復子メソッドにすることです。</span><span class="sxs-lookup"><span data-stu-id="ada54-117">The simplest way to return `IAsyncEnumerable<T>` is by making the hub method an async iterator method as the following sample demonstrates.</span></span> <span data-ttu-id="ada54-118">ハブの非同期反復子メソッドは、 `CancellationToken` クライアントがストリームからアンサブスクライブしたときにトリガーされるパラメーターを受け取ることができます。</span><span class="sxs-lookup"><span data-stu-id="ada54-118">Hub async iterator methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="ada54-119">非同期反復子メソッドは、チャネルに共通する問題を回避します。たとえば、を完了しないうちに十分な初期状態を返さない場合 `ChannelReader` や、メソッドを終了する場合など <xref:System.Threading.Channels.ChannelWriter`1> です。</span><span class="sxs-lookup"><span data-stu-id="ada54-119">Async iterator methods avoid problems common with Channels, such as not returning the `ChannelReader` early enough or exiting the method without completing the <xref:System.Threading.Channels.ChannelWriter`1>.</span></span>
+<span data-ttu-id="6be39-116">ストリーミングハブのメソッドは `IAsyncEnumerable<T>` 、に加えてを返すことができ `ChannelReader<T>` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-116">Streaming hub methods can return `IAsyncEnumerable<T>` in addition to `ChannelReader<T>`.</span></span> <span data-ttu-id="6be39-117">を返す最も簡単 `IAsyncEnumerable<T>` な方法は、次の例に示すように、ハブメソッドを非同期反復子メソッドにすることです。</span><span class="sxs-lookup"><span data-stu-id="6be39-117">The simplest way to return `IAsyncEnumerable<T>` is by making the hub method an async iterator method as the following sample demonstrates.</span></span> <span data-ttu-id="6be39-118">ハブの非同期反復子メソッドは、 `CancellationToken` クライアントがストリームからアンサブスクライブしたときにトリガーされるパラメーターを受け取ることができます。</span><span class="sxs-lookup"><span data-stu-id="6be39-118">Hub async iterator methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="6be39-119">非同期反復子メソッドは、チャネルに共通する問題を回避します。たとえば、を完了しないうちに十分な初期状態を返さない場合 `ChannelReader` や、メソッドを終了する場合など <xref:System.Threading.Channels.ChannelWriter`1> です。</span><span class="sxs-lookup"><span data-stu-id="6be39-119">Async iterator methods avoid problems common with Channels, such as not returning the `ChannelReader` early enough or exiting the method without completing the <xref:System.Threading.Channels.ChannelWriter`1>.</span></span>
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -69,12 +70,12 @@ ms.locfileid: "92690641"
 
 ::: moniker-end
 
-<span data-ttu-id="ada54-120">次のサンプルは、チャネルを使用してクライアントにデータをストリーミングする方法の基本を示しています。</span><span class="sxs-lookup"><span data-stu-id="ada54-120">The following sample shows the basics of streaming data to the client using Channels.</span></span> <span data-ttu-id="ada54-121">オブジェクトがに書き込まれるたびに、 <xref:System.Threading.Channels.ChannelWriter%601> オブジェクトは直ちにクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="ada54-121">Whenever an object is written to the <xref:System.Threading.Channels.ChannelWriter%601>, the object is immediately sent to the client.</span></span> <span data-ttu-id="ada54-122">最後に、は、 `ChannelWriter` ストリームが閉じられていることをクライアントに通知するために完了します。</span><span class="sxs-lookup"><span data-stu-id="ada54-122">At the end, the `ChannelWriter` is completed to tell the client the stream is closed.</span></span>
+<span data-ttu-id="6be39-120">次のサンプルは、チャネルを使用してクライアントにデータをストリーミングする方法の基本を示しています。</span><span class="sxs-lookup"><span data-stu-id="6be39-120">The following sample shows the basics of streaming data to the client using Channels.</span></span> <span data-ttu-id="6be39-121">オブジェクトがに書き込まれるたびに、 <xref:System.Threading.Channels.ChannelWriter%601> オブジェクトは直ちにクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="6be39-121">Whenever an object is written to the <xref:System.Threading.Channels.ChannelWriter%601>, the object is immediately sent to the client.</span></span> <span data-ttu-id="6be39-122">最後に、は、 `ChannelWriter` ストリームが閉じられていることをクライアントに通知するために完了します。</span><span class="sxs-lookup"><span data-stu-id="6be39-122">At the end, the `ChannelWriter` is completed to tell the client the stream is closed.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="ada54-123">`ChannelWriter<T>`バックグラウンドスレッドでに書き込み、できるだけ早くを返し `ChannelReader` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-123">Write to the `ChannelWriter<T>` on a background thread and return the `ChannelReader` as soon as possible.</span></span> <span data-ttu-id="ada54-124">が返されるまで、他のハブ呼び出しはブロックされ `ChannelReader` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-124">Other hub invocations are blocked until a `ChannelReader` is returned.</span></span>
+> <span data-ttu-id="6be39-123">`ChannelWriter<T>`バックグラウンドスレッドでに書き込み、できるだけ早くを返し `ChannelReader` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-123">Write to the `ChannelWriter<T>` on a background thread and return the `ChannelReader` as soon as possible.</span></span> <span data-ttu-id="6be39-124">が返されるまで、他のハブ呼び出しはブロックされ `ChannelReader` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-124">Other hub invocations are blocked until a `ChannelReader` is returned.</span></span>
 >
-> <span data-ttu-id="ada54-125">[ `try ... catch` ステートメント](/dotnet/csharp/language-reference/keywords/try-catch)でロジックをラップします。</span><span class="sxs-lookup"><span data-stu-id="ada54-125">Wrap logic in a [`try ... catch` statement](/dotnet/csharp/language-reference/keywords/try-catch).</span></span> <span data-ttu-id="ada54-126">`Channel` [ `finally` ブロック](/dotnet/csharp/language-reference/keywords/try-catch-finally)内のを完了します。</span><span class="sxs-lookup"><span data-stu-id="ada54-126">Complete the `Channel` in a [`finally` block](/dotnet/csharp/language-reference/keywords/try-catch-finally).</span></span> <span data-ttu-id="ada54-127">エラーをフローさせる場合は、ブロック内でキャプチャ `catch` し、ブロックに書き込み `finally` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-127">If you want to flow an error, capture it inside the `catch` block and write it in the `finally` block.</span></span>
+> <span data-ttu-id="6be39-125">[ `try ... catch` ステートメント](/dotnet/csharp/language-reference/keywords/try-catch)でロジックをラップします。</span><span class="sxs-lookup"><span data-stu-id="6be39-125">Wrap logic in a [`try ... catch` statement](/dotnet/csharp/language-reference/keywords/try-catch).</span></span> <span data-ttu-id="6be39-126">`Channel` [ `finally` ブロック](/dotnet/csharp/language-reference/keywords/try-catch-finally)内のを完了します。</span><span class="sxs-lookup"><span data-stu-id="6be39-126">Complete the `Channel` in a [`finally` block](/dotnet/csharp/language-reference/keywords/try-catch-finally).</span></span> <span data-ttu-id="6be39-127">エラーをフローさせる場合は、ブロック内でキャプチャ `catch` し、ブロックに書き込み `finally` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-127">If you want to flow an error, capture it inside the `catch` block and write it in the `finally` block.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -96,19 +97,19 @@ ms.locfileid: "92690641"
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="ada54-128">サーバーからクライアントへのストリーミングハブメソッドは、 `CancellationToken` クライアントがストリームからアンサブスクライブしたときにトリガーされるパラメーターを受け取ることができます。</span><span class="sxs-lookup"><span data-stu-id="ada54-128">Server-to-client streaming hub methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="ada54-129">ストリームの終了前にクライアントが切断された場合は、このトークンを使用してサーバー操作を停止し、リソースを解放します。</span><span class="sxs-lookup"><span data-stu-id="ada54-129">Use this token to stop the server operation and release any resources if the client disconnects before the end of the stream.</span></span>
+<span data-ttu-id="6be39-128">サーバーからクライアントへのストリーミングハブメソッドは、 `CancellationToken` クライアントがストリームからアンサブスクライブしたときにトリガーされるパラメーターを受け取ることができます。</span><span class="sxs-lookup"><span data-stu-id="6be39-128">Server-to-client streaming hub methods can accept a `CancellationToken` parameter that's triggered when the client unsubscribes from the stream.</span></span> <span data-ttu-id="6be39-129">ストリームの終了前にクライアントが切断された場合は、このトークンを使用してサーバー操作を停止し、リソースを解放します。</span><span class="sxs-lookup"><span data-stu-id="6be39-129">Use this token to stop the server operation and release any resources if the client disconnects before the end of the stream.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a><span data-ttu-id="ada54-130">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-130">Client-to-server streaming</span></span>
+### <a name="client-to-server-streaming"></a><span data-ttu-id="6be39-130">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-130">Client-to-server streaming</span></span>
 
-<span data-ttu-id="ada54-131">ハブメソッドは、型または型の1つ以上のオブジェクトを受け入れると、クライアントとサーバー間のストリーミングハブメソッドに自動的になり <xref:System.Threading.Channels.ChannelReader%601> <xref:System.Collections.Generic.IAsyncEnumerable%601> ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-131">A hub method automatically becomes a client-to-server streaming hub method when it accepts one or more objects of type <xref:System.Threading.Channels.ChannelReader%601> or <xref:System.Collections.Generic.IAsyncEnumerable%601>.</span></span> <span data-ttu-id="ada54-132">次のサンプルは、クライアントから送信されたストリーミングデータの読み取りの基本を示しています。</span><span class="sxs-lookup"><span data-stu-id="ada54-132">The following sample shows the basics of reading streaming data sent from the client.</span></span> <span data-ttu-id="ada54-133">クライアントがに書き込むたびに、 <xref:System.Threading.Channels.ChannelWriter%601> データは `ChannelReader` ハブメソッドの読み取り元のサーバー上のに書き込まれます。</span><span class="sxs-lookup"><span data-stu-id="ada54-133">Whenever the client writes to the <xref:System.Threading.Channels.ChannelWriter%601>, the data is written into the `ChannelReader` on the server from which the hub method is reading.</span></span>
+<span data-ttu-id="6be39-131">ハブメソッドは、型または型の1つ以上のオブジェクトを受け入れると、クライアントとサーバー間のストリーミングハブメソッドに自動的になり <xref:System.Threading.Channels.ChannelReader%601> <xref:System.Collections.Generic.IAsyncEnumerable%601> ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-131">A hub method automatically becomes a client-to-server streaming hub method when it accepts one or more objects of type <xref:System.Threading.Channels.ChannelReader%601> or <xref:System.Collections.Generic.IAsyncEnumerable%601>.</span></span> <span data-ttu-id="6be39-132">次のサンプルは、クライアントから送信されたストリーミングデータの読み取りの基本を示しています。</span><span class="sxs-lookup"><span data-stu-id="6be39-132">The following sample shows the basics of reading streaming data sent from the client.</span></span> <span data-ttu-id="6be39-133">クライアントがに書き込むたびに、 <xref:System.Threading.Channels.ChannelWriter%601> データは `ChannelReader` ハブメソッドの読み取り元のサーバー上のに書き込まれます。</span><span class="sxs-lookup"><span data-stu-id="6be39-133">Whenever the client writes to the <xref:System.Threading.Channels.ChannelWriter%601>, the data is written into the `ChannelReader` on the server from which the hub method is reading.</span></span>
 
 [!code-csharp[Streaming upload hub method](streaming/samples/3.0/Hubs/StreamHub.cs?name=snippet2)]
 
-<span data-ttu-id="ada54-134"><xref:System.Collections.Generic.IAsyncEnumerable%601>メソッドのバージョンは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="ada54-134">An <xref:System.Collections.Generic.IAsyncEnumerable%601> version of the method follows.</span></span>
+<span data-ttu-id="6be39-134"><xref:System.Collections.Generic.IAsyncEnumerable%601>メソッドのバージョンは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="6be39-134">An <xref:System.Collections.Generic.IAsyncEnumerable%601> version of the method follows.</span></span>
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -124,16 +125,16 @@ public async Task UploadStream(IAsyncEnumerable<string> stream)
 
 ::: moniker-end
 
-## <a name="net-client"></a><span data-ttu-id="ada54-135">.NET クライアント</span><span class="sxs-lookup"><span data-stu-id="ada54-135">.NET client</span></span>
+## <a name="net-client"></a><span data-ttu-id="6be39-135">.NET クライアント</span><span class="sxs-lookup"><span data-stu-id="6be39-135">.NET client</span></span>
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="ada54-136">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-136">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="6be39-136">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-136">Server-to-client streaming</span></span>
 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ada54-137">`StreamAsync` `StreamAsChannelAsync` のメソッドとメソッド `HubConnection` は、サーバーからクライアントへのストリーミングメソッドを呼び出すために使用されます。</span><span class="sxs-lookup"><span data-stu-id="ada54-137">The `StreamAsync` and `StreamAsChannelAsync` methods on `HubConnection` are used to invoke server-to-client streaming methods.</span></span> <span data-ttu-id="ada54-138">ハブメソッドで定義されているハブメソッド名と引数を `StreamAsync` またはに渡し `StreamAsChannelAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-138">Pass the hub method name and arguments defined in the hub method to `StreamAsync` or `StreamAsChannelAsync`.</span></span> <span data-ttu-id="ada54-139">およびのジェネリックパラメーターは、 `StreamAsync<T>` `StreamAsChannelAsync<T>` ストリーミングメソッドによって返されるオブジェクトの型を指定します。</span><span class="sxs-lookup"><span data-stu-id="ada54-139">The generic parameter on `StreamAsync<T>` and `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="ada54-140">または型の `IAsyncEnumerable<T>` オブジェクト `ChannelReader<T>` がストリーム呼び出しから返され、クライアントのストリームを表します。</span><span class="sxs-lookup"><span data-stu-id="ada54-140">An object of type `IAsyncEnumerable<T>` or `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
+<span data-ttu-id="6be39-137">`StreamAsync` `StreamAsChannelAsync` のメソッドとメソッド `HubConnection` は、サーバーからクライアントへのストリーミングメソッドを呼び出すために使用されます。</span><span class="sxs-lookup"><span data-stu-id="6be39-137">The `StreamAsync` and `StreamAsChannelAsync` methods on `HubConnection` are used to invoke server-to-client streaming methods.</span></span> <span data-ttu-id="6be39-138">ハブメソッドで定義されているハブメソッド名と引数を `StreamAsync` またはに渡し `StreamAsChannelAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-138">Pass the hub method name and arguments defined in the hub method to `StreamAsync` or `StreamAsChannelAsync`.</span></span> <span data-ttu-id="6be39-139">およびのジェネリックパラメーターは、 `StreamAsync<T>` `StreamAsChannelAsync<T>` ストリーミングメソッドによって返されるオブジェクトの型を指定します。</span><span class="sxs-lookup"><span data-stu-id="6be39-139">The generic parameter on `StreamAsync<T>` and `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="6be39-140">または型の `IAsyncEnumerable<T>` オブジェクト `ChannelReader<T>` がストリーム呼び出しから返され、クライアントのストリームを表します。</span><span class="sxs-lookup"><span data-stu-id="6be39-140">An object of type `IAsyncEnumerable<T>` or `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
 
-<span data-ttu-id="ada54-141">`StreamAsync`を返す例を `IAsyncEnumerable<int>` 次に示します。</span><span class="sxs-lookup"><span data-stu-id="ada54-141">A `StreamAsync` example that returns `IAsyncEnumerable<int>`:</span></span>
+<span data-ttu-id="6be39-141">`StreamAsync`を返す例を `IAsyncEnumerable<int>` 次に示します。</span><span class="sxs-lookup"><span data-stu-id="6be39-141">A `StreamAsync` example that returns `IAsyncEnumerable<int>`:</span></span>
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -150,7 +151,7 @@ await foreach (var count in stream)
 Console.WriteLine("Streaming completed");
 ```
 
-<span data-ttu-id="ada54-142">`StreamAsChannelAsync`を返す対応する例を `ChannelReader<int>` 次に示します。</span><span class="sxs-lookup"><span data-stu-id="ada54-142">A corresponding `StreamAsChannelAsync` example that returns `ChannelReader<int>`:</span></span>
+<span data-ttu-id="6be39-142">`StreamAsChannelAsync`を返す対応する例を `ChannelReader<int>` 次に示します。</span><span class="sxs-lookup"><span data-stu-id="6be39-142">A corresponding `StreamAsChannelAsync` example that returns `ChannelReader<int>`:</span></span>
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -176,7 +177,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="ada54-143">`StreamAsChannelAsync`のメソッドは、 `HubConnection` サーバーからクライアントへのストリーミングメソッドを呼び出すために使用されます。</span><span class="sxs-lookup"><span data-stu-id="ada54-143">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="ada54-144">ハブメソッドで定義されているハブメソッド名と引数をに渡し `StreamAsChannelAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-144">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="ada54-145">のジェネリックパラメーターは、 `StreamAsChannelAsync<T>` ストリーミングメソッドによって返されるオブジェクトの型を指定します。</span><span class="sxs-lookup"><span data-stu-id="ada54-145">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="ada54-146">は `ChannelReader<T>` ストリーム呼び出しから返され、クライアントのストリームを表します。</span><span class="sxs-lookup"><span data-stu-id="ada54-146">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
+<span data-ttu-id="6be39-143">`StreamAsChannelAsync`のメソッドは、 `HubConnection` サーバーからクライアントへのストリーミングメソッドを呼び出すために使用されます。</span><span class="sxs-lookup"><span data-stu-id="6be39-143">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="6be39-144">ハブメソッドで定義されているハブメソッド名と引数をに渡し `StreamAsChannelAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-144">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="6be39-145">のジェネリックパラメーターは、 `StreamAsChannelAsync<T>` ストリーミングメソッドによって返されるオブジェクトの型を指定します。</span><span class="sxs-lookup"><span data-stu-id="6be39-145">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="6be39-146">は `ChannelReader<T>` ストリーム呼び出しから返され、クライアントのストリームを表します。</span><span class="sxs-lookup"><span data-stu-id="6be39-146">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -202,7 +203,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range="= aspnetcore-2.1"
 
-<span data-ttu-id="ada54-147">`StreamAsChannelAsync`のメソッドは、 `HubConnection` サーバーからクライアントへのストリーミングメソッドを呼び出すために使用されます。</span><span class="sxs-lookup"><span data-stu-id="ada54-147">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="ada54-148">ハブメソッドで定義されているハブメソッド名と引数をに渡し `StreamAsChannelAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-148">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="ada54-149">のジェネリックパラメーターは、 `StreamAsChannelAsync<T>` ストリーミングメソッドによって返されるオブジェクトの型を指定します。</span><span class="sxs-lookup"><span data-stu-id="ada54-149">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="ada54-150">は `ChannelReader<T>` ストリーム呼び出しから返され、クライアントのストリームを表します。</span><span class="sxs-lookup"><span data-stu-id="ada54-150">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
+<span data-ttu-id="6be39-147">`StreamAsChannelAsync`のメソッドは、 `HubConnection` サーバーからクライアントへのストリーミングメソッドを呼び出すために使用されます。</span><span class="sxs-lookup"><span data-stu-id="6be39-147">The `StreamAsChannelAsync` method on `HubConnection` is used to invoke a server-to-client streaming method.</span></span> <span data-ttu-id="6be39-148">ハブメソッドで定義されているハブメソッド名と引数をに渡し `StreamAsChannelAsync` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-148">Pass the hub method name and arguments defined in the hub method to `StreamAsChannelAsync`.</span></span> <span data-ttu-id="6be39-149">のジェネリックパラメーターは、 `StreamAsChannelAsync<T>` ストリーミングメソッドによって返されるオブジェクトの型を指定します。</span><span class="sxs-lookup"><span data-stu-id="6be39-149">The generic parameter on `StreamAsChannelAsync<T>` specifies the type of objects returned by the streaming method.</span></span> <span data-ttu-id="6be39-150">は `ChannelReader<T>` ストリーム呼び出しから返され、クライアントのストリームを表します。</span><span class="sxs-lookup"><span data-stu-id="6be39-150">A `ChannelReader<T>` is returned from the stream invocation and represents the stream on the client.</span></span>
 
 ```csharp
 var channel = await hubConnection
@@ -225,13 +226,13 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a><span data-ttu-id="ada54-151">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-151">Client-to-server streaming</span></span>
+### <a name="client-to-server-streaming"></a><span data-ttu-id="6be39-151">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-151">Client-to-server streaming</span></span>
 
-<span data-ttu-id="ada54-152">.NET クライアントからクライアントとサーバー間のストリーミングハブメソッドを呼び出すには、2つの方法があります。</span><span class="sxs-lookup"><span data-stu-id="ada54-152">There are two ways to invoke a client-to-server streaming hub method from the .NET client.</span></span> <span data-ttu-id="ada54-153">`IAsyncEnumerable<T>` `ChannelReader` `SendAsync` `InvokeAsync` `StreamAsChannelAsync` 呼び出されたハブメソッドに応じて、またはを引数として、、またはに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="ada54-153">You can either pass in an `IAsyncEnumerable<T>` or a `ChannelReader` as an argument to `SendAsync`, `InvokeAsync`, or `StreamAsChannelAsync`, depending on the hub method invoked.</span></span>
+<span data-ttu-id="6be39-152">.NET クライアントからクライアントとサーバー間のストリーミングハブメソッドを呼び出すには、2つの方法があります。</span><span class="sxs-lookup"><span data-stu-id="6be39-152">There are two ways to invoke a client-to-server streaming hub method from the .NET client.</span></span> <span data-ttu-id="6be39-153">`IAsyncEnumerable<T>` `ChannelReader` `SendAsync` `InvokeAsync` `StreamAsChannelAsync` 呼び出されたハブメソッドに応じて、またはを引数として、、またはに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="6be39-153">You can either pass in an `IAsyncEnumerable<T>` or a `ChannelReader` as an argument to `SendAsync`, `InvokeAsync`, or `StreamAsChannelAsync`, depending on the hub method invoked.</span></span>
 
-<span data-ttu-id="ada54-154">オブジェクトまたはオブジェクトにデータが書き込まれるたびに `IAsyncEnumerable` `ChannelWriter` 、サーバーのハブメソッドは、クライアントからのデータを使用して新しい項目を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="ada54-154">Whenever data is written to the `IAsyncEnumerable` or `ChannelWriter` object, the hub method on the server receives a new item with the data from the client.</span></span>
+<span data-ttu-id="6be39-154">オブジェクトまたはオブジェクトにデータが書き込まれるたびに `IAsyncEnumerable` `ChannelWriter` 、サーバーのハブメソッドは、クライアントからのデータを使用して新しい項目を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="6be39-154">Whenever data is written to the `IAsyncEnumerable` or `ChannelWriter` object, the hub method on the server receives a new item with the data from the client.</span></span>
 
-<span data-ttu-id="ada54-155">オブジェクトを使用している場合 `IAsyncEnumerable` 、ストリームは、ストリーム項目を返すメソッドが終了した後に終了します。</span><span class="sxs-lookup"><span data-stu-id="ada54-155">If using an `IAsyncEnumerable` object, the stream ends after the method returning stream items exits.</span></span>
+<span data-ttu-id="6be39-155">オブジェクトを使用している場合 `IAsyncEnumerable` 、ストリームは、ストリーム項目を返すメソッドが終了した後に終了します。</span><span class="sxs-lookup"><span data-stu-id="6be39-155">If using an `IAsyncEnumerable` object, the stream ends after the method returning stream items exits.</span></span>
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -249,7 +250,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-<span data-ttu-id="ada54-156">または、を使用している場合は、 `ChannelWriter` 次のようにチャネルを完成させ `channel.Writer.Complete()` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-156">Or if you're using a `ChannelWriter`, you complete the channel with `channel.Writer.Complete()`:</span></span>
+<span data-ttu-id="6be39-156">または、を使用している場合は、 `ChannelWriter` 次のようにチャネルを完成させ `channel.Writer.Complete()` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-156">Or if you're using a `ChannelWriter`, you complete the channel with `channel.Writer.Complete()`:</span></span>
 
 ```csharp
 var channel = Channel.CreateBounded<string>(10);
@@ -261,22 +262,22 @@ channel.Writer.Complete();
 
 ::: moniker-end
 
-## <a name="javascript-client"></a><span data-ttu-id="ada54-157">JavaScript クライアント</span><span class="sxs-lookup"><span data-stu-id="ada54-157">JavaScript client</span></span>
+## <a name="javascript-client"></a><span data-ttu-id="6be39-157">JavaScript クライアント</span><span class="sxs-lookup"><span data-stu-id="6be39-157">JavaScript client</span></span>
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="ada54-158">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-158">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="6be39-158">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-158">Server-to-client streaming</span></span>
 
-<span data-ttu-id="ada54-159">JavaScript クライアントは、を使用してハブでサーバーからクライアントへのストリーミングメソッドを呼び出し `connection.stream` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-159">JavaScript clients call server-to-client streaming methods on hubs with `connection.stream`.</span></span> <span data-ttu-id="ada54-160">メソッドは、 `stream` 次の2つの引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="ada54-160">The `stream` method accepts two arguments:</span></span>
+<span data-ttu-id="6be39-159">JavaScript クライアントは、を使用してハブでサーバーからクライアントへのストリーミングメソッドを呼び出し `connection.stream` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-159">JavaScript clients call server-to-client streaming methods on hubs with `connection.stream`.</span></span> <span data-ttu-id="6be39-160">メソッドは、 `stream` 次の2つの引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="6be39-160">The `stream` method accepts two arguments:</span></span>
 
-* <span data-ttu-id="ada54-161">ハブメソッドの名前。</span><span class="sxs-lookup"><span data-stu-id="ada54-161">The name of the hub method.</span></span> <span data-ttu-id="ada54-162">次の例では、ハブメソッド名は `Counter` です。</span><span class="sxs-lookup"><span data-stu-id="ada54-162">In the following example, the hub method name is `Counter`.</span></span>
-* <span data-ttu-id="ada54-163">ハブメソッドで定義されている引数。</span><span class="sxs-lookup"><span data-stu-id="ada54-163">Arguments defined in the hub method.</span></span> <span data-ttu-id="ada54-164">次の例では、引数は、受信するストリーム項目数とストリーム項目間の遅延をカウントします。</span><span class="sxs-lookup"><span data-stu-id="ada54-164">In the following example, the arguments are a count for the number of stream items to receive and the delay between stream items.</span></span>
+* <span data-ttu-id="6be39-161">ハブメソッドの名前。</span><span class="sxs-lookup"><span data-stu-id="6be39-161">The name of the hub method.</span></span> <span data-ttu-id="6be39-162">次の例では、ハブメソッド名は `Counter` です。</span><span class="sxs-lookup"><span data-stu-id="6be39-162">In the following example, the hub method name is `Counter`.</span></span>
+* <span data-ttu-id="6be39-163">ハブメソッドで定義されている引数。</span><span class="sxs-lookup"><span data-stu-id="6be39-163">Arguments defined in the hub method.</span></span> <span data-ttu-id="6be39-164">次の例では、引数は、受信するストリーム項目数とストリーム項目間の遅延をカウントします。</span><span class="sxs-lookup"><span data-stu-id="6be39-164">In the following example, the arguments are a count for the number of stream items to receive and the delay between stream items.</span></span>
 
-<span data-ttu-id="ada54-165">`connection.stream``IStreamResult`メソッドを含むを返し `subscribe` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-165">`connection.stream` returns an `IStreamResult`, which contains a `subscribe` method.</span></span> <span data-ttu-id="ada54-166">をに渡し、、、およびの各 `IStreamSubscriber` `subscribe` コールバックを設定して、 `next` `error` `complete` 呼び出しから通知を受信し `stream` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-166">Pass an `IStreamSubscriber` to `subscribe` and set the `next`, `error`, and `complete` callbacks to receive notifications from the `stream` invocation.</span></span>
+<span data-ttu-id="6be39-165">`connection.stream``IStreamResult`メソッドを含むを返し `subscribe` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-165">`connection.stream` returns an `IStreamResult`, which contains a `subscribe` method.</span></span> <span data-ttu-id="6be39-166">をに渡し、、、およびの各 `IStreamSubscriber` `subscribe` コールバックを設定して、 `next` `error` `complete` 呼び出しから通知を受信し `stream` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-166">Pass an `IStreamSubscriber` to `subscribe` and set the `next`, `error`, and `complete` callbacks to receive notifications from the `stream` invocation.</span></span>
 
 ::: moniker range=">= aspnetcore-2.2"
 
 [!code-javascript[Streaming javascript](streaming/samples/2.2/wwwroot/js/stream.js?range=19-36)]
 
-<span data-ttu-id="ada54-167">クライアントからストリームを終了するには、 `dispose` メソッドから返されたに対してメソッドを呼び出し `ISubscription` `subscribe` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-167">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span> <span data-ttu-id="ada54-168">このメソッドを呼び出すと、 `CancellationToken` ハブメソッドのパラメーターがキャンセルされます (指定した場合)。</span><span class="sxs-lookup"><span data-stu-id="ada54-168">Calling this method causes cancellation of the `CancellationToken` parameter of the Hub method, if you provided one.</span></span>
+<span data-ttu-id="6be39-167">クライアントからストリームを終了するには、 `dispose` メソッドから返されたに対してメソッドを呼び出し `ISubscription` `subscribe` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-167">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span> <span data-ttu-id="6be39-168">このメソッドを呼び出すと、 `CancellationToken` ハブメソッドのパラメーターがキャンセルされます (指定した場合)。</span><span class="sxs-lookup"><span data-stu-id="6be39-168">Calling this method causes cancellation of the `CancellationToken` parameter of the Hub method, if you provided one.</span></span>
 
 ::: moniker-end
 
@@ -284,31 +285,31 @@ channel.Writer.Complete();
 
 [!code-javascript[Streaming javascript](streaming/samples/2.1/wwwroot/js/stream.js?range=19-36)]
 
-<span data-ttu-id="ada54-169">クライアントからストリームを終了するには、 `dispose` メソッドから返されたに対してメソッドを呼び出し `ISubscription` `subscribe` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-169">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span>
+<span data-ttu-id="6be39-169">クライアントからストリームを終了するには、 `dispose` メソッドから返されたに対してメソッドを呼び出し `ISubscription` `subscribe` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-169">To end the stream from the client, call the `dispose` method on the `ISubscription` that's returned from the `subscribe` method.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="client-to-server-streaming"></a><span data-ttu-id="ada54-170">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-170">Client-to-server streaming</span></span>
+### <a name="client-to-server-streaming"></a><span data-ttu-id="6be39-170">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-170">Client-to-server streaming</span></span>
 
-<span data-ttu-id="ada54-171">JavaScript クライアントは、 `Subject` `send` `invoke` `stream` 呼び出されたハブメソッドに応じて、を引数として、、またはに渡すことによって、ハブでクライアントからサーバーへのストリーミングメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ada54-171">JavaScript clients call client-to-server streaming methods on hubs by passing in a `Subject` as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span> <span data-ttu-id="ada54-172">は、の `Subject` ように見えるクラスです `Subject` 。</span><span class="sxs-lookup"><span data-stu-id="ada54-172">The `Subject` is a class that looks like a `Subject`.</span></span> <span data-ttu-id="ada54-173">たとえば、RxJS では、そのライブラリの [サブジェクト](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) クラスを使用できます。</span><span class="sxs-lookup"><span data-stu-id="ada54-173">For example in RxJS, you can use the [Subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) class from that library.</span></span>
+<span data-ttu-id="6be39-171">JavaScript クライアントは、 `Subject` `send` `invoke` `stream` 呼び出されたハブメソッドに応じて、を引数として、、またはに渡すことによって、ハブでクライアントからサーバーへのストリーミングメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="6be39-171">JavaScript clients call client-to-server streaming methods on hubs by passing in a `Subject` as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span> <span data-ttu-id="6be39-172">は、の `Subject` ように見えるクラスです `Subject` 。</span><span class="sxs-lookup"><span data-stu-id="6be39-172">The `Subject` is a class that looks like a `Subject`.</span></span> <span data-ttu-id="6be39-173">たとえば、RxJS では、そのライブラリの [サブジェクト](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) クラスを使用できます。</span><span class="sxs-lookup"><span data-stu-id="6be39-173">For example in RxJS, you can use the [Subject](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) class from that library.</span></span>
 
 [!code-javascript[Upload javascript](streaming/samples/3.0/wwwroot/js/stream.js?range=41-51)]
 
-<span data-ttu-id="ada54-174">項目を使用してを呼び出す `subject.next(item)` と、項目がストリームに書き込まれ、ハブメソッドはサーバー上の項目を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="ada54-174">Calling `subject.next(item)` with an item writes the item to the stream, and the hub method receives the item on the server.</span></span>
+<span data-ttu-id="6be39-174">項目を使用してを呼び出す `subject.next(item)` と、項目がストリームに書き込まれ、ハブメソッドはサーバー上の項目を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="6be39-174">Calling `subject.next(item)` with an item writes the item to the stream, and the hub method receives the item on the server.</span></span>
 
-<span data-ttu-id="ada54-175">ストリームを終了するには、を呼び出し `subject.complete()` ます。</span><span class="sxs-lookup"><span data-stu-id="ada54-175">To end the stream, call `subject.complete()`.</span></span>
+<span data-ttu-id="6be39-175">ストリームを終了するには、を呼び出し `subject.complete()` ます。</span><span class="sxs-lookup"><span data-stu-id="6be39-175">To end the stream, call `subject.complete()`.</span></span>
 
-## <a name="java-client"></a><span data-ttu-id="ada54-176">Java クライアント</span><span class="sxs-lookup"><span data-stu-id="ada54-176">Java client</span></span>
+## <a name="java-client"></a><span data-ttu-id="6be39-176">Java クライアント</span><span class="sxs-lookup"><span data-stu-id="6be39-176">Java client</span></span>
 
-### <a name="server-to-client-streaming"></a><span data-ttu-id="ada54-177">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="ada54-177">Server-to-client streaming</span></span>
+### <a name="server-to-client-streaming"></a><span data-ttu-id="6be39-177">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="6be39-177">Server-to-client streaming</span></span>
 
-<span data-ttu-id="ada54-178">Java クライアントは、メソッドを使用して :::no-loc(SignalR)::: `stream` ストリーミングメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="ada54-178">The :::no-loc(SignalR)::: Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="ada54-179">`stream` 3つ以上の引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="ada54-179">`stream` accepts three or more arguments:</span></span>
+<span data-ttu-id="6be39-178">Java クライアントは、メソッドを使用して :::no-loc(SignalR)::: `stream` ストリーミングメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="6be39-178">The :::no-loc(SignalR)::: Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="6be39-179">`stream` 3つ以上の引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="6be39-179">`stream` accepts three or more arguments:</span></span>
 
-* <span data-ttu-id="ada54-180">ストリーム項目の予期される型。</span><span class="sxs-lookup"><span data-stu-id="ada54-180">The expected type of the stream items.</span></span>
-* <span data-ttu-id="ada54-181">ハブメソッドの名前。</span><span class="sxs-lookup"><span data-stu-id="ada54-181">The name of the hub method.</span></span>
-* <span data-ttu-id="ada54-182">ハブメソッドで定義されている引数。</span><span class="sxs-lookup"><span data-stu-id="ada54-182">Arguments defined in the hub method.</span></span>
+* <span data-ttu-id="6be39-180">ストリーム項目の予期される型。</span><span class="sxs-lookup"><span data-stu-id="6be39-180">The expected type of the stream items.</span></span>
+* <span data-ttu-id="6be39-181">ハブメソッドの名前。</span><span class="sxs-lookup"><span data-stu-id="6be39-181">The name of the hub method.</span></span>
+* <span data-ttu-id="6be39-182">ハブメソッドで定義されている引数。</span><span class="sxs-lookup"><span data-stu-id="6be39-182">Arguments defined in the hub method.</span></span>
 
 ```java
 hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
@@ -318,13 +319,13 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
         () -> {/* Define your onCompleted handler here. */});
 ```
 
-<span data-ttu-id="ada54-183">`stream`のメソッドは、 `HubConnection` ストリーム項目の型の観測可能なを返します。</span><span class="sxs-lookup"><span data-stu-id="ada54-183">The `stream` method on `HubConnection` returns an Observable of the stream item type.</span></span> <span data-ttu-id="ada54-184">観測可能な型の `subscribe` メソッドは `onNext` 、、 `onError` および `onCompleted` ハンドラーが定義されている場所です。</span><span class="sxs-lookup"><span data-stu-id="ada54-184">The Observable type's `subscribe` method is where `onNext`, `onError` and `onCompleted` handlers are defined.</span></span>
+<span data-ttu-id="6be39-183">`stream`のメソッドは、 `HubConnection` ストリーム項目の型の観測可能なを返します。</span><span class="sxs-lookup"><span data-stu-id="6be39-183">The `stream` method on `HubConnection` returns an Observable of the stream item type.</span></span> <span data-ttu-id="6be39-184">観測可能な型の `subscribe` メソッドは `onNext` 、、 `onError` および `onCompleted` ハンドラーが定義されている場所です。</span><span class="sxs-lookup"><span data-stu-id="6be39-184">The Observable type's `subscribe` method is where `onNext`, `onError` and `onCompleted` handlers are defined.</span></span>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="ada54-185">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="ada54-185">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="6be39-185">その他の資料</span><span class="sxs-lookup"><span data-stu-id="6be39-185">Additional resources</span></span>
 
-* [<span data-ttu-id="ada54-186">ハブ</span><span class="sxs-lookup"><span data-stu-id="ada54-186">Hubs</span></span>](xref:signalr/hubs)
-* [<span data-ttu-id="ada54-187">.NET クライアント</span><span class="sxs-lookup"><span data-stu-id="ada54-187">.NET client</span></span>](xref:signalr/dotnet-client)
-* [<span data-ttu-id="ada54-188">JavaScript クライアント</span><span class="sxs-lookup"><span data-stu-id="ada54-188">JavaScript client</span></span>](xref:signalr/javascript-client)
-* [<span data-ttu-id="ada54-189">Azure に発行する</span><span class="sxs-lookup"><span data-stu-id="ada54-189">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
+* [<span data-ttu-id="6be39-186">ハブ</span><span class="sxs-lookup"><span data-stu-id="6be39-186">Hubs</span></span>](xref:signalr/hubs)
+* [<span data-ttu-id="6be39-187">.NET クライアント</span><span class="sxs-lookup"><span data-stu-id="6be39-187">.NET client</span></span>](xref:signalr/dotnet-client)
+* [<span data-ttu-id="6be39-188">JavaScript クライアント</span><span class="sxs-lookup"><span data-stu-id="6be39-188">JavaScript client</span></span>](xref:signalr/javascript-client)
+* [<span data-ttu-id="6be39-189">Azure に発行する</span><span class="sxs-lookup"><span data-stu-id="6be39-189">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
