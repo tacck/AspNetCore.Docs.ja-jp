@@ -5,40 +5,41 @@ description: ASP.NET Core データ保護の実装に関するさまざまなト
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/data-protection/implementation/index
-ms.openlocfilehash: f97b9ec40422a2c6cce45b23f166934acc64e2c9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 067f41957cfe06ddfb5a8fd3b0d77b0d17a0ed1b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633696"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051084"
 ---
-# <a name="aspnet-core-data-protection-implementation"></a><span data-ttu-id="ccb81-103">ASP.NET Core データ保護の実装</span><span class="sxs-lookup"><span data-stu-id="ccb81-103">ASP.NET Core Data Protection implementation</span></span>
+# <a name="aspnet-core-data-protection-implementation"></a><span data-ttu-id="cac80-103">ASP.NET Core データ保護の実装</span><span class="sxs-lookup"><span data-stu-id="cac80-103">ASP.NET Core Data Protection implementation</span></span>
 
-* [<span data-ttu-id="ccb81-104">認証された暗号化の詳細</span><span class="sxs-lookup"><span data-stu-id="ccb81-104">Authenticated encryption details</span></span>](xref:security/data-protection/implementation/authenticated-encryption-details)
+* [<span data-ttu-id="cac80-104">認証された暗号化の詳細</span><span class="sxs-lookup"><span data-stu-id="cac80-104">Authenticated encryption details</span></span>](xref:security/data-protection/implementation/authenticated-encryption-details)
 
-* [<span data-ttu-id="ccb81-105">サブキーの派生と認証された暗号化</span><span class="sxs-lookup"><span data-stu-id="ccb81-105">Subkey Derivation and Authenticated Encryption</span></span>](xref:security/data-protection/implementation/subkeyderivation)
+* [<span data-ttu-id="cac80-105">サブキーの派生と認証された暗号化</span><span class="sxs-lookup"><span data-stu-id="cac80-105">Subkey Derivation and Authenticated Encryption</span></span>](xref:security/data-protection/implementation/subkeyderivation)
 
-* [<span data-ttu-id="ccb81-106">コンテキスト ヘッダー</span><span class="sxs-lookup"><span data-stu-id="ccb81-106">Context headers</span></span>](xref:security/data-protection/implementation/context-headers)
+* [<span data-ttu-id="cac80-106">コンテキスト ヘッダー</span><span class="sxs-lookup"><span data-stu-id="cac80-106">Context headers</span></span>](xref:security/data-protection/implementation/context-headers)
 
-* [<span data-ttu-id="ccb81-107">キーの管理</span><span class="sxs-lookup"><span data-stu-id="ccb81-107">Key Management</span></span>](xref:security/data-protection/implementation/key-management)
+* [<span data-ttu-id="cac80-107">キーの管理</span><span class="sxs-lookup"><span data-stu-id="cac80-107">Key Management</span></span>](xref:security/data-protection/implementation/key-management)
 
-* [<span data-ttu-id="ccb81-108">キー ストレージ プロバイダー</span><span class="sxs-lookup"><span data-stu-id="ccb81-108">Key Storage Providers</span></span>](xref:security/data-protection/implementation/key-storage-providers)
+* [<span data-ttu-id="cac80-108">キー ストレージ プロバイダー</span><span class="sxs-lookup"><span data-stu-id="cac80-108">Key Storage Providers</span></span>](xref:security/data-protection/implementation/key-storage-providers)
 
-* [<span data-ttu-id="ccb81-109">保存時のキーの暗号化</span><span class="sxs-lookup"><span data-stu-id="ccb81-109">Key Encryption At Rest</span></span>](xref:security/data-protection/implementation/key-encryption-at-rest)
+* [<span data-ttu-id="cac80-109">保存時のキーの暗号化</span><span class="sxs-lookup"><span data-stu-id="cac80-109">Key Encryption At Rest</span></span>](xref:security/data-protection/implementation/key-encryption-at-rest)
 
-* [<span data-ttu-id="ccb81-110">キーの不変性と設定</span><span class="sxs-lookup"><span data-stu-id="ccb81-110">Key immutability and settings</span></span>](xref:security/data-protection/implementation/key-immutability)
+* [<span data-ttu-id="cac80-110">キーの不変性と設定</span><span class="sxs-lookup"><span data-stu-id="cac80-110">Key immutability and settings</span></span>](xref:security/data-protection/implementation/key-immutability)
 
-* [<span data-ttu-id="ccb81-111">キー ストレージの形式</span><span class="sxs-lookup"><span data-stu-id="ccb81-111">Key Storage Format</span></span>](xref:security/data-protection/implementation/key-storage-format)
+* [<span data-ttu-id="cac80-111">キー ストレージの形式</span><span class="sxs-lookup"><span data-stu-id="cac80-111">Key Storage Format</span></span>](xref:security/data-protection/implementation/key-storage-format)
 
-* [<span data-ttu-id="ccb81-112">短期データ保護プロバイダー</span><span class="sxs-lookup"><span data-stu-id="ccb81-112">Ephemeral data protection providers</span></span>](xref:security/data-protection/implementation/key-storage-ephemeral)
+* [<span data-ttu-id="cac80-112">短期データ保護プロバイダー</span><span class="sxs-lookup"><span data-stu-id="cac80-112">Ephemeral data protection providers</span></span>](xref:security/data-protection/implementation/key-storage-ephemeral)
