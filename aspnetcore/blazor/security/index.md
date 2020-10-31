@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: f198cef0cf990dcc2806d3967130db64af47c1d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6110f51eb5d5ee40d6ce5a5d49ddda3329d1f033
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627833"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055543"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
@@ -36,7 +37,7 @@ Blazor Server アプリと Blazor WebAssembly アプリでは、セキュリテ�
 * ユーザーに表示される UI オプション (たとえば、ユーザーが利用できるメニュー エントリ)。
 * アプリとコンポーネントの領域に対するアクセス規則。
 
-Blazor WebAssembly アプリはクライアント上で実行されます。 承認は、表示する UI オプションを決定するために "*のみ*" 使用されます。 クライアント側のチェックはユーザーによって変更またはバイパスされる可能性があるため、Blazor WebAssembly アプリでは承認アクセス規則を適用できません。
+Blazor WebAssembly アプリはクライアント上で実行されます。 承認は、表示する UI オプションを決定するために " *のみ* " 使用されます。 クライアント側のチェックはユーザーによって変更またはバイパスされる可能性があるため、Blazor WebAssembly アプリでは承認アクセス規則を適用できません。
 
 [Razor Pages の承認規則](xref:security/authorization/razor-pages-authorization)は、ルーティング可能な Razor コンポーネントには適用されません。 ルーティング不可能な Razor コンポーネントが[ページに埋め込まれている](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#render-components-from-a-page-or-view)場合、ページの承認規則は、Razor コンポーネントと、ページのコンテンツの残りの部分に間接的に影響します。
 
@@ -241,20 +242,20 @@ Blazor Server アプリでは、オプションと承認のためのサービス
 
 ## <a name="authorization"></a>承認
 
-ユーザーが認証されると、ユーザーが実行できる操作を制御する "*承認*" 規則が適用されます。
+ユーザーが認証されると、ユーザーが実行できる操作を制御する " *承認* " 規則が適用されます。
 
 通常、アクセスは以下の条件に基づいて許可または拒否されます。
 
 * ユーザーが認証されている (サインインしている)。
-* ユーザーに "*ロール*" が割り当てられている。
-* ユーザーに "*要求*" がある。
-* "*ポリシー*" が満たされている。
+* ユーザーに " *ロール* " が割り当てられている。
+* ユーザーに " *要求* " がある。
+* " *ポリシー* " が満たされている。
 
 これらの各概念は、ASP.NET Core MVC または Razor Pages アプリと同じです。 ASP.NET Core のセキュリティの詳細については、[ASP.NET Core のセキュリティと Identity](xref:security/index) の記事を参照してください。
 
 ## <a name="authorizeview-component"></a>AuthorizeView コンポーネント
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントでは、ユーザーに表示を許可するかどうかに応じて UI が選択的に表示されます。 このアプローチは、ユーザーに対してデータを "*表示する*" だけで済み、手続き型ロジックでユーザーの ID を使用する必要がない場合に便利です。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントでは、ユーザーに表示を許可するかどうかに応じて UI が選択的に表示されます。 このアプローチは、ユーザーに対してデータを " *表示する* " だけで済み、手続き型ロジックでユーザーの ID を使用する必要がない場合に便利です。
 
 このコンポーネントでは、型 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> の `context` 変数が公開されており、これを使用して、サインインしたユーザーに関する情報にアクセスできます。
 
@@ -293,7 +294,7 @@ UI オプションまたはアクセスを制御するロールやポリシー�
 
 ### <a name="role-based-and-policy-based-authorization"></a>ロールベースとリソースベースの承認
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、"*ロールベース*" または "*ポリシーベース*" の承認をサポートしています。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、" *ロールベース* " または " *ポリシーベース* " の承認をサポートしています。
 
 ロールベースの承認の場合は、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> パラメーターを使用します。
 
@@ -321,7 +322,7 @@ UI オプションまたはアクセスを制御するロールやポリシー�
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>非同期認証中に表示されるコンテンツ
 
-Blazor では、認証状態を "*非同期的に*" 決定することができます。 このアプローチの主なシナリオは、認証のために外部エンドポイントに要求を送信する Blazor WebAssembly アプリです。
+Blazor では、認証状態を " *非同期的に* " 決定することができます。 このアプローチの主なシナリオは、認証のために外部エンドポイントに要求を送信する Blazor WebAssembly アプリです。
 
 認証が進行中の間、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> には既定でコンテンツが表示されません。 認証が行われている間にコンテンツを表示するには、`<Authorizing>` タグを使用します。
 
@@ -352,7 +353,7 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> Blazor ルーター経由で到達した `@page` コンポーネントにのみ [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) を使用してください。 承認はルーティングの一面としてのみ実行され、ページ内にレンダリングされた子コンポーネントに対しては実行され "*ません*"。 ページ内の特定部分の表示を承認するには、代わりに <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> を使用します。
+> Blazor ルーター経由で到達した `@page` コンポーネントにのみ [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) を使用してください。 承認はルーティングの一面としてのみ実行され、ページ内にレンダリングされた子コンポーネントに対しては実行され " *ません* "。 ページ内の特定部分の表示を承認するには、代わりに <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> を使用します。
 
 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、ロールベースまたはポリシーベースの承認もサポートしています。 ロールベースの承認の場合は、<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> パラメーターを使用します。
 

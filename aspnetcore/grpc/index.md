@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 4a2f86d906c7b268b1fb2a63c50a1b8f0dd2b154
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 80f44e3845cc1e3c87d5d657807a318eb65e6c6f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633189"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059898"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core の gRPC の概要
 
@@ -105,7 +106,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService` は `GreeterBase` 型を継承します。これは *\*.proto* ファイル内の `Greeter` サービスから生成されます。 サービスは、*Startup.cs* 内でクライアントがアクセスできるようになります。
+`GreeterService` は `GreeterBase` 型を継承します。これは *\*.proto* ファイル内の `Greeter` サービスから生成されます。 サービスは、 *Startup.cs* 内でクライアントがアクセスできるようになります。
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -118,7 +119,7 @@ ASP.NET Core での gRPC サービスについて詳しくは、「<xref:grpc/as
 
 ## <a name="call-grpc-services-with-a-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
-gRPC クライアントは、[ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。
+gRPC クライアントは、 [ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");

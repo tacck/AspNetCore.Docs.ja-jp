@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 51f76bc33d2da6097d26c1ffe17b1c93046a7b88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634372"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052462"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core を使って Web API を作成する
 
 作成者: [Scott Addie](https://github.com/scottaddie)、[Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core では、C# を使った RESTful サービス (別名: Web API) の作成がサポートされています。 要求を処理するために、Web API ではコントローラーを使用します。 Web API の "*コントローラー*" は `ControllerBase` から派生するクラスです。 この記事では、コントローラーを使って Web API 要求を処理する方法について説明します。
+ASP.NET Core では、C# を使った RESTful サービス (別名: Web API) の作成がサポートされています。 要求を処理するために、Web API ではコントローラーを使用します。 Web API の " *コントローラー* " は `ControllerBase` から派生するクラスです。 この記事では、コントローラーを使って Web API 要求を処理する方法について説明します。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples)します。 ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -97,7 +98,7 @@ Web API は、<xref:Microsoft.AspNetCore.Mvc.ControllerBase> から派生した 
 * [マルチパート/フォーム データ要求の推論](#multipartform-data-request-inference)
 * [エラー状態コードに関する問題の詳細](#problem-details-for-error-status-codes)
 
-"*エラー状態コードに関する問題の詳細*" 機能には、[互換性バージョン](xref:mvc/compatibility-version) 2.2 以降が必要です。 その他の機能では、互換性バージョン 2.1 以降が必要です。
+" *エラー状態コードに関する問題の詳細* " 機能には、 [互換性バージョン](xref:mvc/compatibility-version) 2.2 以降が必要です。 その他の機能では、互換性バージョン 2.1 以降が必要です。
 
 ::: moniker-end
 

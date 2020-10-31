@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009623"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056271"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -31,7 +32,7 @@ ms.locfileid: "90009623"
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-Blazor アプリは *コンポーネント*を使用してビルドします。 コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型のチャンクです。 コンポーネントには、データの挿入や UI イベントへの応答に必要な HTML マークアップと、処理ロジックが含まれます。 コンポーネントは、柔軟性があり、軽量です。 それらを入れ子にしたり、再利用したり、プロジェクト間で共有したりできます。
+Blazor アプリは *コンポーネント* を使用してビルドします。 コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型のチャンクです。 コンポーネントには、データの挿入や UI イベントへの応答に必要な HTML マークアップと、処理ロジックが含まれます。 コンポーネントは、柔軟性があり、軽量です。 それらを入れ子にしたり、再利用したり、プロジェクト間で共有したりできます。
 
 ## <a name="component-classes"></a>コンポーネント クラス
 
@@ -253,7 +254,7 @@ namespace BlazorSample
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
-コンポーネントには、*コンポーネント パラメーター*を指定できます。このパラメーターは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
+コンポーネントには、 *コンポーネント パラメーター* を指定できます。このパラメーターは、 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
 
 `Components/ChildComponent.razor`:
 
@@ -266,7 +267,7 @@ namespace BlazorSample
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> 独自の "*コンポーネント パラメーター*" を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[上書きされたパラメーター](#overwritten-parameters)」セクションをご覧ください。
+> 独自の " *コンポーネント パラメーター* " を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[上書きされたパラメーター](#overwritten-parameters)」セクションをご覧ください。
 
 ## <a name="child-content"></a>子コンテンツ
 
@@ -312,7 +313,7 @@ Blazor による子コンテンツのレンダリング方法により、`for` �
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>属性スプラッティングと任意のパラメーター
 
-コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、[`@attributes`][3] Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に "*スプラッティング*" できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
+コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、 [`@attributes`][3] Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に " *スプラッティング* " できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
 
 次の例で、最初の `<input>` 要素 (`id="useIndividualParams"`) では、個々のコンポーネント パラメーターを使用していますが、2 番目の `<input>` 要素 (`id="useAttributesDict"`) では、属性スプラッティングを使用しています。
 
@@ -463,7 +464,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 コンポーネント参照のキャプチャでは、[要素参照のキャプチャ](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)と類似の構文を使用しますが、それは JavaScript 相互運用機能ではありません。 コンポーネント参照は、JavaScript コードに渡されません。 コンポーネント参照は、.NET コードでのみ使用されます。
 
 > [!NOTE]
-> 子コンポーネントの状態を変えるためにコンポーネント参照を使用**しない**でください。 代わりに、通常の宣言型パラメーターを使用して、子コンポーネントにデータを渡します。 通常の宣言型パラメーターを使用すると、子コンポーネントが正しいタイミングで自動的にレンダリングされます。
+> 子コンポーネントの状態を変えるためにコンポーネント参照を使用 **しない** でください。 代わりに、通常の宣言型パラメーターを使用して、子コンポーネントにデータを渡します。 通常の宣言型パラメーターを使用すると、子コンポーネントが正しいタイミングで自動的にレンダリングされます。
 
 ## <a name="synchronization-context"></a>同期コンテキスト
 
@@ -484,7 +485,7 @@ Blazor Server の同期コンテキストでは、ブラウザーの WebAssembly
 
 ### <a name="invoke-component-methods-externally-to-update-state"></a>状態を更新するために外部でコンポーネント メソッドを呼び出す
 
-タイマーやその他の通知などの外部のイベントに基づいてコンポーネントを更新する必要がある場合は、`InvokeAsync` メソッドを使用します。これにより、Blazor の同期コンテキストにディスパッチされます。 たとえば、リッスンしているコンポーネントに、更新状態を通知できる*通知サービス* を考えてみます。
+タイマーやその他の通知などの外部のイベントに基づいてコンポーネントを更新する必要がある場合は、`InvokeAsync` メソッドを使用します。これにより、Blazor の同期コンテキストにディスパッチされます。 たとえば、リッスンしているコンポーネントに、更新状態を通知できる *通知サービス* を考えてみます。
 
 ```csharp
 public class NotifierService
@@ -555,7 +556,7 @@ public class NotifierService
 
 要素またはコンポーネントのリストをレンダリングし、その後に要素またはコンポーネントが変更された場合、Blazor の比較アルゴリズムでは、前のどの要素やコンポーネントを保持できるか、およびモデル オブジェクトをそれらにどのようにマップするかを決定する必要があります。 通常、このプロセスは自動で、無視できますが、プロセスの制御が必要になる場合があります。
 
-次に例を示します。
+次の例を確認してください。
 
 ```csharp
 @foreach (var person in People)
@@ -614,7 +615,7 @@ public class NotifierService
 
 [`@key`][5] で比較すると、パフォーマンスが低下します。 パフォーマンスの低下は大きくありませんが、要素やコンポーネントの保存規則を制御することによって、アプリにメリットがある場合にのみ [`@key`][5] を指定してください。
 
-[`@key`][5] を使用しない場合でも、Blazor では可能な限り、子要素とコンポーネント インスタンスが保持されます。 [`@key`][5] を使用する唯一の利点は、マッピングを選択する比較アルゴリズムではなく、保持されているコンポーネント インスタンスにモデル インスタンスをマップする "*方法*" を制御することです。
+[`@key`][5] を使用しない場合でも、Blazor では可能な限り、子要素とコンポーネント インスタンスが保持されます。 [`@key`][5] を使用する唯一の利点は、マッピングを選択する比較アルゴリズムではなく、保持されているコンポーネント インスタンスにモデル インスタンスをマップする " *方法* " を制御することです。
 
 ### <a name="what-values-to-use-for-key"></a>\@ キーに使用する値
 
@@ -678,12 +679,12 @@ public class NotifierService
 
 初期状態では、`Expanded` プロパティが切り替えられると、`Expander` コンポーネントはそれぞれ独立して動作します。 子コンポーネントの状態は、想定どおりのままです。 親で <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されると、最初の子コンポーネントの `Expanded` パラメーターが初期値 (`true`) にリセットされます。 2 つめの `Expander` コンポーネントの `Expanded` 値はリセットされません。これは、2 つめのコンポーネントでは子コンテンツがレンダリングされないためです。
 
-前のシナリオでの状態を維持するには、`Expander` コンポーネントで "*プライベート フィールド*" を使用して、切り替え状態を維持します。
+前のシナリオでの状態を維持するには、`Expander` コンポーネントで " *プライベート フィールド* " を使用して、切り替え状態を維持します。
 
 次の変更された `Expander` コンポーネント:
 
 * 親から `Expanded` コンポーネント パラメーター値を受け入れます。
-* コンポーネント パラメーター値を、[OnInitialized イベント](xref:blazor/components/lifecycle#component-initialization-methods) の "*プライベート フィールド*" (`expanded`) に割り当てます。
+* コンポーネント パラメーター値を、 [OnInitialized イベント](xref:blazor/components/lifecycle#component-initialization-methods) の " *プライベート フィールド* " (`expanded`) に割り当てます。
 * プライベート フィールドを使用して、内部のトグル状態を維持します。
 
 ```razor
@@ -765,7 +766,7 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 通常、文字列は DOM テキスト ノードを使用してレンダリングされます。つまり、それらに含まれている可能性のあるすべてのマークアップが無視され、リテラル テキストとして扱われます。 生 HTML をレンダリングするには、HTML コンテンツを `MarkupString` 値にラップします。 値は HTML または SVG として解析され、DOM に挿入されます。
 
 > [!WARNING]
-> 信頼されていないソースから構築された生 HTML をレンダリングすることは、**セキュリティ リスク**であるため、避ける必要があります。
+> 信頼されていないソースから構築された生 HTML をレンダリングすることは、 **セキュリティ リスク** であるため、避ける必要があります。
 
 次の例では、`MarkupString` 型を使用して、コンポーネントのレンダリングされた出力に静的 HTML コンテンツのブロックを追加しています。
 
@@ -822,7 +823,7 @@ Blazor は、プロジェクトの [`web root (wwwroot)` フォルダー](xref:f
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) はサポートされて**いません**。
+Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) はサポートされて **いません** 。
 
 アプリのベース パスの設定の詳細については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。
 

@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 03/27/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/index
-ms.openlocfilehash: 0accf0f7f4c64334d2fd8e6b1edce3316f3b0ab2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d66cd7737b167db274bdb5e252e763190a46743b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629159"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054191"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC と EF Core - チュートリアル シリーズ
 
 ::: moniker range=">= aspnetcore-3.0"
 
-このチュートリアルは ASP.NET Core 3.0 に更新されて**いません**。 [Razor Pages のバージョン](xref:data/ef-rp/intro)は更新されています。 この情報がいつ更新されるかについては、[こちらの GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/13920)を参照してください。
+このチュートリアルは ASP.NET Core 3.0 に更新されて **いません** 。 [Razor Pages のバージョン](xref:data/ef-rp/intro)は更新されています。 この情報がいつ更新されるかについては、[こちらの GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/13920)を参照してください。
 
 ::: moniker-end
 

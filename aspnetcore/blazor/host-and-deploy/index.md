@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 7bde61b0ff1d122b449ccc9d7ea9629fc8fb6108
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 082072d2b70abfe60da8e2cd40daa8b93ebcc9ac
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628093"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055816"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor のホストと展開
 
@@ -67,7 +68,7 @@ dotnet publish -c Release
 
 ## <a name="app-base-path"></a>アプリのベース パス
 
-*アプリのベース パス*とは、アプリのルート URL パスのことです。 次の ASP.NET Core アプリと Blazor サブアプリについて考えてみましょう。
+*アプリのベース パス* とは、アプリのルート URL パスのことです。 次の ASP.NET Core アプリと Blazor サブアプリについて考えてみましょう。
 
 * ASP.NET Core アプリは `MyApp` と命名します。
   * このアプリは、物理的に `d:/MyApp` に存在します。
@@ -96,7 +97,7 @@ app.UsePathBase("/CoolApp");
 
 アプリのベース パスを設定するには、`Pages/_Host.cshtml` ファイル (Blazor Server) または `wwwroot/index.html` ファイル (Blazor WebAssembly) の `<head>` タグ要素内の `<base>` タグを更新します。 `href` 属性値を `/{RELATIVE URL PATH}/` (末尾にスラッシュが必要) に設定します。ここで、`{RELATIVE URL PATH}` は、アプリの完全な相対 URL パスです。
 
-ルート以外の相対 URL パスが構成されている Blazor WebAssembly アプリの場合 (例: `<base href="/CoolApp/">`)、そのアプリは "*ローカルで実行されると*" 自身のリソースを見つけることができません。 ローカルでの開発およびテスト中は、実行時の `<base>` タグの `href` 値と一致する*パス ベース*引数を指定することで、この問題を克服することができます。 末尾にはスラッシュを含めないでください。 アプリをローカルで実行しているときにパス ベースの引数を渡すには、アプリのディレクトリから `--pathbase` オプションを指定して `dotnet run` コマンドを実行します。
+ルート以外の相対 URL パスが構成されている Blazor WebAssembly アプリの場合 (例: `<base href="/CoolApp/">`)、そのアプリは " *ローカルで実行されると* " 自身のリソースを見つけることができません。 ローカルでの開発およびテスト中は、実行時の `<base>` タグの `href` 値と一致する *パス ベース* 引数を指定することで、この問題を克服することができます。 末尾にはスラッシュを含めないでください。 アプリをローカルで実行しているときにパス ベースの引数を渡すには、アプリのディレクトリから `--pathbase` オプションを指定して `dotnet run` コマンドを実行します。
 
 ```dotnetcli
 dotnet run --pathbase=/{RELATIVE URL PATH (no trailing slash)}

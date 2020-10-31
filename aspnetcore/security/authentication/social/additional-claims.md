@@ -5,7 +5,7 @@ description: 外部プロバイダーから追加の要求とトークンを確�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 10/30/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 733afec8d3253ec58a7edf6d7fcf35e303a7fe57
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4503291ff887f79b1ad6eacd4e56943ce23335bc
+ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060327"
+ms.lasthandoff: 10/31/2020
+ms.locfileid: "93141509"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>ASP.NET Core で外部プロバイダーからの追加の要求とトークンを保持する
 
@@ -60,11 +60,11 @@ OAuth 認証プロバイダーは、クライアント ID とクライアント�
 | プロバイダー  | スコープ                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
-| Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
+| Google    | `profile`, `email`, `openid`                                     |
 | Microsoft | `https://login.microsoftonline.com/common/oauth2/v2.0/authorize` |
 | Twitter   | `https://api.twitter.com/oauth/authenticate`                     |
 
-サンプルアプリで `userinfo.profile` <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*> は、がで呼び出されたときに、Google のスコープがフレームワークによって自動的に追加され <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder> ます。 アプリに追加のスコープが必要な場合は、それらをオプションに追加します。 次の例で `https://www.googleapis.com/auth/user.birthday.read` は、ユーザーの誕生日を取得するために Google スコープが追加されています。
+サンプルアプリで `profile` は、がで呼び出されると、Google の、、の各 `email` `openid` スコープがフレームワークによって自動的に追加され <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle%2A> <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder> ます。 アプリに追加のスコープが必要な場合は、それらをオプションに追加します。 次の例で `https://www.googleapis.com/auth/user.birthday.read` は、ユーザーの誕生日を取得するために Google スコープが追加されています。
 
 ```csharp
 options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
