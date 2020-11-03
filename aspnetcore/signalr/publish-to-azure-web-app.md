@@ -5,7 +5,7 @@ description: ASP.NET Core アプリを Azure App Service に発行する方法�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/02/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: e00eea81788c9b335691b7e5ffe6a46534c3c492
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8e6d36fe0b38486f94078b8f9cf12b852da7e0d9
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058221"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234512"
 ---
 # <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalRAzure App Service に ASP.NET Core アプリを発行する
 
@@ -47,14 +47,14 @@ ms.locfileid: "93058221"
 
    [ **App Service の作成** ] ダイアログで、次の表に記載されている情報を入力し、[ **作成** ] を選択します。
 
-   | アイテム               | 説明 |
+   | 項目               | 説明 |
    | ------------------ | ----------- |
    | **名前**           | アプリの一意の名前。 |
    | **サブスクリプション**   | アプリが使用する Azure サブスクリプション。 |
    | **リソース グループ** | アプリが所属する関連リソースのグループ。 |
    | **ホスティング プラン**   | Web アプリの料金プラン。 |
 
-1. [ **依存関係** の追加] ドロップダウンリストで **Azure SignalR サービス** を選択し  >  **Add** ます。
+1. [ **サービスの依存関係** ] セクションで [ **Azure SignalR サービス** ] を選択します。 [] ボタンを選択し **+** ます。
 
    ![[追加] ドロップダウンリストに表示されている Azure::: no-loc (SignalR)::: Service の選択を示す [依存関係] 領域](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
@@ -94,7 +94,7 @@ Azure サービスを使用せずにホストされるアプリの場合は Sign
 
 Web ソケットとその他のトランスポートは、選択した App Service プランに基づいて制限されます。 詳細については、azure [サブスクリプションとサービスの制限、クォータ、制約](/azure/azure-subscription-service-limits#app-service-limits)に関する記事の *azure Cloud Services の制限* と *App Service の制限事項* に関するセクションを参照してください。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [Azure SignalR Service とは](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>
