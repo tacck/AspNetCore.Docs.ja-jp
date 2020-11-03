@@ -5,41 +5,42 @@ description: 既存の ASP.NET MVC または Web API アプリを ASP.NET Core.w
 ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: f1a5af60f8dce83d9622ed9d2c6bcb4b8fc22b73
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 059ddc18d0c531efaba8aab916ddbb27b42b5e2c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712494"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053554"
 ---
-# <a name="migrate-from-aspnet-to-aspnet-core"></a><span data-ttu-id="37cfe-103">ASP.NET から ASP.NET Core への移行</span><span class="sxs-lookup"><span data-stu-id="37cfe-103">Migrate from ASP.NET to ASP.NET Core</span></span>
+# <a name="migrate-from-aspnet-to-aspnet-core"></a><span data-ttu-id="caea5-103">ASP.NET から ASP.NET Core への移行</span><span class="sxs-lookup"><span data-stu-id="caea5-103">Migrate from ASP.NET to ASP.NET Core</span></span>
 
-<span data-ttu-id="37cfe-104">著者: [Isaac Levin](https://isaaclevin.com)</span><span class="sxs-lookup"><span data-stu-id="37cfe-104">By [Isaac Levin](https://isaaclevin.com)</span></span>
+<span data-ttu-id="caea5-104">著者: [Isaac Levin](https://isaaclevin.com)</span><span class="sxs-lookup"><span data-stu-id="caea5-104">By [Isaac Levin](https://isaaclevin.com)</span></span>
 
-<span data-ttu-id="37cfe-105">この記事は、ASP.NET アプリを ASP.NET Core に移行するための参考ガイドです。</span><span class="sxs-lookup"><span data-stu-id="37cfe-105">This article serves as a reference guide for migrating ASP.NET apps to ASP.NET Core.</span></span>
+<span data-ttu-id="caea5-105">この記事は、ASP.NET アプリを ASP.NET Core に移行するための参考ガイドです。</span><span class="sxs-lookup"><span data-stu-id="caea5-105">This article serves as a reference guide for migrating ASP.NET apps to ASP.NET Core.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="37cfe-106">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="37cfe-106">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="caea5-106">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="caea5-106">Prerequisites</span></span>
 
-[<span data-ttu-id="37cfe-107">.NET Core SDK 2.2 以降</span><span class="sxs-lookup"><span data-stu-id="37cfe-107">.NET Core SDK 2.2 or later</span></span>](https://dotnet.microsoft.com/download)
+[<span data-ttu-id="caea5-107">.NET Core SDK 2.2 以降</span><span class="sxs-lookup"><span data-stu-id="caea5-107">.NET Core SDK 2.2 or later</span></span>](https://dotnet.microsoft.com/download)
 
-## <a name="target-frameworks"></a><span data-ttu-id="37cfe-108">ターゲット フレームワーク</span><span class="sxs-lookup"><span data-stu-id="37cfe-108">Target frameworks</span></span>
+## <a name="target-frameworks"></a><span data-ttu-id="caea5-108">ターゲット フレームワーク</span><span class="sxs-lookup"><span data-stu-id="caea5-108">Target frameworks</span></span>
 
-<span data-ttu-id="37cfe-109">ASP.NET Core プロジェクトを使うと、開発者は、.NET Core と .NET Framework のどちらか一方または両方を対象にして柔軟に開発できます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-109">ASP.NET Core projects offer developers the flexibility of targeting .NET Core, .NET Framework, or both.</span></span> <span data-ttu-id="37cfe-110">最も適切なターゲット フレームワークの決定については、「[サーバー アプリ用 .NET Core と .NET Framework の選択](/dotnet/standard/choosing-core-framework-server)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="37cfe-110">See [Choosing between .NET Core and .NET Framework for server apps](/dotnet/standard/choosing-core-framework-server) to determine which target framework is most appropriate.</span></span>
+<span data-ttu-id="caea5-109">ASP.NET Core プロジェクトを使うと、開発者は、.NET Core と .NET Framework のどちらか一方または両方を対象にして柔軟に開発できます。</span><span class="sxs-lookup"><span data-stu-id="caea5-109">ASP.NET Core projects offer developers the flexibility of targeting .NET Core, .NET Framework, or both.</span></span> <span data-ttu-id="caea5-110">最も適切なターゲット フレームワークの決定については、「[サーバー アプリ用 .NET Core と .NET Framework の選択](/dotnet/standard/choosing-core-framework-server)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="caea5-110">See [Choosing between .NET Core and .NET Framework for server apps](/dotnet/standard/choosing-core-framework-server) to determine which target framework is most appropriate.</span></span>
 
-<span data-ttu-id="37cfe-111">.NET Framework を対象にする場合は、プロジェクトで個々の NuGet パッケージを参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="37cfe-111">When targeting .NET Framework, projects need to reference individual NuGet packages.</span></span>
+<span data-ttu-id="caea5-111">.NET Framework を対象にする場合は、プロジェクトで個々の NuGet パッケージを参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="caea5-111">When targeting .NET Framework, projects need to reference individual NuGet packages.</span></span>
 
-<span data-ttu-id="37cfe-112">.NET Core を対象にすると、ASP.NET Core [メタパッケージ](xref:fundamentals/metapackage-app)のおかげで、さまざまな明示的パッケージ参照をしなくて済みます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-112">Targeting .NET Core allows you to eliminate numerous explicit package references, thanks to the ASP.NET Core [metapackage](xref:fundamentals/metapackage-app).</span></span> <span data-ttu-id="37cfe-113">`Microsoft.AspNetCore.App` メタパッケージをプロジェクトにインストールします。</span><span class="sxs-lookup"><span data-stu-id="37cfe-113">Install the `Microsoft.AspNetCore.App` metapackage in your project:</span></span>
+<span data-ttu-id="caea5-112">.NET Core を対象にすると、ASP.NET Core [メタパッケージ](xref:fundamentals/metapackage-app)のおかげで、さまざまな明示的パッケージ参照をしなくて済みます。</span><span class="sxs-lookup"><span data-stu-id="caea5-112">Targeting .NET Core allows you to eliminate numerous explicit package references, thanks to the ASP.NET Core [metapackage](xref:fundamentals/metapackage-app).</span></span> <span data-ttu-id="caea5-113">`Microsoft.AspNetCore.App` メタパッケージをプロジェクトにインストールします。</span><span class="sxs-lookup"><span data-stu-id="caea5-113">Install the `Microsoft.AspNetCore.App` metapackage in your project:</span></span>
 
 ```xml
 <ItemGroup>
@@ -47,71 +48,71 @@ ms.locfileid: "88712494"
 </ItemGroup>
 ```
 
-<span data-ttu-id="37cfe-114">メタパッケージを使うと、メタパッケージ内で参照されているパッケージはアプリでは展開されません。</span><span class="sxs-lookup"><span data-stu-id="37cfe-114">When the metapackage is used, no packages referenced in the metapackage are deployed with the app.</span></span> <span data-ttu-id="37cfe-115">.NET Core ランタイム ストアにはこれらのアセットが含まれており、パフォーマンス向上のためにプリコンパイルされています。</span><span class="sxs-lookup"><span data-stu-id="37cfe-115">The .NET Core Runtime Store includes these assets, and they're precompiled to improve performance.</span></span> <span data-ttu-id="37cfe-116">詳細については、[ASP.NET Core 用の Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)に関する記事を参照してください。</span><span class="sxs-lookup"><span data-stu-id="37cfe-116">See [Microsoft.AspNetCore.App metapackage for ASP.NET Core](xref:fundamentals/metapackage-app) for more detail.</span></span>
+<span data-ttu-id="caea5-114">メタパッケージを使うと、メタパッケージ内で参照されているパッケージはアプリでは展開されません。</span><span class="sxs-lookup"><span data-stu-id="caea5-114">When the metapackage is used, no packages referenced in the metapackage are deployed with the app.</span></span> <span data-ttu-id="caea5-115">.NET Core ランタイム ストアにはこれらのアセットが含まれており、パフォーマンス向上のためにプリコンパイルされています。</span><span class="sxs-lookup"><span data-stu-id="caea5-115">The .NET Core Runtime Store includes these assets, and they're precompiled to improve performance.</span></span> <span data-ttu-id="caea5-116">詳細については、[ASP.NET Core 用の Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)に関する記事を参照してください。</span><span class="sxs-lookup"><span data-stu-id="caea5-116">See [Microsoft.AspNetCore.App metapackage for ASP.NET Core](xref:fundamentals/metapackage-app) for more detail.</span></span>
 
-## <a name="project-structure-differences"></a><span data-ttu-id="37cfe-117">プロジェクトの構造の違い</span><span class="sxs-lookup"><span data-stu-id="37cfe-117">Project structure differences</span></span>
+## <a name="project-structure-differences"></a><span data-ttu-id="caea5-117">プロジェクトの構造の違い</span><span class="sxs-lookup"><span data-stu-id="caea5-117">Project structure differences</span></span>
 
-<span data-ttu-id="37cfe-118">*.csproj* ファイルの形式は、ASP.NET Core では簡素化されています。</span><span class="sxs-lookup"><span data-stu-id="37cfe-118">The *.csproj* file format has been simplified in ASP.NET Core.</span></span> <span data-ttu-id="37cfe-119">いくつかの重要な変更は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="37cfe-119">Some notable changes include:</span></span>
+<span data-ttu-id="caea5-118">*.csproj* ファイルの形式は、ASP.NET Core では簡素化されています。</span><span class="sxs-lookup"><span data-stu-id="caea5-118">The *.csproj* file format has been simplified in ASP.NET Core.</span></span> <span data-ttu-id="caea5-119">いくつかの重要な変更は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="caea5-119">Some notable changes include:</span></span>
 
-- <span data-ttu-id="37cfe-120">ファイルがプロジェクトの一部と見なされるためにファイルを明示的に含める必要はありません。</span><span class="sxs-lookup"><span data-stu-id="37cfe-120">Explicit inclusion of files isn't necessary for them to be considered part of the project.</span></span> <span data-ttu-id="37cfe-121">これにより、大規模なチームで作業する場合に XML のマージが競合するリスクが軽減されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-121">This reduces the risk of XML merge conflicts when working on large teams.</span></span>
-- <span data-ttu-id="37cfe-122">他のプロジェクトを GUID で参照することはなくなり、ファイルの読みやすさが向上します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-122">There are no GUID-based references to other projects, which improves file readability.</span></span>
-- <span data-ttu-id="37cfe-123">Visual Studio でアンロードせずにファイルを編集することができます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-123">The file can be edited without unloading it in Visual Studio:</span></span>
+- <span data-ttu-id="caea5-120">ファイルがプロジェクトの一部と見なされるためにファイルを明示的に含める必要はありません。</span><span class="sxs-lookup"><span data-stu-id="caea5-120">Explicit inclusion of files isn't necessary for them to be considered part of the project.</span></span> <span data-ttu-id="caea5-121">これにより、大規模なチームで作業する場合に XML のマージが競合するリスクが軽減されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-121">This reduces the risk of XML merge conflicts when working on large teams.</span></span>
+- <span data-ttu-id="caea5-122">他のプロジェクトを GUID で参照することはなくなり、ファイルの読みやすさが向上します。</span><span class="sxs-lookup"><span data-stu-id="caea5-122">There are no GUID-based references to other projects, which improves file readability.</span></span>
+- <span data-ttu-id="caea5-123">Visual Studio でアンロードせずにファイルを編集することができます。</span><span class="sxs-lookup"><span data-stu-id="caea5-123">The file can be edited without unloading it in Visual Studio:</span></span>
 
     ![Visual Studio 2017 の CSPROJ の編集コンテキスト メニュー オプション](_static/EditProjectVs2017.png)
 
-## <a name="globalasax-file-replacement"></a><span data-ttu-id="37cfe-125">Global.asax ファイルの置換</span><span class="sxs-lookup"><span data-stu-id="37cfe-125">Global.asax file replacement</span></span>
+## <a name="globalasax-file-replacement"></a><span data-ttu-id="caea5-125">Global.asax ファイルの置換</span><span class="sxs-lookup"><span data-stu-id="caea5-125">Global.asax file replacement</span></span>
 
-<span data-ttu-id="37cfe-126">ASP.NET Core では、アプリをブートストラップする新しいメカニズムが導入されました。</span><span class="sxs-lookup"><span data-stu-id="37cfe-126">ASP.NET Core introduced a new mechanism for bootstrapping an app.</span></span> <span data-ttu-id="37cfe-127">ASP.NET アプリケーションのエントリ ポイントは、*Global.asax* ファイルです。</span><span class="sxs-lookup"><span data-stu-id="37cfe-127">The entry point for ASP.NET applications is the *Global.asax* file.</span></span> <span data-ttu-id="37cfe-128">ルート構成、フィルター、領域の登録などのタスクは、*Global.asax* ファイルで処理されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-128">Tasks such as route configuration and filter and area registrations are handled in the *Global.asax* file.</span></span>
+<span data-ttu-id="caea5-126">ASP.NET Core では、アプリをブートストラップする新しいメカニズムが導入されました。</span><span class="sxs-lookup"><span data-stu-id="caea5-126">ASP.NET Core introduced a new mechanism for bootstrapping an app.</span></span> <span data-ttu-id="caea5-127">ASP.NET アプリケーションのエントリ ポイントは、 *Global.asax* ファイルです。</span><span class="sxs-lookup"><span data-stu-id="caea5-127">The entry point for ASP.NET applications is the *Global.asax* file.</span></span> <span data-ttu-id="caea5-128">ルート構成、フィルター、領域の登録などのタスクは、 *Global.asax* ファイルで処理されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-128">Tasks such as route configuration and filter and area registrations are handled in the *Global.asax* file.</span></span>
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-<span data-ttu-id="37cfe-129">このアプローチでは、アプリケーションとその展開先のサーバーが、実装を妨げるような方法で結合されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-129">This approach couples the application and the server to which it's deployed in a way that interferes with the implementation.</span></span> <span data-ttu-id="37cfe-130">結合を切り離すため、複数のフレームワークを一緒に使うさらにクリーンな方法を提供する [OWIN](https://owin.org/) が導入されました。</span><span class="sxs-lookup"><span data-stu-id="37cfe-130">In an effort to decouple, [OWIN](https://owin.org/) was introduced to provide a cleaner way to use multiple frameworks together.</span></span> <span data-ttu-id="37cfe-131">OWIN は、必要なモジュールのみを追加するためのパイプラインを提供します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-131">OWIN provides a pipeline to add only the modules needed.</span></span> <span data-ttu-id="37cfe-132">ホスティング環境は、[Startup](xref:fundamentals/startup) 関数を取得して、サービスとアプリの要求パイプラインを構成します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-132">The hosting environment takes a [Startup](xref:fundamentals/startup) function to configure services and the app's request pipeline.</span></span> <span data-ttu-id="37cfe-133">`Startup` は、ミドルウェアのセットをアプリケーションに登録します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-133">`Startup` registers a set of middleware with the application.</span></span> <span data-ttu-id="37cfe-134">アプリケーションは、要求ごとに、既存のハンドラーのセットに対するリンク リストのヘッド ポインターを指定して、各ミドルウェア コンポーネントを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-134">For each request, the application calls each of the middleware components with the head pointer of a linked list to an existing set of handlers.</span></span> <span data-ttu-id="37cfe-135">各ミドルウェア コンポーネントは、要求処理パイプラインに 1 つ以上のハンドラーを追加できます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-135">Each middleware component can add one or more handlers to the request handling pipeline.</span></span> <span data-ttu-id="37cfe-136">これは、新しいリストのヘッドであるハンドラーへの参照を返すことによって行われます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-136">This is accomplished by returning a reference to the handler that's the new head of the list.</span></span> <span data-ttu-id="37cfe-137">各ハンドラーは、リスト内の次のハンドラーを記憶して呼び出します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-137">Each handler is responsible for remembering and invoking the next handler in the list.</span></span> <span data-ttu-id="37cfe-138">ASP.NET Core では、アプリケーションへのエントリ ポイントは `Startup` であり、*Global.asax* に依存する必要はなくなりました。</span><span class="sxs-lookup"><span data-stu-id="37cfe-138">With ASP.NET Core, the entry point to an application is `Startup`, and you no longer have a dependency on *Global.asax*.</span></span> <span data-ttu-id="37cfe-139">.NET Framework で OWIN を使うときは、パイプラインとして次のようなものを使います。</span><span class="sxs-lookup"><span data-stu-id="37cfe-139">When using OWIN with .NET Framework, use something like the following as a pipeline:</span></span>
+<span data-ttu-id="caea5-129">このアプローチでは、アプリケーションとその展開先のサーバーが、実装を妨げるような方法で結合されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-129">This approach couples the application and the server to which it's deployed in a way that interferes with the implementation.</span></span> <span data-ttu-id="caea5-130">結合を切り離すため、複数のフレームワークを一緒に使うさらにクリーンな方法を提供する [OWIN](https://owin.org/) が導入されました。</span><span class="sxs-lookup"><span data-stu-id="caea5-130">In an effort to decouple, [OWIN](https://owin.org/) was introduced to provide a cleaner way to use multiple frameworks together.</span></span> <span data-ttu-id="caea5-131">OWIN は、必要なモジュールのみを追加するためのパイプラインを提供します。</span><span class="sxs-lookup"><span data-stu-id="caea5-131">OWIN provides a pipeline to add only the modules needed.</span></span> <span data-ttu-id="caea5-132">ホスティング環境は、[Startup](xref:fundamentals/startup) 関数を取得して、サービスとアプリの要求パイプラインを構成します。</span><span class="sxs-lookup"><span data-stu-id="caea5-132">The hosting environment takes a [Startup](xref:fundamentals/startup) function to configure services and the app's request pipeline.</span></span> <span data-ttu-id="caea5-133">`Startup` は、ミドルウェアのセットをアプリケーションに登録します。</span><span class="sxs-lookup"><span data-stu-id="caea5-133">`Startup` registers a set of middleware with the application.</span></span> <span data-ttu-id="caea5-134">アプリケーションは、要求ごとに、既存のハンドラーのセットに対するリンク リストのヘッド ポインターを指定して、各ミドルウェア コンポーネントを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="caea5-134">For each request, the application calls each of the middleware components with the head pointer of a linked list to an existing set of handlers.</span></span> <span data-ttu-id="caea5-135">各ミドルウェア コンポーネントは、要求処理パイプラインに 1 つ以上のハンドラーを追加できます。</span><span class="sxs-lookup"><span data-stu-id="caea5-135">Each middleware component can add one or more handlers to the request handling pipeline.</span></span> <span data-ttu-id="caea5-136">これは、新しいリストのヘッドであるハンドラーへの参照を返すことによって行われます。</span><span class="sxs-lookup"><span data-stu-id="caea5-136">This is accomplished by returning a reference to the handler that's the new head of the list.</span></span> <span data-ttu-id="caea5-137">各ハンドラーは、リスト内の次のハンドラーを記憶して呼び出します。</span><span class="sxs-lookup"><span data-stu-id="caea5-137">Each handler is responsible for remembering and invoking the next handler in the list.</span></span> <span data-ttu-id="caea5-138">ASP.NET Core では、アプリケーションへのエントリ ポイントは `Startup` であり、 *Global.asax* に依存する必要はなくなりました。</span><span class="sxs-lookup"><span data-stu-id="caea5-138">With ASP.NET Core, the entry point to an application is `Startup`, and you no longer have a dependency on *Global.asax*.</span></span> <span data-ttu-id="caea5-139">.NET Framework で OWIN を使うときは、パイプラインとして次のようなものを使います。</span><span class="sxs-lookup"><span data-stu-id="caea5-139">When using OWIN with .NET Framework, use something like the following as a pipeline:</span></span>
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
-<span data-ttu-id="37cfe-140">これにより既定のルートが構成され、既定では Json 経由の XmlSerialization です。</span><span class="sxs-lookup"><span data-stu-id="37cfe-140">This configures your default routes, and defaults to XmlSerialization over Json.</span></span> <span data-ttu-id="37cfe-141">必要に応じて、このパイプラインに他のミドルウェアを追加します (サービスの読み込み、構成設定、静的ファイルなど)。</span><span class="sxs-lookup"><span data-stu-id="37cfe-141">Add other Middleware to this pipeline as needed (loading services, configuration settings, static files, etc.).</span></span>
+<span data-ttu-id="caea5-140">これにより既定のルートが構成され、既定では Json 経由の XmlSerialization です。</span><span class="sxs-lookup"><span data-stu-id="caea5-140">This configures your default routes, and defaults to XmlSerialization over Json.</span></span> <span data-ttu-id="caea5-141">必要に応じて、このパイプラインに他のミドルウェアを追加します (サービスの読み込み、構成設定、静的ファイルなど)。</span><span class="sxs-lookup"><span data-stu-id="caea5-141">Add other Middleware to this pipeline as needed (loading services, configuration settings, static files, etc.).</span></span>
 
-<span data-ttu-id="37cfe-142">ASP.NET Core は同様のアプローチを使いますが、エントリを処理するために OWIN には依存しません。</span><span class="sxs-lookup"><span data-stu-id="37cfe-142">ASP.NET Core uses a similar approach, but doesn't rely on OWIN to handle the entry.</span></span> <span data-ttu-id="37cfe-143">代わりに、(コンソール アプリケーションと同じように) *Program.cs* の `Main` メソッドを通して行われ、そこから `Startup` が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-143">Instead, that's done through the *Program.cs* `Main` method (similar to console applications) and `Startup` is loaded through there.</span></span>
+<span data-ttu-id="caea5-142">ASP.NET Core は同様のアプローチを使いますが、エントリを処理するために OWIN には依存しません。</span><span class="sxs-lookup"><span data-stu-id="caea5-142">ASP.NET Core uses a similar approach, but doesn't rely on OWIN to handle the entry.</span></span> <span data-ttu-id="caea5-143">代わりに、(コンソール アプリケーションと同じように) *Program.cs* の `Main` メソッドを通して行われ、そこから `Startup` が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="caea5-143">Instead, that's done through the *Program.cs* `Main` method (similar to console applications) and `Startup` is loaded through there.</span></span>
 
 [!code-csharp[](samples/program.cs)]
 
-<span data-ttu-id="37cfe-144">`Startup` は、`Configure` メソッドを含む必要があります。</span><span class="sxs-lookup"><span data-stu-id="37cfe-144">`Startup` must include a `Configure` method.</span></span> <span data-ttu-id="37cfe-145">`Configure` では、必要なミドルウェアをパイプラインに追加します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-145">In `Configure`, add the necessary middleware to the pipeline.</span></span> <span data-ttu-id="37cfe-146">(既定の Web サイト テンプレートからの) 次の例では、拡張メソッドにより、以下をサポートするパイプラインが構成されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-146">In the following example (from the default web site template), extension methods configure the pipeline with support for:</span></span>
+<span data-ttu-id="caea5-144">`Startup` は、`Configure` メソッドを含む必要があります。</span><span class="sxs-lookup"><span data-stu-id="caea5-144">`Startup` must include a `Configure` method.</span></span> <span data-ttu-id="caea5-145">`Configure` では、必要なミドルウェアをパイプラインに追加します。</span><span class="sxs-lookup"><span data-stu-id="caea5-145">In `Configure`, add the necessary middleware to the pipeline.</span></span> <span data-ttu-id="caea5-146">(既定の Web サイト テンプレートからの) 次の例では、拡張メソッドにより、以下をサポートするパイプラインが構成されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-146">In the following example (from the default web site template), extension methods configure the pipeline with support for:</span></span>
 
-- <span data-ttu-id="37cfe-147">エラー ページ</span><span class="sxs-lookup"><span data-stu-id="37cfe-147">Error pages</span></span>
-- <span data-ttu-id="37cfe-148">HTTP Strict Transport Security</span><span class="sxs-lookup"><span data-stu-id="37cfe-148">HTTP Strict Transport Security</span></span>
-- <span data-ttu-id="37cfe-149">HTTP への HTTP リダイレクト</span><span class="sxs-lookup"><span data-stu-id="37cfe-149">HTTP redirection to HTTPS</span></span>
-- <span data-ttu-id="37cfe-150">ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="37cfe-150">ASP.NET Core MVC</span></span>
+- <span data-ttu-id="caea5-147">エラー ページ</span><span class="sxs-lookup"><span data-stu-id="caea5-147">Error pages</span></span>
+- <span data-ttu-id="caea5-148">HTTP Strict Transport Security</span><span class="sxs-lookup"><span data-stu-id="caea5-148">HTTP Strict Transport Security</span></span>
+- <span data-ttu-id="caea5-149">HTTP への HTTP リダイレクト</span><span class="sxs-lookup"><span data-stu-id="caea5-149">HTTP redirection to HTTPS</span></span>
+- <span data-ttu-id="caea5-150">ASP.NET Core MVC</span><span class="sxs-lookup"><span data-stu-id="caea5-150">ASP.NET Core MVC</span></span>
 
 [!code-csharp[](samples/startup.cs)]
 
-<span data-ttu-id="37cfe-151">ホストとアプリケーションは切り離されており、将来別のプラットフォームに柔軟に移動できます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-151">The host and application have been decoupled, which provides the flexibility of moving to a different platform in the future.</span></span>
+<span data-ttu-id="caea5-151">ホストとアプリケーションは切り離されており、将来別のプラットフォームに柔軟に移動できます。</span><span class="sxs-lookup"><span data-stu-id="caea5-151">The host and application have been decoupled, which provides the flexibility of moving to a different platform in the future.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="37cfe-152">ASP.NET Core のスタートアップとミドルウェアについて詳しくは、「[ASP.NET Core でのアプリケーションのスタートアップ](xref:fundamentals/startup)」をご覧ください</span><span class="sxs-lookup"><span data-stu-id="37cfe-152">For a more in-depth reference to ASP.NET Core Startup and Middleware, see [Startup in ASP.NET Core](xref:fundamentals/startup)</span></span>
+> <span data-ttu-id="caea5-152">ASP.NET Core のスタートアップとミドルウェアについて詳しくは、「[ASP.NET Core でのアプリケーションのスタートアップ](xref:fundamentals/startup)」をご覧ください</span><span class="sxs-lookup"><span data-stu-id="caea5-152">For a more in-depth reference to ASP.NET Core Startup and Middleware, see [Startup in ASP.NET Core](xref:fundamentals/startup)</span></span>
 
-## <a name="store-configurations"></a><span data-ttu-id="37cfe-153">構成を保存する</span><span class="sxs-lookup"><span data-stu-id="37cfe-153">Store configurations</span></span>
+## <a name="store-configurations"></a><span data-ttu-id="caea5-153">構成を保存する</span><span class="sxs-lookup"><span data-stu-id="caea5-153">Store configurations</span></span>
 
-<span data-ttu-id="37cfe-154">ASP.NET では保存の設定がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="37cfe-154">ASP.NET supports storing settings.</span></span> <span data-ttu-id="37cfe-155">これらの設定は、たとえば、アプリケーションが展開された環境のサポートに使われます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-155">These setting are used, for example, to support the environment to which the applications were deployed.</span></span> <span data-ttu-id="37cfe-156">一般的な方法は、すべてのカスタム キー/値ペアを、*Web.config* ファイルの `<appSettings>` セクションに保存するというものでした。</span><span class="sxs-lookup"><span data-stu-id="37cfe-156">A common practice was to store all custom key-value pairs in the `<appSettings>` section of the *Web.config* file:</span></span>
+<span data-ttu-id="caea5-154">ASP.NET では保存の設定がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="caea5-154">ASP.NET supports storing settings.</span></span> <span data-ttu-id="caea5-155">これらの設定は、たとえば、アプリケーションが展開された環境のサポートに使われます。</span><span class="sxs-lookup"><span data-stu-id="caea5-155">These setting are used, for example, to support the environment to which the applications were deployed.</span></span> <span data-ttu-id="caea5-156">一般的な方法は、すべてのカスタム キー/値ペアを、 *Web.config* ファイルの `<appSettings>` セクションに保存するというものでした。</span><span class="sxs-lookup"><span data-stu-id="caea5-156">A common practice was to store all custom key-value pairs in the `<appSettings>` section of the *Web.config* file:</span></span>
 
 [!code-xml[](samples/webconfig-sample.xml)]
 
-<span data-ttu-id="37cfe-157">アプリケーションでは、`System.Configuration` 名前空間内の `ConfigurationManager.AppSettings` コレクションを使ってこれらの設定を読み取ります。</span><span class="sxs-lookup"><span data-stu-id="37cfe-157">Applications read these settings using the `ConfigurationManager.AppSettings` collection in the `System.Configuration` namespace:</span></span>
+<span data-ttu-id="caea5-157">アプリケーションでは、`System.Configuration` 名前空間内の `ConfigurationManager.AppSettings` コレクションを使ってこれらの設定を読み取ります。</span><span class="sxs-lookup"><span data-stu-id="caea5-157">Applications read these settings using the `ConfigurationManager.AppSettings` collection in the `System.Configuration` namespace:</span></span>
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
-<span data-ttu-id="37cfe-158">ASP.NET Core では、アプリケーションの構成データを任意のファイルに保存し、ミドルウェアのブートストラップの一部として読み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-158">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="37cfe-159">プロジェクト テンプレートで使われる既定のファイルは、*appsettings.json* です。</span><span class="sxs-lookup"><span data-stu-id="37cfe-159">The default file used in the project templates is *appsettings.json*:</span></span>
+<span data-ttu-id="caea5-158">ASP.NET Core では、アプリケーションの構成データを任意のファイルに保存し、ミドルウェアのブートストラップの一部として読み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="caea5-158">ASP.NET Core can store configuration data for the application in any file and load them as part of middleware bootstrapping.</span></span> <span data-ttu-id="caea5-159">プロジェクト テンプレートで使用される既定のファイルは、 *:::no-loc(appsettings.json):::* です。</span><span class="sxs-lookup"><span data-stu-id="caea5-159">The default file used in the project templates is *:::no-loc(appsettings.json):::* :</span></span>
 
 [!code-json[](samples/appsettings-sample.json)]
 
-<span data-ttu-id="37cfe-160">アプリケーション内部の `IConfiguration` のインスタンスにこのファイルを読み込むには、*Startup.cs* が使われます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-160">Loading this file into an instance of `IConfiguration` inside your application is done in *Startup.cs*:</span></span>
+<span data-ttu-id="caea5-160">アプリケーション内部の `IConfiguration` のインスタンスにこのファイルを読み込むには、 *Startup.cs* が使われます。</span><span class="sxs-lookup"><span data-stu-id="caea5-160">Loading this file into an instance of `IConfiguration` inside your application is done in *Startup.cs* :</span></span>
 
 [!code-csharp[](samples/startup-builder.cs)]
 
-<span data-ttu-id="37cfe-161">アプリでは、`Configuration` から読み取って設定を取得します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-161">The app reads from `Configuration` to get the settings:</span></span>
+<span data-ttu-id="caea5-161">アプリでは、`Configuration` から読み取って設定を取得します。</span><span class="sxs-lookup"><span data-stu-id="caea5-161">The app reads from `Configuration` to get the settings:</span></span>
 
 [!code-csharp[](samples/read-appsettings.cs)]
 
-<span data-ttu-id="37cfe-162">このアプローチにはプロセスをより堅牢にする拡張機能があります。たとえば、[依存性の注入](xref:fundamentals/dependency-injection) (DI) を使ってサービスとこれらの値を読み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-162">There are extensions to this approach to make the process more robust, such as using [Dependency Injection](xref:fundamentals/dependency-injection) (DI) to load a service with these values.</span></span> <span data-ttu-id="37cfe-163">DI アプローチは、厳密に型指定された構成オブジェクトのセットを提供します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-163">The DI approach provides a strongly-typed set of configuration objects.</span></span>
+<span data-ttu-id="caea5-162">このアプローチにはプロセスをより堅牢にする拡張機能があります。たとえば、[依存性の注入](xref:fundamentals/dependency-injection) (DI) を使ってサービスとこれらの値を読み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="caea5-162">There are extensions to this approach to make the process more robust, such as using [Dependency Injection](xref:fundamentals/dependency-injection) (DI) to load a service with these values.</span></span> <span data-ttu-id="caea5-163">DI アプローチは、厳密に型指定された構成オブジェクトのセットを提供します。</span><span class="sxs-lookup"><span data-stu-id="caea5-163">The DI approach provides a strongly-typed set of configuration objects.</span></span>
 
 ```csharp
 // Assume AppConfiguration is a class representing a strongly-typed version of AppConfiguration section
@@ -119,60 +120,60 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 ```
 
 > [!NOTE]
-> <span data-ttu-id="37cfe-164">ASP.NET Core の構成について詳しくは、「[ASP.NET Core の構成](xref:fundamentals/configuration/index)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="37cfe-164">For a more in-depth reference to ASP.NET Core configuration, see [Configuration in ASP.NET Core](xref:fundamentals/configuration/index).</span></span>
+> <span data-ttu-id="caea5-164">ASP.NET Core の構成について詳しくは、「[ASP.NET Core の構成](xref:fundamentals/configuration/index)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="caea5-164">For a more in-depth reference to ASP.NET Core configuration, see [Configuration in ASP.NET Core](xref:fundamentals/configuration/index).</span></span>
 
-## <a name="native-dependency-injection"></a><span data-ttu-id="37cfe-165">ネイティブな依存性の注入</span><span class="sxs-lookup"><span data-stu-id="37cfe-165">Native dependency injection</span></span>
+## <a name="native-dependency-injection"></a><span data-ttu-id="caea5-165">ネイティブな依存性の注入</span><span class="sxs-lookup"><span data-stu-id="caea5-165">Native dependency injection</span></span>
 
-<span data-ttu-id="37cfe-166">大規模で拡張性の高いアプリケーションを構築するときの重要な目標は、コンポーネントとサービスの疎な結合です。</span><span class="sxs-lookup"><span data-stu-id="37cfe-166">An important goal when building large, scalable applications is the loose coupling of components and services.</span></span> <span data-ttu-id="37cfe-167">[依存性の注入](xref:fundamentals/dependency-injection)はこれを実現するための一般的な手法であり、ASP.NET Core のネイティブなコンポーネントです。</span><span class="sxs-lookup"><span data-stu-id="37cfe-167">[Dependency Injection](xref:fundamentals/dependency-injection) is a popular technique for achieving this, and it's a native component of ASP.NET Core.</span></span>
+<span data-ttu-id="caea5-166">大規模で拡張性の高いアプリケーションを構築するときの重要な目標は、コンポーネントとサービスの疎な結合です。</span><span class="sxs-lookup"><span data-stu-id="caea5-166">An important goal when building large, scalable applications is the loose coupling of components and services.</span></span> <span data-ttu-id="caea5-167">[依存性の注入](xref:fundamentals/dependency-injection)はこれを実現するための一般的な手法であり、ASP.NET Core のネイティブなコンポーネントです。</span><span class="sxs-lookup"><span data-stu-id="caea5-167">[Dependency Injection](xref:fundamentals/dependency-injection) is a popular technique for achieving this, and it's a native component of ASP.NET Core.</span></span>
 
-<span data-ttu-id="37cfe-168">ASP.NET アプリでは、開発者はサードパーティのライブラリに依存して依存性の注入を実装します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-168">In ASP.NET apps, developers rely on a third-party library to implement Dependency Injection.</span></span> <span data-ttu-id="37cfe-169">[Unity](https://github.com/unitycontainer/unity) はそのようなライブラリの 1 つであり、Microsoft Patterns & Practices によって提供されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-169">One such library is [Unity](https://github.com/unitycontainer/unity), provided by Microsoft Patterns & Practices.</span></span>
+<span data-ttu-id="caea5-168">ASP.NET アプリでは、開発者はサードパーティのライブラリに依存して依存性の注入を実装します。</span><span class="sxs-lookup"><span data-stu-id="caea5-168">In ASP.NET apps, developers rely on a third-party library to implement Dependency Injection.</span></span> <span data-ttu-id="caea5-169">[Unity](https://github.com/unitycontainer/unity) はそのようなライブラリの 1 つであり、Microsoft Patterns & Practices によって提供されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-169">One such library is [Unity](https://github.com/unitycontainer/unity), provided by Microsoft Patterns & Practices.</span></span>
 
-<span data-ttu-id="37cfe-170">Unity で依存性の注入を設定する例は、`UnityContainer` をラップする `IDependencyResolver` の実装です。</span><span class="sxs-lookup"><span data-stu-id="37cfe-170">An example of setting up Dependency Injection with Unity is implementing `IDependencyResolver` that wraps a `UnityContainer`:</span></span>
+<span data-ttu-id="caea5-170">Unity で依存性の注入を設定する例は、`UnityContainer` をラップする `IDependencyResolver` の実装です。</span><span class="sxs-lookup"><span data-stu-id="caea5-170">An example of setting up Dependency Injection with Unity is implementing `IDependencyResolver` that wraps a `UnityContainer`:</span></span>
 
 [!code-csharp[](samples/sample8.cs)]
 
-<span data-ttu-id="37cfe-171">`UnityContainer` のインスタンスを作成し、サービスを登録して、`HttpConfiguration` の依存関係リゾルバーをコンテナー用の `UnityResolver` の新しいインスタンスに設定します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-171">Create an instance of your `UnityContainer`, register your service, and set the dependency resolver of `HttpConfiguration` to the new instance of `UnityResolver` for your container:</span></span>
+<span data-ttu-id="caea5-171">`UnityContainer` のインスタンスを作成し、サービスを登録して、`HttpConfiguration` の依存関係リゾルバーをコンテナー用の `UnityResolver` の新しいインスタンスに設定します。</span><span class="sxs-lookup"><span data-stu-id="caea5-171">Create an instance of your `UnityContainer`, register your service, and set the dependency resolver of `HttpConfiguration` to the new instance of `UnityResolver` for your container:</span></span>
 
 [!code-csharp[](samples/sample9.cs)]
 
-<span data-ttu-id="37cfe-172">必要な場所に `IProductRepository` を挿入します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-172">Inject `IProductRepository` where needed:</span></span>
+<span data-ttu-id="caea5-172">必要な場所に `IProductRepository` を挿入します。</span><span class="sxs-lookup"><span data-stu-id="caea5-172">Inject `IProductRepository` where needed:</span></span>
 
 [!code-csharp[](samples/sample5.cs)]
 
-<span data-ttu-id="37cfe-173">依存性の注入は ASP.NET Core の一部であるため、*Startup.cs* の `ConfigureServices` メソッドに独自のサービスを追加できます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-173">Because Dependency Injection is part of ASP.NET Core, you can add your service in the `ConfigureServices` method of *Startup.cs*:</span></span>
+<span data-ttu-id="caea5-173">依存性の注入は ASP.NET Core の一部であるため、 *Startup.cs* の `ConfigureServices` メソッドに独自のサービスを追加できます。</span><span class="sxs-lookup"><span data-stu-id="caea5-173">Because Dependency Injection is part of ASP.NET Core, you can add your service in the `ConfigureServices` method of *Startup.cs* :</span></span>
 
 [!code-csharp[](samples/configure-services.cs)]
 
-<span data-ttu-id="37cfe-174">Unity でそうであったように、リポジトリは任意の場所に挿入できます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-174">The repository can be injected anywhere, as was true with Unity.</span></span>
+<span data-ttu-id="caea5-174">Unity でそうであったように、リポジトリは任意の場所に挿入できます。</span><span class="sxs-lookup"><span data-stu-id="caea5-174">The repository can be injected anywhere, as was true with Unity.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="37cfe-175">依存関係の挿入について詳しくは、「[依存関係の挿入](xref:fundamentals/dependency-injection)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="37cfe-175">For more information on dependency injection, see [Dependency injection](xref:fundamentals/dependency-injection).</span></span>
+> <span data-ttu-id="caea5-175">依存関係の挿入について詳しくは、「[依存関係の挿入](xref:fundamentals/dependency-injection)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="caea5-175">For more information on dependency injection, see [Dependency injection](xref:fundamentals/dependency-injection).</span></span>
 
-## <a name="serve-static-files"></a><span data-ttu-id="37cfe-176">静的ファイルの提供</span><span class="sxs-lookup"><span data-stu-id="37cfe-176">Serve static files</span></span>
+## <a name="serve-static-files"></a><span data-ttu-id="caea5-176">静的ファイルの提供</span><span class="sxs-lookup"><span data-stu-id="caea5-176">Serve static files</span></span>
 
-<span data-ttu-id="37cfe-177">Web 開発の重要な部分は、静的なクライアント側アセットを提供する機能です。</span><span class="sxs-lookup"><span data-stu-id="37cfe-177">An important part of web development is the ability to serve static, client-side assets.</span></span> <span data-ttu-id="37cfe-178">静的なファイルの最も一般的な例は、HTML、CSS、Javascript、およびイメージです。</span><span class="sxs-lookup"><span data-stu-id="37cfe-178">The most common examples of static files are HTML, CSS, Javascript, and images.</span></span> <span data-ttu-id="37cfe-179">これらのファイルは、アプリ (または CDN) の公開された場所に保存され、要求によって読み込めるように参照される必要があります。</span><span class="sxs-lookup"><span data-stu-id="37cfe-179">These files need to be saved in the published location of the app (or CDN) and referenced so they can be loaded by a request.</span></span> <span data-ttu-id="37cfe-180">このプロセスは、ASP.NET Core で変更されました。</span><span class="sxs-lookup"><span data-stu-id="37cfe-180">This process has changed in ASP.NET Core.</span></span>
+<span data-ttu-id="caea5-177">Web 開発の重要な部分は、静的なクライアント側アセットを提供する機能です。</span><span class="sxs-lookup"><span data-stu-id="caea5-177">An important part of web development is the ability to serve static, client-side assets.</span></span> <span data-ttu-id="caea5-178">静的なファイルの最も一般的な例は、HTML、CSS、Javascript、およびイメージです。</span><span class="sxs-lookup"><span data-stu-id="caea5-178">The most common examples of static files are HTML, CSS, Javascript, and images.</span></span> <span data-ttu-id="caea5-179">これらのファイルは、アプリ (または CDN) の公開された場所に保存され、要求によって読み込めるように参照される必要があります。</span><span class="sxs-lookup"><span data-stu-id="caea5-179">These files need to be saved in the published location of the app (or CDN) and referenced so they can be loaded by a request.</span></span> <span data-ttu-id="caea5-180">このプロセスは、ASP.NET Core で変更されました。</span><span class="sxs-lookup"><span data-stu-id="caea5-180">This process has changed in ASP.NET Core.</span></span>
 
-<span data-ttu-id="37cfe-181">ASP.NET では、静的ファイルはさまざまなディレクトリに保存され、ビューで参照されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-181">In ASP.NET, static files are stored in various directories and referenced in the views.</span></span>
+<span data-ttu-id="caea5-181">ASP.NET では、静的ファイルはさまざまなディレクトリに保存され、ビューで参照されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-181">In ASP.NET, static files are stored in various directories and referenced in the views.</span></span>
 
-<span data-ttu-id="37cfe-182">ASP.NET Core では、構成が変更されていない限り、静的ファイルは "Web ルート" ( *&lt;コンテンツ ルート&gt;/wwwroot*) に保存されます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-182">In ASP.NET Core, static files are stored in the "web root" (*&lt;content root&gt;/wwwroot*), unless configured otherwise.</span></span> <span data-ttu-id="37cfe-183">ファイルは、`Startup.Configure` から `UseStaticFiles` 拡張メソッドを呼び出すことによって、要求パイプラインに読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-183">The files are loaded into the request pipeline by invoking the `UseStaticFiles` extension method from `Startup.Configure`:</span></span>
+<span data-ttu-id="caea5-182">ASP.NET Core では、構成が変更されていない限り、静的ファイルは "Web ルート" ( *&lt;コンテンツ ルート&gt;/wwwroot* ) に保存されます。</span><span class="sxs-lookup"><span data-stu-id="caea5-182">In ASP.NET Core, static files are stored in the "web root" ( *&lt;content root&gt;/wwwroot* ), unless configured otherwise.</span></span> <span data-ttu-id="caea5-183">ファイルは、`Startup.Configure` から `UseStaticFiles` 拡張メソッドを呼び出すことによって、要求パイプラインに読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="caea5-183">The files are loaded into the request pipeline by invoking the `UseStaticFiles` extension method from `Startup.Configure`:</span></span>
 
 [!code-csharp[](../../fundamentals/static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
 > [!NOTE]
-> <span data-ttu-id="37cfe-184">.NET Framework を対象にする場合は、NuGet パッケージ `Microsoft.AspNetCore.StaticFiles` をインストールします。</span><span class="sxs-lookup"><span data-stu-id="37cfe-184">If targeting .NET Framework, install the NuGet package `Microsoft.AspNetCore.StaticFiles`.</span></span>
+> <span data-ttu-id="caea5-184">.NET Framework を対象にする場合は、NuGet パッケージ `Microsoft.AspNetCore.StaticFiles` をインストールします。</span><span class="sxs-lookup"><span data-stu-id="caea5-184">If targeting .NET Framework, install the NuGet package `Microsoft.AspNetCore.StaticFiles`.</span></span>
 
-<span data-ttu-id="37cfe-185">たとえば、*wwwroot/images* フォルダー内のイメージ アセットには、ブラウザーから `http://<app>/images/<imageFileName>` などの場所でアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-185">For example, an image asset in the *wwwroot/images* folder is accessible to the browser at a location such as `http://<app>/images/<imageFileName>`.</span></span>
+<span data-ttu-id="caea5-185">たとえば、 *wwwroot/images* フォルダー内のイメージ アセットには、ブラウザーから `http://<app>/images/<imageFileName>` などの場所でアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="caea5-185">For example, an image asset in the *wwwroot/images* folder is accessible to the browser at a location such as `http://<app>/images/<imageFileName>`.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="37cfe-186">ASP.NET Core での静的ファイルの提供について詳しくは、[静的ファイル](xref:fundamentals/static-files)に関するページをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="37cfe-186">For a more in-depth reference to serving static files in ASP.NET Core, see [Static files](xref:fundamentals/static-files).</span></span>
+> <span data-ttu-id="caea5-186">ASP.NET Core での静的ファイルの提供について詳しくは、[静的ファイル](xref:fundamentals/static-files)に関するページをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="caea5-186">For a more in-depth reference to serving static files in ASP.NET Core, see [Static files](xref:fundamentals/static-files).</span></span>
 
-## <a name="multi-value-no-loccookies"></a><span data-ttu-id="37cfe-187">複数値の cookie</span><span class="sxs-lookup"><span data-stu-id="37cfe-187">Multi-value cookies</span></span>
+## <a name="multi-value-no-loccookies"></a><span data-ttu-id="caea5-187">複数値の :::no-loc(cookie):::</span><span class="sxs-lookup"><span data-stu-id="caea5-187">Multi-value :::no-loc(cookie):::s</span></span>
 
-<span data-ttu-id="37cfe-188">[複数値の cookie](xref:System.Web.HttpCookie.Values) は ASP.NET Core ではサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="37cfe-188">[Multi-value cookies](xref:System.Web.HttpCookie.Values) aren't supported in ASP.NET Core.</span></span> <span data-ttu-id="37cfe-189">値ごとに cookie を 1 つ作成します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-189">Create one cookie per value.</span></span>
+<span data-ttu-id="caea5-188">[複数値の :::no-loc(cookie):::](xref:System.Web.Http:::no-loc(Cookie):::.Values) は ASP.NET Core ではサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="caea5-188">[Multi-value :::no-loc(cookie):::s](xref:System.Web.Http:::no-loc(Cookie):::.Values) aren't supported in ASP.NET Core.</span></span> <span data-ttu-id="caea5-189">値ごとに :::no-loc(cookie)::: を 1 つ作成します。</span><span class="sxs-lookup"><span data-stu-id="caea5-189">Create one :::no-loc(cookie)::: per value.</span></span>
 
-## <a name="partial-app-migration"></a><span data-ttu-id="37cfe-190">部分的なアプリの移行</span><span class="sxs-lookup"><span data-stu-id="37cfe-190">Partial app migration</span></span>
+## <a name="partial-app-migration"></a><span data-ttu-id="caea5-190">部分的なアプリの移行</span><span class="sxs-lookup"><span data-stu-id="caea5-190">Partial app migration</span></span>
 
-<span data-ttu-id="37cfe-191">部分的にアプリを移行する方法の 1 つは、IIS サブアプリケーションを作成し、アプリの URL 構造を維持しながら ASP.NET 4.x から ASP.NET Core に特定のルートのみを移動することです。</span><span class="sxs-lookup"><span data-stu-id="37cfe-191">One approach to partial app migration is to create an IIS sub-application and only move certain routes from ASP.NET 4.x to ASP.NET Core while preserving the URL structure the app.</span></span> <span data-ttu-id="37cfe-192">たとえば、*applicationHost.config* ファイルからのアプリの URL 構造について考えてみます。</span><span class="sxs-lookup"><span data-stu-id="37cfe-192">For example, consider the URL structure of the app from the *applicationHost.config* file:</span></span>
+<span data-ttu-id="caea5-191">部分的にアプリを移行する方法の 1 つは、IIS サブアプリケーションを作成し、アプリの URL 構造を維持しながら ASP.NET 4.x から ASP.NET Core に特定のルートのみを移動することです。</span><span class="sxs-lookup"><span data-stu-id="caea5-191">One approach to partial app migration is to create an IIS sub-application and only move certain routes from ASP.NET 4.x to ASP.NET Core while preserving the URL structure the app.</span></span> <span data-ttu-id="caea5-192">たとえば、 *applicationHost.config* ファイルからのアプリの URL 構造について考えてみます。</span><span class="sxs-lookup"><span data-stu-id="caea5-192">For example, consider the URL structure of the app from the *applicationHost.config* file:</span></span>
 
 ```xml
 <sites>
@@ -192,24 +193,24 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 </sites>
 ```
 
-<span data-ttu-id="37cfe-193">ディレクトリの構造:</span><span class="sxs-lookup"><span data-stu-id="37cfe-193">Directory structure:</span></span>
+<span data-ttu-id="caea5-193">ディレクトリの構造:</span><span class="sxs-lookup"><span data-stu-id="caea5-193">Directory structure:</span></span>
 
 ```
 .
 ├── MainSite
-│   ├── ...
-│   └── Web.config
+│   ├── ...
+│   └── Web.config
 └── NetCoreApi
     ├── ...
     └── web.config
 ```
 
-## <a name="bind-and-input-formatters"></a><span data-ttu-id="37cfe-194">[BIND] と入力フォーマッタ</span><span class="sxs-lookup"><span data-stu-id="37cfe-194">[BIND] and Input Formatters</span></span>
+## <a name="bind-and-input-formatters"></a><span data-ttu-id="caea5-194">[BIND] と入力フォーマッタ</span><span class="sxs-lookup"><span data-stu-id="caea5-194">[BIND] and Input Formatters</span></span>
 
-<span data-ttu-id="37cfe-195">[以前のバージョンの ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) では、過剰ポスティング攻撃からの保護に `[Bind]` 属性が使用されていました。</span><span class="sxs-lookup"><span data-stu-id="37cfe-195">[Previous versions of ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) used the `[Bind]` attribute to protect against overposting attacks.</span></span> <span data-ttu-id="37cfe-196">[入力フォーマッタ](xref:mvc/models/model-binding#input-formatters)は ASP.NET Core では動作が異なります。</span><span class="sxs-lookup"><span data-stu-id="37cfe-196">[Input formatters](xref:mvc/models/model-binding#input-formatters) work differently in ASP.NET Core.</span></span> <span data-ttu-id="37cfe-197">`[Bind]` 属性は、入力フォーマッタと共に使用して JSON または XML を解析するときに、過剰ポスティングを防ぐように設計されなくなりました。</span><span class="sxs-lookup"><span data-stu-id="37cfe-197">The `[Bind]` attribute is no longer designed to prevent overposting when used with input formatters to parse JSON or XML.</span></span> <span data-ttu-id="37cfe-198">データのソースが `x-www-form-urlencoded` コンテンツ タイプでポストされたフォーム データである場合、これらの属性はモデル バインドに影響します。</span><span class="sxs-lookup"><span data-stu-id="37cfe-198">These attributes affect model binding when the source of data is form data posted with the `x-www-form-urlencoded` content type.</span></span>
+<span data-ttu-id="caea5-195">[以前のバージョンの ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) では、過剰ポスティング攻撃からの保護に `[Bind]` 属性が使用されていました。</span><span class="sxs-lookup"><span data-stu-id="caea5-195">[Previous versions of ASP.NET](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) used the `[Bind]` attribute to protect against overposting attacks.</span></span> <span data-ttu-id="caea5-196">[入力フォーマッタ](xref:mvc/models/model-binding#input-formatters)は ASP.NET Core では動作が異なります。</span><span class="sxs-lookup"><span data-stu-id="caea5-196">[Input formatters](xref:mvc/models/model-binding#input-formatters) work differently in ASP.NET Core.</span></span> <span data-ttu-id="caea5-197">`[Bind]` 属性は、入力フォーマッタと共に使用して JSON または XML を解析するときに、過剰ポスティングを防ぐように設計されなくなりました。</span><span class="sxs-lookup"><span data-stu-id="caea5-197">The `[Bind]` attribute is no longer designed to prevent overposting when used with input formatters to parse JSON or XML.</span></span> <span data-ttu-id="caea5-198">データのソースが `x-www-form-urlencoded` コンテンツ タイプでポストされたフォーム データである場合、これらの属性はモデル バインドに影響します。</span><span class="sxs-lookup"><span data-stu-id="caea5-198">These attributes affect model binding when the source of data is form data posted with the `x-www-form-urlencoded` content type.</span></span>
 
-<span data-ttu-id="37cfe-199">JSON 情報をコントローラーにポストし、JSON 入力フォーマッタを使用してデータを解析するアプリの場合は、`[Bind]` 属性を、`[Bind]` 属性で定義されるプロパティと一致するビュー モデルに置き換えることをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="37cfe-199">For apps that post JSON information to controllers and use JSON Input Formatters to parse the data, we recommend replacing the `[Bind]` attribute with a view model that matches the properties defined by the `[Bind]` attribute.</span></span>
+<span data-ttu-id="caea5-199">JSON 情報をコントローラーにポストし、JSON 入力フォーマッタを使用してデータを解析するアプリの場合は、`[Bind]` 属性を、`[Bind]` 属性で定義されるプロパティと一致するビュー モデルに置き換えることをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="caea5-199">For apps that post JSON information to controllers and use JSON Input Formatters to parse the data, we recommend replacing the `[Bind]` attribute with a view model that matches the properties defined by the `[Bind]` attribute.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="37cfe-200">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="37cfe-200">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="caea5-200">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="caea5-200">Additional resources</span></span>
 
-- [<span data-ttu-id="37cfe-201">.NET Core にライブラリを移植する</span><span class="sxs-lookup"><span data-stu-id="37cfe-201">Porting Libraries to .NET Core</span></span>](/dotnet/core/porting/libraries)
+- [<span data-ttu-id="caea5-201">.NET Core にライブラリを移植する</span><span class="sxs-lookup"><span data-stu-id="caea5-201">Porting Libraries to .NET Core</span></span>](/dotnet/core/porting/libraries)
