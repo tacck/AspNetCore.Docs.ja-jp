@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6d67924d87cdbe72cb08c5305dfe45c5b22b31bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634346"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057116"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x から 2.0 への移行
 
@@ -69,7 +70,7 @@ ms.locfileid: "88634346"
 
 1\.x プロジェクト内の *.csproj* ファイルには、プロジェクトによって使用される各 NuGet パッケージの一覧があります。
 
-.NET Core 2.0 をターゲットとする ASP.NET Core 2.0 プロジェクトでは、 *.csproj* ファイル内の 1 つの[メタパッケージ](xref:fundamentals/metapackage)への参照によってパッケージのコレクションが置き換えられます。
+.NET Core 2.0 をターゲットとする ASP.NET Core 2.0 プロジェクトでは、 *.csproj* ファイル内の 1 つの [メタパッケージ](xref:fundamentals/metapackage)への参照によってパッケージのコレクションが置き換えられます。
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=8-10)]
 
@@ -107,11 +108,11 @@ ms.locfileid: "88634346"
 
 ## <a name="update-main-method-in-programcs"></a>Program.cs の Main メソッドの更新
 
-1\.x プロジェクトでは、*Program.cs* の `Main` メソッドは次のようでした。
+1\.x プロジェクトでは、 *Program.cs* の `Main` メソッドは次のようでした。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-2\.0 プロジェクトでは、*Program.cs* の `Main` メソッドは次のように簡素化されました。
+2\.0 プロジェクトでは、 *Program.cs* の `Main` メソッドは次のように簡素化されました。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
@@ -129,13 +130,13 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-前の例では、`IHostingEnvironment.EnvironmentName` プロパティに一致する *appsettings.json* とすべての *appsettings.\<EnvironmentName\>.json* ファイルから、構成設定を含む `Configuration` メンバーを読み込んでいます。 これらのファイルの場所は *Startup.cs* と同じパスです。
+前の例では、 *appsettings.json* と、`IHostingEnvironment.EnvironmentName` プロパティに一致する *appsettings.\<EnvironmentName\>.json* ファイルとから、構成設定を含む `Configuration` メンバーを読み込んでいます。 これらのファイルの場所は *Startup.cs* と同じパスです。
 
 2\.0 プロジェクトでは、1.x プロジェクトに固有の定型句による構成コードがバックグラウンドで実行されていました。 たとえば、環境変数とアプリの設定は起動時に読み込まれます。 同等の *Startup.cs* コードは、挿入されたインスタンスによって `IConfiguration` の初期化に削減されます。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-`WebHostBuilder.CreateDefaultBuilder` によって追加された既定のプロバイダーを削除するには、`ConfigureAppConfiguration` の内部の `IConfigurationBuilder.Sources` プロパティで `Clear` メソッドを呼び出します。 プロバイダーを戻すには、*Program.cs* の `ConfigureAppConfiguration` メソッドを利用します。
+`WebHostBuilder.CreateDefaultBuilder` によって追加された既定のプロバイダーを削除するには、`ConfigureAppConfiguration` の内部の `IConfigurationBuilder.Sources` プロパティで `Clear` メソッドを呼び出します。 プロバイダーを戻すには、 *Program.cs* の `ConfigureAppConfiguration` メソッドを利用します。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
@@ -159,7 +160,7 @@ EF Core 2.0 を使用する 2.0 プロジェクトでは、`Program.BuildWebHost
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
-2\.0 プロジェクトでは、*Program.cs* の `Main` メソッドに `SeedData.Initialize` 呼び出しを移動します。
+2\.0 プロジェクトでは、 *Program.cs* の `Main` メソッドに `SeedData.Initialize` 呼び出しを移動します。
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
@@ -189,7 +190,7 @@ Visual Studio 2017 で作成された ASP.NET Core 1.1 プロジェクトには�
 
     [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=10)]
 
-2. .NET Core をターゲットにする場合、*Program.cs* から `UseApplicationInsights` 拡張メソッド呼び出しを削除します。
+2. .NET Core をターゲットにする場合、 *Program.cs* から `UseApplicationInsights` 拡張メソッド呼び出しを削除します。
 
     [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCsMain&highlight=8)]
 

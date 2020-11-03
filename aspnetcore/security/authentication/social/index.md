@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: da025cb8dced8ac8a6ecf559d4de7795c9797f71
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634281"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053307"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Facebook、Google、ASP.NET Core での外部プロバイダーの認証
 
@@ -46,7 +47,7 @@ ms.locfileid: "88634281"
 * 新しいプロジェクトを作成します。
 * **[ASP.NET Core Web アプリケーション]** 、 **[次へ]** の順に選択します。
 * **[プロジェクト名]** を指定して、 **[場所]** を確認または変更します。 **[作成]** を選択します。
-* ドロップダウン (**ASP.NET Core {X.y}** ) で ASP.NET Core の最新バージョンを選択し、 **[Web アプリケーション]** を選択します。
+* ドロップダウン ( **ASP.NET Core {X.y}** ) で ASP.NET Core の最新バージョンを選択し、 **[Web アプリケーション]** を選択します。
 * **[認証]** の下で、 **[変更]** を選択して認証を **[個人のユーザー アカウント]** に設定します。 **[OK]** を選択します。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ウィンドウで、 **[作成]** を選択します。
 
@@ -68,7 +69,7 @@ ms.locfileid: "88634281"
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * `dotnet new` コマンドを使用すると、*WebApp1* フォルダーに新しい Razor Pages プロジェクトが作成されます。
+  * `dotnet new` コマンドを使用すると、 *WebApp1* フォルダーに新しい Razor Pages プロジェクトが作成されます。
   * `-au Individual` によって、個々の認証に対するコードを作成します。
   * `-uld` では、Windows 用の SQL Server Express の軽量バージョンである、LocalDB を使用します。 `-uld` を省略して SQLite を使用します。
   * `code` コマンドでは、Visual Studio Code の新しいインスタンス内に *WebApp1* フォルダーが開かれます。
@@ -85,7 +86,7 @@ ms.locfileid: "88634281"
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>SecretManager を使用して、ログイン プロバイダーから割り当てられたトークンを格納する
 
-ソーシャル ログイン プロバイダーは、登録プロセス中に**アプリケーション ID** トークンと**アプリケーション シークレット** トークンを割り当てます。 完全なトークン名はプロバイダーにより異なります。 これらのトークンは、アプリが API にアクセスするために使用する資格情報を示します。 トークンは、[Secret Manager](xref:security/app-secrets#secret-manager) のヘルプにより、アプリの構成にリンクすることが可能な "シークレット" になります。 Secret Manager は、*appsettings.json* などの構成ファイルのトークンに格納される、セキュリティがさらに向上した方法です。
+ソーシャル ログイン プロバイダーは、登録プロセス中に **アプリケーション ID** トークンと **アプリケーション シークレット** トークンを割り当てます。 完全なトークン名はプロバイダーにより異なります。 これらのトークンは、アプリが API にアクセスするために使用する資格情報を示します。 トークンは、[Secret Manager](xref:security/app-secrets#secret-manager) のヘルプにより、アプリの構成にリンクすることが可能な "シークレット" になります。 Secret Manager は、 *appsettings.json* などの構成ファイルにトークンを格納することに代わるより安全な方法です。
 
 > [!IMPORTANT]
 > Secret Manager は、開発目的のみのためのものです。 [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)により、Azure テストと運用のシークレットを格納し、保護することが可能です。
@@ -110,7 +111,7 @@ ms.locfileid: "88634281"
 
 外部プロバイダーでのサインイン プロセス中に設定した電子メール アドレスを使用して、パスワードを作成し、サインインするには、次の手順を実行します。
 
-* 右上にある **[Hello &lt; 電子メール エイリアス&gt;]** リンクを選択して**管理**ビューに移動します。
+* 右上にある **[Hello &lt; 電子メール エイリアス&gt;]** リンクを選択して **管理** ビューに移動します。
 
 ![Web アプリケーションの管理ビュー](index/_static/pass1a.png)
 

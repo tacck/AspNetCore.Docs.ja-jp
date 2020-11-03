@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: 8fa44f567906ecf36a9bbaa5076cd36c75c10781
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 25348f8486ec6ccb53ebf527ad4519638dd5f73e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634879"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059378"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core の基礎
 
@@ -48,7 +49,7 @@ ms.locfileid: "88634879"
 
 ASP.NET Core には、構成済みのサービスをアプリ全体で利用できるようにする依存性の注入 (DI) フレームワークが組み込まれています。 たとえば、ログ コンポーネントは、サービスです。
 
-サービスを構成 (または*登録*) するコードが `Startup.ConfigureServices` メソッドに追加されています。 次に例を示します。
+サービスを構成 (または *登録* ) するコードが `Startup.ConfigureServices` メソッドに追加されています。 次に例を示します。
 
 [!code-csharp[](index/samples_snapshot/3.x/ConfigureServices.cs)]
 
@@ -78,7 +79,7 @@ ASP.NET Core には、豊富な組み込みミドルウェアのセットが含�
 
 ## <a name="host"></a>Host
 
-起動時に、ASP.NET Core アプリによって*ホスト*がビルドされます。 ホストにより、次のようなアプリのすべてのリソースがカプセル化されます。
+起動時に、ASP.NET Core アプリによって *ホスト* がビルドされます。 ホストにより、次のようなアプリのすべてのリソースがカプセル化されます。
 
 * HTTP サーバーの実装
 * ミドルウェア コンポーネント
@@ -100,7 +101,7 @@ ASP.NET Core には、豊富な組み込みミドルウェアのセットが含�
 `CreateDefaultBuilder` と `ConfigureWebHostDefaults` メソッドでは、次のような既定のオプションのセットを使用してホストが構成されます。
 
 * Web サーバーとして [Kestrel](#servers) を使用し、IIS の統合を有効にします。
-* *appsettings.json*、"*appsettings.{環境名}.json*"、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。
+* *appsettings.json* 、 *appsettings.{環境名}.json* 、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。
 * ログ出力をコンソールとデバッグ プロバイダーに送ります。
 
 詳細については、「<xref:fundamentals/host/generic-host>」を参照してください。
@@ -118,16 +119,16 @@ ASP.NET Core アプリは、HTTP 要求をリッスンするために HTTP サ�
 ASP.NET Core では、次のサーバー実装が提供されます。
 
 * *Kestrel* は、クロスプラットフォームの Web サーバーです。 Kestrel は [IIS](https://www.iis.net/) を使用してリバース プロキシ構成で実行されることがよくあります。 Kestrel は、ASP.NET Core 2.0 以降で、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。
-* *IIS HTTP サーバー*は、IIS を使用する Windows のサーバーです。 このサーバーでは、ASP.NET Core アプリと IIS が同じプロセスで実行されます。
+* *IIS HTTP サーバー* は、IIS を使用する Windows のサーバーです。 このサーバーでは、ASP.NET Core アプリと IIS が同じプロセスで実行されます。
 * *HTTP.sys* は、IIS とは一緒に使用しない Windows のサーバーです。
 
 # <a name="macos"></a>[macOS](#tab/macos)
 
-ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、ASP.NET Core 2.0 以降で、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
+ASP.NET Core は、 *Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、ASP.NET Core 2.0 以降で、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、ASP.NET Core 2.0 以降で、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
+ASP.NET Core は、 *Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、ASP.NET Core 2.0 以降で、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
 
 ---
 
@@ -137,7 +138,7 @@ ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの�
 
 ASP.NET Core は、構成プロバイダーの順序付けされたセットから、名前と値のペアの設定を取得する構成フレームワークとなります。 組み込み構成プロバイダーは、 *.json* ファイル、 *.xml* ファイル、環境変数、コマンドライン引数などのさまざまなソースで使用できます。 他のソースをサポートするには、カスタム構成プロバイダーを作成します。
 
-[既定](xref:fundamentals/configuration/index#default)では、ASP.NET Core アプリは *appsettings. json*、環境変数、コマンドラインなどから読み取るように構成されます。 アプリの構成が読み込まれると、環境変数の値によって *appsettings.json* の値がオーバーライドされます。
+[既定](xref:fundamentals/configuration/index#default)では、ASP.NET Core アプリは *appsettings.json* 、環境変数、コマンドラインなどから読み取るように構成されます。 アプリの構成が読み込まれると、環境変数からの値によって *appsettings.json* からの値がオーバーライドされます。
 
 関連する構成値を読み取る方法としては、[オプション パターン](xref:fundamentals/configuration/options)を使用することをお勧めします。 詳細については、「[オプションパターンを使用して、階層型の構成データをバインドします](xref:fundamentals/configuration/index#optpat)」を参照してください。
 
@@ -177,7 +178,7 @@ ASP.NET Core では、組み込みやサード パーティ製のさまざまな
 
 ## <a name="routing"></a>ルーティング
 
-*ルート*とは、ハンドラーにマップされている URL のパターンです。 このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。 ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。
+*ルート* とは、ハンドラーにマップされている URL のパターンです。 このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。 ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。
 
 詳細については、「<xref:fundamentals/routing>」を参照してください。
 
@@ -196,9 +197,9 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
 
 `HttpClient` インスタンスの作成に、`IHttpClientFactory` の実装を使用できます。 ファクトリは次のことを行います。
 
-* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、GitHub にアクセスするために、*github* クライアントを登録して構成します。 既定のクライアントを別の目的で登録して構成します。
+* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、GitHub にアクセスするために、 *github* クライアントを登録して構成します。 既定のクライアントを別の目的で登録して構成します。
 * 複数のデリゲート ハンドラーを登録してチェーン化し、送信要求ミドルウェア パイプラインを構築するのをサポートしています。 このパターンは、ASP.NET Core の受信ミドルウェア パイプラインに似ています。 このパターンでは、キャッシュ、エラー処理、シリアル化、ログ記録など、HTTP 要求に関する横断的関心事を管理するためのメカニズムが提供されます。
-* 一時的な障害処理用の人気のサードパーティ製ライブラリ、*Polly* と統合できます。
+* 一時的な障害処理用の人気のサードパーティ製ライブラリ、 *Polly* と統合できます。
 * 基になっている `HttpClientHandler` インスタンスのプールと有効期間を管理し、`HttpClient` の有効期間を手動で管理するときに発生する一般的な DNS の問題を防ぎます。
 * ファクトリによって作成されたクライアントから送信されるすべての要求に対し、構成可能なログ エクスペリエンスを <xref:Microsoft.Extensions.Logging.ILogger> を介して追加します。
 
@@ -208,12 +209,12 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
 
 コンテンツ ルートは、以下に対する基本パスです。
 
-* アプリをホストしている実行可能ファイル ( *.exe*)。
-* アプリを構成するコンパイル済みアセンブリ ( *.dll*)。
+* アプリをホストしている実行可能ファイル ( *.exe* )。
+* アプリを構成するコンパイル済みアセンブリ ( *.dll* )。
 * 次のような、アプリで使用されるコンテンツ ファイル。
-  * Razor ファイル ( *.cshtml*、 *.razor*)
-  * 構成ファイル ( *.json*、 *.xml*)
-  * データ ファイル ( *.db*)
+  * Razor ファイル ( *.cshtml* 、 *.razor* )
+  * 構成ファイル ( *.json* 、 *.xml* )
+  * データ ファイル ( *.db* )
 * [Web ルート](#web-root) (通常は *wwwroot* フォルダー)。
 
 開発中、コンテンツ ルートの既定値は、プロジェクトのルート ディレクトリです。 このディレクトリは、アプリのコンテンツ ファイルと [Web ルート](#web-root)の両方の基本パスでもあります。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別のコンテンツ ルートを指定します。 詳細については、[コンテンツ ルート](xref:fundamentals/host/generic-host#contentroot)に関するページを参照してください。
@@ -222,13 +223,13 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
 
 Web ルートは、次のような、パブリックで静的なリソース ファイルへの基本パスです。
 
-* スタイルシート ( *.css*)
-* JavaScript ( *.js*)
-* 画像 ( *.png*、*jpg*)
+* スタイルシート ( *.css* )
+* JavaScript ( *.js* )
+* 画像 ( *.png* 、 *jpg* )
 
 既定では、静的ファイルは Web ルート ディレクトリとそのサブディレクトリからのみ提供されます。 Web ルートのパスの既定値は、 *{コンテンツ ルート}/wwwroot* です。 [ホストを構築するとき](#host)は、それ自体のパスを設定して別の Web ルートを指定します。 詳細については、「[Web ルート](xref:fundamentals/host/generic-host#webroot)」を参照してください。
 
-プロジェクト ファイル内の [\<Content> プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content)を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* とそのサブディレクトリにコンテンツを公開しないようにします。
+プロジェクト ファイル内の [\<Content> プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content)を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、 *wwwroot/local* とそのサブディレクトリにコンテンツを公開しないようにします。
 
 ```xml
 <ItemGroup>
@@ -236,7 +237,7 @@ Web ルートは、次のような、パブリックで静的なリソース フ
 </ItemGroup>
 ```
 
-Razor *.cshtml* ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。 `~/` で始まるパスは、"*仮想パス*" と呼ばれます。
+Razor *.cshtml* ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。 `~/` で始まるパスは、" *仮想パス* " と呼ばれます。
 
 詳細については、「<xref:fundamentals/static-files>」を参照してください。
 
@@ -253,9 +254,9 @@ Razor *.cshtml* ファイルの場合、チルダとスラッシュ (`~/`) が W
 * アプリで必要なサービスが構成されています。
 * 要求を処理するパイプラインが定義されています。
 
-*サービス*とは、アプリが使用するコンポーネントです。 たとえば、ログ コンポーネントは、サービスです。 サービスを構成 (または*登録*) するコードが `Startup.ConfigureServices` メソッドに追加されています。
+*サービス* とは、アプリが使用するコンポーネントです。 たとえば、ログ コンポーネントは、サービスです。 サービスを構成 (または *登録* ) するコードが `Startup.ConfigureServices` メソッドに追加されています。
 
-要求を処理するパイプラインは、一連の*ミドルウェア* コンポーネントとして構成されています。 たとえば、ミドルウェアは、静的ファイルに対する要求を処理したり、HTTPS に HTTP 要求をリダイレクトします。 各ミドルウェアは `HttpContext` に非同期操作を実行してから、パイプラインの次のミドルウェアを呼び出すか、要求を終了します。 `Startup.Configure` メソッドには、要求を処理するパイプラインを構成するコードが追加されます。
+要求を処理するパイプラインは、一連の *ミドルウェア* コンポーネントとして構成されています。 たとえば、ミドルウェアは、静的ファイルに対する要求を処理したり、HTTPS に HTTP 要求をリダイレクトします。 各ミドルウェアは `HttpContext` に非同期操作を実行してから、パイプラインの次のミドルウェアを呼び出すか、要求を終了します。 `Startup.Configure` メソッドには、要求を処理するパイプラインを構成するコードが追加されます。
 
 `Startup` クラスの例を次に示します。
 
@@ -291,7 +292,7 @@ ASP.NET Core にはミドルウェアのセットが豊富に組み込まれて�
 
 ## <a name="host"></a>Host
 
-ASP.NET Core アプリは起動時に*ホスト*をビルドします。 ホストとは、次などのアプリのすべてのリソースをカプセル化するオブジェクトです。
+ASP.NET Core アプリは起動時に *ホスト* をビルドします。 ホストとは、次などのアプリのすべてのリソースをカプセル化するオブジェクトです。
 
 * HTTP サーバーの実装
 * ミドルウェア コンポーネント
@@ -310,7 +311,7 @@ Web ホストと汎用ホストの 2 つのホストが利用可能です。 ASP
 `CreateDefaultBuilder` メソッドは、次のようなよく使用されるオプションと共にホストを構成します。
 
 * Web サーバーとして [Kestrel](#servers) を使用し、IIS の統合を有効にします。
-* *appsettings.json*、"*appsettings.{環境名}.json*"、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。
+* *appsettings.json* 、 *appsettings.{環境名}.json* 、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。
 * ログ出力をコンソールとデバッグ プロバイダーに送ります。
 
 詳細については、「<xref:fundamentals/host/web-host>」を参照してください。
@@ -332,16 +333,16 @@ ASP.NET Core アプリは、HTTP 要求をリッスンするために HTTP サ�
 ASP.NET Core では、次のサーバー実装が提供されます。
 
 * *Kestrel* は、クロスプラットフォームの Web サーバーです。 Kestrel は [IIS](https://www.iis.net/) を使用してリバース プロキシ構成で実行されることがよくあります。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。
-* *IIS HTTP サーバー*は、IIS を使用する Windows のサーバーです。 このサーバーでは、ASP.NET Core アプリと IIS が同じプロセスで実行されます。
+* *IIS HTTP サーバー* は、IIS を使用する Windows のサーバーです。 このサーバーでは、ASP.NET Core アプリと IIS が同じプロセスで実行されます。
 * *HTTP.sys* は、IIS とは一緒に使用しない Windows のサーバーです。
 
 # <a name="macos"></a>[macOS](#tab/macos)
 
-ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
+ASP.NET Core は、 *Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
+ASP.NET Core は、 *Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
 
 ---
 
@@ -358,11 +359,11 @@ ASP.NET Core では、次のサーバー実装が提供されます。
 
 # <a name="macos"></a>[macOS](#tab/macos)
 
-ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
+ASP.NET Core は、 *Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-ASP.NET Core は、*Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
+ASP.NET Core は、 *Kestrel* クロスプラットフォーム サーバーの実装を提供します。 Kestrel は、インターネットに直接公開される一般向けエッジ サーバーとして実行することもできます。 Kestrel は [Nginx](https://nginx.org) または [Apache](https://httpd.apache.org/) を使用してリバース プロキシ構成で実行されることがよくあります。
 
 ---
 
@@ -384,7 +385,7 @@ ASP.NET Core には、パスワードなどの機密の構成データの管理�
 
 ## <a name="options"></a>オプション
 
-ASP.NET Core では、構成値の格納と取得に、可能な限り*オプション パターン*を使用します。 オプション パターンではクラスを使用して、関連する設定のグループを表します。
+ASP.NET Core では、構成値の格納と取得に、可能な限り *オプション パターン* を使用します。 オプション パターンではクラスを使用して、関連する設定のグループを表します。
 
 たとえば、以下のコードでは WebSockets のオプションが設定されます。
 
@@ -394,7 +395,7 @@ ASP.NET Core では、構成値の格納と取得に、可能な限り*オプシ
 
 ## <a name="environments"></a>環境
 
-*開発*、*ステージング*、および*実稼働*などの実行環境は ASP.NET Core の最上の概念です。 アプリが実行している環境は、`ASPNETCORE_ENVIRONMENT` 環境変数を設定することにより指定できます。 ASP.NET Core は、アプリの起動時にその環境変数を読み取り、その値を `IHostingEnvironment` 実装に格納します。 この環境オブジェクトは、DI を介しアプリの任意の場所で使用されます。
+*開発* 、 *ステージング* 、および *実稼働* などの実行環境は ASP.NET Core の最上の概念です。 アプリが実行している環境は、`ASPNETCORE_ENVIRONMENT` 環境変数を設定することにより指定できます。 ASP.NET Core は、アプリの起動時にその環境変数を読み取り、その値を `IHostingEnvironment` 実装に格納します。 この環境オブジェクトは、DI を介しアプリの任意の場所で使用されます。
 
 `Startup` クラスの次のサンプル コードは、それが開発環境で実行された場合のみ、詳細なエラー情報を提供するようアプリを構成します。
 
@@ -426,7 +427,7 @@ DI からの `ILogger` オブジェクトの取得およびログ メソッド�
 
 ## <a name="routing"></a>ルーティング
 
-*ルート*とは、ハンドラーにマップされている URL のパターンです。 このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。 ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。
+*ルート* とは、ハンドラーにマップされている URL のパターンです。 このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。 ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。
 
 詳細については、「<xref:fundamentals/routing>」を参照してください。
 
@@ -445,9 +446,9 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
 
 `HttpClient` インスタンスの作成に、`IHttpClientFactory` の実装を使用できます。 ファクトリは次のことを行います。
 
-* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、*github* クライアントを登録して、GitHub にアクセスするように構成できます。 既定のクライアントは、他の目的に登録できます。
+* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、 *github* クライアントを登録して、GitHub にアクセスするように構成できます。 既定のクライアントは、他の目的に登録できます。
 * 複数のデリゲート ハンドラーを登録してチェーン化し、送信要求ミドルウェア パイプラインを構築するのをサポートしています。 このパターンは、ASP.NET Core での受信ミドルウェア パイプラインに似ています。 このパターンは、キャッシュ、エラー処理、シリアル化、ログ記録など、HTTP 要求に関する横断的関心事を管理するためのメカニズムを提供します。
-* 一時的な障害処理用の人気のサードパーティ製ライブラリ、*Polly* と統合できます。
+* 一時的な障害処理用の人気のサードパーティ製ライブラリ、 *Polly* と統合できます。
 * 基になっている `HttpClientHandler` インスタンスのプールと有効期間を管理し、`HttpClient` の有効期間を手動で管理するときに発生する一般的な DNS の問題を防ぎます。
 * ファクトリによって作成されたクライアントから送信されるすべての要求に対し、(`ILogger` によって) 構成可能なログ エクスペリエンスを追加します。
 
@@ -457,12 +458,12 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
 
 コンテンツ ルートは、以下に対する基本パスです。
 
-* アプリをホストしている実行可能ファイル ( *.exe*)。
-* アプリを構成するコンパイル済みアセンブリ ( *.dll*)。
+* アプリをホストしている実行可能ファイル ( *.exe* )。
+* アプリを構成するコンパイル済みアセンブリ ( *.dll* )。
 * 次のような、アプリで使用される非コード コンテンツ ファイル。
-  * Razor ファイル ( *.cshtml*、 *.razor*)
-  * 構成ファイル ( *.json*、 *.xml*)
-  * データ ファイル ( *.db*)
+  * Razor ファイル ( *.cshtml* 、 *.razor* )
+  * 構成ファイル ( *.json* 、 *.xml* )
+  * データ ファイル ( *.db* )
 * [Web ルート](#web-root) (通常、発行された *wwwroot* フォルダー)。
 
 開発中:
@@ -478,15 +479,15 @@ ASP.NET Core には、次などのエラー処理用の機能が組み込まれ�
 
 Web ルートは、次のような、パブリックで非コードの静的なリソース ファイルへの基本パスです。
 
-* スタイルシート ( *.css*)
-* JavaScript ( *.js*)
-* 画像 ( *.png*、*jpg*)
+* スタイルシート ( *.css* )
+* JavaScript ( *.js* )
+* 画像 ( *.png* 、 *jpg* )
 
 既定で、静的ファイルは Web ルート ディレクトリ (とサブディレクトリ) からのみ提供されます。
 
-Web ルートのパスの既定値は、" *{コンテンツ ルート}/wwwroot*" ですが、[ホストの構築](#host)時に別の Web ルートを指定することも可能です。 詳細については、「[Web ルート](xref:fundamentals/host/web-host#web-root)」を参照してください。
+Web ルートのパスの既定値は、" *{コンテンツ ルート}/wwwroot* " ですが、 [ホストの構築](#host)時に別の Web ルートを指定することも可能です。 詳細については、「[Web ルート](xref:fundamentals/host/web-host#web-root)」を参照してください。
 
-プロジェクト ファイル内の [\<Content> プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content)を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、*wwwroot/local* ディレクトリおよびサブディレクトリにコンテンツを公開しないようにします。
+プロジェクト ファイル内の [\<Content> プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items#content)を使用して *wwwroot* にファイルを発行できないようにします。 次の例では、 *wwwroot/local* ディレクトリおよびサブディレクトリにコンテンツを公開しないようにします。
 
 ```xml
 <ItemGroup>
@@ -494,7 +495,7 @@ Web ルートのパスの既定値は、" *{コンテンツ ルート}/wwwroot*"
 </ItemGroup>
 ```
 
-Razor ( *.cshtml*) ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。 `~/` で始まるパスは、"*仮想パス*" と呼ばれます。
+Razor ( *.cshtml* ) ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。 `~/` で始まるパスは、" *仮想パス* " と呼ばれます。
 
 詳細については、「<xref:fundamentals/static-files>」を参照してください。
 
