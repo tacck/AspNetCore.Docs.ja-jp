@@ -5,7 +5,7 @@ description: イベント引数の型、イベントのコールバック、既�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/17/2020
+ms.date: 10/20/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 0d832d98ac9d1364b5db2bf65f31cbc5442db7f6
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: e8c3d6a9f2c6b50fc18da59b8e0b5475360673c7
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393783"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491465"
 ---
 # <a name="aspnet-core-no-locblazor-event-handling"></a>ASP.NET Core Blazor のイベント処理
 
@@ -71,7 +71,7 @@ Razor コンポーネントでは、イベント処理機能が提供されま�
 @code {
     private async Task UpdateHeading(MouseEventArgs e)
     {
-        ...
+        await ...
     }
 }
 ```
@@ -129,7 +129,7 @@ private void ShowMessage(MouseEventArgs e)
 
 詳細については、次のリソースを参照してください。
 
-* [`EventArgs`ASP.NET Core 参照ソースのクラス (dotnet/aspnetcore `master` ブランチ)](https://github.com/dotnet/aspnetcore/tree/master/src/Components/Web/src/Web)。 `master` ブランチは、"*次の*" ASP.NET Core リリース用に開発される API を表します。 現在のリリースでは、適切な GitHub リポジトリ ブランチ (たとえば、`release/3.1`) を選択します。
+* [`EventArgs`ASP.NET Core 参照ソースのクラス (dotnet/aspnetcore `master` ブランチ)](https://github.com/dotnet/aspnetcore/tree/master/src/Components/Web/src/Web)。 `master` ブランチは、" *次の* " ASP.NET Core リリース用に開発される API を表します。 現在のリリースでは、適切な GitHub リポジトリ ブランチ (たとえば、`release/3.1`) を選択します。
 * [MDN Web ドキュメント:GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers):各 DOM イベントをサポートする HTML 要素に関する情報が含まれています。
 
 ## <a name="lambda-expressions"></a>ラムダ式
@@ -167,7 +167,7 @@ private void ShowMessage(MouseEventArgs e)
 ```
 
 > [!NOTE]
-> 前の `for` ループの例の `i` などのラムダ式内で、ループ変数を直接使用し**ない**でください。 そうしないと、すべてのラムダ式で同じ変数が使用され、すべてのラムダで同じ値が使用されることになります。 常にローカル変数の変数値をキャプチャしてから使用してください。 上の例では、ループ変数の `i` は `buttonNumber` に割り当てられます。
+> 前の `for` ループの例の `i` などのラムダ式内で、ループ変数を直接使用し **ない** でください。 そうしないと、すべてのラムダ式で同じ変数が使用され、すべてのラムダで同じ値が使用されることになります。 常にローカル変数の変数値をキャプチャしてから使用してください。 上の例では、ループ変数の `i` は `buttonNumber` に割り当てられます。
 
 ## <a name="eventcallback"></a>EventCallback
 
@@ -289,3 +289,26 @@ await OnClickCallback.InvokeAsync(arg);
         Console.WriteLine($"A child div was selected. {DateTime.Now}");
 }
 ```
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="focus-an-element"></a>要素にフォーカスを合わせる
+
+[要素参照](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements)で `FocusAsync` を呼び出し、コード内の要素にフォーカスを合わせます。
+
+```razor
+<input @ref="exampleInput" />
+
+<button @onclick="ChangeFocus">Focus the Input Element</button>
+
+@code {
+    private ElementReference exampleInput;
+    
+    private async Task ChangeFocus()
+    {
+        await exampleInput.FocusAsync();
+    }
+}
+```
+
+::: moniker-end

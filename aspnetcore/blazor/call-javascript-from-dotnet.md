@@ -4,8 +4,8 @@ author: guardrex
 description: Blazor アプリで .NET メソッドから JavaScript 関数を呼び出す方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
-ms.date: 10/02/2020
+ms.custom: mvc, devx-track-js
+ms.date: 10/20/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 3bd881b124e00b91ab0aa9d3eb7531f10ef895f2
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: ddbffa356a1cb53ee6ba1589f93e815af968bfb7
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326494"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690290"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -208,40 +208,46 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 >
 > JS 相互運用により要素 `MyList` のコンテンツが変更され、Blazor でその要素に差分を適用しようとした場合、差分は DOM と一致しません。
 
-.NET コードに関しては、<xref:Microsoft.AspNetCore.Components.ElementReference> は不透明なハンドルです。 <xref:Microsoft.AspNetCore.Components.ElementReference> を使用して実行できるのは、JS 相互運用を介して JavaScript コードに渡すこと " *のみ* " です。 これを行うと、JavaScript 側のコードが `HTMLElement` インスタンスを受け取り、通常の DOM API で使用できます。
-
-たとえば、次のコードでは、要素にフォーカスを設定できるようにする .NET 拡張メソッドを定義しています。
+<xref:Microsoft.AspNetCore.Components.ElementReference> は JS Interop 経由で JavaScript コードに渡されます。 JavaScript コードが `HTMLElement` インスタンスを受け取り、通常の DOM API で使用できます。 たとえば、次のコードでは、要素にマウス クリックを送信できるようにする .NET 拡張メソッドを定義しています。
 
 `exampleJsInterop.js`:
 
 ```javascript
-window.exampleJsFunctions = {
-  focusElement : function (element) {
-    element.focus();
+window.interopFunctions = {
+  clickElement : function (element) {
+    element.click();
   }
 }
 ```
 
-値を返さない JavaScript 関数を呼び出すには、<xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を使用します。 次のコードは、キャプチャされた <xref:Microsoft.AspNetCore.Components.ElementReference> で前述の JavaScript 関数を呼び出して、ユーザー名入力にフォーカスを設定します。
+::: moniker range=">= aspnetcore-5.0"
 
-[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=1,3,11-12)]
+> [!NOTE]
+> C# コードで [`FocusAsync`](xref:blazor/components/event-handling#focus-an-element) を使用し、Blazor フレームワークに組み込まれ、要素参照と連動する要素にフォーカスを合わせます。
+
+::: moniker-end
+
+値を返さない JavaScript 関数を呼び出すには、<xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> を使用します。 次のコードは、キャプチャされた <xref:Microsoft.AspNetCore.Components.ElementReference> で前述の JavaScript 関数を呼び出し、クライアント側の `Click` イベントをトリガーします。
+
+[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=14-15)]
 
 拡張メソッドを使用するには、<xref:Microsoft.JSInterop.IJSRuntime> インスタンスを受け取る静的拡張メソッドを作成します。
 
 ```csharp
-public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
+public static async Task TriggerClickEvent(this ElementReference elementRef, 
+    IJSRuntime jsRuntime)
 {
     await jsRuntime.InvokeVoidAsync(
-        "exampleJsFunctions.focusElement", elementRef);
+        "interopFunctions.clickElement", elementRef);
 }
 ```
 
-`Focus` メソッドは、オブジェクトで直接呼び出されます。 次の例では、`Focus` メソッドが `JsInteropClasses` 名前空間から使用できることを前提としています。
+`clickElement` メソッドは、オブジェクトで直接呼び出されます。 次の例では、`TriggerClickEvent` メソッドが `JsInteropClasses` 名前空間から使用できることを前提としています。
 
-[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
+[!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=15)]
 
 > [!IMPORTANT]
-> `username` 変数は、コンポーネントがレンダリングされた後にのみ設定されます。 未入力の <xref:Microsoft.AspNetCore.Components.ElementReference> が JavaScript コードに渡された場合、JavaScript コードは `null` の値を受け取ります。 コンポーネントのレンダリングが完了した後に要素参照を操作する (要素に初期フォーカスを設定する) には、[`OnAfterRenderAsync` または `OnAfterRender` コンポーネント ライフサイクル メソッド](xref:blazor/components/lifecycle#after-component-render)を使用します。
+> `exampleButton` 変数は、コンポーネントがレンダリングされた後にのみ設定されます。 未入力の <xref:Microsoft.AspNetCore.Components.ElementReference> が JavaScript コードに渡された場合、JavaScript コードは `null` の値を受け取ります。 コンポーネントのレンダリングが完了した後に要素参照を操作するには、[`OnAfterRenderAsync` または `OnAfterRender` コンポーネント ライフサイクル メソッド](xref:blazor/components/lifecycle#after-component-render)を使用します。
 
 ジェネリック型を操作して値を返す場合は、<xref:System.Threading.Tasks.ValueTask%601> を使用します。
 
@@ -260,7 +266,12 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 ## <a name="reference-elements-across-components"></a>コンポーネント間で要素を参照する
 
-<xref:Microsoft.AspNetCore.Components.ElementReference> インスタンスは、コンポーネントの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> メソッドでのみ有効であることが保証されます (要素参照は `struct` です)。そのため、コンポーネント間で要素参照を渡すことはできません。 親コンポーネントが要素参照を他のコンポーネントで使用できるようにするために、親コンポーネントは次のことを実行できます。
+<xref:Microsoft.AspNetCore.Components.ElementReference> は次の理由からコンポーネントで渡すことができません。
+
+* インスタンスはコンポーネントのレンダリング後にのみ存在することが保証されます。それはコンポーネントの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A>/<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> メソッドの実行中か実行後になります。
+* <xref:Microsoft.AspNetCore.Components.ElementReference> は [`struct`](/csharp/language-reference/builtin-types/struct) であり、[コンポーネント パラメーター](xref:blazor/components/index#component-parameters)として渡すことはできません。
+
+親コンポーネントが要素参照を他のコンポーネントで使用できるようにするために、親コンポーネントは次のことを実行できます。
 
 * 子コンポーネントがコールバックを登録できるようにします。
 * 渡された要素参照を使用して、登録されたコールバックを<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> イベント中に呼び出します。 間接的には、この方法により、子コンポーネントが親の要素参照とやりとりできるようになります。

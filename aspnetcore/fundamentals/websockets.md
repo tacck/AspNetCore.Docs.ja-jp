@@ -5,7 +5,7 @@ description: ASP.NET Core で Websocket の使用を開始する方法を説明�
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/1/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 685e694a3d974a8a51255bdbb83d33459137a3d9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 11cd1c266516c696859c4116c940400e90d09ab4
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629016"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678542"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core での Websocket のサポート
 
@@ -37,39 +37,25 @@ ms.locfileid: "88629016"
 
 [ASP.NET Core SignalR](xref:signalr/introduction) は、アプリへのリアルタイム Web 機能の追加を簡単にするライブラリです。 可能なかぎり、WebSocket が使用されます。
 
-ほとんどのアプリケーションでは、生の WebSocket よりも SignalR が推奨されます。 SignalR には、WebSocket を使用できない環境の場合にトランスポートのフォールバックが用意されています。 シンプルなリモート プロシージャ呼び出しアプリ モデルも用意されています。 また、ほとんどのシナリオで、SignalR には生の WebSocket を使用した場合と比較してパフォーマンス上の大きなデメリットがありません。
+ほとんどのアプリケーションでは、生の WebSocket よりも SignalR が推奨されます。 SignalR には、WebSocket を使用できない環境の場合にトランスポートのフォールバックが用意されています。 基本的なリモート プロシージャ呼び出しアプリ モデルも用意されています。 また、ほとんどのシナリオで、SignalR には生の WebSocket を使用した場合と比較してパフォーマンス上の大きなデメリットがありません。
 
-## <a name="prerequisites"></a>必須コンポーネント
+一部のアプリでは、[.NET の gRPC](xref:grpc/index) に Websocket の代替手段が用意されています。
 
-* ASP.NET Core 1.1 以降
-* ASP.NET Core をサポートする任意の OS:
-  
+## <a name="prerequisites"></a>前提条件
+
+* ASP.NET Core をサポートする任意の OS:  
   * Windows 7 / Windows Server 2008 以降
   * Linux
-  * macOS
-  
+  * macOS  
 * アプリが IIS を含む Windows 上で実行されている場合:
-
   * Windows 8 / Windows Server 2012 以降
   * IIS 8 / IIS 8 Express
-  * WebSockets を有効にする必要があります (「[IIS/IIS Express のサポート](#iisiis-express-support)」セクションを参照してください)。
-  
+  * WebSockets を有効にする必要があります。 「[IIS/IIS Express のサポート](#iisiis-express-support)」セクションを参照してください。  
 * アプリが [HTTP.sys](xref:fundamentals/servers/httpsys) で実行されている場合:
-
   * Windows 8 / Windows Server 2012 以降
-
 * サポートされているブラウザーについては、 https://caniuse.com/#feat=websockets を参照してください。
 
-::: moniker range="< aspnetcore-2.1"
-
-## <a name="nuget-package"></a>NuGet パッケージ
-
-[Microsoft.AspNetCore.WebSockets](https://www.nuget.org/packages/Microsoft.AspNetCore.WebSockets/) パッケージをインストールします。
-
-::: moniker-end
-
 ## <a name="configure-the-middleware"></a>ミドルウェアの構成
-
 
 `Startup` クラスの `Configure` メソッドに、Websocket ミドルウェアを追加します。
 
@@ -106,7 +92,7 @@ ms.locfileid: "88629016"
 
 WebSocket 要求はどの URL からも受け取る場合がありますが、このサンプル コードでは `/ws` の要求のみを受け取ります。
 
-WebSocket を使用するとき、接続中、ミドルウェア パイプラインの実行を維持する**必要があります**。 ミドルウェア パイプラインの修了後に WebSocket メッセージを送信するか、受信する場合、次のような例外を受け取ることがあります。
+WebSocket を使用するとき、接続中、ミドルウェア パイプラインの実行を維持する **必要があります** 。 ミドルウェア パイプラインの修了後に WebSocket メッセージを送信するか、受信する場合、次のような例外を受け取ることがあります。
 
 ```
 System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake. ---> System.ObjectDisposedException: Cannot write to the response body, the response has completed.
@@ -115,19 +101,11 @@ Object name: 'HttpResponseStream'.
 
 バックグラウンド サービスを利用してデータを WebSocket に書き込む場合、ミドルウェア パイプラインの実行を維持します。 これは <xref:System.Threading.Tasks.TaskCompletionSource%601> を使用して行います。 `TaskCompletionSource` をバックグラウンド サービスに渡し、WebSocket が終わったとき、それに <xref:System.Threading.Tasks.TaskCompletionSource%601.TrySetResult%2A> を呼び出させます。 次の例に示すように、要求中に <xref:System.Threading.Tasks.TaskCompletionSource%601.Task> プロパティの `await` を行います。
 
-```csharp
-app.Use(async (context, next) => {
-    var socket = await context.WebSockets.AcceptWebSocketAsync();
-    var socketFinishedTcs = new TaskCompletionSource<object>();
+[!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup2.cs?name=AcceptWebSocket)]
 
-    BackgroundSocketProcessor.AddSocket(socket, socketFinishedTcs); 
-
-    await socketFinishedTcs.Task;
-});
-```
 WebSocket の終了例外は、アクション メソッドから早く戻りすぎた場合にも発生する可能性があります。 アクション メソッドでソケットを受け入れる場合は、そのソケットを使用するコードが完了するまで待ち、アクション メソッドから戻ってください。
 
-重大なスレッドの問題を引き起こす可能性があるので、ソケットの完了を待つために `Task.Wait()`、`Task.Result`、または同様のブロック呼び出しを使用しないでください。 常に `await` を使用します。
+重大なスレッドの問題を引き起こす可能性があるので、ソケットの完了を待つために `Task.Wait`、`Task.Result`、または同様のブロック呼び出しを使用しないでください。 常に `await` を使用します。
 
 ## <a name="send-and-receive-messages"></a>メッセージの送受信
 
@@ -149,7 +127,7 @@ WebSocket の終了例外は、アクション メソッドから早く戻りす
 
 ## <a name="websocket-origin-restriction"></a>WebSocket の配信元の制限
 
-CORS で提供される保護は、WebSocket には適用されません。 ブラウザーでは以下を実行**しません**。
+CORS で提供される保護は、WebSocket には適用されません。 ブラウザーでは以下を実行 **しません** 。
 
 * CORS の事前要求を実行する。
 * WebSocket 要求を行うときに `Access-Control` ヘッダーに指定された制限を考慮する。
@@ -161,7 +139,7 @@ CORS で提供される保護は、WebSocket には適用されません。 ブ�
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSocketsOptionsAO&highlight=6-7)]
 
 > [!NOTE]
-> `Origin` ヘッダーは、クライアントによって制御され、`Referer` のように偽装することができます。 これらのヘッダーを認証メカニズムとして使用**しないでください**。
+> `Origin` ヘッダーは、クライアントによって制御され、`Referer` のように偽装することができます。 これらのヘッダーを認証メカニズムとして使用 **しないでください** 。
 
 ::: moniker-end
 
@@ -179,7 +157,7 @@ Windows Server 2012 以降で WebSocket プロトコルのサポートを有効�
 > [!NOTE]
 > これらの手順は、IIS Express を使用する場合は必要ありません
 
-1. **[管理]** メニューから**役割と機能の追加**ウィザードを使用するか、**サーバー マネージャー**にあるリンクを使用します。
+1. **[管理]** メニューから **役割と機能の追加** ウィザードを使用するか、 **サーバー マネージャー** にあるリンクを使用します。
 1. **[役割ベースまたは機能ベースのインストール]** を選択します。 **[次へ]** を選択します。
 1. 適切なサーバーを選択します (既定では、ローカル サーバーが選択されます)。 **[次へ]** を選択します。
 1. **[役割]** ツリーで **[Web サーバー (IIS)]** を展開し、 **[Web サーバー]** 、 **[アプリケーション開発]** の順に展開します。

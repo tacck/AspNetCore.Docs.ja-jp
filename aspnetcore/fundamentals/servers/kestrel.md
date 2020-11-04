@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 44558a0f2fdc61eb860223658f5bef1d0117ba87
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 50bf2a60f14238c9b71fe90a64c284da202bff59
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653949"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491601"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core への Kestrel Web サーバーの実装
 
@@ -66,7 +66,7 @@ Http/2 は既定では無効になっています。 構成の詳細について
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Kestrel とリバース プロキシを使用するタイミング
 
-Kestrel を単独で使用することも、[インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org)、[Apache](https://httpd.apache.org/) などの*リバース プロキシ サーバー*と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
+Kestrel を単独で使用することも、 [インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、 [Nginx](https://nginx.org)、 [Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
 
 エッジ (インターネットに接続する) Web サーバーとして使用される Kestrel:
 
@@ -98,7 +98,7 @@ ASP.NET Core プロジェクト テンプレートは既定では Kestrel を使
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=8)]
 
-ホストのビルトに関する詳細については、「<xref:fundamentals/host/generic-host#set-up-a-host>」の「*ホストを設定する*」と「*既定の builder 設定*」セクションを参照してください。
+ホストのビルトに関する詳細については、「<xref:fundamentals/host/generic-host#set-up-a-host>」の「 *ホストを設定する* 」と「 *既定の builder 設定* 」セクションを参照してください。
 
 `ConfigureWebHostDefaults` を呼び出した後に追加の構成を指定するには、`ConfigureKestrel` を使用します。
 
@@ -127,7 +127,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-この記事の後半で示す例では、Kestrel オプションが C# コードで構成されています。 Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使用して設定することもできます。 たとえば、[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)によって、"*appsettings.json*" または "*appsettings.{Environment}.json*" ファイルから Kestrel 構成を読み込むことができます。
+この記事の後半で示す例では、Kestrel オプションが C# コードで構成されています。 Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使用して設定することもできます。 たとえば、 [ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)によって、" *appsettings.json* " または " *appsettings.{Environment}.json* " ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -144,7 +144,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> および[エンドポイント構成](#endpoint-configuration)は、構成プロバイダーから構成できます。 残りの Kestrel 構成は、C# コードで構成する必要があります。
 
-次の方法の**いずれか**を使用します。
+次の方法の **いずれか** を使用します。
 
 * `Startup.ConfigureServices` で Kestrel を構成する。
 
@@ -257,7 +257,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 最小レートは応答にも適用されます。 要求制限と応答制限を設定するコードは、プロパティ名およびインターフェイス名に `RequestBody` または `Response` が使用されることを除けば同じです。
 
-次の例では、*Program.cs* で最小データ レートを構成する方法を示します。
+次の例では、 *Program.cs* で最小データ レートを構成する方法を示します。
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=6-11)]
 
@@ -265,7 +265,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=6-21)]
 
-前のサンプルで参照した <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> は、HTTP/2 要求の `HttpContext.Features` には存在しません。これは、プロトコルで要求の多重化に対応するために、要求ごとのレート制限の変更が、HTTP/2 で一般的にサポートされていないからです。 ただし、<xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> は引き続き現在の HTTP/2 要求の `HttpContext.Features` です。これは、HTTP/2 要求に対してであっても、`IHttpMinRequestBodyDataRateFeature.MinDataRate` を `null` に設定すれば、読み取りのレート制限を要求ごとに "*すべて無効*" にできるためです。 `IHttpMinRequestBodyDataRateFeature.MinDataRate` を読み取ろうとしたり、`null` 以外の値に設定しようとしたりすると、HTTP/2 要求を指定した `NotSupportedException` がスローされます。
+前のサンプルで参照した <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> は、HTTP/2 要求の `HttpContext.Features` には存在しません。これは、プロトコルで要求の多重化に対応するために、要求ごとのレート制限の変更が、HTTP/2 で一般的にサポートされていないからです。 ただし、<xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> は引き続き現在の HTTP/2 要求の `HttpContext.Features` です。これは、HTTP/2 要求に対してであっても、`IHttpMinRequestBodyDataRateFeature.MinDataRate` を `null` に設定すれば、読み取りのレート制限を要求ごとに " *すべて無効* " にできるためです。 `IHttpMinRequestBodyDataRateFeature.MinDataRate` を読み取ろうとしたり、`null` 以外の値に設定しようとしたりすると、HTTP/2 要求を指定した `NotSupportedException` がスローされます。
 
 `KestrelServerOptions.Limits` で構成したサーバー全体のレート制限は、引き続き HTTP/1.x と HTTP/2 の両方の接続に適用されます。
 
@@ -355,6 +355,34 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 既定値は 96 KB (98,304) です。
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="http2-keep-alive-ping-configuration"></a>HTTP/2 キープ アライブ ping 構成
+
+Kestrel は、接続されているクライアントに HTTP/2 ping を送信するように構成できます。 HTTP/2 ping は複数の目的で機能します。
+
+* アイドル状態の接続を維持します。 一部のクライアントとプロキシ サーバーでは、アイドル状態の接続が閉じられます。 HTTP/2 ping は接続におけるアクティビティと見なされ、接続がアイドル状態として閉じられるのを防ぎます。
+* 異常な接続を閉じます。 構成された時間でキープ アライブ ping にクライアントが応答しない接続はサーバーによって閉じられます。
+
+HTTP/2 キープ アライブ ping に関連する 2 つの構成オプション:
+
+* `Http2.KeepAlivePingInterval` は ping を内部構成する `TimeSpan` です。 この時間内にフレームが受信されない場合、サーバーからクライアントにキープ アライブ ping が送信されます。 このオプションが `TimeSpan.MaxValue` に設定されているとき、キープ アライブ ping は無効になります。 既定値は `TimeSpan.MaxValue` です。
+* `Http2.KeepAlivePingTimeout` は、ping タイムアウトを構成する `TimeSpan` です。 このタイムアウト内でサーバーが応答 ping など、いかなるフレームも受信しない場合、接続は閉じられます。 このオプションが `TimeSpan.MaxValue` に設定されているとき、キープ アライブ タイムアウトは無効になります。 既定値は 20 秒です。
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.Http2.KeepAlivePingInterval = TimeSpan.FromSeconds(30);
+    serverOptions.Limits.Http2.KeepAlivePingTimeout = TimeSpan.FromSeconds(60);
+});
+```
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
 ### <a name="trailers"></a>予告編
 
 [!INCLUDE[](~/includes/trailers.md)]
@@ -428,7 +456,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> を呼び出す**前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> を呼び出す **前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
 
 ### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)
 
@@ -446,7 +474,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> を呼び出す**前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> を呼び出す **前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
 
 ### <a name="configureiconfiguration"></a>Configure(IConfiguration)
 
@@ -502,7 +530,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 以下の *appsettings.json* の例では、次のことが行われています。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
-* 証明書 (後の例では **HttpsDefaultCert**) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
+* 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
 
 ```json
 {
@@ -565,7 +593,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 * `Url` パラメーターは、エンドポイントごとに必要です。 このパラメーターの形式は、1 つの値に制限されることを除き、最上位レベルの `Urls` 構成パラメーターと同じです。
 * これらのエンドポイントは、最上位レベルの `Urls` 構成での定義に追加されるのではなく、それを置き換えます。 コードで `Listen` を使用して定義されているエンドポイントは、構成セクションで定義されているエンドポイントに累積されます。
 * `Certificate` セクションは省略可能です。 `Certificate` セクションを指定しないと、前述のシナリオで定義した既定値が使用されます。 既定値を使用できない場合、サーバーにより例外がスローされ、開始できません。
-* `Certificate` セクションは、**Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
+* `Certificate` セクションは、 **Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
 * ポートが競合しない限り、この方法で任意の数のエンドポイントを定義できます。
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))` が `.Endpoint(string name, listenOptions => { })` メソッドで返す `KestrelConfigurationLoader` を使用して、構成されているエンドポイントの設定を補足できます。
 
@@ -973,9 +1001,9 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、*appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
+Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
-*appsettings.json*:
+*appsettings.json* :
 
 ```json
 {
@@ -1027,7 +1055,7 @@ Http/2 は既定では無効になっています。 構成の詳細について
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Kestrel とリバース プロキシを使用するタイミング
 
-Kestrel を単独で使用することも、[インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org)、[Apache](https://httpd.apache.org/) などの*リバース プロキシ サーバー*と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
+Kestrel を単独で使用することも、 [インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、 [Nginx](https://nginx.org)、 [Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
 
 エッジ (インターネットに接続する) Web サーバーとして使用される Kestrel:
 
@@ -1061,7 +1089,7 @@ ASP.NET Core プロジェクト テンプレートは既定では Kestrel を使
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=7)]
 
-`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の "*ホストを設定する*" セクションをご覧ください。
+`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の " *ホストを設定する* " セクションをご覧ください。
 
 `CreateDefaultBuilder` を呼び出した後に追加の構成を指定するには、`ConfigureKestrel` を使用します。
 
@@ -1075,7 +1103,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-アプリでホストを設定するための `CreateDefaultBuilder` を呼び出さない場合は、`ConfigureKestrel` を呼び出す**前に** <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> を呼び出します。
+アプリでホストを設定するための `CreateDefaultBuilder` を呼び出さない場合は、`ConfigureKestrel` を呼び出す **前に** <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> を呼び出します。
 
 ```csharp
 public static void Main(string[] args)
@@ -1107,7 +1135,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、*appsettings.json* または "*appsettings.{環境}.json*" ファイルから Kestrel 構成を読み込むことができます。
+次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、 *appsettings.json* または " *appsettings.{環境}.json* " ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -1120,7 +1148,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 }
 ```
 
-次の方法の**いずれか**を使用します。
+次の方法の **いずれか** を使用します。
 
 * `Startup.ConfigureServices` で Kestrel を構成する。
 
@@ -1230,7 +1258,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 最小レートは応答にも適用されます。 要求制限と応答制限を設定するコードは、プロパティ名およびインターフェイス名に `RequestBody` または `Response` が使用されることを除けば同じです。
 
-次の例では、*Program.cs* で最小データ レートを構成する方法を示します。
+次の例では、 *Program.cs* で最小データ レートを構成する方法を示します。
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=6-9)]
 
@@ -1412,7 +1440,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> を呼び出す**前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> を呼び出す **前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
 
 ### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)
 
@@ -1433,7 +1461,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> を呼び出す**前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> を呼び出す **前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
 
 
 ### <a name="configureiconfiguration"></a>Configure(IConfiguration)
@@ -1490,7 +1518,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 以下の *appsettings.json* の例では、次のことが行われています。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
-* 証明書 (後の例では **HttpsDefaultCert**) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
+* 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
 
 ```json
 {
@@ -1557,7 +1585,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 * `Url` パラメーターは、エンドポイントごとに必要です。 このパラメーターの形式は、1 つの値に制限されることを除き、最上位レベルの `Urls` 構成パラメーターと同じです。
 * これらのエンドポイントは、最上位レベルの `Urls` 構成での定義に追加されるのではなく、それを置き換えます。 コードで `Listen` を使用して定義されているエンドポイントは、構成セクションで定義されているエンドポイントに累積されます。
 * `Certificate` セクションは省略可能です。 `Certificate` セクションを指定しないと、前述のシナリオで定義した既定値が使用されます。 既定値を使用できない場合、サーバーにより例外がスローされ、開始できません。
-* `Certificate` セクションは、**Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
+* `Certificate` セクションは、 **Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
 * ポートが競合しない限り、この方法で任意の数のエンドポイントを定義できます。
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))` が `.Endpoint(string name, listenOptions => { })` メソッドで返す `KestrelConfigurationLoader` を使用して、構成されているエンドポイントの設定を補足できます。
 
@@ -1924,9 +1952,9 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、*appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
+Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
-*appsettings.json*:
+*appsettings.json* :
 
 ```json
 {
@@ -1957,7 +1985,7 @@ kestrel は、.NET Core がサポートするすべてのプラットフォー�
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Kestrel とリバース プロキシを使用するタイミング
 
-Kestrel を単独で使用することも、[インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org)、[Apache](https://httpd.apache.org/) などの*リバース プロキシ サーバー*と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
+Kestrel を単独で使用することも、 [インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、 [Nginx](https://nginx.org)、 [Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
 
 エッジ (インターネットに接続する) Web サーバーとして使用される Kestrel:
 
@@ -2001,7 +2029,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の "*ホストを設定する*" セクションをご覧ください。
+`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の " *ホストを設定する* " セクションをご覧ください。
 
 ## <a name="kestrel-options"></a>Kestrel オプション
 
@@ -2015,7 +2043,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、*appsettings.json* または "*appsettings.{環境}.json*" ファイルから Kestrel 構成を読み込むことができます。
+次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、 *appsettings.json* または " *appsettings.{環境}.json* " ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -2028,7 +2056,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 }
 ```
 
-次の方法の**いずれか**を使用します。
+次の方法の **いずれか** を使用します。
 
 * `Startup.ConfigureServices` で Kestrel を構成する。
 
@@ -2170,7 +2198,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 最小レートは応答にも適用されます。 要求制限と応答制限を設定するコードは、プロパティ名およびインターフェイス名に `RequestBody` または `Response` が使用されることを除けば同じです。
 
-次の例では、*Program.cs* で最小データ レートを構成する方法を示します。
+次の例では、 *Program.cs* で最小データ レートを構成する方法を示します。
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2277,7 +2305,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> を呼び出す**前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureEndpointDefaults*> を呼び出す **前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
 
 ### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)
 
@@ -2298,7 +2326,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> を呼び出す**前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> を呼び出す **前に** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> を呼び出すことで作成されるエンドポイントには既定値が適用されません。
 
 ### <a name="configureiconfiguration"></a>Configure(IConfiguration)
 
@@ -2354,7 +2382,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 以下の *appsettings.json* の例では、次のことが行われています。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
-* 証明書 (後の例では **HttpsDefaultCert**) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
+* 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
 
 ```json
 {
@@ -2421,7 +2449,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 * `Url` パラメーターは、エンドポイントごとに必要です。 このパラメーターの形式は、1 つの値に制限されることを除き、最上位レベルの `Urls` 構成パラメーターと同じです。
 * これらのエンドポイントは、最上位レベルの `Urls` 構成での定義に追加されるのではなく、それを置き換えます。 コードで `Listen` を使用して定義されているエンドポイントは、構成セクションで定義されているエンドポイントに累積されます。
 * `Certificate` セクションは省略可能です。 `Certificate` セクションを指定しないと、前述のシナリオで定義した既定値が使用されます。 既定値を使用できない場合、サーバーにより例外がスローされ、開始できません。
-* `Certificate` セクションは、**Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
+* `Certificate` セクションは、 **Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
 * ポートが競合しない限り、この方法で任意の数のエンドポイントを定義できます。
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))` が `.Endpoint(string name, listenOptions => { })` メソッドで返す `KestrelConfigurationLoader` を使用して、構成されているエンドポイントの設定を補足できます。
 
@@ -2714,9 +2742,9 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、*appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
+Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
-*appsettings.json*:
+*appsettings.json* :
 
 ```json
 {

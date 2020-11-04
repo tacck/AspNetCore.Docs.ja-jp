@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 99e0109ea4c2526e9f91a8a4df23c4557e9be83a
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 6f677cc4fc26eb9d50ab6e149b7363079ae756a9
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762309"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678565"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
 
@@ -33,6 +33,8 @@ ASP.NET Core では依存関係の挿入 (DI) ソフトウェア設計パター�
 
 MVC コントローラー内部における依存関係の挿入に固有の情報については、<xref:mvc/controllers/dependency-injection> をご覧ください。
 
+コンソール アプリで依存関係の挿入を使用する方法の詳細については、「[Dependency injection in .NET](/dotnet/core/extensions/dependency-injection)」 (.NET.NET での依存関係の挿入) を参照してください
+
 オプションとしての依存関係挿入の詳細については、「<xref:fundamentals/configuration/options>」を参照してください。
 
 このトピックでは、ASP.NET Core での依存関係の挿入について説明します。 コンソール アプリで依存関係の挿入を使用することの詳細については、「[.NET での依存関係の挿入](/dotnet/core/extensions/dependency-injection)」を参照してください。
@@ -41,7 +43,7 @@ MVC コントローラー内部における依存関係の挿入に固有の情�
 
 ## <a name="overview-of-dependency-injection"></a>依存関係の挿入の概要
 
-"*依存関係*" とは、他のオブジェクトが依存するオブジェクトのことです。 他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+" *依存関係* " とは、他のオブジェクトが依存するオブジェクトのことです。 他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
 
 ```csharp
 public class MyDependency
@@ -77,7 +79,7 @@ public class IndexModel : PageModel
 
 * 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
 * サービス コンテナー内の依存関係の登録。 ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。 サービスは通常、アプリの `Startup.ConfigureServices` メソッドに登録されています。
-* サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
+* サービスを使用するクラスのコンストラクターへの、サービスの " *挿入* "。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、`IMyDependency` インターフェイスは、`WriteMessage` メソッドを定義します。
 
@@ -110,7 +112,7 @@ DI パターンを使用すると、コントローラーは次のようにな�
 
 `MyDependency2` は、コンストラクターで要求される <xref:Microsoft.Extensions.Logging.ILogger%601> によって異なります。 `ILogger<TCategoryName>` は、[フレームワークで提供されるサービス](#framework-provided-services)です。
 
-依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。
+依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、" *依存関係ツリー* "、" *依存関係グラフ* "、または " *オブジェクト グラフ* " と呼ばれます。
 
 コンテナーでは、[(ジェネリック) オープン型](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)を活用し、すべての [(ジェネリック) 構築型](/dotnet/csharp/language-reference/language-specification/types#constructed-types)を登録する必要をなくすことで、`ILogger<TCategoryName>` を解決します。
 
@@ -180,9 +182,9 @@ ASP.NET Core フレームワークは、関連するサービスのグループ�
 
 Entity Framework Core を使用する場合、既定では <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張メソッドによって、スコープ付き有効期間を持つ `DbContext` 型が登録されます。
 
-シングルトンからスコープ付きサービスを解決***しない***でください。 後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。 次の場合は問題ありません。
+シングルトンからスコープ付きサービスを解決 **しない** でください。また、たとえば一時的なサービスにより、間接的に解決しないように注意してください。 後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。 次の場合は問題ありません。
 
-* スコープ付きまたは一時的なサービスからシングルトン サービスを解決する。
+スコープ付きまたは一時的なサービスからシングルトン サービスを解決する。
 * スコープ付きサービスを、別のスコープ付きまたは一時的なサービスから解決する。
 
 既定では、開発環境で、より長い有効期間を持つ別のサービスからサービスを解決すると、例外がスローされます。 詳しくは、「[スコープの検証](#sv)」をご覧ください。
@@ -208,7 +210,7 @@ Entity Framework Core を使用する場合、既定では <xref:Microsoft.Exten
 要求を処理するアプリでは、アプリのシャットダウン時に <xref:Microsoft.Extensions.DependencyInjection.ServiceProvider> が破棄されるとき、シングルトン サービスが破棄されます。 アプリがシャットダウンされるまでメモリは解放されないため、シングルトン サービスでのメモリ使用を考慮してください。
 
 > [!WARNING]
-> シングルトンからスコープ付きサービスを解決***しない***でください。 後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。 スコープ付きまたは一時的なサービスからシングルトン サービスを解決することに問題はありません。
+> シングルトンからスコープ付きサービスを解決 **しない** でください。 後続の要求を処理する際に、サービスが正しくない状態になる可能性があります。 スコープ付きまたは一時的なサービスからシングルトン サービスを解決することに問題はありません。
 
 ## <a name="service-registration-methods"></a>サービス登録メソッド
 
@@ -226,14 +228,46 @@ Entity Framework Core を使用する場合、既定では <xref:Microsoft.Exten
 
 型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。 [テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)する場合に、複数の実装を使用することは一般的です。
 
+実装型のみでサービスを登録することは、同じ実装とサービスの型でそのサービスを登録することと同じです。 明示的なサービス型を使用しないメソッドを使用してサービスの複数の実装を登録できないのは、このためです。 これらのメソッドでは、サービスの複数のインスタンスを登録できますが、すべて同じ " *実装* " 型になります。
+
+上記のサービス登録メソッドのずれかを使用して、同じサービス型の複数のサービス インスタンスを登録できます。 次の例では、`IMyDependency` をサービス型として使用して、`AddSingleton` を 2 回呼び出します。 2 回目の `AddSingleton` の呼び出しにより、`IMyDependency` として解決された場合は前のものがオーバーライドされ、`IEnumerable<IMyDependency>` を介して複数のサービスが解決された場合は前のものに追加されます。 `IEnumerable<{SERVICE}>` を介して解決された場合、サービスは登録された順に表示されます。
+
+```csharp
+services.AddSingleton<IMyDependency, MyDependency>();
+services.AddSingleton<IMyDependency, DifferentDependency>();
+
+public class MyService
+{
+    public MyService(IMyDependency myDependency, 
+       IEnumberable<IMyDependency> myDependencies)
+    {
+        Trace.Assert(myDependency is DifferentDependency);
+
+        var dependencyArray = myDependencies.ToArray();
+        Trace.Assert(dependencyArray[0] is MyDependency);
+        Trace.Assert(dependencyArray[1] is DifferentDependency);
+    }
+}
+```
+
 フレームワークには `TryAdd{LIFETIME}` 拡張メソッドも用意されており、実装がまだ登録されていない場合にのみ、サービスが登録されます。
 
-次の例では、`AddSingleton` の呼び出しによって、`IMyDependency` の実装として `MyDependency` が登録されます。 `TryAddSingleton` の呼び出しでは何も行われません。`IMyDependency` には登録された実装が既に含まれているからです。
+次の例では、`AddSingleton` の呼び出しによって、`IMyDependency` の実装として `MyDependency` が登録されます。 `IMyDependency` には登録された実装が既に含まれているため、`TryAddSingleton` の呼び出しでは何も行われません。
 
 ```csharp
 services.AddSingleton<IMyDependency, MyDependency>();
 // The following line has no effect:
 services.TryAddSingleton<IMyDependency, DifferentDependency>();
+
+public class MyService
+{
+    public MyService(IMyDependency myDependency, 
+        IEnumberable<IMyDependency> myDependencies)
+    {
+        Trace.Assert(myDependency is MyDependency);
+        Trace.Assert(myDependencies.Single() is MyDependency);
+    }
+}
 ```
 
 詳細については、次を参照してください。
@@ -243,7 +277,7 @@ services.TryAddSingleton<IMyDependency, DifferentDependency>();
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped%2A>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton%2A>
 
-[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable%2A) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にインスタンスを追加する必要があります。 一般に、ライブラリの作成者は、コンテナー内の実装の複数のコピーを登録しないようにするため `TryAddEnumerable` を使用します。
+[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable%2A) メソッドでは、" *同じ型* " の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にインスタンスを追加する必要があります。 一般に、ライブラリの作成者は、コンテナー内の実装の複数のコピーを登録しないようにするため `TryAddEnumerable` を使用します。
 
 次の例では、`TryAddEnumerable` の最初の呼び出しで、`IMyDependency1` の実装として `MyDependency` が登録されます。 2 番目の呼び出しでは `IMyDependency2` に `MyDependency` が登録されます。 3 番目の呼び出しでは何も行われません。`IMyDependency1` には `MyDependency` の登録済みの実装が既に含まれているからです。
 
@@ -277,7 +311,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDependency1, MyDependen
 
 コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。
 
-`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。
+`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、" *パブリック* " コンストラクターが必要です。
 
 `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。 コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
 
@@ -323,11 +357,11 @@ An `OperationService` is registered that depends on each of the other `Operation
 
 ロガーの出力は次のようになります。
 
-* "*一時的な*" オブジェクトは常に異なります。 一時的な `OperationId` 値は、`IndexModel` とミドルウェアでは異なります。
-* "*スコープ付きの*" オブジェクトは、それぞれの要求内では同じですが、それぞれの要求間では異なります。
-* "*シングルトン*" オブジェクトは、すべての要求において同じです。
+* " *一時的な* " オブジェクトは常に異なります。 一時的な `OperationId` 値は、`IndexModel` とミドルウェアでは異なります。
+* " *スコープ付きの* " オブジェクトは、それぞれの要求内では同じですが、それぞれの要求間では異なります。
+* " *シングルトン* " オブジェクトは、すべての要求において同じです。
 
-ログ出力を減らすには、*appsettings.Development.json* ファイル内で "Logging:LogLevel:Microsoft:Error" を設定します。
+ログ出力を減らすには、 *appsettings.Development.json* ファイル内で "Logging:LogLevel:Microsoft:Error" を設定します。
 
 [!code-json[](dependency-injection/samples/3.x/DependencyInjectionSample/appsettings.Development.json?highlight=7)]
 
@@ -474,13 +508,13 @@ Service1.Dispose
 * データと構成をサービス コンテナーに直接格納しないようにします。 たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。 同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。 実際のアイテムを DI 経由で要求することをお勧めします。
 * サービスへの静的なアクセスを行わないようにします。 たとえば、他の場所で使用するために [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) を静的フィールドまたはプロパティとしてキャプチャしないようにしてください。
 * DI ファクトリを高速かつ同期的に維持します。
-* *サービス ロケーター パターン*の使用は避けてください。 たとえば、サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService%2A> を呼び出さないでください。
+* *サービス ロケーター パターン* の使用は避けてください。 たとえば、サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService%2A> を呼び出さないでください。
 
   **正しくない:**
 
     ![正しくないコード](dependency-injection/_static/bad.png)
 
-  **正しい**:
+  **正しい** :
 
   ```csharp
   public class MyClass
@@ -523,7 +557,7 @@ Service1.Dispose
 
 どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです。ほとんどがフレームワーク自体の内の特殊なケースです。
 
-DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
+DI は静的/グローバル オブジェクト アクセス パターンの *代替機能* です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
 
 ## <a name="recommended-patterns-for-multi-tenancy-in-di"></a>DI でのマルチテナントの推奨パターン
 
@@ -583,7 +617,7 @@ MVC コントローラー内部における依存関係の挿入に固有の情�
 
 ## <a name="overview-of-dependency-injection"></a>依存関係の挿入の概要
 
-"*依存関係*" とは、他のオブジェクトが必要とする任意のオブジェクトのことです。 アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+" *依存関係* " とは、他のオブジェクトが必要とする任意のオブジェクトのことです。 アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
 
 ```csharp
 public class MyDependency
@@ -627,7 +661,7 @@ public class IndexModel : PageModel
 
 * 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
 * サービス コンテナー内の依存関係の登録。 ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。 サービスはアプリの `Startup.ConfigureServices` メソッドに登録されています。
-* サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
+* サービスを使用するクラスのコンストラクターへの、サービスの " *挿入* "。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
 
 [サンプル アプリ](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、サービスがアプリに提供するメソッドが `IMyDependency` インターフェイスによって定義されます。
 
@@ -637,7 +671,7 @@ public class IndexModel : PageModel
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。
+`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、" *依存関係ツリー* "、" *依存関係グラフ* "、または " *オブジェクト グラフ* " と呼ばれます。
 
 `IMyDependency` と `ILogger<TCategoryName>` をサービス コンテナーに登録する必要があります。 `IMyDependency` は `Startup.ConfigureServices` に登録されます。 `ILogger<TCategoryName>` はログ記録の抽象化インフラストラクチャによって登録されます。したがって、これは、フレームワークによって既定で登録される[フレームワークが提供するサービス](#framework-provided-services)です。
 
@@ -780,14 +814,46 @@ public void ConfigureServices(IServiceCollection services)
 
 型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。 実装が複数の場合の一般的なシナリオとしては、[テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)します。
 
-`TryAdd{LIFETIME}` メソッドでは、登録された実装がまだ存在しない場合にのみサービスが登録されます。
+実装型のみでサービスを登録することは、同じ実装とサービスの型でそのサービスを登録することと同じです。 明示的なサービス型を使用しないメソッドを使用してサービスの複数の実装を登録できないのは、このためです。 これらのメソッドでは、サービスの複数の " *インスタンス* " を登録できますが、すべて同じ " *実装* " 型になります。
 
-次の例の最初の行では、`IMyDependency` に `MyDependency` を登録します。 2 行目では何も行われません。`IMyDependency` には登録された実装が既に含まれているからです。
+上記のサービス登録メソッドのずれかを使用して、同じサービス型の複数のサービス インスタンスを登録できます。 次の例では、`IMyDependency` をサービス型として使用して、`AddSingleton` を 2 回呼び出します。 2 回目の `AddSingleton` の呼び出しにより、`IMyDependency` として解決された場合は前のものがオーバーライドされ、`IEnumerable<IMyDependency>` を介して複数のサービスが解決された場合は前のものに追加されます。 `IEnumerable<{SERVICE}>` を介して解決された場合、サービスは登録された順に表示されます。
+
+```csharp
+services.AddSingleton<IMyDependency, MyDependency>();
+services.AddSingleton<IMyDependency, DifferentDependency>();
+
+public class MyService
+{
+    public MyService(IMyDependency myDependency, 
+       IEnumberable<IMyDependency> myDependencies)
+    {
+        Trace.Assert(myDependency is DifferentDependency);
+
+        var dependencyArray = myDependencies.ToArray();
+        Trace.Assert(dependencyArray[0] is MyDependency);
+        Trace.Assert(dependencyArray[1] is DifferentDependency);
+    }
+}
+```
+
+フレームワークには `TryAdd{LIFETIME}` 拡張メソッドも用意されており、実装がまだ登録されていない場合にのみ、サービスが登録されます。
+
+次の例では、`AddSingleton` の呼び出しによって、`IMyDependency` の実装として `MyDependency` が登録されます。 `IMyDependency` には登録された実装が既に含まれているため、`TryAddSingleton` の呼び出しでは何も行われません。
 
 ```csharp
 services.AddSingleton<IMyDependency, MyDependency>();
 // The following line has no effect:
 services.TryAddSingleton<IMyDependency, DifferentDependency>();
+
+public class MyService
+{
+    public MyService(IMyDependency myDependency, 
+        IEnumberable<IMyDependency> myDependencies)
+    {
+        Trace.Assert(myDependency is MyDependency);
+        Trace.Assert(myDependencies.Single() is MyDependency);
+    }
+}
 ```
 
 詳細については次を参照してください:
@@ -797,7 +863,7 @@ services.TryAddSingleton<IMyDependency, DifferentDependency>();
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton*>
 
-[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。 一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
+[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、" *同じ型* " の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。 一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
 
 次の例の最初の行では、`IMyDep1` に `MyDep` を登録します。 2 行目では `IMyDep2` に `MyDep` を登録します。 3 行目では何も行われません。`IMyDep1` には `MyDep` の登録済みの実装が既に含まれているからです。
 
@@ -822,7 +888,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。
 
-`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。
+`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、" *パブリック* " コンストラクターが必要です。
 
 `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。 コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
 
@@ -894,9 +960,9 @@ Entity Framework コンテキストでは通常、[範囲が指定された有�
 
 要求内および要求間で、どの `OperationId` 値が変化しているかを確認してください。
 
-* "*一時的な*" オブジェクトは常に異なります。 1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。
+* " *一時的な* " オブジェクトは常に異なります。 1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。
 * *Scoped* オブジェクトは、1 つのクライアント要求内では同じですが、複数のクライアント要求間では異なります。
-* "*シングルトン*" オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
+* " *シングルトン* " オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
 
 ## <a name="call-services-from-main"></a>main からサービスを呼び出す
 
@@ -1084,7 +1150,7 @@ public void ConfigureServices(IServiceCollection services)
 * データと構成をサービス コンテナーに直接格納しないようにします。 たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。 同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。 実際のアイテムを DI 経由で要求することをお勧めします。
 * サービスへの静的なアクセスを行わないようにします。 たとえば、他の場所で使用するために [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) の静的な型指定を行わないようにします。
 
-* *サービス ロケーター パターン*は、[制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)戦略が混在しているので使用しないでください。
+* *サービス ロケーター パターン* は、 [制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)戦略が混在しているので使用しないでください。
   * サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService*> を呼び出さないでください。
 
     **正しくない:**
@@ -1102,7 +1168,7 @@ public void ConfigureServices(IServiceCollection services)
       }
       ```
    
-    **正しい**:
+    **正しい** :
 
     ```csharp
     public class MyClass
@@ -1128,7 +1194,7 @@ public void ConfigureServices(IServiceCollection services)
 
 どのような推奨事項であっても、それを無視する必要がある状況が発生する可能性があります。 例外はまれです。ほとんどがフレームワーク自体の内の特殊なケースです。
 
-DI は静的/グローバル オブジェクト アクセス パターンの*代替機能*です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
+DI は静的/グローバル オブジェクト アクセス パターンの *代替機能* です。 静的オブジェクト アクセスと併用した場合、DI のメリットを実現することはできません。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

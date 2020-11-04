@@ -5,7 +5,7 @@ description: Blazor アプリのコンポーネントと DOM 要素のデータ 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 10/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0884b0bedd9ed31b8c85790c6950c7c5d63bdf44
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: fd337a6fb54c418ff08af18014073a6b3f07bb8c
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653907"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491466"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor データ バインディング
 
@@ -51,7 +51,7 @@ Razor コンポーネントはフィールド、プロパティ、または Razo
 
 いずれかの要素がフォーカスを失うと、バインドされたフィールドまたはプロパティが更新されます。
 
-テキスト ボックスは、フィールドまたはプロパティの値の変更に対する応答としてではなく、コンポーネントがレンダリングされたときにのみ UI が更新されます。 コンポーネントはイベント ハンドラーのコードが実行された後に自身をレンダリングするため、*通常は*、イベント ハンドラーがトリガーされた直後に、フィールドとプロパティの更新が UI に反映されます。
+テキスト ボックスは、フィールドまたはプロパティの値の変更に対する応答としてではなく、コンポーネントがレンダリングされたときにのみ UI が更新されます。 コンポーネントはイベント ハンドラーのコードが実行された後に自身をレンダリングするため、 *通常は* 、イベント ハンドラーがトリガーされた直後に、フィールドとプロパティの更新が UI に反映されます。
 
 `CurrentValue` プロパティで [`@bind`](xref:mvc/views/razor#bind) を使用する (`<input @bind="CurrentValue" />`) ことは、本質的に次の内容と同じです。
 
@@ -141,9 +141,15 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>コンポーネント パラメーターを使用した親から子へのバインディング
+## <a name="binding-with-component-parameters"></a>コンポーネント パラメーターによるバインディング
+
+一般的なシナリオは、子コンポーネントのプロパティをその親のプロパティにバインディングすることです。 このシナリオは、複数のレベルのバインドが同時に発生するため、 *チェーン バインド* と呼ばれます。
 
 コンポーネント パラメーターを使用すると、`@bind-{PROPERTY OR FIELD}` 構文を使用して親コンポーネントのプロパティとフィールドをバインドできます。
+
+チェーン バインドは、子コンポーネントで [`@bind`](xref:mvc/views/razor#bind) 構文を使用して実装することはできません。 子コンポーネントから親のプロパティを更新するには、イベント ハンドラーと値を別々に指定する必要があります。
+
+子コンポーネントによるデータバインディングを設定するため、親コンポーネントによって引き続き [`@bind`](xref:mvc/views/razor#bind) 構文が活用されます。
 
 次の `Child` コンポーネント (`Shared/Child.razor`) には、`Year` コンポーネント パラメーターと `YearChanged` コールバックがあります。
 
@@ -155,16 +161,25 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
     </div>
 </div>
 
+<button @onclick="UpdateYearFromChild">Update Year from Child</button>
+
 @code {
+    private Random r = new Random();
+
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
+
+    private async Task UpdateYearFromChild()
+    {
+        await YearChanged.InvokeAsync(r.Next(1950, 2021));
+    }
 }
 ```
 
-コールバック (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) は、コンポーネント パラメーター名の後に "`Changed`" サフィックスを付けた名前 (`{PARAMETER NAME}Changed`) にする必要があります。 上の例では、コールバックの名前は `YearChanged` です。 <xref:Microsoft.AspNetCore.Components.EventCallback%601> の詳細については、「<xref:blazor/components/event-handling#eventcallback>」を参照してください。
+コールバック (<xref:Microsoft.AspNetCore.Components.EventCallback%601>) は、コンポーネント パラメーター名の後に "`Changed`" サフィックスを付けた名前 (`{PARAMETER NAME}Changed`) にする必要があります。 上の例では、コールバックの名前は `YearChanged` です。 <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> によって、バインディングに関連付けられているデリゲートが指定の引数で呼び出され、変更されたプロパティのイベント通知が送信されます。
 
 次の `Parent` コンポーネント (`Parent.razor`) では、`year` フィールドが子コンポーネントの `Year` パラメーターにバインドされています。
 
@@ -198,13 +213,7 @@ Blazor には日付の書式を設定するためのサポートが組み込ま�
 <Child @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>チェーン バインドを使用した子から親へのバインディング
-
-一般的なシナリオでは、データにバインドされたパラメーターをコンポーネントの出力のページ要素に連結します。 このシナリオは、複数のレベルのバインドが同時に発生するため、*チェーン バインド*と呼ばれます。
-
-チェーン バインドは、子コンポーネントで [`@bind`](xref:mvc/views/razor#bind) 構文を使用して実装することはできません。 イベント ハンドラーと値は、個別に指定する必要があります。 ただし、親コンポーネントでは、[`@bind`](xref:mvc/views/razor#bind) 構文を子コンポーネントのパラメーターと共に使用できます。
-
-次の `PasswordField` コンポーネント (`PasswordField.razor`) では、次を実行します。
+もっと洗練された実世界の例では、次の `PasswordField` コンポーネント (`PasswordField.razor`) により、次のことが行われます。
 
 * `password` フィールドに `<input>` 要素の値を設定します。
 * 子の `password` フィールドの現在の値を引数として渡す [`EventCallback`](xref:blazor/components/event-handling#eventcallback) を使用して、`Password` プロパティの変更を親コンポーネントに公開します。
@@ -234,11 +243,11 @@ Password:
     [Parameter]
     public EventCallback<string> PasswordChanged { get; set; }
 
-    private Task OnPasswordChanged(ChangeEventArgs e)
+    private async Task OnPasswordChanged(ChangeEventArgs e)
     {
         password = e.Value.ToString();
 
-        return PasswordChanged.InvokeAsync(password);
+        await PasswordChanged.InvokeAsync(password);
     }
 
     private void ToggleShowPassword()
@@ -294,7 +303,7 @@ Password:
     private Task OnPasswordChanged(ChangeEventArgs e)
     {
         password = e.Value.ToString();
-        
+
         if (password.Contains(' '))
         {
             validationMessage = "Spaces not allowed!";
@@ -316,12 +325,14 @@ Password:
 }
 ```
 
+<xref:Microsoft.AspNetCore.Components.EventCallback%601> の詳細については、「<xref:blazor/components/event-handling#eventcallback>」を参照してください。
+
 ## <a name="bind-across-more-than-two-components"></a>3 つ以上のコンポーネント間でバインドする
 
 入れ子になった任意の数のコンポーネントをバインドできますが、次のような一方向のデータ フローを考慮する必要があります。
 
-* 変更通知は "*階層をフローアップ*" します。
-* 新しいパラメーター値は "*階層をフローダウン*" します。
+* 変更通知は " *階層をフローアップ* " します。
+* 新しいパラメーター値は " *階層をフローダウン* " します。
 
 一般的な推奨される方法は、基になるデータを親コンポーネントに格納のみすることであり、これにより、更新する必要がある状態に関する混乱を避けることができます。
 
@@ -378,9 +389,9 @@ Password:
         set => PropertyChanged.InvokeAsync(value);
     }
 
-    private Task ChangeValue()
+    private async Task ChangeValue()
     {
-        return PropertyChanged.InvokeAsync($"Set in Child {DateTime.Now}");
+        await PropertyChanged.InvokeAsync($"Set in Child {DateTime.Now}");
     }
 }
 ```
@@ -405,9 +416,9 @@ Password:
     [Parameter]
     public EventCallback<string> PropertyChanged { get; set; }
 
-    private Task ChangeValue()
+    private async Task ChangeValue()
     {
-        return PropertyChanged.InvokeAsync($"Set in Grandchild {DateTime.Now}");
+        await PropertyChanged.InvokeAsync($"Set in Grandchild {DateTime.Now}");
     }
 }
 ```

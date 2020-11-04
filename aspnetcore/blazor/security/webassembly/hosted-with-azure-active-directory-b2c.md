@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor WebAssembly でホストされるアプリを A
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/08/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: aa6c865f5fd51d1634bde3ac96e1fddc7216a801
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 1a58e19ecaf816ddfb724b9a575d35c801cebd04
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900948"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690557"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する
 
@@ -41,18 +41,18 @@ AAD B2C インスタンスを記録しておきます (例: 末尾にスラッ�
 
 ### <a name="register-a-server-api-app"></a>サーバー API アプリを登録する
 
-「[チュートリアル: Azure Active Directory B2C に Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、"*サーバー API アプリ*" 用の AAD アプリを登録した後、次のようにします。
+「 [チュートリアル: Azure Active Directory B2C に Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、" *サーバー API アプリ* " 用の AAD アプリを登録した後、次のようにします。
 
 1. **[Azure Active Directory]**  >  **[アプリの登録]** で、 **[新規登録]** を選択します。
-1. アプリの **[名前]** を指定します (例: **Blazor Server AAD B2C**)。
-1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **[任意の組織ディレクトリ内のアカウントまたは任意の ID プロバイダー。Azure AD B2C でユーザーを認証します。]**
-1. "*サーバー API アプリ*" の場合、このシナリオでは **[リダイレクト URI]** は必要ないので、ドロップダウンは **[Web]** に設定されたままにして、リダイレクト URI は入力しません。
+1. アプリの **[名前]** を指定します (例: **Blazor Server AAD B2C** )。
+1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **ID プロバイダーまたは組織ディレクトリのアカウント (ユーザー フローでユーザーを認証するため)**
+1. " *サーバー API アプリ* " の場合、このシナリオでは **[リダイレクト URI]** は必要ないので、ドロップダウンは **[Web]** に設定されたままにして、リダイレクト URI は入力しません。
 1. **[アクセス許可]**  >  **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が選択されていることを確認します。
 1. **[登録]** を選択します。
 
 次の情報を記録しておきます。
 
-* "*サーバー API アプリ*" のアプリケーション (クライアント) ID (例: `41451fa7-82d9-4673-8fa5-69eff5a761fd`)
+* " *サーバー API アプリ* " のアプリケーション (クライアント) ID (例: `41451fa7-82d9-4673-8fa5-69eff5a761fd`)
 * AAD プライマリ、パブリッシャー、テナント ドメイン (`contoso.onmicrosoft.com` など):ドメインは、Azure portal で登録されているアプリに対する **[ブランド]** ブレードの **[パブリッシャー ドメイン]** として使用できます。
 
 **[API の公開]** で:
@@ -72,13 +72,13 @@ AAD B2C インスタンスを記録しておきます (例: 末尾にスラッ�
 
 ### <a name="register-a-client-app"></a>クライアント アプリを登録する
 
-「[チュートリアル: Azure Active Directory B2C に Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに再度従って、 *`Client`* アプリに AAD アプリを登録した後、次を実行します。
+「 [チュートリアル: Azure Active Directory B2C に Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに再度従って、 *`Client`* アプリに AAD アプリを登録した後、次を実行します。
 
 ::: moniker range=">= aspnetcore-5.0"
 
 1. **[Azure Active Directory]** > **[アプリの登録]** で、 **[新規登録]** を選択します。
-1. アプリの **[名前]** を指定します (例: **Blazor クライアント AAD B2C**)。
-1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **[任意の組織ディレクトリ内のアカウントまたは任意の ID プロバイダー。Azure AD B2C でユーザーを認証します。]**
+1. アプリの **[名前]** を指定します (例: **Blazor クライアント AAD B2C** )。
+1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **ID プロバイダーまたは組織ディレクトリのアカウント (ユーザー フローでユーザーを認証するため)**
 1. **[リダイレクト URI]** ドロップダウンを **[シングルページ アプリケーション (SPA)]** に設定し、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。 Kestrel で実行されているアプリの既定のポートは 5001 です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルの *`Server`* アプリのプロパティで確認できます。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 「[アプリを作成する](#create-the-app)」セクションの解説には、IIS Express ユーザーに対してリダイレクト URI の更新を促す注意が示されています。
 1. **[アクセス許可]** > **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が選択されていることを確認します。
 1. **[登録]** を選択します。
@@ -88,7 +88,7 @@ AAD B2C インスタンスを記録しておきます (例: 末尾にスラッ�
 **[認証]** > **[プラットフォーム構成]** > **[シングルページ アプリケーション (SPA)]** で次の操作を行います。
 
 1. **[リダイレクト URI]** が`https://localhost:{PORT}/authentication/login-callback` であることを確認します。
-1. **[暗黙の付与]** で、 **[アクセス トークン]** と **[ID トークン]** のチェック ボックスが**オフ**になっていることを確認します。
+1. **[暗黙の付与]** で、 **[アクセス トークン]** と **[ID トークン]** のチェック ボックスが **オフ** になっていることを確認します。
 1. アプリの残りの既定値は、このエクスペリエンスで使用可能です。
 1. **[保存]** ボタンを選択します。
 
@@ -97,8 +97,8 @@ AAD B2C インスタンスを記録しておきます (例: 末尾にスラッ�
 ::: moniker range="< aspnetcore-5.0"
 
 1. **[Azure Active Directory]** > **[アプリの登録]** で、 **[新規登録]** を選択します。
-1. アプリの **[名前]** を指定します (例: **Blazor クライアント AAD B2C**)。
-1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **[任意の組織ディレクトリ内のアカウントまたは任意の ID プロバイダー。Azure AD B2C でユーザーを認証します。]**
+1. アプリの **[名前]** を指定します (例: **Blazor クライアント AAD B2C** )。
+1. **[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **ID プロバイダーまたは組織ディレクトリのアカウント (ユーザー フローでユーザーを認証するため)**
 1. **[リダイレクト URI]** ドロップ ダウンの設定を **[Web]** のままとし、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。 Kestrel で実行されているアプリの既定のポートは 5001 です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルの *`Server`* アプリのプロパティで確認できます。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 「[アプリを作成する](#create-the-app)」セクションの解説には、IIS Express ユーザーに対してリダイレクト URI の更新を促す注意が示されています。
 1. **[アクセス許可]** > **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が選択されていることを確認します。
 1. **[登録]** を選択します。
@@ -117,7 +117,7 @@ AAD B2C インスタンスを記録しておきます (例: 末尾にスラッ�
 **[API のアクセス許可]** で:
 
 1. **[アクセス許可の追加]** を選択し、 **[自分の API]** を選択します。
-1. **[名前]** 列で "*サーバー API アプリ*" を選択します (例: **Blazor Server AAD B2C**)。
+1. **[名前]** 列で " *サーバー API アプリ* " を選択します (例: **Blazor Server AAD B2C** )。
 1. **[API]** の一覧を開きます。
 1. API へのアクセスを有効にします (例: `API.Access`)。
 1. **[アクセス許可の追加]** を選択します.
@@ -145,7 +145,7 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 | `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                               |
 | `{CLIENT APP CLIENT ID}`      | *`Client`* アプリのアプリケーション (クライアント) ID        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
 | `{DEFAULT SCOPE}`             | スコープ名                                            | `API.Access`                                 |
-| `{SERVER API APP CLIENT ID}`  | "*サーバー API アプリ*" のアプリケーション (クライアント) ID      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
+| `{SERVER API APP CLIENT ID}`  | " *サーバー API アプリ* " のアプリケーション (クライアント) ID      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
 | `{SERVER API APP ID URI}`     | アプリケーション ID URI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
 | `{SIGN UP OR SIGN IN POLICY}` | サインアップまたはサインインのユーザー フロー                             | `B2C_1_signupsignin1`                        |
 | `{TENANT DOMAIN}`             | プライマリ、パブリッシャー、テナント ドメイン                       | `contoso.onmicrosoft.com`                    |
@@ -158,13 +158,13 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 > [!NOTE]
 > Azure portal では、 *`Client`* アプリのプラットフォーム構成の **[リダイレクト URI]** は、既定の設定の Kestrel サーバーで実行されるアプリの場合、ポート 5001 に構成されます。
 >
-> *`Client`* アプリがランダムな IIS Express ポートで実行されている場合、アプリのポートは **[デバッグ]** パネルの "*サーバー API アプリ*" のプロパティで確認できます。
+> *`Client`* アプリがランダムな IIS Express ポートで実行されている場合、アプリのポートは **[デバッグ]** パネルの " *サーバー API アプリ* " のプロパティで確認できます。
 >
 > ポートが *`Client`* アプリの既知のポートで事前に構成されていない場合は、Azure portal で *`Client`* アプリの登録に戻り、正しいポートでリダイレクト URI を更新します。
 
 ## <a name="server-app-configuration"></a>*`Server`* アプリの構成
 
-"*このセクションは、ソリューションの **`Server`** アプリに関連しています。* "
+" *このセクションは、ソリューションの **`Server`** アプリに関連しています。* "
 
 ### <a name="authentication-package"></a>認証パッケージ
 
@@ -175,7 +175,7 @@ ASP.NET Core Web API の呼び出しの認証と承認のサポートは、[`Mic
   Version="{VERSION}" />
 ```
 
-プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.AzureAD.UI) のパッケージの**バージョン履歴**にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
+プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.AzureAD.UI) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 ### <a name="authentication-service-support"></a>認証サービスのサポート
 
@@ -244,7 +244,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="weatherforecast-controller"></a>WeatherForecast コントローラー
 
-WeatherForecast コントローラー (*Controllers/WeatherForecastController.cs*) では、[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性がコントローラーに適用されている保護された API が公開されます。 次のことを理解しておくことが**重要**です。
+WeatherForecast コントローラー ( *Controllers/WeatherForecastController.cs* ) では、 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性がコントローラーに適用されている保護された API が公開されます。 次のことを理解しておくことが **重要** です。
 
 * この API コントローラーの [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、この API を不正アクセスから保護する唯一のものです。
 * Blazor WebAssembly アプリで使用される [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、アプリが正しく動作するにはユーザーを承認する必要がある、というアプリへのヒントとしてのみ機能します。
@@ -265,7 +265,7 @@ public class WeatherForecastController : ControllerBase
 
 ## <a name="client-app-configuration"></a>*`Client`* アプリの構成
 
-"*このセクションは、ソリューションの **`Client`** アプリに関連しています。* "
+" *このセクションは、ソリューションの **`Client`** アプリに関連しています。* "
 
 ### <a name="authentication-package"></a>認証パッケージ
 
@@ -278,7 +278,7 @@ public class WeatherForecastController : ControllerBase
   Version="{VERSION}" />
 ```
 
-プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) のパッケージの**バージョン履歴**にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
+プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) パッケージによって、[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) パッケージがアプリに推移的に追加されます。
 
@@ -360,7 +360,7 @@ builder.Services.AddMsalAuthentication(options =>
 options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
 ```
 
-詳細については、"*その他のシナリオ*" に関する記事の次のセクションを参照してください。
+詳細については、" *その他のシナリオ* " に関する記事の次のセクションを参照してください。
 
 * [追加のアクセス トークンを要求する](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [送信要求にトークンを添付する](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
@@ -405,8 +405,8 @@ options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
 
 サーバー プロジェクトからアプリを実行します。 Visual Studio を使用しているときは、次のいずれかを行います。
 
-* ツール バーの **[スタートアップ プロジェクト]** ドロップダウン リストを "*サーバー API アプリ*" に設定して、 **[実行]** ボタンを選択します。
-* **ソリューション エクスプローラー**でサーバー プロジェクトを選択し、ツール バーの **[実行]** ボタンを選択するか、 **[デバッグ]** メニューからアプリを開始します。
+* ツール バーの **[スタートアップ プロジェクト]** ドロップダウン リストを " *サーバー API アプリ* " に設定して、 **[実行]** ボタンを選択します。
+* **ソリューション エクスプローラー** でサーバー プロジェクトを選択し、ツール バーの **[実行]** ボタンを選択するか、 **[デバッグ]** メニューからアプリを開始します。
 
 <!-- HOLD
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]

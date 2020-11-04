@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 52810cb5a5961ffe932a7f5ac2a3a03033781cc9
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326531"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678483"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
 
@@ -164,6 +164,19 @@ cookie を使用すると、WebSocket 接続によってカルチャを正しく
 1. ブラウザーによって、WebSocket 接続が開かれ、対話型の Blazor Server セッションが作成されます。
 1. ローカライズ ミドルウェアによって、cookie が読み取られ、カルチャが割り当てられます。
 1. Blazor Server セッションは、正しいカルチャで開始されます。
+
+<xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage> の操作時は <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context> プロパティを使用します。
+
+```razor
+@{
+    this.Context.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(
+            new RequestCulture(
+                CultureInfo.CurrentCulture,
+                CultureInfo.CurrentUICulture)));
+}
+```
 
 #### <a name="provide-ui-to-choose-the-culture"></a>カルチャを選択するための UI を提供する
 

@@ -16,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 745703aaa4ceb39c75789bab0bde4564f3d79a30
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632838"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678551"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>パート 6: ASP.NET Core のコントローラーのメソッドとビュー
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ムービー アプリは上々の滑り出しでしたが、表示が理想的ではありません。たとえば、**ReleaseDate** は 2 語でなければなりません。
+ムービー アプリは上々の滑り出しでしたが、表示が理想的ではありません。たとえば、 **ReleaseDate** は 2 語でなければなりません。
 
 ![インデックス ビュー:Release Date が 1 語 (スペースなし) で、ムービーの公開日がすべて午前 12 時になっています](working-with-sql/_static/m55.png)
 
@@ -43,7 +43,7 @@ ms.locfileid: "88632838"
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として https://localhost:5001/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-**[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、*Views/Movies/Index.cshtml* ファイルで Core MVC アンカー タグ ヘルパーによって生成されます。
+**[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、 *Views/Movies/Index.cshtml* ファイルで Core MVC アンカー タグ ヘルパーによって生成されます。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -57,7 +57,7 @@ ms.locfileid: "88632838"
 </td>
 ```
 
-*Startup.cs* ファイルで設定する[ルーティング](xref:mvc/controllers/routing)の形式を思い出してください。
+*Startup.cs* ファイルで設定する [ルーティング](xref:mvc/controllers/routing)の形式を思い出してください。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
@@ -67,7 +67,7 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 <a name="get-post"></a>
 
-`Movies` コントローラーを開き、2 つの `Edit` アクション メソッドを調べます。 次に示すコードの `HTTP GET Edit` メソッドは、ムービーをフェッチし、*Edit.cshtml* Razor ファイルによって生成される編集フォームを設定します。
+`Movies` コントローラーを開き、2 つの `Edit` アクション メソッドを調べます。 次に示すコードの `HTTP GET Edit` メソッドは、ムービーをフェッチし、 *Edit.cshtml* Razor ファイルによって生成される編集フォームを設定します。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -105,9 +105,9 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 ::: moniker-end
 
-`HttpPost` 属性は、`POST` 要求に対して "*のみ*" この `Edit` メソッドを呼び出すことができることを指定します。 1 番目の Edit メソッドにも `[HttpGet]` 属性を適用してもかまいませんが、`[HttpGet]` が既定値なので必要ありません。
+`HttpPost` 属性は、`POST` 要求に対して " *のみ* " この `Edit` メソッドを呼び出すことができることを指定します。 1 番目の Edit メソッドにも `[HttpGet]` 属性を適用してもかまいませんが、`[HttpGet]` が既定値なので必要ありません。
 
-`ValidateAntiForgeryToken` 属性は[リクエスト フォージェリを防ぐ](xref:security/anti-request-forgery)ために使われ、編集ビュー ファイル (*Views/Movies/Edit.cshtml*) で生成されるフォージェリ対策トークンとペアにされます。 編集ビュー ファイルは、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)でフォージェリ対策トークンを生成します。
+`ValidateAntiForgeryToken` 属性は [リクエスト フォージェリを防ぐ](xref:security/anti-request-forgery)ために使われ、編集ビュー ファイル ( *Views/Movies/Edit.cshtml* ) で生成されるフォージェリ対策トークンとペアにされます。 編集ビュー ファイルは、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)でフォージェリ対策トークンを生成します。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
@@ -149,9 +149,9 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 `[ValidateAntiForgeryToken]` 属性は、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)のフォージェリ対策トークン ジェネレーターによって生成された非表示の [XSRF](xref:security/anti-request-forgery) トークンを検証します。
 
-[モデル バインド](xref:mvc/models/model-binding) システムは、送信されたフォーム値を取得し、`movie` パラメーターとして渡される `Movie` オブジェクトを作成します。 `ModelState.IsValid` メソッドは、フォームで送信されたデータを使って `Movie` オブジェクトを変更 (編集または更新) できることを検証します。 データが有効な場合は保存されます。 更新 (編集) されたムービー データは、データベース コンテキストの `SaveChangesAsync` メソッドを呼び出すことによってデータベースに保存されます。 データを保存した後、コードはユーザーを `MoviesController` クラスの `Index` アクション メソッドにリダイレクトします。そこでは、行われたばかりの変更を含むムービー コレクションが表示されます。
+[モデル バインド](xref:mvc/models/model-binding) システムは、送信されたフォーム値を取得し、`movie` パラメーターとして渡される `Movie` オブジェクトを作成します。 `ModelState.IsValid` プロパティは、フォームで送信されたデータを使って `Movie` オブジェクトを変更 (編集または更新) できることを検証します。 データが有効な場合は保存されます。 更新 (編集) されたムービー データは、データベース コンテキストの `SaveChangesAsync` メソッドを呼び出すことによってデータベースに保存されます。 データを保存した後、コードはユーザーを `MoviesController` クラスの `Index` アクション メソッドにリダイレクトします。そこでは、行われたばかりの変更を含むムービー コレクションが表示されます。
 
-フォームがサーバーに送信される前に、クライアント側の検証はフィールドに対する検証規則を確認します。 検証エラーがある場合は、エラー メッセージが表示され、フォームは送信されません。 JavaScript が無効になっている場合、クライアント側検証は行われませんが、サーバーは送信された無効な値を検出し、フォーム値がエラー メッセージと共に再表示されます。 このチュートリアルで後ほど、[モデルの検証](xref:mvc/models/validation)についてさらに詳しく説明します。 *Views/Movies/Edit.cshtml* ビュー テンプレートの[検証タグ ヘルパー](xref:mvc/views/working-with-forms)は、適切なエラー メッセージの表示を処理します。
+フォームがサーバーに送信される前に、クライアント側の検証はフィールドに対する検証規則を確認します。 検証エラーがある場合は、エラー メッセージが表示され、フォームは送信されません。 JavaScript が無効になっている場合、クライアント側検証は行われませんが、サーバーは送信された無効な値を検出し、フォーム値がエラー メッセージと共に再表示されます。 このチュートリアルで後ほど、[モデルの検証](xref:mvc/models/validation)についてさらに詳しく説明します。 *Views/Movies/Edit.cshtml* ビュー テンプレートの [検証タグ ヘルパー](xref:mvc/views/working-with-forms)は、適切なエラー メッセージの表示を処理します。
 
 ![編集ビュー:正しくない価格の値 abc に対する例外では、"Price フィールドは数値でなければなりません" と表示されます。 正しくないリリース日の値 xyz に対する例外では、"Please enter a valid date" と表示されます。](~/tutorials/first-mvc-app/controller-methods-views/_static/val.png)
 
