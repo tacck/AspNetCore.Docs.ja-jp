@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 3242031f07f3fa344422db4591ea1a244b6723dd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8c7f10a6b6f8504efaba6054533aba034982820c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625246"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056570"
 ---
 # <a name="tools-and-downloads"></a>ツールとダウンロード
 
@@ -39,7 +40,7 @@ Azure には、[Azure portal](https://portal.azure.com)、[Azure CLI](/cli/azure
 次のツールが必要です。
 
 * [Git](https://git-scm.com/downloads) &mdash; このガイドを対象とした Git についての基本的な理解。 [Git のドキュメント](https://git-scm.com/doc) (具体的には、[git remote](https://git-scm.com/docs/git-remote) と [git push](https://git-scm.com/docs/git-push)) を確認してください。
-* [.NET Core SDK](https://dotnet.microsoft.com/download/) &mdash; サンプル アプリをビルドして実行するには、バージョン 2.1.300 以降が必要です。 **.NET Core クロスプラットフォームの開発**ワークロードを使用して Visual Studio がインストールされている場合は、.NET Core SDK は既にインストールされています。
+* [.NET Core SDK](https://dotnet.microsoft.com/download/) &mdash; サンプル アプリをビルドして実行するには、バージョン 2.1.300 以降が必要です。 **.NET Core クロスプラットフォームの開発** ワークロードを使用して Visual Studio がインストールされている場合は、.NET Core SDK は既にインストールされています。
 
     .NET Core SDK のインストールを確認します。 コマンド シェルを開き、次のコマンドを実行します。
 

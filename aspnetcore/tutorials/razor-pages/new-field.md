@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: f5efb121b95d84876c9029cf06a96f827137e660
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 951a8ada57ae523f362313426c0279556eb8339b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631448"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050616"
 ---
 # <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a>パート 7、ASP.NET Core で Razor ページでの新しいフィールドの追加
 
@@ -258,7 +259,7 @@ DB 内のすべてのレコードを削除すると、初期化子は DB にデ�
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-データベースを削除し、移行を使ってデータベースを再作成します。 データベースを削除するには、データベース ファイル (*MvcMovie.db*) を削除します。 次に、`ef database update` コマンドを実行します。
+データベースを削除し、移行を使ってデータベースを再作成します。 データベースを削除するには、データベース ファイル ( *MvcMovie.db* ) を削除します。 次に、`ef database update` コマンドを実行します。
 
 ```dotnetcli
 dotnet ef database update

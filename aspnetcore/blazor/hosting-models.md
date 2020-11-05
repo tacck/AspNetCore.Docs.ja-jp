@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/11/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,28 +19,28 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0830214029d59d0820ed3c5806267c766314c74f
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 1ec1f699d3beb5dbbc3851d9e3b6b1d3faf64cfd
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009675"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055673"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>ASP.NET Core Blazor のホスティング モデル
 
 作成者: [Daniel Roth](https://github.com/danroth27)
 
-Blazor は、[WebAssembly](https://webassembly.org/) ベースの .NET ランタイム ( *Blazor WebAssembly* ) 上のブラウザーのクライアント側で、または ASP.NET Core ( *Blazor Server* ) のサーバー側で実行されるように設計された Web フレームワークです。 ホスティング モデルに関係なく、アプリ モデルとコンポーネント モデルは "*同じ*" です。
+Blazor は、 [WebAssembly](https://webassembly.org/) ベースの .NET ランタイム ( *Blazor WebAssembly* ) 上のブラウザーのクライアント側で、または ASP.NET Core ( *Blazor Server* ) のサーバー側で実行されるように設計された Web フレームワークです。 ホスティング モデルに関係なく、アプリ モデルとコンポーネント モデルは " *同じ* " です。
 
 ## Blazor WebAssembly
 
-Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。 このアプリはバックエンド ASP.NET Core アプリのない展開用として開発されているため、"*スタンドアロン Blazor WebAssembly アプリ*" と呼ばれています。
+Blazor のプリンシパル ホスティング モデルは、WebAssembly 上のブラウザーのクライアント側で実行されます。 Blazor アプリ、その依存関係、.NET ランタイムがブラウザーにダウンロードされます。 アプリがブラウザー UI スレッド上で直接実行されます。 UI の更新とイベントの処理は、同じプロセス内で行われます。 アプリの資産は、静的コンテンツをクライアントに提供できる Web サーバーまたはサービスに静的ファイルとして展開されます。 このアプリはバックエンド ASP.NET Core アプリのない展開用として開発されているため、" *スタンドアロン Blazor WebAssembly アプリ* " と呼ばれています。
 
 ![Blazor WebAssembly:Blazor アプリは、ブラウザー内の UI スレッドで実行されます。](hosting-models/_static/blazor-webassembly.png)
 
-クライアント側のホスティング モデルを使用して Blazor アプリを作成するには、 **Blazor WebAssembly アプリ** テンプレート ([`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new)) を使用します。
+クライアント側のホスティング モデルを使用して Blazor アプリを作成するには、 **Blazor WebAssembly アプリ** テンプレート ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new)) を使用します。
 
-**Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ([`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 ASP.NET Core バックエンドのあるアプリは "*ホステッド Blazor WebAssembly アプリ*"と呼ばれています。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
+**Blazor WebAssembly アプリ** テンプレートを選択したら、 **[ASP.NET Core hosted]** チェック ボックス ( [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new)) をオンにして、ASP.NET Core バックエンドを使用するようにアプリを構成することもできます。 ASP.NET Core アプリは、Blazor アプリをクライアントに提供します。 ASP.NET Core バックエンドのあるアプリは " *ホステッド Blazor WebAssembly アプリ* "と呼ばれています。 Blazor WebAssembly アプリは、Web API 呼び出しまたは [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>) を使用してネットワーク経由でサーバーと通信できます。
 
 `blazor.webassembly.js` スクリプトは、フレームワークによって提供され、次の処理を行います。
 
@@ -68,7 +69,7 @@ Blazor Server ホスティング モデルを使用すると、アプリは ASP.
 
 ![ブラウザーとサーバー上のアプリ (ASP.NET Core アプリ内でホストされている) とのやりとりは、SignalR 接続を介して行われます。](hosting-models/_static/blazor-server.png)
 
-Blazor Server ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor Server アプリ** テンプレート ([`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor Server アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
+Blazor Server ホスティング モデルを使用して Blazor アプリを作成するには、ASP.NET Core **Blazor Server アプリ** テンプレート ( [`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new)) を使用します。 ASP.NET Core アプリによって Blazor Server アプリがホストされ、クライアントによって接続される SignalR エンドポイントが作成されます。
 
 ASP.NET Core アプリにより、次の項目を追加するためにアプリの `Startup` クラスが参照されます。
 
@@ -86,7 +87,7 @@ Blazor Server ホスティング モデルには、次のいくつかの利点�
 * アプリのコンポーネント コードを含め、アプリの .NET/C# コード ベースがクライアントに提供されません。
 
 > [!IMPORTANT]
-> 最初のクライアント要求への応答として、Blazor Server アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、**クライアントを同じサーバーに再接続する必要があります**。 複数のバックエンド サーバーを使用する Blazor Server アプリでは、SignalR 接続に "*スティッキー セッション*" を実装する必要があります。 詳細については、「[サーバーへの接続](#connection-to-the-server)」セクションを参照してください。
+> 最初のクライアント要求への応答として、Blazor Server アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、 **クライアントを同じサーバーに再接続する必要があります** 。 複数のバックエンド サーバーを使用する Blazor Server アプリでは、SignalR 接続に " *スティッキー セッション* " を実装する必要があります。 詳細については、「[サーバーへの接続](#connection-to-the-server)」セクションを参照してください。
 
 Blazor Server ホスティングには、次の欠点があります。
 
@@ -106,12 +107,12 @@ Razor ページまたはビューがレンダリングされると、Razor コ�
 * ページ全体が HTML テキストに再びレンダリングされます。
 * ページがクライアントに送信されます。
 
-Blazor アプリは、"*コンポーネント*" と呼ばれる UI の再利用可能な要素で構成されています。 コンポーネントには、C# コード、マークアップ、およびその他のコンポーネントが含まれています。 コンポーネントがレンダリングされると、Blazor により、HTML または XML ドキュメント オブジェクト モデル (DOM) に似ている、含まれるコンポーネントのグラフが生成されます。 このグラフには、プロパティとフィールドに保持されているコンポーネントの状態が含まれます。 Blazor により、コンポーネント グラフが評価されて、マークアップのバイナリ表現が生成されます。 バイナリ形式は次のように処理できます。
+Blazor アプリは、" *コンポーネント* " と呼ばれる UI の再利用可能な要素で構成されています。 コンポーネントには、C# コード、マークアップ、およびその他のコンポーネントが含まれています。 コンポーネントがレンダリングされると、Blazor により、HTML または XML ドキュメント オブジェクト モデル (DOM) に似ている、含まれるコンポーネントのグラフが生成されます。 このグラフには、プロパティとフィールドに保持されているコンポーネントの状態が含まれます。 Blazor により、コンポーネント グラフが評価されて、マークアップのバイナリ表現が生成されます。 バイナリ形式は次のように処理できます。
 
 * HTML テキストに変換できます (プリレンダリング時&dagger;)。
 * 通常のレンダリング時にマークアップを効率的に更新するために使用できます。
 
-&dagger;*プリレンダリング*:要求された Razor コンポーネントはサーバーで静的 HTML にコンパイルされ、クライアントに送信されて、そこでユーザーに対してレンダリングされます。 クライアントとサーバーの間で接続が確立されると、コンポーネントのプリレンダリング済みの静的な要素が対話型要素に置き換えられます。 プリレンダリングによって、ユーザーに対するアプリの応答性が向上します。
+&dagger;*プリレンダリング* :要求された Razor コンポーネントはサーバーで静的 HTML にコンパイルされ、クライアントに送信されて、そこでユーザーに対してレンダリングされます。 クライアントとサーバーの間で接続が確立されると、コンポーネントのプリレンダリング済みの静的な要素が対話型要素に置き換えられます。 プリレンダリングによって、ユーザーに対するアプリの応答性が向上します。
 
 Blazor の UI の更新は、次の方法でトリガーされます。
 
@@ -124,13 +125,13 @@ Blazor の UI の更新は、次の方法でトリガーされます。
 
 ### <a name="circuits"></a>回線
 
-Blazor Server アプリは、[ASP.NET Core SignalR](xref:signalr/introduction) 上に構築されています。 各クライアントは、"*回線*" と呼ばれる 1 つ以上の SignalR 接続を介してサーバーと通信します。 回線は、一時的なネットワーク中断が許容される SignalR 接続を介した Blazor の抽象化です。 Blazor クライアントで、SignalR 接続が切断されていることが確認されると、新しい SignalR 接続を使用してサーバーへの再接続が試行されます。
+Blazor Server アプリは、[ASP.NET Core SignalR](xref:signalr/introduction) 上に構築されています。 各クライアントは、" *回線* " と呼ばれる 1 つ以上の SignalR 接続を介してサーバーと通信します。 回線は、一時的なネットワーク中断が許容される SignalR 接続を介した Blazor の抽象化です。 Blazor クライアントで、SignalR 接続が切断されていることが確認されると、新しい SignalR 接続を使用してサーバーへの再接続が試行されます。
 
 Blazor Server アプリに接続されている各ブラウザー画面 (ブラウザー タブまたは iframe) では、SignalR 接続が使用されます。 これは、サーバーでレンダリングされる一般的なアプリとの、もう 1 つの重要な違いです。 サーバーでレンダリングされるアプリでは、複数のブラウザー画面で同じアプリを開いても、通常、サーバー上で追加のリソースは要求されません。 Blazor Server アプリでは、ブラウザー画面ごとに、個別の回線とコンポーネント状態の個別のインスタンスをサーバーで管理する必要があります。
 
-Blazor では、ブラウザー タブを閉じるか、または外部 URL に移動して "*正常に終了*" することが検討されます。 正常な終了が行われた場合は、回線と関連リソースが直ちに解放されます。 ネットワークの中断などにより、クライアントが正常に切断されないこともあります。 Blazor Server では、クライアントが再接続できるように、切断された回線が格納されます (その間隔は設定できます)。
+Blazor では、ブラウザー タブを閉じるか、または外部 URL に移動して " *正常に終了* " することが検討されます。 正常な終了が行われた場合は、回線と関連リソースが直ちに解放されます。 ネットワークの中断などにより、クライアントが正常に切断されないこともあります。 Blazor Server では、クライアントが再接続できるように、切断された回線が格納されます (その間隔は設定できます)。
 
-Blazor Server を使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 詳細については、「<xref:blazor/advanced-scenarios#blazor-server-circuit-handler>」を参照してください。
+Blazor Server を使用すると、コードで " *回線ハンドラー* " を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 詳細については、「<xref:blazor/advanced-scenarios#blazor-server-circuit-handler>」を参照してください。
 
 ### <a name="ui-latency"></a>UI 遅延時間
 
@@ -149,7 +150,7 @@ Blazor Server アプリは、ネットワーク遅延時間とメモリ使用量
 
 Blazor Server アプリには、サーバーへのアクティブな SignalR 接続が必要です。 接続が失われた場合、アプリではサーバーへの再接続が試行されます。 クライアントの状態がまだメモリ内にある限り、クライアント セッションは状態を失うことなく再開されます。
 
-最初のクライアント要求への応答として、Blazor Server アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、クライアントを同じサーバーに再接続する必要があります。 複数のバックエンド サーバーを使用する Blazor Server アプリでは、SignalR 接続に "*スティッキー セッション*" を実装する必要があります。
+最初のクライアント要求への応答として、Blazor Server アプリによってプリレンダリングされます。これにより、サーバー上で UI の状態が設定されます。 クライアントで SignalR 接続の作成が再試行される際は、クライアントを同じサーバーに再接続する必要があります。 複数のバックエンド サーバーを使用する Blazor Server アプリでは、SignalR 接続に " *スティッキー セッション* " を実装する必要があります。
 
 Blazor Server アプリには [Azure SignalR Service](/azure/azure-signalr) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 Azure SignalR サービスでは、サービスの `ServerStickyMode` オプションまたは構成値を `Required` に設定することにより、スティッキー セッションが有効になります。 詳細については、「<xref:blazor/host-and-deploy/server#signalr-configuration>」を参照してください。
 

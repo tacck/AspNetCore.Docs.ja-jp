@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 09f4cb5ba11feb7d81a410dd3869f9863d104d0e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627846"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055595"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor のコンテンツ セキュリティ ポリシーを適用する
 
@@ -35,7 +36,7 @@ ms.locfileid: "88627846"
 * ページによって実行され、フォームの許可された URL ターゲットを指定するアクション。
 * 読み込むことができるプラグイン。
 
-CSP をアプリに適用するために、開発者は 1 つ以上の `Content-Security-Policy` ヘッダーまたは `<meta>` タグに複数の CSP コンテンツ セキュリティ "*ディレクティブ*" を指定します。
+CSP をアプリに適用するために、開発者は 1 つ以上の `Content-Security-Policy` ヘッダーまたは `<meta>` タグに複数の CSP コンテンツ セキュリティ " *ディレクティブ* " を指定します。
 
 ポリシーは、ページの読み込み中にブラウザーによって評価されます。 ブラウザーによりページのソースが検査され、コンテンツ セキュリティ ディレクティブの要件を満たしているかどうかが判断されます。 リソースのポリシー ディレクティブが満たされていない場合、ブラウザーでリソースが読み込まれません。 たとえば、サードパーティのスクリプトを許可しないポリシーについて考えてみます。 ページの `src` 属性にサードパーティから発生した `<script>` タグが含まれている場合、ブラウザーによってスクリプトの読み込みが禁止されます。
 
@@ -153,7 +154,7 @@ CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新の�
 * [report-to](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [report-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 
-`report-uri` の使用は推奨されなくなりましたが、すべての主要なブラウザーで `report-to` がサポートされるようになるまで、両方のディレクティブを使用する必要があります。 `report-uri` のサポートは、ブラウザーから "*常に*" 削除される可能性があるため、`report-uri` を排他的に使用しないでください。 `report-to` が完全にサポートされたら、ポリシー内の `report-uri` のサポートを削除します。 `report-to` が導入されたかどうかを追跡する方法については、「[Can I use: report-to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)」(私は使用できますか? report-to) を参照してください。
+`report-uri` の使用は推奨されなくなりましたが、すべての主要なブラウザーで `report-to` がサポートされるようになるまで、両方のディレクティブを使用する必要があります。 `report-uri` のサポートは、ブラウザーから " *常に* " 削除される可能性があるため、`report-uri` を排他的に使用しないでください。 `report-to` が完全にサポートされたら、ポリシー内の `report-uri` のサポートを削除します。 `report-to` が導入されたかどうかを追跡する方法については、「[Can I use: report-to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)」(私は使用できますか? report-to) を参照してください。
 
 アプリがリリースされるたびにポリシーをテストして更新してください。
 

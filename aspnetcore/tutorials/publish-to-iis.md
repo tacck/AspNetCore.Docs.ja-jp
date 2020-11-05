@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: 40c47da472257862414ba33be582eb19d3f0b29c
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: b3c714ea8e741430df1f70b2df258f1e8f1c7ad5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754555"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060509"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS に ASP.NET Core アプリを発行する
 
@@ -39,7 +40,7 @@ ms.locfileid: "91754555"
 ## <a name="prerequisites"></a>必須コンポーネント
 
 * 開発用のコンピューターにインストールされている [.NET Core SDK](/dotnet/core/sdk)。
-* **Web Server (IIS)** サーバー ロールで構成された Windows Server。 IIS で Web サイトをホストするようにサーバーが構成されていない場合、<xref:host-and-deploy/iis/index#iis-configuration> 記事の「*IIS 構成*」セクションの指示に従い、その後、このチュートリアルに戻ってください。
+* **Web Server (IIS)** サーバー ロールで構成された Windows Server。 IIS で Web サイトをホストするようにサーバーが構成されていない場合、<xref:host-and-deploy/iis/index#iis-configuration> 記事の「 *IIS 構成* 」セクションの指示に従い、その後、このチュートリアルに戻ってください。
 
 > [!WARNING]
 > **IIS 構成と Web サイトのセキュリティには、このチュートリアルでは説明されていない概念が含まれています。** IIS で本稼働アプリをホストする前に、[Microsoft IIS ドキュメント](https://www.iis.net/)と [IIS でホストする方法に関する ASP.NET Core 記事](xref:host-and-deploy/iis/index)を参照してください。
@@ -52,7 +53,7 @@ ms.locfileid: "91754555"
 
 ## <a name="install-the-net-core-hosting-bundle"></a>.NET Core ホスティング バンドルのインストール
 
-*.NET Core ホスティング バンドル*を IIS サーバーにインストールします。 このバンドルをインストールすることで、.NET Core ランタイム、.NET Core ライブラリ、[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)がインストールされます。 このモジュールでは、ASP.NET Core アプリが IIS の背後で実行できるようになります。
+*.NET Core ホスティング バンドル* を IIS サーバーにインストールします。 このバンドルをインストールすることで、.NET Core ランタイム、.NET Core ライブラリ、[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)がインストールされます。 このモジュールでは、ASP.NET Core アプリが IIS の背後で実行できるようになります。
 
 次のリンクを使用してインストーラーをダウンロードします。
 
@@ -83,18 +84,18 @@ ms.locfileid: "91754555"
 
 ## <a name="publish-and-deploy-the-app"></a>アプリを発行および配置する
 
-"*アプリを発行する*" とは、サーバーでホストできるコンパイル済みのアプリを生成するということです。 "*アプリを展開する*" とは、発行済みのアプリをホスティング システムに移動するということです。 発行手順は [.NET Core SDK](/dotnet/core/sdk) で処理されます。一方で、展開手順はさまざまな手法で処理できます。 このチュートリアルでは、"*フォルダー*" 展開手法を採用しています。
+" *アプリを発行する* " とは、サーバーでホストできるコンパイル済みのアプリを生成するということです。 " *アプリを展開する* " とは、発行済みのアプリをホスティング システムに移動するということです。 発行手順は [.NET Core SDK](/dotnet/core/sdk) で処理されます。一方で、展開手順はさまざまな手法で処理できます。 このチュートリアルでは、" *フォルダー* " 展開手法を採用しています。
  
 * アプリはフォルダーに発行されます。
-* フォルダーの内容が IIS サイトのフォルダーに移動されます (IIS マネージャーのサイトの**物理パス**)。
+* フォルダーの内容が IIS サイトのフォルダーに移動されます (IIS マネージャーのサイトの **物理パス** )。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. **[ソリューション エクスプローラー]** でプロジェクトを右クリックし、 **[発行]** を選択します。
 1. **[発行先を選択]** ダイアログで、 **[フォルダー]** 発行オプションを選択します。
-1. **フォルダーまたはファイル共有**パスを選択します。
+1. **フォルダーまたはファイル共有** パスを選択します。
    * ネットワーク共有として開発用のコンピューターで利用できる IIS サイトのフォルダーを作成した場合、共有へのパスを指定します。 現在のユーザーに、共有に発行するための書き込みアクセスを与える必要があります。
-   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
+   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -104,14 +105,14 @@ ms.locfileid: "91754555"
    dotnet publish --configuration Release
    ```
 
-1. IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
+1. IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 1. **[ソリューション]** でプロジェクトを右クリックし、 **[発行]**  >  **[フォルダーに発行]** の順に選択します。
 1. **[フォルダーを選択してください]** パスを設定します。
    * ネットワーク共有として開発用のコンピューターで利用できる IIS サイトのフォルダーを作成した場合、共有へのパスを指定します。 現在のユーザーに、共有に発行するための書き込みアクセスを与える必要があります。
-   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの**物理パス**である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
+   * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
 
 ---
 

@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: ca52b6cf8646bced3a228341717f8ccb1edff582
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 34c35daac3da845bac9156fe96078df7902a4cd0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634203"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059495"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core で IHttpClientFactory を使用して HTTP 要求を行う
 
@@ -33,7 +34,7 @@ ms.locfileid: "88634203"
 
 アプリ内で <xref:System.Net.Http.HttpClient> インスタンスを構成して作成するために、<xref:System.Net.Http.IHttpClientFactory> を登録して使用できます。 `IHttpClientFactory` には次のような利点があります。
 
-* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、[GitHub](https://github.com/) にアクセスするために、*github* という名前のクライアントを登録して構成できます。 一般的なアクセスのために、既定のクライアントを登録できます。
+* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、 [GitHub](https://github.com/) にアクセスするために、 *github* という名前のクライアントを登録して構成できます。 一般的なアクセスのために、既定のクライアントを登録できます。
 * `HttpClient` でのハンドラーのデリゲートにより、送信ミドルウェアの概念が体系化されます。 `HttpClient` でのハンドラーのデリゲートを利用するために、Polly ベースのミドルウェアに対する拡張機能が提供されます。
 * 基になっている `HttpClientMessageHandler` インスタンスのプールと有効期間が管理されます。 自動管理により、`HttpClient` の有効期間を手動で管理するときの一般的な DNS (ドメイン ネーム システム) の問題が発生しなくなります。
 * ファクトリによって作成されたクライアントから送信されるすべての要求に対し、(`ILogger` によって) 構成可能なログ エクスペリエンスを追加します。
@@ -340,7 +341,7 @@ Polly のポリシーは入れ子にするのが一般的です。
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup5.cs?name=snippet1)]
 
-通常、`HttpClient` インスタンスは、破棄する必要の**ない** .NET オブジェクトとして扱うことができます。 破棄すると送信要求がキャンセルされ、<xref:System.IDisposable.Dispose*> の呼び出し後には指定された `HttpClient` インスタンスを使用できなくなります。 `IHttpClientFactory` は、`HttpClient` インスタンスによって使用されたリソースの追跡と破棄を行います。
+通常、`HttpClient` インスタンスは、破棄する必要の **ない** .NET オブジェクトとして扱うことができます。 破棄すると送信要求がキャンセルされ、<xref:System.IDisposable.Dispose*> の呼び出し後には指定された `HttpClient` インスタンスを使用できなくなります。 `IHttpClientFactory` は、`HttpClient` インスタンスによって使用されたリソースの追跡と破棄を行います。
 
 `IHttpClientFactory` の登場以前は、1 つの `HttpClient` インスタンスを長い期間使い続けるパターンが一般的に使用されていました。 `IHttpClientFactory` に移行した後は、このパターンは不要になります。
 
@@ -377,9 +378,9 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 `IHttpClientFactory` によって作成されたクライアントは、すべての要求のログ メッセージを記録します。 既定のログ メッセージを見るには、ログの構成で適切な情報レベルを有効にします。 要求ヘッダーのログなどの追加ログは、トレース レベルでのみ含まれます。
 
-各クライアントに使用されるログのカテゴリには、クライアントの名前が含まれます。 たとえば、*MyNamedClient* という名前のクライアントでは、"System.Net.Http.HttpClient.**MyNamedClient**.LogicalHandler" というカテゴリでメッセージがログに記録されます。 *LogicalHandler* というサフィックスが付いたメッセージが、要求ハンドラーのパイプラインの外部で発生します。 要求では、パイプライン内の他のハンドラーが要求を処理する前に、メッセージがログに記録されます。 応答では、他のパイプライン ハンドラーが応答を受け取った後で、メッセージがログに記録されます。
+各クライアントに使用されるログのカテゴリには、クライアントの名前が含まれます。 たとえば、 *MyNamedClient* という名前のクライアントでは、"System.Net.Http.HttpClient. **MyNamedClient**.LogicalHandler" というカテゴリでメッセージがログに記録されます。 *LogicalHandler* というサフィックスが付いたメッセージが、要求ハンドラーのパイプラインの外部で発生します。 要求では、パイプライン内の他のハンドラーが要求を処理する前に、メッセージがログに記録されます。 応答では、他のパイプライン ハンドラーが応答を受け取った後で、メッセージがログに記録されます。
 
-ログ記録は、要求ハンドラーのパイプラインの内部でも行われます。 *MyNamedClient* の例では、これらのメッセージはログ カテゴリ "System.Net.Http.HttpClient.**MyNamedClient**.ClientHandler" でログに記録されます。 要求では、他のすべてのハンドラーが実行された後、要求が送信される直前に、これが行われます。 応答では、このログ記録には、ハンドラー パイプラインを通じ戻される前の応答の状態が含まれます。
+ログ記録は、要求ハンドラーのパイプラインの内部でも行われます。 *MyNamedClient* の例では、これらのメッセージはログ カテゴリ "System.Net.Http.HttpClient. **MyNamedClient**.ClientHandler" でログに記録されます。 要求では、他のすべてのハンドラーが実行された後、要求が送信される直前に、これが行われます。 応答では、このログ記録には、ハンドラー パイプラインを通じ戻される前の応答の状態が含まれます。
 
 パイプラインの外部と内部でログを有効にすると、他のパイプライン ハンドラーによる変更を検査できます。 これには、要求ヘッダーや応答状態コードへの変更を含めることができます。
 
@@ -439,7 +440,7 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 アプリ内で <xref:System.Net.Http.HttpClient> インスタンスを構成して作成するために、<xref:System.Net.Http.IHttpClientFactory> を登録して使用できます。 次のような利点があります。
 
-* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、*github* クライアントを登録して、[GitHub](https://github.com/) にアクセスするように構成できます。 既定のクライアントは、他の目的に登録できます。
+* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、 *github* クライアントを登録して、 [GitHub](https://github.com/) にアクセスするように構成できます。 既定のクライアントは、他の目的に登録できます。
 * `HttpClient` でのハンドラーのデリゲートにより送信ミドルウェアの概念を体系化し、Polly ベースのミドルウェアでそれを利用するための拡張機能を提供します。
 * 基になっている `HttpClientMessageHandler` インスタンスのプールと有効期間を管理し、`HttpClient` の有効期間を手動で管理するときに発生する一般的な DNS の問題を防ぎます。
 * ファクトリによって作成されたクライアントから送信されるすべての要求に対し、(`ILogger` によって) 構成可能なログ エクスペリエンスを追加します。
@@ -471,11 +472,11 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 ### <a name="named-clients"></a>名前付きクライアント
 
-それぞれ構成が異なる多数の `HttpClient` をアプリで個別に使用する必要がある場合は、**名前付きクライアント**を使用することができます。 名前付き `HttpClient` の構成は、`Startup.ConfigureServices` での登録時に指定できます。
+それぞれ構成が異なる多数の `HttpClient` をアプリで個別に使用する必要がある場合は、 **名前付きクライアント** を使用することができます。 名前付き `HttpClient` の構成は、`Startup.ConfigureServices` での登録時に指定できます。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-上記のコードでは、*github* という名前を指定して `AddHttpClient` を呼び出しています。 このクライアントには既定の構成がいくつか適用されています。つまり、GitHub API を使用するために必要なベース アドレスと 2 つのヘッダーです。
+上記のコードでは、 *github* という名前を指定して `AddHttpClient` を呼び出しています。 このクライアントには既定の構成がいくつか適用されています。つまり、GitHub API を使用するために必要なベース アドレスと 2 つのヘッダーです。
 
 `CreateClient` を呼び出すたびに、`HttpClient` の新しいインスタンスが作成されて、構成アクションが呼び出されます。
 
@@ -695,7 +696,7 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 `IHttpClientFactory` によって作成されたクライアントは、すべての要求のログ メッセージを記録します。 既定のログ メッセージを見るには、ログの構成で適切な情報レベルを有効にします。 要求ヘッダーのログなどの追加ログは、トレース レベルでのみ含まれます。
 
-各クライアントに使用されるログのカテゴリには、クライアントの名前が含まれます。 たとえば、*MyNamedClient* という名前のクライアントは、カテゴリ `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` でメッセージをログに記録します。 *LogicalHandler* というサフィックスが付いたメッセージが、要求ハンドラーのパイプラインの外部で発生します。 要求では、パイプライン内の他のハンドラーが要求を処理する前に、メッセージがログに記録されます。 応答では、他のパイプライン ハンドラーが応答を受け取った後で、メッセージがログに記録されます。
+各クライアントに使用されるログのカテゴリには、クライアントの名前が含まれます。 たとえば、 *MyNamedClient* という名前のクライアントは、カテゴリ `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` でメッセージをログに記録します。 *LogicalHandler* というサフィックスが付いたメッセージが、要求ハンドラーのパイプラインの外部で発生します。 要求では、パイプライン内の他のハンドラーが要求を処理する前に、メッセージがログに記録されます。 応答では、他のパイプライン ハンドラーが応答を受け取った後で、メッセージがログに記録されます。
 
 ログ記録は、要求ハンドラーのパイプラインの内部でも行われます。 *MyNamedClient* の例では、それらのメッセージはログ カテゴリ `System.Net.Http.HttpClient.MyNamedClient.ClientHandler` に対して記録されます。 要求では、他のすべてのハンドラーが実行した後、要求がネットワークに送信される直前に、これが行われます。 応答では、このログ記録には、ハンドラー パイプラインを通じ戻される前の応答の状態が含まれます。
 
@@ -740,7 +741,7 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 アプリ内で <xref:System.Net.Http.HttpClient> インスタンスを構成して作成するために、<xref:System.Net.Http.IHttpClientFactory> を登録して使用できます。 次のような利点があります。
 
-* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、*github* クライアントを登録して、[GitHub](https://github.com/) にアクセスするように構成できます。 既定のクライアントは、他の目的に登録できます。
+* 論理 `HttpClient` インスタンスの名前付けと構成を一元化します。 たとえば、 *github* クライアントを登録して、 [GitHub](https://github.com/) にアクセスするように構成できます。 既定のクライアントは、他の目的に登録できます。
 * `HttpClient` でのハンドラーのデリゲートにより送信ミドルウェアの概念を体系化し、Polly ベースのミドルウェアでそれを利用するための拡張機能を提供します。
 * 基になっている `HttpClientMessageHandler` インスタンスのプールと有効期間を管理し、`HttpClient` の有効期間を手動で管理するときに発生する一般的な DNS の問題を防ぎます。
 * ファクトリによって作成されたクライアントから送信されるすべての要求に対し、(`ILogger` によって) 構成可能なログ エクスペリエンスを追加します。
@@ -776,11 +777,11 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 ### <a name="named-clients"></a>名前付きクライアント
 
-それぞれ構成が異なる多数の `HttpClient` をアプリで個別に使用する必要がある場合は、**名前付きクライアント**を使用することができます。 名前付き `HttpClient` の構成は、`Startup.ConfigureServices` での登録時に指定できます。
+それぞれ構成が異なる多数の `HttpClient` をアプリで個別に使用する必要がある場合は、 **名前付きクライアント** を使用することができます。 名前付き `HttpClient` の構成は、`Startup.ConfigureServices` での登録時に指定できます。
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-上記のコードでは、*github* という名前を指定して `AddHttpClient` を呼び出しています。 このクライアントには既定の構成がいくつか適用されています。つまり、GitHub API を使用するために必要なベース アドレスと 2 つのヘッダーです。
+上記のコードでは、 *github* という名前を指定して `AddHttpClient` を呼び出しています。 このクライアントには既定の構成がいくつか適用されています。つまり、GitHub API を使用するために必要なベース アドレスと 2 つのヘッダーです。
 
 `CreateClient` を呼び出すたびに、`HttpClient` の新しいインスタンスが作成されて、構成アクションが呼び出されます。
 
@@ -892,7 +893,7 @@ public class ValuesController : ControllerBase
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
-上記のコードでは、`ValidateHeaderHandler` が DI で登録されます。 ハンドラーは、スコープではなく、一時的なサービスとして DI で登録する**必要があります**。 ハンドラーがスコープ付きサービスとして登録されており、ハンドラーが依存するサービスを破棄できる場合:
+上記のコードでは、`ValidateHeaderHandler` が DI で登録されます。 ハンドラーは、スコープではなく、一時的なサービスとして DI で登録する **必要があります** 。 ハンドラーがスコープ付きサービスとして登録されており、ハンドラーが依存するサービスを破棄できる場合:
 
 * ハンドラーのサービスは、ハンドラーがスコープ外に出る前に破棄されることがあります。
 * 破棄されたハンドラー サービスが原因でハンドラーが失敗します。
@@ -1003,7 +1004,7 @@ DI 対応のアプリ内で `IHttpClientFactory` を使用すれば、次のこ�
 
 `IHttpClientFactory` によって作成されたクライアントは、すべての要求のログ メッセージを記録します。 既定のログ メッセージを見るには、ログの構成で適切な情報レベルを有効にします。 要求ヘッダーのログなどの追加ログは、トレース レベルでのみ含まれます。
 
-各クライアントに使用されるログのカテゴリには、クライアントの名前が含まれます。 たとえば、*MyNamedClient* という名前のクライアントは、カテゴリ `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` でメッセージをログに記録します。 *LogicalHandler* というサフィックスが付いたメッセージが、要求ハンドラーのパイプラインの外部で発生します。 要求では、パイプライン内の他のハンドラーが要求を処理する前に、メッセージがログに記録されます。 応答では、他のパイプライン ハンドラーが応答を受け取った後で、メッセージがログに記録されます。
+各クライアントに使用されるログのカテゴリには、クライアントの名前が含まれます。 たとえば、 *MyNamedClient* という名前のクライアントは、カテゴリ `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler` でメッセージをログに記録します。 *LogicalHandler* というサフィックスが付いたメッセージが、要求ハンドラーのパイプラインの外部で発生します。 要求では、パイプライン内の他のハンドラーが要求を処理する前に、メッセージがログに記録されます。 応答では、他のパイプライン ハンドラーが応答を受け取った後で、メッセージがログに記録されます。
 
 ログ記録は、要求ハンドラーのパイプラインの内部でも行われます。 *MyNamedClient* の例では、それらのメッセージはログ カテゴリ `System.Net.Http.HttpClient.MyNamedClient.ClientHandler` に対して記録されます。 要求では、他のすべてのハンドラーが実行した後、要求がネットワークに送信される直前に、これが行われます。 応答では、このログ記録には、ハンドラー パイプラインを通じ戻される前の応答の状態が含まれます。
 

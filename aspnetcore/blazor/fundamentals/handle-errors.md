@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: dfe6f1ac79732d158e31fb5250645d4ff98d1c0b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628340"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055998"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>ASP.NET Core Blazor アプリのエラーを処理する
 
@@ -90,7 +91,7 @@ Blazor Server アプリでは、`Pages/_Host.cshtml` ファイルでエクスペ
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>ハンドルされない例外に対して Blazor Server アプリがどのように反応するか
 
-Blazor Server はステートフルなフレームワークです。 ユーザーはアプリを操作するときに、*回線*と呼ばれる、サーバーへの接続を維持します。 回線では、アクティブなコンポーネント インスタンスに加えて、次のような状態の他の多くの側面が保持されます。
+Blazor Server はステートフルなフレームワークです。 ユーザーはアプリを操作するときに、 *回線* と呼ばれる、サーバーへの接続を維持します。 回線では、アクティブなコンポーネント インスタンスに加えて、次のような状態の他の多くの側面が保持されます。
 
 * コンポーネントの表示される最新の出力。
 * クライアント側のイベントによってトリガーされる可能性がある、イベント処理デリゲートの現在のセット。
@@ -279,4 +280,4 @@ Blazor によってコンポーネントのインスタンスが作成される�
 
 手動レンダー ツリー ビルダーのロジックが正しくないと、クラッシュ、サーバーのハング、セキュリティ脆弱性など、不特定の未定義の動作が発生する可能性があります。
 
-手動のレンダリング ツリー ビルダー ロジックは、アセンブリ コードや MSIL 命令を手動で記述するのと同じレベルの複雑さと、同じレベルの*危険性*を伴うことを考慮に入れてください。
+手動のレンダリング ツリー ビルダー ロジックは、アセンブリ コードや MSIL 命令を手動で記述するのと同じレベルの複雑さと、同じレベルの *危険性* を伴うことを考慮に入れてください。

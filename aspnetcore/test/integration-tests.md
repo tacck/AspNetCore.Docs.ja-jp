@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 9b36a77730a43c7515fcd2c56621412453784c9d
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: f1ce6a209ef3ca85abe0a6f1ac61d85bec52d17a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722541"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050824"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core での統合テスト
 
@@ -57,7 +58,7 @@ ms.locfileid: "90722541"
 * ネットワーク アプライアンス
 * 要求 - 応答パイプライン
 
-単体テストでは、インフラストラクチャ コンポーネントの代わりに、*フェイク*または*モック オブジェクト*と呼ばれる、作成済みのコンポーネントを使用します。
+単体テストでは、インフラストラクチャ コンポーネントの代わりに、 *フェイク* または *モック オブジェクト* と呼ばれる、作成済みのコンポーネントを使用します。
 
 単体テストと比較すると、統合テストは次のようになります。
 
@@ -71,7 +72,7 @@ ms.locfileid: "90722541"
 > 統合テストは、データベースとファイル システムを使用するデータおよびファイル アクセスのすべての順列として記述してはいけません。 通常は、アプリ全体でデータベースやファイル システムを操作する場所がいくつあったとしても、的を絞った一連の読み取り、書き込み、更新、削除の統合テストを行うことで、データベースおよびファイル システム コンポーネントを適切にテストすることができます。 これらのコンポーネントと連携するメソッドのロジックのルーチン テストには、単体テストを使用します。 単体テストでは、インフラストラクチャのフェイク/モックを使用することにより、テストの実行時間が短縮されます。
 
 > [!NOTE]
-> 統合テストの説明では、テスト対象のプロジェクトをよく*テスト対象システム*、または短縮して "SUT" と呼びます。
+> 統合テストの説明では、テスト対象のプロジェクトをよく *テスト対象システム* 、または短縮して "SUT" と呼びます。
 >
 > *このトピック全体で、テスト対象の ASP.NET Core アプリを指すために "SUT" を使用します。*
 
@@ -83,13 +84,13 @@ ASP.NET Core の統合テストには、次のものが必要です。
 * テスト プロジェクトは、SUT のテスト Web ホストを作成し、テスト サーバー クライアントを使用して SUT との要求と応答を処理します。
 * テスト ランナーは、テストを実行し、テスト結果を報告するために使用されます。
 
-統合テストでは、通常の *Arrange (配置)* 、*Act (実行)* 、および *Assert (確認)* のテスト ステップを含む一連のイベントに従います。
+統合テストでは、通常の *Arrange (配置)* 、 *Act (実行)* 、および *Assert (確認)* のテスト ステップを含む一連のイベントに従います。
 
 1. SUT の Web ホストが構成されます。
 1. アプリに要求を送信するためのテスト サーバー クライアントが作成されます。
 1. *Arrange (配置)* テスト ステップが実行されます。テスト アプリが要求を準備します。
 1. *Act (実行)* テスト ステップが実行されます。クライアントは要求を送信し、応答を受信します。
-1. *Assert (確認)* テスト ステップが実行されます。*実際*の応答は、*予測される*応答に基づき、*成功*または*失敗*として検証されます。
+1. *Assert (確認)* テスト ステップが実行されます。 *実際* の応答は、 *予測される* 応答に基づき、 *成功* または *失敗* として検証されます。
 1. このプロセスは、すべてのテストが実行されるまで続行されます。
 1. テスト結果が報告されます。
 
@@ -99,7 +100,7 @@ ASP.NET Core の統合テストには、次のものが必要です。
 
 `Microsoft.AspNetCore.Mvc.Testing` パッケージは、次のタスクを処理します。
 
-* 依存関係ファイル ( *.deps*) を SUT からテスト プロジェクトの *bin* ディレクトリにコピーします。
+* 依存関係ファイル ( *.deps* ) を SUT からテスト プロジェクトの *bin* ディレクトリにコピーします。
 * テストを実行したときに、静的なファイルとページ/ビューが検出されるように、[コンテンツ ルート](xref:fundamentals/index#content-root)を SUT のプロジェクト ルートに設定します。
 * [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) クラスを提供し、`TestServer` を使用して SUT のブートストラップを効率化します。
 
@@ -139,7 +140,7 @@ SUT の [環境](xref:fundamentals/environments) が設定されていない場�
 
 [WebApplicationFactory\<TEntryPoint>](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) は、統合テスト用の [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) を作成するために使用します。 `TEntryPoint` は SUT のエントリ ポイント クラスであり、通常は `Startup` クラスです。
 
-テスト クラスは、クラスにテストが含まれていることを示すために*クラス フィクスチャ* インターフェイス ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) を実装し、クラス内テストの共有オブジェクト インスタンスを提供します。
+テスト クラスは、クラスにテストが含まれていることを示すために *クラス フィクスチャ* インターフェイス ( [IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) を実装し、クラス内テストの共有オブジェクト インスタンスを提供します。
 
 次のテスト クラス `BasicTests` は、`WebApplicationFactory` を使用して SUT をブートストラップし、テスト メソッド `Get_EndpointsReturnSuccessAndCorrectContentType` に [HttpClient](/dotnet/api/system.net.http.httpclient) を提供します。 このメソッドは、複数のアプリ ページで応答状態コードが成功かどうか (200-299 の範囲の状態コード) と、`Content-Type` ヘッダーが `text/html; charset=utf-8` であるかどうかを確認します。
 
@@ -159,9 +160,9 @@ Web ホストの構成は、`WebApplicationFactory` から継承して 1 つ以�
 
    [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)でのデータベースのシード処理は、`InitializeDbForTests` メソッドによって実行されます。 このメソッドについては、[統合テストのサンプル: テスト アプリの構成](#test-app-organization)に関するセクションをご覧ください。
 
-   SUT のデータベース コンテキストは、`Startup.ConfigureServices` メソッドに登録されます。 テスト アプリの `builder.ConfigureServices` コールバックは、アプリの `Startup.ConfigureServices` コードが実行された*後*に実行されます。 ASP.NET Core 3.0 リリースの[汎用ホスト](xref:fundamentals/host/generic-host)により、実行順序に関する互換性のない変更が行われています。 アプリのデータベースとは異なるデータベースをテストに使用するには、`builder.ConfigureServices` でアプリのデータベース コンテキストを置き換える必要があります。
+   SUT のデータベース コンテキストは、`Startup.ConfigureServices` メソッドに登録されます。 テスト アプリの `builder.ConfigureServices` コールバックは、アプリの `Startup.ConfigureServices` コードが実行された *後* に実行されます。 ASP.NET Core 3.0 リリースの[汎用ホスト](xref:fundamentals/host/generic-host)により、実行順序に関する互換性のない変更が行われています。 アプリのデータベースとは異なるデータベースをテストに使用するには、`builder.ConfigureServices` でアプリのデータベース コンテキストを置き換える必要があります。
 
-   まだ [Web ホスト](xref:fundamentals/host/web-host)を使用している SUT の場合、テスト アプリの `builder.ConfigureServices` コールバックは、SUT の `Startup.ConfigureServices` コードの "*前に*" 実行されます。 テスト アプリの `builder.ConfigureTestServices` コールバックは、"*後で*" 実行されます。
+   まだ [Web ホスト](xref:fundamentals/host/web-host)を使用している SUT の場合、テスト アプリの `builder.ConfigureServices` コールバックは、SUT の `Startup.ConfigureServices` コードの " *前に* " 実行されます。 テスト アプリの `builder.ConfigureTestServices` コールバックは、" *後で* " 実行されます。
 
    サンプル アプリでは、データベース コンテキストのサービス記述子を検索し、記述子を使用してサービス登録を削除しています。 次に、ファクトリは、テストにメモリ内データベースを使用する新しい `ApplicationDbContext` を追加します。
 
@@ -194,9 +195,9 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
 1. 応答の偽造防止 cookie と要求検証トークンを解析します。
 1. 偽造防止 cookie と要求検証トークンを使用して POST 要求を行います。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)の `SendAsync` ヘルパー拡張メソッド (*Helpers/HttpClientExtensions.cs*) と `GetDocumentAsync` ヘルパー メソッド (*Helpers/HtmlHelpers.cs*) は、次のメソッドで [AngleSharp](https://anglesharp.github.io/) パーサーを使用して偽造防止チェック処理を行います。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)の `SendAsync` ヘルパー拡張メソッド ( *Helpers/HttpClientExtensions.cs* ) と `GetDocumentAsync` ヘルパー メソッド ( *Helpers/HtmlHelpers.cs* ) は、次のメソッドで [AngleSharp](https://anglesharp.github.io/) パーサーを使用して偽造防止チェック処理を行います。
 
-* `GetDocumentAsync`:[HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) を受け取り、`IHtmlDocument` を返します。 `GetDocumentAsync` は、元の `HttpResponseMessage` に基づいて*仮想応答*を準備するファクトリを使用します。 詳しくは、[AngleSharp のドキュメント](https://github.com/AngleSharp/AngleSharp#documentation)をご覧ください。
+* `GetDocumentAsync`:[HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) を受け取り、`IHtmlDocument` を返します。 `GetDocumentAsync` は、元の `HttpResponseMessage` に基づいて *仮想応答* を準備するファクトリを使用します。 詳しくは、[AngleSharp のドキュメント](https://github.com/AngleSharp/AngleSharp#documentation)をご覧ください。
 * `HttpClient` の `SendAsync` 拡張メソッドは、[HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) を作成し、[SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) を呼び出して、SUT に要求を送信します。 `SendAsync` のオーバーロードは、HTML フォーム (`IHtmlFormElement`) と次のものを受け入れます。
   * フォームの送信ボタン (`IHtmlElement`)
   * フォームの値コレクション (`IEnumerable<KeyValuePair<string, string>>`)
@@ -245,23 +246,23 @@ _client = _factory.CreateClient(clientOptions);
 
 サンプルの SUT には、引用符を返すスコープ サービスが含まれています。 インデックス ページが要求されると、インデックス ページの非表示フィールドに引用符が埋め込まれます。
 
-*Services/IQuoteService.cs*:
+*Services/IQuoteService.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Services/QuoteService.cs*:
+*Services/QuoteService.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs*:
+*Startup.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/Index.cshtml.cs*:
+*Pages/Index.cshtml.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Pages/Index.cs*:
+*Pages/Index.cs* :
 
 [!code-cshtml[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -274,7 +275,7 @@ _client = _factory.CreateClient(clientOptions);
 
 統合テストでサービスと引用符の注入をテストするため、テストは SUT にモック サービスを注入します。 モック サービスは、アプリの `QuoteService` をテスト アプリが提供する `TestQuoteService` と呼ばれるサービスに置き換えます。
 
-*IntegrationTests.IndexPageTests.cs*:
+*IntegrationTests.IndexPageTests.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -342,7 +343,7 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>テスト インフラストラクチャがアプリ コンテンツのルート パスを推測する方法
 
-`WebApplicationFactory` コンストラクターは、`TEntryPoint` アセンブリの `System.Reflection.Assembly.FullName` と同じキーを持つ統合テストを含むアセンブリで [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) を検索することによって、アプリの[コンテンツ ルート](xref:fundamentals/index#content-root) パスを推測します。 正しいキーを持つ属性が見つからない場合、`WebApplicationFactory` はフォールバックしてソリューション ファイル ( *.sln*) を検索し、`TEntryPoint` アセンブリ名をソリューション ディレクトリに追加します。 アプリのルート ディレクトリ (コンテンツ ルート パス) は、ビューやコンテンツのファイルを検出するために使用されます。
+`WebApplicationFactory` コンストラクターは、`TEntryPoint` アセンブリの `System.Reflection.Assembly.FullName` と同じキーを持つ統合テストを含むアセンブリで [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) を検索することによって、アプリの[コンテンツ ルート](xref:fundamentals/index#content-root) パスを推測します。 正しいキーを持つ属性が見つからない場合、`WebApplicationFactory` はフォールバックしてソリューション ファイル ( *.sln* ) を検索し、`TEntryPoint` アセンブリ名をソリューション ディレクトリに追加します。 アプリのルート ディレクトリ (コンテンツ ルート パス) は、ビューやコンテンツのファイルを検出するために使用されます。
 
 ## <a name="disable-shadow-copying"></a>シャドウ コピーの無効化
 
@@ -379,10 +380,10 @@ dotnet test
 
 SUT は、次の特性を持つ Razor Pages メッセージ システムです。
 
-* アプリのインデックス ページ (*Pages/Index.cshtml* と *Pages/Index.cshtml.cs*) には、メッセージの追加、削除、および分析 (メッセージあたりの平均単語数) を制御する UI およびページ モデル メソッドが用意されています。
-* メッセージは、`Id` (キー) と `Text` (メッセージ) の 2 つのプロパティを持つ `Message` クラス (*Data/Message.cs*) によって記述されます。 `Text` プロパティは必須であり、200 文字までに制限されています。
+* アプリのインデックス ページ ( *Pages/Index.cshtml* と *Pages/Index.cshtml.cs* ) には、メッセージの追加、削除、および分析 (メッセージあたりの平均単語数) を制御する UI およびページ モデル メソッドが用意されています。
+* メッセージは、`Id` (キー) と `Text` (メッセージ) の 2 つのプロパティを持つ `Message` クラス ( *Data/Message.cs* ) によって記述されます。 `Text` プロパティは必須であり、200 文字までに制限されています。
 * メッセージは [Entity Framework のメモリ内データベース](/ef/core/providers/in-memory/)&#8224; を使用して格納されます。
-* アプリのデータベース コンテキスト クラスである `AppDbContext` (*Data/AppDbContext.cs*) には、データアクセス層 (DAL) が含まれています。
+* アプリのデータベース コンテキスト クラスである `AppDbContext` ( *Data/AppDbContext.cs* ) には、データアクセス層 (DAL) が含まれています。
 * アプリの起動時にデータベースが空の場合、メッセージ ストアが 3 つのメッセージで初期化されます。
 * アプリには、認証されたユーザーのみがアクセスできる `/SecurePage` が含まれています。
 
@@ -392,7 +393,7 @@ SUT は、次の特性を持つ Razor Pages メッセージ システムです�
 
 ### <a name="test-app-organization"></a>テスト アプリの構成
 
-テスト アプリは、*tests/RazorPagesProject.Tests* ディレクトリにあるコンソール アプリです。
+テスト アプリは、 *tests/RazorPagesProject.Tests* ディレクトリにあるコンソール アプリです。
 
 | テスト アプリのディレクトリ | 説明 |
 | ------------------ | ----------- |
@@ -407,13 +408,13 @@ SUT は、次の特性を持つ Razor Pages メッセージ システムです�
 
 統合テストでは、通常、テストを実行する前に、データベース内に小さなデータセットが必要です。 たとえば、削除テストでは、データベース レコードの削除を呼び出します。そのため、削除要求を成功させるには、データベースに少なくとも 1 つのレコードが必要です。
 
-このサンプル アプリでは、*Utilities.cs* で 3 つのメッセージを使用してデータベースをシードします。このメッセージは、テストを実行する際に使用することができます。
+このサンプル アプリでは、 *Utilities.cs* で 3 つのメッセージを使用してデータベースをシードします。このメッセージは、テストを実行する際に使用することができます。
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/Helpers/Utilities.cs?name=snippet1)]
 
-SUT のデータベース コンテキストは、`Startup.ConfigureServices` メソッドに登録されます。 テスト アプリの `builder.ConfigureServices` コールバックは、アプリの `Startup.ConfigureServices` コードが実行された*後*に実行されます。 テストに異なるデータベースを使用するには、アプリのデータベース コンテキストを `builder.ConfigureServices`で置き換える必要があります。 詳細については、「[WebApplicationFactory のカスタマイズ](#customize-webapplicationfactory)」セクションをご覧ください。
+SUT のデータベース コンテキストは、`Startup.ConfigureServices` メソッドに登録されます。 テスト アプリの `builder.ConfigureServices` コールバックは、アプリの `Startup.ConfigureServices` コードが実行された *後* に実行されます。 テストに異なるデータベースを使用するには、アプリのデータベース コンテキストを `builder.ConfigureServices`で置き換える必要があります。 詳細については、「[WebApplicationFactory のカスタマイズ](#customize-webapplicationfactory)」セクションをご覧ください。
 
-まだ [Web ホスト](xref:fundamentals/host/web-host)を使用している SUT の場合、テスト アプリの `builder.ConfigureServices` コールバックは、SUT の `Startup.ConfigureServices` コードの "*前に*" 実行されます。 テスト アプリの `builder.ConfigureTestServices` コールバックは、"*後で*" 実行されます。
+まだ [Web ホスト](xref:fundamentals/host/web-host)を使用している SUT の場合、テスト アプリの `builder.ConfigureServices` コールバックは、SUT の `Startup.ConfigureServices` コードの " *前に* " 実行されます。 テスト アプリの `builder.ConfigureTestServices` コールバックは、" *後で* " 実行されます。
 
 ::: moniker-end
 
@@ -445,7 +446,7 @@ SUT のデータベース コンテキストは、`Startup.ConfigureServices` �
 * ネットワーク アプライアンス
 * 要求 - 応答パイプライン
 
-単体テストでは、インフラストラクチャ コンポーネントの代わりに、*フェイク*または*モック オブジェクト*と呼ばれる、作成済みのコンポーネントを使用します。
+単体テストでは、インフラストラクチャ コンポーネントの代わりに、 *フェイク* または *モック オブジェクト* と呼ばれる、作成済みのコンポーネントを使用します。
 
 単体テストと比較すると、統合テストは次のようになります。
 
@@ -459,7 +460,7 @@ SUT のデータベース コンテキストは、`Startup.ConfigureServices` �
 > 統合テストは、データベースとファイル システムを使用するデータおよびファイル アクセスのすべての順列として記述してはいけません。 通常は、アプリ全体でデータベースやファイル システムを操作する場所がいくつあったとしても、的を絞った一連の読み取り、書き込み、更新、削除の統合テストを行うことで、データベースおよびファイル システム コンポーネントを適切にテストすることができます。 これらのコンポーネントと連携するメソッドのロジックのルーチン テストには、単体テストを使用します。 単体テストでは、インフラストラクチャのフェイク/モックを使用することにより、テストの実行時間が短縮されます。
 
 > [!NOTE]
-> 統合テストの説明では、テスト対象のプロジェクトをよく*テスト対象システム*、または短縮して "SUT" と呼びます。
+> 統合テストの説明では、テスト対象のプロジェクトをよく *テスト対象システム* 、または短縮して "SUT" と呼びます。
 >
 > *このトピック全体で、テスト対象の ASP.NET Core アプリを指すために "SUT" を使用します。*
 
@@ -471,13 +472,13 @@ ASP.NET Core の統合テストには、次のものが必要です。
 * テスト プロジェクトは、SUT のテスト Web ホストを作成し、テスト サーバー クライアントを使用して SUT との要求と応答を処理します。
 * テスト ランナーは、テストを実行し、テスト結果を報告するために使用されます。
 
-統合テストでは、通常の *Arrange (配置)* 、*Act (実行)* 、および *Assert (確認)* のテスト ステップを含む一連のイベントに従います。
+統合テストでは、通常の *Arrange (配置)* 、 *Act (実行)* 、および *Assert (確認)* のテスト ステップを含む一連のイベントに従います。
 
 1. SUT の Web ホストが構成されます。
 1. アプリに要求を送信するためのテスト サーバー クライアントが作成されます。
 1. *Arrange (配置)* テスト ステップが実行されます。テスト アプリが要求を準備します。
 1. *Act (実行)* テスト ステップが実行されます。クライアントは要求を送信し、応答を受信します。
-1. *Assert (確認)* テスト ステップが実行されます。*実際*の応答は、*予測される*応答に基づき、*成功*または*失敗*として検証されます。
+1. *Assert (確認)* テスト ステップが実行されます。 *実際* の応答は、 *予測される* 応答に基づき、 *成功* または *失敗* として検証されます。
 1. このプロセスは、すべてのテストが実行されるまで続行されます。
 1. テスト結果が報告されます。
 
@@ -487,7 +488,7 @@ ASP.NET Core の統合テストには、次のものが必要です。
 
 `Microsoft.AspNetCore.Mvc.Testing` パッケージは、次のタスクを処理します。
 
-* 依存関係ファイル ( *.deps*) を SUT からテスト プロジェクトの *bin* ディレクトリにコピーします。
+* 依存関係ファイル ( *.deps* ) を SUT からテスト プロジェクトの *bin* ディレクトリにコピーします。
 * テストを実行したときに、静的なファイルとページ/ビューが検出されるように、[コンテンツ ルート](xref:fundamentals/index#content-root)を SUT のプロジェクト ルートに設定します。
 * [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) クラスを提供し、`TestServer` を使用して SUT のブートストラップを効率化します。
 
@@ -521,7 +522,7 @@ SUT の [環境](xref:fundamentals/environments) が設定されていない場�
 
 [WebApplicationFactory\<TEntryPoint>](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) は、統合テスト用の [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) を作成するために使用します。 `TEntryPoint` は SUT のエントリ ポイント クラスであり、通常は `Startup` クラスです。
 
-テスト クラスは、クラスにテストが含まれていることを示すために*クラス フィクスチャ* インターフェイス ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) を実装し、クラス内テストの共有オブジェクト インスタンスを提供します。
+テスト クラスは、クラスにテストが含まれていることを示すために *クラス フィクスチャ* インターフェイス ( [IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture)) を実装し、クラス内テストの共有オブジェクト インスタンスを提供します。
 
 次のテスト クラス `BasicTests` は、`WebApplicationFactory` を使用して SUT をブートストラップし、テスト メソッド `Get_EndpointsReturnSuccessAndCorrectContentType` に [HttpClient](/dotnet/api/system.net.http.httpclient) を提供します。 このメソッドは、複数のアプリ ページで応答状態コードが成功かどうか (200-299 の範囲の状態コード) と、`Content-Type` ヘッダーが `text/html; charset=utf-8` であるかどうかを確認します。
 
@@ -557,9 +558,9 @@ SUT に対する POST 要求は、アプリの[偽造防止データ保護シス
 1. 応答の偽造防止 cookie と要求検証トークンを解析します。
 1. 偽造防止 cookie と要求検証トークンを使用して POST 要求を行います。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)の `SendAsync` ヘルパー拡張メソッド (*Helpers/HttpClientExtensions.cs*) と `GetDocumentAsync` ヘルパー メソッド (*Helpers/HtmlHelpers.cs*) は、次のメソッドで [AngleSharp](https://anglesharp.github.io/) パーサーを使用して偽造防止チェック処理を行います。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)の `SendAsync` ヘルパー拡張メソッド ( *Helpers/HttpClientExtensions.cs* ) と `GetDocumentAsync` ヘルパー メソッド ( *Helpers/HtmlHelpers.cs* ) は、次のメソッドで [AngleSharp](https://anglesharp.github.io/) パーサーを使用して偽造防止チェック処理を行います。
 
-* `GetDocumentAsync`:[HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) を受け取り、`IHtmlDocument` を返します。 `GetDocumentAsync` は、元の `HttpResponseMessage` に基づいて*仮想応答*を準備するファクトリを使用します。 詳しくは、[AngleSharp のドキュメント](https://github.com/AngleSharp/AngleSharp#documentation)をご覧ください。
+* `GetDocumentAsync`:[HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) を受け取り、`IHtmlDocument` を返します。 `GetDocumentAsync` は、元の `HttpResponseMessage` に基づいて *仮想応答* を準備するファクトリを使用します。 詳しくは、[AngleSharp のドキュメント](https://github.com/AngleSharp/AngleSharp#documentation)をご覧ください。
 * `HttpClient` の `SendAsync` 拡張メソッドは、[HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) を作成し、[SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) を呼び出して、SUT に要求を送信します。 `SendAsync` のオーバーロードは、HTML フォーム (`IHtmlFormElement`) と次のものを受け入れます。
   * フォームの送信ボタン (`IHtmlElement`)
   * フォームの値コレクション (`IEnumerable<KeyValuePair<string, string>>`)
@@ -608,23 +609,23 @@ _client = _factory.CreateClient(clientOptions);
 
 サンプルの SUT には、引用符を返すスコープ サービスが含まれています。 インデックス ページが要求されると、インデックス ページの非表示フィールドに引用符が埋め込まれます。
 
-*Services/IQuoteService.cs*:
+*Services/IQuoteService.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Services/QuoteService.cs*:
+*Services/QuoteService.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs*:
+*Startup.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/Index.cshtml.cs*:
+*Pages/Index.cshtml.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Pages/Index.cs*:
+*Pages/Index.cs* :
 
 [!code-cshtml[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -637,7 +638,7 @@ _client = _factory.CreateClient(clientOptions);
 
 統合テストでサービスと引用符の注入をテストするため、テストは SUT にモック サービスを注入します。 モック サービスは、アプリの `QuoteService` をテスト アプリが提供する `TestQuoteService` と呼ばれるサービスに置き換えます。
 
-*IntegrationTests.IndexPageTests.cs*:
+*IntegrationTests.IndexPageTests.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -723,7 +724,7 @@ public class CustomWebApplicationFactory<TStartup>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>テスト インフラストラクチャがアプリ コンテンツのルート パスを推測する方法
 
-`WebApplicationFactory` コンストラクターは、`TEntryPoint` アセンブリの `System.Reflection.Assembly.FullName` と同じキーを持つ統合テストを含むアセンブリで [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) を検索することによって、アプリの[コンテンツ ルート](xref:fundamentals/index#content-root) パスを推測します。 正しいキーを持つ属性が見つからない場合、`WebApplicationFactory` はフォールバックしてソリューション ファイル ( *.sln*) を検索し、`TEntryPoint` アセンブリ名をソリューション ディレクトリに追加します。 アプリのルート ディレクトリ (コンテンツ ルート パス) は、ビューやコンテンツのファイルを検出するために使用されます。
+`WebApplicationFactory` コンストラクターは、`TEntryPoint` アセンブリの `System.Reflection.Assembly.FullName` と同じキーを持つ統合テストを含むアセンブリで [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) を検索することによって、アプリの[コンテンツ ルート](xref:fundamentals/index#content-root) パスを推測します。 正しいキーを持つ属性が見つからない場合、`WebApplicationFactory` はフォールバックしてソリューション ファイル ( *.sln* ) を検索し、`TEntryPoint` アセンブリ名をソリューション ディレクトリに追加します。 アプリのルート ディレクトリ (コンテンツ ルート パス) は、ビューやコンテンツのファイルを検出するために使用されます。
 
 ## <a name="disable-shadow-copying"></a>シャドウ コピーの無効化
 
@@ -770,10 +771,10 @@ dotnet test
 
 SUT は、次の特性を持つ Razor Pages メッセージ システムです。
 
-* アプリのインデックス ページ (*Pages/Index.cshtml* と *Pages/Index.cshtml.cs*) には、メッセージの追加、削除、および分析 (メッセージあたりの平均単語数) を制御する UI およびページ モデル メソッドが用意されています。
-* メッセージは、`Id` (キー) と `Text` (メッセージ) の 2 つのプロパティを持つ `Message` クラス (*Data/Message.cs*) によって記述されます。 `Text` プロパティは必須であり、200 文字までに制限されています。
+* アプリのインデックス ページ ( *Pages/Index.cshtml* と *Pages/Index.cshtml.cs* ) には、メッセージの追加、削除、および分析 (メッセージあたりの平均単語数) を制御する UI およびページ モデル メソッドが用意されています。
+* メッセージは、`Id` (キー) と `Text` (メッセージ) の 2 つのプロパティを持つ `Message` クラス ( *Data/Message.cs* ) によって記述されます。 `Text` プロパティは必須であり、200 文字までに制限されています。
 * メッセージは [Entity Framework のメモリ内データベース](/ef/core/providers/in-memory/)&#8224; を使用して格納されます。
-* アプリのデータベース コンテキスト クラスである `AppDbContext` (*Data/AppDbContext.cs*) には、データアクセス層 (DAL) が含まれています。
+* アプリのデータベース コンテキスト クラスである `AppDbContext` ( *Data/AppDbContext.cs* ) には、データアクセス層 (DAL) が含まれています。
 * アプリの起動時にデータベースが空の場合、メッセージ ストアが 3 つのメッセージで初期化されます。
 * アプリには、認証されたユーザーのみがアクセスできる `/SecurePage` が含まれています。
 
@@ -783,7 +784,7 @@ SUT は、次の特性を持つ Razor Pages メッセージ システムです�
 
 ### <a name="test-app-organization"></a>テスト アプリの構成
 
-テスト アプリは、*tests/RazorPagesProject.Tests* ディレクトリにあるコンソール アプリです。
+テスト アプリは、 *tests/RazorPagesProject.Tests* ディレクトリにあるコンソール アプリです。
 
 | テスト アプリのディレクトリ | 説明 |
 | ------------------ | ----------- |
@@ -798,7 +799,7 @@ SUT は、次の特性を持つ Razor Pages メッセージ システムです�
 
 統合テストでは、通常、テストを実行する前に、データベース内に小さなデータセットが必要です。 たとえば、削除テストでは、データベース レコードの削除を呼び出します。そのため、削除要求を成功させるには、データベースに少なくとも 1 つのレコードが必要です。
 
-このサンプル アプリでは、*Utilities.cs* で 3 つのメッセージを使用してデータベースをシードします。このメッセージは、テストを実行する際に使用することができます。
+このサンプル アプリでは、 *Utilities.cs* で 3 つのメッセージを使用してデータベースをシードします。このメッセージは、テストを実行する際に使用することができます。
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/Helpers/Utilities.cs?name=snippet1)]
 

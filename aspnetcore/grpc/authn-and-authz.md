@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 01044c2b0656743ad608be9ca040880e82231919
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2efed6b76228227f032482346a36f528b3448de2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633826"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053567"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core のための gRPC での認証と承認
 
@@ -187,7 +188,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-個々のサービス メソッドに `[Authorize]` 属性を適用することもできます。 現在のユーザーが、メソッドとクラスの**両方**に適用されているポリシーと一致しない場合は、呼び出し元にエラーが返されます。
+個々のサービス メソッドに `[Authorize]` 属性を適用することもできます。 現在のユーザーが、メソッドとクラスの **両方** に適用されているポリシーと一致しない場合は、呼び出し元にエラーが返されます。
 
 ```csharp
 [Authorize]

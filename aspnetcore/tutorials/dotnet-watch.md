@@ -5,6 +5,7 @@ description: このチュートリアルでは、.NET Core CLI のファイル �
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
-ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
+ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90083454"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060041"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>ファイル ウォッチャーを使用した ASP.NET Core アプリの開発
 
@@ -31,16 +32,16 @@ ms.locfileid: "90083454"
 
 このチュートリアルでは、エンドポイントが 2 つの既存の Web API を利用します。合計を返すエンドポイントと積を返すエンドポイントです。 積のメソッドにはバグがあり、このチュートリアルで修正します。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)をダウンロードしてください。 これには次の 2 つのプロジェクトが含まれています。*WebApp* (ASP.NET Core Web API) および *WebAppTests* (Web API の単体テスト)。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)をダウンロードしてください。 これには次の 2 つのプロジェクトが含まれています。 *WebApp* (ASP.NET Core Web API) および *WebAppTests* (Web API の単体テスト)。
 
-コマンド シェルで、*WebApp* フォルダーに移動します。 次のコマンドを実行します。
+コマンド シェルで、 *WebApp* フォルダーに移動します。 次のコマンドを実行します。
 
 ```dotnetcli
 dotnet run
 ```
 
 > [!NOTE]
-> `dotnet run --project <PROJECT>` を使用して、実行するプロジェクトを指定することができます。 たとえば、サンプル アプリのルートから `dotnet run --project WebApp` を実行すると、*WebApp* プロジェクトも実行されます。
+> `dotnet run --project <PROJECT>` を使用して、実行するプロジェクトを指定することができます。 たとえば、サンプル アプリのルートから `dotnet run --project WebApp` を実行すると、 *WebApp* プロジェクトも実行されます。
 
 コンソール出力に、次のようなメッセージが表示されます。アプリが実行中であり、要求を待っていることを示しています。
 
@@ -106,7 +107,7 @@ Web アプリで `dotnet watch run` を実行すると、準備完了後にブ�
 ::: moniker-end
 
 > [!NOTE]
-> `dotnet watch --project <PROJECT>` を使用して、ウォッチするプロジェクトを指定することができます。 たとえば、サンプル アプリのルートから `dotnet watch --project WebApp run` を実行すると、*WebApp* プロジェクトも実行されてウォッチされます。
+> `dotnet watch --project <PROJECT>` を使用して、ウォッチするプロジェクトを指定することができます。 たとえば、サンプル アプリのルートから `dotnet watch --project WebApp run` を実行すると、 *WebApp* プロジェクトも実行されてウォッチされます。
 
 ## <a name="make-changes-with-dotnet-watch"></a>`dotnet watch` で変更を行う
 
@@ -128,7 +129,7 @@ public static int Product(int a, int b)
 ## <a name="run-tests-using-dotnet-watch"></a>`dotnet watch` を使用してテストを実行する
 
 1. *MathController.cs* の `Product` メソッドを元に戻して合計を返すようにします。 ファイルを保存します。
-1. コマンド シェルで、*WebAppTests* フォルダーに移動します。
+1. コマンド シェルで、 *WebAppTests* フォルダーに移動します。
 1. [dotnet restore](/dotnet/core/tools/dotnet-restore) を実行します。
 1. `dotnet watch test` を実行します。 テストに失敗し、ウォッチャーがファイル変更を待っていることが出力に示されます。
 
@@ -200,7 +201,7 @@ public static int Product(int a, int b)
 </Project>
 ```
 
-両方のプロジェクトでファイルの監視を開始するには、*test* フォルダーに変更します。 次のコマンドを実行します。
+両方のプロジェクトでファイルの監視を開始するには、 *test* フォルダーに変更します。 次のコマンドを実行します。
 
 ```dotnetcli
 dotnet watch msbuild /t:Test
@@ -216,7 +217,7 @@ VSTest は、いずれかのテスト プロジェクトでファイルが変更
 | ------------- | ------------- |
 | `DOTNET_USE_POLLING_FILE_WATCHER`                | "1" または "true" に設定した場合、`dotnet watch` によって、CoreFx の `FileSystemWatcher` ではなく、ポーリング ファイル ウォッチャーが使用されます。 ネットワーク共有または Docker でマウントされたボリューム上のファイルをウォッチするときに使用します。                       |
 | `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | 既定では、復元の実行や、ファイルが変更されるたびにウォッチ対象のファイルのセットの再評価が行われるなどの特定の操作が実行されないようにすることで、`dotnet watch` によってビルドが最適化されます。 "1" または "true" に設定した場合、これらの最適化は無効になります。 |
-| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` は、*launchSettings.json* で構成された `launchBrowser` を使用して、Web アプリ用のブラウザーの起動を試みます。 "1" または "true" に設定した場合、この動作は抑制されます。 |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` は、 *launchSettings.json* で構成された `launchBrowser` を使用して、Web アプリ用のブラウザーの起動を試みます。 "1" または "true" に設定した場合、この動作は抑制されます。 |
 | `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` は、ファイルの変更を検出すると、ブラウザーを最新の情報に更新することを試みます。 "1" または "true" に設定した場合、この動作は抑制されます。 `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` が設定されている場合も、この動作は抑制されます。 |
 
 ## <a name="dotnet-watch-in-github"></a>GitHub での `dotnet-watch`

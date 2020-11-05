@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 085a26d508af5bdce506ab923a3256046b3894ab
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722489"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059703"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2 の新機能
 
@@ -44,12 +45,12 @@ ASP.NET Core 2.1 では、HTTP 応答でエラーの詳細を伝達するため�
 
 ## <a name="endpoint-routing"></a>エンドポイント ルーティング
 
-ASP.NET Core 2.2 では、要求のディスパッチを改善するために新しい*エンドポイント ルーティング* システムを使用しています。 この変更には、新しいリンク生成 API メンバーとルート パラメーター変換機能が含まれています。
+ASP.NET Core 2.2 では、要求のディスパッチを改善するために新しい *エンドポイント ルーティング* システムを使用しています。 この変更には、新しいリンク生成 API メンバーとルート パラメーター変換機能が含まれています。
 
 詳細については、次のリソースを参照してください。
 
 * [2.2 のエンドポイント ルーティング](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)
-* [ルート パラメーターの変換機能](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) (**ルーティング**に関するセクションを参照してください)
+* [ルート パラメーターの変換機能](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx) ( **ルーティング** に関するセクションを参照してください)
 * [IRouter ベースのルーティングとエンドポイントベースのルーティングの違い](xref:fundamentals/routing?view=aspnetcore-2.2#differences-from-earlier-versions-of-routing)
 
 ## <a name="health-checks"></a>正常性チェック
@@ -86,7 +87,7 @@ HTTP/2 は HTTP のセマンティクス (HTTP ヘッダー、メソッドなど
 
 ## <a name="iis-in-process-hosting"></a>IIS のインプロセス ホスティング
 
-以前のバージョンの ASP.NET Core では、IIS はリバース プロキシとして機能しています。 2\.2 では、ASP.NET Core モジュールで CoreCLR を起動し、IIS worker プロセス (*w3wp.exe*) 内でアプリをホストすることができます。 インプロセス ホスティングを IIS で実行すると、パフォーマンスと診断機能が向上します。
+以前のバージョンの ASP.NET Core では、IIS はリバース プロキシとして機能しています。 2\.2 では、ASP.NET Core モジュールで CoreCLR を起動し、IIS worker プロセス ( *w3wp.exe* ) 内でアプリをホストすることができます。 インプロセス ホスティングを IIS で実行すると、パフォーマンスと診断機能が向上します。
 
 詳細については、[IIS のインプロセス ホスティング](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)に関する記事を参照してください。
 

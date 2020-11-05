@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f1235337748bacdb6eaa775a5853238bf729e605
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4301e0d59364573767ab4cae25a4818ff84b9abc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634554"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052228"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core の概要
 
@@ -57,7 +58,7 @@ ASP.NET Core MVC は、[Web API](xref:tutorials/first-web-api) と [Web アプ�
 
 ## <a name="client-side-development"></a>クライアント側の開発
 
-ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と "*クライアント側の開発*" の関連トピックを参照してください。
+ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と " *クライアント側の開発* " の関連トピックを参照してください。
 
 <a name="target-framework"></a>
 
@@ -136,7 +137,7 @@ ASP.NET Core MVC は、[Web API](xref:tutorials/first-web-api) と [Web アプ�
 
 ## <a name="client-side-development"></a>クライアント側の開発
 
-ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と "*クライアント側の開発*" の関連トピックを参照してください。
+ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と " *クライアント側の開発* " の関連トピックを参照してください。
 
 <a name="target-framework"></a>
 

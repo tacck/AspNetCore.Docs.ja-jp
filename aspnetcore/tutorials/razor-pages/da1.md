@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 5�
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7d25dae67c928fa659654ce4ab34cfdad08b5300
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632799"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060067"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>パート 5、ASP.NET Core アプリでの生成済みページの更新
 
@@ -47,7 +48,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として http://localhost:1234/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/razor-pages/da1/edit7.png)
 
-**[編集]** 、 **[詳細]** 、および **[削除]** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+**[編集]** 、 **[詳細]** 、および **[削除]** の各リンクは、 *Pages/Movies/Index.cshtml* ファイルで [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -77,7 +78,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 </td>
 ```
 
-整数を**含まない**、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。 たとえば、`http://localhost:5000/Movies/Details` の場合は 404 エラーが返されます。 ID を省略するには、次のように `?` をルート制約に追加します。
+整数を **含まない** 、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。 たとえば、`http://localhost:5000/Movies/Details` の場合は 404 エラーが返されます。 ID を省略するには、次のように `?` をルート制約に追加します。
 
  ```cshtml
 @page "{id:int?}"
@@ -86,7 +87,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 `@page "{id:int?}"` の動作をテストするには
 
 * *Pages/Movies/Details.cshtml* の page ディレクティブを `@page "{id:int?}"` に設定します。
-* `public async Task<IActionResult> OnGetAsync(int? id)` (*Pages/Movies/Details.cshtml.cs* で) にブレークポイントを設定します
+* `public async Task<IActionResult> OnGetAsync(int? id)` ( *Pages/Movies/Details.cshtml.cs* で) にブレークポイントを設定します
 * `https://localhost:5001/Movies/Details/` に移動します。
 
 `@page "{id:int}"` ディレクティブでは、ブレークポイントがヒットすることはありません。 ルーティング エンジンは、HTTP 404 を返します。 `@page "{id:int?}"` を使用すると、`OnGetAsync` メソッドは `NotFound` (HTTP 404) を返します。
@@ -162,7 +163,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として http://localhost:1234/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/razor-pages/da1/edit7.png)
 
-**[編集]** 、 **[詳細]** 、および **[削除]** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+**[編集]** 、 **[詳細]** 、および **[削除]** の各リンクは、 *Pages/Movies/Index.cshtml* ファイルで [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -190,7 +191,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 </td>
 ```
 
-整数を**含まない**、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。 たとえば、`http://localhost:5000/Movies/Details` の場合は 404 エラーが返されます。 ID を省略するには、次のように `?` をルート制約に追加します。
+整数を **含まない** 、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。 たとえば、`http://localhost:5000/Movies/Details` の場合は 404 エラーが返されます。 ID を省略するには、次のように `?` をルート制約に追加します。
 
  ```cshtml
 @page "{id:int?}"
@@ -199,7 +200,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 `@page "{id:int?}"` の動作をテストするには
 
 * *Pages/Movies/Details.cshtml* の page ディレクティブを `@page "{id:int?}"` に設定します。
-* `public async Task<IActionResult> OnGetAsync(int? id)` (*Pages/Movies/Details.cshtml.cs* で) にブレークポイントを設定します
+* `public async Task<IActionResult> OnGetAsync(int? id)` ( *Pages/Movies/Details.cshtml.cs* で) にブレークポイントを設定します
 * `https://localhost:5001/Movies/Details/` に移動します。
 
 `@page "{id:int}"` ディレクティブでは、ブレークポイントがヒットすることはありません。 ルーティング エンジンは、HTTP 404 を返します。 `@page "{id:int?}"` を使用すると、`OnGetAsync` メソッドは `NotFound` (HTTP 404) を返します。

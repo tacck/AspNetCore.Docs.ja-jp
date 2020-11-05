@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/logging-and-diagnostics
-ms.openlocfilehash: 523eec53d7d21723dcf136c4e5ce299533a78cc6
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: b866be130a93491bce7c5c7e08045de961ff91b2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91901026"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057441"
 ---
 # <a name="log-creation-and-redirection"></a>ログの作成とリダイレクト
 
@@ -96,6 +97,6 @@ ASP.NET Core モジュールは、強化された診断ログを提供するよ�
 * `ASPNETCORE_MODULE_DEBUG`:デバッグ レベルの設定。
 
 > [!WARNING]
-> 配置内でデバッグ ログを、問題のトラブルシューティングに必要な時間よりも長く有効のままに**しないでください**。 ログのサイズは制限されていません。 デバッグ ログを有効のままにすると、使用可能なディスク領域が使い果たされ、サーバーまたはアプリ サービスがクラッシュする可能性があります。
+> 配置内でデバッグ ログを、問題のトラブルシューティングに必要な時間よりも長く有効のままに **しないでください** 。 ログのサイズは制限されていません。 デバッグ ログを有効のままにすると、使用可能なディスク領域が使い果たされ、サーバーまたはアプリ サービスがクラッシュする可能性があります。
 
 `web.config` ファイル内の `aspNetCore` 要素の例については、「[`web.config` を使用した ASP.NET Core モジュールの構成](xref:host-and-deploy/iis/web-config#configuration-of-aspnet-core-module-with-webconfig)」を参照してください。

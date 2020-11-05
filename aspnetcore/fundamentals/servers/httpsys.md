@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 8ed9ec3447205107194ffa5c329c0e5ae0fc5553
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: ca8aa126a44ea417017f0be0372e818a95ad8413
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653972"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053749"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core での HTTP.sys Web サーバーの実装
 
@@ -150,8 +151,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -179,7 +180,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -187,7 +188,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -220,7 +221,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    参照用に、この GUID をパッケージ タグとしてアプリに格納します。
 
    * Visual Studio:
-     * **ソリューション エクスプローラー**内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
+     * **ソリューション エクスプローラー** 内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
      * **[パッケージ]** タブを選択します。
      * 作成した GUID を **[タグ]** フィールドに入力します。
    * Visual Studio を使用しない場合:
@@ -253,7 +254,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、*netsh.exe* のリファレンス ドキュメントです。
+   以下は、 *netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
@@ -418,8 +419,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -447,7 +448,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -455,7 +456,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -488,7 +489,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    参照用に、この GUID をパッケージ タグとしてアプリに格納します。
 
    * Visual Studio:
-     * **ソリューション エクスプローラー**内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
+     * **ソリューション エクスプローラー** 内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
      * **[パッケージ]** タブを選択します。
      * 作成した GUID を **[タグ]** フィールドに入力します。
    * Visual Studio を使用しない場合:
@@ -521,7 +522,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、*netsh.exe* のリファレンス ドキュメントです。
+   以下は、 *netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
@@ -671,8 +672,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -700,7 +701,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -708,7 +709,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -741,7 +742,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    参照用に、この GUID をパッケージ タグとしてアプリに格納します。
 
    * Visual Studio:
-     * **ソリューション エクスプローラー**内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
+     * **ソリューション エクスプローラー** 内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
      * **[パッケージ]** タブを選択します。
      * 作成した GUID を **[タグ]** フィールドに入力します。
    * Visual Studio を使用しない場合:
@@ -774,7 +775,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、*netsh.exe* のリファレンス ドキュメントです。
+   以下は、 *netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
@@ -924,8 +925,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -953,7 +954,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -961,7 +962,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -994,7 +995,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    参照用に、この GUID をパッケージ タグとしてアプリに格納します。
 
    * Visual Studio:
-     * **ソリューション エクスプローラー**内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
+     * **ソリューション エクスプローラー** 内でアプリを右クリックし、 **[プロパティ]** をクリックして、アプリのプロジェクト プロパティを開きます。
      * **[パッケージ]** タブを選択します。
      * 作成した GUID を **[タグ]** フィールドに入力します。
    * Visual Studio を使用しない場合:
@@ -1027,7 +1028,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、*netsh.exe* のリファレンス ドキュメントです。
+   以下は、 *netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)

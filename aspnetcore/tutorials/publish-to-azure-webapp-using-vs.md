@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: ebfe89d68725d597d6975015bbf84414ff818829
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 817169503a80a771354e32123d65ba2bf388aa2d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722911"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060223"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio を使用して Azure に ASP.NET Core アプリを発行する
 
@@ -129,7 +130,7 @@ Visual Studio によってソリューションが作成されます。
 
 ![[発行] ダイアログ: App Service インスタンスを選択](publish-to-azure-webapp-using-vs/_static/select_as.png)
 
-次に、**発行プロファイルの概要**ページが表示されます。 Visual Studio によって、このアプリケーションには SQL Server データベースが必要であることが検出されているため、構成するように求められています。 **[構成]** をクリックします。
+次に、 **発行プロファイルの概要** ページが表示されます。 Visual Studio によって、このアプリケーションには SQL Server データベースが必要であることが検出されているため、構成するように求められています。 **[構成]** をクリックします。
 
 ![発行プロファイルの概要ページ: SQL Server 依存関係の構成](publish-to-azure-webapp-using-vs/_static/sql.png)
 
@@ -144,7 +145,7 @@ Visual Studio によってソリューションが作成されます。
 
 ![[Azure SQL Database の構成] ダイアログ](publish-to-azure-webapp-using-vs/_static/sql2.png)
 
-**Azure SQL Database の作成**が表示されます。
+**Azure SQL Database の作成** が表示されます。
 
 * **[データベース名]** 、 **[リソース グループ]** 、 **[データベース サーバー]** 、 **[App Service プラン]** の各入力フィールドに値が設定されます。 これらの値を保持することも、変更することもできます。
 * 選択した **[データベース サーバー]** の **[データベース管理者のユーザー名]** と **[データベース管理者のパスワード]** を入力します (注: 使用するアカウントには、新しい Azure SQL データベースを作成するために必要なアクセス許可が必要です)。
@@ -166,7 +167,7 @@ Visual Studio によってソリューションが作成されます。
 
 ![[Azure SQL Database の構成] ダイアログ、接続文字列の詳細](publish-to-azure-webapp-using-vs/_static/sql_connection.png)
 
-**発行プロファイルの概要**ページで **[設定]** を選択します。
+**発行プロファイルの概要** ページで **[設定]** を選択します。
 
 ![発行プロファイルの概要ページ: 設定の編集](publish-to-azure-webapp-using-vs/_static/pp_configured.png)
 
@@ -189,7 +190,7 @@ Visual Studio によってソリューションが作成されます。
 
     [!code-html[Index](publish-to-azure-webapp-using-vs/sample/index.cshtml?highlight=10&range=1-12)]
 
-* **発行プロファイルの概要**ページから **[発行]** を選択します。
+* **発行プロファイルの概要** ページから **[発行]** を選択します。
 
 ![発行プロファイルの概要ページ](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 

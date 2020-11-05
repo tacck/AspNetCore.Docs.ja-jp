@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 0f0f1a9c70a2d6725cbb68ac62850cf6aa332d36
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721841"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053996"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー
 
@@ -340,7 +341,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 ### <a name="update-the-delete-page"></a>[削除] ページを更新する
 
-次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
+次のコードを使用して、 *Pages/Departments/Delete.cshtml* を更新します。
 
 [!code-cshtml[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,42,51)]
 
@@ -638,7 +639,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 ### <a name="update-the-delete-page"></a>[削除] ページを更新する
 
-次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
+次のコードを使用して、 *Pages/Departments/Delete.cshtml* を更新します。
 
 [!code-cshtml[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
 

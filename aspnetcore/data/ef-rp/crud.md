@@ -5,6 +5,7 @@ description: Razor Pages と Entity Framework チュートリアル シリーズ
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 083214c01dbec6c6f44d6b82f5b514a029e57cbe
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606730"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053866"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>パート 2、ASP.NET Core の Razor Pages と EF Core - CRUD
 
@@ -183,7 +184,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 * データベース例外がキャッチされます。
 * [削除] ページの `OnGetAsync` メソッドが、`saveChangesError=true` を指定して呼び出されます。
 
-Delete Razor ページ (*Pages/Students/Delete.cshtml*) にエラー メッセージを追加します。
+Delete Razor ページ ( *Pages/Students/Delete.cshtml* ) にエラー メッセージを追加します。
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -346,7 +347,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 * データベース例外がキャッチされます。
 * [削除] ページの `OnGetAsync` メソッドが、`saveChangesError=true` を指定して呼び出されます。
 
-[削除] Razor ページ (*Pages/Students/Delete.cshtml*) にエラー メッセージを追加します。
+[削除] Razor ページ ( *Pages/Students/Delete.cshtml* ) にエラー メッセージを追加します。
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -366,7 +367,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 
 複雑さを最小限に抑え、これらのチュートリアルを通して主眼を EF Core に置くために、EF Core コードはページ モデルで使用されています。 一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (Razor Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。
 
-このチュートリアルでは、*Students* フォルダー内の [作成]、[編集]、[削除]、[詳細] の各 Razor Pages を確認します。
+このチュートリアルでは、 *Students* フォルダー内の [作成]、[編集]、[削除]、[詳細] の各 Razor Pages を確認します。
 
 スキャフォールディング コードでは、[作成]、[編集]、[削除] ページに対して次のパターンを使用します。
 
@@ -404,7 +405,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 
 ## <a name="customize-the-details-page"></a>Details ページをカスタマイズする
 
-`Pages/Students` ページを参照します。 **[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、*Pages/Students/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+`Pages/Students` ページを参照します。 **[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、 *Pages/Students/Index.cshtml* ファイルで [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
@@ -412,7 +413,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 
 `"{id:int}"` ルート テンプレートを使用するには、[編集]、[詳細]、[削除] の Razor ページを更新します。 これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。
 
-整数ルート値を**含まない**、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。 たとえば、 `http://localhost:5000/Students/Details` は 404 エラーを返します。 ID を省略するには、次のように `?` をルート制約に追加します。
+整数ルート値を **含まない** 、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。 たとえば、 `http://localhost:5000/Students/Details` は 404 エラーを返します。 ID を省略するには、次のように `?` をルート制約に追加します。
 
  ```cshtml
 @page "{id:int?}"
@@ -450,7 +451,7 @@ Students インデックス ページのスキャフォールディング コー
 
 ## <a name="update-the-create-page"></a>[作成] ページを更新する
 
-次のコードを使用して、*Pages/Students/Create.cshtml.cs* 内の `OnPostAsync` メソッドを更新します。
+次のコードを使用して、 *Pages/Students/Create.cshtml.cs* 内の `OnPostAsync` メソッドを更新します。
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
@@ -578,7 +579,7 @@ Web アプリにおいて、エンティティを読み取り、データを表�
 
 [受講者]/[インデックス] またはその他のリンクが機能しません。
 
-Razor ページに正しい `@page` ディレクティブが含まれていることを確認します。 たとえば、Students/Index Razor ページにルート テンプレートを含めることは**できません**。
+Razor ページに正しい `@page` ディレクティブが含まれていることを確認します。 たとえば、Students/Index Razor ページにルート テンプレートを含めることは **できません** 。
 
 ```cshtml
 @page "{id:int}"

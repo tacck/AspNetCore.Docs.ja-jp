@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 043fe513f370cf63637733b66ca195e7887faab0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629211"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054295"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>チュートリアル: CRUD 機能を実装する - ASP.NET MVC と EF Core
 
@@ -59,7 +60,7 @@ Students/Index ページのスキャフォールディングされたコード�
 
 ### <a name="route-data"></a>ルート データ
 
-`Details` メソッドに渡すキー値は、"*ルート データ*" から取得します。 ルート データは、モデル バインダーが URL のセグメント内で検出したデータです。 たとえば、既定のルートでは、controller、action、id の各セグメントが指定されています。
+`Details` メソッドに渡すキー値は、" *ルート データ* " から取得します。 ルート データは、モデル バインダーが URL のセグメント内で検出したデータです。 たとえば、既定のルートでは、controller、action、id の各セグメントが指定されています。
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Route&highlight=5)]
 
@@ -129,9 +130,9 @@ Index ページでは、Razor ビューのタグ ヘルパーのステートメ�
 
 `ID` は行が挿入されるときに SQL Server によって自動的に設定される主キー値であるため、`Bind` 属性から ID を削除しました。 ユーザーからの入力によって ID 値が設定されることはありません。
 
-`Bind` 属性以外では、スキャフォールディングされたコードに対して行った変更は try-catch ブロックだけです。 変更を保存するときに、`DbUpdateException` から派生した例外がキャッチされた場合は、汎用的なエラー メッセージが表示されます。 `DbUpdateException` 例外は、プログラミング エラーではなくアプリケーション外の何かが原因で発生する場合があるので、再試行することをお勧めします。 このサンプルでは実装されていませんが、運用品質のアプリケーションでは例外をログに記録します。 詳細については、「[Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)」(監視とテレメトリ (Azure での実際のクラウド アプリの構築)) の「**Log for insight**」(洞察のためのログ) セクションをご覧ください。
+`Bind` 属性以外では、スキャフォールディングされたコードに対して行った変更は try-catch ブロックだけです。 変更を保存するときに、`DbUpdateException` から派生した例外がキャッチされた場合は、汎用的なエラー メッセージが表示されます。 `DbUpdateException` 例外は、プログラミング エラーではなくアプリケーション外の何かが原因で発生する場合があるので、再試行することをお勧めします。 このサンプルでは実装されていませんが、運用品質のアプリケーションでは例外をログに記録します。 詳細については、「 [Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)」(監視とテレメトリ (Azure での実際のクラウド アプリの構築)) の「 **Log for insight** 」(洞察のためのログ) セクションをご覧ください。
 
-`ValidateAntiForgeryToken` 属性は、クロスサイト リクエスト フォージェリ (CSRF) 攻撃を防ぐのに役立ちます。 トークンは、[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) によってビューに自動的に挿入され、ユーザーがフォームを送信するときに追加されます。 トークンは、`ValidateAntiForgeryToken` 属性によって検証されます。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
+`ValidateAntiForgeryToken` 属性は、クロスサイト リクエスト フォージェリ (CSRF) 攻撃を防ぐのに役立ちます。 トークンは、[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) によってビューに自動的に挿入され、ユーザーがフォームを送信するときに追加されます。 トークンは、`ValidateAntiForgeryToken` 属性によって検証されます。 詳細については、 <xref:security/anti-request-forgery> を参照してください。
 
 <a id="overpost"></a>
 
@@ -210,15 +211,15 @@ HttpPost の Edit の推奨されるコードでは、変更された列のみ�
 
 エンティティは、次のいずれかの状態になる可能性があります。
 
-* `Added`。 エンティティはデータベースにまだ存在しません。 `SaveChanges` メソッドは INSERT ステートメントを発行します。
+* `Added`. エンティティはデータベースにまだ存在しません。 `SaveChanges` メソッドは INSERT ステートメントを発行します。
 
-* `Unchanged`。 `SaveChanges` メソッドはこのエンティティに対し何も行う必要はありません。 データベースからエンティティを読み取ると、エンティティはこの状態で開始します。
+* `Unchanged`. `SaveChanges` メソッドはこのエンティティに対し何も行う必要はありません。 データベースからエンティティを読み取ると、エンティティはこの状態で開始します。
 
-* `Modified`。 エンティティのプロパティ値の一部またはすべてが変更されています。 `SaveChanges` メソッドは UPDATE ステートメントを発行します。
+* `Modified`. エンティティのプロパティ値の一部またはすべてが変更されています。 `SaveChanges` メソッドは UPDATE ステートメントを発行します。
 
-* `Deleted`。 エンティティには削除のマークが付けられています。 `SaveChanges` メソッドは DELETE ステートメントを発行します。
+* `Deleted`. エンティティには削除のマークが付けられています。 `SaveChanges` メソッドは DELETE ステートメントを発行します。
 
-* `Detached`。 エンティティはデータベース コンテキストによって追跡されていません。
+* `Detached`. エンティティはデータベース コンテキストによって追跡されていません。
 
 デスクトップ アプリケーションにおいて、通常、状態の変更は自動的に設定されます。 エンティティを読み取って一部のプロパティの値を変更すると、 そのエンティティの状態は自動的に `Modified` に変更されます。 その後、`SaveChanges` を呼び出すと、Entity Framework は、変更された実際のプロパティのみを更新する SQL UPDATE ステートメントを生成します。
 
@@ -282,7 +283,7 @@ HttpPost の `Delete` アクション メソッド (名前は `DeleteConfirmed`)
 
 データベース接続が保持しているリソースを解放するには、使い終わったコンテキスト インスタンスをできるだけ早く破棄する必要があります。 ASP.NET Core に組み込まれている[依存関係の挿入](../../fundamentals/dependency-injection.md)が、そのタスクを自動的に行います。
 
-*Startup.cs* で、[AddDbContext 拡張メソッド](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs)を呼び出して、ASP.NET Core DI コンテナー内の `DbContext` クラスをプロビジョニングします。 このメソッドは、サービスの有効期間を既定で `Scoped` に設定します。 `Scoped` はコンテキスト オブジェクトの有効期間が Web 要求の有効期間と一致することを意味し、Web 要求の最後に `Dispose` メソッドが自動的に呼び出されます。
+*Startup.cs* で、 [AddDbContext 拡張メソッド](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs)を呼び出して、ASP.NET Core DI コンテナー内の `DbContext` クラスをプロビジョニングします。 このメソッドは、サービスの有効期間を既定で `Scoped` に設定します。 `Scoped` はコンテキスト オブジェクトの有効期間が Web 要求の有効期間と一致することを意味し、Web 要求の最後に `Dispose` メソッドが自動的に呼び出されます。
 
 ## <a name="handle-transactions"></a>トランザクションを処理する
 

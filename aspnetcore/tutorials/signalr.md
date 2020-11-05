@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: b69d60e7d0e24f6d3c8032b391c98a6cd1589305
-ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
+ms.openlocfilehash: 59c296f3388e71254badb02fa3ae4279005c359c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/18/2020
-ms.locfileid: "90770182"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056882"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>チュートリアル: ASP.NET Core SignalR の概要
 
@@ -102,13 +103,13 @@ SignalR サーバー ライブラリは、ASP.NET Core 3.1 共有フレームワ
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックし、 **[追加]** > **[クライアント側のライブラリ]** を選択します。
+* **ソリューション エクスプローラー** で、プロジェクトを右クリックし、 **[追加]** > **[クライアント側のライブラリ]** を選択します。
 
 * **[Add Client-Side Library]\(クライアント側のライブラリの追加\)** ダイアログで、 **[プロバイダー]** に対して **[unpkg]** を選択します。
 
 * **[ライブラリ]** に、「`@microsoft/signalr@latest`」と入力します。
 
-* **[Choose specific files]\(特定のファイルの選択\)** を選択して *dist/browser* フォルダーを展開し、*signalr.js* と *signalr.min.js* を選択します。
+* **[Choose specific files]\(特定のファイルの選択\)** を選択して *dist/browser* フォルダーを展開し、 *signalr.js* と *signalr.min.js* を選択します。
 
 * **[ターゲットの場所]** を *wwwroot/js/signalr/* に設定して、 **[インストール]** を選択します。
 
@@ -176,9 +177,9 @@ SignalR サーバー ライブラリは、ASP.NET Core 3.1 共有フレームワ
 
 ## <a name="create-a-no-locsignalr-hub"></a>SignalR ハブを作成する
 
-*ハブ*はクライアント サーバー通信を処理するハイレベル パイプラインとして機能するクラスです。
+*ハブ* はクライアント サーバー通信を処理するハイレベル パイプラインとして機能するクラスです。
 
-* SignalRChat プロジェクト フォルダー内で、*Hubs* フォルダーを作成します。
+* SignalRChat プロジェクト フォルダー内で、 *Hubs* フォルダーを作成します。
 
 * *Hubs* フォルダー内で、次のコードを使用して *ChatHub.cs* ファイルを作成します。
 
@@ -249,7 +250,7 @@ SignalR 要求が SignalR に渡されるように SignalR サーバーを構成
   ![SignalR サンプル アプリ](signalr/_static/3.x/signalr-get-started-finished.png)
 
 > [!TIP]
-> * アプリが動作しない場合は、ご利用のブラウザーの開発者ツール (F12) を開き、コンソールに移動します。 HTML および JavaScript コードに関連するエラーが発生している場合があります。 たとえば、*signalr.js* を指示されたフォルダーとは別のフォルダーに配置したとします。 その場合、そのファイルへの参照は機能せず、コンソールに 404 エラーが表示されます。
+> * アプリが動作しない場合は、ご利用のブラウザーの開発者ツール (F12) を開き、コンソールに移動します。 HTML および JavaScript コードに関連するエラーが発生している場合があります。 たとえば、 *signalr.js* を指示されたフォルダーとは別のフォルダーに配置したとします。 その場合、そのファイルへの参照は機能せず、コンソールに 404 エラーが表示されます。
 >   ![エラー "signalr.js が見つかりませんでした"](signalr/_static/3.x/f12-console.png)
 > * Chrome でエラー ERR_SPDY_INADEQUATE_TRANSPORT_SECURITY が発生する場合は、次のコマンドを実行して開発証明書を更新します。
 >
@@ -300,7 +301,7 @@ SignalR 要求が SignalR に渡されるように SignalR サーバーを構成
 
 * **[Web アプリケーション]** を選択して、Razor Pages を使用するプロジェクトを作成します。   
 
-* **.NET Core** のターゲット フレームワークを選択し、**ASP.NET Core 2.2** を選択して、 **[OK]** をクリックします。    
+* **.NET Core** のターゲット フレームワークを選択し、 **ASP.NET Core 2.2** を選択して、 **[OK]** をクリックします。    
 
   ![Visual Studio の [新しいプロジェクト] ダイアログ ボックス](signalr/_static/2.x/signalr-new-project-choose-type.png)   
 
@@ -333,7 +334,7 @@ SignalR サーバー ライブラリは、`Microsoft.AspNetCore.App` メタパ�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックし、 **[追加]** > **[クライアント側のライブラリ]** を選択します。  
+* **ソリューション エクスプローラー** で、プロジェクトを右クリックし、 **[追加]** > **[クライアント側のライブラリ]** を選択します。  
 
 * **[Add Client-Side Library]\(クライアント側のライブラリの追加\)** ダイアログで、 **[プロバイダー]** に対して **[unpkg]** を選択します。 
 
@@ -341,7 +342,7 @@ SignalR サーバー ライブラリは、`Microsoft.AspNetCore.App` メタパ�
 
   ![クライアント側のライブラリの追加ダイアログ - ライブラリの選択](signalr/_static/2.x/libman1.png)   
 
-* **[Choose specific files]\(特定のファイルの選択\)** を選択して *dist/browser* フォルダーを展開し、*signalr.js* と *signalr.min.js* を選択します。 
+* **[Choose specific files]\(特定のファイルの選択\)** を選択して *dist/browser* フォルダーを展開し、 *signalr.js* と *signalr.min.js* を選択します。 
 
 * **[ターゲットの場所]** を *wwwroot/lib/signalr/* に設定して、 **[インストール]** を選択します。    
 
@@ -409,9 +410,9 @@ SignalR サーバー ライブラリは、`Microsoft.AspNetCore.App` メタパ�
 
 ## <a name="create-a-no-locsignalr-hub"></a>SignalR ハブを作成する   
 
-*ハブ*はクライアント サーバー通信を処理するハイレベル パイプラインとして機能するクラスです。   
+*ハブ* はクライアント サーバー通信を処理するハイレベル パイプラインとして機能するクラスです。   
 
-* SignalRChat プロジェクト フォルダー内で、*Hubs* フォルダーを作成します。  
+* SignalRChat プロジェクト フォルダー内で、 *Hubs* フォルダーを作成します。  
 
 * *Hubs* フォルダー内で、次のコードを使用して *ChatHub.cs* ファイルを作成します。 
 
@@ -482,7 +483,7 @@ SignalR 要求が SignalR に渡されるように SignalR サーバーを構成
   ![SignalR サンプル アプリ](signalr/_static/2.x/signalr-get-started-finished.png) 
 
 > [!TIP]    
-> アプリが動作しない場合は、ご利用のブラウザーの開発者ツール (F12) を開き、コンソールに移動します。 HTML および JavaScript コードに関連するエラーが発生している場合があります。 たとえば、*signalr.js* を指示されたフォルダーとは別のフォルダーに配置したとします。 その場合、そのファイルへの参照は機能せず、コンソールに 404 エラーが表示されます。   
+> アプリが動作しない場合は、ご利用のブラウザーの開発者ツール (F12) を開き、コンソールに移動します。 HTML および JavaScript コードに関連するエラーが発生している場合があります。 たとえば、 *signalr.js* を指示されたフォルダーとは別のフォルダーに配置したとします。 その場合、そのファイルへの参照は機能せず、コンソールに 404 エラーが表示されます。   
 > ![エラー "signalr.js が見つかりませんでした"](signalr/_static/2.x/f12-console.png)    
 ## <a name="additional-resources"></a>その他の技術情報 
 * [このチュートリアルの YouTube バージョン](https://www.youtube.com/watch?v=iKlVmu-r0JQ)   

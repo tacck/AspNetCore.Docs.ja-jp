@@ -7,6 +7,7 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: c4afddca1d0c2428371c90013f5dbd5c1afb5108
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628782"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054568"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>ASP.NET Core で Angular プロジェクト テンプレートを使用する
 
@@ -35,7 +36,7 @@ ms.locfileid: "88628782"
 
 ASP.NET Core 2.1 がインストールされている場合は、Angular プロジェクト テンプレートをインストールする必要はありません。
 
-コマンド プロンプトで `dotnet new angular` コマンドを使用して、空のディレクトリの中に新しいプロジェクトを作成します。 たとえば、次のコマンドは、*my-new-app* ディレクトリにアプリを作成し、そのディレクトリに切り替えます。
+コマンド プロンプトで `dotnet new angular` コマンドを使用して、空のディレクトリの中に新しいプロジェクトを作成します。 たとえば、次のコマンドは、 *my-new-app* ディレクトリにアプリを作成し、そのディレクトリに切り替えます。
 
 ```dotnetcli
 dotnet new angular -o my-new-app
@@ -65,7 +66,7 @@ Now listening on: http://localhost:<port>
 ブラウザーでこの URL に移動します。
 
 > [!WARNING]
-> アプリは、Angular CLI サーバーのインスタンスをバックグラウンドで開始します。 次のようなメッセージがログに記録されます。*NG ライブ開発サーバーが localhost でリッスンしています。他のポート&gt;&lt;ブラウザーを開いて http://localhost:&lt し、その他のポート&gt;/* 。 このメッセージは無視してください。それは、結合された ASP.NET Core と Angular CLI アプリの URLでは**ありません**。
+> アプリは、Angular CLI サーバーのインスタンスをバックグラウンドで開始します。 次のようなメッセージがログに記録されます。 *NG ライブ開発サーバーが localhost でリッスンしています。他のポート&gt;&lt;ブラウザーを開いて http://localhost:&lt し、その他のポート&gt;/* 。 このメッセージは無視してください。それは、結合された ASP.NET Core と Angular CLI アプリの URLでは **ありません** 。
 
 ---
 
@@ -79,7 +80,7 @@ Now listening on: http://localhost:<port>
 
 ## <a name="run-ng-commands"></a>ng コマンドを実行する
 
-コマンド プロンプトで、*ClientApp* サブディレクトリに切り替えます。
+コマンド プロンプトで、 *ClientApp* サブディレクトリに切り替えます。
 
 ```console
 cd ClientApp
@@ -91,7 +92,7 @@ cd ClientApp
 
 ## <a name="install-npm-packages"></a>npm パッケージをインストールする
 
-サードパーティ製の npm パッケージをインストールするには、*ClientApp* サブディレクトリでコマンド プロンプトを使用します。 次に例を示します。
+サードパーティ製の npm パッケージをインストールするには、 *ClientApp* サブディレクトリでコマンド プロンプトを使用します。 次に例を示します。
 
 ```console
 cd ClientApp
@@ -112,7 +113,7 @@ ASP.NET Core アプリが開発モードで起動された場合、プロジェ�
 
 この既定の設定には欠点があります。 C# コードを変更し、ASP.NET Core アプリを再起動する必要がある場合、Angular CLI サーバーが毎回再起動します。 再起動には、約 10 秒必要です。 C# コードを何度も編集するが、Angular CLI が再起動するまで待ちたくない場合は、ASP.NET Core プロセスから独立した Angular CLI サーバーを外部で実行します。 次の手順に従います。
 
-1. コマンド プロンプトで、*ClientApp* サブディレクトリに切り替え、Angular CLI 開発サーバーを起動します。
+1. コマンド プロンプトで、 *ClientApp* サブディレクトリに切り替え、Angular CLI 開発サーバーを起動します。
 
     ```console
     cd ClientApp
@@ -120,7 +121,7 @@ ASP.NET Core アプリが開発モードで起動された場合、プロジェ�
     ```
 
     > [!IMPORTANT]
-    > Angular CLI 開発サーバーを起動するには、`ng serve` ではなく `npm start` を使用して、*package.json* の構成が使用されるようにします。 Angular CLI サーバーに追加パラメーターを渡すには、*package.json* ファイルの関連する `scripts` 行にそれらを追加します。
+    > Angular CLI 開発サーバーを起動するには、`ng serve` ではなく `npm start` を使用して、 *package.json* の構成が使用されるようにします。 Angular CLI サーバーに追加パラメーターを渡すには、 *package.json* ファイルの関連する `scripts` 行にそれらを追加します。
 
 2. 独自のインスタンスを起動する代わりに外部の Angular CLI インスタンスを使用するように ASP.NET Core アプリケーションを変更します。 *Startup* クラスで、`spa.UseAngularCliServer` の呼び出しを以下に置き換えます。
 
@@ -132,7 +133,7 @@ ASP.NET Core アプリの起動時に Angular CLI サーバーが起動されな
 
 ### <a name="pass-data-from-net-code-into-typescript-code"></a>.NET コードから TypeScript コードに データを渡す
 
-SSR 中は、要求ごとのデータを ASP.NET Core アプリから Angular アプリに渡すことができます。 たとえば、cookie 情報やデータベースから読み取ったデータを渡すことができます。 これを行うには、*Startup* クラスを編集します。 `UseSpaPrerendering` のコールバックに、次のような `options.SupplyData` の値を設定します。
+SSR 中は、要求ごとのデータを ASP.NET Core アプリから Angular アプリに渡すことができます。 たとえば、cookie 情報やデータベースから読み取ったデータを渡すことができます。 これを行うには、 *Startup* クラスを編集します。 `UseSpaPrerendering` のコールバックに、次のような `options.SupplyData` の値を設定します。
 
 ```csharp
 options.SupplyData = (context, data) =>
@@ -142,7 +143,7 @@ options.SupplyData = (context, data) =>
 };
 ```
 
-`SupplyData` コールバックでは、任意の要求ごとの JSON でシリアル可能なデータ (文字列、ブール値、数値など) を渡すことができます。 *main.server.ts* コードは、これを `params.data` として受け取ります。 たとえば、上記のコード サンプルは、ブール値を `params.data.isHttpsRequest` として `createServerRenderer` コールバックに渡しています。 Angular でサポートされている方法で、アプリの他の部分にこれを渡すことができます。 たとえば、*main.server.ts* が、`BASE_URL` 値をコンストラクターが受け取ることを宣言されているコンポーネントにその値を渡す方法を参照してください。
+`SupplyData` コールバックでは、任意の要求ごとの JSON でシリアル可能なデータ (文字列、ブール値、数値など) を渡すことができます。 *main.server.ts* コードは、これを `params.data` として受け取ります。 たとえば、上記のコード サンプルは、ブール値を `params.data.isHttpsRequest` として `createServerRenderer` コールバックに渡しています。 Angular でサポートされている方法で、アプリの他の部分にこれを渡すことができます。 たとえば、 *main.server.ts* が、`BASE_URL` 値をコンストラクターが受け取ることを宣言されているコンポーネントにその値を渡す方法を参照してください。
 
 ### <a name="drawbacks-of-ssr"></a>SSR の欠点
 
@@ -151,7 +152,7 @@ options.SupplyData = (context, data) =>
 同時に、SSR の有効化には重大な欠点があります。 それは、開発プロセスの複雑さを深めます。 ASP.NET Core から呼び出される Node.js 環境の中で、クライアント側とサーバー側 という 2 つの異なる環境でコードを実行する必要があります。 考慮すべき点を次に示します。
 
 * SSR では、運用サーバー上に Node.js をインストールする必要があります。 これは、Azure App Services などの一部のデプロイ シナリオでは自動的に実行されますが、Azure Service Fabric などの他のシナリオではそうではありません。
-* `BuildServerSideRenderer` ビルド フラグを有効にすると、*node_modules* ディレクトリが発行されます。 このフォルダーには、20,000 以上のファイルが含まれているため、配置時間が増加します。
+* `BuildServerSideRenderer` ビルド フラグを有効にすると、 *node_modules* ディレクトリが発行されます。 このフォルダーには、20,000 以上のファイルが含まれているため、配置時間が増加します。
 * Node.js 環境でコードを実行するために、`window` や `localStorage` などのブラウザー固有の JavaScript API の存在に頼ることはできません。 コード (または参照された一部のサードパーティ製ライブラリ) がこれらの API を使用しようとすると、SSR 中にエラーが発生します。 たとえば、jQuery は多くの場所でブラウザー固有の API を参照するため、それを使用しないでください。 エラーを防ぐには、SSR を有効にしないか、ブラウザー固有の API またはライブラリを使用しないようにする必要があります。 SSR 中に呼び出されることがないように、このような API への呼び出しをチェックしてラップできます。 たとえば、JavaScript または TypeScript コードで、次のようなチェックを使用します。
 
     ```javascript

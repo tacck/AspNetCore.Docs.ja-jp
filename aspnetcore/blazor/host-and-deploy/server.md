@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: afbaad2f27359a4a1cac5c5fe1da16d3e80d038f
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102654"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055764"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Blazor Server のホストと展開
 
@@ -37,7 +38,7 @@ ms.locfileid: "89102654"
 
 [Blazor Server のホスティング モデル](xref:blazor/hosting-models#blazor-server)を使用する場合、Blazor はサーバー上で ASP.NET Core アプリ内から実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
 
-ASP.NET Core アプリをホストできる Web サーバーが必要です。 Visual Studio には **Blazor Server アプリ** プロジェクト テンプレートが含まれています ([`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorserverside` テンプレート)。
+ASP.NET Core アプリをホストできる Web サーバーが必要です。 Visual Studio には **Blazor Server アプリ** プロジェクト テンプレートが含まれています ( [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorserverside` テンプレート)。
 
 ## <a name="scalability"></a>スケーラビリティ
 
@@ -79,7 +80,7 @@ Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-s
 
 アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
 
-1. サービスで "*スティッキー セッション*" をサポートできるようにします。それにより、クライアントは[事前レンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値を `Required` に設定します。 通常、アプリでは次の方法の**いずれか 1 つ**を使用して構成を作成します。
+1. サービスで " *スティッキー セッション* " をサポートできるようにします。それにより、クライアントは [事前レンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値を `Required` に設定します。 通常、アプリでは次の方法の **いずれか 1 つ** を使用して構成を作成します。
 
    * `Startup.ConfigureServices`:
   
@@ -91,7 +92,7 @@ Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-s
      });
      ```
 
-   * 構成 (次の方法の**いずれか**を使用):
+   * 構成 (次の方法の **いずれか** を使用):
   
      * `appsettings.json`:
 
@@ -99,7 +100,7 @@ Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-s
        "Azure:SignalR:ServerStickyMode": "Required"
        ```
 
-     * Azure portal で App Service の **[構成]**  >  **[アプリケーションの設定]** (**名前**: `Azure:SignalR:ServerStickyMode`、**値**: `Required`)。
+     * Azure portal で App Service の **[構成]**  >  **[アプリケーションの設定]** ( **名前** : `Azure:SignalR:ServerStickyMode`、 **値** : `Required`)。
 
 1. Blazor Server アプリ用に、Visual Studio に Azure アプリ発行プロファイルを作成する。
 1. プロファイルに **Azure SignalR Service** の依存関係を追加する。 Azure サブスクリプションに、アプリに割り当てる既存の Azure SignalR Service のインスタンスがない場合は、 **[新しい Azure SignalR Service のインスタンスを作成する]** を選択して新しいサービス インスタンスをプロビジョニングします。

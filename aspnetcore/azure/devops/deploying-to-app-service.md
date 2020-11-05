@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18, devx-track-azurecli
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: e6d8b4bcbbbe909fde971a8c706287654fcc98ba
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 52c4905ecb3a76f1dd10629f834b2b541b698774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847625"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052358"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service にアプリをデプロイする
 
@@ -120,13 +121,13 @@ ms.locfileid: "90847625"
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
-    f. ローカル環境の Git からデプロイを受け入れるように Web アプリを構成し、"*Git デプロイ URL*" を表示します。 **後で参照するので、この URL を記録しておきます**。
+    f. ローカル環境の Git からデプロイを受け入れるように Web アプリを構成し、" *Git デプロイ URL* " を表示します。 **後で参照するので、この URL を記録しておきます** 。
 
     ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    g. "*Web アプリの URL*" を表示します。 この URL を参照すると、空の Web アプリが表示されます。 **後で参照するので、この URL を記録しておきます**。
+    g. " *Web アプリの URL* " を表示します。 この URL を参照すると、空の Web アプリが表示されます。 **後で参照するので、この URL を記録しておきます** 。
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
@@ -140,7 +141,7 @@ ms.locfileid: "90847625"
     git remote add azure-prod GIT_DEPLOYMENT_URL
     ```
 
-    b. ローカルの *master* ブランチを、*azure-prod* リモートの *master* ブランチにプッシュします。
+    b. ローカルの *master* ブランチを、 *azure-prod* リモートの *master* ブランチにプッシュします。
 
     ```console
     git push azure-prod master
@@ -148,7 +149,7 @@ ms.locfileid: "90847625"
 
     前に作成したデプロイ資格情報の入力を求められます。 コマンド シェルで出力を確認します。 Azure によって、ASP.NET Core アプリがリモートでビルドされます。
 
-4. ブラウザーで "*Web アプリ URL*" に移動し、アプリがビルドおよびデプロイされたことを確認します。 `git commit` を使用して、追加の変更をローカル Git リポジトリにコミットできます。 前の `git push` コマンドを使用すると、これらの変更が Azure にプッシュされます。
+4. ブラウザーで " *Web アプリ URL* " に移動し、アプリがビルドおよびデプロイされたことを確認します。 `git commit` を使用して、追加の変更をローカル Git リポジトリにコミットできます。 前の `git push` コマンドを使用すると、これらの変更が Azure にプッシュされます。
 
 ## <a name="deployment-with-visual-studio"></a>Visual Studio でのデプロイ
 
@@ -164,7 +165,7 @@ ms.locfileid: "90847625"
     ![右クリックの [発行] を示すスクリーンショット](./media/deploying-to-app-service/publish.png)
 5. Visual Studio で新しい App Service リソースを作成できますが、この更新プログラムは既存のデプロイに対して発行されます。 **[発行先を選択]** ダイアログで、左側の一覧から **[App Service]** を選択し、 **[既存のものを選択]** を選択します。 **[発行]** をクリックします。
 6. **[App Service]** ダイアログで、Azure サブスクリプションの作成に使用した Microsoft アカウントまたは組織アカウントが右上に表示されていることを確認します。 そうでない場合は、ドロップダウンをクリックして追加します。
-7. 正しい Azure **サブスクリプション**が選択されていることを確認します。 **[表示]** で、 **[リソース グループ]** を選択します。 **AzureTutorial** リソース グループを展開し、既存の Web アプリを選択します。 **[OK]** をクリックします。
+7. 正しい Azure **サブスクリプション** が選択されていることを確認します。 **[表示]** で、 **[リソース グループ]** を選択します。 **AzureTutorial** リソース グループを展開し、既存の Web アプリを選択します。 **[OK]** をクリックします。
 
     ![App Service への発行ダイアログを示すスクリーンショット](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -185,19 +186,19 @@ Visual Studio によってアプリがビルドされ、Azure にデプロイさ
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-    b. ローカル環境の Git からのデプロイを使用するようにステージング スロットを構成し、**ステージング** デプロイ URL を取得します。 **後で参照するので、この URL を記録しておきます**。
+    b. ローカル環境の Git からのデプロイを使用するようにステージング スロットを構成し、 **ステージング** デプロイ URL を取得します。 **後で参照するので、この URL を記録しておきます** 。
 
     ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
-    c. ステージング スロットの URL を表示します。 URL を参照して、空のステージン グスロットを表示します。 **後で参照するので、この URL を記録しておきます**。
+    c. ステージング スロットの URL を表示します。 URL を参照して、空のステージン グスロットを表示します。 **後で参照するので、この URL を記録しておきます** 。
 
     ```console
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
     ```
 
-3. テキスト エディターまたは Visual Studio で、`<h2>` 要素が `<h2>Simple Feed Reader - V3</h2>` を読み取り、ファイルを保存するように、*Pages/Index.cshtml* をもう一度変更します。
+3. テキスト エディターまたは Visual Studio で、`<h2>` 要素が `<h2>Simple Feed Reader - V3</h2>` を読み取り、ファイルを保存するように、 *Pages/Index.cshtml* をもう一度変更します。
 
 4. Visual Studio の *[チーム エクスプローラー]* タブの **[変更]** ページを使用するか、ローカル コンピューターのコマンド シェルを使用して次のように入力し、ファイルをローカル Git リポジトリにコミットします。
 
@@ -213,7 +214,7 @@ Visual Studio によってアプリがビルドされ、Azure にデプロイさ
     git remote add azure-staging <Git_staging_deployment_URL>
     ```
 
-    b. ローカルの *master* ブランチを、*azure-staging* リモートの *master* ブランチにプッシュします。
+    b. ローカルの *master* ブランチを、 *azure-staging* リモートの *master* ブランチにプッシュします。
 
     ```console
     git push azure-staging master

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/25/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/services
-ms.openlocfilehash: c4d37556a3345d275f45c537a40908c5966fe015
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: cc9fc50871cbad1f2ddf63d3c13c3253f24a995b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113622"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058741"
 ---
 # <a name="create-grpc-services-and-methods"></a>gRPC のサービスとメソッドを作成する
 
@@ -194,7 +195,7 @@ public override async Task StreamingFromServer(ExampleRequest request,
 
 ### <a name="client-streaming-method"></a>クライアント ストリーミング メソッド
 
-クライアント ストリーミング メソッドは、メッセージを受信するメソッド "*なしで*" 開始します。 `requestStream` パラメーターは、クライアントからメッセージを読み取るために使用されます。 応答メッセージが返されると、クライアント ストリーミングの呼び出しが完了します。
+クライアント ストリーミング メソッドは、メッセージを受信するメソッド " *なしで* " 開始します。 `requestStream` パラメーターは、クライアントからメッセージを読み取るために使用されます。 応答メッセージが返されると、クライアント ストリーミングの呼び出しが完了します。
 
 ```csharp
 public override async Task<ExampleResponse> StreamingFromClient(
@@ -225,7 +226,7 @@ public override async Task<ExampleResponse> StreamingFromClient(
 
 ### <a name="bi-directional-streaming-method"></a>双方向ストリーミング メソッド
 
-双方向ストリーミング メソッドは、メッセージを受信するメソッド "*なしで*" 開始します。 `requestStream` パラメーターは、クライアントからメッセージを読み取るために使用されます。 このメソッドでは、`responseStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 双方向ストリーミング呼び出しは、メソッドが返されると完了します。
+双方向ストリーミング メソッドは、メッセージを受信するメソッド " *なしで* " 開始します。 `requestStream` パラメーターは、クライアントからメッセージを読み取るために使用されます。 このメソッドでは、`responseStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 双方向ストリーミング呼び出しは、メソッドが返されると完了します。
 
 ```csharp
 public override async Task StreamingBothWays(IAsyncStreamReader<ExampleRequest> requestStream,

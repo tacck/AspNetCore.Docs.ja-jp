@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900987"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056193"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をデバッグする
 
@@ -44,7 +45,7 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 * *[ローカル]* ウィンドウで、ローカル変数の値を観察する。
 * JavaScript と .NET の間の呼び出しチェーンなど、呼び出し履歴を確認する。
 
-現時点では、次の操作を行うことは*できません*。
+現時点では、次の操作を行うことは *できません* 。
 
 * 未処理の例外の発生時に中断する。
 * デバッグ プロキシが実行される前に、アプリの起動中にブレークポイントにヒットします。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
@@ -58,8 +59,8 @@ Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chr
 
 Visual Studio for Mac のバージョン 8.8 (ビルド 1532) 以降が必要です。
 
-1. Visual Studio for Mac の最新リリースをインストールします。それには、 **[Visual Studio for Mac をダウンロードする]** ボタンを選択します ([Microsoft: Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/))。
-1. Visual Studio 内から "*プレビュー*" チャネルを選択します。 詳細については、「[Visual Studio for Mac のプレビュー バージョンをインストールする](/visualstudio/mac/install-preview)」を参照してください。
+1. Visual Studio for Mac の最新リリースをインストールします。それには、 **[Visual Studio for Mac をダウンロードする]** ボタンを選択します ( [Microsoft: Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/))。
+1. Visual Studio 内から " *プレビュー* " チャネルを選択します。 詳細については、「[Visual Studio for Mac のプレビュー バージョンをインストールする](/visualstudio/mac/install-preview)」を参照してください。
 
 > [!NOTE]
 > 現在、macOS での Apple Safari はサポートされていません。
@@ -91,7 +92,7 @@ Visual Studio で Blazor WebAssembly アプリをデバッグするには、次�
 1. <kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。
 
    > [!NOTE]
-   > **デバッグなしの開始** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
+   > **デバッグなしの開始** ( <kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
 
 1. "`*Client*`" アプリで、`Pages/Counter.razor` の `currentCount++;` 行にブレークポイントを設定します。
 1. ブラウザーで `Counter` ページに移動し、 **[Click me]** ボタンを選択して、ブレークポイントで停止させます。
@@ -107,7 +108,7 @@ Blazor WebAssembly アプリをデバッグしている間に、サーバー コ
 1. <kbd>F5</kbd> キーをもう一度押して実行を続け、天気予報テーブルがブラウザーにレンダリングされることを確認します。
 
 > [!NOTE]
-> デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは**ありません**。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
+> デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは **ありません** 。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
 
 アプリが `/` 以外の[アプリ ベース パス](xref:blazor/host-and-deploy/index#app-base-path)でホストされている場合、`Properties/launchSettings.json` で次のプロパティを更新し、アプリのベース パスを反映させます。
 
@@ -167,14 +168,14 @@ Blazor WebAssembly アプリにカスタム アプリ ベース パスを使用�
 
    通知を受信した場合:
 
-   * 最新の [C# for Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)がインストールされていることを確認します。 インストールされている拡張機能を確認するには、メニュー バーから **[表示]**  >  **[拡張機能]** を開くか、**アクティビティ** サイド バーにある**拡張機能**アイコンを選択します。
+   * 最新の [C# for Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)がインストールされていることを確認します。 インストールされている拡張機能を確認するには、メニュー バーから **[表示]**  >  **[拡張機能]** を開くか、 **アクティビティ** サイド バーにある **拡張機能** アイコンを選択します。
    * JavaScript のプレビュー デバッグが有効になっていることを確認します。 メニュー バーから設定を開きます ( **[ファイル]**  >  **[ユーザー設定]**  >  **[設定]** )。 キーワード「`debug preview`」を使用して検索します。 検索結果で、 **[デバッグ] > [JavaScript:Use Preview]\(JavaScript: 使用プレビュー\)** のチェック ボックスがオンになっていることを確認します。 プレビュー デバッグを有効にするオプションがない場合、VS Code の最新版にアップグレードするか、[JavaScript デバッガー拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) (VS Code バージョン 1.46 以前) をインストールしてください。
    * ウィンドウを再度読み込みます。
 
 1. <kbd>F5</kbd> キーボード ショートカットまたはメニュー項目を使用してデバッグを開始します。
 
    > [!NOTE]
-   > **デバッグなしの開始** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
+   > **デバッグなしの開始** ( <kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
 
 1. プロンプトが表示されたら、 **[Blazor WebAssembly Debug]** オプションを選択してデバッグを開始します。
 
@@ -185,7 +186,7 @@ Blazor WebAssembly アプリにカスタム アプリ ベース パスを使用�
 1. ブラウザーで `Counter` ページに移動し、 **[Click me]** ボタンを選択して、ブレークポイントで停止させます。
 
 > [!NOTE]
-> デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは**ありません**。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
+> デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは **ありません** 。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
 
 ## <a name="debug-hosted-no-locblazor-webassembly"></a>ホストされた Blazor WebAssembly のデバッグ
 
@@ -280,7 +281,7 @@ Visual Studio for Mac で Blazor WebAssembly アプリをデバッグするに�
 1. <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> キーを押して、デバッガーでアプリを実行します。
 
    > [!NOTE]
-   > **デバッグなしの開始** (<kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
+   > **デバッグなしの開始** ( <kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) はサポートされていません。 アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。
 
    > [!IMPORTANT]
    > デバッグ セッション用のブラウザーとしては、Google Chrome または Microsoft Edge を選択する必要があります。
@@ -299,7 +300,7 @@ Blazor WebAssembly アプリをデバッグしている間に、サーバー コ
 1. <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> キーをもう一度押して実行を続け、天気予報テーブルがブラウザーにレンダリングされることを確認します。
 
 > [!NOTE]
-> デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは**ありません**。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
+> デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは **ありません** 。 これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。
 
 詳細については、「[Visual Studio for Mac を使用したデバッグ](/visualstudio/mac/debugging)」を参照してください。
 
@@ -315,7 +316,7 @@ Blazor WebAssembly アプリをデバッグしている間に、サーバー コ
 
 1. ブラウザーで <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd> キーを押すことにより、リモート デバッグの開始を試みます。
 
-   ブラウザーはリモート デバッグが有効で実行されている必要があります。これは既定ではありません。 リモート デバッグが無効になっている場合、"**デバッグ可能なブラウザー タブが見つからない**" というエラー ページと、デバッグ ポートを開いた状態でブラウザーを起動する手順がレンダリングされます。 ブラウザーの指示に従って、新しいブラウザー ウィンドウを開きます。 前のブラウザー ウィンドウを閉じます。
+   ブラウザーはリモート デバッグが有効で実行されている必要があります。これは既定ではありません。 リモート デバッグが無効になっている場合、" **デバッグ可能なブラウザー タブが見つからない** " というエラー ページと、デバッグ ポートを開いた状態でブラウザーを起動する手順がレンダリングされます。 ブラウザーの指示に従って、新しいブラウザー ウィンドウを開きます。 前のブラウザー ウィンドウを閉じます。
 
 <!-- HOLD 
 1. In the browser, attempt to commence remote debugging by pressing:

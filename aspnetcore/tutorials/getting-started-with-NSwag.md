@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 6dc1fe85298cae307f554cfc06c4129fabbe8ab4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 78d58d4d544c33862cf502ce63e83560e8009c65
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633592"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060574"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag と ASP.NET Core の概要
 
@@ -71,13 +72,13 @@ NSwag ミドルウェアの登録でできること:
 
 * **[NuGet パッケージの管理]** ダイアログ ボックスから:
   * **[ソリューション エクスプローラー]**  >  **[NuGet パッケージの管理]** でプロジェクトを右クリックします。
-  * **パッケージ ソース**を "nuget.org" に設定します。
+  * **パッケージ ソース** を "nuget.org" に設定します。
   * 検索ボックスに「NSwag.AspNetCore」と入力します。
   * **[参照]** タブから "NSwag.AspNetCore" パッケージを選択して、 **[インストール]** をクリックします。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* **[Solution Pad]**  >  **[パッケージを追加]** で [*パッケージ*] フォルダーを右クリックします。
+* **[Solution Pad]**  >  **[パッケージを追加]** で [ *パッケージ* ] フォルダーを右クリックします。
 * **[パッケージを追加]** ウィンドウの **[ソース]** ドロップダウンを "nuget.org" に設定します。
 * 検索ボックスに「NSwag.AspNetCore」と入力します。
 * 結果ウィンドウから NSwag.AspNetCore パッケージを選択し、 **[パッケージを追加]** をクリックします。
@@ -127,7 +128,7 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
   ![Swagger 仕様のローカル コピーの作成](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)
 
 * **[Outputs]\(出力\)** 領域で、 **[CSharp Client]\(CSharp クライアント\)** チェック ボックスをオンにします。 ご自身のプロジェクトに応じて、 **[TypeScript Client]\(TypeScript クライアント\)** または **[CSharp Web API Controller]\(CSharp Web API コントローラー\)** を選択することもできます。 **[CSharp Web API Controller]\(CSharp Web API コントローラー\)** を選択した場合は、逆方向の生成が行われ、サービスの仕様からサービスが再構築されます。
-* **[Generate Outputs]\(出力の生成\)** をクリックすると、*TodoApi.NSwag* プロジェクトの完全な C# クライアントの実装が作成されます。 生成されたクライアント コードを表示するには、 **[CSharp Client]\(CSharp クライアント\)** タブをクリックします。
+* **[Generate Outputs]\(出力の生成\)** をクリックすると、 *TodoApi.NSwag* プロジェクトの完全な C# クライアントの実装が作成されます。 生成されたクライアント コードを表示するには、 **[CSharp Client]\(CSharp クライアント\)** タブをクリックします。
 
 ```csharp
 //----------------------
@@ -208,7 +209,7 @@ XML コメントを有効にするには、次の手順を実行します。
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* **ソリューション エクスプローラー**でプロジェクトを右クリックし、 **[<project_name>.csproj の編集]** を選択します。
+* **ソリューション エクスプローラー** でプロジェクトを右クリックし、 **[<project_name>.csproj の編集]** を選択します。
 * 強調表示された行を手動で *.csproj* ファイルに追加します。
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/TodoApi.csproj?name=snippet_DocumentationFileElement&highlight=1-2,4)]
@@ -217,7 +218,7 @@ XML コメントを有効にするには、次の手順を実行します。
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* **ソリューション エクスプローラー**で、プロジェクトを右クリックし、 **[プロパティ]** を選択します。
+* **ソリューション エクスプローラー** で、プロジェクトを右クリックし、 **[プロパティ]** を選択します。
 * **[ビルド]** タブの **[出力]** セクションの下にある **[XML ドキュメント ファイル]** チェック ボックスをオンにします。
 
 ::: moniker-end

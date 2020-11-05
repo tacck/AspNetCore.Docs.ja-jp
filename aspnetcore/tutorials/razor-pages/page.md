@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 3�
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 7d0085e1d444de30ca124ef544668122ab350c93
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865122"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060054"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
 
@@ -35,7 +36,7 @@ ms.locfileid: "88865122"
 
 ## <a name="the-create-delete-details-and-edit-pages"></a>[作成]、[削除]、[詳細]、および [編集] ページ
 
-次のように、*Pages/Movies/Index.cshtml.cs* ページ モデルを確認します。
+次のように、 *Pages/Movies/Index.cshtml.cs* ページ モデルを確認します。
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs)]
 
@@ -43,11 +44,11 @@ Razor ページは `PageModel` から派生します。 慣例により、`PageM
 
 ページに対して要求が行われると、`OnGetAsync` メソッドは Razor ページにムービーのリストを返します。 `OnGetAsync` または `OnGet` が呼び出され、ページの状態が初期化されます。 この場合、`OnGetAsync` でムービーのリストを取得し、表示します。
 
-`OnGet` によって `void` が返される場合、または `OnGetAsync` によって `Task` が返される場合は、return ステートメントは使用されません。 戻り値の型が `IActionResult` または `Task<IActionResult>` の場合は、return ステートメントを指定する必要があります。 たとえば、*Pages/Movies/Create.cshtml.cs* `OnPostAsync` メソッドでは、次のようになります。
+`OnGet` によって `void` が返される場合、または `OnGetAsync` によって `Task` が返される場合は、return ステートメントは使用されません。 戻り値の型が `IActionResult` または `Task<IActionResult>` の場合は、return ステートメントを指定する必要があります。 たとえば、 *Pages/Movies/Create.cshtml.cs* `OnPostAsync` メソッドでは、次のようになります。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>次のように、*Pages/Movies/Index.cshtml* Razor ページを確認します。
+<a name="index"></a>次のように、 *Pages/Movies/Index.cshtml* Razor ページを確認します。
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
@@ -75,14 +76,14 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="the-layout-page"></a>レイアウト ページ
 
-メニューのリンク ( **[RazorPagesMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、*Pages/Shared/_Layout.cshtml* ファイルに実装されています。 *Pages/Shared/_Layout.cshtml* ファイルを開きます。
+メニューのリンク ( **[RazorPagesMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、 *Pages/Shared/_Layout.cshtml* ファイルに実装されています。 *Pages/Shared/_Layout.cshtml* ファイルを開きます。
 
 [レイアウト](xref:mvc/views/layout) テンプレートを使用すると、HTML コンテナーのレイアウトを次のようにすることができます。
 
 * 1 つの場所で指定される。
 * サイトの複数のページに適用される。
 
-`@RenderBody()` という行を見つけます。 `RenderBody` は、ページ固有のビューがすべて表示されるプレースホルダーで、レイアウト ページに "*ラップ*" されます。 たとえば、 **[プライバシー]** リンクを選択すると、`RenderBody` メソッド内で *Pages/Privacy.cshtml* ビューがレンダリングされます。
+`@RenderBody()` という行を見つけます。 `RenderBody` は、ページ固有のビューがすべて表示されるプレースホルダーで、レイアウト ページに " *ラップ* " されます。 たとえば、 **[プライバシー]** リンクを選択すると、`RenderBody` メソッド内で *Pages/Privacy.cshtml* ビューがレンダリングされます。
 
 <a name="vd"></a>
 
@@ -106,7 +107,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="update-the-layout"></a>レイアウトの更新
 
-**RazorPagesMovie** ではなく **Movie** が表示されるように、*Pages/Shared/_Layout.cshtml* ファイルの `<title>` 要素を変更します。
+**RazorPagesMovie** ではなく **Movie** が表示されるように、 *Pages/Shared/_Layout.cshtml* ファイルの `<title>` 要素を変更します。
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -124,7 +125,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 上のアンカー要素は[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)です。 この場合は、[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)です。 `asp-page="/Movies/Index"` タグ ヘルパー属性と値で、`/Movies/Index` Razor ページへのリンクが作成されます。 `asp-area` 属性の値が空なので、リンクではこの区分が使用されていません。 詳細については、[区分](xref:mvc/controllers/areas)に関する記事を参照してください。
 
-変更内容を保存し、**RpMovie** リンクをクリックしてアプリをテストします。 問題がある場合は、GitHub の [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) ファイルを参照してください。
+変更内容を保存し、 **RpMovie** リンクをクリックしてアプリをテストします。 問題がある場合は、GitHub の [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) ファイルを参照してください。
 
 その他のリンク ( **[Home]** 、 **[RpMovie]** 、 **[Create]** 、 **[Edit]** 、および **[Delete]** ) をテストします。 各ページで、ブラウザー タブで表示できるタイトルを設定します。ページをブックマークすると、ブックマークでタイトルが使用されます。
 
@@ -135,7 +136,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/_ViewStart.cshtml)]
 
-上のマークアップでは、*Pages* フォルダーの下のすべての Razor ファイルに対して、レイアウト ファイルを *Pages/Shared/_Layout.cshtml* に設定します。 詳細については、「[Layout](xref:razor-pages/index#layout)」 (レイアウト) を参照してください。
+上のマークアップでは、 *Pages* フォルダーの下のすべての Razor ファイルに対して、レイアウト ファイルを *Pages/Shared/_Layout.cshtml* に設定します。 詳細については、「[Layout](xref:razor-pages/index#layout)」 (レイアウト) を参照してください。
 
 ### <a name="the-create-page-model"></a>Create ページのモデル
 
@@ -143,7 +144,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` メソッドは、ページに必要な状態を初期化します。 [作成] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルの後半では、状態を初期化する `OnGet` の例を示します。 `Page` メソッドでは、*Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
+`OnGet` メソッドは、ページに必要な状態を初期化します。 [作成] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルの後半では、状態を初期化する `OnGet` の例を示します。 `Page` メソッドでは、 *Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
 
 `Movie` プロパティは `[BindProperty]` 属性を使用して、[モデル バインド](xref:mvc/models/model-binding)にオプトインします。 [作成] フォームでフォーム値が投稿されると、ASP.NET Core ランタイムが投稿された値を `Movie` モデルにバインドします。
 
@@ -157,7 +158,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="the-create-no-locrazor-page"></a>Razor の作成ページ
 
-次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
+次のように、 *Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
@@ -227,7 +228,7 @@ Visual Studio に、タグ ヘルパーで使用される独特な太字のフ�
 
 ## <a name="the-create-delete-details-and-edit-pages"></a>[作成]、[削除]、[詳細]、および [編集] ページ
 
-次のように、*Pages/Movies/Index.cshtml.cs* ページ モデルを確認します。
+次のように、 *Pages/Movies/Index.cshtml.cs* ページ モデルを確認します。
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
 
@@ -235,11 +236,11 @@ Razor ページは `PageModel` から派生します。 慣例により、`PageM
 
 ページに対して要求が行われると、`OnGetAsync` メソッドは Razor ページにムービーのリストを返します。 `OnGetAsync` または `OnGet` が Razor ページで呼び出され、ページの状態が初期化されます。 この場合、`OnGetAsync` でムービーのリストを取得し、表示します。
 
-`OnGet` が `void` を返す場合、または `OnGetAsync` が `Task` を返す場合、return メソッドは使用されません。 戻り値の型が `IActionResult` または `Task<IActionResult>` の場合は、return ステートメントを指定する必要があります。 たとえば、*Pages/Movies/Create.cshtml.cs* `OnPostAsync` メソッドでは、次のようになります。
+`OnGet` が `void` を返す場合、または `OnGetAsync` が `Task` を返す場合、return メソッドは使用されません。 戻り値の型が `IActionResult` または `Task<IActionResult>` の場合は、return ステートメントを指定する必要があります。 たとえば、 *Pages/Movies/Create.cshtml.cs* `OnPostAsync` メソッドでは、次のようになります。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>次のように、*Pages/Movies/Index.cshtml* Razor ページを確認します。
+<a name="index"></a>次のように、 *Pages/Movies/Index.cshtml* Razor ページを確認します。
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
 
@@ -265,9 +266,9 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="the-layout-page"></a>レイアウト ページ
 
-メニューのリンク ( **[RazorPagesMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、*Pages/Shared/_Layout.cshtml* ファイルに実装されています。 *Pages/Shared/_Layout.cshtml* ファイルを開きます。
+メニューのリンク ( **[RazorPagesMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、 *Pages/Shared/_Layout.cshtml* ファイルに実装されています。 *Pages/Shared/_Layout.cshtml* ファイルを開きます。
 
-[[レイアウト]](xref:mvc/views/layout) テンプレートでは、1 か所でサイトの HTML コンテナー レイアウトを指定し、それをサイト内の複数のページに適用できます。 `@RenderBody()` という行を見つけます。 `RenderBody` は、作成したページ固有のビューがすべて表示されるプレースホルダーで、レイアウト ページに*ラップ*されます。 たとえば、 **[プライバシー]** リンクを選択した場合、`RenderBody` メソッド内で **Pages/Privacy.cshtml** ビューがレンダリングされます。
+[[レイアウト]](xref:mvc/views/layout) テンプレートでは、1 か所でサイトの HTML コンテナー レイアウトを指定し、それをサイト内の複数のページに適用できます。 `@RenderBody()` という行を見つけます。 `RenderBody` は、作成したページ固有のビューがすべて表示されるプレースホルダーで、レイアウト ページに *ラップ* されます。 たとえば、 **[プライバシー]** リンクを選択した場合、`RenderBody` メソッド内で **Pages/Privacy.cshtml** ビューがレンダリングされます。
 
 <a name="vd"></a>
 
@@ -291,7 +292,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="update-the-layout"></a>レイアウトの更新
 
-**RazorPagesMovie** ではなく **Movie** が表示されるように、*Pages/Shared/_Layout.cshtml* ファイルの `<title>` 要素を変更します。
+**RazorPagesMovie** ではなく **Movie** が表示されるように、 *Pages/Shared/_Layout.cshtml* ファイルの `<title>` 要素を変更します。
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -309,7 +310,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 上のアンカー要素は[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)です。 この場合は、[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)です。 `asp-page="/Movies/Index"` タグ ヘルパー属性と値で、`/Movies/Index` Razor ページへのリンクが作成されます。 `asp-area` 属性の値が空なので、リンクではこの区分が使用されていません。 詳細については、[区分](xref:mvc/controllers/areas)に関する記事を参照してください。
 
-変更内容を保存し、**RpMovie** リンクをクリックしてアプリをテストします。 問題がある場合は、GitHub の [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) ファイルを参照してください。
+変更内容を保存し、 **RpMovie** リンクをクリックしてアプリをテストします。 問題がある場合は、GitHub の [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) ファイルを参照してください。
 
 その他のリンク ( **[Home]** 、 **[RpMovie]** 、 **[Create]** 、 **[Edit]** 、および **[Delete]** ) をテストします。 各ページで、ブラウザー タブで表示できるタイトルを設定します。ページをブックマークすると、ブックマークでタイトルが使用されます。
 
@@ -320,7 +321,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/_ViewStart.cshtml)]
 
-上のマークアップでは、*Pages* フォルダーの下のすべての Razor ファイルに対して、レイアウト ファイルを *Pages/Shared/_Layout.cshtml* に設定します。 詳細については、「[Layout](xref:razor-pages/index#layout)」 (レイアウト) を参照してください。
+上のマークアップでは、 *Pages* フォルダーの下のすべての Razor ファイルに対して、レイアウト ファイルを *Pages/Shared/_Layout.cshtml* に設定します。 詳細については、「[Layout](xref:razor-pages/index#layout)」 (レイアウト) を参照してください。
 
 ### <a name="the-create-page-model"></a>Create ページのモデル
 
@@ -328,7 +329,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` メソッドは、ページに必要な状態を初期化します。 [作成] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルで後ほど、`OnGet` メソッドの状態の初期化を確認できます。 `Page` メソッドでは、*Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
+`OnGet` メソッドは、ページに必要な状態を初期化します。 [作成] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルで後ほど、`OnGet` メソッドの状態の初期化を確認できます。 `Page` メソッドでは、 *Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
 
 `Movie` プロパティは `[BindProperty]` 属性を使用して、[モデル バインド](xref:mvc/models/model-binding)にオプトインします。 [作成] フォームでフォーム値が投稿されると、ASP.NET Core ランタイムが投稿された値を `Movie` モデルにバインドします。
 
@@ -342,7 +343,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 ### <a name="the-create-no-locrazor-page"></a>Razor の作成ページ
 
-次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
+次のように、 *Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 

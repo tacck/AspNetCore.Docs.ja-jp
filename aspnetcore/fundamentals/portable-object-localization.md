@@ -5,6 +5,7 @@ description: この記事では、Portable Object (PO) ファイルについて�
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: f471c5b7511434cf42717e52ef271663c2e36647
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456050"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053723"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core で Portable Object のローカライズを構成する
 
@@ -108,7 +109,7 @@ PO ファイルの仕様については、[こちら](https://www.gnu.org/savann
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
-このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、*fr.po* ファイルが使用されます。
+このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、 *fr.po* ファイルが使用されます。
 
 ### <a name="testing-the-application"></a>アプリケーションのテスト
 
@@ -158,7 +159,7 @@ var supportedCultures = new List<CultureInfo>
 };
 ```
 
-複数の基数についてローカライズされた複数形の文字列をレンダリングするように、*Views/Home/About.cshtml* ファイルを編集します。
+複数の基数についてローカライズされた複数形の文字列をレンダリングするように、 *Views/Home/About.cshtml* ファイルを編集します。
 
 ```cshtml
 <p>@Localizer.Plural(1, "There is one item.", "There are {0} items.")</p>
@@ -323,7 +324,7 @@ PO ファイルの仕様については、[こちら](https://www.gnu.org/savann
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
-このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、*fr.po* ファイルが使用されます。
+このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、 *fr.po* ファイルが使用されます。
 
 ### <a name="testing-the-application"></a>アプリケーションのテスト
 
@@ -373,7 +374,7 @@ var supportedCultures = new List<CultureInfo>
 };
 ```
 
-複数の基数についてローカライズされた複数形の文字列をレンダリングするように、*Views/Home/About.cshtml* ファイルを編集します。
+複数の基数についてローカライズされた複数形の文字列をレンダリングするように、 *Views/Home/About.cshtml* ファイルを編集します。
 
 ```cshtml
 <p>@Localizer.Plural(1, "There is one item.", "There are {0} items.")</p>

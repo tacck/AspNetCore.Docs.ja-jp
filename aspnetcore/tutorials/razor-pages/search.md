@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 6�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 5e899929372697f7a381cd493655309fa3f70f79
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 960f60198f5e65ed05d0374fd0704537376d27d6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633852"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058091"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>パート 6、ASP.NET Core Razor ページへの検索の追加
 
@@ -31,7 +32,7 @@ ms.locfileid: "88633852"
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-次のセクションでは、*ジャンル*または*名前*による映画検索が追加されます。
+次のセクションでは、 *ジャンル* または *名前* による映画検索が追加されます。
 
 強調表示されている次のプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。
 
@@ -56,7 +57,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-このクエリはこの時点では定義される*だけ*で、データベースに対して**実行されていません**。
+このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません** 。
 
 `SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。
 
@@ -91,7 +92,7 @@ ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model
 
 HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。
 
-* [フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper) フォームが提出されると、フィルター文字列がクエリ文字列経由で*ページ/ムービー/索引*ページに送信されます。
+* [フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper) フォームが提出されると、フィルター文字列がクエリ文字列経由で *ページ/ムービー/索引* ページに送信されます。
 * [入力タグ ヘルパー](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 変更を保存し、フィルターをテストします。
@@ -134,7 +135,7 @@ HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-help
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-次のセクションでは、*ジャンル*または*名前*による映画検索が追加されます。
+次のセクションでは、 *ジャンル* または *名前* による映画検索が追加されます。
 
 強調表示されている次のプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。
 
@@ -159,7 +160,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-このクエリはこの時点では定義される*だけ*で、データベースに対して**実行されていません**。
+このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません** 。
 
 `SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。
 
@@ -193,7 +194,7 @@ ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model
 
 HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。
 
-* [フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper) フォームが提出されると、フィルター文字列がクエリ文字列経由で*ページ/ムービー/索引*ページに送信されます。
+* [フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper) フォームが提出されると、フィルター文字列がクエリ文字列経由で *ページ/ムービー/索引* ページに送信されます。
 * [入力タグ ヘルパー](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 変更を保存し、フィルターをテストします。

@@ -5,6 +5,7 @@ description: ASP.NET Core での Grunt の使用
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: e8e4459f7fe496135d6cfd7f4ff52511a5e1c064
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 374c23f440dcf301b3a1e1e9e6684dd050f218c6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628028"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054555"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core での Grunt の使用
 
@@ -31,17 +32,17 @@ Grunt は、スクリプトの縮小、TypeScript のコンパイル、コード
 
 完成した例では、ターゲットの展開ディレクトリのクリーンアップ、JavaScript ファイルの結合、コード品質の確認、JavaScript ファイル コンテンツの圧縮、および Web アプリケーションのルートへの展開を行います。 次のパッケージを使用します。
 
-* **grunt**:Grunt タスク ランナー パッケージ。
+* **grunt** :Grunt タスク ランナー パッケージ。
 
-* **grunt-contrib-clean**:ファイルまたはディレクトリを削除するプラグイン。
+* **grunt-contrib-clean** :ファイルまたはディレクトリを削除するプラグイン。
 
-* **grunt-contrib-jshint**:JavaScript コードの品質を確認するプラグイン。
+* **grunt-contrib-jshint** :JavaScript コードの品質を確認するプラグイン。
 
-* **grunt-contrib-concat**:ファイルを 1 つのファイルに結合するプラグイン。
+* **grunt-contrib-concat** :ファイルを 1 つのファイルに結合するプラグイン。
 
-* **grunt-contrib-uglify**:サイズを小さくするために JavaScript を縮小するプラグイン。
+* **grunt-contrib-uglify** :サイズを小さくするために JavaScript を縮小するプラグイン。
 
-* **grunt-contrib-watch**:ファイル アクティビティを監視するプラグイン。
+* **grunt-contrib-watch** :ファイル アクティビティを監視するプラグイン。
 
 ## <a name="preparing-the-application"></a>アプリケーションの準備
 
@@ -107,7 +108,7 @@ Grunt は、スクリプトの縮小、TypeScript のコンパイル、コード
     > [!NOTE]
     > NPM では、依存関係を整理するために[セマンティック バージョニング](https://semver.org/)が使用されます。 セマンティック バージョニングは SemVer とも呼ばれ、\<major>.\<minor>.\<patch> の番号設定によってパッケージを識別するものです。Intellisense では、いくつかの共通の選択肢だけを表示することで、セマンティック バージョニングが簡略化されています。 Intellisense の一覧の一番上にある項目 (上の例では 0.4.5) は、最新の安定バージョンのパッケージと見なされます。 キャレット (^) 記号は最新のメジャー バージョンと一致し、チルダ (~) は最新のマイナー バージョンと一致します。 SemVer で提供される完全な表現のガイドとして、[NPM SemVer バージョン パーサーのリファレンス](https://www.npmjs.com/package/semver)を参照してください。
 
-3. 次の例に示すように、*clean*、*jshint*、*concat*、*uglify*、および *watch* に対して grunt-contrib-\* パッケージを読み込むよう、さらに依存関係を追加します。 バージョンは例と一致している必要はありません。
+3. 次の例に示すように、 *clean* 、 *jshint* 、 *concat* 、 *uglify* 、および *watch* に対して grunt-contrib-\* パッケージを読み込むよう、さらに依存関係を追加します。 バージョンは例と一致している必要はありません。
 
     ```json
     "devDependencies": {
@@ -122,18 +123,18 @@ Grunt は、スクリプトの縮小、TypeScript のコンパイル、コード
 
 4. *package.json* ファイルを保存します。
 
-各 `devDependencies` 項目のパッケージが、各パッケージに必要なすべてのファイルと共にダウンロードされます。 **ソリューション エクスプローラー**で **[すべてのファイルを表示]** ボタンを有効にすると、*node_modules* ディレクトリ内のパッケージ ファイルを確認できます。
+各 `devDependencies` 項目のパッケージが、各パッケージに必要なすべてのファイルと共にダウンロードされます。 **ソリューション エクスプローラー** で **[すべてのファイルを表示]** ボタンを有効にすると、 *node_modules* ディレクトリ内のパッケージ ファイルを確認できます。
 
 ![grunt node_modules](using-grunt/_static/node-modules.png)
 
 > [!NOTE]
-> 必要に応じて、**ソリューション エクスプローラー**で `Dependencies\NPM` を右クリックし、 **[パッケージの復元]** メニュー オプションを選択することで、依存関係を手動で復元できます。
+> 必要に応じて、 **ソリューション エクスプローラー** で `Dependencies\NPM` を右クリックし、 **[パッケージの復元]** メニュー オプションを選択することで、依存関係を手動で復元できます。
 
 ![パッケージの復元](using-grunt/_static/restore-packages.png)
 
 ## <a name="configuring-grunt"></a>Grunt の構成
 
-Grunt は、*Gruntfile.js* という名前のマニフェストを使用して構成されます。このマニフェストでは、手動で実行したり、Visual Studio のイベントに基づいて自動的に実行されるように構成したりできるタスクの定義、読み込み、および登録が行われます。
+Grunt は、 *Gruntfile.js* という名前のマニフェストを使用して構成されます。このマニフェストでは、手動で実行したり、Visual Studio のイベントに基づいて自動的に実行されるように構成したりできるタスクの定義、読み込み、および登録が行われます。
 
 1. プロジェクトを右クリックし、 **[追加]**  >  **[新しい項目]** を選択します。 **[JavaScript ファイル]** 項目テンプレートを選択し、名前を *Gruntfile.js* に変更して、 **[追加]** ボタンをクリックします。
 
@@ -146,7 +147,7 @@ Grunt は、*Gruntfile.js* という名前のマニフェストを使用して�
    };
    ```
 
-1. 次の *Gruntfile.js* の例に示すように、`initConfig` 関数の内部に `clean` タスクのオプションを追加します。 `clean` タスクで、ディレクトリ文字列の配列が受け入れられます。 このタスクにより、*wwwroot/lib* からファイルが削除され、 */temp* ディレクトリ全体が削除されます。
+1. 次の *Gruntfile.js* の例に示すように、`initConfig` 関数の内部に `clean` タスクのオプションを追加します。 `clean` タスクで、ディレクトリ文字列の配列が受け入れられます。 このタスクにより、 *wwwroot/lib* からファイルが削除され、 */temp* ディレクトリ全体が削除されます。
 
     ```javascript
     module.exports = function (grunt) {
@@ -170,7 +171,7 @@ Grunt は、*Gruntfile.js* という名前のマニフェストを使用して�
 
     ![[タスク ランナー エクスプローラー] メニュー](using-grunt/_static/task-runner-explorer-menu.png)
 
-1. **タスク ランナー エクスプローラー**の **[タスク]** の下に `clean` が表示されていることを確認します。
+1. **タスク ランナー エクスプローラー** の **[タスク]** の下に `clean` が表示されていることを確認します。
 
     ![タスク ランナー エクスプローラーの [タスク] 一覧](using-grunt/_static/task-runner-explorer-tasks.png)
 
@@ -199,7 +200,7 @@ Grunt は、*Gruntfile.js* という名前のマニフェストを使用して�
 
 1. 次のコードを使用して、`jshint` タスクを追加します。
 
-    jshint `code-quality` ユーティリティは、*temp* ディレクトリにあるすべての JavaScript ファイルに対して実行されます。
+    jshint `code-quality` ユーティリティは、 *temp* ディレクトリにあるすべての JavaScript ファイルに対して実行されます。
 
     ```javascript
     jshint: {
@@ -238,11 +239,11 @@ Grunt は、*Gruntfile.js* という名前のマニフェストを使用して�
 
     ![完全な grunt ファイルの例](using-grunt/_static/gruntfile-js-complete.png)
 
-1. **タスク ランナー エクスプローラー**の [タスク] 一覧に、`clean`、`concat`、`jshint`、および `uglify` の各タスクが含まれることに注意してください。 各タスクを順番に実行し、**ソリューション エクスプローラー**の結果を確認します。 各タスクはエラーなしに実行されるはずです。
+1. **タスク ランナー エクスプローラー** の [タスク] 一覧に、`clean`、`concat`、`jshint`、および `uglify` の各タスクが含まれることに注意してください。 各タスクを順番に実行し、 **ソリューション エクスプローラー** の結果を確認します。 各タスクはエラーなしに実行されるはずです。
 
     ![タスク ランナー エクスプローラーでの各タスクの実行](using-grunt/_static/task-runner-explorer-run-each-task.png)
 
-    concat タスクでは、新しい *combined.js* ファイルが作成され、temp ディレクトリに格納されます。 `jshint` タスクは単に実行されるだけで、出力は生成されません。 `uglify` タスクでは、新しい *combined.min.js* ファイルが作成され、*wwwroot/lib* に格納されます。 完了すると、ソリューションは次のスクリーンショットのようになります。
+    concat タスクでは、新しい *combined.js* ファイルが作成され、temp ディレクトリに格納されます。 `jshint` タスクは単に実行されるだけで、出力は生成されません。 `uglify` タスクでは、新しい *combined.min.js* ファイルが作成され、 *wwwroot/lib* に格納されます。 完了すると、ソリューションは次のスクリーンショットのようになります。
 
     ![すべてのタスク後のソリューション エクスプローラー](using-grunt/_static/solution-explorer-after-all-tasks.png)
 

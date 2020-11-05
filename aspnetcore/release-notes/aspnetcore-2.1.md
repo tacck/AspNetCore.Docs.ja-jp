@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: d10fd89a3eac34e855ba92673033edc541aa6393
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632409"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059716"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 の新機能
 
@@ -54,7 +55,7 @@ ASP.NET Core 2.1 を使用すると、Razor ベースの UI をビルドして�
 
 ASP.NET Core 2.1 では、[ASP.NET Core Identity](xref:security/authentication/identity) を [Razor クラス ライブラリ](xref:razor-pages/ui-class)として提供しています。 Identity を含むアプリでは、新しい Identity スキャフォルダーを適用して、Identity Razor クラス ライブラリ (RCL) に含まれるソース コードを選択的に追加することができます。 コードを変更して動作を変更できるように、ソース コードを生成できます。 たとえば、登録で使用するコードを生成するようにスキャフォルダーに指示できます。 生成されたコードは、Identity RCL の同じコードよりも優先されます。
 
-認証が含まれて**いない**アプリでは、Identity スキャフォルダーを適用して RCL Identity パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
+認証が含まれて **いない** アプリでは、Identity スキャフォルダーを適用して RCL Identity パッケージを追加できます。 生成される Identity コードの選択オプションがあります。
 
 詳細については、「[ASP.NET Core プロジェクトの Identity のスキャフォールディング](xref:security/authentication/scaffold-identity)」を参照してください。
 
@@ -92,7 +93,7 @@ ASP.NET Core では、[EU の一般データ保護規制 (GDPR) ](https://www.eu
 
 テストの作成と実行を効率化する新しいパッケージが導入されました。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) パッケージは、次のタスクを処理します。
 
-* テスト対象のアプリから依存関係ファイル ( *\*.deps*) をプロジェクトの *bin* フォルダーにコピーします。
+* テスト対象のアプリから依存関係ファイル ( *\*.deps* ) をプロジェクトの *bin* フォルダーにコピーします。
 * テストを実行したときに、静的なファイルとページ/ビューが検出されるように、コンテンツ ルートをテスト対象のアプリのプロジェクト ルートに設定します。
 * [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) クラスを提供して、[TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) を使用してテスト対象のアプリのブートストラップを効率化します。
 

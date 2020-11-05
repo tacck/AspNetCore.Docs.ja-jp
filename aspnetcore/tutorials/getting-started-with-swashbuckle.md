@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 84094dce306e10470ec7b7be3efe6da024470330
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628847"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057610"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle と ASP.NET Core の概要
 
@@ -55,14 +56,14 @@ Swashbuckle は、次の方法で追加できます。
 
 * **[NuGet パッケージの管理]** ダイアログ ボックスから:
   * **[ソリューション エクスプローラー]**  >  **[NuGet パッケージの管理]** でプロジェクトを右クリックします。
-  * **パッケージ ソース**を "nuget.org" に設定します。
+  * **パッケージ ソース** を "nuget.org" に設定します。
   * [プレリリースを含める] オプションが有効になっていることを確認します
   * 検索ボックスに「Swashbuckle.AspNetCore」と入力します。
   * **[参照]** タブから最新の "Swashbuckle.AspNetCore"パッケージを選択して、 **[インストール]** をクリックします
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* **[Solution Pad]**  >  **[パッケージを追加]** で [*パッケージ*] フォルダーを右クリックします。
+* **[Solution Pad]**  >  **[パッケージを追加]** で [ *パッケージ* ] フォルダーを右クリックします。
 * **[パッケージを追加]** ウィンドウの **[ソース]** ドロップダウンを "nuget.org" に設定します。
 * [プレリリースパッケージを表示する] オプションが有効になっていることを確認します
 * 検索ボックスに「Swashbuckle.AspNetCore」と入力します。
@@ -70,7 +71,7 @@ Swashbuckle は、次の方法で追加できます。
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**統合ターミナル**からから次のコマンドを実行します。
+**統合ターミナル** からから次のコマンドを実行します。
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -179,7 +180,7 @@ XML コメントは、次の方法で有効にすることができます。
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* **ソリューション エクスプローラー**でプロジェクトを右クリックし、 **[<project_name>.csproj の編集]** を選択します。
+* **ソリューション エクスプローラー** でプロジェクトを右クリックし、 **[<project_name>.csproj の編集]** を選択します。
 * 強調表示された行を手動で *.csproj* ファイルに追加します。
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -188,7 +189,7 @@ XML コメントは、次の方法で有効にすることができます。
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* **ソリューション エクスプローラー**でプロジェクトを右クリックして、 **[プロパティ]** を選択します。
+* **ソリューション エクスプローラー** でプロジェクトを右クリックして、 **[プロパティ]** を選択します。
 * **[ビルド]** タブの **[出力]** セクションの下にある **[XML ドキュメント ファイル]** チェック ボックスをオンにします。
 
 ::: moniker-end
@@ -285,7 +286,7 @@ namespace TodoApi
 }
 ```
 
-上記の手順で生成される XML ファイルを使用するように、Swagger を構成します。 Linux または Windows 以外のオペレーティング システムでは、ファイル名やパスで大文字小文字が区別されます。 たとえば、*TodoApi.XML* ファイルは Windows では有効ですが、CentOS では無効です。
+上記の手順で生成される XML ファイルを使用するように、Swagger を構成します。 Linux または Windows 以外のオペレーティング システムでは、ファイル名やパスで大文字小文字が区別されます。 たとえば、 *TodoApi.XML* ファイルは Windows では有効ですが、CentOS では無効です。
 
 ::: moniker range=">= aspnetcore-3.0"
 
