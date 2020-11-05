@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: aacaf9cca131d3fba1c3ae96cf42d51d3fdc17b6
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 4968ac889cd3b4e0780ce73dc729d0107a416932
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945429"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061016"
 ---
 # <a name="grpc-services-with-c"></a>C\# を使用した gRPC サービス
 
@@ -39,7 +40,7 @@ gRPC では、API 開発に対してコントラクト優先のアプローチ�
 
 protobuf ファイルの構文の詳細については、「<xref:grpc/protobuf>」を参照してください。
 
-たとえば、[gRPC サービスの概要に関するページ](xref:tutorials/grpc/grpc-start)で使用されている *greet.proto* ファイルについて考えてみます。
+たとえば、 [gRPC サービスの概要に関するページ](xref:tutorials/grpc/grpc-start)で使用されている *greet.proto* ファイルについて考えてみます。
 
 * `Greeter` サービスを定義します。
 * `Greeter` サービスで `SayHello` 呼び出しを定義します。

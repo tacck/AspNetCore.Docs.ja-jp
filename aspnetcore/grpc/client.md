@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 07/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 6515e87845cc5aa101532c18711d175a73581bee
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 9322020083ce25b00b2979633ae8a692cfd4da4a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722710"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060964"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
@@ -33,7 +34,7 @@ ms.locfileid: "90722710"
 
 ## <a name="configure-grpc-client"></a>gRPC クライアントを構成する
 
-gRPC クライアントは、[ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。 たとえば、`Greeter` というサービスにより、サービスを呼び出すメソッドを含む `GreeterClient` 型が生成されます。
+gRPC クライアントは、 [ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。 たとえば、`Greeter` というサービスにより、サービスを呼び出すメソッドを含む `GreeterClient` 型が生成されます。
 
 gRPC クライアントはチャネルから作成されます。 まず `GrpcChannel.ForAddress` を使用してチャネルを作成し、次にそのチャネルを使用して、gRPC クライアントを作成します。
 
@@ -137,7 +138,7 @@ await foreach (var response in call.ResponseStream.ReadAllAsync())
 
 ### <a name="client-streaming-call"></a>クライアント ストリーミング呼び出し
 
-クライアント ストリーミング呼び出しは、メッセージを送信するクライアント*なしで*始まります。 クライアントでは、`RequestStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 クライアントがメッセージの送信を完了したら、`RequestStream.CompleteAsync()` を呼び出してサービスに通知する必要があります。 サービスが応答メッセージを返すと呼び出しが完了します。
+クライアント ストリーミング呼び出しは、メッセージを送信するクライアント *なしで* 始まります。 クライアントでは、`RequestStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 クライアントがメッセージの送信を完了したら、`RequestStream.CompleteAsync()` を呼び出してサービスに通知する必要があります。 サービスが応答メッセージを返すと呼び出しが完了します。
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -156,7 +157,7 @@ Console.WriteLine($"Count: {response.Count}");
 
 ### <a name="bi-directional-streaming-call"></a>双方向ストリーミング呼び出し
 
-双方向ストリーミング呼び出しは、メッセージを送信するクライアント*なしで*始まります。 クライアントでは、`RequestStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 サービスからストリーミングされたメッセージには、`ResponseStream.MoveNext()` または `ResponseStream.ReadAllAsync()` を使用してアクセスできます。 双方向ストリーミング呼び出しは、`ResponseStream` にメッセージがなくなると完了します。
+双方向ストリーミング呼び出しは、メッセージを送信するクライアント *なしで* 始まります。 クライアントでは、`RequestStream.WriteAsync` を使用して、メッセージを送信することを選択できます。 サービスからストリーミングされたメッセージには、`ResponseStream.MoveNext()` または `ResponseStream.ReadAllAsync()` を使用してアクセスできます。 双方向ストリーミング呼び出しは、`ResponseStream` にメッセージがなくなると完了します。
 
 ```csharp
 var client = new Echo.EchoClient(channel);

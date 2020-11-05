@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: fadd93cf28603653e20ed6c7dceadcabf0dfb9a5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627521"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061055"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core でホスティング スタートアップ アセンブリを使用する
 
@@ -105,20 +106,20 @@ ms.locfileid: "88627521"
 
 クラス ライブラリでは、ホスティング スタートアップの拡張機能を提供できます。 このライブラリには `HostingStartup` 属性が含まれています。
 
-[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、*HostingStartupApp*、クラス ライブラリ、*HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
+[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、 *HostingStartupApp* 、クラス ライブラリ、 *HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
 
 * `IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。 `ServiceKeyInjection` では、メモリ内の構成プロバイダー ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) を使用して、サービスの文字列のペアがアプリの構成に追加されます。
 * ホスティング スタートアップの名前空間とクラスを識別する `HostingStartup` 属性。
 
 `ServiceKeyInjection` クラスの <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> メソッドでは、<xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> を使ってアプリに拡張機能を追加します。
 
-*HostingStartupLibrary/ServiceKeyInjection.cs*:
+*HostingStartupLibrary/ServiceKeyInjection.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 アプリのインデックス ページでは、クラス ライブラリのホスティング スタートアップ アセンブリによって設定された 2 つのキーの構成値が読み取られて表示されます。
 
-*HostingStartupApp/Pages/Index.cshtml.cs*:
+*HostingStartupApp/Pages/Index.cshtml.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
@@ -127,13 +128,13 @@ ms.locfileid: "88627521"
 * `IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。 `ServiceKeyInjection` では、アプリの構成にサービス文字列のペアが追加されます。
 * `HostingStartup`属性。
 
-*HostingStartupPackage/ServiceKeyInjection.cs*:
+*HostingStartupPackage/ServiceKeyInjection.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 アプリのインデックス ページでは、パッケージのホスティング スタートアップ アセンブリによって設定された 2 つのキーの構成値が読み取られて表示されます。
 
-*HostingStartupApp/Pages/Index.cshtml.cs*:
+*HostingStartupApp/Pages/Index.cshtml.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/3.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
@@ -169,7 +170,7 @@ ms.locfileid: "88627521"
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-`IHostingStartup` プロジェクトのビルド時に、依存関係ファイル ( *.deps.json*) によってアセンブリの `runtime` の場所が *bin* フォルダーに設定されます。
+`IHostingStartup` プロジェクトのビルド時に、依存関係ファイル ( *.deps.json* ) によってアセンブリの `runtime` の場所が *bin* フォルダーに設定されます。
 
 [!code-json[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -262,7 +263,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 dotnet store --manifest {MANIFEST FILE} --runtime {RUNTIME IDENTIFIER} --output {OUTPUT LOCATION} --skip-optimization
 ```
 
-サンプル アプリ (*RuntimeStore* プロジェクト) では、次のコマンドを使用します。
+サンプル アプリ ( *RuntimeStore* プロジェクト) では、次のコマンドを使用します。
 
 ```dotnetcli
 dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./deployment/store --skip-optimization
@@ -339,7 +340,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 * `{SHARED FRAMEWORK VERSION}`:共有フレームワークの最小バージョン。
 * `{ENHANCEMENT ASSEMBLY NAME}`:拡張機能のアセンブリ名。
 
-サンプル アプリ (*RuntimeStore* プロジェクト) では、追加の依存関係ファイルは以下の場所に配置されます。
+サンプル アプリ ( *RuntimeStore* プロジェクト) では、追加の依存関係ファイルは以下の場所に配置されます。
 
 ```
 deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnostics.deps.json
@@ -347,7 +348,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnosti
 
 ランタイムでランタイム ストアの場所を検出できるように、追加の依存関係ファイルの場所が環境変数 `DOTNET_ADDITIONAL_DEPS` に追加されます。
 
-サンプル アプリ (*RuntimeStore* プロジェクト) では、[PowerShell](/powershell/scripting/powershell-scripting) スクリプトを使用してランタイム ストアのビルドと追加の依存関係ファイルの生成を行います。
+サンプル アプリ ( *RuntimeStore* プロジェクト) では、 [PowerShell](/powershell/scripting/powershell-scripting) スクリプトを使用してランタイム ストアのビルドと追加の依存関係ファイルの生成を行います。
 
 さまざまなオペレーティング システムの環境変数を設定する方法の例については、[複数の環境の使用](xref:fundamentals/environments)に関するページを参照してください。
 
@@ -363,7 +364,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/3.0.0/StartupDiagnosti
 
 NuGet パッケージでは、ホスティング スタートアップの拡張機能を提供できます。 このパッケージには `HostingStartup` 属性があります。 このパッケージで提供される種類のホスティング スタートアップは、次のアプローチのいずれかを使用してアプリで利用できるようになります。
 
-* 機能強化されたアプリのプロジェクト ファイルでは、アプリのプロジェクト ファイル内のホスティング スタートアップに対するパッケージ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json*) に組み込まれます。 このアプローチは、[nuget.org](https://www.nuget.org/) に発行されるホスティング スタートアップ アセンブリ パッケージに適用されます。
+* 機能強化されたアプリのプロジェクト ファイルでは、アプリのプロジェクト ファイル内のホスティング スタートアップに対するパッケージ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json* ) に組み込まれます。 このアプローチは、[nuget.org](https://www.nuget.org/) に発行されるホスティング スタートアップ アセンブリ パッケージに適用されます。
 * ホスティング スタートアップの依存関係ファイルは、「[ランタイム ストア](#runtime-store)」のセクションで説明にしたように (コンパイル参照がない場合)、機能強化されたアプリで利用できるようになります。
 
 NuGet パッケージとランタイム ストアの詳細については、次のトピックを参照してください。
@@ -376,12 +377,12 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 
 ホスティング スタートアップの拡張機能は、機能強化されたアプリ内の *bin* 配置アセンブリによって提供できます。 このアセンブリで提供される種類のホスティング スタートアップは、次のアプローチのいずれかを使用してアプリで利用できるようになります。
 
-* 機能強化されたアプリのプロジェクト ファイルでは、ホスティング スタートアップへのアセンブリ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json*) に組み込まれます。 この手法は、展開シナリオによって、ホスティング スタートアップのアセンブリ ( *.dll* ファイル) に対してコンパイル時参照を作成し、次のいずれかにそのアセンブリを移動させることが要請される場合に適用されます。
+* 機能強化されたアプリのプロジェクト ファイルでは、ホスティング スタートアップへのアセンブリ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json* ) に組み込まれます。 この手法は、展開シナリオによって、ホスティング スタートアップのアセンブリ ( *.dll* ファイル) に対してコンパイル時参照を作成し、次のいずれかにそのアセンブリを移動させることが要請される場合に適用されます。
   * 使用するプロジェクト。
   * 使用するプロジェクトでアクセスできる場所。
 * ホスティング スタートアップの依存関係ファイルは、「[ランタイム ストア](#runtime-store)」のセクションで説明にしたように (コンパイル参照がない場合)、機能強化されたアプリで利用できるようになります。
 * .NET Framework を対象にするとき、アセンブリは既定の読み込みコンテキストで読み込み可能です。これは、.NET Framework の場合、アセンブリが次のいずれかの場所にあることを意味します。
-  * アプリケーション ベース パス:アプリの実行可能ファイル ( *.exe*) が置かれている *bin* フォルダー。
+  * アプリケーション ベース パス:アプリの実行可能ファイル ( *.exe* ) が置かれている *bin* フォルダー。
   * グローバル アセンブリ キャッシュ (GAC):GAC には、複数の .NET Framework アプリで共有されるアセンブリが格納されています。 詳細については、「[方法: アセンブリをグローバル アセンブリ キャッシュにインストールする](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)」を参照してください。これは .NET Framework ドキュメントにあります。
 
 ## <a name="sample-code"></a>サンプル コード
@@ -389,9 +390,9 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 [サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([ダウンロードする方法](xref:index#how-to-download-a-sample)) では、ホスティング スタートアップ実装のシナリオを示します。
 
 * 2 つのホスティング スタートアップ アセンブリ (クラス ライブラリ) ではそれぞれ、メモリ内の構成のキーと値のペアの組が設定されます。
-  * NuGet パッケージ (*HostingStartupPackage*)
-  * クラス ライブラリ (*HostingStartupLibrary*)
-* ホスティング スタートアップは、ランタイム ストア配置アセンブリ (*StartupDiagnostics*) からアクティブ化されます。 このアセンブリによってスタートアップ時に 2 つのミドルウェアがアプリに追加され、これにより診断情報が提供されます。
+  * NuGet パッケージ ( *HostingStartupPackage* )
+  * クラス ライブラリ ( *HostingStartupLibrary* )
+* ホスティング スタートアップは、ランタイム ストア配置アセンブリ ( *StartupDiagnostics* ) からアクティブ化されます。 このアセンブリによってスタートアップ時に 2 つのミドルウェアがアプリに追加され、これにより診断情報が提供されます。
   * 登録サービス
   * アドレス (スキーム、ホスト、パス ベース、パス、クエリ文字列)
   * 接続 (リモート IP、リモート ポート、ローカル IP、ローカル ポート、クライアント証明書)
@@ -404,7 +405,7 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 
 1. [dotnet pack](/dotnet/core/tools/dotnet-pack) コマンドを使用して *HostingStartupPackage* パッケージをコンパイルします。
 1. *HostingStartupPackage* のパッケージのアセンブリ名を `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境変数に追加します。
-1. アプリをコンパイルして実行します。 機能拡張されたアプリにはパッケージ参照 (コンパイル時参照) が存在します。 アプリのプロジェクト ファイル内の `<PropertyGroup>` では、パッケージ プロジェクトの出力 ( *../HostingStartupPackage/Bin/debug*) がパッケージ ソースとして指定されます。 これにより、[nuget.org](https://www.nuget.org/) にパッケージをアップロードすることなく、アプリによりパッケージが使用されるようになります。詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
+1. アプリをコンパイルして実行します。 機能拡張されたアプリにはパッケージ参照 (コンパイル時参照) が存在します。 アプリのプロジェクト ファイル内の `<PropertyGroup>` では、パッケージ プロジェクトの出力 ( *../HostingStartupPackage/Bin/debug* ) がパッケージ ソースとして指定されます。 これにより、[nuget.org](https://www.nuget.org/) にパッケージをアップロードすることなく、アプリによりパッケージが使用されるようになります。詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
 
    ```xml
    <PropertyGroup>
@@ -414,7 +415,7 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 
 1. インデックス ページで表示されるサービス構成キー値が、パッケージの `ServiceKeyInjection.Configure` メソッドによって設定された値と一致することを確認します。
 
-*HostingStartupPackage* プロジェクトに変更を加えてそれをコンパイルする場合は、ローカル キャッシュから、古いパッケージではなく更新されたパッケージが、*HostingStartupApp* によって確実に受信されるように、ローカルの NuGet パッケージ キャッシュをクリアします。 ローカルの NuGet キャッシュをクリアするには、次の [dotnet nuget locals](/dotnet/core/tools/dotnet-nuget-locals) コマンドを実行します。
+*HostingStartupPackage* プロジェクトに変更を加えてそれをコンパイルする場合は、ローカル キャッシュから、古いパッケージではなく更新されたパッケージが、 *HostingStartupApp* によって確実に受信されるように、ローカルの NuGet パッケージ キャッシュをクリアします。 ローカルの NuGet キャッシュをクリアするには、次の [dotnet nuget locals](/dotnet/core/tools/dotnet-nuget-locals) コマンドを実行します。
 
 ```dotnetcli
 dotnet nuget locals all --clear
@@ -425,7 +426,7 @@ dotnet nuget locals all --clear
 1. [dotnet build](/dotnet/core/tools/dotnet-build) コマンドを使用して *HostingStartupLibrary* クラス ライブラリをコンパイルします。
 1. *HostingStartupLibrary* のクラス ライブラリのアセンブリ名を `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境変数に追加します。
 1. クラス ライブラリのアセンブリをアプリに *bin* 配置するには、クラス ライブラリのコンパイルされた出力からアプリの *bin/Debug* フォルダーに *HostingStartupLibrary.dll* ファイルをコピーします。
-1. アプリをコンパイルして実行します。 アプリのプロジェクト ファイル内の `<ItemGroup>` により、クラス ライブラリのアセンブリ ( *.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll*) が参照されます (コンパイル時参照)。 詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
+1. アプリをコンパイルして実行します。 アプリのプロジェクト ファイル内の `<ItemGroup>` により、クラス ライブラリのアセンブリ ( *.\bin\Debug\netcoreapp3.0\HostingStartupLibrary.dll* ) が参照されます (コンパイル時参照)。 詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
 
    ```xml
    <ItemGroup>
@@ -440,7 +441,7 @@ dotnet nuget locals all --clear
 
 **ランタイム ストア配置アセンブリからのアクティブ化**
 
-1. *StartupDiagnostics* プロジェクトでは、[PowerShell](/powershell/scripting/powershell-scripting) を使用して、その *StartupDiagnostics.deps.json* ファイルを変更します。 既定では、PowerShell は Windows 7 SP1 と Windows Server 2008 R2 SP1 以降の Windows 上にインストールされます。 他のプラットフォームで PowerShell を取得するには、「[PowerShell のさまざまなバージョンのインストール](/powershell/scripting/install/installing-powershell)」を参照してください。
+1. *StartupDiagnostics* プロジェクトでは、 [PowerShell](/powershell/scripting/powershell-scripting) を使用して、その *StartupDiagnostics.deps.json* ファイルを変更します。 既定では、PowerShell は Windows 7 SP1 と Windows Server 2008 R2 SP1 以降の Windows 上にインストールされます。 他のプラットフォームで PowerShell を取得するには、「[PowerShell のさまざまなバージョンのインストール](/powershell/scripting/install/installing-powershell)」を参照してください。
 1. *RuntimeStore* フォルダーにある *build.ps1* スクリプトを実行します。 スクリプトでは次のことが行われます。
    * *obj\packages* フォルダーに `StartupDiagnostics` パッケージが生成されます。
    * *store* フォルダー内に `StartupDiagnostics` 用のランタイム ストアが生成されます。 スクリプト内の `dotnet store` コマンドでは、Windows に展開されているホスティング スタートアップの `win7-x64`[ランタイム識別子 (RID)](/dotnet/core/rid-catalog) が使用されます。 別のランタイムに対してホスティング スタートアップを指定する場合は、スクリプトの 37 行目を適切な RID に置き換えます。 `StartupDiagnostics` のランタイム ストアは、後で、アセンブリが使用されるコンピューター上のユーザーまたはシステムのランタイム ストアに移動されます。 `StartupDiagnostics` アセンブリのユーザー ランタイム ストアのインストール場所は、 *.dotnet/store/x64/netcoreapp3.0/startupdiagnostics/1.0.0/lib/netcoreapp3.0/StartupDiagnostics.dll* です。
@@ -503,20 +504,20 @@ dotnet nuget locals all --clear
 
 クラス ライブラリでは、ホスティング スタートアップの拡張機能を提供できます。 このライブラリには `HostingStartup` 属性が含まれています。
 
-[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、*HostingStartupApp*、クラス ライブラリ、*HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
+[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、 *HostingStartupApp* 、クラス ライブラリ、 *HostingStartupLibrary* が含まれています。 クラス ライブラリには次のものが含まれています。
 
 * `IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。 `ServiceKeyInjection` では、メモリ内の構成プロバイダー ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) を使用して、サービスの文字列のペアがアプリの構成に追加されます。
 * ホスティング スタートアップの名前空間とクラスを識別する `HostingStartup` 属性。
 
 `ServiceKeyInjection` クラスの <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> メソッドでは、<xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> を使ってアプリに拡張機能を追加します。
 
-*HostingStartupLibrary/ServiceKeyInjection.cs*:
+*HostingStartupLibrary/ServiceKeyInjection.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupLibrary/ServiceKeyInjection.cs?name=snippet1)]
 
 アプリのインデックス ページでは、クラス ライブラリのホスティング スタートアップ アセンブリによって設定された 2 つのキーの構成値が読み取られて表示されます。
 
-*HostingStartupApp/Pages/Index.cshtml.cs*:
+*HostingStartupApp/Pages/Index.cshtml.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=5-6,11-12)]
 
@@ -525,13 +526,13 @@ dotnet nuget locals all --clear
 * `IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。 `ServiceKeyInjection` では、アプリの構成にサービス文字列のペアが追加されます。
 * `HostingStartup`属性。
 
-*HostingStartupPackage/ServiceKeyInjection.cs*:
+*HostingStartupPackage/ServiceKeyInjection.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupPackage/ServiceKeyInjection.cs?name=snippet1)]
 
 アプリのインデックス ページでは、パッケージのホスティング スタートアップ アセンブリによって設定された 2 つのキーの構成値が読み取られて表示されます。
 
-*HostingStartupApp/Pages/Index.cshtml.cs*:
+*HostingStartupApp/Pages/Index.cshtml.cs* :
 
 [!code-csharp[](platform-specific-configuration/samples/2.x/HostingStartupApp/Pages/Index.cshtml.cs?name=snippet1&highlight=7-8,13-14)]
 
@@ -567,7 +568,7 @@ dotnet nuget locals all --clear
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
-`IHostingStartup` プロジェクトのビルド時に、依存関係ファイル ( *.deps.json*) によってアセンブリの `runtime` の場所が *bin* フォルダーに設定されます。
+`IHostingStartup` プロジェクトのビルド時に、依存関係ファイル ( *.deps.json* ) によってアセンブリの `runtime` の場所が *bin* フォルダーに設定されます。
 
 [!code-json[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement1.deps.json?range=2-13&highlight=8)]
 
@@ -648,7 +649,7 @@ HostingStartupLibrary;HostingStartupPackage;StartupDiagnostics
 dotnet store --manifest {MANIFEST FILE} --runtime {RUNTIME IDENTIFIER} --output {OUTPUT LOCATION} --skip-optimization
 ```
 
-サンプル アプリ (*RuntimeStore* プロジェクト) では、次のコマンドを使用します。
+サンプル アプリ ( *RuntimeStore* プロジェクト) では、次のコマンドを使用します。
 
 ```dotnetcli
 dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./deployment/store --skip-optimization
@@ -725,7 +726,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 * `{SHARED FRAMEWORK VERSION}`:共有フレームワークの最小バージョン。
 * `{ENHANCEMENT ASSEMBLY NAME}`:拡張機能のアセンブリ名。
 
-サンプル アプリ (*RuntimeStore* プロジェクト) では、追加の依存関係ファイルは以下の場所に配置されます。
+サンプル アプリ ( *RuntimeStore* プロジェクト) では、追加の依存関係ファイルは以下の場所に配置されます。
 
 ```
 deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnostics.deps.json
@@ -733,7 +734,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnosti
 
 ランタイムでランタイム ストアの場所を検出できるように、追加の依存関係ファイルの場所が環境変数 `DOTNET_ADDITIONAL_DEPS` に追加されます。
 
-サンプル アプリ (*RuntimeStore* プロジェクト) では、[PowerShell](/powershell/scripting/powershell-scripting) スクリプトを使用してランタイム ストアのビルドと追加の依存関係ファイルの生成を行います。
+サンプル アプリ ( *RuntimeStore* プロジェクト) では、 [PowerShell](/powershell/scripting/powershell-scripting) スクリプトを使用してランタイム ストアのビルドと追加の依存関係ファイルの生成を行います。
 
 さまざまなオペレーティング システムの環境変数を設定する方法の例については、[複数の環境の使用](xref:fundamentals/environments)に関するページを参照してください。
 
@@ -749,7 +750,7 @@ deployment/additionalDeps/shared/Microsoft.AspNetCore.App/2.1.0/StartupDiagnosti
 
 NuGet パッケージでは、ホスティング スタートアップの拡張機能を提供できます。 このパッケージには `HostingStartup` 属性があります。 このパッケージで提供される種類のホスティング スタートアップは、次のアプローチのいずれかを使用してアプリで利用できるようになります。
 
-* 機能強化されたアプリのプロジェクト ファイルでは、アプリのプロジェクト ファイル内のホスティング スタートアップに対するパッケージ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json*) に組み込まれます。 このアプローチは、[nuget.org](https://www.nuget.org/) に発行されるホスティング スタートアップ アセンブリ パッケージに適用されます。
+* 機能強化されたアプリのプロジェクト ファイルでは、アプリのプロジェクト ファイル内のホスティング スタートアップに対するパッケージ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json* ) に組み込まれます。 このアプローチは、[nuget.org](https://www.nuget.org/) に発行されるホスティング スタートアップ アセンブリ パッケージに適用されます。
 * ホスティング スタートアップの依存関係ファイルは、「[ランタイム ストア](#runtime-store)」のセクションで説明にしたように (コンパイル参照がない場合)、機能強化されたアプリで利用できるようになります。
 
 NuGet パッケージとランタイム ストアの詳細については、次のトピックを参照してください。
@@ -762,12 +763,12 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 
 ホスティング スタートアップの拡張機能は、機能強化されたアプリ内の *bin* 配置アセンブリによって提供できます。 このアセンブリで提供される種類のホスティング スタートアップは、次のアプローチのいずれかを使用してアプリで利用できるようになります。
 
-* 機能強化されたアプリのプロジェクト ファイルでは、ホスティング スタートアップへのアセンブリ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json*) に組み込まれます。 この手法は、展開シナリオによって、ホスティング スタートアップのアセンブリ ( *.dll* ファイル) に対してコンパイル時参照を作成し、次のいずれかにそのアセンブリを移動させることが要請される場合に適用されます。
+* 機能強化されたアプリのプロジェクト ファイルでは、ホスティング スタートアップへのアセンブリ参照 (コンパイル時参照) が作成されます。 コンパイル時参照を適用すると、ホスティング スタートアップ アセンブリとその依存関係のすべてが、アプリの依存関係ファイル ( *.deps.json* ) に組み込まれます。 この手法は、展開シナリオによって、ホスティング スタートアップのアセンブリ ( *.dll* ファイル) に対してコンパイル時参照を作成し、次のいずれかにそのアセンブリを移動させることが要請される場合に適用されます。
   * 使用するプロジェクト。
   * 使用するプロジェクトでアクセスできる場所。
 * ホスティング スタートアップの依存関係ファイルは、「[ランタイム ストア](#runtime-store)」のセクションで説明にしたように (コンパイル参照がない場合)、機能強化されたアプリで利用できるようになります。
 * .NET Framework を対象にするとき、アセンブリは既定の読み込みコンテキストで読み込み可能です。これは、.NET Framework の場合、アセンブリが次のいずれかの場所にあることを意味します。
-  * アプリケーション ベース パス:アプリの実行可能ファイル ( *.exe*) が置かれている *bin* フォルダー。
+  * アプリケーション ベース パス:アプリの実行可能ファイル ( *.exe* ) が置かれている *bin* フォルダー。
   * グローバル アセンブリ キャッシュ (GAC):GAC には、複数の .NET Framework アプリで共有されるアセンブリが格納されています。 詳細については、「[方法: アセンブリをグローバル アセンブリ キャッシュにインストールする](/dotnet/framework/app-domains/how-to-install-an-assembly-into-the-gac)」を参照してください。これは .NET Framework ドキュメントにあります。
 
 ## <a name="sample-code"></a>サンプル コード
@@ -775,9 +776,9 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 [サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ([ダウンロードする方法](xref:index#how-to-download-a-sample)) では、ホスティング スタートアップ実装のシナリオを示します。
 
 * 2 つのホスティング スタートアップ アセンブリ (クラス ライブラリ) ではそれぞれ、メモリ内の構成のキーと値のペアの組が設定されます。
-  * NuGet パッケージ (*HostingStartupPackage*)
-  * クラス ライブラリ (*HostingStartupLibrary*)
-* ホスティング スタートアップは、ランタイム ストア配置アセンブリ (*StartupDiagnostics*) からアクティブ化されます。 このアセンブリによってスタートアップ時に 2 つのミドルウェアがアプリに追加され、これにより診断情報が提供されます。
+  * NuGet パッケージ ( *HostingStartupPackage* )
+  * クラス ライブラリ ( *HostingStartupLibrary* )
+* ホスティング スタートアップは、ランタイム ストア配置アセンブリ ( *StartupDiagnostics* ) からアクティブ化されます。 このアセンブリによってスタートアップ時に 2 つのミドルウェアがアプリに追加され、これにより診断情報が提供されます。
   * 登録サービス
   * アドレス (スキーム、ホスト、パス ベース、パス、クエリ文字列)
   * 接続 (リモート IP、リモート ポート、ローカル IP、ローカル ポート、クライアント証明書)
@@ -790,7 +791,7 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 
 1. [dotnet pack](/dotnet/core/tools/dotnet-pack) コマンドを使用して *HostingStartupPackage* パッケージをコンパイルします。
 1. *HostingStartupPackage* のパッケージのアセンブリ名を `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境変数に追加します。
-1. アプリをコンパイルして実行します。 機能拡張されたアプリにはパッケージ参照 (コンパイル時参照) が存在します。 アプリのプロジェクト ファイル内の `<PropertyGroup>` では、パッケージ プロジェクトの出力 ( *../HostingStartupPackage/Bin/debug*) がパッケージ ソースとして指定されます。 これにより、[nuget.org](https://www.nuget.org/) にパッケージをアップロードすることなく、アプリによりパッケージが使用されるようになります。詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
+1. アプリをコンパイルして実行します。 機能拡張されたアプリにはパッケージ参照 (コンパイル時参照) が存在します。 アプリのプロジェクト ファイル内の `<PropertyGroup>` では、パッケージ プロジェクトの出力 ( *../HostingStartupPackage/Bin/debug* ) がパッケージ ソースとして指定されます。 これにより、[nuget.org](https://www.nuget.org/) にパッケージをアップロードすることなく、アプリによりパッケージが使用されるようになります。詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
 
    ```xml
    <PropertyGroup>
@@ -800,7 +801,7 @@ NuGet パッケージとランタイム ストアの詳細については、次�
 
 1. インデックス ページで表示されるサービス構成キー値が、パッケージの `ServiceKeyInjection.Configure` メソッドによって設定された値と一致することを確認します。
 
-*HostingStartupPackage* プロジェクトに変更を加えてそれをコンパイルする場合は、ローカル キャッシュから、古いパッケージではなく更新されたパッケージが、*HostingStartupApp* によって確実に受信されるように、ローカルの NuGet パッケージ キャッシュをクリアします。 ローカルの NuGet キャッシュをクリアするには、次の [dotnet nuget locals](/dotnet/core/tools/dotnet-nuget-locals) コマンドを実行します。
+*HostingStartupPackage* プロジェクトに変更を加えてそれをコンパイルする場合は、ローカル キャッシュから、古いパッケージではなく更新されたパッケージが、 *HostingStartupApp* によって確実に受信されるように、ローカルの NuGet パッケージ キャッシュをクリアします。 ローカルの NuGet キャッシュをクリアするには、次の [dotnet nuget locals](/dotnet/core/tools/dotnet-nuget-locals) コマンドを実行します。
 
 ```dotnetcli
 dotnet nuget locals all --clear
@@ -811,7 +812,7 @@ dotnet nuget locals all --clear
 1. [dotnet build](/dotnet/core/tools/dotnet-build) コマンドを使用して *HostingStartupLibrary* クラス ライブラリをコンパイルします。
 1. *HostingStartupLibrary* のクラス ライブラリのアセンブリ名を `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 環境変数に追加します。
 1. クラス ライブラリのアセンブリをアプリに *bin* 配置するには、クラス ライブラリのコンパイルされた出力からアプリの *bin/Debug* フォルダーに *HostingStartupLibrary.dll* ファイルをコピーします。
-1. アプリをコンパイルして実行します。 アプリのプロジェクト ファイル内の `<ItemGroup>` は、クラス ライブラリのアセンブリ ( *.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll*) を参照します (コンパイル時参照)。 詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
+1. アプリをコンパイルして実行します。 アプリのプロジェクト ファイル内の `<ItemGroup>` は、クラス ライブラリのアセンブリ ( *.\bin\Debug\netcoreapp2.1\HostingStartupLibrary.dll* ) を参照します (コンパイル時参照)。 詳細については、HostingStartupApp のプロジェクト ファイル内の注を参照してください。
 
    ```xml
    <ItemGroup>
@@ -826,7 +827,7 @@ dotnet nuget locals all --clear
 
 **ランタイム ストア配置アセンブリからのアクティブ化**
 
-1. *StartupDiagnostics* プロジェクトでは、[PowerShell](/powershell/scripting/powershell-scripting) を使用して、その *StartupDiagnostics.deps.json* ファイルを変更します。 既定では、PowerShell は Windows 7 SP1 と Windows Server 2008 R2 SP1 以降の Windows 上にインストールされます。 他のプラットフォームで PowerShell を取得するには、「[PowerShell のさまざまなバージョンのインストール](/powershell/scripting/install/installing-powershell)」を参照してください。
+1. *StartupDiagnostics* プロジェクトでは、 [PowerShell](/powershell/scripting/powershell-scripting) を使用して、その *StartupDiagnostics.deps.json* ファイルを変更します。 既定では、PowerShell は Windows 7 SP1 と Windows Server 2008 R2 SP1 以降の Windows 上にインストールされます。 他のプラットフォームで PowerShell を取得するには、「[PowerShell のさまざまなバージョンのインストール](/powershell/scripting/install/installing-powershell)」を参照してください。
 1. *RuntimeStore* フォルダーにある *build.ps1* スクリプトを実行します。 スクリプトでは次のことが行われます。
    * *obj\packages* フォルダーに `StartupDiagnostics` パッケージが生成されます。
    * *store* フォルダー内に `StartupDiagnostics` 用のランタイム ストアが生成されます。 スクリプト内の `dotnet store` コマンドでは、Windows に展開されているホスティング スタートアップの `win7-x64`[ランタイム識別子 (RID)](/dotnet/core/rid-catalog) が使用されます。 別のランタイムに対してホスティング スタートアップを指定する場合は、スクリプトの 37 行目を適切な RID に置き換えます。 `StartupDiagnostics` のランタイム ストアは、後で、アセンブリが使用されるコンピューター上のユーザーまたはシステムのランタイム ストアに移動されます。 `StartupDiagnostics` アセンブリのユーザー ランタイム ストアのインストール場所は、 *.dotnet/store/x64/netcoreapp2.2/startupdiagnostics/1.0.0/lib/netcoreapp2.2/StartupDiagnostics.dll* です。

@@ -5,6 +5,7 @@ description: Razor ページと Entity Framework チュートリアル シリー
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 78eb466fcfeb130e411df490f033114b3fdebeef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722632"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061107"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>パート 4、ASP.NET Core の Razor ページと EF Core の移行
 
@@ -45,7 +46,7 @@ ms.locfileid: "90722632"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**SQL Server オブジェクトエクスプローラー** (SSOX) を使用してデータベースを削除するか、**パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
+**SQL Server オブジェクトエクスプローラー** (SSOX) を使用してデータベースを削除するか、 **パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
 
 ```powershell
 Drop-Database
@@ -59,7 +60,7 @@ Drop-Database
   dotnet tool install --global dotnet-ef
   ```
 
-* コマンド プロンプトで、プロジェクト フォルダーに移動します。 プロジェクトフォルダーには、*ContosoUniversity.csproj* ファイルが含まれています。
+* コマンド プロンプトで、プロジェクト フォルダーに移動します。 プロジェクトフォルダーには、 *ContosoUniversity.csproj* ファイルが含まれています。
 
 * *CU.db* ファイルを削除するか、次のコマンドを実行します。
 
@@ -113,7 +114,7 @@ EF Core の `migrations add` コマンドでは、データベースを作成す
 
 ## <a name="the-data-model-snapshot"></a>データ モデルのスナップショット
 
-移行によって、現在のデータ モデルの*スナップショット*が *Migrations/SchoolContextModelSnapshot.cs* 内に作成されます。 移行を追加するときに、EF では、スナップショット ファイルと現在のデータ モデルを比較することによって変更内容を判断します。
+移行によって、現在のデータ モデルの *スナップショット* が *Migrations/SchoolContextModelSnapshot.cs* 内に作成されます。 移行を追加するときに、EF では、スナップショット ファイルと現在のデータ モデルを比較することによって変更内容を判断します。
 
 スナップショット ファイルではデータ モデルの状態が追跡されるため、`<timestamp>_<migrationname>.cs` ファイルを削除することによって移行を削除することはできません。 最新の移行を取り消すには、`migrations remove` コマンドを使用する必要があります。 このコマンドでは移行が削除され、スナップショットが正しく確実にリセットされます。 詳細については、「[dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)」を参照してください。
 
@@ -132,7 +133,7 @@ context.Database.EnsureCreated();
 
 ## <a name="applying-migrations-in-production"></a>運用環境で移行を適用する
 
-実稼働アプリでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を呼び出さ**ない**ことをお勧めします。 `Migrate` は、サーバー ファームに展開されているアプリから呼び出さないでください。 アプリが複数のサーバー インスタンスにスケールアウトされている場合は、確実にデータベース スキーマの更新が複数のサーバーから行われたり、読み取り/書き込みアクセスと競合したりしないようにするのは困難です。
+実稼働アプリでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を呼び出さ **ない** ことをお勧めします。 `Migrate` は、サーバー ファームに展開されているアプリから呼び出さないでください。 アプリが複数のサーバー インスタンスにスケールアウトされている場合は、確実にデータベース スキーマの更新が複数のサーバーから行われたり、読み取り/書き込みアクセスと競合したりしないようにするのは困難です。
 
 データベースの移行は、展開の一部として制御された方法で行う必要があります。 実稼働データベースの移行には次の方法があります。
 
@@ -250,7 +251,7 @@ EF Core コマンド `migrations add` で、DB の作成元のコードが生成
 
 ### <a name="the-data-model-snapshot"></a>データ モデルのスナップショット
 
-移行は、現在のデータベース スキーマの*スナップショット*を *Migrations/SchoolContextModelSnapshot.cs* 内に作成します。 移行を追加するときに、EF は、スナップショット ファイルとデータ モデルを比較することによって変更内容を判断します。
+移行は、現在のデータベース スキーマの *スナップショット* を *Migrations/SchoolContextModelSnapshot.cs* 内に作成します。 移行を追加するときに、EF は、スナップショット ファイルとデータ モデルを比較することによって変更内容を判断します。
 
 移行を削除するには、次のコマンドを使用します。
 
@@ -276,7 +277,7 @@ remove migrations コマンドによって移行が削除され、スナップ�
 
 * 移行をバイパスし、データベースとスキーマを作成します。
 * 移行テーブルは作成しません。
-* 移行と共に使用することは*できません*。
+* 移行と共に使用することは *できません* 。
 * データベースが頻繁に削除および再作成されるようなテストや迅速なプロトタイプのために設計されています。
 
 `EnsureCreated` を削除します。
@@ -289,13 +290,13 @@ context.Database.EnsureCreated();
 
 ### <a name="inspect-the-database"></a>データベースを検査する
 
-**SQL Server オブジェクト エクスプローラー**を使用してデータベースを検査します。 `__EFMigrationsHistory` テーブルが追加されていることに注意してください。 `__EFMigrationsHistory` テーブルは、どの移行がデータベースに適用されたかを追跡します。 `__EFMigrationsHistory` テーブルのデータを表示すると、最初の移行の 1 つの行が表示されます。 前の CLI の出力例の最後のログは、この行を作成する INSERT ステートメントを示しています。
+**SQL Server オブジェクト エクスプローラー** を使用してデータベースを検査します。 `__EFMigrationsHistory` テーブルが追加されていることに注意してください。 `__EFMigrationsHistory` テーブルは、どの移行がデータベースに適用されたかを追跡します。 `__EFMigrationsHistory` テーブルのデータを表示すると、最初の移行の 1 つの行が表示されます。 前の CLI の出力例の最後のログは、この行を作成する INSERT ステートメントを示しています。
 
 アプリを実行して、すべてが適切に機能していることを確認します。
 
 ## <a name="applying-migrations-in-production"></a>運用環境で移行を適用する
 
-実稼働アプリケーションでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を**呼び出さない**ことをお勧めします。 `Migrate` をサーバー ファームのアプリから呼び出すことはできません。 たとえば、アプリがスケールアウト (アプリの複数のインスタンスを実行する) を使用してクラウドに展開されている場合があります。
+実稼働アプリケーションでは、アプリケーションの起動時に [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) を **呼び出さない** ことをお勧めします。 `Migrate` をサーバー ファームのアプリから呼び出すことはできません。 たとえば、アプリがスケールアウト (アプリの複数のインスタンスを実行する) を使用してクラウドに展開されている場合があります。
 
 データベースの移行は、展開の一部として制御された方法で行う必要があります。 実稼働データベースの移行には次の方法があります。
 

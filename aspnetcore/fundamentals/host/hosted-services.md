@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 04841eb4f6adfec76020d3fe61601037c3fc0733
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635347"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061081"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core でホステッド サービスを使用するバックグラウンド タスク
 
@@ -31,7 +32,7 @@ ms.locfileid: "88635347"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core では、バックグラウンド タスクを*ホステッド サービス*として実装することができます。 ホストされるサービスは、<xref:Microsoft.Extensions.Hosting.IHostedService> インターフェイスを実装するバックグラウンド タスク ロジックを持つクラスです。 このトピックでは、3 つのホステッド サービスの例について説明します。
+ASP.NET Core では、バックグラウンド タスクを *ホステッド サービス* として実装することができます。 ホストされるサービスは、<xref:Microsoft.Extensions.Hosting.IHostedService> インターフェイスを実装するバックグラウンド タスク ロジックを持つクラスです。 このトピックでは、3 つのホステッド サービスの例について説明します。
 
 * タイマーで実行されるバックグラウンド タスク。
 * [スコープ サービス](xref:fundamentals/dependency-injection#service-lifetimes)をアクティブ化するホステッド サービス。 スコープ サービスは[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) を使用できます。
@@ -53,7 +54,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 ## <a name="package"></a>Package
 
-ワーカー サービス テンプレートに基づくアプリは `Microsoft.NET.Sdk.Worker` SDK を使用し、[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) パッケージへの明示的なパッケージ参照を含んでいます。 たとえば、サンプル アプリのプロジェクト ファイル (*BackgroundTasksSample.csproj*) を参照してください。
+ワーカー サービス テンプレートに基づくアプリは `Microsoft.NET.Sdk.Worker` SDK を使用し、[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) パッケージへの明示的なパッケージ参照を含んでいます。 たとえば、サンプル アプリのプロジェクト ファイル ( *BackgroundTasksSample.csproj* ) を参照してください。
 
 `Microsoft.NET.Sdk.Web` SDK を使用する Web アプリの場合、[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) パッケージは共有フレームワークから暗黙的に参照されます。 アプリのプロジェクト ファイル内の明示的なパッケージ参照は必要ありません。
 
@@ -61,7 +62,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 <xref:Microsoft.Extensions.Hosting.IHostedService> インターフェイスは、ホストによって管理されるオブジェクトの 2 つのメソッドを定義します。
 
-* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` には、バックグラウンド タスクを開始するロジックが含まれています。 `StartAsync` は、以下よりも "*前に*" 呼び出されます。
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` には、バックグラウンド タスクを開始するロジックが含まれています。 `StartAsync` は、以下よりも " *前に* " 呼び出されます。
 
   * アプリの要求処理パイプラインが構成される (`Startup.Configure`)。
   * サーバーが起動して、[IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) がトリガーされる。
@@ -127,7 +128,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 前の `DoWork` の実行が完了するまで <xref:System.Threading.Timer> は待機されないため、ここで示したアプローチはすべてのシナリオに適しているとは限りません。 [Interlocked.Increment](xref:System.Threading.Interlocked.Increment*) は、アトミック操作として実行カウンターをインクリメントするために使用されされます。これにより、複数のスレッドによって `executionCount` が同時に更新されなくなります。
 
-サービスは、`AddHostedService` 拡張メソッドを使用して `IHostBuilder.ConfigureServices` (*Program.cs*) に登録されます。
+サービスは、`AddHostedService` 拡張メソッドを使用して `IHostBuilder.ConfigureServices` ( *Program.cs* ) に登録されます。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -146,7 +147,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-サービスは `IHostBuilder.ConfigureServices` (*Program.cs*) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
+サービスは `IHostBuilder.ConfigureServices` ( *Program.cs* ) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -174,7 +175,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-サービスは `IHostBuilder.ConfigureServices` (*Program.cs*) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
+サービスは `IHostBuilder.ConfigureServices` ( *Program.cs* ) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
@@ -186,7 +187,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core では、バックグラウンド タスクを*ホステッド サービス*として実装することができます。 ホストされるサービスは、<xref:Microsoft.Extensions.Hosting.IHostedService> インターフェイスを実装するバックグラウンド タスク ロジックを持つクラスです。 このトピックでは、3 つのホステッド サービスの例について説明します。
+ASP.NET Core では、バックグラウンド タスクを *ホステッド サービス* として実装することができます。 ホストされるサービスは、<xref:Microsoft.Extensions.Hosting.IHostedService> インターフェイスを実装するバックグラウンド タスク ロジックを持つクラスです。 このトピックでは、3 つのホステッド サービスの例について説明します。
 
 * タイマーで実行されるバックグラウンド タスク。
 * [スコープ サービス](xref:fundamentals/dependency-injection#service-lifetimes)をアクティブ化するホステッド サービス。 スコープ サービスは[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) を使用できます

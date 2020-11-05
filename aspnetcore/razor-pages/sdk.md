@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: d11600af88d499d63adf9eae90d6deb929f9d92a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d3b01889b7634dce8ef1d6a4886a9a6ac39a6473
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632916"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060873"
 ---
 # <a name="aspnet-core-no-locrazor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -36,7 +37,7 @@ ms.locfileid: "88632916"
 ::: moniker range=">= aspnetcore-3.0"
 
 * ASP.NET Core MVC ベースまたは [Blazor](xref:blazor/index) プロジェクト用の [Razor](xref:mvc/views/razor) ファイルを含むプロジェクトのビルド、パッケージ化、および発行を行うために必要です。
-* Razor ( *.cshtml* または *.razor*) ファイルのコンパイルのカスタマイズを可能にする事前定義されたターゲット、プロパティ、項目のセットが含まれます。
+* Razor ( *.cshtml* または *.razor* ) ファイルのコンパイルのカスタマイズを可能にする事前定義されたターゲット、プロパティ、項目のセットが含まれます。
 
 Razor SDK には、`Include` 属性が `**\*.cshtml` および `**\*.razor` glob パターンに設定された `Content` 項目が含まれています。 一致するファイルが発行されます。
 
@@ -61,7 +62,7 @@ Razor SDK には、`Include` 属性が `**\*.cshtml` glob パターンに設定�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razor SDK を使用して Razor ビューまたは Razor Pages を含むクラス ライブラリをビルドするには、Razor クラス ライブラリ (RCL) プロジェクト テンプレートを使用して開始することをお勧めします。 Blazor ( *.razor*) ファイルのビルドに使用する RCL では、少なくとも、[Microsoft.AspNetCore.Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) パッケージへの参照が必要です。 RazorRazor ビューまたはページのビルドに使用する RCL ( *.cshtml* ファイル) は、少なくとも `netcoreapp3.0` 以降をターゲットにする必要があり、そのプロジェクト ファイル内には [Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)への `FrameworkReference` があります。
+Razor SDK を使用して Razor ビューまたは Razor Pages を含むクラス ライブラリをビルドするには、Razor クラス ライブラリ (RCL) プロジェクト テンプレートを使用して開始することをお勧めします。 Blazor ( *.razor* ) ファイルのビルドに使用する RCL では、少なくとも、 [Microsoft.AspNetCore.Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) パッケージへの参照が必要です。 RazorRazor ビューまたはページのビルドに使用する RCL ( *.cshtml* ファイル) は、少なくとも `netcoreapp3.0` 以降をターゲットにする必要があり、そのプロジェクト ファイル内には [Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)への `FrameworkReference` があります。
 
 ::: moniker-end
 
@@ -129,14 +130,14 @@ Razor SDK への入力および出力は、次の表のプロパティと項目�
 | `RazorTargetName` | Razor によって生成されたアセンブリのファイル名 (拡張子なし)。 |
 | `RazorOutputPath` | Razor 出力ディレクトリ。 |
 | `RazorCompileToolset` | Razor アセンブリをビルドするために使用するツールセットを決定するために使用します。 有効な値は `Implicit`、`RazorSDK`、`PrecompilationTool` です。 |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 既定値は `true` です。 `true` の場合、プロジェクトのコンテンツとして *web.config* ファイル、*json* ファイル、 *.cshtml* ファイルが含まれます。 `Microsoft.NET.Sdk.Web` を介して参照する場合、*wwwroot* 下のファイルと構成ファイルも含まれます。 |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 既定値は `true` です。 `true` の場合、プロジェクトのコンテンツとして *web.config* ファイル、 *json* ファイル、 *.cshtml* ファイルが含まれます。 `Microsoft.NET.Sdk.Web` を介して参照する場合、 *wwwroot* 下のファイルと構成ファイルも含まれます。 |
 | `EnableDefaultRazorGenerateItems` | `true` の場合、`RazorGenerate` 項目の `Content` 項目の *.cshtml* ファイルが含まれます。 |
 | `GenerateRazorTargetAssemblyInfo` | `true` の場合、`RazorAssemblyAttribute` で指定された属性を含む *.cs* ファイルが生成され、そのファイルがコンパイル出力に含められます。 |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | `true` の場合、`RazorAssemblyAttribute` にアセンブリ属性の既定のセットが追加されます。 |
-| `CopyRazorGenerateFilesToPublishDirectory` | `true` の場合、`RazorGenerate` 項目 ( *.cshtml*) ファイルが発行ディレクトリにコピーされます。 一般に、Razor ファイルがビルド時または発行時にコンパイルに含められる場合、発行済みアプリのためにそれらは必要ありません。 既定値は `false` です。 |
+| `CopyRazorGenerateFilesToPublishDirectory` | `true` の場合、`RazorGenerate` 項目 ( *.cshtml* ) ファイルが発行ディレクトリにコピーされます。 一般に、Razor ファイルがビルド時または発行時にコンパイルに含められる場合、発行済みアプリのためにそれらは必要ありません。 既定値は `false` です。 |
 | `PreserveCompilationReferences` | `true` の場合、発行ディレクトリに参照アセンブリ項目がコピーされます。 一般に、ビルド時または発行時に Razor のコンパイルが行われる場合、発行済みアプリのために参照アセンブリは必要ありません。 発行済みアプリで実行時のコンパイルが必要な場合は、`true` に設定します。 たとえばアプリで、実行時に *.cshtml* ファイルを変更したり、埋め込みビューを使用したりする場合は、値を `true` に設定します。 既定値は `false` です。 |
 | `IncludeRazorContentInPack` | `true` の場合、Razor コンテンツ項目 ( *.cshtml* ファイル) はすべて、生成される NuGet パッケージに含めるようマーク付けされます。 既定値は `false` です。 |
-| `EmbedRazorGenerateSources` | `true` の場合、生成された Razor アセンブリに、埋め込みファイルとして RazorGenerate ( *.cshtml*) 項目が追加されます。 既定値は `false` です。 |
+| `EmbedRazorGenerateSources` | `true` の場合、生成された Razor アセンブリに、埋め込みファイルとして RazorGenerate ( *.cshtml* ) 項目が追加されます。 既定値は `false` です。 |
 | `UseRazorBuildServer` | `true` の場合、コードの生成作業をオフロードするために、永続的なビルド サーバーが使用されます。 既定値は、`UseSharedCompilation` の値です。 |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | `true` の場合、アプリケーション パーツの検出を実行するために実行時に MVC によって使用される追加の属性が、SDK によって生成されます。 |
 | `DefaultWebContentItemExcludes` | Web または Razor SDK をターゲットとするプロジェクトの `Content` 項目グループから除外する必要がある項目要素の glob パターン |
@@ -153,14 +154,14 @@ Razor SDK への入力および出力は、次の表のプロパティと項目�
 | `RazorTargetName` | Razor によって生成されたアセンブリのファイル名 (拡張子なし)。 |
 | `RazorOutputPath` | Razor 出力ディレクトリ。 |
 | `RazorCompileToolset` | Razor アセンブリをビルドするために使用するツールセットを決定するために使用します。 有効な値は `Implicit`、`RazorSDK`、`PrecompilationTool` です。 |
-| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 既定値は `true` です。 `true` の場合、プロジェクトのコンテンツとして *web.config* ファイル、*json* ファイル、 *.cshtml* ファイルが含まれます。 `Microsoft.NET.Sdk.Web` を介して参照する場合、*wwwroot* 下のファイルと構成ファイルも含まれます。 |
+| [EnableDefaultContentItems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | 既定値は `true` です。 `true` の場合、プロジェクトのコンテンツとして *web.config* ファイル、 *json* ファイル、 *.cshtml* ファイルが含まれます。 `Microsoft.NET.Sdk.Web` を介して参照する場合、 *wwwroot* 下のファイルと構成ファイルも含まれます。 |
 | `EnableDefaultRazorGenerateItems` | `true` の場合、`RazorGenerate` 項目の `Content` 項目の *.cshtml* ファイルが含まれます。 |
 | `GenerateRazorTargetAssemblyInfo` | `true` の場合、`RazorAssemblyAttribute` で指定された属性を含む *.cs* ファイルが生成され、そのファイルがコンパイル出力に含められます。 |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | `true` の場合、`RazorAssemblyAttribute` にアセンブリ属性の既定のセットが追加されます。 |
-| `CopyRazorGenerateFilesToPublishDirectory` | `true` の場合、`RazorGenerate` 項目 ( *.cshtml*) ファイルが発行ディレクトリにコピーされます。 一般に、Razor ファイルがビルド時または発行時にコンパイルに含められる場合、発行済みアプリのためにそれらは必要ありません。 既定値は `false` です。 |
+| `CopyRazorGenerateFilesToPublishDirectory` | `true` の場合、`RazorGenerate` 項目 ( *.cshtml* ) ファイルが発行ディレクトリにコピーされます。 一般に、Razor ファイルがビルド時または発行時にコンパイルに含められる場合、発行済みアプリのためにそれらは必要ありません。 既定値は `false` です。 |
 | `CopyRefAssembliesToPublishDirectory` | `true` の場合、発行ディレクトリに参照アセンブリ項目がコピーされます。 一般に、ビルド時または発行時に Razor のコンパイルが行われる場合、発行済みアプリのために参照アセンブリは必要ありません。 発行済みアプリで実行時のコンパイルが必要な場合は、`true` に設定します。 たとえばアプリで、実行時に *.cshtml* ファイルを変更したり、埋め込みビューを使用したりする場合は、値を `true` に設定します。 既定値は `false` です。 |
 | `IncludeRazorContentInPack` | `true` の場合、Razor コンテンツ項目 ( *.cshtml* ファイル) はすべて、生成される NuGet パッケージに含めるようマーク付けされます。 既定値は `false` です。 |
-| `EmbedRazorGenerateSources` | `true` の場合、生成された Razor アセンブリに、埋め込みファイルとして RazorGenerate ( *.cshtml*) 項目が追加されます。 既定値は `false` です。 |
+| `EmbedRazorGenerateSources` | `true` の場合、生成された Razor アセンブリに、埋め込みファイルとして RazorGenerate ( *.cshtml* ) 項目が追加されます。 既定値は `false` です。 |
 | `UseRazorBuildServer` | `true` の場合、コードの生成作業をオフロードするために、永続的なビルド サーバーが使用されます。 既定値は、`UseSharedCompilation` の値です。 |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | `true` の場合、アプリケーション パーツの検出を実行するために実行時に MVC によって使用される追加の属性が、SDK によって生成されます。 |
 | `DefaultWebContentItemExcludes` | Web または Razor SDK をターゲットとするプロジェクトの `Content` 項目グループから除外する必要がある項目要素の glob パターン |
