@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor WebAssembly)::: のホストと展開'
+title: 'ASP.NET Core Blazor WebAssembly のホストと展開'
 author: guardrex
-description: 'ASP.NET Core、Content Delivery Networks (CDN)、ファイル サーバー、GitHub ページを使用して、:::no-loc(Blazor)::: アプリをホストしデプロイする方法について説明します。'
+description: 'ASP.NET Core、Content Delivery Networks (CDN)、ファイル サーバー、GitHub ページを使用して、Blazor アプリをホストしデプロイする方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/host-and-deploy/webassembly
 ms.openlocfilehash: 0912b3fbcd0b891deb4985eaa18841c22f4f3264
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,28 +26,28 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055751"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="dd9ad-103">ASP.NET Core :::no-loc(Blazor WebAssembly)::: のホストと展開</span><span class="sxs-lookup"><span data-stu-id="dd9ad-103">Host and deploy ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="dd9ad-103">ASP.NET Core Blazor WebAssembly のホストと展開</span><span class="sxs-lookup"><span data-stu-id="dd9ad-103">Host and deploy ASP.NET Core Blazor WebAssembly</span></span>
 
 <span data-ttu-id="dd9ad-104">作成者: [Luke Latham](https://github.com/guardrex)、[Rainer Stropek](https://www.timecockpit.com)、[Daniel Roth](https://github.com/danroth27)、[Ben Adams](https://twitter.com/ben_a_adams)、[Safia Abdalla](https://safia.rocks)</span><span class="sxs-lookup"><span data-stu-id="dd9ad-104">By [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams), and [Safia Abdalla](https://safia.rocks)</span></span>
 
-<span data-ttu-id="dd9ad-105">[:::no-loc(Blazor WebAssembly)::: ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)を使用する場合は以下のようになります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-105">With the [:::no-loc(Blazor WebAssembly)::: hosting model](xref:blazor/hosting-models#blazor-webassembly):</span></span>
+<span data-ttu-id="dd9ad-105">[Blazor WebAssembly ホスティング モデル](xref:blazor/hosting-models#blazor-webassembly)を使用する場合は以下のようになります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-105">With the [Blazor WebAssembly hosting model](xref:blazor/hosting-models#blazor-webassembly):</span></span>
 
-* <span data-ttu-id="dd9ad-106">:::no-loc(Blazor)::: アプリ、その依存関係、.NET ランタイムが並行してブラウザーにダウンロードされます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-106">The :::no-loc(Blazor)::: app, its dependencies, and the .NET runtime are downloaded to the browser in parallel.</span></span>
+* <span data-ttu-id="dd9ad-106">Blazor アプリ、その依存関係、.NET ランタイムが並行してブラウザーにダウンロードされます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-106">The Blazor app, its dependencies, and the .NET runtime are downloaded to the browser in parallel.</span></span>
 * <span data-ttu-id="dd9ad-107">アプリがブラウザー UI スレッド上で直接実行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-107">The app is executed directly on the browser UI thread.</span></span>
 
 <span data-ttu-id="dd9ad-108">次の展開戦略がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-108">The following deployment strategies are supported:</span></span>
 
-* <span data-ttu-id="dd9ad-109">:::no-loc(Blazor)::: アプリは、ASP.NET Core アプリによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-109">The :::no-loc(Blazor)::: app is served by an ASP.NET Core app.</span></span> <span data-ttu-id="dd9ad-110">この戦略については、「[ASP.NET Core でのホストされた展開](#hosted-deployment-with-aspnet-core)」セクションで説明します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-110">This strategy is covered in the [Hosted deployment with ASP.NET Core](#hosted-deployment-with-aspnet-core) section.</span></span>
-* <span data-ttu-id="dd9ad-111">:::no-loc(Blazor)::: アプリは、:::no-loc(Blazor)::: アプリの提供に .NET が使用されていない静的ホスティング Web サーバーまたはサービス上に配置されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-111">The :::no-loc(Blazor)::: app is placed on a static hosting web server or service, where .NET isn't used to serve the :::no-loc(Blazor)::: app.</span></span> <span data-ttu-id="dd9ad-112">この戦略については、「[スタンドアロン展開](#standalone-deployment)」セクションで示されます。これには、:::no-loc(Blazor WebAssembly)::: アプリを IIS サブアプリとしてホストする方法についての情報が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-112">This strategy is covered in the [Standalone deployment](#standalone-deployment) section, which includes information on hosting a :::no-loc(Blazor WebAssembly)::: app as an IIS sub-app.</span></span>
+* <span data-ttu-id="dd9ad-109">Blazor アプリは、ASP.NET Core アプリによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-109">The Blazor app is served by an ASP.NET Core app.</span></span> <span data-ttu-id="dd9ad-110">この戦略については、「[ASP.NET Core でのホストされた展開](#hosted-deployment-with-aspnet-core)」セクションで説明します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-110">This strategy is covered in the [Hosted deployment with ASP.NET Core](#hosted-deployment-with-aspnet-core) section.</span></span>
+* <span data-ttu-id="dd9ad-111">Blazor アプリは、Blazor アプリの提供に .NET が使用されていない静的ホスティング Web サーバーまたはサービス上に配置されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-111">The Blazor app is placed on a static hosting web server or service, where .NET isn't used to serve the Blazor app.</span></span> <span data-ttu-id="dd9ad-112">この戦略については、「[スタンドアロン展開](#standalone-deployment)」セクションで示されます。これには、Blazor WebAssembly アプリを IIS サブアプリとしてホストする方法についての情報が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-112">This strategy is covered in the [Standalone deployment](#standalone-deployment) section, which includes information on hosting a Blazor WebAssembly app as an IIS sub-app.</span></span>
 
 ## <a name="compression"></a><span data-ttu-id="dd9ad-113">[圧縮]</span><span class="sxs-lookup"><span data-stu-id="dd9ad-113">Compression</span></span>
 
-<span data-ttu-id="dd9ad-114">:::no-loc(Blazor WebAssembly)::: アプリが公開されると、公開中に出力が静的に圧縮されてアプリのサイズが縮小され、実行時の圧縮に必要なオーバーヘッドがなくなります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-114">When a :::no-loc(Blazor WebAssembly)::: app is published, the output is statically compressed during publish to reduce the app's size and remove the overhead for runtime compression.</span></span> <span data-ttu-id="dd9ad-115">次の圧縮アルゴリズムが使用されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-115">The following compression algorithms are used:</span></span>
+<span data-ttu-id="dd9ad-114">Blazor WebAssembly アプリが公開されると、公開中に出力が静的に圧縮されてアプリのサイズが縮小され、実行時の圧縮に必要なオーバーヘッドがなくなります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-114">When a Blazor WebAssembly app is published, the output is statically compressed during publish to reduce the app's size and remove the overhead for runtime compression.</span></span> <span data-ttu-id="dd9ad-115">次の圧縮アルゴリズムが使用されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-115">The following compression algorithms are used:</span></span>
 
 * <span data-ttu-id="dd9ad-116">[Brotli](https://tools.ietf.org/html/rfc7932) (最高レベル)</span><span class="sxs-lookup"><span data-stu-id="dd9ad-116">[Brotli](https://tools.ietf.org/html/rfc7932) (highest level)</span></span>
 * [<span data-ttu-id="dd9ad-117">Gzip</span><span class="sxs-lookup"><span data-stu-id="dd9ad-117">Gzip</span></span>](https://tools.ietf.org/html/rfc1952)
 
-<span data-ttu-id="dd9ad-118">:::no-loc(Blazor)::: は、適切な圧縮ファイルにサービスを提供するため、ホストに依存します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-118">:::no-loc(Blazor)::: relies on the host to the serve the appropriate compressed files.</span></span> <span data-ttu-id="dd9ad-119">ASP.NET Core でホストするプロジェクトを使用するとき、ホスト プロジェクトでは、コンテント ネゴシエーションを実行したり、静的に圧縮されたファイルにサービスを提供したりできます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-119">When using an ASP.NET Core hosted project, the host project is capable of performing content negotiation and serving the statically-compressed files.</span></span> <span data-ttu-id="dd9ad-120">:::no-loc(Blazor WebAssembly)::: スタンドアロン アプリをホストするとき、静的に圧縮されたファイルにサービスが提供されるよう、追加の作業が必要になることがあります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-120">When hosting a :::no-loc(Blazor WebAssembly)::: standalone app, additional work might be required to ensure that statically-compressed files are served:</span></span>
+<span data-ttu-id="dd9ad-118">Blazor は、適切な圧縮ファイルにサービスを提供するため、ホストに依存します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-118">Blazor relies on the host to the serve the appropriate compressed files.</span></span> <span data-ttu-id="dd9ad-119">ASP.NET Core でホストするプロジェクトを使用するとき、ホスト プロジェクトでは、コンテント ネゴシエーションを実行したり、静的に圧縮されたファイルにサービスを提供したりできます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-119">When using an ASP.NET Core hosted project, the host project is capable of performing content negotiation and serving the statically-compressed files.</span></span> <span data-ttu-id="dd9ad-120">Blazor WebAssembly スタンドアロン アプリをホストするとき、静的に圧縮されたファイルにサービスが提供されるよう、追加の作業が必要になることがあります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-120">When hosting a Blazor WebAssembly standalone app, additional work might be required to ensure that statically-compressed files are served:</span></span>
 
 * <span data-ttu-id="dd9ad-121">IIS の `web.config` の圧縮構成については、[IIS の「Brotli と Gzip の圧縮」](#brotli-and-gzip-compression)セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-121">For IIS `web.config` compression configuration, see the [IIS: Brotli and Gzip compression](#brotli-and-gzip-compression) section.</span></span> 
 * <span data-ttu-id="dd9ad-122">GitHub ページなど、静的に圧縮されたファイル コンテント ネゴシエーションをサポートしない静的ホスティング ソリューションでホストするとき、Brotli 圧縮ファイルをフェッチし、デコードするようにアプリを構成することを検討してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-122">When hosting on static hosting solutions that don't support statically-compressed file content negotiation, such as GitHub Pages, consider configuring the app to fetch and decode Brotli compressed files:</span></span>
@@ -63,7 +63,7 @@ ms.locfileid: "93055751"
     <script src="decode.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
-      :::no-loc(Blazor):::.start({
+      Blazor.start({
         loadBootResource: function (type, name, defaultUri, integrity) {
           if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
             return (async function () {
@@ -85,23 +85,23 @@ ms.locfileid: "93055751"
     </script>
     ```
  
-<span data-ttu-id="dd9ad-130">圧縮を無効にするには、アプリケーションのプロジェクト ファイルに `:::no-loc(Blazor):::EnableCompression` MSBuild プロパティを追加し、値を `false` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-130">To disable compression, add the `:::no-loc(Blazor):::EnableCompression` MSBuild property to the app's project file and set the value to `false`:</span></span>
+<span data-ttu-id="dd9ad-130">圧縮を無効にするには、アプリケーションのプロジェクト ファイルに `BlazorEnableCompression` MSBuild プロパティを追加し、値を `false` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-130">To disable compression, add the `BlazorEnableCompression` MSBuild property to the app's project file and set the value to `false`:</span></span>
 
 ```xml
 <PropertyGroup>
-  <:::no-loc(Blazor):::EnableCompression>false</:::no-loc(Blazor):::EnableCompression>
+  <BlazorEnableCompression>false</BlazorEnableCompression>
 </PropertyGroup>
 ```
 
-<span data-ttu-id="dd9ad-131">`:::no-loc(Blazor):::EnableCompression` プロパティは、コマンド シェルで次の構文を使用して [`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-131">The `:::no-loc(Blazor):::EnableCompression` property can be passed to the [`dotnet publish`](/dotnet/core/tools/dotnet-publish) command with the following syntax in a command shell:</span></span>
+<span data-ttu-id="dd9ad-131">`BlazorEnableCompression` プロパティは、コマンド シェルで次の構文を使用して [`dotnet publish`](/dotnet/core/tools/dotnet-publish) コマンドに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-131">The `BlazorEnableCompression` property can be passed to the [`dotnet publish`](/dotnet/core/tools/dotnet-publish) command with the following syntax in a command shell:</span></span>
 
 ```dotnetcli
-dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
+dotnet publish -p:BlazorEnableCompression=false
 ```
 
 ## <a name="rewrite-urls-for-correct-routing"></a><span data-ttu-id="dd9ad-132">正しいルーティングのために URL を書き換える</span><span class="sxs-lookup"><span data-stu-id="dd9ad-132">Rewrite URLs for correct routing</span></span>
 
-<span data-ttu-id="dd9ad-133">:::no-loc(Blazor WebAssembly)::: アプリ内のページ コンポーネントに対するルーティング要求は、:::no-loc(Blazor Server)::: (ホストされているアプリ) でのルーティング要求のように単純なものではありません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-133">Routing requests for page components in a :::no-loc(Blazor WebAssembly)::: app isn't as straightforward as routing requests in a :::no-loc(Blazor Server):::, hosted app.</span></span> <span data-ttu-id="dd9ad-134">次の 2 つのコンポーネントがある :::no-loc(Blazor WebAssembly)::: アプリについて考えてみます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-134">Consider a :::no-loc(Blazor WebAssembly)::: app with two components:</span></span>
+<span data-ttu-id="dd9ad-133">Blazor WebAssembly アプリ内のページ コンポーネントに対するルーティング要求は、Blazor Server (ホストされているアプリ) でのルーティング要求のように単純なものではありません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-133">Routing requests for page components in a Blazor WebAssembly app isn't as straightforward as routing requests in a Blazor Server, hosted app.</span></span> <span data-ttu-id="dd9ad-134">次の 2 つのコンポーネントがある Blazor WebAssembly アプリについて考えてみます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-134">Consider a Blazor WebAssembly app with two components:</span></span>
 
 * <span data-ttu-id="dd9ad-135">`Main.razor`:アプリのルートで読み込まれ、`About` コンポーネントへのリンク (`href="About"`) が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-135">`Main.razor`: Loads at the root of the app and contains a link to the `About` component (`href="About"`).</span></span>
 * <span data-ttu-id="dd9ad-136">`About.razor`: `About` コンポーネント。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-136">`About.razor`: `About` component.</span></span>
@@ -111,33 +111,33 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
 1. <span data-ttu-id="dd9ad-138">ブラウザーにより要求が送信されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-138">The browser makes a request.</span></span>
 1. <span data-ttu-id="dd9ad-139">既定のページ (通常は `index.html`) が返されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-139">The default page is returned, which is usually `index.html`.</span></span>
 1. <span data-ttu-id="dd9ad-140">`index.html` によりアプリがブートストラップされます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-140">`index.html` bootstraps the app.</span></span>
-1. <span data-ttu-id="dd9ad-141">:::no-loc(Blazor)::: のルーターが読み込まれて、:::no-loc(Razor)::: `Main` コンポーネントが表示されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-141">:::no-loc(Blazor):::'s router loads, and the :::no-loc(Razor)::: `Main` component is rendered.</span></span>
+1. <span data-ttu-id="dd9ad-141">Blazor のルーターが読み込まれて、Razor `Main` コンポーネントが表示されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-141">Blazor's router loads, and the Razor `Main` component is rendered.</span></span>
 
-<span data-ttu-id="dd9ad-142">Main ページでは、`About` コンポーネントへのリンクの選択がクライアント上で動作します。:::no-loc(Blazor)::: のルーターにより、インターネット上で `www.contoso.com` に `About` を求めるブラウザーの要求が停止され、レンダリングされた `About` コンポーネント自体が提供されるためです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-142">In the Main page, selecting the link to the `About` component works on the client because the :::no-loc(Blazor)::: router stops the browser from making a request on the Internet to `www.contoso.com` for `About` and serves the rendered `About` component itself.</span></span> <span data-ttu-id="dd9ad-143">" *:::no-loc(Blazor WebAssembly)::: アプリ内にある* " 内部エンドポイントへの要求は、すべて同じように動作します。要求によって、サーバーにホストされているインターネット上のリソースに対するブラウザーベースの要求がトリガーされることはありません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-143">All of the requests for internal endpoints *within the :::no-loc(Blazor WebAssembly)::: app* work the same way: Requests don't trigger browser-based requests to server-hosted resources on the Internet.</span></span> <span data-ttu-id="dd9ad-144">要求は、ルーターによって内部的に処理されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-144">The router handles the requests internally.</span></span>
+<span data-ttu-id="dd9ad-142">Main ページでは、`About` コンポーネントへのリンクの選択がクライアント上で動作します。Blazor のルーターにより、インターネット上で `www.contoso.com` に `About` を求めるブラウザーの要求が停止され、レンダリングされた `About` コンポーネント自体が提供されるためです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-142">In the Main page, selecting the link to the `About` component works on the client because the Blazor router stops the browser from making a request on the Internet to `www.contoso.com` for `About` and serves the rendered `About` component itself.</span></span> <span data-ttu-id="dd9ad-143">" *Blazor WebAssembly アプリ内にある* " 内部エンドポイントへの要求は、すべて同じように動作します。要求によって、サーバーにホストされているインターネット上のリソースに対するブラウザーベースの要求がトリガーされることはありません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-143">All of the requests for internal endpoints *within the Blazor WebAssembly app* work the same way: Requests don't trigger browser-based requests to server-hosted resources on the Internet.</span></span> <span data-ttu-id="dd9ad-144">要求は、ルーターによって内部的に処理されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-144">The router handles the requests internally.</span></span>
 
 <span data-ttu-id="dd9ad-145">ブラウザーのアドレス バーを使用して `www.contoso.com/About` の要求が行われた場合、その要求は失敗します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-145">If a request is made using the browser's address bar for `www.contoso.com/About`, the request fails.</span></span> <span data-ttu-id="dd9ad-146">アプリのインターネット ホスト上にそのようなリソースは存在しないため、" *404 見つかりません* " という応答が返されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-146">No such resource exists on the app's Internet host, so a *404 - Not Found* response is returned.</span></span>
 
-<span data-ttu-id="dd9ad-147">ブラウザーではクライアント側ページの要求がインターネットベースのホストに対して行われるため、Web サーバーとホスティング サービスでは、サーバー上に物理的に存在しないリソースに対する `index.html` ページへのすべての要求を、書き換える必要があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-147">Because browsers make requests to Internet-based hosts for client-side pages, web servers and hosting services must rewrite all requests for resources not physically on the server to the `index.html` page.</span></span> <span data-ttu-id="dd9ad-148">`index.html` が返されると、アプリの :::no-loc(Blazor)::: ルーターがそれを受け取り、正しいリソースで応答します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-148">When `index.html` is returned, the app's :::no-loc(Blazor)::: router takes over and responds with the correct resource.</span></span>
+<span data-ttu-id="dd9ad-147">ブラウザーではクライアント側ページの要求がインターネットベースのホストに対して行われるため、Web サーバーとホスティング サービスでは、サーバー上に物理的に存在しないリソースに対する `index.html` ページへのすべての要求を、書き換える必要があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-147">Because browsers make requests to Internet-based hosts for client-side pages, web servers and hosting services must rewrite all requests for resources not physically on the server to the `index.html` page.</span></span> <span data-ttu-id="dd9ad-148">`index.html` が返されると、アプリの Blazor ルーターがそれを受け取り、正しいリソースで応答します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-148">When `index.html` is returned, the app's Blazor router takes over and responds with the correct resource.</span></span>
 
 <span data-ttu-id="dd9ad-149">IIS サーバーに展開する場合は、アプリで発行される `web.config` ファイルで URL Rewrite Module を使用できます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-149">When deploying to an IIS server, you can use the URL Rewrite Module with the app's published `web.config` file.</span></span> <span data-ttu-id="dd9ad-150">詳細については、「[IIS](#iis)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-150">For more information, see the [IIS](#iis) section.</span></span>
 
 ## <a name="hosted-deployment-with-aspnet-core"></a><span data-ttu-id="dd9ad-151">ASP.NET Core でのホストされた展開</span><span class="sxs-lookup"><span data-stu-id="dd9ad-151">Hosted deployment with ASP.NET Core</span></span>
 
-<span data-ttu-id="dd9ad-152">" *ホストされたデプロイ* " により、:::no-loc(Blazor WebAssembly)::: アプリが、Web サーバー上で実行されている [ASP.NET Core アプリ](xref:index)からブラウザーに提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-152">A *hosted deployment* serves the :::no-loc(Blazor WebAssembly)::: app to browsers from an [ASP.NET Core app](xref:index) that runs on a web server.</span></span>
+<span data-ttu-id="dd9ad-152">" *ホストされたデプロイ* " により、Blazor WebAssembly アプリが、Web サーバー上で実行されている [ASP.NET Core アプリ](xref:index)からブラウザーに提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-152">A *hosted deployment* serves the Blazor WebAssembly app to browsers from an [ASP.NET Core app](xref:index) that runs on a web server.</span></span>
 
-<span data-ttu-id="dd9ad-153">クライアント :::no-loc(Blazor WebAssembly)::: アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-153">The client :::no-loc(Blazor WebAssembly)::: app is published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder of the server app, along with any other static web assets of the server app.</span></span> <span data-ttu-id="dd9ad-154">2 つのアプリが一緒に展開されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-154">The two apps are deployed together.</span></span> <span data-ttu-id="dd9ad-155">ASP.NET Core アプリをホストできる Web サーバーが必要です。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-155">A web server that is capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="dd9ad-156">ホストされている展開の場合、Visual Studio には **:::no-loc(Blazor WebAssembly)::: アプリ** プロジェクト テンプレートが含まれており ( [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorwasm` テンプレート)、 **`Hosted`** オプションが選択されています (`dotnet new` コマンドを使用する場合は `-ho|--hosted`)。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-156">For a hosted deployment, Visual Studio includes the **:::no-loc(Blazor WebAssembly)::: App** project template (`blazorwasm` template when using the [`dotnet new`](/dotnet/core/tools/dotnet-new) command) with the **`Hosted`** option selected (`-ho|--hosted` when using the `dotnet new` command).</span></span>
+<span data-ttu-id="dd9ad-153">クライアント Blazor WebAssembly アプリは、サーバー アプリの他の静的な Web アセットと共に、サーバー アプリの `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-153">The client Blazor WebAssembly app is published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder of the server app, along with any other static web assets of the server app.</span></span> <span data-ttu-id="dd9ad-154">2 つのアプリが一緒に展開されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-154">The two apps are deployed together.</span></span> <span data-ttu-id="dd9ad-155">ASP.NET Core アプリをホストできる Web サーバーが必要です。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-155">A web server that is capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="dd9ad-156">ホストされている展開の場合、Visual Studio には **Blazor WebAssembly アプリ** プロジェクト テンプレートが含まれており ( [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorwasm` テンプレート)、 **`Hosted`** オプションが選択されています (`dotnet new` コマンドを使用する場合は `-ho|--hosted`)。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-156">For a hosted deployment, Visual Studio includes the **Blazor WebAssembly App** project template (`blazorwasm` template when using the [`dotnet new`](/dotnet/core/tools/dotnet-new) command) with the **`Hosted`** option selected (`-ho|--hosted` when using the `dotnet new` command).</span></span>
 
 <span data-ttu-id="dd9ad-157">ASP.NET Core アプリでのホストと展開の詳細については、「<xref:host-and-deploy/index>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-157">For more information on ASP.NET Core app hosting and deployment, see <xref:host-and-deploy/index>.</span></span>
 
 <span data-ttu-id="dd9ad-158">Azure App Service の展開については、「<xref:tutorials/publish-to-azure-webapp-using-vs>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-158">For information on deploying to Azure App Service, see <xref:tutorials/publish-to-azure-webapp-using-vs>.</span></span>
 
-## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a><span data-ttu-id="dd9ad-159">複数の :::no-loc(Blazor WebAssembly)::: アプリによるホストされた展開</span><span class="sxs-lookup"><span data-stu-id="dd9ad-159">Hosted deployment with multiple :::no-loc(Blazor WebAssembly)::: apps</span></span>
+## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a><span data-ttu-id="dd9ad-159">複数の Blazor WebAssembly アプリによるホストされた展開</span><span class="sxs-lookup"><span data-stu-id="dd9ad-159">Hosted deployment with multiple Blazor WebAssembly apps</span></span>
 
 ### <a name="app-configuration"></a><span data-ttu-id="dd9ad-160">アプリの構成</span><span class="sxs-lookup"><span data-stu-id="dd9ad-160">App configuration</span></span>
 
-<span data-ttu-id="dd9ad-161">複数の :::no-loc(Blazor WebAssembly)::: アプリを提供するようにホストされた :::no-loc(Blazor)::: ソリューションを構成するには:</span><span class="sxs-lookup"><span data-stu-id="dd9ad-161">To configure a hosted :::no-loc(Blazor)::: solution to serve multiple :::no-loc(Blazor WebAssembly)::: apps:</span></span>
+<span data-ttu-id="dd9ad-161">複数の Blazor WebAssembly アプリを提供するようにホストされた Blazor ソリューションを構成するには:</span><span class="sxs-lookup"><span data-stu-id="dd9ad-161">To configure a hosted Blazor solution to serve multiple Blazor WebAssembly apps:</span></span>
 
-* <span data-ttu-id="dd9ad-162">既存のホストされた :::no-loc(Blazor)::: ソリューションを使用するか、:::no-loc(Blazor)::: のホストされたプロジェクト テンプレートから新しいソリューションを作成します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-162">Use an existing hosted :::no-loc(Blazor)::: solution or create a new solution from the :::no-loc(Blazor)::: Hosted project template.</span></span>
+* <span data-ttu-id="dd9ad-162">既存のホストされた Blazor ソリューションを使用するか、Blazor のホストされたプロジェクト テンプレートから新しいソリューションを作成します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-162">Use an existing hosted Blazor solution or create a new solution from the Blazor Hosted project template.</span></span>
 
 * <span data-ttu-id="dd9ad-163">クライアント アプリのプロジェクト ファイルで、値が `FirstApp` の `<PropertyGroup>` に `<StaticWebAssetBasePath>` プロパティを追加して、プロジェクトの静的アセットの基本パスを設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-163">In the client app's project file, add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `FirstApp` to set the base path for the project's static assets:</span></span>
 
@@ -151,7 +151,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
 * <span data-ttu-id="dd9ad-164">ソリューションに 2 つ目のクライアント アプリを追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-164">Add a second client app to the solution:</span></span>
 
   * <span data-ttu-id="dd9ad-165">`SecondClient` という名前のフォルダーをソリューションのフォルダーに追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-165">Add a folder named `SecondClient` to the solution's folder.</span></span>
-  * <span data-ttu-id="dd9ad-166">:::no-loc(Blazor WebAssembly)::: プロジェクト テンプレートから `SecondClient` フォルダーに `Second:::no-loc(Blazor):::App.Client` という名前の :::no-loc(Blazor WebAssembly)::: アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-166">Create a :::no-loc(Blazor WebAssembly)::: app named `Second:::no-loc(Blazor):::App.Client` in the `SecondClient` folder from the :::no-loc(Blazor WebAssembly)::: project template.</span></span>
+  * <span data-ttu-id="dd9ad-166">Blazor WebAssembly プロジェクト テンプレートから `SecondClient` フォルダーに `SecondBlazorApp.Client` という名前の Blazor WebAssembly アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-166">Create a Blazor WebAssembly app named `SecondBlazorApp.Client` in the `SecondClient` folder from the Blazor WebAssembly project template.</span></span>
   * <span data-ttu-id="dd9ad-167">アプリのプロジェクト ファイル内で:</span><span class="sxs-lookup"><span data-stu-id="dd9ad-167">In the app's project file:</span></span>
 
     * <span data-ttu-id="dd9ad-168">値が `SecondApp` の `<PropertyGroup>` に `<StaticWebAssetBasePath>` プロパティを追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-168">Add a `<StaticWebAssetBasePath>` property to the `<PropertyGroup>` with a value of `SecondApp`:</span></span>
@@ -178,7 +178,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
   ```xml
   <ItemGroup>
     ...
-    <ProjectReference Include="..\SecondClient\Second:::no-loc(Blazor):::App.Client.csproj" />
+    <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
   </ItemGroup>
   ```
 
@@ -191,14 +191,14 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
 * <span data-ttu-id="dd9ad-173">サーバー アプリの `Startup.Configure` メソッド (`Startup.cs`) で、<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> の呼び出しの後にある次の行を削除します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-173">In the server app's `Startup.Configure` method (`Startup.cs`), remove the following lines, which appear after the call to <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>:</span></span>
 
   ```csharp
-  app.Use:::no-loc(Blazor):::FrameworkFiles();
+  app.UseBlazorFrameworkFiles();
   app.UseStaticFiles();
 
   app.UseRouting();
 
   app.UseEndpoints(endpoints =>
   {
-      endpoints.Map:::no-loc(Razor):::Pages();
+      endpoints.MapRazorPages();
       endpoints.MapControllers();
       endpoints.MapFallbackToFile("index.html");
   });
@@ -229,7 +229,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
           return nxt();
       });
 
-      first.Use:::no-loc(Blazor):::FrameworkFiles("/FirstApp");
+      first.UseBlazorFrameworkFiles("/FirstApp");
       first.UseStaticFiles();
       first.UseStaticFiles("/FirstApp");
       first.UseRouting();
@@ -251,7 +251,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
           return nxt();
       });
 
-      second.Use:::no-loc(Blazor):::FrameworkFiles("/SecondApp");
+      second.UseBlazorFrameworkFiles("/SecondApp");
       second.UseStaticFiles();
       second.UseStaticFiles("/SecondApp");
       second.UseRouting();
@@ -284,7 +284,7 @@ dotnet publish -p::::no-loc(Blazor):::EnableCompression=false
   <img alt="..." src="/{ASSET FILE NAME}" />
   ```
 
-* <span data-ttu-id="dd9ad-190">アセットが [:::no-loc(Razor)::: クラス ライブラリ (RCL)](xref:blazor/components/class-libraries) の `wwwroot` フォルダーにある場合は、[RCL の記事](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)のガイダンスに従って、クライアント アプリの静的アセットを参照します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-190">When the asset is in the `wwwroot` folder of a [:::no-loc(Razor)::: Class Library (RCL)](xref:blazor/components/class-libraries), reference the static asset in the client app per the guidance in the [RCL article](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl):</span></span>
+* <span data-ttu-id="dd9ad-190">アセットが [Razor クラス ライブラリ (RCL)](xref:blazor/components/class-libraries) の `wwwroot` フォルダーにある場合は、[RCL の記事](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)のガイダンスに従って、クライアント アプリの静的アセットを参照します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-190">When the asset is in the `wwwroot` folder of a [Razor Class Library (RCL)](xref:blazor/components/class-libraries), reference the static asset in the client app per the guidance in the [RCL article](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl):</span></span>
 
   ```razor
   <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
@@ -318,7 +318,7 @@ The preceding approaches are demonstrated in the following examples.
 <span data-ttu-id="dd9ad-194">次の `Jeep` コンポーネントをクライアント アプリのいずれかに追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-194">Add the following `Jeep` component to one of the client apps.</span></span> <span data-ttu-id="dd9ad-195">`Jeep` コンポーネントでは次のものが使用されています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-195">The `Jeep` component uses:</span></span>
 
 * <span data-ttu-id="dd9ad-196">クライアント アプリの `wwwroot` フォルダーにある画像 (`jeep-cj.png`)。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-196">An image from the client app's `wwwroot` folder (`jeep-cj.png`).</span></span>
-* <span data-ttu-id="dd9ad-197">[追加された :::no-loc(Razor)::: コンポーネント ライブラリ](xref:blazor/components/class-libraries) (`JeepImage`) の `wwwroot` フォルダーにある画像 (`jeep-yj.png`)。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-197">An image from an [added :::no-loc(Razor)::: component library](xref:blazor/components/class-libraries) (`JeepImage`) `wwwroot` folder (`jeep-yj.png`).</span></span>
+* <span data-ttu-id="dd9ad-197">[追加された Razor コンポーネント ライブラリ](xref:blazor/components/class-libraries) (`JeepImage`) の `wwwroot` フォルダーにある画像 (`jeep-yj.png`)。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-197">An image from an [added Razor component library](xref:blazor/components/class-libraries) (`JeepImage`) `wwwroot` folder (`jeep-yj.png`).</span></span>
 * <span data-ttu-id="dd9ad-198">この例のコンポーネント (`Component1`) は、`JeepImage` ライブラリがソリューションに追加されると、RCL プロジェクト テンプレートによって自動的に作成されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-198">The example component (`Component1`) is created automatically by the RCL project template when the `JeepImage` library is added to the solution.</span></span>
 
 ```razor
@@ -360,7 +360,7 @@ The library's `jeep-yj.png` image can also be added to the library's `Component1
     <h1>JeepImage.Component1</h1>
 
     <p>
-        This :::no-loc(Blazor)::: component is defined in the <strong>JeepImage</strong> package.
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
     </p>
 
     <p>
@@ -391,7 +391,7 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
     <h1>JeepImage.Component1</h1>
 
     <p>
-        This :::no-loc(Blazor)::: component is defined in the <strong>JeepImage</strong> package.
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
     </p>
 
     <p>
@@ -432,25 +432,25 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 ## <a name="standalone-deployment"></a><span data-ttu-id="dd9ad-205">スタンドアロン展開</span><span class="sxs-lookup"><span data-stu-id="dd9ad-205">Standalone deployment</span></span>
 
-<span data-ttu-id="dd9ad-206">" *スタンドアロン デプロイ* " により、:::no-loc(Blazor WebAssembly)::: アプリが、クライアントによって直接要求される静的ファイルのセットとして提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-206">A *standalone deployment* serves the :::no-loc(Blazor WebAssembly)::: app as a set of static files that are requested directly by clients.</span></span> <span data-ttu-id="dd9ad-207">任意の静的ファイル サーバーで :::no-loc(Blazor)::: アプリを提供できます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-207">Any static file server is able to serve the :::no-loc(Blazor)::: app.</span></span>
+<span data-ttu-id="dd9ad-206">" *スタンドアロン デプロイ* " により、Blazor WebAssembly アプリが、クライアントによって直接要求される静的ファイルのセットとして提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-206">A *standalone deployment* serves the Blazor WebAssembly app as a set of static files that are requested directly by clients.</span></span> <span data-ttu-id="dd9ad-207">任意の静的ファイル サーバーで Blazor アプリを提供できます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-207">Any static file server is able to serve the Blazor app.</span></span>
 
 <span data-ttu-id="dd9ad-208">スタンドアロンのデプロイ アセットは、`/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` フォルダーに発行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-208">Standalone deployment assets are published into the `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` folder.</span></span>
 
 ### <a name="azure-app-service"></a><span data-ttu-id="dd9ad-209">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="dd9ad-209">Azure App Service</span></span>
 
-<span data-ttu-id="dd9ad-210">:::no-loc(Blazor WebAssembly)::: アプリは、[IIS](#iis) 上でアプリをホストするために使用される Windows 上の Azure App Service にデプロイできます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-210">:::no-loc(Blazor WebAssembly)::: apps can be deployed to Azure App Services on Windows, which hosts the app on [IIS](#iis).</span></span>
+<span data-ttu-id="dd9ad-210">Blazor WebAssembly アプリは、[IIS](#iis) 上でアプリをホストするために使用される Windows 上の Azure App Service にデプロイできます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-210">Blazor WebAssembly apps can be deployed to Azure App Services on Windows, which hosts the app on [IIS](#iis).</span></span>
 
-<span data-ttu-id="dd9ad-211">スタンドアロンの :::no-loc(Blazor WebAssembly)::: アプリを Azure App Service for Linux にデプロイすることは、現在サポートされていません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-211">Deploying a standalone :::no-loc(Blazor WebAssembly)::: app to Azure App Service for Linux isn't currently supported.</span></span> <span data-ttu-id="dd9ad-212">現時点では、アプリをホストする Linux サーバー イメージは使用できません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-212">A Linux server image to host the app isn't available at this time.</span></span> <span data-ttu-id="dd9ad-213">このシナリオを可能にするための取り組みが進行中です。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-213">Work is in progress to enable this scenario.</span></span>
+<span data-ttu-id="dd9ad-211">スタンドアロンの Blazor WebAssembly アプリを Azure App Service for Linux にデプロイすることは、現在サポートされていません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-211">Deploying a standalone Blazor WebAssembly app to Azure App Service for Linux isn't currently supported.</span></span> <span data-ttu-id="dd9ad-212">現時点では、アプリをホストする Linux サーバー イメージは使用できません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-212">A Linux server image to host the app isn't available at this time.</span></span> <span data-ttu-id="dd9ad-213">このシナリオを可能にするための取り組みが進行中です。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-213">Work is in progress to enable this scenario.</span></span>
 
 ### <a name="iis"></a><span data-ttu-id="dd9ad-214">IIS</span><span class="sxs-lookup"><span data-stu-id="dd9ad-214">IIS</span></span>
 
-<span data-ttu-id="dd9ad-215">IIS は、:::no-loc(Blazor)::: アプリ対応の静的ファイル サーバーです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-215">IIS is a capable static file server for :::no-loc(Blazor)::: apps.</span></span> <span data-ttu-id="dd9ad-216">:::no-loc(Blazor)::: をホストするよう IIS を構成する方法については、「[IIS で静的 Web サイトを構築する](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-216">To configure IIS to host :::no-loc(Blazor):::, see [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).</span></span>
+<span data-ttu-id="dd9ad-215">IIS は、Blazor アプリ対応の静的ファイル サーバーです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-215">IIS is a capable static file server for Blazor apps.</span></span> <span data-ttu-id="dd9ad-216">Blazor をホストするよう IIS を構成する方法については、「[IIS で静的 Web サイトを構築する](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-216">To configure IIS to host Blazor, see [Build a Static Website on IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).</span></span>
 
 <span data-ttu-id="dd9ad-217">発行されたアセットは、`/bin/Release/{TARGET FRAMEWORK}/publish` フォルダーに作成されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-217">Published assets are created in the `/bin/Release/{TARGET FRAMEWORK}/publish` folder.</span></span> <span data-ttu-id="dd9ad-218">`publish` フォルダーのコンテンツを、Web サーバーまたはホスティング サービス上でホストします。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-218">Host the contents of the `publish` folder on the web server or hosting service.</span></span>
 
 #### <a name="webconfig"></a><span data-ttu-id="dd9ad-219">web.config</span><span class="sxs-lookup"><span data-stu-id="dd9ad-219">web.config</span></span>
 
-<span data-ttu-id="dd9ad-220">:::no-loc(Blazor)::: プロジェクトが発行されると、`web.config` ファイルが以下の IIS 構成で作成されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-220">When a :::no-loc(Blazor)::: project is published, a `web.config` file is created with the following IIS configuration:</span></span>
+<span data-ttu-id="dd9ad-220">Blazor プロジェクトが発行されると、`web.config` ファイルが以下の IIS 構成で作成されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-220">When a Blazor project is published, a `web.config` file is created with the following IIS configuration:</span></span>
 
 * <span data-ttu-id="dd9ad-221">各ファイル拡張子に対して設定される MIME の種類は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-221">MIME types are set for the following file extensions:</span></span>
   * <span data-ttu-id="dd9ad-222">`.dll`: `application/octet-stream`</span><span class="sxs-lookup"><span data-stu-id="dd9ad-222">`.dll`: `application/octet-stream`</span></span>
@@ -495,7 +495,7 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 * <span data-ttu-id="dd9ad-253">継承された ASP.NET Core モジュール ハンドラーを無効にします。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-253">Disable the inherited ASP.NET Core Module handler.</span></span>
 
-  <span data-ttu-id="dd9ad-254">:::no-loc(Blazor)::: アプリで発行された `web.config` ファイル内のハンドラーを、`<handlers>` セクションをファイルに追加することで削除します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-254">Remove the handler in the :::no-loc(Blazor)::: app's published `web.config` file by adding a `<handlers>` section to the file:</span></span>
+  <span data-ttu-id="dd9ad-254">Blazor アプリで発行された `web.config` ファイル内のハンドラーを、`<handlers>` セクションをファイルに追加することで削除します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-254">Remove the handler in the Blazor app's published `web.config` file by adding a `<handlers>` section to the file:</span></span>
 
   ```xml
   <handlers>
@@ -523,22 +523,22 @@ An alternative to using the [`Link` component](xref:blazor/fundamentals/addition
 
 #### <a name="brotli-and-gzip-compression"></a><span data-ttu-id="dd9ad-258">Brotli と Gzip の圧縮</span><span class="sxs-lookup"><span data-stu-id="dd9ad-258">Brotli and Gzip compression</span></span>
 
-<span data-ttu-id="dd9ad-259">`web.config` を使用して、Brotli または Gzip で圧縮された :::no-loc(Blazor)::: アセットを提供するように IIS を構成することができます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-259">IIS can be configured via `web.config` to serve Brotli or Gzip compressed :::no-loc(Blazor)::: assets.</span></span> <span data-ttu-id="dd9ad-260">構成例については、[`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-260">For an example configuration, see [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).</span></span>
+<span data-ttu-id="dd9ad-259">`web.config` を使用して、Brotli または Gzip で圧縮された Blazor アセットを提供するように IIS を構成することができます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-259">IIS can be configured via `web.config` to serve Brotli or Gzip compressed Blazor assets.</span></span> <span data-ttu-id="dd9ad-260">構成例については、[`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-260">For an example configuration, see [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).</span></span>
 
 #### <a name="troubleshooting"></a><span data-ttu-id="dd9ad-261">トラブルシューティング</span><span class="sxs-lookup"><span data-stu-id="dd9ad-261">Troubleshooting</span></span>
 
-<span data-ttu-id="dd9ad-262">Web サイトの構成にアクセスしようとしたときに、" *500 - 内部サーバー エラー* " という応答が返され、IIS マネージャーによりエラーがスローされた場合は、URL リライト モジュールがインストールされていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-262">If a *500 - Internal Server Error* is received and IIS Manager throws errors when attempting to access the website's configuration, confirm that the URL Rewrite Module is installed.</span></span> <span data-ttu-id="dd9ad-263">モジュールがインストールされていない場合、IIS では `web.config` ファイルを解析できません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-263">When the module isn't installed, the `web.config` file can't be parsed by IIS.</span></span> <span data-ttu-id="dd9ad-264">これは、IIS マネージャーによる Web サイトの構成の読み込み、そして Web サイトによる :::no-loc(Blazor)::: の静的ファイルの提供を阻止するためのものです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-264">This prevents the IIS Manager from loading the website's configuration and the website from serving :::no-loc(Blazor):::'s static files.</span></span>
+<span data-ttu-id="dd9ad-262">Web サイトの構成にアクセスしようとしたときに、" *500 - 内部サーバー エラー* " という応答が返され、IIS マネージャーによりエラーがスローされた場合は、URL リライト モジュールがインストールされていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-262">If a *500 - Internal Server Error* is received and IIS Manager throws errors when attempting to access the website's configuration, confirm that the URL Rewrite Module is installed.</span></span> <span data-ttu-id="dd9ad-263">モジュールがインストールされていない場合、IIS では `web.config` ファイルを解析できません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-263">When the module isn't installed, the `web.config` file can't be parsed by IIS.</span></span> <span data-ttu-id="dd9ad-264">これは、IIS マネージャーによる Web サイトの構成の読み込み、そして Web サイトによる Blazor の静的ファイルの提供を阻止するためのものです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-264">This prevents the IIS Manager from loading the website's configuration and the website from serving Blazor's static files.</span></span>
 
 <span data-ttu-id="dd9ad-265">IIS への展開に関するトラブルシューティングの詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-265">For more information on troubleshooting deployments to IIS, see <xref:test/troubleshoot-azure-iis>.</span></span>
 
 ### <a name="azure-storage"></a><span data-ttu-id="dd9ad-266">Azure ストレージ</span><span class="sxs-lookup"><span data-stu-id="dd9ad-266">Azure Storage</span></span>
 
-<span data-ttu-id="dd9ad-267">[Azure Storage](/azure/storage/) の静的ファイル ホスティングにより、サーバーレス :::no-loc(Blazor)::: アプリ ホスティングが可能になります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-267">[Azure Storage](/azure/storage/) static file hosting allows serverless :::no-loc(Blazor)::: app hosting.</span></span> <span data-ttu-id="dd9ad-268">カスタム ドメイン名の Azure Content Delivery Network (CDN) と HTTPS がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-268">Custom domain names, the Azure Content Delivery Network (CDN), and HTTPS are supported.</span></span>
+<span data-ttu-id="dd9ad-267">[Azure Storage](/azure/storage/) の静的ファイル ホスティングにより、サーバーレス Blazor アプリ ホスティングが可能になります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-267">[Azure Storage](/azure/storage/) static file hosting allows serverless Blazor app hosting.</span></span> <span data-ttu-id="dd9ad-268">カスタム ドメイン名の Azure Content Delivery Network (CDN) と HTTPS がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-268">Custom domain names, the Azure Content Delivery Network (CDN), and HTTPS are supported.</span></span>
 
 <span data-ttu-id="dd9ad-269">ストレージ アカウントでホスティングされている静的 Web サイトに Blob service サービスが有効になっているとき:</span><span class="sxs-lookup"><span data-stu-id="dd9ad-269">When the blob service is enabled for static website hosting on a storage account:</span></span>
 
 * <span data-ttu-id="dd9ad-270">**インデックス ドキュメント名** を `index.html` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-270">Set the **Index document name** to `index.html`.</span></span>
-* <span data-ttu-id="dd9ad-271">**エラー ドキュメント パス** を `index.html` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-271">Set the **Error document path** to `index.html`.</span></span> <span data-ttu-id="dd9ad-272">:::no-loc(Razor)::: コンポーネントとその他の非ファイル エンドポイントは、Blob service で保管される静的コンテンツの物理パスに置かれません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-272">:::no-loc(Razor)::: components and other non-file endpoints don't reside at physical paths in the static content stored by the blob service.</span></span> <span data-ttu-id="dd9ad-273">このようなリソースの 1 つに対して受け取った要求を :::no-loc(Blazor)::: ルーターで処理しなければならないとき、Blob service によって生成された *404 - Not Found* エラーにより、要求が **エラー ドキュメント パス** に転送されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-273">When a request for one of these resources is received that the :::no-loc(Blazor)::: router should handle, the *404 - Not Found* error generated by the blob service routes the request to the **Error document path**.</span></span> <span data-ttu-id="dd9ad-274">`index.html` BLOB が返され、:::no-loc(Blazor)::: ルーターでパスが読み込まれ、処理されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-274">The `index.html` blob is returned, and the :::no-loc(Blazor)::: router loads and processes the path.</span></span>
+* <span data-ttu-id="dd9ad-271">**エラー ドキュメント パス** を `index.html` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-271">Set the **Error document path** to `index.html`.</span></span> <span data-ttu-id="dd9ad-272">Razor コンポーネントとその他の非ファイル エンドポイントは、Blob service で保管される静的コンテンツの物理パスに置かれません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-272">Razor components and other non-file endpoints don't reside at physical paths in the static content stored by the blob service.</span></span> <span data-ttu-id="dd9ad-273">このようなリソースの 1 つに対して受け取った要求を Blazor ルーターで処理しなければならないとき、Blob service によって生成された *404 - Not Found* エラーにより、要求が **エラー ドキュメント パス** に転送されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-273">When a request for one of these resources is received that the Blazor router should handle, the *404 - Not Found* error generated by the blob service routes the request to the **Error document path**.</span></span> <span data-ttu-id="dd9ad-274">`index.html` BLOB が返され、Blazor ルーターでパスが読み込まれ、処理されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-274">The `index.html` blob is returned, and the Blazor router loads and processes the path.</span></span>
 
 <span data-ttu-id="dd9ad-275">ファイルの `Content-Type` ヘッダーに不適切な MIME の種類があるために、実行時にファイルが読み込まれない場合は、次のいずれかの操作を実行します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-275">If files aren't loaded at runtime due to inappropriate MIME types in the files' `Content-Type` headers, take either of the following actions:</span></span>
 
@@ -570,7 +570,7 @@ http {
 }
 ```
 
-<span data-ttu-id="dd9ad-284">[NGINX バースト レート制限](https://www.nginx.com/blog/rate-limiting-nginx/#bursts)を [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) で設定するとき、アプリによって行われる比較的大量の要求を受け入れる目的で、場合によっては、:::no-loc(Blazor WebAssembly)::: アプリの `burst` パラメーター値を大きくする必要があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-284">When setting the [NGINX burst rate limit](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) with [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req), :::no-loc(Blazor WebAssembly)::: apps may require a large `burst` parameter value to accommodate the relatively large number of requests made by an app.</span></span> <span data-ttu-id="dd9ad-285">最初に、値を 60 以上に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-285">Initially, set the value to at least 60:</span></span>
+<span data-ttu-id="dd9ad-284">[NGINX バースト レート制限](https://www.nginx.com/blog/rate-limiting-nginx/#bursts)を [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req) で設定するとき、アプリによって行われる比較的大量の要求を受け入れる目的で、場合によっては、Blazor WebAssembly アプリの `burst` パラメーター値を大きくする必要があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-284">When setting the [NGINX burst rate limit](https://www.nginx.com/blog/rate-limiting-nginx/#bursts) with [`limit_req`](https://nginx.org/docs/http/ngx_http_limit_req_module.html#limit_req), Blazor WebAssembly apps may require a large `burst` parameter value to accommodate the relatively large number of requests made by an app.</span></span> <span data-ttu-id="dd9ad-285">最初に、値を 60 以上に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-285">Initially, set the value to at least 60:</span></span>
 
 ```
 http {
@@ -592,7 +592,7 @@ http {
 
 ### <a name="nginx-in-docker"></a><span data-ttu-id="dd9ad-288">Docker での Nginx</span><span class="sxs-lookup"><span data-stu-id="dd9ad-288">Nginx in Docker</span></span>
 
-<span data-ttu-id="dd9ad-289">Nginx を使用して Docker で :::no-loc(Blazor)::: をホストするには、Alpine ベースの Nginx イメージを使用するように Dockerfile をセットアップします。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-289">To host :::no-loc(Blazor)::: in Docker using Nginx, setup the Dockerfile to use the Alpine-based Nginx image.</span></span> <span data-ttu-id="dd9ad-290">`nginx.config` ファイルをコンテナーにコピーするように、Dockerfile を更新します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-290">Update the Dockerfile to copy the `nginx.config` file into the container.</span></span>
+<span data-ttu-id="dd9ad-289">Nginx を使用して Docker で Blazor をホストするには、Alpine ベースの Nginx イメージを使用するように Dockerfile をセットアップします。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-289">To host Blazor in Docker using Nginx, setup the Dockerfile to use the Alpine-based Nginx image.</span></span> <span data-ttu-id="dd9ad-290">`nginx.config` ファイルをコンテナーにコピーするように、Dockerfile を更新します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-290">Update the Dockerfile to copy the `nginx.config` file into the container.</span></span>
 
 <span data-ttu-id="dd9ad-291">次の例に示すように、1 つの行を Dockerfile に追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-291">Add one line to the Dockerfile, as shown in the following example:</span></span>
 
@@ -604,7 +604,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a><span data-ttu-id="dd9ad-292">Apache</span><span class="sxs-lookup"><span data-stu-id="dd9ad-292">Apache</span></span>
 
-<span data-ttu-id="dd9ad-293">:::no-loc(Blazor WebAssembly)::: アプリを CentOS 7 以降にデプロイするには:</span><span class="sxs-lookup"><span data-stu-id="dd9ad-293">To deploy a :::no-loc(Blazor WebAssembly)::: app to CentOS 7 or later:</span></span>
+<span data-ttu-id="dd9ad-293">Blazor WebAssembly アプリを CentOS 7 以降にデプロイするには:</span><span class="sxs-lookup"><span data-stu-id="dd9ad-293">To deploy a Blazor WebAssembly app to CentOS 7 or later:</span></span>
 
 1. <span data-ttu-id="dd9ad-294">Apache 構成ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-294">Create the Apache configuration file.</span></span> <span data-ttu-id="dd9ad-295">次の例は、簡略化された構成ファイル (`blazorapp.config`) です。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-295">The following example is a simplified configuration file (`blazorapp.config`):</span></span>
 
@@ -652,19 +652,19 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="github-pages"></a><span data-ttu-id="dd9ad-300">GitHub ページ</span><span class="sxs-lookup"><span data-stu-id="dd9ad-300">GitHub Pages</span></span>
 
-<span data-ttu-id="dd9ad-301">URL の書き換えを処理するために、`wwwroot/404.html` ファイルを、要求を `index.html` ページにリダイレクトするスクリプトと共に追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-301">To handle URL rewrites, add a `wwwroot/404.html` file with a script that handles redirecting the request to the `index.html` page.</span></span> <span data-ttu-id="dd9ad-302">例については、[SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-302">For an example, see the [SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages):</span></span>
+<span data-ttu-id="dd9ad-301">URL の書き換えを処理するために、`wwwroot/404.html` ファイルを、要求を `index.html` ページにリダイレクトするスクリプトと共に追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-301">To handle URL rewrites, add a `wwwroot/404.html` file with a script that handles redirecting the request to the `index.html` page.</span></span> <span data-ttu-id="dd9ad-302">例については、[SteveSandersonMS/BlazorOnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-302">For an example, see the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages):</span></span>
 
-* [`wwwroot/404.html`](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages/blob/master/wwwroot/404.html)
-* <span data-ttu-id="dd9ad-303">[ライブ サイト](https://stevesandersonms.github.io/:::no-loc(Blazor):::OnGitHubPages/)</span><span class="sxs-lookup"><span data-stu-id="dd9ad-303">[Live site](https://stevesandersonms.github.io/:::no-loc(Blazor):::OnGitHubPages/))</span></span>
+* [`wwwroot/404.html`](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/wwwroot/404.html)
+* <span data-ttu-id="dd9ad-303">[ライブ サイト](https://stevesandersonms.github.io/BlazorOnGitHubPages/)</span><span class="sxs-lookup"><span data-stu-id="dd9ad-303">[Live site](https://stevesandersonms.github.io/BlazorOnGitHubPages/))</span></span>
 
-<span data-ttu-id="dd9ad-304">組織のサイトではなくプロジェクトのサイトを使用しているときは、`wwwroot/index.html` 内の `<base>` タグを更新します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-304">When using a project site instead of an organization site, update the `<base>` tag in `wwwroot/index.html`.</span></span> <span data-ttu-id="dd9ad-305">`href` 属性の値を、GitHub リポジトリの名前の末尾にスラッシュを付けたもの (例: `/my-repository/`) に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-305">Set the `href` attribute value to the GitHub repository name with a trailing slash (for example, `/my-repository/`).</span></span> <span data-ttu-id="dd9ad-306">[SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages)では、[`.github/workflows/main.yml` 構成ファイル](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages/blob/master/.github/workflows/main.yml)による発行時に、基本 `href` が更新されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-306">In the [SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages), the base `href` is updated at publish by the [`.github/workflows/main.yml` configuration file](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages/blob/master/.github/workflows/main.yml).</span></span>
+<span data-ttu-id="dd9ad-304">組織のサイトではなくプロジェクトのサイトを使用しているときは、`wwwroot/index.html` 内の `<base>` タグを更新します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-304">When using a project site instead of an organization site, update the `<base>` tag in `wwwroot/index.html`.</span></span> <span data-ttu-id="dd9ad-305">`href` 属性の値を、GitHub リポジトリの名前の末尾にスラッシュを付けたもの (例: `/my-repository/`) に設定します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-305">Set the `href` attribute value to the GitHub repository name with a trailing slash (for example, `/my-repository/`).</span></span> <span data-ttu-id="dd9ad-306">[SteveSandersonMS/BlazorOnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)では、[`.github/workflows/main.yml` 構成ファイル](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml)による発行時に、基本 `href` が更新されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-306">In the [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages), the base `href` is updated at publish by the [`.github/workflows/main.yml` configuration file](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml).</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="dd9ad-307">[SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages)は、.NET Foundation または Microsoft では、所有、管理、またはサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-307">The [SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/:::no-loc(Blazor):::OnGitHubPages) isn't owned, maintained, or supported by the .NET Foundation or Microsoft.</span></span>
+> <span data-ttu-id="dd9ad-307">[SteveSandersonMS/BlazorOnGitHubPages GitHub リポジトリ](https://github.com/SteveSandersonMS/BlazorOnGitHubPages)は、.NET Foundation または Microsoft では、所有、管理、またはサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-307">The [SteveSandersonMS/BlazorOnGitHubPages GitHub repository](https://github.com/SteveSandersonMS/BlazorOnGitHubPages) isn't owned, maintained, or supported by the .NET Foundation or Microsoft.</span></span>
 
 ## <a name="host-configuration-values"></a><span data-ttu-id="dd9ad-308">ホストの構成値</span><span class="sxs-lookup"><span data-stu-id="dd9ad-308">Host configuration values</span></span>
 
-<span data-ttu-id="dd9ad-309">[:::no-loc(Blazor WebAssembly)::: アプリ](xref:blazor/hosting-models#blazor-webassembly)では、開発環境での実行時に以下のホスト構成値をコマンドライン引数として受け入れることができます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-309">[:::no-loc(Blazor WebAssembly)::: apps](xref:blazor/hosting-models#blazor-webassembly) can accept the following host configuration values as command-line arguments at runtime in the development environment.</span></span>
+<span data-ttu-id="dd9ad-309">[Blazor WebAssembly アプリ](xref:blazor/hosting-models#blazor-webassembly)では、開発環境での実行時に以下のホスト構成値をコマンドライン引数として受け入れることができます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-309">[Blazor WebAssembly apps](xref:blazor/hosting-models#blazor-webassembly) can accept the following host configuration values as command-line arguments at runtime in the development environment.</span></span>
 
 ### <a name="content-root"></a><span data-ttu-id="dd9ad-310">コンテンツ ルート</span><span class="sxs-lookup"><span data-stu-id="dd9ad-310">Content root</span></span>
 
@@ -739,7 +739,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-trimmer"></a><span data-ttu-id="dd9ad-339">トリマーを構成する</span><span class="sxs-lookup"><span data-stu-id="dd9ad-339">Configure the Trimmer</span></span>
 
-<span data-ttu-id="dd9ad-340">:::no-loc(Blazor)::: では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL トリミング設定が各リリース ビルド上で実行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-340">:::no-loc(Blazor)::: performs Intermediate Language (IL) trimming on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="dd9ad-341">詳細については、「<xref:blazor/host-and-deploy/configure-trimmer>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-341">For more information, see <xref:blazor/host-and-deploy/configure-trimmer>.</span></span>
+<span data-ttu-id="dd9ad-340">Blazor では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL トリミング設定が各リリース ビルド上で実行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-340">Blazor performs Intermediate Language (IL) trimming on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="dd9ad-341">詳細については、「<xref:blazor/host-and-deploy/configure-trimmer>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-341">For more information, see <xref:blazor/host-and-deploy/configure-trimmer>.</span></span>
 
 ::: moniker-end
 
@@ -747,13 +747,13 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ## <a name="configure-the-linker"></a><span data-ttu-id="dd9ad-342">リンカーを構成する</span><span class="sxs-lookup"><span data-stu-id="dd9ad-342">Configure the Linker</span></span>
 
-<span data-ttu-id="dd9ad-343">:::no-loc(Blazor)::: では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL リンク設定が各リリース ビルド上で実行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-343">:::no-loc(Blazor)::: performs Intermediate Language (IL) linking on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="dd9ad-344">詳細については、「<xref:blazor/host-and-deploy/configure-linker>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-344">For more information, see <xref:blazor/host-and-deploy/configure-linker>.</span></span>
+<span data-ttu-id="dd9ad-343">Blazor では、出力アセンブリから不要な中間言語 (IL) を削除するために、IL リンク設定が各リリース ビルド上で実行されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-343">Blazor performs Intermediate Language (IL) linking on each Release build to remove unnecessary IL from the output assemblies.</span></span> <span data-ttu-id="dd9ad-344">詳細については、「<xref:blazor/host-and-deploy/configure-linker>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-344">For more information, see <xref:blazor/host-and-deploy/configure-linker>.</span></span>
 
 ::: moniker-end
 
 ## <a name="custom-boot-resource-loading"></a><span data-ttu-id="dd9ad-345">カスタム ブート リソースの読み込み</span><span class="sxs-lookup"><span data-stu-id="dd9ad-345">Custom boot resource loading</span></span>
 
-<span data-ttu-id="dd9ad-346">:::no-loc(Blazor WebAssembly)::: アプリを `loadBootResource` 関数で初期化して、組み込みのブート リソース読み込みメカニズムをオーバーライドできます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-346">A :::no-loc(Blazor WebAssembly)::: app can be initialized with the `loadBootResource` function to override the built-in boot resource loading mechanism.</span></span> <span data-ttu-id="dd9ad-347">次のシナリオで `loadBootResource` を使用します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-347">Use `loadBootResource` for the following scenarios:</span></span>
+<span data-ttu-id="dd9ad-346">Blazor WebAssembly アプリを `loadBootResource` 関数で初期化して、組み込みのブート リソース読み込みメカニズムをオーバーライドできます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-346">A Blazor WebAssembly app can be initialized with the `loadBootResource` function to override the built-in boot resource loading mechanism.</span></span> <span data-ttu-id="dd9ad-347">次のシナリオで `loadBootResource` を使用します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-347">Use `loadBootResource` for the following scenarios:</span></span>
 
 * <span data-ttu-id="dd9ad-348">ユーザーが、タイムゾーン データや `dotnet.wasm` などの静的なリソースを CDN から読み込むことができるようにする。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-348">Allow users to load static resources, such as timezone data or `dotnet.wasm` from a CDN.</span></span>
 * <span data-ttu-id="dd9ad-349">HTTP 要求を使用して圧縮されたアセンブリを読み込み、サーバーからの圧縮コンテンツのフェッチをサポートしていないホストのクライアントに展開する。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-349">Load compressed assemblies using an HTTP request and decompress them on the client for hosts that don't support fetching compressed contents from the server.</span></span>
@@ -781,7 +781,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
   <script>
-    :::no-loc(Blazor):::.start({
+    Blazor.start({
       loadBootResource: function (type, name, defaultUri, integrity) {
         console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
         switch (type) {
@@ -802,7 +802,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
   ```html
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
   <script>
-    :::no-loc(Blazor):::.start({
+    Blazor.start({
       loadBootResource: function (type, name, defaultUri, integrity) {
         return fetch(defaultUri, { 
           cache: 'no-cache',
@@ -893,7 +893,7 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 
 ## <a name="resolve-integrity-check-failures"></a><span data-ttu-id="dd9ad-393">整合性チェックの失敗を解決する</span><span class="sxs-lookup"><span data-stu-id="dd9ad-393">Resolve integrity check failures</span></span>
 
-<span data-ttu-id="dd9ad-394">:::no-loc(Blazor WebAssembly)::: によってアプリのスタートアップ ファイルがダウンロードされると、応答に対して整合性チェックを実行するようにブラウザーに指示が出されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-394">When :::no-loc(Blazor WebAssembly)::: downloads an app's startup files, it instructs the browser to perform integrity checks on the responses.</span></span> <span data-ttu-id="dd9ad-395">`blazor.boot.json` ファイルの情報を使用して、`.dll`、`.wasm`、およびその他のファイルに対して想定される SHA-256 ハッシュ値が指定されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-395">It uses information in the `blazor.boot.json` file to specify the expected SHA-256 hash values for `.dll`, `.wasm`, and other files.</span></span> <span data-ttu-id="dd9ad-396">これには次のような理由で利点があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-396">This is beneficial for the following reasons:</span></span>
+<span data-ttu-id="dd9ad-394">Blazor WebAssembly によってアプリのスタートアップ ファイルがダウンロードされると、応答に対して整合性チェックを実行するようにブラウザーに指示が出されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-394">When Blazor WebAssembly downloads an app's startup files, it instructs the browser to perform integrity checks on the responses.</span></span> <span data-ttu-id="dd9ad-395">`blazor.boot.json` ファイルの情報を使用して、`.dll`、`.wasm`、およびその他のファイルに対して想定される SHA-256 ハッシュ値が指定されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-395">It uses information in the `blazor.boot.json` file to specify the expected SHA-256 hash values for `.dll`, `.wasm`, and other files.</span></span> <span data-ttu-id="dd9ad-396">これには次のような理由で利点があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-396">This is beneficial for the following reasons:</span></span>
 
 * <span data-ttu-id="dd9ad-397">たとえばユーザーがアプリケーション ファイルをダウンロードしているときに Web サーバーに新しい展開が適用された場合など、一貫性のないファイルのセットを読み込むリスクがなくなります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-397">It ensures you don't risk loading an inconsistent set of files, for example if a new deployment is applied to your web server while the user is in the process of downloading the application files.</span></span> <span data-ttu-id="dd9ad-398">不整合なファイルは未定義の動作につながる可能性があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-398">Inconsistent files could lead to undefined behavior.</span></span>
 * <span data-ttu-id="dd9ad-399">ユーザーのブラウザーが不整合または無効な応答をキャッシュしないようになります (その場合、ページを手動で更新してもアプリを起動できなくなる可能性があります)。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-399">It ensures the user's browser never caches inconsistent or invalid responses, which could prevent them from starting the app even if they manually refresh the page.</span></span>
@@ -902,7 +902,7 @@ Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
 <span data-ttu-id="dd9ad-401">想定される SHA-256 ハッシュに一致しない応答が Web サーバーから返された場合、ブラウザーの開発者コンソールに次のようなエラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-401">If your web server returns responses that don't match the expected SHA-256 hashes, you will see an error similar to the following appear in the browser's developer console:</span></span>
 
 ```
-Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/My:::no-loc(Blazor):::App.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
+Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
 ```
 
 <span data-ttu-id="dd9ad-402">ほとんどの場合、これは整合性チェック自体に関する問題では " *ありません* "。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-402">In most cases, this is *not* a problem with integrity checking itself.</span></span> <span data-ttu-id="dd9ad-403">代わりにこれは他の問題があることを意味し、整合性チェックによってその他の問題に関する警告が表示されます。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-403">Instead, it means there is some other problem, and the integrity check is warning you about that other problem.</span></span>
@@ -935,20 +935,20 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
 
 <span data-ttu-id="dd9ad-440">ほとんどの場合、整合性チェックを無効にしないでください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-440">In most cases, don't disable integrity checking.</span></span> <span data-ttu-id="dd9ad-441">整合性チェックを無効にしても、予期しない応答の原因となった根本的な問題は解決されず、前述の利点が失われる結果になります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-441">Disabling integrity checking doesn't solve the underlying problem that has caused the unexpected responses and results in losing the benefits listed earlier.</span></span>
 
-<span data-ttu-id="dd9ad-442">Web サーバーから一貫した応答が返されるとは限らないため、整合性チェックを無効にするしかないケースがあります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-442">There may be cases where the web server can't be relied upon to return consistent responses, and you have no choice but to disable integrity checks.</span></span> <span data-ttu-id="dd9ad-443">整合性チェックを無効にするには、:::no-loc(Blazor WebAssembly)::: プロジェクトの `.csproj` ファイル内のプロパティ グループに次を追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-443">To disable integrity checks, add the following to a property group in the :::no-loc(Blazor WebAssembly)::: project's `.csproj` file:</span></span>
+<span data-ttu-id="dd9ad-442">Web サーバーから一貫した応答が返されるとは限らないため、整合性チェックを無効にするしかないケースがあります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-442">There may be cases where the web server can't be relied upon to return consistent responses, and you have no choice but to disable integrity checks.</span></span> <span data-ttu-id="dd9ad-443">整合性チェックを無効にするには、Blazor WebAssembly プロジェクトの `.csproj` ファイル内のプロパティ グループに次を追加します。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-443">To disable integrity checks, add the following to a property group in the Blazor WebAssembly project's `.csproj` file:</span></span>
 
 ```xml
-<:::no-loc(Blazor):::CacheBootResources>false</:::no-loc(Blazor):::CacheBootResources>
+<BlazorCacheBootResources>false</BlazorCacheBootResources>
 ```
 
-<span data-ttu-id="dd9ad-444">`:::no-loc(Blazor):::CacheBootResources` により、SHA-256 ハッシュに基づいて `.dll`、`.wasm`、およびその他のファイルをキャッシュする :::no-loc(Blazor)::: の既定の動作も無効になります。このプロパティによって、SHA-256 ハッシュの正確性を信頼できないことが指定されるためです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-444">`:::no-loc(Blazor):::CacheBootResources` also disables :::no-loc(Blazor):::'s default behavior of caching the `.dll`, `.wasm`, and other files based on their SHA-256 hashes because the property indicates that the SHA-256 hashes can't be relied upon for correctness.</span></span> <span data-ttu-id="dd9ad-445">この設定を使用しても、ブラウザーの通常の HTTP キャッシュによってこれらのファイルがキャッシュされる可能性がありますが、このような状況が発生するかどうかは、Web サーバーの構成と、それによって提供される `cache-control` ヘッダーによって異なります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-445">Even with this setting, the browser's normal HTTP cache may still cache those files, but whether or not this happens depends on your web server configuration and the `cache-control` headers that it serves.</span></span>
+<span data-ttu-id="dd9ad-444">`BlazorCacheBootResources` により、SHA-256 ハッシュに基づいて `.dll`、`.wasm`、およびその他のファイルをキャッシュする Blazor の既定の動作も無効になります。このプロパティによって、SHA-256 ハッシュの正確性を信頼できないことが指定されるためです。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-444">`BlazorCacheBootResources` also disables Blazor's default behavior of caching the `.dll`, `.wasm`, and other files based on their SHA-256 hashes because the property indicates that the SHA-256 hashes can't be relied upon for correctness.</span></span> <span data-ttu-id="dd9ad-445">この設定を使用しても、ブラウザーの通常の HTTP キャッシュによってこれらのファイルがキャッシュされる可能性がありますが、このような状況が発生するかどうかは、Web サーバーの構成と、それによって提供される `cache-control` ヘッダーによって異なります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-445">Even with this setting, the browser's normal HTTP cache may still cache those files, but whether or not this happens depends on your web server configuration and the `cache-control` headers that it serves.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="dd9ad-446">`:::no-loc(Blazor):::CacheBootResources` プロパティによって[プログレッシブ Web アプリケーション (PWA)](xref:blazor/progressive-web-app) の整合性チェックが無効になることはありません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-446">The `:::no-loc(Blazor):::CacheBootResources` property doesn't disable integrity checks for [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app).</span></span> <span data-ttu-id="dd9ad-447">PWA に関連するガイダンスについては、「[PWA の整合性チェックを無効にする](#disable-integrity-checking-for-pwas)」セクションをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-447">For guidance pertaining to PWAs, see the [Disable integrity checking for PWAs](#disable-integrity-checking-for-pwas) section.</span></span>
+> <span data-ttu-id="dd9ad-446">`BlazorCacheBootResources` プロパティによって[プログレッシブ Web アプリケーション (PWA)](xref:blazor/progressive-web-app) の整合性チェックが無効になることはありません。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-446">The `BlazorCacheBootResources` property doesn't disable integrity checks for [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app).</span></span> <span data-ttu-id="dd9ad-447">PWA に関連するガイダンスについては、「[PWA の整合性チェックを無効にする](#disable-integrity-checking-for-pwas)」セクションをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-447">For guidance pertaining to PWAs, see the [Disable integrity checking for PWAs](#disable-integrity-checking-for-pwas) section.</span></span>
 
 ### <a name="disable-integrity-checking-for-pwas"></a><span data-ttu-id="dd9ad-448">PWA の整合性チェックを無効にする</span><span class="sxs-lookup"><span data-stu-id="dd9ad-448">Disable integrity checking for PWAs</span></span>
 
-<span data-ttu-id="dd9ad-449">:::no-loc(Blazor)::: のプログレッシブ Web アプリケーション (PWA) テンプレートには、オフライン使用のためにアプリケーション ファイルをフェッチおよび格納するための推奨される `service-worker.published.js` ファイルが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-449">:::no-loc(Blazor):::'s Progressive Web Application (PWA) template contains a suggested `service-worker.published.js` file that's responsible for fetching and storing application files for offline use.</span></span> <span data-ttu-id="dd9ad-450">これは通常のアプリの起動メカニズムとは別のプロセスであり、独自の整合性チェック ロジックを備えています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-450">This is a separate process from the normal app startup mechanism and has its own separate integrity checking logic.</span></span>
+<span data-ttu-id="dd9ad-449">Blazor のプログレッシブ Web アプリケーション (PWA) テンプレートには、オフライン使用のためにアプリケーション ファイルをフェッチおよび格納するための推奨される `service-worker.published.js` ファイルが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-449">Blazor's Progressive Web Application (PWA) template contains a suggested `service-worker.published.js` file that's responsible for fetching and storing application files for offline use.</span></span> <span data-ttu-id="dd9ad-450">これは通常のアプリの起動メカニズムとは別のプロセスであり、独自の整合性チェック ロジックを備えています。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-450">This is a separate process from the normal app startup mechanism and has its own separate integrity checking logic.</span></span>
 
 <span data-ttu-id="dd9ad-451">`service-worker.published.js` ファイル内に、次の行があります。</span><span class="sxs-lookup"><span data-stu-id="dd9ad-451">Inside the `service-worker.published.js` file, following line is present:</span></span>
 

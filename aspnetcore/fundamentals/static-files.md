@@ -6,15 +6,15 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/static-files
 ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -252,7 +252,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 ### <a name="security-considerations-for-static-files"></a><span data-ttu-id="7aa89-208">静的ファイルのセキュリティに関する注意点</span><span class="sxs-lookup"><span data-stu-id="7aa89-208">Security considerations for static files</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="7aa89-209">`UseDirectoryBrowser` と `UseStaticFiles` では、機密データが漏洩することがあります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-209">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="7aa89-210">本番では、ディレクトリ参照を無効にすることが、強く推奨されます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-210">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="7aa89-211">`UseStaticFiles` や `UseDirectoryBrowser` でどのディレクトリが有効になっているか、慎重にご確認ください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-211">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="7aa89-212">ディレクトリ全体とそのサブディレクトリが、パブリックにアクセス可能になります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-212">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="7aa89-213">ファイルは、パブリックに提供するのに適した、`<content_root>/wwwroot` などの専用ディレクトリに格納します。</span><span class="sxs-lookup"><span data-stu-id="7aa89-213">Store files suitable for serving to the public in a dedicated directory, such as `<content_root>/wwwroot`.</span></span> <span data-ttu-id="7aa89-214">これらのファイルは、MVC ビュー、:::no-loc(Razor)::: Pages、構成ファイルなどとは別にします。</span><span class="sxs-lookup"><span data-stu-id="7aa89-214">Separate these files from MVC views, :::no-loc(Razor)::: Pages, configuration files, etc.</span></span>
+> <span data-ttu-id="7aa89-209">`UseDirectoryBrowser` と `UseStaticFiles` では、機密データが漏洩することがあります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-209">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="7aa89-210">本番では、ディレクトリ参照を無効にすることが、強く推奨されます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-210">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="7aa89-211">`UseStaticFiles` や `UseDirectoryBrowser` でどのディレクトリが有効になっているか、慎重にご確認ください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-211">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="7aa89-212">ディレクトリ全体とそのサブディレクトリが、パブリックにアクセス可能になります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-212">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="7aa89-213">ファイルは、パブリックに提供するのに適した、`<content_root>/wwwroot` などの専用ディレクトリに格納します。</span><span class="sxs-lookup"><span data-stu-id="7aa89-213">Store files suitable for serving to the public in a dedicated directory, such as `<content_root>/wwwroot`.</span></span> <span data-ttu-id="7aa89-214">これらのファイルは、MVC ビュー、Razor Pages、構成ファイルなどとは別にします。</span><span class="sxs-lookup"><span data-stu-id="7aa89-214">Separate these files from MVC views, Razor Pages, configuration files, etc.</span></span>
 
 * <span data-ttu-id="7aa89-215">`UseDirectoryBrowser` と `UseStaticFiles` で公開されるコンテンツの URL では、大文字と小文字が区別され、基になるファイル システムの文字制限の影響を受けます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-215">The URLs for content exposed with `UseDirectoryBrowser` and `UseStaticFiles` are subject to the case sensitivity and character restrictions of the underlying file system.</span></span> <span data-ttu-id="7aa89-216">たとえば、Windows では大文字と小文字が区別されませんが、macOS と Linux では区別されます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-216">For example, Windows is case insensitive, but macOS and Linux aren't.</span></span>
 
@@ -461,7 +461,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 <span data-ttu-id="7aa89-328">「[MIME content types](https://www.iana.org/assignments/media-types/media-types.xhtml)」 (MIME コンテンツ タイプ) を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-328">See [MIME content types](https://www.iana.org/assignments/media-types/media-types.xhtml).</span></span>
 
-<span data-ttu-id="7aa89-329">カスタム <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> を使用する方法、または :::no-loc(Blazor)::: サーバー アプリで他の <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> を構成する方法については、<xref:blazor/fundamentals/additional-scenarios#static-files> を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-329">For information on using a custom <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> or to configure other <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> in :::no-loc(Blazor)::: Server apps, see <xref:blazor/fundamentals/additional-scenarios#static-files>.</span></span>
+<span data-ttu-id="7aa89-329">カスタム <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> を使用する方法、または Blazor サーバー アプリで他の <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> を構成する方法については、<xref:blazor/fundamentals/additional-scenarios#static-files> を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-329">For information on using a custom <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> or to configure other <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> in Blazor Server apps, see <xref:blazor/fundamentals/additional-scenarios#static-files>.</span></span>
 
 ## <a name="non-standard-content-types"></a><span data-ttu-id="7aa89-330">非標準のコンテンツ タイプ</span><span class="sxs-lookup"><span data-stu-id="7aa89-330">Non-standard content types</span></span>
 
@@ -483,7 +483,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 ### <a name="considerations"></a><span data-ttu-id="7aa89-344">注意事項</span><span class="sxs-lookup"><span data-stu-id="7aa89-344">Considerations</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="7aa89-345">`UseDirectoryBrowser` と `UseStaticFiles` では、機密データが漏洩することがあります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-345">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="7aa89-346">本番では、ディレクトリ参照を無効にすることが、強く推奨されます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-346">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="7aa89-347">`UseStaticFiles` や `UseDirectoryBrowser` でどのディレクトリが有効になっているか、慎重にご確認ください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-347">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="7aa89-348">ディレクトリ全体とそのサブディレクトリが、パブリックにアクセス可能になります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-348">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="7aa89-349">ファイルは、パブリックに提供するのに適した、 *\<content_root>/wwwroot* などの専用ディレクトリに格納します。</span><span class="sxs-lookup"><span data-stu-id="7aa89-349">Store files suitable for serving to the public in a dedicated directory, such as *\<content_root>/wwwroot*.</span></span> <span data-ttu-id="7aa89-350">これらのファイルは、MVC ビュー、:::no-loc(Razor)::: Pages (2.x のみ)、構成ファイルなどとは別にします。</span><span class="sxs-lookup"><span data-stu-id="7aa89-350">Separate these files from MVC views, :::no-loc(Razor)::: Pages (2.x only), configuration files, etc.</span></span>
+> <span data-ttu-id="7aa89-345">`UseDirectoryBrowser` と `UseStaticFiles` では、機密データが漏洩することがあります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-345">`UseDirectoryBrowser` and `UseStaticFiles` can leak secrets.</span></span> <span data-ttu-id="7aa89-346">本番では、ディレクトリ参照を無効にすることが、強く推奨されます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-346">Disabling directory browsing in production is highly recommended.</span></span> <span data-ttu-id="7aa89-347">`UseStaticFiles` や `UseDirectoryBrowser` でどのディレクトリが有効になっているか、慎重にご確認ください。</span><span class="sxs-lookup"><span data-stu-id="7aa89-347">Carefully review which directories are enabled via `UseStaticFiles` or `UseDirectoryBrowser`.</span></span> <span data-ttu-id="7aa89-348">ディレクトリ全体とそのサブディレクトリが、パブリックにアクセス可能になります。</span><span class="sxs-lookup"><span data-stu-id="7aa89-348">The entire directory and its sub-directories become publicly accessible.</span></span> <span data-ttu-id="7aa89-349">ファイルは、パブリックに提供するのに適した、 *\<content_root>/wwwroot* などの専用ディレクトリに格納します。</span><span class="sxs-lookup"><span data-stu-id="7aa89-349">Store files suitable for serving to the public in a dedicated directory, such as *\<content_root>/wwwroot*.</span></span> <span data-ttu-id="7aa89-350">これらのファイルは、MVC ビュー、Razor Pages (2.x のみ)、構成ファイルなどとは別にします。</span><span class="sxs-lookup"><span data-stu-id="7aa89-350">Separate these files from MVC views, Razor Pages (2.x only), configuration files, etc.</span></span>
 
 * <span data-ttu-id="7aa89-351">`UseDirectoryBrowser` と `UseStaticFiles` で公開されるコンテンツの URL では、大文字と小文字が区別され、基になるファイル システムの文字制限の影響を受けます。</span><span class="sxs-lookup"><span data-stu-id="7aa89-351">The URLs for content exposed with `UseDirectoryBrowser` and `UseStaticFiles` are subject to the case sensitivity and character restrictions of the underlying file system.</span></span> <span data-ttu-id="7aa89-352">たとえば、Windows では大文字小文字は区別されますが、macOS と Linux ではされません。</span><span class="sxs-lookup"><span data-stu-id="7aa89-352">For example, Windows is case insensitive&mdash;macOS and Linux aren't.</span></span>
 

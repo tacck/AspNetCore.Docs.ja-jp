@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: のコンテンツ セキュリティ ポリシーを適用する'
+title: 'ASP.NET Core Blazor のコンテンツ セキュリティ ポリシーを適用する'
 author: guardrex
-description: 'ASP.NET Core :::no-loc(Blazor)::: アプリでコンテンツ セキュリティ ポリシー (CSP) を使用して、クロスサイト スクリプティング (XSS) 攻撃から保護する方法について説明します。'
+description: 'ASP.NET Core Blazor アプリでコンテンツ セキュリティ ポリシー (CSP) を使用して、クロスサイト スクリプティング (XSS) 攻撃から保護する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/content-security-policy
 ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,7 +26,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055595"
 ---
-# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a><span data-ttu-id="1a509-103">ASP.NET Core :::no-loc(Blazor)::: のコンテンツ セキュリティ ポリシーを適用する</span><span class="sxs-lookup"><span data-stu-id="1a509-103">Enforce a Content Security Policy for ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a><span data-ttu-id="1a509-103">ASP.NET Core Blazor のコンテンツ セキュリティ ポリシーを適用する</span><span class="sxs-lookup"><span data-stu-id="1a509-103">Enforce a Content Security Policy for ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="1a509-104">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="1a509-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
@@ -40,11 +40,11 @@ ms.locfileid: "93055595"
 
 <span data-ttu-id="1a509-111">ポリシーは、ページの読み込み中にブラウザーによって評価されます。</span><span class="sxs-lookup"><span data-stu-id="1a509-111">Policies are evaluated by the browser while a page is loading.</span></span> <span data-ttu-id="1a509-112">ブラウザーによりページのソースが検査され、コンテンツ セキュリティ ディレクティブの要件を満たしているかどうかが判断されます。</span><span class="sxs-lookup"><span data-stu-id="1a509-112">The browser inspects the page's sources and determines if they meet the requirements of the content security directives.</span></span> <span data-ttu-id="1a509-113">リソースのポリシー ディレクティブが満たされていない場合、ブラウザーでリソースが読み込まれません。</span><span class="sxs-lookup"><span data-stu-id="1a509-113">When policy directives aren't met for a resource, the browser doesn't load the resource.</span></span> <span data-ttu-id="1a509-114">たとえば、サードパーティのスクリプトを許可しないポリシーについて考えてみます。</span><span class="sxs-lookup"><span data-stu-id="1a509-114">For example, consider a policy that doesn't allow third-party scripts.</span></span> <span data-ttu-id="1a509-115">ページの `src` 属性にサードパーティから発生した `<script>` タグが含まれている場合、ブラウザーによってスクリプトの読み込みが禁止されます。</span><span class="sxs-lookup"><span data-stu-id="1a509-115">When a page contains a `<script>` tag with a third-party origin in the `src` attribute, the browser prevents the script from loading.</span></span>
 
-<span data-ttu-id="1a509-116">CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新のデスクトップおよびモバイル ブラウザーのほとんどでサポートされています。</span><span class="sxs-lookup"><span data-stu-id="1a509-116">CSP is supported in most modern desktop and mobile browsers, including Chrome, Edge, Firefox, Opera, and Safari.</span></span> <span data-ttu-id="1a509-117">CSP は、:::no-loc(Blazor)::: アプリで推奨されています。</span><span class="sxs-lookup"><span data-stu-id="1a509-117">CSP is recommended for :::no-loc(Blazor)::: apps.</span></span>
+<span data-ttu-id="1a509-116">CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新のデスクトップおよびモバイル ブラウザーのほとんどでサポートされています。</span><span class="sxs-lookup"><span data-stu-id="1a509-116">CSP is supported in most modern desktop and mobile browsers, including Chrome, Edge, Firefox, Opera, and Safari.</span></span> <span data-ttu-id="1a509-117">CSP は、Blazor アプリで推奨されています。</span><span class="sxs-lookup"><span data-stu-id="1a509-117">CSP is recommended for Blazor apps.</span></span>
 
 ## <a name="policy-directives"></a><span data-ttu-id="1a509-118">ポリシー ディレクティブ</span><span class="sxs-lookup"><span data-stu-id="1a509-118">Policy directives</span></span>
 
-<span data-ttu-id="1a509-119">最小限として、:::no-loc(Blazor)::: アプリの次のディレクティブとソースを指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-119">Minimally, specify the following directives and sources for :::no-loc(Blazor)::: apps.</span></span> <span data-ttu-id="1a509-120">必要に応じて、ディレクティブとソースを追加してください。</span><span class="sxs-lookup"><span data-stu-id="1a509-120">Add additional directives and sources as needed.</span></span> <span data-ttu-id="1a509-121">次のディレクティブは、この記事の「[ポリシーの適用](#apply-the-policy)」セクションで使用されます。そこでは、:::no-loc(Blazor WebAssembly)::: と :::no-loc(Blazor Server)::: のセキュリティ ポリシーの例を示しています。</span><span class="sxs-lookup"><span data-stu-id="1a509-121">The following directives are used in the [Apply the policy](#apply-the-policy) section of this article, where example security policies for :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server)::: are provided:</span></span>
+<span data-ttu-id="1a509-119">最小限として、Blazor アプリの次のディレクティブとソースを指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-119">Minimally, specify the following directives and sources for Blazor apps.</span></span> <span data-ttu-id="1a509-120">必要に応じて、ディレクティブとソースを追加してください。</span><span class="sxs-lookup"><span data-stu-id="1a509-120">Add additional directives and sources as needed.</span></span> <span data-ttu-id="1a509-121">次のディレクティブは、この記事の「[ポリシーの適用](#apply-the-policy)」セクションで使用されます。そこでは、Blazor WebAssembly と Blazor Server のセキュリティ ポリシーの例を示しています。</span><span class="sxs-lookup"><span data-stu-id="1a509-121">The following directives are used in the [Apply the policy](#apply-the-policy) section of this article, where example security policies for Blazor WebAssembly and Blazor Server are provided:</span></span>
 
 * <span data-ttu-id="1a509-122">[base-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): ページの `<base>` タグの URL を制限します。</span><span class="sxs-lookup"><span data-stu-id="1a509-122">[base-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): Restricts the URLs for a page's `<base>` tag.</span></span> <span data-ttu-id="1a509-123">`self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-123">Specify `self` to indicate that the app's origin, including the scheme and port number, is a valid source.</span></span>
 * <span data-ttu-id="1a509-124">[block-all-mixed-content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): HTTP と HTTPS の混合コンテンツの読み込みを禁止します。</span><span class="sxs-lookup"><span data-stu-id="1a509-124">[block-all-mixed-content](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): Prevents loading mixed HTTP and HTTPS content.</span></span>
@@ -56,17 +56,17 @@ ms.locfileid: "93055595"
 * <span data-ttu-id="1a509-132">[script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): スクリプトの有効なソースを示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-132">[script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): Indicates valid sources for scripts.</span></span>
   * <span data-ttu-id="1a509-133">ブートストラップ スクリプトの `https://stackpath.bootstrapcdn.com/` ホスト ソースを指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-133">Specify the `https://stackpath.bootstrapcdn.com/` host source for Bootstrap scripts.</span></span>
   * <span data-ttu-id="1a509-134">`self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-134">Specify `self` to indicate that the app's origin, including the scheme and port number, is a valid source.</span></span>
-  * <span data-ttu-id="1a509-135">:::no-loc(Blazor WebAssembly)::: アプリでは以下のようにします。</span><span class="sxs-lookup"><span data-stu-id="1a509-135">In a :::no-loc(Blazor WebAssembly)::: app:</span></span>
-    * <span data-ttu-id="1a509-136">次のハッシュを指定して、必要な :::no-loc(Blazor WebAssembly)::: のインライン スクリプトの読み込みを許可します。</span><span class="sxs-lookup"><span data-stu-id="1a509-136">Specify the following hashes to permit the required :::no-loc(Blazor WebAssembly)::: inline scripts to load:</span></span>
+  * <span data-ttu-id="1a509-135">Blazor WebAssembly アプリでは以下のようにします。</span><span class="sxs-lookup"><span data-stu-id="1a509-135">In a Blazor WebAssembly app:</span></span>
+    * <span data-ttu-id="1a509-136">次のハッシュを指定して、必要な Blazor WebAssembly のインライン スクリプトの読み込みを許可します。</span><span class="sxs-lookup"><span data-stu-id="1a509-136">Specify the following hashes to permit the required Blazor WebAssembly inline scripts to load:</span></span>
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * <span data-ttu-id="1a509-137">`eval()` および文字列からコードを作成するメソッドを使用するには、`unsafe-eval` を指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-137">Specify `unsafe-eval` to use `eval()` and methods for creating code from strings.</span></span>
-  * <span data-ttu-id="1a509-138">:::no-loc(Blazor Server)::: アプリでは、スタイルシートのフォールバック検出を実行するインライン スクリプトの `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` ハッシュを指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-138">In a :::no-loc(Blazor Server)::: app, specify the `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` hash for the inline script that performs fallback detection for stylesheets.</span></span>
+  * <span data-ttu-id="1a509-138">Blazor Server アプリでは、スタイルシートのフォールバック検出を実行するインライン スクリプトの `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` ハッシュを指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-138">In a Blazor Server app, specify the `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` hash for the inline script that performs fallback detection for stylesheets.</span></span>
 * <span data-ttu-id="1a509-139">[style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): スタイルシートの有効なソースを示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-139">[style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): Indicates valid sources for stylesheets.</span></span>
   * <span data-ttu-id="1a509-140">ブートストラップ スタイルシートの `https://stackpath.bootstrapcdn.com/` ホスト ソースを指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-140">Specify the `https://stackpath.bootstrapcdn.com/` host source for Bootstrap stylesheets.</span></span>
   * <span data-ttu-id="1a509-141">`self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-141">Specify `self` to indicate that the app's origin, including the scheme and port number, is a valid source.</span></span>
-  * <span data-ttu-id="1a509-142">インライン スタイルの使用を許可するには `unsafe-inline` を指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-142">Specify `unsafe-inline` to allow the use of inline styles.</span></span> <span data-ttu-id="1a509-143">初期要求後にクライアントとサーバーを再接続するには、:::no-loc(Blazor Server)::: アプリの UI にインライン宣言が必要です。</span><span class="sxs-lookup"><span data-stu-id="1a509-143">The inline declaration is required for the UI in :::no-loc(Blazor Server)::: apps for reconnecting the client and server after the initial request.</span></span> <span data-ttu-id="1a509-144">今後のリリースでは、`unsafe-inline` が不要になるように、インライン スタイルが削除される可能性があります。</span><span class="sxs-lookup"><span data-stu-id="1a509-144">In a future release, inline styling might be removed so that `unsafe-inline` is no longer required.</span></span>
+  * <span data-ttu-id="1a509-142">インライン スタイルの使用を許可するには `unsafe-inline` を指定します。</span><span class="sxs-lookup"><span data-stu-id="1a509-142">Specify `unsafe-inline` to allow the use of inline styles.</span></span> <span data-ttu-id="1a509-143">初期要求後にクライアントとサーバーを再接続するには、Blazor Server アプリの UI にインライン宣言が必要です。</span><span class="sxs-lookup"><span data-stu-id="1a509-143">The inline declaration is required for the UI in Blazor Server apps for reconnecting the client and server after the initial request.</span></span> <span data-ttu-id="1a509-144">今後のリリースでは、`unsafe-inline` が不要になるように、インライン スタイルが削除される可能性があります。</span><span class="sxs-lookup"><span data-stu-id="1a509-144">In a future release, inline styling might be removed so that `unsafe-inline` is no longer required.</span></span>
 * <span data-ttu-id="1a509-145">[upgrade-insecure-requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): セキュリティで保護されていない (HTTP) ソースからのコンテンツ URL を HTTPS 経由で安全に取得する必要があることを示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-145">[upgrade-insecure-requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): Indicates that content URLs from insecure (HTTP) sources should be acquired securely over HTTPS.</span></span>
 
 <span data-ttu-id="1a509-146">上記のディレクティブは、Microsoft Internet Explorer 以外のすべてのブラウザーでサポートされています。</span><span class="sxs-lookup"><span data-stu-id="1a509-146">The preceding directives are supported by all browsers except Microsoft Internet Explorer.</span></span>
@@ -87,9 +87,9 @@ ms.locfileid: "93055595"
 * <span data-ttu-id="1a509-157">`content` 属性値にディレクティブを配置します。</span><span class="sxs-lookup"><span data-stu-id="1a509-157">Place the directives in the `content` attribute value.</span></span> <span data-ttu-id="1a509-158">各ディレクティブをセミコロン (`;`) で区切ります。</span><span class="sxs-lookup"><span data-stu-id="1a509-158">Separate directives with a semicolon (`;`).</span></span>
 * <span data-ttu-id="1a509-159">常に `meta` タグを `<head>` のコンテンツに配置します。</span><span class="sxs-lookup"><span data-stu-id="1a509-159">Always place the `meta` tag in the `<head>` content.</span></span>
 
-<span data-ttu-id="1a509-160">次のセクションに、:::no-loc(Blazor WebAssembly)::: と :::no-loc(Blazor Server)::: のポリシーの例を示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-160">The following sections show example policies for :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server):::.</span></span> <span data-ttu-id="1a509-161">これらの例は、:::no-loc(Blazor)::: のリリースごとにこの記事でバージョン管理されています。</span><span class="sxs-lookup"><span data-stu-id="1a509-161">These examples are versioned with this article for each release of :::no-loc(Blazor):::.</span></span> <span data-ttu-id="1a509-162">リリースに適したバージョンを使用するには、この Web ページの **[バージョン]** ドロップ ダウン セレクターを使用してドキュメントのバージョンを選択してください。</span><span class="sxs-lookup"><span data-stu-id="1a509-162">To use a version appropriate for your release, select the document version with the **Version** drop down selector on this webpage.</span></span>
+<span data-ttu-id="1a509-160">次のセクションに、Blazor WebAssembly と Blazor Server のポリシーの例を示します。</span><span class="sxs-lookup"><span data-stu-id="1a509-160">The following sections show example policies for Blazor WebAssembly and Blazor Server.</span></span> <span data-ttu-id="1a509-161">これらの例は、Blazor のリリースごとにこの記事でバージョン管理されています。</span><span class="sxs-lookup"><span data-stu-id="1a509-161">These examples are versioned with this article for each release of Blazor.</span></span> <span data-ttu-id="1a509-162">リリースに適したバージョンを使用するには、この Web ページの **[バージョン]** ドロップ ダウン セレクターを使用してドキュメントのバージョンを選択してください。</span><span class="sxs-lookup"><span data-stu-id="1a509-162">To use a version appropriate for your release, select the document version with the **Version** drop down selector on this webpage.</span></span>
 
-### :::no-loc(Blazor WebAssembly):::
+### Blazor WebAssembly
 
 <span data-ttu-id="1a509-163">`wwwroot/index.html` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。</span><span class="sxs-lookup"><span data-stu-id="1a509-163">In the `<head>` content of the `wwwroot/index.html` host page, apply the directives described in the [Policy directives](#policy-directives) section:</span></span>
 
@@ -112,7 +112,7 @@ ms.locfileid: "93055595"
                upgrade-insecure-requests;">
 ```
 
-### :::no-loc(Blazor Server):::
+### Blazor Server
 
 <span data-ttu-id="1a509-164">`Pages/_Host.cshtml` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。</span><span class="sxs-lookup"><span data-stu-id="1a509-164">In the `<head>` content of the `Pages/_Host.cshtml` host page, apply the directives described in the [Policy directives](#policy-directives) section:</span></span>
 

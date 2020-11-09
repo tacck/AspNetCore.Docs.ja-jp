@@ -5,17 +5,17 @@ description: 共通レイアウトの使用方法、ディレクティブの共�
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/layout
 ms.openlocfilehash: 502df268e7f5f33acfffccd5ec0bd65267fa12da
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,9 +34,9 @@ ms.locfileid: "93060977"
 * <span data-ttu-id="60a6a-108">ディレクティブを共有する。</span><span class="sxs-lookup"><span data-stu-id="60a6a-108">Share directives.</span></span>
 * <span data-ttu-id="60a6a-109">ページまたはビューを表示する前に、共通のコードを実行する。</span><span class="sxs-lookup"><span data-stu-id="60a6a-109">Run common code before rendering pages or views.</span></span>
 
-<span data-ttu-id="60a6a-110">このドキュメントでは、MVC を ASP.NET Core するための2つの異なるアプローチのレイアウトについて説明します。 :::no-loc(Razor)::: ビューにはページとコントローラーがあります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-110">This document discusses layouts for the two different approaches to ASP.NET Core MVC: :::no-loc(Razor)::: Pages and controllers with views.</span></span> <span data-ttu-id="60a6a-111">このトピックでは、違いは最小限です。</span><span class="sxs-lookup"><span data-stu-id="60a6a-111">For this topic, the differences are minimal:</span></span>
+<span data-ttu-id="60a6a-110">このドキュメントでは、MVC を ASP.NET Core するための2つの異なるアプローチのレイアウトについて説明します。 Razor ビューにはページとコントローラーがあります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-110">This document discusses layouts for the two different approaches to ASP.NET Core MVC: Razor Pages and controllers with views.</span></span> <span data-ttu-id="60a6a-111">このトピックでは、違いは最小限です。</span><span class="sxs-lookup"><span data-stu-id="60a6a-111">For this topic, the differences are minimal:</span></span>
 
-* <span data-ttu-id="60a6a-112">:::no-loc(Razor)::: ページは *ページ* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-112">:::no-loc(Razor)::: Pages are in the *Pages* folder.</span></span>
+* <span data-ttu-id="60a6a-112">Razor ページは *ページ* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-112">Razor Pages are in the *Pages* folder.</span></span>
 * <span data-ttu-id="60a6a-113">ビューを含むコントローラーでは、 *Views* フォルダーをビューに使用します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-113">Controllers with views uses a *Views* folder for views.</span></span>
 
 ## <a name="what-is-a-layout"></a><span data-ttu-id="60a6a-114">レイアウトとは</span><span class="sxs-lookup"><span data-stu-id="60a6a-114">What is a Layout</span></span>
@@ -49,7 +49,7 @@ ms.locfileid: "93060977"
 
 <span data-ttu-id="60a6a-121">規則により、ASP.NET Core アプリの既定のレイアウトには *_Layout.cshtml* という名前が付けられます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-121">By convention, the default layout for an ASP.NET Core app is named *_Layout.cshtml* .</span></span> <span data-ttu-id="60a6a-122">テンプレートを使用すると、次のような新しい ASP.NET Core プロジェクトのレイアウト ファイルが作成されます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-122">The layout files for new ASP.NET Core projects created with the templates are:</span></span>
 
-* <span data-ttu-id="60a6a-123">:::no-loc(Razor)::: ページ: *pages/Shared/_Layout. cshtml*</span><span class="sxs-lookup"><span data-stu-id="60a6a-123">:::no-loc(Razor)::: Pages: *Pages/Shared/_Layout.cshtml*</span></span>
+* <span data-ttu-id="60a6a-123">Razor ページ: *pages/Shared/_Layout. cshtml*</span><span class="sxs-lookup"><span data-stu-id="60a6a-123">Razor Pages: *Pages/Shared/_Layout.cshtml*</span></span>
 
   ![ソリューション エクスプローラーの Pages フォルダー](layout/_static/rp-web-project-views.png)
 
@@ -65,11 +65,11 @@ ms.locfileid: "93060977"
 
 ## <a name="specifying-a-layout"></a><span data-ttu-id="60a6a-131">レイアウトの指定</span><span class="sxs-lookup"><span data-stu-id="60a6a-131">Specifying a Layout</span></span>
 
-<span data-ttu-id="60a6a-132">:::no-loc(Razor)::: ビューには `Layout` プロパティがあります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-132">:::no-loc(Razor)::: views have a `Layout` property.</span></span> <span data-ttu-id="60a6a-133">個々のビューは、このプロパティを設定することでレイアウトを指定します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-133">Individual views specify a layout by setting this property:</span></span>
+<span data-ttu-id="60a6a-132">Razor ビューには `Layout` プロパティがあります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-132">Razor views have a `Layout` property.</span></span> <span data-ttu-id="60a6a-133">個々のビューは、このプロパティを設定することでレイアウトを指定します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-133">Individual views specify a layout by setting this property:</span></span>
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-<span data-ttu-id="60a6a-134">指定されるレイアウトでは、完全なパス (例: */Pages/Shared/_Layout.cshtml* 、 */Views/Shared/_Layout.cshtml* ) または部分パス (例: `_Layout`) を使用できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-134">The layout specified can use a full path (for example, */Pages/Shared/_Layout.cshtml* or */Views/Shared/_Layout.cshtml* ) or a partial name (example: `_Layout`).</span></span> <span data-ttu-id="60a6a-135">部分名を指定すると、 :::no-loc(Razor)::: ビューエンジンは標準の検出プロセスを使用してレイアウトファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-135">When a partial name is provided, the :::no-loc(Razor)::: view engine searches for the layout file using its standard discovery process.</span></span> <span data-ttu-id="60a6a-136">ハンドラー メソッド (またはコントローラー) が存在するフォルダーが最初に検索され、その後で *Shared* フォルダーが検索されます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-136">The folder where the handler method (or controller) exists is searched first, followed by the *Shared* folder.</span></span> <span data-ttu-id="60a6a-137">この検出プロセスは、[部分ビュー](xref:mvc/views/partial#partial-view-discovery)の検出に使用されるのと同じプロセスです。</span><span class="sxs-lookup"><span data-stu-id="60a6a-137">This discovery process is identical to the process used to discover [partial views](xref:mvc/views/partial#partial-view-discovery).</span></span>
+<span data-ttu-id="60a6a-134">指定されるレイアウトでは、完全なパス (例: */Pages/Shared/_Layout.cshtml* 、 */Views/Shared/_Layout.cshtml* ) または部分パス (例: `_Layout`) を使用できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-134">The layout specified can use a full path (for example, */Pages/Shared/_Layout.cshtml* or */Views/Shared/_Layout.cshtml* ) or a partial name (example: `_Layout`).</span></span> <span data-ttu-id="60a6a-135">部分名を指定すると、 Razor ビューエンジンは標準の検出プロセスを使用してレイアウトファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-135">When a partial name is provided, the Razor view engine searches for the layout file using its standard discovery process.</span></span> <span data-ttu-id="60a6a-136">ハンドラー メソッド (またはコントローラー) が存在するフォルダーが最初に検索され、その後で *Shared* フォルダーが検索されます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-136">The folder where the handler method (or controller) exists is searched first, followed by the *Shared* folder.</span></span> <span data-ttu-id="60a6a-137">この検出プロセスは、[部分ビュー](xref:mvc/views/partial#partial-view-discovery)の検出に使用されるのと同じプロセスです。</span><span class="sxs-lookup"><span data-stu-id="60a6a-137">This discovery process is identical to the process used to discover [partial views](xref:mvc/views/partial#partial-view-discovery).</span></span>
 
 <span data-ttu-id="60a6a-138">既定では、すべてのレイアウトで `RenderBody` を呼び出す必要があります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-138">By default, every layout must call `RenderBody`.</span></span> <span data-ttu-id="60a6a-139">`RenderBody` への呼び出しが配置されると、ビューのコンテンツがレンダリングされます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-139">Wherever the call to `RenderBody` is placed, the contents of the view will be rendered.</span></span>
 
@@ -85,9 +85,9 @@ ms.locfileid: "93060977"
 @RenderSection("Scripts", required: false)
 ```
 
-<span data-ttu-id="60a6a-144">必須のセクションが見つからない場合、例外がスローされます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-144">If a required section isn't found, an exception is thrown.</span></span> <span data-ttu-id="60a6a-145">個々のビューでは、構文を使用して、セクション内に表示されるコンテンツを指定し `@section` :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-145">Individual views specify the content to be rendered within a section using the `@section` :::no-loc(Razor)::: syntax.</span></span> <span data-ttu-id="60a6a-146">ページまたはビューでセクションを定義する場合は、レンダリングされる必要があります (そうしないと、エラーが発生します)。</span><span class="sxs-lookup"><span data-stu-id="60a6a-146">If a page or view defines a section, it must be rendered (or an error will occur).</span></span>
+<span data-ttu-id="60a6a-144">必須のセクションが見つからない場合、例外がスローされます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-144">If a required section isn't found, an exception is thrown.</span></span> <span data-ttu-id="60a6a-145">個々のビューでは、構文を使用して、セクション内に表示されるコンテンツを指定し `@section` Razor ます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-145">Individual views specify the content to be rendered within a section using the `@section` Razor syntax.</span></span> <span data-ttu-id="60a6a-146">ページまたはビューでセクションを定義する場合は、レンダリングされる必要があります (そうしないと、エラーが発生します)。</span><span class="sxs-lookup"><span data-stu-id="60a6a-146">If a page or view defines a section, it must be rendered (or an error will occur).</span></span>
 
-<span data-ttu-id="60a6a-147">`@section`ページビューの定義の例を :::no-loc(Razor)::: 次に示します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-147">An example `@section` definition in :::no-loc(Razor)::: Pages view:</span></span>
+<span data-ttu-id="60a6a-147">`@section`ページビューの定義の例を Razor 次に示します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-147">An example `@section` definition in Razor Pages view:</span></span>
 
 ```html
 @section Scripts {
@@ -105,23 +105,23 @@ ms.locfileid: "93060977"
 }
 ```
 
-<span data-ttu-id="60a6a-151">前のマークアップは、[スキャフォールディング :::no-loc(Identity)::: ](xref:security/authentication/scaffold-identity)によって生成されました。</span><span class="sxs-lookup"><span data-stu-id="60a6a-151">The preceding markup was generated by [scaffolding :::no-loc(Identity):::](xref:security/authentication/scaffold-identity).</span></span>
+<span data-ttu-id="60a6a-151">前のマークアップは、[スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)によって生成されました。</span><span class="sxs-lookup"><span data-stu-id="60a6a-151">The preceding markup was generated by [scaffolding Identity](xref:security/authentication/scaffold-identity).</span></span>
 
 <span data-ttu-id="60a6a-152">ページまたはビューで定義されたセクションは、そのイミディエイト レイアウト ページでのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-152">Sections defined in a page or view are available only in its immediate layout page.</span></span> <span data-ttu-id="60a6a-153">これらは、部分、ビュー コンポーネント、またはビュー システムの他の部分からは参照できません。</span><span class="sxs-lookup"><span data-stu-id="60a6a-153">They cannot be referenced from partials, view components, or other parts of the view system.</span></span>
 
 ### <a name="ignoring-sections"></a><span data-ttu-id="60a6a-154">セクションの無視</span><span class="sxs-lookup"><span data-stu-id="60a6a-154">Ignoring sections</span></span>
 
-<span data-ttu-id="60a6a-155">既定では、コンテンツ ページの本文とすべてのセクションがレイアウト ページですべてレンダリングされる必要があります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-155">By default, the body and all sections in a content page must all be rendered by the layout page.</span></span> <span data-ttu-id="60a6a-156">:::no-loc(Razor):::ビューエンジンは、本文と各セクションがレンダリングされているかどうかを追跡することによってこれを適用します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-156">The :::no-loc(Razor)::: view engine enforces this by tracking whether the body and each section have been rendered.</span></span>
+<span data-ttu-id="60a6a-155">既定では、コンテンツ ページの本文とすべてのセクションがレイアウト ページですべてレンダリングされる必要があります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-155">By default, the body and all sections in a content page must all be rendered by the layout page.</span></span> <span data-ttu-id="60a6a-156">Razorビューエンジンは、本文と各セクションがレンダリングされているかどうかを追跡することによってこれを適用します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-156">The Razor view engine enforces this by tracking whether the body and each section have been rendered.</span></span>
 
 <span data-ttu-id="60a6a-157">本文またはセクションを無視するようにビュー エンジンに指示するには、`IgnoreBody` メソッドと `IgnoreSection` メソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="60a6a-157">To instruct the view engine to ignore the body or sections, call the `IgnoreBody` and `IgnoreSection` methods.</span></span>
 
-<span data-ttu-id="60a6a-158">ページ内の本文とすべてのセクションは、 :::no-loc(Razor)::: 表示または無視する必要があります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-158">The body and every section in a :::no-loc(Razor)::: page must be either rendered or ignored.</span></span>
+<span data-ttu-id="60a6a-158">ページ内の本文とすべてのセクションは、 Razor 表示または無視する必要があります。</span><span class="sxs-lookup"><span data-stu-id="60a6a-158">The body and every section in a Razor page must be either rendered or ignored.</span></span>
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a><span data-ttu-id="60a6a-159">共有ディレクティブのインポート</span><span class="sxs-lookup"><span data-stu-id="60a6a-159">Importing Shared Directives</span></span>
 
-<span data-ttu-id="60a6a-160">ビューおよびページでは :::no-loc(Razor)::: 、ディレクティブを使用して名前空間をインポートし、 [依存関係の挿入](dependency-injection.md)を使用できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-160">Views and pages can use :::no-loc(Razor)::: directives to import namespaces and use [dependency injection](dependency-injection.md).</span></span> <span data-ttu-id="60a6a-161">多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-161">Directives shared by many views may be specified in a common *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="60a6a-162">`_ViewImports` ファイルは、次のディレクティブをサポートします。</span><span class="sxs-lookup"><span data-stu-id="60a6a-162">The `_ViewImports` file supports the following directives:</span></span>
+<span data-ttu-id="60a6a-160">ビューおよびページでは Razor 、ディレクティブを使用して名前空間をインポートし、 [依存関係の挿入](dependency-injection.md)を使用できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-160">Views and pages can use Razor directives to import namespaces and use [dependency injection](dependency-injection.md).</span></span> <span data-ttu-id="60a6a-161">多くのビューで共有されるディレクティブは、共通の *_ViewImports.cshtml* ファイルで指定できます。</span><span class="sxs-lookup"><span data-stu-id="60a6a-161">Directives shared by many views may be specified in a common *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="60a6a-162">`_ViewImports` ファイルは、次のディレクティブをサポートします。</span><span class="sxs-lookup"><span data-stu-id="60a6a-162">The `_ViewImports` file supports the following directives:</span></span>
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -131,7 +131,7 @@ ms.locfileid: "93060977"
 * `@inherits`
 * `@inject`
 
-<span data-ttu-id="60a6a-163">ファイルは、関数やセクション定義などの他の機能をサポートしていません :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="60a6a-163">The file doesn't support other :::no-loc(Razor)::: features, such as functions and section definitions.</span></span>
+<span data-ttu-id="60a6a-163">ファイルは、関数やセクション定義などの他の機能をサポートしていません Razor 。</span><span class="sxs-lookup"><span data-stu-id="60a6a-163">The file doesn't support other Razor features, such as functions and section definitions.</span></span>
 
 <span data-ttu-id="60a6a-164">`_ViewImports.cshtml` ファイルのサンプル:</span><span class="sxs-lookup"><span data-stu-id="60a6a-164">A sample `_ViewImports.cshtml` file:</span></span>
 

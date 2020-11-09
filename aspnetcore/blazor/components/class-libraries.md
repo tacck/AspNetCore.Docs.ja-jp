@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Razor)::: コンポーネント クラス ライブラリ'
+title: 'ASP.NET Core Razor コンポーネント クラス ライブラリ'
 author: guardrex
-description: '外部コンポーネント ライブラリから、コンポーネントを :::no-loc(Blazor)::: アプリに含める方法について説明します。'
+description: '外部コンポーネント ライブラリから、コンポーネントを Blazor アプリに含める方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/class-libraries
 ms.openlocfilehash: f8e36cbe905b5ec2e674123c0f2ab6db99683c7c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,11 +26,11 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056414"
 ---
-# <a name="aspnet-core-no-locrazor-components-class-libraries"></a><span data-ttu-id="13de4-103">ASP.NET Core :::no-loc(Razor)::: コンポーネント クラス ライブラリ</span><span class="sxs-lookup"><span data-stu-id="13de4-103">ASP.NET Core :::no-loc(Razor)::: components class libraries</span></span>
+# <a name="aspnet-core-no-locrazor-components-class-libraries"></a><span data-ttu-id="13de4-103">ASP.NET Core Razor コンポーネント クラス ライブラリ</span><span class="sxs-lookup"><span data-stu-id="13de4-103">ASP.NET Core Razor components class libraries</span></span>
 
 <span data-ttu-id="13de4-104">作成者: [Simon Timms](https://github.com/stimms)</span><span class="sxs-lookup"><span data-stu-id="13de4-104">By [Simon Timms](https://github.com/stimms)</span></span>
 
-<span data-ttu-id="13de4-105">コンポーネントは、プロジェクト間で [:::no-loc(Razor)::: クラス ライブラリ (RCL)](xref:razor-pages/ui-class) で共有できます。</span><span class="sxs-lookup"><span data-stu-id="13de4-105">Components can be shared in a [:::no-loc(Razor)::: class library (RCL)](xref:razor-pages/ui-class) across projects.</span></span> <span data-ttu-id="13de4-106">*:::no-loc(Razor)::: コンポーネント クラス ライブラリ* は、次から含めることができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-106">A *:::no-loc(Razor)::: components class library* can be included from:</span></span>
+<span data-ttu-id="13de4-105">コンポーネントは、プロジェクト間で [Razor クラス ライブラリ (RCL)](xref:razor-pages/ui-class) で共有できます。</span><span class="sxs-lookup"><span data-stu-id="13de4-105">Components can be shared in a [Razor class library (RCL)](xref:razor-pages/ui-class) across projects.</span></span> <span data-ttu-id="13de4-106">*Razor コンポーネント クラス ライブラリ* は、次から含めることができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-106">A *Razor components class library* can be included from:</span></span>
 
 * <span data-ttu-id="13de4-107">ソリューションの別のプロジェクト。</span><span class="sxs-lookup"><span data-stu-id="13de4-107">Another project in the solution.</span></span>
 * <span data-ttu-id="13de4-108">NuGet パッケージ。</span><span class="sxs-lookup"><span data-stu-id="13de4-108">A NuGet package.</span></span>
@@ -43,8 +43,8 @@ ms.locfileid: "93056414"
 # <a name="visual-studio"></a>[<span data-ttu-id="13de4-112">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="13de4-112">Visual Studio</span></span>](#tab/visual-studio)
 
 1. <span data-ttu-id="13de4-113">新しいプロジェクトを作成します。</span><span class="sxs-lookup"><span data-stu-id="13de4-113">Create a new project.</span></span>
-1. <span data-ttu-id="13de4-114">**[:::no-loc(Razor)::: クラス ライブラリ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-114">Select **:::no-loc(Razor)::: Class Library**.</span></span> <span data-ttu-id="13de4-115">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-115">Select **Next**.</span></span>
-1. <span data-ttu-id="13de4-116">**[新しい :::no-loc(Razor)::: クラス ライブラリを作成します]** ダイアログで **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-116">In the **Create a new :::no-loc(Razor)::: class library** dialog, select **Create**.</span></span>
+1. <span data-ttu-id="13de4-114">**[Razor クラス ライブラリ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-114">Select **Razor Class Library**.</span></span> <span data-ttu-id="13de4-115">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-115">Select **Next**.</span></span>
+1. <span data-ttu-id="13de4-116">**[新しい Razor クラス ライブラリを作成します]** ダイアログで **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-116">In the **Create a new Razor class library** dialog, select **Create**.</span></span>
 1. <span data-ttu-id="13de4-117">**[プロジェクト名]** フィールドにプロジェクト名を入力するか、既定のプロジェクト名をそのまま使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-117">Provide a project name in the **Project name** field or accept the default project name.</span></span> <span data-ttu-id="13de4-118">このトピックの例では、プロジェクト名 `ComponentLibrary` を使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-118">The examples in this topic use the project name `ComponentLibrary`.</span></span> <span data-ttu-id="13de4-119">**[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-119">Select **Create**.</span></span>
 1. <span data-ttu-id="13de4-120">RCL をソリューションに追加します。</span><span class="sxs-lookup"><span data-stu-id="13de4-120">Add the RCL to a solution:</span></span>
    1. <span data-ttu-id="13de4-121">ソリューションを右クリックします。</span><span class="sxs-lookup"><span data-stu-id="13de4-121">Right-click the solution.</span></span> <span data-ttu-id="13de4-122">**[追加]**  >  **[既存のプロジェクト]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-122">Select **Add** > **Existing Project**.</span></span>
@@ -55,7 +55,7 @@ ms.locfileid: "93056414"
    1. <span data-ttu-id="13de4-128">RCL プロジェクトを選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-128">Select the RCL project.</span></span> <span data-ttu-id="13de4-129">**[OK]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="13de4-129">Select **OK**.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="13de4-130">テンプレートから RCL を生成するときに **[ページとビューのサポート]** チェック ボックスがオンになっている場合は、生成したプロジェクトのルートに、次の内容で `_Imports.razor` ファイルも追加して、:::no-loc(Razor)::: コンポーネントを作成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="13de4-130">If the **Support pages and views** check box is selected when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable :::no-loc(Razor)::: component authoring:</span></span>
+> <span data-ttu-id="13de4-130">テンプレートから RCL を生成するときに **[ページとビューのサポート]** チェック ボックスがオンになっている場合は、生成したプロジェクトのルートに、次の内容で `_Imports.razor` ファイルも追加して、Razor コンポーネントを作成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="13de4-130">If the **Support pages and views** check box is selected when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable Razor component authoring:</span></span>
 >
 > ```razor
 > @using Microsoft.AspNetCore.Components.Web
@@ -65,14 +65,14 @@ ms.locfileid: "93056414"
 
 # <a name="net-core-cli"></a>[<span data-ttu-id="13de4-132">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="13de4-132">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-1. <span data-ttu-id="13de4-133">コマンド シェルで [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用して、 **:::no-loc(Razor)::: クラス ライブラリ** テンプレート (`razorclasslib`) を使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-133">Use the **:::no-loc(Razor)::: Class Library** template (`razorclasslib`) with the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in a command shell.</span></span> <span data-ttu-id="13de4-134">次の例では、`ComponentLibrary` という名前の RCL が作成されます。</span><span class="sxs-lookup"><span data-stu-id="13de4-134">In the following example, an RCL is created named `ComponentLibrary`.</span></span> <span data-ttu-id="13de4-135">コマンドの実行時に、`ComponentLibrary` を保持するフォルダーが自動的に作成されます。</span><span class="sxs-lookup"><span data-stu-id="13de4-135">The folder that holds `ComponentLibrary` is created automatically when the command is executed:</span></span>
+1. <span data-ttu-id="13de4-133">コマンド シェルで [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用して、 **Razor クラス ライブラリ** テンプレート (`razorclasslib`) を使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-133">Use the **Razor Class Library** template (`razorclasslib`) with the [`dotnet new`](/dotnet/core/tools/dotnet-new) command in a command shell.</span></span> <span data-ttu-id="13de4-134">次の例では、`ComponentLibrary` という名前の RCL が作成されます。</span><span class="sxs-lookup"><span data-stu-id="13de4-134">In the following example, an RCL is created named `ComponentLibrary`.</span></span> <span data-ttu-id="13de4-135">コマンドの実行時に、`ComponentLibrary` を保持するフォルダーが自動的に作成されます。</span><span class="sxs-lookup"><span data-stu-id="13de4-135">The folder that holds `ComponentLibrary` is created automatically when the command is executed:</span></span>
 
    ```dotnetcli
    dotnet new razorclasslib -o ComponentLibrary
    ```
 
    > [!NOTE]
-   > <span data-ttu-id="13de4-136">テンプレートから RCL を生成するときに、`-s|--support-pages-and-views` スイッチが使用されている場合、生成したプロジェクトのルートに、次の内容で `_Imports.razor` ファイルも追加して、:::no-loc(Razor)::: コンポーネントを作成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="13de4-136">If the `-s|--support-pages-and-views` switch is used when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable :::no-loc(Razor)::: component authoring:</span></span>
+   > <span data-ttu-id="13de4-136">テンプレートから RCL を生成するときに、`-s|--support-pages-and-views` スイッチが使用されている場合、生成したプロジェクトのルートに、次の内容で `_Imports.razor` ファイルも追加して、Razor コンポーネントを作成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="13de4-136">If the `-s|--support-pages-and-views` switch is used when generating the RCL from the template, then also add an `_Imports.razor` file to root of the generated project with the following contents to enable Razor component authoring:</span></span>
    >
    > ```razor
    > @using Microsoft.AspNetCore.Components.Web
@@ -93,7 +93,7 @@ ms.locfileid: "93056414"
 <span data-ttu-id="13de4-142">別のプロジェクトのライブラリに定義されているコンポーネントを使用するには、次のいずれかの方法を使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-142">In order to consume components defined in a library in another project, use either of the following approaches:</span></span>
 
 * <span data-ttu-id="13de4-143">名前空間と完全な型名を使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-143">Use the full type name with the namespace.</span></span>
-* <span data-ttu-id="13de4-144">:::no-loc(Razor)::: の [`@using`](xref:mvc/views/razor#using) ディレクティブを使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-144">Use :::no-loc(Razor):::'s [`@using`](xref:mvc/views/razor#using) directive.</span></span> <span data-ttu-id="13de4-145">個々のコンポーネントを名前で追加することができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-145">Individual components can be added by name.</span></span>
+* <span data-ttu-id="13de4-144">Razor の [`@using`](xref:mvc/views/razor#using) ディレクティブを使用します。</span><span class="sxs-lookup"><span data-stu-id="13de4-144">Use Razor's [`@using`](xref:mvc/views/razor#using) directive.</span></span> <span data-ttu-id="13de4-145">個々のコンポーネントを名前で追加することができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-145">Individual components can be added by name.</span></span>
 
 <span data-ttu-id="13de4-146">次の例で、`ComponentLibrary` は `Component1` コンポーネント (`Component1.razor`) を含むコンポーネント ライブラリです。</span><span class="sxs-lookup"><span data-stu-id="13de4-146">In the following examples, `ComponentLibrary` is a component library containing the `Component1` component (`Component1.razor`).</span></span> <span data-ttu-id="13de4-147">`Component1` コンポーネントは、ライブラリの作成時に RCL プロジェクト テンプレートによって自動的に追加されるサンプルのコンポーネントです。</span><span class="sxs-lookup"><span data-stu-id="13de4-147">The `Component1` component is an example component automatically added by the RCL project template when the library is created.</span></span>
 
@@ -132,12 +132,12 @@ To provide `Component1`'s `my-component` CSS class to the component, link to the
     <Link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
 
     <p>
-        This :::no-loc(Blazor)::: component is defined in the <strong>ComponentLibrary</strong> package.
+        This Blazor component is defined in the <strong>ComponentLibrary</strong> package.
     </p>
 </div>
 ```
 
-To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (:::no-loc(Blazor WebAssembly):::) or `Pages/_Host.cshtml` file (:::no-loc(Blazor Server):::):
+To provide the stylesheet across the app, you can alternatively link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):
 
 ```html
 <head>
@@ -157,7 +157,7 @@ When the `Link` component is used in a child component, the linked asset is also
 
 -->
 
-<span data-ttu-id="13de4-152">`Component1` の `my-component`CSS クラスを提供するには、アプリの `wwwroot/index.html` ファイル (:::no-loc(Blazor WebAssembly):::) または `Pages/_Host.cshtml` ファイル (:::no-loc(Blazor Server):::) 内でライブラリのスタイルシートにリンクします。</span><span class="sxs-lookup"><span data-stu-id="13de4-152">To provide `Component1`'s `my-component` CSS class, link to the library's stylesheet in the app's `wwwroot/index.html` file (:::no-loc(Blazor WebAssembly):::) or `Pages/_Host.cshtml` file (:::no-loc(Blazor Server):::):</span></span>
+<span data-ttu-id="13de4-152">`Component1` の `my-component`CSS クラスを提供するには、アプリの `wwwroot/index.html` ファイル (Blazor WebAssembly) または `Pages/_Host.cshtml` ファイル (Blazor Server) 内でライブラリのスタイルシートにリンクします。</span><span class="sxs-lookup"><span data-stu-id="13de4-152">To provide `Component1`'s `my-component` CSS class, link to the library's stylesheet in the app's `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server):</span></span>
 
 ```html
 <head>
@@ -172,21 +172,21 @@ When the `Link` component is used in a child component, the linked asset is also
 
 -->
 
-## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a><span data-ttu-id="13de4-153">静的アセットを含む :::no-loc(Razor)::: コンポーネント クラス ライブラリを作成する</span><span class="sxs-lookup"><span data-stu-id="13de4-153">Create a :::no-loc(Razor)::: components class library with static assets</span></span>
+## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a><span data-ttu-id="13de4-153">静的アセットを含む Razor コンポーネント クラス ライブラリを作成する</span><span class="sxs-lookup"><span data-stu-id="13de4-153">Create a Razor components class library with static assets</span></span>
 
 <span data-ttu-id="13de4-154">RCL には、静的アセットを含めることができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-154">An RCL can include static assets.</span></span> <span data-ttu-id="13de4-155">静的アセットは、ライブラリを使用するすべてのアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="13de4-155">The static assets are available to any app that consumes the library.</span></span> <span data-ttu-id="13de4-156">詳細については、「<xref:razor-pages/ui-class#create-an-rcl-with-static-assets>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="13de4-156">For more information, see <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>.</span></span>
 
-## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a><span data-ttu-id="13de4-157">複数のホスト型 :::no-loc(Blazor)::: アプリにコンポーネントと静的アセットを提供する</span><span class="sxs-lookup"><span data-stu-id="13de4-157">Supply components and static assets to multiple hosted :::no-loc(Blazor)::: apps</span></span>
+## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a><span data-ttu-id="13de4-157">複数のホスト型 Blazor アプリにコンポーネントと静的アセットを提供する</span><span class="sxs-lookup"><span data-stu-id="13de4-157">Supply components and static assets to multiple hosted Blazor apps</span></span>
 
 <span data-ttu-id="13de4-158">詳細については、「<xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="13de4-158">For more information, see <xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a><span data-ttu-id="13de4-159">:::no-loc(Blazor WebAssembly)::: のブラウザー互換性アナライザー</span><span class="sxs-lookup"><span data-stu-id="13de4-159">Browser compatibility analyzer for :::no-loc(Blazor WebAssembly):::</span></span>
+## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a><span data-ttu-id="13de4-159">Blazor WebAssembly のブラウザー互換性アナライザー</span><span class="sxs-lookup"><span data-stu-id="13de4-159">Browser compatibility analyzer for Blazor WebAssembly</span></span>
 
-<span data-ttu-id="13de4-160">:::no-loc(Blazor WebAssembly)::: アプリは完全な .NET API 領域を対象としていますが、ブラウザー サンドボックスの制約により、すべての .NET API が WebAssembly でサポートされているわけではありません。</span><span class="sxs-lookup"><span data-stu-id="13de4-160">:::no-loc(Blazor WebAssembly)::: apps target the full .NET API surface area, but not all .NET APIs are supported on WebAssembly due to browser sandbox constraints.</span></span> <span data-ttu-id="13de4-161">サポートされていない API は、WebAssembly で実行すると <xref:System.PlatformNotSupportedException> がスローされます。</span><span class="sxs-lookup"><span data-stu-id="13de4-161">Unsupported APIs throw <xref:System.PlatformNotSupportedException> when running on WebAssembly.</span></span> <span data-ttu-id="13de4-162">開発者が、アプリのターゲット プラットフォームでサポートされていない API をアプリで使用すると、プラットフォーム互換性アナライザーから警告を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="13de4-162">A platform compatibility analyzer warns the developer when the app uses APIs that aren't supported by the app's target platforms.</span></span> <span data-ttu-id="13de4-163">:::no-loc(Blazor WebAssembly)::: アプリの場合、API がブラウザーでサポートされているかどうかが確認されるということです。</span><span class="sxs-lookup"><span data-stu-id="13de4-163">For :::no-loc(Blazor WebAssembly)::: apps, this means checking that APIs are supported in browsers.</span></span> <span data-ttu-id="13de4-164">互換性アナライザーの .NET フレームワーク API に注釈を付けることは、進行中のプロセスであるため、現在、すべての .NET フレームワーク API に注釈が付けられるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="13de4-164">Annotating .NET framework APIs for the compatibility analyzer is an on-going process, so not all .NET framework API is currently annotated.</span></span>
+<span data-ttu-id="13de4-160">Blazor WebAssembly アプリは完全な .NET API 領域を対象としていますが、ブラウザー サンドボックスの制約により、すべての .NET API が WebAssembly でサポートされているわけではありません。</span><span class="sxs-lookup"><span data-stu-id="13de4-160">Blazor WebAssembly apps target the full .NET API surface area, but not all .NET APIs are supported on WebAssembly due to browser sandbox constraints.</span></span> <span data-ttu-id="13de4-161">サポートされていない API は、WebAssembly で実行すると <xref:System.PlatformNotSupportedException> がスローされます。</span><span class="sxs-lookup"><span data-stu-id="13de4-161">Unsupported APIs throw <xref:System.PlatformNotSupportedException> when running on WebAssembly.</span></span> <span data-ttu-id="13de4-162">開発者が、アプリのターゲット プラットフォームでサポートされていない API をアプリで使用すると、プラットフォーム互換性アナライザーから警告を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="13de4-162">A platform compatibility analyzer warns the developer when the app uses APIs that aren't supported by the app's target platforms.</span></span> <span data-ttu-id="13de4-163">Blazor WebAssembly アプリの場合、API がブラウザーでサポートされているかどうかが確認されるということです。</span><span class="sxs-lookup"><span data-stu-id="13de4-163">For Blazor WebAssembly apps, this means checking that APIs are supported in browsers.</span></span> <span data-ttu-id="13de4-164">互換性アナライザーの .NET フレームワーク API に注釈を付けることは、進行中のプロセスであるため、現在、すべての .NET フレームワーク API に注釈が付けられるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="13de4-164">Annotating .NET framework APIs for the compatibility analyzer is an on-going process, so not all .NET framework API is currently annotated.</span></span>
 
-<span data-ttu-id="13de4-165">:::no-loc(Blazor WebAssembly)::: および :::no-loc(Razor)::: クラス ライブラリ プロジェクトでは、`SupportedPlatform` MSBuild 項目でサポートされているプラットフォームとして `browser` を追加することで、ブラウザーの互換性チェックを " *自動的* " に有効にします。</span><span class="sxs-lookup"><span data-stu-id="13de4-165">:::no-loc(Blazor WebAssembly)::: and :::no-loc(Razor)::: class library projects *automatically* enable browser compatibilty checks by adding `browser` as a supported platform with the `SupportedPlatform` MSBuild item.</span></span> <span data-ttu-id="13de4-166">ライブラリ開発者は、`SupportedPlatform` 項目をライブラリのプロジェクト ファイルに手動で追加して、この機能を有効にすることができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-166">Library developers can manually add the `SupportedPlatform` item to a library's project file to enable the feature:</span></span>
+<span data-ttu-id="13de4-165">Blazor WebAssembly および Razor クラス ライブラリ プロジェクトでは、`SupportedPlatform` MSBuild 項目でサポートされているプラットフォームとして `browser` を追加することで、ブラウザーの互換性チェックを " *自動的* " に有効にします。</span><span class="sxs-lookup"><span data-stu-id="13de4-165">Blazor WebAssembly and Razor class library projects *automatically* enable browser compatibilty checks by adding `browser` as a supported platform with the `SupportedPlatform` MSBuild item.</span></span> <span data-ttu-id="13de4-166">ライブラリ開発者は、`SupportedPlatform` 項目をライブラリのプロジェクト ファイルに手動で追加して、この機能を有効にすることができます。</span><span class="sxs-lookup"><span data-stu-id="13de4-166">Library developers can manually add the `SupportedPlatform` item to a library's project file to enable the feature:</span></span>
 
 ```xml
 <ItemGroup>
@@ -206,9 +206,9 @@ private static string GetLoggingDirectory()
 
 <span data-ttu-id="13de4-168">詳細については、「[特定のプラットフォームでサポートされていない API に注釈を付ける (dotnet/designs GitHub リポジトリ)」](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms)」参照してください。</span><span class="sxs-lookup"><span data-stu-id="13de4-168">For more information, see [Annotating APIs as unsupported on specific platforms (dotnet/designs GitHub repository](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms).</span></span>
 
-## <a name="no-locblazor-javascript-isolation-and-object-references"></a><span data-ttu-id="13de4-169">:::no-loc(Blazor)::: JavaScript の分離とオブジェクト参照</span><span class="sxs-lookup"><span data-stu-id="13de4-169">:::no-loc(Blazor)::: JavaScript isolation and object references</span></span>
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a><span data-ttu-id="13de4-169">Blazor JavaScript の分離とオブジェクト参照</span><span class="sxs-lookup"><span data-stu-id="13de4-169">Blazor JavaScript isolation and object references</span></span>
 
-<span data-ttu-id="13de4-170">:::no-loc(Blazor)::: により、標準 [JavaScript モジュール](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)で JavaScript の分離が有効にされます。</span><span class="sxs-lookup"><span data-stu-id="13de4-170">:::no-loc(Blazor)::: enables JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules).</span></span> <span data-ttu-id="13de4-171">JavaScript の分離には、次のような利点があります。</span><span class="sxs-lookup"><span data-stu-id="13de4-171">JavaScript isolation provides the following benefits:</span></span>
+<span data-ttu-id="13de4-170">Blazor により、標準 [JavaScript モジュール](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)で JavaScript の分離が有効にされます。</span><span class="sxs-lookup"><span data-stu-id="13de4-170">Blazor enables JavaScript isolation in standard [JavaScript modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules).</span></span> <span data-ttu-id="13de4-171">JavaScript の分離には、次のような利点があります。</span><span class="sxs-lookup"><span data-stu-id="13de4-171">JavaScript isolation provides the following benefits:</span></span>
 
 * <span data-ttu-id="13de4-172">インポートされる JavaScript によって、グローバル名前空間が汚染されなくなります。</span><span class="sxs-lookup"><span data-stu-id="13de4-172">Imported JavaScript no longer pollutes the global namespace.</span></span>
 * <span data-ttu-id="13de4-173">ライブラリおよびコンポーネントのコンシューマーは、関連する JavaScript を手動でインポートする必要がありません。</span><span class="sxs-lookup"><span data-stu-id="13de4-173">Consumers of the library and components aren't required to manually import the related JavaScript.</span></span>

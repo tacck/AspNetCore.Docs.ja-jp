@@ -5,17 +5,17 @@ description: ASP.NET Core アプリのローカライズに関する問題を診
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/troubleshoot-aspnet-core-localization
 ms.openlocfilehash: 995db4c8c9d0c0f1f77b1fd3665e707975406a7f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -62,7 +62,7 @@ public void ConfigureServices(IServiceCollection services)
 - <span data-ttu-id="b537b-118">一部の言語の `resx` でリソースが不足しており、その他の言語に存在しています。</span><span class="sxs-lookup"><span data-stu-id="b537b-118">The resource is missing from the `resx` for some languages, but exists in others.</span></span>
 - <span data-ttu-id="b537b-119">引き続き問題が発生する場合は、不足しているリソースの詳細について、ローカライズのログ メッセージ (`Debug` ログ レベル) を確認してください。</span><span class="sxs-lookup"><span data-stu-id="b537b-119">If you're still having trouble, check the localization log messages (which are at `Debug` log level) for more details about the missing resources.</span></span>
 
-<span data-ttu-id="b537b-120">_**ヒント:** `:::no-loc(Cookie):::RequestCultureProvider` を使用している場合、ローカライズの :::no-loc(cookie)::: 値内のカルチャで単一引用符が使用されないことを確認します。たとえば、`c='en-UK'|uic='en-US'` は無効な :::no-loc(cookie)::: 値ですが、`c=en-UK|uic=en-US` は有効です。_</span><span class="sxs-lookup"><span data-stu-id="b537b-120">_**Hint:** When using `:::no-loc(Cookie):::RequestCultureProvider`, verify single quotes are not used with the cultures inside the localization :::no-loc(cookie)::: value. For example, `c='en-UK'|uic='en-US'` is an invalid :::no-loc(cookie)::: value, while `c=en-UK|uic=en-US` is a valid._</span></span>
+<span data-ttu-id="b537b-120">_**ヒント:** `CookieRequestCultureProvider` を使用している場合、ローカライズの cookie 値内のカルチャで単一引用符が使用されないことを確認します。たとえば、`c='en-UK'|uic='en-US'` は無効な cookie 値ですが、`c=en-UK|uic=en-US` は有効です。_</span><span class="sxs-lookup"><span data-stu-id="b537b-120">_**Hint:** When using `CookieRequestCultureProvider`, verify single quotes are not used with the cultures inside the localization cookie value. For example, `c='en-UK'|uic='en-US'` is an invalid cookie value, while `c=en-UK|uic=en-US` is a valid._</span></span>
 
 ## <a name="resources--class-libraries-issues"></a><span data-ttu-id="b537b-121">リソースとクラス ライブラリに関する問題</span><span class="sxs-lookup"><span data-stu-id="b537b-121">Resources & Class Libraries issues</span></span>
 
@@ -78,7 +78,7 @@ public void ConfigureServices(IServiceCollection services)
 <span data-ttu-id="b537b-130">`RequestLocalizationOptions` クラスには、既定のプロバイダーが 3 つあります。</span><span class="sxs-lookup"><span data-stu-id="b537b-130">The `RequestLocalizationOptions` class has three default providers:</span></span>
 
 1. `QueryStringRequestCultureProvider`
-2. `:::no-loc(Cookie):::RequestCultureProvider`
+2. `CookieRequestCultureProvider`
 3. `AcceptLanguageHeaderRequestCultureProvider`
 
 <span data-ttu-id="b537b-131">[CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1) によって、ローカライズ カルチャをご利用のアプリ内で指定する方法をカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="b537b-131">The [CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1) allows you to customize how the localization culture is provided in your app.</span></span> <span data-ttu-id="b537b-132">`CustomRequestCultureProvider` は、既定のプロバイダーが要件に合わないときに使用されます。</span><span class="sxs-lookup"><span data-stu-id="b537b-132">The `CustomRequestCultureProvider` is used when the default providers don't meet your requirements.</span></span>

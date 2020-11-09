@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: の構成'
+title: 'ASP.NET Core Blazor の構成'
 author: guardrex
-description: 'アプリの設定、認証、ログの構成など、:::no-loc(Blazor)::: アプリの構成について説明します。'
+description: 'アプリの設定、認証、ログの構成など、Blazor アプリの構成について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/fundamentals/configuration
 ms.openlocfilehash: f8b1c49ab29bb8a88ca6d9785cd7ee151315e065
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -26,31 +26,31 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/03/2020
 ms.locfileid: "93234375"
 ---
-# <a name="aspnet-core-no-locblazor-configuration"></a><span data-ttu-id="29d86-103">ASP.NET Core :::no-loc(Blazor)::: の構成</span><span class="sxs-lookup"><span data-stu-id="29d86-103">ASP.NET Core :::no-loc(Blazor)::: configuration</span></span>
+# <a name="aspnet-core-no-locblazor-configuration"></a><span data-ttu-id="29d86-103">ASP.NET Core Blazor の構成</span><span class="sxs-lookup"><span data-stu-id="29d86-103">ASP.NET Core Blazor configuration</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="29d86-104">このトピックの対象は、:::no-loc(Blazor WebAssembly)::: です。</span><span class="sxs-lookup"><span data-stu-id="29d86-104">This topic applies to :::no-loc(Blazor WebAssembly):::.</span></span> <span data-ttu-id="29d86-105">ASP.NET Core アプリの構成に関する一般的なガイダンスについては、「<xref:fundamentals/configuration/index>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="29d86-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/configuration/index>.</span></span>
+> <span data-ttu-id="29d86-104">このトピックの対象は、Blazor WebAssembly です。</span><span class="sxs-lookup"><span data-stu-id="29d86-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="29d86-105">ASP.NET Core アプリの構成に関する一般的なガイダンスについては、「<xref:fundamentals/configuration/index>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="29d86-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/configuration/index>.</span></span>
 
-<span data-ttu-id="29d86-106">:::no-loc(Blazor WebAssembly)::: では既定で、アプリ設定ファイルから構成が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="29d86-106">:::no-loc(Blazor WebAssembly)::: loads configuration from app settings files by default:</span></span>
+<span data-ttu-id="29d86-106">Blazor WebAssembly では既定で、アプリ設定ファイルから構成が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="29d86-106">Blazor WebAssembly loads configuration from app settings files by default:</span></span>
 
-* `wwwroot/:::no-loc(appsettings.json):::`
+* `wwwroot/appsettings.json`
 * `wwwroot/appsettings.{ENVIRONMENT}.json`
 
 <span data-ttu-id="29d86-107">アプリによって登録されたその他の構成プロバイダーから構成を取得することもできます。</span><span class="sxs-lookup"><span data-stu-id="29d86-107">Other configuration providers registered by the app can also provide configuration.</span></span>
 
-<span data-ttu-id="29d86-108">すべてのプロバイダーまたはプロバイダー機能が :::no-loc(Blazor WebAssembly)::: アプリに適しているわけではありません。</span><span class="sxs-lookup"><span data-stu-id="29d86-108">Not all providers or provider features are appropriate for :::no-loc(Blazor WebAssembly)::: apps:</span></span>
+<span data-ttu-id="29d86-108">すべてのプロバイダーまたはプロバイダー機能が Blazor WebAssembly アプリに適しているわけではありません。</span><span class="sxs-lookup"><span data-stu-id="29d86-108">Not all providers or provider features are appropriate for Blazor WebAssembly apps:</span></span>
 
-* <span data-ttu-id="29d86-109">[Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration): クライアント シークレットのシナリオでは、プロバイダーはマネージド ID およびアプリケーション ID (クライアント ID) に対してはサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="29d86-109">[Azure Key Vault configuration provider](xref:security/key-vault-configuration): The provider isn't supported for managed identity and application ID (client ID) with client secret scenarios.</span></span> <span data-ttu-id="29d86-110">クライアント シークレットを使用したアプリケーション ID は、ASP.NET Core アプリ、特に :::no-loc(Blazor WebAssembly)::: アプリについては推奨されません。これは、クライアント シークレットをサービスにアクセスするためにクライアント側でセキュリティで保護することができないためです。</span><span class="sxs-lookup"><span data-stu-id="29d86-110">Application ID with a client secret isn't recommended for any ASP.NET Core app, especially :::no-loc(Blazor WebAssembly)::: apps because the client secret can't be secured client-side to access to the service.</span></span>
-* <span data-ttu-id="29d86-111">[Azure App Configuration プロバイダー](/azure/azure-app-configuration/quickstart-aspnet-core-app): このプロバイダーは :::no-loc(Blazor WebAssembly)::: アプリに適していません。これは、:::no-loc(Blazor WebAssembly)::: アプリは Azure 内のサーバー上では実行されないためです。</span><span class="sxs-lookup"><span data-stu-id="29d86-111">[Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app): The provider isn't appropriate for :::no-loc(Blazor WebAssembly)::: apps because :::no-loc(Blazor WebAssembly)::: apps don't run on a server in Azure.</span></span>
+* <span data-ttu-id="29d86-109">[Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration): クライアント シークレットのシナリオでは、プロバイダーはマネージド ID およびアプリケーション ID (クライアント ID) に対してはサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="29d86-109">[Azure Key Vault configuration provider](xref:security/key-vault-configuration): The provider isn't supported for managed identity and application ID (client ID) with client secret scenarios.</span></span> <span data-ttu-id="29d86-110">クライアント シークレットを使用したアプリケーション ID は、ASP.NET Core アプリ、特に Blazor WebAssembly アプリについては推奨されません。これは、クライアント シークレットをサービスにアクセスするためにクライアント側でセキュリティで保護することができないためです。</span><span class="sxs-lookup"><span data-stu-id="29d86-110">Application ID with a client secret isn't recommended for any ASP.NET Core app, especially Blazor WebAssembly apps because the client secret can't be secured client-side to access to the service.</span></span>
+* <span data-ttu-id="29d86-111">[Azure App Configuration プロバイダー](/azure/azure-app-configuration/quickstart-aspnet-core-app): このプロバイダーは Blazor WebAssembly アプリに適していません。これは、Blazor WebAssembly アプリは Azure 内のサーバー上では実行されないためです。</span><span class="sxs-lookup"><span data-stu-id="29d86-111">[Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app): The provider isn't appropriate for Blazor WebAssembly apps because Blazor WebAssembly apps don't run on a server in Azure.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="29d86-112">:::no-loc(Blazor WebAssembly)::: アプリでの構成は、ユーザーに表示されます。</span><span class="sxs-lookup"><span data-stu-id="29d86-112">Configuration in a :::no-loc(Blazor WebAssembly)::: app is visible to users.</span></span> <span data-ttu-id="29d86-113">**アプリのシークレットや資格情報を構成に保存しないでください。**</span><span class="sxs-lookup"><span data-stu-id="29d86-113">**Don't store app secrets or credentials in configuration.**</span></span>
+> <span data-ttu-id="29d86-112">Blazor WebAssembly アプリでの構成は、ユーザーに表示されます。</span><span class="sxs-lookup"><span data-stu-id="29d86-112">Configuration in a Blazor WebAssembly app is visible to users.</span></span> <span data-ttu-id="29d86-113">**アプリのシークレットや資格情報を構成に保存しないでください。**</span><span class="sxs-lookup"><span data-stu-id="29d86-113">**Don't store app secrets or credentials in configuration.**</span></span>
 
 <span data-ttu-id="29d86-114">構成プロバイダーの詳細については、「<xref:fundamentals/configuration/index>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="29d86-114">For more information on configuration providers, see <xref:fundamentals/configuration/index>.</span></span>
 
 ## <a name="app-settings-configuration"></a><span data-ttu-id="29d86-115">アプリ設定の構成</span><span class="sxs-lookup"><span data-stu-id="29d86-115">App settings configuration</span></span>
 
-<span data-ttu-id="29d86-116">`wwwroot/:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="29d86-116">`wwwroot/:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="29d86-116">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="29d86-116">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -72,7 +72,7 @@ ms.locfileid: "93234375"
 
 ## <a name="custom-configuration-provider-with-ef-core"></a><span data-ttu-id="29d86-118">EF Core を使用したカスタム構成プロバイダー</span><span class="sxs-lookup"><span data-stu-id="29d86-118">Custom configuration provider with EF Core</span></span>
 
-<span data-ttu-id="29d86-119">「<xref:fundamentals/configuration/index#custom-configuration-provider>」で説明されている EF Core を使用したカスタム構成プロバイダーは、:::no-loc(Blazor WebAssembly)::: アプリで動作します。</span><span class="sxs-lookup"><span data-stu-id="29d86-119">The custom configuration provider with EF Core demonstrated in <xref:fundamentals/configuration/index#custom-configuration-provider> works with :::no-loc(Blazor WebAssembly)::: apps.</span></span>
+<span data-ttu-id="29d86-119">「<xref:fundamentals/configuration/index#custom-configuration-provider>」で説明されている EF Core を使用したカスタム構成プロバイダーは、Blazor WebAssembly アプリで動作します。</span><span class="sxs-lookup"><span data-stu-id="29d86-119">The custom configuration provider with EF Core demonstrated in <xref:fundamentals/configuration/index#custom-configuration-provider> works with Blazor WebAssembly apps.</span></span>
 
 <span data-ttu-id="29d86-120">`Program.Main` (`Program.cs`) で次のコードを使用して、例の構成プロバイダーを追加します。</span><span class="sxs-lookup"><span data-stu-id="29d86-120">Add the example's configuration provider with the following code in `Program.Main` (`Program.cs`):</span></span>
 
@@ -182,7 +182,7 @@ builder.Configuration.AddJsonStream(stream);
 
 ## <a name="authentication-configuration"></a><span data-ttu-id="29d86-130">認証の構成</span><span class="sxs-lookup"><span data-stu-id="29d86-130">Authentication configuration</span></span>
 
-<span data-ttu-id="29d86-131">`wwwroot/:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="29d86-131">`wwwroot/:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="29d86-131">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="29d86-131">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -210,7 +210,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 <span data-ttu-id="29d86-135">プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。</span><span class="sxs-lookup"><span data-stu-id="29d86-135">For the placeholder `{VERSION}`, the latest stable version of the package that matches the app's shared framework version can be found in the package's **Version History** at [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span></span>
 
-<span data-ttu-id="29d86-136">`wwwroot/:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="29d86-136">`wwwroot/:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="29d86-136">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="29d86-136">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {

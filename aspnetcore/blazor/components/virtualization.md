@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: コンポーネントの仮想化'
+title: 'ASP.NET Core Blazor コンポーネントの仮想化'
 author: guardrex
-description: 'ASP.NET Core :::no-loc(Blazor)::: アプリでコンポーネントの仮想化を使用する方法について説明します。'
+description: 'ASP.NET Core Blazor アプリでコンポーネントの仮想化を使用する方法について説明します。'
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/02/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/virtualization
 ms.openlocfilehash: b23e4814daaabbe2c8660d49cc5b6940a9cc3b4f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,11 +26,11 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056167"
 ---
-# <a name="aspnet-core-no-locblazor-component-virtualization"></a><span data-ttu-id="967c5-103">ASP.NET Core :::no-loc(Blazor)::: コンポーネントの仮想化</span><span class="sxs-lookup"><span data-stu-id="967c5-103">ASP.NET Core :::no-loc(Blazor)::: component virtualization</span></span>
+# <a name="aspnet-core-no-locblazor-component-virtualization"></a><span data-ttu-id="967c5-103">ASP.NET Core Blazor コンポーネントの仮想化</span><span class="sxs-lookup"><span data-stu-id="967c5-103">ASP.NET Core Blazor component virtualization</span></span>
 
 <span data-ttu-id="967c5-104">作成者: [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="967c5-104">By [Daniel Roth](https://github.com/danroth27)</span></span>
 
-<span data-ttu-id="967c5-105">:::no-loc(Blazor)::: フレームワークに組み込まれている仮想化サポートを使用して、コンポーネント レンダリングの認識されるパフォーマンスを向上させます。</span><span class="sxs-lookup"><span data-stu-id="967c5-105">Improve the perceived performance of component rendering using the :::no-loc(Blazor)::: framework's built-in virtualization support.</span></span> <span data-ttu-id="967c5-106">仮想化は、UI レンダリングを現在表示されている部分のみに制限するための手法です。</span><span class="sxs-lookup"><span data-stu-id="967c5-106">Virtualization is a technique for limiting UI rendering to just the parts that are currently visible.</span></span> <span data-ttu-id="967c5-107">たとえば、仮想化が有用なのは、アプリで項目の長いリストや項目の一部のみをレンダリングする必要があるが、表示する必要があるのはどんなときでも項目のサブセットのみである場合です。</span><span class="sxs-lookup"><span data-stu-id="967c5-107">For example, virtualization is helpful when the app must render a long list of items and only a subset of items is required to be visible at any given time.</span></span> <span data-ttu-id="967c5-108">:::no-loc(Blazor)::: には、仮想化をアプリのコンポーネントに追加するために使用できる `Virtualize` コンポーネントが用意されています。</span><span class="sxs-lookup"><span data-stu-id="967c5-108">:::no-loc(Blazor)::: provides the `Virtualize` component that can be used to add virtualization to an app's components.</span></span>
+<span data-ttu-id="967c5-105">Blazor フレームワークに組み込まれている仮想化サポートを使用して、コンポーネント レンダリングの認識されるパフォーマンスを向上させます。</span><span class="sxs-lookup"><span data-stu-id="967c5-105">Improve the perceived performance of component rendering using the Blazor framework's built-in virtualization support.</span></span> <span data-ttu-id="967c5-106">仮想化は、UI レンダリングを現在表示されている部分のみに制限するための手法です。</span><span class="sxs-lookup"><span data-stu-id="967c5-106">Virtualization is a technique for limiting UI rendering to just the parts that are currently visible.</span></span> <span data-ttu-id="967c5-107">たとえば、仮想化が有用なのは、アプリで項目の長いリストや項目の一部のみをレンダリングする必要があるが、表示する必要があるのはどんなときでも項目のサブセットのみである場合です。</span><span class="sxs-lookup"><span data-stu-id="967c5-107">For example, virtualization is helpful when the app must render a long list of items and only a subset of items is required to be visible at any given time.</span></span> <span data-ttu-id="967c5-108">Blazor には、仮想化をアプリのコンポーネントに追加するために使用できる `Virtualize` コンポーネントが用意されています。</span><span class="sxs-lookup"><span data-stu-id="967c5-108">Blazor provides the `Virtualize` component that can be used to add virtualization to an app's components.</span></span>
 
 <span data-ttu-id="967c5-109">仮想化を使用しない場合は、一般的なリストで、C# [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) ループを使用してリストの各項目を表示できます。</span><span class="sxs-lookup"><span data-stu-id="967c5-109">Without virtualization, a typical list might use a C# [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) loop to render each item in the list:</span></span>
 
@@ -72,9 +72,9 @@ ms.locfileid: "93056167"
 
 <span data-ttu-id="967c5-116">`Virtualize` コンポーネントの項目コンテンツには次を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="967c5-116">The item content for the `Virtualize` component can include:</span></span>
 
-* <span data-ttu-id="967c5-117">前の例に含まれていたプレーン HTML および :::no-loc(Razor)::: コード。</span><span class="sxs-lookup"><span data-stu-id="967c5-117">Plain HTML and :::no-loc(Razor)::: code, as the preceding example shows.</span></span>
-* <span data-ttu-id="967c5-118">1 つまたは複数の :::no-loc(Razor)::: コンポーネント。</span><span class="sxs-lookup"><span data-stu-id="967c5-118">One or more :::no-loc(Razor)::: components.</span></span>
-* <span data-ttu-id="967c5-119">HTML/:::no-loc(Razor)::: および :::no-loc(Razor)::: コンポーネントの混合。</span><span class="sxs-lookup"><span data-stu-id="967c5-119">A mix of HTML/:::no-loc(Razor)::: and :::no-loc(Razor)::: components.</span></span>
+* <span data-ttu-id="967c5-117">前の例に含まれていたプレーン HTML および Razor コード。</span><span class="sxs-lookup"><span data-stu-id="967c5-117">Plain HTML and Razor code, as the preceding example shows.</span></span>
+* <span data-ttu-id="967c5-118">1 つまたは複数の Razor コンポーネント。</span><span class="sxs-lookup"><span data-stu-id="967c5-118">One or more Razor components.</span></span>
+* <span data-ttu-id="967c5-119">HTML/Razor および Razor コンポーネントの混合。</span><span class="sxs-lookup"><span data-stu-id="967c5-119">A mix of HTML/Razor and Razor components.</span></span>
 
 ## <a name="item-provider-delegate"></a><span data-ttu-id="967c5-120">項目プロバイダー デリゲート</span><span class="sxs-lookup"><span data-stu-id="967c5-120">Item provider delegate</span></span>
 

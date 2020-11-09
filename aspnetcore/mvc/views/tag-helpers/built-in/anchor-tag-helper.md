@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
 ms.openlocfilehash: d39db59b0fc273fe4193a4864f302ecd3f4ad348
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -151,7 +151,7 @@ ms.locfileid: "93060912"
 
 <span data-ttu-id="94ecc-147">[asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 属性は、キー/値ペアのディクショナリの作成をサポートします。</span><span class="sxs-lookup"><span data-stu-id="94ecc-147">The [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) attribute supports the creation of a dictionary of key-value pairs.</span></span> <span data-ttu-id="94ecc-148">キーはパラメーターの名前で、値はパラメーターの値です。</span><span class="sxs-lookup"><span data-stu-id="94ecc-148">The key is the parameter name, and the value is the parameter value.</span></span>
 
-<span data-ttu-id="94ecc-149">次の例では、ディクショナリが初期化され、ビューに渡され :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-149">In the following example, a dictionary is initialized and passed to a :::no-loc(Razor)::: view.</span></span> <span data-ttu-id="94ecc-150">データがモデルによって渡される場合もあります。</span><span class="sxs-lookup"><span data-stu-id="94ecc-150">Alternatively, the data could be passed in with your model.</span></span>
+<span data-ttu-id="94ecc-149">次の例では、ディクショナリが初期化され、ビューに渡され Razor ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-149">In the following example, a dictionary is initialized and passed to a Razor view.</span></span> <span data-ttu-id="94ecc-150">データがモデルによって渡される場合もあります。</span><span class="sxs-lookup"><span data-stu-id="94ecc-150">Alternatively, the data could be passed in with your model.</span></span>
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -185,9 +185,9 @@ ms.locfileid: "93060912"
 
 <span data-ttu-id="94ecc-163">[asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 属性は、適切なルートの設定に使用する領域名を設定します。</span><span class="sxs-lookup"><span data-stu-id="94ecc-163">The [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) attribute sets the area name used to set the appropriate route.</span></span> <span data-ttu-id="94ecc-164">`asp-area` 属性によってどのようにルートの再マップが行われるかの例を以下に示します。</span><span class="sxs-lookup"><span data-stu-id="94ecc-164">The following examples depict how the `asp-area` attribute causes a remapping of routes.</span></span>
 
-#### <a name="usage-in-no-locrazor-pages"></a><span data-ttu-id="94ecc-165">使用 ( :::no-loc(Razor)::: ページで)</span><span class="sxs-lookup"><span data-stu-id="94ecc-165">Usage in :::no-loc(Razor)::: Pages</span></span>
+#### <a name="usage-in-no-locrazor-pages"></a><span data-ttu-id="94ecc-165">使用 ( Razor ページで)</span><span class="sxs-lookup"><span data-stu-id="94ecc-165">Usage in Razor Pages</span></span>
 
-<span data-ttu-id="94ecc-166">:::no-loc(Razor)::: ページ領域は ASP.NET Core 2.1 以降でサポートされています。</span><span class="sxs-lookup"><span data-stu-id="94ecc-166">:::no-loc(Razor)::: Pages areas are supported in ASP.NET Core 2.1 or later.</span></span>
+<span data-ttu-id="94ecc-166">Razor ページ領域は ASP.NET Core 2.1 以降でサポートされています。</span><span class="sxs-lookup"><span data-stu-id="94ecc-166">Razor Pages areas are supported in ASP.NET Core 2.1 or later.</span></span>
 
 <span data-ttu-id="94ecc-167">次のディレクトリ階層があるとします。</span><span class="sxs-lookup"><span data-stu-id="94ecc-167">Consider the following directory hierarchy:</span></span>
 
@@ -201,9 +201,9 @@ ms.locfileid: "93060912"
         * <span data-ttu-id="94ecc-175">*Index.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="94ecc-175">*Index.cshtml.cs*</span></span>
   * <span data-ttu-id="94ecc-176">**ページ**</span><span class="sxs-lookup"><span data-stu-id="94ecc-176">**Pages**</span></span>
 
-<span data-ttu-id="94ecc-177">[ *セッション* 領域の *インデックス* ] ページを参照するマークアップ :::no-loc(Razor)::: は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="94ecc-177">The markup to reference the *Sessions* area *Index* :::no-loc(Razor)::: Page is:</span></span>
+<span data-ttu-id="94ecc-177">[ *セッション* 領域の *インデックス* ] ページを参照するマークアップ Razor は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="94ecc-177">The markup to reference the *Sessions* area *Index* Razor Page is:</span></span>
 
-[!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspArea:::no-loc(Razor):::Pages)]
+[!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
 <span data-ttu-id="94ecc-178">生成される HTML:</span><span class="sxs-lookup"><span data-stu-id="94ecc-178">The generated HTML:</span></span>
 
@@ -212,10 +212,10 @@ ms.locfileid: "93060912"
 ```
 
 > [!TIP]
-> <span data-ttu-id="94ecc-179">Pages アプリの領域をサポートするには :::no-loc(Razor)::: 、で次のいずれかの操作を行い `Startup.ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-179">To support areas in a :::no-loc(Razor)::: Pages app, do one of the following in `Startup.ConfigureServices`:</span></span>
+> <span data-ttu-id="94ecc-179">Pages アプリの領域をサポートするには Razor 、で次のいずれかの操作を行い `Startup.ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-179">To support areas in a Razor Pages app, do one of the following in `Startup.ConfigureServices`:</span></span>
 >
 > * <span data-ttu-id="94ecc-180">[互換性バージョン](xref:mvc/compatibility-version)に 2.1 以降を設定します。</span><span class="sxs-lookup"><span data-stu-id="94ecc-180">Set the [compatibility version](xref:mvc/compatibility-version) to 2.1 or later.</span></span>
-> * <span data-ttu-id="94ecc-181">次のように、[ [ :::no-loc(Razor)::: allowareas]](xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.:::no-loc(Razor):::PagesOptions.AllowAreas*)プロパティをに設定します。 `true`</span><span class="sxs-lookup"><span data-stu-id="94ecc-181">Set the [:::no-loc(Razor):::PagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.:::no-loc(Razor):::PagesOptions.AllowAreas*) property to `true`:</span></span>
+> * <span data-ttu-id="94ecc-181">次のように、[ [ Razor allowareas]](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*)プロパティをに設定します。 `true`</span><span class="sxs-lookup"><span data-stu-id="94ecc-181">Set the [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) property to `true`:</span></span>
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 
@@ -279,9 +279,9 @@ ms.locfileid: "93060912"
 
 ### <a name="asp-page"></a><span data-ttu-id="94ecc-211">asp-page</span><span class="sxs-lookup"><span data-stu-id="94ecc-211">asp-page</span></span>
 
-<span data-ttu-id="94ecc-212">[Asp ページ](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*)属性は、ページで使用され :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-212">The [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) attribute is used with :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="94ecc-213">アンカー タグの `href` 属性の値を特定のページに設定するために使用します。</span><span class="sxs-lookup"><span data-stu-id="94ecc-213">Use it to set an anchor tag's `href` attribute value to a specific page.</span></span> <span data-ttu-id="94ecc-214">ページ名の前にスラッシュ "/" を付けると URL が作成されます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-214">Prefixing the page name with a forward slash ("/") creates the URL.</span></span>
+<span data-ttu-id="94ecc-212">[Asp ページ](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*)属性は、ページで使用され Razor ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-212">The [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) attribute is used with Razor Pages.</span></span> <span data-ttu-id="94ecc-213">アンカー タグの `href` 属性の値を特定のページに設定するために使用します。</span><span class="sxs-lookup"><span data-stu-id="94ecc-213">Use it to set an anchor tag's `href` attribute value to a specific page.</span></span> <span data-ttu-id="94ecc-214">ページ名の前にスラッシュ "/" を付けると URL が作成されます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-214">Prefixing the page name with a forward slash ("/") creates the URL.</span></span>
 
-<span data-ttu-id="94ecc-215">次の例では、出席者ページを参照してい :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-215">The following sample points to the attendee :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="94ecc-215">次の例では、出席者ページを参照してい Razor ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-215">The following sample points to the attendee Razor Page:</span></span>
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -303,7 +303,7 @@ ms.locfileid: "93060912"
 
 ### <a name="asp-page-handler"></a><span data-ttu-id="94ecc-220">asp-page-handler</span><span class="sxs-lookup"><span data-stu-id="94ecc-220">asp-page-handler</span></span>
 
-<span data-ttu-id="94ecc-221">[Asp ページハンドラー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*)属性は、ページで使用され :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-221">The [asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) attribute is used with :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="94ecc-222">特定のページ ハンドラーへのリンクが目的です。</span><span class="sxs-lookup"><span data-stu-id="94ecc-222">It's intended for linking to specific page handlers.</span></span>
+<span data-ttu-id="94ecc-221">[Asp ページハンドラー](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*)属性は、ページで使用され Razor ます。</span><span class="sxs-lookup"><span data-stu-id="94ecc-221">The [asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) attribute is used with Razor Pages.</span></span> <span data-ttu-id="94ecc-222">特定のページ ハンドラーへのリンクが目的です。</span><span class="sxs-lookup"><span data-stu-id="94ecc-222">It's intended for linking to specific page handlers.</span></span>
 
 <span data-ttu-id="94ecc-223">次のページ ハンドラーがあるとします。</span><span class="sxs-lookup"><span data-stu-id="94ecc-223">Consider the following page handler:</span></span>
 

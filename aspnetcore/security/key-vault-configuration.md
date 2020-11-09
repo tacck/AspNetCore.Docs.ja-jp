@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc, devx-track-azurecli
 ms.date: 02/07/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/key-vault-configuration
 ms.openlocfilehash: 10a949831c180f51bc6bb9b8294150a558f9343c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -135,7 +135,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. <span data-ttu-id="2e574-167">Azure AD でアプリを選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-167">Select the app in Azure AD.</span></span>
    1. <span data-ttu-id="2e574-168">[ **証明書 & シークレット** ] に移動します。</span><span class="sxs-lookup"><span data-stu-id="2e574-168">Navigate to **Certificates & secrets** .</span></span>
    1. <span data-ttu-id="2e574-169">公開キーを含む証明書をアップロードするには、[ **証明書のアップロード** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-169">Select **Upload certificate** to upload the certificate, which contains the public key.</span></span> <span data-ttu-id="2e574-170">*.Cer* 、 *pem* 、または *.crt* 証明書を使用できます。</span><span class="sxs-lookup"><span data-stu-id="2e574-170">A *.cer* , *.pem* , or *.crt* certificate is acceptable.</span></span>
-1. <span data-ttu-id="2e574-171">Key vault 名、アプリケーション ID、証明書の拇印をアプリのファイルに格納し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-171">Store the key vault name, Application ID, and certificate thumbprint in the app's *:::no-loc(appsettings.json):::* file.</span></span>
+1. <span data-ttu-id="2e574-171">Key vault 名、アプリケーション ID、証明書の拇印をアプリのファイルに格納し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-171">Store the key vault name, Application ID, and certificate thumbprint in the app's *appsettings.json* file.</span></span>
 1. <span data-ttu-id="2e574-172">Azure portal の **キーコンテナー** に移動します。</span><span class="sxs-lookup"><span data-stu-id="2e574-172">Navigate to **Key vaults** in the Azure portal.</span></span>
 1. <span data-ttu-id="2e574-173">Azure Key Vault セクションで、 [運用環境のシークレットストレージ](#secret-storage-in-the-production-environment-with-azure-key-vault) に作成したキーコンテナーを選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-173">Select the key vault that you created in the [Secret storage in the Production environment with Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) section.</span></span>
 1. <span data-ttu-id="2e574-174">**[アクセス ポリシー]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-174">Select **Access policies** .</span></span>
@@ -153,7 +153,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-<span data-ttu-id="2e574-186">X.509 証明書は OS によって管理されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-186">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="2e574-187">アプリは <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 、ファイルによって指定された値を使用してを呼び出し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-187">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="2e574-186">X.509 証明書は OS によって管理されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-186">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="2e574-187">アプリは <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 、ファイルによって指定された値を使用してを呼び出し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-187">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *appsettings.json* file:</span></span>
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -163,9 +163,9 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 * <span data-ttu-id="2e574-190">アプリケーション ID: `627e911e-43cc-61d4-992e-12db9c81b413`</span><span class="sxs-lookup"><span data-stu-id="2e574-190">Application ID: `627e911e-43cc-61d4-992e-12db9c81b413`</span></span>
 * <span data-ttu-id="2e574-191">証明書の拇印: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span><span class="sxs-lookup"><span data-stu-id="2e574-191">Certificate thumbprint: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span></span>
 
-<span data-ttu-id="2e574-192">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="2e574-192">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="2e574-192">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="2e574-192">*appsettings.json* :</span></span>
 
-[!code-json[](key-vault-configuration/samples/3.x/SampleApp/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
 <span data-ttu-id="2e574-193">アプリを実行すると、web ページに読み込まれたシークレット値が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-193">When you run the app, a webpage shows the loaded secret values.</span></span> <span data-ttu-id="2e574-194">開発環境では、シークレット値はサフィックス付きで読み込ま `_dev` れます。</span><span class="sxs-lookup"><span data-stu-id="2e574-194">In the Development environment, secret values load with the `_dev` suffix.</span></span> <span data-ttu-id="2e574-195">運用環境では、値はというサフィックスで読み込まれ `_prod` ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-195">In the Production environment, the values load with the `_prod` suffix.</span></span>
 
@@ -175,11 +175,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 <span data-ttu-id="2e574-198">このサンプルアプリでは、 `#define` *Program.cs* ファイルの先頭にあるステートメントがに設定されている場合に、Azure リソースの管理対象 id を使用し `Managed` ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-198">The sample app uses Managed identities for Azure resources when the `#define` statement at the top of the *Program.cs* file is set to `Managed`.</span></span>
 
-<span data-ttu-id="2e574-199">アプリのファイルにコンテナー名を入力し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-199">Enter the vault name into the app's *:::no-loc(appsettings.json):::* file.</span></span> <span data-ttu-id="2e574-200">このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。</span><span class="sxs-lookup"><span data-stu-id="2e574-200">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="2e574-201">アプリが Azure にデプロイされ、Azure は、ファイルに格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-201">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="2e574-199">アプリのファイルにコンテナー名を入力し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-199">Enter the vault name into the app's *appsettings.json* file.</span></span> <span data-ttu-id="2e574-200">このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。</span><span class="sxs-lookup"><span data-stu-id="2e574-200">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="2e574-201">アプリが Azure にデプロイされ、Azure は、ファイルに格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-201">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *appsettings.json* file.</span></span>
 
 <span data-ttu-id="2e574-202">サンプルアプリを Azure App Service にデプロイします。</span><span class="sxs-lookup"><span data-stu-id="2e574-202">Deploy the sample app to Azure App Service.</span></span>
 
-<span data-ttu-id="2e574-203">Azure App Service にデプロイされたアプリは、サービスの作成時に Azure AD に自動的に登録されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-203">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="2e574-204">次のコマンドで使用するために、デプロイからオブジェクト ID を取得します。</span><span class="sxs-lookup"><span data-stu-id="2e574-204">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="2e574-205">オブジェクト ID は、App Service のパネルの Azure portal に表示され **:::no-loc(Identity):::** ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-205">The Object ID is shown in the Azure portal on the **:::no-loc(Identity):::** panel of the App Service.</span></span>
+<span data-ttu-id="2e574-203">Azure App Service にデプロイされたアプリは、サービスの作成時に Azure AD に自動的に登録されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-203">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="2e574-204">次のコマンドで使用するために、デプロイからオブジェクト ID を取得します。</span><span class="sxs-lookup"><span data-stu-id="2e574-204">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="2e574-205">オブジェクト ID は、App Service のパネルの Azure portal に表示され **Identity** ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-205">The Object ID is shown in the Azure portal on the **Identity** panel of the App Service.</span></span>
 
 <span data-ttu-id="2e574-206">Azure CLI とアプリのオブジェクト ID を使用して、 `list` `get` キーコンテナーにアクセスするためのアクセス許可とアクセス許可をアプリに付与します。</span><span class="sxs-lookup"><span data-stu-id="2e574-206">Using Azure CLI and the app's Object ID, provide the app with `list` and `get` permissions to access the key vault:</span></span>
 
@@ -199,7 +199,7 @@ az keyvault set-policy --name {KEY VAULT NAME} --object-id {OBJECT ID} --secret-
 
 <span data-ttu-id="2e574-213">Key vault 名の値の例: `contosovault`</span><span class="sxs-lookup"><span data-stu-id="2e574-213">Key vault name example value: `contosovault`</span></span>
     
-<span data-ttu-id="2e574-214">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="2e574-214">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="2e574-214">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="2e574-214">*appsettings.json* :</span></span>
 
 ```json
 {
@@ -481,7 +481,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    1. <span data-ttu-id="2e574-362">Azure AD でアプリを選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-362">Select the app in Azure AD.</span></span>
    1. <span data-ttu-id="2e574-363">[ **証明書 & シークレット** ] に移動します。</span><span class="sxs-lookup"><span data-stu-id="2e574-363">Navigate to **Certificates & secrets** .</span></span>
    1. <span data-ttu-id="2e574-364">公開キーを含む証明書をアップロードするには、[ **証明書のアップロード** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-364">Select **Upload certificate** to upload the certificate, which contains the public key.</span></span> <span data-ttu-id="2e574-365">*.Cer* 、 *pem* 、または *.crt* 証明書を使用できます。</span><span class="sxs-lookup"><span data-stu-id="2e574-365">A *.cer* , *.pem* , or *.crt* certificate is acceptable.</span></span>
-1. <span data-ttu-id="2e574-366">Key vault 名、アプリケーション ID、証明書の拇印をアプリのファイルに格納し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-366">Store the key vault name, Application ID, and certificate thumbprint in the app's *:::no-loc(appsettings.json):::* file.</span></span>
+1. <span data-ttu-id="2e574-366">Key vault 名、アプリケーション ID、証明書の拇印をアプリのファイルに格納し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-366">Store the key vault name, Application ID, and certificate thumbprint in the app's *appsettings.json* file.</span></span>
 1. <span data-ttu-id="2e574-367">Azure portal の **キーコンテナー** に移動します。</span><span class="sxs-lookup"><span data-stu-id="2e574-367">Navigate to **Key vaults** in the Azure portal.</span></span>
 1. <span data-ttu-id="2e574-368">Azure Key Vault セクションで、 [運用環境のシークレットストレージ](#secret-storage-in-the-production-environment-with-azure-key-vault) に作成したキーコンテナーを選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-368">Select the key vault that you created in the [Secret storage in the Production environment with Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) section.</span></span>
 1. <span data-ttu-id="2e574-369">**[アクセス ポリシー]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="2e574-369">Select **Access policies** .</span></span>
@@ -499,7 +499,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-<span data-ttu-id="2e574-381">X.509 証明書は OS によって管理されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-381">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="2e574-382">アプリは <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 、ファイルによって指定された値を使用してを呼び出し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-382">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="2e574-381">X.509 証明書は OS によって管理されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-381">The X.509 certificate is managed by the OS.</span></span> <span data-ttu-id="2e574-382">アプリは <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> 、ファイルによって指定された値を使用してを呼び出し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-382">The app calls <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> with values supplied by the *appsettings.json* file:</span></span>
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -509,9 +509,9 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 * <span data-ttu-id="2e574-385">アプリケーション ID: `627e911e-43cc-61d4-992e-12db9c81b413`</span><span class="sxs-lookup"><span data-stu-id="2e574-385">Application ID: `627e911e-43cc-61d4-992e-12db9c81b413`</span></span>
 * <span data-ttu-id="2e574-386">証明書の拇印: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span><span class="sxs-lookup"><span data-stu-id="2e574-386">Certificate thumbprint: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`</span></span>
 
-<span data-ttu-id="2e574-387">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="2e574-387">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="2e574-387">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="2e574-387">*appsettings.json* :</span></span>
 
-[!code-json[](key-vault-configuration/samples/2.x/SampleApp/:::no-loc(appsettings.json):::?highlight=10-12)]
+[!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
 <span data-ttu-id="2e574-388">アプリを実行すると、web ページに読み込まれたシークレット値が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-388">When you run the app, a webpage shows the loaded secret values.</span></span> <span data-ttu-id="2e574-389">開発環境では、シークレット値はサフィックス付きで読み込ま `_dev` れます。</span><span class="sxs-lookup"><span data-stu-id="2e574-389">In the Development environment, secret values load with the `_dev` suffix.</span></span> <span data-ttu-id="2e574-390">運用環境では、値はというサフィックスで読み込まれ `_prod` ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-390">In the Production environment, the values load with the `_prod` suffix.</span></span>
 
@@ -521,11 +521,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 <span data-ttu-id="2e574-393">このサンプルアプリでは、 `#define` *Program.cs* ファイルの先頭にあるステートメントがに設定されている場合に、Azure リソースの管理対象 id を使用し `Managed` ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-393">The sample app uses Managed identities for Azure resources when the `#define` statement at the top of the *Program.cs* file is set to `Managed`.</span></span>
 
-<span data-ttu-id="2e574-394">アプリのファイルにコンテナー名を入力し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-394">Enter the vault name into the app's *:::no-loc(appsettings.json):::* file.</span></span> <span data-ttu-id="2e574-395">このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。</span><span class="sxs-lookup"><span data-stu-id="2e574-395">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="2e574-396">アプリが Azure にデプロイされ、Azure は、ファイルに格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-396">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="2e574-394">アプリのファイルにコンテナー名を入力し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-394">Enter the vault name into the app's *appsettings.json* file.</span></span> <span data-ttu-id="2e574-395">このサンプルアプリでは、バージョンに設定するときにアプリケーション ID とパスワード (クライアントシークレット) は必要ありません `Managed` 。そのため、これらの構成エントリは無視してかまいません。</span><span class="sxs-lookup"><span data-stu-id="2e574-395">The sample app doesn't require an Application ID and Password (Client Secret) when set to the `Managed` version, so you can ignore those configuration entries.</span></span> <span data-ttu-id="2e574-396">アプリが Azure にデプロイされ、Azure は、ファイルに格納されているコンテナー名を使用してのみ Azure Key Vault にアクセスするようにアプリを認証し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-396">The app is deployed to Azure, and Azure authenticates the app to access Azure Key Vault only using the vault name stored in the *appsettings.json* file.</span></span>
 
 <span data-ttu-id="2e574-397">サンプルアプリを Azure App Service にデプロイします。</span><span class="sxs-lookup"><span data-stu-id="2e574-397">Deploy the sample app to Azure App Service.</span></span>
 
-<span data-ttu-id="2e574-398">Azure App Service にデプロイされたアプリは、サービスの作成時に Azure AD に自動的に登録されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-398">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="2e574-399">次のコマンドで使用するために、デプロイからオブジェクト ID を取得します。</span><span class="sxs-lookup"><span data-stu-id="2e574-399">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="2e574-400">オブジェクト ID は、App Service のパネルの Azure portal に表示され **:::no-loc(Identity):::** ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-400">The Object ID is shown in the Azure portal on the **:::no-loc(Identity):::** panel of the App Service.</span></span>
+<span data-ttu-id="2e574-398">Azure App Service にデプロイされたアプリは、サービスの作成時に Azure AD に自動的に登録されます。</span><span class="sxs-lookup"><span data-stu-id="2e574-398">An app deployed to Azure App Service is automatically registered with Azure AD when the service is created.</span></span> <span data-ttu-id="2e574-399">次のコマンドで使用するために、デプロイからオブジェクト ID を取得します。</span><span class="sxs-lookup"><span data-stu-id="2e574-399">Obtain the Object ID from the deployment for use in the following command.</span></span> <span data-ttu-id="2e574-400">オブジェクト ID は、App Service のパネルの Azure portal に表示され **Identity** ます。</span><span class="sxs-lookup"><span data-stu-id="2e574-400">The Object ID is shown in the Azure portal on the **Identity** panel of the App Service.</span></span>
 
 <span data-ttu-id="2e574-401">Azure CLI とアプリのオブジェクト ID を使用して、 `list` `get` キーコンテナーにアクセスするためのアクセス許可とアクセス許可をアプリに付与します。</span><span class="sxs-lookup"><span data-stu-id="2e574-401">Using Azure CLI and the app's Object ID, provide the app with `list` and `get` permissions to access the key vault:</span></span>
 
@@ -545,7 +545,7 @@ az keyvault set-policy --name {KEY VAULT NAME} --object-id {OBJECT ID} --secret-
 
 <span data-ttu-id="2e574-408">Key vault 名の値の例: `contosovault`</span><span class="sxs-lookup"><span data-stu-id="2e574-408">Key vault name example value: `contosovault`</span></span>
     
-<span data-ttu-id="2e574-409">*:::no-loc(appsettings.json):::* :</span><span class="sxs-lookup"><span data-stu-id="2e574-409">*:::no-loc(appsettings.json):::* :</span></span>
+<span data-ttu-id="2e574-409">*appsettings.json* :</span><span class="sxs-lookup"><span data-stu-id="2e574-409">*appsettings.json* :</span></span>
 
 ```json
 {

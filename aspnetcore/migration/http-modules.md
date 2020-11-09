@@ -5,17 +5,17 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/http-modules
 ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -195,9 +195,9 @@ ms.locfileid: "93060704"
 
 2. <span data-ttu-id="d337b-185">オプションの値を格納する</span><span class="sxs-lookup"><span data-stu-id="d337b-185">Store the option values</span></span>
 
-   <span data-ttu-id="d337b-186">構成システムでは、オプションの値を任意の場所に格納できます。</span><span class="sxs-lookup"><span data-stu-id="d337b-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="d337b-187">ただし、ほとんどのサイトではを使用しているので、 *:::no-loc(appsettings.json):::* 次の方法を使用します。</span><span class="sxs-lookup"><span data-stu-id="d337b-187">However, most sites use *:::no-loc(appsettings.json):::* , so we'll take that approach:</span></span>
+   <span data-ttu-id="d337b-186">構成システムでは、オプションの値を任意の場所に格納できます。</span><span class="sxs-lookup"><span data-stu-id="d337b-186">The configuration system allows you to store option values anywhere you want.</span></span> <span data-ttu-id="d337b-187">ただし、ほとんどのサイトではを使用しているので、 *appsettings.json* 次の方法を使用します。</span><span class="sxs-lookup"><span data-stu-id="d337b-187">However, most sites use *appsettings.json* , so we'll take that approach:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,14-18)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
    <span data-ttu-id="d337b-188">*MyMiddlewareOptionsSection* ここにはセクション名があります。</span><span class="sxs-lookup"><span data-stu-id="d337b-188">*MyMiddlewareOptionsSection* here is a section name.</span></span> <span data-ttu-id="d337b-189">オプションクラスの名前と同じである必要はありません。</span><span class="sxs-lookup"><span data-stu-id="d337b-189">It doesn't have to be the same as the name of your options class.</span></span>
 
@@ -207,7 +207,7 @@ ms.locfileid: "93060704"
 
     <span data-ttu-id="d337b-192">クラスを更新し `Startup` ます。</span><span class="sxs-lookup"><span data-stu-id="d337b-192">Update your `Startup` class:</span></span>
 
-   1. <span data-ttu-id="d337b-193">を使用している場合は *:::no-loc(appsettings.json):::* 、コンストラクターの構成ビルダーに追加し `Startup` ます。</span><span class="sxs-lookup"><span data-stu-id="d337b-193">If you're using *:::no-loc(appsettings.json):::* , add it to the configuration builder in the `Startup` constructor:</span></span>
+   1. <span data-ttu-id="d337b-193">を使用している場合は *appsettings.json* 、コンストラクターの構成ビルダーに追加し `Startup` ます。</span><span class="sxs-lookup"><span data-stu-id="d337b-193">If you're using *appsettings.json* , add it to the configuration builder in the `Startup` constructor:</span></span>
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -235,11 +235,11 @@ ms.locfileid: "93060704"
 
 <span data-ttu-id="d337b-208">ソリューションでは、オプションオブジェクトをクラスの実際のオプション値で取得 `Startup` し、ミドルウェアの各インスタンスに直接渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="d337b-208">The solution is to get the options objects with the actual options values in your `Startup` class and pass those directly to each instance of your middleware.</span></span>
 
-1. <span data-ttu-id="d337b-209">2番目のキーをに追加します。 *:::no-loc(appsettings.json):::*</span><span class="sxs-lookup"><span data-stu-id="d337b-209">Add a second key to *:::no-loc(appsettings.json):::*</span></span>
+1. <span data-ttu-id="d337b-209">2番目のキーをに追加します。 *appsettings.json*</span><span class="sxs-lookup"><span data-stu-id="d337b-209">Add a second key to *appsettings.json*</span></span>
 
-   <span data-ttu-id="d337b-210">2番目のオプションセットをファイルに追加するには *:::no-loc(appsettings.json):::* 、新しいキーを使用して一意に識別します。</span><span class="sxs-lookup"><span data-stu-id="d337b-210">To add a second set of options to the *:::no-loc(appsettings.json):::* file, use a new key to uniquely identify it:</span></span>
+   <span data-ttu-id="d337b-210">2番目のオプションセットをファイルに追加するには *appsettings.json* 、新しいキーを使用して一意に識別します。</span><span class="sxs-lookup"><span data-stu-id="d337b-210">To add a second set of options to the *appsettings.json* file, use a new key to uniquely identify it:</span></span>
 
-   [!code-json[](http-modules/sample/Asp.Net.Core/:::no-loc(appsettings.json):::?range=1,10-18&highlight=2-5)]
+   [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
 2. <span data-ttu-id="d337b-211">オプションの値を取得し、ミドルウェアに渡します。</span><span class="sxs-lookup"><span data-stu-id="d337b-211">Retrieve options values and pass them to middleware.</span></span> <span data-ttu-id="d337b-212">`Use...`(ミドルウェアをパイプラインに追加する) 拡張メソッドは、オプション値を渡す論理的な場所です。</span><span class="sxs-lookup"><span data-stu-id="d337b-212">The `Use...` extension method (which adds your middleware to the pipeline) is a logical place to pass in the option values:</span></span> 
 
@@ -295,9 +295,9 @@ public async Task Invoke(HttpContext context)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-<span data-ttu-id="d337b-233">**HttpContext. 要求。 :::no-loc(Cookie):::s** は次のように変換します。</span><span class="sxs-lookup"><span data-stu-id="d337b-233">**HttpContext.Request.:::no-loc(Cookie):::s** translates to:</span></span>
+<span data-ttu-id="d337b-233">**HttpContext. 要求。 Cookies** は次のように変換します。</span><span class="sxs-lookup"><span data-stu-id="d337b-233">**HttpContext.Request.Cookies** translates to:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
 <span data-ttu-id="d337b-234">**Httpcontext.current** は次のように変換されます。</span><span class="sxs-lookup"><span data-stu-id="d337b-234">**HttpContext.Request.RequestContext.RouteData** translates to:</span></span>
 
@@ -378,21 +378,21 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-<span data-ttu-id="d337b-260">**:::no-loc(Cookie):::HttpContext。2$s**</span><span class="sxs-lookup"><span data-stu-id="d337b-260">**HttpContext.Response.:::no-loc(Cookie):::s**</span></span>
+<span data-ttu-id="d337b-260">**CookieHttpContext。2$s**</span><span class="sxs-lookup"><span data-stu-id="d337b-260">**HttpContext.Response.Cookies**</span></span>
 
-<span data-ttu-id="d337b-261">:::no-loc(Cookie):::は、 *セット :::no-loc(Cookie):::* 応答ヘッダー内のブラウザーに移動します。</span><span class="sxs-lookup"><span data-stu-id="d337b-261">:::no-loc(Cookie):::s travel to the browser in a *Set-:::no-loc(Cookie):::* response header.</span></span> <span data-ttu-id="d337b-262">そのため、を送信するには、 :::no-loc(cookie)::: 応答ヘッダーの送信に使用するのと同じコールバックが必要です。</span><span class="sxs-lookup"><span data-stu-id="d337b-262">As a result, sending :::no-loc(cookie):::s requires the same callback as used for sending response headers:</span></span>
+<span data-ttu-id="d337b-261">Cookieは、 *セット Cookie* 応答ヘッダー内のブラウザーに移動します。</span><span class="sxs-lookup"><span data-stu-id="d337b-261">Cookies travel to the browser in a *Set-Cookie* response header.</span></span> <span data-ttu-id="d337b-262">そのため、を送信するには、 cookie 応答ヘッダーの送信に使用するのと同じコールバックが必要です。</span><span class="sxs-lookup"><span data-stu-id="d337b-262">As a result, sending cookies requires the same callback as used for sending response headers:</span></span>
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
 {
     // ...
-    httpContext.Response.OnStarting(Set:::no-loc(Cookie):::s, state: httpContext);
+    httpContext.Response.OnStarting(SetCookies, state: httpContext);
     httpContext.Response.OnStarting(SetHeaders, state: httpContext);
 ```
 
-<span data-ttu-id="d337b-263">`Set:::no-loc(Cookie):::s`コールバックメソッドは次のようになります。</span><span class="sxs-lookup"><span data-stu-id="d337b-263">The `Set:::no-loc(Cookie):::s` callback method would look like the following:</span></span>
+<span data-ttu-id="d337b-263">`SetCookies`コールバックメソッドは次のようになります。</span><span class="sxs-lookup"><span data-stu-id="d337b-263">The `SetCookies` callback method would look like the following:</span></span>
 
-[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Set:::no-loc(Cookie):::s)]
+[!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
 ## <a name="additional-resources"></a><span data-ttu-id="d337b-264">その他の資料</span><span class="sxs-lookup"><span data-stu-id="d337b-264">Additional resources</span></span>
 

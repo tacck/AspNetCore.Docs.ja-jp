@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core でのログ記録と診断 :::no-loc(SignalR):::'
+title: 'ASP.NET Core でのログ記録と診断 SignalR'
 author: anurse
-description: 'ASP.NET Core アプリから診断を収集する方法について説明 :::no-loc(SignalR)::: します。'
+description: 'ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/diagnostics
 ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061315"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="d513f-103">ASP.NET Core でのログ記録と診断 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="d513f-103">Logging and diagnostics in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="d513f-103">ASP.NET Core でのログ記録と診断 SignalR</span><span class="sxs-lookup"><span data-stu-id="d513f-103">Logging and diagnostics in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="d513f-104">By [Andrew Stanton-看護師](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="d513f-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="d513f-105">この記事では、ASP.NET Core アプリから診断情報を収集して問題のトラブルシューティングを行うためのガイダンスを提供 :::no-loc(SignalR)::: します。</span><span class="sxs-lookup"><span data-stu-id="d513f-105">This article provides guidance for gathering diagnostics from your ASP.NET Core :::no-loc(SignalR)::: app to help troubleshoot issues.</span></span>
+<span data-ttu-id="d513f-105">この記事では、ASP.NET Core アプリから診断情報を収集して問題のトラブルシューティングを行うためのガイダンスを提供 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="d513f-105">This article provides guidance for gathering diagnostics from your ASP.NET Core SignalR app to help troubleshoot issues.</span></span>
 
 ## <a name="server-side-logging"></a><span data-ttu-id="d513f-106">サーバー側のログ記録</span><span class="sxs-lookup"><span data-stu-id="d513f-106">Server-side logging</span></span>
 
 > [!WARNING]
 > <span data-ttu-id="d513f-107">サーバー側のログには、アプリからの機密情報が含まれる場合があります。</span><span class="sxs-lookup"><span data-stu-id="d513f-107">Server-side logs may contain sensitive information from your app.</span></span> <span data-ttu-id="d513f-108">運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。</span><span class="sxs-lookup"><span data-stu-id="d513f-108">**Never** post raw logs from production apps to public forums like GitHub.</span></span>
 
-<span data-ttu-id="d513f-109">:::no-loc(SignalR):::は ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。</span><span class="sxs-lookup"><span data-stu-id="d513f-109">Since :::no-loc(SignalR)::: is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="d513f-110">既定の構成では、は :::no-loc(SignalR)::: ごくわずかな情報をログに記録しますが、これは構成できます。</span><span class="sxs-lookup"><span data-stu-id="d513f-110">In the default configuration, :::no-loc(SignalR)::: logs very little information, but this can configured.</span></span> <span data-ttu-id="d513f-111">ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="d513f-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
+<span data-ttu-id="d513f-109">SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。</span><span class="sxs-lookup"><span data-stu-id="d513f-109">Since SignalR is part of ASP.NET Core, it uses the ASP.NET Core logging system.</span></span> <span data-ttu-id="d513f-110">既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。</span><span class="sxs-lookup"><span data-stu-id="d513f-110">In the default configuration, SignalR logs very little information, but this can configured.</span></span> <span data-ttu-id="d513f-111">ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。</span><span class="sxs-lookup"><span data-stu-id="d513f-111">See the documentation on [ASP.NET Core logging](xref:fundamentals/logging/index#configuration) for details on configuring ASP.NET Core logging.</span></span>
 
-<span data-ttu-id="d513f-112">:::no-loc(SignalR)::: 2つの logger カテゴリを使用します。</span><span class="sxs-lookup"><span data-stu-id="d513f-112">:::no-loc(SignalR)::: uses two logger categories:</span></span>
+<span data-ttu-id="d513f-112">SignalR 2つの logger カテゴリを使用します。</span><span class="sxs-lookup"><span data-stu-id="d513f-112">SignalR uses two logger categories:</span></span>
 
-* <span data-ttu-id="d513f-113">`Microsoft.AspNetCore.:::no-loc(SignalR):::`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。</span><span class="sxs-lookup"><span data-stu-id="d513f-113">`Microsoft.AspNetCore.:::no-loc(SignalR):::`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
-* <span data-ttu-id="d513f-114">`Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、Server-Sent イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="d513f-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level :::no-loc(SignalR)::: infrastructure.</span></span>
+* <span data-ttu-id="d513f-113">`Microsoft.AspNetCore.SignalR`: ハブプロトコルに関連するログ、ハブのアクティブ化、メソッドの呼び出し、およびその他のハブ関連アクティビティ。</span><span class="sxs-lookup"><span data-stu-id="d513f-113">`Microsoft.AspNetCore.SignalR`: For logs related to Hub Protocols, activating Hubs, invoking methods, and other Hub-related activities.</span></span>
+* <span data-ttu-id="d513f-114">`Microsoft.AspNetCore.Http.Connections`: Websocket、長いポーリング、Server-Sent イベント、低レベルのインフラストラクチャなどのトランスポートに関連するログ。 SignalR</span><span class="sxs-lookup"><span data-stu-id="d513f-114">`Microsoft.AspNetCore.Http.Connections`: For logs related to transports, such as WebSockets, Long Polling, Server-Sent Events, and low-level SignalR infrastructure.</span></span>
 
-<span data-ttu-id="d513f-115">から詳細なログを有効にするには :::no-loc(SignalR)::: 、の `Debug` *:::no-loc(appsettings.json):::* サブセクションに次の項目を追加して、前のプレフィックスをファイル内のレベルに構成し `LogLevel` `Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-115">To enable detailed logs from :::no-loc(SignalR):::, configure both of the preceding prefixes to the `Debug` level in your *:::no-loc(appsettings.json):::* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
+<span data-ttu-id="d513f-115">から詳細なログを有効にするには SignalR 、の `Debug` *appsettings.json* サブセクションに次の項目を追加して、前のプレフィックスをファイル内のレベルに構成し `LogLevel` `Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-115">To enable detailed logs from SignalR, configure both of the preceding prefixes to the `Debug` level in your *appsettings.json* file by adding the following items to the `LogLevel` sub-section in `Logging`:</span></span>
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -54,10 +54,10 @@ ms.locfileid: "93061315"
 
 <span data-ttu-id="d513f-117">JSON ベースの構成を使用していない場合は、構成システムで次の構成値を設定します。</span><span class="sxs-lookup"><span data-stu-id="d513f-117">If you aren't using JSON-based configuration, set the following configuration values in your configuration system:</span></span>
 
-* `Logging:LogLevel:Microsoft.AspNetCore.:::no-loc(SignalR):::` = `Debug`
+* `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-<span data-ttu-id="d513f-118">構成システムのドキュメントを調べて、入れ子になった構成値を指定する方法を確認してください。</span><span class="sxs-lookup"><span data-stu-id="d513f-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="d513f-119">たとえば、環境変数の使用時には、`:` の代わりに 2 つの `_` 文字を使用します (例: `Logging__LogLevel__Microsoft.AspNetCore.:::no-loc(SignalR):::`)。</span><span class="sxs-lookup"><span data-stu-id="d513f-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.:::no-loc(SignalR):::`).</span></span>
+<span data-ttu-id="d513f-118">構成システムのドキュメントを調べて、入れ子になった構成値を指定する方法を確認してください。</span><span class="sxs-lookup"><span data-stu-id="d513f-118">Check the documentation for your configuration system to determine how to specify nested configuration values.</span></span> <span data-ttu-id="d513f-119">たとえば、環境変数の使用時には、`:` の代わりに 2 つの `_` 文字を使用します (例: `Logging__LogLevel__Microsoft.AspNetCore.SignalR`)。</span><span class="sxs-lookup"><span data-stu-id="d513f-119">For example, when using environment variables, two `_` characters are used instead of the `:` (for example, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).</span></span>
 
 <span data-ttu-id="d513f-120">アプリのより詳細な診断情報を収集する場合は、`Debug` レベルを使用することが推奨されます。</span><span class="sxs-lookup"><span data-stu-id="d513f-120">We recommend using the `Debug` level when gathering more detailed diagnostics for your app.</span></span> <span data-ttu-id="d513f-121">`Trace` レベルでは非常に低レベルの診断情報が生成されるため、アプリの問題を診断するために必要となることはまれです。</span><span class="sxs-lookup"><span data-stu-id="d513f-121">The `Trace` level produces very low-level diagnostics and is rarely needed to diagnose issues in your app.</span></span>
 
@@ -67,7 +67,7 @@ ms.locfileid: "93061315"
 
 ### <a name="as-a-console-app-outside-iis"></a><span data-ttu-id="d513f-124">IIS の外部のコンソールアプリとして</span><span class="sxs-lookup"><span data-stu-id="d513f-124">As a console app outside IIS</span></span>
 
-<span data-ttu-id="d513f-125">コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d513f-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="d513f-126">:::no-loc(SignalR)::: ログはコンソールに表示されます。</span><span class="sxs-lookup"><span data-stu-id="d513f-126">:::no-loc(SignalR)::: logs will appear in the console.</span></span>
+<span data-ttu-id="d513f-125">コンソール アプリで実行中の場合は、[コンソール ロガー](xref:fundamentals/logging/index#console)を既定で有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d513f-125">If you're running in a console app, the [Console logger](xref:fundamentals/logging/index#console) should be enabled by default.</span></span> <span data-ttu-id="d513f-126">SignalR ログはコンソールに表示されます。</span><span class="sxs-lookup"><span data-stu-id="d513f-126">SignalR logs will appear in the console.</span></span>
 
 ### <a name="within-iis-express-from-visual-studio"></a><span data-ttu-id="d513f-127">Visual Studio から IIS Express 内</span><span class="sxs-lookup"><span data-stu-id="d513f-127">Within IIS Express from Visual Studio</span></span>
 
@@ -117,7 +117,7 @@ ms.locfileid: "93061315"
 
 <span data-ttu-id="d513f-159">.NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-159">To get logs from the .NET client, you can use the `ConfigureLogging` method on `HubConnectionBuilder`.</span></span> <span data-ttu-id="d513f-160">これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-160">This works the same way as the `ConfigureLogging` method on `WebHostBuilder` and `HostBuilder`.</span></span> <span data-ttu-id="d513f-161">ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。</span><span class="sxs-lookup"><span data-stu-id="d513f-161">You can configure the same logging providers you use in ASP.NET Core.</span></span> <span data-ttu-id="d513f-162">ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d513f-162">However, you have to manually install and enable the NuGet packages for the individual logging providers.</span></span>
 
-<span data-ttu-id="d513f-163">.NET クライアントのログ記録をアプリに追加するに :::no-loc(Blazor WebAssembly)::: は、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。</span><span class="sxs-lookup"><span data-stu-id="d513f-163">To add .NET client logging to a :::no-loc(Blazor WebAssembly)::: app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
+<span data-ttu-id="d513f-163">.NET クライアントのログ記録をアプリに追加するに Blazor WebAssembly は、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。</span><span class="sxs-lookup"><span data-stu-id="d513f-163">To add .NET client logging to a Blazor WebAssembly app, see <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging>.</span></span>
 
 ### <a name="console-logging"></a><span data-ttu-id="d513f-164">[コンソールのログ記録]</span><span class="sxs-lookup"><span data-stu-id="d513f-164">Console logging</span></span>
 
@@ -133,13 +133,13 @@ ms.locfileid: "93061315"
 
 ### <a name="other-logging-providers"></a><span data-ttu-id="d513f-170">その他のログプロバイダー</span><span class="sxs-lookup"><span data-stu-id="d513f-170">Other logging providers</span></span>
 
-<span data-ttu-id="d513f-171">:::no-loc(SignalR)::: では、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-171">:::no-loc(SignalR)::: supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="d513f-172">ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
+<span data-ttu-id="d513f-171">SignalR では、Serilog、Seq、NLog などの他のログ記録プロバイダーや、と統合されるその他のログ記録プロバイダーがサポートされてい `Microsoft.Extensions.Logging` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-171">SignalR supports other logging providers such as Serilog, Seq, NLog, or any other logging system that integrates with `Microsoft.Extensions.Logging`.</span></span> <span data-ttu-id="d513f-172">ログシステムにが用意されている場合は `ILoggerProvider` 、次のように登録でき `AddProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-172">If your logging system provides an `ILoggerProvider`, you can register it with `AddProvider`:</span></span>
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a><span data-ttu-id="d513f-173">コントロールの詳細度</span><span class="sxs-lookup"><span data-stu-id="d513f-173">Control verbosity</span></span>
 
-<span data-ttu-id="d513f-174">アプリ内の他の場所からログを記録している場合は、既定のレベルをに変更すると、詳細が表示されない場合 `Debug` があります。</span><span class="sxs-lookup"><span data-stu-id="d513f-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="d513f-175">フィルターを使用して、ログのログ記録レベルを構成でき :::no-loc(SignalR)::: ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-175">You can use a Filter to configure the logging level for :::no-loc(SignalR)::: logs.</span></span> <span data-ttu-id="d513f-176">これは、サーバーの場合とほぼ同じ方法でコードで行うことができます。</span><span class="sxs-lookup"><span data-stu-id="d513f-176">This can be done in code, in much the same way as on the server:</span></span>
+<span data-ttu-id="d513f-174">アプリ内の他の場所からログを記録している場合は、既定のレベルをに変更すると、詳細が表示されない場合 `Debug` があります。</span><span class="sxs-lookup"><span data-stu-id="d513f-174">If you are logging from other places in your app, changing the default level to `Debug` may be too verbose.</span></span> <span data-ttu-id="d513f-175">フィルターを使用して、ログのログ記録レベルを構成でき SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-175">You can use a Filter to configure the logging level for SignalR logs.</span></span> <span data-ttu-id="d513f-176">これは、サーバーの場合とほぼ同じ方法でコードで行うことができます。</span><span class="sxs-lookup"><span data-stu-id="d513f-176">This can be done in code, in much the same way as on the server:</span></span>
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
@@ -222,9 +222,9 @@ tcpdump -i [interface] -w trace.pcap
 
 <span data-ttu-id="d513f-228">メトリックは、一定期間のデータ測定値を表します。</span><span class="sxs-lookup"><span data-stu-id="d513f-228">Metrics is a representation of data measures over intervals of time.</span></span> <span data-ttu-id="d513f-229">たとえば、1秒あたりの要求です。</span><span class="sxs-lookup"><span data-stu-id="d513f-229">For example, requests per second.</span></span> <span data-ttu-id="d513f-230">メトリックデータを使用すると、アプリの状態を高レベルで監視できます。</span><span class="sxs-lookup"><span data-stu-id="d513f-230">Metrics data allows observation of the state of an app at a high level.</span></span> <span data-ttu-id="d513f-231">.NET gRPC メトリックは <xref:System.Diagnostics.Tracing.EventCounter> を使用して出力されます。</span><span class="sxs-lookup"><span data-stu-id="d513f-231">.NET gRPC metrics are emitted using <xref:System.Diagnostics.Tracing.EventCounter>.</span></span>
 
-### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="d513f-232">:::no-loc(SignalR)::: サーバーメトリック</span><span class="sxs-lookup"><span data-stu-id="d513f-232">:::no-loc(SignalR)::: server metrics</span></span>
+### <a name="no-locsignalr-server-metrics"></a><span data-ttu-id="d513f-232">SignalR サーバーメトリック</span><span class="sxs-lookup"><span data-stu-id="d513f-232">SignalR server metrics</span></span>
 
-<span data-ttu-id="d513f-233">:::no-loc(SignalR)::: サーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-233">:::no-loc(SignalR)::: server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
+<span data-ttu-id="d513f-233">SignalR サーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。</span><span class="sxs-lookup"><span data-stu-id="d513f-233">SignalR server metrics are reported on the <xref:Microsoft.AspNetCore.Http.Connections> event source.</span></span>
 
 | <span data-ttu-id="d513f-234">Name</span><span class="sxs-lookup"><span data-stu-id="d513f-234">Name</span></span>                    | <span data-ttu-id="d513f-235">[説明]</span><span class="sxs-lookup"><span data-stu-id="d513f-235">Description</span></span>                 |
 |-------------------------|-----------------------------|

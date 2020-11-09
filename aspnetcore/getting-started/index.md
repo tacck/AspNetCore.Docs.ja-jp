@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: getting-started
 ms.openlocfilehash: fef5ae525a7c01d0ea7733e990233f413aac61a7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93057792"
 > * <span data-ttu-id="99d67-106">Web アプリ プロジェクトを作成する。</span><span class="sxs-lookup"><span data-stu-id="99d67-106">Create a web app project.</span></span>
 > * <span data-ttu-id="99d67-107">開発証明書を信頼します。</span><span class="sxs-lookup"><span data-stu-id="99d67-107">Trust the development certificate.</span></span>
 > * <span data-ttu-id="99d67-108">アプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="99d67-108">Run the app.</span></span>
-> * <span data-ttu-id="99d67-109">:::no-loc(Razor)::: ページを編集します。</span><span class="sxs-lookup"><span data-stu-id="99d67-109">Edit a :::no-loc(Razor)::: page.</span></span>
+> * <span data-ttu-id="99d67-109">Razor ページを編集します。</span><span class="sxs-lookup"><span data-stu-id="99d67-109">Edit a Razor page.</span></span>
 
 <span data-ttu-id="99d67-110">最後に、作業用の Web アプリがご利用のローカル コンピューター上で実行されるようにします。</span><span class="sxs-lookup"><span data-stu-id="99d67-110">At the end, you'll have a working web app running on your local machine.</span></span>
 
@@ -105,7 +105,7 @@ dotnet watch run
 
 <span data-ttu-id="99d67-134">コマンド シェルでアプリが開始したことが示されたら、`https://localhost:5001` を参照します。</span><span class="sxs-lookup"><span data-stu-id="99d67-134">After the command shell indicates that the app has started, browse to `https://localhost:5001`.</span></span>
 
-## <a name="edit-a-no-locrazor-page"></a><span data-ttu-id="99d67-135">:::no-loc(Razor)::: ページを編集する</span><span class="sxs-lookup"><span data-stu-id="99d67-135">Edit a :::no-loc(Razor)::: page</span></span>
+## <a name="edit-a-no-locrazor-page"></a><span data-ttu-id="99d67-135">Razor ページを編集する</span><span class="sxs-lookup"><span data-stu-id="99d67-135">Edit a Razor page</span></span>
 
 <span data-ttu-id="99d67-136">*Pages/Index.cshtml* を開き、次の強調表示されたマークアップを使ってページを変更し、保存します。</span><span class="sxs-lookup"><span data-stu-id="99d67-136">Open *Pages/Index.cshtml* and modify and save the page with the following highlighted markup:</span></span>
 

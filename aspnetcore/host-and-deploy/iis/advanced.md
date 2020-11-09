@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/iis/advanced
 ms.openlocfilehash: 9f14929a7d298d6f4d66abcc88665db34fc072bf
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -79,9 +79,9 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 <span data-ttu-id="d13d1-134">データ保護キー リングがメモリに格納されている場合、アプリを再起動すると次のようになります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-134">If the Data Protection key ring is stored in memory when the app restarts:</span></span>
 
-* <span data-ttu-id="d13d1-135">すべての :::no-loc(cookie)::: ベースの認証トークンは無効になります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-135">All :::no-loc(cookie):::-based authentication tokens are invalidated.</span></span> 
+* <span data-ttu-id="d13d1-135">すべての cookie ベースの認証トークンは無効になります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-135">All cookie-based authentication tokens are invalidated.</span></span> 
 * <span data-ttu-id="d13d1-136">ユーザーは、次回の要求時に再度サインインする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-136">Users are required to sign in again on their next request.</span></span> 
-* <span data-ttu-id="d13d1-137">キーリングで保護されているデータは、いずれも復号化できなくなります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-137">Any data protected with the key ring can no longer be decrypted.</span></span> <span data-ttu-id="d13d1-138">これには、[CSRF トークン](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration)と [ASP.NET Core MVC TempData :::no-loc(cookie):::](xref:fundamentals/app-state#tempdata) が含まれます。</span><span class="sxs-lookup"><span data-stu-id="d13d1-138">This may include [CSRF tokens](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) and [ASP.NET Core MVC TempData :::no-loc(cookie):::s](xref:fundamentals/app-state#tempdata).</span></span>
+* <span data-ttu-id="d13d1-137">キーリングで保護されているデータは、いずれも復号化できなくなります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-137">Any data protected with the key ring can no longer be decrypted.</span></span> <span data-ttu-id="d13d1-138">これには、[CSRF トークン](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration)と [ASP.NET Core MVC TempData cookie](xref:fundamentals/app-state#tempdata) が含まれます。</span><span class="sxs-lookup"><span data-stu-id="d13d1-138">This may include [CSRF tokens](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) and [ASP.NET Core MVC TempData cookies](xref:fundamentals/app-state#tempdata).</span></span>
 
 <span data-ttu-id="d13d1-139">キーリングを保持するために IIS でのデータ保護を構成するには、次の **いずれか** の方法を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d13d1-139">To configure data protection under IIS to persist the key ring, use **one** of the following approaches:</span></span>
 
@@ -198,9 +198,9 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 <span data-ttu-id="d13d1-242">IIS の **[Web サイトの追加]** ダイアログの既定では、アプリケーションごとに 1 つのアプリケーション プールです。</span><span class="sxs-lookup"><span data-stu-id="d13d1-242">The IIS **Add Website** dialog defaults to a single app pool per app.</span></span> <span data-ttu-id="d13d1-243">**[サイト名]** を指定すると、入力したテキストが自動的に **[アプリケーション プール]** テキストボックスに設定されます。</span><span class="sxs-lookup"><span data-stu-id="d13d1-243">When a **Site name** is provided, the text is automatically transferred to the **Application pool** textbox.</span></span> <span data-ttu-id="d13d1-244">サイトが追加されるときに、そのサイト名を使用して新しいアプリ プールが作成されます。</span><span class="sxs-lookup"><span data-stu-id="d13d1-244">A new app pool is created using the site name when the site is added.</span></span>
 
-## <a name="application-pool-no-locidentity"></a><span data-ttu-id="d13d1-245">アプリケーション プール :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="d13d1-245">Application Pool :::no-loc(Identity):::</span></span>
+## <a name="application-pool-no-locidentity"></a><span data-ttu-id="d13d1-245">アプリケーション プール Identity</span><span class="sxs-lookup"><span data-stu-id="d13d1-245">Application Pool Identity</span></span>
 
-<span data-ttu-id="d13d1-246">アプリ プール ID アカウントを使用すると、ドメインやローカル アカウントを作成して管理する必要なく、一意のアカウントでアプリを実行できます。</span><span class="sxs-lookup"><span data-stu-id="d13d1-246">An app pool identity account allows an app to run under a unique account without having to create and manage domains or local accounts.</span></span> <span data-ttu-id="d13d1-247">IIS 8.0 以降の IIS 管理者ワーカー プロセス (WAS) は、新しいアプリ プールの名前で仮想アカウントを作成し、既定によってアプリ プールのワーカー プロセスをこのアカウントで実行します。</span><span class="sxs-lookup"><span data-stu-id="d13d1-247">On IIS 8.0 or later, the IIS Admin Worker Process (WAS) creates a virtual account with the name of the new app pool and runs the app pool's worker processes under this account by default.</span></span> <span data-ttu-id="d13d1-248">IIS 管理コンソールの、アプリ プールに対する **[詳細設定]** で、確実に **:::no-loc(Identity):::** で `ApplicationPool:::no-loc(Identity):::` が使用されるように設定します。</span><span class="sxs-lookup"><span data-stu-id="d13d1-248">In the IIS Management Console under **Advanced Settings** for the app pool, ensure that the **:::no-loc(Identity):::** is set to use `ApplicationPool:::no-loc(Identity):::`:</span></span>
+<span data-ttu-id="d13d1-246">アプリ プール ID アカウントを使用すると、ドメインやローカル アカウントを作成して管理する必要なく、一意のアカウントでアプリを実行できます。</span><span class="sxs-lookup"><span data-stu-id="d13d1-246">An app pool identity account allows an app to run under a unique account without having to create and manage domains or local accounts.</span></span> <span data-ttu-id="d13d1-247">IIS 8.0 以降の IIS 管理者ワーカー プロセス (WAS) は、新しいアプリ プールの名前で仮想アカウントを作成し、既定によってアプリ プールのワーカー プロセスをこのアカウントで実行します。</span><span class="sxs-lookup"><span data-stu-id="d13d1-247">On IIS 8.0 or later, the IIS Admin Worker Process (WAS) creates a virtual account with the name of the new app pool and runs the app pool's worker processes under this account by default.</span></span> <span data-ttu-id="d13d1-248">IIS 管理コンソールの、アプリ プールに対する **[詳細設定]** で、確実に **Identity** で `ApplicationPoolIdentity` が使用されるように設定します。</span><span class="sxs-lookup"><span data-stu-id="d13d1-248">In the IIS Management Console under **Advanced Settings** for the app pool, ensure that the **Identity** is set to use `ApplicationPoolIdentity`:</span></span>
 
 ![アプリケーション プールの [詳細設定] ダイアログ](index/_static/apppool-identity.png)
 

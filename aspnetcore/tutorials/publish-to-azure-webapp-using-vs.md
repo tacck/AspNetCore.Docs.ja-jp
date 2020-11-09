@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/publish-to-azure-webapp-using-vs
 ms.openlocfilehash: 817169503a80a771354e32123d65ba2bf388aa2d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -186,7 +186,7 @@ ms.locfileid: "93060223"
 
 ### <a name="update-the-app"></a><span data-ttu-id="7e033-200">アプリを更新する</span><span class="sxs-lookup"><span data-stu-id="7e033-200">Update the app</span></span>
 
-* <span data-ttu-id="7e033-201">*Pages/Index.cshtml* :::no-loc(Razor)::: ページを編集し、その内容を変更します。</span><span class="sxs-lookup"><span data-stu-id="7e033-201">Edit the *Pages/Index.cshtml* :::no-loc(Razor)::: page and change its contents.</span></span> <span data-ttu-id="7e033-202">たとえば、"Hello ASP.NET Core!" と表示されるように段落を修正できます。</span><span class="sxs-lookup"><span data-stu-id="7e033-202">For example, you can modify the paragraph to say "Hello ASP.NET Core!":</span></span>
+* <span data-ttu-id="7e033-201">*Pages/Index.cshtml* Razor ページを編集し、その内容を変更します。</span><span class="sxs-lookup"><span data-stu-id="7e033-201">Edit the *Pages/Index.cshtml* Razor page and change its contents.</span></span> <span data-ttu-id="7e033-202">たとえば、"Hello ASP.NET Core!" と表示されるように段落を修正できます。</span><span class="sxs-lookup"><span data-stu-id="7e033-202">For example, you can modify the paragraph to say "Hello ASP.NET Core!":</span></span>
 
     [!code-html[Index](publish-to-azure-webapp-using-vs/sample/index.cshtml?highlight=10&range=1-12)]
 

@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/browser
 ms.openlocfilehash: 6456707620ae1c1f4d23f3562c78d1bf05d4844f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -29,7 +29,7 @@ ms.locfileid: "93058910"
 
 <span data-ttu-id="cbbd1-104">作成者: [James Newton-King](https://twitter.com/jamesnk)</span><span class="sxs-lookup"><span data-stu-id="cbbd1-104">By [James Newton-King](https://twitter.com/jamesnk)</span></span>
 
- <span data-ttu-id="cbbd1-105">既存の ASP.NET Core の gRPC サービスを、[gRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) プロトコルを使用してブラウザー アプリから呼び出せるように構成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-105">Learn how to configure an existing ASP.NET Core gRPC service to be callable from browser apps, using the [gRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) protocol.</span></span> <span data-ttu-id="cbbd1-106">gRPC-Web を使用すると、ブラウザーの JavaScript および :::no-loc(Blazor)::: アプリで gRPC サービスを呼び出せます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-106">gRPC-Web allows browser JavaScript and :::no-loc(Blazor)::: apps to call gRPC services.</span></span> <span data-ttu-id="cbbd1-107">ブラウザーベースのアプリから HTTP/2 gRPC サービスを呼び出すことはできません。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-107">It's not possible to call an HTTP/2 gRPC service from a browser-based app.</span></span> <span data-ttu-id="cbbd1-108">ASP.NET Core でホストされている gRPC サービスは、HTTP/2 gRPC と共に gRPC-Web をサポートするように構成できます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-108">gRPC services hosted in ASP.NET Core can be configured to support gRPC-Web alongside HTTP/2 gRPC.</span></span>
+ <span data-ttu-id="cbbd1-105">既存の ASP.NET Core の gRPC サービスを、[gRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) プロトコルを使用してブラウザー アプリから呼び出せるように構成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-105">Learn how to configure an existing ASP.NET Core gRPC service to be callable from browser apps, using the [gRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) protocol.</span></span> <span data-ttu-id="cbbd1-106">gRPC-Web を使用すると、ブラウザーの JavaScript および Blazor アプリで gRPC サービスを呼び出せます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-106">gRPC-Web allows browser JavaScript and Blazor apps to call gRPC services.</span></span> <span data-ttu-id="cbbd1-107">ブラウザーベースのアプリから HTTP/2 gRPC サービスを呼び出すことはできません。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-107">It's not possible to call an HTTP/2 gRPC service from a browser-based app.</span></span> <span data-ttu-id="cbbd1-108">ASP.NET Core でホストされている gRPC サービスは、HTTP/2 gRPC と共に gRPC-Web をサポートするように構成できます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-108">gRPC services hosted in ASP.NET Core can be configured to support gRPC-Web alongside HTTP/2 gRPC.</span></span>
 
 
 <span data-ttu-id="cbbd1-109">既存の ASP.NET Core アプリに gRPC サービスを追加する手順については、「[ASP.NET Core アプリに gRPC サービスを追加する](xref:grpc/aspnetcore#add-grpc-services-to-an-aspnet-core-app)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-109">For instructions on adding a gRPC service to an existing ASP.NET Core app, see [Add gRPC services to an ASP.NET Core app](xref:grpc/aspnetcore#add-grpc-services-to-an-aspnet-core-app).</span></span>
@@ -107,7 +107,7 @@ ms.locfileid: "93058910"
 
 ### <a name="configure-grpc-web-with-the-net-grpc-client"></a><span data-ttu-id="cbbd1-161">.NET gRPC クライアントを使用して gRPC-Web を構成する</span><span class="sxs-lookup"><span data-stu-id="cbbd1-161">Configure gRPC-Web with the .NET gRPC client</span></span>
 
-<span data-ttu-id="cbbd1-162">gRPC-Web 呼び出しを行うように .NET gRPC クライアントを構成できます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-162">The .NET gRPC client can be configured to make gRPC-Web calls.</span></span> <span data-ttu-id="cbbd1-163">これは、ブラウザーでホストされ、JavaScript コードの同じ HTTP 制限がある [:::no-loc(Blazor WebAssembly):::](xref:blazor/index#blazor-webassembly) アプリに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-163">This is useful for [:::no-loc(Blazor WebAssembly):::](xref:blazor/index#blazor-webassembly) apps, which are hosted in the browser and have the same HTTP limitations of JavaScript code.</span></span> <span data-ttu-id="cbbd1-164">.NET クライアントによる gRPC-Web の呼び出しは、[HTTP/2 gRPC と同じ](xref:grpc/client)です。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-164">Calling gRPC-Web with a .NET client is [the same as HTTP/2 gRPC](xref:grpc/client).</span></span> <span data-ttu-id="cbbd1-165">唯一の変更点は、チャネルの作成方法です。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-165">The only modification is how the channel is created.</span></span>
+<span data-ttu-id="cbbd1-162">gRPC-Web 呼び出しを行うように .NET gRPC クライアントを構成できます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-162">The .NET gRPC client can be configured to make gRPC-Web calls.</span></span> <span data-ttu-id="cbbd1-163">これは、ブラウザーでホストされ、JavaScript コードの同じ HTTP 制限がある [Blazor WebAssembly](xref:blazor/index#blazor-webassembly) アプリに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-163">This is useful for [Blazor WebAssembly](xref:blazor/index#blazor-webassembly) apps, which are hosted in the browser and have the same HTTP limitations of JavaScript code.</span></span> <span data-ttu-id="cbbd1-164">.NET クライアントによる gRPC-Web の呼び出しは、[HTTP/2 gRPC と同じ](xref:grpc/client)です。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-164">Calling gRPC-Web with a .NET client is [the same as HTTP/2 gRPC](xref:grpc/client).</span></span> <span data-ttu-id="cbbd1-165">唯一の変更点は、チャネルの作成方法です。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-165">The only modification is how the channel is created.</span></span>
 
 <span data-ttu-id="cbbd1-166">gRPC-Web を使用するには:</span><span class="sxs-lookup"><span data-stu-id="cbbd1-166">To use gRPC-Web:</span></span>
 
@@ -131,7 +131,7 @@ ms.locfileid: "93058910"
 * <span data-ttu-id="cbbd1-180">**HttpVersion** :基になる gRPC HTTP 要求で、 [HttpRequestMessage](xref:System.Net.Http.HttpRequestMessage.Version) を設定するために使用される HTTP プロトコル `Version`。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-180">**HttpVersion** : HTTP protocol `Version` used to set [HttpRequestMessage.Version](xref:System.Net.Http.HttpRequestMessage.Version) on the underlying gRPC HTTP request.</span></span> <span data-ttu-id="cbbd1-181">gRPC-Web では特定のバージョンを必要とせず、指定しない限り、既定値はオーバーライドされません。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-181">gRPC-Web doesn't require a specific version and doesn't override the default unless specified.</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="cbbd1-182">生成された gRPC クライアントには、単項メソッドを呼び出すための同期メソッドと非同期メソッドがあります。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-182">Generated gRPC clients have sync and async methods for calling unary methods.</span></span> <span data-ttu-id="cbbd1-183">たとえば、`SayHello` は同期であり、`SayHelloAsync` は非同期です。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-183">For example, `SayHello` is sync and `SayHelloAsync` is async.</span></span> <span data-ttu-id="cbbd1-184">:::no-loc(Blazor WebAssembly)::: アプリで同期メソッドを呼び出すと、アプリが応答しなくなります。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-184">Calling a sync method in a :::no-loc(Blazor WebAssembly)::: app will cause the app to become unresponsive.</span></span> <span data-ttu-id="cbbd1-185">:::no-loc(Blazor WebAssembly)::: では、常に非同期メソッドを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-185">Async methods must always be used in :::no-loc(Blazor WebAssembly):::.</span></span>
+> <span data-ttu-id="cbbd1-182">生成された gRPC クライアントには、単項メソッドを呼び出すための同期メソッドと非同期メソッドがあります。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-182">Generated gRPC clients have sync and async methods for calling unary methods.</span></span> <span data-ttu-id="cbbd1-183">たとえば、`SayHello` は同期であり、`SayHelloAsync` は非同期です。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-183">For example, `SayHello` is sync and `SayHelloAsync` is async.</span></span> <span data-ttu-id="cbbd1-184">Blazor WebAssembly アプリで同期メソッドを呼び出すと、アプリが応答しなくなります。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-184">Calling a sync method in a Blazor WebAssembly app will cause the app to become unresponsive.</span></span> <span data-ttu-id="cbbd1-185">Blazor WebAssembly では、常に非同期メソッドを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-185">Async methods must always be used in Blazor WebAssembly.</span></span>
 
 ### <a name="use-grpc-client-factory-with-grpc-web"></a><span data-ttu-id="cbbd1-186">gRPC-Web で gRPC クライアント ファクトリを使用する</span><span class="sxs-lookup"><span data-stu-id="cbbd1-186">Use gRPC client factory with gRPC-Web</span></span>
 
@@ -142,7 +142,7 @@ ms.locfileid: "93058910"
 * <span data-ttu-id="cbbd1-189">次のパッケージのプロジェクト ファイルにパッケージ参照を追加します。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-189">Add package references to the project file for the following packages:</span></span>
   * [<span data-ttu-id="cbbd1-190">Grpc.Net.Client.Web</span><span class="sxs-lookup"><span data-stu-id="cbbd1-190">Grpc.Net.Client.Web</span></span>](https://www.nuget.org/packages/Grpc.Net.Client.Web)
   * [<span data-ttu-id="cbbd1-191">Grpc.Net.ClientFactory</span><span class="sxs-lookup"><span data-stu-id="cbbd1-191">Grpc.Net.ClientFactory</span></span>](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
-* <span data-ttu-id="cbbd1-192">汎用の `AddGrpcClient` 拡張メソッドを使用して、依存関係の注入 (DI) に gRPC クライアントを登録します。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-192">Register a gRPC client with dependency injection (DI) using the generic `AddGrpcClient` extension method.</span></span> <span data-ttu-id="cbbd1-193">:::no-loc(Blazor WebAssembly)::: アプリでは、サービスは `Program.cs` で DI に登録されます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-193">In a :::no-loc(Blazor WebAssembly)::: app, services are registered with DI in `Program.cs`.</span></span>
+* <span data-ttu-id="cbbd1-192">汎用の `AddGrpcClient` 拡張メソッドを使用して、依存関係の注入 (DI) に gRPC クライアントを登録します。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-192">Register a gRPC client with dependency injection (DI) using the generic `AddGrpcClient` extension method.</span></span> <span data-ttu-id="cbbd1-193">Blazor WebAssembly アプリでは、サービスは `Program.cs` で DI に登録されます。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-193">In a Blazor WebAssembly app, services are registered with DI in `Program.cs`.</span></span>
 * <span data-ttu-id="cbbd1-194"><xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> 拡張メソッドを使用して `GrpcWebHandler` を構成します。</span><span class="sxs-lookup"><span data-stu-id="cbbd1-194">Configure `GrpcWebHandler` using the <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> extension method.</span></span>
 
 ```csharp

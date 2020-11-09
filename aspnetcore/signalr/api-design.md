@@ -1,23 +1,23 @@
 ---
-title: ':::no-loc(SignalR)::: API の設計に関する考慮事項'
+title: 'SignalR API の設計に関する考慮事項'
 author: anurse
-description: :::no-loc(SignalR):::アプリのバージョン間の互換性を確保するために api をデザインする方法について説明します。
+description: SignalRアプリのバージョン間の互換性を確保するために api をデザインする方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/api-design
 ms.openlocfilehash: 87665a7950edbc70b664230d2f078598e9dbc0aa
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,15 +26,15 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93059651"
 ---
-# <a name="no-locsignalr-api-design-considerations"></a><span data-ttu-id="58021-103">:::no-loc(SignalR)::: API の設計に関する考慮事項</span><span class="sxs-lookup"><span data-stu-id="58021-103">:::no-loc(SignalR)::: API design considerations</span></span>
+# <a name="no-locsignalr-api-design-considerations"></a><span data-ttu-id="58021-103">SignalR API の設計に関する考慮事項</span><span class="sxs-lookup"><span data-stu-id="58021-103">SignalR API design considerations</span></span>
 
 <span data-ttu-id="58021-104">By [Andrew Stanton-看護師](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="58021-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="58021-105">この記事では、ベースの Api を構築するためのガイダンスを提供 :::no-loc(SignalR)::: します。</span><span class="sxs-lookup"><span data-stu-id="58021-105">This article provides guidance for building :::no-loc(SignalR):::-based APIs.</span></span>
+<span data-ttu-id="58021-105">この記事では、ベースの Api を構築するためのガイダンスを提供 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="58021-105">This article provides guidance for building SignalR-based APIs.</span></span>
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a><span data-ttu-id="58021-106">カスタムオブジェクトパラメーターを使用して下位互換性を確保する</span><span class="sxs-lookup"><span data-stu-id="58021-106">Use custom object parameters to ensure backwards-compatibility</span></span>
 
-<span data-ttu-id="58021-107">:::no-loc(SignalR):::クライアントまたはサーバー上のハブメソッドにパラメーターを追加することは、 *互換性に影響する変更* 点です。</span><span class="sxs-lookup"><span data-stu-id="58021-107">Adding parameters to a :::no-loc(SignalR)::: hub method (on either the client or the server) is a *breaking change* .</span></span> <span data-ttu-id="58021-108">これは、適切な数のパラメーターを指定せずにメソッドを呼び出そうとすると、古いクライアントまたはサーバーがエラーを受け取ることを意味します。</span><span class="sxs-lookup"><span data-stu-id="58021-108">This means older clients/servers will get errors when they try to invoke the method without the appropriate number of parameters.</span></span> <span data-ttu-id="58021-109">ただし、カスタムオブジェクトパラメーターにプロパティを追加することは、互換性に影響する変更点では **ありません** 。</span><span class="sxs-lookup"><span data-stu-id="58021-109">However, adding properties to a custom object parameter is **not** a breaking change.</span></span> <span data-ttu-id="58021-110">これは、クライアントまたはサーバーでの変更に対して回復力のある互換性のある Api を設計するために使用できます。</span><span class="sxs-lookup"><span data-stu-id="58021-110">This can be used to design compatible APIs that are resilient to changes on the client or the server.</span></span>
+<span data-ttu-id="58021-107">SignalRクライアントまたはサーバー上のハブメソッドにパラメーターを追加することは、 *互換性に影響する変更* 点です。</span><span class="sxs-lookup"><span data-stu-id="58021-107">Adding parameters to a SignalR hub method (on either the client or the server) is a *breaking change* .</span></span> <span data-ttu-id="58021-108">これは、適切な数のパラメーターを指定せずにメソッドを呼び出そうとすると、古いクライアントまたはサーバーがエラーを受け取ることを意味します。</span><span class="sxs-lookup"><span data-stu-id="58021-108">This means older clients/servers will get errors when they try to invoke the method without the appropriate number of parameters.</span></span> <span data-ttu-id="58021-109">ただし、カスタムオブジェクトパラメーターにプロパティを追加することは、互換性に影響する変更点では **ありません** 。</span><span class="sxs-lookup"><span data-stu-id="58021-109">However, adding properties to a custom object parameter is **not** a breaking change.</span></span> <span data-ttu-id="58021-110">これは、クライアントまたはサーバーでの変更に対して回復力のある互換性のある Api を設計するために使用できます。</span><span class="sxs-lookup"><span data-stu-id="58021-110">This can be used to design compatible APIs that are resilient to changes on the client or the server.</span></span>
 
 <span data-ttu-id="58021-111">たとえば、次のようなサーバー側 API を考えてみます。</span><span class="sxs-lookup"><span data-stu-id="58021-111">For example, consider a server-side API like the following:</span></span>
 
@@ -51,7 +51,7 @@ ms.locfileid: "93059651"
 <span data-ttu-id="58021-115">古いクライアントがこのメソッドを呼び出そうとすると、次のようなエラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="58021-115">When the old client tries to invoke this method, it will get an error like this:</span></span>
 
 ```
-Microsoft.AspNetCore.:::no-loc(SignalR):::.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
+Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
 <span data-ttu-id="58021-116">サーバーでは、次のようなログメッセージが表示されます。</span><span class="sxs-lookup"><span data-stu-id="58021-116">On the server, you'll see a log message like this:</span></span>

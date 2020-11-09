@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor WebAssembly)::: でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する'
+title: 'ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する'
 author: guardrex
-description: 'ASP.NET Core :::no-loc(Blazor WebAssembly)::: でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する方法について説明します。'
+description: 'ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
 ms.openlocfilehash: 1a58e19ecaf816ddfb724b9a575d35c801cebd04
 ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
@@ -25,11 +25,11 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/27/2020
 ms.locfileid: "92690557"
 ---
-# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a><span data-ttu-id="9f939-103">ASP.NET Core :::no-loc(Blazor WebAssembly)::: でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する</span><span class="sxs-lookup"><span data-stu-id="9f939-103">Secure an ASP.NET Core :::no-loc(Blazor WebAssembly)::: hosted app with Azure Active Directory B2C</span></span>
+# <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a><span data-ttu-id="9f939-103">ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する</span><span class="sxs-lookup"><span data-stu-id="9f939-103">Secure an ASP.NET Core Blazor WebAssembly hosted app with Azure Active Directory B2C</span></span>
 
 <span data-ttu-id="9f939-104">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="9f939-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="9f939-105">この記事では、認証用に [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) を使用する[ホステッド :::no-loc(Blazor WebAssembly)::: アプリ](xref:blazor/hosting-models#blazor-webassembly)を作成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="9f939-105">This article describes how to create a [hosted :::no-loc(Blazor WebAssembly)::: app](xref:blazor/hosting-models#blazor-webassembly) that uses [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) for authentication.</span></span>
+<span data-ttu-id="9f939-105">この記事では、認証用に [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) を使用する[ホステッド Blazor WebAssembly アプリ](xref:blazor/hosting-models#blazor-webassembly)を作成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="9f939-105">This article describes how to create a [hosted Blazor WebAssembly app](xref:blazor/hosting-models#blazor-webassembly) that uses [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) for authentication.</span></span>
 
 ## <a name="register-apps-in-aad-b2c-and-create-solution"></a><span data-ttu-id="9f939-106">AAD B2C でアプリを登録してソリューションを作成する</span><span class="sxs-lookup"><span data-stu-id="9f939-106">Register apps in AAD B2C and create solution</span></span>
 
@@ -44,7 +44,7 @@ ms.locfileid: "92690557"
 <span data-ttu-id="9f939-112">「 [チュートリアル: Azure Active Directory B2C に Web アプリケーションを登録する](/azure/active-directory-b2c/tutorial-register-applications)」のガイダンスに従って、" *サーバー API アプリ* " 用の AAD アプリを登録した後、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="9f939-112">Follow the guidance in [Tutorial: Register an application in Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) to register an AAD app for the *Server API app* and then do the following:</span></span>
 
 1. <span data-ttu-id="9f939-113">**[Azure Active Directory]**  >  **[アプリの登録]** で、 **[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="9f939-113">In **Azure Active Directory** > **App registrations** , select **New registration**.</span></span>
-1. <span data-ttu-id="9f939-114">アプリの **[名前]** を指定します (例: **:::no-loc(Blazor Server)::: AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-114">Provide a **Name** for the app (for example, **:::no-loc(Blazor Server)::: AAD B2C** ).</span></span>
+1. <span data-ttu-id="9f939-114">アプリの **[名前]** を指定します (例: **Blazor Server AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-114">Provide a **Name** for the app (for example, **Blazor Server AAD B2C** ).</span></span>
 1. <span data-ttu-id="9f939-115">**[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **ID プロバイダーまたは組織ディレクトリのアカウント (ユーザー フローでユーザーを認証するため)**</span><span class="sxs-lookup"><span data-stu-id="9f939-115">For **Supported account types** , select the multi-tenant option: **Accounts in any identity provider or organizational directory (for authenticating users with user flows)**</span></span>
 1. <span data-ttu-id="9f939-116">" *サーバー API アプリ* " の場合、このシナリオでは **[リダイレクト URI]** は必要ないので、ドロップダウンは **[Web]** に設定されたままにして、リダイレクト URI は入力しません。</span><span class="sxs-lookup"><span data-stu-id="9f939-116">The *Server API app* doesn't require a **Redirect URI** in this scenario, so leave the drop down set to **Web** and don't enter a redirect URI.</span></span>
 1. <span data-ttu-id="9f939-117">**[アクセス許可]**  >  **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が選択されていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="9f939-117">Confirm that **Permissions** > **Grant admin consent to openid and offline_access permissions** is selected.</span></span>
@@ -77,7 +77,7 @@ ms.locfileid: "92690557"
 ::: moniker range=">= aspnetcore-5.0"
 
 1. <span data-ttu-id="9f939-135">**[Azure Active Directory]** > **[アプリの登録]** で、 **[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="9f939-135">In **Azure Active Directory** > **App registrations** , select **New registration**.</span></span>
-1. <span data-ttu-id="9f939-136">アプリの **[名前]** を指定します (例: **:::no-loc(Blazor)::: クライアント AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-136">Provide a **Name** for the app (for example, **:::no-loc(Blazor)::: Client AAD B2C** ).</span></span>
+1. <span data-ttu-id="9f939-136">アプリの **[名前]** を指定します (例: **Blazor クライアント AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-136">Provide a **Name** for the app (for example, **Blazor Client AAD B2C** ).</span></span>
 1. <span data-ttu-id="9f939-137">**[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **ID プロバイダーまたは組織ディレクトリのアカウント (ユーザー フローでユーザーを認証するため)**</span><span class="sxs-lookup"><span data-stu-id="9f939-137">For **Supported account types** , select the multi-tenant option: **Accounts in any identity provider or organizational directory (for authenticating users with user flows)**</span></span>
 1. <span data-ttu-id="9f939-138">**[リダイレクト URI]** ドロップダウンを **[シングルページ アプリケーション (SPA)]** に設定し、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。</span><span class="sxs-lookup"><span data-stu-id="9f939-138">Set the **Redirect URI** drop down to **Single-page application (SPA)** and provide the following redirect URI: `https://localhost:{PORT}/authentication/login-callback`.</span></span> <span data-ttu-id="9f939-139">Kestrel で実行されているアプリの既定のポートは 5001 です。</span><span class="sxs-lookup"><span data-stu-id="9f939-139">The default port for an app running on Kestrel is 5001.</span></span> <span data-ttu-id="9f939-140">アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。</span><span class="sxs-lookup"><span data-stu-id="9f939-140">If the app is run on a different Kestrel port, use the app's port.</span></span> <span data-ttu-id="9f939-141">IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルの *`Server`* アプリのプロパティで確認できます。</span><span class="sxs-lookup"><span data-stu-id="9f939-141">For IIS Express, the randomly generated port for the app can be found in the *`Server`* app's properties in the **Debug** panel.</span></span> <span data-ttu-id="9f939-142">この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。</span><span class="sxs-lookup"><span data-stu-id="9f939-142">Since the app doesn't exist at this point and the IIS Express port isn't known, return to this step after the app is created and update the redirect URI.</span></span> <span data-ttu-id="9f939-143">「[アプリを作成する](#create-the-app)」セクションの解説には、IIS Express ユーザーに対してリダイレクト URI の更新を促す注意が示されています。</span><span class="sxs-lookup"><span data-stu-id="9f939-143">A remark appears in the [Create the app](#create-the-app) section to remind IIS Express users to update the redirect URI.</span></span>
 1. <span data-ttu-id="9f939-144">**[アクセス許可]** > **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が選択されていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="9f939-144">Confirm that **Permissions** > **Grant admin consent to openid and offline_access permissions** is selected.</span></span>
@@ -97,7 +97,7 @@ ms.locfileid: "92690557"
 ::: moniker range="< aspnetcore-5.0"
 
 1. <span data-ttu-id="9f939-152">**[Azure Active Directory]** > **[アプリの登録]** で、 **[新規登録]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="9f939-152">In **Azure Active Directory** > **App registrations** , select **New registration**.</span></span>
-1. <span data-ttu-id="9f939-153">アプリの **[名前]** を指定します (例: **:::no-loc(Blazor)::: クライアント AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-153">Provide a **Name** for the app (for example, **:::no-loc(Blazor)::: Client AAD B2C** ).</span></span>
+1. <span data-ttu-id="9f939-153">アプリの **[名前]** を指定します (例: **Blazor クライアント AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-153">Provide a **Name** for the app (for example, **Blazor Client AAD B2C** ).</span></span>
 1. <span data-ttu-id="9f939-154">**[サポートされているアカウントの種類]** で、マルチテナント オプションを選択します: **ID プロバイダーまたは組織ディレクトリのアカウント (ユーザー フローでユーザーを認証するため)**</span><span class="sxs-lookup"><span data-stu-id="9f939-154">For **Supported account types** , select the multi-tenant option: **Accounts in any identity provider or organizational directory (for authenticating users with user flows)**</span></span>
 1. <span data-ttu-id="9f939-155">**[リダイレクト URI]** ドロップ ダウンの設定を **[Web]** のままとし、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。</span><span class="sxs-lookup"><span data-stu-id="9f939-155">Leave the **Redirect URI** drop down set to **Web** and provide the following redirect URI: `https://localhost:{PORT}/authentication/login-callback`.</span></span> <span data-ttu-id="9f939-156">Kestrel で実行されているアプリの既定のポートは 5001 です。</span><span class="sxs-lookup"><span data-stu-id="9f939-156">The default port for an app running on Kestrel is 5001.</span></span> <span data-ttu-id="9f939-157">アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。</span><span class="sxs-lookup"><span data-stu-id="9f939-157">If the app is run on a different Kestrel port, use the app's port.</span></span> <span data-ttu-id="9f939-158">IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルの *`Server`* アプリのプロパティで確認できます。</span><span class="sxs-lookup"><span data-stu-id="9f939-158">For IIS Express, the randomly generated port for the app can be found in the *`Server`* app's properties in the **Debug** panel.</span></span> <span data-ttu-id="9f939-159">この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。</span><span class="sxs-lookup"><span data-stu-id="9f939-159">Since the app doesn't exist at this point and the IIS Express port isn't known, return to this step after the app is created and update the redirect URI.</span></span> <span data-ttu-id="9f939-160">「[アプリを作成する](#create-the-app)」セクションの解説には、IIS Express ユーザーに対してリダイレクト URI の更新を促す注意が示されています。</span><span class="sxs-lookup"><span data-stu-id="9f939-160">A remark appears in the [Create the app](#create-the-app) section to remind IIS Express users to update the redirect URI.</span></span>
 1. <span data-ttu-id="9f939-161">**[アクセス許可]** > **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** が選択されていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="9f939-161">Confirm that **Permissions** > **Grant admin consent to openid and offline_access permissions** is selected.</span></span>
@@ -117,7 +117,7 @@ ms.locfileid: "92690557"
 <span data-ttu-id="9f939-169">**[API のアクセス許可]** で:</span><span class="sxs-lookup"><span data-stu-id="9f939-169">In **API permissions** :</span></span>
 
 1. <span data-ttu-id="9f939-170">**[アクセス許可の追加]** を選択し、 **[自分の API]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="9f939-170">Select **Add a permission** followed by **My APIs**.</span></span>
-1. <span data-ttu-id="9f939-171">**[名前]** 列で " *サーバー API アプリ* " を選択します (例: **:::no-loc(Blazor Server)::: AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-171">Select the *Server API app* from the **Name** column (for example, **:::no-loc(Blazor Server)::: AAD B2C** ).</span></span>
+1. <span data-ttu-id="9f939-171">**[名前]** 列で " *サーバー API アプリ* " を選択します (例: **Blazor Server AAD B2C** )。</span><span class="sxs-lookup"><span data-stu-id="9f939-171">Select the *Server API app* from the **Name** column (for example, **Blazor Server AAD B2C** ).</span></span>
 1. <span data-ttu-id="9f939-172">**[API]** の一覧を開きます。</span><span class="sxs-lookup"><span data-stu-id="9f939-172">Open the **API** list.</span></span>
 1. <span data-ttu-id="9f939-173">API へのアクセスを有効にします (例: `API.Access`)。</span><span class="sxs-lookup"><span data-stu-id="9f939-173">Enable access to the API (for example, `API.Access`).</span></span>
 1. <span data-ttu-id="9f939-174">**[アクセス許可の追加]** を選択します.</span><span class="sxs-lookup"><span data-stu-id="9f939-174">Select **Add permissions**.</span></span>
@@ -127,7 +127,7 @@ ms.locfileid: "92690557"
 
 [<span data-ttu-id="9f939-178">サインアップとサインイン ユーザー フローを作成する</span><span class="sxs-lookup"><span data-stu-id="9f939-178">Create a sign-up and sign-in user flow</span></span>](/azure/active-directory-b2c/tutorial-create-user-flows)
 
-<span data-ttu-id="9f939-179">少なくとも、 **[アプリケーション要求]**  >  **[表示名]** ユーザー属性を選択して、`LoginDisplay` コンポーネント (`Shared/LoginDisplay.razor`) に `context.User.:::no-loc(Identity):::.Name` を設定します。</span><span class="sxs-lookup"><span data-stu-id="9f939-179">At a minimum, select the **Application claims** > **Display Name** user attribute to populate the `context.User.:::no-loc(Identity):::.Name` in the `LoginDisplay` component (`Shared/LoginDisplay.razor`).</span></span>
+<span data-ttu-id="9f939-179">少なくとも、 **[アプリケーション要求]**  >  **[表示名]** ユーザー属性を選択して、`LoginDisplay` コンポーネント (`Shared/LoginDisplay.razor`) に `context.User.Identity.Name` を設定します。</span><span class="sxs-lookup"><span data-stu-id="9f939-179">At a minimum, select the **Application claims** > **Display Name** user attribute to populate the `context.User.Identity.Name` in the `LoginDisplay` component (`Shared/LoginDisplay.razor`).</span></span>
 
 <span data-ttu-id="9f939-180">アプリ用に作成されたサインアップおよびサインイン ユーザーフロー名を記録しておきます (例: `B2C_1_signupsignin`)。</span><span class="sxs-lookup"><span data-stu-id="9f939-180">Record the sign-up and sign-in user flow name created for the app (for example, `B2C_1_signupsignin`).</span></span>
 
@@ -142,7 +142,7 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 | <span data-ttu-id="9f939-183">プレースホルダー</span><span class="sxs-lookup"><span data-stu-id="9f939-183">Placeholder</span></span>                   | <span data-ttu-id="9f939-184">Azure portal での名前</span><span class="sxs-lookup"><span data-stu-id="9f939-184">Azure portal name</span></span>                                     | <span data-ttu-id="9f939-185">例</span><span class="sxs-lookup"><span data-stu-id="9f939-185">Example</span></span>                                      |
 | ----------------------------- | ----------------------------------------------------- | -------------------------------------------- |
 | `{AAD B2C INSTANCE}`          | <span data-ttu-id="9f939-186">インスタンス</span><span class="sxs-lookup"><span data-stu-id="9f939-186">Instance</span></span>                                              | `https://contoso.b2clogin.com/`              |
-| `{APP NAME}`                  | &mdash;                                               | `:::no-loc(Blazor):::Sample`                               |
+| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                               |
 | `{CLIENT APP CLIENT ID}`      | <span data-ttu-id="9f939-187">*`Client`* アプリのアプリケーション (クライアント) ID</span><span class="sxs-lookup"><span data-stu-id="9f939-187">Application (client) ID for the *`Client`* app</span></span>        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
 | `{DEFAULT SCOPE}`             | <span data-ttu-id="9f939-188">スコープ名</span><span class="sxs-lookup"><span data-stu-id="9f939-188">Scope name</span></span>                                            | `API.Access`                                 |
 | `{SERVER API APP CLIENT ID}`  | <span data-ttu-id="9f939-189">" *サーバー API アプリ* " のアプリケーション (クライアント) ID</span><span class="sxs-lookup"><span data-stu-id="9f939-189">Application (client) ID for the *Server API app*</span></span>      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
@@ -153,7 +153,7 @@ dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" 
 <span data-ttu-id="9f939-193">`-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。</span><span class="sxs-lookup"><span data-stu-id="9f939-193">The output location specified with the `-o|--output` option creates a project folder if it doesn't exist and becomes part of the app's name.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="9f939-194">ホストされている :::no-loc(Blazor)::: テンプレートによって設定されるスコープでは、アプリ ID URI ホストが繰り返される場合があります。</span><span class="sxs-lookup"><span data-stu-id="9f939-194">The scope set up by the Hosted :::no-loc(Blazor)::: template might have the App ID URI host repeated.</span></span> <span data-ttu-id="9f939-195">`DefaultAccessTokenScopes` コレクションに対して構成されたスコープが *`Client`* アプリの `Program.Main` (`Program.cs`) で正しいことを確認します。</span><span class="sxs-lookup"><span data-stu-id="9f939-195">Confirm that the scope configured for the `DefaultAccessTokenScopes` collection is correct in `Program.Main` (`Program.cs`) of the *`Client`* app.</span></span>
+> <span data-ttu-id="9f939-194">ホストされている Blazor テンプレートによって設定されるスコープでは、アプリ ID URI ホストが繰り返される場合があります。</span><span class="sxs-lookup"><span data-stu-id="9f939-194">The scope set up by the Hosted Blazor template might have the App ID URI host repeated.</span></span> <span data-ttu-id="9f939-195">`DefaultAccessTokenScopes` コレクションに対して構成されたスコープが *`Client`* アプリの `Program.Main` (`Program.cs`) で正しいことを確認します。</span><span class="sxs-lookup"><span data-stu-id="9f939-195">Confirm that the scope configured for the `DefaultAccessTokenScopes` collection is correct in `Program.Main` (`Program.cs`) of the *`Client`* app.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="9f939-196">Azure portal では、 *`Client`* アプリのプラットフォーム構成の **[リダイレクト URI]** は、既定の設定の Kestrel サーバーで実行されるアプリの場合、ポート 5001 に構成されます。</span><span class="sxs-lookup"><span data-stu-id="9f939-196">In the Azure portal, the *`Client`* app's platform configuration **Redirect URI** is configured for port 5001 for apps that run on the Kestrel server with default settings.</span></span>
@@ -196,11 +196,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 ```
 
-### <a name="userno-locidentityname"></a><span data-ttu-id="9f939-210">User.:::no-loc(Identity):::.Name</span><span class="sxs-lookup"><span data-stu-id="9f939-210">User.:::no-loc(Identity):::.Name</span></span>
+### <a name="userno-locidentityname"></a><span data-ttu-id="9f939-210">User.Identity.Name</span><span class="sxs-lookup"><span data-stu-id="9f939-210">User.Identity.Name</span></span>
 
-<span data-ttu-id="9f939-211">既定では、`User.:::no-loc(Identity):::.Name` は設定されません。</span><span class="sxs-lookup"><span data-stu-id="9f939-211">By default, the `User.:::no-loc(Identity):::.Name` isn't populated.</span></span>
+<span data-ttu-id="9f939-211">既定では、`User.Identity.Name` は設定されません。</span><span class="sxs-lookup"><span data-stu-id="9f939-211">By default, the `User.Identity.Name` isn't populated.</span></span>
 
-<span data-ttu-id="9f939-212">`name` 要求の種類から値を受け取るようにアプリを構成するには、`Startup.ConfigureServices` で <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> の <xref:Microsoft.:::no-loc(Identity):::Model.Tokens.TokenValidationParameters.NameClaimType?displayProperty=nameWithType> を構成します。</span><span class="sxs-lookup"><span data-stu-id="9f939-212">To configure the app to receive the value from the `name` claim type, configure the <xref:Microsoft.:::no-loc(Identity):::Model.Tokens.TokenValidationParameters.NameClaimType?displayProperty=nameWithType> of the <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="9f939-212">`name` 要求の種類から値を受け取るようにアプリを構成するには、`Startup.ConfigureServices` で <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> の <xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType?displayProperty=nameWithType> を構成します。</span><span class="sxs-lookup"><span data-stu-id="9f939-212">To configure the app to receive the value from the `name` claim type, configure the <xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType?displayProperty=nameWithType> of the <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -247,7 +247,7 @@ services.Configure<JwtBearerOptions>(
 <span data-ttu-id="9f939-217">WeatherForecast コントローラー ( *Controllers/WeatherForecastController.cs* ) では、 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性がコントローラーに適用されている保護された API が公開されます。</span><span class="sxs-lookup"><span data-stu-id="9f939-217">The WeatherForecast controller ( *Controllers/WeatherForecastController.cs* ) exposes a protected API with the [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute applied to the controller.</span></span> <span data-ttu-id="9f939-218">次のことを理解しておくことが **重要** です。</span><span class="sxs-lookup"><span data-stu-id="9f939-218">It's **important** to understand that:</span></span>
 
 * <span data-ttu-id="9f939-219">この API コントローラーの [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、この API を不正アクセスから保護する唯一のものです。</span><span class="sxs-lookup"><span data-stu-id="9f939-219">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute in this API controller is the only thing that protect this API from unauthorized access.</span></span>
-* <span data-ttu-id="9f939-220">:::no-loc(Blazor WebAssembly)::: アプリで使用される [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、アプリが正しく動作するにはユーザーを承認する必要がある、というアプリへのヒントとしてのみ機能します。</span><span class="sxs-lookup"><span data-stu-id="9f939-220">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute used in the :::no-loc(Blazor WebAssembly)::: app only serves as a hint to the app that the user should be authorized for the app to work correctly.</span></span>
+* <span data-ttu-id="9f939-220">Blazor WebAssembly アプリで使用される [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、アプリが正しく動作するにはユーザーを承認する必要がある、というアプリへのヒントとしてのみ機能します。</span><span class="sxs-lookup"><span data-stu-id="9f939-220">The [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribute used in the Blazor WebAssembly app only serves as a hint to the app that the user should be authorized for the app to work correctly.</span></span>
 
 ```csharp
 [Authorize]
@@ -297,9 +297,9 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 
-<span data-ttu-id="9f939-232">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `:::no-loc(Blazor):::Sample.ServerAPI`)。</span><span class="sxs-lookup"><span data-stu-id="9f939-232">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `:::no-loc(Blazor):::Sample.ServerAPI`).</span></span>
+<span data-ttu-id="9f939-232">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `BlazorSample.ServerAPI`)。</span><span class="sxs-lookup"><span data-stu-id="9f939-232">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `BlazorSample.ServerAPI`).</span></span>
 
-<span data-ttu-id="9f939-233">ユーザーの認証に対するサポートは、[`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) パッケージによって提供される <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> 拡張メソッドを使用して、サービス コンテナーに登録されます。</span><span class="sxs-lookup"><span data-stu-id="9f939-233">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> extension method provided by the [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) package.</span></span> <span data-ttu-id="9f939-234">このメソッドでは、アプリが :::no-loc(Identity):::ID プロバイダー (IP) とやり取りするために必要なサービスが設定されます。</span><span class="sxs-lookup"><span data-stu-id="9f939-234">This method sets up the services required for the app to interact with the :::no-loc(Identity)::: Provider (IP).</span></span>
+<span data-ttu-id="9f939-233">ユーザーの認証に対するサポートは、[`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) パッケージによって提供される <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> 拡張メソッドを使用して、サービス コンテナーに登録されます。</span><span class="sxs-lookup"><span data-stu-id="9f939-233">Support for authenticating users is registered in the service container with the <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A> extension method provided by the [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) package.</span></span> <span data-ttu-id="9f939-234">このメソッドでは、アプリが IdentityID プロバイダー (IP) とやり取りするために必要なサービスが設定されます。</span><span class="sxs-lookup"><span data-stu-id="9f939-234">This method sets up the services required for the app to interact with the Identity Provider (IP).</span></span>
 
 <span data-ttu-id="9f939-235">`Program.cs`:</span><span class="sxs-lookup"><span data-stu-id="9f939-235">`Program.cs`:</span></span>
 

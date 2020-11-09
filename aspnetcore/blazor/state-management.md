@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 状態管理'
+title: 'ASP.NET Core Blazor 状態管理'
 author: guardrex
-description: ':::no-loc(Blazor Server)::: アプリで状態を維持する方法について説明します。'
+description: 'Blazor Server アプリで状態を維持する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
 ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
@@ -27,13 +27,13 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054997"
 ---
-# <a name="aspnet-core-no-locblazor-state-management"></a><span data-ttu-id="37a91-103">ASP.NET Core :::no-loc(Blazor)::: 状態管理</span><span class="sxs-lookup"><span data-stu-id="37a91-103">ASP.NET Core :::no-loc(Blazor)::: state management</span></span>
+# <a name="aspnet-core-no-locblazor-state-management"></a><span data-ttu-id="37a91-103">ASP.NET Core Blazor 状態管理</span><span class="sxs-lookup"><span data-stu-id="37a91-103">ASP.NET Core Blazor state management</span></span>
 
 <span data-ttu-id="37a91-104">作成者: [Steve Sanderson](https://github.com/SteveSandersonMS)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="37a91-104">By [Steve Sanderson](https://github.com/SteveSandersonMS) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 ::: zone pivot="webassembly"
 
-<span data-ttu-id="37a91-105">:::no-loc(Blazor WebAssembly)::: アプリで作成されたユーザー状態は、ブラウザーのメモリに保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-105">User state created in a :::no-loc(Blazor WebAssembly)::: app is held in the browser's memory.</span></span>
+<span data-ttu-id="37a91-105">Blazor WebAssembly アプリで作成されたユーザー状態は、ブラウザーのメモリに保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-105">User state created in a Blazor WebAssembly app is held in the browser's memory.</span></span>
 
 <span data-ttu-id="37a91-106">ブラウザーのメモリに保持されるユーザー状態の例としては、次のようなものがあります。</span><span class="sxs-lookup"><span data-stu-id="37a91-106">Examples of user state held in browser memory include:</span></span>
 
@@ -77,13 +77,13 @@ ms.locfileid: "93054997"
 
 <span data-ttu-id="37a91-140">データが保存された後は、ユーザーの状態は保持されていて、新しいブラウザー セッションで使用できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-140">After data is saved, the user's state is retained and available in any new browser session.</span></span>
 
-<span data-ttu-id="37a91-141">:::no-loc(Blazor WebAssembly)::: アプリはユーザーのブラウザー内で完全に実行されるため、ストレージ サービスやデータベースなど、セキュリティで保護された外部システムにアクセスするには、追加の手段が必要です。</span><span class="sxs-lookup"><span data-stu-id="37a91-141">Because :::no-loc(Blazor WebAssembly)::: apps run entirely in the user's browser, they require additional measures to access secure external systems, such as storage services and databases.</span></span> <span data-ttu-id="37a91-142">:::no-loc(Blazor WebAssembly)::: アプリは、シングル ページ アプリケーション (SPA) と同じ方法でセキュリティ保護されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-142">:::no-loc(Blazor WebAssembly)::: apps are secured in the same manner as Single Page Applications (SPAs).</span></span> <span data-ttu-id="37a91-143">通常、アプリでは、[OAuth](https://oauth.net) や [OpenID Connect (OIDC)](https://openid.net/connect/) を使用してユーザーの認証を行った後、サーバー側アプリへの Web API 呼び出しを使用して、ストレージ サービスやデータベースとやり取りします。</span><span class="sxs-lookup"><span data-stu-id="37a91-143">Typically, an app authenticates a user via [OAuth](https://oauth.net)/[OpenID Connect (OIDC)](https://openid.net/connect/) and then interacts with storage services and databases through web API calls to a server-side app.</span></span> <span data-ttu-id="37a91-144">:::no-loc(Blazor WebAssembly)::: アプリとストレージ サービスまたはデータベースの間のデータ転送は、サーバー側アプリによって仲介されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-144">The server-side app mediates the transfer of data between the :::no-loc(Blazor WebAssembly)::: app and the storage service or database.</span></span> <span data-ttu-id="37a91-145">:::no-loc(Blazor WebAssembly)::: アプリではサーバー側アプリへの一時的な接続を維持し、サーバー側アプリではストレージへの永続的な接続が保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-145">The :::no-loc(Blazor WebAssembly)::: app maintains an ephemeral connection to the server-side app, while the server-side app has a persistent connection to storage.</span></span>
+<span data-ttu-id="37a91-141">Blazor WebAssembly アプリはユーザーのブラウザー内で完全に実行されるため、ストレージ サービスやデータベースなど、セキュリティで保護された外部システムにアクセスするには、追加の手段が必要です。</span><span class="sxs-lookup"><span data-stu-id="37a91-141">Because Blazor WebAssembly apps run entirely in the user's browser, they require additional measures to access secure external systems, such as storage services and databases.</span></span> <span data-ttu-id="37a91-142">Blazor WebAssembly アプリは、シングル ページ アプリケーション (SPA) と同じ方法でセキュリティ保護されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-142">Blazor WebAssembly apps are secured in the same manner as Single Page Applications (SPAs).</span></span> <span data-ttu-id="37a91-143">通常、アプリでは、[OAuth](https://oauth.net) や [OpenID Connect (OIDC)](https://openid.net/connect/) を使用してユーザーの認証を行った後、サーバー側アプリへの Web API 呼び出しを使用して、ストレージ サービスやデータベースとやり取りします。</span><span class="sxs-lookup"><span data-stu-id="37a91-143">Typically, an app authenticates a user via [OAuth](https://oauth.net)/[OpenID Connect (OIDC)](https://openid.net/connect/) and then interacts with storage services and databases through web API calls to a server-side app.</span></span> <span data-ttu-id="37a91-144">Blazor WebAssembly アプリとストレージ サービスまたはデータベースの間のデータ転送は、サーバー側アプリによって仲介されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-144">The server-side app mediates the transfer of data between the Blazor WebAssembly app and the storage service or database.</span></span> <span data-ttu-id="37a91-145">Blazor WebAssembly アプリではサーバー側アプリへの一時的な接続を維持し、サーバー側アプリではストレージへの永続的な接続が保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-145">The Blazor WebAssembly app maintains an ephemeral connection to the server-side app, while the server-side app has a persistent connection to storage.</span></span>
 
 <span data-ttu-id="37a91-146">詳細については、次のリソースを参照してください。</span><span class="sxs-lookup"><span data-stu-id="37a91-146">For more information, see the following resources:</span></span>
 
 * <xref:blazor/call-web-api>
 * <xref:blazor/security/webassembly/index>
-* <span data-ttu-id="37a91-147">:::no-loc(Blazor)::: の " *セキュリティと :::no-loc(Identity):::* " に関する記事</span><span class="sxs-lookup"><span data-stu-id="37a91-147">:::no-loc(Blazor)::: *Security and :::no-loc(Identity):::* articles</span></span>
+* <span data-ttu-id="37a91-147">Blazor の " *セキュリティと Identity* " に関する記事</span><span class="sxs-lookup"><span data-stu-id="37a91-147">Blazor *Security and Identity* articles</span></span>
 
 <span data-ttu-id="37a91-148">Azure のデータ ストレージ オプションの詳細については、以下を参照してください。</span><span class="sxs-lookup"><span data-stu-id="37a91-148">For more information on Azure data storage options, see the following:</span></span>
 
@@ -109,7 +109,7 @@ ms.locfileid: "93054997"
 * <span data-ttu-id="37a91-164">`sessionStorage` の対象範囲はブラウザーのタブです。ユーザーがタブを再読み込みすると、状態は維持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-164">`sessionStorage` is scoped to the browser tab. If the user reloads the tab, the state persists.</span></span> <span data-ttu-id="37a91-165">ユーザーがタブかブラウザーを閉じると、状態は失われます。</span><span class="sxs-lookup"><span data-stu-id="37a91-165">If the user closes the tab or the browser, the state is lost.</span></span> <span data-ttu-id="37a91-166">ユーザーが複数のブラウザー タブを開くと、それぞれのタブには、他に依存しないそのタブだけのバージョンのデータが保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-166">If the user opens multiple browser tabs, each tab has its own independent version of the data.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="37a91-167">`localStorage` と `sessionStorage` は :::no-loc(Blazor WebAssembly)::: アプリで使用できますが、カスタム コードを記述するか、サードパーティのパッケージを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="37a91-167">`localStorage` and `sessionStorage` can be used in :::no-loc(Blazor WebAssembly)::: apps but only by writing custom code or using a third-party package.</span></span>
+> <span data-ttu-id="37a91-167">`localStorage` と `sessionStorage` は Blazor WebAssembly アプリで使用できますが、カスタム コードを記述するか、サードパーティのパッケージを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="37a91-167">`localStorage` and `sessionStorage` can be used in Blazor WebAssembly apps but only by writing custom code or using a third-party package.</span></span>
 
 <span data-ttu-id="37a91-168">一般に、`sessionStorage` を使用しておけば安全です。</span><span class="sxs-lookup"><span data-stu-id="37a91-168">Generally, `sessionStorage` is safer to use.</span></span> <span data-ttu-id="37a91-169">`sessionStorage` の場合、ユーザーが複数のタブを開き、以下に遭遇するリスクが回避されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-169">`sessionStorage` avoids the risk that a user opens multiple tabs and encounters the following:</span></span>
 
@@ -135,7 +135,7 @@ ms.locfileid: "93054997"
 
 ::: zone pivot="server"
 
-<span data-ttu-id="37a91-177">:::no-loc(Blazor Server)::: はステートフル アプリ フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="37a91-177">:::no-loc(Blazor Server)::: is a stateful app framework.</span></span> <span data-ttu-id="37a91-178">アプリでは、ほとんど常に、サーバーとの接続が維持されています。</span><span class="sxs-lookup"><span data-stu-id="37a91-178">Most of the time, the app maintains a connection to the server.</span></span> <span data-ttu-id="37a91-179">ユーザーの状態は、" *回線* " の中のサーバーのメモリに保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-179">The user's state is held in the server's memory in a *circuit*.</span></span> 
+<span data-ttu-id="37a91-177">Blazor Server はステートフル アプリ フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="37a91-177">Blazor Server is a stateful app framework.</span></span> <span data-ttu-id="37a91-178">アプリでは、ほとんど常に、サーバーとの接続が維持されています。</span><span class="sxs-lookup"><span data-stu-id="37a91-178">Most of the time, the app maintains a connection to the server.</span></span> <span data-ttu-id="37a91-179">ユーザーの状態は、" *回線* " の中のサーバーのメモリに保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-179">The user's state is held in the server's memory in a *circuit*.</span></span> 
 
 <span data-ttu-id="37a91-180">たとえば、回線には次のようなユーザー状態が保持されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-180">Examples of user state held in a circuit include:</span></span>
 
@@ -145,7 +145,7 @@ ms.locfileid: "93054997"
 
 <span data-ttu-id="37a91-184">ユーザー状態は、[JavaScript 相互運用](xref:blazor/call-javascript-from-dotnet)の呼び出しによって設定される、ブラウザーのメモリ内の JavaScript 変数にも存在する場合があります。</span><span class="sxs-lookup"><span data-stu-id="37a91-184">User state might also be found in JavaScript variables in the browser's memory set via [JavaScript interop](xref:blazor/call-javascript-from-dotnet) calls.</span></span>
 
-<span data-ttu-id="37a91-185">ユーザーが一時的にネットワークに接続できなくなった場合は、:::no-loc(Blazor)::: により、ユーザーを元の状態で元の回線に再接続することが試みられます。</span><span class="sxs-lookup"><span data-stu-id="37a91-185">If a user experiences a temporary network connection loss, :::no-loc(Blazor)::: attempts to reconnect the user to their original circuit with their original state.</span></span> <span data-ttu-id="37a91-186">ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="37a91-186">However, reconnecting a user to their original circuit in the server's memory isn't always possible:</span></span>
+<span data-ttu-id="37a91-185">ユーザーが一時的にネットワークに接続できなくなった場合は、Blazor により、ユーザーを元の状態で元の回線に再接続することが試みられます。</span><span class="sxs-lookup"><span data-stu-id="37a91-185">If a user experiences a temporary network connection loss, Blazor attempts to reconnect the user to their original circuit with their original state.</span></span> <span data-ttu-id="37a91-186">ただし、サーバーのメモリにある元の回線にいつでもユーザーを再接続できるわけではありません。</span><span class="sxs-lookup"><span data-stu-id="37a91-186">However, reconnecting a user to their original circuit in the server's memory isn't always possible:</span></span>
 
 * <span data-ttu-id="37a91-187">サーバーでは、切断された回線を永久に保持することはできません。</span><span class="sxs-lookup"><span data-stu-id="37a91-187">The server can't retain a disconnected circuit forever.</span></span> <span data-ttu-id="37a91-188">サーバーでは、タイムアウト後、あるいはサーバーがメモリ不足になったとき、切断された回線を解放しなければなりません。</span><span class="sxs-lookup"><span data-stu-id="37a91-188">The server must release a disconnected circuit after a timeout or when the server is under memory pressure.</span></span>
 * <span data-ttu-id="37a91-189">複数のサーバーが存在する負荷分散された展開環境では、個々のサーバーは、それがなくても全体的な要求量を処理できるようになると、作動しなくなったり、自動的に削除されたりすることがあります。</span><span class="sxs-lookup"><span data-stu-id="37a91-189">In multi-server, load-balanced deployment environments, individual servers may fail or be automatically removed when no longer required to handle the overall volume of requests.</span></span> <span data-ttu-id="37a91-190">ユーザーが再接続しようとしたときに、ユーザーの要求を処理していた元のサーバーを使用できなくなることがあります。</span><span class="sxs-lookup"><span data-stu-id="37a91-190">The original server processing requests for a user may become unavailable when the user attempts to reconnect.</span></span>
@@ -223,7 +223,7 @@ ms.locfileid: "93054997"
 
 * <span data-ttu-id="37a91-251">サーバー側データベースの使用に似ていますが、データの読み込みと保存は非同期です。</span><span class="sxs-lookup"><span data-stu-id="37a91-251">Similar to the use of a server-side database, loading and saving data are asynchronous.</span></span>
 * <span data-ttu-id="37a91-252">サーバー側データベースとは異なり、プリレンダリング中はストレージを利用できません。プリレンダリング中は、要求されたページがブラウザーに存在しないためです。</span><span class="sxs-lookup"><span data-stu-id="37a91-252">Unlike a server-side database, storage isn't available during prerendering because the requested page doesn't exist in the browser during the prerendering stage.</span></span>
-* <span data-ttu-id="37a91-253">:::no-loc(Blazor Server)::: アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。</span><span class="sxs-lookup"><span data-stu-id="37a91-253">Storage of a few kilobytes of data is reasonable to persist for :::no-loc(Blazor Server)::: apps.</span></span> <span data-ttu-id="37a91-254">数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。</span><span class="sxs-lookup"><span data-stu-id="37a91-254">Beyond a few kilobytes, you must consider the performance implications because the data is loaded and saved across the network.</span></span>
+* <span data-ttu-id="37a91-253">Blazor Server アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。</span><span class="sxs-lookup"><span data-stu-id="37a91-253">Storage of a few kilobytes of data is reasonable to persist for Blazor Server apps.</span></span> <span data-ttu-id="37a91-254">数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。</span><span class="sxs-lookup"><span data-stu-id="37a91-254">Beyond a few kilobytes, you must consider the performance implications because the data is loaded and saved across the network.</span></span>
 * <span data-ttu-id="37a91-255">ユーザーはデータを見たり、改ざんしたりするかもしれません。</span><span class="sxs-lookup"><span data-stu-id="37a91-255">Users may view or tamper with the data.</span></span> <span data-ttu-id="37a91-256">[ASP.NET Core のデータ保護](xref:security/data-protection/introduction)で、このリスクを軽減できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-256">[ASP.NET Core Data Protection](xref:security/data-protection/introduction) can mitigate the risk.</span></span> <span data-ttu-id="37a91-257">たとえば、[ASP.NET Core で保護されたブラウザー ストレージ](#aspnet-core-protected-browser-storage)では、ASP.NET Core のデータ保護が使用されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-257">For example, [ASP.NET Core Protected Browser Storage](#aspnet-core-protected-browser-storage) uses ASP.NET Core Data Protection.</span></span>
 
 <span data-ttu-id="37a91-258">サードパーティ製 NuGet パッケージからは、`localStorage` と `sessionStorage` を使用するための API が与えられます。</span><span class="sxs-lookup"><span data-stu-id="37a91-258">Third-party NuGet packages provide APIs for working with `localStorage` and `sessionStorage`.</span></span> <span data-ttu-id="37a91-259">[ASP.NET Core のデータ保護](xref:security/data-protection/introduction)を透過的に使用するパッケージを選択してみることもお勧めします。</span><span class="sxs-lookup"><span data-stu-id="37a91-259">It's worth considering choosing a package that transparently uses [ASP.NET Core Data Protection](xref:security/data-protection/introduction).</span></span> <span data-ttu-id="37a91-260">データ保護を使用すると、保存データが暗号化され、保存データが改ざんされる潜在的リスクが減ります。</span><span class="sxs-lookup"><span data-stu-id="37a91-260">Data Protection encrypts stored data and reduces the potential risk of tampering with stored data.</span></span> <span data-ttu-id="37a91-261">JSON でシリアル化されたデータがプレーンテキストで保存されている場合、ユーザーはブラウザー開発者ツールでデータを表示できます。また、保存データを変更できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-261">If JSON-serialized data is stored in plain text, users can see the data using browser developer tools and also modify the stored data.</span></span> <span data-ttu-id="37a91-262">データが性質上、取るに足りないものであれば、データ セキュリティを問題にする必要はないかもしれません。</span><span class="sxs-lookup"><span data-stu-id="37a91-262">Securing data isn't always a problem because the data might be trivial in nature.</span></span> <span data-ttu-id="37a91-263">たとえば、UI 要素に保存されている色を読み取られたり、変更されたりしたところで、それはユーザーや組織にとって大きなセキュリティ リスクではありません。</span><span class="sxs-lookup"><span data-stu-id="37a91-263">For example, reading or modifying the stored color of a UI element isn't a significant security risk to the user or the organization.</span></span> <span data-ttu-id="37a91-264">" *取り扱いに慎重を要するデータ* " を見たり、改ざんしたりすることをユーザーに禁止します。</span><span class="sxs-lookup"><span data-stu-id="37a91-264">Avoid allowing users to inspect or tamper with *sensitive data*.</span></span>
@@ -235,7 +235,7 @@ ms.locfileid: "93054997"
 <span data-ttu-id="37a91-266">ASP.NET Core で保護されたブラウザー ストレージでは、[`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) と [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) に対して [ASP.NET Core のデータ保護](xref:security/data-protection/introduction)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="37a91-266">ASP.NET Core Protected Browser Storage leverages [ASP.NET Core Data Protection](xref:security/data-protection/introduction) for [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) and [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage).</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="37a91-267">保護されたブラウザー ストレージは、ASP.NET Core のデータ保護に依存しており、:::no-loc(Blazor Server)::: アプリでのみサポートされます。</span><span class="sxs-lookup"><span data-stu-id="37a91-267">Protected Browser Storage relies on ASP.NET Core Data Protection and is only supported for :::no-loc(Blazor Server)::: apps.</span></span>
+> <span data-ttu-id="37a91-267">保護されたブラウザー ストレージは、ASP.NET Core のデータ保護に依存しており、Blazor Server アプリでのみサポートされます。</span><span class="sxs-lookup"><span data-stu-id="37a91-267">Protected Browser Storage relies on ASP.NET Core Data Protection and is only supported for Blazor Server apps.</span></span>
 
 ### <a name="save-and-load-data-within-a-component"></a><span data-ttu-id="37a91-268">コンポーネント内でデータを保存し、読み込む</span><span class="sxs-lookup"><span data-stu-id="37a91-268">Save and load data within a component</span></span>
 
@@ -253,7 +253,7 @@ ms.locfileid: "93054997"
 
 <span data-ttu-id="37a91-272">`@using` ディレクティブは、コンポーネントの代わりに、アプリの `_Imports.razor` ファイルに配置できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-272">The `@using` directive can be placed in the app's `_Imports.razor` file instead of in the component.</span></span> <span data-ttu-id="37a91-273">`_Imports.razor` ファイルを使用すると、アプリの中の大きなセグメントで、あるいはアプリ全体で名前空間を利用できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-273">Use of the `_Imports.razor` file makes the namespace available to larger segments of the app or the whole app.</span></span>
 
-<span data-ttu-id="37a91-274">:::no-loc(Blazor Server)::: プロジェクト テンプレートに基づいてアプリの `Counter` コンポーネントに `currentCount` の値を保持するには、`ProtectedSessionStore.SetAsync` を使用するように `IncrementCount` メソッドを変更します。</span><span class="sxs-lookup"><span data-stu-id="37a91-274">To persist the `currentCount` value in the `Counter` component of an app based on the :::no-loc(Blazor Server)::: project template, modify the `IncrementCount` method to use `ProtectedSessionStore.SetAsync`:</span></span>
+<span data-ttu-id="37a91-274">Blazor Server プロジェクト テンプレートに基づいてアプリの `Counter` コンポーネントに `currentCount` の値を保持するには、`ProtectedSessionStore.SetAsync` を使用するように `IncrementCount` メソッドを変更します。</span><span class="sxs-lookup"><span data-stu-id="37a91-274">To persist the `currentCount` value in the `Counter` component of an app based on the Blazor Server project template, modify the `IncrementCount` method to use `ProtectedSessionStore.SetAsync`:</span></span>
 
 ```csharp
 private async Task IncrementCount()
@@ -466,7 +466,7 @@ else
 > [!WARNING]
 > <span data-ttu-id="37a91-329">`Microsoft.AspNetCore.ProtectedBrowserStorage` はサポートのない試験用パッケージであり、運用環境での使用に適していません。</span><span class="sxs-lookup"><span data-stu-id="37a91-329">`Microsoft.AspNetCore.ProtectedBrowserStorage` is an unsupported, experimental package unsuitable for production use.</span></span>
 >
-> <span data-ttu-id="37a91-330">パッケージは、ASP.NET Core 3.1 の :::no-loc(Blazor Server)::: アプリでのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-330">The package is only available for use in ASP.NET Core 3.1 :::no-loc(Blazor Server)::: apps.</span></span>
+> <span data-ttu-id="37a91-330">パッケージは、ASP.NET Core 3.1 の Blazor Server アプリでのみ使用できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-330">The package is only available for use in ASP.NET Core 3.1 Blazor Server apps.</span></span>
 
 ### <a name="configuration"></a><span data-ttu-id="37a91-331">構成</span><span class="sxs-lookup"><span data-stu-id="37a91-331">Configuration</span></span>
 
@@ -499,7 +499,7 @@ else
 
 <span data-ttu-id="37a91-339">`@using` ステートメントは、コンポーネントの代わりに、`_Imports.razor` ファイルに入れることができます。</span><span class="sxs-lookup"><span data-stu-id="37a91-339">The `@using` statement can be placed into an `_Imports.razor` file instead of in the component.</span></span> <span data-ttu-id="37a91-340">`_Imports.razor` ファイルを使用すると、アプリの中の大きなセグメントで、あるいはアプリ全体で名前空間を利用できます。</span><span class="sxs-lookup"><span data-stu-id="37a91-340">Use of the `_Imports.razor` file makes the namespace available to larger segments of the app or the whole app.</span></span>
 
-<span data-ttu-id="37a91-341">:::no-loc(Blazor Server)::: プロジェクト テンプレートに基づいてアプリの `Counter` コンポーネントに `currentCount` の値を保持するには、`ProtectedSessionStore.SetAsync` を使用するように `IncrementCount` メソッドを変更します。</span><span class="sxs-lookup"><span data-stu-id="37a91-341">To persist the `currentCount` value in the `Counter` component of an app based on the :::no-loc(Blazor Server)::: project template, modify the `IncrementCount` method to use `ProtectedSessionStore.SetAsync`:</span></span>
+<span data-ttu-id="37a91-341">Blazor Server プロジェクト テンプレートに基づいてアプリの `Counter` コンポーネントに `currentCount` の値を保持するには、`ProtectedSessionStore.SetAsync` を使用するように `IncrementCount` メソッドを変更します。</span><span class="sxs-lookup"><span data-stu-id="37a91-341">To persist the `currentCount` value in the `Counter` component of an app based on the Blazor Server project template, modify the `IncrementCount` method to use `ProtectedSessionStore.SetAsync`:</span></span>
 
 ```csharp
 private async Task IncrementCount()

@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core プロジェクトでのユーザーデータの追加、ダウンロード、および削除 :::no-loc(Identity):::'
+title: 'ASP.NET Core プロジェクトでのユーザーデータの追加、ダウンロード、および削除 Identity'
 author: rick-anderson
-description: 'ASP.NET Core プロジェクト内のにカスタムユーザーデータを追加する方法について説明 :::no-loc(Identity)::: します。 GDPR ごとのデータを削除します。'
+description: 'ASP.NET Core プロジェクト内のにカスタムユーザーデータを追加する方法について説明 Identity します。 GDPR ごとのデータを削除します。'
 ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/add-user-data
 ms.openlocfilehash: a4e1fd780947cfa5f09fb1e03964595fa09f0f18
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,16 +25,16 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061419"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a><span data-ttu-id="7ad73-104">カスタムユーザーデータを :::no-loc(Identity)::: ASP.NET Core プロジェクトに追加、ダウンロード、および削除する</span><span class="sxs-lookup"><span data-stu-id="7ad73-104">Add, download, and delete custom user data to :::no-loc(Identity)::: in an ASP.NET Core project</span></span>
+# <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a><span data-ttu-id="7ad73-104">カスタムユーザーデータを Identity ASP.NET Core プロジェクトに追加、ダウンロード、および削除する</span><span class="sxs-lookup"><span data-stu-id="7ad73-104">Add, download, and delete custom user data to Identity in an ASP.NET Core project</span></span>
 
 <span data-ttu-id="7ad73-105">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="7ad73-105">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 <span data-ttu-id="7ad73-106">この記事では、次の方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-106">This article shows how to:</span></span>
 
 * <span data-ttu-id="7ad73-107">カスタムユーザーデータを ASP.NET Core web アプリに追加します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-107">Add custom user data to an ASP.NET Core web app.</span></span>
-* <span data-ttu-id="7ad73-108">カスタムユーザーデータモデルを属性でマークして、 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PersonalDataAttribute> 自動的にダウンロードおよび削除できるようにします。</span><span class="sxs-lookup"><span data-stu-id="7ad73-108">Mark the custom user data model with the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PersonalDataAttribute> attribute so it's automatically available for download and deletion.</span></span> <span data-ttu-id="7ad73-109">データをダウンロードして削除できるようにすると、 [GDPR](xref:security/gdpr) の要件を満たすことができます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-109">Making the data able to be downloaded and deleted helps meet [GDPR](xref:security/gdpr) requirements.</span></span>
+* <span data-ttu-id="7ad73-108">カスタムユーザーデータモデルを属性でマークして、 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 自動的にダウンロードおよび削除できるようにします。</span><span class="sxs-lookup"><span data-stu-id="7ad73-108">Mark the custom user data model with the <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> attribute so it's automatically available for download and deletion.</span></span> <span data-ttu-id="7ad73-109">データをダウンロードして削除できるようにすると、 [GDPR](xref:security/gdpr) の要件を満たすことができます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-109">Making the data able to be downloaded and deleted helps meet [GDPR](xref:security/gdpr) requirements.</span></span>
 
-<span data-ttu-id="7ad73-110">プロジェクトサンプルは、ページ web アプリから作成され :::no-loc(Razor)::: ますが、手順は ASP.NET CORE MVC web アプリの場合と似ています。</span><span class="sxs-lookup"><span data-stu-id="7ad73-110">The project sample is created from a :::no-loc(Razor)::: Pages web app, but the instructions are similar for a ASP.NET Core MVC web app.</span></span>
+<span data-ttu-id="7ad73-110">プロジェクトサンプルは、ページ web アプリから作成され Razor ますが、手順は ASP.NET CORE MVC web アプリの場合と似ています。</span><span class="sxs-lookup"><span data-stu-id="7ad73-110">The project sample is created from a Razor Pages web app, but the instructions are similar for a ASP.NET Core MVC web app.</span></span>
 
 <span data-ttu-id="7ad73-111">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="7ad73-111">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "93061419"
 
 ::: moniker-end
 
-## <a name="create-a-no-locrazor-web-app"></a><span data-ttu-id="7ad73-113">Web アプリを作成する :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="7ad73-113">Create a :::no-loc(Razor)::: web app</span></span>
+## <a name="create-a-no-locrazor-web-app"></a><span data-ttu-id="7ad73-113">Web アプリを作成する Razor</span><span class="sxs-lookup"><span data-stu-id="7ad73-113">Create a Razor web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="7ad73-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="7ad73-114">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -85,13 +85,13 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-no-locidentity-scaffolder"></a><span data-ttu-id="7ad73-128">Scaffolder を実行します。 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="7ad73-128">Run the :::no-loc(Identity)::: scaffolder</span></span>
+## <a name="run-the-no-locidentity-scaffolder"></a><span data-ttu-id="7ad73-128">Scaffolder を実行します。 Identity</span><span class="sxs-lookup"><span data-stu-id="7ad73-128">Run the Identity scaffolder</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="7ad73-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="7ad73-129">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="7ad73-130">**ソリューションエクスプローラー** で、プロジェクトを右クリックし、[ **Add**  >  **New スキャフォールディング Item** ] > ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-130">From **Solution Explorer** , right-click on the project > **Add** > **New Scaffolded Item** .</span></span>
-* <span data-ttu-id="7ad73-131">[ **スキャフォールディングの追加** ] ダイアログボックスの左ペインで、[追加] を選択し **:::no-loc(Identity):::**  >  **Add** ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-131">From the left pane of the **Add Scaffold** dialog, select **:::no-loc(Identity):::** > **Add** .</span></span>
-* <span data-ttu-id="7ad73-132">[ **追加 :::no-loc(Identity):::** ] ダイアログで、次のオプションを選択します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-132">In the **Add :::no-loc(Identity):::** dialog, the following options:</span></span>
+* <span data-ttu-id="7ad73-131">[ **スキャフォールディングの追加** ] ダイアログボックスの左ペインで、[追加] を選択し **Identity**  >  **Add** ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-131">From the left pane of the **Add Scaffold** dialog, select **Identity** > **Add** .</span></span>
+* <span data-ttu-id="7ad73-132">[ **追加 Identity** ] ダイアログで、次のオプションを選択します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-132">In the **Add Identity** dialog, the following options:</span></span>
   * <span data-ttu-id="7ad73-133">既存のレイアウト _Layout ファイルを選択し  *ます。*</span><span class="sxs-lookup"><span data-stu-id="7ad73-133">Select the existing layout  file  *~/Pages/Shared/_Layout.cshtml*</span></span>
   * <span data-ttu-id="7ad73-134">上書きする以下のファイルを選択してください:</span><span class="sxs-lookup"><span data-stu-id="7ad73-134">Select the following files to override:</span></span>
     * <span data-ttu-id="7ad73-135">**アカウント/登録**</span><span class="sxs-lookup"><span data-stu-id="7ad73-135">**Account/Register**</span></span>
@@ -115,13 +115,13 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-<span data-ttu-id="7ad73-146">次のコマンドを実行して、scaffolder オプションの一覧を表示し :::no-loc(Identity)::: ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-146">Run the following command to list the :::no-loc(Identity)::: scaffolder options:</span></span>
+<span data-ttu-id="7ad73-146">次のコマンドを実行して、scaffolder オプションの一覧を表示し Identity ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-146">Run the following command to list the Identity scaffolder options:</span></span>
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-<span data-ttu-id="7ad73-147">プロジェクトフォルダーで、scaffolder を実行し :::no-loc(Identity)::: ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-147">In the project folder, run the :::no-loc(Identity)::: scaffolder:</span></span>
+<span data-ttu-id="7ad73-147">プロジェクトフォルダーで、scaffolder を実行し Identity ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-147">In the project folder, run the Identity scaffolder:</span></span>
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
@@ -141,72 +141,72 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
   * <span data-ttu-id="7ad73-157">[ **ダウンロード** ] ボタンを選択し、ファイルの *PersonalData.js* を調べます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-157">Select the **Download** button and examined the *PersonalData.json* file.</span></span>
   * <span data-ttu-id="7ad73-158">[ **削除** ] ボタンをテストします。これにより、ログオンしているユーザーが削除されます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-158">Test the **Delete** button, which deletes the logged on user.</span></span>
 
-## <a name="add-custom-user-data-to-the-no-locidentity-db"></a><span data-ttu-id="7ad73-159">DB にカスタムユーザーデータを追加する :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="7ad73-159">Add custom user data to the :::no-loc(Identity)::: DB</span></span>
+## <a name="add-custom-user-data-to-the-no-locidentity-db"></a><span data-ttu-id="7ad73-159">DB にカスタムユーザーデータを追加する Identity</span><span class="sxs-lookup"><span data-stu-id="7ad73-159">Add custom user data to the Identity DB</span></span>
 
-<span data-ttu-id="7ad73-160">`:::no-loc(Identity):::User`カスタムプロパティを使用して、派生クラスを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-160">Update the `:::no-loc(Identity):::User` derived class with custom properties.</span></span> <span data-ttu-id="7ad73-161">プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は *Areas/ :::no-loc(Identity)::: /Data/WebApp1User.cs* になります。</span><span class="sxs-lookup"><span data-stu-id="7ad73-161">If you named the project WebApp1, the file is named *Areas/:::no-loc(Identity):::/Data/WebApp1User.cs* .</span></span> <span data-ttu-id="7ad73-162">次のコードを使用して、ファイルを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-162">Update the file with the following code:</span></span>
+<span data-ttu-id="7ad73-160">`IdentityUser`カスタムプロパティを使用して、派生クラスを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-160">Update the `IdentityUser` derived class with custom properties.</span></span> <span data-ttu-id="7ad73-161">プロジェクトに WebApp1 という名前を付けた場合、ファイルの名前は *Areas/ Identity /Data/WebApp1User.cs* になります。</span><span class="sxs-lookup"><span data-stu-id="7ad73-161">If you named the project WebApp1, the file is named *Areas/Identity/Data/WebApp1User.cs* .</span></span> <span data-ttu-id="7ad73-162">次のコードを使用して、ファイルを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-162">Update the file with the following code:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/:::no-loc(Identity):::/Data/WebApp1User.cs)]
+[!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Data/WebApp1User.cs)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/:::no-loc(Identity):::/Data/WebApp1User.cs)]
+[!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Data/WebApp1User.cs)]
 
 ::: moniker-end
 
 <span data-ttu-id="7ad73-163">プロパティ [は、次のよう](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) になります。</span><span class="sxs-lookup"><span data-stu-id="7ad73-163">Properties with the [PersonalData](/dotnet/api/microsoft.aspnetcore.identity.personaldataattribute) attribute are:</span></span>
 
-* <span data-ttu-id="7ad73-164">*区分/ :::no-loc(Identity)::: /Pages/Account/Manage/DeletePersonalData.cshtml* ページがを呼び出したときに削除され :::no-loc(Razor)::: `UserManager.Delete` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-164">Deleted when the *Areas/:::no-loc(Identity):::/Pages/Account/Manage/DeletePersonalData.cshtml* :::no-loc(Razor)::: Page calls `UserManager.Delete`.</span></span>
-* <span data-ttu-id="7ad73-165">ダウンロードされたデータには、[区分]、[ページ]、 *および [ :::no-loc(Identity)::: Manage/Download] の各* ページで含まれ :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-165">Included in the downloaded data by the *Areas/:::no-loc(Identity):::/Pages/Account/Manage/DownloadPersonalData.cshtml* :::no-loc(Razor)::: Page.</span></span>
+* <span data-ttu-id="7ad73-164">*区分/ Identity /Pages/Account/Manage/DeletePersonalData.cshtml* ページがを呼び出したときに削除され Razor `UserManager.Delete` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-164">Deleted when the *Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml* Razor Page calls `UserManager.Delete`.</span></span>
+* <span data-ttu-id="7ad73-165">ダウンロードされたデータには、[区分]、[ページ]、 *および [ Identity Manage/Download] の各* ページで含まれ Razor ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-165">Included in the downloaded data by the *Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml* Razor Page.</span></span>
 
 ### <a name="update-the-accountmanageindexcshtml-page"></a><span data-ttu-id="7ad73-166">Account/Manage/Index. cshtml ページを更新する</span><span class="sxs-lookup"><span data-stu-id="7ad73-166">Update the Account/Manage/Index.cshtml page</span></span>
 
-<span data-ttu-id="7ad73-167">次の `InputModel` 強調表示されたコードを使用して、 *区分/ :::no-loc(Identity)::: /Pages/Account/Manage/Index.cshtml.cs* のを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-167">Update the `InputModel` in *Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="7ad73-167">次の `InputModel` 強調表示されたコードを使用して、 *区分/ Identity /Pages/Account/Manage/Index.cshtml.cs* のを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-167">Update the `InputModel` in *Areas/Identity/Pages/Account/Manage/Index.cshtml.cs* with the following highlighted code:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
+[!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=24-32,48-49,96-104,106)]
 
-<span data-ttu-id="7ad73-168">次の強調表示されているマークアップを使用して、 *区分//////////また :::no-loc(Identity):::* は更新プログラムを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-168">Update the *Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="7ad73-168">次の強調表示されているマークアップを使用して、 *区分//////////また Identity* は更新プログラムを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-168">Update the *Areas/Identity/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
 
-[!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
+[!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=18-25)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
+[!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs?name=snippet&highlight=28-36,63-64,98-106,119)]
 
-<span data-ttu-id="7ad73-169">次の強調表示されているマークアップを使用して、 *区分//////////また :::no-loc(Identity):::* は更新プログラムを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-169">Update the *Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="7ad73-169">次の強調表示されているマークアップを使用して、 *区分//////////また Identity* は更新プログラムを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-169">Update the *Areas/Identity/Pages/Account/Manage/Index.cshtml* with the following highlighted markup:</span></span>
 
-[!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
+[!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Manage/Index.cshtml?highlight=35-42)]
 
 ::: moniker-end
 
 ### <a name="update-the-accountregistercshtml-page"></a><span data-ttu-id="7ad73-170">Account/Register. cshtml ページを更新する</span><span class="sxs-lookup"><span data-stu-id="7ad73-170">Update the Account/Register.cshtml page</span></span>
 
-<span data-ttu-id="7ad73-171">次の `InputModel` 強調表示されたコードを使用して、 *区分/ :::no-loc(Identity)::: /Pages/Account/Register.cshtml.cs* のを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-171">Update the `InputModel` in *Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs* with the following highlighted code:</span></span>
+<span data-ttu-id="7ad73-171">次の `InputModel` 強調表示されたコードを使用して、 *区分/ Identity /Pages/Account/Register.cshtml.cs* のを更新します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-171">Update the `InputModel` in *Areas/Identity/Pages/Account/Register.cshtml.cs* with the following highlighted code:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
+[!code-csharp[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=30-38,70-71)]
 
-<span data-ttu-id="7ad73-172">次の強調表示されたマークアップを使用して、 *区分//[///////////////また :::no-loc(Identity):::* はの</span><span class="sxs-lookup"><span data-stu-id="7ad73-172">Update the *Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="7ad73-172">次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity* はの</span><span class="sxs-lookup"><span data-stu-id="7ad73-172">Update the *Areas/Identity/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
 
-[!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml?highlight=16-25)]
+[!code-cshtml[](add-user-data/samples/3.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
+[!code-csharp[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=28-36,67,66)]
 
-<span data-ttu-id="7ad73-173">次の強調表示されたマークアップを使用して、 *区分//[///////////////また :::no-loc(Identity):::* はの</span><span class="sxs-lookup"><span data-stu-id="7ad73-173">Update the *Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="7ad73-173">次の強調表示されたマークアップを使用して、 *区分//[///////////////また Identity* はの</span><span class="sxs-lookup"><span data-stu-id="7ad73-173">Update the *Areas/Identity/Pages/Account/Register.cshtml* with the following highlighted markup:</span></span>
 
-[!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml?highlight=16-25)]
+[!code-cshtml[](add-user-data/samples/2.x/SampleApp/Areas/Identity/Pages/Account/Register.cshtml?highlight=16-25)]
 
 ::: moniker-end
 
@@ -238,20 +238,20 @@ dotnet ef database update
 <span data-ttu-id="7ad73-180">アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="7ad73-180">Test the app:</span></span>
 
 * <span data-ttu-id="7ad73-181">新しいユーザーを登録します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-181">Register a new user.</span></span>
-* <span data-ttu-id="7ad73-182">ページ上のカスタムユーザーデータを表示し `/:::no-loc(Identity):::/Account/Manage` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-182">View the custom user data on the `/:::no-loc(Identity):::/Account/Manage` page.</span></span>
-* <span data-ttu-id="7ad73-183">ページからユーザーの個人データをダウンロードして表示し `/:::no-loc(Identity):::/Account/Manage/PersonalData` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-183">Download and view the users personal data from the `/:::no-loc(Identity):::/Account/Manage/PersonalData` page.</span></span>
+* <span data-ttu-id="7ad73-182">ページ上のカスタムユーザーデータを表示し `/Identity/Account/Manage` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-182">View the custom user data on the `/Identity/Account/Manage` page.</span></span>
+* <span data-ttu-id="7ad73-183">ページからユーザーの個人データをダウンロードして表示し `/Identity/Account/Manage/PersonalData` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-183">Download and view the users personal data from the `/Identity/Account/Manage/PersonalData` page.</span></span>
 
-## <a name="add-claims-to-no-locidentity-using-iuserclaimsprincipalfactoryapplicationuser"></a><span data-ttu-id="7ad73-184">:::no-loc(Identity):::IUserClaimsPrincipalFactory を使用してにクレームを追加する<ApplicationUser></span><span class="sxs-lookup"><span data-stu-id="7ad73-184">Add claims to :::no-loc(Identity)::: using IUserClaimsPrincipalFactory<ApplicationUser></span></span>
+## <a name="add-claims-to-no-locidentity-using-iuserclaimsprincipalfactoryapplicationuser"></a><span data-ttu-id="7ad73-184">IdentityIUserClaimsPrincipalFactory を使用してにクレームを追加する<ApplicationUser></span><span class="sxs-lookup"><span data-stu-id="7ad73-184">Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser></span></span>
 
 > [!NOTE]
 > <span data-ttu-id="7ad73-185">このセクションは、前のチュートリアルの拡張機能ではありません。</span><span class="sxs-lookup"><span data-stu-id="7ad73-185">This section isn't an extension of the previous tutorial.</span></span> <span data-ttu-id="7ad73-186">チュートリアルを使用してビルドされたアプリに次の手順を適用するには、 [GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/18797)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7ad73-186">To apply the following steps to the app built using the tutorial, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/18797).</span></span>
 
-<span data-ttu-id="7ad73-187">インターフェイスを使用して、追加の要求をに追加でき :::no-loc(ASP.NET Core Identity)::: `IUserClaimsPrincipalFactory<T>` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-187">Additional claims can be added to :::no-loc(ASP.NET Core Identity)::: by using the `IUserClaimsPrincipalFactory<T>` interface.</span></span> <span data-ttu-id="7ad73-188">このクラスは、メソッドでアプリに追加でき `Startup.ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-188">This class can be added to the app in the `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="7ad73-189">次のように、クラスのカスタム実装を追加します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-189">Add the custom implementation of the class as follows:</span></span>
+<span data-ttu-id="7ad73-187">インターフェイスを使用して、追加の要求をに追加でき ASP.NET Core Identity `IUserClaimsPrincipalFactory<T>` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-187">Additional claims can be added to ASP.NET Core Identity by using the `IUserClaimsPrincipalFactory<T>` interface.</span></span> <span data-ttu-id="7ad73-188">このクラスは、メソッドでアプリに追加でき `Startup.ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-188">This class can be added to the app in the `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="7ad73-189">次のように、クラスのカスタム実装を追加します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-189">Add the custom implementation of the class as follows:</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
@@ -262,7 +262,7 @@ public void ConfigureServices(IServiceCollection services)
 <span data-ttu-id="7ad73-190">デモコードでは、クラスを使用し `ApplicationUser` ます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-190">The demo code uses the `ApplicationUser` class.</span></span> <span data-ttu-id="7ad73-191">このクラス `IsAdmin` は、追加の要求を追加するために使用されるプロパティを追加します。</span><span class="sxs-lookup"><span data-stu-id="7ad73-191">This class adds an `IsAdmin` property which is used to add the additional claim.</span></span>
 
 ```csharp
-public class ApplicationUser : :::no-loc(Identity):::User
+public class ApplicationUser : IdentityUser
 {
     public bool IsAdmin { get; set; }
 }
@@ -272,19 +272,19 @@ public class ApplicationUser : :::no-loc(Identity):::User
 
 ```csharp
 public class AdditionalUserClaimsPrincipalFactory 
-        : UserClaimsPrincipalFactory<ApplicationUser, :::no-loc(Identity):::Role>
+        : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
 {
     public AdditionalUserClaimsPrincipalFactory( 
         UserManager<ApplicationUser> userManager,
-        RoleManager<:::no-loc(Identity):::Role> roleManager, 
-        IOptions<:::no-loc(Identity):::Options> optionsAccessor) 
+        RoleManager<IdentityRole> roleManager, 
+        IOptions<IdentityOptions> optionsAccessor) 
         : base(userManager, roleManager, optionsAccessor)
     {}
 
     public async override Task<ClaimsPrincipal> CreateAsync(ApplicationUser user)
     {
         var principal = await base.CreateAsync(user);
-        var identity = (Claims:::no-loc(Identity):::)principal.:::no-loc(Identity):::;
+        var identity = (ClaimsIdentity)principal.Identity;
 
         var claims = new List<Claim>();
         if (user.IsAdmin)
@@ -302,7 +302,7 @@ public class AdditionalUserClaimsPrincipalFactory
 }
 ```
 
-<span data-ttu-id="7ad73-194">その後、追加の要求をアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-194">The additional claim can then be used in the app.</span></span> <span data-ttu-id="7ad73-195">ページでは、 :::no-loc(Razor)::: `IAuthorizationService` インスタンスを使用して要求値にアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-195">In a :::no-loc(Razor)::: Page, the `IAuthorizationService` instance can be used to access the claim value.</span></span>
+<span data-ttu-id="7ad73-194">その後、追加の要求をアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-194">The additional claim can then be used in the app.</span></span> <span data-ttu-id="7ad73-195">ページでは、 Razor `IAuthorizationService` インスタンスを使用して要求値にアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="7ad73-195">In a Razor Page, the `IAuthorizationService` instance can be used to access the claim value.</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization

@@ -6,17 +6,17 @@ ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/read-related-data
 ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -200,7 +200,7 @@ ms.locfileid: "93054061"
   }
   ```
 
-* <span data-ttu-id="74e75-228">インストラクターごとに担当したコースを表示する **Courses** 列を追加しました。</span><span class="sxs-lookup"><span data-stu-id="74e75-228">Added a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="74e75-229">詳細については、:::no-loc(Razor)::: 構文記事の「[明示的な行の遷移](xref:mvc/views/razor#explicit-line-transition)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="74e75-229">For more information, see the [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) section of the :::no-loc(Razor)::: syntax article.</span></span>
+* <span data-ttu-id="74e75-228">インストラクターごとに担当したコースを表示する **Courses** 列を追加しました。</span><span class="sxs-lookup"><span data-stu-id="74e75-228">Added a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="74e75-229">詳細については、Razor 構文記事の「[明示的な行の遷移](xref:mvc/views/razor#explicit-line-transition)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="74e75-229">For more information, see the [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) section of the Razor syntax article.</span></span>
 
 * <span data-ttu-id="74e75-230">選択したインストラクターの `tr` 要素に `class="success"` を動的に追加するコードを追加しました。</span><span class="sxs-lookup"><span data-stu-id="74e75-230">Added code that dynamically adds `class="success"` to the `tr` element of the selected instructor.</span></span> <span data-ttu-id="74e75-231">これは、ブートストラップ クラスを使用して、選択した行の背景色を設定します。</span><span class="sxs-lookup"><span data-stu-id="74e75-231">This sets a background color for the selected row using a Bootstrap class.</span></span>
 

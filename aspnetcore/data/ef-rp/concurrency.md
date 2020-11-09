@@ -1,22 +1,22 @@
 ---
-title: 'パート 8、ASP.NET Core の :::no-loc(Razor)::: ページと EF Core - コンカレンシー'
+title: 'パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー'
 author: rick-anderson
-description: ':::no-loc(Razor)::: Pages と Entity Framework チュートリアル シリーズのパート 8。'
+description: 'Razor Pages と Entity Framework チュートリアル シリーズのパート 8。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/concurrency
 ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93053996"
 ---
-# <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a><span data-ttu-id="1d4b7-103">パート 8、ASP.NET Core の :::no-loc(Razor)::: ページと EF Core - コンカレンシー</span><span class="sxs-lookup"><span data-stu-id="1d4b7-103">Part 8, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Concurrency</span></span>
+# <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a><span data-ttu-id="1d4b7-103">パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー</span><span class="sxs-lookup"><span data-stu-id="1d4b7-103">Part 8, Razor Pages with EF Core in ASP.NET Core - Concurrency</span></span>
 
 <span data-ttu-id="1d4b7-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)、[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)</span><span class="sxs-lookup"><span data-stu-id="1d4b7-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra), and [Jon P Smith](https://twitter.com/thereformedprog)</span></span>
 
@@ -268,7 +268,7 @@ modelBuilder.Entity<Department>()
 
 <span data-ttu-id="1d4b7-244">前の強調表示されたコードでは、次のようになっています。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-244">In the preceding highlighted code:</span></span>
 
-* <span data-ttu-id="1d4b7-245">`Department.RowVersion` の値は、Edit ページに対する Get 要求でもともとフェッチされたエンティティのものです。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-245">The value in `Department.RowVersion` is what was in the entity when it was originally fetched in the Get request for the Edit page.</span></span> <span data-ttu-id="1d4b7-246">その値は、編集対象のエンティティが表示される :::no-loc(Razor)::: ページの非表示フィールドによって、`OnPost` メソッドに提供されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-246">The value is provided to the `OnPost` method by a hidden field in the :::no-loc(Razor)::: page that displays the entity to be edited.</span></span> <span data-ttu-id="1d4b7-247">非表示フィールドの値は、モデル バインダーによって `Department.RowVersion` にコピーされます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-247">The hidden field value is copied to `Department.RowVersion` by the model binder.</span></span>
+* <span data-ttu-id="1d4b7-245">`Department.RowVersion` の値は、Edit ページに対する Get 要求でもともとフェッチされたエンティティのものです。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-245">The value in `Department.RowVersion` is what was in the entity when it was originally fetched in the Get request for the Edit page.</span></span> <span data-ttu-id="1d4b7-246">その値は、編集対象のエンティティが表示される Razor ページの非表示フィールドによって、`OnPost` メソッドに提供されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-246">The value is provided to the `OnPost` method by a hidden field in the Razor page that displays the entity to be edited.</span></span> <span data-ttu-id="1d4b7-247">非表示フィールドの値は、モデル バインダーによって `Department.RowVersion` にコピーされます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-247">The hidden field value is copied to `Department.RowVersion` by the model binder.</span></span>
 * <span data-ttu-id="1d4b7-248">`OriginalValue` は、EF Core によって Where 句で使用されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-248">`OriginalValue` is what EF Core will use in the Where clause.</span></span> <span data-ttu-id="1d4b7-249">強調表示されたコード行が実行される前の `OriginalValue` の値は、このメソッドで `FirstOrDefaultAsync` が呼び出されたときのデータベース内の値であり、これは Edit ページに表示されたものと異なる場合があります。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-249">Before the highlighted line of code executes, `OriginalValue` has the value that was in the database when `FirstOrDefaultAsync` was called in this method, which might be different from what was displayed on the Edit page.</span></span>
 * <span data-ttu-id="1d4b7-250">強調表示されたコードにより、EF Core では SQL UPDATE ステートメントの Where 句で表示された `RowVersion` エンティティの元の `Department` の値が確実に使用されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-250">The highlighted code makes sure that EF Core uses the original `RowVersion` value from the displayed `Department` entity in the SQL UPDATE statement's Where clause.</span></span>
 
@@ -284,7 +284,7 @@ modelBuilder.Entity<Department>()
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
-<span data-ttu-id="1d4b7-255">`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-255">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="1d4b7-256">:::no-loc(Razor)::: ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-256">In the :::no-loc(Razor)::: Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
+<span data-ttu-id="1d4b7-255">`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-255">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="1d4b7-256">Razor ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-256">In the Razor Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
 
 ### <a name="update-the-edit-page"></a><span data-ttu-id="1d4b7-257">[編集] ページを更新する</span><span class="sxs-lookup"><span data-stu-id="1d4b7-257">Update the Edit page</span></span>
 
@@ -580,7 +580,7 @@ dotnet ef database update
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
-<span data-ttu-id="1d4b7-443">`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-443">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="1d4b7-444">:::no-loc(Razor)::: ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-444">In the :::no-loc(Razor)::: Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
+<span data-ttu-id="1d4b7-443">`ModelState` の `RowVersion` 値が古いため、`ModelState.Remove` ステートメントが必要になります。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-443">The `ModelState.Remove` statement is required because `ModelState` has the old `RowVersion` value.</span></span> <span data-ttu-id="1d4b7-444">Razor ページでは、どちらも存在する場合は、フィールドの `ModelState` 値がモデル プロパティ値より優先されます。</span><span class="sxs-lookup"><span data-stu-id="1d4b7-444">In the Razor Page, the `ModelState` value for a field takes precedence over the model property values when both are present.</span></span>
 
 ## <a name="update-the-edit-page"></a><span data-ttu-id="1d4b7-445">[編集] ページを更新する</span><span class="sxs-lookup"><span data-stu-id="1d4b7-445">Update the Edit page</span></span>
 

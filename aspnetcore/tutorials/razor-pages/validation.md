@@ -1,22 +1,22 @@
 ---
-title: 'パート 8、ASP.NET Core :::no-loc(Razor)::: ページへの検証の追加'
+title: 'パート 8、ASP.NET Core Razor ページへの検証の追加'
 author: rick-anderson
-description: ':::no-loc(Razor)::: ページのチュートリアル シリーズのパート 8。'
+description: 'Razor ページのチュートリアル シリーズのパート 8。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/validation
 ms.openlocfilehash: 991a0f29c0edc5a220dfde69bd22dc4ed758394d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060730"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a><span data-ttu-id="fa742-103">パート 8、ASP.NET Core :::no-loc(Razor)::: ページへの検証の追加</span><span class="sxs-lookup"><span data-stu-id="fa742-103">Part 8, add validation to an ASP.NET Core :::no-loc(Razor)::: Page</span></span>
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a><span data-ttu-id="fa742-103">パート 8、ASP.NET Core Razor ページへの検証の追加</span><span class="sxs-lookup"><span data-stu-id="fa742-103">Part 8, add validation to an ASP.NET Core Razor Page</span></span>
 
 <span data-ttu-id="fa742-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="fa742-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -33,12 +33,12 @@ ms.locfileid: "93060730"
 
 ## <a name="validation"></a><span data-ttu-id="fa742-107">検証</span><span class="sxs-lookup"><span data-stu-id="fa742-107">Validation</span></span>
 
-<span data-ttu-id="fa742-108">ソフトウェア開発には、 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeat **Y** ourself" (繰り返しを避けること)) という重要な理念があります。</span><span class="sxs-lookup"><span data-stu-id="fa742-108">A key tenet of software development is called [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeat **Y** ourself").</span></span> <span data-ttu-id="fa742-109">:::no-loc(Razor)::: ページでは、機能を一度規定したら、それをアプリ全体に反映する開発を推奨しています。</span><span class="sxs-lookup"><span data-stu-id="fa742-109">:::no-loc(Razor)::: Pages encourages development where functionality is specified once, and it's reflected throughout the app.</span></span> <span data-ttu-id="fa742-110">DRY は次の場合に役立ちます。</span><span class="sxs-lookup"><span data-stu-id="fa742-110">DRY can help:</span></span>
+<span data-ttu-id="fa742-108">ソフトウェア開発には、 [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeat **Y** ourself" (繰り返しを避けること)) という重要な理念があります。</span><span class="sxs-lookup"><span data-stu-id="fa742-108">A key tenet of software development is called [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeat **Y** ourself").</span></span> <span data-ttu-id="fa742-109">Razor ページでは、機能を一度規定したら、それをアプリ全体に反映する開発を推奨しています。</span><span class="sxs-lookup"><span data-stu-id="fa742-109">Razor Pages encourages development where functionality is specified once, and it's reflected throughout the app.</span></span> <span data-ttu-id="fa742-110">DRY は次の場合に役立ちます。</span><span class="sxs-lookup"><span data-stu-id="fa742-110">DRY can help:</span></span>
 
 * <span data-ttu-id="fa742-111">アプリのコード量を減らす。</span><span class="sxs-lookup"><span data-stu-id="fa742-111">Reduce the amount of code in an app.</span></span>
 * <span data-ttu-id="fa742-112">コードのエラーが発生する可能性を低くし、テストと保守を簡単にする。</span><span class="sxs-lookup"><span data-stu-id="fa742-112">Make the code less error prone, and easier to test and maintain.</span></span>
 
-<span data-ttu-id="fa742-113">:::no-loc(Razor)::: ページと Entity Framework が提供している検証のサポートは、DRY 原則の好例です。</span><span class="sxs-lookup"><span data-stu-id="fa742-113">The validation support provided by :::no-loc(Razor)::: Pages and Entity Framework is a good example of the DRY principle.</span></span> <span data-ttu-id="fa742-114">検証規則は、1 つの場所 (モデル クラス内) で宣言的に規定され、アプリの任意の場所で適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-114">Validation rules are declaratively specified in one place (in the model class), and the rules are enforced everywhere in the app.</span></span>
+<span data-ttu-id="fa742-113">Razor ページと Entity Framework が提供している検証のサポートは、DRY 原則の好例です。</span><span class="sxs-lookup"><span data-stu-id="fa742-113">The validation support provided by Razor Pages and Entity Framework is a good example of the DRY principle.</span></span> <span data-ttu-id="fa742-114">検証規則は、1 つの場所 (モデル クラス内) で宣言的に規定され、アプリの任意の場所で適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-114">Validation rules are declaratively specified in one place (in the model class), and the rules are enforced everywhere in the app.</span></span>
 
 ## <a name="add-validation-rules-to-the-movie-model"></a><span data-ttu-id="fa742-115">検証規則をムービー モデルに追加する</span><span class="sxs-lookup"><span data-stu-id="fa742-115">Add validation rules to the movie model</span></span>
 
@@ -46,7 +46,7 @@ ms.locfileid: "93060730"
 
 <span data-ttu-id="fa742-118">組み込みの `Required`、`StringLength`、`RegularExpression`、および `Range` 検証属性を利用するように、`Movie` クラスを更新します。</span><span class="sxs-lookup"><span data-stu-id="fa742-118">Update the `Movie` class to take advantage of the built-in `Required`, `StringLength`, `RegularExpression`, and `Range` validation attributes.</span></span>
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
 <span data-ttu-id="fa742-119">検証属性では、適用対象のモデル プロパティに適用する動作が指定されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-119">The validation attributes specify behavior that you want to enforce on the model properties they're applied to:</span></span>
 
@@ -67,7 +67,7 @@ ms.locfileid: "93060730"
 
 <span data-ttu-id="fa742-133">ASP.NET Core によって検証規則が自動的に適用されるようにすると、アプリをより堅牢にできます。</span><span class="sxs-lookup"><span data-stu-id="fa742-133">Having validation rules automatically enforced by ASP.NET Core helps make your app more robust.</span></span> <span data-ttu-id="fa742-134">また、ユーザーが何かを検証することを忘れてしまい、データベースに不適切なデータが誤って格納されることもなくなります。</span><span class="sxs-lookup"><span data-stu-id="fa742-134">It also ensures that you can't forget to validate something and inadvertently let bad data into the database.</span></span>
 
-### <a name="validation-error-ui-in-no-locrazor-pages"></a><span data-ttu-id="fa742-135">:::no-loc(Razor)::: ページの検証エラー UI</span><span class="sxs-lookup"><span data-stu-id="fa742-135">Validation Error UI in :::no-loc(Razor)::: Pages</span></span>
+### <a name="validation-error-ui-in-no-locrazor-pages"></a><span data-ttu-id="fa742-135">Razor ページの検証エラー UI</span><span class="sxs-lookup"><span data-stu-id="fa742-135">Validation Error UI in Razor Pages</span></span>
 
 <span data-ttu-id="fa742-136">アプリを実行し、[Pages/Movies]/(ページ/ムービー/) に移動します。</span><span class="sxs-lookup"><span data-stu-id="fa742-136">Run the app and navigate to Pages/Movies.</span></span>
 
@@ -79,7 +79,7 @@ ms.locfileid: "93060730"
 
 <span data-ttu-id="fa742-141">無効な値を含む各フィールドに、検証エラー メッセージが自動的に表示されることがわかります。</span><span class="sxs-lookup"><span data-stu-id="fa742-141">Notice how the form has automatically rendered a validation error message in each field containing an invalid value.</span></span> <span data-ttu-id="fa742-142">エラーは、(JavaScript と jQuery を使用している) クライアント側とサーバー側 (ユーザーが JavaScript を無効にしている場合) の両方に適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-142">The errors are enforced both client-side (using JavaScript and jQuery) and server-side (when a user has JavaScript disabled).</span></span>
 
-<span data-ttu-id="fa742-143">大きな利点は、[Create]/(作成/) ページまたは [Edit]/(編集/) ページの変更が **必要ない** ことです。</span><span class="sxs-lookup"><span data-stu-id="fa742-143">A significant benefit is that **no** code changes were necessary in the Create  or Edit pages.</span></span> <span data-ttu-id="fa742-144">一度 DataAnnotations がモデルに適用されると、検証 UI は有効化されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-144">Once DataAnnotations were applied to the model, the validation UI was enabled.</span></span> <span data-ttu-id="fa742-145">このチュートリアルで作成した :::no-loc(Razor)::: ページは、(`Movie` モデル クラスのプロパティの検証属性を使用して) 検証規則を自動的に抽出しました。</span><span class="sxs-lookup"><span data-stu-id="fa742-145">The :::no-loc(Razor)::: Pages created in this tutorial automatically picked up the validation rules (using validation attributes on the properties of the `Movie` model class).</span></span> <span data-ttu-id="fa742-146">[Edit]/(編集/) ページを使用して検証をテストすると、同じ検証が適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-146">Test validation using the Edit page, the same validation is applied.</span></span>
+<span data-ttu-id="fa742-143">大きな利点は、[Create]/(作成/) ページまたは [Edit]/(編集/) ページの変更が **必要ない** ことです。</span><span class="sxs-lookup"><span data-stu-id="fa742-143">A significant benefit is that **no** code changes were necessary in the Create  or Edit pages.</span></span> <span data-ttu-id="fa742-144">一度 DataAnnotations がモデルに適用されると、検証 UI は有効化されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-144">Once DataAnnotations were applied to the model, the validation UI was enabled.</span></span> <span data-ttu-id="fa742-145">このチュートリアルで作成した Razor ページは、(`Movie` モデル クラスのプロパティの検証属性を使用して) 検証規則を自動的に抽出しました。</span><span class="sxs-lookup"><span data-stu-id="fa742-145">The Razor Pages created in this tutorial automatically picked up the validation rules (using validation attributes on the properties of the `Movie` model class).</span></span> <span data-ttu-id="fa742-146">[Edit]/(編集/) ページを使用して検証をテストすると、同じ検証が適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-146">Test validation using the Edit page, the same validation is applied.</span></span>
 
 <span data-ttu-id="fa742-147">クライアント側の検証エラーがなくなるまで、フォーム データはサーバーにポストされません。</span><span class="sxs-lookup"><span data-stu-id="fa742-147">The form data isn't posted to the server until there are no client-side validation errors.</span></span> <span data-ttu-id="fa742-148">次のうち 1 つまたは複数の方法で、フォーム データがポストされていないことを確認します。</span><span class="sxs-lookup"><span data-stu-id="fa742-148">Verify form data isn't posted by one or more of the following approaches:</span></span>
 
@@ -109,11 +109,11 @@ ms.locfileid: "93060730"
 
 <span data-ttu-id="fa742-164">次のコードは、チュートリアルで前にスキャフォールディング処理した *Create.cshtml* ページの一部を示しています。</span><span class="sxs-lookup"><span data-stu-id="fa742-164">The following code shows a portion of the *Create.cshtml* page scaffolded earlier in the tutorial.</span></span> <span data-ttu-id="fa742-165">[Create] または [Edit] ページにおいて、最初のフォームの表示と、エラーイベント時におけるフォームの再表示のために使用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-165">It's used by the Create and Edit pages to display the initial form and to redisplay the form in the event of an error.</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/Pages/Movies/Create.cshtml?range=14-20)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie/Pages/Movies/Create.cshtml?range=14-20)]
 
 <span data-ttu-id="fa742-166">[入力タグ ヘルパー](xref:mvc/views/working-with-forms)は [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 属性を使用し、クライアント側で jQuery 検証に必要な HTML 属性を生成します。</span><span class="sxs-lookup"><span data-stu-id="fa742-166">The [Input Tag Helper](xref:mvc/views/working-with-forms) uses the [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) attributes and produces HTML attributes needed for jQuery Validation on the client-side.</span></span> <span data-ttu-id="fa742-167">[検証タグ ヘルパー](xref:mvc/views/working-with-forms#the-validation-tag-helpers)には検証エラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-167">The [Validation Tag Helper](xref:mvc/views/working-with-forms#the-validation-tag-helpers) displays validation errors.</span></span> <span data-ttu-id="fa742-168">詳しくは、[検証に関する記事](xref:mvc/models/validation)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="fa742-168">See [Validation](xref:mvc/models/validation) for more information.</span></span>
 
-<span data-ttu-id="fa742-169">[Create] ページと [Edit] ページ内に検証規則はありません。</span><span class="sxs-lookup"><span data-stu-id="fa742-169">The Create and Edit pages have no validation rules in them.</span></span> <span data-ttu-id="fa742-170">検証規則とエラー文字列は、`Movie` クラスでのみ指定されています。</span><span class="sxs-lookup"><span data-stu-id="fa742-170">The validation rules and the error strings are specified only in the `Movie` class.</span></span> <span data-ttu-id="fa742-171">これらの検証規則は、`Movie` モデルを編集する :::no-loc(Razor)::: ページに自動的に適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-171">These validation rules are automatically applied to :::no-loc(Razor)::: Pages that edit the `Movie` model.</span></span>
+<span data-ttu-id="fa742-169">[Create] ページと [Edit] ページ内に検証規則はありません。</span><span class="sxs-lookup"><span data-stu-id="fa742-169">The Create and Edit pages have no validation rules in them.</span></span> <span data-ttu-id="fa742-170">検証規則とエラー文字列は、`Movie` クラスでのみ指定されています。</span><span class="sxs-lookup"><span data-stu-id="fa742-170">The validation rules and the error strings are specified only in the `Movie` class.</span></span> <span data-ttu-id="fa742-171">これらの検証規則は、`Movie` モデルを編集する Razor ページに自動的に適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-171">These validation rules are automatically applied to Razor Pages that edit the `Movie` model.</span></span>
 
 <span data-ttu-id="fa742-172">検証ロジックの変更が必要な場合は、モデルでのみ変更します。</span><span class="sxs-lookup"><span data-stu-id="fa742-172">When validation logic needs to change, it's done only in the model.</span></span> <span data-ttu-id="fa742-173">検証は常にアプリケーション全体に適用されます (検証ロジックは 1 か所で定義されます)。</span><span class="sxs-lookup"><span data-stu-id="fa742-173">Validation is applied consistently throughout the application (validation logic is defined in one place).</span></span> <span data-ttu-id="fa742-174">検証が 1 か所であることは、コードが整理された状態を保つことを助け、保守と更新を簡単にします。</span><span class="sxs-lookup"><span data-stu-id="fa742-174">Validation in one place helps keep the code clean, and makes it easier to maintain and update.</span></span>
 
@@ -121,7 +121,7 @@ ms.locfileid: "93060730"
 
 <span data-ttu-id="fa742-176">`Movie` クラスを調べます。</span><span class="sxs-lookup"><span data-stu-id="fa742-176">Examine the `Movie` class.</span></span> <span data-ttu-id="fa742-177">`System.ComponentModel.DataAnnotations` 名前空間には、組み込みの検証属性セットに加え、書式設定の属性もあります。</span><span class="sxs-lookup"><span data-stu-id="fa742-177">The `System.ComponentModel.DataAnnotations` namespace provides formatting attributes in addition to the built-in set of validation attributes.</span></span> <span data-ttu-id="fa742-178">`DataType` 属性は、`ReleaseDate` および `Price` プロパティに適用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-178">The `DataType` attribute is applied to the `ReleaseDate` and `Price` properties.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
 <span data-ttu-id="fa742-179">`DataType` 属性は、ビュー エンジンに対して、データの書式設定のヒントのみを提供します (また、URL の場合に `<a>`、電子メールの場合に `<a href="mailto:EmailAddress.com">` などの属性を提供します)。</span><span class="sxs-lookup"><span data-stu-id="fa742-179">The `DataType` attributes only provide hints for the view engine to format the data (and supplies attributes such as `<a>` for URL's and `<a href="mailto:EmailAddress.com">` for email).</span></span> <span data-ttu-id="fa742-180">データの書式を検証するためには、`RegularExpression` 属性を使用してください。</span><span class="sxs-lookup"><span data-stu-id="fa742-180">Use the `RegularExpression` attribute to validate the format of the data.</span></span> <span data-ttu-id="fa742-181">`DataType` 属性は、データベースの組み込み型よりも具体的なデータ型を指定するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-181">The `DataType` attribute is used to specify a data type that's more specific than the database intrinsic type.</span></span> <span data-ttu-id="fa742-182">`DataType` 属性は、検証属性ではありません。</span><span class="sxs-lookup"><span data-stu-id="fa742-182">`DataType` attributes are not validation attributes.</span></span> <span data-ttu-id="fa742-183">サンプル アプリケーションでは、日付のみが表示され、時刻は表示されません。</span><span class="sxs-lookup"><span data-stu-id="fa742-183">In the sample application, only the date is displayed, without time.</span></span>
 
@@ -156,15 +156,15 @@ public DateTime ReleaseDate { get; set; }
 
 <span data-ttu-id="fa742-207">次のコードは、1 行で複数の属性を組み合わせる例です。</span><span class="sxs-lookup"><span data-stu-id="fa742-207">The following code shows combining attributes on one line:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-<span data-ttu-id="fa742-208">[:::no-loc(Razor)::: ページと EF Core の概要](xref:data/ef-rp/intro)に関するページでは、:::no-loc(Razor)::: ページでの EF Core 操作についてより詳しく説明されています。</span><span class="sxs-lookup"><span data-stu-id="fa742-208">[Get started with :::no-loc(Razor)::: Pages and EF Core](xref:data/ef-rp/intro) shows advanced EF Core operations with :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="fa742-208">[Razor ページと EF Core の概要](xref:data/ef-rp/intro)に関するページでは、Razor ページでの EF Core 操作についてより詳しく説明されています。</span><span class="sxs-lookup"><span data-stu-id="fa742-208">[Get started with Razor Pages and EF Core](xref:data/ef-rp/intro) shows advanced EF Core operations with Razor Pages.</span></span>
 
 ### <a name="apply-migrations"></a><span data-ttu-id="fa742-209">移行を適用する</span><span class="sxs-lookup"><span data-stu-id="fa742-209">Apply migrations</span></span>
 
 <span data-ttu-id="fa742-210">クラスに適用された DataAnnotations によって、スキーマが変更されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-210">The DataAnnotations applied to the class changes the schema.</span></span> <span data-ttu-id="fa742-211">たとえば、`Title`フィールドに適用された DataAnnotations は次のようになります。</span><span class="sxs-lookup"><span data-stu-id="fa742-211">For example, the DataAnnotations applied to the `Title` field:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
 
 * <span data-ttu-id="fa742-212">文字数を 60 に制限します。</span><span class="sxs-lookup"><span data-stu-id="fa742-212">Limits the characters to 60.</span></span>
 * <span data-ttu-id="fa742-213">`null` 値を許可しません。</span><span class="sxs-lookup"><span data-stu-id="fa742-213">Doesn't allow a `null` value.</span></span>
@@ -197,7 +197,7 @@ Update-Database
 
 <span data-ttu-id="fa742-220">`Update-Database` では、`New_DataAnnotations` クラスの `Up` メソッドが実行されます。</span><span class="sxs-lookup"><span data-stu-id="fa742-220">`Update-Database` runs the `Up` methods of the `New_DataAnnotations` class.</span></span> <span data-ttu-id="fa742-221">`Up` メソッドを検証します。</span><span class="sxs-lookup"><span data-stu-id="fa742-221">Examine the `Up` method:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
 
 <span data-ttu-id="fa742-222">更新された `Movie` テーブルには、次のスキーマがあります。</span><span class="sxs-lookup"><span data-stu-id="fa742-222">The updated `Movie` table has the following schema:</span></span>
 
@@ -223,7 +223,7 @@ CREATE TABLE [dbo].[Movie] (
 
 <span data-ttu-id="fa742-226">Azure へのデプロイの詳細については、「[チュートリアル: SQL Database を使用して Azure に ASP.NET Core アプリを作成する](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="fa742-226">For information on deploying to Azure, see [Tutorial: Build an ASP.NET Core app in Azure with SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).</span></span>
 
-<span data-ttu-id="fa742-227">このたびは、この :::no-loc(Razor)::: Pages の紹介を最後までお読みいただきありがとうございました。</span><span class="sxs-lookup"><span data-stu-id="fa742-227">Thanks for completing this introduction to :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="fa742-228">このチュートリアルの後は、[:::no-loc(Razor)::: Pages と EF Core の概要](xref:data/ef-rp/intro)に関するページにお進みいただくことをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="fa742-228">[Get started with :::no-loc(Razor)::: Pages and EF Core](xref:data/ef-rp/intro) is an excellent follow up to this tutorial.</span></span>
+<span data-ttu-id="fa742-227">このたびは、この Razor Pages の紹介を最後までお読みいただきありがとうございました。</span><span class="sxs-lookup"><span data-stu-id="fa742-227">Thanks for completing this introduction to Razor Pages.</span></span> <span data-ttu-id="fa742-228">このチュートリアルの後は、[Razor Pages と EF Core の概要](xref:data/ef-rp/intro)に関するページにお進みいただくことをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="fa742-228">[Get started with Razor Pages and EF Core](xref:data/ef-rp/intro) is an excellent follow up to this tutorial.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="fa742-229">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="fa742-229">Additional resources</span></span>
 

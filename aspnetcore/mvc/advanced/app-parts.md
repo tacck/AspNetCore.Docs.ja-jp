@@ -1,21 +1,21 @@
 ---
-title: :::no-loc(Razor):::ASP.NET Core のアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
+title: RazorASP.NET Core のアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 author: rick-anderson
-description: :::no-loc(Razor):::ASP.NET Core のアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
+description: RazorASP.NET Core のアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/extensibility/app-parts
 ms.openlocfilehash: 33deb5ff794982e0c074186bb2abb88344e8a116
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061185"
 ---
-# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a><span data-ttu-id="770bc-103">:::no-loc(Razor):::アプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する</span><span class="sxs-lookup"><span data-stu-id="770bc-103">Share controllers, views, :::no-loc(Razor)::: Pages and more with Application Parts</span></span>
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a><span data-ttu-id="770bc-103">Razorアプリケーションパーツを使用して、コントローラー、ビュー、ページなどを共有する</span><span class="sxs-lookup"><span data-stu-id="770bc-103">Share controllers, views, Razor Pages and more with Application Parts</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,9 +32,9 @@ ms.locfileid: "93061185"
 
 <span data-ttu-id="770bc-105">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="770bc-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="770bc-106">" *アプリケーション パーツ* " は、アプリのリソースを抽象化したものです。</span><span class="sxs-lookup"><span data-stu-id="770bc-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="770bc-107">アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 :::no-loc(Razor)::: ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="770bc-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, :::no-loc(Razor)::: Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="770bc-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> はアプリケーション パーツです。</span><span class="sxs-lookup"><span data-stu-id="770bc-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> is an Application part.</span></span> <span data-ttu-id="770bc-109">`AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。</span><span class="sxs-lookup"><span data-stu-id="770bc-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
+<span data-ttu-id="770bc-106">" *アプリケーション パーツ* " は、アプリのリソースを抽象化したものです。</span><span class="sxs-lookup"><span data-stu-id="770bc-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="770bc-107">アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="770bc-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="770bc-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> はアプリケーション パーツです。</span><span class="sxs-lookup"><span data-stu-id="770bc-108"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> is an Application part.</span></span> <span data-ttu-id="770bc-109">`AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。</span><span class="sxs-lookup"><span data-stu-id="770bc-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-<span data-ttu-id="770bc-110">"[機能プロバイダー](#fp)" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。</span><span class="sxs-lookup"><span data-stu-id="770bc-110">[Feature providers](#fp) work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="770bc-111">アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。</span><span class="sxs-lookup"><span data-stu-id="770bc-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="770bc-112">たとえば、複数のアプリで共通の機能を共有したいとします。</span><span class="sxs-lookup"><span data-stu-id="770bc-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="770bc-113">アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 :::no-loc(Razor)::: ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。</span><span class="sxs-lookup"><span data-stu-id="770bc-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, :::no-loc(Razor)::: Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="770bc-114">複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。</span><span class="sxs-lookup"><span data-stu-id="770bc-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
+<span data-ttu-id="770bc-110">"[機能プロバイダー](#fp)" は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。</span><span class="sxs-lookup"><span data-stu-id="770bc-110">[Feature providers](#fp) work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="770bc-111">アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。</span><span class="sxs-lookup"><span data-stu-id="770bc-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="770bc-112">たとえば、複数のアプリで共通の機能を共有したいとします。</span><span class="sxs-lookup"><span data-stu-id="770bc-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="770bc-113">アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。</span><span class="sxs-lookup"><span data-stu-id="770bc-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="770bc-114">複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。</span><span class="sxs-lookup"><span data-stu-id="770bc-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
 <span data-ttu-id="770bc-115">ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機能を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="770bc-115">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="770bc-116"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> クラスは、アセンブリでバックアップされるアプリケーション パーツを表します。</span><span class="sxs-lookup"><span data-stu-id="770bc-116">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "93061185"
 
 ### <a name="include-views"></a><span data-ttu-id="770bc-125">ビューを含める</span><span class="sxs-lookup"><span data-stu-id="770bc-125">Include views</span></span>
 
-<span data-ttu-id="770bc-126">[ :::no-loc(Razor)::: クラスライブラリ](xref:razor-pages/ui-class)を使用して、アセンブリにビューを含めます。</span><span class="sxs-lookup"><span data-stu-id="770bc-126">Use a [:::no-loc(Razor)::: class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
+<span data-ttu-id="770bc-126">[ Razor クラスライブラリ](xref:razor-pages/ui-class)を使用して、アセンブリにビューを含めます。</span><span class="sxs-lookup"><span data-stu-id="770bc-126">Use a [Razor class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
 
 ### <a name="prevent-loading-resources"></a><span data-ttu-id="770bc-127">リソースの読み込みを防ぐ</span><span class="sxs-lookup"><span data-stu-id="770bc-127">Prevent loading resources</span></span>
 
@@ -61,10 +61,10 @@ ms.locfileid: "93061185"
 <span data-ttu-id="770bc-134">`ApplicationPartManager` には次のパーツが含まれています。</span><span class="sxs-lookup"><span data-stu-id="770bc-134">The `ApplicationPartManager` includes parts for:</span></span>
 
 * <span data-ttu-id="770bc-135">アプリのアセンブリおよび依存アセンブリ。</span><span class="sxs-lookup"><span data-stu-id="770bc-135">The app's assembly and dependent assemblies.</span></span>
-* `Microsoft.AspNetCore.Mvc.ApplicationParts.Compiled:::no-loc(Razor):::AssemblyPart`
-* `Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.RuntimeCompilation`
+* `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
+* `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
 * <span data-ttu-id="770bc-136">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="770bc-136">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
-* <span data-ttu-id="770bc-137">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span><span class="sxs-lookup"><span data-stu-id="770bc-137">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span></span>
+* <span data-ttu-id="770bc-137">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="770bc-137">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
 
 <a name="fp"></a>
 
@@ -73,10 +73,10 @@ ms.locfileid: "93061185"
 <span data-ttu-id="770bc-139">アプリケーション機能プロバイダーはアプリケーション パーツを調べ、これらのパーツの機能を提供します。</span><span class="sxs-lookup"><span data-stu-id="770bc-139">Application feature providers examine application parts and provide features for those parts.</span></span> <span data-ttu-id="770bc-140">次の ASP.NET Core 機能には組み込みの機能プロバイダーがあります。</span><span class="sxs-lookup"><span data-stu-id="770bc-140">There are built-in feature providers for the following ASP.NET Core features:</span></span>
 
 * <xref:Microsoft.AspNetCore.Mvc.Controllers.ControllerFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.TagHelpers.TagHelperFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.Compilation.MetadataReferenceFeatureProvider>
-* <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::.Compilation.ViewsFeatureProvider>
-* <span data-ttu-id="770bc-141">`internal class`[ :::no-loc(Razor)::: CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.:::no-loc(Razor):::/src/ApplicationParts/:::no-loc(Razor):::CompiledItemFeatureProvider.cs#L14)</span><span class="sxs-lookup"><span data-stu-id="770bc-141">`internal class` [:::no-loc(Razor):::CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.:::no-loc(Razor):::/src/ApplicationParts/:::no-loc(Razor):::CompiledItemFeatureProvider.cs#L14)</span></span>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
+* <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
+* <span data-ttu-id="770bc-141">`internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)</span><span class="sxs-lookup"><span data-stu-id="770bc-141">`internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)</span></span>
 
 <span data-ttu-id="770bc-142">機能プロバイダーは <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1> から継承されます。ここで `T` は機能の種類です。</span><span class="sxs-lookup"><span data-stu-id="770bc-142">Feature providers inherit from <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, where `T` is the type of the feature.</span></span> <span data-ttu-id="770bc-143">機能プロバイダーは、前述の機能の種類のいずれについても実装できます。</span><span class="sxs-lookup"><span data-stu-id="770bc-143">Feature providers can be implemented for any of the previously listed feature types.</span></span> <span data-ttu-id="770bc-144">`ApplicationPartManager.FeatureProviders` の機能プロバイダーの順序が実行時の動作に影響することがあります。</span><span class="sxs-lookup"><span data-stu-id="770bc-144">The order of feature providers in the `ApplicationPartManager.FeatureProviders` can impact run time behavior.</span></span> <span data-ttu-id="770bc-145">後から追加されたプロバイダーは、前に追加されたプロバイダーによって行われたアクションに対応できます。</span><span class="sxs-lookup"><span data-stu-id="770bc-145">Later added providers can react to actions taken by earlier added providers.</span></span>
 
@@ -122,9 +122,9 @@ View Components:
 
 <span data-ttu-id="770bc-160">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="770bc-160">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="770bc-161">" *アプリケーション パーツ* " は、アプリのリソースを抽象化したものです。</span><span class="sxs-lookup"><span data-stu-id="770bc-161">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="770bc-162">アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 :::no-loc(Razor)::: ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="770bc-162">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, :::no-loc(Razor)::: Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="770bc-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) はアプリケーション パーツです。</span><span class="sxs-lookup"><span data-stu-id="770bc-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="770bc-164">`AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。</span><span class="sxs-lookup"><span data-stu-id="770bc-164">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
+<span data-ttu-id="770bc-161">" *アプリケーション パーツ* " は、アプリのリソースを抽象化したものです。</span><span class="sxs-lookup"><span data-stu-id="770bc-161">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="770bc-162">アプリケーションパーツを使用すると、コントローラーの探索、コンポーネントの表示、ヘルパー、 Razor ページ、razor コンパイルソースなどの ASP.NET Core を行うことができます。</span><span class="sxs-lookup"><span data-stu-id="770bc-162">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="770bc-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) はアプリケーション パーツです。</span><span class="sxs-lookup"><span data-stu-id="770bc-163">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="770bc-164">`AssemblyPart` はアセンブリ参照をカプセル化して、型とコンパイル参照を公開します。</span><span class="sxs-lookup"><span data-stu-id="770bc-164">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-<span data-ttu-id="770bc-165">" *機能プロバイダー* " は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。</span><span class="sxs-lookup"><span data-stu-id="770bc-165">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="770bc-166">アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。</span><span class="sxs-lookup"><span data-stu-id="770bc-166">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="770bc-167">たとえば、複数のアプリで共通の機能を共有したいとします。</span><span class="sxs-lookup"><span data-stu-id="770bc-167">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="770bc-168">アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 :::no-loc(Razor)::: ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。</span><span class="sxs-lookup"><span data-stu-id="770bc-168">Using Application Parts, you can share an assembly (DLL) containing controllers, views, :::no-loc(Razor)::: Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="770bc-169">複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。</span><span class="sxs-lookup"><span data-stu-id="770bc-169">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
+<span data-ttu-id="770bc-165">" *機能プロバイダー* " は、アプリケーション パーツと連携し、ASP.NET Core アプリの機能を組み込みます。</span><span class="sxs-lookup"><span data-stu-id="770bc-165">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="770bc-166">アプリケーション パーツの主なユース ケースは、アセンブリから ASP.NET Core 機能を検出 (または読み込みを回避) するようにアプリを構成することです。</span><span class="sxs-lookup"><span data-stu-id="770bc-166">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="770bc-167">たとえば、複数のアプリで共通の機能を共有したいとします。</span><span class="sxs-lookup"><span data-stu-id="770bc-167">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="770bc-168">アプリケーションパーツを使用すると、複数のアプリを使用して、コントローラー、ビュー、 Razor ページ、razor コンパイルソース、タグヘルパーなどを含むアセンブリ (DLL) を共有できます。</span><span class="sxs-lookup"><span data-stu-id="770bc-168">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="770bc-169">複数のプロジェクトでコードを複製するよりもアセンブリの共有をお勧めします。</span><span class="sxs-lookup"><span data-stu-id="770bc-169">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
 <span data-ttu-id="770bc-170">ASP.NET Core アプリは <xref:System.Web.WebPages.ApplicationPart> から機能を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="770bc-170">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="770bc-171"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> クラスは、アセンブリでバックアップされるアプリケーション パーツを表します。</span><span class="sxs-lookup"><span data-stu-id="770bc-171">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
@@ -142,7 +142,7 @@ View Components:
 
 ### <a name="include-views"></a><span data-ttu-id="770bc-180">ビューを含める</span><span class="sxs-lookup"><span data-stu-id="770bc-180">Include views</span></span>
 
-<span data-ttu-id="770bc-181">[ :::no-loc(Razor)::: クラスライブラリ](xref:razor-pages/ui-class)を使用して、アセンブリにビューを含めます。</span><span class="sxs-lookup"><span data-stu-id="770bc-181">Use a [:::no-loc(Razor)::: class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
+<span data-ttu-id="770bc-181">[ Razor クラスライブラリ](xref:razor-pages/ui-class)を使用して、アセンブリにビューを含めます。</span><span class="sxs-lookup"><span data-stu-id="770bc-181">Use a [Razor class library](xref:razor-pages/ui-class) to include views in the assembly.</span></span>
 
 ### <a name="prevent-loading-resources"></a><span data-ttu-id="770bc-182">リソースの読み込みを防ぐ</span><span class="sxs-lookup"><span data-stu-id="770bc-182">Prevent loading resources</span></span>
 
@@ -154,7 +154,7 @@ View Components:
 
 * <span data-ttu-id="770bc-191">アプリのアセンブリおよび依存アセンブリ。</span><span class="sxs-lookup"><span data-stu-id="770bc-191">The app's assembly and dependent assemblies.</span></span>
 * <span data-ttu-id="770bc-192">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="770bc-192">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
-* <span data-ttu-id="770bc-193">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span><span class="sxs-lookup"><span data-stu-id="770bc-193">`Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::`.</span></span>
+* <span data-ttu-id="770bc-193">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="770bc-193">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
 
 ## <a name="application-feature-providers"></a><span data-ttu-id="770bc-194">アプリケーション機能プロバイダー</span><span class="sxs-lookup"><span data-stu-id="770bc-194">Application feature providers</span></span>
 

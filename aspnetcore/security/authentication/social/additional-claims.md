@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/30/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/social/additional-claims
 ms.openlocfilehash: 4503291ff887f79b1ad6eacd4e56943ce23335bc
 ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
@@ -78,35 +78,35 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=13-14)]
 
-<span data-ttu-id="39e4e-141">では、 `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> ( `ApplicationUser` ) がを使用してアプリにサインイン <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*> します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-141">In `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="39e4e-142">サインインプロセス中に、で <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> `ApplicationUser` 使用可能なユーザーデータの要求を格納でき <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-142">During the sign in process, the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*>.</span></span>
+<span data-ttu-id="39e4e-141">では、 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` <xref:Microsoft.AspNetCore.Identity.IdentityUser> ( `ApplicationUser` ) がを使用してアプリにサインイン <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-141">In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="39e4e-142">サインインプロセス中に、で <xref:Microsoft.AspNetCore.Identity.UserManager%601> `ApplicationUser` 使用可能なユーザーデータの要求を格納でき <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-142">During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.</span></span>
 
 <span data-ttu-id="39e4e-143">サンプルアプリでは、 `OnPostConfirmationAsync` ( *Account/externallogin. cshtml* ) によって、 `urn:google:locale` `urn:google:picture` `ApplicationUser` 次の要求を含む、サインインしたのロケール () と画像 () の要求が確立 <xref:System.Security.Claims.ClaimTypes.GivenName> されます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-143">In the sample app, `OnPostConfirmationAsync` ( *Account/ExternalLogin.cshtml.cs* ) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:</span></span>
 
-[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
+[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-<span data-ttu-id="39e4e-144">既定では、ユーザーの要求は認証に格納され :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-144">By default, a user's claims are stored in the authentication :::no-loc(cookie):::.</span></span> <span data-ttu-id="39e4e-145">認証 :::no-loc(cookie)::: が大きすぎると、次の理由により、アプリでエラーが発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="39e4e-145">If the authentication :::no-loc(cookie)::: is too large, it can cause the app to fail because:</span></span>
+<span data-ttu-id="39e4e-144">既定では、ユーザーの要求は認証に格納され cookie ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-144">By default, a user's claims are stored in the authentication cookie.</span></span> <span data-ttu-id="39e4e-145">認証 cookie が大きすぎると、次の理由により、アプリでエラーが発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="39e4e-145">If the authentication cookie is too large, it can cause the app to fail because:</span></span>
 
-* <span data-ttu-id="39e4e-146">ブラウザーは、 :::no-loc(cookie)::: ヘッダーが長すぎることを検出します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-146">The browser detects that the :::no-loc(cookie)::: header is too long.</span></span>
+* <span data-ttu-id="39e4e-146">ブラウザーは、 cookie ヘッダーが長すぎることを検出します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-146">The browser detects that the cookie header is too long.</span></span>
 * <span data-ttu-id="39e4e-147">要求の全体的なサイズが大きすぎます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-147">The overall size of the request is too large.</span></span>
 
 <span data-ttu-id="39e4e-148">ユーザーの要求を処理するために大量のユーザーデータが必要な場合は、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="39e4e-148">If a large amount of user data is required for processing user requests:</span></span>
 
 * <span data-ttu-id="39e4e-149">要求処理のユーザー要求の数とサイズは、アプリで必要なもののみに制限します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-149">Limit the number and size of user claims for request processing to only what the app requires.</span></span>
-* <span data-ttu-id="39e4e-150">認証ミドルウェアのカスタムを使用し <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> て、 :::no-loc(Cookie)::: <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> 要求間で id を格納します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-150">Use a custom <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> for the :::no-loc(Cookie)::: Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="39e4e-151">小さいセッション識別子キーをクライアントに送信するだけで、サーバー上の大量の id 情報を保持します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-151">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
+* <span data-ttu-id="39e4e-150">認証ミドルウェアのカスタムを使用し <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> て、 Cookie <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> 要求間で id を格納します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-150">Use a custom <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> for the Cookie Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="39e4e-151">小さいセッション識別子キーをクライアントに送信するだけで、サーバー上の大量の id 情報を保持します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-151">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
 
 ## <a name="save-the-access-token"></a><span data-ttu-id="39e4e-152">アクセストークンを保存する</span><span class="sxs-lookup"><span data-stu-id="39e4e-152">Save the access token</span></span>
 
-<span data-ttu-id="39e4e-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="39e4e-154">`SaveTokens` は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-154">`SaveTokens` is set to `false` by default to reduce the size of the final authentication :::no-loc(cookie):::.</span></span>
+<span data-ttu-id="39e4e-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-153"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="39e4e-154">`SaveTokens` は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され cookie ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-154">`SaveTokens` is set to `false` by default to reduce the size of the final authentication cookie.</span></span>
 
 <span data-ttu-id="39e4e-155">サンプルアプリでは、の値をに設定し `SaveTokens` `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-155">The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>:</span></span>
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=15)]
 
-<span data-ttu-id="39e4e-156">を実行するときに、 `OnPostConfirmationAsync` の外部プロバイダーからアクセストークン ([Externallogininfo. authenticationtokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) をに格納 `ApplicationUser` `AuthenticationProperties` します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-156">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
+<span data-ttu-id="39e4e-156">を実行するときに、 `OnPostConfirmationAsync` の外部プロバイダーからアクセストークン ([Externallogininfo. authenticationtokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) をに格納 `ApplicationUser` `AuthenticationProperties` します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-156">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
 
 <span data-ttu-id="39e4e-157">サンプルアプリでは、アクセストークン `OnPostConfirmationAsync` (新しいユーザー登録) と `OnGetCallbackAsync` (以前に登録されたユーザー) を *Account/externallogin. cshtml. cs* に保存します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-157">The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs* :</span></span>
 
-[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
+[!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
 ## <a name="how-to-add-additional-custom-tokens"></a><span data-ttu-id="39e4e-158">カスタムトークンを追加する方法</span><span class="sxs-lookup"><span data-stu-id="39e4e-158">How to add additional custom tokens</span></span>
 
@@ -135,7 +135,7 @@ http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
     9b342344f-7aab-43c2-1ac1-ba75912ca999
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
     someone@gmail.com
-AspNet.:::no-loc(Identity):::.SecurityStamp
+AspNet.Identity.SecurityStamp
     7D4312MOWRYYBFI1KXRPHGOSTBVWSFDE
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
     Judy
@@ -218,35 +218,35 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=13-14)]
 
-<span data-ttu-id="39e4e-206">では、 `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> ( `ApplicationUser` ) がを使用してアプリにサインイン <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*> します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-206">In `Microsoft.AspNetCore.:::no-loc(Identity):::.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.:::no-loc(Identity):::User> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="39e4e-207">サインインプロセス中に、で <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> `ApplicationUser` 使用可能なユーザーデータの要求を格納でき <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-207">During the sign in process, the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.Principal*>.</span></span>
+<span data-ttu-id="39e4e-206">では、 `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync` <xref:Microsoft.AspNetCore.Identity.IdentityUser> ( `ApplicationUser` ) がを使用してアプリにサインイン <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*> します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-206">In `Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal.ExternalLoginModel.OnPostConfirmationAsync`, an <xref:Microsoft.AspNetCore.Identity.IdentityUser> (`ApplicationUser`) is signed into the app with <xref:Microsoft.AspNetCore.Identity.SignInManager%601.SignInAsync*>.</span></span> <span data-ttu-id="39e4e-207">サインインプロセス中に、で <xref:Microsoft.AspNetCore.Identity.UserManager%601> `ApplicationUser` 使用可能なユーザーデータの要求を格納でき <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-207">During the sign in process, the <xref:Microsoft.AspNetCore.Identity.UserManager%601> can store an `ApplicationUser` claims for user data available from the <xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.Principal*>.</span></span>
 
 <span data-ttu-id="39e4e-208">サンプルアプリでは、 `OnPostConfirmationAsync` ( *Account/externallogin. cshtml* ) によって、 `urn:google:locale` `urn:google:picture` `ApplicationUser` 次の要求を含む、サインインしたのロケール () と画像 () の要求が確立 <xref:System.Security.Claims.ClaimTypes.GivenName> されます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-208">In the sample app, `OnPostConfirmationAsync` ( *Account/ExternalLogin.cshtml.cs* ) establishes the locale (`urn:google:locale`) and picture (`urn:google:picture`) claims for the signed in `ApplicationUser`, including a claim for <xref:System.Security.Claims.ClaimTypes.GivenName>:</span></span>
 
-[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
+[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-<span data-ttu-id="39e4e-209">既定では、ユーザーの要求は認証に格納され :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-209">By default, a user's claims are stored in the authentication :::no-loc(cookie):::.</span></span> <span data-ttu-id="39e4e-210">認証 :::no-loc(cookie)::: が大きすぎると、次の理由により、アプリでエラーが発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="39e4e-210">If the authentication :::no-loc(cookie)::: is too large, it can cause the app to fail because:</span></span>
+<span data-ttu-id="39e4e-209">既定では、ユーザーの要求は認証に格納され cookie ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-209">By default, a user's claims are stored in the authentication cookie.</span></span> <span data-ttu-id="39e4e-210">認証 cookie が大きすぎると、次の理由により、アプリでエラーが発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="39e4e-210">If the authentication cookie is too large, it can cause the app to fail because:</span></span>
 
-* <span data-ttu-id="39e4e-211">ブラウザーは、 :::no-loc(cookie)::: ヘッダーが長すぎることを検出します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-211">The browser detects that the :::no-loc(cookie)::: header is too long.</span></span>
+* <span data-ttu-id="39e4e-211">ブラウザーは、 cookie ヘッダーが長すぎることを検出します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-211">The browser detects that the cookie header is too long.</span></span>
 * <span data-ttu-id="39e4e-212">要求の全体的なサイズが大きすぎます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-212">The overall size of the request is too large.</span></span>
 
 <span data-ttu-id="39e4e-213">ユーザーの要求を処理するために大量のユーザーデータが必要な場合は、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="39e4e-213">If a large amount of user data is required for processing user requests:</span></span>
 
 * <span data-ttu-id="39e4e-214">要求処理のユーザー要求の数とサイズは、アプリで必要なもののみに制限します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-214">Limit the number and size of user claims for request processing to only what the app requires.</span></span>
-* <span data-ttu-id="39e4e-215">認証ミドルウェアのカスタムを使用し <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> て、 :::no-loc(Cookie)::: <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> 要求間で id を格納します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-215">Use a custom <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.ITicketStore> for the :::no-loc(Cookie)::: Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s.:::no-loc(Cookie):::AuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="39e4e-216">小さいセッション識別子キーをクライアントに送信するだけで、サーバー上の大量の id 情報を保持します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-216">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
+* <span data-ttu-id="39e4e-215">認証ミドルウェアのカスタムを使用し <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> て、 Cookie <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> 要求間で id を格納します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-215">Use a custom <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore> for the Cookie Authentication Middleware's <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> to store identity across requests.</span></span> <span data-ttu-id="39e4e-216">小さいセッション識別子キーをクライアントに送信するだけで、サーバー上の大量の id 情報を保持します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-216">Preserve large quantities of identity information on the server while only sending a small session identifier key to the client.</span></span>
 
 ## <a name="save-the-access-token"></a><span data-ttu-id="39e4e-217">アクセストークンを保存する</span><span class="sxs-lookup"><span data-stu-id="39e4e-217">Save the access token</span></span>
 
-<span data-ttu-id="39e4e-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="39e4e-219">`SaveTokens` は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-219">`SaveTokens` is set to `false` by default to reduce the size of the final authentication :::no-loc(cookie):::.</span></span>
+<span data-ttu-id="39e4e-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> 承認が成功した後に、アクセストークンと更新トークンをに格納するかどうかを定義し <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-218"><xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*> defines whether access and refresh tokens should be stored in the <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> after a successful authorization.</span></span> <span data-ttu-id="39e4e-219">`SaveTokens` は `false` 、最終的な認証のサイズを小さくするために、既定でに設定され cookie ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-219">`SaveTokens` is set to `false` by default to reduce the size of the final authentication cookie.</span></span>
 
 <span data-ttu-id="39e4e-220">サンプルアプリでは、の値をに設定し `SaveTokens` `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="39e4e-220">The sample app sets the value of `SaveTokens` to `true` in <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>:</span></span>
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Startup.cs?name=snippet_AddGoogle&highlight=15)]
 
-<span data-ttu-id="39e4e-221">を実行するときに、 `OnPostConfirmationAsync` の外部プロバイダーからアクセストークン ([Externallogininfo. authenticationtokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) をに格納 `ApplicationUser` `AuthenticationProperties` します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-221">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.:::no-loc(Identity):::.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
+<span data-ttu-id="39e4e-221">を実行するときに、 `OnPostConfirmationAsync` の外部プロバイダーからアクセストークン ([Externallogininfo. authenticationtokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) をに格納 `ApplicationUser` `AuthenticationProperties` します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-221">When `OnPostConfirmationAsync` executes, store the access token ([ExternalLoginInfo.AuthenticationTokens](xref:Microsoft.AspNetCore.Identity.ExternalLoginInfo.AuthenticationTokens*)) from the external provider in the `ApplicationUser`'s `AuthenticationProperties`.</span></span>
 
 <span data-ttu-id="39e4e-222">サンプルアプリでは、アクセストークン `OnPostConfirmationAsync` (新しいユーザー登録) と `OnGetCallbackAsync` (以前に登録されたユーザー) を *Account/externallogin. cshtml. cs* に保存します。</span><span class="sxs-lookup"><span data-stu-id="39e4e-222">The sample app saves the access token in `OnPostConfirmationAsync` (new user registration) and `OnGetCallbackAsync` (previously registered user) in *Account/ExternalLogin.cshtml.cs* :</span></span>
 
-[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/:::no-loc(Identity):::/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
+[!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=54-56)]
 
 ## <a name="how-to-add-additional-custom-tokens"></a><span data-ttu-id="39e4e-223">カスタムトークンを追加する方法</span><span class="sxs-lookup"><span data-stu-id="39e4e-223">How to add additional custom tokens</span></span>
 
@@ -275,7 +275,7 @@ http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
     9b342344f-7aab-43c2-1ac1-ba75912ca999
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
     someone@gmail.com
-AspNet.:::no-loc(Identity):::.SecurityStamp
+AspNet.Identity.SecurityStamp
     7D4312MOWRYYBFI1KXRPHGOSTBVWSFDE
 http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
     Judy

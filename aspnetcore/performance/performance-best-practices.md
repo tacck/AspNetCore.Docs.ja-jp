@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/performance-best-practices
 ms.openlocfilehash: a3fc398569fafefc0b4634e80433a5d4e0e1b4ff
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -55,7 +55,7 @@ ms.locfileid: "93061003"
 
 * <span data-ttu-id="31adc-126">[ホットコードパス](#understand-hot-code-paths)を非同期にします。</span><span class="sxs-lookup"><span data-stu-id="31adc-126">Make [hot code paths](#understand-hot-code-paths) asynchronous.</span></span>
 * <span data-ttu-id="31adc-127">非同期 API が使用可能な場合は、データアクセス、i/o、長時間実行される操作 Api を非同期に呼び出します。</span><span class="sxs-lookup"><span data-stu-id="31adc-127">Call data access, I/O, and long-running operations APIs asynchronously if an asynchronous API is available.</span></span> <span data-ttu-id="31adc-128">同期 API を非同期にするには、Run **を使用しないでください** [。](/dotnet/api/system.threading.tasks.task.run)</span><span class="sxs-lookup"><span data-stu-id="31adc-128">Do **not** use [Task.Run](/dotnet/api/system.threading.tasks.task.run) to make a synchronous API asynchronous.</span></span>
-* <span data-ttu-id="31adc-129">コントローラー/ :::no-loc(Razor)::: ページのアクションを非同期にします。</span><span class="sxs-lookup"><span data-stu-id="31adc-129">Make controller/:::no-loc(Razor)::: Page actions asynchronous.</span></span> <span data-ttu-id="31adc-130">非同期 [/await](/dotnet/csharp/programming-guide/concepts/async/) パターンを活用するために、呼び出し履歴全体が非同期になります。</span><span class="sxs-lookup"><span data-stu-id="31adc-130">The entire call stack is asynchronous in order to benefit from [async/await](/dotnet/csharp/programming-guide/concepts/async/) patterns.</span></span>
+* <span data-ttu-id="31adc-129">コントローラー/ Razor ページのアクションを非同期にします。</span><span class="sxs-lookup"><span data-stu-id="31adc-129">Make controller/Razor Page actions asynchronous.</span></span> <span data-ttu-id="31adc-130">非同期 [/await](/dotnet/csharp/programming-guide/concepts/async/) パターンを活用するために、呼び出し履歴全体が非同期になります。</span><span class="sxs-lookup"><span data-stu-id="31adc-130">The entire call stack is asynchronous in order to benefit from [async/await](/dotnet/csharp/programming-guide/concepts/async/) patterns.</span></span>
 
 <span data-ttu-id="31adc-131">[Perfview](https://github.com/Microsoft/perfview)などのプロファイラーを使用して、[スレッドプール](/windows/desktop/procthread/thread-pools)に頻繁に追加されるスレッドを見つけることができます。</span><span class="sxs-lookup"><span data-stu-id="31adc-131">A profiler, such as [PerfView](https://github.com/Microsoft/perfview), can be used to find threads frequently added to the [Thread Pool](/windows/desktop/procthread/thread-pools).</span></span> <span data-ttu-id="31adc-132">イベントは、スレッド `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` プールに追加されたスレッドを示します。</span><span class="sxs-lookup"><span data-stu-id="31adc-132">The `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` event indicates a thread added to the thread pool.</span></span> <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
@@ -136,7 +136,7 @@ ms.locfileid: "93061003"
 
 * <span data-ttu-id="31adc-208">通常の HTTP 要求処理の一部として、長時間実行されるタスクが完了するまで待機しない **で** ください。</span><span class="sxs-lookup"><span data-stu-id="31adc-208">**Do not** wait for long-running tasks to complete as part of ordinary HTTP request processing.</span></span>
 * <span data-ttu-id="31adc-209">[バックグラウンドサービス](xref:fundamentals/host/hosted-services)で長時間実行される要求や、 [Azure 関数](/azure/azure-functions/)を使用したアウトプロセスを処理すること **を検討してください。**</span><span class="sxs-lookup"><span data-stu-id="31adc-209">**Do** consider handling long-running requests with [background services](xref:fundamentals/host/hosted-services) or out of process with an [Azure Function](/azure/azure-functions/).</span></span> <span data-ttu-id="31adc-210">特に、CPU を集中的に使用するタスクには、アウトプロセスの完了が役立ちます。</span><span class="sxs-lookup"><span data-stu-id="31adc-210">Completing work out-of-process is especially beneficial for CPU-intensive tasks.</span></span>
-* <span data-ttu-id="31adc-211">クライアントとの非同期通信には、などのリアルタイム通信オプション **を使用し** [:::no-loc(SignalR):::](xref:signalr/introduction) ます。</span><span class="sxs-lookup"><span data-stu-id="31adc-211">**Do** use real-time communication options, such as [:::no-loc(SignalR):::](xref:signalr/introduction), to communicate with clients asynchronously.</span></span>
+* <span data-ttu-id="31adc-211">クライアントとの非同期通信には、などのリアルタイム通信オプション **を使用し** [SignalR](xref:signalr/introduction) ます。</span><span class="sxs-lookup"><span data-stu-id="31adc-211">**Do** use real-time communication options, such as [SignalR](xref:signalr/introduction), to communicate with clients asynchronously.</span></span>
 
 ## <a name="minify-client-assets"></a><span data-ttu-id="31adc-212">クライアント資産の縮小</span><span class="sxs-lookup"><span data-stu-id="31adc-212">Minify client assets</span></span>
 

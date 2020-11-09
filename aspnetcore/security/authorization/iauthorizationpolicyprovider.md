@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authorization/iauthorizationpolicyprovider
 ms.openlocfilehash: 0f6f628cee0623c21a2a93aa11470005f8c78c58
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -104,7 +104,7 @@ public IActionResult RequiresMinimumAge10()
 
 * <span data-ttu-id="1b9c4-143">ポリシー名から age を解析しています。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-143">Parsing the age from the policy name.</span></span>
 * <span data-ttu-id="1b9c4-144">を使用して `AuthorizationPolicyBuilder` 新しいを作成する `AuthorizationPolicy`</span><span class="sxs-lookup"><span data-stu-id="1b9c4-144">Using `AuthorizationPolicyBuilder` to create a new `AuthorizationPolicy`</span></span>
-* <span data-ttu-id="1b9c4-145">次の例では、ユーザーがによって認証されることを前提として :::no-loc(cookie)::: います。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-145">In this and following examples it will be assumed that the user is authenticated via a :::no-loc(cookie):::.</span></span> <span data-ttu-id="1b9c4-146">は、 `AuthorizationPolicyBuilder` 少なくとも1つの認証スキーム名を使用して構築するか、常に成功する必要があります。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-146">The `AuthorizationPolicyBuilder` should either be constructed with at least one authorization scheme name or always succeed.</span></span> <span data-ttu-id="1b9c4-147">そうしないと、ユーザーにチャレンジを提供する方法に関する情報はなく、例外がスローされます。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-147">Otherwise there is no information on how to provide a challenge to the user and an exception will be thrown.</span></span>
+* <span data-ttu-id="1b9c4-145">次の例では、ユーザーがによって認証されることを前提として cookie います。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-145">In this and following examples it will be assumed that the user is authenticated via a cookie.</span></span> <span data-ttu-id="1b9c4-146">は、 `AuthorizationPolicyBuilder` 少なくとも1つの認証スキーム名を使用して構築するか、常に成功する必要があります。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-146">The `AuthorizationPolicyBuilder` should either be constructed with at least one authorization scheme name or always succeed.</span></span> <span data-ttu-id="1b9c4-147">そうしないと、ユーザーにチャレンジを提供する方法に関する情報はなく、例外がスローされます。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-147">Otherwise there is no information on how to provide a challenge to the user and an exception will be thrown.</span></span>
 * <span data-ttu-id="1b9c4-148">の年齢に基づいてポリシーに要件を追加 `AuthorizationPolicyBuilder.AddRequirements` します。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-148">Adding requirements to the policy based on the age with `AuthorizationPolicyBuilder.AddRequirements`.</span></span> <span data-ttu-id="1b9c4-149">他のシナリオでは、代わりに、、またはを使用することもでき `RequireClaim` `RequireRole` `RequireUserName` ます。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-149">In other scenarios, you might use `RequireClaim`, `RequireRole`, or `RequireUserName` instead.</span></span>
 
 ```csharp
@@ -121,7 +121,7 @@ internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
         if (policyName.StartsWith(POLICY_PREFIX, StringComparison.OrdinalIgnoreCase) &&
             int.TryParse(policyName.Substring(POLICY_PREFIX.Length), out var age))
         {
-            var policy = new AuthorizationPolicyBuilder(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme);
+            var policy = new AuthorizationPolicyBuilder(CookieAuthenticationDefaults.AuthenticationScheme);
             policy.AddRequirements(new MinimumAgeRequirement(age));
             return Task.FromResult(policy.Build());
         }
@@ -168,7 +168,7 @@ return BackupPolicyProvider.GetPolicyAsync(policyName);
 
 ```csharp
 public Task<AuthorizationPolicy> GetDefaultPolicyAsync() => 
-    Task.FromResult(new AuthorizationPolicyBuilder(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build());
+    Task.FromResult(new AuthorizationPolicyBuilder(CookieAuthenticationDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build());
 ```
 
 <span data-ttu-id="1b9c4-162">カスタムのすべての側面と同様に、必要に応じ `IAuthorizationPolicyProvider` てこれをカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-162">As with all aspects of a custom `IAuthorizationPolicyProvider`, you can customize this, as needed.</span></span> <span data-ttu-id="1b9c4-163">場合によっては、フォールバックから既定のポリシーを取得することが望ましい場合があり `IAuthorizationPolicyProvider` ます。</span><span class="sxs-lookup"><span data-stu-id="1b9c4-163">In some cases, it may be desirable to retrieve the default policy from a fallback `IAuthorizationPolicyProvider`.</span></span>

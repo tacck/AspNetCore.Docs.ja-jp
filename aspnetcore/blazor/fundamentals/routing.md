@@ -1,5 +1,5 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: のルーティング'
+title: 'ASP.NET Core Blazor のルーティング'
 author: guardrex
 description: アプリで要求をルーティングする方法と、NavLink コンポーネントについて説明します。
 monikerRange: '>= aspnetcore-3.1'
@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/02/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/fundamentals/routing
 ms.openlocfilehash: 5898059d83576cd0d2af15ad61bc399cbfbe0e99
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,21 +26,21 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055855"
 ---
-# <a name="aspnet-core-no-locblazor-routing"></a><span data-ttu-id="f1d2d-103">ASP.NET Core :::no-loc(Blazor)::: のルーティング</span><span class="sxs-lookup"><span data-stu-id="f1d2d-103">ASP.NET Core :::no-loc(Blazor)::: routing</span></span>
+# <a name="aspnet-core-no-locblazor-routing"></a><span data-ttu-id="f1d2d-103">ASP.NET Core Blazor のルーティング</span><span class="sxs-lookup"><span data-stu-id="f1d2d-103">ASP.NET Core Blazor routing</span></span>
 
 <span data-ttu-id="f1d2d-104">作成者: [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="f1d2d-104">By [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="f1d2d-105">:::no-loc(Blazor)::: アプリで、要求をルーティングする方法と、<xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントを使用してナビゲーション リンクを作成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-105">Learn how to route requests and how to use the <xref:Microsoft.AspNetCore.Components.Routing.NavLink> component to create navigation links in :::no-loc(Blazor)::: apps.</span></span>
+<span data-ttu-id="f1d2d-105">Blazor アプリで、要求をルーティングする方法と、<xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントを使用してナビゲーション リンクを作成する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-105">Learn how to route requests and how to use the <xref:Microsoft.AspNetCore.Components.Routing.NavLink> component to create navigation links in Blazor apps.</span></span>
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a><span data-ttu-id="f1d2d-106">ASP.NET Core エンドポイントのルーティングの統合</span><span class="sxs-lookup"><span data-stu-id="f1d2d-106">ASP.NET Core endpoint routing integration</span></span>
 
-<span data-ttu-id="f1d2d-107">:::no-loc(Blazor Server)::: は [ASP.NET Core エンドポイントのルーティング](xref:fundamentals/routing)に統合されています。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-107">:::no-loc(Blazor Server)::: is integrated into [ASP.NET Core Endpoint Routing](xref:fundamentals/routing).</span></span> <span data-ttu-id="f1d2d-108">ASP.NET Core アプリは、`Startup.Configure` で <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.Map:::no-loc(Blazor):::Hub%2A> を使用して、対話型コンポーネントの着信接続を受け入れるように構成します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-108">An ASP.NET Core app is configured to accept incoming connections for interactive components with <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.Map:::no-loc(Blazor):::Hub%2A> in `Startup.Configure`:</span></span>
+<span data-ttu-id="f1d2d-107">Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref:fundamentals/routing)に統合されています。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-107">Blazor Server is integrated into [ASP.NET Core Endpoint Routing](xref:fundamentals/routing).</span></span> <span data-ttu-id="f1d2d-108">ASP.NET Core アプリは、`Startup.Configure` で <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> を使用して、対話型コンポーネントの着信接続を受け入れるように構成します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-108">An ASP.NET Core app is configured to accept incoming connections for interactive components with <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> in `Startup.Configure`:</span></span>
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-<span data-ttu-id="f1d2d-109">最も一般的な構成は、すべての要求を :::no-loc(Razor)::: ページにルーティングすることです。これは、:::no-loc(Blazor Server)::: アプリのサーバー側部分のホストとして機能します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-109">The most typical configuration is to route all requests to a :::no-loc(Razor)::: page, which acts as the host for the server-side part of the :::no-loc(Blazor Server)::: app.</span></span> <span data-ttu-id="f1d2d-110">通常、 *ホスト* ページは、`_Host.cshtml` という名前になります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-110">By convention, the *host* page is usually named `_Host.cshtml`.</span></span> <span data-ttu-id="f1d2d-111">ホスト ファイルに指定されるルートは、ルート照合で低い優先順位で動作するため、 *フォールバック ルート* と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-111">The route specified in the host file is called a *fallback route* because it operates with a low priority in route matching.</span></span> <span data-ttu-id="f1d2d-112">フォールバック ルートは、他のルートが一致しない場合に考慮されます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-112">The fallback route is considered when other routes don't match.</span></span> <span data-ttu-id="f1d2d-113">これにより、:::no-loc(Blazor Server)::: アプリと干渉することなく、他のコントローラーやページをアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-113">This allows the app to use others controllers and pages without interfering with the :::no-loc(Blazor Server)::: app.</span></span>
+<span data-ttu-id="f1d2d-109">最も一般的な構成は、すべての要求を Razor ページにルーティングすることです。これは、Blazor Server アプリのサーバー側部分のホストとして機能します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-109">The most typical configuration is to route all requests to a Razor page, which acts as the host for the server-side part of the Blazor Server app.</span></span> <span data-ttu-id="f1d2d-110">通常、 *ホスト* ページは、`_Host.cshtml` という名前になります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-110">By convention, the *host* page is usually named `_Host.cshtml`.</span></span> <span data-ttu-id="f1d2d-111">ホスト ファイルに指定されるルートは、ルート照合で低い優先順位で動作するため、 *フォールバック ルート* と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-111">The route specified in the host file is called a *fallback route* because it operates with a low priority in route matching.</span></span> <span data-ttu-id="f1d2d-112">フォールバック ルートは、他のルートが一致しない場合に考慮されます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-112">The fallback route is considered when other routes don't match.</span></span> <span data-ttu-id="f1d2d-113">これにより、Blazor Server アプリと干渉することなく、他のコントローラーやページをアプリで使用できます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-113">This allows the app to use others controllers and pages without interfering with the Blazor Server app.</span></span>
 
-<span data-ttu-id="f1d2d-114">ルート以外の URL のサーバー ホスト用に <xref:Microsoft.AspNetCore.Builder.:::no-loc(Razor):::PagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> を構成する方法の詳細については、<xref:blazor/host-and-deploy/index#app-base-path> をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-114">For information on configuring <xref:Microsoft.AspNetCore.Builder.:::no-loc(Razor):::PagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> for non-root URL server hosting, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
+<span data-ttu-id="f1d2d-114">ルート以外の URL のサーバー ホスト用に <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> を構成する方法の詳細については、<xref:blazor/host-and-deploy/index#app-base-path> をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-114">For information on configuring <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> for non-root URL server hosting, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
 
 ## <a name="route-templates"></a><span data-ttu-id="f1d2d-115">ルート テンプレート</span><span class="sxs-lookup"><span data-stu-id="f1d2d-115">Route templates</span></span>
 
@@ -64,19 +64,19 @@ ms.locfileid: "93055855"
 * <span data-ttu-id="f1d2d-120"><xref:Microsoft.AspNetCore.Components.Routing.Router> から、必要なパラメーターと共に <xref:Microsoft.AspNetCore.Components.RouteData> を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-120">Receives the <xref:Microsoft.AspNetCore.Components.RouteData> from the <xref:Microsoft.AspNetCore.Components.Routing.Router> along with any desired parameters.</span></span>
 * <span data-ttu-id="f1d2d-121">指定されたパラメーターを使用して、指定されたコンポーネントを、そのレイアウト (または任意の既定のレイアウト) でレンダリングします。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-121">Renders the specified component with its layout (or an optional default layout) using the specified parameters.</span></span>
 
-<span data-ttu-id="f1d2d-122">必要に応じて、レイアウト クラスで <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> パラメーターを指定して、レイアウトを指定しないコンポーネントに使用できます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-122">You can optionally specify a <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> parameter with a layout class to use for components that don't specify a layout.</span></span> <span data-ttu-id="f1d2d-123">既定の :::no-loc(Blazor)::: テンプレートでは、`MainLayout` コンポーネントを指定しています。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-123">The default :::no-loc(Blazor)::: templates specify the `MainLayout` component.</span></span> <span data-ttu-id="f1d2d-124">`MainLayout.razor` はテンプレート プロジェクトの `Shared` フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-124">`MainLayout.razor` is in the template project's `Shared` folder.</span></span> <span data-ttu-id="f1d2d-125">レイアウトの詳細については、「<xref:blazor/layouts>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-125">For more information on layouts, see <xref:blazor/layouts>.</span></span>
+<span data-ttu-id="f1d2d-122">必要に応じて、レイアウト クラスで <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> パラメーターを指定して、レイアウトを指定しないコンポーネントに使用できます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-122">You can optionally specify a <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> parameter with a layout class to use for components that don't specify a layout.</span></span> <span data-ttu-id="f1d2d-123">既定の Blazor テンプレートでは、`MainLayout` コンポーネントを指定しています。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-123">The default Blazor templates specify the `MainLayout` component.</span></span> <span data-ttu-id="f1d2d-124">`MainLayout.razor` はテンプレート プロジェクトの `Shared` フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-124">`MainLayout.razor` is in the template project's `Shared` folder.</span></span> <span data-ttu-id="f1d2d-125">レイアウトの詳細については、「<xref:blazor/layouts>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-125">For more information on layouts, see <xref:blazor/layouts>.</span></span>
 
-<span data-ttu-id="f1d2d-126">コンポーネントには、複数のルート テンプレートを適用できます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-126">Multiple route templates can be applied to a component.</span></span> <span data-ttu-id="f1d2d-127">次のコンポーネントは、`/:::no-loc(Blazor):::Route` と `/Different:::no-loc(Blazor):::Route` に対する要求に応答します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-127">The following component responds to requests for `/:::no-loc(Blazor):::Route` and `/Different:::no-loc(Blazor):::Route`:</span></span>
+<span data-ttu-id="f1d2d-126">コンポーネントには、複数のルート テンプレートを適用できます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-126">Multiple route templates can be applied to a component.</span></span> <span data-ttu-id="f1d2d-127">次のコンポーネントは、`/BlazorRoute` と `/DifferentBlazorRoute` に対する要求に応答します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-127">The following component responds to requests for `/BlazorRoute` and `/DifferentBlazorRoute`:</span></span>
 
 ```razor
-@page "/:::no-loc(Blazor):::Route"
-@page "/Different:::no-loc(Blazor):::Route"
+@page "/BlazorRoute"
+@page "/DifferentBlazorRoute"
 
-<h1>:::no-loc(Blazor)::: routing</h1>
+<h1>Blazor routing</h1>
 ```
 
 > [!IMPORTANT]
-> <span data-ttu-id="f1d2d-128">URL が正しく解決されるように、アプリでは、`href` 属性に指定されているアプリのベース パス (`<base href="/">`) を使用して、その `wwwroot/index.html` ファイル (:::no-loc(Blazor WebAssembly):::) または `Pages/_Host.cshtml` ファイル (:::no-loc(Blazor Server):::) に `<base>` タグを含める必要があります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-128">For URLs to resolve correctly, the app must include a `<base>` tag in its `wwwroot/index.html` file (:::no-loc(Blazor WebAssembly):::) or `Pages/_Host.cshtml` file (:::no-loc(Blazor Server):::) with the app base path specified in the `href` attribute (`<base href="/">`).</span></span> <span data-ttu-id="f1d2d-129">詳細については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-129">For more information, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
+> <span data-ttu-id="f1d2d-128">URL が正しく解決されるように、アプリでは、`href` 属性に指定されているアプリのベース パス (`<base href="/">`) を使用して、その `wwwroot/index.html` ファイル (Blazor WebAssembly) または `Pages/_Host.cshtml` ファイル (Blazor Server) に `<base>` タグを含める必要があります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-128">For URLs to resolve correctly, the app must include a `<base>` tag in its `wwwroot/index.html` file (Blazor WebAssembly) or `Pages/_Host.cshtml` file (Blazor Server) with the app base path specified in the `href` attribute (`<base href="/">`).</span></span> <span data-ttu-id="f1d2d-129">詳細については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-129">For more information, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a><span data-ttu-id="f1d2d-130">コンテンツが見つからないときにカスタム コンテンツを提供する</span><span class="sxs-lookup"><span data-stu-id="f1d2d-130">Provide custom content when content isn't found</span></span>
 
@@ -118,7 +118,7 @@ ms.locfileid: "93055855"
 @page "/RouteParameter"
 @page "/RouteParameter/{text}"
 
-<h1>:::no-loc(Blazor)::: is @Text!</h1>
+<h1>Blazor is @Text!</h1>
 
 @code {
     [Parameter]
@@ -162,7 +162,7 @@ ms.locfileid: "93055855"
 
 ### <a name="routing-with-urls-that-contain-dots"></a><span data-ttu-id="f1d2d-177">ドットを含む URL によるルーティング</span><span class="sxs-lookup"><span data-stu-id="f1d2d-177">Routing with URLs that contain dots</span></span>
 
-<span data-ttu-id="f1d2d-178">ホストされている :::no-loc(Blazor WebAssembly)::: および :::no-loc(Blazor Server)::: アプリの場合、サーバー側の既定のルート テンプレートでは、ファイルが要求されているドット (`.`) が要求 URL の最後のセグメントに含まれていると想定されます (例: `https://localhost.com:5001/example/some.thing`)。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-178">For hosted :::no-loc(Blazor WebAssembly)::: and :::no-loc(Blazor Server)::: apps, the server-side default route template assumes that if the last segment of a request URL contains a dot (`.`) that a file is requested (for example, `https://localhost.com:5001/example/some.thing`).</span></span> <span data-ttu-id="f1d2d-179">追加の構成がなければ、コンポーネントへのルーティングが意図されている場合は、アプリによって " *404 - 見つかりません* " が返されます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-179">Without additional configuration, an app returns a *404 - Not Found* response if this was meant to route to a component.</span></span> <span data-ttu-id="f1d2d-180">ドットが含まれる 1 つ以上のパラメーターを指定してルートを使用するには、アプリでカスタム テンプレートを使用してルートを構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-180">To use a route with one or more parameters that contains a dot, the app must configure the route with a custom template.</span></span>
+<span data-ttu-id="f1d2d-178">ホストされている Blazor WebAssembly および Blazor Server アプリの場合、サーバー側の既定のルート テンプレートでは、ファイルが要求されているドット (`.`) が要求 URL の最後のセグメントに含まれていると想定されます (例: `https://localhost.com:5001/example/some.thing`)。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-178">For hosted Blazor WebAssembly and Blazor Server apps, the server-side default route template assumes that if the last segment of a request URL contains a dot (`.`) that a file is requested (for example, `https://localhost.com:5001/example/some.thing`).</span></span> <span data-ttu-id="f1d2d-179">追加の構成がなければ、コンポーネントへのルーティングが意図されている場合は、アプリによって " *404 - 見つかりません* " が返されます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-179">Without additional configuration, an app returns a *404 - Not Found* response if this was meant to route to a component.</span></span> <span data-ttu-id="f1d2d-180">ドットが含まれる 1 つ以上のパラメーターを指定してルートを使用するには、アプリでカスタム テンプレートを使用してルートを構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-180">To use a route with one or more parameters that contains a dot, the app must configure the route with a custom template.</span></span>
 
 <span data-ttu-id="f1d2d-181">URL の最後のセグメントからルート パラメーターを受け取ることができる次の `Example` コンポーネントについて考えてみます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-181">Consider the following `Example` component that can receive a route parameter from the last segment of the URL:</span></span>
 
@@ -180,13 +180,13 @@ ms.locfileid: "93055855"
 }
 ```
 
-<span data-ttu-id="f1d2d-182">ホストされている :::no-loc(Blazor WebAssembly)::: ソリューションの " *サーバー* " アプリで、`param` パラメーターのドットを使用して要求をルーティングできるようにするには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ファイル ルート テンプレートを追加します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-182">To permit the *Server* app of a hosted :::no-loc(Blazor WebAssembly)::: solution to route the request with a dot in the `param` parameter, add a fallback file route template with the optional parameter in `Startup.Configure` (`Startup.cs`):</span></span>
+<span data-ttu-id="f1d2d-182">ホストされている Blazor WebAssembly ソリューションの " *サーバー* " アプリで、`param` パラメーターのドットを使用して要求をルーティングできるようにするには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ファイル ルート テンプレートを追加します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-182">To permit the *Server* app of a hosted Blazor WebAssembly solution to route the request with a dot in the `param` parameter, add a fallback file route template with the optional parameter in `Startup.Configure` (`Startup.cs`):</span></span>
 
 ```csharp
 endpoints.MapFallbackToFile("/example/{param?}", "index.html");
 ```
 
-<span data-ttu-id="f1d2d-183">`param` パラメーターのドットを使用して要求をルーティングするように :::no-loc(Blazor Server)::: アプリを構成するには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ページ ルート テンプレートを追加します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-183">To configure a :::no-loc(Blazor Server)::: app to route the request with a dot in the `param` parameter, add a fallback page route template with the optional parameter in `Startup.Configure` (`Startup.cs`):</span></span>
+<span data-ttu-id="f1d2d-183">`param` パラメーターのドットを使用して要求をルーティングするように Blazor Server アプリを構成するには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ページ ルート テンプレートを追加します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-183">To configure a Blazor Server app to route the request with a dot in the `param` parameter, add a fallback page route template with the optional parameter in `Startup.Configure` (`Startup.cs`):</span></span>
 
 ```csharp
 endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
@@ -255,7 +255,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 ```
 
 > [!WARNING]
-> <span data-ttu-id="f1d2d-212">:::no-loc(Blazor)::: による子コンテンツのレンダリング方法により、`for` ループ内の `NavLink` コンポーネントのレンダリングでは、インクリメントするループ変数が `NavLink` (子) コンポーネントのコンテンツ内で使用されている場合、ローカル インデックス変数が必要になります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-212">Due to the way that :::no-loc(Blazor)::: renders child content, rendering `NavLink` components inside a `for` loop requires a local index variable if the incrementing loop variable is used in the `NavLink` (child) component's content:</span></span>
+> <span data-ttu-id="f1d2d-212">Blazor による子コンテンツのレンダリング方法により、`for` ループ内の `NavLink` コンポーネントのレンダリングでは、インクリメントするループ変数が `NavLink` (子) コンポーネントのコンテンツ内で使用されている場合、ローカル インデックス変数が必要になります。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-212">Due to the way that Blazor renders child content, rendering `NavLink` components inside a `for` loop requires a local index variable if the incrementing loop variable is used in the `NavLink` (child) component's content:</span></span>
 >
 > ```razor
 > @for (int c = 0; c < 10; c++)
@@ -291,7 +291,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 | <span data-ttu-id="f1d2d-218">メンバー</span><span class="sxs-lookup"><span data-stu-id="f1d2d-218">Member</span></span> | <span data-ttu-id="f1d2d-219">説明</span><span class="sxs-lookup"><span data-stu-id="f1d2d-219">Description</span></span> |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | <span data-ttu-id="f1d2d-220">現在の絶対 URI を取得します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-220">Gets the current absolute URI.</span></span> |
-| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | <span data-ttu-id="f1d2d-221">絶対 URI を生成するために、相対 URI パスの前に付加できるベース URI (末尾のスラッシュを含む) を取得します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-221">Gets the base URI (with a trailing slash) that can be prepended to relative URI paths to produce an absolute URI.</span></span> <span data-ttu-id="f1d2d-222">通常、<xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> は `wwwroot/index.html` (:::no-loc(Blazor WebAssembly):::) または `Pages/_Host.cshtml` (:::no-loc(Blazor Server):::) 内のドキュメントの `<base>` 要素の `href` 属性に対応します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-222">Typically, <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> corresponds to the `href` attribute on the document's `<base>` element in `wwwroot/index.html` (:::no-loc(Blazor WebAssembly):::) or `Pages/_Host.cshtml` (:::no-loc(Blazor Server):::).</span></span> |
+| <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | <span data-ttu-id="f1d2d-221">絶対 URI を生成するために、相対 URI パスの前に付加できるベース URI (末尾のスラッシュを含む) を取得します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-221">Gets the base URI (with a trailing slash) that can be prepended to relative URI paths to produce an absolute URI.</span></span> <span data-ttu-id="f1d2d-222">通常、<xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> は `wwwroot/index.html` (Blazor WebAssembly) または `Pages/_Host.cshtml` (Blazor Server) 内のドキュメントの `<base>` 要素の `href` 属性に対応します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-222">Typically, <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> corresponds to the `href` attribute on the document's `<base>` element in `wwwroot/index.html` (Blazor WebAssembly) or `Pages/_Host.cshtml` (Blazor Server).</span></span> |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A> | <span data-ttu-id="f1d2d-223">指定された URI に移動します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-223">Navigates to the specified URI.</span></span> <span data-ttu-id="f1d2d-224">`forceLoad` が `true` の場合:</span><span class="sxs-lookup"><span data-stu-id="f1d2d-224">If `forceLoad` is `true`:</span></span><ul><li><span data-ttu-id="f1d2d-225">クライアント側のルーティングはバイパスされます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-225">Client-side routing is bypassed.</span></span></li><li><span data-ttu-id="f1d2d-226">URI が通常クライアント側ルーターによって処理されるかどうかにかかわらず、ブラウザーでは、強制的にサーバーから新しいページが読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-226">The browser is forced to load the new page from the server, whether or not the URI is normally handled by the client-side router.</span></span></li></ul> |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged> | <span data-ttu-id="f1d2d-227">ナビゲーションの場所が変更されたときに発生するイベントです。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-227">An event that fires when the navigation location has changed.</span></span> |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri%2A> | <span data-ttu-id="f1d2d-228">相対 URI を絶対 URI に変換します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-228">Converts a relative URI into an absolute URI.</span></span> |
@@ -344,7 +344,7 @@ public void Dispose()
 <span data-ttu-id="f1d2d-234"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> は、イベントに関する次の情報を提供します。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-234"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> provides the following information about the event:</span></span>
 
 * <span data-ttu-id="f1d2d-235"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>:新しい場所の URL。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-235"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: The URL of the new location.</span></span>
-* <span data-ttu-id="f1d2d-236"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>:`true` の場合、:::no-loc(Blazor)::: によってブラウザーからナビゲーションがインターセプトされました。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-236"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: If `true`, :::no-loc(Blazor)::: intercepted the navigation from the browser.</span></span> <span data-ttu-id="f1d2d-237">`false` の場合、<xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> によってナビゲーションが発生しました。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-237">If `false`, <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> caused the navigation to occur.</span></span>
+* <span data-ttu-id="f1d2d-236"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>:`true` の場合、Blazor によってブラウザーからナビゲーションがインターセプトされました。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-236"><xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: If `true`, Blazor intercepted the navigation from the browser.</span></span> <span data-ttu-id="f1d2d-237">`false` の場合、<xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> によってナビゲーションが発生しました。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-237">If `false`, <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> caused the navigation to occur.</span></span>
 
 <span data-ttu-id="f1d2d-238">コンポーネントの破棄の詳細については、「<xref:blazor/components/lifecycle#component-disposal-with-idisposable>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f1d2d-238">For more information on component disposal, see <xref:blazor/components/lifecycle#component-disposal-with-idisposable>.</span></span>
 

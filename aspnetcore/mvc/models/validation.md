@@ -1,22 +1,22 @@
 ---
 title: ASP.NET Core MVC でのモデルの検証
 author: rick-anderson
-description: 'ASP.NET Core MVC とページでのモデルの検証について説明し :::no-loc(Razor)::: ます。'
+description: 'ASP.NET Core MVC とページでのモデルの検証について説明し Razor ます。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/models/validation
 ms.openlocfilehash: 77d49710b9d69f6fbbe92970f1c455de32489444
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,13 +25,13 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056960"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a><span data-ttu-id="be3d8-103">MVC とページ ASP.NET Core でのモデルの検証 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="be3d8-103">Model validation in ASP.NET Core MVC and :::no-loc(Razor)::: Pages</span></span>
+# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a><span data-ttu-id="be3d8-103">MVC とページ ASP.NET Core でのモデルの検証 Razor</span><span class="sxs-lookup"><span data-stu-id="be3d8-103">Model validation in ASP.NET Core MVC and Razor Pages</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 <span data-ttu-id="be3d8-104">作成者: [Kirk Larkin](https://github.com/serpent5)</span><span class="sxs-lookup"><span data-stu-id="be3d8-104">By [Kirk Larkin](https://github.com/serpent5)</span></span>
 
-<span data-ttu-id="be3d8-105">この記事では、ASP.NET Core MVC またはページアプリでユーザー入力を検証する方法について説明し :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-105">This article explains how to validate user input in an ASP.NET Core MVC or :::no-loc(Razor)::: Pages app.</span></span>
+<span data-ttu-id="be3d8-105">この記事では、ASP.NET Core MVC またはページアプリでユーザー入力を検証する方法について説明し Razor ます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-105">This article explains how to validate user input in an ASP.NET Core MVC or Razor Pages app.</span></span>
 
 <span data-ttu-id="be3d8-106">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="be3d8-106">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
@@ -39,7 +39,7 @@ ms.locfileid: "93056960"
 
 <span data-ttu-id="be3d8-108">モデルの状態では、モデル バインドとモデル検証の 2 つのサブシステムで発生したエラーが表されます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-108">Model state represents errors that come from two subsystems: model binding and model validation.</span></span> <span data-ttu-id="be3d8-109">[モデルバインド](model-binding.md)から発生するエラーは、通常、データ変換エラーです。</span><span class="sxs-lookup"><span data-stu-id="be3d8-109">Errors that originate from [model binding](model-binding.md) are generally data conversion errors.</span></span> <span data-ttu-id="be3d8-110">たとえば、"x" は整数フィールドに入力されます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-110">For example, an "x" is entered in an integer field.</span></span> <span data-ttu-id="be3d8-111">モデルの検証は、モデル バインド後に行われ、データがビジネス ルールに準拠していないエラーを報告します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-111">Model validation occurs after model binding and reports errors where data doesn't conform to business rules.</span></span> <span data-ttu-id="be3d8-112">たとえば、1 から 5 の評価を想定したフィールドに 0 が入力されたとします。</span><span class="sxs-lookup"><span data-stu-id="be3d8-112">For example, a 0 is entered in a field that expects a rating between 1 and 5.</span></span>
 
-<span data-ttu-id="be3d8-113">モデルバインドとモデル検証は、どちらもコントローラーアクションまたはページハンドラーメソッドの実行前に行わ :::no-loc(Razor)::: れます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-113">Both model binding and model validation occur before the execution of a controller action or a :::no-loc(Razor)::: Pages handler method.</span></span> <span data-ttu-id="be3d8-114">Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。</span><span class="sxs-lookup"><span data-stu-id="be3d8-114">For web apps, it's the app's responsibility to inspect `ModelState.IsValid` and react appropriately.</span></span> <span data-ttu-id="be3d8-115">通常、Web アプリではエラー メッセージを含むページを再表示します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-115">Web apps typically redisplay the page with an error message:</span></span>
+<span data-ttu-id="be3d8-113">モデルバインドとモデル検証は、どちらもコントローラーアクションまたはページハンドラーメソッドの実行前に行わ Razor れます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-113">Both model binding and model validation occur before the execution of a controller action or a Razor Pages handler method.</span></span> <span data-ttu-id="be3d8-114">Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。</span><span class="sxs-lookup"><span data-stu-id="be3d8-114">For web apps, it's the app's responsibility to inspect `ModelState.IsValid` and react appropriately.</span></span> <span data-ttu-id="be3d8-115">通常、Web アプリではエラー メッセージを含むページを再表示します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-115">Web apps typically redisplay the page with an error message:</span></span>
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -379,7 +379,7 @@ $.get({
 
 ## <a name="disable-client-side-validation"></a><span data-ttu-id="be3d8-310">クライアント側検証を無効にする</span><span class="sxs-lookup"><span data-stu-id="be3d8-310">Disable client-side validation</span></span>
 
-<span data-ttu-id="be3d8-311">次のコードは、ページ内のクライアント検証を無効にし :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-311">The following code disables client validation in :::no-loc(Razor)::: Pages:</span></span>
+<span data-ttu-id="be3d8-311">次のコードは、ページ内のクライアント検証を無効にし Razor ます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-311">The following code disables client validation in Razor Pages:</span></span>
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -388,7 +388,7 @@ $.get({
 * <span data-ttu-id="be3d8-313">すべての *.cshtml* ファイル内の `_ValidationScriptsPartial` への参照をコメントアウトします。</span><span class="sxs-lookup"><span data-stu-id="be3d8-313">Comment out the reference to `_ValidationScriptsPartial` in all the *.cshtml* files.</span></span>
 * <span data-ttu-id="be3d8-314">*Pages\Shared\_ValidationScriptsPartial.cshtml* ファイルの内容を削除します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-314">Remove the contents of the *Pages\Shared\_ValidationScriptsPartial.cshtml* file.</span></span>
 
-<span data-ttu-id="be3d8-315">上記の方法では、クライアント側でクラスライブラリを検証することはできません :::no-loc(ASP.NET Core Identity)::: :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="be3d8-315">The preceding approach won't prevent client side validation of :::no-loc(ASP.NET Core Identity)::: :::no-loc(Razor)::: Class Library.</span></span> <span data-ttu-id="be3d8-316">詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="be3d8-316">For more information, see <xref:security/authentication/scaffold-identity>.</span></span>
+<span data-ttu-id="be3d8-315">上記の方法では、クライアント側でクラスライブラリを検証することはできません ASP.NET Core Identity Razor 。</span><span class="sxs-lookup"><span data-stu-id="be3d8-315">The preceding approach won't prevent client side validation of ASP.NET Core Identity Razor Class Library.</span></span> <span data-ttu-id="be3d8-316">詳細については、「<xref:security/authentication/scaffold-identity>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="be3d8-316">For more information, see <xref:security/authentication/scaffold-identity>.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="be3d8-317">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="be3d8-317">Additional resources</span></span>
 
@@ -399,7 +399,7 @@ $.get({
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="be3d8-320">この記事では、ASP.NET Core MVC またはページアプリでユーザー入力を検証する方法について説明し :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-320">This article explains how to validate user input in an ASP.NET Core MVC or :::no-loc(Razor)::: Pages app.</span></span>
+<span data-ttu-id="be3d8-320">この記事では、ASP.NET Core MVC またはページアプリでユーザー入力を検証する方法について説明し Razor ます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-320">This article explains how to validate user input in an ASP.NET Core MVC or Razor Pages app.</span></span>
 
 <span data-ttu-id="be3d8-321">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="be3d8-321">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
@@ -407,7 +407,7 @@ $.get({
 
 <span data-ttu-id="be3d8-323">モデルの状態では、モデル バインドとモデル検証の 2 つのサブシステムで発生したエラーが表されます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-323">Model state represents errors that come from two subsystems: model binding and model validation.</span></span> <span data-ttu-id="be3d8-324">[モデル バインド](model-binding.md)で発生するエラーは、一般に、データ変換エラーです (たとえば、整数が必要なフィールドに "x" が入力された場合)。</span><span class="sxs-lookup"><span data-stu-id="be3d8-324">Errors that originate from [model binding](model-binding.md) are generally data conversion errors (for example, an "x" is entered in a field that expects an integer).</span></span> <span data-ttu-id="be3d8-325">モデル検証は、モデル バインドの後で行われて、データがビジネス ルールに従っていないエラーが報告されます (たとえば、1 から 5 までのレーティングが必要なフィールドに 0 が入力された場合)。</span><span class="sxs-lookup"><span data-stu-id="be3d8-325">Model validation occurs after model binding and reports errors where the data doesn't conform to business rules (for example, a 0 is entered in a field that expects a rating between 1 and 5).</span></span>
 
-<span data-ttu-id="be3d8-326">モデルバインドと検証の両方が、コントローラーアクションまたはページハンドラーメソッドの実行前に行わ :::no-loc(Razor)::: れます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-326">Both model binding and validation occur before the execution of a controller action or a :::no-loc(Razor)::: Pages handler method.</span></span> <span data-ttu-id="be3d8-327">Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。</span><span class="sxs-lookup"><span data-stu-id="be3d8-327">For web apps, it's the app's responsibility to inspect `ModelState.IsValid` and react appropriately.</span></span> <span data-ttu-id="be3d8-328">通常、Web アプリではエラー メッセージを含むページを再表示します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-328">Web apps typically redisplay the page with an error message:</span></span>
+<span data-ttu-id="be3d8-326">モデルバインドと検証の両方が、コントローラーアクションまたはページハンドラーメソッドの実行前に行わ Razor れます。</span><span class="sxs-lookup"><span data-stu-id="be3d8-326">Both model binding and validation occur before the execution of a controller action or a Razor Pages handler method.</span></span> <span data-ttu-id="be3d8-327">Web アプリでは、`ModelState.IsValid` を調べて適切に対処するのはアプリの責任です。</span><span class="sxs-lookup"><span data-stu-id="be3d8-327">For web apps, it's the app's responsibility to inspect `ModelState.IsValid` and react appropriately.</span></span> <span data-ttu-id="be3d8-328">通常、Web アプリではエラー メッセージを含むページを再表示します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-328">Web apps typically redisplay the page with an error message:</span></span>
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -430,7 +430,7 @@ $.get({
 <span data-ttu-id="be3d8-342">組み込みの検証属性には次のものがあります。</span><span class="sxs-lookup"><span data-stu-id="be3d8-342">Built-in validation attributes include:</span></span>
 
 * <span data-ttu-id="be3d8-343">`[CreditCard]`: プロパティにクレジットカード形式があることを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-343">`[CreditCard]`: Validates that the property has a credit card format.</span></span>
-* <span data-ttu-id="be3d8-344">`[Compare]`: モデル内の2つのプロパティが一致することを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-344">`[Compare]`: Validates that two properties in a model match.</span></span> <span data-ttu-id="be3d8-345">たとえば、 *Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-345">For example, the *Register.cshtml.cs* file uses `[Compare]` to validate the two entered passwords match.</span></span> <span data-ttu-id="be3d8-346">[スキャフォールディング :::no-loc(Identity)::: ](xref:security/authentication/scaffold-identity)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="be3d8-346">[Scaffold :::no-loc(Identity):::](xref:security/authentication/scaffold-identity) to see the Register code.</span></span>
+* <span data-ttu-id="be3d8-344">`[Compare]`: モデル内の2つのプロパティが一致することを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-344">`[Compare]`: Validates that two properties in a model match.</span></span> <span data-ttu-id="be3d8-345">たとえば、 *Register.cshtml.cs* ファイルは `[Compare]` を使用して、入力された 2 つのパスワードが一致していることを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-345">For example, the *Register.cshtml.cs* file uses `[Compare]` to validate the two entered passwords match.</span></span> <span data-ttu-id="be3d8-346">[スキャフォールディング Identity ](xref:security/authentication/scaffold-identity)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="be3d8-346">[Scaffold Identity](xref:security/authentication/scaffold-identity) to see the Register code.</span></span>
 * <span data-ttu-id="be3d8-347">`[EmailAddress]`: プロパティが電子メール形式であることを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-347">`[EmailAddress]`: Validates that the property has an email format.</span></span>
 * <span data-ttu-id="be3d8-348">`[Phone]`: プロパティに電話番号の書式が設定されていることを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-348">`[Phone]`: Validates that the property has a telephone number format.</span></span>
 * <span data-ttu-id="be3d8-349">`[Range]`: プロパティ値が指定した範囲内にあることを検証します。</span><span class="sxs-lookup"><span data-stu-id="be3d8-349">`[Range]`: Validates that the property value falls within a specified range.</span></span>
@@ -754,7 +754,7 @@ $.get({
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-<span data-ttu-id="be3d8-531">ページ内 :::no-loc(Razor)::: :</span><span class="sxs-lookup"><span data-stu-id="be3d8-531">And in :::no-loc(Razor)::: Pages:</span></span>
+<span data-ttu-id="be3d8-531">ページ内 Razor :</span><span class="sxs-lookup"><span data-stu-id="be3d8-531">And in Razor Pages:</span></span>
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 

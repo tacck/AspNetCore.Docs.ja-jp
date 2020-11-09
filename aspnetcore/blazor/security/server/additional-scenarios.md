@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor Server)::: のセキュリティに関するその他のシナリオ'
+title: 'ASP.NET Core Blazor Server のセキュリティに関するその他のシナリオ'
 author: guardrex
-description: 'セキュリティに関するその他のシナリオ用に :::no-loc(Blazor Server)::: を構成する方法について説明します。'
+description: 'セキュリティに関するその他のシナリオ用に Blazor Server を構成する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/server/additional-scenarios
 ms.openlocfilehash: 56b226f8e4a10aa996b0344f10c76dad2ae32b51
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -26,21 +26,21 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/03/2020
 ms.locfileid: "93234438"
 ---
-# <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a><span data-ttu-id="4fa18-103">ASP.NET Core :::no-loc(Blazor Server)::: のセキュリティに関するその他のシナリオ</span><span class="sxs-lookup"><span data-stu-id="4fa18-103">ASP.NET Core :::no-loc(Blazor Server)::: additional security scenarios</span></span>
+# <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a><span data-ttu-id="4fa18-103">ASP.NET Core Blazor Server のセキュリティに関するその他のシナリオ</span><span class="sxs-lookup"><span data-stu-id="4fa18-103">ASP.NET Core Blazor Server additional security scenarios</span></span>
 
 <span data-ttu-id="4fa18-104">作成者: [Javier Calvarro Jeannine](https://github.com/javiercn)</span><span class="sxs-lookup"><span data-stu-id="4fa18-104">By [Javier Calvarro Nelson](https://github.com/javiercn)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<h2 id="pass-tokens-to-a-blazor-server-app"><span data-ttu-id="4fa18-105">:::no-loc(Blazor Server)::: アプリにトークンを渡す</span><span class="sxs-lookup"><span data-stu-id="4fa18-105">Pass tokens to a :::no-loc(Blazor Server)::: app</span></span></h2>
+<h2 id="pass-tokens-to-a-blazor-server-app"><span data-ttu-id="4fa18-105">Blazor Server アプリにトークンを渡す</span><span class="sxs-lookup"><span data-stu-id="4fa18-105">Pass tokens to a Blazor Server app</span></span></h2>
 
-<span data-ttu-id="4fa18-106">:::no-loc(Blazor Server)::: アプリの :::no-loc(Razor)::: コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-106">Tokens available outside of the :::no-loc(Razor)::: components in a :::no-loc(Blazor Server)::: app can be passed to components with the approach described in this section.</span></span>
+<span data-ttu-id="4fa18-106">Blazor Server アプリの Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-106">Tokens available outside of the Razor components in a Blazor Server app can be passed to components with the approach described in this section.</span></span>
 
-<span data-ttu-id="4fa18-107">通常の :::no-loc(Razor)::: Pages や MVC アプリの場合と同じように、:::no-loc(Blazor Server)::: アプリを認証します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-107">Authenticate the :::no-loc(Blazor Server)::: app as you would with a regular :::no-loc(Razor)::: Pages or MVC app.</span></span> <span data-ttu-id="4fa18-108">トークンをプロビジョニングし、認証 :::no-loc(cookie)::: に保存します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-108">Provision and save the tokens to the authentication :::no-loc(cookie):::.</span></span> <span data-ttu-id="4fa18-109">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-109">For example:</span></span>
+<span data-ttu-id="4fa18-107">通常の Razor Pages や MVC アプリの場合と同じように、Blazor Server アプリを認証します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-107">Authenticate the Blazor Server app as you would with a regular Razor Pages or MVC app.</span></span> <span data-ttu-id="4fa18-108">トークンをプロビジョニングし、認証 cookie に保存します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-108">Provision and save the tokens to the authentication cookie.</span></span> <span data-ttu-id="4fa18-109">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-109">For example:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.:::no-loc(Identity):::Model.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 ...
 
@@ -55,7 +55,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =
 
 <span data-ttu-id="4fa18-110">必要があれば、`options.Scope.Add("{SCOPE}");` を使用して、さらにスコープを追加します。ここで、プレースホルダー `{SCOPE}` は追加するスコープです。</span><span class="sxs-lookup"><span data-stu-id="4fa18-110">Optionally, additional scopes are added with `options.Scope.Add("{SCOPE}");`, where the placeholder `{SCOPE}` is the additional scope to add.</span></span>
 
-<span data-ttu-id="4fa18-111">[依存関係の挿入 (DI)](xref:blazor/fundamentals/dependency-injection) からトークンを解決するために :::no-loc(Blazor)::: アプリ内で使用できる **スコープを持つ** トークン プロバイダー サービスを定義します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-111">Define a **scoped** token provider service that can be used within the :::no-loc(Blazor)::: app to resolve the tokens from [dependency injection (DI)](xref:blazor/fundamentals/dependency-injection):</span></span>
+<span data-ttu-id="4fa18-111">[依存関係の挿入 (DI)](xref:blazor/fundamentals/dependency-injection) からトークンを解決するために Blazor アプリ内で使用できる **スコープを持つ** トークン プロバイダー サービスを定義します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-111">Define a **scoped** token provider service that can be used within the Blazor app to resolve the tokens from [dependency injection (DI)](xref:blazor/fundamentals/dependency-injection):</span></span>
 
 ```csharp
 public class TokenProvider
@@ -162,10 +162,10 @@ public class WeatherForecastService
 
 <h2 id="set-the-authentication-scheme"><span data-ttu-id="4fa18-118">認証スキームを設定する</span><span class="sxs-lookup"><span data-stu-id="4fa18-118">Set the authentication scheme</span></span></h2>
 
-<span data-ttu-id="4fa18-119">複数の認証ミドルウェアを使用していることにより、複数の認証スキームがあるアプリの場合、:::no-loc(Blazor)::: で使用されるスキームを、`Startup.Configure` のエンドポイント構成で明示的に設定できます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-119">For an app that uses more than one Authentication Middleware and thus has more than one authentication scheme, the scheme that :::no-loc(Blazor)::: uses can be explicitly set in the endpoint configuration of `Startup.Configure`.</span></span> <span data-ttu-id="4fa18-120">次の例では、Azure Active Directory スキームを設定します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-120">The following example sets the Azure Active Directory scheme:</span></span>
+<span data-ttu-id="4fa18-119">複数の認証ミドルウェアを使用していることにより、複数の認証スキームがあるアプリの場合、Blazor で使用されるスキームを、`Startup.Configure` のエンドポイント構成で明示的に設定できます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-119">For an app that uses more than one Authentication Middleware and thus has more than one authentication scheme, the scheme that Blazor uses can be explicitly set in the endpoint configuration of `Startup.Configure`.</span></span> <span data-ttu-id="4fa18-120">次の例では、Azure Active Directory スキームを設定します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-120">The following example sets the Azure Active Directory scheme:</span></span>
 
 ```csharp
-endpoints.Map:::no-loc(Blazor):::Hub().RequireAuthorization(
+endpoints.MapBlazorHub().RequireAuthorization(
     new AuthorizeAttribute 
     {
         AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
@@ -176,15 +176,15 @@ endpoints.Map:::no-loc(Blazor):::Hub().RequireAuthorization(
 
 ::: moniker range="< aspnetcore-5.0"
 
-<h2 id="pass-tokens-to-a-blazor-server-app"><span data-ttu-id="4fa18-121">:::no-loc(Blazor Server)::: アプリにトークンを渡す</span><span class="sxs-lookup"><span data-stu-id="4fa18-121">Pass tokens to a :::no-loc(Blazor Server)::: app</span></span></h2>
+<h2 id="pass-tokens-to-a-blazor-server-app"><span data-ttu-id="4fa18-121">Blazor Server アプリにトークンを渡す</span><span class="sxs-lookup"><span data-stu-id="4fa18-121">Pass tokens to a Blazor Server app</span></span></h2>
 
-<span data-ttu-id="4fa18-122">:::no-loc(Blazor Server)::: アプリの :::no-loc(Razor)::: コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-122">Tokens available outside of the :::no-loc(Razor)::: components in a :::no-loc(Blazor Server)::: app can be passed to components with the approach described in this section.</span></span>
+<span data-ttu-id="4fa18-122">Blazor Server アプリの Razor コンポーネントの外部で使用できるトークンは、このセクションで説明する方法を使用してコンポーネントに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-122">Tokens available outside of the Razor components in a Blazor Server app can be passed to components with the approach described in this section.</span></span>
 
-<span data-ttu-id="4fa18-123">通常の :::no-loc(Razor)::: Pages や MVC アプリの場合と同じように、:::no-loc(Blazor Server)::: アプリを認証します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-123">Authenticate the :::no-loc(Blazor Server)::: app as you would with a regular :::no-loc(Razor)::: Pages or MVC app.</span></span> <span data-ttu-id="4fa18-124">トークンをプロビジョニングし、認証 :::no-loc(cookie)::: に保存します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-124">Provision and save the tokens to the authentication :::no-loc(cookie):::.</span></span> <span data-ttu-id="4fa18-125">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-125">For example:</span></span>
+<span data-ttu-id="4fa18-123">通常の Razor Pages や MVC アプリの場合と同じように、Blazor Server アプリを認証します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-123">Authenticate the Blazor Server app as you would with a regular Razor Pages or MVC app.</span></span> <span data-ttu-id="4fa18-124">トークンをプロビジョニングし、認証 cookie に保存します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-124">Provision and save the tokens to the authentication cookie.</span></span> <span data-ttu-id="4fa18-125">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-125">For example:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.:::no-loc(Identity):::Model.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 ...
 
@@ -215,7 +215,7 @@ public class InitialApplicationState
 }
 ```
 
-<span data-ttu-id="4fa18-130">[依存関係の挿入 (DI)](xref:blazor/fundamentals/dependency-injection) からトークンを解決するために :::no-loc(Blazor)::: アプリ内で使用できる **スコープを持つ** トークン プロバイダー サービスを定義します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-130">Define a **scoped** token provider service that can be used within the :::no-loc(Blazor)::: app to resolve the tokens from [dependency injection (DI)](xref:blazor/fundamentals/dependency-injection):</span></span>
+<span data-ttu-id="4fa18-130">[依存関係の挿入 (DI)](xref:blazor/fundamentals/dependency-injection) からトークンを解決するために Blazor アプリ内で使用できる **スコープを持つ** トークン プロバイダー サービスを定義します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-130">Define a **scoped** token provider service that can be used within the Blazor app to resolve the tokens from [dependency injection (DI)](xref:blazor/fundamentals/dependency-injection):</span></span>
 
 ```csharp
 public class TokenProvider
@@ -314,10 +314,10 @@ public class WeatherForecastService
 
 <h2 id="set-the-authentication-scheme"><span data-ttu-id="4fa18-136">認証スキームを設定する</span><span class="sxs-lookup"><span data-stu-id="4fa18-136">Set the authentication scheme</span></span></h2>
 
-<span data-ttu-id="4fa18-137">複数の認証ミドルウェアを使用していることにより、複数の認証スキームがあるアプリの場合、:::no-loc(Blazor)::: で使用されるスキームを、`Startup.Configure` のエンドポイント構成で明示的に設定できます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-137">For an app that uses more than one Authentication Middleware and thus has more than one authentication scheme, the scheme that :::no-loc(Blazor)::: uses can be explicitly set in the endpoint configuration of `Startup.Configure`.</span></span> <span data-ttu-id="4fa18-138">次の例では、Azure Active Directory スキームを設定します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-138">The following example sets the Azure Active Directory scheme:</span></span>
+<span data-ttu-id="4fa18-137">複数の認証ミドルウェアを使用していることにより、複数の認証スキームがあるアプリの場合、Blazor で使用されるスキームを、`Startup.Configure` のエンドポイント構成で明示的に設定できます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-137">For an app that uses more than one Authentication Middleware and thus has more than one authentication scheme, the scheme that Blazor uses can be explicitly set in the endpoint configuration of `Startup.Configure`.</span></span> <span data-ttu-id="4fa18-138">次の例では、Azure Active Directory スキームを設定します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-138">The following example sets the Azure Active Directory scheme:</span></span>
 
 ```csharp
-endpoints.Map:::no-loc(Blazor):::Hub().RequireAuthorization(
+endpoints.MapBlazorHub().RequireAuthorization(
     new AuthorizeAttribute 
     {
         AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
@@ -326,7 +326,7 @@ endpoints.Map:::no-loc(Blazor):::Hub().RequireAuthorization(
 
 ## <a name="use-openid-connect-oidc-v20-endpoints"></a><span data-ttu-id="4fa18-139">OpenID Connect (OIDC) v2.0 エンドポイントを使用する</span><span class="sxs-lookup"><span data-stu-id="4fa18-139">Use OpenID Connect (OIDC) v2.0 endpoints</span></span>
 
-<span data-ttu-id="4fa18-140">5\.0 より前のバージョンの ASP.NET Core では、認証ライブラリと :::no-loc(Blazor)::: テンプレートに OpenID Connect (OIDC) v1.0 エンドポイントが使用されます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-140">In versions of ASP.NET Core prior to 5.0, the authentication library and :::no-loc(Blazor)::: templates use OpenID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="4fa18-141">5\.0 より前のバージョンの ASP.NET Core で v2.0 エンドポイントを使用するには、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> に <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> オプションを構成します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-141">To use a v2.0 endpoint with versions of ASP.NET Core prior to 5.0, configure the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> option in the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>:</span></span>
+<span data-ttu-id="4fa18-140">5\.0 より前のバージョンの ASP.NET Core では、認証ライブラリと Blazor テンプレートに OpenID Connect (OIDC) v1.0 エンドポイントが使用されます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-140">In versions of ASP.NET Core prior to 5.0, the authentication library and Blazor templates use OpenID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="4fa18-141">5\.0 より前のバージョンの ASP.NET Core で v2.0 エンドポイントを使用するには、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> に <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> オプションを構成します。</span><span class="sxs-lookup"><span data-stu-id="4fa18-141">To use a v2.0 endpoint with versions of ASP.NET Core prior to 5.0, configure the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> option in the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>:</span></span>
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
@@ -336,7 +336,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-<span data-ttu-id="4fa18-142">または、アプリ設定ファイル (`:::no-loc(appsettings.json):::`) で設定を行うこともできます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-142">Alternatively, the setting can be made in the app settings (`:::no-loc(appsettings.json):::`) file:</span></span>
+<span data-ttu-id="4fa18-142">または、アプリ設定ファイル (`appsettings.json`) で設定を行うこともできます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-142">Alternatively, the setting can be made in the app settings (`appsettings.json`) file:</span></span>
 
 ```json
 {
@@ -371,7 +371,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
 * <span data-ttu-id="4fa18-153">すべてのスコープにはプレフィックスとしてアプリ ID URI が含まれています。v2.0 エンドポイントからはアプリ ID URI を対象ユーザーとするアクセス トークンが発行されます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-153">All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.</span></span>
 * <span data-ttu-id="4fa18-154">v2.0 エンドポイントを使用するとき、Server API で構成されたクライアント ID は API アプリケーション ID (クライアント ID) からアプリ ID URI に変更されます。</span><span class="sxs-lookup"><span data-stu-id="4fa18-154">When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.</span></span>
 
-<span data-ttu-id="4fa18-155">`:::no-loc(appsettings.json):::`:</span><span class="sxs-lookup"><span data-stu-id="4fa18-155">`:::no-loc(appsettings.json):::`:</span></span>
+<span data-ttu-id="4fa18-155">`appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="4fa18-155">`appsettings.json`:</span></span>
 
 ```json
 {

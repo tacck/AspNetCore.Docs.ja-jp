@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/configuration/index
 ms.openlocfilehash: 9e744ec6d0f0dd72bded8284e98fd9ce53056b84
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -34,7 +34,7 @@ ms.locfileid: "93057974"
 
 <span data-ttu-id="90aee-105">ASP.NET Core の構成は、1つまたは複数の[構成プロバイダー](#cp)を使用して実行されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-105">Configuration in ASP.NET Core is performed using one or more [configuration providers](#cp).</span></span> <span data-ttu-id="90aee-106">構成プロバイダーは、以下のようなさまざまな構成ソースを使用して、キーと値のペアから構成データを読み取ります:</span><span class="sxs-lookup"><span data-stu-id="90aee-106">Configuration providers read configuration data from key-value pairs using a variety of configuration sources:</span></span>
 
-* <span data-ttu-id="90aee-107">*:::no-loc(appsettings.json):::* などの設定ファイル</span><span class="sxs-lookup"><span data-stu-id="90aee-107">Settings files, such as *:::no-loc(appsettings.json):::*</span></span>
+* <span data-ttu-id="90aee-107">*appsettings.json* などの設定ファイル</span><span class="sxs-lookup"><span data-stu-id="90aee-107">Settings files, such as *appsettings.json*</span></span>
 * <span data-ttu-id="90aee-108">環境変数</span><span class="sxs-lookup"><span data-stu-id="90aee-108">Environment variables</span></span>
 * <span data-ttu-id="90aee-109">Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="90aee-109">Azure Key Vault</span></span>
 * <span data-ttu-id="90aee-110">Azure App Configuration</span><span class="sxs-lookup"><span data-stu-id="90aee-110">Azure App Configuration</span></span>
@@ -58,13 +58,13 @@ ms.locfileid: "93057974"
  <span data-ttu-id="90aee-120"><xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> により、次の順序でアプリの既定の構成が提供されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-120"><xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> provides default configuration for the app in the following order:</span></span>
 
 1. <span data-ttu-id="90aee-121">[ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) は:既存の `IConfiguration` をソースとして追加します。</span><span class="sxs-lookup"><span data-stu-id="90aee-121">[ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) :  Adds an existing `IConfiguration` as a source.</span></span> <span data-ttu-id="90aee-122">既定の構成では、 [ホスト](#hvac)構成を追加し、 _アプリ_ 構成の最初のソースとして設定します。</span><span class="sxs-lookup"><span data-stu-id="90aee-122">In the default configuration case, adds the [host](#hvac) configuration and setting it as the first source for the _app_ configuration.</span></span>
-1. <span data-ttu-id="90aee-123">[JSON 構成プロバイダー](#file-configuration-provider)を使用する [:::no-loc(appsettings.json):::](#appsettingsjson)。</span><span class="sxs-lookup"><span data-stu-id="90aee-123">[:::no-loc(appsettings.json):::](#appsettingsjson) using the [JSON configuration provider](#file-configuration-provider).</span></span>
+1. <span data-ttu-id="90aee-123">[JSON 構成プロバイダー](#file-configuration-provider)を使用する [appsettings.json](#appsettingsjson)。</span><span class="sxs-lookup"><span data-stu-id="90aee-123">[appsettings.json](#appsettingsjson) using the [JSON configuration provider](#file-configuration-provider).</span></span>
 1. <span data-ttu-id="90aee-124">[JSON 構成プロバイダー](#file-configuration-provider)を使用する *appsettings.* `Environment`*json* 。</span><span class="sxs-lookup"><span data-stu-id="90aee-124">*appsettings.*`Environment`*.json* using the [JSON configuration provider](#file-configuration-provider).</span></span> <span data-ttu-id="90aee-125">たとえば、 *appsettings*. ***Production\*\*_._json* および *appsettings*.\*\*\*Development** _._json\*。</span><span class="sxs-lookup"><span data-stu-id="90aee-125">For example, *appsettings*. ***Production\*\*_._json* and *appsettings*.\*\*\*Development** _._json\*.</span></span>
 1. <span data-ttu-id="90aee-126">`Development` 環境でアプリが実行される際の [App シークレット](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="90aee-126">[App secrets](xref:security/app-secrets) when the app runs in the `Development` environment.</span></span>
 1. <span data-ttu-id="90aee-127">[環境変数構成プロバイダー](#evcp)を使用する環境変数。</span><span class="sxs-lookup"><span data-stu-id="90aee-127">Environment variables using the [Environment Variables configuration provider](#evcp).</span></span>
 1. <span data-ttu-id="90aee-128">[コマンドライン構成プロバイダー](#command-line)を使用するコマンドライン引数。</span><span class="sxs-lookup"><span data-stu-id="90aee-128">Command-line arguments using the [Command-line configuration provider](#command-line).</span></span>
 
-<span data-ttu-id="90aee-129">後から追加される構成プロバイダーは、それ以前のキー設定をオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="90aee-129">Configuration providers that are added later override previous key settings.</span></span> <span data-ttu-id="90aee-130">たとえば、`MyKey` が *:::no-loc(appsettings.json):::* と環境の両方で設定されている場合、環境の値が使用されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-130">For example, if `MyKey` is set in both *:::no-loc(appsettings.json):::* and the environment, the environment value is used.</span></span> <span data-ttu-id="90aee-131">既定の構成プロバイダーを使用すると、[コマンドライン構成プロバイダー](#clcp) が他のすべてのプロバイダーをオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="90aee-131">Using the default configuration providers, the  [Command-line configuration provider](#clcp) overrides all other providers.</span></span>
+<span data-ttu-id="90aee-129">後から追加される構成プロバイダーは、それ以前のキー設定をオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="90aee-129">Configuration providers that are added later override previous key settings.</span></span> <span data-ttu-id="90aee-130">たとえば、`MyKey` が *appsettings.json* と環境の両方で設定されている場合、環境の値が使用されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-130">For example, if `MyKey` is set in both *appsettings.json* and the environment, the environment value is used.</span></span> <span data-ttu-id="90aee-131">既定の構成プロバイダーを使用すると、[コマンドライン構成プロバイダー](#clcp) が他のすべてのプロバイダーをオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="90aee-131">Using the default configuration providers, the  [Command-line configuration provider](#clcp) overrides all other providers.</span></span>
 
 <span data-ttu-id="90aee-132">`CreateDefaultBuilder` の詳細については、[既定のビルダー設定](xref:fundamentals/host/generic-host#default-builder-settings)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="90aee-132">For more information on `CreateDefaultBuilder`, see [Default builder settings](xref:fundamentals/host/generic-host#default-builder-settings).</span></span>
 
@@ -72,11 +72,11 @@ ms.locfileid: "93057974"
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Index2.cshtml.cs?name=snippet)]
 
-### :::no-loc(appsettings.json):::
+### appsettings.json
 
-<span data-ttu-id="90aee-134">次の *:::no-loc(appsettings.json):::* ファイルを考えてみます。</span><span class="sxs-lookup"><span data-stu-id="90aee-134">Consider the following *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="90aee-134">次の *appsettings.json* ファイルを考えてみます。</span><span class="sxs-lookup"><span data-stu-id="90aee-134">Consider the following *appsettings.json* file:</span></span>
 
-[!code-json[](index/samples/3.x/ConfigSample/:::no-loc(appsettings.json):::)]
+[!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
 <span data-ttu-id="90aee-135">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) の次のコードでは、上記の構成設定のいくつかが表示されます:</span><span class="sxs-lookup"><span data-stu-id="90aee-135">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the preceding configurations settings:</span></span>
 
@@ -84,13 +84,13 @@ ms.locfileid: "93057974"
 
 <span data-ttu-id="90aee-136">既定の <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> は、以下の順序で構成を読み込みます:</span><span class="sxs-lookup"><span data-stu-id="90aee-136">The default <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> loads configuration in the following order:</span></span>
 
-1. *:::no-loc(appsettings.json):::*
+1. *appsettings.json*
 1. <span data-ttu-id="90aee-137">*appsettings.* `Environment` *.json* :たとえば、 *appsettings*. ***Production\*\*_._json* および *appsettings*.\*\*\*Development** _._json\* ファイル。</span><span class="sxs-lookup"><span data-stu-id="90aee-137">*appsettings.*`Environment`*.json* : For example, the *appsettings*. ***Production\*\*_._json* and *appsettings*.\*\*\*Development** _._json\* files.</span></span> <span data-ttu-id="90aee-138">ファイルの環境バージョンは、[IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-138">The environment version of the file is loaded based on the [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span></span> <span data-ttu-id="90aee-139">詳細については、「<xref:fundamentals/environments>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="90aee-139">For more information, see <xref:fundamentals/environments>.</span></span>
 
-<span data-ttu-id="90aee-140">*appsettings*.`Environment`. *json* の値によって、 *:::no-loc(appsettings.json):::* 内のキーがオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-140">*appsettings*.`Environment`. *json* values override keys in *:::no-loc(appsettings.json):::*.</span></span> <span data-ttu-id="90aee-141">たとえば、既定では次のようになります:</span><span class="sxs-lookup"><span data-stu-id="90aee-141">For example, by default:</span></span>
+<span data-ttu-id="90aee-140">*appsettings*.`Environment`. *json* の値によって、 *appsettings.json* 内のキーがオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-140">*appsettings*.`Environment`. *json* values override keys in *appsettings.json*.</span></span> <span data-ttu-id="90aee-141">たとえば、既定では次のようになります:</span><span class="sxs-lookup"><span data-stu-id="90aee-141">For example, by default:</span></span>
 
-* <span data-ttu-id="90aee-142">開発中は、 *appsettings*.\* **Development** _._json\* 構成によって、 *:::no-loc(appsettings.json):::* で見つかった値が上書きされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-142">In development, *appsettings*.\* **Development** _._json\* configuration overwrites values found in *:::no-loc(appsettings.json):::*.</span></span>
-* <span data-ttu-id="90aee-143">運用環境では、 *appsettings*.\* **Production** _._json\* 構成によって、 *:::no-loc(appsettings.json):::* で見つかった値が上書きされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-143">In production, *appsettings*.\* **Production** _._json\* configuration overwrites values found in *:::no-loc(appsettings.json):::*.</span></span> <span data-ttu-id="90aee-144">たとえば、Azure にアプリをデプロイする場合。</span><span class="sxs-lookup"><span data-stu-id="90aee-144">For example, when deploying the app to Azure.</span></span>
+* <span data-ttu-id="90aee-142">開発中は、 *appsettings*.\* **Development** _._json\* 構成によって、 *appsettings.json* で見つかった値が上書きされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-142">In development, *appsettings*.\* **Development** _._json\* configuration overwrites values found in *appsettings.json*.</span></span>
+* <span data-ttu-id="90aee-143">運用環境では、 *appsettings*.\* **Production** _._json\* 構成によって、 *appsettings.json* で見つかった値が上書きされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-143">In production, *appsettings*.\* **Production** _._json\* configuration overwrites values found in *appsettings.json*.</span></span> <span data-ttu-id="90aee-144">たとえば、Azure にアプリをデプロイする場合。</span><span class="sxs-lookup"><span data-stu-id="90aee-144">For example, when deploying the app to Azure.</span></span>
 
 <a name="optpat"></a>
 
@@ -98,7 +98,7 @@ ms.locfileid: "93057974"
 
 [!INCLUDE[](~/includes/bind.md)]
 
-<span data-ttu-id="90aee-146">[既定](#default)の構成を利用する場合、 [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75) で *:::no-loc(appsettings.json):::* と *appsettings.* `Environment` *.json* ファイルを有効にすることができます。</span><span class="sxs-lookup"><span data-stu-id="90aee-146">Using the [default](#default) configuration, the *:::no-loc(appsettings.json):::* and *appsettings.*`Environment`*.json* files are enabled with [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75).</span></span> <span data-ttu-id="90aee-147">アプリの開始\* **後** _に *:::no-loc(appsettings.json):::* と *appsettings.* `Environment` *.json* ファイルに加えられた変更は、[JSON 構成プロバイダー](#jcp) によって読み取られます。</span><span class="sxs-lookup"><span data-stu-id="90aee-147">Changes made to the *:::no-loc(appsettings.json):::* and *appsettings.*`Environment`*.json* file \* **after** _ the app starts are read by the [JSON configuration provider](#jcp).</span></span>
+<span data-ttu-id="90aee-146">[既定](#default)の構成を利用する場合、 [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75) で *appsettings.json* と *appsettings.* `Environment` *.json* ファイルを有効にすることができます。</span><span class="sxs-lookup"><span data-stu-id="90aee-146">Using the [default](#default) configuration, the *appsettings.json* and *appsettings.*`Environment`*.json* files are enabled with [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75).</span></span> <span data-ttu-id="90aee-147">アプリの開始\* **後** _に *appsettings.json* と *appsettings.* `Environment` *.json* ファイルに加えられた変更は、[JSON 構成プロバイダー](#jcp) によって読み取られます。</span><span class="sxs-lookup"><span data-stu-id="90aee-147">Changes made to the *appsettings.json* and *appsettings.*`Environment`*.json* file \* **after** _ the app starts are read by the [JSON configuration provider](#jcp).</span></span>
 
 <span data-ttu-id="90aee-148">追加の JSON 構成ファイルを追加する方法の詳細については、このドキュメント中の「[JSON 構成プロバイダー](#jcp)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="90aee-148">See [JSON configuration provider](#jcp) in this document for information on adding additional JSON configuration files.</span></span>
 
@@ -116,7 +116,7 @@ ms.locfileid: "93057974"
 * <span data-ttu-id="90aee-154">開発環境やテスト環境では運用シークレットを使用しないでください。</span><span class="sxs-lookup"><span data-stu-id="90aee-154">Don't use production secrets in development or test environments.</span></span>
 * <span data-ttu-id="90aee-155">プロジェクトの外部にシークレットを指定してください。そうすれば、誤ってリソース コード リポジトリにコミットされることはありません。</span><span class="sxs-lookup"><span data-stu-id="90aee-155">Specify secrets outside of the project so that they can't be accidentally committed to a source code repository.</span></span>
 
-<span data-ttu-id="90aee-156">[既定](#default)では、 [シークレット マネージャー](xref:security/app-secrets)によって、構成設定が、 *:::no-loc(appsettings.json):::* および *appsettings.* `Environment` *.json* の後に読み取られます。</span><span class="sxs-lookup"><span data-stu-id="90aee-156">By [default](#default), [Secret manager](xref:security/app-secrets) reads configuration settings after *:::no-loc(appsettings.json):::* and *appsettings.*`Environment`*.json*.</span></span>
+<span data-ttu-id="90aee-156">[既定](#default)では、 [シークレット マネージャー](xref:security/app-secrets)によって、構成設定が、 *appsettings.json* および *appsettings.* `Environment` *.json* の後に読み取られます。</span><span class="sxs-lookup"><span data-stu-id="90aee-156">By [default](#default), [Secret manager](xref:security/app-secrets) reads configuration settings after *appsettings.json* and *appsettings.*`Environment`*.json*.</span></span>
 
 <span data-ttu-id="90aee-157">パスワードその他の機密データの格納については、次を参照してください：</span><span class="sxs-lookup"><span data-stu-id="90aee-157">For more information on storing passwords or other sensitive data:</span></span>
 
@@ -129,7 +129,7 @@ ms.locfileid: "93057974"
 
 ## <a name="environment-variables"></a><span data-ttu-id="90aee-162">環境変数</span><span class="sxs-lookup"><span data-stu-id="90aee-162">Environment variables</span></span>
 
-<span data-ttu-id="90aee-163">[既定](#default)の構成を使用すると、<xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> によって、 *:::no-loc(appsettings.json):::* 、 *appsettings.* `Environment` *.json* 、および[シークレット マネージャー](xref:security/app-secrets)の読み取り後に、環境変数のキーと値のペアから構成が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-163">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> loads configuration from environment variable key-value pairs after reading *:::no-loc(appsettings.json):::* , *appsettings.*`Environment`*.json* , and [Secret manager](xref:security/app-secrets).</span></span> <span data-ttu-id="90aee-164">そのため、環境から読み取られたキー値によって、 *:::no-loc(appsettings.json):::* 、 *appsettings.* `Environment` *.json* 、およびシークレット マネージャーから読み取られた値がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-164">Therefore, key values read from the environment override values read from *:::no-loc(appsettings.json):::* , *appsettings.*`Environment`*.json* , and Secret manager.</span></span>
+<span data-ttu-id="90aee-163">[既定](#default)の構成を使用すると、<xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> によって、 *appsettings.json* 、 *appsettings.* `Environment` *.json* 、および[シークレット マネージャー](xref:security/app-secrets)の読み取り後に、環境変数のキーと値のペアから構成が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-163">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> loads configuration from environment variable key-value pairs after reading *appsettings.json* , *appsettings.*`Environment`*.json* , and [Secret manager](xref:security/app-secrets).</span></span> <span data-ttu-id="90aee-164">そのため、環境から読み取られたキー値によって、 *appsettings.json* 、 *appsettings.* `Environment` *.json* 、およびシークレット マネージャーから読み取られた値がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-164">Therefore, key values read from the environment override values read from *appsettings.json* , *appsettings.*`Environment`*.json* , and Secret manager.</span></span>
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -158,7 +158,7 @@ setx Position__Title Setx_Environment_Editor /M
 setx Position__Name Environment_Rick /M
 ```
 
-<span data-ttu-id="90aee-176">上記のコマンドによって、 *:::no-loc(appsettings.json):::* および *appsettings.* `Environment` *.json* がオーバーライドされるのをテストするには:</span><span class="sxs-lookup"><span data-stu-id="90aee-176">To test that the preceding commands override *:::no-loc(appsettings.json):::* and *appsettings.*`Environment`*.json* :</span></span>
+<span data-ttu-id="90aee-176">上記のコマンドによって、 *appsettings.json* および *appsettings.* `Environment` *.json* がオーバーライドされるのをテストするには:</span><span class="sxs-lookup"><span data-stu-id="90aee-176">To test that the preceding commands override *appsettings.json* and *appsettings.*`Environment`*.json* :</span></span>
 
 * <span data-ttu-id="90aee-177">Visual Studio の場合:Visual Studio を終了して再起動します。</span><span class="sxs-lookup"><span data-stu-id="90aee-177">With Visual Studio: Exit and restart Visual Studio.</span></span>
 * <span data-ttu-id="90aee-178">CLI の場合:新しいコマンド ウィンドウを起動し、`dotnet run` を入力します。</span><span class="sxs-lookup"><span data-stu-id="90aee-178">With the CLI: Start a new command window and enter `dotnet run`.</span></span>
@@ -204,7 +204,7 @@ dotnet run
 
 <span data-ttu-id="90aee-199">[既定](#default)の構成を使用して、<xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> は、以下の構成ソースの後にコマンド ライン引数のキーと値のペアから構成を読み込みます：</span><span class="sxs-lookup"><span data-stu-id="90aee-199">Using the [default](#default) configuration, the <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> loads configuration from command-line argument key-value pairs after the following configuration sources:</span></span>
 
-* <span data-ttu-id="90aee-200">*:::no-loc(appsettings.json):::* および *appsettings*.`Environment`. *json* ファイル。</span><span class="sxs-lookup"><span data-stu-id="90aee-200">*:::no-loc(appsettings.json):::* and *appsettings*.`Environment`. *json* files.</span></span>
+* <span data-ttu-id="90aee-200">*appsettings.json* および *appsettings*.`Environment`. *json* ファイル。</span><span class="sxs-lookup"><span data-stu-id="90aee-200">*appsettings.json* and *appsettings*.`Environment`. *json* files.</span></span>
 * <span data-ttu-id="90aee-201">開発環境の [App シークレット (Secret Manager)](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="90aee-201">[App secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
 * <span data-ttu-id="90aee-202">環境変数。</span><span class="sxs-lookup"><span data-stu-id="90aee-202">Environment variables.</span></span>
 
@@ -268,9 +268,9 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 <span data-ttu-id="90aee-229">構成 API では、構成キーの区切り記号を使用して階層データをフラット化することにより、階層型の構成データの読み取りが行われます。</span><span class="sxs-lookup"><span data-stu-id="90aee-229">The Configuration API reads hierarchical configuration data by flattening the hierarchical data with the use of a delimiter in the configuration keys.</span></span>
 
-<span data-ttu-id="90aee-230">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) には、次の *:::no-loc(appsettings.json):::* ファイルが含まれます:</span><span class="sxs-lookup"><span data-stu-id="90aee-230">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *:::no-loc(appsettings.json):::* file:</span></span>
+<span data-ttu-id="90aee-230">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) には、次の *appsettings.json* ファイルが含まれます:</span><span class="sxs-lookup"><span data-stu-id="90aee-230">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *appsettings.json* file:</span></span>
 
-[!code-json[](index/samples/3.x/ConfigSample/:::no-loc(appsettings.json):::)]
+[!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
 <span data-ttu-id="90aee-231">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) の次のコードでは、構成設定のいくつかが表示されます：</span><span class="sxs-lookup"><span data-stu-id="90aee-231">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) displays several of the configurations settings:</span></span>
 
@@ -323,7 +323,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 <span data-ttu-id="90aee-277">一般的な一連の構成プロバイダーは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="90aee-277">A typical sequence of configuration providers is:</span></span>
 
-1. *:::no-loc(appsettings.json):::*
+1. *appsettings.json*
 1. <span data-ttu-id="90aee-278">*appsettings*.`Environment`. *json*</span><span class="sxs-lookup"><span data-stu-id="90aee-278">*appsettings*.`Environment`. *json*</span></span>
 1. [<span data-ttu-id="90aee-279">シークレットマネージャー</span><span class="sxs-lookup"><span data-stu-id="90aee-279">Secret Manager</span></span>](xref:security/app-secrets)
 1. <span data-ttu-id="90aee-280">[環境変数構成プロバイダー](#evcp)を使用する環境変数。</span><span class="sxs-lookup"><span data-stu-id="90aee-280">Environment variables using the [Environment Variables configuration provider](#evcp).</span></span>
@@ -419,7 +419,7 @@ dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 
 
 <span data-ttu-id="90aee-335">上記のコードでは、_MyConfig.json\* および *MyConfig*.`Environment`. *json* ファイル内の設定は:</span><span class="sxs-lookup"><span data-stu-id="90aee-335">In the preceding code, settings in the _MyConfig.json\* and  *MyConfig*.`Environment`. *json* files:</span></span>
 
-* <span data-ttu-id="90aee-336">*:::no-loc(appsettings.json):::* および *appsettings*.`Environment`. *json* ファイル内の設定をオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="90aee-336">Override settings in the *:::no-loc(appsettings.json):::* and *appsettings*.`Environment`. *json* files.</span></span>
+* <span data-ttu-id="90aee-336">*appsettings.json* および *appsettings*.`Environment`. *json* ファイル内の設定をオーバーライドします。</span><span class="sxs-lookup"><span data-stu-id="90aee-336">Override settings in the *appsettings.json* and *appsettings*.`Environment`. *json* files.</span></span>
 * <span data-ttu-id="90aee-337">[環境変数の構成プロバイダー](#evcp)と[コマンドライン構成プロバイダー](#clcp)の設定によってオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-337">Are overridden by settings in the [Environment variables configuration provider](#evcp) and the [Command-line configuration provider](#clcp).</span></span>
 
 <span data-ttu-id="90aee-338">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)には、次の *MyConfig.json* ファイルが含まれます：</span><span class="sxs-lookup"><span data-stu-id="90aee-338">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contains the following  *MyConfig.json* file:</span></span>
@@ -689,9 +689,9 @@ Index: 5  Value: value5
 
 <span data-ttu-id="90aee-436">起動時の簡易メソッドを使用して構成にアクセスする例については、[アプリ起動時の簡易メソッド](xref:fundamentals/startup#convenience-methods)に関連する記事をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="90aee-436">For an example of accessing configuration using startup convenience methods, see [App startup: Convenience methods](xref:fundamentals/startup#convenience-methods).</span></span>
 
-## <a name="access-configuration-in-no-locrazor-pages"></a><span data-ttu-id="90aee-437">:::no-loc(Razor)::: ページの構成にアクセスする</span><span class="sxs-lookup"><span data-stu-id="90aee-437">Access configuration in :::no-loc(Razor)::: Pages</span></span>
+## <a name="access-configuration-in-no-locrazor-pages"></a><span data-ttu-id="90aee-437">Razor ページの構成にアクセスする</span><span class="sxs-lookup"><span data-stu-id="90aee-437">Access configuration in Razor Pages</span></span>
 
-<span data-ttu-id="90aee-438">次のコードでは :::no-loc(Razor)::: ページの構成データが表示されます:</span><span class="sxs-lookup"><span data-stu-id="90aee-438">The following code displays configuration data in a :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="90aee-438">次のコードでは Razor ページの構成データが表示されます:</span><span class="sxs-lookup"><span data-stu-id="90aee-438">The following code displays configuration data in a Razor Page:</span></span>
 
 [!code-cshtml[](index/samples/3.x/ConfigSample/Pages/Test5.cshtml)]
 
@@ -699,7 +699,7 @@ Index: 5  Value: value5
 
 [!code-csharp[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Startup3.cs?name=snippet_Example2)]
 
-<span data-ttu-id="90aee-440">次のマークアップは、[`@inject`](xref:mvc/views/razor#inject) :::no-loc(Razor)::: ディレクティブを使用して、オプションの値を解決して表示します。</span><span class="sxs-lookup"><span data-stu-id="90aee-440">The following markup uses the [`@inject`](xref:mvc/views/razor#inject) :::no-loc(Razor)::: directive to resolve and display the options values:</span></span>
+<span data-ttu-id="90aee-440">次のマークアップは、[`@inject`](xref:mvc/views/razor#inject) Razor ディレクティブを使用して、オプションの値を解決して表示します。</span><span class="sxs-lookup"><span data-stu-id="90aee-440">The following markup uses the [`@inject`](xref:mvc/views/razor#inject) Razor directive to resolve and display the options values:</span></span>
 
 [!code-cshtml[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/Pages/Test3.cshtml)]
 
@@ -723,7 +723,7 @@ Index: 5  Value: value5
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Pages/Test2.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="90aee-449">先の例では、値 `Option1` と `Option2` が *:::no-loc(appsettings.json):::* で指定されてから、構成されているデリゲートによりオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-449">In the preceding example, the values of `Option1` and `Option2` are specified in *:::no-loc(appsettings.json):::* and then overridden by the configured delegate.</span></span>
+<span data-ttu-id="90aee-449">先の例では、値 `Option1` と `Option2` が *appsettings.json* で指定されてから、構成されているデリゲートによりオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-449">In the preceding example, the values of `Option1` and `Option2` are specified in *appsettings.json* and then overridden by the configured delegate.</span></span>
 
 <a name="hvac"></a>
 
@@ -825,7 +825,7 @@ using Microsoft.Extensions.Configuration;
   * <span data-ttu-id="90aee-517">[環境変数構成プロバイダー](#environment-variables-configuration-provider)を使用する、プレフィックス `ASPNETCORE_` (`ASPNETCORE_ENVIRONMENT` など) が付いた環境変数。</span><span class="sxs-lookup"><span data-stu-id="90aee-517">Environment variables prefixed with `ASPNETCORE_` (for example, `ASPNETCORE_ENVIRONMENT`) using the [Environment Variables Configuration Provider](#environment-variables-configuration-provider).</span></span> <span data-ttu-id="90aee-518">構成のキーと値のペアが読み込まれるときに、プレフィックス (`ASPNETCORE_`) は削除されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-518">The prefix (`ASPNETCORE_`) is stripped when the configuration key-value pairs are loaded.</span></span>
   * <span data-ttu-id="90aee-519">[コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。</span><span class="sxs-lookup"><span data-stu-id="90aee-519">Command-line arguments using the [Command-line Configuration Provider](#command-line-configuration-provider).</span></span>
 * <span data-ttu-id="90aee-520">アプリの構成は、次から提供されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-520">App configuration is provided from:</span></span>
-  * <span data-ttu-id="90aee-521">[ファイル構成プロバイダー](#file-configuration-provider)を使用する *:::no-loc(appsettings.json):::* 。</span><span class="sxs-lookup"><span data-stu-id="90aee-521">*:::no-loc(appsettings.json):::* using the [File Configuration Provider](#file-configuration-provider).</span></span>
+  * <span data-ttu-id="90aee-521">[ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.json* 。</span><span class="sxs-lookup"><span data-stu-id="90aee-521">*appsettings.json* using the [File Configuration Provider](#file-configuration-provider).</span></span>
   * <span data-ttu-id="90aee-522">[ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.{Environment}.json* 。</span><span class="sxs-lookup"><span data-stu-id="90aee-522">*appsettings.{Environment}.json* using the [File Configuration Provider](#file-configuration-provider).</span></span>
   * <span data-ttu-id="90aee-523">エントリ アセンブリを使用して `Development` 環境でアプリが実行される場合に使用される[シークレット マネージャー](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="90aee-523">[Secret Manager](xref:security/app-secrets) when the app runs in the `Development` environment using the entry assembly.</span></span>
   * <span data-ttu-id="90aee-524">[環境変数構成プロバイダー](#environment-variables-configuration-provider)を使用する環境変数。</span><span class="sxs-lookup"><span data-stu-id="90aee-524">Environment variables using the [Environment Variables Configuration Provider](#environment-variables-configuration-provider).</span></span>
@@ -882,7 +882,7 @@ using Microsoft.Extensions.Configuration;
 
 <span data-ttu-id="90aee-551">変更の検出を実装する構成プロバイダーは、基になる設定が変更された場合に構成を再読み込みする機能を備えています。</span><span class="sxs-lookup"><span data-stu-id="90aee-551">Configuration providers that implement change detection have the ability to reload configuration when an underlying setting is changed.</span></span> <span data-ttu-id="90aee-552">たとえば、ファイル構成プロバイダー (このトピックで後から説明します) と[Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)では、変更の検出を実装します。</span><span class="sxs-lookup"><span data-stu-id="90aee-552">For example, the File Configuration Provider (described later in this topic) and the [Azure Key Vault Configuration Provider](xref:security/key-vault-configuration) implement change detection.</span></span>
 
-<span data-ttu-id="90aee-553"><xref:Microsoft.Extensions.Configuration.IConfiguration> は、アプリの[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) コンテナーで使用できます。</span><span class="sxs-lookup"><span data-stu-id="90aee-553"><xref:Microsoft.Extensions.Configuration.IConfiguration> is available in the app's [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="90aee-554"><xref:Microsoft.Extensions.Configuration.IConfiguration> を :::no-loc(Razor)::: Pages <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel> または MVC <xref:Microsoft.AspNetCore.Mvc.Controller> に挿入して、クラスの構成を取得することができます。</span><span class="sxs-lookup"><span data-stu-id="90aee-554"><xref:Microsoft.Extensions.Configuration.IConfiguration> can be injected into a :::no-loc(Razor)::: Pages <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel> or MVC <xref:Microsoft.AspNetCore.Mvc.Controller> to obtain configuration for the class.</span></span>
+<span data-ttu-id="90aee-553"><xref:Microsoft.Extensions.Configuration.IConfiguration> は、アプリの[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) コンテナーで使用できます。</span><span class="sxs-lookup"><span data-stu-id="90aee-553"><xref:Microsoft.Extensions.Configuration.IConfiguration> is available in the app's [dependency injection (DI)](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="90aee-554"><xref:Microsoft.Extensions.Configuration.IConfiguration> を Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> または MVC <xref:Microsoft.AspNetCore.Mvc.Controller> に挿入して、クラスの構成を取得することができます。</span><span class="sxs-lookup"><span data-stu-id="90aee-554"><xref:Microsoft.Extensions.Configuration.IConfiguration> can be injected into a Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> or MVC <xref:Microsoft.AspNetCore.Mvc.Controller> to obtain configuration for the class.</span></span>
 
 <span data-ttu-id="90aee-555">次の例では、構成値にアクセスするために `_config` フィールドが使用されています。</span><span class="sxs-lookup"><span data-stu-id="90aee-555">In the following examples, the `_config` field is used to access configuration values:</span></span>
 
@@ -951,7 +951,7 @@ public class HomeController : Controller
 
 <span data-ttu-id="90aee-600">一般的な一連の構成プロバイダーは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="90aee-600">A typical sequence of configuration providers is:</span></span>
 
-1. <span data-ttu-id="90aee-601">ファイル ( *:::no-loc(appsettings.json):::* 、 *appsettings.{Environment}.json* 。ここで、`{Environment}` はアプリの現在のホスト環境です)</span><span class="sxs-lookup"><span data-stu-id="90aee-601">Files ( *:::no-loc(appsettings.json):::* , *appsettings.{Environment}.json* , where `{Environment}` is the app's current hosting environment)</span></span>
+1. <span data-ttu-id="90aee-601">ファイル ( *appsettings.json* 、 *appsettings.{Environment}.json* 。ここで、`{Environment}` はアプリの現在のホスト環境です)</span><span class="sxs-lookup"><span data-stu-id="90aee-601">Files ( *appsettings.json* , *appsettings.{Environment}.json* , where `{Environment}` is the app's current hosting environment)</span></span>
 1. [<span data-ttu-id="90aee-602">Azure Key Vault</span><span class="sxs-lookup"><span data-stu-id="90aee-602">Azure Key Vault</span></span>](xref:security/key-vault-configuration)
 1. <span data-ttu-id="90aee-603">[ユーザー シークレット (Secret Manager)](xref:security/app-secrets) (開発環境のみ)</span><span class="sxs-lookup"><span data-stu-id="90aee-603">[User secrets (Secret Manager)](xref:security/app-secrets) (Development environment only)</span></span>
 1. <span data-ttu-id="90aee-604">環境変数</span><span class="sxs-lookup"><span data-stu-id="90aee-604">Environment variables</span></span>
@@ -1028,7 +1028,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 
 <span data-ttu-id="90aee-625">`CreateDefaultBuilder` では次のものも読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-625">`CreateDefaultBuilder` also loads:</span></span>
 
-* <span data-ttu-id="90aee-626">*:::no-loc(appsettings.json):::* および *appsettings.{Environment}.json* ファイルからの省略可能な構成。</span><span class="sxs-lookup"><span data-stu-id="90aee-626">Optional configuration from *:::no-loc(appsettings.json):::* and *appsettings.{Environment}.json* files.</span></span>
+* <span data-ttu-id="90aee-626">*appsettings.json* および *appsettings.{Environment}.json* ファイルからの省略可能な構成。</span><span class="sxs-lookup"><span data-stu-id="90aee-626">Optional configuration from *appsettings.json* and *appsettings.{Environment}.json* files.</span></span>
 * <span data-ttu-id="90aee-627">開発環境の[ユーザー シークレット (Secret Manager)](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="90aee-627">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
 * <span data-ttu-id="90aee-628">環境変数。</span><span class="sxs-lookup"><span data-stu-id="90aee-628">Environment variables.</span></span>
 
@@ -1143,7 +1143,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 <span data-ttu-id="90aee-682">`CreateDefaultBuilder` では次のものも読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-682">`CreateDefaultBuilder` also loads:</span></span>
 
 * <span data-ttu-id="90aee-683">プレフィックスなしの `AddEnvironmentVariables` 呼び出しによる、プレフィックスの付いていない環境変数からのアプリの構成。</span><span class="sxs-lookup"><span data-stu-id="90aee-683">App configuration from unprefixed environment variables by calling `AddEnvironmentVariables` without a prefix.</span></span>
-* <span data-ttu-id="90aee-684">*:::no-loc(appsettings.json):::* および *appsettings.{Environment}.json* ファイルからの省略可能な構成。</span><span class="sxs-lookup"><span data-stu-id="90aee-684">Optional configuration from *:::no-loc(appsettings.json):::* and *appsettings.{Environment}.json* files.</span></span>
+* <span data-ttu-id="90aee-684">*appsettings.json* および *appsettings.{Environment}.json* ファイルからの省略可能な構成。</span><span class="sxs-lookup"><span data-stu-id="90aee-684">Optional configuration from *appsettings.json* and *appsettings.{Environment}.json* files.</span></span>
 * <span data-ttu-id="90aee-685">開発環境の[ユーザー シークレット (Secret Manager)](xref:security/app-secrets)。</span><span class="sxs-lookup"><span data-stu-id="90aee-685">[User secrets (Secret Manager)](xref:security/app-secrets) in the Development environment.</span></span>
 * <span data-ttu-id="90aee-686">コマンド ライン引数。</span><span class="sxs-lookup"><span data-stu-id="90aee-686">Command-line arguments.</span></span>
 
@@ -1296,7 +1296,7 @@ key=value
 
 <span data-ttu-id="90aee-762">`CreateDefaultBuilder` を使用して新しいホスト ビルダーを初期化すると、`AddJsonFile` が自動的に 2 回呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-762">`AddJsonFile` is automatically called twice when a new host builder is initialized with `CreateDefaultBuilder`.</span></span> <span data-ttu-id="90aee-763">このメソッドは、次から構成を読み込むために呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-763">The method is called to load configuration from:</span></span>
 
-* <span data-ttu-id="90aee-764">*:::no-loc(appsettings.json):::* : このファイルは最初に読み取られます。</span><span class="sxs-lookup"><span data-stu-id="90aee-764">*:::no-loc(appsettings.json):::* : This file is read first.</span></span> <span data-ttu-id="90aee-765">ファイルの環境バージョンを使用すると、 *:::no-loc(appsettings.json):::* ファイルによって指定された値をオーバーライドできます。</span><span class="sxs-lookup"><span data-stu-id="90aee-765">The environment version of the file can override the values provided by the *:::no-loc(appsettings.json):::* file.</span></span>
+* <span data-ttu-id="90aee-764">*appsettings.json* : このファイルは最初に読み取られます。</span><span class="sxs-lookup"><span data-stu-id="90aee-764">*appsettings.json* : This file is read first.</span></span> <span data-ttu-id="90aee-765">ファイルの環境バージョンを使用すると、 *appsettings.json* ファイルによって指定された値をオーバーライドできます。</span><span class="sxs-lookup"><span data-stu-id="90aee-765">The environment version of the file can override the values provided by the *appsettings.json* file.</span></span>
 * <span data-ttu-id="90aee-766">*appsettings.{Environment}.json* :ファイルの環境バージョンは、 [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-766">*appsettings.{Environment}.json* : The environment version of the file is loaded based on the [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).</span></span>
 
 <span data-ttu-id="90aee-767">詳細については、「[既定の構成](#default-configuration)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="90aee-767">For more information, see the [Default configuration](#default-configuration) section.</span></span>
@@ -1309,7 +1309,7 @@ key=value
 
 <span data-ttu-id="90aee-772">JSON 構成プロバイダーが最初に確立されます。</span><span class="sxs-lookup"><span data-stu-id="90aee-772">The JSON Configuration Provider is established first.</span></span> <span data-ttu-id="90aee-773">このため、ユーザー シークレット、環境変数、およびコマンド ライン引数によって、 *appsettings* ファイルによって設定された構成がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="90aee-773">Therefore, user secrets, environment variables, and command-line arguments override configuration set by the *appsettings* files.</span></span>
 
-<span data-ttu-id="90aee-774">ホストのビルド時に `ConfigureAppConfiguration` を呼び出して、 *:::no-loc(appsettings.json):::* および *appsettings.{Environment}.json* 以外のファイルにアプリの構成を指定します。</span><span class="sxs-lookup"><span data-stu-id="90aee-774">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration for files other than *:::no-loc(appsettings.json):::* and *appsettings.{Environment}.json* :</span></span>
+<span data-ttu-id="90aee-774">ホストのビルド時に `ConfigureAppConfiguration` を呼び出して、 *appsettings.json* および *appsettings.{Environment}.json* 以外のファイルにアプリの構成を指定します。</span><span class="sxs-lookup"><span data-stu-id="90aee-774">Call `ConfigureAppConfiguration` when building the host to specify the app's configuration for files other than *appsettings.json* and *appsettings.{Environment}.json* :</span></span>
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1323,9 +1323,9 @@ key=value
 
 <span data-ttu-id="90aee-776">サンプル アプリでは、静的な簡易メソッド `CreateDefaultBuilder` を利用してホストをビルドします。これには `AddJsonFile` の 2 回の呼び出しが含まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-776">The sample app takes advantage of the static convenience method `CreateDefaultBuilder` to build the host, which includes two calls to `AddJsonFile`:</span></span>
 
-* <span data-ttu-id="90aee-777">`AddJsonFile` の最初の呼び出しを行うと、 *:::no-loc(appsettings.json):::* から構成が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-777">The first call to `AddJsonFile` loads configuration from *:::no-loc(appsettings.json):::* :</span></span>
+* <span data-ttu-id="90aee-777">`AddJsonFile` の最初の呼び出しを行うと、 *appsettings.json* から構成が読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-777">The first call to `AddJsonFile` loads configuration from *appsettings.json* :</span></span>
 
-  [!code-json[](index/samples/2.x/ConfigurationSample/:::no-loc(appsettings.json):::)]
+  [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.json)]
 
 * <span data-ttu-id="90aee-778">`AddJsonFile` の 2 回目の呼び出しでは、 *appsettings.{Environment}.json* から構成を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="90aee-778">The second call to `AddJsonFile` loads configuration from *appsettings.{Environment}.json*.</span></span> <span data-ttu-id="90aee-779">サンプル アプリの *appsettings.Development.json* では、次のファイルが読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="90aee-779">For *appsettings.Development.json* in the sample app, the following file is loaded:</span></span>
 
@@ -1337,7 +1337,7 @@ key=value
    1. <span data-ttu-id="90aee-785">*Properties/launchSettings.json* ファイルを開きます。</span><span class="sxs-lookup"><span data-stu-id="90aee-785">Open the *Properties/launchSettings.json* file.</span></span>
    1. <span data-ttu-id="90aee-786">`ConfigurationSample` プロファイルで、`ASPNETCORE_ENVIRONMENT` 環境変数の値を `Production` に変更します。</span><span class="sxs-lookup"><span data-stu-id="90aee-786">In the `ConfigurationSample` profile, change the value of the `ASPNETCORE_ENVIRONMENT` environment variable to `Production`.</span></span>
    1. <span data-ttu-id="90aee-787">ファイルを保存し、コマンド シェルで `dotnet run` を使用してアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="90aee-787">Save the file and run the app with `dotnet run` in a command shell.</span></span>
-1. <span data-ttu-id="90aee-788">*appsettings.Development.json* 内の設定によって、 *:::no-loc(appsettings.json):::* 内の設定はオーバーライドされなくなりました。</span><span class="sxs-lookup"><span data-stu-id="90aee-788">The settings in the *appsettings.Development.json* no longer override the settings in *:::no-loc(appsettings.json):::*.</span></span> <span data-ttu-id="90aee-789">キー `Logging:LogLevel:Default` のログ レベルは `Warning` です。</span><span class="sxs-lookup"><span data-stu-id="90aee-789">The log level for the key `Logging:LogLevel:Default` is `Warning`.</span></span>
+1. <span data-ttu-id="90aee-788">*appsettings.Development.json* 内の設定によって、 *appsettings.json* 内の設定はオーバーライドされなくなりました。</span><span class="sxs-lookup"><span data-stu-id="90aee-788">The settings in the *appsettings.Development.json* no longer override the settings in *appsettings.json*.</span></span> <span data-ttu-id="90aee-789">キー `Logging:LogLevel:Default` のログ レベルは `Warning` です。</span><span class="sxs-lookup"><span data-stu-id="90aee-789">The log level for the key `Logging:LogLevel:Default` is `Warning`.</span></span>
 
 ### <a name="xml-configuration-provider"></a><span data-ttu-id="90aee-790">XML 構成プロバイダー</span><span class="sxs-lookup"><span data-stu-id="90aee-790">XML Configuration Provider</span></span>
 
@@ -1801,11 +1801,11 @@ public class Startup
 
 <span data-ttu-id="90aee-994">起動時の簡易メソッドを使用して構成にアクセスする例については、[アプリ起動時の簡易メソッド](xref:fundamentals/startup#convenience-methods)に関連する記事をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="90aee-994">For an example of accessing configuration using startup convenience methods, see [App startup: Convenience methods](xref:fundamentals/startup#convenience-methods).</span></span>
 
-## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a><span data-ttu-id="90aee-995">:::no-loc(Razor)::: Pages ページまたは MVC ビューで構成にアクセスする</span><span class="sxs-lookup"><span data-stu-id="90aee-995">Access configuration in a :::no-loc(Razor)::: Pages page or MVC view</span></span>
+## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a><span data-ttu-id="90aee-995">Razor Pages ページまたは MVC ビューで構成にアクセスする</span><span class="sxs-lookup"><span data-stu-id="90aee-995">Access configuration in a Razor Pages page or MVC view</span></span>
 
-<span data-ttu-id="90aee-996">:::no-loc(Razor)::: Pages ページまたは MVC ビューで構成設定にアクセスするには、[Microsoft.Extensions.Configuration](xref:Microsoft.Extensions.Configuration) 名前空間に [using ディレクティブ](xref:mvc/views/razor#using) ([C# リファレンス: using ディレクティブ](/dotnet/csharp/language-reference/keywords/using-directive)) を追加して、<xref:Microsoft.Extensions.Configuration.IConfiguration> をページまたはビューに挿入します。</span><span class="sxs-lookup"><span data-stu-id="90aee-996">To access configuration settings in a :::no-loc(Razor)::: Pages page or an MVC view, add a [using directive](xref:mvc/views/razor#using) ([C# reference: using directive](/dotnet/csharp/language-reference/keywords/using-directive)) for the [Microsoft.Extensions.Configuration namespace](xref:Microsoft.Extensions.Configuration) and inject <xref:Microsoft.Extensions.Configuration.IConfiguration> into the page or view.</span></span>
+<span data-ttu-id="90aee-996">Razor Pages ページまたは MVC ビューで構成設定にアクセスするには、[Microsoft.Extensions.Configuration](xref:Microsoft.Extensions.Configuration) 名前空間に [using ディレクティブ](xref:mvc/views/razor#using) ([C# リファレンス: using ディレクティブ](/dotnet/csharp/language-reference/keywords/using-directive)) を追加して、<xref:Microsoft.Extensions.Configuration.IConfiguration> をページまたはビューに挿入します。</span><span class="sxs-lookup"><span data-stu-id="90aee-996">To access configuration settings in a Razor Pages page or an MVC view, add a [using directive](xref:mvc/views/razor#using) ([C# reference: using directive](/dotnet/csharp/language-reference/keywords/using-directive)) for the [Microsoft.Extensions.Configuration namespace](xref:Microsoft.Extensions.Configuration) and inject <xref:Microsoft.Extensions.Configuration.IConfiguration> into the page or view.</span></span>
 
-<span data-ttu-id="90aee-997">:::no-loc(Razor)::: Pages ページで、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="90aee-997">In a :::no-loc(Razor)::: Pages page:</span></span>
+<span data-ttu-id="90aee-997">Razor Pages ページで、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="90aee-997">In a Razor Pages page:</span></span>
 
 ```cshtml
 @page
@@ -1819,7 +1819,7 @@ public class Startup
     <title>Index Page</title>
 </head>
 <body>
-    <h1>Access configuration in a :::no-loc(Razor)::: Pages page</h1>
+    <h1>Access configuration in a Razor Pages page</h1>
     <p>Configuration value for 'key': @Configuration["key"]</p>
 </body>
 </html>

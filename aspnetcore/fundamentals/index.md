@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/index
 ms.openlocfilehash: 25348f8486ec6ccb53ebf527ad4519638dd5f73e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -55,7 +55,7 @@ ms.locfileid: "93059378"
 
 <span data-ttu-id="c2147-116">サービスは通常、コンストラクター挿入を使用して DI から解決されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-116">Services are typically resolved from DI using constructor injection.</span></span> <span data-ttu-id="c2147-117">コンストラクター挿入では、必要な型またはインターフェイスのコンストラクター パラメーターがクラスで宣言されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-117">With constructor injection, a class declares a constructor parameter of either the required type or an interface.</span></span> <span data-ttu-id="c2147-118">DI フレームワークでは、実行時にこのサービスのインスタンスが提供されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-118">The DI framework provides an instance of this service at runtime.</span></span>
 
-<span data-ttu-id="c2147-119">次の例では、コンストラクター挿入を使用して、DI から `:::no-loc(Razor):::PagesMovieContext` を解決します。</span><span class="sxs-lookup"><span data-stu-id="c2147-119">The following example uses constructor injection to resolve a `:::no-loc(Razor):::PagesMovieContext` from DI:</span></span>
+<span data-ttu-id="c2147-119">次の例では、コンストラクター挿入を使用して、DI から `RazorPagesMovieContext` を解決します。</span><span class="sxs-lookup"><span data-stu-id="c2147-119">The following example uses constructor injection to resolve a `RazorPagesMovieContext` from DI:</span></span>
 
 [!code-csharp[](index/samples_snapshot/3.x/Index.cshtml.cs?highlight=5)]
 
@@ -101,7 +101,7 @@ ms.locfileid: "93059378"
 <span data-ttu-id="c2147-145">`CreateDefaultBuilder` と `ConfigureWebHostDefaults` メソッドでは、次のような既定のオプションのセットを使用してホストが構成されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-145">The `CreateDefaultBuilder` and `ConfigureWebHostDefaults` methods configure a host with a set of default options, such as:</span></span>
 
 * <span data-ttu-id="c2147-146">Web サーバーとして [Kestrel](#servers) を使用し、IIS の統合を有効にします。</span><span class="sxs-lookup"><span data-stu-id="c2147-146">Use [Kestrel](#servers) as the web server and enable IIS integration.</span></span>
-* <span data-ttu-id="c2147-147">*:::no-loc(appsettings.json):::* 、 *appsettings.{環境名}.json* 、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="c2147-147">Load configuration from *:::no-loc(appsettings.json):::* , *appsettings.{Environment Name}.json* , environment variables, command line arguments, and other configuration sources.</span></span>
+* <span data-ttu-id="c2147-147">*appsettings.json* 、 *appsettings.{環境名}.json* 、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="c2147-147">Load configuration from *appsettings.json* , *appsettings.{Environment Name}.json* , environment variables, command line arguments, and other configuration sources.</span></span>
 * <span data-ttu-id="c2147-148">ログ出力をコンソールとデバッグ プロバイダーに送ります。</span><span class="sxs-lookup"><span data-stu-id="c2147-148">Send logging output to the console and debug providers.</span></span>
 
 <span data-ttu-id="c2147-149">詳細については、「<xref:fundamentals/host/generic-host>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-149">For more information, see <xref:fundamentals/host/generic-host>.</span></span>
@@ -138,7 +138,7 @@ ms.locfileid: "93059378"
 
 <span data-ttu-id="c2147-174">ASP.NET Core は、構成プロバイダーの順序付けされたセットから、名前と値のペアの設定を取得する構成フレームワークとなります。</span><span class="sxs-lookup"><span data-stu-id="c2147-174">ASP.NET Core provides a configuration framework that gets settings as name-value pairs from an ordered set of configuration providers.</span></span> <span data-ttu-id="c2147-175">組み込み構成プロバイダーは、 *.json* ファイル、 *.xml* ファイル、環境変数、コマンドライン引数などのさまざまなソースで使用できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-175">Built-in configuration providers are available for a variety of sources, such as *.json* files, *.xml* files, environment variables, and command-line arguments.</span></span> <span data-ttu-id="c2147-176">他のソースをサポートするには、カスタム構成プロバイダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="c2147-176">Write custom configuration providers to support other sources.</span></span>
 
-<span data-ttu-id="c2147-177">[既定](xref:fundamentals/configuration/index#default)では、ASP.NET Core アプリは *:::no-loc(appsettings.json):::* 、環境変数、コマンドラインなどから読み取るように構成されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-177">By [default](xref:fundamentals/configuration/index#default), ASP.NET Core apps are configured to read from *:::no-loc(appsettings.json):::* , environment variables, the command line, and more.</span></span> <span data-ttu-id="c2147-178">アプリの構成が読み込まれると、環境変数からの値によって *:::no-loc(appsettings.json):::* からの値がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="c2147-178">When the app's configuration is loaded, values from environment variables override values from *:::no-loc(appsettings.json):::*.</span></span>
+<span data-ttu-id="c2147-177">[既定](xref:fundamentals/configuration/index#default)では、ASP.NET Core アプリは *appsettings.json* 、環境変数、コマンドラインなどから読み取るように構成されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-177">By [default](xref:fundamentals/configuration/index#default), ASP.NET Core apps are configured to read from *appsettings.json* , environment variables, the command line, and more.</span></span> <span data-ttu-id="c2147-178">アプリの構成が読み込まれると、環境変数からの値によって *appsettings.json* からの値がオーバーライドされます。</span><span class="sxs-lookup"><span data-stu-id="c2147-178">When the app's configuration is loaded, values from environment variables override values from *appsettings.json*.</span></span>
 
 <span data-ttu-id="c2147-179">関連する構成値を読み取る方法としては、[オプション パターン](xref:fundamentals/configuration/options)を使用することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="c2147-179">The preferred way to read related configuration values is using the [options pattern](xref:fundamentals/configuration/options).</span></span> <span data-ttu-id="c2147-180">詳細については、「[オプションパターンを使用して、階層型の構成データをバインドします](xref:fundamentals/configuration/index#optpat)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-180">For more information, see [Bind hierarchical configuration data using the options pattern](xref:fundamentals/configuration/index#optpat).</span></span>
 
@@ -178,7 +178,7 @@ ms.locfileid: "93059378"
 
 ## <a name="routing"></a><span data-ttu-id="c2147-207">ルーティング</span><span class="sxs-lookup"><span data-stu-id="c2147-207">Routing</span></span>
 
-<span data-ttu-id="c2147-208">*ルート* とは、ハンドラーにマップされている URL のパターンです。</span><span class="sxs-lookup"><span data-stu-id="c2147-208">A *route* is a URL pattern that is mapped to a handler.</span></span> <span data-ttu-id="c2147-209">このハンドラーは一般的には :::no-loc(Razor)::: ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。</span><span class="sxs-lookup"><span data-stu-id="c2147-209">The handler is typically a :::no-loc(Razor)::: page, an action method in an MVC controller, or a middleware.</span></span> <span data-ttu-id="c2147-210">ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-210">ASP.NET Core routing gives you control over the URLs used by your app.</span></span>
+<span data-ttu-id="c2147-208">*ルート* とは、ハンドラーにマップされている URL のパターンです。</span><span class="sxs-lookup"><span data-stu-id="c2147-208">A *route* is a URL pattern that is mapped to a handler.</span></span> <span data-ttu-id="c2147-209">このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。</span><span class="sxs-lookup"><span data-stu-id="c2147-209">The handler is typically a Razor page, an action method in an MVC controller, or a middleware.</span></span> <span data-ttu-id="c2147-210">ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-210">ASP.NET Core routing gives you control over the URLs used by your app.</span></span>
 
 <span data-ttu-id="c2147-211">詳細については、「<xref:fundamentals/routing>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-211">For more information, see <xref:fundamentals/routing>.</span></span>
 
@@ -212,7 +212,7 @@ ms.locfileid: "93059378"
 * <span data-ttu-id="c2147-234">アプリをホストしている実行可能ファイル ( *.exe* )。</span><span class="sxs-lookup"><span data-stu-id="c2147-234">The executable hosting the app ( *.exe* ).</span></span>
 * <span data-ttu-id="c2147-235">アプリを構成するコンパイル済みアセンブリ ( *.dll* )。</span><span class="sxs-lookup"><span data-stu-id="c2147-235">Compiled assemblies that make up the app ( *.dll* ).</span></span>
 * <span data-ttu-id="c2147-236">次のような、アプリで使用されるコンテンツ ファイル。</span><span class="sxs-lookup"><span data-stu-id="c2147-236">Content files used by the app, such as:</span></span>
-  * <span data-ttu-id="c2147-237">:::no-loc(Razor)::: ファイル ( *.cshtml* 、 *.razor* )</span><span class="sxs-lookup"><span data-stu-id="c2147-237">:::no-loc(Razor)::: files ( *.cshtml* , *.razor* )</span></span>
+  * <span data-ttu-id="c2147-237">Razor ファイル ( *.cshtml* 、 *.razor* )</span><span class="sxs-lookup"><span data-stu-id="c2147-237">Razor files ( *.cshtml* , *.razor* )</span></span>
   * <span data-ttu-id="c2147-238">構成ファイル ( *.json* 、 *.xml* )</span><span class="sxs-lookup"><span data-stu-id="c2147-238">Configuration files ( *.json* , *.xml* )</span></span>
   * <span data-ttu-id="c2147-239">データ ファイル ( *.db* )</span><span class="sxs-lookup"><span data-stu-id="c2147-239">Data files ( *.db* )</span></span>
 * <span data-ttu-id="c2147-240">[Web ルート](#web-root) (通常は *wwwroot* フォルダー)。</span><span class="sxs-lookup"><span data-stu-id="c2147-240">The [Web root](#web-root), typically the *wwwroot* folder.</span></span>
@@ -237,7 +237,7 @@ ms.locfileid: "93059378"
 </ItemGroup>
 ```
 
-<span data-ttu-id="c2147-256">:::no-loc(Razor)::: *.cshtml* ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。</span><span class="sxs-lookup"><span data-stu-id="c2147-256">In :::no-loc(Razor)::: *.cshtml* files, tilde-slash (`~/`) points to the web root.</span></span> <span data-ttu-id="c2147-257">`~/` で始まるパスは、" *仮想パス* " と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="c2147-257">A path beginning with `~/` is referred to as a *virtual path*.</span></span>
+<span data-ttu-id="c2147-256">Razor *.cshtml* ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。</span><span class="sxs-lookup"><span data-stu-id="c2147-256">In Razor *.cshtml* files, tilde-slash (`~/`) points to the web root.</span></span> <span data-ttu-id="c2147-257">`~/` で始まるパスは、" *仮想パス* " と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="c2147-257">A path beginning with `~/` is referred to as a *virtual path*.</span></span>
 
 <span data-ttu-id="c2147-258">詳細については、「<xref:fundamentals/static-files>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-258">For more information, see <xref:fundamentals/static-files>.</span></span>
 
@@ -311,7 +311,7 @@ ms.locfileid: "93059378"
 <span data-ttu-id="c2147-302">`CreateDefaultBuilder` メソッドは、次のようなよく使用されるオプションと共にホストを構成します。</span><span class="sxs-lookup"><span data-stu-id="c2147-302">The `CreateDefaultBuilder` method configures a host with commonly used options, such as the following:</span></span>
 
 * <span data-ttu-id="c2147-303">Web サーバーとして [Kestrel](#servers) を使用し、IIS の統合を有効にします。</span><span class="sxs-lookup"><span data-stu-id="c2147-303">Use [Kestrel](#servers) as the web server and enable IIS integration.</span></span>
-* <span data-ttu-id="c2147-304">*:::no-loc(appsettings.json):::* 、 *appsettings.{環境名}.json* 、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="c2147-304">Load configuration from *:::no-loc(appsettings.json):::* , *appsettings.{Environment Name}.json* , environment variables, command line arguments, and other configuration sources.</span></span>
+* <span data-ttu-id="c2147-304">*appsettings.json* 、 *appsettings.{環境名}.json* 、環境変数、コマンド ライン引数、およびその他の構成ソースから構成を読み込みます。</span><span class="sxs-lookup"><span data-stu-id="c2147-304">Load configuration from *appsettings.json* , *appsettings.{Environment Name}.json* , environment variables, command line arguments, and other configuration sources.</span></span>
 * <span data-ttu-id="c2147-305">ログ出力をコンソールとデバッグ プロバイダーに送ります。</span><span class="sxs-lookup"><span data-stu-id="c2147-305">Send logging output to the console and debug providers.</span></span>
 
 <span data-ttu-id="c2147-306">詳細については、「<xref:fundamentals/host/web-host>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-306">For more information, see <xref:fundamentals/host/web-host>.</span></span>
@@ -377,7 +377,7 @@ ms.locfileid: "93059378"
 
 <span data-ttu-id="c2147-345">ASP.NET Core は、構成プロバイダーの順序付けされたセットから、名前と値のペアの設定を取得する構成フレームワークとなります。</span><span class="sxs-lookup"><span data-stu-id="c2147-345">ASP.NET Core provides a configuration framework that gets settings as name-value pairs from an ordered set of configuration providers.</span></span> <span data-ttu-id="c2147-346">*.json* ファイル、 *.xml* ファイル、環境変数、コマンドライン引数など、さまざまなソース用に構成プロバイダーが組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="c2147-346">There are built-in configuration providers for a variety of sources, such as *.json* files, *.xml* files, environment variables, and command-line arguments.</span></span> <span data-ttu-id="c2147-347">独自のカスタム構成プロバイダーを記述することもできます。</span><span class="sxs-lookup"><span data-stu-id="c2147-347">You can also write custom configuration providers.</span></span>
 
-<span data-ttu-id="c2147-348">たとえば、構成は *:::no-loc(appsettings.json):::* と環境変数から取得したものであると指定できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-348">For example, you could specify that configuration comes from *:::no-loc(appsettings.json):::* and environment variables.</span></span> <span data-ttu-id="c2147-349">このとき *ConnectionString* 値が要求されると、フレームワークはまず *:::no-loc(appsettings.json):::* ファイルを参照します。</span><span class="sxs-lookup"><span data-stu-id="c2147-349">Then when the value of *ConnectionString* is requested, the framework looks first in the *:::no-loc(appsettings.json):::* file.</span></span> <span data-ttu-id="c2147-350">値がそこにあり、しかし環境変数にもある場合、環境変数の値が優先されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-350">If the value is found there but also in an environment variable, the value from the environment variable would take precedence.</span></span>
+<span data-ttu-id="c2147-348">たとえば、構成は *appsettings.json* と環境変数から取得したものであると指定できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-348">For example, you could specify that configuration comes from *appsettings.json* and environment variables.</span></span> <span data-ttu-id="c2147-349">このとき *ConnectionString* 値が要求されると、フレームワークはまず *appsettings.json* ファイルを参照します。</span><span class="sxs-lookup"><span data-stu-id="c2147-349">Then when the value of *ConnectionString* is requested, the framework looks first in the *appsettings.json* file.</span></span> <span data-ttu-id="c2147-350">値がそこにあり、しかし環境変数にもある場合、環境変数の値が優先されます。</span><span class="sxs-lookup"><span data-stu-id="c2147-350">If the value is found there but also in an environment variable, the value from the environment variable would take precedence.</span></span>
 
 <span data-ttu-id="c2147-351">ASP.NET Core には、パスワードなどの機密の構成データの管理に[シークレット マネージャー ツール](xref:security/app-secrets)が用意されています。</span><span class="sxs-lookup"><span data-stu-id="c2147-351">For managing confidential configuration data such as passwords, ASP.NET Core provides a [Secret Manager tool](xref:security/app-secrets).</span></span> <span data-ttu-id="c2147-352">実稼働の機密情報には、[Azure Key Vault](xref:security/key-vault-configuration) を使用することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="c2147-352">For production secrets, we recommend [Azure Key Vault](xref:security/key-vault-configuration).</span></span>
 
@@ -427,7 +427,7 @@ ms.locfileid: "93059378"
 
 ## <a name="routing"></a><span data-ttu-id="c2147-382">ルーティング</span><span class="sxs-lookup"><span data-stu-id="c2147-382">Routing</span></span>
 
-<span data-ttu-id="c2147-383">*ルート* とは、ハンドラーにマップされている URL のパターンです。</span><span class="sxs-lookup"><span data-stu-id="c2147-383">A *route* is a URL pattern that is mapped to a handler.</span></span> <span data-ttu-id="c2147-384">このハンドラーは一般的には :::no-loc(Razor)::: ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。</span><span class="sxs-lookup"><span data-stu-id="c2147-384">The handler is typically a :::no-loc(Razor)::: page, an action method in an MVC controller, or a middleware.</span></span> <span data-ttu-id="c2147-385">ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-385">ASP.NET Core routing gives you control over the URLs used by your app.</span></span>
+<span data-ttu-id="c2147-383">*ルート* とは、ハンドラーにマップされている URL のパターンです。</span><span class="sxs-lookup"><span data-stu-id="c2147-383">A *route* is a URL pattern that is mapped to a handler.</span></span> <span data-ttu-id="c2147-384">このハンドラーは一般的には Razor ページ、MVC コントローラーのアクション メソッドまたはミドルウェアです。</span><span class="sxs-lookup"><span data-stu-id="c2147-384">The handler is typically a Razor page, an action method in an MVC controller, or a middleware.</span></span> <span data-ttu-id="c2147-385">ASP.NET Core のルーティングでは、アプリで使用する URL を制御できます。</span><span class="sxs-lookup"><span data-stu-id="c2147-385">ASP.NET Core routing gives you control over the URLs used by your app.</span></span>
 
 <span data-ttu-id="c2147-386">詳細については、「<xref:fundamentals/routing>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-386">For more information, see <xref:fundamentals/routing>.</span></span>
 
@@ -461,7 +461,7 @@ ms.locfileid: "93059378"
 * <span data-ttu-id="c2147-409">アプリをホストしている実行可能ファイル ( *.exe* )。</span><span class="sxs-lookup"><span data-stu-id="c2147-409">Executable hosting the app ( *.exe* ).</span></span>
 * <span data-ttu-id="c2147-410">アプリを構成するコンパイル済みアセンブリ ( *.dll* )。</span><span class="sxs-lookup"><span data-stu-id="c2147-410">Compiled assemblies that make up the app ( *.dll* ).</span></span>
 * <span data-ttu-id="c2147-411">次のような、アプリで使用される非コード コンテンツ ファイル。</span><span class="sxs-lookup"><span data-stu-id="c2147-411">Non-code content files used by the app, such as:</span></span>
-  * <span data-ttu-id="c2147-412">:::no-loc(Razor)::: ファイル ( *.cshtml* 、 *.razor* )</span><span class="sxs-lookup"><span data-stu-id="c2147-412">:::no-loc(Razor)::: files ( *.cshtml* , *.razor* )</span></span>
+  * <span data-ttu-id="c2147-412">Razor ファイル ( *.cshtml* 、 *.razor* )</span><span class="sxs-lookup"><span data-stu-id="c2147-412">Razor files ( *.cshtml* , *.razor* )</span></span>
   * <span data-ttu-id="c2147-413">構成ファイル ( *.json* 、 *.xml* )</span><span class="sxs-lookup"><span data-stu-id="c2147-413">Configuration files ( *.json* , *.xml* )</span></span>
   * <span data-ttu-id="c2147-414">データ ファイル ( *.db* )</span><span class="sxs-lookup"><span data-stu-id="c2147-414">Data files ( *.db* )</span></span>
 * <span data-ttu-id="c2147-415">[Web ルート](#web-root) (通常、発行された *wwwroot* フォルダー)。</span><span class="sxs-lookup"><span data-stu-id="c2147-415">[Web root](#web-root), typically the published *wwwroot* folder.</span></span>
@@ -495,7 +495,7 @@ ms.locfileid: "93059378"
 </ItemGroup>
 ```
 
-<span data-ttu-id="c2147-433">:::no-loc(Razor)::: ( *.cshtml* ) ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。</span><span class="sxs-lookup"><span data-stu-id="c2147-433">In :::no-loc(Razor)::: ( *.cshtml* ) files, the tilde-slash (`~/`) points to the web root.</span></span> <span data-ttu-id="c2147-434">`~/` で始まるパスは、" *仮想パス* " と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="c2147-434">A path beginning with `~/` is referred to as a *virtual path*.</span></span>
+<span data-ttu-id="c2147-433">Razor ( *.cshtml* ) ファイルの場合、チルダとスラッシュ (`~/`) が Web ルートを指します。</span><span class="sxs-lookup"><span data-stu-id="c2147-433">In Razor ( *.cshtml* ) files, the tilde-slash (`~/`) points to the web root.</span></span> <span data-ttu-id="c2147-434">`~/` で始まるパスは、" *仮想パス* " と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="c2147-434">A path beginning with `~/` is referred to as a *virtual path*.</span></span>
 
 <span data-ttu-id="c2147-435">詳細については、「<xref:fundamentals/static-files>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c2147-435">For more information, see <xref:fundamentals/static-files>.</span></span>
 

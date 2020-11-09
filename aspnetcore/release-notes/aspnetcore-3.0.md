@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: aspnetcore-3.0
 ms.openlocfilehash: 235daac5c08248ca2052de6b44e66a8162ce23ad
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -29,39 +29,39 @@ ms.locfileid: "93051240"
 
 <span data-ttu-id="3a7b2-104">この記事では、ASP.NET Core 3.0 の最も大きな変更点について説明します。また、その変更点のドキュメントへのリンクも示します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-104">This article highlights the most significant changes in ASP.NET Core 3.0 with links to relevant documentation.</span></span>
 
-## :::no-loc(Blazor):::
+## Blazor
 
-<span data-ttu-id="3a7b2-105">:::no-loc(Blazor)::: は、.NET を使って対話型のクライアント側 Web UI を構築するための ASP.NET Core の新しいフレームワークです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-105">:::no-loc(Blazor)::: is a new framework in ASP.NET Core for building interactive client-side web UI with .NET:</span></span>
+<span data-ttu-id="3a7b2-105">Blazor は、.NET を使って対話型のクライアント側 Web UI を構築するための ASP.NET Core の新しいフレームワークです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-105">Blazor is a new framework in ASP.NET Core for building interactive client-side web UI with .NET:</span></span>
 
 * <span data-ttu-id="3a7b2-106">JavaScript の代わりに C# を使って、優れた対話型 UI を作成します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-106">Create rich interactive UIs using C# instead of JavaScript.</span></span>
 * <span data-ttu-id="3a7b2-107">.NET で記述された、サーバー側とクライアント側のアプリのロジックを共有します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-107">Share server-side and client-side app logic written in .NET.</span></span>
 * <span data-ttu-id="3a7b2-108">モバイル ブラウザーを含めた広範なブラウザーのサポートのために、HTML および CSS として UI をレンダリングします。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-108">Render the UI as HTML and CSS for wide browser support, including mobile browsers.</span></span>
 
-<span data-ttu-id="3a7b2-109">:::no-loc(Blazor)::: フレームワークでサポートされるシナリオ:</span><span class="sxs-lookup"><span data-stu-id="3a7b2-109">:::no-loc(Blazor)::: framework supported scenarios:</span></span>
+<span data-ttu-id="3a7b2-109">Blazor フレームワークでサポートされるシナリオ:</span><span class="sxs-lookup"><span data-stu-id="3a7b2-109">Blazor framework supported scenarios:</span></span>
 
-* <span data-ttu-id="3a7b2-110">再利用可能な UI コンポーネント (:::no-loc(Razor)::: コンポーネント)</span><span class="sxs-lookup"><span data-stu-id="3a7b2-110">Reusable UI components (:::no-loc(Razor)::: components)</span></span>
+* <span data-ttu-id="3a7b2-110">再利用可能な UI コンポーネント (Razor コンポーネント)</span><span class="sxs-lookup"><span data-stu-id="3a7b2-110">Reusable UI components (Razor components)</span></span>
 * <span data-ttu-id="3a7b2-111">クライアント側のルーティング</span><span class="sxs-lookup"><span data-stu-id="3a7b2-111">Client-side routing</span></span>
 * <span data-ttu-id="3a7b2-112">コンポーネントのレイアウト</span><span class="sxs-lookup"><span data-stu-id="3a7b2-112">Component layouts</span></span>
 * <span data-ttu-id="3a7b2-113">依存関係の挿入のサポート</span><span class="sxs-lookup"><span data-stu-id="3a7b2-113">Support for dependency injection</span></span>
 * <span data-ttu-id="3a7b2-114">フォームと検証</span><span class="sxs-lookup"><span data-stu-id="3a7b2-114">Forms and validation</span></span>
-* <span data-ttu-id="3a7b2-115">:::no-loc(Razor)::: クラス ライブラリを使用したコンポーネント ライブラリの構築</span><span class="sxs-lookup"><span data-stu-id="3a7b2-115">Build component libraries with :::no-loc(Razor)::: class libraries</span></span>
+* <span data-ttu-id="3a7b2-115">Razor クラス ライブラリを使用したコンポーネント ライブラリの構築</span><span class="sxs-lookup"><span data-stu-id="3a7b2-115">Build component libraries with Razor class libraries</span></span>
 * <span data-ttu-id="3a7b2-116">JavaScript 相互運用</span><span class="sxs-lookup"><span data-stu-id="3a7b2-116">JavaScript interop</span></span>
 
 <span data-ttu-id="3a7b2-117">詳細については、「<xref:blazor/index>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-117">For more information, see <xref:blazor/index>.</span></span>
 
-### :::no-loc(Blazor Server):::
+### Blazor Server
 
-<span data-ttu-id="3a7b2-118">:::no-loc(Blazor)::: では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-118">:::no-loc(Blazor)::: decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="3a7b2-119">:::no-loc(Blazor Server)::: では、ASP.NET Core アプリでサーバー上の :::no-loc(Razor)::: コンポーネントをホストするためのサポートが提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-119">:::no-loc(Blazor Server)::: provides support for hosting :::no-loc(Razor)::: components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="3a7b2-120">UI の更新は :::no-loc(SignalR)::: 接続を介して処理されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-120">UI updates are handled over a :::no-loc(SignalR)::: connection.</span></span> <span data-ttu-id="3a7b2-121">:::no-loc(Blazor Server)::: は ASP.NET Core 3.0 でサポートされています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-121">:::no-loc(Blazor Server)::: is supported in ASP.NET Core 3.0.</span></span>
+<span data-ttu-id="3a7b2-118">Blazor では、UI の更新プログラムを適用する方法からコンポーネントのレンダリング ロジックが分離されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-118">Blazor decouples component rendering logic from how UI updates are applied.</span></span> <span data-ttu-id="3a7b2-119">Blazor Server では、ASP.NET Core アプリでサーバー上の Razor コンポーネントをホストするためのサポートが提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-119">Blazor Server provides support for hosting Razor components on the server in an ASP.NET Core app.</span></span> <span data-ttu-id="3a7b2-120">UI の更新は SignalR 接続を介して処理されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-120">UI updates are handled over a SignalR connection.</span></span> <span data-ttu-id="3a7b2-121">Blazor Server は ASP.NET Core 3.0 でサポートされています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-121">Blazor Server is supported in ASP.NET Core 3.0.</span></span>
 
-### <a name="no-locblazor-webassembly-preview"></a><span data-ttu-id="3a7b2-122">:::no-loc(Blazor WebAssembly)::: (プレビュー)</span><span class="sxs-lookup"><span data-stu-id="3a7b2-122">:::no-loc(Blazor WebAssembly)::: (Preview)</span></span>
+### <a name="no-locblazor-webassembly-preview"></a><span data-ttu-id="3a7b2-122">Blazor WebAssembly (プレビュー)</span><span class="sxs-lookup"><span data-stu-id="3a7b2-122">Blazor WebAssembly (Preview)</span></span>
 
-<span data-ttu-id="3a7b2-123">:::no-loc(Blazor)::: アプリは、WebAssembly ベースの .NET ランタイムを使用してブラウザーで直接実行することもできます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-123">:::no-loc(Blazor)::: apps can also be run directly in the browser using a WebAssembly-based .NET runtime.</span></span> <span data-ttu-id="3a7b2-124">:::no-loc(Blazor WebAssembly)::: はプレビュー段階であり、ASP.NET Core 3.0 ではサポートされて " *いません* "。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-124">:::no-loc(Blazor WebAssembly)::: is in preview and *not* supported in ASP.NET Core 3.0.</span></span> <span data-ttu-id="3a7b2-125">:::no-loc(Blazor WebAssembly)::: は、ASP.NET Core の今後のリリースでサポートされる予定です。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-125">:::no-loc(Blazor WebAssembly)::: will be supported in a future release of ASP.NET Core.</span></span>
+<span data-ttu-id="3a7b2-123">Blazor アプリは、WebAssembly ベースの .NET ランタイムを使用してブラウザーで直接実行することもできます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-123">Blazor apps can also be run directly in the browser using a WebAssembly-based .NET runtime.</span></span> <span data-ttu-id="3a7b2-124">Blazor WebAssembly はプレビュー段階であり、ASP.NET Core 3.0 ではサポートされて " *いません* "。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-124">Blazor WebAssembly is in preview and *not* supported in ASP.NET Core 3.0.</span></span> <span data-ttu-id="3a7b2-125">Blazor WebAssembly は、ASP.NET Core の今後のリリースでサポートされる予定です。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-125">Blazor WebAssembly will be supported in a future release of ASP.NET Core.</span></span>
 
-### <a name="no-locrazor-components"></a><span data-ttu-id="3a7b2-126">:::no-loc(Razor)::: のコンポーネント</span><span class="sxs-lookup"><span data-stu-id="3a7b2-126">:::no-loc(Razor)::: components</span></span>
+### <a name="no-locrazor-components"></a><span data-ttu-id="3a7b2-126">Razor のコンポーネント</span><span class="sxs-lookup"><span data-stu-id="3a7b2-126">Razor components</span></span>
 
-<span data-ttu-id="3a7b2-127">:::no-loc(Blazor)::: アプリはコンポーネントから構築されています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-127">:::no-loc(Blazor)::: apps are built from components.</span></span> <span data-ttu-id="3a7b2-128">コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型チャンクです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-128">Components are self-contained chunks of user interface (UI), such as a page, dialog, or form.</span></span> <span data-ttu-id="3a7b2-129">コンポーネントは、UI レンダリング ロジックとクライアント側のイベント ハンドラーを定義する通常の .NET クラスです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-129">Components are normal .NET classes that define UI rendering logic and client-side event handlers.</span></span> <span data-ttu-id="3a7b2-130">JavaScript を使用せずに、機能豊富な対話型 Web アプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-130">You can create rich interactive web apps without JavaScript.</span></span>
+<span data-ttu-id="3a7b2-127">Blazor アプリはコンポーネントから構築されています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-127">Blazor apps are built from components.</span></span> <span data-ttu-id="3a7b2-128">コンポーネントは、ページ、ダイアログ、フォームなどのユーザー インターフェイス (UI) の自己完結型チャンクです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-128">Components are self-contained chunks of user interface (UI), such as a page, dialog, or form.</span></span> <span data-ttu-id="3a7b2-129">コンポーネントは、UI レンダリング ロジックとクライアント側のイベント ハンドラーを定義する通常の .NET クラスです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-129">Components are normal .NET classes that define UI rendering logic and client-side event handlers.</span></span> <span data-ttu-id="3a7b2-130">JavaScript を使用せずに、機能豊富な対話型 Web アプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-130">You can create rich interactive web apps without JavaScript.</span></span>
 
-<span data-ttu-id="3a7b2-131">通常、:::no-loc(Blazor)::: のコンポーネントは、HTML と C# が自然に融合している :::no-loc(Razor)::: 構文を使用して作成されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-131">Components in :::no-loc(Blazor)::: are typically authored using :::no-loc(Razor)::: syntax, a natural blend of HTML and C#.</span></span> <span data-ttu-id="3a7b2-132">:::no-loc(Razor)::: コンポーネントは、両方とも :::no-loc(Razor)::: を使用するという点で :::no-loc(Razor)::: Pages および MVC ビューに似ています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-132">:::no-loc(Razor)::: components are similar to :::no-loc(Razor)::: Pages and MVC views in that they both use :::no-loc(Razor):::.</span></span> <span data-ttu-id="3a7b2-133">要求 - 応答モデルに基づくページやビューとは異なり、コンポーネントは特に UI コンポジションを処理するために使われます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-133">Unlike pages and views, which are based on a request-response model, components are used specifically for handling UI composition.</span></span>
+<span data-ttu-id="3a7b2-131">通常、Blazor のコンポーネントは、HTML と C# が自然に融合している Razor 構文を使用して作成されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-131">Components in Blazor are typically authored using Razor syntax, a natural blend of HTML and C#.</span></span> <span data-ttu-id="3a7b2-132">Razor コンポーネントは、両方とも Razor を使用するという点で Razor Pages および MVC ビューに似ています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-132">Razor components are similar to Razor Pages and MVC views in that they both use Razor.</span></span> <span data-ttu-id="3a7b2-133">要求 - 応答モデルに基づくページやビューとは異なり、コンポーネントは特に UI コンポジションを処理するために使われます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-133">Unlike pages and views, which are based on a request-response model, components are used specifically for handling UI composition.</span></span>
 
 ## <a name="grpc"></a><span data-ttu-id="3a7b2-134">gRPC</span><span class="sxs-lookup"><span data-stu-id="3a7b2-134">gRPC</span></span>
 
@@ -88,11 +88,11 @@ ms.locfileid: "93051240"
 
 <span data-ttu-id="3a7b2-151">詳細については、「<xref:grpc/index>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-151">For more information, see <xref:grpc/index>.</span></span>
 
-## :::no-loc(SignalR):::
+## SignalR
 
-<span data-ttu-id="3a7b2-152">移行の手順については、[:::no-loc(SignalR)::: コードの更新](xref:migration/22-to-30#signalr)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-152">See [Update :::no-loc(SignalR)::: code](xref:migration/22-to-30#signalr) for migration instructions.</span></span> <span data-ttu-id="3a7b2-153">現在、:::no-loc(SignalR)::: は `System.Text.Json` を使用して JSON メッセージのシリアル化および逆シリアル化を行います。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-153">:::no-loc(SignalR)::: now uses `System.Text.Json` to serialize/deserialize JSON messages.</span></span> <span data-ttu-id="3a7b2-154">`Newtonsoft.Json` ベースのシリアライザーを復元する手順については、「[Newtonsoft.Json に切り替える](xref:migration/22-to-30#switch-to-newtonsoftjson)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-154">See [Switch to Newtonsoft.Json](xref:migration/22-to-30#switch-to-newtonsoftjson) for instructions to restore the `Newtonsoft.Json`-based serializer.</span></span>
+<span data-ttu-id="3a7b2-152">移行の手順については、[SignalR コードの更新](xref:migration/22-to-30#signalr)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-152">See [Update SignalR code](xref:migration/22-to-30#signalr) for migration instructions.</span></span> <span data-ttu-id="3a7b2-153">現在、SignalR は `System.Text.Json` を使用して JSON メッセージのシリアル化および逆シリアル化を行います。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-153">SignalR now uses `System.Text.Json` to serialize/deserialize JSON messages.</span></span> <span data-ttu-id="3a7b2-154">`Newtonsoft.Json` ベースのシリアライザーを復元する手順については、「[Newtonsoft.Json に切り替える](xref:migration/22-to-30#switch-to-newtonsoftjson)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-154">See [Switch to Newtonsoft.Json](xref:migration/22-to-30#switch-to-newtonsoftjson) for instructions to restore the `Newtonsoft.Json`-based serializer.</span></span>
 
-<span data-ttu-id="3a7b2-155">:::no-loc(SignalR)::: 対応の JavaScript および .NET クライアントには、自動再接続のサポートが追加されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-155">In the JavaScript and .NET Clients for :::no-loc(SignalR):::, support was added for automatic reconnection.</span></span> <span data-ttu-id="3a7b2-156">既定では、クライアントはすぐに再接続を試行し、必要に応じて 2 秒後、10 秒後、30 秒後に再試行します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-156">By default, the client tries to reconnect immediately and retry after 2, 10, and 30 seconds if necessary.</span></span> <span data-ttu-id="3a7b2-157">クライアントが正常に再接続すると、新しい接続 ID を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-157">If the client successfully reconnects, it receives a new connection ID.</span></span> <span data-ttu-id="3a7b2-158">自動再接続はオプトインです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-158">Automatic reconnect is opt-in:</span></span>
+<span data-ttu-id="3a7b2-155">SignalR 対応の JavaScript および .NET クライアントには、自動再接続のサポートが追加されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-155">In the JavaScript and .NET Clients for SignalR, support was added for automatic reconnection.</span></span> <span data-ttu-id="3a7b2-156">既定では、クライアントはすぐに再接続を試行し、必要に応じて 2 秒後、10 秒後、30 秒後に再試行します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-156">By default, the client tries to reconnect immediately and retry after 2, 10, and 30 seconds if necessary.</span></span> <span data-ttu-id="3a7b2-157">クライアントが正常に再接続すると、新しい接続 ID を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-157">If the client successfully reconnects, it receives a new connection ID.</span></span> <span data-ttu-id="3a7b2-158">自動再接続はオプトインです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-158">Automatic reconnect is opt-in:</span></span>
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -117,7 +117,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 <span data-ttu-id="3a7b2-164">再接続の試行中に、再接続が試行されていることをユーザーに通知するようにアプリ UI を更新します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-164">During reconnection attempts, update the app UI to notify the user that the reconnection is being attempted.</span></span>
 
-<span data-ttu-id="3a7b2-165">接続が中断されたときに UI にフィードバックを提供するため、次のイベント ハンドラーを含むように :::no-loc(SignalR)::: クライアント API が拡張されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-165">To provide UI feedback when the connection is interrupted, the :::no-loc(SignalR)::: client API has been expanded to include the following event handlers:</span></span>
+<span data-ttu-id="3a7b2-165">接続が中断されたときに UI にフィードバックを提供するため、次のイベント ハンドラーを含むように SignalR クライアント API が拡張されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-165">To provide UI feedback when the connection is interrupted, the SignalR client API has been expanded to include the following event handlers:</span></span>
 
 * <span data-ttu-id="3a7b2-166">`onreconnecting`:これによって、開発者が UI を無効にしたり、アプリがオフラインであることをユーザーに知らせたりすることができます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-166">`onreconnecting`:  Gives developers an opportunity to disable UI or to let users know the app is offline.</span></span>
 * <span data-ttu-id="3a7b2-167">`onreconnected`:これによって、接続が再確立したときに開発者が UI を更新できます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-167">`onreconnected`: Gives developers an opportunity to update the UI once the connection is reestablished.</span></span>
@@ -144,7 +144,7 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-<span data-ttu-id="3a7b2-170">:::no-loc(SignalR)::: 3.0 以降では、ハブ メソッドが承認を必要とする場合に、承認ハンドラーにカスタム リソースが提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-170">:::no-loc(SignalR)::: 3.0 and later provides a custom resource to authorization handlers when a hub method requires authorization.</span></span> <span data-ttu-id="3a7b2-171">リソースは `HubInvocationContext` のインスタンスです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-171">The resource is an instance of `HubInvocationContext`.</span></span> <span data-ttu-id="3a7b2-172">`HubInvocationContext` には次のものが含まれます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-172">The `HubInvocationContext` includes the:</span></span>
+<span data-ttu-id="3a7b2-170">SignalR 3.0 以降では、ハブ メソッドが承認を必要とする場合に、承認ハンドラーにカスタム リソースが提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-170">SignalR 3.0 and later provides a custom resource to authorization handlers when a hub method requires authorization.</span></span> <span data-ttu-id="3a7b2-171">リソースは `HubInvocationContext` のインスタンスです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-171">The resource is an instance of `HubInvocationContext`.</span></span> <span data-ttu-id="3a7b2-172">`HubInvocationContext` には次のものが含まれます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-172">The `HubInvocationContext` includes the:</span></span>
 
 * `HubCallerContext`
 * <span data-ttu-id="3a7b2-173">呼び出されているハブ メソッドの名前。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-173">Name of the hub method being invoked.</span></span>
@@ -161,12 +161,12 @@ public class DomainRestrictedRequirement :
         DomainRestrictedRequirement requirement,
         HubInvocationContext resource)
     {
-        if (context.User?.:::no-loc(Identity):::?.Name == null)
+        if (context.User?.Identity?.Name == null)
         {
             return Task.CompletedTask;
         }
 
-        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.:::no-loc(Identity):::.Name))
+        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.Identity.Name))
         {
             context.Succeed(requirement);
         }
@@ -234,40 +234,40 @@ services
     });
 ```
 
-<span data-ttu-id="3a7b2-192">:::no-loc(SignalR)::: ハブでは[エンドポイント ルーティング](xref:fundamentals/routing)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-192">:::no-loc(SignalR)::: hubs use [Endpoint Routing](xref:fundamentals/routing).</span></span> <span data-ttu-id="3a7b2-193">:::no-loc(SignalR)::: ハブ接続は以前は明示的に実行されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-193">:::no-loc(SignalR)::: hub connection was previously done explicitly:</span></span>
+<span data-ttu-id="3a7b2-192">SignalR ハブでは[エンドポイント ルーティング](xref:fundamentals/routing)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-192">SignalR hubs use [Endpoint Routing](xref:fundamentals/routing).</span></span> <span data-ttu-id="3a7b2-193">SignalR ハブ接続は以前は明示的に実行されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-193">SignalR hub connection was previously done explicitly:</span></span>
 
 ```csharp
-app.Use:::no-loc(SignalR):::(routes =>
+app.UseSignalR(routes =>
 {
     routes.MapHub<ChatHub>("hubs/chat");
 });
 ```
 
-<span data-ttu-id="3a7b2-194">以前のバージョンでは、開発者はさまざまな場所でコントローラー、:::no-loc(Razor)::: ページ、ハブを関連付ける必要がありました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-194">In the previous version, developers needed to wire up controllers, :::no-loc(Razor)::: pages, and hubs in a variety of places.</span></span> <span data-ttu-id="3a7b2-195">明示的な接続によって、ほぼ同一のルーティング セグメントがいくつも生成されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-195">Explicit connection results in a series of nearly-identical routing segments:</span></span>
+<span data-ttu-id="3a7b2-194">以前のバージョンでは、開発者はさまざまな場所でコントローラー、Razor ページ、ハブを関連付ける必要がありました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-194">In the previous version, developers needed to wire up controllers, Razor pages, and hubs in a variety of places.</span></span> <span data-ttu-id="3a7b2-195">明示的な接続によって、ほぼ同一のルーティング セグメントがいくつも生成されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-195">Explicit connection results in a series of nearly-identical routing segments:</span></span>
 
 ```csharp
-app.Use:::no-loc(SignalR):::(routes =>
+app.UseSignalR(routes =>
 {
     routes.MapHub<ChatHub>("hubs/chat");
 });
 
 app.UseRouting(routes =>
 {
-    routes.Map:::no-loc(Razor):::Pages();
+    routes.MapRazorPages();
 });
 ```
 
-<span data-ttu-id="3a7b2-196">:::no-loc(SignalR)::: 3.0 ハブは、エンドポイント ルーティングを介してルーティングできます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-196">:::no-loc(SignalR)::: 3.0 hubs can be routed via endpoint routing.</span></span> <span data-ttu-id="3a7b2-197">エンドポイント ルーティングでは、通常、すべてのルーティングを `UseRouting` に構成できます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-197">With endpoint routing, typically all routing can be configured in `UseRouting`:</span></span>
+<span data-ttu-id="3a7b2-196">SignalR 3.0 ハブは、エンドポイント ルーティングを介してルーティングできます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-196">SignalR 3.0 hubs can be routed via endpoint routing.</span></span> <span data-ttu-id="3a7b2-197">エンドポイント ルーティングでは、通常、すべてのルーティングを `UseRouting` に構成できます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-197">With endpoint routing, typically all routing can be configured in `UseRouting`:</span></span>
 
 ```csharp
 app.UseRouting(routes =>
 {
-    routes.Map:::no-loc(Razor):::Pages();
+    routes.MapRazorPages();
     routes.MapHub<ChatHub>("hubs/chat");
 });
 ```
 
-<span data-ttu-id="3a7b2-198">ASP.NET Core 3.0 :::no-loc(SignalR)::: で追加されたもの:</span><span class="sxs-lookup"><span data-stu-id="3a7b2-198">ASP.NET Core 3.0 :::no-loc(SignalR)::: added:</span></span>
+<span data-ttu-id="3a7b2-198">ASP.NET Core 3.0 SignalR で追加されたもの:</span><span class="sxs-lookup"><span data-stu-id="3a7b2-198">ASP.NET Core 3.0 SignalR added:</span></span>
 
 <span data-ttu-id="3a7b2-199">クライアントとサーバー間のストリーミング。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-199">Client-to-server streaming.</span></span> <span data-ttu-id="3a7b2-200">クライアントとサーバー間のストリーミングでは、サーバー側メソッドが `IAsyncEnumerable<T>` または `ChannelReader<T>` のインスタンスを受け取ることができます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-200">With client-to-server streaming, server-side methods can take instances of either an `IAsyncEnumerable<T>` or `ChannelReader<T>`.</span></span> <span data-ttu-id="3a7b2-201">次 C# の例では、ハブの `UploadStream` メソッドがクライアントから文字列のストリームを受け取ります。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-201">In the following C# sample, the `UploadStream` method on the Hub will receive a stream of strings from the client:</span></span>
 
@@ -298,7 +298,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-<span data-ttu-id="3a7b2-204">JavaScript クライアント アプリは、上記の `UploadStream` ハブ メソッドの `stream` 引数のために :::no-loc(SignalR)::: `Subject` (または [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) を使用します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-204">JavaScript client apps use the :::no-loc(SignalR)::: `Subject` (or an [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) for the `stream` argument of the `UploadStream` Hub method above.</span></span>
+<span data-ttu-id="3a7b2-204">JavaScript クライアント アプリは、上記の `UploadStream` ハブ メソッドの `stream` 引数のために SignalR `Subject` (または [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) を使用します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-204">JavaScript client apps use the SignalR `Subject` (or an [RxJS Subject](https://rxjs.dev/api/index/class/Subject)) for the `stream` argument of the `UploadStream` Hub method above.</span></span>
 
 ```javascript
 let subject = new signalR.Subject();
@@ -324,25 +324,25 @@ subject.complete();
 
 <span data-ttu-id="3a7b2-212">Json.NET を ASP.NET Core 3.0 に追加するには、「[Newtonsoft.Json ベースの JSON 形式のサポートを追加する](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-212">To add Json.NET to ASP.NET Core 3.0, see [Add Newtonsoft.Json-based JSON format support](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).</span></span>
 
-## <a name="new-no-locrazor-directives"></a><span data-ttu-id="3a7b2-213">新しい :::no-loc(Razor)::: ディレクティブ</span><span class="sxs-lookup"><span data-stu-id="3a7b2-213">New :::no-loc(Razor)::: directives</span></span>
+## <a name="new-no-locrazor-directives"></a><span data-ttu-id="3a7b2-213">新しい Razor ディレクティブ</span><span class="sxs-lookup"><span data-stu-id="3a7b2-213">New Razor directives</span></span>
 
-<span data-ttu-id="3a7b2-214">次の一覧には、新しい :::no-loc(Razor)::: ディレクティブが含まれます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-214">The following list contains new :::no-loc(Razor)::: directives:</span></span>
+<span data-ttu-id="3a7b2-214">次の一覧には、新しい Razor ディレクティブが含まれます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-214">The following list contains new Razor directives:</span></span>
 
 * <span data-ttu-id="3a7b2-215">[`@attribute`](xref:mvc/views/razor#attribute):`@attribute` ディレクティブでは、指定された属性が生成されたページまたはビューのクラスに適用されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-215">[`@attribute`](xref:mvc/views/razor#attribute): The `@attribute` directive applies the given attribute to the class of the generated page or view.</span></span> <span data-ttu-id="3a7b2-216">たとえば、`@attribute [Authorize]` のようにします。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-216">For example, `@attribute [Authorize]`.</span></span>
 * <span data-ttu-id="3a7b2-217">[`@implements`](xref:mvc/views/razor#implements):`@implements` ディレクティブでは、生成されたクラスのインターフェイスが実装されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-217">[`@implements`](xref:mvc/views/razor#implements): The `@implements` directive implements an interface for the generated class.</span></span> <span data-ttu-id="3a7b2-218">たとえば、`@implements IDisposable` のようにします。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-218">For example, `@implements IDisposable`.</span></span>
 
-## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a><span data-ttu-id="3a7b2-219">:::no-loc(Identity):::Server4 では、Web API と SPA の認証と承認がサポートされています</span><span class="sxs-lookup"><span data-stu-id="3a7b2-219">:::no-loc(Identity):::Server4 supports authentication and authorization for web APIs and SPAs</span></span>
+## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a><span data-ttu-id="3a7b2-219">IdentityServer4 では、Web API と SPA の認証と承認がサポートされています</span><span class="sxs-lookup"><span data-stu-id="3a7b2-219">IdentityServer4 supports authentication and authorization for web APIs and SPAs</span></span>
 
-<span data-ttu-id="3a7b2-220">ASP.NET Core 3.0 では、Web API 認証のサポートの使用により、シングルページ アプリ (SPA) での認証が提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-220">ASP.NET Core 3.0 offers authentication in Single Page Apps (SPAs) using the support for web API authorization.</span></span> <span data-ttu-id="3a7b2-221">ユーザーを認証および格納するための :::no-loc(ASP.NET Core Identity)::: が [:::no-loc(Identity):::Server4](https://identityserver.io/) と組み合わされ、OpenID Connect が実装されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-221">:::no-loc(ASP.NET Core Identity)::: for authenticating and storing users is combined with [:::no-loc(Identity):::Server4](https://identityserver.io/) for implementing OpenID Connect.</span></span>
+<span data-ttu-id="3a7b2-220">ASP.NET Core 3.0 では、Web API 認証のサポートの使用により、シングルページ アプリ (SPA) での認証が提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-220">ASP.NET Core 3.0 offers authentication in Single Page Apps (SPAs) using the support for web API authorization.</span></span> <span data-ttu-id="3a7b2-221">ユーザーを認証および格納するための ASP.NET Core Identity が [IdentityServer4](https://identityserver.io/) と組み合わされ、OpenID Connect が実装されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-221">ASP.NET Core Identity for authenticating and storing users is combined with [IdentityServer4](https://identityserver.io/) for implementing OpenID Connect.</span></span>
 
-<span data-ttu-id="3a7b2-222">:::no-loc(Identity):::Server4 は、ASP.NET Core 3.0 用の OpenID Connect および OAuth 2.0 フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-222">:::no-loc(Identity):::Server4 is an OpenID Connect and OAuth 2.0 framework for ASP.NET Core 3.0.</span></span> <span data-ttu-id="3a7b2-223">これにより、次のセキュリティ機能が有効になります。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-223">It enables the following security features:</span></span>
+<span data-ttu-id="3a7b2-222">IdentityServer4 は、ASP.NET Core 3.0 用の OpenID Connect および OAuth 2.0 フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-222">IdentityServer4 is an OpenID Connect and OAuth 2.0 framework for ASP.NET Core 3.0.</span></span> <span data-ttu-id="3a7b2-223">これにより、次のセキュリティ機能が有効になります。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-223">It enables the following security features:</span></span>
 
 * <span data-ttu-id="3a7b2-224">サービスとしての認証 (AaaS)</span><span class="sxs-lookup"><span data-stu-id="3a7b2-224">Authentication as a Service (AaaS)</span></span>
 * <span data-ttu-id="3a7b2-225">複数のアプリケーションの種類でのシングル サインオン/オフ (SSO)</span><span class="sxs-lookup"><span data-stu-id="3a7b2-225">Single sign-on/off (SSO) over multiple application types</span></span>
 * <span data-ttu-id="3a7b2-226">API のアクセス制御</span><span class="sxs-lookup"><span data-stu-id="3a7b2-226">Access control for APIs</span></span>
 * <span data-ttu-id="3a7b2-227">Federation Gateway</span><span class="sxs-lookup"><span data-stu-id="3a7b2-227">Federation Gateway</span></span>
 
-<span data-ttu-id="3a7b2-228">詳細については、[:::no-loc(Identity):::Server4 のドキュメント](http://docs.identityserver.io/en/latest/index.html)または「[SPAs の認証と承認](xref:security/authentication/identity/spa)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-228">For more information, see [the :::no-loc(Identity):::Server4 documentation](http://docs.identityserver.io/en/latest/index.html) or [Authentication and authorization for SPAs](xref:security/authentication/identity/spa).</span></span>
+<span data-ttu-id="3a7b2-228">詳細については、[IdentityServer4 のドキュメント](http://docs.identityserver.io/en/latest/index.html)または「[SPAs の認証と承認](xref:security/authentication/identity/spa)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-228">For more information, see [the IdentityServer4 documentation](http://docs.identityserver.io/en/latest/index.html) or [Authentication and authorization for SPAs](xref:security/authentication/identity/spa).</span></span>
 
 ## <a name="certificate-and-kerberos-authentication"></a><span data-ttu-id="3a7b2-229">証明書および Kerberos 認証</span><span class="sxs-lookup"><span data-stu-id="3a7b2-229">Certificate and Kerberos authentication</span></span>
 
@@ -404,14 +404,14 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="template-changes"></a><span data-ttu-id="3a7b2-252">テンプレートの変更</span><span class="sxs-lookup"><span data-stu-id="3a7b2-252">Template changes</span></span>
 
-<span data-ttu-id="3a7b2-253">Web UI テンプレート (:::no-loc(Razor)::: Pages、コントローラーとビューを含む MVC) では、以下が削除されています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-253">The web UI templates (:::no-loc(Razor)::: Pages, MVC with controller and views) have the following removed:</span></span>
+<span data-ttu-id="3a7b2-253">Web UI テンプレート (Razor Pages、コントローラーとビューを含む MVC) では、以下が削除されています。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-253">The web UI templates (Razor Pages, MVC with controller and views) have the following removed:</span></span>
 
-* <span data-ttu-id="3a7b2-254">:::no-loc(cookie)::: 同意 UI は含まれなくなりました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-254">The :::no-loc(cookie)::: consent UI is no longer included.</span></span> <span data-ttu-id="3a7b2-255">ASP.NET Core 3.0 テンプレートで生成されるアプリで :::no-loc(cookie)::: 同意機能を有効にするには、「<xref:security/gdpr>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-255">To enable the :::no-loc(cookie)::: consent feature in an ASP.NET Core 3.0 template-generated app, see <xref:security/gdpr>.</span></span>
+* <span data-ttu-id="3a7b2-254">cookie 同意 UI は含まれなくなりました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-254">The cookie consent UI is no longer included.</span></span> <span data-ttu-id="3a7b2-255">ASP.NET Core 3.0 テンプレートで生成されるアプリで cookie 同意機能を有効にするには、「<xref:security/gdpr>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-255">To enable the cookie consent feature in an ASP.NET Core 3.0 template-generated app, see <xref:security/gdpr>.</span></span>
 * <span data-ttu-id="3a7b2-256">スクリプトと関連する静的アセットは、CDN を使用する代わりに、ローカル ファイルとして参照されるようになりました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-256">Scripts and related static assets are now referenced as local files instead of using CDNs.</span></span> <span data-ttu-id="3a7b2-257">詳細については、「[現在、スクリプトと関連する静的アセットは、現在の環境に基づいた CDN を使用する代わりに、ローカル ファイルとして参照される (aspnet/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-257">For more information, see [Scripts and related static assets are now referenced as local files instead of using CDNs based on the current environment (aspnet/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).</span></span>
 
 <span data-ttu-id="3a7b2-258">Angular テンプレートは、Angular 8 を使用するように更新されました。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-258">The Angular template updated to use Angular 8.</span></span>
 
-<span data-ttu-id="3a7b2-259">:::no-loc(Razor)::: クラス ライブラリ (RCL) テンプレートは :::no-loc(Razor)::: コンポーネント開発での既定です。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-259">The :::no-loc(Razor)::: class library (RCL) template defaults to :::no-loc(Razor)::: component development by default.</span></span> <span data-ttu-id="3a7b2-260">Visual Studio の新しいテンプレート オプションによって、ページとビューのテンプレート サポートが提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-260">A new template option in Visual Studio provides template support for pages and views.</span></span> <span data-ttu-id="3a7b2-261">コマンド シェルでテンプレートから RCL を作成するときは、`--support-pages-and-views` オプション (`dotnet new razorclasslib --support-pages-and-views`) を渡します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-261">When creating an RCL from the template in a command shell, pass the `--support-pages-and-views` option (`dotnet new razorclasslib --support-pages-and-views`).</span></span>
+<span data-ttu-id="3a7b2-259">Razor クラス ライブラリ (RCL) テンプレートは Razor コンポーネント開発での既定です。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-259">The Razor class library (RCL) template defaults to Razor component development by default.</span></span> <span data-ttu-id="3a7b2-260">Visual Studio の新しいテンプレート オプションによって、ページとビューのテンプレート サポートが提供されます。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-260">A new template option in Visual Studio provides template support for pages and views.</span></span> <span data-ttu-id="3a7b2-261">コマンド シェルでテンプレートから RCL を作成するときは、`--support-pages-and-views` オプション (`dotnet new razorclasslib --support-pages-and-views`) を渡します。</span><span class="sxs-lookup"><span data-stu-id="3a7b2-261">When creating an RCL from the template in a command shell, pass the `--support-pages-and-views` option (`dotnet new razorclasslib --support-pages-and-views`).</span></span>
 
 ## <a name="generic-host"></a><span data-ttu-id="3a7b2-262">汎用ホスト</span><span class="sxs-lookup"><span data-stu-id="3a7b2-262">Generic Host</span></span>
 

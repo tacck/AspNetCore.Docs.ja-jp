@@ -5,17 +5,17 @@ description: 電子メールの確認とパスワードのリセットを使用�
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/accconfirm
 ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -52,11 +52,11 @@ cd WebPWrecover
 dotnet run
 ```
 
-<span data-ttu-id="1cdb9-115">アプリを実行し、[ **登録** ] リンクを選択して、ユーザーを登録します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-115">Run the app, select the **Register** link, and register a user.</span></span> <span data-ttu-id="1cdb9-116">登録されると、 `/:::no-loc(Identity):::/Account/RegisterConfirmation` 電子メールの確認をシミュレートするためのリンクを含む [to] ページにリダイレクトされます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-116">Once registered, you are redirected to the to `/:::no-loc(Identity):::/Account/RegisterConfirmation` page which contains a link to simulate email confirmation:</span></span>
+<span data-ttu-id="1cdb9-115">アプリを実行し、[ **登録** ] リンクを選択して、ユーザーを登録します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-115">Run the app, select the **Register** link, and register a user.</span></span> <span data-ttu-id="1cdb9-116">登録されると、 `/Identity/Account/RegisterConfirmation` 電子メールの確認をシミュレートするためのリンクを含む [to] ページにリダイレクトされます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-116">Once registered, you are redirected to the to `/Identity/Account/RegisterConfirmation` page which contains a link to simulate email confirmation:</span></span>
 
 * <span data-ttu-id="1cdb9-117">リンクを選択し `Click here to confirm your account` ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-117">Select the `Click here to confirm your account` link.</span></span>
 * <span data-ttu-id="1cdb9-118">**ログイン** リンクを選択し、同じ資格情報でサインインします。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-118">Select the **Login** link and sign-in with the same credentials.</span></span>
-* <span data-ttu-id="1cdb9-119">リンクを選択 `Hello YourEmail@provider.com!` すると、ページにリダイレクトされ `/:::no-loc(Identity):::/Account/Manage/PersonalData` ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-119">Select the `Hello YourEmail@provider.com!` link, which redirects you to the `/:::no-loc(Identity):::/Account/Manage/PersonalData` page.</span></span>
+* <span data-ttu-id="1cdb9-119">リンクを選択 `Hello YourEmail@provider.com!` すると、ページにリダイレクトされ `/Identity/Account/Manage/PersonalData` ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-119">Select the `Hello YourEmail@provider.com!` link, which redirects you to the `/Identity/Account/Manage/PersonalData` page.</span></span>
 * <span data-ttu-id="1cdb9-120">左側の [ **Personal data** ] タブを選択し、[ **削除** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-120">Select the **Personal data** tab on the left, and then select **Delete** .</span></span>
 
 ### <a name="configure-an-email-provider"></a><span data-ttu-id="1cdb9-121">電子メールプロバイダーを構成する</span><span class="sxs-lookup"><span data-stu-id="1cdb9-121">Configure an email provider</span></span>
@@ -136,10 +136,10 @@ dotnet add package SendGrid
 
 ## <a name="scaffold-registerconfirmation"></a><span data-ttu-id="1cdb9-152">スキャフォールディング RegisterConfirmation</span><span class="sxs-lookup"><span data-stu-id="1cdb9-152">Scaffold RegisterConfirmation</span></span>
 
-<span data-ttu-id="1cdb9-153">[ :::no-loc(Identity)::: スキャフォールディング](xref:security/authentication/scaffold-identity)とスキャフォールディングの手順に従い `RegisterConfirmation` ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-153">Follow the instructions for [Scaffold :::no-loc(Identity):::](xref:security/authentication/scaffold-identity) and scaffold `RegisterConfirmation`.</span></span>
+<span data-ttu-id="1cdb9-153">[ Identity スキャフォールディング](xref:security/authentication/scaffold-identity)とスキャフォールディングの手順に従い `RegisterConfirmation` ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-153">Follow the instructions for [Scaffold Identity](xref:security/authentication/scaffold-identity) and scaffold `RegisterConfirmation`.</span></span>
 
 <!-- .NET 5 fixes this, see
-https://github.com/dotnet/aspnetcore/blob/master/src/:::no-loc(Identity):::/UI/src/Areas/:::no-loc(Identity):::/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
 -->
 
 [!INCLUDE[](~/includes/disableVer.md)]
@@ -171,7 +171,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/:::no-loc(Identity):::/UI/s
 
 <span data-ttu-id="1cdb9-172">既定の非アクティブタイムアウトは14日です。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-172">The default inactivity timeout is 14 days.</span></span> <span data-ttu-id="1cdb9-173">次のコードは、非アクティブタイムアウトを5日間に設定します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-173">The following code sets the inactivity timeout to 5 days:</span></span>
 
-[!code-csharp[](accconfirm/sample/WebPWrecover30/StartupApp:::no-loc(Cookie):::.cs?name=snippet1)]
+[!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAppCookie.cs?name=snippet1)]
 
 ### <a name="change-all-data-protection-token-lifespans"></a><span data-ttu-id="1cdb9-174">すべてのデータ保護トークンの lifespans を変更する</span><span class="sxs-lookup"><span data-stu-id="1cdb9-174">Change all data protection token lifespans</span></span>
 
@@ -179,13 +179,13 @@ https://github.com/dotnet/aspnetcore/blob/master/src/:::no-loc(Identity):::/UI/s
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
 
-<span data-ttu-id="1cdb9-176">組み込みの :::no-loc(Identity)::: ユーザートークン (「 [AspNetCore/src/ :::no-loc(Identity)::: /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs) 」を参照) には [1 日のタイムアウト](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs)があります。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-176">The built in :::no-loc(Identity)::: user tokens (see [AspNetCore/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs) )have a [one day timeout](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs).</span></span>
+<span data-ttu-id="1cdb9-176">組み込みの Identity ユーザートークン (「 [AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 」を参照) には [1 日のタイムアウト](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)があります。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-176">The built in Identity user tokens (see [AspNetCore/src/Identity/Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) )have a [one day timeout](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).</span></span>
 
 ### <a name="change-the-email-token-lifespan"></a><span data-ttu-id="1cdb9-177">電子メールトークンの有効期間を変更する</span><span class="sxs-lookup"><span data-stu-id="1cdb9-177">Change the email token lifespan</span></span>
 
-<span data-ttu-id="1cdb9-178">[ :::no-loc(Identity)::: ユーザートークン](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs)の既定のトークン有効期間は[1 日](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs)です。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-178">The default token lifespan of [the :::no-loc(Identity)::: user tokens](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs) is [one day](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs).</span></span> <span data-ttu-id="1cdb9-179">このセクションでは、電子メールトークンの有効期間を変更する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-179">This section shows how to change the email token lifespan.</span></span>
+<span data-ttu-id="1cdb9-178">[ Identity ユーザートークン](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs)の既定のトークン有効期間は[1 日](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)です。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-178">The default token lifespan of [the Identity user tokens](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) is [one day](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).</span></span> <span data-ttu-id="1cdb9-179">このセクションでは、電子メールトークンの有効期間を変更する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-179">This section shows how to change the email token lifespan.</span></span>
 
-<span data-ttu-id="1cdb9-180">カスタム[ \<TUser> DataProtectorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1)とを追加し <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.DataProtectionTokenProviderOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-180">Add a custom [DataProtectorTokenProvider\<TUser>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.DataProtectionTokenProviderOptions>:</span></span>
+<span data-ttu-id="1cdb9-180">カスタム[ \<TUser> DataProtectorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1)とを追加し <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-180">Add a custom [DataProtectorTokenProvider\<TUser>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) and <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>:</span></span>
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -241,7 +241,7 @@ https://github.com/dotnet/aspnetcore/blob/master/src/:::no-loc(Identity):::/UI/s
 
 [<span data-ttu-id="1cdb9-216">.NET Core 2.2 SDK 以降</span><span class="sxs-lookup"><span data-stu-id="1cdb9-216">.NET Core 2.2 SDK or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-no-locidentity"></a><span data-ttu-id="1cdb9-217">Web アプリとスキャフォールディングを作成する :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="1cdb9-217">Create a web  app and scaffold :::no-loc(Identity):::</span></span>
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a><span data-ttu-id="1cdb9-217">Web アプリとスキャフォールディングを作成する Identity</span><span class="sxs-lookup"><span data-stu-id="1cdb9-217">Create a web  app and scaffold Identity</span></span>
 
 <span data-ttu-id="1cdb9-218">認証を使用して web アプリを作成するには、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-218">Run the following commands to create a web app with authentication.</span></span>
 
@@ -257,7 +257,7 @@ dotnet run
 ```
 
 > [!NOTE]
-> <span data-ttu-id="1cdb9-219">がで構成されている場合は <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordOptions> `Startup.ConfigureServices` 、スキャフォールディング pages のプロパティに[ `[StringLength]` 属性](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute)の構成が必要になることがあり `Password` :::no-loc(Identity)::: ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-219">If <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordOptions> are configured in `Startup.ConfigureServices`, [`[StringLength]` attribute](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) configuration might be required for the `Password` property in scaffolded :::no-loc(Identity)::: pages.</span></span> <span data-ttu-id="1cdb9-220">`InputModel` `Password` プロパティは、 `Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs` スキャフォールディング後にファイルにあり :::no-loc(Identity)::: ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-220">An `InputModel` `Password` property is found in the `Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs` file after scaffolding :::no-loc(Identity):::.</span></span>
+> <span data-ttu-id="1cdb9-219">がで構成されている場合は <xref:Microsoft.AspNetCore.Identity.PasswordOptions> `Startup.ConfigureServices` 、スキャフォールディング pages のプロパティに[ `[StringLength]` 属性](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute)の構成が必要になることがあり `Password` Identity ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-219">If <xref:Microsoft.AspNetCore.Identity.PasswordOptions> are configured in `Startup.ConfigureServices`, [`[StringLength]` attribute](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) configuration might be required for the `Password` property in scaffolded Identity pages.</span></span> <span data-ttu-id="1cdb9-220">`InputModel` `Password` プロパティは、 `Areas/Identity/Pages/Account/Register.cshtml.cs` スキャフォールディング後にファイルにあり Identity ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-220">An `InputModel` `Password` property is found in the `Areas/Identity/Pages/Account/Register.cshtml.cs` file after scaffolding Identity.</span></span>
 
 ## <a name="test-new-user-registration"></a><span data-ttu-id="1cdb9-221">新しいユーザー登録をテストする</span><span class="sxs-lookup"><span data-stu-id="1cdb9-221">Test new user registration</span></span>
 
@@ -356,7 +356,7 @@ dotnet add package SendGrid
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a><span data-ttu-id="1cdb9-273">アカウントの確認とパスワードの回復を有効にする</span><span class="sxs-lookup"><span data-stu-id="1cdb9-273">Enable account confirmation and password recovery</span></span>
 
-<span data-ttu-id="1cdb9-274">このテンプレートには、アカウントの確認とパスワードの回復のためのコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-274">The template has the code for account confirmation and password recovery.</span></span> <span data-ttu-id="1cdb9-275">`OnPostAsync` *Areas/ :::no-loc(Identity)::: /Pages/Account/Register.cshtml.cs* でメソッドを検索します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-275">Find the `OnPostAsync` method in *Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs* .</span></span>
+<span data-ttu-id="1cdb9-274">このテンプレートには、アカウントの確認とパスワードの回復のためのコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-274">The template has the code for account confirmation and password recovery.</span></span> <span data-ttu-id="1cdb9-275">`OnPostAsync` *Areas/ Identity /Pages/Account/Register.cshtml.cs* でメソッドを検索します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-275">Find the `OnPostAsync` method in *Areas/Identity/Pages/Account/Register.cshtml.cs* .</span></span>
 
 <span data-ttu-id="1cdb9-276">新しく登録されたユーザーが自動的にサインインしないようにするには、次の行をコメントアウトします。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-276">Prevent newly registered users from being automatically signed in by commenting out the following line:</span></span>
 
@@ -366,7 +366,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 <span data-ttu-id="1cdb9-277">完全なメソッドは、変更された行が強調表示された状態で表示されます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-277">The complete method is shown with the changed line highlighted:</span></span>
 
-[!code-csharp[](accconfirm/sample/WebPWrecover22/Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs?highlight=22&name=snippet_Register)]
+[!code-csharp[](accconfirm/sample/WebPWrecover22/Areas/Identity/Pages/Account/Register.cshtml.cs?highlight=22&name=snippet_Register)]
 
 ## <a name="register-confirm-email-and-reset-password"></a><span data-ttu-id="1cdb9-278">登録、電子メールの確認、およびパスワードのリセット</span><span class="sxs-lookup"><span data-stu-id="1cdb9-278">Register, confirm email, and reset password</span></span>
 
@@ -395,7 +395,7 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 <span data-ttu-id="1cdb9-298">既定の非アクティブタイムアウトは14日です。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-298">The default inactivity timeout is 14 days.</span></span> <span data-ttu-id="1cdb9-299">次のコードは、非アクティブタイムアウトを5日間に設定します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-299">The following code sets the inactivity timeout to 5 days:</span></span>
 
-[!code-csharp[](accconfirm/sample/WebPWrecover22/StartupApp:::no-loc(Cookie):::.cs?name=snippet1)]
+[!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAppCookie.cs?name=snippet1)]
 
 ### <a name="change-all-data-protection-token-lifespans"></a><span data-ttu-id="1cdb9-300">すべてのデータ保護トークンの lifespans を変更する</span><span class="sxs-lookup"><span data-stu-id="1cdb9-300">Change all data protection token lifespans</span></span>
 
@@ -403,13 +403,13 @@ await _signInManager.SignInAsync(user, isPersistent: false);
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAllTokens.cs?name=snippet1&highlight=15-16)]
 
-<span data-ttu-id="1cdb9-302">組み込みの :::no-loc(Identity)::: ユーザートークン (「 [AspNetCore/src/ :::no-loc(Identity)::: /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs) 」を参照) には [1 日のタイムアウト](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs)があります。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-302">The built in :::no-loc(Identity)::: user tokens (see [AspNetCore/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs) )have a [one day timeout](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs).</span></span>
+<span data-ttu-id="1cdb9-302">組み込みの Identity ユーザートークン (「 [AspNetCore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) 」を参照) には [1 日のタイムアウト](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)があります。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-302">The built in Identity user tokens (see [AspNetCore/src/Identity/Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) )have a [one day timeout](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).</span></span>
 
 ### <a name="change-the-email-token-lifespan"></a><span data-ttu-id="1cdb9-303">電子メールトークンの有効期間を変更する</span><span class="sxs-lookup"><span data-stu-id="1cdb9-303">Change the email token lifespan</span></span>
 
-<span data-ttu-id="1cdb9-304">[ :::no-loc(Identity)::: ユーザートークン](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs)の既定のトークン有効期間は[1 日](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs)です。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-304">The default token lifespan of [the :::no-loc(Identity)::: user tokens](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Extensions.Core/src/TokenOptions.cs) is [one day](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/:::no-loc(Identity):::/Core/src/DataProtectionTokenProviderOptions.cs).</span></span> <span data-ttu-id="1cdb9-305">このセクションでは、電子メールトークンの有効期間を変更する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-305">This section shows how to change the email token lifespan.</span></span>
+<span data-ttu-id="1cdb9-304">[ Identity ユーザートークン](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs)の既定のトークン有効期間は[1 日](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs)です。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-304">The default token lifespan of [the Identity user tokens](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) is [one day](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).</span></span> <span data-ttu-id="1cdb9-305">このセクションでは、電子メールトークンの有効期間を変更する方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-305">This section shows how to change the email token lifespan.</span></span>
 
-<span data-ttu-id="1cdb9-306">カスタム[ \<TUser> DataProtectorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1)とを追加し <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.DataProtectionTokenProviderOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-306">Add a custom [DataProtectorTokenProvider\<TUser>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) and <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.DataProtectionTokenProviderOptions>:</span></span>
+<span data-ttu-id="1cdb9-306">カスタム[ \<TUser> DataProtectorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1)とを追加し <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> ます。</span><span class="sxs-lookup"><span data-stu-id="1cdb9-306">Add a custom [DataProtectorTokenProvider\<TUser>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) and <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>:</span></span>
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 

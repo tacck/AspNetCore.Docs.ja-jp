@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core でハブを使用する :::no-loc(SignalR):::'
+title: 'ASP.NET Core でハブを使用する SignalR'
 author: bradygaster
-description: 'ASP.NET Core でハブを使用する方法について説明 :::no-loc(SignalR)::: します。'
+description: 'ASP.NET Core でハブを使用する方法について説明 SignalR します。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/hubs
 ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,25 +26,25 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050941"
 ---
-# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a><span data-ttu-id="07c46-103">のハブを :::no-loc(SignalR)::: ASP.NET Core に使用する</span><span class="sxs-lookup"><span data-stu-id="07c46-103">Use hubs in :::no-loc(SignalR)::: for ASP.NET Core</span></span>
+# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a><span data-ttu-id="07c46-103">のハブを SignalR ASP.NET Core に使用する</span><span class="sxs-lookup"><span data-stu-id="07c46-103">Use hubs in SignalR for ASP.NET Core</span></span>
 
 <span data-ttu-id="07c46-104">[Rachel appel](https://twitter.com/rachelappel)および[加山 Griffin](https://twitter.com/1kevgriff)</span><span class="sxs-lookup"><span data-stu-id="07c46-104">By [Rachel Appel](https://twitter.com/rachelappel) and [Kevin Griffin](https://twitter.com/1kevgriff)</span></span>
 
 <span data-ttu-id="07c46-105">[サンプル コードを表示またはダウンロードする](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) ([ダウンロード方法](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="07c46-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(how to download)](xref:index#how-to-download-a-sample)</span></span>
 
-## <a name="what-is-a-no-locsignalr-hub"></a><span data-ttu-id="07c46-106">ハブとは :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="07c46-106">What is a :::no-loc(SignalR)::: hub</span></span>
+## <a name="what-is-a-no-locsignalr-hub"></a><span data-ttu-id="07c46-106">ハブとは SignalR</span><span class="sxs-lookup"><span data-stu-id="07c46-106">What is a SignalR hub</span></span>
 
-<span data-ttu-id="07c46-107">:::no-loc(SignalR):::ハブ API を使用すると、接続されているクライアント上のメソッドをサーバーから呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="07c46-107">The :::no-loc(SignalR)::: Hubs API enables you to call methods on connected clients from the server.</span></span> <span data-ttu-id="07c46-108">サーバーコードでは、クライアントによって呼び出されるメソッドを定義します。</span><span class="sxs-lookup"><span data-stu-id="07c46-108">In the server code, you define methods that are called by client.</span></span> <span data-ttu-id="07c46-109">クライアントコードでは、サーバーから呼び出されるメソッドを定義します。</span><span class="sxs-lookup"><span data-stu-id="07c46-109">In the client code, you define methods that are called from the server.</span></span> <span data-ttu-id="07c46-110">:::no-loc(SignalR)::: は、クライアントとサーバー間のリアルタイム通信とサーバー間の通信を可能にする、バックグラウンドの背後にあるすべての処理を行います。</span><span class="sxs-lookup"><span data-stu-id="07c46-110">:::no-loc(SignalR)::: takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible.</span></span>
+<span data-ttu-id="07c46-107">SignalRハブ API を使用すると、接続されているクライアント上のメソッドをサーバーから呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="07c46-107">The SignalR Hubs API enables you to call methods on connected clients from the server.</span></span> <span data-ttu-id="07c46-108">サーバーコードでは、クライアントによって呼び出されるメソッドを定義します。</span><span class="sxs-lookup"><span data-stu-id="07c46-108">In the server code, you define methods that are called by client.</span></span> <span data-ttu-id="07c46-109">クライアントコードでは、サーバーから呼び出されるメソッドを定義します。</span><span class="sxs-lookup"><span data-stu-id="07c46-109">In the client code, you define methods that are called from the server.</span></span> <span data-ttu-id="07c46-110">SignalR は、クライアントとサーバー間のリアルタイム通信とサーバー間の通信を可能にする、バックグラウンドの背後にあるすべての処理を行います。</span><span class="sxs-lookup"><span data-stu-id="07c46-110">SignalR takes care of everything behind the scenes that makes real-time client-to-server and server-to-client communications possible.</span></span>
 
-## <a name="configure-no-locsignalr-hubs"></a><span data-ttu-id="07c46-111">ハブの構成 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="07c46-111">Configure :::no-loc(SignalR)::: hubs</span></span>
+## <a name="configure-no-locsignalr-hubs"></a><span data-ttu-id="07c46-111">ハブの構成 SignalR</span><span class="sxs-lookup"><span data-stu-id="07c46-111">Configure SignalR hubs</span></span>
 
-<span data-ttu-id="07c46-112">ミドルウェアには :::no-loc(SignalR)::: 、を呼び出すことによって構成されるいくつかのサービスが必要です `services.Add:::no-loc(SignalR):::` 。</span><span class="sxs-lookup"><span data-stu-id="07c46-112">The :::no-loc(SignalR)::: middleware requires some services, which are configured by calling `services.Add:::no-loc(SignalR):::`.</span></span>
+<span data-ttu-id="07c46-112">ミドルウェアには SignalR 、を呼び出すことによって構成されるいくつかのサービスが必要です `services.AddSignalR` 。</span><span class="sxs-lookup"><span data-stu-id="07c46-112">The SignalR middleware requires some services, which are configured by calling `services.AddSignalR`.</span></span>
 
 [!code-csharp[Configure service](hubs/sample/startup.cs?range=38)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="07c46-113">:::no-loc(SignalR):::ASP.NET Core アプリに機能を追加する場合、 :::no-loc(SignalR)::: `endpoint.MapHub` `Startup.Configure` メソッドのコールバックでを呼び出すことによってルートをセットアップし `app.UseEndpoints` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-113">When adding :::no-loc(SignalR)::: functionality to an ASP.NET Core app, setup :::no-loc(SignalR)::: routes by calling `endpoint.MapHub` in the `Startup.Configure` method's `app.UseEndpoints` callback.</span></span>
+<span data-ttu-id="07c46-113">SignalRASP.NET Core アプリに機能を追加する場合、 SignalR `endpoint.MapHub` `Startup.Configure` メソッドのコールバックでを呼び出すことによってルートをセットアップし `app.UseEndpoints` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-113">When adding SignalR functionality to an ASP.NET Core app, setup SignalR routes by calling `endpoint.MapHub` in the `Startup.Configure` method's `app.UseEndpoints` callback.</span></span>
 
 ```csharp
 app.UseRouting();
@@ -58,7 +58,7 @@ app.UseEndpoints(endpoints =>
 
 ::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="07c46-114">ASP.NET Core アプリに機能を追加するときに :::no-loc(SignalR)::: 、 :::no-loc(SignalR)::: メソッドでを呼び出すことによってルートをセットアップし `app.Use:::no-loc(SignalR):::` `Startup.Configure` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-114">When adding :::no-loc(SignalR)::: functionality to an ASP.NET Core app, setup :::no-loc(SignalR)::: routes by calling `app.Use:::no-loc(SignalR):::` in the `Startup.Configure` method.</span></span>
+<span data-ttu-id="07c46-114">ASP.NET Core アプリに機能を追加するときに SignalR 、 SignalR メソッドでを呼び出すことによってルートをセットアップし `app.UseSignalR` `Startup.Configure` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-114">When adding SignalR functionality to an ASP.NET Core app, setup SignalR routes by calling `app.UseSignalR` in the `Startup.Configure` method.</span></span>
 
 [!code-csharp[Configure routes to hubs](hubs/sample/startup.cs?range=57-60)]
 
@@ -78,7 +78,7 @@ public class ChatHub : Hub
 }
 ```
 
-<span data-ttu-id="07c46-118">C# のメソッドの場合と同様に、戻り値の型とパラメーター (複合型や配列を含む) を指定できます。</span><span class="sxs-lookup"><span data-stu-id="07c46-118">You can specify a return type and parameters, including complex types and arrays, as you would in any C# method.</span></span> <span data-ttu-id="07c46-119">:::no-loc(SignalR)::: パラメーターと戻り値の複合オブジェクトおよび配列のシリアル化と逆シリアル化を処理します。</span><span class="sxs-lookup"><span data-stu-id="07c46-119">:::no-loc(SignalR)::: handles the serialization and deserialization of complex objects and arrays in your parameters and return values.</span></span>
+<span data-ttu-id="07c46-118">C# のメソッドの場合と同様に、戻り値の型とパラメーター (複合型や配列を含む) を指定できます。</span><span class="sxs-lookup"><span data-stu-id="07c46-118">You can specify a return type and parameters, including complex types and arrays, as you would in any C# method.</span></span> <span data-ttu-id="07c46-119">SignalR パラメーターと戻り値の複合オブジェクトおよび配列のシリアル化と逆シリアル化を処理します。</span><span class="sxs-lookup"><span data-stu-id="07c46-119">SignalR handles the serialization and deserialization of complex objects and arrays in your parameters and return values.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="07c46-120">ハブは一時的なものです。</span><span class="sxs-lookup"><span data-stu-id="07c46-120">Hubs are transient:</span></span>
@@ -92,8 +92,8 @@ public class ChatHub : Hub
 
 | <span data-ttu-id="07c46-127">プロパティ</span><span class="sxs-lookup"><span data-stu-id="07c46-127">Property</span></span> | <span data-ttu-id="07c46-128">[説明]</span><span class="sxs-lookup"><span data-stu-id="07c46-128">Description</span></span> |
 | ------ | ----------- |
-| `ConnectionId` | <span data-ttu-id="07c46-129">によって割り当てられる、接続の一意の ID を取得し :::no-loc(SignalR)::: ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-129">Gets the unique ID for the connection, assigned by :::no-loc(SignalR):::.</span></span> <span data-ttu-id="07c46-130">接続ごとに1つの接続 ID があります。</span><span class="sxs-lookup"><span data-stu-id="07c46-130">There is one connection ID for each connection.</span></span>|
-| `UserIdentifier` | <span data-ttu-id="07c46-131">[ユーザー識別子](xref:signalr/groups)を取得します。</span><span class="sxs-lookup"><span data-stu-id="07c46-131">Gets the [user identifier](xref:signalr/groups).</span></span> <span data-ttu-id="07c46-132">既定では、は、 :::no-loc(SignalR)::: `ClaimTypes.NameIdentifier` `ClaimsPrincipal` 接続に関連付けられているのをユーザー識別子として使用します。</span><span class="sxs-lookup"><span data-stu-id="07c46-132">By default, :::no-loc(SignalR)::: uses the `ClaimTypes.NameIdentifier` from the `ClaimsPrincipal` associated with the connection as the user identifier.</span></span> |
+| `ConnectionId` | <span data-ttu-id="07c46-129">によって割り当てられる、接続の一意の ID を取得し SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-129">Gets the unique ID for the connection, assigned by SignalR.</span></span> <span data-ttu-id="07c46-130">接続ごとに1つの接続 ID があります。</span><span class="sxs-lookup"><span data-stu-id="07c46-130">There is one connection ID for each connection.</span></span>|
+| `UserIdentifier` | <span data-ttu-id="07c46-131">[ユーザー識別子](xref:signalr/groups)を取得します。</span><span class="sxs-lookup"><span data-stu-id="07c46-131">Gets the [user identifier](xref:signalr/groups).</span></span> <span data-ttu-id="07c46-132">既定では、は、 SignalR `ClaimTypes.NameIdentifier` `ClaimsPrincipal` 接続に関連付けられているのをユーザー識別子として使用します。</span><span class="sxs-lookup"><span data-stu-id="07c46-132">By default, SignalR uses the `ClaimTypes.NameIdentifier` from the `ClaimsPrincipal` associated with the connection as the user identifier.</span></span> |
 | `User` | <span data-ttu-id="07c46-133">現在の `ClaimsPrincipal` ユーザーに関連付けられているを取得します。</span><span class="sxs-lookup"><span data-stu-id="07c46-133">Gets the `ClaimsPrincipal` associated with the current user.</span></span> |
 | `Items` | <span data-ttu-id="07c46-134">この接続のスコープ内でデータを共有するために使用できるキー/値のコレクションを取得します。</span><span class="sxs-lookup"><span data-stu-id="07c46-134">Gets a key/value collection that can be used to share data within the scope of this connection.</span></span> <span data-ttu-id="07c46-135">このコレクションにデータを格納することができ、さまざまなハブメソッド呼び出し間の接続が維持されます。</span><span class="sxs-lookup"><span data-stu-id="07c46-135">Data can be stored in this collection and it will persist for the connection across different hub method invocations.</span></span> |
 | `Features` | <span data-ttu-id="07c46-136">接続で使用できる機能のコレクションを取得します。</span><span class="sxs-lookup"><span data-stu-id="07c46-136">Gets the collection of features available on the connection.</span></span> <span data-ttu-id="07c46-137">現時点では、ほとんどのシナリオでこのコレクションは必要ないため、詳細には記載されていません。</span><span class="sxs-lookup"><span data-stu-id="07c46-137">For now, this collection isn't needed in most scenarios, so it isn't documented in detail yet.</span></span> |
@@ -138,7 +138,7 @@ public class ChatHub : Hub
 
 * <span data-ttu-id="07c46-169">`SendMessage` を使用して、接続されているすべてのクライアントにメッセージを送信し `Clients.All` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-169">`SendMessage` sends a message to all connected clients, using `Clients.All`.</span></span>
 * <span data-ttu-id="07c46-170">`SendMessageToCaller` を使用して、メッセージを呼び出し元に返信し `Clients.Caller` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-170">`SendMessageToCaller` sends a message back to the caller, using `Clients.Caller`.</span></span>
-* <span data-ttu-id="07c46-171">`SendMessageToGroups` グループ内のすべてのクライアントにメッセージを送信し `:::no-loc(SignalR)::: Users` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-171">`SendMessageToGroups` sends a message to all clients in the `:::no-loc(SignalR)::: Users` group.</span></span>
+* <span data-ttu-id="07c46-171">`SendMessageToGroups` グループ内のすべてのクライアントにメッセージを送信し `SignalR Users` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-171">`SendMessageToGroups` sends a message to all clients in the `SignalR Users` group.</span></span>
 
 [!code-csharp[Send messages](hubs/sample/hubs/chathub.cs?name=HubMethods)]
 
@@ -146,7 +146,7 @@ public class ChatHub : Hub
 
 <span data-ttu-id="07c46-173">を使用する場合の欠点 `SendAsync` は、呼び出されるクライアントメソッドを指定するマジック文字列に依存することです。</span><span class="sxs-lookup"><span data-stu-id="07c46-173">A drawback of using `SendAsync` is that it relies on a magic string to specify the client method to be called.</span></span> <span data-ttu-id="07c46-174">これにより、メソッド名のスペルが間違っている場合、またはクライアントに存在しない場合、コードは実行時エラーになります。</span><span class="sxs-lookup"><span data-stu-id="07c46-174">This leaves code open to runtime errors if the method name is misspelled or missing from the client.</span></span>
 
-<span data-ttu-id="07c46-175">を使用する代わりに、を使用してを `SendAsync` 厳密に型にする方法も `Hub` <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub%601> あります。</span><span class="sxs-lookup"><span data-stu-id="07c46-175">An alternative to using `SendAsync` is to strongly type the `Hub` with <xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.Hub%601>.</span></span> <span data-ttu-id="07c46-176">次の例では、 `ChatHub` クライアントメソッドがというインターフェイスに抽出されてい `IChatClient` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-176">In the following example, the `ChatHub` client methods have been extracted out into an interface called `IChatClient`.</span></span>
+<span data-ttu-id="07c46-175">を使用する代わりに、を使用してを `SendAsync` 厳密に型にする方法も `Hub` <xref:Microsoft.AspNetCore.SignalR.Hub%601> あります。</span><span class="sxs-lookup"><span data-stu-id="07c46-175">An alternative to using `SendAsync` is to strongly type the `Hub` with <xref:Microsoft.AspNetCore.SignalR.Hub%601>.</span></span> <span data-ttu-id="07c46-176">次の例では、 `ChatHub` クライアントメソッドがというインターフェイスに抽出されてい `IChatClient` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-176">In the following example, the `ChatHub` client methods have been extracted out into an interface called `IChatClient`.</span></span>
 
 [!code-csharp[Interface for IChatClient](hubs/sample/hubs/ichatclient.cs?name=snippet_IChatClient)]
 
@@ -170,13 +170,13 @@ public interface IClient
 
 ## <a name="change-the-name-of-a-hub-method"></a><span data-ttu-id="07c46-187">ハブメソッドの名前を変更する</span><span class="sxs-lookup"><span data-stu-id="07c46-187">Change the name of a hub method</span></span>
 
-<span data-ttu-id="07c46-188">既定では、サーバーハブのメソッド名は .NET メソッドの名前です。</span><span class="sxs-lookup"><span data-stu-id="07c46-188">By default, a server hub method name is the name of the .NET method.</span></span> <span data-ttu-id="07c46-189">ただし、 [HubMethodName](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.HubMethodNameAttribute) 属性を使用してこの既定値を変更し、メソッドの名前を手動で指定することができます。</span><span class="sxs-lookup"><span data-stu-id="07c46-189">However, you can use the [HubMethodName](xref:Microsoft.AspNetCore.:::no-loc(SignalR):::.HubMethodNameAttribute) attribute to change this default and manually specify a name for the method.</span></span> <span data-ttu-id="07c46-190">クライアントは、メソッドを呼び出すときに、.NET メソッド名の代わりにこの名前を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="07c46-190">The client should use this name, instead of the .NET method name, when invoking the method.</span></span>
+<span data-ttu-id="07c46-188">既定では、サーバーハブのメソッド名は .NET メソッドの名前です。</span><span class="sxs-lookup"><span data-stu-id="07c46-188">By default, a server hub method name is the name of the .NET method.</span></span> <span data-ttu-id="07c46-189">ただし、 [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) 属性を使用してこの既定値を変更し、メソッドの名前を手動で指定することができます。</span><span class="sxs-lookup"><span data-stu-id="07c46-189">However, you can use the [HubMethodName](xref:Microsoft.AspNetCore.SignalR.HubMethodNameAttribute) attribute to change this default and manually specify a name for the method.</span></span> <span data-ttu-id="07c46-190">クライアントは、メソッドを呼び出すときに、.NET メソッド名の代わりにこの名前を使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="07c46-190">The client should use this name, instead of the .NET method name, when invoking the method.</span></span>
 
 [!code-csharp[HubMethodName attribute](hubs/sample/hubs/chathub.cs?name=HubMethodName&highlight=1)]
 
 ## <a name="handle-events-for-a-connection"></a><span data-ttu-id="07c46-191">接続のイベントを処理する</span><span class="sxs-lookup"><span data-stu-id="07c46-191">Handle events for a connection</span></span>
 
-<span data-ttu-id="07c46-192">:::no-loc(SignalR):::HUB API は、 `OnConnectedAsync` 接続の `OnDisconnectedAsync` 管理と追跡のためのおよび仮想メソッドを提供します。</span><span class="sxs-lookup"><span data-stu-id="07c46-192">The :::no-loc(SignalR)::: Hubs API provides the `OnConnectedAsync` and `OnDisconnectedAsync` virtual methods to manage and track connections.</span></span> <span data-ttu-id="07c46-193">`OnConnectedAsync`仮想メソッドを上書きして、クライアントがハブに接続したときにアクションを実行します (グループへの追加など)。</span><span class="sxs-lookup"><span data-stu-id="07c46-193">Override the `OnConnectedAsync` virtual method to perform actions when a client connects to the Hub, such as adding it to a group.</span></span>
+<span data-ttu-id="07c46-192">SignalRHUB API は、 `OnConnectedAsync` 接続の `OnDisconnectedAsync` 管理と追跡のためのおよび仮想メソッドを提供します。</span><span class="sxs-lookup"><span data-stu-id="07c46-192">The SignalR Hubs API provides the `OnConnectedAsync` and `OnDisconnectedAsync` virtual methods to manage and track connections.</span></span> <span data-ttu-id="07c46-193">`OnConnectedAsync`仮想メソッドを上書きして、クライアントがハブに接続したときにアクションを実行します (グループへの追加など)。</span><span class="sxs-lookup"><span data-stu-id="07c46-193">Override the `OnConnectedAsync` virtual method to perform actions when a client connects to the Hub, such as adding it to a group.</span></span>
 
 [!code-csharp[Handle connection](hubs/sample/hubs/chathub.cs?name=OnConnectedAsync)]
 
@@ -192,23 +192,23 @@ public interface IClient
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-<span data-ttu-id="07c46-201">ハブが例外をスローした場合、接続は閉じられません。</span><span class="sxs-lookup"><span data-stu-id="07c46-201">If your Hub throws an exception, connections aren't closed.</span></span> <span data-ttu-id="07c46-202">既定では、は、 :::no-loc(SignalR)::: 一般的なエラーメッセージをクライアントに返します。</span><span class="sxs-lookup"><span data-stu-id="07c46-202">By default, :::no-loc(SignalR)::: returns a generic error message to the client.</span></span> <span data-ttu-id="07c46-203">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="07c46-203">For example:</span></span>
+<span data-ttu-id="07c46-201">ハブが例外をスローした場合、接続は閉じられません。</span><span class="sxs-lookup"><span data-stu-id="07c46-201">If your Hub throws an exception, connections aren't closed.</span></span> <span data-ttu-id="07c46-202">既定では、は、 SignalR 一般的なエラーメッセージをクライアントに返します。</span><span class="sxs-lookup"><span data-stu-id="07c46-202">By default, SignalR returns a generic error message to the client.</span></span> <span data-ttu-id="07c46-203">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="07c46-203">For example:</span></span>
 
 ```
-Microsoft.AspNetCore.:::no-loc(SignalR):::.HubException: An unexpected error occurred invoking 'MethodName' on the server.
+Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
 ```
 
-<span data-ttu-id="07c46-204">予期しない例外には、データベース接続が失敗したときにトリガーされる例外のデータベースサーバーの名前など、重要な情報が含まれていることがよくあります。</span><span class="sxs-lookup"><span data-stu-id="07c46-204">Unexpected exceptions often contain sensitive information, such as the name of a database server in an exception triggered when the database connection fails.</span></span> <span data-ttu-id="07c46-205">:::no-loc(SignalR)::: では、これらの詳細なエラーメッセージは既定でセキュリティ対策として公開されません。</span><span class="sxs-lookup"><span data-stu-id="07c46-205">:::no-loc(SignalR)::: doesn't expose these detailed error messages by default as a security measure.</span></span> <span data-ttu-id="07c46-206">例外の詳細が抑制される理由の詳細については、「 [セキュリティに関する考慮事項](xref:signalr/security#exceptions) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="07c46-206">See the [Security considerations article](xref:signalr/security#exceptions) for more information on why exception details are suppressed.</span></span>
+<span data-ttu-id="07c46-204">予期しない例外には、データベース接続が失敗したときにトリガーされる例外のデータベースサーバーの名前など、重要な情報が含まれていることがよくあります。</span><span class="sxs-lookup"><span data-stu-id="07c46-204">Unexpected exceptions often contain sensitive information, such as the name of a database server in an exception triggered when the database connection fails.</span></span> <span data-ttu-id="07c46-205">SignalR では、これらの詳細なエラーメッセージは既定でセキュリティ対策として公開されません。</span><span class="sxs-lookup"><span data-stu-id="07c46-205">SignalR doesn't expose these detailed error messages by default as a security measure.</span></span> <span data-ttu-id="07c46-206">例外の詳細が抑制される理由の詳細については、「 [セキュリティに関する考慮事項](xref:signalr/security#exceptions) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="07c46-206">See the [Security considerations article](xref:signalr/security#exceptions) for more information on why exception details are suppressed.</span></span>
 
-<span data-ttu-id="07c46-207">クライアントに伝達する必要のある *例外的な条件* がある場合は、クラスを使用でき `HubException` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-207">If you have an exceptional condition you *do* want to propagate to the client, you can use the `HubException` class.</span></span> <span data-ttu-id="07c46-208">ハブメソッドからをスローすると `HubException` 、 :::no-loc(SignalR)::: **は** 、メッセージ全体を未変更のままクライアントに送信します。</span><span class="sxs-lookup"><span data-stu-id="07c46-208">If you throw a `HubException` from your hub method, :::no-loc(SignalR)::: **will** send the entire message to the client, unmodified.</span></span>
+<span data-ttu-id="07c46-207">クライアントに伝達する必要のある *例外的な条件* がある場合は、クラスを使用でき `HubException` ます。</span><span class="sxs-lookup"><span data-stu-id="07c46-207">If you have an exceptional condition you *do* want to propagate to the client, you can use the `HubException` class.</span></span> <span data-ttu-id="07c46-208">ハブメソッドからをスローすると `HubException` 、 SignalR **は** 、メッセージ全体を未変更のままクライアントに送信します。</span><span class="sxs-lookup"><span data-stu-id="07c46-208">If you throw a `HubException` from your hub method, SignalR **will** send the entire message to the client, unmodified.</span></span>
 
 [!code-csharp[ThrowHubException](hubs/sample/hubs/chathub.cs?name=ThrowHubException&highlight=3)]
 
 > [!NOTE]
-> <span data-ttu-id="07c46-209">:::no-loc(SignalR)::: では、 `Message` 例外のプロパティのみがクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="07c46-209">:::no-loc(SignalR)::: only sends the `Message` property of the exception to the client.</span></span> <span data-ttu-id="07c46-210">例外のスタックトレースおよびその他のプロパティは、クライアントでは使用できません。</span><span class="sxs-lookup"><span data-stu-id="07c46-210">The stack trace and other properties on the exception aren't available to the client.</span></span>
+> <span data-ttu-id="07c46-209">SignalR では、 `Message` 例外のプロパティのみがクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="07c46-209">SignalR only sends the `Message` property of the exception to the client.</span></span> <span data-ttu-id="07c46-210">例外のスタックトレースおよびその他のプロパティは、クライアントでは使用できません。</span><span class="sxs-lookup"><span data-stu-id="07c46-210">The stack trace and other properties on the exception aren't available to the client.</span></span>
 
 ## <a name="related-resources"></a><span data-ttu-id="07c46-211">関連リソース</span><span class="sxs-lookup"><span data-stu-id="07c46-211">Related resources</span></span>
 
-* [<span data-ttu-id="07c46-212">ASP.NET Core の概要 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="07c46-212">Intro to ASP.NET Core :::no-loc(SignalR):::</span></span>](xref:signalr/introduction)
+* [<span data-ttu-id="07c46-212">ASP.NET Core の概要 SignalR</span><span class="sxs-lookup"><span data-stu-id="07c46-212">Intro to ASP.NET Core SignalR</span></span>](xref:signalr/introduction)
 * [<span data-ttu-id="07c46-213">JavaScript クライアント</span><span class="sxs-lookup"><span data-stu-id="07c46-213">JavaScript client</span></span>](xref:signalr/javascript-client)
 * [<span data-ttu-id="07c46-214">Azure に発行する</span><span class="sxs-lookup"><span data-stu-id="07c46-214">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)

@@ -5,17 +5,17 @@ description: ビューがアプリのデータ表示と、ASP.NET Core MVC で�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/overview
 ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,11 +28,11 @@ ms.locfileid: "93060626"
 
 <span data-ttu-id="ced93-104">作成者: [Steve Smith](https://ardalis.com/)</span><span class="sxs-lookup"><span data-stu-id="ced93-104">By [Steve Smith](https://ardalis.com/)</span></span>
 
-<span data-ttu-id="ced93-105">このドキュメントでは、ASP.NET Core MVC アプリケーションで使用されるビューについて説明します。</span><span class="sxs-lookup"><span data-stu-id="ced93-105">This document explains views used in ASP.NET Core MVC applications.</span></span> <span data-ttu-id="ced93-106">ページの詳細につい :::no-loc(Razor)::: ては、「 [ :::no-loc(Razor)::: ページの概要](xref:razor-pages/index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-106">For information on :::no-loc(Razor)::: Pages, see [Introduction to :::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span>
+<span data-ttu-id="ced93-105">このドキュメントでは、ASP.NET Core MVC アプリケーションで使用されるビューについて説明します。</span><span class="sxs-lookup"><span data-stu-id="ced93-105">This document explains views used in ASP.NET Core MVC applications.</span></span> <span data-ttu-id="ced93-106">ページの詳細につい Razor ては、「 [ Razor ページの概要](xref:razor-pages/index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-106">For information on Razor Pages, see [Introduction to Razor Pages](xref:razor-pages/index).</span></span>
 
-<span data-ttu-id="ced93-107">Model-View-Controller (MVC) パターンでは、 *ビュー* がアプリのデータ表示とユーザー操作を処理します。</span><span class="sxs-lookup"><span data-stu-id="ced93-107">In the Model-View-Controller (MVC) pattern, the *view* handles the app's data presentation and user interaction.</span></span> <span data-ttu-id="ced93-108">ビューは、 [ :::no-loc(Razor)::: マークアップ](xref:mvc/views/razor)が埋め込まれた HTML テンプレートです。</span><span class="sxs-lookup"><span data-stu-id="ced93-108">A view is an HTML template with embedded [:::no-loc(Razor)::: markup](xref:mvc/views/razor).</span></span> <span data-ttu-id="ced93-109">:::no-loc(Razor)::: マークアップは、クライアントに送信される web ページを生成するために HTML マークアップと対話するコードです。</span><span class="sxs-lookup"><span data-stu-id="ced93-109">:::no-loc(Razor)::: markup is code that interacts with HTML markup to produce a webpage that's sent to the client.</span></span>
+<span data-ttu-id="ced93-107">Model-View-Controller (MVC) パターンでは、 *ビュー* がアプリのデータ表示とユーザー操作を処理します。</span><span class="sxs-lookup"><span data-stu-id="ced93-107">In the Model-View-Controller (MVC) pattern, the *view* handles the app's data presentation and user interaction.</span></span> <span data-ttu-id="ced93-108">ビューは、 [ Razor マークアップ](xref:mvc/views/razor)が埋め込まれた HTML テンプレートです。</span><span class="sxs-lookup"><span data-stu-id="ced93-108">A view is an HTML template with embedded [Razor markup](xref:mvc/views/razor).</span></span> <span data-ttu-id="ced93-109">Razor マークアップは、クライアントに送信される web ページを生成するために HTML マークアップと対話するコードです。</span><span class="sxs-lookup"><span data-stu-id="ced93-109">Razor markup is code that interacts with HTML markup to produce a webpage that's sent to the client.</span></span>
 
-<span data-ttu-id="ced93-110">ASP.NET Core MVC では、ビューは、マークアップで [C# プログラミング言語](/dotnet/csharp/)を使用する *cshtml ファイルです。* :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="ced93-110">In ASP.NET Core MVC, views are *.cshtml* files that use the [C# programming language](/dotnet/csharp/) in :::no-loc(Razor)::: markup.</span></span> <span data-ttu-id="ced93-111">通常、ビュー ファイルは、各アプリの[コントローラー](xref:mvc/controllers/actions)の名前が付いたフォルダーにグループ化されます。</span><span class="sxs-lookup"><span data-stu-id="ced93-111">Usually, view files are grouped into folders named for each of the app's [controllers](xref:mvc/controllers/actions).</span></span> <span data-ttu-id="ced93-112">これらのフォルダーは、アプリのルートにある *Views* フォルダーに格納されます。</span><span class="sxs-lookup"><span data-stu-id="ced93-112">The folders are stored in a *Views* folder at the root of the app:</span></span>
+<span data-ttu-id="ced93-110">ASP.NET Core MVC では、ビューは、マークアップで [C# プログラミング言語](/dotnet/csharp/)を使用する *cshtml ファイルです。* Razor</span><span class="sxs-lookup"><span data-stu-id="ced93-110">In ASP.NET Core MVC, views are *.cshtml* files that use the [C# programming language](/dotnet/csharp/) in Razor markup.</span></span> <span data-ttu-id="ced93-111">通常、ビュー ファイルは、各アプリの[コントローラー](xref:mvc/controllers/actions)の名前が付いたフォルダーにグループ化されます。</span><span class="sxs-lookup"><span data-stu-id="ced93-111">Usually, view files are grouped into folders named for each of the app's [controllers](xref:mvc/controllers/actions).</span></span> <span data-ttu-id="ced93-112">これらのフォルダーは、アプリのルートにある *Views* フォルダーに格納されます。</span><span class="sxs-lookup"><span data-stu-id="ced93-112">The folders are stored in a *Views* folder at the root of the app:</span></span>
 
 ![Visual Studio のソリューション エクスプローラーで Views フォルダー、Home フォルダーが開かれ、About.cshtml、Contact.cshtml、および Index.cshtml ファイルが示されています。](overview/_static/views_solution_explorer.png)
 
@@ -59,7 +59,7 @@ ms.locfileid: "93060626"
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
-<span data-ttu-id="ced93-144">*:::no-loc(Razor):::* マークアップは、 `@` 記号で始まります。</span><span class="sxs-lookup"><span data-stu-id="ced93-144">*:::no-loc(Razor):::* markup starts with the `@` symbol.</span></span> <span data-ttu-id="ced93-145">中かっこ () で設定された[ :::no-loc(Razor)::: コードブロック](xref:mvc/views/razor#razor-code-blocks)内に c# コードを配置して c# ステートメントを実行 `{ ... }` します。</span><span class="sxs-lookup"><span data-stu-id="ced93-145">Run C# statements by placing C# code within [:::no-loc(Razor)::: code blocks](xref:mvc/views/razor#razor-code-blocks) set off by curly braces (`{ ... }`).</span></span> <span data-ttu-id="ced93-146">例として、上に示されている `ViewData["Title"]` への "About" の割り当てを参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-146">For example, see the assignment of "About" to `ViewData["Title"]` shown above.</span></span> <span data-ttu-id="ced93-147">`@` 記号を使用して値を参照するだけで、HTML 内に値を表示することができます。</span><span class="sxs-lookup"><span data-stu-id="ced93-147">You can display values within HTML by simply referencing the value with the `@` symbol.</span></span> <span data-ttu-id="ced93-148">上記の `<h2>` 要素と `<h3>` 要素のコンテンツを参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-148">See the contents of the `<h2>` and `<h3>` elements above.</span></span>
+<span data-ttu-id="ced93-144">*Razor* マークアップは、 `@` 記号で始まります。</span><span class="sxs-lookup"><span data-stu-id="ced93-144">*Razor* markup starts with the `@` symbol.</span></span> <span data-ttu-id="ced93-145">中かっこ () で設定された[ Razor コードブロック](xref:mvc/views/razor#razor-code-blocks)内に c# コードを配置して c# ステートメントを実行 `{ ... }` します。</span><span class="sxs-lookup"><span data-stu-id="ced93-145">Run C# statements by placing C# code within [Razor code blocks](xref:mvc/views/razor#razor-code-blocks) set off by curly braces (`{ ... }`).</span></span> <span data-ttu-id="ced93-146">例として、上に示されている `ViewData["Title"]` への "About" の割り当てを参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-146">For example, see the assignment of "About" to `ViewData["Title"]` shown above.</span></span> <span data-ttu-id="ced93-147">`@` 記号を使用して値を参照するだけで、HTML 内に値を表示することができます。</span><span class="sxs-lookup"><span data-stu-id="ced93-147">You can display values within HTML by simply referencing the value with the `@` symbol.</span></span> <span data-ttu-id="ced93-148">上記の `<h2>` 要素と `<h3>` 要素のコンテンツを参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-148">See the contents of the `<h2>` and `<h3>` elements above.</span></span>
 
 <span data-ttu-id="ced93-149">上記のビュー コンテンツは、ユーザーにレンダリングされる Web ページ全体の一部のみを示しています。</span><span class="sxs-lookup"><span data-stu-id="ced93-149">The view content shown above is only part of the entire webpage that's rendered to the user.</span></span> <span data-ttu-id="ced93-150">残りのページのレイアウトとビューのその他の共通する側面は、他のビュー ファイルで指定されます。</span><span class="sxs-lookup"><span data-stu-id="ced93-150">The rest of the page's layout and other common aspects of the view are specified in other view files.</span></span> <span data-ttu-id="ced93-151">詳細については、「[Layout](xref:mvc/views/layout)」 (レイアウト) のトピックを参照してください。</span><span class="sxs-lookup"><span data-stu-id="ced93-151">To learn more, see the [Layout topic](xref:mvc/views/layout).</span></span>
 
@@ -204,7 +204,7 @@ namespace WebApplication1.ViewModels
 
 ### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a><span data-ttu-id="ced93-212">弱く型指定されたデータ (ViewData、ViewData 属性、ViewBag)</span><span class="sxs-lookup"><span data-stu-id="ced93-212">Weakly typed data (ViewData, ViewData attribute, and ViewBag)</span></span>
 
-<span data-ttu-id="ced93-213">`ViewBag`*では :::no-loc(Razor)::: 使用できませんページ。*</span><span class="sxs-lookup"><span data-stu-id="ced93-213">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="ced93-213">`ViewBag`*では Razor 使用できませんページ。*</span><span class="sxs-lookup"><span data-stu-id="ced93-213">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="ced93-214">厳密に型指定されたビューに加え、ビューはデータの *弱く型指定された* ( *緩く型指定された* ともいう) コレクションにもアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="ced93-214">In addition to strongly typed views, views have access to a *weakly typed* (also called *loosely typed* ) collection of data.</span></span> <span data-ttu-id="ced93-215">厳密な型とは異なり、 *弱い型* (または *緩い型* ) は、使用するデータの型を明示的に宣言しないことを意味します。</span><span class="sxs-lookup"><span data-stu-id="ced93-215">Unlike strong types, *weak types* (or *loose types* ) means that you don't explicitly declare the type of data you're using.</span></span> <span data-ttu-id="ced93-216">弱く型指定されたデータのコレクションを使用して、少量のデータをコントローラーとビュー間でやり取りすることができます。</span><span class="sxs-lookup"><span data-stu-id="ced93-216">You can use the collection of weakly typed data for passing small amounts of data in and out of controllers and views.</span></span>
 
@@ -264,7 +264,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="ced93-238">**ViewData 属性**</span><span class="sxs-lookup"><span data-stu-id="ced93-238">**ViewData attribute**</span></span>
 
-<span data-ttu-id="ced93-239">[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) を使用するもう 1 つの方法は [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) です。</span><span class="sxs-lookup"><span data-stu-id="ced93-239">Another approach that uses the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) is [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="ced93-240">属性でマークされたコントローラーまたはページモデルのプロパティの :::no-loc(Razor)::: `[ViewData]` 値は、ディクショナリから格納および読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="ced93-240">Properties on controllers or :::no-loc(Razor)::: Page models marked with the `[ViewData]` attribute have their values stored and loaded from the dictionary.</span></span>
+<span data-ttu-id="ced93-239">[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) を使用するもう 1 つの方法は [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) です。</span><span class="sxs-lookup"><span data-stu-id="ced93-239">Another approach that uses the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) is [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="ced93-240">属性でマークされたコントローラーまたはページモデルのプロパティの Razor `[ViewData]` 値は、ディクショナリから格納および読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="ced93-240">Properties on controllers or Razor Page models marked with the `[ViewData]` attribute have their values stored and loaded from the dictionary.</span></span>
 
 <span data-ttu-id="ced93-241">次の例では、Home コントローラーには `[ViewData]` でマークされた `Title` プロパティが含まれています。</span><span class="sxs-lookup"><span data-stu-id="ced93-241">In the following example, the Home controller contains a `Title` property marked with `[ViewData]`.</span></span> <span data-ttu-id="ced93-242">`About` メソッドは、About ビューのタイトルを設定します。</span><span class="sxs-lookup"><span data-stu-id="ced93-242">The `About` method sets the title for the About view:</span></span>
 
@@ -298,7 +298,7 @@ public class HomeController : Controller
 
 <span data-ttu-id="ced93-244">**ViewBag**</span><span class="sxs-lookup"><span data-stu-id="ced93-244">**ViewBag**</span></span>
 
-<span data-ttu-id="ced93-245">`ViewBag`*では :::no-loc(Razor)::: 使用できませんページ。*</span><span class="sxs-lookup"><span data-stu-id="ced93-245">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="ced93-245">`ViewBag`*では Razor 使用できませんページ。*</span><span class="sxs-lookup"><span data-stu-id="ced93-245">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="ced93-246">`ViewBag` は、に格納されているオブジェクトへの動的アクセスを提供する [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) オブジェクトです `ViewData` 。</span><span class="sxs-lookup"><span data-stu-id="ced93-246">`ViewBag` is a [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) object that provides dynamic access to the objects stored in `ViewData`.</span></span> <span data-ttu-id="ced93-247">`ViewBag` はキャストを必要としないため、より簡単に使用できます。</span><span class="sxs-lookup"><span data-stu-id="ced93-247">`ViewBag` can be more convenient to work with, since it doesn't require casting.</span></span> <span data-ttu-id="ced93-248">次の例は、上記の `ViewData` を使用した時と同じ結果になるように、`ViewBag` を使用する方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="ced93-248">The following example shows how to use `ViewBag` with the same result as using `ViewData` above:</span></span>
 
@@ -331,7 +331,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="ced93-249">**ViewBag、ViewData を同時に使用する**</span><span class="sxs-lookup"><span data-stu-id="ced93-249">**Using ViewData and ViewBag simultaneously**</span></span>
 
-<span data-ttu-id="ced93-250">`ViewBag`*では :::no-loc(Razor)::: 使用できませんページ。*</span><span class="sxs-lookup"><span data-stu-id="ced93-250">`ViewBag` *isn't available in :::no-loc(Razor)::: Pages.*</span></span>
+<span data-ttu-id="ced93-250">`ViewBag`*では Razor 使用できませんページ。*</span><span class="sxs-lookup"><span data-stu-id="ced93-250">`ViewBag` *isn't available in Razor Pages.*</span></span>
 
 <span data-ttu-id="ced93-251">`ViewData` と `ViewBag` は基になる同じ `ViewData` コレクションを参照しているため、値を読み書きするときに、`ViewData` と `ViewBag` の両方を使用して、それらを組み合わせることができます。</span><span class="sxs-lookup"><span data-stu-id="ced93-251">Since `ViewData` and `ViewBag` refer to the same underlying `ViewData` collection, you can use both `ViewData` and `ViewBag` and mix and match between them when reading and writing values.</span></span>
 
@@ -371,7 +371,7 @@ public IActionResult SomeAction()
 
 <span data-ttu-id="ced93-259">**ViewData と ViewBag の相違点の概要**</span><span class="sxs-lookup"><span data-stu-id="ced93-259">**Summary of the differences between ViewData and ViewBag**</span></span>
 
- <span data-ttu-id="ced93-260">`ViewBag` は、ページでは使用できません :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="ced93-260">`ViewBag` isn't available in the :::no-loc(Razor)::: Pages.</span></span>
+ <span data-ttu-id="ced93-260">`ViewBag` は、ページでは使用できません Razor 。</span><span class="sxs-lookup"><span data-stu-id="ced93-260">`ViewBag` isn't available in the Razor Pages.</span></span>
 
 * `ViewData`
   * <span data-ttu-id="ced93-261">は [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)から派生しているため、、、、などの便利なディクショナリプロパティを持つことができ `ContainsKey` `Add` `Remove` `Clear` ます。</span><span class="sxs-lookup"><span data-stu-id="ced93-261">Derives from [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), so it has dictionary properties that can be useful, such as `ContainsKey`, `Add`, `Remove`, and `Clear`.</span></span>

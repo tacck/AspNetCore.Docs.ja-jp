@@ -1,21 +1,21 @@
 ---
-title: '認証と :::no-loc(Identity)::: ASP.NET Core 2.0 への移行'
+title: '認証と Identity ASP.NET Core 2.0 への移行'
 author: scottaddie
-description: 'この記事では ASP.NET Core 1.x 認証と ASP.NET Core 2.0 に移行するための最も一般的な手順について説明し :::no-loc(Identity)::: ます。'
+description: 'この記事では ASP.NET Core 1.x 認証と ASP.NET Core 2.0 に移行するための最も一般的な手順について説明し Identity ます。'
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/1x-to-2x/identity-2x
 ms.openlocfilehash: cad7582670013661f5fcbfbebad923f0f092462e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,17 +24,17 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93057181"
 ---
-# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a><span data-ttu-id="ba6a3-103">認証と :::no-loc(Identity)::: ASP.NET Core 2.0 への移行</span><span class="sxs-lookup"><span data-stu-id="ba6a3-103">Migrate authentication and :::no-loc(Identity)::: to ASP.NET Core 2.0</span></span>
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a><span data-ttu-id="ba6a3-103">認証と Identity ASP.NET Core 2.0 への移行</span><span class="sxs-lookup"><span data-stu-id="ba6a3-103">Migrate authentication and Identity to ASP.NET Core 2.0</span></span>
 
 <span data-ttu-id="ba6a3-104">[Scott Addie](https://github.com/scottaddie)および[hao Kung](https://github.com/HaoK)</span><span class="sxs-lookup"><span data-stu-id="ba6a3-104">By [Scott Addie](https://github.com/scottaddie) and [Hao Kung](https://github.com/HaoK)</span></span>
 
-<span data-ttu-id="ba6a3-105">ASP.NET Core 2.0 には、認証のための新しいモデルが用意されており、 [:::no-loc(Identity):::](xref:security/authentication/identity) サービスを使用した構成が簡単になります。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-105">ASP.NET Core 2.0 has a new model for authentication and [:::no-loc(Identity):::](xref:security/authentication/identity) that simplifies configuration by using services.</span></span> <span data-ttu-id="ba6a3-106">認証を使用するか :::no-loc(Identity)::: 、次に示すように、新しいモデルを使用するように更新することができる ASP.NET Core 1.x アプリケーション。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-106">ASP.NET Core 1.x applications that use authentication or :::no-loc(Identity)::: can be updated to use the new model as outlined below.</span></span>
+<span data-ttu-id="ba6a3-105">ASP.NET Core 2.0 には、認証のための新しいモデルが用意されており、 [Identity](xref:security/authentication/identity) サービスを使用した構成が簡単になります。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-105">ASP.NET Core 2.0 has a new model for authentication and [Identity](xref:security/authentication/identity) that simplifies configuration by using services.</span></span> <span data-ttu-id="ba6a3-106">認証を使用するか Identity 、次に示すように、新しいモデルを使用するように更新することができる ASP.NET Core 1.x アプリケーション。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-106">ASP.NET Core 1.x applications that use authentication or Identity can be updated to use the new model as outlined below.</span></span>
 
 ## <a name="update-namespaces"></a><span data-ttu-id="ba6a3-107">名前空間の更新</span><span class="sxs-lookup"><span data-stu-id="ba6a3-107">Update namespaces</span></span>
 
-<span data-ttu-id="ba6a3-108">1.x では、やなどのクラスは `:::no-loc(Identity):::Role` `:::no-loc(Identity):::User` 名前空間にありました `Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore` 。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-108">In 1.x, classes such `:::no-loc(Identity):::Role` and `:::no-loc(Identity):::User` were found in the `Microsoft.AspNetCore.:::no-loc(Identity):::.EntityFrameworkCore` namespace.</span></span>
+<span data-ttu-id="ba6a3-108">1.x では、やなどのクラスは `IdentityRole` `IdentityUser` 名前空間にありました `Microsoft.AspNetCore.Identity.EntityFrameworkCore` 。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-108">In 1.x, classes such `IdentityRole` and `IdentityUser` were found in the `Microsoft.AspNetCore.Identity.EntityFrameworkCore` namespace.</span></span>
 
-<span data-ttu-id="ba6a3-109">2.0 では、 <xref:Microsoft.AspNetCore.:::no-loc(Identity):::> このようなクラスのいくつかの新しいホームに名前空間が追加されました。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-109">In 2.0, the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::> namespace became the new home for several of such classes.</span></span> <span data-ttu-id="ba6a3-110">既定のコードでは :::no-loc(Identity)::: 、影響を受けるクラスにはおよびが含ま `ApplicationUser` `Startup` れます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-110">With the default :::no-loc(Identity)::: code, affected classes include `ApplicationUser` and `Startup`.</span></span> <span data-ttu-id="ba6a3-111">ステートメントを調整して `using` 、影響を受ける参照を解決します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-111">Adjust your `using` statements to resolve the affected references.</span></span>
+<span data-ttu-id="ba6a3-109">2.0 では、 <xref:Microsoft.AspNetCore.Identity> このようなクラスのいくつかの新しいホームに名前空間が追加されました。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-109">In 2.0, the <xref:Microsoft.AspNetCore.Identity> namespace became the new home for several of such classes.</span></span> <span data-ttu-id="ba6a3-110">既定のコードでは Identity 、影響を受けるクラスにはおよびが含ま `ApplicationUser` `Startup` れます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-110">With the default Identity code, affected classes include `ApplicationUser` and `Startup`.</span></span> <span data-ttu-id="ba6a3-111">ステートメントを調整して `using` 、影響を受ける参照を解決します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-111">Adjust your `using` statements to resolve the affected references.</span></span>
 
 <a name="auth-middleware"></a>
 
@@ -42,18 +42,18 @@ ms.locfileid: "93057181"
 
 <span data-ttu-id="ba6a3-113">1.x プロジェクトでは、認証はミドルウェアを介して構成されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-113">In 1.x projects, authentication is configured via middleware.</span></span> <span data-ttu-id="ba6a3-114">ミドルウェアメソッドは、サポートする各認証スキームに対して呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-114">A middleware method is invoked for each authentication scheme you want to support.</span></span>
 
-<span data-ttu-id="ba6a3-115">次の 1. x の例では、 :::no-loc(Identity)::: *Startup.cs* で Facebook 認証を構成します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-115">The following 1.x example configures Facebook authentication with :::no-loc(Identity)::: in *Startup.cs* :</span></span>
+<span data-ttu-id="ba6a3-115">次の 1. x の例では、 Identity *Startup.cs* で Facebook 認証を構成します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-115">The following 1.x example configures Facebook authentication with Identity in *Startup.cs* :</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 }
 
 public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 {
-    app.Use:::no-loc(Identity):::();
+    app.UseIdentity();
     app.UseFacebookAuthentication(new FacebookOptions {
         AppId = Configuration["auth:facebook:appid"],
         AppSecret = Configuration["auth:facebook:appsecret"]
@@ -61,18 +61,18 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 }
 ```
 
-<span data-ttu-id="ba6a3-116">2.0 プロジェクトでは、認証はサービスを介して構成されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-116">In 2.0 projects, authentication is configured via services.</span></span> <span data-ttu-id="ba6a3-117">各認証スキームは、 `ConfigureServices` *Startup.cs* のメソッドに登録されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-117">Each authentication scheme is registered in the `ConfigureServices` method of *Startup.cs* .</span></span> <span data-ttu-id="ba6a3-118">`Use:::no-loc(Identity):::`メソッドはに置き換えられ `UseAuthentication` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-118">The `Use:::no-loc(Identity):::` method is replaced with `UseAuthentication`.</span></span>
+<span data-ttu-id="ba6a3-116">2.0 プロジェクトでは、認証はサービスを介して構成されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-116">In 2.0 projects, authentication is configured via services.</span></span> <span data-ttu-id="ba6a3-117">各認証スキームは、 `ConfigureServices` *Startup.cs* のメソッドに登録されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-117">Each authentication scheme is registered in the `ConfigureServices` method of *Startup.cs* .</span></span> <span data-ttu-id="ba6a3-118">`UseIdentity`メソッドはに置き換えられ `UseAuthentication` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-118">The `UseIdentity` method is replaced with `UseAuthentication`.</span></span>
 
-<span data-ttu-id="ba6a3-119">次の2.0 の例では、Startup.cs ので Facebook 認証を構成し :::no-loc(Identity)::: ます。 *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="ba6a3-119">The following 2.0 example configures Facebook authentication with :::no-loc(Identity)::: in *Startup.cs* :</span></span>
+<span data-ttu-id="ba6a3-119">次の2.0 の例では、Startup.cs ので Facebook 認証を構成し Identity ます。 *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="ba6a3-119">The following 2.0 example configures Facebook authentication with Identity in *Startup.cs* :</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+    services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-    // If you want to tweak :::no-loc(Identity)::: :::no-loc(cookie):::s, they're no longer part of :::no-loc(Identity):::Options.
-    services.ConfigureApplication:::no-loc(Cookie):::(options => options.LoginPath = "/Account/LogIn");
+    // If you want to tweak Identity cookies, they're no longer part of IdentityOptions.
+    services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
     services.AddAuthentication()
             .AddFacebook(options =>
             {
@@ -90,42 +90,42 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 <span data-ttu-id="ba6a3-122">次に、各主要な認証スキームの2.0 移行手順を示します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-122">Below are 2.0 migration instructions for each major authentication scheme.</span></span>
 
-### <a name="no-loccookie-based-authentication"></a><span data-ttu-id="ba6a3-123">:::no-loc(Cookie):::ベースの認証</span><span class="sxs-lookup"><span data-stu-id="ba6a3-123">:::no-loc(Cookie):::-based authentication</span></span>
+### <a name="no-loccookie-based-authentication"></a><span data-ttu-id="ba6a3-123">Cookieベースの認証</span><span class="sxs-lookup"><span data-stu-id="ba6a3-123">Cookie-based authentication</span></span>
 
 <span data-ttu-id="ba6a3-124">次の2つのオプションのいずれかを選択し、 *Startup.cs* で必要な変更を行います。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-124">Select one of the two options below, and make the necessary changes in *Startup.cs* :</span></span>
 
-1. <span data-ttu-id="ba6a3-125">:::no-loc(cookie):::でを使用する:::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="ba6a3-125">Use :::no-loc(cookie):::s with :::no-loc(Identity):::</span></span>
-    - <span data-ttu-id="ba6a3-126">`Use:::no-loc(Identity):::` `UseAuthentication` メソッド内のをに置き換え `Configure` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-126">Replace `Use:::no-loc(Identity):::` with `UseAuthentication` in the `Configure` method:</span></span>
+1. <span data-ttu-id="ba6a3-125">cookieでを使用するIdentity</span><span class="sxs-lookup"><span data-stu-id="ba6a3-125">Use cookies with Identity</span></span>
+    - <span data-ttu-id="ba6a3-126">`UseIdentity` `UseAuthentication` メソッド内のをに置き換え `Configure` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-126">Replace `UseIdentity` with `UseAuthentication` in the `Configure` method:</span></span>
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - <span data-ttu-id="ba6a3-127">`Add:::no-loc(Identity):::`メソッドでメソッドを呼び出して `ConfigureServices` 、認証サービスを追加し :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-127">Invoke the `Add:::no-loc(Identity):::` method in the `ConfigureServices` method to add the :::no-loc(cookie)::: authentication services.</span></span>
-    - <span data-ttu-id="ba6a3-128">必要に応じて、 `ConfigureApplication:::no-loc(Cookie):::` メソッドでメソッドまたはメソッドを呼び出して、設定を調整し `ConfigureExternal:::no-loc(Cookie):::` `ConfigureServices` :::no-loc(Identity)::: :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-128">Optionally, invoke the `ConfigureApplication:::no-loc(Cookie):::` or `ConfigureExternal:::no-loc(Cookie):::` method in the `ConfigureServices` method to tweak the :::no-loc(Identity)::: :::no-loc(cookie)::: settings.</span></span>
+    - <span data-ttu-id="ba6a3-127">`AddIdentity`メソッドでメソッドを呼び出して `ConfigureServices` 、認証サービスを追加し cookie ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-127">Invoke the `AddIdentity` method in the `ConfigureServices` method to add the cookie authentication services.</span></span>
+    - <span data-ttu-id="ba6a3-128">必要に応じて、 `ConfigureApplicationCookie` メソッドでメソッドまたはメソッドを呼び出して、設定を調整し `ConfigureExternalCookie` `ConfigureServices` Identity cookie ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-128">Optionally, invoke the `ConfigureApplicationCookie` or `ConfigureExternalCookie` method in the `ConfigureServices` method to tweak the Identity cookie settings.</span></span>
 
         ```csharp
-        services.Add:::no-loc(Identity):::<ApplicationUser, :::no-loc(Identity):::Role>()
+        services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-        services.ConfigureApplication:::no-loc(Cookie):::(options => options.LoginPath = "/Account/LogIn");
+        services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. <span data-ttu-id="ba6a3-129">を :::no-loc(cookie)::: 指定せずにを使用する :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="ba6a3-129">Use :::no-loc(cookie):::s without :::no-loc(Identity):::</span></span>
-    - <span data-ttu-id="ba6a3-130">メソッドの `Use:::no-loc(Cookie):::Authentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-130">Replace the `Use:::no-loc(Cookie):::Authentication` method call in the `Configure` method with `UseAuthentication`:</span></span>
+2. <span data-ttu-id="ba6a3-129">を cookie 指定せずにを使用する Identity</span><span class="sxs-lookup"><span data-stu-id="ba6a3-129">Use cookies without Identity</span></span>
+    - <span data-ttu-id="ba6a3-130">メソッドの `UseCookieAuthentication` メソッド呼び出しを `Configure` 次のように置き換え `UseAuthentication` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-130">Replace the `UseCookieAuthentication` method call in the `Configure` method with `UseAuthentication`:</span></span>
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - <span data-ttu-id="ba6a3-131">`AddAuthentication`メソッドでメソッドとメソッドを呼び出し `Add:::no-loc(Cookie):::` `ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-131">Invoke the `AddAuthentication` and `Add:::no-loc(Cookie):::` methods in the `ConfigureServices` method:</span></span>
+    - <span data-ttu-id="ba6a3-131">`AddAuthentication`メソッドでメソッドとメソッドを呼び出し `AddCookie` `ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-131">Invoke the `AddAuthentication` and `AddCookie` methods in the `ConfigureServices` method:</span></span>
 
         ```csharp
-        // If you don't want the :::no-loc(cookie)::: to be automatically authenticated and assigned to HttpContext.User,
-        // remove the :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme parameter passed to AddAuthentication.
-        services.AddAuthentication(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme)
-                .Add:::no-loc(Cookie):::(options =>
+        // If you don't want the cookie to be automatically authenticated and assigned to HttpContext.User,
+        // remove the CookieAuthenticationDefaults.AuthenticationScheme parameter passed to AddAuthentication.
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
                 {
                     options.LoginPath = "/Account/LogIn";
                     options.LogoutPath = "/Account/LogOff";
@@ -152,7 +152,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
             });
     ```
 
-    <span data-ttu-id="ba6a3-136">このコードスニペットはを使用しない :::no-loc(Identity)::: ため、既定のスキームはメソッドに渡すことによって設定する必要があり `JwtBearerDefaults.AuthenticationScheme` `AddAuthentication` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-136">This code snippet doesn't use :::no-loc(Identity):::, so the default scheme should be set by passing `JwtBearerDefaults.AuthenticationScheme` to the `AddAuthentication` method.</span></span>
+    <span data-ttu-id="ba6a3-136">このコードスニペットはを使用しない Identity ため、既定のスキームはメソッドに渡すことによって設定する必要があり `JwtBearerDefaults.AuthenticationScheme` `AddAuthentication` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-136">This code snippet doesn't use Identity, so the default scheme should be set by passing `JwtBearerDefaults.AuthenticationScheme` to the `AddAuthentication` method.</span></span>
 
 ### <a name="openid-connect-oidc-authentication"></a><span data-ttu-id="ba6a3-137">OpenID Connect (OIDC) 認証</span><span class="sxs-lookup"><span data-stu-id="ba6a3-137">OpenID Connect (OIDC) authentication</span></span>
 
@@ -169,10 +169,10 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
     ```csharp
     services.AddAuthentication(options =>
     {
-        options.DefaultScheme = :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
     })
-    .Add:::no-loc(Cookie):::()
+    .AddCookie()
     .AddOpenIdConnect(options =>
     {
         options.Authority = Configuration["auth:oidc:authority"];
@@ -278,17 +278,17 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 <span data-ttu-id="ba6a3-162">2.0 では、これら2つのプロパティは個別のインスタンスのプロパティとして削除されてい `AuthenticationOptions` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-162">In 2.0, these two properties have been removed as properties on the individual `AuthenticationOptions` instance.</span></span> <span data-ttu-id="ba6a3-163">これらは、 `AddAuthentication` Startup.cs のメソッド内のメソッド呼び出しで構成でき `ConfigureServices` ます。 *Startup.cs*</span><span class="sxs-lookup"><span data-stu-id="ba6a3-163">They can be configured in the `AddAuthentication` method call within the `ConfigureServices` method of *Startup.cs* :</span></span>
 
 ```csharp
-services.AddAuthentication(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme);
+services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-<span data-ttu-id="ba6a3-164">前のコードスニペットでは、既定のスキームは `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` ("s") に設定されて :::no-loc(Cookie)::: います。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-164">In the preceding code snippet, the default scheme is set to `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` (":::no-loc(Cookie):::s").</span></span>
+<span data-ttu-id="ba6a3-164">前のコードスニペットでは、既定のスキームは `CookieAuthenticationDefaults.AuthenticationScheme` ("s") に設定されて Cookie います。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-164">In the preceding code snippet, the default scheme is set to `CookieAuthenticationDefaults.AuthenticationScheme` ("Cookies").</span></span>
 
-<span data-ttu-id="ba6a3-165">または、オーバーロードされたバージョンのメソッドを使用して、複数の `AddAuthentication` プロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-165">Alternatively, use an overloaded version of the `AddAuthentication` method to set more than one property.</span></span> <span data-ttu-id="ba6a3-166">次のオーバーロードされたメソッドの例では、既定のスキームはに設定されて `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme` います。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-166">In the following overloaded method example, the default scheme is set to `:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme`.</span></span> <span data-ttu-id="ba6a3-167">認証方式は、個々の `[Authorize]` 属性または承認ポリシー内で指定することもできます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-167">The authentication scheme may alternatively be specified within your individual `[Authorize]` attributes or authorization policies.</span></span>
+<span data-ttu-id="ba6a3-165">または、オーバーロードされたバージョンのメソッドを使用して、複数の `AddAuthentication` プロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-165">Alternatively, use an overloaded version of the `AddAuthentication` method to set more than one property.</span></span> <span data-ttu-id="ba6a3-166">次のオーバーロードされたメソッドの例では、既定のスキームはに設定されて `CookieAuthenticationDefaults.AuthenticationScheme` います。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-166">In the following overloaded method example, the default scheme is set to `CookieAuthenticationDefaults.AuthenticationScheme`.</span></span> <span data-ttu-id="ba6a3-167">認証方式は、個々の `[Authorize]` 属性または承認ポリシー内で指定することもできます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-167">The authentication scheme may alternatively be specified within your individual `[Authorize]` attributes or authorization policies.</span></span>
 
 ```csharp
 services.AddAuthentication(options =>
 {
-    options.DefaultScheme = :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 });
 ```
@@ -297,7 +297,7 @@ services.AddAuthentication(options =>
 - <span data-ttu-id="ba6a3-169">ユーザーが自動的にサインインするようにするには</span><span class="sxs-lookup"><span data-stu-id="ba6a3-169">You want the user to be automatically signed in</span></span>
 - <span data-ttu-id="ba6a3-170">`[Authorize]`スキーマを指定せずに属性または承認ポリシーを使用する</span><span class="sxs-lookup"><span data-stu-id="ba6a3-170">You use the `[Authorize]` attribute or authorization policies without specifying schemes</span></span>
 
-<span data-ttu-id="ba6a3-171">この規則の例外は `Add:::no-loc(Identity):::` メソッドです。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-171">An exception to this rule is the `Add:::no-loc(Identity):::` method.</span></span> <span data-ttu-id="ba6a3-172">このメソッドは、を追加 :::no-loc(cookie)::: し、既定の認証およびチャレンジのスキームをアプリケーションに設定し :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ApplicationScheme` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-172">This method adds :::no-loc(cookie):::s for you and sets the default authenticate and challenge schemes to the application :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ApplicationScheme`.</span></span> <span data-ttu-id="ba6a3-173">また、既定のサインインスキームが外部に設定され :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ExternalScheme` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-173">Additionally, it sets the default sign-in scheme to the external :::no-loc(cookie)::: `:::no-loc(Identity):::Constants.ExternalScheme`.</span></span>
+<span data-ttu-id="ba6a3-171">この規則の例外は `AddIdentity` メソッドです。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-171">An exception to this rule is the `AddIdentity` method.</span></span> <span data-ttu-id="ba6a3-172">このメソッドは、を追加 cookie し、既定の認証およびチャレンジのスキームをアプリケーションに設定し cookie `IdentityConstants.ApplicationScheme` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-172">This method adds cookies for you and sets the default authenticate and challenge schemes to the application cookie `IdentityConstants.ApplicationScheme`.</span></span> <span data-ttu-id="ba6a3-173">また、既定のサインインスキームが外部に設定され cookie `IdentityConstants.ExternalScheme` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-173">Additionally, it sets the default sign-in scheme to the external cookie `IdentityConstants.ExternalScheme`.</span></span>
 
 <a name="obsolete-interface"></a>
 
@@ -344,25 +344,25 @@ services.AddAuthentication(options =>
 
 <span data-ttu-id="ba6a3-191">詳細については、「<xref:security/authentication/windowsauth>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-191">For more information, see <xref:security/authentication/windowsauth>.</span></span>
 
-<a name="identity-:::no-loc(cookie):::-options"></a>
+<a name="identity-cookie-options"></a>
 
-## <a name="no-locidentityno-loccookieoptions-instances"></a><span data-ttu-id="ba6a3-192">:::no-loc(Identity)::::::no-loc(Cookie):::オプションのインスタンス</span><span class="sxs-lookup"><span data-stu-id="ba6a3-192">:::no-loc(Identity)::::::no-loc(Cookie):::Options instances</span></span>
+## <a name="no-locidentityno-loccookieoptions-instances"></a><span data-ttu-id="ba6a3-192">IdentityCookieオプションのインスタンス</span><span class="sxs-lookup"><span data-stu-id="ba6a3-192">IdentityCookieOptions instances</span></span>
 
-<span data-ttu-id="ba6a3-193">2.0 の変更の副作用は、オプションのインスタンスの代わりに名前付きオプションを使用するように切り替えることです :::no-loc(cookie)::: 。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-193">A side effect of the 2.0 changes is the switch to using named options instead of :::no-loc(cookie)::: options instances.</span></span> <span data-ttu-id="ba6a3-194">スキーム名をカスタマイズする機能 :::no-loc(Identity)::: :::no-loc(cookie)::: は削除されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-194">The ability to customize the :::no-loc(Identity)::: :::no-loc(cookie)::: scheme names is removed.</span></span>
+<span data-ttu-id="ba6a3-193">2.0 の変更の副作用は、オプションのインスタンスの代わりに名前付きオプションを使用するように切り替えることです cookie 。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-193">A side effect of the 2.0 changes is the switch to using named options instead of cookie options instances.</span></span> <span data-ttu-id="ba6a3-194">スキーム名をカスタマイズする機能 Identity cookie は削除されます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-194">The ability to customize the Identity cookie scheme names is removed.</span></span>
 
-<span data-ttu-id="ba6a3-195">たとえば、1.x プロジェクトでは、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection) を使用し `:::no-loc(Identity)::::::no-loc(Cookie):::Options` て、パラメーターを *AccountController.cs* および *ManageController.cs* に渡します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-195">For example, 1.x projects use [constructor injection](xref:mvc/controllers/dependency-injection#constructor-injection) to pass an `:::no-loc(Identity)::::::no-loc(Cookie):::Options` parameter into *AccountController.cs* and *ManageController.cs* .</span></span> <span data-ttu-id="ba6a3-196">外部 :::no-loc(cookie)::: 認証スキームは、指定されたインスタンスからアクセスされます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-196">The external :::no-loc(cookie)::: authentication scheme is accessed from the provided instance:</span></span>
+<span data-ttu-id="ba6a3-195">たとえば、1.x プロジェクトでは、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection) を使用し `IdentityCookieOptions` て、パラメーターを *AccountController.cs* および *ManageController.cs* に渡します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-195">For example, 1.x projects use [constructor injection](xref:mvc/controllers/dependency-injection#constructor-injection) to pass an `IdentityCookieOptions` parameter into *AccountController.cs* and *ManageController.cs* .</span></span> <span data-ttu-id="ba6a3-196">外部 cookie 認証スキームは、指定されたインスタンスからアクセスされます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-196">The external cookie authentication scheme is accessed from the provided instance:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
-<span data-ttu-id="ba6a3-197">上記のコンストラクターインジェクションは、2.0 プロジェクトでは不要になり、 `_external:::no-loc(Cookie):::Scheme` フィールドを削除することができます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-197">The aforementioned constructor injection becomes unnecessary in 2.0 projects, and the `_external:::no-loc(Cookie):::Scheme` field can be deleted:</span></span>
+<span data-ttu-id="ba6a3-197">上記のコンストラクターインジェクションは、2.0 プロジェクトでは不要になり、 `_externalCookieScheme` フィールドを削除することができます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-197">The aforementioned constructor injection becomes unnecessary in 2.0 projects, and the `_externalCookieScheme` field can be deleted:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor)]
 
-<span data-ttu-id="ba6a3-198">1.x プロジェクトでは、次のようにフィールドが使用されていました。 `_external:::no-loc(Cookie):::Scheme`</span><span class="sxs-lookup"><span data-stu-id="ba6a3-198">1.x projects used the `_external:::no-loc(Cookie):::Scheme` field as follows:</span></span>
+<span data-ttu-id="ba6a3-198">1.x プロジェクトでは、次のようにフィールドが使用されていました。 `_externalCookieScheme`</span><span class="sxs-lookup"><span data-stu-id="ba6a3-198">1.x projects used the `_externalCookieScheme` field as follows:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
 
-<span data-ttu-id="ba6a3-199">2.0 プロジェクトで、上記のコードを次のコードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-199">In 2.0 projects, replace the preceding code with the following.</span></span> <span data-ttu-id="ba6a3-200">定数は、 `:::no-loc(Identity):::Constants.ExternalScheme` 直接使用できます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-200">The `:::no-loc(Identity):::Constants.ExternalScheme` constant can be used directly.</span></span>
+<span data-ttu-id="ba6a3-199">2.0 プロジェクトで、上記のコードを次のコードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-199">In 2.0 projects, replace the preceding code with the following.</span></span> <span data-ttu-id="ba6a3-200">定数は、 `IdentityConstants.ExternalScheme` 直接使用できます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-200">The `IdentityConstants.ExternalScheme` constant can be used directly.</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
 
@@ -372,35 +372,35 @@ services.AddAuthentication(options =>
 
 <a name="navigation-properties"></a>
 
-## <a name="add-no-locidentityuser-poco-navigation-properties"></a><span data-ttu-id="ba6a3-202">:::no-loc(Identity):::ユーザー POCO ナビゲーションプロパティの追加</span><span class="sxs-lookup"><span data-stu-id="ba6a3-202">Add :::no-loc(Identity):::User POCO navigation properties</span></span>
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a><span data-ttu-id="ba6a3-202">Identityユーザー POCO ナビゲーションプロパティの追加</span><span class="sxs-lookup"><span data-stu-id="ba6a3-202">Add IdentityUser POCO navigation properties</span></span>
 
-<span data-ttu-id="ba6a3-203">基本 POCO (Plain Old CLR Object) の Entity Framework (EF) コアナビゲーションプロパティ `:::no-loc(Identity):::User` が削除されました。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-203">The Entity Framework (EF) Core navigation properties of the base `:::no-loc(Identity):::User` POCO (Plain Old CLR Object) have been removed.</span></span> <span data-ttu-id="ba6a3-204">1.x プロジェクトでこれらのプロパティを使用していた場合は、手動で2.0 プロジェクトに追加します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-204">If your 1.x project used these properties, manually add them back to the 2.0 project:</span></span>
+<span data-ttu-id="ba6a3-203">基本 POCO (Plain Old CLR Object) の Entity Framework (EF) コアナビゲーションプロパティ `IdentityUser` が削除されました。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-203">The Entity Framework (EF) Core navigation properties of the base `IdentityUser` POCO (Plain Old CLR Object) have been removed.</span></span> <span data-ttu-id="ba6a3-204">1.x プロジェクトでこれらのプロパティを使用していた場合は、手動で2.0 プロジェクトに追加します。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-204">If your 1.x project used these properties, manually add them back to the 2.0 project:</span></span>
 
 ```csharp
 /// <summary>
 /// Navigation property for the roles this user belongs to.
 /// </summary>
-public virtual ICollection<:::no-loc(Identity):::UserRole<int>> Roles { get; } = new List<:::no-loc(Identity):::UserRole<int>>();
+public virtual ICollection<IdentityUserRole<int>> Roles { get; } = new List<IdentityUserRole<int>>();
 
 /// <summary>
 /// Navigation property for the claims this user possesses.
 /// </summary>
-public virtual ICollection<:::no-loc(Identity):::UserClaim<int>> Claims { get; } = new List<:::no-loc(Identity):::UserClaim<int>>();
+public virtual ICollection<IdentityUserClaim<int>> Claims { get; } = new List<IdentityUserClaim<int>>();
 
 /// <summary>
 /// Navigation property for this users login accounts.
 /// </summary>
-public virtual ICollection<:::no-loc(Identity):::UserLogin<int>> Logins { get; } = new List<:::no-loc(Identity):::UserLogin<int>>();
+public virtual ICollection<IdentityUserLogin<int>> Logins { get; } = new List<IdentityUserLogin<int>>();
 ```
 
-<span data-ttu-id="ba6a3-205">EF Core 移行の実行時に外部キーが重複しないようにするには、 `:::no-loc(Identity):::DbContext` クラスの `OnModelCreating` メソッド (呼び出しの後) に次のを追加し `base.OnModelCreating();` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-205">To prevent duplicate foreign keys when running EF Core Migrations, add the following to your `:::no-loc(Identity):::DbContext` class' `OnModelCreating` method (after the `base.OnModelCreating();` call):</span></span>
+<span data-ttu-id="ba6a3-205">EF Core 移行の実行時に外部キーが重複しないようにするには、 `IdentityDbContext` クラスの `OnModelCreating` メソッド (呼び出しの後) に次のを追加し `base.OnModelCreating();` ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-205">To prevent duplicate foreign keys when running EF Core Migrations, add the following to your `IdentityDbContext` class' `OnModelCreating` method (after the `base.OnModelCreating();` call):</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder builder)
 {
     base.OnModelCreating(builder);
-    // Customize the :::no-loc(ASP.NET Core Identity)::: model and override the defaults if needed.
-    // For example, you can rename the :::no-loc(ASP.NET Core Identity)::: table names and more.
+    // Customize the ASP.NET Core Identity model and override the defaults if needed.
+    // For example, you can rename the ASP.NET Core Identity table names and more.
     // Add your customizations after calling base.OnModelCreating(builder);
 
     builder.Entity<ApplicationUser>()
@@ -438,7 +438,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemes&highlight=2)]
 
-<span data-ttu-id="ba6a3-210">2.0 プロジェクトでは、メソッドを使用し <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager`1.GetExternalAuthenticationSchemesAsync*> ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-210">In 2.0 projects, use the <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.SignInManager`1.GetExternalAuthenticationSchemesAsync*> method.</span></span> <span data-ttu-id="ba6a3-211">*ManageController.cs* の変更は、次のコードのようになります。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-211">The change in *ManageController.cs* resembles the following code:</span></span>
+<span data-ttu-id="ba6a3-210">2.0 プロジェクトでは、メソッドを使用し <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> ます。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-210">In 2.0 projects, use the <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> method.</span></span> <span data-ttu-id="ba6a3-211">*ManageController.cs* の変更は、次のコードのようになります。</span><span class="sxs-lookup"><span data-stu-id="ba6a3-211">The change in *ManageController.cs* resembles the following code:</span></span>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemesAsync)]
 

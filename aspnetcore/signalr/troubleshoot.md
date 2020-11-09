@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(SignalR)::: 接続のトラブルシューティング'
+title: 'ASP.NET Core SignalR 接続のトラブルシューティング'
 author: bradygaster
-description: :::no-loc(SignalR):::接続のトラブルシューティングを ASP.NET Core します。
+description: SignalR接続のトラブルシューティングを ASP.NET Core します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/troubleshoot
 ms.openlocfilehash: f1d9761267d7c6af76c0be6abb238742f40fb016
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -28,7 +28,7 @@ ms.locfileid: "93059612"
 ---
 # <a name="troubleshoot-connection-errors"></a><span data-ttu-id="97efd-103">接続エラーのトラブルシューティング</span><span class="sxs-lookup"><span data-stu-id="97efd-103">Troubleshoot connection errors</span></span>
 
-<span data-ttu-id="97efd-104">このセクションでは、ASP.NET Core ハブへの接続を確立しようとしたときに発生する可能性があるエラーについて説明 :::no-loc(SignalR)::: します。</span><span class="sxs-lookup"><span data-stu-id="97efd-104">This section provides help with errors that can occur when trying to establish a connection to a ASP.NET Core :::no-loc(SignalR)::: hub.</span></span>
+<span data-ttu-id="97efd-104">このセクションでは、ASP.NET Core ハブへの接続を確立しようとしたときに発生する可能性があるエラーについて説明 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="97efd-104">This section provides help with errors that can occur when trying to establish a connection to a ASP.NET Core SignalR hub.</span></span>
 
 ### <a name="response-code-404"></a><span data-ttu-id="97efd-105">応答コード404</span><span class="sxs-lookup"><span data-stu-id="97efd-105">Response code 404</span></span>
 
@@ -99,9 +99,9 @@ Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remot
 
 <span data-ttu-id="97efd-134">多くの場合、アクセストークンが4k を超えていることが原因です。</span><span class="sxs-lookup"><span data-stu-id="97efd-134">This is often caused by having an access token that is over 4k.</span></span>
 
-* <span data-ttu-id="97efd-135">Azure サービスを使用している場合は、 :::no-loc(SignalR)::: サービスを介して送信される要求を次のようにカスタマイズすることによって、トークンサイズを減らします。</span><span class="sxs-lookup"><span data-stu-id="97efd-135">If using the Azure :::no-loc(SignalR)::: Service, reduce the token size by customizing the claims being sent through the Service with:</span></span>
+* <span data-ttu-id="97efd-135">Azure サービスを使用している場合は、 SignalR サービスを介して送信される要求を次のようにカスタマイズすることによって、トークンサイズを減らします。</span><span class="sxs-lookup"><span data-stu-id="97efd-135">If using the Azure SignalR Service, reduce the token size by customizing the claims being sent through the Service with:</span></span>
 ```csharp
-.AddAzure:::no-loc(SignalR):::(options =>
+.AddAzureSignalR(options =>
 {
     options.ClaimsProvider = context => context.User.Claims;
 });
@@ -109,4 +109,4 @@ Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remot
 
 ### <a name="transient-network-failures"></a><span data-ttu-id="97efd-136">一時的なネットワークエラー</span><span class="sxs-lookup"><span data-stu-id="97efd-136">Transient network failures</span></span>
 
-<span data-ttu-id="97efd-137">一時的なネットワークエラーによって接続が閉じられる場合があり :::no-loc(SignalR)::: ます。</span><span class="sxs-lookup"><span data-stu-id="97efd-137">Transient network failures may close the :::no-loc(SignalR)::: connection.</span></span> <span data-ttu-id="97efd-138">サーバーは、終了した接続を正常なクライアント切断として解釈する場合があります。</span><span class="sxs-lookup"><span data-stu-id="97efd-138">The server may interpret the closed connection as a graceful client disconnect.</span></span> <span data-ttu-id="97efd-139">クライアントが切断された理由に関する詳細情報を取得するには [、クライアントとサーバーからログを収集](xref:signalr/diagnostics)します。</span><span class="sxs-lookup"><span data-stu-id="97efd-139">To get more info on why a client disconnected in those cases [gather logs from the client and server](xref:signalr/diagnostics).</span></span>
+<span data-ttu-id="97efd-137">一時的なネットワークエラーによって接続が閉じられる場合があり SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="97efd-137">Transient network failures may close the SignalR connection.</span></span> <span data-ttu-id="97efd-138">サーバーは、終了した接続を正常なクライアント切断として解釈する場合があります。</span><span class="sxs-lookup"><span data-stu-id="97efd-138">The server may interpret the closed connection as a graceful client disconnect.</span></span> <span data-ttu-id="97efd-139">クライアントが切断された理由に関する詳細情報を取得するには [、クライアントとサーバーからログを収集](xref:signalr/diagnostics)します。</span><span class="sxs-lookup"><span data-stu-id="97efd-139">To get more info on why a client disconnected in those cases [gather logs from the client and server](xref:signalr/diagnostics).</span></span>

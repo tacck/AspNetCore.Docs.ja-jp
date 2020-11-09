@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/request-features
 ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -127,9 +127,9 @@ ms.locfileid: "93053710"
  
 ::: moniker-end
 
-<span data-ttu-id="e32b1-145"><xref:Microsoft.AspNetCore.Http.Features.IRequest:::no-loc(Cookie):::sFeature>: 要求 `:::no-loc(Cookie):::` ヘッダー値を解析してキャッシュします。</span><span class="sxs-lookup"><span data-stu-id="e32b1-145"><xref:Microsoft.AspNetCore.Http.Features.IRequest:::no-loc(Cookie):::sFeature>: Parses and caches the request `:::no-loc(Cookie):::` header values.</span></span>
+<span data-ttu-id="e32b1-145"><xref:Microsoft.AspNetCore.Http.Features.IRequestCookiesFeature>: 要求 `Cookie` ヘッダー値を解析してキャッシュします。</span><span class="sxs-lookup"><span data-stu-id="e32b1-145"><xref:Microsoft.AspNetCore.Http.Features.IRequestCookiesFeature>: Parses and caches the request `Cookie` header values.</span></span>
 
-<span data-ttu-id="e32b1-146"><xref:Microsoft.AspNetCore.Http.Features.IResponse:::no-loc(Cookie):::sFeature>: `Set-:::no-loc(Cookie):::` ヘッダーに応答 :::no-loc(cookie)::: を適用する方法を制御します。</span><span class="sxs-lookup"><span data-stu-id="e32b1-146"><xref:Microsoft.AspNetCore.Http.Features.IResponse:::no-loc(Cookie):::sFeature>: Controls how response :::no-loc(cookie):::s are applied to the `Set-:::no-loc(Cookie):::` header.</span></span>
+<span data-ttu-id="e32b1-146"><xref:Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature>: `Set-Cookie` ヘッダーに応答 cookie を適用する方法を制御します。</span><span class="sxs-lookup"><span data-stu-id="e32b1-146"><xref:Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature>: Controls how response cookies are applied to the `Set-Cookie` header.</span></span>
 
 ::: moniker range=">= aspnetcore-2.2"
 

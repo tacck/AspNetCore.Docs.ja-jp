@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/twitter-logins
 ms.openlocfilehash: 47926d12ac5f922f2937df164d38ff6eb63cacf1
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -42,7 +42,7 @@ ms.locfileid: "93053281"
 
 * <span data-ttu-id="c5c4e-112">[ **Twitter でのサインインを有効** にする] の横にあるチェックボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-112">Check the box next to **Enable Sign in with Twitter**</span></span>
 
-* <span data-ttu-id="c5c4e-113">AspNetCore。:::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="c5c4e-113">Microsoft.AspNetCore.:::no-loc(Identity):::</span></span> <span data-ttu-id="c5c4e-114">既定では、ユーザーは電子メールアドレスを持っている必要があります。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-114">requires users to have an email address by default.</span></span> <span data-ttu-id="c5c4e-115">[ **アクセス許可** ] タブにアクセスし、[ **編集** ] ボタンをクリックして、[ **ユーザーに電子メールアドレスを要求** する] の横にあるチェックボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-115">Go to the **Permissions** tab, click the **Edit** button and check the box next to **Request email address from users** .</span></span>
+* <span data-ttu-id="c5c4e-113">AspNetCore。Identity</span><span class="sxs-lookup"><span data-stu-id="c5c4e-113">Microsoft.AspNetCore.Identity</span></span> <span data-ttu-id="c5c4e-114">既定では、ユーザーは電子メールアドレスを持っている必要があります。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-114">requires users to have an email address by default.</span></span> <span data-ttu-id="c5c4e-115">[ **アクセス許可** ] タブにアクセスし、[ **編集** ] ボタンをクリックして、[ **ユーザーに電子メールアドレスを要求** する] の横にあるチェックボックスをオンにします。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-115">Go to the **Permissions** tab, click the **Edit** button and check the box next to **Request email address from users** .</span></span>
 
 * <span data-ttu-id="c5c4e-116">`/signin-twitter`[ **コールバック url** ] フィールドに追加された開発 URI を入力します (例: `https://webapp128.azurewebsites.net/signin-twitter` )。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-116">Enter your development URI with `/signin-twitter` appended into the **Callback URLs** field (for example: `https://webapp128.azurewebsites.net/signin-twitter`).</span></span> <span data-ttu-id="c5c4e-117">このサンプルで後で構成される Twitter 認証スキームは、OAuth フローを実装するために、ルートで要求を自動的に処理し `/signin-twitter` ます。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-117">The Twitter authentication scheme configured later in this sample will automatically handle requests at `/signin-twitter` route to implement the OAuth flow.</span></span>
 
@@ -99,7 +99,7 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a><span data-ttu-id="c5c4e-138">トラブルシューティング</span><span class="sxs-lookup"><span data-stu-id="c5c4e-138">Troubleshooting</span></span>
 
-* <span data-ttu-id="c5c4e-139">**ASP.NET Core 2.x のみ:**:::no-loc(Identity):::でを呼び出すことによって構成されていない場合 `services.Add:::no-loc(Identity):::` `ConfigureServices` 、認証を試みると ArgumentException が返され *ます。 ' SignInScheme ' オプションを指定する必要があり* ます。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-139">**ASP.NET Core 2.x only:** If :::no-loc(Identity)::: isn't configured by calling `services.Add:::no-loc(Identity):::` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="c5c4e-140">このサンプルで使用するプロジェクトテンプレートにより、この処理が確実に行われます。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-140">The project template used in this sample ensures that this is done.</span></span>
+* <span data-ttu-id="c5c4e-139">**ASP.NET Core 2.x のみ:**Identityでを呼び出すことによって構成されていない場合 `services.AddIdentity` `ConfigureServices` 、認証を試みると ArgumentException が返され *ます。 ' SignInScheme ' オプションを指定する必要があり* ます。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-139">**ASP.NET Core 2.x only:** If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided* .</span></span> <span data-ttu-id="c5c4e-140">このサンプルで使用するプロジェクトテンプレートにより、この処理が確実に行われます。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-140">The project template used in this sample ensures that this is done.</span></span>
 * <span data-ttu-id="c5c4e-141">初期移行を適用してサイトデータベースが作成されていない場合は、 *要求エラーの処理中にデータベース操作が失敗* します。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-141">If the site database has not been created by applying the initial migration, you will get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="c5c4e-142">[ **移行の適用** ] をタップしてデータベースを作成し、更新してエラーを続行します。</span><span class="sxs-lookup"><span data-stu-id="c5c4e-142">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
 
 ## <a name="next-steps"></a><span data-ttu-id="c5c4e-143">次のステップ</span><span class="sxs-lookup"><span data-stu-id="c5c4e-143">Next steps</span></span>

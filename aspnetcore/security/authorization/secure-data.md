@@ -1,22 +1,22 @@
 ---
 title: 承認によって保護されたユーザーデータを含む ASP.NET Core アプリを作成する
 author: rick-anderson
-description: '認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する方法について説明します。 HTTPS、認証、セキュリティ、などが含まれ :::no-loc(ASP.NET Core Identity)::: ます。'
+description: '認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する方法について説明します。 HTTPS、認証、セキュリティ、などが含まれ ASP.NET Core Identity ます。'
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authorization/secure-data
 ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -101,11 +101,11 @@ ms.locfileid: "93051942"
 
 ### <a name="tie-the-contact-data-to-the-user"></a><span data-ttu-id="c7a43-151">連絡先データをユーザーに関連付ける</span><span class="sxs-lookup"><span data-stu-id="c7a43-151">Tie the contact data to the user</span></span>
 
-<span data-ttu-id="c7a43-152">ASP.NET ユーザー ID を使用すると、 [:::no-loc(Identity):::](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-152">Use the ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="c7a43-153">`OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-153">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
+<span data-ttu-id="c7a43-152">ASP.NET ユーザー ID を使用すると、 [Identity](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-152">Use the ASP.NET [Identity](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="c7a43-153">`OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-153">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-<span data-ttu-id="c7a43-154">`OwnerID` データベース内のテーブルのユーザー ID を示し `AspNetUser` [:::no-loc(Identity):::](xref:security/authentication/identity) ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-154">`OwnerID` is the user's ID from the `AspNetUser` table in the [:::no-loc(Identity):::](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="c7a43-155">フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-155">The `Status` field determines if a contact is viewable by general users.</span></span>
+<span data-ttu-id="c7a43-154">`OwnerID` データベース内のテーブルのユーザー ID を示し `AspNetUser` [Identity](xref:security/authentication/identity) ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-154">`OwnerID` is the user's ID from the `AspNetUser` table in the [Identity](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="c7a43-155">フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-155">The `Status` field determines if a contact is viewable by general users.</span></span>
 
 <span data-ttu-id="c7a43-156">新しい移行を作成し、データベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-156">Create a new migration and update the database:</span></span>
 
@@ -114,9 +114,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="c7a43-157">役割サービスの追加先 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="c7a43-157">Add Role services to :::no-loc(Identity):::</span></span>
+### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="c7a43-157">役割サービスの追加先 Identity</span><span class="sxs-lookup"><span data-stu-id="c7a43-157">Add Role services to Identity</span></span>
 
-<span data-ttu-id="c7a43-158">役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) を追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-158">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) to add Role services:</span></span>
+<span data-ttu-id="c7a43-158">役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) を追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-158">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) to add Role services:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet2&highlight=9)]
 
@@ -128,19 +128,19 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-<span data-ttu-id="c7a43-161">前の強調表示されたコードは、 [フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-161">The preceding highlighted code sets the [fallback authentication policy](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy).</span></span> <span data-ttu-id="c7a43-162">フォールバック認証ポリシーでは、 *_all_* :::no-loc(Razor)::: 認証属性を持つページ、コントローラー、またはアクションメソッドを除き、\* すべての _ ユーザーを認証する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-162">The fallback authentication policy requires \* *_all_* _ users to be authenticated, except for :::no-loc(Razor)::: Pages, controllers, or action methods with an authentication attribute.</span></span> <span data-ttu-id="c7a43-163">たとえば、 :::no-loc(Razor)::: ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-163">For example, :::no-loc(Razor)::: Pages, controllers, or action methods with `[AllowAnonymous]` or `[Authorize(PolicyName="MyPolicy")]` use the applied authentication attribute rather than the fallback authentication policy.</span></span>
+<span data-ttu-id="c7a43-161">前の強調表示されたコードは、 [フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-161">The preceding highlighted code sets the [fallback authentication policy](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy).</span></span> <span data-ttu-id="c7a43-162">フォールバック認証ポリシーでは、 *_all_* Razor 認証属性を持つページ、コントローラー、またはアクションメソッドを除き、\* すべての _ ユーザーを認証する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-162">The fallback authentication policy requires \* *_all_* _ users to be authenticated, except for Razor Pages, controllers, or action methods with an authentication attribute.</span></span> <span data-ttu-id="c7a43-163">たとえば、 Razor ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-163">For example, Razor Pages, controllers, or action methods with `[AllowAnonymous]` or `[Authorize(PolicyName="MyPolicy")]` use the applied authentication attribute rather than the fallback authentication policy.</span></span>
 
 <span data-ttu-id="c7a43-164">フォールバック認証ポリシー:</span><span class="sxs-lookup"><span data-stu-id="c7a43-164">The fallback authentication policy:</span></span>
 
 <span data-ttu-id="c7a43-165">_ は、認証ポリシーを明示的に指定しないすべての要求に適用されます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-165">_ Is applied to all requests that do not explicitly specify an authentication policy.</span></span> <span data-ttu-id="c7a43-166">エンドポイントのルーティングによって提供される要求の場合、これには承認属性を指定しないエンドポイントが含まれます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-166">For requests served by endpoint routing, this would include any endpoint that does not specify an authorization attribute.</span></span> <span data-ttu-id="c7a43-167">[静的ファイル](xref:fundamentals/static-files)など、承認ミドルウェアの後に他のミドルウェアによって提供される要求の場合、ポリシーがすべての要求に適用されます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-167">For requests served by other middleware after the authorization middleware, such as [static files](xref:fundamentals/static-files), this would apply the policy to all requests.</span></span>
 
-<span data-ttu-id="c7a43-168">代替認証ポリシーを設定して、ユーザーが認証を要求するようにすると、新しく追加されたページとコントローラーが保護され :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-168">Setting the fallback authentication policy to require users to be authenticated protects newly added :::no-loc(Razor)::: Pages and controllers.</span></span> <span data-ttu-id="c7a43-169">既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です :::no-loc(Razor)::: `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="c7a43-169">Having authentication required by default is more secure than relying on new controllers and :::no-loc(Razor)::: Pages to include the `[Authorize]` attribute.</span></span>
+<span data-ttu-id="c7a43-168">代替認証ポリシーを設定して、ユーザーが認証を要求するようにすると、新しく追加されたページとコントローラーが保護され Razor ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-168">Setting the fallback authentication policy to require users to be authenticated protects newly added Razor Pages and controllers.</span></span> <span data-ttu-id="c7a43-169">既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です Razor `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="c7a43-169">Having authentication required by default is more secure than relying on new controllers and Razor Pages to include the `[Authorize]` attribute.</span></span>
 
 <span data-ttu-id="c7a43-170">クラスには <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> も含まれ <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-170">The <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> class also contains <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType>.</span></span> <span data-ttu-id="c7a43-171">は、 `DefaultPolicy` `[Authorize]` ポリシーが指定されていない場合に、属性で使用されるポリシーです。</span><span class="sxs-lookup"><span data-stu-id="c7a43-171">The `DefaultPolicy` is the policy used with the `[Authorize]` attribute when no policy is specified.</span></span> <span data-ttu-id="c7a43-172">`[Authorize]` はと異なり、名前付きポリシーを含んでいません `[Authorize(PolicyName="MyPolicy")]` 。</span><span class="sxs-lookup"><span data-stu-id="c7a43-172">`[Authorize]` doesn't contain a named policy, unlike `[Authorize(PolicyName="MyPolicy")]`.</span></span>
 
 <span data-ttu-id="c7a43-173">ポリシーの詳細については、「」を参照してください <xref:security/authorization/policies> 。</span><span class="sxs-lookup"><span data-stu-id="c7a43-173">For more information on policies, see <xref:security/authorization/policies>.</span></span>
 
-<span data-ttu-id="c7a43-174">すべてのユーザーの認証を要求する MVC コントローラーとページの別の方法 :::no-loc(Razor)::: は、承認フィルターを追加することです。</span><span class="sxs-lookup"><span data-stu-id="c7a43-174">An alternative way for MVC controllers and :::no-loc(Razor)::: Pages to require all users be authenticated is adding an authorization filter:</span></span>
+<span data-ttu-id="c7a43-174">すべてのユーザーの認証を要求する MVC コントローラーとページの別の方法 Razor は、承認フィルターを追加することです。</span><span class="sxs-lookup"><span data-stu-id="c7a43-174">An alternative way for MVC controllers and Razor Pages to require all users be authenticated is adding an authorization filter:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Startup2.cs?name=snippet&highlight=14-99)]
 
@@ -203,7 +203,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a><span data-ttu-id="c7a43-209">認証ハンドラーを登録する</span><span class="sxs-lookup"><span data-stu-id="c7a43-209">Register the authorization handlers</span></span>
 
-<span data-ttu-id="c7a43-210">Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-210">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="c7a43-211">は、 `ContactIsOwnerAuthorizationHandler` [:::no-loc(Identity):::](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-211">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="c7a43-212">サービスコレクションにハンドラーを登録し `ContactsController` て、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。</span><span class="sxs-lookup"><span data-stu-id="c7a43-212">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="c7a43-213">の末尾に次のコードを追加し `ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-213">Add the following code to the end of `ConfigureServices`:</span></span>
+<span data-ttu-id="c7a43-210">Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-210">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="c7a43-211">は、 `ContactIsOwnerAuthorizationHandler` [Identity](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-211">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [Identity](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="c7a43-212">サービスコレクションにハンドラーを登録し `ContactsController` て、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。</span><span class="sxs-lookup"><span data-stu-id="c7a43-212">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="c7a43-213">の末尾に次のコードを追加し `ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-213">Add the following code to the end of `ConfigureServices`:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -211,7 +211,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="support-authorization"></a><span data-ttu-id="c7a43-216">認証のサポート</span><span class="sxs-lookup"><span data-stu-id="c7a43-216">Support authorization</span></span>
 
-<span data-ttu-id="c7a43-217">このセクションでは、ページを更新 :::no-loc(Razor)::: し、操作要件クラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-217">In this section, you update the :::no-loc(Razor)::: Pages and add an operations requirements class.</span></span>
+<span data-ttu-id="c7a43-217">このセクションでは、ページを更新 Razor し、操作要件クラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-217">In this section, you update the Razor Pages and add an operations requirements class.</span></span>
 
 ### <a name="review-the-contact-operations-requirements-class"></a><span data-ttu-id="c7a43-218">Contact operation の要件クラスを確認する</span><span class="sxs-lookup"><span data-stu-id="c7a43-218">Review the contact operations requirements class</span></span>
 
@@ -219,16 +219,16 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="c7a43-221">連絡先ページの基本クラスを作成する :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c7a43-221">Create a base class for the Contacts :::no-loc(Razor)::: Pages</span></span>
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="c7a43-221">連絡先ページの基本クラスを作成する Razor</span><span class="sxs-lookup"><span data-stu-id="c7a43-221">Create a base class for the Contacts Razor Pages</span></span>
 
-<span data-ttu-id="c7a43-222">[連絡先] ページで使用されるサービスを含む基本クラスを作成 :::no-loc(Razor)::: します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-222">Create a base class that contains the services used in the contacts :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="c7a43-223">基本クラスは、初期化コードを1つの場所に配置します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-223">The base class puts the initialization code in one location:</span></span>
+<span data-ttu-id="c7a43-222">[連絡先] ページで使用されるサービスを含む基本クラスを作成 Razor します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-222">Create a base class that contains the services used in the contacts Razor Pages.</span></span> <span data-ttu-id="c7a43-223">基本クラスは、初期化コードを1つの場所に配置します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-223">The base class puts the initialization code in one location:</span></span>
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/DI_BasePageModel.cs)]
 
 <span data-ttu-id="c7a43-224">上記のコードでは次の操作が行われます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-224">The preceding code:</span></span>
 
 * <span data-ttu-id="c7a43-225">`IAuthorizationService`認証ハンドラーにアクセスするためのサービスを追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-225">Adds the `IAuthorizationService` service to access to the authorization handlers.</span></span>
-* <span data-ttu-id="c7a43-226">サービスを追加し :::no-loc(Identity)::: `UserManager` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-226">Adds the :::no-loc(Identity)::: `UserManager` service.</span></span>
+* <span data-ttu-id="c7a43-226">サービスを追加し Identity `UserManager` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-226">Adds the Identity `UserManager` service.</span></span>
 * <span data-ttu-id="c7a43-227">`ApplicationDbContext` を追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-227">Add the `ApplicationDbContext`.</span></span>
 
 ### <a name="update-the-createmodel"></a><span data-ttu-id="c7a43-228">CreateModel を更新する</span><span class="sxs-lookup"><span data-stu-id="c7a43-228">Update the CreateModel</span></span>
@@ -277,7 +277,7 @@ dotnet user-secrets set SeedUserPW <PW>
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> <span data-ttu-id="c7a43-249">データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-249">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="c7a43-250">リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-250">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="c7a43-251">ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-251">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="c7a43-252">:::no-loc(Razor):::ページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-252">The :::no-loc(Razor)::: Page or controller must enforce access checks to secure the data.</span></span>
+> <span data-ttu-id="c7a43-249">データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-249">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="c7a43-250">リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-250">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="c7a43-251">ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-251">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="c7a43-252">Razorページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-252">The Razor Page or controller must enforce access checks to secure the data.</span></span>
 
 ### <a name="update-details"></a><span data-ttu-id="c7a43-253">更新プログラムの詳細</span><span class="sxs-lookup"><span data-stu-id="c7a43-253">Update Details</span></span>
 
@@ -342,7 +342,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-the-starter-app"></a><span data-ttu-id="c7a43-299">スターターアプリを作成する</span><span class="sxs-lookup"><span data-stu-id="c7a43-299">Create the starter app</span></span>
 
-* <span data-ttu-id="c7a43-300">:::no-loc(Razor):::"ContactManager" という名前のページアプリを作成する</span><span class="sxs-lookup"><span data-stu-id="c7a43-300">Create a :::no-loc(Razor)::: Pages app named "ContactManager"</span></span>
+* <span data-ttu-id="c7a43-300">Razor"ContactManager" という名前のページアプリを作成する</span><span class="sxs-lookup"><span data-stu-id="c7a43-300">Create a Razor Pages app named "ContactManager"</span></span>
   * <span data-ttu-id="c7a43-301">**個々のユーザーアカウント** を使用してアプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-301">Create the app with **Individual User Accounts** .</span></span>
   * <span data-ttu-id="c7a43-302">名前空間がサンプルで使用される名前空間と一致するように、"ContactManager" という名前を指定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-302">Name it "ContactManager" so the namespace matches the namespace used in the sample.</span></span>
   * <span data-ttu-id="c7a43-303">`-uld` SQLite ではなく LocalDB を指定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-303">`-uld` specifies LocalDB instead of SQLite</span></span>
@@ -455,11 +455,11 @@ dotnet ef database update
 
 ### <a name="tie-the-contact-data-to-the-user"></a><span data-ttu-id="c7a43-358">連絡先データをユーザーに関連付ける</span><span class="sxs-lookup"><span data-stu-id="c7a43-358">Tie the contact data to the user</span></span>
 
-<span data-ttu-id="c7a43-359">ASP.NET ユーザー ID を使用すると、 [:::no-loc(Identity):::](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-359">Use the ASP.NET [:::no-loc(Identity):::](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="c7a43-360">`OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-360">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
+<span data-ttu-id="c7a43-359">ASP.NET ユーザー ID を使用すると、 [Identity](xref:security/authentication/identity) ユーザーがデータを編集できるようになりますが、他のユーザーデータは編集できません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-359">Use the ASP.NET [Identity](xref:security/authentication/identity) user ID to ensure users can edit their data, but not other users data.</span></span> <span data-ttu-id="c7a43-360">`OwnerID` `ContactStatus` モデルにおよびを追加し `Contact` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-360">Add `OwnerID` and `ContactStatus` to the `Contact` model:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-<span data-ttu-id="c7a43-361">`OwnerID` データベース内のテーブルのユーザー ID を示し `AspNetUser` [:::no-loc(Identity):::](xref:security/authentication/identity) ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-361">`OwnerID` is the user's ID from the `AspNetUser` table in the [:::no-loc(Identity):::](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="c7a43-362">フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-362">The `Status` field determines if a contact is viewable by general users.</span></span>
+<span data-ttu-id="c7a43-361">`OwnerID` データベース内のテーブルのユーザー ID を示し `AspNetUser` [Identity](xref:security/authentication/identity) ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-361">`OwnerID` is the user's ID from the `AspNetUser` table in the [Identity](xref:security/authentication/identity) database.</span></span> <span data-ttu-id="c7a43-362">フィールドは、 `Status` 一般的なユーザーが連絡先を表示できるかどうかを決定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-362">The `Status` field determines if a contact is viewable by general users.</span></span>
 
 <span data-ttu-id="c7a43-363">新しい移行を作成し、データベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-363">Create a new migration and update the database:</span></span>
 
@@ -468,9 +468,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="c7a43-364">役割サービスの追加先 :::no-loc(Identity):::</span><span class="sxs-lookup"><span data-stu-id="c7a43-364">Add Role services to :::no-loc(Identity):::</span></span>
+### <a name="add-role-services-to-no-locidentity"></a><span data-ttu-id="c7a43-364">役割サービスの追加先 Identity</span><span class="sxs-lookup"><span data-stu-id="c7a43-364">Add Role services to Identity</span></span>
 
-<span data-ttu-id="c7a43-365">役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) を追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-365">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) to add Role services:</span></span>
+<span data-ttu-id="c7a43-365">役割サービスを追加するには、 [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) を追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-365">Append [AddRoles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) to add Role services:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=11)]
 
@@ -480,7 +480,7 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet&highlight=17-99)] 
 
- <span data-ttu-id="c7a43-368">:::no-loc(Razor):::ページ、コントローラー、またはアクションメソッドレベルで、属性を使用して認証を無効にすることができ `[AllowAnonymous]` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-368">You can opt out of authentication at the :::no-loc(Razor)::: Page, controller, or action method level with the `[AllowAnonymous]` attribute.</span></span> <span data-ttu-id="c7a43-369">既定の認証ポリシーを設定すると、ユーザーの認証が必要になり、新しく追加されたページとコントローラーは保護され :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-369">Setting the default authentication policy to require users to be authenticated protects newly added :::no-loc(Razor)::: Pages and controllers.</span></span> <span data-ttu-id="c7a43-370">既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です :::no-loc(Razor)::: `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="c7a43-370">Having authentication required by default is more secure than relying on new controllers and :::no-loc(Razor)::: Pages to include the `[Authorize]` attribute.</span></span>
+ <span data-ttu-id="c7a43-368">Razorページ、コントローラー、またはアクションメソッドレベルで、属性を使用して認証を無効にすることができ `[AllowAnonymous]` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-368">You can opt out of authentication at the Razor Page, controller, or action method level with the `[AllowAnonymous]` attribute.</span></span> <span data-ttu-id="c7a43-369">既定の認証ポリシーを設定すると、ユーザーの認証が必要になり、新しく追加されたページとコントローラーは保護され Razor ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-369">Setting the default authentication policy to require users to be authenticated protects newly added Razor Pages and controllers.</span></span> <span data-ttu-id="c7a43-370">既定で認証が必要になることは、新しいコントローラーやページを利用して属性を含めるよりも安全です Razor `[Authorize]` 。</span><span class="sxs-lookup"><span data-stu-id="c7a43-370">Having authentication required by default is more secure than relying on new controllers and Razor Pages to include the `[Authorize]` attribute.</span></span>
 
 <span data-ttu-id="c7a43-371">匿名ユーザーが登録前にサイトに関する情報を取得できるように、 [Allowanonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) を Index、About、および Contact の各ページに追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-371">Add [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) to the Index, About, and Contact pages so anonymous users can get information about the site before they register.</span></span>
 
@@ -539,7 +539,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="register-the-authorization-handlers"></a><span data-ttu-id="c7a43-403">認証ハンドラーを登録する</span><span class="sxs-lookup"><span data-stu-id="c7a43-403">Register the authorization handlers</span></span>
 
-<span data-ttu-id="c7a43-404">Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-404">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="c7a43-405">は、 `ContactIsOwnerAuthorizationHandler` [:::no-loc(Identity):::](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-405">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [:::no-loc(Identity):::](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="c7a43-406">サービスコレクションにハンドラーを登録し `ContactsController` て、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。</span><span class="sxs-lookup"><span data-stu-id="c7a43-406">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="c7a43-407">の末尾に次のコードを追加し `ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-407">Add the following code to the end of `ConfigureServices`:</span></span>
+<span data-ttu-id="c7a43-404">Entity Framework Core を使用するサービスは、 [Addscoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)を使用して[依存関係の挿入](xref:fundamentals/dependency-injection)に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-404">Services using Entity Framework Core must be registered for [dependency injection](xref:fundamentals/dependency-injection) using [AddScoped](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions).</span></span> <span data-ttu-id="c7a43-405">は、 `ContactIsOwnerAuthorizationHandler` [Identity](xref:security/authentication/identity) Entity Framework Core 上に構築された ASP.NET Core を使用します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-405">The `ContactIsOwnerAuthorizationHandler` uses ASP.NET Core [Identity](xref:security/authentication/identity), which is built on Entity Framework Core.</span></span> <span data-ttu-id="c7a43-406">サービスコレクションにハンドラーを登録し `ContactsController` て、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってで使用できるようにします。</span><span class="sxs-lookup"><span data-stu-id="c7a43-406">Register the handlers with the service collection so they're available to the `ContactsController` through [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="c7a43-407">の末尾に次のコードを追加し `ConfigureServices` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-407">Add the following code to the end of `ConfigureServices`:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -547,7 +547,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="support-authorization"></a><span data-ttu-id="c7a43-410">認証のサポート</span><span class="sxs-lookup"><span data-stu-id="c7a43-410">Support authorization</span></span>
 
-<span data-ttu-id="c7a43-411">このセクションでは、ページを更新 :::no-loc(Razor)::: し、操作要件クラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-411">In this section, you update the :::no-loc(Razor)::: Pages and add an operations requirements class.</span></span>
+<span data-ttu-id="c7a43-411">このセクションでは、ページを更新 Razor し、操作要件クラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-411">In this section, you update the Razor Pages and add an operations requirements class.</span></span>
 
 ### <a name="review-the-contact-operations-requirements-class"></a><span data-ttu-id="c7a43-412">Contact operation の要件クラスを確認する</span><span class="sxs-lookup"><span data-stu-id="c7a43-412">Review the contact operations requirements class</span></span>
 
@@ -555,16 +555,16 @@ dotnet user-secrets set SeedUserPW <PW>
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="c7a43-415">連絡先ページの基本クラスを作成する :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="c7a43-415">Create a base class for the Contacts :::no-loc(Razor)::: Pages</span></span>
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a><span data-ttu-id="c7a43-415">連絡先ページの基本クラスを作成する Razor</span><span class="sxs-lookup"><span data-stu-id="c7a43-415">Create a base class for the Contacts Razor Pages</span></span>
 
-<span data-ttu-id="c7a43-416">[連絡先] ページで使用されるサービスを含む基本クラスを作成 :::no-loc(Razor)::: します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-416">Create a base class that contains the services used in the contacts :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="c7a43-417">基本クラスは、初期化コードを1つの場所に配置します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-417">The base class puts the initialization code in one location:</span></span>
+<span data-ttu-id="c7a43-416">[連絡先] ページで使用されるサービスを含む基本クラスを作成 Razor します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-416">Create a base class that contains the services used in the contacts Razor Pages.</span></span> <span data-ttu-id="c7a43-417">基本クラスは、初期化コードを1つの場所に配置します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-417">The base class puts the initialization code in one location:</span></span>
 
 [!code-csharp[](secure-data/samples/final2.1/Pages/Contacts/DI_BasePageModel.cs)]
 
 <span data-ttu-id="c7a43-418">上記のコードでは次の操作が行われます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-418">The preceding code:</span></span>
 
 * <span data-ttu-id="c7a43-419">`IAuthorizationService`認証ハンドラーにアクセスするためのサービスを追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-419">Adds the `IAuthorizationService` service to access to the authorization handlers.</span></span>
-* <span data-ttu-id="c7a43-420">サービスを追加し :::no-loc(Identity)::: `UserManager` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-420">Adds the :::no-loc(Identity)::: `UserManager` service.</span></span>
+* <span data-ttu-id="c7a43-420">サービスを追加し Identity `UserManager` ます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-420">Adds the Identity `UserManager` service.</span></span>
 * <span data-ttu-id="c7a43-421">`ApplicationDbContext` を追加します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-421">Add the `ApplicationDbContext`.</span></span>
 
 ### <a name="update-the-createmodel"></a><span data-ttu-id="c7a43-422">CreateModel を更新する</span><span class="sxs-lookup"><span data-stu-id="c7a43-422">Update the CreateModel</span></span>
@@ -613,7 +613,7 @@ dotnet user-secrets set SeedUserPW <PW>
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> <span data-ttu-id="c7a43-443">データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-443">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="c7a43-444">リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-444">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="c7a43-445">ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-445">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="c7a43-446">:::no-loc(Razor):::ページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-446">The :::no-loc(Razor)::: Page or controller must enforce access checks to secure the data.</span></span>
+> <span data-ttu-id="c7a43-443">データを変更するアクセス許可がないユーザーからのリンクを非表示にしても、アプリはセキュリティで保護されません。</span><span class="sxs-lookup"><span data-stu-id="c7a43-443">Hiding links from users that don't have permission to change data doesn't secure the app.</span></span> <span data-ttu-id="c7a43-444">リンクを非表示にすると、有効なリンクのみが表示されるため、アプリのユーザーがわかりやすくなります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-444">Hiding links makes the app more user-friendly by displaying only valid links.</span></span> <span data-ttu-id="c7a43-445">ユーザーは、生成された Url をハッキングして、所有していないデータに対する編集操作と削除操作を呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="c7a43-445">Users can hack the generated URLs to invoke edit and delete operations on data they don't own.</span></span> <span data-ttu-id="c7a43-446">Razorページまたはコントローラーは、データをセキュリティで保護するためにアクセスチェックを強制する必要があります。</span><span class="sxs-lookup"><span data-stu-id="c7a43-446">The Razor Page or controller must enforce access checks to secure the data.</span></span>
 
 ### <a name="update-details"></a><span data-ttu-id="c7a43-447">更新プログラムの詳細</span><span class="sxs-lookup"><span data-stu-id="c7a43-447">Update Details</span></span>
 
@@ -669,7 +669,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="create-the-starter-app"></a><span data-ttu-id="c7a43-483">スターターアプリを作成する</span><span class="sxs-lookup"><span data-stu-id="c7a43-483">Create the starter app</span></span>
 
-* <span data-ttu-id="c7a43-484">:::no-loc(Razor):::"ContactManager" という名前のページアプリを作成する</span><span class="sxs-lookup"><span data-stu-id="c7a43-484">Create a :::no-loc(Razor)::: Pages app named "ContactManager"</span></span>
+* <span data-ttu-id="c7a43-484">Razor"ContactManager" という名前のページアプリを作成する</span><span class="sxs-lookup"><span data-stu-id="c7a43-484">Create a Razor Pages app named "ContactManager"</span></span>
   * <span data-ttu-id="c7a43-485">**個々のユーザーアカウント** を使用してアプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-485">Create the app with **Individual User Accounts** .</span></span>
   * <span data-ttu-id="c7a43-486">名前空間がサンプルで使用される名前空間と一致するように、"ContactManager" という名前を指定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-486">Name it "ContactManager" so the namespace matches the namespace used in the sample.</span></span>
   * <span data-ttu-id="c7a43-487">`-uld` SQLite ではなく LocalDB を指定します。</span><span class="sxs-lookup"><span data-stu-id="c7a43-487">`-uld` specifies LocalDB instead of SQLite</span></span>

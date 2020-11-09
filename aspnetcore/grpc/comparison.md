@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: grpc/comparison
 ms.openlocfilehash: 0fb50f07153f5f9953b667fe32062ad24b2bd66d
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -127,7 +127,7 @@ ms.locfileid: "93059950"
 <span data-ttu-id="ef055-212">以下のシナリオでは、gRPC よりも他のフレームワークが推奨されます。</span><span class="sxs-lookup"><span data-stu-id="ef055-212">Other frameworks are recommended over gRPC in the following scenarios:</span></span>
 
 * <span data-ttu-id="ef055-213">**ブラウザーでアクセスできる API** : gRPC は、ブラウザーで完全にサポートされているわけではありません。</span><span class="sxs-lookup"><span data-stu-id="ef055-213">**Browser accessible APIs** : gRPC isn't fully supported in the browser.</span></span> <span data-ttu-id="ef055-214">gRPC-Web でブラウザーのサポートを提供可能ですが、制限があり、サーバー プロキシが必要になります。</span><span class="sxs-lookup"><span data-stu-id="ef055-214">gRPC-Web can offer browser support, but it has limitations and introduces a server proxy.</span></span>
-* <span data-ttu-id="ef055-215">**ブロードキャスト リアルタイム通信** : gRPC ではストリーミングによるリアルタイム通信がサポートされますが、登録済みの接続にメッセージをブロードキャストするという概念がありません。</span><span class="sxs-lookup"><span data-stu-id="ef055-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="ef055-216">たとえば、チャット ルーム内のすべてのクライアントに新しいチャット メッセージを送信する必要があるチャット ルーム シナリオでは、クライアントに新しいチャット メッセージを個々にストリーミングするため、それぞれに gRPC 呼び出しが必要です。</span><span class="sxs-lookup"><span data-stu-id="ef055-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="ef055-217">[:::no-loc(SignalR):::](xref:signalr/introduction) は、このシナリオの場合に便利なフレームワークです。</span><span class="sxs-lookup"><span data-stu-id="ef055-217">[:::no-loc(SignalR):::](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="ef055-218">:::no-loc(SignalR)::: には永続的な接続という概念があり、メッセージをブロードキャストするためのサポートが組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="ef055-218">:::no-loc(SignalR)::: has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
+* <span data-ttu-id="ef055-215">**ブロードキャスト リアルタイム通信** : gRPC ではストリーミングによるリアルタイム通信がサポートされますが、登録済みの接続にメッセージをブロードキャストするという概念がありません。</span><span class="sxs-lookup"><span data-stu-id="ef055-215">**Broadcast real-time communication** : gRPC supports real-time communication via streaming, but the concept of broadcasting a message out to registered connections doesn't exist.</span></span> <span data-ttu-id="ef055-216">たとえば、チャット ルーム内のすべてのクライアントに新しいチャット メッセージを送信する必要があるチャット ルーム シナリオでは、クライアントに新しいチャット メッセージを個々にストリーミングするため、それぞれに gRPC 呼び出しが必要です。</span><span class="sxs-lookup"><span data-stu-id="ef055-216">For example in a chat room scenario where new chat messages should be sent to all clients in the chat room, each gRPC call is required to individually stream new chat messages to the client.</span></span> <span data-ttu-id="ef055-217">[SignalR](xref:signalr/introduction) は、このシナリオの場合に便利なフレームワークです。</span><span class="sxs-lookup"><span data-stu-id="ef055-217">[SignalR](xref:signalr/introduction) is a useful framework for this scenario.</span></span> <span data-ttu-id="ef055-218">SignalR には永続的な接続という概念があり、メッセージをブロードキャストするためのサポートが組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="ef055-218">SignalR has the concept of persistent connections and built-in support for broadcasting messages.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="ef055-219">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="ef055-219">Additional resources</span></span>
 

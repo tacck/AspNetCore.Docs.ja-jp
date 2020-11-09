@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 用のリンカーを構成する'
+title: 'ASP.NET Core Blazor 用のリンカーを構成する'
 author: guardrex
-description: ':::no-loc(Blazor)::: アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
+description: 'Blazor アプリを構築するときに、中間言語 (IL) リンカーを制御する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1 < aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/host-and-deploy/configure-linker
 ms.openlocfilehash: 0c99056053356133e901d6cf468fec8034dfb845
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,28 +26,28 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93055829"
 ---
-# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a><span data-ttu-id="d9c3f-103">ASP.NET Core :::no-loc(Blazor)::: 用のリンカーを構成する</span><span class="sxs-lookup"><span data-stu-id="d9c3f-103">Configure the Linker for ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a><span data-ttu-id="d9c3f-103">ASP.NET Core Blazor 用のリンカーを構成する</span><span class="sxs-lookup"><span data-stu-id="d9c3f-103">Configure the Linker for ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="d9c3f-104">作成者: [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="d9c3f-104">By [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="d9c3f-105">:::no-loc(Blazor WebAssembly)::: では、ビルド中に[中間言語 (IL)](/dotnet/standard/managed-code#intermediate-language--execution) のリンクが実行されて、アプリの出力アセンブリから不要な IL がトリミングされます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-105">:::no-loc(Blazor WebAssembly)::: performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) linking during a build to trim unnecessary IL from the app's output assemblies.</span></span> <span data-ttu-id="d9c3f-106">デバッグ構成でビルドすると、リンカーは無効になります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-106">The linker is disabled when building in Debug configuration.</span></span> <span data-ttu-id="d9c3f-107">リンカーを有効にするには、アプリをリリース構成でビルドする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-107">Apps must build in Release configuration to enable the linker.</span></span> <span data-ttu-id="d9c3f-108">:::no-loc(Blazor WebAssembly)::: アプリを配置する場合は、リリースでビルドすることをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-108">We recommend building in Release when deploying your :::no-loc(Blazor WebAssembly)::: apps.</span></span> 
+<span data-ttu-id="d9c3f-105">Blazor WebAssembly では、ビルド中に[中間言語 (IL)](/dotnet/standard/managed-code#intermediate-language--execution) のリンクが実行されて、アプリの出力アセンブリから不要な IL がトリミングされます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-105">Blazor WebAssembly performs [Intermediate Language (IL)](/dotnet/standard/managed-code#intermediate-language--execution) linking during a build to trim unnecessary IL from the app's output assemblies.</span></span> <span data-ttu-id="d9c3f-106">デバッグ構成でビルドすると、リンカーは無効になります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-106">The linker is disabled when building in Debug configuration.</span></span> <span data-ttu-id="d9c3f-107">リンカーを有効にするには、アプリをリリース構成でビルドする必要があります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-107">Apps must build in Release configuration to enable the linker.</span></span> <span data-ttu-id="d9c3f-108">Blazor WebAssembly アプリを配置する場合は、リリースでビルドすることをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-108">We recommend building in Release when deploying your Blazor WebAssembly apps.</span></span> 
 
 <span data-ttu-id="d9c3f-109">アプリをリンクするとサイズが最適化されますが、悪影響を及ぼす可能性があります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-109">Linking an app optimizes for size but may have detrimental effects.</span></span> <span data-ttu-id="d9c3f-110">リフレクションや関連する動的機能を使用するアプリは、トリミングされたときに中断する可能性があります。リンカーがこの動的な動作を認識せず、通常は実行時にリフレクションに必要な型を特定できないためです。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-110">Apps that use reflection or related dynamic features may break when trimmed because the linker doesn't know about this dynamic behavior and can't determine in general which types are required for reflection at runtime.</span></span> <span data-ttu-id="d9c3f-111">そのようなアプリをトリミングするには、コードと、アプリが依存しているパッケージまたはフレームワークのリフレクションで必要なすべての型を、リンカーに通知する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-111">To trim such apps, the linker must be informed about any types required by reflection in the code and in packages or frameworks that the app depends on.</span></span>
 
 <span data-ttu-id="d9c3f-112">トリミングされたアプリが配置後に正しく動作するには、開発中にアプリのリリース ビルドを頻繁にテストすることが重要です。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-112">To ensure the trimmed app works correctly once deployed, it's important to test Release builds of the app frequently while developing.</span></span>
 
-<span data-ttu-id="d9c3f-113">:::no-loc(Blazor)::: アプリのリンクは、次の MSBuild 機能を使用して構成できます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-113">Linking for :::no-loc(Blazor)::: apps can be configured using these MSBuild features:</span></span>
+<span data-ttu-id="d9c3f-113">Blazor アプリのリンクは、次の MSBuild 機能を使用して構成できます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-113">Linking for Blazor apps can be configured using these MSBuild features:</span></span>
 
 * <span data-ttu-id="d9c3f-114">[MSBuild プロパティ](#control-linking-with-an-msbuild-property)を使ってリンクをグローバルに構成する。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-114">Configure linking globally with a [MSBuild property](#control-linking-with-an-msbuild-property).</span></span>
 * <span data-ttu-id="d9c3f-115">[構成ファイル](#control-linking-with-a-configuration-file)を使ってアセンブリごとにリンクを制御する。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-115">Control linking on a per-assembly basis with a [configuration file](#control-linking-with-a-configuration-file).</span></span>
 
 ## <a name="control-linking-with-an-msbuild-property"></a><span data-ttu-id="d9c3f-116">MSBuild プロパティを使ってリンクを制御する</span><span class="sxs-lookup"><span data-stu-id="d9c3f-116">Control linking with an MSBuild property</span></span>
 
-<span data-ttu-id="d9c3f-117">リンクは、アプリが `Release` 構成でビルドされると有効になります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-117">Linking is enabled when an app is built in `Release` configuration.</span></span> <span data-ttu-id="d9c3f-118">これを変更するには、プロジェクト ファイルで `:::no-loc(Blazor):::WebAssemblyEnableLinking` の MSBuild プロパティを構成します。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-118">To change this, configure the `:::no-loc(Blazor):::WebAssemblyEnableLinking` MSBuild property in the project file:</span></span>
+<span data-ttu-id="d9c3f-117">リンクは、アプリが `Release` 構成でビルドされると有効になります。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-117">Linking is enabled when an app is built in `Release` configuration.</span></span> <span data-ttu-id="d9c3f-118">これを変更するには、プロジェクト ファイルで `BlazorWebAssemblyEnableLinking` の MSBuild プロパティを構成します。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-118">To change this, configure the `BlazorWebAssemblyEnableLinking` MSBuild property in the project file:</span></span>
 
 ```xml
 <PropertyGroup>
-  <:::no-loc(Blazor):::WebAssemblyEnableLinking>false</:::no-loc(Blazor):::WebAssemblyEnableLinking>
+  <BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
 </PropertyGroup>
 ```
 
@@ -57,7 +57,7 @@ ms.locfileid: "93055829"
 
 ```xml
 <ItemGroup>
-  <:::no-loc(Blazor):::LinkerDescriptor Include="LinkerConfig.xml" />
+  <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
 </ItemGroup>
 ```
 
@@ -66,7 +66,7 @@ ms.locfileid: "93055829"
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  This file specifies which parts of the BCL or :::no-loc(Blazor)::: packages must not be
+  This file specifies which parts of the BCL or Blazor packages must not be
   stripped by the IL Linker even if they aren't referenced by user code.
 -->
 <linker>
@@ -89,7 +89,7 @@ ms.locfileid: "93055829"
     In this example, the app's entry point assembly is listed. The assembly
     isn't stripped by the IL Linker.
   -->
-  <assembly fullname="MyCool:::no-loc(Blazor):::App" />
+  <assembly fullname="MyCoolBlazorApp" />
 </linker>
 ```
 
@@ -111,13 +111,13 @@ ms.locfileid: "93055829"
 
 ### <a name="configure-the-linker-for-internationalization"></a><span data-ttu-id="d9c3f-127">国際化用にリンカーを構成する</span><span class="sxs-lookup"><span data-stu-id="d9c3f-127">Configure the linker for internationalization</span></span>
 
-<span data-ttu-id="d9c3f-128">既定では、:::no-loc(Blazor WebAssembly)::: アプリに対する :::no-loc(Blazor)::: のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-128">By default, :::no-loc(Blazor):::'s linker configuration for :::no-loc(Blazor WebAssembly)::: apps strips out internationalization information except for locales explicitly requested.</span></span> <span data-ttu-id="d9c3f-129">これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-129">Removing these assemblies minimizes the app's size.</span></span>
+<span data-ttu-id="d9c3f-128">既定では、Blazor WebAssembly アプリに対する Blazor のリンカー構成により、明示的に要求されたロケールを除き、国際化情報は除去されます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-128">By default, Blazor's linker configuration for Blazor WebAssembly apps strips out internationalization information except for locales explicitly requested.</span></span> <span data-ttu-id="d9c3f-129">これらのアセンブリを削除すると、アプリのサイズが最小限に抑えられます。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-129">Removing these assemblies minimizes the app's size.</span></span>
 
-<span data-ttu-id="d9c3f-130">保持される I18N アセンブリを制御するには、プロジェクト ファイルで MSBuild のプロパティ `<:::no-loc(Blazor):::WebAssemblyI18NAssemblies>` を設定します。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-130">To control which I18N assemblies are retained, set the `<:::no-loc(Blazor):::WebAssemblyI18NAssemblies>` MSBuild property in the project file:</span></span>
+<span data-ttu-id="d9c3f-130">保持される I18N アセンブリを制御するには、プロジェクト ファイルで MSBuild のプロパティ `<BlazorWebAssemblyI18NAssemblies>` を設定します。</span><span class="sxs-lookup"><span data-stu-id="d9c3f-130">To control which I18N assemblies are retained, set the `<BlazorWebAssemblyI18NAssemblies>` MSBuild property in the project file:</span></span>
 
 ```xml
 <PropertyGroup>
-  <:::no-loc(Blazor):::WebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</:::no-loc(Blazor):::WebAssemblyI18NAssemblies>
+  <BlazorWebAssemblyI18NAssemblies>{all|none|REGION1,REGION2,...}</BlazorWebAssemblyI18NAssemblies>
 </PropertyGroup>
 ```
 

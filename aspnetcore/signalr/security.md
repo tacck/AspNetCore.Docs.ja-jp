@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core のセキュリティに関する考慮事項 :::no-loc(SignalR):::'
+title: 'ASP.NET Core のセキュリティに関する考慮事項 SignalR'
 author: bradygaster
-description: 'ASP.NET Core で認証と承認を使用する方法について説明 :::no-loc(SignalR)::: します。'
+description: 'ASP.NET Core で認証と承認を使用する方法について説明 SignalR します。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/security
 ms.openlocfilehash: 5ecbf07b1527e9c68443870f7fce77adc29a5416
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,35 +26,35 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050837"
 ---
-# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="5e8f8-103">ASP.NET Core のセキュリティに関する考慮事項 :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="5e8f8-103">Security considerations in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="5e8f8-103">ASP.NET Core のセキュリティに関する考慮事項 SignalR</span><span class="sxs-lookup"><span data-stu-id="5e8f8-103">Security considerations in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="5e8f8-104">By [Andrew Stanton-看護師](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="5e8f8-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="5e8f8-105">この記事では、のセキュリティ保護について説明 :::no-loc(SignalR)::: します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-105">This article provides information on securing :::no-loc(SignalR):::.</span></span>
+<span data-ttu-id="5e8f8-105">この記事では、のセキュリティ保護について説明 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-105">This article provides information on securing SignalR.</span></span>
 
 ## <a name="cross-origin-resource-sharing"></a><span data-ttu-id="5e8f8-106">クロス オリジン リソース共有</span><span class="sxs-lookup"><span data-stu-id="5e8f8-106">Cross-origin resource sharing</span></span>
 
-<span data-ttu-id="5e8f8-107">[クロスオリジンリソース共有 (CORS)](https://www.w3.org/TR/cors/) を使用して、ブラウザーでクロスオリジン接続を許可することができ :::no-loc(SignalR)::: ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-107">[Cross-origin resource sharing (CORS)](https://www.w3.org/TR/cors/) can be used to allow cross-origin :::no-loc(SignalR)::: connections in the browser.</span></span> <span data-ttu-id="5e8f8-108">JavaScript コードがアプリとは別のドメインでホストされている場合 :::no-loc(SignalR)::: 、javascript がアプリに接続できるようにするには、 [CORS ミドルウェア](xref:security/cors) を有効にする必要があり :::no-loc(SignalR)::: ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-108">If JavaScript code is hosted on a different domain from the :::no-loc(SignalR)::: app, [CORS middleware](xref:security/cors) must be enabled to allow the JavaScript to connect to the :::no-loc(SignalR)::: app.</span></span> <span data-ttu-id="5e8f8-109">信頼または制御するドメインからのクロスオリジン要求を許可します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-109">Allow cross-origin requests only from domains you trust or control.</span></span> <span data-ttu-id="5e8f8-110">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-110">For example:</span></span>
+<span data-ttu-id="5e8f8-107">[クロスオリジンリソース共有 (CORS)](https://www.w3.org/TR/cors/) を使用して、ブラウザーでクロスオリジン接続を許可することができ SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-107">[Cross-origin resource sharing (CORS)](https://www.w3.org/TR/cors/) can be used to allow cross-origin SignalR connections in the browser.</span></span> <span data-ttu-id="5e8f8-108">JavaScript コードがアプリとは別のドメインでホストされている場合 SignalR 、javascript がアプリに接続できるようにするには、 [CORS ミドルウェア](xref:security/cors) を有効にする必要があり SignalR ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-108">If JavaScript code is hosted on a different domain from the SignalR app, [CORS middleware](xref:security/cors) must be enabled to allow the JavaScript to connect to the SignalR app.</span></span> <span data-ttu-id="5e8f8-109">信頼または制御するドメインからのクロスオリジン要求を許可します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-109">Allow cross-origin requests only from domains you trust or control.</span></span> <span data-ttu-id="5e8f8-110">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-110">For example:</span></span>
 
 * <span data-ttu-id="5e8f8-111">サイトがホストされている `http://www.example.com`</span><span class="sxs-lookup"><span data-stu-id="5e8f8-111">Your site is hosted on `http://www.example.com`</span></span>
-* <span data-ttu-id="5e8f8-112">:::no-loc(SignalR):::アプリがホストされている`http://signalr.example.com`</span><span class="sxs-lookup"><span data-stu-id="5e8f8-112">Your :::no-loc(SignalR)::: app is hosted on `http://signalr.example.com`</span></span>
+* <span data-ttu-id="5e8f8-112">SignalRアプリがホストされている`http://signalr.example.com`</span><span class="sxs-lookup"><span data-stu-id="5e8f8-112">Your SignalR app is hosted on `http://signalr.example.com`</span></span>
 
-<span data-ttu-id="5e8f8-113">CORS は :::no-loc(SignalR)::: 、オリジンのみを許可するようにアプリで構成する必要があり `www.example.com` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-113">CORS should be configured in the :::no-loc(SignalR)::: app to only allow the origin `www.example.com`.</span></span>
+<span data-ttu-id="5e8f8-113">CORS は SignalR 、オリジンのみを許可するようにアプリで構成する必要があり `www.example.com` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-113">CORS should be configured in the SignalR app to only allow the origin `www.example.com`.</span></span>
 
-<span data-ttu-id="5e8f8-114">CORS の構成の詳細については、「 [クロスオリジン要求 (cors) を有効にする](xref:security/cors)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-114">For more information on configuring CORS, see [Enable Cross-Origin Requests (CORS)](xref:security/cors).</span></span> <span data-ttu-id="5e8f8-115">:::no-loc(SignalR):::次の CORS ポリシー **が必要** です。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-115">:::no-loc(SignalR)::: **requires** the following CORS policies:</span></span>
+<span data-ttu-id="5e8f8-114">CORS の構成の詳細については、「 [クロスオリジン要求 (cors) を有効にする](xref:security/cors)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-114">For more information on configuring CORS, see [Enable Cross-Origin Requests (CORS)](xref:security/cors).</span></span> <span data-ttu-id="5e8f8-115">SignalR次の CORS ポリシー **が必要** です。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-115">SignalR **requires** the following CORS policies:</span></span>
 
 * <span data-ttu-id="5e8f8-116">想定される特定のオリジンを許可します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-116">Allow the specific expected origins.</span></span> <span data-ttu-id="5e8f8-117">配信元を許可することは可能ですが、安全でも推奨され **ません** 。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-117">Allowing any origin is possible but is **not** secure or recommended.</span></span>
 * <span data-ttu-id="5e8f8-118">HTTP メソッド `GET` と `POST` が許可されている必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-118">HTTP methods `GET` and `POST` must be allowed.</span></span>
-* <span data-ttu-id="5e8f8-119">:::no-loc(cookie):::ベースの固定セッションが正常に機能するためには、資格情報を許可する必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-119">Credentials must be allowed in order for :::no-loc(cookie):::-based sticky sessions to work correctly.</span></span> <span data-ttu-id="5e8f8-120">認証が使用されていない場合でも、有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-120">They must be enabled even when authentication isn't used.</span></span>
+* <span data-ttu-id="5e8f8-119">cookieベースの固定セッションが正常に機能するためには、資格情報を許可する必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-119">Credentials must be allowed in order for cookie-based sticky sessions to work correctly.</span></span> <span data-ttu-id="5e8f8-120">認証が使用されていない場合でも、有効にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-120">They must be enabled even when authentication isn't used.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
 <span data-ttu-id="5e8f8-121">ただし、5.0 では、資格情報を使用しないように TypeScript クライアントでオプションを提供しています。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-121">However, in 5.0 we have provided an option in the TypeScript client to not use credentials.</span></span>
-<span data-ttu-id="5e8f8-122">資格情報を使用しないオプションは、100% がわかっている場合にのみ使用してください。のような資格情報 :::no-loc(Cookie)::: は、アプリでは必要ありません ( :::no-loc(cookie)::: では、複数のサーバーを使用して固定セッションを使用している場合、azure app service によって使用されます)。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-122">The option to not use credentials should only be used when you know 100% that credentials like :::no-loc(Cookie):::s are not needed in your app (:::no-loc(cookie):::s are used by azure app service when using multiple servers for sticky sessions).</span></span>
+<span data-ttu-id="5e8f8-122">資格情報を使用しないオプションは、100% がわかっている場合にのみ使用してください。のような資格情報 Cookie は、アプリでは必要ありません ( cookie では、複数のサーバーを使用して固定セッションを使用している場合、azure app service によって使用されます)。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-122">The option to not use credentials should only be used when you know 100% that credentials like Cookies are not needed in your app (cookies are used by azure app service when using multiple servers for sticky sessions).</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="5e8f8-123">たとえば、次の CORS ポリシーでは、 :::no-loc(SignalR)::: でホストされているブラウザークライアントが、 `https://example.com` でホストされているアプリにアクセスでき :::no-loc(SignalR)::: `https://signalr.example.com` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-123">For example, the following CORS policy allows a :::no-loc(SignalR)::: browser client hosted on `https://example.com` to access the :::no-loc(SignalR)::: app hosted on `https://signalr.example.com`:</span></span>
+<span data-ttu-id="5e8f8-123">たとえば、次の CORS ポリシーでは、 SignalR でホストされているブラウザークライアントが、 `https://example.com` でホストされているアプリにアクセスでき SignalR `https://signalr.example.com` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-123">For example, the following CORS policy allows a SignalR browser client hosted on `https://example.com` to access the SignalR app hosted on `https://signalr.example.com`:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -63,7 +63,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     // ... other middleware ...
 
-    // Make sure the CORS middleware is ahead of :::no-loc(SignalR):::.
+    // Make sure the CORS middleware is ahead of SignalR.
     app.UseCors(builder =>
     {
         builder.WithOrigins("https://example.com")
@@ -109,7 +109,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 <span data-ttu-id="5e8f8-131">ただし、WebSocket 要求を発行するときにはブラウザーから `Origin` ヘッダーが送信されます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-131">However, browsers do send the `Origin` header when issuing WebSocket requests.</span></span> <span data-ttu-id="5e8f8-132">予期した配信元からの WebSocket のみが許可されるように、アプリケーションでこれらのヘッダーが検証されるように構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-132">Applications should be configured to validate these headers to ensure that only WebSockets coming from the expected origins are allowed.</span></span>
 
-<span data-ttu-id="5e8f8-133">ASP.NET Core 2.1 以降では、前に配置したカスタムミドルウェア **`Use:::no-loc(SignalR):::` との認証ミドルウェア** を使用して、ヘッダーの検証を行うことができ `Configure` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-133">In ASP.NET Core 2.1 and later, header validation can be achieved using a custom middleware placed **before `Use:::no-loc(SignalR):::`, and authentication middleware** in `Configure`:</span></span>
+<span data-ttu-id="5e8f8-133">ASP.NET Core 2.1 以降では、前に配置したカスタムミドルウェア **`UseSignalR` との認証ミドルウェア** を使用して、ヘッダーの検証を行うことができ `Configure` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-133">In ASP.NET Core 2.1 and later, header validation can be achieved using a custom middleware placed **before `UseSignalR`, and authentication middleware** in `Configure`:</span></span>
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
@@ -120,7 +120,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="connectionid"></a><span data-ttu-id="5e8f8-136">ConnectionId</span><span class="sxs-lookup"><span data-stu-id="5e8f8-136">ConnectionId</span></span>
 
-<span data-ttu-id="5e8f8-137">`ConnectionId` :::no-loc(SignalR)::: サーバーまたはクライアントのバージョンが2.2 以前 ASP.NET Core 場合、を公開すると、悪意のある偽装が発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-137">Exposing `ConnectionId` can lead to malicious impersonation if the :::no-loc(SignalR)::: server or client version is ASP.NET Core 2.2 or earlier.</span></span> <span data-ttu-id="5e8f8-138">:::no-loc(SignalR):::サーバーとクライアントのバージョンが3.0 以降 ASP.NET Core 場合、では `ConnectionToken` なく、 `ConnectionId` シークレットを保持する必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-138">If the :::no-loc(SignalR)::: server and client version are ASP.NET Core 3.0 or later, the `ConnectionToken` rather than the `ConnectionId` must be kept secret.</span></span> <span data-ttu-id="5e8f8-139">は、 `ConnectionToken` どの API でも意図的に公開されていません。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-139">The `ConnectionToken` is purposely not exposed in any API.</span></span>  <span data-ttu-id="5e8f8-140">古いクライアントがサーバーに接続されていないことを確認するのは困難な場合があり :::no-loc(SignalR)::: ます。したがって、 :::no-loc(SignalR)::: サーバーのバージョンが3.0 以降 ASP.NET Core 場合でも、が公開されないようにする必要があり `ConnectionId` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-140">It can be difficult to ensure that older :::no-loc(SignalR)::: clients aren't connecting to the server, so even if your :::no-loc(SignalR)::: server version is ASP.NET Core 3.0 or later, the `ConnectionId` shouldn't be exposed.</span></span>
+<span data-ttu-id="5e8f8-137">`ConnectionId` SignalR サーバーまたはクライアントのバージョンが2.2 以前 ASP.NET Core 場合、を公開すると、悪意のある偽装が発生する可能性があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-137">Exposing `ConnectionId` can lead to malicious impersonation if the SignalR server or client version is ASP.NET Core 2.2 or earlier.</span></span> <span data-ttu-id="5e8f8-138">SignalRサーバーとクライアントのバージョンが3.0 以降 ASP.NET Core 場合、では `ConnectionToken` なく、 `ConnectionId` シークレットを保持する必要があります。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-138">If the SignalR server and client version are ASP.NET Core 3.0 or later, the `ConnectionToken` rather than the `ConnectionId` must be kept secret.</span></span> <span data-ttu-id="5e8f8-139">は、 `ConnectionToken` どの API でも意図的に公開されていません。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-139">The `ConnectionToken` is purposely not exposed in any API.</span></span>  <span data-ttu-id="5e8f8-140">古いクライアントがサーバーに接続されていないことを確認するのは困難な場合があり SignalR ます。したがって、 SignalR サーバーのバージョンが3.0 以降 ASP.NET Core 場合でも、が公開されないようにする必要があり `ConnectionId` ます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-140">It can be difficult to ensure that older SignalR clients aren't connecting to the server, so even if your SignalR server version is ASP.NET Core 3.0 or later, the `ConnectionId` shouldn't be exposed.</span></span>
 
 ## <a name="access-token-logging"></a><span data-ttu-id="5e8f8-141">アクセストークンのログ記録</span><span class="sxs-lookup"><span data-stu-id="5e8f8-141">Access token logging</span></span>
 
@@ -135,11 +135,11 @@ info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
 
 ## <a name="exceptions"></a><span data-ttu-id="5e8f8-152">例外</span><span class="sxs-lookup"><span data-stu-id="5e8f8-152">Exceptions</span></span>
 
-<span data-ttu-id="5e8f8-153">例外メッセージは、通常、クライアントに公開してはいけない機密データと見なされます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-153">Exception messages are generally considered sensitive data that shouldn't be revealed to a client.</span></span> <span data-ttu-id="5e8f8-154">既定では、は :::no-loc(SignalR)::: ハブメソッドによってスローされた例外の詳細をクライアントに送信しません。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-154">By default, :::no-loc(SignalR)::: doesn't send the details of an exception thrown by a hub method to the client.</span></span> <span data-ttu-id="5e8f8-155">クライアントはその代わりに、エラーが発生したことを示す一般的なメッセージを受信します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-155">Instead, the client receives a generic message indicating an error occurred.</span></span> <span data-ttu-id="5e8f8-156">クライアントへの例外メッセージの配信は、 [EnableDetailedErrors](xref:signalr/configuration#configure-server-options)を使用して (開発やテストなどで) オーバーライドできます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-156">Exception message delivery to the client can be overridden (for example in development or test) with [EnableDetailedErrors](xref:signalr/configuration#configure-server-options).</span></span> <span data-ttu-id="5e8f8-157">例外メッセージは、実稼働アプリでクライアントに公開しないでください。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-157">Exception messages should not be exposed to the client in production apps.</span></span>
+<span data-ttu-id="5e8f8-153">例外メッセージは、通常、クライアントに公開してはいけない機密データと見なされます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-153">Exception messages are generally considered sensitive data that shouldn't be revealed to a client.</span></span> <span data-ttu-id="5e8f8-154">既定では、は SignalR ハブメソッドによってスローされた例外の詳細をクライアントに送信しません。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-154">By default, SignalR doesn't send the details of an exception thrown by a hub method to the client.</span></span> <span data-ttu-id="5e8f8-155">クライアントはその代わりに、エラーが発生したことを示す一般的なメッセージを受信します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-155">Instead, the client receives a generic message indicating an error occurred.</span></span> <span data-ttu-id="5e8f8-156">クライアントへの例外メッセージの配信は、 [EnableDetailedErrors](xref:signalr/configuration#configure-server-options)を使用して (開発やテストなどで) オーバーライドできます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-156">Exception message delivery to the client can be overridden (for example in development or test) with [EnableDetailedErrors](xref:signalr/configuration#configure-server-options).</span></span> <span data-ttu-id="5e8f8-157">例外メッセージは、実稼働アプリでクライアントに公開しないでください。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-157">Exception messages should not be exposed to the client in production apps.</span></span>
 
 ## <a name="buffer-management"></a><span data-ttu-id="5e8f8-158">バッファー管理</span><span class="sxs-lookup"><span data-stu-id="5e8f8-158">Buffer management</span></span>
 
-<span data-ttu-id="5e8f8-159">:::no-loc(SignalR)::: では、接続ごとのバッファーを使用して、受信メッセージと送信メッセージを管理します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-159">:::no-loc(SignalR)::: uses per-connection buffers to manage incoming and outgoing messages.</span></span> <span data-ttu-id="5e8f8-160">既定では、は :::no-loc(SignalR)::: これらのバッファーを 32 KB に制限します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-160">By default, :::no-loc(SignalR)::: limits these buffers to 32 KB.</span></span> <span data-ttu-id="5e8f8-161">クライアントまたはサーバーが送信できる最大メッセージサイズは 32 KB です。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-161">The largest message a client or server can send is 32 KB.</span></span> <span data-ttu-id="5e8f8-162">メッセージの接続で消費される最大メモリは 32 KB です。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-162">The maximum memory consumed by a connection for messages is 32 KB.</span></span> <span data-ttu-id="5e8f8-163">メッセージが常に 32 KB より小さい場合は、次の制限を減らすことができます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-163">If your messages are always smaller than 32 KB, you can reduce the limit, which:</span></span>
+<span data-ttu-id="5e8f8-159">SignalR では、接続ごとのバッファーを使用して、受信メッセージと送信メッセージを管理します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-159">SignalR uses per-connection buffers to manage incoming and outgoing messages.</span></span> <span data-ttu-id="5e8f8-160">既定では、は SignalR これらのバッファーを 32 KB に制限します。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-160">By default, SignalR limits these buffers to 32 KB.</span></span> <span data-ttu-id="5e8f8-161">クライアントまたはサーバーが送信できる最大メッセージサイズは 32 KB です。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-161">The largest message a client or server can send is 32 KB.</span></span> <span data-ttu-id="5e8f8-162">メッセージの接続で消費される最大メモリは 32 KB です。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-162">The maximum memory consumed by a connection for messages is 32 KB.</span></span> <span data-ttu-id="5e8f8-163">メッセージが常に 32 KB より小さい場合は、次の制限を減らすことができます。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-163">If your messages are always smaller than 32 KB, you can reduce the limit, which:</span></span>
 
 * <span data-ttu-id="5e8f8-164">クライアントが大きなメッセージを送信できないようにします。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-164">Prevents a client from being able to send a larger message.</span></span>
 * <span data-ttu-id="5e8f8-165">サーバーは、メッセージを受け入れるために大きなバッファーを割り当てる必要はありません。</span><span class="sxs-lookup"><span data-stu-id="5e8f8-165">The server will never need to allocate large buffers to accept messages.</span></span>

@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/Index
 ms.openlocfilehash: eac67307ac23153a8509c866b6e8da91cf3f935f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -31,7 +31,7 @@ ms.locfileid: "93060366"
 
 <span data-ttu-id="a44e5-105">タグ ヘルパーの概要については、「<xref:mvc/views/tag-helpers/intro>」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="a44e5-105">For an overview of Tag Helpers, see <xref:mvc/views/tag-helpers/intro>.</span></span>
 
-<span data-ttu-id="a44e5-106">組み込みタグ ヘルパーがありますが、ドキュメントには表示されていません。</span><span class="sxs-lookup"><span data-stu-id="a44e5-106">There are built-in Tag Helpers which aren't listed in this document.</span></span> <span data-ttu-id="a44e5-107">表示されていないタグ ヘルパーは、[:::no-loc(Razor):::](xref:mvc/views/razor) ビュー エンジンによって内部で使用されます。</span><span class="sxs-lookup"><span data-stu-id="a44e5-107">The unlisted Tag Helpers are used internally by the [:::no-loc(Razor):::](xref:mvc/views/razor) view engine.</span></span> <span data-ttu-id="a44e5-108">`~` (チルダ) 文字のタグ ヘルパーは表示されていません。</span><span class="sxs-lookup"><span data-stu-id="a44e5-108">The Tag Helper for the `~` (tilde) character is unlisted.</span></span> <span data-ttu-id="a44e5-109">Web サイトのルート パスにチルダのタグ ヘルパーが展開されます。</span><span class="sxs-lookup"><span data-stu-id="a44e5-109">The tilde Tag Helper expands to the root path of the website.</span></span>
+<span data-ttu-id="a44e5-106">組み込みタグ ヘルパーがありますが、ドキュメントには表示されていません。</span><span class="sxs-lookup"><span data-stu-id="a44e5-106">There are built-in Tag Helpers which aren't listed in this document.</span></span> <span data-ttu-id="a44e5-107">表示されていないタグ ヘルパーは、[Razor](xref:mvc/views/razor) ビュー エンジンによって内部で使用されます。</span><span class="sxs-lookup"><span data-stu-id="a44e5-107">The unlisted Tag Helpers are used internally by the [Razor](xref:mvc/views/razor) view engine.</span></span> <span data-ttu-id="a44e5-108">`~` (チルダ) 文字のタグ ヘルパーは表示されていません。</span><span class="sxs-lookup"><span data-stu-id="a44e5-108">The Tag Helper for the `~` (tilde) character is unlisted.</span></span> <span data-ttu-id="a44e5-109">Web サイトのルート パスにチルダのタグ ヘルパーが展開されます。</span><span class="sxs-lookup"><span data-stu-id="a44e5-109">The tilde Tag Helper expands to the root path of the website.</span></span>
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 

@@ -6,17 +6,17 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authentication/ws-federation
 ms.openlocfilehash: ed78923a2bdd1ed683a72c0a6f34337a38350035
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -63,7 +63,7 @@ ms.locfileid: "93053372"
 
 * <span data-ttu-id="e6f09-133">ウィザードの残りの部分で [ **次へ** ] をクリックし、最後 **に終了し** ます。</span><span class="sxs-lookup"><span data-stu-id="e6f09-133">Click **Next** through the rest of the wizard and **Close** at the end.</span></span>
 
-* <span data-ttu-id="e6f09-134">:::no-loc(ASP.NET Core Identity):::**名前 ID** 要求が必要です。</span><span class="sxs-lookup"><span data-stu-id="e6f09-134">:::no-loc(ASP.NET Core Identity)::: requires a **Name ID** claim.</span></span> <span data-ttu-id="e6f09-135">[ **要求規則の編集** ] ダイアログボックスで、次のいずれかを追加します。</span><span class="sxs-lookup"><span data-stu-id="e6f09-135">Add one from the **Edit Claim Rules** dialog:</span></span>
+* <span data-ttu-id="e6f09-134">ASP.NET Core Identity**名前 ID** 要求が必要です。</span><span class="sxs-lookup"><span data-stu-id="e6f09-134">ASP.NET Core Identity requires a **Name ID** claim.</span></span> <span data-ttu-id="e6f09-135">[ **要求規則の編集** ] ダイアログボックスで、次のいずれかを追加します。</span><span class="sxs-lookup"><span data-stu-id="e6f09-135">Add one from the **Edit Claim Rules** dialog:</span></span>
 
 ![要求規則を編集する](ws-federation/_static/EditClaimRules.png)
 
@@ -92,9 +92,9 @@ ms.locfileid: "93053372"
 
 ![Azure Active Directory: アプリの登録のプロパティ](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a><span data-ttu-id="e6f09-158">を指定せずに WS-Federation を使用する :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="e6f09-158">Use WS-Federation without :::no-loc(ASP.NET Core Identity):::</span></span>
+## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a><span data-ttu-id="e6f09-158">を指定せずに WS-Federation を使用する ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="e6f09-158">Use WS-Federation without ASP.NET Core Identity</span></span>
 
-<span data-ttu-id="e6f09-159">WS-Federation ミドルウェアは、なしで使用でき :::no-loc(Identity)::: ます。</span><span class="sxs-lookup"><span data-stu-id="e6f09-159">The WS-Federation middleware can be used without :::no-loc(Identity):::.</span></span> <span data-ttu-id="e6f09-160">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="e6f09-160">For example:</span></span>
+<span data-ttu-id="e6f09-159">WS-Federation ミドルウェアは、なしで使用でき Identity ます。</span><span class="sxs-lookup"><span data-stu-id="e6f09-159">The WS-Federation middleware can be used without Identity.</span></span> <span data-ttu-id="e6f09-160">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="e6f09-160">For example:</span></span>
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -103,7 +103,7 @@ ms.locfileid: "93053372"
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a><span data-ttu-id="e6f09-161">の外部ログインプロバイダーとして WS-Federation を追加します。 :::no-loc(ASP.NET Core Identity):::</span><span class="sxs-lookup"><span data-stu-id="e6f09-161">Add WS-Federation as an external login provider for :::no-loc(ASP.NET Core Identity):::</span></span>
+## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a><span data-ttu-id="e6f09-161">の外部ログインプロバイダーとして WS-Federation を追加します。 ASP.NET Core Identity</span><span class="sxs-lookup"><span data-stu-id="e6f09-161">Add WS-Federation as an external login provider for ASP.NET Core Identity</span></span>
 
 * <span data-ttu-id="e6f09-162">[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)への依存関係をプロジェクトに追加します。</span><span class="sxs-lookup"><span data-stu-id="e6f09-162">Add a dependency on [Microsoft.AspNetCore.Authentication.WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) to the project.</span></span>
 * <span data-ttu-id="e6f09-163">WS-Federation の追加先 `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="e6f09-163">Add WS-Federation to `Startup.ConfigureServices`:</span></span>

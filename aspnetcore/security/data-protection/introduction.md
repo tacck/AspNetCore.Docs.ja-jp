@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/introduction
 ms.openlocfilehash: 5fd5676b286e758f0648d78bf8cb4171e7a98f60
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93051695"
 
 <span data-ttu-id="a8ccf-110">全体的な問題の説明は、1つの文で簡潔に記述できます。後で取得するために信頼できる情報を保持する必要がありますが、永続化メカニズムを信頼していません。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-110">The overall problem statement can be succinctly stated in a single sentence: I need to persist trusted information for later retrieval, but I don't trust the persistence mechanism.</span></span> <span data-ttu-id="a8ccf-111">Web 用語では、"信頼された状態を信頼されていないクライアント経由でラウンドトリップする必要がある" として記述されている可能性があります。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-111">In web terms, this might be written as "I need to round-trip trusted state via an untrusted client."</span></span>
 
-<span data-ttu-id="a8ccf-112">この例では、認証またはベアラートークンが使用されてい :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-112">The canonical example of this is an authentication :::no-loc(cookie)::: or bearer token.</span></span> <span data-ttu-id="a8ccf-113">サーバーは "I am Groot と" xyz アクセス許可 "トークンを生成し、クライアントに渡します。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="a8ccf-114">将来の日付では、クライアントはそのトークンをサーバーに返しますが、サーバーでは、クライアントがトークンを偽造していないことを保証する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="a8ccf-115">そのため、最初の要件: 信頼性 (</span><span class="sxs-lookup"><span data-stu-id="a8ccf-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="a8ccf-116">整合性、改ざん防止)。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-116">integrity, tamper-proofing).</span></span>
+<span data-ttu-id="a8ccf-112">この例では、認証またはベアラートークンが使用されてい cookie ます。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-112">The canonical example of this is an authentication cookie or bearer token.</span></span> <span data-ttu-id="a8ccf-113">サーバーは "I am Groot と" xyz アクセス許可 "トークンを生成し、クライアントに渡します。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-113">The server generates an "I am Groot and have xyz permissions" token and hands it to the client.</span></span> <span data-ttu-id="a8ccf-114">将来の日付では、クライアントはそのトークンをサーバーに返しますが、サーバーでは、クライアントがトークンを偽造していないことを保証する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-114">At some future date the client will present that token back to the server, but the server needs some kind of assurance that the client hasn't forged the token.</span></span> <span data-ttu-id="a8ccf-115">そのため、最初の要件: 信頼性 (</span><span class="sxs-lookup"><span data-stu-id="a8ccf-115">Thus the first requirement: authenticity (a.k.a.</span></span> <span data-ttu-id="a8ccf-116">整合性、改ざん防止)。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-116">integrity, tamper-proofing).</span></span>
 
 <span data-ttu-id="a8ccf-117">永続化された状態はサーバーによって信頼されているため、この状態には、オペレーティング環境に固有の情報が含まれている可能性があります。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-117">Since the persisted state is trusted by the server, we anticipate that this state might contain information that's specific to the operating environment.</span></span> <span data-ttu-id="a8ccf-118">ファイルパス、アクセス許可、ハンドルまたはその他の間接参照、またはサーバー固有のその他のデータの形式を使用できます。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-118">This could be in the form of a file path, a permission, a handle or other indirect reference, or some other piece of server-specific data.</span></span> <span data-ttu-id="a8ccf-119">通常、このような情報は、信頼されていないクライアントに公開することはできません。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-119">Such information should generally not be disclosed to an untrusted client.</span></span> <span data-ttu-id="a8ccf-120">そのため、2番目の要件は機密性です。</span><span class="sxs-lookup"><span data-stu-id="a8ccf-120">Thus the second requirement: confidentiality.</span></span>
 

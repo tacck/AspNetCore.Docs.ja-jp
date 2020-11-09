@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor WebAssembly)::: のセキュリティに関するその他のシナリオ'
+title: 'ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ'
 author: guardrex
-description: 'セキュリティに関するその他のシナリオ用に :::no-loc(Blazor WebAssembly)::: を構成する方法について説明します。'
+description: 'セキュリティに関するその他のシナリオ用に Blazor WebAssembly を構成する方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/27/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/security/webassembly/additional-scenarios
 ms.openlocfilehash: 88970b0e53b456467bdc2218a3a6b943bbbf0df5
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -26,7 +26,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/03/2020
 ms.locfileid: "93234388"
 ---
-# <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="fc5ae-103">ASP.NET Core :::no-loc(Blazor WebAssembly)::: のセキュリティに関するその他のシナリオ</span><span class="sxs-lookup"><span data-stu-id="fc5ae-103">ASP.NET Core :::no-loc(Blazor WebAssembly)::: additional security scenarios</span></span>
+# <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a><span data-ttu-id="fc5ae-103">ASP.NET Core Blazor WebAssembly のセキュリティに関するその他のシナリオ</span><span class="sxs-lookup"><span data-stu-id="fc5ae-103">ASP.NET Core Blazor WebAssembly additional security scenarios</span></span>
 
 <span data-ttu-id="fc5ae-104">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="fc5ae-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
@@ -59,7 +59,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("ServerAPI"));
 ```
 
-<span data-ttu-id="fc5ae-122">:::no-loc(Blazor WebAssembly)::: のホストされたプロジェクト テンプレートに基づく :::no-loc(Blazor)::: アプリの場合、要求 URI は既定ではアプリのベース URI 内にあります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-122">For a :::no-loc(Blazor)::: app based on the :::no-loc(Blazor WebAssembly)::: Hosted project template, request URIs are within the app's base URI by default.</span></span> <span data-ttu-id="fc5ae-123">したがって、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は、プロジェクト テンプレートから生成されたアプリ内の <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-123">Therefore, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> in an app generated from the project template.</span></span>
+<span data-ttu-id="fc5ae-122">Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、要求 URI は既定ではアプリのベース URI 内にあります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-122">For a Blazor app based on the Blazor WebAssembly Hosted project template, request URIs are within the app's base URI by default.</span></span> <span data-ttu-id="fc5ae-123">したがって、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は、プロジェクト テンプレートから生成されたアプリ内の <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-123">Therefore, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> in an app generated from the project template.</span></span>
 
 <span data-ttu-id="fc5ae-124">構成された <xref:System.Net.Http.HttpClient> を使用し、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) パターンを使用して、承認された要求を行います。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-124">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) pattern:</span></span>
 
@@ -120,7 +120,7 @@ builder.Services.AddHttpClient("ServerAPI",
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="fc5ae-131">:::no-loc(Blazor WebAssembly)::: のホストされたプロジェクト テンプレートに基づく :::no-loc(Blazor)::: アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-131">For a :::no-loc(Blazor)::: app based on the :::no-loc(Blazor WebAssembly)::: Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> by default.</span></span>
+<span data-ttu-id="fc5ae-131">Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-131">For a Blazor app based on the Blazor WebAssembly Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> by default.</span></span>
 
 <span data-ttu-id="fc5ae-132">構成が行われた <xref:System.Net.Http.HttpClient> を使用し、[`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) パターンを使用して、承認された要求を行います。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-132">The configured <xref:System.Net.Http.HttpClient> is used to make authorized requests using the [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) pattern.</span></span> <span data-ttu-id="fc5ae-133"><xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) パッケージ) を使用してクライアントが作成される場合にサーバー API への要求を行うと、アクセス トークンが含まれるインスタンスが <xref:System.Net.Http.HttpClient> に提供されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-133">Where the client is created with <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ([`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) package), the <xref:System.Net.Http.HttpClient> is supplied instances that include access tokens when making requests to the server API.</span></span> <span data-ttu-id="fc5ae-134">要求 URI が次の例 (`ExampleAPIMethod`) のように相対 URI である場合、それは、クライアント アプリから要求があったときに <xref:System.Net.Http.HttpClient.BaseAddress> に結合されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-134">If the request URI is a relative URI, as it is in the following example (`ExampleAPIMethod`), it's combined with the <xref:System.Net.Http.HttpClient.BaseAddress> when the client app makes the request:</span></span>
 
@@ -171,7 +171,7 @@ builder.Services.AddScoped(sp => new HttpClient(
     });
 ```
 
-<span data-ttu-id="fc5ae-141">:::no-loc(Blazor WebAssembly)::: のホストされたプロジェクト テンプレートに基づく :::no-loc(Blazor)::: アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> は既定では以下に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-141">For a :::no-loc(Blazor)::: app based on the :::no-loc(Blazor WebAssembly)::: Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> is assigned to the following by default:</span></span>
+<span data-ttu-id="fc5ae-141">Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> は既定では以下に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-141">For a Blazor app based on the Blazor WebAssembly Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> is assigned to the following by default:</span></span>
 
 * <span data-ttu-id="fc5ae-142"><xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-142">The <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`).</span></span>
 * <span data-ttu-id="fc5ae-143">`authorizedUrls` 配列の URL。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-143">A URL of the `authorizedUrls` array.</span></span>
@@ -217,7 +217,7 @@ public class WeatherForecastClient
 }
 ```
 
-<span data-ttu-id="fc5ae-147">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `using static :::no-loc(Blazor):::Sample.Data;`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-147">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `using static :::no-loc(Blazor):::Sample.Data;`).</span></span>
+<span data-ttu-id="fc5ae-147">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `using static BlazorSample.Data;`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-147">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `using static BlazorSample.Data;`).</span></span>
 
 <span data-ttu-id="fc5ae-148">`Program.Main` (`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="fc5ae-148">`Program.Main` (`Program.cs`):</span></span>
 
@@ -232,7 +232,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-<span data-ttu-id="fc5ae-149">:::no-loc(Blazor WebAssembly)::: のホストされたプロジェクト テンプレートに基づく :::no-loc(Blazor)::: アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-149">For a :::no-loc(Blazor)::: app based on the :::no-loc(Blazor WebAssembly)::: Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> by default.</span></span>
+<span data-ttu-id="fc5ae-149">Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-149">For a Blazor app based on the Blazor WebAssembly Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> by default.</span></span>
 
 <span data-ttu-id="fc5ae-150">`FetchData` コンポーネント (`Pages/FetchData.razor`):</span><span class="sxs-lookup"><span data-stu-id="fc5ae-150">`FetchData` component (`Pages/FetchData.razor`):</span></span>
 
@@ -262,14 +262,14 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-<span data-ttu-id="fc5ae-154">:::no-loc(Blazor WebAssembly)::: のホストされたプロジェクト テンプレートに基づく :::no-loc(Blazor)::: アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> は既定では以下に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-154">For a :::no-loc(Blazor)::: app based on the :::no-loc(Blazor WebAssembly)::: Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> is assigned to the following by default:</span></span>
+<span data-ttu-id="fc5ae-154">Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> は既定では以下に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-154">For a Blazor app based on the Blazor WebAssembly Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> is assigned to the following by default:</span></span>
 
 * <span data-ttu-id="fc5ae-155"><xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-155">The <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`).</span></span>
 * <span data-ttu-id="fc5ae-156">`authorizedUrls` 配列の URL。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-156">A URL of the `authorizedUrls` array.</span></span>
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a><span data-ttu-id="fc5ae-157">セキュリティで保護された既定のクライアントを使用する、アプリ内の認証または承認されていない Web API 要求</span><span class="sxs-lookup"><span data-stu-id="fc5ae-157">Unauthenticated or unauthorized web API requests in an app with a secure default client</span></span>
 
-<span data-ttu-id="fc5ae-158">通常、:::no-loc(Blazor WebAssembly)::: アプリがセキュリティで保護された既定の <xref:System.Net.Http.HttpClient> を使用する場合、アプリでは、名前付きの <xref:System.Net.Http.HttpClient> の構成を行うことで、認証または承認されていない Web API 要求が行われます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-158">If the :::no-loc(Blazor WebAssembly)::: app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
+<span data-ttu-id="fc5ae-158">通常、Blazor WebAssembly アプリがセキュリティで保護された既定の <xref:System.Net.Http.HttpClient> を使用する場合、アプリでは、名前付きの <xref:System.Net.Http.HttpClient> の構成を行うことで、認証または承認されていない Web API 要求が行われます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-158">If the Blazor WebAssembly app ordinarily uses a secure default <xref:System.Net.Http.HttpClient>, the app can also make unauthenticated or unauthorized web API requests by configuring a named <xref:System.Net.Http.HttpClient>:</span></span>
 
 <span data-ttu-id="fc5ae-159">`Program.Main` (`Program.cs`):</span><span class="sxs-lookup"><span data-stu-id="fc5ae-159">`Program.Main` (`Program.cs`):</span></span>
 
@@ -278,7 +278,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
     client => client.BaseAddress = new Uri("https://www.example.com/base"));
 ```
 
-<span data-ttu-id="fc5ae-160">:::no-loc(Blazor WebAssembly)::: のホストされたプロジェクト テンプレートに基づく :::no-loc(Blazor)::: アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-160">For a :::no-loc(Blazor)::: app based on the :::no-loc(Blazor WebAssembly)::: Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> by default.</span></span>
+<span data-ttu-id="fc5ae-160">Blazor WebAssembly のホストされたプロジェクト テンプレートに基づく Blazor アプリの場合、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) は既定では <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> に割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-160">For a Blazor app based on the Blazor WebAssembly Hosted project template, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> (`new Uri(builder.HostEnvironment.BaseAddress)`) is assigned to the <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> by default.</span></span>
 
 <span data-ttu-id="fc5ae-161">前述の登録は、セキュリティで保護された既定の <xref:System.Net.Http.HttpClient> 登録に追加されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-161">The preceding registration is in addition to the existing secure default <xref:System.Net.Http.HttpClient> registration.</span></span>
 
@@ -329,7 +329,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 <span data-ttu-id="fc5ae-175">`IAccessTokenProvider.RequestToken` メソッドには、指定されたスコープ セットを使用して、アプリでアクセス トークンをプロビジョニングできるようにするオーバーロードが用意されています。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-175">The `IAccessTokenProvider.RequestToken` method provides an overload that allows an app to provision an access token with a given set of scopes.</span></span>
 
-<span data-ttu-id="fc5ae-176">:::no-loc(Razor)::: コンポーネントでは、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-176">In a :::no-loc(Razor)::: component:</span></span>
+<span data-ttu-id="fc5ae-176">Razor コンポーネントでは、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-176">In a Razor component:</span></span>
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -358,7 +358,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="cross-origin-resource-sharing-cors"></a><span data-ttu-id="fc5ae-181">クロスオリジン リソース共有 (CORS)</span><span class="sxs-lookup"><span data-stu-id="fc5ae-181">Cross-origin resource sharing (CORS)</span></span>
 
-<span data-ttu-id="fc5ae-182">CORS 要求で資格情報 (承認 :::no-loc(cookie)::: またはヘッダー) を送信するときには、CORS ポリシーで `Authorization` ヘッダーが許可されている必要があります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-182">When sending credentials (authorization :::no-loc(cookie):::s/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
+<span data-ttu-id="fc5ae-182">CORS 要求で資格情報 (承認 cookie またはヘッダー) を送信するときには、CORS ポリシーで `Authorization` ヘッダーが許可されている必要があります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-182">When sending credentials (authorization cookies/headers) on CORS requests, the `Authorization` header must be allowed by the CORS policy.</span></span>
 
 <span data-ttu-id="fc5ae-183">次のポリシーには、以下についての構成が含まれています。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-183">The following policy includes configuration for:</span></span>
 
@@ -375,19 +375,19 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-<span data-ttu-id="fc5ae-189">:::no-loc(Blazor)::: のホストされたプロジェクト テンプレートに基づくホスト型 :::no-loc(Blazor)::: ソリューションでは、クライアントおよびサーバー アプリ用に同じベース アドレスが使用されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-189">A hosted :::no-loc(Blazor)::: solution based on the :::no-loc(Blazor)::: Hosted project template uses the same base address for the client and server apps.</span></span> <span data-ttu-id="fc5ae-190">クライアント アプリの <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> は、既定では `builder.HostEnvironment.BaseAddress` の URI に設定されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-190">The client app's <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> is set to a URI of `builder.HostEnvironment.BaseAddress` by default.</span></span> <span data-ttu-id="fc5ae-191">:::no-loc(Blazor)::: のホストされたプロジェクト テンプレートから作成されるホスト型アプリの既定の構成では、CORS 構成は **必須ではありません** 。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-191">CORS configuration is **not** required in the default configuration of a hosted app created from the :::no-loc(Blazor)::: Hosted project template.</span></span> <span data-ttu-id="fc5ae-192">サーバー プロジェクトでホストされておらず、サーバー アプリのベース アドレスを共有していない追加のクライアント アプリでは、サーバー プロジェクト内の CORS 構成は **必須です** 。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-192">Additional client apps that aren't hosted by the server project and don't share the server app's base address **do** require CORS configuration in the server project.</span></span>
+<span data-ttu-id="fc5ae-189">Blazor のホストされたプロジェクト テンプレートに基づくホスト型 Blazor ソリューションでは、クライアントおよびサーバー アプリ用に同じベース アドレスが使用されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-189">A hosted Blazor solution based on the Blazor Hosted project template uses the same base address for the client and server apps.</span></span> <span data-ttu-id="fc5ae-190">クライアント アプリの <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> は、既定では `builder.HostEnvironment.BaseAddress` の URI に設定されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-190">The client app's <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> is set to a URI of `builder.HostEnvironment.BaseAddress` by default.</span></span> <span data-ttu-id="fc5ae-191">Blazor のホストされたプロジェクト テンプレートから作成されるホスト型アプリの既定の構成では、CORS 構成は **必須ではありません** 。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-191">CORS configuration is **not** required in the default configuration of a hosted app created from the Blazor Hosted project template.</span></span> <span data-ttu-id="fc5ae-192">サーバー プロジェクトでホストされておらず、サーバー アプリのベース アドレスを共有していない追加のクライアント アプリでは、サーバー プロジェクト内の CORS 構成は **必須です** 。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-192">Additional client apps that aren't hosted by the server project and don't share the server app's base address **do** require CORS configuration in the server project.</span></span>
 
 <span data-ttu-id="fc5ae-193">詳細については、「<xref:security/cors>」と、サンプル アプリの HTTP 要求テスター コンポーネント (`Components/HTTPRequestTester.razor`) を参照してください。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-193">For more information, see <xref:security/cors> and the sample app's HTTP Request Tester component (`Components/HTTPRequestTester.razor`).</span></span>
 
 ## <a name="handle-token-request-errors"></a><span data-ttu-id="fc5ae-194">トークン要求エラーを処理する</span><span class="sxs-lookup"><span data-stu-id="fc5ae-194">Handle token request errors</span></span>
 
-<span data-ttu-id="fc5ae-195">シングル ページ アプリケーション (SPA) で OpenID Connect (OIDC) を使用してユーザーが認証されると、ユーザーが資格情報を入力したときに設定されるセッション :::no-loc(cookie)::: の形式で、SPA 内および :::no-loc(Identity)::: プロバイダー (IP) 内で、認証状態がローカルに維持されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-195">When a Single Page Application (SPA) authenticates a user using OpenID Connect (OIDC), the authentication state is maintained locally within the SPA and in the :::no-loc(Identity)::: Provider (IP) in the form of a session :::no-loc(cookie)::: that's set as a result of the user providing their credentials.</span></span>
+<span data-ttu-id="fc5ae-195">シングル ページ アプリケーション (SPA) で OpenID Connect (OIDC) を使用してユーザーが認証されると、ユーザーが資格情報を入力したときに設定されるセッション cookie の形式で、SPA 内および Identity プロバイダー (IP) 内で、認証状態がローカルに維持されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-195">When a Single Page Application (SPA) authenticates a user using OpenID Connect (OIDC), the authentication state is maintained locally within the SPA and in the Identity Provider (IP) in the form of a session cookie that's set as a result of the user providing their credentials.</span></span>
 
 <span data-ttu-id="fc5ae-196">通常、IP によってユーザーに出力されるトークンが有効なのは短時間のため (通常は約 1 時間)、クライアント アプリでは定期的に新しいトークンをフェッチする必要があります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-196">The tokens that the IP emits for the user typically are valid for short periods of time, about one hour normally, so the client app must regularly fetch new tokens.</span></span> <span data-ttu-id="fc5ae-197">それ以外の場合は、許可されたトークンの有効期限が切れると、ユーザーがログアウトします。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-197">Otherwise, the user would be logged-out after the granted tokens expire.</span></span> <span data-ttu-id="fc5ae-198">ほとんどの場合、OIDC クライアントでは、ユーザーに対して認証の再要求を行うことなく、新しいトークンをプロビジョニングできます。これは、認証状態または IP 内に保持される "セッション" によるものです。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-198">In most cases, OIDC clients are able to provision new tokens without requiring the user to authenticate again thanks to the authentication state or "session" that is kept within the IP.</span></span>
 
 <span data-ttu-id="fc5ae-199">場合によっては、ユーザーの介入なしに、クライアントでトークンを取得できないことがあります。たとえば、何らかの理由でユーザーが明示的に IP からログアウトした場合などです。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-199">There are some cases in which the client can't get a token without user interaction, for example, when for some reason the user explicitly logs out from the IP.</span></span> <span data-ttu-id="fc5ae-200">このシナリオは、ユーザーが `https://login.microsoftonline.com` にアクセスしてログアウトした場合に発生します。これらのシナリオでは、ユーザーがログアウトしたことを、アプリはすぐに認識しません。クライアントで保持されるトークンは、有効でなくなった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-200">This scenario occurs if a user visits `https://login.microsoftonline.com` and logs out. In these scenarios, the app doesn't know immediately that the user has logged out. Any token that the client holds might no longer be valid.</span></span> <span data-ttu-id="fc5ae-201">また、クライアントでは、現在のトークンの有効期限が切れた後に、ユーザーの介入なしに新しいトークンをプロビジョニングすることはできません。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-201">Also, the client isn't able to provision a new token without user interaction after the current token expires.</span></span>
 
-<span data-ttu-id="fc5ae-202">これらのシナリオは、トークンベースの認証に固有のものではありません。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-202">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="fc5ae-203">これらは、SPA の性質の一部です。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-203">They are part of the nature of SPAs.</span></span> <span data-ttu-id="fc5ae-204">また、認証 :::no-loc(cookie)::: が削除されると、:::no-loc(cookie)::: を使用する SPA でサーバー API を呼び出すこともできません。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-204">An SPA using :::no-loc(cookie):::s also fails to call a server API if the authentication :::no-loc(cookie)::: is removed.</span></span>
+<span data-ttu-id="fc5ae-202">これらのシナリオは、トークンベースの認証に固有のものではありません。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-202">These scenarios aren't specific to token-based authentication.</span></span> <span data-ttu-id="fc5ae-203">これらは、SPA の性質の一部です。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-203">They are part of the nature of SPAs.</span></span> <span data-ttu-id="fc5ae-204">また、認証 cookie が削除されると、cookie を使用する SPA でサーバー API を呼び出すこともできません。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-204">An SPA using cookies also fails to call a server API if the authentication cookie is removed.</span></span>
 
 <span data-ttu-id="fc5ae-205">保護されたリソースに対する API 呼び出しをアプリで実行するときは、次の点に注意する必要があります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-205">When an app performs API calls to protected resources, you must be aware of the following:</span></span>
 
@@ -714,7 +714,7 @@ builder.Services.AddApiAuthorization(options => {
 
 ### <a name="customize-the-user-with-a-payload-claim"></a><span data-ttu-id="fc5ae-267">ペイロード要求を使用してユーザーをカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="fc5ae-267">Customize the user with a payload claim</span></span>
 
-<span data-ttu-id="fc5ae-268">次の例では、アプリの認証されたユーザーが、ユーザーの認証方法ごとに `amr` 要求を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-268">In the following example, the app's authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span> <span data-ttu-id="fc5ae-269">この `amr` 要求は、Microsoft :::no-loc(Identity)::: プラットフォーム v1.0 [ペイロード要求](/azure/active-directory/develop/access-tokens#the-amr-claim)でトークンのサブジェクトが認証された方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-269">The `amr` claim identifies how the subject of the token was authenticated in Microsoft :::no-loc(Identity)::: Platform v1.0 [payload claims](/azure/active-directory/develop/access-tokens#the-amr-claim).</span></span> <span data-ttu-id="fc5ae-270">この例では、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> に基づくカスタム ユーザー アカウント クラスを使用します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-270">The example uses a custom user account class based on <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>.</span></span>
+<span data-ttu-id="fc5ae-268">次の例では、アプリの認証されたユーザーが、ユーザーの認証方法ごとに `amr` 要求を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-268">In the following example, the app's authenticated users receive an `amr` claim for each of the user's authentication methods.</span></span> <span data-ttu-id="fc5ae-269">この `amr` 要求は、Microsoft Identity プラットフォーム v1.0 [ペイロード要求](/azure/active-directory/develop/access-tokens#the-amr-claim)でトークンのサブジェクトが認証された方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-269">The `amr` claim identifies how the subject of the token was authenticated in Microsoft Identity Platform v1.0 [payload claims](/azure/active-directory/develop/access-tokens#the-amr-claim).</span></span> <span data-ttu-id="fc5ae-270">この例では、<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> に基づくカスタム ユーザー アカウント クラスを使用します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-270">The example uses a custom user account class based on <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>.</span></span>
 
 <span data-ttu-id="fc5ae-271"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> クラスを拡張するクラスを作成します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-271">Create a class that extends the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> class.</span></span> <span data-ttu-id="fc5ae-272">次の例では、`AuthenticationMethod` プロパティを `amr` JSON プロパティ値のユーザー配列に設定します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-272">The following example sets the `AuthenticationMethod` property to the user's array of `amr` JSON property values.</span></span> <span data-ttu-id="fc5ae-273">ユーザーが認証されると、フレームワークによって `AuthenticationMethod` が自動的に設定されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-273">`AuthenticationMethod` is populated automatically by the framework when the user is authenticated.</span></span>
 
@@ -751,11 +751,11 @@ public class CustomAccountFactory
     {
         var initialUser = await base.CreateUserAsync(account, options);
 
-        if (initialUser.:::no-loc(Identity):::.IsAuthenticated)
+        if (initialUser.Identity.IsAuthenticated)
         {
             foreach (var value in account.AuthenticationMethod)
             {
-                ((Claims:::no-loc(Identity):::)initialUser.:::no-loc(Identity):::)
+                ((ClaimsIdentity)initialUser.Identity)
                     .AddClaim(new Claim("amr", value));
             }
         }
@@ -821,7 +821,7 @@ public class CustomAccountFactory
 
 ## <a name="support-prerendering-with-authentication"></a><span data-ttu-id="fc5ae-282">認証を使用したプリレンダリングのサポート</span><span class="sxs-lookup"><span data-stu-id="fc5ae-282">Support prerendering with authentication</span></span>
 
-<span data-ttu-id="fc5ae-283">ホストされている :::no-loc(Blazor WebAssembly)::: アプリのトピックのいずれかのガイダンスを実行した後は、この後の手順に従って次のようなアプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-283">After following the guidance in one of the hosted :::no-loc(Blazor WebAssembly)::: app topics, use the following instructions to create an app that:</span></span>
+<span data-ttu-id="fc5ae-283">ホストされている Blazor WebAssembly アプリのトピックのいずれかのガイダンスを実行した後は、この後の手順に従って次のようなアプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-283">After following the guidance in one of the hosted Blazor WebAssembly app topics, use the following instructions to create an app that:</span></span>
 
 * <span data-ttu-id="fc5ae-284">承認が不要なパスをプリレンダリングする。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-284">Prerenders paths for which authorization isn't required.</span></span>
 * <span data-ttu-id="fc5ae-285">承認が必要なパスをプリレンダリングしない。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-285">Doesn't prerender paths for which authorization is required.</span></span>
@@ -867,7 +867,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     ...
 
-    services.Add:::no-loc(Razor):::Pages();
+    services.AddRazorPages();
     services.AddScoped<AuthenticationStateProvider, 
         ServerAuthenticationStateProvider>();
     services.AddScoped<SignOutSessionStateManager>();
@@ -876,7 +876,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="fc5ae-288">サーバー アプリの `Startup.Configure` メソッドで、[`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) を [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.:::no-loc(Razor):::PagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A) に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-288">In the server app's `Startup.Configure` method, replace [`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) with [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.:::no-loc(Razor):::PagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span></span>
+<span data-ttu-id="fc5ae-288">サーバー アプリの `Startup.Configure` メソッドで、[`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) を [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A) に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-288">In the server app's `Startup.Configure` method, replace [`endpoints.MapFallbackToFile("index.html")`](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) with [`endpoints.MapFallbackToPage("/_Host")`](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -907,7 +907,7 @@ app.UseEndpoints(endpoints =>
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a><span data-ttu-id="fc5ae-295">ホストされているアプリおよびサードパーティ ログイン プロバイダーに関するオプション</span><span class="sxs-lookup"><span data-stu-id="fc5ae-295">Options for hosted apps and third-party login providers</span></span>
 
-<span data-ttu-id="fc5ae-296">ホストされている :::no-loc(Blazor WebAssembly)::: アプリをサードパーティ プロバイダーで認証および承認する場合、ユーザーの認証にはいくつかのオプションを使用できます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-296">When authenticating and authorizing a hosted :::no-loc(Blazor WebAssembly)::: app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="fc5ae-297">どれを選択するかは、シナリオによって異なります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-297">Which one you choose depends on your scenario.</span></span>
+<span data-ttu-id="fc5ae-296">ホストされている Blazor WebAssembly アプリをサードパーティ プロバイダーで認証および承認する場合、ユーザーの認証にはいくつかのオプションを使用できます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-296">When authenticating and authorizing a hosted Blazor WebAssembly app with a third-party provider, there are several options available for authenticating the user.</span></span> <span data-ttu-id="fc5ae-297">どれを選択するかは、シナリオによって異なります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-297">Which one you choose depends on your scenario.</span></span>
 
 <span data-ttu-id="fc5ae-298">詳細については、「<xref:security/authentication/social/additional-claims>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-298">For more information, see <xref:security/authentication/social/additional-claims>.</span></span>
 
@@ -927,13 +927,13 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a><span data-ttu-id="fc5ae-305">サードパーティ プロバイダーでユーザーを認証し、ホスト サーバーおよびサード パーティ上で保護された API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="fc5ae-305">Authenticate users with a third-party provider and call protected APIs on the host server and the third party</span></span>
 
-<span data-ttu-id="fc5ae-306">サードパーティのログイン プロバイダーを使用して、:::no-loc(Identity)::: の構成を行います。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-306">Configure :::no-loc(Identity)::: with a third-party login provider.</span></span> <span data-ttu-id="fc5ae-307">サードパーティ API へのアクセスに必要なトークンを取得し、それを格納します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-307">Obtain the tokens required for third-party API access and store them.</span></span>
+<span data-ttu-id="fc5ae-306">サードパーティのログイン プロバイダーを使用して、Identity の構成を行います。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-306">Configure Identity with a third-party login provider.</span></span> <span data-ttu-id="fc5ae-307">サードパーティ API へのアクセスに必要なトークンを取得し、それを格納します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-307">Obtain the tokens required for third-party API access and store them.</span></span>
 
-<span data-ttu-id="fc5ae-308">ユーザーがログインすると、認証プロセスの一環として、アクセス トークンと更新トークンが :::no-loc(Identity):::ID によって収集されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-308">When a user logs in, :::no-loc(Identity)::: collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="fc5ae-309">その時点で、サードパーティ API の API 呼び出しを行うために使用できる方法はいくつかあります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-309">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
+<span data-ttu-id="fc5ae-308">ユーザーがログインすると、認証プロセスの一環として、アクセス トークンと更新トークンが IdentityID によって収集されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-308">When a user logs in, Identity collects access and refresh tokens as part of the authentication process.</span></span> <span data-ttu-id="fc5ae-309">その時点で、サードパーティ API の API 呼び出しを行うために使用できる方法はいくつかあります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-309">At that point, there are a couple of approaches available for making API calls to third-party APIs.</span></span>
 
 #### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a><span data-ttu-id="fc5ae-310">サーバー アクセス トークンを使用してサードパーティのアクセス トークンを取得する</span><span class="sxs-lookup"><span data-stu-id="fc5ae-310">Use a server access token to retrieve the third-party access token</span></span>
 
-<span data-ttu-id="fc5ae-311">サーバー上で生成されたアクセス トークンを使用して、サーバー API エンドポイントからサードパーティのアクセストークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-311">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="fc5ae-312">そこから、サードパーティのアクセス トークンを使用して、クライアント上の :::no-loc(Identity):::ID からサードパーティ API リソースを直接呼び出します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-312">From there, use the third-party access token to call third-party API resources directly from :::no-loc(Identity)::: on the client.</span></span>
+<span data-ttu-id="fc5ae-311">サーバー上で生成されたアクセス トークンを使用して、サーバー API エンドポイントからサードパーティのアクセストークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-311">Use the access token generated on the server to retrieve the third-party access token from a server API endpoint.</span></span> <span data-ttu-id="fc5ae-312">そこから、サードパーティのアクセス トークンを使用して、クライアント上の IdentityID からサードパーティ API リソースを直接呼び出します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-312">From there, use the third-party access token to call third-party API resources directly from Identity on the client.</span></span>
 
 <span data-ttu-id="fc5ae-313">この方法はお勧めしません。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-313">We don't recommend this approach.</span></span> <span data-ttu-id="fc5ae-314">この方法では、サードパーティのアクセス トークンをパブリック クライアント用に生成されたものとして扱う必要があります。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-314">This approach requires treating the third-party access token as if it were generated for a public client.</span></span> <span data-ttu-id="fc5ae-315">OAuth 規約では、パブリック アプリにはクライアント シークレットがありません。これはシークレットを安全に格納することが信頼できないためです。アクセス トークンは機密クライアントに対して生成されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-315">In OAuth terms, the public app doesn't have a client secret because it can't be trusted to store secrets safely, and the access token is produced for a confidential client.</span></span> <span data-ttu-id="fc5ae-316">機密クライアントとは、クライアント シークレットを持っていてシークレットを安全に格納できると想定されるクライアントです。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-316">A confidential client is a client that has a client secret and is assumed to be able to safely store secrets.</span></span>
 
@@ -951,7 +951,7 @@ app.UseEndpoints(endpoints =>
 
 ## <a name="use-openid-connect-oidc-v20-endpoints"></a><span data-ttu-id="fc5ae-325">OpenID Connect (OIDC) v2.0 エンドポイントを使用する</span><span class="sxs-lookup"><span data-stu-id="fc5ae-325">Use OpenID Connect (OIDC) v2.0 endpoints</span></span>
 
-<span data-ttu-id="fc5ae-326">認証ライブラリと :::no-loc(Blazor)::: プロジェクト テンプレートでは、Open ID Connect (OIDC) v1.0 エンドポイントが使用されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-326">The authentication library and :::no-loc(Blazor)::: project templates use OpenID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="fc5ae-327">v2.0 エンドポイントを使用するには、JWT ベアラー <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> オプションの構成を行います。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-327">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="fc5ae-328">次の例では、<xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> プロパティに `v2.0` セグメントを追加することで、v2.0 に対して AAD の構成が行われます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-328">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> property:</span></span>
+<span data-ttu-id="fc5ae-326">認証ライブラリと Blazor プロジェクト テンプレートでは、Open ID Connect (OIDC) v1.0 エンドポイントが使用されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-326">The authentication library and Blazor project templates use OpenID Connect (OIDC) v1.0 endpoints.</span></span> <span data-ttu-id="fc5ae-327">v2.0 エンドポイントを使用するには、JWT ベアラー <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> オプションの構成を行います。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-327">To use a v2.0 endpoint, configure the JWT Bearer <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> option.</span></span> <span data-ttu-id="fc5ae-328">次の例では、<xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> プロパティに `v2.0` セグメントを追加することで、v2.0 に対して AAD の構成が行われます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-328">In the following example, AAD is configured for v2.0 by appending a `v2.0` segment to the <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> property:</span></span>
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -962,7 +962,7 @@ builder.Services.Configure<JwtBearerOptions>(
     });
 ```
 
-<span data-ttu-id="fc5ae-329">または、アプリ設定ファイル (`:::no-loc(appsettings.json):::`) で設定を行うこともできます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-329">Alternatively, the setting can be made in the app settings (`:::no-loc(appsettings.json):::`) file:</span></span>
+<span data-ttu-id="fc5ae-329">または、アプリ設定ファイル (`appsettings.json`) で設定を行うこともできます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-329">Alternatively, the setting can be made in the app settings (`appsettings.json`) file:</span></span>
 
 ```json
 {
@@ -973,13 +973,13 @@ builder.Services.Configure<JwtBearerOptions>(
 }
 ```
 
-<span data-ttu-id="fc5ae-330">証明機関へのセグメントを追跡することがアプリの OIDC プロバイダー (AAD 以外のプロバイダーなど) にとって適切でない場合は、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> プロパティを直接設定します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-330">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> property directly.</span></span> <span data-ttu-id="fc5ae-331"><xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> またはアプリ設定ファイル (`:::no-loc(appsettings.json):::`) で `Authority` キーを使用してプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-331">Either set the property in <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> or in the app settings file (`:::no-loc(appsettings.json):::`) with the `Authority` key.</span></span>
+<span data-ttu-id="fc5ae-330">証明機関へのセグメントを追跡することがアプリの OIDC プロバイダー (AAD 以外のプロバイダーなど) にとって適切でない場合は、<xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> プロパティを直接設定します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-330">If tacking on a segment to the authority isn't appropriate for the app's OIDC provider, such as with non-AAD providers, set the <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> property directly.</span></span> <span data-ttu-id="fc5ae-331"><xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> またはアプリ設定ファイル (`appsettings.json`) で `Authority` キーを使用してプロパティを設定します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-331">Either set the property in <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions> or in the app settings file (`appsettings.json`) with the `Authority` key.</span></span>
 
 <span data-ttu-id="fc5ae-332">ID トークンの要求のリストは、v2.0 エンドポイントで変更されています。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-332">The list of claims in the ID token changes for v2.0 endpoints.</span></span> <span data-ttu-id="fc5ae-333">詳細については、「[Microsoft ID プラットフォーム (v2.0) に更新する理由](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-333">For more information, see [Why update to Microsoft identity platform (v2.0)?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).</span></span>
 
 ## <a name="configure-and-use-grpc-in-components"></a><span data-ttu-id="fc5ae-334">コンポーネントで gRPC を構成し、使用する</span><span class="sxs-lookup"><span data-stu-id="fc5ae-334">Configure and use gRPC in components</span></span>
 
-<span data-ttu-id="fc5ae-335">[ASP.NET Core gRPC フレームワーク](xref:grpc/index)を使用するように :::no-loc(Blazor WebAssembly)::: アプリを構成するには:</span><span class="sxs-lookup"><span data-stu-id="fc5ae-335">To configure a :::no-loc(Blazor WebAssembly)::: app to use the [ASP.NET Core gRPC framework](xref:grpc/index):</span></span>
+<span data-ttu-id="fc5ae-335">[ASP.NET Core gRPC フレームワーク](xref:grpc/index)を使用するように Blazor WebAssembly アプリを構成するには:</span><span class="sxs-lookup"><span data-stu-id="fc5ae-335">To configure a Blazor WebAssembly app to use the [ASP.NET Core gRPC framework](xref:grpc/index):</span></span>
 
 * <span data-ttu-id="fc5ae-336">サーバーで gRPC-Web を有効にします。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-336">Enable gRPC-Web on the server.</span></span> <span data-ttu-id="fc5ae-337">詳細については、「<xref:grpc/browser>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-337">For more information, see <xref:grpc/browser>.</span></span>
 * <span data-ttu-id="fc5ae-338">アプリのメッセージ ハンドラーに gRPC サービスを登録します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-338">Register gRPC services for the app's message handler.</span></span> <span data-ttu-id="fc5ae-339">次の例では、gRPC チュートリアル[ (`Program.Main`) から ](xref:tutorials/grpc/grpc-start#create-a-grpc-service)`GreeterClient` サービスを使用するように、アプリの認可メッセージ ハンドラーが構成されます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-339">The following example configures the app's authorization message handler to use the [`GreeterClient` service from the gRPC tutorial](xref:tutorials/grpc/grpc-start#create-a-grpc-service) (`Program.Main`):</span></span>
@@ -1007,7 +1007,7 @@ builder.Services.AddScoped(sp =>
 });
 ```
 
-<span data-ttu-id="fc5ae-340">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `:::no-loc(Blazor):::Sample`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-340">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span> <span data-ttu-id="fc5ae-341">ホストされている :::no-loc(Blazor)::: ソリューションの `Shared` プロジェクトに `.proto` ファイルを置きます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-341">Place the `.proto` file in the `Shared` project of the hosted :::no-loc(Blazor)::: solution.</span></span>
+<span data-ttu-id="fc5ae-340">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `BlazorSample`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-340">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `BlazorSample`).</span></span> <span data-ttu-id="fc5ae-341">ホストされている Blazor ソリューションの `Shared` プロジェクトに `.proto` ファイルを置きます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-341">Place the `.proto` file in the `Shared` project of the hosted Blazor solution.</span></span>
 
 <span data-ttu-id="fc5ae-342">クライアント アプリのコンポーネントでは、gRPC クライアント (`Pages/Grpc.razor`) を使用し、gRPC 呼び出しを行うことができます。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-342">A component in the client app can make gRPC calls using the gRPC client (`Pages/Grpc.razor`):</span></span>
 
@@ -1049,7 +1049,7 @@ Server response: <strong>@serverResponse</strong>
 }
 ```
 
-<span data-ttu-id="fc5ae-343">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `:::no-loc(Blazor):::Sample`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-343">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span> <span data-ttu-id="fc5ae-344">`Status.DebugException` プロパティを使用するには、[Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) バージョン 2.30.0 以降を使用します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-344">To use the `Status.DebugException` property, use [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 or later.</span></span>
+<span data-ttu-id="fc5ae-343">プレースホルダー `{APP ASSEMBLY}` は、アプリのアセンブリ名です (例: `BlazorSample`)。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-343">The placeholder `{APP ASSEMBLY}` is the app's assembly name (for example, `BlazorSample`).</span></span> <span data-ttu-id="fc5ae-344">`Status.DebugException` プロパティを使用するには、[Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) バージョン 2.30.0 以降を使用します。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-344">To use the `Status.DebugException` property, use [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 or later.</span></span>
 
 <span data-ttu-id="fc5ae-345">詳細については、「<xref:grpc/browser>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="fc5ae-345">For more information, see <xref:grpc/browser>.</span></span>
 

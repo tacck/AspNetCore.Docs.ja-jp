@@ -1,22 +1,22 @@
 ---
-title: 'パート 7、ASP.NET Core で :::no-loc(Razor)::: ページでの新しいフィールドの追加'
+title: 'パート 7、ASP.NET Core で Razor ページでの新しいフィールドの追加'
 author: rick-anderson
-description: ':::no-loc(Razor)::: ページのチュートリアル シリーズのパート 7。'
+description: 'Razor ページのチュートリアル シリーズのパート 7。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/new-field
 ms.openlocfilehash: 951a8ada57ae523f362313426c0279556eb8339b
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93050616"
 ---
-# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a><span data-ttu-id="9ccbc-103">パート 7、ASP.NET Core で :::no-loc(Razor)::: ページでの新しいフィールドの追加</span><span class="sxs-lookup"><span data-stu-id="9ccbc-103">Part 7, add a new field to a :::no-loc(Razor)::: Page in ASP.NET Core</span></span>
+# <a name="part-7-add-a-new-field-to-a-no-locrazor-page-in-aspnet-core"></a><span data-ttu-id="9ccbc-103">パート 7、ASP.NET Core で Razor ページでの新しいフィールドの追加</span><span class="sxs-lookup"><span data-stu-id="9ccbc-103">Part 7, add a new field to a Razor Page in ASP.NET Core</span></span>
 
 <span data-ttu-id="9ccbc-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="9ccbc-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -49,7 +49,7 @@ ms.locfileid: "93050616"
 
 <span data-ttu-id="9ccbc-113">*Models/Movie.cs* ファイルを開き、`Rating` プロパティを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-113">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 <span data-ttu-id="9ccbc-114">アプリをビルドします。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-114">Build the app.</span></span>
 
@@ -57,12 +57,12 @@ ms.locfileid: "93050616"
 
 <a name="addrat"></a>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 <span data-ttu-id="9ccbc-116">次のページを更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-116">Update the following pages:</span></span>
 
 * <span data-ttu-id="9ccbc-117">[削除] と [詳細] ページに、`Rating` フィールドを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-117">Add the `Rating` field to the Delete and Details pages.</span></span>
-* <span data-ttu-id="9ccbc-118">[Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Create.cshtml) を `Rating` フィールドを使用して更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-118">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
+* <span data-ttu-id="9ccbc-118">[Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) を `Rating` フィールドを使用して更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-118">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
 * <span data-ttu-id="9ccbc-119">[編集] ページに、`Rating` フィールドを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-119">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="9ccbc-120">DB を更新して新しいフィールドが含まれるようになるまでアプリは動作しません。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-120">The app won't work until the DB is updated to include the new field.</span></span> <span data-ttu-id="9ccbc-121">データベースを更新せずにアプリを実行すると、次の `SqlException` がスローされます。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-121">Running the app without updating the database throws a `SqlException`:</span></span>
@@ -83,9 +83,9 @@ ms.locfileid: "93050616"
 
 <span data-ttu-id="9ccbc-135">新しい列に値を提供するように、`SeedData` クラスを更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-135">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="9ccbc-136">下に変更のサンプルがありますが、`new Movie` ブロックごとにこの変更を行ってください。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-136">A sample change is shown below, but you'll want to make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="9ccbc-137">[完成した SeedData.cs ファイル](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedDataRating.cs)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-137">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="9ccbc-137">[完成した SeedData.cs ファイル](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-137">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="9ccbc-138">ソリューションをビルドします。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-138">Build the solution.</span></span>
 
@@ -177,18 +177,18 @@ dotnet ef database update
 
 <span data-ttu-id="9ccbc-175">*Models/Movie.cs* ファイルを開き、`Rating` プロパティを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-175">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
 <span data-ttu-id="9ccbc-176">アプリをビルドします。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-176">Build the app.</span></span>
 
 <span data-ttu-id="9ccbc-177">*Pages/Movies/Index.cshtml* を編集し、`Rating` フィールドを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-177">Edit *Pages/Movies/Index.cshtml* , and add a `Rating` field:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
 <span data-ttu-id="9ccbc-178">次のページを更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-178">Update the following pages:</span></span>
 
 * <span data-ttu-id="9ccbc-179">[削除] と [詳細] ページに、`Rating` フィールドを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-179">Add the `Rating` field to the Delete and Details pages.</span></span>
-* <span data-ttu-id="9ccbc-180">[Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Create.cshtml) を `Rating` フィールドを使用して更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-180">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
+* <span data-ttu-id="9ccbc-180">[Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) を `Rating` フィールドを使用して更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-180">Update [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
 * <span data-ttu-id="9ccbc-181">[編集] ページに、`Rating` フィールドを追加します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-181">Add the `Rating` field to the Edit Page.</span></span>
 
 <span data-ttu-id="9ccbc-182">DB を更新して新しいフィールドが含まれるようになるまでアプリは動作しません。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-182">The app won't work until the DB is updated to include the new field.</span></span> <span data-ttu-id="9ccbc-183">ここで実行すると、アプリによって `SqlException` がスローされます。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-183">If run now, the app throws a `SqlException`:</span></span>
@@ -209,9 +209,9 @@ dotnet ef database update
 
 <span data-ttu-id="9ccbc-197">新しい列に値を提供するように、`SeedData` クラスを更新します。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-197">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="9ccbc-198">下に変更のサンプルがありますが、`new Movie` ブロックごとにこの変更を行ってください。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-198">A sample change is shown below, but you'll want to make this change for each `new Movie` block.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="9ccbc-199">[完成した SeedData.cs ファイル](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-199">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="9ccbc-199">[完成した SeedData.cs ファイル](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-199">See the [completed SeedData.cs file](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).</span></span>
 
 <span data-ttu-id="9ccbc-200">ソリューションをビルドします。</span><span class="sxs-lookup"><span data-stu-id="9ccbc-200">Build the solution.</span></span>
 

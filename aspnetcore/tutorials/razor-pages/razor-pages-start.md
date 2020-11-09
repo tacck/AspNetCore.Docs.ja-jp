@@ -1,21 +1,21 @@
 ---
-title: 'チュートリアル: ASP.NET Core の :::no-loc(Razor)::: Pages の概要'
+title: 'チュートリアル: ASP.NET Core の Razor Pages の概要'
 author: rick-anderson
-description: 'このチュートリアル シリーズでは、ASP.NET Core で :::no-loc(Razor)::: ページを使用する方法を示します。 モデルの作成、:::no-loc(Razor)::: ページのコードの生成、Entity Framework Core と SQL Server を使用したデータ アクセス、検索機能の追加、入力検証の追加、移行を使用したモデルの更新の方法について学習します。'
+description: 'このチュートリアル シリーズでは、ASP.NET Core で Razor ページを使用する方法を示します。 モデルの作成、Razor ページのコードの生成、Entity Framework Core と SQL Server を使用したデータ アクセス、検索機能の追加、入力検証の追加、移行を使用したモデルの更新の方法について学習します。'
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/razor-pages-start
 ms.openlocfilehash: ab890b956b1242f183054b7ab4575a59072b4f50
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,12 +24,12 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93060236"
 ---
-# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="1d57e-104">チュートリアル: ASP.NET Core の :::no-loc(Razor)::: Pages の概要</span><span class="sxs-lookup"><span data-stu-id="1d57e-104">Tutorial: Get started with :::no-loc(Razor)::: Pages in ASP.NET Core</span></span>
+# <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="1d57e-104">チュートリアル: ASP.NET Core の Razor Pages の概要</span><span class="sxs-lookup"><span data-stu-id="1d57e-104">Tutorial: Get started with Razor Pages in ASP.NET Core</span></span>
 
 <span data-ttu-id="1d57e-105">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="1d57e-105">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
-<span data-ttu-id="1d57e-106">これは、ASP.NET Core の :::no-loc(Razor)::: Pages Web アプリの構築の基礎について説明する、シリーズの最初のチュートリアルです。</span><span class="sxs-lookup"><span data-stu-id="1d57e-106">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="1d57e-106">これは、ASP.NET Core の Razor Pages Web アプリの構築の基礎について説明する、シリーズの最初のチュートリアルです。</span><span class="sxs-lookup"><span data-stu-id="1d57e-106">This is the first tutorial of a series that teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -40,11 +40,11 @@ ms.locfileid: "93060236"
 <span data-ttu-id="1d57e-108">このチュートリアルでは、次の作業を行いました。</span><span class="sxs-lookup"><span data-stu-id="1d57e-108">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="1d57e-109">:::no-loc(Razor)::: Pages Web アプリを作成する。</span><span class="sxs-lookup"><span data-stu-id="1d57e-109">Create a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="1d57e-109">Razor Pages Web アプリを作成する。</span><span class="sxs-lookup"><span data-stu-id="1d57e-109">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="1d57e-110">アプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-110">Run the app.</span></span>
 > * <span data-ttu-id="1d57e-111">プロジェクト ファイルを確認する</span><span class="sxs-lookup"><span data-stu-id="1d57e-111">Examine the project files.</span></span>
 
-<span data-ttu-id="1d57e-112">このチュートリアルの最後には、以降のチュートリアルでビルドする作業用 :::no-loc(Razor)::: Pages Web アプリができあがります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-112">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="1d57e-112">このチュートリアルの最後には、以降のチュートリアルでビルドする作業用 Razor Pages Web アプリができあがります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-112">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![ホームまたはインデックス ページ](razor-pages-start/_static/home2.2.png)
 
@@ -64,14 +64,14 @@ ms.locfileid: "93060236"
 
 ---
 
-## <a name="create-a-no-locrazor-pages-web-app"></a><span data-ttu-id="1d57e-118">:::no-loc(Razor)::: Pages Web アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="1d57e-118">Create a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="create-a-no-locrazor-pages-web-app"></a><span data-ttu-id="1d57e-118">Razor Pages Web アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="1d57e-118">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="1d57e-119">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="1d57e-119">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="1d57e-120">Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-120">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
 * <span data-ttu-id="1d57e-121">新しい ASP.NET CoreWeb アプリケーションを作成し、 **[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-121">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
   <span data-ttu-id="1d57e-122">![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/np_2.1.png)</span><span class="sxs-lookup"><span data-stu-id="1d57e-122">![new ASP.NET Core Web Application](razor-pages-start/_static/np_2.1.png)</span></span>
-* <span data-ttu-id="1d57e-123">プロジェクトに **:::no-loc(Razor):::PagesMovie** という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-123">Name the project **:::no-loc(Razor):::PagesMovie**.</span></span> <span data-ttu-id="1d57e-124">コードのコピーおよび貼り付けを行う際に名前空間が一致するように、プロジェクトに *:::no-loc(Razor):::PagesMovie* という名前を付けることが重要です。</span><span class="sxs-lookup"><span data-stu-id="1d57e-124">It's important to name the project *:::no-loc(Razor):::PagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="1d57e-123">プロジェクトに **RazorPagesMovie** という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-123">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="1d57e-124">コードのコピーおよび貼り付けを行う際に名前空間が一致するように、プロジェクトに *RazorPagesMovie* という名前を付けることが重要です。</span><span class="sxs-lookup"><span data-stu-id="1d57e-124">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
   <span data-ttu-id="1d57e-125">![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/config.png)</span><span class="sxs-lookup"><span data-stu-id="1d57e-125">![new ASP.NET Core Web Application](razor-pages-start/_static/config.png)</span></span>
 
 * <span data-ttu-id="1d57e-126">ドロップダウンの **[ASP.NET Core 3.1]** 、 **[Web アプリケーション]** の順に選択し、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-126">Select **ASP.NET Core 3.1** in the dropdown, **Web Application** , and then select **Create**.</span></span>
@@ -91,14 +91,14 @@ ms.locfileid: "93060236"
 * <span data-ttu-id="1d57e-133">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-133">Run the following commands:</span></span>
 
   ```dotnetcli
-  dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-  code -r :::no-loc(Razor):::PagesMovie
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="1d57e-134">`dotnet new` コマンド: *:::no-loc(Razor):::PagesMovie* フォルダーに新しい :::no-loc(Razor)::: Pages プロジェクトが作成されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-134">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-  * <span data-ttu-id="1d57e-135">`code` コマンドを実行すると、Visual Studio Code の現在のインスタンス内で *:::no-loc(Razor):::PagesMovie* フォルダーが開きます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-135">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="1d57e-134">`dotnet new` コマンド: *RazorPagesMovie* フォルダーに新しい Razor Pages プロジェクトが作成されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-134">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="1d57e-135">`code` コマンドを実行すると、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーが開きます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-135">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="1d57e-136">状態バーの OmniSharp フレーム アイコンが緑色になり、" **ビルドとデバッグに必要な資産が ':::no-loc(Razor):::PagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、</span><span class="sxs-lookup"><span data-stu-id="1d57e-136">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from ':::no-loc(Razor):::PagesMovie'. Add them?**</span></span> <span data-ttu-id="1d57e-137">**[はい]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-137">Select **Yes**.</span></span>
+* <span data-ttu-id="1d57e-136">状態バーの OmniSharp フレーム アイコンが緑色になり、" **ビルドとデバッグに必要な資産が 'RazorPagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、</span><span class="sxs-lookup"><span data-stu-id="1d57e-136">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="1d57e-137">**[はい]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-137">Select **Yes**.</span></span>
 
   <span data-ttu-id="1d57e-138">*launch.json* ファイルと *tasks.json* ファイルを格納している *.vscode* ディレクトリが、プロジェクトのルート ディレクトリに追加されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-138">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
@@ -119,9 +119,9 @@ ms.locfileid: "93060236"
 
   <span data-ttu-id="1d57e-148">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-148">Select **Next**.</span></span>
 
-* <span data-ttu-id="1d57e-149">プロジェクトに **:::no-loc(Razor):::PagesMovie** という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-149">Name the project **:::no-loc(Razor):::PagesMovie** , and then select **Create**.</span></span>
+* <span data-ttu-id="1d57e-149">プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-149">Name the project **RazorPagesMovie** , and then select **Create**.</span></span>
 
-  ![macOS でプロジェクトに名前を付ける](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+  ![macOS でプロジェクトに名前を付ける](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -137,9 +137,9 @@ ms.locfileid: "93060236"
 
 ### <a name="pages-folder"></a><span data-ttu-id="1d57e-154">Pages フォルダー</span><span class="sxs-lookup"><span data-stu-id="1d57e-154">Pages folder</span></span>
 
-<span data-ttu-id="1d57e-155">:::no-loc(Razor)::: ページとサポート ファイルが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-155">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="1d57e-156">各 :::no-loc(Razor)::: ページは、次のファイルのペアとなります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-156">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="1d57e-155">Razor ページとサポート ファイルが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-155">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="1d57e-156">各 Razor ページは、次のファイルのペアとなります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-156">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="1d57e-157">*.cshtml* ファイル: HTML マークアップと、:::no-loc(Razor)::: 構文を使用した C# コードが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-157">A *.cshtml* file that contains HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="1d57e-157">*.cshtml* ファイル: HTML マークアップと、Razor 構文を使用した C# コードが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-157">A *.cshtml* file that contains HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="1d57e-158">*.cshtml.cs* ファイル: ページ イベントを処理する C# コードが保存されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-158">A *.cshtml.cs* file that contains C# code that handles page events.</span></span>
 
 <span data-ttu-id="1d57e-159">サポート ファイルには、アンダー スコアで始まる名前が付けられます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-159">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="1d57e-160">たとえば、 *_Layout.cshtml* ファイルでは、すべてのページに共通の UI 要素が構成されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-160">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="1d57e-161">このファイルでは、ページの上部に表示されるナビゲーション メニューと、ページの下部に表示される著作権の通知が設定されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-161">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="1d57e-162">詳細については、「<xref:mvc/views/layout>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1d57e-162">For more information, see <xref:mvc/views/layout>.</span></span>
@@ -173,7 +173,7 @@ ms.locfileid: "93060236"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="1d57e-178">これは、シリーズの最初のチュートリアルです。</span><span class="sxs-lookup"><span data-stu-id="1d57e-178">This is the first tutorial of a series.</span></span> <span data-ttu-id="1d57e-179">[このシリーズ](xref:tutorials/razor-pages/index)では、ASP.NET Core の :::no-loc(Razor)::: Pages Web アプリの構築の基礎について説明します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-179">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core :::no-loc(Razor)::: Pages web app.</span></span>
+<span data-ttu-id="1d57e-178">これは、シリーズの最初のチュートリアルです。</span><span class="sxs-lookup"><span data-stu-id="1d57e-178">This is the first tutorial of a series.</span></span> <span data-ttu-id="1d57e-179">[このシリーズ](xref:tutorials/razor-pages/index)では、ASP.NET Core の Razor Pages Web アプリの構築の基礎について説明します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-179">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -184,11 +184,11 @@ ms.locfileid: "93060236"
 <span data-ttu-id="1d57e-181">このチュートリアルでは、次の作業を行いました。</span><span class="sxs-lookup"><span data-stu-id="1d57e-181">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="1d57e-182">:::no-loc(Razor)::: Pages Web アプリを作成する。</span><span class="sxs-lookup"><span data-stu-id="1d57e-182">Create a :::no-loc(Razor)::: Pages web app.</span></span>
+> * <span data-ttu-id="1d57e-182">Razor Pages Web アプリを作成する。</span><span class="sxs-lookup"><span data-stu-id="1d57e-182">Create a Razor Pages web app.</span></span>
 > * <span data-ttu-id="1d57e-183">アプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-183">Run the app.</span></span>
 > * <span data-ttu-id="1d57e-184">プロジェクト ファイルを確認する</span><span class="sxs-lookup"><span data-stu-id="1d57e-184">Examine the project files.</span></span>
 
-<span data-ttu-id="1d57e-185">このチュートリアルの最後には、以降のチュートリアルでビルドする作業用 :::no-loc(Razor)::: Pages Web アプリができあがります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-185">At the end of this tutorial, you'll have a working :::no-loc(Razor)::: Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="1d57e-185">このチュートリアルの最後には、以降のチュートリアルでビルドする作業用 Razor Pages Web アプリができあがります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-185">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![ホームまたはインデックス ページ](razor-pages-start/_static/home2.2.png)
 
@@ -208,7 +208,7 @@ ms.locfileid: "93060236"
 
 ---
 
-## <a name="create-a-no-locrazor-pages-web-app"></a><span data-ttu-id="1d57e-191">:::no-loc(Razor)::: Pages Web アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="1d57e-191">Create a :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="create-a-no-locrazor-pages-web-app"></a><span data-ttu-id="1d57e-191">Razor Pages Web アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="1d57e-191">Create a Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="1d57e-192">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="1d57e-192">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -218,7 +218,7 @@ ms.locfileid: "93060236"
 
   ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/np_2.1.png)
 
-* <span data-ttu-id="1d57e-196">プロジェクトに **:::no-loc(Razor):::PagesMovie** という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-196">Name the project **:::no-loc(Razor):::PagesMovie**.</span></span> <span data-ttu-id="1d57e-197">コードのコピーおよび貼り付けを行う際に名前空間が一致するように、プロジェクトに *:::no-loc(Razor):::PagesMovie* という名前を付けることが重要です。</span><span class="sxs-lookup"><span data-stu-id="1d57e-197">It's important to name the project *:::no-loc(Razor):::PagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="1d57e-196">プロジェクトに **RazorPagesMovie** という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-196">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="1d57e-197">コードのコピーおよび貼り付けを行う際に名前空間が一致するように、プロジェクトに *RazorPagesMovie* という名前を付けることが重要です。</span><span class="sxs-lookup"><span data-stu-id="1d57e-197">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
 
   ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/config.png)
 
@@ -239,14 +239,14 @@ ms.locfileid: "93060236"
 * <span data-ttu-id="1d57e-206">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-206">Run the following commands:</span></span>
 
   ```dotnetcli
-  dotnet new webapp -o :::no-loc(Razor):::PagesMovie
-  code -r :::no-loc(Razor):::PagesMovie
+  dotnet new webapp -o RazorPagesMovie
+  code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="1d57e-207">`dotnet new` コマンド: *:::no-loc(Razor):::PagesMovie* フォルダーに新しい :::no-loc(Razor)::: Pages プロジェクトが作成されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-207">The `dotnet new` command creates a new :::no-loc(Razor)::: Pages project in the *:::no-loc(Razor):::PagesMovie* folder.</span></span>
-  * <span data-ttu-id="1d57e-208">`code` コマンドを実行すると、Visual Studio Code の現在のインスタンス内で *:::no-loc(Razor):::PagesMovie* フォルダーが開きます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-208">The `code` command opens the *:::no-loc(Razor):::PagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="1d57e-207">`dotnet new` コマンド: *RazorPagesMovie* フォルダーに新しい Razor Pages プロジェクトが作成されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-207">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="1d57e-208">`code` コマンドを実行すると、Visual Studio Code の現在のインスタンス内で *RazorPagesMovie* フォルダーが開きます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-208">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="1d57e-209">状態バーの OmniSharp フレーム アイコンが緑色になり、" **ビルドとデバッグに必要な資産が ':::no-loc(Razor):::PagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、</span><span class="sxs-lookup"><span data-stu-id="1d57e-209">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from ':::no-loc(Razor):::PagesMovie'. Add them?**</span></span> <span data-ttu-id="1d57e-210">**[はい]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-210">Select **Yes**.</span></span>
+* <span data-ttu-id="1d57e-209">状態バーの OmniSharp フレーム アイコンが緑色になり、" **ビルドとデバッグに必要な資産が 'RazorPagesMovie' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されたら、</span><span class="sxs-lookup"><span data-stu-id="1d57e-209">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="1d57e-210">**[はい]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-210">Select **Yes**.</span></span>
 
   <span data-ttu-id="1d57e-211">*launch.json* ファイルと *tasks.json* ファイルを格納している *.vscode* ディレクトリが、プロジェクトのルート ディレクトリに追加されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-211">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
@@ -265,9 +265,9 @@ ms.locfileid: "93060236"
 
   <span data-ttu-id="1d57e-220">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-220">Select **Next**.</span></span>
 
-* <span data-ttu-id="1d57e-221">プロジェクトに **:::no-loc(Razor):::PagesMovie** という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-221">Name the project **:::no-loc(Razor):::PagesMovie** , and then select **Create**.</span></span>
+* <span data-ttu-id="1d57e-221">プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="1d57e-221">Name the project **RazorPagesMovie** , and then select **Create**.</span></span>
 
-  ![nameproj](razor-pages-start/_static/:::no-loc(Razor):::PagesMovie.png)
+  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -339,9 +339,9 @@ ms.locfileid: "93060236"
 
 ### <a name="pages-folder"></a><span data-ttu-id="1d57e-257">Pages フォルダー</span><span class="sxs-lookup"><span data-stu-id="1d57e-257">Pages folder</span></span>
 
-<span data-ttu-id="1d57e-258">:::no-loc(Razor)::: ページとサポート ファイルが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-258">Contains :::no-loc(Razor)::: pages and supporting files.</span></span> <span data-ttu-id="1d57e-259">各 :::no-loc(Razor)::: ページは、次のファイルのペアとなります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-259">Each :::no-loc(Razor)::: page is a pair of files:</span></span>
+<span data-ttu-id="1d57e-258">Razor ページとサポート ファイルが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-258">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="1d57e-259">各 Razor ページは、次のファイルのペアとなります。</span><span class="sxs-lookup"><span data-stu-id="1d57e-259">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="1d57e-260">*.cshtml* ファイル: HTML マークアップと、:::no-loc(Razor)::: 構文を使用した C# コードが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-260">A *.cshtml* file that contains HTML markup with C# code using :::no-loc(Razor)::: syntax.</span></span>
+* <span data-ttu-id="1d57e-260">*.cshtml* ファイル: HTML マークアップと、Razor 構文を使用した C# コードが含まれます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-260">A *.cshtml* file that contains HTML markup with C# code using Razor syntax.</span></span>
 * <span data-ttu-id="1d57e-261">*.cshtml.cs* ファイル: ページ イベントを処理する C# コードが保存されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-261">A *.cshtml.cs* file that contains C# code that handles page events.</span></span>
 
 <span data-ttu-id="1d57e-262">サポート ファイルには、アンダー スコアで始まる名前が付けられます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-262">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="1d57e-263">たとえば、 *_Layout.cshtml* ファイルでは、すべてのページに共通の UI 要素が構成されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-263">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="1d57e-264">このファイルでは、ページの上部に表示されるナビゲーション メニューと、ページの下部に表示される著作権の通知が設定されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-264">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="1d57e-265">詳細については、「<xref:mvc/views/layout>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1d57e-265">For more information, see <xref:mvc/views/layout>.</span></span>
@@ -360,7 +360,7 @@ ms.locfileid: "93060236"
 
 ### <a name="startupcs"></a><span data-ttu-id="1d57e-275">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="1d57e-275">Startup.cs</span></span>
 
-<span data-ttu-id="1d57e-276">:::no-loc(cookie)::: に対する同意が必要かどうかなど、アプリの動作を構成するコードが保存されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-276">Contains code that configures app behavior, such as whether it requires consent for :::no-loc(cookie):::s.</span></span> <span data-ttu-id="1d57e-277">詳細については、「<xref:fundamentals/startup>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1d57e-277">For more information, see <xref:fundamentals/startup>.</span></span>
+<span data-ttu-id="1d57e-276">cookie に対する同意が必要かどうかなど、アプリの動作を構成するコードが保存されます。</span><span class="sxs-lookup"><span data-stu-id="1d57e-276">Contains code that configures app behavior, such as whether it requires consent for cookies.</span></span> <span data-ttu-id="1d57e-277">詳細については、「<xref:fundamentals/startup>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="1d57e-277">For more information, see <xref:fundamentals/startup>.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="1d57e-278">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="1d57e-278">Additional resources</span></span>
 

@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: performance/caching/distributed
 ms.openlocfilehash: 6d87c8de66bf5600189465b96dee903841106b6f
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -113,7 +113,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <span data-ttu-id="ab179-155"><xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、 [シークレットマネージャー](xref:security/app-secrets)または appsettings に格納され *:::no-loc(appsettings.json):::* / *ます)。ENVIRONMENT} json* ファイル)。</span><span class="sxs-lookup"><span data-stu-id="ab179-155">A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (and optionally, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> and <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) are typically stored outside of source control (for example, stored by the [Secret Manager](xref:security/app-secrets) or in *:::no-loc(appsettings.json):::*/*appsettings.{ENVIRONMENT}.json* files).</span></span> <span data-ttu-id="ab179-156">接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="ab179-156">The connection string may contain credentials that should be kept out of source control systems.</span></span>
+> <span data-ttu-id="ab179-155"><xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、 [シークレットマネージャー](xref:security/app-secrets)または appsettings に格納され *appsettings.json* / *ます)。ENVIRONMENT} json* ファイル)。</span><span class="sxs-lookup"><span data-stu-id="ab179-155">A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (and optionally, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> and <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) are typically stored outside of source control (for example, stored by the [Secret Manager](xref:security/app-secrets) or in *appsettings.json*/*appsettings.{ENVIRONMENT}.json* files).</span></span> <span data-ttu-id="ab179-156">接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="ab179-156">The connection string may contain credentials that should be kept out of source control systems.</span></span>
 
 ### <a name="distributed-redis-cache"></a><span data-ttu-id="ab179-157">分散 Redis Cache</span><span class="sxs-lookup"><span data-stu-id="ab179-157">Distributed Redis Cache</span></span>
 
@@ -280,7 +280,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <span data-ttu-id="ab179-252"><xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、 [シークレットマネージャー](xref:security/app-secrets)または appsettings に格納され *:::no-loc(appsettings.json):::* / *ます)。ENVIRONMENT} json* ファイル)。</span><span class="sxs-lookup"><span data-stu-id="ab179-252">A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (and optionally, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> and <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) are typically stored outside of source control (for example, stored by the [Secret Manager](xref:security/app-secrets) or in *:::no-loc(appsettings.json):::*/*appsettings.{ENVIRONMENT}.json* files).</span></span> <span data-ttu-id="ab179-253">接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="ab179-253">The connection string may contain credentials that should be kept out of source control systems.</span></span>
+> <span data-ttu-id="ab179-252"><xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、 [シークレットマネージャー](xref:security/app-secrets)または appsettings に格納され *appsettings.json* / *ます)。ENVIRONMENT} json* ファイル)。</span><span class="sxs-lookup"><span data-stu-id="ab179-252">A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (and optionally, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> and <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) are typically stored outside of source control (for example, stored by the [Secret Manager](xref:security/app-secrets) or in *appsettings.json*/*appsettings.{ENVIRONMENT}.json* files).</span></span> <span data-ttu-id="ab179-253">接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="ab179-253">The connection string may contain credentials that should be kept out of source control systems.</span></span>
 
 ### <a name="distributed-redis-cache"></a><span data-ttu-id="ab179-254">分散 Redis Cache</span><span class="sxs-lookup"><span data-stu-id="ab179-254">Distributed Redis Cache</span></span>
 
@@ -450,7 +450,7 @@ Table and index were created successfully.
 [!code-csharp[](distributed/samples/2.x/DistCacheSample/Startup.cs?name=snippet_AddDistributedSqlServerCache)]
 
 > [!NOTE]
-> <span data-ttu-id="ab179-350"><xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、 [シークレットマネージャー](xref:security/app-secrets)または appsettings に格納され *:::no-loc(appsettings.json):::* / *ます)。ENVIRONMENT} json* ファイル)。</span><span class="sxs-lookup"><span data-stu-id="ab179-350">A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (and optionally, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> and <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) are typically stored outside of source control (for example, stored by the [Secret Manager](xref:security/app-secrets) or in *:::no-loc(appsettings.json):::*/*appsettings.{ENVIRONMENT}.json* files).</span></span> <span data-ttu-id="ab179-351">接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="ab179-351">The connection string may contain credentials that should be kept out of source control systems.</span></span>
+> <span data-ttu-id="ab179-350"><xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*>通常、(および必要に応じ <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> て <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*> ) は、ソース管理の外部に格納されます (たとえば、 [シークレットマネージャー](xref:security/app-secrets)または appsettings に格納され *appsettings.json* / *ます)。ENVIRONMENT} json* ファイル)。</span><span class="sxs-lookup"><span data-stu-id="ab179-350">A <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.ConnectionString*> (and optionally, <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.SchemaName*> and <xref:Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions.TableName*>) are typically stored outside of source control (for example, stored by the [Secret Manager](xref:security/app-secrets) or in *appsettings.json*/*appsettings.{ENVIRONMENT}.json* files).</span></span> <span data-ttu-id="ab179-351">接続文字列には、ソース管理システムから保持する必要がある資格情報を含めることができます。</span><span class="sxs-lookup"><span data-stu-id="ab179-351">The connection string may contain credentials that should be kept out of source control systems.</span></span>
 
 ### <a name="distributed-redis-cache"></a><span data-ttu-id="ab179-352">分散 Redis Cache</span><span class="sxs-lookup"><span data-stu-id="ab179-352">Distributed Redis Cache</span></span>
 

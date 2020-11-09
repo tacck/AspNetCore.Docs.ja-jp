@@ -6,17 +6,17 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/authorization/limitingidentitybyscheme
 ms.openlocfilehash: 4dc86480d40d8ee40b3c03aa7fd2994e6c15b105
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -27,7 +27,7 @@ ms.locfileid: "93053125"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a><span data-ttu-id="50731-103">ASP.NET Core で特定のスキームを使用して承認する</span><span class="sxs-lookup"><span data-stu-id="50731-103">Authorize with a specific scheme in ASP.NET Core</span></span>
 
-<span data-ttu-id="50731-104">シングルページアプリケーション (spa) などの一部のシナリオでは、複数の認証方法を使用するのが一般的です。</span><span class="sxs-lookup"><span data-stu-id="50731-104">In some scenarios, such as Single Page Applications (SPAs), it's common to use multiple authentication methods.</span></span> <span data-ttu-id="50731-105">たとえば、アプリはベース :::no-loc(cookie)::: 認証を使用して、JavaScript 要求のログインと JWT ベアラー認証を使用する場合があります。</span><span class="sxs-lookup"><span data-stu-id="50731-105">For example, the app may use :::no-loc(cookie):::-based authentication to log in and JWT bearer authentication for JavaScript requests.</span></span> <span data-ttu-id="50731-106">場合によっては、アプリに認証ハンドラーのインスタンスが複数存在することがあります。</span><span class="sxs-lookup"><span data-stu-id="50731-106">In some cases, the app may have multiple instances of an authentication handler.</span></span> <span data-ttu-id="50731-107">たとえば、1つのに基本 id が格納されている2つの :::no-loc(cookie)::: ハンドラーと、multi-factor authentication (MFA) がトリガーされたときに作成されるハンドラーがあります。</span><span class="sxs-lookup"><span data-stu-id="50731-107">For example, two :::no-loc(cookie)::: handlers where one contains a basic identity and one is created when a multi-factor authentication (MFA) has been triggered.</span></span> <span data-ttu-id="50731-108">ユーザーが追加のセキュリティを必要とする操作を要求したため、MFA がトリガーされる可能性があります。</span><span class="sxs-lookup"><span data-stu-id="50731-108">MFA may be triggered because the user requested an operation that requires extra security.</span></span> <span data-ttu-id="50731-109">ユーザーが MFA を必要とするリソースを要求したときに MFA を適用する方法の詳細については、「MFA を使用した GitHub の問題の [保護」セクション](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="50731-109">For more information on enforcing MFA when a user requests a resource that requires MFA, see the GitHub issue [Protect section with MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).</span></span>
+<span data-ttu-id="50731-104">シングルページアプリケーション (spa) などの一部のシナリオでは、複数の認証方法を使用するのが一般的です。</span><span class="sxs-lookup"><span data-stu-id="50731-104">In some scenarios, such as Single Page Applications (SPAs), it's common to use multiple authentication methods.</span></span> <span data-ttu-id="50731-105">たとえば、アプリはベース cookie 認証を使用して、JavaScript 要求のログインと JWT ベアラー認証を使用する場合があります。</span><span class="sxs-lookup"><span data-stu-id="50731-105">For example, the app may use cookie-based authentication to log in and JWT bearer authentication for JavaScript requests.</span></span> <span data-ttu-id="50731-106">場合によっては、アプリに認証ハンドラーのインスタンスが複数存在することがあります。</span><span class="sxs-lookup"><span data-stu-id="50731-106">In some cases, the app may have multiple instances of an authentication handler.</span></span> <span data-ttu-id="50731-107">たとえば、1つのに基本 id が格納されている2つの cookie ハンドラーと、multi-factor authentication (MFA) がトリガーされたときに作成されるハンドラーがあります。</span><span class="sxs-lookup"><span data-stu-id="50731-107">For example, two cookie handlers where one contains a basic identity and one is created when a multi-factor authentication (MFA) has been triggered.</span></span> <span data-ttu-id="50731-108">ユーザーが追加のセキュリティを必要とする操作を要求したため、MFA がトリガーされる可能性があります。</span><span class="sxs-lookup"><span data-stu-id="50731-108">MFA may be triggered because the user requested an operation that requires extra security.</span></span> <span data-ttu-id="50731-109">ユーザーが MFA を必要とするリソースを要求したときに MFA を適用する方法の詳細については、「MFA を使用した GitHub の問題の [保護」セクション](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="50731-109">For more information on enforcing MFA when a user requests a resource that requires MFA, see the GitHub issue [Protect section with MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).</span></span>
 
 <span data-ttu-id="50731-110">認証時に認証サービスが構成されると、認証スキームに名前が付けられます。</span><span class="sxs-lookup"><span data-stu-id="50731-110">An authentication scheme is named when the authentication service is configured during authentication.</span></span> <span data-ttu-id="50731-111">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="50731-111">For example:</span></span>
 
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
     // Code omitted for brevity
 
     services.AddAuthentication()
-        .Add:::no-loc(Cookie):::(options => {
+        .AddCookie(options => {
             options.LoginPath = "/Account/Unauthorized/";
             options.AccessDeniedPath = "/Account/Forbidden/";
         })
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
         });
 ```
 
-<span data-ttu-id="50731-112">上記のコードでは、2つの認証ハンドラーが追加されています。1つは :::no-loc(cookie)::: s、もう1つはベアラー用です。</span><span class="sxs-lookup"><span data-stu-id="50731-112">In the preceding code, two authentication handlers have been added: one for :::no-loc(cookie):::s and one for bearer.</span></span>
+<span data-ttu-id="50731-112">上記のコードでは、2つの認証ハンドラーが追加されています。1つは cookie s、もう1つはベアラー用です。</span><span class="sxs-lookup"><span data-stu-id="50731-112">In the preceding code, two authentication handlers have been added: one for cookies and one for bearer.</span></span>
 
 >[!NOTE]
 ><span data-ttu-id="50731-113">既定のスキームを指定すると、 `HttpContext.User` プロパティはその id に設定されます。</span><span class="sxs-lookup"><span data-stu-id="50731-113">Specifying the default scheme results in the `HttpContext.User` property being set to that identity.</span></span> <span data-ttu-id="50731-114">この動作が望ましくない場合は、のパラメーターなしの形式を呼び出して無効に `AddAuthentication` します。</span><span class="sxs-lookup"><span data-stu-id="50731-114">If that behavior isn't desired, disable it by invoking the parameterless form of `AddAuthentication`.</span></span>
@@ -60,14 +60,14 @@ public void ConfigureServices(IServiceCollection services)
 [Authorize(AuthenticationSchemes = AuthSchemes)]
 public class MixedController : Controller
     // Requires the following imports:
-    // using Microsoft.AspNetCore.Authentication.:::no-loc(Cookie):::s;
+    // using Microsoft.AspNetCore.Authentication.Cookies;
     // using Microsoft.AspNetCore.Authentication.JwtBearer;
     private const string AuthSchemes =
-        :::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme + "," +
+        CookieAuthenticationDefaults.AuthenticationScheme + "," +
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-<span data-ttu-id="50731-120">前の例では、 :::no-loc(cookie)::: およびベアラーハンドラーの両方が実行され、現在のユーザーの id を作成して追加する機会があります。</span><span class="sxs-lookup"><span data-stu-id="50731-120">In the preceding example, both the :::no-loc(cookie)::: and bearer handlers run and have a chance to create and append an identity for the current user.</span></span> <span data-ttu-id="50731-121">1つのスキームのみを指定すると、対応するハンドラーが実行されます。</span><span class="sxs-lookup"><span data-stu-id="50731-121">By specifying a single scheme only, the corresponding handler runs.</span></span>
+<span data-ttu-id="50731-120">前の例では、 cookie およびベアラーハンドラーの両方が実行され、現在のユーザーの id を作成して追加する機会があります。</span><span class="sxs-lookup"><span data-stu-id="50731-120">In the preceding example, both the cookie and bearer handlers run and have a chance to create and append an identity for the current user.</span></span> <span data-ttu-id="50731-121">1つのスキームのみを指定すると、対応するハンドラーが実行されます。</span><span class="sxs-lookup"><span data-stu-id="50731-121">By specifying a single scheme only, the corresponding handler runs.</span></span>
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -75,7 +75,7 @@ public class MixedController : Controller
 public class MixedController : Controller
 ```
 
-<span data-ttu-id="50731-122">前のコードでは、"ベアラー" スキームを持つハンドラーだけが実行されます。</span><span class="sxs-lookup"><span data-stu-id="50731-122">In the preceding code, only the handler with the "Bearer" scheme runs.</span></span> <span data-ttu-id="50731-123">:::no-loc(cookie):::ベースの id は無視されます。</span><span class="sxs-lookup"><span data-stu-id="50731-123">Any :::no-loc(cookie):::-based identities are ignored.</span></span>
+<span data-ttu-id="50731-122">前のコードでは、"ベアラー" スキームを持つハンドラーだけが実行されます。</span><span class="sxs-lookup"><span data-stu-id="50731-122">In the preceding code, only the handler with the "Bearer" scheme runs.</span></span> <span data-ttu-id="50731-123">cookieベースの id は無視されます。</span><span class="sxs-lookup"><span data-stu-id="50731-123">Any cookie-based identities are ignored.</span></span>
 
 ## <a name="selecting-the-scheme-with-policies"></a><span data-ttu-id="50731-124">ポリシーを使用したスキームの選択</span><span class="sxs-lookup"><span data-stu-id="50731-124">Selecting the scheme with policies</span></span>
 

@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core の :::no-loc(Razor)::: Pages のフィルター メソッド'
+title: 'ASP.NET Core の Razor Pages のフィルター メソッド'
 author: Rick-Anderson
-description: 'ASP.NET Core の :::no-loc(Razor)::: Pages のフィルター メソッドを作成する方法を学習します。'
+description: 'ASP.NET Core の Razor Pages のフィルター メソッドを作成する方法を学習します。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: razor-pages/filter
 ms.openlocfilehash: a6d25c1b88e09560c1aad9aefd9148f7fe293909
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,15 +25,15 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056830"
 ---
-# <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="745eb-103">ASP.NET Core の :::no-loc(Razor)::: Pages のフィルター メソッド</span><span class="sxs-lookup"><span data-stu-id="745eb-103">Filter methods for :::no-loc(Razor)::: Pages in ASP.NET Core</span></span>
+# <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="745eb-103">ASP.NET Core の Razor Pages のフィルター メソッド</span><span class="sxs-lookup"><span data-stu-id="745eb-103">Filter methods for Razor Pages in ASP.NET Core</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 <span data-ttu-id="745eb-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="745eb-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="745eb-105">:::no-loc(Razor)::: ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、:::no-loc(Razor)::: ページ ハンドラーの実行の前後に :::no-loc(Razor)::: Pages でコードを実行できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-105">:::no-loc(Razor)::: Page filters [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) and [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) allow :::no-loc(Razor)::: Pages to run code before and after a :::no-loc(Razor)::: Page handler is run.</span></span> <span data-ttu-id="745eb-106">:::no-loc(Razor)::: ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。</span><span class="sxs-lookup"><span data-stu-id="745eb-106">:::no-loc(Razor)::: Page filters are similar to [ASP.NET Core MVC action filters](xref:mvc/controllers/filters#action-filters), except they can't be applied to individual page handler methods.</span></span>
+<span data-ttu-id="745eb-105">Razor ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、Razor ページ ハンドラーの実行の前後に Razor Pages でコードを実行できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-105">Razor Page filters [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) and [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) allow Razor Pages to run code before and after a Razor Page handler is run.</span></span> <span data-ttu-id="745eb-106">Razor ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。</span><span class="sxs-lookup"><span data-stu-id="745eb-106">Razor Page filters are similar to [ASP.NET Core MVC action filters](xref:mvc/controllers/filters#action-filters), except they can't be applied to individual page handler methods.</span></span>
 
-<span data-ttu-id="745eb-107">:::no-loc(Razor)::: ページ フィルター</span><span class="sxs-lookup"><span data-stu-id="745eb-107">:::no-loc(Razor)::: Page filters:</span></span>
+<span data-ttu-id="745eb-107">Razor ページ フィルター</span><span class="sxs-lookup"><span data-stu-id="745eb-107">Razor Page filters:</span></span>
 
 * <span data-ttu-id="745eb-108">モデルのバインドが行われる前の、ハンドラー メソッドが選択された後にコードを実行します。</span><span class="sxs-lookup"><span data-stu-id="745eb-108">Run code after a handler method has been selected, but before model binding occurs.</span></span>
 * <span data-ttu-id="745eb-109">モデルのバインドの完了後の、ハンドラー メソッドの実行前にコードを実行します。</span><span class="sxs-lookup"><span data-stu-id="745eb-109">Run code before the handler method executes, after model binding is complete.</span></span>
@@ -42,11 +42,11 @@ ms.locfileid: "93056830"
 * <span data-ttu-id="745eb-112">特定のページ ハンドラー メソッドには適用できません。</span><span class="sxs-lookup"><span data-stu-id="745eb-112">Cannot be applied to specific page handler methods.</span></span>
 * <span data-ttu-id="745eb-113">コンストラクターの依存関係は、[依存関係の挿入](xref:fundamentals/dependency-injection) (DI) によって入力されるようにできます。</span><span class="sxs-lookup"><span data-stu-id="745eb-113">Can have constructor dependencies populated by [Dependency Injection](xref:fundamentals/dependency-injection) (DI).</span></span> <span data-ttu-id="745eb-114">詳細については、「[ServiceFilterAttribute](../mvc/controllers/filters.md#servicefilterattribute)」と「[TypeFilterAttribute](../mvc/controllers/filters.md#typefilterattribute)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="745eb-114">For more information, see [ServiceFilterAttribute](../mvc/controllers/filters.md#servicefilterattribute) and [TypeFilterAttribute](../mvc/controllers/filters.md#typefilterattribute).</span></span>
 
-<span data-ttu-id="745eb-115">ページ コンストラクターとミドルウェアにより、ハンドラー メソッドが実行される前にカスタム コードの実行が可能になりますが、<xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel.HttpContext> とページへのアクセスを可能にするのは :::no-loc(Razor)::: ページ フィルターのみです。</span><span class="sxs-lookup"><span data-stu-id="745eb-115">While page constructors and middleware enable executing custom code before a handler method executes, only :::no-loc(Razor)::: Page filters enable access to <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel.HttpContext> and the page.</span></span> <span data-ttu-id="745eb-116">ミドルウェアは `HttpContext` にアクセスできますが、"ページ コンテキスト" にはアクセスできません。</span><span class="sxs-lookup"><span data-stu-id="745eb-116">Middleware has access to the `HttpContext`, but not to the "page context".</span></span> <span data-ttu-id="745eb-117">フィルターには、`HttpContext` へのアクセスを提供する派生型のパラメーター <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> があります。</span><span class="sxs-lookup"><span data-stu-id="745eb-117">Filters have a <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> derived parameter, which provides access to `HttpContext`.</span></span> <span data-ttu-id="745eb-118">ページ フィルターの例を次に示します。応答にヘッダーが追加する[フィルター属性を実装する](#ifa)。これは、コンストラクターやミドルウェアでは実行できません。</span><span class="sxs-lookup"><span data-stu-id="745eb-118">Here's a sample for a page filter: [Implement a filter attribute](#ifa) that adds a header to the response, something that can't be done with constructors or middleware.</span></span> <span data-ttu-id="745eb-119">ページとそのモデルのインスタンスへのアクセスを含む、ページ コンテキストへのアクセスは、フィルター、ハンドラー、:::no-loc(Razor)::: ページの本文を実行するときにのみ利用できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-119">Access to the page context, which includes access to the instances of the page and it's model, are only available when executing filters, handlers, or the body of a :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="745eb-115">ページ コンストラクターとミドルウェアにより、ハンドラー メソッドが実行される前にカスタム コードの実行が可能になりますが、<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> とページへのアクセスを可能にするのは Razor ページ フィルターのみです。</span><span class="sxs-lookup"><span data-stu-id="745eb-115">While page constructors and middleware enable executing custom code before a handler method executes, only Razor Page filters enable access to <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> and the page.</span></span> <span data-ttu-id="745eb-116">ミドルウェアは `HttpContext` にアクセスできますが、"ページ コンテキスト" にはアクセスできません。</span><span class="sxs-lookup"><span data-stu-id="745eb-116">Middleware has access to the `HttpContext`, but not to the "page context".</span></span> <span data-ttu-id="745eb-117">フィルターには、`HttpContext` へのアクセスを提供する派生型のパラメーター <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> があります。</span><span class="sxs-lookup"><span data-stu-id="745eb-117">Filters have a <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> derived parameter, which provides access to `HttpContext`.</span></span> <span data-ttu-id="745eb-118">ページ フィルターの例を次に示します。応答にヘッダーが追加する[フィルター属性を実装する](#ifa)。これは、コンストラクターやミドルウェアでは実行できません。</span><span class="sxs-lookup"><span data-stu-id="745eb-118">Here's a sample for a page filter: [Implement a filter attribute](#ifa) that adds a header to the response, something that can't be done with constructors or middleware.</span></span> <span data-ttu-id="745eb-119">ページとそのモデルのインスタンスへのアクセスを含む、ページ コンテキストへのアクセスは、フィルター、ハンドラー、Razor ページの本文を実行するときにのみ利用できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-119">Access to the page context, which includes access to the instances of the page and it's model, are only available when executing filters, handlers, or the body of a Razor Page.</span></span>
 
 <span data-ttu-id="745eb-120">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="745eb-120">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="745eb-121">:::no-loc(Razor)::: ページ フィルターには、グローバルまたはページ レベルで適用できる次のメソッドがあります。</span><span class="sxs-lookup"><span data-stu-id="745eb-121">:::no-loc(Razor)::: Page filters provide the following methods, which can be applied globally or at the page level:</span></span>
+<span data-ttu-id="745eb-121">Razor ページ フィルターには、グローバルまたはページ レベルで適用できる次のメソッドがあります。</span><span class="sxs-lookup"><span data-stu-id="745eb-121">Razor Page filters provide the following methods, which can be applied globally or at the page level:</span></span>
 
 * <span data-ttu-id="745eb-122">同期メソッド:</span><span class="sxs-lookup"><span data-stu-id="745eb-122">Synchronous methods:</span></span>
 
@@ -61,7 +61,7 @@ ms.locfileid: "93056830"
 
 <span data-ttu-id="745eb-129">フィルター インターフェイスの同期と非同期バージョンの **両方ではなく** 、 **いずれか** を実装します。</span><span class="sxs-lookup"><span data-stu-id="745eb-129">Implement **either** the synchronous or the async version of a filter interface, **not** both.</span></span> <span data-ttu-id="745eb-130">フレームワークは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="745eb-130">The framework checks first to see if the filter implements the async interface, and if so, it calls that.</span></span> <span data-ttu-id="745eb-131">していない場合は、同期インターフェイスのメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="745eb-131">If not, it calls the synchronous interface's method(s).</span></span> <span data-ttu-id="745eb-132">両方のインターフェイスを実装した場合、非同期メソッドのみが呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="745eb-132">If both interfaces are implemented, only the async methods are called.</span></span> <span data-ttu-id="745eb-133">ページのオーバーライドでもこの規則は同じです。オーバーライドの同期バージョンまたは非同期バージョンを実装でき、両方はできません。</span><span class="sxs-lookup"><span data-stu-id="745eb-133">The same rule applies to overrides in pages, implement the synchronous or the async version of the override, not both.</span></span>
 
-## <a name="implement-no-locrazor-page-filters-globally"></a><span data-ttu-id="745eb-134">:::no-loc(Razor)::: ページにフィルターをグローバルに実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-134">Implement :::no-loc(Razor)::: Page filters globally</span></span>
+## <a name="implement-no-locrazor-page-filters-globally"></a><span data-ttu-id="745eb-134">Razor ページにフィルターをグローバルに実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-134">Implement Razor Page filters globally</span></span>
 
 <span data-ttu-id="745eb-135">`IAsyncPageFilter` は、次のコードによって実装されます。</span><span class="sxs-lookup"><span data-stu-id="745eb-135">The following code implements `IAsyncPageFilter`:</span></span>
 
@@ -85,9 +85,9 @@ ms.locfileid: "93056830"
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/StartupSync.cs?name=snippet2)]
 
-## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a><span data-ttu-id="745eb-141">フィルター メソッドをオーバーライドして :::no-loc(Razor)::: ページにフィルターを実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-141">Implement :::no-loc(Razor)::: Page filters by overriding filter methods</span></span>
+## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a><span data-ttu-id="745eb-141">フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-141">Implement Razor Page filters by overriding filter methods</span></span>
 
-<span data-ttu-id="745eb-142">次のコードでは、非同期 :::no-loc(Razor)::: ページ フィルターをオーバーライドしています。</span><span class="sxs-lookup"><span data-stu-id="745eb-142">The following code overrides the asynchronous :::no-loc(Razor)::: Page filters:</span></span>
+<span data-ttu-id="745eb-142">次のコードでは、非同期 Razor ページ フィルターをオーバーライドしています。</span><span class="sxs-lookup"><span data-stu-id="745eb-142">The following code overrides the asynchronous Razor Page filters:</span></span>
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Index.cshtml.cs?name=snippet)]
 
@@ -123,9 +123,9 @@ ms.locfileid: "93056830"
 
 <span data-ttu-id="745eb-153">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="745eb-153">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="745eb-154">:::no-loc(Razor)::: ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、:::no-loc(Razor)::: ページ ハンドラーの実行の前後に :::no-loc(Razor)::: Pages でコードを実行できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-154">:::no-loc(Razor)::: Page filters [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) and [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) allow :::no-loc(Razor)::: Pages to run code before and after a :::no-loc(Razor)::: Page handler is run.</span></span> <span data-ttu-id="745eb-155">:::no-loc(Razor)::: ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。</span><span class="sxs-lookup"><span data-stu-id="745eb-155">:::no-loc(Razor)::: Page filters are similar to [ASP.NET Core MVC action filters](xref:mvc/controllers/filters#action-filters), except they can't be applied to individual page handler methods.</span></span>
+<span data-ttu-id="745eb-154">Razor ページのフィルターである [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) および [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) を使用すると、Razor ページ ハンドラーの実行の前後に Razor Pages でコードを実行できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-154">Razor Page filters [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) and [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) allow Razor Pages to run code before and after a Razor Page handler is run.</span></span> <span data-ttu-id="745eb-155">Razor ページ フィルターは、個々のページ ハンドラー メソッドに適用できないことを除き、[ASP.NET Core MVC アクション フィルター](xref:mvc/controllers/filters#action-filters)と類似しています。</span><span class="sxs-lookup"><span data-stu-id="745eb-155">Razor Page filters are similar to [ASP.NET Core MVC action filters](xref:mvc/controllers/filters#action-filters), except they can't be applied to individual page handler methods.</span></span>
 
-<span data-ttu-id="745eb-156">:::no-loc(Razor)::: ページ フィルター</span><span class="sxs-lookup"><span data-stu-id="745eb-156">:::no-loc(Razor)::: Page filters:</span></span>
+<span data-ttu-id="745eb-156">Razor ページ フィルター</span><span class="sxs-lookup"><span data-stu-id="745eb-156">Razor Page filters:</span></span>
 
 * <span data-ttu-id="745eb-157">モデルのバインドが行われる前の、ハンドラー メソッドが選択された後にコードを実行します。</span><span class="sxs-lookup"><span data-stu-id="745eb-157">Run code after a handler method has been selected, but before model binding occurs.</span></span>
 * <span data-ttu-id="745eb-158">モデルのバインドの完了後の、ハンドラー メソッドの実行前にコードを実行します。</span><span class="sxs-lookup"><span data-stu-id="745eb-158">Run code before the handler method executes, after model binding is complete.</span></span>
@@ -133,11 +133,11 @@ ms.locfileid: "93056830"
 * <span data-ttu-id="745eb-160">ページまたはグローバルに実装できます。</span><span class="sxs-lookup"><span data-stu-id="745eb-160">Can be implemented on a page or globally.</span></span>
 * <span data-ttu-id="745eb-161">特定のページ ハンドラー メソッドには適用できません。</span><span class="sxs-lookup"><span data-stu-id="745eb-161">Cannot be applied to specific page handler methods.</span></span>
 
-<span data-ttu-id="745eb-162">コードは、ページ コンストラクターまたはミドルウェアを使用してハンドラー メソッドの実行前に実行できますが、[HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_HttpContext) にアクセスできるのは :::no-loc(Razor)::: ページ フィルターのみです。</span><span class="sxs-lookup"><span data-stu-id="745eb-162">Code can be run before a handler method executes using the page constructor or middleware, but only :::no-loc(Razor)::: Page filters have access to [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_HttpContext).</span></span> <span data-ttu-id="745eb-163">フィルターには、`HttpContext` へのアクセスを提供する [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) 派生のパラメーターがあります。</span><span class="sxs-lookup"><span data-stu-id="745eb-163">Filters have a [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) derived parameter, which provides access to `HttpContext`.</span></span> <span data-ttu-id="745eb-164">たとえば、「[フィルター属性を実装する](#ifa)」のサンプルでは、応答にヘッダーが追加されます。これは、コンストラクターやミドルウェアでは実行できません。</span><span class="sxs-lookup"><span data-stu-id="745eb-164">For example, the [Implement a filter attribute](#ifa) sample adds a header to the response, something that can't be done with constructors or middleware.</span></span>
+<span data-ttu-id="745eb-162">コードは、ページ コンストラクターまたはミドルウェアを使用してハンドラー メソッドの実行前に実行できますが、[HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext) にアクセスできるのは Razor ページ フィルターのみです。</span><span class="sxs-lookup"><span data-stu-id="745eb-162">Code can be run before a handler method executes using the page constructor or middleware, but only Razor Page filters have access to [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext).</span></span> <span data-ttu-id="745eb-163">フィルターには、`HttpContext` へのアクセスを提供する [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) 派生のパラメーターがあります。</span><span class="sxs-lookup"><span data-stu-id="745eb-163">Filters have a [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) derived parameter, which provides access to `HttpContext`.</span></span> <span data-ttu-id="745eb-164">たとえば、「[フィルター属性を実装する](#ifa)」のサンプルでは、応答にヘッダーが追加されます。これは、コンストラクターやミドルウェアでは実行できません。</span><span class="sxs-lookup"><span data-stu-id="745eb-164">For example, the [Implement a filter attribute](#ifa) sample adds a header to the response, something that can't be done with constructors or middleware.</span></span>
 
 <span data-ttu-id="745eb-165">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="745eb-165">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="745eb-166">:::no-loc(Razor)::: ページ フィルターには、グローバルまたはページ レベルで適用できる次のメソッドがあります。</span><span class="sxs-lookup"><span data-stu-id="745eb-166">:::no-loc(Razor)::: Page filters provide the following methods, which can be applied globally or at the page level:</span></span>
+<span data-ttu-id="745eb-166">Razor ページ フィルターには、グローバルまたはページ レベルで適用できる次のメソッドがあります。</span><span class="sxs-lookup"><span data-stu-id="745eb-166">Razor Page filters provide the following methods, which can be applied globally or at the page level:</span></span>
 
 * <span data-ttu-id="745eb-167">同期メソッド:</span><span class="sxs-lookup"><span data-stu-id="745eb-167">Synchronous methods:</span></span>
 
@@ -153,7 +153,7 @@ ms.locfileid: "93056830"
 > [!NOTE]
 > <span data-ttu-id="745eb-174">フィルター インターフェイスの同期と非同期バージョンの両方ではなく、 **いずれか** を実装します。</span><span class="sxs-lookup"><span data-stu-id="745eb-174">Implement **either** the synchronous or the async version of a filter interface, not both.</span></span> <span data-ttu-id="745eb-175">フレームワークは、最初にフィルターが非同期インターフェイスを実装しているかどうかをチェックして、している場合はそれを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="745eb-175">The framework checks first to see if the filter implements the async interface, and if so, it calls that.</span></span> <span data-ttu-id="745eb-176">していない場合は、同期インターフェイスのメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="745eb-176">If not, it calls the synchronous interface's method(s).</span></span> <span data-ttu-id="745eb-177">両方のインターフェイスを実装した場合、非同期メソッドのみが呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="745eb-177">If both interfaces are implemented, only the async methods are called.</span></span> <span data-ttu-id="745eb-178">ページのオーバーライドでもこの規則は同じです。オーバーライドの同期バージョンまたは非同期バージョンを実装でき、両方はできません。</span><span class="sxs-lookup"><span data-stu-id="745eb-178">The same rule applies to overrides in pages, implement the synchronous or the async version of the override, not both.</span></span>
 
-## <a name="implement-no-locrazor-page-filters-globally"></a><span data-ttu-id="745eb-179">:::no-loc(Razor)::: ページにフィルターをグローバルに実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-179">Implement :::no-loc(Razor)::: Page filters globally</span></span>
+## <a name="implement-no-locrazor-page-filters-globally"></a><span data-ttu-id="745eb-179">Razor ページにフィルターをグローバルに実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-179">Implement Razor Page filters globally</span></span>
 
 <span data-ttu-id="745eb-180">`IAsyncPageFilter` は、次のコードによって実装されます。</span><span class="sxs-lookup"><span data-stu-id="745eb-180">The following code implements `IAsyncPageFilter`:</span></span>
 
@@ -181,9 +181,9 @@ ms.locfileid: "93056830"
 
 [!code-csharp[Main](filter/sample/PageFilter/StartupSync.cs?name=snippet2&highlight=11)]
 
-## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a><span data-ttu-id="745eb-188">フィルター メソッドをオーバーライドして :::no-loc(Razor)::: ページにフィルターを実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-188">Implement :::no-loc(Razor)::: Page filters by overriding filter methods</span></span>
+## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a><span data-ttu-id="745eb-188">フィルター メソッドをオーバーライドして Razor ページにフィルターを実装する</span><span class="sxs-lookup"><span data-stu-id="745eb-188">Implement Razor Page filters by overriding filter methods</span></span>
 
-<span data-ttu-id="745eb-189">次のコードでは、同期 :::no-loc(Razor)::: ページ フィルターをオーバーライドしています。</span><span class="sxs-lookup"><span data-stu-id="745eb-189">The following code overrides the synchronous :::no-loc(Razor)::: Page filters:</span></span>
+<span data-ttu-id="745eb-189">次のコードでは、同期 Razor ページ フィルターをオーバーライドしています。</span><span class="sxs-lookup"><span data-stu-id="745eb-189">The following code overrides the synchronous Razor Page filters:</span></span>
 
 [!code-csharp[Main](filter/sample/PageFilter/Pages/Index.cshtml.cs)]
 

@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/configuration/platform-specific-configuration
 ms.openlocfilehash: c12487875db69472ee328dfc7a611ee99974c770
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -106,7 +106,7 @@ ms.locfileid: "93061055"
 
 <span data-ttu-id="8af53-135">クラス ライブラリでは、ホスティング スタートアップの拡張機能を提供できます。</span><span class="sxs-lookup"><span data-stu-id="8af53-135">A hosting startup enhancement can be provided in a class library.</span></span> <span data-ttu-id="8af53-136">このライブラリには `HostingStartup` 属性が含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-136">The library contains a `HostingStartup` attribute.</span></span>
 
-<span data-ttu-id="8af53-137">[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、:::no-loc(Razor)::: Pages アプリ、 *HostingStartupApp* 、クラス ライブラリ、 *HostingStartupLibrary* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-137">The [sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) includes a :::no-loc(Razor)::: Pages app, *HostingStartupApp* , and a class library, *HostingStartupLibrary*.</span></span> <span data-ttu-id="8af53-138">クラス ライブラリには次のものが含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-138">The class library:</span></span>
+<span data-ttu-id="8af53-137">[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、 *HostingStartupApp* 、クラス ライブラリ、 *HostingStartupLibrary* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-137">The [sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) includes a Razor Pages app, *HostingStartupApp* , and a class library, *HostingStartupLibrary*.</span></span> <span data-ttu-id="8af53-138">クラス ライブラリには次のものが含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-138">The class library:</span></span>
 
 * <span data-ttu-id="8af53-139">`IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。</span><span class="sxs-lookup"><span data-stu-id="8af53-139">Contains a hosting startup class, `ServiceKeyInjection`, which implements `IHostingStartup`.</span></span> <span data-ttu-id="8af53-140">`ServiceKeyInjection` では、メモリ内の構成プロバイダー ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) を使用して、サービスの文字列のペアがアプリの構成に追加されます。</span><span class="sxs-lookup"><span data-stu-id="8af53-140">`ServiceKeyInjection` adds a pair of service strings to the app's configuration using the in-memory configuration provider ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).</span></span>
 * <span data-ttu-id="8af53-141">ホスティング スタートアップの名前空間とクラスを識別する `HostingStartup` 属性。</span><span class="sxs-lookup"><span data-stu-id="8af53-141">Includes a `HostingStartup` attribute that identifies the hosting startup's namespace and class.</span></span>
@@ -504,7 +504,7 @@ dotnet nuget locals all --clear
 
 <span data-ttu-id="8af53-343">クラス ライブラリでは、ホスティング スタートアップの拡張機能を提供できます。</span><span class="sxs-lookup"><span data-stu-id="8af53-343">A hosting startup enhancement can be provided in a class library.</span></span> <span data-ttu-id="8af53-344">このライブラリには `HostingStartup` 属性が含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-344">The library contains a `HostingStartup` attribute.</span></span>
 
-<span data-ttu-id="8af53-345">[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、:::no-loc(Razor)::: Pages アプリ、 *HostingStartupApp* 、クラス ライブラリ、 *HostingStartupLibrary* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-345">The [sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) includes a :::no-loc(Razor)::: Pages app, *HostingStartupApp* , and a class library, *HostingStartupLibrary*.</span></span> <span data-ttu-id="8af53-346">クラス ライブラリには次のものが含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-346">The class library:</span></span>
+<span data-ttu-id="8af53-345">[サンプル コード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)には、Razor Pages アプリ、 *HostingStartupApp* 、クラス ライブラリ、 *HostingStartupLibrary* が含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-345">The [sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) includes a Razor Pages app, *HostingStartupApp* , and a class library, *HostingStartupLibrary*.</span></span> <span data-ttu-id="8af53-346">クラス ライブラリには次のものが含まれています。</span><span class="sxs-lookup"><span data-stu-id="8af53-346">The class library:</span></span>
 
 * <span data-ttu-id="8af53-347">`IHostingStartup` を実装するホスティング スタートアップ クラス `ServiceKeyInjection`。</span><span class="sxs-lookup"><span data-stu-id="8af53-347">Contains a hosting startup class, `ServiceKeyInjection`, which implements `IHostingStartup`.</span></span> <span data-ttu-id="8af53-348">`ServiceKeyInjection` では、メモリ内の構成プロバイダー ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) を使用して、サービスの文字列のペアがアプリの構成に追加されます。</span><span class="sxs-lookup"><span data-stu-id="8af53-348">`ServiceKeyInjection` adds a pair of service strings to the app's configuration using the in-memory configuration provider ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).</span></span>
 * <span data-ttu-id="8af53-349">ホスティング スタートアップの名前空間とクラスを識別する `HostingStartup` 属性。</span><span class="sxs-lookup"><span data-stu-id="8af53-349">Includes a `HostingStartup` attribute that identifies the hosting startup's namespace and class.</span></span>

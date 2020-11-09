@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core :::no-loc(SignalR)::: の概要'
+title: 'ASP.NET Core SignalR の概要'
 author: bradygaster
-description: 'このチュートリアルでは、ASP.NET Core :::no-loc(SignalR)::: を使用するチャット アプリを作成します。'
+description: 'このチュートリアルでは、ASP.NET Core SignalR を使用するチャット アプリを作成します。'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/signalr
 ms.openlocfilehash: 59c296f3388e71254badb02fa3ae4279005c359c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,17 +25,17 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056882"
 ---
-# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a><span data-ttu-id="a4e63-103">チュートリアル: ASP.NET Core :::no-loc(SignalR)::: の概要</span><span class="sxs-lookup"><span data-stu-id="a4e63-103">Tutorial: Get started with ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a><span data-ttu-id="a4e63-103">チュートリアル: ASP.NET Core SignalR の概要</span><span class="sxs-lookup"><span data-stu-id="a4e63-103">Tutorial: Get started with ASP.NET Core SignalR</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="a4e63-104">このチュートリアルでは、:::no-loc(SignalR)::: を使用してリアルタイム アプリをビルドするための基礎について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-104">This tutorial teaches the basics of building a real-time app using :::no-loc(SignalR):::.</span></span> <span data-ttu-id="a4e63-105">以下の方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-105">You learn how to:</span></span>
+<span data-ttu-id="a4e63-104">このチュートリアルでは、SignalR を使用してリアルタイム アプリをビルドするための基礎について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-104">This tutorial teaches the basics of building a real-time app using SignalR.</span></span> <span data-ttu-id="a4e63-105">以下の方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-105">You learn how to:</span></span>
 
 > [!div class="checklist"]
 > * <span data-ttu-id="a4e63-106">Web プロジェクトを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-106">Create a web project.</span></span>
-> * <span data-ttu-id="a4e63-107">:::no-loc(SignalR)::: クライアント ライブラリを追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-107">Add the :::no-loc(SignalR)::: client library.</span></span>
-> * <span data-ttu-id="a4e63-108">:::no-loc(SignalR)::: ハブを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-108">Create a :::no-loc(SignalR)::: hub.</span></span>
-> * <span data-ttu-id="a4e63-109">:::no-loc(SignalR)::: を使用するようにプロジェクトを構成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-109">Configure the project to use :::no-loc(SignalR):::.</span></span>
+> * <span data-ttu-id="a4e63-107">SignalR クライアント ライブラリを追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-107">Add the SignalR client library.</span></span>
+> * <span data-ttu-id="a4e63-108">SignalR ハブを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-108">Create a SignalR hub.</span></span>
+> * <span data-ttu-id="a4e63-109">SignalR を使用するようにプロジェクトを構成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-109">Configure the project to use SignalR.</span></span>
 > * <span data-ttu-id="a4e63-110">任意のクライアントから、接続されているすべてのクライアントにメッセージを送信するコードを追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-110">Add code that sends messages from any client to all connected clients.</span></span>
 
 <span data-ttu-id="a4e63-111">最後には、次のように動作するチャット アプリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-111">At the end, you'll have a working chat app:</span></span>
@@ -66,11 +66,11 @@ ms.locfileid: "93056882"
 
 * <span data-ttu-id="a4e63-120">**[新しいプロジェクト]** ダイアログで、 **[ASP.NET Core Web アプリケーション]** 、 **[次へ]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-120">In the **Create a new project** dialog, select **ASP.NET Core Web Application** , and then select **Next**.</span></span>
 
-* <span data-ttu-id="a4e63-121">**[新しいプロジェクトの構成]** ダイアログで、プロジェクトに *:::no-loc(SignalR):::Chat* という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-121">In the **Configure your new project** dialog, name the project *:::no-loc(SignalR):::Chat* , and then select **Create**.</span></span>
+* <span data-ttu-id="a4e63-121">**[新しいプロジェクトの構成]** ダイアログで、プロジェクトに *SignalRChat* という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-121">In the **Configure your new project** dialog, name the project *SignalRChat* , and then select **Create**.</span></span>
 
 * <span data-ttu-id="a4e63-122">**[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-122">In the **Create a new ASP.NET Core web Application** dialog, select **.NET Core** and **ASP.NET Core 3.1**.</span></span> 
 
-* <span data-ttu-id="a4e63-123">:::no-loc(Razor)::: Pages を使用するプロジェクトを作成するには **[Web アプリケーション]** を選択し、次に **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-123">Select **Web Application** to create a project that uses :::no-loc(Razor)::: Pages, and then select **Create**.</span></span>
+* <span data-ttu-id="a4e63-123">Razor Pages を使用するプロジェクトを作成するには **[Web アプリケーション]** を選択し、次に **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-123">Select **Web Application** to create a project that uses Razor Pages, and then select **Create**.</span></span>
 
   ![Visual Studio の [新しいプロジェクト] ダイアログ ボックス](signalr/_static/3.x/signalr-new-project-dialog.png)
 
@@ -81,8 +81,8 @@ ms.locfileid: "93056882"
 * <span data-ttu-id="a4e63-127">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-127">Run the following commands:</span></span>
 
    ```dotnetcli
-   dotnet new webapp -o :::no-loc(SignalR):::Chat
-   code -r :::no-loc(SignalR):::Chat
+   dotnet new webapp -o SignalRChat
+   code -r SignalRChat
    ```
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="a4e63-128">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a4e63-128">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
@@ -93,13 +93,13 @@ ms.locfileid: "93056882"
 
 * <span data-ttu-id="a4e63-131">**[ターゲット フレームワーク]** が **.NET Core 3.1** に設定されていることを確認してから、 **[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-131">Make sure the **Target Framework** is set to **.NET Core 3.1** , and then select **Next**.</span></span>
 
-* <span data-ttu-id="a4e63-132">プロジェクトに *:::no-loc(SignalR):::Chat* という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-132">Name the project *:::no-loc(SignalR):::Chat* , and then select **Create**.</span></span>
+* <span data-ttu-id="a4e63-132">プロジェクトに *SignalRChat* という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-132">Name the project *SignalRChat* , and then select **Create**.</span></span>
 
 ---
 
-## <a name="add-the-no-locsignalr-client-library"></a><span data-ttu-id="a4e63-133">:::no-loc(SignalR)::: クライアント ライブラリを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-133">Add the :::no-loc(SignalR)::: client library</span></span>
+## <a name="add-the-no-locsignalr-client-library"></a><span data-ttu-id="a4e63-133">SignalR クライアント ライブラリを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-133">Add the SignalR client library</span></span>
 
-<span data-ttu-id="a4e63-134">:::no-loc(SignalR)::: サーバー ライブラリは、ASP.NET Core 3.1 共有フレームワークに含まれています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-134">The :::no-loc(SignalR)::: server library is included in the ASP.NET Core 3.1 shared framework.</span></span> <span data-ttu-id="a4e63-135">JavaScript クライアント ライブラリはプロジェクトに自動的に含まれません。</span><span class="sxs-lookup"><span data-stu-id="a4e63-135">The JavaScript client library isn't automatically included in the project.</span></span> <span data-ttu-id="a4e63-136">このチュートリアルでは、ライブラリ マネージャー (LibMan) を使用して *unpkg* からクライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-136">For this tutorial, you use Library Manager (LibMan) to get the client library from *unpkg*.</span></span> <span data-ttu-id="a4e63-137">unpkg は、npm (Node.js パッケージ マネージャー) で見つかるものすべてを配信できるコンテンツ配信ネットワーク (CDN) です。</span><span class="sxs-lookup"><span data-stu-id="a4e63-137">unpkg is a content delivery network (CDN) that can deliver anything found in npm, the Node.js package manager.</span></span>
+<span data-ttu-id="a4e63-134">SignalR サーバー ライブラリは、ASP.NET Core 3.1 共有フレームワークに含まれています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-134">The SignalR server library is included in the ASP.NET Core 3.1 shared framework.</span></span> <span data-ttu-id="a4e63-135">JavaScript クライアント ライブラリはプロジェクトに自動的に含まれません。</span><span class="sxs-lookup"><span data-stu-id="a4e63-135">The JavaScript client library isn't automatically included in the project.</span></span> <span data-ttu-id="a4e63-136">このチュートリアルでは、ライブラリ マネージャー (LibMan) を使用して *unpkg* からクライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-136">For this tutorial, you use Library Manager (LibMan) to get the client library from *unpkg*.</span></span> <span data-ttu-id="a4e63-137">unpkg は、npm (Node.js パッケージ マネージャー) で見つかるものすべてを配信できるコンテンツ配信ネットワーク (CDN) です。</span><span class="sxs-lookup"><span data-stu-id="a4e63-137">unpkg is a content delivery network (CDN) that can deliver anything found in npm, the Node.js package manager.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a4e63-138">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a4e63-138">Visual Studio</span></span>](#tab/visual-studio/)
 
@@ -125,7 +125,7 @@ ms.locfileid: "93056882"
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
-* <span data-ttu-id="a4e63-148">次のコマンドを実行して、LibMan を使用して :::no-loc(SignalR)::: クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-148">Run the following command to get the :::no-loc(SignalR)::: client library by using LibMan.</span></span> <span data-ttu-id="a4e63-149">出力が表示されるまでに数秒待機する必要がある場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-149">You might have to wait a few seconds before seeing output.</span></span>
+* <span data-ttu-id="a4e63-148">次のコマンドを実行して、LibMan を使用して SignalR クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-148">Run the following command to get the SignalR client library by using LibMan.</span></span> <span data-ttu-id="a4e63-149">出力が表示されるまでに数秒待機する必要がある場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-149">You might have to wait a few seconds before seeing output.</span></span>
 
   ```console
   libman install @microsoft/signalr@latest -p unpkg -d wwwroot/js/signalr --files dist/browser/signalr.js --files dist/browser/signalr.min.js
@@ -152,9 +152,9 @@ ms.locfileid: "93056882"
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
-* <span data-ttu-id="a4e63-157">プロジェクト フォルダー (ファイル *:::no-loc(SignalR):::Chat.csproj* を含んでいるフォルダー) に移動します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-157">Navigate to the project folder (the one that contains the *:::no-loc(SignalR):::Chat.csproj* file).</span></span>
+* <span data-ttu-id="a4e63-157">プロジェクト フォルダー (ファイル *SignalRChat.csproj* を含んでいるフォルダー) に移動します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-157">Navigate to the project folder (the one that contains the *SignalRChat.csproj* file).</span></span>
 
-* <span data-ttu-id="a4e63-158">次のコマンドを実行して、LibMan を使用して :::no-loc(SignalR)::: クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-158">Run the following command to get the :::no-loc(SignalR)::: client library by using LibMan.</span></span>
+* <span data-ttu-id="a4e63-158">次のコマンドを実行して、LibMan を使用して SignalR クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-158">Run the following command to get the SignalR client library by using LibMan.</span></span>
 
   ```console
   libman install @microsoft/signalr@latest -p unpkg -d wwwroot/js/signalr --files dist/browser/signalr.js --files dist/browser/signalr.min.js
@@ -175,31 +175,31 @@ ms.locfileid: "93056882"
 
 ---
 
-## <a name="create-a-no-locsignalr-hub"></a><span data-ttu-id="a4e63-164">:::no-loc(SignalR)::: ハブを作成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-164">Create a :::no-loc(SignalR)::: hub</span></span>
+## <a name="create-a-no-locsignalr-hub"></a><span data-ttu-id="a4e63-164">SignalR ハブを作成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-164">Create a SignalR hub</span></span>
 
 <span data-ttu-id="a4e63-165">*ハブ* はクライアント サーバー通信を処理するハイレベル パイプラインとして機能するクラスです。</span><span class="sxs-lookup"><span data-stu-id="a4e63-165">A *hub* is a class that serves as a high-level pipeline that handles client-server communication.</span></span>
 
-* <span data-ttu-id="a4e63-166">:::no-loc(SignalR):::Chat プロジェクト フォルダー内で、 *Hubs* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-166">In the :::no-loc(SignalR):::Chat project folder, create a *Hubs* folder.</span></span>
+* <span data-ttu-id="a4e63-166">SignalRChat プロジェクト フォルダー内で、 *Hubs* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-166">In the SignalRChat project folder, create a *Hubs* folder.</span></span>
 
 * <span data-ttu-id="a4e63-167">*Hubs* フォルダー内で、次のコードを使用して *ChatHub.cs* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-167">In the *Hubs* folder, create a *ChatHub.cs* file with the following code:</span></span>
 
   [!code-csharp[ChatHub](signalr/sample-snapshot/3.x/ChatHub.cs)]
 
-  <span data-ttu-id="a4e63-168">`ChatHub` クラスは :::no-loc(SignalR)::: `Hub` クラスを継承します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-168">The `ChatHub` class inherits from the :::no-loc(SignalR)::: `Hub` class.</span></span> <span data-ttu-id="a4e63-169">`Hub` クラスでは、接続、グループ、およびメッセージングが管理されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-169">The `Hub` class manages connections, groups, and messaging.</span></span>
+  <span data-ttu-id="a4e63-168">`ChatHub` クラスは SignalR `Hub` クラスを継承します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-168">The `ChatHub` class inherits from the SignalR `Hub` class.</span></span> <span data-ttu-id="a4e63-169">`Hub` クラスでは、接続、グループ、およびメッセージングが管理されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-169">The `Hub` class manages connections, groups, and messaging.</span></span>
 
-  <span data-ttu-id="a4e63-170">`SendMessage` メソッドは、メッセージをすべてのクライアントに送信するために、接続されたクライアントによって呼び出される場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-170">The `SendMessage` method can be called by a connected client to send a message to all clients.</span></span> <span data-ttu-id="a4e63-171">このメソッドを呼び出す JavaScript クライアント コードは、チュートリアルの後半で示されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-171">JavaScript client code that calls the method is shown later in the tutorial.</span></span> <span data-ttu-id="a4e63-172">最大のスケーラビリティを実現するために、:::no-loc(SignalR)::: コードは非同期になっています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-172">:::no-loc(SignalR)::: code is asynchronous to provide maximum scalability.</span></span>
+  <span data-ttu-id="a4e63-170">`SendMessage` メソッドは、メッセージをすべてのクライアントに送信するために、接続されたクライアントによって呼び出される場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-170">The `SendMessage` method can be called by a connected client to send a message to all clients.</span></span> <span data-ttu-id="a4e63-171">このメソッドを呼び出す JavaScript クライアント コードは、チュートリアルの後半で示されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-171">JavaScript client code that calls the method is shown later in the tutorial.</span></span> <span data-ttu-id="a4e63-172">最大のスケーラビリティを実現するために、SignalR コードは非同期になっています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-172">SignalR code is asynchronous to provide maximum scalability.</span></span>
 
-## <a name="configure-no-locsignalr"></a><span data-ttu-id="a4e63-173">:::no-loc(SignalR)::: を構成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-173">Configure :::no-loc(SignalR):::</span></span>
+## <a name="configure-no-locsignalr"></a><span data-ttu-id="a4e63-173">SignalR を構成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-173">Configure SignalR</span></span>
 
-<span data-ttu-id="a4e63-174">:::no-loc(SignalR)::: 要求が :::no-loc(SignalR)::: に渡されるように :::no-loc(SignalR)::: サーバーを構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-174">The :::no-loc(SignalR)::: server must be configured to pass :::no-loc(SignalR)::: requests to :::no-loc(SignalR):::.</span></span>
+<span data-ttu-id="a4e63-174">SignalR 要求が SignalR に渡されるように SignalR サーバーを構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-174">The SignalR server must be configured to pass SignalR requests to SignalR.</span></span>
 
 * <span data-ttu-id="a4e63-175">次の強調表示されたコードを *Startup.cs* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-175">Add the following highlighted code to the *Startup.cs* file.</span></span>
 
   [!code-csharp[Startup](signalr/sample-snapshot/3.x/Startup.cs?highlight=11,28,55)]
 
-  <span data-ttu-id="a4e63-176">これらの変更によって、:::no-loc(SignalR)::: が ASP.NET Core 依存関係挿入およびルーティング システムに追加されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-176">These changes add :::no-loc(SignalR)::: to the ASP.NET Core dependency injection and routing systems.</span></span>
+  <span data-ttu-id="a4e63-176">これらの変更によって、SignalR が ASP.NET Core 依存関係挿入およびルーティング システムに追加されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-176">These changes add SignalR to the ASP.NET Core dependency injection and routing systems.</span></span>
 
-## <a name="add-no-locsignalr-client-code"></a><span data-ttu-id="a4e63-177">:::no-loc(SignalR)::: クライアント コードを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-177">Add :::no-loc(SignalR)::: client code</span></span>
+## <a name="add-no-locsignalr-client-code"></a><span data-ttu-id="a4e63-177">SignalR クライアント コードを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-177">Add SignalR client code</span></span>
 
 * <span data-ttu-id="a4e63-178">*Pages\Index.cshtml* のコンテンツを次のコードに変更します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-178">Replace the content in *Pages\Index.cshtml* with the following code:</span></span>
 
@@ -208,8 +208,8 @@ ms.locfileid: "93056882"
   <span data-ttu-id="a4e63-179">上記のコードでは次の操作が行われます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-179">The preceding code:</span></span>
 
   * <span data-ttu-id="a4e63-180">名前およびメッセージ テキスト用のテキスト ボックスと送信ボタンを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-180">Creates text boxes for name and message text, and a submit button.</span></span>
-  * <span data-ttu-id="a4e63-181">:::no-loc(SignalR)::: ハブから受信したメッセージを表示するために、`id="messagesList"` を使用してリストを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-181">Creates a list with `id="messagesList"` for displaying messages that are received from the :::no-loc(SignalR)::: hub.</span></span>
-  * <span data-ttu-id="a4e63-182">:::no-loc(SignalR)::: へのスクリプト参照と、次の手順で作成する *chat.js* アプリケーション コードを含めます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-182">Includes script references to :::no-loc(SignalR)::: and the *chat.js* application code that you create in the next step.</span></span>
+  * <span data-ttu-id="a4e63-181">SignalR ハブから受信したメッセージを表示するために、`id="messagesList"` を使用してリストを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-181">Creates a list with `id="messagesList"` for displaying messages that are received from the SignalR hub.</span></span>
+  * <span data-ttu-id="a4e63-182">SignalR へのスクリプト参照と、次の手順で作成する *chat.js* アプリケーション コードを含めます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-182">Includes script references to SignalR and the *chat.js* application code that you create in the next step.</span></span>
 
 * <span data-ttu-id="a4e63-183">*wwwroot/js* フォルダー内に、次のコードを使用して *chat.js* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-183">In the *wwwroot/js* folder, create a *chat.js* file with the following code:</span></span>
 
@@ -232,7 +232,7 @@ ms.locfileid: "93056882"
 * <span data-ttu-id="a4e63-192">統合ターミナルで、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-192">In the integrated terminal, run the following command:</span></span>
 
   ```dotnetcli
-  dotnet watch run -p :::no-loc(SignalR):::Chat.csproj
+  dotnet watch run -p SignalRChat.csproj
   ```
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="a4e63-193">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a4e63-193">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
@@ -263,15 +263,15 @@ ms.locfileid: "93056882"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="a4e63-205">このチュートリアルでは、:::no-loc(SignalR)::: を使用してリアルタイム アプリをビルドするための基礎について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-205">This tutorial teaches the basics of building a real-time app using :::no-loc(SignalR):::.</span></span> <span data-ttu-id="a4e63-206">以下の方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-206">You learn how to:</span></span> 
+<span data-ttu-id="a4e63-205">このチュートリアルでは、SignalR を使用してリアルタイム アプリをビルドするための基礎について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-205">This tutorial teaches the basics of building a real-time app using SignalR.</span></span> <span data-ttu-id="a4e63-206">以下の方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-206">You learn how to:</span></span> 
 
 > [!div class="checklist"]  
 > * <span data-ttu-id="a4e63-207">Web プロジェクトを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-207">Create a web project.</span></span>   
-> * <span data-ttu-id="a4e63-208">:::no-loc(SignalR)::: クライアント ライブラリを追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-208">Add the :::no-loc(SignalR)::: client library.</span></span>   
-> * <span data-ttu-id="a4e63-209">:::no-loc(SignalR)::: ハブを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-209">Create a :::no-loc(SignalR)::: hub.</span></span> 
-> * <span data-ttu-id="a4e63-210">:::no-loc(SignalR)::: を使用するようにプロジェクトを構成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-210">Configure the project to use :::no-loc(SignalR):::.</span></span> 
+> * <span data-ttu-id="a4e63-208">SignalR クライアント ライブラリを追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-208">Add the SignalR client library.</span></span>   
+> * <span data-ttu-id="a4e63-209">SignalR ハブを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-209">Create a SignalR hub.</span></span> 
+> * <span data-ttu-id="a4e63-210">SignalR を使用するようにプロジェクトを構成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-210">Configure the project to use SignalR.</span></span> 
 > * <span data-ttu-id="a4e63-211">任意のクライアントから、接続されているすべてのクライアントにメッセージを送信するコードを追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-211">Add code that sends messages from any client to all connected clients.</span></span>  
-<span data-ttu-id="a4e63-212">最後には、動作するチャット アプリが作成されます。![SignalR サンプル アプリ](signalr/_static/2.x/signalr-get-started-finished.png)</span><span class="sxs-lookup"><span data-stu-id="a4e63-212">At the end, you'll have a working chat app: ![:::no-loc(SignalR)::: sample app](signalr/_static/2.x/signalr-get-started-finished.png)</span></span>   
+<span data-ttu-id="a4e63-212">最後には、動作するチャット アプリが作成されます。![SignalR サンプル アプリ](signalr/_static/2.x/signalr-get-started-finished.png)</span><span class="sxs-lookup"><span data-stu-id="a4e63-212">At the end, you'll have a working chat app: ![SignalR sample app](signalr/_static/2.x/signalr-get-started-finished.png)</span></span>   
 
 ## <a name="prerequisites"></a><span data-ttu-id="a4e63-213">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="a4e63-213">Prerequisites</span></span>    
 
@@ -295,11 +295,11 @@ ms.locfileid: "93056882"
 
 * <span data-ttu-id="a4e63-219">メニューから、 **[ファイル]、[新規プロジェクト]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-219">From the menu, select **File > New Project**.</span></span> 
 
-* <span data-ttu-id="a4e63-220">**[新しいプロジェクト]** ダイアログで、 **[インストール]、[Visual C#]、[Web]、[ASP.NET Core Web アプリケーション]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-220">In the **New Project** dialog, select **Installed > Visual C# > Web > ASP.NET Core Web Application**.</span></span> <span data-ttu-id="a4e63-221">プロジェクトに *:::no-loc(SignalR):::Chat* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-221">Name the project *:::no-loc(SignalR):::Chat*.</span></span>   
+* <span data-ttu-id="a4e63-220">**[新しいプロジェクト]** ダイアログで、 **[インストール]、[Visual C#]、[Web]、[ASP.NET Core Web アプリケーション]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-220">In the **New Project** dialog, select **Installed > Visual C# > Web > ASP.NET Core Web Application**.</span></span> <span data-ttu-id="a4e63-221">プロジェクトに *SignalRChat* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-221">Name the project *SignalRChat*.</span></span>   
 
   ![Visual Studio の [新しいプロジェクト] ダイアログ ボックス](signalr/_static/2.x/signalr-new-project-dialog.png)    
 
-* <span data-ttu-id="a4e63-223">**[Web アプリケーション]** を選択して、:::no-loc(Razor)::: Pages を使用するプロジェクトを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-223">Select **Web Application** to create a project that uses :::no-loc(Razor)::: Pages.</span></span>   
+* <span data-ttu-id="a4e63-223">**[Web アプリケーション]** を選択して、Razor Pages を使用するプロジェクトを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-223">Select **Web Application** to create a project that uses Razor Pages.</span></span>   
 
 * <span data-ttu-id="a4e63-224">**.NET Core** のターゲット フレームワークを選択し、 **ASP.NET Core 2.2** を選択して、 **[OK]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="a4e63-224">Select a target framework of **.NET Core** , select **ASP.NET Core 2.2** , and click **OK**.</span></span>    
 
@@ -312,8 +312,8 @@ ms.locfileid: "93056882"
 * <span data-ttu-id="a4e63-228">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-228">Run the following commands:</span></span>   
 
    ```dotnetcli 
-   dotnet new webapp -o :::no-loc(SignalR):::Chat   
-   code -r :::no-loc(SignalR):::Chat    
+   dotnet new webapp -o SignalRChat   
+   code -r SignalRChat    
    ```  
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="a4e63-229">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a4e63-229">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)   
@@ -324,13 +324,13 @@ ms.locfileid: "93056882"
 
 * <span data-ttu-id="a4e63-232">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-232">Select **Next**.</span></span>  
 
-* <span data-ttu-id="a4e63-233">プロジェクトに *:::no-loc(SignalR):::Chat* という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-233">Name the project *:::no-loc(SignalR):::Chat* , and then select **Create**.</span></span> 
+* <span data-ttu-id="a4e63-233">プロジェクトに *SignalRChat* という名前を付けて、 **[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-233">Name the project *SignalRChat* , and then select **Create**.</span></span> 
 
 --- 
 
-## <a name="add-the-no-locsignalr-client-library"></a><span data-ttu-id="a4e63-234">:::no-loc(SignalR)::: クライアント ライブラリを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-234">Add the :::no-loc(SignalR)::: client library</span></span> 
+## <a name="add-the-no-locsignalr-client-library"></a><span data-ttu-id="a4e63-234">SignalR クライアント ライブラリを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-234">Add the SignalR client library</span></span> 
 
-<span data-ttu-id="a4e63-235">:::no-loc(SignalR)::: サーバー ライブラリは、`Microsoft.AspNetCore.App` メタパッケージに含まれています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-235">The :::no-loc(SignalR)::: server library is included in the `Microsoft.AspNetCore.App` metapackage.</span></span> <span data-ttu-id="a4e63-236">JavaScript クライアント ライブラリはプロジェクトに自動的に含まれません。</span><span class="sxs-lookup"><span data-stu-id="a4e63-236">The JavaScript client library isn't automatically included in the project.</span></span> <span data-ttu-id="a4e63-237">このチュートリアルでは、ライブラリ マネージャー (LibMan) を使用して *unpkg* からクライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-237">For this tutorial, you use Library Manager (LibMan) to get the client library from *unpkg*.</span></span> <span data-ttu-id="a4e63-238">unpkg は、npm (Node.js パッケージ マネージャー) で見つかるものすべてを配信できるコンテンツ配信ネットワーク (CDN) です。</span><span class="sxs-lookup"><span data-stu-id="a4e63-238">unpkg is a content delivery network (CDN) that can deliver anything found in npm, the Node.js package manager.</span></span>   
+<span data-ttu-id="a4e63-235">SignalR サーバー ライブラリは、`Microsoft.AspNetCore.App` メタパッケージに含まれています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-235">The SignalR server library is included in the `Microsoft.AspNetCore.App` metapackage.</span></span> <span data-ttu-id="a4e63-236">JavaScript クライアント ライブラリはプロジェクトに自動的に含まれません。</span><span class="sxs-lookup"><span data-stu-id="a4e63-236">The JavaScript client library isn't automatically included in the project.</span></span> <span data-ttu-id="a4e63-237">このチュートリアルでは、ライブラリ マネージャー (LibMan) を使用して *unpkg* からクライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-237">For this tutorial, you use Library Manager (LibMan) to get the client library from *unpkg*.</span></span> <span data-ttu-id="a4e63-238">unpkg は、npm (Node.js パッケージ マネージャー) で見つかるものすべてを配信できるコンテンツ配信ネットワーク (CDN) です。</span><span class="sxs-lookup"><span data-stu-id="a4e63-238">unpkg is a content delivery network (CDN) that can deliver anything found in npm, the Node.js package manager.</span></span>   
 
 # <a name="visual-studio"></a>[<span data-ttu-id="a4e63-239">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="a4e63-239">Visual Studio</span></span>](#tab/visual-studio/)  
 
@@ -358,7 +358,7 @@ ms.locfileid: "93056882"
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli   
   ```   
 
-* <span data-ttu-id="a4e63-250">次のコマンドを実行して、LibMan を使用して :::no-loc(SignalR)::: クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-250">Run the following command to get the :::no-loc(SignalR)::: client library by using LibMan.</span></span> <span data-ttu-id="a4e63-251">出力が表示されるまでに数秒待機する必要がある場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-251">You might have to wait a few seconds before seeing output.</span></span> 
+* <span data-ttu-id="a4e63-250">次のコマンドを実行して、LibMan を使用して SignalR クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-250">Run the following command to get the SignalR client library by using LibMan.</span></span> <span data-ttu-id="a4e63-251">出力が表示されるまでに数秒待機する必要がある場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-251">You might have to wait a few seconds before seeing output.</span></span> 
 
   ```console    
   libman install @microsoft/signalr -p unpkg -d wwwroot/lib/signalr --files dist/browser/signalr.js --files dist/browser/signalr.min.js 
@@ -385,9 +385,9 @@ ms.locfileid: "93056882"
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli   
   ```   
 
-* <span data-ttu-id="a4e63-259">プロジェクト フォルダー (ファイル *:::no-loc(SignalR):::Chat.csproj* を含んでいるフォルダー) に移動します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-259">Navigate to the project folder (the one that contains the *:::no-loc(SignalR):::Chat.csproj* file).</span></span>   
+* <span data-ttu-id="a4e63-259">プロジェクト フォルダー (ファイル *SignalRChat.csproj* を含んでいるフォルダー) に移動します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-259">Navigate to the project folder (the one that contains the *SignalRChat.csproj* file).</span></span>   
 
-* <span data-ttu-id="a4e63-260">次のコマンドを実行して、LibMan を使用して :::no-loc(SignalR)::: クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-260">Run the following command to get the :::no-loc(SignalR)::: client library by using LibMan.</span></span>    
+* <span data-ttu-id="a4e63-260">次のコマンドを実行して、LibMan を使用して SignalR クライアント ライブラリを取得します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-260">Run the following command to get the SignalR client library by using LibMan.</span></span>    
 
   ```console    
   libman install @microsoft/signalr -p unpkg -d wwwroot/lib/signalr --files dist/browser/signalr.js --files dist/browser/signalr.min.js 
@@ -408,31 +408,31 @@ ms.locfileid: "93056882"
 
 --- 
 
-## <a name="create-a-no-locsignalr-hub"></a><span data-ttu-id="a4e63-266">:::no-loc(SignalR)::: ハブを作成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-266">Create a :::no-loc(SignalR)::: hub</span></span>   
+## <a name="create-a-no-locsignalr-hub"></a><span data-ttu-id="a4e63-266">SignalR ハブを作成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-266">Create a SignalR hub</span></span>   
 
 <span data-ttu-id="a4e63-267">*ハブ* はクライアント サーバー通信を処理するハイレベル パイプラインとして機能するクラスです。</span><span class="sxs-lookup"><span data-stu-id="a4e63-267">A *hub* is a class that serves as a high-level pipeline that handles client-server communication.</span></span>   
 
-* <span data-ttu-id="a4e63-268">:::no-loc(SignalR):::Chat プロジェクト フォルダー内で、 *Hubs* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-268">In the :::no-loc(SignalR):::Chat project folder, create a *Hubs* folder.</span></span>  
+* <span data-ttu-id="a4e63-268">SignalRChat プロジェクト フォルダー内で、 *Hubs* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-268">In the SignalRChat project folder, create a *Hubs* folder.</span></span>  
 
 * <span data-ttu-id="a4e63-269">*Hubs* フォルダー内で、次のコードを使用して *ChatHub.cs* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-269">In the *Hubs* folder, create a *ChatHub.cs* file with the following code:</span></span> 
 
   [!code-csharp[Startup](signalr/sample-snapshot/2.x/ChatHub.cs)]   
 
-  <span data-ttu-id="a4e63-270">`ChatHub` クラスは :::no-loc(SignalR)::: `Hub` クラスを継承します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-270">The `ChatHub` class inherits from the :::no-loc(SignalR)::: `Hub` class.</span></span> <span data-ttu-id="a4e63-271">`Hub` クラスでは、接続、グループ、およびメッセージングが管理されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-271">The `Hub` class manages connections, groups, and messaging.</span></span>  
+  <span data-ttu-id="a4e63-270">`ChatHub` クラスは SignalR `Hub` クラスを継承します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-270">The `ChatHub` class inherits from the SignalR `Hub` class.</span></span> <span data-ttu-id="a4e63-271">`Hub` クラスでは、接続、グループ、およびメッセージングが管理されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-271">The `Hub` class manages connections, groups, and messaging.</span></span>  
 
-  <span data-ttu-id="a4e63-272">`SendMessage` メソッドは、メッセージをすべてのクライアントに送信するために、接続されたクライアントによって呼び出される場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-272">The `SendMessage` method can be called by a connected client to send a message to all clients.</span></span> <span data-ttu-id="a4e63-273">このメソッドを呼び出す JavaScript クライアント コードは、チュートリアルの後半で示されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-273">JavaScript client code that calls the method is shown later in the tutorial.</span></span> <span data-ttu-id="a4e63-274">最大のスケーラビリティを実現するために、:::no-loc(SignalR)::: コードは非同期になっています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-274">:::no-loc(SignalR)::: code is asynchronous to provide maximum scalability.</span></span>    
+  <span data-ttu-id="a4e63-272">`SendMessage` メソッドは、メッセージをすべてのクライアントに送信するために、接続されたクライアントによって呼び出される場合があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-272">The `SendMessage` method can be called by a connected client to send a message to all clients.</span></span> <span data-ttu-id="a4e63-273">このメソッドを呼び出す JavaScript クライアント コードは、チュートリアルの後半で示されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-273">JavaScript client code that calls the method is shown later in the tutorial.</span></span> <span data-ttu-id="a4e63-274">最大のスケーラビリティを実現するために、SignalR コードは非同期になっています。</span><span class="sxs-lookup"><span data-stu-id="a4e63-274">SignalR code is asynchronous to provide maximum scalability.</span></span>    
 
-## <a name="configure-no-locsignalr"></a><span data-ttu-id="a4e63-275">:::no-loc(SignalR)::: を構成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-275">Configure :::no-loc(SignalR):::</span></span>  
+## <a name="configure-no-locsignalr"></a><span data-ttu-id="a4e63-275">SignalR を構成する</span><span class="sxs-lookup"><span data-stu-id="a4e63-275">Configure SignalR</span></span>  
 
-<span data-ttu-id="a4e63-276">:::no-loc(SignalR)::: 要求が :::no-loc(SignalR)::: に渡されるように :::no-loc(SignalR)::: サーバーを構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-276">The :::no-loc(SignalR)::: server must be configured to pass :::no-loc(SignalR)::: requests to :::no-loc(SignalR):::.</span></span>    
+<span data-ttu-id="a4e63-276">SignalR 要求が SignalR に渡されるように SignalR サーバーを構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a4e63-276">The SignalR server must be configured to pass SignalR requests to SignalR.</span></span>    
 
 * <span data-ttu-id="a4e63-277">次の強調表示されたコードを *Startup.cs* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-277">Add the following highlighted code to the *Startup.cs* file.</span></span>  
 
   [!code-csharp[Startup](signalr/sample-snapshot/2.x/Startup.cs?highlight=7,33,52-55)]  
 
-  <span data-ttu-id="a4e63-278">これらの変更によって、:::no-loc(SignalR)::: が ASP.NET Core 依存関係挿入システムとミドルウェア パイプラインに追加されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-278">These changes add :::no-loc(SignalR)::: to the ASP.NET Core dependency injection system and the middleware pipeline.</span></span>  
+  <span data-ttu-id="a4e63-278">これらの変更によって、SignalR が ASP.NET Core 依存関係挿入システムとミドルウェア パイプラインに追加されます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-278">These changes add SignalR to the ASP.NET Core dependency injection system and the middleware pipeline.</span></span>  
 
-## <a name="add-no-locsignalr-client-code"></a><span data-ttu-id="a4e63-279">:::no-loc(SignalR)::: クライアント コードを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-279">Add :::no-loc(SignalR)::: client code</span></span>    
+## <a name="add-no-locsignalr-client-code"></a><span data-ttu-id="a4e63-279">SignalR クライアント コードを追加する</span><span class="sxs-lookup"><span data-stu-id="a4e63-279">Add SignalR client code</span></span>    
 
 * <span data-ttu-id="a4e63-280">*Pages\Index.cshtml* のコンテンツを次のコードに変更します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-280">Replace the content in *Pages\Index.cshtml* with the following code:</span></span>  
 
@@ -441,8 +441,8 @@ ms.locfileid: "93056882"
   <span data-ttu-id="a4e63-281">上記のコードでは次の操作が行われます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-281">The preceding code:</span></span>   
 
   * <span data-ttu-id="a4e63-282">名前およびメッセージ テキスト用のテキスト ボックスと送信ボタンを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-282">Creates text boxes for name and message text, and a submit button.</span></span>  
-  * <span data-ttu-id="a4e63-283">:::no-loc(SignalR)::: ハブから受信したメッセージを表示するために、`id="messagesList"` を使用してリストを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-283">Creates a list with `id="messagesList"` for displaying messages that are received from the :::no-loc(SignalR)::: hub.</span></span>   
-  * <span data-ttu-id="a4e63-284">:::no-loc(SignalR)::: へのスクリプト参照と、次の手順で作成する *chat.js* アプリケーション コードを含めます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-284">Includes script references to :::no-loc(SignalR)::: and the *chat.js* application code that you create in the next step.</span></span>    
+  * <span data-ttu-id="a4e63-283">SignalR ハブから受信したメッセージを表示するために、`id="messagesList"` を使用してリストを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-283">Creates a list with `id="messagesList"` for displaying messages that are received from the SignalR hub.</span></span>   
+  * <span data-ttu-id="a4e63-284">SignalR へのスクリプト参照と、次の手順で作成する *chat.js* アプリケーション コードを含めます。</span><span class="sxs-lookup"><span data-stu-id="a4e63-284">Includes script references to SignalR and the *chat.js* application code that you create in the next step.</span></span>    
 
 * <span data-ttu-id="a4e63-285">*wwwroot/js* フォルダー内に、次のコードを使用して *chat.js* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-285">In the *wwwroot/js* folder, create a *chat.js* file with the following code:</span></span>  
 
@@ -465,7 +465,7 @@ ms.locfileid: "93056882"
 * <span data-ttu-id="a4e63-294">統合ターミナルで、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="a4e63-294">In the integrated terminal, run the following command:</span></span>    
 
   ```dotnetcli
-  dotnet run -p :::no-loc(SignalR):::Chat.csproj
+  dotnet run -p SignalRChat.csproj
   ```
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="a4e63-295">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="a4e63-295">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)

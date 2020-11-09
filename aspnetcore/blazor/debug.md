@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor WebAssembly)::: をデバッグする'
+title: 'ASP.NET Core Blazor WebAssembly をデバッグする'
 author: guardrex
-description: ':::no-loc(Blazor)::: アプリをデバッグする方法について説明します。'
+description: 'Blazor アプリをデバッグする方法について説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/debug
 ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,11 +26,11 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056193"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="bb95f-103">ASP.NET Core :::no-loc(Blazor WebAssembly)::: をデバッグする</span><span class="sxs-lookup"><span data-stu-id="bb95f-103">Debug ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="bb95f-103">ASP.NET Core Blazor WebAssembly をデバッグする</span><span class="sxs-lookup"><span data-stu-id="bb95f-103">Debug ASP.NET Core Blazor WebAssembly</span></span>
 
 [<span data-ttu-id="bb95f-104">Daniel Roth</span><span class="sxs-lookup"><span data-stu-id="bb95f-104">Daniel Roth</span></span>](https://github.com/danroth27)
 
-<span data-ttu-id="bb95f-105">:::no-loc(Blazor WebAssembly)::: アプリは、Chromium ベースのブラウザー (Edge/Chrome) のブラウザー開発ツールを使用してデバッグできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-105">:::no-loc(Blazor WebAssembly)::: apps can be debugged using the browser dev tools in Chromium-based browsers (Edge/Chrome).</span></span> <span data-ttu-id="bb95f-106">次の統合開発環境 (IDE) を使用して、アプリをデバッグすることもできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-106">You can also debug your app using the following integrated development environments (IDEs):</span></span>
+<span data-ttu-id="bb95f-105">Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chrome) のブラウザー開発ツールを使用してデバッグできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-105">Blazor WebAssembly apps can be debugged using the browser dev tools in Chromium-based browsers (Edge/Chrome).</span></span> <span data-ttu-id="bb95f-106">次の統合開発環境 (IDE) を使用して、アプリをデバッグすることもできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-106">You can also debug your app using the following integrated development environments (IDEs):</span></span>
 
 * <span data-ttu-id="bb95f-107">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="bb95f-107">Visual Studio</span></span>
 * <span data-ttu-id="bb95f-108">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="bb95f-108">Visual Studio for Mac</span></span>
@@ -67,7 +67,7 @@ ms.locfileid: "93056193"
 
 ## <a name="enable-debugging"></a><span data-ttu-id="bb95f-130">デバッグの有効化</span><span class="sxs-lookup"><span data-stu-id="bb95f-130">Enable debugging</span></span>
 
-<span data-ttu-id="bb95f-131">既存の :::no-loc(Blazor WebAssembly)::: アプリのデバッグを有効にするには、スタートアップ プロジェクトの `launchSettings.json` ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-131">To enable debugging for an existing :::no-loc(Blazor WebAssembly)::: app, update the `launchSettings.json` file in the startup project to include the following `inspectUri` property in each launch profile:</span></span>
+<span data-ttu-id="bb95f-131">既存の Blazor WebAssembly アプリのデバッグを有効にするには、スタートアップ プロジェクトの `launchSettings.json` ファイルを更新して、各起動プロファイルに次の `inspectUri` プロパティを含めます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-131">To enable debugging for an existing Blazor WebAssembly app, update the `launchSettings.json` file in the startup project to include the following `inspectUri` property in each launch profile:</span></span>
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
@@ -79,16 +79,16 @@ ms.locfileid: "93056193"
 
 <span data-ttu-id="bb95f-133">`inspectUri` プロパティ:</span><span class="sxs-lookup"><span data-stu-id="bb95f-133">The `inspectUri` property:</span></span>
 
-* <span data-ttu-id="bb95f-134">アプリが :::no-loc(Blazor WebAssembly)::: アプリであることを IDE で検出できるようにします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-134">Enables the IDE to detect that the app is a :::no-loc(Blazor WebAssembly)::: app.</span></span>
-* <span data-ttu-id="bb95f-135">スクリプト デバッグ インフラストラクチャに対して、:::no-loc(Blazor)::: のデバッグ プロキシを使用してブラウザーに接続するように指示します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-135">Instructs the script debugging infrastructure to connect to the browser through :::no-loc(Blazor):::'s debugging proxy.</span></span>
+* <span data-ttu-id="bb95f-134">アプリが Blazor WebAssembly アプリであることを IDE で検出できるようにします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-134">Enables the IDE to detect that the app is a Blazor WebAssembly app.</span></span>
+* <span data-ttu-id="bb95f-135">スクリプト デバッグ インフラストラクチャに対して、Blazor のデバッグ プロキシを使用してブラウザーに接続するように指示します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-135">Instructs the script debugging infrastructure to connect to the browser through Blazor's debugging proxy.</span></span>
 
 <span data-ttu-id="bb95f-136">起動したブラウザー (`browserInspectUri`) の Websocket プロトコル (`wsProtocol`)、ホスト (`url.hostname`)、ポート (`url.port`)、およびインスペクター URI のプレースホルダー値は、フレームワークによって提供されます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-136">The placeholder values for the WebSockets protocol (`wsProtocol`), host (`url.hostname`), port (`url.port`), and inspector URI on the launched browser (`browserInspectUri`) are provided by the framework.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="bb95f-137">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="bb95f-137">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="bb95f-138">Visual Studio で :::no-loc(Blazor WebAssembly)::: アプリをデバッグするには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-138">To debug a :::no-loc(Blazor WebAssembly)::: app in Visual Studio:</span></span>
+<span data-ttu-id="bb95f-138">Visual Studio で Blazor WebAssembly アプリをデバッグするには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-138">To debug a Blazor WebAssembly app in Visual Studio:</span></span>
 
-1. <span data-ttu-id="bb95f-139">新しい ASP.NET Core でホストされる :::no-loc(Blazor WebAssembly)::: アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-139">Create a new ASP.NET Core hosted :::no-loc(Blazor WebAssembly)::: app.</span></span>
+1. <span data-ttu-id="bb95f-139">新しい ASP.NET Core でホストされる Blazor WebAssembly アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-139">Create a new ASP.NET Core hosted Blazor WebAssembly app.</span></span>
 1. <span data-ttu-id="bb95f-140"><kbd>F5</kbd> キーを押して、デバッガーでアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-140">Press <kbd>F5</kbd> to run the app in the debugger.</span></span>
 
    > [!NOTE]
@@ -99,7 +99,7 @@ ms.locfileid: "93056193"
 1. <span data-ttu-id="bb95f-145">Visual Studio の **[ローカル]** ウィンドウで、`currentCount` フィールドの値を調べます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-145">In Visual Studio, inspect the value of the `currentCount` field in the **Locals** window.</span></span>
 1. <span data-ttu-id="bb95f-146"><kbd>F5</kbd> キーを押して、実行を続行します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-146">Press <kbd>F5</kbd> to continue execution.</span></span>
 
-<span data-ttu-id="bb95f-147">:::no-loc(Blazor WebAssembly)::: アプリをデバッグしている間に、サーバー コードをデバッグすることもできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-147">While debugging a :::no-loc(Blazor WebAssembly)::: app, you can also debug server code:</span></span>
+<span data-ttu-id="bb95f-147">Blazor WebAssembly アプリをデバッグしている間に、サーバー コードをデバッグすることもできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-147">While debugging a Blazor WebAssembly app, you can also debug server code:</span></span>
 
 1. <span data-ttu-id="bb95f-148">`Pages/FetchData.razor` ページの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> にブレークポイントを設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-148">Set a breakpoint in the `Pages/FetchData.razor` page in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>.</span></span>
 1. <span data-ttu-id="bb95f-149">`Get` アクション メソッドの `WeatherForecastController` にブレークポイントを設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-149">Set a breakpoint in the `WeatherForecastController` in the `Get` action method.</span></span>
@@ -154,17 +154,17 @@ ms.locfileid: "93056193"
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/OAT/_framework/debug/ws-proxy?browser={browserInspectUri}",
 ```
 
-<span data-ttu-id="bb95f-167">:::no-loc(Blazor WebAssembly)::: アプリにカスタム アプリ ベース パスを使用する方法については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="bb95f-167">For information on using a custom app base path for :::no-loc(Blazor WebAssembly)::: apps, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
+<span data-ttu-id="bb95f-167">Blazor WebAssembly アプリにカスタム アプリ ベース パスを使用する方法については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="bb95f-167">For information on using a custom app base path for Blazor WebAssembly apps, see <xref:blazor/host-and-deploy/index#app-base-path>.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="bb95f-168">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="bb95f-168">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<h2 id="vscode"><span data-ttu-id="bb95f-169">スタンドアロン :::no-loc(Blazor WebAssembly)::: のデバッグ</span><span class="sxs-lookup"><span data-stu-id="bb95f-169">Debug standalone :::no-loc(Blazor WebAssembly):::</span></span></h2>
+<h2 id="vscode"><span data-ttu-id="bb95f-169">スタンドアロン Blazor WebAssembly のデバッグ</span><span class="sxs-lookup"><span data-stu-id="bb95f-169">Debug standalone Blazor WebAssembly</span></span></h2>
 
-1. <span data-ttu-id="bb95f-170">VS Code でスタンドアロンの :::no-loc(Blazor WebAssembly)::: アプリを開きます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-170">Open the standalone :::no-loc(Blazor WebAssembly)::: app in VS Code.</span></span>
+1. <span data-ttu-id="bb95f-170">VS Code でスタンドアロンの Blazor WebAssembly アプリを開きます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-170">Open the standalone Blazor WebAssembly app in VS Code.</span></span>
 
    <span data-ttu-id="bb95f-171">デバッグを有効にするために追加の設定が必要であることを示す通知が表示される場合があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-171">You may receive a notification that additional setup is required to enable debugging:</span></span>
 
-   > <span data-ttu-id="bb95f-172">:::no-loc(Blazor WebAssembly)::: アプリケーションをデバッグするには、追加のセットアップが必要です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-172">Additional setup is required to debug :::no-loc(Blazor WebAssembly)::: applications.</span></span>
+   > <span data-ttu-id="bb95f-172">Blazor WebAssembly アプリケーションをデバッグするには、追加のセットアップが必要です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-172">Additional setup is required to debug Blazor WebAssembly applications.</span></span>
 
    <span data-ttu-id="bb95f-173">通知を受信した場合:</span><span class="sxs-lookup"><span data-stu-id="bb95f-173">If you receive the notification:</span></span>
 
@@ -177,7 +177,7 @@ ms.locfileid: "93056193"
    > [!NOTE]
    > <span data-ttu-id="bb95f-183">**デバッグなしの開始** ( <kbd>Ctrl</kbd>+<kbd>F5</kbd>) はサポートされていません。</span><span class="sxs-lookup"><span data-stu-id="bb95f-183">**Start Without Debugging** (<kbd>Ctrl</kbd>+<kbd>F5</kbd>) isn't supported.</span></span> <span data-ttu-id="bb95f-184">アプリがデバッグ構成で実行されている場合、デバッグのオーバーヘッドによって常にパフォーマンスがわずかに低下します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-184">When the app is run in Debug configuration, debugging overhead always results in a small performance reduction.</span></span>
 
-1. <span data-ttu-id="bb95f-185">プロンプトが表示されたら、 **[:::no-loc(Blazor WebAssembly)::: Debug]** オプションを選択してデバッグを開始します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-185">When prompted, select the **:::no-loc(Blazor WebAssembly)::: Debug** option to start debugging.</span></span>
+1. <span data-ttu-id="bb95f-185">プロンプトが表示されたら、 **[Blazor WebAssembly Debug]** オプションを選択してデバッグを開始します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-185">When prompted, select the **Blazor WebAssembly Debug** option to start debugging.</span></span>
 
 1. <span data-ttu-id="bb95f-186">スタンドアロン アプリが起動され、デバッグ ブラウザーが開きます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-186">The standalone app is launched, and a debugging browser is opened.</span></span>
 
@@ -188,9 +188,9 @@ ms.locfileid: "93056193"
 > [!NOTE]
 > <span data-ttu-id="bb95f-189">デバッグ プロキシが実行状態になる前のアプリの起動中には、ブレークポイントで停止することは **ありません** 。</span><span class="sxs-lookup"><span data-stu-id="bb95f-189">Breakpoints are **not** hit during app startup before the debug proxy is running.</span></span> <span data-ttu-id="bb95f-190">これには、`Program.Main` (`Program.cs`) のブレークポイントと、アプリから要求された最初のページによって読み込まれるコンポーネントの [`OnInitialized{Async}` メソッド](xref:blazor/components/lifecycle#component-initialization-methods)のブレークポイントが含まれます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-190">This includes breakpoints in `Program.Main` (`Program.cs`) and breakpoints in the [`OnInitialized{Async}` methods](xref:blazor/components/lifecycle#component-initialization-methods) of components that are loaded by the first page requested from the app.</span></span>
 
-## <a name="debug-hosted-no-locblazor-webassembly"></a><span data-ttu-id="bb95f-191">ホストされた :::no-loc(Blazor WebAssembly)::: のデバッグ</span><span class="sxs-lookup"><span data-stu-id="bb95f-191">Debug hosted :::no-loc(Blazor WebAssembly):::</span></span>
+## <a name="debug-hosted-no-locblazor-webassembly"></a><span data-ttu-id="bb95f-191">ホストされた Blazor WebAssembly のデバッグ</span><span class="sxs-lookup"><span data-stu-id="bb95f-191">Debug hosted Blazor WebAssembly</span></span>
 
-1. <span data-ttu-id="bb95f-192">VS Code で、ホストされた :::no-loc(Blazor WebAssembly)::: アプリのソリューション フォルダーを開きます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-192">Open the hosted :::no-loc(Blazor WebAssembly)::: app's solution folder in VS Code.</span></span>
+1. <span data-ttu-id="bb95f-192">VS Code で、ホストされた Blazor WebAssembly アプリのソリューション フォルダーを開きます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-192">Open the hosted Blazor WebAssembly app's solution folder in VS Code.</span></span>
 
 1. <span data-ttu-id="bb95f-193">プロジェクトの起動構成が設定されていない場合は、次の通知が表示されます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-193">If there's no launch configuration set for the project, the following notification appears.</span></span> <span data-ttu-id="bb95f-194">**[はい]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-194">Select **Yes**.</span></span>
 
@@ -202,13 +202,13 @@ ms.locfileid: "93056193"
 
 ## <a name="attach-to-an-existing-debugging-session"></a><span data-ttu-id="bb95f-199">既存のデバッグセッションにアタッチする</span><span class="sxs-lookup"><span data-stu-id="bb95f-199">Attach to an existing debugging session</span></span>
 
-<span data-ttu-id="bb95f-200">実行中の :::no-loc(Blazor)::: アプリにアタッチするには、次のように構成された `launch.json` ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-200">To attach to a running :::no-loc(Blazor)::: app, create a `launch.json` file with the following configuration:</span></span>
+<span data-ttu-id="bb95f-200">実行中の Blazor アプリにアタッチするには、次のように構成された `launch.json` ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-200">To attach to a running Blazor app, create a `launch.json` file with the following configuration:</span></span>
 
 ```json
 {
   "type": "blazorwasm",
   "request": "attach",
-  "name": "Attach to Existing :::no-loc(Blazor WebAssembly)::: Application"
+  "name": "Attach to Existing Blazor WebAssembly Application"
 }
 ```
 
@@ -221,11 +221,11 @@ ms.locfileid: "93056193"
 
 | <span data-ttu-id="bb95f-205">オプション</span><span class="sxs-lookup"><span data-stu-id="bb95f-205">Option</span></span>    | <span data-ttu-id="bb95f-206">説明</span><span class="sxs-lookup"><span data-stu-id="bb95f-206">Description</span></span> |
 | --------- | ----------- |
-| `request` | <span data-ttu-id="bb95f-207">`launch` を使用して、:::no-loc(Blazor WebAssembly)::: アプリにデバッグ セッションを起動してアタッチするか、`attach` を使用して既に実行中のアプリにデバッグ セッションをアタッチします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-207">Use `launch` to launch and attach a debugging session to a :::no-loc(Blazor WebAssembly)::: app or `attach` to attach a debugging session to an already-running app.</span></span> |
+| `request` | <span data-ttu-id="bb95f-207">`launch` を使用して、Blazor WebAssembly アプリにデバッグ セッションを起動してアタッチするか、`attach` を使用して既に実行中のアプリにデバッグ セッションをアタッチします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-207">Use `launch` to launch and attach a debugging session to a Blazor WebAssembly app or `attach` to attach a debugging session to an already-running app.</span></span> |
 | `url`     | <span data-ttu-id="bb95f-208">デバッグ時にブラウザーで開く URL。</span><span class="sxs-lookup"><span data-stu-id="bb95f-208">The URL to open in the browser when debugging.</span></span> <span data-ttu-id="bb95f-209">既定値は `https://localhost:5001` です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-209">Defaults to `https://localhost:5001`.</span></span> |
 | `browser` | <span data-ttu-id="bb95f-210">デバッグ セッション用に起動するブラウザー。</span><span class="sxs-lookup"><span data-stu-id="bb95f-210">The browser to launch for the debugging session.</span></span> <span data-ttu-id="bb95f-211">`edge` または `chrome` に設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-211">Set to `edge` or `chrome`.</span></span> <span data-ttu-id="bb95f-212">既定値は `chrome` です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-212">Defaults to `chrome`.</span></span> |
 | `trace`   | <span data-ttu-id="bb95f-213">JS デバッガーからログを生成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-213">Used to generate logs from the JS debugger.</span></span> <span data-ttu-id="bb95f-214">ログを生成するには `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-214">Set to `true` to generate logs.</span></span> |
-| `hosted`  | <span data-ttu-id="bb95f-215">ホストされている :::no-loc(Blazor WebAssembly)::: アプリを起動およびデバッグする場合は、`true` に設定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-215">Must be set to `true` if launching and debugging a hosted :::no-loc(Blazor WebAssembly)::: app.</span></span> |
+| `hosted`  | <span data-ttu-id="bb95f-215">ホストされている Blazor WebAssembly アプリを起動およびデバッグする場合は、`true` に設定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-215">Must be set to `true` if launching and debugging a hosted Blazor WebAssembly app.</span></span> |
 | `webRoot` | <span data-ttu-id="bb95f-216">Web サーバーの絶対パスを指定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-216">Specifies the absolute path of the web server.</span></span> <span data-ttu-id="bb95f-217">アプリをサブルートから提供する場合は設定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-217">Should be set if an app is served from a sub-route.</span></span> |
 | `timeout` | <span data-ttu-id="bb95f-218">デバッグ セッションがアタッチされるのを待機するミリ秒単位の時間。</span><span class="sxs-lookup"><span data-stu-id="bb95f-218">The number of milliseconds to wait for the debugging session to attach.</span></span> <span data-ttu-id="bb95f-219">既定値は 30,000 ミリ秒 (30 秒) です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-219">Defaults to 30,000 milliseconds (30 seconds).</span></span> |
 | `program` | <span data-ttu-id="bb95f-220">ホストされたアプリのサーバーを実行する実行可能ファイルへの参照。</span><span class="sxs-lookup"><span data-stu-id="bb95f-220">A reference to the executable to run the server of the hosted app.</span></span> <span data-ttu-id="bb95f-221">`hosted` が `true` の場合に設定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-221">Must be set if `hosted` is `true`.</span></span> |
@@ -234,7 +234,7 @@ ms.locfileid: "93056193"
 
 ## <a name="example-launch-configurations"></a><span data-ttu-id="bb95f-226">起動構成の例</span><span class="sxs-lookup"><span data-stu-id="bb95f-226">Example launch configurations</span></span>
 
-### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a><span data-ttu-id="bb95f-227">スタンドアロン :::no-loc(Blazor WebAssembly)::: アプリを起動してデバッグする</span><span class="sxs-lookup"><span data-stu-id="bb95f-227">Launch and debug a standalone :::no-loc(Blazor WebAssembly)::: app</span></span>
+### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a><span data-ttu-id="bb95f-227">スタンドアロン Blazor WebAssembly アプリを起動してデバッグする</span><span class="sxs-lookup"><span data-stu-id="bb95f-227">Launch and debug a standalone Blazor WebAssembly app</span></span>
 
 ```json
 {
@@ -255,13 +255,13 @@ ms.locfileid: "93056193"
 }
 ```
 
-### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a><span data-ttu-id="bb95f-229">Microsoft Edge でホストされている :::no-loc(Blazor WebAssembly)::: アプリを起動してデバッグする</span><span class="sxs-lookup"><span data-stu-id="bb95f-229">Launch and debug a hosted :::no-loc(Blazor WebAssembly)::: app with Microsoft Edge</span></span>
+### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a><span data-ttu-id="bb95f-229">Microsoft Edge でホストされている Blazor WebAssembly アプリを起動してデバッグする</span><span class="sxs-lookup"><span data-stu-id="bb95f-229">Launch and debug a hosted Blazor WebAssembly app with Microsoft Edge</span></span>
 
 <span data-ttu-id="bb95f-230">ブラウザーの構成の既定値は Google Chrome です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-230">Browser configuration defaults to Google Chrome.</span></span> <span data-ttu-id="bb95f-231">デバッグに Microsoft Edge を使用する場合は、`browser` を `edge` に設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-231">When using Microsoft Edge for debugging, set `browser` to `edge`.</span></span> <span data-ttu-id="bb95f-232">Google Chrome を使用するには、`browser` オプションを設定しないか、オプションの値を `chrome` に設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-232">To use Google Chrome, either don't set the `browser` option or set the option's value to `chrome`.</span></span>
 
 ```json
 {
-  "name": "Launch and Debug Hosted :::no-loc(Blazor WebAssembly)::: App",
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
   "hosted": true,
@@ -275,9 +275,9 @@ ms.locfileid: "93056193"
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="bb95f-235">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="bb95f-235">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="bb95f-236">Visual Studio for Mac で :::no-loc(Blazor WebAssembly)::: アプリをデバッグするには:</span><span class="sxs-lookup"><span data-stu-id="bb95f-236">To debug a :::no-loc(Blazor WebAssembly)::: app in Visual Studio for Mac:</span></span>
+<span data-ttu-id="bb95f-236">Visual Studio for Mac で Blazor WebAssembly アプリをデバッグするには:</span><span class="sxs-lookup"><span data-stu-id="bb95f-236">To debug a Blazor WebAssembly app in Visual Studio for Mac:</span></span>
 
-1. <span data-ttu-id="bb95f-237">新しい ASP.NET Core でホストされる :::no-loc(Blazor WebAssembly)::: アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-237">Create a new ASP.NET Core hosted :::no-loc(Blazor WebAssembly)::: app.</span></span>
+1. <span data-ttu-id="bb95f-237">新しい ASP.NET Core でホストされる Blazor WebAssembly アプリを作成します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-237">Create a new ASP.NET Core hosted Blazor WebAssembly app.</span></span>
 1. <span data-ttu-id="bb95f-238"><kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> キーを押して、デバッガーでアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-238">Press <kbd>&#8984;</kbd>+<kbd>&#8617;</kbd> to run the app in the debugger.</span></span>
 
    > [!NOTE]
@@ -291,7 +291,7 @@ ms.locfileid: "93056193"
 1. <span data-ttu-id="bb95f-244">Visual Studio の **[ローカル]** ウィンドウで、`currentCount` フィールドの値を調べます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-244">In Visual Studio, inspect the value of the `currentCount` field in the **Locals** window.</span></span>
 1. <span data-ttu-id="bb95f-245"><kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> キーを押して、実行を続けます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-245">Press <kbd>&#8984;</kbd>+<kbd>&#8617;</kbd> to continue execution.</span></span>
 
-<span data-ttu-id="bb95f-246">:::no-loc(Blazor WebAssembly)::: アプリをデバッグしている間に、サーバー コードをデバッグすることもできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-246">While debugging a :::no-loc(Blazor WebAssembly)::: app, you can also debug server code:</span></span>
+<span data-ttu-id="bb95f-246">Blazor WebAssembly アプリをデバッグしている間に、サーバー コードをデバッグすることもできます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-246">While debugging a Blazor WebAssembly app, you can also debug server code:</span></span>
 
 1. <span data-ttu-id="bb95f-247">`Pages/FetchData.razor` ページの <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> にブレークポイントを設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-247">Set a breakpoint in the `Pages/FetchData.razor` page in <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>.</span></span>
 1. <span data-ttu-id="bb95f-248">`Get` アクション メソッドの `WeatherForecastController` にブレークポイントを設定します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-248">Set a breakpoint in the `WeatherForecastController` in the `Get` action method.</span></span>
@@ -333,11 +333,11 @@ ms.locfileid: "93056193"
 
 1. <span data-ttu-id="bb95f-266">コンポーネント コード (`.razor` ファイル) と C# コード ファイル (`.cs`) で、設定したブレークポイントがコードの実行時にヒットします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-266">In component code (`.razor` files) and C# code files (`.cs`), breakpoints that you set are hit when code executes.</span></span> <span data-ttu-id="bb95f-267">ブレークポイントにヒットした後、コード全体をステップ実行する (<kbd>F10</kbd>) か、コードの実行を普通に再開 (<kbd>F8</kbd>) します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-267">After a breakpoint is hit, single-step (<kbd>F10</kbd>) through the code or resume (<kbd>F8</kbd>) code execution normally.</span></span>
 
-<span data-ttu-id="bb95f-268">:::no-loc(Blazor)::: は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/devtools-protocol/)を実装し、.NET 固有の情報によってプロトコルを拡張するデバッグ プロキシを備えています。</span><span class="sxs-lookup"><span data-stu-id="bb95f-268">:::no-loc(Blazor)::: provides a debugging proxy that implements the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) and augments the protocol with .NET-specific information.</span></span> <span data-ttu-id="bb95f-269">デバッグ用のキーボード ショートカットが押されると、:::no-loc(Blazor)::: はプロキシで Chrome DevTools を指し示します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-269">When debugging keyboard shortcut is pressed, :::no-loc(Blazor)::: points the Chrome DevTools at the proxy.</span></span> <span data-ttu-id="bb95f-270">プロキシは、デバッグしようとしているブラウザー ウィンドウに接続します (そのためリモート デバッグを有効にする必要があります)。</span><span class="sxs-lookup"><span data-stu-id="bb95f-270">The proxy connects to the browser window you're seeking to debug (hence the need to enable remote debugging).</span></span>
+<span data-ttu-id="bb95f-268">Blazor は、[Chrome DevTools プロトコル](https://chromedevtools.github.io/devtools-protocol/)を実装し、.NET 固有の情報によってプロトコルを拡張するデバッグ プロキシを備えています。</span><span class="sxs-lookup"><span data-stu-id="bb95f-268">Blazor provides a debugging proxy that implements the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) and augments the protocol with .NET-specific information.</span></span> <span data-ttu-id="bb95f-269">デバッグ用のキーボード ショートカットが押されると、Blazor はプロキシで Chrome DevTools を指し示します。</span><span class="sxs-lookup"><span data-stu-id="bb95f-269">When debugging keyboard shortcut is pressed, Blazor points the Chrome DevTools at the proxy.</span></span> <span data-ttu-id="bb95f-270">プロキシは、デバッグしようとしているブラウザー ウィンドウに接続します (そのためリモート デバッグを有効にする必要があります)。</span><span class="sxs-lookup"><span data-stu-id="bb95f-270">The proxy connects to the browser window you're seeking to debug (hence the need to enable remote debugging).</span></span>
 
 ## <a name="browser-source-maps"></a><span data-ttu-id="bb95f-271">ブラウザー ソース マップ</span><span class="sxs-lookup"><span data-stu-id="bb95f-271">Browser source maps</span></span>
 
-<span data-ttu-id="bb95f-272">ブラウザー ソース マップを使用すると、ブラウザーのコンパイルされたファイルを元のソース ファイルにマップし直すことができ、これはクライアント側のデバッグによく使用されます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-272">Browser source maps allow the browser to map compiled files back to their original source files and are commonly used for client-side debugging.</span></span> <span data-ttu-id="bb95f-273">ただし :::no-loc(Blazor)::: では現在、C# は JavaScript/WASM に直接マップされません。</span><span class="sxs-lookup"><span data-stu-id="bb95f-273">However, :::no-loc(Blazor)::: doesn't currently map C# directly to JavaScript/WASM.</span></span> <span data-ttu-id="bb95f-274">その代わり、:::no-loc(Blazor)::: はブラウザー内で中間言語の解釈を行うため、ソース マップは関係がありません。</span><span class="sxs-lookup"><span data-stu-id="bb95f-274">Instead, :::no-loc(Blazor)::: does IL interpretation within the browser, so source maps aren't relevant.</span></span>
+<span data-ttu-id="bb95f-272">ブラウザー ソース マップを使用すると、ブラウザーのコンパイルされたファイルを元のソース ファイルにマップし直すことができ、これはクライアント側のデバッグによく使用されます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-272">Browser source maps allow the browser to map compiled files back to their original source files and are commonly used for client-side debugging.</span></span> <span data-ttu-id="bb95f-273">ただし Blazor では現在、C# は JavaScript/WASM に直接マップされません。</span><span class="sxs-lookup"><span data-stu-id="bb95f-273">However, Blazor doesn't currently map C# directly to JavaScript/WASM.</span></span> <span data-ttu-id="bb95f-274">その代わり、Blazor はブラウザー内で中間言語の解釈を行うため、ソース マップは関係がありません。</span><span class="sxs-lookup"><span data-stu-id="bb95f-274">Instead, Blazor does IL interpretation within the browser, so source maps aren't relevant.</span></span>
 
 ## <a name="troubleshoot"></a><span data-ttu-id="bb95f-275">トラブルシューティング</span><span class="sxs-lookup"><span data-stu-id="bb95f-275">Troubleshoot</span></span>
 
@@ -352,7 +352,7 @@ ms.locfileid: "93056193"
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a><span data-ttu-id="bb95f-289">`OnInitialized{Async}` 内のブレークポイントにヒットしない</span><span class="sxs-lookup"><span data-stu-id="bb95f-289">Breakpoints in `OnInitialized{Async}` not hit</span></span>
 
-<span data-ttu-id="bb95f-290">:::no-loc(Blazor)::: フレームワークのデバッグ プロキシは、起動に少し時間がかかります。そのため、[`OnInitialized{Async}` ライフサイクル メソッド](xref:blazor/components/lifecycle#component-initialization-methods)内のブレークポイントにヒットしない可能性があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-290">The :::no-loc(Blazor)::: framework's debugging proxy takes a short time to launch, so breakpoints in the [`OnInitialized{Async}` lifecycle method](xref:blazor/components/lifecycle#component-initialization-methods) might not be hit.</span></span> <span data-ttu-id="bb95f-291">デバッグ プロキシが起動してブレークポイントにヒットするまでの時間を確保するために、メソッド本体の開始に対して遅延を追加することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-291">We recommend adding a delay at the start of the method body to give the debug proxy some time to launch before the breakpoint is hit.</span></span> <span data-ttu-id="bb95f-292">[`if` コンパイラ ディレクティブ](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)に基づいて遅延を含めると、アプリのリリース ビルドに対しては遅延が存在しないようにすることができます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-292">You can include the delay based on an [`if` compiler directive](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) to ensure that the delay isn't present for a release build of the app.</span></span>
+<span data-ttu-id="bb95f-290">Blazor フレームワークのデバッグ プロキシは、起動に少し時間がかかります。そのため、[`OnInitialized{Async}` ライフサイクル メソッド](xref:blazor/components/lifecycle#component-initialization-methods)内のブレークポイントにヒットしない可能性があります。</span><span class="sxs-lookup"><span data-stu-id="bb95f-290">The Blazor framework's debugging proxy takes a short time to launch, so breakpoints in the [`OnInitialized{Async}` lifecycle method](xref:blazor/components/lifecycle#component-initialization-methods) might not be hit.</span></span> <span data-ttu-id="bb95f-291">デバッグ プロキシが起動してブレークポイントにヒットするまでの時間を確保するために、メソッド本体の開始に対して遅延を追加することをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="bb95f-291">We recommend adding a delay at the start of the method body to give the debug proxy some time to launch before the breakpoint is hit.</span></span> <span data-ttu-id="bb95f-292">[`if` コンパイラ ディレクティブ](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)に基づいて遅延を含めると、アプリのリリース ビルドに対しては遅延が存在しないようにすることができます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-292">You can include the delay based on an [`if` compiler directive](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) to ensure that the delay isn't present for a release build of the app.</span></span>
 
 <span data-ttu-id="bb95f-293"><xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:</span><span class="sxs-lookup"><span data-stu-id="bb95f-293"><xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A>:</span></span>
 
@@ -385,7 +385,7 @@ protected override async Task OnInitializedAsync()
 <span data-ttu-id="bb95f-296">Visual Studio で、タイムアウトに達したことを示すデバッグ アダプターの起動失敗の例外がスローされた場合、レジストリ設定でタイムアウトを調整できます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-296">If Visual Studio throws an exception that the debug adapter failed to launch mentioning that the timeout was reached, you can adjust the timeout with a Registry setting:</span></span>
 
 ```console
-VsRegEdit.exe set "<VSInstallFolder>" HKCU JSDebugger\Options\Debugging ":::no-loc(Blazor):::TimeoutInMilliseconds" dword {TIMEOUT}
+VsRegEdit.exe set "<VSInstallFolder>" HKCU JSDebugger\Options\Debugging "BlazorTimeoutInMilliseconds" dword {TIMEOUT}
 ```
 
 <span data-ttu-id="bb95f-297">上記のコマンドの `{TIMEOUT}` プレースホルダーはミリ秒単位です。</span><span class="sxs-lookup"><span data-stu-id="bb95f-297">The `{TIMEOUT}` placeholder in the preceding command is in milliseconds.</span></span> <span data-ttu-id="bb95f-298">たとえば、1 分は `60000` として割り当てられます。</span><span class="sxs-lookup"><span data-stu-id="bb95f-298">For example, one minute is assigned as `60000`.</span></span>

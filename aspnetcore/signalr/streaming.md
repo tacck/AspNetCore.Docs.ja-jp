@@ -1,5 +1,5 @@
 ---
-title: 'ASP.NET Core でストリーミングを使用する :::no-loc(SignalR):::'
+title: 'ASP.NET Core でストリーミングを使用する SignalR'
 author: bradygaster
 description: クライアントとサーバーの間でデータをストリーミングする方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
@@ -7,17 +7,17 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 10/29/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/streaming
 ms.openlocfilehash: b07c280f271ccdd525128b973da065001a5cf0ed
 ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
@@ -26,19 +26,19 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93062442"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="1124d-103">ASP.NET Core でストリーミングを使用する :::no-loc(SignalR):::</span><span class="sxs-lookup"><span data-stu-id="1124d-103">Use streaming in ASP.NET Core :::no-loc(SignalR):::</span></span>
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a><span data-ttu-id="1124d-103">ASP.NET Core でストリーミングを使用する SignalR</span><span class="sxs-lookup"><span data-stu-id="1124d-103">Use streaming in ASP.NET Core SignalR</span></span>
 
 <span data-ttu-id="1124d-104">[Brennan Conroy](https://github.com/BrennanConroy)</span><span class="sxs-lookup"><span data-stu-id="1124d-104">By [Brennan Conroy](https://github.com/BrennanConroy)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="1124d-105">ASP.NET Core :::no-loc(SignalR)::: は、クライアントからサーバー、およびサーバーからクライアントへのストリーミングをサポートします。</span><span class="sxs-lookup"><span data-stu-id="1124d-105">ASP.NET Core :::no-loc(SignalR)::: supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="1124d-106">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="1124d-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="1124d-107">ストリーミング時には、すべてのデータが使用可能になるのを待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントまたはサーバーに送信されます。</span><span class="sxs-lookup"><span data-stu-id="1124d-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
+<span data-ttu-id="1124d-105">ASP.NET Core SignalR は、クライアントからサーバー、およびサーバーからクライアントへのストリーミングをサポートします。</span><span class="sxs-lookup"><span data-stu-id="1124d-105">ASP.NET Core SignalR supports streaming from client to server and from server to client.</span></span> <span data-ttu-id="1124d-106">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="1124d-106">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="1124d-107">ストリーミング時には、すべてのデータが使用可能になるのを待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントまたはサーバーに送信されます。</span><span class="sxs-lookup"><span data-stu-id="1124d-107">When streaming, each fragment is sent to the client or server as soon as it becomes available, rather than waiting for all of the data to become available.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="1124d-108">ASP.NET Core :::no-loc(SignalR)::: は、サーバーメソッドのストリーミング戻り値をサポートします。</span><span class="sxs-lookup"><span data-stu-id="1124d-108">ASP.NET Core :::no-loc(SignalR)::: supports streaming return values of server methods.</span></span> <span data-ttu-id="1124d-109">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="1124d-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="1124d-110">戻り値がクライアントにストリーミングされると、すべてのデータが使用可能になるまで待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="1124d-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
+<span data-ttu-id="1124d-108">ASP.NET Core SignalR は、サーバーメソッドのストリーミング戻り値をサポートします。</span><span class="sxs-lookup"><span data-stu-id="1124d-108">ASP.NET Core SignalR supports streaming return values of server methods.</span></span> <span data-ttu-id="1124d-109">これは、時間の経過と共にデータのフラグメントが到着するシナリオに役立ちます。</span><span class="sxs-lookup"><span data-stu-id="1124d-109">This is useful for scenarios where fragments of data arrive over time.</span></span> <span data-ttu-id="1124d-110">戻り値がクライアントにストリーミングされると、すべてのデータが使用可能になるまで待機するのではなく、使用可能になるとすぐに各フラグメントがクライアントに送信されます。</span><span class="sxs-lookup"><span data-stu-id="1124d-110">When a return value is streamed to the client, each fragment is sent to the client as soon as it becomes available, rather than waiting for all the data to become available.</span></span>
 
 ::: moniker-end
 
@@ -305,7 +305,7 @@ channel.Writer.Complete();
 
 ### <a name="server-to-client-streaming"></a><span data-ttu-id="1124d-177">サーバーからクライアントへのストリーミング</span><span class="sxs-lookup"><span data-stu-id="1124d-177">Server-to-client streaming</span></span>
 
-<span data-ttu-id="1124d-178">Java クライアントは、メソッドを使用して :::no-loc(SignalR)::: `stream` ストリーミングメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="1124d-178">The :::no-loc(SignalR)::: Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="1124d-179">`stream` 3つ以上の引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="1124d-179">`stream` accepts three or more arguments:</span></span>
+<span data-ttu-id="1124d-178">Java クライアントは、メソッドを使用して SignalR `stream` ストリーミングメソッドを呼び出します。</span><span class="sxs-lookup"><span data-stu-id="1124d-178">The SignalR Java client uses the `stream` method to invoke streaming methods.</span></span> <span data-ttu-id="1124d-179">`stream` 3つ以上の引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="1124d-179">`stream` accepts three or more arguments:</span></span>
 
 * <span data-ttu-id="1124d-180">ストリーム項目の予期される型。</span><span class="sxs-lookup"><span data-stu-id="1124d-180">The expected type of the stream items.</span></span>
 * <span data-ttu-id="1124d-181">ハブメソッドの名前。</span><span class="sxs-lookup"><span data-stu-id="1124d-181">The name of the hub method.</span></span>
@@ -323,7 +323,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ### <a name="client-to-server-streaming"></a><span data-ttu-id="1124d-185">クライアントとサーバー間のストリーミング</span><span class="sxs-lookup"><span data-stu-id="1124d-185">Client-to-server streaming</span></span>
 
-<span data-ttu-id="1124d-186">:::no-loc(SignalR):::Java クライアントは[Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) `send` 、 `invoke` `stream` 呼び出されたハブメソッドに応じて、、、またはへの引数として観測可能なを渡すことによって、ハブでクライアントからサーバーへのストリーミングメソッドを呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="1124d-186">The :::no-loc(SignalR)::: Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
+<span data-ttu-id="1124d-186">SignalRJava クライアントは[Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) `send` 、 `invoke` `stream` 呼び出されたハブメソッドに応じて、、、またはへの引数として観測可能なを渡すことによって、ハブでクライアントからサーバーへのストリーミングメソッドを呼び出すことができます。</span><span class="sxs-lookup"><span data-stu-id="1124d-186">The SignalR Java client can call client-to-server streaming methods on hubs by passing in an [Observable](https://rxjs-dev.firebaseapp.com/api/index/class/Observable) as an argument to `send`, `invoke`, or `stream`, depending on the hub method invoked.</span></span>
 
 ```java
 ReplaySubject<String> stream = ReplaySubject.create();

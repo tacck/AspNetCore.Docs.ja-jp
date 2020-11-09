@@ -1,21 +1,21 @@
 ---
-title: 'パート 6、ASP.NET Core :::no-loc(Razor)::: ページへの検索の追加'
+title: 'パート 6、ASP.NET Core Razor ページへの検索の追加'
 author: rick-anderson
-description: ':::no-loc(Razor)::: ページのチュートリアル シリーズのパート 6。'
+description: 'Razor ページのチュートリアル シリーズのパート 6。'
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/razor-pages/search
 ms.openlocfilehash: 960f60198f5e65ed05d0374fd0704537376d27d6
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93058091"
 ---
-# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a><span data-ttu-id="bec08-103">パート 6、ASP.NET Core :::no-loc(Razor)::: ページへの検索の追加</span><span class="sxs-lookup"><span data-stu-id="bec08-103">Part 6, add search to ASP.NET Core :::no-loc(Razor)::: Pages</span></span>
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a><span data-ttu-id="bec08-103">パート 6、ASP.NET Core Razor ページへの検索の追加</span><span class="sxs-lookup"><span data-stu-id="bec08-103">Part 6, add search to ASP.NET Core Razor Pages</span></span>
 
 <span data-ttu-id="bec08-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="bec08-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -36,7 +36,7 @@ ms.locfileid: "93058091"
 
 <span data-ttu-id="bec08-106">強調表示されている次のプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。</span><span class="sxs-lookup"><span data-stu-id="bec08-106">Add the following highlighted properties to *Pages/Movies/Index.cshtml.cs* :</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
 * <span data-ttu-id="bec08-107">`SearchString`: ユーザーが検索テキスト ボックスに入力したテキストが含まれる。</span><span class="sxs-lookup"><span data-stu-id="bec08-107">`SearchString`: contains the text users enter in the search text box.</span></span> <span data-ttu-id="bec08-108">`SearchString` には、[`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 属性があります。</span><span class="sxs-lookup"><span data-stu-id="bec08-108">`SearchString` has the [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) attribute.</span></span> <span data-ttu-id="bec08-109">`[BindProperty]` により、プロパティと同じ名前に基づきフォーム値とクエリ文字列がバインドされます。</span><span class="sxs-lookup"><span data-stu-id="bec08-109">`[BindProperty]` binds form values and query strings with the same name as the property.</span></span> <span data-ttu-id="bec08-110">GET 要求でのバインドには `(SupportsGet = true)` が必要です。</span><span class="sxs-lookup"><span data-stu-id="bec08-110">`(SupportsGet = true)` is required for binding on GET requests.</span></span>
 * <span data-ttu-id="bec08-111">`Genres`: ジャンル一覧が含まれる。</span><span class="sxs-lookup"><span data-stu-id="bec08-111">`Genres`: contains the list of genres.</span></span> <span data-ttu-id="bec08-112">`Genres` により、ユーザーは一覧からジャンルを選択できます。</span><span class="sxs-lookup"><span data-stu-id="bec08-112">`Genres` allows the user to select a genre from the list.</span></span> <span data-ttu-id="bec08-113">`SelectList` には `using Microsoft.AspNetCore.Mvc.Rendering;` が必要です。</span><span class="sxs-lookup"><span data-stu-id="bec08-113">`SelectList` requires `using Microsoft.AspNetCore.Mvc.Rendering;`</span></span>
@@ -47,7 +47,7 @@ ms.locfileid: "93058091"
 
 <span data-ttu-id="bec08-116">索引ページの `OnGetAsync` メソッドを次のコードに変更します。</span><span class="sxs-lookup"><span data-stu-id="bec08-116">Update the Index page's `OnGetAsync` method with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
 <span data-ttu-id="bec08-117">`OnGetAsync` メソッドの最初の行により、ムービーを選択する [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-117">The first line of the `OnGetAsync` method creates a [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) query to select the movies:</span></span>
 
@@ -61,7 +61,7 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-119">`SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-119">If the `SearchString` property is not null or empty, the movies query is modified to filter on the search string:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
 
 <span data-ttu-id="bec08-120">`s => s.Title.Contains()` コードは[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)です。</span><span class="sxs-lookup"><span data-stu-id="bec08-120">The `s => s.Title.Contains()` code is a [Lambda Expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="bec08-121">ラムダは、メソッド ベースの [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリで、[Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) メソッドや `Contains` (先のコードで使用されています) など、標準クエリ演算子メソッドの引数として使用されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-121">Lambdas are used in method-based [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) queries as arguments to standard query operator methods such as the [Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) method or `Contains` (used in the preceding code).</span></span> <span data-ttu-id="bec08-122">LINQ クエリは、`Where`、`Contains`、`OrderBy` などのメソッドの呼び出しで定義または変更されたときには実行されません。</span><span class="sxs-lookup"><span data-stu-id="bec08-122">LINQ queries are not executed when they're defined or when they're modified by calling a method (such as `Where`, `Contains`  or `OrderBy`).</span></span> <span data-ttu-id="bec08-123">クエリ実行は先送りされます。</span><span class="sxs-lookup"><span data-stu-id="bec08-123">Rather, query execution is deferred.</span></span> <span data-ttu-id="bec08-124">つまり、その具体値が繰り返されるか、`ToListAsync` メソッドが呼び出されるまで、式の評価が延ばされます。</span><span class="sxs-lookup"><span data-stu-id="bec08-124">That means the evaluation of an expression is delayed until its realized value is iterated over or the `ToListAsync` method is called.</span></span> <span data-ttu-id="bec08-125">詳細については、「[クエリ実行](/dotnet/framework/data/adonet/ef/language-reference/query-execution)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="bec08-125">See [Query Execution](/dotnet/framework/data/adonet/ef/language-reference/query-execution) for more information.</span></span>
 
@@ -88,7 +88,7 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-142">*Pages/Movies/Index.cshtml* ファイルを開き、次のコードで強調表示されている `<form>` マークアップを追加します。</span><span class="sxs-lookup"><span data-stu-id="bec08-142">Open the *Pages/Movies/Index.cshtml* file, and add the `<form>` markup highlighted in the following code:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/SnapShots/Index2.cshtml?highlight=14-19&range=1-22)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/Index2.cshtml?highlight=14-19&range=1-22)]
 
 <span data-ttu-id="bec08-143">HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-143">The HTML `<form>` tag uses the following [Tag Helpers](xref:mvc/views/tag-helpers/intro):</span></span>
 
@@ -103,21 +103,21 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-150">`OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="bec08-150">Update the `OnGetAsync` method with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
 
 <span data-ttu-id="bec08-151">次のコードは、データベースからすべてのジャンルを取得する LINQ クエリです。</span><span class="sxs-lookup"><span data-stu-id="bec08-151">The following code is a LINQ query that retrieves all the genres from the database.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_LINQ)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_LINQ)]
 
 <span data-ttu-id="bec08-152">ジャンルの `SelectList` は、別個のジャンルを推定することで作成されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-152">The `SelectList` of genres is created by projecting the distinct genres.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="bec08-153">ジャンル検索を :::no-loc(Razor)::: ページに追加する</span><span class="sxs-lookup"><span data-stu-id="bec08-153">Add search by genre to the :::no-loc(Razor)::: Page</span></span>
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="bec08-153">ジャンル検索を Razor ページに追加する</span><span class="sxs-lookup"><span data-stu-id="bec08-153">Add search by genre to the Razor Page</span></span>
 
 <span data-ttu-id="bec08-154">*Index.cshtml* を次のように変更します。</span><span class="sxs-lookup"><span data-stu-id="bec08-154">Update *Index.cshtml* as follows:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/SnapShots/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
 <span data-ttu-id="bec08-155">ジャンルまたはムービーのタイトル、あるいはその両方で検索して、アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="bec08-155">Test the app by searching by genre, by movie title, and by both.</span></span>
 
@@ -140,7 +140,7 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-160">強調表示されている次のプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。</span><span class="sxs-lookup"><span data-stu-id="bec08-160">Add the following highlighted properties to *Pages/Movies/Index.cshtml.cs* :</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
 * <span data-ttu-id="bec08-161">`SearchString`: ユーザーが検索テキスト ボックスに入力したテキストが含まれる。</span><span class="sxs-lookup"><span data-stu-id="bec08-161">`SearchString`: contains the text users enter in the search text box.</span></span> <span data-ttu-id="bec08-162">`SearchString` には、[`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 属性があります。</span><span class="sxs-lookup"><span data-stu-id="bec08-162">`SearchString` has the [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) attribute.</span></span> <span data-ttu-id="bec08-163">`[BindProperty]` により、プロパティと同じ名前に基づきフォーム値とクエリ文字列がバインドされます。</span><span class="sxs-lookup"><span data-stu-id="bec08-163">`[BindProperty]` binds form values and query strings with the same name as the property.</span></span> <span data-ttu-id="bec08-164">GET 要求でのバインドには `(SupportsGet = true)` が必要です。</span><span class="sxs-lookup"><span data-stu-id="bec08-164">`(SupportsGet = true)` is required for binding on GET requests.</span></span>
 * <span data-ttu-id="bec08-165">`Genres`: ジャンル一覧が含まれる。</span><span class="sxs-lookup"><span data-stu-id="bec08-165">`Genres`: contains the list of genres.</span></span> <span data-ttu-id="bec08-166">`Genres` により、ユーザーは一覧からジャンルを選択できます。</span><span class="sxs-lookup"><span data-stu-id="bec08-166">`Genres` allows the user to select a genre from the list.</span></span> <span data-ttu-id="bec08-167">`SelectList` には `using Microsoft.AspNetCore.Mvc.Rendering;` が必要です。</span><span class="sxs-lookup"><span data-stu-id="bec08-167">`SelectList` requires `using Microsoft.AspNetCore.Mvc.Rendering;`</span></span>
@@ -151,7 +151,7 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-170">索引ページの `OnGetAsync` メソッドを次のコードに変更します。</span><span class="sxs-lookup"><span data-stu-id="bec08-170">Update the Index page's `OnGetAsync` method with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
 <span data-ttu-id="bec08-171">`OnGetAsync` メソッドの最初の行により、ムービーを選択する [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-171">The first line of the `OnGetAsync` method creates a [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) query to select the movies:</span></span>
 
@@ -165,7 +165,7 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-173">`SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-173">If the `SearchString` property is not null or empty, the movies query is modified to filter on the search string:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
 
 <span data-ttu-id="bec08-174">`s => s.Title.Contains()` コードは[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)です。</span><span class="sxs-lookup"><span data-stu-id="bec08-174">The `s => s.Title.Contains()` code is a [Lambda Expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="bec08-175">ラムダは、メソッド ベースの [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリで、[Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) メソッドや `Contains` (先のコードで使用されています) など、標準クエリ演算子メソッドの引数として使用されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-175">Lambdas are used in method-based [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) queries as arguments to standard query operator methods such as the [Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) method or `Contains` (used in the preceding code).</span></span> <span data-ttu-id="bec08-176">LINQ クエリは、`Where`、`Contains`、`OrderBy` などのメソッドの呼び出しで定義または変更されたときには実行されません。</span><span class="sxs-lookup"><span data-stu-id="bec08-176">LINQ queries are not executed when they're defined or when they're modified by calling a method (such as `Where`, `Contains`  or `OrderBy`).</span></span> <span data-ttu-id="bec08-177">クエリ実行は先送りされます。</span><span class="sxs-lookup"><span data-stu-id="bec08-177">Rather, query execution is deferred.</span></span> <span data-ttu-id="bec08-178">つまり、その具体値が繰り返されるか、`ToListAsync` メソッドが呼び出されるまで、式の評価が延ばされます。</span><span class="sxs-lookup"><span data-stu-id="bec08-178">That means the evaluation of an expression is delayed until its realized value is iterated over or the `ToListAsync` method is called.</span></span> <span data-ttu-id="bec08-179">詳細については、「[クエリ実行](/dotnet/framework/data/adonet/ef/language-reference/query-execution)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="bec08-179">See [Query Execution](/dotnet/framework/data/adonet/ef/language-reference/query-execution) for more information.</span></span>
 
@@ -191,7 +191,7 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-196">*Pages/Movies/Index.cshtml* ファイルを開き、次のコードで強調表示されている `<form>` マークアップを追加します。</span><span class="sxs-lookup"><span data-stu-id="bec08-196">Open the *Pages/Movies/Index.cshtml* file, and add the `<form>` markup highlighted in the following code:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index2.cshtml?highlight=14-19&range=1-22)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index2.cshtml?highlight=14-19&range=1-22)]
 
 <span data-ttu-id="bec08-197">HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-197">The HTML `<form>` tag uses the following [Tag Helpers](xref:mvc/views/tag-helpers/intro):</span></span>
 
@@ -206,21 +206,21 @@ var movies = from m in _context.Movie
 
 <span data-ttu-id="bec08-204">`OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="bec08-204">Update the `OnGetAsync` method with the following code:</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
 
 <span data-ttu-id="bec08-205">次のコードは、データベースからすべてのジャンルを取得する LINQ クエリです。</span><span class="sxs-lookup"><span data-stu-id="bec08-205">The following code is a LINQ query that retrieves all the genres from the database.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_LINQ)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_LINQ)]
 
 <span data-ttu-id="bec08-206">ジャンルの `SelectList` は、別個のジャンルを推定することで作成されます。</span><span class="sxs-lookup"><span data-stu-id="bec08-206">The `SelectList` of genres is created by projecting the distinct genres.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="bec08-207">ジャンル検索を :::no-loc(Razor)::: ページに追加する</span><span class="sxs-lookup"><span data-stu-id="bec08-207">Add search by genre to the :::no-loc(Razor)::: Page</span></span>
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="bec08-207">ジャンル検索を Razor ページに追加する</span><span class="sxs-lookup"><span data-stu-id="bec08-207">Add search by genre to the Razor Page</span></span>
 
 <span data-ttu-id="bec08-208">*Index.cshtml* を次のように変更します。</span><span class="sxs-lookup"><span data-stu-id="bec08-208">Update *Index.cshtml* as follows:</span></span>
 
-[!code-cshtml[](razor-pages-start/sample/:::no-loc(Razor):::PagesMovie22/Pages/Movies/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
 <span data-ttu-id="bec08-209">ジャンルまたはムービーのタイトル、あるいはその両方で検索して、アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="bec08-209">Test the app by searching by genre, by movie title, and by both.</span></span>
 <span data-ttu-id="bec08-210">前のコードでは、[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)とオプション タグ ヘルパーが使用されています。</span><span class="sxs-lookup"><span data-stu-id="bec08-210">The preceding code uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper) and Option Tag Helper.</span></span>

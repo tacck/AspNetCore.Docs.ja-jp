@@ -5,17 +5,17 @@ description: ASP.NET Core におけるデータ保護のキー管理と有効期
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/data-protection/configuration/default-settings
 ms.openlocfilehash: 1303c5c2c993f1d20383457666aebfa2a583e938
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -35,7 +35,7 @@ ms.locfileid: "93053008"
 1. <span data-ttu-id="b4029-107">アプリが [Azure アプリ](https://azure.microsoft.com/services/app-service/)でホストされている場合、キーは *%HOME%\ASP.NET\DataProtection-Keys* フォルダーに保存されます。</span><span class="sxs-lookup"><span data-stu-id="b4029-107">If the app is hosted in [Azure Apps](https://azure.microsoft.com/services/app-service/), keys are persisted to the *%HOME%\ASP.NET\DataProtection-Keys* folder.</span></span> <span data-ttu-id="b4029-108">このフォルダーはネットワーク ストレージにバックアップされ、アプリをホストしているすべてのマシンで同期されています。</span><span class="sxs-lookup"><span data-stu-id="b4029-108">This folder is backed by network storage and is synchronized across all machines hosting the app.</span></span>
    * <span data-ttu-id="b4029-109">保存中のキーは保護されていません。</span><span class="sxs-lookup"><span data-stu-id="b4029-109">Keys aren't protected at rest.</span></span>
    * <span data-ttu-id="b4029-110">*Dataprotection キー* フォルダーは、単一のデプロイスロット内のアプリのすべてのインスタンスにキーリングを提供します。</span><span class="sxs-lookup"><span data-stu-id="b4029-110">The *DataProtection-Keys* folder supplies the key ring to all instances of an app in a single deployment slot.</span></span>
-   * <span data-ttu-id="b4029-111">ステージングや運用などの別のデプロイ スロットでは、キー リングが共有されません。</span><span class="sxs-lookup"><span data-stu-id="b4029-111">Separate deployment slots, such as Staging and Production, don't share a key ring.</span></span> <span data-ttu-id="b4029-112">デプロイスロット間でスワップする場合 (運用環境へのステージングまたは A/B テストを使用する場合など)、データ保護を使用するすべてのアプリは、前のスロット内のキーリングを使用して格納されたデータの暗号化を解除することはできません。</span><span class="sxs-lookup"><span data-stu-id="b4029-112">When you swap between deployment slots, for example swapping Staging to Production or using A/B testing, any app using Data Protection won't be able to decrypt stored data using the key ring inside the previous slot.</span></span> <span data-ttu-id="b4029-113">これにより、ユーザーは、 :::no-loc(cookie)::: データ保護を使用してを保護するので、標準 ASP.NET Core 認証を使用するアプリからログアウトされ :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="b4029-113">This leads to users being logged out of an app that uses the standard ASP.NET Core :::no-loc(cookie)::: authentication, as it uses Data Protection to protect its :::no-loc(cookie):::s.</span></span> <span data-ttu-id="b4029-114">スロットに依存しないキーリングが必要な場合は、Azure Blob Storage、Azure Key Vault、SQL ストア、Redis cache などの外部キーリングプロバイダーを使用します。</span><span class="sxs-lookup"><span data-stu-id="b4029-114">If you desire slot-independent key rings, use an external key ring provider, such as Azure Blob Storage, Azure Key Vault, a SQL store, or Redis cache.</span></span>
+   * <span data-ttu-id="b4029-111">ステージングや運用などの別のデプロイ スロットでは、キー リングが共有されません。</span><span class="sxs-lookup"><span data-stu-id="b4029-111">Separate deployment slots, such as Staging and Production, don't share a key ring.</span></span> <span data-ttu-id="b4029-112">デプロイスロット間でスワップする場合 (運用環境へのステージングまたは A/B テストを使用する場合など)、データ保護を使用するすべてのアプリは、前のスロット内のキーリングを使用して格納されたデータの暗号化を解除することはできません。</span><span class="sxs-lookup"><span data-stu-id="b4029-112">When you swap between deployment slots, for example swapping Staging to Production or using A/B testing, any app using Data Protection won't be able to decrypt stored data using the key ring inside the previous slot.</span></span> <span data-ttu-id="b4029-113">これにより、ユーザーは、 cookie データ保護を使用してを保護するので、標準 ASP.NET Core 認証を使用するアプリからログアウトされ cookie ます。</span><span class="sxs-lookup"><span data-stu-id="b4029-113">This leads to users being logged out of an app that uses the standard ASP.NET Core cookie authentication, as it uses Data Protection to protect its cookies.</span></span> <span data-ttu-id="b4029-114">スロットに依存しないキーリングが必要な場合は、Azure Blob Storage、Azure Key Vault、SQL ストア、Redis cache などの外部キーリングプロバイダーを使用します。</span><span class="sxs-lookup"><span data-stu-id="b4029-114">If you desire slot-independent key rings, use an external key ring provider, such as Azure Blob Storage, Azure Key Vault, a SQL store, or Redis cache.</span></span>
 
 1. <span data-ttu-id="b4029-115">ユーザープロファイルが使用可能な場合、キーは *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* フォルダーに保存されます。</span><span class="sxs-lookup"><span data-stu-id="b4029-115">If the user profile is available, keys are persisted to the *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* folder.</span></span> <span data-ttu-id="b4029-116">オペレーティングシステムが Windows の場合、キーは DPAPI を使用して保存時に暗号化されます。</span><span class="sxs-lookup"><span data-stu-id="b4029-116">If the operating system is Windows, the keys are encrypted at rest using DPAPI.</span></span>
 

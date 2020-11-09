@@ -5,17 +5,17 @@ description: ASP.NET Core MVC のチュートリアル シリーズのパート 
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: 11832efa6715f96856665f174d65b094806d2810
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -135,7 +135,7 @@ ms.locfileid: "93061289"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-<span data-ttu-id="2f966-195">これらの例では、コントローラーによって MVC の "VC" 部分が実行されています。つまり、ビュー ( **V** iew) とコントローラー ( **C** ontroller) が動作します。</span><span class="sxs-lookup"><span data-stu-id="2f966-195">In these examples the controller has been doing the "VC" portion of MVC - that is, the **V** iew and the **C** ontroller work.</span></span> <span data-ttu-id="2f966-196">コントローラーは HTML を直接返しています。</span><span class="sxs-lookup"><span data-stu-id="2f966-196">The controller is returning HTML directly.</span></span> <span data-ttu-id="2f966-197">一般に、コントローラーが HTML を直接返すのは、コーディングと保守が非常に面倒になるので、望ましくありません。</span><span class="sxs-lookup"><span data-stu-id="2f966-197">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="2f966-198">代わりに、通常は、別の :::no-loc(Razor)::: ビュー テンプレート ファイルを使って、HTML 応答を生成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="2f966-198">Instead you typically use a separate :::no-loc(Razor)::: view template file to generate the HTML response.</span></span> <span data-ttu-id="2f966-199">これは次のチュートリアルで行います。</span><span class="sxs-lookup"><span data-stu-id="2f966-199">You do that in the next tutorial.</span></span>
+<span data-ttu-id="2f966-195">これらの例では、コントローラーによって MVC の "VC" 部分が実行されています。つまり、ビュー ( **V** iew) とコントローラー ( **C** ontroller) が動作します。</span><span class="sxs-lookup"><span data-stu-id="2f966-195">In these examples the controller has been doing the "VC" portion of MVC - that is, the **V** iew and the **C** ontroller work.</span></span> <span data-ttu-id="2f966-196">コントローラーは HTML を直接返しています。</span><span class="sxs-lookup"><span data-stu-id="2f966-196">The controller is returning HTML directly.</span></span> <span data-ttu-id="2f966-197">一般に、コントローラーが HTML を直接返すのは、コーディングと保守が非常に面倒になるので、望ましくありません。</span><span class="sxs-lookup"><span data-stu-id="2f966-197">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="2f966-198">代わりに、通常は、別の Razor ビュー テンプレート ファイルを使って、HTML 応答を生成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="2f966-198">Instead you typically use a separate Razor view template file to generate the HTML response.</span></span> <span data-ttu-id="2f966-199">これは次のチュートリアルで行います。</span><span class="sxs-lookup"><span data-stu-id="2f966-199">You do that in the next tutorial.</span></span>
 
 > [!div class="step-by-step"]
 > <span data-ttu-id="2f966-200">[前へ](start-mvc.md)
@@ -256,7 +256,7 @@ Remove link for simplified tutorial.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-<span data-ttu-id="2f966-291">これらの例では、コントローラーによって MVC の "VC" 部分が実行されています。つまり、ビューとコントローラーが動作します。</span><span class="sxs-lookup"><span data-stu-id="2f966-291">In these examples the controller has been doing the "VC" portion of MVC - that is, the view and controller work.</span></span> <span data-ttu-id="2f966-292">コントローラーは HTML を直接返しています。</span><span class="sxs-lookup"><span data-stu-id="2f966-292">The controller is returning HTML directly.</span></span> <span data-ttu-id="2f966-293">一般に、コントローラーが HTML を直接返すのは、コーディングと保守が非常に面倒になるので、望ましくありません。</span><span class="sxs-lookup"><span data-stu-id="2f966-293">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="2f966-294">代わりに、通常は、別の :::no-loc(Razor)::: ビュー テンプレート ファイルを使って、HTML 応答を生成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="2f966-294">Instead you typically use a separate :::no-loc(Razor)::: view template file to help generate the HTML response.</span></span> <span data-ttu-id="2f966-295">これは次のチュートリアルで行います。</span><span class="sxs-lookup"><span data-stu-id="2f966-295">You do that in the next tutorial.</span></span>
+<span data-ttu-id="2f966-291">これらの例では、コントローラーによって MVC の "VC" 部分が実行されています。つまり、ビューとコントローラーが動作します。</span><span class="sxs-lookup"><span data-stu-id="2f966-291">In these examples the controller has been doing the "VC" portion of MVC - that is, the view and controller work.</span></span> <span data-ttu-id="2f966-292">コントローラーは HTML を直接返しています。</span><span class="sxs-lookup"><span data-stu-id="2f966-292">The controller is returning HTML directly.</span></span> <span data-ttu-id="2f966-293">一般に、コントローラーが HTML を直接返すのは、コーディングと保守が非常に面倒になるので、望ましくありません。</span><span class="sxs-lookup"><span data-stu-id="2f966-293">Generally you don't want controllers returning HTML directly, since that becomes very cumbersome to code and maintain.</span></span> <span data-ttu-id="2f966-294">代わりに、通常は、別の Razor ビュー テンプレート ファイルを使って、HTML 応答を生成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="2f966-294">Instead you typically use a separate Razor view template file to help generate the HTML response.</span></span> <span data-ttu-id="2f966-295">これは次のチュートリアルで行います。</span><span class="sxs-lookup"><span data-stu-id="2f966-295">You do that in the next tutorial.</span></span>
 
 > [!div class="step-by-step"]
 > <span data-ttu-id="2f966-296">[前へ](start-mvc.md)

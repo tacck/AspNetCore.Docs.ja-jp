@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -83,7 +83,7 @@ ms.locfileid: "93054373"
 
 * <span data-ttu-id="17620-150">ユーザーが変更したプロパティを追跡記録し、それに該当する列だけをデータベースで更新できます。</span><span class="sxs-lookup"><span data-stu-id="17620-150">You can keep track of which property a user has modified and update only the corresponding columns in the database.</span></span>
 
-     <span data-ttu-id="17620-151">例のシナリオでは、2 人のユーザーが異なるプロパティを更新したため、データは失われません。</span><span class="sxs-lookup"><span data-stu-id="17620-151">In the example scenario, no data would be lost, because different properties were updated by the two users.</span></span> <span data-ttu-id="17620-152">今度誰かが English 部署を閲覧すると、Jane の変更と John の変更が両方とも表示されます。開始日が 9/1/2013 で予算が 0 ドルです。</span><span class="sxs-lookup"><span data-stu-id="17620-152">The next time someone browses the English department, they will see both Jane's and John's changes -- a start date of 9/1/2013 and a budget of zero dollars.</span></span> <span data-ttu-id="17620-153">この更新方法では、データの損失につながる可能性がある競合の数を減らすことができますが、あるエンティティの同じプロパティに対して行われた変更が競合する場合、データの損失は避けられません。</span><span class="sxs-lookup"><span data-stu-id="17620-153">This method of updating can reduce the number of conflicts that could result in data loss, but it can't avoid data loss if competing changes are made to the same property of an entity.</span></span> <span data-ttu-id="17620-154">Entity Framework がこのように動作するかどうかは、更新コードの実装方法に依存します。</span><span class="sxs-lookup"><span data-stu-id="17620-154">Whether the Entity Framework works this way depends on how you implement your update code.</span></span> <span data-ttu-id="17620-155">これは Web アプリケーションの場合、実用的ではない場合が多いです。あるエンティティの新しい値に加え、元のプロパティ値もすべて追跡記録するため、大量のステータスを更新することになるからです。</span><span class="sxs-lookup"><span data-stu-id="17620-155">It's often not practical in a web application, because it can require that you maintain large amounts of state in order to keep track of all original property values for an entity as well as new values.</span></span> <span data-ttu-id="17620-156">大量のステータスを更新するとなると、サーバー リソースが必要になるか、Web ページ自体 (非表示フィールドなど) や :::no-loc(cookie)::: に含める必要があるため、アプリケーションのパフォーマンスに影響が出ます。</span><span class="sxs-lookup"><span data-stu-id="17620-156">Maintaining large amounts of state can affect application performance because it either requires server resources or must be included in the web page itself (for example, in hidden fields) or in a :::no-loc(cookie):::.</span></span>
+     <span data-ttu-id="17620-151">例のシナリオでは、2 人のユーザーが異なるプロパティを更新したため、データは失われません。</span><span class="sxs-lookup"><span data-stu-id="17620-151">In the example scenario, no data would be lost, because different properties were updated by the two users.</span></span> <span data-ttu-id="17620-152">今度誰かが English 部署を閲覧すると、Jane の変更と John の変更が両方とも表示されます。開始日が 9/1/2013 で予算が 0 ドルです。</span><span class="sxs-lookup"><span data-stu-id="17620-152">The next time someone browses the English department, they will see both Jane's and John's changes -- a start date of 9/1/2013 and a budget of zero dollars.</span></span> <span data-ttu-id="17620-153">この更新方法では、データの損失につながる可能性がある競合の数を減らすことができますが、あるエンティティの同じプロパティに対して行われた変更が競合する場合、データの損失は避けられません。</span><span class="sxs-lookup"><span data-stu-id="17620-153">This method of updating can reduce the number of conflicts that could result in data loss, but it can't avoid data loss if competing changes are made to the same property of an entity.</span></span> <span data-ttu-id="17620-154">Entity Framework がこのように動作するかどうかは、更新コードの実装方法に依存します。</span><span class="sxs-lookup"><span data-stu-id="17620-154">Whether the Entity Framework works this way depends on how you implement your update code.</span></span> <span data-ttu-id="17620-155">これは Web アプリケーションの場合、実用的ではない場合が多いです。あるエンティティの新しい値に加え、元のプロパティ値もすべて追跡記録するため、大量のステータスを更新することになるからです。</span><span class="sxs-lookup"><span data-stu-id="17620-155">It's often not practical in a web application, because it can require that you maintain large amounts of state in order to keep track of all original property values for an entity as well as new values.</span></span> <span data-ttu-id="17620-156">大量のステータスを更新するとなると、サーバー リソースが必要になるか、Web ページ自体 (非表示フィールドなど) や cookie に含める必要があるため、アプリケーションのパフォーマンスに影響が出ます。</span><span class="sxs-lookup"><span data-stu-id="17620-156">Maintaining large amounts of state can affect application performance because it either requires server resources or must be included in the web page itself (for example, in hidden fields) or in a cookie.</span></span>
 
 * <span data-ttu-id="17620-157">John の変更で Jane の変更を上書きするように指定できます。</span><span class="sxs-lookup"><span data-stu-id="17620-157">You can let John's change overwrite Jane's change.</span></span>
 

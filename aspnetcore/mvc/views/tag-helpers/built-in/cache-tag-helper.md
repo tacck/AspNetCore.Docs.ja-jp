@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
 ms.openlocfilehash: a87f91255bd1f280b1567f522423a6f4e88a6dd8
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -33,7 +33,7 @@ ms.locfileid: "93060886"
 
 <span data-ttu-id="6a7f0-106">タグ ヘルパーの概要については、「<xref:mvc/views/tag-helpers/intro>」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-106">For an overview of Tag Helpers, see <xref:mvc/views/tag-helpers/intro>.</span></span>
 
-<span data-ttu-id="6a7f0-107">次の :::no-loc(Razor)::: マークアップは、現在の日付をキャッシュします。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-107">The following :::no-loc(Razor)::: markup caches the current date:</span></span>
+<span data-ttu-id="6a7f0-107">次の Razor マークアップは、現在の日付をキャッシュします。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-107">The following Razor markup caches the current date:</span></span>
 
 ```cshtml
 <cache>@DateTime.Now</cache>
@@ -91,7 +91,7 @@ ms.locfileid: "93060886"
 </cache>
 ```
 
-<span data-ttu-id="6a7f0-133">:::no-loc(Razor):::ビューエンジンは、既定 `expires-after` 値を20分に設定します。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-133">The :::no-loc(Razor)::: View Engine sets the default `expires-after` value to twenty minutes.</span></span>
+<span data-ttu-id="6a7f0-133">Razorビューエンジンは、既定 `expires-after` 値を20分に設定します。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-133">The Razor View Engine sets the default `expires-after` value to twenty minutes.</span></span>
 
 ### <a name="expires-sliding"></a><span data-ttu-id="6a7f0-134">expires-sliding</span><span class="sxs-lookup"><span data-stu-id="6a7f0-134">expires-sliding</span></span>
 
@@ -167,18 +167,18 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-no-loccookie"></a><span data-ttu-id="6a7f0-164">異なる方法-:::no-loc(cookie):::</span><span class="sxs-lookup"><span data-stu-id="6a7f0-164">vary-by-:::no-loc(cookie):::</span></span>
+### <a name="vary-by-no-loccookie"></a><span data-ttu-id="6a7f0-164">異なる方法-cookie</span><span class="sxs-lookup"><span data-stu-id="6a7f0-164">vary-by-cookie</span></span>
 
 | <span data-ttu-id="6a7f0-165">属性の種類</span><span class="sxs-lookup"><span data-stu-id="6a7f0-165">Attribute Type</span></span> | <span data-ttu-id="6a7f0-166">例</span><span class="sxs-lookup"><span data-stu-id="6a7f0-166">Examples</span></span>                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
-| <span data-ttu-id="6a7f0-167">String</span><span class="sxs-lookup"><span data-stu-id="6a7f0-167">String</span></span>         | <span data-ttu-id="6a7f0-168">`.AspNetCore.:::no-loc(Identity):::.Application`, `.AspNetCore.:::no-loc(Identity):::.Application,HairColor`</span><span class="sxs-lookup"><span data-stu-id="6a7f0-168">`.AspNetCore.:::no-loc(Identity):::.Application`, `.AspNetCore.:::no-loc(Identity):::.Application,HairColor`</span></span> |
+| <span data-ttu-id="6a7f0-167">String</span><span class="sxs-lookup"><span data-stu-id="6a7f0-167">String</span></span>         | <span data-ttu-id="6a7f0-168">`.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor`</span><span class="sxs-lookup"><span data-stu-id="6a7f0-168">`.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor`</span></span> |
 
-<span data-ttu-id="6a7f0-169">`vary-by-:::no-loc(cookie):::`:::no-loc(cookie):::値が変更されたときにキャッシュの更新をトリガーする名前のコンマ区切りの一覧を受け取り :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-169">`vary-by-:::no-loc(cookie):::` accepts a comma-delimited list of :::no-loc(cookie)::: names that trigger a cache refresh when the :::no-loc(cookie)::: values change.</span></span>
+<span data-ttu-id="6a7f0-169">`vary-by-cookie`cookie値が変更されたときにキャッシュの更新をトリガーする名前のコンマ区切りの一覧を受け取り cookie ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-169">`vary-by-cookie` accepts a comma-delimited list of cookie names that trigger a cache refresh when the cookie values change.</span></span>
 
-<span data-ttu-id="6a7f0-170">次の例では、に関連付けられているを監視し :::no-loc(cookie)::: :::no-loc(ASP.NET Core Identity)::: ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-170">The following example monitors the :::no-loc(cookie)::: associated with :::no-loc(ASP.NET Core Identity):::.</span></span> <span data-ttu-id="6a7f0-171">ユーザーが認証されると、の変更によって :::no-loc(Identity)::: :::no-loc(cookie)::: キャッシュ更新がトリガーされます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-171">When a user is authenticated, a change in the :::no-loc(Identity)::: :::no-loc(cookie)::: triggers a cache refresh:</span></span>
+<span data-ttu-id="6a7f0-170">次の例では、に関連付けられているを監視し cookie ASP.NET Core Identity ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-170">The following example monitors the cookie associated with ASP.NET Core Identity.</span></span> <span data-ttu-id="6a7f0-171">ユーザーが認証されると、の変更によって Identity cookie キャッシュ更新がトリガーされます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-171">When a user is authenticated, a change in the Identity cookie triggers a cache refresh:</span></span>
 
 ```cshtml
-<cache vary-by-:::no-loc(cookie):::=".AspNetCore.:::no-loc(Identity):::.Application">
+<cache vary-by-cookie=".AspNetCore.Identity.Application">
     Current Time Inside Cache Tag Helper: @DateTime.Now
 </cache>
 ```
@@ -189,7 +189,7 @@ routes.MapRoute(
 | --------------- | --------------- | ------- |
 | <span data-ttu-id="6a7f0-176">Boolean</span><span class="sxs-lookup"><span data-stu-id="6a7f0-176">Boolean</span></span>         | <span data-ttu-id="6a7f0-177">`true`, `false`</span><span class="sxs-lookup"><span data-stu-id="6a7f0-177">`true`, `false`</span></span> | `true`  |
 
-<span data-ttu-id="6a7f0-178">`vary-by-user` では、サインインしているユーザー (またはコンテキストのプリンシパル) が変化したときにキャッシュをリセットするかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-178">`vary-by-user` specifies whether or not the cache resets when the signed-in user (or Context Principal) changes.</span></span> <span data-ttu-id="6a7f0-179">現在のユーザーは、要求コンテキストプリンシパルとも呼ばれ、を参照すること :::no-loc(Razor)::: によってビューで表示でき `@User.:::no-loc(Identity):::.Name` ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-179">The current user is also known as the Request Context Principal and can be viewed in a :::no-loc(Razor)::: view by referencing `@User.:::no-loc(Identity):::.Name`.</span></span>
+<span data-ttu-id="6a7f0-178">`vary-by-user` では、サインインしているユーザー (またはコンテキストのプリンシパル) が変化したときにキャッシュをリセットするかどうかを指定します。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-178">`vary-by-user` specifies whether or not the cache resets when the signed-in user (or Context Principal) changes.</span></span> <span data-ttu-id="6a7f0-179">現在のユーザーは、要求コンテキストプリンシパルとも呼ばれ、を参照すること Razor によってビューで表示でき `@User.Identity.Name` ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-179">The current user is also known as the Request Context Principal and can be viewed in a Razor view by referencing `@User.Identity.Name`.</span></span>
 
 <span data-ttu-id="6a7f0-180">次の例では、現在ログインしているユーザーを監視して、キャッシュの更新をトリガーします。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-180">The following example monitors the current logged in user to trigger a cache refresh:</span></span>
 
@@ -199,7 +199,7 @@ routes.MapRoute(
 </cache>
 ```
 
-<span data-ttu-id="6a7f0-181">この属性を使って、ユーザーがサインインしてからサインアウトするまでキャッシュの内容を保持します。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-181">Using this attribute maintains the contents in cache through a sign-in and sign-out cycle.</span></span> <span data-ttu-id="6a7f0-182">値を `true` に設定すると、認証サイクルによって認証されたユーザーのキャッシュが無効にされます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-182">When the value is set to `true`, an authentication cycle invalidates the cache for the authenticated user.</span></span> <span data-ttu-id="6a7f0-183">ユーザーが認証されると、新しい一意の値が生成されるため、キャッシュは無効になり :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-183">The cache is invalidated because a new unique :::no-loc(cookie)::: value is generated when a user is authenticated.</span></span> <span data-ttu-id="6a7f0-184">が存在しない場合 :::no-loc(cookie)::: 、またはが期限切れになった場合、匿名状態のキャッシュが保持され :::no-loc(cookie)::: ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-184">Cache is maintained for the anonymous state when no :::no-loc(cookie)::: is present or the :::no-loc(cookie)::: has expired.</span></span> <span data-ttu-id="6a7f0-185">ユーザーが認証 **されない** 場合、キャッシュは保持されます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-185">If the user is **not** authenticated, the cache is maintained.</span></span>
+<span data-ttu-id="6a7f0-181">この属性を使って、ユーザーがサインインしてからサインアウトするまでキャッシュの内容を保持します。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-181">Using this attribute maintains the contents in cache through a sign-in and sign-out cycle.</span></span> <span data-ttu-id="6a7f0-182">値を `true` に設定すると、認証サイクルによって認証されたユーザーのキャッシュが無効にされます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-182">When the value is set to `true`, an authentication cycle invalidates the cache for the authenticated user.</span></span> <span data-ttu-id="6a7f0-183">ユーザーが認証されると、新しい一意の値が生成されるため、キャッシュは無効になり cookie ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-183">The cache is invalidated because a new unique cookie value is generated when a user is authenticated.</span></span> <span data-ttu-id="6a7f0-184">が存在しない場合 cookie 、またはが期限切れになった場合、匿名状態のキャッシュが保持され cookie ます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-184">Cache is maintained for the anonymous state when no cookie is present or the cookie has expired.</span></span> <span data-ttu-id="6a7f0-185">ユーザーが認証 **されない** 場合、キャッシュは保持されます。</span><span class="sxs-lookup"><span data-stu-id="6a7f0-185">If the user is **not** authenticated, the cache is maintained.</span></span>
 
 ### <a name="vary-by"></a><span data-ttu-id="6a7f0-186">vary-by</span><span class="sxs-lookup"><span data-stu-id="6a7f0-186">vary-by</span></span>
 

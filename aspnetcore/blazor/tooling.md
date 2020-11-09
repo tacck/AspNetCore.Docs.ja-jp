@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: 用のツール'
+title: 'ASP.NET Core Blazor 用のツール'
 author: guardrex
-description: ':::no-loc(Blazor)::: アプリのビルドに使用できるツールについて説明します。'
+description: 'Blazor アプリのビルドに使用できるツールについて説明します。'
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
 ms.openlocfilehash: 500342ac979efdee824ac0d4b5757ca9804f3b30
@@ -27,7 +27,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054815"
 ---
-# <a name="tooling-for-aspnet-core-no-locblazor"></a><span data-ttu-id="0b2e5-103">ASP.NET Core :::no-loc(Blazor)::: 用のツール</span><span class="sxs-lookup"><span data-stu-id="0b2e5-103">Tooling for ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="tooling-for-aspnet-core-no-locblazor"></a><span data-ttu-id="0b2e5-103">ASP.NET Core Blazor 用のツール</span><span class="sxs-lookup"><span data-stu-id="0b2e5-103">Tooling for ASP.NET Core Blazor</span></span>
 
 <span data-ttu-id="0b2e5-104">作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="0b2e5-104">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
@@ -37,13 +37,13 @@ ms.locfileid: "93054815"
 
 1. <span data-ttu-id="0b2e5-106">新しいプロジェクトを作成します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-106">Create a new project.</span></span>
 
-1. <span data-ttu-id="0b2e5-107">**[:::no-loc(Blazor)::: アプリ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-107">Select **:::no-loc(Blazor)::: App**.</span></span> <span data-ttu-id="0b2e5-108">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-108">Select **Next**.</span></span>
+1. <span data-ttu-id="0b2e5-107">**[Blazor アプリ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-107">Select **Blazor App**.</span></span> <span data-ttu-id="0b2e5-108">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-108">Select **Next**.</span></span>
 
 1. <span data-ttu-id="0b2e5-109">**[プロジェクト名]** フィールドにプロジェクト名を入力するか、既定のプロジェクト名をそのまま使用します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-109">Provide a project name in the **Project name** field or accept the default project name.</span></span> <span data-ttu-id="0b2e5-110">**[場所]** エントリが正しいことを確認します。または、プロジェクトの場所を指定します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-110">Confirm the **Location** entry is correct or provide a location for the project.</span></span> <span data-ttu-id="0b2e5-111">**[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-111">Select **Create**.</span></span>
 
-1. <span data-ttu-id="0b2e5-112">:::no-loc(Blazor WebAssembly)::: エクスペリエンスの場合は、 **:::no-loc(Blazor WebAssembly)::: アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-112">For a :::no-loc(Blazor WebAssembly)::: experience, choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="0b2e5-113">:::no-loc(Blazor Server)::: エクスペリエンスの場合は、 **:::no-loc(Blazor Server)::: アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-113">For a :::no-loc(Blazor Server)::: experience, choose the **:::no-loc(Blazor Server)::: App** template.</span></span> <span data-ttu-id="0b2e5-114">**[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-114">Select **Create**.</span></span>
+1. <span data-ttu-id="0b2e5-112">Blazor WebAssembly エクスペリエンスの場合は、 **Blazor WebAssembly アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-112">For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="0b2e5-113">Blazor Server エクスペリエンスの場合は、 **Blazor Server アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-113">For a Blazor Server experience, choose the **Blazor Server App** template.</span></span> <span data-ttu-id="0b2e5-114">**[作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-114">Select **Create**.</span></span>
 
-   <span data-ttu-id="0b2e5-115">2 つの :::no-loc(Blazor)::: ホスティング モデルである *:::no-loc(Blazor WebAssembly):::* と *:::no-loc(Blazor Server):::* については、「<xref:blazor/hosting-models>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-115">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="0b2e5-115">2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-115">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server* , see <xref:blazor/hosting-models>.</span></span>
 
 1. <span data-ttu-id="0b2e5-116"><kbd>Ctrl</kbd>+<kbd>F5</kbd> キーを押してアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-116">Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the app.</span></span>
 
@@ -63,19 +63,19 @@ ms.locfileid: "93054815"
 
 1. <span data-ttu-id="0b2e5-121">最新の [C# for Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)をインストールします。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-121">Install the latest [C# for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).</span></span>
 
-1. <span data-ttu-id="0b2e5-122">:::no-loc(Blazor WebAssembly)::: エクスペリエンスの場合は、コマンド シェルで次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-122">For a :::no-loc(Blazor WebAssembly)::: experience, execute the following command in a command shell:</span></span>
+1. <span data-ttu-id="0b2e5-122">Blazor WebAssembly エクスペリエンスの場合は、コマンド シェルで次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-122">For a Blazor WebAssembly experience, execute the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   <span data-ttu-id="0b2e5-123">:::no-loc(Blazor Server)::: エクスペリエンスの場合は、コマンド シェルで次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-123">For a :::no-loc(Blazor Server)::: experience, execute the following command in a command shell:</span></span>
+   <span data-ttu-id="0b2e5-123">Blazor Server エクスペリエンスの場合は、コマンド シェルで次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-123">For a Blazor Server experience, execute the following command in a command shell:</span></span>
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   <span data-ttu-id="0b2e5-124">2 つの :::no-loc(Blazor)::: ホスティング モデルである *:::no-loc(Blazor WebAssembly):::* と *:::no-loc(Blazor Server):::* については、「<xref:blazor/hosting-models>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-124">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="0b2e5-124">2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-124">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server* , see <xref:blazor/hosting-models>.</span></span>
 
 1. <span data-ttu-id="0b2e5-125">Visual Studio Code で `WebApplication1` フォルダーを開きます。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-125">Open the `WebApplication1` folder in Visual Studio Code.</span></span>
 
@@ -103,9 +103,9 @@ ms.locfileid: "93054815"
 
 1. <span data-ttu-id="0b2e5-138">サイドバーで、 **[Web and Console]\(Web とコンソール\)**  >  **[アプリ]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-138">In the sidebar, select **Web and Console** > **App**.</span></span>
 
-   <span data-ttu-id="0b2e5-139">:::no-loc(Blazor WebAssembly)::: エクスペリエンスの場合は、 **:::no-loc(Blazor WebAssembly)::: アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-139">For a :::no-loc(Blazor WebAssembly)::: experience, choose the **:::no-loc(Blazor WebAssembly)::: App** template.</span></span> <span data-ttu-id="0b2e5-140">:::no-loc(Blazor Server)::: エクスペリエンスの場合は、 **:::no-loc(Blazor Server)::: アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-140">For a :::no-loc(Blazor Server)::: experience, choose the **:::no-loc(Blazor Server)::: App** template.</span></span> <span data-ttu-id="0b2e5-141">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-141">Select **Next**.</span></span>
+   <span data-ttu-id="0b2e5-139">Blazor WebAssembly エクスペリエンスの場合は、 **Blazor WebAssembly アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-139">For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template.</span></span> <span data-ttu-id="0b2e5-140">Blazor Server エクスペリエンスの場合は、 **Blazor Server アプリ** テンプレートを選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-140">For a Blazor Server experience, choose the **Blazor Server App** template.</span></span> <span data-ttu-id="0b2e5-141">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-141">Select **Next**.</span></span>
 
-   <span data-ttu-id="0b2e5-142">2 つの :::no-loc(Blazor)::: ホスティング モデルである *:::no-loc(Blazor WebAssembly):::* と *:::no-loc(Blazor Server):::* については、「<xref:blazor/hosting-models>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-142">For information on the two :::no-loc(Blazor)::: hosting models, *:::no-loc(Blazor WebAssembly):::* and *:::no-loc(Blazor Server):::* , see <xref:blazor/hosting-models>.</span></span>
+   <span data-ttu-id="0b2e5-142">2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-142">For information on the two Blazor hosting models, *Blazor WebAssembly* and *Blazor Server* , see <xref:blazor/hosting-models>.</span></span>
 
 1. <span data-ttu-id="0b2e5-143">**[認証]** に **[認証なし]** が設定されていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-143">Confirm that **Authentication** is set to **No Authentication**.</span></span> <span data-ttu-id="0b2e5-144">**[次へ]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0b2e5-144">Select **Next**.</span></span>
 

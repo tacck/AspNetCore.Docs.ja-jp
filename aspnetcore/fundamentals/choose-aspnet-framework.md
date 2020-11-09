@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
 ms.openlocfilehash: 95ac4784634d38add5e28644d42b0182e15c6de9
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -46,7 +46,7 @@ ms.locfileid: "93060028"
 | <span data-ttu-id="0521f-112">ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="0521f-112">ASP.NET Core</span></span> | <span data-ttu-id="0521f-113">ASP.NET 4.x</span><span class="sxs-lookup"><span data-stu-id="0521f-113">ASP.NET 4.x</span></span> |
 |---|---|
 |<span data-ttu-id="0521f-114">Windows、macOS、Linux が対象</span><span class="sxs-lookup"><span data-stu-id="0521f-114">Build for Windows, macOS, or Linux</span></span>|<span data-ttu-id="0521f-115">Windows が対象</span><span class="sxs-lookup"><span data-stu-id="0521f-115">Build for Windows</span></span>|
-|<span data-ttu-id="0521f-116">[:::no-loc(Razor)::: Pages](xref:razor-pages/index) は、ASP.NET Core 2.x の時点で Web UI を作成する場合に推奨される方法です。</span><span class="sxs-lookup"><span data-stu-id="0521f-116">[:::no-loc(Razor)::: Pages](xref:razor-pages/index) is the recommended approach to create a Web UI as of ASP.NET Core 2.x.</span></span> <span data-ttu-id="0521f-117">[MVC](xref:mvc/overview)、[Web API](xref:tutorials/first-web-api)、[:::no-loc(SignalR):::](xref:signalr/introduction) についても参照してください。</span><span class="sxs-lookup"><span data-stu-id="0521f-117">See also [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api), and [:::no-loc(SignalR):::](xref:signalr/introduction).</span></span>|<span data-ttu-id="0521f-118">[Web Forms](/aspnet/web-forms)、[:::no-loc(SignalR):::](/aspnet/signalr)、[MVC](/aspnet/mvc)、[Web API](/aspnet/web-api/)、[WebHooks](/aspnet/webhooks/)、または [Web ページ](/aspnet/web-pages)を使います</span><span class="sxs-lookup"><span data-stu-id="0521f-118">Use [Web Forms](/aspnet/web-forms), [:::no-loc(SignalR):::](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), or [Web Pages](/aspnet/web-pages)</span></span>|
+|<span data-ttu-id="0521f-116">[Razor Pages](xref:razor-pages/index) は、ASP.NET Core 2.x の時点で Web UI を作成する場合に推奨される方法です。</span><span class="sxs-lookup"><span data-stu-id="0521f-116">[Razor Pages](xref:razor-pages/index) is the recommended approach to create a Web UI as of ASP.NET Core 2.x.</span></span> <span data-ttu-id="0521f-117">[MVC](xref:mvc/overview)、[Web API](xref:tutorials/first-web-api)、[SignalR](xref:signalr/introduction) についても参照してください。</span><span class="sxs-lookup"><span data-stu-id="0521f-117">See also [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api), and [SignalR](xref:signalr/introduction).</span></span>|<span data-ttu-id="0521f-118">[Web Forms](/aspnet/web-forms)、[SignalR](/aspnet/signalr)、[MVC](/aspnet/mvc)、[Web API](/aspnet/web-api/)、[WebHooks](/aspnet/webhooks/)、または [Web ページ](/aspnet/web-pages)を使います</span><span class="sxs-lookup"><span data-stu-id="0521f-118">Use [Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), or [Web Pages](/aspnet/web-pages)</span></span>|
 |<span data-ttu-id="0521f-119">コンピューターごとに複数のバージョン</span><span class="sxs-lookup"><span data-stu-id="0521f-119">Multiple versions per machine</span></span>|<span data-ttu-id="0521f-120">コンピューターごとに 1 つのバージョン</span><span class="sxs-lookup"><span data-stu-id="0521f-120">One version per machine</span></span>|
 |<span data-ttu-id="0521f-121">C# または F# を使い、[Visual Studio](https://visualstudio.microsoft.com/vs/)、[Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)、または [Visual Studio Code](https://code.visualstudio.com/) で 開発</span><span class="sxs-lookup"><span data-stu-id="0521f-121">Develop with [Visual Studio](https://visualstudio.microsoft.com/vs/), [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/), or [Visual Studio Code](https://code.visualstudio.com/) using C# or F#</span></span>|<span data-ttu-id="0521f-122">C#、VB、または F# を使い、[Visual Studio](https://visualstudio.microsoft.com/vs/) で開発</span><span class="sxs-lookup"><span data-stu-id="0521f-122">Develop with [Visual Studio](https://visualstudio.microsoft.com/vs/) using C#, VB, or F#</span></span>|
 |<span data-ttu-id="0521f-123">ASP.NET 4.x より高いパフォーマンス</span><span class="sxs-lookup"><span data-stu-id="0521f-123">Higher performance than ASP.NET 4.x</span></span>|<span data-ttu-id="0521f-124">よいパフォーマンス</span><span class="sxs-lookup"><span data-stu-id="0521f-124">Good performance</span></span>|

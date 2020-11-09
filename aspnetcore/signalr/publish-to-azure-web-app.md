@@ -1,23 +1,23 @@
 ---
-title: :::no-loc(SignalR):::Azure App Service に ASP.NET Core アプリを発行する
+title: SignalRAzure App Service に ASP.NET Core アプリを発行する
 author: bradygaster
-description: 'ASP.NET Core アプリを Azure App Service に発行する方法について説明 :::no-loc(SignalR)::: します。'
+description: 'ASP.NET Core アプリを Azure App Service に発行する方法について説明 SignalR します。'
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/02/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: signalr/publish-to-azure-web-app
 ms.openlocfilehash: 8e6d36fe0b38486f94078b8f9cf12b852da7e0d9
 ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
@@ -26,14 +26,14 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/03/2020
 ms.locfileid: "93234512"
 ---
-# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a><span data-ttu-id="e4dd6-103">:::no-loc(SignalR):::Azure App Service に ASP.NET Core アプリを発行する</span><span class="sxs-lookup"><span data-stu-id="e4dd6-103">Publish an ASP.NET Core :::no-loc(SignalR)::: app to Azure App Service</span></span>
+# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a><span data-ttu-id="e4dd6-103">SignalRAzure App Service に ASP.NET Core アプリを発行する</span><span class="sxs-lookup"><span data-stu-id="e4dd6-103">Publish an ASP.NET Core SignalR app to Azure App Service</span></span>
 
 <span data-ttu-id="e4dd6-104">[Brady](https://twitter.com/bradygaster)による</span><span class="sxs-lookup"><span data-stu-id="e4dd6-104">By [Brady Gaster](https://twitter.com/bradygaster)</span></span>
 
 <span data-ttu-id="e4dd6-105">[Azure App Service](/azure/app-service/app-service-web-overview) は、web アプリ (ASP.NET Core を含む) をホストするための [Microsoft クラウドコンピューティング](https://azure.microsoft.com/) プラットフォームサービスです。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-105">[Azure App Service](/azure/app-service/app-service-web-overview) is a [Microsoft cloud computing](https://azure.microsoft.com/) platform service for hosting web apps, including ASP.NET Core.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="e4dd6-106">この記事では、Visual Studio から ASP.NET Core アプリを発行する方法について説明 :::no-loc(SignalR)::: します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-106">This article refers to publishing an ASP.NET Core :::no-loc(SignalR)::: app from Visual Studio.</span></span> <span data-ttu-id="e4dd6-107">詳細については、「 [ :::no-loc(SignalR)::: Azure のサービス](https://azure.microsoft.com/services/signalr-service)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-107">For more information, see [:::no-loc(SignalR)::: service for Azure](https://azure.microsoft.com/services/signalr-service).</span></span>
+> <span data-ttu-id="e4dd6-106">この記事では、Visual Studio から ASP.NET Core アプリを発行する方法について説明 SignalR します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-106">This article refers to publishing an ASP.NET Core SignalR app from Visual Studio.</span></span> <span data-ttu-id="e4dd6-107">詳細については、「 [ SignalR Azure のサービス](https://azure.microsoft.com/services/signalr-service)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-107">For more information, see [SignalR service for Azure](https://azure.microsoft.com/services/signalr-service).</span></span>
 
 ## <a name="publish-the-app"></a><span data-ttu-id="e4dd6-108">アプリの発行</span><span class="sxs-lookup"><span data-stu-id="e4dd6-108">Publish the app</span></span>
 
@@ -54,13 +54,13 @@ ms.locfileid: "93234512"
    | <span data-ttu-id="e4dd6-122">**リソース グループ**</span><span class="sxs-lookup"><span data-stu-id="e4dd6-122">**Resource Group**</span></span> | <span data-ttu-id="e4dd6-123">アプリが所属する関連リソースのグループ。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-123">Group of related resources to which the app belongs.</span></span> |
    | <span data-ttu-id="e4dd6-124">**ホスティング プラン**</span><span class="sxs-lookup"><span data-stu-id="e4dd6-124">**Hosting Plan**</span></span>   | <span data-ttu-id="e4dd6-125">Web アプリの料金プラン。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-125">Pricing plan for the web app.</span></span> |
 
-1. <span data-ttu-id="e4dd6-126">[ **サービスの依存関係** ] セクションで [ **Azure :::no-loc(SignalR)::: サービス** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-126">Select **Azure :::no-loc(SignalR)::: Service** in the **Service Dependencies** section.</span></span> <span data-ttu-id="e4dd6-127">[] ボタンを選択し **+** ます。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-127">Select the **+** button:</span></span>
+1. <span data-ttu-id="e4dd6-126">[ **サービスの依存関係** ] セクションで [ **Azure SignalR サービス** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-126">Select **Azure SignalR Service** in the **Service Dependencies** section.</span></span> <span data-ttu-id="e4dd6-127">[] ボタンを選択し **+** ます。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-127">Select the **+** button:</span></span>
 
    ![[追加] ドロップダウンリストに表示されている Azure::: no-loc (SignalR)::: Service の選択を示す [依存関係] 領域](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. <span data-ttu-id="e4dd6-129">[ **Azure :::no-loc(SignalR)::: サービス** ] ダイアログで、[ **新しい Azure :::no-loc(SignalR)::: サービスインスタンスの作成** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-129">In the **Azure :::no-loc(SignalR)::: Service** dialog, select **Create a new Azure :::no-loc(SignalR)::: Service instance** .</span></span>
+1. <span data-ttu-id="e4dd6-129">[ **Azure SignalR サービス** ] ダイアログで、[ **新しい Azure SignalR サービスインスタンスの作成** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-129">In the **Azure SignalR Service** dialog, select **Create a new Azure SignalR Service instance** .</span></span>
 
-1. <span data-ttu-id="e4dd6-130">**名前** 、 **リソースグループ** 、および **場所** を指定します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-130">Provide a **Name** , **Resource Group** , and **Location** .</span></span> <span data-ttu-id="e4dd6-131">[ **Azure :::no-loc(SignalR)::: サービス** ] ダイアログに戻り、[ **追加** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-131">Return to the **Azure :::no-loc(SignalR)::: Service** dialog and select **Add** .</span></span>
+1. <span data-ttu-id="e4dd6-130">**名前** 、 **リソースグループ** 、および **場所** を指定します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-130">Provide a **Name** , **Resource Group** , and **Location** .</span></span> <span data-ttu-id="e4dd6-131">[ **Azure SignalR サービス** ] ダイアログに戻り、[ **追加** ] を選択します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-131">Return to the **Azure SignalR Service** dialog and select **Add** .</span></span>
 
 <span data-ttu-id="e4dd6-132">Visual Studio は次のタスクを完了します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-132">Visual Studio completes the following tasks:</span></span>
 
@@ -69,20 +69,20 @@ ms.locfileid: "93234512"
 * <span data-ttu-id="e4dd6-135">アプリを発行します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-135">Publishes the app.</span></span>
 * <span data-ttu-id="e4dd6-136">ブラウザーを起動して、web アプリを読み込みます。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-136">Launches a browser, which loads the web app.</span></span>
 
-<span data-ttu-id="e4dd6-137">アプリの URL の形式は `{APP SERVICE NAME}.azurewebsites.net` です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-137">The format of the app's URL is `{APP SERVICE NAME}.azurewebsites.net`.</span></span> <span data-ttu-id="e4dd6-138">たとえば、という名前 `:::no-loc(SignalR):::ChatApp` のアプリの URL は `https://signalrchatapp.azurewebsites.net` です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-138">For example, an app named `:::no-loc(SignalR):::ChatApp` has a URL of `https://signalrchatapp.azurewebsites.net`.</span></span>
+<span data-ttu-id="e4dd6-137">アプリの URL の形式は `{APP SERVICE NAME}.azurewebsites.net` です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-137">The format of the app's URL is `{APP SERVICE NAME}.azurewebsites.net`.</span></span> <span data-ttu-id="e4dd6-138">たとえば、という名前 `SignalRChatApp` のアプリの URL は `https://signalrchatapp.azurewebsites.net` です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-138">For example, an app named `SignalRChatApp` has a URL of `https://signalrchatapp.azurewebsites.net`.</span></span>
 
 <span data-ttu-id="e4dd6-139">Preview .NET Core リリースを対象とするアプリをデプロイするときに HTTP *502.2-Bad Gateway* エラーが発生する場合は、「 [ASP.NET Core プレビューリリース Azure App Service をデプロイ](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service) して解決するには」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-139">If an HTTP *502.2 - Bad Gateway* error occurs when deploying an app that targets a preview .NET Core release, see [Deploy ASP.NET Core preview release to Azure App Service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service) to resolve it.</span></span>
 
 ## <a name="configure-the-app-in-azure-app-service"></a><span data-ttu-id="e4dd6-140">Azure App Service でアプリを構成する</span><span class="sxs-lookup"><span data-stu-id="e4dd6-140">Configure the app in Azure App Service</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="e4dd6-141">*このセクションは、Azure サービスを使用していないアプリにのみ適用さ :::no-loc(SignalR)::: れます。*</span><span class="sxs-lookup"><span data-stu-id="e4dd6-141">*This section only applies to apps not using the Azure :::no-loc(SignalR)::: Service.*</span></span>
+> <span data-ttu-id="e4dd6-141">*このセクションは、Azure サービスを使用していないアプリにのみ適用さ SignalR れます。*</span><span class="sxs-lookup"><span data-stu-id="e4dd6-141">*This section only applies to apps not using the Azure SignalR Service.*</span></span>
 >
-> <span data-ttu-id="e4dd6-142">アプリで Azure サービスを使用する場合、App Service では、 :::no-loc(SignalR)::: このセクションで説明するアプリケーション要求ルーティング (ARR) アフィニティと Web ソケットの構成は必要ありません。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-142">If the app uses the Azure :::no-loc(SignalR)::: Service, the App Service doesn't require the configuration of Application Request Routing (ARR) Affinity and Web Sockets described in this section.</span></span> <span data-ttu-id="e4dd6-143">クライアントは、 :::no-loc(SignalR)::: アプリに直接ではなく、Azure サービスに Web ソケットを接続します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-143">Clients connect their Web Sockets to the Azure :::no-loc(SignalR)::: Service, not directly to the app.</span></span>
+> <span data-ttu-id="e4dd6-142">アプリで Azure サービスを使用する場合、App Service では、 SignalR このセクションで説明するアプリケーション要求ルーティング (ARR) アフィニティと Web ソケットの構成は必要ありません。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-142">If the app uses the Azure SignalR Service, the App Service doesn't require the configuration of Application Request Routing (ARR) Affinity and Web Sockets described in this section.</span></span> <span data-ttu-id="e4dd6-143">クライアントは、 SignalR アプリに直接ではなく、Azure サービスに Web ソケットを接続します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-143">Clients connect their Web Sockets to the Azure SignalR Service, not directly to the app.</span></span>
 
-<span data-ttu-id="e4dd6-144">Azure サービスを使用せずにホストされるアプリの場合は :::no-loc(SignalR)::: 、次を有効にします。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-144">For apps hosted without the Azure :::no-loc(SignalR)::: Service, enable:</span></span>
+<span data-ttu-id="e4dd6-144">Azure サービスを使用せずにホストされるアプリの場合は SignalR 、次を有効にします。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-144">For apps hosted without the Azure SignalR Service, enable:</span></span>
 
-* <span data-ttu-id="e4dd6-145">[ARR Affinity]( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- :::no-loc(cookie)::: -(ARR- :::no-loc(cookie)::: ) -for-Azure-web-apps.html) ユーザーから同じ App Service インスタンスに要求をルーティングします。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-145">[ARR Affinity](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-:::no-loc(cookie):::-(ARR-:::no-loc(cookie):::)-for-Azure-web-apps.html) to route requests from a user back to the same App Service instance.</span></span> <span data-ttu-id="e4dd6-146">既定の設定は **On** です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-146">The default setting is **On** .</span></span>
+* <span data-ttu-id="e4dd6-145">[ARR Affinity]( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie -(ARR- cookie ) -for-Azure-web-apps.html) ユーザーから同じ App Service インスタンスに要求をルーティングします。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-145">[ARR Affinity](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html) to route requests from a user back to the same App Service instance.</span></span> <span data-ttu-id="e4dd6-146">既定の設定は **On** です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-146">The default setting is **On** .</span></span>
 * <span data-ttu-id="e4dd6-147">Web ソケットトランスポートを機能させるための[Web ソケット](xref:fundamentals/websockets)。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-147">[Web Sockets](xref:fundamentals/websockets) to allow the Web Sockets transport to function.</span></span> <span data-ttu-id="e4dd6-148">既定の設定は [ **オフ** ] です。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-148">The default setting is **Off** .</span></span>
 
 1. <span data-ttu-id="e4dd6-149">Azure portal で、 **App Services** 内の web アプリに移動します。</span><span class="sxs-lookup"><span data-stu-id="e4dd6-149">In the Azure portal, navigate to the web app in **App Services** .</span></span>
@@ -96,7 +96,7 @@ ms.locfileid: "93234512"
 
 ## <a name="additional-resources"></a><span data-ttu-id="e4dd6-156">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="e4dd6-156">Additional resources</span></span>
 
-* [<span data-ttu-id="e4dd6-157">Azure :::no-loc(SignalR)::: Service とは</span><span class="sxs-lookup"><span data-stu-id="e4dd6-157">What is Azure :::no-loc(SignalR)::: Service?</span></span>](/azure/azure-signalr/signalr-overview)
+* [<span data-ttu-id="e4dd6-157">Azure SignalR Service とは</span><span class="sxs-lookup"><span data-stu-id="e4dd6-157">What is Azure SignalR Service?</span></span>](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>
 * <xref:host-and-deploy/index>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>

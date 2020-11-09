@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/cors
 ms.openlocfilehash: 03008f40fc1c4b323535d08a1bb4c4007bc145f7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -131,7 +131,7 @@ ms.locfileid: "93060821"
 
 * <span data-ttu-id="a85af-166">`app.UseCors` CORS ミドルウェアを有効にします。</span><span class="sxs-lookup"><span data-stu-id="a85af-166">`app.UseCors` enables the CORS middleware.</span></span> <span data-ttu-id="a85af-167">既定のポリシーが構成されていないため、 `app.UseCors()` 単独で CORS を有効にすることはできません。</span><span class="sxs-lookup"><span data-stu-id="a85af-167">Because a default policy hasn't been configured, `app.UseCors()` alone doesn't enable CORS.</span></span>
 * <span data-ttu-id="a85af-168">`/echo`およびコントローラーエンドポイントは、指定されたポリシーを使用して、クロスオリジン要求を許可します。</span><span class="sxs-lookup"><span data-stu-id="a85af-168">The `/echo` and controller endpoints allow cross-origin requests using the specified policy.</span></span>
-* <span data-ttu-id="a85af-169">`/echo2`既定のポリシーが指定されていないため、と :::no-loc(Razor)::: Pages エンドポイントはクロスオリジン要求を許可し **ません** 。</span><span class="sxs-lookup"><span data-stu-id="a85af-169">The `/echo2` and :::no-loc(Razor)::: Pages endpoints do **not** allow cross-origin requests because no default policy was specified.</span></span>
+* <span data-ttu-id="a85af-169">`/echo2`既定のポリシーが指定されていないため、と Razor Pages エンドポイントはクロスオリジン要求を許可し **ません** 。</span><span class="sxs-lookup"><span data-stu-id="a85af-169">The `/echo2` and Razor Pages endpoints do **not** allow cross-origin requests because no default policy was specified.</span></span>
 
 <span data-ttu-id="a85af-170">[[Disablecors]](#dc)属性では、を使用してエンドポイントルーティングによって有効にされた CORS は無効になり **ません** `RequireCors` 。</span><span class="sxs-lookup"><span data-stu-id="a85af-170">The [[DisableCors]](#dc) attribute does **not**  disable CORS that has been enabled by endpoint routing with `RequireCors`.</span></span>
 
@@ -150,7 +150,7 @@ ms.locfileid: "93060821"
 
 <span data-ttu-id="a85af-178">`[EnableCors]`属性は次のものに適用できます。</span><span class="sxs-lookup"><span data-stu-id="a85af-178">The `[EnableCors]` attribute can be applied to:</span></span>
 
-* <span data-ttu-id="a85af-179">:::no-loc(Razor)::: 改 `PageModel`</span><span class="sxs-lookup"><span data-stu-id="a85af-179">:::no-loc(Razor)::: Page `PageModel`</span></span>
+* <span data-ttu-id="a85af-179">Razor 改 `PageModel`</span><span class="sxs-lookup"><span data-stu-id="a85af-179">Razor Page `PageModel`</span></span>
 * <span data-ttu-id="a85af-180">コントローラー</span><span class="sxs-lookup"><span data-stu-id="a85af-180">Controller</span></span>
 * <span data-ttu-id="a85af-181">コントローラーアクションメソッド</span><span class="sxs-lookup"><span data-stu-id="a85af-181">Controller action method</span></span>
 
@@ -276,7 +276,7 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
 ### <a name="credentials-in-cross-origin-requests"></a><span data-ttu-id="a85af-242">クロスオリジン要求の資格情報</span><span class="sxs-lookup"><span data-stu-id="a85af-242">Credentials in cross-origin requests</span></span>
 
-<span data-ttu-id="a85af-243">資格情報では、CORS 要求で特別な処理を行う必要があります。</span><span class="sxs-lookup"><span data-stu-id="a85af-243">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="a85af-244">既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。</span><span class="sxs-lookup"><span data-stu-id="a85af-244">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="a85af-245">資格情報には :::no-loc(cookie)::: 、および HTTP 認証スキームが含まれます。</span><span class="sxs-lookup"><span data-stu-id="a85af-245">Credentials include :::no-loc(cookie):::s and HTTP authentication schemes.</span></span> <span data-ttu-id="a85af-246">クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。</span><span class="sxs-lookup"><span data-stu-id="a85af-246">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
+<span data-ttu-id="a85af-243">資格情報では、CORS 要求で特別な処理を行う必要があります。</span><span class="sxs-lookup"><span data-stu-id="a85af-243">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="a85af-244">既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。</span><span class="sxs-lookup"><span data-stu-id="a85af-244">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="a85af-245">資格情報には cookie 、および HTTP 認証スキームが含まれます。</span><span class="sxs-lookup"><span data-stu-id="a85af-245">Credentials include cookies and HTTP authentication schemes.</span></span> <span data-ttu-id="a85af-246">クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。</span><span class="sxs-lookup"><span data-stu-id="a85af-246">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
 
 <span data-ttu-id="a85af-247">直接の使用 `XMLHttpRequest` :</span><span class="sxs-lookup"><span data-stu-id="a85af-247">Using `XMLHttpRequest` directly:</span></span>
 
@@ -346,7 +346,7 @@ Response Headers:
 Access-Control-Allow-Methods: PUT,DELETE,GET
 Access-Control-Allow-Origin: https://cors1.azurewebsites.net
 Server: Microsoft-IIS/10.0
-Set-:::no-loc(Cookie):::: ARRAffinity=8f8...8;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
+Set-Cookie: ARRAffinity=8f8...8;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
 Vary: Origin
 
 Request Headers:
@@ -462,7 +462,7 @@ Status Code: 200 OK
 Content-Encoding: gzip
 Content-Type: text/plain; charset=utf-8
 Server: Microsoft-IIS/10.0
-Set-:::no-loc(Cookie):::: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
+Set-Cookie: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors1.azurewebsites.net
 Transfer-Encoding: chunked
 Vary: Accept-Encoding
 X-Powered-By: ASP.NET
@@ -501,7 +501,7 @@ Access-Control-Allow-Headers: Content-Type,x-custom-header
 Access-Control-Allow-Methods: PUT,DELETE,GET,OPTIONS
 Access-Control-Allow-Origin: https://cors1.azurewebsites.net
 Server: Microsoft-IIS/10.0
-Set-:::no-loc(Cookie):::: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors3.azurewebsites.net
+Set-Cookie: ARRAffinity=8f...;Path=/;HttpOnly;Domain=cors3.azurewebsites.net
 Vary: Origin
 X-Powered-By: ASP.NET
 ```
@@ -550,7 +550,7 @@ User-Agent: Mozilla/5.0
 
 ## <a name="test-cors"></a><span data-ttu-id="a85af-356">CORS のテスト</span><span class="sxs-lookup"><span data-stu-id="a85af-356">Test CORS</span></span>
 
-<span data-ttu-id="a85af-357">[サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI)には、CORS をテストするコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a85af-357">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) has code to test CORS.</span></span> <span data-ttu-id="a85af-358">[ダウンロード方法](xref:index#how-to-download-a-sample)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="a85af-358">See [how to download](xref:index#how-to-download-a-sample).</span></span> <span data-ttu-id="a85af-359">このサンプルは、ページが追加された API プロジェクトです :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="a85af-359">The sample is an API project with :::no-loc(Razor)::: Pages added:</span></span>
+<span data-ttu-id="a85af-357">[サンプルダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI)には、CORS をテストするコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a85af-357">The [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) has code to test CORS.</span></span> <span data-ttu-id="a85af-358">[ダウンロード方法](xref:index#how-to-download-a-sample)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="a85af-358">See [how to download](xref:index#how-to-download-a-sample).</span></span> <span data-ttu-id="a85af-359">このサンプルは、ページが追加された API プロジェクトです Razor 。</span><span class="sxs-lookup"><span data-stu-id="a85af-359">The sample is an API project with Razor Pages added:</span></span>
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupTest2.cs?name=snippet2)]
 
@@ -708,7 +708,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ```
 <span data-ttu-id="a85af-440">メモ: `UseCors` の前にを呼び出す必要があり `UseMvc` ます。</span><span class="sxs-lookup"><span data-stu-id="a85af-440">Note: `UseCors` must be called before `UseMvc`.</span></span>
 
-<span data-ttu-id="a85af-441">ページ/コントローラー/アクションレベルで CORS ポリシーを適用するには [ :::no-loc(Razor)::: 、「ページ、コントローラー、およびアクションメソッドで Cors を有効](#ecors) にする」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="a85af-441">See [Enable CORS in :::no-loc(Razor)::: Pages, controllers, and action methods](#ecors) to apply CORS policy at the page/controller/action level.</span></span>
+<span data-ttu-id="a85af-441">ページ/コントローラー/アクションレベルで CORS ポリシーを適用するには [ Razor 、「ページ、コントローラー、およびアクションメソッドで Cors を有効](#ecors) にする」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="a85af-441">See [Enable CORS in Razor Pages, controllers, and action methods](#ecors) to apply CORS policy at the page/controller/action level.</span></span>
 
 <span data-ttu-id="a85af-442">前のコードのようなコードをテストする方法については、「 [テスト CORS](#test) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="a85af-442">See [Test CORS](#test) for instructions on testing code similar to the preceding code.</span></span>
 
@@ -720,7 +720,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 <span data-ttu-id="a85af-447">`[EnableCors]`属性は次のものに適用できます。</span><span class="sxs-lookup"><span data-stu-id="a85af-447">The `[EnableCors]` attribute can be applied to:</span></span>
 
-* <span data-ttu-id="a85af-448">:::no-loc(Razor)::: 改 `PageModel`</span><span class="sxs-lookup"><span data-stu-id="a85af-448">:::no-loc(Razor)::: Page `PageModel`</span></span>
+* <span data-ttu-id="a85af-448">Razor 改 `PageModel`</span><span class="sxs-lookup"><span data-stu-id="a85af-448">Razor Page `PageModel`</span></span>
 * <span data-ttu-id="a85af-449">コントローラー</span><span class="sxs-lookup"><span data-stu-id="a85af-449">Controller</span></span>
 * <span data-ttu-id="a85af-450">コントローラーアクションメソッド</span><span class="sxs-lookup"><span data-stu-id="a85af-450">Controller action method</span></span>
 
@@ -823,7 +823,7 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 
 ### <a name="credentials-in-cross-origin-requests"></a><span data-ttu-id="a85af-498">クロスオリジン要求の資格情報</span><span class="sxs-lookup"><span data-stu-id="a85af-498">Credentials in cross-origin requests</span></span>
 
-<span data-ttu-id="a85af-499">資格情報では、CORS 要求で特別な処理を行う必要があります。</span><span class="sxs-lookup"><span data-stu-id="a85af-499">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="a85af-500">既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。</span><span class="sxs-lookup"><span data-stu-id="a85af-500">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="a85af-501">資格情報には :::no-loc(cookie)::: 、および HTTP 認証スキームが含まれます。</span><span class="sxs-lookup"><span data-stu-id="a85af-501">Credentials include :::no-loc(cookie):::s and HTTP authentication schemes.</span></span> <span data-ttu-id="a85af-502">クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。</span><span class="sxs-lookup"><span data-stu-id="a85af-502">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
+<span data-ttu-id="a85af-499">資格情報では、CORS 要求で特別な処理を行う必要があります。</span><span class="sxs-lookup"><span data-stu-id="a85af-499">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="a85af-500">既定では、ブラウザーはクロスオリジン要求で資格情報を送信しません。</span><span class="sxs-lookup"><span data-stu-id="a85af-500">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="a85af-501">資格情報には cookie 、および HTTP 認証スキームが含まれます。</span><span class="sxs-lookup"><span data-stu-id="a85af-501">Credentials include cookies and HTTP authentication schemes.</span></span> <span data-ttu-id="a85af-502">クロスオリジン要求で資格情報を送信するには、クライアントがに設定されている必要があり `XMLHttpRequest.withCredentials` `true` ます。</span><span class="sxs-lookup"><span data-stu-id="a85af-502">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
 
 <span data-ttu-id="a85af-503">直接の使用 `XMLHttpRequest` :</span><span class="sxs-lookup"><span data-stu-id="a85af-503">Using `XMLHttpRequest` directly:</span></span>
 
@@ -999,14 +999,14 @@ Test message
   > [!WARNING]
   > <span data-ttu-id="a85af-579">`WithOrigins("https://localhost:<port>");` サンプルアプリのテストにのみ使用してください [サンプルコードをダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors)します。</span><span class="sxs-lookup"><span data-stu-id="a85af-579">`WithOrigins("https://localhost:<port>");` should only be used for testing a sample app similar to the [download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors).</span></span>
 
-1. <span data-ttu-id="a85af-580">Web アプリプロジェクトを作成 :::no-loc(Razor)::: します (ページまたは MVC)。</span><span class="sxs-lookup"><span data-stu-id="a85af-580">Create a web app project (:::no-loc(Razor)::: Pages or MVC).</span></span> <span data-ttu-id="a85af-581">このサンプルでは、 :::no-loc(Razor)::: ページを使用します。</span><span class="sxs-lookup"><span data-stu-id="a85af-581">The sample uses :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="a85af-582">API プロジェクトと同じソリューションに web アプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="a85af-582">You can create the web app in the same solution as the API project.</span></span>
+1. <span data-ttu-id="a85af-580">Web アプリプロジェクトを作成 Razor します (ページまたは MVC)。</span><span class="sxs-lookup"><span data-stu-id="a85af-580">Create a web app project (Razor Pages or MVC).</span></span> <span data-ttu-id="a85af-581">このサンプルでは、 Razor ページを使用します。</span><span class="sxs-lookup"><span data-stu-id="a85af-581">The sample uses Razor Pages.</span></span> <span data-ttu-id="a85af-582">API プロジェクトと同じソリューションに web アプリを作成できます。</span><span class="sxs-lookup"><span data-stu-id="a85af-582">You can create the web app in the same solution as the API project.</span></span>
 1. <span data-ttu-id="a85af-583">次の強調表示されたコードを *インデックスの cshtml* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="a85af-583">Add the following highlighted code to the *Index.cshtml* file:</span></span>
 
   [!code-cshtml[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
 1. <span data-ttu-id="a85af-584">前のコードで、をデプロイされた `url: 'https://<web app>.azurewebsites.net/api/values/1',` アプリの URL に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="a85af-584">In the preceding code, replace `url: 'https://<web app>.azurewebsites.net/api/values/1',` with the URL to the deployed app.</span></span>
 1. <span data-ttu-id="a85af-585">API プロジェクトをデプロイします。</span><span class="sxs-lookup"><span data-stu-id="a85af-585">Deploy the API project.</span></span> <span data-ttu-id="a85af-586">たとえば、 [Azure にデプロイ](xref:host-and-deploy/azure-apps/index)します。</span><span class="sxs-lookup"><span data-stu-id="a85af-586">For example, [deploy to Azure](xref:host-and-deploy/azure-apps/index).</span></span>
-1. <span data-ttu-id="a85af-587">:::no-loc(Razor):::デスクトップからページまたは MVC アプリを実行し、[ **テスト** ] ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="a85af-587">Run the :::no-loc(Razor)::: Pages or MVC app from the desktop and click on the **Test** button.</span></span> <span data-ttu-id="a85af-588">F12 ツールを使用して、エラーメッセージを確認します。</span><span class="sxs-lookup"><span data-stu-id="a85af-588">Use the F12 tools to review error messages.</span></span>
+1. <span data-ttu-id="a85af-587">Razorデスクトップからページまたは MVC アプリを実行し、[ **テスト** ] ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="a85af-587">Run the Razor Pages or MVC app from the desktop and click on the **Test** button.</span></span> <span data-ttu-id="a85af-588">F12 ツールを使用して、エラーメッセージを確認します。</span><span class="sxs-lookup"><span data-stu-id="a85af-588">Use the F12 tools to review error messages.</span></span>
 1. <span data-ttu-id="a85af-589">から localhost の配信元を削除 `WithOrigins` し、アプリをデプロイします。</span><span class="sxs-lookup"><span data-stu-id="a85af-589">Remove the localhost origin from `WithOrigins` and deploy the app.</span></span> <span data-ttu-id="a85af-590">または、別のポートを使用してクライアントアプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="a85af-590">Alternatively, run the client app with a different port.</span></span> <span data-ttu-id="a85af-591">たとえば、Visual Studio からを実行します。</span><span class="sxs-lookup"><span data-stu-id="a85af-591">For example, run from Visual Studio.</span></span>
 1. <span data-ttu-id="a85af-592">クライアントアプリでテストします。</span><span class="sxs-lookup"><span data-stu-id="a85af-592">Test with the client app.</span></span> <span data-ttu-id="a85af-593">CORS エラーはエラーを返しますが、エラーメッセージは JavaScript では使用できません。</span><span class="sxs-lookup"><span data-stu-id="a85af-593">CORS failures return an error, but the error message isn't available to JavaScript.</span></span> <span data-ttu-id="a85af-594">F12 ツールの [コンソール] タブを使用して、エラーを確認します。</span><span class="sxs-lookup"><span data-stu-id="a85af-594">Use the console tab in the F12 tools to see the error.</span></span> <span data-ttu-id="a85af-595">ブラウザーによっては、次のようなエラー (F12 ツールコンソール) が表示されます。</span><span class="sxs-lookup"><span data-stu-id="a85af-595">Depending on the browser, you get an error (in the F12 tools console) similar to the following:</span></span>
 

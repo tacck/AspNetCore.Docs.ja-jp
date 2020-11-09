@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: security/enforcing-ssl
 ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -114,9 +114,9 @@ ms.locfileid: "93051123"
 
   * <span data-ttu-id="f6c06-155">ホスト構成。</span><span class="sxs-lookup"><span data-stu-id="f6c06-155">In host configuration.</span></span>
   * <span data-ttu-id="f6c06-156">環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-156">By setting the `ASPNETCORE_HTTPS_PORT` environment variable.</span></span>
-  * <span data-ttu-id="f6c06-157">最上位レベルのエントリをに追加し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-157">By adding a top-level entry in *:::no-loc(appsettings.json):::* :</span></span>
+  * <span data-ttu-id="f6c06-157">最上位レベルのエントリをに追加し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-157">By adding a top-level entry in *appsettings.json* :</span></span>
 
-    [!code-json[](enforcing-ssl/sample-snapshot/3.x/:::no-loc(appsettings.json):::?highlight=2)]
+    [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
 * <span data-ttu-id="f6c06-158">[ASPNETCORE_URLS 環境変数](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls)を使用して、セキュリティで保護されたスキームのポートを指定します。</span><span class="sxs-lookup"><span data-stu-id="f6c06-158">Indicate a port with the secure scheme using the [ASPNETCORE_URLS environment variable](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls).</span></span> <span data-ttu-id="f6c06-159">環境変数によってサーバーが構成されます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-159">The environment variable configures the server.</span></span> <span data-ttu-id="f6c06-160">ミドルウェアは、を使用して HTTPS ポートを間接的に検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-160">The middleware indirectly discovers the HTTPS port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span> <span data-ttu-id="f6c06-161">リバースプロキシの展開では、この方法は使用できません。</span><span class="sxs-lookup"><span data-stu-id="f6c06-161">This approach doesn't work in reverse proxy deployments.</span></span>
 
@@ -128,9 +128,9 @@ ms.locfileid: "93051123"
 
   * <span data-ttu-id="f6c06-163">ホスト構成。</span><span class="sxs-lookup"><span data-stu-id="f6c06-163">In host configuration.</span></span>
   * <span data-ttu-id="f6c06-164">環境変数を設定し `ASPNETCORE_HTTPS_PORT` ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-164">By setting the `ASPNETCORE_HTTPS_PORT` environment variable.</span></span>
-  * <span data-ttu-id="f6c06-165">最上位レベルのエントリをに追加し *:::no-loc(appsettings.json):::* ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-165">By adding a top-level entry in *:::no-loc(appsettings.json):::* :</span></span>
+  * <span data-ttu-id="f6c06-165">最上位レベルのエントリをに追加し *appsettings.json* ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-165">By adding a top-level entry in *appsettings.json* :</span></span>
 
-    [!code-json[](enforcing-ssl/sample-snapshot/2.x/:::no-loc(appsettings.json):::?highlight=2)]
+    [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
 * <span data-ttu-id="f6c06-166">[ASPNETCORE_URLS 環境変数](xref:fundamentals/host/web-host#server-urls)を使用して、セキュリティで保護されたスキームのポートを指定します。</span><span class="sxs-lookup"><span data-stu-id="f6c06-166">Indicate a port with the secure scheme using the [ASPNETCORE_URLS environment variable](xref:fundamentals/host/web-host#server-urls).</span></span> <span data-ttu-id="f6c06-167">環境変数によってサーバーが構成されます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-167">The environment variable configures the server.</span></span> <span data-ttu-id="f6c06-168">ミドルウェアは、を使用して HTTPS ポートを間接的に検出し <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ます。</span><span class="sxs-lookup"><span data-stu-id="f6c06-168">The middleware indirectly discovers the HTTPS port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span> <span data-ttu-id="f6c06-169">リバースプロキシの展開では、この方法は使用できません。</span><span class="sxs-lookup"><span data-stu-id="f6c06-169">This approach doesn't work in reverse proxy deployments.</span></span>
 

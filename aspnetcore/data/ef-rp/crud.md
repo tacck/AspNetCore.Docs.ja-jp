@@ -1,21 +1,21 @@
 ---
-title: 'パート 2、ASP.NET Core の :::no-loc(Razor)::: Pages と EF Core - CRUD'
+title: 'パート 2、ASP.NET Core の Razor Pages と EF Core - CRUD'
 author: rick-anderson
-description: ':::no-loc(Razor)::: Pages と Entity Framework チュートリアル シリーズのパート 2。'
+description: 'Razor Pages と Entity Framework チュートリアル シリーズのパート 2。'
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/crud
 ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -24,7 +24,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93053866"
 ---
-# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a><span data-ttu-id="a81d4-103">パート 2、ASP.NET Core の :::no-loc(Razor)::: Pages と EF Core - CRUD</span><span class="sxs-lookup"><span data-stu-id="a81d4-103">Part 2, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - CRUD</span></span>
+# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a><span data-ttu-id="a81d4-103">パート 2、ASP.NET Core の Razor Pages と EF Core - CRUD</span><span class="sxs-lookup"><span data-stu-id="a81d4-103">Part 2, Razor Pages with EF Core in ASP.NET Core - CRUD</span></span>
 
 <span data-ttu-id="a81d4-104">作成者: [Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog)、[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="a81d4-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
@@ -36,7 +36,7 @@ ms.locfileid: "93053866"
 
 ## <a name="no-repository"></a><span data-ttu-id="a81d4-106">リポジトリがない</span><span class="sxs-lookup"><span data-stu-id="a81d4-106">No repository</span></span>
 
-<span data-ttu-id="a81d4-107">一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (:::no-loc(Razor)::: Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-107">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (:::no-loc(Razor)::: Pages) and the data access layer.</span></span> <span data-ttu-id="a81d4-108">このチュートリアルでは、これは行いません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-108">This tutorial doesn't do that.</span></span> <span data-ttu-id="a81d4-109">複雑さを最小限に抑え、チュートリアルの焦点を EF Core に置くために、EF Core コードがページ モデル クラスに直接追加されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-109">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
+<span data-ttu-id="a81d4-107">一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (Razor Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-107">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (Razor Pages) and the data access layer.</span></span> <span data-ttu-id="a81d4-108">このチュートリアルでは、これは行いません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-108">This tutorial doesn't do that.</span></span> <span data-ttu-id="a81d4-109">複雑さを最小限に抑え、チュートリアルの焦点を EF Core に置くために、EF Core コードがページ モデル クラスに直接追加されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-109">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
 
 ## <a name="update-the-details-page"></a><span data-ttu-id="a81d4-110">Details ページを更新する</span><span class="sxs-lookup"><span data-stu-id="a81d4-110">Update the Details page</span></span>
 
@@ -89,7 +89,7 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-150">上記のコードでは、Student オブジェクトを作成し、ポストされたフォーム フィールドを使用して Student オブジェクトのプロパティを更新します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-150">The preceding code creates a Student object and then uses posted form fields to update the Student object's properties.</span></span> <span data-ttu-id="a81d4-151">[TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) メソッド:</span><span class="sxs-lookup"><span data-stu-id="a81d4-151">The [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) method:</span></span>
 
-* <span data-ttu-id="a81d4-152">[PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) の [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) プロパティからポストされたフォーム値を使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-152">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
+* <span data-ttu-id="a81d4-152">[PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) の [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) プロパティからポストされたフォーム値を使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-152">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
 * <span data-ttu-id="a81d4-153">リストされたプロパティのみを更新します (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-153">Updates only the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
 * <span data-ttu-id="a81d4-154">"student" のプレフィックスを持つフォーム フィールドを検索します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-154">Looks for form fields with a "student" prefix.</span></span> <span data-ttu-id="a81d4-155">たとえば、`Student.FirstMidName` のようにします。</span><span class="sxs-lookup"><span data-stu-id="a81d4-155">For example, `Student.FirstMidName`.</span></span> <span data-ttu-id="a81d4-156">大文字と小文字の区別はありません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-156">It's not case sensitive.</span></span>
 * <span data-ttu-id="a81d4-157">[モデル バインド](xref:mvc/models/model-binding) システムを使用して、文字列からフォーム値を `Student` モデル内の型に変換します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-157">Uses the [model binding](xref:mvc/models/model-binding) system to convert form values from strings to the types in the `Student` model.</span></span> <span data-ttu-id="a81d4-158">たとえば、`EnrollmentDate` は `DateTime` に変換されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-158">For example, `EnrollmentDate` is converted to `DateTime`.</span></span>
@@ -102,7 +102,7 @@ ms.locfileid: "93053866"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-<span data-ttu-id="a81d4-163">アプリの作成または更新の :::no-loc(Razor)::: ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-163">Even if the app doesn't have a `Secret` field on the create or update :::no-loc(Razor)::: Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="a81d4-164">ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-164">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="a81d4-165">元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-165">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
+<span data-ttu-id="a81d4-163">アプリの作成または更新の Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-163">Even if the app doesn't have a `Secret` field on the create or update Razor Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="a81d4-164">ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-164">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="a81d4-165">元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-165">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
 
 <span data-ttu-id="a81d4-166">`Secret` フォーム フィールドに対してハッカーが指定した値はいずれも、データベース内で更新されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-166">Whatever value the hacker specified for the `Secret` form field is updated in the database.</span></span> <span data-ttu-id="a81d4-167">次の図は、ポストされたフォームの値に、値 "OverPost" が含まれる `Secret` フィールドを追加している Fiddler ツールを示しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-167">The following image shows the Fiddler tool adding the `Secret` field, with the value "OverPost", to the posted form values.</span></span>
 
@@ -116,7 +116,7 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-173">アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-173">The application model is often called the domain model.</span></span> <span data-ttu-id="a81d4-174">ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-174">The domain model typically contains all the properties required by the corresponding entity in the database.</span></span> <span data-ttu-id="a81d4-175">ビュー モデルには、Create ページなどの UI ページで必要なプロパティのみが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-175">The view model contains only the properties needed for the UI page, for example, the Create page.</span></span>
 
-<span data-ttu-id="a81d4-176">一部のアプリでは、ビュー モデルに加えて、:::no-loc(Razor)::: Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-176">In addition to the view model, some apps use a binding model or input model to pass data between the :::no-loc(Razor)::: Pages page model class and the browser.</span></span> 
+<span data-ttu-id="a81d4-176">一部のアプリでは、ビュー モデルに加えて、Razor Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-176">In addition to the view model, some apps use a binding model or input model to pass data between the Razor Pages page model class and the browser.</span></span> 
 
 <span data-ttu-id="a81d4-177">次の `StudentVM` ビュー モデルを考えてみます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-177">Consider the following `StudentVM` view model:</span></span>
 
@@ -205,7 +205,7 @@ ms.locfileid: "93053866"
 
 ## <a name="no-repository"></a><span data-ttu-id="a81d4-234">リポジトリがない</span><span class="sxs-lookup"><span data-stu-id="a81d4-234">No repository</span></span>
 
-<span data-ttu-id="a81d4-235">一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (:::no-loc(Razor)::: Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-235">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (:::no-loc(Razor)::: Pages) and the data access layer.</span></span> <span data-ttu-id="a81d4-236">このチュートリアルでは、これは行いません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-236">This tutorial doesn't do that.</span></span> <span data-ttu-id="a81d4-237">複雑さを最小限に抑え、チュートリアルの焦点を EF Core に置くために、EF Core コードがページ モデル クラスに直接追加されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-237">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
+<span data-ttu-id="a81d4-235">一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (Razor Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-235">Some developers use a service layer or repository pattern to create an abstraction layer between the UI (Razor Pages) and the data access layer.</span></span> <span data-ttu-id="a81d4-236">このチュートリアルでは、これは行いません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-236">This tutorial doesn't do that.</span></span> <span data-ttu-id="a81d4-237">複雑さを最小限に抑え、チュートリアルの焦点を EF Core に置くために、EF Core コードがページ モデル クラスに直接追加されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-237">To minimize complexity and keep the tutorial focused on EF Core, EF Core code is added directly to the page model classes.</span></span> 
 
 ## <a name="update-the-details-page"></a><span data-ttu-id="a81d4-238">Details ページを更新する</span><span class="sxs-lookup"><span data-stu-id="a81d4-238">Update the Details page</span></span>
 
@@ -258,7 +258,7 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-278">上記のコードでは、Student オブジェクトを作成し、ポストされたフォーム フィールドを使用して Student オブジェクトのプロパティを更新します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-278">The preceding code creates a Student object and then uses posted form fields to update the Student object's properties.</span></span> <span data-ttu-id="a81d4-279">[TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) メソッド:</span><span class="sxs-lookup"><span data-stu-id="a81d4-279">The [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) method:</span></span>
 
-* <span data-ttu-id="a81d4-280">[PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) の [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) プロパティからポストされたフォーム値を使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-280">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
+* <span data-ttu-id="a81d4-280">[PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) の [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) プロパティからポストされたフォーム値を使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-280">Uses the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span>
 * <span data-ttu-id="a81d4-281">リストされたプロパティのみを更新します (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-281">Updates only the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
 * <span data-ttu-id="a81d4-282">"student" のプレフィックスを持つフォーム フィールドを検索します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-282">Looks for form fields with a "student" prefix.</span></span> <span data-ttu-id="a81d4-283">たとえば、`Student.FirstMidName` のようにします。</span><span class="sxs-lookup"><span data-stu-id="a81d4-283">For example, `Student.FirstMidName`.</span></span> <span data-ttu-id="a81d4-284">大文字と小文字の区別はありません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-284">It's not case sensitive.</span></span>
 * <span data-ttu-id="a81d4-285">[モデル バインド](xref:mvc/models/model-binding) システムを使用して、文字列からフォーム値を `Student` モデル内の型に変換します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-285">Uses the [model binding](xref:mvc/models/model-binding) system to convert form values from strings to the types in the `Student` model.</span></span> <span data-ttu-id="a81d4-286">たとえば、`EnrollmentDate` は DateTime に変換する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a81d4-286">For example, `EnrollmentDate` has to be converted to DateTime.</span></span>
@@ -271,7 +271,7 @@ ms.locfileid: "93053866"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-<span data-ttu-id="a81d4-291">アプリの作成または更新の :::no-loc(Razor)::: ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-291">Even if the app doesn't have a `Secret` field on the create or update :::no-loc(Razor)::: Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="a81d4-292">ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-292">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="a81d4-293">元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-293">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
+<span data-ttu-id="a81d4-291">アプリの作成または更新の Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-291">Even if the app doesn't have a `Secret` field on the create or update Razor Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="a81d4-292">ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-292">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="a81d4-293">元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-293">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
 
 <span data-ttu-id="a81d4-294">`Secret` フォーム フィールドに対してハッカーが指定した値はいずれも、データベース内で更新されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-294">Whatever value the hacker specified for the `Secret` form field is updated in the database.</span></span> <span data-ttu-id="a81d4-295">次の図では、Fiddler ツールを使用して、ポストされたフォームの値に `Secret` フィールド (値 "OverPost" を含む) が追加されています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-295">The following image shows the Fiddler tool adding the `Secret` field (with the value "OverPost") to the posted form values.</span></span>
 
@@ -285,7 +285,7 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-301">アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-301">The application model is often called the domain model.</span></span> <span data-ttu-id="a81d4-302">ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-302">The domain model typically contains all the properties required by the corresponding entity in the database.</span></span> <span data-ttu-id="a81d4-303">ビュー モデルには、使用する UI に必要なプロパティのみが含まれています (たとえば、Create ページ)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-303">The view model contains only the properties needed for the UI that it is used for (for example, the Create page).</span></span>
 
-<span data-ttu-id="a81d4-304">一部のアプリでは、ビュー モデルに加えて、:::no-loc(Razor)::: Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-304">In addition to the view model, some apps use a binding model or input model to pass data between the :::no-loc(Razor)::: Pages page model class and the browser.</span></span> 
+<span data-ttu-id="a81d4-304">一部のアプリでは、ビュー モデルに加えて、Razor Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-304">In addition to the view model, some apps use a binding model or input model to pass data between the Razor Pages page model class and the browser.</span></span> 
 
 <span data-ttu-id="a81d4-305">次の `Student` ビュー モデルを考えてみます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-305">Consider the following `Student` view model:</span></span>
 
@@ -348,7 +348,7 @@ ms.locfileid: "93053866"
 * <span data-ttu-id="a81d4-353">データベース例外がキャッチされます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-353">The database exception is caught.</span></span>
 * <span data-ttu-id="a81d4-354">[削除] ページの `OnGetAsync` メソッドが、`saveChangesError=true` を指定して呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-354">The Delete pages `OnGetAsync` method is called with `saveChangesError=true`.</span></span>
 
-<span data-ttu-id="a81d4-355">[削除] :::no-loc(Razor)::: ページ ( *Pages/Students/Delete.cshtml* ) にエラー メッセージを追加します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-355">Add an error message to the Delete :::no-loc(Razor)::: Page ( *Pages/Students/Delete.cshtml* ):</span></span>
+<span data-ttu-id="a81d4-355">[削除] Razor ページ ( *Pages/Students/Delete.cshtml* ) にエラー メッセージを追加します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-355">Add an error message to the Delete Razor Page ( *Pages/Students/Delete.cshtml* ):</span></span>
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -367,9 +367,9 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-359">このチュートリアルでは、スキャフォールディング CRUD (作成、読み取り、更新、削除) コードのレビューとカスタマイズを行います。</span><span class="sxs-lookup"><span data-stu-id="a81d4-359">In this tutorial, the scaffolded CRUD (create, read, update, delete) code is reviewed and customized.</span></span>
 
-<span data-ttu-id="a81d4-360">複雑さを最小限に抑え、これらのチュートリアルを通して主眼を EF Core に置くために、EF Core コードはページ モデルで使用されています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-360">To minimize complexity and keep these tutorials focused on EF Core, EF Core code is used in the page models.</span></span> <span data-ttu-id="a81d4-361">一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (:::no-loc(Razor)::: Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-361">Some developers use a service layer or repository pattern in to create an abstraction layer between the UI (:::no-loc(Razor)::: Pages) and the data access layer.</span></span>
+<span data-ttu-id="a81d4-360">複雑さを最小限に抑え、これらのチュートリアルを通して主眼を EF Core に置くために、EF Core コードはページ モデルで使用されています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-360">To minimize complexity and keep these tutorials focused on EF Core, EF Core code is used in the page models.</span></span> <span data-ttu-id="a81d4-361">一部の開発者は、サービス レイヤーまたはリポジトリ パターンを使用して、UI (Razor Pages) とデータ アクセス層との間に抽象化レイヤーを作成しています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-361">Some developers use a service layer or repository pattern in to create an abstraction layer between the UI (Razor Pages) and the data access layer.</span></span>
 
-<span data-ttu-id="a81d4-362">このチュートリアルでは、 *Students* フォルダー内の [作成]、[編集]、[削除]、[詳細] の各 :::no-loc(Razor)::: Pages を確認します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-362">In this tutorial, the Create, Edit, Delete, and Details :::no-loc(Razor)::: Pages in the *Students* folder are examined.</span></span>
+<span data-ttu-id="a81d4-362">このチュートリアルでは、 *Students* フォルダー内の [作成]、[編集]、[削除]、[詳細] の各 Razor Pages を確認します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-362">In this tutorial, the Create, Edit, Delete, and Details Razor Pages in the *Students* folder are examined.</span></span>
 
 <span data-ttu-id="a81d4-363">スキャフォールディング コードでは、[作成]、[編集]、[削除] ページに対して次のパターンを使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-363">The scaffolded code uses the following pattern for Create, Edit, and Delete pages:</span></span>
 
@@ -413,7 +413,7 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-388">アプリを実行し、 **[詳細]** リンクを選択します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-388">Run the app and select a **Details** link.</span></span> <span data-ttu-id="a81d4-389">URL の形式は、 `http://localhost:5000/Students/Details?id=2` です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-389">The URL is of the form `http://localhost:5000/Students/Details?id=2`.</span></span> <span data-ttu-id="a81d4-390">クエリ文字列 (`?id=2`) によって受講者 ID が渡されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-390">The Student ID is passed using a query string (`?id=2`).</span></span>
 
-<span data-ttu-id="a81d4-391">`"{id:int}"` ルート テンプレートを使用するには、[編集]、[詳細]、[削除] の :::no-loc(Razor)::: ページを更新します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-391">Update the Edit, Details, and Delete :::no-loc(Razor)::: Pages to use the `"{id:int}"` route template.</span></span> <span data-ttu-id="a81d4-392">これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-392">Change the page directive for each of these pages from `@page` to `@page "{id:int}"`.</span></span>
+<span data-ttu-id="a81d4-391">`"{id:int}"` ルート テンプレートを使用するには、[編集]、[詳細]、[削除] の Razor ページを更新します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-391">Update the Edit, Details, and Delete Razor Pages to use the `"{id:int}"` route template.</span></span> <span data-ttu-id="a81d4-392">これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-392">Change the page directive for each of these pages from `@page` to `@page "{id:int}"`.</span></span>
 
 <span data-ttu-id="a81d4-393">整数ルート値を **含まない** 、"{id:int}" ルート テンプレートを使用するページへの要求では、HTTP 404 (見つかりません) エラーが返されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-393">A request to the page with the "{id:int}" route template that does **not** include a integer route value returns an HTTP 404 (not found) error.</span></span> <span data-ttu-id="a81d4-394">たとえば、 `http://localhost:5000/Students/Details` は 404 エラーを返します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-394">For example, `http://localhost:5000/Students/Details` returns a 404 error.</span></span> <span data-ttu-id="a81d4-395">ID を省略するには、次のように `?` をルート制約に追加します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-395">To make the ID optional, append `?` to the route constraint:</span></span>
 
@@ -465,7 +465,7 @@ ms.locfileid: "93053866"
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_TryUpdateModelAsync)]
 
-<span data-ttu-id="a81d4-420">上記のコードで、`TryUpdateModelAsync<Student>` は、[PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) の [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) プロパティからのポストされたフォームの値を使用して `emptyStudent` オブジェクトの更新を試みます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-420">In the preceding code, `TryUpdateModelAsync<Student>` tries to update the `emptyStudent` object using the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_:::no-loc(Razor):::Pages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span> <span data-ttu-id="a81d4-421">`TryUpdateModelAsync` は、リストされたプロパティのみを更新します (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-421">`TryUpdateModelAsync` only updates the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
+<span data-ttu-id="a81d4-420">上記のコードで、`TryUpdateModelAsync<Student>` は、[PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) の [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) プロパティからのポストされたフォームの値を使用して `emptyStudent` オブジェクトの更新を試みます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-420">In the preceding code, `TryUpdateModelAsync<Student>` tries to update the `emptyStudent` object using the posted form values from the [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) property in the [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).</span></span> <span data-ttu-id="a81d4-421">`TryUpdateModelAsync` は、リストされたプロパティのみを更新します (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-421">`TryUpdateModelAsync` only updates the properties listed (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).</span></span>
 
 <span data-ttu-id="a81d4-422">上記のサンプルについて:</span><span class="sxs-lookup"><span data-stu-id="a81d4-422">In the preceding sample:</span></span>
 
@@ -480,7 +480,7 @@ ms.locfileid: "93053866"
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-<span data-ttu-id="a81d4-429">アプリの作成または更新の :::no-loc(Razor)::: ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-429">Even if the app doesn't have a `Secret` field on the create/update :::no-loc(Razor)::: Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="a81d4-430">ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-430">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="a81d4-431">元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-431">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
+<span data-ttu-id="a81d4-429">アプリの作成または更新の Razor ページに `Secret` フィールドが含まれていない場合でも、ハッカーは過剰ポスティングによって `Secret` 値を設定することが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-429">Even if the app doesn't have a `Secret` field on the create/update Razor Page, a hacker could set the `Secret` value by overposting.</span></span> <span data-ttu-id="a81d4-430">ハッカーは、Fiddler などのツールを使用するか、または何らかの JavaScript を作成して、`Secret` フォーム値をポストすることが可能です。</span><span class="sxs-lookup"><span data-stu-id="a81d4-430">A hacker could use a tool such as Fiddler, or write some JavaScript, to post a `Secret` form value.</span></span> <span data-ttu-id="a81d4-431">元のコードでは、Student インスタンスの作成時にモデル バインダーによって使用されるフィールドを制限していません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-431">The original code doesn't limit the fields that the model binder uses when it creates a Student instance.</span></span>
 
 <span data-ttu-id="a81d4-432">`Secret` フォーム フィールドに対してハッカーが指定した値はいずれも、DB 内で更新されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-432">Whatever value the hacker specified for the `Secret` form field is updated in the DB.</span></span> <span data-ttu-id="a81d4-433">次の図では、Fiddler ツールを使用して、ポストされたフォームの値に `Secret` フィールド (値 "OverPost" を含む) が追加されています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-433">The following image shows the Fiddler tool adding the `Secret` field (with the value "OverPost") to the posted form values.</span></span>
 
@@ -492,7 +492,7 @@ ms.locfileid: "93053866"
 
 ### <a name="view-model"></a><span data-ttu-id="a81d4-437">ビュー モデル</span><span class="sxs-lookup"><span data-stu-id="a81d4-437">View model</span></span>
 
-<span data-ttu-id="a81d4-438">ビュー モデルには、通常、アプリケーションで使用されるモデルに含まれるプロパティのサブセットが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-438">A view model typically contains a subset of the properties included in the model used by the application.</span></span> <span data-ttu-id="a81d4-439">アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-439">The application model is often called the domain model.</span></span> <span data-ttu-id="a81d4-440">ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-440">The domain model typically contains all the properties required by the corresponding entity in the DB.</span></span> <span data-ttu-id="a81d4-441">ビュー モデルには、UI レイヤーで必要なプロパティのみが含まれています (たとえば、[作成] ページ)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-441">The view model contains only the properties needed for the UI layer (for example, the Create page).</span></span> <span data-ttu-id="a81d4-442">一部のアプリでは、ビュー モデルに加えて、:::no-loc(Razor)::: Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-442">In addition to the view model, some apps use a binding model or input model to pass data between the :::no-loc(Razor)::: Pages page model class and the browser.</span></span> <span data-ttu-id="a81d4-443">次の `Student` ビュー モデルを考えてみます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-443">Consider the following `Student` view model:</span></span>
+<span data-ttu-id="a81d4-438">ビュー モデルには、通常、アプリケーションで使用されるモデルに含まれるプロパティのサブセットが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-438">A view model typically contains a subset of the properties included in the model used by the application.</span></span> <span data-ttu-id="a81d4-439">アプリケーション モデルは、しばしばドメイン モデルと呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-439">The application model is often called the domain model.</span></span> <span data-ttu-id="a81d4-440">ドメイン モデルには、通常、データベース内の対応するエンティティによって必要とされるすべてのプロパティが含まれています。</span><span class="sxs-lookup"><span data-stu-id="a81d4-440">The domain model typically contains all the properties required by the corresponding entity in the DB.</span></span> <span data-ttu-id="a81d4-441">ビュー モデルには、UI レイヤーで必要なプロパティのみが含まれています (たとえば、[作成] ページ)。</span><span class="sxs-lookup"><span data-stu-id="a81d4-441">The view model contains only the properties needed for the UI layer (for example, the Create page).</span></span> <span data-ttu-id="a81d4-442">一部のアプリでは、ビュー モデルに加えて、Razor Pages のページ モデル クラスとブラウザーとの間でデータを渡すためにバインド モデルまたは入力モデルも使用します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-442">In addition to the view model, some apps use a binding model or input model to pass data between the Razor Pages page model class and the browser.</span></span> <span data-ttu-id="a81d4-443">次の `Student` ビュー モデルを考えてみます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-443">Consider the following `Student` view model:</span></span>
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
@@ -506,7 +506,7 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-450">`StudentVM` を使用するには、`Student` ではなく `StudentVM` を使用するように [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) を更新する必要があります。</span><span class="sxs-lookup"><span data-stu-id="a81d4-450">Using `StudentVM` requires [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) be updated to use `StudentVM` rather than `Student`.</span></span>
 
-<span data-ttu-id="a81d4-451">:::no-loc(Razor)::: Pages で、`PageModel` 派生クラスはビュー モデルです。</span><span class="sxs-lookup"><span data-stu-id="a81d4-451">In :::no-loc(Razor)::: Pages, the `PageModel` derived class is the view model.</span></span>
+<span data-ttu-id="a81d4-451">Razor Pages で、`PageModel` 派生クラスはビュー モデルです。</span><span class="sxs-lookup"><span data-stu-id="a81d4-451">In Razor Pages, the `PageModel` derived class is the view model.</span></span>
 
 ## <a name="update-the-edit-page"></a><span data-ttu-id="a81d4-452">[編集] ページを更新する</span><span class="sxs-lookup"><span data-stu-id="a81d4-452">Update the Edit page</span></span>
 
@@ -567,9 +567,9 @@ ms.locfileid: "93053866"
 * <span data-ttu-id="a81d4-499">DB 例外がキャッチされます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-499">The DB exception is caught.</span></span>
 * <span data-ttu-id="a81d4-500">[削除] ページの `OnGetAsync` メソッドが、`saveChangesError=true` を指定して呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="a81d4-500">The Delete pages `OnGetAsync` method is called with `saveChangesError=true`.</span></span>
 
-### <a name="update-the-delete-no-locrazor-page"></a><span data-ttu-id="a81d4-501">[削除] :::no-loc(Razor)::: ページを更新する</span><span class="sxs-lookup"><span data-stu-id="a81d4-501">Update the Delete :::no-loc(Razor)::: Page</span></span>
+### <a name="update-the-delete-no-locrazor-page"></a><span data-ttu-id="a81d4-501">[削除] Razor ページを更新する</span><span class="sxs-lookup"><span data-stu-id="a81d4-501">Update the Delete Razor Page</span></span>
 
-<span data-ttu-id="a81d4-502">次の強調表示されたエラー メッセージを [削除] :::no-loc(Razor)::: ページに追加します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-502">Add the following highlighted error message to the Delete :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="a81d4-502">次の強調表示されたエラー メッセージを [削除] Razor ページに追加します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-502">Add the following highlighted error message to the Delete Razor Page.</span></span>
 <!--
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Delete.cshtml?name=snippet&highlight=11)]
 -->
@@ -581,13 +581,13 @@ ms.locfileid: "93053866"
 
 <span data-ttu-id="a81d4-505">[受講者]/[インデックス] またはその他のリンクが機能しません。</span><span class="sxs-lookup"><span data-stu-id="a81d4-505">Students/Index or other links don't work:</span></span>
 
-<span data-ttu-id="a81d4-506">:::no-loc(Razor)::: ページに正しい `@page` ディレクティブが含まれていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-506">Verify the :::no-loc(Razor)::: Page contains the correct `@page` directive.</span></span> <span data-ttu-id="a81d4-507">たとえば、Students/Index :::no-loc(Razor)::: ページにルート テンプレートを含めることは **できません** 。</span><span class="sxs-lookup"><span data-stu-id="a81d4-507">For example, The Students/Index :::no-loc(Razor)::: Page should **not** contain a route template:</span></span>
+<span data-ttu-id="a81d4-506">Razor ページに正しい `@page` ディレクティブが含まれていることを確認します。</span><span class="sxs-lookup"><span data-stu-id="a81d4-506">Verify the Razor Page contains the correct `@page` directive.</span></span> <span data-ttu-id="a81d4-507">たとえば、Students/Index Razor ページにルート テンプレートを含めることは **できません** 。</span><span class="sxs-lookup"><span data-stu-id="a81d4-507">For example, The Students/Index Razor Page should **not** contain a route template:</span></span>
 
 ```cshtml
 @page "{id:int}"
 ```
 
-<span data-ttu-id="a81d4-508">各 :::no-loc(Razor)::: ページには、`@page` ディレクティブを含める必要があります。</span><span class="sxs-lookup"><span data-stu-id="a81d4-508">Each :::no-loc(Razor)::: Page must include the `@page` directive.</span></span>
+<span data-ttu-id="a81d4-508">各 Razor ページには、`@page` ディレクティブを含める必要があります。</span><span class="sxs-lookup"><span data-stu-id="a81d4-508">Each Razor Page must include the `@page` directive.</span></span>
 
 
 

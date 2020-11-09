@@ -6,17 +6,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/views/tag-helpers/authoring
 ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -77,11 +77,11 @@ ms.locfileid: "93060925"
    public class Email : TagHelper
    ```
 
-1. <span data-ttu-id="3d15d-134">クラスをすべてのビューで使用できるようにするには `EmailTagHelper` :::no-loc(Razor)::: 、 `addTagHelper` ディレクティブを *views/_ViewImports cshtml* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-134">To make the `EmailTagHelper` class available to all our :::no-loc(Razor)::: views, add the `addTagHelper` directive to the *Views/_ViewImports.cshtml* file:</span></span>
+1. <span data-ttu-id="3d15d-134">クラスをすべてのビューで使用できるようにするには `EmailTagHelper` Razor 、 `addTagHelper` ディレクティブを *views/_ViewImports cshtml* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-134">To make the `EmailTagHelper` class available to all our Razor views, add the `addTagHelper` directive to the *Views/_ViewImports.cshtml* file:</span></span>
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   <span data-ttu-id="3d15d-135">上記のコードでは、ワイルドカードの構文を使用して、アセンブリ内のすべてのタグ ヘルパーが使用可能になるように指定しています。</span><span class="sxs-lookup"><span data-stu-id="3d15d-135">The code above uses the wildcard syntax to specify all the tag helpers in our assembly will be available.</span></span> <span data-ttu-id="3d15d-136">`@addTagHelper` の後の最初の文字列は、読み込むタグ ヘルパーを指定します (すべてのタグ ヘルパーを指定するには、"\*" を使用します)。2 番目の文字列 "AuthoringTagHelpers" は、タグ ヘルパーが存在するアセンブリを指定します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-136">The first string after `@addTagHelper` specifies the tag helper to load (Use "\*" for all tag helpers), and the second string "AuthoringTagHelpers" specifies the assembly the tag helper is in.</span></span> <span data-ttu-id="3d15d-137">また、2番目の行は、ワイルドカード構文を使用して ASP.NET Core MVC タグヘルパーを取り込むことに注意してください (これらのヘルパーについては、「 [タグヘルパーの概要](intro.md)」で説明されています)。これは、 `@addTagHelper` タグヘルパーをビューで使用できるようにするディレクティブです :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="3d15d-137">Also, note that the second line brings in the ASP.NET Core MVC tag helpers using the wildcard syntax (those helpers are discussed in [Introduction to Tag Helpers](intro.md).) It's the `@addTagHelper` directive that makes the tag helper available to the :::no-loc(Razor)::: view.</span></span> <span data-ttu-id="3d15d-138">または、次に示すように、タグ ヘルパーの完全修飾名 (FQN) を指定することもできます。</span><span class="sxs-lookup"><span data-stu-id="3d15d-138">Alternatively, you can provide the fully qualified name (FQN) of a tag helper as shown below:</span></span>
+   <span data-ttu-id="3d15d-135">上記のコードでは、ワイルドカードの構文を使用して、アセンブリ内のすべてのタグ ヘルパーが使用可能になるように指定しています。</span><span class="sxs-lookup"><span data-stu-id="3d15d-135">The code above uses the wildcard syntax to specify all the tag helpers in our assembly will be available.</span></span> <span data-ttu-id="3d15d-136">`@addTagHelper` の後の最初の文字列は、読み込むタグ ヘルパーを指定します (すべてのタグ ヘルパーを指定するには、"\*" を使用します)。2 番目の文字列 "AuthoringTagHelpers" は、タグ ヘルパーが存在するアセンブリを指定します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-136">The first string after `@addTagHelper` specifies the tag helper to load (Use "\*" for all tag helpers), and the second string "AuthoringTagHelpers" specifies the assembly the tag helper is in.</span></span> <span data-ttu-id="3d15d-137">また、2番目の行は、ワイルドカード構文を使用して ASP.NET Core MVC タグヘルパーを取り込むことに注意してください (これらのヘルパーについては、「 [タグヘルパーの概要](intro.md)」で説明されています)。これは、 `@addTagHelper` タグヘルパーをビューで使用できるようにするディレクティブです Razor 。</span><span class="sxs-lookup"><span data-stu-id="3d15d-137">Also, note that the second line brings in the ASP.NET Core MVC tag helpers using the wildcard syntax (those helpers are discussed in [Introduction to Tag Helpers](intro.md).) It's the `@addTagHelper` directive that makes the tag helper available to the Razor view.</span></span> <span data-ttu-id="3d15d-138">または、次に示すように、タグ ヘルパーの完全修飾名 (FQN) を指定することもできます。</span><span class="sxs-lookup"><span data-stu-id="3d15d-138">Alternatively, you can provide the fully qualified name (FQN) of a tag helper as shown below:</span></span>
 
 ```csharp
 @using AuthoringTagHelpers
@@ -104,7 +104,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
 ## <a name="setattribute-and-setcontent"></a><span data-ttu-id="3d15d-146">SetAttribute と SetContent</span><span class="sxs-lookup"><span data-stu-id="3d15d-146">SetAttribute and SetContent</span></span>
 
-<span data-ttu-id="3d15d-147">このセクションでは、`EmailTagHelper` を更新して、電子メール用の有効なアンカー タグが作成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="3d15d-147">In this section, we'll update the `EmailTagHelper` so that it will create a valid anchor tag for email.</span></span> <span data-ttu-id="3d15d-148">これを更新して、 :::no-loc(Razor)::: (属性の形式で) ビューから情報を取得 `mail-to` し、アンカーの生成に使用します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-148">We'll update it to take information from a :::no-loc(Razor)::: view (in the form of a `mail-to` attribute) and use that in generating the anchor.</span></span>
+<span data-ttu-id="3d15d-147">このセクションでは、`EmailTagHelper` を更新して、電子メール用の有効なアンカー タグが作成できるようにします。</span><span class="sxs-lookup"><span data-stu-id="3d15d-147">In this section, we'll update the `EmailTagHelper` so that it will create a valid anchor tag for email.</span></span> <span data-ttu-id="3d15d-148">これを更新して、 Razor (属性の形式で) ビューから情報を取得 `mail-to` し、アンカーの生成に使用します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-148">We'll update it to take information from a Razor view (in the form of a `mail-to` attribute) and use that in generating the anchor.</span></span>
 
 <span data-ttu-id="3d15d-149">次のように `EmailTagHelper` クラスを更新します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-149">Update the `EmailTagHelper` class with the following:</span></span>
 
@@ -205,7 +205,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * <span data-ttu-id="3d15d-196">前述したように、タグ ヘルパーは、パスカルケースの C# クラス名とタグ ヘルパーのプロパティを[ケバブ ケース](https://wiki.c2.com/?KebabCase)に変換します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-196">As mentioned previously, tag helpers translates Pascal-cased C# class names and properties for tag helpers into [kebab case](https://wiki.c2.com/?KebabCase).</span></span> <span data-ttu-id="3d15d-197">したがって、のを使用するには、を `WebsiteInformationTagHelper` :::no-loc(Razor)::: 記述 `<website-information />` します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-197">Therefore, to use the `WebsiteInformationTagHelper` in :::no-loc(Razor):::, you'll write `<website-information />`.</span></span>
+   * <span data-ttu-id="3d15d-196">前述したように、タグ ヘルパーは、パスカルケースの C# クラス名とタグ ヘルパーのプロパティを[ケバブ ケース](https://wiki.c2.com/?KebabCase)に変換します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-196">As mentioned previously, tag helpers translates Pascal-cased C# class names and properties for tag helpers into [kebab case](https://wiki.c2.com/?KebabCase).</span></span> <span data-ttu-id="3d15d-197">したがって、のを使用するには、を `WebsiteInformationTagHelper` Razor 記述 `<website-information />` します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-197">Therefore, to use the `WebsiteInformationTagHelper` in Razor, you'll write `<website-information />`.</span></span>
 
    * <span data-ttu-id="3d15d-198">`[HtmlTargetElement]` 属性を使用してターゲット要素を明示的に識別しないため、`website-information` の既定がターゲットになります。</span><span class="sxs-lookup"><span data-stu-id="3d15d-198">You are not explicitly identifying the target element with the `[HtmlTargetElement]` attribute, so the default of `website-information` will be targeted.</span></span> <span data-ttu-id="3d15d-199">次の属性を適用した場合 (ケバブ ケースではありませんが、クラス名が一致します):</span><span class="sxs-lookup"><span data-stu-id="3d15d-199">If you applied the following attribute (note it's not kebab case but matches the class name):</span></span>
 
@@ -219,7 +219,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
    [HtmlTargetElement("Website-Information")]
    ```
 
-   * <span data-ttu-id="3d15d-202">自己終了の要素にはコンテンツがありません。</span><span class="sxs-lookup"><span data-stu-id="3d15d-202">Elements that are self-closing have no content.</span></span> <span data-ttu-id="3d15d-203">この例では、 :::no-loc(Razor)::: マークアップは自己終了タグを使用しますが、タグヘルパーは [section](https://www.w3.org/TR/html5/sections.html#the-section-element) 要素を作成します (これは自己終了ではなく、要素内にコンテンツを書き込んでい `section` ます)。</span><span class="sxs-lookup"><span data-stu-id="3d15d-203">For this example, the :::no-loc(Razor)::: markup will use a self-closing tag, but the tag helper will be creating a [section](https://www.w3.org/TR/html5/sections.html#the-section-element) element (which isn't self-closing and you are writing content inside the `section` element).</span></span> <span data-ttu-id="3d15d-204">そのため、`TagMode` を `StartTagAndEndTag` に設定して出力を記述する必要があります。</span><span class="sxs-lookup"><span data-stu-id="3d15d-204">Therefore, you need to set `TagMode` to `StartTagAndEndTag` to write output.</span></span> <span data-ttu-id="3d15d-205">または、`TagMode` を設定する行をコメント アウトして、終了タグを使ってマークアップを記述することもできます。</span><span class="sxs-lookup"><span data-stu-id="3d15d-205">Alternatively, you can comment out the line setting `TagMode` and write markup with a closing tag.</span></span> <span data-ttu-id="3d15d-206">(サンプルのマークアップは、後ほどこのチュートリアルで提供します。)</span><span class="sxs-lookup"><span data-stu-id="3d15d-206">(Example markup is provided later in this tutorial.)</span></span>
+   * <span data-ttu-id="3d15d-202">自己終了の要素にはコンテンツがありません。</span><span class="sxs-lookup"><span data-stu-id="3d15d-202">Elements that are self-closing have no content.</span></span> <span data-ttu-id="3d15d-203">この例では、 Razor マークアップは自己終了タグを使用しますが、タグヘルパーは [section](https://www.w3.org/TR/html5/sections.html#the-section-element) 要素を作成します (これは自己終了ではなく、要素内にコンテンツを書き込んでい `section` ます)。</span><span class="sxs-lookup"><span data-stu-id="3d15d-203">For this example, the Razor markup will use a self-closing tag, but the tag helper will be creating a [section](https://www.w3.org/TR/html5/sections.html#the-section-element) element (which isn't self-closing and you are writing content inside the `section` element).</span></span> <span data-ttu-id="3d15d-204">そのため、`TagMode` を `StartTagAndEndTag` に設定して出力を記述する必要があります。</span><span class="sxs-lookup"><span data-stu-id="3d15d-204">Therefore, you need to set `TagMode` to `StartTagAndEndTag` to write output.</span></span> <span data-ttu-id="3d15d-205">または、`TagMode` を設定する行をコメント アウトして、終了タグを使ってマークアップを記述することもできます。</span><span class="sxs-lookup"><span data-stu-id="3d15d-205">Alternatively, you can comment out the line setting `TagMode` and write markup with a closing tag.</span></span> <span data-ttu-id="3d15d-206">(サンプルのマークアップは、後ほどこのチュートリアルで提供します。)</span><span class="sxs-lookup"><span data-stu-id="3d15d-206">(Example markup is provided later in this tutorial.)</span></span>
 
    * <span data-ttu-id="3d15d-207">次の行の `$` (ドル記号) は、[挿入文字列](/dotnet/csharp/language-reference/keywords/interpolated-strings)を使用しています。</span><span class="sxs-lookup"><span data-stu-id="3d15d-207">The `$` (dollar sign) in the following line uses an [interpolated string](/dotnet/csharp/language-reference/keywords/interpolated-strings):</span></span>
 
@@ -232,11 +232,11 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
    [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
-   > <span data-ttu-id="3d15d-210">:::no-loc(Razor):::次に示すマークアップでは、</span><span class="sxs-lookup"><span data-stu-id="3d15d-210">In the :::no-loc(Razor)::: markup shown below:</span></span>
+   > <span data-ttu-id="3d15d-210">Razor次に示すマークアップでは、</span><span class="sxs-lookup"><span data-stu-id="3d15d-210">In the Razor markup shown below:</span></span>
    >
    > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >
-   > <span data-ttu-id="3d15d-211">:::no-loc(Razor):::`info`属性が文字列ではなくクラスであることを認識し、C# コードを記述します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-211">:::no-loc(Razor)::: knows the `info` attribute is a class, not a string, and you want to write C# code.</span></span> <span data-ttu-id="3d15d-212">文字列以外のタグ ヘルパー属性はすべて、`@` 文字を使わずに記述する必要があります。</span><span class="sxs-lookup"><span data-stu-id="3d15d-212">Any non-string tag helper attribute should be written without the `@` character.</span></span>
+   > <span data-ttu-id="3d15d-211">Razor`info`属性が文字列ではなくクラスであることを認識し、C# コードを記述します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-211">Razor knows the `info` attribute is a class, not a string, and you want to write C# code.</span></span> <span data-ttu-id="3d15d-212">文字列以外のタグ ヘルパー属性はすべて、`@` 文字を使わずに記述する必要があります。</span><span class="sxs-lookup"><span data-stu-id="3d15d-212">Any non-string tag helper attribute should be written without the `@` character.</span></span>
 
 1. <span data-ttu-id="3d15d-213">アプリを実行し、[バージョン情報] ビューに移動して、Web サイトの情報を確認します。</span><span class="sxs-lookup"><span data-stu-id="3d15d-213">Run the app, and navigate to the About view to see the web site information.</span></span>
 

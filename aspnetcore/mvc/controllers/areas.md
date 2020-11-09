@@ -5,17 +5,17 @@ description: 区分は ASP.NET MVC の機能であり、関連する機能を別
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/controllers/areas
 ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -33,11 +33,11 @@ ms.locfileid: "93053528"
 <span data-ttu-id="f8270-105">区分は、関連する機能を別のグループとしてグループにまとめるために使用される ASP.NET の機能です。</span><span class="sxs-lookup"><span data-stu-id="f8270-105">Areas are an ASP.NET feature used to organize related functionality into a group as a separate:</span></span>
 
 * <span data-ttu-id="f8270-106">ルーティング用の名前空間。</span><span class="sxs-lookup"><span data-stu-id="f8270-106">Namespace for routing.</span></span>
-* <span data-ttu-id="f8270-107">ビューおよびページのフォルダー構造 :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="f8270-107">Folder structure for views and :::no-loc(Razor)::: Pages.</span></span>
+* <span data-ttu-id="f8270-107">ビューおよびページのフォルダー構造 Razor 。</span><span class="sxs-lookup"><span data-stu-id="f8270-107">Folder structure for views and Razor Pages.</span></span>
 
-<span data-ttu-id="f8270-108">区分を使用すると、別のルートパラメーターである、、またはをページに追加することで、ルーティングのための階層が作成さ `area` `controller` `action` :::no-loc(Razor)::: `page` れます。</span><span class="sxs-lookup"><span data-stu-id="f8270-108">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a :::no-loc(Razor)::: Page `page`.</span></span>
+<span data-ttu-id="f8270-108">区分を使用すると、別のルートパラメーターである、、またはをページに追加することで、ルーティングのための階層が作成さ `area` `controller` `action` Razor `page` れます。</span><span class="sxs-lookup"><span data-stu-id="f8270-108">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a Razor Page `page`.</span></span>
 
-<span data-ttu-id="f8270-109">区分を使用すると、ASP.NET Core Web アプリをより小さな機能グループに分割し、それぞれに独自の :::no-loc(Razor)::: ページ、コントローラー、ビュー、およびモデルのセットを持たせることができます。</span><span class="sxs-lookup"><span data-stu-id="f8270-109">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of :::no-loc(Razor)::: Pages, controllers, views, and models.</span></span> <span data-ttu-id="f8270-110">区分は、実質的にはアプリ内の構造体となります。</span><span class="sxs-lookup"><span data-stu-id="f8270-110">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="f8270-111">ASP.NET Core Web プロジェクトでは、ページ、モデル、コントローラー、ビューなどの論理コンポーネントが別々のフォルダーに保存されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-111">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="f8270-112">ASP.NET Core ランタイムでは、名前付け規則を使用し、これらのコンポーネント間のリレーションシップを作成します。</span><span class="sxs-lookup"><span data-stu-id="f8270-112">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="f8270-113">大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。</span><span class="sxs-lookup"><span data-stu-id="f8270-113">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="f8270-114">チェックアウト、請求、検索などの複数のビジネス ユニットがある eコマース アプリの場合です。</span><span class="sxs-lookup"><span data-stu-id="f8270-114">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="f8270-115">これらの各ユニットには、ビュー、コントローラー、ページ、およびモデルを格納するための独自の領域があり :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-115">Each of these units have their own area to contain views, controllers, :::no-loc(Razor)::: Pages, and models.</span></span>
+<span data-ttu-id="f8270-109">区分を使用すると、ASP.NET Core Web アプリをより小さな機能グループに分割し、それぞれに独自の Razor ページ、コントローラー、ビュー、およびモデルのセットを持たせることができます。</span><span class="sxs-lookup"><span data-stu-id="f8270-109">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of Razor Pages, controllers, views, and models.</span></span> <span data-ttu-id="f8270-110">区分は、実質的にはアプリ内の構造体となります。</span><span class="sxs-lookup"><span data-stu-id="f8270-110">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="f8270-111">ASP.NET Core Web プロジェクトでは、ページ、モデル、コントローラー、ビューなどの論理コンポーネントが別々のフォルダーに保存されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-111">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="f8270-112">ASP.NET Core ランタイムでは、名前付け規則を使用し、これらのコンポーネント間のリレーションシップを作成します。</span><span class="sxs-lookup"><span data-stu-id="f8270-112">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="f8270-113">大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。</span><span class="sxs-lookup"><span data-stu-id="f8270-113">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="f8270-114">チェックアウト、請求、検索などの複数のビジネス ユニットがある eコマース アプリの場合です。</span><span class="sxs-lookup"><span data-stu-id="f8270-114">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="f8270-115">これらの各ユニットには、ビュー、コントローラー、ページ、およびモデルを格納するための独自の領域があり Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-115">Each of these units have their own area to contain views, controllers, Razor Pages, and models.</span></span>
 
 <span data-ttu-id="f8270-116">次のような場合は、プロジェクトで区分を使用することを検討してください。</span><span class="sxs-lookup"><span data-stu-id="f8270-116">Consider using Areas in a project when:</span></span>
 
@@ -46,7 +46,7 @@ ms.locfileid: "93053528"
 
 <span data-ttu-id="f8270-119">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="f8270-119">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span> <span data-ttu-id="f8270-120">ダウンロード サンプルからは、区分をテストするための基本的なアプリが与えられます。</span><span class="sxs-lookup"><span data-stu-id="f8270-120">The download sample provides a basic app for testing areas.</span></span>
 
-<span data-ttu-id="f8270-121">ページを使用している場合は :::no-loc(Razor)::: 、このドキュメントの「 [ :::no-loc(Razor)::: ページがある領域](#areas-with-razor-pages) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f8270-121">If you're using :::no-loc(Razor)::: Pages, see [Areas with :::no-loc(Razor)::: Pages](#areas-with-razor-pages) in this document.</span></span>
+<span data-ttu-id="f8270-121">ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページがある領域](#areas-with-razor-pages) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f8270-121">If you're using Razor Pages, see [Areas with Razor Pages](#areas-with-razor-pages) in this document.</span></span>
 
 ## <a name="areas-for-controllers-with-views"></a><span data-ttu-id="f8270-122">ビューを伴うコントローラーの区分</span><span class="sxs-lookup"><span data-stu-id="f8270-122">Areas for controllers with views</span></span>
 
@@ -149,7 +149,7 @@ ms.locfileid: "93053528"
 
 ### <a name="_viewimportscshtml"></a><span data-ttu-id="f8270-179">_ViewImports.cshtml</span><span class="sxs-lookup"><span data-stu-id="f8270-179">_ViewImports.cshtml</span></span>
 
- <span data-ttu-id="f8270-180">/ビュー */_ViewImports* 、MVC の場合は、ページの場合は */ページ/_ViewImports* の場合 :::no-loc(Razor)::: 、領域内のビューにはインポートされません。</span><span class="sxs-lookup"><span data-stu-id="f8270-180">*/Views/_ViewImports.cshtml* , for MVC, and */Pages/_ViewImports.cshtml* for :::no-loc(Razor)::: Pages, is not imported to views in areas.</span></span> <span data-ttu-id="f8270-181">次のいずれかの方法を使用して、ビューをすべてのビューにインポートします。</span><span class="sxs-lookup"><span data-stu-id="f8270-181">Use one of the following approaches to provide view imports to all views:</span></span>
+ <span data-ttu-id="f8270-180">/ビュー */_ViewImports* 、MVC の場合は、ページの場合は */ページ/_ViewImports* の場合 Razor 、領域内のビューにはインポートされません。</span><span class="sxs-lookup"><span data-stu-id="f8270-180">*/Views/_ViewImports.cshtml* , for MVC, and */Pages/_ViewImports.cshtml* for Razor Pages, is not imported to views in areas.</span></span> <span data-ttu-id="f8270-181">次のいずれかの方法を使用して、ビューをすべてのビューにインポートします。</span><span class="sxs-lookup"><span data-stu-id="f8270-181">Use one of the following approaches to provide view imports to all views:</span></span>
 
 * <span data-ttu-id="f8270-182">[アプリケーションのルートフォルダー](#arf)に _ViewImports を追加し *ます* 。</span><span class="sxs-lookup"><span data-stu-id="f8270-182">Add *_ViewImports.cshtml* to the [application root folder](#arf).</span></span> <span data-ttu-id="f8270-183">アプリケーションルートフォルダー内の *_ViewImports* は、アプリ内のすべてのビューに適用されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-183">A *_ViewImports.cshtml* in the application root folder will apply to all views in the app.</span></span>
 * <span data-ttu-id="f8270-184">[区分] の下にある適切な表示フォルダーに _ViewImports ファイルをコピーし *ます* 。</span><span class="sxs-lookup"><span data-stu-id="f8270-184">Copy the *_ViewImports.cshtml* file to the appropriate view folder under areas.</span></span>
@@ -166,9 +166,9 @@ ms.locfileid: "93053528"
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="f8270-189">ページがある領域 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f8270-189">Areas with :::no-loc(Razor)::: Pages</span></span>
+## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="f8270-189">ページがある領域 Razor</span><span class="sxs-lookup"><span data-stu-id="f8270-189">Areas with Razor Pages</span></span>
 
-<span data-ttu-id="f8270-190">ページがある領域には、 :::no-loc(Razor)::: `Areas/<area name>/Pages` アプリのルートにフォルダーが必要です。</span><span class="sxs-lookup"><span data-stu-id="f8270-190">Areas with :::no-loc(Razor)::: Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="f8270-191">[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)では次のフォルダー構造が使われます。</span><span class="sxs-lookup"><span data-stu-id="f8270-191">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples):</span></span>
+<span data-ttu-id="f8270-190">ページがある領域には、 Razor `Areas/<area name>/Pages` アプリのルートにフォルダーが必要です。</span><span class="sxs-lookup"><span data-stu-id="f8270-190">Areas with Razor Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="f8270-191">[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)では次のフォルダー構造が使われます。</span><span class="sxs-lookup"><span data-stu-id="f8270-191">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples):</span></span>
 
 * <span data-ttu-id="f8270-192">プロジェクト名</span><span class="sxs-lookup"><span data-stu-id="f8270-192">Project name</span></span>
   * <span data-ttu-id="f8270-193">Areas</span><span class="sxs-lookup"><span data-stu-id="f8270-193">Areas</span></span>
@@ -183,7 +183,7 @@ ms.locfileid: "93053528"
           * <span data-ttu-id="f8270-202">詳細</span><span class="sxs-lookup"><span data-stu-id="f8270-202">About</span></span>
           * <span data-ttu-id="f8270-203">インデックス</span><span class="sxs-lookup"><span data-stu-id="f8270-203">Index</span></span>
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="f8270-204">ページと領域を含むリンク生成 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f8270-204">Link generation with :::no-loc(Razor)::: Pages and areas</span></span>
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="f8270-204">ページと領域を含むリンク生成 Razor</span><span class="sxs-lookup"><span data-stu-id="f8270-204">Link generation with Razor Pages and areas</span></span>
 
 <span data-ttu-id="f8270-205">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)の次のコードでは、区分を指定したリンクの生成を示しています (例: `asp-area="Products"`)。</span><span class="sxs-lookup"><span data-stu-id="f8270-205">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) shows link generation with the area specified (for example, `asp-area="Products"`):</span></span>
 
@@ -203,9 +203,9 @@ ms.locfileid: "93053528"
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a><span data-ttu-id="f8270-218">_ViewImports ファイルを使って名前空間とタグ ヘルパーをインポートする</span><span class="sxs-lookup"><span data-stu-id="f8270-218">Import namespace and Tag Helpers with _ViewImports file</span></span>
 
-<span data-ttu-id="f8270-219">各区分 *ページ* フォルダーに *_ViewImports* ファイルを追加して、名前空間とタグヘルパーを :::no-loc(Razor)::: フォルダー内の各ページにインポートできます。</span><span class="sxs-lookup"><span data-stu-id="f8270-219">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each :::no-loc(Razor)::: Page in the folder.</span></span>
+<span data-ttu-id="f8270-219">各区分 *ページ* フォルダーに *_ViewImports* ファイルを追加して、名前空間とタグヘルパーを Razor フォルダー内の各ページにインポートできます。</span><span class="sxs-lookup"><span data-stu-id="f8270-219">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each Razor Page in the folder.</span></span>
 
-<span data-ttu-id="f8270-220">サンプル コードの *Services* 区分について検討します。これには *_ViewImports.cshtml* ファイルが含まれていません。</span><span class="sxs-lookup"><span data-stu-id="f8270-220">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="f8270-221">次のマークアップは、 */サービス/情報* ページを示してい :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-221">The following markup shows the */Services/Manage/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="f8270-220">サンプル コードの *Services* 区分について検討します。これには *_ViewImports.cshtml* ファイルが含まれていません。</span><span class="sxs-lookup"><span data-stu-id="f8270-220">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="f8270-221">次のマークアップは、 */サービス/情報* ページを示してい Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-221">The following markup shows the */Services/Manage/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
@@ -218,7 +218,7 @@ ms.locfileid: "93053528"
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-<span data-ttu-id="f8270-226">次のマークアップは、 */製品/バージョン* ページを示してい :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-226">The following markup shows the */Products/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="f8270-226">次のマークアップは、 */製品/バージョン* ページを示してい Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-226">The following markup shows the */Products/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
@@ -226,7 +226,7 @@ ms.locfileid: "93053528"
 
 <span data-ttu-id="f8270-228">詳細については、「[タグ ヘルパーのスコープの管理](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)」と「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="f8270-228">For more information, see [Managing Tag Helper scope](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) and [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives).</span></span>
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="f8270-229">ページ領域の共有レイアウト :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f8270-229">Shared layout for :::no-loc(Razor)::: Pages Areas</span></span>
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="f8270-229">ページ領域の共有レイアウト Razor</span><span class="sxs-lookup"><span data-stu-id="f8270-229">Shared layout for Razor Pages Areas</span></span>
 
 <span data-ttu-id="f8270-230">アプリ全体で共通レイアウトを共有するには、アプリケーションのルート フォルダーに *_ViewStart.cshtml* を移動します。</span><span class="sxs-lookup"><span data-stu-id="f8270-230">To share a common layout for the entire app, move the *_ViewStart.cshtml* to the application root folder.</span></span>
 
@@ -237,9 +237,9 @@ ms.locfileid: "93053528"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="f8270-233">区分は ASP.NET の機能であり、関連する機能を別の名前空間 (ルーティングの場合) およびフォルダー構造 (ビューの場合) としてグループにまとめるために使用されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-233">Areas are an ASP.NET feature used to organize related functionality into a group as a separate namespace (for routing) and folder structure (for views).</span></span> <span data-ttu-id="f8270-234">区分を使用すると、別のルートパラメーターである、、またはをページに追加することで、ルーティングのための階層が作成さ `area` `controller` `action` :::no-loc(Razor)::: `page` れます。</span><span class="sxs-lookup"><span data-stu-id="f8270-234">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a :::no-loc(Razor)::: Page `page`.</span></span>
+<span data-ttu-id="f8270-233">区分は ASP.NET の機能であり、関連する機能を別の名前空間 (ルーティングの場合) およびフォルダー構造 (ビューの場合) としてグループにまとめるために使用されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-233">Areas are an ASP.NET feature used to organize related functionality into a group as a separate namespace (for routing) and folder structure (for views).</span></span> <span data-ttu-id="f8270-234">区分を使用すると、別のルートパラメーターである、、またはをページに追加することで、ルーティングのための階層が作成さ `area` `controller` `action` Razor `page` れます。</span><span class="sxs-lookup"><span data-stu-id="f8270-234">Using areas creates a hierarchy for the purpose of routing by adding another route parameter, `area`, to `controller` and `action` or a Razor Page `page`.</span></span>
 
-<span data-ttu-id="f8270-235">区分を使用すると、ASP.NET Core Web アプリをより小さな機能グループに分割し、それぞれに独自の :::no-loc(Razor)::: ページ、コントローラー、ビュー、およびモデルのセットを持たせることができます。</span><span class="sxs-lookup"><span data-stu-id="f8270-235">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of :::no-loc(Razor)::: Pages, controllers, views, and models.</span></span> <span data-ttu-id="f8270-236">区分は、実質的にはアプリ内の構造体となります。</span><span class="sxs-lookup"><span data-stu-id="f8270-236">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="f8270-237">ASP.NET Core Web プロジェクトでは、ページ、モデル、コントローラー、ビューなどの論理コンポーネントが別々のフォルダーに保存されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-237">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="f8270-238">ASP.NET Core ランタイムでは、名前付け規則を使用し、これらのコンポーネント間のリレーションシップを作成します。</span><span class="sxs-lookup"><span data-stu-id="f8270-238">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="f8270-239">大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。</span><span class="sxs-lookup"><span data-stu-id="f8270-239">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="f8270-240">チェックアウト、請求、検索などの複数のビジネス ユニットがある eコマース アプリの場合です。</span><span class="sxs-lookup"><span data-stu-id="f8270-240">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="f8270-241">これらの各ユニットには、ビュー、コントローラー、ページ、およびモデルを格納するための独自の領域があり :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-241">Each of these units have their own area to contain views, controllers, :::no-loc(Razor)::: Pages, and models.</span></span>
+<span data-ttu-id="f8270-235">区分を使用すると、ASP.NET Core Web アプリをより小さな機能グループに分割し、それぞれに独自の Razor ページ、コントローラー、ビュー、およびモデルのセットを持たせることができます。</span><span class="sxs-lookup"><span data-stu-id="f8270-235">Areas provide a way to partition an ASP.NET Core Web app into smaller functional groups, each  with its own set of Razor Pages, controllers, views, and models.</span></span> <span data-ttu-id="f8270-236">区分は、実質的にはアプリ内の構造体となります。</span><span class="sxs-lookup"><span data-stu-id="f8270-236">An area is effectively a structure inside an app.</span></span> <span data-ttu-id="f8270-237">ASP.NET Core Web プロジェクトでは、ページ、モデル、コントローラー、ビューなどの論理コンポーネントが別々のフォルダーに保存されます。</span><span class="sxs-lookup"><span data-stu-id="f8270-237">In an ASP.NET Core web project, logical components like Pages, Model, Controller, and View are kept in different folders.</span></span> <span data-ttu-id="f8270-238">ASP.NET Core ランタイムでは、名前付け規則を使用し、これらのコンポーネント間のリレーションシップを作成します。</span><span class="sxs-lookup"><span data-stu-id="f8270-238">The ASP.NET Core runtime uses naming conventions to create the relationship between these components.</span></span> <span data-ttu-id="f8270-239">大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。</span><span class="sxs-lookup"><span data-stu-id="f8270-239">For a large app, it may be advantageous to partition the app into separate high level areas of functionality.</span></span> <span data-ttu-id="f8270-240">チェックアウト、請求、検索などの複数のビジネス ユニットがある eコマース アプリの場合です。</span><span class="sxs-lookup"><span data-stu-id="f8270-240">For instance, an e-commerce app with multiple business units, such as checkout, billing, and search.</span></span> <span data-ttu-id="f8270-241">これらの各ユニットには、ビュー、コントローラー、ページ、およびモデルを格納するための独自の領域があり Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-241">Each of these units have their own area to contain views, controllers, Razor Pages, and models.</span></span>
 
 <span data-ttu-id="f8270-242">次のような場合は、プロジェクトで区分を使用することを検討してください。</span><span class="sxs-lookup"><span data-stu-id="f8270-242">Consider using Areas in a project when:</span></span>
 
@@ -248,7 +248,7 @@ ms.locfileid: "93053528"
 
 <span data-ttu-id="f8270-245">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="f8270-245">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span> <span data-ttu-id="f8270-246">ダウンロード サンプルからは、区分をテストするための基本的なアプリが与えられます。</span><span class="sxs-lookup"><span data-stu-id="f8270-246">The download sample provides a basic app for testing areas.</span></span>
 
-<span data-ttu-id="f8270-247">ページを使用している場合は :::no-loc(Razor)::: 、このドキュメントの「 [ :::no-loc(Razor)::: ページがある領域](#areas-with-razor-pages) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f8270-247">If you're using :::no-loc(Razor)::: Pages, see [Areas with :::no-loc(Razor)::: Pages](#areas-with-razor-pages) in this document.</span></span>
+<span data-ttu-id="f8270-247">ページを使用している場合は Razor 、このドキュメントの「 [ Razor ページがある領域](#areas-with-razor-pages) 」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="f8270-247">If you're using Razor Pages, see [Areas with Razor Pages](#areas-with-razor-pages) in this document.</span></span>
 
 ## <a name="areas-for-controllers-with-views"></a><span data-ttu-id="f8270-248">ビューを伴うコントローラーの区分</span><span class="sxs-lookup"><span data-stu-id="f8270-248">Areas for controllers with views</span></span>
 
@@ -353,9 +353,9 @@ ms.locfileid: "93053528"
 
 <a name="arp"></a>
 
-## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="f8270-306">ページがある領域 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f8270-306">Areas with :::no-loc(Razor)::: Pages</span></span>
+## <a name="areas-with-no-locrazor-pages"></a><span data-ttu-id="f8270-306">ページがある領域 Razor</span><span class="sxs-lookup"><span data-stu-id="f8270-306">Areas with Razor Pages</span></span>
 
-<span data-ttu-id="f8270-307">ページがある領域には、 :::no-loc(Razor)::: `Areas/<area name>/Pages` アプリのルートにフォルダーが必要です。</span><span class="sxs-lookup"><span data-stu-id="f8270-307">Areas with :::no-loc(Razor)::: Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="f8270-308">[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)では次のフォルダー構造が使われます。</span><span class="sxs-lookup"><span data-stu-id="f8270-308">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples):</span></span>
+<span data-ttu-id="f8270-307">ページがある領域には、 Razor `Areas/<area name>/Pages` アプリのルートにフォルダーが必要です。</span><span class="sxs-lookup"><span data-stu-id="f8270-307">Areas with Razor Pages require an `Areas/<area name>/Pages` folder in the root of the app.</span></span> <span data-ttu-id="f8270-308">[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)では次のフォルダー構造が使われます。</span><span class="sxs-lookup"><span data-stu-id="f8270-308">The following folder structure is used with the [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples):</span></span>
 
 * <span data-ttu-id="f8270-309">プロジェクト名</span><span class="sxs-lookup"><span data-stu-id="f8270-309">Project name</span></span>
   * <span data-ttu-id="f8270-310">Areas</span><span class="sxs-lookup"><span data-stu-id="f8270-310">Areas</span></span>
@@ -370,7 +370,7 @@ ms.locfileid: "93053528"
           * <span data-ttu-id="f8270-319">詳細</span><span class="sxs-lookup"><span data-stu-id="f8270-319">About</span></span>
           * <span data-ttu-id="f8270-320">インデックス</span><span class="sxs-lookup"><span data-stu-id="f8270-320">Index</span></span>
 
-### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="f8270-321">ページと領域を含むリンク生成 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f8270-321">Link generation with :::no-loc(Razor)::: Pages and areas</span></span>
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a><span data-ttu-id="f8270-321">ページと領域を含むリンク生成 Razor</span><span class="sxs-lookup"><span data-stu-id="f8270-321">Link generation with Razor Pages and areas</span></span>
 
 <span data-ttu-id="f8270-322">[サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)の次のコードでは、区分を指定したリンクの生成を示しています (例: `asp-area="Products"`)。</span><span class="sxs-lookup"><span data-stu-id="f8270-322">The following code from the [sample download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) shows link generation with the area specified (for example, `asp-area="Products"`):</span></span>
 
@@ -392,9 +392,9 @@ ms.locfileid: "93053528"
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a><span data-ttu-id="f8270-336">_ViewImports ファイルを使って名前空間とタグ ヘルパーをインポートする</span><span class="sxs-lookup"><span data-stu-id="f8270-336">Import namespace and Tag Helpers with _ViewImports file</span></span>
 
-<span data-ttu-id="f8270-337">各区分 *ページ* フォルダーに *_ViewImports* ファイルを追加して、名前空間とタグヘルパーを :::no-loc(Razor)::: フォルダー内の各ページにインポートできます。</span><span class="sxs-lookup"><span data-stu-id="f8270-337">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each :::no-loc(Razor)::: Page in the folder.</span></span>
+<span data-ttu-id="f8270-337">各区分 *ページ* フォルダーに *_ViewImports* ファイルを追加して、名前空間とタグヘルパーを Razor フォルダー内の各ページにインポートできます。</span><span class="sxs-lookup"><span data-stu-id="f8270-337">A *_ViewImports.cshtml* file can be added to each area *Pages* folder to import the namespace and Tag Helpers to each Razor Page in the folder.</span></span>
 
-<span data-ttu-id="f8270-338">サンプル コードの *Services* 区分について検討します。これには *_ViewImports.cshtml* ファイルが含まれていません。</span><span class="sxs-lookup"><span data-stu-id="f8270-338">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="f8270-339">次のマークアップは、 */サービス/情報* ページを示してい :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-339">The following markup shows the */Services/Manage/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="f8270-338">サンプル コードの *Services* 区分について検討します。これには *_ViewImports.cshtml* ファイルが含まれていません。</span><span class="sxs-lookup"><span data-stu-id="f8270-338">Consider the *Services* area of the sample code, which doesn't contain a *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="f8270-339">次のマークアップは、 */サービス/情報* ページを示してい Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-339">The following markup shows the */Services/Manage/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
@@ -407,7 +407,7 @@ ms.locfileid: "93053528"
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-<span data-ttu-id="f8270-344">次のマークアップは、 */製品/バージョン* ページを示してい :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-344">The following markup shows the */Products/About* :::no-loc(Razor)::: Page:</span></span>
+<span data-ttu-id="f8270-344">次のマークアップは、 */製品/バージョン* ページを示してい Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f8270-344">The following markup shows the */Products/About* Razor Page:</span></span>
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
@@ -415,7 +415,7 @@ ms.locfileid: "93053528"
 
 <span data-ttu-id="f8270-346">詳細については、「[タグ ヘルパーのスコープの管理](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)」と「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="f8270-346">For more information, see [Managing Tag Helper scope](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) and [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives).</span></span>
 
-### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="f8270-347">ページ領域の共有レイアウト :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f8270-347">Shared layout for :::no-loc(Razor)::: Pages Areas</span></span>
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a><span data-ttu-id="f8270-347">ページ領域の共有レイアウト Razor</span><span class="sxs-lookup"><span data-stu-id="f8270-347">Shared layout for Razor Pages Areas</span></span>
 
 <span data-ttu-id="f8270-348">アプリ全体で共通レイアウトを共有するには、アプリケーションのルート フォルダーに *_ViewStart.cshtml* を移動します。</span><span class="sxs-lookup"><span data-stu-id="f8270-348">To share a common layout for the entire app, move the *_ViewStart.cshtml* to the application root folder.</span></span>
 

@@ -1,23 +1,23 @@
 ---
-title: 'ASP.NET Core でのアセンブリの遅延読み込み:::no-loc(Blazor WebAssembly):::'
+title: 'ASP.NET Core でのアセンブリの遅延読み込みBlazor WebAssembly'
 author: guardrex
-description: 'ASP.NET Core :::no-loc(Blazor WebAssembly)::: アプリでアセンブリの遅延読み込みを行う方法について説明します。'
+description: 'ASP.NET Core Blazor WebAssembly アプリでアセンブリの遅延読み込みを行う方法について説明します。'
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/09/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/webassembly-lazy-load-assemblies
 ms.openlocfilehash: 6a1feffb5341d432d6d1949a9e26b9537b85ba03
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -26,30 +26,30 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93054789"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="b64e1-103">ASP.NET Core でのアセンブリの遅延読み込み:::no-loc(Blazor WebAssembly):::</span><span class="sxs-lookup"><span data-stu-id="b64e1-103">Lazy load assemblies in ASP.NET Core :::no-loc(Blazor WebAssembly):::</span></span>
+# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="b64e1-103">ASP.NET Core でのアセンブリの遅延読み込みBlazor WebAssembly</span><span class="sxs-lookup"><span data-stu-id="b64e1-103">Lazy load assemblies in ASP.NET Core Blazor WebAssembly</span></span>
 
 <span data-ttu-id="b64e1-104">作成者: [Safia Abdalla](https://safia.rocks)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="b64e1-104">By [Safia Abdalla](https://safia.rocks) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="b64e1-105">:::no-loc(Blazor WebAssembly)::: アプリの起動時のパフォーマンスは、一部のアプリケーション アセンブリの読み込みをそれが必要になるまで延期することで改善できます。これは " *遅延読み込み* " と呼ばれています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-105">:::no-loc(Blazor WebAssembly)::: app startup performance can be improved by deferring the loading of some application assemblies until they are required, which is called *lazy loading*.</span></span> <span data-ttu-id="b64e1-106">たとえば、1 つのコンポーネントをレンダリングするためにのみ使用されるアセンブリの読み込みを、ユーザーがそのコンポーネントに移動する場合にのみ行うように設定することができます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-106">For example, assemblies that are only used to render a single component can be set up to load only if the user navigates to that component.</span></span> <span data-ttu-id="b64e1-107">読み込みが完了すると、アセンブリはクライアント側にキャッシュされ、今後のすべてのナビゲーションで使用できるようになります。</span><span class="sxs-lookup"><span data-stu-id="b64e1-107">After loading, the assemblies are cached client-side and are available for all future navigations.</span></span>
+<span data-ttu-id="b64e1-105">Blazor WebAssembly アプリの起動時のパフォーマンスは、一部のアプリケーション アセンブリの読み込みをそれが必要になるまで延期することで改善できます。これは " *遅延読み込み* " と呼ばれています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-105">Blazor WebAssembly app startup performance can be improved by deferring the loading of some application assemblies until they are required, which is called *lazy loading*.</span></span> <span data-ttu-id="b64e1-106">たとえば、1 つのコンポーネントをレンダリングするためにのみ使用されるアセンブリの読み込みを、ユーザーがそのコンポーネントに移動する場合にのみ行うように設定することができます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-106">For example, assemblies that are only used to render a single component can be set up to load only if the user navigates to that component.</span></span> <span data-ttu-id="b64e1-107">読み込みが完了すると、アセンブリはクライアント側にキャッシュされ、今後のすべてのナビゲーションで使用できるようになります。</span><span class="sxs-lookup"><span data-stu-id="b64e1-107">After loading, the assemblies are cached client-side and are available for all future navigations.</span></span>
 
-<span data-ttu-id="b64e1-108">:::no-loc(Blazor)::: の遅延読み込み機能を使用すると、アプリ アセンブリに遅延読み込みのマークを付けることができます。これにより、実行時にユーザーが特定のルートに移動したとき、アセンブリが読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-108">:::no-loc(Blazor):::'s lazy loading feature allows you to mark app assemblies for lazy loading, which loads the assemblies during runtime when the user navigates to a particular route.</span></span> <span data-ttu-id="b64e1-109">この機能は、プロジェクト ファイルに対する変更と、アプリケーションのルーターに対する変更で構成されています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-109">The feature consists of changes to the project file and changes to the application's router.</span></span>
+<span data-ttu-id="b64e1-108">Blazor の遅延読み込み機能を使用すると、アプリ アセンブリに遅延読み込みのマークを付けることができます。これにより、実行時にユーザーが特定のルートに移動したとき、アセンブリが読み込まれます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-108">Blazor's lazy loading feature allows you to mark app assemblies for lazy loading, which loads the assemblies during runtime when the user navigates to a particular route.</span></span> <span data-ttu-id="b64e1-109">この機能は、プロジェクト ファイルに対する変更と、アプリケーションのルーターに対する変更で構成されています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-109">The feature consists of changes to the project file and changes to the application's router.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="b64e1-110">:::no-loc(Blazor Server)::: アプリでは、アセンブリの遅延読み込みを行っても効果がありません。これは、:::no-loc(Blazor Server)::: アプリのクライアントにアセンブリがダウンロードされないためです。</span><span class="sxs-lookup"><span data-stu-id="b64e1-110">Assembly lazy loading doesn't benefit :::no-loc(Blazor Server)::: apps because assemblies aren't downloaded to the client in a :::no-loc(Blazor Server)::: app.</span></span>
+> <span data-ttu-id="b64e1-110">Blazor Server アプリでは、アセンブリの遅延読み込みを行っても効果がありません。これは、Blazor Server アプリのクライアントにアセンブリがダウンロードされないためです。</span><span class="sxs-lookup"><span data-stu-id="b64e1-110">Assembly lazy loading doesn't benefit Blazor Server apps because assemblies aren't downloaded to the client in a Blazor Server app.</span></span>
 
 ## <a name="project-file"></a><span data-ttu-id="b64e1-111">プロジェクト ファイル</span><span class="sxs-lookup"><span data-stu-id="b64e1-111">Project file</span></span>
 
-<span data-ttu-id="b64e1-112">アプリのプロジェクト ファイル (`.csproj`) 内で、`:::no-loc(Blazor):::WebAssemblyLazyLoad` 項目を使用して、遅延読み込みのマークをアセンブリに付けます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-112">Mark assemblies for lazy loading in the app's project file (`.csproj`) using the `:::no-loc(Blazor):::WebAssemblyLazyLoad` item.</span></span> <span data-ttu-id="b64e1-113">`.dll` 拡張子が含まれるアセンブリ名を使用します。</span><span class="sxs-lookup"><span data-stu-id="b64e1-113">Use the assembly name with the `.dll` extension.</span></span> <span data-ttu-id="b64e1-114">:::no-loc(Blazor)::: フレームワークを使用すると、この項目グループによって指定されたアセンブリはアプリの起動時に読み込まれません。</span><span class="sxs-lookup"><span data-stu-id="b64e1-114">The :::no-loc(Blazor)::: framework prevents the assemblies specified by this item group from loading at app launch.</span></span> <span data-ttu-id="b64e1-115">次の例では、大規模なカスタム アセンブリ (`GrantImaharaRobotControls.dll`) に遅延読み込みのマークを付けいています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-115">The following example marks a large custom assembly (`GrantImaharaRobotControls.dll`) for lazy loading.</span></span> <span data-ttu-id="b64e1-116">遅延読み込みのマークが付けられているアセンブリに依存関係がある場合、それらにはプロジェクト ファイル内でも遅延読み込みのマークを付ける必要があります。</span><span class="sxs-lookup"><span data-stu-id="b64e1-116">If an assembly that's marked for lazy loading has dependencies, they must also be marked for lazy loading in the project file.</span></span>
+<span data-ttu-id="b64e1-112">アプリのプロジェクト ファイル (`.csproj`) 内で、`BlazorWebAssemblyLazyLoad` 項目を使用して、遅延読み込みのマークをアセンブリに付けます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-112">Mark assemblies for lazy loading in the app's project file (`.csproj`) using the `BlazorWebAssemblyLazyLoad` item.</span></span> <span data-ttu-id="b64e1-113">`.dll` 拡張子が含まれるアセンブリ名を使用します。</span><span class="sxs-lookup"><span data-stu-id="b64e1-113">Use the assembly name with the `.dll` extension.</span></span> <span data-ttu-id="b64e1-114">Blazor フレームワークを使用すると、この項目グループによって指定されたアセンブリはアプリの起動時に読み込まれません。</span><span class="sxs-lookup"><span data-stu-id="b64e1-114">The Blazor framework prevents the assemblies specified by this item group from loading at app launch.</span></span> <span data-ttu-id="b64e1-115">次の例では、大規模なカスタム アセンブリ (`GrantImaharaRobotControls.dll`) に遅延読み込みのマークを付けいています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-115">The following example marks a large custom assembly (`GrantImaharaRobotControls.dll`) for lazy loading.</span></span> <span data-ttu-id="b64e1-116">遅延読み込みのマークが付けられているアセンブリに依存関係がある場合、それらにはプロジェクト ファイル内でも遅延読み込みのマークを付ける必要があります。</span><span class="sxs-lookup"><span data-stu-id="b64e1-116">If an assembly that's marked for lazy loading has dependencies, they must also be marked for lazy loading in the project file.</span></span>
 
 ```xml
 <ItemGroup>
-  <:::no-loc(Blazor):::WebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
 </ItemGroup>
 ```
 
 ## <a name="router-component"></a><span data-ttu-id="b64e1-117">`Router` コンポーネント</span><span class="sxs-lookup"><span data-stu-id="b64e1-117">`Router` component</span></span>
 
-<span data-ttu-id="b64e1-118">:::no-loc(Blazor)::: がルーティング可能なコンポーネントを求めて探索するアセンブリは、:::no-loc(Blazor)::: の `Router` コンポーネントによって指定されます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-118">:::no-loc(Blazor):::'s `Router` component designates which assemblies :::no-loc(Blazor)::: searches for routable components.</span></span> <span data-ttu-id="b64e1-119">`Router` コンポーネントは、ユーザーが移動するルートのコンポーネントをレンダリングする役割も担います。</span><span class="sxs-lookup"><span data-stu-id="b64e1-119">The `Router` component is also responsible for rendering the component for the route where the user navigates.</span></span> <span data-ttu-id="b64e1-120">`Router` コンポーネントでは、遅延読み込みと組み合わせて使用できる `OnNavigateAsync` 機能がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-120">The `Router` component supports an `OnNavigateAsync` feature that can be used in conjunction with lazy loading.</span></span>
+<span data-ttu-id="b64e1-118">Blazor がルーティング可能なコンポーネントを求めて探索するアセンブリは、Blazor の `Router` コンポーネントによって指定されます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-118">Blazor's `Router` component designates which assemblies Blazor searches for routable components.</span></span> <span data-ttu-id="b64e1-119">`Router` コンポーネントは、ユーザーが移動するルートのコンポーネントをレンダリングする役割も担います。</span><span class="sxs-lookup"><span data-stu-id="b64e1-119">The `Router` component is also responsible for rendering the component for the route where the user navigates.</span></span> <span data-ttu-id="b64e1-120">`Router` コンポーネントでは、遅延読み込みと組み合わせて使用できる `OnNavigateAsync` 機能がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="b64e1-120">The `Router` component supports an `OnNavigateAsync` feature that can be used in conjunction with lazy loading.</span></span>
 
 <span data-ttu-id="b64e1-121">アプリの `Router` コンポーネント (`App.razor`):</span><span class="sxs-lookup"><span data-stu-id="b64e1-121">In the app's `Router` component (`App.razor`):</span></span>
 
@@ -75,7 +75,7 @@ ms.locfileid: "93054789"
 }
 ```
 
-<span data-ttu-id="b64e1-129">`OnNavigateAsync` コールバックから、ハンドルされない例外がスローされた場合は、[:::no-loc(Blazor):::エラー UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) が呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-129">If the `OnNavigateAsync` callback throws an unhandled exception, the [:::no-loc(Blazor)::: error UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) is invoked.</span></span>
+<span data-ttu-id="b64e1-129">`OnNavigateAsync` コールバックから、ハンドルされない例外がスローされた場合は、[Blazorエラー UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) が呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-129">If the `OnNavigateAsync` callback throws an unhandled exception, the [Blazor error UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) is invoked.</span></span>
 
 ### <a name="assembly-load-logic-in-onnavigateasync"></a><span data-ttu-id="b64e1-130">`OnNavigateAsync` 内のアセンブリ読み込みロジック</span><span class="sxs-lookup"><span data-stu-id="b64e1-130">Assembly load logic in `OnNavigateAsync`</span></span>
 
@@ -104,7 +104,7 @@ ms.locfileid: "93054789"
 * <span data-ttu-id="b64e1-142">JS 相互運用を使用して、ネットワーク呼び出しを介してアセンブリをフェッチします。</span><span class="sxs-lookup"><span data-stu-id="b64e1-142">Uses JS interop to fetch assemblies via a network call.</span></span>
 * <span data-ttu-id="b64e1-143">ブラウザー内の WebAssembly で実行されているランタイムにアセンブリを読み込みます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-143">Loads assemblies into the runtime executing on WebAssembly in the browser.</span></span>
 
-<span data-ttu-id="b64e1-144">フレームワークの遅延読み込みの実装では、ホストされた :::no-loc(Blazor)::: ソリューションでのプリレンダリングによる遅延読み込みがサポートされます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-144">The framework's lazy loading implementation supports lazy loading with prerendering in a hosted :::no-loc(Blazor)::: solution.</span></span> <span data-ttu-id="b64e1-145">プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-145">During prerendering, all assemblies, including those marked for lazy loading, are assumed to be loaded.</span></span> <span data-ttu-id="b64e1-146">" *サーバー* " プロジェクトの `Startup.ConfigureServices` メソッド (`Startup.cs`) に、手動で `LazyAssemblyLoader` を登録します。</span><span class="sxs-lookup"><span data-stu-id="b64e1-146">Manually register `LazyAssemblyLoader` in the *Server* project's `Startup.ConfigureServices` method (`Startup.cs`):</span></span>
+<span data-ttu-id="b64e1-144">フレームワークの遅延読み込みの実装では、ホストされた Blazor ソリューションでのプリレンダリングによる遅延読み込みがサポートされます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-144">The framework's lazy loading implementation supports lazy loading with prerendering in a hosted Blazor solution.</span></span> <span data-ttu-id="b64e1-145">プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。</span><span class="sxs-lookup"><span data-stu-id="b64e1-145">During prerendering, all assemblies, including those marked for lazy loading, are assumed to be loaded.</span></span> <span data-ttu-id="b64e1-146">" *サーバー* " プロジェクトの `Startup.ConfigureServices` メソッド (`Startup.cs`) に、手動で `LazyAssemblyLoader` を登録します。</span><span class="sxs-lookup"><span data-stu-id="b64e1-146">Manually register `LazyAssemblyLoader` in the *Server* project's `Startup.ConfigureServices` method (`Startup.cs`):</span></span>
 
 ```csharp
 services.AddScoped<LazyAssemblyLoader>();

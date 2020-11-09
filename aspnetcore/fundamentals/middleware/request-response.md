@@ -7,17 +7,17 @@ ms.author: jukotali
 ms.custom: mvc
 ms.date: 5/29/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: fundamentals/middleware/request-response
 ms.openlocfilehash: cc701343cb3859f0f76ebc62bd54aa2e4431d522
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -30,7 +30,7 @@ ms.locfileid: "93061029"
 
 <span data-ttu-id="fd6e5-104">作成者: [Justin Kotalik](https://github.com/jkotalik)</span><span class="sxs-lookup"><span data-stu-id="fd6e5-104">By [Justin Kotalik](https://github.com/jkotalik)</span></span>
 
-<span data-ttu-id="fd6e5-105">この記事では、要求本文からの読み取りと、応答本文への書き込みを行う方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-105">This article explains how to read from the request body and write to the response body.</span></span> <span data-ttu-id="fd6e5-106">ミドルウェアを作成するときは、これらの操作のコードが必要になることがあります。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-106">Code for these operations might be required when writing middleware.</span></span> <span data-ttu-id="fd6e5-107">操作は MVC と :::no-loc(Razor)::: Pages によって処理されるため、ミドルウェアの作成以外では、通常、カスタムコードは必要ありません。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-107">Outside of writing middleware, custom code isn't generally required because the operations are handled by MVC and :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="fd6e5-105">この記事では、要求本文からの読み取りと、応答本文への書き込みを行う方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-105">This article explains how to read from the request body and write to the response body.</span></span> <span data-ttu-id="fd6e5-106">ミドルウェアを作成するときは、これらの操作のコードが必要になることがあります。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-106">Code for these operations might be required when writing middleware.</span></span> <span data-ttu-id="fd6e5-107">操作は MVC と Razor Pages によって処理されるため、ミドルウェアの作成以外では、通常、カスタムコードは必要ありません。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-107">Outside of writing middleware, custom code isn't generally required because the operations are handled by MVC and Razor Pages.</span></span>
 
 <span data-ttu-id="fd6e5-108">要求と応答の本文には 2 つの抽象化があります: <xref:System.IO.Stream> と <xref:System.IO.Pipelines.Pipe> です。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-108">There are two abstractions for the request and response bodies: <xref:System.IO.Stream> and <xref:System.IO.Pipelines.Pipe>.</span></span> <span data-ttu-id="fd6e5-109">要求の読み取りでは、<xref:Microsoft.AspNetCore.Http.HttpRequest.Body?displayProperty=nameWithType> が <xref:System.IO.Stream> で、`HttpRequest.BodyReader` が <xref:System.IO.Pipelines.PipeReader> です。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-109">For request reading, <xref:Microsoft.AspNetCore.Http.HttpRequest.Body?displayProperty=nameWithType> is a <xref:System.IO.Stream>, and `HttpRequest.BodyReader` is a <xref:System.IO.Pipelines.PipeReader>.</span></span> <span data-ttu-id="fd6e5-110">応答の書き込みでは、<xref:Microsoft.AspNetCore.Http.HttpResponse.Body?displayProperty=nameWithType> が <xref:System.IO.Stream> で、`HttpResponse.BodyWriter` が <xref:System.IO.Pipelines.PipeWriter> です。</span><span class="sxs-lookup"><span data-stu-id="fd6e5-110">For response writing, <xref:Microsoft.AspNetCore.Http.HttpResponse.Body?displayProperty=nameWithType> is a <xref:System.IO.Stream>, and `HttpResponse.BodyWriter` is a <xref:System.IO.Pipelines.PipeWriter>.</span></span>
 

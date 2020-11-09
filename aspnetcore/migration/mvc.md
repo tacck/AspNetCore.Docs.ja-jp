@@ -5,17 +5,17 @@ description: ASP.NET MVC プロジェクトの ASP.NET Core MVC への移行を�
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: migration/mvc
 ms.openlocfilehash: 226ac6da508378c7b3c81779d38dd2e0840f1fed
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -37,7 +37,7 @@ ms.locfileid: "93051514"
 * <span data-ttu-id="e6b1b-110">静的コンテンツ。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-110">Static content.</span></span>
 * <span data-ttu-id="e6b1b-111">クライアント側の依存関係。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-111">Client-side dependencies.</span></span>
 
-<span data-ttu-id="e6b1b-112">構成とコードの移行につい :::no-loc(Identity)::: ては、「 [ASP.NET Core への構成の移行](xref:migration/configuration) 」および「 [認証の移行」および「 :::no-loc(Identity)::: ASP.NET Core への移行](xref:migration/identity)」を参照してください</span><span class="sxs-lookup"><span data-stu-id="e6b1b-112">For migrating configuration and :::no-loc(Identity)::: code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity).</span></span>
+<span data-ttu-id="e6b1b-112">構成とコードの移行につい Identity ては、「 [ASP.NET Core への構成の移行](xref:migration/configuration) 」および「 [認証の移行」および「 Identity ASP.NET Core への移行](xref:migration/identity)」を参照してください</span><span class="sxs-lookup"><span data-stu-id="e6b1b-112">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="e6b1b-113">[前提条件]</span><span class="sxs-lookup"><span data-stu-id="e6b1b-113">Prerequisites</span></span>
 
@@ -101,7 +101,7 @@ ms.locfileid: "93051514"
 1. <span data-ttu-id="e6b1b-158">ASP.NET MVC からメソッドをコピーして、 `HomeController` 新しい ASP.NET Core メソッドを置き換え `HomeController` ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-158">Copy the methods from the ASP.NET MVC `HomeController` to replace the new ASP.NET Core `HomeController` methods.</span></span> <span data-ttu-id="e6b1b-159">アクションメソッドの戻り値の型を変更する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-159">There's no need to change the return type of the action methods.</span></span> <span data-ttu-id="e6b1b-160">ASP.NET MVC 組み込みテンプレートのコントローラーアクションメソッドの戻り値の型はです <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> 。 ASP.NET CORE mvc では、アクションメソッドは代わりにを返し `IActionResult` ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-160">The ASP.NET MVC built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="e6b1b-161">`ActionResult` は、`IActionResult` を実装します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-161">`ActionResult` implements `IActionResult`.</span></span>
 1. <span data-ttu-id="e6b1b-162">ASP.NET Core プロジェクトで、 *Views/Home* ディレクトリを右クリックし、[既存項目の **追加** ] を選択し > **Existing Item** ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-162">In the ASP.NET Core project, right-click the *Views/Home* directory, select **Add** > **Existing Item** .</span></span>
 1. <span data-ttu-id="e6b1b-163">[ **既存項目の追加** ] ダイアログで、ASP.NET MVC *WebApp1* プロジェクトの *Views/Home* ディレクトリに移動します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-163">In the **Add Existing Item** dialog, navigate to the ASP.NET MVC *WebApp1* project's *Views/Home* directory.</span></span>
-1. <span data-ttu-id="e6b1b-164">[ *バージョン情報* ]、[ *連絡先.* *..* ............................... :::no-loc(Razor)::: **Add**</span><span class="sxs-lookup"><span data-stu-id="e6b1b-164">Select the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files, then select **Add** , replacing the existing files.</span></span>
+1. <span data-ttu-id="e6b1b-164">[ *バージョン情報* ]、[ *連絡先.* *..* ............................... Razor **Add**</span><span class="sxs-lookup"><span data-stu-id="e6b1b-164">Select the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files, then select **Add** , replacing the existing files.</span></span>
 
 <span data-ttu-id="e6b1b-165">詳細については、次のトピックを参照してください。 <xref:mvc/controllers/actions> および <xref:mvc/views/overview></span><span class="sxs-lookup"><span data-stu-id="e6b1b-165">For more information, see <xref:mvc/controllers/actions> and <xref:mvc/views/overview>.</span></span>
 
@@ -203,7 +203,7 @@ ms.locfileid: "93051514"
 * <span data-ttu-id="e6b1b-222">静的コンテンツ</span><span class="sxs-lookup"><span data-stu-id="e6b1b-222">Static content</span></span>
 * <span data-ttu-id="e6b1b-223">クライアント側の依存関係。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-223">Client-side dependencies.</span></span>
 
-<span data-ttu-id="e6b1b-224">構成とコードの移行につい :::no-loc(Identity)::: ては、「」および「」を参照してください <xref:migration/configuration> <xref:migration/identity> 。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-224">For migrating configuration and :::no-loc(Identity)::: code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
+<span data-ttu-id="e6b1b-224">構成とコードの移行につい Identity ては、「」および「」を参照してください <xref:migration/configuration> <xref:migration/identity> 。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-224">For migrating configuration and Identity code, see <xref:migration/configuration> and <xref:migration/identity>.</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="e6b1b-225">サンプルのバージョン番号が最新ではない可能性があります。それに応じてプロジェクトを更新してください。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-225">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
@@ -254,7 +254,7 @@ ms.locfileid: "93051514"
 
 * <span data-ttu-id="e6b1b-261">*ビュー/ホーム* ディレクトリを追加します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-261">Add a *Views/Home* directory.</span></span>
 
-* <span data-ttu-id="e6b1b-262">*Views/Home* ディレクトリに、 *Index. cshtml* という名前の **:::no-loc(Razor)::: ビュー** を追加します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-262">Add a **:::no-loc(Razor)::: View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+* <span data-ttu-id="e6b1b-262">*Views/Home* ディレクトリに、 *Index. cshtml* という名前の **Razor ビュー** を追加します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-262">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
 
 ![[新しい項目の追加] ダイアログ](mvc/_static/view.png)
 
@@ -288,13 +288,13 @@ ms.locfileid: "93051514"
 
 * <span data-ttu-id="e6b1b-276">filters</span><span class="sxs-lookup"><span data-stu-id="e6b1b-276">filters</span></span>
 
-* <span data-ttu-id="e6b1b-277">ログイン/ログアウト :::no-loc(Identity)::: (これは次のチュートリアルで行います)</span><span class="sxs-lookup"><span data-stu-id="e6b1b-277">Log in/out, :::no-loc(Identity)::: (This is done in the next tutorial.)</span></span>
+* <span data-ttu-id="e6b1b-277">ログイン/ログアウト Identity (これは次のチュートリアルで行います)</span><span class="sxs-lookup"><span data-stu-id="e6b1b-277">Log in/out, Identity (This is done in the next tutorial.)</span></span>
 
 ## <a name="controllers-and-views"></a><span data-ttu-id="e6b1b-278">コントローラーとビュー</span><span class="sxs-lookup"><span data-stu-id="e6b1b-278">Controllers and views</span></span>
 
 * <span data-ttu-id="e6b1b-279">ASP.NET MVC の各メソッド `HomeController` を新しいにコピーし `HomeController` ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-279">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="e6b1b-280">ASP.NET MVC では、組み込みテンプレートのコントローラーアクションメソッドの戻り値の型はです <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> 。 ASP.NET CORE mvc では、アクションメソッドは代わりにを返し `IActionResult` ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-280">In ASP.NET MVC, the built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="e6b1b-281">`ActionResult``IActionResult`を実装するので、アクションメソッドの戻り値の型を変更する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-281">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
 
-* <span data-ttu-id="e6b1b-282">ASP.NET MVC プロジェクトの *About. cshtml* 、 *Contact.* cshtml、および *Index. cshtml* :::no-loc(Razor)::: view ファイルを ASP.NET Core プロジェクトにコピーします。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-282">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+* <span data-ttu-id="e6b1b-282">ASP.NET MVC プロジェクトの *About. cshtml* 、 *Contact.* cshtml、および *Index. cshtml* Razor view ファイルを ASP.NET Core プロジェクトにコピーします。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-282">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
 
 ## <a name="test-each-method"></a><span data-ttu-id="e6b1b-283">各メソッドをテストする</span><span class="sxs-lookup"><span data-stu-id="e6b1b-283">Test each method</span></span>
 
@@ -330,7 +330,7 @@ ms.locfileid: "93051514"
 
 * <span data-ttu-id="e6b1b-313">`@Scripts.Render("~/bundles/modernizr")` を削除します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-313">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="e6b1b-314">行をコメントアウト `@Html.Partial("_LoginPartial")` します (行をで囲み `@*...*@` ます)。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="e6b1b-315">詳細については、「[認証と :::no-loc(Identity)::: ASP.NET Core への移行](xref:migration/identity)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-315">For more information, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity)</span></span>
+* <span data-ttu-id="e6b1b-314">行をコメントアウト `@Html.Partial("_LoginPartial")` します (行をで囲み `@*...*@` ます)。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-314">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="e6b1b-315">詳細については、「[認証と Identity ASP.NET Core への移行](xref:migration/identity)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-315">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
 
 * <span data-ttu-id="e6b1b-316">`@Scripts.Render("~/bundles/jquery")`要素で置き換え `<script>` ます (下記参照)。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-316">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
 
@@ -389,7 +389,7 @@ ms.locfileid: "93051514"
 * <span data-ttu-id="e6b1b-343">静的コンテンツ</span><span class="sxs-lookup"><span data-stu-id="e6b1b-343">Static content</span></span>
 * <span data-ttu-id="e6b1b-344">クライアント側の依存関係。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-344">Client-side dependencies.</span></span>
 
-<span data-ttu-id="e6b1b-345">構成とコードの移行につい :::no-loc(Identity)::: ては、「 [ASP.NET Core への構成の移行](xref:migration/configuration) 」および「 [認証の移行」および「 :::no-loc(Identity)::: ASP.NET Core への移行](xref:migration/identity)」を参照してください</span><span class="sxs-lookup"><span data-stu-id="e6b1b-345">For migrating configuration and :::no-loc(Identity)::: code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity).</span></span>
+<span data-ttu-id="e6b1b-345">構成とコードの移行につい Identity ては、「 [ASP.NET Core への構成の移行](xref:migration/configuration) 」および「 [認証の移行」および「 Identity ASP.NET Core への移行](xref:migration/identity)」を参照してください</span><span class="sxs-lookup"><span data-stu-id="e6b1b-345">For migrating configuration and Identity code, see [Migrate configuration to ASP.NET Core](xref:migration/configuration) and [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity).</span></span>
 
 > [!NOTE]
 > <span data-ttu-id="e6b1b-346">サンプルのバージョン番号が最新ではない可能性があります。それに応じてプロジェクトを更新してください。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-346">The version numbers in the samples might not be current, update the projects accordingly.</span></span>
@@ -440,7 +440,7 @@ ms.locfileid: "93051514"
 
 * <span data-ttu-id="e6b1b-383">*ビュー/ホーム* ディレクトリを追加します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-383">Add a *Views/Home* directory.</span></span>
 
-* <span data-ttu-id="e6b1b-384">*Views/Home* ディレクトリに、 *Index. cshtml* という名前の **:::no-loc(Razor)::: ビュー** を追加します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-384">Add a **:::no-loc(Razor)::: View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
+* <span data-ttu-id="e6b1b-384">*Views/Home* ディレクトリに、 *Index. cshtml* という名前の **Razor ビュー** を追加します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-384">Add a **Razor View** named *Index.cshtml* to the *Views/Home* directory.</span></span>
 
 ![[新しい項目の追加] ダイアログ](mvc/_static/view.png)
 
@@ -474,13 +474,13 @@ ms.locfileid: "93051514"
 
 * <span data-ttu-id="e6b1b-398">filters</span><span class="sxs-lookup"><span data-stu-id="e6b1b-398">filters</span></span>
 
-* <span data-ttu-id="e6b1b-399">ログイン/ログアウト :::no-loc(Identity)::: (これは次のチュートリアルで行います)</span><span class="sxs-lookup"><span data-stu-id="e6b1b-399">Log in/out, :::no-loc(Identity)::: (This is done in the next tutorial.)</span></span>
+* <span data-ttu-id="e6b1b-399">ログイン/ログアウト Identity (これは次のチュートリアルで行います)</span><span class="sxs-lookup"><span data-stu-id="e6b1b-399">Log in/out, Identity (This is done in the next tutorial.)</span></span>
 
 ## <a name="controllers-and-views"></a><span data-ttu-id="e6b1b-400">コントローラーとビュー</span><span class="sxs-lookup"><span data-stu-id="e6b1b-400">Controllers and views</span></span>
 
 * <span data-ttu-id="e6b1b-401">ASP.NET MVC の各メソッド `HomeController` を新しいにコピーし `HomeController` ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-401">Copy each of the methods from the ASP.NET MVC `HomeController` to the new `HomeController`.</span></span> <span data-ttu-id="e6b1b-402">ASP.NET MVC では、組み込みテンプレートのコントローラーアクションメソッドの戻り値の型はです <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> 。 ASP.NET CORE mvc では、アクションメソッドは代わりにを返し `IActionResult` ます。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-402">In ASP.NET MVC, the built-in template's controller action method return type is <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2>; in ASP.NET Core MVC, the action methods return `IActionResult` instead.</span></span> <span data-ttu-id="e6b1b-403">`ActionResult``IActionResult`を実装するので、アクションメソッドの戻り値の型を変更する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-403">`ActionResult` implements `IActionResult`, so there's no need to change the return type of the action methods.</span></span>
 
-* <span data-ttu-id="e6b1b-404">ASP.NET MVC プロジェクトの *About. cshtml* 、 *Contact.* cshtml、および *Index. cshtml* :::no-loc(Razor)::: view ファイルを ASP.NET Core プロジェクトにコピーします。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-404">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* :::no-loc(Razor)::: view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
+* <span data-ttu-id="e6b1b-404">ASP.NET MVC プロジェクトの *About. cshtml* 、 *Contact.* cshtml、および *Index. cshtml* Razor view ファイルを ASP.NET Core プロジェクトにコピーします。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-404">Copy the *About.cshtml* , *Contact.cshtml* , and *Index.cshtml* Razor view files from the ASP.NET MVC project to the ASP.NET Core project.</span></span>
 
 ## <a name="test-each-method"></a><span data-ttu-id="e6b1b-405">各メソッドをテストする</span><span class="sxs-lookup"><span data-stu-id="e6b1b-405">Test each method</span></span>
 
@@ -516,7 +516,7 @@ ms.locfileid: "93051514"
 
 * <span data-ttu-id="e6b1b-435">`@Scripts.Render("~/bundles/modernizr")` を削除します。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-435">Remove `@Scripts.Render("~/bundles/modernizr")`.</span></span>
 
-* <span data-ttu-id="e6b1b-436">行をコメントアウト `@Html.Partial("_LoginPartial")` します (行をで囲み `@*...*@` ます)。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="e6b1b-437">詳細については、「[認証と :::no-loc(Identity)::: ASP.NET Core への移行](xref:migration/identity)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-437">For more information, see [Migrate Authentication and :::no-loc(Identity)::: to ASP.NET Core](xref:migration/identity)</span></span>
+* <span data-ttu-id="e6b1b-436">行をコメントアウト `@Html.Partial("_LoginPartial")` します (行をで囲み `@*...*@` ます)。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-436">Comment out the `@Html.Partial("_LoginPartial")` line (surround the line with `@*...*@`).</span></span> <span data-ttu-id="e6b1b-437">詳細については、「[認証と Identity ASP.NET Core への移行](xref:migration/identity)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-437">For more information, see [Migrate Authentication and Identity to ASP.NET Core](xref:migration/identity)</span></span>
 
 * <span data-ttu-id="e6b1b-438">`@Scripts.Render("~/bundles/jquery")`要素で置き換え `<script>` ます (下記参照)。</span><span class="sxs-lookup"><span data-stu-id="e6b1b-438">Replace `@Scripts.Render("~/bundles/jquery")` with a `<script>` element (see below).</span></span>
 
