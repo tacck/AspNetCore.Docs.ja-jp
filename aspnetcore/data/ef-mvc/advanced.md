@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 9f02165f54d3cd3328496710dc92ebc86c4640d6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 386be395399bf4131e4b6c8cac8221f994e8b7c5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626832"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054386"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>チュートリアル: 高度なシナリオについて学習する - ASP.NET MVC と EF Core
 
@@ -102,7 +103,7 @@ Contoso University の管理者が、すべてのコースの単位数を変更�
 
 **[更新]** ボタンをクリックすると、HttpPost メソッドが呼び出され、乗数がテキスト ボックスに入力した値になります。 このコードは次に、コースを更新し、影響を受けた行の数を`ViewData` のビューに返す SQL を実行します。 ビューが `RowsAffected` 値を取得すると、更新された行の数を表示します。
 
-**ソリューション エクスプローラー**で、*Views/Courses* フォルダーを右クリックし、 **[追加] > [新しい項目]** の順にクリックします。
+**ソリューション エクスプローラー** で、 *Views/Courses* フォルダーを右クリックし、 **[追加] > [新しい項目]** の順にクリックします。
 
 **[新しい項目の追加]** ダイアログで、左側のウィンドウの **[インストール済み]** の下の **[ASP.NET Core]** をクリックし、 **[Razor ビュー]** をクリックして、新しいビューに *UpdateCourseCredits.cshtml* という名前を付けます。
 
@@ -240,7 +241,7 @@ EF CLI コマンドは、コード ファイルを自動的に閉じて保存し
 
 データが存在するデータベースでスキーマの変更を行っているときに、他のエラーが発生する場合があります。 解決できない移行エラーが発生した場合は、接続文字列のデータベース名を変更するか、データベースを削除できます。 新しいデータベースには移行するデータが存在しないため、update-database コマンドがエラーなしで完了する可能性が高くなります。
 
-最も簡単な方法は、*appsettings.json* でデータベースの名前を変更することです。 次に `database update` を実行したときに、新しいデータベースが作成されます。
+最も簡単な方法は、 *appsettings.json* でデータベースの名前を変更することです。 次に `database update` を実行したときに、新しいデータベースが作成されます。
 
 SSOX でデータベースを削除するには、そのデータベースを右クリックして、 **[削除]** をクリックしてから、 **[データベースの削除]** ダイアログ ボックスで **[既存の接続を閉じる]** 、 **[OK]** の順にクリックします。
 

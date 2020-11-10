@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 7d2da20d04b93ebcd16fb58a4b74b5b67d37bd72
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722924"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060444"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET での gRPC のログ記録と診断
 
@@ -41,11 +42,11 @@ gRPC サービスと gRPC クライアントでは、[.NET Core ログ](xref:fun
 ### <a name="grpc-services-logging"></a>gRPC サービス ログ
 
 > [!WARNING]
-> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
+> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
 
 gRPC サービスは ASP.NET Core でホストされるため、ASP.NET Core ログ システムが使用されます。 既定の構成では、gRPC でログに記録される情報は非常に少量ですが、これは構成可能です。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
-gRPC では、`Grpc` カテゴリの下にログが追加されます。 gRPC からの詳細なログを有効にするには、`Logging` 内の `LogLevel` サブセクションに次の項目を追加して、*appsettings.json* ファイルの `Debug` レベルに `Grpc` プレフィックスを構成します。
+gRPC では、`Grpc` カテゴリの下にログが追加されます。 gRPC からの詳細なログを有効にするには、`Logging` 内の `LogLevel` サブセクションに次の項目を追加して、 *appsettings.json* ファイルの `Debug` レベルに `Grpc` プレフィックスを構成します。
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
@@ -97,7 +98,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ### <a name="grpc-client-logging"></a>gRPC クライアント ログ
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿**しないでください**。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
 
 .NET クライアントからログを取得するには、クライアントのチャネルが作成されるときに `GrpcChannelOptions.LoggerFactory` プロパティを設定します。 ASP.NET Core アプリから gRPC サービスを呼び出す場合は、依存関係の挿入 (DI) からロガー ファクトリを解決できます。
 

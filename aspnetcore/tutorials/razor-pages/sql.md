@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 4�
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: d2e18782411b1801c74fa33ba1b31bad9662f3b2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d592cf7d8a96a7e4ec2e53418843a186488951be
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627118"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058156"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>パート 4: データベースと ASP.NET Core を使用する
 
@@ -31,7 +32,7 @@ ms.locfileid: "88627118"
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、*Startup.cs* の `ConfigureServices` メソッドで[依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
+`RazorPagesMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、 *Startup.cs* の `ConfigureServices` メソッドで [依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -43,7 +44,7 @@ ms.locfileid: "88627118"
 
 ---
 
-ASP.NET Core の[構成](xref:fundamentals/configuration/index)システムは `ConnectionString` を読み取ります。 ローカルで開発する場合は、*appsettings.json* ファイルから接続文字列を取得します。
+ASP.NET Core の[構成](xref:fundamentals/configuration/index)システムは `ConnectionString` を読み取ります。 ローカルで開発する場合は、 *appsettings.json* ファイルから接続文字列が取得されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -91,7 +92,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
+次のコードを使用して、 *Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -161,7 +162,7 @@ DB 内のすべてのレコードを削除します (そのため Seed メソッ
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、*Startup.cs* の `ConfigureServices` メソッドで[依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
+`RazorPagesMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、 *Startup.cs* の `ConfigureServices` メソッドで [依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -178,7 +179,7 @@ DB 内のすべてのレコードを削除します (そのため Seed メソッ
 * [ASP.NET Core での `CookiePolicyOptions` 用の EU の一般データ保護規制 (GDPR) のサポート](xref:security/gdpr)
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-ASP.NET Core の[構成](xref:fundamentals/configuration/index)システムは `ConnectionString` を読み取ります。 ローカルで開発する場合は、*appsettings.json* ファイルから接続文字列を取得します。
+ASP.NET Core の[構成](xref:fundamentals/configuration/index)システムは `ConnectionString` を読み取ります。 ローカルで開発する場合は、 *appsettings.json* ファイルから接続文字列が取得されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -235,7 +236,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
+次のコードを使用して、 *Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 

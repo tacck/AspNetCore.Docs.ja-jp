@@ -5,6 +5,7 @@ description: Razor ページのチュートリアル シリーズのパート 2�
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 4099873142b99afb7f0659dfd9a4fde8bec3081d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 84198760cf8302d379c7630b65641e65b66d72a2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633774"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050928"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する
 
@@ -41,7 +42,7 @@ ms.locfileid: "88633774"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
 *Models* フォルダーを右クリックします。 **[追加]**  >  **[クラス]** の順に選択します。 クラスに **Movie** と名前を付けます。
 
@@ -58,7 +59,7 @@ ms.locfileid: "88633774"
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* Solution Pad で、 **RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。フォルダーに「*Models*」という名前を付けます。
+* Solution Pad で、 **RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。フォルダーに「 *Models* 」という名前を付けます。
 * *Models* フォルダーを右クリックし、 **[追加]** > **[新しいファイル]** の順に選択します。
 * **[新しいファイル]** ダイアログで次を実行します。
 
@@ -94,7 +95,7 @@ ms.locfileid: "88633774"
 **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。
 
 * **[モデル クラス]** ドロップ ダウンで、 **[Movie (RazorPagesMovie.Models)]** を選択します。
-* **データ コンテキスト クラス**行で、 **+** (プラス) 記号を選択し、生成された名前 RazorPagesMovie.**Models**.RazorPagesMovieContext を RazorPagesMovie.**Data**.RazorPagesMovieContext に変更します。 [この変更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html)は必須ではありません。 これにより、正しい名前空間を使用してデータベース コンテキスト クラスが作成されます。
+* **データ コンテキスト クラス** 行で、 **+** (プラス) 記号を選択し、生成された名前 RazorPagesMovie. **Models**.RazorPagesMovieContext を RazorPagesMovie. **Data**.RazorPagesMovieContext に変更します。 [この変更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html)は必須ではありません。 これにより、正しい名前空間を使用してデータベース コンテキスト クラスが作成されます。
 * **[追加]** を選びます。
 
 ![前の手順からのイメージ。](model/_static/3/arp.png)
@@ -106,20 +107,20 @@ ms.locfileid: "88633774"
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 * スキャフォールディング ツールをインストールします。
 
   ```dotnetcli
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* **Windows の場合**:次のコマンドを実行します。
+* **Windows の場合** :次のコマンドを実行します。
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
   ```
 
-* **macOS および Linux の場合**:次のコマンドを実行します。
+* **macOS および Linux の場合** :次のコマンドを実行します。
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
@@ -148,7 +149,7 @@ ms.locfileid: "88633774"
 **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。
 
 * **[モデル クラス]** ドロップ ダウンで、 **[Movie (RazorPagesMovie.Models)]** を選択するか、または入力します。
-* **データ コンテキスト クラス**行で、新しいクラスの名前「RazorPagesMovie.**Data**.RazorPagesMovieContext」と入力します。 [この変更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html)は必須ではありません。 これにより、正しい名前空間を使用してデータベース コンテキスト クラスが作成されます。
+* **データ コンテキスト クラス** 行で、新しいクラスの名前「RazorPagesMovie. **Data**.RazorPagesMovieContext」と入力します。 [この変更](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html)は必須ではありません。 これにより、正しい名前空間を使用してデータベース コンテキスト クラスが作成されます。
 * **[追加]** を選びます。
 
 ![前の手順からのイメージ。](model/_static/arpMac.png)
@@ -173,7 +174,7 @@ dotnet tool install --global dotnet-ef
 
 スキャフォールディングのプロセスが作成され、次のファイルが更新されます。
 
-* *Pages/Movies*: 作成、削除、詳細、編集、インデックス。
+* *Pages/Movies* : 作成、削除、詳細、編集、インデックス。
 * *Data/RazorPagesMovieContext.cs*
 
 ### <a name="updated"></a>更新済み
@@ -186,7 +187,7 @@ dotnet tool install --global dotnet-ef
 
 スキャフォールディングのプロセスが作成され、次のファイルが更新されます。
 
-* *Pages/Movies*: 作成、削除、詳細、編集、インデックス。
+* *Pages/Movies* : 作成、削除、詳細、編集、インデックス。
 * *Data/RazorPagesMovieContext.cs*
 
 ### <a name="updated"></a>更新済み
@@ -199,7 +200,7 @@ dotnet tool install --global dotnet-ef
 
 スキャフォールディングのプロセスでは、次のファイルが作成されます。
 
-* *Pages/Movies*: 作成、削除、詳細、編集、インデックス。
+* *Pages/Movies* : 作成、削除、詳細、編集、インデックス。
 
 作成されたファイルについては、次のセクションで説明します。
 
@@ -243,7 +244,7 @@ Update-Database
 
 移行コマンドによって、最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます。 `InitialCreate` 引数は移行の命名に使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が選択されます。
 
-`update` コマンドにより、適用されていない移行で `Up` メソッドが実行されます。 この場合、`update` により、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
+`update` コマンドにより、適用されていない移行で `Up` メソッドが実行されます。 この場合、`update` により、 *Migrations/\<time-stamp>_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -263,7 +264,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。 エンティティはテーブル内の行に対応します。
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)が *appsettings.json* ファイルから接続文字列を読み取ります。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -322,7 +323,7 @@ Login failed for user 'User-name'.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+**RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
 *Models* フォルダーを右クリックします。 **[追加]**  >  **[クラス]** の順に選択します。 クラスに **Movie** と名前を付けます。
 
@@ -339,7 +340,7 @@ Login failed for user 'User-name'.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* ソリューション エクスプローラーで、 **RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「*Models*」という名前を付けます。
+* ソリューション エクスプローラーで、 **RazorPagesMovie** プロジェクトを右クリックし、 **[追加]** 、 **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 * *Models* フォルダーを右クリックし、 **[追加]** > **[新しいファイル]** の順に選択します。
 * **[新しいファイル]** ダイアログで次を実行します。
 
@@ -379,7 +380,7 @@ to use Data, it should not use models. That will make the namespace the same for
 -->
 
 * **[モデル クラス]** ドロップ ダウンで、 **[Movie (RazorPagesMovie.Models)]** を選択します。
-* **データ コンテキスト クラス**行で、 **+** (プラス) 記号を選択し、生成された名前 **RazorPagesMovie.Models.RazorPagesMovieContext** を受け入れます。
+* **データ コンテキスト クラス** 行で、 **+** (プラス) 記号を選択し、生成された名前 **RazorPagesMovie.Models.RazorPagesMovieContext** を受け入れます。
 * **[追加]** を選びます。
 
 ![前の手順からのイメージ。](model/_static/arp.png)
@@ -391,15 +392,15 @@ to use Data, it should not use models. That will make the namespace the same for
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 
-* **Windows の場合**:次のコマンドを実行します。
+* **Windows の場合** :次のコマンドを実行します。
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages\Movies --referenceScriptLibraries
   ```
 
-* **macOS および Linux の場合**:次のコマンドを実行します。
+* **macOS および Linux の場合** :次のコマンドを実行します。
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
@@ -438,7 +439,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 ### <a name="files-created"></a>作成されたファイル
 
-* *Pages/Movies*: 作成、削除、詳細、編集、インデックス。
+* *Pages/Movies* : 作成、削除、詳細、編集、インデックス。
 * *Data/RazorPagesMovieContext.cs*
 
 ### <a name="file-updated"></a>更新されたファイル
@@ -471,7 +472,7 @@ Update-Database
 
 `Add-Migration` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます ( *RazorPagesMovieContext.cs* ファイル内)。 `InitialCreate` 引数は、移行の名前を指定するために使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が使用されます。 詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。
 
-`Update-Database` コマンドによって、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドが実行されます。 `Up` メソッドにより、データベースが作成されます。
+`Update-Database` コマンドによって、 *Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドが実行されます。 `Up` メソッドにより、データベースが作成されます。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -483,7 +484,7 @@ Update-Database
 
 ---
 > [!NOTE]
-> 上記のコマンドで次の警告が生成されます。"*エンティティ型 'Movie' の decimal 列 'Price' に型が指定されていません。これにより、値が既定の有効桁数と小数点以下桁数に収まらない場合、自動的に切り捨てられます。'HasColumnType()' を使用してすべての値に適合する SQL server 列の型を明示的に指定します。* " この警告は無視して構いません。後のチュートリアルで修正されます。
+> 上記のコマンドで次の警告が生成されます。" *エンティティ型 'Movie' の decimal 列 'Price' に型が指定されていません。これにより、値が既定の有効桁数と小数点以下桁数に収まらない場合、自動的に切り捨てられます。'HasColumnType()' を使用してすべての値に適合する SQL server 列の型を明示的に指定します。* " この警告は無視して構いません。後のチュートリアルで修正されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -503,7 +504,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。 エンティティはテーブル内の行に対応します。
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)が *appsettings.json* ファイルから接続文字列を読み取ります。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 

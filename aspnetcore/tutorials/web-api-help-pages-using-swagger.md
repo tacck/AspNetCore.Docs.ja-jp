@@ -1,11 +1,12 @@
 ---
-title: Swagger / OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ
+title: Swagger/OpenAPI を使用する ASP.NET Core Web API のドキュメント
 author: RicoSuter
 description: このチュートリアルでは、Swagger を追加して、Web API アプリのドキュメントとヘルプ ページを生成する手順を説明します。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/29/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,32 +18,39 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: c40aede044c78122a9057613f0eece9acf84df7b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
+ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633995"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93062455"
 ---
-# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ
+# <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a>Swagger/OpenAPI を使用する ASP.NET Core Web API のドキュメント
 
 作成者: [Christoph Nienaber](https://twitter.com/zuckerthoben) および [Rico Suter](https://blog.rsuter.com/)
 
-Web API を使用する場合、さまざまなメソッドを理解することは開発者にとって困難な場合があります。 [Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org/) とも呼ばれる) では、Web API の役立つドキュメントとヘルプ ページの生成に関する問題が解決されます。 Swagger では、対話型のドキュメント、クライアント SDK の生成、API の発見可能性などの利点を提供します。
+Swagger (OpenAPI) は REST API を記述するための仕様であり、言語に依存しません。 これにより、コンピューターと人間の両方が、ソース コードに直接アクセスせずに REST API の機能を理解できるようになります。 主な目的は次のとおりです。
 
-この記事では、[Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) と [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger の実装を示します。
+* 関連のないサービスに接続するために必要な作業量を最小限にします。
+* 正確にサービスをドキュメント化するために必要な時間を減らします。
 
-* **Swashbuckle.AspNetCore** は、ASP.NET Core Web API の Swagger ドキュメントを生成するためのオープン ソース プロジェクトです。
+.NET 用の 2 つの主要な OpenAPI の実装は、[Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) と [NSwag](https://github.com/RicoSuter/NSwag) です。次を参照してください。
 
-* **NSwag** は、Swagger ドキュメントを生成し、[Swagger UI](https://swagger.io/swagger-ui/) や [ReDoc](https://github.com/Rebilly/ReDoc) を ASP.NET Core Web API に統合するためのもう 1 つのオープン ソース プロジェクトです。 また、NSwag によって、API 用に C# と TypeScript のクライアント コードを生成するための手段が提供されます。
+* [Swashbuckle の概要](xref:tutorials/get-started-with-swashbuckle)
+* [NSwag の概要](xref:tutorials/get-started-with-nswag)
 
-## <a name="what-is-swagger--openapi"></a>Swagger / OpenAPI とは
+## <a name="openapi-vs-swagger"></a>OpenApi と Swagger
 
-Swagger は、[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API を記述するために、言語に関係なく使える仕様です。 Swagger プロジェクトは、現在、OpenAPI と呼ばれている [OpenAPI イニシアティブ](https://www.openapis.org/)に寄贈されました。 どちらの名前も同様に使用できますが、OpenAPI の使用をお勧めします。 Open API では、実装 (ソース コード、ネットワーク アクセス、ドキュメント) に直接アクセスすることなく、コンピューターと人間の両方がサービスの機能を理解できます。 関連付けられていないサービスに接続するために必要な作業量を最小限にすることが 1 つの目標です。 もう 1 つの目標は、正確にサービスをドキュメント化するために必要な時間を減らすことです。
+Swagger プロジェクトは 2015 年に OpenAPI Initiative に寄贈され、それ以降は OpenAPI と呼ばれています。 どちらの名前も同じように使用されます。 ただし、"OpenAPI" は仕様を指します。 "Swagger" は、オープンソース製品および OpenAPI Specification と協力している SmartBear による商用製品のファミリを指します。 [OpenAPIGenerator](https://github.com/OpenAPITools/openapi-generator) などの後続のオープンソース製品も Swagger ファミリ名に該当しますが、SmartBear からはリリースされていません。
+
+要約すると、次のようになります。
+
+* OpenAPI は仕様です。
+* Swagger は、OpenAPI 仕様を使用するツールです。 たとえば、OpenAPIGenerator や SwaggerUI などです。
 
 ## <a name="openapi-specification-openapijson"></a>OpenAPI の仕様 (openapi.json)
 
-OpenAPI フローの基本は、OpenAPI の仕様です。既定では、ドキュメントの名前は *openapi.json* です。 それは、サービスに基づいて OpenAPI ツール チェーン (またはサード パーティによるその実装) によって生成されます。 ここでは API の機能と HTTP を使用してアクセスする方法について説明します。 これにより Swagger UI が駆動され、検出とクライアント コードの生成が行えるように、ツール チェーンによって使用されます。 簡略化された OpenAPI の仕様の例は次のとおりです。
+OpenAPI の仕様は、API の機能について説明されているドキュメントです。 そのドキュメントは、コントローラーとモデル内の XML および属性の注釈に基づいています。 それは OpenAPI フローの中核部分であり、SwaggerUI などのツールを駆動するために使用されます。 既定では、 *openapi.json* という名前になっています。 簡略化された OpenAPI の仕様の例は次のとおりです。
 
 ```json
 {
@@ -136,7 +144,7 @@ OpenAPI フローの基本は、OpenAPI の仕様です。既定では、ドキ�
 
 ![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-コントローラー内の各パブリック アクション メソッドを UI からテストすることができます。 メソッドの名前をクリックし、セクションを展開します。 任意の必要なパラメーターを追加し、 **[Try it out!]** をクリックします。
+コントローラー内の各パブリック アクション メソッドを UI からテストすることができます。 メソッドの名前を選択してセクションを展開します。 必要なパラメーターを追加し、 **[Try it out!]\(試してみる\)** を選択します。
 
 ![Swagger GET テストの例](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 

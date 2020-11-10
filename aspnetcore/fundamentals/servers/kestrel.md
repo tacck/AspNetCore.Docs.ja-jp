@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/04/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 50bf2a60f14238c9b71fe90a64c284da202bff59
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: 56ac6635639eed93a84f47fc915c7013c6ed2381
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491601"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052332"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core への Kestrel Web サーバーの実装
 
@@ -127,7 +128,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-この記事の後半で示す例では、Kestrel オプションが C# コードで構成されています。 Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使用して設定することもできます。 たとえば、 [ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)によって、" *appsettings.json* " または " *appsettings.{Environment}.json* " ファイルから Kestrel 構成を読み込むことができます。
+この記事の後半で示す例では、Kestrel オプションが C# コードで構成されています。 Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使用して設定することもできます。 たとえば、 [ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)によって、 *appsettings.json* または *appsettings.{Environment}.json* ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -527,7 +528,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 
 `CreateDefaultBuilder` は既定で `Configure(context.Configuration.GetSection("Kestrel"))` を呼び出して Kestrel の構成を読み込みます。 Kestrel は、既定の HTTPS アプリ設定構成スキーマを使用できます。 ディスク上のファイルまたは証明書ストアから、URL や使用する証明書など、複数のエンドポイントを構成します。
 
-以下の *appsettings.json* の例では、次のことが行われています。
+次の *appsettings.json* の例では以下のようになります。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
 * 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
@@ -1001,7 +1002,7 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
+Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json* /*appsettings.\<EnvironmentName>.json* で `AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
 *appsettings.json* :
 
@@ -1135,7 +1136,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、 *appsettings.json* または " *appsettings.{環境}.json* " ファイルから Kestrel 構成を読み込むことができます。
+次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、 *appsettings.json* または *appsettings.{Environment}.json* ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -1515,7 +1516,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 
 `CreateDefaultBuilder` は既定で `Configure(context.Configuration.GetSection("Kestrel"))` を呼び出して Kestrel の構成を読み込みます。 Kestrel は、既定の HTTPS アプリ設定構成スキーマを使用できます。 ディスク上のファイルまたは証明書ストアから、URL や使用する証明書など、複数のエンドポイントを構成します。
 
-以下の *appsettings.json* の例では、次のことが行われています。
+次の *appsettings.json* の例では以下のようになります。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
 * 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
@@ -1952,7 +1953,7 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
+Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json* /*appsettings.\<EnvironmentName>.json* で `AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
 *appsettings.json* :
 
@@ -2043,7 +2044,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、 *appsettings.json* または " *appsettings.{環境}.json* " ファイルから Kestrel 構成を読み込むことができます。
+次の例の C# コード内で構成されている Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使って設定することもできます。 たとえば、ファイル構成プロバイダーによって、 *appsettings.json* または *appsettings.{Environment}.json* ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -2379,7 +2380,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 
 `CreateDefaultBuilder` は既定で `Configure(context.Configuration.GetSection("Kestrel"))` を呼び出して Kestrel の構成を読み込みます。 Kestrel は、既定の HTTPS アプリ設定構成スキーマを使用できます。 ディスク上のファイルまたは証明書ストアから、URL や使用する証明書など、複数のエンドポイントを構成します。
 
-以下の *appsettings.json* の例では、次のことが行われています。
+次の *appsettings.json* の例では以下のようになります。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
 * 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
@@ -2742,7 +2743,7 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 [!code-csharp[](kestrel/samples-snapshot/2.x/KestrelSample/Program.cs?name=snippet_Program&highlight=9)]
 
-Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json*/*appsettings.\<EnvironmentName>.json* に、`AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
+Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json* /*appsettings.\<EnvironmentName>.json* で `AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
 *appsettings.json* :
 

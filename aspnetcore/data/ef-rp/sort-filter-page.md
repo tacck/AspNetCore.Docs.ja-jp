@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653894"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061042"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング
 
@@ -55,13 +56,13 @@ ms.locfileid: "91653894"
 
 `sortOrder` パラメーターは `Name` または `Date` のいずれかとなります。 `sortOrder` パラメーターの後には、必要に応じて、降順を指定する `_desc` が置かれます。 既定の並べ替え順序は昇順です。
 
-インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは、姓の昇順が `default` です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
+インデックス ページが、 **Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは、姓の昇順が `default` です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
 
 `NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-このコードによって、C# の[条件演算子 ?:](/dotnet/csharp/language-reference/operators/conditional-operator) が使用されています。 `?:` 演算子は三項演算子であり、3 つのオペランドを取ります。 最初の行により、`sortOrder` が null または空の場合に、`NameSort` を `name_desc` に設定することが指定されます。 `sortOrder` が null または空***ではない***場合、`NameSort` は空の文字列に設定されます。
+このコードによって、C# の[条件演算子 ?:](/dotnet/csharp/language-reference/operators/conditional-operator) が使用されています。 `?:` 演算子は三項演算子であり、3 つのオペランドを取ります。 最初の行により、`sortOrder` が null または空の場合に、`NameSort` を `name_desc` に設定することが指定されます。 `sortOrder` が null または空 "* *_ではない_* _" 場合、`NameSort` は空の文字列に設定されます。
 
 これらの 2 つのステートメントを使用して、次のようにページで列見出しのハイパーリンクを設定することができます。
 
@@ -84,7 +85,7 @@ ms.locfileid: "91653894"
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>列見出しハイパーリンクを Student インデックス ページに追加する
 
-*Students/Index.cshtml* のコードを次のコードに置き換えます。 変更が強調表示されます。
+_Students/Index.cshtml* のコードを次のコードに置き換えます。 変更が強調表示されます。
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
@@ -248,19 +249,19 @@ https://localhost:5001/Students?SearchString=an
 
 *Models/SchoolViewModels* フォルダーを作成します。
 
-次のコードを使用して、*SchoolViewModels/EnrollmentDateGroup.cs* を作成します。
+次のコードを使用して、 *SchoolViewModels/EnrollmentDateGroup.cs* を作成します。
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
 ### <a name="create-the-no-locrazor-page"></a>Razor ページを作成する
 
-次のコードを使用して、*Pages/About.cshtml* ファイルを作成します。
+次のコードを使用して、 *Pages/About.cshtml* ファイルを作成します。
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/About.cshtml)]
 
 ### <a name="create-the-page-model"></a>ページ モデルの作成
 
-次のコードを使用して、*Pages/About.cshtml.cs* を更新します。
+次のコードを使用して、 *Pages/About.cshtml.cs* を更新します。
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 
@@ -305,7 +306,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 `sortOrder` パラメーターは "Name" または "Date" です。 `sortOrder` パラメーターの後に必要に応じて "_desc" を続け、降順を指定します。 既定の並べ替え順序は昇順です。
 
-インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
+インデックス ページが、 **Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
 
 `NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
 
@@ -315,7 +316,7 @@ LINQ ステートメントは、登録日で受講者エンティティをグル
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_Ternary)]
 
-最初の行は、`sortOrder` が null または空の場合に、`NameSort` を "name_desc" に設定することを指定します。 `sortOrder` が null または空**ではない**場合、`NameSort` は空の文字列に設定されます。
+最初の行は、`sortOrder` が null または空の場合に、`NameSort` を "name_desc" に設定することを指定します。 `sortOrder` が null または空 **ではない** 場合、`NameSort` は空の文字列に設定されます。
 
 `?: operator` は三項演算子とも呼ばれます。
 
@@ -503,7 +504,7 @@ http://localhost:5000/Students?SearchString=an
 
 ## <a name="update-the-about-page-to-show-student-statistics"></a>学生の統計情報を表示するように [About] ページを更新します。
 
-このステップで、*Pages/About.cshtml* が更新され、登録日付ごとに登録した学生の数を表示します。 更新では、グループ化を使用し、次の手順が含まれています。
+このステップで、 *Pages/About.cshtml* が更新され、登録日付ごとに登録した学生の数を表示します。 更新では、グループ化を使用し、次の手順が含まれています。
 
 * **About** ページで使用されるデータのビュー モデルを作成します。
 * ビュー モデルを使用するように About ページを更新します。
@@ -512,7 +513,7 @@ http://localhost:5000/Students?SearchString=an
 
 *SchoolViewModels* フォルダーを *Models* フォルダー内に作成します。
 
-次のコードを使用して、*SchoolViewModels* フォルダー内に *EnrollmentDateGroup.cs* を追加します。
+次のコードを使用して、 *SchoolViewModels* フォルダー内に *EnrollmentDateGroup.cs* を追加します。
 
 [!code-csharp[](intro/samples/cu21/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
@@ -520,7 +521,7 @@ http://localhost:5000/Students?SearchString=an
 
 ASP.NET Core 2.2 の Web テンプレートには、About ページが含まれていません。 ASP.NET Core 2.2 を使っている場合は、About Razor ページを作成します。
 
-次のコードを使用して、*Pages/About.cshtml.cs* を更新します。
+次のコードを使用して、 *Pages/About.cshtml.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu21/Pages/About.cshtml.cs)]
 

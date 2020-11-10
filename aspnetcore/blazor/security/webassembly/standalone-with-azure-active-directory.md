@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,33 +19,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 46e5a422864dd8f6aef72afddb3b406bc99f9163
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 4e8c22c56b7023301499fd273a9194b8c7b58f3d
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690426"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343712"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>Azure Active Directory を使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)
 
-この記事では、Azure Active Directory (AAD) を使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する方法について取り上げます。
+この記事では、認証用に [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) を使用する[スタンドアロン Blazor WebAssembly アプリ](xref:blazor/hosting-models#blazor-webassembly)を作成する方法について説明します。
 
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
 > AAD 組織ディレクトリのアカウントをサポートするように構成されている Visual Studio で作成された Blazor WebAssembly アプリの場合、Visual Studio では、プロジェクト生成でアプリが正しく構成されません。 これは、Visual Studio の将来のリリースで対処される予定です。 この記事では、.NET Core CLI の `dotnet new` コマンドを使用してアプリを作成する方法について示します。 ASP.NET Core 5.0 の最新 Blazor テンプレートのために IDE が更新される前に Visual Studio でアプリを作成する場合、この記事の各セクションを参照し、Visual Studio でアプリが作成された後に、アプリの構成を確定するか更新してください。
 
-::: moniker-end
-
-認証用に [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) を使用する [スタンドアロン Blazor WebAssembly アプリ](xref:blazor/hosting-models#blazor-webassembly)を作成する方法:
-
-[AAD テナントと Web アプリケーションを作成する](/azure/active-directory/develop/v2-overview):
-
-Azure portal の **[Azure Active Directory]**  >  **[アプリの登録]** 領域に AAD アプリを登録します。
-
-::: moniker range=">= aspnetcore-5.0"
+Azure portal の **[Azure Active Directory]** > **[アプリの登録]** 領域に AAD アプリを登録します。
 
 1. アプリの **名前** を指定します (例: **Blazor スタンドアロン AAD** )。
 1. **[サポートされているアカウントの種類]** を選択します。 このエクスペリエンスでは、 **[この組織のディレクトリ内のアカウントのみ]** を選択できます。
@@ -67,6 +60,8 @@ Azure portal の **[Azure Active Directory]**  >  **[アプリの登録]** 領�
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+Azure portal の **[Azure Active Directory]** > **[アプリの登録]** 領域に AAD アプリを登録します。
 
 1. アプリの **名前** を指定します (例: **Blazor スタンドアロン AAD** )。
 1. **[サポートされているアカウントの種類]** を選択します。 このエクスペリエンスでは、 **[この組織のディレクトリ内のアカウントのみ]** を選択できます。

@@ -5,8 +5,9 @@ description: ASP.NET Core Blazor WebAssembly でホストされるアプリを A
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/27/2020
+ms.date: 11/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 1a58e19ecaf816ddfb724b9a575d35c801cebd04
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 8727fa52acbcf59549c326bd5106e5dfe23c36be
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690557"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234492"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>ASP.NET Core Blazor WebAssembly でホストされるアプリを Azure Active Directory B2C でセキュリティ保護する
 
@@ -139,16 +140,18 @@ AAD B2C インスタンスを記録しておきます (例: 末尾にスラッ�
 dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} -ssp "{SIGN UP OR SIGN IN POLICY}"
 ```
 
-| プレースホルダー                   | Azure portal での名前                                     | 例                                      |
-| ----------------------------- | ----------------------------------------------------- | -------------------------------------------- |
-| `{AAD B2C INSTANCE}`          | インスタンス                                              | `https://contoso.b2clogin.com/`              |
-| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                               |
-| `{CLIENT APP CLIENT ID}`      | *`Client`* アプリのアプリケーション (クライアント) ID        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
-| `{DEFAULT SCOPE}`             | スコープ名                                            | `API.Access`                                 |
-| `{SERVER API APP CLIENT ID}`  | " *サーバー API アプリ* " のアプリケーション (クライアント) ID      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
-| `{SERVER API APP ID URI}`     | アプリケーション ID URI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SIGN UP OR SIGN IN POLICY}` | サインアップまたはサインインのユーザー フロー                             | `B2C_1_signupsignin1`                        |
-| `{TENANT DOMAIN}`             | プライマリ、パブリッシャー、テナント ドメイン                       | `contoso.onmicrosoft.com`                    |
+| プレースホルダー                   | Azure portal での名前                                     | 例                                        |
+| ----------------------------- | ----------------------------------------------------- | ---------------------------------------------- |
+| `{AAD B2C INSTANCE}`          | インスタンス                                              | `https://contoso.b2clogin.com/`                |
+| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                                 |
+| `{CLIENT APP CLIENT ID}`      | *`Client`* アプリのアプリケーション (クライアント) ID        | `4369008b-21fa-427c-abaa-9b53bf58e538`         |
+| `{DEFAULT SCOPE}`             | スコープ名                                            | `API.Access`                                   |
+| `{SERVER API APP CLIENT ID}`  | " *サーバー API アプリ* " のアプリケーション (クライアント) ID      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`         |
+| `{SERVER API APP ID URI}`     | アプリケーション ID URI&dagger;                            | `41451fa7-82d9-4673-8fa5-69eff5a761fd`&dagger; |
+| `{SIGN UP OR SIGN IN POLICY}` | サインアップまたはサインインのユーザー フロー                             | `B2C_1_signupsignin1`                          |
+| `{TENANT DOMAIN}`             | プライマリ、パブリッシャー、テナント ドメイン                       | `contoso.onmicrosoft.com`                      |
+
+&dagger;`dotnet new` コマンドに渡されるアプリ ID URI 引数に、Blazor WebAssembly テンプレートによって `api://` のスキームが自動的に追加されます。 `{SERVER API APP ID URI}` プレースホルダーでアプリ ID URI を指定し、スキームが `api://` の場合は、上記の表の例の値に示すように、引数からスキーム (`api://`) を削除します。 アプリ ID URI がカスタム値の場合、または他の何らかのスキームである場合 (たとえば、`https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` のような信頼されていない発行元ドメインの `https://`) は、既定のスコープ URI を手動で更新し、テンプレートによって *`Client`* アプリが作成された後で、`api://` スキームを削除する必要があります。 詳細については、「[アクセス トークン スコープ](#access-token-scopes)」セクションの注を参照してください。 Blazor WebAssembly テンプレートは、このようなシナリオに対応するため、ASP.NET Core の今後のリリースで変更される可能性があります。 詳細については、「[Blazor WASM テンプレートでのアプリ ID URI 用の二重スキーム (ホストされた、単一組織) (dotnet/aspnetcore #27417)](https://github.com/dotnet/aspnetcore/issues/27417)」を参照してください。
 
 `-o|--output` オプションで指定した出力場所にプロジェクト フォルダーが存在しない場合は作成されて、アプリの名前の一部になります。
 
@@ -353,6 +356,29 @@ builder.Services.AddMsalAuthentication(options =>
     options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
+
+> [!NOTE]
+> `dotnet new` コマンドに渡されるアプリ ID URI 引数に、Blazor WebAssembly テンプレートによって `api://` のスキームが自動的に追加されます。 Blazor プロジェクト テンプレートからアプリを生成するときは、既定のアクセス トークン スコープの値で、Azure portal で指定した正しいカスタム アプリ ID URI の値、または次の **いずれか** の形式の値が使用されていることを確認します。
+>
+> * ディレクトリの発行元ドメインが **信頼されている** 場合は、通常、既定のアクセス トークンのスコープは次の例のような値になります。`API.Access` は既定のスコープ名です。
+>
+>   ```csharp
+>   options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>       "api://41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
+>   ```
+>
+>   二重スキーム (`api://api://...`) の値を調べます。 二重スキームが存在する場合は、最初の `api://` スキームを値から削除します。
+>
+> * ディレクトリの発行元ドメインが **信頼されていない** 場合は、通常、既定のアクセス トークンのスコープは次の例のような値になります。`API.Access` は既定のスコープ名です。
+>
+>   ```csharp
+>   options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>       "https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
+>   ```
+>
+>   余分な `api://` スキーム (`api://https://contoso.onmicrosoft.com/...`) の値を調べます。 余分な `api://` スキームが存在する場合は、`api://` スキームを値から削除します。
+>
+> Blazor WebAssembly テンプレートは、このようなシナリオに対応するため、ASP.NET Core の今後のリリースで変更される可能性があります。 詳細については、「[Blazor WASM テンプレートでのアプリ ID URI 用の二重スキーム (ホストされた、単一組織) (dotnet/aspnetcore #27417)](https://github.com/dotnet/aspnetcore/issues/27417)」を参照してください。
 
 `AdditionalScopesToConsent` を使用して追加のスコープを指定します。
 

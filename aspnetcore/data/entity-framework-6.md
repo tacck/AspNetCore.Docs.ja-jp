@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876699"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059456"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core と Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -49,7 +50,7 @@ Entity Framework 6 は .NET Core をサポートしていないので、Entity F
 
 ASP.NET Core アプリケーションで Entity Framework 6 を使用するための推奨方法は、EF6 コンテキストとモデル クラスを、.NET Framework を対象とするクラス ライブラリ プロジェクト内に配置することです。 ASP.NET Core プロジェクトから、クラス ライブラリに参照を追加します。 [EF6 と ASP.NET Core プロジェクトを使用した Visual Studio ソリューション](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)のサンプルを参照してください。  
 
-.NET Core プロジェクトは、*Enable-Migrations* などの EF6 コマンドが必要とするすべての機能をサポートしていないため、EF6 コンテキストを ASP.NET Core プロジェクトに配置することはできません。    
+.NET Core プロジェクトは、 *Enable-Migrations* などの EF6 コマンドが必要とするすべての機能をサポートしていないため、EF6 コンテキストを ASP.NET Core プロジェクトに配置することはできません。    
 
 EF6 コンテキストを検索するプロジェクトの種類に関係なく、EF6 コマンドライン ツールのみが EF6 コンテキストを使用します。 たとえば、`Scaffold-DbContext` は、Entity Framework Core でのみ使用できます。 データベースを EF6 モデルにリバース エンジニアリングする必要がある場合は、「<https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database>」 (既存のデータベースに対する Entity Framework Code First) を参照してください。    
 
@@ -59,7 +60,7 @@ ASP.NET Core プロジェクトは、.NET Framework を対象とし、EF6 を参
 
 [!code-xml[](entity-framework-6/sample/MVCCore/MVCCore.csproj?range=3-9&highlight=2)]   
 
-新しいプロジェクトを作成する場合は、**ASP.NET Core Web アプリケーション (.NET Framework)** テンプレートを使用します。    
+新しいプロジェクトを作成する場合は、 **ASP.NET Core Web アプリケーション (.NET Framework)** テンプレートを使用します。    
 
 ## <a name="handle-connection-strings"></a>接続文字列を処理する    
 
@@ -96,7 +97,7 @@ Core プロジェクトの *Startup.cs* ファイルで、`ConfigureServices` �
 
 * **[追加]** > **[新しいプロジェクト]** > **[Windows デスクトップ]** > **[クラス ライブラリ (.NET Framework)]**  
 
-* 両方のプロジェクトの**パッケージ マネージャー コンソール** (PMC) ウィンドウで、`Install-Package Entityframework` コマンドを実行します。    
+* 両方のプロジェクトの **パッケージ マネージャー コンソール** (PMC) ウィンドウで、`Install-Package Entityframework` コマンドを実行します。    
 
 * クラス ライブラリ プロジェクトで、データ モデル クラスとコンテキスト クラス、および `IDbContextFactory` の実装を作成します。    
 
@@ -106,7 +107,7 @@ Core プロジェクトの *Startup.cs* ファイルで、`ConfigureServices` �
 
 * Core プロジェクト内の *Startup.cs* で、DI のコンテキストを登録します。    
 
-* Core プロジェクト内の *appsettings.json* で、接続文字列を追加します。    
+* Core プロジェクト内の *appsettings.json* で、接続文字列を追加します。  
 
 * Core プロジェクトで、コントローラーとビューを追加してデータの読み書きができることを確認します (ASP.NET Core MVC のスキャフォールディングは、クラス ライブラリから参照される EF6 コンテキストでは機能しないことに注意してください)。
 

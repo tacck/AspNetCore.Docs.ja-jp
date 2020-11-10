@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 67831237ab1f95c6535cf586681150a230b491d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 09383cb9067d7fdc2d7b69213b741e7ae823e9ea
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635269"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060015"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core の Web ホスト
 
-ASP.NET Core アプリは*ホスト*を構成して起動します。 ホストはアプリの起動と有効期間の管理を担当します。 少なくとも、ホストはサーバーおよび要求処理パイプラインを構成します。 ホストでは、ログ記録、依存関係挿入、構成を設定することもできます。
+ASP.NET Core アプリは *ホスト* を構成して起動します。 ホストはアプリの起動と有効期間の管理を担当します。 少なくとも、ホストはサーバーおよび要求処理パイプラインを構成します。 ホストでは、ログ記録、依存関係挿入、構成を設定することもできます。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -71,18 +72,18 @@ public class Program
   * `ASPNETCORE_` のプレフィックスが付いた環境変数 (たとえば、`ASPNETCORE_ENVIRONMENT`)。
   * コマンド ライン引数。
 * 次の順序でアプリの構成を読み込みます。
-  * *appsettings.json*。
-  * *appsettings.{Environment}.json*。
+  * *appsettings.json*.
+  * *appsettings.{Environment}.json* 。
   * エントリ アセンブリを使用して `Development` 環境でアプリが実行される場合に使用される[シークレット マネージャー](xref:security/app-secrets)。
   * 環境変数。
   * コマンド ライン引数。
-* コンソールとデバッグ出力の[ログ](xref:fundamentals/logging/index)を構成します。 ログには、*appsettings.json* または *appsettings.{Environment}.json* ファイルのログ構成セクションで指定される[ログ フィルター](xref:fundamentals/logging/index#log-filtering)規則が含まれます。
+* コンソールとデバッグ出力の[ログ](xref:fundamentals/logging/index)を構成します。 ログには、 *appsettings.json* または *appsettings.{Environment}.json* ファイルのログ構成セクションで指定される[ログ フィルター](xref:fundamentals/logging/index#log-filtering)規則が含まれます。
 * [ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)を使用して IIS の背後で実行されている場合は、`CreateDefaultBuilder` によってアプリのベース アドレスとポートが構成される [IIS の統合](xref:host-and-deploy/iis/index)が有効になります。 IIS の統合により、[スタートアップ エラーをキャプチャする](#capture-startup-errors)アプリも構成されます。 IIS の既定のオプションについては、<xref:host-and-deploy/iis/index#iis-options> を参照してください。
 * アプリの環境が開発の場合、[ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes) を `true` に設定します。 詳しくは、「[スコープの検証](#scope-validation)」をご覧ください。
 
 `CreateDefaultBuilder` によって定義された構成は、[ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration)、[ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging)、そして [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) のその他のメソッドと拡張メソッドによってオーバーライドされ、拡張されます。 以下に、いくつかの例を示します。
 
-* [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration) はアプリの追加の `IConfiguration` を指定するために使用します。 次の `ConfigureAppConfiguration` の呼び出しによりデリゲートが追加され、*appsettings.xml* ファイルにアプリの構成が含まれます。 `ConfigureAppConfiguration` は複数回呼び出すことができます。 この構成はホスト (たとえば、サーバーの URL や環境など) には適用されないことに注意してください。 「[ホストの構成値](#host-configuration-values)」のセクションを参照してください。
+* [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration) はアプリの追加の `IConfiguration` を指定するために使用します。 次の `ConfigureAppConfiguration` の呼び出しによりデリゲートが追加され、 *appsettings.xml* ファイルにアプリの構成が含まれます。 `ConfigureAppConfiguration` は複数回呼び出すことができます。 この構成はホスト (たとえば、サーバーの URL や環境など) には適用されないことに注意してください。 「[ホストの構成値](#host-configuration-values)」のセクションを参照してください。
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -165,11 +166,11 @@ public class Program
 
 ::: moniker-end
 
-**キー**: applicationName  
-**型**: *文字列*  
-**既定値**:アプリのエントリ ポイントを含むアセンブリの名前。  
-**次を使用して設定**: `UseSetting`  
-**環境変数**: `ASPNETCORE_APPLICATIONNAME`
+**キー** : applicationName  
+**型** : *文字列*  
+**既定値** :アプリのエントリ ポイントを含むアセンブリの名前。  
+**次を使用して設定** : `UseSetting`  
+**環境変数** : `ASPNETCORE_APPLICATIONNAME`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -180,11 +181,11 @@ WebHost.CreateDefaultBuilder(args)
 
 この設定では、スタートアップ エラーのキャプチャを制御します。
 
-**キー**: captureStartupErrors  
-**型**: *ブール* (`true` または `1`)  
-**既定**:アプリが IIS の背後で Kestrel を使用して実行されている場合 (既定値は `true`) を除き、既定では `false` に設定されます。  
-**次を使用して設定**: `CaptureStartupErrors`  
-**環境変数**: `ASPNETCORE_CAPTURESTARTUPERRORS`
+**キー** : captureStartupErrors  
+**型** : *ブール* (`true` または `1`)  
+**既定** :アプリが IIS の背後で Kestrel を使用して実行されている場合 (既定値は `true`) を除き、既定では `false` に設定されます。  
+**次を使用して設定** : `CaptureStartupErrors`  
+**環境変数** : `ASPNETCORE_CAPTURESTARTUPERRORS`
 
 `false` の場合、起動時にエラーが発生するとホストが終了します。 `true` の場合、ホストは起動時に例外をキャプチャして、サーバーを起動しようとします。
 
@@ -197,11 +198,11 @@ WebHost.CreateDefaultBuilder(args)
 
 この設定により、ASP.NET Core でコンテンツ ファイルの検索が開始される場所が決まります。
 
-**キー**: contentRoot  
-**型**: *文字列*  
-**既定**:既定でアプリ アセンブリが存在するフォルダーに設定されます。  
-**次を使用して設定**: `UseContentRoot`  
-**環境変数**: `ASPNETCORE_CONTENTROOT`
+**キー** : contentRoot  
+**型** : *文字列*  
+**既定** :既定でアプリ アセンブリが存在するフォルダーに設定されます。  
+**次を使用して設定** : `UseContentRoot`  
+**環境変数** : `ASPNETCORE_CONTENTROOT`
 
 コンテンツ ルートは、[Web ルート](xref:fundamentals/index#web-root)の基本パスとしても使用されます。 コンテンツ ルート パスが存在しない場合は、ホストを起動できません。
 
@@ -219,11 +220,11 @@ WebHost.CreateDefaultBuilder(args)
 
 詳細なエラーをキャプチャするかどうかを判断します。
 
-**キー**: detailedErrors  
-**型**: *ブール* (`true` または `1`)  
-**既定値**: false  
-**次を使用して設定**: `UseSetting`  
-**環境変数**: `ASPNETCORE_DETAILEDERRORS`
+**キー** : detailedErrors  
+**型** : *ブール* (`true` または `1`)  
+**既定値** : false  
+**次を使用して設定** : `UseSetting`  
+**環境変数** : `ASPNETCORE_DETAILEDERRORS`
 
 有効な場合 (または<a href="#environment">環境</a>が `Development` に設定されている場合)、アプリは詳細な例外をキャプチャします。
 
@@ -236,13 +237,13 @@ WebHost.CreateDefaultBuilder(args)
 
 アプリの環境を設定します。
 
-**キー**: 環境  
-**型**: *文字列*  
-**既定**:実稼働  
-**次を使用して設定**: `UseEnvironment`  
-**環境変数**: `ASPNETCORE_ENVIRONMENT`
+**キー** : 環境  
+**型** : *文字列*  
+**既定** :実稼働  
+**次を使用して設定** : `UseEnvironment`  
+**環境変数** : `ASPNETCORE_ENVIRONMENT`
 
-環境は任意の値に設定することができます。 フレームワークで定義された値には `Development`、`Staging`、`Production` が含まれます。 値は大文字と小文字が区別されません。 既定では、*環境*は `ASPNETCORE_ENVIRONMENT` 環境変数から読み取られます。 [Visual Studio](https://visualstudio.microsoft.com) を使用する場合、環境変数は *launchSettings.json* ファイルで設定できます。 詳細については、「<xref:fundamentals/environments>」を参照してください。
+環境は任意の値に設定することができます。 フレームワークで定義された値には `Development`、`Staging`、`Production` が含まれます。 値は大文字と小文字が区別されません。 既定では、 *環境* は `ASPNETCORE_ENVIRONMENT` 環境変数から読み取られます。 [Visual Studio](https://visualstudio.microsoft.com) を使用する場合、環境変数は *launchSettings.json* ファイルで設定できます。 詳細については、「<xref:fundamentals/environments>」を参照してください。
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -253,11 +254,11 @@ WebHost.CreateDefaultBuilder(args)
 
 アプリのホスティング スタートアップ アセンブリを設定します。
 
-**キー**: hostingStartupAssemblies  
-**型**: *文字列*  
-**既定**:空の文字列  
-**次を使用して設定**: `UseSetting`  
-**環境変数**: `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
+**キー** : hostingStartupAssemblies  
+**型** : *文字列*  
+**既定** :空の文字列  
+**次を使用して設定** : `UseSetting`  
+**環境変数** : `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
 
 起動時に読み込むホスティング スタートアップ アセンブリのセミコロンで区切られた文字列。
 
@@ -272,10 +273,10 @@ WebHost.CreateDefaultBuilder(args)
 
 HTTPS リダイレクト ポートを設定します。 [HTTPS の適用](xref:security/enforcing-ssl)に使用されます。
 
-**キー**: https_port **型**: *文字列*
-**既定値**:既定値は設定されていません。
-**次を使用して設定**:`UseSetting`
-**環境変数**: `ASPNETCORE_HTTPS_PORT`
+**キー** : https_port **型** : *文字列*
+**既定値** :既定値は設定されていません。
+**次を使用して設定** :`UseSetting`
+**環境変数** : `ASPNETCORE_HTTPS_PORT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -286,11 +287,11 @@ WebHost.CreateDefaultBuilder(args)
 
 起動時に除外するホスティング スタートアップ アセンブリのセミコロン区切り文字列。
 
-**キー**: hostingStartupExcludeAssemblies  
-**型**: *文字列*  
-**既定**:空の文字列  
-**次を使用して設定**: `UseSetting`  
-**環境変数**: `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+**キー** : hostingStartupExcludeAssemblies  
+**型** : *文字列*  
+**既定** :空の文字列  
+**次を使用して設定** : `UseSetting`  
+**環境変数** : `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -301,11 +302,11 @@ WebHost.CreateDefaultBuilder(args)
 
 `IServer` 実装で構成されているものではなく、`WebHostBuilder` で構成されている URL でホストがリッスンするかどうかを示します。
 
-**キー**: preferHostingUrls  
-**型**: *ブール* (`true` または `1`)  
-**既定値**: true  
-**次を使用して設定**: `PreferHostingUrls`  
-**環境変数**: `ASPNETCORE_PREFERHOSTINGURLS`
+**キー** : preferHostingUrls  
+**型** : *ブール* (`true` または `1`)  
+**既定値** : true  
+**次を使用して設定** : `PreferHostingUrls`  
+**環境変数** : `ASPNETCORE_PREFERHOSTINGURLS`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -316,11 +317,11 @@ WebHost.CreateDefaultBuilder(args)
 
 アプリのアセンブリで構成されているホスティング スタートアップ アセンブリを含む、ホスティング スタートアップ アセンブリの自動読み込みを回避します。 詳細については、「<xref:fundamentals/configuration/platform-specific-configuration>」を参照してください。
 
-**キー**: preventHostingStartup  
-**型**: *ブール* (`true` または `1`)  
-**既定値**: false  
-**次を使用して設定**: `UseSetting`  
-**環境変数**: `ASPNETCORE_PREVENTHOSTINGSTARTUP`
+**キー** : preventHostingStartup  
+**型** : *ブール* (`true` または `1`)  
+**既定値** : false  
+**次を使用して設定** : `UseSetting`  
+**環境変数** : `ASPNETCORE_PREVENTHOSTINGSTARTUP`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -331,11 +332,11 @@ WebHost.CreateDefaultBuilder(args)
 
 サーバーが要求をリッスンする必要があるポートとプロトコルを使用して、IP アドレスまたはホスト アドレスを示します。
 
-**キー**: urls  
-**型**: *文字列*  
-**既定値**: http://localhost:5000  
-**次を使用して設定**: `UseUrls`  
-**環境変数**: `ASPNETCORE_URLS`
+**キー** : urls  
+**型** : *文字列*  
+**既定値** : http://localhost:5000  
+**次を使用して設定** : `UseUrls`  
+**環境変数** : `ASPNETCORE_URLS`
 
 サーバーが応答する必要がある URL プレフィックスのセミコロン (;) で区切られたリストに設定します。 たとえば、`http://localhost:123` のようにします。 "\*" を使用し、サーバーが指定されたポートとプロトコル (`http://*:5000` など) を使用して IP アドレスまたはホスト名に関する要求をリッスンする必要があることを示します。 プロトコル (`http://` または `https://`) は各 URL に含める必要があります。 サポートされている形式はサーバー間で異なります。
 
@@ -350,13 +351,13 @@ Kestrel には独自のエンドポイント構成 API があります。 詳細
 
 Web ホストがシャットダウンするまで待機する時間を指定します。
 
-**キー**: shutdownTimeoutSeconds  
-**型**: *int*  
-**既定**:5  
-**次を使用して設定**: `UseShutdownTimeout`  
-**環境変数**: `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
+**キー** : shutdownTimeoutSeconds  
+**型** : *int*  
+**既定** :5  
+**次を使用して設定** : `UseShutdownTimeout`  
+**環境変数** : `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
-キーは `UseSetting` で *int* を受け取りますが (`.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")` など)、[UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) 拡張メソッドは [TimeSpan](/dotnet/api/system.timespan) を受け取ります。
+キーは `UseSetting` で *int* を受け取りますが (`.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")` など)、 [UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) 拡張メソッドは [TimeSpan](/dotnet/api/system.timespan) を受け取ります。
 
 タイムアウト期間中、ホスティングは次のことを行います。
 
@@ -374,11 +375,11 @@ WebHost.CreateDefaultBuilder(args)
 
 `Startup` クラスを検索するアセンブリを決定します。
 
-**キー**: startupAssembly  
-**型**: *文字列*  
-**既定**:アプリのアセンブリ  
-**次を使用して設定**: `UseStartup`  
-**環境変数**: `ASPNETCORE_STARTUPASSEMBLY`
+**キー** : startupAssembly  
+**型** : *文字列*  
+**既定** :アプリのアセンブリ  
+**次を使用して設定** : `UseStartup`  
+**環境変数** : `ASPNETCORE_STARTUPASSEMBLY`
 
 名前 (`string`) または型 (`TStartup`) 別のアセンブリを参照できます。 複数の `UseStartup` メソッドが呼び出された場合は、最後のメソッドが優先されます。
 
@@ -396,11 +397,11 @@ WebHost.CreateDefaultBuilder(args)
 
 アプリの静的資産への相対パスを設定します。
 
-**キー**: webroot  
-**型**: *文字列*  
-**既定**:既定値は、`wwwroot` です。 *{content root}/wwwroot* へのパスが存在する必要があります。 パスが存在しない場合は、no-op ファイル プロバイダーが使用されます。  
-**次を使用して設定**: `UseWebRoot`  
-**環境変数**: `ASPNETCORE_WEBROOT`
+**キー** : webroot  
+**型** : *文字列*  
+**既定** :既定値は、`wwwroot` です。 *{content root}/wwwroot* へのパスが存在する必要があります。 パスが存在しない場合は、no-op ファイル プロバイダーが使用されます。  
+**次を使用して設定** : `UseWebRoot`  
+**環境変数** : `ASPNETCORE_WEBROOT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -416,7 +417,7 @@ WebHost.CreateDefaultBuilder(args)
 
 [Configuration](xref:fundamentals/configuration/index) を使用して、Web ホストを構成します。 次の例では、ホスト構成はオプションで *hostsettings.json* ファイルに指定されます。 *hostsettings.json* ファイルから読み込まれた構成は、コマンド ライン引数でオーバーライドされる場合があります。 (`config` の) ビルド構成は、[UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) でホストを構成する場合に使用されます。 `IWebHostBuilder` 構成はアプリの構成に追加されますが、その逆は当てはまりません&mdash;`ConfigureAppConfiguration` は `IWebHostBuilder` の構成に影響しません。
 
-次のように、`UseUrls` で指定された構成をオーバーライドします (最初の構成は *hostsettings.json*、2 番目の構成はコマンドライン引数です)。
+次のように、`UseUrls` で指定された構成をオーバーライドします (最初の構成は *hostsettings.json* 、2 番目の構成はコマンドライン引数です)。
 
 ```csharp
 public class Program
@@ -446,7 +447,7 @@ public class Program
 }
 ```
 
-*hostsettings.json*:
+*hostsettings.json* :
 
 ```json
 {
@@ -533,7 +534,7 @@ using (var host = WebHost.Start("http://localhost:8080", app => app.Response.Wri
 }
 ```
 
-アプリが `http://localhost:8080` で応答する場合を除き、**Start(RequestDelegate app)** と同じ結果が生成されます。
+アプリが `http://localhost:8080` で応答する場合を除き、 **Start(RequestDelegate app)** と同じ結果が生成されます。
 
 **Start(Action\<IRouteBuilder> routeBuilder)**
 
@@ -590,7 +591,7 @@ using (var host = WebHost.Start("http://localhost:8080", router => router
 }
 ```
 
-アプリが `http://localhost:8080` で応答する場合を除き、**Start(Action\<IRouteBuilder> routeBuilder)** と同じ結果が生成されます。
+アプリが `http://localhost:8080` で応答する場合を除き、 **Start(Action\<IRouteBuilder> routeBuilder)** と同じ結果が生成されます。
 
 **StartWith(Action\<IApplicationBuilder> app)**
 
@@ -632,7 +633,7 @@ using (var host = WebHost.StartWith("http://localhost:8080", app =>
 }
 ```
 
-アプリが `http://localhost:8080` で応答する場合を除き、**StartWith(Action\<IApplicationBuilder> app)** と同じ結果が生成されます。
+アプリが `http://localhost:8080` で応答する場合を除き、 **StartWith(Action\<IApplicationBuilder> app)** と同じ結果が生成されます。
 
 ::: moniker range=">= aspnetcore-3.0"
 

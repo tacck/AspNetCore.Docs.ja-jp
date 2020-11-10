@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: d3de81ce7248372279b423da865513ee5db73c79
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 3e44932c302713132a37534b97fffdd91acce2c7
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762322"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234557"
 ---
 # <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core の .NET 汎用ホスト
 
@@ -35,7 +36,7 @@ ASP.NET Core テンプレートでは、.NET Core の汎用ホスト (<xref:Micr
 
 ## <a name="host-definition"></a>ホストの定義
 
-"*ホスト*" とは、以下のようなアプリのリソースをカプセル化するオブジェクトです:
+" *ホスト* " とは、以下のようなアプリのリソースをカプセル化するオブジェクトです:
 
 * 依存関係の挿入 (DI)
 * ログの記録
@@ -113,8 +114,8 @@ Entity Framework Core がアプリで使用されている場合は、`CreateHos
   * プレフィックス `DOTNET_` が付いた環境変数。
   * コマンド ライン引数。
 * 次からアプリの構成を読み込みます。
-  * *appsettings.json*。
-  * *appsettings.{Environment}.json*。
+  * *appsettings.json*.
+  * *appsettings.{Environment}.json* 。
   * `Development` 環境でアプリが実行される場合に使用される[シークレット マネージャー](xref:security/app-secrets)。
   * 環境変数。
   * コマンド ライン引数。
@@ -125,7 +126,7 @@ Entity Framework Core がアプリで使用されている場合は、`CreateHos
   * イベント ログ (Windows で実行されている場合のみ)
 * 環境が [開発] になっている場合は、[スコープの検証](xref:fundamentals/dependency-injection#scope-validation)と[依存関係の検証](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild)を有効にします。
 
-`ConfigureWebHostDefaults` メソッド:
+<xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*> メソッド:
 
 * プレフィックス `ASPNETCORE_` が付いた環境変数からホスト構成を読み込みます。
 * [Kestrel](xref:fundamentals/servers/kestrel) サーバーを Web サーバーとして設定し、アプリのホスティング構成プロバイダーを使用してそれを構成します。 Kestrel サーバーの既定のオプションについては、<xref:fundamentals/servers/kestrel#kestrel-options> を参照してください。
@@ -196,7 +197,7 @@ Web アプリで `IWebHostEnvironment` インターフェイスを実装しま�
 
 ## <a name="settings-for-all-app-types"></a>すべての種類のアプリの設定
 
-このセクションでは、HTTP のワークロードと HTTP 以外のワークロードの両方に適用されるホストの設定を一覧します。 既定では、これらの設定を構成するのに使用する環境変数には、プレフィックスとして `DOTNET_` または `ASPNETCORE_` を付けることができます。
+このセクションでは、HTTP のワークロードと HTTP 以外のワークロードの両方に適用されるホストの設定を一覧します。 既定では、これらの設定を構成するのに使用する環境変数には、プレフィックスとして `DOTNET_` または `ASPNETCORE_` を付けることができます。 詳細については、「[既定の builder 設定](#default-builder-settings)」を参照してください。
 
 <!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 
@@ -204,10 +205,10 @@ Web アプリで `IWebHostEnvironment` インターフェイスを実装しま�
 
 [IHostEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) プロパティは、ホストの構築時にホストの構成から設定されます。
 
-**キー**: `applicationName`  
-**型**: `string`  
-**既定**: アプリのエントリ ポイントを含むアセンブリの名前。  
-**環境変数**: `<PREFIX_>APPLICATIONNAME`
+**キー** : `applicationName`  
+**型** : `string`  
+**既定** : アプリのエントリ ポイントを含むアセンブリの名前。  
+**環境変数** : `<PREFIX_>APPLICATIONNAME`
 
 この値を設定するには、環境変数を使用します。 
 
@@ -215,10 +216,10 @@ Web アプリで `IWebHostEnvironment` インターフェイスを実装しま�
 
 [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath*) プロパティでは、ホストがコンテンツ ファイルの検索を開始する位置が決定されます。 パスが存在しない場合は、ホストを起動できません。
 
-**キー**: `contentRoot`  
-**型**: `string`  
-**既定**: アプリ アセンブリが存在するフォルダー。  
-**環境変数**: `<PREFIX_>CONTENTROOT`
+**キー** : `contentRoot`  
+**型** : `string`  
+**既定** : アプリ アセンブリが存在するフォルダー。  
+**環境変数** : `<PREFIX_>CONTENTROOT`
 
 この値を設定するには、環境変数を使用するか、または `IHostBuilder` 上で `UseContentRoot` を呼び出します。
 
@@ -237,10 +238,10 @@ Host.CreateDefaultBuilder(args)
 
 [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) プロパティは、任意の値に設定することができます。 フレームワークで定義された値には `Development`、`Staging`、`Production` が含まれます。 値は大文字と小文字が区別されません。
 
-**キー**: `environment`  
-**型**: `string`  
-**既定値**: `Production`  
-**環境変数**: `<PREFIX_>ENVIRONMENT`
+**キー** : `environment`  
+**型** : `string`  
+**既定値** : `Production`  
+**環境変数** : `<PREFIX_>ENVIRONMENT`
 
 この値を設定するには、環境変数を使用するか、または `IHostBuilder` 上で `UseEnvironment` を呼び出します。
 
@@ -259,10 +260,10 @@ Host.CreateDefaultBuilder(args)
 
 すべてのホステッド サービスが停止する前にタイムアウト時間が切れた場合、残っているアクティブなサービスはアプリのシャットダウン時に停止します。 処理が完了していない場合でも、サービスは停止します。 サービスが停止するまでにさらに時間が必要な場合は、タイムアウト値を増やします。
 
-**キー**: `shutdownTimeoutSeconds`  
-**型**: `int`  
-**既定**:5 秒  
-**環境変数**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+**キー** : `shutdownTimeoutSeconds`  
+**型** : `int`  
+**既定** :5 秒  
+**環境変数** : `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 この値を設定するには、環境変数を使用するか、または `HostOptions` を構成します。 次の例では、タイムアウトを 20 秒に設定します。
 
@@ -270,13 +271,13 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="disable-app-configuration-reload-on-change"></a>変更時にアプリ構成の再度読み込みを無効にする
 
-[既定](xref:fundamentals/configuration/index#default)では、*appsettings.json* と *appsettings.{Environment}.json* は、ファイルの変更時に再度読み込まれます。 ASP.NET Core 5.0 以降でこの再度読み込み動作を無効にするには、`hostBuilder:reloadConfigOnChange` キーを `false` に設定します。
+[既定](xref:fundamentals/configuration/index#default)では、 *appsettings.json* と *appsettings.{Environment}.json* は、ファイルの変更時に再度読み込まれます。 ASP.NET Core 5.0 以降でこの再度読み込み動作を無効にするには、`hostBuilder:reloadConfigOnChange` キーを `false` に設定します。
 
-**キー**: `hostBuilder:reloadConfigOnChange`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `true`  
-**コマンドライン引数**: `hostBuilder:reloadConfigOnChange`  
-**環境変数**: `<PREFIX_>hostBuilder:reloadConfigOnChange`
+**キー** : `hostBuilder:reloadConfigOnChange`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `true`  
+**コマンドライン引数** : `hostBuilder:reloadConfigOnChange`  
+**環境変数** : `<PREFIX_>hostBuilder:reloadConfigOnChange`
 
 > [!WARNING]
 > コロン (`:`) の区切り記号は、すべてのプラットフォームの環境変数階層キーには対応していません。 詳細については、「[環境変数](xref:fundamentals/configuration/index#environment-variables)」を参照してください。
@@ -301,10 +302,10 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 `false` の場合、起動時にエラーが発生するとホストが終了します。 `true` の場合、ホストは起動時に例外をキャプチャして、サーバーを起動しようとします。
 
-**キー**: `captureStartupErrors`  
-**型**: `bool` (`true` または `1`)  
-**既定**:アプリが IIS の背後で Kestrel を使用して実行されている場合 (既定値は `true`) を除き、既定では `false` に設定されます。  
-**環境変数**: `<PREFIX_>CAPTURESTARTUPERRORS`
+**キー** : `captureStartupErrors`  
+**型** : `bool` (`true` または `1`)  
+**既定** :アプリが IIS の背後で Kestrel を使用して実行されている場合 (既定値は `true`) を除き、既定では `false` に設定されます。  
+**環境変数** : `<PREFIX_>CAPTURESTARTUPERRORS`
 
 この値を設定するには、構成を使用するか、または `CaptureStartupErrors` を呼び出します。
 
@@ -316,10 +317,10 @@ webBuilder.CaptureStartupErrors(true);
 
 有効にされている場合、または環境が `Development` である場合、アプリによって詳細なエラーがキャプチャされます。
 
-**キー**: `detailedErrors`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `false`  
-**環境変数**: `<PREFIX_>_DETAILEDERRORS`
+**キー** : `detailedErrors`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `false`  
+**環境変数** : `<PREFIX_>_DETAILEDERRORS`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -331,10 +332,10 @@ webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 起動時に読み込むホスティング スタートアップ アセンブリのセミコロンで区切られた文字列。 構成値は既定で空の文字列に設定されますが、ホスティング スタートアップ アセンブリには常にアプリのアセンブリが含まれます。 ホスティング スタートアップ アセンブリが提供されている場合、アプリが起動中に共通サービスをビルドしたときに読み込むためにアプリのアセンブリに追加されます。
 
-**キー**: `hostingStartupAssemblies`  
-**型**: `string`  
-**既定**:空の文字列  
-**環境変数**: `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
+**キー** : `hostingStartupAssemblies`  
+**型** : `string`  
+**既定** :空の文字列  
+**環境変数** : `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -346,10 +347,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;as
 
 起動時に除外するホスティング スタートアップ アセンブリのセミコロン区切り文字列。
 
-**キー**: `hostingStartupExcludeAssemblies`  
-**型**: `string`  
-**既定**:空の文字列  
-**環境変数**: `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+**キー** : `hostingStartupExcludeAssemblies`  
+**型** : `string`  
+**既定** :空の文字列  
+**環境変数** : `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -361,10 +362,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS リダイレクト ポート。 [HTTPS の適用](xref:security/enforcing-ssl)に使用されます。
 
-**キー**: `https_port`  
-**型**: `string`  
-**既定**:既定値は設定されていません。  
-**環境変数**: `<PREFIX_>HTTPS_PORT`
+**キー** : `https_port`  
+**型** : `string`  
+**既定** :既定値は設定されていません。  
+**環境変数** : `<PREFIX_>HTTPS_PORT`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -376,10 +377,10 @@ webBuilder.UseSetting("https_port", "8080");
 
 `IServer` の実装で構成されている URL ではなく、`IWebHostBuilder` で構成されている URL でホストがリッスンするかどうかを示します。
 
-**キー**: `preferHostingUrls`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `true`  
-**環境変数**: `<PREFIX_>_PREFERHOSTINGURLS`
+**キー** : `preferHostingUrls`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `true`  
+**環境変数** : `<PREFIX_>_PREFERHOSTINGURLS`
 
 この値を設定するには、環境変数を使用するか、または `PreferHostingUrls` を呼び出します。
 
@@ -391,10 +392,10 @@ webBuilder.PreferHostingUrls(false);
 
 アプリのアセンブリで構成されているホスティング スタートアップ アセンブリを含む、ホスティング スタートアップ アセンブリの自動読み込みを回避します。 詳細については、「<xref:fundamentals/configuration/platform-specific-configuration>」を参照してください。
 
-**キー**: `preventHostingStartup`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `false`  
-**環境変数**: `<PREFIX_>_PREVENTHOSTINGSTARTUP`
+**キー** : `preventHostingStartup`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `false`  
+**環境変数** : `<PREFIX_>_PREVENTHOSTINGSTARTUP`
 
 この値を設定するには、環境変数を使用するか、または `UseSetting` を呼び出します。
 
@@ -406,10 +407,10 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 `Startup` クラスを検索するアセンブリ。
 
-**キー**: `startupAssembly`  
-**型**: `string`  
-**既定**:アプリのアセンブリ  
-**環境変数**: `<PREFIX_>STARTUPASSEMBLY`
+**キー** : `startupAssembly`  
+**型** : `string`  
+**既定** :アプリのアセンブリ  
+**環境変数** : `<PREFIX_>STARTUPASSEMBLY`
 
 この値を設定するには、環境変数を使用するか、または `UseStartup` を呼び出します。 `UseStartup` は、アセンブリ名 (`string`) または型 (`TStartup`) を取ることができます。 複数の `UseStartup` メソッドが呼び出された場合は、最後のメソッドが優先されます。
 
@@ -425,10 +426,10 @@ webBuilder.UseStartup<Startup>();
 
 サーバーが要求をリッスンする必要があるポートとプロトコルを含む IP アドレスまたはホスト アドレスを示すセミコロンで区切られたリスト。 たとえば、`http://localhost:123` のようにします。 "\*" を使用し、サーバーが指定されたポートとプロトコル (`http://*:5000` など) を使用して IP アドレスまたはホスト名に関する要求をリッスンする必要があることを示します。 プロトコル (`http://` または `https://`) は各 URL に含める必要があります。 サポートされている形式はサーバー間で異なります。
 
-**キー**: `urls`  
-**型**: `string`  
-**既定値**: `http://localhost:5000` および `https://localhost:5001`  
-**環境変数**: `<PREFIX_>URLS`
+**キー** : `urls`  
+**型** : `string`  
+**既定値** : `http://localhost:5000` および `https://localhost:5001`  
+**環境変数** : `<PREFIX_>URLS`
 
 この値を設定するには、環境変数を使用するか、または `UseUrls` を呼び出します。
 
@@ -442,10 +443,10 @@ Kestrel には独自のエンドポイント構成 API があります。 詳細
 
 [IWebHostEnvironment.WebRootPath](xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment.WebRootPath) プロパティでは、アプリの静的アセットへの相対パスが決定されます。 パスが存在しない場合は、no-op ファイル プロバイダーが使用されます。  
 
-**キー**: `webroot`  
-**型**: `string`  
-**既定**:既定値は、`wwwroot` です。 *{content root}/wwwroot* へのパスが存在する必要があります。  
-**環境変数**: `<PREFIX_>WEBROOT`
+**キー** : `webroot`  
+**型** : `string`  
+**既定** :既定値は、`wwwroot` です。 *{content root}/wwwroot* へのパスが存在する必要があります。  
+**環境変数** : `<PREFIX_>WEBROOT`
 
 この値を設定するには、環境変数を使用するか、または `IWebHostBuilder` 上で `UseWebRoot` を呼び出します。
 
@@ -536,7 +537,7 @@ ASP.NET Core テンプレートでは、.NET Core の汎用ホスト (<xref:Micr
 
 ## <a name="host-definition"></a>ホストの定義
 
-"*ホスト*" とは、以下のようなアプリのリソースをカプセル化するオブジェクトです:
+" *ホスト* " とは、以下のようなアプリのリソースをカプセル化するオブジェクトです:
 
 * 依存関係の挿入 (DI)
 * ログの記録
@@ -616,8 +617,8 @@ Entity Framework Core がアプリで使用されている場合は、`CreateHos
   * プレフィックス `DOTNET_` が付いた環境変数。
   * コマンド ライン引数。
 * 次からアプリの構成を読み込みます。
-  * *appsettings.json*。
-  * *appsettings.{Environment}.json*。
+  * *appsettings.json*.
+  * *appsettings.{Environment}.json* 。
   * `Development` 環境でアプリが実行される場合に使用される[シークレット マネージャー](xref:security/app-secrets)。
   * 環境変数。
   * コマンド ライン引数。
@@ -707,10 +708,10 @@ Web アプリで `IWebHostEnvironment` インターフェイスを実装しま�
 
 [IHostEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ApplicationName*) プロパティは、ホストの構築時にホストの構成から設定されます。
 
-**キー**: `applicationName`  
-**型**: `string`  
-**既定**: アプリのエントリ ポイントを含むアセンブリの名前。  
-**環境変数**: `<PREFIX_>APPLICATIONNAME`
+**キー** : `applicationName`  
+**型** : `string`  
+**既定** : アプリのエントリ ポイントを含むアセンブリの名前。  
+**環境変数** : `<PREFIX_>APPLICATIONNAME`
 
 この値を設定するには、環境変数を使用します。 
 
@@ -718,10 +719,10 @@ Web アプリで `IWebHostEnvironment` インターフェイスを実装しま�
 
 [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath*) プロパティでは、ホストがコンテンツ ファイルの検索を開始する位置が決定されます。 パスが存在しない場合は、ホストを起動できません。
 
-**キー**: `contentRoot`  
-**型**: `string`  
-**既定**: アプリ アセンブリが存在するフォルダー。  
-**環境変数**: `<PREFIX_>CONTENTROOT`
+**キー** : `contentRoot`  
+**型** : `string`  
+**既定** : アプリ アセンブリが存在するフォルダー。  
+**環境変数** : `<PREFIX_>CONTENTROOT`
 
 この値を設定するには、環境変数を使用するか、または `IHostBuilder` 上で `UseContentRoot` を呼び出します。
 
@@ -740,10 +741,10 @@ Host.CreateDefaultBuilder(args)
 
 [IHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) プロパティは、任意の値に設定することができます。 フレームワークで定義された値には `Development`、`Staging`、`Production` が含まれます。 値は大文字と小文字が区別されません。
 
-**キー**: `environment`  
-**型**: `string`  
-**既定値**: `Production`  
-**環境変数**: `<PREFIX_>ENVIRONMENT`
+**キー** : `environment`  
+**型** : `string`  
+**既定値** : `Production`  
+**環境変数** : `<PREFIX_>ENVIRONMENT`
 
 この値を設定するには、環境変数を使用するか、または `IHostBuilder` 上で `UseEnvironment` を呼び出します。
 
@@ -762,10 +763,10 @@ Host.CreateDefaultBuilder(args)
 
 すべてのホステッド サービスが停止する前にタイムアウト時間が切れた場合、残っているアクティブなサービスはアプリのシャットダウン時に停止します。 処理が完了していない場合でも、サービスは停止します。 サービスが停止するまでにさらに時間が必要な場合は、タイムアウト値を増やします。
 
-**キー**: `shutdownTimeoutSeconds`  
-**型**: `int`  
-**既定**:5 秒  
-**環境変数**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+**キー** : `shutdownTimeoutSeconds`  
+**型** : `int`  
+**既定** :5 秒  
+**環境変数** : `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 この値を設定するには、環境変数を使用するか、または `HostOptions` を構成します。 次の例では、タイムアウトを 20 秒に設定します。
 
@@ -791,10 +792,10 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 `false` の場合、起動時にエラーが発生するとホストが終了します。 `true` の場合、ホストは起動時に例外をキャプチャして、サーバーを起動しようとします。
 
-**キー**: `captureStartupErrors`  
-**型**: `bool` (`true` または `1`)  
-**既定**:アプリが IIS の背後で Kestrel を使用して実行されている場合 (既定値は `true`) を除き、既定では `false` に設定されます。  
-**環境変数**: `<PREFIX_>CAPTURESTARTUPERRORS`
+**キー** : `captureStartupErrors`  
+**型** : `bool` (`true` または `1`)  
+**既定** :アプリが IIS の背後で Kestrel を使用して実行されている場合 (既定値は `true`) を除き、既定では `false` に設定されます。  
+**環境変数** : `<PREFIX_>CAPTURESTARTUPERRORS`
 
 この値を設定するには、構成を使用するか、または `CaptureStartupErrors` を呼び出します。
 
@@ -806,10 +807,10 @@ webBuilder.CaptureStartupErrors(true);
 
 有効にされている場合、または環境が `Development` である場合、アプリによって詳細なエラーがキャプチャされます。
 
-**キー**: `detailedErrors`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `false`  
-**環境変数**: `<PREFIX_>_DETAILEDERRORS`
+**キー** : `detailedErrors`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `false`  
+**環境変数** : `<PREFIX_>_DETAILEDERRORS`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -821,10 +822,10 @@ webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
 
 起動時に読み込むホスティング スタートアップ アセンブリのセミコロンで区切られた文字列。 構成値は既定で空の文字列に設定されますが、ホスティング スタートアップ アセンブリには常にアプリのアセンブリが含まれます。 ホスティング スタートアップ アセンブリが提供されている場合、アプリが起動中に共通サービスをビルドしたときに読み込むためにアプリのアセンブリに追加されます。
 
-**キー**: `hostingStartupAssemblies`  
-**型**: `string`  
-**既定**:空の文字列  
-**環境変数**: `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
+**キー** : `hostingStartupAssemblies`  
+**型** : `string`  
+**既定** :空の文字列  
+**環境変数** : `<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -836,10 +837,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;as
 
 起動時に除外するホスティング スタートアップ アセンブリのセミコロン区切り文字列。
 
-**キー**: `hostingStartupExcludeAssemblies`  
-**型**: `string`  
-**既定**:空の文字列  
-**環境変数**: `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+**キー** : `hostingStartupExcludeAssemblies`  
+**型** : `string`  
+**既定** :空の文字列  
+**環境変数** : `<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -851,10 +852,10 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS リダイレクト ポート。 [HTTPS の適用](xref:security/enforcing-ssl)に使用されます。
 
-**キー**: `https_port`  
-**型**: `string`  
-**既定**:既定値は設定されていません。  
-**環境変数**: `<PREFIX_>HTTPS_PORT`
+**キー** : `https_port`  
+**型** : `string`  
+**既定** :既定値は設定されていません。  
+**環境変数** : `<PREFIX_>HTTPS_PORT`
 
 この値を設定するには、構成を使用するか、または `UseSetting` を呼び出します。
 
@@ -866,10 +867,10 @@ webBuilder.UseSetting("https_port", "8080");
 
 `IServer` の実装で構成されている URL ではなく、`IWebHostBuilder` で構成されている URL でホストがリッスンするかどうかを示します。
 
-**キー**: `preferHostingUrls`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `true`  
-**環境変数**: `<PREFIX_>_PREFERHOSTINGURLS`
+**キー** : `preferHostingUrls`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `true`  
+**環境変数** : `<PREFIX_>_PREFERHOSTINGURLS`
 
 この値を設定するには、環境変数を使用するか、または `PreferHostingUrls` を呼び出します。
 
@@ -881,10 +882,10 @@ webBuilder.PreferHostingUrls(false);
 
 アプリのアセンブリで構成されているホスティング スタートアップ アセンブリを含む、ホスティング スタートアップ アセンブリの自動読み込みを回避します。 詳細については、「<xref:fundamentals/configuration/platform-specific-configuration>」を参照してください。
 
-**キー**: `preventHostingStartup`  
-**型**: `bool` (`true` または `1`)  
-**既定値**: `false`  
-**環境変数**: `<PREFIX_>_PREVENTHOSTINGSTARTUP`
+**キー** : `preventHostingStartup`  
+**型** : `bool` (`true` または `1`)  
+**既定値** : `false`  
+**環境変数** : `<PREFIX_>_PREVENTHOSTINGSTARTUP`
 
 この値を設定するには、環境変数を使用するか、または `UseSetting` を呼び出します。
 
@@ -896,10 +897,10 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 `Startup` クラスを検索するアセンブリ。
 
-**キー**: `startupAssembly`  
-**型**: `string`  
-**既定**:アプリのアセンブリ  
-**環境変数**: `<PREFIX_>STARTUPASSEMBLY`
+**キー** : `startupAssembly`  
+**型** : `string`  
+**既定** :アプリのアセンブリ  
+**環境変数** : `<PREFIX_>STARTUPASSEMBLY`
 
 この値を設定するには、環境変数を使用するか、または `UseStartup` を呼び出します。 `UseStartup` は、アセンブリ名 (`string`) または型 (`TStartup`) を取ることができます。 複数の `UseStartup` メソッドが呼び出された場合は、最後のメソッドが優先されます。
 
@@ -915,10 +916,10 @@ webBuilder.UseStartup<Startup>();
 
 サーバーが要求をリッスンする必要があるポートとプロトコルを含む IP アドレスまたはホスト アドレスを示すセミコロンで区切られたリスト。 たとえば、`http://localhost:123` のようにします。 "\*" を使用し、サーバーが指定されたポートとプロトコル (`http://*:5000` など) を使用して IP アドレスまたはホスト名に関する要求をリッスンする必要があることを示します。 プロトコル (`http://` または `https://`) は各 URL に含める必要があります。 サポートされている形式はサーバー間で異なります。
 
-**キー**: `urls`  
-**型**: `string`  
-**既定値**: `http://localhost:5000` および `https://localhost:5001`  
-**環境変数**: `<PREFIX_>URLS`
+**キー** : `urls`  
+**型** : `string`  
+**既定値** : `http://localhost:5000` および `https://localhost:5001`  
+**環境変数** : `<PREFIX_>URLS`
 
 この値を設定するには、環境変数を使用するか、または `UseUrls` を呼び出します。
 
@@ -932,10 +933,10 @@ Kestrel には独自のエンドポイント構成 API があります。 詳細
 
 [IWebHostEnvironment.WebRootPath](xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment.WebRootPath) プロパティでは、アプリの静的アセットへの相対パスが決定されます。 パスが存在しない場合は、no-op ファイル プロバイダーが使用されます。  
 
-**キー**: `webroot`  
-**型**: `string`  
-**既定**:既定値は、`wwwroot` です。 *{content root}/wwwroot* へのパスが存在する必要があります。  
-**環境変数**: `<PREFIX_>WEBROOT`
+**キー** : `webroot`  
+**型** : `string`  
+**既定** :既定値は、`wwwroot` です。 *{content root}/wwwroot* へのパスが存在する必要があります。  
+**環境変数** : `<PREFIX_>WEBROOT`
 
 この値を設定するには、環境変数を使用するか、または `IWebHostBuilder` 上で `UseWebRoot` を呼び出します。
 
@@ -1030,12 +1031,12 @@ ASP.NET Core アプリはホストを構成して起動します。 ホストは
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
-[Visual Studio Code](https://code.visualstudio.com/) でサンプル アプリを実行するときは、"*外部ターミナルまたは統合ターミナル*" を使います。 `internalConsole` ではサンプルを実行しないでください。
+[Visual Studio Code](https://code.visualstudio.com/) でサンプル アプリを実行するときは、" *外部ターミナルまたは統合ターミナル* " を使います。 `internalConsole` ではサンプルを実行しないでください。
 
 Visual Studio Code でコンソールを設定するには:
 
 1. *.vscode/launch.json* ファイルを開きます。
-1. **.NET Core Launch (console)** の構成で、**console** エントリを探します。 値を `externalTerminal` または `integratedTerminal` に設定します。
+1. **.NET Core Launch (console)** の構成で、 **console** エントリを探します。 値を `externalTerminal` または `integratedTerminal` に設定します。
 
 ## <a name="introduction"></a>はじめに
 
@@ -1097,21 +1098,21 @@ var host = new HostBuilder()
 
 [IHostingEnvironment.ApplicationName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ApplicationName*) プロパティは、ホストの構築時にホストの構成から設定されます。 値を明示的に設定するには、[HostDefaults.ApplicationKey](xref:Microsoft.Extensions.Hosting.HostDefaults.ApplicationKey) を使用します。
 
-**キー**: `applicationName`  
-**型**: `string`  
-**既定**:アプリのエントリ ポイントを含むアセンブリの名前。  
-**次を使用して設定**: `HostBuilderContext.HostingEnvironment.ApplicationName`  
-**環境変数**: `<PREFIX_>APPLICATIONNAME` (`<PREFIX_>` は[オプションであり、ユーザー定義です](#configurehostconfiguration))
+**キー** : `applicationName`  
+**型** : `string`  
+**既定** :アプリのエントリ ポイントを含むアセンブリの名前。  
+**次を使用して設定** : `HostBuilderContext.HostingEnvironment.ApplicationName`  
+**環境変数** : `<PREFIX_>APPLICATIONNAME` (`<PREFIX_>` は [オプションであり、ユーザー定義です](#configurehostconfiguration))
 
 ### <a name="content-root"></a>コンテンツ ルート
 
 この設定では、ホストがコンテンツ ファイルの検索を開始する場所を決定します。
 
-**キー**: `contentRoot`  
-**型**: `string`  
-**既定**:既定でアプリ アセンブリが存在するフォルダーに設定されます。  
-**次を使用して設定**: `UseContentRoot`  
-**環境変数**: `<PREFIX_>CONTENTROOT` (`<PREFIX_>` は[オプションであり、ユーザー定義です](#configurehostconfiguration))
+**キー** : `contentRoot`  
+**型** : `string`  
+**既定** :既定でアプリ アセンブリが存在するフォルダーに設定されます。  
+**次を使用して設定** : `UseContentRoot`  
+**環境変数** : `<PREFIX_>CONTENTROOT` (`<PREFIX_>` は [オプションであり、ユーザー定義です](#configurehostconfiguration))
 
 パスが存在しない場合は、ホストを起動できません。
 
@@ -1123,11 +1124,11 @@ var host = new HostBuilder()
 
 アプリの[環境](xref:fundamentals/environments)を設定します。
 
-**キー**: `environment`  
-**型**: `string`  
-**既定値**: `Production`  
-**次を使用して設定**: `UseEnvironment`  
-**環境変数**: `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` は[オプションであり、ユーザー定義です](#configurehostconfiguration))
+**キー** : `environment`  
+**型** : `string`  
+**既定値** : `Production`  
+**次を使用して設定** : `UseEnvironment`  
+**環境変数** : `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` は [オプションであり、ユーザー定義です](#configurehostconfiguration))
 
 環境は任意の値に設定することができます。 フレームワークで定義された値には `Development`、`Staging`、`Production` が含まれます。 値は大文字と小文字が区別されません。
 
@@ -1141,12 +1142,12 @@ var host = new HostBuilder()
 
 既定ではプロバイダーが含まれていません。 次のような、アプリが <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> で必要とする構成プロバイダーを明示的に指定する必要があります。
 
-* ファイルの構成 (*hostsettings.json* ファイルからなど)。
+* ファイルの構成 ( *hostsettings.json* ファイルからなど)。
 * 環境変数の構成。
 * コマンドライン引数の構成。
 * その他に必要なすべての構成プロバイダー。
 
-ホストのファイル構成は、いずれかの[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)に対する呼び出しの前に `SetBasePath` のアプリのベース パスを指定することで有効になります。 サンプル アプリは、JSON ファイル (*hostsettings.json*) を使用し、<xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> を呼び出して、ファイルのホスト構成設定を使用します。
+ホストのファイル構成は、いずれかの[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)に対する呼び出しの前に `SetBasePath` のアプリのベース パスを指定することで有効になります。 サンプル アプリは、JSON ファイル ( *hostsettings.json* ) を使用し、<xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> を呼び出して、ファイルのホスト構成設定を使用します。
 
 ホストの[環境変数の構成](xref:fundamentals/configuration/index#environment-variables-configuration-provider)を追加するには、ホスト ビルダーで <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> を呼び出します。 `AddEnvironmentVariables` は、オプションのユーザー定義プレフィックスを受け入れます。 サンプル アプリは、`PREFIX_` のプレフィックスを使用します。 環境変数が読み取られると、プレフィックスは削除されます。 サンプル アプリのホストが構成されると、`PREFIX_ENVIRONMENT` の環境変数の値が `environment` キーのホスト構成値になります。
 
@@ -1154,7 +1155,7 @@ var host = new HostBuilder()
 
 [コマンドラインの構成](xref:fundamentals/configuration/index#command-line-configuration-provider)は、<xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*>を呼び出すことで追加されます。 コマンドラインの構成は、コマンドライン引数を許可して以前の構成プロバイダーから提供された構成をオーバーライドするために最後に追加されます。
 
-*hostsettings.json*:
+*hostsettings.json* :
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
 
@@ -1174,15 +1175,15 @@ var host = new HostBuilder()
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureAppConfiguration)]
 
-*appsettings.json*:
+*appsettings.json* :
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
-*appsettings.Development.json*:
+*appsettings.Development.json* :
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
 
-*appsettings.Production.json*:
+*appsettings.Production.json* :
 
 [!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
 
@@ -1482,7 +1483,7 @@ public class MyClass
 
 コンストラクターは任意のクラスに <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> サービスを挿入します。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/)は、`LifetimeEventsHostedService` クラス (<xref:Microsoft.Extensions.Hosting.IHostedService> の実装) へのコンストラクターの挿入を使って、イベントを登録します。
 
-*LifetimeEventsHostedService.cs*:
+*LifetimeEventsHostedService.cs* :
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/LifetimeEventsHostedService.cs?name=snippet1)]
 

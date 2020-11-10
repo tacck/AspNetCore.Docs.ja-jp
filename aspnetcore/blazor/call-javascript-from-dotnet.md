@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, devx-track-js
 ms.date: 10/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: ddbffa356a1cb53ee6ba1589f93e815af968bfb7
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 17d6087b884775a8bfcb41fe23296f508467e924
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690290"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234453"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -55,7 +56,7 @@ JavaScript コードでは、前の例で示したコードのように、スク
 
 次のコンポーネント:
 
-* コンポーネント ボタン ( **`Convert Array`** ) が選択された場合、`JSRuntime` を使用して `convertArray` JavaScript 関数を呼び出します。
+* コンポーネント ボタン ( **`Convert Array`** ) が選択された場合、`JS` を使用して `convertArray` JavaScript 関数を呼び出します。
 * JavaScript 関数が呼び出されると、渡された配列が文字列に変換されます。 文字列は、表示できるようにコンポーネントに返されます。
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
@@ -76,7 +77,7 @@ JavaScript コードでは、前の例で示したコードのように、スク
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  `wwwroot/index.html` (Blazor WebAssembly) または `Pages/_Host.cshtml` (Blazor Server) の `<head>` 要素内で、`handleTickerChanged` JavaScript 関数を指定します。 関数は `JSRuntime.InvokeAsync` を指定して呼び出され、次の値を返します。
+  `wwwroot/index.html` (Blazor WebAssembly) または `Pages/_Host.cshtml` (Blazor Server) の `<head>` 要素内で、`handleTickerChanged` JavaScript 関数を指定します。 関数は `JS.InvokeAsync` を指定して呼び出され、次の値を返します。
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
@@ -84,7 +85,7 @@ JavaScript コードでは、前の例で示したコードのように、スク
 
   ```razor
   [Inject]
-  IJSRuntime JSRuntime { get; set; }
+  IJSRuntime JS { get; set; }
   ```
 
 このトピックに添付されているクライアント側のサンプル アプリでは、ユーザー入力を受け取り、ウェルカム メッセージを表示するために、DOM とやりとりする 2 つの JavaScript 関数をアプリで使用できます。
@@ -130,7 +131,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 ```razor
 @page "/JSInterop"
 @using {APP ASSEMBLY}.JsInteropClasses
-@inject IJSRuntime JSRuntime
+@inject IJSRuntime JS
 
 <h1>JavaScript Interop</h1>
 
@@ -145,11 +146,11 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 @code {
     public async Task TriggerJsPrompt()
     {
-        var name = await JSRuntime.InvokeAsync<string>(
+        var name = await JS.InvokeAsync<string>(
                 "exampleJsFunctions.showPrompt",
                 "What's your name?");
 
-        await JSRuntime.InvokeVoidAsync(
+        await JS.InvokeVoidAsync(
                 "exampleJsFunctions.displayWelcome",
                 $"Hello {name}! Welcome to Blazor!");
     }
@@ -235,10 +236,9 @@ window.interopFunctions = {
 
 ```csharp
 public static async Task TriggerClickEvent(this ElementReference elementRef, 
-    IJSRuntime jsRuntime)
+    IJSRuntime js)
 {
-    await jsRuntime.InvokeVoidAsync(
-        "interopFunctions.clickElement", elementRef);
+    await js.InvokeVoidAsync("interopFunctions.clickElement", elementRef);
 }
 ```
 
@@ -253,10 +253,9 @@ public static async Task TriggerClickEvent(this ElementReference elementRef,
 
 ```csharp
 public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
-    IJSRuntime jsRuntime)
+    IJSRuntime js)
 {
-    return jsRuntime.InvokeAsync<T>(
-        "exampleJsFunctions.doSomethingGeneric", elementRef);
+    return js.InvokeAsync<T>("exampleJsFunctions.doSomethingGeneric", elementRef);
 }
 ```
 
@@ -487,7 +486,7 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
 * コンポーネント コードでの呼び出しごとに、1 回の呼び出しでタイムアウトを指定できます。
 
   ```csharp
-  var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
+  var result = await JS.InvokeAsync<string>("MyJSOperation", 
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
@@ -524,10 +523,10 @@ export function showPrompt(message) {
 }
 ```
 
-前の JavaScript モジュールを静的 Web アセット (`wwwroot/exampleJsInterop.js`) として .NET ライブラリに追加し、<xref:Microsoft.JSInterop.IJSRuntime> サービスを使用してそのモジュールを .NET コードにインポートします。 サービスは、次の例では `jsRuntime` (表示はなし) として挿入されます。
+前の JavaScript モジュールを静的 Web アセット (`wwwroot/exampleJsInterop.js`) として .NET ライブラリに追加し、<xref:Microsoft.JSInterop.IJSRuntime> サービスを使用してそのモジュールを .NET コードにインポートします。 サービスは、次の例では `js` (表示はなし) として挿入されます。
 
 ```csharp
-var module = await jsRuntime.InvokeAsync<IJSObjectReference>(
+var module = await js.InvokeAsync<IJSObjectReference>(
     "import", "./_content/MyComponents/exampleJsInterop.js");
 ```
 
@@ -556,13 +555,15 @@ window.unmarshalledInstance = {
 ```
 
 ```csharp
-var unmarshalledRuntime = (IJSUnmarshalledRuntime)jsRuntime;
+var unmarshalledRuntime = (IJSUnmarshalledRuntime)js;
 var jsUnmarshalledReference = unmarshalledRuntime
     .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
 
 string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
     "helloWorld");
 ```
+
+前の例では、<xref:Microsoft.JSInterop.IJSRuntime> サービスがクラスに挿入され、`js` に割り当てられます (示されてはいません)。
 
 ## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>UI をレンダリングする JavaScript ライブラリの使用 (DOM 要素)
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 9/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 74f65b916c2d5b7de61ec29f4259a51584ee5989
+ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424286"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93365419"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 
@@ -118,9 +119,10 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。
-* **[ASP.NET Core Web アプリケーション]** を選択します。
+* Visual Studio を開始し、 **[新しいプロジェクトの作成]** を選択します。
+* **[ASP.NET Core Web アプリケーション]** > **[次へ]** の順に選択します。
 * プロジェクトに *ContosoUniversity* という名前を付けます。 コードをコピーして貼り付けるときに名前空間が一致するように、この正確な名前 (大文字と小文字を含む) を使用することが重要です。
+* **［作成］** を選択します
 * ドロップダウン リストで **[.NET Core]** と **[ASP.NET Core 5.0]** を選択してから、 **[Web アプリケーション]** を選択します。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -137,7 +139,7 @@ To run the app after downloading the completed project:
 
 ## <a name="set-up-the-site-style"></a>サイトのスタイルを設定する
 
-次のコードをコピーして、*Pages/Shared/_Layout.cshtml* ファイルに貼り付けます: [!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
+次のコードをコピーして、 *Pages/Shared/_Layout.cshtml* ファイルに貼り付けます: [!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
 このレイアウト ファイルによってサイト ヘッダー、フッター、およびメニューが設定されます。 上記のコードは、次の変更を加えます。
 
@@ -167,7 +169,7 @@ To run the app after downloading the completed project:
 
 * プロジェクト フォルダー内に *Models* フォルダーを作成します。 
 
-* 次のコードを使用して、*Models/Student.cs* を作成します。
+* 次のコードを使用して、 *Models/Student.cs* を作成します。
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
@@ -175,7 +177,7 @@ To run the app after downloading the completed project:
 
 `Enrollments` プロパティは[ナビゲーション プロパティ](/ef/core/modeling/relationships)です。 ナビゲーション プロパティには、このエンティティに関連する他のエンティティが含まれます。 この例では、`Student` エンティティの `Enrollments` プロパティによって、その Student に関連するすべての `Enrollment` エンティティが保持されます。 たとえば、データベース内のある Student 行に 2 つの関連する Enrollment 行がある場合、`Enrollments` ナビゲーション プロパティにその 2 つの Enrollment エンティティが含まれます。 
 
-データベースでは、StudentID 列に学生の ID 値が含まれている場合には、Enrollment 行が Student 行に関連付けられます。 たとえば、Student 行の ID が 1 であるとします。 関連する Enrollment 行の StudentID は 1 になります。 StudentID は、Enrollment テーブルの*外部キー*です。 
+データベースでは、StudentID 列に学生の ID 値が含まれている場合には、Enrollment 行が Student 行に関連付けられます。 たとえば、Student 行の ID が 1 であるとします。 関連する Enrollment 行の StudentID は 1 になります。 StudentID は、Enrollment テーブルの *外部キー* です。 
 
 `Enrollments` プロパティは、複数の関連する Enrollment エンティティが存在する可能性があるため、`ICollection<Enrollment>` として定義されます。 他のコレクション型 (`List<Enrollment>` や `HashSet<Enrollment>` など) を使用できます。 `ICollection<Enrollment>` を使用する場合、EF Core で `HashSet<Enrollment>` コレクションが既定で作成されます。
 
@@ -183,7 +185,7 @@ To run the app after downloading the completed project:
 
 ![Enrollment エンティティの図](intro/_static/enrollment-entity.png)
 
-以下のコードを使用して、*Models/Enrollment.cs* を作成します。
+以下のコードを使用して、 *Models/Enrollment.cs* を作成します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Enrollment.cs)]
 
@@ -201,7 +203,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 
 ![Course エンティティの図](intro/_static/course-entity.png)
 
-以下のコードを使用して、*Models/Course.cs* を作成します。
+以下のコードを使用して、 *Models/Course.cs* を作成します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Course.cs)]
 
@@ -221,7 +223,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Pages/Students* フォルダーを作成します。
-* **ソリューション エクスプローラー**で、*Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
+* **ソリューション エクスプローラー** で、 *Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
 * **[新しいスキャフォールディング アイテムの追加]** ダイアログで次のようにします。
   * 左側のタブで、 **[インストール済み] > [共通] > [Razor Pages]** の順に選択します。
   * **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
@@ -293,7 +295,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 
 ## <a name="database-connection-string"></a>データベース接続文字列
 
-スキャフォールディング ツールを使用すると、*appsettings.json* ファイルに接続文字列が生成されます。
+スキャフォールディング ツールを使用すると、 *appsettings.json* ファイルに接続文字列が生成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -360,11 +362,11 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 ---
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)が *appsettings.json* ファイルから接続文字列を読み取ります。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 ### <a name="add-the-database-exception-filter"></a>データベース例外フィルターを追加する
 
-次のコードに示すように、`ConfigureServices` に `AddDatabaseDeveloperPageExceptionFilter` を追加します。
+次のコードに示すように、`ConfigureServices` に <xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> を追加します。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -372,10 +374,10 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 [Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージを追加します。
 
-PMC で、次のコマンドを入力して NuGet パッケージを追加します。
+PMC で、次のように入力して NuGet パッケージを追加します。
 
 ```powershell
-Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.1.20451.17
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.2.20475.17
 ```
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -386,9 +388,11 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.
 
 `Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore` NuGet パッケージには Entity Framework Core のエラー ページ用の ASP.NET Core ミドルウェアが用意されています。 このミドルウェアは、Entity Framework Core の移行に関するエラーを検出して診断するのに役立ちます。
 
+`AddDatabaseDeveloperPageExceptionFilter` により、[開発環境](xref:fundamentals/environments)で役に立つエラー情報が提供されます。
+
 ## <a name="create-the-database"></a>データベースの作成
 
-データベースが存在しない場合は、*Program.cs* を更新して作成します。
+データベースが存在しない場合は、 *Program.cs* を更新して作成します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Program.cs?highlight=1-2,14-18,21-38)]
 
@@ -413,7 +417,7 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.
 
 `EnsureCreated` メソッドは、空のデータベースを作成します。 このセクションでは、データベースにテスト データを入力するコードを追加します。
 
-次のコードを使用して、*Data/DbInitializer.cs* を作成します。
+次のコードを使用して、 *Data/DbInitializer.cs* を作成します。
 <!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
@@ -428,7 +432,7 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-アプリが実行されている場合は停止し、**パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
+アプリが実行されている場合は停止し、 **パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
 
 ```powershell
 Drop-Database -Confirm
@@ -438,7 +442,7 @@ Drop-Database -Confirm
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* アプリが実行されている場合は停止し、*CU.db* ファイルを削除します。
+* アプリが実行されている場合は停止し、 *CU.db* ファイルを削除します。
 
 ---
 
@@ -557,7 +561,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 このサイトの UI スタイルは、組み込みのプロジェクト テンプレートに基づいています。 このチュートリアルでは、UI をカスタマイズする方法ではなく、主に EF Core の使用方法について説明します。
 
-ページの上部にあるリンクを使用して、完成したプロジェクトのソース コードを取得します。 *cu30* フォルダーには、チュートリアルの ASP.NET Core 3.0 バージョン用のコードが含まれています。 チュートリアル 1-7 のコードの状態を反映するファイルは、*cu30snapshots* フォルダー内にあります。
+ページの上部にあるリンクを使用して、完成したプロジェクトのソース コードを取得します。 *cu30* フォルダーには、チュートリアルの ASP.NET Core 3.0 バージョン用のコードが含まれています。 チュートリアル 1-7 のコードの状態を反映するファイルは、 *cu30snapshots* フォルダー内にあります。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -576,10 +580,10 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 完成したプロジェクトをダウンロードした後にアプリを実行するには:
 
-* *ContosoUniversity.csproj* を削除し、*ContosoUniversitySQLite.csproj* の名前を *ContosoUniversity.csproj* に変更します。
+* *ContosoUniversity.csproj* を削除し、 *ContosoUniversitySQLite.csproj* の名前を *ContosoUniversity.csproj* に変更します。
 * *Program.cs* で、`StartupSQLite` が使用されるように `#define Startup` をコメント アウトします。
-* *appSettings.json* を削除し、*appSettingsSQLite.json* の名前を *appSettings.json* に変更します。
-* *Migrations* フォルダーを削除し、*MigrationsSQL* の名前を *Migrations* に変更します。
+* *appSettings.json* を削除し、 *appSettingsSQLite.json* の名前を *appSettings.json* に変更します。
+* *Migrations* フォルダーを削除し、 *MigrationsSQL* の名前を *Migrations* に変更します。
 * `#if SQLiteVersion` のグローバル検索を実行し、`#if SQLiteVersion` と関連する `#endif` ステートメントを削除します。
 * プロジェクトをビルドします。
 * プロジェクト フォルダーのコマンド プロンプトで、次のコマンドを実行します。
@@ -628,7 +632,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 * "ContosoUniversity" をすべて "Contoso University" に変更します。 これは 3 回出てきます。
 
-* **Home** メニューと **Privacy** メニューのエントリを削除し、**About**、**Students**、**Courses**、**Instructors**、**Departments** のエントリを追加します。
+* **Home** メニューと **Privacy** メニューのエントリを削除し、 **About** 、 **Students** 、 **Courses** 、 **Instructors** 、 **Departments** のエントリを追加します。
 
 変更が強調表示されます。
 
@@ -653,7 +657,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 ![Student エンティティの図](intro/_static/student-entity.png)
 
 * プロジェクト フォルダー内に *Models* フォルダーを作成します。
-* 次のコードを使用して、*Models/Student.cs* を作成します。
+* 次のコードを使用して、 *Models/Student.cs* を作成します。
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
@@ -661,7 +665,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 `Enrollments` プロパティは[ナビゲーション プロパティ](/ef/core/modeling/relationships)です。 ナビゲーション プロパティには、このエンティティに関連する他のエンティティが含まれます。 この例では、`Student` エンティティの `Enrollments` プロパティによって、その Student に関連するすべての `Enrollment` エンティティが保持されます。 たとえば、データベース内のある Student 行に 2 つの関連する Enrollment 行がある場合、`Enrollments` ナビゲーション プロパティにその 2 つの Enrollment エンティティが含まれます。 
 
-データベースでは、StudentID 列に学生の ID 値が含まれている場合には、Enrollment 行が Student 行に関連付けられます。 たとえば、Student 行の ID が 1 であるとします。 関連する Enrollment 行の StudentID は 1 になります。 StudentID は、Enrollment テーブルの*外部キー*です。 
+データベースでは、StudentID 列に学生の ID 値が含まれている場合には、Enrollment 行が Student 行に関連付けられます。 たとえば、Student 行の ID が 1 であるとします。 関連する Enrollment 行の StudentID は 1 になります。 StudentID は、Enrollment テーブルの *外部キー* です。 
 
 `Enrollments` プロパティは、複数の関連する Enrollment エンティティが存在する可能性があるため、`ICollection<Enrollment>` として定義されます。 他のコレクション型 (`List<Enrollment>` や `HashSet<Enrollment>` など) を使用できます。 `ICollection<Enrollment>` を使用する場合、EF Core で `HashSet<Enrollment>` コレクションが既定で作成されます。
 
@@ -669,7 +673,7 @@ SQLite の使用を選択した場合は、SQLite データベースを管理お
 
 ![Enrollment エンティティの図](intro/_static/enrollment-entity.png)
 
-以下のコードを使用して、*Models/Enrollment.cs* を作成します。
+以下のコードを使用して、 *Models/Enrollment.cs* を作成します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Enrollment.cs)]
 
@@ -687,7 +691,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 
 ![Course エンティティの図](intro/_static/course-entity.png)
 
-以下のコードを使用して、*Models/Course.cs* を作成します。
+以下のコードを使用して、 *Models/Course.cs* を作成します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Course.cs)]
 
@@ -707,7 +711,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Pages* フォルダー内に *Students* フォルダーを作成します。
-* **ソリューション エクスプローラー**で、*Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
+* **ソリューション エクスプローラー** で、 *Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
 * **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 * **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。
   * **[モデル クラス]** ドロップダウンで、 **[Student (ContosoUniversity.Models)]** を選択します。
@@ -782,7 +786,7 @@ remove dotnet tool install --global  below
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*appsettings.json* ファイルでは、接続文字列 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されます。
+*appsettings.json* ファイルでは、接続文字列 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されています。
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -835,11 +839,11 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 ---
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)が *appsettings.json* ファイルから接続文字列を読み取ります。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 ## <a name="create-the-database"></a>データベースの作成
 
-データベースが存在しない場合は、*Program.cs* を更新して作成します。
+データベースが存在しない場合は、 *Program.cs* を更新して作成します。
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Program.cs?highlight=1-2,14-18,21-38)]
 
@@ -864,7 +868,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 `EnsureCreated` メソッドは、空のデータベースを作成します。 このセクションでは、データベースにテスト データを入力するコードを追加します。
 
-次のコードを使用して、*Data/DbInitializer.cs* を作成します。
+次のコードを使用して、 *Data/DbInitializer.cs* を作成します。
 <!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
@@ -879,7 +883,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-アプリが実行されている場合は停止し、**パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
+アプリが実行されている場合は停止し、 **パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
 
 ```powershell
 Drop-Database
@@ -887,7 +891,7 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* アプリが実行されている場合は停止し、*CU.db* ファイルを削除します。
+* アプリが実行されている場合は停止し、 *CU.db* ファイルを削除します。
 
 ---
 
@@ -1015,9 +1019,9 @@ dotnet run
 
 * "ContosoUniversity" をすべて "Contoso University" に変更します。 これは 3 回出てきます。
 
-* メニュー エントリとして「**Students**」、「**Courses**」、「**Instructors**」、「**Departments**」を追加し、「**Contact**」を削除します。
+* メニュー エントリとして「 **Students** 」、「 **Courses** 」、「 **Instructors** 」、「 **Departments** 」を追加し、「 **Contact** 」を削除します。
 
-変更が強調表示されます。 (マークアップは一部表示されて*いません*。)
+変更が強調表示されます。 (マークアップは一部表示されて *いません* 。)
 
 [!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
@@ -1039,7 +1043,7 @@ Contoso University アプリのエンティティ クラスを作成します。
 
 ![Student エンティティの図](intro/_static/student-entity.png)
 
-*Models* フォルダーを作成します。 以下のコードを使用して、*Models* フォルダーで、*Student.cs* という名前のクラス ファイルを作成します。
+*Models* フォルダーを作成します。 以下のコードを使用して、 *Models* フォルダーで、 *Student.cs* という名前のクラス ファイルを作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_Intro)]
 
@@ -1053,7 +1057,7 @@ Contoso University アプリのエンティティ クラスを作成します。
 
 ![Enrollment エンティティの図](intro/_static/enrollment-entity.png)
 
-以下のコードを使用して、*Models* フォルダーで、*Enrollment.cs* を作成します。
+以下のコードを使用して、 *Models* フォルダーで、 *Enrollment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/Enrollment.cs?name=snippet_Intro)]
 
@@ -1071,7 +1075,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 
 ![Course エンティティの図](intro/_static/course-entity.png)
 
-以下のコードを使用して、*Models* フォルダーで、*Course.cs* を作成します。
+以下のコードを使用して、 *Models* フォルダーで、 *Course.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/Course.cs?name=snippet_Intro)]
 
@@ -1088,7 +1092,7 @@ EF Core は、プロパティの名前が `<navigation property name><primary ke
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**で、*Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
+* **ソリューション エクスプローラー** で、 *Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。
 * **[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。
 
 **[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。
@@ -1123,8 +1127,8 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ### <a name="file-updates"></a>ファイルの更新
 
-* *Startup.cs*:このファイルに対する変更を次のセクションで詳しく説明します。
-* *appsettings.json*:ローカル データベースへの接続に使用される接続文字列を追加します。
+* *Startup.cs* :このファイルに対する変更を次のセクションで詳しく説明します。
+* *appsettings.json* :ローカル データベースへの接続に使用される接続文字列を追加します。
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>依存関係挿入に登録されるコンテキストを調べる
 
@@ -1136,7 +1140,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)が *appsettings.json* ファイルから接続文字列を読み取ります。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 ## <a name="update-main"></a>main を更新する
 
@@ -1191,7 +1195,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 EF Core によって空の DB が作成されます。 このセクションでは、それにテスト データを入力するために `Initialize` メソッドを記述します。
 
-*Data* フォルダーで、*DbInitializer.cs* という名前の新しいクラス ファイルを作成し、次のコードを追加します。
+*Data* フォルダーで、 *DbInitializer.cs* という名前の新しいクラス ファイルを作成し、次のコードを追加します。
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Intro)]
 
@@ -1207,7 +1211,7 @@ EF Core によって空の DB が作成されます。 このセクションで�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-アプリが実行されている場合は停止し、**パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
+アプリが実行されている場合は停止し、 **パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
 
 ```powershell
 Drop-Database
@@ -1215,7 +1219,7 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* アプリが実行されている場合は停止し、*CU.db* ファイルを削除します。
+* アプリが実行されている場合は停止し、 *CU.db* ファイルを削除します。
 
 ---
 

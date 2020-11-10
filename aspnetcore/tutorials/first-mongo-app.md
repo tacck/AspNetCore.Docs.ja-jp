@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 61f72c4d281e7957b520e1660440e536ebd4c78a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 350df417886fe1ea5fef89dc221c217d596768b3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631772"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060743"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core と MongoDB で Web API を作成する
 
@@ -49,7 +50,7 @@ ms.locfileid: "88631772"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 3.0 以降](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) と **ASP.NET と Web 開発**ワークロード
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) と **ASP.NET と Web 開発** ワークロード
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -92,7 +93,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
    use BookstoreDb
    ```
 
-   これがまだ存在していない場合、*BookstoreDb* という名前のデータベースが作成されます。 データベースが存在する場合は、トランザクションのために接続されます。
+   これがまだ存在していない場合、 *BookstoreDb* という名前のデータベースが作成されます。 データベースが存在する場合は、トランザクションのために接続されます。
 
 1. 次のコマンドを使用して `Books` コレクションを作成します。
 
@@ -181,7 +182,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    .NET Core をターゲットとする新しい ASP.NET Core Web API プロジェクトが生成され、Visual Studio Code で開きます。
 
-1. 状態バーの OmniSharp フレーム アイコンが緑色になり、"**ビルドとデバッグに必要な資産が 'BooksApi' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されます。 **[はい]** を選択します。
+1. 状態バーの OmniSharp フレーム アイコンが緑色になり、" **ビルドとデバッグに必要な資産が 'BooksApi' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されます。 **[はい]** を選択します。
 1. [NuGet ギャラリー:MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) に関するページを参照して、MongoDB 用 .NET ドライバーの最新の安定バージョンを確認します。 **[統合ターミナル]** を開き、プロジェクトのルートに移動します。 次のコマンドを実行して、MongoDB 用の .NET ドライバーをインストールします。
 
    ```dotnetcli
@@ -193,9 +194,9 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 1. バージョン 8.6 より前の Visual Studio for Mac の場合、サイドバーから **[ファイル]** 、 **[新しいソリューション]** 、 **[.NET Core]** 、 **[アプリ]** の順に選択します。 バージョン 8.6 以降の場合、サイドバーから **[ファイル]** 、 **[新しいソリューション]** 、 **[Web and Console]\(Web とコンソール)** 、 **[アプリ]** の順に選択します。
 1. **[ASP.NET Core]** 、 **[API]** C# プロジェクト テンプレートの順に選択し、 **[次へ]** を選択します。
 1. **[ターゲット フレームワーク]** ドロップダウン リストで **[.NET Core 3.1]** を選択し、 **[次へ]** を選択します。
-1. **[プロジェクト名]** に「*BooksApi*」と入力し、 **[作成]** を選択します。
+1. **[プロジェクト名]** に「 *BooksApi* 」と入力し、 **[作成]** を選択します。
 1. **[ソリューション]** パッドで、プロジェクトの **[依存関係]** ノードを右クリックし、 **[パッケージを追加]** を選択します。
-1. 検索ボックスに「*MongoDB.Driver*」と入力し、*MongoDB.Driver* パッケージを選択して、 **[パッケージを追加]** を選択します。
+1. 検索ボックスに「 *MongoDB.Driver* 」と入力し、 *MongoDB.Driver* パッケージを選択して、 **[パッケージを追加]** を選択します。
 1. **[ライセンスへの同意]** ダイアログの **[承諾]** ボタンを選択します。
 
 ---
@@ -243,11 +244,11 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    [!code-json[](first-mongo-app/samples/3.x/SampleApp/appsettings.json?highlight=2-6)]
 
-1. 次のコードを使用して、*BookstoreDatabaseSettings.cs* ファイルを *Models* ディレクトリに追加します。
+1. 次のコードを使用して、 *BookstoreDatabaseSettings.cs* ファイルを *Models* ディレクトリに追加します。
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   前述の `BookstoreDatabaseSettings` クラスは、*appsettings.json* ファイルの `BookstoreDatabaseSettings` プロパティ値を格納するために使用されます。 JSON と C# のプロパティ名には、マッピング処理を簡単にするために同じ名前が付けられています。
+   前述の `BookstoreDatabaseSettings` クラスは、 *appsettings.json* ファイルの `BookstoreDatabaseSettings` プロパティ値を格納するために使用されます。 JSON と C# のプロパティ名には、マッピング処理を簡単にするために同じ名前が付けられています。
 
 1. 次の強調表示されたコードを `Startup.ConfigureServices` に追加します。
 
@@ -255,7 +256,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    上のコードでは以下の操作が行われます。
 
-   * *appsettings.json* ファイルの `BookstoreDatabaseSettings` セクションがバインドされている構成インスタンスは、Dependency Injection (DI) コンテナーに登録されています。 たとえば、`BookstoreDatabaseSettings` オブジェクトの `ConnectionString` プロパティには、*appsettings.json* の `BookstoreDatabaseSettings:ConnectionString` プロパティが設定されています。
+   * *appsettings.json* ファイルの `BookstoreDatabaseSettings` セクションがバインドされている構成インスタンスは、Dependency Injection (DI) コンテナーに登録されています。 たとえば、`BookstoreDatabaseSettings` オブジェクトの `ConnectionString` プロパティには、 *appsettings.json* の `BookstoreDatabaseSettings:ConnectionString` プロパティが設定されています。
    * `IBookstoreDatabaseSettings` インターフェイスは、シングルトン [サービス有効期間](xref:fundamentals/dependency-injection#service-lifetimes)で DI に登録されています。 挿入されると、インターフェイス インスタンスは `BookstoreDatabaseSettings` オブジェクトに解決されます。
 
 1. 次のコードを *Startup.cs* の先頭に追加して、`BookstoreDatabaseSettings` と `IBookstoreDatabaseSettings` の参照を解決します。
@@ -269,7 +270,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   前述のコードでは、`IBookstoreDatabaseSettings` インスタンスがコンストラクターの挿入によって DI から取得されます。 この手法で、「[構成モデルを追加する](#add-a-configuration-model)」セクションで追加した *appsettings.json* 構成値にアクセスできます。
+   前述のコードでは、`IBookstoreDatabaseSettings` インスタンスがコンストラクターの挿入によって DI から取得されます。 この手法で、「 [構成モデルを追加する](#add-a-configuration-model)」セクションで追加した *appsettings.json* 構成値にアクセスできます。
 
 1. 次の強調表示されたコードを `Startup.ConfigureServices` に追加します。
 
@@ -399,7 +400,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) と **ASP.NET と Web 開発**ワークロード
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) と **ASP.NET と Web 開発** ワークロード
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -442,7 +443,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
    use BookstoreDb
    ```
 
-   これがまだ存在していない場合、*BookstoreDb* という名前のデータベースが作成されます。 データベースが存在する場合は、トランザクションのために接続されます。
+   これがまだ存在していない場合、 *BookstoreDb* という名前のデータベースが作成されます。 データベースが存在する場合は、トランザクションのために接続されます。
 
 1. 次のコマンドを使用して `Books` コレクションを作成します。
 
@@ -531,7 +532,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    .NET Core をターゲットとする新しい ASP.NET Core Web API プロジェクトが生成され、Visual Studio Code で開きます。
 
-1. 状態バーの OmniSharp フレーム アイコンが緑色になり、"**ビルドとデバッグに必要な資産が 'BooksApi' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されます。 **[はい]** を選択します。
+1. 状態バーの OmniSharp フレーム アイコンが緑色になり、" **ビルドとデバッグに必要な資産が 'BooksApi' にありません。追加しますか?** " という内容のダイアログ ボックスが表示されます。 **[はい]** を選択します。
 1. [NuGet ギャラリー:MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) に関するページを参照して、MongoDB 用 .NET ドライバーの最新の安定バージョンを確認します。 **[統合ターミナル]** を開き、プロジェクトのルートに移動します。 次のコマンドを実行して、MongoDB 用の .NET ドライバーをインストールします。
 
    ```dotnetcli
@@ -543,9 +544,9 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 1. バージョン 8.6 より前の Visual Studio for Mac の場合、サイドバーから **[ファイル]** 、 **[新しいソリューション]** 、 **[.NET Core]** 、 **[アプリ]** の順に選択します。 バージョン 8.6 以降の場合、サイドバーから **[ファイル]** 、 **[新しいソリューション]** 、 **[Web and Console]\(Web とコンソール)** 、 **[アプリ]** の順に選択します。
 1. **[ASP.NET Core Web API]** C# プロジェクト テンプレートを選択し、 **[次へ]** を選択します。
 1. **[ターゲット フレームワーク]** ドロップダウン リストで **[.NET Core 2.2]** を選択し、 **[次へ]** を選択します。
-1. **[プロジェクト名]** に「*BooksApi*」と入力し、 **[作成]** を選択します。
+1. **[プロジェクト名]** に「 *BooksApi* 」と入力し、 **[作成]** を選択します。
 1. **[ソリューション]** パッドで、プロジェクトの **[依存関係]** ノードを右クリックし、 **[パッケージを追加]** を選択します。
-1. 検索ボックスに「*MongoDB.Driver*」と入力し、*MongoDB.Driver* パッケージを選択して、 **[パッケージを追加]** を選択します。
+1. 検索ボックスに「 *MongoDB.Driver* 」と入力し、 *MongoDB.Driver* パッケージを選択して、 **[パッケージを追加]** を選択します。
 1. **[ライセンスへの同意]** ダイアログの **[承諾]** ボタンを選択します。
 
 ---
@@ -593,11 +594,11 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    [!code-json[](first-mongo-app/samples/2.x/SampleApp/appsettings.json?highlight=2-6)]
 
-1. 次のコードを使用して、*BookstoreDatabaseSettings.cs* ファイルを *Models* ディレクトリに追加します。
+1. 次のコードを使用して、 *BookstoreDatabaseSettings.cs* ファイルを *Models* ディレクトリに追加します。
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   前述の `BookstoreDatabaseSettings` クラスは、*appsettings.json* ファイルの `BookstoreDatabaseSettings` プロパティ値を格納するために使用されます。 JSON と C# のプロパティ名には、マッピング処理を簡単にするために同じ名前が付けられています。
+   前述の `BookstoreDatabaseSettings` クラスは、 *appsettings.json* ファイルの `BookstoreDatabaseSettings` プロパティ値を格納するために使用されます。 JSON と C# のプロパティ名には、マッピング処理を簡単にするために同じ名前が付けられています。
 
 1. 次の強調表示されたコードを `Startup.ConfigureServices` に追加します。
 
@@ -605,7 +606,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    上のコードでは以下の操作が行われます。
 
-   * *appsettings.json* ファイルの `BookstoreDatabaseSettings` セクションがバインドされている構成インスタンスは、Dependency Injection (DI) コンテナーに登録されています。 たとえば、`BookstoreDatabaseSettings` オブジェクトの `ConnectionString` プロパティには、*appsettings.json* の `BookstoreDatabaseSettings:ConnectionString` プロパティが設定されています。
+   * *appsettings.json* ファイルの `BookstoreDatabaseSettings` セクションがバインドされている構成インスタンスは、Dependency Injection (DI) コンテナーに登録されています。 たとえば、`BookstoreDatabaseSettings` オブジェクトの `ConnectionString` プロパティには、 *appsettings.json* の `BookstoreDatabaseSettings:ConnectionString` プロパティが設定されています。
    * `IBookstoreDatabaseSettings` インターフェイスは、シングルトン [サービス有効期間](xref:fundamentals/dependency-injection#service-lifetimes)で DI に登録されています。 挿入されると、インターフェイス インスタンスは `BookstoreDatabaseSettings` オブジェクトに解決されます。
 
 1. 次のコードを *Startup.cs* の先頭に追加して、`BookstoreDatabaseSettings` と `IBookstoreDatabaseSettings` の参照を解決します。
@@ -619,7 +620,7 @@ Windows を使用する場合、MongoDB は既定では *C:\\Program Files\\Mong
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   前述のコードでは、`IBookstoreDatabaseSettings` インスタンスがコンストラクターの挿入によって DI から取得されます。 この手法で、「[構成モデルを追加する](#add-a-configuration-model)」セクションで追加した *appsettings.json* 構成値にアクセスできます。
+   前述のコードでは、`IBookstoreDatabaseSettings` インスタンスがコンストラクターの挿入によって DI から取得されます。 この手法で、「 [構成モデルを追加する](#add-a-configuration-model)」セクションで追加した *appsettings.json* 構成値にアクセスできます。
 
 1. 次の強調表示されたコードを `Startup.ConfigureServices` に追加します。
 

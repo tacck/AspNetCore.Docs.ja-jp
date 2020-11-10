@@ -5,8 +5,8 @@ description: InputFile コンポーネントを使用して Blazor 内のファ�
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/29/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,13 +17,14 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
+ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: 06d1464cb731a8008362fc911f463e4ff8a37b6b
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606663"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056128"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core Blazor ファイルのアップロード
 
@@ -44,8 +45,9 @@ ms.locfileid: "91606663"
 
 ユーザーが選択したファイルからデータを読み取るには、次のようにします。
 
-* ファイルで `OpenReadStream` を呼び出し、返されるストリームから読み取ります。 詳細については、「[ファイル ストリーム](#file-streams)」セクションを参照してください。
-* `ReadAsync` を使用してください。 `ReadAsync` では既定で、サイズが 524,288 KB (512 KB) 未満のファイルのみ、読み取りが許可されます。 このような制限は、開発者が誤って大きいファイルをメモリに読み取ってしまうことを防ぐために存在します。 大きいファイルをサポートする必要がある場合は、予想される最大ファイル サイズについて、妥当なおおよその数値を指定します。 受信ファイル ストリームを直接メモリに読み取ることは避けてください。 たとえば、ファイル バイトを <xref:System.IO.MemoryStream> にコピーしたり、バイト配列として読み取ることは避けてください。 このような方法は、特に Blazor Server で、パフォーマンスおよびセキュリティの問題を引き起こす可能性があります。 代わりに、ファイル バイトを外部ストア (BLOB、またはディスク上のファイルなど) にコピーすることを検討してください。
+* ファイルで `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` を呼び出し、返されるストリームから読み取ります。 詳細については、「[ファイル ストリーム](#file-streams)」セクションを参照してください。
+* `OpenReadStream` によって返される <xref:System.IO.Stream> には、読み取られる `Stream` の最大サイズがバイト単位で適用されます。 既定では、それ以降の読み取りで例外が発生する前に、サイズが 524,288 KB (512 KB) より小さいファイルのみを読み取ることができます。 このような制限は、開発者が誤って大きいファイルをメモリに読み取ってしまうことを防ぐために存在します。 `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` の `maxAllowedSize` パラメーターを使用すると、必要に応じてより大きなサイズを指定できます。
+* 受信ファイル ストリームを直接メモリに読み取ることは避けてください。 たとえば、ファイル バイトを <xref:System.IO.MemoryStream> にコピーしたり、バイト配列として読み取ることは避けてください。 このような方法は、特に Blazor Server で、パフォーマンスおよびセキュリティの問題を引き起こす可能性があります。 代わりに、ファイル バイトを外部ストア (BLOB、またはディスク上のファイルなど) にコピーすることを検討してください。
 
 イメージ ファイルを受信するコンポーネントは、ファイルの便利な `RequestImageFileAsync` メソッドを呼び出して、イメージがアプリにストリームされる前に、ブラウザーの JavaScript ランタイム内のイメージ データのサイズを変更できます。
 

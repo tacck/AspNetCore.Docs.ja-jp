@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/28/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: fa4e7489920338344b78874690e64d4080b5a719
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: 45e2a1a5e6a9f00294147db769454b78c5b866e5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805584"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059937"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>gRPC から JSON Web API を作成する
 
@@ -38,7 +39,7 @@ ms.locfileid: "91805584"
 
 gRPC は、アプリ間で通信するための最新の方法です。 gRPC は、HTTP/2、ストリーミング、Protobuf、メッセージ コントラクトを使用して、高パフォーマンスのリアルタイム サービスを作成します。
 
-gRPC の制限事項の 1 つが、すべてのプラットフォームで使用できるわけではないということです。 ブラウザーでは HTTP/2 が完全にサポートされていないため、REST と JSON が、ブラウザー アプリにデータを取り込む主な方法になります。 gRPC にはベネフィットがありますが、REST と JSON にも最新のアプリで重要な役割があります。 gRPC ***および*** JSON Web API を構築すると、アプリ開発に不要なオーバーヘッドが発生します。
+gRPC の制限事項の 1 つが、すべてのプラットフォームで使用できるわけではないということです。 ブラウザーでは HTTP/2 が完全にサポートされていないため、REST と JSON が、ブラウザー アプリにデータを取り込む主な方法になります。 gRPC にはベネフィットがありますが、REST と JSON にも最新のアプリで重要な役割があります。 gRPC "* **および** _" JSON Web API を構築すると、アプリ開発に不要なオーバーヘッドが発生します。
 
 このドキュメントでは、gRPC サービスを使用して JSON Web API を作成する方法について説明します。
 
@@ -46,7 +47,7 @@ gRPC の制限事項の 1 つが、すべてのプラットフォームで使用
 
 gRPC HTTP API は、gRPC サービス用の RESTful JSON API を作成する ASP.NET Core 向けの試験段階の拡張機能です。 構成が完了すると、gRPC HTTP API により、アプリが、使い慣れた HTTP の次のような概念を使用して gRPC サービスを呼び出せるようになります。
 
-* HTTP 動詞
+_ HTTP 動詞
 * URL パラメーター バインディング
 * JSON の要求/応答
 
