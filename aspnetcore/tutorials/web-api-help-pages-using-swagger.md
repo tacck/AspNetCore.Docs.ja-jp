@@ -1,48 +1,56 @@
 ---
-title: Swagger / OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ
+title: Swagger/OpenAPI を使用する ASP.NET Core Web API のドキュメント
 author: RicoSuter
 description: このチュートリアルでは、Swagger を追加して、Web API アプリのドキュメントとヘルプ ページを生成する手順を説明します。
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/29/2020
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: c40aede044c78122a9057613f0eece9acf84df7b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
+ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633995"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93062455"
 ---
-# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a><span data-ttu-id="aa45a-103">Swagger/OpenAPI を使用する ASP.NET Core Web API のヘルプ ページ</span><span class="sxs-lookup"><span data-stu-id="aa45a-103">ASP.NET Core web API help pages with Swagger / OpenAPI</span></span>
+# <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a><span data-ttu-id="20645-103">Swagger/OpenAPI を使用する ASP.NET Core Web API のドキュメント</span><span class="sxs-lookup"><span data-stu-id="20645-103">ASP.NET Core web API documentation with Swagger / OpenAPI</span></span>
 
-<span data-ttu-id="aa45a-104">作成者: [Christoph Nienaber](https://twitter.com/zuckerthoben) および [Rico Suter](https://blog.rsuter.com/)</span><span class="sxs-lookup"><span data-stu-id="aa45a-104">By [Christoph Nienaber](https://twitter.com/zuckerthoben) and [Rico Suter](https://blog.rsuter.com/)</span></span>
+<span data-ttu-id="20645-104">作成者: [Christoph Nienaber](https://twitter.com/zuckerthoben) および [Rico Suter](https://blog.rsuter.com/)</span><span class="sxs-lookup"><span data-stu-id="20645-104">By [Christoph Nienaber](https://twitter.com/zuckerthoben) and [Rico Suter](https://blog.rsuter.com/)</span></span>
 
-<span data-ttu-id="aa45a-105">Web API を使用する場合、さまざまなメソッドを理解することは開発者にとって困難な場合があります。</span><span class="sxs-lookup"><span data-stu-id="aa45a-105">When consuming a web API, understanding its various methods can be challenging for a developer.</span></span> <span data-ttu-id="aa45a-106">[Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org/) とも呼ばれる) では、Web API の役立つドキュメントとヘルプ ページの生成に関する問題が解決されます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-106">[Swagger](https://swagger.io/), also known as [OpenAPI](https://www.openapis.org/), solves the problem of generating useful documentation and help pages for web APIs.</span></span> <span data-ttu-id="aa45a-107">Swagger では、対話型のドキュメント、クライアント SDK の生成、API の発見可能性などの利点を提供します。</span><span class="sxs-lookup"><span data-stu-id="aa45a-107">It provides benefits such as interactive documentation, client SDK generation, and API discoverability.</span></span>
+<span data-ttu-id="20645-105">Swagger (OpenAPI) は REST API を記述するための仕様であり、言語に依存しません。</span><span class="sxs-lookup"><span data-stu-id="20645-105">Swagger (OpenAPI) is a language-agnostic specification for describing REST APIs.</span></span> <span data-ttu-id="20645-106">これにより、コンピューターと人間の両方が、ソース コードに直接アクセスせずに REST API の機能を理解できるようになります。</span><span class="sxs-lookup"><span data-stu-id="20645-106">It allows both computers and humans to understand the capabilities of a REST API without direct access to the source code.</span></span> <span data-ttu-id="20645-107">主な目的は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="20645-107">Its main goals are to:</span></span>
 
-<span data-ttu-id="aa45a-108">この記事では、[Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) と [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger の実装を示します。</span><span class="sxs-lookup"><span data-stu-id="aa45a-108">In this article, the [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) and [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger implementations are showcased:</span></span>
+* <span data-ttu-id="20645-108">関連のないサービスに接続するために必要な作業量を最小限にします。</span><span class="sxs-lookup"><span data-stu-id="20645-108">Minimize the amount of work needed to connect decoupled services.</span></span>
+* <span data-ttu-id="20645-109">正確にサービスをドキュメント化するために必要な時間を減らします。</span><span class="sxs-lookup"><span data-stu-id="20645-109">Reduce the amount of time needed to accurately document a service.</span></span>
 
-* <span data-ttu-id="aa45a-109">**Swashbuckle.AspNetCore** は、ASP.NET Core Web API の Swagger ドキュメントを生成するためのオープン ソース プロジェクトです。</span><span class="sxs-lookup"><span data-stu-id="aa45a-109">**Swashbuckle.AspNetCore** is an open source project for generating Swagger documents for ASP.NET Core Web APIs.</span></span>
+<span data-ttu-id="20645-110">.NET 用の 2 つの主要な OpenAPI の実装は、[Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) と [NSwag](https://github.com/RicoSuter/NSwag) です。次を参照してください。</span><span class="sxs-lookup"><span data-stu-id="20645-110">The two main OpenAPI implementations for .NET are [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) and [NSwag](https://github.com/RicoSuter/NSwag), see:</span></span>
 
-* <span data-ttu-id="aa45a-110">**NSwag** は、Swagger ドキュメントを生成し、[Swagger UI](https://swagger.io/swagger-ui/) や [ReDoc](https://github.com/Rebilly/ReDoc) を ASP.NET Core Web API に統合するためのもう 1 つのオープン ソース プロジェクトです。</span><span class="sxs-lookup"><span data-stu-id="aa45a-110">**NSwag** is another open source project for generating Swagger documents and integrating [Swagger UI](https://swagger.io/swagger-ui/) or [ReDoc](https://github.com/Rebilly/ReDoc) into ASP.NET Core web APIs.</span></span> <span data-ttu-id="aa45a-111">また、NSwag によって、API 用に C# と TypeScript のクライアント コードを生成するための手段が提供されます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-111">Additionally, NSwag offers approaches to generate C# and TypeScript client code for your API.</span></span>
+* [<span data-ttu-id="20645-111">Swashbuckle の概要</span><span class="sxs-lookup"><span data-stu-id="20645-111">Getting Started with Swashbuckle</span></span>](xref:tutorials/get-started-with-swashbuckle)
+* [<span data-ttu-id="20645-112">NSwag の概要</span><span class="sxs-lookup"><span data-stu-id="20645-112">Getting Started with NSwag</span></span>](xref:tutorials/get-started-with-nswag)
 
-## <a name="what-is-swagger--openapi"></a><span data-ttu-id="aa45a-112">Swagger / OpenAPI とは</span><span class="sxs-lookup"><span data-stu-id="aa45a-112">What is Swagger / OpenAPI?</span></span>
+## <a name="openapi-vs-swagger"></a><span data-ttu-id="20645-113">OpenApi と Swagger</span><span class="sxs-lookup"><span data-stu-id="20645-113">OpenApi vs. Swagger</span></span>
 
-<span data-ttu-id="aa45a-113">Swagger は、[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API を記述するために、言語に関係なく使える仕様です。</span><span class="sxs-lookup"><span data-stu-id="aa45a-113">Swagger is a language-agnostic specification for describing [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) APIs.</span></span> <span data-ttu-id="aa45a-114">Swagger プロジェクトは、現在、OpenAPI と呼ばれている [OpenAPI イニシアティブ](https://www.openapis.org/)に寄贈されました。</span><span class="sxs-lookup"><span data-stu-id="aa45a-114">The Swagger project was donated to the [OpenAPI Initiative](https://www.openapis.org/), where it's now referred to as OpenAPI.</span></span> <span data-ttu-id="aa45a-115">どちらの名前も同様に使用できますが、OpenAPI の使用をお勧めします。</span><span class="sxs-lookup"><span data-stu-id="aa45a-115">Both names are used interchangeably; however, OpenAPI is preferred.</span></span> <span data-ttu-id="aa45a-116">Open API では、実装 (ソース コード、ネットワーク アクセス、ドキュメント) に直接アクセスすることなく、コンピューターと人間の両方がサービスの機能を理解できます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-116">It allows both computers and humans to understand the capabilities of a service without any direct access to the implementation (source code, network access, documentation).</span></span> <span data-ttu-id="aa45a-117">関連付けられていないサービスに接続するために必要な作業量を最小限にすることが 1 つの目標です。</span><span class="sxs-lookup"><span data-stu-id="aa45a-117">One goal is to minimize the amount of work needed to connect disassociated services.</span></span> <span data-ttu-id="aa45a-118">もう 1 つの目標は、正確にサービスをドキュメント化するために必要な時間を減らすことです。</span><span class="sxs-lookup"><span data-stu-id="aa45a-118">Another goal is to reduce the amount of time needed to accurately document a service.</span></span>
+<span data-ttu-id="20645-114">Swagger プロジェクトは 2015 年に OpenAPI Initiative に寄贈され、それ以降は OpenAPI と呼ばれています。</span><span class="sxs-lookup"><span data-stu-id="20645-114">The Swagger project was donated to the OpenAPI Initiative in 2015 and has since been referred to as OpenAPI.</span></span> <span data-ttu-id="20645-115">どちらの名前も同じように使用されます。</span><span class="sxs-lookup"><span data-stu-id="20645-115">Both names are used interchangeably.</span></span> <span data-ttu-id="20645-116">ただし、"OpenAPI" は仕様を指します。</span><span class="sxs-lookup"><span data-stu-id="20645-116">However, "OpenAPI" refers to the specification.</span></span> <span data-ttu-id="20645-117">"Swagger" は、オープンソース製品および OpenAPI Specification と協力している SmartBear による商用製品のファミリを指します。</span><span class="sxs-lookup"><span data-stu-id="20645-117">"Swagger" refers to the family of open-source and commercial products from SmartBear that work with the OpenAPI Specification.</span></span> <span data-ttu-id="20645-118">[OpenAPIGenerator](https://github.com/OpenAPITools/openapi-generator) などの後続のオープンソース製品も Swagger ファミリ名に該当しますが、SmartBear からはリリースされていません。</span><span class="sxs-lookup"><span data-stu-id="20645-118">Subsequent open-source products, such as [OpenAPIGenerator](https://github.com/OpenAPITools/openapi-generator), also fall under the Swagger family name, despite not being released by SmartBear.</span></span>
 
-## <a name="openapi-specification-openapijson"></a><span data-ttu-id="aa45a-119">OpenAPI の仕様 (openapi.json)</span><span class="sxs-lookup"><span data-stu-id="aa45a-119">OpenAPI specification (openapi.json)</span></span>
+<span data-ttu-id="20645-119">要約すると、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="20645-119">In short:</span></span>
 
-<span data-ttu-id="aa45a-120">OpenAPI フローの基本は、OpenAPI の仕様です。既定では、ドキュメントの名前は *openapi.json* です。</span><span class="sxs-lookup"><span data-stu-id="aa45a-120">The core to the OpenAPI flow is the specification&mdash;by default, a document named *openapi.json*.</span></span> <span data-ttu-id="aa45a-121">それは、サービスに基づいて OpenAPI ツール チェーン (またはサード パーティによるその実装) によって生成されます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-121">It's generated by the OpenAPI tool chain (or third-party implementations of it) based on your service.</span></span> <span data-ttu-id="aa45a-122">ここでは API の機能と HTTP を使用してアクセスする方法について説明します。</span><span class="sxs-lookup"><span data-stu-id="aa45a-122">It describes the capabilities of your API and how to access it with HTTP.</span></span> <span data-ttu-id="aa45a-123">これにより Swagger UI が駆動され、検出とクライアント コードの生成が行えるように、ツール チェーンによって使用されます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-123">It drives the Swagger UI and is used by the tool chain to enable discovery and client code generation.</span></span> <span data-ttu-id="aa45a-124">簡略化された OpenAPI の仕様の例は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="aa45a-124">Here's an example of an OpenAPI specification, reduced for brevity:</span></span>
+* <span data-ttu-id="20645-120">OpenAPI は仕様です。</span><span class="sxs-lookup"><span data-stu-id="20645-120">OpenAPI is a specification.</span></span>
+* <span data-ttu-id="20645-121">Swagger は、OpenAPI 仕様を使用するツールです。</span><span class="sxs-lookup"><span data-stu-id="20645-121">Swagger is tooling that uses the OpenAPI specification.</span></span> <span data-ttu-id="20645-122">たとえば、OpenAPIGenerator や SwaggerUI などです。</span><span class="sxs-lookup"><span data-stu-id="20645-122">For example, OpenAPIGenerator and SwaggerUI.</span></span>
+
+## <a name="openapi-specification-openapijson"></a><span data-ttu-id="20645-123">OpenAPI の仕様 (openapi.json)</span><span class="sxs-lookup"><span data-stu-id="20645-123">OpenAPI specification (openapi.json)</span></span>
+
+<span data-ttu-id="20645-124">OpenAPI の仕様は、API の機能について説明されているドキュメントです。</span><span class="sxs-lookup"><span data-stu-id="20645-124">The OpenAPI specification is a document that describes the capabilities of your API.</span></span> <span data-ttu-id="20645-125">そのドキュメントは、コントローラーとモデル内の XML および属性の注釈に基づいています。</span><span class="sxs-lookup"><span data-stu-id="20645-125">The document is based on the XML and attribute annotations within the controllers and models.</span></span> <span data-ttu-id="20645-126">それは OpenAPI フローの中核部分であり、SwaggerUI などのツールを駆動するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="20645-126">It's the core part of the OpenAPI flow and is used to drive tooling such as SwaggerUI.</span></span> <span data-ttu-id="20645-127">既定では、 *openapi.json* という名前になっています。</span><span class="sxs-lookup"><span data-stu-id="20645-127">By default, it's named *openapi.json*.</span></span> <span data-ttu-id="20645-128">簡略化された OpenAPI の仕様の例は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="20645-128">Here's an example of an OpenAPI specification, reduced for brevity:</span></span>
 
 ```json
 {
@@ -130,20 +138,20 @@ ms.locfileid: "88633995"
 }
 ```
 
-## <a name="swagger-ui"></a><span data-ttu-id="aa45a-125">Swagger UI</span><span class="sxs-lookup"><span data-stu-id="aa45a-125">Swagger UI</span></span>
+## <a name="swagger-ui"></a><span data-ttu-id="20645-129">Swagger UI</span><span class="sxs-lookup"><span data-stu-id="20645-129">Swagger UI</span></span>
 
-<span data-ttu-id="aa45a-126">[Swagger UI](https://swagger.io/swagger-ui/) には、生成された OpenAPI の仕様を使用してサービスに関する情報が提供される Web ベースの UI が用意されています。</span><span class="sxs-lookup"><span data-stu-id="aa45a-126">[Swagger UI](https://swagger.io/swagger-ui/) offers a web-based UI that provides information about the service, using the generated OpenAPI specification.</span></span> <span data-ttu-id="aa45a-127">ミドルウェアの登録呼び出しを使用して ASP.NET Core アプリでホストすることができるように、Swashbuckle と NSwag の両方に埋め込みバージョンの Swagger UI が含まれます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-127">Both Swashbuckle and NSwag include an embedded version of Swagger UI, so that it can be hosted in your ASP.NET Core app using a middleware registration call.</span></span> <span data-ttu-id="aa45a-128">Web UI は次のようになります。</span><span class="sxs-lookup"><span data-stu-id="aa45a-128">The web UI looks like this:</span></span>
+<span data-ttu-id="20645-130">[Swagger UI](https://swagger.io/swagger-ui/) には、生成された OpenAPI の仕様を使用してサービスに関する情報が提供される Web ベースの UI が用意されています。</span><span class="sxs-lookup"><span data-stu-id="20645-130">[Swagger UI](https://swagger.io/swagger-ui/) offers a web-based UI that provides information about the service, using the generated OpenAPI specification.</span></span> <span data-ttu-id="20645-131">ミドルウェアの登録呼び出しを使用して ASP.NET Core アプリでホストすることができるように、Swashbuckle と NSwag の両方に埋め込みバージョンの Swagger UI が含まれます。</span><span class="sxs-lookup"><span data-stu-id="20645-131">Both Swashbuckle and NSwag include an embedded version of Swagger UI, so that it can be hosted in your ASP.NET Core app using a middleware registration call.</span></span> <span data-ttu-id="20645-132">Web UI は次のようになります。</span><span class="sxs-lookup"><span data-stu-id="20645-132">The web UI looks like this:</span></span>
 
 ![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-<span data-ttu-id="aa45a-130">コントローラー内の各パブリック アクション メソッドを UI からテストすることができます。</span><span class="sxs-lookup"><span data-stu-id="aa45a-130">Each public action method in your controllers can be tested from the UI.</span></span> <span data-ttu-id="aa45a-131">メソッドの名前をクリックし、セクションを展開します。</span><span class="sxs-lookup"><span data-stu-id="aa45a-131">Click a method name to expand the section.</span></span> <span data-ttu-id="aa45a-132">任意の必要なパラメーターを追加し、 **[Try it out!]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="aa45a-132">Add any necessary parameters, and click **Try it out!**.</span></span>
+<span data-ttu-id="20645-134">コントローラー内の各パブリック アクション メソッドを UI からテストすることができます。</span><span class="sxs-lookup"><span data-stu-id="20645-134">Each public action method in your controllers can be tested from the UI.</span></span> <span data-ttu-id="20645-135">メソッドの名前を選択してセクションを展開します。</span><span class="sxs-lookup"><span data-stu-id="20645-135">Select a method name to expand the section.</span></span> <span data-ttu-id="20645-136">必要なパラメーターを追加し、 **[Try it out!]\(試してみる\)** を選択します。</span><span class="sxs-lookup"><span data-stu-id="20645-136">Add any necessary parameters, and select **Try it out!**.</span></span>
 
 ![Swagger GET テストの例](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
-> <span data-ttu-id="aa45a-134">スクリーンショットに使用される Swagger UI バージョンは、バージョン 2 です。</span><span class="sxs-lookup"><span data-stu-id="aa45a-134">The Swagger UI version used for the screenshots is version 2.</span></span> <span data-ttu-id="aa45a-135">バージョン 3 の例については、[Petstore の例](https://petstore.swagger.io/)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="aa45a-135">For a version 3 example, see [Petstore example](https://petstore.swagger.io/).</span></span>
+> <span data-ttu-id="20645-138">スクリーンショットに使用される Swagger UI バージョンは、バージョン 2 です。</span><span class="sxs-lookup"><span data-stu-id="20645-138">The Swagger UI version used for the screenshots is version 2.</span></span> <span data-ttu-id="20645-139">バージョン 3 の例については、[Petstore の例](https://petstore.swagger.io/)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="20645-139">For a version 3 example, see [Petstore example](https://petstore.swagger.io/).</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="aa45a-136">次の手順</span><span class="sxs-lookup"><span data-stu-id="aa45a-136">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="20645-140">次の手順</span><span class="sxs-lookup"><span data-stu-id="20645-140">Next steps</span></span>
 
-* [<span data-ttu-id="aa45a-137">Swashbuckle の概要</span><span class="sxs-lookup"><span data-stu-id="aa45a-137">Get started with Swashbuckle</span></span>](xref:tutorials/get-started-with-swashbuckle)
-* [<span data-ttu-id="aa45a-138">NSWag の概要</span><span class="sxs-lookup"><span data-stu-id="aa45a-138">Get started with NSwag</span></span>](xref:tutorials/get-started-with-nswag)
+* [<span data-ttu-id="20645-141">Swashbuckle の概要</span><span class="sxs-lookup"><span data-stu-id="20645-141">Get started with Swashbuckle</span></span>](xref:tutorials/get-started-with-swashbuckle)
+* [<span data-ttu-id="20645-142">NSWag の概要</span><span class="sxs-lookup"><span data-stu-id="20645-142">Get started with NSwag</span></span>](xref:tutorials/get-started-with-nswag)

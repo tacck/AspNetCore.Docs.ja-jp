@@ -7,56 +7,57 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: 2e1041ed4cce3c3919d75ff47e2bc24fc446e9c3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a6ef5a547e6ccba6771cdf892a9636f83d6796b1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627612"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053736"
 ---
-# <a name="localization-extensibility"></a><span data-ttu-id="be401-103">ローカライズの拡張性</span><span class="sxs-lookup"><span data-stu-id="be401-103">Localization Extensibility</span></span>
+# <a name="localization-extensibility"></a><span data-ttu-id="85f33-103">ローカライズの拡張性</span><span class="sxs-lookup"><span data-stu-id="85f33-103">Localization Extensibility</span></span>
 
-<span data-ttu-id="be401-104">作成者: [Hisham Bin Ateya](https://github.com/hishamco)</span><span class="sxs-lookup"><span data-stu-id="be401-104">By [Hisham Bin Ateya](https://github.com/hishamco)</span></span>
+<span data-ttu-id="85f33-104">作成者: [Hisham Bin Ateya](https://github.com/hishamco)</span><span class="sxs-lookup"><span data-stu-id="85f33-104">By [Hisham Bin Ateya](https://github.com/hishamco)</span></span>
 
-<span data-ttu-id="be401-105">この記事の内容は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="be401-105">This article:</span></span>
+<span data-ttu-id="85f33-105">この記事の内容は次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="85f33-105">This article:</span></span>
 
-* <span data-ttu-id="be401-106">ローカライズ API の拡張性ポイントを挙げます。</span><span class="sxs-lookup"><span data-stu-id="be401-106">Lists the extensibility points on the localization APIs.</span></span>
-* <span data-ttu-id="be401-107">ASP.NET Core アプリのローカライズを拡張する手順を紹介します。</span><span class="sxs-lookup"><span data-stu-id="be401-107">Provides instructions on how to extend ASP.NET Core app localization.</span></span>
+* <span data-ttu-id="85f33-106">ローカライズ API の拡張性ポイントを挙げます。</span><span class="sxs-lookup"><span data-stu-id="85f33-106">Lists the extensibility points on the localization APIs.</span></span>
+* <span data-ttu-id="85f33-107">ASP.NET Core アプリのローカライズを拡張する手順を紹介します。</span><span class="sxs-lookup"><span data-stu-id="85f33-107">Provides instructions on how to extend ASP.NET Core app localization.</span></span>
 
-## <a name="extensible-points-in-localization-apis"></a><span data-ttu-id="be401-108">ローカライズ API の拡張性ポイント</span><span class="sxs-lookup"><span data-stu-id="be401-108">Extensible Points in Localization APIs</span></span>
+## <a name="extensible-points-in-localization-apis"></a><span data-ttu-id="85f33-108">ローカライズ API の拡張性ポイント</span><span class="sxs-lookup"><span data-stu-id="85f33-108">Extensible Points in Localization APIs</span></span>
 
-<span data-ttu-id="be401-109">ASP.NET Core ローカライズ API は拡張性を持つように作られています。</span><span class="sxs-lookup"><span data-stu-id="be401-109">ASP.NET Core localization APIs are built to be extensible.</span></span> <span data-ttu-id="be401-110">拡張性により、開発者はそのニーズに合わせてローカライズをカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="be401-110">Extensibility allows developers to customize the localization according to their needs.</span></span> <span data-ttu-id="be401-111">たとえば、[OrchardCore](https://github.com/orchardCMS/OrchardCore/) には `POStringLocalizer` があります。</span><span class="sxs-lookup"><span data-stu-id="be401-111">For instance, [OrchardCore](https://github.com/orchardCMS/OrchardCore/) has a `POStringLocalizer`.</span></span> <span data-ttu-id="be401-112">`POStringLocalizer` では、[Portable Object ローカライズ](xref:fundamentals/portable-object-localization)で `PO` ファイルを使用し、ローカライズ リソースを格納することが詳しく説明されます。</span><span class="sxs-lookup"><span data-stu-id="be401-112">`POStringLocalizer` describes in detail using [Portable Object localization](xref:fundamentals/portable-object-localization) to use `PO` files to store localization resources.</span></span>
+<span data-ttu-id="85f33-109">ASP.NET Core ローカライズ API は拡張性を持つように作られています。</span><span class="sxs-lookup"><span data-stu-id="85f33-109">ASP.NET Core localization APIs are built to be extensible.</span></span> <span data-ttu-id="85f33-110">拡張性により、開発者はそのニーズに合わせてローカライズをカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="85f33-110">Extensibility allows developers to customize the localization according to their needs.</span></span> <span data-ttu-id="85f33-111">たとえば、[OrchardCore](https://github.com/orchardCMS/OrchardCore/) には `POStringLocalizer` があります。</span><span class="sxs-lookup"><span data-stu-id="85f33-111">For instance, [OrchardCore](https://github.com/orchardCMS/OrchardCore/) has a `POStringLocalizer`.</span></span> <span data-ttu-id="85f33-112">`POStringLocalizer` では、[Portable Object ローカライズ](xref:fundamentals/portable-object-localization)で `PO` ファイルを使用し、ローカライズ リソースを格納することが詳しく説明されます。</span><span class="sxs-lookup"><span data-stu-id="85f33-112">`POStringLocalizer` describes in detail using [Portable Object localization](xref:fundamentals/portable-object-localization) to use `PO` files to store localization resources.</span></span>
 
-<span data-ttu-id="be401-113">この記事では、ローカライズ API によって与えられる 2 つの主要な拡張性ポイントを挙げます。</span><span class="sxs-lookup"><span data-stu-id="be401-113">This article lists the two main extensibility points that localization APIs provide:</span></span> 
+<span data-ttu-id="85f33-113">この記事では、ローカライズ API によって与えられる 2 つの主要な拡張性ポイントを挙げます。</span><span class="sxs-lookup"><span data-stu-id="85f33-113">This article lists the two main extensibility points that localization APIs provide:</span></span> 
 
 * <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer>
 
-## <a name="localization-culture-providers"></a><span data-ttu-id="be401-114">ローカライズ カルチャ プロバイダー</span><span class="sxs-lookup"><span data-stu-id="be401-114">Localization Culture Providers</span></span>
+## <a name="localization-culture-providers"></a><span data-ttu-id="85f33-114">ローカライズ カルチャ プロバイダー</span><span class="sxs-lookup"><span data-stu-id="85f33-114">Localization Culture Providers</span></span>
 
-<span data-ttu-id="be401-115">ASP.NET Core ローカライズ API には、実行中の要求の現在のカルチャを決定できる既定のプロバイダーが 4 つあります。</span><span class="sxs-lookup"><span data-stu-id="be401-115">ASP.NET Core localization APIs have four default providers that can determine the current culture of an executing request:</span></span>
+<span data-ttu-id="85f33-115">ASP.NET Core ローカライズ API には、実行中の要求の現在のカルチャを決定できる既定のプロバイダーが 4 つあります。</span><span class="sxs-lookup"><span data-stu-id="85f33-115">ASP.NET Core localization APIs have four default providers that can determine the current culture of an executing request:</span></span>
 
 * <xref:Microsoft.AspNetCore.Localization.QueryStringRequestCultureProvider>
-* <xref:Microsoft.AspNetCore.Localization.CookieRequestCultureProvider>
+* <xref:Microsoft.AspNetCore.Localization.:::no-loc(Cookie):::RequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.AcceptLanguageHeaderRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>
 
-<span data-ttu-id="be401-116">前のプロバイダーの詳しい説明は、[ローカライズ ミドルウェア](xref:fundamentals/localization) ドキュメントにあります。</span><span class="sxs-lookup"><span data-stu-id="be401-116">The preceding providers are described in detail in the [Localization Middleware](xref:fundamentals/localization) documentation.</span></span> <span data-ttu-id="be401-117">既定のプロバイダーでニーズが満たされない場合、次のいずれかの手法でカスタム プロバイダーを構築します。</span><span class="sxs-lookup"><span data-stu-id="be401-117">If the default providers don't meet your needs, build a custom provider using one of the following approaches:</span></span>
+<span data-ttu-id="85f33-116">前のプロバイダーの詳しい説明は、[ローカライズ ミドルウェア](xref:fundamentals/localization) ドキュメントにあります。</span><span class="sxs-lookup"><span data-stu-id="85f33-116">The preceding providers are described in detail in the [Localization Middleware](xref:fundamentals/localization) documentation.</span></span> <span data-ttu-id="85f33-117">既定のプロバイダーでニーズが満たされない場合、次のいずれかの手法でカスタム プロバイダーを構築します。</span><span class="sxs-lookup"><span data-stu-id="85f33-117">If the default providers don't meet your needs, build a custom provider using one of the following approaches:</span></span>
 
-### <a name="use-customrequestcultureprovider"></a><span data-ttu-id="be401-118">CustomRequestCultureProvider を使用する</span><span class="sxs-lookup"><span data-stu-id="be401-118">Use CustomRequestCultureProvider</span></span>
+### <a name="use-customrequestcultureprovider"></a><span data-ttu-id="85f33-118">CustomRequestCultureProvider を使用する</span><span class="sxs-lookup"><span data-stu-id="85f33-118">Use CustomRequestCultureProvider</span></span>
 
-<span data-ttu-id="be401-119"><xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider> からは、単純な委任を利用して現在のローカライズ カルチャを決定するカスタム <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> が与えられます。</span><span class="sxs-lookup"><span data-stu-id="be401-119"><xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider> provides a custom <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> that uses a simple delegate to determine the current localization culture:</span></span>
+<span data-ttu-id="85f33-119"><xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider> からは、単純な委任を利用して現在のローカライズ カルチャを決定するカスタム <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> が与えられます。</span><span class="sxs-lookup"><span data-stu-id="85f33-119"><xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider> provides a custom <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> that uses a simple delegate to determine the current localization culture:</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -100,11 +101,11 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 ::: moniker-end
 
-### <a name="use-a-new-implemetation-of-requestcultureprovider"></a><span data-ttu-id="be401-120">RequestCultureProvider の新しい実装を使用する</span><span class="sxs-lookup"><span data-stu-id="be401-120">Use a new implemetation of RequestCultureProvider</span></span>
+### <a name="use-a-new-implemetation-of-requestcultureprovider"></a><span data-ttu-id="85f33-120">RequestCultureProvider の新しい実装を使用する</span><span class="sxs-lookup"><span data-stu-id="85f33-120">Use a new implemetation of RequestCultureProvider</span></span>
 
-<span data-ttu-id="be401-121">カスタム ソースから要求カルチャ情報を決定する <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> の新しい実装を作成できます。</span><span class="sxs-lookup"><span data-stu-id="be401-121">A new implementation of <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> can be created that determines the request culture information from a custom source.</span></span> <span data-ttu-id="be401-122">たとえば、構成ファイルまたはデータベースをカスタム ソースにすることができます。</span><span class="sxs-lookup"><span data-stu-id="be401-122">For example, the custom source can be a configuration file or database.</span></span>
+<span data-ttu-id="85f33-121">カスタム ソースから要求カルチャ情報を決定する <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> の新しい実装を作成できます。</span><span class="sxs-lookup"><span data-stu-id="85f33-121">A new implementation of <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> can be created that determines the request culture information from a custom source.</span></span> <span data-ttu-id="85f33-122">たとえば、構成ファイルまたはデータベースをカスタム ソースにすることができます。</span><span class="sxs-lookup"><span data-stu-id="85f33-122">For example, the custom source can be a configuration file or database.</span></span>
 
-<span data-ttu-id="be401-123">次の例では、`AppSettingsRequestCultureProvider` を確認できます。これによって <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> が拡張され、*appsettings.json* からの要求カルチャ情報が決定します。</span><span class="sxs-lookup"><span data-stu-id="be401-123">The following example shows `AppSettingsRequestCultureProvider`, which extends the <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> to determine the request culture information from *appsettings.json*:</span></span>
+<span data-ttu-id="85f33-123">次の例では、`AppSettingsRequestCultureProvider` を確認できます。これによって <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> が拡張され、 *:::no-loc(appsettings.json):::* からの要求カルチャ情報が決定されます。</span><span class="sxs-lookup"><span data-stu-id="85f33-123">The following example shows `AppSettingsRequestCultureProvider`, which extends the <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> to determine the request culture information from *:::no-loc(appsettings.json):::* :</span></span>
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider
@@ -146,14 +147,14 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 }
 ```
 
-## <a name="localization-resources"></a><span data-ttu-id="be401-124">ローカライズ リソース</span><span class="sxs-lookup"><span data-stu-id="be401-124">Localization resources</span></span>
+## <a name="localization-resources"></a><span data-ttu-id="85f33-124">ローカライズ リソース</span><span class="sxs-lookup"><span data-stu-id="85f33-124">Localization resources</span></span>
 
-<span data-ttu-id="be401-125">ASP.NET Core ローカライズからは <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> が与えられます。</span><span class="sxs-lookup"><span data-stu-id="be401-125">ASP.NET Core localization provides <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>.</span></span> <span data-ttu-id="be401-126"><xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> は、`resx` を使用してローカライズ リソースを格納する <xref:Microsoft.Extensions.Localization.IStringLocalizer> の実装です。</span><span class="sxs-lookup"><span data-stu-id="be401-126"><xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> is an implementation of <xref:Microsoft.Extensions.Localization.IStringLocalizer> that is uses `resx` to store localization resources.</span></span>
+<span data-ttu-id="85f33-125">ASP.NET Core ローカライズからは <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> が与えられます。</span><span class="sxs-lookup"><span data-stu-id="85f33-125">ASP.NET Core localization provides <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>.</span></span> <span data-ttu-id="85f33-126"><xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> は、`resx` を使用してローカライズ リソースを格納する <xref:Microsoft.Extensions.Localization.IStringLocalizer> の実装です。</span><span class="sxs-lookup"><span data-stu-id="85f33-126"><xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> is an implementation of <xref:Microsoft.Extensions.Localization.IStringLocalizer> that is uses `resx` to store localization resources.</span></span>
 
-<span data-ttu-id="be401-127">`resx` ファイルの使用に限定されることはありません。</span><span class="sxs-lookup"><span data-stu-id="be401-127">You aren't limited to using `resx` files.</span></span> <span data-ttu-id="be401-128">`IStringLocalized` を実装することで、あらゆるデータ ソースを使用できます。</span><span class="sxs-lookup"><span data-stu-id="be401-128">By implementing `IStringLocalized`, any data source can be used.</span></span>
+<span data-ttu-id="85f33-127">`resx` ファイルの使用に限定されることはありません。</span><span class="sxs-lookup"><span data-stu-id="85f33-127">You aren't limited to using `resx` files.</span></span> <span data-ttu-id="85f33-128">`IStringLocalized` を実装することで、あらゆるデータ ソースを使用できます。</span><span class="sxs-lookup"><span data-stu-id="85f33-128">By implementing `IStringLocalized`, any data source can be used.</span></span>
 
-<span data-ttu-id="be401-129">次のサンプル プロジェクトでは <xref:Microsoft.Extensions.Localization.IStringLocalizer> が実装されます。</span><span class="sxs-lookup"><span data-stu-id="be401-129">The following example projects implement <xref:Microsoft.Extensions.Localization.IStringLocalizer>:</span></span> 
+<span data-ttu-id="85f33-129">次のサンプル プロジェクトでは <xref:Microsoft.Extensions.Localization.IStringLocalizer> が実装されます。</span><span class="sxs-lookup"><span data-stu-id="85f33-129">The following example projects implement <xref:Microsoft.Extensions.Localization.IStringLocalizer>:</span></span> 
 
-* [<span data-ttu-id="be401-130">EFStringLocalizer</span><span class="sxs-lookup"><span data-stu-id="be401-130">EFStringLocalizer</span></span>](https://github.com/aspnet/Entropy/tree/master/samples/Localization.EntityFramework)
-* [<span data-ttu-id="be401-131">JsonStringLocalizer</span><span class="sxs-lookup"><span data-stu-id="be401-131">JsonStringLocalizer</span></span>](https://github.com/hishamco/My.Extensions.Localization.Json)
-* [<span data-ttu-id="be401-132">SqlLocalizer</span><span class="sxs-lookup"><span data-stu-id="be401-132">SqlLocalizer</span></span>](https://github.com/damienbod/AspNetCoreLocalization)
+* [<span data-ttu-id="85f33-130">EFStringLocalizer</span><span class="sxs-lookup"><span data-stu-id="85f33-130">EFStringLocalizer</span></span>](https://github.com/aspnet/Entropy/tree/master/samples/Localization.EntityFramework)
+* [<span data-ttu-id="85f33-131">JsonStringLocalizer</span><span class="sxs-lookup"><span data-stu-id="85f33-131">JsonStringLocalizer</span></span>](https://github.com/hishamco/My.Extensions.Localization.Json)
+* [<span data-ttu-id="85f33-132">SqlLocalizer</span><span class="sxs-lookup"><span data-stu-id="85f33-132">SqlLocalizer</span></span>](https://github.com/damienbod/AspNetCoreLocalization)
