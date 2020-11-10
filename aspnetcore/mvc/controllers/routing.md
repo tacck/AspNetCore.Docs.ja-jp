@@ -5,17 +5,17 @@ description: ASP.NET Core MVC でルーティング ミドルウェアを使っ�
 ms.author: riande
 ms.date: 3/25/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: mvc/controllers/routing
 ms.openlocfilehash: 59ad373cefaa12370aa7c02a367125c7a94f59a6
 ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
@@ -307,7 +307,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 ## <a name="reserved-routing-names"></a><span data-ttu-id="f3d62-281">ルーティングの予約名</span><span class="sxs-lookup"><span data-stu-id="f3d62-281">Reserved routing names</span></span>
 
-<span data-ttu-id="f3d62-282">次のキーワードは、コントローラーまたはページを使用する場合の予約ルートパラメーター名です :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="f3d62-282">The following keywords are reserved route parameter names when using Controllers or :::no-loc(Razor)::: Pages:</span></span>
+<span data-ttu-id="f3d62-282">次のキーワードは、コントローラーまたはページを使用する場合の予約ルートパラメーター名です Razor 。</span><span class="sxs-lookup"><span data-stu-id="f3d62-282">The following keywords are reserved route parameter names when using Controllers or Razor Pages:</span></span>
 
 * `action`
 * `area`
@@ -319,7 +319,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo2Controller.cs?name=snippet)]
 
-<span data-ttu-id="f3d62-285">特別なパラメーター名は、url 生成操作がページまたはコントローラーのどちらを参照するかを判断するために、URL 生成によって使用され :::no-loc(Razor)::: ます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-285">The special parameter names are used by the URL generation to determine if a URL generation operation refers to a :::no-loc(Razor)::: Page or to a Controller.</span></span>
+<span data-ttu-id="f3d62-285">特別なパラメーター名は、url 生成操作がページまたはコントローラーのどちらを参照するかを判断するために、URL 生成によって使用され Razor ます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-285">The special parameter names are used by the URL generation to determine if a URL generation operation refers to a Razor Page or to a Controller.</span></span>
 
 <a name="verb"></a>
 
@@ -477,7 +477,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 * <span data-ttu-id="f3d62-387">上記のコードは、ルーティング設計の一例または不十分です。</span><span class="sxs-lookup"><span data-stu-id="f3d62-387">The preceding code is an example or poor routing design.</span></span> <span data-ttu-id="f3d62-388">これは、プロパティを示すために使用されていま `Order` した。</span><span class="sxs-lookup"><span data-stu-id="f3d62-388">It was used to illustrate the `Order` property.</span></span>
 * <span data-ttu-id="f3d62-389">`Order`プロパティはあいまいさを解決するだけで、そのテンプレートは一致しません。</span><span class="sxs-lookup"><span data-stu-id="f3d62-389">The `Order` property only resolves the ambiguity, that template cannot be matched.</span></span> <span data-ttu-id="f3d62-390">テンプレートを削除することをお勧めし `[Route("Home")]` ます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-390">It would be better to remove the `[Route("Home")]` template.</span></span>
 
-<span data-ttu-id="f3d62-391">ページとルートの順序については[ :::no-loc(Razor)::: 、「ルートとアプリの規則](xref:razor-pages/razor-pages-conventions#route-order)」を参照してください :::no-loc(Razor)::: 。</span><span class="sxs-lookup"><span data-stu-id="f3d62-391">See [:::no-loc(Razor)::: Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order) for information on route order with :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="f3d62-391">ページとルートの順序については[ Razor 、「ルートとアプリの規則](xref:razor-pages/razor-pages-conventions#route-order)」を参照してください Razor 。</span><span class="sxs-lookup"><span data-stu-id="f3d62-391">See [Razor Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order) for information on route order with Razor Pages.</span></span>
 
 <span data-ttu-id="f3d62-392">場合によっては、あいまいなルートで HTTP 500 エラーが返されます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-392">In some cases, an HTTP 500 error is returned with ambiguous routes.</span></span> <span data-ttu-id="f3d62-393">[ログ](xref:fundamentals/logging/index)を使用して、の原因となったエンドポイントを確認し `AmbiguousMatchException` ます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-393">Use [logging](xref:fundamentals/logging/index) to see which endpoints caused the `AmbiguousMatchException`.</span></span>
 
@@ -756,13 +756,13 @@ result: /UrlGeneration/Destination
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-<span data-ttu-id="f3d62-544">次の :::no-loc(Razor)::: ファイルでは、への HTML リンクが生成され `Destination_Route` ます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-544">The following :::no-loc(Razor)::: file generates an HTML link to the `Destination_Route`:</span></span>
+<span data-ttu-id="f3d62-544">次の Razor ファイルでは、への HTML リンクが生成され `Destination_Route` ます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-544">The following Razor file generates an HTML link to the `Destination_Route`:</span></span>
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-no-locrazor"></a><span data-ttu-id="f3d62-545">HTML およびでの Url の生成 :::no-loc(Razor):::</span><span class="sxs-lookup"><span data-stu-id="f3d62-545">Generate URLs in HTML and :::no-loc(Razor):::</span></span>
+### <a name="generate-urls-in-html-and-no-locrazor"></a><span data-ttu-id="f3d62-545">HTML およびでの Url の生成 Razor</span><span class="sxs-lookup"><span data-stu-id="f3d62-545">Generate URLs in HTML and Razor</span></span>
 
 <span data-ttu-id="f3d62-546"><xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>メソッドを使用して、 <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> 要素と要素をそれぞれ生成するように[Html.actionlink と html](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*)を[提供します](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*)。 `<form>` `<a>`</span><span class="sxs-lookup"><span data-stu-id="f3d62-546"><xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper> provides the <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> methods [Html.BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) and [Html.ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) to generate `<form>` and `<a>` elements respectively.</span></span> <span data-ttu-id="f3d62-547">これらのメソッドは、Url を生成するために [url. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) メソッドを使用し、同様の引数を受け取ります。</span><span class="sxs-lookup"><span data-stu-id="f3d62-547">These methods use the [Url.Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) method to generate a URL and they accept similar arguments.</span></span> <span data-ttu-id="f3d62-548">`HtmlHelper` の `Url.RouteUrl` コンパニオンは、同様の機能を持つ `Html.BeginRouteForm` と `Html.RouteLink` です。</span><span class="sxs-lookup"><span data-stu-id="f3d62-548">The `Url.RouteUrl` companions for `HtmlHelper` are `Html.BeginRouteForm` and `Html.RouteLink` which have similar functionality.</span></span>
 
@@ -1224,7 +1224,7 @@ public class HomeController : Controller
 > [!TIP]
 > <span data-ttu-id="f3d62-746">`Order` には依存しないでください。</span><span class="sxs-lookup"><span data-stu-id="f3d62-746">Avoid depending on `Order`.</span></span> <span data-ttu-id="f3d62-747">URL 空間で正しくルーティングするために明示的な順序値が必要な場合、クライアントの混乱を招く可能性があります。</span><span class="sxs-lookup"><span data-stu-id="f3d62-747">If your URL-space requires explicit order values to route correctly, then it's likely confusing to clients as well.</span></span> <span data-ttu-id="f3d62-748">一般に、属性ルーティングは URL 照合で正しいルートを選びます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-748">In general attribute routing will select the correct route with URL matching.</span></span> <span data-ttu-id="f3d62-749">URL の生成に使われる既定の順序がうまくいかない場合は、通常、オーバーライドとしてルート名を使う方が、`Order` プロパティを適用するより簡単です。</span><span class="sxs-lookup"><span data-stu-id="f3d62-749">If the default order used for URL generation isn't working, using route name as an override is usually simpler than applying the `Order` property.</span></span>
 
-<span data-ttu-id="f3d62-750">:::no-loc(Razor)::: Pages ルーティングと MVC コントローラー ルーティングは、実装を共有します。</span><span class="sxs-lookup"><span data-stu-id="f3d62-750">:::no-loc(Razor)::: Pages routing and MVC controller routing share an implementation.</span></span> <span data-ttu-id="f3d62-751">「ページのルート :::no-loc(Razor)::: [ :::no-loc(Razor)::: とアプリの規則: ルートの順序](xref:razor-pages/razor-pages-conventions#route-order)」で、ルートの順序に関する情報を参照できます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-751">Information on route order in the :::no-loc(Razor)::: Pages topics is available at [:::no-loc(Razor)::: Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order).</span></span>
+<span data-ttu-id="f3d62-750">Razor Pages ルーティングと MVC コントローラー ルーティングは、実装を共有します。</span><span class="sxs-lookup"><span data-stu-id="f3d62-750">Razor Pages routing and MVC controller routing share an implementation.</span></span> <span data-ttu-id="f3d62-751">「ページのルート Razor [ Razor とアプリの規則: ルートの順序](xref:razor-pages/razor-pages-conventions#route-order)」で、ルートの順序に関する情報を参照できます。</span><span class="sxs-lookup"><span data-stu-id="f3d62-751">Information on route order in the Razor Pages topics is available at [Razor Pages route and app conventions: Route order](xref:razor-pages/razor-pages-conventions#route-order).</span></span>
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 
