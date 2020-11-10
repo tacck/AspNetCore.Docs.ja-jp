@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: c55421efa1fd559f462549bfaceb794d4a9c35b8
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4f0e98057c03769a672ef350cc3ec724a4f7e721
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059313"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94431061"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -72,7 +72,7 @@ ASP.NET Core MVC では、明確な関心の分離を可能にする動的な We
 ASP.NET Core MVC には、以下が含まれます。
 
 * [ルーティング](#routing)
-* [モデル バインド](#model-binding)
+* [モデルバインド](#model-binding)
 * [モデルの検証](#model-validation)
 * [依存関係の挿入](../fundamentals/dependency-injection.md)
 * [フィルター](#filters)
@@ -173,7 +173,7 @@ ASP.NET Core には、[依存関係の挿入 (DI)](../fundamentals/dependency-in
 </html>
 ```
 
-### <a name="filters"></a>フィルタ
+### <a name="filters"></a>フィルター
 
 [フィルター](controllers/filters.md)は、開発者が例外処理や承認など、横断的関心事をカプセル化するのに役立ちます。 フィルターでは、アクション メソッドの前処理と後処理ロジックを実行できるようにします。また、指定した要求の実行パイプライン内のある時点で実行するように構成することもできます。 フィルターは、属性としてコントローラーまたはアクションに適用できます (または、グローバルに実行できます)。 いくつかのフィルター (`Authorize` など) は、フレームワークに含まれます。 `[Authorize]` は MVC 承認フィルターの作成のために使用される属性です.
 
@@ -182,7 +182,7 @@ ASP.NET Core には、[依存関係の挿入 (DI)](../fundamentals/dependency-in
 public class AccountController : Controller
 ```
 
-### <a name="areas"></a>Areas
+### <a name="areas"></a>区分
 
 [区分](controllers/areas.md) を使用すると、大規模な ASP.NET Core MVC Web アプリをより小さな機能グループに分割することができます。 区分は、アプリケーション内の MVC 構造体となります。 MVC プロジェクトでは、モデル、コント ローラー、ビューなどの論理コンポーネントが異なるフォルダーに保持され、MVC では名前付け規則を使用して、これらのコンポーネントの関係を作成します。 大きなアプリでは、アプリを機能の個別の高レベル区分に分割すると便利な場合があります。 たとえば、チェックアウト、請求、検索などの複数のビジネスユニットを含む e コマースアプリです。これらの各ユニットには、それぞれ独自の論理コンポーネントビュー、コントローラー、およびモデルがあります。
 
@@ -270,4 +270,4 @@ Razor MVC のビューは、モデルに基づいて厳密に型指定できま�
 ## <a name="additional-resources"></a>その他の技術情報
 
 * [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 (" *Microsoft では保守管理もサポートも行っていません。* ")
-* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>
+* <xref:blazor/components/prerendering-and-integration>
