@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: ff045b24c351c696566dee6046fc4b76f8f88e1a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 89e06d00e9312a428c4e164b0dc60527fe12d904
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059144"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430875"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>ASP.NET Core での Razor ページの概要
 
@@ -616,7 +616,7 @@ Razor Pages のルートは既定で */Pages* ディレクトリです。 <xref:
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:test/razor-pages-tests>
 * <xref:mvc/views/partial>
-* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>
+* <xref:blazor/components/prerendering-and-integration>
 
 ::: moniker-end
 

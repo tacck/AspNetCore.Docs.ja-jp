@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 6110f51eb5d5ee40d6ce5a5d49ddda3329d1f033
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a333c189e81a9f44e94deb6b37097f1a8b19a0f9
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055543"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430927"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
@@ -39,7 +39,7 @@ Blazor Server アプリと Blazor WebAssembly アプリでは、セキュリテ�
 
 Blazor WebAssembly アプリはクライアント上で実行されます。 承認は、表示する UI オプションを決定するために " *のみ* " 使用されます。 クライアント側のチェックはユーザーによって変更またはバイパスされる可能性があるため、Blazor WebAssembly アプリでは承認アクセス規則を適用できません。
 
-[Razor Pages の承認規則](xref:security/authorization/razor-pages-authorization)は、ルーティング可能な Razor コンポーネントには適用されません。 ルーティング不可能な Razor コンポーネントが[ページに埋め込まれている](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#render-components-from-a-page-or-view)場合、ページの承認規則は、Razor コンポーネントと、ページのコンテンツの残りの部分に間接的に影響します。
+[Razor Pages の承認規則](xref:security/authorization/razor-pages-authorization)は、ルーティング可能な Razor コンポーネントには適用されません。 ルーティング不可能な Razor コンポーネントが[ページに埋め込まれている](xref:blazor/components/prerendering-and-integration)場合、ページの承認規則は、Razor コンポーネントと、ページのコンテンツの残りの部分に間接的に影響します。
 
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Identity.SignInManager%601> と <xref:Microsoft.AspNetCore.Identity.UserManager%601> は、Razor コンポーネントではサポートされていません。
