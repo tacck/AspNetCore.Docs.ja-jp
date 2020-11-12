@@ -1,10 +1,10 @@
 ---
-title: HTTP REPL テレメトリ
+title: HttpRepl テレメトリ
 author: scottaddie
-description: HTTP REPL によって収集されたテレメトリについて説明します。
+description: HttpRepl によって収集されたテレメトリについて説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.date: 11/10/2020
+ms.date: 11/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,30 +18,32 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl/telemetry
-ms.openlocfilehash: 8590959e43c2dda69090acb358e740b271426a44
-ms.sourcegitcommit: fb72e9c1ae5b279817f1fb4b46a52170449b6f30
+ms.openlocfilehash: 5ff22753f566c494e51dae67c8c4f6371211be78
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94502004"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550609"
 ---
-# <a name="http-repl-telemetry"></a>HTTP REPL テレメトリ
+# <a name="httprepl-telemetry"></a>HttpRepl テレメトリ
 
-[HTTP Read-Eval-Print Loop (REPL)](xref:web-api/http-repl)には、使用状況データを収集するテレメトリ機能が含まれています。 HTTP REPL チームが、ツールの使用方法を理解し、改善できるようにすることが重要です。
+[HttpRepl](xref:web-api/http-repl)には、使用状況データを収集するテレメトリ機能が含まれています。 HttpRepl チームは、ツールがどのように使用されているかを理解し、改善できるようにすることが重要です。
 
 ## <a name="how-to-opt-out"></a>オプトアウトする方法
 
-HTTP REPL テレメトリ機能は、既定で有効になっています。 製品利用統計情報機能をオプトアウトするには、`DOTNET_HTTPREPL_TELEMETRY_OPTOUT` 環境変数を `1` または `true` に設定します。
+HttpRepl テレメトリ機能は、既定で有効になっています。 製品利用統計情報機能をオプトアウトするには、`DOTNET_HTTPREPL_TELEMETRY_OPTOUT` 環境変数を `1` または `true` に設定します。
 
 ## <a name="disclosure"></a>開示
 
-HttpRepl では、ツールを初めて実行するときに、次のようなテキストが表示されます。 テキストは、実行しているツールのバージョンによって多少異なる場合があります。 この "最初の実行" の際に、Microsoft がデータ回収に関して通知する方法が示されます。
+HttpRepl では、ツールを初めて実行したときに、次のようなテキストが表示されます。 テキストは、実行しているツールのバージョンによって多少異なる場合があります。 この "最初の実行" の際に、Microsoft がデータ回収に関して通知する方法が示されます。
 
 ```console
 Telemetry
 ---------
-The .NET Core tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_HTTPREPL_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
 ```
+
+"最初の実行" のエクスペリエンステキストを抑制するに `DOTNET_HTTPREPL_SKIP_FIRST_TIME_EXPERIENCE` は、環境変数をまたはに設定し `1` `true` ます。
 
 ## <a name="data-points"></a>データ ポイント
 
@@ -59,7 +61,7 @@ The .NET Core tools collect usage data in order to help us improve your experien
 
 テレメトリ機能は、次のデータを収集します。
 
-| .NET SDK のバージョン | データ |
+| .NET SDK のバージョン | Data |
 |--------------|------|
 | >= 5.0        | 呼び出しのタイムスタンプ。 |
 | >= 5.0        | 地理的な場所を決定するために使用される3オクテットの IP アドレス。 |
@@ -68,7 +70,7 @@ The .NET Core tools collect usage data in order to help us improve your experien
 | >= 5.0        | ツールがコンテナーで実行されているかどうか。 |
 | >= 5.0        | ハッシュされたメディア Access Control (MAC) アドレス: コンピューターの暗号 (SHA256) ハッシュされた一意の ID。 |
 | >= 5.0        | カーネル バージョン。 |
-| >= 5.0        | HTTP REPL バージョン。 |
+| >= 5.0        | HttpRepl のバージョン。 |
 | >= 5.0        | ツールが、、のいずれかの引数を使用して開始されたかどうか `help` `run` `connect` 。 実際の引数値は収集されません。 |
 | >= 5.0        | 呼び出されたコマンド (など `get` ) と、成功したかどうか。 |
 | >= 5.0        | コマンドの場合、 `connect` `root` 、、のいずれかの `base` 引数が指定されているかどうか `openapi` 。 実際の引数値は収集されません。 |
