@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: eb8c5b3c66f9a0d845d6a1d58c69e6fddefa5b0b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e9e4ca11d20557666c75b84e56af825d002df0f1
+ms.sourcegitcommit: fbd5427293d9ecccc388bd5fd305c2eb8ada7281
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053385"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94464004"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core の認証の概要
 
@@ -141,3 +141,4 @@ Orchard Core とは:
 * <xref:security/authentication/policyschemes>
 * <xref:security/authorization/secure-data>
 * [認証されたユーザーをグローバルに要求する](xref:security/authorization/secure-data#rau)
+* [GitHub の複数の認証方式の使用に関する問題](https://github.com/dotnet/aspnetcore/issues/26002)

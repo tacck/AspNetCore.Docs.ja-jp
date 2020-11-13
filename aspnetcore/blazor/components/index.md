@@ -5,7 +5,7 @@ description: データへのバインド、イベントの処理、コンポー�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 11/09/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d30f40945a3b2799dfc2d9391bba37eee1bfdc18
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d78076eb29d6d09756e408b388fcf12b4b6460f6
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056271"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507942"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -258,7 +258,7 @@ namespace BlazorSample
 
 `Components/ChildComponent.razor`:
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
 サンプル アプリの次の例では、`ParentComponent` によって `ChildComponent` の `Title` プロパティの値を設定しています。
 
@@ -277,7 +277,7 @@ namespace BlazorSample
 
 `Components/ChildComponent.razor`:
 
-[!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Components.RenderFragment> コンテンツを受け取るプロパティは、規則によって `ChildContent` という名前にする必要があります。
@@ -628,12 +628,26 @@ public class NotifierService
 
 ## <a name="overwritten-parameters"></a>上書きされたパラメーター
 
-親コンポーネントの再レンダリング時に、新しいパラメーター値が指定され、通常は既存のパラメーター値が上書きされます。
+Blazor フレームワークでは、一般に安全な親から子へのパラメーターの割り当てが行われます。
 
-次が実行される `Expander` コンポーネントについて考えてみましょう。
+* パラメーターが予期せずに上書きされることはありません。
+* 副作用は最小限に抑えられます。 たとえば、追加のレンダリングは、無限のレンダリング ループが作成される可能性があるため、回避されます。
+
+子コンポーネントは、親コンポーネントのレンダリング時に既存の値を上書きする可能性がある新しいパラメーター値を受け取ります。 子コンポーネントでパラメーター値が誤って上書きされることは、1 つまたは複数のデータバインド パラメーターを使用してコンポーネントを開発しており、開発者が子のパラメーターに直接書き込む場合に多く発生します。
+
+* 子コンポーネントは、親コンポーネントの 1 つまたは複数のパラメーター値を使用してレンダリングされます。
+* 子によって、パラメーターの値が直接書き込まれます。
+* 親コンポーネントがレンダリングされ、子のパラメーターの値が上書きされます。
+
+パラメーター値の上書きの可能性は、子コンポーネントのプロパティ セッターにも及びます。
+
+**一般的なガイダンスとして、独自のパラメーターに直接書き込むコンポーネントを作成しないでください。**
+
+次が実行される、問題のある `Expander` コンポーネントについて考えてみましょう。
 
 * 子コンテンツのレンダリング。
-* コンポーネント パラメーターを使用した、子コンテンツの表示の切り替え。
+* コンポーネント パラメーター (`Expanded`) を使用した、子コンテンツの表示の切り替え。
+* コンポーネントによって、`Expanded` パラメーターに直接書き込まれます。これは上書きされるパラメーターの問題を示しているため、回避する必要があります。
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -685,7 +699,7 @@ public class NotifierService
 
 * 親から `Expanded` コンポーネント パラメーター値を受け入れます。
 * コンポーネント パラメーター値を、 [OnInitialized イベント](xref:blazor/components/lifecycle#component-initialization-methods) の " *プライベート フィールド* " (`expanded`) に割り当てます。
-* プライベート フィールドを使用して、内部のトグル状態を維持します。
+* プライベート フィールドを使用して、その内部のトグル状態を維持します。これは、パラメーターに直接書き込まれないようにする方法を示しています。
 
 ```razor
 <div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
@@ -719,6 +733,8 @@ public class NotifierService
     }
 }
 ```
+
+詳細については、[Blazor両方向のバインド エラー (dotnet/aspnetcore #24599)](https://github.com/dotnet/aspnetcore/issues/24599) に関するページを参照してください。 
 
 ## <a name="apply-an-attribute"></a>属性を適用する
 
