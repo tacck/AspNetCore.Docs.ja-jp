@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: ファイルのアップロード'
+title: 'ASP.NET Core Blazor ファイルのアップロード'
 author: guardrex
-description: 'InputFile コンポーネントを使用して :::no-loc(Blazor)::: 内のファイルをアップロードする方法について説明します。'
+description: 'InputFile コンポーネントを使用して Blazor 内のファイルをアップロードする方法について説明します。'
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 ms.date: 10/27/2020
 uid: blazor/file-uploads
 ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
@@ -26,7 +26,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93056128"
 ---
-# <a name="aspnet-core-no-locblazor-file-uploads"></a><span data-ttu-id="bff56-103">ASP.NET Core :::no-loc(Blazor)::: ファイルのアップロード</span><span class="sxs-lookup"><span data-stu-id="bff56-103">ASP.NET Core :::no-loc(Blazor)::: file uploads</span></span>
+# <a name="aspnet-core-no-locblazor-file-uploads"></a><span data-ttu-id="bff56-103">ASP.NET Core Blazor ファイルのアップロード</span><span class="sxs-lookup"><span data-stu-id="bff56-103">ASP.NET Core Blazor file uploads</span></span>
 
 <span data-ttu-id="bff56-104">作成者: [Daniel Roth](https://github.com/danroth27)、[Pranav Krishnamoorthy](https://github.com/pranavkm)</span><span class="sxs-lookup"><span data-stu-id="bff56-104">By [Daniel Roth](https://github.com/danroth27) and [Pranav Krishnamoorthy](https://github.com/pranavkm)</span></span>
 
@@ -47,7 +47,7 @@ ms.locfileid: "93056128"
 
 * <span data-ttu-id="bff56-115">ファイルで `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` を呼び出し、返されるストリームから読み取ります。</span><span class="sxs-lookup"><span data-stu-id="bff56-115">Call `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` on the file and read from the returned stream.</span></span> <span data-ttu-id="bff56-116">詳細については、「[ファイル ストリーム](#file-streams)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="bff56-116">For more information, see the [File streams](#file-streams) section.</span></span>
 * <span data-ttu-id="bff56-117">`OpenReadStream` によって返される <xref:System.IO.Stream> には、読み取られる `Stream` の最大サイズがバイト単位で適用されます。</span><span class="sxs-lookup"><span data-stu-id="bff56-117">The <xref:System.IO.Stream> returned by `OpenReadStream` enforces a maximum size in bytes of the `Stream` being read.</span></span> <span data-ttu-id="bff56-118">既定では、それ以降の読み取りで例外が発生する前に、サイズが 524,288 KB (512 KB) より小さいファイルのみを読み取ることができます。</span><span class="sxs-lookup"><span data-stu-id="bff56-118">By default, only files smaller than 524,288 KB (512 KB) in size are allowed to be read before any further reads would result in an exception.</span></span> <span data-ttu-id="bff56-119">このような制限は、開発者が誤って大きいファイルをメモリに読み取ってしまうことを防ぐために存在します。</span><span class="sxs-lookup"><span data-stu-id="bff56-119">This limit is present to prevent developers from accidentally reading large files in to memory.</span></span> <span data-ttu-id="bff56-120">`Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` の `maxAllowedSize` パラメーターを使用すると、必要に応じてより大きなサイズを指定できます。</span><span class="sxs-lookup"><span data-stu-id="bff56-120">The `maxAllowedSize` parameter on `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` can be used to specify a larger size if required.</span></span>
-* <span data-ttu-id="bff56-121">受信ファイル ストリームを直接メモリに読み取ることは避けてください。</span><span class="sxs-lookup"><span data-stu-id="bff56-121">Avoid reading the incoming file stream directly into memory.</span></span> <span data-ttu-id="bff56-122">たとえば、ファイル バイトを <xref:System.IO.MemoryStream> にコピーしたり、バイト配列として読み取ることは避けてください。</span><span class="sxs-lookup"><span data-stu-id="bff56-122">For example, don't copy file bytes into a <xref:System.IO.MemoryStream> or read as a byte array.</span></span> <span data-ttu-id="bff56-123">このような方法は、特に :::no-loc(Blazor Server)::: で、パフォーマンスおよびセキュリティの問題を引き起こす可能性があります。</span><span class="sxs-lookup"><span data-stu-id="bff56-123">These approaches can result in performance and security problems, especially in :::no-loc(Blazor Server):::.</span></span> <span data-ttu-id="bff56-124">代わりに、ファイル バイトを外部ストア (BLOB、またはディスク上のファイルなど) にコピーすることを検討してください。</span><span class="sxs-lookup"><span data-stu-id="bff56-124">Instead, consider copying file bytes to an external store, such as a a blob or a file on disk.</span></span>
+* <span data-ttu-id="bff56-121">受信ファイル ストリームを直接メモリに読み取ることは避けてください。</span><span class="sxs-lookup"><span data-stu-id="bff56-121">Avoid reading the incoming file stream directly into memory.</span></span> <span data-ttu-id="bff56-122">たとえば、ファイル バイトを <xref:System.IO.MemoryStream> にコピーしたり、バイト配列として読み取ることは避けてください。</span><span class="sxs-lookup"><span data-stu-id="bff56-122">For example, don't copy file bytes into a <xref:System.IO.MemoryStream> or read as a byte array.</span></span> <span data-ttu-id="bff56-123">このような方法は、特に Blazor Server で、パフォーマンスおよびセキュリティの問題を引き起こす可能性があります。</span><span class="sxs-lookup"><span data-stu-id="bff56-123">These approaches can result in performance and security problems, especially in Blazor Server.</span></span> <span data-ttu-id="bff56-124">代わりに、ファイル バイトを外部ストア (BLOB、またはディスク上のファイルなど) にコピーすることを検討してください。</span><span class="sxs-lookup"><span data-stu-id="bff56-124">Instead, consider copying file bytes to an external store, such as a a blob or a file on disk.</span></span>
 
 <span data-ttu-id="bff56-125">イメージ ファイルを受信するコンポーネントは、ファイルの便利な `RequestImageFileAsync` メソッドを呼び出して、イメージがアプリにストリームされる前に、ブラウザーの JavaScript ランタイム内のイメージ データのサイズを変更できます。</span><span class="sxs-lookup"><span data-stu-id="bff56-125">A component that receives an image file can call the `RequestImageFileAsync` convenience method on the file to resize the image data within the browser's JavaScript runtime before the image is streamed into the app.</span></span>
 
@@ -100,9 +100,9 @@ ms.locfileid: "93056128"
 
 ## <a name="file-streams"></a><span data-ttu-id="bff56-133">ファイル ストリーム</span><span class="sxs-lookup"><span data-stu-id="bff56-133">File streams</span></span>
 
-<span data-ttu-id="bff56-134">:::no-loc(Blazor WebAssembly)::: アプリでは、データはブラウザー内の .NET コードに直接ストリームされます。</span><span class="sxs-lookup"><span data-stu-id="bff56-134">In a :::no-loc(Blazor WebAssembly)::: app, the data is streamed directly into the .NET code within the browser.</span></span>
+<span data-ttu-id="bff56-134">Blazor WebAssembly アプリでは、データはブラウザー内の .NET コードに直接ストリームされます。</span><span class="sxs-lookup"><span data-stu-id="bff56-134">In a Blazor WebAssembly app, the data is streamed directly into the .NET code within the browser.</span></span>
 
-<span data-ttu-id="bff56-135">:::no-loc(Blazor Server)::: アプリでは、ファイルがストリームから読み取られるときに、ファイル データがサーバー上の .NET コードに :::no-loc(SignalR)::: 接続を介してストリームされます。</span><span class="sxs-lookup"><span data-stu-id="bff56-135">In a :::no-loc(Blazor Server)::: app, the file data is streamed over the :::no-loc(SignalR)::: connection into .NET code on the server as the file is read from the stream.</span></span> <span data-ttu-id="bff56-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) では、:::no-loc(Blazor Server)::: のファイル アップロード特性を構成することができます。</span><span class="sxs-lookup"><span data-stu-id="bff56-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) allows configuring file upload characteristics for :::no-loc(Blazor Server):::.</span></span>
+<span data-ttu-id="bff56-135">Blazor Server アプリでは、ファイルがストリームから読み取られるときに、ファイル データがサーバー上の .NET コードに SignalR 接続を介してストリームされます。</span><span class="sxs-lookup"><span data-stu-id="bff56-135">In a Blazor Server app, the file data is streamed over the SignalR connection into .NET code on the server as the file is read from the stream.</span></span> <span data-ttu-id="bff56-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) では、Blazor Server のファイル アップロード特性を構成することができます。</span><span class="sxs-lookup"><span data-stu-id="bff56-136">[`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) allows configuring file upload characteristics for Blazor Server.</span></span>
 
 ## <a name="additional-resources"></a><span data-ttu-id="bff56-137">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="bff56-137">Additional resources</span></span>
 

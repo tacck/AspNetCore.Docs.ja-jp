@@ -1,5 +1,5 @@
 ---
-title: 'ASP.NET Core :::no-loc(Blazor)::: の値とパラメーターのカスケード'
+title: 'ASP.NET Core Blazor の値とパラメーターのカスケード'
 author: guardrex
 description: 先祖のコンポーネントから子孫のコンポーネントにデータをフローさせる方法について説明します。
 monikerRange: '>= aspnetcore-3.1'
@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: blazor/components/cascading-values-and-parameters
 ms.openlocfilehash: 56d70cea50a3a913b4483f6ea488438269aa58fe
 ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
@@ -26,7 +26,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/11/2020
 ms.locfileid: "94507981"
 ---
-# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a><span data-ttu-id="451e8-103">ASP.NET Core :::no-loc(Blazor)::: の値とパラメーターのカスケード</span><span class="sxs-lookup"><span data-stu-id="451e8-103">ASP.NET Core :::no-loc(Blazor)::: cascading values and parameters</span></span>
+# <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a><span data-ttu-id="451e8-103">ASP.NET Core Blazor の値とパラメーターのカスケード</span><span class="sxs-lookup"><span data-stu-id="451e8-103">ASP.NET Core Blazor cascading values and parameters</span></span>
 
 <span data-ttu-id="451e8-104">作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="451e8-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
@@ -55,7 +55,7 @@ public class ThemeInfo
 
 ```razor
 @inherits LayoutComponentBase
-@using :::no-loc(Blazor):::Sample.UIThemeClasses
+@using BlazorSample.UIThemeClasses
 
 <div class="container-fluid">
     <div class="row">
@@ -86,7 +86,7 @@ public class ThemeInfo
 ```razor
 @page "/cascadingvaluesparameterstheme"
 @layout CascadingValuesParametersLayout
-@using :::no-loc(Blazor):::Sample.UIThemeClasses
+@using BlazorSample.UIThemeClasses
 
 <h1>Cascading Values & Parameters</h1>
 
@@ -156,7 +156,7 @@ public class ThemeInfo
 
 <span data-ttu-id="451e8-129">このサンプル アプリには、タブに実装されている `ITab` インターフェイスがあります。</span><span class="sxs-lookup"><span data-stu-id="451e8-129">The sample app has an `ITab` interface that tabs implement:</span></span>
 
-[!code-csharp[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/UIInterfaces/ITab.cs)]
+[!code-csharp[](../common/samples/5.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
 
 <span data-ttu-id="451e8-130">`CascadingValuesParametersTabSet` コンポーネントでは、いくつかの `Tab` コンポーネントを含む `TabSet` コンポーネントを使用します。</span><span class="sxs-lookup"><span data-stu-id="451e8-130">The `CascadingValuesParametersTabSet` component uses the `TabSet` component, which contains several `Tab` components:</span></span>
 
@@ -194,10 +194,10 @@ public class ThemeInfo
 
 <span data-ttu-id="451e8-134">`TabSet` コンポーネント:</span><span class="sxs-lookup"><span data-stu-id="451e8-134">`TabSet` component:</span></span>
 
-[!code-razor[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/Components/TabSet.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
 <span data-ttu-id="451e8-135">子孫の `Tab` コンポーネントでは、含まれている `TabSet` をカスケード パラメーターとしてキャプチャするため、`Tab` コンポーネントはそれ自体を `TabSet` に追加し、どのタブをアクティブにするかを調整します。</span><span class="sxs-lookup"><span data-stu-id="451e8-135">The descendent `Tab` components capture the containing `TabSet` as a cascading parameter, so the `Tab` components add themselves to the `TabSet` and coordinate on which tab is active.</span></span>
 
 <span data-ttu-id="451e8-136">`Tab` コンポーネント:</span><span class="sxs-lookup"><span data-stu-id="451e8-136">`Tab` component:</span></span>
 
-[!code-razor[](../common/samples/5.x/:::no-loc(Blazor):::WebAssemblySample/Components/Tab.razor)]
+[!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/Tab.razor)]

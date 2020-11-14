@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core での :::no-loc(Razor)::: ページの概要'
+title: 'ASP.NET Core での Razor ページの概要'
 author: Rick-Anderson
-description: 'ASP.NET Core の :::no-loc(Razor)::: Pages を使用して、ページのコーディングに重点を置いたシナリオをより簡略化して、MVC を使用する場合よりも生産性を高める方法について説明します。'
+description: 'ASP.NET Core の Razor Pages を使用して、ページのコーディングに重点を置いたシナリオをより簡略化して、MVC を使用する場合よりも生産性を高める方法について説明します。'
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: razor-pages/index
 ms.openlocfilehash: 89e06d00e9312a428c4e164b0dc60527fe12d904
 ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
@@ -25,17 +25,17 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/10/2020
 ms.locfileid: "94430875"
 ---
-# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="dee9e-103">ASP.NET Core での :::no-loc(Razor)::: ページの概要</span><span class="sxs-lookup"><span data-stu-id="dee9e-103">Introduction to :::no-loc(Razor)::: Pages in ASP.NET Core</span></span>
+# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a><span data-ttu-id="dee9e-103">ASP.NET Core での Razor ページの概要</span><span class="sxs-lookup"><span data-stu-id="dee9e-103">Introduction to Razor Pages in ASP.NET Core</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 <span data-ttu-id="dee9e-104">[Rick Anderson](https://twitter.com/RickAndMSFT) および [Ryan Nowak](https://github.com/rynowak) 著</span><span class="sxs-lookup"><span data-stu-id="dee9e-104">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Ryan Nowak](https://github.com/rynowak)</span></span>
 
-<span data-ttu-id="dee9e-105">:::no-loc(Razor)::: ページを利用することで、ページのコーディングに今まで以上に集中できます。また、コントローラーとビューを使用する場合より生産的になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-105">:::no-loc(Razor)::: Pages can make coding page-focused scenarios easier and more productive than using controllers and views.</span></span>
+<span data-ttu-id="dee9e-105">Razor ページを利用することで、ページのコーディングに今まで以上に集中できます。また、コントローラーとビューを使用する場合より生産的になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-105">Razor Pages can make coding page-focused scenarios easier and more productive than using controllers and views.</span></span>
 
 <span data-ttu-id="dee9e-106">モデル ビュー コントローラーのアプローチを使用するチュートリアルをお探しの場合は、「[Get started with ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc)」 (ASP.NET Core MVC の概要) を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-106">If you're looking for a tutorial that uses the Model-View-Controller approach, see [Get started with ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc).</span></span>
 
-<span data-ttu-id="dee9e-107">このドキュメントでは、:::no-loc(Razor)::: ページの概要について説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-107">This document provides an introduction to :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="dee9e-108">手順を追って説明するチュートリアルではありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-108">It's not a step by step tutorial.</span></span> <span data-ttu-id="dee9e-109">セクションの一部を理解できない場合は、「[:::no-loc(Razor)::: ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-109">If you find some of the sections too advanced, see [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start).</span></span> <span data-ttu-id="dee9e-110">ASP.NET Core の概要については、「[ASP.NET Core の概要](xref:index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-110">For an overview of ASP.NET Core, see the [Introduction to ASP.NET Core](xref:index).</span></span>
+<span data-ttu-id="dee9e-107">このドキュメントでは、Razor ページの概要について説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-107">This document provides an introduction to Razor Pages.</span></span> <span data-ttu-id="dee9e-108">手順を追って説明するチュートリアルではありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-108">It's not a step by step tutorial.</span></span> <span data-ttu-id="dee9e-109">セクションの一部を理解できない場合は、「[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-109">If you find some of the sections too advanced, see [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start).</span></span> <span data-ttu-id="dee9e-110">ASP.NET Core の概要については、「[ASP.NET Core の概要](xref:index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-110">For an overview of ASP.NET Core, see the [Introduction to ASP.NET Core](xref:index).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="dee9e-111">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="dee9e-111">Prerequisites</span></span>
 
@@ -55,11 +55,11 @@ ms.locfileid: "94430875"
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-no-locrazor-pages-project"></a><span data-ttu-id="dee9e-115">:::no-loc(Razor)::: ページ プロジェクトを作成する</span><span class="sxs-lookup"><span data-stu-id="dee9e-115">Create a :::no-loc(Razor)::: Pages project</span></span>
+## <a name="create-a-no-locrazor-pages-project"></a><span data-ttu-id="dee9e-115">Razor ページ プロジェクトを作成する</span><span class="sxs-lookup"><span data-stu-id="dee9e-115">Create a Razor Pages project</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="dee9e-116">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="dee9e-116">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="dee9e-117">:::no-loc(Razor)::: ページ プロジェクトを作成する詳細な手順については、「[:::no-loc(Razor)::: ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-117">See [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) for detailed instructions on how to create a :::no-loc(Razor)::: Pages project.</span></span>
+<span data-ttu-id="dee9e-117">Razor ページ プロジェクトを作成する詳細な手順については、「[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-117">See [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) for detailed instructions on how to create a Razor Pages project.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="dee9e-118">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="dee9e-118">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
@@ -67,33 +67,33 @@ ms.locfileid: "94430875"
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="dee9e-120">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="dee9e-120">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="dee9e-121">:::no-loc(Razor)::: ページ プロジェクトを作成する詳細な手順については、「[:::no-loc(Razor)::: ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-121">See [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) for detailed instructions on how to create a :::no-loc(Razor)::: Pages project.</span></span>
+<span data-ttu-id="dee9e-121">Razor ページ プロジェクトを作成する詳細な手順については、「[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-121">See [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) for detailed instructions on how to create a Razor Pages project.</span></span>
 
 ---
 
-## <a name="no-locrazor-pages"></a><span data-ttu-id="dee9e-122">:::no-loc(Razor)::: Pages</span><span class="sxs-lookup"><span data-stu-id="dee9e-122">:::no-loc(Razor)::: Pages</span></span>
+## <a name="no-locrazor-pages"></a><span data-ttu-id="dee9e-122">Razor Pages</span><span class="sxs-lookup"><span data-stu-id="dee9e-122">Razor Pages</span></span>
 
-<span data-ttu-id="dee9e-123">:::no-loc(Razor)::: ページは " *Startup.cs* " で有効になっています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-123">:::no-loc(Razor)::: Pages is enabled in *Startup.cs* :</span></span>
+<span data-ttu-id="dee9e-123">Razor ページは " *Startup.cs* " で有効になっています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-123">Razor Pages is enabled in *Startup.cs* :</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
+[!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
 <span data-ttu-id="dee9e-124">基本ページを検討します。<a name="OnGet"></a></span><span class="sxs-lookup"><span data-stu-id="dee9e-124">Consider a basic page: <a name="OnGet"></a></span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesIntro/Pages/Index.cshtml?highlight=1)]
+[!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-<span data-ttu-id="dee9e-125">上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [:::no-loc(Razor)::: ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-125">The preceding code looks a lot like a [:::no-loc(Razor)::: view file](xref:tutorials/first-mvc-app/adding-view) used in an ASP.NET Core app with controllers and views.</span></span> <span data-ttu-id="dee9e-126">違いは [`@page`](xref:mvc/views/razor#page) ディレクティブにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-126">What makes it different is the [`@page`](xref:mvc/views/razor#page) directive.</span></span> <span data-ttu-id="dee9e-127">`@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-127">`@page` makes the file into an MVC action - which means that it handles requests directly, without going through a controller.</span></span> <span data-ttu-id="dee9e-128">`@page` はページ上で最初の :::no-loc(Razor)::: ディレクティブである必要があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-128">`@page` must be the first :::no-loc(Razor)::: directive on a page.</span></span> <span data-ttu-id="dee9e-129">`@page` はその他の [:::no-loc(Razor):::](xref:mvc/views/razor) コンストラクトの動作に影響します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-129">`@page` affects the behavior of other [:::no-loc(Razor):::](xref:mvc/views/razor) constructs.</span></span> <span data-ttu-id="dee9e-130">:::no-loc(Razor)::: ページのファイル名には " *.cshtml* " サフィックスが付きます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-130">:::no-loc(Razor)::: Pages file names have a *.cshtml* suffix.</span></span>
+<span data-ttu-id="dee9e-125">上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [Razor ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-125">The preceding code looks a lot like a [Razor view file](xref:tutorials/first-mvc-app/adding-view) used in an ASP.NET Core app with controllers and views.</span></span> <span data-ttu-id="dee9e-126">違いは [`@page`](xref:mvc/views/razor#page) ディレクティブにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-126">What makes it different is the [`@page`](xref:mvc/views/razor#page) directive.</span></span> <span data-ttu-id="dee9e-127">`@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-127">`@page` makes the file into an MVC action - which means that it handles requests directly, without going through a controller.</span></span> <span data-ttu-id="dee9e-128">`@page` はページ上で最初の Razor ディレクティブである必要があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-128">`@page` must be the first Razor directive on a page.</span></span> <span data-ttu-id="dee9e-129">`@page` はその他の [Razor](xref:mvc/views/razor) コンストラクトの動作に影響します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-129">`@page` affects the behavior of other [Razor](xref:mvc/views/razor) constructs.</span></span> <span data-ttu-id="dee9e-130">Razor ページのファイル名には " *.cshtml* " サフィックスが付きます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-130">Razor Pages file names have a *.cshtml* suffix.</span></span>
 
 <span data-ttu-id="dee9e-131">`PageModel` クラスを使用している類似したページが、次の 2 つのファイルにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-131">A similar page, using a `PageModel` class, is shown in the following two files.</span></span> <span data-ttu-id="dee9e-132">*Pages/Index2.cshtml* ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-132">The *Pages/Index2.cshtml* file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesIntro/Pages/Index2.cshtml)]
+[!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml)]
 
 <span data-ttu-id="dee9e-133">*Pages/Index2.cshtml.cs* ページ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-133">The *Pages/Index2.cshtml.cs* page model:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesIntro/Pages/Index2.cshtml.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-<span data-ttu-id="dee9e-134">規則により、`PageModel` クラス ファイルは、:::no-loc(Razor)::: ページ ファイルと同じ名前に " *.cs* " が付加された名前になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-134">By convention, the `PageModel` class file has the same name as the :::no-loc(Razor)::: Page file with *.cs* appended.</span></span> <span data-ttu-id="dee9e-135">たとえば、上の :::no-loc(Razor)::: ページは " *Pages/Index2.cshtml* " になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-135">For example, the previous :::no-loc(Razor)::: Page is *Pages/Index2.cshtml*.</span></span> <span data-ttu-id="dee9e-136">`PageModel` クラスを含むファイル名は、 *Pages/Index2.cshtml.cs* になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-136">The file containing the `PageModel` class is named *Pages/Index2.cshtml.cs*.</span></span>
+<span data-ttu-id="dee9e-134">規則により、`PageModel` クラス ファイルは、Razor ページ ファイルと同じ名前に " *.cs* " が付加された名前になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-134">By convention, the `PageModel` class file has the same name as the Razor Page file with *.cs* appended.</span></span> <span data-ttu-id="dee9e-135">たとえば、上の Razor ページは " *Pages/Index2.cshtml* " になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-135">For example, the previous Razor Page is *Pages/Index2.cshtml*.</span></span> <span data-ttu-id="dee9e-136">`PageModel` クラスを含むファイル名は、 *Pages/Index2.cshtml.cs* になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-136">The file containing the `PageModel` class is named *Pages/Index2.cshtml.cs*.</span></span>
 
-<span data-ttu-id="dee9e-137">URL パスのページへの関連付けは、ファイル システム内のページの場所によって決定されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-137">The associations of URL paths to pages are determined by the page's location in the file system.</span></span> <span data-ttu-id="dee9e-138">次の表に、:::no-loc(Razor)::: ページ パスと一致 URL を示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-138">The following table shows a :::no-loc(Razor)::: Page path and the matching URL:</span></span>
+<span data-ttu-id="dee9e-137">URL パスのページへの関連付けは、ファイル システム内のページの場所によって決定されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-137">The associations of URL paths to pages are determined by the page's location in the file system.</span></span> <span data-ttu-id="dee9e-138">次の表に、Razor ページ パスと一致 URL を示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-138">The following table shows a Razor Page path and the matching URL:</span></span>
 
 | <span data-ttu-id="dee9e-139">ファイル名とパス</span><span class="sxs-lookup"><span data-stu-id="dee9e-139">File name and path</span></span>               | <span data-ttu-id="dee9e-140">一致 URL</span><span class="sxs-lookup"><span data-stu-id="dee9e-140">matching URL</span></span> |
 | ----------------- | ------------ |
@@ -104,34 +104,34 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-147">メモ:</span><span class="sxs-lookup"><span data-stu-id="dee9e-147">Notes:</span></span>
 
-* <span data-ttu-id="dee9e-148">既定では、ランタイムが " *Pages* " フォルダー内で :::no-loc(Razor)::: ページ ファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-148">The runtime looks for :::no-loc(Razor)::: Pages files in the *Pages* folder by default.</span></span>
+* <span data-ttu-id="dee9e-148">既定では、ランタイムが " *Pages* " フォルダー内で Razor ページ ファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-148">The runtime looks for Razor Pages files in the *Pages* folder by default.</span></span>
 * <span data-ttu-id="dee9e-149">`Index` は、URL にページが含まれない場合の既定のページになります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-149">`Index` is the default page when a URL doesn't include a page.</span></span>
 
 ## <a name="write-a-basic-form"></a><span data-ttu-id="dee9e-150">基本フォームを作成する</span><span class="sxs-lookup"><span data-stu-id="dee9e-150">Write a basic form</span></span>
 
-<span data-ttu-id="dee9e-151">:::no-loc(Razor)::: ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-151">:::no-loc(Razor)::: Pages is designed to make common patterns used with web browsers easy to implement when building an app.</span></span> <span data-ttu-id="dee9e-152">[モデル バインド](xref:mvc/models/model-binding)、 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、:::no-loc(Razor)::: ページ クラスで定義されたプロパティで " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-152">[Model binding](xref:mvc/models/model-binding), [Tag Helpers](xref:mvc/views/tag-helpers/intro), and HTML helpers all *just work* with the properties defined in a :::no-loc(Razor)::: Page class.</span></span> <span data-ttu-id="dee9e-153">`Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-153">Consider a page that implements a basic "contact us" form for the `Contact` model:</span></span>
+<span data-ttu-id="dee9e-151">Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-151">Razor Pages is designed to make common patterns used with web browsers easy to implement when building an app.</span></span> <span data-ttu-id="dee9e-152">[モデル バインド](xref:mvc/models/model-binding)、 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-152">[Model binding](xref:mvc/models/model-binding), [Tag Helpers](xref:mvc/views/tag-helpers/intro), and HTML helpers all *just work* with the properties defined in a Razor Page class.</span></span> <span data-ttu-id="dee9e-153">`Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-153">Consider a page that implements a basic "contact us" form for the `Contact` model:</span></span>
 
-<span data-ttu-id="dee9e-154">このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/:::no-loc(Razor):::PagesContacts/Startup.cs#L23-L24) ファイルで `DbContext` が初期化されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-154">For the samples in this document, the `DbContext` is initialized in the [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/:::no-loc(Razor):::PagesContacts/Startup.cs#L23-L24) file.</span></span>
+<span data-ttu-id="dee9e-154">このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) ファイルで `DbContext` が初期化されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-154">For the samples in this document, the `DbContext` is initialized in the [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) file.</span></span>
 
 <span data-ttu-id="dee9e-155">インメモリ データベースには、`Microsoft.EntityFrameworkCore.InMemory` NuGet パッケージが必要です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-155">The in memory database requires the `Microsoft.EntityFrameworkCore.InMemory` NuGet package.</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Startup.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
 
 <span data-ttu-id="dee9e-156">データ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-156">The data model:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Models/Customer.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
 
 <span data-ttu-id="dee9e-157">db コンテキスト:</span><span class="sxs-lookup"><span data-stu-id="dee9e-157">The db context:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Data/CustomerDbContext.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Data/CustomerDbContext.cs)]
 
 <span data-ttu-id="dee9e-158">*Pages/Create.cshtml* ビュー ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-158">The *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml)]
 
 <span data-ttu-id="dee9e-159">*Pages/Create.cshtml.cs* ページ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-159">The *Pages/Create.cshtml.cs* page model:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_ALL)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_ALL)]
 
 <span data-ttu-id="dee9e-160">規則により、`PageModel` クラスは `<PageName>Model` と呼ばれ、ページと同じ名前空間にあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-160">By convention, the `PageModel` class is called `<PageName>Model` and is in the same namespace as the page.</span></span>
 
@@ -142,19 +142,19 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-166">このページには、(ユーザーがフォームを投稿したときに) `POST` 要求で実行される `OnPostAsync` " *ハンドラー メソッド* " があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-166">The page has an `OnPostAsync` *handler method* , which runs on `POST` requests (when a user posts the form).</span></span> <span data-ttu-id="dee9e-167">任意の HTTP 動詞のハンドラー メソッドを追加できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-167">Handler methods for any HTTP verb can be added.</span></span> <span data-ttu-id="dee9e-168">最も一般的なハンドラーは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-168">The most common handlers are:</span></span>
 
-* <span data-ttu-id="dee9e-169">ページに必要な状態を初期化するための `OnGet`。</span><span class="sxs-lookup"><span data-stu-id="dee9e-169">`OnGet` to initialize state needed for the page.</span></span> <span data-ttu-id="dee9e-170">前のコードでは、`OnGet` メソッドにより " *CreateModel.cshtml* " :::no-loc(Razor)::: ページが表示されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-170">In the preceding code, the `OnGet` method displays the *CreateModel.cshtml* :::no-loc(Razor)::: Page.</span></span>
+* <span data-ttu-id="dee9e-169">ページに必要な状態を初期化するための `OnGet`。</span><span class="sxs-lookup"><span data-stu-id="dee9e-169">`OnGet` to initialize state needed for the page.</span></span> <span data-ttu-id="dee9e-170">前のコードでは、`OnGet` メソッドにより " *CreateModel.cshtml* " Razor ページが表示されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-170">In the preceding code, the `OnGet` method displays the *CreateModel.cshtml* Razor Page.</span></span>
 * <span data-ttu-id="dee9e-171">フォームの送信を処理するための `OnPost`。</span><span class="sxs-lookup"><span data-stu-id="dee9e-171">`OnPost` to handle form submissions.</span></span>
 
-<span data-ttu-id="dee9e-172">`Async` 名前付けサフィックスは省略可能ですが、非同期関数の規則でよく使用されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-172">The `Async` naming suffix is optional but is often used by convention for asynchronous functions.</span></span> <span data-ttu-id="dee9e-173">上記のコードは、:::no-loc(Razor)::: ページでは一般的です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-173">The preceding code is typical for :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="dee9e-172">`Async` 名前付けサフィックスは省略可能ですが、非同期関数の規則でよく使用されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-172">The `Async` naming suffix is optional but is often used by convention for asynchronous functions.</span></span> <span data-ttu-id="dee9e-173">上記のコードは、Razor ページでは一般的です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-173">The preceding code is typical for Razor Pages.</span></span>
 
 <span data-ttu-id="dee9e-174">コントローラーとビューを利用する ASP.NET アプリに慣れている場合:</span><span class="sxs-lookup"><span data-stu-id="dee9e-174">If you're familiar with ASP.NET apps using controllers and views:</span></span>
 
 * <span data-ttu-id="dee9e-175">前の例の `OnPostAsync` コードは、一般的なコントローラー コードに似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-175">The `OnPostAsync` code in the preceding example looks similar to typical controller code.</span></span>
-* <span data-ttu-id="dee9e-176">[モデル バインド](xref:mvc/models/model-binding)、[検証](xref:mvc/models/validation)、アクションの結果など、MVC プリミティブのほとんどは Controllers ページや :::no-loc(Razor)::: ページと同じように動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-176">Most of the MVC primitives like [model binding](xref:mvc/models/model-binding), [validation](xref:mvc/models/validation), and action results work the same with Controllers and :::no-loc(Razor)::: Pages.</span></span> 
+* <span data-ttu-id="dee9e-176">[モデル バインド](xref:mvc/models/model-binding)、[検証](xref:mvc/models/validation)、アクションの結果など、MVC プリミティブのほとんどは Controllers ページや Razor ページと同じように動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-176">Most of the MVC primitives like [model binding](xref:mvc/models/model-binding), [validation](xref:mvc/models/validation), and action results work the same with Controllers and Razor Pages.</span></span> 
 
 <span data-ttu-id="dee9e-177">上記の `OnPostAsync` メソッド:</span><span class="sxs-lookup"><span data-stu-id="dee9e-177">The previous `OnPostAsync` method:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
 <span data-ttu-id="dee9e-178">`OnPostAsync` の基本的な流れは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-178">The basic flow of `OnPostAsync`:</span></span>
 
@@ -165,17 +165,17 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-183">*Pages/Create.cshtml* ビュー ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-183">The *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml)]
 
 <span data-ttu-id="dee9e-184">*Pages/Create.cshtml* からレンダリングされた HTML:</span><span class="sxs-lookup"><span data-stu-id="dee9e-184">The rendered HTML from *Pages/Create.cshtml* :</span></span>
 
-[!code-html[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create4.html)]
+[!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.html)]
 
 <span data-ttu-id="dee9e-185">前のコードで投稿したフォーム:</span><span class="sxs-lookup"><span data-stu-id="dee9e-185">In the previous code, posting the form:</span></span>
 
 * <span data-ttu-id="dee9e-186">有効なデータ:</span><span class="sxs-lookup"><span data-stu-id="dee9e-186">With valid data:</span></span>
 
-  * <span data-ttu-id="dee9e-187">`OnPostAsync` ハンドラー メソッドにより <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel.RedirectToPage*> ヘルパー メソッドが呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-187">The `OnPostAsync` handler method calls the <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel.RedirectToPage*> helper method.</span></span> <span data-ttu-id="dee9e-188">`RedirectToPage` は <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult> のインスタンスを返します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-188">`RedirectToPage` returns an instance of <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult>.</span></span> <span data-ttu-id="dee9e-189">`RedirectToPage`:</span><span class="sxs-lookup"><span data-stu-id="dee9e-189">`RedirectToPage`:</span></span>
+  * <span data-ttu-id="dee9e-187">`OnPostAsync` ハンドラー メソッドにより <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> ヘルパー メソッドが呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-187">The `OnPostAsync` handler method calls the <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> helper method.</span></span> <span data-ttu-id="dee9e-188">`RedirectToPage` は <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult> のインスタンスを返します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-188">`RedirectToPage` returns an instance of <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult>.</span></span> <span data-ttu-id="dee9e-189">`RedirectToPage`:</span><span class="sxs-lookup"><span data-stu-id="dee9e-189">`RedirectToPage`:</span></span>
 
     * <span data-ttu-id="dee9e-190">はアクションの結果です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-190">Is an action result.</span></span>
     * <span data-ttu-id="dee9e-191">は、(コントローラーやビューで使用される) `RedirectToAction` や`RedirectToRoute` に似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-191">Is similar to `RedirectToAction` or `RedirectToRoute` (used in controllers and views).</span></span>
@@ -183,10 +183,10 @@ ms.locfileid: "94430875"
 
 * <span data-ttu-id="dee9e-195">サーバーに検証エラーが渡される:</span><span class="sxs-lookup"><span data-stu-id="dee9e-195">With validation errors that are passed to the server:</span></span>
 
-  * <span data-ttu-id="dee9e-196">`OnPostAsync` ハンドラー メソッドにより <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageBase.Page*> ヘルパー メソッドが呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-196">The `OnPostAsync` handler method calls the <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageBase.Page*> helper method.</span></span> <span data-ttu-id="dee9e-197">`Page` は <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageResult> のインスタンスを返します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-197">`Page` returns an instance of <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageResult>.</span></span> <span data-ttu-id="dee9e-198">`Page` を返すのは、コントローラーのアクションが `View` を返す方法に似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-198">Returning `Page` is similar to how actions in controllers return `View`.</span></span> <span data-ttu-id="dee9e-199">`PageResult` はハンドラー メソッドの既定の戻り値の型です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-199">`PageResult` is the default return type for a handler method.</span></span> <span data-ttu-id="dee9e-200">`void` を返すハンドラー メソッドがページをレンダリングします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-200">A handler method that returns `void` renders the page.</span></span>
+  * <span data-ttu-id="dee9e-196">`OnPostAsync` ハンドラー メソッドにより <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> ヘルパー メソッドが呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-196">The `OnPostAsync` handler method calls the <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> helper method.</span></span> <span data-ttu-id="dee9e-197">`Page` は <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> のインスタンスを返します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-197">`Page` returns an instance of <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult>.</span></span> <span data-ttu-id="dee9e-198">`Page` を返すのは、コントローラーのアクションが `View` を返す方法に似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-198">Returning `Page` is similar to how actions in controllers return `View`.</span></span> <span data-ttu-id="dee9e-199">`PageResult` はハンドラー メソッドの既定の戻り値の型です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-199">`PageResult` is the default return type for a handler method.</span></span> <span data-ttu-id="dee9e-200">`void` を返すハンドラー メソッドがページをレンダリングします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-200">A handler method that returns `void` renders the page.</span></span>
   * <span data-ttu-id="dee9e-201">前の例では、値のないフォームが投稿された結果、[ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) から false が返されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-201">In the preceding example, posting the form with no value results in [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) returning false.</span></span> <span data-ttu-id="dee9e-202">このサンプルでは、検証エラーはクライアントに表示されません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-202">In this sample, no validation errors are displayed on the client.</span></span> <span data-ttu-id="dee9e-203">検証エラーの処理については、このドキュメントの後半で説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-203">Validation error handing is covered later in this document.</span></span>
 
-  [!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
+  [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
 * <span data-ttu-id="dee9e-204">クライアント側の検証で検証エラーが検出される:</span><span class="sxs-lookup"><span data-stu-id="dee9e-204">With validation errors detected by client side validation:</span></span>
 
@@ -195,17 +195,17 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-207">`Customer` プロパティは [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性を使用してモデル バインドにオプトインします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-207">The `Customer` property uses [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) attribute to opt in to model binding:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
 
 <span data-ttu-id="dee9e-208">`[BindProperty]` は、クライアントが変更するべきではないプロパティを含むモデルで使用 **しないで** ください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-208">`[BindProperty]` should **not** be used on models containing properties that should not be changed by the client.</span></span> <span data-ttu-id="dee9e-209">詳細については、「[過剰ポスティング](xref:data/ef-rp/crud#overposting)」をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-209">For more information, see [Overposting](xref:data/ef-rp/crud#overposting).</span></span>
 
-<span data-ttu-id="dee9e-210">既定では、:::no-loc(Razor)::: ページはプロパティを非 `GET` 動詞とのみバインドします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-210">:::no-loc(Razor)::: Pages, by default, bind properties only with non-`GET` verbs.</span></span> <span data-ttu-id="dee9e-211">プロパティにバインドすると、HTTP データをモデル型に変換する目的でコードを記述する必要がなくなります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-211">Binding to properties removes the need to writing code to convert HTTP data to the model type.</span></span> <span data-ttu-id="dee9e-212">同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-212">Binding reduces code by using the same property to render form fields (`<input asp-for="Customer.Name">`) and accept the input.</span></span>
+<span data-ttu-id="dee9e-210">既定では、Razor ページはプロパティを非 `GET` 動詞とのみバインドします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-210">Razor Pages, by default, bind properties only with non-`GET` verbs.</span></span> <span data-ttu-id="dee9e-211">プロパティにバインドすると、HTTP データをモデル型に変換する目的でコードを記述する必要がなくなります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-211">Binding to properties removes the need to writing code to convert HTTP data to the model type.</span></span> <span data-ttu-id="dee9e-212">同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-212">Binding reduces code by using the same property to render form fields (`<input asp-for="Customer.Name">`) and accept the input.</span></span>
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
 <span data-ttu-id="dee9e-213">*Pages/Create.cshtml* ビュー ファイルのレビュー:</span><span class="sxs-lookup"><span data-stu-id="dee9e-213">Reviewing the *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml?highlight=3,9)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml?highlight=3,9)]
 
 * <span data-ttu-id="dee9e-214">前のコードでは、[入力タグ ヘルパー](xref:mvc/views/working-with-forms#the-input-tag-helper) `<input asp-for="Customer.Name" />` によって HTML `<input>` 要素が `Customer.Name` モデル式にバインドされます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-214">In the preceding code, the [input tag helper](xref:mvc/views/working-with-forms#the-input-tag-helper) `<input asp-for="Customer.Name" />` binds the HTML `<input>` element to the `Customer.Name` model expression.</span></span>
 * <span data-ttu-id="dee9e-215">[`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available) でタグ ヘルパーを使用可能にします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-215">[`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available) makes Tag Helpers available.</span></span>
@@ -214,21 +214,21 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-217">*Index.cshtml* はホーム ページです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-217">*Index.cshtml* is the home page:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Index.cshtml)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml)]
 
 <span data-ttu-id="dee9e-218">関連付けられた `PageModel` クラス ( *Index.cshtml.cs* ):</span><span class="sxs-lookup"><span data-stu-id="dee9e-218">The associated `PageModel` class ( *Index.cshtml.cs* ):</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet)]
 
 <span data-ttu-id="dee9e-219">*Index.cshtml* ファイルには、次のマークアップが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-219">The *Index.cshtml* file contains the following markup:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Index.cshtml?range=21)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=21)]
 
-<span data-ttu-id="dee9e-220">`<a /a>` [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)では、`asp-route-{value}` 属性を使用して編集ページへのリンクが生成されました。</span><span class="sxs-lookup"><span data-stu-id="dee9e-220">The `<a /a>` [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) used the `asp-route-{value}` attribute to generate a link to the Edit page.</span></span> <span data-ttu-id="dee9e-221">リンクには、連絡先 ID とともにルート データが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-221">The link contains route data with the contact ID.</span></span> <span data-ttu-id="dee9e-222">たとえば、`https://localhost:5001/Edit/1` のようにします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-222">For example, `https://localhost:5001/Edit/1`.</span></span> <span data-ttu-id="dee9e-223">[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、:::no-loc(Razor)::: ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-223">[Tag Helpers](xref:mvc/views/tag-helpers/intro) enable server-side code to participate in creating and rendering HTML elements in :::no-loc(Razor)::: files.</span></span>
+<span data-ttu-id="dee9e-220">`<a /a>` [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)では、`asp-route-{value}` 属性を使用して編集ページへのリンクが生成されました。</span><span class="sxs-lookup"><span data-stu-id="dee9e-220">The `<a /a>` [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) used the `asp-route-{value}` attribute to generate a link to the Edit page.</span></span> <span data-ttu-id="dee9e-221">リンクには、連絡先 ID とともにルート データが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-221">The link contains route data with the contact ID.</span></span> <span data-ttu-id="dee9e-222">たとえば、`https://localhost:5001/Edit/1` のようにします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-222">For example, `https://localhost:5001/Edit/1`.</span></span> <span data-ttu-id="dee9e-223">[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、Razor ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-223">[Tag Helpers](xref:mvc/views/tag-helpers/intro) enable server-side code to participate in creating and rendering HTML elements in Razor files.</span></span>
 
 <span data-ttu-id="dee9e-224">*Index.cshtml* ファイルには、各顧客の連絡先の削除ボタンを作成するマークアップが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-224">The *Index.cshtml* file contains markup to create a delete button for each customer contact:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Index.cshtml?range=22-23)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=22-23)]
 
 <span data-ttu-id="dee9e-225">レンダリングされた HTML:</span><span class="sxs-lookup"><span data-stu-id="dee9e-225">The rendered HTML:</span></span>
 
@@ -245,18 +245,18 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-231">この例では `handler` が `delete` であるため、`OnPostDeleteAsync` ハンドラー メソッドを使用して `POST` 要求が処理されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-231">Because the `handler` is `delete` in this example, the `OnPostDeleteAsync` handler method is used to process the `POST` request.</span></span> <span data-ttu-id="dee9e-232">`asp-page-handler` が `remove` などの別の値に設定されている場合、名前が `OnPostRemoveAsync` のハンドラー メソッドが選択されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-232">If the `asp-page-handler` is set to a different value, such as `remove`, a handler method with the name `OnPostRemoveAsync` is selected.</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet2)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml.cs?name=snippet2)]
 
 <span data-ttu-id="dee9e-233">`OnPostDeleteAsync` メソッド:</span><span class="sxs-lookup"><span data-stu-id="dee9e-233">The `OnPostDeleteAsync` method:</span></span>
 
 * <span data-ttu-id="dee9e-234">クエリ文字列から `id` を取得します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-234">Gets the `id` from the query string.</span></span>
 * <span data-ttu-id="dee9e-235">`FindAsync` を使用してデータベースから顧客の連絡先を照会します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-235">Queries the database for the customer contact with `FindAsync`.</span></span>
 * <span data-ttu-id="dee9e-236">顧客の連絡先が見つからない場合、それは削除されており、データベースが更新されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-236">If the customer contact is found, it's removed and the database is updated.</span></span>
-* <span data-ttu-id="dee9e-237">ルート インデックス ページ (`/Index`) にリダイレクトされるように、<xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel.RedirectToPage*> を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-237">Calls <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.PageModel.RedirectToPage*> to redirect to the root Index page (`/Index`).</span></span>
+* <span data-ttu-id="dee9e-237">ルート インデックス ページ (`/Index`) にリダイレクトされるように、<xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> を呼び出します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-237">Calls <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> to redirect to the root Index page (`/Index`).</span></span>
 
 ### <a name="the-editcshtml-file"></a><span data-ttu-id="dee9e-238">Edit.cshtml ファイル</span><span class="sxs-lookup"><span data-stu-id="dee9e-238">The Edit.cshtml file</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Edit.cshtml?highlight=1)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml?highlight=1)]
 
 <span data-ttu-id="dee9e-239">最初の行には `@page "{id:int}"` ディレクティブが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-239">The first line contains the `@page "{id:int}"` directive.</span></span> <span data-ttu-id="dee9e-240">ルーティングの制約 `"{id:int}"` は、`int` ルート データを含むページへの要求を受け入れるようにページに指示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-240">The routing constraint`"{id:int}"` tells the page to accept requests to the page that contain `int` route data.</span></span> <span data-ttu-id="dee9e-241">ページへの要求に `int` に変換できるルート データが含まれていない場合は、ランタイムで HTTP 404 (見つかりません) エラーが返されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-241">If a request to the page doesn't contain route data that can be converted to an `int`, the runtime returns an HTTP 404 (not found) error.</span></span> <span data-ttu-id="dee9e-242">ID を省略するには、次のように `?` をルート制約に追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-242">To make the ID optional, append `?` to the route constraint:</span></span>
 
@@ -266,7 +266,7 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-243">*Edit.cshtml.cs* ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-243">The *Edit.cshtml.cs* file:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Edit.cshtml.cs?name=snippet)]
 
 ## <a name="validation"></a><span data-ttu-id="dee9e-244">検証</span><span class="sxs-lookup"><span data-stu-id="dee9e-244">Validation</span></span>
 
@@ -279,11 +279,11 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-250">`Customer` モデルを考えてみましょう。</span><span class="sxs-lookup"><span data-stu-id="dee9e-250">Consider the `Customer` model:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Models/Customer.cs)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
 
 <span data-ttu-id="dee9e-251">次の *Create.cshtml* ビュー ファイルを使用:</span><span class="sxs-lookup"><span data-stu-id="dee9e-251">Using the following *Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create3.cshtml?highlight=3,8-9,15-99)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=3,8-9,15-99)]
 
 <span data-ttu-id="dee9e-252">上記のコードでは次の操作が行われます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-252">The preceding code:</span></span>
 
@@ -295,7 +295,7 @@ ms.locfileid: "94430875"
 
 * <span data-ttu-id="dee9e-257">次の HTML が生成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-257">Generates the following HTML:</span></span>
 
-  [!code-html[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create5.html)]
+  [!code-html[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create5.html)]
 
 <span data-ttu-id="dee9e-258">名前値なしで Create フォームを投稿すると、このフォームに "The Name field is required." (名前フィールドは必須です。) というエラー メッセージ</span><span class="sxs-lookup"><span data-stu-id="dee9e-258">Posting the Create form without a name value displays the error message "The Name field is required."</span></span> <span data-ttu-id="dee9e-259">が表示されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-259">on the form.</span></span> <span data-ttu-id="dee9e-260">JavaScript がクライアントで有効になっている場合、サーバーに投稿されず、エラーがブラウザーに表示されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-260">If JavaScript is enabled on the client, the browser displays the error without posting to the server.</span></span>
 
@@ -306,7 +306,7 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-267">次の `Movie` モデルがあるとします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-267">Consider the following `Movie` model:</span></span>
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/:::no-loc(Razor):::PagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
 <span data-ttu-id="dee9e-268">検証属性では、適用対象のモデル プロパティに適用する動作が指定されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-268">The validation attributes specify behavior to enforce on the model properties they're applied to:</span></span>
 
@@ -340,51 +340,51 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-290">通常、`HEAD` 要求に対して `OnHead` ハンドラーが作成され、呼び出されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-290">Ordinarily, an `OnHead` handler is created and called for `HEAD` requests:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
-<span data-ttu-id="dee9e-291">`OnHead` ハンドラーが定義されていない場合、:::no-loc(Razor)::: ページは `OnGet` ハンドラーの呼び出しにフォールバックします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-291">:::no-loc(Razor)::: Pages falls back to calling the `OnGet` handler if no `OnHead` handler is defined.</span></span>
+<span data-ttu-id="dee9e-291">`OnHead` ハンドラーが定義されていない場合、Razor ページは `OnGet` ハンドラーの呼び出しにフォールバックします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-291">Razor Pages falls back to calling the `OnGet` handler if no `OnHead` handler is defined.</span></span>
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-no-locrazor-pages"></a><span data-ttu-id="dee9e-292">XSRF/CSRF および :::no-loc(Razor)::: ページ</span><span class="sxs-lookup"><span data-stu-id="dee9e-292">XSRF/CSRF and :::no-loc(Razor)::: Pages</span></span>
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a><span data-ttu-id="dee9e-292">XSRF/CSRF および Razor ページ</span><span class="sxs-lookup"><span data-stu-id="dee9e-292">XSRF/CSRF and Razor Pages</span></span>
 
-<span data-ttu-id="dee9e-293">:::no-loc(Razor)::: ページは、[偽造防止検証](xref:security/anti-request-forgery)によって保護されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-293">:::no-loc(Razor)::: Pages are protected by [Antiforgery validation](xref:security/anti-request-forgery).</span></span> <span data-ttu-id="dee9e-294">[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) により HTML フォーム要素に偽造防止トークンが挿入されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-294">The [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injects antiforgery tokens into HTML form elements.</span></span>
+<span data-ttu-id="dee9e-293">Razor ページは、[偽造防止検証](xref:security/anti-request-forgery)によって保護されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-293">Razor Pages are protected by [Antiforgery validation](xref:security/anti-request-forgery).</span></span> <span data-ttu-id="dee9e-294">[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) により HTML フォーム要素に偽造防止トークンが挿入されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-294">The [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injects antiforgery tokens into HTML form elements.</span></span>
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a><span data-ttu-id="dee9e-295">:::no-loc(Razor)::: ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用</span><span class="sxs-lookup"><span data-stu-id="dee9e-295">Using Layouts, partials, templates, and Tag Helpers with :::no-loc(Razor)::: Pages</span></span>
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a><span data-ttu-id="dee9e-295">Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用</span><span class="sxs-lookup"><span data-stu-id="dee9e-295">Using Layouts, partials, templates, and Tag Helpers with Razor Pages</span></span>
 
-<span data-ttu-id="dee9e-296">ページは、:::no-loc(Razor)::: ビュー エンジンのすべての機能で動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-296">Pages work with all the capabilities of the :::no-loc(Razor)::: view engine.</span></span> <span data-ttu-id="dee9e-297">レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml* "、" *_ViewImports.cshtml* " は、従来の :::no-loc(Razor)::: ビューの場合と同じように動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-297">Layouts, partials, templates, Tag Helpers, *_ViewStart.cshtml* , and *_ViewImports.cshtml* work in the same way they do for conventional :::no-loc(Razor)::: views.</span></span>
+<span data-ttu-id="dee9e-296">ページは、Razor ビュー エンジンのすべての機能で動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-296">Pages work with all the capabilities of the Razor view engine.</span></span> <span data-ttu-id="dee9e-297">レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml* "、" *_ViewImports.cshtml* " は、従来の Razor ビューの場合と同じように動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-297">Layouts, partials, templates, Tag Helpers, *_ViewStart.cshtml* , and *_ViewImports.cshtml* work in the same way they do for conventional Razor views.</span></span>
 
 <span data-ttu-id="dee9e-298">これらの機能の一部を利用してこのページをまとめてみましょう。</span><span class="sxs-lookup"><span data-stu-id="dee9e-298">Let's declutter this page by taking advantage of some of those capabilities.</span></span>
 
 <span data-ttu-id="dee9e-299">[レイアウト ページ](xref:mvc/views/layout)を *Pages/Shared/_Layout.cshtml* に追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-299">Add a [layout page](xref:mvc/views/layout) to *Pages/Shared/_Layout.cshtml* :</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Shared/_Layout2.cshtml?hightlight=12)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Shared/_Layout2.cshtml?hightlight=12)]
 
 <span data-ttu-id="dee9e-300">[レイアウト](xref:mvc/views/layout)は次のことを行います。</span><span class="sxs-lookup"><span data-stu-id="dee9e-300">The [Layout](xref:mvc/views/layout):</span></span>
 
 * <span data-ttu-id="dee9e-301">(ページでレイアウトを止めない限り) 各ページのレイアウトを制御します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-301">Controls the layout of each page (unless the page opts out of layout).</span></span>
 * <span data-ttu-id="dee9e-302">JavaScript やスタイルシートなどの HTML 構造をインポートします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-302">Imports HTML structures such as JavaScript and stylesheets.</span></span>
-* <span data-ttu-id="dee9e-303">`@RenderBody()` が呼び出されるところで :::no-loc(Razor)::: ページの内容が表示されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-303">The contents of the :::no-loc(Razor)::: page are rendered where `@RenderBody()` is called.</span></span>
+* <span data-ttu-id="dee9e-303">`@RenderBody()` が呼び出されるところで Razor ページの内容が表示されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-303">The contents of the Razor page are rendered where `@RenderBody()` is called.</span></span>
 
 <span data-ttu-id="dee9e-304">詳細については、[レイアウトに関するページ](xref:mvc/views/layout)を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-304">For more information, see [layout page](xref:mvc/views/layout).</span></span>
 
 <span data-ttu-id="dee9e-305">[Layout](xref:mvc/views/layout#specifying-a-layout) プロパティは *Pages/_ViewStart.cshtml* で設定されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-305">The [Layout](xref:mvc/views/layout#specifying-a-layout) property is set in *Pages/_ViewStart.cshtml* :</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_ViewStart.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
-<span data-ttu-id="dee9e-306">レイアウトは、 *Pages/Shared* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-306">The layout is in the *Pages/Shared* folder.</span></span> <span data-ttu-id="dee9e-307">ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-307">Pages look for other views (layouts, templates, partials) hierarchically, starting in the same folder as the current page.</span></span> <span data-ttu-id="dee9e-308">" *Pages/Shared* " フォルダー内のレイアウトは、" *Pages* " フォルダー配下の任意の :::no-loc(Razor)::: ページから使用できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-308">A layout in the *Pages/Shared* folder can be used from any :::no-loc(Razor)::: page under the *Pages* folder.</span></span>
+<span data-ttu-id="dee9e-306">レイアウトは、 *Pages/Shared* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-306">The layout is in the *Pages/Shared* folder.</span></span> <span data-ttu-id="dee9e-307">ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-307">Pages look for other views (layouts, templates, partials) hierarchically, starting in the same folder as the current page.</span></span> <span data-ttu-id="dee9e-308">" *Pages/Shared* " フォルダー内のレイアウトは、" *Pages* " フォルダー配下の任意の Razor ページから使用できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-308">A layout in the *Pages/Shared* folder can be used from any Razor page under the *Pages* folder.</span></span>
 
 <span data-ttu-id="dee9e-309">レイアウト ファイルは *Pages/Shared* フォルダーに入ります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-309">The layout file should go in the *Pages/Shared* folder.</span></span>
 
-<span data-ttu-id="dee9e-310">レイアウト ファイルを *Views/Shared* フォルダー内に配置 **しない** ことをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-310">We recommend you **not** put the layout file in the *Views/Shared* folder.</span></span> <span data-ttu-id="dee9e-311">*Views/Shared* は MVC ビュー パターンです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-311">*Views/Shared* is an MVC views pattern.</span></span> <span data-ttu-id="dee9e-312">:::no-loc(Razor)::: ページは、パス規則ではなく、フォルダー階層に依存することを意図しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-312">:::no-loc(Razor)::: Pages are meant to rely on folder hierarchy, not path conventions.</span></span>
+<span data-ttu-id="dee9e-310">レイアウト ファイルを *Views/Shared* フォルダー内に配置 **しない** ことをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-310">We recommend you **not** put the layout file in the *Views/Shared* folder.</span></span> <span data-ttu-id="dee9e-311">*Views/Shared* は MVC ビュー パターンです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-311">*Views/Shared* is an MVC views pattern.</span></span> <span data-ttu-id="dee9e-312">Razor ページは、パス規則ではなく、フォルダー階層に依存することを意図しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-312">Razor Pages are meant to rely on folder hierarchy, not path conventions.</span></span>
 
-<span data-ttu-id="dee9e-313">:::no-loc(Razor)::: ページからのビュー検索には、" *Pages* " フォルダーが含まれます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-313">View search from a :::no-loc(Razor)::: Page includes the *Pages* folder.</span></span> <span data-ttu-id="dee9e-314">MVC コントローラーで使用されているレイアウト、テンプレート、パーシャルと、従来の :::no-loc(Razor)::: ビューは " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-314">The layouts, templates, and partials used with MVC controllers and conventional :::no-loc(Razor)::: views *just work*.</span></span>
+<span data-ttu-id="dee9e-313">Razor ページからのビュー検索には、" *Pages* " フォルダーが含まれます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-313">View search from a Razor Page includes the *Pages* folder.</span></span> <span data-ttu-id="dee9e-314">MVC コントローラーで使用されているレイアウト、テンプレート、パーシャルと、従来の Razor ビューは " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-314">The layouts, templates, and partials used with MVC controllers and conventional Razor views *just work*.</span></span>
 
 <span data-ttu-id="dee9e-315">*Pages/_ViewImports.cshtml* ファイルを追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-315">Add a *Pages/_ViewImports.cshtml* file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_ViewImports.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml)]
 
 <span data-ttu-id="dee9e-316">`@namespace` はこのチュートリアルで後ほど説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-316">`@namespace` is explained later in the tutorial.</span></span> <span data-ttu-id="dee9e-317">`@addTagHelper` ディレクティブにより、 [組み込みタグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/Index)が *Pages* フォルダー内のすべてのページにもたらされます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-317">The `@addTagHelper` directive brings in the [built-in Tag Helpers](xref:mvc/views/tag-helpers/builtin-th/Index) to all the pages in the *Pages* folder.</span></span>
 
@@ -392,7 +392,7 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-318">ページに設定される `@namespace` ディレクティブ:</span><span class="sxs-lookup"><span data-stu-id="dee9e-318">The `@namespace` directive set on a page:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesIntro/Pages/Customers/Namespace2.cshtml?highlight=2)]
+[!code-cshtml[](index/sample/RazorPagesIntro/Pages/Customers/Namespace2.cshtml?highlight=2)]
 
 <span data-ttu-id="dee9e-319">`@namespace` ディレクティブは、ページの名前空間を設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-319">The `@namespace` directive sets the namespace for the page.</span></span> <span data-ttu-id="dee9e-320">`@model` ディレクティブには、名前空間を含める必要はありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-320">The `@model` directive doesn't need to include the namespace.</span></span>
 
@@ -400,27 +400,27 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-323">たとえば、`PageModel` クラス *Pages/Customers/Edit.cshtml.cs* は名前空間を明示的に設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-323">For example, the `PageModel` class *Pages/Customers/Edit.cshtml.cs* explicitly sets the namespace:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
 
 <span data-ttu-id="dee9e-324">*Pages/_ViewImports.cshtml* ファイルは次の名前空間を設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-324">The *Pages/_ViewImports.cshtml* file sets the following namespace:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
 
-<span data-ttu-id="dee9e-325">" *Pages/Customers/Edit.cshtml* " :::no-loc(Razor)::: ページの生成された名前空間は、`PageModel` クラスと同じです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-325">The generated namespace for the *Pages/Customers/Edit.cshtml* :::no-loc(Razor)::: Page is the same as the `PageModel` class.</span></span>
+<span data-ttu-id="dee9e-325">" *Pages/Customers/Edit.cshtml* " Razor ページの生成された名前空間は、`PageModel` クラスと同じです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-325">The generated namespace for the *Pages/Customers/Edit.cshtml* Razor Page is the same as the `PageModel` class.</span></span>
 
-<span data-ttu-id="dee9e-326">`@namespace` は " *従来の :::no-loc(Razor)::: ビューでも機能します。* "</span><span class="sxs-lookup"><span data-stu-id="dee9e-326">`@namespace` *also works with conventional :::no-loc(Razor)::: views.*</span></span>
+<span data-ttu-id="dee9e-326">`@namespace` は " *従来の Razor ビューでも機能します。* "</span><span class="sxs-lookup"><span data-stu-id="dee9e-326">`@namespace` *also works with conventional Razor views.*</span></span>
 
 <span data-ttu-id="dee9e-327">*Pages/Create.cshtml* ビュー ファイル を考えてみましょう。</span><span class="sxs-lookup"><span data-stu-id="dee9e-327">Consider the *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create3.cshtml?highlight=2-3)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=2-3)]
 
 <span data-ttu-id="dee9e-328">更新後の *Pages/Create.cshtml* ビュー ファイル、 *_ViewImports.cshtml* 、前のレイアウト ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-328">The updated *Pages/Create.cshtml* view file with *_ViewImports.cshtml* and the preceding layout file:</span></span>
 
-[!code-cshtml[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create4.cshtml?highlight=2)]
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create4.cshtml?highlight=2)]
 
 <span data-ttu-id="dee9e-329">前のコードでは、 *_ViewImports.cshtml* によって名前空間とタグ ヘルパーがインポートされました。</span><span class="sxs-lookup"><span data-stu-id="dee9e-329">In the preceding code, the *_ViewImports.cshtml* imported the namespace and Tag Helpers.</span></span> <span data-ttu-id="dee9e-330">レイアウト ファイルによって JavaScript ファイルがインポートされました。</span><span class="sxs-lookup"><span data-stu-id="dee9e-330">The layout file imported the JavaScript files.</span></span>
 
-<span data-ttu-id="dee9e-331">[:::no-loc(Razor)::: ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする " *Pages/_ValidationScriptsPartial.cshtml* " が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-331">The [:::no-loc(Razor)::: Pages starter project](#rpvs17) contains the *Pages/_ValidationScriptsPartial.cshtml* , which hooks up client-side validation.</span></span>
+<span data-ttu-id="dee9e-331">[Razor ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする " *Pages/_ValidationScriptsPartial.cshtml* " が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-331">The [Razor Pages starter project](#rpvs17) contains the *Pages/_ValidationScriptsPartial.cshtml* , which hooks up client-side validation.</span></span>
 
 <span data-ttu-id="dee9e-332">部分ビューの詳細については、「<xref:mvc/views/partial>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-332">For more information on partial views, see <xref:mvc/views/partial>.</span></span>
 
@@ -430,7 +430,7 @@ ms.locfileid: "94430875"
 
 <span data-ttu-id="dee9e-334">上に示した `Create` ページでは、`RedirectToPage` を使用します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-334">The `Create` page, shown previously, uses `RedirectToPage`:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=28)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=28)]
 
 <span data-ttu-id="dee9e-335">アプリには次のファイル/フォルダー構造があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-335">The app has the following file/folder structure:</span></span>
 
@@ -467,7 +467,7 @@ ms.locfileid: "94430875"
 | <span data-ttu-id="dee9e-360">RedirectToPage("../Index")</span><span class="sxs-lookup"><span data-stu-id="dee9e-360">RedirectToPage("../Index")</span></span> | <span data-ttu-id="dee9e-361">*Pages/Index*</span><span class="sxs-lookup"><span data-stu-id="dee9e-361">*Pages/Index*</span></span> |
 | <span data-ttu-id="dee9e-362">RedirectToPage("Index")</span><span class="sxs-lookup"><span data-stu-id="dee9e-362">RedirectToPage("Index")</span></span>  | <span data-ttu-id="dee9e-363">*Pages/Customers/Index*</span><span class="sxs-lookup"><span data-stu-id="dee9e-363">*Pages/Customers/Index*</span></span> |
 
-<!-- Test via ~/razor-pages/index/3.0sample/:::no-loc(Razor):::PagesContacts/Pages/Customers/Details.cshtml.cs -->
+<!-- Test via ~/razor-pages/index/3.0sample/RazorPagesContacts/Pages/Customers/Details.cshtml.cs -->
 
 <span data-ttu-id="dee9e-364">`RedirectToPage("Index")`、`RedirectToPage("./Index")`、`RedirectToPage("../Index")` は *相対名* です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-364">`RedirectToPage("Index")`, `RedirectToPage("./Index")`, and `RedirectToPage("../Index")` are *relative names*.</span></span> <span data-ttu-id="dee9e-365">`RedirectToPage` パラメーターは現在のページのパスと *組み合わされて* 、ターゲット ページの名前を計算します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-365">The `RedirectToPage` parameter is *combined* with the path of the current page to compute the name of the destination page.</span></span>
 
@@ -524,7 +524,7 @@ public class AboutModel : PageModel
 
 <span data-ttu-id="dee9e-383">次のコードは、`TempData` を使用して `Message` の値を設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-383">The following code sets the value of `Message` using `TempData`:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
 
 <span data-ttu-id="dee9e-384">*Pages/Customers/Index.cshtml* ファイル内の次のマークアップは、`TempData` を使用して `Message` の値を表示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-384">The following markup in the *Pages/Customers/Index.cshtml* file displays the value of `Message` using `TempData`.</span></span>
 
@@ -547,17 +547,17 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-388">次のページでは、`asp-page-handler` タグ ヘルパーを使用して 2 つのハンドラーにマークアップが生成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-388">The following page generates markup for two handlers using the `asp-page-handler` Tag Helper:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13)]
 
 <span data-ttu-id="dee9e-389">前の例のフォームには、それぞれが `FormActionTagHelper` を使用して異なる URL に送信する 2 つの送信ボタンがあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-389">The form in the preceding example has two submit buttons, each using the `FormActionTagHelper` to submit to a different URL.</span></span> <span data-ttu-id="dee9e-390">`asp-page-handler` 属性は、`asp-page` のコンパニオンです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-390">The `asp-page-handler` attribute is a companion to `asp-page`.</span></span> <span data-ttu-id="dee9e-391">`asp-page-handler` はページごとに定義されている各ハンドラー メソッドに送信する URL を生成します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-391">`asp-page-handler` generates URLs that submit to each of the handler methods defined by a page.</span></span> <span data-ttu-id="dee9e-392">サンプルは現在のページにリンクしているため、`asp-page` は指定されません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-392">`asp-page` isn't specified because the sample is linking to the current page.</span></span>
 
 <span data-ttu-id="dee9e-393">ページ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-393">The page model:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
 <span data-ttu-id="dee9e-394">上記のコードは、 *名前付きハンドラー メソッド* を使用しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-394">The preceding code uses *named handler methods*.</span></span> <span data-ttu-id="dee9e-395">名前付きハンドラー メソッドは、名前の `On<HTTP Verb>` の後および `Async` の前 (ある場合) のテキストを取得して作成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-395">Named handler methods are created by taking the text in the name after `On<HTTP Verb>` and before `Async` (if present).</span></span> <span data-ttu-id="dee9e-396">前の例では、ページ メソッドは OnPost **JoinList** Async と OnPost **JoinListUC** Async です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-396">In the preceding example, the page methods are OnPost **JoinList** Async and OnPost **JoinListUC** Async.</span></span> <span data-ttu-id="dee9e-397">*OnPost* と *Async* を削除すると、ハンドラー名は `JoinList` と `JoinListUC` になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-397">With *OnPost* and *Async* removed, the handler names are `JoinList` and `JoinListUC`.</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateFATH.cshtml?range=12-13)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?range=12-13)]
 
 <span data-ttu-id="dee9e-398">上記のコードを使用すると、`OnPostJoinListAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH?handler=JoinList` になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-398">Using the preceding code, the URL path that submits to `OnPostJoinListAsync` is `https://localhost:5001/Customers/CreateFATH?handler=JoinList`.</span></span> <span data-ttu-id="dee9e-399">`OnPostJoinListUCAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH?handler=JoinListUC` です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-399">The URL path that submits to `OnPostJoinListUCAsync` is `https://localhost:5001/Customers/CreateFATH?handler=JoinListUC`.</span></span>
 
@@ -573,7 +573,7 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-410">URL 内のクエリ文字列 `?handler=JoinList` が気に入らない場合は、ルートを変更して URL のパス部分にハンドラー名を挿入することができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-410">If you don't like the query string `?handler=JoinList` in the URL, change the route to put the handler name in the path portion of the URL.</span></span> <span data-ttu-id="dee9e-411">`@page` ディレクティブの後に二重引用符で囲んだルート テンプレートを追加して、ルートをカスタマイズすることができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-411">The route can be customized by adding a route template enclosed in double quotes after the `@page` directive.</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
 <span data-ttu-id="dee9e-412">上記のコードを使用すると、`OnPostJoinListAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH/JoinList` になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-412">Using the preceding code, the URL path that submits to `OnPostJoinListAsync` is `https://localhost:5001/Customers/CreateFATH/JoinList`.</span></span> <span data-ttu-id="dee9e-413">`OnPostJoinListUCAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH/JoinListUC` です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-413">The URL path that submits to `OnPostJoinListUCAsync` is `https://localhost:5001/Customers/CreateFATH/JoinListUC`.</span></span>
 
@@ -583,30 +583,30 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-416">次のセクションの構成と設定はほとんどのアプリで必要ありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-416">The configuration and settings in following sections is not required by most apps.</span></span>
 
-<span data-ttu-id="dee9e-417">高度なオプションを構成するには、<xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.:::no-loc(Razor):::PagesOptions> を構成する <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.Add:::no-loc(Razor):::Pages%2A> オーバーロードを使用します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-417">To configure advanced options, use the <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.Add:::no-loc(Razor):::Pages%2A> overload that configures <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.:::no-loc(Razor):::PagesOptions>:</span></span>
+<span data-ttu-id="dee9e-417">高度なオプションを構成するには、<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> を構成する <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> オーバーロードを使用します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-417">To configure advanced options, use the <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> overload that configures <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions>:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/StartupRPoptions.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/StartupRPoptions.cs?name=snippet)]
 
-<span data-ttu-id="dee9e-418"><xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.:::no-loc(Razor):::PagesOptions> を使用してページのルート ディレクトリを設定したり、ページのアプリケーション モデルの規則を追加したりできます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-418">Use the <xref:Microsoft.AspNetCore.Mvc.:::no-loc(Razor):::Pages.:::no-loc(Razor):::PagesOptions> to set the root directory for pages, or add application model conventions for pages.</span></span> <span data-ttu-id="dee9e-419">規則の詳細については、「[:::no-loc(Razor)::: ページの承認規則](xref:security/authorization/razor-pages-authorization)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-419">For more information on conventions, see [:::no-loc(Razor)::: Pages authorization conventions](xref:security/authorization/razor-pages-authorization).</span></span>
+<span data-ttu-id="dee9e-418"><xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> を使用してページのルート ディレクトリを設定したり、ページのアプリケーション モデルの規則を追加したりできます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-418">Use the <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> to set the root directory for pages, or add application model conventions for pages.</span></span> <span data-ttu-id="dee9e-419">規則の詳細については、「[Razor ページの承認規則](xref:security/authorization/razor-pages-authorization)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-419">For more information on conventions, see [Razor Pages authorization conventions](xref:security/authorization/razor-pages-authorization).</span></span>
 
-<span data-ttu-id="dee9e-420">ビューをプリコンパイルするには、[:::no-loc(Razor)::: ビューのコンパイル](xref:mvc/views/view-compilation)に関するページをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-420">To precompile views, see [:::no-loc(Razor)::: view compilation](xref:mvc/views/view-compilation).</span></span>
+<span data-ttu-id="dee9e-420">ビューをプリコンパイルするには、[Razor ビューのコンパイル](xref:mvc/views/view-compilation)に関するページをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-420">To precompile views, see [Razor view compilation](xref:mvc/views/view-compilation).</span></span>
 
-### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a><span data-ttu-id="dee9e-421">:::no-loc(Razor)::: Pages をコンテンツのルートに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-421">Specify that :::no-loc(Razor)::: Pages are at the content root</span></span>
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a><span data-ttu-id="dee9e-421">Razor Pages をコンテンツのルートに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-421">Specify that Razor Pages are at the content root</span></span>
 
-<span data-ttu-id="dee9e-422">:::no-loc(Razor)::: Pages のルートは既定で */Pages* ディレクトリです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-422">By default, :::no-loc(Razor)::: Pages are rooted in the */Pages* directory.</span></span> <span data-ttu-id="dee9e-423"><xref:Microsoft.Extensions.DependencyInjection.Mvc:::no-loc(Razor):::PagesMvcBuilderExtensions.With:::no-loc(Razor):::PagesAtContentRoot*> を追加して、:::no-loc(Razor)::: ページをアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) に置くように指定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-423">Add <xref:Microsoft.Extensions.DependencyInjection.Mvc:::no-loc(Razor):::PagesMvcBuilderExtensions.With:::no-loc(Razor):::PagesAtContentRoot*> to specify that your :::no-loc(Razor)::: Pages are at the [content root](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) of the app:</span></span>
+<span data-ttu-id="dee9e-422">Razor Pages のルートは既定で */Pages* ディレクトリです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-422">By default, Razor Pages are rooted in the */Pages* directory.</span></span> <span data-ttu-id="dee9e-423"><xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> を追加して、Razor ページをアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) に置くように指定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-423">Add <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> to specify that your Razor Pages are at the [content root](xref:fundamentals/index#content-root) (<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>) of the app:</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/StartupWith:::no-loc(Razor):::PagesAtContentRoot.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a><span data-ttu-id="dee9e-424">:::no-loc(Razor)::: Pages をカスタム ルート ディレクトリに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-424">Specify that :::no-loc(Razor)::: Pages are at a custom root directory</span></span>
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a><span data-ttu-id="dee9e-424">Razor Pages をカスタム ルート ディレクトリに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-424">Specify that Razor Pages are at a custom root directory</span></span>
 
-<span data-ttu-id="dee9e-425">(相対パスを指定して) :::no-loc(Razor)::: ページをアプリのカスタム ルート ディレクトリに置くように指定するには、<xref:Microsoft.Extensions.DependencyInjection.Mvc:::no-loc(Razor):::PagesMvcCoreBuilderExtensions.With:::no-loc(Razor):::PagesRoot*> を追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-425">Add <xref:Microsoft.Extensions.DependencyInjection.Mvc:::no-loc(Razor):::PagesMvcCoreBuilderExtensions.With:::no-loc(Razor):::PagesRoot*> to specify that :::no-loc(Razor)::: Pages are at a custom root directory in the app (provide a relative path):</span></span>
+<span data-ttu-id="dee9e-425">(相対パスを指定して) Razor ページをアプリのカスタム ルート ディレクトリに置くように指定するには、<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> を追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-425">Add <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> to specify that Razor Pages are at a custom root directory in the app (provide a relative path):</span></span>
 
-[!code-csharp[](index/3.0sample/:::no-loc(Razor):::PagesContacts/StartupWith:::no-loc(Razor):::PagesRoot.cs?name=snippet)]
+[!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesRoot.cs?name=snippet)]
 
 ## <a name="additional-resources"></a><span data-ttu-id="dee9e-426">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="dee9e-426">Additional resources</span></span>
 
-* <span data-ttu-id="dee9e-427">この概要に基づく、[:::no-loc(Razor)::: Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するページをご覧ください</span><span class="sxs-lookup"><span data-stu-id="dee9e-427">See [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start), which builds on this introduction.</span></span>
-* [<span data-ttu-id="dee9e-428">属性と :::no-loc(Razor)::: ページを承認する</span><span class="sxs-lookup"><span data-stu-id="dee9e-428">Authorize attribute and :::no-loc(Razor)::: Pages</span></span>](xref:security/authorization/simple#aarp)
+* <span data-ttu-id="dee9e-427">この概要に基づく、[Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するページをご覧ください</span><span class="sxs-lookup"><span data-stu-id="dee9e-427">See [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start), which builds on this introduction.</span></span>
+* [<span data-ttu-id="dee9e-428">属性と Razor ページを承認する</span><span class="sxs-lookup"><span data-stu-id="dee9e-428">Authorize attribute and Razor Pages</span></span>](xref:security/authorization/simple#aarp)
 * [<span data-ttu-id="dee9e-429">サンプル コードのダウンロードまたは表示</span><span class="sxs-lookup"><span data-stu-id="dee9e-429">Download or view sample code</span></span>](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/3.0sample)
 * <xref:index>
 * <xref:mvc/views/razor>
@@ -624,11 +624,11 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-430">[Rick Anderson](https://twitter.com/RickAndMSFT) および [Ryan Nowak](https://github.com/rynowak) 著</span><span class="sxs-lookup"><span data-stu-id="dee9e-430">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Ryan Nowak](https://github.com/rynowak)</span></span>
 
-<span data-ttu-id="dee9e-431">:::no-loc(Razor)::: ページは、ページ コーディングに重点を置いたシナリオをより簡略化し、生産性を高める ASP.NET Core MVC の新たな側面です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-431">:::no-loc(Razor)::: Pages is a new aspect of ASP.NET Core MVC that makes coding page-focused scenarios easier and more productive.</span></span>
+<span data-ttu-id="dee9e-431">Razor ページは、ページ コーディングに重点を置いたシナリオをより簡略化し、生産性を高める ASP.NET Core MVC の新たな側面です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-431">Razor Pages is a new aspect of ASP.NET Core MVC that makes coding page-focused scenarios easier and more productive.</span></span>
 
 <span data-ttu-id="dee9e-432">モデル ビュー コントローラーのアプローチを使用するチュートリアルをお探しの場合は、「[Get started with ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc)」 (ASP.NET Core MVC の概要) を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-432">If you're looking for a tutorial that uses the Model-View-Controller approach, see [Get started with ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc).</span></span>
 
-<span data-ttu-id="dee9e-433">このドキュメントでは、:::no-loc(Razor)::: ページの概要について説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-433">This document provides an introduction to :::no-loc(Razor)::: Pages.</span></span> <span data-ttu-id="dee9e-434">手順を追って説明するチュートリアルではありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-434">It's not a step by step tutorial.</span></span> <span data-ttu-id="dee9e-435">セクションの一部を理解できない場合は、「[:::no-loc(Razor)::: ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-435">If you find some of the sections too advanced, see [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start).</span></span> <span data-ttu-id="dee9e-436">ASP.NET Core の概要については、「[ASP.NET Core の概要](xref:index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-436">For an overview of ASP.NET Core, see the [Introduction to ASP.NET Core](xref:index).</span></span>
+<span data-ttu-id="dee9e-433">このドキュメントでは、Razor ページの概要について説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-433">This document provides an introduction to Razor Pages.</span></span> <span data-ttu-id="dee9e-434">手順を追って説明するチュートリアルではありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-434">It's not a step by step tutorial.</span></span> <span data-ttu-id="dee9e-435">セクションの一部を理解できない場合は、「[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-435">If you find some of the sections too advanced, see [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start).</span></span> <span data-ttu-id="dee9e-436">ASP.NET Core の概要については、「[ASP.NET Core の概要](xref:index)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-436">For an overview of ASP.NET Core, see the [Introduction to ASP.NET Core](xref:index).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="dee9e-437">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="dee9e-437">Prerequisites</span></span>
 
@@ -648,11 +648,11 @@ public string Message { get; set; }
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-no-locrazor-pages-project"></a><span data-ttu-id="dee9e-441">:::no-loc(Razor)::: ページ プロジェクトを作成する</span><span class="sxs-lookup"><span data-stu-id="dee9e-441">Create a :::no-loc(Razor)::: Pages project</span></span>
+## <a name="create-a-no-locrazor-pages-project"></a><span data-ttu-id="dee9e-441">Razor ページ プロジェクトを作成する</span><span class="sxs-lookup"><span data-stu-id="dee9e-441">Create a Razor Pages project</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="dee9e-442">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="dee9e-442">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="dee9e-443">:::no-loc(Razor)::: ページ プロジェクトを作成する詳細な手順については、「[:::no-loc(Razor)::: ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-443">See [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) for detailed instructions on how to create a :::no-loc(Razor)::: Pages project.</span></span>
+<span data-ttu-id="dee9e-443">Razor ページ プロジェクトを作成する詳細な手順については、「[Razor ページの概要](xref:tutorials/razor-pages/razor-pages-start)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-443">See [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) for detailed instructions on how to create a Razor Pages project.</span></span>
 
 # <a name="visual-studio-for-mac"></a>[<span data-ttu-id="dee9e-444">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="dee9e-444">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
@@ -666,29 +666,29 @@ public string Message { get; set; }
 
 ---
 
-## <a name="no-locrazor-pages"></a><span data-ttu-id="dee9e-449">:::no-loc(Razor)::: Pages</span><span class="sxs-lookup"><span data-stu-id="dee9e-449">:::no-loc(Razor)::: Pages</span></span>
+## <a name="no-locrazor-pages"></a><span data-ttu-id="dee9e-449">Razor Pages</span><span class="sxs-lookup"><span data-stu-id="dee9e-449">Razor Pages</span></span>
 
-<span data-ttu-id="dee9e-450">:::no-loc(Razor)::: ページは " *Startup.cs* " で有効になっています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-450">:::no-loc(Razor)::: Pages is enabled in *Startup.cs* :</span></span>
+<span data-ttu-id="dee9e-450">Razor ページは " *Startup.cs* " で有効になっています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-450">Razor Pages is enabled in *Startup.cs* :</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesIntro/Startup.cs?name=snippet_Startup)]
+[!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
 <span data-ttu-id="dee9e-451">基本ページを検討します。<a name="OnGet"></a></span><span class="sxs-lookup"><span data-stu-id="dee9e-451">Consider a basic page: <a name="OnGet"></a></span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesIntro/Pages/Index.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-<span data-ttu-id="dee9e-452">上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [:::no-loc(Razor)::: ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-452">The preceding code looks a lot like a [:::no-loc(Razor)::: view file](xref:tutorials/first-mvc-app/adding-view) used in an ASP.NET Core app with controllers and views.</span></span> <span data-ttu-id="dee9e-453">違いは、`@page` ディレクティブにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-453">What makes it different is the `@page` directive.</span></span> <span data-ttu-id="dee9e-454">`@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-454">`@page` makes the file into an MVC action - which means that it handles requests directly, without going through a controller.</span></span> <span data-ttu-id="dee9e-455">`@page` はページ上で最初の :::no-loc(Razor)::: ディレクティブである必要があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-455">`@page` must be the first :::no-loc(Razor)::: directive on a page.</span></span> <span data-ttu-id="dee9e-456">`@page` はその他の :::no-loc(Razor)::: コンストラクトの動作に影響します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-456">`@page` affects the behavior of other :::no-loc(Razor)::: constructs.</span></span>
+<span data-ttu-id="dee9e-452">上記のコードは、コントローラーとビューを含んだ ASP.NET Core アプリで使われる [Razor ビュー ファイル](xref:tutorials/first-mvc-app/adding-view)によく似ています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-452">The preceding code looks a lot like a [Razor view file](xref:tutorials/first-mvc-app/adding-view) used in an ASP.NET Core app with controllers and views.</span></span> <span data-ttu-id="dee9e-453">違いは、`@page` ディレクティブにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-453">What makes it different is the `@page` directive.</span></span> <span data-ttu-id="dee9e-454">`@page` はファイルを MVC アクションにします。つまり、コントローラーを経由せずに要求を直接処理します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-454">`@page` makes the file into an MVC action - which means that it handles requests directly, without going through a controller.</span></span> <span data-ttu-id="dee9e-455">`@page` はページ上で最初の Razor ディレクティブである必要があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-455">`@page` must be the first Razor directive on a page.</span></span> <span data-ttu-id="dee9e-456">`@page` はその他の Razor コンストラクトの動作に影響します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-456">`@page` affects the behavior of other Razor constructs.</span></span>
 
 <span data-ttu-id="dee9e-457">`PageModel` クラスを使用している類似したページが、次の 2 つのファイルにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-457">A similar page, using a `PageModel` class, is shown in the following two files.</span></span> <span data-ttu-id="dee9e-458">*Pages/Index2.cshtml* ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-458">The *Pages/Index2.cshtml* file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesIntro/Pages/Index2.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index2.cshtml)]
 
 <span data-ttu-id="dee9e-459">*Pages/Index2.cshtml.cs* ページ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-459">The *Pages/Index2.cshtml.cs* page model:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesIntro/Pages/Index2.cshtml.cs)]
+[!code-csharp[](index/sample/RazorPagesIntro/Pages/Index2.cshtml.cs)]
 
-<span data-ttu-id="dee9e-460">規則により、`PageModel` クラス ファイルは、:::no-loc(Razor)::: ページ ファイルと同じ名前に " *.cs* " が付加された名前になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-460">By convention, the `PageModel` class file has the same name as the :::no-loc(Razor)::: Page file with *.cs* appended.</span></span> <span data-ttu-id="dee9e-461">たとえば、上の :::no-loc(Razor)::: ページは " *Pages/Index2.cshtml* " になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-461">For example, the previous :::no-loc(Razor)::: Page is *Pages/Index2.cshtml*.</span></span> <span data-ttu-id="dee9e-462">`PageModel` クラスを含むファイル名は、 *Pages/Index2.cshtml.cs* になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-462">The file containing the `PageModel` class is named *Pages/Index2.cshtml.cs*.</span></span>
+<span data-ttu-id="dee9e-460">規則により、`PageModel` クラス ファイルは、Razor ページ ファイルと同じ名前に " *.cs* " が付加された名前になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-460">By convention, the `PageModel` class file has the same name as the Razor Page file with *.cs* appended.</span></span> <span data-ttu-id="dee9e-461">たとえば、上の Razor ページは " *Pages/Index2.cshtml* " になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-461">For example, the previous Razor Page is *Pages/Index2.cshtml*.</span></span> <span data-ttu-id="dee9e-462">`PageModel` クラスを含むファイル名は、 *Pages/Index2.cshtml.cs* になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-462">The file containing the `PageModel` class is named *Pages/Index2.cshtml.cs*.</span></span>
 
-<span data-ttu-id="dee9e-463">URL パスのページへの関連付けは、ファイル システム内のページの場所によって決定されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-463">The associations of URL paths to pages are determined by the page's location in the file system.</span></span> <span data-ttu-id="dee9e-464">次の表に、:::no-loc(Razor)::: ページ パスと一致 URL を示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-464">The following table shows a :::no-loc(Razor)::: Page path and the matching URL:</span></span>
+<span data-ttu-id="dee9e-463">URL パスのページへの関連付けは、ファイル システム内のページの場所によって決定されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-463">The associations of URL paths to pages are determined by the page's location in the file system.</span></span> <span data-ttu-id="dee9e-464">次の表に、Razor ページ パスと一致 URL を示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-464">The following table shows a Razor Page path and the matching URL:</span></span>
 
 | <span data-ttu-id="dee9e-465">ファイル名とパス</span><span class="sxs-lookup"><span data-stu-id="dee9e-465">File name and path</span></span>               | <span data-ttu-id="dee9e-466">一致 URL</span><span class="sxs-lookup"><span data-stu-id="dee9e-466">matching URL</span></span> |
 | ----------------- | ------------ |
@@ -699,32 +699,32 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-473">メモ:</span><span class="sxs-lookup"><span data-stu-id="dee9e-473">Notes:</span></span>
 
-* <span data-ttu-id="dee9e-474">既定では、ランタイムが " *Pages* " フォルダー内で :::no-loc(Razor)::: ページ ファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-474">The runtime looks for :::no-loc(Razor)::: Pages files in the *Pages* folder by default.</span></span>
+* <span data-ttu-id="dee9e-474">既定では、ランタイムが " *Pages* " フォルダー内で Razor ページ ファイルを検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-474">The runtime looks for Razor Pages files in the *Pages* folder by default.</span></span>
 * <span data-ttu-id="dee9e-475">`Index` は、URL にページが含まれない場合の既定のページになります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-475">`Index` is the default page when a URL doesn't include a page.</span></span>
 
 ## <a name="write-a-basic-form"></a><span data-ttu-id="dee9e-476">基本フォームを作成する</span><span class="sxs-lookup"><span data-stu-id="dee9e-476">Write a basic form</span></span>
 
-<span data-ttu-id="dee9e-477">:::no-loc(Razor)::: ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-477">:::no-loc(Razor)::: Pages is designed to make common patterns used with web browsers easy to implement when building an app.</span></span> <span data-ttu-id="dee9e-478">[モデル バインド](xref:mvc/models/model-binding)、 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、:::no-loc(Razor)::: ページ クラスで定義されたプロパティで " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-478">[Model binding](xref:mvc/models/model-binding), [Tag Helpers](xref:mvc/views/tag-helpers/intro), and HTML helpers all *just work* with the properties defined in a :::no-loc(Razor)::: Page class.</span></span> <span data-ttu-id="dee9e-479">`Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-479">Consider a page that implements a basic "contact us" form for the `Contact` model:</span></span>
+<span data-ttu-id="dee9e-477">Razor ページは、アプリの構築時に Web ブラウザーで使用される一般的なパターンを実装しやすくするために設計されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-477">Razor Pages is designed to make common patterns used with web browsers easy to implement when building an app.</span></span> <span data-ttu-id="dee9e-478">[モデル バインド](xref:mvc/models/model-binding)、 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)、および HTML ヘルパーはすべて、Razor ページ クラスで定義されたプロパティで " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-478">[Model binding](xref:mvc/models/model-binding), [Tag Helpers](xref:mvc/views/tag-helpers/intro), and HTML helpers all *just work* with the properties defined in a Razor Page class.</span></span> <span data-ttu-id="dee9e-479">`Contact` モデルの基本的な "お問い合わせ" フォームを実装するページを考察します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-479">Consider a page that implements a basic "contact us" form for the `Contact` model:</span></span>
 
-<span data-ttu-id="dee9e-480">このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/:::no-loc(Razor):::PagesContacts/Startup.cs#L15-L16) ファイルで `DbContext` が初期化されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-480">For the samples in this document, the `DbContext` is initialized in the [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/:::no-loc(Razor):::PagesContacts/Startup.cs#L15-L16) file.</span></span>
+<span data-ttu-id="dee9e-480">このドキュメントのサンプルでは、[Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) ファイルで `DbContext` が初期化されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-480">For the samples in this document, the `DbContext` is initialized in the [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) file.</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Startup.cs?highlight=15-16)]
+[!code-csharp[](index/sample/RazorPagesContacts/Startup.cs?highlight=15-16)]
 
 <span data-ttu-id="dee9e-481">データ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-481">The data model:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Data/Customer.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Data/Customer.cs)]
 
 <span data-ttu-id="dee9e-482">db コンテキスト:</span><span class="sxs-lookup"><span data-stu-id="dee9e-482">The db context:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Data/AppDbContext.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Data/AppDbContext.cs)]
 
 <span data-ttu-id="dee9e-483">*Pages/Create.cshtml* ビュー ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-483">The *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Create.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts/Pages/Create.cshtml)]
 
 <span data-ttu-id="dee9e-484">*Pages/Create.cshtml.cs* ページ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-484">The *Pages/Create.cshtml.cs* page model:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Create.cshtml.cs?name=snippet_ALL)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_ALL)]
 
 <span data-ttu-id="dee9e-485">規則により、`PageModel` クラスは `<PageName>Model` と呼ばれ、ページと同じ名前空間にあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-485">By convention, the `PageModel` class is called `<PageName>Model` and is in the same namespace as the page.</span></span>
 
@@ -738,7 +738,7 @@ public string Message { get; set; }
 * <span data-ttu-id="dee9e-494">ページに必要な状態を初期化するための `OnGet`。</span><span class="sxs-lookup"><span data-stu-id="dee9e-494">`OnGet` to initialize state needed for the page.</span></span> <span data-ttu-id="dee9e-495">[OnGet](#OnGet) サンプル。</span><span class="sxs-lookup"><span data-stu-id="dee9e-495">[OnGet](#OnGet) sample.</span></span>
 * <span data-ttu-id="dee9e-496">フォームの送信を処理するための `OnPost`。</span><span class="sxs-lookup"><span data-stu-id="dee9e-496">`OnPost` to handle form submissions.</span></span>
 
-<span data-ttu-id="dee9e-497">`Async` 名前付けサフィックスは省略可能ですが、非同期関数の規則でよく使用されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-497">The `Async` naming suffix is optional but is often used by convention for asynchronous functions.</span></span> <span data-ttu-id="dee9e-498">上記のコードは、:::no-loc(Razor)::: ページでは一般的です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-498">The preceding code is typical for :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="dee9e-497">`Async` 名前付けサフィックスは省略可能ですが、非同期関数の規則でよく使用されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-497">The `Async` naming suffix is optional but is often used by convention for asynchronous functions.</span></span> <span data-ttu-id="dee9e-498">上記のコードは、Razor ページでは一般的です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-498">The preceding code is typical for Razor Pages.</span></span>
 
 <span data-ttu-id="dee9e-499">コントローラーとビューを利用する ASP.NET アプリに慣れている場合:</span><span class="sxs-lookup"><span data-stu-id="dee9e-499">If you're familiar with ASP.NET apps using controllers and views:</span></span>
 
@@ -747,7 +747,7 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-502">上記の `OnPostAsync` メソッド:</span><span class="sxs-lookup"><span data-stu-id="dee9e-502">The previous `OnPostAsync` method:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
 <span data-ttu-id="dee9e-503">`OnPostAsync` の基本的な流れは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-503">The basic flow of `OnPostAsync`:</span></span>
 
@@ -762,29 +762,29 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-518">`Customer` プロパティは `[BindProperty]` 属性を使用してモデル バインドにオプトインします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-518">The `Customer` property uses `[BindProperty]` attribute to opt in to model binding.</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
-<span data-ttu-id="dee9e-519">既定では、:::no-loc(Razor)::: ページはプロパティを非 `GET` 動詞とのみバインドします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-519">:::no-loc(Razor)::: Pages, by default, bind properties only with non-`GET` verbs.</span></span> <span data-ttu-id="dee9e-520">プロパティをバインドすることで、記述すべきコードの量を削減できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-520">Binding to properties can reduce the amount of code you have to write.</span></span> <span data-ttu-id="dee9e-521">同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-521">Binding reduces code by using the same property to render form fields (`<input asp-for="Customer.Name">`) and accept the input.</span></span>
+<span data-ttu-id="dee9e-519">既定では、Razor ページはプロパティを非 `GET` 動詞とのみバインドします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-519">Razor Pages, by default, bind properties only with non-`GET` verbs.</span></span> <span data-ttu-id="dee9e-520">プロパティをバインドすることで、記述すべきコードの量を削減できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-520">Binding to properties can reduce the amount of code you have to write.</span></span> <span data-ttu-id="dee9e-521">同じプロパティを使用してバインドすることでコードを減らし、フィールド (`<input asp-for="Customer.Name">`) からレンダリングして入力を受け入れます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-521">Binding reduces code by using the same property to render form fields (`<input asp-for="Customer.Name">`) and accept the input.</span></span>
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
 <span data-ttu-id="dee9e-522">ホーム ページ ( *Index.cshtml* ):</span><span class="sxs-lookup"><span data-stu-id="dee9e-522">The home page ( *Index.cshtml* ):</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Index.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml)]
 
 <span data-ttu-id="dee9e-523">関連付けられた `PageModel` クラス ( *Index.cshtml.cs* ):</span><span class="sxs-lookup"><span data-stu-id="dee9e-523">The associated `PageModel` class ( *Index.cshtml.cs* ):</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Index.cshtml.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs)]
 
 <span data-ttu-id="dee9e-524">*Index.cshtml* ファイルには、各連絡先の編集リンクを作成するために次のマークアップが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-524">The *Index.cshtml* file contains the following markup to create an edit link for each contact:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Index.cshtml?range=21)]
+[!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-<span data-ttu-id="dee9e-525">`<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)では、`asp-route-{value}` 属性を使用して編集ページへのリンクが生成されました。</span><span class="sxs-lookup"><span data-stu-id="dee9e-525">The `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) used the `asp-route-{value}` attribute to generate a link to the Edit page.</span></span> <span data-ttu-id="dee9e-526">リンクには、連絡先 ID とともにルート データが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-526">The link contains route data with the contact ID.</span></span> <span data-ttu-id="dee9e-527">たとえば、`https://localhost:5001/Edit/1` のようにします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-527">For example, `https://localhost:5001/Edit/1`.</span></span> <span data-ttu-id="dee9e-528">[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、:::no-loc(Razor)::: ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-528">[Tag Helpers](xref:mvc/views/tag-helpers/intro) enable server-side code to participate in creating and rendering HTML elements in :::no-loc(Razor)::: files.</span></span> <span data-ttu-id="dee9e-529">タグ ヘルパーは `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` によって有効になります</span><span class="sxs-lookup"><span data-stu-id="dee9e-529">Tag Helpers are enabled by `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`</span></span>
+<span data-ttu-id="dee9e-525">`<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)では、`asp-route-{value}` 属性を使用して編集ページへのリンクが生成されました。</span><span class="sxs-lookup"><span data-stu-id="dee9e-525">The `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) used the `asp-route-{value}` attribute to generate a link to the Edit page.</span></span> <span data-ttu-id="dee9e-526">リンクには、連絡先 ID とともにルート データが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-526">The link contains route data with the contact ID.</span></span> <span data-ttu-id="dee9e-527">たとえば、`https://localhost:5001/Edit/1` のようにします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-527">For example, `https://localhost:5001/Edit/1`.</span></span> <span data-ttu-id="dee9e-528">[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使うと、Razor ファイルでの HTML 要素の作成とレンダリングに、サーバー側コードを組み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-528">[Tag Helpers](xref:mvc/views/tag-helpers/intro) enable server-side code to participate in creating and rendering HTML elements in Razor files.</span></span> <span data-ttu-id="dee9e-529">タグ ヘルパーは `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` によって有効になります</span><span class="sxs-lookup"><span data-stu-id="dee9e-529">Tag Helpers are enabled by `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`</span></span>
 
 <span data-ttu-id="dee9e-530">*Pages/Edit.cshtml* ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-530">The *Pages/Edit.cshtml* file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Edit.cshtml?highlight=1)]
+[!code-cshtml[](index/sample/RazorPagesContacts/Pages/Edit.cshtml?highlight=1)]
 
 <span data-ttu-id="dee9e-531">最初の行には `@page "{id:int}"` ディレクティブが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-531">The first line contains the `@page "{id:int}"` directive.</span></span> <span data-ttu-id="dee9e-532">ルーティングの制約 `"{id:int}"` は、`int` ルート データを含むページへの要求を受け入れるようにページに指示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-532">The routing constraint`"{id:int}"` tells the page to accept requests to the page that contain `int` route data.</span></span> <span data-ttu-id="dee9e-533">ページへの要求に `int` に変換できるルート データが含まれていない場合は、ランタイムで HTTP 404 (見つかりません) エラーが返されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-533">If a request to the page doesn't contain route data that can be converted to an `int`, the runtime returns an HTTP 404 (not found) error.</span></span> <span data-ttu-id="dee9e-534">ID を省略するには、次のように `?` をルート制約に追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-534">To make the ID optional, append `?` to the route constraint:</span></span>
 
@@ -794,11 +794,11 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-535">*Pages/Edit.cshtml.cs* ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-535">The *Pages/Edit.cshtml.cs* file:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Edit.cshtml.cs)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Edit.cshtml.cs)]
 
 <span data-ttu-id="dee9e-536">*Index.cshtml* ファイルには、各顧客の連絡先の削除ボタンを作成するマークアップも含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-536">The *Index.cshtml* file also contains markup to create a delete button for each customer contact:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Index.cshtml?range=22-23)]
+[!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=22-23)]
 
 <span data-ttu-id="dee9e-537">HTML で削除ボタンがレンダリングされる場合、その `formaction` には次のパラメーターが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-537">When the delete button is rendered in HTML, its `formaction` includes parameters for:</span></span>
 
@@ -815,7 +815,7 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-543">この例では `handler` が `delete` であるため、`OnPostDeleteAsync` ハンドラー メソッドを使用して `POST` 要求が処理されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-543">Because the `handler` is `delete` in this example, the `OnPostDeleteAsync` handler method is used to process the `POST` request.</span></span> <span data-ttu-id="dee9e-544">`asp-page-handler` が `remove` などの別の値に設定されている場合、名前が `OnPostRemoveAsync` のハンドラー メソッドが選択されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-544">If the `asp-page-handler` is set to a different value, such as `remove`, a handler method with the name `OnPostRemoveAsync` is selected.</span></span> <span data-ttu-id="dee9e-545">次のコードは、`OnPostDeleteAsync` ハンドラーを示しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-545">The following code shows the `OnPostDeleteAsync` handler:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Index.cshtml.cs?range=26-37)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs?range=26-37)]
 
 <span data-ttu-id="dee9e-546">`OnPostDeleteAsync` メソッド:</span><span class="sxs-lookup"><span data-stu-id="dee9e-546">The `OnPostDeleteAsync` method:</span></span>
 
@@ -845,20 +845,20 @@ public void OnHead()
 }
 ```
 
-<span data-ttu-id="dee9e-561">ASP.NET Core 2.1 以降では、`OnHead` ハンドラーが定義されていない場合、:::no-loc(Razor)::: ページは `OnGet` ハンドラーの呼び出しにフォールバックします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-561">In ASP.NET Core 2.1 or later, :::no-loc(Razor)::: Pages falls back to calling the `OnGet` handler if no `OnHead` handler is defined.</span></span> <span data-ttu-id="dee9e-562">この動作は、`Startup.ConfigureServices` での [SetCompatibilityVersion](xref:mvc/compatibility-version) への呼び出しによって有効になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-562">This behavior is enabled by the call to [SetCompatibilityVersion](xref:mvc/compatibility-version) in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="dee9e-561">ASP.NET Core 2.1 以降では、`OnHead` ハンドラーが定義されていない場合、Razor ページは `OnGet` ハンドラーの呼び出しにフォールバックします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-561">In ASP.NET Core 2.1 or later, Razor Pages falls back to calling the `OnGet` handler if no `OnHead` handler is defined.</span></span> <span data-ttu-id="dee9e-562">この動作は、`Startup.ConfigureServices` での [SetCompatibilityVersion](xref:mvc/compatibility-version) への呼び出しによって有効になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-562">This behavior is enabled by the call to [SetCompatibilityVersion](xref:mvc/compatibility-version) in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 ```
 
-<span data-ttu-id="dee9e-563">既定のテンプレートでは、ASP.NET Core 2.1 および 2.2 で `SetCompatibilityVersion` の呼び出しが生成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-563">The default templates generate the `SetCompatibilityVersion` call in ASP.NET Core 2.1 and 2.2.</span></span> <span data-ttu-id="dee9e-564">`SetCompatibilityVersion` は実質的に :::no-loc(Razor)::: ページのオプション `AllowMappingHeadRequestsToGetHandler` を `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-564">`SetCompatibilityVersion` effectively sets the :::no-loc(Razor)::: Pages option `AllowMappingHeadRequestsToGetHandler` to `true`.</span></span>
+<span data-ttu-id="dee9e-563">既定のテンプレートでは、ASP.NET Core 2.1 および 2.2 で `SetCompatibilityVersion` の呼び出しが生成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-563">The default templates generate the `SetCompatibilityVersion` call in ASP.NET Core 2.1 and 2.2.</span></span> <span data-ttu-id="dee9e-564">`SetCompatibilityVersion` は実質的に Razor ページのオプション `AllowMappingHeadRequestsToGetHandler` を `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-564">`SetCompatibilityVersion` effectively sets the Razor Pages option `AllowMappingHeadRequestsToGetHandler` to `true`.</span></span>
 
 <span data-ttu-id="dee9e-565">`SetCompatibilityVersion` とのすべての動作にオプトインするのではなく、明示的に *特定の* 動作にオプトインすることもできます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-565">Rather than opting in to all behaviors with `SetCompatibilityVersion`, you can explicitly opt in to *specific* behaviors.</span></span> <span data-ttu-id="dee9e-566">次のコードでは、`OnGet` ハンドラーに `HEAD` 要求をマップできるようにすることにオプトインしています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-566">The following code opts in to allowing `HEAD` requests to be mapped to the `OnGet` handler:</span></span>
 
 ```csharp
 services.AddMvc()
-    .Add:::no-loc(Razor):::PagesOptions(options =>
+    .AddRazorPagesOptions(options =>
     {
         options.AllowMappingHeadRequestsToGetHandler = true;
     });
@@ -866,21 +866,21 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-no-locrazor-pages"></a><span data-ttu-id="dee9e-567">XSRF/CSRF および :::no-loc(Razor)::: ページ</span><span class="sxs-lookup"><span data-stu-id="dee9e-567">XSRF/CSRF and :::no-loc(Razor)::: Pages</span></span>
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a><span data-ttu-id="dee9e-567">XSRF/CSRF および Razor ページ</span><span class="sxs-lookup"><span data-stu-id="dee9e-567">XSRF/CSRF and Razor Pages</span></span>
 
-<span data-ttu-id="dee9e-568">[偽造防止検証](xref:security/anti-request-forgery)のためにコードを記述する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-568">You don't have to write any code for [antiforgery validation](xref:security/anti-request-forgery).</span></span> <span data-ttu-id="dee9e-569">偽造防止トークンの生成と検証は、自動的に :::no-loc(Razor)::: ページに含まれます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-569">Antiforgery token generation and validation are automatically included in :::no-loc(Razor)::: Pages.</span></span>
+<span data-ttu-id="dee9e-568">[偽造防止検証](xref:security/anti-request-forgery)のためにコードを記述する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-568">You don't have to write any code for [antiforgery validation](xref:security/anti-request-forgery).</span></span> <span data-ttu-id="dee9e-569">偽造防止トークンの生成と検証は、自動的に Razor ページに含まれます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-569">Antiforgery token generation and validation are automatically included in Razor Pages.</span></span>
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a><span data-ttu-id="dee9e-570">:::no-loc(Razor)::: ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用</span><span class="sxs-lookup"><span data-stu-id="dee9e-570">Using Layouts, partials, templates, and Tag Helpers with :::no-loc(Razor)::: Pages</span></span>
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a><span data-ttu-id="dee9e-570">Razor ページでのレイアウト、パーシャル、テンプレート、およびタグ ヘルパーの使用</span><span class="sxs-lookup"><span data-stu-id="dee9e-570">Using Layouts, partials, templates, and Tag Helpers with Razor Pages</span></span>
 
-<span data-ttu-id="dee9e-571">ページは、:::no-loc(Razor)::: ビュー エンジンのすべての機能で動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-571">Pages work with all the capabilities of the :::no-loc(Razor)::: view engine.</span></span> <span data-ttu-id="dee9e-572">レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml* "、" *_ViewImports.cshtml* " は、従来の :::no-loc(Razor)::: ビューと同じように動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-572">Layouts, partials, templates, Tag Helpers, *_ViewStart.cshtml* , *_ViewImports.cshtml* work in the same way they do for conventional :::no-loc(Razor)::: views.</span></span>
+<span data-ttu-id="dee9e-571">ページは、Razor ビュー エンジンのすべての機能で動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-571">Pages work with all the capabilities of the Razor view engine.</span></span> <span data-ttu-id="dee9e-572">レイアウト、パーシャル、テンプレート、タグ ヘルパー、" *_ViewStart.cshtml* "、" *_ViewImports.cshtml* " は、従来の Razor ビューと同じように動作します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-572">Layouts, partials, templates, Tag Helpers, *_ViewStart.cshtml* , *_ViewImports.cshtml* work in the same way they do for conventional Razor views.</span></span>
 
 <span data-ttu-id="dee9e-573">これらの機能の一部を利用してこのページをまとめてみましょう。</span><span class="sxs-lookup"><span data-stu-id="dee9e-573">Let's declutter this page by taking advantage of some of those capabilities.</span></span>
 
 <span data-ttu-id="dee9e-574">[レイアウト ページ](xref:mvc/views/layout)を *Pages/Shared/_Layout.cshtml* に追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-574">Add a [layout page](xref:mvc/views/layout) to *Pages/Shared/_Layout.cshtml* :</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_LayoutSimple.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_LayoutSimple.cshtml)]
 
 <span data-ttu-id="dee9e-575">[レイアウト](xref:mvc/views/layout)は次のことを行います。</span><span class="sxs-lookup"><span data-stu-id="dee9e-575">The [Layout](xref:mvc/views/layout):</span></span>
 
@@ -891,19 +891,19 @@ services.AddMvc()
 
 <span data-ttu-id="dee9e-579">[Layout](xref:mvc/views/layout#specifying-a-layout) プロパティは *Pages/_ViewStart.cshtml* で設定されています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-579">The [Layout](xref:mvc/views/layout#specifying-a-layout) property is set in *Pages/_ViewStart.cshtml* :</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_ViewStart.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewStart.cshtml)]
 
-<span data-ttu-id="dee9e-580">レイアウトは、 *Pages/Shared* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-580">The layout is in the *Pages/Shared* folder.</span></span> <span data-ttu-id="dee9e-581">ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-581">Pages look for other views (layouts, templates, partials) hierarchically, starting in the same folder as the current page.</span></span> <span data-ttu-id="dee9e-582">" *Pages/Shared* " フォルダー内のレイアウトは、" *Pages* " フォルダー配下の任意の :::no-loc(Razor)::: ページから使用できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-582">A layout in the *Pages/Shared* folder can be used from any :::no-loc(Razor)::: page under the *Pages* folder.</span></span>
+<span data-ttu-id="dee9e-580">レイアウトは、 *Pages/Shared* フォルダーにあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-580">The layout is in the *Pages/Shared* folder.</span></span> <span data-ttu-id="dee9e-581">ページは現在のページと同じフォルダーから開始して、階層的に他のビュー (レイアウト、テンプレート、パーシャル) を検索します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-581">Pages look for other views (layouts, templates, partials) hierarchically, starting in the same folder as the current page.</span></span> <span data-ttu-id="dee9e-582">" *Pages/Shared* " フォルダー内のレイアウトは、" *Pages* " フォルダー配下の任意の Razor ページから使用できます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-582">A layout in the *Pages/Shared* folder can be used from any Razor page under the *Pages* folder.</span></span>
 
 <span data-ttu-id="dee9e-583">レイアウト ファイルは *Pages/Shared* フォルダーに入ります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-583">The layout file should go in the *Pages/Shared* folder.</span></span>
 
-<span data-ttu-id="dee9e-584">レイアウト ファイルを *Views/Shared* フォルダー内に配置 **しない** ことをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-584">We recommend you **not** put the layout file in the *Views/Shared* folder.</span></span> <span data-ttu-id="dee9e-585">*Views/Shared* は MVC ビュー パターンです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-585">*Views/Shared* is an MVC views pattern.</span></span> <span data-ttu-id="dee9e-586">:::no-loc(Razor)::: ページは、パス規則ではなく、フォルダー階層に依存することを意図しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-586">:::no-loc(Razor)::: Pages are meant to rely on folder hierarchy, not path conventions.</span></span>
+<span data-ttu-id="dee9e-584">レイアウト ファイルを *Views/Shared* フォルダー内に配置 **しない** ことをお勧めします。</span><span class="sxs-lookup"><span data-stu-id="dee9e-584">We recommend you **not** put the layout file in the *Views/Shared* folder.</span></span> <span data-ttu-id="dee9e-585">*Views/Shared* は MVC ビュー パターンです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-585">*Views/Shared* is an MVC views pattern.</span></span> <span data-ttu-id="dee9e-586">Razor ページは、パス規則ではなく、フォルダー階層に依存することを意図しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-586">Razor Pages are meant to rely on folder hierarchy, not path conventions.</span></span>
 
-<span data-ttu-id="dee9e-587">:::no-loc(Razor)::: ページからのビュー検索には、" *Pages* " フォルダーが含まれます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-587">View search from a :::no-loc(Razor)::: Page includes the *Pages* folder.</span></span> <span data-ttu-id="dee9e-588">MVC コントローラーで使用しているレイアウト、テンプレート、およびパーシャルと、従来の :::no-loc(Razor)::: ビューは " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-588">The layouts, templates, and partials you're using with MVC controllers and conventional :::no-loc(Razor)::: views *just work*.</span></span>
+<span data-ttu-id="dee9e-587">Razor ページからのビュー検索には、" *Pages* " フォルダーが含まれます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-587">View search from a Razor Page includes the *Pages* folder.</span></span> <span data-ttu-id="dee9e-588">MVC コントローラーで使用しているレイアウト、テンプレート、およびパーシャルと、従来の Razor ビューは " *機能します* "。</span><span class="sxs-lookup"><span data-stu-id="dee9e-588">The layouts, templates, and partials you're using with MVC controllers and conventional Razor views *just work*.</span></span>
 
 <span data-ttu-id="dee9e-589">*Pages/_ViewImports.cshtml* ファイルを追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-589">Add a *Pages/_ViewImports.cshtml* file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_ViewImports.cshtml)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml)]
 
 <span data-ttu-id="dee9e-590">`@namespace` はこのチュートリアルで後ほど説明します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-590">`@namespace` is explained later in the tutorial.</span></span> <span data-ttu-id="dee9e-591">`@addTagHelper` ディレクティブにより、 [組み込みタグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/Index)が *Pages* フォルダー内のすべてのページにもたらされます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-591">The `@addTagHelper` directive brings in the [built-in Tag Helpers](xref:mvc/views/tag-helpers/builtin-th/Index) to all the pages in the *Pages* folder.</span></span>
 
@@ -911,7 +911,7 @@ services.AddMvc()
 
 <span data-ttu-id="dee9e-592">ページで `@namespace` ディレクティブが明示的に使用されている場合:</span><span class="sxs-lookup"><span data-stu-id="dee9e-592">When the `@namespace` directive is used explicitly on a page:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesIntro/Pages/Customers/Namespace2.cshtml?highlight=2)]
+[!code-cshtml[](index/sample/RazorPagesIntro/Pages/Customers/Namespace2.cshtml?highlight=2)]
 
 <span data-ttu-id="dee9e-593">ディレクティブは、ページの名前空間を設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-593">The directive sets the namespace for the page.</span></span> <span data-ttu-id="dee9e-594">`@model` ディレクティブには、名前空間を含める必要はありません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-594">The `@model` directive doesn't need to include the namespace.</span></span>
 
@@ -919,25 +919,25 @@ services.AddMvc()
 
 <span data-ttu-id="dee9e-597">たとえば、`PageModel` クラス *Pages/Customers/Edit.cshtml.cs* は名前空間を明示的に設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-597">For example, the `PageModel` class *Pages/Customers/Edit.cshtml.cs* explicitly sets the namespace:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/Edit.cshtml.cs?name=snippet_namespace)]
 
 <span data-ttu-id="dee9e-598">*Pages/_ViewImports.cshtml* ファイルは次の名前空間を設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-598">The *Pages/_ViewImports.cshtml* file sets the following namespace:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml?highlight=1)]
 
-<span data-ttu-id="dee9e-599">" *Pages/Customers/Edit.cshtml* " :::no-loc(Razor)::: ページの生成された名前空間は、`PageModel` クラスと同じです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-599">The generated namespace for the *Pages/Customers/Edit.cshtml* :::no-loc(Razor)::: Page is the same as the `PageModel` class.</span></span>
+<span data-ttu-id="dee9e-599">" *Pages/Customers/Edit.cshtml* " Razor ページの生成された名前空間は、`PageModel` クラスと同じです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-599">The generated namespace for the *Pages/Customers/Edit.cshtml* Razor Page is the same as the `PageModel` class.</span></span>
 
-<span data-ttu-id="dee9e-600">`@namespace` は " *従来の :::no-loc(Razor)::: ビューでも機能します。* "</span><span class="sxs-lookup"><span data-stu-id="dee9e-600">`@namespace` *also works with conventional :::no-loc(Razor)::: views.*</span></span>
+<span data-ttu-id="dee9e-600">`@namespace` は " *従来の Razor ビューでも機能します。* "</span><span class="sxs-lookup"><span data-stu-id="dee9e-600">`@namespace` *also works with conventional Razor views.*</span></span>
 
 <span data-ttu-id="dee9e-601">元の *Pages/Create.cshtml* ビュー ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-601">The original *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Create.cshtml?highlight=2)]
+[!code-cshtml[](index/sample/RazorPagesContacts/Pages/Create.cshtml?highlight=2)]
 
 <span data-ttu-id="dee9e-602">更新された *Pages/Create.cshtml* ビュー ファイル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-602">The updated *Pages/Create.cshtml* view file:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/Create.cshtml?highlight=2)]
 
-<span data-ttu-id="dee9e-603">[:::no-loc(Razor)::: ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする " *Pages/_ValidationScriptsPartial.cshtml* " が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-603">The [:::no-loc(Razor)::: Pages starter project](#rpvs17) contains the *Pages/_ValidationScriptsPartial.cshtml* , which hooks up client-side validation.</span></span>
+<span data-ttu-id="dee9e-603">[Razor ページのスタート プロジェクト](#rpvs17)には、クライアント側の検証をフックする " *Pages/_ValidationScriptsPartial.cshtml* " が含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-603">The [Razor Pages starter project](#rpvs17) contains the *Pages/_ValidationScriptsPartial.cshtml* , which hooks up client-side validation.</span></span>
 
 <span data-ttu-id="dee9e-604">部分ビューの詳細については、「<xref:mvc/views/partial>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-604">For more information on partial views, see <xref:mvc/views/partial>.</span></span>
 
@@ -947,7 +947,7 @@ services.AddMvc()
 
 <span data-ttu-id="dee9e-606">上に示した `Create` ページでは、`RedirectToPage` を使用します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-606">The `Create` page, shown previously, uses `RedirectToPage`:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=10)]
+[!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=10)]
 
 <span data-ttu-id="dee9e-607">アプリには次のファイル/フォルダー構造があります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-607">The app has the following file/folder structure:</span></span>
 
@@ -991,7 +991,7 @@ RedirectToPage("/Index", new { area = "Services" });
 
 ## <a name="viewdata-attribute"></a><span data-ttu-id="dee9e-640">ViewData 属性</span><span class="sxs-lookup"><span data-stu-id="dee9e-640">ViewData attribute</span></span>
 
-<span data-ttu-id="dee9e-641">データは [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) とのページに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-641">Data can be passed to a page with [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="dee9e-642">`[ViewData]` 属性を持つコントローラーまたは :::no-loc(Razor)::: ページのモデルのプロパティの値は、[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) に格納してそこから読み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-642">Properties on controllers or :::no-loc(Razor)::: Page models with the `[ViewData]` attribute have their values stored and loaded from the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary).</span></span>
+<span data-ttu-id="dee9e-641">データは [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute) とのページに渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-641">Data can be passed to a page with [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute).</span></span> <span data-ttu-id="dee9e-642">`[ViewData]` 属性を持つコントローラーまたは Razor ページのモデルのプロパティの値は、[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) に格納してそこから読み込むことができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-642">Properties on controllers or Razor Page models with the `[ViewData]` attribute have their values stored and loaded from the [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary).</span></span>
 
 <span data-ttu-id="dee9e-643">次の例では、`AboutModel` に `[ViewData]` でマークされた `Title` プロパティが含まれています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-643">In the following example, the `AboutModel` contains a `Title` property marked with `[ViewData]`.</span></span> <span data-ttu-id="dee9e-644">`Title` プロパティは、[About] ページのタイトルに設定されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-644">The `Title` property is set to the title of the About page:</span></span>
 
@@ -1029,7 +1029,7 @@ public class AboutModel : PageModel
 
 <span data-ttu-id="dee9e-652">次のコードは、`TempData` を使用して `Message` の値を設定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-652">The following code sets the value of `Message` using `TempData`:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateDot.cshtml.cs?highlight=10-11,25&name=snippet_Temp)]
 
 <span data-ttu-id="dee9e-653">*Pages/Customers/Index.cshtml* ファイル内の次のマークアップは、`TempData` を使用して `Message` の値を表示します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-653">The following markup in the *Pages/Customers/Index.cshtml* file displays the value of `Message` using `TempData`.</span></span>
 
@@ -1052,19 +1052,19 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-657">次のページでは、`asp-page-handler` タグ ヘルパーを使用して 2 つのハンドラーにマークアップが生成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-657">The following page generates markup for two handlers using the `asp-page-handler` Tag Helper:</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13)]
 
-<!-- Review: the FormActionTagHelper applies to all <form /> elements on a :::no-loc(Razor)::: page, even when there's no `asp-` attribute   -->
+<!-- Review: the FormActionTagHelper applies to all <form /> elements on a Razor page, even when there's no `asp-` attribute   -->
 
 <span data-ttu-id="dee9e-658">前の例のフォームには、それぞれが `FormActionTagHelper` を使用して異なる URL に送信する 2 つの送信ボタンがあります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-658">The form in the preceding example has two submit buttons, each using the `FormActionTagHelper` to submit to a different URL.</span></span> <span data-ttu-id="dee9e-659">`asp-page-handler` 属性は、`asp-page` のコンパニオンです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-659">The `asp-page-handler` attribute is a companion to `asp-page`.</span></span> <span data-ttu-id="dee9e-660">`asp-page-handler` はページごとに定義されている各ハンドラー メソッドに送信する URL を生成します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-660">`asp-page-handler` generates URLs that submit to each of the handler methods defined by a page.</span></span> <span data-ttu-id="dee9e-661">サンプルは現在のページにリンクしているため、`asp-page` は指定されません。</span><span class="sxs-lookup"><span data-stu-id="dee9e-661">`asp-page` isn't specified because the sample is linking to the current page.</span></span>
 
 <span data-ttu-id="dee9e-662">ページ モデル:</span><span class="sxs-lookup"><span data-stu-id="dee9e-662">The page model:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
+[!code-csharp[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml.cs?highlight=20,32)]
 
 <span data-ttu-id="dee9e-663">上記のコードは、 *名前付きハンドラー メソッド* を使用しています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-663">The preceding code uses *named handler methods*.</span></span> <span data-ttu-id="dee9e-664">名前付きハンドラー メソッドは、名前の `On<HTTP Verb>` の後および `Async` の前 (ある場合) のテキストを取得して作成されます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-664">Named handler methods are created by taking the text in the name after `On<HTTP Verb>` and before `Async` (if present).</span></span> <span data-ttu-id="dee9e-665">前の例では、ページ メソッドは OnPost **JoinList** Async と OnPost **JoinListUC** Async です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-665">In the preceding example, the page methods are OnPost **JoinList** Async and OnPost **JoinListUC** Async.</span></span> <span data-ttu-id="dee9e-666">*OnPost* と *Async* を削除すると、ハンドラー名は `JoinList` と `JoinListUC` になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-666">With *OnPost* and *Async* removed, the handler names are `JoinList` and `JoinListUC`.</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateFATH.cshtml?range=12-13)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?range=12-13)]
 
 <span data-ttu-id="dee9e-667">上記のコードを使用すると、`OnPostJoinListAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH?handler=JoinList` になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-667">Using the preceding code, the URL path that submits to `OnPostJoinListAsync` is `https://localhost:5001/Customers/CreateFATH?handler=JoinList`.</span></span> <span data-ttu-id="dee9e-668">`OnPostJoinListUCAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH?handler=JoinListUC` です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-668">The URL path that submits to `OnPostJoinListUCAsync` is `https://localhost:5001/Customers/CreateFATH?handler=JoinListUC`.</span></span>
 
@@ -1080,7 +1080,7 @@ public string Message { get; set; }
 
 <span data-ttu-id="dee9e-679">URL 内のクエリ文字列 `?handler=JoinList` が気に入らない場合は、ルートを変更して URL のパス部分にハンドラー名を挿入することができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-679">If you don't like the query string `?handler=JoinList` in the URL, change the route to put the handler name in the path portion of the URL.</span></span> <span data-ttu-id="dee9e-680">`@page` ディレクティブの後に二重引用符で囲んだルート テンプレートを追加して、ルートをカスタマイズすることができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-680">The route can be customized by adding a route template enclosed in double quotes after the `@page` directive.</span></span>
 
-[!code-cshtml[](index/sample/:::no-loc(Razor):::PagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
+[!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
 <span data-ttu-id="dee9e-681">上記のコードを使用すると、`OnPostJoinListAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH/JoinList` になります。</span><span class="sxs-lookup"><span data-stu-id="dee9e-681">Using the preceding code, the URL path that submits to `OnPostJoinListAsync` is `https://localhost:5001/Customers/CreateFATH/JoinList`.</span></span> <span data-ttu-id="dee9e-682">`OnPostJoinListUCAsync` に送信される URL パスは `https://localhost:5001/Customers/CreateFATH/JoinListUC` です。</span><span class="sxs-lookup"><span data-stu-id="dee9e-682">The URL path that submits to `OnPostJoinListUCAsync` is `https://localhost:5001/Customers/CreateFATH/JoinListUC`.</span></span>
 
@@ -1088,47 +1088,47 @@ public string Message { get; set; }
 
 ## <a name="configuration-and-settings"></a><span data-ttu-id="dee9e-684">構成と設定</span><span class="sxs-lookup"><span data-stu-id="dee9e-684">Configuration and settings</span></span>
 
-<span data-ttu-id="dee9e-685">高度なオプションを構成するには、MVC ビルダーで拡張メソッド `Add:::no-loc(Razor):::PagesOptions` を使用します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-685">To configure advanced options, use the extension method `Add:::no-loc(Razor):::PagesOptions` on the MVC builder:</span></span>
+<span data-ttu-id="dee9e-685">高度なオプションを構成するには、MVC ビルダーで拡張メソッド `AddRazorPagesOptions` を使用します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-685">To configure advanced options, use the extension method `AddRazorPagesOptions` on the MVC builder:</span></span>
 
-[!code-csharp[](index/sample/:::no-loc(Razor):::PagesContacts/StartupAdvanced.cs?name=snippet_1)]
+[!code-csharp[](index/sample/RazorPagesContacts/StartupAdvanced.cs?name=snippet_1)]
 
-<span data-ttu-id="dee9e-686">現在は、`:::no-loc(Razor):::PagesOptions` を使用してページのルート ディレクトリを設定したり、ページのアプリケーション モデルの規則を追加したりすることができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-686">Currently you can use the `:::no-loc(Razor):::PagesOptions` to set the root directory for pages, or add application model conventions for pages.</span></span> <span data-ttu-id="dee9e-687">将来、この方法でより多くの機能拡張を可能にしたいと考えています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-687">We'll enable more extensibility this way in the future.</span></span>
+<span data-ttu-id="dee9e-686">現在は、`RazorPagesOptions` を使用してページのルート ディレクトリを設定したり、ページのアプリケーション モデルの規則を追加したりすることができます。</span><span class="sxs-lookup"><span data-stu-id="dee9e-686">Currently you can use the `RazorPagesOptions` to set the root directory for pages, or add application model conventions for pages.</span></span> <span data-ttu-id="dee9e-687">将来、この方法でより多くの機能拡張を可能にしたいと考えています。</span><span class="sxs-lookup"><span data-stu-id="dee9e-687">We'll enable more extensibility this way in the future.</span></span>
 
-<span data-ttu-id="dee9e-688">ビューをプリコンパイルするには、[:::no-loc(Razor)::: ビューのコンパイル](xref:mvc/views/view-compilation)に関するページをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-688">To precompile views, see [:::no-loc(Razor)::: view compilation](xref:mvc/views/view-compilation) .</span></span>
+<span data-ttu-id="dee9e-688">ビューをプリコンパイルするには、[Razor ビューのコンパイル](xref:mvc/views/view-compilation)に関するページをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="dee9e-688">To precompile views, see [Razor view compilation](xref:mvc/views/view-compilation) .</span></span>
 
 <span data-ttu-id="dee9e-689">[サンプル コードをダウンロードまたは表示します](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/sample)。</span><span class="sxs-lookup"><span data-stu-id="dee9e-689">[Download or view sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/sample).</span></span>
 
-<span data-ttu-id="dee9e-690">この概要に基づく、[:::no-loc(Razor)::: Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するページをご覧ください</span><span class="sxs-lookup"><span data-stu-id="dee9e-690">See [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start), which builds on this introduction.</span></span>
+<span data-ttu-id="dee9e-690">この概要に基づく、[Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するページをご覧ください</span><span class="sxs-lookup"><span data-stu-id="dee9e-690">See [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start), which builds on this introduction.</span></span>
 
-### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a><span data-ttu-id="dee9e-691">:::no-loc(Razor)::: Pages をコンテンツのルートに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-691">Specify that :::no-loc(Razor)::: Pages are at the content root</span></span>
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a><span data-ttu-id="dee9e-691">Razor Pages をコンテンツのルートに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-691">Specify that Razor Pages are at the content root</span></span>
 
-<span data-ttu-id="dee9e-692">:::no-loc(Razor)::: Pages のルートは既定で */Pages* ディレクトリです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-692">By default, :::no-loc(Razor)::: Pages are rooted in the */Pages* directory.</span></span> <span data-ttu-id="dee9e-693">[With:::no-loc(Razor):::PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) を [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) に追加して、:::no-loc(Razor)::: Pages をアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) に置くように指定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-693">Add [With:::no-loc(Razor):::PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) to [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) to specify that your :::no-loc(Razor)::: Pages are at the [content root](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) of the app:</span></span>
+<span data-ttu-id="dee9e-692">Razor Pages のルートは既定で */Pages* ディレクトリです。</span><span class="sxs-lookup"><span data-stu-id="dee9e-692">By default, Razor Pages are rooted in the */Pages* directory.</span></span> <span data-ttu-id="dee9e-693">[WithRazorPagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) を [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) に追加して、Razor Pages をアプリの[コンテンツ ルート](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) に置くように指定します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-693">Add [WithRazorPagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) to [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) to specify that your Razor Pages are at the [content root](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) of the app:</span></span>
 
 ```csharp
 services.AddMvc()
-    .Add:::no-loc(Razor):::PagesOptions(options =>
+    .AddRazorPagesOptions(options =>
     {
         ...
     })
-    .With:::no-loc(Razor):::PagesAtContentRoot();
+    .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a><span data-ttu-id="dee9e-694">:::no-loc(Razor)::: Pages をカスタム ルート ディレクトリに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-694">Specify that :::no-loc(Razor)::: Pages are at a custom root directory</span></span>
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a><span data-ttu-id="dee9e-694">Razor Pages をカスタム ルート ディレクトリに指定する</span><span class="sxs-lookup"><span data-stu-id="dee9e-694">Specify that Razor Pages are at a custom root directory</span></span>
 
-<span data-ttu-id="dee9e-695">(相対パスを指定して) :::no-loc(Razor)::: Pages をアプリのカスタム ルート ディレクトリに指定するには、[With:::no-loc(Razor):::PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) を [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) に追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-695">Add [With:::no-loc(Razor):::PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) to [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) to specify that your :::no-loc(Razor)::: Pages are at a custom root directory in the app (provide a relative path):</span></span>
+<span data-ttu-id="dee9e-695">(相対パスを指定して) Razor Pages をアプリのカスタム ルート ディレクトリに指定するには、[WithRazorPagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) を [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) に追加します。</span><span class="sxs-lookup"><span data-stu-id="dee9e-695">Add [WithRazorPagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) to [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) to specify that your Razor Pages are at a custom root directory in the app (provide a relative path):</span></span>
 
 ```csharp
 services.AddMvc()
-    .Add:::no-loc(Razor):::PagesOptions(options =>
+    .AddRazorPagesOptions(options =>
     {
         ...
     })
-    .With:::no-loc(Razor):::PagesRoot("/path/to/razor/pages");
+    .WithRazorPagesRoot("/path/to/razor/pages");
 ```
 
 ## <a name="additional-resources"></a><span data-ttu-id="dee9e-696">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="dee9e-696">Additional resources</span></span>
 
-* [<span data-ttu-id="dee9e-697">属性と :::no-loc(Razor)::: ページを承認する</span><span class="sxs-lookup"><span data-stu-id="dee9e-697">Authorize attribute and :::no-loc(Razor)::: Pages</span></span>](xref:security/authorization/simple#aarp)
+* [<span data-ttu-id="dee9e-697">属性と Razor ページを承認する</span><span class="sxs-lookup"><span data-stu-id="dee9e-697">Authorize attribute and Razor Pages</span></span>](xref:security/authorization/simple#aarp)
 * <xref:index>
 * <xref:mvc/views/razor>
 * <xref:mvc/controllers/areas>

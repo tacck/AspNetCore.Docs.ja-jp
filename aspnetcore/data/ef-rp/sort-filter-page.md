@@ -1,22 +1,22 @@
 ---
-title: 'パート 3、ASP.NET Core の :::no-loc(Razor)::: ページと EF Core - 並べ替え、フィルター、ページング'
+title: 'パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング'
 author: rick-anderson
-description: ':::no-loc(Razor)::: ページと Entity Framework チュートリアル シリーズのパート 3。'
+description: 'Razor ページと Entity Framework チュートリアル シリーズのパート 3。'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/sort-filter-page
 ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -25,7 +25,7 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 10/30/2020
 ms.locfileid: "93061042"
 ---
-# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a><span data-ttu-id="80a70-103">パート 3、ASP.NET Core の :::no-loc(Razor)::: ページと EF Core - 並べ替え、フィルター、ページング</span><span class="sxs-lookup"><span data-stu-id="80a70-103">Part 3, :::no-loc(Razor)::: Pages with EF Core in ASP.NET Core - Sort, Filter, Paging</span></span>
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a><span data-ttu-id="80a70-103">パート 3、ASP.NET Core の Razor ページと EF Core - 並べ替え、フィルター、ページング</span><span class="sxs-lookup"><span data-stu-id="80a70-103">Part 3, Razor Pages with EF Core in ASP.NET Core - Sort, Filter, Paging</span></span>
 
 <span data-ttu-id="80a70-104">作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)</span><span class="sxs-lookup"><span data-stu-id="80a70-104">By [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT), and [Jon P Smith](https://twitter.com/thereformedprog)</span></span>
 
@@ -58,7 +58,7 @@ ms.locfileid: "93061042"
 
 <span data-ttu-id="80a70-122">インデックス ページが、 **Students** リンクから要求された場合、クエリ文字列はありません。</span><span class="sxs-lookup"><span data-stu-id="80a70-122">When the Index page is requested from the **Students** link, there's no query string.</span></span> <span data-ttu-id="80a70-123">学生は、姓の昇順で表示されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-123">The students are displayed in ascending order by last name.</span></span> <span data-ttu-id="80a70-124">`switch` ステートメントでは、姓の昇順が `default` です。</span><span class="sxs-lookup"><span data-stu-id="80a70-124">Ascending order by last name is the `default` in the `switch` statement.</span></span> <span data-ttu-id="80a70-125">ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-125">When the user clicks a column heading link, the appropriate `sortOrder` value is provided in the query string value.</span></span>
 
-<span data-ttu-id="80a70-126">`NameSort` および `DateSort` は、:::no-loc(Razor)::: ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-126">`NameSort` and `DateSort` are used by the :::no-loc(Razor)::: Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
+<span data-ttu-id="80a70-126">`NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-126">`NameSort` and `DateSort` are used by the Razor Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -105,7 +105,7 @@ ms.locfileid: "93061042"
 
 <span data-ttu-id="80a70-167">Students インデックス ページにフィルターを追加するには</span><span class="sxs-lookup"><span data-stu-id="80a70-167">To add filtering to the Students Index page:</span></span>
 
-* <span data-ttu-id="80a70-168">テキスト ボックスと [送信] ボタンが、:::no-loc(Razor)::: ページに追加されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-168">A text box and a submit button is added to the :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="80a70-169">テキスト ボックスは、名と姓で検索文字列を指定します。</span><span class="sxs-lookup"><span data-stu-id="80a70-169">The text box supplies a search string on the first or last name.</span></span>
+* <span data-ttu-id="80a70-168">テキスト ボックスと [送信] ボタンが、Razor ページに追加されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-168">A text box and a submit button is added to the Razor Page.</span></span> <span data-ttu-id="80a70-169">テキスト ボックスは、名と姓で検索文字列を指定します。</span><span class="sxs-lookup"><span data-stu-id="80a70-169">The text box supplies a search string on the first or last name.</span></span>
 * <span data-ttu-id="80a70-170">テキスト ボックスの値を使用するようにページ モデルが更新されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-170">The page model is updated to use the text box value.</span></span>
 
 ### <a name="update-the-ongetasync-method"></a><span data-ttu-id="80a70-171">OnGetAsync メソッドの更新</span><span class="sxs-lookup"><span data-stu-id="80a70-171">Update the OnGetAsync method</span></span>
@@ -139,7 +139,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 <span data-ttu-id="80a70-199">詳細については、「[Sqlite プロバイダーで大文字と小文字を区別しないクエリを使用する方法](https://github.com/aspnet/EntityFrameworkCore/issues/11414)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="80a70-199">For more information, see [How to use case-insensitive query with Sqlite provider](https://github.com/aspnet/EntityFrameworkCore/issues/11414).</span></span>
 
-### <a name="update-the-no-locrazor-page"></a><span data-ttu-id="80a70-200">:::no-loc(Razor)::: ページを更新する</span><span class="sxs-lookup"><span data-stu-id="80a70-200">Update the :::no-loc(Razor)::: page</span></span>
+### <a name="update-the-no-locrazor-page"></a><span data-ttu-id="80a70-200">Razor ページを更新する</span><span class="sxs-lookup"><span data-stu-id="80a70-200">Update the Razor page</span></span>
 
 <span data-ttu-id="80a70-201">*Pages/Students/Index.cshtml* 内のコードを置き換えて、 **[検索]** ボタンを追加します。</span><span class="sxs-lookup"><span data-stu-id="80a70-201">Replace the code in *Pages/Students/Index.cshtml* to add a **Search** button.</span></span>
 
@@ -201,9 +201,9 @@ https://localhost:5001/Students?SearchString=an
 
 <span data-ttu-id="80a70-243">ページングのリンクをクリックすると、ページ インデックス変数に表示するページ番号が含まれます。</span><span class="sxs-lookup"><span data-stu-id="80a70-243">When a paging link is clicked, the page index variable contains the page number to display.</span></span>
 
-<span data-ttu-id="80a70-244">`CurrentSort` プロパティでは、現在の並べ替え順序を含む :::no-loc(Razor)::: ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-244">The `CurrentSort` property provides the :::no-loc(Razor)::: Page with the current sort order.</span></span> <span data-ttu-id="80a70-245">ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-245">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
+<span data-ttu-id="80a70-244">`CurrentSort` プロパティでは、現在の並べ替え順序を含む Razor ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-244">The `CurrentSort` property provides the Razor Page with the current sort order.</span></span> <span data-ttu-id="80a70-245">ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-245">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
 
-<span data-ttu-id="80a70-246">`CurrentFilter` プロパティでは、現在のフィルター文字列を含む :::no-loc(Razor)::: ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-246">The `CurrentFilter` property provides the :::no-loc(Razor)::: Page with the current filter string.</span></span> <span data-ttu-id="80a70-247">`CurrentFilter` 値:</span><span class="sxs-lookup"><span data-stu-id="80a70-247">The `CurrentFilter` value:</span></span>
+<span data-ttu-id="80a70-246">`CurrentFilter` プロパティでは、現在のフィルター文字列を含む Razor ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-246">The `CurrentFilter` property provides the Razor Page with the current filter string.</span></span> <span data-ttu-id="80a70-247">`CurrentFilter` 値:</span><span class="sxs-lookup"><span data-stu-id="80a70-247">The `CurrentFilter` value:</span></span>
 
 * <span data-ttu-id="80a70-248">ページングの中に、フィルターの設定を維持するために、ページング リンクに含まれている必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-248">Must be included in the paging links in order to maintain the filter settings during paging.</span></span>
 * <span data-ttu-id="80a70-249">ページがリダイレクトされるときに、テキスト ボックスに復元される必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-249">Must be restored to the text box when the page is redisplayed.</span></span>
@@ -213,11 +213,11 @@ https://localhost:5001/Students?SearchString=an
   * <span data-ttu-id="80a70-253">検索文字列が変更されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-253">The search string is changed.</span></span>
   * <span data-ttu-id="80a70-254">`searchString` パラメーターは null ではありません。</span><span class="sxs-lookup"><span data-stu-id="80a70-254">The `searchString` parameter isn't null.</span></span>
 
-  <span data-ttu-id="80a70-255">`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。</span><span class="sxs-lookup"><span data-stu-id="80a70-255">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="80a70-256">その 1 つの学生のページが :::no-loc(Razor)::: ページに渡されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-256">That single page of students is passed to the :::no-loc(Razor)::: Page.</span></span>
+  <span data-ttu-id="80a70-255">`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。</span><span class="sxs-lookup"><span data-stu-id="80a70-255">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="80a70-256">その 1 つの学生のページが Razor ページに渡されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-256">That single page of students is passed to the Razor Page.</span></span>
 
   <span data-ttu-id="80a70-257">`PaginatedList.CreateAsync` 呼び出しの `pageIndex` の後の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。</span><span class="sxs-lookup"><span data-stu-id="80a70-257">The two question marks after `pageIndex` in the `PaginatedList.CreateAsync` call represent the [null-coalescing operator](/dotnet/csharp/language-reference/operators/null-conditional-operator).</span></span> <span data-ttu-id="80a70-258">Null 合体演算子は、null 許容型の既定値を定義します。</span><span class="sxs-lookup"><span data-stu-id="80a70-258">The null-coalescing operator defines a default value for a nullable type.</span></span> <span data-ttu-id="80a70-259">式 `pageIndex ?? 1` からは、`pageIndex` に値が含まれる場合はそれの値が返され、それ以外の場合は 1 が返されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-259">The expression `pageIndex ?? 1` returns the value of `pageIndex` if it has a value, otherwise, it returns 1.</span></span>
 
-### <a name="add-paging-links-to-the-no-locrazor-page"></a><span data-ttu-id="80a70-260">:::no-loc(Razor)::: ページにページングのリンクを追加する</span><span class="sxs-lookup"><span data-stu-id="80a70-260">Add paging links to the :::no-loc(Razor)::: Page</span></span>
+### <a name="add-paging-links-to-the-no-locrazor-page"></a><span data-ttu-id="80a70-260">Razor ページにページングのリンクを追加する</span><span class="sxs-lookup"><span data-stu-id="80a70-260">Add paging links to the Razor Page</span></span>
 
 <span data-ttu-id="80a70-261">*Students/Index.cshtml* のコードを次のコードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="80a70-261">Replace the code in *Students/Index.cshtml* with the following code.</span></span> <span data-ttu-id="80a70-262">変更が強調表示されています。</span><span class="sxs-lookup"><span data-stu-id="80a70-262">The changes are highlighted:</span></span>
 
@@ -253,7 +253,7 @@ https://localhost:5001/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-no-locrazor-page"></a><span data-ttu-id="80a70-277">:::no-loc(Razor)::: ページを作成する</span><span class="sxs-lookup"><span data-stu-id="80a70-277">Create the :::no-loc(Razor)::: Page</span></span>
+### <a name="create-the-no-locrazor-page"></a><span data-ttu-id="80a70-277">Razor ページを作成する</span><span class="sxs-lookup"><span data-stu-id="80a70-277">Create the Razor Page</span></span>
 
 <span data-ttu-id="80a70-278">次のコードを使用して、 *Pages/About.cshtml* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="80a70-278">Create a *Pages/About.cshtml* file with the following code:</span></span>
 
@@ -310,7 +310,7 @@ https://localhost:5001/Students?SearchString=an
 
 <span data-ttu-id="80a70-302">インデックス ページが、 **Students** リンクから要求された場合、クエリ文字列はありません。</span><span class="sxs-lookup"><span data-stu-id="80a70-302">When the Index page is requested from the **Students** link, there's no query string.</span></span> <span data-ttu-id="80a70-303">学生は、姓の昇順で表示されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-303">The students are displayed in ascending order by last name.</span></span> <span data-ttu-id="80a70-304">`switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。</span><span class="sxs-lookup"><span data-stu-id="80a70-304">Ascending order by last name is the default (fall-through case) in the `switch` statement.</span></span> <span data-ttu-id="80a70-305">ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-305">When the user clicks a column heading link, the appropriate `sortOrder` value is provided in the query string value.</span></span>
 
-<span data-ttu-id="80a70-306">`NameSort` および `DateSort` は、:::no-loc(Razor)::: ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-306">`NameSort` and `DateSort` are used by the :::no-loc(Razor)::: Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
+<span data-ttu-id="80a70-306">`NameSort` および `DateSort` は、Razor ページで、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-306">`NameSort` and `DateSort` are used by the Razor Page to configure the column heading hyperlinks with the appropriate query string values:</span></span>
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -370,7 +370,7 @@ https://localhost:5001/Students?SearchString=an
 
 <span data-ttu-id="80a70-349">Students インデックス ページにフィルターを追加するには</span><span class="sxs-lookup"><span data-stu-id="80a70-349">To add filtering to the Students Index page:</span></span>
 
-* <span data-ttu-id="80a70-350">テキスト ボックスと [送信] ボタンが、:::no-loc(Razor)::: ページに追加されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-350">A text box and a submit button is added to the :::no-loc(Razor)::: Page.</span></span> <span data-ttu-id="80a70-351">テキスト ボックスは、名と姓で検索文字列を指定します。</span><span class="sxs-lookup"><span data-stu-id="80a70-351">The text box supplies a search string on the first or last name.</span></span>
+* <span data-ttu-id="80a70-350">テキスト ボックスと [送信] ボタンが、Razor ページに追加されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-350">A text box and a submit button is added to the Razor Page.</span></span> <span data-ttu-id="80a70-351">テキスト ボックスは、名と姓で検索文字列を指定します。</span><span class="sxs-lookup"><span data-stu-id="80a70-351">The text box supplies a search string on the first or last name.</span></span>
 * <span data-ttu-id="80a70-352">テキスト ボックスの値を使用するようにページ モデルが更新されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-352">The page model is updated to use the text box value.</span></span>
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a><span data-ttu-id="80a70-353">Index メソッドにフィルター機能を追加する</span><span class="sxs-lookup"><span data-stu-id="80a70-353">Add filtering functionality to the Index method</span></span>
@@ -455,9 +455,9 @@ http://localhost:5000/Students?SearchString=an
 
 <span data-ttu-id="80a70-413">ページングのリンクをクリックすると、ページ インデックス変数に表示するページ番号が含まれます。</span><span class="sxs-lookup"><span data-stu-id="80a70-413">When a paging link is clicked, the page index variable contains the page number to display.</span></span>
 
-<span data-ttu-id="80a70-414">`CurrentSort` は、現在の並べ替え順序を含む :::no-loc(Razor)::: ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-414">`CurrentSort` provides the :::no-loc(Razor)::: Page with the current sort order.</span></span> <span data-ttu-id="80a70-415">ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-415">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
+<span data-ttu-id="80a70-414">`CurrentSort` は、現在の並べ替え順序を含む Razor ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-414">`CurrentSort` provides the Razor Page with the current sort order.</span></span> <span data-ttu-id="80a70-415">ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-415">The current sort order must be included in the paging links to keep the sort order while paging.</span></span>
 
-<span data-ttu-id="80a70-416">`CurrentFilter` は、現在のフィルター文字列を含む :::no-loc(Razor)::: ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-416">`CurrentFilter` provides the :::no-loc(Razor)::: Page with the current filter string.</span></span> <span data-ttu-id="80a70-417">`CurrentFilter` 値:</span><span class="sxs-lookup"><span data-stu-id="80a70-417">The `CurrentFilter` value:</span></span>
+<span data-ttu-id="80a70-416">`CurrentFilter` は、現在のフィルター文字列を含む Razor ページを提供します。</span><span class="sxs-lookup"><span data-stu-id="80a70-416">`CurrentFilter` provides the Razor Page with the current filter string.</span></span> <span data-ttu-id="80a70-417">`CurrentFilter` 値:</span><span class="sxs-lookup"><span data-stu-id="80a70-417">The `CurrentFilter` value:</span></span>
 
 * <span data-ttu-id="80a70-418">ページングの中に、フィルターの設定を維持するために、ページング リンクに含まれている必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-418">Must be included in the paging links in order to maintain the filter settings during paging.</span></span>
 * <span data-ttu-id="80a70-419">ページがリダイレクトされるときに、テキスト ボックスに復元される必要があります。</span><span class="sxs-lookup"><span data-stu-id="80a70-419">Must be restored to the text box when the page is redisplayed.</span></span>
@@ -469,13 +469,13 @@ http://localhost:5000/Students?SearchString=an
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage3)]
 
-<span data-ttu-id="80a70-425">`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。</span><span class="sxs-lookup"><span data-stu-id="80a70-425">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="80a70-426">その 1 つの学生のページが :::no-loc(Razor)::: ページに渡されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-426">That single page of students is passed to the :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="80a70-425">`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。</span><span class="sxs-lookup"><span data-stu-id="80a70-425">The `PaginatedList.CreateAsync` method converts the student query to a single page of students in a collection type that supports paging.</span></span> <span data-ttu-id="80a70-426">その 1 つの学生のページが Razor ページに渡されます。</span><span class="sxs-lookup"><span data-stu-id="80a70-426">That single page of students is passed to the Razor Page.</span></span>
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage4)]
 
 <span data-ttu-id="80a70-427">`PaginatedList.CreateAsync` の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。</span><span class="sxs-lookup"><span data-stu-id="80a70-427">The two question marks in `PaginatedList.CreateAsync` represent the [null-coalescing operator](/dotnet/csharp/language-reference/operators/null-conditional-operator).</span></span> <span data-ttu-id="80a70-428">Null 合体演算子は、null 許容型の既定値を定義します。</span><span class="sxs-lookup"><span data-stu-id="80a70-428">The null-coalescing operator defines a default value for a nullable type.</span></span> <span data-ttu-id="80a70-429">式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。</span><span class="sxs-lookup"><span data-stu-id="80a70-429">The expression `(pageIndex ?? 1)` means return the value of `pageIndex` if it has a value.</span></span> <span data-ttu-id="80a70-430">`pageIndex` に値がない場合は、1 を返します。</span><span class="sxs-lookup"><span data-stu-id="80a70-430">If `pageIndex` doesn't have a value, return 1.</span></span>
 
-## <a name="add-paging-links-to-the-student-no-locrazor-page"></a><span data-ttu-id="80a70-431">学生の :::no-loc(Razor)::: ページにページングのリンクを追加する</span><span class="sxs-lookup"><span data-stu-id="80a70-431">Add paging links to the student :::no-loc(Razor)::: Page</span></span>
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a><span data-ttu-id="80a70-431">学生の Razor ページにページングのリンクを追加する</span><span class="sxs-lookup"><span data-stu-id="80a70-431">Add paging links to the student Razor Page</span></span>
 
 <span data-ttu-id="80a70-432">*Students/Index.cshtml* 内のマークアップを更新する</span><span class="sxs-lookup"><span data-stu-id="80a70-432">Update the markup in *Students/Index.cshtml*.</span></span> <span data-ttu-id="80a70-433">変更が強調表示されています。</span><span class="sxs-lookup"><span data-stu-id="80a70-433">The changes are highlighted:</span></span>
 
@@ -521,7 +521,7 @@ http://localhost:5000/Students?SearchString=an
 
 ### <a name="update-the-about-page-model"></a><span data-ttu-id="80a70-453">About ページ モデルを更新する</span><span class="sxs-lookup"><span data-stu-id="80a70-453">Update the About page model</span></span>
 
-<span data-ttu-id="80a70-454">ASP.NET Core 2.2 の Web テンプレートには、About ページが含まれていません。</span><span class="sxs-lookup"><span data-stu-id="80a70-454">The web templates in ASP.NET Core 2.2 do not include the About page.</span></span> <span data-ttu-id="80a70-455">ASP.NET Core 2.2 を使っている場合は、About :::no-loc(Razor)::: ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="80a70-455">If you are using ASP.NET Core 2.2, create the About :::no-loc(Razor)::: Page.</span></span>
+<span data-ttu-id="80a70-454">ASP.NET Core 2.2 の Web テンプレートには、About ページが含まれていません。</span><span class="sxs-lookup"><span data-stu-id="80a70-454">The web templates in ASP.NET Core 2.2 do not include the About page.</span></span> <span data-ttu-id="80a70-455">ASP.NET Core 2.2 を使っている場合は、About Razor ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="80a70-455">If you are using ASP.NET Core 2.2, create the About Razor Page.</span></span>
 
 <span data-ttu-id="80a70-456">次のコードを使用して、 *Pages/About.cshtml.cs* を更新します。</span><span class="sxs-lookup"><span data-stu-id="80a70-456">Update the *Pages/About.cshtml.cs* file with the following code:</span></span>
 
@@ -529,7 +529,7 @@ http://localhost:5000/Students?SearchString=an
 
 <span data-ttu-id="80a70-457">LINQ ステートメントは、登録日で受講者エンティティをグループ化し、各グループ内のエンティティの数を計算して、結果を `EnrollmentDateGroup` ビュー モデル オブジェクトのコレクションに格納します。</span><span class="sxs-lookup"><span data-stu-id="80a70-457">The LINQ statement groups the student entities by enrollment date, calculates the number of entities in each group, and stores the results in a collection of `EnrollmentDateGroup` view model objects.</span></span>
 
-### <a name="modify-the-about-no-locrazor-page"></a><span data-ttu-id="80a70-458">About :::no-loc(Razor)::: ページを変更する</span><span class="sxs-lookup"><span data-stu-id="80a70-458">Modify the About :::no-loc(Razor)::: Page</span></span>
+### <a name="modify-the-about-no-locrazor-page"></a><span data-ttu-id="80a70-458">About Razor ページを変更する</span><span class="sxs-lookup"><span data-stu-id="80a70-458">Modify the About Razor Page</span></span>
 
 <span data-ttu-id="80a70-459">*Pages/About.cshtml* ファイルのコードを次のコードに置き換えます。</span><span class="sxs-lookup"><span data-stu-id="80a70-459">Replace the code in the *Pages/About.cshtml* file with the following code:</span></span>
 

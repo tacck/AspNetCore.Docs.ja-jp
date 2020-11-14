@@ -1,22 +1,22 @@
 ---
-title: 'ASP.NET Core での Entity Framework Core を使用した :::no-loc(Razor)::: Pages - チュートリアル 1/8'
+title: 'ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8'
 author: rick-anderson
-description: 'Entity Framework Core を使用して :::no-loc(Razor)::: Pages アプリを作成する方法について説明します'
+description: 'Entity Framework Core を使用して Razor Pages アプリを作成する方法について説明します'
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 9/26/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: data/ef-rp/intro
 ms.openlocfilehash: 74f65b916c2d5b7de61ec29f4259a51584ee5989
 ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
@@ -25,19 +25,19 @@ ms.contentlocale: ja-JP
 ms.lasthandoff: 11/05/2020
 ms.locfileid: "93365419"
 ---
-# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a><span data-ttu-id="0e683-103">ASP.NET Core での Entity Framework Core を使用した :::no-loc(Razor)::: Pages - チュートリアル 1/8</span><span class="sxs-lookup"><span data-stu-id="0e683-103">:::no-loc(Razor)::: Pages with Entity Framework Core in ASP.NET Core - Tutorial 1 of 8</span></span>
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a><span data-ttu-id="0e683-103">ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8</span><span class="sxs-lookup"><span data-stu-id="0e683-103">Razor Pages with Entity Framework Core in ASP.NET Core - Tutorial 1 of 8</span></span>
 
 <span data-ttu-id="0e683-104">作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="0e683-104">By [Tom Dykstra](https://github.com/tdykstra) and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="0e683-105">これは、[ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) アプリでの Entity Framework (EF) Core の使用方法を示す一連のチュートリアルの 1 番目です。</span><span class="sxs-lookup"><span data-stu-id="0e683-105">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="0e683-106">このチュートリアルでは、架空の Contoso University の Web サイトを構築します。</span><span class="sxs-lookup"><span data-stu-id="0e683-106">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="0e683-107">サイトには、学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれます。</span><span class="sxs-lookup"><span data-stu-id="0e683-107">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="0e683-108">このチュートリアルでは、コード ファーストのアプローチを使用します。</span><span class="sxs-lookup"><span data-stu-id="0e683-108">The tutorial uses the code first approach.</span></span> <span data-ttu-id="0e683-109">データベース ファーストのアプローチを使用してこのチュートリアルを実行する方法の詳細については、[こちらの Github イシュー](https://github.com/dotnet/AspNetCore.Docs/issues/16897)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-109">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
+<span data-ttu-id="0e683-105">これは、[ASP.NET Core Razor Pages](xref:razor-pages/index) アプリでの Entity Framework (EF) Core の使用方法を示す一連のチュートリアルの 1 番目です。</span><span class="sxs-lookup"><span data-stu-id="0e683-105">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core Razor Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="0e683-106">このチュートリアルでは、架空の Contoso University の Web サイトを構築します。</span><span class="sxs-lookup"><span data-stu-id="0e683-106">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="0e683-107">サイトには、学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれます。</span><span class="sxs-lookup"><span data-stu-id="0e683-107">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="0e683-108">このチュートリアルでは、コード ファーストのアプローチを使用します。</span><span class="sxs-lookup"><span data-stu-id="0e683-108">The tutorial uses the code first approach.</span></span> <span data-ttu-id="0e683-109">データベース ファーストのアプローチを使用してこのチュートリアルを実行する方法の詳細については、[こちらの Github イシュー](https://github.com/dotnet/AspNetCore.Docs/issues/16897)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-109">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
 
 [<span data-ttu-id="0e683-110">完成したアプリをダウンロードまたは表示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-110">Download or view the completed app.</span></span>](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) <span data-ttu-id="0e683-111">[ダウンロードの方法はこちらをご覧ください。](xref:index#how-to-download-a-sample)</span><span class="sxs-lookup"><span data-stu-id="0e683-111">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="0e683-112">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="0e683-112">Prerequisites</span></span>
 
-* <span data-ttu-id="0e683-113">:::no-loc(Razor)::: Pages を初めて使用する場合は、このチュートリアルを開始する前に、[:::no-loc(Razor)::: Pages の概要](xref:tutorials/razor-pages/razor-pages-start)チュートリアル シリーズをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-113">If you're new to :::no-loc(Razor)::: Pages, go through the [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
+* <span data-ttu-id="0e683-113">Razor Pages を初めて使用する場合は、このチュートリアルを開始する前に、[Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)チュートリアル シリーズをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-113">If you're new to Razor Pages, go through the [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-114">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -128,7 +128,7 @@ To run the app after downloading the completed project:
 # <a name="visual-studio-code"></a>[<span data-ttu-id="0e683-139">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0e683-139">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 * <span data-ttu-id="0e683-140">ターミナルで、プロジェクト フォルダーを作成するフォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="0e683-140">In a terminal, navigate to the folder in which the project folder should be created.</span></span>
-* <span data-ttu-id="0e683-141">次のコマンドを実行して、:::no-loc(Razor)::: Pages プロジェクトと `cd` を新しいプロジェクト フォルダー内に作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-141">Run the following commands to create a :::no-loc(Razor)::: Pages project and `cd` into the new project folder:</span></span>
+* <span data-ttu-id="0e683-141">次のコマンドを実行して、Razor Pages プロジェクトと `cd` を新しいプロジェクト フォルダー内に作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-141">Run the following commands to create a Razor Pages project and `cd` into the new project folder:</span></span>
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
@@ -218,16 +218,16 @@ To run the app after downloading the completed project:
 <span data-ttu-id="0e683-202">このセクションでは、ASP.NET Core スキャフォールディング ツールを使用して、次のものを生成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-202">In this section, you use the ASP.NET Core scaffolding tool to generate:</span></span>
 
 * <span data-ttu-id="0e683-203">EF Core `DbContext` クラス。</span><span class="sxs-lookup"><span data-stu-id="0e683-203">An EF Core `DbContext` class.</span></span> <span data-ttu-id="0e683-204">コンテキストは、定められたデータ モデルに対し、Entity Framework 機能を調整するメイン クラスです。</span><span class="sxs-lookup"><span data-stu-id="0e683-204">The context is the main class that coordinates Entity Framework functionality for a given data model.</span></span> <span data-ttu-id="0e683-205">これは <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> クラスから派生します。</span><span class="sxs-lookup"><span data-stu-id="0e683-205">It derives from the <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName> class.</span></span>
-* <span data-ttu-id="0e683-206">`Student` エンティティの作成、読み取り、更新、および削除 (CRUD) 操作を処理する :::no-loc(Razor)::: ページ。</span><span class="sxs-lookup"><span data-stu-id="0e683-206">:::no-loc(Razor)::: pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
+* <span data-ttu-id="0e683-206">`Student` エンティティの作成、読み取り、更新、および削除 (CRUD) 操作を処理する Razor ページ。</span><span class="sxs-lookup"><span data-stu-id="0e683-206">Razor pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-207">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-207">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="0e683-208">*Pages/Students* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-208">Create a *Pages/Students* folder.</span></span>
 * <span data-ttu-id="0e683-209">**ソリューション エクスプローラー** で、 *Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-209">In **Solution Explorer** , right-click the *Pages/Students* folder and select **Add** > **New Scaffolded Item**.</span></span>
 * <span data-ttu-id="0e683-210">**[新しいスキャフォールディング アイテムの追加]** ダイアログで次のようにします。</span><span class="sxs-lookup"><span data-stu-id="0e683-210">In the **Add New Scaffold Item** dialog:</span></span>
-  * <span data-ttu-id="0e683-211">左側のタブで、 **[インストール済み] > [共通] > [:::no-loc(Razor)::: Pages]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-211">In the left tab, select **Installed > Common > :::no-loc(Razor)::: Pages**</span></span>
-  * <span data-ttu-id="0e683-212">**[Entity Framework を使用する :::no-loc(Razor)::: ページ (CRUD)]** > **[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-212">Select **:::no-loc(Razor)::: Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
-* <span data-ttu-id="0e683-213">**[Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。</span><span class="sxs-lookup"><span data-stu-id="0e683-213">In the **Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)** dialog:</span></span>
+  * <span data-ttu-id="0e683-211">左側のタブで、 **[インストール済み] > [共通] > [Razor Pages]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-211">In the left tab, select **Installed > Common > Razor Pages**</span></span>
+  * <span data-ttu-id="0e683-212">**[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-212">Select **Razor Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
+* <span data-ttu-id="0e683-213">**[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。</span><span class="sxs-lookup"><span data-stu-id="0e683-213">In the **Add Razor Pages using Entity Framework (CRUD)** dialog:</span></span>
   * <span data-ttu-id="0e683-214">**[モデル クラス]** ドロップダウンで、 **[Student (ContosoUniversity.Models)]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-214">In the **Model class** drop-down, select **Student (ContosoUniversity.Models)**.</span></span>
   * <span data-ttu-id="0e683-215">**Data context class** 行で、 **+** (+) 記号を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-215">In the **Data context class** row, select the **+** (plus) sign.</span></span>
     * <span data-ttu-id="0e683-216">データ コンテキスト名が、`ContosoUniversityContext` ではなく `SchoolContext` で終わるように変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-216">Change the data context name to end in `SchoolContext` rather than `ContosoUniversityContext`.</span></span> <span data-ttu-id="0e683-217">更新されたコンテキスト名: `ContosoUniversity.Data.SchoolContext`</span><span class="sxs-lookup"><span data-stu-id="0e683-217">The updated context name: `ContosoUniversity.Data.SchoolContext`</span></span>
@@ -283,7 +283,7 @@ To run the app after downloading the completed project:
 
 <span data-ttu-id="0e683-230">スキャフォールディング プロセスは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="0e683-230">The scaffolding process:</span></span>
 
-* <span data-ttu-id="0e683-231">*Pages/Students* フォルダーに :::no-loc(Razor)::: ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-231">Creates :::no-loc(Razor)::: pages in the *Pages/Students* folder:</span></span>
+* <span data-ttu-id="0e683-231">*Pages/Students* フォルダーに Razor ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-231">Creates Razor pages in the *Pages/Students* folder:</span></span>
   * <span data-ttu-id="0e683-232">*Create.cshtml* と *Create.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-232">*Create.cshtml* and *Create.cshtml.cs*</span></span>
   * <span data-ttu-id="0e683-233">*Delete.cshtml* と *Delete.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-233">*Delete.cshtml* and *Delete.cshtml.cs*</span></span>
   * <span data-ttu-id="0e683-234">*Details.cshtml* と *Details.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-234">*Details.cshtml* and *Details.cshtml.cs*</span></span>
@@ -291,17 +291,17 @@ To run the app after downloading the completed project:
   * <span data-ttu-id="0e683-236">*Index.cshtml* と *Index.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-236">*Index.cshtml* and *Index.cshtml.cs*</span></span>
 * <span data-ttu-id="0e683-237">*Data/SchoolContext.cs* を作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-237">Creates *Data/SchoolContext.cs*.</span></span>
 * <span data-ttu-id="0e683-238">*Startup.cs* の依存関係の挿入にコンテキストを追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-238">Adds the context to dependency injection in *Startup.cs*.</span></span>
-* <span data-ttu-id="0e683-239">データベース接続文字列を *:::no-loc(appsettings.json):::* に追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-239">Adds a database connection string to *:::no-loc(appsettings.json):::*.</span></span>
+* <span data-ttu-id="0e683-239">データベース接続文字列を *appsettings.json* に追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-239">Adds a database connection string to *appsettings.json*.</span></span>
 
 ## <a name="database-connection-string"></a><span data-ttu-id="0e683-240">データベース接続文字列</span><span class="sxs-lookup"><span data-stu-id="0e683-240">Database connection string</span></span>
 
-<span data-ttu-id="0e683-241">スキャフォールディング ツールを使用すると、 *:::no-loc(appsettings.json):::* ファイルに接続文字列が生成されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-241">The scaffolding tool generates a connection string in the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="0e683-241">スキャフォールディング ツールを使用すると、 *appsettings.json* ファイルに接続文字列が生成されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-241">The scaffolding tool generates a connection string in the *appsettings.json* file.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-242">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-242">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="0e683-243">この接続文字列によって [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-243">The connection string specifies [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb):</span></span>
 
-[!code-json[Main](intro/samples/cu50/:::no-loc(appsettings.json):::?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettings.json?highlight=11)]
 
 <span data-ttu-id="0e683-244">LocalDB は SQL Server Express データベース エンジンの軽量版であり、実稼働ではなく、アプリの開発を意図して設計されています。</span><span class="sxs-lookup"><span data-stu-id="0e683-244">LocalDB is a lightweight version of the SQL Server Express Database Engine and is intended for app development, not production use.</span></span> <span data-ttu-id="0e683-245">既定では、LocalDB は `C:/Users/<user>` ディレクトリに *.mdf* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-245">By default, LocalDB creates *.mdf* files in the `C:/Users/<user>` directory.</span></span>
 
@@ -321,7 +321,7 @@ To run the app after downloading the completed project:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-<span data-ttu-id="0e683-254">上記のコードは、単数形の `DbSet<Student> Student` から複数形の `DbSet<Student> Students` に変更されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-254">The preceding code changes from the singular `DbSet<Student> Student` to the  plural `DbSet<Student> Students`.</span></span> <span data-ttu-id="0e683-255">:::no-loc(Razor)::: Pages のコードが新しい `DBSet` 名と一致するようにするには、`_context.Student.` から</span><span class="sxs-lookup"><span data-stu-id="0e683-255">To make the :::no-loc(Razor)::: Pages code match the new `DBSet` name, make a global change from: `_context.Student.`</span></span>
+<span data-ttu-id="0e683-254">上記のコードは、単数形の `DbSet<Student> Student` から複数形の `DbSet<Student> Students` に変更されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-254">The preceding code changes from the singular `DbSet<Student> Student` to the  plural `DbSet<Student> Students`.</span></span> <span data-ttu-id="0e683-255">Razor Pages のコードが新しい `DBSet` 名と一致するようにするには、`_context.Student.` から</span><span class="sxs-lookup"><span data-stu-id="0e683-255">To make the Razor Pages code match the new `DBSet` name, make a global change from: `_context.Student.`</span></span>
 <span data-ttu-id="0e683-256">`_context.Students.` へとグローバルに変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-256">to: `_context.Students.`</span></span>
 
 <span data-ttu-id="0e683-257">8 回の出現があります。</span><span class="sxs-lookup"><span data-stu-id="0e683-257">There are 8 occurrences.</span></span>
@@ -342,7 +342,7 @@ To run the app after downloading the completed project:
 
 ## <a name="startupcs"></a><span data-ttu-id="0e683-269">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="0e683-269">Startup.cs</span></span>
 
-<span data-ttu-id="0e683-270">ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-270">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="0e683-271">サービス (`SchoolContext` など) は、アプリの起動時に依存関係の挿入に登録されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-271">Services such as the `SchoolContext` are registered with dependency injection during app startup.</span></span> <span data-ttu-id="0e683-272">これらのサービスを必要とするコンポーネント (:::no-loc(Razor)::: Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-272">Components that require these services, such as :::no-loc(Razor)::: Pages, are provided these services via constructor parameters.</span></span> <span data-ttu-id="0e683-273">データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-273">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="0e683-270">ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-270">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="0e683-271">サービス (`SchoolContext` など) は、アプリの起動時に依存関係の挿入に登録されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-271">Services such as the `SchoolContext` are registered with dependency injection during app startup.</span></span> <span data-ttu-id="0e683-272">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-272">Components that require these services, such as Razor Pages, are provided these services via constructor parameters.</span></span> <span data-ttu-id="0e683-273">データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-273">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
 
 <span data-ttu-id="0e683-274">スキャフォールディング ツールにより、コンテキスト クラスが依存関係挿入コンテナーに自動的に登録されました。</span><span class="sxs-lookup"><span data-stu-id="0e683-274">The scaffolding tool automatically registered the context class with the dependency injection container.</span></span>
 
@@ -362,7 +362,7 @@ To run the app after downloading the completed project:
 
 ---
 
-<span data-ttu-id="0e683-280">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-280">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="0e683-281">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *:::no-loc(appsettings.json):::* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="0e683-281">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="0e683-280">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-280">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="0e683-281">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="0e683-281">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 ### <a name="add-the-database-exception-filter"></a><span data-ttu-id="0e683-282">データベース例外フィルターを追加する</span><span class="sxs-lookup"><span data-stu-id="0e683-282">Add the database exception filter</span></span>
 
@@ -521,13 +521,13 @@ public async Task OnGetAsync()
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-<span data-ttu-id="0e683-372">これは、[ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) アプリでの Entity Framework (EF) Core の使用方法を示す一連のチュートリアルの 1 番目です。</span><span class="sxs-lookup"><span data-stu-id="0e683-372">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core :::no-loc(Razor)::: Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="0e683-373">このチュートリアルでは、架空の Contoso University の Web サイトを構築します。</span><span class="sxs-lookup"><span data-stu-id="0e683-373">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="0e683-374">サイトには、学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれます。</span><span class="sxs-lookup"><span data-stu-id="0e683-374">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="0e683-375">このチュートリアルでは、コード ファーストのアプローチを使用します。</span><span class="sxs-lookup"><span data-stu-id="0e683-375">The tutorial uses the code first approach.</span></span> <span data-ttu-id="0e683-376">データベース ファーストのアプローチを使用してこのチュートリアルを実行する方法の詳細については、[こちらの Github イシュー](https://github.com/dotnet/AspNetCore.Docs/issues/16897)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-376">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
+<span data-ttu-id="0e683-372">これは、[ASP.NET Core Razor Pages](xref:razor-pages/index) アプリでの Entity Framework (EF) Core の使用方法を示す一連のチュートリアルの 1 番目です。</span><span class="sxs-lookup"><span data-stu-id="0e683-372">This is the first in a series of tutorials that show how to use Entity Framework (EF) Core in an [ASP.NET Core Razor Pages](xref:razor-pages/index) app.</span></span> <span data-ttu-id="0e683-373">このチュートリアルでは、架空の Contoso University の Web サイトを構築します。</span><span class="sxs-lookup"><span data-stu-id="0e683-373">The tutorials build a web site for a fictional Contoso University.</span></span> <span data-ttu-id="0e683-374">サイトには、学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれます。</span><span class="sxs-lookup"><span data-stu-id="0e683-374">The site includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="0e683-375">このチュートリアルでは、コード ファーストのアプローチを使用します。</span><span class="sxs-lookup"><span data-stu-id="0e683-375">The tutorial uses the code first approach.</span></span> <span data-ttu-id="0e683-376">データベース ファーストのアプローチを使用してこのチュートリアルを実行する方法の詳細については、[こちらの Github イシュー](https://github.com/dotnet/AspNetCore.Docs/issues/16897)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-376">For information on following this tutorial using the database first approach, see [this Github issue](https://github.com/dotnet/AspNetCore.Docs/issues/16897).</span></span>
 
 [<span data-ttu-id="0e683-377">完成したアプリをダウンロードまたは表示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-377">Download or view the completed app.</span></span>](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) <span data-ttu-id="0e683-378">[ダウンロードの方法はこちらをご覧ください。](xref:index#how-to-download-a-sample)</span><span class="sxs-lookup"><span data-stu-id="0e683-378">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
 
 ## <a name="prerequisites"></a><span data-ttu-id="0e683-379">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="0e683-379">Prerequisites</span></span>
 
-* <span data-ttu-id="0e683-380">:::no-loc(Razor)::: Pages を初めて使用する場合は、このチュートリアルを開始する前に、[:::no-loc(Razor)::: Pages の概要](xref:tutorials/razor-pages/razor-pages-start)チュートリアル シリーズをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-380">If you're new to :::no-loc(Razor)::: Pages, go through the [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
+* <span data-ttu-id="0e683-380">Razor Pages を初めて使用する場合は、このチュートリアルを開始する前に、[Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)チュートリアル シリーズをご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-380">If you're new to Razor Pages, go through the [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) tutorial series before starting this one.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-381">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-381">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -617,7 +617,7 @@ public async Task OnGetAsync()
 
 * <span data-ttu-id="0e683-425">ターミナルで、プロジェクト フォルダーを作成するフォルダーに移動します。</span><span class="sxs-lookup"><span data-stu-id="0e683-425">In a terminal, navigate to the folder in which the project folder should be created.</span></span>
 
-* <span data-ttu-id="0e683-426">次のコマンドを実行して、:::no-loc(Razor)::: Pages プロジェクトと `cd` を新しいプロジェクト フォルダー内に作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-426">Run the following commands to create a :::no-loc(Razor)::: Pages project and `cd` into the new project folder:</span></span>
+* <span data-ttu-id="0e683-426">次のコマンドを実行して、Razor Pages プロジェクトと `cd` を新しいプロジェクト フォルダー内に作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-426">Run the following commands to create a Razor Pages project and `cd` into the new project folder:</span></span>
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
@@ -706,14 +706,14 @@ public async Task OnGetAsync()
 <span data-ttu-id="0e683-484">このセクションでは、ASP.NET Core スキャフォールディング ツールを使用して、次のものを生成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-484">In this section, you use the ASP.NET Core scaffolding tool to generate:</span></span>
 
 * <span data-ttu-id="0e683-485">EF Core *コンテキスト* クラス。</span><span class="sxs-lookup"><span data-stu-id="0e683-485">An EF Core *context* class.</span></span> <span data-ttu-id="0e683-486">コンテキストは、定められたデータ モデルに対し、Entity Framework 機能を調整するメイン クラスです。</span><span class="sxs-lookup"><span data-stu-id="0e683-486">The context is the main class that coordinates Entity Framework functionality for a given data model.</span></span> <span data-ttu-id="0e683-487">これは `Microsoft.EntityFrameworkCore.DbContext` クラスから派生します。</span><span class="sxs-lookup"><span data-stu-id="0e683-487">It derives from the `Microsoft.EntityFrameworkCore.DbContext` class.</span></span>
-* <span data-ttu-id="0e683-488">`Student` エンティティの作成、読み取り、更新、および削除 (CRUD) 操作を処理する :::no-loc(Razor)::: ページ。</span><span class="sxs-lookup"><span data-stu-id="0e683-488">:::no-loc(Razor)::: pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
+* <span data-ttu-id="0e683-488">`Student` エンティティの作成、読み取り、更新、および削除 (CRUD) 操作を処理する Razor ページ。</span><span class="sxs-lookup"><span data-stu-id="0e683-488">Razor pages that handle Create, Read, Update, and Delete (CRUD) operations for the `Student` entity.</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-489">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-489">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="0e683-490">*Pages* フォルダー内に *Students* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-490">Create a *Students* folder in the *Pages* folder.</span></span>
 * <span data-ttu-id="0e683-491">**ソリューション エクスプローラー** で、 *Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-491">In **Solution Explorer** , right-click the *Pages/Students* folder and select **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="0e683-492">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する :::no-loc(Razor)::: ページ (CRUD)]** > **[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-492">In the **Add Scaffold** dialog, select **:::no-loc(Razor)::: Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
-* <span data-ttu-id="0e683-493">**[Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。</span><span class="sxs-lookup"><span data-stu-id="0e683-493">In the **Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)** dialog:</span></span>
+* <span data-ttu-id="0e683-492">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-492">In the **Add Scaffold** dialog, select **Razor Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
+* <span data-ttu-id="0e683-493">**[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログで、次のことを行います。</span><span class="sxs-lookup"><span data-stu-id="0e683-493">In the **Add Razor Pages using Entity Framework (CRUD)** dialog:</span></span>
   * <span data-ttu-id="0e683-494">**[モデル クラス]** ドロップダウンで、 **[Student (ContosoUniversity.Models)]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-494">In the **Model class** drop-down, select **Student (ContosoUniversity.Models)**.</span></span>
   * <span data-ttu-id="0e683-495">**Data context class** 行で、 **+** (+) 記号を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-495">In the **Data context class** row, select the **+** (plus) sign.</span></span>
   * <span data-ttu-id="0e683-496">データ コンテキスト名を *ContosoUniversity.Models.ContosoUniversityContext* から *ContosoUniversity.Data.SchoolContext* に変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-496">Change the data context name from *ContosoUniversity.Models.ContosoUniversityContext* to *ContosoUniversity.Data.SchoolContext*.</span></span>
@@ -772,7 +772,7 @@ remove dotnet tool install --global  below
 
 <span data-ttu-id="0e683-509">スキャフォールディング プロセスは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="0e683-509">The scaffolding process:</span></span>
 
-* <span data-ttu-id="0e683-510">*Pages/Students* フォルダーに :::no-loc(Razor)::: ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-510">Creates :::no-loc(Razor)::: pages in the *Pages/Students* folder:</span></span>
+* <span data-ttu-id="0e683-510">*Pages/Students* フォルダーに Razor ページを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-510">Creates Razor pages in the *Pages/Students* folder:</span></span>
   * <span data-ttu-id="0e683-511">*Create.cshtml* と *Create.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-511">*Create.cshtml* and *Create.cshtml.cs*</span></span>
   * <span data-ttu-id="0e683-512">*Delete.cshtml* と *Delete.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-512">*Delete.cshtml* and *Delete.cshtml.cs*</span></span>
   * <span data-ttu-id="0e683-513">*Details.cshtml* と *Details.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-513">*Details.cshtml* and *Details.cshtml.cs*</span></span>
@@ -780,15 +780,15 @@ remove dotnet tool install --global  below
   * <span data-ttu-id="0e683-515">*Index.cshtml* と *Index.cshtml.cs*</span><span class="sxs-lookup"><span data-stu-id="0e683-515">*Index.cshtml* and *Index.cshtml.cs*</span></span>
 * <span data-ttu-id="0e683-516">*Data/SchoolContext.cs* を作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-516">Creates *Data/SchoolContext.cs*.</span></span>
 * <span data-ttu-id="0e683-517">*Startup.cs* の依存関係の挿入にコンテキストを追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-517">Adds the context to dependency injection in *Startup.cs*.</span></span>
-* <span data-ttu-id="0e683-518">データベース接続文字列を *:::no-loc(appsettings.json):::* に追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-518">Adds a database connection string to *:::no-loc(appsettings.json):::*.</span></span>
+* <span data-ttu-id="0e683-518">データベース接続文字列を *appsettings.json* に追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-518">Adds a database connection string to *appsettings.json*.</span></span>
 
 ## <a name="database-connection-string"></a><span data-ttu-id="0e683-519">データベース接続文字列</span><span class="sxs-lookup"><span data-stu-id="0e683-519">Database connection string</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-520">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-520">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="0e683-521">*:::no-loc(appsettings.json):::* ファイルでは、接続文字列 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されています。</span><span class="sxs-lookup"><span data-stu-id="0e683-521">The *:::no-loc(appsettings.json):::* file specifies the connection string [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).</span></span>
+<span data-ttu-id="0e683-521">*appsettings.json* ファイルでは、接続文字列 [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb) が指定されています。</span><span class="sxs-lookup"><span data-stu-id="0e683-521">The *appsettings.json* file specifies the connection string [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb).</span></span>
 
-[!code-json[Main](intro/samples/cu30/:::no-loc(appsettings.json):::?highlight=11)]
+[!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
 <span data-ttu-id="0e683-522">LocalDB は SQL Server Express データベース エンジンの軽量版であり、実稼働ではなく、アプリの開発を意図して設計されています。</span><span class="sxs-lookup"><span data-stu-id="0e683-522">LocalDB is a lightweight version of the SQL Server Express Database Engine and is intended for app development, not production use.</span></span> <span data-ttu-id="0e683-523">既定では、LocalDB は `C:/Users/<user>` ディレクトリに *.mdf* ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-523">By default, LocalDB creates *.mdf* files in the `C:/Users/<user>` directory.</span></span>
 
@@ -815,13 +815,13 @@ remove dotnet tool install --global  below
 
 <span data-ttu-id="0e683-536">エンティティ セットには複数のエンティティが含まれているため、DBSet プロパティは複数形の名前にする必要があります。</span><span class="sxs-lookup"><span data-stu-id="0e683-536">Since an entity set contains multiple entities, the DBSet properties should be plural names.</span></span> <span data-ttu-id="0e683-537">スキャフォールディング ツールによって `Student` DBSet を作成したので、このステップでこれを複数形の `Students` に変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-537">Since the scaffolding tool created a`Student` DBSet, this step changes it to plural `Students`.</span></span> 
 
-<span data-ttu-id="0e683-538">:::no-loc(Razor)::: Pages のコードを新しい DBSet 名と一致させるには、プロジェクト全体で `_context.Student` を `_context.Students` にグローバルに変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-538">To make the :::no-loc(Razor)::: Pages code match the new DBSet name, make a global change across the whole project of `_context.Student` to `_context.Students`.</span></span>  <span data-ttu-id="0e683-539">8 回の出現があります。</span><span class="sxs-lookup"><span data-stu-id="0e683-539">There are 8 occurrences.</span></span>
+<span data-ttu-id="0e683-538">Razor Pages のコードを新しい DBSet 名と一致させるには、プロジェクト全体で `_context.Student` を `_context.Students` にグローバルに変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-538">To make the Razor Pages code match the new DBSet name, make a global change across the whole project of `_context.Student` to `_context.Students`.</span></span>  <span data-ttu-id="0e683-539">8 回の出現があります。</span><span class="sxs-lookup"><span data-stu-id="0e683-539">There are 8 occurrences.</span></span>
 
 <span data-ttu-id="0e683-540">プロジェクトをビルドし、コンパイラ エラーがないことを確認します。</span><span class="sxs-lookup"><span data-stu-id="0e683-540">Build the project to verify there are no compiler errors.</span></span>
 
 ## <a name="startupcs"></a><span data-ttu-id="0e683-541">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="0e683-541">Startup.cs</span></span>
 
-<span data-ttu-id="0e683-542">ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-542">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="0e683-543">サービス (EF Core データベース コンテキストなど) は、アプリケーションの起動時に依存関係の挿入に登録されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-543">Services (such as the EF Core database context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="0e683-544">これらのサービスを必要とするコンポーネント (:::no-loc(Razor)::: Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-544">Components that require these services (such as :::no-loc(Razor)::: Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="0e683-545">データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-545">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="0e683-542">ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-542">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="0e683-543">サービス (EF Core データベース コンテキストなど) は、アプリケーションの起動時に依存関係の挿入に登録されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-543">Services (such as the EF Core database context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="0e683-544">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-544">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="0e683-545">データベース コンテキスト インスタンスを取得するコンストラクター コードは、この後のチュートリアルで示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-545">The constructor code that gets a database context instance is shown later in the tutorial.</span></span>
 
 <span data-ttu-id="0e683-546">スキャフォールディング ツールにより、コンテキスト クラスが依存関係挿入コンテナーに自動的に登録されました。</span><span class="sxs-lookup"><span data-stu-id="0e683-546">The scaffolding tool automatically registered the context class with the dependency injection container.</span></span>
 
@@ -839,7 +839,7 @@ remove dotnet tool install --global  below
 
 ---
 
-<span data-ttu-id="0e683-551">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-551">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="0e683-552">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *:::no-loc(appsettings.json):::* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="0e683-552">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="0e683-551">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-551">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="0e683-552">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="0e683-552">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 ## <a name="create-the-database"></a><span data-ttu-id="0e683-553">データベースの作成</span><span class="sxs-lookup"><span data-stu-id="0e683-553">Create the database</span></span>
 
@@ -956,7 +956,7 @@ public async Task OnGetAsync()
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="0e683-625">Contoso University のサンプル Web アプリでは、Entity Framework (EF) Core を使用して ASP.NET Core :::no-loc(Razor)::: Pages アプリを作成する方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="0e683-625">The Contoso University sample web app demonstrates how to create an ASP.NET Core :::no-loc(Razor)::: Pages app using Entity Framework (EF) Core.</span></span>
+<span data-ttu-id="0e683-625">Contoso University のサンプル Web アプリでは、Entity Framework (EF) Core を使用して ASP.NET Core Razor Pages アプリを作成する方法を示しています。</span><span class="sxs-lookup"><span data-stu-id="0e683-625">The Contoso University sample web app demonstrates how to create an ASP.NET Core Razor Pages app using Entity Framework (EF) Core.</span></span>
 
 <span data-ttu-id="0e683-626">このサンプル アプリは架空の Contoso University の Web サイトです。</span><span class="sxs-lookup"><span data-stu-id="0e683-626">The sample app is a web site for a fictional Contoso University.</span></span> <span data-ttu-id="0e683-627">学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-627">It includes functionality such as student admission, course creation, and instructor assignments.</span></span> <span data-ttu-id="0e683-628">このページは、Contoso University のサンプル アプリを作成する方法を説明するチュートリアル シリーズの 1 回目です。</span><span class="sxs-lookup"><span data-stu-id="0e683-628">This page is the first in a series of tutorials that explain how to build the Contoso University sample app.</span></span>
 
@@ -974,7 +974,7 @@ public async Task OnGetAsync()
 
 ---
 
-<span data-ttu-id="0e683-634">[:::no-loc(Razor)::: Pages](xref:razor-pages/index) に関する知識。</span><span class="sxs-lookup"><span data-stu-id="0e683-634">Familiarity with [:::no-loc(Razor)::: Pages](xref:razor-pages/index).</span></span> <span data-ttu-id="0e683-635">そのプログラミング経験をお持ちでない場合は、このシリーズを始める前に [:::no-loc(Razor)::: Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するチュートリアルを完了してください。</span><span class="sxs-lookup"><span data-stu-id="0e683-635">New programmers should complete [Get started with :::no-loc(Razor)::: Pages](xref:tutorials/razor-pages/razor-pages-start) before starting this series.</span></span>
+<span data-ttu-id="0e683-634">[Razor Pages](xref:razor-pages/index) に関する知識。</span><span class="sxs-lookup"><span data-stu-id="0e683-634">Familiarity with [Razor Pages](xref:razor-pages/index).</span></span> <span data-ttu-id="0e683-635">そのプログラミング経験をお持ちでない場合は、このシリーズを始める前に [Razor Pages の概要](xref:tutorials/razor-pages/razor-pages-start)に関するチュートリアルを完了してください。</span><span class="sxs-lookup"><span data-stu-id="0e683-635">New programmers should complete [Get started with Razor Pages](xref:tutorials/razor-pages/razor-pages-start) before starting this series.</span></span>
 
 ## <a name="troubleshooting"></a><span data-ttu-id="0e683-636">トラブルシューティング</span><span class="sxs-lookup"><span data-stu-id="0e683-636">Troubleshooting</span></span>
 
@@ -990,9 +990,9 @@ public async Task OnGetAsync()
 
 ![Students 編集ページ](intro/_static/student-edit.png)
 
-<span data-ttu-id="0e683-645">このサイトの UI スタイルは、組み込みのテンプレートによって生成されるものに類似しています。</span><span class="sxs-lookup"><span data-stu-id="0e683-645">The UI style of this site is close to what's generated by the built-in templates.</span></span> <span data-ttu-id="0e683-646">このチュートリアルでは、UI ではなく、EF Core と :::no-loc(Razor)::: ページに重点を置きます。</span><span class="sxs-lookup"><span data-stu-id="0e683-646">The tutorial focus is on EF Core with :::no-loc(Razor)::: Pages, not the UI.</span></span>
+<span data-ttu-id="0e683-645">このサイトの UI スタイルは、組み込みのテンプレートによって生成されるものに類似しています。</span><span class="sxs-lookup"><span data-stu-id="0e683-645">The UI style of this site is close to what's generated by the built-in templates.</span></span> <span data-ttu-id="0e683-646">このチュートリアルでは、UI ではなく、EF Core と Razor ページに重点を置きます。</span><span class="sxs-lookup"><span data-stu-id="0e683-646">The tutorial focus is on EF Core with Razor Pages, not the UI.</span></span>
 
-## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a><span data-ttu-id="0e683-647">ContosoUniversity :::no-loc(Razor)::: Pages Web アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="0e683-647">Create the ContosoUniversity :::no-loc(Razor)::: Pages web app</span></span>
+## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a><span data-ttu-id="0e683-647">ContosoUniversity Razor Pages Web アプリを作成する</span><span class="sxs-lookup"><span data-stu-id="0e683-647">Create the ContosoUniversity Razor Pages web app</span></span>
 
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-648">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-648">Visual Studio</span></span>](#tab/visual-studio)
 
@@ -1000,7 +1000,7 @@ public async Task OnGetAsync()
 * <span data-ttu-id="0e683-650">新しい ASP.NET Core Web アプリケーションを作成します。</span><span class="sxs-lookup"><span data-stu-id="0e683-650">Create a new ASP.NET Core Web Application.</span></span> <span data-ttu-id="0e683-651">プロジェクトに **ContosoUniversity** という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="0e683-651">Name the project **ContosoUniversity**.</span></span> <span data-ttu-id="0e683-652">このプロジェクトに *ContosoUniversity* という名前を付けることは重要です。そうすることでコードをコピーしたり貼り付けるときに名前空間が一致します。</span><span class="sxs-lookup"><span data-stu-id="0e683-652">It's important to name the project *ContosoUniversity* so the namespaces match when code is copy/pasted.</span></span>
 * <span data-ttu-id="0e683-653">ドロップダウン リストで **[ASP.NET Core 2.1]** を選択してから、 **[Web アプリケーション]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-653">Select **ASP.NET Core 2.1** in the dropdown, and then select **Web Application**.</span></span>
 
-<span data-ttu-id="0e683-654">前の手順の画像については、[:::no-loc(Razor)::: Web アプリの作成](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)に関する記事をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-654">For images of the preceding steps, see [Create a :::no-loc(Razor)::: web app](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).</span></span>
+<span data-ttu-id="0e683-654">前の手順の画像については、[Razor Web アプリの作成](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)に関する記事をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="0e683-654">For images of the preceding steps, see [Create a Razor web app](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).</span></span>
 <span data-ttu-id="0e683-655">アプリを実行します。</span><span class="sxs-lookup"><span data-stu-id="0e683-655">Run the app.</span></span>
 
 # <a name="visual-studio-code"></a>[<span data-ttu-id="0e683-656">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="0e683-656">Visual Studio Code</span></span>](#tab/visual-studio-code)
@@ -1093,9 +1093,9 @@ dotnet run
 # <a name="visual-studio"></a>[<span data-ttu-id="0e683-725">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="0e683-725">Visual Studio</span></span>](#tab/visual-studio)
 
 * <span data-ttu-id="0e683-726">**ソリューション エクスプローラー** で、 *Pages/Students* フォルダーを右クリックし、 **[追加]** > **[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-726">In **Solution Explorer** , right click on the *Pages/Students* folder > **Add** > **New Scaffolded Item**.</span></span>
-* <span data-ttu-id="0e683-727">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する :::no-loc(Razor)::: ページ (CRUD)]** > **[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-727">In the **Add Scaffold** dialog, select **:::no-loc(Razor)::: Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
+* <span data-ttu-id="0e683-727">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用する Razor ページ (CRUD)]** > **[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-727">In the **Add Scaffold** dialog, select **Razor Pages using Entity Framework (CRUD)** > **ADD**.</span></span>
 
-<span data-ttu-id="0e683-728">**[Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。</span><span class="sxs-lookup"><span data-stu-id="0e683-728">Complete the **Add :::no-loc(Razor)::: Pages using Entity Framework (CRUD)** dialog:</span></span>
+<span data-ttu-id="0e683-728">**[Add Razor Pages using Entity Framework (CRUD)]\(Entity Framework を使用して Razor Pages (CRUD) を追加する\)** ダイアログを完了します。</span><span class="sxs-lookup"><span data-stu-id="0e683-728">Complete the **Add Razor Pages using Entity Framework (CRUD)** dialog:</span></span>
 
 * <span data-ttu-id="0e683-729">**[モデル クラス]** ドロップダウンで、 **[Student (ContosoUniversity.Models)]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-729">In the **Model class** drop-down, select **Student (ContosoUniversity.Models)**.</span></span>
 * <span data-ttu-id="0e683-730">**[データ コンテキスト クラス]** 行で **+** (+) 記号を選択し、生成された名前を **ContosoUniversity.Models.SchoolContext** に変更します。</span><span class="sxs-lookup"><span data-stu-id="0e683-730">In the **Data context class** row, select the **+** (plus) sign and change the generated name to **ContosoUniversity.Models.SchoolContext**.</span></span>
@@ -1128,11 +1128,11 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 ### <a name="file-updates"></a><span data-ttu-id="0e683-741">ファイルの更新</span><span class="sxs-lookup"><span data-stu-id="0e683-741">File updates</span></span>
 
 * <span data-ttu-id="0e683-742">*Startup.cs* :このファイルに対する変更を次のセクションで詳しく説明します。</span><span class="sxs-lookup"><span data-stu-id="0e683-742">*Startup.cs* : Changes to this file are detailed in the next section.</span></span>
-* <span data-ttu-id="0e683-743">*:::no-loc(appsettings.json):::* :ローカル データベースへの接続に使用される接続文字列を追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-743">*:::no-loc(appsettings.json):::* : The connection string used to connect to a local database is added.</span></span>
+* <span data-ttu-id="0e683-743">*appsettings.json* :ローカル データベースへの接続に使用される接続文字列を追加します。</span><span class="sxs-lookup"><span data-stu-id="0e683-743">*appsettings.json* : The connection string used to connect to a local database is added.</span></span>
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="0e683-744">依存関係挿入に登録されるコンテキストを調べる</span><span class="sxs-lookup"><span data-stu-id="0e683-744">Examine the context registered with dependency injection</span></span>
 
-<span data-ttu-id="0e683-745">ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-745">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="0e683-746">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に依存関係挿入に登録されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-746">Services (such as the EF Core DB context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="0e683-747">これらのサービスを必要とするコンポーネント (:::no-loc(Razor)::: Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-747">Components that require these services (such as :::no-loc(Razor)::: Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="0e683-748">db コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-748">The constructor code that gets a db context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="0e683-745">ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injection)が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="0e683-745">ASP.NET Core is built with [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="0e683-746">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に依存関係挿入に登録されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-746">Services (such as the EF Core DB context) are registered with dependency injection during application startup.</span></span> <span data-ttu-id="0e683-747">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-747">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="0e683-748">db コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="0e683-748">The constructor code that gets a db context instance is shown later in the tutorial.</span></span>
 
 <span data-ttu-id="0e683-749">スキャフォールディング ツールが自動的に DB コンテキストを作成し、依存関係挿入コンテナーと共に登録します。</span><span class="sxs-lookup"><span data-stu-id="0e683-749">The scaffolding tool automatically created a DB Context and registered it with the dependency injection container.</span></span>
 
@@ -1140,7 +1140,7 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-<span data-ttu-id="0e683-752">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-752">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="0e683-753">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *:::no-loc(appsettings.json):::* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="0e683-753">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *:::no-loc(appsettings.json):::* file.</span></span>
+<span data-ttu-id="0e683-752">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="0e683-752">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="0e683-753">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="0e683-753">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 ## <a name="update-main"></a><span data-ttu-id="0e683-754">main を更新する</span><span class="sxs-lookup"><span data-stu-id="0e683-754">Update main</span></span>
 
@@ -1167,7 +1167,7 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ### <a name="test-the-app"></a><span data-ttu-id="0e683-772">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="0e683-772">Test the app</span></span>
 
-<span data-ttu-id="0e683-773">アプリを実行し、:::no-loc(cookie)::: ポリシーに同意します。</span><span class="sxs-lookup"><span data-stu-id="0e683-773">Run the app and accept the :::no-loc(cookie)::: policy.</span></span> <span data-ttu-id="0e683-774">このアプリで個人情報が保持されることはありません。</span><span class="sxs-lookup"><span data-stu-id="0e683-774">This app doesn't keep personal information.</span></span> <span data-ttu-id="0e683-775">:::no-loc(cookie)::: ポリシーについては、[EU の一般的なデータ保護規制 (GDPR) のサポート](xref:security/gdpr)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="0e683-775">You can read about the :::no-loc(cookie)::: policy at [EU General Data Protection Regulation (GDPR) support](xref:security/gdpr).</span></span>
+<span data-ttu-id="0e683-773">アプリを実行し、cookie ポリシーに同意します。</span><span class="sxs-lookup"><span data-stu-id="0e683-773">Run the app and accept the cookie policy.</span></span> <span data-ttu-id="0e683-774">このアプリで個人情報が保持されることはありません。</span><span class="sxs-lookup"><span data-stu-id="0e683-774">This app doesn't keep personal information.</span></span> <span data-ttu-id="0e683-775">cookie ポリシーについては、[EU の一般的なデータ保護規制 (GDPR) のサポート](xref:security/gdpr)に関するページを参照してください。</span><span class="sxs-lookup"><span data-stu-id="0e683-775">You can read about the cookie policy at [EU General Data Protection Regulation (GDPR) support](xref:security/gdpr).</span></span>
 
 * <span data-ttu-id="0e683-776">**[Students]** リンクを選択し、 **[新規作成]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="0e683-776">Select the **Students** link and then **Create New**.</span></span>
 * <span data-ttu-id="0e683-777">[編集]、[詳細]、および [削除] の各リンクをテストします。</span><span class="sxs-lookup"><span data-stu-id="0e683-777">Test the Edit, Details, and Delete links.</span></span>

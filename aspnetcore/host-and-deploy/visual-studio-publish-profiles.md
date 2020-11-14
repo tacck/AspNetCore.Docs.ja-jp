@@ -7,17 +7,17 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: host-and-deploy/visual-studio-publish-profiles
 ms.openlocfilehash: 98dfd539171807cbf94d4ac8746458152c809495
 ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
@@ -42,7 +42,7 @@ ms.locfileid: "93057571"
 
 <span data-ttu-id="7e08b-109">上の `<Project>` 要素の `Sdk` 属性では、MSBuild の [プロパティ](/visualstudio/msbuild/msbuild-properties)と [ターゲット](/visualstudio/msbuild/msbuild-targets)が、それぞれ *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* と *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets* からインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-109">The preceding `<Project>` element's `Sdk` attribute imports the MSBuild [properties](/visualstudio/msbuild/msbuild-properties) and [targets](/visualstudio/msbuild/msbuild-targets) from *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* and *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets* , respectively.</span></span> <span data-ttu-id="7e08b-110">(Visual Studio 2019 Enterprise の場合) `$(MSBuildSDKsPath)` の既定の場所は、 *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* フォルダーです。</span><span class="sxs-lookup"><span data-stu-id="7e08b-110">The default location for `$(MSBuildSDKsPath)` (with Visual Studio 2019 Enterprise) is the *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* folder.</span></span>
 
-<span data-ttu-id="7e08b-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) は、`Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) や `Microsoft.NET.Sdk.:::no-loc(Razor):::` ([:::no-loc(Razor)::: SDK](xref:razor-pages/sdk)) などの他の SDK に依存します。</span><span class="sxs-lookup"><span data-stu-id="7e08b-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) depends on other SDKs, including `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) and `Microsoft.NET.Sdk.:::no-loc(Razor):::` ([:::no-loc(Razor)::: SDK](xref:razor-pages/sdk)).</span></span> <span data-ttu-id="7e08b-112">依存する各 SDK に関連付けられている MSBuild のプロパティとターゲットがインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-112">The MSBuild properties and targets associated with each dependent SDK are imported.</span></span> <span data-ttu-id="7e08b-113">発行ターゲットでは、使われる発行方法に基づいて、適切なターゲットのセットがインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-113">Publish targets import the appropriate set of targets based on the publish method used.</span></span>
+<span data-ttu-id="7e08b-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) は、`Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) や `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)) などの他の SDK に依存します。</span><span class="sxs-lookup"><span data-stu-id="7e08b-111">`Microsoft.NET.Sdk.Web` ([Web SDK](xref:razor-pages/web-sdk)) depends on other SDKs, including `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) and `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)).</span></span> <span data-ttu-id="7e08b-112">依存する各 SDK に関連付けられている MSBuild のプロパティとターゲットがインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-112">The MSBuild properties and targets associated with each dependent SDK are imported.</span></span> <span data-ttu-id="7e08b-113">発行ターゲットでは、使われる発行方法に基づいて、適切なターゲットのセットがインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-113">Publish targets import the appropriate set of targets based on the publish method used.</span></span>
 
 <span data-ttu-id="7e08b-114">MSBuild または Visual Studio がプロジェクトを読み込むと、次の高レベルのアクションが発生します。</span><span class="sxs-lookup"><span data-stu-id="7e08b-114">When MSBuild or Visual Studio loads a project, the following high-level actions occur:</span></span>
 
@@ -58,13 +58,13 @@ ms.locfileid: "93057571"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="7e08b-126">[Web SDK](xref:razor-pages/web-sdk) では、[:::no-loc(Razor)::: SDK](xref:razor-pages/sdk) がインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-126">The [Web SDK](xref:razor-pages/web-sdk) imports the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="7e08b-127">その結果、`**\*.cshtml` および `**\*.razor` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-127">As a result, files matching the patterns `**\*.cshtml` and `**\*.razor` are also included in the `Content` item list.</span></span>
+<span data-ttu-id="7e08b-126">[Web SDK](xref:razor-pages/web-sdk) では、[Razor SDK](xref:razor-pages/sdk) がインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-126">The [Web SDK](xref:razor-pages/web-sdk) imports the [Razor SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="7e08b-127">その結果、`**\*.cshtml` および `**\*.razor` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-127">As a result, files matching the patterns `**\*.cshtml` and `**\*.razor` are also included in the `Content` item list.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-<span data-ttu-id="7e08b-128">[Web SDK](xref:razor-pages/web-sdk) では、[:::no-loc(Razor)::: SDK](xref:razor-pages/sdk) がインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-128">The [Web SDK](xref:razor-pages/web-sdk) imports the [:::no-loc(Razor)::: SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="7e08b-129">その結果、`**\*.cshtml` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-129">As a result, files matching the `**\*.cshtml` pattern are also included in the `Content` item list.</span></span>
+<span data-ttu-id="7e08b-128">[Web SDK](xref:razor-pages/web-sdk) では、[Razor SDK](xref:razor-pages/sdk) がインポートされます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-128">The [Web SDK](xref:razor-pages/web-sdk) imports the [Razor SDK](xref:razor-pages/sdk).</span></span> <span data-ttu-id="7e08b-129">その結果、`**\*.cshtml` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-129">As a result, files matching the `**\*.cshtml` pattern are also included in the `Content` item list.</span></span>
 
 ::: moniker-end
 
@@ -352,7 +352,7 @@ dotnet msbuild "AzureWebApp.csproj"
 * <span data-ttu-id="7e08b-259">ビルド成果物</span><span class="sxs-lookup"><span data-stu-id="7e08b-259">Build artifacts</span></span>
 * <span data-ttu-id="7e08b-260">次の glob パターンと一致するフォルダーおよびファイル:</span><span class="sxs-lookup"><span data-stu-id="7e08b-260">Folders and files matching the following globbing patterns:</span></span>
   * <span data-ttu-id="7e08b-261">`**\*.config` (例: *web.config* )</span><span class="sxs-lookup"><span data-stu-id="7e08b-261">`**\*.config` (for example, *web.config* )</span></span>
-  * <span data-ttu-id="7e08b-262">`**\*.json` (例: *:::no-loc(appsettings.json):::* )</span><span class="sxs-lookup"><span data-stu-id="7e08b-262">`**\*.json` (for example, *:::no-loc(appsettings.json):::* )</span></span>
+  * <span data-ttu-id="7e08b-262">`**\*.json` (例: *appsettings.json* )</span><span class="sxs-lookup"><span data-stu-id="7e08b-262">`**\*.json` (for example, *appsettings.json* )</span></span>
   * `wwwroot\**`
 
 <span data-ttu-id="7e08b-263">MSBuild では、[glob パターン](https://gruntjs.com/configuring-tasks#globbing-patterns)がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="7e08b-263">MSBuild supports [globbing patterns](https://gruntjs.com/configuring-tasks#globbing-patterns).</span></span> <span data-ttu-id="7e08b-264">たとえば、次の `<Content>` 要素では、 *wwwroot/content* フォルダーとそのサブフォルダー内にあるテキスト ( *.txt* ) ファイルのコピーが抑制されます。</span><span class="sxs-lookup"><span data-stu-id="7e08b-264">For example, the following `<Content>` element suppresses the copying of text ( *.txt* ) files in the *wwwroot\content* folder and its subfolders:</span></span>

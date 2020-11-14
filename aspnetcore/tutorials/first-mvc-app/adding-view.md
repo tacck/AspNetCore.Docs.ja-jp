@@ -5,17 +5,17 @@ description: ASP.NET Core MVC のチュートリアル シリーズのパート 
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
-- ':::no-loc(appsettings.json):::'
-- ':::no-loc(ASP.NET Core Identity):::'
-- ':::no-loc(cookie):::'
-- ':::no-loc(Cookie):::'
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- 'appsettings.json'
+- 'ASP.NET Core Identity'
+- 'cookie'
+- 'Cookie'
+- 'Blazor'
+- 'Blazor Server'
+- 'Blazor WebAssembly'
+- 'Identity'
+- "Let's Encrypt"
+- 'Razor'
+- 'SignalR'
 uid: tutorials/first-mvc-app/adding-view
 ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
 ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
@@ -30,9 +30,9 @@ ms.locfileid: "94422718"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="cb43f-105">このセクションでは、[:::no-loc(Razor):::](xref:mvc/views/razor) ビュー ファイルを使用して、クライアントへの HTML 応答を生成するプロセスを完全にカプセル化するために `HelloWorldController` クラスを変更します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-105">In this section you modify the `HelloWorldController` class to use [:::no-loc(Razor):::](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
+<span data-ttu-id="cb43f-105">このセクションでは、[Razor](xref:mvc/views/razor) ビュー ファイルを使用して、クライアントへの HTML 応答を生成するプロセスを完全にカプセル化するために `HelloWorldController` クラスを変更します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-105">In this section you modify the `HelloWorldController` class to use [Razor](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
 
-<span data-ttu-id="cb43f-106">ビュー テンプレート ファイルは :::no-loc(Razor)::: を使用して作成します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-106">You create a view template file using :::no-loc(Razor):::.</span></span> <span data-ttu-id="cb43f-107">:::no-loc(Razor)::: ベースのビュー テンプレートには *.cshtml* ファイル拡張子が含まれています。</span><span class="sxs-lookup"><span data-stu-id="cb43f-107">:::no-loc(Razor):::-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="cb43f-108">C# を使用して HTML 出力を作成する洗練された方法が提供されます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-108">They provide an elegant way to create HTML output with C#.</span></span>
+<span data-ttu-id="cb43f-106">ビュー テンプレート ファイルは Razor を使用して作成します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-106">You create a view template file using Razor.</span></span> <span data-ttu-id="cb43f-107">Razor ベースのビュー テンプレートには *.cshtml* ファイル拡張子が含まれています。</span><span class="sxs-lookup"><span data-stu-id="cb43f-107">Razor-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="cb43f-108">C# を使用して HTML 出力を作成する洗練された方法が提供されます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-108">They provide an elegant way to create HTML output with C#.</span></span>
 
 <span data-ttu-id="cb43f-109">現在、`Index` メソッドは、コントローラー クラスでハード コーディングされるメッセージを含む文字列を返します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-109">Currently the `Index` method returns a string with a message that's hard-coded in the controller class.</span></span> <span data-ttu-id="cb43f-110">`HelloWorldController` クラスでは、`Index` メソッドを次のコードで置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-110">In the `HelloWorldController` class, replace the `Index` method with the following code:</span></span>
 
@@ -52,7 +52,7 @@ ms.locfileid: "94422718"
 
   * <span data-ttu-id="cb43f-119">右上の検索ボックスに「 *view* 」と入力します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-119">In the search box in the upper-right, enter *view*</span></span>
 
-  * <span data-ttu-id="cb43f-120">**[:::no-loc(Razor)::: ビュー]** を選択します</span><span class="sxs-lookup"><span data-stu-id="cb43f-120">Select **:::no-loc(Razor)::: View**</span></span>
+  * <span data-ttu-id="cb43f-120">**[Razor ビュー]** を選択します</span><span class="sxs-lookup"><span data-stu-id="cb43f-120">Select **Razor View**</span></span>
 
   * <span data-ttu-id="cb43f-121">**[名前]** ボックスの値、 *Index.cshtml* を維持します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-121">Keep the **Name** box value, *Index.cshtml*.</span></span>
 
@@ -82,7 +82,7 @@ ms.locfileid: "94422718"
 
 ---
 
-<span data-ttu-id="cb43f-137">*Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: ビュー ファイルを次の内容に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-137">Replace the contents of the *Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: view file with the following:</span></span>
+<span data-ttu-id="cb43f-137">*Views/HelloWorld/Index.cshtml* Razor ビュー ファイルを次の内容に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-137">Replace the contents of the *Views/HelloWorld/Index.cshtml* Razor view file with the following:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
@@ -200,9 +200,9 @@ ms.locfileid: "94422718"
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="cb43f-219">このセクションでは、[:::no-loc(Razor):::](xref:mvc/views/razor) ビュー ファイルを使用して、クライアントへの HTML 応答を生成するプロセスを完全にカプセル化するために `HelloWorldController` クラスを変更します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-219">In this section you modify the `HelloWorldController` class to use [:::no-loc(Razor):::](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
+<span data-ttu-id="cb43f-219">このセクションでは、[Razor](xref:mvc/views/razor) ビュー ファイルを使用して、クライアントへの HTML 応答を生成するプロセスを完全にカプセル化するために `HelloWorldController` クラスを変更します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-219">In this section you modify the `HelloWorldController` class to use [Razor](xref:mvc/views/razor) view files to cleanly encapsulate the process of generating HTML responses to a client.</span></span>
 
-<span data-ttu-id="cb43f-220">ビュー テンプレート ファイルは :::no-loc(Razor)::: を使用して作成します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-220">You create a view template file using :::no-loc(Razor):::.</span></span> <span data-ttu-id="cb43f-221">:::no-loc(Razor)::: ベースのビュー テンプレートには *.cshtml* ファイル拡張子が含まれています。</span><span class="sxs-lookup"><span data-stu-id="cb43f-221">:::no-loc(Razor):::-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="cb43f-222">C# を使用して HTML 出力を作成する洗練された方法が提供されます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-222">They provide an elegant way to create HTML output with C#.</span></span>
+<span data-ttu-id="cb43f-220">ビュー テンプレート ファイルは Razor を使用して作成します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-220">You create a view template file using Razor.</span></span> <span data-ttu-id="cb43f-221">Razor ベースのビュー テンプレートには *.cshtml* ファイル拡張子が含まれています。</span><span class="sxs-lookup"><span data-stu-id="cb43f-221">Razor-based view templates have a *.cshtml* file extension.</span></span> <span data-ttu-id="cb43f-222">C# を使用して HTML 出力を作成する洗練された方法が提供されます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-222">They provide an elegant way to create HTML output with C#.</span></span>
 
 <span data-ttu-id="cb43f-223">現在、`Index` メソッドは、コントローラー クラスでハード コーディングされるメッセージを含む文字列を返します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-223">Currently the `Index` method returns a string with a message that's hard-coded in the controller class.</span></span> <span data-ttu-id="cb43f-224">`HelloWorldController` クラスでは、`Index` メソッドを次のコードで置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-224">In the `HelloWorldController` class, replace the `Index` method with the following code:</span></span>
 
@@ -222,7 +222,7 @@ ms.locfileid: "94422718"
 
   * <span data-ttu-id="cb43f-233">右上の検索ボックスに「 *view* 」と入力します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-233">In the search box in the upper-right, enter *view*</span></span>
 
-  * <span data-ttu-id="cb43f-234">**[:::no-loc(Razor)::: ビュー]** を選択します</span><span class="sxs-lookup"><span data-stu-id="cb43f-234">Select **:::no-loc(Razor)::: View**</span></span>
+  * <span data-ttu-id="cb43f-234">**[Razor ビュー]** を選択します</span><span class="sxs-lookup"><span data-stu-id="cb43f-234">Select **Razor View**</span></span>
 
   * <span data-ttu-id="cb43f-235">**[名前]** ボックスの値、 *Index.cshtml* を維持します。</span><span class="sxs-lookup"><span data-stu-id="cb43f-235">Keep the **Name** box value, *Index.cshtml*.</span></span>
 
@@ -252,7 +252,7 @@ ms.locfileid: "94422718"
 
 ---
 
-<span data-ttu-id="cb43f-251">*Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: ビュー ファイルを次の内容に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-251">Replace the contents of the *Views/HelloWorld/Index.cshtml* :::no-loc(Razor)::: view file with the following:</span></span>
+<span data-ttu-id="cb43f-251">*Views/HelloWorld/Index.cshtml* Razor ビュー ファイルを次の内容に置き換えます。</span><span class="sxs-lookup"><span data-stu-id="cb43f-251">Replace the contents of the *Views/HelloWorld/Index.cshtml* Razor view file with the following:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
