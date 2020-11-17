@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d78076eb29d6d09756e408b388fcf12b4b6460f6
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507942"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637705"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -244,17 +244,31 @@ namespace BlazorSample
 
 コンポーネントでは、[`@page`][9] ディレクティブに指定されたルート テンプレートからルート パラメーターを受け取ることができます。 ルーターでは、ルート パラメーターを使用して、対応するコンポーネント パラメーターが設定されます。
 
+::: moniker range=">= aspnetcore-5.0"
+
+省略可能なパラメーターがサポートされています。 次の例では、省略可能なパラメーター `text` を使用して、ルート セグメントの値をコンポーネントの `Text` プロパティに割り当てます。 セグメントが存在しない場合、`Text` の値は `fantastic` に設定されます。
+
 `Pages/RouteParameter.razor`:
 
-[!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
+[!code-razor[](index/samples_snapshot/RouteParameter-5x.razor?highlight=1,6-7)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Pages/RouteParameter.razor`:
+
+[!code-razor[](index/samples_snapshot/RouteParameter-3x.razor?highlight=2,7-8)]
 
 オプションのパラメーターはサポートされていないため、前の例では 2 つの [`@page`][9] ディレクティブが適用されます。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の [`@page`][9] ディレクティブでは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
+
+::: moniker-end
 
 複数のフォルダーにわたりパスをキャプチャするキャッチオール ルート パラメーター (`{*pageRoute}`) の詳細については、「<xref:blazor/fundamentals/routing#catch-all-route-parameters>」を参照してください。
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
-コンポーネントには、 *コンポーネント パラメーター* を指定できます。このパラメーターは、 [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
+コンポーネントには、*コンポーネント パラメーター* を指定できます。このパラメーターは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
 
 `Components/ChildComponent.razor`:
 
@@ -266,8 +280,16 @@ namespace BlazorSample
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
+慣例により、C# コードで構成される属性値は、[Razor の予約済み `@` シンボル](xref:mvc/views/razor#razor-syntax)を使用してパラメーターに割り当てられます。
+
+* 親フィールドまたはプロパティ: `Title="@{FIELD OR PROPERTY}`。プレースホルダー `{FIELD OR PROPERTY}` は親コンポーネントの C# フィールドまたはプロパティです。
+* メソッドの結果: `Title="@{METHOD}"`。プレースホルダー `{METHOD}` は親コンポーネントの C# メソッドです。
+* [暗黙的または明示的な式](xref:mvc/views/razor#implicit-razor-expressions): `Title="@({EXPRESSION})"`。プレースホルダー `{EXPRESSION}` は C# 式です。
+  
+詳細については、「<xref:mvc/views/razor>」を参照してください。
+
 > [!WARNING]
-> 独自の " *コンポーネント パラメーター* " を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[上書きされたパラメーター](#overwritten-parameters)」セクションをご覧ください。
+> 独自の "*コンポーネント パラメーター*" を書き込み先とするコンポーネントを作成する代わりに、プライベート フィールドを使用してください。 詳細については、「[上書きされたパラメーター](#overwritten-parameters)」セクションをご覧ください。
 
 ## <a name="child-content"></a>子コンテンツ
 
@@ -294,7 +316,7 @@ Blazor による子コンテンツのレンダリング方法により、`for` �
 > @for (int c = 0; c < 10; c++)
 > {
 >     var current = c;
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @current
 >     </ChildComponent>
 > }
@@ -305,7 +327,7 @@ Blazor による子コンテンツのレンダリング方法により、`for` �
 > ```razor
 > @foreach(var c in Enumerable.Range(0,10))
 > {
->     <ChildComponent Param1="@c">
+>     <ChildComponent Title="@c">
 >         Child Content: Count: @c
 >     </ChildComponent>
 > }
@@ -313,7 +335,7 @@ Blazor による子コンテンツのレンダリング方法により、`for` �
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>属性スプラッティングと任意のパラメーター
 
-コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、 [`@attributes`][3] Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に " *スプラッティング* " できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
+コンポーネントでは、コンポーネントの宣言されたパラメーターに加えて、追加の属性をキャプチャしてレンダリングできます。 追加の属性は、ディクショナリにキャプチャし、[`@attributes`][3] Razor ディレクティブを使用して、コンポーネントがレンダリングされるときに、要素に "*スプラッティング*" できます。 このシナリオは、さまざまなカスタマイズをサポートするマークアップ要素を生成するコンポーネントを定義する場合に便利です。 たとえば、多くのパラメーターをサポートする `<input>` に対して、属性を個別に定義するのは面倒な場合があります。
 
 次の例で、最初の `<input>` 要素 (`id="useIndividualParams"`) では、個々のコンポーネント パラメーターを使用していますが、2 番目の `<input>` 要素 (`id="useAttributesDict"`) では、属性スプラッティングを使用しています。
 
@@ -615,7 +637,7 @@ public class NotifierService
 
 [`@key`][5] で比較すると、パフォーマンスが低下します。 パフォーマンスの低下は大きくありませんが、要素やコンポーネントの保存規則を制御することによって、アプリにメリットがある場合にのみ [`@key`][5] を指定してください。
 
-[`@key`][5] を使用しない場合でも、Blazor では可能な限り、子要素とコンポーネント インスタンスが保持されます。 [`@key`][5] を使用する唯一の利点は、マッピングを選択する比較アルゴリズムではなく、保持されているコンポーネント インスタンスにモデル インスタンスをマップする " *方法* " を制御することです。
+[`@key`][5] を使用しない場合でも、Blazor では可能な限り、子要素とコンポーネント インスタンスが保持されます。 [`@key`][5] を使用する唯一の利点は、マッピングを選択する比較アルゴリズムではなく、保持されているコンポーネント インスタンスにモデル インスタンスをマップする "*方法*" を制御することです。
 
 ### <a name="what-values-to-use-for-key"></a>\@ キーに使用する値
 
@@ -650,7 +672,7 @@ Blazor フレームワークでは、一般に安全な親から子へのパラ�
 * コンポーネントによって、`Expanded` パラメーターに直接書き込まれます。これは上書きされるパラメーターの問題を示しているため、回避する必要があります。
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
 
@@ -693,16 +715,16 @@ Blazor フレームワークでは、一般に安全な親から子へのパラ�
 
 初期状態では、`Expanded` プロパティが切り替えられると、`Expander` コンポーネントはそれぞれ独立して動作します。 子コンポーネントの状態は、想定どおりのままです。 親で <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> が呼び出されると、最初の子コンポーネントの `Expanded` パラメーターが初期値 (`true`) にリセットされます。 2 つめの `Expander` コンポーネントの `Expanded` 値はリセットされません。これは、2 つめのコンポーネントでは子コンテンツがレンダリングされないためです。
 
-前のシナリオでの状態を維持するには、`Expander` コンポーネントで " *プライベート フィールド* " を使用して、切り替え状態を維持します。
+前のシナリオでの状態を維持するには、`Expander` コンポーネントで "*プライベート フィールド*" を使用して、切り替え状態を維持します。
 
 次の変更された `Expander` コンポーネント:
 
 * 親から `Expanded` コンポーネント パラメーター値を受け入れます。
-* コンポーネント パラメーター値を、 [OnInitialized イベント](xref:blazor/components/lifecycle#component-initialization-methods) の " *プライベート フィールド* " (`expanded`) に割り当てます。
+* コンポーネント パラメーター値を、[OnInitialized イベント](xref:blazor/components/lifecycle#component-initialization-methods) の "*プライベート フィールド*" (`expanded`) に割り当てます。
 * プライベート フィールドを使用して、その内部のトグル状態を維持します。これは、パラメーターに直接書き込まれないようにする方法を示しています。
 
 ```razor
-<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
         <h2 class="card-title">Toggle (<code>expanded</code> = @expanded)</h2>
 
@@ -782,7 +804,7 @@ HTML 要素属性は、.NET 値に基づいて条件付きでレンダリング�
 通常、文字列は DOM テキスト ノードを使用してレンダリングされます。つまり、それらに含まれている可能性のあるすべてのマークアップが無視され、リテラル テキストとして扱われます。 生 HTML をレンダリングするには、HTML コンテンツを `MarkupString` 値にラップします。 値は HTML または SVG として解析され、DOM に挿入されます。
 
 > [!WARNING]
-> 信頼されていないソースから構築された生 HTML をレンダリングすることは、 **セキュリティ リスク** であるため、避ける必要があります。
+> 信頼されていないソースから構築された生 HTML をレンダリングすることは、**セキュリティ リスク** であるため、避ける必要があります。
 
 次の例では、`MarkupString` 型を使用して、コンポーネントのレンダリングされた出力に静的 HTML コンテンツのブロックを追加しています。
 
@@ -839,7 +861,7 @@ Blazor は、プロジェクトの [`web root (wwwroot)` フォルダー](xref:f
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) はサポートされて **いません** 。
+Razor コンポーネントでは、チルダ スラッシュ表記 (`~/`) はサポートされて **いません**。
 
 アプリのベース パスの設定の詳細については、「<xref:blazor/host-and-deploy/index#app-base-path>」を参照してください。
 

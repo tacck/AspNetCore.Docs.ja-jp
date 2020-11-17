@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: a333c189e81a9f44e94deb6b37097f1a8b19a0f9
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 6435a7c9ce2a30873f0d3475a38270d3dea1b300
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430927"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595468"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor の認証と承認
 
@@ -37,7 +37,7 @@ Blazor Server アプリと Blazor WebAssembly アプリでは、セキュリテ�
 * ユーザーに表示される UI オプション (たとえば、ユーザーが利用できるメニュー エントリ)。
 * アプリとコンポーネントの領域に対するアクセス規則。
 
-Blazor WebAssembly アプリはクライアント上で実行されます。 承認は、表示する UI オプションを決定するために " *のみ* " 使用されます。 クライアント側のチェックはユーザーによって変更またはバイパスされる可能性があるため、Blazor WebAssembly アプリでは承認アクセス規則を適用できません。
+Blazor WebAssembly アプリはクライアント上で実行されます。 承認は、表示する UI オプションを決定するために "*のみ*" 使用されます。 クライアント側のチェックはユーザーによって変更またはバイパスされる可能性があるため、Blazor WebAssembly アプリでは承認アクセス規則を適用できません。
 
 [Razor Pages の承認規則](xref:security/authorization/razor-pages-authorization)は、ルーティング可能な Razor コンポーネントには適用されません。 ルーティング不可能な Razor コンポーネントが[ページに埋め込まれている](xref:blazor/components/prerendering-and-integration)場合、ページの承認規則は、Razor コンポーネントと、ページのコンテンツの残りの部分に間接的に影響します。
 
@@ -242,20 +242,20 @@ Blazor Server アプリでは、オプションと承認のためのサービス
 
 ## <a name="authorization"></a>承認
 
-ユーザーが認証されると、ユーザーが実行できる操作を制御する " *承認* " 規則が適用されます。
+ユーザーが認証されると、ユーザーが実行できる操作を制御する "*承認*" 規則が適用されます。
 
 通常、アクセスは以下の条件に基づいて許可または拒否されます。
 
 * ユーザーが認証されている (サインインしている)。
-* ユーザーに " *ロール* " が割り当てられている。
-* ユーザーに " *要求* " がある。
-* " *ポリシー* " が満たされている。
+* ユーザーに "*ロール*" が割り当てられている。
+* ユーザーに "*要求*" がある。
+* "*ポリシー*" が満たされている。
 
 これらの各概念は、ASP.NET Core MVC または Razor Pages アプリと同じです。 ASP.NET Core のセキュリティの詳細については、[ASP.NET Core のセキュリティと Identity](xref:security/index) の記事を参照してください。
 
 ## <a name="authorizeview-component"></a>AuthorizeView コンポーネント
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントでは、ユーザーに表示を許可するかどうかに応じて UI が選択的に表示されます。 このアプローチは、ユーザーに対してデータを " *表示する* " だけで済み、手続き型ロジックでユーザーの ID を使用する必要がない場合に便利です。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントでは、ユーザーを承認するかどうかに応じて UI コンテンツが選択的に表示されます。 このアプローチは、ユーザーに対してデータを "*表示する*" だけで済み、手続き型ロジックでユーザーの ID を使用する必要がない場合に便利です。
 
 このコンポーネントでは、型 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> の `context` 変数が公開されており、これを使用して、サインインしたユーザーに関する情報にアクセスできます。
 
@@ -266,24 +266,29 @@ Blazor Server アプリでは、オプションと承認のためのサービス
 </AuthorizeView>
 ```
 
-ユーザーが認証されていない場合は、表示用に異なるコンテンツを指定することもできます。
+ユーザーが承認されていない場合は、表示用に異なるコンテンツを指定することもできます。
 
 ```razor
 <AuthorizeView>
     <Authorized>
         <h1>Hello, @context.User.Identity.Name!</h1>
-        <p>You can only see this content if you're authenticated.</p>
+        <p>You can only see this content if you're authorized.</p>
+        <button @onclick="SecureMethod">Authorized Only Button</button>
     </Authorized>
     <NotAuthorized>
         <h1>Authentication Failure!</h1>
         <p>You're not signed in.</p>
     </NotAuthorized>
 </AuthorizeView>
+
+@code {
+    private void SecureMethod() { ... }
+}
 ```
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、`NavMenu` コンポーネント (`Shared/NavMenu.razor`) で使用して [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) のリスト項目 (`<li>...</li>`) を表示できますが、この方法では、表示された出力からリスト項目が削除されるだけであることに注意してください。 ユーザーがコンポーネントに移動するのを防ぐことはできません。
-
 `<Authorized>` および `<NotAuthorized>` タグには、他の対話型コンポーネントなど、任意の項目を含めることができます。
+
+前の例の `<button>` 要素の `SecureMethod` メソッドなど、承認された要素の既定のイベント ハンドラーは、承認されたユーザーのみが呼び出すことができます。
 
 UI オプションまたはアクセスを制御するロールやポリシーなどの承認条件については、「[承認](#authorization)」セクションを参照してください。
 
@@ -292,9 +297,11 @@ UI オプションまたはアクセスを制御するロールやポリシー�
 * 承認済みの認証された (サインインした) ユーザー。
 * 未承認の認証されていない (サインアウトした) ユーザー。
 
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、`NavMenu` コンポーネント (`Shared/NavMenu.razor`) で使用して [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) のリスト項目 (`<li>...</li>`) を表示できますが、この方法では、表示された出力からリスト項目が削除されるだけであることに注意してください。 ユーザーがコンポーネントに移動するのを防ぐことはできません。
+
 ### <a name="role-based-and-policy-based-authorization"></a>ロールベースとリソースベースの承認
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、" *ロールベース* " または " *ポリシーベース* " の承認をサポートしています。
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> コンポーネントは、"*ロールベース*" または "*ポリシーベース*" の承認をサポートしています。
 
 ロールベースの承認の場合は、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> パラメーターを使用します。
 
@@ -322,7 +329,7 @@ UI オプションまたはアクセスを制御するロールやポリシー�
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>非同期認証中に表示されるコンテンツ
 
-Blazor では、認証状態を " *非同期的に* " 決定することができます。 このアプローチの主なシナリオは、認証のために外部エンドポイントに要求を送信する Blazor WebAssembly アプリです。
+Blazor では、認証状態を "*非同期的に*" 決定することができます。 このアプローチの主なシナリオは、認証のために外部エンドポイントに要求を送信する Blazor WebAssembly アプリです。
 
 認証が進行中の間、<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> には既定でコンテンツが表示されません。 認証が行われている間にコンテンツを表示するには、`<Authorizing>` タグを使用します。
 
@@ -353,7 +360,7 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> Blazor ルーター経由で到達した `@page` コンポーネントにのみ [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) を使用してください。 承認はルーティングの一面としてのみ実行され、ページ内にレンダリングされた子コンポーネントに対しては実行され " *ません* "。 ページ内の特定部分の表示を承認するには、代わりに <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> を使用します。
+> Blazor ルーター経由で到達した `@page` コンポーネントにのみ [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) を使用してください。 承認はルーティングの一面としてのみ実行され、ページ内にレンダリングされた子コンポーネントに対しては実行され "*ません*"。 ページ内の特定部分の表示を承認するには、代わりに <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> を使用します。
 
 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 属性は、ロールベースまたはポリシーベースの承認もサポートしています。 ロールベースの承認の場合は、<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> パラメーターを使用します。
 

@@ -5,7 +5,7 @@ description: HttpRepl .NET Core グローバル ツールを使用して、ASP.N
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
-ms.date: 11/11/2020
+ms.date: 11/12/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 8dd763d270a00c9a71913d68d6a039b2d98c3864
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: c661141c1bec93c0f7b6404964dc0bca2319b529
+ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570212"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94634614"
 ---
 # <a name="test-web-apis-with-the-httprepl"></a>HttpRepl を使用して Web API をテストする
 
@@ -604,7 +604,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 HTTP PUT 要求を発行するには、次のようにします。
 
-1. *省略可能* :変更前にデータを表示するには、`get` コマンドを実行します。
+1. *省略可能*:変更前にデータを表示するには、`get` コマンドを実行します。
 
     ```console
     https://localhost:5001/fruits> get
@@ -666,7 +666,7 @@ HTTP PUT 要求を発行するには、次のようにします。
     Server: Kestrel
     ```
 
-1. *省略可能* :変更を確認するには、`get` コマンドを実行します。 たとえば、テキスト エディターに「Cherry」と入力すると、`get` によって、次の出力が返されます。
+1. *省略可能*:変更を確認するには、`get` コマンドを実行します。 たとえば、テキスト エディターに「Cherry」と入力すると、`get` によって、次の出力が返されます。
 
     ```console
     https://localhost:5001/fruits> get
@@ -717,7 +717,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 HTTP DELETE 要求を発行するには、次のようにします。
 
-1. *省略可能* :変更前にデータを表示するには、`get` コマンドを実行します。
+1. *省略可能*:変更前にデータを表示するには、`get` コマンドを実行します。
 
     ```console
     https://localhost:5001/fruits> get
@@ -757,7 +757,7 @@ HTTP DELETE 要求を発行するには、次のようにします。
     Server: Kestrel
     ```
 
-1. *省略可能* :変更を確認するには、`get` コマンドを実行します。 この例では、`get` によって次の出力が返されます。
+1. *省略可能*:変更を確認するには、`get` コマンドを実行します。 この例では、`get` によって次の出力が返されます。
 
     ```console
     https://localhost:5001/fruits> get
@@ -1127,3 +1127,6 @@ https://localhost:5001/>
 
 * [REST API 要求](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HttpRepl GitHub リポジトリ](https://github.com/dotnet/HttpRepl)
+* [Visual Studio が HttpRepl を起動するよう構成する](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-windows-to-launch-httprepl-on-f5)
+* [Visual Studio Code が HttpRepl を起動するよう構成する](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-code-to-launch-httprepl-on-debug)
+* [Visual Studio Code for Mac が HttpRepl を起動するよう構成する](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)

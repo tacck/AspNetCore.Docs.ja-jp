@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f1aa388015bd540a6fda263eac53753ada63bf79
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051617"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673992"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core での SameSite s の使用
 
@@ -166,7 +166,7 @@ SameSite サポートは、2.0 の ASP.NET Core で最初に [2016 ドラフト�
 
 で `Startup.ConfigureServices` 、次のようなコードを追加します。
 
-::: moniker range="= aspnetcore-3.1"
+::: moniker range=">= aspnetcore-3.1"
 
 [!code-csharp[](samesite/sample/Startup31.cs?name=snippet)]
 
@@ -231,7 +231,7 @@ Edge では、古い SameSite 標準がサポートされています。 Edge �
 
 のバージョンに Electron は、古いバージョンの Chromium が含まれています。 たとえば、 Electron チームによって使用されるのバージョンは Chromium 66 であり、以前の動作を示しています。 使用している製品のバージョンで、独自の互換性テストを実行する必要があり Electron ます。 次のセクションの「 [古いブラウザーのサポート](#sob) 」を参照してください。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [Chromium ブログ: 開発者: 新しい SameSite の準備 = None;セキュリティで保護された Cookie 設定](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite の cookie 説明](https://web.dev/samesite-cookies-explained/)
