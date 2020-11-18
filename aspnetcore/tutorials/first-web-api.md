@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: fc41dd13e7d027d9630cd596162f9b5fd2ef9e2b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ab06f2d347d7f05e9c72a85e0c6e0fbc67fe48a7
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058494"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550713"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>チュートリアル: ASP.NET Core で Web API を作成する
 
@@ -83,7 +83,7 @@ ms.locfileid: "93058494"
 
 * **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** テンプレートを選択して、 **[次へ]** をクリックします。
-* プロジェクトに「 *TodoApi* 」という名前を付け、 **[作成]** をクリックします。
+* プロジェクトに「*TodoApi*」という名前を付け、 **[作成]** をクリックします。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 5.0]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。
 
 ![VS の [新しいプロジェクト] ダイアログ](first-web-api/_static/5/vs.png)
@@ -119,9 +119,9 @@ ms.locfileid: "93058494"
 
   ![macOS での API テンプレートの選択](first-web-api-mac/_static/api_template.png)
 
-* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
+* **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 5.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
 
-* **[プロジェクト名]** に「 *TodoApi* 」と入力し、 **[作成]** を選択します。
+* **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
   ![構成ダイアログ](first-web-api-mac/_static/2.png)
 
@@ -231,7 +231,7 @@ Swagger が削除されているため、上記のマークアップにより、
 
 * **ソリューション エクスプローラー** で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoItem* 」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -249,7 +249,7 @@ Swagger が削除されているため、上記のマークアップにより、
 
 * *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
-* クラスに「 *TodoItem* 」という名前を付け、 **[新規]** をクリックします。
+* クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -271,19 +271,19 @@ Swagger が削除されているため、上記のマークアップにより、
 
 * **[ツール]** メニューで **[NuGet パッケージ マネージャー]、[ソリューションの NuGet パッケージの管理]** の順に選択します。
 * **[参照]** タブを選択し、「Microsoft.
-**EntityFrameworkCore.SqlServer** 」と検索ボックスに入力します。
+**EntityFrameworkCore.SqlServer**」と検索ボックスに入力します。
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Delete this line at RTM -->
 * 5\.0 RC バージョンを使用できるように、 **[プレリリースを含める]** チェックボックスをオンにします。 
 * 左側のウィンドウで、 **[Microsoft.EntityFrameworkCore.SqlServer]** を選択します。
 * 右側のウィンドウで **[プロジェクト]** チェックボックスをオンにして、 **[インストール]** を選択します。
-* 前の手順を使用して、 **Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
+* 前の手順を使用して、**Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
 
 <!-- https://github.com/dotnet/AspNetCore.Docs/issues/19782 Update this image at RTM -->
 ![NuGet パッケージ マネージャー](first-web-api/_static/5/vsNuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext データベースコンテキストの追加
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoContext* 」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -609,7 +609,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** テンプレートを選択して、 **[次へ]** をクリックします。
-* プロジェクトに「 *TodoApi* 」という名前を付け、 **[作成]** をクリックします。
+* プロジェクトに「*TodoApi*」という名前を付け、 **[作成]** をクリックします。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 3.1]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。
 
 ![VS の [新しいプロジェクト] ダイアログ](first-web-api/_static/vs3.png)
@@ -647,7 +647,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 3.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
 
-* **[プロジェクト名]** に「 *TodoApi* 」と入力し、 **[作成]** を選択します。
+* **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
   ![構成ダイアログ](first-web-api-mac/_static/2.png)
 
@@ -727,7 +727,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 * **ソリューション エクスプローラー** で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoItem* 」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -745,7 +745,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 * *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
-* クラスに「 *TodoItem* 」という名前を付け、 **[新規]** をクリックします。
+* クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -766,16 +766,16 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 ### <a name="add-nuget-packages"></a>NuGet パッケージを追加する
 
 * **[ツール]** メニューで **[NuGet パッケージ マネージャー]、[ソリューションの NuGet パッケージの管理]** の順に選択します。
-* **[参照]** タブを選択し、検索ボックスに「 **Microsoft.EntityFrameworkCore.SqlServer** 」と入力します。
+* **[参照]** タブを選択し、検索ボックスに「**Microsoft.EntityFrameworkCore.SqlServer**」と入力します。
 * 左側のウィンドウで、 **[Microsoft.EntityFrameworkCore.SqlServer]** を選択します。
 * 右側のウィンドウで **[プロジェクト]** チェックボックスをオンにして、 **[インストール]** を選択します。
-* 前の手順を使用して、 **Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
+* 前の手順を使用して、**Microsoft.EntityFrameworkCore.InMemory** NuGet パッケージを追加します。
 
 ![NuGet パッケージ マネージャー](first-web-api/_static/vs3NuGet.png)
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext データベースコンテキストの追加
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoContext* 」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -791,7 +791,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)コンテナーに登録する必要があります。 コンテナーは、コントローラーにサービスを提供します。
 
-次の強調表示されているコードを使用して、 *Startup.cs* を更新します。
+次の強調表示されているコードを使用して、*Startup.cs* を更新します。
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
@@ -1100,7 +1100,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
 
 * **[ファイル]** メニューで、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 * **[ASP.NET Core Web アプリケーション]** テンプレートを選択して、 **[次へ]** をクリックします。
-* プロジェクトに「 *TodoApi* 」という名前を付け、 **[作成]** をクリックします。
+* プロジェクトに「*TodoApi*」という名前を付け、 **[作成]** をクリックします。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ダイアログで、 **[.NET Core]** と **[ASP.NET Core 2.2]** が選択されていることを確認します。 **API** テンプレートを選択し、 **[作成]** をクリックします。 **[Enable Docker Support]\(Docker サポートを有効にする\)** は **選択しないで** ください。
 
 ![VS の [新しいプロジェクト] ダイアログ](first-web-api/_static/vs.png)
@@ -1130,7 +1130,7 @@ DTO のアプローチを実演するために、`TodoItem` クラスを更新�
   
 * **[Configure the new ASP.NET Core Web API]\(新しい ASP.NET Core Web API を構成する\)** ダイアログで、最新の .NET Core 2.x **ターゲット フレームワーク** を選択します。 **[次へ]** を選択します。
 
-* **[プロジェクト名]** に「 *TodoApi* 」と入力し、 **[作成]** を選択します。
+* **[プロジェクト名]** に「*TodoApi*」と入力し、 **[作成]** を選択します。
 
   ![構成ダイアログ](first-web-api-mac/_static/2.png)
 
@@ -1170,7 +1170,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 * **ソリューション エクスプローラー** で、プロジェクトを右クリックします。 **[追加]**  >  **[新しいフォルダー]** の順に選択します。 フォルダーに「 *Models* 」という名前を付けます。
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoItem* 」という名前を付け、 **[追加]** を選択します。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoItem*」という名前を付け、 **[追加]** を選択します。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -1188,7 +1188,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 * *Models* フォルダーを右クリックして、 **[追加]** > **[新しいファイル]** > **[全般]** > **[空のクラス]** の順に選択します。
 
-* クラスに「 *TodoItem* 」という名前を付け、 **[新規]** をクリックします。
+* クラスに「*TodoItem*」という名前を付け、 **[新規]** をクリックします。
 
 * テンプレート コードを次のコードに置き換えます。
 
@@ -1206,7 +1206,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「 *TodoContext* 」という名前を付け、 **[追加]** をクリックします。
+* *Models* フォルダーを右クリックして、 **[追加]**  >  **[クラス]** の順に選択します。 クラスに「*TodoContext*」という名前を付け、 **[追加]** をクリックします。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1222,7 +1222,7 @@ Ctrl キーを押しながら F5 キーを押して、アプリを実行しま�
 
 ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection)コンテナーに登録する必要があります。 コンテナーは、コントローラーにサービスを提供します。
 
-次の強調表示されているコードを使用して、 *Startup.cs* を更新します。
+次の強調表示されているコードを使用して、*Startup.cs* を更新します。
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
@@ -1239,7 +1239,7 @@ ASP.NET Core で、サービス (DB コンテキストなど) を[依存関係�
 * *Controllers* フォルダーを右クリックします。
 * **[追加]** > **[新しい項目]** の順に選択します。
 * **[新しい項目の追加]** ダイアログで、 **[API コントローラー クラス]** テンプレートを選択します。
-* クラスに「 *TodoController* 」という名前を付け、 **[追加]** を選択します。
+* クラスに「*TodoController*」という名前を付け、 **[追加]** を選択します。
 
   ![[新しい項目の追加] ダイアログ。検索ボックスに「controller」と入力されています。Web API コントローラーが選択されています。](first-web-api/_static/new_controller.png)
 
@@ -1329,7 +1329,7 @@ To Do アイテムを取得する API を指定するには、`TodoController` �
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* **[Postman]**  >  **[ユーザー設定]** ( **[全般]** タブ) で、 **SSL 証明書の検証** を無効にします。 あるいは、レンチを選択し、 **[設定]** を選択して、SSL 証明書の検証を無効にします。
+* **[Postman]**  >  **[ユーザー設定]** ( **[全般]** タブ) で、**SSL 証明書の検証** を無効にします。 あるいは、レンチを選択し、 **[設定]** を選択して、SSL 証明書の検証を無効にします。
 
 ---
   
@@ -1444,7 +1444,7 @@ Postman を使用して、To Do アイテムを削除します。
 
 このセクションでは、JavaScript を使用して Web API を呼び出す HTML ページを追加します。 jQuery によって要求が開始されます。 JavaScript により、Web API の応答からの詳細を使ってページが更新されます。
 
-*Startup.cs* を次の強調表示されたコードで更新して、 [静的ファイルを提供](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)し、 [既定のファイル マッピングを有効にする](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)ためのアプリを構成します。
+*Startup.cs* を次の強調表示されたコードで更新して、[静的ファイルを提供](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A)し、[既定のファイル マッピングを有効にする](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A)ためのアプリを構成します。
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 

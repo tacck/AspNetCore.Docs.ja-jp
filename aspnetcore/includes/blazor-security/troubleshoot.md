@@ -1,5 +1,25 @@
 ## <a name="troubleshoot"></a>トラブルシューティング
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="common-errors"></a>一般的なエラー
+
+* AAD で承認されないクライアント
+
+  > 情報:Microsoft.AspNetCore.Authorization.DefaultAuthorizationService[2] 承認に失敗しました。 次の要件が満たされていません。DenyAnonymousAuthorizationRequirement:認証済みユーザーが必要です。
+
+  AAD からのログイン コールバック エラー:
+
+  * エラー: `unauthorized_client`
+  * 説明: `AADB2C90058: The provided application is not configured to allow public clients.`
+
+  このエラーを解決するには:
+
+  1. Azure portal で、[アプリのマニフェスト](/azure/active-directory/develop/reference-app-manifest)にアクセスします。
+  1. [`allowPublicClient`](/azure/active-directory/develop/reference-app-manifest#allowpublicclient-attribute) 属性を `null` または `true` に設定します。
+
+::: moniker-end
+
 ### <a name="cookies-and-site-data"></a>Cookie とサイト データ
 
 Cookie とサイト データは、アプリが更新されても保持され、テストやトラブルシューティングに影響する可能性があります。 アプリ コードの変更、プロバイダーによるユーザー アカウントの変更、プロバイダー アプリの構成変更を行うときは、次のものをクリアしてください。
@@ -31,7 +51,7 @@ Cookie とサイト データは、アプリが更新されても保持され、
 
 ### <a name="run-the-server-app"></a>Server アプリを実行する
 
-ホストされている Blazor アプリのテストとトラブルシューティングを行うときは、 **`Server`** プロジェクトからアプリを実行していることを確認してください。 たとえば、Visual Studio で、次のいずれかの方法を使用してアプリを起動する前に、Server プロジェクトが**ソリューション エクスプローラー**で強調表示されていることを確認します。
+ホストされている Blazor アプリのテストとトラブルシューティングを行うときは、 **`Server`** プロジェクトからアプリを実行していることを確認してください。 たとえば、Visual Studio で、次のいずれかの方法を使用してアプリを起動する前に、Server プロジェクトが **ソリューション エクスプローラー** で強調表示されていることを確認します。
 
 * **[実行]** ボタンを選択します。
 * メニューの、 **[デバッグ]**  >  **[デバッグ開始]** を使用します。

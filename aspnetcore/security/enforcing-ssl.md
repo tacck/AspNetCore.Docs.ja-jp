@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa109aaa89003fd7566e7dc219ecc9799b077355
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051123"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703671"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -289,7 +289,7 @@ ASP.NET Core 2.1 以降では、拡張メソッドを使用して HSTS を実装
 ::: moniker-end
 
 
-* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、[https://hstspreload.org/](https://hstspreload.org/) を参照してください。
+* ヘッダーのプリロードパラメーターを設定し `Strict-Transport-Security` ます。 プリロードは [RFC hsts 仕様](https://tools.ietf.org/html/rfc6797)の一部ではありませんが、web ブラウザーでは、新規インストール時に hsts サイトを事前に読み込むことがサポートされています。 詳細については、[https://hstspreload.org/](https://hstspreload.org/) をご覧ください。
 * HSTS ポリシーをホストサブドメインに適用する [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2)を有効にします。
 * `max-age`ヘッダーのパラメーターを明示的に `Strict-Transport-Security` 60 日に設定します。 設定されていない場合、既定値は30日です。 詳細については、「 [最長有効期間」ディレクティブ](https://tools.ietf.org/html/rfc6797#section-6.1.1)を参照してください。
 * `example.com`除外するホストの一覧にを追加します。
@@ -449,7 +449,21 @@ Visual Studio での証明書の問題のトラブルシューティングにつ
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>IIS Express Visual Studio で使用される SSL 証明書
 
-IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [ **修復** ] を選択します。 詳細については、[こちらの GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)のページを参照してください。
+IIS Express 証明書の問題を解決するには、Visual Studio インストーラーで [ **修復** ] を選択します。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/aspnetcore/issues/16892)します。
+
+<a name="trust-ff"></a>
+
+### <a name="firefox-sec_error_inadequate_key_usage-certificate-error"></a>Firefox SEC_ERROR_INADEQUATE_KEY_USAGE 証明書エラー
+
+Firefox ブラウザーでは独自の証明書ストアが使用されるため、 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) または [kestrel](xref:fundamentals/servers/kestrel) 開発者の証明書は信頼されません。
+
+Firefox を IIS Express または Kestrel と共に使用するには、を設定します。  `security.enterprise_roots.enabled` = `true`
+
+1. `about:config`FireFox ブラウザーで「」と入力します。
+1. リスクに同意する場合は、[リスクを受け入れる] を選択し **て続行** します。
+1. [**すべて表示**] を選択
+1. 一連 `security.enterprise_roots.enabled` = `true`
+1. Firefox を終了して再起動する
 
 ## <a name="additional-information"></a>関連情報
 

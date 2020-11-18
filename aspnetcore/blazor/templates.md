@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: eef381367d7aa59dcc430c529746088d4488e700
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: fc2e81cf130732d515fb871227031493e297cf9f
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054932"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94507773"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -48,12 +48,27 @@ dotnet new blazorserver --help
 
 Blazor プロジェクト テンプレートから生成された Blazor アプリは、次のファイルとフォルダーで構成されます。
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `Program.cs`:以下を設定するアプリのエントリ ポイント。
 
   * ASP.NET Core [ホスト](xref:fundamentals/host/generic-host) (Blazor Server)
   * WebAssembly ホスト (Blazor WebAssembly):このファイルのコードは、Blazor WebAssembly テンプレート (`blazorwasm`) から作成されたアプリに固有です。
-    * `App` コンポーネントは、アプリのルート コンポーネントです。 `App` コンポーネントは、ルート コンポーネント コレクション (`builder.RootComponents.Add<App>("app")`) に対する `app` DOM 要素 (`<app>...</app>`) として指定されます。
+    * `App` コンポーネントは、アプリのルート コンポーネントです。 `App` コンポーネントは、ルート コンポーネント コレクション (`builder.RootComponents.Add<App>("#app")`) に対する `app` DOM 要素 (`wwwroot/index.html` の `<div id="app">Loading...</div>`) として指定されます。
     * [サービス](xref:blazor/fundamentals/dependency-injection)が追加され、構成されます (例: `builder.Services.AddSingleton<IMyDependency, MyDependency>()`)。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `Program.cs`:以下を設定するアプリのエントリ ポイント。
+
+  * ASP.NET Core [ホスト](xref:fundamentals/host/generic-host) (Blazor Server)
+  * WebAssembly ホスト (Blazor WebAssembly):このファイルのコードは、Blazor WebAssembly テンプレート (`blazorwasm`) から作成されたアプリに固有です。
+    * `App` コンポーネントは、アプリのルート コンポーネントです。 `App` コンポーネントは、ルート コンポーネント コレクション (`builder.RootComponents.Add<App>("app")`) に対する `app` DOM 要素 (`wwwroot/index.html` の `<app>Loading...</app>`) として指定されます。
+    * [サービス](xref:blazor/fundamentals/dependency-injection)が追加され、構成されます (例: `builder.Services.AddSingleton<IMyDependency, MyDependency>()`)。
+
+::: moniker-end
 
 * `Startup.cs` (Blazor Server): アプリのスタートアップ ロジックを含みます。 `Startup` クラスには、次の 2 つのメソッドがあります。
 

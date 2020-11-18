@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 5898059d83576cd0d2af15ad61bc399cbfbe0e99
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8f0aa80d092b6678131a2b7152f21ecb8e168257
+ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055855"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430992"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor のルーティング
 
@@ -38,7 +38,7 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-最も一般的な構成は、すべての要求を Razor ページにルーティングすることです。これは、Blazor Server アプリのサーバー側部分のホストとして機能します。 通常、 *ホスト* ページは、`_Host.cshtml` という名前になります。 ホスト ファイルに指定されるルートは、ルート照合で低い優先順位で動作するため、 *フォールバック ルート* と呼ばれます。 フォールバック ルートは、他のルートが一致しない場合に考慮されます。 これにより、Blazor Server アプリと干渉することなく、他のコントローラーやページをアプリで使用できます。
+最も一般的な構成は、すべての要求を Razor ページにルーティングすることです。これは、Blazor Server アプリのサーバー側部分のホストとして機能します。 通常、*ホスト* ページは、`_Host.cshtml` という名前になります。 ホスト ファイルに指定されるルートは、ルート照合で低い優先順位で動作するため、*フォールバック ルート* と呼ばれます。 フォールバック ルートは、他のルートが一致しない場合に考慮されます。 これにより、Blazor Server アプリと干渉することなく、他のコントローラーやページをアプリで使用できます。
 
 ルート以外の URL のサーバー ホスト用に <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> を構成する方法の詳細については、<xref:blazor/host-and-deploy/index#app-base-path> をご覧ください。
 
@@ -162,7 +162,7 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 
 ### <a name="routing-with-urls-that-contain-dots"></a>ドットを含む URL によるルーティング
 
-ホストされている Blazor WebAssembly および Blazor Server アプリの場合、サーバー側の既定のルート テンプレートでは、ファイルが要求されているドット (`.`) が要求 URL の最後のセグメントに含まれていると想定されます (例: `https://localhost.com:5001/example/some.thing`)。 追加の構成がなければ、コンポーネントへのルーティングが意図されている場合は、アプリによって " *404 - 見つかりません* " が返されます。 ドットが含まれる 1 つ以上のパラメーターを指定してルートを使用するには、アプリでカスタム テンプレートを使用してルートを構成する必要があります。
+ホストされている Blazor WebAssembly および Blazor Server アプリの場合、サーバー側の既定のルート テンプレートでは、ファイルが要求されているドット (`.`) が要求 URL の最後のセグメントに含まれていると想定されます (例: `https://localhost.com:5001/example/some.thing`)。 追加の構成がなければ、コンポーネントへのルーティングが意図されている場合は、アプリによって "*404 - 見つかりません*" が返されます。 ドットが含まれる 1 つ以上のパラメーターを指定してルートを使用するには、アプリでカスタム テンプレートを使用してルートを構成する必要があります。
 
 URL の最後のセグメントからルート パラメーターを受け取ることができる次の `Example` コンポーネントについて考えてみます。
 
@@ -180,7 +180,7 @@ URL の最後のセグメントからルート パラメーターを受け取る
 }
 ```
 
-ホストされている Blazor WebAssembly ソリューションの " *サーバー* " アプリで、`param` パラメーターのドットを使用して要求をルーティングできるようにするには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ファイル ルート テンプレートを追加します。
+ホストされている Blazor WebAssembly ソリューションの "*サーバー*" アプリで、`param` パラメーターのドットを使用して要求をルーティングできるようにするには、`Startup.Configure` (`Startup.cs`) で省略可能なパラメーターを使用して、フォールバック ファイル ルート テンプレートを追加します。
 
 ```csharp
 endpoints.MapFallbackToFile("/example/{param?}", "index.html");
@@ -198,7 +198,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 
 ::: moniker range=">= aspnetcore-5.0"
 
-" *このセクションは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core に適用されます。* "
+"*このセクションは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core に適用されます。* "
 
 複数のフォルダー境界にまたがるパスをキャプチャするキャッチオール ルート パラメーターが、コンポーネントでサポートされます。 キャッチオール ルート パラメーターは次のとおりであることが必要です。
 
@@ -223,7 +223,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 
 ::: moniker range="< aspnetcore-5.0"
 
-キャッチオール ルート パラメーターは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core でサポートされます。*
+キャッチオール ルート パラメーターは、ASP.NET Core 5.0 以降でサポートされます。
 
 ::: moniker-end
 
@@ -238,7 +238,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 `<NavLink>` 要素の `Match` 属性に割り当てられる 2 つの <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> オプションがあります。
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>:<xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、現在の URL 全体に一致する場合にアクティブになります。
-* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> ( *既定値* ):<xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、現在の URL の任意のプレフィックスに一致する場合にアクティブになります。
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*既定値*):<xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、現在の URL の任意のプレフィックスに一致する場合にアクティブになります。
 
 前の例では、ホーム <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` はホーム URL と一致し、アプリの既定のベース パス URL (`https://localhost:5001/` など) でのみ `active` CSS クラスを受け取ります。 2 番目の <xref:Microsoft.AspNetCore.Components.Routing.NavLink> は、ユーザーが `MyComponent` プレフィックスを含む任意の URL (`https://localhost:5001/MyComponent` や `https://localhost:5001/MyComponent/AnotherSegment` など) にアクセスしたときに、`active` クラスを受け取ります。
 
@@ -269,7 +269,7 @@ endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
 > }
 > ```
 >
-> このシナリオでのインデックス変数の使用は、`NavLink` コンポーネントだけでなく、 [子コンテンツ](xref:blazor/components/index#child-content)でループ変数を使用する **すべての** 子コンポーネントで必須です。
+> このシナリオでのインデックス変数の使用は、`NavLink` コンポーネントだけでなく、[子コンテンツ](xref:blazor/components/index#child-content)でループ変数を使用する **すべての** 子コンポーネントで必須です。
 >
 > または、<xref:System.Linq.Enumerable.Range%2A?displayProperty=nameWithType> と共に `foreach` ループを使用します。
 >

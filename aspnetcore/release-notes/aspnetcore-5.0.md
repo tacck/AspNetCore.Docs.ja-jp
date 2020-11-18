@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: e9c74f7b45ebcdffc19a0483b4e98ad2f44d5747
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: e25549d557dd971d0f2f4d67a182574f07138acb
+ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061745"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94508124"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 の新機能
 
@@ -224,6 +224,8 @@ gRPC の詳細については、「<xref:grpc/index>」を参照してくださ�
 
 ## SignalR
 
+### <a name="no-locsignalr-hub-filters"></a>SignalR ハブ フィルター
+
 SignalR ハブ フィルター (ASP.NET SignalR のハブ パイプラインと呼ばれます) は、ハブ メソッドが呼び出される前と後にコードを実行できる機能です。 ハブ メソッドが呼び出される前と後のコードの実行は、ミドルウェアが HTTP 要求の前と後にコードを実行する機能に似ています。 一般的な使用方法としては、ログ記録、エラー処理、引数の検証などがあります。
 
 詳細については、「[ASP.NET Core SignalR のハブ フィルターを使用する](xref:signalr/hub-filters)」を参照してください。
@@ -388,7 +390,7 @@ ASP.NET Core のプロジェクト テンプレートが <xref:Microsoft.Identit
 
 新しい <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> および `WriteAsJsonAsync` 拡張メソッドを使用して、`HttpRequest` および `HttpResponse` に対する JSON データの読み取りと書き込みを行うことができます。 これらの拡張メソッドでは、[System.Text.Json](xref:System.Text.Json) シリアライザーを使用して JSON データが処理されます。 新しい `HasJsonContentType` 拡張メソッドを使用すれば、要求に JSON コンテンツ タイプがあるかどうかを確認することもできます。
 
-JSON 拡張メソッドを [エンドポイント ルーティング](xref:fundamentals/routing)と組み合わせることで、"* **コードへのルーティング** _" と呼ばれるプログラミングのスタイルで JSON API を作成できます。 これは、基本的な JSON API を軽量な方法で作成したい開発者向けの新しいオプションです。 たとえば、少数のエンドポイントのみを持つ Web アプリでは、ASP.NET Core MVC の完全な機能ではなく、コードへのルーティングを使用することができます。
+JSON 拡張メソッドを [エンドポイント ルーティング](xref:fundamentals/routing)と組み合わせることで、"***コードへのルーティング** _" と呼ばれるプログラミングのスタイルで JSON API を作成できます。 これは、基本的な JSON API を軽量な方法で作成したい開発者向けの新しいオプションです。 たとえば、少数のエンドポイントのみを持つ Web アプリでは、ASP.NET Core MVC の完全な機能ではなく、コードへのルーティングを使用することができます。
 
 ```csharp
 endpoints.MapGet("/weather/{city:alpha}", async context =>
@@ -412,9 +414,10 @@ endpoints.MapGet("/weather/{city:alpha}", async context =>
 
 ```csharp
 public IActionResult Post([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)]
-                           MyModel model) {
-     ...
-     }
+                          MyModel model)
+{
+    ...
+}
 ```
 
 ## <a name="miscellaneous-improvements"></a>その他の機能強化

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 77cf1e9ad51b7044a35e1a9b2c125b0fdd91435e
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
+ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365391"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94550648"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>チュートリアル: ASP.NET MVC Web アプリでの EF Core の概要
 
@@ -73,11 +73,15 @@ If you choose to use SQLite, download and install a third-party tool for managin
 
 ## <a name="create-web-app"></a>Web アプリを作成する
 
-* Visual Studio を開始し、 **[ASP.NET Core Web アプリケーション]** > **[次へ]** を選択します。
-* プロジェクトに `ContosoUniversity` という名前を付けます。 コードをコピーするときに名前空間が一致するように、この正確な名前 (大文字と小文字を含む) を使用することが重要です。
-* **［作成］** を選択します
-* ドロップダウン リストで **[.NET Core]** と **[ASP.NET Core 5.0]** を選択してから、 **[Web アプリケーション (モデル ビュー コントローラー)]** テンプレートを選択します。
-  ![[新しい ASP.NET Core プロジェクト] ダイアログ](intro/_static/new-aspnet5.png)
+1. Visual Studio を開始し、 **[新しいプロジェクトの作成]** を選択します。
+1. **[新しいプロジェクトの作成]** ダイアログで、 **[ASP.NET Core Web アプリケーション]** > **[次へ]** の順に選択します。
+1. **[新しいプロジェクトの構成]** ダイアログで、 **[プロジェクト名]** に「`ContosoUniversity`」と入力します。 コードをコピーするときに各`namespace`が一致するように、この正確な名前 (大文字と小文字を含む) を使用することが重要です。
+1. **［作成］** を選択します
+1. **[新しい ASP.NET Core Web アプリケーションの作成]** ダイアログで、次のものを選択します。
+    1. ドロップダウンで **[.NET Core]** と **[ASP.NET Core 5.0]**
+    1. **ASP.NET Core Web アプリ (Model-View-Controller)**
+    1. **[作成]** 
+      ![[新しい ASP.NET Core プロジェクト] ダイアログ](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
 ## <a name="set-up-the-site-style"></a>サイトのスタイルを設定する
 
@@ -86,7 +90,7 @@ If you choose to use SQLite, download and install a third-party tool for managin
 *Views/Shared/_Layout.cshtml* を開き、次のように変更します。
 
 * 各 `ContosoUniversity` を `Contoso University` に変更します。 これは 3 回出てきます。
-* メニュー エントリとして「 **About** 」、「 **Students** 」、「 **Courses** 」、「 **Instructors** 」、「 **Departments** 」を追加し、「 **Privacy** 」メニュー エントリを削除します。
+* メニュー エントリとして「**About**」、「**Students**」、「**Courses**」、「**Instructors**」、「**Departments**」を追加し、「**Privacy**」メニュー エントリを削除します。
 
 次のコードでは上の変更が強調表示されています。
 
@@ -109,8 +113,8 @@ EF SQL Server パッケージとその依存関係 `Microsoft.EntityFrameworkCor
 [Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージと [Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージを追加します。 プログラム マネージャー コンソール (PMC) で、次のコマンドを入力して NuGet パッケージを追加します。
 
 ```powershell
-Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.2.20475.17
-Install-Package Microsoft.EntityFrameworkCore.SqlServer -Version 5.0.0-rc.2.20475.6
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 `Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore` NuGet パッケージには EF Core のエラー ページ用の ASP.NET Core ミドルウェアが用意されています。 このミドルウェアは、EF Core の移行に関するエラーを検出して診断するのに役立ちます。
@@ -134,11 +138,11 @@ EF Core で利用できるその他のデータベース プロバイダーに�
 
 ![Student エンティティの図](intro/_static/student-entity.png)
 
-以下のコードを使用して、 *Models* フォルダーに `Student` クラスを作成します。
+以下のコードを使用して、*Models* フォルダーに `Student` クラスを作成します。
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-`ID` プロパティは、このクラスに相当するデータベース テーブルの主キー ( **PK** ) 列です。 既定では、EF は、`ID` または `classnameID` という名前のプロパティを主キーとして解釈します。 たとえば、PK には `ID` ではなく `StudentID` という名前を付けることができます。
+`ID` プロパティは、このクラスに相当するデータベース テーブルの主キー (**PK**) 列です。 既定では、EF は、`ID` または `classnameID` という名前のプロパティを主キーとして解釈します。 たとえば、PK には `ID` ではなく `StudentID` という名前を付けることができます。
 
 `Enrollments` プロパティは[ナビゲーション プロパティ](/ef/core/modeling/relationships)です。 ナビゲーション プロパティには、このエンティティに関連する他のエンティティが含まれます。 `Student` エンティティの `Enrollments` プロパティ:
 
@@ -146,7 +150,7 @@ EF Core で利用できるその他のデータベース プロバイダーに�
 * データベースの特定の `Student` 行に、関連する `Enrollment` 行が 2 つある場合:
   * その `Student` エンティティの `Enrollments` ナビゲーション プロパティには、これら 2 つの `Enrollment` エンティティが含まれます。
   
-`Enrollment` 行には、`StudentID` 外部キー ( **FK** ) 列の学生の PK 値が含まれます。
+`Enrollment` 行には、`StudentID` 外部キー (**FK**) 列の学生の PK 値が含まれます。
 
 ナビゲーション プロパティが複数のエンティティを保持できる場合:
 
@@ -159,7 +163,7 @@ EF Core で利用できるその他のデータベース プロバイダーに�
 
 ![Enrollment エンティティの図](intro/_static/enrollment-entity.png)
 
-以下のコードを使用して、 *Models* フォルダーに `Enrollment` クラスを作成します。
+以下のコードを使用して、*Models* フォルダーに `Enrollment` クラスを作成します。
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Intro)]
 
@@ -177,7 +181,7 @@ EF Core で利用できるその他のデータベース プロバイダーに�
 
 ![Course エンティティの図](intro/_static/course-entity.png)
 
-以下のコードを使用して、 *Models* フォルダーに `Course` クラスを作成します。
+以下のコードを使用して、*Models* フォルダーに `Course` クラスを作成します。
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Intro)]
 
@@ -213,11 +217,11 @@ EF Core で利用できるその他のデータベース プロバイダーに�
 
 ASP.NET Core には、[依存関係挿入](../../fundamentals/dependency-injection.md)が含まれています。 EF データベース コンテキストなどのサービスは、アプリの起動時に依存関係の挿入で登録されます。 これらのサービス (MVC コント ローラーなど) を必要とするコンポーネントには、コンストラクターのパラメーターを介してこれらのサービスが提供されます。 コンテキスト インスタンスを取得するコントローラー コンストラクターのコードは、このチュートリアルで後ほど示します。
 
-`SchoolContext` をサービスとして登録するには、 *Startup.cs* を開き、強調表示されている行を `ConfigureServices` メソッドに追加します。
+`SchoolContext` をサービスとして登録するには、*Startup.cs* を開き、強調表示されている行を `ConfigureServices` メソッドに追加します。
 
 [!code-csharp[](intro/samples/5cu-snap/Startup.cs?name=snippet&highlight=1-2,22-23)]
 
-`DbContextOptionsBuilder` オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
+`DbContextOptionsBuilder` オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 *appsettings.json* ファイルを開き、次のマークアップで示されているように接続文字列を追加します。
 
@@ -255,7 +259,7 @@ EF により、空のデータベースが作成されます。 このセクシ�
 
 [!code-csharp[Program file](intro/samples/5cu-snap/Program.cs?highlight=1-2,14-18,21-37)]
 
-アプリの起動時に、 *Program.cs* によって次のことが行われます。
+アプリの起動時に、*Program.cs* によって次のことが行われます。
 
 * 依存関係挿入コンテナーからデータベース コンテキスト インスタンスを取得します。
 * `DbInitializer.Initialize` メソッドを呼び出します。
@@ -318,7 +322,7 @@ CTRL を押しながら F5 を押してプロジェクトを実行するか、�
 * そのため、データベースが作成されました。
 * `Initialize` メソッドのコードにより、データベースにデータが設定されました。
 
-Visual Studio でデータベースを表示するには、 **SQL Server オブジェクト エクスプローラー** (SSOX) を使用します。
+Visual Studio でデータベースを表示するには、**SQL Server オブジェクト エクスプローラー** (SSOX) を使用します。
 
 * Visual Studio の **[表示]** メニューで **[SQL Server オブジェクト エクスプローラー]** を選択します。
 * SSOX で、 **(localdb)\MSSQLLocalDB > [データベース]** を選択します。
@@ -388,11 +392,13 @@ EF を使用する非同期コードを記述するときに注意すべき点:
 
 ::: moniker-end
 
-::: moniker range="< aspnetcore-3.0"
+::: moniker range="<= aspnetcore-3.1"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
 Contoso University のサンプル Web アプリケーションでは、Entity Framework (EF) Core 2.2 と Visual Studio 2017 または 2019 を使用して ASP.NET Core 2.2 MVC Web アプリケーションを作成する方法を示します。
+
+このチュートリアルは、ASP.NET Core 3.1 用に更新されていません。 [ASP.NET Core 5.0](xref:data/ef-mvc/intro?view=aspnetcore-5.0) 用に更新されています。
 
 サンプル アプリケーションは架空の Contoso University の Web サイトです。 学生の受け付け、講座の作成、講師の割り当てなどの機能が含まれています。 これは、Contoso University のサンプル アプリケーションを一から作成する方法を説明するチュートリアル シリーズの 1 回目です。
 
@@ -430,7 +436,7 @@ Contoso University のサンプル Web アプリケーションでは、Entity F
 
 * **[ASP.NET Core Web アプリケーション]** プロジェクト テンプレートを選択します。
 
-* 名前に「 **ContosoUniversity** 」と入力し、 **[OK]** をクリックします。
+* 名前に「**ContosoUniversity**」と入力し、 **[OK]** をクリックします。
 
   ![[新しいプロジェクト] ダイアログ](intro/_static/new-project2.png)
 
@@ -452,7 +458,7 @@ Contoso University のサンプル Web アプリケーションでは、Entity F
 
 * "ContosoUniversity" をすべて "Contoso University" に変更します。 これは 3 回出てきます。
 
-* メニュー エントリとして「 **About** 」、「 **Students** 」、「 **Courses** 」、「 **Instructors** 」、「 **Departments** 」を追加し、「 **Privacy** 」メニュー エントリを削除します。
+* メニュー エントリとして「**About**」、「**Students**」、「**Courses**」、「**Instructors**」、「**Departments**」を追加し、「**Privacy**」メニュー エントリを削除します。
 
 変更が強調表示されます。
 
@@ -488,7 +494,7 @@ Entity Framework Core で利用できるその他のデータベース プロバ
 
 ![Student エンティティの図](intro/_static/student-entity.png)
 
-*[Models]* フォルダーで、 *Student.cs* という名前のクラス ファイルを作成し、テンプレート コードを次のコードに変更します。
+*[Models]* フォルダーで、*Student.cs* という名前のクラス ファイルを作成し、テンプレート コードを次のコードに変更します。
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
@@ -502,7 +508,7 @@ Entity Framework Core で利用できるその他のデータベース プロバ
 
 ![Enrollment エンティティの図](intro/_static/enrollment-entity.png)
 
-*[Models]* フォルダーで、 *Enrollment.cs* を作成し、既存のコードを次のコードに変更します。
+*[Models]* フォルダーで、*Enrollment.cs* を作成し、既存のコードを次のコードに変更します。
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Intro)]
 
@@ -520,7 +526,7 @@ Entity Framework は `<navigation property name><primary key property name>` と
 
 ![Course エンティティの図](intro/_static/course-entity.png)
 
-*[Models]* フォルダーで、 *Course.cs* を作成し、既存のコードを次のコードに変更します。
+*[Models]* フォルダーで、*Course.cs* を作成し、既存のコードを次のコードに変更します。
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Intro)]
 
@@ -532,9 +538,9 @@ Entity Framework は `<navigation property name><primary key property name>` と
 
 所与のデータ モデルの Entity Framework 機能を調整するメイン クラスは、データベース コンテキスト クラスです。 このクラスは、`Microsoft.EntityFrameworkCore.DbContext` クラスから派生させて作成します。 自分のコードでは、データ モデルに含めるエンティティを自分で指定します。 Entity Framework の特定の動作をカスタマイズすることもできます。 このプロジェクトでは、クラスに `SchoolContext` という名前が付けられています。
 
-プロジェクト フォルダーで、 *Data* という名前のフォルダーを作成します。
+プロジェクト フォルダーで、*Data* という名前のフォルダーを作成します。
 
-*[Data]* フォルダーで、 *SchoolContext.cs* という名前の新しいクラス ファイルを作成し、テンプレート コードを次のコードに変更します。
+*[Data]* フォルダーで、*SchoolContext.cs* という名前の新しいクラス ファイルを作成し、テンプレート コードを次のコードに変更します。
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_Intro)]
 
@@ -552,11 +558,11 @@ Entity Framework は `<navigation property name><primary key property name>` と
 
 ASP.NET Core は既定で[依存関係の挿入](../../fundamentals/dependency-injection.md)を実装します。 サービス (EF データベース コンテキストなど) は、アプリケーションの起動時に依存関係の挿入に登録されます。 これらのサービス (MVC コント ローラーなど) を必要とするコンポーネントには、コンストラクターのパラメーターを介してこれらのサービスが指定されます。 このチュートリアルの後半で、コンテキスト インスタンスを取得するコントローラー コンストラクター コードが登場します。
 
-`SchoolContext` をサービスとして登録するには、 *Startup.cs* を開き、強調表示されている行を `ConfigureServices` メソッドに追加します。
+`SchoolContext` をサービスとして登録するには、*Startup.cs* を開き、強調表示されている行を `ConfigureServices` メソッドに追加します。
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
-`DbContextOptionsBuilder` オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
+`DbContextOptionsBuilder` オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 名前空間の `ContosoUniversity.Data` と `Microsoft.EntityFrameworkCore` に対して `using` ステートメントを追加し、プロジェクトをビルドします。
 
@@ -612,7 +618,7 @@ CRUD アクションのメソッドとビューの自動作成は、スキャフ
   * 名前は **StudentsController** をそのまま選択します。
   * **[追加]** をクリックします。
 
-Visual Studio スキャフォールディング エンジンにより、 *StudentsController.cs* ファイルと、コントローラーで動作するビューのセット ( *.cshtml* ファイル) が作成されます。
+Visual Studio スキャフォールディング エンジンにより、*StudentsController.cs* ファイルと、コントローラーで動作するビューのセット ( *.cshtml* ファイル) が作成されます。
 
 コントローラーによりコンストラクター パラメーターとして `SchoolContext` が受け取られることに注意してください。
 
