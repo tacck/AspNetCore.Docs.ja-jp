@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 1c703cdbd168c2e83d09c40f7740689df8938dad
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: c96e7107c85bf36f55f6571c71c20d09bc94ddb3
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422788"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688529"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC の概要
 
@@ -75,7 +75,7 @@ ms.locfileid: "94422788"
     1. **ASP.NET Core Web アプリ (Model-View-Controller)**
     1. **作成**
 
-![新しい ASP.NET Core Web アプリケーションを作成する ](start-mvc/_static/5/mvc.png)
+![新しい ASP.NET Core Web アプリケーションを作成する ](start-mvc/_static/mvcVS19v16.9.png)
 
 プロジェクトを作成する別の方法については、「[Visual Studio で新しいプロジェクトを作成する](/visualstudio/ide/create-new-project)」をご覧ください。
 
@@ -142,7 +142,7 @@ Visual Studio では、作成した MVC プロジェクトに既定のテンプ�
 
   次の図はアプリを示しています。
 
-  ![ホームまたはインデックス ページ](start-mvc/_static/home2.2.png)
+  ![ホームまたはインデックス ページ](start-mvc/_static/home50-vs.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -154,7 +154,7 @@ Ctrl + F5 キーを押して、デバッガーなしで実行します。
 
   Ctrl + F5 キー (非デバッグ モード) でアプリを起動することで、コードの変更、ファイルの保存、ブラウザーの更新、コード変更の確認を行うことができます。 多くの開発者は、ページを更新して変更を確認できる非デバッグ モードの使用を好みます。
 
-  ![ホームまたはインデックス ページ](start-mvc/_static/home2.2.png)
+  ![ホームまたはインデックス ページ](start-mvc/_static/home50-port5001.png)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 

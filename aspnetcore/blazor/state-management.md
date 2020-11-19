@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 1769ddbb95c9ffe373e916c885e411adc3d4c65b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054997"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570147"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
@@ -55,18 +55,18 @@ Blazor WebAssembly アプリで作成されたユーザー状態は、ブラウ�
 * 複数ステップの Web フォーム: 複数ステップの Web フォームのいくつかのステップを完了した後で、状態が失われた場合、ユーザーがデータを再入力するのでは時間がかかります。 このシナリオでは、フォームからユーザーが離れて後で戻ってきた場合、状態が失われます。
 * ショッピング カート: 収益につながる可能性がある、アプリの中のビジネス上重要なコンポーネントを維持できます。 ユーザーが自分の状態を失い、そのため、自分のショッピング カートが消えると、後でサイトに戻ってきたとき、製品やサービスの購入数が減ることがあります。
 
-アプリでは、" *アプリの状態* " のみが維持されます。 コンポーネント インスタンスやそのレンダー ツリーなど、UI は維持されません。 コンポーネントとレンダー ツリーは一般的にシリアル化されません。 アプリで、ツリー ビュー コントロールの展開されたノードなど、UI の状態を維持するには、カスタム コードを使用して、UI 状態の動作をシリアル化できるアプリ状態としてモデル化する必要があります。
+アプリでは、"*アプリの状態*" のみが維持されます。 コンポーネント インスタンスやそのレンダー ツリーなど、UI は維持されません。 コンポーネントとレンダー ツリーは一般的にシリアル化されません。 アプリで、ツリー ビュー コントロールの展開されたノードなど、UI の状態を維持するには、カスタム コードを使用して、UI 状態の動作をシリアル化できるアプリ状態としてモデル化する必要があります。
 
 ## <a name="where-to-persist-state"></a>状態を維持する場所
 
 一般に、状態を維持するために、次のような場所があります。
 
-* [サーバー側ストレージ](#server-side-storage)
-* [URL](#url)
-* [ブラウザー ストレージ](#browser-storage)
-* [メモリ内状態コンテナー サービス](#in-memory-state-container-service)
+* [サーバー側ストレージ](#server-side-storage-wasm)
+* [URL](#url-wasm)
+* [ブラウザー ストレージ](#browser-storage-wasm)
+* [メモリ内状態コンテナー サービス](#in-memory-state-container-service-wasm)
 
-### <a name="server-side-storage"></a>サーバー側ストレージ
+<h2 id="server-side-storage-wasm">サーバー側ストレージ</h2>
 
 複数のユーザーとデバイスにまたがって永続的にデータを保持する場合は、Web API を使用してアクセスされる独立したサーバー側ストレージをアプリで使用できます。 次のオプションがあります。
 
@@ -83,14 +83,14 @@ Blazor WebAssembly アプリはユーザーのブラウザー内で完全に実�
 
 * <xref:blazor/call-web-api>
 * <xref:blazor/security/webassembly/index>
-* Blazor の " *セキュリティと Identity* " に関する記事
+* Blazor の "*セキュリティと Identity* " に関する記事
 
 Azure のデータ ストレージ オプションの詳細については、以下を参照してください。
 
 * [Azure のデータベース](https://azure.microsoft.com/product-categories/databases/)
 * [Azure Storage のドキュメント](/azure/storage/)
 
-### <a name="url"></a>URL
+<h2 id="url-wasm">URL</h2>
 
 ナビゲーションの状態を表わす一時的なデータについては、URL の一部としてデータをモデル化します。 たとえば、次のようなユーザー状態が URL でモデル化されます。
 
@@ -101,7 +101,7 @@ Azure のデータ ストレージ オプションの詳細については、以
 
 [`@page`](xref:mvc/views/razor#page) ディレクティブで URL パターンを定義する方法については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
-### <a name="browser-storage"></a>ブラウザー ストレージ
+<h2 id="browser-storage-wasm">ブラウザー ストレージ</h2>
 
 ユーザーが頻繁に作成する一時的なデータの場合、一般的に使用されるストレージの場所は、ブラウザーの [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) コレクションと [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) コレクションです。
 
@@ -121,7 +121,7 @@ Azure のデータ ストレージ オプションの詳細については、以
 > [!WARNING]
 > `localStorage` および `sessionStorage` に格納されているデータは、ユーザーによって表示または改ざんされる可能性があります。
 
-## <a name="in-memory-state-container-service"></a>メモリ内状態コンテナー サービス
+<h2 id="in-memory-state-container-service-wasm">メモリ内状態コンテナー サービス</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
@@ -135,7 +135,7 @@ Azure のデータ ストレージ オプションの詳細については、以
 
 ::: zone pivot="server"
 
-Blazor Server はステートフル アプリ フレームワークです。 アプリでは、ほとんど常に、サーバーとの接続が維持されています。 ユーザーの状態は、" *回線* " の中のサーバーのメモリに保持されます。 
+Blazor Server はステートフル アプリ フレームワークです。 アプリでは、ほとんど常に、サーバーとの接続が維持されています。 ユーザーの状態は、"*回線*" の中のサーバーのメモリに保持されます。 
 
 たとえば、回線には次のようなユーザー状態が保持されます。
 
@@ -164,18 +164,18 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 * 複数ステップの Web フォーム: 複数ステップの Web フォームのいくつかのステップを完了した後で、状態が失われた場合、ユーザーがデータを再入力するのでは時間がかかります。 このシナリオでは、フォームからユーザーが離れて後で戻ってきた場合、状態が失われます。
 * ショッピング カート: 収益につながる可能性がある、アプリの中のビジネス上重要なコンポーネントを維持できます。 ユーザーが自分の状態を失い、そのため、自分のショッピング カートが消えると、後でサイトに戻ってきたとき、製品やサービスの購入数が減ることがあります。
 
-アプリでは、" *アプリの状態* " のみが維持されます。 コンポーネント インスタンスやそのレンダー ツリーなど、UI は維持されません。 コンポーネントとレンダー ツリーは一般的にシリアル化されません。 アプリで、ツリー ビュー コントロールの展開されたノードなど、UI の状態を維持するには、カスタム コードを使用して、UI 状態の動作をシリアル化できるアプリ状態としてモデル化する必要があります。
+アプリでは、"*アプリの状態*" のみが維持されます。 コンポーネント インスタンスやそのレンダー ツリーなど、UI は維持されません。 コンポーネントとレンダー ツリーは一般的にシリアル化されません。 アプリで、ツリー ビュー コントロールの展開されたノードなど、UI の状態を維持するには、カスタム コードを使用して、UI 状態の動作をシリアル化できるアプリ状態としてモデル化する必要があります。
 
 ## <a name="where-to-persist-state"></a>状態を維持する場所
 
 一般に、状態を維持するために、次のような場所があります。
 
-* [サーバー側ストレージ](#server-side-storage)
-* [URL](#url)
-* [ブラウザー ストレージ](#browser-storage)
-* [メモリ内状態コンテナー サービス](#in-memory-state-container-service)
+* [サーバー側ストレージ](#server-side-storage-server)
+* [URL](#url-server)
+* [ブラウザー ストレージ](#browser-storage-server)
+* [メモリ内状態コンテナー サービス](#in-memory-state-container-service-server)
 
-### <a name="server-side-storage"></a>サーバー側ストレージ
+<h2 id="server-side-storage-server">サーバー側ストレージ</h2>
 
 複数のユーザーとデバイスにまたがって永続的にデータを保持する場合は、サーバー側ストレージをアプリで使用できます。 次のオプションがあります。
 
@@ -191,7 +191,7 @@ Azure のデータ ストレージ オプションの詳細については、以
 * [Azure のデータベース](https://azure.microsoft.com/product-categories/databases/)
 * [Azure Storage のドキュメント](/azure/storage/)
 
-### <a name="url"></a>URL
+<h2 id="url-server">URL</h2>
 
 ナビゲーションの状態を表わす一時的なデータについては、URL の一部としてデータをモデル化します。 たとえば、次のようなユーザー状態が URL でモデル化されます。
 
@@ -205,7 +205,7 @@ Azure のデータ ストレージ オプションの詳細については、以
 
 [`@page`](xref:mvc/views/razor#page) ディレクティブで URL パターンを定義する方法については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
-### <a name="browser-storage"></a>ブラウザー ストレージ
+<h2 id="browser-storage-server">ブラウザー ストレージ</h2>
 
 ユーザーが頻繁に作成する一時的なデータの場合、一般的に使用されるストレージの場所は、ブラウザーの [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) コレクションと [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) コレクションです。
 
@@ -226,7 +226,7 @@ Azure のデータ ストレージ オプションの詳細については、以
 * Blazor Server アプリの場合、数キロバイトのデータをストレージに保持するのが妥当です。 数キロバイトを超えると、パフォーマンスに影響が出ることを考慮する必要があります。ネットワーク中でデータが読み込まれ、保存されるためです。
 * ユーザーはデータを見たり、改ざんしたりするかもしれません。 [ASP.NET Core のデータ保護](xref:security/data-protection/introduction)で、このリスクを軽減できます。 たとえば、[ASP.NET Core で保護されたブラウザー ストレージ](#aspnet-core-protected-browser-storage)では、ASP.NET Core のデータ保護が使用されます。
 
-サードパーティ製 NuGet パッケージからは、`localStorage` と `sessionStorage` を使用するための API が与えられます。 [ASP.NET Core のデータ保護](xref:security/data-protection/introduction)を透過的に使用するパッケージを選択してみることもお勧めします。 データ保護を使用すると、保存データが暗号化され、保存データが改ざんされる潜在的リスクが減ります。 JSON でシリアル化されたデータがプレーンテキストで保存されている場合、ユーザーはブラウザー開発者ツールでデータを表示できます。また、保存データを変更できます。 データが性質上、取るに足りないものであれば、データ セキュリティを問題にする必要はないかもしれません。 たとえば、UI 要素に保存されている色を読み取られたり、変更されたりしたところで、それはユーザーや組織にとって大きなセキュリティ リスクではありません。 " *取り扱いに慎重を要するデータ* " を見たり、改ざんしたりすることをユーザーに禁止します。
+サードパーティ製 NuGet パッケージからは、`localStorage` と `sessionStorage` を使用するための API が与えられます。 [ASP.NET Core のデータ保護](xref:security/data-protection/introduction)を透過的に使用するパッケージを選択してみることもお勧めします。 データ保護を使用すると、保存データが暗号化され、保存データが改ざんされる潜在的リスクが減ります。 JSON でシリアル化されたデータがプレーンテキストで保存されている場合、ユーザーはブラウザー開発者ツールでデータを表示できます。また、保存データを変更できます。 データが性質上、取るに足りないものであれば、データ セキュリティを問題にする必要はないかもしれません。 たとえば、UI 要素に保存されている色を読み取られたり、変更されたりしたところで、それはユーザーや組織にとって大きなセキュリティ リスクではありません。 "*取り扱いに慎重を要するデータ*" を見たり、改ざんしたりすることをユーザーに禁止します。
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -371,7 +371,7 @@ else
 
 ### <a name="factor-out-the-state-preservation-to-a-common-location"></a>状態保存を取り出し、共通の場所に入れる
 
-さまざまなコンポーネントがブラウザーベースのストレージに依存しているとき、状態プロバイダー コードを何回も再実装すると、コードが重複します。 コードの重複を回避する選択肢の 1 つは、状態プロバイダー ロジックをカプセル化する " *状態プロバイダーの親コンポーネント* " を作成することです。 状態保存メカニズムに関係なく、子コンポーネントは永続保存データとやりとりできます。
+さまざまなコンポーネントがブラウザーベースのストレージに依存しているとき、状態プロバイダー コードを何回も再実装すると、コードが重複します。 コードの重複を回避する選択肢の 1 つは、状態プロバイダー ロジックをカプセル化する "*状態プロバイダーの親コンポーネント*" を作成することです。 状態保存メカニズムに関係なく、子コンポーネントは永続保存データとやりとりできます。
 
 `CounterStateProvider` コンポーネントの次の例では、カウンター データは `sessionStorage` に保持されます。
 
@@ -448,7 +448,7 @@ else
 
 前に説明したようにプリレンダリングを扱うには、カウンター データを利用するすべてのコンポーネントが自動的にプリレンダリングを使用するよう、`CounterStateProvider` を変更できます。 詳細については、「[プリレンダリングを処理する](#handle-prerendering)」セクションを参照してください。
 
-一般に、次の場合、" *状態プロバイダーの親コンポーネント* " パターンが推奨されます。
+一般に、次の場合、"*状態プロバイダーの親コンポーネント*" パターンが推奨されます。
 
 * 多くのコンポーネントで状態を使用する。
 * 最上位の状態オブジェクトを 1 つだけ保持する場合。
@@ -615,7 +615,7 @@ else
 
 ### <a name="factor-out-the-state-preservation-to-a-common-location"></a>状態保存を取り出し、共通の場所に入れる
 
-さまざまなコンポーネントがブラウザーベースのストレージに依存しているとき、状態プロバイダー コードを何回も再実装すると、コードが重複します。 コードの重複を回避する選択肢の 1 つは、状態プロバイダー ロジックをカプセル化する " *状態プロバイダーの親コンポーネント* " を作成することです。 状態保存メカニズムに関係なく、子コンポーネントは永続保存データとやりとりできます。
+さまざまなコンポーネントがブラウザーベースのストレージに依存しているとき、状態プロバイダー コードを何回も再実装すると、コードが重複します。 コードの重複を回避する選択肢の 1 つは、状態プロバイダー ロジックをカプセル化する "*状態プロバイダーの親コンポーネント*" を作成することです。 状態保存メカニズムに関係なく、子コンポーネントは永続保存データとやりとりできます。
 
 `CounterStateProvider` コンポーネントの次の例では、カウンター データは `sessionStorage` に保持されます。
 
@@ -691,7 +691,7 @@ else
 
 前に説明したようにプリレンダリングを扱うには、カウンター データを利用するすべてのコンポーネントが自動的にプリレンダリングを使用するよう、`CounterStateProvider` を変更できます。 詳細については、「[プリレンダリングを処理する](#handle-prerendering)」セクションを参照してください。
 
-一般的に、次の場合、" *状態プロバイダーの親コンポーネント* " パターンが推奨されます。
+一般的に、次の場合、"*状態プロバイダーの親コンポーネント*" パターンが推奨されます。
 
 * 多くのコンポーネントで状態を使用する。
 * 最上位の状態オブジェクトを 1 つだけ保持する場合。
@@ -700,7 +700,7 @@ else
 
 ::: moniker-end
 
-## <a name="in-memory-state-container-service"></a>メモリ内状態コンテナー サービス
+<h2 id="in-memory-state-container-service-server">メモリ内状態コンテナー サービス</h2>
 
 [!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 

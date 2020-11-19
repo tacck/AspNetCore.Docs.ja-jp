@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: e87e74533fe6900d8e0a73708ad24b765a968493
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0bfdb1932d829ec00c9de1bd38b7920cb1f40c51
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056804"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570173"
 ---
 # <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>ASP.NET Core の Razor クラス ライブラリ プロジェクトを使用した再利用可能 UI の作成
 
@@ -73,7 +73,7 @@ RCL は次によって参照できます。
 
 ## <a name="override-views-partial-views-and-pages"></a>ビュー、部分ビュー、ページのオーバーライド
 
-Web アプリと RCL の両方にビュー、部分ビュー、Razor ページがあるとき、Web アプリの Razor マークアップ ( *.cshtml* ファイル) が優先されます。 たとえば、 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* を WebApp1 に追加すると、WebApp1 の Page1 は RCL の Page1 よりも優先されます。
+Web アプリと RCL の両方にビュー、部分ビュー、Razor ページがあるとき、Web アプリの Razor マークアップ ( *.cshtml* ファイル) が優先されます。 たとえば、*WebApp1/Areas/MyFeature/Pages/Page1.cshtml* を WebApp1 に追加すると、WebApp1 の Page1 は RCL の Page1 よりも優先されます。
 
 サンプル ダウンロードの *WebApp1/Areas/MyFeature2* の名前を *WebApp1/Areas/MyFeature* に変更し、優先設定をテストします。
 
@@ -102,7 +102,7 @@ RCL では、RCL または RCL の使用アプリで参照できる静的なコ�
 
 コンパニオン アセットを RCL の一部として含めるには、クラス ライブラリに *wwwroot* フォルダーを作成し、必要なファイルをすべてそのフォルダーに含めます。
 
-RCL をパックすると、 *wwwroot* フォルダー内のすべてのコンパニオン アセットがパッケージに自動的に組み込まれます。
+RCL をパックすると、*wwwroot* フォルダー内のすべてのコンパニオン アセットがパッケージに自動的に組み込まれます。
 
 Nuget.exe バージョン `nuget pack` ではなく、`dotnet pack` コマンドを使用します。
 
@@ -110,7 +110,7 @@ Nuget.exe バージョン `nuget pack` ではなく、`dotnet pack` コマンド
 
 静的アセットを除外するには、目的の除外パスをプロジェクトファイル内の `$(DefaultItemExcludes)` プロパティ グループに追加します。 各エントリは、セミコロン (`;`) で区切ります。
 
-次の例では、 *wwwroot* フォルダー内の *lib.css* スタイルシートは、静的アセットとは見なされず、公開された RCL には組み込まれていません。
+次の例では、*wwwroot* フォルダー内の *lib.css* スタイルシートは、静的アセットとは見なされず、公開された RCL には組み込まれていません。
 
 ```xml
 <PropertyGroup>
@@ -122,7 +122,7 @@ Nuget.exe バージョン `nuget pack` ではなく、`dotnet pack` コマンド
 
 TypeScript ファイルを RCL に含めるには、次の操作を行います。
 
-1. TypeScript ファイル ( *.ts* ) を *wwwroot* フォルダーの外側に配置します。 たとえば、ファイルを *Client* フォルダーに入れます。
+1. TypeScript ファイル ( *.ts*) を *wwwroot* フォルダーの外側に配置します。 たとえば、ファイルを *Client* フォルダーに入れます。
 
 1. *wwwroot* フォルダーの TypeScript ビルド出力を構成します。 プロジェクト ファイルの `PropertyGroup` の内側に `TypescriptOutDir` プロパティを設定します。
 
@@ -156,7 +156,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-使用アプリをビルド出力から実行 (`dotnet run`) すると、開発環境で、静的な Web アセットが既定で有効になります。 ビルド出力から実行するときに他の環境のアセットをサポートするには、 *Program.cs* のホスト ビルダーで `UseStaticWebAssets` を呼び出します。
+使用アプリをビルド出力から実行 (`dotnet run`) すると、開発環境で、静的な Web アセットが既定で有効になります。 ビルド出力から実行するときに他の環境のアセットをサポートするには、*Program.cs* のホスト ビルダーで `UseStaticWebAssets` を呼び出します。
 
 ```csharp
 using Microsoft.AspNetCore.Hosting;
@@ -320,7 +320,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
   ```
 
-  *_ViewImports.cshtml* について詳しくは、「 [共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」を参照してください。
+  *_ViewImports.cshtml* について詳しくは、「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」を参照してください。
 
 * クラス ライブラリをビルドし、コンパイラ エラーがないことを確認します。
 
@@ -342,10 +342,10 @@ Razor ページ Web アプリの作成:
 * **ASP.NET Core 2.1** 以降が選択されていることを確認します。
 * **[Web アプリケーション]** > **[OK]** の順に選択します。
 
-* **ソリューション エクスプローラー** で、 **WebApp1** を右クリックし、 **[スタートアップ プロジェクトに設定]** を選択します。
-* **ソリューション エクスプローラー** で、 **WebApp1** を右クリックし、 **[ビルド依存関係]** > **[プロジェクトの依存関係]** の順に選択します。
+* **ソリューション エクスプローラー** で、**WebApp1** を右クリックし、 **[スタートアップ プロジェクトに設定]** を選択します。
+* **ソリューション エクスプローラー** で、**WebApp1** を右クリックし、 **[ビルド依存関係]** > **[プロジェクトの依存関係]** の順に選択します。
 * **WebApp1** の依存関係として **RazorUIClassLib** を選択します。
-* **ソリューション エクスプローラー** で、 **WebApp1** を右クリックし、 **[追加]** > **[参照]** の順に選択します。
+* **ソリューション エクスプローラー** で、**WebApp1** を右クリックし、 **[追加]** > **[参照]** の順に選択します。
 * **[参照マネージャー]** ダイアログで、 **[RazorUIClassLib]** をオンにして **[OK]** を選択します。
 
 アプリを実行します。
@@ -377,7 +377,7 @@ dotnet run
 
 ## <a name="override-views-partial-views-and-pages"></a>ビュー、部分ビュー、ページのオーバーライド
 
-Web アプリと RCL の両方にビュー、部分ビュー、Razor ページがあるとき、Web アプリの Razor マークアップ ( *.cshtml* ファイル) が優先されます。 たとえば、 *WebApp1/Areas/MyFeature/Pages/Page1.cshtml* を WebApp1 に追加すると、WebApp1 の Page1 は RCL の Page1 よりも優先されます。
+Web アプリと RCL の両方にビュー、部分ビュー、Razor ページがあるとき、Web アプリの Razor マークアップ ( *.cshtml* ファイル) が優先されます。 たとえば、*WebApp1/Areas/MyFeature/Pages/Page1.cshtml* を WebApp1 に追加すると、WebApp1 の Page1 は RCL の Page1 よりも優先されます。
 
 サンプル ダウンロードの *WebApp1/Areas/MyFeature2* の名前を *WebApp1/Areas/MyFeature* に変更し、優先設定をテストします。
 
@@ -404,4 +404,15 @@ RCL コンテンツを Web アプリの *Pages* フォルダーの一部であ�
 
 ## <a name="additional-resources"></a>その他の技術情報
 
+::: moniker range=">= aspnetcore-5.0"
+
 * <xref:blazor/components/class-libraries>
+* <xref:blazor/components/css-isolation#razor-class-library-rcl-support>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* <xref:blazor/components/class-libraries>
+
+::: moniker-end
