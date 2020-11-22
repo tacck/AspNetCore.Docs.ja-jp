@@ -3,212 +3,220 @@ title: パート 4、ASP.NET Core MVC アプリにモデルを追加する
 author: rick-anderson
 description: ASP.NET Core MVC のチュートリアル シリーズのパート 4。
 ms.author: riande
-ms.date: 01/13/2020
+ms.date: 11/16/2020
 no-loc:
-- 'appsettings.json'
-- 'ASP.NET Core Identity'
-- 'cookie'
-- 'Cookie'
-- 'Blazor'
-- 'Blazor Server'
-- 'Blazor WebAssembly'
-- 'Identity'
-- "Let's Encrypt"
-- 'Razor'
-- 'SignalR'
+- appsettings.json
+- ASP.NET Core Identity
+- cookie
+- Cookie
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: fa1d79bed56f17afe69697a7e24ec200e6a0ab22
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422756"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688450"
 ---
-# <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a><span data-ttu-id="20515-103">パート 4、ASP.NET Core MVC アプリにモデルを追加する</span><span class="sxs-lookup"><span data-stu-id="20515-103">Part 4, add a model to an ASP.NET Core MVC app</span></span>
+# <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a><span data-ttu-id="85c2d-103">パート 4、ASP.NET Core MVC アプリにモデルを追加する</span><span class="sxs-lookup"><span data-stu-id="85c2d-103">Part 4, add a model to an ASP.NET Core MVC app</span></span>
 
-<span data-ttu-id="20515-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="20515-104">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Tom Dykstra](https://github.com/tdykstra)</span></span>
+<span data-ttu-id="85c2d-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="85c2d-104">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Tom Dykstra](https://github.com/tdykstra)</span></span>
 
-<span data-ttu-id="20515-105">このセクションでは、データベースのムービーを管理するクラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-105">In this section, you add classes for managing movies in a database.</span></span> <span data-ttu-id="20515-106">これらのクラスは、 **M** VC アプリの " **モ** デル" 部分です。</span><span class="sxs-lookup"><span data-stu-id="20515-106">These classes will be the " **M** odel" part of the **M** VC app.</span></span>
+<span data-ttu-id="85c2d-105">このセクションでは、データベースのムービーを管理するクラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-105">In this section, you add classes for managing movies in a database.</span></span> <span data-ttu-id="85c2d-106">これらのクラスは、**M** VC アプリの "**モ** デル" 部分です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-106">These classes will be the "**M** odel" part of the **M** VC app.</span></span>
 
-<span data-ttu-id="20515-107">[Entity Framework Core](/ef/core) (EF Core) でこれらのクラスを使用して、データベースを操作します。</span><span class="sxs-lookup"><span data-stu-id="20515-107">You use these classes with [Entity Framework Core](/ef/core) (EF Core) to work with a database.</span></span> <span data-ttu-id="20515-108">EF Core は、記述する必要があるデータ アクセス コードを簡略化するオブジェクト リレーショナル マッピング (ORM) フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="20515-108">EF Core is an object-relational mapping (ORM) framework that simplifies the data access code that you have to write.</span></span>
+<span data-ttu-id="85c2d-107">[Entity Framework Core](/ef/core) (EF Core) でこれらのクラスを使用して、データベースを操作します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-107">You use these classes with [Entity Framework Core](/ef/core) (EF Core) to work with a database.</span></span> <span data-ttu-id="85c2d-108">EF Core は、記述する必要があるデータ アクセス コードを簡略化するオブジェクト リレーショナル マッピング (ORM) フレームワークです。</span><span class="sxs-lookup"><span data-stu-id="85c2d-108">EF Core is an object-relational mapping (ORM) framework that simplifies the data access code that you have to write.</span></span>
 
-<span data-ttu-id="20515-109">作成するモデル クラスは、EF Core に対する依存関係がないために、POCO クラス ( **P** lain- **O** ld **C** LR **O** bjects から) と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="20515-109">The model classes you create are known as POCO classes (from **P** lain **O** ld **C** LR **O** bjects) because they don't have any dependency on EF Core.</span></span> <span data-ttu-id="20515-110">これらは単に、データベースに格納されるデータのプロパティを定義します。</span><span class="sxs-lookup"><span data-stu-id="20515-110">They just define the properties of the data that will be stored in the database.</span></span>
+<span data-ttu-id="85c2d-109">作成するモデル クラスは、EF Core に対する依存関係がないために、POCO クラス (**P** lain-**O** ld **C** LR **O** bjects から) と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-109">The model classes you create are known as POCO classes (from **P** lain **O** ld **C** LR **O** bjects) because they don't have any dependency on EF Core.</span></span> <span data-ttu-id="85c2d-110">これらは単に、データベースに格納されるデータのプロパティを定義します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-110">They just define the properties of the data that will be stored in the database.</span></span>
 
-<span data-ttu-id="20515-111">このチュートリアルでは、まずモデル クラスを記述し、EF コアによってデータベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-111">In this tutorial, you write the model classes first, and EF Core creates the database.</span></span>
+<span data-ttu-id="85c2d-111">このチュートリアルでは、まずモデル クラスを記述し、EF コアによってデータベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-111">In this tutorial, you write the model classes first, and EF Core creates the database.</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="add-a-data-model-class"></a><span data-ttu-id="20515-112">データ モデル クラスの追加</span><span class="sxs-lookup"><span data-stu-id="20515-112">Add a data model class</span></span>
+## <a name="add-a-data-model-class"></a><span data-ttu-id="85c2d-112">データ モデル クラスの追加</span><span class="sxs-lookup"><span data-stu-id="85c2d-112">Add a data model class</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-113">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-113">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-113">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-113">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-114">*Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-114">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="20515-115">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="20515-115">Name the file *Movie.cs*.</span></span>
+<span data-ttu-id="85c2d-114">*Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-114">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="85c2d-115">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-115">Name the file *Movie.cs*.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="20515-116">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-116">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-116">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-116">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="20515-117">*Movie.cs* という名前のファイルを *Models* フォルダーに追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-117">Add a file named *Movie.cs* to the *Models* folder.</span></span>
+<span data-ttu-id="85c2d-117">*Movie.cs* という名前のファイルを *Models* フォルダーに追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-117">Add a file named *Movie.cs* to the *Models* folder.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-118">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-118">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-118">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-118">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="20515-119">*Models* フォルダーを右クリックし、 **[追加]**  >  **[新しいクラス]**  >  **[空のクラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-119">Right-click the *Models* folder > **Add** > **New Class** > **Empty Class**.</span></span> <span data-ttu-id="20515-120">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="20515-120">Name the file *Movie.cs*.</span></span>
+<span data-ttu-id="85c2d-119">*Models* フォルダーを右クリックし、 **[追加]**  >  **[新しいクラス]**  >  **[空のクラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-119">Right-click the *Models* folder > **Add** > **New Class** > **Empty Class**.</span></span> <span data-ttu-id="85c2d-120">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-120">Name the file *Movie.cs*.</span></span>
 
 ---
 
-<span data-ttu-id="20515-121">次のコードで *Movie.cs* ファイルを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-121">Update the *Movie.cs* file with the following code:</span></span>
+<span data-ttu-id="85c2d-121">次のコードで *Movie.cs* ファイルを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-121">Update the *Movie.cs* file with the following code:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/Movie.cs)]
 
-<span data-ttu-id="20515-122">`Movie` クラスには、データベースで主キー用に必要となる `Id` フィールドが含まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-122">The `Movie` class contains an `Id` field, which is required by the database for the primary key.</span></span>
+<span data-ttu-id="85c2d-122">`Movie` クラスには、データベースで主キー用に必要となる `Id` フィールドが含まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-122">The `Movie` class contains an `Id` field, which is required by the database for the primary key.</span></span>
 
-<span data-ttu-id="20515-123">`ReleaseDate` の <xref:System.ComponentModel.DataAnnotations.DataType> 属性により、データの型 (`Date`) が指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-123">The <xref:System.ComponentModel.DataAnnotations.DataType> attribute on `ReleaseDate` specifies the type of the data (`Date`).</span></span> <span data-ttu-id="20515-124">この属性を使用する場合:</span><span class="sxs-lookup"><span data-stu-id="20515-124">With this attribute:</span></span>
+<span data-ttu-id="85c2d-123">`ReleaseDate` の <xref:System.ComponentModel.DataAnnotations.DataType> 属性により、データの型 (`Date`) が指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-123">The <xref:System.ComponentModel.DataAnnotations.DataType> attribute on `ReleaseDate` specifies the type of the data (`Date`).</span></span> <span data-ttu-id="85c2d-124">この属性を使用する場合:</span><span class="sxs-lookup"><span data-stu-id="85c2d-124">With this attribute:</span></span>
 
-* <span data-ttu-id="20515-125">ユーザーは日付フィールドに時刻の情報を入力する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="20515-125">The user is not required to enter time information in the date field.</span></span>
-* <span data-ttu-id="20515-126">日付のみが表示され、時刻の情報は表示されません。</span><span class="sxs-lookup"><span data-stu-id="20515-126">Only the date is displayed, not time information.</span></span>
+* <span data-ttu-id="85c2d-125">ユーザーは日付フィールドに時刻の情報を入力する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-125">The user is not required to enter time information in the date field.</span></span>
+* <span data-ttu-id="85c2d-126">日付のみが表示され、時刻の情報は表示されません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-126">Only the date is displayed, not time information.</span></span>
 
-<span data-ttu-id="20515-127">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) は、後のチュートリアルで説明されます。</span><span class="sxs-lookup"><span data-stu-id="20515-127">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) are covered in a later tutorial.</span></span>
+<span data-ttu-id="85c2d-127">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) は、後のチュートリアルで説明されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-127">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) are covered in a later tutorial.</span></span>
 
-## <a name="add-nuget-packages"></a><span data-ttu-id="20515-128">NuGet パッケージを追加する</span><span class="sxs-lookup"><span data-stu-id="20515-128">Add NuGet packages</span></span>
+## <a name="add-nuget-packages"></a><span data-ttu-id="85c2d-128">NuGet パッケージを追加する</span><span class="sxs-lookup"><span data-stu-id="85c2d-128">Add NuGet packages</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-129">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-129">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-129">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-130">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-130">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+<span data-ttu-id="85c2d-130">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-130">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
 ![PMC メニュー](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
-<span data-ttu-id="20515-132">PMC で次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-132">In the PMC, run the following command:</span></span>
+<span data-ttu-id="85c2d-132">PMC で次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-132">In the PMC, run the following command:</span></span>
 
 ```powershell
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-<span data-ttu-id="20515-133">上記のコマンドによって EF Core SQL Server プロバイダーが追加されます。</span><span class="sxs-lookup"><span data-stu-id="20515-133">The preceding command adds the EF Core SQL Server provider.</span></span> <span data-ttu-id="20515-134">プロバイダー パッケージによって、依存関係として EF Core パッケージがインストールされます。</span><span class="sxs-lookup"><span data-stu-id="20515-134">The provider package installs the EF Core package as a dependency.</span></span> <span data-ttu-id="20515-135">追加のパッケージは、このチュートリアルの後半で、スキャフォールディングの手順で自動的にインストールされます。</span><span class="sxs-lookup"><span data-stu-id="20515-135">Additional packages are installed automatically in the scaffolding step later in the tutorial.</span></span>
+<span data-ttu-id="85c2d-133">上記のコマンドによって EF Core SQL Server プロバイダーが追加されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-133">The preceding command adds the EF Core SQL Server provider.</span></span> <span data-ttu-id="85c2d-134">プロバイダー パッケージによって、依存関係として EF Core パッケージがインストールされます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-134">The provider package installs the EF Core package as a dependency.</span></span> <span data-ttu-id="85c2d-135">追加のパッケージは、このチュートリアルの後半で、スキャフォールディングの手順で自動的にインストールされます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-135">Additional packages are installed automatically in the scaffolding step later in the tutorial.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="20515-136">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-136">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-136">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-136">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI-5.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-137">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-137">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-137">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-137">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="20515-138">**[プロジェクト]** メニューから、 **[NuGet パッケージの管理]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-138">From the **Project** menu, select **Manage NuGet Packages**.</span></span>
+<span data-ttu-id="85c2d-138">**[プロジェクト]** メニューから、 **[NuGet パッケージの管理]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-138">From the **Project** menu, select **Manage NuGet Packages**.</span></span>
 
-<span data-ttu-id="20515-139">右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、 **Return** キーを押して検索します。</span><span class="sxs-lookup"><span data-stu-id="20515-139">In the **Search** field in the upper right, enter `Microsoft.EntityFrameworkCore.SQLite` and press the **Return** key to search.</span></span> <span data-ttu-id="20515-140">一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-140">Select the matching NuGet package and press the **Add Package** button.</span></span>
+<span data-ttu-id="85c2d-139">右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、**Return** キーを押して検索します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-139">In the **Search** field in the upper right, enter `Microsoft.EntityFrameworkCore.SQLite` and press the **Return** key to search.</span></span> <span data-ttu-id="85c2d-140">一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-140">Select the matching NuGet package and press the **Add Package** button.</span></span>
 
 ![Entity Framework Core NuGet パッケージを追加する](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
-<span data-ttu-id="20515-142">**[プロジェクトの選択]** ダイアログが、`MvcMovie` プロジェクトが選択された状態で表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-142">The **Select Projects** dialog will be displayed, with the `MvcMovie` project selected.</span></span> <span data-ttu-id="20515-143">**[OK]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-143">Press the **Ok** button.</span></span>
+<span data-ttu-id="85c2d-142">**[プロジェクトの選択]** ダイアログが、`MvcMovie` プロジェクトが選択された状態で表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-142">The **Select Projects** dialog will be displayed, with the `MvcMovie` project selected.</span></span> <span data-ttu-id="85c2d-143">**[OK]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-143">Press the **Ok** button.</span></span>
 
-<span data-ttu-id="20515-144">**[ライセンスの同意]** ダイアログが表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-144">A **License Acceptance** dialog will be displayed.</span></span> <span data-ttu-id="20515-145">必要に応じてライセンスを確認し、 **[同意する]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-145">Review the licenses as desired, then click the **Accept** button.</span></span>
+<span data-ttu-id="85c2d-144">**[ライセンスの同意]** ダイアログが表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-144">A **License Acceptance** dialog will be displayed.</span></span> <span data-ttu-id="85c2d-145">必要に応じてライセンスを確認し、 **[同意する]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-145">Review the licenses as desired, then click the **Accept** button.</span></span>
 
-<span data-ttu-id="20515-146">上記の手順を繰り返して、次の NuGet パッケージをインストールします。</span><span class="sxs-lookup"><span data-stu-id="20515-146">Repeat the above steps to install the following NuGet packages:</span></span>
+<span data-ttu-id="85c2d-146">上記の手順を繰り返して、次の NuGet パッケージをインストールします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-146">Repeat the above steps to install the following NuGet packages:</span></span>
 
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Microsoft.EntityFrameworkCore.Design`
 
+<span data-ttu-id="85c2d-147">次の .NET CLI コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-147">Run the following .NET CLI command:</span></span>
+
+```dotnetcli
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+
+<span data-ttu-id="85c2d-148">上記のコマンドを実行すると、[aspnet-codegenerator スキャフォールディング ツール](xref:fundamentals/tools/dotnet-aspnet-codegenerator)が追加されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-148">The preceding command adds the [aspnet-codegenerator scaffolding tool](xref:fundamentals/tools/dotnet-aspnet-codegenerator).</span></span>
+
 ---
 
 <a name="dc"></a>
 
-## <a name="create-a-database-context-class"></a><span data-ttu-id="20515-147">データベース コンテキスト クラスを作成する</span><span class="sxs-lookup"><span data-stu-id="20515-147">Create a database context class</span></span>
+## <a name="create-a-database-context-class"></a><span data-ttu-id="85c2d-149">データベース コンテキスト クラスを作成する</span><span class="sxs-lookup"><span data-stu-id="85c2d-149">Create a database context class</span></span>
 
-<span data-ttu-id="20515-148">データベース コンテキスト クラスは、`Movie` モデルの EF Core 機能 (作成、読み取り、更新、削除) を調整するために必要です。</span><span class="sxs-lookup"><span data-stu-id="20515-148">A database context class is needed to coordinate EF Core functionality (Create, Read, Update, Delete) for the `Movie` model.</span></span> <span data-ttu-id="20515-149">データベース コンテキストは [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生し、データ モデルに含めるエンティティを指定します。</span><span class="sxs-lookup"><span data-stu-id="20515-149">The database context is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) and specifies the entities to include in the data model.</span></span>
+<span data-ttu-id="85c2d-150">データベース コンテキスト クラスは、`Movie` モデルの EF Core 機能 (作成、読み取り、更新、削除) を調整するために必要です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-150">A database context class is needed to coordinate EF Core functionality (Create, Read, Update, Delete) for the `Movie` model.</span></span> <span data-ttu-id="85c2d-151">データベース コンテキストは [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生し、データ モデルに含めるエンティティを指定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-151">The database context is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) and specifies the entities to include in the data model.</span></span>
 
-<span data-ttu-id="20515-150">*Data* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="20515-150">Create a *Data* folder.</span></span>
+<span data-ttu-id="85c2d-152">*Data* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-152">Create a *Data* folder.</span></span>
 
-<span data-ttu-id="20515-151">次のコードで *Data/MvcMovieContext.cs* ファイルを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-151">Add a *Data/MvcMovieContext.cs* file with the following code:</span></span> 
+<span data-ttu-id="85c2d-153">次のコードで *Data/MvcMovieContext.cs* ファイルを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-153">Add a *Data/MvcMovieContext.cs* file with the following code:</span></span> 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/zDocOnly/MvcMovieContext.cs?name=snippet)]
 
-<span data-ttu-id="20515-152">上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-152">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="20515-153">Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。</span><span class="sxs-lookup"><span data-stu-id="20515-153">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="20515-154">エンティティはテーブル内の行に対応します。</span><span class="sxs-lookup"><span data-stu-id="20515-154">An entity corresponds to a row in the table.</span></span>
+<span data-ttu-id="85c2d-154">上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-154">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="85c2d-155">Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-155">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="85c2d-156">エンティティはテーブル内の行に対応します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-156">An entity corresponds to a row in the table.</span></span>
 
 <a name="reg"></a>
 
-## <a name="register-the-database-context"></a><span data-ttu-id="20515-155">データベース コンテキストの登録</span><span class="sxs-lookup"><span data-stu-id="20515-155">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="85c2d-157">データベース コンテキストの登録</span><span class="sxs-lookup"><span data-stu-id="85c2d-157">Register the database context</span></span>
 
-<span data-ttu-id="20515-156">ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-156">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="20515-157">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="20515-157">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="20515-158">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-158">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="20515-159">DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="20515-159">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="20515-160">このセクションでは、DI コンテナーにデータベース コンテキストを登録します。</span><span class="sxs-lookup"><span data-stu-id="20515-160">In this section, you register the database context with the DI container.</span></span>
+<span data-ttu-id="85c2d-158">ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-158">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="85c2d-159">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-159">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="85c2d-160">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-160">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="85c2d-161">DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-161">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="85c2d-162">このセクションでは、DI コンテナーにデータベース コンテキストを登録します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-162">In this section, you register the database context with the DI container.</span></span>
 
-<span data-ttu-id="20515-161">*Startup.cs* の先頭に次の `using` ステートメントを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-161">Add the following `using` statements at the top of *Startup.cs* :</span></span>
+<span data-ttu-id="85c2d-163">*Startup.cs* の先頭に次の `using` ステートメントを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-163">Add the following `using` statements at the top of *Startup.cs*:</span></span>
 
 ```csharp
 using MvcMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 
-<span data-ttu-id="20515-162">`Startup.ConfigureServices` で次の強調表示されたコードを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-162">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="85c2d-164">`Startup.ConfigureServices` で次の強調表示されたコードを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-164">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-163">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-163">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-165">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-165">Visual Studio</span></span>](#tab/visual-studio)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-164">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-164">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-166">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-166">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 ---
 
-<span data-ttu-id="20515-165">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-165">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="20515-166">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="20515-166">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
+<span data-ttu-id="85c2d-167">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-167">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="85c2d-168">ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-168">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 <a name="cs"></a>
 
-## <a name="add-a-database-connection-string"></a><span data-ttu-id="20515-167">データベース接続文字列の追加</span><span class="sxs-lookup"><span data-stu-id="20515-167">Add a database connection string</span></span>
+## <a name="add-a-database-connection-string"></a><span data-ttu-id="85c2d-169">データベース接続文字列の追加</span><span class="sxs-lookup"><span data-stu-id="85c2d-169">Add a database connection string</span></span>
 
-<span data-ttu-id="20515-168">接続文字列を *appsettings.json* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-168">Add a connection string to the *appsettings.json* file:</span></span>
+<span data-ttu-id="85c2d-170">接続文字列を *appsettings.json* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-170">Add a connection string to the *appsettings.json* file:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-169">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-169">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-171">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-171">Visual Studio</span></span>](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-170">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-170">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-172">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-172">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-11)]
 
 ---
 
-<span data-ttu-id="20515-171">コンパイラ エラーのチェックとしてプロジェクトをビルドします。</span><span class="sxs-lookup"><span data-stu-id="20515-171">Build the project as a check for compiler errors.</span></span>
+<span data-ttu-id="85c2d-173">コンパイラ エラーのチェックとしてプロジェクトをビルドします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-173">Build the project as a check for compiler errors.</span></span>
 
-## <a name="scaffold-movie-pages"></a><span data-ttu-id="20515-172">ムービー ページのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="20515-172">Scaffold movie pages</span></span>
+## <a name="scaffold-movie-pages"></a><span data-ttu-id="85c2d-174">ムービー ページのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="85c2d-174">Scaffold movie pages</span></span>
 
-<span data-ttu-id="20515-173">スキャフォールディング ツールを使用し、ムービー モデルの作成、読み取り、更新、削除の (CRUD) ページを生成します。</span><span class="sxs-lookup"><span data-stu-id="20515-173">Use the scaffolding tool to produce Create, Read, Update, and Delete (CRUD) pages for the movie model.</span></span>
+<span data-ttu-id="85c2d-175">スキャフォールディング ツールを使用し、ムービー モデルの作成、読み取り、更新、削除の (CRUD) ページを生成します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-175">Use the scaffolding tool to produce Create, Read, Update, and Delete (CRUD) pages for the movie model.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-174">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-174">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-176">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-176">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-175">*ソリューション エクスプローラー* で、 **Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-175">In **Solution Explorer** , right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
+<span data-ttu-id="85c2d-177">*ソリューション エクスプローラー* で、**Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-177">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
 
 ![前述の手順を参照](adding-model/_static/add_controller21.png)
 
-<span data-ttu-id="20515-177">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用したビューがある MVC コントローラー]、[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-177">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
+<span data-ttu-id="85c2d-179">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用したビューがある MVC コントローラー]、[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-179">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
 
 ![[スキャフォールディングを追加] ダイアログ](adding-model/_static/add_scaffold21.png)
 
-<span data-ttu-id="20515-179">**[コントローラーの追加]** ダイアログ ボックスを完了します。</span><span class="sxs-lookup"><span data-stu-id="20515-179">Complete the **Add Controller** dialog:</span></span>
+<span data-ttu-id="85c2d-181">**[コントローラーの追加]** ダイアログ ボックスを完了します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-181">Complete the **Add Controller** dialog:</span></span>
 
-* <span data-ttu-id="20515-180">**モデル クラス:** *Movie (MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="20515-180">**Model class:** *Movie (MvcMovie.Models)*</span></span>
-* <span data-ttu-id="20515-181">**データ コンテキスト クラス:** *MvcMovieContext (MvcMovie.Data)*</span><span class="sxs-lookup"><span data-stu-id="20515-181">**Data context class:** *MvcMovieContext (MvcMovie.Data)*</span></span>
+* <span data-ttu-id="85c2d-182">**モデル クラス:** *Movie (MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="85c2d-182">**Model class:** *Movie (MvcMovie.Models)*</span></span>
+* <span data-ttu-id="85c2d-183">**データ コンテキスト クラス:** *MvcMovieContext (MvcMovie.Data)*</span><span class="sxs-lookup"><span data-stu-id="85c2d-183">**Data context class:** *MvcMovieContext (MvcMovie.Data)*</span></span>
 
 ![[データの追加] コンテキスト](adding-model/_static/dc5.png)
 
-* <span data-ttu-id="20515-183">**ビュー:** 各オプションの既定値をオンにします。</span><span class="sxs-lookup"><span data-stu-id="20515-183">**Views:** Keep the default of each option checked</span></span>
-* <span data-ttu-id="20515-184">**コントローラー名:** 既定の *MoviesController* のままにします。</span><span class="sxs-lookup"><span data-stu-id="20515-184">**Controller name:** Keep the default *MoviesController*</span></span>
-* <span data-ttu-id="20515-185">**[追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-185">Select **Add**</span></span>
+* <span data-ttu-id="85c2d-185">**ビュー:** 各オプションの既定値をオンにします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-185">**Views:** Keep the default of each option checked</span></span>
+* <span data-ttu-id="85c2d-186">**コントローラー名:** 既定の *MoviesController* のままにします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-186">**Controller name:** Keep the default *MoviesController*</span></span>
+* <span data-ttu-id="85c2d-187">**[追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-187">Select **Add**</span></span>
 
-<span data-ttu-id="20515-186">Visual Studio では、次が作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-186">Visual Studio creates:</span></span>
+<span data-ttu-id="85c2d-188">Visual Studio では、次が作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-188">Visual Studio creates:</span></span>
 
-* <span data-ttu-id="20515-187">ムービー コントローラー ( *Controllers/MoviesController.cs* )</span><span class="sxs-lookup"><span data-stu-id="20515-187">A movies controller ( *Controllers/MoviesController.cs* )</span></span>
-* <span data-ttu-id="20515-188">作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル ( *Views/Movies/\*.cshtml* )</span><span class="sxs-lookup"><span data-stu-id="20515-188">Razor view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
+* <span data-ttu-id="85c2d-189">ムービー コントローラー (*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-189">A movies controller (*Controllers/MoviesController.cs*)</span></span>
+* <span data-ttu-id="85c2d-190">作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル (*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-190">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
 
-<span data-ttu-id="20515-189">このようなファイルの自動作成は、" *スキャフォールディング* " と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="20515-189">The automatic creation of these files is known as *scaffolding*.</span></span>
+<span data-ttu-id="85c2d-191">このようなファイルの自動作成は、"*スキャフォールディング*" と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-191">The automatic creation of these files is known as *scaffolding*.</span></span>
 
-### <a name="visual-studio-code"></a>[<span data-ttu-id="20515-190">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-190">Visual Studio Code</span></span>](#tab/visual-studio-code) 
+### <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-192">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-192">Visual Studio Code</span></span>](#tab/visual-studio-code) 
 
-* <span data-ttu-id="20515-191">プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="20515-191">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
+* <span data-ttu-id="85c2d-193">プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-193">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
 
-* <span data-ttu-id="20515-192">Linux で、スキャフォールディング ツールのパスをエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="20515-192">On Linux, export the scaffold tool path:</span></span>
+* <span data-ttu-id="85c2d-194">Linux で、スキャフォールディング ツールのパスをエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-194">On Linux, export the scaffold tool path:</span></span>
 
   ```console
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* <span data-ttu-id="20515-193">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-193">Run the following command:</span></span>
+* <span data-ttu-id="85c2d-195">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-195">Run the following command:</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -216,11 +224,11 @@ using Microsoft.EntityFrameworkCore;
 
   [!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
 
-### <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-194">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-194">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-196">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-196">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="20515-195">プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="20515-195">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
+* <span data-ttu-id="85c2d-197">プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-197">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
 
-* <span data-ttu-id="20515-196">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-196">Run the following command:</span></span>
+* <span data-ttu-id="85c2d-198">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-198">Run the following command:</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -232,113 +240,113 @@ using Microsoft.EntityFrameworkCore;
 
 <!-- End of tabs                  -->
 
-<span data-ttu-id="20515-197">データベースが存在しないため、スキャフォールディング ページをまだ使用できません。</span><span class="sxs-lookup"><span data-stu-id="20515-197">You can't use the scaffolded pages yet because the database doesn't exist.</span></span> <span data-ttu-id="20515-198">アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie* ] というエラー メッセージが表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-198">If you run the app and click on the **Movie App** link, you get a *Cannot open database* or *no such table: Movie* error message.</span></span>
+<span data-ttu-id="85c2d-199">データベースが存在しないため、スキャフォールディング ページをまだ使用できません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-199">You can't use the scaffolded pages yet because the database doesn't exist.</span></span> <span data-ttu-id="85c2d-200">アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie*] というエラー メッセージが表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-200">If you run the app and click on the **Movie App** link, you get a *Cannot open database* or *no such table: Movie* error message.</span></span>
 
 <a name="migration"></a>
 
-## <a name="initial-migration"></a><span data-ttu-id="20515-199">最初の移行</span><span class="sxs-lookup"><span data-stu-id="20515-199">Initial migration</span></span>
+## <a name="initial-migration"></a><span data-ttu-id="85c2d-201">最初の移行</span><span class="sxs-lookup"><span data-stu-id="85c2d-201">Initial migration</span></span>
 
-<span data-ttu-id="20515-200">EF Core [移行](xref:data/ef-mvc/migrations)機能を使用し、データベースを作成します。</span><span class="sxs-lookup"><span data-stu-id="20515-200">Use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to create the database.</span></span> <span data-ttu-id="20515-201">移行は、データ モデルに合わせてデータベースを作成したり、更新したりできる一連のツールです。</span><span class="sxs-lookup"><span data-stu-id="20515-201">Migrations is a set of tools that let you create and update a database to match your data model.</span></span>
+<span data-ttu-id="85c2d-202">EF Core [移行](xref:data/ef-mvc/migrations)機能を使用し、データベースを作成します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-202">Use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to create the database.</span></span> <span data-ttu-id="85c2d-203">移行は、データ モデルに合わせてデータベースを作成したり、更新したりできる一連のツールです。</span><span class="sxs-lookup"><span data-stu-id="85c2d-203">Migrations is a set of tools that let you create and update a database to match your data model.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-202">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-202">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-204">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-204">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-203">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-203">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+<span data-ttu-id="85c2d-205">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-205">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
-<span data-ttu-id="20515-204">PMC で、次のコマンドを入力します。</span><span class="sxs-lookup"><span data-stu-id="20515-204">In the PMC, enter the following commands:</span></span>
+<span data-ttu-id="85c2d-206">PMC で、次のコマンドを入力します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-206">In the PMC, enter the following commands:</span></span>
 
 ```powershell
 Add-Migration InitialCreate
 Update-Database
 ```
 
-* <span data-ttu-id="20515-205">`Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-205">`Add-Migration InitialCreate`: Generates a *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="20515-206">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="20515-206">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="20515-207">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="20515-207">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="20515-208">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-208">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="20515-209">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。</span><span class="sxs-lookup"><span data-stu-id="20515-209">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span>
+* <span data-ttu-id="85c2d-207">`Add-Migration InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-207">`Add-Migration InitialCreate`: Generates a *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="85c2d-208">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-208">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="85c2d-209">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-209">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="85c2d-210">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-210">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="85c2d-211">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-211">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span>
 
-* <span data-ttu-id="20515-210">`Update-Database`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-210">`Update-Database`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="20515-211">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-211">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+* <span data-ttu-id="85c2d-212">`Update-Database`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-212">`Update-Database`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="85c2d-213">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-213">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
-  <span data-ttu-id="20515-212">データベース更新コマンドにより、次の警告が生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-212">The database update command generates the following warning:</span></span> 
+  <span data-ttu-id="85c2d-214">データベース更新コマンドにより、次の警告が生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-214">The database update command generates the following warning:</span></span> 
 
-  > <span data-ttu-id="20515-213">エンティティ型 'Movie' の decimal 列 'Price' に型が指定されていません。</span><span class="sxs-lookup"><span data-stu-id="20515-213">No type was specified for the decimal column 'Price' on entity type 'Movie'.</span></span> <span data-ttu-id="20515-214">これにより、値が既定の有効桁数と小数点以下桁数に収まらない場合、自動的に切り捨てられます。</span><span class="sxs-lookup"><span data-stu-id="20515-214">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span></span> <span data-ttu-id="20515-215">'HasColumnType()' を使用してすべての値に適合する SQL server 列の型を明示的に指定します。</span><span class="sxs-lookup"><span data-stu-id="20515-215">Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.</span></span>
+  > <span data-ttu-id="85c2d-215">エンティティ型 'Movie' の decimal 列 'Price' に型が指定されていません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-215">No type was specified for the decimal column 'Price' on entity type 'Movie'.</span></span> <span data-ttu-id="85c2d-216">これにより、値が既定の有効桁数と小数点以下桁数に収まらない場合、自動的に切り捨てられます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-216">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span></span> <span data-ttu-id="85c2d-217">'HasColumnType()' を使用してすべての値に適合する SQL server 列の型を明示的に指定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-217">Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.</span></span>
 
-  <span data-ttu-id="20515-216">この警告は無視して構いません。後のチュートリアルで修正されます。</span><span class="sxs-lookup"><span data-stu-id="20515-216">You can ignore that warning, it will be fixed in a later tutorial.</span></span>
+  <span data-ttu-id="85c2d-218">この警告は無視して構いません。後のチュートリアルで修正されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-218">You can ignore that warning, it will be fixed in a later tutorial.</span></span>
 
 [!INCLUDE [more information on the PMC tools for EF Core](~/includes/ef-pmc.md)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-217">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-217">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-219">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-219">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
-<span data-ttu-id="20515-218">次の .NET Core CLI コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-218">Run the following .NET Core CLI commands:</span></span>
+<span data-ttu-id="85c2d-220">次の .NET Core CLI コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-220">Run the following .NET Core CLI commands:</span></span>
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* <span data-ttu-id="20515-219">`ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-219">`ef migrations add InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="20515-220">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="20515-220">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="20515-221">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="20515-221">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="20515-222">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-222">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="20515-223">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます ( *Data/MvcMovieContext.cs* ファイル内)。</span><span class="sxs-lookup"><span data-stu-id="20515-223">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span>
+* <span data-ttu-id="85c2d-221">`ef migrations add InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-221">`ef migrations add InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="85c2d-222">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-222">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="85c2d-223">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-223">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="85c2d-224">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-224">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="85c2d-225">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-225">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span>
 
-* <span data-ttu-id="20515-224">`ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-224">`ef database update`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="20515-225">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-225">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+* <span data-ttu-id="85c2d-226">`ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-226">`ef database update`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="85c2d-227">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-227">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
 ---
 
-### <a name="the-initialcreate-class"></a><span data-ttu-id="20515-226">InitialCreate クラス</span><span class="sxs-lookup"><span data-stu-id="20515-226">The InitialCreate class</span></span>
+### <a name="the-initialcreate-class"></a><span data-ttu-id="85c2d-228">InitialCreate クラス</span><span class="sxs-lookup"><span data-stu-id="85c2d-228">The InitialCreate class</span></span>
 
-<span data-ttu-id="20515-227">*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-227">Examine the *Migrations/{timestamp}_InitialCreate.cs* migration file:</span></span>
+<span data-ttu-id="85c2d-229">*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-229">Examine the *Migrations/{timestamp}_InitialCreate.cs* migration file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Migrations/20190805165915_InitialCreate.cs?name=snippet)]
 
-<span data-ttu-id="20515-228">`Up` メソッドにより Movie テーブルが作成され、主キーとして `Id` が構成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-228">The `Up` method creates the Movie table and configures `Id` as the primary key.</span></span> <span data-ttu-id="20515-229">`Down` メソッドにより、`Up` 移行で行われたスキーマ変更が元に戻ります。</span><span class="sxs-lookup"><span data-stu-id="20515-229">The `Down` method reverts the schema changes made by the `Up` migration.</span></span>
+<span data-ttu-id="85c2d-230">`Up` メソッドにより Movie テーブルが作成され、主キーとして `Id` が構成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-230">The `Up` method creates the Movie table and configures `Id` as the primary key.</span></span> <span data-ttu-id="85c2d-231">`Down` メソッドにより、`Up` 移行で行われたスキーマ変更が元に戻ります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-231">The `Down` method reverts the schema changes made by the `Up` migration.</span></span>
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a><span data-ttu-id="20515-230">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="20515-230">Test the app</span></span>
+## <a name="test-the-app"></a><span data-ttu-id="85c2d-232">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="85c2d-232">Test the app</span></span>
 
-* <span data-ttu-id="20515-231">アプリを実行し、 **[Movie App]** リンクをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-231">Run the app and click the **Movie App** link.</span></span>
+* <span data-ttu-id="85c2d-233">アプリを実行し、 **[Movie App]** リンクをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-233">Run the app and click the **Movie App** link.</span></span>
 
-  <span data-ttu-id="20515-232">次のような例外が表示された場合:</span><span class="sxs-lookup"><span data-stu-id="20515-232">If you get an exception similar to one of the following:</span></span>
+  <span data-ttu-id="85c2d-234">次のような例外が表示された場合:</span><span class="sxs-lookup"><span data-stu-id="85c2d-234">If you get an exception similar to one of the following:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-233">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-233">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-235">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-235">Visual Studio</span></span>](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-234">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-234">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-236">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-236">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
   ```console
   SqliteException: SQLite Error 1: 'no such table: Movie'.
   ```
 
 ---
-  <span data-ttu-id="20515-235">[移行手順](#migration)を実行しなかった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="20515-235">You probably missed the [migrations step](#migration).</span></span>
+  <span data-ttu-id="85c2d-237">[移行手順](#migration)を実行しなかった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-237">You probably missed the [migrations step](#migration).</span></span>
 
-* <span data-ttu-id="20515-236">**Create** ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="20515-236">Test the **Create** page.</span></span> <span data-ttu-id="20515-237">データを入力して送信します。</span><span class="sxs-lookup"><span data-stu-id="20515-237">Enter and submit data.</span></span>
+* <span data-ttu-id="85c2d-238">**Create** ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-238">Test the **Create** page.</span></span> <span data-ttu-id="85c2d-239">データを入力して送信します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-239">Enter and submit data.</span></span>
 
   > [!NOTE]
-  > <span data-ttu-id="20515-238">`Price` フィールドに小数点のコンマを入力できない場合があります。</span><span class="sxs-lookup"><span data-stu-id="20515-238">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="20515-239">小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。</span><span class="sxs-lookup"><span data-stu-id="20515-239">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="20515-240">グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="20515-240">For globalization instructions, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
+  > <span data-ttu-id="85c2d-240">`Price` フィールドに小数点のコンマを入力できない場合があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-240">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="85c2d-241">小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-241">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="85c2d-242">グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-242">For globalization instructions, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
 
-* <span data-ttu-id="20515-241">**[編集]** 、 **[詳細]** 、 **[削除]** の各ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="20515-241">Test the **Edit** , **Details** , and **Delete** pages.</span></span>
+* <span data-ttu-id="85c2d-243">**[編集]** 、 **[詳細]** 、 **[削除]** の各ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-243">Test the **Edit**, **Details**, and **Delete** pages.</span></span>
 
-## <a name="dependency-injection-in-the-controller"></a><span data-ttu-id="20515-242">コントローラーの依存関係挿入</span><span class="sxs-lookup"><span data-stu-id="20515-242">Dependency injection in the controller</span></span>
+## <a name="dependency-injection-in-the-controller"></a><span data-ttu-id="85c2d-244">コントローラーの依存関係挿入</span><span class="sxs-lookup"><span data-stu-id="85c2d-244">Dependency injection in the controller</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-243">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-243">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-245">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-245">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-244">*Controllers/MoviesController.cs* ファイルを開いて、コンストラクターを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-244">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
+<span data-ttu-id="85c2d-246">*Controllers/MoviesController.cs* ファイルを開いて、コンストラクターを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-246">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
 
 <!-- l.. Make copy of Movies controller (or use the old one as I did in the 3.0 upgrade) because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="20515-245">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="20515-245">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="20515-246">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="20515-246">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="85c2d-247">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-247">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="85c2d-248">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-248">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-247">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-247">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-249">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-249">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="20515-248">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="20515-248">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="20515-249">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="20515-249">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="85c2d-250">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-250">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="85c2d-251">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-251">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a><span data-ttu-id="20515-250">開発用に SQLite を、運用環境に SQL Server を使用する</span><span class="sxs-lookup"><span data-stu-id="20515-250">Use SQLite for development, SQL Server for production</span></span>
+### <a name="use-sqlite-for-development-sql-server-for-production"></a><span data-ttu-id="85c2d-252">開発用に SQLite を、運用環境に SQL Server を使用する</span><span class="sxs-lookup"><span data-stu-id="85c2d-252">Use SQLite for development, SQL Server for production</span></span>
 
-<span data-ttu-id="20515-251">SQLite が選択されている場合、テンプレートで生成されたコードは開発の準備ができています。</span><span class="sxs-lookup"><span data-stu-id="20515-251">When SQLite is selected, the template generated code is ready for development.</span></span> <span data-ttu-id="20515-252">次のコードでは、スタートアップに <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> を挿入する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="20515-252">The following code shows how to inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into Startup.</span></span> <span data-ttu-id="20515-253">`IWebHostEnvironment` が挿入されているので、`ConfigureServices` では開発用に SQLite を、運用環境に SQL Server を使用できます。</span><span class="sxs-lookup"><span data-stu-id="20515-253">`IWebHostEnvironment` is injected so `ConfigureServices` can use SQLite in development and SQL Server in production.</span></span>
+<span data-ttu-id="85c2d-253">SQLite が選択されている場合、テンプレートで生成されたコードは開発の準備ができています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-253">When SQLite is selected, the template generated code is ready for development.</span></span> <span data-ttu-id="85c2d-254">次のコードでは、スタートアップに <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> を挿入する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-254">The following code shows how to inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into Startup.</span></span> <span data-ttu-id="85c2d-255">`IWebHostEnvironment` が挿入されているので、`ConfigureServices` では開発用に SQLite を、運用環境に SQL Server を使用できます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-255">`IWebHostEnvironment` is injected so `ConfigureServices` can use SQLite in development and SQL Server in production.</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -348,145 +356,145 @@ dotnet ef database update
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
-## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="20515-254">厳密に型指定されたモデルと @model キーワード</span><span class="sxs-lookup"><span data-stu-id="20515-254">Strongly typed models and the @model keyword</span></span>
+## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="85c2d-256">厳密に型指定されたモデルと @model キーワード</span><span class="sxs-lookup"><span data-stu-id="85c2d-256">Strongly typed models and the @model keyword</span></span>
 
-<span data-ttu-id="20515-255">コントローラーで `ViewData` ディクショナリを使ってビューにデータまたはオブジェクトを渡す方法を前に示しました。</span><span class="sxs-lookup"><span data-stu-id="20515-255">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="20515-256">`ViewData` ディクショナリは動的オブジェクトであり、ビューに情報を渡すための便利な遅延バインディングの方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="20515-256">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
+<span data-ttu-id="85c2d-257">コントローラーで `ViewData` ディクショナリを使ってビューにデータまたはオブジェクトを渡す方法を前に示しました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-257">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="85c2d-258">`ViewData` ディクショナリは動的オブジェクトであり、ビューに情報を渡すための便利な遅延バインディングの方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-258">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
 
-<span data-ttu-id="20515-257">MVC にも、厳密に型指定されたモデル オブジェクトをビューに渡す機能があります。</span><span class="sxs-lookup"><span data-stu-id="20515-257">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="20515-258">この厳密に型指定された方法では、コンパイル時にコードを確認できます。</span><span class="sxs-lookup"><span data-stu-id="20515-258">This strongly typed approach enables compile time code checking.</span></span> <span data-ttu-id="20515-259">スキャフォールディング メカニズムでは、`MoviesController` のクラスとビューで、この手法 (つまり、厳密に型指定されたモデルを渡しました) が使用されました。</span><span class="sxs-lookup"><span data-stu-id="20515-259">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views.</span></span>
+<span data-ttu-id="85c2d-259">MVC にも、厳密に型指定されたモデル オブジェクトをビューに渡す機能があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-259">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="85c2d-260">この厳密に型指定された方法では、コンパイル時にコードを確認できます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-260">This strongly typed approach enables compile time code checking.</span></span> <span data-ttu-id="85c2d-261">スキャフォールディング メカニズムでは、`MoviesController` のクラスとビューで、この手法 (つまり、厳密に型指定されたモデルを渡しました) が使用されました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-261">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views.</span></span>
 
-<span data-ttu-id="20515-260">*Controllers/MoviesController.cs* ファイルで生成された `Details` メソッドを調べてください。</span><span class="sxs-lookup"><span data-stu-id="20515-260">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
+<span data-ttu-id="85c2d-262">*Controllers/MoviesController.cs* ファイルで生成された `Details` メソッドを調べてください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-262">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-<span data-ttu-id="20515-261">通常、`id` パラメーターはルート データとして渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-261">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="20515-262">たとえば、`https://localhost:5001/movies/details/1` は次のように設定します。</span><span class="sxs-lookup"><span data-stu-id="20515-262">For example `https://localhost:5001/movies/details/1` sets:</span></span>
+<span data-ttu-id="85c2d-263">通常、`id` パラメーターはルート データとして渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-263">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="85c2d-264">たとえば、`https://localhost:5001/movies/details/1` は次のように設定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-264">For example `https://localhost:5001/movies/details/1` sets:</span></span>
 
-* <span data-ttu-id="20515-263">コントローラーを `movies` コントローラーに (最初の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-263">The controller to the `movies` controller (the first URL segment).</span></span>
-* <span data-ttu-id="20515-264">アクションを `details` に (2 番目の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-264">The action to `details` (the second URL segment).</span></span>
-* <span data-ttu-id="20515-265">ID を 1 に (最後の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-265">The id to 1 (the last URL segment).</span></span>
+* <span data-ttu-id="85c2d-265">コントローラーを `movies` コントローラーに (最初の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-265">The controller to the `movies` controller (the first URL segment).</span></span>
+* <span data-ttu-id="85c2d-266">アクションを `details` に (2 番目の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-266">The action to `details` (the second URL segment).</span></span>
+* <span data-ttu-id="85c2d-267">ID を 1 に (最後の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-267">The id to 1 (the last URL segment).</span></span>
 
-<span data-ttu-id="20515-266">次のようにクエリ文字列で `id` を渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="20515-266">You can also pass in the `id` with a query string as follows:</span></span>
+<span data-ttu-id="85c2d-268">次のようにクエリ文字列で `id` を渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-268">You can also pass in the `id` with a query string as follows:</span></span>
 
 `https://localhost:5001/movies/details?id=1`
 
-<span data-ttu-id="20515-267">ID 値が指定されない場合、`id` パラメーターは [null 許容型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) として定義されます。</span><span class="sxs-lookup"><span data-stu-id="20515-267">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
+<span data-ttu-id="85c2d-269">ID 値が指定されない場合、`id` パラメーターは [null 許容型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) として定義されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-269">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
 
-<span data-ttu-id="20515-268">ルート データまたはクエリ文字列の値と一致するムービー エンティティを選択するため、[ラムダ式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)が `FirstOrDefaultAsync` に渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-268">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
+<span data-ttu-id="85c2d-270">ルート データまたはクエリ文字列の値と一致するムービー エンティティを選択するため、[ラムダ式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)が `FirstOrDefaultAsync` に渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-270">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
 
 ```csharp
 var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-<span data-ttu-id="20515-269">ムービーが見つかった場合、`Movie` モデルのインスタンスが `Details` ビューに渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-269">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
+<span data-ttu-id="85c2d-271">ムービーが見つかった場合、`Movie` モデルのインスタンスが `Details` ビューに渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-271">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
 
 ```csharp
 return View(movie);
 ```
 
-<span data-ttu-id="20515-270">*Views/Movies/Details.cshtml* ファイルの内容を確認してください。</span><span class="sxs-lookup"><span data-stu-id="20515-270">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-272">*Views/Movies/Details.cshtml* ファイルの内容を確認してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-272">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-<span data-ttu-id="20515-271">ビュー ファイルの一番上にある `@model` ステートメントにより、ビューで求められるオブジェクトの型が指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-271">The `@model` statement at the top of the view file specifies the type of object that the view expects.</span></span> <span data-ttu-id="20515-272">ムービー コントローラーが作成されたとき、次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="20515-272">When the movie controller was created, the following `@model` statement was included:</span></span>
+<span data-ttu-id="85c2d-273">ビュー ファイルの一番上にある `@model` ステートメントにより、ビューで求められるオブジェクトの型が指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-273">The `@model` statement at the top of the view file specifies the type of object that the view expects.</span></span> <span data-ttu-id="85c2d-274">ムービー コントローラーが作成されたとき、次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-274">When the movie controller was created, the following `@model` statement was included:</span></span>
 
 ```cshtml
 @model MvcMovie.Models.Movie
 ```
 
-<span data-ttu-id="20515-273">この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="20515-273">This `@model` directive allows access to the movie that the controller passed to the view.</span></span> <span data-ttu-id="20515-274">`Model` オブジェクトは厳密に型指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-274">The `Model` object is strongly typed.</span></span> <span data-ttu-id="20515-275">たとえば、 *Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。</span><span class="sxs-lookup"><span data-stu-id="20515-275">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="20515-276">`Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。</span><span class="sxs-lookup"><span data-stu-id="20515-276">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
+<span data-ttu-id="85c2d-275">この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-275">This `@model` directive allows access to the movie that the controller passed to the view.</span></span> <span data-ttu-id="85c2d-276">`Model` オブジェクトは厳密に型指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-276">The `Model` object is strongly typed.</span></span> <span data-ttu-id="85c2d-277">たとえば、*Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-277">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="85c2d-278">`Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-278">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
 
-<span data-ttu-id="20515-277">Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。</span><span class="sxs-lookup"><span data-stu-id="20515-277">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="20515-278">コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。</span><span class="sxs-lookup"><span data-stu-id="20515-278">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="20515-279">コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。</span><span class="sxs-lookup"><span data-stu-id="20515-279">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
+<span data-ttu-id="85c2d-279">Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-279">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="85c2d-280">コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-280">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="85c2d-281">コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-281">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-<span data-ttu-id="20515-280">ムービー コントローラーが作成されたとき、スキャフォールディングにより、 *Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="20515-280">When the movies controller was created, scaffolding included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-282">ムービー コントローラーが作成されたとき、スキャフォールディングにより、*Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-282">When the movies controller was created, scaffolding included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-<span data-ttu-id="20515-281">`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="20515-281">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="20515-282">たとえば、 *Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。</span><span class="sxs-lookup"><span data-stu-id="20515-282">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
+<span data-ttu-id="85c2d-283">`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-283">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="85c2d-284">たとえば、*Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-284">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-<span data-ttu-id="20515-283">`Model` オブジェクトは厳密に型指定されているので (`IEnumerable<Movie>` オブジェクトとして)、ループ内の各項目は `Movie` として型指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-283">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="20515-284">これには、コンパイル時にコードを確認できるなどの利点があります。</span><span class="sxs-lookup"><span data-stu-id="20515-284">Among other benefits, this means that you get compile time checking of the code.</span></span>
+<span data-ttu-id="85c2d-285">`Model` オブジェクトは厳密に型指定されているので (`IEnumerable<Movie>` オブジェクトとして)、ループ内の各項目は `Movie` として型指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-285">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="85c2d-286">これには、コンパイル時にコードを確認できるなどの利点があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-286">Among other benefits, this means that you get compile time checking of the code.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="20515-285">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="20515-285">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="85c2d-287">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="85c2d-287">Additional resources</span></span>
 
-* [<span data-ttu-id="20515-286">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="20515-286">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
-* [<span data-ttu-id="20515-287">グローバライズとローカライズ</span><span class="sxs-lookup"><span data-stu-id="20515-287">Globalization and localization</span></span>](xref:fundamentals/localization)
+* [<span data-ttu-id="85c2d-288">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="85c2d-288">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
+* [<span data-ttu-id="85c2d-289">グローバライズとローカライズ</span><span class="sxs-lookup"><span data-stu-id="85c2d-289">Globalization and localization</span></span>](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="20515-288">[前のチュートリアル ビューの追加](adding-view.md)
-> [次のチュートリアル SQL の使用](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="20515-288">[Previous Adding a View](adding-view.md)
+> <span data-ttu-id="85c2d-290">[前のチュートリアル ビューの追加](adding-view.md)
+> [次のチュートリアル SQL の使用](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="85c2d-290">[Previous Adding a View](adding-view.md)
 [Next Working with SQL](working-with-sql.md)</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
-## <a name="add-a-data-model-class"></a><span data-ttu-id="20515-289">データ モデル クラスの追加</span><span class="sxs-lookup"><span data-stu-id="20515-289">Add a data model class</span></span>
+## <a name="add-a-data-model-class"></a><span data-ttu-id="85c2d-291">データ モデル クラスの追加</span><span class="sxs-lookup"><span data-stu-id="85c2d-291">Add a data model class</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-290">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-290">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-292">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-292">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-291">*Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-291">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="20515-292">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="20515-292">Name the file *Movie.cs*.</span></span>
+<span data-ttu-id="85c2d-293">*Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-293">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="85c2d-294">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-294">Name the file *Movie.cs*.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="20515-293">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-293">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-295">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-295">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="20515-294">*Movie.cs* という名前のファイルを *Models* フォルダーに追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-294">Add a file named *Movie.cs* to the *Models* folder.</span></span>
+<span data-ttu-id="85c2d-296">*Movie.cs* という名前のファイルを *Models* フォルダーに追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-296">Add a file named *Movie.cs* to the *Models* folder.</span></span>
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-295">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-295">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-297">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-297">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="20515-296">*Models* フォルダーを右クリックし、 **[追加]**  >  **[新しいクラス]**  >  **[空のクラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-296">Right-click the *Models* folder > **Add** > **New Class** > **Empty Class**.</span></span> <span data-ttu-id="20515-297">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="20515-297">Name the file *Movie.cs*.</span></span>
+<span data-ttu-id="85c2d-298">*Models* フォルダーを右クリックし、 **[追加]**  >  **[新しいクラス]**  >  **[空のクラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-298">Right-click the *Models* folder > **Add** > **New Class** > **Empty Class**.</span></span> <span data-ttu-id="85c2d-299">ファイルに *Movie.cs* という名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-299">Name the file *Movie.cs*.</span></span>
 
 ---
 
-<span data-ttu-id="20515-298">次のコードで *Movie.cs* ファイルを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-298">Update the *Movie.cs* file with the following code:</span></span>
+<span data-ttu-id="85c2d-300">次のコードで *Movie.cs* ファイルを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-300">Update the *Movie.cs* file with the following code:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/Movie.cs)]
 
-<span data-ttu-id="20515-299">`Movie` クラスには、データベースで主キー用に必要となる `Id` フィールドが含まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-299">The `Movie` class contains an `Id` field, which is required by the database for the primary key.</span></span>
+<span data-ttu-id="85c2d-301">`Movie` クラスには、データベースで主キー用に必要となる `Id` フィールドが含まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-301">The `Movie` class contains an `Id` field, which is required by the database for the primary key.</span></span>
 
-<span data-ttu-id="20515-300">`ReleaseDate` の <xref:System.ComponentModel.DataAnnotations.DataType> 属性により、データの型 (`Date`) が指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-300">The <xref:System.ComponentModel.DataAnnotations.DataType> attribute on `ReleaseDate` specifies the type of the data (`Date`).</span></span> <span data-ttu-id="20515-301">この属性を使用する場合:</span><span class="sxs-lookup"><span data-stu-id="20515-301">With this attribute:</span></span>
+<span data-ttu-id="85c2d-302">`ReleaseDate` の <xref:System.ComponentModel.DataAnnotations.DataType> 属性により、データの型 (`Date`) が指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-302">The <xref:System.ComponentModel.DataAnnotations.DataType> attribute on `ReleaseDate` specifies the type of the data (`Date`).</span></span> <span data-ttu-id="85c2d-303">この属性を使用する場合:</span><span class="sxs-lookup"><span data-stu-id="85c2d-303">With this attribute:</span></span>
 
-* <span data-ttu-id="20515-302">ユーザーは日付フィールドに時刻の情報を入力する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="20515-302">The user is not required to enter time information in the date field.</span></span>
-* <span data-ttu-id="20515-303">日付のみが表示され、時刻の情報は表示されません。</span><span class="sxs-lookup"><span data-stu-id="20515-303">Only the date is displayed, not time information.</span></span>
+* <span data-ttu-id="85c2d-304">ユーザーは日付フィールドに時刻の情報を入力する必要はありません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-304">The user is not required to enter time information in the date field.</span></span>
+* <span data-ttu-id="85c2d-305">日付のみが表示され、時刻の情報は表示されません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-305">Only the date is displayed, not time information.</span></span>
 
-<span data-ttu-id="20515-304">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) は、後のチュートリアルで説明されます。</span><span class="sxs-lookup"><span data-stu-id="20515-304">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) are covered in a later tutorial.</span></span>
+<span data-ttu-id="85c2d-306">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) は、後のチュートリアルで説明されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-306">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) are covered in a later tutorial.</span></span>
 
-## <a name="add-nuget-packages"></a><span data-ttu-id="20515-305">NuGet パッケージを追加する</span><span class="sxs-lookup"><span data-stu-id="20515-305">Add NuGet packages</span></span>
+## <a name="add-nuget-packages"></a><span data-ttu-id="85c2d-307">NuGet パッケージを追加する</span><span class="sxs-lookup"><span data-stu-id="85c2d-307">Add NuGet packages</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-306">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-306">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-308">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-308">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-307">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-307">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+<span data-ttu-id="85c2d-309">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-309">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
 ![PMC メニュー](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
-<span data-ttu-id="20515-309">PMC で次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-309">In the PMC, run the following command:</span></span>
+<span data-ttu-id="85c2d-311">PMC で次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-311">In the PMC, run the following command:</span></span>
 
 ```powershell
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-<span data-ttu-id="20515-310">上記のコマンドによって EF Core SQL Server プロバイダーが追加されます。</span><span class="sxs-lookup"><span data-stu-id="20515-310">The preceding command adds the EF Core SQL Server provider.</span></span> <span data-ttu-id="20515-311">プロバイダー パッケージによって、依存関係として EF Core パッケージがインストールされます。</span><span class="sxs-lookup"><span data-stu-id="20515-311">The provider package installs the EF Core package as a dependency.</span></span> <span data-ttu-id="20515-312">追加のパッケージは、このチュートリアルの後半で、スキャフォールディングの手順で自動的にインストールされます。</span><span class="sxs-lookup"><span data-stu-id="20515-312">Additional packages are installed automatically in the scaffolding step later in the tutorial.</span></span>
+<span data-ttu-id="85c2d-312">上記のコマンドによって EF Core SQL Server プロバイダーが追加されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-312">The preceding command adds the EF Core SQL Server provider.</span></span> <span data-ttu-id="85c2d-313">プロバイダー パッケージによって、依存関係として EF Core パッケージがインストールされます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-313">The provider package installs the EF Core package as a dependency.</span></span> <span data-ttu-id="85c2d-314">追加のパッケージは、このチュートリアルの後半で、スキャフォールディングの手順で自動的にインストールされます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-314">Additional packages are installed automatically in the scaffolding step later in the tutorial.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="20515-313">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-313">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-315">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-315">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-314">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-314">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-316">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-316">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="20515-315">**[プロジェクト]** メニューから、 **[NuGet パッケージの管理]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-315">From the **Project** menu, select **Manage NuGet Packages**.</span></span>
+<span data-ttu-id="85c2d-317">**[プロジェクト]** メニューから、 **[NuGet パッケージの管理]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-317">From the **Project** menu, select **Manage NuGet Packages**.</span></span>
 
-<span data-ttu-id="20515-316">右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、 **Return** キーを押して検索します。</span><span class="sxs-lookup"><span data-stu-id="20515-316">In the **Search** field in the upper right, enter `Microsoft.EntityFrameworkCore.SQLite` and press the **Return** key to search.</span></span> <span data-ttu-id="20515-317">一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-317">Select the matching NuGet package and press the **Add Package** button.</span></span>
+<span data-ttu-id="85c2d-318">右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、**Return** キーを押して検索します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-318">In the **Search** field in the upper right, enter `Microsoft.EntityFrameworkCore.SQLite` and press the **Return** key to search.</span></span> <span data-ttu-id="85c2d-319">一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-319">Select the matching NuGet package and press the **Add Package** button.</span></span>
 
 ![Entity Framework Core NuGet パッケージを追加する](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
-<span data-ttu-id="20515-319">**[プロジェクトの選択]** ダイアログが、`MvcMovie` プロジェクトが選択された状態で表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-319">The **Select Projects** dialog will be displayed, with the `MvcMovie` project selected.</span></span> <span data-ttu-id="20515-320">**[OK]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-320">Press the **Ok** button.</span></span>
+<span data-ttu-id="85c2d-321">**[プロジェクトの選択]** ダイアログが、`MvcMovie` プロジェクトが選択された状態で表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-321">The **Select Projects** dialog will be displayed, with the `MvcMovie` project selected.</span></span> <span data-ttu-id="85c2d-322">**[OK]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-322">Press the **Ok** button.</span></span>
 
-<span data-ttu-id="20515-321">**[ライセンスの同意]** ダイアログが表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-321">A **License Acceptance** dialog will be displayed.</span></span> <span data-ttu-id="20515-322">必要に応じてライセンスを確認し、 **[同意する]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-322">Review the licenses as desired, then click the **Accept** button.</span></span>
+<span data-ttu-id="85c2d-323">**[ライセンスの同意]** ダイアログが表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-323">A **License Acceptance** dialog will be displayed.</span></span> <span data-ttu-id="85c2d-324">必要に応じてライセンスを確認し、 **[同意する]** ボタンをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-324">Review the licenses as desired, then click the **Accept** button.</span></span>
 
-<span data-ttu-id="20515-323">上記の手順を繰り返して、次の NuGet パッケージをインストールします。</span><span class="sxs-lookup"><span data-stu-id="20515-323">Repeat the above steps to install the following NuGet packages:</span></span>
+<span data-ttu-id="85c2d-325">上記の手順を繰り返して、次の NuGet パッケージをインストールします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-325">Repeat the above steps to install the following NuGet packages:</span></span>
 
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
@@ -496,106 +504,106 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 <a name="dc"></a>
 
-## <a name="create-a-database-context-class"></a><span data-ttu-id="20515-324">データベース コンテキスト クラスを作成する</span><span class="sxs-lookup"><span data-stu-id="20515-324">Create a database context class</span></span>
+## <a name="create-a-database-context-class"></a><span data-ttu-id="85c2d-326">データベース コンテキスト クラスを作成する</span><span class="sxs-lookup"><span data-stu-id="85c2d-326">Create a database context class</span></span>
 
-<span data-ttu-id="20515-325">データベース コンテキスト クラスは、`Movie` モデルの EF Core 機能 (作成、読み取り、更新、削除) を調整するために必要です。</span><span class="sxs-lookup"><span data-stu-id="20515-325">A database context class is needed to coordinate EF Core functionality (Create, Read, Update, Delete) for the `Movie` model.</span></span> <span data-ttu-id="20515-326">データベース コンテキストは [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生し、データ モデルに含めるエンティティを指定します。</span><span class="sxs-lookup"><span data-stu-id="20515-326">The database context is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) and specifies the entities to include in the data model.</span></span>
+<span data-ttu-id="85c2d-327">データベース コンテキスト クラスは、`Movie` モデルの EF Core 機能 (作成、読み取り、更新、削除) を調整するために必要です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-327">A database context class is needed to coordinate EF Core functionality (Create, Read, Update, Delete) for the `Movie` model.</span></span> <span data-ttu-id="85c2d-328">データベース コンテキストは [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生し、データ モデルに含めるエンティティを指定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-328">The database context is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) and specifies the entities to include in the data model.</span></span>
 
-<span data-ttu-id="20515-327">*Data* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="20515-327">Create a *Data* folder.</span></span>
+<span data-ttu-id="85c2d-329">*Data* フォルダーを作成します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-329">Create a *Data* folder.</span></span>
 
-<span data-ttu-id="20515-328">次のコードで *Data/MvcMovieContext.cs* ファイルを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-328">Add a *Data/MvcMovieContext.cs* file with the following code:</span></span> 
+<span data-ttu-id="85c2d-330">次のコードで *Data/MvcMovieContext.cs* ファイルを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-330">Add a *Data/MvcMovieContext.cs* file with the following code:</span></span> 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/zDocOnly/MvcMovieContext.cs?name=snippet)]
 
-<span data-ttu-id="20515-329">上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-329">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="20515-330">Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。</span><span class="sxs-lookup"><span data-stu-id="20515-330">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="20515-331">エンティティはテーブル内の行に対応します。</span><span class="sxs-lookup"><span data-stu-id="20515-331">An entity corresponds to a row in the table.</span></span>
+<span data-ttu-id="85c2d-331">上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-331">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="85c2d-332">Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-332">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="85c2d-333">エンティティはテーブル内の行に対応します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-333">An entity corresponds to a row in the table.</span></span>
 
 <a name="reg"></a>
 
-## <a name="register-the-database-context"></a><span data-ttu-id="20515-332">データベース コンテキストの登録</span><span class="sxs-lookup"><span data-stu-id="20515-332">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="85c2d-334">データベース コンテキストの登録</span><span class="sxs-lookup"><span data-stu-id="85c2d-334">Register the database context</span></span>
 
-<span data-ttu-id="20515-333">ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-333">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="20515-334">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="20515-334">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="20515-335">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-335">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="20515-336">DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="20515-336">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="20515-337">このセクションでは、DI コンテナーにデータベース コンテキストを登録します。</span><span class="sxs-lookup"><span data-stu-id="20515-337">In this section, you register the database context with the DI container.</span></span>
+<span data-ttu-id="85c2d-335">ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-335">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="85c2d-336">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録する必要があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-336">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="85c2d-337">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-337">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="85c2d-338">DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-338">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="85c2d-339">このセクションでは、DI コンテナーにデータベース コンテキストを登録します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-339">In this section, you register the database context with the DI container.</span></span>
 
-<span data-ttu-id="20515-338">*Startup.cs* の先頭に次の `using` ステートメントを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-338">Add the following `using` statements at the top of *Startup.cs* :</span></span>
+<span data-ttu-id="85c2d-340">*Startup.cs* の先頭に次の `using` ステートメントを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-340">Add the following `using` statements at the top of *Startup.cs*:</span></span>
 
 ```csharp
 using MvcMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 
-<span data-ttu-id="20515-339">`Startup.ConfigureServices` で次の強調表示されたコードを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-339">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="85c2d-341">`Startup.ConfigureServices` で次の強調表示されたコードを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-341">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-340">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-340">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-342">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-342">Visual Studio</span></span>](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-341">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-341">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-343">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-343">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
 
 ---
 
-<span data-ttu-id="20515-342">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-342">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="20515-343">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="20515-343">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
+<span data-ttu-id="85c2d-344">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-344">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="85c2d-345">ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-345">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 <a name="cs"></a>
 
-## <a name="add-a-database-connection-string"></a><span data-ttu-id="20515-344">データベース接続文字列の追加</span><span class="sxs-lookup"><span data-stu-id="20515-344">Add a database connection string</span></span>
+## <a name="add-a-database-connection-string"></a><span data-ttu-id="85c2d-346">データベース接続文字列の追加</span><span class="sxs-lookup"><span data-stu-id="85c2d-346">Add a database connection string</span></span>
 
-<span data-ttu-id="20515-345">接続文字列を *appsettings.json* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-345">Add a connection string to the *appsettings.json* file:</span></span>
+<span data-ttu-id="85c2d-347">接続文字列を *appsettings.json* ファイルに追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-347">Add a connection string to the *appsettings.json* file:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-346">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-346">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-348">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-348">Visual Studio</span></span>](#tab/visual-studio)
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-347">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-347">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-349">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-349">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
 
 ---
 
-<span data-ttu-id="20515-348">コンパイラ エラーのチェックとしてプロジェクトをビルドします。</span><span class="sxs-lookup"><span data-stu-id="20515-348">Build the project as a check for compiler errors.</span></span>
+<span data-ttu-id="85c2d-350">コンパイラ エラーのチェックとしてプロジェクトをビルドします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-350">Build the project as a check for compiler errors.</span></span>
 
-## <a name="scaffold-movie-pages"></a><span data-ttu-id="20515-349">ムービー ページのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="20515-349">Scaffold movie pages</span></span>
+## <a name="scaffold-movie-pages"></a><span data-ttu-id="85c2d-351">ムービー ページのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="85c2d-351">Scaffold movie pages</span></span>
 
-<span data-ttu-id="20515-350">スキャフォールディング ツールを使用し、ムービー モデルの作成、読み取り、更新、削除の (CRUD) ページを生成します。</span><span class="sxs-lookup"><span data-stu-id="20515-350">Use the scaffolding tool to produce Create, Read, Update, and Delete (CRUD) pages for the movie model.</span></span>
+<span data-ttu-id="85c2d-352">スキャフォールディング ツールを使用し、ムービー モデルの作成、読み取り、更新、削除の (CRUD) ページを生成します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-352">Use the scaffolding tool to produce Create, Read, Update, and Delete (CRUD) pages for the movie model.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-351">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-351">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-353">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-353">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-352">*ソリューション エクスプローラー* で、 **Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-352">In **Solution Explorer** , right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
+<span data-ttu-id="85c2d-354">*ソリューション エクスプローラー* で、**Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-354">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
 
 ![前述の手順を参照](adding-model/_static/add_controller21.png)
 
-<span data-ttu-id="20515-354">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用したビューがある MVC コントローラー]、[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-354">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
+<span data-ttu-id="85c2d-356">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用したビューがある MVC コントローラー]、[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-356">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
 
 ![[スキャフォールディングを追加] ダイアログ](adding-model/_static/add_scaffold21.png)
 
-<span data-ttu-id="20515-356">**[コントローラーの追加]** ダイアログ ボックスを完了します。</span><span class="sxs-lookup"><span data-stu-id="20515-356">Complete the **Add Controller** dialog:</span></span>
+<span data-ttu-id="85c2d-358">**[コントローラーの追加]** ダイアログ ボックスを完了します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-358">Complete the **Add Controller** dialog:</span></span>
 
-* <span data-ttu-id="20515-357">**モデル クラス:** *Movie (MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="20515-357">**Model class:** *Movie (MvcMovie.Models)*</span></span>
-* <span data-ttu-id="20515-358">**データ コンテキスト クラス:** *MvcMovieContext (MvcMovie.Data)*</span><span class="sxs-lookup"><span data-stu-id="20515-358">**Data context class:** *MvcMovieContext (MvcMovie.Data)*</span></span>
+* <span data-ttu-id="85c2d-359">**モデル クラス:** *Movie (MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="85c2d-359">**Model class:** *Movie (MvcMovie.Models)*</span></span>
+* <span data-ttu-id="85c2d-360">**データ コンテキスト クラス:** *MvcMovieContext (MvcMovie.Data)*</span><span class="sxs-lookup"><span data-stu-id="85c2d-360">**Data context class:** *MvcMovieContext (MvcMovie.Data)*</span></span>
 
 ![[データの追加] コンテキスト](adding-model/_static/dc3.png)
 
-* <span data-ttu-id="20515-360">**ビュー:** 各オプションの既定値をオンにします。</span><span class="sxs-lookup"><span data-stu-id="20515-360">**Views:** Keep the default of each option checked</span></span>
-* <span data-ttu-id="20515-361">**コントローラー名:** 既定の *MoviesController* のままにします。</span><span class="sxs-lookup"><span data-stu-id="20515-361">**Controller name:** Keep the default *MoviesController*</span></span>
-* <span data-ttu-id="20515-362">**[追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-362">Select **Add**</span></span>
+* <span data-ttu-id="85c2d-362">**ビュー:** 各オプションの既定値をオンにします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-362">**Views:** Keep the default of each option checked</span></span>
+* <span data-ttu-id="85c2d-363">**コントローラー名:** 既定の *MoviesController* のままにします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-363">**Controller name:** Keep the default *MoviesController*</span></span>
+* <span data-ttu-id="85c2d-364">**[追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-364">Select **Add**</span></span>
 
-<span data-ttu-id="20515-363">Visual Studio では、次が作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-363">Visual Studio creates:</span></span>
+<span data-ttu-id="85c2d-365">Visual Studio では、次が作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-365">Visual Studio creates:</span></span>
 
-* <span data-ttu-id="20515-364">ムービー コントローラー ( *Controllers/MoviesController.cs* )</span><span class="sxs-lookup"><span data-stu-id="20515-364">A movies controller ( *Controllers/MoviesController.cs* )</span></span>
-* <span data-ttu-id="20515-365">作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル ( *Views/Movies/\*.cshtml* )</span><span class="sxs-lookup"><span data-stu-id="20515-365">Razor view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
+* <span data-ttu-id="85c2d-366">ムービー コントローラー (*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-366">A movies controller (*Controllers/MoviesController.cs*)</span></span>
+* <span data-ttu-id="85c2d-367">作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル (*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-367">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
 
-<span data-ttu-id="20515-366">このようなファイルの自動作成は、" *スキャフォールディング* " と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="20515-366">The automatic creation of these files is known as *scaffolding*.</span></span>
+<span data-ttu-id="85c2d-368">このようなファイルの自動作成は、"*スキャフォールディング*" と呼ばれます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-368">The automatic creation of these files is known as *scaffolding*.</span></span>
 
-### <a name="visual-studio-code"></a>[<span data-ttu-id="20515-367">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-367">Visual Studio Code</span></span>](#tab/visual-studio-code) 
+### <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-369">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-369">Visual Studio Code</span></span>](#tab/visual-studio-code) 
 
-* <span data-ttu-id="20515-368">プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="20515-368">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
+* <span data-ttu-id="85c2d-370">プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-370">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
 
-* <span data-ttu-id="20515-369">Linux で、スキャフォールディング ツールのパスをエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="20515-369">On Linux, export the scaffold tool path:</span></span>
+* <span data-ttu-id="85c2d-371">Linux で、スキャフォールディング ツールのパスをエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-371">On Linux, export the scaffold tool path:</span></span>
 
   ```console
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* <span data-ttu-id="20515-370">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-370">Run the following command:</span></span>
+* <span data-ttu-id="85c2d-372">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-372">Run the following command:</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -603,11 +611,11 @@ using Microsoft.EntityFrameworkCore;
 
   [!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
 
-### <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-371">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-371">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-373">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-373">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="20515-372">プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="20515-372">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
+* <span data-ttu-id="85c2d-374">プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-374">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
 
-* <span data-ttu-id="20515-373">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-373">Run the following command:</span></span>
+* <span data-ttu-id="85c2d-375">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-375">Run the following command:</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -619,113 +627,113 @@ using Microsoft.EntityFrameworkCore;
 
 <!-- End of tabs                  -->
 
-<span data-ttu-id="20515-374">データベースが存在しないため、スキャフォールディング ページをまだ使用できません。</span><span class="sxs-lookup"><span data-stu-id="20515-374">You can't use the scaffolded pages yet because the database doesn't exist.</span></span> <span data-ttu-id="20515-375">アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie* ] というエラー メッセージが表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-375">If you run the app and click on the **Movie App** link, you get a *Cannot open database* or *no such table: Movie* error message.</span></span>
+<span data-ttu-id="85c2d-376">データベースが存在しないため、スキャフォールディング ページをまだ使用できません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-376">You can't use the scaffolded pages yet because the database doesn't exist.</span></span> <span data-ttu-id="85c2d-377">アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie*] というエラー メッセージが表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-377">If you run the app and click on the **Movie App** link, you get a *Cannot open database* or *no such table: Movie* error message.</span></span>
 
 <a name="migration"></a>
 
-## <a name="initial-migration"></a><span data-ttu-id="20515-376">最初の移行</span><span class="sxs-lookup"><span data-stu-id="20515-376">Initial migration</span></span>
+## <a name="initial-migration"></a><span data-ttu-id="85c2d-378">最初の移行</span><span class="sxs-lookup"><span data-stu-id="85c2d-378">Initial migration</span></span>
 
-<span data-ttu-id="20515-377">EF Core [移行](xref:data/ef-mvc/migrations)機能を使用し、データベースを作成します。</span><span class="sxs-lookup"><span data-stu-id="20515-377">Use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to create the database.</span></span> <span data-ttu-id="20515-378">移行は、データ モデルに合わせてデータベースを作成したり、更新したりできる一連のツールです。</span><span class="sxs-lookup"><span data-stu-id="20515-378">Migrations is a set of tools that let you create and update a database to match your data model.</span></span>
+<span data-ttu-id="85c2d-379">EF Core [移行](xref:data/ef-mvc/migrations)機能を使用し、データベースを作成します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-379">Use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to create the database.</span></span> <span data-ttu-id="85c2d-380">移行は、データ モデルに合わせてデータベースを作成したり、更新したりできる一連のツールです。</span><span class="sxs-lookup"><span data-stu-id="85c2d-380">Migrations is a set of tools that let you create and update a database to match your data model.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-379">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-379">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-381">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-381">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-380">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-380">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+<span data-ttu-id="85c2d-382">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-382">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
-<span data-ttu-id="20515-381">PMC で、次のコマンドを入力します。</span><span class="sxs-lookup"><span data-stu-id="20515-381">In the PMC, enter the following commands:</span></span>
+<span data-ttu-id="85c2d-383">PMC で、次のコマンドを入力します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-383">In the PMC, enter the following commands:</span></span>
 
 ```powershell
 Add-Migration InitialCreate
 Update-Database
 ```
 
-* <span data-ttu-id="20515-382">`Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-382">`Add-Migration InitialCreate`: Generates a *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="20515-383">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="20515-383">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="20515-384">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="20515-384">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="20515-385">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-385">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="20515-386">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。</span><span class="sxs-lookup"><span data-stu-id="20515-386">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span>
+* <span data-ttu-id="85c2d-384">`Add-Migration InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-384">`Add-Migration InitialCreate`: Generates a *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="85c2d-385">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-385">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="85c2d-386">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-386">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="85c2d-387">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-387">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="85c2d-388">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-388">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span>
 
-* <span data-ttu-id="20515-387">`Update-Database`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-387">`Update-Database`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="20515-388">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-388">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+* <span data-ttu-id="85c2d-389">`Update-Database`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-389">`Update-Database`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="85c2d-390">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-390">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
-  <span data-ttu-id="20515-389">データベース更新コマンドにより、次の警告が生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-389">The database update command generates the following warning:</span></span> 
+  <span data-ttu-id="85c2d-391">データベース更新コマンドにより、次の警告が生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-391">The database update command generates the following warning:</span></span> 
 
-  > <span data-ttu-id="20515-390">エンティティ型 'Movie' の decimal 列 'Price' に型が指定されていません。</span><span class="sxs-lookup"><span data-stu-id="20515-390">No type was specified for the decimal column 'Price' on entity type 'Movie'.</span></span> <span data-ttu-id="20515-391">これにより、値が既定の有効桁数と小数点以下桁数に収まらない場合、自動的に切り捨てられます。</span><span class="sxs-lookup"><span data-stu-id="20515-391">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span></span> <span data-ttu-id="20515-392">'HasColumnType()' を使用してすべての値に適合する SQL server 列の型を明示的に指定します。</span><span class="sxs-lookup"><span data-stu-id="20515-392">Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.</span></span>
+  > <span data-ttu-id="85c2d-392">エンティティ型 'Movie' の decimal 列 'Price' に型が指定されていません。</span><span class="sxs-lookup"><span data-stu-id="85c2d-392">No type was specified for the decimal column 'Price' on entity type 'Movie'.</span></span> <span data-ttu-id="85c2d-393">これにより、値が既定の有効桁数と小数点以下桁数に収まらない場合、自動的に切り捨てられます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-393">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span></span> <span data-ttu-id="85c2d-394">'HasColumnType()' を使用してすべての値に適合する SQL server 列の型を明示的に指定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-394">Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.</span></span>
 
-  <span data-ttu-id="20515-393">この警告は無視して構いません。後のチュートリアルで修正されます。</span><span class="sxs-lookup"><span data-stu-id="20515-393">You can ignore that warning, it will be fixed in a later tutorial.</span></span>
+  <span data-ttu-id="85c2d-395">この警告は無視して構いません。後のチュートリアルで修正されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-395">You can ignore that warning, it will be fixed in a later tutorial.</span></span>
 
 [!INCLUDE [more information on the PMC tools for EF Core](~/includes/ef-pmc.md)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-394">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-394">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-396">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-396">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
-<span data-ttu-id="20515-395">次の .NET Core CLI コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-395">Run the following .NET Core CLI commands:</span></span>
+<span data-ttu-id="85c2d-397">次の .NET Core CLI コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-397">Run the following .NET Core CLI commands:</span></span>
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* <span data-ttu-id="20515-396">`ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-396">`ef migrations add InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="20515-397">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="20515-397">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="20515-398">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="20515-398">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="20515-399">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-399">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="20515-400">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます ( *Data/MvcMovieContext.cs* ファイル内)。</span><span class="sxs-lookup"><span data-stu-id="20515-400">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span>
+* <span data-ttu-id="85c2d-398">`ef migrations add InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-398">`ef migrations add InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="85c2d-399">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-399">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="85c2d-400">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-400">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="85c2d-401">これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-401">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="85c2d-402">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-402">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span>
 
-* <span data-ttu-id="20515-401">`ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-401">`ef database update`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="20515-402">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-402">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+* <span data-ttu-id="85c2d-403">`ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-403">`ef database update`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="85c2d-404">このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-404">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
 ---
 
-### <a name="the-initialcreate-class"></a><span data-ttu-id="20515-403">InitialCreate クラス</span><span class="sxs-lookup"><span data-stu-id="20515-403">The InitialCreate class</span></span>
+### <a name="the-initialcreate-class"></a><span data-ttu-id="85c2d-405">InitialCreate クラス</span><span class="sxs-lookup"><span data-stu-id="85c2d-405">The InitialCreate class</span></span>
 
-<span data-ttu-id="20515-404">*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-404">Examine the *Migrations/{timestamp}_InitialCreate.cs* migration file:</span></span>
+<span data-ttu-id="85c2d-406">*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-406">Examine the *Migrations/{timestamp}_InitialCreate.cs* migration file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Migrations/20190805165915_InitialCreate.cs?name=snippet)]
 
-<span data-ttu-id="20515-405">`Up` メソッドにより Movie テーブルが作成され、主キーとして `Id` が構成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-405">The `Up` method creates the Movie table and configures `Id` as the primary key.</span></span> <span data-ttu-id="20515-406">`Down` メソッドにより、`Up` 移行で行われたスキーマ変更が元に戻ります。</span><span class="sxs-lookup"><span data-stu-id="20515-406">The `Down` method reverts the schema changes made by the `Up` migration.</span></span>
+<span data-ttu-id="85c2d-407">`Up` メソッドにより Movie テーブルが作成され、主キーとして `Id` が構成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-407">The `Up` method creates the Movie table and configures `Id` as the primary key.</span></span> <span data-ttu-id="85c2d-408">`Down` メソッドにより、`Up` 移行で行われたスキーマ変更が元に戻ります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-408">The `Down` method reverts the schema changes made by the `Up` migration.</span></span>
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a><span data-ttu-id="20515-407">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="20515-407">Test the app</span></span>
+## <a name="test-the-app"></a><span data-ttu-id="85c2d-409">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="85c2d-409">Test the app</span></span>
 
-* <span data-ttu-id="20515-408">アプリを実行し、 **[Movie App]** リンクをクリックします。</span><span class="sxs-lookup"><span data-stu-id="20515-408">Run the app and click the **Movie App** link.</span></span>
+* <span data-ttu-id="85c2d-410">アプリを実行し、 **[Movie App]** リンクをクリックします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-410">Run the app and click the **Movie App** link.</span></span>
 
-  <span data-ttu-id="20515-409">次のような例外が表示された場合:</span><span class="sxs-lookup"><span data-stu-id="20515-409">If you get an exception similar to one of the following:</span></span>
+  <span data-ttu-id="85c2d-411">次のような例外が表示された場合:</span><span class="sxs-lookup"><span data-stu-id="85c2d-411">If you get an exception similar to one of the following:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-410">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-410">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-412">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-412">Visual Studio</span></span>](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-411">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-411">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-413">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-413">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
   ```console
   SqliteException: SQLite Error 1: 'no such table: Movie'.
   ```
 
 ---
-  <span data-ttu-id="20515-412">[移行手順](#migration)を実行しなかった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="20515-412">You probably missed the [migrations step](#migration).</span></span>
+  <span data-ttu-id="85c2d-414">[移行手順](#migration)を実行しなかった可能性があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-414">You probably missed the [migrations step](#migration).</span></span>
 
-* <span data-ttu-id="20515-413">**Create** ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="20515-413">Test the **Create** page.</span></span> <span data-ttu-id="20515-414">データを入力して送信します。</span><span class="sxs-lookup"><span data-stu-id="20515-414">Enter and submit data.</span></span>
+* <span data-ttu-id="85c2d-415">**Create** ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-415">Test the **Create** page.</span></span> <span data-ttu-id="85c2d-416">データを入力して送信します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-416">Enter and submit data.</span></span>
 
   > [!NOTE]
-  > <span data-ttu-id="20515-415">`Price` フィールドに小数点のコンマを入力できない場合があります。</span><span class="sxs-lookup"><span data-stu-id="20515-415">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="20515-416">小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。</span><span class="sxs-lookup"><span data-stu-id="20515-416">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="20515-417">グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="20515-417">For globalization instructions, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
+  > <span data-ttu-id="85c2d-417">`Price` フィールドに小数点のコンマを入力できない場合があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-417">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="85c2d-418">小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-418">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="85c2d-419">グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-419">For globalization instructions, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
 
-* <span data-ttu-id="20515-418">**[編集]** 、 **[詳細]** 、 **[削除]** の各ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="20515-418">Test the **Edit** , **Details** , and **Delete** pages.</span></span>
+* <span data-ttu-id="85c2d-420">**[編集]** 、 **[詳細]** 、 **[削除]** の各ページをテストします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-420">Test the **Edit**, **Details**, and **Delete** pages.</span></span>
 
-## <a name="dependency-injection-in-the-controller"></a><span data-ttu-id="20515-419">コントローラーの依存関係挿入</span><span class="sxs-lookup"><span data-stu-id="20515-419">Dependency injection in the controller</span></span>
+## <a name="dependency-injection-in-the-controller"></a><span data-ttu-id="85c2d-421">コントローラーの依存関係挿入</span><span class="sxs-lookup"><span data-stu-id="85c2d-421">Dependency injection in the controller</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-420">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-420">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-422">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-422">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-421">*Controllers/MoviesController.cs* ファイルを開いて、コンストラクターを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-421">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
+<span data-ttu-id="85c2d-423">*Controllers/MoviesController.cs* ファイルを開いて、コンストラクターを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-423">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
 
 <!-- l.. Make copy of Movies controller (or use the old one as I did in the 3.0 upgrade) because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="20515-422">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="20515-422">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="20515-423">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="20515-423">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="85c2d-424">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-424">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="85c2d-425">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-425">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-424">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-424">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-426">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-426">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="20515-425">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="20515-425">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="20515-426">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="20515-426">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="85c2d-427">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-427">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="85c2d-428">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-428">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-### <a name="use-sqlite-for-development-sql-server-for-production"></a><span data-ttu-id="20515-427">開発用に SQLite を、運用環境に SQL Server を使用する</span><span class="sxs-lookup"><span data-stu-id="20515-427">Use SQLite for development, SQL Server for production</span></span>
+### <a name="use-sqlite-for-development-sql-server-for-production"></a><span data-ttu-id="85c2d-429">開発用に SQLite を、運用環境に SQL Server を使用する</span><span class="sxs-lookup"><span data-stu-id="85c2d-429">Use SQLite for development, SQL Server for production</span></span>
 
-<span data-ttu-id="20515-428">SQLite が選択されている場合、テンプレートで生成されたコードは開発の準備ができています。</span><span class="sxs-lookup"><span data-stu-id="20515-428">When SQLite is selected, the template generated code is ready for development.</span></span> <span data-ttu-id="20515-429">次のコードでは、スタートアップに <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> を挿入する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="20515-429">The following code shows how to inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into Startup.</span></span> <span data-ttu-id="20515-430">`IWebHostEnvironment` が挿入されているので、`ConfigureServices` では開発用に SQLite を、運用環境に SQL Server を使用できます。</span><span class="sxs-lookup"><span data-stu-id="20515-430">`IWebHostEnvironment` is injected so `ConfigureServices` can use SQLite in development and SQL Server in production.</span></span>
+<span data-ttu-id="85c2d-430">SQLite が選択されている場合、テンプレートで生成されたコードは開発の準備ができています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-430">When SQLite is selected, the template generated code is ready for development.</span></span> <span data-ttu-id="85c2d-431">次のコードでは、スタートアップに <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> を挿入する方法を示します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-431">The following code shows how to inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into Startup.</span></span> <span data-ttu-id="85c2d-432">`IWebHostEnvironment` が挿入されているので、`ConfigureServices` では開発用に SQLite を、運用環境に SQL Server を使用できます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-432">`IWebHostEnvironment` is injected so `ConfigureServices` can use SQLite in development and SQL Server in production.</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -735,154 +743,154 @@ dotnet ef database update
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
-## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="20515-431">厳密に型指定されたモデルと @model キーワード</span><span class="sxs-lookup"><span data-stu-id="20515-431">Strongly typed models and the @model keyword</span></span>
+## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="85c2d-433">厳密に型指定されたモデルと @model キーワード</span><span class="sxs-lookup"><span data-stu-id="85c2d-433">Strongly typed models and the @model keyword</span></span>
 
-<span data-ttu-id="20515-432">コントローラーで `ViewData` ディクショナリを使ってビューにデータまたはオブジェクトを渡す方法を前に示しました。</span><span class="sxs-lookup"><span data-stu-id="20515-432">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="20515-433">`ViewData` ディクショナリは動的オブジェクトであり、ビューに情報を渡すための便利な遅延バインディングの方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="20515-433">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
+<span data-ttu-id="85c2d-434">コントローラーで `ViewData` ディクショナリを使ってビューにデータまたはオブジェクトを渡す方法を前に示しました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-434">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="85c2d-435">`ViewData` ディクショナリは動的オブジェクトであり、ビューに情報を渡すための便利な遅延バインディングの方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-435">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
 
-<span data-ttu-id="20515-434">MVC にも、厳密に型指定されたモデル オブジェクトをビューに渡す機能があります。</span><span class="sxs-lookup"><span data-stu-id="20515-434">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="20515-435">この厳密に型指定された方法では、コンパイル時にコードを確認できます。</span><span class="sxs-lookup"><span data-stu-id="20515-435">This strongly typed approach enables compile time code checking.</span></span> <span data-ttu-id="20515-436">スキャフォールディング メカニズムでは、`MoviesController` のクラスとビューで、この手法 (つまり、厳密に型指定されたモデルを渡しました) が使用されました。</span><span class="sxs-lookup"><span data-stu-id="20515-436">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views.</span></span>
+<span data-ttu-id="85c2d-436">MVC にも、厳密に型指定されたモデル オブジェクトをビューに渡す機能があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-436">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="85c2d-437">この厳密に型指定された方法では、コンパイル時にコードを確認できます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-437">This strongly typed approach enables compile time code checking.</span></span> <span data-ttu-id="85c2d-438">スキャフォールディング メカニズムでは、`MoviesController` のクラスとビューで、この手法 (つまり、厳密に型指定されたモデルを渡しました) が使用されました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-438">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views.</span></span>
 
-<span data-ttu-id="20515-437">*Controllers/MoviesController.cs* ファイルで生成された `Details` メソッドを調べてください。</span><span class="sxs-lookup"><span data-stu-id="20515-437">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
+<span data-ttu-id="85c2d-439">*Controllers/MoviesController.cs* ファイルで生成された `Details` メソッドを調べてください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-439">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-<span data-ttu-id="20515-438">通常、`id` パラメーターはルート データとして渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-438">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="20515-439">たとえば、`https://localhost:5001/movies/details/1` は次のように設定します。</span><span class="sxs-lookup"><span data-stu-id="20515-439">For example `https://localhost:5001/movies/details/1` sets:</span></span>
+<span data-ttu-id="85c2d-440">通常、`id` パラメーターはルート データとして渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-440">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="85c2d-441">たとえば、`https://localhost:5001/movies/details/1` は次のように設定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-441">For example `https://localhost:5001/movies/details/1` sets:</span></span>
 
-* <span data-ttu-id="20515-440">コントローラーを `movies` コントローラーに (最初の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-440">The controller to the `movies` controller (the first URL segment).</span></span>
-* <span data-ttu-id="20515-441">アクションを `details` に (2 番目の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-441">The action to `details` (the second URL segment).</span></span>
-* <span data-ttu-id="20515-442">ID を 1 に (最後の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-442">The id to 1 (the last URL segment).</span></span>
+* <span data-ttu-id="85c2d-442">コントローラーを `movies` コントローラーに (最初の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-442">The controller to the `movies` controller (the first URL segment).</span></span>
+* <span data-ttu-id="85c2d-443">アクションを `details` に (2 番目の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-443">The action to `details` (the second URL segment).</span></span>
+* <span data-ttu-id="85c2d-444">ID を 1 に (最後の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-444">The id to 1 (the last URL segment).</span></span>
 
-<span data-ttu-id="20515-443">次のようにクエリ文字列で `id` を渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="20515-443">You can also pass in the `id` with a query string as follows:</span></span>
+<span data-ttu-id="85c2d-445">次のようにクエリ文字列で `id` を渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-445">You can also pass in the `id` with a query string as follows:</span></span>
 
 `https://localhost:5001/movies/details?id=1`
 
-<span data-ttu-id="20515-444">ID 値が指定されない場合、`id` パラメーターは [null 許容型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) として定義されます。</span><span class="sxs-lookup"><span data-stu-id="20515-444">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
+<span data-ttu-id="85c2d-446">ID 値が指定されない場合、`id` パラメーターは [null 許容型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) として定義されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-446">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
 
-<span data-ttu-id="20515-445">ルート データまたはクエリ文字列の値と一致するムービー エンティティを選択するため、[ラムダ式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)が `FirstOrDefaultAsync` に渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-445">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
+<span data-ttu-id="85c2d-447">ルート データまたはクエリ文字列の値と一致するムービー エンティティを選択するため、[ラムダ式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)が `FirstOrDefaultAsync` に渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-447">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
 
 ```csharp
 var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-<span data-ttu-id="20515-446">ムービーが見つかった場合、`Movie` モデルのインスタンスが `Details` ビューに渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-446">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
+<span data-ttu-id="85c2d-448">ムービーが見つかった場合、`Movie` モデルのインスタンスが `Details` ビューに渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-448">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
 
 ```csharp
 return View(movie);
 ```
 
-<span data-ttu-id="20515-447">*Views/Movies/Details.cshtml* ファイルの内容を確認してください。</span><span class="sxs-lookup"><span data-stu-id="20515-447">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-449">*Views/Movies/Details.cshtml* ファイルの内容を確認してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-449">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-<span data-ttu-id="20515-448">ビュー ファイルの一番上にある `@model` ステートメントにより、ビューで求められるオブジェクトの型が指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-448">The `@model` statement at the top of the view file specifies the type of object that the view expects.</span></span> <span data-ttu-id="20515-449">ムービー コントローラーが作成されたとき、次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="20515-449">When the movie controller was created, the following `@model` statement was included:</span></span>
+<span data-ttu-id="85c2d-450">ビュー ファイルの一番上にある `@model` ステートメントにより、ビューで求められるオブジェクトの型が指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-450">The `@model` statement at the top of the view file specifies the type of object that the view expects.</span></span> <span data-ttu-id="85c2d-451">ムービー コントローラーが作成されたとき、次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-451">When the movie controller was created, the following `@model` statement was included:</span></span>
 
 ```cshtml
 @model MvcMovie.Models.Movie
 ```
 
-<span data-ttu-id="20515-450">この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="20515-450">This `@model` directive allows access to the movie that the controller passed to the view.</span></span> <span data-ttu-id="20515-451">`Model` オブジェクトは厳密に型指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-451">The `Model` object is strongly typed.</span></span> <span data-ttu-id="20515-452">たとえば、 *Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。</span><span class="sxs-lookup"><span data-stu-id="20515-452">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="20515-453">`Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。</span><span class="sxs-lookup"><span data-stu-id="20515-453">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
+<span data-ttu-id="85c2d-452">この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-452">This `@model` directive allows access to the movie that the controller passed to the view.</span></span> <span data-ttu-id="85c2d-453">`Model` オブジェクトは厳密に型指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-453">The `Model` object is strongly typed.</span></span> <span data-ttu-id="85c2d-454">たとえば、*Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-454">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="85c2d-455">`Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-455">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
 
-<span data-ttu-id="20515-454">Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。</span><span class="sxs-lookup"><span data-stu-id="20515-454">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="20515-455">コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。</span><span class="sxs-lookup"><span data-stu-id="20515-455">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="20515-456">コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。</span><span class="sxs-lookup"><span data-stu-id="20515-456">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
+<span data-ttu-id="85c2d-456">Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-456">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="85c2d-457">コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-457">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="85c2d-458">コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-458">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-<span data-ttu-id="20515-457">ムービー コントローラーが作成されたとき、スキャフォールディングにより、 *Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="20515-457">When the movies controller was created, scaffolding included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-459">ムービー コントローラーが作成されたとき、スキャフォールディングにより、*Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-459">When the movies controller was created, scaffolding included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-<span data-ttu-id="20515-458">`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="20515-458">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="20515-459">たとえば、 *Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。</span><span class="sxs-lookup"><span data-stu-id="20515-459">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
+<span data-ttu-id="85c2d-460">`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-460">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="85c2d-461">たとえば、*Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-461">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-<span data-ttu-id="20515-460">`Model` オブジェクトは厳密に型指定されているので (`IEnumerable<Movie>` オブジェクトとして)、ループ内の各項目は `Movie` として型指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-460">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="20515-461">これには、コンパイル時にコードを確認できるなどの利点があります。</span><span class="sxs-lookup"><span data-stu-id="20515-461">Among other benefits, this means that you get compile time checking of the code.</span></span>
+<span data-ttu-id="85c2d-462">`Model` オブジェクトは厳密に型指定されているので (`IEnumerable<Movie>` オブジェクトとして)、ループ内の各項目は `Movie` として型指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-462">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="85c2d-463">これには、コンパイル時にコードを確認できるなどの利点があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-463">Among other benefits, this means that you get compile time checking of the code.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="20515-462">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="20515-462">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="85c2d-464">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="85c2d-464">Additional resources</span></span>
 
-* [<span data-ttu-id="20515-463">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="20515-463">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
-* [<span data-ttu-id="20515-464">グローバライズとローカライズ</span><span class="sxs-lookup"><span data-stu-id="20515-464">Globalization and localization</span></span>](xref:fundamentals/localization)
+* [<span data-ttu-id="85c2d-465">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="85c2d-465">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
+* [<span data-ttu-id="85c2d-466">グローバライズとローカライズ</span><span class="sxs-lookup"><span data-stu-id="85c2d-466">Globalization and localization</span></span>](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="20515-465">[前のチュートリアル ビューの追加](adding-view.md)
-> [次のチュートリアル SQL の使用](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="20515-465">[Previous Adding a View](adding-view.md)
+> <span data-ttu-id="85c2d-467">[前のチュートリアル ビューの追加](adding-view.md)
+> [次のチュートリアル SQL の使用](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="85c2d-467">[Previous Adding a View](adding-view.md)
 [Next Working with SQL](working-with-sql.md)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="add-a-data-model-class"></a><span data-ttu-id="20515-466">データ モデル クラスの追加</span><span class="sxs-lookup"><span data-stu-id="20515-466">Add a data model class</span></span>
+## <a name="add-a-data-model-class"></a><span data-ttu-id="85c2d-468">データ モデル クラスの追加</span><span class="sxs-lookup"><span data-stu-id="85c2d-468">Add a data model class</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-467">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-467">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-469">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-469">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-468">*Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-468">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="20515-469">クラスに **Movie** と名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="20515-469">Name the class **Movie**.</span></span>
+<span data-ttu-id="85c2d-470">*Models* フォルダーを右クリックし、 **[追加]**  >  **[クラス]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-470">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="85c2d-471">クラスに **Movie** と名前を付けます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-471">Name the class **Movie**.</span></span>
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-470">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-470">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-472">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-472">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="20515-471">*Movie.cs* という名前の *Models* フォルダーにクラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-471">Add a class to the *Models* folder named *Movie.cs*.</span></span>
+* <span data-ttu-id="85c2d-473">*Movie.cs* という名前の *Models* フォルダーにクラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-473">Add a class to the *Models* folder named *Movie.cs*.</span></span>
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 [!INCLUDE [model 2](~/includes/mvc-intro/model2.md)]
 
 ---
 
-## <a name="scaffold-the-movie-model"></a><span data-ttu-id="20515-472">ムービー モデルのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="20515-472">Scaffold the movie model</span></span>
+## <a name="scaffold-the-movie-model"></a><span data-ttu-id="85c2d-474">ムービー モデルのスキャフォールディング</span><span class="sxs-lookup"><span data-stu-id="85c2d-474">Scaffold the movie model</span></span>
 
-<span data-ttu-id="20515-473">このセクションでは、ムービー モデルがスキャフォールディングされます。</span><span class="sxs-lookup"><span data-stu-id="20515-473">In this section, the movie model is scaffolded.</span></span> <span data-ttu-id="20515-474">つまり、スキャフォールディング ツールにより、ムービー モデルの作成、読み取り、更新、削除の (CRUD) 操作用のページが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-474">That is, the scaffolding tool produces pages for Create, Read, Update, and Delete (CRUD) operations for the movie model.</span></span>
+<span data-ttu-id="85c2d-475">このセクションでは、ムービー モデルがスキャフォールディングされます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-475">In this section, the movie model is scaffolded.</span></span> <span data-ttu-id="85c2d-476">つまり、スキャフォールディング ツールにより、ムービー モデルの作成、読み取り、更新、削除の (CRUD) 操作用のページが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-476">That is, the scaffolding tool produces pages for Create, Read, Update, and Delete (CRUD) operations for the movie model.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-475">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-475">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-477">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-477">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-476">*ソリューション エクスプローラー* で、 **Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-476">In **Solution Explorer** , right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
+<span data-ttu-id="85c2d-478">*ソリューション エクスプローラー* で、**Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-478">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
 
 ![前述の手順を参照](adding-model/_static/add_controller21.png)
 
-<span data-ttu-id="20515-478">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用したビューがある MVC コントローラー]、[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-478">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
+<span data-ttu-id="85c2d-480">**[スキャフォールディングを追加]** ダイアログで、 **[Entity Framework を使用したビューがある MVC コントローラー]、[追加]** の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-480">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
 
 ![[スキャフォールディングを追加] ダイアログ](adding-model/_static/add_scaffold21.png)
 
-<span data-ttu-id="20515-480">**[コントローラーの追加]** ダイアログ ボックスを完了します。</span><span class="sxs-lookup"><span data-stu-id="20515-480">Complete the **Add Controller** dialog:</span></span>
+<span data-ttu-id="85c2d-482">**[コントローラーの追加]** ダイアログ ボックスを完了します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-482">Complete the **Add Controller** dialog:</span></span>
 
-* <span data-ttu-id="20515-481">**モデル クラス:** *Movie (MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="20515-481">**Model class:** *Movie (MvcMovie.Models)*</span></span>
-* <span data-ttu-id="20515-482">**データ コンテキスト クラス:** **+** アイコンを選択して、既定の **MvcMovie.Models.MvcMovieContext** を追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-482">**Data context class:** Select the **+** icon and add the default **MvcMovie.Models.MvcMovieContext**</span></span>
+* <span data-ttu-id="85c2d-483">**モデル クラス:** *Movie (MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="85c2d-483">**Model class:** *Movie (MvcMovie.Models)*</span></span>
+* <span data-ttu-id="85c2d-484">**データ コンテキスト クラス:** **+** アイコンを選択して、既定の **MvcMovie.Models.MvcMovieContext** を追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-484">**Data context class:** Select the **+** icon and add the default **MvcMovie.Models.MvcMovieContext**</span></span>
 
 ![[データの追加] コンテキスト](adding-model/_static/dc.png)
 
-* <span data-ttu-id="20515-484">**ビュー:** 各オプションの既定値をオンにします。</span><span class="sxs-lookup"><span data-stu-id="20515-484">**Views:** Keep the default of each option checked</span></span>
-* <span data-ttu-id="20515-485">**コントローラー名:** 既定の *MoviesController* のままにします。</span><span class="sxs-lookup"><span data-stu-id="20515-485">**Controller name:** Keep the default *MoviesController*</span></span>
-* <span data-ttu-id="20515-486">**[追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-486">Select **Add**</span></span>
+* <span data-ttu-id="85c2d-486">**ビュー:** 各オプションの既定値をオンにします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-486">**Views:** Keep the default of each option checked</span></span>
+* <span data-ttu-id="85c2d-487">**コントローラー名:** 既定の *MoviesController* のままにします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-487">**Controller name:** Keep the default *MoviesController*</span></span>
+* <span data-ttu-id="85c2d-488">**[追加]** を選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-488">Select **Add**</span></span>
 
 ![[コントローラーの追加] ダイアログ](adding-model/_static/add_controller2.png)
 
-<span data-ttu-id="20515-488">Visual Studio では、次が作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-488">Visual Studio creates:</span></span>
+<span data-ttu-id="85c2d-490">Visual Studio では、次が作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-490">Visual Studio creates:</span></span>
 
-* <span data-ttu-id="20515-489">Entity Framework Core の [データベース コンテキスト クラス](xref:data/ef-mvc/intro#create-the-database-context)( *Data/MvcMovieContext.cs* )</span><span class="sxs-lookup"><span data-stu-id="20515-489">An Entity Framework Core [database context class](xref:data/ef-mvc/intro#create-the-database-context) ( *Data/MvcMovieContext.cs* )</span></span>
-* <span data-ttu-id="20515-490">ムービー コントローラー ( *Controllers/MoviesController.cs* )</span><span class="sxs-lookup"><span data-stu-id="20515-490">A movies controller ( *Controllers/MoviesController.cs* )</span></span>
-* <span data-ttu-id="20515-491">作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル ( *Views/Movies/\*.cshtml* )</span><span class="sxs-lookup"><span data-stu-id="20515-491">Razor view files for Create, Delete, Details, Edit, and Index pages ( *Views/Movies/\*.cshtml* )</span></span>
+* <span data-ttu-id="85c2d-491">Entity Framework Core の [データベース コンテキスト クラス](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-491">An Entity Framework Core [database context class](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext.cs*)</span></span>
+* <span data-ttu-id="85c2d-492">ムービー コントローラー (*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-492">A movies controller (*Controllers/MoviesController.cs*)</span></span>
+* <span data-ttu-id="85c2d-493">作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル (*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="85c2d-493">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
 
-<span data-ttu-id="20515-492">データベース コンテキストと [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (作成、読み取り、更新、および削除) アクション メソッドとビューの自動作成は、 *スキャフォールディング* と言います。</span><span class="sxs-lookup"><span data-stu-id="20515-492">The automatic creation of the database context and [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*.</span></span>
+<span data-ttu-id="85c2d-494">データベース コンテキストと [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (作成、読み取り、更新、および削除) アクション メソッドとビューの自動作成は、*スキャフォールディング* と言います。</span><span class="sxs-lookup"><span data-stu-id="85c2d-494">The automatic creation of the database context and [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="20515-493">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="20515-493">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="85c2d-495">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="85c2d-495">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* <span data-ttu-id="20515-494">プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="20515-494">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
-* <span data-ttu-id="20515-495">スキャフォールディング ツールをインストールします。</span><span class="sxs-lookup"><span data-stu-id="20515-495">Install the scaffolding tool:</span></span>
+* <span data-ttu-id="85c2d-496">プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-496">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
+* <span data-ttu-id="85c2d-497">スキャフォールディング ツールをインストールします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-497">Install the scaffolding tool:</span></span>
 
   ```dotnetcli
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* <span data-ttu-id="20515-496">Linux で、スキャフォールディング ツールのパスをエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="20515-496">On Linux, export the scaffold tool path:</span></span>
+* <span data-ttu-id="85c2d-498">Linux で、スキャフォールディング ツールのパスをエクスポートします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-498">On Linux, export the scaffold tool path:</span></span>
 
   ```console
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* <span data-ttu-id="20515-497">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-497">Run the following command:</span></span>
+* <span data-ttu-id="85c2d-499">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-499">Run the following command:</span></span>
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -892,16 +900,16 @@ return View(movie);
 
 <!-- Mac -------------------------->
 
-# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="20515-498">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-498">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-500">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-500">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="20515-499">プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="20515-499">Open a command window in the project directory (The directory that contains the *Program.cs* , *Startup.cs* , and *.csproj* files).</span></span>
-* <span data-ttu-id="20515-500">スキャフォールディング ツールをインストールします。</span><span class="sxs-lookup"><span data-stu-id="20515-500">Install the scaffolding tool:</span></span>
+* <span data-ttu-id="85c2d-501">プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-501">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
+* <span data-ttu-id="85c2d-502">スキャフォールディング ツールをインストールします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-502">Install the scaffolding tool:</span></span>
 
   ```dotnetcli
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* <span data-ttu-id="20515-501">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-501">Run the following command:</span></span>
+* <span data-ttu-id="85c2d-503">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-503">Run the following command:</span></span>
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -913,9 +921,9 @@ return View(movie);
 
 <!-- End of VS tabs                  -->
 
-<span data-ttu-id="20515-502">アプリを実行し、 **[MVC Movie]\(MVC ムービー\)** リンクをクリックすると、次のようなエラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="20515-502">If you run the app and click on the **Mvc Movie** link, you get an error similar to the following:</span></span>
+<span data-ttu-id="85c2d-504">アプリを実行し、 **[MVC Movie]\(MVC ムービー\)** リンクをクリックすると、次のようなエラーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-504">If you run the app and click on the **Mvc Movie** link, you get an error similar to the following:</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-503">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-503">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-505">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-505">Visual Studio</span></span>](#tab/visual-studio)
 
 ```
 An unhandled exception occurred while processing the request.
@@ -926,7 +934,7 @@ Login failed for user 'Rick'.
 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString
 ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-504">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-504">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-506">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-506">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 ```
 An unhandled exception occurred while processing the request.
@@ -937,185 +945,185 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ---
 
-<span data-ttu-id="20515-505">データベースを作成する必要があり、それには EF Core [移行](xref:data/ef-mvc/migrations)機能を使用します。</span><span class="sxs-lookup"><span data-stu-id="20515-505">You need to create the database, and you use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to do that.</span></span> <span data-ttu-id="20515-506">移行では、データ モデルに一致するデータベースを作成し、データ モデルの変更時にデータベース スキーマを更新することができます。</span><span class="sxs-lookup"><span data-stu-id="20515-506">Migrations lets you create a database that matches your data model and update the database schema when your data model changes.</span></span>
+<span data-ttu-id="85c2d-507">データベースを作成する必要があり、それには EF Core [移行](xref:data/ef-mvc/migrations)機能を使用します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-507">You need to create the database, and you use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to do that.</span></span> <span data-ttu-id="85c2d-508">移行では、データ モデルに一致するデータベースを作成し、データ モデルの変更時にデータベース スキーマを更新することができます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-508">Migrations lets you create a database that matches your data model and update the database schema when your data model changes.</span></span>
 
 <a name="pmc"></a>
 
-## <a name="initial-migration"></a><span data-ttu-id="20515-507">最初の移行</span><span class="sxs-lookup"><span data-stu-id="20515-507">Initial migration</span></span>
+## <a name="initial-migration"></a><span data-ttu-id="85c2d-509">最初の移行</span><span class="sxs-lookup"><span data-stu-id="85c2d-509">Initial migration</span></span>
 
-<span data-ttu-id="20515-508">このセクションでは、次のタスクを完了しました。</span><span class="sxs-lookup"><span data-stu-id="20515-508">In this section, the following tasks are completed:</span></span>
+<span data-ttu-id="85c2d-510">このセクションでは、次のタスクを完了しました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-510">In this section, the following tasks are completed:</span></span>
 
-* <span data-ttu-id="20515-509">初期移行を追加します。</span><span class="sxs-lookup"><span data-stu-id="20515-509">Add an initial migration.</span></span>
-* <span data-ttu-id="20515-510">初期移行でデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="20515-510">Update the database with the initial migration.</span></span>
+* <span data-ttu-id="85c2d-511">初期移行を追加します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-511">Add an initial migration.</span></span>
+* <span data-ttu-id="85c2d-512">初期移行でデータベースを更新します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-512">Update the database with the initial migration.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-511">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-511">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-513">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-513">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="20515-512">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="20515-512">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+1. <span data-ttu-id="85c2d-514">**[ツール]** メニューで、 **[NuGet パッケージ マネージャー]** > **[パッケージ マネージャー コンソール]** (PMC) の順に選択します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-514">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
    ![PMC メニュー](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
-1. <span data-ttu-id="20515-514">PMC で、次のコマンドを入力します。</span><span class="sxs-lookup"><span data-stu-id="20515-514">In the PMC, enter the following commands:</span></span>
+1. <span data-ttu-id="85c2d-516">PMC で、次のコマンドを入力します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-516">In the PMC, enter the following commands:</span></span>
 
    ```powershell
    Add-Migration Initial
    Update-Database
    ```
 
-   <span data-ttu-id="20515-515">`Add-Migration` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-515">The `Add-Migration` command generates code to create the initial database schema.</span></span>
+   <span data-ttu-id="85c2d-517">`Add-Migration` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-517">The `Add-Migration` command generates code to create the initial database schema.</span></span>
 
-   <span data-ttu-id="20515-516">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。</span><span class="sxs-lookup"><span data-stu-id="20515-516">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span> <span data-ttu-id="20515-517">`Initial` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="20515-517">The `Initial` argument is the migration name.</span></span> <span data-ttu-id="20515-518">任意の名前を使用できますが、慣例により、移行を説明する名前が使用されます。</span><span class="sxs-lookup"><span data-stu-id="20515-518">Any name can be used, but by convention, a name that describes the migration is used.</span></span> <span data-ttu-id="20515-519">詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="20515-519">For more information, see <xref:data/ef-mvc/migrations>.</span></span>
+   <span data-ttu-id="85c2d-518">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-518">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span> <span data-ttu-id="85c2d-519">`Initial` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-519">The `Initial` argument is the migration name.</span></span> <span data-ttu-id="85c2d-520">任意の名前を使用できますが、慣例により、移行を説明する名前が使用されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-520">Any name can be used, but by convention, a name that describes the migration is used.</span></span> <span data-ttu-id="85c2d-521">詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-521">For more information, see <xref:data/ef-mvc/migrations>.</span></span>
 
-   <span data-ttu-id="20515-520">`Update-Database` コマンドは、データベースを作成する、 *Migrations/{time-stamp}_InitialCreate.cs* ファイルの `Up` メソッドを実行します。</span><span class="sxs-lookup"><span data-stu-id="20515-520">The `Update-Database` command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+   <span data-ttu-id="85c2d-522">`Update-Database` コマンドは、データベースを作成する、*Migrations/{time-stamp}_InitialCreate.cs* ファイルの `Up` メソッドを実行します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-522">The `Update-Database` command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-521">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-521">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-523">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-523">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE [initial migration](~/includes/RP/model3.md)]
 
-<span data-ttu-id="20515-522">`ef migrations add InitialCreate` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-522">The `ef migrations add InitialCreate` command generates code to create the initial database schema.</span></span>
+<span data-ttu-id="85c2d-524">`ef migrations add InitialCreate` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-524">The `ef migrations add InitialCreate` command generates code to create the initial database schema.</span></span>
 
-<span data-ttu-id="20515-523">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます ( *Data/MvcMovieContext.cs* ファイル内)。</span><span class="sxs-lookup"><span data-stu-id="20515-523">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span> <span data-ttu-id="20515-524">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="20515-524">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="20515-525">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="20515-525">Any name can be used, but by convention, a name is selected that describes the migration.</span></span>
+<span data-ttu-id="85c2d-525">データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-525">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span> <span data-ttu-id="85c2d-526">`InitialCreate` 引数は、移行の名前です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-526">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="85c2d-527">任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-527">Any name can be used, but by convention, a name is selected that describes the migration.</span></span>
 
 ---
 
-## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="20515-526">依存関係挿入に登録されるコンテキストを調べる</span><span class="sxs-lookup"><span data-stu-id="20515-526">Examine the context registered with dependency injection</span></span>
+## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="85c2d-528">依存関係挿入に登録されるコンテキストを調べる</span><span class="sxs-lookup"><span data-stu-id="85c2d-528">Examine the context registered with dependency injection</span></span>
 
-<span data-ttu-id="20515-527">ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="20515-527">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="20515-528">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録されます。</span><span class="sxs-lookup"><span data-stu-id="20515-528">Services (such as the EF Core DB context) are registered with DI during application startup.</span></span> <span data-ttu-id="20515-529">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-529">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="20515-530">DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="20515-530">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="85c2d-529">ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-injection) が組み込まれています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-529">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="85c2d-530">サービス (EF Core DB コンテキストなど) は、アプリケーションの起動時に DI に登録されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-530">Services (such as the EF Core DB context) are registered with DI during application startup.</span></span> <span data-ttu-id="85c2d-531">これらのサービスを必要とするコンポーネント (Razor Pages など) には、コンストラクターのパラメーターを介してこれらのサービスが指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-531">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="85c2d-532">DB コンテキスト インスタンスを取得するコンストラクター コードは、チュートリアルの後半で示します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-532">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="20515-531">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="20515-531">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="85c2d-533">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="85c2d-533">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="20515-532">スキャフォールディング ツールが自動的に DB コンテキストを作成し、それを DI コンテナーに登録します。</span><span class="sxs-lookup"><span data-stu-id="20515-532">The scaffolding tool automatically created a DB context and registered it with the DI container.</span></span>
+<span data-ttu-id="85c2d-534">スキャフォールディング ツールが自動的に DB コンテキストを作成し、それを DI コンテナーに登録します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-534">The scaffolding tool automatically created a DB context and registered it with the DI container.</span></span>
 
-<span data-ttu-id="20515-533">次の `Startup.ConfigureServices` メソッドを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-533">Examine the following `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="20515-534">強調表示された行は、スキャフォールダーによって追加されました。</span><span class="sxs-lookup"><span data-stu-id="20515-534">The highlighted line was added by the scaffolder:</span></span>
+<span data-ttu-id="85c2d-535">次の `Startup.ConfigureServices` メソッドを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-535">Examine the following `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="85c2d-536">強調表示された行は、スキャフォールダーによって追加されました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-536">The highlighted line was added by the scaffolder:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=14-15)]
 
-<span data-ttu-id="20515-535">`MvcMovieContext` では、`Movie` モデルのために EF Core 機能 (作成、読み取り、更新、削除など) が調整されます。</span><span class="sxs-lookup"><span data-stu-id="20515-535">The `MvcMovieContext` coordinates EF Core functionality (Create, Read, Update, Delete, etc.) for the `Movie` model.</span></span> <span data-ttu-id="20515-536">データ コンテキスト (`MvcMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生されます。</span><span class="sxs-lookup"><span data-stu-id="20515-536">The data context (`MvcMovieContext`) is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext).</span></span> <span data-ttu-id="20515-537">データ コンテキストによって、データ モデルに含めるエンティティが指定されます:</span><span class="sxs-lookup"><span data-stu-id="20515-537">The data context specifies which entities are included in the data model:</span></span>
+<span data-ttu-id="85c2d-537">`MvcMovieContext` では、`Movie` モデルのために EF Core 機能 (作成、読み取り、更新、削除など) が調整されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-537">The `MvcMovieContext` coordinates EF Core functionality (Create, Read, Update, Delete, etc.) for the `Movie` model.</span></span> <span data-ttu-id="85c2d-538">データ コンテキスト (`MvcMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) から派生されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-538">The data context (`MvcMovieContext`) is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext).</span></span> <span data-ttu-id="85c2d-539">データ コンテキストによって、データ モデルに含めるエンティティが指定されます:</span><span class="sxs-lookup"><span data-stu-id="85c2d-539">The data context specifies which entities are included in the data model:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Data/MvcMovieContext.cs)]
 
-<span data-ttu-id="20515-538">上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。</span><span class="sxs-lookup"><span data-stu-id="20515-538">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="20515-539">Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。</span><span class="sxs-lookup"><span data-stu-id="20515-539">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="20515-540">エンティティはテーブル内の行に対応します。</span><span class="sxs-lookup"><span data-stu-id="20515-540">An entity corresponds to a row in the table.</span></span>
+<span data-ttu-id="85c2d-540">上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-540">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="85c2d-541">Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-541">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="85c2d-542">エンティティはテーブル内の行に対応します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-542">An entity corresponds to a row in the table.</span></span>
 
-<span data-ttu-id="20515-541">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-541">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="20515-542">ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="20515-542">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
+<span data-ttu-id="85c2d-543">[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-543">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="85c2d-544">ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-544">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="20515-543">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="20515-543">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="85c2d-545">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="85c2d-545">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="20515-544">DB コンテキストを作成し、それを DI コンテナーに登録しました。</span><span class="sxs-lookup"><span data-stu-id="20515-544">You created a DB context and registered it with the DI container.</span></span>
+<span data-ttu-id="85c2d-546">DB コンテキストを作成し、それを DI コンテナーに登録しました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-546">You created a DB context and registered it with the DI container.</span></span>
 
 ---
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a><span data-ttu-id="20515-545">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="20515-545">Test the app</span></span>
+### <a name="test-the-app"></a><span data-ttu-id="85c2d-547">アプリのテスト</span><span class="sxs-lookup"><span data-stu-id="85c2d-547">Test the app</span></span>
 
-* <span data-ttu-id="20515-546">アプリを実行し、ブラウザーで URL に `/Movies` を追加します ( `http://localhost:port/movies` )。</span><span class="sxs-lookup"><span data-stu-id="20515-546">Run the app and append `/Movies` to the URL in the browser (`http://localhost:port/movies`).</span></span>
+* <span data-ttu-id="85c2d-548">アプリを実行し、ブラウザーで URL に `/Movies` を追加します ( `http://localhost:port/movies` )。</span><span class="sxs-lookup"><span data-stu-id="85c2d-548">Run the app and append `/Movies` to the URL in the browser (`http://localhost:port/movies`).</span></span>
 
-<span data-ttu-id="20515-547">次のようなデータベースの例外が表示された場合:</span><span class="sxs-lookup"><span data-stu-id="20515-547">If you get a database exception similar to the following:</span></span>
+<span data-ttu-id="85c2d-549">次のようなデータベースの例外が表示された場合:</span><span class="sxs-lookup"><span data-stu-id="85c2d-549">If you get a database exception similar to the following:</span></span>
 
 ```console
 SqlException: Cannot open database "MvcMovieContext-GUID" requested by the login. The login failed.
 Login failed for user 'User-name'.
 ```
 
-<span data-ttu-id="20515-548">[移行手順](#pmc)を失敗しました。</span><span class="sxs-lookup"><span data-stu-id="20515-548">You missed the [migrations step](#pmc).</span></span>
+<span data-ttu-id="85c2d-550">[移行手順](#pmc)を失敗しました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-550">You missed the [migrations step](#pmc).</span></span>
 
-* <span data-ttu-id="20515-549">**[作成]** リンクをテストします。</span><span class="sxs-lookup"><span data-stu-id="20515-549">Test the **Create** link.</span></span> <span data-ttu-id="20515-550">データを入力して送信します。</span><span class="sxs-lookup"><span data-stu-id="20515-550">Enter and submit data.</span></span>
+* <span data-ttu-id="85c2d-551">**[作成]** リンクをテストします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-551">Test the **Create** link.</span></span> <span data-ttu-id="85c2d-552">データを入力して送信します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-552">Enter and submit data.</span></span>
 
   > [!NOTE]
-  > <span data-ttu-id="20515-551">`Price` フィールドに小数点のコンマを入力できない場合があります。</span><span class="sxs-lookup"><span data-stu-id="20515-551">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="20515-552">小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。</span><span class="sxs-lookup"><span data-stu-id="20515-552">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="20515-553">グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="20515-553">For globalization instructions, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
+  > <span data-ttu-id="85c2d-553">`Price` フィールドに小数点のコンマを入力できない場合があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-553">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="85c2d-554">小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-554">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="85c2d-555">グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-555">For globalization instructions, see [this GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
 
-* <span data-ttu-id="20515-554">**[編集]** 、 **[詳細]** 、および **[削除]** の各リンクをテストします。</span><span class="sxs-lookup"><span data-stu-id="20515-554">Test the **Edit** , **Details** , and **Delete** links.</span></span>
+* <span data-ttu-id="85c2d-556">**[編集]** 、 **[詳細]** 、および **[削除]** の各リンクをテストします。</span><span class="sxs-lookup"><span data-stu-id="85c2d-556">Test the **Edit**, **Details**, and **Delete** links.</span></span>
 
-<span data-ttu-id="20515-555">次の `Startup` クラスを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-555">Examine the `Startup` class:</span></span>
+<span data-ttu-id="85c2d-557">次の `Startup` クラスを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-557">Examine the `Startup` class:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=13-99)]
 
-<span data-ttu-id="20515-556">上のコードで強調表示されている部分は、[依存性の注入](xref:fundamentals/dependency-injection)コンテナーに追加されているムービー データベース コンテキストを示します。</span><span class="sxs-lookup"><span data-stu-id="20515-556">The preceding highlighted code shows the movie database context being added to the [Dependency Injection](xref:fundamentals/dependency-injection) container:</span></span>
+<span data-ttu-id="85c2d-558">上のコードで強調表示されている部分は、[依存性の注入](xref:fundamentals/dependency-injection)コンテナーに追加されているムービー データベース コンテキストを示します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-558">The preceding highlighted code shows the movie database context being added to the [Dependency Injection](xref:fundamentals/dependency-injection) container:</span></span>
 
-* <span data-ttu-id="20515-557">`services.AddDbContext<MvcMovieContext>(options =>` では、使用するデータベースと接続文字列を指定します。</span><span class="sxs-lookup"><span data-stu-id="20515-557">`services.AddDbContext<MvcMovieContext>(options =>` specifies the database to use and the connection string.</span></span>
-* <span data-ttu-id="20515-558">`=>` は[ラムダ演算子](/dotnet/articles/csharp/language-reference/operators/lambda-operator)です。</span><span class="sxs-lookup"><span data-stu-id="20515-558">`=>` is a [lambda operator](/dotnet/articles/csharp/language-reference/operators/lambda-operator)</span></span>
+* <span data-ttu-id="85c2d-559">`services.AddDbContext<MvcMovieContext>(options =>` では、使用するデータベースと接続文字列を指定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-559">`services.AddDbContext<MvcMovieContext>(options =>` specifies the database to use and the connection string.</span></span>
+* <span data-ttu-id="85c2d-560">`=>` は[ラムダ演算子](/dotnet/articles/csharp/language-reference/operators/lambda-operator)です。</span><span class="sxs-lookup"><span data-stu-id="85c2d-560">`=>` is a [lambda operator](/dotnet/articles/csharp/language-reference/operators/lambda-operator)</span></span>
 
-<span data-ttu-id="20515-559">*Controllers/MoviesController.cs* ファイルを開いて、コンストラクターを調べます。</span><span class="sxs-lookup"><span data-stu-id="20515-559">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
+<span data-ttu-id="85c2d-561">*Controllers/MoviesController.cs* ファイルを開いて、コンストラクターを調べます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-561">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
 
 <!-- l.. Make copy of Movies controller because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="20515-560">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="20515-560">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="20515-561">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="20515-561">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="85c2d-562">コンストラクターでは、[依存性の注入](xref:fundamentals/dependency-injection)を使ってデータベース コンテキスト (`MvcMovieContext`) がコントローラーに挿入されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-562">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="85c2d-563">データベース コンテキストは、コントローラーの各 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) メソッドで使用されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-563">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
-## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="20515-562">厳密に型指定されたモデルと @model キーワード</span><span class="sxs-lookup"><span data-stu-id="20515-562">Strongly typed models and the @model keyword</span></span>
+## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="85c2d-564">厳密に型指定されたモデルと @model キーワード</span><span class="sxs-lookup"><span data-stu-id="85c2d-564">Strongly typed models and the @model keyword</span></span>
 
-<span data-ttu-id="20515-563">コントローラーで `ViewData` ディクショナリを使ってビューにデータまたはオブジェクトを渡す方法を前に示しました。</span><span class="sxs-lookup"><span data-stu-id="20515-563">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="20515-564">`ViewData` ディクショナリは動的オブジェクトであり、ビューに情報を渡すための便利な遅延バインディングの方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="20515-564">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
+<span data-ttu-id="85c2d-565">コントローラーで `ViewData` ディクショナリを使ってビューにデータまたはオブジェクトを渡す方法を前に示しました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-565">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="85c2d-566">`ViewData` ディクショナリは動的オブジェクトであり、ビューに情報を渡すための便利な遅延バインディングの方法を提供します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-566">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
 
-<span data-ttu-id="20515-565">MVC にも、厳密に型指定されたモデル オブジェクトをビューに渡す機能があります。</span><span class="sxs-lookup"><span data-stu-id="20515-565">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="20515-566">この厳密に型指定された方法を使うと、コンパイル時のコードのチェックが向上します。</span><span class="sxs-lookup"><span data-stu-id="20515-566">This strongly typed approach enables better compile time checking of your code.</span></span> <span data-ttu-id="20515-567">スキャフォールディング メカニズムは、メソッドとビューを作成するときに、`MoviesController` クラスとビューでこの方法 (つまり、厳密に型指定されたモデルを渡すこと) を使いました。</span><span class="sxs-lookup"><span data-stu-id="20515-567">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views when it created the methods and views.</span></span>
+<span data-ttu-id="85c2d-567">MVC にも、厳密に型指定されたモデル オブジェクトをビューに渡す機能があります。</span><span class="sxs-lookup"><span data-stu-id="85c2d-567">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="85c2d-568">この厳密に型指定された方法を使うと、コンパイル時のコードのチェックが向上します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-568">This strongly typed approach enables better compile time checking of your code.</span></span> <span data-ttu-id="85c2d-569">スキャフォールディング メカニズムは、メソッドとビューを作成するときに、`MoviesController` クラスとビューでこの方法 (つまり、厳密に型指定されたモデルを渡すこと) を使いました。</span><span class="sxs-lookup"><span data-stu-id="85c2d-569">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views when it created the methods and views.</span></span>
 
-<span data-ttu-id="20515-568">*Controllers/MoviesController.cs* ファイルで生成された `Details` メソッドを調べてください。</span><span class="sxs-lookup"><span data-stu-id="20515-568">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
+<span data-ttu-id="85c2d-570">*Controllers/MoviesController.cs* ファイルで生成された `Details` メソッドを調べてください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-570">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-<span data-ttu-id="20515-569">通常、`id` パラメーターはルート データとして渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-569">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="20515-570">たとえば、`https://localhost:5001/movies/details/1` は次のように設定します。</span><span class="sxs-lookup"><span data-stu-id="20515-570">For example `https://localhost:5001/movies/details/1` sets:</span></span>
+<span data-ttu-id="85c2d-571">通常、`id` パラメーターはルート データとして渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-571">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="85c2d-572">たとえば、`https://localhost:5001/movies/details/1` は次のように設定します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-572">For example `https://localhost:5001/movies/details/1` sets:</span></span>
 
-* <span data-ttu-id="20515-571">コントローラーを `movies` コントローラーに (最初の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-571">The controller to the `movies` controller (the first URL segment).</span></span>
-* <span data-ttu-id="20515-572">アクションを `details` に (2 番目の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-572">The action to `details` (the second URL segment).</span></span>
-* <span data-ttu-id="20515-573">ID を 1 に (最後の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="20515-573">The id to 1 (the last URL segment).</span></span>
+* <span data-ttu-id="85c2d-573">コントローラーを `movies` コントローラーに (最初の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-573">The controller to the `movies` controller (the first URL segment).</span></span>
+* <span data-ttu-id="85c2d-574">アクションを `details` に (2 番目の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-574">The action to `details` (the second URL segment).</span></span>
+* <span data-ttu-id="85c2d-575">ID を 1 に (最後の URL セグメント)。</span><span class="sxs-lookup"><span data-stu-id="85c2d-575">The id to 1 (the last URL segment).</span></span>
 
-<span data-ttu-id="20515-574">次のようにクエリ文字列で `id` を渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="20515-574">You can also pass in the `id` with a query string as follows:</span></span>
+<span data-ttu-id="85c2d-576">次のようにクエリ文字列で `id` を渡すこともできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-576">You can also pass in the `id` with a query string as follows:</span></span>
 
 `https://localhost:5001/movies/details?id=1`
 
-<span data-ttu-id="20515-575">ID 値が指定されない場合、`id` パラメーターは [null 許容型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) として定義されます。</span><span class="sxs-lookup"><span data-stu-id="20515-575">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
+<span data-ttu-id="85c2d-577">ID 値が指定されない場合、`id` パラメーターは [null 許容型](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) として定義されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-577">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
 
-<span data-ttu-id="20515-576">ルート データまたはクエリ文字列の値と一致するムービー エンティティを選択するため、[ラムダ式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)が `FirstOrDefaultAsync` に渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-576">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
+<span data-ttu-id="85c2d-578">ルート データまたはクエリ文字列の値と一致するムービー エンティティを選択するため、[ラムダ式](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)が `FirstOrDefaultAsync` に渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-578">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
 
 ```csharp
 var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-<span data-ttu-id="20515-577">ムービーが見つかった場合、`Movie` モデルのインスタンスが `Details` ビューに渡されます。</span><span class="sxs-lookup"><span data-stu-id="20515-577">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
+<span data-ttu-id="85c2d-579">ムービーが見つかった場合、`Movie` モデルのインスタンスが `Details` ビューに渡されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-579">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
 
 ```csharp
 return View(movie);
    ```
 
-<span data-ttu-id="20515-578">*Views/Movies/Details.cshtml* ファイルの内容を確認してください。</span><span class="sxs-lookup"><span data-stu-id="20515-578">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-580">*Views/Movies/Details.cshtml* ファイルの内容を確認してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-580">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-<span data-ttu-id="20515-579">ビュー ファイルの先頭に `@model` ステートメントを含めることで、ビューが期待するオブジェクトの型を指定することができます。</span><span class="sxs-lookup"><span data-stu-id="20515-579">By including a `@model` statement at the top of the view file, you can specify the type of object that the view expects.</span></span> <span data-ttu-id="20515-580">ムービー コントローラーを作成したとき、 *Details.cshtml* ファイルの先頭に次の `@model` ステートメントが自動的に追加されています。</span><span class="sxs-lookup"><span data-stu-id="20515-580">When you created the movie controller, the following `@model` statement was automatically included at the top of the *Details.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-581">ビュー ファイルの先頭に `@model` ステートメントを含めることで、ビューが期待するオブジェクトの型を指定することができます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-581">By including a `@model` statement at the top of the view file, you can specify the type of object that the view expects.</span></span> <span data-ttu-id="85c2d-582">ムービー コントローラーを作成したとき、*Details.cshtml* ファイルの先頭に次の `@model` ステートメントが自動的に追加されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-582">When you created the movie controller, the following `@model` statement was automatically included at the top of the *Details.cshtml* file:</span></span>
 
 ```cshtml
 @model MvcMovie.Models.Movie
 ```
 
-<span data-ttu-id="20515-581">この `@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="20515-581">This `@model` directive allows you to access the movie that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="20515-582">たとえば、 *Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。</span><span class="sxs-lookup"><span data-stu-id="20515-582">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="20515-583">`Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。</span><span class="sxs-lookup"><span data-stu-id="20515-583">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
+<span data-ttu-id="85c2d-583">この `@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-583">This `@model` directive allows you to access the movie that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="85c2d-584">たとえば、*Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-584">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="85c2d-585">`Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。</span><span class="sxs-lookup"><span data-stu-id="85c2d-585">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
 
-<span data-ttu-id="20515-584">Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。</span><span class="sxs-lookup"><span data-stu-id="20515-584">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="20515-585">コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。</span><span class="sxs-lookup"><span data-stu-id="20515-585">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="20515-586">コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。</span><span class="sxs-lookup"><span data-stu-id="20515-586">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
+<span data-ttu-id="85c2d-586">Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-586">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="85c2d-587">コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。</span><span class="sxs-lookup"><span data-stu-id="85c2d-587">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="85c2d-588">コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-588">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-<span data-ttu-id="20515-587">ムービー コントローラーを作成したとき、スキャフォールディングによって *Index.cshtml* ファイルの先頭に `@model` ステートメントが自動的に追加されています。</span><span class="sxs-lookup"><span data-stu-id="20515-587">When you created the movies controller, scaffolding automatically included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
+<span data-ttu-id="85c2d-589">ムービー コントローラーを作成したとき、スキャフォールディングによって *Index.cshtml* ファイルの先頭に `@model` ステートメントが自動的に追加されています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-589">When you created the movies controller, scaffolding automatically included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-<span data-ttu-id="20515-588">`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="20515-588">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="20515-589">たとえば、 *Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。</span><span class="sxs-lookup"><span data-stu-id="20515-589">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
+<span data-ttu-id="85c2d-590">`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-590">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="85c2d-591">たとえば、*Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。</span><span class="sxs-lookup"><span data-stu-id="85c2d-591">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-<span data-ttu-id="20515-590">`Model` オブジェクトは厳密に型指定されているので (`IEnumerable<Movie>` オブジェクトとして)、ループ内の各項目は `Movie` として型指定されます。</span><span class="sxs-lookup"><span data-stu-id="20515-590">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="20515-591">それ以外の利点としては、コンパイル時にコードのチェックが行われます。</span><span class="sxs-lookup"><span data-stu-id="20515-591">Among other benefits, this means that you get compile time checking of the code:</span></span>
+<span data-ttu-id="85c2d-592">`Model` オブジェクトは厳密に型指定されているので (`IEnumerable<Movie>` オブジェクトとして)、ループ内の各項目は `Movie` として型指定されます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-592">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="85c2d-593">それ以外の利点としては、コンパイル時にコードのチェックが行われます。</span><span class="sxs-lookup"><span data-stu-id="85c2d-593">Among other benefits, this means that you get compile time checking of the code:</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="20515-592">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="20515-592">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="85c2d-594">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="85c2d-594">Additional resources</span></span>
 
-* [<span data-ttu-id="20515-593">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="20515-593">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
-* [<span data-ttu-id="20515-594">グローバライズとローカライズ</span><span class="sxs-lookup"><span data-stu-id="20515-594">Globalization and localization</span></span>](xref:fundamentals/localization)
+* [<span data-ttu-id="85c2d-595">タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="85c2d-595">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
+* [<span data-ttu-id="85c2d-596">グローバライズとローカライズ</span><span class="sxs-lookup"><span data-stu-id="85c2d-596">Globalization and localization</span></span>](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="20515-595">[前のチュートリアル ビューの追加](adding-view.md)
-> [次のチュートリアル データベースの使用](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="20515-595">[Previous Adding a View](adding-view.md)
+> <span data-ttu-id="85c2d-597">[前のチュートリアル ビューの追加](adding-view.md)
+> [次のチュートリアル データベースの使用](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="85c2d-597">[Previous Adding a View](adding-view.md)
 [Next Working with a database](working-with-sql.md)</span></span>
 
 ::: moniker-end
