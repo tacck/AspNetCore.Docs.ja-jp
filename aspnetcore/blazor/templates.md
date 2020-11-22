@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor アプリ テンプレートと Blazor プロ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/04/2020
+ms.date: 11/17/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: fc2e81cf130732d515fb871227031493e297cf9f
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 602ad2908d607703a3b77b2047d51d912645b043
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507773"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703723"
 ---
 # <a name="aspnet-core-no-locblazor-templates"></a>ASP.NET Core Blazor テンプレート
 
@@ -91,16 +91,30 @@ Blazor プロジェクト テンプレートから生成された Blazor アプ�
     * アプリのいずれかのページが最初に要求されると、このページが表示されて応答として返されます。
     * ブラウザーとサーバーの間のリアルタイム SignalR 接続を設定する `_framework/blazor.server.js` JavaScript ファイルが読み込まれます。
     * [ホスト] ページは、ルート `App` コンポーネント (`App.razor`) を表示する場所を指定します。
-  * `Counter` (`Pages/Counter.razor`):カウンター ページを実装します。
-  * `Error` (`Error.razor`、Blazor Server アプリのみ):アプリでハンドルされない例外が発生したときに表示されます。
-  * `FetchData` (`Pages/FetchData.razor`):フェッチ データ ページを実装します。
-  * `Index` (`Pages/Index.razor`):ホーム ページを実装します。
+  * `Counter` コンポーネント (`Pages/Counter.razor`): カウンター ページを実装します。
+  * `Error` コンポーネント (`Error.razor`、Blazor Server アプリのみ): アプリでハンドルされない例外が発生したときに表示されます。
+  * `FetchData` コンポーネント (`Pages/FetchData.razor`): フェッチ データ ページを実装します。
+  * `Index` コンポーネント (`Pages/Index.razor`): ホーム ページを実装します。
   
 * `Properties/launchSettings.json`:[開発環境の構成](xref:fundamentals/environments#development-and-launchsettingsjson)を保持します。
 
+::: moniker range=">= aspnetcore-5.0"
+
 * `Shared` フォルダー:アプリで使用する他の UI コンポーネント (`.razor`) を含みます。
-  * `MainLayout` (`MainLayout.razor`): アプリの[レイアウト コンポーネント](xref:blazor/layouts)。
-  * `NavMenu` (`NavMenu.razor`):サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
+  * `MainLayout` コンポーネント (`MainLayout.razor`): アプリの[レイアウト コンポーネント](xref:blazor/layouts)。
+  * `MainLayout.razor.css`: アプリのメイン レイアウト用のスタイルシート。
+  * `NavMenu` コンポーネント (`NavMenu.razor`): サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
+  * `NavMenu.razor.css`: アプリのナビゲーション メニュー用のスタイルシート。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* `Shared` フォルダー:アプリで使用する他の UI コンポーネント (`.razor`) を含みます。
+  * `MainLayout` コンポーネント (`MainLayout.razor`): アプリの[レイアウト コンポーネント](xref:blazor/layouts)。
+  * `NavMenu` コンポーネント (`NavMenu.razor`): サイドバー ナビゲーションを実装します。 ナビゲーション リンクを他の Razor コンポーネントに表示する [`NavLink` コンポーネント](xref:blazor/fundamentals/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>) が含まれます。 <xref:Microsoft.AspNetCore.Components.Routing.NavLink> コンポーネントは、そのコンポーネントが読み込まれると、自動的に選択された状態を示します。これは、ユーザーが現在どのコンポーネントが表示されているかを理解するために役立ちます。
+  
+::: moniker-end
 
 * `_Imports.razor`:名前空間の [`@using`](xref:mvc/views/razor#using) ディレクティブなど、アプリのコンポーネント (`.razor`) に含める一般的な Razor ディレクティブが含まれます。
 

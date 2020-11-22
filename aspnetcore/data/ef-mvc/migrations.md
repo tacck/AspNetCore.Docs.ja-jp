@@ -1,10 +1,10 @@
 ---
-title: 'チュートリアル: 移行機能の使用 - ASP.NET MVC と EF Core'
-description: このチュートリアルでは、ASP.NET Core MVC アプリケーションでデータ モデルの変更を管理するための EF Core の移行機能の使用を開始します。
+title: チュートリアル パート 5 - Contoso University のサンプルに移行を適用する
+description: Contoso University チュートリアル シリーズのパート 5。 ASP.NET Core MVC アプリでのデータ モデルの変更を管理するために EF Core の移行機能を使用します。
 author: rick-anderson
 ms.author: riande
-ms.custom: mvc
-ms.date: 03/27/2019
+ms.custom: contperfq2
+ms.date: 11/13/2020
 ms.topic: tutorial
 no-loc:
 - appsettings.json
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 070c18db55956d79560904f53395b5001c7bce6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ab5be222416e61fcff90c5130ca91ad4a2a5c9b0
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054035"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94674005"
 ---
-# <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>チュートリアル: 移行機能の使用 - ASP.NET MVC と EF Core
+# <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>チュートリアル: パート 5 - Contoso University のサンプルに移行を適用する
 
 このチュートリアルでは、データ モデルの変更を管理するための EF Core の移行機能の使用を開始します。 チュートリアルの後半では、データ モデルを変更するときに移行を追加します。
 
@@ -34,7 +34,6 @@ ms.locfileid: "93054035"
 
 > [!div class="checklist"]
 > * 移行について学習する
-> * 接続文字列を変更する
 > * 初期移行を作成する
 > * Up および Down メソッドを確認する
 > * データ モデルのスナップショットについて学習する
@@ -50,24 +49,17 @@ ms.locfileid: "93054035"
 
 このメソッドは、実稼働環境にアプリケーションを展開するまで、データベースとデータ モデルの同期の維持がうまく機能します。 実稼働環境でアプリケーションを実行している場合、通常、保持する必要があるデータが保存され、新しい列の追加などの変更を加えるたびにすべてが失われないようにする必要があります。 EF Core の移行機能は、新しいデータベースを作成する代わりに、EF でデータベース スキーマを更新できるようにすることで、この問題を解決します。
 
-移行の作業を行うには、 **パッケージ マネージャー コンソール** (PMC) または CLI を使用できます。  このチュートリアルでは、CLI コマンドを使用する方法を示します。 PMC については、[このチュートリアルの最後](#pmc)に説明します。
+移行の作業を行うには、**パッケージ マネージャー コンソール** (PMC) または CLI を使用できます。  このチュートリアルでは、CLI コマンドを使用する方法を示します。 PMC については、[このチュートリアルの最後](#pmc)に説明します。
 
-## <a name="change-the-connection-string"></a>接続文字列を変更する
+## <a name="drop-the-database"></a>データベースを削除します。
 
-*appsettings.json* ファイルで、接続文字列のデータベース名を ContosoUniversity2 に変更するか、使用しているコンピューターではまだ使用していない別の名前に変更します。
+データベースを削除します。 **SQL Server オブジェクト エクスプローラー** (SSOX) または `database drop` CLI コマンドを使用します。
 
-[!code-json[](intro/samples/cu/appsettings2.json?range=1-4)]
+ ```dotnetcli
+ dotnet ef database drop
+ ```
 
-この変更では、最初の移行で新しいデータベースが作成されるように、プロジェクトを設定します。 これは移行の作業を開始するために必要ではありませんが、後でこの設定をお勧めする理由がわかります。
-
-> [!NOTE]
-> データベース名を変更する代わりに、データベースを削除することもできます。 **SQL Server オブジェクト エクスプローラー** (SSOX) または `database drop` CLI コマンドを使用します。
->
-> ```dotnetcli
-> dotnet ef database drop
-> ```
->
-> 次のセクションでは、CLI コマンドを実行する方法について説明します。
+次のセクションでは、CLI コマンドを実行する方法について説明します。
 
 ## <a name="create-an-initial-migration"></a>初期移行を作成する
 
@@ -94,11 +86,11 @@ dotnet ef migrations add InitialCreate
 
 ```console
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-      Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+      Entity Framework Core initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 Done. To undo this action, use 'ef migrations remove'
 ```
 
-" *別のプロセスによって使用されているため、ContosoUniversity.dll ファイルにアクセスできません。* " というエラー メッセージが表示された場合は、Windows のシステム トレイの IIS Express アイコンを見つけて右クリックし、 **[ContosoUniversity]、[サイトの停止]** の順にクリックします。
+"*別のプロセスによって使用されているため、ContosoUniversity.dll ファイルにアクセスできません。* " というエラー メッセージが表示された場合は、Windows のシステム トレイの IIS Express アイコンを見つけて右クリックし、 **[ContosoUniversity]、[サイトの停止]** の順にクリックします。
 
 ## <a name="examine-up-and-down-methods"></a>Up および Down メソッドを確認する
 
@@ -128,11 +120,11 @@ Done. To undo this action, use 'ef migrations remove'
 dotnet ef database update
 ```
 
-コマンドからの出力は、データベースを設定する SQL コマンドのログを表示する以外は、`migrations add` コマンドと同様です。 次のサンプル出力では、ログのほとんどは省略されています。 ログ メッセージの詳細レベルを表示しない場合は、 *appsettings.Development.json* ファイルでログ レベルを変更できます。 詳細については、「<xref:fundamentals/logging/index>」を参照してください。
+コマンドからの出力は、データベースを設定する SQL コマンドのログを表示する以外は、`migrations add` コマンドと同様です。 次のサンプル出力では、ログのほとんどは省略されています。 ログ メッセージの詳細レベルを表示しない場合は、*appsettings.Development.json* ファイルでログ レベルを変更できます。 詳細については、「<xref:fundamentals/logging/index>」を参照してください。
 
 ```text
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
-      Entity Framework Core 2.2.0-rtm-35687 initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+      Entity Framework Core initialized 'SchoolContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (274ms) [Parameters=[], CommandType='Text', CommandTimeout='60']
       CREATE DATABASE [ContosoUniversity2];
@@ -155,7 +147,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-      VALUES (N'20190327172701_InitialCreate', N'2.2.0-rtm-35687');
+      VALUES (N'20190327172701_InitialCreate', N'5.0-rtm');
 Done.
 ```
 
@@ -181,20 +173,9 @@ PMC コマンドの詳細については、「[パッケージ マネージャ�
 
 ## <a name="get-the-code"></a>コードを取得する
 
-[完成したアプリケーションをダウンロードまたは表示する。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[完成したアプリケーションをダウンロードまたは表示する。](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples)
 
 ## <a name="next-step"></a>次のステップ
-
-このチュートリアルでは、次の作業を行いました。
-
-> [!div class="checklist"]
-> * 移行について学習した
-> * NuGet 移行パッケージについて学習した
-> * 接続文字列を変更した
-> * 初期移行を作成した
-> * Up および Down メソッドを確認した
-> * データ モデルのスナップショットについて学習した
-> * 移行を適用した
 
 データ モデルの展開に関するより高度なトピックを確認するには、次のチュートリアルに進んでください。 その途中で、追加の移行を作成して適用することになります。
 

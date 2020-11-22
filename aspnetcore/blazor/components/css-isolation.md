@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: 628e7dc897912beaae0df792b82958517ac70ca4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4fec0fa750b9209849030d0d6b7de8f4e163d62f
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056323"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570134"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>ASP.NET Core Blazor の CSS の分離
 
@@ -34,9 +34,9 @@ CSS の分離により、グローバル スタイルへの依存を防ぐこと
 
 ## <a name="enable-css-isolation"></a>CSS の分離を有効にする 
 
-コンポーネント固有のスタイルを定義するには、コンポーネントの `.razor` ファイルの名前と一致する `razor.css` ファイルを作成します。 この `razor.css` ファイルは、" *スコープ付き CSS ファイル* " です。 
+コンポーネント固有のスタイルを定義するには、コンポーネントの `.razor` ファイルの名前と一致する `.razor.css` ファイルを作成します。 この `.razor.css` ファイルは、"*スコープ付き CSS ファイル*" です。 
 
-`MyComponent.razor` ファイルを持つ `MyComponent` コンポーネントの場合、コンポーネントと共に `MyComponent.razor.css` という名前のファイルを作成します。 ファイル名 `razor.css` の `MyComponent` 値では、大文字と小文字は区別 **されません** 。
+`MyComponent.razor` ファイルを持つ `MyComponent` コンポーネントの場合、コンポーネントと共に `MyComponent.razor.css` という名前のファイルを作成します。 ファイル名 `.razor.css` の `MyComponent` 値では、大文字と小文字は区別 **されません**。
 
 たとえば、既定の Blazor プロジェクト テンプレートの `Counter` コンポーネントに CSS の分離を追加するには、`Counter.razor` ファイルと共に `Counter.razor.css` という名前の新しいファイルを追加し、次の CSS を追加します。
 
@@ -86,7 +86,7 @@ NuGet パッケージや [Razor クラス ライブラリ](xref:blazor/component
 
 ## <a name="child-component-support"></a>子コンポーネントのサポート
 
-既定で、CSS の分離は形式 `{COMPONENT NAME}.razor.css` に関連付けられたコンポーネントにのみ適用されます。ここで、プレースホルダー `{COMPONENT NAME}` は、通常、コンポーネント名です。 子コンポーネントに変更を適用するには、親コンポーネントの `razor.css` ファイル内の子孫要素に `::deep` 連結子を使用します。 `::deep` 連結子により、要素の生成されたスコープ識別子の " *子孫* " である要素が選択されます。 
+既定で、CSS の分離は形式 `{COMPONENT NAME}.razor.css` に関連付けられたコンポーネントにのみ適用されます。ここで、プレースホルダー `{COMPONENT NAME}` は、通常、コンポーネント名です。 子コンポーネントに変更を適用するには、親コンポーネントの `.razor.css` ファイル内の子孫要素に `::deep` 連結子を使用します。 `::deep` 連結子により、要素の生成されたスコープ識別子の "*子孫*" である要素が選択されます。 
 
 次の例は、`Child` という名前の子コンポーネントを持つ `Parent` という名前の親コンポーネントを示します。
 
@@ -131,7 +131,7 @@ NuGet パッケージや [Razor クラス ライブラリ](xref:blazor/component
 >
 > このシナリオでは、ASP.NET Core により、親コンポーネントのスコープ識別子が `div` 要素に適用されるため、ブラウザーでは、スタイルを親コンポーネントから継承することが認識されます。
 >
-> ただし、`div` 要素を除外すると、子孫関係が削除され、スタイルは子コンポーネントに適用 **されません** 。
+> ただし、`div` 要素を除外すると、子孫関係が削除され、スタイルは子コンポーネントに適用 **されません**。
 >
 > ```razor
 > <h1>Parent</h1>
@@ -180,3 +180,24 @@ Blazor でスコープ付きファイルを公開し、それを実行時に読�
   <DisableScopedCssBundling>true</DisableScopedCssBundling>
 </PropertyGroup>
 ```
+
+## <a name="no-locrazor-class-library-rcl-support"></a>Razor クラス ライブラリ (RCL) のサポート
+
+[Razor クラス ライブラリ (RCL)](xref:razor-pages/ui-class) により分離スタイルが提供される場合、`<link>` タグの `href` 属性は `{STATIC WEB ASSET BASE PATH}/{ASSEMBLY NAME}.bundle.scp.css` を指します。ここで、プレースホルダーは次のとおりです。
+
+* `{STATIC WEB ASSET BASE PATH}`: 静的な Web 資産のベース パス。
+* `{ASSEMBLY NAME}`: クラス ライブラリのアセンブリ名。
+
+次に例を示します。
+
+* 静的な Web 資産のベース パスは `_content/ClassLib` です。
+* クラス ライブラリのアセンブリ名は `ClassLib` です。
+
+```html
+<link href="_content/ClassLib/ClassLib.bundle.scp.css" rel="stylesheet">
+```
+
+RCL およびコンポーネント ライブラリの詳細については、以下を参照してください。
+
+* <xref:razor-pages/ui-class>
+* <xref:blazor/components/class-libraries>.

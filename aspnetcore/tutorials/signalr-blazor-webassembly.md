@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
+title: ホストされた Blazor WebAssembly アプリで ASP.NET Core SignalR を使用する
 author: guardrex
 description: Blazor WebAssembly で ASP.NET Core SignalR を使用するチャット アプリを作成します。
 monikerRange: '>= aspnetcore-3.1'
@@ -19,14 +19,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: afbfc44db8cb833df7a79061f9bd73052859fec2
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: 2975ee699a2535cdf63ef2f5af5790f178a09f93
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508176"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637731"
 ---
-# <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>ASP.NET Core SignalR を Blazor WebAssembly と共に使用する
+# <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>ホストされた Blazor WebAssembly アプリで ASP.NET Core SignalR を使用する
 
 作成者: [Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 

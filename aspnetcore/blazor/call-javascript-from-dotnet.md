@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 5d9934c8bebbe994489380faf55140fce6beec95
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: f5373f1905958ee5c51ee76bd07690d079fb50f5
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507799"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570017"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
 作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
 
-Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、" *JavaScript 相互運用* " (" *JS 相互運用* ") と呼ばれます。
+Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。
 
 この記事では、.NET から JavaScript 関数を呼び出す方法について説明します。 JavaScript から .NET メソッドを呼び出す方法については、「<xref:blazor/call-dotnet-from-javascript>」を参照してください。
 
@@ -196,7 +196,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 > [!WARNING]
 > Blazor とやりとりしない空の要素のコンテンツを変化させるには、要素参照のみを使用します。 このシナリオは、サードパーティの API から要素にコンテンツが提供される場合に便利です。 Blazor は要素とやりとりしないため、Blazor の要素表現と DOM との間に競合が発生する可能性がありません。
 >
-> 次の例では、Blazor が DOM とやりとりしてこの要素のリスト項目 (`<li>`) を設定するため、順序なしリスト (`ul`) のコンテンツを変化させるのは " *危険* " です。
+> 次の例では、Blazor が DOM とやりとりしてこの要素のリスト項目 (`<li>`) を設定するため、順序なしリスト (`ul`) のコンテンツを変化させるのは "*危険*" です。
 >
 > ```razor
 > <ul ref="MyList">
@@ -671,7 +671,7 @@ export function setMapCenter(map, latitude, longitude) {
 
 理解しておくべき重要な点は次のとおりです。
 
- * `@ref="mapElement"` が含まれる `<div>` は、Blazor に関する限り空のままになります。 したがって、やがて `mapbox-gl.js` によって設定されたり、内容が変更されたりしても安全です。 この手法は、UI をレンダリングする任意の JavaScript ライブラリで使用できます。 ページの他の部分に手を伸ばして変更しようとしない限り、サードパーティの JavaScript SPA フレームワークのコンポーネントを Blazor コンポーネントの内部に埋め込むことさえできます。 Blazor によって空と見なされない要素を、外部の JavaScript コードで変更することは、安全では " *ありません* "。
+ * `@ref="mapElement"` が含まれる `<div>` は、Blazor に関する限り空のままになります。 したがって、やがて `mapbox-gl.js` によって設定されたり、内容が変更されたりしても安全です。 この手法は、UI をレンダリングする任意の JavaScript ライブラリで使用できます。 ページの他の部分に手を伸ばして変更しようとしない限り、サードパーティの JavaScript SPA フレームワークのコンポーネントを Blazor コンポーネントの内部に埋め込むことさえできます。 Blazor によって空と見なされない要素を、外部の JavaScript コードで変更することは、安全では "*ありません*"。
  * このアプローチを使用する場合は、Blazor によって DOM 要素が保持または破棄される方法に関する規則に留意してください。 前の例で、既定では DOM 要素が可能な限り保持されるため、コンポーネントにより安全にボタン クリック イベントが処理され、既存のマップ インスタンスが更新されます。 `@foreach` ループの内側からマップ要素のリストをレンダリングしていた場合は、`@key` を使用して、コンポーネントのインスタンスを確実に保持する必要があります。 そうしないと、リスト データを変更した場合、コンポーネントのインスタンスによって前のインスタンスの状態が望ましくない状態で保持される可能性があります。 詳細については、[@key を使用した要素とコンポーネントの保持](xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components)に関する記事を参照してください。
 
 また、前の例では、JavaScript のロジックと依存関係を ES6 モジュール内にカプセル化し、`import` 識別子を使用して動的に読み込むことができる方法が示されています。 詳細については、[JavaScript の分離とオブジェクト参照](#blazor-javascript-isolation-and-object-references)に関する記事を参照してください。
@@ -703,6 +703,10 @@ JavaScript と Blazor の間で大量のデータを転送するコードを開�
 * データがサーバーによって受信されたら、データは:
   * すべてのセグメントが収集されるまで、一時的にメモリ バッファーに格納できます。
   * 直ちに消費できます。 たとえば、データは、データベースに直ちに格納することも、セグメントを受信するたびにディスクに書き込むこともできます。
+  
+## <a name="js-modules"></a>JS モジュール
+
+JS の分離では、JS 相互運用は、ブラウザーで [EcmaScript モジュール (ESM)](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) ([ECMAScript 仕様](https://tc39.es/ecma262/#sec-modules)) が既定でサポートされている場合に機能します。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

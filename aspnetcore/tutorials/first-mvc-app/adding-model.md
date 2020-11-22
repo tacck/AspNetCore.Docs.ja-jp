@@ -3,7 +3,7 @@ title: パート 4、ASP.NET Core MVC アプリにモデルを追加する
 author: rick-anderson
 description: ASP.NET Core MVC のチュートリアル シリーズのパート 4。
 ms.author: riande
-ms.date: 01/13/2020
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: fa1d79bed56f17afe69697a7e24ec200e6a0ab22
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: 16cef6cc9e772f494515942072c2aaf58913ce91
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422756"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688450"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>パート 4、ASP.NET Core MVC アプリにモデルを追加する
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT) および [Tom Dykstra](https://github.com/tdykstra)
 
-このセクションでは、データベースのムービーを管理するクラスを追加します。 これらのクラスは、 **M** VC アプリの " **モ** デル" 部分です。
+このセクションでは、データベースのムービーを管理するクラスを追加します。 これらのクラスは、**M** VC アプリの "**モ** デル" 部分です。
 
 [Entity Framework Core](/ef/core) (EF Core) でこれらのクラスを使用して、データベースを操作します。 EF Core は、記述する必要があるデータ アクセス コードを簡略化するオブジェクト リレーショナル マッピング (ORM) フレームワークです。
 
-作成するモデル クラスは、EF Core に対する依存関係がないために、POCO クラス ( **P** lain- **O** ld **C** LR **O** bjects から) と呼ばれます。 これらは単に、データベースに格納されるデータのプロパティを定義します。
+作成するモデル クラスは、EF Core に対する依存関係がないために、POCO クラス (**P** lain-**O** ld **C** LR **O** bjects から) と呼ばれます。 これらは単に、データベースに格納されるデータのプロパティを定義します。
 
 このチュートリアルでは、まずモデル クラスを記述し、EF コアによってデータベースが作成されます。
 
@@ -91,7 +91,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 **[プロジェクト]** メニューから、 **[NuGet パッケージの管理]** を選択します。
 
-右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、 **Return** キーを押して検索します。 一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。
+右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、**Return** キーを押して検索します。 一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。
 
 ![Entity Framework Core NuGet パッケージを追加する](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
@@ -104,6 +104,14 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 * `Microsoft.EntityFrameworkCore.Design`
+
+次の .NET CLI コマンドを実行します。
+
+```dotnetcli
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+
+上記のコマンドを実行すると、[aspnet-codegenerator スキャフォールディング ツール](xref:fundamentals/tools/dotnet-aspnet-codegenerator)が追加されます。
 
 ---
 
@@ -138,15 +146,15 @@ using Microsoft.EntityFrameworkCore;
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
 ---
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 <a name="cs"></a>
 
@@ -156,11 +164,11 @@ using Microsoft.EntityFrameworkCore;
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-11)]
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-11)]
 
 ---
 
@@ -172,7 +180,7 @@ using Microsoft.EntityFrameworkCore;
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*ソリューション エクスプローラー* で、 **Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。
+*ソリューション エクスプローラー* で、**Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。
 
 ![前述の手順を参照](adding-model/_static/add_controller21.png)
 
@@ -193,14 +201,14 @@ using Microsoft.EntityFrameworkCore;
 
 Visual Studio では、次が作成されます。
 
-* ムービー コントローラー ( *Controllers/MoviesController.cs* )
-* 作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル ( *Views/Movies/\*.cshtml* )
+* ムービー コントローラー (*Controllers/MoviesController.cs*)
+* 作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル (*Views/Movies/\*.cshtml*)
 
-このようなファイルの自動作成は、" *スキャフォールディング* " と呼ばれます。
+このようなファイルの自動作成は、"*スキャフォールディング*" と呼ばれます。
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 
 * Linux で、スキャフォールディング ツールのパスをエクスポートします。
 
@@ -218,7 +226,7 @@ Visual Studio では、次が作成されます。
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 
 * 次のコマンドを実行します。
 
@@ -232,7 +240,7 @@ Visual Studio では、次が作成されます。
 
 <!-- End of tabs                  -->
 
-データベースが存在しないため、スキャフォールディング ページをまだ使用できません。 アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie* ] というエラー メッセージが表示されます。
+データベースが存在しないため、スキャフォールディング ページをまだ使用できません。 アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie*] というエラー メッセージが表示されます。
 
 <a name="migration"></a>
 
@@ -251,7 +259,7 @@ Add-Migration InitialCreate
 Update-Database
 ```
 
-* `Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。
+* `Add-Migration InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。
 
 * `Update-Database`:前のコマンドで作成された最新の移行にデータベースを更新します。 このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
@@ -274,7 +282,7 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* `ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます ( *Data/MvcMovieContext.cs* ファイル内)。
+* `ef migrations add InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。
 
 * `ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。 このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
@@ -393,19 +401,19 @@ return View(movie);
 @model MvcMovie.Models.Movie
 ```
 
-この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。 `Model` オブジェクトは厳密に型指定されます。 たとえば、 *Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。 `Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。
+この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。 `Model` オブジェクトは厳密に型指定されます。 たとえば、*Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。 `Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。
 
 Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。 コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。 コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-ムービー コントローラーが作成されたとき、スキャフォールディングにより、 *Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。
+ムービー コントローラーが作成されたとき、スキャフォールディングにより、*Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。 たとえば、 *Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。
+`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。 たとえば、*Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
@@ -477,7 +485,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 **[プロジェクト]** メニューから、 **[NuGet パッケージの管理]** を選択します。
 
-右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、 **Return** キーを押して検索します。 一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。
+右上の **[検索]** フィールドに「`Microsoft.EntityFrameworkCore.SQLite`」と入力し、**Return** キーを押して検索します。 一致する NuGet パッケージを選択し、 **[パッケージの追加]** ボタンをクリックします。
 
 ![Entity Framework Core NuGet パッケージを追加する](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
@@ -532,7 +540,7 @@ using Microsoft.EntityFrameworkCore;
 
 ---
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 <a name="cs"></a>
 
@@ -558,7 +566,7 @@ using Microsoft.EntityFrameworkCore;
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*ソリューション エクスプローラー* で、 **Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。
+*ソリューション エクスプローラー* で、**Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。
 
 ![前述の手順を参照](adding-model/_static/add_controller21.png)
 
@@ -579,14 +587,14 @@ using Microsoft.EntityFrameworkCore;
 
 Visual Studio では、次が作成されます。
 
-* ムービー コントローラー ( *Controllers/MoviesController.cs* )
-* 作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル ( *Views/Movies/\*.cshtml* )
+* ムービー コントローラー (*Controllers/MoviesController.cs*)
+* 作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル (*Views/Movies/\*.cshtml*)
 
-このようなファイルの自動作成は、" *スキャフォールディング* " と呼ばれます。
+このようなファイルの自動作成は、"*スキャフォールディング*" と呼ばれます。
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
-* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 
 * Linux で、スキャフォールディング ツールのパスをエクスポートします。
 
@@ -604,7 +612,7 @@ Visual Studio では、次が作成されます。
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 
 * 次のコマンドを実行します。
 
@@ -618,7 +626,7 @@ Visual Studio では、次が作成されます。
 
 <!-- End of tabs                  -->
 
-データベースが存在しないため、スキャフォールディング ページをまだ使用できません。 アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie* ] というエラー メッセージが表示されます。
+データベースが存在しないため、スキャフォールディング ページをまだ使用できません。 アプリを実行し、 **[Movie App]** リンクをクリックすると、 *[データベースを開けません]* または *[そのようなテーブルはありません:Movie*] というエラー メッセージが表示されます。
 
 <a name="migration"></a>
 
@@ -637,7 +645,7 @@ Add-Migration InitialCreate
 Update-Database
 ```
 
-* `Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。
+* `Add-Migration InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。
 
 * `Update-Database`:前のコマンドで作成された最新の移行にデータベースを更新します。 このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
@@ -660,7 +668,7 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* `ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます ( *Data/MvcMovieContext.cs* ファイル内)。
+* `ef migrations add InitialCreate`:*Migrations/{timestamp}_InitialCreate.cs* 移行ファイルが生成されます。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。 これは最初の移行であるため、生成されたクラスには、データベース スキーマを作成するコードが含まれています。 データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。
 
 * `ef database update`:前のコマンドで作成された最新の移行にデータベースを更新します。 このコマンドにより *Migrations/{time-stamp}_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
@@ -779,19 +787,19 @@ return View(movie);
 @model MvcMovie.Models.Movie
 ```
 
-この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。 `Model` オブジェクトは厳密に型指定されます。 たとえば、 *Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。 `Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。
+この `@model` ディレクティブにより、コントローラーでビューに渡されたムービーにアクセスできます。 `Model` オブジェクトは厳密に型指定されます。 たとえば、*Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。 `Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。
 
 Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。 コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。 コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-ムービー コントローラーが作成されたとき、スキャフォールディングにより、 *Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。
+ムービー コントローラーが作成されたとき、スキャフォールディングにより、*Index.cshtml* ファイルの一番上に次の `@model` ステートメントが含まれました。
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。 たとえば、 *Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。
+`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。 たとえば、*Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
@@ -833,7 +841,7 @@ Movies コントローラーの *Index.cshtml* ビューと `Index` メソッド
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*ソリューション エクスプローラー* で、 **Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。
+*ソリューション エクスプローラー* で、**Controllers** フォルダーを右クリックし、 **[追加]、[スキャフォールディングされた新しい項目]** の順に選択します。
 
 ![前述の手順を参照](adding-model/_static/add_controller21.png)
 
@@ -856,18 +864,18 @@ Movies コントローラーの *Index.cshtml* ビューと `Index` メソッド
 
 Visual Studio では、次が作成されます。
 
-* Entity Framework Core の [データベース コンテキスト クラス](xref:data/ef-mvc/intro#create-the-database-context)( *Data/MvcMovieContext.cs* )
-* ムービー コントローラー ( *Controllers/MoviesController.cs* )
-* 作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル ( *Views/Movies/\*.cshtml* )
+* Entity Framework Core の [データベース コンテキスト クラス](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)
+* ムービー コントローラー (*Controllers/MoviesController.cs*)
+* 作成、削除、詳細、編集、およびインデックス ページ用の Razor ビュー ファイル (*Views/Movies/\*.cshtml*)
 
-データベース コンテキストと [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (作成、読み取り、更新、および削除) アクション メソッドとビューの自動作成は、 *スキャフォールディング* と言います。
+データベース コンテキストと [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (作成、読み取り、更新、および削除) アクション メソッドとビューの自動作成は、*スキャフォールディング* と言います。
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 * スキャフォールディング ツールをインストールします。
 
   ```dotnetcli
@@ -892,7 +900,7 @@ Visual Studio では、次が作成されます。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* プロジェクト ディレクトリ ( *Program.cs* 、 *Startup.cs* 、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
+* プロジェクト ディレクトリ (*Program.cs*、*Startup.cs*、および *.csproj* ファイルを含むディレクトリ) でコマンド ウィンドウを開きます。
 * スキャフォールディング ツールをインストールします。
 
   ```dotnetcli
@@ -963,7 +971,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
    データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます。 `Initial` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が使用されます。 詳細については、「<xref:data/ef-mvc/migrations>」を参照してください。
 
-   `Update-Database` コマンドは、データベースを作成する、 *Migrations/{time-stamp}_InitialCreate.cs* ファイルの `Up` メソッドを実行します。
+   `Update-Database` コマンドは、データベースを作成する、*Migrations/{time-stamp}_InitialCreate.cs* ファイルの `Up` メソッドを実行します。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -971,7 +979,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 `ef migrations add InitialCreate` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。
 
-データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます ( *Data/MvcMovieContext.cs* ファイル内)。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。
+データベース スキーマは、`MvcMovieContext` クラスで指定されたモデルに基づきます (*Data/MvcMovieContext.cs* ファイル内)。 `InitialCreate` 引数は、移行の名前です。 任意の名前を使用できますが、慣例により、移行を説明する名前が選択されます。
 
 ---
 
@@ -993,7 +1001,7 @@ ASP.NET Core には、[依存関係挿入 (DI)](xref:fundamentals/dependency-inj
 
 上記のコードによって、エンティティ セットの [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) プロパティが作成されます。 Entity Framework の用語では、エンティティ セットは通常はデータベース テーブルに対応します。 エンティティはテーブル内の行に対応します。
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、 [ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) オブジェクトでメソッドが呼び出され、接続文字列の名前がコンテキストに渡されます。 ローカル開発の場合、[ASP.NET Core 構成システム](xref:fundamentals/configuration/index)によって *appsettings.json* ファイルから接続文字列が読み取られます。
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -1082,13 +1090,13 @@ return View(movie);
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-ビュー ファイルの先頭に `@model` ステートメントを含めることで、ビューが期待するオブジェクトの型を指定することができます。 ムービー コントローラーを作成したとき、 *Details.cshtml* ファイルの先頭に次の `@model` ステートメントが自動的に追加されています。
+ビュー ファイルの先頭に `@model` ステートメントを含めることで、ビューが期待するオブジェクトの型を指定することができます。 ムービー コントローラーを作成したとき、*Details.cshtml* ファイルの先頭に次の `@model` ステートメントが自動的に追加されています。
 
 ```cshtml
 @model MvcMovie.Models.Movie
 ```
 
-この `@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーにアクセスできます。 たとえば、 *Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。 `Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。
+この `@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーにアクセスできます。 たとえば、*Details.cshtml* ビューでは、コードで厳密に型指定された `Model` オブジェクトを使って、`DisplayNameFor` および `DisplayFor` HTML ヘルパーに各ムービー フィールドを渡しています。 `Create` および `Edit` のメソッドとビューも、`Movie` モデル オブジェクトを渡します。
 
 Movies コントローラーの *Index.cshtml* ビューと `Index` メソッドを確認してください。 コードで `View` メソッドを呼び出すときの `List` オブジェクトの作成方法に注意してください。 コードでは、この `Movies` リストを `Index` アクション メソッドからビューに渡しています。
 
@@ -1100,7 +1108,7 @@ Movies コントローラーの *Index.cshtml* ビューと `Index` メソッド
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。 たとえば、 *Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。
+`@model` ディレクティブにより、厳密に型指定された `Model` オブジェクトを使って、コントローラーがビューに渡したムービーのリストにアクセスできます。 たとえば、*Index.cshtml* ビューのコードでは、`foreach` ステートメントを使って厳密に型指定された `Model` オブジェクトのムービーをループ処理しています。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 

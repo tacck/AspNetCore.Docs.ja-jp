@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 4a80e3e82a18e0066c7628c8f40401155538e32b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c32c5befe0be3b1ad4bd87649d3cc74b0296a134
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061198"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703710"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>チュートリアル: JavaScript を使用して ASP.NET Core Web API を呼び出す
 
@@ -60,11 +60,15 @@ ASP.NET Core 2.2 の場合は、2.2 バージョンの「[JavaScript で Web API
 
 1. *wwwroot* フォルダー内に *js* フォルダーを作成します。
 
-1. *index.html* という名前の HTML ファイルを、 *wwwroot* フォルダーに追加します。 *index.html* の内容を、次のマークアップに置き換えます。
+1. *index.html* という名前の HTML ファイルを、*wwwroot* フォルダーに追加します。 *index.html* の内容を、次のマークアップに置き換えます。
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. *site.js* という名前の JavaScript ファイルを、 *wwwroot/js* フォルダーに追加します。 *site.js* の内容を、次のコードに置き換えます。
+1. *site.css* という名前の CSS ファイルを *wwwroot/css* フォルダーに追加します。 *site.css* の内容を、次のスタイルに置き換えます。
+
+    [!code-css[](first-web-api/samples/3.0/TodoApi/wwwroot/css/site.css)]
+
+1. *site.js* という名前の JavaScript ファイルを、*wwwroot/js* フォルダーに追加します。 *site.js* の内容を、次のコードに置き換えます。
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
@@ -81,7 +85,7 @@ ASP.NET Core 2.2 の場合は、2.2 バージョンの「[JavaScript で Web API
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_GetItems)]
 
-Web API から正常状態コードが返されると、`_displayItems` 関数が呼び出されます。 `_displayItems` によって受け入れられた配列パラメーターの各 To Do アイテムが、 **[Edit]** ボタンと **[Delete]** ボタンのあるテーブルに追加されます。 Web API 要求が失敗した場合は、ブラウザーのコンソールにエラーが記録されます。
+Web API から正常状態コードが返されると、`_displayItems` 関数が呼び出されます。 `_displayItems` によって受け入れられた配列パラメーターの各 To Do アイテムが、**[Edit]** ボタンと **[Delete]** ボタンのあるテーブルに追加されます。 Web API 要求が失敗した場合は、ブラウザーのコンソールにエラーが記録されます。
 
 ### <a name="add-a-to-do-item"></a>To Do アイテムの追加
 
@@ -102,7 +106,7 @@ Web API で正常状態コードが返されると、`getItems` 関数が呼び�
 
 To Do アイテムの更新は追加と似ていますが、2 つの大きな違いがあります。
 
-* ルートに、更新するアイテムの一意の識別子がサフィックスとして付けられます。 たとえば、 *api/TodoItems/1* のようになります。
+* ルートに、更新するアイテムの一意の識別子がサフィックスとして付けられます。 たとえば、*api/TodoItems/1* のようになります。
 * `method` オプションで示されているように、HTTP アクション動詞は PUT です。
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]

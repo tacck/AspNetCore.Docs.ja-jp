@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 2efed6b76228227f032482346a36f528b3448de2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 833114a12c8c1ac67097b3592cf410d7a69bb628
+ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053567"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94673979"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core のための gRPC での認証と承認
 
@@ -76,7 +76,7 @@ public override Task<BuyTicketsResponse> BuyTickets(
 
 サーバーでは、[JWT ベアラー ミドルウェア](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)を使用してベアラー トークン認証が構成されます。
 
-.NET gRPC クライアントでは、呼び出しで、トークンをヘッダーとして送信できます。
+.NET gRPC クライアントでは、`Metadata` コレクションを使用すれば、呼び出しでトークンを送信することができます。 `Metadata` コレクション内のエントリは、gRPC 呼び出しで、HTTP ヘッダーとして送信されます。
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -92,7 +92,9 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-チャネルで `ChannelCredentials` を構成することは、gRPC 呼び出しを使用してトークンをサービスに送信するもう 1 つの方法です。 gRPC 呼び出しが行われるたびに資格情報が実行されるので、コードを複数の場所に記述してユーザー自身でトークンを渡す必要がなくなります。
+チャネルで `ChannelCredentials` を構成することは、gRPC 呼び出しを使用してトークンをサービスに送信するもう 1 つの方法です。 `ChannelCredentials` には `CallCredentials` を含めることができます。これにより、`Metadata` を自動的に設定することができます。
+
+gRPC 呼び出しが行われるたびに `CallCredentials` が実行されるので、コードを複数の場所に記述してユーザー自身でトークンを渡す必要がなくなります。 `CallCredentials` はチャネルが TLS でセキュリティ保護されている場合にのみ適用されることに注意してください。 セキュリティで保護されていない非 TLS チャネルに、`CallCredentials` は適用されません。
 
 次の例の資格情報では、すべての gRPC 呼び出しでトークンを送信するようにチャネルを構成しています。
 

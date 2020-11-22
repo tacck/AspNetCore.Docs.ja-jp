@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: f8b6e65424948aaa7b28023497bbbf2a1ceb47dd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ef37c539d377f14a2744c3ead28234d8497df700
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056050"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637679"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor ホスティング モデルの構成
 
@@ -102,32 +102,21 @@ UI をカスタマイズするには、`_Host.cshtml` Razor ページの `<body>
 
 ## <a name="render-mode"></a>表示モード
 
+::: moniker range=">= aspnetcore-5.0"
+
+*このセクションは、ホストされている Blazor WebAssembly および Blazor Server に適用されます。*
+
+Blazor アプリは既定では、サーバー上の UI をプリレンダリングするように設定されます。 詳細については、「<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 *このセクションは Blazor Server に適用されます。*
 
-Blazor Server アプリは、サーバーへのクライアント接続が確立される前に、サーバー上の UI をプリレンダリングするよう既定で設定されます。 これは `_Host.cshtml` Razor ページで設定します。
+Blazor Server アプリは、サーバーへのクライアント接続が確立される前に、サーバー上の UI をプリレンダリングするよう既定で設定されます。 詳細については、「<xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>」を参照してください。
 
-```cshtml
-<body>
-    <app>
-      <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </app>
-
-    <script src="_framework/blazor.server.js"></script>
-</body>
-```
-
-<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> によって、コンポーネントに対して以下の構成が行われます。
-
-* ページに事前レンダリングするかどうか。
-* ページに静的 HTML としてレンダリングするかどうか。または、ユーザー エージェントから Blazor アプリをブートストラップするために必要な情報が含まれているかどうか。
-
-| 表示モード | 説明 |
-| --- | --- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | コンポーネントを静的 HTML にレンダリングし、Blazor Server アプリのマーカーを含めます。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server アプリのマーカーをレンダリングします。 コンポーネントからの出力は含められません。 このマーカーは、ユーザー エージェントの起動時に Blazor アプリをブートストラップするために使用されます。 |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | コンポーネントを静的 HTML にレンダリングします。 |
-
-静的 HTML ページからのサーバー コンポーネントのレンダリングは、サポートされていません。
+::: moniker-end
 
 ## <a name="initialize-the-no-locblazor-circuit"></a>Blazor 回線を初期化する
 
@@ -389,3 +378,4 @@ When one of the framework components is used in a child component, the rendered 
 ## <a name="additional-resources"></a>その他のリソース
 
 * <xref:fundamentals/logging/index>
+* [Blazor Server 再接続イベントとコンポーネント ライフサイクル イベント](xref:blazor/components/lifecycle#blazor-server-reconnection-events)

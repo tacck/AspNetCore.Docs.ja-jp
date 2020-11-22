@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 74473eb5c0efcd8798d260b765c848d7e621e534
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055764"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595442"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Blazor Server のホストと展開
 
@@ -38,7 +38,7 @@ ms.locfileid: "93055764"
 
 [Blazor Server のホスティング モデル](xref:blazor/hosting-models#blazor-server)を使用する場合、Blazor はサーバー上で ASP.NET Core アプリ内から実行されます。 UI の更新、イベント処理、JavaScript の呼び出しは、[SignalR](xref:signalr/introduction) 接続経由で処理されます。
 
-ASP.NET Core アプリをホストできる Web サーバーが必要です。 Visual Studio には **Blazor Server アプリ** プロジェクト テンプレートが含まれています ( [`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorserverside` テンプレート)。
+ASP.NET Core アプリをホストできる Web サーバーが必要です。 Visual Studio には **Blazor Server アプリ** プロジェクト テンプレートが含まれています ([`dotnet new`](/dotnet/core/tools/dotnet-new) コマンドを使用する場合は `blazorserverside` テンプレート)。
 
 ## <a name="scalability"></a>スケーラビリティ
 
@@ -69,7 +69,7 @@ Blazor は、待ち時間、信頼性、および[セキュリティ](xref:signa
 Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) を使用することをお勧めします。 このサービスでは、多数の同時 SignalR 接続に対して Blazor Server アプリをスケールアップできます。 さらに、SignalR サービスのグローバル リーチとハイパフォーマンスのデータ センターは、地理的条件による待機時間の短縮に役立ちます。
 
 > [!IMPORTANT]
-> [WebSocket](https://wikipedia.org/wiki/WebSocket) が無効になっている場合、Azure App Service では HTTP ロング ポーリングを使用してリアルタイム接続がシミュレートされます。 HTTP ロング ポーリングは、WebSocket を有効にして、クライアントとサーバー間の接続のシミュレーションにポーリングを使用せずに実行する場合よりも著しく遅くなります。
+> [WebSocket](https://wikipedia.org/wiki/WebSocket) が無効になっている場合、Azure App Service によって、リアルタイム接続のシミュレーションが HTTP ロング ポーリングを使用して行われます。 HTTP ロング ポーリングは、WebSocket を有効にして、クライアントとサーバー間の接続のシミュレーションにポーリングを使用せずに実行する場合よりも著しく遅くなります。
 >
 > Azure App Service にデプロイされた Blazor Server アプリには WebSocket を使用することをお勧めします。 [Azure SignalR Service](xref:signalr/scale#azure-signalr-service) では、既定で WebSocket が使用されます。 アプリで Azure SignalR Service を使用しない場合は、「<xref:signalr/publish-to-azure-web-app#configure-the-app-in-azure-app-service>」を参照してください。
 >
@@ -78,9 +78,9 @@ Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-s
 > * [Azure SignalR Service とは](/azure/azure-signalr/signalr-overview)
 > * [Azure SignalR Service のパフォーマンス ガイド](/azure-signalr/signalr-concept-performance#performance-factors)
 
-アプリの構成 (および必要に応じてプロビジョニング) を行うために、Azure SignalR Service によって次が実行されます。
+### <a name="configuration"></a>構成
 
-1. サービスで " *スティッキー セッション* " をサポートできるようにします。それにより、クライアントは [事前レンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値を `Required` に設定します。 通常、アプリでは次の方法の **いずれか 1 つ** を使用して構成を作成します。
+Azure SignalR サービス用にアプリを構成するには、そのアプリで "*スティッキー セッション*" をサポートする必要があります。それにより、クライアントは[プリレンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値は `Required` に設定されます。 通常、アプリでは次の方法のいずれか **_1 つ_** を使用して構成を作成します。
 
    * `Startup.ConfigureServices`:
   
@@ -92,19 +92,25 @@ Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-s
      });
      ```
 
-   * 構成 (次の方法の **いずれか** を使用):
+   * 構成 (次の方法のいずれか **_1 つ_** を使用):
   
      * `appsettings.json`:
 
        ```json
-       "Azure:SignalR:ServerStickyMode": "Required"
+       "Azure:SignalR:StickyServerMode": "Required"
        ```
 
-     * Azure portal で App Service の **[構成]**  >  **[アプリケーションの設定]** ( **名前** : `Azure:SignalR:ServerStickyMode`、 **値** : `Required`)。
+     * Azure portal で App Service の **[構成]**  >  **[アプリケーションの設定]** (**名前**: `Azure__SignalR__StickyServerMode`、**値**: `Required`)。 この方法は、[Azure SignalR サービスをプロビジョニングする](#provision-the-azure-signalr-service)場合に、アプリに自動的に適用されます。
+
+### <a name="provision-the-azure-no-locsignalr-service"></a>Azure SignalR サービスをプロビジョニングする
+
+Visual Studio でアプリに合わせて Azure SignalR サービスをプロビジョニングするには、次のようにします。
 
 1. Blazor Server アプリ用に、Visual Studio に Azure アプリ発行プロファイルを作成する。
 1. プロファイルに **Azure SignalR Service** の依存関係を追加する。 Azure サブスクリプションに、アプリに割り当てる既存の Azure SignalR Service のインスタンスがない場合は、 **[新しい Azure SignalR Service のインスタンスを作成する]** を選択して新しいサービス インスタンスをプロビジョニングします。
 1. Azure にアプリを公開します。
+
+Visual Studio で Azure SignalR サービスを自動的にプロビジョニングすると、["*スティッキー セッション*"](#configuration) が有効になり、SignalR 接続文字列が App Service の構成に追加されます。
 
 #### <a name="iis"></a>IIS
 

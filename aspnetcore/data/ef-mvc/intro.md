@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 428320f9d706b0dd16ced68d183ec4b331451965
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: c0623de3c8031b6dbb518a6d25623b55a6500af5
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550648"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703736"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>チュートリアル: ASP.NET MVC Web アプリでの EF Core の概要
 
@@ -110,7 +110,7 @@ CTRL を押しながら F5 を押してプロジェクトを実行するか、�
 
 EF SQL Server パッケージとその依存関係 `Microsoft.EntityFrameworkCore` と `Microsoft.EntityFrameworkCore.Relational` により、EF のランタイム サポートが提供されます。
 
-[Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージと [Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージを追加します。 プログラム マネージャー コンソール (PMC) で、次のコマンドを入力して NuGet パッケージを追加します。
+[Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージと [Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet パッケージを追加します。 パッケージ マネージャー コンソール (PMC) で、次のコマンドを入力して NuGet パッケージを追加します。
 
 ```powershell
 Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
@@ -231,7 +231,7 @@ ASP.NET Core には、[依存関係挿入](../../fundamentals/dependency-injecti
 
 次のコードに示すように、`ConfigureServices` に <xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> を追加します。
 
-[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=1=2,22-23)]
+[!code-csharp[](intro/samples/5cu/Startup.cs?name=snippet&highlight=6)]
 
 `AddDatabaseDeveloperPageExceptionFilter` により、[開発環境](xref:fundamentals/environments)で役に立つエラー情報が提供されます。
 

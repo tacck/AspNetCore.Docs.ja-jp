@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 66fd41abe4f85071797bacc0a5531bbab35bd227
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 744449240fabc3dae317d0d7bc9090311521c224
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055595"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570121"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor のコンテンツ セキュリティ ポリシーを適用する
 
@@ -36,7 +36,7 @@ ms.locfileid: "93055595"
 * ページによって実行され、フォームの許可された URL ターゲットを指定するアクション。
 * 読み込むことができるプラグイン。
 
-CSP をアプリに適用するために、開発者は 1 つ以上の `Content-Security-Policy` ヘッダーまたは `<meta>` タグに複数の CSP コンテンツ セキュリティ " *ディレクティブ* " を指定します。
+CSP をアプリに適用するために、開発者は 1 つ以上の `Content-Security-Policy` ヘッダーまたは `<meta>` タグに複数の CSP コンテンツ セキュリティ "*ディレクティブ*" を指定します。
 
 ポリシーは、ページの読み込み中にブラウザーによって評価されます。 ブラウザーによりページのソースが検査され、コンテンツ セキュリティ ディレクティブの要件を満たしているかどうかが判断されます。 リソースのポリシー ディレクティブが満たされていない場合、ブラウザーでリソースが読み込まれません。 たとえば、サードパーティのスクリプトを許可しないポリシーについて考えてみます。 ページの `src` 属性にサードパーティから発生した `<script>` タグが含まれている場合、ブラウザーによってスクリプトの読み込みが禁止されます。
 
@@ -57,12 +57,9 @@ CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新の�
   * ブートストラップ スクリプトの `https://stackpath.bootstrapcdn.com/` ホスト ソースを指定します。
   * `self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
   * Blazor WebAssembly アプリでは以下のようにします。
-    * 次のハッシュを指定して、必要な Blazor WebAssembly のインライン スクリプトの読み込みを許可します。
-      * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
-      * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
-      * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
+    * 必要なスクリプトの読み込みを許可するハッシュを指定します。
     * `eval()` および文字列からコードを作成するメソッドを使用するには、`unsafe-eval` を指定します。
-  * Blazor Server アプリでは、スタイルシートのフォールバック検出を実行するインライン スクリプトの `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` ハッシュを指定します。
+  * Blazor Server アプリでは、必要なスクリプトの読み込みを許可するハッシュを指定します。
 * [style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): スタイルシートの有効なソースを示します。
   * ブートストラップ スタイルシートの `https://stackpath.bootstrapcdn.com/` ホスト ソースを指定します。
   * `self` を指定して、スキームやポート番号など、アプリの配信元が有効なソースであることを示します。
@@ -93,6 +90,29 @@ CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新の�
 
 `wwwroot/index.html` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
 
+::: moniker range=">= aspnetcore-5.0"
+
+```html
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self' 
+                          'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 
+                          'unsafe-eval';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self'
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ```html
 <meta http-equiv="Content-Security-Policy" 
       content="base-uri 'self';
@@ -112,9 +132,38 @@ CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新の�
                upgrade-insecure-requests;">
 ```
 
+::: moniker-end
+
+アプリで必要な場合に、さらに `script-src` と `style-src` ハッシュを追加します。 開発時には、オンライン ツールまたはブラウザー開発者ツールを使用して、ハッシュが自動的に計算されるようにします。 たとえば、次のブラウザー ツール コンソールのエラーは、必要なスクリプトに対するハッシュがポリシーでカバーされていないことを報告するものです。
+
+> 次のコンテンツ セキュリティ ポリシー ディレクティブに違反しているため、インライン スクリプトの実行が拒否されました: "..."。 インライン実行を有効にするには、'unsafe-inline' キーワード、ハッシュ ('sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=')、または nonce ('nonce-...') のいずれかが必要です。
+
+エラーに関連付けられている特定のスクリプトが、コンソール内でエラーの隣に表示されます。
+
 ### Blazor Server
 
 `Pages/_Host.cshtml` ホスト ページの `<head>` コンテンツで、「[ポリシー ディレクティブ](#policy-directives)」セクションで説明されているディレクティブを適用します。
+
+::: moniker range=">= aspnetcore-5.0"
+
+```cshtml
+<meta http-equiv="Content-Security-Policy" 
+      content="base-uri 'self';
+               block-all-mixed-content;
+               default-src 'self';
+               img-src data: https:;
+               object-src 'none';
+               script-src https://stackpath.bootstrapcdn.com/ 
+                          'self';
+               style-src https://stackpath.bootstrapcdn.com/
+                         'self' 
+                         'unsafe-inline';
+               upgrade-insecure-requests;">
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 
@@ -131,6 +180,14 @@ CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新の�
                          'unsafe-inline';
                upgrade-insecure-requests;">
 ```
+
+::: moniker-end
+
+アプリで必要な場合に、さらに `script-src` と `style-src` ハッシュを追加します。 開発時には、オンライン ツールまたはブラウザー開発者ツールを使用して、ハッシュが自動的に計算されるようにします。 たとえば、次のブラウザー ツール コンソールのエラーは、必要なスクリプトに対するハッシュがポリシーでカバーされていないことを報告するものです。
+
+> 次のコンテンツ セキュリティ ポリシー ディレクティブに違反しているため、インライン スクリプトの実行が拒否されました: "..."。 インライン実行を有効にするには、'unsafe-inline' キーワード、ハッシュ ('sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=')、または nonce ('nonce-...') のいずれかが必要です。
+
+エラーに関連付けられている特定のスクリプトが、コンソール内でエラーの隣に表示されます。
 
 ## <a name="meta-tag-limitations"></a>Meta タグに関する制限事項
 
@@ -154,7 +211,7 @@ CSP は、Chrome、Microsoft Edge、Firefox、Opera、Safari など、最新の�
 * [report-to](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-to)
 * [report-uri](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)
 
-`report-uri` の使用は推奨されなくなりましたが、すべての主要なブラウザーで `report-to` がサポートされるようになるまで、両方のディレクティブを使用する必要があります。 `report-uri` のサポートは、ブラウザーから " *常に* " 削除される可能性があるため、`report-uri` を排他的に使用しないでください。 `report-to` が完全にサポートされたら、ポリシー内の `report-uri` のサポートを削除します。 `report-to` が導入されたかどうかを追跡する方法については、「[Can I use: report-to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)」(私は使用できますか? report-to) を参照してください。
+`report-uri` の使用は推奨されなくなりましたが、すべての主要なブラウザーで `report-to` がサポートされるようになるまで、両方のディレクティブを使用する必要があります。 `report-uri` のサポートは、ブラウザーから "*常に*" 削除される可能性があるため、`report-uri` を排他的に使用しないでください。 `report-to` が完全にサポートされたら、ポリシー内の `report-uri` のサポートを削除します。 `report-to` が導入されたかどうかを追跡する方法については、「[Can I use: report-to](https://caniuse.com/#feat=mdn-http_headers_csp_content-security-policy_report-to)」(私は使用できますか? report-to) を参照してください。
 
 アプリがリリースされるたびにポリシーをテストして更新してください。
 

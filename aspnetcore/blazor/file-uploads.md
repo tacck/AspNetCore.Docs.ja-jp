@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 ms.date: 10/27/2020
 uid: blazor/file-uploads
-ms.openlocfilehash: c0806c3a68a4d9e698925f6ec955dd2f53d7818f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 77c2874eef788b8083758c087913a7a04c55fa2b
+ms.sourcegitcommit: 54fdca99f30b18d69cf0753ca3c84c7dab8f2b0e
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056128"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94691171"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>ASP.NET Core Blazor ファイルのアップロード
 
@@ -46,12 +46,15 @@ ms.locfileid: "93056128"
 ユーザーが選択したファイルからデータを読み取るには、次のようにします。
 
 * ファイルで `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` を呼び出し、返されるストリームから読み取ります。 詳細については、「[ファイル ストリーム](#file-streams)」セクションを参照してください。
-* `OpenReadStream` によって返される <xref:System.IO.Stream> には、読み取られる `Stream` の最大サイズがバイト単位で適用されます。 既定では、それ以降の読み取りで例外が発生する前に、サイズが 524,288 KB (512 KB) より小さいファイルのみを読み取ることができます。 このような制限は、開発者が誤って大きいファイルをメモリに読み取ってしまうことを防ぐために存在します。 `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` の `maxAllowedSize` パラメーターを使用すると、必要に応じてより大きなサイズを指定できます。
+* `OpenReadStream` によって返される <xref:System.IO.Stream> には、読み取られる `Stream` の最大サイズがバイト単位で適用されます。 既定では、それ以降の読み取りで例外が発生する前に、サイズが 512,000 バイト (500 KB) 以下のファイルを読み取ることができます。 このような制限は、開発者が誤って大きいファイルをメモリに読み取ってしまうことを防ぐために存在します。 `Microsoft.AspNetCore.Components.Forms.IBrowserFile.OpenReadStream` の `maxAllowedSize` パラメーターを使用すると、必要に応じてより大きなサイズを指定できます。
 * 受信ファイル ストリームを直接メモリに読み取ることは避けてください。 たとえば、ファイル バイトを <xref:System.IO.MemoryStream> にコピーしたり、バイト配列として読み取ることは避けてください。 このような方法は、特に Blazor Server で、パフォーマンスおよびセキュリティの問題を引き起こす可能性があります。 代わりに、ファイル バイトを外部ストア (BLOB、またはディスク上のファイルなど) にコピーすることを検討してください。
 
 イメージ ファイルを受信するコンポーネントは、ファイルの便利な `RequestImageFileAsync` メソッドを呼び出して、イメージがアプリにストリームされる前に、ブラウザーの JavaScript ランタイム内のイメージ データのサイズを変更できます。
 
 次の例は、コンポーネントでの複数のイメージ ファイルのアップロードを示しています。 `InputFileChangeEventArgs.GetMultipleFiles` では、複数のファイルを読み取ることができます。 悪意のあるユーザーがアプリで想定されているよりも多くのファイルをアップロードするのを防ぐために、読み取るファイルの予想最大数を指定します。 ファイルのアップロードが複数のファイルをサポートしていない場合、`InputFileChangeEventArgs.File` では、最初のファイルのみを読み取ることができます。
+
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs> は <xref:Microsoft.AspNetCore.Components.Forms?displayProperty=fullName> 名前空間にあります。これは、通常、アプリの `_Imports.razor` ファイル内の名前空間の 1 つです。
 
 ```razor
 <h3>Upload PNG images</h3>
@@ -75,7 +78,7 @@ ms.locfileid: "93056128"
 }
 
 @code {
-    IList<string> imageDataUrls = new List<string>();
+    private IList<string> imageDataUrls = new List<string>();
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {

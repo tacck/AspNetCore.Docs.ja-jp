@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: f8e36cbe905b5ec2e674123c0f2ab6db99683c7c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 24a5b93a18cfe36c50d9739ba56d12aca41615c0
+ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056414"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94570160"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor コンポーネント クラス ライブラリ
 
@@ -186,7 +186,7 @@ RCL には、静的アセットを含めることができます。 静的アセ
 
 Blazor WebAssembly アプリは完全な .NET API 領域を対象としていますが、ブラウザー サンドボックスの制約により、すべての .NET API が WebAssembly でサポートされているわけではありません。 サポートされていない API は、WebAssembly で実行すると <xref:System.PlatformNotSupportedException> がスローされます。 開発者が、アプリのターゲット プラットフォームでサポートされていない API をアプリで使用すると、プラットフォーム互換性アナライザーから警告を受け取ります。 Blazor WebAssembly アプリの場合、API がブラウザーでサポートされているかどうかが確認されるということです。 互換性アナライザーの .NET フレームワーク API に注釈を付けることは、進行中のプロセスであるため、現在、すべての .NET フレームワーク API に注釈が付けられるわけではありません。
 
-Blazor WebAssembly および Razor クラス ライブラリ プロジェクトでは、`SupportedPlatform` MSBuild 項目でサポートされているプラットフォームとして `browser` を追加することで、ブラウザーの互換性チェックを " *自動的* " に有効にします。 ライブラリ開発者は、`SupportedPlatform` 項目をライブラリのプロジェクト ファイルに手動で追加して、この機能を有効にすることができます。
+Blazor WebAssembly および Razor クラス ライブラリ プロジェクトでは、`SupportedPlatform` MSBuild 項目でサポートされているプラットフォームとして `browser` を追加することで、ブラウザーの互換性チェックを "*自動的*" に有効にします。 ライブラリ開発者は、`SupportedPlatform` 項目をライブラリのプロジェクト ファイルに手動で追加して、この機能を有効にすることができます。
 
 ```xml
 <ItemGroup>
@@ -233,6 +233,7 @@ dotnet pack
 
 * <xref:razor-pages/ui-class>
 * [XML 中間言語 (IL) トリマーの構成ファイルをライブラリに追加する](xref:blazor/host-and-deploy/configure-trimmer)
+* [Razor クラスライブラリを使用した CSS の分離のサポート](xref:blazor/components/css-isolation#razor-class-library-rcl-support)
 
 ::: moniker-end
 

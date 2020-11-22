@@ -5,7 +5,7 @@ description: アプリで要求をルーティングする方法と、NavLink �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/02/2020
+ms.date: 11/17/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 8f0aa80d092b6678131a2b7152f21ecb8e168257
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: c4da8bf8447618c9a7a2d0f690164fe48a7ed006
+ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430992"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94703697"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor のルーティング
 
@@ -112,7 +112,31 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 
 ## <a name="route-parameters"></a>ルート パラメーター
 
-ルーターは、ルート パラメーターを使用して、同じ名前の対応するコンポーネント パラメーターを設定します (大文字と小文字は区別されません)。
+ルーターでルート パラメーターを使用すれば、同じ名前の対応するコンポーネント パラメーターを設定できます (大文字と小文字は区別されません)。
+
+::: moniker range=">= aspnetcore-5.0"
+
+省略可能なパラメーターがサポートされています。 次の例では、省略可能なパラメーター `text` を使用して、ルート セグメントの値をコンポーネントの `Text` プロパティに割り当てます。 セグメントが存在しない場合、`Text` の値は `fantastic` に設定されます。
+
+```razor
+@page "/RouteParameter/{text?}"
+
+<h1>Blazor is @Text!</h1>
+
+@code {
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Text = Text ?? "fantastic";
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```razor
 @page "/RouteParameter"
@@ -132,6 +156,17 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 ```
 
 省略可能なパラメーターはサポートされていません。 前の例では、2 つの `@page` ディレクティブが適用されています。 1 つ目は、パラメーターを指定せずにコンポーネントへの移動を許可します。 2 番目の `@page` ディレクティブは、`{text}` ルート パラメーターを受け取り、その値を `Text` プロパティに割り当てます。
+
+::: moniker-end
+
+オプションのパラメーター値が異なる同じコンポーネントへのアプリの移動を許可するには、[`OnInitialized`](xref:blazor/components/lifecycle#component-initialization-methods) ではなく、[`OnParametersSet`](xref:blazor/components/lifecycle#after-parameters-are-set) を使用します。 前の例に基づいて、ユーザーが `/RouteParameter` から `/RouteParameter/awesome` に、または `/RouteParameter/awesome` から `/RouteParameter` に移動できる必要がある場合は、`OnParametersSet` を使用してください。
+
+```csharp
+protected override void OnParametersSet()
+{
+    Text = Text ?? "fantastic";
+}
+```
 
 ## <a name="route-constraints"></a>ルート制約
 

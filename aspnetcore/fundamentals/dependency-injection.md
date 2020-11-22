@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 31db9aea9e0b7ed21cae2f87fbb9e2e649782697
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.openlocfilehash: 3f7cce475b5c7b0fcbb93644b2c39acd637a6f9d
+ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93234466"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94595481"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core での依存関係の挿入
 
@@ -44,7 +44,7 @@ Web アプリ以外のアプリケーションで依存関係の挿入を使用�
 
 ## <a name="overview-of-dependency-injection"></a>依存関係の挿入の概要
 
-" *依存関係* " とは、他のオブジェクトが依存するオブジェクトのことです。 他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+"*依存関係*" とは、他のオブジェクトが依存するオブジェクトのことです。 他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
 
 ```csharp
 public class MyDependency
@@ -80,7 +80,7 @@ public class IndexModel : PageModel
 
 * 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
 * サービス コンテナー内の依存関係の登録。 ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。 サービスは通常、アプリの `Startup.ConfigureServices` メソッドに登録されています。
-* サービスを使用するクラスのコンストラクターへの、サービスの " *挿入* "。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
+* サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、`IMyDependency` インターフェイスは、`WriteMessage` メソッドを定義します。
 
@@ -113,7 +113,7 @@ DI パターンを使用すると、コントローラーは次のようにな�
 
 `MyDependency2` は、コンストラクターで要求される <xref:Microsoft.Extensions.Logging.ILogger%601> によって異なります。 `ILogger<TCategoryName>` は、[フレームワークで提供されるサービス](#framework-provided-services)です。
 
-依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、" *依存関係ツリー* "、" *依存関係グラフ* "、または " *オブジェクト グラフ* " と呼ばれます。
+依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。
 
 コンテナーでは、[(ジェネリック) オープン型](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)を活用し、すべての [(ジェネリック) 構築型](/dotnet/csharp/language-reference/language-specification/types#constructed-types)を登録する必要をなくすことで、`ILogger<TCategoryName>` を解決します。
 
@@ -151,7 +151,7 @@ public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
 
 ## <a name="register-groups-of-services-with-extension-methods"></a>拡張メソッドを使用したサービスのグループを登録する
 
-ASP.NET Core フレームワークは、関連するサービスのグループを登録するための規則を使用します。 規則は、単一の `Add{GROUP_NAME}` 拡張メソッドを使用して、フレームワーク機能に必要なすべてのサービスを登録するというものです。 たとえば、<Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers> 拡張メソッドによって、MVC コントローラーに必要なサービスが登録されます。
+ASP.NET Core フレームワークは、関連するサービスのグループを登録するための規則を使用します。 規則は、単一の `Add{GROUP_NAME}` 拡張メソッドを使用して、フレームワーク機能に必要なすべてのサービスを登録するというものです。 たとえば、<xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers%2A> 拡張メソッドには、MVC コントローラーに必要なサービスが登録されます。
 
 次のコードは、個々のユーザー アカウントを使用して Razor ページ テンプレートに基づいて生成されており、拡張メソッド <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> および <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity%2A> を使用してコンテナーにさらにサービスを追加する方法を示しています。
 
@@ -176,7 +176,7 @@ ASP.NET Core フレームワークは、関連するサービスのグループ�
 
  [テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)する場合に、複数の実装を使用することは一般的です。
 
-実装型のみでサービスを登録することは、同じ実装とサービスの型でそのサービスを登録することと同じです。 明示的なサービス型を使用しないメソッドを使用してサービスの複数の実装を登録できないのは、このためです。 これらのメソッドでは、サービスの複数の " *インスタンス* " を登録できますが、すべて同じ " *実装* " 型になります。
+実装型のみでサービスを登録することは、同じ実装とサービスの型でそのサービスを登録することと同じです。 明示的なサービス型を使用しないメソッドを使用してサービスの複数の実装を登録できないのは、このためです。 これらのメソッドでは、サービスの複数の "*インスタンス*" を登録できますが、すべて同じ "*実装*" 型になります。
 
 上記のサービス登録メソッドのずれかを使用して、同じサービス型の複数のサービス インスタンスを登録できます。 次の例では、`IMyDependency` をサービス型として使用して、`AddSingleton` を 2 回呼び出します。 2 回目の `AddSingleton` の呼び出しにより、`IMyDependency` として解決された場合は前のものがオーバーライドされ、`IEnumerable<IMyDependency>` を介して複数のサービスが解決された場合は前のものに追加されます。 `IEnumerable<{SERVICE}>` を介して解決された場合、サービスは登録された順に表示されます。
 
@@ -234,11 +234,11 @@ public class MyService
 
 ロガーの出力は次のようになります。
 
-* " *一時的な* " オブジェクトは常に異なります。 一時的な `OperationId` 値は、`IndexModel` とミドルウェアでは異なります。
-* " *スコープ付きの* " オブジェクトは、それぞれの要求内では同じですが、それぞれの要求間では異なります。
-* " *シングルトン* " オブジェクトは、すべての要求において同じです。
+* "*一時的な*" オブジェクトは常に異なります。 一時的な `OperationId` 値は、`IndexModel` とミドルウェアでは異なります。
+* "*スコープ付きの*" オブジェクトは、それぞれの要求内では同じですが、それぞれの要求間では異なります。
+* "*シングルトン*" オブジェクトは、すべての要求において同じです。
 
-ログ出力を減らすには、 *appsettings.Development.json* ファイル内で "Logging:LogLevel:Microsoft:Error" を設定します。
+ログ出力を減らすには、*appsettings.Development.json* ファイル内で "Logging:LogLevel:Microsoft:Error" を設定します。
 
 [!code-json[](dependency-injection/samples/3.x/DependencyInjectionSample/appsettings.Development.json?highlight=7)]
 
@@ -328,7 +328,7 @@ Service1.Dispose
 
     ![正しくないコード](dependency-injection/_static/bad.png)
 
-  **正しい** :
+  **正しい**:
 
   ```csharp
   public class MyClass
@@ -431,7 +431,7 @@ MVC コントローラー内部における依存関係の挿入に固有の情�
 
 ## <a name="overview-of-dependency-injection"></a>依存関係の挿入の概要
 
-" *依存関係* " とは、他のオブジェクトが必要とする任意のオブジェクトのことです。 アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
+"*依存関係*" とは、他のオブジェクトが必要とする任意のオブジェクトのことです。 アプリ内の他のクラスが依存している、次の `WriteMessage` メソッドを備えた `MyDependency` クラスを調べます。
 
 ```csharp
 public class MyDependency
@@ -475,7 +475,7 @@ public class IndexModel : PageModel
 
 * 依存関係の実装を抽象化するための、インターフェイスまたは基底クラスの使用。
 * サービス コンテナー内の依存関係の登録。 ASP.NET Core には、組み込みのサービス コンテナー <xref:System.IServiceProvider> が用意されています。 サービスはアプリの `Startup.ConfigureServices` メソッドに登録されています。
-* サービスを使用するクラスのコンストラクターへの、サービスの " *挿入* "。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
+* サービスを使用するクラスのコンストラクターへの、サービスの "*挿入*"。 依存関係のインスタンスの作成、およびインスタンスが不要になったときの廃棄の役割を、フレームワークが担当します。
 
 [サンプル アプリ](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)では、サービスがアプリに提供するメソッドが `IMyDependency` インターフェイスによって定義されます。
 
@@ -485,7 +485,7 @@ public class IndexModel : PageModel
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、" *依存関係ツリー* "、" *依存関係グラフ* "、または " *オブジェクト グラフ* " と呼ばれます。
+`MyDependency` では、コンストラクター内で <xref:Microsoft.Extensions.Logging.ILogger`1> が要求されます。 依存関係の挿入をチェーン形式で使用することはよくあります。 次に、要求されたそれぞれの依存関係が、それ自身の依存関係を要求します。 コンテナーによってグラフ内の依存関係が解決され、完全に解決されたサービスが返されます。 解決する必要がある依存関係の集合的なセットは、通常、"*依存関係ツリー*"、"*依存関係グラフ*"、または "*オブジェクト グラフ*" と呼ばれます。
 
 `IMyDependency` と `ILogger<TCategoryName>` をサービス コンテナーに登録する必要があります。 `IMyDependency` は `Startup.ConfigureServices` に登録されます。 `ILogger<TCategoryName>` はログ記録の抽象化インフラストラクチャによって登録されます。したがって、これは、フレームワークによって既定で登録される[フレームワークが提供するサービス](#framework-provided-services)です。
 
@@ -500,7 +500,10 @@ services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> 各 `services.Add{SERVICE_NAME}` 拡張メソッドは、サービスを追加 (および場合によっては構成) します。 たとえば、`services.AddMvc()` はサービスの Razor Pages と必須の MVC を追加します。 アプリをこの規則に従わせることをお勧めします。 拡張メソッドを [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 名前空間に配置して、サービス登録のグループをカプセル化します。
+> 各 `services.Add{SERVICE_NAME}` 拡張メソッドによって、サービスが追加、場合によっては構成されます。 たとえば、`services.AddControllersWithViews`、`services.AddRazorPages`、`services.AddControllers` を使用すると、ASP.NET Core アプリに必要なサービスが追加されます。 アプリをこの規則に従わせることをお勧めします。 拡張メソッドを <xref:Microsoft.Extensions.DependencyInjection?displayProperty=fullName> 名前空間に配置して、サービス登録のグループをカプセル化します。 DI 拡張メソッド用の名前空間部分として `Microsoft.Extensions.DependencyInjection` を含めると、次のようになります。
+>
+> * `using` ブロックを追加しなくても、それらを [IntelliSense](/visualstudio/ide/using-intellisense) で表示することができます。
+> * それらの拡張メソッドの通常の呼び出し元である `Startup` クラス内で `using` ステートメントが過剰になることはありません。
 
 サービスのコンストラクターで[ビルトイン型](/dotnet/csharp/language-reference/keywords/built-in-types-table) (`string` など) が必要な場合は、[構成](xref:fundamentals/configuration/index)や[オプション パターン](xref:fundamentals/configuration/options)を使って型を挿入することができます。
 
@@ -628,7 +631,7 @@ public void ConfigureServices(IServiceCollection services)
 
 型の廃棄の詳細については、「[サービスの破棄](#disposal-of-services)」を参照してください。 実装が複数の場合の一般的なシナリオとしては、[テスト用に型のモックを作成](xref:test/integration-tests#inject-mock-services)します。
 
-実装型のみでサービスを登録することは、同じ実装とサービスの型でそのサービスを登録することと同じです。 明示的なサービス型を使用しないメソッドを使用してサービスの複数の実装を登録できないのは、このためです。 これらのメソッドでは、サービスの複数の " *インスタンス* " を登録できますが、すべて同じ " *実装* " 型になります。
+実装型のみでサービスを登録することは、同じ実装とサービスの型でそのサービスを登録することと同じです。 明示的なサービス型を使用しないメソッドを使用してサービスの複数の実装を登録できないのは、このためです。 これらのメソッドでは、サービスの複数の "*インスタンス*" を登録できますが、すべて同じ "*実装*" 型になります。
 
 上記のサービス登録メソッドのずれかを使用して、同じサービス型の複数のサービス インスタンスを登録できます。 次の例では、`IMyDependency` をサービス型として使用して、`AddSingleton` を 2 回呼び出します。 2 回目の `AddSingleton` の呼び出しにより、`IMyDependency` として解決された場合は前のものがオーバーライドされ、`IEnumerable<IMyDependency>` を介して複数のサービスが解決された場合は前のものに追加されます。 `IEnumerable<{SERVICE}>` を介して解決された場合、サービスは登録された順に表示されます。
 
@@ -677,7 +680,7 @@ public class MyService
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton*>
 
-[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、" *同じ型* " の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。 一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
+[TryAddEnumerable(ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) メソッドでは、"*同じ型*" の実装がまだ存在しない場合にのみサービスが登録されます。 複数のサービスは、`IEnumerable<{SERVICE}>` によって解決されます。 サービスを登録するとき、開発者は同じ型のものがまだ追加されていない場合にのみインスタンスを追加します。 一般に、このメソッドは、インスタンスのコピーが 2 つコンテナーに登録されるのを回避するために、ライブラリ作成者によって使用されます。
 
 次の例の最初の行では、`IMyDep1` に `MyDep` を登録します。 2 行目では `IMyDep2` に `MyDep` を登録します。 3 行目では何も行われません。`IMyDep1` には `MyDep` の登録済みの実装が既に含まれているからです。
 
@@ -702,7 +705,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 コンストラクターは、依存関係の挿入によって提供されない引数を受け取ることができますが、引数は既定値を割り当てる必要があります。
 
-`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、 [コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、" *パブリック* " コンストラクターが必要です。
+`IServiceProvider` または `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、"*パブリック*" コンストラクターが必要です。
 
 `ActivatorUtilities` によってサービスを解決する場合、[コンストラクターの挿入](xref:mvc/controllers/dependency-injection#constructor-injection)には、該当するコンストラクターが 1 つだけ存在することが必要です。 コンストラクターのオーバーロードはサポートされていますが、依存関係の挿入によってすべての引数を設定できるオーバーロードは 1 つしか存在できません。
 
@@ -774,9 +777,9 @@ Entity Framework コンテキストでは通常、[範囲が指定された有�
 
 要求内および要求間で、どの `OperationId` 値が変化しているかを確認してください。
 
-* " *一時的な* " オブジェクトは常に異なります。 1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。
+* "*一時的な*" オブジェクトは常に異なります。 1 番目と 2 番目のクライアント要求の一時的な `OperationId` 値は、`OperationService` 操作とクライアント要求間の両方に対して異なります。 個々のサービス要求とクライアント要求に対して、新しいインスタンスが提供されます。
 * *Scoped* オブジェクトは、1 つのクライアント要求内では同じですが、複数のクライアント要求間では異なります。
-* " *シングルトン* " オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
+* "*シングルトン*" オブジェクトは、`Operation` インスタンスが `Startup.ConfigureServices` で提供されるかどうかに関係なく、すべてのオブジェクトとすべての要求について同じです。
 
 ## <a name="call-services-from-main"></a>main からサービスを呼び出す
 
@@ -964,7 +967,7 @@ public void ConfigureServices(IServiceCollection services)
 * データと構成をサービス コンテナーに直接格納しないようにします。 たとえば、通常、ユーザーのショッピング カートはサービス コンテナーに追加しません。 構成では、[オプション パターン](xref:fundamentals/configuration/options)を使う必要があります。 同様に、他のオブジェクトへのアクセスを許可するためだけに存在する "データ ホルダー" オブジェクトは避ける必要があります。 実際のアイテムを DI 経由で要求することをお勧めします。
 * サービスへの静的なアクセスを行わないようにします。 たとえば、他の場所で使用するために [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) の静的な型指定を行わないようにします。
 
-* *サービス ロケーター パターン* は、 [制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)戦略が混在しているので使用しないでください。
+* *サービス ロケーター パターン* は、[制御の反転](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion)戦略が混在しているので使用しないでください。
   * サービス インスタンスを取得する場合、DI を使用できるときに、<xref:System.IServiceProvider.GetService*> を呼び出さないでください。
 
     **正しくない:**
@@ -982,7 +985,7 @@ public void ConfigureServices(IServiceCollection services)
       }
       ```
    
-    **正しい** :
+    **正しい**:
 
     ```csharp
     public class MyClass

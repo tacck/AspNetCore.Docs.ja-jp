@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 08fc393160e0a7396963901e2add3b44fc7b02b9
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
+ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94508013"
+ms.lasthandoff: 11/15/2020
+ms.locfileid: "94637718"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
@@ -81,7 +81,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> の既定の実装では、対応する値が <xref:Microsoft.AspNetCore.Components.ParameterView> 内にある [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) または [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) 属性を使用して、各プロパティの値が設定されます。 対応する値が <xref:Microsoft.AspNetCore.Components.ParameterView> 内にないパラメーターは、変更されないままになります。
 
-[`base.SetParametersAync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) が呼び出されない場合、カスタム コードでは、必要に応じて受信パラメーター値を解釈できます。 たとえば、受信したパラメーターをクラスのプロパティに割り当てる必要はありません。
+[`base.SetParametersAsync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) が呼び出されない場合、カスタム コードでは、必要に応じて受信パラメーター値を解釈できます。 たとえば、受信したパラメーターをクラスのプロパティに割り当てる必要はありません。
 
 イベント ハンドラーが設定されている場合は、破棄時にそれらをアンフックします。 詳細については、「[`IDisposable` を使用したコンポーネントの破棄](#component-disposal-with-idisposable)」セクションを参照してください。
 
@@ -109,7 +109,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-[コンテンツをプリレンダリングする](xref:blazor/fundamentals/additional-scenarios#render-mode)Blazor Server アプリは、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> を "**_2 回_**" 呼び出します。
+[コンテンツをプリレンダリングする](xref:blazor/fundamentals/additional-scenarios#render-mode) Blazor Server アプリによって、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> が "*2 回*" 呼び出されます。
 
 * コンポーネントが最初にページの一部として静的にレンダリングされるときに 1 回。
 * ブラウザーがサーバーへの接続を確立するときに 2 回目。
@@ -218,7 +218,7 @@ protected override bool ShouldRender()
 
 ライフサイクル イベントで実行される非同期アクションは、コンポーネントがレンダリングされる前に完了していない可能性があります。 ライフサイクル メソッドの実行中に、オブジェクトが `null` またはデータが不完全に設定されている可能性があります。 オブジェクトが初期化されていることを確認するレンダリング ロジックを提供します。 オブジェクトが `null` の間、プレースホルダー UI 要素 (読み込みメッセージなど) をレンダリングします。
 
-Blazor テンプレートの `FetchData` コンポーネントでは、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> はオーバーライドされ、予測データを非同期に受信します (`forecasts`)。 `forecasts` が `null` の場合、読み込みメッセージがユーザーに表示されます。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> によって返された `Task` が完了すると、コンポーネントは更新された状態で再レンダリングされます。
+Blazor テンプレートの `FetchData` コンポーネントでは、予測データ (`forecasts`) を非同期に受信するように、<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> がオーバーライドされます。 `forecasts` が `null` の場合、読み込みメッセージがユーザーに表示されます。 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> によって返された `Task` が完了すると、コンポーネントは更新された状態で再レンダリングされます。
 
 Blazor Server テンプレートの `Pages/FetchData.razor` は以下のようになります。
 
@@ -392,3 +392,7 @@ public class WeatherForecastService
     }
 }
 ```
+
+## <a name="no-locblazor-server-reconnection-events"></a>Blazor Server 再接続イベント
+
+この記事で説明するコンポーネント ライフサイクル イベントは、[Blazor Server の再接続イベント ハンドラー](xref:blazor/fundamentals/additional-scenarios#reflect-the-connection-state-in-the-ui)とは別々に動作します。 Blazor Server アプリとクライアントの SignalR 接続が失われた場合には、UI の更新だけが中断されます。 その接続が再確立されると、UI の更新が再開されます。 回線ハンドラーのイベントと構成の詳細については、「<xref:blazor/fundamentals/additional-scenarios>」を参照してください。

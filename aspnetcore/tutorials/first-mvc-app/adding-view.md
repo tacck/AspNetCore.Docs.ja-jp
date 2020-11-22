@@ -3,7 +3,7 @@ title: パート 3、ASP.NET Core MVC アプリへのビューの追加
 author: rick-anderson
 description: ASP.NET Core MVC のチュートリアル シリーズのパート 3。
 ms.author: riande
-ms.date: 8/04/2019
+ms.date: 11/16/2019
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 56f39643ccd69c6508148374033208eb3b2f25ab
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.openlocfilehash: ce2754d22b61578bdbe5e78a69e08bdc1e83190d
+ms.sourcegitcommit: fb208f907249cc7aab029afff941a0266c187050
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422718"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94688360"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>パート 3、ASP.NET Core MVC アプリへのビューの追加
 
@@ -38,7 +38,7 @@ ms.locfileid: "94422718"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-上のコードでは、コントローラーの <xref:Microsoft.AspNetCore.Mvc.Controller.View*> メソッドを呼び出します。 ビュー テンプレートを使用して、HTML 応答を生成します。 上記の `Index` メソッドなどのコントローラー メソッド ( *アクション メソッド* ともいう) は、一般に、`string` などの型ではなく、<xref:Microsoft.AspNetCore.Mvc.IActionResult> (または <xref:Microsoft.AspNetCore.Mvc.ActionResult> から派生したクラス) を返します。
+上のコードでは、コントローラーの <xref:Microsoft.AspNetCore.Mvc.Controller.View*> メソッドを呼び出します。 ビュー テンプレートを使用して、HTML 応答を生成します。 上記の `Index` メソッドなどのコントローラー メソッド (*アクション メソッド* ともいう) は、一般に、`string` などの型ではなく、<xref:Microsoft.AspNetCore.Mvc.IActionResult> (または <xref:Microsoft.AspNetCore.Mvc.ActionResult> から派生したクラス) を返します。
 
 ## <a name="add-a-view"></a>ビューを追加する
 
@@ -50,11 +50,11 @@ ms.locfileid: "94422718"
 
 * **[新しい項目の追加 - MvcMovie]** ダイアログ
 
-  * 右上の検索ボックスに「 *view* 」と入力します。
+  * 右上の検索ボックスに「*view*」と入力します。
 
   * **[Razor ビュー]** を選択します
 
-  * **[名前]** ボックスの値、 *Index.cshtml* を維持します。
+  * **[名前]** ボックスの値、*Index.cshtml* を維持します。
 
   * **[追加]** を選択します。
 
@@ -74,11 +74,11 @@ ms.locfileid: "94422718"
 * **[新しいファイル]** ダイアログで次を実行します。
 
   * 左側のウィンドウで、 **[ASP .NET Core]** を選択します。
-  * 中央のウィンドウで、 **[MVC ビュー ページ]** を選択します。
-  * **[名前]** ボックスに「 *Index* 」と入力します。
+  * 中央のウィンドウで **Razor [表示]** を選択します。
+  * **[名前]** ボックスに「*Index*」と入力します。
   * **[新規]** を選択します。
 
-![[新しい項目の追加] ダイアログ](adding-view/_static/add_view_mac.png)
+![[新しい項目の追加] ダイアログ](adding-view/_static/add_view_macVSM8.9.png)
 
 ---
 
@@ -92,7 +92,7 @@ ms.locfileid: "94422718"
 
 ## <a name="change-views-and-layout-pages"></a>ビューとレイアウト ページを変更する
 
-メニューのリンク ( **[MvcMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、 *Views/Shared/_Layout.cshtml* ファイルに実装されています。 *Views/Shared/_Layout.cshtml* ファイルを開きます。
+メニューのリンク ( **[MvcMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、*Views/Shared/_Layout.cshtml* ファイルに実装されています。 *Views/Shared/_Layout.cshtml* ファイルを開きます。
 
 [[レイアウト]](xref:mvc/views/layout) テンプレートでは、1 か所でサイトの HTML コンテナー レイアウトを指定し、それをサイト内の複数のページに適用できます。 `@RenderBody()` という行を見つけます。 `RenderBody` は、作成したビュー固有のページがすべて表示されるプレースホルダーで、レイアウト ページに *ラップ* されます。 たとえば、 **[プライバシー]** リンクを選択した場合、`RenderBody` メソッド内で **Views/Home/Privacy.cshtml** ビューがレンダリングされます。
 
@@ -121,9 +121,9 @@ ms.locfileid: "94422718"
 
 上記のマークアップでは、このアプリで[領域](xref:mvc/controllers/areas)が使用されていないため、`asp-area=""` [アンカー タグ ヘルパー属性](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)と属性値は省略されました。
 
-**注** :`Movies` コントローラーは実装されていません。 この時点で、`Movie App`リンクは機能しません。
+**注**:`Movies` コントローラーは実装されていません。 この時点で、`Movie App`リンクは機能しません。
 
-ご自分の変更を保存し、 **プライバシー** リンクを選択します。 ブラウザー タブのタイトルが、 **Privacy Policy - Mvc Movie** ではなく、 **Privacy Policy - Movie App** になっていることに注目してください。
+ご自分の変更を保存し、**プライバシー** リンクを選択します。 ブラウザー タブのタイトルが、**Privacy Policy - Mvc Movie** ではなく、**Privacy Policy - Movie App** になっていることに注目してください。
 
 ![[プライバシー] タブ](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
@@ -151,9 +151,9 @@ ms.locfileid: "94422718"
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-変更内容を保存して、`https://localhost:{PORT}/HelloWorld` に移動します。 ブラウザーのタイトル、プライマリ見出し、およびセカンダリ見出しが変更されていることに注意してください (ブラウザーに変更内容が表示されない場合は、キャッシュされたコンテンツを表示している可能性があります。 ブラウザーで Ctrl + F5 キーを押して、サーバーからの応答が強制的に読み込まれるようにしてください)。ブラウザーのタイトルは、 *Index.cshtml* ビュー テンプレートで設定した `ViewData["Title"]` で作成されます。レイアウト ファイルには "- Movie App" が追加されます。
+変更内容を保存して、`https://localhost:{PORT}/HelloWorld` に移動します。 ブラウザーのタイトル、プライマリ見出し、およびセカンダリ見出しが変更されていることに注意してください (ブラウザーに変更内容が表示されない場合は、キャッシュされたコンテンツを表示している可能性があります。 ブラウザーで Ctrl + F5 キーを押して、サーバーからの応答が強制的に読み込まれるようにしてください)。ブラウザーのタイトルは、*Index.cshtml* ビュー テンプレートで設定した `ViewData["Title"]` で作成されます。レイアウト ファイルには "- Movie App" が追加されます。
 
-*Index.cshtml* ビュー テンプレート内のコンテンツは、 *Views/Shared/_Layout.cshtml* ビュー テンプレートにマージされます。 1 つの HTML 応答がブラウザーに送信されます。 レイアウト テンプレートを使用すれば、アプリのすべてのページに適用される変更を簡単に行うことができます。 詳細については、「[Layout](xref:mvc/views/layout)」(レイアウト) を参照してください。
+*Index.cshtml* ビュー テンプレート内のコンテンツは、*Views/Shared/_Layout.cshtml* ビュー テンプレートにマージされます。 1 つの HTML 応答がブラウザーに送信されます。 レイアウト テンプレートを使用すれば、アプリのすべてのページに適用される変更を簡単に行うことができます。 詳細については、「[Layout](xref:mvc/views/layout)」(レイアウト) を参照してください。
 
 ![ムービー リスト ビュー](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 
@@ -207,7 +207,7 @@ ms.locfileid: "94422718"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-上のコードでは、コントローラーの <xref:Microsoft.AspNetCore.Mvc.Controller.View*> メソッドを呼び出します。 ビュー テンプレートを使用して、HTML 応答を生成します。 上記の `Index` メソッドなどのコントローラー メソッド ( *アクション メソッド* ともいう) は、一般に、`string` などの型ではなく、<xref:Microsoft.AspNetCore.Mvc.IActionResult> (または <xref:Microsoft.AspNetCore.Mvc.ActionResult> から派生したクラス) を返します。
+上のコードでは、コントローラーの <xref:Microsoft.AspNetCore.Mvc.Controller.View*> メソッドを呼び出します。 ビュー テンプレートを使用して、HTML 応答を生成します。 上記の `Index` メソッドなどのコントローラー メソッド (*アクション メソッド* ともいう) は、一般に、`string` などの型ではなく、<xref:Microsoft.AspNetCore.Mvc.IActionResult> (または <xref:Microsoft.AspNetCore.Mvc.ActionResult> から派生したクラス) を返します。
 
 ## <a name="add-a-view"></a>ビューを追加する
 
@@ -219,11 +219,11 @@ ms.locfileid: "94422718"
 
 * **[新しい項目の追加 - MvcMovie]** ダイアログ
 
-  * 右上の検索ボックスに「 *view* 」と入力します。
+  * 右上の検索ボックスに「*view*」と入力します。
 
   * **[Razor ビュー]** を選択します
 
-  * **[名前]** ボックスの値、 *Index.cshtml* を維持します。
+  * **[名前]** ボックスの値、*Index.cshtml* を維持します。
 
   * **[追加]** を選択します。
 
@@ -244,7 +244,7 @@ ms.locfileid: "94422718"
 
   * 左側のウィンドウで **[Web]** を選択します。
   * 中央のウィンドウで **[空の HTML ファイル]** を選択します。
-  * **[名前]** ボックスに「 *Index.cshtml* 」と入力します。
+  * **[名前]** ボックスに「*Index.cshtml*」と入力します。
   * **[新規]** を選択します。
 
 ![[新しい項目の追加] ダイアログ](adding-view/_static/add_view_mac.png)
@@ -261,7 +261,7 @@ ms.locfileid: "94422718"
 
 ## <a name="change-views-and-layout-pages"></a>ビューとレイアウト ページを変更する
 
-メニューのリンク ( **[MvcMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、 *Views/Shared/_Layout.cshtml* ファイルに実装されています。 *Views/Shared/_Layout.cshtml* ファイルを開きます。
+メニューのリンク ( **[MvcMovie]** 、 **[ホーム]** 、 **[プライバシー]** ) を選択します。 各ページには同じメニューのレイアウトが表示されます。 メニューのレイアウトは、*Views/Shared/_Layout.cshtml* ファイルに実装されています。 *Views/Shared/_Layout.cshtml* ファイルを開きます。
 
 [[レイアウト]](xref:mvc/views/layout) テンプレートでは、1 か所でサイトの HTML コンテナー レイアウトを指定し、それをサイト内の複数のページに適用できます。 `@RenderBody()` という行を見つけます。 `RenderBody` は、作成したビュー固有のページがすべて表示されるプレースホルダーで、レイアウト ページに *ラップ* されます。 たとえば、 **[プライバシー]** リンクを選択した場合、`RenderBody` メソッド内で **Views/Home/Privacy.cshtml** ビューがレンダリングされます。
 
@@ -281,9 +281,9 @@ ms.locfileid: "94422718"
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**注** :`Movies` コントローラーは実装されていません。 この時点で、`Movie App`リンクは機能しません。
+**注**:`Movies` コントローラーは実装されていません。 この時点で、`Movie App`リンクは機能しません。
 
-ご自分の変更を保存し、 **プライバシー** リンクを選択します。 ブラウザー タブのタイトルが、 **Privacy Policy - Mvc Movie** ではなく、 **Privacy Policy - Movie App** になっていることに注目してください。
+ご自分の変更を保存し、**プライバシー** リンクを選択します。 ブラウザー タブのタイトルが、**Privacy Policy - Mvc Movie** ではなく、**Privacy Policy - Movie App** になっていることに注目してください。
 
 ![[プライバシー] タブ](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
@@ -311,7 +311,7 @@ ms.locfileid: "94422718"
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-変更内容を保存して、`https://localhost:{PORT}/HelloWorld` に移動します。 ブラウザーのタイトル、プライマリ見出し、およびセカンダリ見出しが変更されていることに注意してください (ブラウザーに変更内容が表示されない場合は、キャッシュされたコンテンツを表示している可能性があります。 ブラウザーで Ctrl + F5 キーを押して、サーバーからの応答が強制的に読み込まれるようにしてください)。ブラウザーのタイトルは、 *Index.cshtml* ビュー テンプレートで設定した `ViewData["Title"]` で作成されます。レイアウト ファイルには "- Movie App" が追加されます。
+変更内容を保存して、`https://localhost:{PORT}/HelloWorld` に移動します。 ブラウザーのタイトル、プライマリ見出し、およびセカンダリ見出しが変更されていることに注意してください (ブラウザーに変更内容が表示されない場合は、キャッシュされたコンテンツを表示している可能性があります。 ブラウザーで Ctrl + F5 キーを押して、サーバーからの応答が強制的に読み込まれるようにしてください)。ブラウザーのタイトルは、*Index.cshtml* ビュー テンプレートで設定した `ViewData["Title"]` で作成されます。レイアウト ファイルには "- Movie App" が追加されます。
 
 *Index.cshtml* ビュー テンプレートのコンテンツがどのように *Views/Shared/_Layout.cshtml* ビュー テンプレートにマージされ、1 つの HTML 応答がブラウザーに送信されたかにも注目してください。 レイアウト テンプレートを使用すれば、アプリケーションのすべてのページに適用される変更をとても簡単に行うことができます。 詳細については、「[Layout](xref:mvc/views/layout)」 (レイアウト) を参照してください。
 
