@@ -30,7 +30,7 @@ ms.locfileid: "94550518"
 
 [Daniel Roth](https://github.com/danroth27)
 
-Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Edge/Chrome) のブラウザー開発ツールを使用してデバッグできます。 次の統合開発環境 (IDE) を使用して、アプリをデバッグすることもできます。
+Blazor WebAssembly アプリは、Chromium ベースのブラウザー (Microsoft Edge/Chrome) のブラウザー開発ツールを使用してデバッグできます。 次の統合開発環境 (IDE) を使用して、アプリをデバッグすることもできます。
 
 * Visual Studio
 * Visual Studio for Mac
