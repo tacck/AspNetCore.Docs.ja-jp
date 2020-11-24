@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: d8838a458943599890420adec4551ad87e43d328
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637705"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981870"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -268,7 +268,7 @@ namespace BlazorSample
 
 ### <a name="component-parameters"></a>コンポーネントのパラメーター
 
-コンポーネントには、*コンポーネント パラメーター* を指定できます。このパラメーターは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、パブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
+コンポーネントには、"*コンポーネント パラメーター*" を指定できます。これは、[`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) 属性を指定したコンポーネント クラス上で、単純な、または複雑なパブリック プロパティを使用して定義します。 マークアップ内でコンポーネントの引数を指定するには、属性を使います。
 
 `Components/ChildComponent.razor`:
 
