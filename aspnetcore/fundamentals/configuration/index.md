@@ -5,7 +5,7 @@ description: 構成 API を使用して、ASP.NET Core アプリを構成する�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 3/29/2020
+ms.date: 11/23/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9e744ec6d0f0dd72bded8284e98fd9ce53056b84
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c04dcc65f7518d2d8b32cdce7a7fbb756dd8ec3a
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057974"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417540"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -57,9 +57,9 @@ ASP.NET Core の構成は、1つまたは複数の[構成プロバイダー](#cp
 
  <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> により、次の順序でアプリの既定の構成が提供されます。
 
-1. [ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) は:既存の `IConfiguration` をソースとして追加します。 既定の構成では、 [ホスト](#hvac)構成を追加し、 _アプリ_ 構成の最初のソースとして設定します。
+1. [ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) は:既存の `IConfiguration` をソースとして追加します。 既定の構成では、[ホスト](#hvac)構成を追加し、_アプリ_ 構成の最初のソースとして設定します。
 1. [JSON 構成プロバイダー](#file-configuration-provider)を使用する [appsettings.json](#appsettingsjson)。
-1. [JSON 構成プロバイダー](#file-configuration-provider)を使用する *appsettings.* `Environment`*json* 。 たとえば、 *appsettings*. ***Production**_._json* および *appsettings*.***Development** _._json*。
+1. [JSON 構成プロバイダー](#file-configuration-provider)を使用する *appsettings.* `Environment`*json*。 たとえば、*appsettings*.***Production**_._json* および *appsettings*.***Development** _._json*。
 1. `Development` 環境でアプリが実行される際の [App シークレット](xref:security/app-secrets)。
 1. [環境変数構成プロバイダー](#evcp)を使用する環境変数。
 1. [コマンドライン構成プロバイダー](#command-line)を使用するコマンドライン引数。
@@ -85,12 +85,12 @@ ASP.NET Core の構成は、1つまたは複数の[構成プロバイダー](#cp
 既定の <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> は、以下の順序で構成を読み込みます:
 
 1. *appsettings.json*
-1. *appsettings.* `Environment` *.json* :たとえば、 *appsettings*. ***Production**_._json* および *appsettings*.***Development** _._json* ファイル。 ファイルの環境バージョンは、[IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。 詳細については、「<xref:fundamentals/environments>」を参照してください。
+1. *appsettings.* `Environment` *.json*:たとえば、*appsettings*.***Production**_._json* および *appsettings*.***Development** _._json* ファイル。 ファイルの環境バージョンは、[IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。 詳細については、「<xref:fundamentals/environments>」を参照してください。
 
-*appsettings*.`Environment`. *json* の値によって、 *appsettings.json* 内のキーがオーバーライドされます。 たとえば、既定では次のようになります:
+*appsettings*.`Environment`.*json* の値によって、 *appsettings.json* 内のキーがオーバーライドされます。 たとえば、既定では次のようになります:
 
-* 開発中は、 *appsettings*.* **Development** _._json* 構成によって、 *appsettings.json* で見つかった値が上書きされます。
-* 運用環境では、 *appsettings*.* **Production** _._json* 構成によって、 *appsettings.json* で見つかった値が上書きされます。 たとえば、Azure にアプリをデプロイする場合。
+* 開発中は、*appsettings*.***Development** _._json* 構成によって、 *appsettings.json* で見つかった値が上書きされます。
+* 運用環境では、*appsettings*.***Production** _._json* 構成によって、 *appsettings.json* で見つかった値が上書きされます。 たとえば、Azure にアプリをデプロイする場合。
 
 <a name="optpat"></a>
 
@@ -98,7 +98,7 @@ ASP.NET Core の構成は、1つまたは複数の[構成プロバイダー](#cp
 
 [!INCLUDE[](~/includes/bind.md)]
 
-[既定](#default)の構成を利用する場合、 [reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75) で *appsettings.json* と *appsettings.* `Environment` *.json* ファイルを有効にすることができます。 アプリの開始* **後** _に *appsettings.json* と *appsettings.* `Environment` *.json* ファイルに加えられた変更は、[JSON 構成プロバイダー](#jcp) によって読み取られます。
+[既定](#default)の構成を利用する場合、[reloadOnChange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75) で *appsettings.json* と *appsettings.* `Environment` *.json* ファイルを有効にすることができます。 アプリの開始***後** _に *appsettings.json* と *appsettings.* `Environment` *.json* ファイルに加えられた変更は、[JSON 構成プロバイダー](#jcp) によって読み取られます。
 
 追加の JSON 構成ファイルを追加する方法の詳細については、このドキュメント中の「[JSON 構成プロバイダー](#jcp)」を参照してください。
 
@@ -116,7 +116,7 @@ _ 構成プロバイダーのコード内、またはプレーンテキストの
 * 開発環境やテスト環境では運用シークレットを使用しないでください。
 * プロジェクトの外部にシークレットを指定してください。そうすれば、誤ってリソース コード リポジトリにコミットされることはありません。
 
-[既定](#default)では、 [シークレット マネージャー](xref:security/app-secrets)によって、構成設定が、 *appsettings.json* および *appsettings.* `Environment` *.json* の後に読み取られます。
+[既定](#default)では、[シークレット マネージャー](xref:security/app-secrets)によって、構成設定が、 *appsettings.json* および *appsettings.* `Environment` *.json* の後に読み取られます。
 
 パスワードその他の機密データの格納については、次を参照してください：
 
@@ -129,7 +129,7 @@ _ 構成プロバイダーのコード内、またはプレーンテキストの
 
 ## <a name="environment-variables"></a>環境変数
 
-[既定](#default)の構成を使用すると、<xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> によって、 *appsettings.json* 、 *appsettings.* `Environment` *.json* 、および[シークレット マネージャー](xref:security/app-secrets)の読み取り後に、環境変数のキーと値のペアから構成が読み込まれます。 そのため、環境から読み取られたキー値によって、 *appsettings.json* 、 *appsettings.* `Environment` *.json* 、およびシークレット マネージャーから読み取られた値がオーバーライドされます。
+[既定](#default)の構成を使用すると、<xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> によって、 *appsettings.json* 、*appsettings.* `Environment` *.json*、および [シークレット マネージャー](xref:security/app-secrets)の読み取り後に、環境変数のキーと値のペアから構成が読み込まれます。 そのため、環境から読み取られたキー値によって、 *appsettings.json* 、*appsettings.* `Environment` *.json*、およびシークレット マネージャーから読み取られた値がオーバーライドされます。
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -152,7 +152,7 @@ dotnet run
 
 次の [setx](/windows-server/administration/windows-commands/setx) コマンドで、Windows 上の環境キーと値を設定できます。 `set` とは異なり、`setx` 設定は保持されます。 `/M` は、システム環境で変数を設定します。 `/M` スイッチが使用されていない場合には、ユーザー環境変数が設定されます。
 
-```cmd
+```console
 setx MyKey "My key from setx Environment" /M
 setx Position__Title Setx_Environment_Editor /M
 setx Position__Name Environment_Rick /M
@@ -194,6 +194,44 @@ dotnet run
 
 Azure データベース接続文字列の詳細については、「[接続文字列のプレフィックス](#constr)」を参照してください。
 
+### <a name="naming-of-environment-variables"></a>環境変数の名前付け
+
+環境変数名には、 *appsettings.json* ファイルの構造が反映されます。 階層内の各要素は、二重アンダースコア (推奨) またはコロンによって区切られます。 要素構造に配列が含まれている場合は、配列のインデックスをこのパスの追加の要素名として扱う必要があります。 次の *appsettings.json* ファイルと、環境変数として表されたその同等の値を考えてみましょう。
+
+**appsettings.json**
+
+```json
+{
+    "SmtpServer": "smtp.example.com",
+    "Logging": [
+        {
+            "Name": "ToEmail",
+            "Level": "Critical",
+            "Args": {
+                "FromAddress": "MySystem@example.com",
+                "ToAddress": "SRE@example.com"
+            }
+        },
+        {
+            "Name": "ToConsole",
+            "Level": "Information"
+        }
+    ]
+}
+```
+
+**環境変数**
+
+```console
+setx SmtpServer=smtp.example.com
+setx Logging__0__Name=ToEmail
+setx Logging__0__Level=Critical
+setx Logging__0__Args__FromAddress=MySystem@example.com
+setx Logging__0__Args__ToAddress=SRE@example.com
+setx Logging__1__Name=ToConsole
+setx Logging__1__Level=Information
+```
+
 ### <a name="environment-variables-set-in-launchsettingsjson"></a>launchSettings.json で設定された環境変数
 
 *launchSettings.json* に設定されている環境変数で、システム環境に設定されているそれらがオーバーライドされます。
@@ -204,7 +242,7 @@ Azure データベース接続文字列の詳細については、「[接続文�
 
 [既定](#default)の構成を使用して、<xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> は、以下の構成ソースの後にコマンド ライン引数のキーと値のペアから構成を読み込みます：
 
-* *appsettings.json* および *appsettings*.`Environment`. *json* ファイル。
+* *appsettings.json* および *appsettings*.`Environment`.*json* ファイル。
 * 開発環境の [App シークレット (Secret Manager)](xref:security/app-secrets)。
 * 環境変数。
 
@@ -239,7 +277,7 @@ dotnet run --MyKey "Using --" --Position:Title=Cmd-- --Position:Name=Cmd--Rick
 
 ### <a name="switch-mappings"></a>スイッチ マッピング
 
-スイッチ マッピングでは、 **キー** 名の置換ロジックが許可されます。 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> メソッドにスイッチ置換するディクショナリを提供します。
+スイッチ マッピングでは、**キー** 名の置換ロジックが許可されます。 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> メソッドにスイッチ置換するディクショナリを提供します。
 
 スイッチ マッピング ディクショナリが使用されている場合、そのディレクトリで、コマンドライン引数によって指定されたキーと一致するキーが確認されます。 ディクショナリ中にコマンド ライン キーが見つかった場合は、そのディクショナリの値が返され、キーと値のペアがアプリの構成に設定されます。 スイッチ マッピングは、単一のダッシュ (`-`) が前に付いたすべてのコマンドライン キーに必要です。
 
@@ -324,7 +362,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 一般的な一連の構成プロバイダーは次のとおりです。
 
 1. *appsettings.json*
-1. *appsettings*.`Environment`. *json*
+1. *appsettings*.`Environment`.*json*
 1. [シークレットマネージャー](xref:security/app-secrets)
 1. [環境変数構成プロバイダー](#evcp)を使用する環境変数。
 1. [コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。
@@ -376,7 +414,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
 
-上記のコードでは、 *MyIniConfig.ini* と *MyIniConfig*.`Environment`. *ini* ファイルの設定は、以下の設定によってオーバーライドされます：
+上記のコードでは、*MyIniConfig.ini* と *MyIniConfig*.`Environment`.*ini* ファイルの設定は、以下の設定によってオーバーライドされます：
 
 * [環境変数構成プロバイダー](#evcp)
 * [コマンドライン構成プロバイダー](#clcp)。
@@ -406,20 +444,20 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 上記のコードでは次の操作が行われます。
 
-* 次のオプションを使用して、 *MyConfig.json* ファイルを読み込むように JSON 構成プロバイダーを構成します：
+* 次のオプションを使用して、*MyConfig.json* ファイルを読み込むように JSON 構成プロバイダーを構成します：
   * `optional: true`:ファイルは省略可能です。
   * `reloadOnChange: true` は、次のとおりです。変更が保存されると、ファイルが再読み込みされます。
 * *MyConfig.json* ファイルの前に [既定の構成プロバイダー](#default)を読み取ります。 [環境変数構成プロバイダー](#evcp) および [コマンド ライン構成プロバイダー](#clcp)を含む、既定の構成プロバイダーでの *MyConfig.json* ファイルのオーバーライドの設定。
 
-通常は、 [環境変数構成プロバイダー](#evcp)および [コマンドライン構成プロバイダー](#clcp)で設定されている値をオーバーライドするカスタム JSON ファイルは* **必要ありません** _。
+通常は、[環境変数構成プロバイダー](#evcp)および [コマンドライン構成プロバイダー](#clcp)で設定されている値をオーバーライドするカスタム JSON ファイルは***必要ありません** _。
 
 次のコードは、すべての構成プロバイダーをクリアし、いくつかの構成プロバイダーを追加します：
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON2.cs?name=snippet)]
 
-上記のコードでは、_MyConfig.json* および *MyConfig*.`Environment`. *json* ファイル内の設定は:
+上記のコードでは、_MyConfig.json* および *MyConfig*.`Environment`.*json* ファイル内の設定は:
 
-* *appsettings.json* および *appsettings*.`Environment`. *json* ファイル内の設定をオーバーライドします。
+* *appsettings.json* および *appsettings*.`Environment`.*json* ファイル内の設定をオーバーライドします。
 * [環境変数の構成プロバイダー](#evcp)と[コマンドライン構成プロバイダー](#clcp)の設定によってオーバーライドされます。
 
 [サンプル ダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)には、次の *MyConfig.json* ファイルが含まれます：
@@ -438,7 +476,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramXML.cs?name=snippet)]
 
-上記のコードでは、 *MyXMLFile.xml* と *MyXMLFile*.`Environment`. *xml* ファイルの設定は、以下の設定によってオーバーライドされます：
+上記のコードでは、*MyXMLFile.xml* と *MyXMLFile*.`Environment`.*xml* ファイルの設定は、以下の設定によってオーバーライドされます：
 
 * [環境変数構成プロバイダー](#evcp)
 * [コマンドライン構成プロバイダー](#clcp)。
@@ -532,7 +570,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 [!code-json[](index/samples/3.x/ConfigSample/MySubsection.json)]
 
-以下のコードでは、 *MySubsection セクション* を構成プロバイダーに追加します：
+以下のコードでは、*MySubsection セクション* を構成プロバイダーに追加します：
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSONsection.cs?name=snippet)]
 
@@ -570,7 +608,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 [!code-json[](index/samples/3.x/ConfigSample/MyArray.json)]
 
-次のコードでは、 *MyArray.json* を構成プロバイダーに追加します：
+次のコードでは、*MyArray.json* を構成プロバイダーに追加します：
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSONarray.cs?name=snippet)]
 
@@ -614,7 +652,7 @@ Index: 4  Value: value5
 
 [!code-json[](index/samples/3.x/ConfigSample/Value3.json)]
 
-次のコードには、 *Value3.json* と `arrayDict` `Dictionary` の構成が含まれています：
+次のコードには、*Value3.json* と `arrayDict` `Dictionary` の構成が含まれています：
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet2)]
 
@@ -647,35 +685,35 @@ Index: 5  Value: value5
 
 データベースに構成値を格納するための `EFConfigurationValue` エンティティを定義します。
 
-*Models/EFConfigurationValue.cs* :
+*Models/EFConfigurationValue.cs*:
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Models/EFConfigurationValue.cs?name=snippet1)]
 
 構成した値を格納し、その値にアクセスするための `EFConfigurationContext` を追加します。
 
-*EFConfigurationProvider/EFConfigurationContext.cs* :
+*EFConfigurationProvider/EFConfigurationContext.cs*:
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationContext.cs?name=snippet1)]
 
 <xref:Microsoft.Extensions.Configuration.IConfigurationSource> を実装するクラスを作成します。
 
-*EFConfigurationProvider/EFConfigurationSource.cs* :
+*EFConfigurationProvider/EFConfigurationSource.cs*:
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> から継承して、カスタム構成プロバイダーを作成します。 データベースが空だった場合、構成プロバイダーはこれを初期化します。 [構成キーでは大文字と小文字が区別されない](#keys)ため、データベースの初期化に使用されるディクショナリは、大文字と小文字を区別しない比較子 ([StringComparer.OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)) を使用して作成されます。
 
-*EFConfigurationProvider/EFConfigurationProvider.cs* :
+*EFConfigurationProvider/EFConfigurationProvider.cs*:
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationProvider.cs?name=snippet1)]
 
 `AddEFConfiguration` 拡張メソッドを使用すると、`ConfigurationBuilder` に構成ソースを追加できます。
 
-*Extensions/EntityFrameworkExtensions.cs* :
+*Extensions/EntityFrameworkExtensions.cs*:
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Extensions/EntityFrameworkExtensions.cs?name=snippet1)]
 
-次のコードでは、 *Program.cs* でカスタムの `EFConfigurationProvider` を使用する方法を示します。
+次のコードでは、*Program.cs* でカスタムの `EFConfigurationProvider` を使用する方法を示します。
 
 [!code-csharp[](index/samples_snippets/3.x/ConfigurationSample/Program.cs?highlight=7-8)]
 
@@ -729,7 +767,7 @@ Index: 5  Value: value5
 
 ## <a name="host-versus-app-configuration"></a>ホストとアプリの構成
 
-アプリを構成して起動する前に、" *ホスト* " を構成して起動します。 ホストはアプリの起動と有効期間の管理を担当します。 アプリとホストは、両方ともこのトピックで説明する構成プロバイダーを使用して構成します。 ホスト構成のキーと値のペアも、アプリの構成に含まれます。 ホストをビルドするときの構成プロバイダーの使用方法、およびホストの構成に対する構成ソースの影響について詳しくは、「<xref:fundamentals/index#host>」をご覧ください。
+アプリを構成して起動する前に、"*ホスト*" を構成して起動します。 ホストはアプリの起動と有効期間の管理を担当します。 アプリとホストは、両方ともこのトピックで説明する構成プロバイダーを使用して構成します。 ホスト構成のキーと値のペアも、アプリの構成に含まれます。 ホストをビルドするときの構成プロバイダーの使用方法、およびホストの構成に対する構成ソースの影響について詳しくは、「<xref:fundamentals/index#host>」をご覧ください。
 
 <a name="dhc"></a>
 
@@ -748,7 +786,7 @@ Index: 5  Value: value5
 
 ## <a name="other-configuration"></a>その他の構成
 
-このトピックは、" *アプリの構成* " のみに関連しています。 ASP.NET Core アプリの実行とホストに関するその他の側面は、このトピックでは扱わない構成ファイルを使って構成されます。
+このトピックは、"*アプリの構成*" のみに関連しています。 ASP.NET Core アプリの実行とホストに関するその他の側面は、このトピックでは扱わない構成ファイルを使って構成されます。
 
 * *launch.json*/*launchSettings.json* は、開発環境用のツール構成ファイルです。以下で説明されています。
   * <xref:fundamentals/environments#development>、
@@ -775,7 +813,7 @@ Index: 5  Value: value5
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core でのアプリの構成は、" *構成プロバイダー* " によって設定するキーと値のペアに基づいています。 構成プロバイダーは、さまざまな構成のソースから構成データを読み取り、キーと値のペアを作成します。
+ASP.NET Core でのアプリの構成は、"*構成プロバイダー*" によって設定するキーと値のペアに基づいています。 構成プロバイダーは、さまざまな構成のソースから構成データを読み取り、キーと値のペアを作成します。
 
 * Azure Key Vault
 * Azure App Configuration
@@ -794,17 +832,17 @@ ASP.NET Core でのアプリの構成は、" *構成プロバイダー* " によ
 using Microsoft.Extensions.Configuration;
 ```
 
-" *オプション パターン* " は、このトピックで説明する構成の概念を拡張したものです。 オプションでは、クラスを使用して関連する設定のグループを表します。 詳細については、「<xref:fundamentals/configuration/options>」を参照してください。
+"*オプション パターン*" は、このトピックで説明する構成の概念を拡張したものです。 オプションでは、クラスを使用して関連する設定のグループを表します。 詳細については、「<xref:fundamentals/configuration/options>」を参照してください。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
 ## <a name="host-versus-app-configuration"></a>ホストとアプリの構成
 
-アプリを構成して起動する前に、" *ホスト* " を構成して起動します。 ホストはアプリの起動と有効期間の管理を担当します。 アプリとホストは、両方ともこのトピックで説明する構成プロバイダーを使用して構成します。 ホスト構成のキーと値のペアも、アプリの構成に含まれます。 ホストをビルドするときの構成プロバイダーの使用方法、およびホストの構成に対する構成ソースの影響について詳しくは、「<xref:fundamentals/index#host>」をご覧ください。
+アプリを構成して起動する前に、"*ホスト*" を構成して起動します。 ホストはアプリの起動と有効期間の管理を担当します。 アプリとホストは、両方ともこのトピックで説明する構成プロバイダーを使用して構成します。 ホスト構成のキーと値のペアも、アプリの構成に含まれます。 ホストをビルドするときの構成プロバイダーの使用方法、およびホストの構成に対する構成ソースの影響について詳しくは、「<xref:fundamentals/index#host>」をご覧ください。
 
 ## <a name="other-configuration"></a>その他の構成
 
-このトピックは、" *アプリの構成* " のみに関連しています。 ASP.NET Core アプリの実行とホストに関するその他の側面は、このトピックでは扱わない構成ファイルを使って構成されます。
+このトピックは、"*アプリの構成*" のみに関連しています。 ASP.NET Core アプリの実行とホストに関するその他の側面は、このトピックでは扱わない構成ファイルを使って構成されます。
 
 * *launch.json*/*launchSettings.json* は、開発環境用のツール構成ファイルです。以下で説明されています。
   * <xref:fundamentals/environments#development>、
@@ -826,7 +864,7 @@ ASP.NET Core の [dotnet new](/dotnet/core/tools/dotnet-new) テンプレート�
   * [コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。
 * アプリの構成は、次から提供されます。
   * [ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.json* 。
-  * [ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.{Environment}.json* 。
+  * [ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.{Environment}.json*。
   * エントリ アセンブリを使用して `Development` 環境でアプリが実行される場合に使用される[シークレット マネージャー](xref:security/app-secrets)。
   * [環境変数構成プロバイダー](#environment-variables-configuration-provider)を使用する環境変数。
   * [コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。
@@ -937,7 +975,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 | プロバイダー | &hellip; から構成を提供します。 |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration) (" *セキュリティ* " トピック) | Azure Key Vault |
+| [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration) ("*セキュリティ*" トピック) | Azure Key Vault |
 | [Azure App Configuration プロバイダー](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure のドキュメント) | Azure App Configuration |
 | [コマンド ライン構成プロバイダー](#command-line-configuration-provider) | コマンド ライン パラメーター |
 | [カスタム構成プロバイダー](#custom-configuration-provider) | カスタム ソース |
@@ -945,13 +983,13 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 | [ファイル構成プロバイダー](#file-configuration-provider) | ファイル (INI、JSON、XML) |
 | [ファイルごとのキーの構成プロバイダー](#key-per-file-configuration-provider) | ディレクトリ ファイル |
 | [メモリ構成プロバイダー](#memory-configuration-provider) | メモリ内コレクション |
-| [ユーザー シークレット (Secret Manager)](xref:security/app-secrets) (" *セキュリティ* " トピック) | ユーザー プロファイル ディレクトリ内のファイル |
+| [ユーザー シークレット (Secret Manager)](xref:security/app-secrets) ("*セキュリティ*" トピック) | ユーザー プロファイル ディレクトリ内のファイル |
 
 アプリの起動時に各構成プロバイダーが指定されている順序で構成ソースが読み取られます。 このトピックで説明する構成プロバイダーは、それらをコードで配置する順ではなく、アルファベット順で説明します。 アプリで必要とされる、基になる構成ソースの優先順位に合わせるために、コード内で構成プロバイダーを並べ替えます。
 
 一般的な一連の構成プロバイダーは次のとおりです。
 
-1. ファイル ( *appsettings.json* 、 *appsettings.{Environment}.json* 。ここで、`{Environment}` はアプリの現在のホスト環境です)
+1. ファイル ( *appsettings.json* 、*appsettings.{Environment}.json*。ここで、`{Environment}` はアプリの現在のホスト環境です)
 1. [Azure Key Vault](xref:security/key-vault-configuration)
 1. [ユーザー シークレット (Secret Manager)](xref:security/app-secrets) (開発環境のみ)
 1. 環境変数
@@ -1169,7 +1207,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 アプリによってレンダリングされる環境変数の一覧を短く保つために、アプリでは環境変数がフィルター処理されます。 サンプル アプリの *Pages/Index.cshtml.cs* ファイルを参照してください。
 
-アプリで使用できるすべての環境変数を公開する場合は、 *Pages/Index.cshtml.cs* の `FilteredConfiguration` を次のように変更します。
+アプリで使用できるすべての環境変数を公開する場合は、*Pages/Index.cshtml.cs* の `FilteredConfiguration` を次のように変更します。
 
 ```csharp
 FilteredConfiguration = _config.AsEnumerable();
@@ -1297,7 +1335,7 @@ JSON ファイルの構成をアクティブにするには、<xref:Microsoft.Ex
 `CreateDefaultBuilder` を使用して新しいホスト ビルダーを初期化すると、`AddJsonFile` が自動的に 2 回呼び出されます。 このメソッドは、次から構成を読み込むために呼び出されます。
 
 * *appsettings.json* : このファイルは最初に読み取られます。 ファイルの環境バージョンを使用すると、 *appsettings.json* ファイルによって指定された値をオーバーライドできます。
-* *appsettings.{Environment}.json* :ファイルの環境バージョンは、 [IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。
+* *appsettings.{Environment}.json*:ファイルの環境バージョンは、[IHostingEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)に基づいて読み込まれます。
 
 詳細については、「[既定の構成](#default-configuration)」セクションを参照してください。
 
@@ -1307,7 +1345,7 @@ JSON ファイルの構成をアクティブにするには、<xref:Microsoft.Ex
 * 開発環境の[ユーザー シークレット (Secret Manager)](xref:security/app-secrets)。
 * コマンド ライン引数。
 
-JSON 構成プロバイダーが最初に確立されます。 このため、ユーザー シークレット、環境変数、およびコマンド ライン引数によって、 *appsettings* ファイルによって設定された構成がオーバーライドされます。
+JSON 構成プロバイダーが最初に確立されます。 このため、ユーザー シークレット、環境変数、およびコマンド ライン引数によって、*appsettings* ファイルによって設定された構成がオーバーライドされます。
 
 ホストのビルド時に `ConfigureAppConfiguration` を呼び出して、 *appsettings.json* および *appsettings.{Environment}.json* 以外のファイルにアプリの構成を指定します。
 
@@ -1327,7 +1365,7 @@ JSON 構成プロバイダーが最初に確立されます。 このため、�
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.json)]
 
-* `AddJsonFile` の 2 回目の呼び出しでは、 *appsettings.{Environment}.json* から構成を読み込みます。 サンプル アプリの *appsettings.Development.json* では、次のファイルが読み込まれます。
+* `AddJsonFile` の 2 回目の呼び出しでは、*appsettings.{Environment}.json* から構成を読み込みます。 サンプル アプリの *appsettings.Development.json* では、次のファイルが読み込まれます。
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.Development.json)]
 
@@ -1594,7 +1632,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> では、POCO オブジェクト グラフ全体をバインドすることができます。 単純なオブジェクトをバインドする場合と同様に、パブリックな読み取り/書き込みプロパティのみがバインドされます。
 
-サンプルには、オブジェクト グラフに `Metadata` クラスと `Actors` クラスが含まれる `TvShow` モデルが含まれます ( *Models/TvShow.cs* )。
+サンプルには、オブジェクト グラフに `Metadata` クラスと `Actors` クラスが含まれる `TvShow` モデルが含まれます (*Models/TvShow.cs*)。
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/TvShow.cs?name=snippet1)]
 
@@ -1670,7 +1708,7 @@ _config.GetSection("array").Bind(arrayExample);
 
 インデックス &num;3 の不足している構成項目は、`ArrayExample` インスタンスにバインドする前に、構成で適切なキーと値のペアを生成する構成プロバイダーによって指定できます。 不足しているキーと値のペアを含む JSON 構成プロバイダーがサンプルに含まれる場合、`ArrayExample.Entries` は完全な構成の配列と一致します。
 
-*missing_value.json* :
+*missing_value.json*:
 
 ```json
 {
@@ -1741,35 +1779,35 @@ JSON 構成プロバイダーは、次のキーと値のペアに構成データ
 
 データベースに構成値を格納するための `EFConfigurationValue` エンティティを定義します。
 
-*Models/EFConfigurationValue.cs* :
+*Models/EFConfigurationValue.cs*:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/EFConfigurationValue.cs?name=snippet1)]
 
 構成した値を格納し、その値にアクセスするための `EFConfigurationContext` を追加します。
 
-*EFConfigurationProvider/EFConfigurationContext.cs* :
+*EFConfigurationProvider/EFConfigurationContext.cs*:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationContext.cs?name=snippet1)]
 
 <xref:Microsoft.Extensions.Configuration.IConfigurationSource> を実装するクラスを作成します。
 
-*EFConfigurationProvider/EFConfigurationSource.cs* :
+*EFConfigurationProvider/EFConfigurationSource.cs*:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> から継承して、カスタム構成プロバイダーを作成します。 データベースが空だった場合、構成プロバイダーはこれを初期化します。
 
-*EFConfigurationProvider/EFConfigurationProvider.cs* :
+*EFConfigurationProvider/EFConfigurationProvider.cs*:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationProvider.cs?name=snippet1)]
 
 `AddEFConfiguration` 拡張メソッドを使用すると、`ConfigurationBuilder` に構成ソースを追加できます。
 
-*Extensions/EntityFrameworkExtensions.cs* :
+*Extensions/EntityFrameworkExtensions.cs*:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Extensions/EntityFrameworkExtensions.cs?name=snippet1)]
 
-次のコードでは、 *Program.cs* でカスタムの `EFConfigurationProvider` を使用する方法を示します。
+次のコードでは、*Program.cs* でカスタムの `EFConfigurationProvider` を使用する方法を示します。
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
 
