@@ -20,11 +20,11 @@ no-loc:
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
 ms.openlocfilehash: 461f6d2105d38c5dbea2f8cf479e027c2edede14
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057623"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024943"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>プロキシ サーバーとロード バランサーを使用するために ASP.NET Core を構成する
 
@@ -59,7 +59,7 @@ Forwarded Headers Middleware (<xref:Microsoft.AspNetCore.HttpOverrides.Forwarded
 
 Forwarded Headers Middleware の[既定の設定](#forwarded-headers-middleware-options)は構成できます。 既定の設定は次のとおりです。
 
-* アプリと要求のソースの間には、" *1 つのプロキシ* " だけが存在します。
+* アプリと要求のソースの間には、"*1 つのプロキシ*" だけが存在します。
 * 既知のプロキシと既知のネットワークに対しては、ループバック アドレスのみが構成されています。
 * 転送されるヘッダーには `X-Forwarded-For` と `X-Forwarded-Proto` の名前が付けられます。
 
@@ -417,7 +417,7 @@ ASP.NET Core の推奨される構成では、アプリは IIS/ASP.NET Core モ�
 
 Forwarded Headers Middleware の[既定の設定](#forwarded-headers-middleware-options)は構成できます。 既定の設定は次のとおりです。
 
-* アプリと要求のソースの間には、" *1 つのプロキシ* " だけが存在します。
+* アプリと要求のソースの間には、"*1 つのプロキシ*" だけが存在します。
 * 既知のプロキシと既知のネットワークに対しては、ループバック アドレスのみが構成されています。
 * 転送されるヘッダーには `X-Forwarded-For` と `X-Forwarded-Proto` の名前が付けられます。
 

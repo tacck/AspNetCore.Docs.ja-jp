@@ -18,7 +18,7 @@ options.ProviderOptions.DefaultAccessTokenScopes
 }
 ```
 
-上記の構成では、`Audience` 値の末尾に既定のスコープ `/{DEFAULT SCOPE}` が含まれて**いません**。
+上記の構成では、`Audience` 値の末尾に既定のスコープ `/{DEFAULT SCOPE}` が含まれて **いません**。
 
 例:
 
@@ -42,4 +42,4 @@ options.ProviderOptions.DefaultAccessTokenScopes
 }
 ```
 
-上記の例では、`Audience` 値の末尾に既定のスコープ `/API.Access` が含まれて**いません**。
+上記の例では、`Audience` 値の末尾に既定のスコープ `/API.Access` が含まれて **いません**。

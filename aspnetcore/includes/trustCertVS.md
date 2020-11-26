@@ -9,3 +9,5 @@ IIS Express SSL 証明書を信頼する場合、 **[はい]** を選択しま�
 ![セキュリティ警告のダイアログ](~/getting-started/_static/cert.png)
 
 開発証明書を信頼することに同意する場合は、 **[はい]** を選択します。
+
+[!INCLUDE[trust FF](~/includes/trust-ff.md)]
