@@ -5,7 +5,7 @@ description: 構成 API を使用して、ASP.NET Core アプリを構成する�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2020
+ms.date: 11/24/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: c04dcc65f7518d2d8b32cdce7a7fbb756dd8ec3a
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 97ee00dd37ed4eef1c013e0f45b598a79f3f260c
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417540"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035867"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core の構成
 
@@ -108,20 +108,20 @@ ASP.NET Core の構成は、1つまたは複数の[構成プロバイダー](#cp
 
 <a name="security"></a>
 
-## <a name="security-and-secret-manager"></a>セキュリティとシークレット マネージャー
+## <a name="security-and-user-secrets"></a>セキュリティとユーザー シークレット
 
 構成データのガイドライン:
 
-_ 構成プロバイダーのコード内、またはプレーンテキストの構成ファイル内には、パスワードなどの機密データを格納しないでください。 [シークレット マネージャー](xref:security/app-secrets) を使用すると、開発時にシークレットを格納できます。
+_ 構成プロバイダーのコード内、またはプレーンテキストの構成ファイル内には、パスワードなどの機密データを格納しないでください。 [Secret Manager](xref:security/app-secrets) ツールを使用すると、開発時にシークレットを格納できます。
 * 開発環境やテスト環境では運用シークレットを使用しないでください。
 * プロジェクトの外部にシークレットを指定してください。そうすれば、誤ってリソース コード リポジトリにコミットされることはありません。
 
-[既定](#default)では、[シークレット マネージャー](xref:security/app-secrets)によって、構成設定が、 *appsettings.json* および *appsettings.* `Environment` *.json* の後に読み取られます。
+[既定](#default)では、ユーザー シークレットの構成ソースは、JSON 構成ソースの後に登録されます。 このため、ユーザー シークレット キーは、 *appsettings.json* および *appsettings.* `Environment` *.json* よりも優先されます。
 
 パスワードその他の機密データの格納については、次を参照してください：
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>:ここには、環境変数を使用して機密データを格納する際のアドバイスが記載されています。 シークレット マネージャーでは、[ファイル構成プロバイダー](#fcp)を使用して、ユーザーの機密情報をローカル システム上の JSON ファイルに格納します。
+* <xref:security/app-secrets>:ここには、環境変数を使用して機密データを格納する際のアドバイスが記載されています。 Secret Manager ツールでは、[ファイル構成プロバイダー](#fcp)を使用して、ユーザーのシークレットがローカル システム上の JSON ファイルに格納されます。
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) では、ASP.NET Core アプリのアプリのシークレットが安全に保存されます。 詳細については、「<xref:security/key-vault-configuration>」を参照してください。
 
@@ -129,7 +129,7 @@ _ 構成プロバイダーのコード内、またはプレーンテキストの
 
 ## <a name="environment-variables"></a>環境変数
 
-[既定](#default)の構成を使用すると、<xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> によって、 *appsettings.json* 、*appsettings.* `Environment` *.json*、および [シークレット マネージャー](xref:security/app-secrets)の読み取り後に、環境変数のキーと値のペアから構成が読み込まれます。 そのため、環境から読み取られたキー値によって、 *appsettings.json* 、*appsettings.* `Environment` *.json*、およびシークレット マネージャーから読み取られた値がオーバーライドされます。
+[既定](#default)の構成を使用すると、<xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> によって、 *appsettings.json* 、*appsettings.* `Environment` *.json*、および[ユーザー シークレット](xref:security/app-secrets)の読み取り後に、環境変数のキーと値のペアから構成が読み込まれます。 そのため、環境から読み取られたキー値によって、 *appsettings.json* 、*appsettings.* `Environment` *.json*、およびユーザー シークレットから読み取られた値がオーバーライドされます。
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -243,7 +243,7 @@ setx Logging__1__Level=Information
 [既定](#default)の構成を使用して、<xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> は、以下の構成ソースの後にコマンド ライン引数のキーと値のペアから構成を読み込みます：
 
 * *appsettings.json* および *appsettings*.`Environment`.*json* ファイル。
-* 開発環境の [App シークレット (Secret Manager)](xref:security/app-secrets)。
+* 開発環境での[アプリ シークレット](xref:security/app-secrets)。
 * 環境変数。
 
 [既定](#default)では、コマンド ラインで設定された構成値は、他のすべての構成プロバイダーで設定された構成値をオーバーライドします。
@@ -355,7 +355,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 | [ファイル構成プロバイダー](#file-configuration-provider) | INI、JSON、および XML ファイル |
 | [ファイルごとのキーの構成プロバイダー](#key-per-file-configuration-provider) | ディレクトリ ファイル |
 | [メモリ構成プロバイダー](#memory-configuration-provider) | メモリ内コレクション |
-| [シークレットマネージャー](xref:security/app-secrets)  | ユーザー プロファイル ディレクトリ内のファイル |
+| [ユーザー シークレット](xref:security/app-secrets) | ユーザー プロファイル ディレクトリ内のファイル |
 
 構成ソースは、構成プロバイダーで指定された順序で読み取られます。 アプリで必要とされる、基になる構成ソースの優先順位に合わせるために、コード内で構成プロバイダーを並べ替えます。
 
@@ -363,7 +363,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 1. *appsettings.json*
 1. *appsettings*.`Environment`.*json*
-1. [シークレットマネージャー](xref:security/app-secrets)
+1. [ユーザー シークレット](xref:security/app-secrets)
 1. [環境変数構成プロバイダー](#evcp)を使用する環境変数。
 1. [コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。
 
@@ -865,7 +865,7 @@ ASP.NET Core の [dotnet new](/dotnet/core/tools/dotnet-new) テンプレート�
 * アプリの構成は、次から提供されます。
   * [ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.json* 。
   * [ファイル構成プロバイダー](#file-configuration-provider)を使用する *appsettings.{Environment}.json*。
-  * エントリ アセンブリを使用して `Development` 環境でアプリが実行される場合に使用される[シークレット マネージャー](xref:security/app-secrets)。
+  * エントリ アセンブリを使用して `Development` 環境でアプリが実行される場合に使用される[ユーザー シークレット](xref:security/app-secrets)。
   * [環境変数構成プロバイダー](#environment-variables-configuration-provider)を使用する環境変数。
   * [コマンドライン構成プロバイダー](#command-line-configuration-provider)を使用するコマンドライン引数。
 
@@ -880,7 +880,7 @@ ASP.NET Core の [dotnet new](/dotnet/core/tools/dotnet-new) テンプレート�
 詳細については、次のトピックを参照してください。
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>:ここには、環境変数を使用して機密データを格納する際のアドバイスが記載されています。 シークレット マネージャーは、ファイル構成プロバイダーを使用して、ユーザーの機密情報をローカル システム上の JSON ファイルに格納します。 ファイル構成プロバイダーについては、このトピックの後半で説明します。
+* <xref:security/app-secrets>:ここには、環境変数を使用して機密データを格納する際のアドバイスが記載されています。 Secret Manager ツールでは、ファイル構成プロバイダーを使用して、ユーザー シークレットがローカル システム上の JSON ファイルに格納されます。 ファイル構成プロバイダーについては、このトピックの後半で説明します。
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) では、ASP.NET Core アプリのアプリのシークレットが安全に保存されます。 詳細については、「<xref:security/key-vault-configuration>」を参照してください。
 
@@ -983,7 +983,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 | [ファイル構成プロバイダー](#file-configuration-provider) | ファイル (INI、JSON、XML) |
 | [ファイルごとのキーの構成プロバイダー](#key-per-file-configuration-provider) | ディレクトリ ファイル |
 | [メモリ構成プロバイダー](#memory-configuration-provider) | メモリ内コレクション |
-| [ユーザー シークレット (Secret Manager)](xref:security/app-secrets) ("*セキュリティ*" トピック) | ユーザー プロファイル ディレクトリ内のファイル |
+| [ユーザー シークレット](xref:security/app-secrets) ("*セキュリティ*" トピック) | ユーザー プロファイル ディレクトリ内のファイル |
 
 アプリの起動時に各構成プロバイダーが指定されている順序で構成ソースが読み取られます。 このトピックで説明する構成プロバイダーは、それらをコードで配置する順ではなく、アルファベット順で説明します。 アプリで必要とされる、基になる構成ソースの優先順位に合わせるために、コード内で構成プロバイダーを並べ替えます。
 
@@ -991,7 +991,7 @@ ASP.NET Core アプリで使用できる構成プロバイダーを次の表に�
 
 1. ファイル ( *appsettings.json* 、*appsettings.{Environment}.json*。ここで、`{Environment}` はアプリの現在のホスト環境です)
 1. [Azure Key Vault](xref:security/key-vault-configuration)
-1. [ユーザー シークレット (Secret Manager)](xref:security/app-secrets) (開発環境のみ)
+1. [ユーザー シークレット](xref:security/app-secrets) (開発環境のみ)
 1. 環境変数
 1. コマンド ライン引数
 
@@ -1067,7 +1067,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 `CreateDefaultBuilder` では次のものも読み込まれます。
 
 * *appsettings.json* および *appsettings.{Environment}.json* ファイルからの省略可能な構成。
-* 開発環境の[ユーザー シークレット (Secret Manager)](xref:security/app-secrets)。
+* 開発環境での[ユーザー シークレット](xref:security/app-secrets)。
 * 環境変数。
 
 `CreateDefaultBuilder` はコマンド ライン構成プロバイダーを最後に追加します。 実行時に渡されるコマンド ライン引数によって、他のプロバイダーによって設定された構成がオーバーライドされます。
@@ -1182,7 +1182,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 * プレフィックスなしの `AddEnvironmentVariables` 呼び出しによる、プレフィックスの付いていない環境変数からのアプリの構成。
 * *appsettings.json* および *appsettings.{Environment}.json* ファイルからの省略可能な構成。
-* 開発環境の[ユーザー シークレット (Secret Manager)](xref:security/app-secrets)。
+* 開発環境での[ユーザー シークレット](xref:security/app-secrets)。
 * コマンド ライン引数。
 
 ユーザー シークレットと *appsettings* ファイルから構成が設定された後に、環境変数構成プロバイダーが呼び出されます。 この位置でプロバイダーを呼び出すことにより、実行時に読み込まれた環境変数が、ユーザー シークレットと *appsettings* ファイルによって設定された構成をオーバーライドすることができます。
@@ -1342,7 +1342,7 @@ JSON ファイルの構成をアクティブにするには、<xref:Microsoft.Ex
 `CreateDefaultBuilder` では次のものも読み込まれます。
 
 * 環境変数。
-* 開発環境の[ユーザー シークレット (Secret Manager)](xref:security/app-secrets)。
+* 開発環境での[ユーザー シークレット](xref:security/app-secrets)。
 * コマンド ライン引数。
 
 JSON 構成プロバイダーが最初に確立されます。 このため、ユーザー シークレット、環境変数、およびコマンド ライン引数によって、*appsettings* ファイルによって設定された構成がオーバーライドされます。

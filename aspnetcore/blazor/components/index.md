@@ -5,7 +5,7 @@ description: データへのバインド、イベントの処理、コンポー�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/09/2020
+ms.date: 11/25/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: cc4604f7f67a6648c96e099572ff27bfed838916
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981870"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035685"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
-作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Tobias Bartsch](https://www.aveo-solutions.com/)
+作成者: [Luke Latham](https://github.com/guardrex)、[Daniel Roth](https://github.com/danroth27)、[Scott Addie](https://github.com/scottaddie)、[Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -886,6 +886,64 @@ Blazor では HTML がレンダリングされるため、スケーラブル ベ
 ```
 
 ただし、インライン SVG マークアップは、すべてのシナリオでサポートされているわけではありません。 `<svg>` タグをコンポーネント ファイル (`.razor`) に直接配置した場合、基本的な画像レンダリングはサポートされますが、多くの高度なシナリオはまだサポートされていません。 たとえば、`<use>` タグは現在考慮されないため、一部の SVG タグで [`@bind`][10] を使用できません。 詳細については、[Blazor の SVG サポート (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271)に関する記事を参照してください。
+
+## <a name="whitespace-rendering-behavior"></a>空白文字のレンダリング動作
+
+::: moniker range=">= aspnetcore-5.0"
+
+[`@preservewhitespace`](xref:mvc/views/razor#preservewhitespace) ディレクティブが `true`の値と共に使用されている場合を除き、既定では、次の場合に余分な空白が削除されます。
+
+* 要素内の先頭または末尾。
+* `RenderFragment` パラメーター内の先頭または末尾。 別のコンポーネントに渡される子コンテンツなどです。
+* `@if` または `@foreach` のような、C# コード ブロックの前か後にある。
+
+空白文字の削除は、`white-space: pre` などの CSS ルールを使用するときに、レンダリングされた出力に影響を与えることがあります。 このパフォーマンスの最適化を無効にして、空白を保持するには、次のいずれかの操作を実行します。
+
+* 特定のコンポーネントに設定を適用するには、 `.razor` ファイルの先頭に `@preservewhitespace true` ディレクティブを追加する。
+* サブディレクトリ全体またはプロジェクト全体に設定を適用するには、 `_Imports.razor` ファイル内に `@preservewhitespace true` ディレクティブを追加する。
+
+ほとんどの場合、アプリでは一般的に通常の動作が続行されるため (ただし、速くなります)、何の措置も必要ありません。 空白文字の削除で特定のコンポーネントに問題が発生する場合、そのコンポーネントで `@preservewhitespace true` を使用し、この最適化を無効にします。
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+空白は、コンポーネントのソース コードに保持されます。 空白文字のみのテキストは、視覚効果がないときでも、ブラウザーのドキュメント オブジェクト モデル (DOM) にレンダリングされます。
+
+次の Razor コンポーネント コードについて考えてみましょう。
+
+```razor
+<ul>
+    @foreach (var item in Items)
+    {
+        <li>
+            @item.Text
+        </li>
+    }
+</ul>
+```
+
+前の例では、次の不要な空白文字がレンダリングされます。
+
+* `@foreach` コード ブロックの外側。
+* `<li>` 要素の前後。
+* `@item.Text` 出力の前後。
+
+100 項目を含むリストでは、402 の空白領域になり、余分な空白が、レンダリングされる出力に視覚的に影響を及ぼすことはありません。
+
+コンポーネントの静的 HTML をレンダリングする場合、タグ内の空白文字は保持されません。 たとえば、レンダリングされた出力の次のコンポーネントのソースをご覧ください。
+
+```razor
+<img     alt="My image"   src="img.png"     />
+```
+
+前の Razor マークアップからの、空白は保持されません。
+
+```razor
+<img alt="My image" src="img.png" />
+```
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>その他のリソース
 

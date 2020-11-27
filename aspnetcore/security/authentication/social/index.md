@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053307"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870452"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Facebook、Google、ASP.NET Core での外部プロバイダーの認証
 
 作成者: [Valeriy Novytskyy](https://github.com/01binary)、[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-このチュートリアルでは、ユーザーが OAuth 2.0 と外部の認証プロバイダーの資格情報を使用してサインインできる、ASP.NET Core 3.0 アプリを構築する方法について説明します。
+このチュートリアルでは、ユーザーが OAuth 2.0 と外部の認証プロバイダーの資格情報を使用してサインインできる、ASP.NET Core アプリを構築する方法について説明します。
 
 以下のセクションでは、[Facebook](xref:security/authentication/facebook-logins)、[Twitter](xref:security/authentication/twitter-logins)、[Google](xref:security/authentication/google-logins)、および [Microsoft](xref:security/authentication/microsoft-logins) の各プロバイダーを対象とします。また、この記事で作成するスタート プロジェクトを使用します。 他のプロバイダーは、[AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers)、[AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers) などのサードパーティ パッケージで利用できます。
 
@@ -47,7 +47,7 @@ ms.locfileid: "93053307"
 * 新しいプロジェクトを作成します。
 * **[ASP.NET Core Web アプリケーション]** 、 **[次へ]** の順に選択します。
 * **[プロジェクト名]** を指定して、 **[場所]** を確認または変更します。 **[作成]** を選択します。
-* ドロップダウン ( **ASP.NET Core {X.y}** ) で ASP.NET Core の最新バージョンを選択し、 **[Web アプリケーション]** を選択します。
+* ドロップダウン (**ASP.NET Core {X.y}** ) で ASP.NET Core の最新バージョンを選択し、 **[Web アプリケーション]** を選択します。
 * **[認証]** の下で、 **[変更]** を選択して認証を **[個人のユーザー アカウント]** に設定します。 **[OK]** を選択します。
 * **[新しい ASP.NET Core Web アプリケーションを作成する]** ウィンドウで、 **[作成]** を選択します。
 
@@ -69,7 +69,7 @@ ms.locfileid: "93053307"
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * `dotnet new` コマンドを使用すると、 *WebApp1* フォルダーに新しい Razor Pages プロジェクトが作成されます。
+  * `dotnet new` コマンドを使用すると、*WebApp1* フォルダーに新しい Razor Pages プロジェクトが作成されます。
   * `-au Individual` によって、個々の認証に対するコードを作成します。
   * `-uld` では、Windows 用の SQL Server Express の軽量バージョンである、LocalDB を使用します。 `-uld` を省略して SQLite を使用します。
   * `code` コマンドでは、Visual Studio Code の新しいインスタンス内に *WebApp1* フォルダーが開かれます。
