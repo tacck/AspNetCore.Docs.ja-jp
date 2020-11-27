@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: ca5fd8f746e759d1994dde9a2a0d5b5fd6c88d1a
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.openlocfilehash: f7bc7c6a14d014f8c3c283fb09718b9191b7b478
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 11/25/2020
-ms.locfileid: "95870452"
+ms.locfileid: "96035828"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Facebook、Google、ASP.NET Core での外部プロバイダーの認証
 
@@ -86,7 +86,7 @@ ms.locfileid: "95870452"
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>SecretManager を使用して、ログイン プロバイダーから割り当てられたトークンを格納する
 
-ソーシャル ログイン プロバイダーは、登録プロセス中に **アプリケーション ID** トークンと **アプリケーション シークレット** トークンを割り当てます。 完全なトークン名はプロバイダーにより異なります。 これらのトークンは、アプリが API にアクセスするために使用する資格情報を示します。 トークンは、[Secret Manager](xref:security/app-secrets#secret-manager) のヘルプにより、アプリの構成にリンクすることが可能な "シークレット" になります。 Secret Manager は、 *appsettings.json* などの構成ファイルにトークンを格納することに代わるより安全な方法です。
+ソーシャル ログイン プロバイダーは、登録プロセス中に **アプリケーション ID** トークンと **アプリケーション シークレット** トークンを割り当てます。 完全なトークン名はプロバイダーにより異なります。 これらのトークンは、アプリが API にアクセスするために使用する資格情報を示します。 トークンは、[Secret Manager](xref:security/app-secrets#secret-manager) のヘルプにより、アプリの構成にリンクすることが可能な "ユーザー シークレット" になります。 ユーザー シークレットは、 *appsettings.json* などの構成ファイルにトークンを格納することに代わるより安全な方法です。
 
 > [!IMPORTANT]
 > Secret Manager は、開発目的のみのためのものです。 [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration)により、Azure テストと運用のシークレットを格納し、保護することが可能です。
