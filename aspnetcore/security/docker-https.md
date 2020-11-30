@@ -7,7 +7,6 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
-- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -19,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: 63d6e220c0f28e552207039c1649041bfdf4a0d4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a4aac2ce06fee20bdef157efc361f3099a217b1a
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059677"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332155"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS 経由で Docker を使用して ASP.NET Core イメージをホストする
 
@@ -38,7 +37,7 @@ ms.locfileid: "93059677"
 
 このサンプルでは、docker [17.06](https://docs.docker.com/release-notes/docker-ce) 以降の [docker クライアント](https://www.docker.com/products/docker)が必要です。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このドキュメントの一部の手順では、 [.Net Core 2.2 SDK](https://dotnet.microsoft.com/download) 以降が必要です。
 
@@ -47,6 +46,8 @@ ms.locfileid: "93059677"
 ドメインの[運用ホスト](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/)には、[証明機関](https://wikipedia.org/wiki/Certificate_authority)からの証明書が必要です。 [Let's Encrypt](https://letsencrypt.org/) は、無料の証明書を提供する証明機関です。
 
 このドキュメントでは、事前に構築されたイメージをホストするために [自己署名の開発証明書](https://en.wikipedia.org/wiki/Self-signed_certificate) を使用 `localhost` します。 手順は、実稼働証明書の使用に似ています。
+
+[Dotnet](/dotnet/core/additional-tools/self-signed-certificates-guide)を使用して、開発およびテスト用の自己署名入り証明書を作成します。
 
 実稼働証明書の場合:
 
@@ -84,6 +85,9 @@ docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://
 [PowerShell](/powershell/scripting/overview)を使用する場合は、を `%USERPROFILE%` に置き換え `$env:USERPROFILE` ます。
 
 パスワードは、証明書に使用されているパスワードと一致している必要があります。
+
+
+注: この場合の証明書はファイルである必要があり `.pfx` ます。  `.crt`パスワードの有無にかかわらず、またはファイルを使用することは、 `.key` サンプルのコンテナーではサポートされていません。  たとえば、ファイルを指定する場合、 `.crt` コンテナーは "サーバーモード SSL は、関連付けられた秘密キーを持つ証明書を使用する必要があります。" などのエラーメッセージを返すことがあります。 [Wsl](/windows/wsl/about)を使用する場合は、マウントパスを検証して、証明書が正しく読み込まれることを確認します。
 
 ### <a name="macos-or-linux"></a>macOS または Linux
 
