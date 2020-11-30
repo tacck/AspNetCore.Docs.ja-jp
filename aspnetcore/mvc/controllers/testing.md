@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 962c1cf0be0f80ecd6c3adda7d22db7f16519a2a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 348b0fe4da6037933aabdb5b400d36ca073a146a
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060353"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320097"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core でコントローラーのロジックの単体テストを行う
 
@@ -36,7 +36,7 @@ ms.locfileid: "93060353"
 
 ## <a name="unit-testing-controllers"></a>コントローラーの単体テスト
 
-コントローラーのアクションの単体テストは、コントローラーの動作に注目するように設定します。 コントローラーの単体テストでは、[フィルター](xref:mvc/controllers/filters)、[ルーティング](xref:fundamentals/routing)、[モデル バインド](xref:mvc/models/model-binding)などのシナリオは除外します。 まとまって要求に応答するコンポーネント間のインタラクションをカバーするテストは、 *統合テスト* によって処理されます。 統合テストの詳細については、「<xref:test/integration-tests>」を参照してください。
+コントローラーのアクションの単体テストは、コントローラーの動作に注目するように設定します。 コントローラーの単体テストでは、[フィルター](xref:mvc/controllers/filters)、[ルーティング](xref:fundamentals/routing)、[モデル バインド](xref:mvc/models/model-binding)などのシナリオは除外します。 まとまって要求に応答するコンポーネント間のインタラクションをカバーするテストは、*統合テスト* によって処理されます。 統合テストの詳細については、「<xref:test/integration-tests>」を参照してください。
 
 カスタム フィルターやルートを作成している場合は、コントローラーの特定のアクションに対するテストの一部としてではなく、単体テストを切り離して実行します。
 
@@ -50,7 +50,7 @@ Home コントローラーは、ブレーンストーミング セッション�
 
 上記のコントローラーの説明:
 
-* [明示的な依存関係の原則](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)に従います。
+* [明示的な依存関係の原則](/dotnet/architecture/modern-web-apps-azure/architectural-principles#explicit-dependencies)に従います。
 * [依存関係の注入 (DI)](xref:fundamentals/dependency-injection) を予期して、`IBrainstormSessionRepository` のインスタンスを提供します。
 * モック オブジェクト フレームワークを使用するモックされた `IBrainstormSessionRepository` サービスでテストできます ([Moq](https://www.nuget.org/packages/Moq/) サービスなど)。 *モック オブジェクト* は、テストで使用されるプロパティとメソッドの動作が事前定義されている加工オブジェクトです。 詳細については、「[Introduction to integration tests](xref:test/integration-tests#introduction-to-integration-tests)」(統合テストの概要) を参照してください。
 
@@ -69,7 +69,7 @@ Home コントローラーは、ブレーンストーミング セッション�
 
 Home コントローラーの `HTTP POST Index` メソッドのテストでは、以下が検証されます。
 
-* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) が `false` の場合、アクション メソッドは、 *400 Bad Request* <xref:Microsoft.AspNetCore.Mvc.ViewResult> と適切なデータを返す。
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) が `false` の場合、アクション メソッドは、*400 Bad Request* <xref:Microsoft.AspNetCore.Mvc.ViewResult> と適切なデータを返す。
 * `ModelState.IsValid` が `true` の場合:
   * リポジトリの `Add` メソッドが呼び出される。
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> と適切な引数が返される。
@@ -90,7 +90,7 @@ Home コントローラーの `HTTP POST Index` メソッドのテストでは�
 > [!NOTE]
 > このサンプルで使われている Moq ライブラリにより、検証可能な ("厳密な") モックと検証不可能なモック ("厳密でない" モックまたはスタブとも呼ばれます) を混在させることができます。 詳しくは、Moq の「[Customizing Mock Behavior](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior)」(モックの動作のカスタマイズ) をご覧ください。
 
-サンプル アプリの [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) は、特定のブレーンストーミング セッションに関する情報を表示します。 このコントローラーには、無効な `id` 値を処理するロジックが含まれています (これらのシナリオをカバーするために、次のサンプルには 2 つの `return` シナリオがあります)。 最終的な `return` ステートメントにより、新しい `StormSessionViewModel` がビュー ( *Controllers/SessionController.cs* ) に返されます。
+サンプル アプリの [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) は、特定のブレーンストーミング セッションに関する情報を表示します。 このコントローラーには、無効な `id` 値を処理するロジックが含まれています (これらのシナリオをカバーするために、次のサンプルには 2 つの `return` シナリオがあります)。 最終的な `return` ステートメントにより、新しい `StormSessionViewModel` がビュー (*Controllers/SessionController.cs*) に返されます。
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -203,7 +203,7 @@ ASP.NET Core 2.1 以降では、 [actionresult \<T> ](xref:web-api/action-return
 
 [単体テスト](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)では、アプリの一部をインフラストラクチャや依存関係から切り離してテストすることが必要とされます。 コントローラー ロジックの単体テストを行うと、単一のアクションの内容のみがテストされ、その依存関係やフレームワーク自体の動作はテストされません。
 
-コントローラーのアクションの単体テストは、コントローラーの動作に注目するように設定します。 コントローラーの単体テストでは、[フィルター](xref:mvc/controllers/filters)、[ルーティング](xref:fundamentals/routing)、[モデル バインド](xref:mvc/models/model-binding)などのシナリオは除外します。 まとまって要求に応答するコンポーネント間のインタラクションをカバーするテストは、 *統合テスト* によって処理されます。 統合テストの詳細については、「<xref:test/integration-tests>」を参照してください。
+コントローラーのアクションの単体テストは、コントローラーの動作に注目するように設定します。 コントローラーの単体テストでは、[フィルター](xref:mvc/controllers/filters)、[ルーティング](xref:fundamentals/routing)、[モデル バインド](xref:mvc/models/model-binding)などのシナリオは除外します。 まとまって要求に応答するコンポーネント間のインタラクションをカバーするテストは、*統合テスト* によって処理されます。 統合テストの詳細については、「<xref:test/integration-tests>」を参照してください。
 
 カスタム フィルターやルートを作成している場合は、コントローラーの特定のアクションに対するテストの一部としてではなく、単体テストを切り離して実行します。
 
@@ -232,7 +232,7 @@ ASP.NET Core 2.1 以降では、 [actionresult \<T> ](xref:web-api/action-return
 
 Home コントローラーの `HTTP POST Index` メソッドのテストでは、以下が検証されます。
 
-* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) が `false` の場合、アクション メソッドは、 *400 Bad Request* <xref:Microsoft.AspNetCore.Mvc.ViewResult> と適切なデータを返す。
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) が `false` の場合、アクション メソッドは、*400 Bad Request* <xref:Microsoft.AspNetCore.Mvc.ViewResult> と適切なデータを返す。
 * `ModelState.IsValid` が `true` の場合:
   * リポジトリの `Add` メソッドが呼び出される。
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> と適切な引数が返される。
@@ -253,7 +253,7 @@ Home コントローラーの `HTTP POST Index` メソッドのテストでは�
 > [!NOTE]
 > このサンプルで使われている Moq ライブラリにより、検証可能な ("厳密な") モックと検証不可能なモック ("厳密でない" モックまたはスタブとも呼ばれます) を混在させることができます。 詳しくは、Moq の「[Customizing Mock Behavior](https://github.com/Moq/moq4/wiki/Quickstart#customizing-mock-behavior)」(モックの動作のカスタマイズ) をご覧ください。
 
-サンプル アプリの [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) は、特定のブレーンストーミング セッションに関する情報を表示します。 このコントローラーには、無効な `id` 値を処理するロジックが含まれています (これらのシナリオをカバーするために、次のサンプルには 2 つの `return` シナリオがあります)。 最終的な `return` ステートメントにより、新しい `StormSessionViewModel` がビュー ( *Controllers/SessionController.cs* ) に返されます。
+サンプル アプリの [SessionController](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs) は、特定のブレーンストーミング セッションに関する情報を表示します。 このコントローラーには、無効な `id` 値を処理するロジックが含まれています (これらのシナリオをカバーするために、次のサンプルには 2 つの `return` シナリオがあります)。 最終的な `return` ステートメントにより、新しい `StormSessionViewModel` がビュー (*Controllers/SessionController.cs*) に返されます。
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
@@ -356,10 +356,10 @@ ASP.NET Core 2.1 以降では、 [actionresult \<T> ](xref:web-api/action-return
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:test/integration-tests>
 * [Visual Studio で単体テストを作成して実行する](/visualstudio/test/unit-test-your-code)
-* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 (" *Microsoft では保守管理もサポートも行っていません。* ")
-* [JustMockLite](https://github.com/telerik/JustMockLite):.NET 開発者向けのモック フレームワーク。 (" *Microsoft では保守管理もサポートも行っていません。* ")
+* [ASP.NET CORE mvc 用の AspNetCore-Fluent テストライブラリ](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): 厳密に型指定された単体テストライブラリ。 mvc および web API アプリをテストするための fluent インターフェイスを提供します。 ("*Microsoft では保守管理もサポートも行っていません。* ")
+* [JustMockLite](https://github.com/telerik/JustMockLite):.NET 開発者向けのモック フレームワーク。 ("*Microsoft では保守管理もサポートも行っていません。* ")
 
