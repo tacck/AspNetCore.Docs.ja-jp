@@ -19,16 +19,19 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 680b44a705b66be0aab824487119cdb118b44d0f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ded70f028b3021574ba260838837d9b23abd72f1
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055309"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981883"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) グループ、管理者ロール、およびユーザー定義ロール
 
 作成者: [Luke Latham](https://github.com/guardrex)、[Javier Calvarro Nelson](https://github.com/javiercn)
+
+> [!NOTE]
+> この記事は、Microsoft Identity v1.0 を使用する Blazor ASP.NET Core アプリ バージョン 3.1 に適用され、Identity v2.0 を使用する 5.0 に更新される予定です。 詳細については、「[Blazor WASM with AAD/B2C groups and roles」(AAD/B2C グループとロールを使用する Blazor WASM) (dotnet/AspNetCore.Docs #17683)](https://github.com/dotnet/AspNetCore.Docs/issues/17683) を参照してください。
 
 Azure Active Directory (AAD) には、ASP.NET Core Identity と組み合わせることができる承認方法がいくつか用意されています。
 
@@ -65,7 +68,7 @@ Graph API の呼び出しを許可するには、Azure portal で、ホストさ
 * [Azure AD セキュリティ グループを使用したロール](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [`groupMembershipClaims` 属性](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
-次の例では、ユーザーが AAD の " *課金管理者* " ロールに割り当てられているものとします。
+次の例では、ユーザーが AAD の "*課金管理者*" ロールに割り当てられているものとします。
 
 AAD によって送信される単一の `groups` 要求では、ユーザーのグループとロールが JSON 配列内のオブジェクト ID (GUID) として示されます。 アプリでは、グループとロールの JSON 配列を、アプリで[ポリシー](xref:security/authorization/policies)を作成できる個々の `group` 要求に変換する必要があります。
 
@@ -100,7 +103,7 @@ public class CustomUserAccount : RemoteUserAccount
 
 [`Microsoft.Graph`](https://www.nuget.org/packages/Microsoft.Graph) 用のホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリにパッケージ参照を追加します。
 
-<xref:blazor/security/webassembly/graph-api#graph-sdk> の記事のセクション「 *Graph SDK* 」にある Graph SDK ユーティリティ クラスと構成を追加します。
+<xref:blazor/security/webassembly/graph-api#graph-sdk> の記事のセクション「*Graph SDK*」にある Graph SDK ユーティリティ クラスと構成を追加します。
 
 ホストされている Blazor ソリューション (`CustomAccountFactory.cs`) のスタンドアロン アプリまたは *`Client`* アプリに次のカスタム ユーザー アカウント ファクトリを追加します。 カスタム ユーザー ファクトリは、ロールおよびグループの要求を処理するために使用されます。 `roles` 要求の配列については、「[ユーザー定義ロール](#user-defined-roles)」セクションで説明します。 `hasgroups` 要求が存在する場合、Graph SDK を使用して、ユーザーのロールとグループを取得するために Graph API に対する承認された要求を作成します。
 
@@ -413,7 +416,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
 
 ## <a name="authorization-configuration"></a>承認の構成
 
-`Program.Main` で、グループごとまたはロールごとに[ポリシー](xref:security/authorization/policies)を作成します。 次の例では、AAD の " *課金管理者* " ロールに対するポリシーを作成します。
+`Program.Main` で、グループごとまたはロールごとに[ポリシー](xref:security/authorization/policies)を作成します。 次の例では、AAD の "*課金管理者*" ロールに対するポリシーを作成します。
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -506,7 +509,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 > [!NOTE]
 > 現在、このガイドには、ユーザーの [AAD ユーザー定義ロール](#user-defined-roles)に基づく承認は含まれていません。
 
-このセクションのガイダンスでは、サーバー API アプリを Microsoft Graph API 呼び出しの [*デーモン アプリ*](/azure/active-directory/develop/scenario-daemon-overview)として構成します。 この方法では、次のことを行い **ません** 。
+このセクションのガイダンスでは、サーバー API アプリを Microsoft Graph API 呼び出しの [*デーモン アプリ*](/azure/active-directory/develop/scenario-daemon-overview)として構成します。 この方法では、次のことを行い **ません**。
 
 * `access_as_user` スコープを要求する。
 * API 要求を行うユーザーまたはクライアントに代わって Graph API にアクセスする。
@@ -515,7 +518,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 
 ### <a name="azure-configuration"></a>Azure の構成
 
-* *Server* アプリの登録に、`Directory.Read.All` の ( **委任** ではなく) **アプリケーション** Graph API スコープが付与されていることを確認します。これは、セキュリティ グループの最小特権アクセス レベルです。 スコープの割り当てを行った後、管理者の同意がスコープに適用されていることを確認します。
+* *Server* アプリの登録に、`Directory.Read.All` の (**委任** ではなく) **アプリケーション** Graph API スコープが付与されていることを確認します。これは、セキュリティ グループの最小特権アクセス レベルです。 スコープの割り当てを行った後、管理者の同意がスコープに適用されていることを確認します。
 * 新しいクライアント シークレットを *Server* アプリに割り当てます。 「[アプリケーション設定](#app-settings)」セクションでのアプリの構成のために、シークレットをメモしておきます。
 
 ### <a name="app-settings"></a>アプリケーション設定
@@ -547,7 +550,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
-> テナント パブリッシャー ドメインが検証されていない場合、ユーザーまたはクライアント アクセスのサーバー API スコープでは、`https://` ベースの URI が使用されます。 このシナリオでは、サーバー API アプリで、`appsettings.json` ファイル内に `Audience` 構成が必要です。 次の構成では、`Audience` の末尾に、既定のスコープ `/{DEFAULT SCOPE}` が含まれて **いません** 。ここで、プレースホルダー `{DEFAULT SCOPE}` は既定のスコープです。
+> テナント パブリッシャー ドメインが検証されていない場合、ユーザーまたはクライアント アクセスのサーバー API スコープでは、`https://` ベースの URI が使用されます。 このシナリオでは、サーバー API アプリで、`appsettings.json` ファイル内に `Audience` 構成が必要です。 次の構成では、`Audience` の末尾に、既定のスコープ `/{DEFAULT SCOPE}` が含まれて **いません**。ここで、プレースホルダー `{DEFAULT SCOPE}` は既定のスコープです。
 >
 > ```json
 > {
@@ -578,7 +581,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 > * サーバー API アプリ `ClientId` は、`41451fa7-82d9-4673-8fa5-69eff5a761fd` です。
 >
 > > [!NOTE]
-> > 通常、`api://` ベースの API スコープを持つ検証済みのパブリッシャー ドメインを持つアプリでは、通常、`Audience` を明示的に構成する必要は **ありません** 。
+> > 通常、`api://` ベースの API スコープを持つ検証済みのパブリッシャー ドメインを持つアプリでは、通常、`Audience` を明示的に構成する必要は **ありません**。
 >
 > 詳細については、「<xref:blazor/security/webassembly/hosted-with-azure-active-directory#app-settings>」を参照してください。
 
@@ -586,7 +589,7 @@ AAD ロール オブジェクト ID の完全な一覧については、「[AAD 
 
 ### <a name="authorization-policies"></a>承認ポリシー
 
-グループ オブジェクト ID と [AAD 管理者ロール オブジェクト ID](#aad-administrator-role-object-ids) に基づいて、 *Server* アプリの `Startup.ConfigureServices` (`Startup.cs`) で、AAD セキュリティ グループと AAD 管理者ロールに対する [承認ポリシー](xref:security/authorization/policies)を作成します。
+グループ オブジェクト ID と [AAD 管理者ロール オブジェクト ID](#aad-administrator-role-object-ids) に基づいて、*Server* アプリの `Startup.ConfigureServices` (`Startup.cs`) で、AAD セキュリティ グループと AAD 管理者ロールに対する [承認ポリシー](xref:security/authorization/policies)を作成します。
 
 たとえば、Azure の課金管理者ロール ポリシーには、次の構成が含まれます。
 
@@ -627,7 +630,7 @@ public class BillingDataController : ControllerBase
 
 ### <a name="services"></a>サービス
 
-*Server* アプリの `Startup.ConfigureServices` メソッドでは、 *Server* アプリの `Startup` クラスのコードに追加の名前空間が必要です。 次の名前空間を `Startup.cs` に追加します。
+*Server* アプリの `Startup.ConfigureServices` メソッドでは、*Server* アプリの `Startup` クラスのコードに追加の名前空間が必要です。 次の名前空間を `Startup.cs` に追加します。
 
 ```csharp
 using System;

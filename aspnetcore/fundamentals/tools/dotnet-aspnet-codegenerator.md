@@ -4,7 +4,7 @@ author: rick-anderson
 description: dotnet aspnet-codegenerator コマンドでは、ASP.NET Core プロジェクトがスキャフォールディングされます。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 07/04/2019
+ms.date: 11/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 88d761b09833a14de5af9f9610753174867aa09a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 8844b0014cac58f414d79df4c64bc0efac75bfe1
+ms.sourcegitcommit: d29535ea0b4197443fd884aaa6e5b4b763d04fc7
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059989"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94920704"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -31,9 +31,9 @@ ms.locfileid: "93059989"
 
 `dotnet aspnet-codegenerator` - ASP.NET Core のスキャフォールディング エンジンを実行します。 `dotnet aspnet-codegenerator` が必要になるのは、コマンド ラインからスキャフォールディングする場合のみです。Visual Studio でスキャフォールディングする場合は必要ありません。
 
-この記事は [.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) 以降に適用されます。
+## <a name="install-and-update-aspnet-codegenerator"></a>aspnet-codegenerator のインストールと更新
 
-## <a name="installing-aspnet-codegenerator"></a>aspnet-codegenerator のインストール
+[.NET SDK](https://dotnet.microsoft.com/download) をインストールします。
 
 `dotnet-aspnet-codegenerator` は[グローバル ツール](/dotnet/core/tools/global-tools)であり、インストールする必要があります。 次のコマンドを使うと、`dotnet-aspnet-codegenerator` ツールの最新の安定バージョンをインストールできます。
 
@@ -45,6 +45,17 @@ dotnet tool install -g dotnet-aspnet-codegenerator
 
 ```dotnetcli
 dotnet tool update -g dotnet-aspnet-codegenerator
+```
+
+## <a name="uninstall-aspnet-codegenerator"></a>aspnet-codegenerator のアンインストール
+
+問題を解決するには、`aspnet-codegenerator` のアンインストールが必要になる場合があります。 たとえば、`aspnet-codegenerator` のプレビュー バージョンをインストールした場合は、リリース バージョンをインストールする前にアンインストールします。
+
+次のコマンドを使用すると、`dotnet-aspnet-codegenerator` ツールをアンインストールし、最新の安定バージョンをインストールできます。
+
+```dotnetcli
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 ## <a name="synopsis"></a>構文
@@ -143,7 +154,7 @@ NuGet パッケージのディレクトリを指定します。
 | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | --controllerName または -name      | コントローラーの名前です。                                                                                   |
 | --useAsyncActions または -async    | 非同期コントローラー アクションを生成します。                                                                        |
-| --noViews または -nv               | ビューを生成 **しません** 。                                                                                    |
+| --noViews または -nv               | ビューを生成 **しません**。                                                                                    |
 | --restWithNoViews または -api      | REST スタイルの API でコントローラーを生成します。 `noViews` を前提とし、ビュー関連のオプションはすべて無視されます。 |
 | --readWriteActions または -actions | モデルなしで読み取り/書き込みアクションを備えたコントローラーを生成します。                                              |
 

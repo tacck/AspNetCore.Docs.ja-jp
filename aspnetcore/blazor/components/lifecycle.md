@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: f435870e1e73fdb1296699ed62052b72b3b78abf
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 8a2dc802a1d05ead7445e350e3aef0ce7dfb2bb8
+ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637718"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94981922"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor ライフサイクル
 
@@ -39,7 +39,7 @@ Blazor フレームワークには、同期と非同期のライフサイクル 
 1. 要求に対してコンポーネントが初めてレンダリングされる場合は、次のようにします。
    * コンポーネントのインスタンスを作成します。
    * プロパティの挿入を実行します。 [`SetParametersAsync`](#before-parameters-are-set) を実行します。
-   * [`OnInitialized{Async}`](#component-initialization-methods) を呼び出します。 <xref:System.Threading.Tasks.Task> が返された場合、<xref:System.Threading.Tasks.Task> を待機してから、コンポーネントがレンダリングされます。 <xref:System.Threading.Tasks.Task> が返されない場合は、コンポーネントをレンダリングします。
+   * [`OnInitialized{Async}`](#component-initialization-methods) を呼び出します。 <xref:System.Threading.Tasks.Task> が返された場合、<xref:System.Threading.Tasks.Task> が待機され、コンポーネントがレンダリングされます。 <xref:System.Threading.Tasks.Task> が返されない場合は、コンポーネントがレンダリングされます。
 1. [`OnParametersSet{Async}`](#after-parameters-are-set) を呼び出し、コンポーネントをレンダリングします。 `OnParametersSetAsync` から <xref:System.Threading.Tasks.Task> が返された場合は、<xref:System.Threading.Tasks.Task> を待機してから、コンポーネントが再レンダリングされます。
 
 ![Blazor の Razor コンポーネントのコンポーネント ライフサイクル イベント](lifecycle/_static/lifecycle1.png)

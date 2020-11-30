@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: fe232b40a2255732dd375cc266937576d5b2d5d9
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: a8bbcbd6ac13ec064350a5b885423835baa4c4cc
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507825"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870374"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor のフォームと検証
 
@@ -225,7 +225,7 @@ public class Starship
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> では、変更されたフィールドと現在の検証メッセージを含む、編集プロセスに関するメタデータを追跡する[カスケード値](xref:blazor/components/cascading-values-and-parameters) として <xref:Microsoft.AspNetCore.Components.Forms.EditContext> を作成します。
 
-<xref:Microsoft.AspNetCore.Components.Forms.EditContext> **または** <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> の **いずれか** を <xref:Microsoft.AspNetCore.Components.Forms.EditForm> に割り当てます。 両方とも割り当てることはサポートされておらず、 **ランタイム エラー** が生成されます。
+<xref:Microsoft.AspNetCore.Components.Forms.EditContext> **または** <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> の **いずれか** を <xref:Microsoft.AspNetCore.Components.Forms.EditForm> に割り当てます。 両方とも割り当てることはサポートされておらず、**ランタイム エラー** が生成されます。
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm> では、有効および無効のフォームを送信するための便利なイベントが提供されます。
 
@@ -280,7 +280,7 @@ public class Starship
 
 ## <a name="display-name-support"></a>表示名のサポート
 
-" *このセクションは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core に適用されます。* "
+"*このセクションは、.NET 5 リリース候補 1 (RC1) 以降の ASP.NET Core に適用されます。* "
 
 次の組み込みコンポーネントでは、`DisplayName` パラメーターを使用した表示名がサポートされています。
 
@@ -337,49 +337,46 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace BlazorSample.Client
+public class CustomValidator : ComponentBase
 {
-    public class CustomValidator : ComponentBase
+    private ValidationMessageStore messageStore;
+
+    [CascadingParameter]
+    private EditContext CurrentEditContext { get; set; }
+
+    protected override void OnInitialized()
     {
-        private ValidationMessageStore messageStore;
-
-        [CascadingParameter]
-        private EditContext CurrentEditContext { get; set; }
-
-        protected override void OnInitialized()
+        if (CurrentEditContext == null)
         {
-            if (CurrentEditContext == null)
-            {
-                throw new InvalidOperationException(
-                    $"{nameof(CustomValidator)} requires a cascading " +
-                    $"parameter of type {nameof(EditContext)}. " +
-                    $"For example, you can use {nameof(CustomValidator)} " +
-                    $"inside an {nameof(EditForm)}.");
-            }
-
-            messageStore = new ValidationMessageStore(CurrentEditContext);
-
-            CurrentEditContext.OnValidationRequested += (s, e) => 
-                messageStore.Clear();
-            CurrentEditContext.OnFieldChanged += (s, e) => 
-                messageStore.Clear(e.FieldIdentifier);
+            throw new InvalidOperationException(
+                $"{nameof(CustomValidator)} requires a cascading " +
+                $"parameter of type {nameof(EditContext)}. " +
+                $"For example, you can use {nameof(CustomValidator)} " +
+                $"inside an {nameof(EditForm)}.");
         }
 
-        public void DisplayErrors(Dictionary<string, List<string>> errors)
-        {
-            foreach (var err in errors)
-            {
-                messageStore.Add(CurrentEditContext.Field(err.Key), err.Value);
-            }
+        messageStore = new ValidationMessageStore(CurrentEditContext);
 
-            CurrentEditContext.NotifyValidationStateChanged();
-        }
-
-        public void ClearErrors()
-        {
+        CurrentEditContext.OnValidationRequested += (s, e) => 
             messageStore.Clear();
-            CurrentEditContext.NotifyValidationStateChanged();
+        CurrentEditContext.OnFieldChanged += (s, e) => 
+            messageStore.Clear(e.FieldIdentifier);
+    }
+
+    public void DisplayErrors(Dictionary<string, List<string>> errors)
+    {
+        foreach (var err in errors)
+        {
+            messageStore.Add(CurrentEditContext.Field(err.Key), err.Value);
         }
+
+        CurrentEditContext.NotifyValidationStateChanged();
+    }
+
+    public void ClearErrors()
+    {
+        messageStore.Clear();
+        CurrentEditContext.NotifyValidationStateChanged();
     }
 }
 ```
@@ -451,13 +448,13 @@ namespace BlazorSample.Client
 * <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して、フォーム内のクライアント側の検証を処理します。
 * フォームによってクライアント側の検証が渡されると (<xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> が呼び出されると)、フォーム処理のために、<xref:Microsoft.AspNetCore.Components.Forms.EditContext.Model?displayProperty=nameWithType> がバックエンド サーバー API に送信されます。
 * サーバーでモデルの検証を処理します。
-* サーバー API には、組み込みのフレームワーク データ注釈検証と開発者によって提供されるカスタムの検証ロジックの両方が含まれています。 サーバーで検証が成功すると、フォームが処理され、成功の状態コード ( *200 - OK* ) が返されます。 検証が失敗すると、失敗の状態コード ( *400 - 無効な要求* ) とフィールド検証エラーが返されます。
+* サーバー API には、組み込みのフレームワーク データ注釈検証と開発者によって提供されるカスタムの検証ロジックの両方が含まれています。 サーバーで検証が成功すると、フォームが処理され、成功の状態コード (*200 - OK*) が返されます。 検証が失敗すると、失敗の状態コード (*400 - 無効な要求*) とフィールド検証エラーが返されます。
 * 成功時にフォームを無効にするか、エラーを表示します。
 
 次の例は、以下のものに基づいています。
 
 * [Blazorホストされているプロジェクト テンプレート](xref:blazor/hosting-models#blazor-webassembly)によって作成された、ホストされている Blazor ソリューション。 この例は、[セキュリティと Identity のドキュメント](xref:blazor/security/webassembly/index#implementation-guidance)で説明されている、安全でホストされている Blazor ソリューションのいずれかで使用できます。
-* 前述の「 [組み込みフォームのコンポーネント](#built-in-forms-components)」セクションの *Starfleet Starship Database* フォーム例。
+* 前述の「[組み込みフォームのコンポーネント](#built-in-forms-components)」セクションの *Starfleet Starship Database* フォーム例。
 * Blazor フレームワークの <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネント。
 * 「[検証コンポーネント](#validator-components)」セクションで示した `CustomValidator` コンポーネント。
 
@@ -471,7 +468,7 @@ namespace BlazorSample.Client
 </ItemGroup>
 ```
 
-パッケージのプレビュー版以外の最新バージョンを確認するには、 [NuGet.org](https://www.nuget.org/packages/System.ComponentModel.Annotations)でパッケージの **バージョン履歴** を参照してください。
+パッケージのプレビュー版以外の最新バージョンを確認するには、[NuGet.org](https://www.nuget.org/packages/System.ComponentModel.Annotations)でパッケージの **バージョン履歴** を参照してください。
 
 サーバー API プロジェクトでは、starship 検証要求 (`Controllers/StarshipValidation.cs`) を処理し、失敗した検証のメッセージを返すコントローラーを追加します。
 
@@ -483,7 +480,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlazorSample.Shared;
 
-namespace BlazorSample.Server.Controllers
+namespace {ASSEMBLY NAME}.Controllers
 {
     [Authorize]
     [ApiController]
@@ -528,6 +525,8 @@ namespace BlazorSample.Server.Controllers
     }
 }
 ```
+
+前の例では、プレースホルダー `{ASSEMBLY NAME}` はアプリのアセンブリ名です (たとえば `BlazorSample.Server`)。
 
 サーバーでモデル バインド検証エラーが発生した場合、通常、[`ApiController`](xref:web-api/index) (<xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>) により、[既定の無効な要求応答](xref:web-api/index#default-badrequest-response)と <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> が返されます。 *Starfleet Starship Database* フォームのすべてのフィールドが送信されず、フォームの検証が失敗した場合、次の例に示すように、応答には、検証エラー以外のデータも含まれます。
 
@@ -584,7 +583,7 @@ services.AddControllersWithViews()
 
 クライアント プロジェクトでは、「[検証コンポーネント](#validator-components)」セクションで示した検証コンポーネントを追加します。
 
-また、 *Starfleet Starship Database* フォームが、`CustomValidator` コンポーネントを使用してサーバー検証エラーを示すように更新されます。 サーバー API によって検証メッセージが返されると、それらは、`CustomValidator` コンポーネントの <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore>に追加されます。 エラーは、フォームの <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>で表示するために、フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext> で使用することができます。
+また、*Starfleet Starship Database* フォームが、`CustomValidator` コンポーネントを使用してサーバー検証エラーを示すように更新されます。 サーバー API によって検証メッセージが返されると、それらは、`CustomValidator` コンポーネントの <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore>に追加されます。 エラーは、フォームの <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>で表示するために、フォームの <xref:Microsoft.AspNetCore.Components.Forms.EditContext> で使用することができます。
 
 ```razor
 @page "/FormValidation"
@@ -811,7 +810,7 @@ public enum Color { ImperialRed, SpacecruiserGreen, StarshipBlue, VoyagerOrange 
 public enum Engine { Ion, Plasma, Fusion, Warp }
 ```
 
-「 [組み込みフォームのコンポーネント](#built-in-forms-components)」セクションで説明している *Starfleet Starship Database* フォームを更新します。 生成するコンポーネントを追加します。
+「[組み込みフォームのコンポーネント](#built-in-forms-components)」セクションで説明している *Starfleet Starship Database* フォームを更新します。 生成するコンポーネントを追加します。
 
 * 船舶製造元のラジオ ボタン グループ。
 * 船の色およびエンジン用の入れ子になったラジオ ボタン グループ。
@@ -950,7 +949,7 @@ public enum Engine { Ion, Plasma, Fusion, Warp }
 次の理由により、`<select>` 要素のオプション値を C# オブジェクトの `null` 値として表すよい方法はありません。
 
 * HTML 属性には `null` 値を設定できません。 HTML で `null` に最も近いのは、`<option>` 要素から HTML の `value` 属性を除去することです。
-* `value` 属性のない `<option>` を選択すると、ブラウザーではその `<option>` の要素の " *テキスト コンテンツ* " として値が扱われます。
+* `value` 属性のない `<option>` を選択すると、ブラウザーではその `<option>` の要素の "*テキスト コンテンツ*" として値が扱われます。
 
 Blazor フレームワークでは、次の処理が必要になるため、既定の動作の抑制は試みられません。
 
@@ -959,7 +958,7 @@ Blazor フレームワークでは、次の処理が必要になるため、既�
 
 ::: moniker range=">= aspnetcore-5.0"
 
-HTML で `null` に最も近いと思われるものは、" *空の文字列* " の `value` です。 Blazor フレームワークでは、`<select>` の値への双方向バインドに対する空の文字列変換として `null` が処理されます。
+HTML で `null` に最も近いと思われるものは、"*空の文字列*" の `value` です。 Blazor フレームワークでは、`<select>` の値への双方向バインドに対する空の文字列変換として `null` が処理されます。
 
 ::: moniker-end
 
@@ -1060,20 +1059,24 @@ private class MyFieldClassProvider : FieldCssClassProvider
 
 ### <a name="no-locblazor-data-annotations-validation-package"></a>Blazor データ注釈検証パッケージ
 
-[`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して検証エクスペリエンスのギャップを埋めるパッケージです。 パッケージは現在、 *試験段階* です。
+[`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) は、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントを使用して検証エクスペリエンスのギャップを埋めるパッケージです。 パッケージは現在、*試験段階* です。
 
 > [!NOTE]
-> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) パッケージには、 [Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) に " *リリース候補* " の最新バージョンが含まれています。現時点では、" *試験的* " リリース候補パッケージを継続して使用します。 パッケージのアセンブリは、将来のリリースでフレームワークまたはランタイムのいずれかに移動される可能性があります。 更新の詳細については、[Announcements GitHub リポジトリ](https://github.com/aspnet/Announcements)、[dotnet/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore)、またはこのトピック セクションを参照してください。
+> [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) パッケージには、[Nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) に "*リリース候補*" の最新バージョンが含まれています。現時点では、"*試験的*" リリース候補パッケージを継続して使用します。 パッケージのアセンブリは、将来のリリースでフレームワークまたはランタイムのいずれかに移動される可能性があります。 更新の詳細については、[Announcements GitHub リポジトリ](https://github.com/aspnet/Announcements)、[dotnet/aspnetcore GitHub リポジトリ](https://github.com/dotnet/aspnetcore)、またはこのトピック セクションを参照してください。
 
-### <a name="compareproperty-attribute"></a>[CompareProperty] 属性
+::: moniker range="< aspnetcore-5.0"
 
-<xref:System.ComponentModel.DataAnnotations.CompareAttribute> は、検証結果を特定のメンバーに関連付けないため、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントで正しく機能しません。 これにより、フィールドレベルの検証と、送信時のモデル全体が検証されたときの動作に一貫性がなくなることがあります。 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) " *試験的* " パッケージでは、これらの制限を回避する追加の検証属性 `ComparePropertyAttribute` が導入されています。 Blazor アプリでは、`[CompareProperty]` は [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) 属性の直接の代わりとなるものです。
+### <a name="compareproperty-attribute"></a>`[CompareProperty]` 属性
+
+<xref:System.ComponentModel.DataAnnotations.CompareAttribute> は、検証結果を特定のメンバーに関連付けないため、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> コンポーネントで正しく機能しません。 これにより、フィールドレベルの検証と、送信時のモデル全体が検証されたときの動作に一貫性がなくなることがあります。 [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) "*試験的*" パッケージでは、これらの制限を回避する追加の検証属性 `ComparePropertyAttribute` が導入されています。 Blazor アプリでは、`[CompareProperty]` は [`[Compare]`](xref:System.ComponentModel.DataAnnotations.CompareAttribute) 属性の直接の代わりとなるものです。
+
+::: moniker-end
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>入れ子になったモデル、コレクション型、および複合型
 
 Blazor では、組み込みの <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> によるデータ注釈を使用したフォーム入力の検証をサポートしています。 ただし、<xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>で は、コレクション型または複合型のプロパティではないフォームにバインドされているモデルの最上位レベルのプロパティのみが検証されます。
 
-コレクション型と複合型のプロパティを含む、バインドされたモデルのオブジェクト グラフ全体を検証するには、" *試験的* " [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) パッケージによって提供される `ObjectGraphDataAnnotationsValidator` を使用します。
+コレクション型と複合型のプロパティを含む、バインドされたモデルのオブジェクト グラフ全体を検証するには、"*試験的*" [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) パッケージによって提供される `ObjectGraphDataAnnotationsValidator` を使用します。
 
 ```razor
 <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">

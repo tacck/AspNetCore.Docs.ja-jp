@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 423745d734d8da2b8f3f974f9b4dd1a0265d4877
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: cc090b4e56745e6b010e4a7ee17332b0d3a95560
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054737"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417384"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly パフォーマンスに関するベスト プラクティス
 
@@ -32,12 +32,12 @@ ms.locfileid: "93054737"
 
 Blazor WebAssembly は、最も現実的なアプリケーションの UI シナリオでハイ パフォーマンスを実現できるように、慎重に設計および最適化されています。 ただし、最適な結果を得るには、開発者が適切なパターンと機能を使用する必要があります。 次の点を考慮してください。
 
-* **ランタイムのスループット** :.NET コードは WebAssembly ランタイム内のインタープリター上で実行されるため、CPU スループットが制限されます。 要求の厳しいシナリオでは、[レンダリング速度の最適化](#optimize-rendering-speed)によってアプリが恩恵を受けます。
-* **起動時間** :アプリによって .NET ランタイムがブラウザーに転送されるため、 [アプリケーションのダウンロード サイズを最小化する](#minimize-app-download-size)機能を使用することが重要です。
+* **ランタイムのスループット**:.NET コードは WebAssembly ランタイム内のインタープリター上で実行されるため、CPU スループットが制限されます。 要求の厳しいシナリオでは、[レンダリング速度の最適化](#optimize-rendering-speed)によってアプリが恩恵を受けます。
+* **起動時間**:アプリによって .NET ランタイムがブラウザーに転送されるため、[アプリケーションのダウンロード サイズを最小化する](#minimize-app-download-size)機能を使用することが重要です。
 
 ## <a name="optimize-rendering-speed"></a>レンダリング速度を最適化する
 
-以下のセクションでは、レンダリング ワークロードを最小化し、UI の応答性を向上させるための推奨事項を示します。 このアドバイスに従うことで、UI のレンダリング速度を容易に " *10 倍以上改善* " できる可能性があります。
+以下のセクションでは、レンダリング ワークロードを最小化し、UI の応答性を向上させるための推奨事項を示します。 このアドバイスに従うことで、UI のレンダリング速度を容易に "*10 倍以上改善*" できる可能性があります。
 
 ### <a name="avoid-unnecessary-rendering-of-component-subtrees"></a>コンポーネントのサブツリーの不要なレンダリングを避ける
 
@@ -196,7 +196,7 @@ Blazor WebAssembly は、最も現実的なアプリケーションの UI シナ
 }
 ```
 
-何千ものメッセージが一度に表示されない限り、上の例は正常に動作し、パフォーマンスも良好です。 何千ものメッセージを一度に表示するには、個別の `ChatMessageDisplay` コンポーネントを " *取り出さない* " ことを検討してください。 代わりに、レンダリングを直接親にインラインで挿入します。
+何千ものメッセージが一度に表示されない限り、上の例は正常に動作し、パフォーマンスも良好です。 何千ものメッセージを一度に表示するには、個別の `ChatMessageDisplay` コンポーネントを "*取り出さない*" ことを検討してください。 代わりに、レンダリングを直接親にインラインで挿入します。
 
 ```razor
 <div class="chat">
@@ -297,8 +297,8 @@ public static RenderFragment SayHello = __builder =>
 
 `<CascadingValue>` コンポーネントには、`IsFixed` という省略可能なパラメーターがあります。
 
- * `IsFixed` の値が `false` (既定値) の場合、カスケードされた値のすべての受信者は、変更通知を受信するためのサブスクリプションを設定します。 この場合、サブスクリプションの追跡により、各 `[CascadingParameter]` は通常の `[Parameter]` よりも **大幅にコストが高くなります** 。
- * `IsFixed` の値が `true` (`<CascadingValue Value="@someValue" IsFixed="true">` など) の場合、受信者は初期値を受け取りますが、更新を受信するためのサブスクリプションを設定 " *しません* "。 この場合、各 `[CascadingParameter]` は軽量であり、通常の `[Parameter]` よりも **コストが高くなることはありません** 。
+ * `IsFixed` の値が `false` (既定値) の場合、カスケードされた値のすべての受信者は、変更通知を受信するためのサブスクリプションを設定します。 この場合、サブスクリプションの追跡により、各 `[CascadingParameter]` は通常の `[Parameter]` よりも **大幅にコストが高くなります**。
+ * `IsFixed` の値が `true` (`<CascadingValue Value="@someValue" IsFixed="true">` など) の場合、受信者は初期値を受け取りますが、更新を受信するためのサブスクリプションを設定 "*しません*"。 この場合、各 `[CascadingParameter]` は軽量であり、通常の `[Parameter]` よりも **コストが高くなることはありません**。
 
 したがって、可能な限り、カスケードされた値には `IsFixed="true"` を使用する必要があります。 指定される値が時間の経過と共に変化しない場合は、常にこれを行うことができます。 コンポーネントによって `this` がカスケードされた値として渡される一般的なパターンでは、`IsFixed="true"` を使用する必要があります。
 

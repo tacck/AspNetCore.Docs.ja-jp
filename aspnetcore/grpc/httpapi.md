@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 45e2a1a5e6a9f00294147db769454b78c5b866e5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059937"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417579"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>gRPC から JSON Web API を作成する
 
@@ -39,7 +39,7 @@ ms.locfileid: "93059937"
 
 gRPC は、アプリ間で通信するための最新の方法です。 gRPC は、HTTP/2、ストリーミング、Protobuf、メッセージ コントラクトを使用して、高パフォーマンスのリアルタイム サービスを作成します。
 
-gRPC の制限事項の 1 つが、すべてのプラットフォームで使用できるわけではないということです。 ブラウザーでは HTTP/2 が完全にサポートされていないため、REST と JSON が、ブラウザー アプリにデータを取り込む主な方法になります。 gRPC にはベネフィットがありますが、REST と JSON にも最新のアプリで重要な役割があります。 gRPC "* **および** _" JSON Web API を構築すると、アプリ開発に不要なオーバーヘッドが発生します。
+gRPC の制限事項の 1 つが、すべてのプラットフォームで使用できるわけではないということです。 ブラウザーでは HTTP/2 が完全にサポートされていないため、REST と JSON が、ブラウザー アプリにデータを取り込む主な方法になります。 gRPC にはベネフィットがありますが、REST と JSON にも最新のアプリで重要な役割があります。 gRPC "***および** _" JSON Web API を構築すると、アプリ開発に不要なオーバーヘッドが発生します。
 
 このドキュメントでは、gRPC サービスを使用して JSON Web API を作成する方法について説明します。
 
@@ -137,7 +137,7 @@ gRPC HTTP API は試験段階です。 完全ではなく、サポートもさ�
 
 grpc-gateway と gRPC HTTP API の最大の違いは、grpc-gateway ではコード生成を使用してリバースプロキシ サーバーが作成されることです。 リバースプロキシでは、RESTful 呼び出しが gRPC に変換され、gRPC サービスに送信されます。
 
-grpc-gateway のインストールと使用については、[grpc-gateway のドキュメント](https://grpc-ecosystem.github.io/grpc-gateway/docs/usage.html)を参照してください。
+grpc-gateway のインストールと使用については、[grpc-gateway の README](https://github.com/grpc-ecosystem/grpc-gateway/#grpc-gateway) を参照してください。
 
 ## <a name="additional-resources"></a>その他のリソース
 

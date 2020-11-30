@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Kestrel
 uid: aspnetcore-5.0
-ms.openlocfilehash: 84747e2d13275a23e83dc2dc0f666cb0c8d001b1
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 8e848ef57a9164501fd3c4f29f47ad7c72118507
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634627"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417553"
 ---
 # <a name="whats-new-in-aspnet-core-50"></a>ASP.NET Core 5.0 の新機能
 
@@ -148,7 +148,7 @@ Blazor に、ラジオ ボタン グループへのデータ バインドを簡�
 
 ### <a name="component-virtualization"></a>コンポーネントの仮想化
 
-Blazor フレームワークに組み込まれている仮想化サポートを使用して、コンポーネント レンダリングの認識されるパフォーマンスを向上させます。 詳細については、 <xref:blazor/forms-validation#radio-buttons> を参照してください。
+Blazor フレームワークに組み込まれている仮想化サポートを使用して、コンポーネント レンダリングの認識されるパフォーマンスを向上させます。 詳細については、 <xref:blazor/components/virtualization> を参照してください。
 
 ### <a name="ontoggle-event-support"></a>`ontoggle` イベントのサポート
 
@@ -361,7 +361,7 @@ Server Name Indication (SNI) は、SSL ネゴシエーションの一部とし�
 
 ### <a name="azure-active-directory-authentication-with-microsoftno-locidentityweb"></a>Microsoft.Identity.Web での Azure Active Directory 認証
 
-ASP.NET Core のプロジェクト テンプレートが <xref:Microsoft.Identity.Web?displayProperty=fullName> と統合され、[Azure Activity Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) での認証を処理できるようになりました。 [Microsoft.Identity.Web パッケージ](https://www.nuget.org/packages/Microsoft.Identity.Web/)には次が備わっています。
+ASP.NET Core のプロジェクト テンプレートが <xref:Microsoft.Identity.Web?displayProperty=fullName> と統合され、[Azure Active Directory](/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) での認証を処理できるようになりました。 [Microsoft.Identity.Web パッケージ](https://www.nuget.org/packages/Microsoft.Identity.Web/)には次が備わっています。
 
 * Azure AD を使用した認証のエクスペリエンスが向上します。
 * [Microsoft Graph](/graph/overview) など、ユーザーに代わって Azure リソースにアクセスするための簡単な方法。 [Microsoft.Identity.Web のサンプル](https://github.com/Azure-Samples/active-directory-aspnetcore-webapp-openidconnect-v2)を参照してください。これは基本的なログインから始まり、マルチテナント、Azure API の使用、Microsoft Graph の使用、独自の API の保護に進んでいきます。 `Microsoft.Identity.Web` は .NET 5 と共に使用できます。

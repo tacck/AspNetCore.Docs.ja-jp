@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: ab5be222416e61fcff90c5130ca91ad4a2a5c9b0
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 25ada6e3a210ed830514e69da7d5212264b4b91e
+ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674005"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95417566"
 ---
 # <a name="tutorial-part-5-apply-migrations-to-the-contoso-university-sample"></a>チュートリアル: パート 5 - Contoso University のサンプルに移行を適用する
 
@@ -53,9 +53,10 @@ ms.locfileid: "94674005"
 
 ## <a name="drop-the-database"></a>データベースを削除します。
 
-データベースを削除します。 **SQL Server オブジェクト エクスプローラー** (SSOX) または `database drop` CLI コマンドを使用します。
+EF Core ツールを[グローバル ツール](/ef/core/miscellaneous/cli/dotnet)としてインストールし、データベースを削除します。
 
  ```dotnetcli
+ dotnet tool install --global dotnet-ef
  dotnet ef database drop
  ```
 
@@ -76,11 +77,8 @@ ms.locfileid: "94674005"
 コマンド ウィンドウで次のコマンドを入力します。
 
 ```dotnetcli
-dotnet tool install --global dotnet-ef
 dotnet ef migrations add InitialCreate
 ```
-
-`dotnet tool install --global dotnet-ef` によって、[グローバル ツール](/ef/core/miscellaneous/cli/dotnet)として `dotnet ef` がインストールされます。
 
 上のコマンドでは、次のような出力が表示されます。
 

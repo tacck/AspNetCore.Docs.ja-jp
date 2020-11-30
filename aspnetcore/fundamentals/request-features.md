@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88e97d88341789a76a79da8d92098c2e00396fe7
+ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053710"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95870426"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core での要求機能
 
 作成者: [Steve Smith](https://ardalis.com/)
 
-アプリケーションとミドルウェアで要求を処理するために使用する `HttpContext` API には、" *機能インターフェイス* " と呼ばれる抽象化レイヤーがその下にあります。 各機能インターフェイスには、`HttpContext` によってよって公開される機能の詳細なサブセットが用意されています。 これらのインターフェイスは、`HttpContext` 全体を再実装しなくても、要求の処理に応じて、サーバーまたはミドルウェアで追加、変更、ラップ、置換、または削除することができます。 また、テスト時に機能をモックするためにも使用できます。
+アプリケーションとミドルウェアで要求を処理するために使用する `HttpContext` API には、"*機能インターフェイス*" と呼ばれる抽象化レイヤーがその下にあります。 各機能インターフェイスには、`HttpContext` によってよって公開される機能の詳細なサブセットが用意されています。 これらのインターフェイスは、`HttpContext` 全体を再実装しなくても、要求の処理に応じて、サーバーまたはミドルウェアで追加、変更、ラップ、置換、または削除することができます。 また、テスト時に機能をモックするためにも使用できます。
 
 ## <a name="feature-collections"></a>機能のコレクション
 

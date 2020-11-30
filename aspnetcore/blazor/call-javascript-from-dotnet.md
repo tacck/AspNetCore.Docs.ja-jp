@@ -5,7 +5,7 @@ description: Blazor アプリで .NET メソッドから JavaScript 関数を呼
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, devx-track-js
-ms.date: 10/20/2020
+ms.date: 11/25/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,16 +19,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: f5373f1905958ee5c51ee76bd07690d079fb50f5
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: c73de0e30b7b564915f30d75f754f89fecccdc78
+ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570017"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96035724"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
-作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Luke Latham](https://github.com/guardrex)
+作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Daniel Roth](https://github.com/danroth27)、[Pranav Krishnamoorthy](https://github.com/pranavkm)、[Luke Latham](https://github.com/guardrex)
 
 Blazor アプリでは、.NET メソッドから JavaScript 関数を呼び出すことも、JavaScript 関数から .NET メソッドを呼び出すこともできます。 これらのシナリオは、"*JavaScript 相互運用*" ("*JS 相互運用*") と呼ばれます。
 
@@ -543,28 +543,6 @@ public async ValueTask<string> Prompt(string message)
 
 `IJSInProcessObjectReference` は、関数を同期的に呼び出すことができる JavaScript オブジェクトへの参照を表します。
 
-`IJSUnmarshalledObjectReference` は、.NET データをシリアル化するオーバーヘッドなしで関数を呼び出すことができる JavaScript オブジェクトへの参照を表します。 これは、パフォーマンスが重要な場合に Blazor WebAssembly で使用できます。
-
-```javascript
-window.unmarshalledInstance = {
-  helloWorld: function (personNamePointer) {
-    const personName = Blazor.platform.readStringField(value, 0);
-    return `Hello ${personName}`;
-  }
-};
-```
-
-```csharp
-var unmarshalledRuntime = (IJSUnmarshalledRuntime)js;
-var jsUnmarshalledReference = unmarshalledRuntime
-    .InvokeUnmarshalled<IJSUnmarshalledObjectReference>("unmarshalledInstance");
-
-string helloWorldString = jsUnmarshalledReference.InvokeUnmarshalled<string, string>(
-    "helloWorld");
-```
-
-前の例では、<xref:Microsoft.JSInterop.IJSRuntime> サービスがクラスに挿入され、`js` に割り当てられます (示されてはいません)。
-
 ## <a name="use-of-javascript-libraries-that-render-ui-dom-elements"></a>UI をレンダリングする JavaScript ライブラリの使用 (DOM 要素)
 
 ブラウザー DOM 内に表示可能なユーザー インターフェイス要素を生成する JavaScript ライブラリを使用することが必要になる場合があります。 Blazor の差分システムは、DOM 要素のツリーに対する制御に依存しており、外部コードによって DOM ツリーが変更されて、差分を適用するためのメカニズムが無効になるとエラーが発生するため、一見すると、これは困難に思えるかもしれません。 これは、Blazor に固有の制限ではありません。 差分ベースの UI フレームワークでは同じ課題が発生します。
@@ -707,6 +685,158 @@ JavaScript と Blazor の間で大量のデータを転送するコードを開�
 ## <a name="js-modules"></a>JS モジュール
 
 JS の分離では、JS 相互運用は、ブラウザーで [EcmaScript モジュール (ESM)](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) ([ECMAScript 仕様](https://tc39.es/ecma262/#sec-modules)) が既定でサポートされている場合に機能します。
+
+## <a name="unmarshalled-js-interop"></a>JS 相互運用のマーシャリングを解除する
+
+.NET オブジェクトが JS 相互運用のためにシリアル化され、次のいずれかに該当する場合、Blazor WebAssembly コンポーネントのパフォーマンスが低下する可能性があります。
+
+* 大量の .NET オブジェクトが短時間でシリアル化される。 例:JS 相互運用の呼び出しは、マウス ホイールの回転など、入力デバイスの動きに基づいて行われます。
+* 大きな .NET オブジェクトまたは多数の .NET オブジェクトを JS 相互運用のためにシリアル化する必要がある。 例:JS 相互運用の呼び出しでは、数十個のファイルをシリアル化する必要があります。
+
+<xref:Microsoft.JSInterop.IJSUnmarshalledObjectReference> は、.NET データをシリアル化するオーバーヘッドなしで関数を呼び出すことができる JavaScript オブジェクトへの参照を表します。
+
+次に例を示します。
+
+* 文字列と整数を含む [struct](/dotnet/csharp/language-reference/builtin-types/struct) は、シリアル化されずに JavaScript に渡されます。
+* JavaScript 関数によってデータが処理され、ブール値または文字列が呼び出し元に返されます。
+* JavaScript 文字列を .NET `string` オブジェクトに直接変換することはできません。 `unmarshalledFunctionReturnString` 関数によって `BINDING.js_string_to_mono_string` が呼び出され、Javascript 文字列の変換が管理されます。
+
+> [!NOTE]
+> 次の例は、JavaScript に渡された [struct](/dotnet/csharp/language-reference/builtin-types/struct) によってコンポーネントのパフォーマンスは低下しないので、このシナリオの一般的な使用例ではありません。 この例では、シリアル化されていない .NET データを渡すための概念を示すためだけに、小さなオブジェクトを使用しています。
+
+`wwwroot/index.html` の `<script>` ブロックまたは `wwwroot/index.html` から参照される外部 Javascript ファイルの内容:
+
+```javascript
+window.returnJSObjectReference = () => {
+    return {
+        unmarshalledFunctionReturnBoolean: function (fields) {
+            const name = Blazor.platform.readStringField(fields, 0);
+            const year = Blazor.platform.readInt32Field(fields, 8);
+
+            return name === "Brigadier Alistair Gordon Lethbridge-Stewart" &&
+                year === 1968;
+        },
+        unmarshalledFunctionReturnString: function (fields) {
+            const name = Blazor.platform.readStringField(fields, 0);
+            const year = Blazor.platform.readInt32Field(fields, 8);
+
+            return BINDING.js_string_to_mono_string(`Hello, ${name} (${year})!`);
+        }
+    };
+}
+```
+
+> [!WARNING]
+> `js_string_to_mono_string` 関数の名前、動作、および存在は、.NET の今後のリリースで変更される可能性があります。 次に例を示します。
+>
+> * 関数の名前が変更される可能性があります。
+> * フレームワークによる文字列の自動変換を優先して、関数自体が削除される可能性があります。
+
+`Pages/UnmarshalledJSInterop.razor` (URL: `/unmarshalled-js-interop`):
+
+```razor
+@page "/unmarshalled-js-interop"
+@using System.Runtime.InteropServices
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
+<h1>Unmarshalled JS interop</h1>
+
+@if (callResultForBoolean)
+{
+    <p>JS interop was successful!</p>
+}
+
+@if (!string.IsNullOrEmpty(callResultForString))
+{
+    <p>@callResultForString</p>
+}
+
+<p>
+    <button @onclick="CallJSUnmarshalledForBoolean">
+        Call Unmarshalled JS & Return Boolean
+    </button>
+    <button @onclick="CallJSUnmarshalledForString">
+        Call Unmarshalled JS & Return String
+    </button>
+</p>
+
+<p>
+    <a href="https://www.doctorwho.tv">Doctor Who</a>
+    is a registered trademark of the <a href="https://www.bbc.com/">BBC</a>.
+</p>
+
+@code {
+    private bool callResultForBoolean;
+    private string callResultForString;
+
+    private void CallJSUnmarshalledForBoolean()
+    {
+        var unmarshalledRuntime = (IJSUnmarshalledRuntime)JS;
+
+        var jsUnmarshalledReference = unmarshalledRuntime
+            .InvokeUnmarshalled<IJSUnmarshalledObjectReference>(
+                "returnJSObjectReference");
+
+        callResultForBoolean = 
+            jsUnmarshalledReference.InvokeUnmarshalled<InteropStruct, bool>(
+                "unmarshalledFunctionReturnBoolean", GetStruct());
+    }
+
+    private void CallJSUnmarshalledForString()
+    {
+        var unmarshalledRuntime = (IJSUnmarshalledRuntime)JS;
+
+        var jsUnmarshalledReference = unmarshalledRuntime
+            .InvokeUnmarshalled<IJSUnmarshalledObjectReference>(
+                "returnJSObjectReference");
+
+        callResultForString = 
+            jsUnmarshalledReference.InvokeUnmarshalled<InteropStruct, string>(
+                "unmarshalledFunctionReturnString", GetStruct());
+    }
+
+    private InteropStruct GetStruct()
+    {
+        return new InteropStruct
+        {
+            Name = "Brigadier Alistair Gordon Lethbridge-Stewart",
+            Year = 1968,
+        };
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct InteropStruct
+    {
+        [FieldOffset(0)]
+        public string Name;
+
+        [FieldOffset(8)]
+        public int Year;
+    }
+}
+```
+
+`IJSUnmarshalledObjectReference` インスタンスが C# コードで破棄されない場合は、JavaScript で破棄することができます。 次の `dispose` 関数を使用すると、JavaScript から呼び出されたときにオブジェクト参照が破棄されます。
+
+```javascript
+window.exampleJSObjectReferenceNotDisposedInCSharp = () => {
+    return {
+        dispose: function () {
+            DotNet.disposeJSObjectReference(this);
+        },
+
+        ...
+    };
+}
+```
+
+配列型は、`js_typed_array_to_array` を使用して JavaScript オブジェクトから .NET オブジェクトに変換できますが、JavaScript 配列は型指定された配列である必要があります。 JavaScript の配列は、C# コードで .NET オブジェクト配列 (`object[]`) として読み取ることができます。
+
+文字列配列などの他のデータ型は変換できますが、新しい Mono 配列オブジェクト (`mono_obj_array_new`) を作成し、その値 (`mono_obj_array_set`) を設定する必要があります。
+
+> [!WARNING]
+> `js_typed_array_to_array`、`mono_obj_array_new`、`mono_obj_array_set` など、Blazor フレームワークによって提供される JavaScript 関数は、.NET の今後のリリースで、名前の変更、動作の変更、または削除の対象となる可能性があります。
 
 ## <a name="additional-resources"></a>その他の技術情報
 
