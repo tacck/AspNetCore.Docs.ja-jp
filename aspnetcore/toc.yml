@@ -1301,6 +1301,8 @@
       uid: mvc/compatibility-version
     - name: ミドルウェアの作成
       uid: fundamentals/middleware/write
+    - name: コードへのルーティングを使用する基本的な JSON API
+      uid: web-api/route-to-code
     - name: 要求と応答の操作
       displayName: middleware
       uid: fundamentals/middleware/request-response
