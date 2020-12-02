@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 - Route-to-code
 uid: web-api/route-to-code
-ms.openlocfilehash: 49eaa3ceb47c41226b7a50782436ec270e6e1b7b
-ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
+ms.openlocfilehash: 1f5f532053f8f5ca7f73df8c1a910a484e2488d9
+ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96335595"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96513097"
 ---
 # <a name="basic-json-apis-with-no-locroute-to-code-in-aspnet-core"></a>ASP.NET Core での Basic JSON Api Route-to-code
 
@@ -54,7 +54,7 @@ ASP.NET Core には、JSON web Api の作成を容易にするヘルパーメソ
 
 [!code-csharp[](route-to-code/sample/Startup3.cs?name=snippet&highlight=6)]
 
-上記のコードでは次の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * をルートテンプレートとして使用して、HTTP GET API エンドポイントを追加し `/hello/{name:alpha}` ます。
 * ルートが一致すると、API は `name` 要求からルート値を読み取ります。
@@ -66,7 +66,7 @@ ASP.NET Core には、JSON web Api の作成を容易にするヘルパーメソ
 
 [!code-csharp[](route-to-code/sample/Startup2.cs?name=snippet&highlight=5,11)]
 
-上記のコードでは次の操作が行われます。
+上記のコードにより、次のことが行われます。
 
 * をルートテンプレートとして使用して、HTTP POST API エンドポイントを追加し `/weather` ます。
 * ルートが一致すると、は `HasJsonContentType` 要求のコンテンツの種類を検証します。 JSON 以外のコンテンツタイプは、415状態コードを返します。
@@ -111,6 +111,21 @@ DI を多用する Api では、DI をサポートする ASP.NET Core アプリ�
 メソッドでは、 `Startup.Configure` `Map` メソッドとその他のクラスの静的メソッドがで呼び出され `UseEndpoints` ます。
 
 [!code-csharp[](route-to-code/sample/Startup5.cs?name=snippet)]
+
+## <a name="notable-missing-features-compared-to-web-api"></a>Web API と比較した重要でない機能
+
+Route-to-code は、基本的な JSON Api 向けに設計されています。 ASP.NET Core Web API によって提供される高度な機能の多くはサポートされていません。
+
+によって提供されない機能 Route-to-code は次のとおりです。
+
+* モデル バインド
+* モデルの検証
+* API を開く/Swagger
+* コンテンツ ネゴシエーション
+* コンストラクターの依存関係の挿入
+* `ProblemDetails` ([https://tools.ietf.org/html/rfc7807](RFC 7807))
+
+前の一覧の一部の機能が必要な場合は、 [ASP.NET Core WEB api](xref:web-api/index) を使用して API を作成することを検討してください。
 
 ## <a name="additional-resources"></a>その他のリソース
 
