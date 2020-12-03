@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: cc701343cb3859f0f76ebc62bd54aa2e4431d522
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5ad39821778ea58097169def85a940a06f1d036e
+ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061029"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96513110"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core での要求と応答の操作
 
@@ -44,6 +44,8 @@ ms.locfileid: "93061029"
 ストリームがフレームワークから削除されていません。 ストリームは .NET 全体で使われ続けます。また、ストリームの種類の多くにはパイプラインに相当するものがありません (`FileStreams` や `ResponseCompression` など)。
 
 ## <a name="stream-examples"></a>ストリームの例
+
+<!-- see "fundamentals\middleware\request-response\static\TestPipes.JPG for testing sample -->
 
 要求本文全体を、改行で分割した文字列のリストとして読み取るミドルウェアを作成したいとします。 単純なストリームの実装は、次の例のようになります。
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: bfc8f334b9229fed54e6b9841e4fb255ed18249a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6a74b8c5668a37082f648ae74210d90684c4559c
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056622"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320110"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server と Entity Framework Core (EFCore)
 
@@ -32,7 +32,7 @@ By (フィルター方法):[Jeremy Likness](https://github.com/JeremyLikness)
 
 :::moniker range=">= aspnetcore-5.0"
 
-Blazor Server はステートフル アプリ フレームワークです。 アプリではサーバーへの継続的な接続が維持され、ユーザーの状態は " *回線* " 内のサーバーのメモリに保持されます。 ユーザー状態の一例として、回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータがあります。 Blazor Server が提供する独自のアプリケーション モデルでは、Entity Framework Core を使用するための特別なアプローチが必要です。
+Blazor Server はステートフル アプリ フレームワークです。 アプリではサーバーへの継続的な接続が維持され、ユーザーの状態は "*回線*" 内のサーバーのメモリに保持されます。 ユーザー状態の一例として、回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータがあります。 Blazor Server が提供する独自のアプリケーション モデルでは、Entity Framework Core を使用するための特別なアプローチが必要です。
 
 > [!NOTE]
 > この記事では、Blazor Server アプリでの EF Core について説明します。 Blazor WebAssembly アプリは、ほとんどの直接データベース接続が防止される WebAssembly サンドボックス内で実行されます。 Blazor WebAssembly での EF Core の実行については、この記事では扱いません。
@@ -54,7 +54,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 
 <h2 id="database-access-5x">データベース アクセス</h2>
 
-EF Core では、 [データベース アクセスを構成](/ef/core/miscellaneous/configuring-dbcontext)し、" [*作業単位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)" として機能する手段として <xref:Microsoft.EntityFrameworkCore.DbContext> を利用しています。 EF Core には、既定でコンテキストを " *スコープ* " サービスとして登録する ASP.NET Core アプリの <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張機能が用意されています。 Blazor Server アプリでは、インスタンスがユーザーの回線内のコンポーネント全体で共有されるため、スコープ サービスの登録が問題になる可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッド セーフではなく、同時に使用するように設計されていません。 次の理由により、既存の有効期間は不適切です。
+EF Core では、[データベース アクセスを構成](/ef/core/miscellaneous/configuring-dbcontext)し、"[*作業単位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)" として機能する手段として <xref:Microsoft.EntityFrameworkCore.DbContext> を利用しています。 EF Core には、既定でコンテキストを "*スコープ*" サービスとして登録する ASP.NET Core アプリの <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張機能が用意されています。 Blazor Server アプリでは、インスタンスがユーザーの回線内のコンポーネント全体で共有されるため、スコープ サービスの登録が問題になる可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッド セーフではなく、同時に使用するように設計されていません。 次の理由により、既存の有効期間は不適切です。
 
 * **[Singleton]\(シングルトン\)** の場合、アプリのすべてのユーザーで状態が共有され、不適切な同時使用につながります。
 * **[範囲指定]** (既定値) の場合、同じユーザーのコンポーネント間で同様の問題が発生します。
@@ -65,7 +65,7 @@ EF Core では、 [データベース アクセスを構成](/ef/core/miscellane
 * 既定では、操作ごとに 1 つのコンテキストを使用することを検討してください。 コンテキストは、高速でオーバーヘッドの少ないインスタンス化を目的として設計されています。
 
   ```csharp
-  var using context = new MyContext();
+  using var context = new MyContext();
 
   return await context.MyEntities.ToListAsync();
   ```
@@ -163,7 +163,7 @@ services.AddScoped<ApplicationDbContext>(p =>
 
 :::moniker range="< aspnetcore-5.0"
 
-Blazor Server はステートフル アプリ フレームワークです。 アプリではサーバーへの継続的な接続が維持され、ユーザーの状態は " *回線* " 内のサーバーのメモリに保持されます。 ユーザー状態の一例として、回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータがあります。 Blazor Server が提供する独自のアプリケーション モデルでは、Entity Framework Core を使用するための特別なアプローチが必要です。
+Blazor Server はステートフル アプリ フレームワークです。 アプリではサーバーへの継続的な接続が維持され、ユーザーの状態は "*回線*" 内のサーバーのメモリに保持されます。 ユーザー状態の一例として、回線に範囲が設定されている[依存関係の挿入 (DI)](xref:fundamentals/dependency-injection) サービス インスタンスに保存されているデータがあります。 Blazor Server が提供する独自のアプリケーション モデルでは、Entity Framework Core を使用するための特別なアプローチが必要です。
 
 > [!NOTE]
 > この記事では、Blazor Server アプリでの EF Core について説明します。 Blazor WebAssembly アプリは、ほとんどの直接データベース接続が防止される WebAssembly サンドボックス内で実行されます。 Blazor WebAssembly での EF Core の実行については、この記事では扱いません。
@@ -185,7 +185,7 @@ Blazor Server はステートフル アプリ フレームワークです。 ア
 
 <h2 id="database-access-3x">データベース アクセス</h2>
 
-EF Core では、 [データベース アクセスを構成](/ef/core/miscellaneous/configuring-dbcontext)し、" [*作業単位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)" として機能する手段として <xref:Microsoft.EntityFrameworkCore.DbContext> を利用しています。 EF Core には、既定でコンテキストを " *スコープ* " サービスとして登録する ASP.NET Core アプリの <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張機能が用意されています。 Blazor Server アプリでは、インスタンスがユーザーの回線内のコンポーネント全体で共有されるため、これは問題になる可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッド セーフではなく、同時に使用するように設計されていません。 次の理由により、既存の有効期間は不適切です。
+EF Core では、[データベース アクセスを構成](/ef/core/miscellaneous/configuring-dbcontext)し、"[*作業単位*](https://martinfowler.com/eaaCatalog/unitOfWork.html)" として機能する手段として <xref:Microsoft.EntityFrameworkCore.DbContext> を利用しています。 EF Core には、既定でコンテキストを "*スコープ*" サービスとして登録する ASP.NET Core アプリの <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> 拡張機能が用意されています。 Blazor Server アプリでは、インスタンスがユーザーの回線内のコンポーネント全体で共有されるため、これは問題になる可能性があります。 <xref:Microsoft.EntityFrameworkCore.DbContext> はスレッド セーフではなく、同時に使用するように設計されていません。 次の理由により、既存の有効期間は不適切です。
 
 * **[Singleton]\(シングルトン\)** の場合、アプリのすべてのユーザーで状態が共有され、不適切な同時使用につながります。
 * **[範囲指定]** (既定値) の場合、同じユーザーのコンポーネント間で同様の問題が発生します。
@@ -196,7 +196,7 @@ EF Core では、 [データベース アクセスを構成](/ef/core/miscellane
 * 既定では、操作ごとに 1 つのコンテキストを使用することを検討してください。 コンテキストは、高速でオーバーヘッドの少ないインスタンス化を目的として設計されています。
 
   ```csharp
-  var using context = new MyContext();
+  using var context = new MyContext();
 
   return await context.MyEntities.ToListAsync();
   ```
