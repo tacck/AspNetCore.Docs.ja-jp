@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 - Route-to-code
 uid: web-api/route-to-code
-ms.openlocfilehash: 1f5f532053f8f5ca7f73df8c1a910a484e2488d9
-ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
+ms.openlocfilehash: f8a3804a887ebfa0f5284d8991e903c978b18208
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96513097"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556607"
 ---
 # <a name="basic-json-apis-with-no-locroute-to-code-in-aspnet-core"></a>ASP.NET Core での Basic JSON Api Route-to-code
 
@@ -54,7 +54,7 @@ ASP.NET Core には、JSON web Api の作成を容易にするヘルパーメソ
 
 [!code-csharp[](route-to-code/sample/Startup3.cs?name=snippet&highlight=6)]
 
-上記のコードにより、次のことが行われます。
+上記のコードでは、次のことが行われます。
 
 * をルートテンプレートとして使用して、HTTP GET API エンドポイントを追加し `/hello/{name:alpha}` ます。
 * ルートが一致すると、API は `name` 要求からルート値を読み取ります。
@@ -66,7 +66,7 @@ ASP.NET Core には、JSON web Api の作成を容易にするヘルパーメソ
 
 [!code-csharp[](route-to-code/sample/Startup2.cs?name=snippet&highlight=5,11)]
 
-上記のコードにより、次のことが行われます。
+上記のコードでは、次のことが行われます。
 
 * をルートテンプレートとして使用して、HTTP POST API エンドポイントを追加し `/weather` ます。
 * ルートが一致すると、は `HasJsonContentType` 要求のコンテンツの種類を検証します。 JSON 以外のコンテンツタイプは、415状態コードを返します。
@@ -76,14 +76,14 @@ ASP.NET Core には、JSON web Api の作成を容易にするヘルパーメソ
 
 JSON のシリアル化をカスタマイズするには、次の2つの方法があります。
 
-* 既定のシリアル化オプションは、メソッドでを使用して構成でき `JsonOptions` `Startup.ConfigureServices` ます。
-* `WriteAsJsonAsync` および `ReadFromJsonAsync` には、オブジェクトを受け入れるオーバーロードがあり `JsonSerializerOptions` ます。 この `JsonSerializerOptions` オブジェクトは、既定のオプションをオーバーライドします。
+* 既定のシリアル化オプションは、メソッドでを使用して構成でき <xref:Microsoft.AspNetCore.Http.Json.JsonOptions> `Startup.ConfigureServices` ます。
+* `WriteAsJsonAsync` および `ReadFromJsonAsync` には、オブジェクトを受け入れるオーバーロードがあり <xref:System.Text.Json.JsonSerializerOptions> ます。 このオプションオブジェクトは、既定のオプションをオーバーライドします。
 
 [!code-csharp[](route-to-code/sample/Startup6.cs?name=snippet)]
 
 ## <a name="authentication-and-authorization"></a>認証と承認
 
-Route-to-code 認証と承認をサポートします。 やなどの属性は、 `[Authorize]` `[AllowAnonymous]` 要求デリゲートにマップされるエンドポイントには配置できません。 代わりに、および拡張メソッドを使用して認証メタデータが追加され `RequireAuthorization` `AllowAnonymous` ます。
+Route-to-code 認証と承認をサポートします。 やなどの属性は、 `[Authorize]` `[AllowAnonymous]` 要求デリゲートにマップされるエンドポイントには配置できません。 代わりに、および拡張メソッドを使用して認証メタデータが追加され <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization%2A> <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.AllowAnonymous%2A> ます。
 
 [!code-csharp[](route-to-code/sample/Startup.cs?name=snippet&highlight=30)]
 
@@ -123,11 +123,11 @@ Route-to-code は、基本的な JSON Api 向けに設計されています。 A
 * API を開く/Swagger
 * コンテンツ ネゴシエーション
 * コンストラクターの依存関係の挿入
-* `ProblemDetails` ([https://tools.ietf.org/html/rfc7807](RFC 7807))
+* `ProblemDetails` ([RFC 7807](https://tools.ietf.org/html/rfc7807))
 
 前の一覧の一部の機能が必要な場合は、 [ASP.NET Core WEB api](xref:web-api/index) を使用して API を作成することを検討してください。
 
-## <a name="additional-resources"></a>その他のリソース
+## <a name="additional-resources"></a>その他の技術情報
 
 * <xref:web-api/index>
 * <xref:fundamentals/routing>

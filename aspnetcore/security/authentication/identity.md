@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: bfcef860beb07ab81dda1a10a1648491ae187bef
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ad4184fce494ba06acf7e583a42a54d04d37ea20
+ms.sourcegitcommit: 92439194682dc788b8b5b3a08bd2184dc00e200b
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052020"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96556646"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>IdentityASP.NET Core の概要
 
@@ -62,9 +62,9 @@ Identity は、通常、ユーザー名、パスワード、およびプロフ�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [ **ファイル** ] [新しいプロジェクト] を選択し > **New** > **Project** ます。
+* [**ファイル**] [新しいプロジェクト] を選択し > **New** > **Project** ます。
 * **[ASP.NET Core Web アプリケーション]** を選択します。 プロジェクトに **WebApp1** という名前を付け、プロジェクトのダウンロードと同じ名前空間にします。 **[OK]** をクリックします。
-* ASP.NET Core **Web アプリケーション** を選択し、[ **認証の変更** ] を選択します。
+* ASP.NET Core **Web アプリケーション** を選択し、[ **認証の変更**] を選択します。
 * **個々のユーザーアカウント** を選択し、[ **OK]** をクリックします。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -123,6 +123,10 @@ dotnet ef database update
 
 サービスはに追加されて `ConfigureServices` います。 一般的なパターンは、すべての `Add{Service}` メソッドを呼び出した後、すべての `services.Configure{Service}` メソッドを呼び出すことです。
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configureservices&highlight=11-99)]
 
 前の強調表示されたコードは、 Identity 既定のオプション値を使用してを構成します。 サービスは、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってアプリで使用できるようになります。
@@ -130,6 +134,22 @@ dotnet ef database update
 Identity は、を呼び出すことによって有効になり <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> ます。 `UseAuthentication` 認証 [ミドルウェア](xref:fundamentals/middleware/index) を要求パイプラインに追加します。
 
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configure&highlight=19)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-csharp[](identity/sample/WebApp5x/Startup.cs?name=snippet_configureservices&highlight=12-99)]
+
+前のコードでは、 Identity 既定のオプション値を使用してを構成します。 サービスは、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってアプリで使用できるようになります。
+
+Identity は、 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)を呼び出すことによって有効になります。 `UseAuthentication` 認証 [ミドルウェア](xref:fundamentals/middleware/index) を要求パイプラインに追加します。
+
+[!code-csharp[](identity/sample/WebApp5x/Startup.cs?name=snippet_configure&highlight=19)]
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 テンプレートで生成されたアプリは、 [承認](xref:security/authorization/secure-data)を使用しません。 `app.UseAuthorization` は、アプリが承認を追加する正しい順序で追加されるようにするために用意されています。 `UseRouting`、 `UseAuthentication` 、 `UseAuthorization` 、および `UseEndpoints` は、前のコードに示されている順序で呼び出す必要があります。
 
@@ -296,9 +316,9 @@ Identity SQL Server データベースを使用して、ユーザー名、パス
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [ **ファイル** ] [新しいプロジェクト] を選択し > **New** > **Project** ます。
+* [**ファイル**] [新しいプロジェクト] を選択し > **New** > **Project** ます。
 * **[ASP.NET Core Web アプリケーション]** を選択します。 プロジェクトに **WebApp1** という名前を付け、プロジェクトのダウンロードと同じ名前空間にします。 **[OK]** をクリックします。
-* ASP.NET Core **Web アプリケーション** を選択し、[ **認証の変更** ] を選択します。
+* ASP.NET Core **Web アプリケーション** を選択し、[ **認証の変更**] を選択します。
 * **個々のユーザーアカウント** を選択し、[ **OK]** をクリックします。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -346,8 +366,6 @@ dotnet ef database update
 ### <a name="configure-no-locidentity-services"></a>サービスの構成 Identity
 
 サービスはに追加されて `ConfigureServices` います。 一般的なパターンは、すべての `Add{Service}` メソッドを呼び出した後、すべての `services.Configure{Service}` メソッドを呼び出すことです。
-
-[!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configureservices)]
 
 前のコードでは、 Identity 既定のオプション値を使用してを構成します。 サービスは、 [依存関係の挿入](xref:fundamentals/dependency-injection)によってアプリで使用できるようになります。
 
