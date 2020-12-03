@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,51 +18,51 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 00c1be2704d92c7d4f868e6eaa346bd8e9901dbf
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360843"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419981"
 ---
-# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a><span data-ttu-id="2fbd1-103">パート 6、ASP.NET Core Razor ページへの検索の追加</span><span class="sxs-lookup"><span data-stu-id="2fbd1-103">Part 6, add search to ASP.NET Core Razor Pages</span></span>
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a><span data-ttu-id="3fccf-103">パート 6、ASP.NET Core Razor ページへの検索の追加</span><span class="sxs-lookup"><span data-stu-id="3fccf-103">Part 6, add search to ASP.NET Core Razor Pages</span></span>
 
-<span data-ttu-id="2fbd1-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="2fbd1-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="3fccf-104">作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="3fccf-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="2fbd1-105">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="3fccf-105">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="3fccf-105">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
 
-<span data-ttu-id="2fbd1-106">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-106">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="3fccf-106">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="3fccf-106">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="2fbd1-107">次のセクションでは、*ジャンル* または *名前* による映画検索が追加されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-107">In the following sections, searching movies by *genre* or *name* is added.</span></span>
+<span data-ttu-id="3fccf-107">次のセクションでは、*ジャンル* または *名前* による映画検索が追加されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-107">In the following sections, searching movies by *genre* or *name* is added.</span></span>
 
-<span data-ttu-id="2fbd1-108">強調表示されている次の using ステートメントとプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-108">Add the following highlighted using statement and properties to *Pages/Movies/Index.cshtml.cs*:</span></span>
+<span data-ttu-id="3fccf-108">強調表示されている次の using ステートメントとプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-108">Add the following highlighted using statement and properties to *Pages/Movies/Index.cshtml.cs*:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=3,23,24,25,26,27)]
 
-<span data-ttu-id="2fbd1-109">上のコードでは、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-109">In the previous code:</span></span>
+<span data-ttu-id="3fccf-109">上のコードでは、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="3fccf-109">In the previous code:</span></span>
 
-* <span data-ttu-id="2fbd1-110">`SearchString`: ユーザーが検索テキスト ボックスに入力したテキストが含まれる。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-110">`SearchString`: Contains the text users enter in the search text box.</span></span> <span data-ttu-id="2fbd1-111">`SearchString` には、[`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性があります。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-111">`SearchString` has the [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) attribute.</span></span> <span data-ttu-id="2fbd1-112">`[BindProperty]` により、プロパティと同じ名前に基づきフォーム値とクエリ文字列がバインドされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-112">`[BindProperty]` binds form values and query strings with the same name as the property.</span></span> <span data-ttu-id="2fbd1-113">HTTP GET 要求でのバインドには `[BindProperty(SupportsGet = true)]` が必要です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-113">`[BindProperty(SupportsGet = true)]` is required for binding on HTTP GET requests.</span></span>
-* <span data-ttu-id="2fbd1-114">`Genres`: ジャンル一覧が含まれる。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-114">`Genres`: Contains the list of genres.</span></span> <span data-ttu-id="2fbd1-115">`Genres` により、ユーザーは一覧からジャンルを選択できます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-115">`Genres` allows the user to select a genre from the list.</span></span> <span data-ttu-id="2fbd1-116">`SelectList` には `using Microsoft.AspNetCore.Mvc.Rendering;` が必要です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-116">`SelectList` requires `using Microsoft.AspNetCore.Mvc.Rendering;`</span></span>
-* <span data-ttu-id="2fbd1-117">`MovieGenre`: ユーザーが選択する特定のジャンルが含まれる。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-117">`MovieGenre`: Contains the specific genre the user selects.</span></span> <span data-ttu-id="2fbd1-118">たとえば、"Western (西部劇)" です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-118">For example, "Western".</span></span>
-* <span data-ttu-id="2fbd1-119">`Genres` と `MovieGenre` は、このチュートリアルで後述します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-119">`Genres` and `MovieGenre` are used later in this tutorial.</span></span>
+* <span data-ttu-id="3fccf-110">`SearchString`: ユーザーが検索テキスト ボックスに入力したテキストが含まれる。</span><span class="sxs-lookup"><span data-stu-id="3fccf-110">`SearchString`: Contains the text users enter in the search text box.</span></span> <span data-ttu-id="3fccf-111">`SearchString` には、[`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性があります。</span><span class="sxs-lookup"><span data-stu-id="3fccf-111">`SearchString` has the [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) attribute.</span></span> <span data-ttu-id="3fccf-112">`[BindProperty]` により、プロパティと同じ名前に基づきフォーム値とクエリ文字列がバインドされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-112">`[BindProperty]` binds form values and query strings with the same name as the property.</span></span> <span data-ttu-id="3fccf-113">HTTP GET 要求でのバインドには `[BindProperty(SupportsGet = true)]` が必要です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-113">`[BindProperty(SupportsGet = true)]` is required for binding on HTTP GET requests.</span></span>
+* <span data-ttu-id="3fccf-114">`Genres`: ジャンル一覧が含まれる。</span><span class="sxs-lookup"><span data-stu-id="3fccf-114">`Genres`: Contains the list of genres.</span></span> <span data-ttu-id="3fccf-115">`Genres` により、ユーザーは一覧からジャンルを選択できます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-115">`Genres` allows the user to select a genre from the list.</span></span> <span data-ttu-id="3fccf-116">`SelectList` には `using Microsoft.AspNetCore.Mvc.Rendering;` が必要です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-116">`SelectList` requires `using Microsoft.AspNetCore.Mvc.Rendering;`</span></span>
+* <span data-ttu-id="3fccf-117">`MovieGenre`: ユーザーが選択する特定のジャンルが含まれる。</span><span class="sxs-lookup"><span data-stu-id="3fccf-117">`MovieGenre`: Contains the specific genre the user selects.</span></span> <span data-ttu-id="3fccf-118">たとえば、"Western (西部劇)" です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-118">For example, "Western".</span></span>
+* <span data-ttu-id="3fccf-119">`Genres` と `MovieGenre` は、このチュートリアルで後述します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-119">`Genres` and `MovieGenre` are used later in this tutorial.</span></span>
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-<span data-ttu-id="2fbd1-120">Index ページの `OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-120">Update the Index page's `OnGetAsync` method with the following code:</span></span>
+<span data-ttu-id="3fccf-120">Index ページの `OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-120">Update the Index page's `OnGetAsync` method with the following code:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
-<span data-ttu-id="2fbd1-121">`OnGetAsync` メソッドの最初の行により、ムービーを選択する [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-121">The first line of the `OnGetAsync` method creates a [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) query to select the movies:</span></span>
+<span data-ttu-id="3fccf-121">`OnGetAsync` メソッドの最初の行により、ムービーを選択する [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-121">The first line of the `OnGetAsync` method creates a [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) query to select the movies:</span></span>
 
 ```csharp
 // using System.Linq;
@@ -72,101 +70,101 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-<span data-ttu-id="2fbd1-122">このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません**。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-122">The query is *only* defined at this point, it has **not** been run against the database.</span></span>
+<span data-ttu-id="3fccf-122">このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません**。</span><span class="sxs-lookup"><span data-stu-id="3fccf-122">The query is *only* defined at this point, it has **not** been run against the database.</span></span>
 
-<span data-ttu-id="2fbd1-123">`SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-123">If the `SearchString` property is not null or empty, the movies query is modified to filter on the search string:</span></span>
+<span data-ttu-id="3fccf-123">`SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-123">If the `SearchString` property is not null or empty, the movies query is modified to filter on the search string:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
 
-<span data-ttu-id="2fbd1-124">`s => s.Title.Contains()` コードは[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-124">The `s => s.Title.Contains()` code is a [Lambda Expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="2fbd1-125">ラムダは、メソッド ベースの [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリで、[Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) メソッドや `Contains` など、標準クエリ演算子メソッドの引数として使用されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-125">Lambdas are used in method-based [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) queries as arguments to standard query operator methods such as the [Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) method or `Contains`.</span></span> <span data-ttu-id="2fbd1-126">LINQ クエリは、`Where`、`Contains`、`OrderBy` などのメソッドの呼び出しで定義または変更されたときには実行されません。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-126">LINQ queries are not executed when they're defined or when they're modified by calling a method, such as `Where`, `Contains`, or `OrderBy`.</span></span> <span data-ttu-id="2fbd1-127">クエリ実行は先送りされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-127">Rather, query execution is deferred.</span></span> <span data-ttu-id="2fbd1-128">その具体値が繰り返されるか、`ToListAsync` メソッドが呼び出されるまで、式の評価が延ばされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-128">The evaluation of an expression is delayed until its realized value is iterated over or the `ToListAsync` method is called.</span></span> <span data-ttu-id="2fbd1-129">詳細については、「[クエリ実行](/dotnet/framework/data/adonet/ef/language-reference/query-execution)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-129">See [Query Execution](/dotnet/framework/data/adonet/ef/language-reference/query-execution) for more information.</span></span>
+<span data-ttu-id="3fccf-124">`s => s.Title.Contains()` コードは[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-124">The `s => s.Title.Contains()` code is a [Lambda Expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="3fccf-125">ラムダは、メソッド ベースの [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリで、[Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) メソッドや `Contains` など、標準クエリ演算子メソッドの引数として使用されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-125">Lambdas are used in method-based [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) queries as arguments to standard query operator methods such as the [Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) method or `Contains`.</span></span> <span data-ttu-id="3fccf-126">LINQ クエリは、`Where`、`Contains`、`OrderBy` などのメソッドの呼び出しで定義または変更されたときには実行されません。</span><span class="sxs-lookup"><span data-stu-id="3fccf-126">LINQ queries are not executed when they're defined or when they're modified by calling a method, such as `Where`, `Contains`, or `OrderBy`.</span></span> <span data-ttu-id="3fccf-127">クエリ実行は先送りされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-127">Rather, query execution is deferred.</span></span> <span data-ttu-id="3fccf-128">その具体値が繰り返されるか、`ToListAsync` メソッドが呼び出されるまで、式の評価が延ばされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-128">The evaluation of an expression is delayed until its realized value is iterated over or the `ToListAsync` method is called.</span></span> <span data-ttu-id="3fccf-129">詳細については、「[クエリ実行](/dotnet/framework/data/adonet/ef/language-reference/query-execution)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3fccf-129">See [Query Execution](/dotnet/framework/data/adonet/ef/language-reference/query-execution) for more information.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="2fbd1-130">[Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) メソッドは C# コードではなく、データベースで実行されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-130">The [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) method is run on the database, not in the C# code.</span></span> <span data-ttu-id="2fbd1-131">クエリの大文字と小文字の区別は、データベースや照合順序に依存します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-131">The case sensitivity on the query depends on the database and the collation.</span></span> <span data-ttu-id="2fbd1-132">SQL Server では、`Contains` は大文字/小文字の区別がない [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql) にマッピングされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-132">On SQL Server, `Contains` maps to [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql), which is case insensitive.</span></span> <span data-ttu-id="2fbd1-133">SQLite では、既定の照合順序で、大文字と小文字が区別されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-133">In SQLite, with the default collation, it's case sensitive.</span></span>
+> <span data-ttu-id="3fccf-130">[Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) メソッドは C# コードではなく、データベースで実行されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-130">The [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) method is run on the database, not in the C# code.</span></span> <span data-ttu-id="3fccf-131">クエリの大文字と小文字の区別は、データベースや照合順序に依存します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-131">The case sensitivity on the query depends on the database and the collation.</span></span> <span data-ttu-id="3fccf-132">SQL Server では、`Contains` は大文字/小文字の区別がない [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql) にマッピングされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-132">On SQL Server, `Contains` maps to [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql), which is case insensitive.</span></span> <span data-ttu-id="3fccf-133">SQLite では、既定の照合順序で、大文字と小文字が区別されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-133">In SQLite, with the default collation, it's case sensitive.</span></span>
 
-<span data-ttu-id="2fbd1-134">ムービー ページに移動し、`?searchString=Ghost` のようなクエリ文字列を URL に追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-134">Navigate to the Movies page and append a query string such as `?searchString=Ghost` to the URL.</span></span> <span data-ttu-id="2fbd1-135">たとえば、「 `https://localhost:5001/Movies?searchString=Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-135">For example, `https://localhost:5001/Movies?searchString=Ghost`.</span></span> <span data-ttu-id="2fbd1-136">フィルターされたムービーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-136">The filtered movies are displayed.</span></span>
+<span data-ttu-id="3fccf-134">ムービー ページに移動し、`?searchString=Ghost` のようなクエリ文字列を URL に追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-134">Navigate to the Movies page and append a query string such as `?searchString=Ghost` to the URL.</span></span> <span data-ttu-id="3fccf-135">たとえば、「 `https://localhost:5001/Movies?searchString=Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-135">For example, `https://localhost:5001/Movies?searchString=Ghost`.</span></span> <span data-ttu-id="3fccf-136">フィルターされたムービーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-136">The filtered movies are displayed.</span></span>
 
 ![Indexビュー](search/_static/ghost.png)
 
-<span data-ttu-id="2fbd1-138">次のルート テンプレートが Index ページに追加される場合、検索文字列を URL セグメントとして渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-138">If the following route template is added to the Index page, the search string can be passed as a URL segment.</span></span> <span data-ttu-id="2fbd1-139">たとえば、「 `https://localhost:5001/Movies/Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-139">For example, `https://localhost:5001/Movies/Ghost`.</span></span>
+<span data-ttu-id="3fccf-138">次のルート テンプレートが Index ページに追加される場合、検索文字列を URL セグメントとして渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-138">If the following route template is added to the Index page, the search string can be passed as a URL segment.</span></span> <span data-ttu-id="3fccf-139">たとえば、「 `https://localhost:5001/Movies/Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-139">For example, `https://localhost:5001/Movies/Ghost`.</span></span>
 
 ```cshtml
 @page "{searchString?}"
 ```
 
-<span data-ttu-id="2fbd1-140">先のルート制約では、クエリ文字列値の代わりに、ルート データ (URL セグメント) として題名を検索できます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-140">The preceding route constraint allows searching the title as route data (a URL segment) instead of as a query string value.</span></span>  <span data-ttu-id="2fbd1-141">`"{searchString?}"` の `?` は、これが任意のルート パラメーターであることを意味します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-141">The `?` in `"{searchString?}"` means this is an optional route parameter.</span></span>
+<span data-ttu-id="3fccf-140">先のルート制約では、クエリ文字列値の代わりに、ルート データ (URL セグメント) として題名を検索できます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-140">The preceding route constraint allows searching the title as route data (a URL segment) instead of as a query string value.</span></span>  <span data-ttu-id="3fccf-141">`"{searchString?}"` の `?` は、これが任意のルート パラメーターであることを意味します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-141">The `?` in `"{searchString?}"` means this is an optional route parameter.</span></span>
 
 ![ghost という単語が URL に追加されたIndexビュー。Ghostbusters と Ghostbusters 2 という 2 本のムービーからなるムービー リストが返されています。](search/_static/g2.png)
 
-<span data-ttu-id="2fbd1-143">ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model-binding)を使用し、クエリ文字列 (`?searchString=Ghost`) またはルート データ (`https://localhost:5001/Movies/Ghost`) から `SearchString` プロパティの値が設定されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-143">The ASP.NET Core runtime uses [model binding](xref:mvc/models/model-binding) to set the value of the `SearchString` property from the query string (`?searchString=Ghost`) or route data (`https://localhost:5001/Movies/Ghost`).</span></span> <span data-ttu-id="2fbd1-144">モデル バインドでは、\**_大文字と小文字が区別されません_*。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-144">Model binding is \**_not_* _ case sensitive.</span></span>
+<span data-ttu-id="3fccf-143">ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model-binding)を使用し、クエリ文字列 (`?searchString=Ghost`) またはルート データ (`https://localhost:5001/Movies/Ghost`) から `SearchString` プロパティの値が設定されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-143">The ASP.NET Core runtime uses [model binding](xref:mvc/models/model-binding) to set the value of the `SearchString` property from the query string (`?searchString=Ghost`) or route data (`https://localhost:5001/Movies/Ghost`).</span></span> <span data-ttu-id="3fccf-144">モデル バインドでは、\**_大文字と小文字が区別されません_*。</span><span class="sxs-lookup"><span data-stu-id="3fccf-144">Model binding is \**_not_* _ case sensitive.</span></span>
 
-<span data-ttu-id="2fbd1-145">ただし、URL を変更してムービーを検索することをユーザーに求めることはできません。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-145">However, users cannot be expected to modify the URL to search for a movie.</span></span> <span data-ttu-id="2fbd1-146">この手順では、ムービーを絞り込むための UI を追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-146">In this step, UI is added to filter movies.</span></span> <span data-ttu-id="2fbd1-147">ルート制約 `"{searchString?}"` を追加した場合、それを削除します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-147">If you added the route constraint `"{searchString?}"`, remove it.</span></span>
+<span data-ttu-id="3fccf-145">ただし、URL を変更してムービーを検索することをユーザーに求めることはできません。</span><span class="sxs-lookup"><span data-stu-id="3fccf-145">However, users cannot be expected to modify the URL to search for a movie.</span></span> <span data-ttu-id="3fccf-146">この手順では、ムービーを絞り込むための UI を追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-146">In this step, UI is added to filter movies.</span></span> <span data-ttu-id="3fccf-147">ルート制約 `"{searchString?}"` を追加した場合、それを削除します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-147">If you added the route constraint `"{searchString?}"`, remove it.</span></span>
 
-<span data-ttu-id="2fbd1-148">_Pages/Movies/Index.cshtml\* ファイルを開き、次のコードで強調表示されているマークアップを追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-148">Open the _Pages/Movies/Index.cshtml\* file, and add the markup highlighted in the following code:</span></span>
+<span data-ttu-id="3fccf-148">_Pages/Movies/Index.cshtml\* ファイルを開き、次のコードで強調表示されているマークアップを追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-148">Open the _Pages/Movies/Index.cshtml\* file, and add the markup highlighted in the following code:</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/Index2.cshtml?highlight=14-19&range=1-22)]
 
-<span data-ttu-id="2fbd1-149">HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-149">The HTML `<form>` tag uses the following [Tag Helpers](xref:mvc/views/tag-helpers/intro):</span></span>
+<span data-ttu-id="3fccf-149">HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-149">The HTML `<form>` tag uses the following [Tag Helpers](xref:mvc/views/tag-helpers/intro):</span></span>
 
-* <span data-ttu-id="2fbd1-150">[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper)</span><span class="sxs-lookup"><span data-stu-id="2fbd1-150">[Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="2fbd1-151">フォームが提出されると、フィルター文字列がクエリ文字列経由で *ページ/ムービー/Index* ページに送信されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-151">When the form is submitted, the filter string is sent to the *Pages/Movies/Index* page via query string.</span></span>
-* [<span data-ttu-id="2fbd1-152">入力タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="2fbd1-152">Input Tag Helper</span></span>](xref:mvc/views/working-with-forms#the-input-tag-helper)
+* <span data-ttu-id="3fccf-150">[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper)</span><span class="sxs-lookup"><span data-stu-id="3fccf-150">[Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="3fccf-151">フォームが提出されると、フィルター文字列がクエリ文字列経由で *ページ/ムービー/Index* ページに送信されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-151">When the form is submitted, the filter string is sent to the *Pages/Movies/Index* page via query string.</span></span>
+* [<span data-ttu-id="3fccf-152">入力タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="3fccf-152">Input Tag Helper</span></span>](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
-<span data-ttu-id="2fbd1-153">変更を保存し、フィルターをテストします。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-153">Save the changes and test the filter.</span></span>
+<span data-ttu-id="3fccf-153">変更を保存し、フィルターをテストします。</span><span class="sxs-lookup"><span data-stu-id="3fccf-153">Save the changes and test the filter.</span></span>
 
 ![タイトル フィルター テキストボックスに ghost という単語が入力されたIndexビュー](search/_static/filter.png)
 
-## <a name="search-by-genre"></a><span data-ttu-id="2fbd1-155">ジャンルで検索する</span><span class="sxs-lookup"><span data-stu-id="2fbd1-155">Search by genre</span></span>
+## <a name="search-by-genre"></a><span data-ttu-id="3fccf-155">ジャンルで検索する</span><span class="sxs-lookup"><span data-stu-id="3fccf-155">Search by genre</span></span>
 
-<span data-ttu-id="2fbd1-156">Index ページの `OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-156">Update the Index page's `OnGetAsync` method with the following code:</span></span>
+<span data-ttu-id="3fccf-156">Index ページの `OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-156">Update the Index page's `OnGetAsync` method with the following code:</span></span>
 
    [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
 
-<span data-ttu-id="2fbd1-157">次のコードは、データベースからすべてのジャンルを取得する LINQ クエリです。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-157">The following code is a LINQ query that retrieves all the genres from the database.</span></span>
+<span data-ttu-id="3fccf-157">次のコードは、データベースからすべてのジャンルを取得する LINQ クエリです。</span><span class="sxs-lookup"><span data-stu-id="3fccf-157">The following code is a LINQ query that retrieves all the genres from the database.</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_LINQ)]
 
-<span data-ttu-id="2fbd1-158">ジャンルの `SelectList` は、別個のジャンルを推定することで作成されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-158">The `SelectList` of genres is created by projecting the distinct genres.</span></span>
+<span data-ttu-id="3fccf-158">ジャンルの `SelectList` は、別個のジャンルを推定することで作成されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-158">The `SelectList` of genres is created by projecting the distinct genres.</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="2fbd1-159">ジャンル検索を Razor ページに追加する</span><span class="sxs-lookup"><span data-stu-id="2fbd1-159">Add search by genre to the Razor Page</span></span>
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="3fccf-159">ジャンル検索を Razor ページに追加する</span><span class="sxs-lookup"><span data-stu-id="3fccf-159">Add search by genre to the Razor Page</span></span>
 
-1. <span data-ttu-id="2fbd1-160">次のマークアップで強調表示されているように、 *Index.cshtml* [`<form>` 要素] (https://developer.mozilla.org/docs/Web/HTML/Element/form) ) を更新します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-160">Update the *Index.cshtml* [`<form>` element] (https://developer.mozilla.org/docs/Web/HTML/Element/form) as highlighted in the following markup:</span></span>
+1. <span data-ttu-id="3fccf-160">次のマークアップで強調表示されているように、 *Index.cshtml* [`<form>` 要素] (https://developer.mozilla.org/docs/Web/HTML/Element/form) ) を更新します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-160">Update the *Index.cshtml* [`<form>` element] (https://developer.mozilla.org/docs/Web/HTML/Element/form) as highlighted in the following markup:</span></span>
 
    [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
-1. <span data-ttu-id="2fbd1-161">ジャンルまたはムービーのタイトル、あるいはその両方で検索して、アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-161">Test the app by searching by genre, by movie title, and by both.</span></span>
+1. <span data-ttu-id="3fccf-161">ジャンルまたはムービーのタイトル、あるいはその両方で検索して、アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="3fccf-161">Test the app by searching by genre, by movie title, and by both.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="2fbd1-162">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="2fbd1-162">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="3fccf-162">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="3fccf-162">Additional resources</span></span>
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="2fbd1-163">[前へ:ページの更新](xref:tutorials/razor-pages/da1)
-> [次へ新しいフィールドの追加](xref:tutorials/razor-pages/new-field)</span><span class="sxs-lookup"><span data-stu-id="2fbd1-163">[Previous: Update the pages](xref:tutorials/razor-pages/da1)
+> <span data-ttu-id="3fccf-163">[前へ:ページの更新](xref:tutorials/razor-pages/da1)
+> [次へ新しいフィールドの追加](xref:tutorials/razor-pages/new-field)</span><span class="sxs-lookup"><span data-stu-id="3fccf-163">[Previous: Update the pages](xref:tutorials/razor-pages/da1)
 [Next: Add a new field](xref:tutorials/razor-pages/new-field)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="2fbd1-164">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-164">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="3fccf-164">[サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="3fccf-164">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
-<span data-ttu-id="2fbd1-165">次のセクションでは、*ジャンル* または *名前* による映画検索が追加されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-165">In the following sections, searching movies by *genre* or *name* is added.</span></span>
+<span data-ttu-id="3fccf-165">次のセクションでは、*ジャンル* または *名前* による映画検索が追加されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-165">In the following sections, searching movies by *genre* or *name* is added.</span></span>
 
-<span data-ttu-id="2fbd1-166">強調表示されている次のプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-166">Add the following highlighted properties to *Pages/Movies/Index.cshtml.cs*:</span></span>
+<span data-ttu-id="3fccf-166">強調表示されている次のプロパティを *Pages/Movies/Index.cshtml.cs* に追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-166">Add the following highlighted properties to *Pages/Movies/Index.cshtml.cs*:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* <span data-ttu-id="2fbd1-167">`SearchString`: ユーザーが検索テキスト ボックスに入力したテキストが含まれる。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-167">`SearchString`: Contains the text users enter in the search text box.</span></span> <span data-ttu-id="2fbd1-168">`SearchString` には、[`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性があります。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-168">`SearchString` has the [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) attribute.</span></span> <span data-ttu-id="2fbd1-169">`[BindProperty]` により、プロパティと同じ名前に基づきフォーム値とクエリ文字列がバインドされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-169">`[BindProperty]` binds form values and query strings with the same name as the property.</span></span> <span data-ttu-id="2fbd1-170">HTTP GET 要求でのバインドには `[BindProperty(SupportsGet = true)]` が必要です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-170">`[BindProperty(SupportsGet = true)]` is required for binding on HTTP GET requests.</span></span>
-* <span data-ttu-id="2fbd1-171">`Genres`: ジャンル一覧が含まれる。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-171">`Genres`: Contains the list of genres.</span></span> <span data-ttu-id="2fbd1-172">`Genres` により、ユーザーは一覧からジャンルを選択できます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-172">`Genres` allows the user to select a genre from the list.</span></span> <span data-ttu-id="2fbd1-173">`SelectList` には `using Microsoft.AspNetCore.Mvc.Rendering;` が必要です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-173">`SelectList` requires `using Microsoft.AspNetCore.Mvc.Rendering;`</span></span>
-* <span data-ttu-id="2fbd1-174">`MovieGenre`: ユーザーが選択する特定のジャンルが含まれる。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-174">`MovieGenre`: Contains the specific genre the user selects.</span></span> <span data-ttu-id="2fbd1-175">たとえば、"Western (西部劇)" です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-175">For example, "Western".</span></span>
-* <span data-ttu-id="2fbd1-176">`Genres` と `MovieGenre` は、このチュートリアルで後述します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-176">`Genres` and `MovieGenre` are used later in this tutorial.</span></span>
+* <span data-ttu-id="3fccf-167">`SearchString`: ユーザーが検索テキスト ボックスに入力したテキストが含まれる。</span><span class="sxs-lookup"><span data-stu-id="3fccf-167">`SearchString`: Contains the text users enter in the search text box.</span></span> <span data-ttu-id="3fccf-168">`SearchString` には、[`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性があります。</span><span class="sxs-lookup"><span data-stu-id="3fccf-168">`SearchString` has the [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) attribute.</span></span> <span data-ttu-id="3fccf-169">`[BindProperty]` により、プロパティと同じ名前に基づきフォーム値とクエリ文字列がバインドされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-169">`[BindProperty]` binds form values and query strings with the same name as the property.</span></span> <span data-ttu-id="3fccf-170">HTTP GET 要求でのバインドには `[BindProperty(SupportsGet = true)]` が必要です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-170">`[BindProperty(SupportsGet = true)]` is required for binding on HTTP GET requests.</span></span>
+* <span data-ttu-id="3fccf-171">`Genres`: ジャンル一覧が含まれる。</span><span class="sxs-lookup"><span data-stu-id="3fccf-171">`Genres`: Contains the list of genres.</span></span> <span data-ttu-id="3fccf-172">`Genres` により、ユーザーは一覧からジャンルを選択できます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-172">`Genres` allows the user to select a genre from the list.</span></span> <span data-ttu-id="3fccf-173">`SelectList` には `using Microsoft.AspNetCore.Mvc.Rendering;` が必要です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-173">`SelectList` requires `using Microsoft.AspNetCore.Mvc.Rendering;`</span></span>
+* <span data-ttu-id="3fccf-174">`MovieGenre`: ユーザーが選択する特定のジャンルが含まれる。</span><span class="sxs-lookup"><span data-stu-id="3fccf-174">`MovieGenre`: Contains the specific genre the user selects.</span></span> <span data-ttu-id="3fccf-175">たとえば、"Western (西部劇)" です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-175">For example, "Western".</span></span>
+* <span data-ttu-id="3fccf-176">`Genres` と `MovieGenre` は、このチュートリアルで後述します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-176">`Genres` and `MovieGenre` are used later in this tutorial.</span></span>
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-<span data-ttu-id="2fbd1-177">Index ページの `OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-177">Update the Index page's `OnGetAsync` method with the following code:</span></span>
+<span data-ttu-id="3fccf-177">Index ページの `OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-177">Update the Index page's `OnGetAsync` method with the following code:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
-<span data-ttu-id="2fbd1-178">`OnGetAsync` メソッドの最初の行により、ムービーを選択する [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-178">The first line of the `OnGetAsync` method creates a [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) query to select the movies:</span></span>
+<span data-ttu-id="3fccf-178">`OnGetAsync` メソッドの最初の行により、ムービーを選択する [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリが作成されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-178">The first line of the `OnGetAsync` method creates a [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) query to select the movies:</span></span>
 
 ```csharp
 // using System.Linq;
@@ -174,77 +172,77 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-<span data-ttu-id="2fbd1-179">このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません**。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-179">The query is *only* defined at this point, it has **not** been run against the database.</span></span>
+<span data-ttu-id="3fccf-179">このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません**。</span><span class="sxs-lookup"><span data-stu-id="3fccf-179">The query is *only* defined at this point, it has **not** been run against the database.</span></span>
 
-<span data-ttu-id="2fbd1-180">`SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-180">If the `SearchString` property is not null or empty, the movies query is modified to filter on the search string:</span></span>
+<span data-ttu-id="3fccf-180">`SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-180">If the `SearchString` property is not null or empty, the movies query is modified to filter on the search string:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchNull)]
 
-<span data-ttu-id="2fbd1-181">`s => s.Title.Contains()` コードは[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)です。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-181">The `s => s.Title.Contains()` code is a [Lambda Expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="2fbd1-182">ラムダは、メソッド ベースの [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリで、[Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) メソッドや `Contains` など、標準クエリ演算子メソッドの引数として使用されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-182">Lambdas are used in method-based [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) queries as arguments to standard query operator methods such as the [Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) method or `Contains`.</span></span> <span data-ttu-id="2fbd1-183">LINQ クエリは、`Where`、`Contains`、`OrderBy` などのメソッドの呼び出しで定義または変更されたときには実行されません。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-183">LINQ queries are not executed when they're defined or when they're modified by calling a method, such as `Where`, `Contains`  or `OrderBy`.</span></span> <span data-ttu-id="2fbd1-184">クエリ実行は先送りされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-184">Rather, query execution is deferred.</span></span> <span data-ttu-id="2fbd1-185">その具体値が繰り返されるか、`ToListAsync` メソッドが呼び出されるまで、式の評価が延ばされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-185">The evaluation of an expression is delayed until its realized value is iterated over or the `ToListAsync` method is called.</span></span> <span data-ttu-id="2fbd1-186">詳細については、「[クエリ実行](/dotnet/framework/data/adonet/ef/language-reference/query-execution)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-186">See [Query Execution](/dotnet/framework/data/adonet/ef/language-reference/query-execution) for more information.</span></span>
+<span data-ttu-id="3fccf-181">`s => s.Title.Contains()` コードは[ラムダ式](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)です。</span><span class="sxs-lookup"><span data-stu-id="3fccf-181">The `s => s.Title.Contains()` code is a [Lambda Expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="3fccf-182">ラムダは、メソッド ベースの [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) クエリで、[Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) メソッドや `Contains` など、標準クエリ演算子メソッドの引数として使用されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-182">Lambdas are used in method-based [LINQ](/dotnet/csharp/programming-guide/concepts/linq/) queries as arguments to standard query operator methods such as the [Where](/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) method or `Contains`.</span></span> <span data-ttu-id="3fccf-183">LINQ クエリは、`Where`、`Contains`、`OrderBy` などのメソッドの呼び出しで定義または変更されたときには実行されません。</span><span class="sxs-lookup"><span data-stu-id="3fccf-183">LINQ queries are not executed when they're defined or when they're modified by calling a method, such as `Where`, `Contains`  or `OrderBy`.</span></span> <span data-ttu-id="3fccf-184">クエリ実行は先送りされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-184">Rather, query execution is deferred.</span></span> <span data-ttu-id="3fccf-185">その具体値が繰り返されるか、`ToListAsync` メソッドが呼び出されるまで、式の評価が延ばされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-185">The evaluation of an expression is delayed until its realized value is iterated over or the `ToListAsync` method is called.</span></span> <span data-ttu-id="3fccf-186">詳細については、「[クエリ実行](/dotnet/framework/data/adonet/ef/language-reference/query-execution)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="3fccf-186">See [Query Execution](/dotnet/framework/data/adonet/ef/language-reference/query-execution) for more information.</span></span>
 
-<span data-ttu-id="2fbd1-187">**注:** [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) メソッドは C# コードではなく、データベースで実行されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-187">**Note:** The [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) method is run on the database, not in the C# code.</span></span> <span data-ttu-id="2fbd1-188">クエリの大文字と小文字の区別は、データベースや照合順序に依存します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-188">The case sensitivity on the query depends on the database and the collation.</span></span> <span data-ttu-id="2fbd1-189">SQL Server では、`Contains` は大文字/小文字の区別がない [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql) にマッピングされます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-189">On SQL Server, `Contains` maps to [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql), which is case insensitive.</span></span> <span data-ttu-id="2fbd1-190">SQLite では、既定の照合順序で、大文字と小文字が区別されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-190">In SQLite, with the default collation, it's case sensitive.</span></span>
+<span data-ttu-id="3fccf-187">**注:** [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) メソッドは C# コードではなく、データベースで実行されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-187">**Note:** The [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) method is run on the database, not in the C# code.</span></span> <span data-ttu-id="3fccf-188">クエリの大文字と小文字の区別は、データベースや照合順序に依存します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-188">The case sensitivity on the query depends on the database and the collation.</span></span> <span data-ttu-id="3fccf-189">SQL Server では、`Contains` は大文字/小文字の区別がない [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql) にマッピングされます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-189">On SQL Server, `Contains` maps to [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql), which is case insensitive.</span></span> <span data-ttu-id="3fccf-190">SQLite では、既定の照合順序で、大文字と小文字が区別されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-190">In SQLite, with the default collation, it's case sensitive.</span></span>
 
-<span data-ttu-id="2fbd1-191">ムービー ページに移動し、`?searchString=Ghost` のようなクエリ文字列を URL に追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-191">Navigate to the Movies page and append a query string such as `?searchString=Ghost` to the URL.</span></span> <span data-ttu-id="2fbd1-192">たとえば、「 `https://localhost:5001/Movies?searchString=Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-192">For example, `https://localhost:5001/Movies?searchString=Ghost`.</span></span> <span data-ttu-id="2fbd1-193">フィルターされたムービーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-193">The filtered movies are displayed.</span></span>
+<span data-ttu-id="3fccf-191">ムービー ページに移動し、`?searchString=Ghost` のようなクエリ文字列を URL に追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-191">Navigate to the Movies page and append a query string such as `?searchString=Ghost` to the URL.</span></span> <span data-ttu-id="3fccf-192">たとえば、「 `https://localhost:5001/Movies?searchString=Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-192">For example, `https://localhost:5001/Movies?searchString=Ghost`.</span></span> <span data-ttu-id="3fccf-193">フィルターされたムービーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-193">The filtered movies are displayed.</span></span>
 
 ![Indexビュー](search/_static/ghost.png)
 
-<span data-ttu-id="2fbd1-195">次のルート テンプレートが Index ページに追加される場合、検索文字列を URL セグメントとして渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-195">If the following route template is added to the Index page, the search string can be passed as a URL segment.</span></span> <span data-ttu-id="2fbd1-196">たとえば、「 `https://localhost:5001/Movies/Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-196">For example, `https://localhost:5001/Movies/Ghost`.</span></span>
+<span data-ttu-id="3fccf-195">次のルート テンプレートが Index ページに追加される場合、検索文字列を URL セグメントとして渡すことができます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-195">If the following route template is added to the Index page, the search string can be passed as a URL segment.</span></span> <span data-ttu-id="3fccf-196">たとえば、「 `https://localhost:5001/Movies/Ghost` 」のように入力します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-196">For example, `https://localhost:5001/Movies/Ghost`.</span></span>
 
 ```cshtml
 @page "{searchString?}"
 ```
 
-<span data-ttu-id="2fbd1-197">先のルート制約では、クエリ文字列値の代わりに、ルート データ (URL セグメント) として題名を検索できます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-197">The preceding route constraint allows searching the title as route data (a URL segment) instead of as a query string value.</span></span>  <span data-ttu-id="2fbd1-198">`"{searchString?}"` の `?` は、これが任意のルート パラメーターであることを意味します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-198">The `?` in `"{searchString?}"` means this is an optional route parameter.</span></span>
+<span data-ttu-id="3fccf-197">先のルート制約では、クエリ文字列値の代わりに、ルート データ (URL セグメント) として題名を検索できます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-197">The preceding route constraint allows searching the title as route data (a URL segment) instead of as a query string value.</span></span>  <span data-ttu-id="3fccf-198">`"{searchString?}"` の `?` は、これが任意のルート パラメーターであることを意味します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-198">The `?` in `"{searchString?}"` means this is an optional route parameter.</span></span>
 
 ![ghost という単語が URL に追加されたIndexビュー。Ghostbusters と Ghostbusters 2 という 2 本のムービーからなるムービー リストが返されています。](search/_static/g2.png)
 
-<span data-ttu-id="2fbd1-200">ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model-binding)を使用し、クエリ文字列 (`?searchString=Ghost`) またはルート データ (`https://localhost:5001/Movies/Ghost`) から `SearchString` プロパティの値が設定されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-200">The ASP.NET Core runtime uses [model binding](xref:mvc/models/model-binding) to set the value of the `SearchString` property from the query string (`?searchString=Ghost`) or route data (`https://localhost:5001/Movies/Ghost`).</span></span> <span data-ttu-id="2fbd1-201">モデル バインドでは、\**_大文字と小文字が区別されません_*。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-201">Model binding is \**_not_* _ case sensitive.</span></span>
+<span data-ttu-id="3fccf-200">ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model-binding)を使用し、クエリ文字列 (`?searchString=Ghost`) またはルート データ (`https://localhost:5001/Movies/Ghost`) から `SearchString` プロパティの値が設定されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-200">The ASP.NET Core runtime uses [model binding](xref:mvc/models/model-binding) to set the value of the `SearchString` property from the query string (`?searchString=Ghost`) or route data (`https://localhost:5001/Movies/Ghost`).</span></span> <span data-ttu-id="3fccf-201">モデル バインドでは、\**_大文字と小文字が区別されません_*。</span><span class="sxs-lookup"><span data-stu-id="3fccf-201">Model binding is \**_not_* _ case sensitive.</span></span>
 
-<span data-ttu-id="2fbd1-202">ただし、URL を変更してムービーを検索することをユーザーに求めることはできません。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-202">However, users can't be expected to modify the URL to search for a movie.</span></span> <span data-ttu-id="2fbd1-203">この手順では、ムービーを絞り込むための UI を追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-203">In this step, UI is added to filter movies.</span></span> <span data-ttu-id="2fbd1-204">ルート制約 `"{searchString?}"` を追加した場合、それを削除します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-204">If you added the route constraint `"{searchString?}"`, remove it.</span></span>
+<span data-ttu-id="3fccf-202">ただし、URL を変更してムービーを検索することをユーザーに求めることはできません。</span><span class="sxs-lookup"><span data-stu-id="3fccf-202">However, users can't be expected to modify the URL to search for a movie.</span></span> <span data-ttu-id="3fccf-203">この手順では、ムービーを絞り込むための UI を追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-203">In this step, UI is added to filter movies.</span></span> <span data-ttu-id="3fccf-204">ルート制約 `"{searchString?}"` を追加した場合、それを削除します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-204">If you added the route constraint `"{searchString?}"`, remove it.</span></span>
 
-<span data-ttu-id="2fbd1-205">_Pages/Movies/Index.cshtml\* ファイルを開き、次のコードで強調表示されている `<form>` マークアップを追加します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-205">Open the _Pages/Movies/Index.cshtml\* file, and add the `<form>` markup highlighted in the following code:</span></span>
+<span data-ttu-id="3fccf-205">_Pages/Movies/Index.cshtml\* ファイルを開き、次のコードで強調表示されている `<form>` マークアップを追加します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-205">Open the _Pages/Movies/Index.cshtml\* file, and add the `<form>` markup highlighted in the following code:</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index2.cshtml?highlight=14-19&range=1-22)]
 
-<span data-ttu-id="2fbd1-206">HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-206">The HTML `<form>` tag uses the following [Tag Helpers](xref:mvc/views/tag-helpers/intro):</span></span>
+<span data-ttu-id="3fccf-206">HTML `<form>` タグでは、次の[タグ ヘルパー](xref:mvc/views/tag-helpers/intro)が使用されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-206">The HTML `<form>` tag uses the following [Tag Helpers](xref:mvc/views/tag-helpers/intro):</span></span>
 
-* <span data-ttu-id="2fbd1-207">[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper)</span><span class="sxs-lookup"><span data-stu-id="2fbd1-207">[Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="2fbd1-208">フォームが提出されると、フィルター文字列がクエリ文字列経由で *ページ/ムービー/Index* ページに送信されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-208">When the form is submitted, the filter string is sent to the *Pages/Movies/Index* page via query string.</span></span>
-* [<span data-ttu-id="2fbd1-209">入力タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="2fbd1-209">Input Tag Helper</span></span>](xref:mvc/views/working-with-forms#the-input-tag-helper)
+* <span data-ttu-id="3fccf-207">[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms#the-form-tag-helper)</span><span class="sxs-lookup"><span data-stu-id="3fccf-207">[Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="3fccf-208">フォームが提出されると、フィルター文字列がクエリ文字列経由で *ページ/ムービー/Index* ページに送信されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-208">When the form is submitted, the filter string is sent to the *Pages/Movies/Index* page via query string.</span></span>
+* [<span data-ttu-id="3fccf-209">入力タグ ヘルパー</span><span class="sxs-lookup"><span data-stu-id="3fccf-209">Input Tag Helper</span></span>](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
-<span data-ttu-id="2fbd1-210">変更を保存し、フィルターをテストします。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-210">Save the changes and test the filter.</span></span>
+<span data-ttu-id="3fccf-210">変更を保存し、フィルターをテストします。</span><span class="sxs-lookup"><span data-stu-id="3fccf-210">Save the changes and test the filter.</span></span>
 
 ![タイトル フィルター テキストボックスに ghost という単語が入力されたIndexビュー](search/_static/filter.png)
 
-## <a name="search-by-genre"></a><span data-ttu-id="2fbd1-212">ジャンルで検索する</span><span class="sxs-lookup"><span data-stu-id="2fbd1-212">Search by genre</span></span>
+## <a name="search-by-genre"></a><span data-ttu-id="3fccf-212">ジャンルで検索する</span><span class="sxs-lookup"><span data-stu-id="3fccf-212">Search by genre</span></span>
 
-<span data-ttu-id="2fbd1-213">`OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-213">Update the `OnGetAsync` method with the following code:</span></span>
+<span data-ttu-id="3fccf-213">`OnGetAsync` メソッドを次のコードで更新します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-213">Update the `OnGetAsync` method with the following code:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SearchGenre)]
 
-<span data-ttu-id="2fbd1-214">次のコードは、データベースからすべてのジャンルを取得する LINQ クエリです。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-214">The following code is a LINQ query that retrieves all the genres from the database.</span></span>
+<span data-ttu-id="3fccf-214">次のコードは、データベースからすべてのジャンルを取得する LINQ クエリです。</span><span class="sxs-lookup"><span data-stu-id="3fccf-214">The following code is a LINQ query that retrieves all the genres from the database.</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_LINQ)]
 
-<span data-ttu-id="2fbd1-215">ジャンルの `SelectList` は、別個のジャンルを推定することで作成されます。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-215">The `SelectList` of genres is created by projecting the distinct genres.</span></span>
+<span data-ttu-id="3fccf-215">ジャンルの `SelectList` は、別個のジャンルを推定することで作成されます。</span><span class="sxs-lookup"><span data-stu-id="3fccf-215">The `SelectList` of genres is created by projecting the distinct genres.</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="2fbd1-216">ジャンル検索を Razor ページに追加する</span><span class="sxs-lookup"><span data-stu-id="2fbd1-216">Add search by genre to the Razor Page</span></span>
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a><span data-ttu-id="3fccf-216">ジャンル検索を Razor ページに追加する</span><span class="sxs-lookup"><span data-stu-id="3fccf-216">Add search by genre to the Razor Page</span></span>
 
-<span data-ttu-id="2fbd1-217">次のマークアップで強調表示されているように、 *Index.cshtml* [`<form>` 要素] (https://developer.mozilla.org/docs/Web/HTML/Element/form) ) を更新します。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-217">Update the *Index.cshtml* [`<form>` element] (https://developer.mozilla.org/docs/Web/HTML/Element/form) as highlighted in the following markup:</span></span>
+<span data-ttu-id="3fccf-217">次のマークアップで強調表示されているように、 *Index.cshtml* [`<form>` 要素] (https://developer.mozilla.org/docs/Web/HTML/Element/form) ) を更新します。</span><span class="sxs-lookup"><span data-stu-id="3fccf-217">Update the *Index.cshtml* [`<form>` element] (https://developer.mozilla.org/docs/Web/HTML/Element/form) as highlighted in the following markup:</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
-<span data-ttu-id="2fbd1-218">ジャンルまたはムービーのタイトル、あるいはその両方で検索して、アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-218">Test the app by searching by genre, by movie title, and by both.</span></span>
-<span data-ttu-id="2fbd1-219">前のコードでは、[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)とオプション タグ ヘルパーが使用されています。</span><span class="sxs-lookup"><span data-stu-id="2fbd1-219">The preceding code uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper) and Option Tag Helper.</span></span>
+<span data-ttu-id="3fccf-218">ジャンルまたはムービーのタイトル、あるいはその両方で検索して、アプリをテストします。</span><span class="sxs-lookup"><span data-stu-id="3fccf-218">Test the app by searching by genre, by movie title, and by both.</span></span>
+<span data-ttu-id="3fccf-219">前のコードでは、[選択タグ ヘルパー](xref:mvc/views/working-with-forms#the-select-tag-helper)とオプション タグ ヘルパーが使用されています。</span><span class="sxs-lookup"><span data-stu-id="3fccf-219">The preceding code uses the [Select Tag Helper](xref:mvc/views/working-with-forms#the-select-tag-helper) and Option Tag Helper.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="2fbd1-220">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="2fbd1-220">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="3fccf-220">その他の技術情報</span><span class="sxs-lookup"><span data-stu-id="3fccf-220">Additional resources</span></span>
 
-* [<span data-ttu-id="2fbd1-221">このチュートリアルの YouTube バージョン</span><span class="sxs-lookup"><span data-stu-id="2fbd1-221">YouTube version of this tutorial</span></span>](https://youtu.be/4B6pHtdyo08)
+* [<span data-ttu-id="3fccf-221">このチュートリアルの YouTube バージョン</span><span class="sxs-lookup"><span data-stu-id="3fccf-221">YouTube version of this tutorial</span></span>](https://youtu.be/4B6pHtdyo08)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="2fbd1-222">[前へ:ページの更新](xref:tutorials/razor-pages/da1)
-> [次へ新しいフィールドの追加](xref:tutorials/razor-pages/new-field)</span><span class="sxs-lookup"><span data-stu-id="2fbd1-222">[Previous: Update the pages](xref:tutorials/razor-pages/da1)
+> <span data-ttu-id="3fccf-222">[前へ:ページの更新](xref:tutorials/razor-pages/da1)
+> [次へ新しいフィールドの追加](xref:tutorials/razor-pages/new-field)</span><span class="sxs-lookup"><span data-stu-id="3fccf-222">[Previous: Update the pages](xref:tutorials/razor-pages/da1)
 [Next: Add a new field](xref:tutorials/razor-pages/new-field)</span></span>
 
 ::: moniker-end
