@@ -1,0 +1,1 @@
+<span data-ttu-id="c14fd-101">Firefox ブラウザーを信頼する方法の詳細については、「[Firefox SEC_ERROR_INADEQUATE_KEY_USAGE 証明書エラー](xref:security/enforcing-ssl#trust-ff)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="c14fd-101">For information on trusting the Firefox browser, see [Firefox SEC_ERROR_INADEQUATE_KEY_USAGE certificate error](xref:security/enforcing-ssl#trust-ff).</span></span>
