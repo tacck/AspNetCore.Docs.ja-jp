@@ -1,0 +1,1 @@
+Firefox ブラウザーを信頼する方法の詳細については、「[Firefox SEC_ERROR_INADEQUATE_KEY_USAGE 証明書エラー](xref:security/enforcing-ssl#trust-ff)」を参照してください。

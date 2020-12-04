@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/15/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: fa113a3e0a2a69fb4aa1318056dcfc6e261490f6
-ms.sourcegitcommit: 8b867c4cb0c3b39bbc4d2d87815610d2ef858ae7
+ms.openlocfilehash: 4b8bd9c886e615add6b0d3e372843a8ddb33ae18
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "96025028"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420046"
 ---
 # <a name="tutorial-get-started-with-no-locrazor-pages-in-aspnet-core"></a>チュートリアル: ASP.NET Core の Razor Pages の概要
 
@@ -43,7 +41,7 @@ ms.locfileid: "96025028"
 このチュートリアルでは、次の作業を行いました。
 
 > [!div class="checklist"]
-> * Razor Pages Web アプリをCreateする。
+> * Razor Pages Web アプリを作成する。
 > * アプリを実行します。
 > * プロジェクト ファイルを確認する
 
@@ -67,28 +65,28 @@ ms.locfileid: "96025028"
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>Razor Pages Web アプリをCreateする
+## <a name="create-a-no-locrazor-pages-web-app"></a>Razor Pages Web アプリを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Visual Studio を開始し、 **[新しいプロジェクトのCreate]** を選択します。 詳細については、「[Visual Studio で新しいプロジェクトをCreateする](/visualstudio/ide/create-new-project)」をご覧ください。
+1. Visual Studio を開始し、 **[新しいプロジェクトの作成]** を選択します。 詳細については、「[Visual Studio で新しいプロジェクトを作成する](/visualstudio/ide/create-new-project)」を参照してください。
 
    ![スタート ウィンドウから新しいプロジェクトを作成する](razor-pages-start/_static/5/start-window-create-new-project.png)
 
-1. **[新しいプロジェクトのCreate]** ダイアログで、 **[ASP.NET Core Web アプリケーション]** 、 **[次へ]** の順に選択します。
+1. **[新しいプロジェクト]** ダイアログで、 **[ASP.NET Core Web アプリケーション]** 、 **[次へ]** の順に選択します。
 
     ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/5/np.png)
     
 1. **[新しいプロジェクトの構成]** ダイアログで、 **[プロジェクト名]** に「`RazorPagesMovie`」と入力します。 サンプル コードのコピーおよび貼り付けを行う際に名前空間が一致するように、プロジェクトに *RazorPagesMovie* という (大文字と小文字が一致する) 名前を付けることが重要です。
 
-1. **Create** を選びます。
+1. **［作成］** を選択します
 
     ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/config.png)
 
-1. **[新しい ASP.NET Core Web アプリケーションのCreate]** ダイアログで、次のものを選択します。
+1. **[新しい ASP.NET Core Web アプリケーションの作成]** ダイアログで、次のものを選択します。
     1. ドロップダウンで **[.NET Core]** と **[ASP.NET Core 5.0]**
     1. **Web アプリケーション**。
-    1. **Create**.
+    1. **Create**。
 
      ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/5/npx.png)
 
@@ -128,7 +126,7 @@ ms.locfileid: "96025028"
     1. **[ターゲット フレームワーク]** を選択するオプションが表示された場合は、最新の .NET 5.x バージョンを選択します。
     1. **[次へ]** を選択します。
 
-1. プロジェクトに *RazorPagesMovie* という名前を付けて、 **[Create]** を選択します。
+1. プロジェクトに *RazorPagesMovie* という名前を付けて、 **[作成]** を選択します。
 
     ![macOS でプロジェクトに名前を付ける](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -191,7 +189,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的ア
 このチュートリアルでは、次の作業を行いました。
 
 > [!div class="checklist"]
-> * Razor Pages Web アプリをCreateする。
+> * Razor Pages Web アプリを作成する。
 > * アプリを実行します。
 > * プロジェクト ファイルを確認する
 
@@ -215,17 +213,17 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的ア
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>Razor Pages Web アプリをCreateする
+## <a name="create-a-no-locrazor-pages-web-app"></a>Razor Pages Web アプリを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。
-* 新しい ASP.NET CoreWeb アプリケーションをCreateし、 **[次へ]** を選択します。
+* 新しい ASP.NET CoreWeb アプリケーションを作成し、 **[次へ]** を選択します。
   ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/np_2.1.png)
 * プロジェクトに **RazorPagesMovie** という名前を付けます。 コードのコピーおよび貼り付けを行う際に名前空間が一致するように、プロジェクトに *RazorPagesMovie* という名前を付けることが重要です。
   ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/config.png)
 
-* ドロップダウンの **[ASP.NET Core 3.1]** 、 **[Web アプリケーション]** の順に選択し、 **[Create]** を選択します。
+* ドロップダウンの **[ASP.NET Core 3.1]** 、 **[Web アプリケーション]** の順に選択し、 **[作成]** を選択します。
 
 ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/3/npx.png)
 
@@ -270,7 +268,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的ア
 
   **[次へ]** を選択します。
 
-* プロジェクトに **RazorPagesMovie** という名前を付けて、 **[Create]** を選択します。
+* プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。
 
   ![macOS でプロジェクトに名前を付ける](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -333,7 +331,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 このチュートリアルでは、次の作業を行いました。
 
 > [!div class="checklist"]
-> * Razor Pages Web アプリをCreateする。
+> * Razor Pages Web アプリを作成する。
 > * アプリを実行します。
 > * プロジェクト ファイルを確認する
 
@@ -357,13 +355,13 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
 ---
 
-## <a name="no-loccreate-a-no-locrazor-pages-web-app"></a>Razor Pages Web アプリをCreateする
+## <a name="create-a-no-locrazor-pages-web-app"></a>Razor Pages Web アプリを作成する
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio の **[ファイル]** メニューから、 **[新規作成]** > **[プロジェクト]** の順に選択します。
 
-* 新しい ASP.NET CoreWeb アプリケーションをCreateし、 **[次へ]** を選択します。
+* 新しい ASP.NET CoreWeb アプリケーションを作成し、 **[次へ]** を選択します。
 
   ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/np_2.1.png)
 
@@ -371,7 +369,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
   ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/config.png)
 
-* ドロップダウンの **[ASP.NET Core 2.2]** 、 **[Web アプリケーション]** の順に選択し、 **[Create]** を選択します。
+* ドロップダウンの **[ASP.NET Core 2.2]** 、 **[Web アプリケーション]** の順に選択し、 **[作成]** を選択します。
 
 ![新しい ASP.NET Core Web アプリケーション](razor-pages-start/_static/np_2_2.2.png)
 
@@ -414,7 +412,7 @@ HTML ファイル、JavaScript ファイル、CSS ファイルなどの静的フ
 
   **[次へ]** を選択します。
 
-* プロジェクトに **RazorPagesMovie** という名前を付けて、 **[Create]** を選択します。
+* プロジェクトに **RazorPagesMovie** という名前を付けて、 **[作成]** を選択します。
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 

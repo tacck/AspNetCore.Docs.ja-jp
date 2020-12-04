@@ -4,14 +4,14 @@ author: codemillmatt
 description: Visual Studio を使用して Azure API Management に ASP.NET Core Web API を発行する方法を説明します。
 ms.author: masoucou
 ms.custom: devx-track-csharp, mvc
-ms.date: 08/26/2020
+ms.date: 11/22/2020
 uid: tutorials/publish-to-azure-api-management-using-vs
-ms.openlocfilehash: 3cc6b8c0bd93f133151e1c8ad18a55b11975a9be
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 395b5981a3018486235c38f032893f985ab71383
+ms.sourcegitcommit: 619200f2981656ede6d89adb6a22ad1a0e16da22
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945484"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96332224"
 ---
 # <a name="publish-an-aspnet-core-web-api-to-azure-api-management-with-visual-studio"></a>Visual Studio を使用して Azure API Management に ASP.NET Core Web API を発行する
 
@@ -77,7 +77,7 @@ ASP.NET Core Web API を Azure API Management に発行するには、次の手�
 
 ASP.NET Core Web API を Azure API Management に発行するには、次の手順のようにします。
 
-1. **ソリューション エクスプローラー**で、プロジェクトを右クリックして、 **[発行]** を選択します。
+1. **ソリューション エクスプローラー** で、プロジェクトを右クリックして、 **[発行]** を選択します。
 
     ![[発行] リンクが選択された状態でコンテキスト メニューが開きます](publish-to-azure-api-management-using-vs/_static/publish_menu.png)
 
@@ -108,11 +108,15 @@ ASP.NET Core Web API を Azure API Management に発行するには、次の手�
 
 1. 前に作成した API Management サービス インスタンスを Azure portal で開きます。 **[API]** ブレードを選択します。
 
-    ![API Management サービス インスタンスから選択した [API] ブレード](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+  ![API Management サービス インスタンスから選択した [API] ブレード](publish-to-azure-api-management-using-vs/_static/portal_api_overview.png)
+
+1. **Echo API** の横にある 3 つのドットを選択し、ポップアップ メニューから **[削除]** を選択して削除します。
+
+  ![API Management サービス インスタンスからの echo API の削除](publish-to-azure-api-management-using-vs/_static/portal_delete_echo.png)
 
 1. **[Add a new API]\(新しい API の追加\)** パネルで、 **[空の API]** タイルを選択します。
 
-    ![[空の API] タイルが強調表示されている画面](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
+  ![[空の API] タイルが強調表示されている画面](publish-to-azure-api-management-using-vs/_static/portal_api_create_blank.png)
 
 1. 表示される **[空の API の作成]** ダイアログで、次の値を入力します。    
 
@@ -179,7 +183,7 @@ API の名前が、自分で付けたものとは異なることに注意して�
     });
     ```
 
-1. 新しく作成された発行プロファイルを開きます。 **ソリューション エクスプローラー**の *Properties/PublishProfiles* フォルダー内にあります。
+1. 新しく作成された発行プロファイルを開きます。 **ソリューション エクスプローラー** の *Properties/PublishProfiles* フォルダー内にあります。
 
     ![発行プロファイル ファイルの場所が強調して示されているスクリーンショット](publish-to-azure-api-management-using-vs/_static/vs_publish_profile_highlighted.png)
 

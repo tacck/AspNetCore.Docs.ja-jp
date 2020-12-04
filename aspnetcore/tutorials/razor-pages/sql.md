@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/26/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 2c5bc221901d9e41984fb591755a8ad94e7e1420
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 6627825239d815d2c8bcad98e22340f07f921ab9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570238"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420020"
 ---
 # <a name="part-4-of-tutorial-series-on-no-locrazor-pages"></a>Razor ページのチュートリアル シリーズのパート 4。
 
@@ -118,7 +116,7 @@ SQLite データベースを管理および表示するためにダウンロー�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスをCreateします。
+次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -154,7 +152,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. データベース内のすべてのレコードをDeleteします。 ブラウザーの削除リンクを使用するか、[SSOX](xref:tutorials/razor-pages/new-field#ssox) から行います。
+1. データベース内のすべてのレコードを削除します。 ブラウザーの削除リンクを使用するか、[SSOX](xref:tutorials/razor-pages/new-field#ssox) から行います。
 
 1. `Startup` クラスでメソッドを呼び出してアプリを強制的に初期化して、シード メソッドが実行されるようにします。 強制的に初期化するには、IIS Express を停止してから再起動する必要があります。 次の方法のいずれかを使用して、IIS を停止してから再起動します。
 
@@ -169,7 +167,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-データベース内のすべてのレコードをDeleteします (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
+データベース内のすべてのレコードを削除します (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
 
 ---
 
@@ -272,7 +270,7 @@ SQLite データベースを管理および表示するためにダウンロー�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスをCreateします。
+次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -308,7 +306,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* データベース内のすべてのレコードをDeleteします。 ブラウザーの削除リンクを使用するか、[SSOX](xref:tutorials/razor-pages/new-field#ssox) から行います。
+* データベース内のすべてのレコードを削除します。 ブラウザーの削除リンクを使用するか、[SSOX](xref:tutorials/razor-pages/new-field#ssox) から行います。
 * `Startup` クラスでメソッドを呼び出してアプリを強制的に初期化して、シード メソッドが実行されるようにします。 強制的に初期化するには、IIS Express を停止してから再起動する必要があります。 次の方法のいずれかを使用して、IIS を停止してから再起動します。
 
   * 通知領域にある IIS Express システム トレイ アイコンを右クリックし、 **[終了]** または **[サイトの停止]** をタップします。
@@ -322,7 +320,7 @@ if (context.Movie.Any())
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-データベース内のすべてのレコードをDeleteします (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
+データベース内のすべてのレコードを削除します (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
 
 ---
 
@@ -416,7 +414,7 @@ LocalDB は、プログラム開発を対象にした、SQL Server Express デ�
 
 ## <a name="seed-the-database"></a>データベースのシード
 
-次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスをCreateします。
+次のコードを使用して、*Models* フォルダーに `SeedData` という名前の新しいクラスを作成します。
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -452,7 +450,7 @@ Login failed for user 'user name'.\(ユーザー 'ユーザー名' はログイ�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* データベース内のすべてのレコードをDeleteします。 これはブラウザーの削除リンクで行うか、[SSOX](xref:tutorials/razor-pages/new-field#ssox) から行うことができます。
+* データベース内のすべてのレコードを削除します。 これはブラウザーの削除リンクで行うか、[SSOX](xref:tutorials/razor-pages/new-field#ssox) から行うことができます。
 * `Startup` クラスでメソッドを呼び出してアプリを強制的に初期化して、シード メソッドが実行されるようにします。 強制的に初期化するには、IIS Express を停止してから再起動する必要があります。 これは次の方法のいずれかを使用して行うことができます。
 
   * 通知領域にある IIS Express システム トレイ アイコンを右クリックし、 **[終了]** または **[サイトの停止]** をタップします。
@@ -466,11 +464,11 @@ Login failed for user 'user name'.\(ユーザー 'ユーザー名' はログイ�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-データベース内のすべてのレコードをDeleteします (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
+データベース内のすべてのレコードを削除します (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-データベース内のすべてのレコードをDeleteします (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
+データベース内のすべてのレコードを削除します (そのため Seed メソッドが実行されます)。 アプリを停止および起動して、データベースをシードします。
 
 ---
 

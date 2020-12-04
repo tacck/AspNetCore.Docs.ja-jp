@@ -7,8 +7,6 @@ ms.custom: mvc
 ms.date: 09/29/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -21,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: d69ab3452f4f15e916049e5c772a20fe9f9fac65
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: f155922c9cb5ea7fdbad0963221ceddd19f4fe60
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570225"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419955"
 ---
 # <a name="part-8-of-tutorial-series-on-no-locrazor-pages"></a>Razor ページのチュートリアル シリーズのパート 8。
 
@@ -85,7 +83,7 @@ ASP.NET Core によって自動的に適用される検証規則を設定する�
 
 アプリを実行し、[Pages/Movies]/(ページ/ムービー/) に移動します。
 
-**[新規Create]** リンクを選択します。 いくつか無効な値を入力してフォームを設定します。 jQuery クライアント側検証がエラーを検出すると、エラー メッセージが表示されます。
+**[Create New]\(新規作成\)** リンクを選択します。 いくつか無効な値を入力してフォームを設定します。 jQuery クライアント側検証がエラーを検出すると、エラー メッセージが表示されます。
 
 ![複数 jQuery クライアント側検証エラーが表示されたムービー ビュー フォーム](validation/_static/val.png)
 
@@ -93,11 +91,11 @@ ASP.NET Core によって自動的に適用される検証規則を設定する�
 
 無効な値を含む各フィールドに、検証エラー メッセージが自動的に表示されることがわかります。 エラーは、JavaScript と jQuery を使用しているクライアント側で発生し、ユーザーが JavaScript を無効にしている場合はサーバー側でも発生します。
 
-大きな利点は、[Create] または [編集] ページのコードを変更する必要が **なかった** ことです。 データ注釈がモデルに適用された後、検証 UI が有効になりました。 このチュートリアルで作成した Razor Pages では、`Movie` モデル クラスのプロパティの検証属性を使用して、検証規則が自動的に選択されました。 [Edit]/(編集/) ページを使用して検証をテストすると、同じ検証が適用されます。
+大きな利点は、[Create]/(作成/) ページまたは [Edit]/(編集/) ページの変更が **必要ない** ことです。 データ注釈がモデルに適用された後、検証 UI が有効になりました。 このチュートリアルで作成した Razor Pages では、`Movie` モデル クラスのプロパティの検証属性を使用して、検証規則が自動的に選択されました。 [Edit]/(編集/) ページを使用して検証をテストすると、同じ検証が適用されます。
 
 クライアント側の検証エラーがなくなるまで、フォーム データはサーバーにポストされません。 次のうち 1 つまたは複数の方法で、フォーム データがポストされていないことを確認します。
 
-* `OnPostAsync` メソッドにブレークポイントを設定します。 **[Create]** または **[保存]** を選択してフォームを送信します。 ブレークポイントがヒットすることはありません。
+* `OnPostAsync` メソッドにブレークポイントを設定します。 フォームを送信するには、 **[Create]/(作成/)** または **[Save]/(保存/)** を選択します。 ブレークポイントがヒットすることはありません。
 * [Fiddler ツール](https://www.telerik.com/fiddler)を使用します。
 * ブラウザー開発者向けツールを使用して、ネットワーク トラフィックを監視します。
 
@@ -108,7 +106,7 @@ ASP.NET Core によって自動的に適用される検証規則を設定する�
 必要に応じて、サーバー側の検証をテストします。
 
 1. ブラウザーで JavaScript を無効にします。 ブラウザーの開発者ツールを使用して JavaScript を無効にすることができます。 ブラウザーで JavaScript を無効にすることができない場合は、別のブラウザーを試してください。
-1. [Create] または [編集] ページの `OnPostAsync` メソッドにブレークポイントを設定します。
+1. [Create] または [Edit] ページの `OnPostAsync` メソッドにブレークポイントを設定します。
 1. 無効なデータを含むフォームを送信します。
 1. モデルの状態が無効であることを確認します。
 
@@ -121,7 +119,7 @@ ASP.NET Core によって自動的に適用される検証規則を設定する�
   
 または、[サーバーでクライアント側の検証を無効にします](xref:mvc/models/validation#disable-client-side-validation)。
 
-次のコードは、チュートリアルで前にスキャフォールディング処理した *Create.cshtml* ページの一部を示しています。 これは、[Create] ページと [編集] ページで、以下を行うために使用されます。
+次のコードは、チュートリアルで前にスキャフォールディング処理した *Create.cshtml* ページの一部を示しています。 これは、[Create]/(作成/) ページと [Edit]/(編集/) ページで以下を行うために使用されます。
 
 * 最初のフォームを表示する。
 * エラーが発生した場合にフォームを再表示する。
@@ -130,7 +128,7 @@ ASP.NET Core によって自動的に適用される検証規則を設定する�
 
 [入力タグ ヘルパー](xref:mvc/views/working-with-forms)は [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 属性を使用し、クライアント側で jQuery 検証に必要な HTML 属性を生成します。 [検証タグ ヘルパー](xref:mvc/views/working-with-forms#the-validation-tag-helpers)には検証エラーが表示されます。 詳しくは、[検証に関する記事](xref:mvc/models/validation)をご覧ください。
 
-[Create] ページと [編集] ページに検証規則は含まれません。 検証規則とエラー文字列は、`Movie` クラスでのみ指定されています。 これらの検証規則は、`Movie` モデルを編集する Razor ページに自動的に適用されます。
+[Create] ページと [Edit] ページ内に検証規則はありません。 検証規則とエラー文字列は、`Movie` クラスでのみ指定されています。 これらの検証規則は、`Movie` モデルを編集する Razor ページに自動的に適用されます。
 
 検証ロジックの変更が必要な場合は、モデルでのみ変更します。 検証は常にアプリケーション全体に適用され、検証ロジックは 1 か所に定義されます。 検証が 1 か所であることは、コードが整理された状態を保つことを助け、保守と更新を簡単にします。
 

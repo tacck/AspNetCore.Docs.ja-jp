@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 7323cf11ad4556443def4068873e6805b449058a
-ms.sourcegitcommit: bce62ceaac7782e22d185814f2e8532c84efa472
+ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
+ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94674018"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320149"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 
@@ -125,7 +125,7 @@ To run the app after downloading the completed project:
 1. **［作成］** を選択します
 1. **[新しい ASP.NET Core Web アプリケーションの作成]** ダイアログで、次のものを選択します。
     1. ドロップダウンで **[.NET Core]** と **[ASP.NET Core 5.0]**
-    1. **ASP.NET Core Web アプリ (Model-View-Controller)**
+    1. **ASP.NET Core Web アプリ**。
     1. **[作成]** 
       ![[新しい ASP.NET Core プロジェクト] ダイアログ](~/data/ef-mvc/intro/_static/new-aspnet5.png)
     

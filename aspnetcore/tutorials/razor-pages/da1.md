@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/20/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 7146c1955a578502a63578de4f1abce932cb8b32
-ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
+ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/07/2020
-ms.locfileid: "94360609"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96419968"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>パート 5、ASP.NET Core アプリでの生成済みページの更新
 
@@ -55,7 +53,7 @@ ms.locfileid: "94360609"
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として https://localhost:1234/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/razor-pages/da1/edit7.png)
 
-**[編集]** 、 **[詳細]** 、 **[Delete]** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+**[Edit]\(編集\)** 、 **[Details]\(詳細\)** 、および **[Delete]\(削除\)** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -77,7 +75,7 @@ ms.locfileid: "94360609"
 
 ### <a name="add-route-template"></a>ルート テンプレートの追加
 
-`{id:int}` ルート テンプレートを使用するには、[編集]、[詳細]、[Delete] の Razor ページを更新します。 これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。 アプリを実行してから、ソースを表示します。
+`{id:int}` ルート テンプレートを使用するには、[編集]、[詳細]、[削除] の Razor ページを更新します。 これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。 アプリを実行してから、ソースを表示します。
 
 生成される HTML では、次のように URL のパス部分に ID を追加します。
 
@@ -117,7 +115,7 @@ ms.locfileid: "94360609"
 
 1. `catch (DbUpdateConcurrencyException)` にブレークポイントを設定します。
 1. ムービーの **[編集]** を選択し、変更を行います。ただし、 **[保存]** はしないでください。
-1. 別のブラウザー ウィンドウで、同じムービーの **[Delete]** リンクを選択してから、ムービーを削除します。
+1. 別のブラウザー ウィンドウで、同じムービーの **[削除]** リンクを選択してから、ムービーを削除します。
 1. 前のブラウザー ウィンドウで、ムービーに変更を投稿します。
 
 実稼働環境のコードが、コンカレンシーの競合を検出する可能性があります。 詳細については、[コンカレンシーの競合の処理](xref:data/ef-rp/concurrency)に関するページを参照してください。
@@ -146,7 +144,7 @@ Movies/Edit ページが投稿された場合:
 * モデルの状態にエラーがある (たとえば、`ReleaseDate` を日付に変換できない) 場合、送信された値を含むフォームが再表示されます。
 * モデル エラーがない場合、ムービーは保存されます。
 
-[Index]、[Create]、[Delete] Razor ページの HTTP GET メソッドも同様のパターンに従います。 [Create] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
+Index、[Create]/(作成/)、[Delete]\(削除\) Razor ページの HTTP GET メソッドも同様のパターンに従います。 [作成] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -176,7 +174,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として http://localhost:1234/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/razor-pages/da1/edit7.png)
 
-**[編集]** 、 **[詳細]** 、 **[Delete]** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+**[Edit]\(編集\)** 、 **[Details]\(詳細\)** 、および **[Delete]\(削除\)** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -194,7 +192,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 
 動的に生成されたリンクでは、クエリ文字列を含むムービー ID が渡されます。 たとえば、`https://localhost:5001/Movies/Details?id=1` の `?id=1` です。
 
-"{id:int}" ルート テンプレートを使用するには、[編集]、[詳細]、[Delete] Razor ページを更新します。 これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。 アプリを実行してから、ソースを表示します。 生成される HTML では、次のように URL のパス部分に ID を追加します。
+"{id:int}" ルート テンプレートを使用するには、[編集]、[詳細]、[削除] Razor ページを更新します。 これらの各ページのページ ディレクティブを `@page` から `@page "{id:int}"` に変更します。 アプリを実行してから、ソースを表示します。 生成される HTML では、次のように URL のパス部分に ID を追加します。
 
 ```html
 <td>
@@ -232,7 +230,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 
 * `catch (DbUpdateConcurrencyException)` へのブレークポイントの設定
 * ムービーの **[編集]** を選択し、変更を行います。ただし、 **[保存]** はしないでください。
-* 別のブラウザー ウィンドウで、同じムービーの **[Delete]** リンクを選択してから、ムービーを削除します。
+* 別のブラウザー ウィンドウで、同じムービーの **[削除]** リンクを選択してから、ムービーを削除します。
 * 前のブラウザー ウィンドウで、ムービーに変更を投稿します。
 
 実稼働環境のコードが、コンカレンシーの競合を検出する可能性があります。 詳細については、[コンカレンシーの競合の処理](xref:data/ef-rp/concurrency)に関するページを参照してください。
@@ -261,7 +259,7 @@ Movies/Edit ページが投稿された場合:
 * モデル状態にエラーがある (たとえば、`ReleaseDate` を日付に変換できない) 場合、フォームは送信された値で表示されます。
 * モデル エラーがない場合、ムービーは保存されます。
 
-[Index]、[Create]、[Delete] Razor ページの HTTP GET メソッドも同様のパターンに従います。 [Create] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
+Index、[Create]/(作成/)、[Delete]\(削除\) Razor ページの HTTP GET メソッドも同様のパターンに従います。 [作成] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
 
 次のチュートリアルでは検索を追加します。
 

@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 11/11/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 6244ac8798fb470a88802389961968fb52bd3c0a
-ms.sourcegitcommit: 202144092067ea81be1dbb229329518d781dbdfb
+ms.openlocfilehash: b2e840e20d034b42b2dc4a525b1dd76e44bbe3a8
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94550680"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420059"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する
 
@@ -143,11 +141,11 @@ ms.locfileid: "94550680"
 
 ## <a name="scaffold-the-movie-model"></a>ムービー モデルのスキャフォールディング
 
-このセクションでは、ムービー モデルがスキャフォールディングされます。 つまり、スキャフォールディング ツールにより、ムービー モデルの Create、読み取り、更新、および Delete (CRUD) 操作用のページが生成されます。
+このセクションでは、ムービー モデルがスキャフォールディングされます。 つまり、スキャフォールディング ツールにより、ムービー モデルの作成、読み取り、更新、削除の (CRUD) 操作用のページが生成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. *Pages/Movies* フォルダーをCreateします。
+1. *Pages/Movies* フォルダーを作成します。
    1. *Pages* フォルダーを右クリックし、 **[追加]** > **[新しいフォルダー]** を選択します。
    1. フォルダーに *Movies* という名前を付けます。
 
@@ -196,7 +194,7 @@ ms.locfileid: "94550680"
 | `-dc`  | 使用する `DbContext` クラス。 |
 | `-udl` | 既定のレイアウトを使用します。 |
 | `-outDir` | ビューを作成するための相対出力フォルダー パス。 |
-| `--referenceScriptLibraries` | [編集] および [Create] ページに `_ValidationScriptsPartial` を追加します。 |
+| `--referenceScriptLibraries` | [編集] および [作成] ページに `_ValidationScriptsPartial` を追加します。 |
 
 `aspnet-codegenerator razorpage` コマンドに関するヘルプを取得するには、`-h` オプションを使用します。
 
@@ -214,7 +212,7 @@ SQLite が選択されている場合、テンプレートで生成されたコ�
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. *Pages/Movies* フォルダーをCreateします。
+1. *Pages/Movies* フォルダーを作成します。
    1. Ctrl キーを押したまま *Pages* フォルダーをクリックし、 **[追加]** > **[新しいフォルダー]** を選択します。
    1. フォルダーに *Movies* という名前を付けます。
 
@@ -282,11 +280,11 @@ SQLite が選択されている場合、テンプレートで生成されたコ�
 
 <a name="pmc"></a>
 
-## <a name="no-loccreate-the-initial-database-schema-using-efs-migration-feature"></a>EF の移行機能を使用した初期データベース スキーマのCreate
+## <a name="create-the-initial-database-schema-using-efs-migration-feature"></a>EF の移行機能を使用して初期データベース スキーマを作成する
 
 Entity Framework Core の移行機能を使用すると、次のことができます。
 
-* 初期データベース スキーマのCreate。
+* 初期データベース スキーマを作成します。
 * データベース スキーマを増分方式で更新して、アプリケーションのデータ モデルとの同期を維持する。  データベース内の既存のデータは保持されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -326,7 +324,7 @@ Entity Framework Core の移行機能を使用すると、次のことができ�
 
 `migrations` コマンドによって最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます。 `InitialCreate` 引数は移行の命名に使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が選択されます。
 
-`update` コマンドにより、適用されていない移行で `Up` メソッドが実行されます。 ここでは、`update` により、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドが実行され、データベースが作成されます。
+`update` コマンドにより、適用されていない移行で `Up` メソッドが実行されます。 この場合、`update` により、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -340,7 +338,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-`RazorPagesMovieContext` では、`Movie` モデル用の EF Core 機能 (Create、読み取り、更新、Delete など) が調整されます。 データ コンテキスト (`RazorPagesMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext) から派生されます。 データ コンテキストによって、データ モデルに含めるエンティティが指定されます。
+`RazorPagesMovieContext` によって、`Movie` モデル用の EF Core 機能 (作成、読み取り、更新、削除など) が調整されます。 データ コンテキスト (`RazorPagesMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext) から派生されます。 データ コンテキストによって、データ モデルに含めるエンティティが指定されます。
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Data/RazorPagesMovieContext.cs)]
 
@@ -369,14 +367,14 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
    [移行手順](#pmc)を失敗しました。
 
-1. **Create** リンクをテストします。
+1. **[作成]** リンクをテストします。
 
-   ![Create ページ](model/_static/conan5.png)
+   ![[作成] ページ](model/_static/conan5.png)
 
    > [!NOTE]
    > `Price` フィールドに小数点のコンマを入力できない場合があります。 小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。 グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。
 
-1. **[編集]** 、 **[詳細]** 、および **Delete** の各リンクをテストします。
+1. **[編集]** 、 **[詳細]** 、および **[削除]** の各リンクをテストします。
 
 次のチュートリアルでは、スキャフォールディングによって作成されるファイルについて説明します。
 
@@ -509,11 +507,11 @@ using Microsoft.EntityFrameworkCore;
 
 ## <a name="scaffold-the-movie-model"></a>ムービー モデルのスキャフォールディング
 
-このセクションでは、ムービー モデルがスキャフォールディングされます。 つまり、スキャフォールディング ツールにより、ムービー モデルの Create、読み取り、更新、および Delete (CRUD) 操作用のページが生成されます。
+このセクションでは、ムービー モデルがスキャフォールディングされます。 つまり、スキャフォールディング ツールにより、ムービー モデルの作成、読み取り、更新、削除の (CRUD) 操作用のページが生成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*Pages/Movies* フォルダーをCreateします。
+*Pages/Movies* フォルダーを作成します。
 
 * *Pages* フォルダーを右クリックし、 **[追加]** > **[新しいフォルダー]** を選択します。
 * フォルダーに *Movies* という名前を付けます。
@@ -563,7 +561,7 @@ using Microsoft.EntityFrameworkCore;
 | `-dc`  | 使用する `DbContext` クラス。 |
 | `-udl` | 既定のレイアウトを使用します。 |
 | `-outDir` | ビューを作成するための相対出力フォルダー パス。 |
-| `--referenceScriptLibraries` | [編集] および [Create] ページに `_ValidationScriptsPartial` を追加します。 |
+| `--referenceScriptLibraries` | [編集] および [作成] ページに `_ValidationScriptsPartial` を追加します。 |
 
 `aspnet-codegenerator razorpage` コマンドに関するヘルプを取得するには、`-h` オプションを使用します。
 
@@ -581,7 +579,7 @@ SQLite が選択されている場合、テンプレートで生成されたコ�
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-*Pages/Movies* フォルダーをCreateします。
+*Pages/Movies* フォルダーを作成します。
 
 * *Pages* フォルダーを右クリックし、 **[追加]** > **[新しいフォルダー]** を選択します。
 * フォルダーに *Movies* という名前を付けます。
@@ -701,7 +699,7 @@ dotnet ef database update
 
 移行コマンドによって、最初のデータベース スキーマを作成するコードが生成されます。 このスキーマは、`DbContext` で指定されたモデルに基づきます。 `InitialCreate` 引数は移行の命名に使用されます。 任意の名前を使用できますが、規則により、移行を説明する名前が選択されます。
 
-`update` コマンドにより、適用されていない移行で `Up` メソッドが実行されます。 ここでは、`update` により、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルの `Up` メソッドが実行され、データベースが作成されます。
+`update` コマンドにより、適用されていない移行で `Up` メソッドが実行されます。 この場合、`update` により、*Migrations/\<time-stamp>_InitialCreate.cs* ファイルで `Up` メソッドが実行され、データベースが作成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -715,7 +713,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-`RazorPagesMovieContext` では、`Movie` モデル用の EF Core 機能 (Create、読み取り、更新、Delete など) が調整されます。 データ コンテキスト (`RazorPagesMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext) から派生されます。 データ コンテキストによって、データ モデルに含めるエンティティが指定されます。
+`RazorPagesMovieContext` によって、`Movie` モデル用の EF Core 機能 (作成、読み取り、更新、削除など) が調整されます。 データ コンテキスト (`RazorPagesMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext) から派生されます。 データ コンテキストによって、データ モデルに含めるエンティティが指定されます。
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
@@ -744,14 +742,14 @@ Login failed for user 'User-name'.
 
 [移行手順](#pmc)を失敗しました。
 
-* **Create** リンクをテストします。
+* **[作成]** リンクをテストします。
 
-  ![Create ページ](model/_static/conan5.png)
+  ![[作成] ページ](model/_static/conan5.png)
 
   > [!NOTE]
   > `Price` フィールドに小数点のコンマを入力できない場合があります。 小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。 グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。
 
-* **[編集]** 、 **[詳細]** 、および **Delete** の各リンクをテストします。
+* **[編集]** 、 **[詳細]** 、および **[削除]** の各リンクをテストします。
 
 次のチュートリアルでは、スキャフォールディングによって作成されるファイルについて説明します。
 
@@ -895,11 +893,11 @@ using Microsoft.EntityFrameworkCore;
 
 ## <a name="scaffold-the-movie-model"></a>ムービー モデルのスキャフォールディング
 
-このセクションでは、ムービー モデルがスキャフォールディングされます。 つまり、スキャフォールディング ツールにより、ムービー モデルの Create、読み取り、更新、および Delete (CRUD) 操作用のページが生成されます。
+このセクションでは、ムービー モデルがスキャフォールディングされます。 つまり、スキャフォールディング ツールにより、ムービー モデルの作成、読み取り、更新、削除の (CRUD) 操作用のページが生成されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*Pages/Movies* フォルダーをCreateします。
+*Pages/Movies* フォルダーを作成します。
 
 * *Pages* フォルダーを右クリックし、 **[追加]** > **[新しいフォルダー]** を選択します。
 * フォルダーに *Movies* という名前を付けます。
@@ -953,7 +951,7 @@ to use Data, it should not use models. That will make the namespace the same for
 | `-dc`  | 使用する `DbContext` クラス。 |
 | `-udl` | 既定のレイアウトを使用します。 |
 | `-outDir` | ビューを作成するための相対出力フォルダー パス。 |
-| `--referenceScriptLibraries` | [編集] および [Create] ページに `_ValidationScriptsPartial` を追加します。 |
+| `--referenceScriptLibraries` | [編集] および [作成] ページに `_ValidationScriptsPartial` を追加します。 |
 
 `aspnet-codegenerator razorpage` コマンドに関するヘルプを取得するには、`-h` オプションを使用します。
 
@@ -965,7 +963,7 @@ dotnet-aspnet-codegenerator razorpage -h
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-*Pages/Movies* フォルダーをCreateします。
+*Pages/Movies* フォルダーを作成します。
 
 * Ctrl キーを押したまま *Pages* フォルダーをクリックし、 **[追加]** > **[新しいフォルダー]** を選択します。
 * フォルダーに *Movies* という名前を付けます。
@@ -1058,7 +1056,7 @@ ASP.NET Core には、[依存関係挿入](xref:fundamentals/dependency-injectio
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
-`RazorPagesMovieContext` では、`Movie` モデル用の EF Core 機能 (Create、読み取り、更新、Delete など) が調整されます。 データ コンテキスト (`RazorPagesMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext) から派生されます。 データ コンテキストによって、データ モデルに含めるエンティティが指定されます。
+`RazorPagesMovieContext` によって、`Movie` モデル用の EF Core 機能 (作成、読み取り、更新、削除など) が調整されます。 データ コンテキスト (`RazorPagesMovieContext`) は [Microsoft.EntityFrameworkCore.DbContext](xref:Microsoft.EntityFrameworkCore.DbContext) から派生されます。 データ コンテキストによって、データ モデルに含めるエンティティが指定されます。
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -1087,14 +1085,14 @@ Login failed for user 'User-name'.
 
 [移行手順](#pmc)を失敗しました。
 
-* **Create** リンクをテストします。
+* **[作成]** リンクをテストします。
 
-  ![Create ページ](model/_static/conan.png)
+  ![[作成] ページ](model/_static/conan.png)
 
   > [!NOTE]
   > `Price` フィールドに小数点のコンマを入力できない場合があります。 小数点にコンマ (",") を使う英語以外のロケール、および英語 (米国) 以外の日付形式で、[jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する必要があります。 グローバル化の手順については、[この GitHub の記事](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)をご覧ください。
 
-* **[編集]** 、 **[詳細]** 、および **Delete** の各リンクをテストします。
+* **[編集]** 、 **[詳細]** 、および **[削除]** の各リンクをテストします。
 
 次のチュートリアルでは、スキャフォールディングによって作成されるファイルについて説明します。
 
