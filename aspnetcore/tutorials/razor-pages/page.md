@@ -6,8 +6,6 @@ ms.author: riande
 ms.date: 09/25/2020
 no-loc:
 - Index
-- Create
-- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -20,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: d655be26a794f87a0be07046ae1d6415256d592c
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: 4a5369b9e40de89ac9a1895466e7bdd7afb9d32e
+ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417631"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96420033"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>パート 3、ASP.NET Core でスキャフォールディングされた Razor ページ
 
@@ -47,7 +45,7 @@ ms.locfileid: "95417631"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>[Create]、[Delete]、[詳細]、[編集] ページ
+## <a name="the-create-delete-details-and-edit-pages"></a>[作成]、[削除]、[詳細]、および [編集] ページ
 
 *Pages/Movies/Index.cshtml.cs* ページ モデルを確認します。
 
@@ -151,7 +149,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 1. 変更内容を保存し、**RpMovie** リンクを選択してアプリをテストします。 問題がある場合は、GitHub の [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) ファイルを参照してください。
 
-1. **[Home]** 、 **[RpMovie]** 、 **[Create]** 、 **[Edit]** 、 **[Delete]** リンクをテストします。 各ページで、ブラウザー タブで表示できるタイトルを設定します。ページをブックマークすると、ブックマークでタイトルが使用されます。
+1. **[Home]\(ホーム\)** 、 **[RpMovie]** 、 **[Create]/(作成/)** 、 **[Edit]\(編集\)** 、 **[Delete]\(削除\)** のリンクをテストします。 各ページで、ブラウザー タブで表示できるタイトルを設定します。ページをブックマークすると、ブックマークでタイトルが使用されます。
 
 > [!NOTE]
 > `Price` フィールドに小数点のコンマを入力できない場合があります。 小数点にコンマ (",") を使い、英語 (米国) 以外の日付形式を使う英語以外のロケールの [jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する手順を行う必要があります。 小数点のコンマの追加方法については、[こちらの GitHub issue 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) を参照してください。
@@ -162,15 +160,15 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 上のマークアップでは、*Pages* フォルダーの下のすべての Razor ファイルに対して、レイアウト ファイルを *Pages/Shared/_Layout.cshtml* に設定します。 詳細については、「[Layout](xref:razor-pages/index#layout)」 (レイアウト) を参照してください。
 
-### <a name="the-no-loccreate-page-model"></a>Create ページ モデル
+### <a name="the-create-page-model"></a>Create ページのモデル
 
 *Pages/Movies/Create.cshtml.cs* ページ モデルを確認します。
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` メソッドは、ページに必要な状態を初期化します。 [Create] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルの後半では、状態を初期化する `OnGet` の例を示します。 `Page` メソッドでは、 *Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
+`OnGet` メソッドは、ページに必要な状態を初期化します。 [作成] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルの後半では、状態を初期化する `OnGet` の例を示します。 `Page` メソッドでは、*Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
 
-`Movie` プロパティでは [[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性を使用して、[モデル バインド](xref:mvc/models/model-binding)にオプトインします。 [Create] フォームでフォーム値が投稿されると、ASP.NET Core ランタイムが投稿された値を `Movie` モデルにバインドします。
+`Movie` プロパティでは [[BindProperty]](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) 属性を使用して、[モデル バインド](xref:mvc/models/model-binding)にオプトインします。 [作成] フォームでフォーム値が投稿されると、ASP.NET Core ランタイムが投稿された値を `Movie` モデルにバインドします。
 
 `OnPostAsync` メソッドは、ページでフォーム データが投稿されたときに実行されます。
 
@@ -183,7 +181,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 * データが保存されます。
 * ブラウザーは [Index] ページにリダイレクトされます。
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>[Create] Razor ページ
+### <a name="the-create-no-locrazor-page"></a>Razor の作成ページ
 
 次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 
@@ -237,7 +235,7 @@ Visual Studio に、タグ ヘルパーで使用される独特な太字のフ�
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="the-no-loccreate-no-locdelete-details-and-edit-pages"></a>[Create]、[Delete]、[詳細]、[編集] ページ
+## <a name="the-create-delete-details-and-edit-pages"></a>[作成]、[削除]、[詳細]、および [編集] ページ
 
 *Pages/Movies/Index.cshtml.cs* ページ モデルを確認します。
 
@@ -326,7 +324,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 変更内容を保存し、**RpMovie** リンクをクリックしてアプリをテストします。 問題がある場合は、GitHub の [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) ファイルを参照してください。
 
-その他のリンク ( **[Home]** 、 **[RpMovie]** 、 **[Create]** 、 **[Edit]** 、 **[Delete]** ) をテストします。 各ページで、ブラウザー タブで表示できるタイトルを設定します。ページをブックマークすると、ブックマークでタイトルが使用されます。
+その他のリンク ( **[Home]** 、 **[RpMovie]** 、 **[Create]** 、 **[Edit]** 、および **[Delete]** ) をテストします。 各ページで、ブラウザー タブで表示できるタイトルを設定します。ページをブックマークすると、ブックマークでタイトルが使用されます。
 
 > [!NOTE]
 > `Price` フィールドに小数点のコンマを入力できない場合があります。 小数点にコンマ (",") を使い、英語 (米国) 以外の日付形式を使う英語以外のロケールの [jQuery 検証](https://jqueryvalidation.org/)をサポートするには、アプリをグローバル化する手順を行う必要があります。 小数点のコンマの追加方法については、[こちらの GitHub issue 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) を参照してください。
@@ -337,15 +335,15 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 上のマークアップでは、*Pages* フォルダーの下のすべての Razor ファイルに対して、レイアウト ファイルを *Pages/Shared/_Layout.cshtml* に設定します。 詳細については、「[Layout](xref:razor-pages/index#layout)」 (レイアウト) を参照してください。
 
-### <a name="the-no-loccreate-page-model"></a>Create ページ モデル
+### <a name="the-create-page-model"></a>Create ページのモデル
 
 *Pages/Movies/Create.cshtml.cs* ページ モデルを確認します。
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` メソッドは、ページに必要な状態を初期化します。 [Create] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルで後ほど、`OnGet` メソッドの状態の初期化を確認できます。 `Page` メソッドでは、 *Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
+`OnGet` メソッドは、ページに必要な状態を初期化します。 [作成] ページには初期化する状態はないため、`Page` が返されます。 このチュートリアルで後ほど、`OnGet` メソッドの状態の初期化を確認できます。 `Page` メソッドでは、*Create.cshtml* ページをレンダリングする `PageResult` オブジェクトが作成されます。
 
-`Movie` プロパティでは [BindProperty]<xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> 属性を使用して、[モデル バインド](xref:mvc/models/model-binding)にオプトインします。 [Create] フォームでフォーム値が投稿されると、ASP.NET Core ランタイムが投稿された値を `Movie` モデルにバインドします。
+`Movie` プロパティでは [BindProperty]<xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute> 属性を使用して、[モデル バインド](xref:mvc/models/model-binding)にオプトインします。 [作成] フォームでフォーム値が投稿されると、ASP.NET Core ランタイムが投稿された値を `Movie` モデルにバインドします。
 
 `OnPostAsync` メソッドは、ページでフォーム データが投稿されたときに実行されます。
 
@@ -355,7 +353,7 @@ Razor では、HTML から C# または Razor 固有のマークアップに移�
 
 モデル エラーがない場合、データは保存され、ブラウザーは [Index] ページにリダイレクトされます。
 
-### <a name="the-no-loccreate-no-locrazor-page"></a>[Create] Razor ページ
+### <a name="the-create-no-locrazor-page"></a>Razor の作成ページ
 
 次のように、*Pages/Movies/Create.cshtml* Razor ページ ファイルを確認します。
 
