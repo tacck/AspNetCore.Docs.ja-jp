@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 06f55647ba2bb41152e16bb054e098abbe157cb8
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa51e53284bc25629b3975ff0e6de967b9a2b866
+ms.sourcegitcommit: 0bcc0d6df3145a0727da7c4be2f4bda8f27eeaa3
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059365"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96513123"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core のミドルウェア
 
@@ -39,7 +39,7 @@ ms.locfileid: "93059365"
 
 要求デリゲートは、要求パイプラインの構築に使用されます。 要求デリゲートは、各 HTTP 要求を処理します。
 
-要求デリゲートは、<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A>、<xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> の各拡張メソッドを使って構成されます。 個々の要求デリゲートは、匿名メソッドとしてインラインで指定するか (インライン ミドルウェアと呼ばれます)、または再利用可能なクラスで定義することができます。 これらの再利用可能なクラスとインラインの匿名メソッドは、" *ミドルウェア* " です。" *ミドルウェア コンポーネント* " とも呼ばれます。 要求パイプライン内の各ミドルウェア コンポーネントは、パイプラインの次のコンポーネントを呼び出すか、パイプラインをショートさせます。 ショートサーキットしたミドルウェアは " *ターミナル ミドルウェア* " と呼ばれます。これによってさらなるミドルウェアによる要求の処理が回避されるためです。
+要求デリゲートは、<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A>、<xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> の各拡張メソッドを使って構成されます。 個々の要求デリゲートは、匿名メソッドとしてインラインで指定するか (インライン ミドルウェアと呼ばれます)、または再利用可能なクラスで定義することができます。 これらの再利用可能なクラスとインラインの匿名メソッドは、"*ミドルウェア*" です。"*ミドルウェア コンポーネント*" とも呼ばれます。 要求パイプライン内の各ミドルウェア コンポーネントは、パイプラインの次のコンポーネントを呼び出すか、パイプラインをショートさせます。 ショートサーキットしたミドルウェアは "*ターミナル ミドルウェア*" と呼ばれます。これによってさらなるミドルウェアによる要求の処理が回避されるためです。
 
 <xref:migration/http-modules> では、ASP.NET Core と ASP.NET 4.x の要求パイプラインの違いについて説明し、その他のミドルウェア サンプルが提供されています。
 
@@ -55,11 +55,11 @@ ASP.NET Core 要求パイプラインは、順番に呼び出される一連の�
 
 [!code-csharp[](index/snapshot/Middleware/Startup.cs)]
 
-複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します *next* パラメーターを " *呼び出さない* " ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
+複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します *next* パラメーターを "*呼び出さない*" ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=5-10)]
 
-デリゲートが次のデリゲートに要求を渡さない場合、これは " *要求パイプラインのショートサーキット* " と呼ばれます。 不要な処理を回避するために、ショートさせることが望ましい場合がよくあります。 たとえば、 [静的ファイル ミドルウェア](xref:fundamentals/static-files)は、静的ファイルの要求を処理して残りのパイプラインをショートサーキットすることにより、" *ターミナル ミドルウェア* " として動作させることができます。 後続の処理を終了させるミドルウェアの前にパイプラインに追加されたミドルウェアでは、その `next.Invoke` ステートメントの後も引き続きコードが処理されます。 ただし、既に送信された応答に対する書き込みの試行については、次の警告を参照してください。
+デリゲートが次のデリゲートに要求を渡さない場合、これは "*要求パイプラインのショートサーキット*" と呼ばれます。 不要な処理を回避するために、ショートさせることが望ましい場合がよくあります。 たとえば、[静的ファイル ミドルウェア](xref:fundamentals/static-files)は、静的ファイルの要求を処理して残りのパイプラインをショートサーキットすることにより、"*ターミナル ミドルウェア*" として動作させることができます。 後続の処理を終了させるミドルウェアの前にパイプラインに追加されたミドルウェアでは、その `next.Invoke` ステートメントの後も引き続きコードが処理されます。 ただし、既に送信された応答に対する書き込みの試行については、次の警告を参照してください。
 
 > [!WARNING]
 > 応答がクライアントに送信された後に、`next.Invoke` を呼び出さないでください。 応答が開始した後で <xref:Microsoft.AspNetCore.Http.HttpResponse> を変更すると、例外がスローされます。 たとえば、[ヘッダーや状態コードを設定すると、例外がスローされます](xref:performance/performance-best-practices#do-not-modify-the-status-code-or-headers-after-the-response-body-has-started)。 `next` を呼び出した後で応答本文に書き込むと、次のようになります。
@@ -90,7 +90,7 @@ ASP.NET Core 要求パイプラインは、順番に呼び出される一連の�
 
 `Startup.Configure` メソッドでミドルウェア コンポーネントを追加する順序は、要求でミドルウェア コンポーネントが呼び出される順序および応答での逆の順序を定義します。 この順序は、セキュリティ、パフォーマンス、および機能にとって **重要** です。
 
-次の `Startup.Configure` メソッドでは、セキュリティ関連のミドルウェア コンポーネントが推奨される順序で追加されています。
+次の `Startup.Configure` メソッドでは、セキュリティ関連のミドルウェア コンポーネントが、一般的な推奨される順序で追加されています。
 
 [!code-csharp[](index/snapshot/StartupAll3.cs?name=snippet)]
 
@@ -100,6 +100,23 @@ ASP.NET Core 要求パイプラインは、順番に呼び出される一連の�
 * すべてのミドルウェアを厳密にこの順序で追加する必要があるわけではありませんが、多くはそうする必要があります。 次に例を示します。
   * `UseCors`、`UseAuthentication`、`UseAuthorization` は、示されている順序で追加する必要があります。
   * 現時点では、[こちらのバグ](https://github.com/dotnet/aspnetcore/issues/23218)のため、`UseResponseCaching` の前に `UseCors` を追加する必要があります。
+
+一部のシナリオでは、ミドルウェアの順序が異なる場合があります。 たとえば、キャッシュと圧縮の順序はシナリオ固有のものであり、複数の有効な順序があります。 次に例を示します。
+
+```csharp
+app.UseResponseCaching();
+app.UseResponseCompression();
+```
+
+上記のコードでは、圧縮された応答をキャッシュすることによって CPU を節約できますが、gzip や brotli などの異なる圧縮アルゴリズムを使用してリソースの複数の表現をキャッシュすることができます。
+
+次の順序では、圧縮された静的ファイルをキャッシュできるように、静的ファイルが結合されます。
+
+```csharp
+app.UseResponseCaching
+app.UseResponseCompression
+app.UseStaticFiles
+```
 
 次の `Startup.Configure` メソッドにより、共通アプリ シナリオのためのミドルウェア コンポーネントが追加されます。
 
@@ -164,7 +181,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 パイプラインに追加された最初のミドルウェア コンポーネントは <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> です。 そのため、例外ハンドラー ミドルウェアでは、以降の呼び出しで発生するすべての例外がキャッチされます。
 
-静的ファイル ミドルウェアはパイプラインの早い段階で呼び出されるので、要求を処理し、残りのコンポーネントを通過せずにショートさせることができます。 静的ファイル ミドルウェアでは、承認チェックは提供 **されません** 。 *wwwroot* の下にあるものも含め、この静的ファイル ミドルウェアによって提供されるすべてのファイルは、一般に公開されます。 静的ファイルを保護する方法については、「<xref:fundamentals/static-files>」を参照してください。
+静的ファイル ミドルウェアはパイプラインの早い段階で呼び出されるので、要求を処理し、残りのコンポーネントを通過せずにショートさせることができます。 静的ファイル ミドルウェアでは、承認チェックは提供 **されません**。 *wwwroot* の下にあるものも含め、この静的ファイル ミドルウェアによって提供されるすべてのファイルは、一般に公開されます。 静的ファイルを保護する方法については、「<xref:fundamentals/static-files>」を参照してください。
 
 要求が静的ファイル ミドルウェアによって処理されない場合、要求は認証を実行する認証ミドルウェア (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>) に渡されます。 認証は、認証されない要求をショートさせません。 認証ミドルウェアは要求を認証しますが、承認 (および却下) は、MVC が特定の Razor ページまたは MVC コントローラーとアクションを選んだ後でのみ行われます。
 
@@ -249,7 +266,7 @@ app.Map("/level1", level1App => {
 
 ## <a name="built-in-middleware"></a>組み込みミドルウェア
 
-ASP.NET Core には、次のミドルウェア コンポーネントが付属しています。 " *順番* " 列には、要求を処理するパイプライン内のミドルウェアの配置と、ミドルウェアが要求処理を終了する条件に関するメモが記載されています。 ミドルウェアが要求を処理するパイプラインをショートサーキットし、下流のさらなるミドルウェアによる要求の処理を回避する場合、これは " *ターミナル ミドルウェア* " と呼ばれます。 ショートサーキットについて詳しくは、「[IApplicationBuilder を使用したミドルウェア パイプラインの作成](#create-a-middleware-pipeline-with-iapplicationbuilder)」セクションをご覧ください。
+ASP.NET Core には、次のミドルウェア コンポーネントが付属しています。 "*順番*" 列には、要求を処理するパイプライン内のミドルウェアの配置と、ミドルウェアが要求処理を終了する条件に関するメモが記載されています。 ミドルウェアが要求を処理するパイプラインをショートサーキットし、下流のさらなるミドルウェアによる要求の処理を回避する場合、これは "*ターミナル ミドルウェア*" と呼ばれます。 ショートサーキットについて詳しくは、「[IApplicationBuilder を使用したミドルウェア パイプラインの作成](#create-a-middleware-pipeline-with-iapplicationbuilder)」セクションをご覧ください。
 
 | ミドルウェア | 説明 | 順番 |
 | ---------- | ----------- | ----- |
@@ -278,7 +295,7 @@ ASP.NET Core には、次のミドルウェア コンポーネントが付属し
 
 ## <a name="additional-resources"></a>その他の技術情報
 
-* [有効期間と登録のオプション](xref:fundamentals/dependency-injection#lifetime-and-registration-options)には、 *スコープ* 、 *一時* 、 *シングルトン* 有効期間サービスを含むミドルウェアの完全なサンプルが含まれています。
+* [有効期間と登録のオプション](xref:fundamentals/dependency-injection#lifetime-and-registration-options)には、*スコープ*、*一時*、*シングルトン* 有効期間サービスを含むミドルウェアの完全なサンプルが含まれています。
 * <xref:fundamentals/middleware/write>
 * <xref:test/middleware>
 * <xref:migration/http-modules>
@@ -300,7 +317,7 @@ ASP.NET Core には、次のミドルウェア コンポーネントが付属し
 
 要求デリゲートは、要求パイプラインの構築に使用されます。 要求デリゲートは、各 HTTP 要求を処理します。
 
-要求デリゲートは、<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A>、<xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> の各拡張メソッドを使って構成されます。 個々の要求デリゲートは、匿名メソッドとしてインラインで指定するか (インライン ミドルウェアと呼ばれます)、または再利用可能なクラスで定義することができます。 これらの再利用可能なクラスとインラインの匿名メソッドは、" *ミドルウェア* " です。" *ミドルウェア コンポーネント* " とも呼ばれます。 要求パイプライン内の各ミドルウェア コンポーネントは、パイプラインの次のコンポーネントを呼び出すか、パイプラインをショートさせます。 ショートサーキットしたミドルウェアは " *ターミナル ミドルウェア* " と呼ばれます。これによってさらなるミドルウェアによる要求の処理が回避されるためです。
+要求デリゲートは、<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>、<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A>、<xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> の各拡張メソッドを使って構成されます。 個々の要求デリゲートは、匿名メソッドとしてインラインで指定するか (インライン ミドルウェアと呼ばれます)、または再利用可能なクラスで定義することができます。 これらの再利用可能なクラスとインラインの匿名メソッドは、"*ミドルウェア*" です。"*ミドルウェア コンポーネント*" とも呼ばれます。 要求パイプライン内の各ミドルウェア コンポーネントは、パイプラインの次のコンポーネントを呼び出すか、パイプラインをショートさせます。 ショートサーキットしたミドルウェアは "*ターミナル ミドルウェア*" と呼ばれます。これによってさらなるミドルウェアによる要求の処理が回避されるためです。
 
 <xref:migration/http-modules> では、ASP.NET Core と ASP.NET 4.x の要求パイプラインの違いについて説明し、その他のミドルウェア サンプルが提供されています。
 
@@ -318,11 +335,11 @@ ASP.NET Core 要求パイプラインは、順番に呼び出される一連の�
 
 最初の <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> デリゲートが、パイプラインを終了します。
 
-複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します *next* パラメーターを " *呼び出さない* " ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
+複数の要求デリゲートを <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> と一緒にチェーンします。 `next` パラメーターは、パイプラインの次のデリゲートを表します *next* パラメーターを "*呼び出さない*" ことで、パイプラインをショートさせることができます。 次の例で示すように、通常は、次のデリゲートの前と後の両方でアクションを実行できます。
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs)]
 
-デリゲートが次のデリゲートに要求を渡さない場合、これは " *要求パイプラインのショートサーキット* " と呼ばれます。 不要な処理を回避するために、ショートさせることが望ましい場合がよくあります。 たとえば、 [静的ファイル ミドルウェア](xref:fundamentals/static-files)は、静的ファイルの要求を処理して残りのパイプラインをショートサーキットすることにより、" *ターミナル ミドルウェア* " として動作させることができます。 後続の処理を終了させるミドルウェアの前にパイプラインに追加されたミドルウェアでは、その `next.Invoke` ステートメントの後も引き続きコードが処理されます。 ただし、既に送信された応答に対する書き込みの試行については、次の警告を参照してください。
+デリゲートが次のデリゲートに要求を渡さない場合、これは "*要求パイプラインのショートサーキット*" と呼ばれます。 不要な処理を回避するために、ショートさせることが望ましい場合がよくあります。 たとえば、[静的ファイル ミドルウェア](xref:fundamentals/static-files)は、静的ファイルの要求を処理して残りのパイプラインをショートサーキットすることにより、"*ターミナル ミドルウェア*" として動作させることができます。 後続の処理を終了させるミドルウェアの前にパイプラインに追加されたミドルウェアでは、その `next.Invoke` ステートメントの後も引き続きコードが処理されます。 ただし、既に送信された応答に対する書き込みの試行については、次の警告を参照してください。
 
 > [!WARNING]
 > 応答がクライアントに送信された後に、`next.Invoke` を呼び出さないでください。 応答が開始した後で <xref:Microsoft.AspNetCore.Http.HttpResponse> を変更すると、例外がスローされます。 たとえば、ヘッダーや状態コードの設定などの変更があると、例外がスローされます。 `next` を呼び出した後で応答本文に書き込むと、次のようになります。
@@ -390,7 +407,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 パイプラインに追加された最初のミドルウェア コンポーネントは <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> です。 そのため、例外ハンドラー ミドルウェアでは、以降の呼び出しで発生するすべての例外がキャッチされます。
 
-静的ファイル ミドルウェアはパイプラインの早い段階で呼び出されるので、要求を処理し、残りのコンポーネントを通過せずにショートさせることができます。 静的ファイル ミドルウェアでは、承認チェックは提供 **されません** 。 *wwwroot* の下にあるものも含め、この静的ファイル ミドルウェアによって提供されるすべてのファイルは、一般に公開されます。 静的ファイルを保護する方法については、「<xref:fundamentals/static-files>」を参照してください。
+静的ファイル ミドルウェアはパイプラインの早い段階で呼び出されるので、要求を処理し、残りのコンポーネントを通過せずにショートさせることができます。 静的ファイル ミドルウェアでは、承認チェックは提供 **されません**。 *wwwroot* の下にあるものも含め、この静的ファイル ミドルウェアによって提供されるすべてのファイルは、一般に公開されます。 静的ファイルを保護する方法については、「<xref:fundamentals/static-files>」を参照してください。
 
 要求が静的ファイル ミドルウェアによって処理されない場合、要求は認証を実行する認証ミドルウェア (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>) に渡されます。 認証は、認証されない要求をショートさせません。 認証ミドルウェアは要求を認証しますが、承認 (および却下) は、MVC が特定の Razor ページまたは MVC コントローラーとアクションを選んだ後でのみ行われます。
 
@@ -457,7 +474,7 @@ app.Map("/level1", level1App => {
 
 ## <a name="built-in-middleware"></a>組み込みミドルウェア
 
-ASP.NET Core には、次のミドルウェア コンポーネントが付属しています。 " *順番* " 列には、要求を処理するパイプライン内のミドルウェアの配置と、ミドルウェアが要求処理を終了する条件に関するメモが記載されています。 ミドルウェアが要求を処理するパイプラインをショートサーキットし、下流のさらなるミドルウェアによる要求の処理を回避する場合、これは " *ターミナル ミドルウェア* " と呼ばれます。 ショートサーキットについて詳しくは、「[IApplicationBuilder を使用したミドルウェア パイプラインの作成](#create-a-middleware-pipeline-with-iapplicationbuilder)」セクションをご覧ください。
+ASP.NET Core には、次のミドルウェア コンポーネントが付属しています。 "*順番*" 列には、要求を処理するパイプライン内のミドルウェアの配置と、ミドルウェアが要求処理を終了する条件に関するメモが記載されています。 ミドルウェアが要求を処理するパイプラインをショートサーキットし、下流のさらなるミドルウェアによる要求の処理を回避する場合、これは "*ターミナル ミドルウェア*" と呼ばれます。 ショートサーキットについて詳しくは、「[IApplicationBuilder を使用したミドルウェア パイプラインの作成](#create-a-middleware-pipeline-with-iapplicationbuilder)」セクションをご覧ください。
 
 | ミドルウェア | 説明 | 順番 |
 | ---------- | ----------- | ----- |
