@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: b87986442bb8127f03df1f7ecff8167cafa27fdf
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: a2738ab40e2a463a0166ce8916ed6f1b05ea1d08
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035685"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855379"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントの作成と使用
 
@@ -274,6 +274,13 @@ namespace BlazorSample
 
 [!code-razor[](../common/samples/5.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
+コンポーネント パラメーターには、既定値を割り当てることができます。
+
+```csharp
+[Parameter]
+public string Title { get; set; } = "Panel Title from Child";
+```
+
 サンプル アプリの次の例では、`ParentComponent` によって `ChildComponent` の `Title` プロパティの値を設定しています。
 
 `Pages/ParentComponent.razor`:
@@ -461,7 +468,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 }
 ```
 
-コンポーネントがレンダリングされると、`loginDialog` フィールドに `MyLoginDialog` 子コンポーネント インスタンスが設定されます。 これにより、コンポーネント インスタンスに対し、.NET メソッドを呼び出すことができます。
+コンポーネントがレンダリングされると、`loginDialog` フィールドに `CustomLoginDialog` 子コンポーネント インスタンスが設定されます。 これにより、コンポーネント インスタンスに対し、.NET メソッドを呼び出すことができます。
 
 > [!IMPORTANT]
 > `loginDialog` 変数は、コンポーネントがレンダリングされた後にのみ設定され、その出力には `MyLoginDialog` 要素が含まれます。 コンポーネントがレンダリングされるまで、参照するものはありません。
