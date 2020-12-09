@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 4d5f459d54a3c74a2eb23a50db6537eeaf8596b3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9b19c782d1d42ddaba590f05bab31899402f681a
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061445"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901224"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 内のメモリ内のキャッシュ
 
@@ -70,7 +70,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 > 、、またはを使用してキャッシュを制限する場合は、キャッシュ `SetSize` `Size` `SizeLimit` 用のキャッシュシングルトンを作成します。 詳細と例については、「 [SetSize、サイズ、および SizeLimit を使用してキャッシュサイズを制限する](#use-setsize-size-and-sizelimit-to-limit-cache-size)」を参照してください。
 > 共有キャッシュは、他のフレームワークまたはライブラリによって共有されます。 たとえば、EF Core は共有キャッシュを使用し、サイズを指定しません。 
 
-インメモリキャッシュは、 [依存関係の挿入](xref:fundamentals/dependency-injection)を使用してアプリから参照される *サービス* です。 `IMemoryCache`コンストラクターにインスタンスを要求します。
+インメモリキャッシュは、[依存関係の挿入](xref:fundamentals/dependency-injection)を使用してアプリから参照される *サービス* です。 `IMemoryCache`コンストラクターにインスタンスを要求します。
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ctor)]
 
@@ -83,6 +83,9 @@ Web ファームの固定されていないセッションでは、キャッシ�
 現在の時刻とキャッシュされた時間が表示されます。
 
 [!code-cshtml[](memory/3.0sample/WebCacheSample/Views/Home/Cache.cshtml)]
+
+次のコードでは、 [Set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_System_TimeSpan_) extension メソッドを使用して、オブジェクトを作成せずに相対的な時間にデータをキャッシュして `MemoryCacheEntryOptions` います。
+[!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_set)]
 
 キャッシュされた値は、 `DateTime` タイムアウト期間内に要求があってもキャッシュに残ります。
 
@@ -196,7 +199,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 
 などの [バックグラウンドサービス](xref:fundamentals/host/hosted-services) を使用して <xref:Microsoft.Extensions.Hosting.IHostedService> キャッシュを更新します。 バックグラウンドサービスでは、エントリを再計算して、準備ができたときにのみキャッシュに割り当てることができます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:performance/caching/distributed>
 * <xref:fundamentals/change-tokens>
@@ -250,7 +253,7 @@ Web ファームの固定されていないセッションでは、キャッシ�
 > [依存関係の挿入](xref:fundamentals/dependency-injection)から *共有* メモリキャッシュを使用し `SetSize` 、、 `Size` 、またはを呼び出して `SizeLimit` キャッシュサイズを制限すると、アプリが失敗する可能性があります。 キャッシュにサイズ制限が設定されている場合、すべてのエントリは追加時にサイズを指定する必要があります。 これにより、開発者は共有キャッシュを使用する内容を完全に制御できない場合があるため、問題が発生する可能性があります。 たとえば、Entity Framework Core は共有キャッシュを使用し、サイズを指定しません。 アプリがキャッシュサイズの制限を設定し、EF Core を使用する場合、アプリはをスロー `InvalidOperationException` します。
 > 、、またはを使用してキャッシュを制限する場合は、キャッシュ `SetSize` `Size` `SizeLimit` 用のキャッシュシングルトンを作成します。 詳細と例については、「 [SetSize、サイズ、および SizeLimit を使用してキャッシュサイズを制限する](#use-setsize-size-and-sizelimit-to-limit-cache-size)」を参照してください。
 
-インメモリキャッシュは、 [依存関係の挿入](../../fundamentals/dependency-injection.md)を使用してアプリから参照される *サービス* です。 `AddMemoryCache`での呼び出し `ConfigureServices` :
+インメモリキャッシュは、[依存関係の挿入](../../fundamentals/dependency-injection.md)を使用してアプリから参照される *サービス* です。 `AddMemoryCache`での呼び出し `ConfigureServices` :
 
 [!code-csharp[](memory/sample/WebCache/Startup.cs?highlight=9)]
 
