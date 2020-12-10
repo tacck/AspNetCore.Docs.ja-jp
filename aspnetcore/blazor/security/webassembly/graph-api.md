@@ -19,39 +19,39 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 6464b80d52837e7fe35efe5daac2193b77e21c84
-ms.sourcegitcommit: e087b6a38e3d38625ebb567a973e75b4d79547b9
+ms.openlocfilehash: 128ba34b1e2a9f8cc2986a8f1cb3fb8beba83b21
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94637653"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855392"
 ---
-# <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="dd81c-103">ASP.NET Core Blazor WebAssembly で Graph API を使用する</span><span class="sxs-lookup"><span data-stu-id="dd81c-103">Use Graph API with ASP.NET Core Blazor WebAssembly</span></span>
+# <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a><span data-ttu-id="b72bc-103">ASP.NET Core Blazor WebAssembly で Graph API を使用する</span><span class="sxs-lookup"><span data-stu-id="b72bc-103">Use Graph API with ASP.NET Core Blazor WebAssembly</span></span>
 
-<span data-ttu-id="dd81c-104">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="dd81c-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="b72bc-104">作成者: [Javier Calvarro Nelson](https://github.com/javiercn)、[Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="b72bc-104">By [Javier Calvarro Nelson](https://github.com/javiercn) and [Luke Latham](https://github.com/guardrex)</span></span>
 
 ::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="dd81c-105">[Microsoft Graph API](/graph/use-the-api) は、Blazor および他の .NET Framework アプリが Microsoft Cloud サービス リソースにアクセスできるようにする RESTful Web API です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-105">[Microsoft Graph API](/graph/use-the-api) is a RESTful web API that enables Blazor and other .NET Framework apps to access Microsoft Cloud service resources.</span></span>
+<span data-ttu-id="b72bc-105">[Microsoft Graph API](/graph/use-the-api) は、Blazor および他の .NET Framework アプリが Microsoft Cloud サービス リソースにアクセスできるようにする RESTful Web API です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-105">[Microsoft Graph API](/graph/use-the-api) is a RESTful web API that enables Blazor and other .NET Framework apps to access Microsoft Cloud service resources.</span></span>
 
-## <a name="graph-sdk"></a><span data-ttu-id="dd81c-106">Graph SDK</span><span class="sxs-lookup"><span data-stu-id="dd81c-106">Graph SDK</span></span>
+## <a name="graph-sdk"></a><span data-ttu-id="b72bc-106">Graph SDK</span><span class="sxs-lookup"><span data-stu-id="b72bc-106">Graph SDK</span></span>
 
-<span data-ttu-id="dd81c-107">[Microsoft Graph SDK](/graph/sdks/sdks-overview) は、Microsoft Graph にアクセスする高品質で効率的であり、回復性があるアプリケーションのビルドを簡素化するように設計されています。</span><span class="sxs-lookup"><span data-stu-id="dd81c-107">[Microsoft Graph SDKs](/graph/sdks/sdks-overview) are designed to simplify building high-quality, efficient, and resilient applications that access Microsoft Graph.</span></span>
+<span data-ttu-id="b72bc-107">[Microsoft Graph SDK](/graph/sdks/sdks-overview) は、Microsoft Graph にアクセスする高品質で効率的であり、回復性があるアプリケーションのビルドを簡素化するように設計されています。</span><span class="sxs-lookup"><span data-stu-id="b72bc-107">[Microsoft Graph SDKs](/graph/sdks/sdks-overview) are designed to simplify building high-quality, efficient, and resilient applications that access Microsoft Graph.</span></span>
 
-<span data-ttu-id="dd81c-108">このセクションの例では、スタンドアロンのプロジェクト ファイルまたは *`Client`* アプリのプロジェクト ファイルに次のパッケージのパッケージ参照が必要です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-108">The examples in this section require package references for the following packages in the project file of the standalone or *`Client`* app's project file:</span></span>
+<span data-ttu-id="b72bc-108">このセクションの例では、スタンドアロンのプロジェクト ファイルまたは *`Client`* アプリのプロジェクト ファイルに次のパッケージのパッケージ参照が必要です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-108">The examples in this section require package references for the following packages in the project file of the standalone or *`Client`* app's project file:</span></span>
 
 * [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http)
 * [`Microsoft.Graph`](https://www.nuget.org/packages/Microsoft.Graph)
 
-<span data-ttu-id="dd81c-109">次のユーティリティ クラスおよび構成は、この記事の次の各サブセクションで使用されます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-109">The following utility classes and configuration are used in each of the following subsections of this article:</span></span>
+<span data-ttu-id="b72bc-109">次のユーティリティ クラスおよび構成は、この記事の次の各サブセクションで使用されます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-109">The following utility classes and configuration are used in each of the following subsections of this article:</span></span>
 
-* [<span data-ttu-id="dd81c-110">Graph SDK を使用してコンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="dd81c-110">Call Graph API from a component using the Graph SDK</span></span>](#call-graph-api-from-a-component-using-the-graph-sdk)
-* [<span data-ttu-id="dd81c-111">Graph SDK を使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="dd81c-111">Customize user claims with the Graph SDK</span></span>](#customize-user-claims-with-the-graph-sdk)
+* [<span data-ttu-id="b72bc-110">Graph SDK を使用してコンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="b72bc-110">Call Graph API from a component using the Graph SDK</span></span>](#call-graph-api-from-a-component-using-the-graph-sdk)
+* [<span data-ttu-id="b72bc-111">Graph SDK を使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b72bc-111">Customize user claims with the Graph SDK</span></span>](#customize-user-claims-with-the-graph-sdk)
 
-<span data-ttu-id="dd81c-112">Azure portal の AAD 領域で Microsoft Graph API スコープを追加した後:</span><span class="sxs-lookup"><span data-stu-id="dd81c-112">After adding the Microsoft Graph API scopes in the AAD area of the Azure portal:</span></span>
+<span data-ttu-id="b72bc-112">Azure portal の AAD 領域で Microsoft Graph API スコープを追加した後:</span><span class="sxs-lookup"><span data-stu-id="b72bc-112">After adding the Microsoft Graph API scopes in the AAD area of the Azure portal:</span></span>
 
-* <span data-ttu-id="dd81c-113">ホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリに次の `GraphClientExtensions.cs` クラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-113">Add the following `GraphClientExtensions.cs` class to the standalone app or *`Client`* app of a hosted Blazor solution.</span></span>
-* <span data-ttu-id="dd81c-114">`AuthenticateRequestAsync` メソッド内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes> プロパティに必要なスコープを提供します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-114">Provide the required scopes to the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes> property of the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> in the `AuthenticateRequestAsync` method.</span></span> <span data-ttu-id="dd81c-115">次の例では、この記事の後述のセクションにある例と一致するように `User.Read` スコープを指定しています。</span><span class="sxs-lookup"><span data-stu-id="dd81c-115">In the following example, the `User.Read` scope is specified to match the examples in later sections of this article.</span></span>
+* <span data-ttu-id="b72bc-113">ホストされている Blazor ソリューションのスタンドアロン アプリまたは *`Client`* アプリに次の `GraphClientExtensions.cs` クラスを追加します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-113">Add the following `GraphClientExtensions.cs` class to the standalone app or *`Client`* app of a hosted Blazor solution.</span></span>
+* <span data-ttu-id="b72bc-114">`AuthenticateRequestAsync` メソッド内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes> プロパティに必要なスコープを提供します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-114">Provide the required scopes to the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes> property of the <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions> in the `AuthenticateRequestAsync` method.</span></span> <span data-ttu-id="b72bc-115">次の例では、この記事の後述のセクションにある例と一致するように `User.Read` スコープを指定しています。</span><span class="sxs-lookup"><span data-stu-id="b72bc-115">In the following example, the `User.Read` scope is specified to match the examples in later sections of this article.</span></span>
 
 ```csharp
 using System;
@@ -150,27 +150,27 @@ internal static class GraphClientExtensions
 }
 ```
 
-<span data-ttu-id="dd81c-116">上記のコードのプレースホルダー `{STRING ARRAY OF SCOPES}` は、許可されたスコープの文字列配列です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-116">The placeholder `{STRING ARRAY OF SCOPES}` in the preceding code is a string array of the permitted scopes.</span></span> <span data-ttu-id="dd81c-117">たとえば、`Scopes` を、この記事の次のセクションにある例の `User.Read` スコープに設定します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-117">For example, set `Scopes` to the `User.Read` scope for the examples in the following sections of this article:</span></span>
+<span data-ttu-id="b72bc-116">上記のコードのプレースホルダー `{STRING ARRAY OF SCOPES}` は、許可されたスコープの文字列配列です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-116">The placeholder `{STRING ARRAY OF SCOPES}` in the preceding code is a string array of the permitted scopes.</span></span> <span data-ttu-id="b72bc-117">たとえば、`Scopes` を、この記事の次のセクションにある例の `User.Read` スコープに設定します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-117">For example, set `Scopes` to the `User.Read` scope for the examples in the following sections of this article:</span></span>
 
 ```csharp
 Scopes = new[] { "https://graph.microsoft.com/User.Read" }
 ```
 
-<span data-ttu-id="dd81c-118">`Program.Main` (`Program.cs`) で、`AddGraphClient` 拡張メソッドを使用して Graph クライアント サービスと構成を追加します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-118">In `Program.Main` (`Program.cs`), add the Graph client services and configuration with the `AddGraphClient` extension method:</span></span>
+<span data-ttu-id="b72bc-118">`Program.Main` (`Program.cs`) で、`AddGraphClient` 拡張メソッドを使用して Graph クライアント サービスと構成を追加します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-118">In `Program.Main` (`Program.cs`), add the Graph client services and configuration with the `AddGraphClient` extension method:</span></span>
 
 ```csharp
 builder.Services.AddGraphClient({STRING ARRAY OF SCOPES});
 ```
 
-<span data-ttu-id="dd81c-119">上記のコードのプレースホルダー `{STRING ARRAY OF SCOPES}` は、許可されたスコープの文字列配列です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-119">The placeholder `{STRING ARRAY OF SCOPES}` in the preceding code is a string array of the permitted scopes.</span></span> <span data-ttu-id="dd81c-120">たとえば、`User.Read` を、この記事の次のセクションにある例の `AddGraphClient` スコープに渡します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-120">For example, pass the `User.Read` scope to `AddGraphClient` for the examples in the following sections of this article:</span></span>
+<span data-ttu-id="b72bc-119">上記のコードのプレースホルダー `{STRING ARRAY OF SCOPES}` は、許可されたスコープの文字列配列です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-119">The placeholder `{STRING ARRAY OF SCOPES}` in the preceding code is a string array of the permitted scopes.</span></span> <span data-ttu-id="b72bc-120">たとえば、`User.Read` を、この記事の次のセクションにある例の `AddGraphClient` スコープに渡します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-120">For example, pass the `User.Read` scope to `AddGraphClient` for the examples in the following sections of this article:</span></span>
 
 ```csharp
 builder.Services.AddGraphClient("https://graph.microsoft.com/User.Read");
 ```
 
-### <a name="call-graph-api-from-a-component-using-the-graph-sdk"></a><span data-ttu-id="dd81c-121">Graph SDK を使用してコンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="dd81c-121">Call Graph API from a component using the Graph SDK</span></span>
+### <a name="call-graph-api-from-a-component-using-the-graph-sdk"></a><span data-ttu-id="b72bc-121">Graph SDK を使用してコンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="b72bc-121">Call Graph API from a component using the Graph SDK</span></span>
 
-<span data-ttu-id="dd81c-122">このセクションでは、この記事で既に説明した [ユーティリティ クラス (`GraphClientExtensions.cs`)](#graph-sdk) を使用します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-122">This section uses the [utility classes (`GraphClientExtensions.cs`)](#graph-sdk) described earlier in this article.</span></span> <span data-ttu-id="dd81c-123">次の `GraphExample` コンポーネントでは、挿入された `GraphServiceClient` を使用してユーザーの AAD プロファイル データを取得し、その携帯電話番号を表示します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-123">The following `GraphExample` component uses an injected `GraphServiceClient` to obtain the user's AAD profile data and display their mobile phone number:</span></span>
+<span data-ttu-id="b72bc-122">このセクションでは、この記事で既に説明した [ユーティリティ クラス (`GraphClientExtensions.cs`)](#graph-sdk) を使用します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-122">This section uses the [utility classes (`GraphClientExtensions.cs`)](#graph-sdk) described earlier in this article.</span></span> <span data-ttu-id="b72bc-123">次の `GraphExample` コンポーネントでは、挿入された `GraphServiceClient` を使用してユーザーの AAD プロファイル データを取得し、その携帯電話番号を表示します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-123">The following `GraphExample` component uses an injected `GraphServiceClient` to obtain the user's AAD profile data and display their mobile phone number:</span></span>
 
 ```razor
 @page "/GraphExample"
@@ -197,15 +197,15 @@ builder.Services.AddGraphClient("https://graph.microsoft.com/User.Read");
 }
 ```
 
-### <a name="customize-user-claims-with-the-graph-sdk"></a><span data-ttu-id="dd81c-124">Graph SDK を使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="dd81c-124">Customize user claims with the Graph SDK</span></span>
+### <a name="customize-user-claims-with-the-graph-sdk"></a><span data-ttu-id="b72bc-124">Graph SDK を使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b72bc-124">Customize user claims with the Graph SDK</span></span>
 
-<span data-ttu-id="dd81c-125">このセクションでは、この記事で既に説明した [ユーティリティ クラス (`GraphClientExtensions.cs`)](#graph-sdk) を使用します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-125">This section uses the [utility classes (`GraphClientExtensions.cs`)](#graph-sdk) described earlier in this article.</span></span>
+<span data-ttu-id="b72bc-125">このセクションでは、この記事で既に説明した [ユーティリティ クラス (`GraphClientExtensions.cs`)](#graph-sdk) を使用します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-125">This section uses the [utility classes (`GraphClientExtensions.cs`)](#graph-sdk) described earlier in this article.</span></span>
 
-<span data-ttu-id="dd81c-126">次の例のアプリでは、AAD ユーザー プロファイルの携帯電話番号からユーザーの携帯電話番号要求を作成します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-126">In the following example, the app creates a mobile phone number claim for a user from their AAD user profile's mobile phone number.</span></span> <span data-ttu-id="dd81c-127">このアプリには、AAD で構成された `User.Read` Graph API スコープが必要です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-127">The app must have the `User.Read` Graph API scope configured in AAD.</span></span>
+<span data-ttu-id="b72bc-126">次の例のアプリでは、AAD ユーザー プロファイルの携帯電話番号からユーザーの携帯電話番号要求を作成します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-126">In the following example, the app creates a mobile phone number claim for a user from their AAD user profile's mobile phone number.</span></span> <span data-ttu-id="b72bc-127">このアプリには、AAD で構成された `User.Read` Graph API スコープが必要です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-127">The app must have the `User.Read` Graph API scope configured in AAD.</span></span>
 
-<span data-ttu-id="dd81c-128">次のカスタム ユーザー アカウント ファクトリでは、フレームワークの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> はユーザーのアカウントを表します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-128">In the following custom user account factory, the framework's <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> represents the user's account.</span></span> <span data-ttu-id="dd81c-129"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで必要な場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-129">If the app requires a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code.</span></span>
+<span data-ttu-id="b72bc-128">次のカスタム ユーザー アカウント ファクトリでは、フレームワークの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> はユーザーのアカウントを表します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-128">In the following custom user account factory, the framework's <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> represents the user's account.</span></span> <span data-ttu-id="b72bc-129"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで必要な場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-129">If the app requires a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code.</span></span>
 
-<span data-ttu-id="dd81c-130">`CustomAccountFactory.cs`:</span><span class="sxs-lookup"><span data-stu-id="dd81c-130">`CustomAccountFactory.cs`:</span></span>
+<span data-ttu-id="b72bc-130">`CustomAccountFactory.cs`:</span><span class="sxs-lookup"><span data-stu-id="b72bc-130">`CustomAccountFactory.cs`:</span></span>
 
 ```csharp
 using System;
@@ -269,7 +269,7 @@ public class CustomAccountFactory
 }
 ```
 
-<span data-ttu-id="dd81c-131">`Program.Main` (`Program.cs`) で、カスタム ユーザー アカウント ファクトリを使用するように MSAL 認証を構成します。<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで使用されている場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-131">In `Program.Main` (`Program.cs`), configure the MSAL authentication to use the custom user account factory: If the app uses a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code:</span></span>
+<span data-ttu-id="b72bc-131">`Program.Main` (`Program.cs`) で、カスタム ユーザー アカウント ファクトリを使用するように MSAL 認証を構成します。<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで使用されている場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-131">In `Program.Main` (`Program.cs`), configure the MSAL authentication to use the custom user account factory: If the app uses a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -289,20 +289,20 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
 
 ::: moniker-end
 
-## <a name="named-client-with-graph-api"></a><span data-ttu-id="dd81c-132">名前付きクライアントと Graph API</span><span class="sxs-lookup"><span data-stu-id="dd81c-132">Named client with Graph API</span></span>
+## <a name="named-client-with-graph-api"></a><span data-ttu-id="b72bc-132">名前付きクライアントと Graph API</span><span class="sxs-lookup"><span data-stu-id="b72bc-132">Named client with Graph API</span></span>
 
-<span data-ttu-id="dd81c-133">このセクションの例では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を使用して、通話を処理するユーザーの携帯電話番号を取得します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-133">The examples in this section use a named <xref:System.Net.Http.HttpClient> for Graph API to obtain a user's mobile phone number to process a call.</span></span>
+<span data-ttu-id="b72bc-133">このセクションの例では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を使用して、通話を処理するユーザーの携帯電話番号を取得します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-133">The examples in this section use a named <xref:System.Net.Http.HttpClient> for Graph API to obtain a user's mobile phone number to process a call.</span></span>
 
-<span data-ttu-id="dd81c-134">このセクションの例では、スタンドアロンのプロジェクト ファイルまたは *`Client`* アプリのプロジェクト ファイルに [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) のパッケージ参照が必要です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-134">The examples in this section require a package reference for [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) in the project file of the standalone or *`Client`* app's project file.</span></span>
+<span data-ttu-id="b72bc-134">このセクションの例では、スタンドアロンのプロジェクト ファイルまたは *`Client`* アプリのプロジェクト ファイルに [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) のパッケージ参照が必要です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-134">The examples in this section require a package reference for [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) in the project file of the standalone or *`Client`* app's project file.</span></span>
 
-<span data-ttu-id="dd81c-135">Graph API を使用するには、次のクラスとプロジェクト構成を作成します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-135">Create the following class and project configuration for working with Graph API.</span></span> <span data-ttu-id="dd81c-136">次のクラスおよび構成は、この記事の次の各サブセクションで使用されます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-136">The following class and configuration are used in each of the following subsections of this article:</span></span>
+<span data-ttu-id="b72bc-135">Graph API を使用するには、次のクラスとプロジェクト構成を作成します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-135">Create the following class and project configuration for working with Graph API.</span></span> <span data-ttu-id="b72bc-136">次のクラスおよび構成は、この記事の次の各サブセクションで使用されます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-136">The following class and configuration are used in each of the following subsections of this article:</span></span>
 
-* [<span data-ttu-id="dd81c-137">コンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="dd81c-137">Call Graph API from a component</span></span>](#call-graph-api-from-a-component)
-* [<span data-ttu-id="dd81c-138">Graph API と名前付きクライアントを使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="dd81c-138">Customize user claims with Graph API and a named client</span></span>](#customize-user-claims-with-graph-api-and-a-named-client)
+* [<span data-ttu-id="b72bc-137">コンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="b72bc-137">Call Graph API from a component</span></span>](#call-graph-api-from-a-component)
+* [<span data-ttu-id="b72bc-138">Graph API と名前付きクライアントを使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b72bc-138">Customize user claims with Graph API and a named client</span></span>](#customize-user-claims-with-graph-api-and-a-named-client)
 
-<span data-ttu-id="dd81c-139">Azure portal の AAD 領域で Microsoft Graph API スコープを追加した後、アプリの構成済み Graph API 用ハンドラーに必要なスコープを提供します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-139">After adding the Microsoft Graph API scopes in the AAD area of the Azure portal, provide the required scopes to the app's configured handler for Graph API.</span></span> <span data-ttu-id="dd81c-140">次の例では、`User.Read` スコープのハンドラーを構成します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-140">The following example configures the handler for the `User.Read` scope.</span></span> <span data-ttu-id="dd81c-141">さらにスコープを追加できます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-141">Additional scopes can be added.</span></span>
+<span data-ttu-id="b72bc-139">Azure portal の AAD 領域で Microsoft Graph API スコープを追加した後、アプリの構成済み Graph API 用ハンドラーに必要なスコープを提供します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-139">After adding the Microsoft Graph API scopes in the AAD area of the Azure portal, provide the required scopes to the app's configured handler for Graph API.</span></span> <span data-ttu-id="b72bc-140">次の例では、`User.Read` スコープのハンドラーを構成します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-140">The following example configures the handler for the `User.Read` scope.</span></span> <span data-ttu-id="b72bc-141">さらにスコープを追加できます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-141">Additional scopes can be added.</span></span>
 
-<span data-ttu-id="dd81c-142">`GraphAuthorizationMessageHandler.cs`:</span><span class="sxs-lookup"><span data-stu-id="dd81c-142">`GraphAuthorizationMessageHandler.cs`:</span></span>
+<span data-ttu-id="b72bc-142">`GraphAuthorizationMessageHandler.cs`:</span><span class="sxs-lookup"><span data-stu-id="b72bc-142">`GraphAuthorizationMessageHandler.cs`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -321,7 +321,7 @@ public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-<span data-ttu-id="dd81c-143">`Program.Main` (`Program.cs`) では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を構成します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-143">In `Program.Main` (`Program.cs`), configure the named <xref:System.Net.Http.HttpClient> for Graph API:</span></span>
+<span data-ttu-id="b72bc-143">`Program.Main` (`Program.cs`) では、Graph API の名前付き <xref:System.Net.Http.HttpClient> を構成します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-143">In `Program.Main` (`Program.cs`), configure the named <xref:System.Net.Http.HttpClient> for Graph API:</span></span>
 
 ```csharp
 builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
@@ -331,16 +331,16 @@ builder.Services.AddHttpClient("GraphAPI",
     .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
 ```
 
-### <a name="call-graph-api-from-a-component"></a><span data-ttu-id="dd81c-144">コンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="dd81c-144">Call Graph API from a component</span></span>
+### <a name="call-graph-api-from-a-component"></a><span data-ttu-id="b72bc-144">コンポーネントから Graph API を呼び出す</span><span class="sxs-lookup"><span data-stu-id="b72bc-144">Call Graph API from a component</span></span>
 
-<span data-ttu-id="dd81c-145">このセクションでは、この記事で既に説明した [Graph 認可メッセージ ハンドラー (`GraphAuthorizationMessageHandler.cs`) とアプリへの `Program.Main` の追加](#named-client-with-graph-api)を使用します。これにより、Graph API の名前付き <xref:System.Net.Http.HttpClient> が提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-145">This section uses the [Graph Authorization Message Handler (`GraphAuthorizationMessageHandler.cs`) and `Program.Main` additions to the app](#named-client-with-graph-api) described earlier in this article, which provides a named <xref:System.Net.Http.HttpClient> for Graph API.</span></span>
+<span data-ttu-id="b72bc-145">このセクションでは、この記事で既に説明した [Graph 認可メッセージ ハンドラー (`GraphAuthorizationMessageHandler.cs`) とアプリへの `Program.Main` の追加](#named-client-with-graph-api)を使用します。これにより、Graph API の名前付き <xref:System.Net.Http.HttpClient> が提供されます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-145">This section uses the [Graph Authorization Message Handler (`GraphAuthorizationMessageHandler.cs`) and `Program.Main` additions to the app](#named-client-with-graph-api) described earlier in this article, which provides a named <xref:System.Net.Http.HttpClient> for Graph API.</span></span>
 
-<span data-ttu-id="dd81c-146">Razor コンポーネントでは、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="dd81c-146">In a Razor component:</span></span>
+<span data-ttu-id="b72bc-146">Razor コンポーネントでは、次のようになります。</span><span class="sxs-lookup"><span data-stu-id="b72bc-146">In a Razor component:</span></span>
 
-* <span data-ttu-id="dd81c-147">Graph API の <xref:System.Net.Http.HttpClient> を作成し、ユーザーのプロファイル データの要求を発行します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-147">Create an <xref:System.Net.Http.HttpClient> for Graph API and issue a request for the user's profile data.</span></span>
-* <span data-ttu-id="dd81c-148">`UserInfo.cs` クラスにより、必要なユーザー プロファイル プロパティを、<xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> 属性と、AAD によってそれらのプロパティ用に使用される JSON 名を使用して指定します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-148">The `UserInfo.cs` class designates the required user profile properties with the <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> attribute and the JSON name used by AAD for those properties.</span></span>
+* <span data-ttu-id="b72bc-147">Graph API の <xref:System.Net.Http.HttpClient> を作成し、ユーザーのプロファイル データの要求を発行します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-147">Create an <xref:System.Net.Http.HttpClient> for Graph API and issue a request for the user's profile data.</span></span>
+* <span data-ttu-id="b72bc-148">`UserInfo.cs` クラスにより、必要なユーザー プロファイル プロパティを、<xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> 属性と、AAD によってそれらのプロパティ用に使用される JSON 名を使用して指定します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-148">The `UserInfo.cs` class designates the required user profile properties with the <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> attribute and the JSON name used by AAD for those properties.</span></span>
 
-<span data-ttu-id="dd81c-149">`Pages/CallUser.razor`:</span><span class="sxs-lookup"><span data-stu-id="dd81c-149">`Pages/CallUser.razor`:</span></span>
+<span data-ttu-id="b72bc-149">`Pages/CallUser.razor`:</span><span class="sxs-lookup"><span data-stu-id="b72bc-149">`Pages/CallUser.razor`:</span></span>
 
 ```razor
 @page "/CallUser"
@@ -351,7 +351,6 @@ builder.Services.AddHttpClient("GraphAPI",
 @inject IAccessTokenProvider TokenProvider
 @inject IHttpClientFactory ClientFactory
 @inject ILogger<CallUser> Logger
-@inject ICallProcessor CallProcessor
 
 <h3>Call User</h3>
 
@@ -393,7 +392,7 @@ builder.Services.AddHttpClient("GraphAPI",
 
             if (userInfo != null)
             {
-                CallProcessor.Send(userInfo.MobilePhone, callInfo.Message);
+                // Use userInfo.MobilePhone and callInfo.Message to make a call
 
                 formStatus = "Form successfully processed.";
                 Logger.LogInformation(
@@ -423,16 +422,13 @@ builder.Services.AddHttpClient("GraphAPI",
 }
 ```
 
-> [!NOTE]
-> <span data-ttu-id="dd81c-150">前の例では、開発者がカスタム `ICallProcessor` (`CallProcessor`) を実装してキューに配置し、自動呼び出しを行っています。</span><span class="sxs-lookup"><span data-stu-id="dd81c-150">In the preceding example, the developer implements the custom `ICallProcessor` (`CallProcessor`) to queue and then place automated calls.</span></span>
+### <a name="customize-user-claims-with-graph-api-and-a-named-client"></a><span data-ttu-id="b72bc-150">Graph API と名前付きクライアントを使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="b72bc-150">Customize user claims with Graph API and a named client</span></span>
 
-### <a name="customize-user-claims-with-graph-api-and-a-named-client"></a><span data-ttu-id="dd81c-151">Graph API と名前付きクライアントを使用してユーザー要求をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="dd81c-151">Customize user claims with Graph API and a named client</span></span>
+<span data-ttu-id="b72bc-151">このセクションでは、この記事で既に説明した [Graph 認可メッセージ ハンドラー (`GraphAuthorizationMessageHandler.cs`) とアプリへの `Program.Main` の追加](#named-client-with-graph-api)を使用します。これにより、Graph API の名前付き <xref:System.Net.Http.HttpClient> が提供されます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-151">This section uses the [Graph Authorization Message Handler (`GraphAuthorizationMessageHandler.cs`) and `Program.Main` additions to the app](#named-client-with-graph-api) described earlier in this article, which provides a named <xref:System.Net.Http.HttpClient> for Graph API.</span></span>
 
-<span data-ttu-id="dd81c-152">このセクションでは、この記事で既に説明した [Graph 認可メッセージ ハンドラー (`GraphAuthorizationMessageHandler.cs`) とアプリへの `Program.Main` の追加](#named-client-with-graph-api)を使用します。これにより、Graph API の名前付き <xref:System.Net.Http.HttpClient> が提供されます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-152">This section uses the [Graph Authorization Message Handler (`GraphAuthorizationMessageHandler.cs`) and `Program.Main` additions to the app](#named-client-with-graph-api) described earlier in this article, which provides a named <xref:System.Net.Http.HttpClient> for Graph API.</span></span>
+<span data-ttu-id="b72bc-152">次の例のアプリでは、AAD ユーザー プロファイルの携帯電話番号からユーザーの携帯電話番号要求を作成します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-152">In the following example, the app creates a mobile phone number claim for the user from their AAD user profile's mobile phone number.</span></span> <span data-ttu-id="b72bc-153">このアプリには、AAD で構成された `User.Read` Graph API スコープが必要です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-153">The app must have the `User.Read` Graph API scope configured in AAD.</span></span>
 
-<span data-ttu-id="dd81c-153">次の例のアプリでは、AAD ユーザー プロファイルの携帯電話番号からユーザーの携帯電話番号要求を作成します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-153">In the following example, the app creates a mobile phone number claim for the user from their AAD user profile's mobile phone number.</span></span> <span data-ttu-id="dd81c-154">このアプリには、AAD で構成された `User.Read` Graph API スコープが必要です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-154">The app must have the `User.Read` Graph API scope configured in AAD.</span></span>
-
-<span data-ttu-id="dd81c-155">`UserInfo.cs` クラスをアプリに追加し、必要なユーザー プロファイル プロパティを、<xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> 属性と、AAD によってそれらのプロパティ用に使用される JSON 名を使用して指定します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-155">Add a `UserInfo.cs` class to the app and designate the required user profile properties with the <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> attribute and the JSON name used by AAD for those properties:</span></span>
+<span data-ttu-id="b72bc-154">`UserInfo.cs` クラスをアプリに追加し、必要なユーザー プロファイル プロパティを、<xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> 属性と、AAD によってそれらのプロパティ用に使用される JSON 名を使用して指定します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-154">Add a `UserInfo.cs` class to the app and designate the required user profile properties with the <xref:System.Text.Json.Serialization.JsonPropertyNameAttribute> attribute and the JSON name used by AAD for those properties:</span></span>
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -444,9 +440,9 @@ public class UserInfo
 }
 ```
 
-<span data-ttu-id="dd81c-156">次のカスタム ユーザー アカウント ファクトリでは、フレームワークの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> はユーザーのアカウントを表します。</span><span class="sxs-lookup"><span data-stu-id="dd81c-156">In the following custom user account factory, the framework's <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> represents the user's account.</span></span> <span data-ttu-id="dd81c-157"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで必要な場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-157">If the app requires a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code.</span></span>
+<span data-ttu-id="b72bc-155">次のカスタム ユーザー アカウント ファクトリでは、フレームワークの <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> はユーザーのアカウントを表します。</span><span class="sxs-lookup"><span data-stu-id="b72bc-155">In the following custom user account factory, the framework's <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> represents the user's account.</span></span> <span data-ttu-id="b72bc-156"><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで必要な場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-156">If the app requires a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code.</span></span>
 
-<span data-ttu-id="dd81c-158">`CustomAccountFactory.cs`:</span><span class="sxs-lookup"><span data-stu-id="dd81c-158">`CustomAccountFactory.cs`:</span></span>
+<span data-ttu-id="b72bc-157">`CustomAccountFactory.cs`:</span><span class="sxs-lookup"><span data-stu-id="b72bc-157">`CustomAccountFactory.cs`:</span></span>
 
 ```csharp
 using System.Net.Http;
@@ -506,7 +502,7 @@ public class CustomAccountFactory
 }
 ```
 
-<span data-ttu-id="dd81c-159">`Program.Main` (`Program.cs`) で、カスタム ユーザー アカウント ファクトリを使用するように MSAL 認証を構成します。<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで使用されている場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="dd81c-159">In `Program.Main` (`Program.cs`), configure the MSAL authentication to use the custom user account factory: If the app uses a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code:</span></span>
+<span data-ttu-id="b72bc-158">`Program.Main` (`Program.cs`) で、カスタム ユーザー アカウント ファクトリを使用するように MSAL 認証を構成します。<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> を拡張するカスタム ユーザー アカウント クラスがアプリで使用されている場合は、そのカスタム ユーザー アカウント クラスを次のコード内の <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> と入れ替えます。</span><span class="sxs-lookup"><span data-stu-id="b72bc-158">In `Program.Main` (`Program.cs`), configure the MSAL authentication to use the custom user account factory: If the app uses a custom user account class that extends <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>, swap the custom user account class for <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> in the following code:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -523,4 +519,4 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
         CustomAccountFactory>();
 ```
 
-<span data-ttu-id="dd81c-160">前の例は、MSAL で AAD 認証が使用されるアプリの場合です。</span><span class="sxs-lookup"><span data-stu-id="dd81c-160">The preceding example is for an app that uses AAD authentication with MSAL.</span></span> <span data-ttu-id="dd81c-161">OIDC と API 認証にも、同様のパターンがあります。</span><span class="sxs-lookup"><span data-stu-id="dd81c-161">Similar patterns exist for OIDC and API authentication.</span></span> <span data-ttu-id="dd81c-162">詳細については、「[ペイロード要求を使用してユーザーをカスタマイズする](xref:blazor/security/webassembly/additional-scenarios#customize-the-user-with-a-payload-claim)」セクションの例を参照してください。</span><span class="sxs-lookup"><span data-stu-id="dd81c-162">For more information, see the examples in [Customize the user with a payload claim](xref:blazor/security/webassembly/additional-scenarios#customize-the-user-with-a-payload-claim) section.</span></span>
+<span data-ttu-id="b72bc-159">前の例は、MSAL で AAD 認証が使用されるアプリの場合です。</span><span class="sxs-lookup"><span data-stu-id="b72bc-159">The preceding example is for an app that uses AAD authentication with MSAL.</span></span> <span data-ttu-id="b72bc-160">OIDC と API 認証にも、同様のパターンがあります。</span><span class="sxs-lookup"><span data-stu-id="b72bc-160">Similar patterns exist for OIDC and API authentication.</span></span> <span data-ttu-id="b72bc-161">詳細については、「[ペイロード要求を使用してユーザーをカスタマイズする](xref:blazor/security/webassembly/additional-scenarios#customize-the-user-with-a-payload-claim)」セクションの例を参照してください。</span><span class="sxs-lookup"><span data-stu-id="b72bc-161">For more information, see the examples in [Customize the user with a payload claim](xref:blazor/security/webassembly/additional-scenarios#customize-the-user-with-a-payload-claim) section.</span></span>
