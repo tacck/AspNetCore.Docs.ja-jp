@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 9dcb1c4a19e50a57f1a1918cfcf775b49fa89b11
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 0e81397d210518854939c6941e7f6da43ed48389
+ms.sourcegitcommit: 6af9016d1ffc2dffbb2454c7da29c880034cefcd
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320149"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "96855509"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core での Entity Framework Core を使用した Razor Pages - チュートリアル 1/8
 
@@ -479,7 +479,7 @@ Web サーバーでは、利用できるスレッド数に限りがあります�
 
 非同期コードが実行時に発生させるオーバーヘッドは少量です。 トラフィックが少ない場合、パフォーマンスに与える影響は無視して構わない程度です。トラフィックが多い場合、相当なパフォーマンス改善が見込まれます。
 
-次のコードでは、キーワード [async](/dotnet/csharp/language-reference/keywords/async)、戻り値 `Task<T>`、キーワード `await`、メソッド `ToListAsync` によりコードの実行が非同期になります。
+次のコードでは、キーワード [async](/dotnet/csharp/language-reference/keywords/async)、戻り値 `Task`、キーワード `await`、メソッド `ToListAsync` によりコードの実行が非同期になります。
 
 ```csharp
 public async Task OnGetAsync()
@@ -491,7 +491,7 @@ public async Task OnGetAsync()
 * キーワード `async` は次のことをコンパイラに指示します。
   * メソッド本文の一部にコールバックを生成する。
   * 返される [Task](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) オブジェクトを作成する。
-* 戻り値の型 `Task<T>` は進行中の作業を表します。
+* 戻り値の型 `Task` は進行中の作業を表します。
 * キーワード `await` により、コンパイラはメソッドを 2 つに分割します。 最初の部分は、非同期で開始される操作で終わります。 2 つ目の部分は、操作の完了時に呼び出されるコールバック メソッドに入ります。
 * `ToListAsync` は、`ToList` 拡張メソッドの非同期バージョンです。
 
