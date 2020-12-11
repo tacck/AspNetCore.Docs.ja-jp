@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 7e79836e3dd1da175a62a84e11dfd30fee7b2f1b
-ms.sourcegitcommit: 1ea3f23bec63e96ffc3a927992f30a5fc0de3ff9
+ms.openlocfilehash: 24f845bc1d98331f2ee54710d17beb6ffa95ad88
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94570147"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855418"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor 状態管理
 
@@ -43,6 +43,9 @@ Blazor WebAssembly アプリで作成されたユーザー状態は、ブラウ�
 * [JavaScript 相互運用](xref:blazor/call-javascript-from-dotnet)の呼び出しによって設定された値。
 
 ユーザーがブラウザーを閉じて開き直したり、ページを再度読み込んだりすると、ブラウザーのメモリに保持されているユーザー状態は失われます。
+
+> [!NOTE]
+> [保護されたブラウザー ストレージ](xref:blazor/state-management?pivots=server#aspnet-core-protected-browser-storage) (<xref:Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage?displayProperty=fullName> 名前空間) は、ASP.NET Core のデータ保護に依存しており、Blazor Server アプリでのみサポートされます。
 
 ## <a name="persist-state-across-browser-sessions"></a>ブラウザー セッション間で状態を保持する
 

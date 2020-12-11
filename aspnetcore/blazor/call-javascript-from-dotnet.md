@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: c73de0e30b7b564915f30d75f754f89fecccdc78
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: a98537f53229d098328f5b14bf1d5060001ebd80
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035724"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855238"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -501,10 +501,7 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
 * .NET メソッドの呼び出し。
 * 戻り値の型に循環参照がある場合の、C# からの JavaScript メソッドの呼び出し。
 
-詳細については、次のイシューを参照してください。
-
-* [Circular references are not supported, take two (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) (循環参照はサポートされていません、テイク 2 (dotnet/aspnetcore #20525))
-* [Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820) (提案: シリアル化するときに循環参照を処理するメカニズムを追加する (dotnet/runtime #30820))
+詳細については、[「循環参照はサポートされていません、テイク 2」(dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525) を参照してください。
 
 ::: moniker range=">= aspnetcore-5.0"
 

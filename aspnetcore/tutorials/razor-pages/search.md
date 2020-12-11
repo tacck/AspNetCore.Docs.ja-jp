@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 3b95fe117895555ebcd44f971e7bb9d1173e1697
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 1e571966b78f93e29e7901dd9648fbe3aca52726
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419981"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855483"
 ---
 # <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>パート 6、ASP.NET Core Razor ページへの検索の追加
 
@@ -70,7 +70,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません**。
+このクエリはこの時点では "***定義される** _" だけで、データベースに対して実行されて "_*_いません_*_"。
 
 `SearchString` プロパティが null でも空でもない場合、検索文字列で絞り込むようにムービークエリが変更されます。
 
@@ -95,7 +95,7 @@ var movies = from m in _context.Movie
 
 ![ghost という単語が URL に追加されたIndexビュー。Ghostbusters と Ghostbusters 2 という 2 本のムービーからなるムービー リストが返されています。](search/_static/g2.png)
 
-ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model-binding)を使用し、クエリ文字列 (`?searchString=Ghost`) またはルート データ (`https://localhost:5001/Movies/Ghost`) から `SearchString` プロパティの値が設定されます。 モデル バインドでは、**_大文字と小文字が区別されません_*。
+ASP.NET Core ランタイムでは[モデル バインド](xref:mvc/models/model-binding)を使用し、クエリ文字列 (`?searchString=Ghost`) またはルート データ (`https://localhost:5001/Movies/Ghost`) から `SearchString` プロパティの値が設定されます。 モデル バインドでは、大文字と小文字が区別 "_*_されません_*_"。
 
 ただし、URL を変更してムービーを検索することをユーザーに求めることはできません。 この手順では、ムービーを絞り込むための UI を追加します。 ルート制約 `"{searchString?}"` を追加した場合、それを削除します。
 

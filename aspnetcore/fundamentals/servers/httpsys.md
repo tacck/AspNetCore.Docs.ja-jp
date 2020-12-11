@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: ca8aa126a44ea417017f0be0372e818a95ad8413
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9c65abd5a055bb677a14921296316e7e03760bc2
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053749"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855366"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core での HTTP.sys Web サーバーの実装
 
@@ -98,10 +98,11 @@ HTTP.sys の追加の構成は、[レジストリ設定](https://support.microso
 
 | プロパティ | 説明 | Default |
 | -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | `HttpContext.Request.Body` および `HttpContext.Response.Body` に対して、入力/出力の同期を許可するかどうかを制御します。 | `false` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO> | `HttpContext.Request.Body` および `HttpContext.Response.Body` に対して、入力/出力の同期を許可するかどうかを制御します。 | `false` |
 | [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | 匿名要求を許可します。 | `true` |
 | [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | 許可される認証方式を指定します。 リスナーを破棄する前ならいつでも変更できます。 値は [AuthenticationSchemes 列挙型](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes) (`Basic`、`Kerberos`、`Negotiate`、`None`、および `NTLM`) によって指定します。 | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | 対象となるヘッダーを持つ応答に対して、[カーネル モード](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode)のキャッシュを試行します。 `Set-Cookie`、`Vary`、または `Pragma` ヘッダーを含む応答は対象外です。 応答は、`public` である `Cache-Control` ヘッダーと `shared-max-age` または `max-age` の値のいずれかを含むか、または `Expires` ヘッダーを含む必要があります。 | `true` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching> | 対象となるヘッダーを持つ応答に対して、[カーネル モード](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode)のキャッシュを試行します。 `Set-Cookie`、`Vary`、または `Pragma` ヘッダーを含む応答は対象外です。 応答は、`public` である `Cache-Control` ヘッダーと `shared-max-age` または `max-age` の値のいずれかを含むか、または `Expires` ヘッダーを含む必要があります。 | `true` |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Http503Verbosity> | 調整の条件によって要求を拒否する場合の HTTP.sys の動作。 | [Http503VerbosityLevel.<br>Basic](xref:Microsoft.AspNetCore.Server.HttpSys.Http503VerbosityLevel) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | 同時受け入れの最大数です。 | 5 &times;[Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | 受け入れるコンカレント接続の最大数です。 無限にするには、`-1` を使用します。 コンピューター全体のレジストリ設定を使用するには、`null` を使用します。 | `null`<br>(コンピューター全体の<br>設定) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | 「<a href="#maxrequestbodysize">MaxRequestBodySize</a>」セクションを参照してください。 | 30000000 バイト<br>(~28.6 MB) |
@@ -109,8 +110,8 @@ HTTP.sys の追加の構成は、[レジストリ設定](https://support.microso
 | `RequestQueueMode` | これは、サーバーで要求キューの作成と構成を行う必要があるかどうか、または既存のキューにアタッチする必要があるかを示します。<br>既存のキューにアタッチする場合、既存の構成オプションのほとんどは適用されません。 | `RequestQueueMode.Create` |
 | `RequestQueueName` | HTTP.sys 要求キューの名前。 | `null` (匿名キュー) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | 応答本文の書き込みがクライアントの接続の切断によって失敗した場合、例外をスローするか、または正常に完了するかどうかを指定します。 | `false`<br>(正常に完了する) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 構成を公開します。これはレジストリでも構成できます。 各設定に関する既定値などの詳細については、API のリンクを参照してください。<ul><li>[TimeoutManager.DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody):HTTP サーバー API が Keep-Alive 接続でエンティティ本体をドレインするまでに許容される時間です。</li><li>[TimeoutManager.EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody):要求のエンティティ本体が到着するまでに許容される時間。</li><li>[TimeoutManager.HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait):HTTP サーバー API が要求ヘッダーを解析するまでに許容される時間。</li><li>[TimeoutManager.IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection):アイドル接続で許容される時間。</li><li>[TimeoutManager.MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond):応答の最小送信レート。</li><li>[TimeoutManager.RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue):要求が、アプリにピック アップされるまでに要求キューの中に留まっていられる時間。</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | HTTP.sys に登録する <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> を指定します。 最も便利なのは [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*) です。これを使用して、コレクションにプレフィックスを追加できます。 これらは、リスナーを破棄する前ならいつでも変更できます。 |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | HTTP.sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> 構成を公開します。これはレジストリでも構成できます。 各設定に関する既定値などの詳細については、API のリンクを参照してください。<ul><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody?displayProperty=nameWithType>:HTTP サーバー API が Keep-Alive 接続でエンティティ本体をドレインするまでに許容される時間です。</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody?displayProperty=nameWithType>:要求のエンティティ本体が到着するまでに許容される時間。</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait?displayProperty=nameWithType>:HTTP サーバー API が要求ヘッダーを解析するまでに許容される時間。</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection?displayProperty=nameWithType>:アイドル接続で許容される時間。</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond?displayProperty=nameWithType>:応答の最小送信レート。</li><li><xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue?displayProperty=nameWithType>:要求が、アプリにピック アップされるまでに要求キューの中に留まっていられる時間。</li></ul> |  |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | HTTP.sys に登録する <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> を指定します。 最も便利なのは <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add%2A?displayProperty=nameWithType> です。これを使用して、コレクションにプレフィックスを追加できます。 これらは、リスナーを破棄する前ならいつでも変更できます。 |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -151,8 +152,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -180,7 +181,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -188,7 +189,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -254,7 +255,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、 *netsh.exe* のリファレンス ドキュメントです。
+   以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
@@ -419,8 +420,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -448,7 +449,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -456,7 +457,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -522,7 +523,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、 *netsh.exe* のリファレンス ドキュメントです。
+   以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
@@ -672,8 +673,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -701,7 +702,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -709,7 +710,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -775,7 +776,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、 *netsh.exe* のリファレンス ドキュメントです。
+   以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)
@@ -925,8 +926,8 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)である場合は、.NET Core、.NET Framework、またはその両方 (アプリが .NET Framework をターゲットとする .NET Core アプリである場合) をインストールします。
 
-   * **.NET Core** : アプリで .NET Core が必要な場合は、 [.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
-   * **.NET Framework** :アプリで .NET Framework が必要な場合は、 [.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
+   * **.NET Core**: アプリで .NET Core が必要な場合は、[.NET Core のダウンロード](https://dotnet.microsoft.com/download)から **.NET Core Runtime** インストーラーを取得して実行します。 サーバーに SDK 全体をインストールしないでください。
+   * **.NET Framework**:アプリで .NET Framework が必要な場合は、[.NET Framework のインストール ガイド](/dotnet/framework/install/)を参照してください。 必要な .NET Framework をインストールします。 最新の .NET Framework のインストーラーは [.NET Core のダウンロード](https://dotnet.microsoft.com/download) ページから入手できます。
 
    アプリが[自己完結型の展開](/dotnet/core/deploying/#self-contained-deployments-scd)の場合、アプリの展開内にランタイムが含まれています。 サーバーにフレームワークをインストールする必要はありません。
 
@@ -954,7 +955,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
 
 1. サーバーで URL プレフィックスを事前登録します。
 
-   HTTP.sys を構成するための組み込みツールは、 *netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
+   HTTP.sys を構成するための組み込みツールは、*netsh.exe* です。 *netsh.exe* を使用して、URL プレフィックスを予約し、X.509 証明書を割り当てることができます。 ツールを使用するには管理者特権が必要です。
 
    *netsh.exe* ツールを使用して、アプリ用に URL を登録します。
 
@@ -962,7 +963,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 " *URL の末尾にはスラッシュが必要です。* "
+   * `<URL>`:完全修飾 URL (Uniform Resource Locator)。 ワイルドカードのバインドは使用しないでください。 有効なホスト名かローカル IP アドレスを使用してください。 "*URL の末尾にはスラッシュが必要です。* "
    * `<USER>`:ユーザーまたはユーザー グループの名前を指定します。
 
    次の例では、サーバーのローカル IP アドレスは `10.0.0.4` です。
@@ -1028,7 +1029,7 @@ Visual Studio では、既定の起動プロファイルは IIS Express 用で�
    netsh http delete sslcert ipport=<IP>:<PORT>
    ```
 
-   以下は、 *netsh.exe* のリファレンス ドキュメントです。
+   以下は、*netsh.exe* のリファレンス ドキュメントです。
 
    * [Netsh Commands for Hypertext Transfer Protocol (HTTP)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10)) (ハイパーテキスト転送プロトコル (HTTP) 用の Netsh コマンド)
    * [UrlPrefix Strings](/windows/win32/http/urlprefix-strings) (UrlPrefix 文字列)

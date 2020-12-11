@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: a83637bb2690407dac5994bb63c765fcfa97462f
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 3bfd623a206f260d24e2c9009acdb3b205b7ab2d
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981896"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855405"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor のルーティング
 
@@ -57,7 +57,7 @@ Blazor Server は [ASP.NET Core エンドポイントのルーティング](xref
 </Router>
 ```
 
-`@page` ディレクティブを含む `.razor` ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Components.RouteAttribute> が指定されます。
+`@page` ディレクティブを含む `.razor` ファイルがコンパイルされると、生成されたクラスに、ルート テンプレートを指定する <xref:Microsoft.AspNetCore.Components.RouteAttribute> が指定されます。 アプリが起動すると、`AppAssembly` として指定されたアセンブリがスキャンされ、<xref:Microsoft.AspNetCore.Components.RouteAttribute> を持つすべてのコンポーネントに関する情報が収集されます。
 
 実行時に、<xref:Microsoft.AspNetCore.Components.RouteView> コンポーネントは、
 

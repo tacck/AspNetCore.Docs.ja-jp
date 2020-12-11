@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 64d18114e2fe9ee10edb902a98a281c3cd9f3393
-ms.sourcegitcommit: aa85f2911792a1e4783bcabf0da3b3e7e218f63a
+ms.openlocfilehash: cb2855f0293a6bc800bb5758cd1a8400d4434a24
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95417579"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855464"
 ---
 # <a name="create-json-web-apis-from-grpc"></a>gRPC から JSON Web API を作成する
 
@@ -105,6 +105,21 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 これが基本的な例です。 よりカスタマイズしたオプションについては、「[HttpRule](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule)」を参照してください。
+
+### <a name="enable-swaggeropenapi-support"></a>Swagger/OpenAPI のサポートを有効にする
+
+Swagger (OpenAPI) は REST API を記述するための仕様であり、言語に依存しません。 gRPC HTTP API は、RESTful gRPC サービスの Swagger エンドポイントを生成するために、[Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) と統合することができます。 その後、Swagger エンドポイントを [Swagger UI](https://swagger.io/swagger-ui/) やその他のツールで使用できます。
+
+gRPC HTTP API で Swagger を有効にするには:
+
+1. [Microsoft.AspNetCore.Grpc.Swagger](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.Swagger) へのパッケージ参照を追加します。
+2. *Startup.cs* で Swashbuckle を構成します。 `AddGrpcSwagger` メソッドにより、gRPC HTTP API エンドポイントを含めるように Swashbuckle が構成されます。
+
+[!code-csharp[](~/grpc/httpapi/Startup.cs?name=snippet_1&highlight=6-10,15-19)]
+
+Swashbuckle によって RESTful gRPC サービスの Swagger が生成されることを確認するには、アプリを起動して Swagger UI ページに移動します。
+
+![Swagger UI](~/grpc/httpapi/static/swaggerui.png)
 
 ### <a name="grpc-http-api-vs-grpc-web"></a>gRPC HTTP API と gRPC-Web
 

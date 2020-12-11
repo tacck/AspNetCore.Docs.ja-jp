@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 9462b73ad67394e79de08e7d2b13bf6a3145a04e
-ms.sourcegitcommit: 1be547564381873fe9e84812df8d2088514c622a
+ms.openlocfilehash: c6f9815f473380f96092d663cdd785fd19109701
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94507968"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855301"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor レイアウト
 
@@ -34,10 +34,10 @@ ms.locfileid: "94507968"
 
 技術的に、レイアウトはもう 1 つのコンポーネントにすぎません。 レイアウトは Razor テンプレートまたは C# コードで定義され、[データ バインディング](xref:blazor/components/data-binding)、[依存関係の挿入](xref:blazor/fundamentals/dependency-injection)、その他のコンポーネント シナリオを使用できます。
 
-*コンポーネント* を *レイアウト* に変えるには、コンポーネントが:
+コンポーネントをレイアウトに変換するには:
 
-* レイアウト内のレンダリングされるコンテンツの <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> プロパティを定義する <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> から継承している。
-* Razor 構文 `@Body` を使用して、コンテンツがレンダリングされるレイアウト マークアップ内の場所を指定している。
+* コンポーネントを <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> から継承します。 <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> によって、レイアウト内のレンダリングされるコンテンツの <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> プロパティが定義されます。
+* Razor 構文 `@Body` を使用して、コンテンツがレンダリングされるレイアウト マークアップ内の場所を指定します。
 
 次のコード サンプルに、レイアウト コンポーネント `MainLayout.razor` の Razor テンプレートを示します。 レイアウトは <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> を継承し、ナビゲーション バーとフッターの間に `@Body` を設定します。
 
@@ -89,7 +89,7 @@ Blazor プロジェクト テンプレートのいずれかに基づくアプリ
 
 次の `_Imports.razor` ファイルでインポートされるもの:
 
-* `MyCoolLayout`。
+* `MyCoolLayout`.
 * 同じフォルダーおよびサブフォルダー内のすべての Razor コンポーネント。
 * `BlazorApp1.Data` 名前空間。
  

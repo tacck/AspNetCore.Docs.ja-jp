@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
-ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
+ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
+ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/06/2020
-ms.locfileid: "94339985"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96855288"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -934,11 +934,33 @@ Failed to find a valid digest in the 'integrity' attribute for resource 'https:/
  1. ブラウザーの開発者ツールを開き、 *[ネットワーク]* タブを確認します。必要に応じて、ページを再度読み込み、要求と応答の一覧を表示します。 その一覧でエラーをトリガーしているファイルを見つけます。
  1. 応答に含まれる HTTP 状態コードを確認します。 サーバーから *200 - OK* (または別の 2xx 状態コード) 以外のものが返された場合は、サーバー側に診断すべき問題があります。 たとえば、状態コード 403 は承認に関する問題があることを意味しますが、状態コード 500 は、サーバーが未指定のエラーで失敗していることを意味します。 サーバー側のログを参照してアプリを診断し、修正してください。
  1. リソースに対する状態コードが *200 - OK* の場合は、ブラウザーの開発者ツールで応答の内容を確認し、その内容が予想されるデータと一致していることを確認します。 たとえば、よくある問題は、他のファイルに対しても要求から `index.html` データが返されるように、ルーティングを誤って構成してしまうことです。 `.wasm` 要求への応答が WebAssembly であり、`.dll` 要求への応答が .NET アセンブリ バイナリであることを確認してください。 そうでない場合、サーバー側のルーティングに関する問題を診断する必要があります。
+ 1. 「[整合性 PowerShell スクリプトのトラブルシューティング](#troubleshoot-integrity-powershell-script)」で、アプリの発行および展開された出力を検証しようと試みます。
 
 サーバーから正しいと思われるデータが返されていることを確認した場合は、ファイルのビルドと配布の間で何か別の原因によって内容が変更されています。 これを調査するには:
 
  * ファイルがビルドされた後にファイルが変更される場合に備えて、ビルド ツールチェーンと展開メカニズムを調べます。 この例としては、前に説明したように、Git によってファイルの改行コードが変換される場合が挙げられます。
  * 応答を動的に変更する (たとえば、HTML を縮小しようとする) ように設定されている場合があるため、Web サーバーまたは CDN の構成を確認します。 Web サーバーに HTTP 圧縮が実装されていても問題ありません (たとえば `content-encoding: br` や `content-encoding: gzip` が返される場合)。これは展開後の結果には影響しないためです。 ただし、Web サーバーによって圧縮されていないデータが変更される場合は "*問題があります*"。
+
+### <a name="troubleshoot-integrity-powershell-script"></a>整合性 PowerShell スクリプトのトラブルシューティング
+
+[`integrity.ps1`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/integrity.ps1?raw=true) PowerShell スクリプトを使用して、発行および展開された Blazor アプリを検証します。 このスクリプトは、アプリに Blazor フレームワークでは特定できない整合性の問題がある場合の出発点として提供されています。 使用するアプリに対してスクリプトのカスタマイズが必要になる場合があります。
+
+スクリプトを実行すると、`publish` フォルダー内のファイルと展開されたアプリからダウンロードしたファイルがチェックされ、整合性ハッシュを含むさまざまなマニフェストの問題が検出されます。 これらのチェックにより、最も一般的な問題が検出されます。
+
+* 発行された出力で、知らずにファイルを変更した。
+* アプリが展開ターゲットに正しく展開されなかった、または展開ターゲットの環境内で何かが変更された。
+* 展開されたアプリと、アプリの発行からの出力の間に違いがある。
+
+PowerShell コマンド シェルで次のコマンドを使用してスクリプトを呼び出します。
+
+```powershell
+.\integrity.ps1 {BASE URL} {PUBLISH OUTPUT FOLDER}
+```
+
+プレースホルダー:
+
+* `{BASE URL}`: 展開されたアプリの URL。
+* `{PUBLISH OUTPUT FOLDER}`: アプリの `publish` フォルダー、またはアプリが展開のために発行される場所へのパス。
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>非 PWA アプリの整合性チェックを無効にする
 
