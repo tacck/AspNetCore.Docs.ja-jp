@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061315"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506631"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断 SignalR
 
@@ -35,7 +35,7 @@ By [Andrew Stanton-看護師](https://twitter.com/anurse)
 ## <a name="server-side-logging"></a>サーバー側のログ記録
 
 > [!WARNING]
-> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
+> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください**。
 
 SignalRは ASP.NET Core の一部であるため、ASP.NET Core ログシステムを使用します。 既定の構成では、は SignalR ごくわずかな情報をログに記録しますが、これは構成できます。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
@@ -75,7 +75,7 @@ Visual Studio では、[ **出力** ] ウィンドウにログ出力が表示さ
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Azure App Service ポータルの [ **診断ログ** ] セクションで [ **アプリケーションログ (ファイルシステム)** ] オプションを有効にし、 **レベル** をに構成し `Verbose` ます。 ログは、 **ログストリーミング** サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
+Azure App Service ポータルの [**診断ログ**] セクションで [**アプリケーションログ (ファイルシステム)** ] オプションを有効にし、**レベル** をに構成し `Verbose` ます。 ログは、 **ログストリーミング** サービスおよび App Service のファイルシステムのログで使用できます。 詳細については、「 [Azure ログストリーミング](xref:fundamentals/logging/index#azure-log-streaming)」を参照してください。
 
 ### <a name="other-environments"></a>その他の環境
 
@@ -84,7 +84,7 @@ Azure App Service ポータルの [ **診断ログ** ] セクションで [ **�
 ## <a name="javascript-client-logging"></a>JavaScript クライアントのログ記録
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください**。
 
 JavaScript クライアントを使用する場合は、でメソッドを使用してログオプションを構成でき `configureLogging` `HubConnectionBuilder` ます。
 
@@ -110,14 +110,14 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
-## <a name="net-client-logging"></a> .NET クライアント ログ
+## <a name="net-client-logging"></a>.NET クライアントのログ記録
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください**。
 
 .NET クライアントからログを取得するには、でメソッドを使用し `ConfigureLogging` `HubConnectionBuilder` ます。 これは、およびのメソッドと同じように動作し `ConfigureLogging` `WebHostBuilder` `HostBuilder` ます。 ASP.NET Core で使用するのと同じログプロバイダーを構成することができます。 ただし、個々のログプロバイダーに対して NuGet パッケージを手動でインストールして有効にする必要があります。
 
-.NET クライアントのログ記録をアプリに追加するに Blazor WebAssembly は、「」を参照してください <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> 。
+.NET クライアントのログ記録をアプリに追加するに Blazor WebAssembly は、「」を参照してください <xref:blazor/fundamentals/logging#signalr-net-client-logging> 。
 
 ### <a name="console-logging"></a>[コンソールのログ記録]
 
@@ -158,7 +158,7 @@ Fiddler は、HTTP トレースを収集するための非常に強力なツー�
 
 HTTPS を使用して接続する場合は、Fiddler が HTTPS トラフィックの暗号化を解除できるようにするための追加の手順がいくつかあります。 詳細については、 [Fiddler のドキュメント](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)を参照してください。
 
-トレースを収集したら、[ **ファイル**  >  **Save**  >  ] メニューの [ **すべてのセッション** を保存] をクリックして、トレースをエクスポートできます。
+トレースを収集したら、[**ファイル**  >    >  ] メニューの [**すべてのセッション** を保存] をクリックして、トレースをエクスポートできます。
 
 ![Fiddler からすべてのセッションをエクスポートしています](diagnostics/fiddler-export.png)
 
@@ -174,7 +174,7 @@ tcpdump -i [interface] -w trace.pcap
 
 を `[interface]` キャプチャするネットワークインターフェイスで置き換えます。 通常は、 `/dev/eth0` (標準イーサネットインターフェイスの場合) または `/dev/lo0` (localhost トラフィックの場合) のようになります。 詳細については、 `tcpdump` ホストシステムの man ページを参照してください。
 
-## <a name="collect-a-network-trace-in-the-browser"></a>ブラウザーでネットワークトレースを収集する
+## <a name="collect-a-network-trace-in-the-browser"></a>ブラウザーでネットワーク トレースを収集する
 
 この方法は、ブラウザーベースのアプリに対してのみ機能します。
 
@@ -226,7 +226,7 @@ GitHub の問題に診断ファイルを添付するには、名前を変更し�
 
 SignalR サーバーメトリックは、イベントソースで報告され <xref:Microsoft.AspNetCore.Http.Connections> ます。
 
-| Name                    | [説明]                 |
+| 名前                    | 説明                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | 開始された接続の合計   |
 | `connections-stopped`   | 停止した接続の合計数   |
@@ -251,7 +251,7 @@ Press p to pause, r to resume, q to quit.
     Total Connections Timed Out                 0
 ```
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>
