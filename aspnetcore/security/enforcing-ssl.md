@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 209d055f6205eceb9efb5434427c303345791809
-ms.sourcegitcommit: 8363e44f630fcc6433ccd2a85f7aa9567cd274ed
+ms.openlocfilehash: 3277fda0d1dcb5121a2172b3fc1e4869ed6f8430
+ms.sourcegitcommit: fc4cce2767e34f81079510f34bd54e9d0aa86497
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "94981961"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97592870"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core に HTTPS を適用する
 
@@ -93,7 +93,7 @@ Web アプリの運用 ASP.NET Core では次のものを使用することを�
 前の強調表示されているコード:
 
 * 既定の [HttpsRedirectionOptions statuscode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)) を使用します。
-* [HttpsRedirectionOptions.HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) `ASPNETCORE_HTTPS_PORT` 環境変数または[iserverHttpsRedirectionOptions 機能](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)でオーバーライドされない限り、既定の (null) を使用します。
+* [](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) `ASPNETCORE_HTTPS_PORT` 環境変数または[iserverHttpsRedirectionOptions 機能](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)でオーバーライドされない限り、既定の (null) を使用します。
 
 永続的なリダイレクトではなく、一時的なリダイレクトを使用することをお勧めします。 リンク キャッシュを使用すると、開発環境で不安定な動作が発生する可能性があります。 アプリが非開発環境にあるときに永続的なリダイレクト状態コードを送信する場合は、「運用環境 [で永続的なリダイレクトを構成](#configure-permanent-redirects-in-production) する」セクションを参照してください。 [Hsts](#http-strict-transport-security-protocol-hsts)を使用して、セキュリティで保護されたリソース要求のみをアプリケーションに送信する (運用環境のみ) ことをクライアントに通知することをお勧めします。
 
@@ -162,7 +162,7 @@ Kestrel または HTTP.sys が公開エッジサーバーとして使用され�
 
 Azure App Service にデプロイする場合は、 [「チュートリアル: 既存のカスタム SSL 証明書を Azure Web Apps にバインドする](/azure/app-service/app-service-web-tutorial-custom-ssl)」のガイダンスに従ってください。
 
-### <a name="options"></a>オプション
+### <a name="options"></a>Options
 
 次の強調表示されたコードは、 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) を呼び出してミドルウェアオプションを構成します。
 
@@ -397,6 +397,8 @@ Windows Subsystem for Linux (WSL) は、HTTPS 自己署名証明書を生成し�
 
 このセクションでは ASP.NET Core の HTTPS 開発証明書がインストールされ、 [信頼](#trust)されているが、証明書が信頼されていないことを示すブラウザーの警告が表示される場合に役立つ情報を提供します。 ASP.NET Core HTTPS 開発証明書は [Kestrel](xref:fundamentals/servers/kestrel)によって使用されます。
 
+IIS Express 証明書を修復するには、 [この Stackoverflow](https://stackoverflow.com/a/20048613/502537) の問題を参照してください。
+
 ### <a name="all-platforms---certificate-not-trusted"></a>すべてのプラットフォーム-信頼されていない証明書
 
 次のコマンドを実行します。
@@ -467,7 +469,7 @@ Firefox を IIS Express または Kestrel と共に使用するには、を設�
 
 詳細については、「 [Firefox での証明機関 (ca) の設定](https://support.mozilla.org/kb/setting-certificate-authorities-firefox)」を参照してください。
 
-## <a name="additional-information"></a>追加情報
+## <a name="additional-information"></a>関連情報
 
 * <xref:host-and-deploy/proxy-load-balancer>
 * [Apache: HTTPS 構成を使用した Linux での ASP.NET Core のホスト](xref:host-and-deploy/linux-apache#https-configuration)
