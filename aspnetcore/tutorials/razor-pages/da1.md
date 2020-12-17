@@ -4,6 +4,7 @@ author: rick-anderson
 description: Razor ページのチュートリアル シリーズのパート 5。
 ms.author: riande
 ms.date: 09/20/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 460950413d1dd2d3539c1d62b0eb11f6bb5144a9
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 46fbfb50afd03f918f9e02bcc8c1dbde9a080ca4
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96419968"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485941"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>パート 5、ASP.NET Core アプリでの生成済みページの更新
 
@@ -53,7 +54,7 @@ ms.locfileid: "96419968"
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として https://localhost:1234/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/razor-pages/da1/edit7.png)
 
-**[Edit]\(編集\)** 、 **[Details]\(詳細\)** 、および **[Delete]\(削除\)** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+**[Edit]\(編集\)** 、 **[Details]\(詳細\)** 、および **[Delete]\(削除\)** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
@@ -174,7 +175,7 @@ Pages/Movies を参照し、 **[編集]** リンクをポイントしてター�
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として http://localhost:1234/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/razor-pages/da1/edit7.png)
 
-**[Edit]\(編集\)** 、 **[Details]\(詳細\)** 、および **[Delete]\(削除\)** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+**[Edit]\(編集\)** 、 **[Details]\(詳細\)** 、および **[Delete]\(削除\)** の各リンクは、*Pages/Movies/Index.cshtml* ファイルで [アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 

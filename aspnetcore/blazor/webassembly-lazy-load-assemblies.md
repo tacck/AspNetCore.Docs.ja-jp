@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 6a1feffb5341d432d6d1949a9e26b9537b85ba03
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 6e7fa6e231e97793fbf7e1ac1d208bf3013c6fce
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054789"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506574"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core でのアセンブリの遅延読み込みBlazor WebAssembly
 
 作成者: [Safia Abdalla](https://safia.rocks)、[Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssembly アプリの起動時のパフォーマンスは、一部のアプリケーション アセンブリの読み込みをそれが必要になるまで延期することで改善できます。これは " *遅延読み込み* " と呼ばれています。 たとえば、1 つのコンポーネントをレンダリングするためにのみ使用されるアセンブリの読み込みを、ユーザーがそのコンポーネントに移動する場合にのみ行うように設定することができます。 読み込みが完了すると、アセンブリはクライアント側にキャッシュされ、今後のすべてのナビゲーションで使用できるようになります。
+Blazor WebAssembly アプリの起動時のパフォーマンスは、一部のアプリケーション アセンブリの読み込みをそれが必要になるまで延期することで改善できます。これは "*遅延読み込み*" と呼ばれています。 たとえば、1 つのコンポーネントをレンダリングするためにのみ使用されるアセンブリの読み込みを、ユーザーがそのコンポーネントに移動する場合にのみ行うように設定することができます。 読み込みが完了すると、アセンブリはクライアント側にキャッシュされ、今後のすべてのナビゲーションで使用できるようになります。
 
 Blazor の遅延読み込み機能を使用すると、アプリ アセンブリに遅延読み込みのマークを付けることができます。これにより、実行時にユーザーが特定のルートに移動したとき、アセンブリが読み込まれます。 この機能は、プロジェクト ファイルに対する変更と、アプリケーションのルーターに対する変更で構成されています。
 
@@ -75,6 +75,8 @@ Blazor がルーティング可能なコンポーネントを求めて探索す�
 }
 ```
 
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 `OnNavigateAsync` コールバックから、ハンドルされない例外がスローされた場合は、[Blazorエラー UI](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) が呼び出されます。
 
 ### <a name="assembly-load-logic-in-onnavigateasync"></a>`OnNavigateAsync` 内のアセンブリ読み込みロジック
@@ -104,7 +106,7 @@ Blazor がルーティング可能なコンポーネントを求めて探索す�
 * JS 相互運用を使用して、ネットワーク呼び出しを介してアセンブリをフェッチします。
 * ブラウザー内の WebAssembly で実行されているランタイムにアセンブリを読み込みます。
 
-フレームワークの遅延読み込みの実装では、ホストされた Blazor ソリューションでのプリレンダリングによる遅延読み込みがサポートされます。 プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。 " *サーバー* " プロジェクトの `Startup.ConfigureServices` メソッド (`Startup.cs`) に、手動で `LazyAssemblyLoader` を登録します。
+フレームワークの遅延読み込みの実装では、ホストされた Blazor ソリューションでのプリレンダリングによる遅延読み込みがサポートされます。 プリレンダリング中は、遅延読み込みのマークが付けられたものも含め、すべてのアセンブリが読み込まれると見なされます。 "*サーバー*" プロジェクトの `Startup.ConfigureServices` メソッド (`Startup.cs`) に、手動で `LazyAssemblyLoader` を登録します。
 
 ```csharp
 services.AddScoped<LazyAssemblyLoader>();
@@ -132,6 +134,8 @@ services.AddScoped<LazyAssemblyLoader>();
 
 ...
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 ### <a name="handle-cancellations-in-onnavigateasync"></a>`OnNavigateAsync` でキャンセルを処理する
 
@@ -169,6 +173,8 @@ services.AddScoped<LazyAssemblyLoader>();
     }
 }
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 > [!NOTE]
 > `NavigationContext` 内のキャンセル トークンが取り消された場合にスローしないと、前のナビゲーションからのコンポーネントをレンダリングするなど、意図しない動作が発生する可能性があります。
@@ -230,6 +236,8 @@ services.AddScoped<LazyAssemblyLoader>();
     }
 }
 ```
+
+[!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 ## <a name="troubleshoot"></a>トラブルシューティング
 

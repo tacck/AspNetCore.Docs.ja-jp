@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/components/prerendering-and-integration
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: affca6c9b585b91787f94a13144d07bedfefdd37
-ms.sourcegitcommit: fe5a287fa6b9477b130aa39728f82cdad57611ee
+ms.openlocfilehash: 3402117334548f9d90880d4f536e8baa288e7bc9
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431689"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506982"
 ---
 # <a name="prerender-and-integrate-aspnet-core-no-locrazor-components"></a>ASP.NET Core Razor コンポーネントのプリレンダリングと統合を行う
 
@@ -308,6 +308,8 @@ Razor Pages アプリでルーティング可能な Razor コンポーネント�
    </Router>
    ```
 
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
+
 1. 次の内容の `_Host.cshtml` ファイルを `Pages` フォルダーに追加します。
 
    ```cshtml
@@ -376,6 +378,8 @@ MVC アプリでルーティング可能な Razor コンポーネントをサポ
        </NotFound>
    </Router>
    ```
+
+   [!INCLUDE[](~/blazor/includes/prefer-exact-matches.md)]
 
 1. 次の内容の `_Host.cshtml` ファイルを `Views/Home` フォルダーに追加します。
 

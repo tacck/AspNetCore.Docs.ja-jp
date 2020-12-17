@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: a98537f53229d098328f5b14bf1d5060001ebd80
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 11312a34dc62dd3bace791819f62379bffbb1c49
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855238"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97592838"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor で .NET メソッドから JavaScript 関数を呼び出す
 
@@ -172,7 +172,7 @@ JavaScript ファイルを参照する `<script>` タグを `wwwroot/index.html`
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Blazor Server アプリがプリレンダリングされていることを検出する
  
-[!INCLUDE[](~/includes/blazor-prerendering.md)]
+[!INCLUDE[](~/blazor/includes/prerendering.md)]
 
 ## <a name="capture-references-to-elements"></a>要素への参照をキャプチャする
 
@@ -492,7 +492,7 @@ JS 相互運用は、ネットワーク エラーにより失敗する可能性�
 
 リソース枯渇の詳細については、「<xref:blazor/security/server/threat-mitigation>」を参照してください。
 
-[!INCLUDE[](~/includes/blazor-share-interop-code.md)]
+[!INCLUDE[](~/blazor/includes/share-interop-code.md)]
 
 ## <a name="avoid-circular-object-references"></a>循環オブジェクト参照の回避
 

@@ -4,6 +4,7 @@ author: rick-anderson
 description: Razor ページのチュートリアル シリーズのパート 2。 このセクションでは、モデル クラスを追加します。
 ms.author: riande
 ms.date: 11/11/2020
+ms.custom: contperf-fy21q2
 no-loc:
 - Index
 - appsettings.json
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: b2e840e20d034b42b2dc4a525b1dd76e44bbe3a8
-ms.sourcegitcommit: db0a6eb0be7bd7f22810a71fe9bf30e957fd116a
+ms.openlocfilehash: 7ea28e0ecad410335c37c603c8ec1eb5e6e41d33
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96420059"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485993"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>パート 2: ASP.NET Core で Razor ページ アプリにモデルを追加する
 
