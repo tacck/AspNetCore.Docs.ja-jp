@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 500342ac979efdee824ac0d4b5757ca9804f3b30
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 29f1a1f211688a1edcd31c7230e7216df7c89eef
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054815"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506813"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor 用のツール
 
@@ -43,7 +43,9 @@ ms.locfileid: "93054815"
 
 1. Blazor WebAssembly エクスペリエンスの場合は、 **Blazor WebAssembly アプリ** テンプレートを選択します。 Blazor Server エクスペリエンスの場合は、 **Blazor Server アプリ** テンプレートを選択します。 **[作成]** を選択します。
 
-   2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。
+   ホステッド Blazor WebAssembly エクスペリエンスの場合は、 **[ASP.NET Core hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。
+
+   2 つの Blazor ホスティング モデル、 *Blazor WebAssembly* (スタンドアロンとホステッド) と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。
 
 1. <kbd>Ctrl</kbd>+<kbd>F5</kbd> キーを押してアプリを実行します。
 
@@ -69,13 +71,19 @@ ASP.NET Core HTTPS 開発証明書の信頼の詳細については、「<xref:s
    dotnet new blazorwasm -o WebApplication1
    ```
 
+   ホステッド Blazor WebAssembly エクスペリエンスの場合は、ホステッド オプション (`-ho` または `--hosted`) をコマンドに追加します。
+   
+   ```dotnetcli
+   dotnet new blazorwasm -o WebApplication1 -ho
+   ```
+   
    Blazor Server エクスペリエンスの場合は、コマンド シェルで次のコマンドを実行します。
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。
+   2 つの Blazor ホスティング モデル、 *Blazor WebAssembly* (スタンドアロンとホステッド) と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。
 
 1. Visual Studio Code で `WebApplication1` フォルダーを開きます。
 
@@ -105,14 +113,36 @@ Linux で証明書を信頼するための一元的な方法はありません�
 
    Blazor WebAssembly エクスペリエンスの場合は、 **Blazor WebAssembly アプリ** テンプレートを選択します。 Blazor Server エクスペリエンスの場合は、 **Blazor Server アプリ** テンプレートを選択します。 **[次へ]** を選択します。
 
-   2 つの Blazor ホスティング モデルである *Blazor WebAssembly* と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。
+   2 つの Blazor ホスティング モデル、 *Blazor WebAssembly* (スタンドアロンとホステッド) と *Blazor Server* については、「<xref:blazor/hosting-models>」を参照してください。
 
 1. **[認証]** に **[認証なし]** が設定されていることを確認します。 **[次へ]** を選択します。
 
+1. ホステッド Blazor WebAssembly エクスペリエンスの場合は、 **[ASP.NET Core hosted]\(ASP.NET Core ホステッド\)** チェック ボックスをオンにします。
+
 1. **[プロジェクト名]** フィールドで、アプリに `WebApplication1` という名前を付けます。 **[作成]** を選択します。
 
-1. *デバッガーを使用せずに* アプリを実行するには、 **[実行]**  >  **[デバッグなしで開始]** の順に選択します。 **[実行]**  > 、 **[デバッグの開始]** か [実行] (&#9654;) ボタンでアプリを実行すると、" *デバッガーなしで* " アプリが実行されます。
+1. *デバッガーを使用せずに* アプリを実行するには、 **[実行]**  >  **[デバッグなしで開始]** の順に選択します。 **[実行]**  > 、 **[デバッグの開始]** か [実行] (&#9654;) ボタンでアプリを実行すると、"*デバッガーなしで*" アプリが実行されます。
 
 開発証明書を信頼することを求めるメッセージが表示されたら、証明書を信頼して続行します。 証明書を信頼するには、ユーザーとキーチェーンのパスワードが必要です。 ASP.NET Core HTTPS 開発証明書の信頼の詳細については、「<xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos>」を参照してください。
 
 ::: zone-end
+
+## <a name="use-visual-studio-code-for-cross-platform-no-locblazor-development"></a>クロスプラットフォームの Blazor 開発に Visual Studio Code を使用する
+
+[Visual Studio Code](https://code.visualstudio.com/) は、Blazor アプリの開発に使用できるオープン ソースのクロスプラットフォーム統合開発環境 (IDE) です。 .NET CLI を使用して、Visual Studio Code で開発用の新しい Blazor アプリを作成します。 詳細については、[この記事の Linux バージョン](/aspnet/core/blazor/tooling?pivots=linux)を参照してください。
+
+## <a name="no-locblazor-template-options"></a>Blazor テンプレート オプション
+
+Blazor フレームワークには、Blazor ホスティング モデルのそれぞれに対して新しいアプリを作成するためのテンプレートが用意されています。 テンプレートは、Blazor 開発用に選択したツール (Visual Studio、Visual Studio for Mac、Visual Studio Code、または .NET CLI) に関係なく、新しい Blazor プロジェクトとソリューションを作成するために使用されます。
+
+* Blazor WebAssembly プロジェクト テンプレート: `blazorwasm`
+* Blazor Server プロジェクト テンプレート: `blazorserver`
+
+Blazor のホスティング モデルの詳細については、「<xref:blazor/hosting-models>」を参照してください。
+
+テンプレート オプションを使用するには、コマンド シェルで [`dotnet new`](/dotnet/core/tools/dotnet-new) CLI コマンドにヘルプ オプション (`-h` または `--help`) を渡します。
+
+```dotnetcli
+dotnet new blazorwasm --h
+dotnet new blazorserver --h
+```
