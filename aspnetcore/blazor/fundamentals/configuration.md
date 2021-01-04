@@ -5,7 +5,7 @@ description: アプリの設定、認証、ログの構成など、Blazor アプ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/29/2020
+ms.date: 12/10/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,138 +19,60 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: f8b1c49ab29bb8a88ca6d9785cd7ee151315e065
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.openlocfilehash: 5889d775c09ee23f19bf3ff59344c52d469c4bdc
+ms.sourcegitcommit: 6299f08aed5b7f0496001d093aae617559d73240
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93234375"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97485968"
 ---
 # <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor の構成
 
 > [!NOTE]
 > このトピックの対象は、Blazor WebAssembly です。 ASP.NET Core アプリの構成に関する一般的なガイダンスについては、「<xref:fundamentals/configuration/index>」を参照してください。
 
-Blazor WebAssembly では既定で、アプリ設定ファイルから構成が読み込まれます。
+Blazor WebAssembly を使用すると、既定で次のアプリ設定ファイルから構成が読み込まれます。
 
-* `wwwroot/appsettings.json`
-* `wwwroot/appsettings.{ENVIRONMENT}.json`
+* `wwwroot/appsettings.json`.
+* `wwwroot/appsettings.{ENVIRONMENT}.json`。ここで、`{ENVIRONMENT}` プレースホルダーはアプリの[ランタイム環境](xref:fundamentals/environments)です。
 
-アプリによって登録されたその他の構成プロバイダーから構成を取得することもできます。
+アプリによって登録されたその他の構成プロバイダーで構成を指定することもできますが、すべてのプロバイダーやプロバイダーの機能が Blazor WebAssembly アプリに適しているわけではありません。
 
-すべてのプロバイダーまたはプロバイダー機能が Blazor WebAssembly アプリに適しているわけではありません。
-
-* [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration): クライアント シークレットのシナリオでは、プロバイダーはマネージド ID およびアプリケーション ID (クライアント ID) に対してはサポートされていません。 クライアント シークレットを使用したアプリケーション ID は、ASP.NET Core アプリ、特に Blazor WebAssembly アプリについては推奨されません。これは、クライアント シークレットをサービスにアクセスするためにクライアント側でセキュリティで保護することができないためです。
+* [Azure Key Vault 構成プロバイダー](xref:security/key-vault-configuration): クライアント シークレットのシナリオでは、プロバイダーはマネージド ID およびアプリケーション ID (クライアント ID) に対してはサポートされていません。 クライアント シークレットを使用したアプリケーション ID は、ASP.NET Core アプリ、特に Blazor WebAssembly アプリでは推奨されません。これは、クライアント シークレットを Azure Key Vault サービスにアクセスするためにクライアント側ではセキュリティで保護できないためです。
 * [Azure App Configuration プロバイダー](/azure/azure-app-configuration/quickstart-aspnet-core-app): このプロバイダーは Blazor WebAssembly アプリに適していません。これは、Blazor WebAssembly アプリは Azure 内のサーバー上では実行されないためです。
 
 > [!WARNING]
-> Blazor WebAssembly アプリでの構成は、ユーザーに表示されます。 **アプリのシークレットや資格情報を構成に保存しないでください。**
+> Blazor WebAssembly アプリでの構成は、ユーザーに表示されます。 **アプリのシークレット、資格情報、その他の機微なデータを Blazor WebAssembly アプリの構成に格納しないでください。**
 
 構成プロバイダーの詳細については、「<xref:fundamentals/configuration/index>」を参照してください。
 
 ## <a name="app-settings-configuration"></a>アプリ設定の構成
 
+アプリ設定ファイルの構成は既定で読み込まれます。 次の例では、UI 構成値がアプリ設定ファイルに格納され、Blazor フレームワークによって自動的に読み込まれます。 その値はコンポーネントによって読み取られます。
+
 `wwwroot/appsettings.json`:
 
 ```json
 {
-  "message": "Hello from config!"
+  "h1FontSize": "50px"
 }
 ```
 
 構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
 
+`Pages/ConfigurationExample.razor`:
+
 ```razor
-@page "/"
+@page "/configuration-example"
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
 
-<h1>Configuration example</h1>
-
-<p>Message: @Configuration["message"]</p>
+<h1 style="font-size:@Configuration["h1FontSize"]">
+    Configuration example
+</h1>
 ```
 
-## <a name="custom-configuration-provider-with-ef-core"></a>EF Core を使用したカスタム構成プロバイダー
-
-「<xref:fundamentals/configuration/index#custom-configuration-provider>」で説明されている EF Core を使用したカスタム構成プロバイダーは、Blazor WebAssembly アプリで動作します。
-
-`Program.Main` (`Program.cs`) で次のコードを使用して、例の構成プロバイダーを追加します。
-
-```csharp
-builder.Configuration.AddEFConfiguration(
-    options => options.UseInMemoryDatabase("InMemoryDb"));
-```
-
-構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
-
-```razor
-@using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration
-
-<ul>
-    <li>@Configuration["quote1"]</li>
-    <li>@Configuration["quote2"]</li>
-    <li>@Configuration["quote3"]</li>
-</ul>
-```
-
-## <a name="memory-configuration-source"></a>メモリ構成のソース
-
-次の例では、<xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> を使用して追加の構成を指定します。
-
-`Program.Main`:
-
-```csharp
-using Microsoft.Extensions.Configuration.Memory;
-
-...
-
-var vehicleData = new Dictionary<string, string>()
-{
-    { "color", "blue" },
-    { "type", "car" },
-    { "wheels:count", "3" },
-    { "wheels:brand", "Blazin" },
-    { "wheels:brand:type", "rally" },
-    { "wheels:year", "2008" },
-};
-
-var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
-
-...
-
-builder.Configuration.Add(memoryConfig);
-```
-
-構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
-
-```razor
-@page "/"
-@using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration
-
-<h1>Configuration example</h1>
-
-<h2>Wheels</h2>
-
-<ul>
-    <li>Count: @Configuration["wheels:count"]</li>
-    <li>Brand: @Configuration["wheels:brand"]</li>
-    <li>Type: @Configuration["wheels:brand:type"]</li>
-    <li>Year: @Configuration["wheels:year"]</li>
-</ul>
-
-@code {
-    protected override void OnInitialized()
-    {
-        var wheelsSection = Configuration.GetSection("wheels");
-        
-        ...
-    }
-}
-```
-
-その他の構成ファイルを `wwwroot` フォルダーから構成に読み取るには、<xref:System.Net.Http.HttpClient> を使用してファイルの内容を取得します。 この方法を使用する場合、既存の <xref:System.Net.Http.HttpClient> サービスの登録では、次の例に示すように、作成されたローカル クライアントを使用してファイルを読み取ることができます。
+その他の構成ファイルを `wwwroot` フォルダーから構成に読み取るには、<xref:System.Net.Http.HttpClient> を使用してファイルの内容を取得します。 次の例では、構成ファイル (`cars.json`) をアプリの構成に読み取ります。
 
 `wwwroot/cars.json`:
 
@@ -160,13 +82,15 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-`Program.Main`:
+`Program.cs` に <xref:Microsoft.Extensions.Configuration?displayProperty=fullName> の名前空間を追加します。
 
 ```csharp
 using Microsoft.Extensions.Configuration;
+```
 
-...
+`Program.cs` の `Program.Main` で、クライアントを使用してファイルを読み取るように、既存の <xref:System.Net.Http.HttpClient> サービス登録を変更します。
 
+```csharp
 var http = new HttpClient()
 {
     BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
@@ -180,7 +104,129 @@ using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
 ```
 
+## <a name="custom-configuration-provider-with-ef-core"></a>EF Core を使用したカスタム構成プロバイダー
+
+「<xref:fundamentals/configuration/index#custom-configuration-provider>」で説明されている EF Core を使用したカスタム構成プロバイダーは、Blazor WebAssembly アプリで動作します。
+
+> [!WARNING]
+> Blazor WebAssembly アプリで読み込まれたデータベース接続文字列とデータベースは安全ではないため、機微なデータの格納には使用できません。
+
+アプリのプロジェクト ファイルに、[`Microsoft.EntityFrameworkCore`](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore) と [`Microsoft.EntityFrameworkCore.InMemory`](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory) のパッケージ参照を追加します。
+
+「<xref:fundamentals/configuration/index#custom-configuration-provider>」で説明されている EF Core 構成クラスを追加します。
+
+<xref:Microsoft.EntityFrameworkCore?displayProperty=fullName> と <xref:Microsoft.Extensions.Configuration.Memory?displayProperty=fullName> の名前空間を `Program.cs` に追加します。
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.Memory;
+```
+
+`Program.cs` の `Program.Main`:
+
+```csharp
+builder.Configuration.AddEFConfiguration(
+    options => options.UseInMemoryDatabase("InMemoryDb"));
+```
+
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
+
+`Pages/EFCoreConfig.razor`:
+
+```razor
+@page "/efcore-config"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>EF Core configuration example</h1>
+
+<h2>Quotes</h2>
+
+<ul>
+    <li>@Configuration["quote1"]</li>
+    <li>@Configuration["quote2"]</li>
+    <li>@Configuration["quote3"]</li>
+</ul>
+
+<p>
+    Quotes &copy;2005 
+    <a href="https://www.uphe.com/">Universal Pictures</a>: 
+    <a href="https://www.uphe.com/movies/serenity">Serenity</a>
+</p>
+```
+
+## <a name="memory-configuration-source"></a>メモリ構成のソース
+
+次の例では、`Program.Main` で <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> を使用して追加の構成を指定します。
+
+`Program.cs` に <xref:Microsoft.Extensions.Configuration.Memory?displayProperty=fullName> の名前空間を追加します。
+
+```csharp
+using Microsoft.Extensions.Configuration.Memory;
+```
+
+`Program.cs` の `Program.Main`:
+
+```csharp
+var vehicleData = new Dictionary<string, string>()
+{
+    { "color", "blue" },
+    { "type", "car" },
+    { "wheels:count", "3" },
+    { "wheels:brand", "Blazin" },
+    { "wheels:brand:type", "rally" },
+    { "wheels:year", "2008" },
+};
+
+var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
+
+builder.Configuration.Add(memoryConfig);
+```
+
+構成データにアクセスするために、コンポーネントに <xref:Microsoft.Extensions.Configuration.IConfiguration> インスタンスを挿入します。
+
+`Pages/MemoryConfig.razor`:
+
+```razor
+@page "/memory-config"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Memory configuration example</h1>
+
+<h2>General specifications</h2>
+
+<ul>
+    <li>Color: @Configuration["color"]</li>
+    <li>Type: @Configuration["type"]</li>
+</ul>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
+</ul>
+```
+
+<xref:Microsoft.Extensions.Configuration.IConfiguration.GetSection%2A?displayProperty=nameWithType>で C# コード内の構成セクションを取得します。 次の例では、前の例の構成の `wheels` セクションを取得します。
+
+```razor
+@code {
+    protected override void OnInitialized()
+    {
+        var wheelsSection = Configuration.GetSection("wheels");
+
+        ...
+    }
+}
+```
+
 ## <a name="authentication-configuration"></a>認証の構成
+
+アプリ設定ファイルで認証構成を指定します。
 
 `wwwroot/appsettings.json`:
 
@@ -193,7 +239,9 @@ builder.Configuration.AddJsonStream(stream);
 }
 ```
 
-`Program.Main`:
+`Program.Main` で <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind%2A?displayProperty=nameWithType> を使用して、Identity プロバイダーの構成を読み込みます。 次の例では、[OIDC プロバイダー](xref:blazor/security/webassembly/standalone-with-authentication-library)の構成を読み込みます。
+
+`Program.cs`:
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
@@ -202,13 +250,7 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logging-configuration"></a>ログの構成
 
-[`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) のパッケージ参照を追加します。
-
-```xml
-<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
-```
-
-プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
+アプリのプロジェクト ファイルに、[`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) のパッケージ参照を追加します。 アプリ設定ファイルで、ログ構成を指定します。 ログ構成は `Program.Main` に読み込まれます。
 
 `wwwroot/appsettings.json`:
 
@@ -224,20 +266,24 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-`Program.Main`:
+`Program.cs` に <xref:Microsoft.Extensions.Logging?displayProperty=fullName> の名前空間を追加します。
 
 ```csharp
 using Microsoft.Extensions.Logging;
+```
 
-...
+`Program.cs` の `Program.Main`:
 
+```csharp
 builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 ```
 
 ## <a name="host-builder-configuration"></a>ホスト ビルダーの構成
 
-`Program.Main`:
+`Program.Main` で <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Configuration?displayProperty=nameWithType> のホスト ビルダーの構成を読み取ります。
+
+`Program.cs` の `Program.Main`:
 
 ```csharp
 var hostname = builder.Configuration["HostName"];

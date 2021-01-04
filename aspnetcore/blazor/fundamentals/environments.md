@@ -5,7 +5,7 @@ description: Blazor WebAssembly アプリの環境を設定する方法など、
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 12/11/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,25 +19,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: 61d46e0bd83d8bd82bf7faaf9d8f2fecbacc2ffa
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 9ba23753df1726ee4c8a9802e1a1260ef7cf6fa5
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056037"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97506956"
 ---
 # <a name="aspnet-core-no-locblazor-environments"></a>ASP.NET Core Blazor の環境
 
 > [!NOTE]
-> このトピックの対象は、Blazor WebAssembly です。 ASP.NET Core アプリの構成に関する一般的なガイダンスについては、「<xref:fundamentals/environments>」を参照してください。
+> このトピックの対象は、Blazor WebAssembly です。 Blazor Server アプリに使用する方法について説明している ASP.NET Core アプリの構成に関する一般的なガイダンスについては、「<xref:fundamentals/environments>」を参照してください。
 
 アプリをローカルで実行する場合、環境は既定で開発に設定されます。 アプリが発行されると、環境は既定で実稼働になります。
 
-ホストされている Blazor WebAssembly アプリは、`blazor-environment` ヘッダーを追加して環境をブラウザーに送信するミドルウェアを介して、サーバーから環境を取得します。 ヘッダーの値は環境です。 ホストされた Blazor アプリとサーバー アプリによって、同じ環境が共有されます。 環境の構成方法などの詳細については、「<xref:fundamentals/environments>」を参照してください。
+ホストされている Blazor WebAssembly ソリューションのクライアント側 Blazor アプリ ( *`Client`* ) によって、環境をブラウザーに伝えるミドルウェアを介するソリューションの *`Server`* アプリからの環境が決まります。 *`Server`* アプリによって、ヘッダーの値として "environment" (環境) を含む `blazor-environment` という名前のヘッダーが追加されます。 *`Client`* アプリによってそのヘッダーが読み取られます。 ソリューションの *`Server`* アプリは ASP.NET Core アプリであるため、環境の構成方法の詳細については「<xref:fundamentals/environments>」を参照してください。
 
-ローカルで実行されているスタンドアロン アプリの場合、開発サーバーでは `blazor-environment` ヘッダーが追加され、開発環境が指定されます。 他のホスト環境の環境を指定するには、`blazor-environment` ヘッダーを追加します。
+ローカルで実行されているスタンドアロン Blazor WebAssembly アプリの場合、開発サーバーによって `blazor-environment` ヘッダーが追加され、開発環境が指定されます。 他のホスト環境の環境を指定するには、`blazor-environment` ヘッダーを追加します。
 
-次の IIS の例では、発行された `web.config` ファイルにカスタム ヘッダーを追加しています。 `web.config` ファイルは `bin/Release/{TARGET FRAMEWORK}/publish` フォルダー内に配置されます。
+次の IIS の例では、発行された `web.config` ファイルにカスタム ヘッダー (`blazor-environment`) が追加されます。 `web.config` ファイルは `bin/Release/{TARGET FRAMEWORK}/publish` フォルダー内にあります。プレースホルダー `{TARGET FRAMEWORK}` はターゲット フレームワークです。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -60,17 +60,13 @@ ms.locfileid: "93056037"
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> を挿入し、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> プロパティを読み取ることで、コンポーネント内のアプリの環境を取得します。
 
-```razor
-@page "/"
-@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@inject IWebAssemblyHostEnvironment HostEnvironment
+`Pages/ReadEnvironment.razor`:
 
-<h1>Environment example</h1>
+[!code-razor[](environments/samples_snapshot/ReadEnvironment.razor?highlight=3,7)]
 
-<p>Environment: @HostEnvironment.Environment</p>
-```
+起動時に、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> によって <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> が <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> プロパティを介して公開されます。これにより、ホスト ビルダー コードで環境固有のロジックが有効になります。
 
-起動時に、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> では、<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> プロパティを使用して <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> が公開されます。これにより、開発者は環境固有のロジックをコードに含めることができます。
+`Program.cs` の `Program.Main` で:
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -79,12 +75,14 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-次の便利な拡張メソッドを使用すると、現在の環境で開発、運用、ステージング、およびカスタムの環境名を確認できます。
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions> を通じて提供された次の便利な拡張メソッドを使用すると、現在の環境で開発、運用、ステージング、およびカスタムの環境名を確認できます。
 
-* `IsDevelopment()`
-* `IsProduction()`
-* `IsStaging()`
-* `IsEnvironment("{ENVIRONMENT NAME}")`
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsDevelopment%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsProduction%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsStaging%2A>
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsEnvironment%2A>
+
+`Program.cs` の `Program.Main` で:
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())

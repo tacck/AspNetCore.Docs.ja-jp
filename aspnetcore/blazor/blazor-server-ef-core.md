@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: 6a74b8c5668a37082f648ae74210d90684c4559c
-ms.sourcegitcommit: 43a540e703b9096921de27abc6b66bc0783fe905
+ms.openlocfilehash: 10fc0afe84065f2c226d1e9c2f4314142369613a
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320110"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011885"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server と Entity Framework Core (EFCore)
 
@@ -111,7 +111,7 @@ EF Core では、[データベース アクセスを構成](/ef/core/miscellaneo
 > [!NOTE]
 > `Wrapper` は、`GridWrapper` コンポーネントへの[コンポーネント参照](xref:blazor/components/index#capture-references-to-components)です。 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)の `Index` コンポーネント (`Pages/Index.razor`) を参照してください。
 
-新しい <xref:Microsoft.EntityFrameworkCore.DbContext> インスタンスは、[ASP.NET Core の Identity モデル])(xref:security/authentication/customize_identity_model) を使用する場合など、`DbContext` ごとに接続文字列を構成できるファクトリを使用して作成できます。
+新しい <xref:Microsoft.EntityFrameworkCore.DbContext> インスタンスは、[[ASP.NET Core の Identity モデル]](xref:security/authentication/customize_identity_model) を使用する場合など、`DbContext` ごとに接続文字列を構成できるファクトリを使用して作成できます。
 
 ```csharp
 services.AddDbContextFactory<ApplicationDbContext>(options =>

@@ -5,7 +5,7 @@ description: Blazor アプリを段階的に構築します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/24/2020
+ms.date: 12/14/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: a32655b8afedb73ad436f023d2f821b6920c2edd
-ms.sourcegitcommit: 59d95a9106301d5ec5c9f612600903a69c4580ef
+ms.openlocfilehash: 87626ff30589de82a04c95634fc0dcbcf2eeac18
+ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "95870439"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507008"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>Blazor Todo リスト アプリを構築する
 
@@ -62,59 +62,61 @@ ms.locfileid: "95870439"
    dotnet new blazorserver -o TodoList
    ```
 
-   上記のコマンドでは、アプリを保持するための `TodoList` という名前のフォルダーが作成されます。 `TodoList` フォルダーは、プロジェクトの *ルート フォルダー* です。 次のコマンドを使用して、ディレクトリを `TodoList` フォルダーに変更します。
+   上記のコマンドでは、アプリを保持するために `-o|--output` オプションを指定して、`TodoList` という名前のフォルダーを作成します。 `TodoList` フォルダーは、プロジェクトの *ルート フォルダー* です。 次のコマンドを使用して、ディレクトリを `TodoList` フォルダーに変更します。
 
    ```dotnetcli
    cd TodoList
    ```
 
-1. 次のコマンドを使用して、新しい `Todo` Razor コンポーネントを、`Pages` フォルダー内のアプリに追加します。
+1. 次のコマンドを使用して、新しい `Todo` Razor コンポーネントをアプリに追加します。
 
    ```dotnetcli
    dotnet new razorcomponent -n Todo -o Pages
    ```
 
+   前のコマンドの `-n|--name` オプションで、新しい Razor コンポーネントの名前を指定します。 新しいコンポーネントは、`-o|--output` オプションを使用してプロジェクトの `Pages` フォルダーに作成されます。
+
    > [!IMPORTANT]
    > Razor コンポーネント ファイル名の先頭文字は、大文字である必要があります。 `Pages` フォルダーを開き、`Todo` コンポーネントのファイル名の先頭が大文字 `T` であることを確認します。 ファイル名は `Todo.razor` のはずです。
 
-1. `Pages/Todo.razor` で、コンポーネントの最初のマークアップを指定します。
+1. 任意のファイル エディターで `Todo` コンポーネントを開き、`/todo` の相対 URL を使用して、`@page` Razor ディレクティブをファイルの先頭に追加します。
 
-   ```razor
-   @page "/todo"
+   `Pages/Todo.razor`:
 
-   <h3>Todo</h3>
-   ```
+   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo0.razor?highlight=1)]
 
    `Pages/Todo.razor` ファイルを保存します。
 
 1. ナビゲーション バーに `Todo` コンポーネントを追加します。
 
-   `NavMenu` コンポーネント (`Shared/NavMenu.razor`) はアプリのレイアウトで使用されます。 レイアウトは、アプリ内でのコンテンツの重複を回避するために使うコンポーネントです。
+   `NavMenu` コンポーネントはアプリのレイアウトで使用されます。 レイアウトは、アプリ内でのコンテンツの重複を回避できるようにするコンポーネントです。 アプリによってコンポーネントの URL が読み込まれるときに、`NavLink` コンポーネントによりそのアプリの UI でキューが指定されます。
 
-   `Shared/NavMenu.razor` ファイル内で、既存のリスト アイテムの下に以下のリスト アイテムのマークアップを追加し、`Todo` コンポーネント用の `<NavLink>` 要素を追加します。
+   `NavMenu` コンポーネントの順不同のリスト (`<ul>...</ul>`) で、次のリスト項目 (`<li>...</li>`) と、`Todo` コンポーネントの `NavLink` コンポーネントを追加します。
 
-   ```razor
-   <li class="nav-item px-3">
-       <NavLink class="nav-link" href="todo">
-           <span class="oi oi-list-rich" aria-hidden="true"></span> Todo
-       </NavLink>
-   </li>
-   ```
+   `Shared/NavMenu.razor`:
+
+   [!code-razor[](build-a-blazor-app/samples_snapshot/NavMenu.razor?highlight=5-9)]
 
    `Shared/NavMenu.razor` ファイルを保存します。
 
-1. `TodoList` フォルダーからコマンド シェルで [`dotnet watch run`](/aspnet/core/tutorials/dotnet-watch) コマンドを実行して、アプリをビルドして実行します。 `https://localhost:5001/todo` の新しい Todo ページに移動して、サイドバーにある `Todo` コンポーネントへのナビゲーション リンクが機能することを確認します。
+1. `TodoList` フォルダーからコマンド シェルで [`dotnet watch run`](/aspnet/core/tutorials/dotnet-watch) コマンドを実行して、アプリをビルドして実行します。 アプリが実行された後、そのアプリのナビゲーション バーにある **[`Todo`]** リンクを選択して、新しい Todo ページにアクセスします。これにより、`/todo` にページが読み込まれます。
+
+   アプリでコマンド シェルを実行したままにします。 ファイルが保存されるたびに、アプリが自動的に再構築されます。 コンパイルおよび再起動中は、ブラウザーからアプリへの接続が一時的に失われます。 接続が再確立されると、ブラウザーのページが自動的に再読み込みされます。
 
 1. Todo アイテムを表すクラスを保持するために、プロジェクト (`TodoList` フォルダー) のルートに `TodoItem.cs` ファイルを追加します。 `TodoItem` クラス用に次の C# コードを使います。
 
+   `TodoItem.cs`:
+
    [!code-csharp[](build-a-blazor-app/samples_snapshot/TodoItem.cs)]
 
-1. `Todo` コンポーネント (`Pages/Todo.razor`) に戻ります。
+1. `Todo` コンポーネントに戻り、次のタスクを実行します。
 
-   * Todo 項目用のフィールドを `@code` ブロックに追加します。 `Todo` コンポーネントでは、このフィールドを使って ToDo リストの状態を維持します。
+   * Todo アイテム用のフィールドを `@code` ブロックに追加します。 `Todo` コンポーネントでは、このフィールドを使って ToDo リストの状態を維持します。
    * 各 Todo アイテムをリスト アイテム (`<li>`) としてレンダリングするために、順序のないリストのマークアップと `foreach` ループを追加します。
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo2.razor?highlight=5-10,12-14)]
+   `Pages/Todo.razor`:
+
+   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo2.razor?highlight=5-10,13)]
 
 1. アプリには、リストに Todo 項目を追加するための UI 要素が必要です。 順序のないリスト (`<ul>...</ul>`) の下に、テキスト入力 (`<input>`) とボタン (`<button>`) を追加します。
 
@@ -124,13 +126,15 @@ ms.locfileid: "95870439"
 
 1. **`Add todo`** ボタンを選択しても何も起こりません。ボタンにイベント ハンドラーがアタッチされていないためです。
 
-1. `Todo` コンポーネントに `AddTodo` メソッドを追加し、`@onclick` 属性を使ってこれをボタンの選択用に登録します。 ボタンを選択すると C# のメソッド `AddTodo` が呼び出されます。
+1. `Todo` コンポーネントに `AddTodo` メソッドを追加し、`@onclick` 属性を使用して、そのメソッドをボタン用に登録します。 ボタンを選択すると C# のメソッド `AddTodo` が呼び出されます。
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo4.razor?highlight=2,7-10)]
 
-1. 新しい Todo アイテムのタイトルを取得するために、`@code` ブロックの上部に文字列フィールド `newTodo` を追加し、`<input>` 要素の `bind` 属性を使ってこれをテキスト入力の値とバインドします。
+1. 新しい Todo アイテムのタイトルを取得するには、`@code` ブロックの先頭に `newTodo` 文字列フィールドを追加します。
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo5.razor?highlight=2)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo5.razor?highlight=3)]
+
+   `@bind` 属性を使用して `newTodo` をバインドするようにテキストの `<input>` 要素を変更します。
 
    ```razor
    <input placeholder="Something todo" @bind="newTodo" />
@@ -142,11 +146,11 @@ ms.locfileid: "95870439"
 
 1. `Pages/ToDo.razor` ファイルを保存します。 このアプリは、コマンド シェルで自動的にリビルドされます。 ブラウザーからアプリに再接続された後、ページがブラウザーに再度読み込まれます。
 
-1. 各 Todo アイテムのタイトルのテキストは編集可能にすることができます。また、チェック ボックスはユーザーが完了したアイテムを追跡するのに役立ちます。 各 Todo アイテムにチェック ボックス入力を追加し、その値を `IsDone` プロパティにバインドします。 `@todo.Title` を、`@todo.Title` にバインドされた `<input>` 要素に変更します。
+1. 各 Todo アイテムのタイトルのテキストは編集可能にすることができます。また、チェック ボックスはユーザーが完了したアイテムを追跡するのに役立ちます。 各 Todo アイテムにチェック ボックス入力を追加し、その値を `IsDone` プロパティにバインドします。 `@todo.Title` を、`@bind` で `todo.Title` にバインドされた `<input>` 要素に変更します。
 
-   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo7.razor?highlight=5-6)]
+   [!code-razor[](build-a-blazor-app/samples_snapshot/ToDo7.razor?highlight=4-7)]
 
-1. それらの値がバインドされていることを確認するために、`<h3>` ヘッダーを更新して、完了していない (`IsDone` が `false` の) Todo アイテムの数のカウントを表示するようにします。
+1. `<h3>` ヘッダーを更新し、完了していない (`IsDone` が `false` の) Todo アイテムの数のカウントを表示するようにします。
 
    ```razor
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
@@ -158,7 +162,7 @@ ms.locfileid: "95870439"
 
 1. `Pages/ToDo.razor` ファイルを保存します。 このアプリは、コマンド シェルで自動的にリビルドされます。 ブラウザーからアプリに再接続された後、ページがブラウザーに再度読み込まれます。
 
-1. Todo アイテムを追加して新しいコードをテストします。
+1. アイテムを追加し、アイテムを編集し、Todo アイテムに完了のマークを付けて、コンポーネントをテストします。
 
 1. 完了したら、コマンド シェルでアプリをシャットダウンします。 多くのコマンド シェルでは、<kbd>Ctrl</kbd>+<kbd>c</kbd> キーボード コマンドを使用してアプリを停止できます。
 

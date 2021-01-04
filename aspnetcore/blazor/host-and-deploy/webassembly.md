@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 7edba338716a0545390ec53775f69eaef141d389
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
+ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855288"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97011872"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -910,9 +910,7 @@ Blazor WebAssembly によってアプリのスタートアップ ファイルが
 
 想定される SHA-256 ハッシュに一致しない応答が Web サーバーから返された場合、ブラウザーの開発者コンソールに次のようなエラーが表示されます。
 
-```
-Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/_framework/MyBlazorApp.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. The resource has been blocked.
-```
+> Failed to find a valid digest in the 'integrity' attribute for resource 'https://myapp.example.com/\_framework/MyBlazor App.dll' with computed SHA-256 integrity 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY='. (計算された SHA-256 整合性 'IIa70iwvmEg5WiDV17OpQ5eCztNYqL186J56852RpJY=' を持つリソース 'https://myapp.example.com/\_framework/MyBlazor App.dll' の 'integrity' 属性に有効なダイジェストが見つかりませんでした。) The resource has been blocked. (リソースがブロックされています。)
 
 ほとんどの場合、これは整合性チェック自体に関する問題では "*ありません*"。 代わりにこれは他の問題があることを意味し、整合性チェックによってその他の問題に関する警告が表示されます。
 
@@ -961,6 +959,13 @@ PowerShell コマンド シェルで次のコマンドを使用してスクリ�
 
 * `{BASE URL}`: 展開されたアプリの URL。
 * `{PUBLISH OUTPUT FOLDER}`: アプリの `publish` フォルダー、またはアプリが展開のために発行される場所へのパス。
+
+> [!NOTE]
+> [Bitdefender](https://www.bitdefender.com) ウイルス検索プログラムを使用するシステムに `dotnet/AspNetCore.Docs` GitHub リポジトリを複製するには、`integrity.ps1` スクリプトの Bitdefender に例外を追加します。 リポジトリを複製する前に Bitdefender に例外を追加して、ウイルス検索プログラムによってスクリプトが検疫されないようにします。 次の例は、Windows システム上の複製されたリポジトリのスクリプトへの一般的なパスです。 必要に応じてパスを調整します。 プレースホルダー `{USER}` はユーザーのパスのセグメントです。
+>
+> ```
+> C:\Users\{USER}\Documents\GitHub\AspNetCore.Docs\aspnetcore\blazor\host-and-deploy\webassembly\_samples\integrity.ps1
+> ```
 
 ### <a name="disable-integrity-checking-for-non-pwa-apps"></a>非 PWA アプリの整合性チェックを無効にする
 
