@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 4ad4a70c92ce8dd61b676dd7d35ecb4f3b4fa99f
-ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
+ms.openlocfilehash: 49f15e3e0d68ec475bb4c9a047d6c5e37d314a42
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93343690"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854458"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft アカウントを使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する
 
@@ -36,7 +36,7 @@ Azure portal の **[Azure Active Directory]**  >  **[アプリの登録]** 領�
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. アプリの **名前** を指定します (例: **Blazor スタンドアロン AAD Microsoft アカウント** )。
+1. アプリの **名前** を指定します (例: **Blazor スタンドアロン AAD Microsoft アカウント**)。
 1. **[サポートされているアカウントの種類]** で、 **[任意の組織のディレクトリ内のアカウント]** を選択します。
 1. **[リダイレクト URI]** ドロップダウンを **[シングルページ アプリケーション (SPA)]** に設定し、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。 Kestrel で実行されているアプリの既定のポートは 5001 です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルのアプリのプロパティで確認できます。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 このトピックの後半で、IIS Express ユーザーにリダイレクト URI を更新するよう促す注意が表示されます。
 1. **[アクセス許可]** > **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** チェックボックスをオフにします。
@@ -55,7 +55,7 @@ Azure portal の **[Azure Active Directory]**  >  **[アプリの登録]** 領�
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. アプリの **名前** を指定します (例: **Blazor スタンドアロン AAD Microsoft アカウント** )。
+1. アプリの **名前** を指定します (例: **Blazor スタンドアロン AAD Microsoft アカウント**)。
 1. **[サポートされているアカウントの種類]** で、 **[任意の組織のディレクトリ内のアカウント]** を選択します。
 1. **[リダイレクト URI]** ドロップ ダウンの設定を **[Web]** のままとし、次のリダイレクト URI を指定します: `https://localhost:{PORT}/authentication/login-callback`。 Kestrel で実行されているアプリの既定のポートは 5001 です。 アプリが別の Kestrel ポートで実行されている場合は、アプリのポートを使用します。 IIS Express の場合、アプリのランダムに生成されたポートは、 **[デバッグ]** パネルのアプリのプロパティで確認できます。 この時点ではアプリは存在せず、IIS Express ポートは不明であるため、アプリが作成された後にこの手順に戻り、リダイレクト URI を更新してください。 このトピックの後半で、IIS Express ユーザーにリダイレクト URI を更新するよう促す注意が表示されます。
 1. **[アクセス許可]** > **[openid と offline_access アクセス許可に対して管理者の同意を付与します]** チェックボックスをオフにします。
@@ -94,7 +94,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "commo
 
 ::: moniker range=">= aspnetcore-5.0"
 
-[!INCLUDE[](~/includes/blazor-security/additional-scopes-standalone-nonAAD.md)]
+[!INCLUDE[](~/blazor/includes/security/additional-scopes-standalone-nonAAD.md)]
 
 ::: moniker-end
 
@@ -116,7 +116,7 @@ dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "commo
   Version="{VERSION}" />
 ```
 
-プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
+プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 [`Microsoft.Authentication.WebAssembly.Msal`](https://www.nuget.org/packages/Microsoft.Authentication.WebAssembly.Msal) パッケージによって、[`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) パッケージがアプリに推移的に追加されます。
 
@@ -179,11 +179,11 @@ options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
 
 ::: moniker range="< aspnetcore-5.0"
 
-[!INCLUDE[](~/includes/blazor-security/azure-scope-3x.md)]
+[!INCLUDE[](~/blazor/includes/security/azure-scope-3x.md)]
 
 ::: moniker-end
 
-詳細については、" *その他のシナリオ* " に関する記事の次のセクションを参照してください。
+詳細については、"*その他のシナリオ*" に関する記事の次のセクションを参照してください。
 
 * [追加のアクセス トークンを要求する](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [送信要求にトークンを添付する](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
@@ -192,35 +192,35 @@ options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
 
 ## <a name="login-mode"></a>ログイン モード
 
-[!INCLUDE[](~/includes/blazor-security/msal-login-mode.md)]
+[!INCLUDE[](~/blazor/includes/security/msal-login-mode.md)]
 
 ::: moniker-end
 
 ## <a name="imports-file"></a>インポート ファイル
 
-[!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
+[!INCLUDE[](~/blazor/includes/security/imports-file-standalone.md)]
 
 ## <a name="index-page"></a>インデックス ページ
 
-[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
+[!INCLUDE[](~/blazor/includes/security/index-page-msal.md)]
 
 ## <a name="app-component"></a>アプリ コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+[!INCLUDE[](~/blazor/includes/security/app-component.md)]
 
 ## <a name="redirecttologin-component"></a>RedirectToLogin コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+[!INCLUDE[](~/blazor/includes/security/redirecttologin-component.md)]
 
 ## <a name="logindisplay-component"></a>LoginDisplay コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
+[!INCLUDE[](~/blazor/includes/security/logindisplay-component.md)]
 
 ## <a name="authentication-component"></a>認証コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+[!INCLUDE[](~/blazor/includes/security/authentication-component.md)]
 
-[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+[!INCLUDE[](~/blazor/includes/security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

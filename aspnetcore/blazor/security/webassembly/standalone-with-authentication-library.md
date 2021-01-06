@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: d030e97a3adc17f53b42b98a53f04f155ea93bb6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: b16533ef662b341053498162ce4ecb62445f2061
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055114"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854427"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>認証ライブラリを使用して、ASP.NET Core Blazor WebAssembly スタンドアロン アプリをセキュリティで保護する
 
@@ -80,7 +80,7 @@ dotnet new blazorwasm -au Individual -o {APP NAME}
   Version="{VERSION}" />
 ```
 
-プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
+プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 ## <a name="authentication-service-support"></a>認証サービスのサポート
 
@@ -122,26 +122,26 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-詳細については、" *その他のシナリオ* " に関する記事の次のセクションを参照してください。
+詳細については、"*その他のシナリオ*" に関する記事の次のセクションを参照してください。
 
 * [追加のアクセス トークンを要求する](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [送信要求にトークンを添付する](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
 ## <a name="imports-file"></a>インポート ファイル
 
-[!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
+[!INCLUDE[](~/blazor/includes/security/imports-file-standalone.md)]
 
 ## <a name="index-page"></a>インデックス ページ
 
-[!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
+[!INCLUDE[](~/blazor/includes/security/index-page-authentication.md)]
 
 ## <a name="app-component"></a>アプリ コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+[!INCLUDE[](~/blazor/includes/security/app-component.md)]
 
 ## <a name="redirecttologin-component"></a>RedirectToLogin コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+[!INCLUDE[](~/blazor/includes/security/redirecttologin-component.md)]
 
 ## <a name="logindisplay-component"></a>LoginDisplay コンポーネント
 
@@ -181,9 +181,9 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="authentication-component"></a>認証コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+[!INCLUDE[](~/blazor/includes/security/authentication-component.md)]
 
-[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+[!INCLUDE[](~/blazor/includes/security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

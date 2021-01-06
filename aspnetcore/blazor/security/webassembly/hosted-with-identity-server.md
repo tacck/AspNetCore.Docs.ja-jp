@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 147f1d6cdea0b9992b8be333db4cb06e30c7feaf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 80196945bc6891d5517d7da0e07ca1b0debddd28
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055218"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854687"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>ASP.NET Core Blazor WebAssembly でホストされているアプリを Identity Server でセキュリティ保護する
 
@@ -185,7 +185,7 @@ dotnet new blazorwasm -au Individual -ho -o {APP NAME}
   Version="{VERSION}" />
 ```
 
-プレースホルダー `{VERSION}` では、 [NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
+プレースホルダー `{VERSION}` では、[NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) のパッケージの **バージョン履歴** にある、アプリの共有フレームワークのバージョンに一致するパッケージの安定した最新バージョンを確認できます。
 
 ### <a name="httpclient-configuration"></a>`HttpClient` 構成
 
@@ -215,19 +215,19 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="imports-file"></a>インポート ファイル
 
-[!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
+[!INCLUDE[](~/blazor/includes/security/imports-file-hosted.md)]
 
 ### <a name="index-page"></a>インデックス ページ
 
-[!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
+[!INCLUDE[](~/blazor/includes/security/index-page-authentication.md)]
 
 ### <a name="app-component"></a>アプリ コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/app-component.md)]
+[!INCLUDE[](~/blazor/includes/security/app-component.md)]
 
 ### <a name="redirecttologin-component"></a>RedirectToLogin コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/redirecttologin-component.md)]
+[!INCLUDE[](~/blazor/includes/security/redirecttologin-component.md)]
 
 ### <a name="logindisplay-component"></a>LoginDisplay コンポーネント
 
@@ -271,17 +271,17 @@ builder.Services.AddApiAuthorization();
 
 ### <a name="authentication-component"></a>認証コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
+[!INCLUDE[](~/blazor/includes/security/authentication-component.md)]
 
 ### <a name="fetchdata-component"></a>FetchData コンポーネント
 
-[!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
+[!INCLUDE[](~/blazor/includes/security/fetchdata-component.md)]
 
 ## <a name="run-the-app"></a>アプリを実行する
 
 サーバー プロジェクトからアプリを実行します。 Visual Studio を使用しているときは、次のいずれかを行います。
 
-* ツール バーの **[スタートアップ プロジェクト]** ドロップダウン リストを " *サーバー API アプリ* " に設定して、 **[実行]** ボタンを選択します。
+* ツール バーの **[スタートアップ プロジェクト]** ドロップダウン リストを "*サーバー API アプリ*" に設定して、 **[実行]** ボタンを選択します。
 * **ソリューション エクスプローラー** でサーバー プロジェクトを選択し、ツール バーの **[実行]** ボタンを選択するか、 **[デバッグ]** メニューからアプリを開始します。
 
 ## <a name="name-and-role-claim-with-api-authorization"></a>API 認証での名前とロール要求
@@ -466,17 +466,17 @@ services.AddTransient<IProfileService, ProfileService>();
 
 `User.Identity.Name` には、 *`Client`* アプリにおいてユーザーのユーザー名が設定されます。これは通常、サインイン メール アドレスです。
 
-[!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+[!INCLUDE[](~/blazor/includes/security/usermanager-signinmanager.md)]
 
 ## <a name="host-in-azure-app-service-with-a-custom-domain"></a>カスタム ドメインを使用した Azure App Service でのホスト
 
 次のガイダンスでは、Identity Server を使用してホストされている Blazor WebAssembly アプリを、カスタム ドメインを使用して [Azure App Service](https://azure.microsoft.com/services/app-service/) にデプロイする方法について説明します。
 
-このホスティング シナリオの場合、 [Identity Server のトークン署名キー](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)と、サイトの HTTPS でセキュリティ保護されたブラウザーとの通信に、同じ証明書を **使用しないでください** 。
+このホスティング シナリオの場合、[Identity Server のトークン署名キー](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation)と、サイトの HTTPS でセキュリティ保護されたブラウザーとの通信に、同じ証明書を **使用しないでください**。
 
 * この 2 つの要件に対して異なる証明書を使用することは、それぞれの目的に対して秘密キーが分離されるため、優れたセキュリティ方法です。
 * ブラウザーとの通信に使用される TLS 証明書は、Identity Server のトークン署名に影響を与えることなく、個別に管理されます。
-* カスタム ドメイン バインドのために [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) で App Service アプリに証明書を提供すると、Identity Server で Azure Key Vault からトークン署名用に同じ証明書を取得することはできません。 物理パスから同じ TLS 証明書を使用するように Identity Server を構成することはできますが、セキュリティ証明書をソース管理に置くことは **不適切な方法であり、ほとんどのシナリオで避ける必要があります** 。
+* カスタム ドメイン バインドのために [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) で App Service アプリに証明書を提供すると、Identity Server で Azure Key Vault からトークン署名用に同じ証明書を取得することはできません。 物理パスから同じ TLS 証明書を使用するように Identity Server を構成することはできますが、セキュリティ証明書をソース管理に置くことは **不適切な方法であり、ほとんどのシナリオで避ける必要があります**。
 
 次のガイダンスでは、自己署名証明書は Identity Server のトークン署名のためだけに Azure Key Vault に作成されます。 Identity Server の構成により、アプリの `My` > `CurrentUser` 証明書ストアを介して、キー コンテナー証明書が使用されます。 カスタム ドメインで HTTPS トラフィックに使用される他の証明書は、Identity Server の署名証明書とは別に作成および構成されます。
 
@@ -513,16 +513,16 @@ services.AddTransient<IProfileService, ProfileService>();
 
    Azure portal で、アプリの設定の保存は 2 段階のプロセスです。`WEBSITE_LOAD_CERTIFICATES` のキーと値の設定を保存した後、ブレードの上部にある **[保存]** ボタンを選択します。
 1. アプリの **[TLS/SSL の設定]** を選択します。 **[秘密キー証明書 (.pfx)]** を選択します。 **[Key Vault 証明書のインポート]** プロセスを 2 回使用して、HTTPS 通信用のサイトの証明書と、サイトの自己署名された Identity Server トークン署名証明書の両方をインポートします。
-1. **[カスタム ドメイン]** ブレードに移動します。 ドメイン レジストラーの Web サイトで、 **IP アドレス** と **カスタム ドメイン検証 ID** を使用して、ドメインを構成します。 一般的なドメイン構成には次のものが含まれます。
-   * **ホスト** が `@` で、値が Azure portal の IP アドレスである **A レコード** 。
-   * **ホスト** が `asuid` で、値が Azure によって生成されて Azure portal によって提供される検証 ID である **TXT レコード** 。
+1. **[カスタム ドメイン]** ブレードに移動します。 ドメイン レジストラーの Web サイトで、**IP アドレス** と **カスタム ドメイン検証 ID** を使用して、ドメインを構成します。 一般的なドメイン構成には次のものが含まれます。
+   * **ホスト** が `@` で、値が Azure portal の IP アドレスである **A レコード**。
+   * **ホスト** が `asuid` で、値が Azure によって生成されて Azure portal によって提供される検証 ID である **TXT レコード**。
 
    ドメイン レジストラーの Web サイトで変更を正しく保存したことを確認します。 レジストラーの Web サイトによっては、ドメイン レコードを保存するために 2 段階のプロセスが必要な場合があります。1 つ以上のレコードを個別に保存した後、別のボタンを使用してドメインの登録を更新します。
 1. Azure portal の **[カスタム ドメイン]** ブレードに戻ります。 **[カスタム ドメインの追加]** を選択します。 **[A レコード]** オプションを選択します。 ドメインを指定し、 **[検証]** を選択します。 ドメイン レコードが正しく、インターネットを通して反映されている場合、ポータルで **[カスタム ドメインの追加]** ボタンを選択できます。
 
    ドメイン登録の変更がインターネットのドメイン ネーム サーバー (DNS) 全体に反映されるまで、ドメイン レジストラーによって処理されてから数日かかることがあります。 ドメイン レコードが 3 営業日以内に更新されない場合は、レコードが正しく設定されていることをドメイン レジストラーで確認し、カスタマー サポートに問い合わせてください。
 1. **[カスタム ドメイン]** ブレードで、ドメインの **[SSL 状態]** は `Not Secure` とマークされます。 **[バインドの追加]** リンクを選択します。 キー コンテナーからカスタム ドメイン バインド用のサイトの HTTPS 証明書を選択します。
-1. Visual Studio で、 *Server* プロジェクトのアプリ設定ファイル (`appsettings.json` または `appsettings.Production.json`) を開きます。 Identity Server の構成で、次の `Key` セクションを追加します。 `Name` キーに対しては、自己署名証明書の **サブジェクト** を指定します。 次の例の場合、キー コンテナーで割り当てられている証明書の共通名は `IdentityServerSigning` であり、それにより `CN=IdentityServerSigning` という **サブジェクト** が生成されます。
+1. Visual Studio で、*Server* プロジェクトのアプリ設定ファイル (`appsettings.json` または `appsettings.Production.json`) を開きます。 Identity Server の構成で、次の `Key` セクションを追加します。 `Name` キーに対しては、自己署名証明書の **サブジェクト** を指定します。 次の例の場合、キー コンテナーで割り当てられている証明書の共通名は `IdentityServerSigning` であり、それにより `CN=IdentityServerSigning` という **サブジェクト** が生成されます。
 
    ```json
    "IdentityServer": {
@@ -538,7 +538,7 @@ services.AddTransient<IProfileService, ProfileService>();
    },
    ```
 
-1. Visual Studio で、 *Server* プロジェクトに対する Azure App Service の " [発行プロファイル](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)" を作成します。 メニュー バーから次のように選択します。 **[ビルド]**  >  **[発行]**  >  **[新規]**  >  **[Azure]**  >  **[Azure App Service]** (Windows または Linux)。 Visual Studio が Azure サブスクリプションに接続されたら、 **[リソースの種類]** で Azure リソースの **[ビュー]** を設定できます。 **[Web アプリ]** の一覧内を移動し、アプリの App Service を見つけて選択します。 **[完了]** を選択します。
+1. Visual Studio で、*Server* プロジェクトに対する Azure App Service の "[発行プロファイル](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles)" を作成します。 メニュー バーから次のように選択します。 **[ビルド]**  >  **[発行]**  >  **[新規]**  >  **[Azure]**  >  **[Azure App Service]** (Windows または Linux)。 Visual Studio が Azure サブスクリプションに接続されたら、 **[リソースの種類]** で Azure リソースの **[ビュー]** を設定できます。 **[Web アプリ]** の一覧内を移動し、アプリの App Service を見つけて選択します。 **[完了]** を選択します。
 1. Visual Studio が **[発行]** ウィンドウに戻ると、キー コンテナーと SQL Server データベース サービスの依存関係が自動的に検出されます。
 
    Key Vault サービスの既定の設定で構成を変更する必要はありません。
@@ -567,7 +567,7 @@ Azure portal で App Service の構成を変更すると、通常、更新は短
 Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Subject, Thumbprint, EnhancedKeyUsageList
 ```
 
-[!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+[!INCLUDE[](~/blazor/includes/security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>その他の技術情報
 

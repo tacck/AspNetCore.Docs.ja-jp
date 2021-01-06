@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: b3c714ea8e741430df1f70b2df258f1e8f1c7ad5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0f70b5f12b9097f8710c9641404b3e085968fc3f
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060509"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753154"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS に ASP.NET Core アプリを発行する
 
@@ -40,15 +40,15 @@ ms.locfileid: "93060509"
 ## <a name="prerequisites"></a>必須コンポーネント
 
 * 開発用のコンピューターにインストールされている [.NET Core SDK](/dotnet/core/sdk)。
-* **Web Server (IIS)** サーバー ロールで構成された Windows Server。 IIS で Web サイトをホストするようにサーバーが構成されていない場合、<xref:host-and-deploy/iis/index#iis-configuration> 記事の「 *IIS 構成* 」セクションの指示に従い、その後、このチュートリアルに戻ってください。
+* **Web Server (IIS)** サーバー ロールで構成された Windows Server。 IIS で Web サイトをホストするようにサーバーが構成されていない場合、<xref:host-and-deploy/iis/index#iis-configuration> 記事の「*IIS 構成*」セクションの指示に従い、その後、このチュートリアルに戻ってください。
 
 > [!WARNING]
 > **IIS 構成と Web サイトのセキュリティには、このチュートリアルでは説明されていない概念が含まれています。** IIS で本稼働アプリをホストする前に、[Microsoft IIS ドキュメント](https://www.iis.net/)と [IIS でホストする方法に関する ASP.NET Core 記事](xref:host-and-deploy/iis/index)を参照してください。
 >
 > このチュートリアルで取り上げられていない IIS ホスティングの重要なシナリオ:
 >
-> * [ASP.NET Core データ保護のためのレジストリ ハイブの作成](xref:host-and-deploy/iis/index#data-protection)
-> * [アプリ プールのアクセス制御リスト (ACL) の構成](xref:host-and-deploy/iis/index#application-pool-identity)
+> * [ASP.NET Core データ保護のためのレジストリ ハイブの作成](xref:host-and-deploy/iis/advanced#data-protection)
+> * [アプリ プールのアクセス制御リスト (ACL) の構成](xref:host-and-deploy/iis/advanced#application-pool-identity)
 > * IIS 配置の概念を集中的に取り上げるために、このチュートリアルでは、IIS で HTTPS セキュリティを構成せずにアプリを展開します。 HTTPS プロトコルに対して有効にするアプリをホストする方法については、この記事の「[その他の技術情報](#additional-resources)」セクションのセキュリティ トピックをご覧ください。 ASP.NET Core アプリのホスティングに関するその他の情報は <xref:host-and-deploy/iis/index> 記事にあります。
 
 ## <a name="install-the-net-core-hosting-bundle"></a>.NET Core ホスティング バンドルのインストール
@@ -84,10 +84,10 @@ ms.locfileid: "93060509"
 
 ## <a name="publish-and-deploy-the-app"></a>アプリを発行および配置する
 
-" *アプリを発行する* " とは、サーバーでホストできるコンパイル済みのアプリを生成するということです。 " *アプリを展開する* " とは、発行済みのアプリをホスティング システムに移動するということです。 発行手順は [.NET Core SDK](/dotnet/core/sdk) で処理されます。一方で、展開手順はさまざまな手法で処理できます。 このチュートリアルでは、" *フォルダー* " 展開手法を採用しています。
+"*アプリを発行する*" とは、サーバーでホストできるコンパイル済みのアプリを生成するということです。 "*アプリを展開する*" とは、発行済みのアプリをホスティング システムに移動するということです。 発行手順は [.NET Core SDK](/dotnet/core/sdk) で処理されます。一方で、展開手順はさまざまな手法で処理できます。 このチュートリアルでは、"*フォルダー*" 展開手法を採用しています。
  
 * アプリはフォルダーに発行されます。
-* フォルダーの内容が IIS サイトのフォルダーに移動されます (IIS マネージャーのサイトの **物理パス** )。
+* フォルダーの内容が IIS サイトのフォルダーに移動されます (IIS マネージャーのサイトの **物理パス**)。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -96,6 +96,7 @@ ms.locfileid: "93060509"
 1. **フォルダーまたはファイル共有** パスを選択します。
    * ネットワーク共有として開発用のコンピューターで利用できる IIS サイトのフォルダーを作成した場合、共有へのパスを指定します。 現在のユーザーに、共有に発行するための書き込みアクセスを与える必要があります。
    * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
+1. **[発行]** ボタンを選びます。
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -113,6 +114,7 @@ ms.locfileid: "93060509"
 1. **[フォルダーを選択してください]** パスを設定します。
    * ネットワーク共有として開発用のコンピューターで利用できる IIS サイトのフォルダーを作成した場合、共有へのパスを指定します。 現在のユーザーに、共有に発行するための書き込みアクセスを与える必要があります。
    * IIS サーバー上の IIS サイト フォルダーに直接展開できない場合、リムーバブル メディア上のフォルダーに発行し、IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに発行済みのアプリを物理的に移動します。 IIS マネージャーでサイトの **物理パス** である、サーバー上の IIS サイト フォルダーに `bin/Release/{TARGET FRAMEWORK}/publish` フォルダーの内容を移動します。
+1. **[発行]** ボタンを選びます。
 
 ---
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 98dfd539171807cbf94d4ac8746458152c809495
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: eae4a19042efded03f10e9ebd17122232f0323eb
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057571"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854640"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core アプリを配置するための Visual Studio 発行プロファイル (.pubxml)
 
@@ -54,7 +54,7 @@ MSBuild または Visual Studio がプロジェクトを読み込むと、次の
 
 プロジェクトが読み込まれると、[MSBuild プロジェクト項目](/visualstudio/msbuild/common-msbuild-project-items) (ファイル) が計算されます。 項目の種類によって、ファイルの処理方法が決まります。 既定で、 *.cs* ファイルは `Compile` 項目一覧に含まれています。 `Compile` 項目一覧のファイルがコンパイルされます。
 
-`Content` 項目一覧には、ビルドの出力に加え、発行されるファイルが含まれています。 既定では、`wwwroot\**`、`**\*.config`、`**\*.json` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。 たとえば、`wwwroot\**` [glob パターン](https://gruntjs.com/configuring-tasks#globbing-patterns)は、 *wwwroot* フォルダーとそのサブフォルダー内のすべてのファイルと一致します。
+`Content` 項目一覧には、ビルドの出力に加え、発行されるファイルが含まれています。 既定では、`wwwroot\**`、`**\*.config`、`**\*.json` というパターンに一致するファイルが、`Content` の項目一覧に含まれます。 たとえば、`wwwroot\**` [glob パターン](https://gruntjs.com/configuring-tasks#globbing-patterns)は、*wwwroot* フォルダーとそのサブフォルダー内のすべてのファイルと一致します。
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -68,17 +68,17 @@ MSBuild または Visual Studio がプロジェクトを読み込むと、次の
 
 ::: moniker-end
 
-発行一覧に明示的にファイルを追加するには、「 [ファイルを含める](#include-files)」セクションで説明されているように、 *.csproj* ファイルに直接ファイルを追加します。
+発行一覧に明示的にファイルを追加するには、「[ファイルを含める](#include-files)」セクションで説明されているように、 *.csproj* ファイルに直接ファイルを追加します。
 
 Visual Studio で **[発行]** ボタンを選択するか、コマンド ラインから発行すると、以下が実行されます。
 
 * プロパティ/項目が計算されます (ビルドに必要なファイル)。
-* **Visual Studio のみ** : NuGet パッケージが復元されます。 (CLI では、ユーザーが明示的に復元する必要があります)。
+* **Visual Studio のみ**: NuGet パッケージが復元されます。 (CLI では、ユーザーが明示的に復元する必要があります)。
 * プロジェクトがビルドされます。
 * 発行項目が計算されます (発行に必要なファイル)。
 * プロジェクトが発行されます (計算されたファイルが発行先にコピーされます)。
 
-ASP.NET Core プロジェクトは、プロジェクト ファイルの `Microsoft.NET.Sdk.Web` を参照して、 *app_offline.htm* ファイルを Web アプリのディレクトリのルートに配置します。 ファイルが存在する場合、ASP.NET Core モジュールはアプリを正常にシャットダウンし、展開中に *app_offline.htm* ファイルを提供します。 詳細については、「[ASP.NET Core モジュール構成リファレンス](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)」を参照してください。
+ASP.NET Core プロジェクトは、プロジェクト ファイルの `Microsoft.NET.Sdk.Web` を参照して、*app_offline.htm* ファイルを Web アプリのディレクトリのルートに配置します。 ファイルが存在する場合、ASP.NET Core モジュールはアプリを正常にシャットダウンし、展開中に *app_offline.htm* ファイルを提供します。 詳細については、「[ASP.NET Core モジュール構成リファレンス](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)」を参照してください。
 
 ## <a name="basic-command-line-publishing"></a>基本的なコマンド ラインからの発行
 
@@ -108,7 +108,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   Web1 -> C:\Webs\Web1\bin\Debug\{TARGET FRAMEWORK MONIKER}\publish\
 ```
 
-既定の発行フォルダーの形式は *bin\Debug\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、 *bin\Debug\netcoreapp2.2\publish\\* などです。
+既定の発行フォルダーの形式は *bin\Debug\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、*bin\Debug\netcoreapp2.2\publish\\* などです。
 
 次のコマンドでは、`Release` ビルドと発行ディレクトリを指定します。
 
@@ -129,7 +129,7 @@ MSBuild のプロパティは、次のいずれかの形式を使用して渡す
 dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb
 ```
 
-配置用に発行したアプリが実行されていないことを確認します。 アプリが実行中は、 *publish* フォルダー内のファイルがロックされます。 ロックされているファイルはコピーできないため、配置は行われません。
+配置用に発行したアプリが実行されていないことを確認します。 アプリが実行中は、*publish* フォルダー内のファイルがロックされます。 ロックされているファイルはコピーできないため、配置は行われません。
 
 ## <a name="publish-profiles"></a>プロファイルを発行する
 
@@ -151,7 +151,7 @@ dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb
 
 最も適切な発行先を決定するには、[自分に合った発行オプション](/visualstudio/ide/not-in-toc/web-publish-options)に関する記事を参照してください。
 
-発行先を **[フォルダー]** に選択した場合は、発行された資産を保存するフォルダーのパスを指定します。 既定のフォルダー パスは *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、 *bin\Release\netcoreapp2.2\publish\\* などです。 **[プロファイルの作成]** ボタンを選択して完了します。
+発行先を **[フォルダー]** に選択した場合は、発行された資産を保存するフォルダーのパスを指定します。 既定のフォルダー パスは *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* です。 たとえば、*bin\Release\netcoreapp2.2\publish\\* などです。 **[プロファイルの作成]** ボタンを選択して完了します。
 
 発行プロファイルが作成されると、 **[発行]** タブの内容が変化します。 新しく作成したプロファイルがドロップダウン リストに表示されます。 別の新しいプロファイルを作成するには、ドロップダウン リストから **[新しいプロファイルの作成]** を選択します。
 
@@ -162,7 +162,7 @@ Visual Studio の発行ツールでは、発行プロファイルについて説
 
 Azure ターゲットに発行する場合、 *.pubxml* ファイルには、Azure サブスクリプション識別子が含まれます。 そのターゲットの種類では、このファイルをソース管理に追加することはお勧めしません。 Azure 以外のターゲットに発行する場合は、 *.pubxml* ファイルをチェックインするほうが安全です。
 
-機微な情報 (発行パスワードなど) は、個々のユーザー/コンピューター レベルで暗号化されます。 それは、 *Properties/PublishProfiles/{PROFILE NAME}.pubxml.user* ファイルに格納されます。 このファイルには機微な情報が格納される可能性があるため、ソース コード管理にチェックインしないでください。
+機微な情報 (発行パスワードなど) は、個々のユーザー/コンピューター レベルで暗号化されます。 それは、*Properties/PublishProfiles/{PROFILE NAME}.pubxml.user* ファイルに格納されます。 このファイルには機微な情報が格納される可能性があるため、ソース コード管理にチェックインしないでください。
 
 ASP.NET Core で Web アプリを発行する方法の概要については、<xref:host-and-deploy/index> を参照してください。 ASP.NET Core Web アプリを発行するために必要な MSBuild タスクとターゲットはオープン ソースであり、[dotnet/websdk リポジトリ](https://github.com/dotnet/websdk)にあります。
 
@@ -223,7 +223,7 @@ dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<MsDe
 *FolderProfile* という名前のプロファイルを使用して発行する場合は、次のコマンドのいずれかを使用します。
 
 ```dotnetcli
-dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile`
+dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
 ```
 
 ```dotnetcli
@@ -307,10 +307,10 @@ msbuild {PATH}
 * `{PROFILE}`:発行プロファイルの名前。
 * `{USERNAME}`:MSDeploy ユーザー名。 `{USERNAME}` は発行プロファイルで確認できます。
 * `{PASSWORD}`:MSDeploy パスワード。 *{PROFILE}.PublishSettings* ファイルから `{PASSWORD}` を取得します。 次のいずれかの方法で、 *.PublishSettings* ファイルをダウンロードします。
-  * **ソリューション エクスプローラー** : **[ビュー]**  >  **[Cloud Explorer]** の順に選択します。 ご自分の Azure サブスクリプションを使用して接続します。 **App Services** を開きます。 アプリを右クリックします。 **[発行プロファイルのダウンロード]** を選択します。
+  * **ソリューション エクスプローラー**: **[ビュー]**  >  **[Cloud Explorer]** の順に選択します。 ご自分の Azure サブスクリプションを使用して接続します。 **App Services** を開きます。 アプリを右クリックします。 **[発行プロファイルのダウンロード]** を選択します。
   * Azure portal: Web アプリの **[概要]** ウィンドウで **[発行プロファイルの取得]** をクリックします。
 
-次の例では、 *AzureWebApp - Web Deploy* という名前の発行プロファイルが使用されます。
+次の例では、*AzureWebApp - Web Deploy* という名前の発行プロファイルが使用されます。
 
 ```bash
 msbuild "AzureWebApp.csproj" 
@@ -335,7 +335,7 @@ dotnet msbuild "AzureWebApp.csproj"
 
 ## <a name="set-the-environment"></a>環境を設定する
 
-発行プロファイル ( *.pubxml* ) またはプロジェクト ファイルに `<EnvironmentName>` プロパティを追加し、アプリの [環境](xref:fundamentals/environments)を設定します。
+発行プロファイル ( *.pubxml*) またはプロジェクト ファイルに `<EnvironmentName>` プロパティを追加し、アプリの [環境](xref:fundamentals/environments)を設定します。
 
 ```xml
 <PropertyGroup>
@@ -351,11 +351,11 @@ ASP.NET Core Web アプリを発行するときは、次の資産が含まれま
 
 * ビルド成果物
 * 次の glob パターンと一致するフォルダーおよびファイル:
-  * `**\*.config` (例: *web.config* )
+  * `**\*.config` (例: *web.config*)
   * `**\*.json` (例: *appsettings.json* )
   * `wwwroot\**`
 
-MSBuild では、[glob パターン](https://gruntjs.com/configuring-tasks#globbing-patterns)がサポートされています。 たとえば、次の `<Content>` 要素では、 *wwwroot/content* フォルダーとそのサブフォルダー内にあるテキスト ( *.txt* ) ファイルのコピーが抑制されます。
+MSBuild では、[glob パターン](https://gruntjs.com/configuring-tasks#globbing-patterns)がサポートされています。 たとえば、次の `<Content>` 要素では、*wwwroot/content* フォルダーとそのサブフォルダー内にあるテキスト ( *.txt*) ファイルのコピーが抑制されます。
 
 ```xml
 <ItemGroup>
@@ -365,7 +365,7 @@ MSBuild では、[glob パターン](https://gruntjs.com/configuring-tasks#globb
 
 上記のマークアップは、発行プロファイルまたは *.csproj* ファイルに追加できます。 *.csproj* ファイルに追加すると、プロジェクト内のすべての発行プロファイルにルールが追加されます。
 
-次の `<MsDeploySkipRules>` 要素では、 *wwwroot\content* フォルダーのすべてのファイルが除外されます。
+次の `<MsDeploySkipRules>` 要素では、*wwwroot\content* フォルダーのすべてのファイルが除外されます。
 
 ```xml
 <ItemGroup>
@@ -376,7 +376,7 @@ MSBuild では、[glob パターン](https://gruntjs.com/configuring-tasks#globb
 </ItemGroup>
 ```
 
-`<MsDeploySkipRules>` は、" *スキップされる* " ターゲットを配置サイトから削除しません。 `<Content>` のターゲットであるファイルとフォルダーは、配置サイトから削除されます。 たとえば、配置される Web アプリに次のファイルが含まれているとします。
+`<MsDeploySkipRules>` は、"*スキップされる*" ターゲットを配置サイトから削除しません。 `<Content>` のターゲットであるファイルとフォルダーは、配置サイトから削除されます。 たとえば、配置される Web アプリに次のファイルが含まれているとします。
 
 * *Views/Home/About1.cshtml*
 * *Views/Home/About2.cshtml*
@@ -403,7 +403,7 @@ MSBuild では、[glob パターン](https://gruntjs.com/configuring-tasks#globb
 </ItemGroup>
 ```
 
-前述の `<MsDeploySkipRules>` 要素は、" *スキップされる* " ファイルが配置されないようにします。 それは、いったん配置されたファイルは削除しません。
+前述の `<MsDeploySkipRules>` 要素は、"*スキップされる*" ファイルが配置されないようにします。 それは、いったん配置されたファイルは削除しません。
 
 次の `<Content>` 要素は、配置サイトのターゲット ファイルを削除します。
 
