@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/diagnostics
 ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060444"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET での gRPC のログ記録と診断
@@ -42,7 +42,7 @@ gRPC サービスと gRPC クライアントでは、[.NET Core ログ](xref:fun
 ### <a name="grpc-services-logging"></a>gRPC サービス ログ
 
 > [!WARNING]
-> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
+> サーバー側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください**。
 
 gRPC サービスは ASP.NET Core でホストされるため、ASP.NET Core ログ システムが使用されます。 既定の構成では、gRPC でログに記録される情報は非常に少量ですが、これは構成可能です。 ASP.NET Core ログの構成の詳細については、[ASP.NET Core ログ](xref:fundamentals/logging/index#configuration)に関するドキュメントを参照してください。
 
@@ -98,7 +98,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ### <a name="grpc-client-logging"></a>gRPC クライアント ログ
 
 > [!WARNING]
-> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください** 。
+> クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください**。
 
 .NET クライアントからログを取得するには、クライアントのチャネルが作成されるときに `GrpcChannelOptions.LoggerFactory` プロパティを設定します。 ASP.NET Core アプリから gRPC サービスを呼び出す場合は、依存関係の挿入 (DI) からロガー ファクトリを解決できます。
 

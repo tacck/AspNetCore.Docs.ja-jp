@@ -17,10 +17,10 @@ no-loc:
 - SignalR
 uid: fundamentals/static-files
 ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057857"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core の静的ファイル
@@ -43,14 +43,14 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、既定では A
 
 上記のコードは、Web アプリ テンプレートを使用して作成されました。
 
-静的ファイルには、[Web ルート](xref:fundamentals/index#web-root)に対する相対パスを使用してアクセスできます。 たとえば、 **Web アプリケーション** プロジェクト テンプレートでは、`wwwroot` フォルダー内に次のいくつかのフォルダーが含まれています。
+静的ファイルには、[Web ルート](xref:fundamentals/index#web-root)に対する相対パスを使用してアクセスできます。 たとえば、**Web アプリケーション** プロジェクト テンプレートでは、`wwwroot` フォルダー内に次のいくつかのフォルダーが含まれています。
 
 * `wwwroot`
   * `css`
   * `js`
   * `lib`
 
-*wwwroot/images* フォルダーを作成し、 *wwwroot/images/MyImage.jpg* ファイルを追加する場合を考えてみます。 `images` フォルダー内のファイルにアクセスするための URI 形式は `https://<hostname>/images/<image_file_name>` です。 たとえば、`https://localhost:5001/images/MyImage.jpg`
+*wwwroot/images* フォルダーを作成し、*wwwroot/images/MyImage.jpg* ファイルを追加する場合を考えてみます。 `images` フォルダー内のファイルにアクセスするための URI 形式は `https://<hostname>/images/<image_file_name>` です。 たとえば、`https://localhost:5001/images/MyImage.jpg`
 
 ### <a name="serve-files-in-web-root"></a>Web ルート内のファイルの提供
 
@@ -58,7 +58,7 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、既定では A
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/Startup.cs?name=snippet_Configure&highlight=15)]
 
-`UseStaticFiles` メソッドのパラメーターなしのオーバーロードによって、[Web ルート](xref:fundamentals/index#web-root)内のファイルが提供可能とマークされます。 次のマークアップは、 *wwwroot/images/MyImage.jpg* を参照します。
+`UseStaticFiles` メソッドのパラメーターなしのオーバーロードによって、[Web ルート](xref:fundamentals/index#web-root)内のファイルが提供可能とマークされます。 次のマークアップは、*wwwroot/images/MyImage.jpg* を参照します。
 
 ```html
 <img src="~/images/MyImage.jpg" class="img" alt="My image" />
@@ -82,9 +82,9 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、既定では A
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupRose.cs?name=snippet_Configure&highlight=15-22)]
 
-前述のコードでは、 *MyStaticFiles* ディレクトリ階層は、 *StaticFiles* URI セグメントでパブリックに公開されています。 `https://<hostname>/StaticFiles/images/red-rose.jpg` の要求は、 *red-rose.jpg* ファイルを提供します。
+前述のコードでは、*MyStaticFiles* ディレクトリ階層は、*StaticFiles* URI セグメントでパブリックに公開されています。 `https://<hostname>/StaticFiles/images/red-rose.jpg` の要求は、*red-rose.jpg* ファイルを提供します。
 
-次のマークアップは、 *MyStaticFiles/images/red-rose.jpg* を参照します。
+次のマークアップは、*MyStaticFiles/images/red-rose.jpg* を参照します。
 
 ```html
 <img src="~/StaticFiles/images/red-rose.jpg" class="img" alt="A red rose" />
@@ -228,7 +228,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="non-standard-content-types"></a>非標準のコンテンツ タイプ
 
-静的ファイル ミドルウェアでは、約 400 の既知のファイル コンテンツ タイプが認識されています。 ユーザーがファイルの種類が不明なファイルを要求した場合、静的ファイル ミドルウェアでその要求がパイプラインの次のミドルウェアに渡されます。 ミドルウェアで要求が処理されない場合、 *404 見つかりません* という応答が返されます。 ディレクトリ参照が有効になっている場合、ディレクトリ一覧にファイルへのリンクが表示されます。
+静的ファイル ミドルウェアでは、約 400 の既知のファイル コンテンツ タイプが認識されています。 ユーザーがファイルの種類が不明なファイルを要求した場合、静的ファイル ミドルウェアでその要求がパイプラインの次のミドルウェアに渡されます。 ミドルウェアで要求が処理されない場合、*404 見つかりません* という応答が返されます。 ディレクトリ参照が有効になっている場合、ディレクトリ一覧にファイルへのリンクが表示されます。
 
 次のコードによって、不明なタイプを提供できるようにし、不明なファイルをイメージとしてレンダリングします。
 
@@ -264,7 +264,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
     1. **[アクション]** サイドバーで、 **[削除]** をクリックします。
 
 > [!WARNING]
-> IIS の静的ファイル ハンドラーが有効になっており、 **かつ** 、ASP.NET Core モジュールが正しく構成されていない場合、静的ファイルにサービスが提供されます。 これは、たとえば、 *web.config* ファイルが配置されていない場合などで発生します。
+> IIS の静的ファイル ハンドラーが有効になっており、**かつ**、ASP.NET Core モジュールが正しく構成されていない場合、静的ファイルにサービスが提供されます。 これは、たとえば、*web.config* ファイルが配置されていない場合などで発生します。
 
 * アプリ プロジェクトの [Web ルート](xref:fundamentals/index#web-root)の外に、コード ファイル ( *.cs* と *.cshtml* を含む) を配置します。 これにより、アプリのクライアント側コンテンツとサーバー ベースのコードの間で、論理的な分離が作成されます。 これによって、サーバー側のコードが漏洩するのを防ぎます。
 
@@ -293,14 +293,14 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、ASP.NET Core �
 
 [!code-csharp[](../common/samples/WebApplication1DotNetCore2.0App/Program.cs?name=snippet_Main&highlight=9)]
 
-静的ファイルには、[Web ルート](xref:fundamentals/index#web-root)に対する相対パスを使用してアクセスできます。 たとえば、 **Web アプリケーション** プロジェクト テンプレートでは、`wwwroot` フォルダー内に次のいくつかのフォルダーが含まれています。
+静的ファイルには、[Web ルート](xref:fundamentals/index#web-root)に対する相対パスを使用してアクセスできます。 たとえば、**Web アプリケーション** プロジェクト テンプレートでは、`wwwroot` フォルダー内に次のいくつかのフォルダーが含まれています。
 
 * `wwwroot`
   * `css`
   * `images`
   * `js`
 
-*images* サブフォルダーのファイルにアクセスするための URI は、 *http://\<server_address>/images/\<image_file_name>* です。 たとえば、 *http://localhost:9189/images/banner3.svg* です。
+*images* サブフォルダーのファイルにアクセスするための URI は、*http://\<server_address>/images/\<image_file_name>* です。 たとえば、 *http://localhost:9189/images/banner3.svg* です。
 
 .NET Framework を対象としている場合、プロジェクトに [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) パッケージを追加します。 .NET Core をターゲットとする場合、[Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)にこのパッケージが含まれます。
 
@@ -312,7 +312,7 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、ASP.NET Core �
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-`UseStaticFiles` メソッドのパラメーターなしのオーバーロードによって、[Web ルート](xref:fundamentals/index#web-root)内のファイルが提供可能とマークされます。 次のマークアップは、 *wwwroot/images/banner1.svg* を参照します。
+`UseStaticFiles` メソッドのパラメーターなしのオーバーロードによって、[Web ルート](xref:fundamentals/index#web-root)内のファイルが提供可能とマークされます。 次のマークアップは、*wwwroot/images/banner1.svg* を参照します。
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
@@ -334,9 +334,9 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、ASP.NET Core �
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupTwoStaticFiles.cs?name=snippet_ConfigureMethod&highlight=5-10)]
 
-前述のコードでは、 *MyStaticFiles* ディレクトリ階層は、 *StaticFiles* URI セグメントでパブリックに公開されています。 *http://\<server_address>/StaticFiles/images/banner1.svg* に対する要求によって、 *banner1.svg* ファイルが提供されます。
+前述のコードでは、*MyStaticFiles* ディレクトリ階層は、*StaticFiles* URI セグメントでパブリックに公開されています。 *http://\<server_address>/StaticFiles/images/banner1.svg* に対する要求によって、*banner1.svg* ファイルが提供されます。
 
-次のマークアップは、 *MyStaticFiles/images/banner1.svg* を参照します。
+次のマークアップは、*MyStaticFiles/images/banner1.svg* を参照します。
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_outside)]
 
@@ -378,7 +378,7 @@ HTML、CSS、画像、JavaScript などの静的ファイルは、ASP.NET Core �
 
 参照を有効にした場合のセキュリティ上のリスクについては、「[注意点](#considerations)」を参照してください。
 
-次の例の 2 つの `UseStaticFiles` 呼び出しを確認してください。 最初の呼び出しにより、 *wwwroot* フォルダー内の静的ファイルが提供されます。 2 番目の呼び出しにより、URL *http://\<server_address>/MyImages* が使用され、 *wwwroot/images* フォルダーのディレクトリ参照が有効になります。
+次の例の 2 つの `UseStaticFiles` 呼び出しを確認してください。 最初の呼び出しにより、*wwwroot* フォルダー内の静的ファイルが提供されます。 2 番目の呼び出しにより、URL *http://\<server_address>/MyImages* が使用され、*wwwroot/images* フォルダーのディレクトリ参照が有効になります。
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=3,5)]
 
@@ -446,7 +446,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 | *http://\<server_address>/StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
 | *http://\<server_address>/StaticFiles*             |     MyStaticFiles/default.html |
 
-*MyStaticFiles* ディレクトリに既定の名前のファイルが存在しない場合、 *http://\<server_address>/StaticFiles* によってクリック可能なリンクを含むディレクトリの一覧が返されます。
+*MyStaticFiles* ディレクトリに既定の名前のファイルが存在しない場合、*http://\<server_address>/StaticFiles* によってクリック可能なリンクを含むディレクトリの一覧が返されます。
 
 ![静的ファイルの一覧](static-files/_static/db2.png)
 
@@ -465,7 +465,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="non-standard-content-types"></a>非標準のコンテンツ タイプ
 
-静的ファイル ミドルウェアでは、約 400 個の既知のファイル コンテンツ タイプが認識されます。 ユーザーがファイルの種類が不明なファイルを要求した場合、静的ファイル ミドルウェアでその要求がパイプラインの次のミドルウェアに渡されます。 ミドルウェアで要求が処理されない場合、 *404 見つかりません* という応答が返されます。 ディレクトリ参照が有効になっている場合、ディレクトリ一覧にファイルへのリンクが表示されます。
+静的ファイル ミドルウェアでは、約 400 個の既知のファイル コンテンツ タイプが認識されます。 ユーザーがファイルの種類が不明なファイルを要求した場合、静的ファイル ミドルウェアでその要求がパイプラインの次のミドルウェアに渡されます。 ミドルウェアで要求が処理されない場合、*404 見つかりません* という応答が返されます。 ディレクトリ参照が有効になっている場合、ディレクトリ一覧にファイルへのリンクが表示されます。
 
 次のコードによって、不明なタイプを提供できるようにし、不明なファイルをイメージとしてレンダリングします。
 
@@ -478,7 +478,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 ## <a name="serve-files-from-multiple-locations"></a>複数の場所からファイルを提供する
 
-`UseStaticFiles` と `UseFileServer` の既定では、 *wwwroot* をポイントするファイル プロバイダーが作成されます。 他のファイル プロバイダーを使用する `UseStaticFiles` および `UseFileServer` の追加インスタンスを作成して、他の場所からファイルを提供することができます。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/15578)します。
+`UseStaticFiles` と `UseFileServer` の既定では、*wwwroot* をポイントするファイル プロバイダーが作成されます。 他のファイル プロバイダーを使用する `UseStaticFiles` および `UseFileServer` の追加インスタンスを作成して、他の場所からファイルを提供することができます。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/15578)します。
 
 ### <a name="considerations"></a>注意事項
 
@@ -495,7 +495,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
     1. **[アクション]** サイドバーで、 **[削除]** をクリックします。
 
 > [!WARNING]
-> IIS の静的ファイル ハンドラーが有効になっており、 **かつ** 、ASP.NET Core モジュールが正しく構成されていない場合、静的ファイルにサービスが提供されます。 これは、たとえば、 *web.config* ファイルが配置されていない場合などで発生します。
+> IIS の静的ファイル ハンドラーが有効になっており、**かつ**、ASP.NET Core モジュールが正しく構成されていない場合、静的ファイルにサービスが提供されます。 これは、たとえば、*web.config* ファイルが配置されていない場合などで発生します。
 
 * アプリ プロジェクトの [Web ルート](xref:fundamentals/index#web-root)の外に、コード ファイル ( *.cs* と *.cshtml* を含む) を配置します。 これにより、アプリのクライアント側コンテンツとサーバー ベースのコードの間で、論理的な分離が作成されます。 これによって、サーバー側のコードが漏洩するのを防ぎます。
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
 ms.openlocfilehash: b009cc61a94e618a48d96ecbd770ef6371308f6a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059846"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core を使用した Azure App Service および IIS の一般的なエラーのリファレンス
@@ -40,7 +40,7 @@ ms.locfileid: "93059846"
 * アプリケーション イベント ログのエントリ
   * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
   * IIS
-    1. **[Windows]** メニューで **[スタート]** を選択し、「 *Event Viewer* 」と入力し、 **Enter** を押します。
+    1. **[Windows]** メニューで **[スタート]** を選択し、「*Event Viewer*」と入力し、**Enter** を押します。
     1. **イベント ビューアー** が開いたら、サイド バーで **[Windows ログ]** > **[アプリケーション]** の順に展開します。
 * ASP.NET Core モジュールの stdout ログ エントリと debug ログ エントリ
   * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
@@ -62,7 +62,7 @@ ms.locfileid: "93059846"
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>サイト拡張機能の不足、32 ビット (x86) および 64 ビット (x64) サイト拡張機能がインストールされている、または間違ったプロセス ビットが設定されている
 
-" *Azure App Services でホストしているアプリに適用されます。* "
+"*Azure App Services でホストしているアプリに適用されます。* "
 
 * **ブラウザー:** HTTP エラー 500.0 - ANCM インプロセス ハンドラーの読み込みエラー
 
@@ -83,7 +83,7 @@ ms.locfileid: "93059846"
 
 * プレビュー ランタイムでアプリを実行していて、32 ビット (x86)、64 ビット (x64) 両方の[サイト拡張機能](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)がインストールされている場合、アプリのビットと一致しないサイト拡張機能をアンインストールします。 サイト拡張機能を削除した後、アプリを再起動します。 アプリが再起動するまで数秒待ちます。
 
-* プレビュー ランタイムでアプリを実行していて、サイト拡張機能とアプリのビットが一致している場合、プレビュー サイト拡張機能の " *ランタイム バージョン* " がアプリのランタイム バージョンと一致していることを確認します。
+* プレビュー ランタイムでアプリを実行していて、サイト拡張機能とアプリのビットが一致している場合、プレビュー サイト拡張機能の "*ランタイム バージョン*" がアプリのランタイム バージョンと一致していることを確認します。
 
 * **[アプリケーション設定]** のアプリの **[プラットフォーム]** がアプリのビットと一致していることを確認します。
 
@@ -179,7 +179,7 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 
 * **[アプリケーション プール]** > **[プロセス モデル]** > **[Identity]** が **ApplicationPoolIdentity** に設定されていることを確認します。または、カスタム ID にアプリの展開フォルダーにアクセスするための正しいアクセス許可があることを確認します。
 
-* ASP.NET Core ホスティング バンドルをアンインストールし、以前のバージョンのホスティング バンドルをインストールした場合、 *applicationHost.config* ファイルには ASP.NET Core モジュールのセクションが含まれません。 *applicationHost.config* で *%windir%/System32/inetsrv/config* を開き、`<configuration><configSections><sectionGroup name="system.webServer">` セクション グループを見つけます。 セクション グループに ASP.NET Core モジュールのセクションがない場合は、セクション要素を追加します。
+* ASP.NET Core ホスティング バンドルをアンインストールし、以前のバージョンのホスティング バンドルをインストールした場合、*applicationHost.config* ファイルには ASP.NET Core モジュールのセクションが含まれません。 *applicationHost.config* で *%windir%/System32/inetsrv/config* を開き、`<configuration><configSections><sectionGroup name="system.webServer">` セクション グループを見つけます。 セクション グループに ASP.NET Core モジュールのセクションがない場合は、セクション要素を追加します。
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -201,11 +201,11 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 
 * Kestrel でアプリをローカルに実行できることを確認します。 プロセスのエラーは、アプリ内の問題の結果である可能性があります。 詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
 
-* *web.config* で `<aspNetCore>` 要素の *processPath* 属性を調べ、フレームワークに依存する展開 (FDD) の場合はそれが `dotnet` であること、 [自己完結型展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) の場合はそれが `.\{ASSEMBLY}.exe` であることを確認します。
+* *web.config* で `<aspNetCore>` 要素の *processPath* 属性を調べ、フレームワークに依存する展開 (FDD) の場合はそれが `dotnet` であること、[自己完結型展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) の場合はそれが `.\{ASSEMBLY}.exe` であることを確認します。
 
 * FDD の場合、PATH 設定で *dotnet.exe* にアクセスできていない可能性があります。 *C:\Program Files\dotnet\\* がシステムの PATH 設定に含まれていることを確認します。
 
-* FDD では、アプリ プールのユーザー ID で *dotnet.exe* にアクセスできていない可能性があります。 アプリ プール ユーザー ID に、 *C:\Program Files\dotnet* ディレクトリへのアクセス許可が設定されていることを確認します。 *C:\Program Files\dotnet* とアプリのディレクトリに、アプリ プール ユーザー ID に対する拒否ルールが構成されていないことを確認します。
+* FDD では、アプリ プールのユーザー ID で *dotnet.exe* にアクセスできていない可能性があります。 アプリ プール ユーザー ID に、*C:\Program Files\dotnet* ディレクトリへのアクセス許可が設定されていることを確認します。 *C:\Program Files\dotnet* とアプリのディレクトリに、アプリ プール ユーザー ID に対する拒否ルールが構成されていないことを確認します。
 
 * FDD を配置し、IIS を再起動せずに .NET Core をインストールした可能性があります。 サーバーを再起動するか、コマンド プロンプトから **net stop was /y** に続けて **net start w3svc** を実行して IIS を再起動します。
 
@@ -328,7 +328,7 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 * アプリケーション イベント ログのエントリ
   * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
   * IIS
-    1. **[Windows]** メニューで **[スタート]** を選択し、「 *Event Viewer* 」と入力し、 **Enter** を押します。
+    1. **[Windows]** メニューで **[スタート]** を選択し、「*Event Viewer*」と入力し、**Enter** を押します。
     1. **イベント ビューアー** が開いたら、サイド バーで **[Windows ログ]** > **[アプリケーション]** の順に展開します。
 * ASP.NET Core モジュールの stdout ログ エントリと debug ログ エントリ
   * Azure App Service:以下を参照してください。<xref:test/troubleshoot-azure-iis>
@@ -350,7 +350,7 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>サイト拡張機能の不足、32 ビット (x86) および 64 ビット (x64) サイト拡張機能がインストールされている、または間違ったプロセス ビットが設定されている
 
-" *Azure App Services でホストしているアプリに適用されます。* "
+"*Azure App Services でホストしているアプリに適用されます。* "
 
 * **ブラウザー:** HTTP エラー 500.0 - ANCM インプロセス ハンドラーの読み込みエラー
 
@@ -369,7 +369,7 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 
 * プレビュー ランタイムでアプリを実行していて、32 ビット (x86)、64 ビット (x64) 両方の[サイト拡張機能](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)がインストールされている場合、アプリのビットと一致しないサイト拡張機能をアンインストールします。 サイト拡張機能を削除した後、アプリを再起動します。 アプリが再起動するまで数秒待ちます。
 
-* プレビュー ランタイムでアプリを実行していて、サイト拡張機能とアプリのビットが一致している場合、プレビュー サイト拡張機能の " *ランタイム バージョン* " がアプリのランタイム バージョンと一致していることを確認します。
+* プレビュー ランタイムでアプリを実行していて、サイト拡張機能とアプリのビットが一致している場合、プレビュー サイト拡張機能の "*ランタイム バージョン*" がアプリのランタイム バージョンと一致していることを確認します。
 
 * **[アプリケーション設定]** のアプリの **[プラットフォーム]** がアプリのビットと一致していることを確認します。
 
@@ -457,7 +457,7 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 
 * **[アプリケーション プール]** > **[プロセス モデル]** > **[Identity]** が **ApplicationPoolIdentity** に設定されていることを確認します。または、カスタム ID にアプリの展開フォルダーにアクセスするための正しいアクセス許可があることを確認します。
 
-* ASP.NET Core ホスティング バンドルをアンインストールし、以前のバージョンのホスティング バンドルをインストールした場合、 *applicationHost.config* ファイルには ASP.NET Core モジュールのセクションが含まれません。 *applicationHost.config* で *%windir%/System32/inetsrv/config* を開き、`<configuration><configSections><sectionGroup name="system.webServer">` セクション グループを見つけます。 セクション グループに ASP.NET Core モジュールのセクションがない場合は、セクション要素を追加します。
+* ASP.NET Core ホスティング バンドルをアンインストールし、以前のバージョンのホスティング バンドルをインストールした場合、*applicationHost.config* ファイルには ASP.NET Core モジュールのセクションが含まれません。 *applicationHost.config* で *%windir%/System32/inetsrv/config* を開き、`<configuration><configSections><sectionGroup name="system.webServer">` セクション グループを見つけます。 セクション グループに ASP.NET Core モジュールのセクションがない場合は、セクション要素を追加します。
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -477,11 +477,11 @@ IIS Web サイトの **基本設定** と物理アプリのフォルダーを確
 
 * Kestrel でアプリをローカルに実行できることを確認します。 プロセスのエラーは、アプリ内の問題の結果である可能性があります。 詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
 
-* *web.config* で `<aspNetCore>` 要素の *processPath* 属性を調べ、フレームワークに依存する展開 (FDD) の場合はそれが `dotnet` であること、 [自己完結型展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) の場合はそれが `.\{ASSEMBLY}.exe` であることを確認します。
+* *web.config* で `<aspNetCore>` 要素の *processPath* 属性を調べ、フレームワークに依存する展開 (FDD) の場合はそれが `dotnet` であること、[自己完結型展開 (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) の場合はそれが `.\{ASSEMBLY}.exe` であることを確認します。
 
 * FDD の場合、PATH 設定で *dotnet.exe* にアクセスできていない可能性があります。 *C:\Program Files\dotnet\\* がシステムの PATH 設定に含まれていることを確認します。
 
-* FDD では、アプリ プールのユーザー ID で *dotnet.exe* にアクセスできていない可能性があります。 アプリ プール ユーザー ID に、 *C:\Program Files\dotnet* ディレクトリへのアクセス許可が設定されていることを確認します。 *C:\Program Files\dotnet* とアプリのディレクトリに、アプリ プール ユーザー ID に対する拒否ルールが構成されていないことを確認します。
+* FDD では、アプリ プールのユーザー ID で *dotnet.exe* にアクセスできていない可能性があります。 アプリ プール ユーザー ID に、*C:\Program Files\dotnet* ディレクトリへのアクセス許可が設定されていることを確認します。 *C:\Program Files\dotnet* とアプリのディレクトリに、アプリ プール ユーザー ID に対する拒否ルールが構成されていないことを確認します。
 
 * FDD を配置し、IIS を再起動せずに .NET Core をインストールした可能性があります。 サーバーを再起動するか、コマンド プロンプトから **net stop was /y** に続けて **net start w3svc** を実行して IIS を再起動します。
 

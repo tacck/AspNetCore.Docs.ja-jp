@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: grpc/browser
 ms.openlocfilehash: 6456707620ae1c1f4d23f3562c78d1bf05d4844f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058910"
 ---
 # <a name="use-grpc-in-browser-apps"></a>ブラウザー アプリでの gRPC の使用
@@ -124,11 +124,11 @@ gRPC-Web を使用するには:
 
 `GrpcWebHandler` には次の構成オプションがあります。
 
-* **InnerHandler** :gRPC HTTP 要求を行う基になる <xref:System.Net.Http.HttpMessageHandler> (`HttpClientHandler` など)。
-* **GrpcWebMode** :gRPC HTTP 要求の `Content-Type` が `application/grpc-web` または `application/grpc-web-text` であるかどうかを指定する列挙型。
+* **InnerHandler**:gRPC HTTP 要求を行う基になる <xref:System.Net.Http.HttpMessageHandler> (`HttpClientHandler` など)。
+* **GrpcWebMode**:gRPC HTTP 要求の `Content-Type` が `application/grpc-web` または `application/grpc-web-text` であるかどうかを指定する列挙型。
     * `GrpcWebMode.GrpcWeb` は、コンテンツをエンコードせずに送信するように構成します。 既定値です。
     * `GrpcWebMode.GrpcWebText` は、コンテンツを base64 でエンコードするように構成します。 ブラウザーでのサーバー ストリーム呼び出しに必要です。
-* **HttpVersion** :基になる gRPC HTTP 要求で、 [HttpRequestMessage](xref:System.Net.Http.HttpRequestMessage.Version) を設定するために使用される HTTP プロトコル `Version`。 gRPC-Web では特定のバージョンを必要とせず、指定しない限り、既定値はオーバーライドされません。
+* **HttpVersion**:基になる gRPC HTTP 要求で、[HttpRequestMessage](xref:System.Net.Http.HttpRequestMessage.Version) を設定するために使用される HTTP プロトコル `Version`。 gRPC-Web では特定のバージョンを必要とせず、指定しない限り、既定値はオーバーライドされません。
 
 > [!IMPORTANT]
 > 生成された gRPC クライアントには、単項メソッドを呼び出すための同期メソッドと非同期メソッドがあります。 たとえば、`SayHello` は同期であり、`SayHelloAsync` は非同期です。 Blazor WebAssembly アプリで同期メソッドを呼び出すと、アプリが応答しなくなります。 Blazor WebAssembly では、常に非同期メソッドを使用する必要があります。

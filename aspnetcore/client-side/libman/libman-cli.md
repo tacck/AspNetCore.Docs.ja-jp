@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: dad9136439b61ad98523061d181fe44d3bf1273d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054750"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core で LibMan CLI を使用する
@@ -104,7 +104,7 @@ Use "libman [command] --help" for more information about a command.
 
 ## <a name="initialize-libman-in-the-project"></a>プロジェクト内の LibMan の初期化
 
-`libman init` コマンドを実行すると、 *libman.json* ファイルが存在しない場合は作成されます。 このファイルは、既定の項目テンプレート コンテンツを使用して作成されます。
+`libman init` コマンドを実行すると、*libman.json* ファイルが存在しない場合は作成されます。 このファイルは、既定の項目テンプレート コンテンツを使用して作成されます。
 
 ### <a name="synopsis"></a>構文
 
@@ -191,7 +191,7 @@ libman install [-h|--help]
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  指定しない場合、 *libman.json* の `defaultProvider` プロパティが使用されます。 *libman.json* で `defaultProvider` プロパティが指定されていない場合、このオプションは必須です。
+  指定しない場合、*libman.json* の `defaultProvider` プロパティが使用されます。 *libman.json* で `defaultProvider` プロパティが指定されていない場合、このオプションは必須です。
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -244,7 +244,7 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 
 ![libman install コマンド - インストール先](_static/libman-install-destination.png)
 
-既定の保存先を受け入れると、 *libman.json* ファイルは次のようになります。
+既定の保存先を受け入れると、*libman.json* ファイルは次のようになります。
 
 ```json
 {
@@ -273,11 +273,11 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 
 ## <a name="restore-library-files"></a>ライブラリ ファイルの復元
 
-`libman restore` コマンドは、 *libman.json* で定義されているライブラリ ファイルをインストールします。 次の規則が適用されます。
+`libman restore` コマンドは、*libman.json* で定義されているライブラリ ファイルをインストールします。 次の規則が適用されます。
 
 * プロジェクト ルートに *libman.json* ファイルが存在しない場合は、エラーが返されます。
-* ライブラリがプロバイダーを指定している場合、 *libman.json* の `defaultProvider` プロパティは無視されます。
-* ライブラリがインストール先を指定している場合、 *libman.json* の `defaultDestination` プロパティは無視されます。
+* ライブラリがプロバイダーを指定している場合、*libman.json* の `defaultProvider` プロパティは無視されます。
+* ライブラリがインストール先を指定している場合、*libman.json* の `defaultDestination` プロパティは無視されます。
 
 ### <a name="synopsis"></a>構文
 

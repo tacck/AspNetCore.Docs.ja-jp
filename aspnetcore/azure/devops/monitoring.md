@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: azure/devops/monitor
 ms.openlocfilehash: 74e789828bf5d54e3457f235657f8ed7086df80d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056752"
 ---
 # <a name="monitor-and-debug"></a>監視とデバッグ
@@ -43,17 +43,17 @@ ms.locfileid: "93056752"
 
 App Service Web アプリは、リアルタイムで簡単に監視できます。 Azure portal では、わかりやすいチャートとグラフでメトリックがレンダリングされます。
 
-1. [Azure portal](https://portal.azure.com) を開き、" *mywebapp\<unique_number\>* " App Service に移動します。
+1. [Azure portal](https://portal.azure.com) を開き、"*mywebapp\<unique_number\>* " App Service に移動します。
 
 1. **[概要]** タブには、最近のメトリックを表示するグラフなど、"ひとめでわかる" 情報が表示されます。
 
     ![概要パネルを示すスクリーンショット](./media/monitoring/overview.png)
 
-    * **Http 5xx** :サーバー側のエラー (通常は ASP.NET Core コードの例外) の数。
-    * **受信データ** : Web アプリで受信されるデータ受信。
-    * **送信データ** : Web アプリからクライアントへのデータ送信。
-    * **要求** : HTTP 要求の数。
-    * **平均応答時間** : Web アプリが HTTP 要求に応答するまでの平均時間。
+    * **Http 5xx**:サーバー側のエラー (通常は ASP.NET Core コードの例外) の数。
+    * **受信データ**: Web アプリで受信されるデータ受信。
+    * **送信データ**: Web アプリからクライアントへのデータ送信。
+    * **要求**: HTTP 要求の数。
+    * **平均応答時間**: Web アプリが HTTP 要求に応答するまでの平均時間。
 
     トラブルシューティングと最適化のためのセルフサービス ツールは、このページにもいくつかあります。
 
@@ -71,7 +71,7 @@ App Service Web アプリは、リアルタイムで簡単に監視できます�
 
 [Application Insights](/azure/application-insights/app-insights-overview) は、Web アプリのパフォーマンスと安定性、およびユーザーがそれらをどのように使用しているかを分析するための Azure サービスです。 Application Insights のデータは、Azure Monitor よりも広範で深いものです。 開発者や管理者は、このデータからアプリを改善するための重要な情報を得ることができます。 Application Insights は、コードを変更することなく、Azure App Service リソースに追加できます。
 
-1. [Azure portal](https://portal.azure.com) を開き、" *mywebapp\<unique_number\>* " App Service に移動します。
+1. [Azure portal](https://portal.azure.com) を開き、"*mywebapp\<unique_number\>* " App Service に移動します。
 1. **[概要]** タブで、 **[Application Insights]** タイルをクリックします。
 
     ![[Application Insights] タイル](./media/monitoring/app-insights.png)
@@ -96,7 +96,7 @@ App Service Web アプリは、リアルタイムで簡単に監視できます�
 
 Azure App Service では、Web サーバーとアプリのログは既定で無効になっています。 次の手順でログを有効にします。
 
-1. [Azure portal](https://portal.azure.com) を開き、" *mywebapp\<unique_number\>* " App Service に移動します。
+1. [Azure portal](https://portal.azure.com) を開き、"*mywebapp\<unique_number\>* " App Service に移動します。
 1. 左側のメニューで、 **[監視]** セクションまで下にスクロールします。 **[診断ログ]** を選択します。
 
     ![診断ログのリンク](./media/monitoring/logging.png)
@@ -112,7 +112,7 @@ Web アプリ用に ASP.NET Core と Web サーバー (App Service) のログが
 
 アプリと Web サーバーのログは、ポータルを使用してリアルタイムでストリームできます。
 
-1. [Azure portal](https://portal.azure.com) を開き、" *mywebapp\<unique_number\>* " App Service に移動します。
+1. [Azure portal](https://portal.azure.com) を開き、"*mywebapp\<unique_number\>* " App Service に移動します。
 1. 左側のメニューで、 **[監視]** セクションまで下にスクロールして、 **[ログ ストリーム]** を選択します。
 
     ![ログ ストリーム リンクを示すスクリーンショット](./media/monitoring/log-stream.png)

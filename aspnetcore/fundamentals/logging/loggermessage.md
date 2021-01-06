@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/logging/loggermessage
 ms.openlocfilehash: 0224e768bd0e016eac5165dc4d9745f4b0867094
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060457"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>ASP.NET Core での LoggerMessage による高パフォーマンスのログ記録
@@ -47,7 +47,7 @@ ms.locfileid: "93060457"
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> メソッドに指定された文字列はテンプレートであり、補間文字列ではありません。 プレースホルダーは、型が指定された順に入力されます。 テンプレート内のプレースホルダー名はわかりやすく、テンプレート間で一貫している必要があります。 それらは構造化されたログ データ内でプロパティ名としての役割を果たします。 プレースホルダー名には [Pascal 形式](/dotnet/standard/design-guidelines/capitalization-conventions)を推奨します。 たとえば、`{Count}`、`{FirstName}` のようになります。
 
-各ログ メッセージは、[LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) によって作成された静的フィールドに保持される <xref:System.Action> です。 たとえば、サンプル アプリでは、インデックス ページに対する GET 要求に関するログ メッセージを記述するフィールドを作成します ( *Internal/LoggerExtensions.cs* )。
+各ログ メッセージは、[LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) によって作成された静的フィールドに保持される <xref:System.Action> です。 たとえば、サンプル アプリでは、インデックス ページに対する GET 要求に関するログ メッセージを記述するフィールドを作成します (*Internal/LoggerExtensions.cs*)。
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -71,7 +71,7 @@ ms.locfileid: "93060457"
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet9)]
 
-`IndexPageRequested` は、 *Pages/Index.cshtml.cs* に含まれる `OnGetAsync` メソッドのロガー上で呼び出されます。
+`IndexPageRequested` は、*Pages/Index.cshtml.cs* に含まれる `OnGetAsync` メソッドのロガー上で呼び出されます。
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet2&highlight=3)]
 
@@ -95,7 +95,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-インデックス ページのページ モデル ( *Pages/Index.cshtml.cs* ) では、メッセージを記録するために `QuoteAdded` が呼び出されます。
+インデックス ページのページ モデル (*Pages/Index.cshtml.cs*) では、メッセージを記録するために `QuoteAdded` が呼び出されます。
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -108,7 +108,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-サンプル アプリでは、見積もり削除用の [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) パターンを実装します。 削除操作に成功した場合、情報メッセージが記録されます。 例外がスローされた場合は、削除操作に対してエラー メッセージが記録されます。 削除操作が失敗した場合のログ メッセージには、例外スタック トレースが含まれます ( *Internal/LoggerExtensions.cs* )。
+サンプル アプリでは、見積もり削除用の [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) パターンを実装します。 削除操作に成功した場合、情報メッセージが記録されます。 例外がスローされた場合は、削除操作に対してエラー メッセージが記録されます。 削除操作が失敗した場合のログ メッセージには、例外スタック トレースが含まれます (*Internal/LoggerExtensions.cs*)。
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -118,7 +118,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-インデックス ページのページ モデルでは、見積もりの削除に成功すると、ロガー上で `QuoteDeleted` メソッドが呼び出されます。 削除対象の見積もりが見つからない場合は、<xref:System.ArgumentNullException> がスローされます。 例外は [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントによってトラップされ、 [catch](/dotnet/csharp/language-reference/keywords/try-catch) ブロック ( *Pages/Index.cshtml.cs* ) 内のロガーで `QuoteDeleteFailed` メソッドを呼び出すことにより記録されます。
+インデックス ページのページ モデルでは、見積もりの削除に成功すると、ロガー上で `QuoteDeleted` メソッドが呼び出されます。 削除対象の見積もりが見つからない場合は、<xref:System.ArgumentNullException> がスローされます。 例外は [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントによってトラップされ、[catch](/dotnet/csharp/language-reference/keywords/try-catch) ブロック (*Pages/Index.cshtml.cs*) 内のロガーで `QuoteDeleteFailed` メソッドを呼び出すことにより記録されます。
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -159,7 +159,7 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 
 [!code-json[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
-ログ スコープを作成するには、スコープに対して <xref:System.Func%601> デリゲートを保持するフィールドを追加します。 サンプル アプリでは、`_allQuotesDeletedScope` と呼ばれるフィールドを作成します ( *Internal/LoggerExtensions.cs* )。
+ログ スコープを作成するには、スコープに対して <xref:System.Func%601> デリゲートを保持するフィールドを追加します。 サンプル アプリでは、`_allQuotesDeletedScope` と呼ばれるフィールドを作成します (*Internal/LoggerExtensions.cs*)。
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 
@@ -213,7 +213,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 <xref:Microsoft.Extensions.Logging.LoggerMessage.Define*> メソッドに指定された文字列はテンプレートであり、補間文字列ではありません。 プレースホルダーは、型が指定された順に入力されます。 テンプレート内のプレースホルダー名はわかりやすく、テンプレート間で一貫している必要があります。 それらは構造化されたログ データ内でプロパティ名としての役割を果たします。 プレースホルダー名には [Pascal 形式](/dotnet/standard/design-guidelines/capitalization-conventions)を推奨します。 たとえば、`{Count}`、`{FirstName}` のようになります。
 
-各ログ メッセージは、[LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) によって作成された静的フィールドに保持される <xref:System.Action> です。 たとえば、サンプル アプリでは、インデックス ページに対する GET 要求に関するログ メッセージを記述するフィールドを作成します ( *Internal/LoggerExtensions.cs* )。
+各ログ メッセージは、[LoggerMessage.Define](xref:Microsoft.Extensions.Logging.LoggerMessage.Define*) によって作成された静的フィールドに保持される <xref:System.Action> です。 たとえば、サンプル アプリでは、インデックス ページに対する GET 要求に関するログ メッセージを記述するフィールドを作成します (*Internal/LoggerExtensions.cs*)。
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet1)]
 
@@ -237,7 +237,7 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet9)]
 
-`IndexPageRequested` は、 *Pages/Index.cshtml.cs* に含まれる `OnGetAsync` メソッドのロガー上で呼び出されます。
+`IndexPageRequested` は、*Pages/Index.cshtml.cs* に含まれる `OnGetAsync` メソッドのロガー上で呼び出されます。
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet2&highlight=3)]
 
@@ -261,7 +261,7 @@ info: LoggerMessageSample.Pages.IndexModel[1]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet10)]
 
-インデックス ページのページ モデル ( *Pages/Index.cshtml.cs* ) では、メッセージを記録するために `QuoteAdded` が呼び出されます。
+インデックス ページのページ モデル (*Pages/Index.cshtml.cs*) では、メッセージを記録するために `QuoteAdded` が呼び出されます。
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet3&highlight=6)]
 
@@ -274,7 +274,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-サンプル アプリでは、見積もり削除用の [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) パターンを実装します。 削除操作に成功した場合、情報メッセージが記録されます。 例外がスローされた場合は、削除操作に対してエラー メッセージが記録されます。 削除操作が失敗した場合のログ メッセージには、例外スタック トレースが含まれます ( *Internal/LoggerExtensions.cs* )。
+サンプル アプリでは、見積もり削除用の [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) パターンを実装します。 削除操作に成功した場合、情報メッセージが記録されます。 例外がスローされた場合は、削除操作に対してエラー メッセージが記録されます。 削除操作が失敗した場合のログ メッセージには、例外スタック トレースが含まれます (*Internal/LoggerExtensions.cs*)。
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -284,7 +284,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-インデックス ページのページ モデルでは、見積もりの削除に成功すると、ロガー上で `QuoteDeleted` メソッドが呼び出されます。 削除対象の見積もりが見つからない場合は、<xref:System.ArgumentNullException> がスローされます。 例外は [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントによってトラップされ、 [catch](/dotnet/csharp/language-reference/keywords/try-catch) ブロック ( *Pages/Index.cshtml.cs* ) 内のロガーで `QuoteDeleteFailed` メソッドを呼び出すことにより記録されます。
+インデックス ページのページ モデルでは、見積もりの削除に成功すると、ロガー上で `QuoteDeleted` メソッドが呼び出されます。 削除対象の見積もりが見つからない場合は、<xref:System.ArgumentNullException> がスローされます。 例外は [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ステートメントによってトラップされ、[catch](/dotnet/csharp/language-reference/keywords/try-catch) ブロック (*Pages/Index.cshtml.cs*) 内のロガーで `QuoteDeleteFailed` メソッドを呼び出すことにより記録されます。
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 
@@ -327,7 +327,7 @@ Parameter name: entity
 
 [!code-json[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
-ログ スコープを作成するには、スコープに対して <xref:System.Func%601> デリゲートを保持するフィールドを追加します。 サンプル アプリでは、`_allQuotesDeletedScope` と呼ばれるフィールドを作成します ( *Internal/LoggerExtensions.cs* )。
+ログ スコープを作成するには、スコープに対して <xref:System.Func%601> デリゲートを保持するフィールドを追加します。 サンプル アプリでは、`_allQuotesDeletedScope` と呼ばれるフィールドを作成します (*Internal/LoggerExtensions.cs*)。
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet4)]
 

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/modules
 ms.openlocfilehash: 47ba04f199f9b77cf6032de9f80f2410f5c69424
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057402"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core での IIS モジュール
@@ -60,7 +60,7 @@ ms.locfileid: "93057402"
 | **プロトコル サポート**<br>`ProtocolSupportModule`                                                  | はい | |
 | **要求のフィルタリング**<br>`RequestFilteringModule`                                                | はい | [URL リライト ミドルウェア`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **要求監視**<br>`RequestMonitorModule`                                                    | はい | |
-| **URL リライト** &#8224;<br>`RewriteModule`                                                      | はい | [URL リライト ミドルウェア](xref:fundamentals/url-rewriting) |
+| **URL リライト**&#8224;<br>`RewriteModule`                                                      | はい | [URL リライト ミドルウェア](xref:fundamentals/url-rewriting) |
 | **サーバー側インクルード**<br>`ServerSideIncludeModule`                                            | いいえ  | |
 | **静的圧縮**<br>`StaticCompressionModule`                                              | いいえ  | [応答圧縮ミドルウェア](xref:performance/response-compression) |
 | **静的コンテンツ**<br>`StaticFileModule`                                                         | いいえ  | [静的ファイル ミドルウェア](xref:fundamentals/static-files) |
@@ -73,7 +73,7 @@ ms.locfileid: "93057402"
 
 ## <a name="managed-modules"></a>マネージド モジュール
 
-アプリ プールの .NET CLR バージョンが **[マネージ コードなし]** に設定されている場合、マネージド モジュールはホストされた ASP.NET Core アプリでは機能 " *しません* "。 ASP.NET Core では、いくつかのケースにおいてミドルウェアの代替機能が提供されています。
+アプリ プールの .NET CLR バージョンが **[マネージ コードなし]** に設定されている場合、マネージド モジュールはホストされた ASP.NET Core アプリでは機能 "*しません*"。 ASP.NET Core では、いくつかのケースにおいてミドルウェアの代替機能が提供されています。
 
 | Module                  | ASP.NET Core のオプション |
 | ----------------------- | ------------------- |
@@ -93,7 +93,7 @@ ms.locfileid: "93057402"
 
 ## <a name="iis-manager-application-changes"></a>IIS マネージャー アプリケーションの変更
 
-IIS マネージャーを使って設定を構成すると、アプリの *web.config* ファイルが変更されます。 アプリを展開し、 *web.config* を含めた場合、IIS マネージャーを使って行われた変更は、展開される *web.config* ファイルによって上書きされます。 サーバーの *web.config* ファイルを変更する場合は、サーバー上の更新された *web.config* ファイルをローカル プロジェクトにすぐにコピーしてください。
+IIS マネージャーを使って設定を構成すると、アプリの *web.config* ファイルが変更されます。 アプリを展開し、*web.config* を含めた場合、IIS マネージャーを使って行われた変更は、展開される *web.config* ファイルによって上書きされます。 サーバーの *web.config* ファイルを変更する場合は、サーバー上の更新された *web.config* ファイルをローカル プロジェクトにすぐにコピーしてください。
 
 ## <a name="disabling-iis-modules"></a>IIS モジュールの無効化
 
@@ -101,7 +101,7 @@ IIS マネージャーを使って設定を構成すると、アプリの *web.c
 
 ### <a name="module-deactivation"></a>モジュールの非アクティブ化
 
-多くのモジュールには、アプリからモジュールを削除せずに無効にすることができる構成設定が用意されています。 これは、モジュールを非アクティブ化する最も簡単ですばやい方法です。 たとえば、HTTP リダイレクト モジュールは、 *web.config* の `<httpRedirect>` 要素を使って無効にできます。
+多くのモジュールには、アプリからモジュールを削除せずに無効にすることができる構成設定が用意されています。 これは、モジュールを非アクティブ化する最も簡単ですばやい方法です。 たとえば、HTTP リダイレクト モジュールは、*web.config* の `<httpRedirect>` 要素を使って無効にできます。
 
 ```xml
 <configuration>
@@ -111,11 +111,11 @@ IIS マネージャーを使って設定を構成すると、アプリの *web.c
 </configuration>
 ```
 
-構成設定を使ってモジュールを無効にする方法について詳しくは、 [IIS \<system.webServer>](/iis/configuration/system.webServer/) の " *子要素* " に関するセクションのリンクに従ってください。
+構成設定を使ってモジュールを無効にする方法について詳しくは、[IIS \<system.webServer>](/iis/configuration/system.webServer/) の "*子要素*" に関するセクションのリンクに従ってください。
 
 ### <a name="module-removal"></a>モジュールの削除
 
-*web.config* の設定を使ってモジュールを削除する場合は、最初に、モジュールのロックを解除し、 *web.config* の `<modules>` セクションのロックを解除します。
+*web.config* の設定を使ってモジュールを削除する場合は、最初に、モジュールのロックを解除し、*web.config* の `<modules>` セクションのロックを解除します。
 
 1. サーバー レベルでモジュールのロックを解除します。 IIS マネージャーの **[接続]** サイド バーで IIS サーバーを選びます。 **[IIS]** 領域で **[モジュール]** を開きます。 一覧でモジュールを選びます。 右側の **[アクション]** サイド バーで、 **[ロック解除]** を選びます。 モジュールのアクション エントリが **[ロック]** と表示される場合、モジュールのロックは既に解除されています。必要な操作はありません。 後で *web.config* から削除する予定のモジュールをできるだけ多くロック解除します。
 
@@ -135,7 +135,7 @@ IIS マネージャーを使って設定を構成すると、アプリの *web.c
    </configuration>
    ```
 
-*web.config* を利用して IIS Express のモジュールを追加または削除するには、`<modules>` セクションのロックを解除するには、 *applicationHost.config* を変更します。
+*web.config* を利用して IIS Express のモジュールを追加または削除するには、`<modules>` セクションのロックを解除するには、*applicationHost.config* を変更します。
 
 1. *{APPLICATION ROOT}\\.vs\config\applicationhost.config* を開きます。
 
@@ -155,7 +155,7 @@ IIS マネージャーを使って設定を構成すると、アプリの *web.c
 
 1. `<modules>` セクションと個々のモジュールのロックが解除されたら、IIS Express でアプリを実行するためのアプリの *web.config* ファイルを利用し、IIS モジュールを自由に追加したり、削除したりできます。
 
-IIS モジュールは、 *Appcmd.exe* を使って削除することもできます。 コマンドで `MODULE_NAME` と `APPLICATION_NAME` を指定します。
+IIS モジュールは、*Appcmd.exe* を使って削除することもできます。 コマンドで `MODULE_NAME` と `APPLICATION_NAME` を指定します。
 
 ```console
 Appcmd.exe delete module MODULE_NAME /app.name:APPLICATION_NAME

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/test
 ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054867"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>ASP.NET Core Blazor のコンポーネントをテストする
@@ -32,7 +32,7 @@ ms.locfileid: "93054867"
 
 テストは、安定し、保守性に優れたソフトウェアを構築する上で重要な作業です。
 
-Blazor コンポーネントをテストするために、" *テスト対象のコンポーネント* " (CUT) に対して次のことが行われます。
+Blazor コンポーネントをテストするために、"*テスト対象のコンポーネント*" (CUT) に対して次のことが行われます。
 
 * テスト用の関連する入力でレンダリングされます。
 * 実行されるテストの種類によっては、操作または変更される可能性があります。 たとえば、ボタンの `onclick` イベントなどのイベント ハンドラーがトリガーされる可能性があります。
@@ -42,7 +42,7 @@ Blazor コンポーネントをテストするために、" *テスト対象の�
 
 Blazor のコンポーネントをテストするための一般的な 2 つのアプローチは、エンド ツー エンド (E2E) テストと単体テストです。
 
-* **単体テスト** : [単体テスト](/dotnet/core/testing/)は、次の機能を提供する単体テスト ライブラリを使用して記述されます。
+* **単体テスト**: [単体テスト](/dotnet/core/testing/)は、次の機能を提供する単体テスト ライブラリを使用して記述されます。
   * コンポーネントのレンダリング。
   * コンポーネントの出力と状態の検査。
   * イベント ハンドラーとライフ サイクル メソッドのトリガー。
@@ -50,11 +50,11 @@ Blazor のコンポーネントをテストするための一般的な 2 つの�
 
   [bUnit](https://github.com/egil/bUnit) は、Razor コンポーネントの単体テストを実現するライブラリの一例です。
 
-* **E2E テスト** : テスト ランナーでは、CUT を含む Blazor アプリを実行し、ブラウザー インスタンスを自動化します。 テスト ツールでは、ブラウザーを介して CUT を検査および操作します。 [Selenium](https://github.com/SeleniumHQ/selenium) は、Blazor アプリで使用できる E2E テスト フレームワークの一例です。
+* **E2E テスト**: テスト ランナーでは、CUT を含む Blazor アプリを実行し、ブラウザー インスタンスを自動化します。 テスト ツールでは、ブラウザーを介して CUT を検査および操作します。 [Selenium](https://github.com/SeleniumHQ/selenium) は、Blazor アプリで使用できる E2E テスト フレームワークの一例です。
 
 単体テストでは、Blazor コンポーネント (Razor/C#) のみが関係します。 サービスや JS 相互運用などの外部の依存関係は、複製する必要があります。 E2E テストでは、Blazor コンポーネントとそのすべての補助インフラストラクチャ (CSS、JS、DOM、ブラウザー API など) がテストに含まれます。
 
-" *テスト スコープ* " では、テストの範囲を説明します。 通常、テスト スコープは、テストの速度に影響します。 単体テストは、アプリのサブシステムのサブセットに対して実行され、通常、ミリ秒単位で実行されます。 E2E テストでは、アプリのサブシステムの広範なグループがテストされ、完了するまで数秒かかることがあります。 
+"*テスト スコープ*" では、テストの範囲を説明します。 通常、テスト スコープは、テストの速度に影響します。 単体テストは、アプリのサブシステムのサブセットに対して実行され、通常、ミリ秒単位で実行されます。 E2E テストでは、アプリのサブシステムの広範なグループがテストされ、完了するまで数秒かかることがあります。 
 
 単体テストでは、CUT のインスタンスにもアクセスでき、コンポーネントの内部状態の検査と検証を行うことができます。 通常、これは、E2E テストでは行うことができません。
 
@@ -143,11 +143,11 @@ public void CounterShouldIncrementWhenSelected()
 
 テストの各ステップでは、次のアクションが実行されます。
 
-* *Arrange* : bUnit の `TestContext` を使用して、`Counter` コンポーネントがレンダリングされます。 CUT の段落要素 (`<p>`) が検出され、`paraElm` に割り当てられます。
+* *Arrange*: bUnit の `TestContext` を使用して、`Counter` コンポーネントがレンダリングされます。 CUT の段落要素 (`<p>`) が検出され、`paraElm` に割り当てられます。
 
-* *Act* : ボタンの要素 (`<button>`) が配置され、`Click` を呼び出して選択されます。これにより、カウンターが増分され、段落タグ (`<p>`) の内容が更新されます。 段落要素のテキスト コンテンツは、`TextContent` を呼び出すことによって取得されます。
+* *Act*: ボタンの要素 (`<button>`) が配置され、`Click` を呼び出して選択されます。これにより、カウンターが増分され、段落タグ (`<p>`) の内容が更新されます。 段落要素のテキスト コンテンツは、`TextContent` を呼び出すことによって取得されます。
 
-* *Assert* : テキスト コンテンツで `MarkupMatches` が呼び出され、予想される文字列 `Current count: 1` と一致するかどうかが検証されます。
+* *Assert*: テキスト コンテンツで `MarkupMatches` が呼び出され、予想される文字列 `Current count: 1` と一致するかどうかが検証されます。
 
 > [!NOTE]
 > `MarkupMatches` Assert メソッドは、通常の文字列比較アサーション (たとえば、`Assert.Equal("Current count: 1", paraElmText);`) とは異なり、`MarkupMatches` は、入力と予想される HTML マークアップのセマンティック比較を実行します。 セマンティック比較では、HTML セマンティクスが認識されます。つまり、意味のない空白のようなものは無視されます。 これにより、テストの安定性が向上します。 詳細については、「[Customizing the Semantic HTML Comparison](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison)」 (HTML のセマンティック比較のカスタマイズ) を参照してください。

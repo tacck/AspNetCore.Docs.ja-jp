@@ -19,17 +19,17 @@ no-loc:
 - SignalR
 uid: fundamentals/change-tokens
 ms.openlocfilehash: f20d44c7767b284f727ce19a46224dae0cf6a5e1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053775"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core で変更トークンを使用して変更を検出する
 
 ::: moniker range=">= aspnetcore-3.0"
 
-" *変更トークン* " は、状態の変更を追跡するために使用される汎用の低レベル構成ブロックです。
+"*変更トークン*" は、状態の変更を追跡するために使用される汎用の低レベル構成ブロックです。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -67,7 +67,7 @@ ms.locfileid: "93053775"
 
 ## <a name="monitor-for-configuration-changes"></a>構成の変更の監視
 
-既定では、ASP.NET Core テンプレートは、 [JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* 、 *appsettings.Development.json* 、および *appsettings.Production.json* ) を使用して、アプリの構成設定を読み込みます。
+既定では、ASP.NET Core テンプレートは、[JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* 、*appsettings.Development.json*、および *appsettings.Production.json*) を使用して、アプリの構成設定を読み込みます。
 
 これらのファイルは、`reloadOnChange` パラメーターを受け取る、<xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> 上の [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.Extensions.Hosting.Host> の便利なメソッド <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 内に現れます。
 
@@ -85,7 +85,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 構成ファイルの `FileSystemWatcher` は、1 つの構成ファイルの変更に対して複数のトークンのコールバックをトリガーできます。 複数のトークンのコールバックがトリガーされたときにカスタム コードが一度だけ実行されるようにするために、サンプルの実装ではファイル ハッシュがチェックされます。 サンプルでは、SHA1 ファイル ハッシュが使用されています。 再試行は、指数バックオフを使用して実装されます。 再実行が提供されるのは、ファイルの新しいハッシュの計算を一時的に妨げるファイル ロックが発生する場合があるためです。
 
-*Utilities/Utilities.cs* :
+*Utilities/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
@@ -101,7 +101,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Startup.cs?name=snippet3)]
 
-コールバックの `state` は、`IWebHostEnvironment` を渡すためのに使われます。これは監視する適切な *appsettings* 構成ファイルを指定するのに便利です (たとえば、開発環境の場合は *appsettings.Development.json* )。 ファイル ハッシュは、構成ファイルが 1 回のみ変更されたときの複数のトークンのコールバックのために `WriteConsole` ステートメントが複数回実行されるのを防ぐために使用されます。
+コールバックの `state` は、`IWebHostEnvironment` を渡すためのに使われます。これは監視する適切な *appsettings* 構成ファイルを指定するのに便利です (たとえば、開発環境の場合は *appsettings.Development.json*)。 ファイル ハッシュは、構成ファイルが 1 回のみ変更されたときの複数のトークンのコールバックのために `WriteConsole` ステートメントが複数回実行されるのを防ぐために使用されます。
 
 このシステムは、アプリが実行されている限り実行され、ユーザーが無効にすることはできません。
 
@@ -115,7 +115,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 サンプルでは `IConfigurationMonitor` インターフェイスが設定されています。
 
-*Extensions/ConfigurationMonitor.cs* :
+*Extensions/ConfigurationMonitor.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
@@ -141,7 +141,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 インデックス ページは、ユーザーに構成監視の制御を提供します。 `IConfigurationMonitor` のインスタンスは、`IndexModel` に挿入されます。
 
-*Pages/Index.cshtml.cs* :
+*Pages/Index.cshtml.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -153,7 +153,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 UI のボタンを使って監視を有効および無効にできます。
 
-*Pages/Index.cshtml* :
+*Pages/Index.cshtml*:
 
 [!code-cshtml[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
@@ -170,11 +170,11 @@ UI のボタンを使って監視を有効および無効にできます。
 * ファイルの内容を返します。
 * 指数バックオフを使用する再試行アルゴリズムを実装し、ファイル ロックによりファイルの読み取りが一時的に妨げられるケースに対処します。
 
-*Utilities/Utilities.cs* :
+*Utilities/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService` はキャッシュされたファイルの参照の処理するために作成されます。 サービスの `GetFileContent` メソッドの呼び出しは、メモリ内キャッシュからファイルの内容を取得して、呼び出し元 ( *Services/FileService.cs* ) に戻そうとします。
+`FileService` はキャッシュされたファイルの参照の処理するために作成されます。 サービスの `GetFileContent` メソッドの呼び出しは、メモリ内キャッシュからファイルの内容を取得して、呼び出し元 (*Services/FileService.cs*) に戻そうとします。
 
 キャッシュ キーを使用してキャッシュされた内容が見つからない場合、次の操作が実行されます。
 
@@ -194,7 +194,7 @@ UI のボタンを使って監視を有効および無効にできます。
 
 ページ モデルでは、このサービスを使ってファイルの内容が読み込まれます。
 
-Index ページの `OnGet` メソッド内 ( *Pages/Index.cshtml.cs* ):
+Index ページの `OnGet` メソッド内 (*Pages/Index.cshtml.cs*):
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 
@@ -227,7 +227,7 @@ var compositeChangeToken =
 
 ::: moniker range="< aspnetcore-3.0"
 
-" *変更トークン* " は、状態の変更を追跡するために使用される汎用の低レベル構成ブロックです。
+"*変更トークン*" は、状態の変更を追跡するために使用される汎用の低レベル構成ブロックです。
 
 [サンプル コードを表示またはダウンロード](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/)します ([ダウンロード方法](xref:index#how-to-download-a-sample))。
 
@@ -265,7 +265,7 @@ var compositeChangeToken =
 
 ## <a name="monitor-for-configuration-changes"></a>構成の変更の監視
 
-既定では、ASP.NET Core テンプレートは、 [JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* 、 *appsettings.Development.json* 、および *appsettings.Production.json* ) を使用して、アプリの構成設定を読み込みます。
+既定では、ASP.NET Core テンプレートは、[JSON 構成ファイル](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* 、*appsettings.Development.json*、および *appsettings.Production.json*) を使用して、アプリの構成設定を読み込みます。
 
 これらのファイルは、`reloadOnChange` パラメーターを受け取る、<xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> 上の [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 拡張メソッドを使用して構成されます。 `reloadOnChange` は、ファイルの変更時に構成を再読み込みするかどうかを示します。 この設定は、<xref:Microsoft.AspNetCore.WebHost> の便利なメソッド <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> 内に現れます。
 
@@ -283,7 +283,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 構成ファイルの `FileSystemWatcher` は、1 つの構成ファイルの変更に対して複数のトークンのコールバックをトリガーできます。 複数のトークンのコールバックがトリガーされたときにカスタム コードが一度だけ実行されるようにするために、サンプルの実装ではファイル ハッシュがチェックされます。 サンプルでは、SHA1 ファイル ハッシュが使用されています。 再試行は、指数バックオフを使用して実装されます。 再実行が提供されるのは、ファイルの新しいハッシュの計算を一時的に妨げるファイル ロックが発生する場合があるためです。
 
-*Utilities/Utilities.cs* :
+*Utilities/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
@@ -299,7 +299,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-コールバックの `state` は、`IHostingEnvironment` を渡すためのに使われます。これは監視する適切な *appsettings* 構成ファイルを指定するのに便利です (たとえば、開発環境の場合は *appsettings.Development.json* )。 ファイル ハッシュは、構成ファイルが 1 回のみ変更されたときの複数のトークンのコールバックのために `WriteConsole` ステートメントが複数回実行されるのを防ぐために使用されます。
+コールバックの `state` は、`IHostingEnvironment` を渡すためのに使われます。これは監視する適切な *appsettings* 構成ファイルを指定するのに便利です (たとえば、開発環境の場合は *appsettings.Development.json*)。 ファイル ハッシュは、構成ファイルが 1 回のみ変更されたときの複数のトークンのコールバックのために `WriteConsole` ステートメントが複数回実行されるのを防ぐために使用されます。
 
 このシステムは、アプリが実行されている限り実行され、ユーザーが無効にすることはできません。
 
@@ -313,7 +313,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 サンプルでは `IConfigurationMonitor` インターフェイスが設定されています。
 
-*Extensions/ConfigurationMonitor.cs* :
+*Extensions/ConfigurationMonitor.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
@@ -339,7 +339,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 インデックス ページは、ユーザーに構成監視の制御を提供します。 `IConfigurationMonitor` のインスタンスは、`IndexModel` に挿入されます。
 
-*Pages/Index.cshtml.cs* :
+*Pages/Index.cshtml.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -351,7 +351,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 UI のボタンを使って監視を有効および無効にできます。
 
-*Pages/Index.cshtml* :
+*Pages/Index.cshtml*:
 
 [!code-cshtml[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
@@ -368,11 +368,11 @@ UI のボタンを使って監視を有効および無効にできます。
 * ファイルの内容を返します。
 * 指数バックオフを使用する再試行アルゴリズムを実装し、ファイル ロックによりファイルの読み取りが一時的に妨げられるケースに対処します。
 
-*Utilities/Utilities.cs* :
+*Utilities/Utilities.cs*:
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService` はキャッシュされたファイルの参照の処理するために作成されます。 サービスの `GetFileContent` メソッドの呼び出しは、メモリ内キャッシュからファイルの内容を取得して、呼び出し元 ( *Services/FileService.cs* ) に戻そうとします。
+`FileService` はキャッシュされたファイルの参照の処理するために作成されます。 サービスの `GetFileContent` メソッドの呼び出しは、メモリ内キャッシュからファイルの内容を取得して、呼び出し元 (*Services/FileService.cs*) に戻そうとします。
 
 キャッシュ キーを使用してキャッシュされた内容が見つからない場合、次の操作が実行されます。
 
@@ -392,7 +392,7 @@ UI のボタンを使って監視を有効および無効にできます。
 
 ページ モデルでは、このサービスを使ってファイルの内容が読み込まれます。
 
-Index ページの `OnGet` メソッド内 ( *Pages/Index.cshtml.cs* ):
+Index ページの `OnGet` メソッド内 (*Pages/Index.cshtml.cs*):
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 

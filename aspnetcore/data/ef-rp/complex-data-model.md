@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/complex-data-model
 ms.openlocfilehash: 1ac9d6303daac82f3973c5d027fe1f453dc32e02
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054100"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>パート 5、ASP.NET Core の Razor ページと EF Core - データ モデル
@@ -113,7 +113,7 @@ ms.locfileid: "93054100"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**SQL Server オブジェクト エクスプローラー** (SSOX) で、 **Student** テーブルをダブルクリックして、Student テーブル デザイナーを開きます。
+**SQL Server オブジェクト エクスプローラー** (SSOX) で、**Student** テーブルをダブルクリックして、Student テーブル デザイナーを開きます。
 
 ![移行前の SSOX の Students テーブル](complex-data-model/_static/ssox-before-migration.png)
 
@@ -246,7 +246,7 @@ SqliteException: SQLite Error 1: 'no such column: s.FirstName'.
 
 ![Instructor エンティティ](complex-data-model/_static/instructor-entity.png)
 
-以下のコードを使用して、 *Models/Instructor.cs* を作成します。
+以下のコードを使用して、*Models/Instructor.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu30/Models/Instructor.cs)]
 
@@ -276,7 +276,7 @@ public OfficeAssignment OfficeAssignment { get; set; }
 
 ![OfficeAssignment エンティティ](complex-data-model/_static/officeassignment-entity.png)
 
-以下のコードを使用して、 *Models/OfficeAssignment.cs* を作成します。
+以下のコードを使用して、*Models/OfficeAssignment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu30/Models/OfficeAssignment.cs)]
 
@@ -307,7 +307,7 @@ public int InstructorID { get; set; }
 
 ![Course エンティティ](complex-data-model/_static/course-entity.png)
 
-以下のコードを使用して、 *Models/Course.cs* を更新します。
+以下のコードを使用して、*Models/Course.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu30/Models/Course.cs?highlight=2,10,13,16,19,21,23)]
 
@@ -363,7 +363,7 @@ public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
 ![Department エンティティ](complex-data-model/_static/department-entity.png)
 
-以下のコードを使用して、 *Models/Department.cs* を作成します。
+以下のコードを使用して、*Models/Department.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu30snapshots/5-complex/Models/Department1.cs)]
 
@@ -417,7 +417,7 @@ public ICollection<Course> Courses { get; set; }
 
 ![Enrollment エンティティ](complex-data-model/_static/enrollment-entity.png)
 
-以下のコードを使用して、 *Models/Enrollment.cs* を更新します。
+以下のコードを使用して、*Models/Enrollment.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu30/Models/Enrollment.cs?highlight=1-2,16)]
 
@@ -459,7 +459,7 @@ public Student Student { get; set; }
 
 ![CourseAssignment エンティティ](complex-data-model/_static/courseassignment-entity.png)
 
-以下のコードを使用して、 *Models/CourseAssignment.cs* を作成します。
+以下のコードを使用して、*Models/CourseAssignment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu30/Models/CourseAssignment.cs)]
 
@@ -473,7 +473,7 @@ public Student Student { get; set; }
 
 ### <a name="composite-key"></a>複合キー
 
-`CourseAssignment` の 2 つの FK (`InstructorID` と `CourseID`) を組み合わせて使用し、`CourseAssignment` テーブルの各行を一意に識別します。 `CourseAssignment` には専用の PK は必要ありません。 `InstructorID` および `CourseID` プロパティは複合 PK として機能します。 EF Core に複合 PK を指定する唯一の方法は、 *fluent API* を使用することです。 次のセクションでは、複合 PK の構成方法を示します。
+`CourseAssignment` の 2 つの FK (`InstructorID` と `CourseID`) を組み合わせて使用し、`CourseAssignment` テーブルの各行を一意に識別します。 `CourseAssignment` には専用の PK は必要ありません。 `InstructorID` および `CourseID` プロパティは複合 PK として機能します。 EF Core に複合 PK を指定する唯一の方法は、*fluent API* を使用することです。 次のセクションでは、複合 PK の構成方法を示します。
 
 複合キーにより、次のことが保証されます。
 
@@ -496,7 +496,7 @@ public Student Student { get; set; }
 
 ## <a name="fluent-api-alternative-to-attributes"></a>属性の代わりに fluent API を使用する
 
-上のコードの `OnModelCreating` メソッドでは、 *fluent API* を使用して EF Core の動作を構成します。 API は "fluent" と呼ばれます。これは、多くの場合、一連のメソッド呼び出しを単一のステートメントにまとめて使用されるためです。 [次のコード](/ef/core/modeling/#use-fluent-api-to-configure-a-model)は fluent API の例です。
+上のコードの `OnModelCreating` メソッドでは、*fluent API* を使用して EF Core の動作を構成します。 API は "fluent" と呼ばれます。これは、多くの場合、一連のメソッド呼び出しを単一のステートメントにまとめて使用されるためです。 [次のコード](/ef/core/modeling/#use-fluent-api-to-configure-a-model)は fluent API の例です。
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -591,7 +591,7 @@ For more information, see http://go.microsoft.com/fwlink/?LinkId=723262.
 既存のデータベースができたので、変更を適用する方法について検討する必要があります。 このチュートリアルでは、2 つの方法を示します。
 
 * [データベースを削除して再作成する](#drop)。 SQLite を使用している場合は、このセクションを選択します。
-* [移行を既存のデータベースに適用する](#applyexisting)。 このセクションの手順は SQL Server にのみ使用でき、 **SQLite では使用できません** 。 
+* [移行を既存のデータベースに適用する](#applyexisting)。 このセクションの手順は SQL Server にのみ使用でき、**SQLite では使用できません**。 
 
 どちらの選択肢も SQL Server で機能します。 移行適用方法はより複雑で時間がかかりますが、実際の運用環境では推奨される方法です。 
 
@@ -620,7 +620,7 @@ EF Core に新しいデータベースを強制的に作成させるには、デ
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* コマンド ウィンドウを開き、プロジェクト フォルダーに移動します。 プロジェクト フォルダーには、 *ContosoUniversity.csproj* ファイルが含まれています。
+* コマンド ウィンドウを開き、プロジェクト フォルダーに移動します。 プロジェクト フォルダーには、*ContosoUniversity.csproj* ファイルが含まれています。
 
 * 次のコマンドを実行します。
 
@@ -660,7 +660,7 @@ SSOX でデータベースを開きます。
 SQLite ツールを使用してデータベースを確認します。
 
 * 新しいテーブルと列。
-* テーブル内のシードされたデータ ( **CourseAssignment** テーブルなど)。
+* テーブル内のシードされたデータ (**CourseAssignment** テーブルなど)。
 
 ---
 
@@ -757,7 +757,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 学生のページには現在、登録日の時刻が表示されています。 通常、日付フィールドには日付のみが表示され、時刻は表示されません。
 
-以下の強調表示されているコードを使用して、 *Models/Student.cs* を更新します。
+以下の強調表示されているコードを使用して、*Models/Student.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
@@ -811,7 +811,7 @@ https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 ![文字列長エラーが表示されている Students インデックス ページ](complex-data-model/_static/string-length-errors.png)
 
-**SQL Server オブジェクト エクスプローラー** (SSOX) で、 **Student** テーブルをダブルクリックして、Student テーブル デザイナーを開きます。
+**SQL Server オブジェクト エクスプローラー** (SSOX) で、**Student** テーブルをダブルクリックして、Student テーブル デザイナーを開きます。
 
 ![移行前の SSOX の Students テーブル](complex-data-model/_static/ssox-before-migration.png)
 
@@ -825,7 +825,7 @@ DB が作成されたときに、列名でモデルのプロパティ名が使�
 
 `Student` モデルでは名フィールドに対して `FirstMidName` が使用されます。これは、フィールドにミドル ネームも含まれている場合があるためです。
 
-以下の強調表示されているコードを使用して、 *Student.cs* ファイルを更新します。
+以下の強調表示されているコードを使用して、*Student.cs* ファイルを更新します。
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_Column&highlight=4,14)]
 
@@ -882,7 +882,7 @@ SSOX で Student テーブルを開きます。
 
 ![Student エンティティ](complex-data-model/_static/student-entity.png)
 
-以下のコードを使用して、 *Models/Student.cs* を更新します。
+以下のコードを使用して、*Models/Student.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_BeforeInheritance&highlight=11,13,15,18,22,24-31)]
 
@@ -910,7 +910,7 @@ public string LastName { get; set; }
 
 ![Instructor エンティティ](complex-data-model/_static/instructor-entity.png)
 
-以下のコードを使用して、 *Models/Instructor.cs* を作成します。
+以下のコードを使用して、*Models/Instructor.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/Instructor.cs)]
 
@@ -954,7 +954,7 @@ public OfficeAssignment OfficeAssignment { get; set; }
 
 ![OfficeAssignment エンティティ](complex-data-model/_static/officeassignment-entity.png)
 
-以下のコードを使用して、 *Models/OfficeAssignment.cs* を作成します。
+以下のコードを使用して、*Models/OfficeAssignment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/OfficeAssignment.cs)]
 
@@ -1002,7 +1002,7 @@ public Instructor Instructor { get; set; }
 
 ![Course エンティティ](complex-data-model/_static/course-entity.png)
 
-以下のコードを使用して、 *Models/Course.cs* を更新します。
+以下のコードを使用して、*Models/Course.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu21/Models/Course.cs?name=snippet_Final&highlight=2,10,13,16,19,21,23)]
 
@@ -1060,7 +1060,7 @@ public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
 ![Department エンティティ](complex-data-model/_static/department-entity.png)
 
-以下のコードを使用して、 *Models/Department.cs* を作成します。
+以下のコードを使用して、*Models/Department.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/Department.cs?name=snippet_Begin)]
 
@@ -1120,7 +1120,7 @@ public ICollection<Course> Courses { get; set; }
 
 ![Enrollment エンティティ](complex-data-model/_static/enrollment-entity.png)
 
-以下のコードを使用して、 *Models/Enrollment.cs* を更新します。
+以下のコードを使用して、*Models/Enrollment.cs* を更新します。
 
 [!code-csharp[](intro/samples/cu21/Models/Enrollment.cs?name=snippet_Final&highlight=1-2,16)]
 
@@ -1162,7 +1162,7 @@ public Student Student { get; set; }
 
 ![CourseAssignment エンティティ](complex-data-model/_static/courseassignment-entity.png)
 
-以下のコードを使用して、 *Models/CourseAssignment.cs* を作成します。
+以下のコードを使用して、*Models/CourseAssignment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu21/Models/CourseAssignment.cs)]
 
@@ -1181,7 +1181,7 @@ public Student Student { get; set; }
 
 ### <a name="composite-key"></a>複合キー
 
-FK は null 非許容です。 `CourseAssignment` の 2 つの FK (`InstructorID` と `CourseID`) を組み合わせて使用し、`CourseAssignment` テーブルの各行を一意に識別します。 `CourseAssignment` には専用の PK は必要ありません。 `InstructorID` および `CourseID` プロパティは複合 PK として機能します。 EF Core に複合 PK を指定する唯一の方法は、 *fluent API* を使用することです。 次のセクションでは、複合 PK の構成方法を示します。
+FK は null 非許容です。 `CourseAssignment` の 2 つの FK (`InstructorID` と `CourseID`) を組み合わせて使用し、`CourseAssignment` テーブルの各行を一意に識別します。 `CourseAssignment` には専用の PK は必要ありません。 `InstructorID` および `CourseID` プロパティは複合 PK として機能します。 EF Core に複合 PK を指定する唯一の方法は、*fluent API* を使用することです。 次のセクションでは、複合 PK の構成方法を示します。
 
 複合キーでは、必ず次のようになります。
 
@@ -1204,7 +1204,7 @@ FK は null 非許容です。 `CourseAssignment` の 2 つの FK (`InstructorID
 
 ## <a name="fluent-api-alternative-to-attributes"></a>属性の代わりに fluent API を使用する
 
-上のコードの `OnModelCreating` メソッドでは、 *fluent API* を使用して EF Core の動作を構成します。 API は "fluent" と呼ばれます。これは、多くの場合、一連のメソッド呼び出しを単一のステートメントにまとめて使用されるためです。 [次のコード](/ef/core/modeling/#use-fluent-api-to-configure-a-model)は fluent API の例です。
+上のコードの `OnModelCreating` メソッドでは、*fluent API* を使用して EF Core の動作を構成します。 API は "fluent" と呼ばれます。これは、多くの場合、一連のメソッド呼び出しを単一のステートメントにまとめて使用されるためです。 [次のコード](/ef/core/modeling/#use-fluent-api-to-configure-a-model)は fluent API の例です。
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1290,7 +1290,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 既存のデータベースができたので、将来の変更を適用する方法について検討する必要があります。 このチュートリアルでは、2 つの方法を示します。
 
 * [データベースを削除して再作成する](#drop)
-* [移行を既存のデータベースに適用する](#applyexisting)。 この方法はより複雑で時間がかかりますが、実際の運用環境では推奨される方法です。 **注** :これは、チュートリアルのオプションのセクションです。 削除と再作成の手順を行い、このセクションはスキップしてもかまいません。 このセクションの手順に従う場合は、削除と再作成の手順を行わないでください。 
+* [移行を既存のデータベースに適用する](#applyexisting)。 この方法はより複雑で時間がかかりますが、実際の運用環境では推奨される方法です。 **注**:これは、チュートリアルのオプションのセクションです。 削除と再作成の手順を行い、このセクションはスキップしてもかまいません。 このセクションの手順に従う場合は、削除と再作成の手順を行わないでください。 
 
 <a name="drop"></a>
 

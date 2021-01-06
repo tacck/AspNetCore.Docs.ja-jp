@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: 1c97f5d7fbf64c5043e6d2277091b9a477833bf1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054711"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio の ASP.NET Core で LibMan を使用する
@@ -68,19 +68,19 @@ Visual Studio には、ASP.NET Core プロジェクトでの [LibMan](xref:clien
   **[ターゲットの場所]** として提案されるフォルダーは、ダイアログを起動した場所に基づいています。
 
   * プロジェクト ルートから起動した場合は、次のようになります。
-    * *wwwroot* が存在する場合は、 *wwwroot/lib* が使用されます。
-    * *wwwroot* が存在しない場合は、 *lib* が使用されます。
+    * *wwwroot* が存在する場合は、*wwwroot/lib* が使用されます。
+    * *wwwroot* が存在しない場合は、*lib* が使用されます。
   * プロジェクト フォルダーから起動した場合は、対応するフォルダー名が使用されます。
 
   提案されるフォルダーには、ライブラリ名がサフィックスとして付けられます。 次の表は、Razor Pages プロジェクトに jQuery をインストールするときに提案されるフォルダーを示しています。
   
   |起動場所                           |提案されるフォルダー      |
   |------------------------------------------|----------------------|
-  |プロジェクト ルート ( *wwwroot* が存在する場合)        |*wwwroot/lib/jquery/* |
-  |プロジェクト ルート ( *wwwroot* が存在しない場合) |*lib/jquery/*         |
+  |プロジェクト ルート (*wwwroot* が存在する場合)        |*wwwroot/lib/jquery/* |
+  |プロジェクト ルート (*wwwroot* が存在しない場合) |*lib/jquery/*         |
   |プロジェクトの *Pages* フォルダー                 |*Pages/jquery/*       |
 
-* **[インストール]** ボタンをクリックして、 *libman. json* の構成に従ってファイルをダウンロードします。
+* **[インストール]** ボタンをクリックして、*libman. json* の構成に従ってファイルをダウンロードします。
 * インストールの詳細については、 **[出力]** ウィンドウの **[ライブラリ マネージャー]** フィードを確認してください。 次に例を示します。
 
   ```console
@@ -96,7 +96,7 @@ Visual Studio には、ASP.NET Core プロジェクトでの [LibMan](xref:clien
 
 ### <a name="manually-configure-libman-manifest-file-entries"></a>LibMan マニフェスト ファイル エントリを手動で構成する
 
-Visual Studio のすべての LibMan 操作は、プロジェクト ルートの LibMan マニフェスト ( *libman. json* ) のコンテンツに基づいています。 *libman. json* を手動で編集して、プロジェクトのライブラリ ファイルを構成できます。 *libman. json* が保存されると、Visual Studio ではすべてのライブラリ ファイルが復元されます。
+Visual Studio のすべての LibMan 操作は、プロジェクト ルートの LibMan マニフェスト (*libman. json*) のコンテンツに基づいています。 *libman. json* を手動で編集して、プロジェクトのライブラリ ファイルを構成できます。 *libman. json* が保存されると、Visual Studio ではすべてのライブラリ ファイルが復元されます。
 
 編集のために *libman. json* を開くには、次のオプションがあります。
 
@@ -110,9 +110,9 @@ Visual Studio には、色付け、書式設定、IntelliSense、スキーマ検
 
 次のマニフェスト ファイルを使用すると、LibMan では、`libraries` プロパティに定義されている構成に従ってファイルが取得されます。 `libraries` 内で定義されているオブジェクト リテラルの説明を次に示します。
 
-* [jQuery](https://jquery.com/) バージョン 3.3.1 のサブセットは、CDNJS プロバイダーから取得されます。 このサブセットは、`files` プロパティ &mdash; *jquery.min.js* 、 *jquery.js* 、および *jquery.min.map* で定義されます。 これらのファイルは、プロジェクトの *wwwroot/lib/jquery* フォルダーに格納されます。
-* [ブートストラップ](https://getbootstrap.com/) バージョン 4.1.3 の全体が取得され、 *wwwroot/lib/bootstrap* フォルダーに格納されます。 オブジェクト リテラルの `provider` プロパティによって `defaultProvider` プロパティ値がオーバーライドされます。 LibMan により、unpkg プロバイダーからブートストラップ ファイルが取得されます。
-* [Lodash](https://lodash.com/) のサブセットは、組織内の管理機関によって承認されています。 *lodash.js* ファイルと *lodash.min.js* ファイルは、 *C:\\temp\\lodash\\* のローカル ファイル システムから取得されます。 これらのファイルは、プロジェクトの *wwwroot/lib/lodash* フォルダーにコピーされます。
+* [jQuery](https://jquery.com/) バージョン 3.3.1 のサブセットは、CDNJS プロバイダーから取得されます。 このサブセットは、`files` プロパティ &mdash; *jquery.min.js*、*jquery.js*、および *jquery.min.map* で定義されます。 これらのファイルは、プロジェクトの *wwwroot/lib/jquery* フォルダーに格納されます。
+* [ブートストラップ](https://getbootstrap.com/) バージョン 4.1.3 の全体が取得され、*wwwroot/lib/bootstrap* フォルダーに格納されます。 オブジェクト リテラルの `provider` プロパティによって `defaultProvider` プロパティ値がオーバーライドされます。 LibMan により、unpkg プロバイダーからブートストラップ ファイルが取得されます。
+* [Lodash](https://lodash.com/) のサブセットは、組織内の管理機関によって承認されています。 *lodash.js* ファイルと *lodash.min.js* ファイルは、*C:\\temp\\lodash\\* のローカル ファイル システムから取得されます。 これらのファイルは、プロジェクトの *wwwroot/lib/lodash* フォルダーにコピーされます。
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -130,7 +130,7 @@ Visual Studio 内からライブラリ ファイルを復元するには、プ�
 
 ### <a name="restore-files-during-build"></a>ビルド時にファイルを復元する
 
-LibMan では、ビルド プロセスの一環として、定義済みのライブラリ ファイルを復元できます。 既定では、" *ビルド時の復元* " 動作は無効になっています。
+LibMan では、ビルド プロセスの一環として、定義済みのライブラリ ファイルを復元できます。 既定では、"*ビルド時の復元*" 動作は無効になっています。
 
 ビルド時の復元動作を有効にしてテストするには、次の手順に従います。
 
@@ -156,7 +156,7 @@ LibMan では、ビルド プロセスの一環として、定義済みのライ
 
 ビルド時の復元動作が有効になっている場合は、 *[libman. json]* コンテキスト メニューに **[Disable Restore Client-Side Libraries on Build]\(ビルド時にクライアント側のライブラリの復元を無効にする\)** オプションが表示されます。 このオプションを選択すると、プロジェクト ファイルから `Microsoft.Web.LibraryManager.Build` パッケージ参照が削除されます。 その結果、各ビルド時にクライアント側ライブラリは復元されなくなります。
 
-ビルド時の復元設定に関係なく、 *libman. json* コンテキスト メニューからいつでも手動で復元を行うことができます。 詳細については、「[ファイルを手動で復元する](#restore-files-manually)」を参照してください。
+ビルド時の復元設定に関係なく、*libman. json* コンテキスト メニューからいつでも手動で復元を行うことができます。 詳細については、「[ファイルを手動で復元する](#restore-files-manually)」を参照してください。
 
 ### <a name="restore-files-manually"></a>ファイルを手動で復元する
 
@@ -187,7 +187,7 @@ LibMan では、ビルド プロセスの一環として、定義済みのライ
 
 ## <a name="delete-library-files"></a>ライブラリ ファイルを削除する
 
-Visual Studio で以前に復元されたライブラリ ファイルを削除するために " *クリーン* " 操作を実行するには、次の手順に従います。
+Visual Studio で以前に復元されたライブラリ ファイルを削除するために "*クリーン*" 操作を実行するには、次の手順に従います。
 
 * **ソリューション エクスプローラー** で *libman. json* ファイルを右クリックします。
 * **[クライアント側のライブラリをクリーンアップする]** オプションを選択します。
@@ -217,7 +217,7 @@ Clean libraries operation completed
 
   ![ライブラリのアンインストール コンテキスト メニュー オプション](_static/uninstall-menu-option.png)
 
-または、LibMan マニフェスト ( *libman. json* ) を手動で編集して保存することもできます。 ファイルが保存されると、[復元操作](#restore-library-files)が実行されます。 *libman. json* で定義されなくなったライブラリ ファイルは、プロジェクトから削除されます。
+または、LibMan マニフェスト (*libman. json*) を手動で編集して保存することもできます。 ファイルが保存されると、[復元操作](#restore-library-files)が実行されます。 *libman. json* で定義されなくなったライブラリ ファイルは、プロジェクトから削除されます。
 
 ## <a name="update-library-version"></a>ライブラリ バージョンを更新する
 
@@ -236,7 +236,7 @@ LibMan により、インストールされているバージョンよりも新�
 
 * インストールされているバージョンよりも新しいプレリリースを使用できる場合は、プレリリースが表示されます。
 
-古いライブラリ バージョンにダウングレードするには、 *libman. json* ファイルを手動で編集します。 ファイルが保存されると、LibMan [復元操作](#restore-library-files)によって次の処理が行われます。
+古いライブラリ バージョンにダウングレードするには、*libman. json* ファイルを手動で編集します。 ファイルが保存されると、LibMan [復元操作](#restore-library-files)によって次の処理が行われます。
 
 * 以前のバージョンから冗長なファイルが削除されます。
 * 新しいバージョンから新しいファイルと更新済みのファイルが追加されます。

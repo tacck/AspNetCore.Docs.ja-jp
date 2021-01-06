@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
 ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057610"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle と ASP.NET Core の概要
@@ -63,7 +63,7 @@ Swashbuckle は、次の方法で追加できます。
 
 ### <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-* **[Solution Pad]**  >  **[パッケージを追加]** で [ *パッケージ* ] フォルダーを右クリックします。
+* **[Solution Pad]**  >  **[パッケージを追加]** で [*パッケージ*] フォルダーを右クリックします。
 * **[パッケージを追加]** ウィンドウの **[ソース]** ドロップダウンを "nuget.org" に設定します。
 * [プレリリースパッケージを表示する] オプションが有効になっていることを確認します
 * 検索ボックスに「Swashbuckle.AspNetCore」と入力します。
@@ -286,7 +286,7 @@ namespace TodoApi
 }
 ```
 
-上記の手順で生成される XML ファイルを使用するように、Swagger を構成します。 Linux または Windows 以外のオペレーティング システムでは、ファイル名やパスで大文字小文字が区別されます。 たとえば、 *TodoApi.XML* ファイルは Windows では有効ですが、CentOS では無効です。
+上記の手順で生成される XML ファイルを使用するように、Swagger を構成します。 Linux または Windows 以外のオペレーティング システムでは、ファイル名やパスで大文字小文字が区別されます。 たとえば、*TodoApi.XML* ファイルは Windows では有効ですが、CentOS では無効です。
 
 ::: moniker range=">= aspnetcore-3.0"
 

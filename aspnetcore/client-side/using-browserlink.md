@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/using-browserlink
 ms.openlocfilehash: 80f05acab55af973faf08b5db79ea4cbaf896b14
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054490"
 ---
 # <a name="browser-link-in-aspnet-core"></a>ASP.NET Core の Browser Link
@@ -35,7 +35,7 @@ Browser Link は Visual Studio の機能です。 これにより、開発環境
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) パッケージを自分のプロジェクトに追加します。 ASP.NET Core Razor Pages または MVC プロジェクトでは、「<xref:mvc/views/view-compilation>」で説明されているように、Razor ( *.cshtml* ) ファイルのランタイム コンパイルを有効にすることもできます。 Razor 構文の変更は、ランタイム コンパイルが有効になっている場合にのみ適用されます。
+[Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) パッケージを自分のプロジェクトに追加します。 ASP.NET Core Razor Pages または MVC プロジェクトでは、「<xref:mvc/views/view-compilation>」で説明されているように、Razor ( *.cshtml*) ファイルのランタイム コンパイルを有効にすることもできます。 Razor 構文の変更は、ランタイム コンパイルが有効になっている場合にのみ適用されます。
 
 ::: moniker-end
 
@@ -47,13 +47,13 @@ ASP.NET Core 2.0 プロジェクトを ASP.NET Core 2.1 に変換し、[Microsof
 
 ::: moniker range="= aspnetcore-2.0"
 
-ASP.NET Core 2.0 の **Web アプリケーション** 、 **空** 、 **Web API** プロジェクト テンプレートでは、 [Microsoft.AspNetCore.All メタパッケージ](xref:fundamentals/metapackage)が使用されます。これには [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) 用のパッケージ参照が含まれています。 そのため、`Microsoft.AspNetCore.All` メタパッケージを使用する場合、Browser Link を使用できるようにするために、追加の操作を行う必要ありません。
+ASP.NET Core 2.0 の **Web アプリケーション**、**空**、**Web API** プロジェクト テンプレートでは、[Microsoft.AspNetCore.All メタパッケージ](xref:fundamentals/metapackage)が使用されます。これには [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) 用のパッケージ参照が含まれています。 そのため、`Microsoft.AspNetCore.All` メタパッケージを使用する場合、Browser Link を使用できるようにするために、追加の操作を行う必要ありません。
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-ASP.NET Core 1.x の **Web アプリケーション** プロジェクト テンプレートには、 [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) パッケージ用のパッケージ参照が含まれています。 その他のプロジェクトの種類では、`Microsoft.VisualStudio.Web.BrowserLink` にパッケージ参照を追加する必要があります。
+ASP.NET Core 1.x の **Web アプリケーション** プロジェクト テンプレートには、[Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) パッケージ用のパッケージ参照が含まれています。 その他のプロジェクトの種類では、`Microsoft.VisualStudio.Web.BrowserLink` にパッケージ参照を追加する必要があります。
 
 ::: moniker-end
 

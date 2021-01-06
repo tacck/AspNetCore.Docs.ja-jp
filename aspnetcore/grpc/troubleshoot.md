@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: grpc/troubleshoot
 ms.openlocfilehash: cbce85caf7ba792253ba62c6be084c8905acd00f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058715"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core での gRPC のトラブルシューティング
@@ -109,7 +109,7 @@ Kestrel では、macOS や Windows 7 などの古い Windows バージョンで�
 
 この問題を回避するには、TLS を *使用せずに* HTTP/2 を使用するように Kestrel と gRPC クライアントを構成します。 これは開発時にのみ実行してください。 TLS を使用しないと、gRPC メッセージが暗号化されずに送信されます。
 
-Kestrel では、 *Program.cs* で TLS を使用せずに HTTP/2 エンドポイントを構成する必要があります。
+Kestrel では、*Program.cs* で TLS を使用せずに HTTP/2 エンドポイントを構成する必要があります。
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -167,7 +167,7 @@ WPF プロジェクトには、gRPC コードの生成が正常に機能しな�
 この問題は次の方法で回避できます。
 
 1. 新しい .NET Core クラス ライブラリ プロジェクトを作成します。
-2. 新しいプロジェクトで、参照を追加して、 [ *\*.proto* ファイルからの C# コード生成](xref:grpc/basics#generated-c-assets)を有効にします。
+2. 新しいプロジェクトで、参照を追加して、[ *\*.proto* ファイルからの C# コード生成](xref:grpc/basics#generated-c-assets)を有効にします。
     * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) パッケージにパッケージ参照を追加します。
     * `<Protobuf>` 項目グループに *\*.proto* ファイルを追加します。
 3. WPF アプリケーションで、新しいプロジェクトに参照を追加します。

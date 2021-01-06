@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
 ms.openlocfilehash: 2cfd200c44290a0931cdeb2f68e99b90c11aa612
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059820"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Visual Studio コンテナー ツールと ASP.NET Core
@@ -45,7 +45,7 @@ Docker をインストールするには、まず、「[Docker for Windows:What 
 ![コンテナーで共有するローカル C ドライブを選択するためのダイアログ](visual-studio-tools-for-docker/_static/settings-shared-drives-win.png)
 
 > [!TIP]
-> Visual Studio 2017 バージョン 15.6 以降では、 **共有ドライブ** が構成されていない場合にプロンプトが表示されます。
+> Visual Studio 2017 バージョン 15.6 以降では、**共有ドライブ** が構成されていない場合にプロンプトが表示されます。
 
 ## <a name="add-a-project-to-a-docker-container"></a>Docker コンテナーにプロジェクトを追加する
 
@@ -72,15 +72,15 @@ Visual Studio コンテナー ツールでは、.NET Framework をターゲッ�
 
 ## <a name="dockerfile-overview"></a>Dockerfile の概要
 
-*Dockerfile* (Docker の最終イメージを作成するためのレシピ) は、プロジェクトのルートに追加されます。 その中に含まれるコマンドの詳細については、「[Dockerfile reference](https://docs.docker.com/engine/reference/builder/)」 (Dockerfile リファレンス) を参照してください。 この特定の *Dockerfile* では、次のような、4 つの異なる名前付きのビルド ステージを含む、 [multi-stage build](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) を使用します。
+*Dockerfile* (Docker の最終イメージを作成するためのレシピ) は、プロジェクトのルートに追加されます。 その中に含まれるコマンドの詳細については、「[Dockerfile reference](https://docs.docker.com/engine/reference/builder/)」 (Dockerfile リファレンス) を参照してください。 この特定の *Dockerfile* では、次のような、4 つの異なる名前付きのビルド ステージを含む、[multi-stage build](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) を使用します。
 
 ::: moniker range=">= aspnetcore-2.1"
 
 [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile.original?highlight=1,6,14,17)]
 
-上記の *Dockerfile* は、 [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) イメージに基づいています。 この基本イメージには、ASP.NET Core ランタイムと NuGet パッケージが含まれます。 パッケージは、起動時のパフォーマンスを向上させるために JIT (Just-In-Time) コンパイルされます。
+上記の *Dockerfile* は、[microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) イメージに基づいています。 この基本イメージには、ASP.NET Core ランタイムと NuGet パッケージが含まれます。 パッケージは、起動時のパフォーマンスを向上させるために JIT (Just-In-Time) コンパイルされます。
 
-新しいプロジェクト ダイアログの **[Configure for HTTPS]\(HTTPS 用に構成する\)** チェック ボックスがオンになっている場合、 *Dockerfile* は 2 つのポートを公開します。 1 つのポートは HTTP トラフィック用、もう 1 つのポートは HTTPS 用に使用されます。 チェック ボックスがオンになっていない場合は、HTTP トラフィック用に単一のポート (80) が公開されます。
+新しいプロジェクト ダイアログの **[Configure for HTTPS]\(HTTPS 用に構成する\)** チェック ボックスがオンになっている場合、*Dockerfile* は 2 つのポートを公開します。 1 つのポートは HTTP トラフィック用、もう 1 つのポートは HTTPS 用に使用されます。 チェック ボックスがオンになっていない場合は、HTTP トラフィック用に単一のポート (80) が公開されます。
 
 ::: moniker-end
 
@@ -88,7 +88,7 @@ Visual Studio コンテナー ツールでは、.NET Framework をターゲッ�
 
 [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.0/HelloDockerTools/Dockerfile?highlight=1,5,13,16)]
 
-上記の *Dockerfile* は、 [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) イメージに基づいています。 この基本イメージには、起動時のパフォーマンスを向上させるために JIT (Just-In-Time) コンパイルされる、ASP.NET Core NuGet パッケージが含まれます。
+上記の *Dockerfile* は、[microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) イメージに基づいています。 この基本イメージには、起動時のパフォーマンスを向上させるために JIT (Just-In-Time) コンパイルされる、ASP.NET Core NuGet パッケージが含まれます。
 
 ::: moniker-end
 
@@ -106,10 +106,10 @@ Visual Studio 2017 バージョン 15.8 以降では、指示された場合に�
 
 Visual Studio コンテナー ツールでは、ソリューションに *docker-compose* プロジェクトを追加します。これには以下のファイルが含まれます。
 
-* *docker-compose.dcproj* :プロジェクトを表すファイル。 使用する OS を指定する `<DockerTargetOS>` 要素が含まれます。
-* *.dockerignore* :ビルド コンテキストを生成するときに除外するファイルとディレクトリのパターンが一覧表示されます。
-* *docker-compose.yml* :`docker-compose build` および `docker-compose run` を使用して、それぞれビルドおよび実行されるイメージのコレクションを定義するために使用される、基本の [Docker Compose](https://docs.docker.com/compose/overview/) ファイル。
-* *docker-compose.override.yml* :サービスの構成オーバーライドを含む、Docker Compose によって読み取られるオプション ファイル。 Visual Studio は `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` を実行してこれらのファイルをマージします。
+* *docker-compose.dcproj*:プロジェクトを表すファイル。 使用する OS を指定する `<DockerTargetOS>` 要素が含まれます。
+* *.dockerignore*:ビルド コンテキストを生成するときに除外するファイルとディレクトリのパターンが一覧表示されます。
+* *docker-compose.yml*:`docker-compose build` および `docker-compose run` を使用して、それぞれビルドおよび実行されるイメージのコレクションを定義するために使用される、基本の [Docker Compose](https://docs.docker.com/compose/overview/) ファイル。
+* *docker-compose.override.yml*:サービスの構成オーバーライドを含む、Docker Compose によって読み取られるオプション ファイル。 Visual Studio は `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` を実行してこれらのファイルをマージします。
 
 *docker-compose.yml* ファイルでは、プロジェクトの実行時に作成されたイメージの名前を参照します。
 
@@ -119,7 +119,7 @@ Visual Studio コンテナー ツールでは、ソリューションに *docker
 
 イメージがレジストリにプッシュされる場合は、イメージ名の前に [Docker Hub](https://hub.docker.com/) のユーザー名を付けます (例: `dockerhubusername/hellodockertools`)。 または、構成に応じて、プライベート レジストリ URL を含めるようにイメージ名を変更します (例: `privateregistry.domain.com/hellodockertools`)。
 
-ビルド構成に基づいて動作を別にしたい場合 (デバッグやリリースなど)、構成固有の *docker-compose* ファイルを追加します。 ビルド構成に基づいて (たとえば、 *docker-compose.vs.debug.yml* および *docker-compose.vs.release.yml* ) ファイル名を指定して、 *docker-compose-override.yml* ファイルと同じ場所にそのファイルを配置する必要があります。 
+ビルド構成に基づいて動作を別にしたい場合 (デバッグやリリースなど)、構成固有の *docker-compose* ファイルを追加します。 ビルド構成に基づいて (たとえば、*docker-compose.vs.debug.yml* および *docker-compose.vs.release.yml*) ファイル名を指定して、*docker-compose-override.yml* ファイルと同じ場所にそのファイルを配置する必要があります。 
 
 構成固有の上書きファイルを使用して、デバッグおよびリリース ビルド構成に対して、さまざまな構成設定 (環境変数やエンドポイントなど) を指定できます。
 
@@ -161,7 +161,7 @@ Visual Studio コンテナーツールでは、次のタスクを実行します
 * アプリがコンテナーにコピーされます。
 * 動的に割り当てられたポートを使用して、デバッガーがコンテナーにアタッチされ、既定のブラウザーが起動します。
 
-アプリの結果の Docker イメージは、 *dev* としてタグ付けされます。 イメージは、 *microsoft/dotnet* 基本イメージの *2.1-aspnetcore-runtime* タグに基づいています。 **パッケージ マネージャー コンソール** (PMC) ウィンドウで `docker images` コマンドを実行します。 コンピューター上のイメージが表示されます。
+アプリの結果の Docker イメージは、*dev* としてタグ付けされます。 イメージは、*microsoft/dotnet* 基本イメージの *2.1-aspnetcore-runtime* タグに基づいています。 **パッケージ マネージャー コンソール** (PMC) ウィンドウで `docker images` コマンドを実行します。 コンピューター上のイメージが表示されます。
 
 ```console
 REPOSITORY        TAG                     IMAGE ID      CREATED         SIZE
@@ -179,7 +179,7 @@ microsoft/dotnet  2.1-aspnetcore-runtime  fcc3887985bb  6 days ago      255MB
 * アプリがコンテナーにコピーされます。
 * 動的に割り当てられたポートを使用して、デバッガーがコンテナーにアタッチされ、既定のブラウザーが起動します。
 
-アプリの結果の Docker イメージは、 *dev* としてタグ付けされます。 イメージは、 *microsoft/aspnetcore* 基本イメージに基づいています。 **パッケージ マネージャー コンソール** (PMC) ウィンドウで `docker images` コマンドを実行します。 コンピューター上のイメージが表示されます。
+アプリの結果の Docker イメージは、*dev* としてタグ付けされます。 イメージは、*microsoft/aspnetcore* 基本イメージに基づいています。 **パッケージ マネージャー コンソール** (PMC) ウィンドウで `docker images` コマンドを実行します。 コンピューター上のイメージが表示されます。
 
 ```console
 REPOSITORY            TAG  IMAGE ID      CREATED        SIZE
@@ -190,7 +190,7 @@ microsoft/aspnetcore  2.0  c69d39472da9  13 days ago    347MB
 ::: moniker-end
 
 > [!NOTE]
-> **デバッグ** 構成では、反復にボリューム マウントを使用するため、 *dev* イメージにはアプリのコンテンツはありません。 イメージをプッシュするには、 **リリース** 構成を使用します。
+> **デバッグ** 構成では、反復にボリューム マウントを使用するため、*dev* イメージにはアプリのコンテンツはありません。 イメージをプッシュするには、**リリース** 構成を使用します。
 
 PMC で `docker ps` コマンドを実行します。 アプリがコンテナーを使用して実行されていることがわかります。
 
@@ -243,7 +243,7 @@ microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 ::: moniker-end
 
 > [!NOTE]
-> `docker images` コマンドは、 *\<none>* として識別されるリポジトリ名とタグを持つ中間イメージを返します (上にはリストされていません)。 これらの名前のないイメージは、 [multi-stage build](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile* によって生成されます。 これにより、最終イメージの構築効率が向上します&mdash;変更時には必要なレイヤーのみが再構築されます。 中間イメージが不要になった場合は、[docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) コマンドを使用して削除します。
+> `docker images` コマンドは、 *\<none>* として識別されるリポジトリ名とタグを持つ中間イメージを返します (上にはリストされていません)。 これらの名前のないイメージは、[multi-stage build](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile* によって生成されます。 これにより、最終イメージの構築効率が向上します&mdash;変更時には必要なレイヤーのみが再構築されます。 中間イメージが不要になった場合は、[docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) コマンドを使用して削除します。
 
 *dev* イメージと比較した場合、実稼働またはリリース イメージはサイズが小さいと思うかもしれません。 ボリューム マッピングにより、デバッガーとアプリは、コンテナー内ではなく、ローカル コンピューターから実行されています。 *latest* イメージには、ホスト コンピューターでアプリを実行するために必要なアプリ コードがパッケージ化されています。 そのため、デルタはアプリ コードのサイズです。
 

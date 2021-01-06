@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: test/troubleshoot-azure-iis
 ms.openlocfilehash: d51a4a43f585b0a0b7e3aab2c5de1b2d215de494
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059599"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service および IIS での ASP.NET Core のトラブルシューティング
@@ -51,7 +51,7 @@ IIS にデプロイされているアプリまたは IIS Express でローカル
 
 ## <a name="app-startup-errors"></a>アプリ起動時のエラー
 
-Visual Studio では、ASP.NET Core プロジェクトのデバッグ時に [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) のホスティングが既定の設定です。 このトピックのアドバイスを使用すると、ローカルでのデバッグ時に発生する " *502.5 - 処理エラー* " または " *500.30 - 開始エラー* " を診断できます。
+Visual Studio では、ASP.NET Core プロジェクトのデバッグ時に [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) のホスティングが既定の設定です。 このトピックのアドバイスを使用すると、ローカルでのデバッグ時に発生する "*502.5 - 処理エラー*" または "*500.30 - 開始エラー*" を診断できます。
 
 ### <a name="40314-forbidden"></a>403.14 禁止
 
@@ -65,16 +65,16 @@ The Web server is configured to not list the contents of this directory.
 
 * アプリがホスト システム上の不適切なフォルダーに配置されています。
 * 配置プロセスで、アプリのすべてのファイルとフォルダーを、ホスティング システムの配置フォルダーに移動できませんでした。
-* 配置に *web.config* ファイルがありません。または、 *web.config* ファイルの内容の形式が正しくありません。
+* 配置に *web.config* ファイルがありません。または、*web.config* ファイルの内容の形式が正しくありません。
 
 次の手順に従います。
 
 1. ホスト システム上の配置フォルダーからすべてのファイルとフォルダーを削除します。
-1. Visual Studio、PowerShell、手動配置など、通常の配置方法を使用して、アプリの " *公開* " フォルダーの内容をホスティング システムに再配置します。
+1. Visual Studio、PowerShell、手動配置など、通常の配置方法を使用して、アプリの "*公開*" フォルダーの内容をホスティング システムに再配置します。
    * *web.config* ファイルがそのデプロイに存在し、その内容が正しいことを確認します。
    * Azure App Service でホストする場合は、アプリが `D:\home\site\wwwroot` フォルダーにデプロイされていることを確認します。
    * アプリが IIS によってホストされている場合は、アプリが **IIS マネージャー** の **[基本設定]** に表示されている IIS の **物理パス** に配置されていることを確認します。
-1. ホスティング システムの配置をプロジェクトの " *公開* " フォルダーの内容と比較して、アプリのすべてのファイルとフォルダーが配置されていることを確認します。
+1. ホスティング システムの配置をプロジェクトの "*公開*" フォルダーの内容と比較して、アプリのすべてのファイルとフォルダーが配置されていることを確認します。
 
 公開された ASP.NET Core アプリのレイアウトの詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。 *web.config* ファイルの詳細については、「<xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>」を参照してください。
 
@@ -82,7 +82,7 @@ The Web server is configured to not list the contents of this directory.
 
 アプリは起動しますが、エラーのためにサーバーは要求を実行できません。
 
-このエラーは、起動時または応答の作成中に、アプリのコード内で発生します。 応答にコンテンツが含まれていないか、またはブラウザーに " *500 内部サーバー エラー* " という応答が表示される可能性があります。 通常、アプリケーション イベント ログではアプリが正常に起動したことが示されます。 サーバーから見るとそれは正しいことです。 アプリは起動しましたが、有効な応答を生成できません。 問題を解決するには、サーバー上のコマンド プロンプトでアプリを実行するか、ASP.NET Core モジュールの stdout ログを有効にします。
+このエラーは、起動時または応答の作成中に、アプリのコード内で発生します。 応答にコンテンツが含まれていないか、またはブラウザーに "*500 内部サーバー エラー*" という応答が表示される可能性があります。 通常、アプリケーション イベント ログではアプリが正常に起動したことが示されます。 サーバーから見るとそれは正しいことです。 アプリは起動しましたが、有効な応答を生成できません。 問題を解決するには、サーバー上のコマンド プロンプトでアプリを実行するか、ASP.NET Core モジュールの stdout ログを有効にします。
 
 ### <a name="5000-in-process-handler-load-failure"></a>500.0 インプロセス ハンドラーの読み込みエラー
 
@@ -189,7 +189,7 @@ ANCM は、実行可能ファイルの横にあるアプリケーション DLL �
 
 一般的なエラー条件は、存在しないバージョンの ASP.NET Core 共有フレームワークが対象にされていて、アプリが正しく構成されていないことです。 対象のコンピューターにどのバージョンの ASP.NET Core 共有フレームワークがインストールされているかを確認します。 *共有フレームワーク* は、コンピューター上にインストールされたアセンブリ ( *.dll* ファイル) のセットであり、`Microsoft.AspNetCore.App` などのメタパッケージによって参照されます。 メタパッケージの参照には、必要な最低限のバージョンを指定できます。 詳しくは、[共有フレームワーク](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)に関するページをご覧ください。
 
-正しく構成されていないホスティングやアプリが原因でワーカー プロセスが失敗する場合、" *502.5 処理エラー* " のエラー ページが返されます。
+正しく構成されていないホスティングやアプリが原因でワーカー プロセスが失敗する場合、"*502.5 処理エラー*" のエラー ページが返されます。
 
 ### <a name="failed-to-start-application-errorcode-0x800700c1"></a>アプリケーションの起動に失敗しました (ErrorCode '0x800700c1')
 
@@ -199,7 +199,7 @@ Source: IIS AspNetCore Module V2
 Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ```
 
-アプリのアセンブリ ( *.dll* ) を読み込めなかったため、アプリの起動に失敗しました。
+アプリのアセンブリ ( *.dll*) を読み込めなかったため、アプリの起動に失敗しました。
 
 このエラーは、公開されたアプリと w3wp/iisexpress プロセスの間でビットの不一致がある場合に発生します。
 
@@ -215,7 +215,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 ### <a name="connection-reset"></a>接続のリセット
 
-ヘッダー送信後にエラーが発生した場合、サーバーが **500 内部サーバー エラー** を送信するには遅すぎます。 このような状況は、応答に対する複雑なオブジェクトのシリアル化中にエラーが起きたときによく発生します。 この種のエラーは、クライアントでは " *接続リセット* " エラーとして表示されます。 この種のエラーのトラブルシューティングには、[アプリケーション ログ](xref:fundamentals/logging/index)が役に立つことがあります。
+ヘッダー送信後にエラーが発生した場合、サーバーが **500 内部サーバー エラー** を送信するには遅すぎます。 このような状況は、応答に対する複雑なオブジェクトのシリアル化中にエラーが起きたときによく発生します。 この種のエラーは、クライアントでは "*接続リセット*" エラーとして表示されます。 この種のエラーのトラブルシューティングには、[アプリケーション ログ](xref:fundamentals/logging/index)が役に立つことがあります。
 
 ### <a name="default-startup-limits"></a>既定の起動制限
 
@@ -233,9 +233,9 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 1. **[問題の診断と解決]** を選択します。
 1. **[診断ツール]** という見出しを選択します。
 1. **[サポート ツール]** で **[アプリケーション イベント]** ボタンを選択します。
-1. **[Source]\(ソース\)** 列で、 *IIS AspNetCoreModule* または *IIS AspNetCoreModule V2* によって提供された最新のエラーを調べます。
+1. **[Source]\(ソース\)** 列で、*IIS AspNetCoreModule* または *IIS AspNetCoreModule V2* によって提供された最新のエラーを調べます。
 
-**[問題の診断と解決]** ブレードを使う代わりに、 [Kudu](https://github.com/projectkudu/kudu/wiki) を使ってアプリケーション イベント ログ ファイルを直接調べることもできます。
+**[問題の診断と解決]** ブレードを使う代わりに、[Kudu](https://github.com/projectkudu/kudu/wiki) を使ってアプリケーション イベント ログ ファイルを直接調べることもできます。
 
 1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
@@ -272,7 +272,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
-" *ASP.NET Core {バージョン} (x86) ランタイムのサイト拡張機能をインストールする必要があります。* "
+"*ASP.NET Core {バージョン} (x86) ランタイムのサイト拡張機能をインストールする必要があります。* "
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -294,7 +294,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
-" *ASP.NET Core {バージョン} (x64) ランタイムのサイト拡張機能をインストールする必要があります。* "
+"*ASP.NET Core {バージョン} (x64) ランタイムのサイト拡張機能をインストールする必要があります。* "
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -311,11 +311,11 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ASP.NET Core モジュールの stdout には、アプリケーション イベント ログでは見つからない有用なエラー メッセージが記録されることがよくあります。 stdout ログを有効にして表示するには:
 
 1. Azure portal で Web アプリに移動します。
-1. **[App Service]** ブレードで、検索ボックスに「 **kudu** 」と入力します。
+1. **[App Service]** ブレードで、検索ボックスに「**kudu**」と入力します。
 1. **[高度なツール]** 、 **[Go]** の順に選択します。
 1. **[デバッグ コンソール]、[CMD]** の順に選択します。
 1. *site/wwwroot* に移動します
-1. 鉛筆アイコンを選択し、 *web.config* ファイルを編集します。
+1. 鉛筆アイコンを選択し、*web.config* ファイルを編集します。
 1. `<aspNetCore />` 要素で `stdoutLogEnabled="true"` を設定し、 **[保存]** を選択します。
 
 トラブルシューティングが完了したら、`stdoutLogEnabled="false"` を設定して stdout ログを無効にします。
@@ -331,7 +331,7 @@ ASP.NET Core モジュール デバッグ ログでは、ASP.NET Core モジュ�
    * Kudu コンソールを利用し、「`<handlerSettings>`強化された診断ログ [」にある](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) をライブ アプリの *web.config* ファイルに追加します。
      1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
      1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
-     1. パス **site** > **wwwroot** へのフォルダーを開きます。 鉛筆アイコンを選択し、 *web.config* ファイルを編集します。 「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」にある `<handlerSettings>` セクションを追加します。 **[保存]** ボタンを選択します。
+     1. パス **site** > **wwwroot** へのフォルダーを開きます。 鉛筆アイコンを選択し、*web.config* ファイルを編集します。 「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」にある `<handlerSettings>` セクションを追加します。 **[保存]** ボタンを選択します。
 1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
 1. パス **site** > **wwwroot** へのフォルダーを開きます。 *aspnetcore-debug.log* ファイルにパスを指定しなかった場合、ファイルが一覧に表示されます。 パスを指定した場合、ログ ファイルの場所に移動します。
@@ -378,7 +378,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
 1. パス **site** > **wwwroot** へのフォルダーを開き、下にスクロールして、一覧の最後にある *web.config* ファイルを表示します。
 1. *web.config* ファイルの隣の鉛筆アイコンをクリックします。
-1. **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
+1. **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
 1. **[保存]** を選んで、更新した *web.config* ファイルを保存します。
 
 続けて診断ログをアクティブにします。
@@ -412,7 +412,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 
 アプリケーション イベント ログにアクセスします。
 
-1. [スタート] メニューを開き、 *イベント ビューアー* を検索し、 **イベント ビューアー** アプリを選択します。
+1. [スタート] メニューを開き、*イベント ビューアー* を検索し、**イベント ビューアー** アプリを選択します。
 1. **イベント ビューアー** で **[Windows ログ]** ノードを開きます。
 1. **[Application]** を選択して、アプリケーション イベント ログを開きます。
 1. 失敗したアプリに関連するエラーを検索します。 エラーの *[ソース]* 列には *IIS AspNetCore Module* または *IIS Express AspNetCore Module* の値が表示されます。
@@ -425,7 +425,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 
 アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)の場合:
 
-1. コマンド プロンプトで展開フォルダーに移動し、 *dotnet.exe* 使用してアプリのアセンブリを実行して、アプリを実行します。 次のコマンドで、\<assembly_name> をアプリのアセンブリの名前に置き換えます。`dotnet .\<assembly_name>.dll`。
+1. コマンド プロンプトで展開フォルダーに移動し、*dotnet.exe* 使用してアプリのアセンブリを実行して、アプリを実行します。 次のコマンドで、\<assembly_name> をアプリのアセンブリの名前に置き換えます。`dotnet .\<assembly_name>.dll`。
 1. エラーを示すアプリからのコンソール出力は、すべてコンソール ウィンドウに書き込まれます。
 1. アプリへの要求時にエラーが発生した場合は、Kestrel がリッスンしているホストとポートに要求が送信されます。 既定のホストと post を使用して `http://localhost:5000/` に要求を行います。 アプリが Kestrel のエンドポイント アドレスで正常に応答する場合、問題はホスティングの構成に関連している可能性が高く、アプリ内が原因の可能性は低くなります。
 
@@ -442,8 +442,8 @@ stdout ログが有効になっていない場合は、次の手順のように�
 stdout ログを有効にして表示するには:
 
 1. ホスティング システム上のサイトの展開フォルダーに移動します。
-1. *logs* フォルダーが存在しない場合は、フォルダーを作成します。 MSBuild で展開フォルダーに *logs* フォルダーを自動的に作成されるようにする手順については、「 [ディレクトリ構造](xref:host-and-deploy/directory-structure)」のトピックを参照してください。
-1. *web.config* ファイルを編集します。 **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** のパスを *logs* フォルダー (たとえば `.\logs\stdout`) を指すように変更します。 パスの `stdout` はログ ファイル名のプレフィックスです。 ログ ファイルの作成時には、タイムスタンプ、プロセス ID、およびファイルの拡張子が自動的に追加されます。 ファイル名のプレフィックスとして `stdout` を使用すると、一般的なログ ファイルの名前は *stdout_20180205184032_5412.log* になります。
+1. *logs* フォルダーが存在しない場合は、フォルダーを作成します。 MSBuild で展開フォルダーに *logs* フォルダーを自動的に作成されるようにする手順については、「[ディレクトリ構造](xref:host-and-deploy/directory-structure)」のトピックを参照してください。
+1. *web.config* ファイルを編集します。 **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** のパスを *logs* フォルダー (たとえば `.\logs\stdout`) を指すように変更します。 パスの `stdout` はログ ファイル名のプレフィックスです。 ログ ファイルの作成時には、タイムスタンプ、プロセス ID、およびファイルの拡張子が自動的に追加されます。 ファイル名のプレフィックスとして `stdout` を使用すると、一般的なログ ファイルの名前は *stdout_20180205184032_5412.log* になります。
 1. アプリケーション プールの ID に *logs* フォルダーへの書き込みアクセス許可があることを確認します。
 1. 更新した *web.config* ファイルを保存します。
 1. アプリに対して要求します。
@@ -496,7 +496,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 </aspNetCore>
 ```
 
-`ASPNETCORE_ENVIRONMENT` の環境変数を設定する方法は、インターネットに公開されないステージング サーバーやテスト用サーバーの場合にのみお勧めされます。 トラブルシューティング後は、必ず *web.config* ファイルからこの環境変数を削除してください。 *web.config* で環境変数を設定する方法の詳細については、 [aspNetCore の environmentVariables 子要素](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)を参照してください。
+`ASPNETCORE_ENVIRONMENT` の環境変数を設定する方法は、インターネットに公開されないステージング サーバーやテスト用サーバーの場合にのみお勧めされます。 トラブルシューティング後は、必ず *web.config* ファイルからこの環境変数を削除してください。 *web.config* で環境変数を設定する方法の詳細については、[aspNetCore の environmentVariables 子要素](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)を参照してください。
 
 ### <a name="obtain-data-from-an-app"></a>アプリからデータを取得する
 
@@ -504,7 +504,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 ### <a name="slow-or-hanging-app-iis"></a>遅いアプリまたはハングしているアプリ (IIS)
 
-" *クラッシュ ダンプ* " とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
+"*クラッシュ ダンプ*" とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>アプリのクラッシュまたは例外の発生
 
@@ -512,13 +512,13 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 1. `c:\dumps` にクラッシュ ダンプ ファイルを保持するフォルダーを作成します。 アプリ プールには、そのフォルダーへの書き込みアクセス権が必要です。
 1. [EnableDumps PowerShell スクリプト](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) を実行します。
-   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、 *w3wp.exe* に対するスクリプトを実行します。
+   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、*w3wp.exe* に対するスクリプトを実行します。
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
      ```
 
-   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、 *dotnet.exe* に対するスクリプトを実行します。
+   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、*dotnet.exe* に対するスクリプトを実行します。
 
      ```console
      .\EnableDumps dotnet.exe c:\dumps
@@ -526,13 +526,13 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 1. クラッシュが発生する条件の下でアプリを実行します。
 1. クラッシュが発生した後、[DisableDumps PowerShell スクリプト](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/DisableDumps.ps1)を実行します。
-   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、 *w3wp.exe* に対するスクリプトを実行します。
+   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、*w3wp.exe* に対するスクリプトを実行します。
 
      ```console
      .\DisableDumps w3wp.exe
      ```
 
-   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、 *dotnet.exe* に対するスクリプトを実行します。
+   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、*dotnet.exe* に対するスクリプトを実行します。
 
      ```console
      .\DisableDumps dotnet.exe
@@ -545,7 +545,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>アプリが起動時または正常な実行中にハングまたは失敗する
 
-アプリが起動時または正常な実行中に " *ハング* " (応答を停止するがクラッシュしない) または失敗するときは、「 [User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
+アプリが起動時または正常な実行中に "*ハング*" (応答を停止するがクラッシュしない) または失敗するときは、「[User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
 
 #### <a name="analyze-the-dump"></a>ダンプを分析する
 
@@ -558,7 +558,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 1. *bin* フォルダーと *obj* フォルダーを削除します。
 1. コマンド シェルから [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) を実行して、パッケージ キャッシュをクリアします。
 
-   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、 [NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
+   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、[NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
 
 1. プロジェクトを復元してリビルドします。
 1. アプリを再展開する前に、サーバー上の展開フォルダー内のすべてのファイルを削除します。
@@ -616,7 +616,7 @@ IIS にデプロイされているアプリまたは IIS Express でローカル
 
 ## <a name="app-startup-errors"></a>アプリ起動時のエラー
 
-Visual Studio では、ASP.NET Core プロジェクトのデバッグ時に [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) のホスティングが既定の設定です。 このトピックのアドバイスを使用すると、ローカルでのデバッグ時に発生する " *502.5 - 処理エラー* " または " *500.30 - 開始エラー* " を診断できます。
+Visual Studio では、ASP.NET Core プロジェクトのデバッグ時に [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) のホスティングが既定の設定です。 このトピックのアドバイスを使用すると、ローカルでのデバッグ時に発生する "*502.5 - 処理エラー*" または "*500.30 - 開始エラー*" を診断できます。
 
 ### <a name="40314-forbidden"></a>403.14 禁止
 
@@ -630,16 +630,16 @@ The Web server is configured to not list the contents of this directory.
 
 * アプリがホスト システム上の不適切なフォルダーに配置されています。
 * 配置プロセスで、アプリのすべてのファイルとフォルダーを、ホスティング システムの配置フォルダーに移動できませんでした。
-* 配置に *web.config* ファイルがありません。または、 *web.config* ファイルの内容の形式が正しくありません。
+* 配置に *web.config* ファイルがありません。または、*web.config* ファイルの内容の形式が正しくありません。
 
 次の手順に従います。
 
 1. ホスト システム上の配置フォルダーからすべてのファイルとフォルダーを削除します。
-1. Visual Studio、PowerShell、手動配置など、通常の配置方法を使用して、アプリの " *公開* " フォルダーの内容をホスティング システムに再配置します。
+1. Visual Studio、PowerShell、手動配置など、通常の配置方法を使用して、アプリの "*公開*" フォルダーの内容をホスティング システムに再配置します。
    * *web.config* ファイルがそのデプロイに存在し、その内容が正しいことを確認します。
    * Azure App Service でホストする場合は、アプリが `D:\home\site\wwwroot` フォルダーにデプロイされていることを確認します。
    * アプリが IIS によってホストされている場合は、アプリが **IIS マネージャー** の **[基本設定]** に表示されている IIS の **物理パス** に配置されていることを確認します。
-1. ホスティング システムの配置をプロジェクトの " *公開* " フォルダーの内容と比較して、アプリのすべてのファイルとフォルダーが配置されていることを確認します。
+1. ホスティング システムの配置をプロジェクトの "*公開*" フォルダーの内容と比較して、アプリのすべてのファイルとフォルダーが配置されていることを確認します。
 
 公開された ASP.NET Core アプリのレイアウトの詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。 *web.config* ファイルの詳細については、「<xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>」を参照してください。
 
@@ -647,13 +647,13 @@ The Web server is configured to not list the contents of this directory.
 
 アプリは起動しますが、エラーのためにサーバーは要求を実行できません。
 
-このエラーは、起動時または応答の作成中に、アプリのコード内で発生します。 応答にコンテンツが含まれていないか、またはブラウザーに " *500 内部サーバー エラー* " という応答が表示される可能性があります。 通常、アプリケーション イベント ログではアプリが正常に起動したことが示されます。 サーバーから見るとそれは正しいことです。 アプリは起動しましたが、有効な応答を生成できません。 問題を解決するには、サーバー上のコマンド プロンプトでアプリを実行するか、ASP.NET Core モジュールの stdout ログを有効にします。
+このエラーは、起動時または応答の作成中に、アプリのコード内で発生します。 応答にコンテンツが含まれていないか、またはブラウザーに "*500 内部サーバー エラー*" という応答が表示される可能性があります。 通常、アプリケーション イベント ログではアプリが正常に起動したことが示されます。 サーバーから見るとそれは正しいことです。 アプリは起動しましたが、有効な応答を生成できません。 問題を解決するには、サーバー上のコマンド プロンプトでアプリを実行するか、ASP.NET Core モジュールの stdout ログを有効にします。
 
 ### <a name="5000-in-process-handler-load-failure"></a>500.0 インプロセス ハンドラーの読み込みエラー
 
 ワーカー プロセスが失敗します。 アプリは起動しません。
 
-[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)は .NET Core CLR の検出に失敗し、インプロセス要求ハンドラー ( *aspnetcorev2_inprocess.dll* ) を検出します。 次の点をご確認ください。
+[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)は .NET Core CLR の検出に失敗し、インプロセス要求ハンドラー (*aspnetcorev2_inprocess.dll*) を検出します。 次の点をご確認ください。
 
 * アプリが [Microsoft.AspNetCore.Server.IIS](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IIS) NuGet パッケージまたは [Microsoft.AspNetCore.App メタパッケージ](xref:fundamentals/metapackage-app)を対象としている。
 * アプリが対象としているバージョンの ASP.NET Core 共有フレームワークが対象のコンピューターにインストールされている。
@@ -672,7 +672,7 @@ The Web server is configured to not list the contents of this directory.
 
 一般的なエラー条件は、存在しないバージョンの ASP.NET Core 共有フレームワークが対象にされていて、アプリが正しく構成されていないことです。 対象のコンピューターにどのバージョンの ASP.NET Core 共有フレームワークがインストールされているかを確認します。 *共有フレームワーク* は、コンピューター上にインストールされたアセンブリ ( *.dll* ファイル) のセットであり、`Microsoft.AspNetCore.App` などのメタパッケージによって参照されます。 メタパッケージの参照には、必要な最低限のバージョンを指定できます。 詳しくは、[共有フレームワーク](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)に関するページをご覧ください。
 
-正しく構成されていないホスティングやアプリが原因でワーカー プロセスが失敗する場合、" *502.5 処理エラー* " のエラー ページが返されます。
+正しく構成されていないホスティングやアプリが原因でワーカー プロセスが失敗する場合、"*502.5 処理エラー*" のエラー ページが返されます。
 
 ### <a name="failed-to-start-application-errorcode-0x800700c1"></a>アプリケーションの起動に失敗しました (ErrorCode '0x800700c1')
 
@@ -682,7 +682,7 @@ Source: IIS AspNetCore Module V2
 Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ```
 
-アプリのアセンブリ ( *.dll* ) を読み込めなかったため、アプリの起動に失敗しました。
+アプリのアセンブリ ( *.dll*) を読み込めなかったため、アプリの起動に失敗しました。
 
 このエラーは、公開されたアプリと w3wp/iisexpress プロセスの間でビットの不一致がある場合に発生します。
 
@@ -698,7 +698,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 ### <a name="connection-reset"></a>接続のリセット
 
-ヘッダー送信後にエラーが発生した場合、サーバーが **500 内部サーバー エラー** を送信するには遅すぎます。 このような状況は、応答に対する複雑なオブジェクトのシリアル化中にエラーが起きたときによく発生します。 この種のエラーは、クライアントでは " *接続リセット* " エラーとして表示されます。 この種のエラーのトラブルシューティングには、[アプリケーション ログ](xref:fundamentals/logging/index)が役に立つことがあります。
+ヘッダー送信後にエラーが発生した場合、サーバーが **500 内部サーバー エラー** を送信するには遅すぎます。 このような状況は、応答に対する複雑なオブジェクトのシリアル化中にエラーが起きたときによく発生します。 この種のエラーは、クライアントでは "*接続リセット*" エラーとして表示されます。 この種のエラーのトラブルシューティングには、[アプリケーション ログ](xref:fundamentals/logging/index)が役に立つことがあります。
 
 ### <a name="default-startup-limits"></a>既定の起動制限
 
@@ -716,9 +716,9 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 1. **[問題の診断と解決]** を選択します。
 1. **[診断ツール]** という見出しを選択します。
 1. **[サポート ツール]** で **[アプリケーション イベント]** ボタンを選択します。
-1. **[Source]\(ソース\)** 列で、 *IIS AspNetCoreModule* または *IIS AspNetCoreModule V2* によって提供された最新のエラーを調べます。
+1. **[Source]\(ソース\)** 列で、*IIS AspNetCoreModule* または *IIS AspNetCoreModule V2* によって提供された最新のエラーを調べます。
 
-**[問題の診断と解決]** ブレードを使う代わりに、 [Kudu](https://github.com/projectkudu/kudu/wiki) を使ってアプリケーション イベント ログ ファイルを直接調べることもできます。
+**[問題の診断と解決]** ブレードを使う代わりに、[Kudu](https://github.com/projectkudu/kudu/wiki) を使ってアプリケーション イベント ログ ファイルを直接調べることもできます。
 
 1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
@@ -755,7 +755,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
-" *ASP.NET Core {バージョン} (x86) ランタイムのサイト拡張機能をインストールする必要があります。* "
+"*ASP.NET Core {バージョン} (x86) ランタイムのサイト拡張機能をインストールする必要があります。* "
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -777,7 +777,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
-" *ASP.NET Core {バージョン} (x64) ランタイムのサイト拡張機能をインストールする必要があります。* "
+"*ASP.NET Core {バージョン} (x64) ランタイムのサイト拡張機能をインストールする必要があります。* "
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -793,7 +793,7 @@ ASP.NET Core モジュールの stdout には、アプリケーション イベ�
 1. **[推奨されている解決方法]** > **[Enable Stdout Log Redirection]\(Stdout ログのリダイレクトを有効にする\)** で、 **[Open Kudu Console to edit Web.Config]\(Kudu コンソールを開いて Web.Config を編集する\)** ボタンを選びます。
 1. Kudu の **診断コンソール** で、パス **site** > **wwwroot** へのフォルダーを開きます。 下にスクロールして、一覧の最後にある *web.config* ファイルを表示します。
 1. *web.config* ファイルの隣の鉛筆アイコンをクリックします。
-1. **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
+1. **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
 1. **[保存]** を選んで、更新した *web.config* ファイルを保存します。
 1. アプリに対して要求します。
 1. Azure portal に戻ります。 **[開発ツール]** 領域で **[高度なツール]** ブレードを選びます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
@@ -804,7 +804,7 @@ ASP.NET Core モジュールの stdout には、アプリケーション イベ�
 
 トラブルシューティングが完了したら、stdout ログを無効にします。
 
-1. Kudu の **診断コンソール** で、パス **site** > **wwwroot** に戻り、 *web.config* ファイルを表示します。 鉛筆アイコンを選んで **web.config** ファイルを再び開きます。
+1. Kudu の **診断コンソール** で、パス **site** > **wwwroot** に戻り、*web.config* ファイルを表示します。 鉛筆アイコンを選んで **web.config** ファイルを再び開きます。
 1. **stdoutLogEnabled** を `false` に設定します。
 1. **[保存]** を選んでファイルを保存します。
 
@@ -824,7 +824,7 @@ ASP.NET Core モジュール デバッグ ログでは、ASP.NET Core モジュ�
    * Kudu コンソールを利用し、「`<handlerSettings>`強化された診断ログ [」にある](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) をライブ アプリの *web.config* ファイルに追加します。
      1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
      1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
-     1. パス **site** > **wwwroot** へのフォルダーを開きます。 鉛筆アイコンを選択し、 *web.config* ファイルを編集します。 「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」にある `<handlerSettings>` セクションを追加します。 **[保存]** ボタンを選択します。
+     1. パス **site** > **wwwroot** へのフォルダーを開きます。 鉛筆アイコンを選択し、*web.config* ファイルを編集します。 「[強化された診断ログ](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)」にある `<handlerSettings>` セクションを追加します。 **[保存]** ボタンを選択します。
 1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
 1. パス **site** > **wwwroot** へのフォルダーを開きます。 *aspnetcore-debug.log* ファイルにパスを指定しなかった場合、ファイルが一覧に表示されます。 パスを指定した場合、ログ ファイルの場所に移動します。
@@ -871,7 +871,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
 1. パス **site** > **wwwroot** へのフォルダーを開き、下にスクロールして、一覧の最後にある *web.config* ファイルを表示します。
 1. *web.config* ファイルの隣の鉛筆アイコンをクリックします。
-1. **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
+1. **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
 1. **[保存]** を選んで、更新した *web.config* ファイルを保存します。
 
 続けて診断ログをアクティブにします。
@@ -905,7 +905,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 
 アプリケーション イベント ログにアクセスします。
 
-1. [スタート] メニューを開き、 *イベント ビューアー* を検索し、 **イベント ビューアー** アプリを選択します。
+1. [スタート] メニューを開き、*イベント ビューアー* を検索し、**イベント ビューアー** アプリを選択します。
 1. **イベント ビューアー** で **[Windows ログ]** ノードを開きます。
 1. **[Application]** を選択して、アプリケーション イベント ログを開きます。
 1. 失敗したアプリに関連するエラーを検索します。 エラーの *[ソース]* 列には *IIS AspNetCore Module* または *IIS Express AspNetCore Module* の値が表示されます。
@@ -918,7 +918,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 
 アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)の場合:
 
-1. コマンド プロンプトで展開フォルダーに移動し、 *dotnet.exe* 使用してアプリのアセンブリを実行して、アプリを実行します。 次のコマンドで、\<assembly_name> をアプリのアセンブリの名前に置き換えます。`dotnet .\<assembly_name>.dll`。
+1. コマンド プロンプトで展開フォルダーに移動し、*dotnet.exe* 使用してアプリのアセンブリを実行して、アプリを実行します。 次のコマンドで、\<assembly_name> をアプリのアセンブリの名前に置き換えます。`dotnet .\<assembly_name>.dll`。
 1. エラーを示すアプリからのコンソール出力は、すべてコンソール ウィンドウに書き込まれます。
 1. アプリへの要求時にエラーが発生した場合は、Kestrel がリッスンしているホストとポートに要求が送信されます。 既定のホストと post を使用して `http://localhost:5000/` に要求を行います。 アプリが Kestrel のエンドポイント アドレスで正常に応答する場合、問題はホスティングの構成に関連している可能性が高く、アプリ内が原因の可能性は低くなります。
 
@@ -935,8 +935,8 @@ stdout ログが有効になっていない場合は、次の手順のように�
 stdout ログを有効にして表示するには:
 
 1. ホスティング システム上のサイトの展開フォルダーに移動します。
-1. *logs* フォルダーが存在しない場合は、フォルダーを作成します。 MSBuild で展開フォルダーに *logs* フォルダーを自動的に作成されるようにする手順については、「 [ディレクトリ構造](xref:host-and-deploy/directory-structure)」のトピックを参照してください。
-1. *web.config* ファイルを編集します。 **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** のパスを *logs* フォルダー (たとえば `.\logs\stdout`) を指すように変更します。 パスの `stdout` はログ ファイル名のプレフィックスです。 ログ ファイルの作成時には、タイムスタンプ、プロセス ID、およびファイルの拡張子が自動的に追加されます。 ファイル名のプレフィックスとして `stdout` を使用すると、一般的なログ ファイルの名前は *stdout_20180205184032_5412.log* になります。
+1. *logs* フォルダーが存在しない場合は、フォルダーを作成します。 MSBuild で展開フォルダーに *logs* フォルダーを自動的に作成されるようにする手順については、「[ディレクトリ構造](xref:host-and-deploy/directory-structure)」のトピックを参照してください。
+1. *web.config* ファイルを編集します。 **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** のパスを *logs* フォルダー (たとえば `.\logs\stdout`) を指すように変更します。 パスの `stdout` はログ ファイル名のプレフィックスです。 ログ ファイルの作成時には、タイムスタンプ、プロセス ID、およびファイルの拡張子が自動的に追加されます。 ファイル名のプレフィックスとして `stdout` を使用すると、一般的なログ ファイルの名前は *stdout_20180205184032_5412.log* になります。
 1. アプリケーション プールの ID に *logs* フォルダーへの書き込みアクセス許可があることを確認します。
 1. 更新した *web.config* ファイルを保存します。
 1. アプリに対して要求します。
@@ -989,7 +989,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 </aspNetCore>
 ```
 
-`ASPNETCORE_ENVIRONMENT` の環境変数を設定する方法は、インターネットに公開されないステージング サーバーやテスト用サーバーの場合にのみお勧めされます。 トラブルシューティング後は、必ず *web.config* ファイルからこの環境変数を削除してください。 *web.config* で環境変数を設定する方法の詳細については、 [aspNetCore の environmentVariables 子要素](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)を参照してください。
+`ASPNETCORE_ENVIRONMENT` の環境変数を設定する方法は、インターネットに公開されないステージング サーバーやテスト用サーバーの場合にのみお勧めされます。 トラブルシューティング後は、必ず *web.config* ファイルからこの環境変数を削除してください。 *web.config* で環境変数を設定する方法の詳細については、[aspNetCore の environmentVariables 子要素](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)を参照してください。
 
 ### <a name="obtain-data-from-an-app"></a>アプリからデータを取得する
 
@@ -997,7 +997,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 ### <a name="slow-or-hanging-app-iis"></a>遅いアプリまたはハングしているアプリ (IIS)
 
-" *クラッシュ ダンプ* " とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
+"*クラッシュ ダンプ*" とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>アプリのクラッシュまたは例外の発生
 
@@ -1005,13 +1005,13 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 1. `c:\dumps` にクラッシュ ダンプ ファイルを保持するフォルダーを作成します。 アプリ プールには、そのフォルダーへの書き込みアクセス権が必要です。
 1. [EnableDumps PowerShell スクリプト](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) を実行します。
-   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、 *w3wp.exe* に対するスクリプトを実行します。
+   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、*w3wp.exe* に対するスクリプトを実行します。
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
      ```
 
-   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、 *dotnet.exe* に対するスクリプトを実行します。
+   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、*dotnet.exe* に対するスクリプトを実行します。
 
      ```console
      .\EnableDumps dotnet.exe c:\dumps
@@ -1019,13 +1019,13 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 1. クラッシュが発生する条件の下でアプリを実行します。
 1. クラッシュが発生した後、[DisableDumps PowerShell スクリプト](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/DisableDumps.ps1)を実行します。
-   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、 *w3wp.exe* に対するスクリプトを実行します。
+   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、*w3wp.exe* に対するスクリプトを実行します。
 
      ```console
      .\DisableDumps w3wp.exe
      ```
 
-   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、 *dotnet.exe* に対するスクリプトを実行します。
+   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、*dotnet.exe* に対するスクリプトを実行します。
 
      ```console
      .\DisableDumps dotnet.exe
@@ -1038,7 +1038,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>アプリが起動時または正常な実行中にハングまたは失敗する
 
-アプリが起動時または正常な実行中に " *ハング* " (応答を停止するがクラッシュしない) または失敗するときは、「 [User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
+アプリが起動時または正常な実行中に "*ハング*" (応答を停止するがクラッシュしない) または失敗するときは、「[User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
 
 #### <a name="analyze-the-dump"></a>ダンプを分析する
 
@@ -1051,7 +1051,7 @@ ASP.NET Core モジュールのデバッグ ログを有効にするには、次
 1. *bin* フォルダーと *obj* フォルダーを削除します。
 1. コマンド シェルから [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) を実行して、パッケージ キャッシュをクリアします。
 
-   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、 [NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
+   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、[NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
 
 1. プロジェクトを復元してリビルドします。
 1. アプリを再展開する前に、サーバー上の展開フォルダー内のすべてのファイルを削除します。
@@ -1109,7 +1109,7 @@ IIS にデプロイされているアプリまたは IIS Express でローカル
 
 ## <a name="app-startup-errors"></a>アプリ起動時のエラー
 
-Visual Studio では、ASP.NET Core プロジェクトのデバッグ時に [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) のホスティングが既定の設定です。 このトピックのアドバイスを使用すると、ローカルでのデバッグ時に発生する " *502.5 処理エラー* " を診断できます。
+Visual Studio では、ASP.NET Core プロジェクトのデバッグ時に [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) のホスティングが既定の設定です。 このトピックのアドバイスを使用すると、ローカルでのデバッグ時に発生する "*502.5 処理エラー*" を診断できます。
 
 ### <a name="40314-forbidden"></a>403.14 禁止
 
@@ -1123,16 +1123,16 @@ The Web server is configured to not list the contents of this directory.
 
 * アプリがホスト システム上の不適切なフォルダーに配置されています。
 * 配置プロセスで、アプリのすべてのファイルとフォルダーを、ホスティング システムの配置フォルダーに移動できませんでした。
-* 配置に *web.config* ファイルがありません。または、 *web.config* ファイルの内容の形式が正しくありません。
+* 配置に *web.config* ファイルがありません。または、*web.config* ファイルの内容の形式が正しくありません。
 
 次の手順に従います。
 
 1. ホスト システム上の配置フォルダーからすべてのファイルとフォルダーを削除します。
-1. Visual Studio、PowerShell、手動配置など、通常の配置方法を使用して、アプリの " *公開* " フォルダーの内容をホスティング システムに再配置します。
+1. Visual Studio、PowerShell、手動配置など、通常の配置方法を使用して、アプリの "*公開*" フォルダーの内容をホスティング システムに再配置します。
    * *web.config* ファイルがそのデプロイに存在し、その内容が正しいことを確認します。
    * Azure App Service でホストする場合は、アプリが `D:\home\site\wwwroot` フォルダーにデプロイされていることを確認します。
    * アプリが IIS によってホストされている場合は、アプリが **IIS マネージャー** の **[基本設定]** に表示されている IIS の **物理パス** に配置されていることを確認します。
-1. ホスティング システムの配置をプロジェクトの " *公開* " フォルダーの内容と比較して、アプリのすべてのファイルとフォルダーが配置されていることを確認します。
+1. ホスティング システムの配置をプロジェクトの "*公開*" フォルダーの内容と比較して、アプリのすべてのファイルとフォルダーが配置されていることを確認します。
 
 公開された ASP.NET Core アプリのレイアウトの詳細については、「<xref:host-and-deploy/directory-structure>」を参照してください。 *web.config* ファイルの詳細については、「<xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>」を参照してください。
 
@@ -1140,7 +1140,7 @@ The Web server is configured to not list the contents of this directory.
 
 アプリは起動しますが、エラーのためにサーバーは要求を実行できません。
 
-このエラーは、起動時または応答の作成中に、アプリのコード内で発生します。 応答にコンテンツが含まれていないか、またはブラウザーに " *500 内部サーバー エラー* " という応答が表示される可能性があります。 通常、アプリケーション イベント ログではアプリが正常に起動したことが示されます。 サーバーから見るとそれは正しいことです。 アプリは起動しましたが、有効な応答を生成できません。 問題を解決するには、サーバー上のコマンド プロンプトでアプリを実行するか、ASP.NET Core モジュールの stdout ログを有効にします。
+このエラーは、起動時または応答の作成中に、アプリのコード内で発生します。 応答にコンテンツが含まれていないか、またはブラウザーに "*500 内部サーバー エラー*" という応答が表示される可能性があります。 通常、アプリケーション イベント ログではアプリが正常に起動したことが示されます。 サーバーから見るとそれは正しいことです。 アプリは起動しましたが、有効な応答を生成できません。 問題を解決するには、サーバー上のコマンド プロンプトでアプリを実行するか、ASP.NET Core モジュールの stdout ログを有効にします。
 
 ### <a name="5025-process-failure"></a>502.5 処理エラー
 
@@ -1150,7 +1150,7 @@ The Web server is configured to not list the contents of this directory.
 
 一般的なエラー条件は、存在しないバージョンの ASP.NET Core 共有フレームワークが対象にされていて、アプリが正しく構成されていないことです。 対象のコンピューターにどのバージョンの ASP.NET Core 共有フレームワークがインストールされているかを確認します。 *共有フレームワーク* は、コンピューター上にインストールされたアセンブリ ( *.dll* ファイル) のセットであり、`Microsoft.AspNetCore.App` などのメタパッケージによって参照されます。 メタパッケージの参照には、必要な最低限のバージョンを指定できます。 詳しくは、[共有フレームワーク](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)に関するページをご覧ください。
 
-正しく構成されていないホスティングやアプリが原因でワーカー プロセスが失敗する場合、" *502.5 処理エラー* " のエラー ページが返されます。
+正しく構成されていないホスティングやアプリが原因でワーカー プロセスが失敗する場合、"*502.5 処理エラー*" のエラー ページが返されます。
 
 ### <a name="failed-to-start-application-errorcode-0x800700c1"></a>アプリケーションの起動に失敗しました (ErrorCode '0x800700c1')
 
@@ -1160,7 +1160,7 @@ Source: IIS AspNetCore Module V2
 Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 ```
 
-アプリのアセンブリ ( *.dll* ) を読み込めなかったため、アプリの起動に失敗しました。
+アプリのアセンブリ ( *.dll*) を読み込めなかったため、アプリの起動に失敗しました。
 
 このエラーは、公開されたアプリと w3wp/iisexpress プロセスの間でビットの不一致がある場合に発生します。
 
@@ -1176,7 +1176,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 ### <a name="connection-reset"></a>接続のリセット
 
-ヘッダー送信後にエラーが発生した場合、サーバーが **500 内部サーバー エラー** を送信するには遅すぎます。 このような状況は、応答に対する複雑なオブジェクトのシリアル化中にエラーが起きたときによく発生します。 この種のエラーは、クライアントでは " *接続リセット* " エラーとして表示されます。 この種のエラーのトラブルシューティングには、[アプリケーション ログ](xref:fundamentals/logging/index)が役に立つことがあります。
+ヘッダー送信後にエラーが発生した場合、サーバーが **500 内部サーバー エラー** を送信するには遅すぎます。 このような状況は、応答に対する複雑なオブジェクトのシリアル化中にエラーが起きたときによく発生します。 この種のエラーは、クライアントでは "*接続リセット*" エラーとして表示されます。 この種のエラーのトラブルシューティングには、[アプリケーション ログ](xref:fundamentals/logging/index)が役に立つことがあります。
 
 ### <a name="default-startup-limits"></a>既定の起動制限
 
@@ -1194,9 +1194,9 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 1. **[問題の診断と解決]** を選択します。
 1. **[診断ツール]** という見出しを選択します。
 1. **[サポート ツール]** で **[アプリケーション イベント]** ボタンを選択します。
-1. **[Source]\(ソース\)** 列で、 *IIS AspNetCoreModule* または *IIS AspNetCoreModule V2* によって提供された最新のエラーを調べます。
+1. **[Source]\(ソース\)** 列で、*IIS AspNetCoreModule* または *IIS AspNetCoreModule V2* によって提供された最新のエラーを調べます。
 
-**[問題の診断と解決]** ブレードを使う代わりに、 [Kudu](https://github.com/projectkudu/kudu/wiki) を使ってアプリケーション イベント ログ ファイルを直接調べることもできます。
+**[問題の診断と解決]** ブレードを使う代わりに、[Kudu](https://github.com/projectkudu/kudu/wiki) を使ってアプリケーション イベント ログ ファイルを直接調べることもできます。
 
 1. **[開発ツール]** 領域で **[高度なツール]** を開きます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
@@ -1233,7 +1233,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
-" *ASP.NET Core {バージョン} (x86) ランタイムのサイト拡張機能をインストールする必要があります。* "
+"*ASP.NET Core {バージョン} (x86) ランタイムのサイト拡張機能をインストールする必要があります。* "
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -1255,7 +1255,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **プレビュー リリース上で実行されているフレームワークに依存するデプロイ**
 
-" *ASP.NET Core {バージョン} (x64) ランタイムのサイト拡張機能をインストールする必要があります。* "
+"*ASP.NET Core {バージョン} (x64) ランタイムのサイト拡張機能をインストールする必要があります。* "
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` はランタイム バージョンです)
 1. アプリを実行します: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -1271,7 +1271,7 @@ ASP.NET Core モジュールの stdout には、アプリケーション イベ�
 1. **[推奨されている解決方法]** > **[Enable Stdout Log Redirection]\(Stdout ログのリダイレクトを有効にする\)** で、 **[Open Kudu Console to edit Web.Config]\(Kudu コンソールを開いて Web.Config を編集する\)** ボタンを選びます。
 1. Kudu の **診断コンソール** で、パス **site** > **wwwroot** へのフォルダーを開きます。 下にスクロールして、一覧の最後にある *web.config* ファイルを表示します。
 1. *web.config* ファイルの隣の鉛筆アイコンをクリックします。
-1. **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
+1. **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
 1. **[保存]** を選んで、更新した *web.config* ファイルを保存します。
 1. アプリに対して要求します。
 1. Azure portal に戻ります。 **[開発ツール]** 領域で **[高度なツール]** ブレードを選びます。 **[Go&rarr;]** ボタンを選びます。 新しいブラウザー タブまたはウィンドウで Kudu コンソールが開きます。
@@ -1282,7 +1282,7 @@ ASP.NET Core モジュールの stdout には、アプリケーション イベ�
 
 トラブルシューティングが完了したら、stdout ログを無効にします。
 
-1. Kudu の **診断コンソール** で、パス **site** > **wwwroot** に戻り、 *web.config* ファイルを表示します。 鉛筆アイコンを選んで **web.config** ファイルを再び開きます。
+1. Kudu の **診断コンソール** で、パス **site** > **wwwroot** に戻り、*web.config* ファイルを表示します。 鉛筆アイコンを選んで **web.config** ファイルを再び開きます。
 1. **stdoutLogEnabled** を `false` に設定します。
 1. **[保存]** を選んでファイルを保存します。
 
@@ -1320,7 +1320,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 1. ページの上部にあるナビゲーション バーを使って **[デバッグ コンソール]** を開き、 **[CMD]** を選びます。
 1. パス **site** > **wwwroot** へのフォルダーを開き、下にスクロールして、一覧の最後にある *web.config* ファイルを表示します。
 1. *web.config* ファイルの隣の鉛筆アイコンをクリックします。
-1. **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
+1. **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** パスを `\\?\%home%\LogFiles\stdout` に変更します。
 1. **[保存]** を選んで、更新した *web.config* ファイルを保存します。
 
 続けて診断ログをアクティブにします。
@@ -1354,7 +1354,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 
 アプリケーション イベント ログにアクセスします。
 
-1. [スタート] メニューを開き、 *イベント ビューアー* を検索し、 **イベント ビューアー** アプリを選択します。
+1. [スタート] メニューを開き、*イベント ビューアー* を検索し、**イベント ビューアー** アプリを選択します。
 1. **イベント ビューアー** で **[Windows ログ]** ノードを開きます。
 1. **[Application]** を選択して、アプリケーション イベント ログを開きます。
 1. 失敗したアプリに関連するエラーを検索します。 エラーの *[ソース]* 列には *IIS AspNetCore Module* または *IIS Express AspNetCore Module* の値が表示されます。
@@ -1367,7 +1367,7 @@ stdout ログが有効になっていない場合は、次の手順のように�
 
 アプリが[フレームワークに依存する展開](/dotnet/core/deploying/#framework-dependent-deployments-fdd)の場合:
 
-1. コマンド プロンプトで展開フォルダーに移動し、 *dotnet.exe* 使用してアプリのアセンブリを実行して、アプリを実行します。 次のコマンドで、\<assembly_name> をアプリのアセンブリの名前に置き換えます。`dotnet .\<assembly_name>.dll`。
+1. コマンド プロンプトで展開フォルダーに移動し、*dotnet.exe* 使用してアプリのアセンブリを実行して、アプリを実行します。 次のコマンドで、\<assembly_name> をアプリのアセンブリの名前に置き換えます。`dotnet .\<assembly_name>.dll`。
 1. エラーを示すアプリからのコンソール出力は、すべてコンソール ウィンドウに書き込まれます。
 1. アプリへの要求時にエラーが発生した場合は、Kestrel がリッスンしているホストとポートに要求が送信されます。 既定のホストと post を使用して `http://localhost:5000/` に要求を行います。 アプリが Kestrel のエンドポイント アドレスで正常に応答する場合、問題はホスティングの構成に関連している可能性が高く、アプリ内が原因の可能性は低くなります。
 
@@ -1384,8 +1384,8 @@ stdout ログが有効になっていない場合は、次の手順のように�
 stdout ログを有効にして表示するには:
 
 1. ホスティング システム上のサイトの展開フォルダーに移動します。
-1. *logs* フォルダーが存在しない場合は、フォルダーを作成します。 MSBuild で展開フォルダーに *logs* フォルダーを自動的に作成されるようにする手順については、「 [ディレクトリ構造](xref:host-and-deploy/directory-structure)」のトピックを参照してください。
-1. *web.config* ファイルを編集します。 **stdoutLogEnabled** を `true` に設定し、 **stdoutLogFile** のパスを *logs* フォルダー (たとえば `.\logs\stdout`) を指すように変更します。 パスの `stdout` はログ ファイル名のプレフィックスです。 ログ ファイルの作成時には、タイムスタンプ、プロセス ID、およびファイルの拡張子が自動的に追加されます。 ファイル名のプレフィックスとして `stdout` を使用すると、一般的なログ ファイルの名前は *stdout_20180205184032_5412.log* になります。
+1. *logs* フォルダーが存在しない場合は、フォルダーを作成します。 MSBuild で展開フォルダーに *logs* フォルダーを自動的に作成されるようにする手順については、「[ディレクトリ構造](xref:host-and-deploy/directory-structure)」のトピックを参照してください。
+1. *web.config* ファイルを編集します。 **stdoutLogEnabled** を `true` に設定し、**stdoutLogFile** のパスを *logs* フォルダー (たとえば `.\logs\stdout`) を指すように変更します。 パスの `stdout` はログ ファイル名のプレフィックスです。 ログ ファイルの作成時には、タイムスタンプ、プロセス ID、およびファイルの拡張子が自動的に追加されます。 ファイル名のプレフィックスとして `stdout` を使用すると、一般的なログ ファイルの名前は *stdout_20180205184032_5412.log* になります。
 1. アプリケーション プールの ID に *logs* フォルダーへの書き込みアクセス許可があることを確認します。
 1. 更新した *web.config* ファイルを保存します。
 1. アプリに対して要求します。
@@ -1420,7 +1420,7 @@ stdout ログを有効にして表示するには:
 </aspNetCore>
 ```
 
-`ASPNETCORE_ENVIRONMENT` の環境変数を設定する方法は、インターネットに公開されないステージング サーバーやテスト用サーバーの場合にのみお勧めされます。 トラブルシューティング後は、必ず *web.config* ファイルからこの環境変数を削除してください。 *web.config* で環境変数を設定する方法の詳細については、 [aspNetCore の environmentVariables 子要素](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)を参照してください。
+`ASPNETCORE_ENVIRONMENT` の環境変数を設定する方法は、インターネットに公開されないステージング サーバーやテスト用サーバーの場合にのみお勧めされます。 トラブルシューティング後は、必ず *web.config* ファイルからこの環境変数を削除してください。 *web.config* で環境変数を設定する方法の詳細については、[aspNetCore の environmentVariables 子要素](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)を参照してください。
 
 ### <a name="obtain-data-from-an-app"></a>アプリからデータを取得する
 
@@ -1428,7 +1428,7 @@ stdout ログを有効にして表示するには:
 
 ### <a name="slow-or-hanging-app-iis"></a>遅いアプリまたはハングしているアプリ (IIS)
 
-" *クラッシュ ダンプ* " とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
+"*クラッシュ ダンプ*" とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>アプリのクラッシュまたは例外の発生
 
@@ -1436,13 +1436,13 @@ stdout ログを有効にして表示するには:
 
 1. `c:\dumps` にクラッシュ ダンプ ファイルを保持するフォルダーを作成します。 アプリ プールには、そのフォルダーへの書き込みアクセス権が必要です。
 1. [EnableDumps PowerShell スクリプト](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/EnableDumps.ps1) を実行します。
-   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、 *w3wp.exe* に対するスクリプトを実行します。
+   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、*w3wp.exe* に対するスクリプトを実行します。
 
      ```console
      .\EnableDumps w3wp.exe c:\dumps
      ```
 
-   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、 *dotnet.exe* に対するスクリプトを実行します。
+   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、*dotnet.exe* に対するスクリプトを実行します。
 
      ```console
      .\EnableDumps dotnet.exe c:\dumps
@@ -1450,13 +1450,13 @@ stdout ログを有効にして表示するには:
 
 1. クラッシュが発生する条件の下でアプリを実行します。
 1. クラッシュが発生した後、[DisableDumps PowerShell スクリプト](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/test/troubleshoot-azure-iis/scripts/DisableDumps.ps1)を実行します。
-   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、 *w3wp.exe* に対するスクリプトを実行します。
+   * アプリで [インプロセス ホスティング モデル](xref:host-and-deploy/iis/index#in-process-hosting-model)が使われている場合は、*w3wp.exe* に対するスクリプトを実行します。
 
      ```console
      .\DisableDumps w3wp.exe
      ```
 
-   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、 *dotnet.exe* に対するスクリプトを実行します。
+   * アプリで [アウト プロセス ホスティング モデル](xref:host-and-deploy/iis/index#out-of-process-hosting-model)が使われている場合は、*dotnet.exe* に対するスクリプトを実行します。
 
      ```console
      .\DisableDumps dotnet.exe
@@ -1469,7 +1469,7 @@ stdout ログを有効にして表示するには:
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>アプリが起動時または正常な実行中にハングまたは失敗する
 
-アプリが起動時または正常な実行中に " *ハング* " (応答を停止するがクラッシュしない) または失敗するときは、「 [User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
+アプリが起動時または正常な実行中に "*ハング*" (応答を停止するがクラッシュしない) または失敗するときは、「[User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
 
 #### <a name="analyze-the-dump"></a>ダンプを分析する
 
@@ -1482,7 +1482,7 @@ stdout ログを有効にして表示するには:
 1. *bin* フォルダーと *obj* フォルダーを削除します。
 1. コマンド シェルから [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) を実行して、パッケージ キャッシュをクリアします。
 
-   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、 [NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
+   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、[NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
 
 1. プロジェクトを復元してリビルドします。
 1. アプリを再展開する前に、サーバー上の展開フォルダー内のすべてのファイルを削除します。

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/file-providers
 ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059443"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core でのファイル プロバイダー
@@ -59,7 +59,7 @@ ASP.NET Core は、ファイル プロバイダーを使用してファイル �
 
 <xref:Microsoft.Extensions.FileProviders.IFileInfo.CreateReadStream*?displayProperty=nameWithType> メソッドを使用して、ファイルから情報を読み取ることができます。
 
-*FileProviderSample* サンプル アプリでは、 [依存関係の挿入](xref:fundamentals/dependency-injection)を介してアプリ全体で使用するために、`Startup.ConfigureServices` でファイル プロバイダーを構成する方法を示します。
+*FileProviderSample* サンプル アプリでは、[依存関係の挿入](xref:fundamentals/dependency-injection)を介してアプリ全体で使用するために、`Startup.ConfigureServices` でファイル プロバイダーを構成する方法を示します。
 
 ## <a name="file-provider-implementations"></a>ファイル プロバイダーの実装
 
@@ -115,7 +115,7 @@ var physicalProvider = _env.ContentRootFileProvider;
 
 *FileProviderSample* サンプル アプリでは `ManifestEmbeddedFileProvider` が作成され、現在実行しているアセンブリがそのコンストラクターに渡されます。
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -154,7 +154,7 @@ var manifestEmbeddedProvider =
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>:このプロパティを調べることで、変更があったかどうかを判断できます。
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>:指定したパス文字列に対して変更が検出されたときに呼び出されます。 各変更トークンは、1 つの変更への応答として、関連付けられたコールバックを呼び出すのみです。 定数の監視を有効にするには、<xref:System.Threading.Tasks.TaskCompletionSource`1> を使用するか (以下を参照)、変更への応答として `IChangeToken` インスタンスを再作成します。
 
-*WatchConsole* サンプル アプリでは、 *TextFiles* ディレクトリの *.txt* ファイルが変更されるたびに、メッセージが書き込まれます。
+*WatchConsole* サンプル アプリでは、*TextFiles* ディレクトリの *.txt* ファイルが変更されるたびに、メッセージが書き込まれます。
 
 [!code-csharp[](file-providers/samples/3.x/WatchConsole/Program.cs?name=snippet1)]
 
@@ -162,7 +162,7 @@ Docker コンテナーやネットワーク共有など、一部のファイル 
 
 ### <a name="glob-patterns"></a>glob パターン
 
-ファイル システム パスは、" *glob (または globbing) パターン* " と呼ばれるワイルドカード パターンを使用します。 これらのパターンを使用して、ファイルのグループを指定します。 2 つのワイルドカード文字は、`*` と `**` です。
+ファイル システム パスは、"*glob (または globbing) パターン*" と呼ばれるワイルドカード パターンを使用します。 これらのパターンを使用して、ファイルのグループを指定します。 2 つのワイルドカード文字は、`*` と `**` です。
 
 **`*`**  
 現在のフォルダー レベルにある任意の要素、任意のファイル名、または任意のファイル拡張子を照合します。 照合はファイル パス内の `/` 文字および `.` 文字によって終了します。
@@ -262,7 +262,7 @@ var physicalProvider = _env.ContentRootFileProvider;
 
 サンプル アプリでは `ManifestEmbeddedFileProvider` を作成して、現在実行しているアセンブリをそのコンストラクターに渡します。
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -296,7 +296,7 @@ var manifestEmbeddedProvider =
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>:このプロパティを調べることで、変更があったかどうかを判断できます。
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>:指定したパス文字列に対して変更が検出されたときに呼び出されます。 各変更トークンは、1 つの変更への応答として、関連付けられたコールバックを呼び出すのみです。 定数の監視を有効にするには、<xref:System.Threading.Tasks.TaskCompletionSource`1> を使用するか (以下を参照)、変更への応答として `IChangeToken` インスタンスを再作成します。
 
-サンプル アプリでは、 *WatchConsole* コンソール アプリは、テキスト ファイルが変更されるたびにメッセージを表示するように構成されています。
+サンプル アプリでは、*WatchConsole* コンソール アプリは、テキスト ファイルが変更されるたびにメッセージを表示するように構成されています。
 
 [!code-csharp[](file-providers/samples/2.x/WatchConsole/Program.cs?name=snippet1&highlight=1-2,16,19-20)]
 
@@ -304,7 +304,7 @@ Docker コンテナーやネットワーク共有など、一部のファイル 
 
 ## <a name="glob-patterns"></a>glob パターン
 
-ファイル システム パスは、" *glob (または globbing) パターン* " と呼ばれるワイルドカード パターンを使用します。 これらのパターンを使用して、ファイルのグループを指定します。 2 つのワイルドカード文字は、`*` と `**` です。
+ファイル システム パスは、"*glob (または globbing) パターン*" と呼ばれるワイルドカード パターンを使用します。 これらのパターンを使用して、ファイルのグループを指定します。 2 つのワイルドカード文字は、`*` と `**` です。
 
 **`*`**  
 現在のフォルダー レベルにある任意の要素、任意のファイル名、または任意のファイル拡張子を照合します。 照合はファイル パス内の `/` 文字および `.` 文字によって終了します。

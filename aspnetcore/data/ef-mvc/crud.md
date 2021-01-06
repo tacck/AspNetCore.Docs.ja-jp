@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/crud
 ms.openlocfilehash: 043fe513f370cf63637733b66ca195e7887faab0
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054295"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>チュートリアル: CRUD 機能を実装する - ASP.NET MVC と EF Core
@@ -60,7 +60,7 @@ Students/Index ページのスキャフォールディングされたコード�
 
 ### <a name="route-data"></a>ルート データ
 
-`Details` メソッドに渡すキー値は、" *ルート データ* " から取得します。 ルート データは、モデル バインダーが URL のセグメント内で検出したデータです。 たとえば、既定のルートでは、controller、action、id の各セグメントが指定されています。
+`Details` メソッドに渡すキー値は、"*ルート データ*" から取得します。 ルート データは、モデル バインダーが URL のセグメント内で検出したデータです。 たとえば、既定のルートでは、controller、action、id の各セグメントが指定されています。
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Route&highlight=5)]
 
@@ -130,9 +130,9 @@ Index ページでは、Razor ビューのタグ ヘルパーのステートメ�
 
 `ID` は行が挿入されるときに SQL Server によって自動的に設定される主キー値であるため、`Bind` 属性から ID を削除しました。 ユーザーからの入力によって ID 値が設定されることはありません。
 
-`Bind` 属性以外では、スキャフォールディングされたコードに対して行った変更は try-catch ブロックだけです。 変更を保存するときに、`DbUpdateException` から派生した例外がキャッチされた場合は、汎用的なエラー メッセージが表示されます。 `DbUpdateException` 例外は、プログラミング エラーではなくアプリケーション外の何かが原因で発生する場合があるので、再試行することをお勧めします。 このサンプルでは実装されていませんが、運用品質のアプリケーションでは例外をログに記録します。 詳細については、「 [Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)」(監視とテレメトリ (Azure での実際のクラウド アプリの構築)) の「 **Log for insight** 」(洞察のためのログ) セクションをご覧ください。
+`Bind` 属性以外では、スキャフォールディングされたコードに対して行った変更は try-catch ブロックだけです。 変更を保存するときに、`DbUpdateException` から派生した例外がキャッチされた場合は、汎用的なエラー メッセージが表示されます。 `DbUpdateException` 例外は、プログラミング エラーではなくアプリケーション外の何かが原因で発生する場合があるので、再試行することをお勧めします。 このサンプルでは実装されていませんが、運用品質のアプリケーションでは例外をログに記録します。 詳細については、「[Monitoring and Telemetry (Building Real-World Cloud Apps with Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry)」(監視とテレメトリ (Azure での実際のクラウド アプリの構築)) の「**Log for insight**」(洞察のためのログ) セクションをご覧ください。
 
-`ValidateAntiForgeryToken` 属性は、クロスサイト リクエスト フォージェリ (CSRF) 攻撃を防ぐのに役立ちます。 トークンは、[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) によってビューに自動的に挿入され、ユーザーがフォームを送信するときに追加されます。 トークンは、`ValidateAntiForgeryToken` 属性によって検証されます。 詳細については、 <xref:security/anti-request-forgery> を参照してください。
+`ValidateAntiForgeryToken` 属性は、クロスサイト リクエスト フォージェリ (CSRF) 攻撃を防ぐのに役立ちます。 トークンは、[FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) によってビューに自動的に挿入され、ユーザーがフォームを送信するときに追加されます。 トークンは、`ValidateAntiForgeryToken` 属性によって検証されます。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 <a id="overpost"></a>
 
@@ -283,7 +283,7 @@ HttpPost の `Delete` アクション メソッド (名前は `DeleteConfirmed`)
 
 データベース接続が保持しているリソースを解放するには、使い終わったコンテキスト インスタンスをできるだけ早く破棄する必要があります。 ASP.NET Core に組み込まれている[依存関係の挿入](../../fundamentals/dependency-injection.md)が、そのタスクを自動的に行います。
 
-*Startup.cs* で、 [AddDbContext 拡張メソッド](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs)を呼び出して、ASP.NET Core DI コンテナー内の `DbContext` クラスをプロビジョニングします。 このメソッドは、サービスの有効期間を既定で `Scoped` に設定します。 `Scoped` はコンテキスト オブジェクトの有効期間が Web 要求の有効期間と一致することを意味し、Web 要求の最後に `Dispose` メソッドが自動的に呼び出されます。
+*Startup.cs* で、[AddDbContext 拡張メソッド](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs)を呼び出して、ASP.NET Core DI コンテナー内の `DbContext` クラスをプロビジョニングします。 このメソッドは、サービスの有効期間を既定で `Scoped` に設定します。 `Scoped` はコンテキスト オブジェクトの有効期間が Web 要求の有効期間と一致することを意味し、Web 要求の最後に `Dispose` メソッドが自動的に呼び出されます。
 
 ## <a name="handle-transactions"></a>トランザクションを処理する
 

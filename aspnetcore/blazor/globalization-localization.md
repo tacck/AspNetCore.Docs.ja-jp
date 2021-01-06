@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/globalization-localization
 ms.openlocfilehash: f8f261f25d854a9bf36ad3299f4af392d5c4fafd
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93055881"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>ASP.NET Core Blazor のグローバリゼーションおよびローカライズ
@@ -37,8 +37,8 @@ ms.locfileid: "93055881"
 
 現在、サポートされている ASP.NET Core のローカライズ シナリオは限られています。
 
-* <xref:Microsoft.Extensions.Localization.IStringLocalizer> と <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> は、Blazor アプリで " *サポートされています* "。
-* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、<xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>、データ注釈のローカライズは ASP.NET Core の MVC シナリオであり、Blazor アプリでは " **サポートされていません** "。
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> と <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> は、Blazor アプリで "*サポートされています*"。
+* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>、<xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer>、データ注釈のローカライズは ASP.NET Core の MVC シナリオであり、Blazor アプリでは "**サポートされていません**"。
 
 詳細については、「<xref:fundamentals/localization>」を参照してください。
 
@@ -181,7 +181,7 @@ cookie を使用すると、WebSocket 接続によってカルチャを正しく
 
 #### <a name="provide-ui-to-choose-the-culture"></a>カルチャを選択するための UI を提供する
 
-ユーザーがカルチャを選択できるように UI を提供するには、" *リダイレクト ベースのアプローチ* " をお勧めします。 このプロセスは、セキュリティで保護されたリソースにユーザーがアクセスしようとすると Web アプリで発生する処理に似ています。 ユーザーはサインイン ページにリダイレクトされ、元のリソースに再びリダイレクトされます。 
+ユーザーがカルチャを選択できるように UI を提供するには、"*リダイレクト ベースのアプローチ*" をお勧めします。 このプロセスは、セキュリティで保護されたリソースにユーザーがアクセスしようとすると Web アプリで発生する処理に似ています。 ユーザーはサインイン ページにリダイレクトされ、元のリソースに再びリダイレクトされます。 
 
 アプリでは、コントローラーへのリダイレクトによって、ユーザーが選択したカルチャが保持されます。 コントローラーによって、ユーザーが選択したカルチャが cookie に設定され、ユーザーは元の URI にリダイレクトされます。
 

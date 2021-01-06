@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/working-with-sql
 ms.openlocfilehash: c082457258346637499b8ea8000dd8792931112f
-ms.sourcegitcommit: 91e14f1e2a25c98a57c2217fe91b172e0ff2958c
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/10/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94422653"
 ---
 # <a name="part-5-work-with-a-database-in-an-aspnet-core-mvc-app"></a>パート 5、ASP.NET Core MVC アプリでのデータベースの操作
@@ -30,7 +30,7 @@ ms.locfileid: "94422653"
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、 *Startup.cs* ファイルの `ConfigureServices` メソッドで [依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
+`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、*Startup.cs* ファイルの `ConfigureServices` メソッドで [依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -142,7 +142,7 @@ DB 内のすべてのレコードを削除します (そのため Seed メソッ
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、 *Startup.cs* ファイルの `ConfigureServices` メソッドで [依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
+`MvcMovieContext` オブジェクトは、データベースへの接続と、データベース レコードへの `Movie` オブジェクトのマッピングのタスクを処理します。 データベース コンテキストは、*Startup.cs* ファイルの `ConfigureServices` メソッドで [依存性の注入](xref:fundamentals/dependency-injection)コンテナーに登録されます。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

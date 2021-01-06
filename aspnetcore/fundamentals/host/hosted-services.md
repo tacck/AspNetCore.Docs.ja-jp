@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/host/hosted-services
 ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061081"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core でホステッド サービスを使用するバックグラウンド タスク
@@ -54,7 +54,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 ## <a name="package"></a>Package
 
-ワーカー サービス テンプレートに基づくアプリは `Microsoft.NET.Sdk.Worker` SDK を使用し、[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) パッケージへの明示的なパッケージ参照を含んでいます。 たとえば、サンプル アプリのプロジェクト ファイル ( *BackgroundTasksSample.csproj* ) を参照してください。
+ワーカー サービス テンプレートに基づくアプリは `Microsoft.NET.Sdk.Worker` SDK を使用し、[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) パッケージへの明示的なパッケージ参照を含んでいます。 たとえば、サンプル アプリのプロジェクト ファイル (*BackgroundTasksSample.csproj*) を参照してください。
 
 `Microsoft.NET.Sdk.Web` SDK を使用する Web アプリの場合、[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) パッケージは共有フレームワークから暗黙的に参照されます。 アプリのプロジェクト ファイル内の明示的なパッケージ参照は必要ありません。
 
@@ -62,7 +62,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 <xref:Microsoft.Extensions.Hosting.IHostedService> インターフェイスは、ホストによって管理されるオブジェクトの 2 つのメソッドを定義します。
 
-* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` には、バックグラウンド タスクを開始するロジックが含まれています。 `StartAsync` は、以下よりも " *前に* " 呼び出されます。
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*): `StartAsync` には、バックグラウンド タスクを開始するロジックが含まれています。 `StartAsync` は、以下よりも "*前に*" 呼び出されます。
 
   * アプリの要求処理パイプラインが構成される (`Startup.Configure`)。
   * サーバーが起動して、[IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) がトリガーされる。
@@ -128,7 +128,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 前の `DoWork` の実行が完了するまで <xref:System.Threading.Timer> は待機されないため、ここで示したアプローチはすべてのシナリオに適しているとは限りません。 [Interlocked.Increment](xref:System.Threading.Interlocked.Increment*) は、アトミック操作として実行カウンターをインクリメントするために使用されされます。これにより、複数のスレッドによって `executionCount` が同時に更新されなくなります。
 
-サービスは、`AddHostedService` 拡張メソッドを使用して `IHostBuilder.ConfigureServices` ( *Program.cs* ) に登録されます。
+サービスは、`AddHostedService` 拡張メソッドを使用して `IHostBuilder.ConfigureServices` (*Program.cs*) に登録されます。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -147,7 +147,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-サービスは `IHostBuilder.ConfigureServices` ( *Program.cs* ) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
+サービスは `IHostBuilder.ConfigureServices` (*Program.cs*) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -175,7 +175,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-サービスは `IHostBuilder.ConfigureServices` ( *Program.cs* ) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
+サービスは `IHostBuilder.ConfigureServices` (*Program.cs*) に登録されています。 ホステッド サービスは、`AddHostedService` 拡張メソッドを使用して登録されます。
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 

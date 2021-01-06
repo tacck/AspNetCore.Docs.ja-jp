@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/websockets
 ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057779"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core での Websocket のサポート
@@ -93,7 +93,7 @@ ms.locfileid: "93057779"
 
 WebSocket 要求はどの URL からも受け取る場合がありますが、このサンプル コードでは `/ws` の要求のみを受け取ります。
 
-WebSocket を使用するとき、接続中、ミドルウェア パイプラインの実行を維持する **必要があります** 。 ミドルウェア パイプラインの修了後に WebSocket メッセージを送信するか、受信する場合、次のような例外を受け取ることがあります。
+WebSocket を使用するとき、接続中、ミドルウェア パイプラインの実行を維持する **必要があります**。 ミドルウェア パイプラインの修了後に WebSocket メッセージを送信するか、受信する場合、次のような例外を受け取ることがあります。
 
 ```
 System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake. ---> System.ObjectDisposedException: Cannot write to the response body, the response has completed.
@@ -128,7 +128,7 @@ WebSocket の終了例外は、アクション メソッドから早く戻りす
 
 ## <a name="websocket-origin-restriction"></a>WebSocket の配信元の制限
 
-CORS で提供される保護は、WebSocket には適用されません。 ブラウザーでは以下を実行 **しません** 。
+CORS で提供される保護は、WebSocket には適用されません。 ブラウザーでは以下を実行 **しません**。
 
 * CORS の事前要求を実行する。
 * WebSocket 要求を行うときに `Access-Control` ヘッダーに指定された制限を考慮する。
@@ -140,7 +140,7 @@ CORS で提供される保護は、WebSocket には適用されません。 ブ�
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSocketsOptionsAO&highlight=6-7)]
 
 > [!NOTE]
-> `Origin` ヘッダーは、クライアントによって制御され、`Referer` のように偽装することができます。 これらのヘッダーを認証メカニズムとして使用 **しないでください** 。
+> `Origin` ヘッダーは、クライアントによって制御され、`Referer` のように偽装することができます。 これらのヘッダーを認証メカニズムとして使用 **しないでください**。
 
 ::: moniker-end
 
@@ -158,7 +158,7 @@ Windows Server 2012 以降で WebSocket プロトコルのサポートを有効�
 > [!NOTE]
 > これらの手順は、IIS Express を使用する場合は必要ありません
 
-1. **[管理]** メニューから **役割と機能の追加** ウィザードを使用するか、 **サーバー マネージャー** にあるリンクを使用します。
+1. **[管理]** メニューから **役割と機能の追加** ウィザードを使用するか、**サーバー マネージャー** にあるリンクを使用します。
 1. **[役割ベースまたは機能ベースのインストール]** を選択します。 **[次へ]** を選択します。
 1. 適切なサーバーを選択します (既定では、ローカル サーバーが選択されます)。 **[次へ]** を選択します。
 1. **[役割]** ツリーで **[Web サーバー (IIS)]** を展開し、 **[Web サーバー]** 、 **[アプリケーション開発]** の順に展開します。

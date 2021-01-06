@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: fundamentals/app-state
 ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93051409"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core でのセッションと状態の管理
@@ -88,7 +88,7 @@ ASP.NET Core により、セッション ID を含む cookie がクライアン�
 
 メモリ内キャッシュ プロバイダーは、アプリが存在するサーバーのメモリにセッション データを格納します。 サーバー ファームのシナリオでは次のようになります。
 
-* " *固定セッション* " を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
+* "*固定セッション*" を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
 * セッション cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション cookie が読み取られるようにするには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
 
 ### <a name="configure-session-state"></a>セッション状態を構成する
@@ -142,7 +142,7 @@ cookie セッションの既定値をオーバーライドするには、<xref:M
 
 アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
 
-セッション状態は " *ロックなし* " です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は *一貫性のあるセッション* として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
+セッション状態は "*ロックなし*" です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は *一貫性のあるセッション* として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
 
 ### <a name="set-and-get-session-values"></a>セッション値の設定および取得
 
@@ -201,7 +201,7 @@ ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc
 
 [!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/IndexPeek.cshtml?range=1-14)]
 
-前のマークアップでは、`Peek` が使用されているため、要求の最後に `TempData["Message"]` が削除 **されません** 。 ページを更新すると `TempData["Message"]` のコンテンツが表示されます。
+前のマークアップでは、`Peek` が使用されているため、要求の最後に `TempData["Message"]` が削除 **されません**。 ページを更新すると `TempData["Message"]` のコンテンツが表示されます。
 
 次のマークアップは前のコードと似ていますが、`Keep` を使用して要求の最後にデータを保存しています。
 
@@ -241,7 +241,7 @@ cookie ベース TempData プロバイダーは既定で有効になります。
 
 限られた量のデータを要求間で渡すことができます。新しい要求のクエリ文字列にそれを追加します。 これは、リンクと埋め込まれた状態がメールまたはソーシャル ネットワークを通して共有されるよう、永久的に状態をキャプチャするのに役立ちます。 URL クエリ文字列はパブリックであるため、機密データにはクエリ文字列を使わないでください。
 
-意図しない共有に加えて、クエリ文字列にデータを含めると、アプリが[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃に晒される可能性があります。 保存されたセッション状態を CSRF 攻撃から保護する必要があります。 詳細については、 <xref:security/anti-request-forgery> を参照してください。
+意図しない共有に加えて、クエリ文字列にデータを含めると、アプリが[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃に晒される可能性があります。 保存されたセッション状態を CSRF 攻撃から保護する必要があります。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 ## <a name="hidden-fields"></a>非表示フィールド
 
@@ -355,7 +355,7 @@ ASP.NET Core は、セッション ID を含み、要求ごとに各アプリに
 
 メモリ内キャッシュ プロバイダーは、アプリが存在するサーバーのメモリにセッション データを格納します。 サーバー ファームのシナリオでは次のようになります。
 
-* " *固定セッション* " を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
+* "*固定セッション*" を使用して、個々のサーバー上の特定のアプリのインスタンスに、各セッションを結び付けます。 [Azure App Service](https://azure.microsoft.com/services/app-service/) は[アプリケーション要求ルーティング処理 (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) を使って、既定で固定セッションを強制的に使用します。 ただし、固定セッションは拡張性に影響を与え、Web アプリの更新を複雑にすることがあります。 もっとよい方法は、Redis または SQL Server の分散キャッシュを使用することで、固定セッションを必要としません。 詳細については、「<xref:performance/caching/distributed>」を参照してください。
 * セッション cookie は <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> によって暗号化されます。 各コンピューターでセッション cookie が読み取られるようにするには、データ保護を適切に構成する必要があります。 詳細については、<xref:security/data-protection/introduction> および[キー ストレージ プロバイダー](xref:security/data-protection/implementation/key-storage-providers)に関する記事をご覧ください。
 
 ### <a name="configure-session-state"></a>セッション状態を構成する
@@ -402,7 +402,7 @@ cookie セッションの既定値をオーバーライドするには、`Sessio
 
 アプリでは、<xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> プロパティを使用して、サーバーのキャッシュ内の内容が破棄されるまでのセッションのアイドル時間が決定されます。 このプロパティは cookie の有効期限に依存しません。 要求が[セッション ミドルウェア](xref:Microsoft.AspNetCore.Session.SessionMiddleware)を通過するたびにタイムアウトがリセットされます。
 
-セッション状態は " *ロックなし* " です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は *一貫性のあるセッション* として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
+セッション状態は "*ロックなし*" です。 2 つの要求がセッションの内容を同時に変更しようとした場合、最後の要求が最初の要求をオーバーライドします。 `Session` は *一貫性のあるセッション* として実装されます。つまり、コンテンツは全部まとめて保管されます。 2 つの要求が異なるセッション値を変更しようとしたとき、最後の要求が最初の要求によって行われたセッションの変更をオーバーライドすることがあります。
 
 ### <a name="set-and-get-session-values"></a>セッション値の設定および取得
 
@@ -458,7 +458,7 @@ ASP.NET Core によって、Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc
 
 [!code-cshtml[](app-state/3.0samples/RazorPagesContacts/Pages/Customers/IndexPeek.cshtml?range=1-14)]
 
-前のマークアップでは、`Peek` が使用されているため、要求の最後に `TempData["Message"]` が削除 **されません** 。 ページを更新すると `TempData["Message"]` が表示されます。
+前のマークアップでは、`Peek` が使用されているため、要求の最後に `TempData["Message"]` が削除 **されません**。 ページを更新すると `TempData["Message"]` が表示されます。
 
 次のマークアップは前のコードと似ていますが、`Keep` を使用して要求の最後にデータを保存しています。
 
@@ -504,7 +504,7 @@ cookie ベース TempData プロバイダーは既定で有効になります。
 
 限られた量のデータを要求間で渡すことができます。新しい要求のクエリ文字列にそれを追加します。 これは、リンクと埋め込まれた状態がメールまたはソーシャル ネットワークを通して共有されるよう、永久的に状態をキャプチャするのに役立ちます。 URL クエリ文字列はパブリックであるため、機密データにはクエリ文字列を使わないでください。
 
-意図しない共有が発生するだけでなく、クエリ文字列にデータを含めると、[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃の機会を与えてしまいます。認証中、ユーザーをだまして悪意のあるサイトに誘導します。 攻撃者はアプリからユーザー データを盗んだり、ユーザーになりすまして悪意のある行為を行ったりできます。 保存されるアプリまたはセッション状態は CSRF 攻撃を防ぐ必要があります。 詳細については、 <xref:security/anti-request-forgery> を参照してください。
+意図しない共有が発生するだけでなく、クエリ文字列にデータを含めると、[クロスサイト リクエスト フォージェリ (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) 攻撃の機会を与えてしまいます。認証中、ユーザーをだまして悪意のあるサイトに誘導します。 攻撃者はアプリからユーザー データを盗んだり、ユーザーになりすまして悪意のある行為を行ったりできます。 保存されるアプリまたはセッション状態は CSRF 攻撃を防ぐ必要があります。 詳細については、「<xref:security/anti-request-forgery>」を参照してください。
 
 ## <a name="hidden-fields"></a>非表示フィールド
 

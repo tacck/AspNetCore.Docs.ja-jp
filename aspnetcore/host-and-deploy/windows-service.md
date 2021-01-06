@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/windows-service
 ms.openlocfilehash: 31a738e7aa8779171dfa09a5678d7240b8f62343
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057233"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows サービスでの ASP.NET Core のホスト
@@ -58,7 +58,7 @@ ASP.NET Core ワーカー サービス テンプレートは、実行時間が�
 * [コンテンツ ルート](xref:fundamentals/index#content-root)を [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory) に設定します。 詳しくは、「[現在のディレクトリとコンテンツのルート](#current-directory-and-content-root)」セクションをご覧ください。
 * イベント ログへのログ記録を有効にします。
   * アプリケーション名が既定のソース名として使用されます。
-  * 既定のログ レベルは、ホストを構築するために `CreateDefaultBuilder` が呼び出される ASP.NET Core テンプレートに基づくアプリに対して " *警告* " 以上です。
+  * 既定のログ レベルは、ホストを構築するために `CreateDefaultBuilder` が呼び出される ASP.NET Core テンプレートに基づくアプリに対して "*警告*" 以上です。
   * 既定のログ レベルを、 *appsettings.json* /*appsettings.{Environment}.json* の `Logging:EventLog:LogLevel:Default` キーまたは他の構成プロバイダーでオーバーライドします。
   * 管理者のみが新しいイベント ソースを作成できます。 アプリケーション名を使用して、イベント ソースを作成できない場合、警告が *アプリケーション* ソースに記録され、イベント ログが無効になります。
 
@@ -97,9 +97,9 @@ Razor Pages または MVC フレームワークを使用する Web アプリ ベ
 
 ### <a name="framework-dependent-deployment-fdd"></a>フレームワーク依存型展開 (FDD)
 
-フレームワーク依存型展開 (FDD) は、ターゲット システムに .NET Core のシステム全体の共有バージョンが存在することに依存します。 この記事のガイダンスに従って、FDD シナリオを採用すると、 *フレームワーク依存型実行可能ファイル* と呼ばれる実行可能ファイル ( *.exe* ) が SDK によって生成されます。
+フレームワーク依存型展開 (FDD) は、ターゲット システムに .NET Core のシステム全体の共有バージョンが存在することに依存します。 この記事のガイダンスに従って、FDD シナリオを採用すると、*フレームワーク依存型実行可能ファイル* と呼ばれる実行可能ファイル ( *.exe*) が SDK によって生成されます。
 
-[Web SDK](#sdk) を使用している場合、 *web.config* ファイル (通常 ASP.NET Core アプリを発行する際に生成されます) は、Windows サービス アプリに対しては必要ありません。 *web.config* ファイルの作成を無効にするには、`true` に設定した `<IsTransformWebConfigDisabled>` プロパティを追加します。
+[Web SDK](#sdk) を使用している場合、*web.config* ファイル (通常 ASP.NET Core アプリを発行する際に生成されます) は、Windows サービス アプリに対しては必要ありません。 *web.config* ファイルの作成を無効にするには、`true` に設定した `<IsTransformWebConfigDisabled>` プロパティを追加します。
 
 ```xml
 <PropertyGroup>
@@ -256,7 +256,7 @@ Windows サービスに対して <xref:System.IO.Directory.GetCurrentDirectory*>
 
 アプリの既定設定ファイルである *appsettings.json* と *appsettings.{Environment}.json* は、[ホストの構築中に CreateDefaultBuilder](xref:fundamentals/host/generic-host#set-up-a-host) を呼び出すことで、アプリのコンテンツ ルートから読み込まれます。
 
-<xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> の開発者コードによって読み込まれた他の設定ファイルについては、<xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> を呼び出す必要はありません。 次の例では、 *custom_settings.json* ファイルはアプリのコンテンツ ルートに存在しており、明示的にベース パスを設定しなくても読み込まれます。
+<xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> の開発者コードによって読み込まれた他の設定ファイルについては、<xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> を呼び出す必要はありません。 次の例では、*custom_settings.json* ファイルはアプリのコンテンツ ルートに存在しており、明示的にベース パスを設定しなくても読み込まれます。
 
 [!code-csharp[](windows-service/samples_snapshot/CustomSettingsExample.cs?highlight=13)]
 
@@ -273,12 +273,12 @@ Windows サービス アプリのトラブルシューティングについて�
 ### <a name="common-errors"></a>一般的なエラー
 
 * PowerShell の以前のバージョンまたはプレリリース バージョンが使用されています。
-* 登録されたサービスに、 [dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの **発行済み** 出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
+* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの **発行済み** 出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
   * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
   * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
 * サービスが実行中の状態ではありません。
 * アプリに使用されるリソース (証明書など) のパスが正しくありません。 Windows サービスのベース パスは *c:\\Windows\\System32* です。
-* " *サービスとしてログオンする* " アクセス権がユーザーにありません。
+* "*サービスとしてログオンする*" アクセス権がユーザーにありません。
 * `New-Service` PowerShell コマンドの実行時に、ユーザーのパスワードの有効期限が切れていたか、正しく渡されていません。
 * アプリに ASP.NET Core 認証が必要ですが、セキュリティで保護された接続 (HTTPS) 用に構成されていません。
 * 要求 URL ポートが正しくないか、アプリで正しく構成されていません。
@@ -287,7 +287,7 @@ Windows サービス アプリのトラブルシューティングについて�
 
 システム イベント ログとアプリケーション イベント ログにアクセスします。
 
-1. [スタート] メニューを開き、 *イベント ビューアー* を検索し、 **イベント ビューアー** アプリを選択します。
+1. [スタート] メニューを開き、*イベント ビューアー* を検索し、**イベント ビューアー** アプリを選択します。
 1. **イベント ビューアー** で **[Windows ログ]** ノードを開きます。
 1. **[システム]** を選択してシステム イベント ログを開きます。 **[Application]** を選択して、アプリケーション イベント ログを開きます。
 1. 失敗したアプリに関連するエラーを検索します。
@@ -303,14 +303,14 @@ Windows サービス アプリのトラブルシューティングについて�
 1. *bin* フォルダーと *obj* フォルダーを削除します。
 1. コマンド シェルから [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) を実行して、パッケージ キャッシュをクリアします。
 
-   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、 [NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
+   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、[NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
 
 1. プロジェクトを復元してリビルドします。
 1. アプリを再展開する前に、サーバー上の展開フォルダー内のすべてのファイルを削除します。
 
 ### <a name="slow-or-hanging-app"></a>アプリの速度低下またはハング
 
-" *クラッシュ ダンプ* " とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
+"*クラッシュ ダンプ*" とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>アプリのクラッシュまたは例外の発生
 
@@ -337,7 +337,7 @@ Windows サービス アプリのトラブルシューティングについて�
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>アプリが起動時または正常な実行中にハングまたは失敗する
 
-アプリが起動時または正常な実行中に " *ハング* " (応答を停止するがクラッシュしない) または失敗するときは、「 [User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
+アプリが起動時または正常な実行中に "*ハング*" (応答を停止するがクラッシュしない) または失敗するときは、「[User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
 
 #### <a name="analyze-the-dump"></a>ダンプを分析する
 
@@ -399,9 +399,9 @@ Razor Pages または MVC フレームワークを使用する Web アプリ ベ
 
 ### <a name="framework-dependent-deployment-fdd"></a>フレームワーク依存型展開 (FDD)
 
-フレームワーク依存型展開 (FDD) は、ターゲット システムに .NET Core のシステム全体の共有バージョンが存在することに依存します。 この記事のガイダンスに従って、FDD シナリオを採用すると、 *フレームワーク依存型実行可能ファイル* と呼ばれる実行可能ファイル ( *.exe* ) が SDK によって生成されます。
+フレームワーク依存型展開 (FDD) は、ターゲット システムに .NET Core のシステム全体の共有バージョンが存在することに依存します。 この記事のガイダンスに従って、FDD シナリオを採用すると、*フレームワーク依存型実行可能ファイル* と呼ばれる実行可能ファイル ( *.exe*) が SDK によって生成されます。
 
-Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) にはターゲット フレームワークが含まれます。 次の例では、RID が `win7-x64` に設定されています。 `<SelfContained>` プロパティが `false` に設定されている。 これらのプロパティによって、Windows 用の実行可能ファイル ( *.exe* ) と共有 .NET Core フレームワークに依存するアプリを生成するよう SDK に指示します。
+Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) にはターゲット フレームワークが含まれます。 次の例では、RID が `win7-x64` に設定されています。 `<SelfContained>` プロパティが `false` に設定されている。 これらのプロパティによって、Windows 用の実行可能ファイル ( *.exe*) と共有 .NET Core フレームワークに依存するアプリを生成するよう SDK に指示します。
 
 *web.config* ファイル (通常 ASP.NET Core アプリを発行する際に生成されます) は、Windows サービス アプリに対しては必要ありません。 *web.config* ファイルの作成を無効にするには、`true` に設定した `<IsTransformWebConfigDisabled>` プロパティを追加します。
 
@@ -607,12 +607,12 @@ Windows サービス アプリのトラブルシューティングについて�
 ### <a name="common-errors"></a>一般的なエラー
 
 * PowerShell の以前のバージョンまたはプレリリース バージョンが使用されています。
-* 登録されたサービスに、 [dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの **発行済み** 出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
+* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの **発行済み** 出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
   * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
   * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
 * サービスが実行中の状態ではありません。
 * アプリに使用されるリソース (証明書など) のパスが正しくありません。 Windows サービスのベース パスは *c:\\Windows\\System32* です。
-* " *サービスとしてログオンする* " アクセス権がユーザーにありません。
+* "*サービスとしてログオンする*" アクセス権がユーザーにありません。
 * `New-Service` PowerShell コマンドの実行時に、ユーザーのパスワードの有効期限が切れていたか、正しく渡されていません。
 * アプリに ASP.NET Core 認証が必要ですが、セキュリティで保護された接続 (HTTPS) 用に構成されていません。
 * 要求 URL ポートが正しくないか、アプリで正しく構成されていません。
@@ -621,7 +621,7 @@ Windows サービス アプリのトラブルシューティングについて�
 
 システム イベント ログとアプリケーション イベント ログにアクセスします。
 
-1. [スタート] メニューを開き、 *イベント ビューアー* を検索し、 **イベント ビューアー** アプリを選択します。
+1. [スタート] メニューを開き、*イベント ビューアー* を検索し、**イベント ビューアー** アプリを選択します。
 1. **イベント ビューアー** で **[Windows ログ]** ノードを開きます。
 1. **[システム]** を選択してシステム イベント ログを開きます。 **[Application]** を選択して、アプリケーション イベント ログを開きます。
 1. 失敗したアプリに関連するエラーを検索します。
@@ -637,14 +637,14 @@ Windows サービス アプリのトラブルシューティングについて�
 1. *bin* フォルダーと *obj* フォルダーを削除します。
 1. コマンド シェルから [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) を実行して、パッケージ キャッシュをクリアします。
 
-   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、 [NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
+   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、[NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
 
 1. プロジェクトを復元してリビルドします。
 1. アプリを再展開する前に、サーバー上の展開フォルダー内のすべてのファイルを削除します。
 
 ### <a name="slow-or-hanging-app"></a>アプリの速度低下またはハング
 
-" *クラッシュ ダンプ* " とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
+"*クラッシュ ダンプ*" とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>アプリのクラッシュまたは例外の発生
 
@@ -671,7 +671,7 @@ Windows サービス アプリのトラブルシューティングについて�
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>アプリが起動時または正常な実行中にハングまたは失敗する
 
-アプリが起動時または正常な実行中に " *ハング* " (応答を停止するがクラッシュしない) または失敗するときは、「 [User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
+アプリが起動時または正常な実行中に "*ハング*" (応答を停止するがクラッシュしない) または失敗するときは、「[User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
 
 #### <a name="analyze-the-dump"></a>ダンプを分析する
 
@@ -733,11 +733,11 @@ Razor Pages または MVC フレームワークを使用する Web アプリ ベ
 
 ### <a name="framework-dependent-deployment-fdd"></a>フレームワーク依存型展開 (FDD)
 
-フレームワーク依存型展開 (FDD) は、ターゲット システムに .NET Core のシステム全体の共有バージョンが存在することに依存します。 この記事のガイダンスに従って、FDD シナリオを採用すると、 *フレームワーク依存型実行可能ファイル* と呼ばれる実行可能ファイル ( *.exe* ) が SDK によって生成されます。
+フレームワーク依存型展開 (FDD) は、ターゲット システムに .NET Core のシステム全体の共有バージョンが存在することに依存します。 この記事のガイダンスに従って、FDD シナリオを採用すると、*フレームワーク依存型実行可能ファイル* と呼ばれる実行可能ファイル ( *.exe*) が SDK によって生成されます。
 
-Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) にはターゲット フレームワークが含まれます。 次の例では、RID が `win7-x64` に設定されています。 `<SelfContained>` プロパティが `false` に設定されている。 これらのプロパティによって、Windows 用の実行可能ファイル ( *.exe* ) と共有 .NET Core フレームワークに依存するアプリを生成するよう SDK に指示します。
+Windows [ランタイム識別子 (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>](/dotnet/core/tools/csproj#runtimeidentifier)) にはターゲット フレームワークが含まれます。 次の例では、RID が `win7-x64` に設定されています。 `<SelfContained>` プロパティが `false` に設定されている。 これらのプロパティによって、Windows 用の実行可能ファイル ( *.exe*) と共有 .NET Core フレームワークに依存するアプリを生成するよう SDK に指示します。
 
-`<UseAppHost>` プロパティが `true` に設定されている。 このプロパティによって、サービスに FDD のアクティブ化パス (実行可能ファイル、 *.exe* ) を指定します。
+`<UseAppHost>` プロパティが `true` に設定されている。 このプロパティによって、サービスに FDD のアクティブ化パス (実行可能ファイル、 *.exe*) を指定します。
 
 *web.config* ファイル (通常 ASP.NET Core アプリを発行する際に生成されます) は、Windows サービス アプリに対しては必要ありません。 *web.config* ファイルの作成を無効にするには、`true` に設定した `<IsTransformWebConfigDisabled>` プロパティを追加します。
 
@@ -944,12 +944,12 @@ Windows サービス アプリのトラブルシューティングについて�
 ### <a name="common-errors"></a>一般的なエラー
 
 * PowerShell の以前のバージョンまたはプレリリース バージョンが使用されています。
-* 登録されたサービスに、 [dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの **発行済み** 出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
+* 登録されたサービスに、[dotnet publish](/dotnet/core/tools/dotnet-publish) コマンドからのアプリの **発行済み** 出力が使用されません。 [dotnet build](/dotnet/core/tools/dotnet-build) コマンドの出力が、アプリの展開でサポートされていません。 発行された資産は、展開の種類に応じて次のいずれかのフォルダーにあります。
   * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
   * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
 * サービスが実行中の状態ではありません。
 * アプリに使用されるリソース (証明書など) のパスが正しくありません。 Windows サービスのベース パスは *c:\\Windows\\System32* です。
-* " *サービスとしてログオンする* " アクセス権がユーザーにありません。
+* "*サービスとしてログオンする*" アクセス権がユーザーにありません。
 * `New-Service` PowerShell コマンドの実行時に、ユーザーのパスワードの有効期限が切れていたか、正しく渡されていません。
 * アプリに ASP.NET Core 認証が必要ですが、セキュリティで保護された接続 (HTTPS) 用に構成されていません。
 * 要求 URL ポートが正しくないか、アプリで正しく構成されていません。
@@ -958,7 +958,7 @@ Windows サービス アプリのトラブルシューティングについて�
 
 システム イベント ログとアプリケーション イベント ログにアクセスします。
 
-1. [スタート] メニューを開き、 *イベント ビューアー* を検索し、 **イベント ビューアー** アプリを選択します。
+1. [スタート] メニューを開き、*イベント ビューアー* を検索し、**イベント ビューアー** アプリを選択します。
 1. **イベント ビューアー** で **[Windows ログ]** ノードを開きます。
 1. **[システム]** を選択してシステム イベント ログを開きます。 **[Application]** を選択して、アプリケーション イベント ログを開きます。
 1. 失敗したアプリに関連するエラーを検索します。
@@ -974,14 +974,14 @@ Windows サービス アプリのトラブルシューティングについて�
 1. *bin* フォルダーと *obj* フォルダーを削除します。
 1. コマンド シェルから [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals) を実行して、パッケージ キャッシュをクリアします。
 
-   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、 [NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
+   パッケージ キャッシュをクリアするには、[nuget.exe](https://www.nuget.org/downloads) ツールを使用して `nuget locals all -clear` コマンドを実行する方法もあります。 *nuget.exe* は、Windows デスクトップ オペレーティング システムにバンドルされているインストールではなく、[NuGet Web サイト](https://www.nuget.org/downloads)から別に入手する必要があります。
 
 1. プロジェクトを復元してリビルドします。
 1. アプリを再展開する前に、サーバー上の展開フォルダー内のすべてのファイルを削除します。
 
 ### <a name="slow-or-hanging-app"></a>アプリの速度低下またはハング
 
-" *クラッシュ ダンプ* " とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
+"*クラッシュ ダンプ*" とはシステムのメモリのスナップショットであり、アプリのクラッシュ、起動の失敗、遅いアプリの原因を突き止めるのに役立ちます。
 
 #### <a name="app-crashes-or-encounters-an-exception"></a>アプリのクラッシュまたは例外の発生
 
@@ -1008,7 +1008,7 @@ Windows サービス アプリのトラブルシューティングについて�
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>アプリが起動時または正常な実行中にハングまたは失敗する
 
-アプリが起動時または正常な実行中に " *ハング* " (応答を停止するがクラッシュしない) または失敗するときは、「 [User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
+アプリが起動時または正常な実行中に "*ハング*" (応答を停止するがクラッシュしない) または失敗するときは、「[User-Mode Dump Files:Choosing the Best Tool](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)」(ユーザー モード ダンプ ファイル: 最適なツールの選択) を参照し、適切なツールを選択してダンプを生成します。
 
 #### <a name="analyze-the-dump"></a>ダンプを分析する
 

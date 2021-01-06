@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/migrations
 ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061107"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>パート 4、ASP.NET Core の Razor ページと EF Core の移行
@@ -46,7 +46,7 @@ ms.locfileid: "93061107"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**SQL Server オブジェクトエクスプローラー** (SSOX) を使用してデータベースを削除するか、 **パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
+**SQL Server オブジェクトエクスプローラー** (SSOX) を使用してデータベースを削除するか、**パッケージ マネージャー コンソール** (PMC) で次のコマンドを実行します。
 
 ```powershell
 Drop-Database
@@ -60,7 +60,7 @@ Drop-Database
   dotnet tool install --global dotnet-ef
   ```
 
-* コマンド プロンプトで、プロジェクト フォルダーに移動します。 プロジェクトフォルダーには、 *ContosoUniversity.csproj* ファイルが含まれています。
+* コマンド プロンプトで、プロジェクト フォルダーに移動します。 プロジェクトフォルダーには、*ContosoUniversity.csproj* ファイルが含まれています。
 
 * *CU.db* ファイルを削除するか、次のコマンドを実行します。
 
@@ -277,7 +277,7 @@ remove migrations コマンドによって移行が削除され、スナップ�
 
 * 移行をバイパスし、データベースとスキーマを作成します。
 * 移行テーブルは作成しません。
-* 移行と共に使用することは *できません* 。
+* 移行と共に使用することは *できません*。
 * データベースが頻繁に削除および再作成されるようなテストや迅速なプロトタイプのために設計されています。
 
 `EnsureCreated` を削除します。

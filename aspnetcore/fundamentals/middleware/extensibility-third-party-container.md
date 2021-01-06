@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: fundamentals/middleware/extensibility-third-party-container
 ms.openlocfilehash: d322b1b3dda161c9948359253c3f7fee64a1f9ce
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93057766"
 ---
 # <a name="middleware-activation-with-a-third-party-container-in-aspnet-core"></a>ASP.NET Core でのサードパーティ コンテナーによるミドルウェアのアクティブ化
@@ -53,11 +53,11 @@ ms.locfileid: "93057766"
 
 <xref:Microsoft.AspNetCore.Http.IMiddleware> では、アプリの要求パイプライン用にミドルウェアが定義されます。
 
-`IMiddlewareFactory` の実装によってアクティブ化されるミドルウェア ( *Middleware/SimpleInjectorActivatedMiddleware.cs* ):
+`IMiddlewareFactory` の実装によってアクティブ化されるミドルウェア (*Middleware/SimpleInjectorActivatedMiddleware.cs*):
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/SimpleInjectorActivatedMiddleware.cs?name=snippet1)]
 
-ミドルウェア ( *Middleware/MiddlewareExtensions.cs* ) の拡張機能が作成されます。
+ミドルウェア (*Middleware/MiddlewareExtensions.cs*) の拡張機能が作成されます。
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
@@ -100,11 +100,11 @@ ms.locfileid: "93057766"
 
 <xref:Microsoft.AspNetCore.Http.IMiddleware> では、アプリの要求パイプライン用にミドルウェアが定義されます。
 
-`IMiddlewareFactory` の実装によってアクティブ化されるミドルウェア ( *Middleware/SimpleInjectorActivatedMiddleware.cs* ):
+`IMiddlewareFactory` の実装によってアクティブ化されるミドルウェア (*Middleware/SimpleInjectorActivatedMiddleware.cs*):
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/SimpleInjectorActivatedMiddleware.cs?name=snippet1)]
 
-ミドルウェア ( *Middleware/MiddlewareExtensions.cs* ) の拡張機能が作成されます。
+ミドルウェア (*Middleware/MiddlewareExtensions.cs*) の拡張機能が作成されます。
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 

@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93060535"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>パート 7、ASP.NET Core の Razor ページと EF Core - 関連データの更新
@@ -148,7 +148,7 @@ Create、Edit、Details、Delete の各ページをテストします。
 
 ### <a name="create-a-class-for-assigned-courses-data"></a>割り当てられているコース データのクラスを作成する
 
-次のコードを使用して、 *SchoolViewModels/AssignedCourseData.cs* を作成します。
+次のコードを使用して、*SchoolViewModels/AssignedCourseData.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/AssignedCourseData.cs)]
 
@@ -394,7 +394,7 @@ Create、Edit、Details、Delete の各ページをテストします。
 
 ### <a name="add-classes-to-support-create-and-edit-instructor-pages"></a>Instructors/Create ページと Instructors/Edit ページをサポートするクラスを追加する
 
-次のコードを使用して、 *SchoolViewModels/AssignedCourseData.cs* を作成します。
+次のコードを使用して、*SchoolViewModels/AssignedCourseData.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 
@@ -436,7 +436,7 @@ Instructor Razor ビューを更新します。
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Create.cshtml.cs)]
 
-上記のコードは、 *Pages/Instructors/Edit.cshtml.cs* コードに似ています。
+上記のコードは、*Pages/Instructors/Edit.cshtml.cs* コードに似ています。
 
 次のマークアップを使用して、Instructor Create Razor ページを更新します。
 

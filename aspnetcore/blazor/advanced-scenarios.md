@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/advanced-scenarios
 ms.openlocfilehash: 95714b3c0d21d3b348a9a8a984e2a42e7708499e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056557"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core Blazor の高度なシナリオ
@@ -32,7 +32,7 @@ ms.locfileid: "93056557"
 
 ## <a name="no-locblazor-server-circuit-handler"></a>Blazor Server 回線ハンドラー
 
-Blazor Server を使用すると、コードで " *回線ハンドラー* " を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 回線ハンドラーは、`CircuitHandler` から派生させ、そのクラスをアプリのサービス コンテナーに登録することで実装します。 次の回線ハンドラーの例では、開いている SignalR 接続を追跡します。
+Blazor Server を使用すると、コードで "*回線ハンドラー*" を定義できます。これにより、ユーザーの回線の状態の変更時にコードを実行できます。 回線ハンドラーは、`CircuitHandler` から派生させ、そのクラスをアプリのサービス コンテナーに登録することで実装します。 次の回線ハンドラーの例では、開いている SignalR 接続を追跡します。
 
 ```csharp
 using System.Collections.Generic;
@@ -135,13 +135,13 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!WARNING]
-> <xref:Microsoft.AspNetCore.Components.RenderTree> の型により、レンダリング操作の " *結果* " の処理が許可されます。 これらは、Blazor フレームワーク実装の内部的な詳細です。 これらの型は " *不安定* " と考えるべきで、今後のリリースで変更される可能性があります。
+> <xref:Microsoft.AspNetCore.Components.RenderTree> の型により、レンダリング操作の "*結果*" の処理が許可されます。 これらは、Blazor フレームワーク実装の内部的な詳細です。 これらの型は "*不安定*" と考えるべきで、今後のリリースで変更される可能性があります。
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>シーケンス番号は実行順序ではなくコード行番号に関係する
 
 Razor コンポーネント ファイル (`.razor`) は常にコンパイルされます。 コンパイル ステップは、実行時にアプリのパフォーマンスを向上させる情報を挿入するために使用できるため、コンパイルの方がコードを解釈するよりも潜在的な利点があります。
 
-これらの機能強化の主な例として、" *シーケンス番号* " があります。 シーケンス番号は、出力がコードの個別の順序付けられたどの行からのものかをランタイムに示します。 ランタイムでは、この情報を使用して、効率的なツリーの差分を線形時間で生成します。これは、一般的なツリーの差分アルゴリズムで通常にできるよりもかなり高速です。
+これらの機能強化の主な例として、"*シーケンス番号*" があります。 シーケンス番号は、出力がコードの個別の順序付けられたどの行からのものかをランタイムに示します。 ランタイムでは、この情報を使用して、効率的なツリーの差分を線形時間で生成します。これは、一般的なツリーの差分アルゴリズムで通常にできるよりもかなり高速です。
 
 次の Razor コンポーネント (`.razor`) ファイルについて考えてみましょう。
 
@@ -178,7 +178,7 @@ builder.AddContent(1, "Second");
 | :------: | ---------- | :----: |
 | 1        | テキスト ノード  | Second |
 
-ランタイムで差分を実行すると、シーケンス `0` の項目が削除されたことが認識されるため、次のような単純な " *編集スクリプト* " が生成されます。
+ランタイムで差分を実行すると、シーケンス `0` の項目が削除されたことが認識されるため、次のような単純な "*編集スクリプト*" が生成されます。
 
 * Remove the first text node. (最初のテキスト ノードを削除します。)
 
@@ -210,7 +210,7 @@ builder.AddContent(seq++, "Second");
 | :------: | --------- | ------ |
 | 0        | テキスト ノード | Second |
 
-今度は、差分アルゴリズムによって、" *2 つ* " の変更が発生したことが認識され、アルゴリズムによって次の編集スクリプトが生成されます。
+今度は、差分アルゴリズムによって、"*2 つ*" の変更が発生したことが認識され、アルゴリズムによって次の編集スクリプトが生成されます。
 
 * 最初のテキスト ノードの値を `Second` に変更します。
 * 2 番目のテキスト ノードを削除します。

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/read-related-data
 ms.openlocfilehash: e52e4aefc18b84f85bea28a9724894eed50ca54a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93061068"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>パート 6、ASP.NET Core の Razor ページと EF Core - 関連データの読み込み
@@ -129,7 +129,7 @@ EF Core がエンティティのナビゲーション プロパティに関連�
 
 * `Course` プロパティ名は `Courses` に変更されました。
 * `CourseID` プロパティ値を示す **Number** 列が追加されました。 既定では、主キーは、通常、エンドユーザーにとって意味がないため、スキャフォールディングされません。 ただし、このケースでは、主キーは意味があります。
-* 部門名が表示されるように、 **Department** 列を変更しました。 コードは、`Department` ナビゲーション プロパティに読み込まれる `Department` エンティティの `Name` プロパティを表示します。
+* 部門名が表示されるように、**Department** 列を変更しました。 コードは、`Department` ナビゲーション プロパティに読み込まれる `Department` エンティティの `Name` プロパティを表示します。
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
@@ -174,7 +174,7 @@ EF Core がエンティティのナビゲーション プロパティに関連�
 
 Instructors ページには、3 つの異なるテーブルからのデータが表示されます。 3 つのテーブルを表す 3 つのエンティティを含むビュー モデルが必要です。
 
-次のコードを使用して、 *SchoolViewModels/InstructorIndexData.cs* を作成します。
+次のコードを使用して、*SchoolViewModels/InstructorIndexData.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/InstructorIndexData.cs)]
 
@@ -200,7 +200,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
   ```
 
-  **Linux または macOS の場合** :
+  **Linux または macOS の場合**:
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages/Instructors --referenceScriptLibraries
@@ -430,7 +430,7 @@ Course エンティティには、`Department` エンティティを含むナビ
 
 * 見出しが Index から Courses に変更されました。
 * `CourseID` プロパティ値を示す **Number** 列が追加されました。 既定では、主キーは、通常、エンドユーザーにとって意味がないため、スキャフォールディングされません。 ただし、このケースでは、主キーは意味があります。
-* 部門名が表示されるように、 **Department** 列を変更しました。 コードは、`Department` ナビゲーション プロパティに読み込まれる `Department` エンティティの `Name` プロパティを表示します。
+* 部門名が表示されるように、**Department** 列を変更しました。 コードは、`Department` ナビゲーション プロパティに読み込まれる `Department` エンティティの `Name` プロパティを表示します。
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
@@ -477,7 +477,7 @@ Course エンティティには、`Department` エンティティを含むナビ
 
 Instructors ページには、3 つの異なるテーブルからのデータが表示されます。 3 つのテーブルを表す 3 つのエンティティを含むビュー モデルが作成されます。
 
-次のコードを使用して、 *SchoolViewModels* フォルダー内に *InstructorIndexData.cs* を作成します。
+次のコードを使用して、*SchoolViewModels* フォルダー内に *InstructorIndexData.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/InstructorIndexData.cs)]
 
@@ -566,7 +566,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
 
 ### <a name="add-courses-taught-by-selected-instructor"></a>選択したインストラクターが担当するコースを追加する
 
-次のコードを使用して、 *Pages/Instructors/Index.cshtml.cs* 内の `OnGetAsync` メソッドを更新します。
+次のコードを使用して、*Pages/Instructors/Index.cshtml.cs* 内の `OnGetAsync` メソッドを更新します。
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_OnGetAsync&highlight=1,8,16-999)]
 
@@ -609,7 +609,7 @@ Instructors ページには、3 つの異なるテーブルからのデータが
 
 このセクションでは、選択したコースの受講者データを表示するため、アプリが更新されます。
 
-次のコードを使用して、 *Pages/Instructors/Index.cshtml.cs* 内の `OnGetAsync` メソッドのクエリを更新します。
+次のコードを使用して、*Pages/Instructors/Index.cshtml.cs* 内の `OnGetAsync` メソッドのクエリを更新します。
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 

@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-typescript-webpack
 ms.openlocfilehash: 949276bf4aae33c3af3fd1b8219a83868095f378
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93056843"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>TypeScript と Webpack で ASP.NET Core SignalR を使用する
@@ -111,13 +111,13 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 次の手順では、TypeScript の JavaScript への変換と、クライアント側のリソースのバンドルを構成します。
 
-1. プロジェクト ルートで次のコマンドを実行して、" *package.json* " ファイルを作成します。
+1. プロジェクト ルートで次のコマンドを実行して、"*package.json*" ファイルを作成します。
 
     ```console
     npm init -y
     ```
 
-1. 強調表示されているプロパティを " *package.json* " ファイルに追加し、ファイルの変更を保存します。
+1. 強調表示されているプロパティを "*package.json*" ファイルに追加し、ファイルの変更を保存します。
 
     [!code-json[package.json](signalr-typescript-webpack/sample/3.x/snippets/package1.json?highlight=4)]
 
@@ -132,11 +132,11 @@ dotnet add package Microsoft.TypeScript.MSBuild
     注目するべきコマンドの詳細:
 
     * バージョン番号は、各パッケージ名の `@` 記号の後に続きます。 npm によって、これらの特定のパッケージ バージョンがインストールされます。
-    * `-E` オプションは、 [セマンティック バージョニング](https://semver.org/)範囲演算子を *package.json* に書き込む npm の既定の動作を無効にします。 たとえば、`"webpack": "4.41.5"` が `"webpack": "^4.41.5"` の代わりに使用されています。 このオプションにより、新しいパッケージ バージョンへの予期しないアップグレードが防止されます。
+    * `-E` オプションは、[セマンティック バージョニング](https://semver.org/)範囲演算子を *package.json* に書き込む npm の既定の動作を無効にします。 たとえば、`"webpack": "4.41.5"` が `"webpack": "^4.41.5"` の代わりに使用されています。 このオプションにより、新しいパッケージ バージョンへの予期しないアップグレードが防止されます。
 
     詳細については、[npm-install](https://docs.npmjs.com/cli/install) のドキュメントを参照してください。
 
-1. " *package.json* " ファイルの `scripts` プロパティを次のコードで置き換えます。
+1. "*package.json*" ファイルの `scripts` プロパティを次のコードで置き換えます。
 
     ```json
     "scripts": {
@@ -152,18 +152,18 @@ dotnet add package Microsoft.TypeScript.MSBuild
     * `release`:運用モードでクライアント側のリソースをバンドルします。
     * `publish`:`release` スクリプトを実行して、運用モードでクライアント側のリソースをバンドルします。 .NET Core CLI の [publish](/dotnet/core/tools/dotnet-publish) コマンドを呼び出してアプリを公開します。
 
-1. プロジェクト ルートに、次のコードを含む " *webpack.config.js* " という名前のファイルを作成します。
+1. プロジェクト ルートに、次のコードを含む "*webpack.config.js*" という名前のファイルを作成します。
 
     [!code-javascript[webpack.config.js](signalr-typescript-webpack/sample/3.x/webpack.config.js)]
 
     上記のファイルは、Webpack コンパイルを構成します。 注目するべき構成の詳細 (一部):
 
-    * `output` プロパティにより、 *dist* の既定値がオーバーライドされます。 代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。
+    * `output` プロパティにより、*dist* の既定値がオーバーライドされます。 代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。
     * `resolve.extensions` 配列には、SignalR クライアント JavaScript をインポートするための *.js* が含まれています。
 
-1. プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい " *src* " ディレクトリを作成します。
+1. プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい "*src*" ディレクトリを作成します。
 
-1. 次のマークアップを含む " *src/index.html* " を作成します。
+1. 次のマークアップを含む "*src/index.html*" を作成します。
 
     [!code-html[index.html](signalr-typescript-webpack/sample/3.x/src/index.html)]
 
@@ -171,19 +171,19 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 1. 新しい *src/css* ディレクトリを作成します。 その目的は、プロジェクトの *.css* ファイルを格納することです。
 
-1. 次の CSS を含む " *src/css/main.css* " を作成します。
+1. 次の CSS を含む "*src/css/main.css*" を作成します。
 
     [!code-css[main.css](signalr-typescript-webpack/sample/3.x/src/css/main.css)]
 
     上記の *main.css* ファイルは、アプリをスタイル設定します。
 
-1. 次の JSON を含む " *src/tsconfig.json* " を作成します。
+1. 次の JSON を含む "*src/tsconfig.json*" を作成します。
 
     [!code-json[tsconfig.json](signalr-typescript-webpack/sample/3.x/src/tsconfig.json)]
 
     上記のコードは、[ECMAScript](https://wikipedia.org/wiki/ECMAScript) 5 対応の JavaScript を生成するように TypeScript コンパイラを構成します。
 
-1. 次のコードを含む " *src/index.ts* " を作成します。
+1. 次のコードを含む "*src/index.ts*" を作成します。
 
     [!code-typescript[index.ts](signalr-typescript-webpack/sample/3.x/snippets/index1.ts?name=snippet_IndexTsPhase1File)]
 
@@ -198,9 +198,9 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseStaticDefaultFiles&highlight=9-10)]
 
-   上記のコードを使用すると、サーバーで " *index.html* " ファイルを検索して提供できるようになります。  ファイルは、ユーザーが Web アプリの完全な URL またはルート URL を入力した場合に提供されます。
+   上記のコードを使用すると、サーバーで "*index.html*" ファイルを検索して提供できるようになります。  ファイルは、ユーザーが Web アプリの完全な URL またはルート URL を入力した場合に提供されます。
 
-1. `Startup.Configure` の最後で、" */hub* " ルートを `ChatHub` ハブにマップします。 *Hello World!* を表示するコードを 次の行に置き換えます。 
+1. `Startup.Configure` の最後で、" */hub*" ルートを `ChatHub` ハブにマップします。 *Hello World!* を表示するコードを 次の行に置き換えます。 
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseSignalR&highlight=3)]
 
@@ -210,11 +210,11 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 1. SignalR ハブを格納するために、プロジェクト ルート *SignalRWebPack/* に *Hubs* という名前の新しいディレクトリを作成します。
 
-1. 次のコードを使用して、 *Hubs/ChatHub.cs* を作成します。
+1. 次のコードを使用して、*Hubs/ChatHub.cs* を作成します。
 
     [!code-csharp[ChatHub](signalr-typescript-webpack/sample/3.x/snippets/ChatHub.cs?name=snippet_ChatHubStubClass)]
 
-1. `ChatHub` 参照を解決するには、次の `using` ステートメントを " *Startup.cs* " ファイルの先頭に追加します。
+1. `ChatHub` 参照を解決するには、次の `using` ステートメントを "*Startup.cs*" ファイルの先頭に追加します。
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_HubsNamespace)]
 
@@ -275,7 +275,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. プロジェクト ルートで次のコマンドを実行して、 *リリース* モードで Webpack を実行します。
+1. プロジェクト ルートで次のコマンドを実行して、*リリース* モードで Webpack を実行します。
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 
@@ -351,7 +351,7 @@ dotnet new web -o SignalRWebPack
 
 次の手順では、TypeScript の JavaScript への変換と、クライアント側のリソースのバンドルを構成します。
 
-1. プロジェクト ルートで次のコマンドを実行して、" *package.json* " ファイルを作成します。
+1. プロジェクト ルートで次のコマンドを実行して、"*package.json*" ファイルを作成します。
 
     ```console
     npm init -y
@@ -372,11 +372,11 @@ dotnet new web -o SignalRWebPack
     注目するべきコマンドの詳細:
 
     * バージョン番号は、各パッケージ名の `@` 記号の後に続きます。 npm によって、これらの特定のパッケージ バージョンがインストールされます。
-    * `-E` オプションは、 [セマンティック バージョニング](https://semver.org/)範囲演算子を *package.json* に書き込む npm の既定の動作を無効にします。 たとえば、`"webpack": "4.29.3"` が `"webpack": "^4.29.3"` の代わりに使用されています。 このオプションにより、新しいパッケージ バージョンへの予期しないアップグレードが防止されます。
+    * `-E` オプションは、[セマンティック バージョニング](https://semver.org/)範囲演算子を *package.json* に書き込む npm の既定の動作を無効にします。 たとえば、`"webpack": "4.29.3"` が `"webpack": "^4.29.3"` の代わりに使用されています。 このオプションにより、新しいパッケージ バージョンへの予期しないアップグレードが防止されます。
 
     詳細については、[npm-install](https://docs.npmjs.com/cli/install) のドキュメントを参照してください。
 
-1. " *package.json* " ファイルの `scripts` プロパティを次のコードで置き換えます。
+1. "*package.json*" ファイルの `scripts` プロパティを次のコードで置き換えます。
 
     ```json
     "scripts": {
@@ -392,18 +392,18 @@ dotnet new web -o SignalRWebPack
     * `release`:運用モードでクライアント側のリソースをバンドルします。
     * `publish`:`release` スクリプトを実行して、運用モードでクライアント側のリソースをバンドルします。 .NET Core CLI の [publish](/dotnet/core/tools/dotnet-publish) コマンドを呼び出してアプリを公開します。
 
-1. プロジェクト ルートに、次のコードを含む " *webpack.config.js* " という名前のファイルを作成します。
+1. プロジェクト ルートに、次のコードを含む "*webpack.config.js*" という名前のファイルを作成します。
 
     [!code-javascript[webpack.config.js](signalr-typescript-webpack/sample/2.x/webpack.config.js)]
 
     上記のファイルは、Webpack コンパイルを構成します。 注目するべき構成の詳細 (一部):
 
-    * `output` プロパティにより、 *dist* の既定値がオーバーライドされます。 代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。
+    * `output` プロパティにより、*dist* の既定値がオーバーライドされます。 代わりにバンドルが *wwwroot* ディレクトリ内に生成されます。
     * `resolve.extensions` 配列には、SignalR クライアント JavaScript をインポートするための *.js* が含まれています。
 
-1. プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい " *src* " ディレクトリを作成します。
+1. プロジェクトのクライアント側アセットを格納するために、プロジェクト ルートに新しい "*src*" ディレクトリを作成します。
 
-1. 次のマークアップを含む " *src/index.html* " を作成します。
+1. 次のマークアップを含む "*src/index.html*" を作成します。
 
     [!code-html[index.html](signalr-typescript-webpack/sample/2.x/src/index.html)]
 
@@ -411,19 +411,19 @@ dotnet new web -o SignalRWebPack
 
 1. 新しい *src/css* ディレクトリを作成します。 その目的は、プロジェクトの *.css* ファイルを格納することです。
 
-1. 次のマークアップを含む " *src/css/main.css* " を作成します。
+1. 次のマークアップを含む "*src/css/main.css*" を作成します。
 
     [!code-css[main.css](signalr-typescript-webpack/sample/2.x/src/css/main.css)]
 
     上記の *main.css* ファイルは、アプリをスタイル設定します。
 
-1. 次の JSON を含む " *src/tsconfig.json* " を作成します。
+1. 次の JSON を含む "*src/tsconfig.json*" を作成します。
 
     [!code-json[tsconfig.json](signalr-typescript-webpack/sample/2.x/src/tsconfig.json)]
 
     上記のコードは、[ECMAScript](https://wikipedia.org/wiki/ECMAScript) 5 対応の JavaScript を生成するように TypeScript コンパイラを構成します。
 
-1. 次のコードを含む " *src/index.ts* " を作成します。
+1. 次のコードを含む "*src/index.ts*" を作成します。
 
     [!code-typescript[index.ts](signalr-typescript-webpack/sample/2.x/snippets/index1.ts?name=snippet_IndexTsPhase1File)]
 
@@ -434,7 +434,7 @@ dotnet new web -o SignalRWebPack
 
 ## <a name="configure-the-aspnet-core-app"></a>ASP.NET Core アプリを構成する
 
-1. `Startup.Configure` メソッドで提供されたコードにより、 *Hello World!* が表示されます。 `app.Run` メソッド呼び出しを、[UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) と [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) の呼び出しで置き換えます。
+1. `Startup.Configure` メソッドで提供されたコードにより、*Hello World!* が表示されます。 `app.Run` メソッド呼び出しを、[UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) と [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) の呼び出しで置き換えます。
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_UseStaticDefaultFiles)]
 
@@ -450,7 +450,7 @@ dotnet new web -o SignalRWebPack
 
 1. プロジェクト ルートに *Hubs* という新しいディレクトリを作成します。 その目的は、次の手順で作成される SignalR ハブを格納することです。
 
-1. 次のコードを使用して、 *Hubs/ChatHub.cs* を作成します。
+1. 次のコードを使用して、*Hubs/ChatHub.cs* を作成します。
 
     [!code-csharp[ChatHub](signalr-typescript-webpack/sample/2.x/snippets/ChatHub.cs?name=snippet_ChatHubStubClass)]
 
@@ -510,7 +510,7 @@ dotnet new web -o SignalRWebPack
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. プロジェクト ルートで次のコマンドを実行して、 *リリース* モードで Webpack を実行します。
+1. プロジェクト ルートで次のコマンドを実行して、*リリース* モードで Webpack を実行します。
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 

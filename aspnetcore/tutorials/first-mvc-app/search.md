@@ -18,19 +18,19 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/search
 ms.openlocfilehash: 657072803f59feb99de8b31ddb3a6433d832aa30
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059625"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>パート 7、ASP.NET Core MVC アプリへの検索の追加
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-このセクションでは、検索機能を `Index` アクション メソッドに追加して、 *ジャンル* または *名前* でムービーを検索できるようにします。
+このセクションでは、検索機能を `Index` アクション メソッドに追加して、*ジャンル* または *名前* でムービーを検索できるようにします。
 
-次のコードを使用して、 *Controllers/MoviesController.cs* 内で見つかった `Index` メソッドを更新します。
+次のコードを使用して、*Controllers/MoviesController.cs* 内で見つかった `Index` メソッドを更新します。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippet_1stSearch)]
 
@@ -41,7 +41,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません** 。
+このクエリはこの時点では定義される *だけ* で、データベースに対して **実行されていません**。
 
 `searchString` パラメーターに文字列が含まれる場合、検索文字列の値でフィルターするようにムービー クエリが変更されます。
 
@@ -55,7 +55,7 @@ var movies = from m in _context.Movie
 
 ![インデックス ビュー](~/tutorials/first-mvc-app/search/_static/ghost.png)
 
-`id` という名前のパラメーターを使用するために `Index` メソッドの署名を変更すると、`id` パラメーターは、 *Startup.cs* で設定されている既定ルートの省略可能な `{id}` プレースホルダーと一致するようになります。
+`id` という名前のパラメーターを使用するために `Index` メソッドの署名を変更すると、`id` パラメーターは、*Startup.cs* で設定されている既定ルートの省略可能な `{id}` プレースホルダーと一致するようになります。
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 
@@ -103,7 +103,7 @@ HTML `<form>` タグでは[フォーム タグ ヘルパー](xref:mvc/views/work
 
 要求本文に検索パラメーターと [XSRF](xref:security/anti-request-forgery) トークンが表示されています。 前のチュートリアルで説明したように、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)では [XSRF](xref:security/anti-request-forgery) 偽造防止トークンが生成されることに注意してください。 ここではデータを変更しないため、コントローラー メソッドでトークンを検証する必要はありません。
 
-検索パラメーターが URL ではなく、要求本文にあるため、その検索情報をキャプチャして、ブックマークしたり、他のユーザーと共有したりすることはできません。 この問題を解決するには、 *Views/Movies/Index. cshtml* ファイルに存在する要求が `HTTP GET` であることを指定します。
+検索パラメーターが URL ではなく、要求本文にあるため、その検索情報をキャプチャして、ブックマークしたり、他のユーザーと共有したりすることはできません。 この問題を解決するには、*Views/Movies/Index. cshtml* ファイルに存在する要求が `HTTP GET` であることを指定します。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
@@ -144,7 +144,7 @@ HTML `<form>` タグでは[フォーム タグ ヘルパー](xref:mvc/views/work
 
 ## <a name="add-search-by-genre-to-the-index-view"></a>インデックス ビューへのジャンルによる検索の追加
 
-次のように、 *Views/Movies/* で見つかった `Index.cshtml` を更新します。
+次のように、*Views/Movies/* で見つかった `Index.cshtml` を更新します。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 

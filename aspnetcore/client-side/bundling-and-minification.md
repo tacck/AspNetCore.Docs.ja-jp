@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054841"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core での静的資産のバンドルと縮小
@@ -90,25 +90,25 @@ ASP.NET Core 2.0 以前では、MVC および Razor Pages プロジェクト テ
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2.1 以降では、 *bundleconfig.json* という名前の新しい JSON ファイルを MVC または Razor Pages プロジェクトのルートに追加します。 開始点としてそのファイルに次の JSON を含めます。
+ASP.NET Core 2.1 以降では、*bundleconfig.json* という名前の新しい JSON ファイルを MVC または Razor Pages プロジェクトのルートに追加します。 開始点としてそのファイルに次の JSON を含めます。
 
 ::: moniker-end
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-*bundleconfig.json* ファイルには、各バンドルのオプションが定義されています。 上記の例では、カスタムの JavaScript ( *wwwroot/js/site.js* ) とスタイルシート ( *wwwroot/css/site.css* ) ファイルに対して 1 つのバンドル構成が定義されています。
+*bundleconfig.json* ファイルには、各バンドルのオプションが定義されています。 上記の例では、カスタムの JavaScript (*wwwroot/js/site.js*) とスタイルシート (*wwwroot/css/site.css*) ファイルに対して 1 つのバンドル構成が定義されています。
 
 構成のオプションには、次のようなものがあります。
 
 * `outputFileName`:出力するバンドル ファイルの名前。 *bundleconfig.json* ファイルからの相対パスを含めることができます。 **必須**
-* `inputFiles`:まとめてバンドルするファイルの配列。 これらは、構成ファイルへの相対パスです。 **省略可能** 、* 値が空の場合、空の出力ファイルになります。 [globbing](https://www.tldp.org/LDP/abs/html/globbingref.html) パラメーターがサポートされます。
-* `minify`:出力の種類の縮小オプション。 **省略可能** 、 *既定値 - `minify: { enabled: true }`*
+* `inputFiles`:まとめてバンドルするファイルの配列。 これらは、構成ファイルへの相対パスです。 **省略可能**、* 値が空の場合、空の出力ファイルになります。 [globbing](https://www.tldp.org/LDP/abs/html/globbingref.html) パラメーターがサポートされます。
+* `minify`:出力の種類の縮小オプション。 **省略可能**、*既定値 - `minify: { enabled: true }`*
   * 構成オプションは、出力ファイルの種類ごとに使用できます。
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [JavaScript Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML Minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`:生成されたファイルをプロジェクト ファイルに追加するかどうかを示すフラグ。 **省略可能** 、 *既定値 - false*
-* `sourceMap`:バンドルされたファイルのソース マップを生成するかどうかを示すフラグ。 **省略可能** 、 *既定値 - false*
+* `includeInProject`:生成されたファイルをプロジェクト ファイルに追加するかどうかを示すフラグ。 **省略可能**、*既定値 - false*
+* `sourceMap`:バンドルされたファイルのソース マップを生成するかどうかを示すフラグ。 **省略可能**、*既定値 - false*
 * `sourceMapRootPath`:生成されたソース マップ ファイルを格納するためのルート パス。
 
 ## <a name="add-files-to-workflow"></a>ワークフローにファイルを追加する

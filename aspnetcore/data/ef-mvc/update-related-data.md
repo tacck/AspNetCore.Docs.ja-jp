@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/update-related-data
 ms.openlocfilehash: f41d0b1d7ba46ef4867e0d160dc61f21042ce403
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053944"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>チュートリアル: 関連データを更新する - ASP.NET MVC と EF Core
@@ -93,9 +93,9 @@ Course の Details ページと Delete ページのパフォーマンスを最�
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
-*Views/Courses/Edit.cshtml* で、 *Create.cshtml* で行ったのと同じ変更を [Department]\(部門\) フィールドに加えます。
+*Views/Courses/Edit.cshtml* で、*Create.cshtml* で行ったのと同じ変更を [Department]\(部門\) フィールドに加えます。
 
-また、 *Views/Courses/Edit.cshtml* で、 **[Title]\(タイトル\)** フィールドの前にコース番号フィールドを追加します。 コース番号は主キーであるため表示されますが、変更することはできません。
+また、*Views/Courses/Edit.cshtml* で、 **[Title]\(タイトル\)** フィールドの前にコース番号フィールドを追加します。 コース番号は主キーであるため表示されますが、変更することはできません。
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
@@ -105,7 +105,7 @@ Edit ビューには、コース番号の隠しフィールド (`<input type="hi
 
 [!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
-*Views/Courses/Details.cshtml* で、 *Delete.cshtml* に行ったのと同じ変更を行います。
+*Views/Courses/Details.cshtml* で、*Delete.cshtml* に行ったのと同じ変更を行います。
 
 ### <a name="test-the-course-pages"></a>Course ページをテストする
 
@@ -233,7 +233,7 @@ Course エンティティと Instructor エンティティ間には、多対多�
 
 ### <a name="update-the-instructor-views"></a>Instructor ビューを更新する
 
-*Views/Instructors/Edit.cshtml* で、次のコードを **Office** フィールドの `div` 要素の直後、 **Save** ボタンの `div` 要素の前に追加することで、チェック ボックスの配列を持つ **Courses** フィールドを追加します。
+*Views/Instructors/Edit.cshtml* で、次のコードを **Office** フィールドの `div` 要素の直後、**Save** ボタンの `div` 要素の前に追加することで、チェック ボックスの配列を持つ **Courses** フィールドを追加します。
 
 <a id="notepad"></a>
 > [!NOTE]

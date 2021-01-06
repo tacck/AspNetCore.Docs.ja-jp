@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/handle-errors
 ms.openlocfilehash: c789928252417ef1cf95c60deb7edef24d58126e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93055998"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>ASP.NET Core Blazor アプリのエラーを処理する
@@ -91,7 +91,7 @@ Blazor Server アプリでは、`Pages/_Host.cshtml` ファイルでエクスペ
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>ハンドルされない例外に対して Blazor Server アプリがどのように反応するか
 
-Blazor Server はステートフルなフレームワークです。 ユーザーはアプリを操作するときに、 *回線* と呼ばれる、サーバーへの接続を維持します。 回線では、アクティブなコンポーネント インスタンスに加えて、次のような状態の他の多くの側面が保持されます。
+Blazor Server はステートフルなフレームワークです。 ユーザーはアプリを操作するときに、*回線* と呼ばれる、サーバーへの接続を維持します。 回線では、アクティブなコンポーネント インスタンスに加えて、次のような状態の他の多くの側面が保持されます。
 
 * コンポーネントの表示される最新の出力。
 * クライアント側のイベントによってトリガーされる可能性がある、イベント処理デリゲートの現在のセット。

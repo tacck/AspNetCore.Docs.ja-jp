@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: index
 ms.openlocfilehash: 4301e0d59364573767ab4cae25a4818ff84b9abc
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93052228"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core の概要
@@ -58,7 +58,7 @@ ASP.NET Core MVC は、[Web API](xref:tutorials/first-web-api) と [Web アプ�
 
 ## <a name="client-side-development"></a>クライアント側の開発
 
-ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と " *クライアント側の開発* " の関連トピックを参照してください。
+ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と "*クライアント側の開発*" の関連トピックを参照してください。
 
 <a name="target-framework"></a>
 
@@ -137,7 +137,7 @@ ASP.NET Core MVC は、[Web API](xref:tutorials/first-web-api) と [Web アプ�
 
 ## <a name="client-side-development"></a>クライアント側の開発
 
-ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と " *クライアント側の開発* " の関連トピックを参照してください。
+ASP.NET Core は、人気のあるクライアント側のフレームワークとライブラリ ([Blazor](xref:blazor/index)、[Angular](xref:spa/angular)、[React](xref:spa/react)、[Bootstrap](https://getbootstrap.com/) など) をシームレスに統合します。 詳細については、<xref:blazor/index> と "*クライアント側の開発*" の関連トピックを参照してください。
 
 <a name="target-framework"></a>
 

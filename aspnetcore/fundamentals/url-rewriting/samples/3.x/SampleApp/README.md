@@ -19,13 +19,13 @@
   - 成功状態コード: 200 (OK)
   - 例 (リライト): **/iis-rules-rewrite/{capture_group}** から **/rewritten?id={capture_group}** へ
 * `Add(RedirectXmlFileRequests)`
-  - 成功状態コード: 301 (永続的に移動)
+  - 成功状態コード: 301 (完全な移動)
   - 例 (リダイレクト): **/file.xml** から **/xmlfiles/file.xml** へ
 * `Add(RewriteTextFileRequests)`
   - 成功状態コード: 200 (OK)
   - 例 (書き換え): **/some_file.txt** から **/file.txt** へ
 * `Add(new RedirectImageRequests(".png", "/png-images")))`<br>`Add(new RedirectImageRequests(".jpg", "/jpg-images")))`
-  - 成功状態コード: 301 (永続的に移動)
+  - 成功状態コード: 301 (完全な移動)
   - 例 (リダイレクト): **/image.png** から **/png-images/image.png** へ
   - 例 (リダイレクト): **/image.jpg** から **/jpg-images/image.jpg** へ
 
@@ -42,7 +42,7 @@ PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurren
 
 このサンプルには、URL (`https://localhost:5001`、`https://localhost`) とテスト証明書 (*testCert.pfx*) を使用してこれらのセキュリティ保護されたリダイレクト方法を調べるための `WebHostBuilder` 構成が含まれています。 サーバーでポート 443 が既に割り当て済みまたは使用中の場合、`https://localhost` の例は機能しません。*Program.cs* ファイルの `CreateWebHostBuilder` メソッドでポート 443 に対する `ListenOptions` を削除するか、またはサーバーでポート 443 をバインド解除して、Kestrel がポートを使用できるようにしてください。
 
-| メソッド                           | 状態コード |    ポート    |
+| メソッド                           | 状態コード |    Port    |
 | -------------------------------- | :---------: | :--------: |
 | `.AddRedirectToHttpsPermanent()` |     301     | null (465) |
 | `.AddRedirectToHttps()`          |     302     | null (465) |

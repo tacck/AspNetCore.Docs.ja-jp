@@ -18,10 +18,10 @@ no-loc:
 - SignalR
 uid: fundamentals/localization
 ms.openlocfilehash: 07e2f561b0e9db58780d6e8a271e32b00132b1b5
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93059521"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core のグローバリゼーションおよびローカリゼーション
@@ -34,7 +34,7 @@ ms.locfileid: "93059521"
 
 国際化には、[グローバリゼーション](/dotnet/api/system.globalization)と[ローカリゼーション](/dotnet/standard/globalization-localization/localization)が含まれます。 グローバリゼーションとは異なるカルチャをサポートするアプリを設計するプロセスです。 グローバリゼーションによって、特定の地域に関連する定義済みの言語セットの入出力と表示のサポートが追加されます。
 
-ローカリゼーションとは、ローカライズのために既に処理されているグローバル化されたアプリを特定のカルチャ/ロケールに適合させるプロセスです。 詳細については、本ドキュメントの末尾にある「 **グローバリゼーションとローカリゼーションの用語** 」を参照してください。
+ローカリゼーションとは、ローカライズのために既に処理されているグローバル化されたアプリを特定のカルチャ/ロケールに適合させるプロセスです。 詳細については、本ドキュメントの末尾にある「**グローバリゼーションとローカリゼーションの用語**」を参照してください。
 
 アプリのローカリゼーションには、以下のものが関与します。
 
@@ -109,7 +109,7 @@ DataAnnotations エラー メッセージは `IStringLocalizer<T>` を使用し�
 
 [!code-csharp[](localization/sample/3.x/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
-ASP.NET Core MVC 1.1.0 以上では、非検証属性がローカライズされます。 ASP.NET Core MVC 1.0 は、非検証属性のローカライズされた文字列を検索 **しません** 。
+ASP.NET Core MVC 1.1.0 以上では、非検証属性がローカライズされます。 ASP.NET Core MVC 1.0 は、非検証属性のローカライズされた文字列を検索 **しません**。
 
 <a name="one-resource-string-multiple-classes"></a>
 
@@ -158,16 +158,16 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 
 ## <a name="resource-file-naming"></a>リソース ファイルの名前付け
 
-リソースの名前は、クラスの完全な型名からアセンブリ名を除いたものになります。 たとえば、メイン アセンブリが `LocalizationWebsite.Web.dll` であるプロジェクト内のクラス `LocalizationWebsite.Web.Startup` のフランス語のリソースは、 *Startup.fr.resx* という名前になります。 クラス `LocalizationWebsite.Web.Controllers.HomeController` のリソースは、 *Controllers.HomeController.fr.resx* という名前になります。 対象となるクラスの名前空間が、アセンブリ名と同じでない場合は、完全な型名が必要です。 たとえば、同じプロジェクトで、型 `ExtraNamespace.Tools` のリソースは、 *ExtraNamespace.Tools.fr.resx* という名前になります。
+リソースの名前は、クラスの完全な型名からアセンブリ名を除いたものになります。 たとえば、メイン アセンブリが `LocalizationWebsite.Web.dll` であるプロジェクト内のクラス `LocalizationWebsite.Web.Startup` のフランス語のリソースは、*Startup.fr.resx* という名前になります。 クラス `LocalizationWebsite.Web.Controllers.HomeController` のリソースは、*Controllers.HomeController.fr.resx* という名前になります。 対象となるクラスの名前空間が、アセンブリ名と同じでない場合は、完全な型名が必要です。 たとえば、同じプロジェクトで、型 `ExtraNamespace.Tools` のリソースは、*ExtraNamespace.Tools.fr.resx* という名前になります。
 
-サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、 *Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、 *Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、 *Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
+サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、*Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、*Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、*Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
 
 | リソース名 | ドットまたはパスの名前付け |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | ドット  |
 | Resources/Controllers/HomeController.fr.resx  | パス |
 
-Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、 *Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
+Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
 * Resources/Views/Home/About.fr.resx
 
@@ -187,7 +187,7 @@ Razor ビューの `@inject IViewLocalizer` を使用するリソース ファ�
 * 既定では、ローカライズが機能しません。
 * アセンブリ内でのリソースの検索方法が原因で、ローカライズが失敗します。 `RootNamespace` はビルド時の値で、実行中のプロセスでは使用できません。 
 
-`RootNamespace` が `AssemblyName` と異なる場合、 *AssemblyInfo.cs* (パラメーターの値は実際の値に置き換えられます) に次を含めてください。
+`RootNamespace` が `AssemblyName` と異なる場合、*AssemblyInfo.cs* (パラメーターの値は実際の値に置き換えられます) に次を含めてください。
 
 ```csharp
 using System.Reflection;
@@ -213,11 +213,11 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio でリソース ファイルを生成する
 
-Visual Studio で、ファイル名にカルチャを指定せずにリソース ファイルを作成する場合 (たとえば、 *Welcome.resx* )、Visual Studio は各文字列のプロパティを使用して、C# クラスを作成します。 通常、ASP.NET Core ではこれを行いません。 一般的に既定の *.resx* リソース ファイル (カルチャ名のない *.resx* ファイル) は使用しません。 カルチャ名を含む *.resx* ファイル (たとえば *Welcome.fr.resx* ) を作成することをお勧めします。 カルチャ名を含む *.resx* ファイルを作成すると、Visual Studio はクラス ファイルを生成しません。
+Visual Studio で、ファイル名にカルチャを指定せずにリソース ファイルを作成する場合 (たとえば、*Welcome.resx*)、Visual Studio は各文字列のプロパティを使用して、C# クラスを作成します。 通常、ASP.NET Core ではこれを行いません。 一般的に既定の *.resx* リソース ファイル (カルチャ名のない *.resx* ファイル) は使用しません。 カルチャ名を含む *.resx* ファイル (たとえば *Welcome.fr.resx*) を作成することをお勧めします。 カルチャ名を含む *.resx* ファイルを作成すると、Visual Studio はクラス ファイルを生成しません。
 
 ### <a name="add-other-cultures"></a>その他のカルチャを追加する
 
-各言語とカルチャの組み合わせ (既定の言語以外) ごとに一意のリソース ファイルが必要です。 ISO 言語コードがファイル名の一部となるリソース ファイル (たとえば、 **en-us** 、 **fr-ca** 、 **en-gb** ) を新規作成することで、異なるカルチャとロケールのリソース ファイルを作成することができます。 *Welcome.es-MX.resx* (スペイン語/メキシコ) のように、ファイル名と *.resx* ファイル拡張子の間にこれらの ISO コードが置かれます。
+各言語とカルチャの組み合わせ (既定の言語以外) ごとに一意のリソース ファイルが必要です。 ISO 言語コードがファイル名の一部となるリソース ファイル (たとえば、**en-us**、**fr-ca**、**en-gb**) を新規作成することで、異なるカルチャとロケールのリソース ファイルを作成することができます。 *Welcome.es-MX.resx* (スペイン語/メキシコ) のように、ファイル名と *.resx* ファイル拡張子の間にこれらの ISO コードが置かれます。
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>要求ごとに言語/カルチャを選択するための戦略を実装する
 
@@ -229,7 +229,7 @@ Visual Studio で、ファイル名にカルチャを指定せずにリソース
 
 * `AddLocalization` は、ローカリゼーション サービスをサービス コンテナーに追加します。 上記のコードは、リソース パスを "Resources" に設定します。
 
-* `AddViewLocalization` は、ローカライズされたビュー ファイルのサポートを追加します。 このサンプル ビューでは、ローカリゼーションは、ビュー ファイルのサフィックスに基づいています。 たとえば、 *Index.fr.cshtml* ファイルの "fr" です。
+* `AddViewLocalization` は、ローカライズされたビュー ファイルのサポートを追加します。 このサンプル ビューでは、ローカリゼーションは、ビュー ファイルのサフィックスに基づいています。 たとえば、*Index.fr.cshtml* ファイルの "fr" です。
 
 * `AddDataAnnotationsLocalization` は、`IStringLocalizer` 抽象化を介してローカライズされた `DataAnnotations` 検証メッセージのサポートを追加します。
 
@@ -338,7 +338,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、 [依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 
@@ -388,7 +388,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 国際化には、[グローバリゼーション](/dotnet/api/system.globalization)と[ローカリゼーション](/dotnet/standard/globalization-localization/localization)が含まれます。 グローバリゼーションとは異なるカルチャをサポートするアプリを設計するプロセスです。 グローバリゼーションによって、特定の地域に関連する定義済みの言語セットの入出力と表示のサポートが追加されます。
 
-ローカリゼーションとは、ローカライズのために既に処理されているグローバル化されたアプリを特定のカルチャ/ロケールに適合させるプロセスです。 詳細については、本ドキュメントの末尾にある「 **グローバリゼーションとローカリゼーションの用語** 」を参照してください。
+ローカリゼーションとは、ローカライズのために既に処理されているグローバル化されたアプリを特定のカルチャ/ロケールに適合させるプロセスです。 詳細については、本ドキュメントの末尾にある「**グローバリゼーションとローカリゼーションの用語**」を参照してください。
 
 アプリのローカリゼーションには、以下のものが関与します。
 
@@ -463,7 +463,7 @@ DataAnnotations エラー メッセージは `IStringLocalizer<T>` を使用し�
 
 [!code-csharp[](localization/sample/3.x/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
-ASP.NET Core MVC 1.1.0 以上では、非検証属性がローカライズされます。 ASP.NET Core MVC 1.0 は、非検証属性のローカライズされた文字列を検索 **しません** 。
+ASP.NET Core MVC 1.1.0 以上では、非検証属性がローカライズされます。 ASP.NET Core MVC 1.0 は、非検証属性のローカライズされた文字列を検索 **しません**。
 
 <a name="one-resource-string-multiple-classes"></a>
 
@@ -512,16 +512,16 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 
 ## <a name="resource-file-naming"></a>リソース ファイルの名前付け
 
-リソースの名前は、クラスの完全な型名からアセンブリ名を除いたものになります。 たとえば、メイン アセンブリが `LocalizationWebsite.Web.dll` であるプロジェクト内のクラス `LocalizationWebsite.Web.Startup` のフランス語のリソースは、 *Startup.fr.resx* という名前になります。 クラス `LocalizationWebsite.Web.Controllers.HomeController` のリソースは、 *Controllers.HomeController.fr.resx* という名前になります。 対象となるクラスの名前空間が、アセンブリ名と同じでない場合は、完全な型名が必要です。 たとえば、同じプロジェクトで、型 `ExtraNamespace.Tools` のリソースは、 *ExtraNamespace.Tools.fr.resx* という名前になります。
+リソースの名前は、クラスの完全な型名からアセンブリ名を除いたものになります。 たとえば、メイン アセンブリが `LocalizationWebsite.Web.dll` であるプロジェクト内のクラス `LocalizationWebsite.Web.Startup` のフランス語のリソースは、*Startup.fr.resx* という名前になります。 クラス `LocalizationWebsite.Web.Controllers.HomeController` のリソースは、*Controllers.HomeController.fr.resx* という名前になります。 対象となるクラスの名前空間が、アセンブリ名と同じでない場合は、完全な型名が必要です。 たとえば、同じプロジェクトで、型 `ExtraNamespace.Tools` のリソースは、*ExtraNamespace.Tools.fr.resx* という名前になります。
 
-サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、 *Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、 *Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、 *Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
+サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、*Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、*Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、*Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
 
 | リソース名 | ドットまたはパスの名前付け |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | ドット  |
 | Resources/Controllers/HomeController.fr.resx  | パス |
 
-Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、 *Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
+Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
 * Resources/Views/Home/About.fr.resx
 
@@ -541,7 +541,7 @@ Razor ビューの `@inject IViewLocalizer` を使用するリソース ファ�
 * 既定では、ローカライズが機能しません。
 * アセンブリ内でのリソースの検索方法が原因で、ローカライズが失敗します。 `RootNamespace` はビルド時の値で、実行中のプロセスでは使用できません。 
 
-`RootNamespace` が `AssemblyName` と異なる場合、 *AssemblyInfo.cs* (パラメーターの値は実際の値に置き換えられます) に次を含めてください。
+`RootNamespace` が `AssemblyName` と異なる場合、*AssemblyInfo.cs* (パラメーターの値は実際の値に置き換えられます) に次を含めてください。
 
 ```csharp
 using System.Reflection;
@@ -567,11 +567,11 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio でリソース ファイルを生成する
 
-Visual Studio で、ファイル名にカルチャを指定せずにリソース ファイルを作成する場合 (たとえば、 *Welcome.resx* )、Visual Studio は各文字列のプロパティを使用して、C# クラスを作成します。 通常、ASP.NET Core ではこれを行いません。 一般的に既定の *.resx* リソース ファイル (カルチャ名のない *.resx* ファイル) は使用しません。 カルチャ名を含む *.resx* ファイル (たとえば *Welcome.fr.resx* ) を作成することをお勧めします。 カルチャ名を含む *.resx* ファイルを作成すると、Visual Studio はクラス ファイルを生成しません。
+Visual Studio で、ファイル名にカルチャを指定せずにリソース ファイルを作成する場合 (たとえば、*Welcome.resx*)、Visual Studio は各文字列のプロパティを使用して、C# クラスを作成します。 通常、ASP.NET Core ではこれを行いません。 一般的に既定の *.resx* リソース ファイル (カルチャ名のない *.resx* ファイル) は使用しません。 カルチャ名を含む *.resx* ファイル (たとえば *Welcome.fr.resx*) を作成することをお勧めします。 カルチャ名を含む *.resx* ファイルを作成すると、Visual Studio はクラス ファイルを生成しません。
 
 ### <a name="add-other-cultures"></a>その他のカルチャを追加する
 
-各言語とカルチャの組み合わせ (既定の言語以外) ごとに一意のリソース ファイルが必要です。 ISO 言語コードがファイル名の一部となるリソース ファイル (たとえば、 **en-us** 、 **fr-ca** 、 **en-gb** ) を新規作成することで、異なるカルチャとロケールのリソース ファイルを作成することができます。 *Welcome.es-MX.resx* (スペイン語/メキシコ) のように、ファイル名と *.resx* ファイル拡張子の間にこれらの ISO コードが置かれます。
+各言語とカルチャの組み合わせ (既定の言語以外) ごとに一意のリソース ファイルが必要です。 ISO 言語コードがファイル名の一部となるリソース ファイル (たとえば、**en-us**、**fr-ca**、**en-gb**) を新規作成することで、異なるカルチャとロケールのリソース ファイルを作成することができます。 *Welcome.es-MX.resx* (スペイン語/メキシコ) のように、ファイル名と *.resx* ファイル拡張子の間にこれらの ISO コードが置かれます。
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>要求ごとに言語/カルチャを選択するための戦略を実装する
 
@@ -583,7 +583,7 @@ Visual Studio で、ファイル名にカルチャを指定せずにリソース
 
 * `AddLocalization` は、ローカリゼーション サービスをサービス コンテナーに追加します。 上記のコードは、リソース パスを "Resources" に設定します。
 
-* `AddViewLocalization` は、ローカライズされたビュー ファイルのサポートを追加します。 このサンプル ビューでは、ローカリゼーションは、ビュー ファイルのサフィックスに基づいています。 たとえば、 *Index.fr.cshtml* ファイルの "fr" です。
+* `AddViewLocalization` は、ローカライズされたビュー ファイルのサポートを追加します。 このサンプル ビューでは、ローカリゼーションは、ビュー ファイルのサフィックスに基づいています。 たとえば、*Index.fr.cshtml* ファイルの "fr" です。
 
 * `AddDataAnnotationsLocalization` は、`IStringLocalizer` 抽象化を介してローカライズされた `DataAnnotations` 検証メッセージのサポートを追加します。
 
@@ -694,7 +694,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、 [依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 
@@ -743,7 +743,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 国際化には、[グローバリゼーション](/dotnet/api/system.globalization)と[ローカリゼーション](/dotnet/standard/globalization-localization/localization)が含まれます。 グローバリゼーションとは異なるカルチャをサポートするアプリを設計するプロセスです。 グローバリゼーションによって、特定の地域に関連する定義済みの言語セットの入出力と表示のサポートが追加されます。
 
-ローカリゼーションとは、ローカライズのために既に処理されているグローバル化されたアプリを特定のカルチャ/ロケールに適合させるプロセスです。 詳細については、本ドキュメントの末尾にある「 **グローバリゼーションとローカリゼーションの用語** 」を参照してください。
+ローカリゼーションとは、ローカライズのために既に処理されているグローバル化されたアプリを特定のカルチャ/ロケールに適合させるプロセスです。 詳細については、本ドキュメントの末尾にある「**グローバリゼーションとローカリゼーションの用語**」を参照してください。
 
 アプリのローカリゼーションには、以下のものが関与します。
 
@@ -818,7 +818,7 @@ DataAnnotations エラー メッセージは `IStringLocalizer<T>` を使用し�
 
 [!code-csharp[](localization/sample/3.x/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
-ASP.NET Core MVC 1.1.0 以上では、非検証属性がローカライズされます。 ASP.NET Core MVC 1.0 は、非検証属性のローカライズされた文字列を検索 **しません** 。
+ASP.NET Core MVC 1.1.0 以上では、非検証属性がローカライズされます。 ASP.NET Core MVC 1.0 は、非検証属性のローカライズされた文字列を検索 **しません**。
 
 <a name="one-resource-string-multiple-classes"></a>
 
@@ -867,16 +867,16 @@ ASP.NET Core では、`SupportedCultures` と `SupportedUICultures` という 2 
 
 ## <a name="resource-file-naming"></a>リソース ファイルの名前付け
 
-リソースの名前は、クラスの完全な型名からアセンブリ名を除いたものになります。 たとえば、メイン アセンブリが `LocalizationWebsite.Web.dll` であるプロジェクト内のクラス `LocalizationWebsite.Web.Startup` のフランス語のリソースは、 *Startup.fr.resx* という名前になります。 クラス `LocalizationWebsite.Web.Controllers.HomeController` のリソースは、 *Controllers.HomeController.fr.resx* という名前になります。 対象となるクラスの名前空間が、アセンブリ名と同じでない場合は、完全な型名が必要です。 たとえば、同じプロジェクトで、型 `ExtraNamespace.Tools` のリソースは、 *ExtraNamespace.Tools.fr.resx* という名前になります。
+リソースの名前は、クラスの完全な型名からアセンブリ名を除いたものになります。 たとえば、メイン アセンブリが `LocalizationWebsite.Web.dll` であるプロジェクト内のクラス `LocalizationWebsite.Web.Startup` のフランス語のリソースは、*Startup.fr.resx* という名前になります。 クラス `LocalizationWebsite.Web.Controllers.HomeController` のリソースは、*Controllers.HomeController.fr.resx* という名前になります。 対象となるクラスの名前空間が、アセンブリ名と同じでない場合は、完全な型名が必要です。 たとえば、同じプロジェクトで、型 `ExtraNamespace.Tools` のリソースは、*ExtraNamespace.Tools.fr.resx* という名前になります。
 
-サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、 *Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、 *Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、 *Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
+サンプル プロジェクトで、`ConfigureServices` メソッドは `ResourcesPath` を "Resources" に設定するので、ホーム コントローラーのフランス語のりソース ファイルの相対パスは、*Resources/Controllers.HomeController.fr.resx* です。 あるいは、フォルダーを使用してリソース ファイルを整理することもできます。 Home コント ローラーのパスは、*Resources/Controllers/HomeController.fr.resx* です。 `ResourcesPath` オプションを使用しない場合、 *.resx* ファイルは、プロジェクトの基本ディレクトリに置かれます。 `HomeController` のリソース ファイルは、*Controllers.HomeController.fr.resx* という名前になります。 ドットまたはパスの名前付け規則の選択は、リソース ファイルを整理する方法によって決まります。
 
 | リソース名 | ドットまたはパスの名前付け |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | ドット  |
 | Resources/Controllers/HomeController.fr.resx  | パス |
 
-Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、 *Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
+Razor ビューの `@inject IViewLocalizer` を使用するリソース ファイルは同様のパターンに従います。 ビューのリソース ファイルには、ドットの名前付けまたはパスの名前付けを使用して名前を付けることができます。 Razor ビューのリソース ファイルは、関連するビュー ファイルのパスを模倣します。 `ResourcesPath` を "Resources" に設定すると仮定すると、*Views/Home/About.cshtml* ビューに関連付けられるフランス語のリソース ファイルは、次のいずれかになります。
 
 * Resources/Views/Home/About.fr.resx
 
@@ -896,7 +896,7 @@ Razor ビューの `@inject IViewLocalizer` を使用するリソース ファ�
 * 既定では、ローカライズが機能しません。
 * アセンブリ内でのリソースの検索方法が原因で、ローカライズが失敗します。 `RootNamespace` はビルド時の値で、実行中のプロセスでは使用できません。 
 
-`RootNamespace` が `AssemblyName` と異なる場合、 *AssemblyInfo.cs* (パラメーターの値は実際の値に置き換えられます) に次を含めてください。
+`RootNamespace` が `AssemblyName` と異なる場合、*AssemblyInfo.cs* (パラメーターの値は実際の値に置き換えられます) に次を含めてください。
 
 ```csharp
 using System.Reflection;
@@ -922,11 +922,11 @@ using Microsoft.Extensions.Localization;
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio でリソース ファイルを生成する
 
-Visual Studio で、ファイル名にカルチャを指定せずにリソース ファイルを作成する場合 (たとえば、 *Welcome.resx* )、Visual Studio は各文字列のプロパティを使用して、C# クラスを作成します。 通常、ASP.NET Core ではこれを行いません。 一般的に既定の *.resx* リソース ファイル (カルチャ名のない *.resx* ファイル) は使用しません。 カルチャ名を含む *.resx* ファイル (たとえば *Welcome.fr.resx* ) を作成することをお勧めします。 カルチャ名を含む *.resx* ファイルを作成すると、Visual Studio はクラス ファイルを生成しません。
+Visual Studio で、ファイル名にカルチャを指定せずにリソース ファイルを作成する場合 (たとえば、*Welcome.resx*)、Visual Studio は各文字列のプロパティを使用して、C# クラスを作成します。 通常、ASP.NET Core ではこれを行いません。 一般的に既定の *.resx* リソース ファイル (カルチャ名のない *.resx* ファイル) は使用しません。 カルチャ名を含む *.resx* ファイル (たとえば *Welcome.fr.resx*) を作成することをお勧めします。 カルチャ名を含む *.resx* ファイルを作成すると、Visual Studio はクラス ファイルを生成しません。
 
 ### <a name="add-other-cultures"></a>その他のカルチャを追加する
 
-各言語とカルチャの組み合わせ (既定の言語以外) ごとに一意のリソース ファイルが必要です。 ISO 言語コードがファイル名の一部となるリソース ファイル (たとえば、 **en-us** 、 **fr-ca** 、 **en-gb** ) を新規作成することで、異なるカルチャとロケールのリソース ファイルを作成することができます。 *Welcome.es-MX.resx* (スペイン語/メキシコ) のように、ファイル名と *.resx* ファイル拡張子の間にこれらの ISO コードが置かれます。
+各言語とカルチャの組み合わせ (既定の言語以外) ごとに一意のリソース ファイルが必要です。 ISO 言語コードがファイル名の一部となるリソース ファイル (たとえば、**en-us**、**fr-ca**、**en-gb**) を新規作成することで、異なるカルチャとロケールのリソース ファイルを作成することができます。 *Welcome.es-MX.resx* (スペイン語/メキシコ) のように、ファイル名と *.resx* ファイル拡張子の間にこれらの ISO コードが置かれます。
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>要求ごとに言語/カルチャを選択するための戦略を実装する
 
@@ -938,7 +938,7 @@ Visual Studio で、ファイル名にカルチャを指定せずにリソース
 
 * `AddLocalization` は、ローカリゼーション サービスをサービス コンテナーに追加します。 上記のコードは、リソース パスを "Resources" に設定します。
 
-* `AddViewLocalization` は、ローカライズされたビュー ファイルのサポートを追加します。 このサンプル ビューでは、ローカリゼーションは、ビュー ファイルのサフィックスに基づいています。 たとえば、 *Index.fr.cshtml* ファイルの "fr" です。
+* `AddViewLocalization` は、ローカライズされたビュー ファイルのサポートを追加します。 このサンプル ビューでは、ローカリゼーションは、ビュー ファイルのサフィックスに基づいています。 たとえば、*Index.fr.cshtml* ファイルの "fr" です。
 
 * `AddDataAnnotationsLocalization` は、`IStringLocalizer` 抽象化を介してローカライズされた `DataAnnotations` 検証メッセージのサポートを追加します。
 
@@ -1072,7 +1072,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
-*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、 [依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
+*_SelectLanguagePartial.cshtml* をこのプロジェクトのサンプル コードに接続することはできません。 [GitHub](https://github.com/aspnet/entropy) の **Localization.StarterWeb** プロジェクトには、[依存関係の挿入](dependency-injection.md)コンテナーを介して Razor 部分に `RequestLocalizationOptions` をフローするコードがあります。
 
 ## <a name="model-binding-route-data-and-query-strings"></a>モデル バインド ルート データとクエリ文字列
 

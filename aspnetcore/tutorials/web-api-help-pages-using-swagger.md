@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
 ms.openlocfilehash: e5442c88048cf41e289fb476b4082cb6029b1b75
-ms.sourcegitcommit: 0d40fc4932531ce13fc4ee9432144584e03c2f1c
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93062455"
 ---
 # <a name="aspnet-core-web-api-documentation-with-swagger--openapi"></a>Swagger/OpenAPI を使用する ASP.NET Core Web API のドキュメント
@@ -50,7 +50,7 @@ Swagger プロジェクトは 2015 年に OpenAPI Initiative に寄贈され、�
 
 ## <a name="openapi-specification-openapijson"></a>OpenAPI の仕様 (openapi.json)
 
-OpenAPI の仕様は、API の機能について説明されているドキュメントです。 そのドキュメントは、コントローラーとモデル内の XML および属性の注釈に基づいています。 それは OpenAPI フローの中核部分であり、SwaggerUI などのツールを駆動するために使用されます。 既定では、 *openapi.json* という名前になっています。 簡略化された OpenAPI の仕様の例は次のとおりです。
+OpenAPI の仕様は、API の機能について説明されているドキュメントです。 そのドキュメントは、コントローラーとモデル内の XML および属性の注釈に基づいています。 それは OpenAPI フローの中核部分であり、SwaggerUI などのツールを駆動するために使用されます。 既定では、*openapi.json* という名前になっています。 簡略化された OpenAPI の仕様の例は次のとおりです。
 
 ```json
 {

@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: host-and-deploy/iis/advanced
 ms.openlocfilehash: 9f14929a7d298d6f4d66abcc88665db34fc072bf
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93058614"
 ---
 # <a name="advanced-configuration-of-the-aspnet-core-module-and-iis"></a>ASP.NET Core モジュールと IIS の詳細な構成
@@ -32,7 +32,7 @@ ms.locfileid: "93058614"
 
 ## <a name="modify-the-stack-size"></a>スタック サイズを変更する
 
-" *インプロセス ホスティング モデルを使用している場合にのみ適用されます。* "
+"*インプロセス ホスティング モデルを使用している場合にのみ適用されます。* "
 
 マネージド スタックのサイズは、`web.config` ファイルで `stackSize` の設定を使用して構成します (バイト単位)。 既定のサイズは 1,048,576 バイト (1 MB) です。 次の例では、スタック サイズを 2 MB (2,097,152 バイト) に変更します。
 
@@ -123,7 +123,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 **Web サーバー (IIS)** サーバーの役割を有効にし、役割のサービスを設定します。
 
-1. **[管理]** メニューから **役割と機能の追加** ウィザードを使用するか、 **サーバー マネージャー** にあるリンクを使用します。 **[サーバーの役割]** のステップで、 **[Web サーバー (IIS)]** チェック ボックスをオンにします。
+1. **[管理]** メニューから **役割と機能の追加** ウィザードを使用するか、**サーバー マネージャー** にあるリンクを使用します。 **[サーバーの役割]** のステップで、 **[Web サーバー (IIS)]** チェック ボックスをオンにします。
 
    ![[サーバーの役割の選択] のステップで Web サーバー IIS の役割を選択します。](index/_static/server-roles-ws2016.png)
 
@@ -226,7 +226,7 @@ IIS 管理プロセスは、Windows セキュリティ システムでのアプ�
 
 1. 読み取り &amp; 実行アクセス許可は、既定で付与される必要があります。 必要に応じて、追加のアクセス許可を提供します。
 
-**ICACLS** ツールを使用してコマンド プロンプトでアクセス許可を付与することもできます。 たとえば、 *DefaultAppPool* を使用する場合、次のコマンドを使用します。
+**ICACLS** ツールを使用してコマンド プロンプトでアクセス許可を付与することもできます。 たとえば、*DefaultAppPool* を使用する場合、次のコマンドを使用します。
 
 ```console
 ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
@@ -254,7 +254,7 @@ HTTP/2 は既定で有効になっています。 HTTP/2 接続が確立され�
 
 ## <a name="cors-preflight-requests"></a>CORS プレフライト要求
 
-" *このセクションは、.NET Framework をターゲットにした ASP.NET Core アプリにのみ適用されます。* "
+"*このセクションは、.NET Framework をターゲットにした ASP.NET Core アプリにのみ適用されます。* "
 
 .NET Framework をターゲットにした ASP.NET Core アプリの場合、IIS では既定で OPTIONS 要求がアプリに渡されません。 OPTIONS 要求を渡すように `web.config` でアプリの IIS のハンドラーを構成する方法については、[ASP.NET Web API 2 でのクロスオリジン要求の有効化:CORS のしくみ](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)に関する記事をご覧ください。
 
@@ -267,7 +267,7 @@ IIS 内で ASP.NET Core モジュール バージョン 2 によってホスト�
 
 ### <a name="application-initialization-module"></a>Application Initialization モジュール
 
-" *アプリのホストされているインプロセスとアウトプロセスに適用されます。* "
+"*アプリのホストされているインプロセスとアウトプロセスに適用されます。* "
 
 [IIS Application Initialization](/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization) は、アプリ プールが開始するときまたはリサイクルされるときに、アプリに HTTP 要求を送信する IIS 機能です。 要求によってアプリの起動がトリガーされます。 既定では、IIS ではアプリのルート URL (`/`) に対して要求が発行され、アプリが初期化されます (構成の詳細については[その他の技術情報](#application-initialization-module-and-idle-timeout-additional-resources)を参照)。
 
@@ -311,7 +311,7 @@ Windows Server 2008 R2 以降の場合:
 
 ### <a name="idle-timeout"></a>アイドル タイムアウト
 
-" *アプリのホストされているインプロセスにのみ適用されます。* "
+"*アプリのホストされているインプロセスにのみ適用されます。* "
 
 アプリがアイドル状態にならないようにするには、IIS マネージャーを使ってアプリ プールのアイドル タイムアウトを設定します。
 

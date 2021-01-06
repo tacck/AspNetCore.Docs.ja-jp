@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054373"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>チュートリアル: コンカレンシーの処理 - ASP.NET MVC と EF Core
@@ -117,7 +117,7 @@ Entity Framework がスローする `DbConcurrencyException` 例外を処理す�
 
 `Timestamp` 属性によって、データベースに送信された Update コマンドと Delete コマンドの Where 句にこの列が追加されます。 前のバージョンの SQL Server では、SQL `rowversion` に取って代わられる前、SQL `timestamp` というデータ型が使用されていたため、この属性は `Timestamp` と呼ばれています。 `rowversion` の .NET 型はバイト配列です。
 
-fluent API を利用する場合、次の例のように、`IsConcurrencyToken` メソッドを利用し ( *Data/SchoolContext.cs* で)、トラッキング プロパティを指定できます。
+fluent API を利用する場合、次の例のように、`IsConcurrencyToken` メソッドを利用し (*Data/SchoolContext.cs* で)、トラッキング プロパティを指定できます。
 
 ```csharp
 modelBuilder.Entity<Department>()

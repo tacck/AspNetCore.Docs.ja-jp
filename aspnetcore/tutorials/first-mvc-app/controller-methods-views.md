@@ -18,17 +18,17 @@ no-loc:
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
 ms.openlocfilehash: b4850821317b6907452793ef09194844c90c0137
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93050772"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>パート 6: ASP.NET Core のコントローラーのメソッドとビュー
 
 作成者: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ムービー アプリは上々の滑り出しでしたが、表示が理想的ではありません。たとえば、 **ReleaseDate** は 2 語でなければなりません。
+ムービー アプリは上々の滑り出しでしたが、表示が理想的ではありません。たとえば、**ReleaseDate** は 2 語でなければなりません。
 
 ![インデックス ビュー:Release Date が 1 語 (スペースなし) で、ムービーの公開日がすべて午前 12 時になっています](working-with-sql/_static/m55.png)
 
@@ -44,7 +44,7 @@ ms.locfileid: "93050772"
 
 ![[編集] リンクがマウスでポイントされ、リンク URL として https://localhost:5001/Movies/Edit/5 が表示されている状態のブラウザー ウィンドウ](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-**[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、 *Views/Movies/Index.cshtml* ファイルで Core MVC アンカー タグ ヘルパーによって生成されます。
+**[編集]** 、 **[詳細]** 、 **[削除]** の各リンクは、*Views/Movies/Index.cshtml* ファイルで Core MVC アンカー タグ ヘルパーによって生成されます。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -68,7 +68,7 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 <a name="get-post"></a>
 
-`Movies` コントローラーを開き、2 つの `Edit` アクション メソッドを調べます。 次に示すコードの `HTTP GET Edit` メソッドは、ムービーをフェッチし、 *Edit.cshtml* Razor ファイルによって生成される編集フォームを設定します。
+`Movies` コントローラーを開き、2 つの `Edit` アクション メソッドを調べます。 次に示すコードの `HTTP GET Edit` メソッドは、ムービーをフェッチし、*Edit.cshtml* Razor ファイルによって生成される編集フォームを設定します。
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -106,9 +106,9 @@ ASP.NET Core は、`https://localhost:5001/Movies/Edit/4` を、`Movies` コン�
 
 ::: moniker-end
 
-`HttpPost` 属性は、`POST` 要求に対して " *のみ* " この `Edit` メソッドを呼び出すことができることを指定します。 1 番目の Edit メソッドにも `[HttpGet]` 属性を適用してもかまいませんが、`[HttpGet]` が既定値なので必要ありません。
+`HttpPost` 属性は、`POST` 要求に対して "*のみ*" この `Edit` メソッドを呼び出すことができることを指定します。 1 番目の Edit メソッドにも `[HttpGet]` 属性を適用してもかまいませんが、`[HttpGet]` が既定値なので必要ありません。
 
-`ValidateAntiForgeryToken` 属性は [リクエスト フォージェリを防ぐ](xref:security/anti-request-forgery)ために使われ、編集ビュー ファイル ( *Views/Movies/Edit.cshtml* ) で生成されるフォージェリ対策トークンとペアにされます。 編集ビュー ファイルは、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)でフォージェリ対策トークンを生成します。
+`ValidateAntiForgeryToken` 属性は [リクエスト フォージェリを防ぐ](xref:security/anti-request-forgery)ために使われ、編集ビュー ファイル (*Views/Movies/Edit.cshtml*) で生成されるフォージェリ対策トークンとペアにされます。 編集ビュー ファイルは、[フォーム タグ ヘルパー](xref:mvc/views/working-with-forms)でフォージェリ対策トークンを生成します。
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 

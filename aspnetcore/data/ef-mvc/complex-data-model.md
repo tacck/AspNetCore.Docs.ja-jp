@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/complex-data-model
 ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054477"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>チュートリアル: 複合データ モデルを作成する - ASP.NET MVC と EF Core
@@ -146,7 +146,7 @@ dotnet ef migrations add ColumnFirstName
 dotnet ef database update
 ```
 
-**SQL Server オブジェクト エクスプローラー** で、 **Student** テーブルをダブルクリックして、Student テーブル デザイナーを開きます。
+**SQL Server オブジェクト エクスプローラー** で、**Student** テーブルをダブルクリックして、Student テーブル デザイナーを開きます。
 
 ![移行後の SSOX の Students テーブル](complex-data-model/_static/ssox-after-migration.png)
 
@@ -224,7 +224,7 @@ public OfficeAssignment OfficeAssignment { get; set; }
 
 ![OfficeAssignment エンティティ](complex-data-model/_static/officeassignment-entity.png)
 
-以下のコードを使用して、 *Models/OfficeAssignment.cs* を作成します。
+以下のコードを使用して、*Models/OfficeAssignment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu/Models/OfficeAssignment.cs)]
 
@@ -300,7 +300,7 @@ public ICollection<CourseAssignment> CourseAssignments { get; set; }
 
 ![Department エンティティ](complex-data-model/_static/department-entity.png)
 
-以下のコードを使用して、 *Models/Department.cs* を作成します。
+以下のコードを使用して、*Models/Department.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Begin)]
 
@@ -386,7 +386,7 @@ Enrollment テーブルに成績情報が含まれていなかった場合、含
 
 ![CourseAssignment エンティティ](complex-data-model/_static/courseassignment-entity.png)
 
-以下のコードを使用して、 *Models/CourseAssignment.cs* を作成します。
+以下のコードを使用して、*Models/CourseAssignment.cs* を作成します。
 
 [!code-csharp[](intro/samples/cu/Models/CourseAssignment.cs)]
 
@@ -396,7 +396,7 @@ Enrollment テーブルに成績情報が含まれていなかった場合、含
 
 ### <a name="composite-key"></a>複合キー
 
-外部キーが null 許容ではなく、テーブルの各行を一意に識別するために組み合わせて使用される場合、個別の主キーは必要ありません。 *InstructorID* および *CourseID* プロパティは複合主キーとして機能する必要があります。 EF に対する複合主キーを識別する唯一の方法は、 *fluent API* を使用することです (属性を使用して行うことはできません)。 次のセクションでは、複合主キーの構成方法を示します。
+外部キーが null 許容ではなく、テーブルの各行を一意に識別するために組み合わせて使用される場合、個別の主キーは必要ありません。 *InstructorID* および *CourseID* プロパティは複合主キーとして機能する必要があります。 EF に対する複合主キーを識別する唯一の方法は、*fluent API* を使用することです (属性を使用して行うことはできません)。 次のセクションでは、複合主キーの構成方法を示します。
 
 複合キーを使用すると、1 つのコースに対して複数の行を、また 1 人の講師に対して複数の行を使用できても、同じ講師とコースに対しては複数の行を使用できなくなります。 `Enrollment` 結合エンティティでは独自の主キーを定義するため、このような重複が考えられます。 このような重複を防ぐために、外部キー フィールドで一意のインデックスを追加するか、`CourseAssignment` と同様の複合主キーを使用して `Enrollment` を構成することができます。 詳細については、「[インデックス](/ef/core/modeling/indexes)」を参照してください。
 
@@ -410,7 +410,7 @@ Enrollment テーブルに成績情報が含まれていなかった場合、含
 
 ## <a name="about-a-fluent-api-alternative"></a>代替手段 fluent API について
 
-`DbContext` クラスの `OnModelCreating` メソッドのキーでは、 *fluent API* を使用して EF の動作を構成します。 API は "fluent" と呼ばれます。これは、[EF Core のドキュメント](/ef/core/modeling/#use-fluent-api-to-configure-a-model)の例に示されているように、多くの場合、一連のメソッド呼び出しを単一のステートメントにまとめて使用されるためです。
+`DbContext` クラスの `OnModelCreating` メソッドのキーでは、*fluent API* を使用して EF の動作を構成します。 API は "fluent" と呼ばれます。これは、[EF Core のドキュメント](/ef/core/modeling/#use-fluent-api-to-configure-a-model)の例に示されているように、多くの場合、一連のメソッド呼び出しを単一のステートメントにまとめて使用されるためです。
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -510,7 +510,7 @@ dotnet ef database update
 
 アプリを実行すると、`DbInitializer.Initialize` メソッドが実行され、新しいデータベースが設定されます。
 
-前の手順で行ったように SSOX でデータベースを開き、 **Tables** ノードを展開して、テーブルがすべて作成されたことを確認します (前に開いた SSOX がそのままの状態の場合は、 **[更新]** ボタンをクリックします)。
+前の手順で行ったように SSOX でデータベースを開き、**Tables** ノードを展開して、テーブルがすべて作成されたことを確認します (前に開いた SSOX がそのままの状態の場合は、 **[更新]** ボタンをクリックします)。
 
 ![SSOX のテーブル](complex-data-model/_static/ssox-tables.png)
 

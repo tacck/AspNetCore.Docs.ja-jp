@@ -20,10 +20,10 @@ no-loc:
 - SignalR
 uid: blazor/host-and-deploy/server
 ms.openlocfilehash: a209109210ef5e335734a974ceb0c2af7cb8e1a1
-ms.sourcegitcommit: 98f92d766d4f343d7e717b542c1b08da29e789c1
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/13/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "94595442"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Blazor Server のホストと展開
@@ -80,7 +80,7 @@ Blazor Server アプリには [Azure SignalR Service](xref:signalr/scale#azure-s
 
 ### <a name="configuration"></a>構成
 
-Azure SignalR サービス用にアプリを構成するには、そのアプリで "*スティッキー セッション*" をサポートする必要があります。それにより、クライアントは[プリレンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値は `Required` に設定されます。 通常、アプリでは次の方法のいずれか **_1 つ_** を使用して構成を作成します。
+Azure SignalR サービス用にアプリを構成するには、そのアプリで "*スティッキー セッション*" をサポートする必要があります。それにより、クライアントは [プリレンダリングのときに同じサーバーにリダイレクトされます](xref:blazor/hosting-models#connection-to-the-server)。 `ServerStickyMode` オプションまたは構成値は `Required` に設定されます。 通常、アプリでは次の方法のいずれか **_1 つ_** を使用して構成を作成します。
 
    * `Startup.ConfigureServices`:
   

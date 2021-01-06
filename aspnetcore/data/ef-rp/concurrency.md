@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-rp/concurrency
 ms.openlocfilehash: 573a509041bfb34faf50a227c451824db03f92ee
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93053996"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>パート 8、ASP.NET Core の Razor ページと EF Core - コンカレンシー
@@ -341,7 +341,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 ### <a name="update-the-delete-page"></a>[削除] ページを更新する
 
-次のコードを使用して、 *Pages/Departments/Delete.cshtml* を更新します。
+次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
 
 [!code-cshtml[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,42,51)]
 
@@ -639,7 +639,7 @@ Index ページが、値が変更され、rowVersion インジケーターが更
 
 ### <a name="update-the-delete-page"></a>[削除] ページを更新する
 
-次のコードを使用して、 *Pages/Departments/Delete.cshtml* を更新します。
+次のコードを使用して、*Pages/Departments/Delete.cshtml* を更新します。
 
 [!code-cshtml[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
 

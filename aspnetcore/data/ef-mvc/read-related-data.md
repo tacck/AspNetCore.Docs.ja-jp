@@ -19,10 +19,10 @@ no-loc:
 - SignalR
 uid: data/ef-mvc/read-related-data
 ms.openlocfilehash: 610a9e9b0007fb468ea9cdae6fadd2e756de4290
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "93054061"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>チュートリアル: 関連データを読み取る - ASP.NET MVC と EF Core
@@ -95,7 +95,7 @@ Course エンティティには、コースが割り当てられている部門�
 
 * `CourseID` プロパティ値を示す **Number** 列が追加されました。 既定では、主キーは、通常、エンド ユーザーにとって意味がないため、スキャフォールディングされません。 ただし、このケースでは、主キーは意味があり、表示する必要があります。
 
-* 部門名が表示されるように、 **Department** 列を変更しました。 コードは、`Department` ナビゲーション プロパティに読み込まれる Department エンティティの `Name` プロパティを表示します。
+* 部門名が表示されるように、**Department** 列を変更しました。 コードは、`Department` ナビゲーション プロパティに読み込まれる Department エンティティの `Name` プロパティを表示します。
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
@@ -227,7 +227,7 @@ Index メソッドを次のコードに置き換えて、関連データの一�
 
 [!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
 
-このコードでは、ビュー モデルの `Courses` プロパティを読み取り、コースのリストを表示します。 また、選択したコースの ID を `Index` アクション メソッドに送信する、 **Select** ハイパーリンクも指定します。
+このコードでは、ビュー モデルの `Courses` プロパティを読み取り、コースのリストを表示します。 また、選択したコースの ID を `Index` アクション メソッドに送信する、**Select** ハイパーリンクも指定します。
 
 ページを更新し、インストラクターを選択します。 選択したインストラクターに割り当てられたコースを表示するグリッドを表示し、各コースに割り当てられた部門の名前を表示します。
 
