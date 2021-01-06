@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 7f5cd3de38f1e45d9b188c513a0e62ca658b2992
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: 4b035fe59b8576eb387ddce67943386ccab55492
+ms.sourcegitcommit: 8dfcd2b4be936950c228b4d98430622a04254cd7
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035906"
+ms.lasthandoff: 12/26/2020
+ms.locfileid: "97792081"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core の構成プロバイダーの Azure Key Vault
 
@@ -41,7 +41,10 @@ By [Andrew Stanton-看護師](https://github.com/anurse)
 
 ## <a name="packages"></a>パッケージ
 
-パッケージ参照を [Azure.Extensions.AspNetCore.Configuration に追加します。シークレット](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/) パッケージ。
+次のパッケージのパッケージ参照を追加します。
+
+* [Azure.Extensions.AspNetCore.Configuration.Secrets](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets)
+* [Microsoft.Identity](https://www.nuget.org/packages/Azure.Identity)
 
 ## <a name="sample-app"></a>サンプル アプリ
 
@@ -193,7 +196,7 @@ Azure CLI、PowerShell、または Azure portal を使用して **アプリを�
 
 * クラスのインスタンスを作成し `DefaultAzureCredential` ます。資格情報は、Azure リソースの環境からアクセストークンを取得しようとします。
 * インスタンスを [`Azure.Security.KeyVault.Secrets.Secrets`](/dotnet/api/azure.security.keyvault.secrets) 使用して、新しいが作成され `DefaultAzureCredential` ます。
-* `Azure.Security.KeyVault.Secrets.Secrets`インスタンスは、の既定の実装で使用されます。この実装では、 `Azure.Extensions.Aspnetcore.Configuration.Secrets` すべてのシークレット値が読み込まれ、二重ダッシュ ( `--` ) がキー名のコロン () に置き換えられ `:` ます。
+* `Azure.Security.KeyVault.Secrets.Secrets`インスタンスは、の既定の実装で使用されます。この実装では、 `Azure.Extensions.AspNetCore.Configuration.Secrets` すべてのシークレット値が読み込まれ、二重ダッシュ ( `--` ) がキー名のコロン () に置き換えられ `:` ます。
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=12-14)]
 
@@ -227,23 +230,23 @@ config.AddAzureKeyVault(new SecretClient(new URI("Your Key Vault Endpoint"), new
 
 | プロパティ         | 説明 |
 | ---------------- | ----------- |
-| `Manager`        | `Azure.Extensions.Aspnetcore.Configuration.Secrets` シークレットの読み込みを制御するために使用されるインスタンス。 |
+| `Manager`        | `Azure.Extensions.AspNetCore.Configuration.Secrets` シークレットの読み込みを制御するために使用されるインスタンス。 |
 | `ReloadInterval` | `Timespan` キーコンテナーのポーリングによって変更が試行されるまでの待機時間。 既定値はです `null` (構成は再読み込みされません)。 |
 
 ## <a name="use-a-key-name-prefix"></a>キー名のプレフィックスを使用する
 
-AddAzureKeyVault は、の実装を受け入れるオーバーロードを提供します `Azure.Extensions.Aspnetcore.Configuration.Secrets` 。これにより、key vault のシークレットを構成キーに変換する方法を制御できます。 たとえば、アプリの起動時に指定されたプレフィックス値に基づいてシークレット値を読み込むようにインターフェイスを実装できます。 これにより、たとえば、アプリのバージョンに基づいてシークレットを読み込むことができます。
+AddAzureKeyVault は、の実装を受け入れるオーバーロードを提供します `Azure.Extensions.AspNetCore.Configuration.Secrets` 。これにより、key vault のシークレットを構成キーに変換する方法を制御できます。 たとえば、アプリの起動時に指定されたプレフィックス値に基づいてシークレット値を読み込むようにインターフェイスを実装できます。 これにより、たとえば、アプリのバージョンに基づいてシークレットを読み込むことができます。
 
 > [!WARNING]
 > Key vault シークレットのプレフィックスを使用して、複数のアプリのシークレットを同じ key vault に配置したり、環境の機密情報 ( *開発* 、 *運用* シークレットなど) を同じコンテナーに配置したりしないでください。 さまざまなアプリと開発/運用環境では、セキュリティレベルが最も高いアプリケーション環境を分離するために個別のキーコンテナーを使用することをお勧めします。
 
 次の例では、キーコンテナー (および開発環境のシークレットマネージャーツールを使用) でシークレットが確立されてい `5000-AppSecret` ます (キーコンテナーのシークレット名ではピリオドは使用できません)。 このシークレットは、アプリのバージョン5.0.0.0 のアプリシークレットを表します。 アプリの別のバージョンでは、5.1.0.0 は、キーコンテナーに (およびシークレットマネージャーツールを使用して) シークレットを追加し `5100-AppSecret` ます。 各アプリバージョンは、バージョン管理されたシークレット値をとして構成に読み込み `AppSecret` ます。これにより、シークレットが読み込まれるときにバージョンが除去されます。
 
-AddAzureKeyVault は、カスタムのを使用して呼び出され `Azure.Extensions.Aspnetcore.Configuration.Secrets` ます。
+AddAzureKeyVault は、カスタムのを使用して呼び出され `Azure.Extensions.AspNetCore.Configuration.Secrets` ます。
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
-実装によって、 `Azure.Extensions.Aspnetcore.Configuration.Secrets` シークレットのバージョンプレフィックスに反応し、適切なシークレットが構成に読み込まれます。
+実装によって、 `Azure.Extensions.AspNetCore.Configuration.Secrets` シークレットのバージョンプレフィックスに反応し、適切なシークレットが構成に読み込まれます。
 
 * `Load` 名前がプレフィックスで始まる場合に、シークレットを読み込みます。 他のシークレットは読み込まれていません。
 * `GetKey`:
@@ -328,7 +331,7 @@ JSON ファイルによって提供される次の [Serilog](https://serilog.net
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| キー | 値 |
+| Key | [値] |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -655,7 +658,7 @@ JSON ファイルによって提供される次の [Serilog](https://serilog.net
 
 前の JSON ファイルに示されている構成は、二重ダッシュ ( `--` ) 表記と数値セグメントを使用して Azure Key Vault に格納されます。
 
-| キー | 値 |
+| Key | [値] |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |

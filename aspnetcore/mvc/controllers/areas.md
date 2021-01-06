@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f3d76f612e67aeabf1f7fef694199332c732c593
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053528"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878413"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core の区分
 
@@ -71,7 +71,7 @@ ms.locfileid: "93053528"
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * Views
+      * ビュー
         * ホーム
           * Index.cshtml
         * 管理する
@@ -80,7 +80,7 @@ ms.locfileid: "93053528"
     * サービス
       * Controllers
         * HomeController.cs
-      * Views
+      * ビュー
         * ホーム
           * Index.cshtml
 
@@ -139,7 +139,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 ### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>_ViewStart.cshtml ファイルを使用した区分の共有レイアウト
 
-アプリ全体の共通レイアウトを共有するには、 [アプリケーションのルートフォルダー](#arf)にある *_ViewStart* を保持します。 詳細については、「<xref:mvc/views/layout>」を参照してください。
+アプリ全体の共通レイアウトを共有するには、[アプリケーションのルートフォルダー](#arf)にある *_ViewStart* を保持します。 詳細については、<xref:mvc/views/layout> を参照してください。
 
 <a name="arf"></a>
 
@@ -149,9 +149,9 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
- /ビュー */_ViewImports* 、MVC の場合は、ページの場合は */ページ/_ViewImports* の場合 Razor 、領域内のビューにはインポートされません。 次のいずれかの方法を使用して、ビューをすべてのビューにインポートします。
+ /ビュー */_ViewImports*、MVC の場合は、ページの場合は */ページ/_ViewImports* の場合 Razor 、領域内のビューにはインポートされません。 次のいずれかの方法を使用して、ビューをすべてのビューにインポートします。
 
-* [アプリケーションのルートフォルダー](#arf)に _ViewImports を追加し *ます* 。 アプリケーションルートフォルダー内の *_ViewImports* は、アプリ内のすべてのビューに適用されます。
+* [アプリケーションのルートフォルダー](#arf)に _ViewImports を追加し *ます*。 アプリケーションルートフォルダー内の *_ViewImports* は、アプリ内のすべてのビューに適用されます。
 * [区分] の下にある適切な表示フォルダーに _ViewImports ファイルをコピーし *ます* 。
 
 通常、 *_ViewImports* のファイルには、、、およびステートメントをインポートする [タグヘルパー](xref:mvc/views/tag-helpers/intro) が含まれています `@using` `@inject` 。 詳細については、「 [共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」を参照してください。
@@ -191,7 +191,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 サンプル ダウンロードには、[部分ビュー](xref:mvc/views/partial)が含まれます。部分ビューには、上記のリンクと区分が指定されていない同じリンクが含まれます。 部分ビューは[レイアウト ファイル](xref:mvc/views/layout)で参照されます。そのため、生成されたリンクがアプリのすべてのページに表示されます。 区分が指定されずに生成されたリンクは、同じ区分のページから参照されるときにのみ有効です。
 
-区分が指定されていないとき、ルーティングは " *アンビエント* " 値に依存します。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 サンプル アプリでは多くの場合、アンビエント値を使用すると、間違ったリンクが生成されます。 たとえば、次のコードから生成されるリンクを考えてみます。
+区分が指定されていないとき、ルーティングは "*アンビエント*" 値に依存します。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 サンプル アプリでは多くの場合、アンビエント値を使用すると、間違ったリンクが生成されます。 たとえば、次のコードから生成されるリンクを考えてみます。
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
@@ -211,7 +211,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 上のマークアップについて:
 
-* 完全修飾ドメイン名を使ってモデルを指定する必要があります (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`)。
+* モデル () を指定するには、完全修飾クラス名を使用する必要があり `@model RPareas.Areas.Services.Pages.Manage.AboutModel` ます。
 * [タグヘルパー](xref:mvc/views/tag-helpers/intro) は、によって有効になります。 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 サンプル ダウンロードでは、Products 区分に次の *_ViewImports.cshtml* ファイルが含まれています。
@@ -222,7 +222,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-上のファイルでは、 *Areas/Products/Pages/_ViewImports.cshtml* ファイルによって、名前空間と `@addTagHelper` ディレクティブがファイルにインポートされています。
+上のファイルでは、*Areas/Products/Pages/_ViewImports.cshtml* ファイルによって、名前空間と `@addTagHelper` ディレクティブがファイルにインポートされています。
 
 詳細については、「[タグ ヘルパーのスコープの管理](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)」と「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」をご覧ください。
 
@@ -273,7 +273,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
       * Controllers
         * HomeController.cs
         * ManageController.cs
-      * Views
+      * ビュー
         * ホーム
           * Index.cshtml
         * 管理する
@@ -282,7 +282,7 @@ URL スペースがすべての区分で統一されている場合、ルート 
     * サービス
       * Controllers
         * HomeController.cs
-      * Views
+      * ビュー
         * ホーム
           * Index.cshtml
 
@@ -341,7 +341,7 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-標準の場所では、 */Views/_ViewImports.cshtml* は区分に適用されません。 領域で共通の [タグヘルパー](xref:mvc/views/tag-helpers/intro)、、またはを使用するには、 `@using` `@inject` 適切な *_ViewImports cshtml* ファイルが [領域ビューに適用さ](xref:mvc/views/layout#importing-shared-directives)れていることを確認します。 すべてのビューで同じ動作が必要な場合は、 */Views/_ViewImports.cshtml* をアプリケーション ルートに移動します。
+標準の場所では、*/Views/_ViewImports.cshtml* は区分に適用されません。 領域で共通の [タグヘルパー](xref:mvc/views/tag-helpers/intro)、、またはを使用するには、 `@using` `@inject` 適切な *_ViewImports cshtml* ファイルが [領域ビューに適用さ](xref:mvc/views/layout#importing-shared-directives)れていることを確認します。 すべてのビューで同じ動作が必要な場合は、*/Views/_ViewImports.cshtml* をアプリケーション ルートに移動します。
 
 <a name="rename"></a>
 
@@ -380,7 +380,7 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 
 サンプル ダウンロードには、[部分ビュー](xref:mvc/views/partial)が含まれます。部分ビューには、上記のリンクと区分が指定されていない同じリンクが含まれます。 部分ビューは[レイアウト ファイル](xref:mvc/views/layout)で参照されます。そのため、生成されたリンクがアプリのすべてのページに表示されます。 区分が指定されずに生成されたリンクは、同じ区分のページから参照されるときにのみ有効です。
 
-区分が指定されていないとき、ルーティングは " *アンビエント* " 値に依存します。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 サンプル アプリでは多くの場合、アンビエント値を使用すると、間違ったリンクが生成されます。 たとえば、次のコードから生成されるリンクを考えてみます。
+区分が指定されていないとき、ルーティングは "*アンビエント*" 値に依存します。 現在の要求の現在のルート値は、リンク生成の場合、アンビエント値として見なされます。 サンプル アプリでは多くの場合、アンビエント値を使用すると、間違ったリンクが生成されます。 たとえば、次のコードから生成されるリンクを考えてみます。
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
@@ -411,7 +411,7 @@ ASP.NET Core 2.2 で `MapAreaRoute` を使用するときは、[この GitHub �
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-上のファイルでは、 *Areas/Products/Pages/_ViewImports.cshtml* ファイルによって、名前空間と `@addTagHelper` ディレクティブがファイルにインポートされています。
+上のファイルでは、*Areas/Products/Pages/_ViewImports.cshtml* ファイルによって、名前空間と `@addTagHelper` ディレクティブがファイルにインポートされています。
 
 詳細については、「[タグ ヘルパーのスコープの管理](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope)」と「[共有ディレクティブのインポート](xref:mvc/views/layout#importing-shared-directives)」をご覧ください。
 

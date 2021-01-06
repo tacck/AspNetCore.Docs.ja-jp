@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: accfd46fa72c33976f8af2a39267c993447e036e
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: dc70cfe7cb0c0f044f5f1e7ee68a293b3ea7507f
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93051942"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854653"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>認証によって保護されたユーザーデータを使用して ASP.NET Core web アプリを作成する
 
@@ -45,7 +45,7 @@ ms.locfileid: "93051942"
 
 このドキュメントの画像は、最新のテンプレートと完全には一致しません。
 
-次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を **編集** したりするだけで、 / **Delete** / 連絡先の新しいリンクを **作成** できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
+次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を **編集** したりするだけで、 /  / 連絡先の新しいリンクを **作成** できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
 
 ![Rick がサインインしていることを示すスクリーンショット](secure-data/_static/rick.png)
 
@@ -75,7 +75,7 @@ ms.locfileid: "93051942"
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -93,7 +93,7 @@ ms.locfileid: "93051942"
 
 [スターター](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/)アプリを[ダウンロード](xref:index#how-to-download-a-sample)します。
 
-アプリを実行し、[ **Contactmanager** ] リンクをタップして、連絡先を作成、編集、および削除できることを確認します。
+アプリを実行し、[ **Contactmanager** ] リンクをタップして、連絡先を作成、編集、および削除できることを確認します。 スターターアプリを作成するには、「 [スターターアプリを作成](#create-the-starter-app)する」を参照してください。
 
 ## <a name="secure-user-data"></a>ユーザーデータのセキュリティ保護
 
@@ -128,7 +128,7 @@ dotnet ef database update
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-前の強調表示されたコードは、 [フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。 フォールバック認証ポリシーでは、 *_all_* Razor 認証属性を持つページ、コントローラー、またはアクションメソッドを除き、* すべての _ ユーザーを認証する必要があります。 たとえば、 Razor ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。
+前の強調表示されたコードは、 [フォールバック認証ポリシー](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)を設定します。 フォールバック認証ポリシーでは、** Razor 認証属性を持つページ、コントローラー、またはアクションメソッドを除き、* すべての _ ユーザーを認証する必要があります。 たとえば、 Razor ページ、コントローラー、アクションメソッド `[AllowAnonymous]` は、 `[Authorize(PolicyName="MyPolicy")]` フォールバック認証ポリシーではなく、適用された認証属性を使用します。
 
 フォールバック認証ポリシー:
 
@@ -146,7 +146,7 @@ _ は、認証ポリシーを明示的に指定しないすべての要求に適
 
 上記のコードでは、承認フィルターを使用します。フォールバックポリシーを設定するには、エンドポイントルーティングを使用します。 すべてのユーザーが認証されるようにするには、フォールバックポリシーを設定することをお勧めします。
 
-[AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) `Index` `Privacy` 匿名ユーザーが登録前にサイトに関する情報を取得できるように、allowanonymous をおよびページに追加します。
+[](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) `Index` `Privacy` 匿名ユーザーが登録前にサイトに関する情報を取得できるように、allowanonymous をおよびページに追加します。
 
 [!code-csharp[](secure-data/samples/final3/Pages/Index.cshtml.cs?highlight=1,7)]
 
@@ -332,7 +332,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 * マネージャーは、連絡先データを承認/拒否することができます。 このビューには、 `Details` [ **承認** ] ボタンと [ **却下** ] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| User                | アプリによるシード処理 | オプション                                  |
+| ユーザー                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -399,7 +399,7 @@ dotnet ef database update
 * **管理者** は、連絡先データを承認または拒否できます。 承認された連絡先だけがユーザーに表示されます。
 * **管理者** は、任意のデータを承認/拒否したり、編集/削除したりできます。
 
-次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を **編集** したりするだけで、 / **Delete** / 連絡先の新しいリンクを **作成** できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
+次の図では、user Rick ( `rick@example.com` ) がサインインしています。 Rick は、承認された連絡先を表示したり、[削除] を **編集** したりするだけで、 /  / 連絡先の新しいリンクを **作成** できます。 Rick によって作成された最後のレコードにのみ、 **編集** および **削除** のリンクが表示されます。 他のユーザーには、マネージャーまたは管理者が状態を "承認済み" に変更するまで、最後のレコードは表示されません。
 
 ![Rick がサインインしていることを示すスクリーンショット](secure-data/_static/rick.png)
 
@@ -429,7 +429,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 管理者が連絡先を承認または拒否できるようにします。
 * `ContactAdministratorsAuthorizationHandler`: 管理者は、連絡先を承認または拒否したり、連絡先を編集または削除したりできます。
 
-## <a name="prerequisites"></a>[前提条件]
+## <a name="prerequisites"></a>前提条件
 
 このチュートリアルは高度です。 次のことを理解している必要があります。
 
@@ -659,7 +659,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 * マネージャーは、連絡先データを承認/拒否することができます。 このビューには、 `Details` [ **承認** ] ボタンと [ **却下** ] ボタンが表示されます。
 * 管理者は、すべてのデータを承認/拒否し、編集/削除することができます。
 
-| User                | アプリによるシード処理 | オプション                                  |
+| ユーザー                | アプリによるシード処理 | オプション                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
 | test@example.com    | いいえ                | 独自のデータを編集または削除します。                |
 | manager@contoso.com | はい               | 自分のデータを承認/拒否し、編集/削除します。 |
@@ -714,7 +714,7 @@ Create page model コンストラクターを更新して、 `DI_BasePageModel` 
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>その他の資料
+### <a name="additional-resources"></a>その他のリソース
 
 * [Azure App Service で .NET Core および SQL Database のアプリを作成する](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.NET Core の承認ラボ](https://github.com/blowdart/AspNetAuthorizationWorkshop)。 このチュートリアルで紹介するセキュリティ機能の詳細については、このラボを参照してください。

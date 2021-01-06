@@ -1,9 +1,9 @@
 ---
 title: ASP.NET Core でのログ記録と診断 SignalR
-author: anurse
+author: bradygaster
 description: ASP.NET Core アプリから診断を収集する方法について説明 SignalR します。
 monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
+ms.author: bradyg
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 49029bbd53b98425a05bdb82517238e3aa2e3b1f
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 23ebd61d9931f9cd83afbdcc5a718e42cc565317
+ms.sourcegitcommit: b23fed8c1a1d2aec2f9b5e09041442ecfafedd56
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506631"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97797341"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core でのログ記録と診断 SignalR
 
@@ -108,9 +108,19 @@ JavaScript クライアントを使用する場合は、でメソッドを使用
 
 カスタムログシステムにログを送信する場合は、インターフェイスを実装する JavaScript オブジェクトを指定でき `ILogger` ます。 実装する必要のあるメソッドは `log` 、イベントのレベルとイベントに関連付けられたメッセージを受け取るだけです。 次に例を示します。
 
-[!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
+::: moniker range=">= aspnetcore-3.0"
 
-## <a name="net-client-logging"></a>.NET クライアントのログ記録
+[!code-typescript[](diagnostics/3.x/custom-logger.ts?highlight=3-7,13)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[!code-typescript[](diagnostics/2.x/custom-logger.ts?highlight=3-7,13)]
+
+::: moniker-end
+
+## <a name="net-client-logging"></a> .NET クライアント ログ
 
 > [!WARNING]
 > クライアント側のログには、アプリからの機密情報が含まれる場合があります。 運用アプリから GitHub などのパブリック フォーラムに未加工のログを投稿 **しないでください**。

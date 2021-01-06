@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: c4c0ff83cb789e9aa35085496daa461404615726
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c37f0a3c528b6285fbf35f41eed781fb76c68de4
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061211"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854601"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR と ASP.NET Core の違い SignalR
 
@@ -35,7 +35,7 @@ ASP.NET Core SignalR は、ASP.NET のクライアントまたはサーバーと
 
 |                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
-| **サーバー NuGet パッケージ** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | なし。 [AspNetCore](xref:fundamentals/metapackage-app)共有フレームワークに含まれています。 |
+| **サーバー NuGet パッケージ** | [Microsoft AspNet。SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [なし] : [AspNetCore](xref:fundamentals/metapackage-app)共有フレームワークに含まれています。 |
 | **クライアント NuGet パッケージ** | [Microsoft SignalR . AspNet.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft SignalR . AspNet.NODE.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [AspNetCore SignalR .Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript クライアント npm パッケージ** | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
 | **Java クライアント** | [GitHub リポジトリ](https://github.com/SignalR/java-client) (非推奨)  | Maven パッケージ [signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
@@ -203,8 +203,8 @@ JQuery への依存関係は削除されましたが、プロジェクトは引�
 
 ### <a name="internet-explorer-support"></a>Internet Explorer のサポート
 
-ASP.NET Core で SignalR は、Microsoft Internet explorer 11 以降がサポートされていますが、ASP.NET で SignalR は Microsoft internet explorer 8 以降がサポートされています。
-ブラウザーサポートの詳細については、「 [サポートされているプラットフォーム](xref:signalr/supported-platforms#javascript-client)」を参照してください。
+ASP.NET Core SignalR は Microsoft internet explorer をサポートしていませんが、ASP.NET で SignalR は Microsoft internet explorer 8 以降がサポートされています。
+詳細については、「<xref:signalr/supported-platforms#javascript-client>」を参照してください。
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript クライアントメソッドの構文
 
@@ -291,7 +291,7 @@ ASP.NET は SignalR SQL Server と Redis をサポートしています。 ASP.N
 * [Azure SignalR サービス](/azure/azure-signalr/)
 * [Redis バックプレーン](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [ハブ](xref:signalr/hubs)
 * [JavaScript クライアント](xref:signalr/javascript-client)
