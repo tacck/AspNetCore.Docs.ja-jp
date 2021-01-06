@@ -4,7 +4,7 @@ author: scottaddie
 description: HttpRepl .NET Core グローバル ツールを使用して、ASP.NET Core Web API を参照およびテストする方法について説明します。
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: mvc, devx-track-azurecli
+ms.custom: mvc
 ms.date: 11/12/2020
 no-loc:
 - appsettings.json
@@ -19,58 +19,58 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: c661141c1bec93c0f7b6404964dc0bca2319b529
-ms.sourcegitcommit: 827e8be18cebbcc09b467c089e17fa6f5e430cb2
+ms.openlocfilehash: 1027887738740d50c30e24e800c0402b1ce4ad02
+ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/15/2020
-ms.locfileid: "94634614"
+ms.lasthandoff: 01/03/2021
+ms.locfileid: "97854666"
 ---
-# <a name="test-web-apis-with-the-httprepl"></a><span data-ttu-id="d98e6-103">HttpRepl を使用して Web API をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-103">Test web APIs with the HttpRepl</span></span>
+# <a name="test-web-apis-with-the-httprepl"></a><span data-ttu-id="2e6a8-103">HttpRepl を使用して Web API をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-103">Test web APIs with the HttpRepl</span></span>
 
-<span data-ttu-id="d98e6-104">作成者: [Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="d98e6-104">By [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
+<span data-ttu-id="2e6a8-104">作成者: [Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="2e6a8-104">By [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
 
-<span data-ttu-id="d98e6-105">HTTP Read-Eval-Print Loop (REPL) は:</span><span class="sxs-lookup"><span data-stu-id="d98e6-105">The HTTP Read-Eval-Print Loop (REPL) is:</span></span>
+<span data-ttu-id="2e6a8-105">HTTP Read-Eval-Print Loop (REPL) は:</span><span class="sxs-lookup"><span data-stu-id="2e6a8-105">The HTTP Read-Eval-Print Loop (REPL) is:</span></span>
 
-* <span data-ttu-id="d98e6-106">.NET Core がサポートされているすべての場所でサポートされている、軽量なクロスプラットフォーム コマンドライン ツールです。</span><span class="sxs-lookup"><span data-stu-id="d98e6-106">A lightweight, cross-platform command-line tool that's supported everywhere .NET Core is supported.</span></span>
-* <span data-ttu-id="d98e6-107">ASP.NET Core Web API (および ASP.NET 以外の Core Web API) をテストし、その結果を表示する HTTP 要求を作成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-107">Used for making HTTP requests to test ASP.NET Core web APIs (and non-ASP.NET Core web APIs) and view their results.</span></span>
-* <span data-ttu-id="d98e6-108">localhost や Azure App Service などの任意の環境でホストされている Web API をテストすることができます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-108">Capable of testing web APIs hosted in any environment, including localhost and Azure App Service.</span></span>
+* <span data-ttu-id="2e6a8-106">.NET Core がサポートされているすべての場所でサポートされている、軽量なクロスプラットフォーム コマンドライン ツールです。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-106">A lightweight, cross-platform command-line tool that's supported everywhere .NET Core is supported.</span></span>
+* <span data-ttu-id="2e6a8-107">ASP.NET Core Web API (および ASP.NET 以外の Core Web API) をテストし、その結果を表示する HTTP 要求を作成するために使用されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-107">Used for making HTTP requests to test ASP.NET Core web APIs (and non-ASP.NET Core web APIs) and view their results.</span></span>
+* <span data-ttu-id="2e6a8-108">localhost や Azure App Service などの任意の環境でホストされている Web API をテストすることができます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-108">Capable of testing web APIs hosted in any environment, including localhost and Azure App Service.</span></span>
 
-<span data-ttu-id="d98e6-109">次の [HTTP 動詞](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-109">The following [HTTP verbs](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) are supported:</span></span>
+<span data-ttu-id="2e6a8-109">次の [HTTP 動詞](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)がサポートされています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-109">The following [HTTP verbs](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) are supported:</span></span>
 
-* [<span data-ttu-id="d98e6-110">DELETE</span><span class="sxs-lookup"><span data-stu-id="d98e6-110">DELETE</span></span>](#test-http-delete-requests)
-* [<span data-ttu-id="d98e6-111">GET</span><span class="sxs-lookup"><span data-stu-id="d98e6-111">GET</span></span>](#test-http-get-requests)
-* [<span data-ttu-id="d98e6-112">HEAD</span><span class="sxs-lookup"><span data-stu-id="d98e6-112">HEAD</span></span>](#test-http-head-requests)
-* [<span data-ttu-id="d98e6-113">OPTIONS</span><span class="sxs-lookup"><span data-stu-id="d98e6-113">OPTIONS</span></span>](#test-http-options-requests)
-* [<span data-ttu-id="d98e6-114">PATCH</span><span class="sxs-lookup"><span data-stu-id="d98e6-114">PATCH</span></span>](#test-http-patch-requests)
-* [<span data-ttu-id="d98e6-115">POST</span><span class="sxs-lookup"><span data-stu-id="d98e6-115">POST</span></span>](#test-http-post-requests)
-* [<span data-ttu-id="d98e6-116">PUT</span><span class="sxs-lookup"><span data-stu-id="d98e6-116">PUT</span></span>](#test-http-put-requests)
+* [<span data-ttu-id="2e6a8-110">DELETE</span><span class="sxs-lookup"><span data-stu-id="2e6a8-110">DELETE</span></span>](#test-http-delete-requests)
+* [<span data-ttu-id="2e6a8-111">GET</span><span class="sxs-lookup"><span data-stu-id="2e6a8-111">GET</span></span>](#test-http-get-requests)
+* [<span data-ttu-id="2e6a8-112">HEAD</span><span class="sxs-lookup"><span data-stu-id="2e6a8-112">HEAD</span></span>](#test-http-head-requests)
+* [<span data-ttu-id="2e6a8-113">OPTIONS</span><span class="sxs-lookup"><span data-stu-id="2e6a8-113">OPTIONS</span></span>](#test-http-options-requests)
+* [<span data-ttu-id="2e6a8-114">PATCH</span><span class="sxs-lookup"><span data-stu-id="2e6a8-114">PATCH</span></span>](#test-http-patch-requests)
+* [<span data-ttu-id="2e6a8-115">POST</span><span class="sxs-lookup"><span data-stu-id="2e6a8-115">POST</span></span>](#test-http-post-requests)
+* [<span data-ttu-id="2e6a8-116">PUT</span><span class="sxs-lookup"><span data-stu-id="2e6a8-116">PUT</span></span>](#test-http-put-requests)
 
-<span data-ttu-id="d98e6-117">先に進むには、[サンプル ASP.NET Core Web API を表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="d98e6-117">To follow along, [view or download the sample ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="2e6a8-117">先に進むには、[サンプル ASP.NET Core Web API を表示またはダウンロードします](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([ダウンロード方法](xref:index#how-to-download-a-sample))。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-117">To follow along, [view or download the sample ASP.NET Core web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="d98e6-118">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="d98e6-118">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="2e6a8-118">必須コンポーネント</span><span class="sxs-lookup"><span data-stu-id="2e6a8-118">Prerequisites</span></span>
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
-## <a name="installation"></a><span data-ttu-id="d98e6-119">インストール</span><span class="sxs-lookup"><span data-stu-id="d98e6-119">Installation</span></span>
+## <a name="installation"></a><span data-ttu-id="2e6a8-119">インストール</span><span class="sxs-lookup"><span data-stu-id="2e6a8-119">Installation</span></span>
 
-<span data-ttu-id="d98e6-120">HttpRepl をインストールするには、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-120">To install the HttpRepl, run the following command:</span></span>
+<span data-ttu-id="2e6a8-120">HttpRepl をインストールするには、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-120">To install the HttpRepl, run the following command:</span></span>
 
 ```dotnetcli
 dotnet tool install -g Microsoft.dotnet-httprepl
 ```
 
-<span data-ttu-id="d98e6-121">[.Net Core グローバル ツール](/dotnet/core/tools/global-tools#install-a-global-tool)は、[Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet パッケージからインストールされます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-121">A [.NET Core Global Tool](/dotnet/core/tools/global-tools#install-a-global-tool) is installed from the [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet package.</span></span>
+<span data-ttu-id="2e6a8-121">[.Net Core グローバル ツール](/dotnet/core/tools/global-tools#install-a-global-tool)は、[Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet パッケージからインストールされます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-121">A [.NET Core Global Tool](/dotnet/core/tools/global-tools#install-a-global-tool) is installed from the [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet package.</span></span>
 
-## <a name="usage"></a><span data-ttu-id="d98e6-122">使用</span><span class="sxs-lookup"><span data-stu-id="d98e6-122">Usage</span></span>
+## <a name="usage"></a><span data-ttu-id="2e6a8-122">使用</span><span class="sxs-lookup"><span data-stu-id="2e6a8-122">Usage</span></span>
 
-<span data-ttu-id="d98e6-123">ツールのインストールが正常に完了したら、次のコマンドを実行して HttpRepl を開始します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-123">After successful installation of the tool, run the following command to start the HttpRepl:</span></span>
+<span data-ttu-id="2e6a8-123">ツールのインストールが正常に完了したら、次のコマンドを実行して HttpRepl を開始します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-123">After successful installation of the tool, run the following command to start the HttpRepl:</span></span>
 
 ```console
 httprepl
 ```
 
-<span data-ttu-id="d98e6-124">使用可能な HttpRepl コマンドを表示するには、次のコマンドのいずれかを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-124">To view the available HttpRepl commands, run one of the following commands:</span></span>
+<span data-ttu-id="2e6a8-124">使用可能な HttpRepl コマンドを表示するには、次のコマンドのいずれかを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-124">To view the available HttpRepl commands, run one of the following commands:</span></span>
 
 ```console
 httprepl -h
@@ -80,7 +80,7 @@ httprepl -h
 httprepl --help
 ```
 
-<span data-ttu-id="d98e6-125">次の出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-125">The following output is displayed:</span></span>
+<span data-ttu-id="2e6a8-125">次の出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-125">The following output is displayed:</span></span>
 
 ```console
 Usage:
@@ -135,57 +135,57 @@ Use `help <COMMAND>` for more detail on an individual command. e.g. `help get`.
 For detailed tool info, see https://aka.ms/http-repl-doc.
 ```
 
-<span data-ttu-id="d98e6-126">HttpRepl では、コマンド補完が提供されています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-126">The HttpRepl offers command completion.</span></span> <span data-ttu-id="d98e6-127"><kbd>Tab</kbd> キーを押すと、入力した文字または API エンドポイントを補完するコマンドの一覧が反復処理されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-127">Pressing the <kbd>Tab</kbd> key iterates through the list of commands that complete the characters or API endpoint that you typed.</span></span> <span data-ttu-id="d98e6-128">次のセクションでは、使用可能な CLI コマンドの概要を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-128">The following sections outline the available CLI commands.</span></span>
+<span data-ttu-id="2e6a8-126">HttpRepl では、コマンド補完が提供されています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-126">The HttpRepl offers command completion.</span></span> <span data-ttu-id="2e6a8-127"><kbd>Tab</kbd> キーを押すと、入力した文字または API エンドポイントを補完するコマンドの一覧が反復処理されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-127">Pressing the <kbd>Tab</kbd> key iterates through the list of commands that complete the characters or API endpoint that you typed.</span></span> <span data-ttu-id="2e6a8-128">次のセクションでは、使用可能な CLI コマンドの概要を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-128">The following sections outline the available CLI commands.</span></span>
 
-## <a name="connect-to-the-web-api"></a><span data-ttu-id="d98e6-129">Web API に接続する</span><span class="sxs-lookup"><span data-stu-id="d98e6-129">Connect to the web API</span></span>
+## <a name="connect-to-the-web-api"></a><span data-ttu-id="2e6a8-129">Web API に接続する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-129">Connect to the web API</span></span>
 
-<span data-ttu-id="d98e6-130">次のコマンドを実行して、Web API に接続します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-130">Connect to a web API by running the following command:</span></span>
+<span data-ttu-id="2e6a8-130">次のコマンドを実行して、Web API に接続します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-130">Connect to a web API by running the following command:</span></span>
 
 ```console
 httprepl <ROOT URI>
 ```
 
-<span data-ttu-id="d98e6-131">`<ROOT URI>` は、Web API のベース URI です。</span><span class="sxs-lookup"><span data-stu-id="d98e6-131">`<ROOT URI>` is the base URI for the web API.</span></span> <span data-ttu-id="d98e6-132">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-132">For example:</span></span>
+<span data-ttu-id="2e6a8-131">`<ROOT URI>` は、Web API のベース URI です。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-131">`<ROOT URI>` is the base URI for the web API.</span></span> <span data-ttu-id="2e6a8-132">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-132">For example:</span></span>
 
 ```console
 httprepl https://localhost:5001
 ```
 
-<span data-ttu-id="d98e6-133">または、HttpRepl の実行中に、次のコマンドをいつでも実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-133">Alternatively, run the following command at any time while the HttpRepl is running:</span></span>
+<span data-ttu-id="2e6a8-133">または、HttpRepl の実行中に、次のコマンドをいつでも実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-133">Alternatively, run the following command at any time while the HttpRepl is running:</span></span>
 
 ```console
 connect <ROOT URI>
 ```
 
-<span data-ttu-id="d98e6-134">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-134">For example:</span></span>
+<span data-ttu-id="2e6a8-134">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-134">For example:</span></span>
 
 ```console
 (Disconnected)> connect https://localhost:5001
 ```
 
-### <a name="manually-point-to-the-openapi-description-for-the-web-api"></a><span data-ttu-id="d98e6-135">Web API の OpenAPI の説明を手動でポイントする</span><span class="sxs-lookup"><span data-stu-id="d98e6-135">Manually point to the OpenAPI description for the web API</span></span>
+### <a name="manually-point-to-the-openapi-description-for-the-web-api"></a><span data-ttu-id="2e6a8-135">Web API の OpenAPI の説明を手動でポイントする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-135">Manually point to the OpenAPI description for the web API</span></span>
 
-<span data-ttu-id="d98e6-136">上記の connect コマンドでは、自動的に OpenAPI の説明の検索が試みられます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-136">The connect command above will attempt to find the OpenAPI description automatically.</span></span> <span data-ttu-id="d98e6-137">何らかの理由でそれができない場合は、`--openapi` オプションを使用して、Web API の OpenAPI の説明の URI を指定できます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-137">If for some reason it's unable to do so, you can specify the URI of the OpenAPI description for the web API by using the `--openapi` option:</span></span>
+<span data-ttu-id="2e6a8-136">上記の connect コマンドでは、自動的に OpenAPI の説明の検索が試みられます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-136">The connect command above will attempt to find the OpenAPI description automatically.</span></span> <span data-ttu-id="2e6a8-137">何らかの理由でそれができない場合は、`--openapi` オプションを使用して、Web API の OpenAPI の説明の URI を指定できます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-137">If for some reason it's unable to do so, you can specify the URI of the OpenAPI description for the web API by using the `--openapi` option:</span></span>
 
 ```console
 connect <ROOT URI> --openapi <OPENAPI DESCRIPTION ADDRESS>
 ```
 
-<span data-ttu-id="d98e6-138">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-138">For example:</span></span>
+<span data-ttu-id="2e6a8-138">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-138">For example:</span></span>
 
 ```console
 (Disconnected)> connect https://localhost:5001 --openapi /swagger/v1/swagger.json
 ```
 
-### <a name="enable-verbose-output-for-details-on-openapi-description-searching-parsing-and-validation"></a><span data-ttu-id="d98e6-139">OpenAPI の説明の検索、解析、検証に関する詳細の詳細出力を有効にする</span><span class="sxs-lookup"><span data-stu-id="d98e6-139">Enable verbose output for details on OpenAPI description searching, parsing, and validation</span></span>
+### <a name="enable-verbose-output-for-details-on-openapi-description-searching-parsing-and-validation"></a><span data-ttu-id="2e6a8-139">OpenAPI の説明の検索、解析、検証に関する詳細の詳細出力を有効にする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-139">Enable verbose output for details on OpenAPI description searching, parsing, and validation</span></span>
 
-<span data-ttu-id="d98e6-140">`connect` コマンドで `--verbose` オプションを指定すると、ツールで OpenAPI の説明が検索され、解析、検証される場合に、詳細が生成されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-140">Specifying the `--verbose` option with the `connect` command will produce more details when the tool searches for the OpenAPI description, parses, and validates it.</span></span>
+<span data-ttu-id="2e6a8-140">`connect` コマンドで `--verbose` オプションを指定すると、ツールで OpenAPI の説明が検索され、解析、検証される場合に、詳細が生成されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-140">Specifying the `--verbose` option with the `connect` command will produce more details when the tool searches for the OpenAPI description, parses, and validates it.</span></span>
 
 ```console
 connect <ROOT URI> --verbose
 ```
 
-<span data-ttu-id="d98e6-141">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-141">For example:</span></span>
+<span data-ttu-id="2e6a8-141">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-141">For example:</span></span>
 
 ```console
 (Disconnected)> connect https://localhost:5001 --verbose
@@ -197,17 +197,17 @@ The field 'info' in 'document' object is REQUIRED [#/info]
 The field 'paths' in 'document' object is REQUIRED [#/paths]
 ```
 
-## <a name="navigate-the-web-api"></a><span data-ttu-id="d98e6-142">Web API 内を移動する</span><span class="sxs-lookup"><span data-stu-id="d98e6-142">Navigate the web API</span></span>
+## <a name="navigate-the-web-api"></a><span data-ttu-id="2e6a8-142">Web API 内を移動する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-142">Navigate the web API</span></span>
 
-### <a name="view-available-endpoints"></a><span data-ttu-id="d98e6-143">使用可能なエンドポイントを表示する</span><span class="sxs-lookup"><span data-stu-id="d98e6-143">View available endpoints</span></span>
+### <a name="view-available-endpoints"></a><span data-ttu-id="2e6a8-143">使用可能なエンドポイントを表示する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-143">View available endpoints</span></span>
 
-<span data-ttu-id="d98e6-144">Web API アドレスの現在のパスにあるさまざまなエンドポイント (コントローラー) を一覧表示するには、`ls` コマンドまたは `dir` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-144">To list the different endpoints (controllers) at the current path of the web API address, run the `ls` or `dir` command:</span></span>
+<span data-ttu-id="2e6a8-144">Web API アドレスの現在のパスにあるさまざまなエンドポイント (コントローラー) を一覧表示するには、`ls` コマンドまたは `dir` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-144">To list the different endpoints (controllers) at the current path of the web API address, run the `ls` or `dir` command:</span></span>
 
 ```console
 https://localhost:5001/> ls
 ```
 
-<span data-ttu-id="d98e6-145">次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-145">The following output format is displayed:</span></span>
+<span data-ttu-id="2e6a8-145">次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-145">The following output format is displayed:</span></span>
 
 ```console
 .        []
@@ -217,9 +217,9 @@ People   [get|post]
 https://localhost:5001/>
 ```
 
-<span data-ttu-id="d98e6-146">前の出力では、`Fruits` と `People` の 2 つのコントローラーが使用可能であることが示されています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-146">The preceding output indicates that there are two controllers available: `Fruits` and `People`.</span></span> <span data-ttu-id="d98e6-147">どちらのコントローラーでも、パラメーターなしの HTTP GET 操作と POST 操作がサポートされます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-147">Both controllers support parameterless HTTP GET and POST operations.</span></span>
+<span data-ttu-id="2e6a8-146">前の出力では、`Fruits` と `People` の 2 つのコントローラーが使用可能であることが示されています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-146">The preceding output indicates that there are two controllers available: `Fruits` and `People`.</span></span> <span data-ttu-id="2e6a8-147">どちらのコントローラーでも、パラメーターなしの HTTP GET 操作と POST 操作がサポートされます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-147">Both controllers support parameterless HTTP GET and POST operations.</span></span>
 
-<span data-ttu-id="d98e6-148">特定のコントローラーに移動すると、詳細がわかります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-148">Navigating into a specific controller reveals more detail.</span></span> <span data-ttu-id="d98e6-149">たとえば、次のコマンドの出力は、`Fruits` コントローラーが HTTP GET、PUT、DELETE の各操作をサポートしていることを示しています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-149">For example, the following command's output shows the `Fruits` controller also supports HTTP GET, PUT, and DELETE operations.</span></span> <span data-ttu-id="d98e6-150">これらの各操作には、ルートで `id` パラメーターが必要です。</span><span class="sxs-lookup"><span data-stu-id="d98e6-150">Each of these operations expects an `id` parameter in the route:</span></span>
+<span data-ttu-id="2e6a8-148">特定のコントローラーに移動すると、詳細がわかります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-148">Navigating into a specific controller reveals more detail.</span></span> <span data-ttu-id="2e6a8-149">たとえば、次のコマンドの出力は、`Fruits` コントローラーが HTTP GET、PUT、DELETE の各操作をサポートしていることを示しています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-149">For example, the following command's output shows the `Fruits` controller also supports HTTP GET, PUT, and DELETE operations.</span></span> <span data-ttu-id="2e6a8-150">これらの各操作には、ルートで `id` パラメーターが必要です。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-150">Each of these operations expects an `id` parameter in the route:</span></span>
 
 ```console
 https://localhost:5001/fruits> ls
@@ -230,21 +230,21 @@ https://localhost:5001/fruits> ls
 https://localhost:5001/fruits>
 ```
 
-<span data-ttu-id="d98e6-151">または、`ui` コマンドを実行して、ブラウザーで Web API の Swagger UI ページを開きます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-151">Alternatively, run the `ui` command to open the web API's Swagger UI page in a browser.</span></span> <span data-ttu-id="d98e6-152">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-152">For example:</span></span>
+<span data-ttu-id="2e6a8-151">または、`ui` コマンドを実行して、ブラウザーで Web API の Swagger UI ページを開きます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-151">Alternatively, run the `ui` command to open the web API's Swagger UI page in a browser.</span></span> <span data-ttu-id="2e6a8-152">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-152">For example:</span></span>
 
 ```console
 https://localhost:5001/> ui
 ```
 
-### <a name="navigate-to-an-endpoint"></a><span data-ttu-id="d98e6-153">エンドポイントに移動する</span><span class="sxs-lookup"><span data-stu-id="d98e6-153">Navigate to an endpoint</span></span>
+### <a name="navigate-to-an-endpoint"></a><span data-ttu-id="2e6a8-153">エンドポイントに移動する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-153">Navigate to an endpoint</span></span>
 
-<span data-ttu-id="d98e6-154">Web API の別のエンドポイントに移動するには、`cd` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-154">To navigate to a different endpoint on the web API, run the `cd` command:</span></span>
+<span data-ttu-id="2e6a8-154">Web API の別のエンドポイントに移動するには、`cd` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-154">To navigate to a different endpoint on the web API, run the `cd` command:</span></span>
 
 ```console
 https://localhost:5001/> cd people
 ```
 
-<span data-ttu-id="d98e6-155">`cd` コマンドの後のパスでは大文字と小文字が区別されません。</span><span class="sxs-lookup"><span data-stu-id="d98e6-155">The path following the `cd` command is case insensitive.</span></span> <span data-ttu-id="d98e6-156">次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-156">The following output format is displayed:</span></span>
+<span data-ttu-id="2e6a8-155">`cd` コマンドの後のパスでは大文字と小文字が区別されません。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-155">The path following the `cd` command is case insensitive.</span></span> <span data-ttu-id="2e6a8-156">次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-156">The following output format is displayed:</span></span>
 
 ```console
 /people    [get|post]
@@ -252,35 +252,35 @@ https://localhost:5001/> cd people
 https://localhost:5001/people>
 ```
 
-## <a name="customize-the-httprepl"></a><span data-ttu-id="d98e6-157">HttpRepl をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="d98e6-157">Customize the HttpRepl</span></span>
+## <a name="customize-the-httprepl"></a><span data-ttu-id="2e6a8-157">HttpRepl をカスタマイズする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-157">Customize the HttpRepl</span></span>
 
-<span data-ttu-id="d98e6-158">HttpRepl の既定の[色](#set-color-preferences)はカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-158">The HttpRepl's default [colors](#set-color-preferences) can be customized.</span></span> <span data-ttu-id="d98e6-159">また、[既定のテキストエディター](#set-the-default-text-editor)を定義することもできます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-159">Additionally, a [default text editor](#set-the-default-text-editor) can be defined.</span></span> <span data-ttu-id="d98e6-160">HttpRepl の設定は、現在のセッションで永続化され、今後のセッションで受け入れられます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-160">The HttpRepl preferences are persisted across the current session and are honored in future sessions.</span></span> <span data-ttu-id="d98e6-161">変更した設定は、次のファイルに格納されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-161">Once modified, the preferences are stored in the following file:</span></span>
+<span data-ttu-id="2e6a8-158">HttpRepl の既定の[色](#set-color-preferences)はカスタマイズできます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-158">The HttpRepl's default [colors](#set-color-preferences) can be customized.</span></span> <span data-ttu-id="2e6a8-159">また、[既定のテキストエディター](#set-the-default-text-editor)を定義することもできます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-159">Additionally, a [default text editor](#set-the-default-text-editor) can be defined.</span></span> <span data-ttu-id="2e6a8-160">HttpRepl の設定は、現在のセッションで永続化され、今後のセッションで受け入れられます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-160">The HttpRepl preferences are persisted across the current session and are honored in future sessions.</span></span> <span data-ttu-id="2e6a8-161">変更した設定は、次のファイルに格納されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-161">Once modified, the preferences are stored in the following file:</span></span>
 
-# <a name="linux"></a>[<span data-ttu-id="d98e6-162">Linux</span><span class="sxs-lookup"><span data-stu-id="d98e6-162">Linux</span></span>](#tab/linux)
+# <a name="linux"></a>[<span data-ttu-id="2e6a8-162">Linux</span><span class="sxs-lookup"><span data-stu-id="2e6a8-162">Linux</span></span>](#tab/linux)
 
-<span data-ttu-id="d98e6-163">*%HOME%/.httpreplprefs*</span><span class="sxs-lookup"><span data-stu-id="d98e6-163">*%HOME%/.httpreplprefs*</span></span>
+<span data-ttu-id="2e6a8-163">*%HOME%/.httpreplprefs*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-163">*%HOME%/.httpreplprefs*</span></span>
 
-# <a name="macos"></a>[<span data-ttu-id="d98e6-164">macOS</span><span class="sxs-lookup"><span data-stu-id="d98e6-164">macOS</span></span>](#tab/macos)
+# <a name="macos"></a>[<span data-ttu-id="2e6a8-164">macOS</span><span class="sxs-lookup"><span data-stu-id="2e6a8-164">macOS</span></span>](#tab/macos)
 
-<span data-ttu-id="d98e6-165">*%HOME%/.httpreplprefs*</span><span class="sxs-lookup"><span data-stu-id="d98e6-165">*%HOME%/.httpreplprefs*</span></span>
+<span data-ttu-id="2e6a8-165">*%HOME%/.httpreplprefs*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-165">*%HOME%/.httpreplprefs*</span></span>
 
-# <a name="windows"></a>[<span data-ttu-id="d98e6-166">Windows</span><span class="sxs-lookup"><span data-stu-id="d98e6-166">Windows</span></span>](#tab/windows)
+# <a name="windows"></a>[<span data-ttu-id="2e6a8-166">Windows</span><span class="sxs-lookup"><span data-stu-id="2e6a8-166">Windows</span></span>](#tab/windows)
 
-<span data-ttu-id="d98e6-167">*%USERPROFILE%\\.httpreplprefs*</span><span class="sxs-lookup"><span data-stu-id="d98e6-167">*%USERPROFILE%\\.httpreplprefs*</span></span>
+<span data-ttu-id="2e6a8-167">*%USERPROFILE%\\.httpreplprefs*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-167">*%USERPROFILE%\\.httpreplprefs*</span></span>
 
 ---
 
-<span data-ttu-id="d98e6-168">*.httpreplprefs* ファイルは起動時に読み込まれ、実行時の変更は監視されません。</span><span class="sxs-lookup"><span data-stu-id="d98e6-168">The *.httpreplprefs* file is loaded on startup and not monitored for changes at runtime.</span></span> <span data-ttu-id="d98e6-169">ファイルに対する手動の変更は、ツールを再起動した後でのみ有効になります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-169">Manual modifications to the file take effect only after restarting the tool.</span></span>
+<span data-ttu-id="2e6a8-168">*.httpreplprefs* ファイルは起動時に読み込まれ、実行時の変更は監視されません。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-168">The *.httpreplprefs* file is loaded on startup and not monitored for changes at runtime.</span></span> <span data-ttu-id="2e6a8-169">ファイルに対する手動の変更は、ツールを再起動した後でのみ有効になります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-169">Manual modifications to the file take effect only after restarting the tool.</span></span>
 
-### <a name="view-the-settings"></a><span data-ttu-id="d98e6-170">設定を表示する</span><span class="sxs-lookup"><span data-stu-id="d98e6-170">View the settings</span></span>
+### <a name="view-the-settings"></a><span data-ttu-id="2e6a8-170">設定を表示する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-170">View the settings</span></span>
 
-<span data-ttu-id="d98e6-171">使用可能な設定を表示するには、`pref get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-171">To view the available settings, run the `pref get` command.</span></span> <span data-ttu-id="d98e6-172">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-172">For example:</span></span>
+<span data-ttu-id="2e6a8-171">使用可能な設定を表示するには、`pref get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-171">To view the available settings, run the `pref get` command.</span></span> <span data-ttu-id="2e6a8-172">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-172">For example:</span></span>
 
 ```console
 https://localhost:5001/> pref get
 ```
 
-<span data-ttu-id="d98e6-173">上記のコマンドでは、使用可能なキーと値のペアが表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-173">The preceding command displays the available key-value pairs:</span></span>
+<span data-ttu-id="2e6a8-173">上記のコマンドでは、使用可能なキーと値のペアが表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-173">The preceding command displays the available key-value pairs:</span></span>
 
 ```console
 colors.json=Green
@@ -293,26 +293,26 @@ colors.protocol=BoldGreen
 colors.status=BoldYellow
 ```
 
-### <a name="set-color-preferences"></a><span data-ttu-id="d98e6-174">色の設定を設定する</span><span class="sxs-lookup"><span data-stu-id="d98e6-174">Set color preferences</span></span>
+### <a name="set-color-preferences"></a><span data-ttu-id="2e6a8-174">色の設定を設定する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-174">Set color preferences</span></span>
 
-<span data-ttu-id="d98e6-175">応答の色付けは、現在、JSON でのみサポートされています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-175">Response colorization is currently supported for JSON only.</span></span> <span data-ttu-id="d98e6-176">既定の HttpRepl ツールの色分けをカスタマイズするには、変更する色に対応するキーを見つけます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-176">To customize the default HttpRepl tool coloring, locate the key corresponding to the color to be changed.</span></span> <span data-ttu-id="d98e6-177">キーを検索する方法については、「[設定を表示する](#view-the-settings)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="d98e6-177">For instructions on how to find the keys, see the [View the settings](#view-the-settings) section.</span></span> <span data-ttu-id="d98e6-178">たとえば、次のように、`colors.json` キー値を `Green` から `White` に変更します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-178">For example, change the `colors.json` key value from `Green` to `White` as follows:</span></span>
+<span data-ttu-id="2e6a8-175">応答の色付けは、現在、JSON でのみサポートされています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-175">Response colorization is currently supported for JSON only.</span></span> <span data-ttu-id="2e6a8-176">既定の HttpRepl ツールの色分けをカスタマイズするには、変更する色に対応するキーを見つけます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-176">To customize the default HttpRepl tool coloring, locate the key corresponding to the color to be changed.</span></span> <span data-ttu-id="2e6a8-177">キーを検索する方法については、「[設定を表示する](#view-the-settings)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-177">For instructions on how to find the keys, see the [View the settings](#view-the-settings) section.</span></span> <span data-ttu-id="2e6a8-178">たとえば、次のように、`colors.json` キー値を `Green` から `White` に変更します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-178">For example, change the `colors.json` key value from `Green` to `White` as follows:</span></span>
 
 ```console
 https://localhost:5001/people> pref set colors.json White
 ```
 
-<span data-ttu-id="d98e6-179">使用できるのは、[許可されている色](https://github.com/dotnet/HttpRepl/blob/01d5c3c3373e98fe566ff5ef8a17c571de880293/src/Microsoft.Repl/ConsoleHandling/AllowedColors.cs)だけです。</span><span class="sxs-lookup"><span data-stu-id="d98e6-179">Only the [allowed colors](https://github.com/dotnet/HttpRepl/blob/01d5c3c3373e98fe566ff5ef8a17c571de880293/src/Microsoft.Repl/ConsoleHandling/AllowedColors.cs) may be used.</span></span> <span data-ttu-id="d98e6-180">後続の HTTP 要求では、出力が新しい色で表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-180">Subsequent HTTP requests display output with the new coloring.</span></span>
+<span data-ttu-id="2e6a8-179">使用できるのは、[許可されている色](https://github.com/dotnet/HttpRepl/blob/01d5c3c3373e98fe566ff5ef8a17c571de880293/src/Microsoft.Repl/ConsoleHandling/AllowedColors.cs)だけです。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-179">Only the [allowed colors](https://github.com/dotnet/HttpRepl/blob/01d5c3c3373e98fe566ff5ef8a17c571de880293/src/Microsoft.Repl/ConsoleHandling/AllowedColors.cs) may be used.</span></span> <span data-ttu-id="2e6a8-180">後続の HTTP 要求では、出力が新しい色で表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-180">Subsequent HTTP requests display output with the new coloring.</span></span>
 
-<span data-ttu-id="d98e6-181">特定の色キーが設定されていない場合、より汎用的なキーが考慮されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-181">When specific color keys aren't set, more generic keys are considered.</span></span> <span data-ttu-id="d98e6-182">このフォールバック動作を示すために、次の例を考えてみます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-182">To demonstrate this fallback behavior, consider the following example:</span></span>
+<span data-ttu-id="2e6a8-181">特定の色キーが設定されていない場合、より汎用的なキーが考慮されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-181">When specific color keys aren't set, more generic keys are considered.</span></span> <span data-ttu-id="2e6a8-182">このフォールバック動作を示すために、次の例を考えてみます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-182">To demonstrate this fallback behavior, consider the following example:</span></span>
 
-* <span data-ttu-id="d98e6-183">`colors.json.name` に値がない場合は、`colors.json.string` が使用されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-183">If `colors.json.name` doesn't have a value, `colors.json.string` is used.</span></span>
-* <span data-ttu-id="d98e6-184">`colors.json.string` に値がない場合は、`colors.json.literal` が使用されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-184">If `colors.json.string` doesn't have a value, `colors.json.literal` is used.</span></span>
-* <span data-ttu-id="d98e6-185">`colors.json.literal` に値がない場合は、`colors.json` が使用されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-185">If `colors.json.literal` doesn't have a value, `colors.json` is used.</span></span> 
-* <span data-ttu-id="d98e6-186">`colors.json` 値がない場合は、コマンド シェルの既定のテキストの色 (`AllowedColors.None`) が使用されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-186">If `colors.json` doesn't have a value, the command shell's default text color (`AllowedColors.None`) is used.</span></span>
+* <span data-ttu-id="2e6a8-183">`colors.json.name` に値がない場合は、`colors.json.string` が使用されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-183">If `colors.json.name` doesn't have a value, `colors.json.string` is used.</span></span>
+* <span data-ttu-id="2e6a8-184">`colors.json.string` に値がない場合は、`colors.json.literal` が使用されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-184">If `colors.json.string` doesn't have a value, `colors.json.literal` is used.</span></span>
+* <span data-ttu-id="2e6a8-185">`colors.json.literal` に値がない場合は、`colors.json` が使用されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-185">If `colors.json.literal` doesn't have a value, `colors.json` is used.</span></span> 
+* <span data-ttu-id="2e6a8-186">`colors.json` 値がない場合は、コマンド シェルの既定のテキストの色 (`AllowedColors.None`) が使用されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-186">If `colors.json` doesn't have a value, the command shell's default text color (`AllowedColors.None`) is used.</span></span>
 
-### <a name="set-indentation-size"></a><span data-ttu-id="d98e6-187">インデントのサイズを設定する</span><span class="sxs-lookup"><span data-stu-id="d98e6-187">Set indentation size</span></span>
+### <a name="set-indentation-size"></a><span data-ttu-id="2e6a8-187">インデントのサイズを設定する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-187">Set indentation size</span></span>
 
-<span data-ttu-id="d98e6-188">応答インデント サイズのカスタマイズは、現在、JSON でのみサポートされています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-188">Response indentation size customization is currently supported for JSON only.</span></span> <span data-ttu-id="d98e6-189">既定のサイズは 2 つのスペースです。</span><span class="sxs-lookup"><span data-stu-id="d98e6-189">The default size is two spaces.</span></span> <span data-ttu-id="d98e6-190">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-190">For example:</span></span>
+<span data-ttu-id="2e6a8-188">応答インデント サイズのカスタマイズは、現在、JSON でのみサポートされています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-188">Response indentation size customization is currently supported for JSON only.</span></span> <span data-ttu-id="2e6a8-189">既定のサイズは 2 つのスペースです。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-189">The default size is two spaces.</span></span> <span data-ttu-id="2e6a8-190">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-190">For example:</span></span>
 
 ```json
 [
@@ -331,13 +331,13 @@ https://localhost:5001/people> pref set colors.json White
 ]
 ```
 
-<span data-ttu-id="d98e6-191">既定のサイズを変更するには、`formatting.json.indentSize` キーを設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-191">To change the default size, set the `formatting.json.indentSize` key.</span></span> <span data-ttu-id="d98e6-192">たとえば、常に 4 つのスペースを使用するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-192">For example, to always use four spaces:</span></span>
+<span data-ttu-id="2e6a8-191">既定のサイズを変更するには、`formatting.json.indentSize` キーを設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-191">To change the default size, set the `formatting.json.indentSize` key.</span></span> <span data-ttu-id="2e6a8-192">たとえば、常に 4 つのスペースを使用するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-192">For example, to always use four spaces:</span></span>
 
 ```console
 pref set formatting.json.indentSize 4
 ```
 
-<span data-ttu-id="d98e6-193">後続の応答では、4 つのスペースの設定が優先されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-193">Subsequent responses honor the setting of four spaces:</span></span>
+<span data-ttu-id="2e6a8-193">後続の応答では、4 つのスペースの設定が優先されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-193">Subsequent responses honor the setting of four spaces:</span></span>
 
 ```json
 [
@@ -356,29 +356,29 @@ pref set formatting.json.indentSize 4
 ]
 ```
 
-### <a name="set-the-default-text-editor"></a><span data-ttu-id="d98e6-194">既定のテキスト エディターを設定する</span><span class="sxs-lookup"><span data-stu-id="d98e6-194">Set the default text editor</span></span>
+### <a name="set-the-default-text-editor"></a><span data-ttu-id="2e6a8-194">既定のテキスト エディターを設定する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-194">Set the default text editor</span></span>
 
-<span data-ttu-id="d98e6-195">既定では、HttpRepl には、使用するように構成されたテキスト エディターはありません。</span><span class="sxs-lookup"><span data-stu-id="d98e6-195">By default, the HttpRepl has no text editor configured for use.</span></span> <span data-ttu-id="d98e6-196">HTTP 要求本文を必要とする Web API メソッドをテストするには、既定のテキスト エディターを設定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-196">To test web API methods requiring an HTTP request body, a default text editor must be set.</span></span> <span data-ttu-id="d98e6-197">HttpRepl ツールによって、要求本文を作成する目的のためだけに構成されたテキスト エディターが起動します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-197">The HttpRepl tool launches the configured text editor for the sole purpose of composing the request body.</span></span> <span data-ttu-id="d98e6-198">次のコマンドを実行して、優先テキストエディターを既定値として設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-198">Run the following command to set your preferred text editor as the default:</span></span>
+<span data-ttu-id="2e6a8-195">既定では、HttpRepl には、使用するように構成されたテキスト エディターはありません。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-195">By default, the HttpRepl has no text editor configured for use.</span></span> <span data-ttu-id="2e6a8-196">HTTP 要求本文を必要とする Web API メソッドをテストするには、既定のテキスト エディターを設定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-196">To test web API methods requiring an HTTP request body, a default text editor must be set.</span></span> <span data-ttu-id="2e6a8-197">HttpRepl ツールによって、要求本文を作成する目的のためだけに構成されたテキスト エディターが起動します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-197">The HttpRepl tool launches the configured text editor for the sole purpose of composing the request body.</span></span> <span data-ttu-id="2e6a8-198">次のコマンドを実行して、優先テキストエディターを既定値として設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-198">Run the following command to set your preferred text editor as the default:</span></span>
 
 ```console
 pref set editor.command.default "<EXECUTABLE>"
 ```
 
-<span data-ttu-id="d98e6-199">上記のコマンドで、`<EXECUTABLE>` はテキスト エディターの実行可能ファイルへの完全なパスです。</span><span class="sxs-lookup"><span data-stu-id="d98e6-199">In the preceding command, `<EXECUTABLE>` is the full path to the text editor's executable file.</span></span> <span data-ttu-id="d98e6-200">たとえば、次のコマンドを実行して、既定のテキストエディターとして Visual Studio Code を設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-200">For example, run the following command to set Visual Studio Code as the default text editor:</span></span>
+<span data-ttu-id="2e6a8-199">上記のコマンドで、`<EXECUTABLE>` はテキスト エディターの実行可能ファイルへの完全なパスです。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-199">In the preceding command, `<EXECUTABLE>` is the full path to the text editor's executable file.</span></span> <span data-ttu-id="2e6a8-200">たとえば、次のコマンドを実行して、既定のテキストエディターとして Visual Studio Code を設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-200">For example, run the following command to set Visual Studio Code as the default text editor:</span></span>
 
-# <a name="linux"></a>[<span data-ttu-id="d98e6-201">Linux</span><span class="sxs-lookup"><span data-stu-id="d98e6-201">Linux</span></span>](#tab/linux)
+# <a name="linux"></a>[<span data-ttu-id="2e6a8-201">Linux</span><span class="sxs-lookup"><span data-stu-id="2e6a8-201">Linux</span></span>](#tab/linux)
 
 ```console
 pref set editor.command.default "/usr/bin/code"
 ```
 
-# <a name="macos"></a>[<span data-ttu-id="d98e6-202">macOS</span><span class="sxs-lookup"><span data-stu-id="d98e6-202">macOS</span></span>](#tab/macos)
+# <a name="macos"></a>[<span data-ttu-id="2e6a8-202">macOS</span><span class="sxs-lookup"><span data-stu-id="2e6a8-202">macOS</span></span>](#tab/macos)
 
 ```console
 pref set editor.command.default "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
 ```
 
-# <a name="windows"></a>[<span data-ttu-id="d98e6-203">Windows</span><span class="sxs-lookup"><span data-stu-id="d98e6-203">Windows</span></span>](#tab/windows)
+# <a name="windows"></a>[<span data-ttu-id="2e6a8-203">Windows</span><span class="sxs-lookup"><span data-stu-id="2e6a8-203">Windows</span></span>](#tab/windows)
 
 ```console
 pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
@@ -386,77 +386,77 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-<span data-ttu-id="d98e6-204">特定の CLI 引数を使用して既定のテキスト エディターを起動するには、`editor.command.default.arguments` キーを設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-204">To launch the default text editor with specific CLI arguments, set the `editor.command.default.arguments` key.</span></span> <span data-ttu-id="d98e6-205">たとえば、Visual Studio Code が既定のテキスト エディターで、拡張機能が無効になっている新しいセッションでは HttpRepl で常に Visual Studio Code を開きたいとします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-205">For example, assume Visual Studio Code is the default text editor and that you always want the HttpRepl to open Visual Studio Code in a new session with extensions disabled.</span></span> <span data-ttu-id="d98e6-206">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-206">Run the following command:</span></span>
+<span data-ttu-id="2e6a8-204">特定の CLI 引数を使用して既定のテキスト エディターを起動するには、`editor.command.default.arguments` キーを設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-204">To launch the default text editor with specific CLI arguments, set the `editor.command.default.arguments` key.</span></span> <span data-ttu-id="2e6a8-205">たとえば、Visual Studio Code が既定のテキスト エディターで、拡張機能が無効になっている新しいセッションでは HttpRepl で常に Visual Studio Code を開きたいとします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-205">For example, assume Visual Studio Code is the default text editor and that you always want the HttpRepl to open Visual Studio Code in a new session with extensions disabled.</span></span> <span data-ttu-id="2e6a8-206">次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-206">Run the following command:</span></span>
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
 ```
 
 > [!TIP]
-> <span data-ttu-id="d98e6-207">既定のエディターが Visual Studio Code 場合、通常、`-w` または `--wait` 引数を渡して、Visual Studio Code に、ファイルが閉じられてから戻るように待機させます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-207">If your default editor is Visual Studio Code, you'll usually want to pass the `-w` or `--wait` argument to force Visual Studio Code to wait for you to close the file before returning.</span></span>
+> <span data-ttu-id="2e6a8-207">既定のエディターが Visual Studio Code 場合、通常、`-w` または `--wait` 引数を渡して、Visual Studio Code に、ファイルが閉じられてから戻るように待機させます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-207">If your default editor is Visual Studio Code, you'll usually want to pass the `-w` or `--wait` argument to force Visual Studio Code to wait for you to close the file before returning.</span></span>
 
-### <a name="set-the-openapi-description-search-paths"></a><span data-ttu-id="d98e6-208">OpenAPI の説明の検索パスを設定する</span><span class="sxs-lookup"><span data-stu-id="d98e6-208">Set the OpenAPI Description search paths</span></span>
+### <a name="set-the-openapi-description-search-paths"></a><span data-ttu-id="2e6a8-208">OpenAPI の説明の検索パスを設定する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-208">Set the OpenAPI Description search paths</span></span>
 
-<span data-ttu-id="d98e6-209">HttpRepl には既定の相対パスのセットがあり、`connect` コマンドが `--openapi` オプションを指定せずに実行された場合に、それを使用して OpenAPI の説明が検索されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-209">By default, the HttpRepl has a set of relative paths that it uses to find the OpenAPI description when executing the `connect` command without the `--openapi` option.</span></span> <span data-ttu-id="d98e6-210">これらの相対パスは、`connect` コマンドで指定されているルート パスおよびベース パスと組み合わされます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-210">These relative paths are combined with the root and base paths specified in the `connect` command.</span></span> <span data-ttu-id="d98e6-211">既定の相対パスは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="d98e6-211">The default relative paths are:</span></span>
+<span data-ttu-id="2e6a8-209">HttpRepl には既定の相対パスのセットがあり、`connect` コマンドが `--openapi` オプションを指定せずに実行された場合に、それを使用して OpenAPI の説明が検索されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-209">By default, the HttpRepl has a set of relative paths that it uses to find the OpenAPI description when executing the `connect` command without the `--openapi` option.</span></span> <span data-ttu-id="2e6a8-210">これらの相対パスは、`connect` コマンドで指定されているルート パスおよびベース パスと組み合わされます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-210">These relative paths are combined with the root and base paths specified in the `connect` command.</span></span> <span data-ttu-id="2e6a8-211">既定の相対パスは次のとおりです。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-211">The default relative paths are:</span></span>
 
-- <span data-ttu-id="d98e6-212">*swagger.json*</span><span class="sxs-lookup"><span data-stu-id="d98e6-212">*swagger.json*</span></span>
-- <span data-ttu-id="d98e6-213">*swagger/v1/swagger.json*</span><span class="sxs-lookup"><span data-stu-id="d98e6-213">*swagger/v1/swagger.json*</span></span>
-- <span data-ttu-id="d98e6-214">*/swagger.json*</span><span class="sxs-lookup"><span data-stu-id="d98e6-214">*/swagger.json*</span></span>
-- <span data-ttu-id="d98e6-215">*/swagger/v1/swagger.json*</span><span class="sxs-lookup"><span data-stu-id="d98e6-215">*/swagger/v1/swagger.json*</span></span>
-- <span data-ttu-id="d98e6-216">*openapi.json*</span><span class="sxs-lookup"><span data-stu-id="d98e6-216">*openapi.json*</span></span>
-- <span data-ttu-id="d98e6-217">*/openapi.json*</span><span class="sxs-lookup"><span data-stu-id="d98e6-217">*/openapi.json*</span></span>
+- <span data-ttu-id="2e6a8-212">*swagger.json*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-212">*swagger.json*</span></span>
+- <span data-ttu-id="2e6a8-213">*swagger/v1/swagger.json*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-213">*swagger/v1/swagger.json*</span></span>
+- <span data-ttu-id="2e6a8-214">*/swagger.json*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-214">*/swagger.json*</span></span>
+- <span data-ttu-id="2e6a8-215">*/swagger/v1/swagger.json*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-215">*/swagger/v1/swagger.json*</span></span>
+- <span data-ttu-id="2e6a8-216">*openapi.json*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-216">*openapi.json*</span></span>
+- <span data-ttu-id="2e6a8-217">*/openapi.json*</span><span class="sxs-lookup"><span data-stu-id="2e6a8-217">*/openapi.json*</span></span>
 
-<span data-ttu-id="d98e6-218">環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-218">To use a different set of search paths in your environment, set the `swagger.searchPaths` preference.</span></span> <span data-ttu-id="d98e6-219">値としては、パイプで区切られた相対パスのリストを指定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-219">The value must be a pipe-delimited list of relative paths.</span></span> <span data-ttu-id="d98e6-220">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-220">For example:</span></span>
+<span data-ttu-id="2e6a8-218">環境で別の検索パスのセットを使用するには、ユーザー設定 `swagger.searchPaths` を設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-218">To use a different set of search paths in your environment, set the `swagger.searchPaths` preference.</span></span> <span data-ttu-id="2e6a8-219">値としては、パイプで区切られた相対パスのリストを指定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-219">The value must be a pipe-delimited list of relative paths.</span></span> <span data-ttu-id="2e6a8-220">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-220">For example:</span></span>
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 ```
 
-<span data-ttu-id="d98e6-221">既定のリストを完全に置き換えるのではなく、パスを追加または削除してリストを変更することもできます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-221">Instead of replacing the default list altogether, the list can also be modified by adding or removing paths.</span></span>
+<span data-ttu-id="2e6a8-221">既定のリストを完全に置き換えるのではなく、パスを追加または削除してリストを変更することもできます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-221">Instead of replacing the default list altogether, the list can also be modified by adding or removing paths.</span></span>
 
-<span data-ttu-id="d98e6-222">既定のリストに 1 つ以上の検索パスを追加するには、`swagger.addToSearchPaths` 設定を指定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-222">To add one or more search paths to the default list, set the `swagger.addToSearchPaths` preference.</span></span> <span data-ttu-id="d98e6-223">値としては、パイプで区切られた相対パスのリストを指定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-223">The value must be a pipe-delimited list of relative paths.</span></span> <span data-ttu-id="d98e6-224">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-224">For example:</span></span>
+<span data-ttu-id="2e6a8-222">既定のリストに 1 つ以上の検索パスを追加するには、`swagger.addToSearchPaths` 設定を指定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-222">To add one or more search paths to the default list, set the `swagger.addToSearchPaths` preference.</span></span> <span data-ttu-id="2e6a8-223">値としては、パイプで区切られた相対パスのリストを指定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-223">The value must be a pipe-delimited list of relative paths.</span></span> <span data-ttu-id="2e6a8-224">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-224">For example:</span></span>
 
 ```console
 pref set swagger.addToSearchPaths "openapi/v2/openapi.json|openapi/v3/openapi.json"
 ```
 
-<span data-ttu-id="d98e6-225">既定のリストから 1 つ以上の検索パスを削除するには、`swagger.addToSearchPaths` 設定を指定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-225">To remove one or more search paths from the default list, set the `swagger.addToSearchPaths` preference.</span></span> <span data-ttu-id="d98e6-226">値としては、パイプで区切られた相対パスのリストを指定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-226">The value must be a pipe-delimited list of relative paths.</span></span> <span data-ttu-id="d98e6-227">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-227">For example:</span></span>
+<span data-ttu-id="2e6a8-225">既定のリストから 1 つ以上の検索パスを削除するには、`swagger.addToSearchPaths` 設定を指定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-225">To remove one or more search paths from the default list, set the `swagger.addToSearchPaths` preference.</span></span> <span data-ttu-id="2e6a8-226">値としては、パイプで区切られた相対パスのリストを指定する必要があります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-226">The value must be a pipe-delimited list of relative paths.</span></span> <span data-ttu-id="2e6a8-227">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-227">For example:</span></span>
 
 ```console
 pref set swagger.removeFromSearchPaths "swagger.json|/swagger.json"
 ```
 
-## <a name="test-http-get-requests"></a><span data-ttu-id="d98e6-228">HTTP GET 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-228">Test HTTP GET requests</span></span>
+## <a name="test-http-get-requests"></a><span data-ttu-id="2e6a8-228">HTTP GET 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-228">Test HTTP GET requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-229">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-229">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-229">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-229">Synopsis</span></span>
 
 ```console
 get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-230">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-230">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-230">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-230">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-231">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-231">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-231">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-231">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-232">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-232">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-232">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-232">Options</span></span>
 
-<span data-ttu-id="d98e6-233">`get` コマンドには以下のオプションを使用できます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-233">The following options are available for the `get` command:</span></span>
+<span data-ttu-id="2e6a8-233">`get` コマンドには以下のオプションを使用できます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-233">The following options are available for the `get` command:</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
-### <a name="example"></a><span data-ttu-id="d98e6-234">例</span><span class="sxs-lookup"><span data-stu-id="d98e6-234">Example</span></span>
+### <a name="example"></a><span data-ttu-id="2e6a8-234">例</span><span class="sxs-lookup"><span data-stu-id="2e6a8-234">Example</span></span>
 
-<span data-ttu-id="d98e6-235">HTTP GET 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-235">To issue an HTTP GET request:</span></span>
+<span data-ttu-id="2e6a8-235">HTTP GET 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-235">To issue an HTTP GET request:</span></span>
 
-1. <span data-ttu-id="d98e6-236">それをサポートしているエンドポイントで `get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-236">Run the `get` command on an endpoint that supports it:</span></span>
+1. <span data-ttu-id="2e6a8-236">それをサポートしているエンドポイントで `get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-236">Run the `get` command on an endpoint that supports it:</span></span>
 
     ```console
     https://localhost:5001/people> get
     ```
 
-    <span data-ttu-id="d98e6-237">上記のコマンドでは、次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-237">The preceding command displays the following output format:</span></span>
+    <span data-ttu-id="2e6a8-237">上記のコマンドでは、次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-237">The preceding command displays the following output format:</span></span>
 
     ```console
     HTTP/1.1 200 OK
@@ -484,13 +484,13 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response:body] [--response
     https://localhost:5001/people>
     ```
 
-1. <span data-ttu-id="d98e6-238">`get` コマンドにパラメーターを渡すことによって、特定のレコードを取得します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-238">Retrieve a specific record by passing a parameter to the `get` command:</span></span>
+1. <span data-ttu-id="2e6a8-238">`get` コマンドにパラメーターを渡すことによって、特定のレコードを取得します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-238">Retrieve a specific record by passing a parameter to the `get` command:</span></span>
 
     ```console
     https://localhost:5001/people> get 2
     ```
 
-    <span data-ttu-id="d98e6-239">上記のコマンドでは、次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-239">The preceding command displays the following output format:</span></span>
+    <span data-ttu-id="2e6a8-239">上記のコマンドでは、次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-239">The preceding command displays the following output format:</span></span>
 
     ```console
     HTTP/1.1 200 OK
@@ -510,37 +510,37 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response:body] [--response
     https://localhost:5001/people>
     ```
 
-## <a name="test-http-post-requests"></a><span data-ttu-id="d98e6-240">HTTP POST 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-240">Test HTTP POST requests</span></span>
+## <a name="test-http-post-requests"></a><span data-ttu-id="2e6a8-240">HTTP POST 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-240">Test HTTP POST requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-241">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-241">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-241">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-241">Synopsis</span></span>
 
 ```console
 post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-formatting] [--response] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-242">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-242">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-242">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-242">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-243">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-243">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-243">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-243">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-244">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-244">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-244">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-244">Options</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
 [!INCLUDE [HTTP request body CLI options](~/includes/http-repl/requires-body-options.md)]
 
-### <a name="example"></a><span data-ttu-id="d98e6-245">例</span><span class="sxs-lookup"><span data-stu-id="d98e6-245">Example</span></span>
+### <a name="example"></a><span data-ttu-id="2e6a8-245">例</span><span class="sxs-lookup"><span data-stu-id="2e6a8-245">Example</span></span>
 
-<span data-ttu-id="d98e6-246">HTTP POST 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-246">To issue an HTTP POST request:</span></span>
+<span data-ttu-id="2e6a8-246">HTTP POST 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-246">To issue an HTTP POST request:</span></span>
 
-1. <span data-ttu-id="d98e6-247">それをサポートしているエンドポイントで `post` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-247">Run the `post` command on an endpoint that supports it:</span></span>
+1. <span data-ttu-id="2e6a8-247">それをサポートしているエンドポイントで `post` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-247">Run the `post` command on an endpoint that supports it:</span></span>
 
     ```console
     https://localhost:5001/people> post -h Content-Type=application/json
     ```
 
-    <span data-ttu-id="d98e6-248">前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-248">In the preceding command, the `Content-Type` HTTP request header is set to indicate a request body media type of JSON.</span></span> <span data-ttu-id="d98e6-249">既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-249">The default text editor opens a *.tmp* file with a JSON template representing the HTTP request body.</span></span> <span data-ttu-id="d98e6-250">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-250">For example:</span></span>
+    <span data-ttu-id="2e6a8-248">前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-248">In the preceding command, the `Content-Type` HTTP request header is set to indicate a request body media type of JSON.</span></span> <span data-ttu-id="2e6a8-249">既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-249">The default text editor opens a *.tmp* file with a JSON template representing the HTTP request body.</span></span> <span data-ttu-id="2e6a8-250">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-250">For example:</span></span>
 
     ```json
     {
@@ -550,9 +550,9 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
     ```
 
     > [!TIP]
-    > <span data-ttu-id="d98e6-251">既定のテキスト エディターを設定するには、「[既定のテキスト エディターを設定する](#set-the-default-text-editor)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="d98e6-251">To set the default text editor, see the [Set the default text editor](#set-the-default-text-editor) section.</span></span>
+    > <span data-ttu-id="2e6a8-251">既定のテキスト エディターを設定するには、「[既定のテキスト エディターを設定する](#set-the-default-text-editor)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-251">To set the default text editor, see the [Set the default text editor](#set-the-default-text-editor) section.</span></span>
 
-1. <span data-ttu-id="d98e6-252">モデルの検証要件を満たすように JSON テンプレートを変更します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-252">Modify the JSON template to satisfy model validation requirements:</span></span>
+1. <span data-ttu-id="2e6a8-252">モデルの検証要件を満たすように JSON テンプレートを変更します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-252">Modify the JSON template to satisfy model validation requirements:</span></span>
 
     ```json
     {
@@ -561,7 +561,7 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
     }
     ```
 
-1. <span data-ttu-id="d98e6-253">*.tmp* ファイルを保存して、テキスト エディターを閉じます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-253">Save the *.tmp* file, and close the text editor.</span></span> <span data-ttu-id="d98e6-254">コマンド シェルに次の出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-254">The following output appears in the command shell:</span></span>
+1. <span data-ttu-id="2e6a8-253">*.tmp* ファイルを保存して、テキスト エディターを閉じます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-253">Save the *.tmp* file, and close the text editor.</span></span> <span data-ttu-id="2e6a8-254">コマンド シェルに次の出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-254">The following output appears in the command shell:</span></span>
 
     ```console
     HTTP/1.1 201 Created
@@ -580,31 +580,31 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
     https://localhost:5001/people>
     ```
 
-## <a name="test-http-put-requests"></a><span data-ttu-id="d98e6-255">HTTP PUT 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-255">Test HTTP PUT requests</span></span>
+## <a name="test-http-put-requests"></a><span data-ttu-id="2e6a8-255">HTTP PUT 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-255">Test HTTP PUT requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-256">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-256">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-256">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-256">Synopsis</span></span>
 
 ```console
 put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-formatting] [--response] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-257">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-257">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-257">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-257">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-258">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-258">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-258">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-258">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-259">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-259">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-259">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-259">Options</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
 [!INCLUDE [HTTP request body CLI options](~/includes/http-repl/requires-body-options.md)]
 
-### <a name="example"></a><span data-ttu-id="d98e6-260">例</span><span class="sxs-lookup"><span data-stu-id="d98e6-260">Example</span></span>
+### <a name="example"></a><span data-ttu-id="2e6a8-260">例</span><span class="sxs-lookup"><span data-stu-id="2e6a8-260">Example</span></span>
 
-<span data-ttu-id="d98e6-261">HTTP PUT 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-261">To issue an HTTP PUT request:</span></span>
+<span data-ttu-id="2e6a8-261">HTTP PUT 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-261">To issue an HTTP PUT request:</span></span>
 
-1. <span data-ttu-id="d98e6-262">*省略可能*:変更前にデータを表示するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-262">*Optional*: Run the `get` command to view the data before modifying it:</span></span>
+1. <span data-ttu-id="2e6a8-262">*省略可能*:変更前にデータを表示するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-262">*Optional*: Run the `get` command to view the data before modifying it:</span></span>
 
     ```console
     https://localhost:5001/fruits> get
@@ -630,13 +630,13 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     ]
     ```
 
-1. <span data-ttu-id="d98e6-263">それをサポートしているエンドポイントで `put` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-263">Run the `put` command on an endpoint that supports it:</span></span>
+1. <span data-ttu-id="2e6a8-263">それをサポートしているエンドポイントで `put` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-263">Run the `put` command on an endpoint that supports it:</span></span>
 
     ```console
     https://localhost:5001/fruits> put 2 -h Content-Type=application/json
     ```
 
-    <span data-ttu-id="d98e6-264">前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。</span><span class="sxs-lookup"><span data-stu-id="d98e6-264">In the preceding command, the `Content-Type` HTTP request header is set to indicate a request body media type of JSON.</span></span> <span data-ttu-id="d98e6-265">既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-265">The default text editor opens a *.tmp* file with a JSON template representing the HTTP request body.</span></span> <span data-ttu-id="d98e6-266">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-266">For example:</span></span>
+    <span data-ttu-id="2e6a8-264">前のコマンドでは、`Content-Type` HTTP 要求ヘッダーが JSON の要求本文メディアの種類を示すように設定されています。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-264">In the preceding command, the `Content-Type` HTTP request header is set to indicate a request body media type of JSON.</span></span> <span data-ttu-id="2e6a8-265">既定のテキスト エディターでは、HTTP 要求本文を表す JSON テンプレートを含む *.tmp* ファイルが開かれます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-265">The default text editor opens a *.tmp* file with a JSON template representing the HTTP request body.</span></span> <span data-ttu-id="2e6a8-266">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-266">For example:</span></span>
 
     ```json
     {
@@ -646,9 +646,9 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     ```
 
     > [!TIP]
-    > <span data-ttu-id="d98e6-267">既定のテキスト エディターを設定するには、「[既定のテキスト エディターを設定する](#set-the-default-text-editor)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="d98e6-267">To set the default text editor, see the [Set the default text editor](#set-the-default-text-editor) section.</span></span>
+    > <span data-ttu-id="2e6a8-267">既定のテキスト エディターを設定するには、「[既定のテキスト エディターを設定する](#set-the-default-text-editor)」セクションを参照してください。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-267">To set the default text editor, see the [Set the default text editor](#set-the-default-text-editor) section.</span></span>
 
-1. <span data-ttu-id="d98e6-268">モデルの検証要件を満たすように JSON テンプレートを変更します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-268">Modify the JSON template to satisfy model validation requirements:</span></span>
+1. <span data-ttu-id="2e6a8-268">モデルの検証要件を満たすように JSON テンプレートを変更します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-268">Modify the JSON template to satisfy model validation requirements:</span></span>
 
     ```json
     {
@@ -657,7 +657,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     }
     ```
 
-1. <span data-ttu-id="d98e6-269">*.tmp* ファイルを保存して、テキスト エディターを閉じます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-269">Save the *.tmp* file, and close the text editor.</span></span> <span data-ttu-id="d98e6-270">コマンド シェルに次の出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-270">The following output appears in the command shell:</span></span>
+1. <span data-ttu-id="2e6a8-269">*.tmp* ファイルを保存して、テキスト エディターを閉じます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-269">Save the *.tmp* file, and close the text editor.</span></span> <span data-ttu-id="2e6a8-270">コマンド シェルに次の出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-270">The following output appears in the command shell:</span></span>
 
     ```console
     [main 2019-06-28T17:27:01.805Z] update#setState idle
@@ -666,7 +666,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     Server: Kestrel
     ```
 
-1. <span data-ttu-id="d98e6-271">*省略可能*:変更を確認するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-271">*Optional*: Issue a `get` command to see the modifications.</span></span> <span data-ttu-id="d98e6-272">たとえば、テキスト エディターに「Cherry」と入力すると、`get` によって、次の出力が返されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-272">For example, if you typed "Cherry" in the text editor, a `get` returns the following output:</span></span>
+1. <span data-ttu-id="2e6a8-271">*省略可能*:変更を確認するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-271">*Optional*: Issue a `get` command to see the modifications.</span></span> <span data-ttu-id="2e6a8-272">たとえば、テキスト エディターに「Cherry」と入力すると、`get` によって、次の出力が返されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-272">For example, if you typed "Cherry" in the text editor, a `get` returns the following output:</span></span>
 
     ```console
     https://localhost:5001/fruits> get
@@ -695,29 +695,29 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
     https://localhost:5001/fruits>
     ```
 
-## <a name="test-http-delete-requests"></a><span data-ttu-id="d98e6-273">HTTP DELETE 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-273">Test HTTP DELETE requests</span></span>
+## <a name="test-http-delete-requests"></a><span data-ttu-id="2e6a8-273">HTTP DELETE 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-273">Test HTTP DELETE requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-274">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-274">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-274">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-274">Synopsis</span></span>
 
 ```console
 delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-275">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-275">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-275">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-275">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-276">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-276">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-276">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-276">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-277">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-277">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-277">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-277">Options</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
-### <a name="example"></a><span data-ttu-id="d98e6-278">例</span><span class="sxs-lookup"><span data-stu-id="d98e6-278">Example</span></span>
+### <a name="example"></a><span data-ttu-id="2e6a8-278">例</span><span class="sxs-lookup"><span data-stu-id="2e6a8-278">Example</span></span>
 
-<span data-ttu-id="d98e6-279">HTTP DELETE 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-279">To issue an HTTP DELETE request:</span></span>
+<span data-ttu-id="2e6a8-279">HTTP DELETE 要求を発行するには、次のようにします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-279">To issue an HTTP DELETE request:</span></span>
 
-1. <span data-ttu-id="d98e6-280">*省略可能*:変更前にデータを表示するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-280">*Optional*: Run the `get` command to view the data before modifying it:</span></span>
+1. <span data-ttu-id="2e6a8-280">*省略可能*:変更前にデータを表示するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-280">*Optional*: Run the `get` command to view the data before modifying it:</span></span>
 
     ```console
     https://localhost:5001/fruits> get
@@ -743,13 +743,13 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
     ]
     ```
 
-1. <span data-ttu-id="d98e6-281">それをサポートしているエンドポイントで `delete` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-281">Run the `delete` command on an endpoint that supports it:</span></span>
+1. <span data-ttu-id="2e6a8-281">それをサポートしているエンドポイントで `delete` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-281">Run the `delete` command on an endpoint that supports it:</span></span>
 
     ```console
     https://localhost:5001/fruits> delete 2
     ```
 
-    <span data-ttu-id="d98e6-282">上記のコマンドでは、次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-282">The preceding command displays the following output format:</span></span>
+    <span data-ttu-id="2e6a8-282">上記のコマンドでは、次の出力形式が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-282">The preceding command displays the following output format:</span></span>
 
     ```console
     HTTP/1.1 204 No Content
@@ -757,7 +757,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
     Server: Kestrel
     ```
 
-1. <span data-ttu-id="d98e6-283">*省略可能*:変更を確認するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-283">*Optional*: Issue a `get` command to see the modifications.</span></span> <span data-ttu-id="d98e6-284">この例では、`get` によって次の出力が返されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-284">In this example, a `get` returns the following output:</span></span>
+1. <span data-ttu-id="2e6a8-283">*省略可能*:変更を確認するには、`get` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-283">*Optional*: Issue a `get` command to see the modifications.</span></span> <span data-ttu-id="2e6a8-284">この例では、`get` によって次の出力が返されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-284">In this example, a `get` returns the following output:</span></span>
 
     ```console
     https://localhost:5001/fruits> get
@@ -782,182 +782,182 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
     https://localhost:5001/fruits>
     ```
 
-## <a name="test-http-patch-requests"></a><span data-ttu-id="d98e6-285">HTTP PATCH 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-285">Test HTTP PATCH requests</span></span>
+## <a name="test-http-patch-requests"></a><span data-ttu-id="2e6a8-285">HTTP PATCH 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-285">Test HTTP PATCH requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-286">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-286">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-286">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-286">Synopsis</span></span>
 
 ```console
 patch <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-formatting] [--response] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-287">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-287">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-287">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-287">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-288">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-288">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-288">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-288">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-289">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-289">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-289">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-289">Options</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
 [!INCLUDE [HTTP request body CLI options](~/includes/http-repl/requires-body-options.md)]
 
-## <a name="test-http-head-requests"></a><span data-ttu-id="d98e6-290">HTTP HEAD 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-290">Test HTTP HEAD requests</span></span>
+## <a name="test-http-head-requests"></a><span data-ttu-id="2e6a8-290">HTTP HEAD 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-290">Test HTTP HEAD requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-291">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-291">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-291">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-291">Synopsis</span></span>
 
 ```console
 head <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-292">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-292">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-292">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-292">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-293">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-293">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-293">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-293">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-294">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-294">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-294">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-294">Options</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
-## <a name="test-http-options-requests"></a><span data-ttu-id="d98e6-295">HTTP OPTIONS 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-295">Test HTTP OPTIONS requests</span></span>
+## <a name="test-http-options-requests"></a><span data-ttu-id="2e6a8-295">HTTP OPTIONS 要求をテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-295">Test HTTP OPTIONS requests</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="d98e6-296">構文</span><span class="sxs-lookup"><span data-stu-id="d98e6-296">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="2e6a8-296">構文</span><span class="sxs-lookup"><span data-stu-id="2e6a8-296">Synopsis</span></span>
 
 ```console
 options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body] [--response:headers] [-s|--streaming]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="d98e6-297">引数</span><span class="sxs-lookup"><span data-stu-id="d98e6-297">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="2e6a8-297">引数</span><span class="sxs-lookup"><span data-stu-id="2e6a8-297">Arguments</span></span>
 
 `PARAMETER`
 
-<span data-ttu-id="d98e6-298">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="d98e6-298">The route parameter, if any, expected by the associated controller action method.</span></span>
+<span data-ttu-id="2e6a8-298">関連付けられたコントローラー アクション メソッドで求められるルート パラメーター (存在する場合)。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-298">The route parameter, if any, expected by the associated controller action method.</span></span>
 
-### <a name="options"></a><span data-ttu-id="d98e6-299">オプション</span><span class="sxs-lookup"><span data-stu-id="d98e6-299">Options</span></span>
+### <a name="options"></a><span data-ttu-id="2e6a8-299">オプション</span><span class="sxs-lookup"><span data-stu-id="2e6a8-299">Options</span></span>
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
-## <a name="set-http-request-headers"></a><span data-ttu-id="d98e6-300">HTTP 要求ヘッダーを設定する</span><span class="sxs-lookup"><span data-stu-id="d98e6-300">Set HTTP request headers</span></span>
+## <a name="set-http-request-headers"></a><span data-ttu-id="2e6a8-300">HTTP 要求ヘッダーを設定する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-300">Set HTTP request headers</span></span>
 
-<span data-ttu-id="d98e6-301">HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使用します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-301">To set an HTTP request header, use one of the following approaches:</span></span>
+<span data-ttu-id="2e6a8-301">HTTP 要求ヘッダーを設定するには、次のいずれかの方法を使用します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-301">To set an HTTP request header, use one of the following approaches:</span></span>
 
-* <span data-ttu-id="d98e6-302">HTTP 要求でインラインを設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-302">Set inline with the HTTP request.</span></span> <span data-ttu-id="d98e6-303">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-303">For example:</span></span>
+* <span data-ttu-id="2e6a8-302">HTTP 要求でインラインを設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-302">Set inline with the HTTP request.</span></span> <span data-ttu-id="2e6a8-303">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-303">For example:</span></span>
 
     ```console
     https://localhost:5001/people> post -h Content-Type=application/json
     ```
     
-    <span data-ttu-id="d98e6-304">上記の方法では、個別の HTTP 要求ヘッダーごとに独自の `-h` オプションが必要です。</span><span class="sxs-lookup"><span data-stu-id="d98e6-304">With the preceding approach, each distinct HTTP request header requires its own `-h` option.</span></span>
+    <span data-ttu-id="2e6a8-304">上記の方法では、個別の HTTP 要求ヘッダーごとに独自の `-h` オプションが必要です。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-304">With the preceding approach, each distinct HTTP request header requires its own `-h` option.</span></span>
 
-* <span data-ttu-id="d98e6-305">HTTP 要求を送信する前に設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-305">Set before sending the HTTP request.</span></span> <span data-ttu-id="d98e6-306">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-306">For example:</span></span>
+* <span data-ttu-id="2e6a8-305">HTTP 要求を送信する前に設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-305">Set before sending the HTTP request.</span></span> <span data-ttu-id="2e6a8-306">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-306">For example:</span></span>
 
     ```console
     https://localhost:5001/people> set header Content-Type application/json
     ```
     
-    <span data-ttu-id="d98e6-307">要求を送信する前にヘッダーを設定すると、コマンド シェル セッションの間はヘッダーが設定されたままになります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-307">When setting the header before sending a request, the header remains set for the duration of the command shell session.</span></span> <span data-ttu-id="d98e6-308">ヘッダーをクリアするには、空の値を指定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-308">To clear the header, provide an empty value.</span></span> <span data-ttu-id="d98e6-309">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-309">For example:</span></span>
+    <span data-ttu-id="2e6a8-307">要求を送信する前にヘッダーを設定すると、コマンド シェル セッションの間はヘッダーが設定されたままになります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-307">When setting the header before sending a request, the header remains set for the duration of the command shell session.</span></span> <span data-ttu-id="2e6a8-308">ヘッダーをクリアするには、空の値を指定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-308">To clear the header, provide an empty value.</span></span> <span data-ttu-id="2e6a8-309">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-309">For example:</span></span>
     
     ```console
     https://localhost:5001/people> set header Content-Type
     ```
 
-## <a name="test-secured-endpoints"></a><span data-ttu-id="d98e6-310">セキュリティで保護されたエンドポイントをテストする</span><span class="sxs-lookup"><span data-stu-id="d98e6-310">Test secured endpoints</span></span>
+## <a name="test-secured-endpoints"></a><span data-ttu-id="2e6a8-310">セキュリティで保護されたエンドポイントをテストする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-310">Test secured endpoints</span></span>
 
-<span data-ttu-id="d98e6-311">HttpRepl は、次の方法で、セキュリティ保護されたエンドポイントのテストをサポートします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-311">The HttpRepl supports the testing of secured endpoints in the following ways:</span></span>
+<span data-ttu-id="2e6a8-311">HttpRepl は、次の方法で、セキュリティ保護されたエンドポイントのテストをサポートします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-311">The HttpRepl supports the testing of secured endpoints in the following ways:</span></span>
 
-* <span data-ttu-id="d98e6-312">ログインしているユーザーの既定の資格情報を使用する。</span><span class="sxs-lookup"><span data-stu-id="d98e6-312">Via the default credentials of the logged in user.</span></span>
-* <span data-ttu-id="d98e6-313">HTTP 要求ヘッダーを使用する。</span><span class="sxs-lookup"><span data-stu-id="d98e6-313">Through the use of HTTP request headers.</span></span>
+* <span data-ttu-id="2e6a8-312">ログインしているユーザーの既定の資格情報を使用する。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-312">Via the default credentials of the logged in user.</span></span>
+* <span data-ttu-id="2e6a8-313">HTTP 要求ヘッダーを使用する。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-313">Through the use of HTTP request headers.</span></span>
 
-### <a name="default-credentials"></a><span data-ttu-id="d98e6-314">既定の資格情報</span><span class="sxs-lookup"><span data-stu-id="d98e6-314">Default credentials</span></span>
+### <a name="default-credentials"></a><span data-ttu-id="2e6a8-314">既定の資格情報</span><span class="sxs-lookup"><span data-stu-id="2e6a8-314">Default credentials</span></span>
 
-<span data-ttu-id="d98e6-315">IIS でホストされ、Windows 認証でセキュリティ保護されているテスト対象の Web API を考えてみます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-315">Consider a web API you're testing that's hosted in IIS and secured with Windows authentication.</span></span> <span data-ttu-id="d98e6-316">ツールを実行するユーザーの資格情報が、テスト対象の HTTP エンドポイント全体に送信されるようにしたいと考えます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-316">You want the credentials of the user running the tool to flow across to the HTTP endpoints being tested.</span></span> <span data-ttu-id="d98e6-317">ログインしているユーザーの既定の資格情報を渡すには:</span><span class="sxs-lookup"><span data-stu-id="d98e6-317">To pass the default credentials of the logged in user:</span></span>
+<span data-ttu-id="2e6a8-315">IIS でホストされ、Windows 認証でセキュリティ保護されているテスト対象の Web API を考えてみます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-315">Consider a web API you're testing that's hosted in IIS and secured with Windows authentication.</span></span> <span data-ttu-id="2e6a8-316">ツールを実行するユーザーの資格情報が、テスト対象の HTTP エンドポイント全体に送信されるようにしたいと考えます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-316">You want the credentials of the user running the tool to flow across to the HTTP endpoints being tested.</span></span> <span data-ttu-id="2e6a8-317">ログインしているユーザーの既定の資格情報を渡すには:</span><span class="sxs-lookup"><span data-stu-id="2e6a8-317">To pass the default credentials of the logged in user:</span></span>
 
-1. <span data-ttu-id="d98e6-318">`httpClient.useDefaultCredentials` 設定を `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-318">Set the `httpClient.useDefaultCredentials` preference to `true`:</span></span>
+1. <span data-ttu-id="2e6a8-318">`httpClient.useDefaultCredentials` 設定を `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-318">Set the `httpClient.useDefaultCredentials` preference to `true`:</span></span>
 
     ```console
     pref set httpClient.useDefaultCredentials true
     ```
 
-1. <span data-ttu-id="d98e6-319">Web API に別の要求を送信する前に、ツールを終了して再起動します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-319">Exit and restart the tool before sending another request to the web API.</span></span>
+1. <span data-ttu-id="2e6a8-319">Web API に別の要求を送信する前に、ツールを終了して再起動します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-319">Exit and restart the tool before sending another request to the web API.</span></span>
  
-### <a name="default-proxy-credentials"></a><span data-ttu-id="d98e6-320">既定のプロキシ資格情報</span><span class="sxs-lookup"><span data-stu-id="d98e6-320">Default proxy credentials</span></span>
+### <a name="default-proxy-credentials"></a><span data-ttu-id="2e6a8-320">既定のプロキシ資格情報</span><span class="sxs-lookup"><span data-stu-id="2e6a8-320">Default proxy credentials</span></span>
 
-<span data-ttu-id="d98e6-321">テスト対象の Web API が Windows 認証でセキュリティ保護されたプロキシの背後にあるシナリオについて考えてみます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-321">Consider a scenario in which the web API you're testing is behind a proxy secured with Windows authentication.</span></span> <span data-ttu-id="d98e6-322">ツールを実行しているユーザーの資格情報をプロキシに送信したいと考えます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-322">You want the credentials of the user running the tool to flow to the proxy.</span></span> <span data-ttu-id="d98e6-323">ログインしているユーザーの既定の資格情報を渡すには:</span><span class="sxs-lookup"><span data-stu-id="d98e6-323">To pass the default credentials of the logged in user:</span></span>
+<span data-ttu-id="2e6a8-321">テスト対象の Web API が Windows 認証でセキュリティ保護されたプロキシの背後にあるシナリオについて考えてみます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-321">Consider a scenario in which the web API you're testing is behind a proxy secured with Windows authentication.</span></span> <span data-ttu-id="2e6a8-322">ツールを実行しているユーザーの資格情報をプロキシに送信したいと考えます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-322">You want the credentials of the user running the tool to flow to the proxy.</span></span> <span data-ttu-id="2e6a8-323">ログインしているユーザーの既定の資格情報を渡すには:</span><span class="sxs-lookup"><span data-stu-id="2e6a8-323">To pass the default credentials of the logged in user:</span></span>
 
-1. <span data-ttu-id="d98e6-324">`httpClient.proxy.useDefaultCredentials` 設定を `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-324">Set the `httpClient.proxy.useDefaultCredentials` preference to `true`:</span></span>
+1. <span data-ttu-id="2e6a8-324">`httpClient.proxy.useDefaultCredentials` 設定を `true` に設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-324">Set the `httpClient.proxy.useDefaultCredentials` preference to `true`:</span></span>
 
     ```console
     pref set httpClient.proxy.useDefaultCredentials true
     ```
 
-1. <span data-ttu-id="d98e6-325">Web API に別の要求を送信する前に、ツールを終了して再起動します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-325">Exit and restart the tool before sending another request to the web API.</span></span>
+1. <span data-ttu-id="2e6a8-325">Web API に別の要求を送信する前に、ツールを終了して再起動します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-325">Exit and restart the tool before sending another request to the web API.</span></span>
 
-### <a name="http-request-headers"></a><span data-ttu-id="d98e6-326">HTTP 要求ヘッダー</span><span class="sxs-lookup"><span data-stu-id="d98e6-326">HTTP request headers</span></span>
+### <a name="http-request-headers"></a><span data-ttu-id="2e6a8-326">HTTP 要求ヘッダー</span><span class="sxs-lookup"><span data-stu-id="2e6a8-326">HTTP request headers</span></span>
 
-<span data-ttu-id="d98e6-327">サポートされている認証および認可スキームの例には次のものがあります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-327">Examples of supported authentication and authorization schemes include:</span></span>
+<span data-ttu-id="2e6a8-327">サポートされている認証および認可スキームの例には次のものがあります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-327">Examples of supported authentication and authorization schemes include:</span></span>
 
-* <span data-ttu-id="d98e6-328">basic authentication</span><span class="sxs-lookup"><span data-stu-id="d98e6-328">basic authentication</span></span>
-* <span data-ttu-id="d98e6-329">JWT ベアラー トークン</span><span class="sxs-lookup"><span data-stu-id="d98e6-329">JWT bearer tokens</span></span>
-* <span data-ttu-id="d98e6-330">ダイジェスト認証</span><span class="sxs-lookup"><span data-stu-id="d98e6-330">digest authentication</span></span>
+* <span data-ttu-id="2e6a8-328">basic authentication</span><span class="sxs-lookup"><span data-stu-id="2e6a8-328">basic authentication</span></span>
+* <span data-ttu-id="2e6a8-329">JWT ベアラー トークン</span><span class="sxs-lookup"><span data-stu-id="2e6a8-329">JWT bearer tokens</span></span>
+* <span data-ttu-id="2e6a8-330">ダイジェスト認証</span><span class="sxs-lookup"><span data-stu-id="2e6a8-330">digest authentication</span></span>
 
-<span data-ttu-id="d98e6-331">たとえば、次のコマンドを使用して、ベアラー トークンをエンドポイントに送信できます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-331">For example, you can send a bearer token to an endpoint with the following command:</span></span>
+<span data-ttu-id="2e6a8-331">たとえば、次のコマンドを使用して、ベアラー トークンをエンドポイントに送信できます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-331">For example, you can send a bearer token to an endpoint with the following command:</span></span>
 
 ```console
 set header Authorization "bearer <TOKEN VALUE>"
 ```
 
-<span data-ttu-id="d98e6-332">Azure でホストされたエンドポイントにアクセスしたり、[Azure REST API](/rest/api/azure/) を使用したりするには、ベアラー トークンが必要です。</span><span class="sxs-lookup"><span data-stu-id="d98e6-332">To access an Azure-hosted endpoint or to use the [Azure REST API](/rest/api/azure/), you need a bearer token.</span></span> <span data-ttu-id="d98e6-333">[Azure CLI](/cli/azure/) で自分の Azure サブスクリプションのベアラー トークンを取得するには、次の手順を使用します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-333">Use the following steps to obtain a bearer token for your Azure subscription via the [Azure CLI](/cli/azure/).</span></span> <span data-ttu-id="d98e6-334">HttpRepl によって、HTTP 要求ヘッダーにベアラー トークンが設定されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-334">The HttpRepl sets the bearer token in an HTTP request header.</span></span> <span data-ttu-id="d98e6-335">Azure App Service Web Apps の一覧が取得されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-335">A list of Azure App Service Web Apps is retrieved.</span></span>
+<span data-ttu-id="2e6a8-332">Azure でホストされたエンドポイントにアクセスしたり、[Azure REST API](/rest/api/azure/) を使用したりするには、ベアラー トークンが必要です。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-332">To access an Azure-hosted endpoint or to use the [Azure REST API](/rest/api/azure/), you need a bearer token.</span></span> <span data-ttu-id="2e6a8-333">[Azure CLI](/cli/azure/) で自分の Azure サブスクリプションのベアラー トークンを取得するには、次の手順を使用します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-333">Use the following steps to obtain a bearer token for your Azure subscription via the [Azure CLI](/cli/azure/).</span></span> <span data-ttu-id="2e6a8-334">HttpRepl によって、HTTP 要求ヘッダーにベアラー トークンが設定されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-334">The HttpRepl sets the bearer token in an HTTP request header.</span></span> <span data-ttu-id="2e6a8-335">Azure App Service Web Apps の一覧が取得されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-335">A list of Azure App Service Web Apps is retrieved.</span></span>
 
-1. <span data-ttu-id="d98e6-336">Azure にサインインします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-336">Sign in to Azure:</span></span>
+1. <span data-ttu-id="2e6a8-336">Azure にサインインします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-336">Sign in to Azure:</span></span>
 
     ```azurecli
     az login
     ```
 
-1. <span data-ttu-id="d98e6-337">次のコマンドで、サブスクリプション ID を取得します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-337">Get your subscription ID with the following command:</span></span>
+1. <span data-ttu-id="2e6a8-337">次のコマンドで、サブスクリプション ID を取得します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-337">Get your subscription ID with the following command:</span></span>
 
     ```azurecli
     az account show --query id
     ```
 
-1. <span data-ttu-id="d98e6-338">サブスクリプション ID をコピーし、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-338">Copy your subscription ID and run the following command:</span></span>
+1. <span data-ttu-id="2e6a8-338">サブスクリプション ID をコピーし、次のコマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-338">Copy your subscription ID and run the following command:</span></span>
 
     ```azurecli
     az account set --subscription "<SUBSCRIPTION ID>"
     ```
 
-1. <span data-ttu-id="d98e6-339">次のコマンドで、ベアラー トークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-339">Get your bearer token with the following command:</span></span>
+1. <span data-ttu-id="2e6a8-339">次のコマンドで、ベアラー トークンを取得します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-339">Get your bearer token with the following command:</span></span>
 
     ```azurecli
     az account get-access-token --query accessToken
     ```
 
-1. <span data-ttu-id="d98e6-340">HttpRepl を使用して、Azure REST API に接続します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-340">Connect to the Azure REST API via the HttpRepl:</span></span>
+1. <span data-ttu-id="2e6a8-340">HttpRepl を使用して、Azure REST API に接続します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-340">Connect to the Azure REST API via the HttpRepl:</span></span>
 
     ```console
     httprepl https://management.azure.com
     ```
 
-1. <span data-ttu-id="d98e6-341">`Authorization` HTTP 要求ヘッダーを設定します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-341">Set the `Authorization` HTTP request header:</span></span>
+1. <span data-ttu-id="2e6a8-341">`Authorization` HTTP 要求ヘッダーを設定します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-341">Set the `Authorization` HTTP request header:</span></span>
 
     ```console
     https://management.azure.com/> set header Authorization "bearer <ACCESS TOKEN>"
     ```
 
-1. <span data-ttu-id="d98e6-342">サブスクリプションに移動します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-342">Navigate to the subscription:</span></span>
+1. <span data-ttu-id="2e6a8-342">サブスクリプションに移動します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-342">Navigate to the subscription:</span></span>
 
     ```console
     https://management.azure.com/> cd subscriptions/<SUBSCRIPTION ID>
     ```
 
-1. <span data-ttu-id="d98e6-343">サブスクリプションの Azure App Service Web Apps のリストを取得します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-343">Get a list of your subscription's Azure App Service Web Apps:</span></span>
+1. <span data-ttu-id="2e6a8-343">サブスクリプションの Azure App Service Web Apps のリストを取得します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-343">Get a list of your subscription's Azure App Service Web Apps:</span></span>
 
     ```console
     https://management.azure.com/subscriptions/{SUBSCRIPTION ID}> get providers/Microsoft.Web/sites?api-version=2016-08-01
     ```
 
-    <span data-ttu-id="d98e6-344">次の応答が示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-344">The following response is displayed:</span></span>
+    <span data-ttu-id="2e6a8-344">次の応答が示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-344">The following response is displayed:</span></span>
 
     ```console
     HTTP/1.1 200 OK
@@ -981,20 +981,20 @@ set header Authorization "bearer <TOKEN VALUE>"
     }
     ```
 
-## <a name="toggle-http-request-display"></a><span data-ttu-id="d98e6-345">HTTP 要求の表示を切り替える</span><span class="sxs-lookup"><span data-stu-id="d98e6-345">Toggle HTTP request display</span></span>
+## <a name="toggle-http-request-display"></a><span data-ttu-id="2e6a8-345">HTTP 要求の表示を切り替える</span><span class="sxs-lookup"><span data-stu-id="2e6a8-345">Toggle HTTP request display</span></span>
 
-<span data-ttu-id="d98e6-346">既定では、送信中の HTTP 要求の表示は抑制されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-346">By default, display of the HTTP request being sent is suppressed.</span></span> <span data-ttu-id="d98e6-347">コマンド シェル セッションの期間中は、対応する設定を変更できます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-347">It's possible to change the corresponding setting for the duration of the command shell session.</span></span>
+<span data-ttu-id="2e6a8-346">既定では、送信中の HTTP 要求の表示は抑制されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-346">By default, display of the HTTP request being sent is suppressed.</span></span> <span data-ttu-id="2e6a8-347">コマンド シェル セッションの期間中は、対応する設定を変更できます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-347">It's possible to change the corresponding setting for the duration of the command shell session.</span></span>
 
-### <a name="enable-request-display"></a><span data-ttu-id="d98e6-348">要求の表示を有効にする</span><span class="sxs-lookup"><span data-stu-id="d98e6-348">Enable request display</span></span>
+### <a name="enable-request-display"></a><span data-ttu-id="2e6a8-348">要求の表示を有効にする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-348">Enable request display</span></span>
 
-<span data-ttu-id="d98e6-349">`echo on` コマンドを実行して、送信中の HTTP 要求を表示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-349">View the HTTP request being sent by running the `echo on` command.</span></span> <span data-ttu-id="d98e6-350">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-350">For example:</span></span>
+<span data-ttu-id="2e6a8-349">`echo on` コマンドを実行して、送信中の HTTP 要求を表示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-349">View the HTTP request being sent by running the `echo on` command.</span></span> <span data-ttu-id="2e6a8-350">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-350">For example:</span></span>
 
 ```console
 https://localhost:5001/people> echo on
 Request echoing is on
 ```
 
-<span data-ttu-id="d98e6-351">現在のセッションの後続の HTTP 要求では、要求ヘッダーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-351">Subsequent HTTP requests in the current session display the request headers.</span></span> <span data-ttu-id="d98e6-352">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-352">For example:</span></span>
+<span data-ttu-id="2e6a8-351">現在のセッションの後続の HTTP 要求では、要求ヘッダーが表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-351">Subsequent HTTP requests in the current session display the request headers.</span></span> <span data-ttu-id="2e6a8-352">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-352">For example:</span></span>
 
 ```console
 https://localhost:5001/people> post
@@ -1030,20 +1030,20 @@ Transfer-Encoding: chunked
 https://localhost:5001/people>
 ```
 
-### <a name="disable-request-display"></a><span data-ttu-id="d98e6-353">要求の表示を無効にする</span><span class="sxs-lookup"><span data-stu-id="d98e6-353">Disable request display</span></span>
+### <a name="disable-request-display"></a><span data-ttu-id="2e6a8-353">要求の表示を無効にする</span><span class="sxs-lookup"><span data-stu-id="2e6a8-353">Disable request display</span></span>
 
-<span data-ttu-id="d98e6-354">`echo off` コマンドを実行して、送信中の HTTP 要求の表示を抑制します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-354">Suppress display of the HTTP request being sent by running the `echo off` command.</span></span> <span data-ttu-id="d98e6-355">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-355">For example:</span></span>
+<span data-ttu-id="2e6a8-354">`echo off` コマンドを実行して、送信中の HTTP 要求の表示を抑制します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-354">Suppress display of the HTTP request being sent by running the `echo off` command.</span></span> <span data-ttu-id="2e6a8-355">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-355">For example:</span></span>
 
 ```console
 https://localhost:5001/people> echo off
 Request echoing is off
 ```
 
-## <a name="run-a-script"></a><span data-ttu-id="d98e6-356">[スクリプトの実行]</span><span class="sxs-lookup"><span data-stu-id="d98e6-356">Run a script</span></span>
+## <a name="run-a-script"></a><span data-ttu-id="2e6a8-356">[スクリプトの実行]</span><span class="sxs-lookup"><span data-stu-id="2e6a8-356">Run a script</span></span>
 
-<span data-ttu-id="d98e6-357">HttpRepl コマンドの同じセットを頻繁に実行する場合は、それらをテキスト ファイルに格納することを検討してください。</span><span class="sxs-lookup"><span data-stu-id="d98e6-357">If you frequently execute the same set of HttpRepl commands, consider storing them in a text file.</span></span> <span data-ttu-id="d98e6-358">ファイル内のコマンドは、コマンド ラインで手動で実行されるコマンドと同じ形式になります。</span><span class="sxs-lookup"><span data-stu-id="d98e6-358">Commands in the file take the same form as commands executed manually on the command line.</span></span> <span data-ttu-id="d98e6-359">これらのコマンドは、`run` コマンドを使用してバッチ方式で実行できます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-359">The commands can be executed in a batched fashion using the `run` command.</span></span> <span data-ttu-id="d98e6-360">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-360">For example:</span></span>
+<span data-ttu-id="2e6a8-357">HttpRepl コマンドの同じセットを頻繁に実行する場合は、それらをテキスト ファイルに格納することを検討してください。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-357">If you frequently execute the same set of HttpRepl commands, consider storing them in a text file.</span></span> <span data-ttu-id="2e6a8-358">ファイル内のコマンドは、コマンド ラインで手動で実行されるコマンドと同じ形式になります。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-358">Commands in the file take the same form as commands executed manually on the command line.</span></span> <span data-ttu-id="2e6a8-359">これらのコマンドは、`run` コマンドを使用してバッチ方式で実行できます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-359">The commands can be executed in a batched fashion using the `run` command.</span></span> <span data-ttu-id="2e6a8-360">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-360">For example:</span></span>
 
-1. <span data-ttu-id="d98e6-361">改行で区切られた一連のコマンドを含むテキスト ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-361">Create a text file containing a set of newline-delimited commands.</span></span> <span data-ttu-id="d98e6-362">例として、次のコマンドを含む *people-script.txt* ファイルについて考えてみましょう。</span><span class="sxs-lookup"><span data-stu-id="d98e6-362">To illustrate, consider a *people-script.txt* file containing the following commands:</span></span>
+1. <span data-ttu-id="2e6a8-361">改行で区切られた一連のコマンドを含むテキスト ファイルを作成します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-361">Create a text file containing a set of newline-delimited commands.</span></span> <span data-ttu-id="2e6a8-362">例として、次のコマンドを含む *people-script.txt* ファイルについて考えてみましょう。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-362">To illustrate, consider a *people-script.txt* file containing the following commands:</span></span>
 
     ```text
     set base https://localhost:5001
@@ -1053,13 +1053,13 @@ Request echoing is off
     get 1
     ```
 
-1. <span data-ttu-id="d98e6-363">`run` コマンドを実行し、テキスト ファイルのパスを渡します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-363">Execute the `run` command, passing in the text file's path.</span></span> <span data-ttu-id="d98e6-364">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-364">For example:</span></span>
+1. <span data-ttu-id="2e6a8-363">`run` コマンドを実行し、テキスト ファイルのパスを渡します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-363">Execute the `run` command, passing in the text file's path.</span></span> <span data-ttu-id="2e6a8-364">次に例を示します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-364">For example:</span></span>
 
     ```console
     https://localhost:5001/> run C:\http-repl-scripts\people-script.txt
     ```
 
-    <span data-ttu-id="d98e6-365">次のような出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-365">The following output appears:</span></span>
+    <span data-ttu-id="2e6a8-365">次のような出力が表示されます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-365">The following output appears:</span></span>
 
     ```console
     https://localhost:5001/> set base https://localhost:5001
@@ -1094,9 +1094,9 @@ Request echoing is off
     https://localhost:5001/People>
     ```
 
-## <a name="clear-the-output"></a><span data-ttu-id="d98e6-366">出力を消去する</span><span class="sxs-lookup"><span data-stu-id="d98e6-366">Clear the output</span></span>
+## <a name="clear-the-output"></a><span data-ttu-id="2e6a8-366">出力を消去する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-366">Clear the output</span></span>
 
-<span data-ttu-id="d98e6-367">HttpRepl ツールによってコマンド シェルに書き込まれたすべての出力を削除するには、`clear` または `cls` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-367">To remove all output written to the command shell by the HttpRepl tool, run the `clear` or `cls` command.</span></span> <span data-ttu-id="d98e6-368">例として、コマンド シェルに次の出力が含まれているとします。</span><span class="sxs-lookup"><span data-stu-id="d98e6-368">To illustrate, imagine the command shell contains the following output:</span></span>
+<span data-ttu-id="2e6a8-367">HttpRepl ツールによってコマンド シェルに書き込まれたすべての出力を削除するには、`clear` または `cls` コマンドを実行します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-367">To remove all output written to the command shell by the HttpRepl tool, run the `clear` or `cls` command.</span></span> <span data-ttu-id="2e6a8-368">例として、コマンド シェルに次の出力が含まれているとします。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-368">To illustrate, imagine the command shell contains the following output:</span></span>
 
 ```console
 httprepl https://localhost:5001
@@ -1111,22 +1111,22 @@ People   [get|post]
 https://localhost:5001/>
 ```
 
-<span data-ttu-id="d98e6-369">次のコマンドを実行して、出力を消去します。</span><span class="sxs-lookup"><span data-stu-id="d98e6-369">Run the following command to clear the output:</span></span>
+<span data-ttu-id="2e6a8-369">次のコマンドを実行して、出力を消去します。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-369">Run the following command to clear the output:</span></span>
 
 ```console
 https://localhost:5001/> clear
 ```
 
-<span data-ttu-id="d98e6-370">上記のコマンドを実行すると、コマンド シェルには次の出力のみが含まれます。</span><span class="sxs-lookup"><span data-stu-id="d98e6-370">After running the preceding command, the command shell contains only the following output:</span></span>
+<span data-ttu-id="2e6a8-370">上記のコマンドを実行すると、コマンド シェルには次の出力のみが含まれます。</span><span class="sxs-lookup"><span data-stu-id="2e6a8-370">After running the preceding command, the command shell contains only the following output:</span></span>
 
 ```console
 https://localhost:5001/>
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="d98e6-371">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="d98e6-371">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="2e6a8-371">その他のリソース</span><span class="sxs-lookup"><span data-stu-id="2e6a8-371">Additional resources</span></span>
 
-* [<span data-ttu-id="d98e6-372">REST API 要求</span><span class="sxs-lookup"><span data-stu-id="d98e6-372">REST API requests</span></span>](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
-* [<span data-ttu-id="d98e6-373">HttpRepl GitHub リポジトリ</span><span class="sxs-lookup"><span data-stu-id="d98e6-373">HttpRepl GitHub repository</span></span>](https://github.com/dotnet/HttpRepl)
-* [<span data-ttu-id="d98e6-374">Visual Studio が HttpRepl を起動するよう構成する</span><span class="sxs-lookup"><span data-stu-id="d98e6-374">Configure Visual Studio to launch HttpRepl</span></span>](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-windows-to-launch-httprepl-on-f5)
-* [<span data-ttu-id="d98e6-375">Visual Studio Code が HttpRepl を起動するよう構成する</span><span class="sxs-lookup"><span data-stu-id="d98e6-375">Configure Visual Studio Code to launch HttpRepl</span></span>](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-code-to-launch-httprepl-on-debug)
-* [<span data-ttu-id="d98e6-376">Visual Studio Code for Mac が HttpRepl を起動するよう構成する</span><span class="sxs-lookup"><span data-stu-id="d98e6-376">Configure Visual Studio for Mac to launch HttpRepl</span></span>](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)
+* [<span data-ttu-id="2e6a8-372">REST API 要求</span><span class="sxs-lookup"><span data-stu-id="2e6a8-372">REST API requests</span></span>](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
+* [<span data-ttu-id="2e6a8-373">HttpRepl GitHub リポジトリ</span><span class="sxs-lookup"><span data-stu-id="2e6a8-373">HttpRepl GitHub repository</span></span>](https://github.com/dotnet/HttpRepl)
+* [<span data-ttu-id="2e6a8-374">Visual Studio が HttpRepl を起動するよう構成する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-374">Configure Visual Studio to launch HttpRepl</span></span>](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-windows-to-launch-httprepl-on-f5)
+* [<span data-ttu-id="2e6a8-375">Visual Studio Code が HttpRepl を起動するよう構成する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-375">Configure Visual Studio Code to launch HttpRepl</span></span>](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-code-to-launch-httprepl-on-debug)
+* [<span data-ttu-id="2e6a8-376">Visual Studio Code for Mac が HttpRepl を起動するよう構成する</span><span class="sxs-lookup"><span data-stu-id="2e6a8-376">Configure Visual Studio for Mac to launch HttpRepl</span></span>](https://devblogs.microsoft.com/aspnet/httprepl-a-command-line-tool-for-interacting-with-restful-http-services/#configure-visual-studio-for-mac-to-launch-httprepl-as-a-custom-tool)
