@@ -9,10 +9,10 @@ products:
 - vs
 urlFragment: aspnetcore-webapi-mongodb
 ms.openlocfilehash: 95a2a6fcda0a4f7148183981f7dbacd06388329d
-ms.sourcegitcommit: 58722eb309767e462bdbf3082bd38737a4ef168f
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 05/27/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "84106521"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core と MongoDB で Web API を作成する
@@ -30,7 +30,7 @@ ms.locfileid: "84106521"
 ## <a name="prerequisites"></a>必須コンポーネント
 
 * [.NET Core SDK 3.0 以降](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019 Preview](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview) と **ASP.NET および Web 開発**ワークロード
+* [Visual Studio 2019 Preview](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview) と **ASP.NET および Web 開発** ワークロード
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 ## <a name="configure-mongodb"></a>MongoDB を構成する

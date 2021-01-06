@@ -6,7 +6,7 @@
 
 記事は、マークダウン ファイルとしてリポジトリに格納されています。 マークダウン ファイルの内容に対する簡単な変更は、ブラウザー ウィンドウの右上隅にある **[Edit]\(編集\)** リンクを選択して、ブラウザーで行います。 (幅の狭いブラウザー ウィンドウでは、**オプション** バーを展開して、 **[Edit]\(編集\)** リンクを表示します。)指示に従って pull request (PR) を作成します。 PR をレビューし、受け入れるか変更を提案します。
 
-## <a name="how-to-make-a-more-complex-submission"></a>もっと複雑な提案を行う方法
+## <a name="how-to-make-a-more-complex-submission"></a>もっと複雑な投稿を行う方法
 
 [Git と GitHub.com](https://guides.github.com/activities/hello-world/) の基本的な理解が必要です。
 
@@ -22,7 +22,7 @@
 
 Visual Studio Code を使用して ASP.NET ドキュメントに貢献する場合は、[Docs Authoring Pack](https://marketplace.visualstudio.com/items?itemName=docsmsft.docs-authoring-pack) 拡張機能をインストールすることで生産性を高めることができます。 拡張機能では、Markdown の lint 処理、コードのスペル チェック、および記事のテンプレートを支援する各種のツールが提供されています。
 
-## <a name="markdown-syntax"></a>Markdown の構文
+## <a name="markdown-syntax"></a>マークダウンの構文
 
 記事は [DocFX Flavored Markdown](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html) で書かれています。これは [GitHub flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/) のスーパーセットです。 ASP.NET ドキュメントでよく使用される UI 機能についての DFM 構文の例については、.NET Docs リポジトリ スタイル ガイドの「[Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md)」(メタデータと Markdown テンプレート) を参照してください。 
 
@@ -34,7 +34,7 @@ Visual Studio Code を使用して ASP.NET ドキュメントに貢献する場�
 ![description of image for alt attribute](configuration/index/_static/imagename.png)
 ```
 
-すべての画像に[代替 (alt) テキスト](https://wikipedia.org/wiki/Alt_attribute)が必要です。 代替テキストの指定に関するアドバイスについては、「[WebAIM: Alternative Text (WebAIM: 代替テキスト)](https://webaim.org/techniques/alttext/)」などのオンライン リソースを参照してください。
+すべての画像に[代替 (alt) テキスト](https://wikipedia.org/wiki/Alt_attribute)が必要です。 代替テキストの指定に関するアドバイスについては、「[WebAIM: Alternative Text](https://webaim.org/techniques/alttext/)」(WebAIM: 代替テキスト) などのオンライン リソースを参照してください。
 
 マークダウン ファイル名と画像ファイル名には、小文字を使用します。
 
@@ -77,7 +77,7 @@ Visual Studio Code を使用して ASP.NET ドキュメントに貢献する場�
 [!code-csharp[](configuration/index/sample/Program.cs)]
 ```
 
-行番号を使用してファイルの一部をスニペットとして表示するには:
+行番号を使用してファイルの一部をスニペットとしてレンダリングするには:
 
 ```md
 [!code-csharp[](configuration/index/sample/Program.cs?range=1-10,20,30,40-50]
@@ -86,7 +86,7 @@ Visual Studio Code を使用して ASP.NET ドキュメントに貢献する場�
 
 C# のスニペットについては、[C# の領域](https://docs.microsoft.com/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region)に関する記事を参照してください。 可能な場合は常に、行番号ではなく領域を使用してください。コード ファイル内の行番号は変更されることがよくあり、Markdown での行番号の参照と同期されなくなるためです。 C# の領域は入れ子にすることができます。 外側の領域を参照している場合、内側の `#region` および `#endregion` ディレクティブはスニペットには表示されません。 
 
-C# の "snippet_Example" という名前の領域を表示するには:
+"snippet_Example" という名前の C# 領域をレンダリングするには:
 
 ```md
 [!code-csharp[](configuration/index/sample/Program.cs?name=snippet_Example)]
@@ -147,7 +147,7 @@ DocFX には次のものが必要です。
 
 * ブラウザーで、`http://localhost:8080/group1-dest/` に移動します。
 
-## <a name="voice-and-tone"></a>スタイルとトーン
+## <a name="voice-and-tone"></a>ボイスとトーン
 
 目標は、できるかぎり幅広いユーザーにわかりやすいドキュメントを作成することです。 そのため、寄稿者に従っていただきたい書き方のガイドラインが設けられています。 詳細については、.NET リポジトリの「[Voice and tone guidelines](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md)」(スタイルとトーンのガイドライン) を参照してください。
 
