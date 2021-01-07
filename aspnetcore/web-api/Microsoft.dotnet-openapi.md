@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 28a71c7040667c7544cc17c1184c09b5b39959b9
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5d9f1684aa333c38c73673138a703b04d318c6df
+ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052553"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972029"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>OpenAPI ツールを使用した ASP.NET Core アプリの開発
 
@@ -88,7 +88,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 |-------|------|-------------|---------|
 | -p|--updateProject | 操作対象のプロジェクト。 |dotnet openapi add url *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
 | -o|--output-file | OpenAPI ファイルのローカル コピーを配置する場所。 |dotnet openapi add url `https://contoso.com/openapi.json` *--output-file myclient.json* |
-| -c|--code-generator| 参照に適用するコード ジェネレーター。 オプションは `NSwagCSharp` と `NSwagTypeScript` です。 |dotnet openapi add file .\OpenApi.json --code-generator
+| -c|--code-generator| 参照に適用するコード ジェネレーター。 オプションは `NSwagCSharp` と `NSwagTypeScript` です。 |dotnet openapi add url `https://contoso.com/openapi.json` --コードジェネレーター
 | -H|--help|ヘルプ情報を表示します。|dotnet openapi add url --help|
 
 #### <a name="arguments"></a>引数
