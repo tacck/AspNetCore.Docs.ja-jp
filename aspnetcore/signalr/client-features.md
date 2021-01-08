@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 65ad619bb943a0e5ffbaec7ec80243972dafc49f
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93050980"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024666"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR クライアント
 
@@ -47,7 +47,7 @@ SignalRクライアントはサーバーコンポーネントと共に出荷さ�
 
 次の表は、リアルタイムサポートを提供するクライアントの機能とサポートを示しています。 各機能について、この機能をサポートする *最小* バージョンが一覧表示されます。 バージョンが表示されない場合、この機能はサポートされていません。
 
-| 機能 | サーバー | .NET クライアント | JavaScript クライアント | Java クライアント |
+| 特徴量 | サーバー | .NET クライアント | JavaScript クライアント | Java クライアント |
 | ---- | :-: | :-: | :-: | :-: |
 | Azure SignalR サービスのサポート |2.1.0|1.0.0|1.0.0|1.0.0|
 | [サーバーからクライアントへのストリーミング](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|
@@ -57,11 +57,11 @@ SignalRクライアントはサーバーコンポーネントと共に出荷さ�
 | Server-Sent イベントのトランスポート |2.1.0|1.0.0|1.0.0|❌|
 | 長いポーリングトランスポート |2.1.0|1.0.0|1.0.0|3.0.0|
 | JSON ハブプロトコル |2.1.0|1.0.0|1.0.0|1.0.0|
-| MessagePack ハブ プロトコル |2.1.0|1.0.0|1.0.0|❌|
+| MessagePack ハブ プロトコル |2.1.0|1.0.0|1.0.0|5.0.0|
 
 その他のクライアント機能の有効化のサポートは [、microsoft の問題追跡ツール](https://github.com/dotnet/AspNetCore/issues)で追跡されます。
 
-## <a name="additional-resources"></a>その他の資料
+## <a name="additional-resources"></a>その他のリソース
 
 * [For ASP.NET Core を使ってみる SignalR](xref:tutorials/signalr)
 * [サポートされているプラットフォーム](xref:signalr/supported-platforms)

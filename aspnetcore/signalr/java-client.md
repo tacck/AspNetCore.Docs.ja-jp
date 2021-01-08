@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/java-client
-ms.openlocfilehash: da6876e0540579dac5fb9e92362b38a398bca4d5
-ms.sourcegitcommit: b64c44ba5e3abb4ad4d50de93b7e282bf0f251e4
+ms.openlocfilehash: 92941d21820de90eb2ae8fb76c21c588ed9f1ffb
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972081"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024757"
 ---
 # <a name="aspnet-core-no-locsignalr-java-client"></a>SignalRJava クライアントの ASP.NET Core
 
@@ -108,12 +108,43 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
     })).build();
 ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="passing-class-information-in-java"></a>Java でのクラス情報の引き渡し
+
+`on` `invoke` Java クライアントでの、、またはの各メソッドを呼び出す場合 `stream` `HubConnection` 、ユーザーはオブジェクトではなくオブジェクトを渡す必要があり `Type` `Class<?>` ます。これにより、 `Object` メソッドに渡されるジェネリックが記述されます。 は、 `Type` 提供されたクラスを使用して取得でき `TypeReference` ます。 たとえば、というカスタムジェネリッククラスを使用すると、 `Foo<T>` 次のコードはを取得し `Type` ます。
+
+```java
+Type fooType = new TypeReference<Foo<String>>() { }).getType();
+```
+
+などの非ジェネリック型のプリミティブや、などのパラメーター化されていない他の型の場合は、 `String` 単に組み込みのを使用でき `.class` ます。
+
+1つ以上のオブジェクト型を使用してこれらのメソッドのいずれかを呼び出す場合は、メソッドを呼び出すときにジェネリック構文を使用します。 たとえば `on` 、という名前のメソッドに対して `func` 、文字列とオブジェクトを引数として受け取るハンドラーを登録する場合は、 `Foo<String>` 次のコードを使用して、引数を出力するアクションを設定します。
+
+```java
+hubConnection.<String, Foo<String>>on("func", (param1, param2) ->{
+    System.out.println(param1);
+    System.out.println(param2);
+}, String.class, fooType);
+```
+
+この規則が必要なのは、 `Object.getClass` Java の型の消去によって、メソッドを使用して複合型に関する完全な情報を取得できないためです。 たとえば、でを呼び出すと、が返されませんが、では、 `getClass` `ArrayList<String>` `Class<ArrayList<String>>` `Class<ArrayList>` 受信メッセージを正しく逆シリアル化するための十分な情報がデシリアライザーに与えられません。 これは、カスタムオブジェクトにも当てはまります。
+
+::: moniker-end
+
 ## <a name="known-limitations"></a>既知の制限事項
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
-* JSON プロトコルのみがサポートされています。
 * トランスポートフォールバックおよびサーバー送信イベントトランスポートはサポートされていません。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+* トランスポートフォールバックおよびサーバー送信イベントトランスポートはサポートされていません。
+* JSON プロトコルのみがサポートされています。
 
 ::: moniker-end
 

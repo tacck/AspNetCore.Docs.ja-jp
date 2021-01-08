@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: e7d19a42e48048d2be4b87d6b0ac1ba6b2596ff1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7c3640e9cd2c5d392400a115813584861f789554
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058169"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024692"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core には、の MessagePack ハブプロトコルを使用します。 SignalR
 
@@ -120,6 +120,26 @@ const connection = new signalR.HubConnectionBuilder()
 > [!NOTE]
 > 現時点では、JavaScript クライアントの MessagePack プロトコルの構成オプションはありません。
 
+### <a name="java-client"></a>Java クライアント
+
+Java で MessagePack を有効にするには、パッケージをインストールし `com.microsoft.signalr.messagepack` ます。 Gradle を使用する場合は、 `dependencies` *Gradle* ファイルのセクションに次の行を追加します。
+
+```gradle
+implementation 'com.microsoft.signalr.messagepack:signalr-messagepack:5.0.0'
+```
+
+Maven を使用する場合は、 `<dependencies>` *pom.xml* ファイルの要素内に次の行を追加します。
+
+[!code-xml[pom.xml dependency element messagePack](java-client/sample/pom.xml?name=snippet_dependencyElement_messagePack)]
+
+`withHubProtocol(new MessagePackHubProtocol())`でを呼び出し `HubConnectionBuilder` ます。
+
+```java
+HubConnection messagePackConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
+    .withHubProtocol(new MessagePackHubProtocol())
+    .build();
+```
+
 ## <a name="messagepack-quirks"></a>MessagePack の特性
 
 MessagePack ハブプロトコルを使用する場合に注意する必要がある問題がいくつかあります。
@@ -136,7 +156,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 次に例を示します。
+JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 例:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -187,6 +207,10 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 ```
 
 この制限の詳細については、「GitHub issue [aspnet/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937)」を参照してください。
+
+### <a name="chars-and-strings-in-java"></a>Java での文字と文字列
+
+Java クライアントでは、 `char` オブジェクトは1文字のオブジェクトとしてシリアル化され `String` ます。 これは、オブジェクトとしてシリアル化する C# および JavaScript クライアントとは対照的です `short` 。 MessagePack の仕様自体は、オブジェクトの動作を定義していない `char` ため、ライブラリの作成者がオブジェクトをシリアル化する方法を決定します。 クライアント間の動作の違いは、実装に使用したライブラリの結果です。
 
 ## <a name="related-resources"></a>関連リソース
 
@@ -316,7 +340,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 次に例を示します。
+JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 例:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -496,7 +520,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 次に例を示します。
+JavaScript クライアントから送信する場合は、 `PascalCased` 大文字と小文字が C# クラスと正確に一致する必要があるため、プロパティ名を使用する必要があります。 例:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
