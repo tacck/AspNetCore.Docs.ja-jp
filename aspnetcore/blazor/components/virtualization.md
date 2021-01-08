@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: b23e4814daaabbe2c8660d49cc5b6940a9cc3b4f
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 920a23aee0d0555e93c829142700709d5881afd2
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056167"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753096"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor コンポーネントの仮想化
 
@@ -89,7 +89,9 @@ Blazor フレームワークに組み込まれている仮想化サポートを�
 </Virtualize>
 ```
 
-項目プロバイダーは、特定の開始インデックスを開始位置として、必要な項目数を指定する `ItemsProviderRequest` を受け取ります。 次に、項目プロバイダーにより、要求される項目がデータベースまたは他のサービスから取得され、それらが `ItemsProviderResult<TItem>` として、合計項目数と共に返されます。 項目プロバイダーでは、項目を要求ごとに取得するか、すぐに使用できるようにキャッシュするかを選択できます。 項目プロバイダーを使用して、同じ `Virtualize` コンポーネントの `Items` にコレクションを割り当てないでください。
+項目プロバイダーは、特定の開始インデックスを開始位置として、必要な項目数を指定する `ItemsProviderRequest` を受け取ります。 次に、項目プロバイダーにより、要求される項目がデータベースまたは他のサービスから取得され、それらが `ItemsProviderResult<TItem>` として、合計項目数と共に返されます。 項目プロバイダーでは、項目を要求ごとに取得するか、すぐに使用できるようにキャッシュするかを選択できます。
+
+`Virtualize` コンポーネントでは、そのパラメーターから **1 つの項目ソース** のみを受け入れることができるので、項目プロバイダーを同時に使用して `Items` にコレクションを割り当てることは避けてください。 両方が割り当てられている場合は、コンポーネントのパラメーターが実行時に設定されると <xref:System.InvalidOperationException> がスローされます。
 
 次の例では、従業員が `EmployeeService` から読み込まれます。
 

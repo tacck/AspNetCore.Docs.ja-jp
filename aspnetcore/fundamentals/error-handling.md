@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: c8174c7e253a596d02dbc6cec183453b3723bc24
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: ad9920ccd830b93d083f3c5ede03702164842b6e
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060470"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753115"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core のエラーを処理する
 
@@ -38,7 +38,7 @@ ms.locfileid: "93060470"
 
 ## <a name="developer-exception-page"></a>開発者例外ページ
 
-" *開発者例外ページ* " には、要求の例外に関する詳細な情報が表示されます。 ASP.NET Core テンプレートにより、次のコードが生成されます。
+"*開発者例外ページ*" には、要求の例外に関する詳細な情報が表示されます。 ASP.NET Core テンプレートにより、次のコードが生成されます。
 
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/Startup.cs?name=snippet&highlight=3-6)]
 
@@ -46,7 +46,7 @@ ms.locfileid: "93060470"
 
 このテンプレートでは、後続のミドルウェアでスローされた例外をキャッチできるように、ミドルウェア パイプラインの早い段階で <xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage%2A> が配置されます。
 
-前のコードでは、アプリが開発環境で実行されている場合に "* **のみ** _"、開発者例外ページが有効になります。 アプリが運用環境で実行されている場合は、詳細な例外情報を公開しないようにしてください。 環境の構成について詳しくは、「<xref:fundamentals/environments>」をご覧ください。
+前のコードでは、アプリが開発環境で実行されている場合に "***のみ** _"、開発者例外ページが有効になります。 アプリが運用環境で実行されている場合は、詳細な例外情報を公開しないようにしてください。 環境の構成について詳しくは、「<xref:fundamentals/environments>」をご覧ください。
 
 開発者例外ページには、例外と要求に関する次の情報が含まれています。
 
@@ -66,7 +66,7 @@ _ スタック トレース
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtml* ) と <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラス (`ErrorModel`) が *Pages* フォルダー内に用意されています。 MVC アプリの場合、プロジェクト テンプレートには、Home コントローラーの `Error` アクション メソッドとエラー ビューが含まれています。
+Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtml*) と <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラス (`ErrorModel`) が *Pages* フォルダー内に用意されています。 MVC アプリの場合、プロジェクト テンプレートには、Home コントローラーの `Error` アクション メソッドとエラー ビューが含まれています。
 
 `HttpGet` などの HTTP メソッド属性を使ってエラー ハンドラー アクション メソッドをマークしないでください。 明示的な動詞を使用すると、要求がアクション メソッドに届かないことがあります。 認証されていないユーザーにエラー ビューが表示される場合は、メソッドへの匿名アクセスを許可します。
 
@@ -77,7 +77,7 @@ Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtm
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/Pages/Error.cshtml.cs?name=snippet)]
 
 > [!WARNING]
-> 機密性の高いエラー情報をクライアントに提供 **しないでください** 。 エラーの提供はセキュリティ上のリスクです。
+> 機密性の高いエラー情報をクライアントに提供 **しないでください**。 エラーの提供はセキュリティ上のリスクです。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で例外をテストするには:
 
@@ -98,7 +98,7 @@ In the preceding code, `await context.Response.WriteAsync(new string(' ', 512));
 -->
 
 > [!WARNING]
-> <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> または <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> からの機密性の高いエラー情報をクライアントに提供 **しないでください** 。 エラーの提供はセキュリティ上のリスクです。
+> <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> または <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> からの機密性の高いエラー情報をクライアントに提供 **しないでください**。 エラーの提供はセキュリティ上のリスクです。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で例外処理ラムダをテストするには:
 
@@ -108,15 +108,9 @@ In the preceding code, `await context.Response.WriteAsync(new string(' ', 512));
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
-ASP.NET Core アプリでは、既定で、" *404 - 見つかりません* " などの HTTP エラー状態コードの状態コード ページが表示されません。 アプリで、本文のない HTTP 400 - 499 のエラー条件が発生すると、状態コードと空の応答本文が返されます。 状態コード ページを提供するには、状態コード ページ ミドルウェアを使用します。 一般的なエラー状態コード用に既定のテキスト専用ハンドラーを有効にするには、`Startup.Configure` メソッドで <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A> を呼び出します。
+ASP.NET Core アプリでは、既定で、"*404 - 見つかりません*" などの HTTP エラー状態コードの状態コード ページが表示されません。 アプリで、本文のない HTTP 400 から 599 のエラー状態コードが発生すると、状態コードと空の応答本文が返されます。 状態コード ページを提供するには、状態コード ページ ミドルウェアを使用します。 一般的なエラー状態コード用に既定のテキスト専用ハンドラーを有効にするには、`Startup.Configure` メソッドで <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A> を呼び出します。
 
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/StartupUseStatusCodePages.cs?name=snippet&highlight=13)]
-
-<!-- Review: 
-When you comment out // UseExceptionHandler("/Error");`
-you get a browser dependant error, not the codepage as I expected.
-call /index/2 -> return StatusCode(500); -> you get the codepage 
--->
 
 要求処理ミドルウェアの前に `UseStatusCodePages` を呼び出します。 たとえば、静的ファイル ミドルウェアとエンドポイント ミドルウェアの前に `UseStatusCodePages` を呼び出します。
 
@@ -134,6 +128,9 @@ Status Code: 404; Not Found
 * *Program.cs* の `webBuilder.UseStartup<StartupUseStatusCodePages>();` からコメントを削除します。
 * ホーム ページにあるリンクを選択します。
 
+> [!NOTE]
+> 状態コード ページのミドルウェアは例外をキャッチ **しません**。 カスタム エラー処理ページを提供するには、[例外ハンドラー ページ](#exception-handler-page)を使用します。
+
 ### <a name="usestatuscodepages-with-format-string"></a>書式設定文字列での UseStatusCodePages
 
 応答の内容の種類とテキストをカスタマイズするには、内容の種類と書式文字列を受け取る <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A> のオーバーロードを使います。
@@ -144,7 +141,7 @@ Status Code: 404; Not Found
 
 書式指定文字列を含む `UseStatusCodePages` は、ユーザーにとって役に立たないメッセージを返すため、通常は、運用環境では使用されません。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、 *Program.cs* の `webBuilder.UseStartup<StartupFormat>();` からコメントを削除します。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、*Program.cs* の `webBuilder.UseStartup<StartupFormat>();` からコメントを削除します。
 
 ### <a name="usestatuscodepages-with-lambda"></a>ラムダでの UseStatusCodePages
 
@@ -154,7 +151,7 @@ Status Code: 404; Not Found
 
 ラムダを含む `UseStatusCodePages` は、ユーザーにとって役に立たないメッセージを返すため、通常は、運用環境では使用されません。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、 *Program.cs* の `webBuilder.UseStartup<StartupStatusLambda>();` からコメントを削除します。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、*Program.cs* の `webBuilder.UseStartup<StartupStatusLambda>();` からコメントを削除します。
 
 ### <a name="usestatuscodepageswithredirects"></a>UseStatusCodePagesWithRedirects
 
@@ -172,7 +169,7 @@ Status Code: 404; Not Found
 * クライアントを別のエンドポイントにリダイレクトする必要がある場合 (通常は、別のアプリがエラーを処理する場合)。 Web アプリの場合は、クライアントのブラウザーのアドレス バーにリダイレクトされたエンドポイントが反映されます。
 * 元の状態コードを保持し、初回のリダイレクト応答で返してはいけない場合。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、 *Program.cs* の `webBuilder.UseStartup<StartupSCredirect>();` からコメントを削除します。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、*Program.cs* の `webBuilder.UseStartup<StartupSCredirect>();` からコメントを削除します。
 
 ### <a name="usestatuscodepageswithreexecute"></a>UseStatusCodePagesWithReExecute
 
@@ -209,7 +206,7 @@ When using a placeholder in the path, confirm that the endpoint can process the 
 
 Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)にある [Pages/MyStatusCode2.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x/ErrorHandlingSample/Pages) をご覧ください。
 
-[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、 *Program.cs* の `webBuilder.UseStartup<StartupSCreX>();` からコメントを削除します。
+[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)で `UseStatusCodePages` をテストするには、*Program.cs* の `webBuilder.UseStartup<StartupSCreX>();` からコメントを削除します。
 
 ## <a name="disable-status-code-pages"></a>状態コード ページを無効にする
 
@@ -249,7 +246,7 @@ Razor Pages ハンドラー メソッドまたは MVC コントローラーの�
 * dotnet プロセスがクラッシュします。
 * HTTP サーバーが [Kestrel](xref:fundamentals/servers/kestrel) のときは、エラー ページは表示されません。
 
-[IIS](/iis) (または Azure App Service) または [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上で実行している場合、プロセスを開始できなければ、 [ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)から " *502.5 - 処理エラー* " が返されます。 詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
+[IIS](/iis) (または Azure App Service) または [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上で実行している場合、プロセスを開始できなければ、[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)から "*502.5 - 処理エラー*" が返されます。 詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
 
 ## <a name="database-error-page"></a>データベース エラー ページ
 
@@ -286,7 +283,7 @@ MVC アプリでは、例外フィルターをグローバルに、またはコ�
 
 ## <a name="developer-exception-page"></a>開発者例外ページ
 
-" *開発者例外ページ* " には、要求の例外に関する詳細な情報が表示されます。 ASP.NET Core テンプレートにより、次のコードが生成されます。
+"*開発者例外ページ*" には、要求の例外に関する詳細な情報が表示されます。 ASP.NET Core テンプレートにより、次のコードが生成されます。
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=1-4)]
 
@@ -314,7 +311,7 @@ MVC アプリでは、例外フィルターをグローバルに、またはコ�
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtml* ) と <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラス (`ErrorModel`) が *Pages* フォルダー内に用意されています。 MVC アプリの場合、プロジェクト テンプレートには、Home コントローラーのエラー アクション メソッドとエラー ビューが含まれています。
+Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtml*) と <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> クラス (`ErrorModel`) が *Pages* フォルダー内に用意されています。 MVC アプリの場合、プロジェクト テンプレートには、Home コントローラーのエラー アクション メソッドとエラー ビューが含まれています。
 
 `HttpGet` などの HTTP メソッド属性を使ってエラー ハンドラー アクション メソッドをマークしないでください。 明示的な動詞を使用すると、要求がメソッドに届かないことがあります。 認証されていないユーザーにエラー ビューが表示される場合は、メソッドへの匿名アクセスを許可します。
 
@@ -325,7 +322,7 @@ Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtm
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Pages/MyFolder/Error.cshtml.cs?name=snippet_ExceptionHandlerPathFeature&3,7)]
 
 > [!WARNING]
-> 機密性の高いエラー情報をクライアントに提供 **しないでください** 。 エラーの提供はセキュリティ上のリスクです。
+> 機密性の高いエラー情報をクライアントに提供 **しないでください**。 エラーの提供はセキュリティ上のリスクです。
 
 上記の例外処理ページをトリガーするには、環境を運用に設定し、例外を強制します。
 
@@ -340,13 +337,13 @@ Razor Pages アプリのテンプレートには、エラー ページ ( *.cshtm
 上記のコードでは `await context.Response.WriteAsync(new string(' ', 512));` が追加されるため、Internet Explorer ブラウザーには IE のエラー メッセージではなく、このエラー メッセージが表示されます。 詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/16144)します。
 
 > [!WARNING]
-> <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> または <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> からの機密性の高いエラー情報をクライアントに提供 **しないでください** 。 エラーの提供はセキュリティ上のリスクです。
+> <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> または <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature> からの機密性の高いエラー情報をクライアントに提供 **しないでください**。 エラーの提供はセキュリティ上のリスクです。
 
 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)で例外処理ラムダの結果を表示するには、`ProdEnvironment` および `ErrorHandlerLambda` プリプロセッサ ディレクティブを使用して、ホーム ページで **[Trigger an exception]\(例外をトリガーする\)** を選択します。
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
-ASP.NET Core アプリでは、既定で、" *404 - 見つかりません* " などの HTTP 状態コードの状態コード ページが表示されません。 アプリでは、状態コードと空の応答本文が返されます。 状態コード ページを提供するには、状態コード ページ ミドルウェアを使用します。
+ASP.NET Core アプリでは、既定で、"*404 - 見つかりません*" などの HTTP 状態コードの状態コード ページが表示されません。 アプリでは、状態コードと空の応答本文が返されます。 状態コード ページを提供するには、状態コード ページ ミドルウェアを使用します。
 
 そのミドルウェアは、[Microsoft.AspNetCore.Diagnostics](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/) パッケージによって使用可能になります。
 
@@ -383,7 +380,7 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithRedirect)]
 
-次の例で示すように、URL テンプレートには状態コード用の `{0}` プレースホルダーを含めることができます。 URL テンプレートが `~` (チルダ) で始まっている場合、`~` はアプリの `PathBase` に置き換えられます。 アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは Razor ページを作成します。 Razor Pages の例については、 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
+次の例で示すように、URL テンプレートには状態コード用の `{0}` プレースホルダーを含めることができます。 URL テンプレートが `~` (チルダ) で始まっている場合、`~` はアプリの `PathBase` に置き換えられます。 アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは Razor ページを作成します。 Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
 
 この方法は、次のようなアプリで一般的に使用されます。
 
@@ -399,7 +396,7 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithReExecute)]
 
-アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは Razor ページを作成します。 `UseRouting` の前に `UseStatusCodePagesWithReExecute` が配置されていることを確認して、要求を状態ページに再ルーティングできるようにします。 Razor Pages の例については、 [サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
+アプリ内でエンドポイントを指し示す場合は、そのエンドポイントの MVC ビューまたは Razor ページを作成します。 `UseRouting` の前に `UseStatusCodePagesWithReExecute` が配置されていることを確認して、要求を状態ページに再ルーティングできるようにします。 Razor Pages の例については、[サンプル アプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)にある *Pages/StatusCode.cshtml* をご覧ください。
 
 この方法は、次のようなアプリで一般的に使用されます。
 
@@ -444,7 +441,7 @@ if (statusCodePagesFeature != null)
 
 ## <a name="server-exception-handling"></a>サーバー例外処理
 
-アプリ内の例外処理ロジックに加えて、[HTTP サーバーの実装](xref:fundamentals/servers/index)でも一部の例外を処理できます。 応答ヘッダーの送信前にサーバーで例外がキャッチされると、サーバーによって " *500 - 内部サーバー エラーです* " 応答が応答本文なしで送信されます。 応答ヘッダーの送信後にサーバーで例外がキャッチされた場合、サーバーは接続を閉じます。 アプリで処理されない要求はサーバーで処理されます。 サーバーが要求を処理しているときに発生した例外は、すべてサーバーの例外処理によって処理されます。 この動作は、アプリのカスタム エラー ページ、例外処理ミドルウェア、およびフィルターから影響を受けません。
+アプリ内の例外処理ロジックに加えて、[HTTP サーバーの実装](xref:fundamentals/servers/index)でも一部の例外を処理できます。 応答ヘッダーの送信前にサーバーで例外がキャッチされると、サーバーによって "*500 - 内部サーバー エラーです*" 応答が応答本文なしで送信されます。 応答ヘッダーの送信後にサーバーで例外がキャッチされた場合、サーバーは接続を閉じます。 アプリで処理されない要求はサーバーで処理されます。 サーバーが要求を処理しているときに発生した例外は、すべてサーバーの例外処理によって処理されます。 この動作は、アプリのカスタム エラー ページ、例外処理ミドルウェア、およびフィルターから影響を受けません。
 
 ## <a name="startup-exception-handling"></a>起動時の例外処理
 
@@ -456,7 +453,7 @@ if (statusCodePagesFeature != null)
 * dotnet プロセスがクラッシュします。
 * HTTP サーバーが [Kestrel](xref:fundamentals/servers/kestrel) のときは、エラー ページは表示されません。
 
-[IIS](/iis) (または Azure App Service) または [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上で実行している場合、プロセスを開始できなければ、 [ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)から " *502.5 - 処理エラー* " が返されます。 詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
+[IIS](/iis) (または Azure App Service) または [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) 上で実行している場合、プロセスを開始できなければ、[ASP.NET Core モジュール](xref:host-and-deploy/aspnet-core-module)から "*502.5 - 処理エラー*" が返されます。 詳細については、「<xref:test/troubleshoot-azure-iis>」を参照してください。
 
 ## <a name="database-error-page"></a>データベース エラー ページ
 

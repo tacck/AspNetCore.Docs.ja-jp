@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: f9c0ecd32f0e5c05782c2db76eff92bb64845db7
+ms.sourcegitcommit: 53e01d6e9b70a18a05618f0011cf115a16633c21
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053723"
+ms.lasthandoff: 01/05/2021
+ms.locfileid: "97878400"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core で Portable Object のローカライズを構成する
 
@@ -109,7 +109,7 @@ PO ファイルの仕様については、[こちら](https://www.gnu.org/savann
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
-このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、 *fr.po* ファイルが使用されます。
+このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、*fr.po* ファイルが使用されます。
 
 ### <a name="testing-the-application"></a>アプリケーションのテスト
 
@@ -159,7 +159,7 @@ var supportedCultures = new List<CultureInfo>
 };
 ```
 
-複数の基数についてローカライズされた複数形の文字列をレンダリングするように、 *Views/Home/About.cshtml* ファイルを編集します。
+複数の基数についてローカライズされた複数形の文字列をレンダリングするように、*Views/Home/About.cshtml* ファイルを編集します。
 
 ```cshtml
 <p>@Localizer.Plural(1, "There is one item.", "There are {0} items.")</p>
@@ -324,7 +324,7 @@ PO ファイルの仕様については、[こちら](https://www.gnu.org/savann
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
-このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、 *fr.po* ファイルが使用されます。
+このファイルには、翻訳する文字列とフランス語で翻訳された文字列の両方が格納されています。 必要に応じて、翻訳は元の親カルチャに戻されます。 この例では、要求されるカルチャが `fr-FR` または `fr-CA` の場合、*fr.po* ファイルが使用されます。
 
 ### <a name="testing-the-application"></a>アプリケーションのテスト
 
@@ -374,7 +374,7 @@ var supportedCultures = new List<CultureInfo>
 };
 ```
 
-複数の基数についてローカライズされた複数形の文字列をレンダリングするように、 *Views/Home/About.cshtml* ファイルを編集します。
+複数の基数についてローカライズされた複数形の文字列をレンダリングするように、*Views/Home/About.cshtml* ファイルを編集します。
 
 ```cshtml
 <p>@Localizer.Plural(1, "There is one item.", "There are {0} items.")</p>

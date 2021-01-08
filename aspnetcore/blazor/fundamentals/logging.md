@@ -5,7 +5,7 @@ description: ログ レベルの構成や Razor コンポーネントからロ�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/11/2020
+ms.date: 12/16/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/logging
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 78117fa6e9c7d5aed3fb31bbd3afee55b3b5b875
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 10c96bd2d0cc64f3bd035e7079b0996eb5768595
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506709"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97666834"
 ---
 # <a name="aspnet-core-no-locblazor-logging"></a>ASP.NET Core Blazor のログ
 
@@ -55,6 +55,9 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 ## <a name="no-locsignalr-net-client-logging"></a>SignalR .NET クライアント ログ
 
 <xref:Microsoft.Extensions.Logging.ILoggerProvider> を挿入して、<xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> に渡されたログ プロバイダーに `WebAssemblyConsoleLogger` を追加します。 従来の <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> とは異なり、`WebAssemblyConsoleLogger` はブラウザー固有のログ API (例: `console.log`) のラッパーです。 `WebAssemblyConsoleLogger` を使用すると、ブラウザー コンテキスト内の Mono 内でログ記録できるようになります。
+
+> [!NOTE]
+> `WebAssemblyConsoleLogger` は [internal](/dotnet/csharp/language-reference/keywords/internal) であり、開発者コードで直接使用することはできません。
 
 <xref:Microsoft.Extensions.Logging?displayProperty=fullName> の名前空間を追加し、コンポーネントに <xref:Microsoft.Extensions.Logging.ILoggerProvider> を挿入します。
 

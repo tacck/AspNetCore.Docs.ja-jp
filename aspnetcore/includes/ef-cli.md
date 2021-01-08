@@ -1,4 +1,4 @@
-`dotnet ef`がインストールされていない場合は、グローバルツールとしてインストールします。
+`dotnet ef` がインストールされていない場合は、グローバル ツールとしてインストールします。
 
 ```dotnetcli
   dotnet tool install --global dotnet-ef

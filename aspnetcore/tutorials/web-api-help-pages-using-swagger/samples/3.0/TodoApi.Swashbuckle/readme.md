@@ -11,10 +11,10 @@ products:
 - vs-mac
 urlFragment: getstarted-swashbuckle-aspnetcore
 ms.openlocfilehash: e02247325f430b0ce23dbb3f5bc344a60a1a164a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 04/06/2020
+ms.lasthandoff: 01/04/2021
 ms.locfileid: "78647588"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle と ASP.NET Core の概要
@@ -132,7 +132,7 @@ XML コメントは、次の方法で有効にすることができます。
 
 #### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **ソリューション エクスプローラー**でプロジェクトを右クリックし、 **[<project_name>.csproj の編集]** を選択します。
+* **ソリューション エクスプローラー** でプロジェクトを右クリックし、 **[<project_name>.csproj の編集]** を選択します。
 * 強調表示された行を手動で *.csproj* ファイルに追加します。
 
 ```xml
@@ -421,4 +421,4 @@ Swagger UI は、予期される HTTP 応答コードを明確に記述するよ
 
 ASP.NET Core 2.2 以降では、明示的に個別のアクションを `[ProducesResponseType]` で装飾する代わりに、規約を使用できます。 詳しくは、「[Web API 規約を使用する](https://docs.microsoft.com/aspnet/core/web-api/advanced/conventions)」をご覧ください。
 
-UI のカスタマイズについては、次をご覧ください。[UI のカスタマイズ](/aspnet/core/tutorials/getting-started-with-swashbuckle?#customize-and-extend)
+UI のカスタマイズについては、次をご覧ください。[UI をカスタマイズする](/aspnet/core/tutorials/getting-started-with-swashbuckle?#customize-and-extend)

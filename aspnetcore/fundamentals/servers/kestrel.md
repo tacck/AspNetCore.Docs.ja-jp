@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 56ac6635639eed93a84f47fc915c7013c6ed2381
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 5c9e1717ad603687343f015826a113e6945e4a41
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052332"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854614"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core への Kestrel Web サーバーの実装
 
@@ -67,7 +67,7 @@ Http/2 は既定では無効になっています。 構成の詳細について
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Kestrel とリバース プロキシを使用するタイミング
 
-Kestrel を単独で使用することも、 [インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、 [Nginx](https://nginx.org)、 [Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
+Kestrel を単独で使用することも、[インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org)、[Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
 
 エッジ (インターネットに接続する) Web サーバーとして使用される Kestrel:
 
@@ -99,7 +99,7 @@ ASP.NET Core プロジェクト テンプレートは既定では Kestrel を使
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=8)]
 
-ホストのビルトに関する詳細については、「<xref:fundamentals/host/generic-host#set-up-a-host>」の「 *ホストを設定する* 」と「 *既定の builder 設定* 」セクションを参照してください。
+ホストのビルトに関する詳細については、「<xref:fundamentals/host/generic-host#set-up-a-host>」の「*ホストを設定する*」と「*既定の builder 設定*」セクションを参照してください。
 
 `ConfigureWebHostDefaults` を呼び出した後に追加の構成を指定するには、`ConfigureKestrel` を使用します。
 
@@ -128,7 +128,7 @@ Kestrel Web サーバーには、インターネットに接続する展開で�
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
 
-この記事の後半で示す例では、Kestrel オプションが C# コードで構成されています。 Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使用して設定することもできます。 たとえば、 [ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)によって、 *appsettings.json* または *appsettings.{Environment}.json* ファイルから Kestrel 構成を読み込むことができます。
+この記事の後半で示す例では、Kestrel オプションが C# コードで構成されています。 Kestrel オプションは、[構成プロバイダー](xref:fundamentals/configuration/index)を使用して設定することもできます。 たとえば、[ファイル構成プロバイダー](xref:fundamentals/configuration/index#file-configuration-provider)によって、 *appsettings.json* または *appsettings.{Environment}.json* ファイルから Kestrel 構成を読み込むことができます。
 
 ```json
 {
@@ -258,7 +258,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 最小レートは応答にも適用されます。 要求制限と応答制限を設定するコードは、プロパティ名およびインターフェイス名に `RequestBody` または `Response` が使用されることを除けば同じです。
 
-次の例では、 *Program.cs* で最小データ レートを構成する方法を示します。
+次の例では、*Program.cs* で最小データ レートを構成する方法を示します。
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=6-11)]
 
@@ -266,7 +266,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Startup.cs?name=snippet_Limits&highlight=6-21)]
 
-前のサンプルで参照した <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> は、HTTP/2 要求の `HttpContext.Features` には存在しません。これは、プロトコルで要求の多重化に対応するために、要求ごとのレート制限の変更が、HTTP/2 で一般的にサポートされていないからです。 ただし、<xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> は引き続き現在の HTTP/2 要求の `HttpContext.Features` です。これは、HTTP/2 要求に対してであっても、`IHttpMinRequestBodyDataRateFeature.MinDataRate` を `null` に設定すれば、読み取りのレート制限を要求ごとに " *すべて無効* " にできるためです。 `IHttpMinRequestBodyDataRateFeature.MinDataRate` を読み取ろうとしたり、`null` 以外の値に設定しようとしたりすると、HTTP/2 要求を指定した `NotSupportedException` がスローされます。
+前のサンプルで参照した <xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinResponseDataRateFeature> は、HTTP/2 要求の `HttpContext.Features` には存在しません。これは、プロトコルで要求の多重化に対応するために、要求ごとのレート制限の変更が、HTTP/2 で一般的にサポートされていないからです。 ただし、<xref:Microsoft.AspNetCore.Server.Kestrel.Core.Features.IHttpMinRequestBodyDataRateFeature> は引き続き現在の HTTP/2 要求の `HttpContext.Features` です。これは、HTTP/2 要求に対してであっても、`IHttpMinRequestBodyDataRateFeature.MinDataRate` を `null` に設定すれば、読み取りのレート制限を要求ごとに "*すべて無効*" にできるためです。 `IHttpMinRequestBodyDataRateFeature.MinDataRate` を読み取ろうとしたり、`null` 以外の値に設定しようとしたりすると、HTTP/2 要求を指定した `NotSupportedException` がスローされます。
 
 `KestrelServerOptions.Limits` で構成したサーバー全体のレート制限は、引き続き HTTP/1.x と HTTP/2 の両方の接続に適用されます。
 
@@ -531,7 +531,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 次の *appsettings.json* の例では以下のようになります。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
-* 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
+* 証明書 (後の例では **HttpsDefaultCert**) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
 
 ```json
 {
@@ -594,7 +594,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 * `Url` パラメーターは、エンドポイントごとに必要です。 このパラメーターの形式は、1 つの値に制限されることを除き、最上位レベルの `Urls` 構成パラメーターと同じです。
 * これらのエンドポイントは、最上位レベルの `Urls` 構成での定義に追加されるのではなく、それを置き換えます。 コードで `Listen` を使用して定義されているエンドポイントは、構成セクションで定義されているエンドポイントに累積されます。
 * `Certificate` セクションは省略可能です。 `Certificate` セクションを指定しないと、前述のシナリオで定義した既定値が使用されます。 既定値を使用できない場合、サーバーにより例外がスローされ、開始できません。
-* `Certificate` セクションは、 **Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
+* `Certificate` セクションは、**Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
 * ポートが競合しない限り、この方法で任意の数のエンドポイントを定義できます。
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))` が `.Endpoint(string name, listenOptions => { })` メソッドで返す `KestrelConfigurationLoader` を使用して、構成されているエンドポイントの設定を補足できます。
 
@@ -919,37 +919,6 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 構成で設定された値は、コード内で指定されたプロトコルによってオーバーライドされます。
 
-## <a name="transport-configuration"></a>トランスポート構成
-
-Libuv (<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*>) を使用する必要のあるプロジェクトの場合
-
-* アプリのプロジェクト ファイルに [Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv/) パッケージの依存関係を追加します。
-
-   ```xml
-   <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
-                     Version="{VERSION}" />
-   ```
-
-* `IWebHostBuilder` で <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> を呼び出す
-
-   ```csharp
-   public class Program
-   {
-       public static void Main(string[] args)
-       {
-           CreateHostBuilder(args).Build().Run();
-       }
-
-       public static IHostBuilder CreateHostBuilder(string[] args) =>
-           Host.CreateDefaultBuilder(args)
-               .ConfigureWebHostDefaults(webBuilder =>
-               {
-                   webBuilder.UseLibuv();
-                   webBuilder.UseStartup<Startup>();
-               });
-   }
-   ```
-
 ### <a name="url-prefixes"></a>URL プレフィックス
 
 `UseUrls`、`--urls` コマンドライン引数、`urls` ホスト構成キー、または `ASPNETCORE_URLS` 環境変数を使用する場合、URL プレフィックスは次のいずれかの形式となります。
@@ -1004,7 +973,7 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json* /*appsettings.\<EnvironmentName>.json* で `AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
-*appsettings.json* :
+*appsettings.json*:
 
 ```json
 {
@@ -1016,6 +985,49 @@ Host Filtering Middleware は既定では無効です。 このミドルウェ�
 > [Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) にも <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.AllowedHosts> オプションがあります。 Forwarded Headers Middleware および Host Filtering Middleware には、異なるシナリオ用に類似した機能があります。 リバース プロキシ サーバーまたはロード バランサーを使用して要求を転送するとき、`Host` ヘッダーが保存されていない場合、Forwarded Headers Middleware に `AllowedHosts` を設定するのが適切です。 Kestrel が一般向けエッジ サーバーとして使用されていたり、`Host` ヘッダーが直接転送されたりしている場合、Host Filtering Middleware に `AllowedHosts` を設定するのが適切です。
 >
 > Forwarded Headers Middleware の詳細については、<xref:host-and-deploy/proxy-load-balancer> を参照してください。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="libuv-transport-configuration"></a>Libuv トランスポート構成
+
+ASP.NET Core 5.0 から、Kestrel の Libuv トランスポートは廃止されています。 Libuv トランスポートには、Windows ARM64 などの新しい OS プラットフォームをサポートする更新プログラムが提供されず、今後のリリースでは削除される予定です。 古い <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv%2A> メソッドの呼び出しをすべて削除し、代わりに Kestrel の既定の Socket トランスポートを使用してください。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+## <a name="libuv-transport-configuration"></a>Libuv トランスポート構成
+
+Libuv (<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv%2A>) を使用する必要のあるプロジェクトの場合
+
+* アプリのプロジェクト ファイルに [`Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv`](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv) パッケージの依存関係を追加します。
+
+  ```xml
+  <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv"
+                    Version="{VERSION}" />
+  ```
+
+* `IWebHostBuilder` で <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv%2A> を呼び出す
+
+  ```csharp
+  public class Program
+  {
+      public static void Main(string[] args)
+      {
+          CreateHostBuilder(args).Build().Run();
+      }
+
+      public static IHostBuilder CreateHostBuilder(string[] args) =>
+          Host.CreateDefaultBuilder(args)
+              .ConfigureWebHostDefaults(webBuilder =>
+              {
+                  webBuilder.UseLibuv();
+                  webBuilder.UseStartup<Startup>();
+              });
+  }
+  ```
 
 ::: moniker-end
 
@@ -1056,7 +1068,7 @@ Http/2 は既定では無効になっています。 構成の詳細について
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Kestrel とリバース プロキシを使用するタイミング
 
-Kestrel を単独で使用することも、 [インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、 [Nginx](https://nginx.org)、 [Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
+Kestrel を単独で使用することも、[インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org)、[Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
 
 エッジ (インターネットに接続する) Web サーバーとして使用される Kestrel:
 
@@ -1090,7 +1102,7 @@ ASP.NET Core プロジェクト テンプレートは既定では Kestrel を使
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=7)]
 
-`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の " *ホストを設定する* " セクションをご覧ください。
+`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の "*ホストを設定する*" セクションをご覧ください。
 
 `CreateDefaultBuilder` を呼び出した後に追加の構成を指定するには、`ConfigureKestrel` を使用します。
 
@@ -1259,7 +1271,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 最小レートは応答にも適用されます。 要求制限と応答制限を設定するコードは、プロパティ名およびインターフェイス名に `RequestBody` または `Response` が使用されることを除けば同じです。
 
-次の例では、 *Program.cs* で最小データ レートを構成する方法を示します。
+次の例では、*Program.cs* で最小データ レートを構成する方法を示します。
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_Limits&highlight=6-9)]
 
@@ -1519,7 +1531,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 次の *appsettings.json* の例では以下のようになります。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
-* 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
+* 証明書 (後の例では **HttpsDefaultCert**) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
 
 ```json
 {
@@ -1586,7 +1598,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 * `Url` パラメーターは、エンドポイントごとに必要です。 このパラメーターの形式は、1 つの値に制限されることを除き、最上位レベルの `Urls` 構成パラメーターと同じです。
 * これらのエンドポイントは、最上位レベルの `Urls` 構成での定義に追加されるのではなく、それを置き換えます。 コードで `Listen` を使用して定義されているエンドポイントは、構成セクションで定義されているエンドポイントに累積されます。
 * `Certificate` セクションは省略可能です。 `Certificate` セクションを指定しないと、前述のシナリオで定義した既定値が使用されます。 既定値を使用できない場合、サーバーにより例外がスローされ、開始できません。
-* `Certificate` セクションは、 **Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
+* `Certificate` セクションは、**Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
 * ポートが競合しない限り、この方法で任意の数のエンドポイントを定義できます。
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))` が `.Endpoint(string name, listenOptions => { })` メソッドで返す `KestrelConfigurationLoader` を使用して、構成されているエンドポイントの設定を補足できます。
 
@@ -1868,7 +1880,7 @@ private class TlsFilterAdapter : IConnectionAdapter
 
 構成で設定された値は、コード内で指定されたプロトコルによってオーバーライドされます。
 
-## <a name="transport-configuration"></a>トランスポート構成
+## <a name="libuv-transport-configuration"></a>Libuv トランスポート構成
 
 ASP.NET Core 2.1 のリリースにより、Kestrel の既定のトランスポートは、Libuv に基づかなくなり、代わりにマネージド ソケットに基づくようになりました。 これは、<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> を呼び出す 2.1 にアップグレードする ASP.NET Core 2.0 アプリにとっては破壊的変更であり、以下のパッケージのいずれかに依存しています。
 
@@ -1955,7 +1967,7 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json* /*appsettings.\<EnvironmentName>.json* で `AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
-*appsettings.json* :
+*appsettings.json*:
 
 ```json
 {
@@ -1986,7 +1998,7 @@ kestrel は、.NET Core がサポートするすべてのプラットフォー�
 
 ## <a name="when-to-use-kestrel-with-a-reverse-proxy"></a>Kestrel とリバース プロキシを使用するタイミング
 
-Kestrel を単独で使用することも、 [インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、 [Nginx](https://nginx.org)、 [Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
+Kestrel を単独で使用することも、[インターネット インフォメーション サービス (IIS)](https://www.iis.net/)、[Nginx](https://nginx.org)、[Apache](https://httpd.apache.org/) などの *リバース プロキシ サーバー* と併用することもできます。 リバース プロキシ サーバーはネットワークから HTTP 要求を受け取り、これを Kestrel に転送します。
 
 エッジ (インターネットに接続する) Web サーバーとして使用される Kestrel:
 
@@ -2030,7 +2042,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の " *ホストを設定する* " セクションをご覧ください。
+`CreateDefaultBuilder` とホストのビルドについて詳しくは、<xref:fundamentals/host/web-host#set-up-a-host> の "*ホストを設定する*" セクションをご覧ください。
 
 ## <a name="kestrel-options"></a>Kestrel オプション
 
@@ -2199,7 +2211,7 @@ kestrel はデータが指定のレート (バイト数/秒) で到着してい�
 
 最小レートは応答にも適用されます。 要求制限と応答制限を設定するコードは、プロパティ名およびインターフェイス名に `RequestBody` または `Response` が使用されることを除けば同じです。
 
-次の例では、 *Program.cs* で最小データ レートを構成する方法を示します。
+次の例では、*Program.cs* で最小データ レートを構成する方法を示します。
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2383,7 +2395,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 次の *appsettings.json* の例では以下のようになります。
 
 * **AllowInvalid** を `true` に設定し、の無効な証明書 (自己署名証明書など) の使用を許可します。
-* 証明書 (後の例では **HttpsDefaultCert** ) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
+* 証明書 (後の例では **HttpsDefaultCert**) が指定されていないすべての HTTPS エンドポイントは、 **[証明書]** > **[既定]** または開発証明書で定義されている証明書にフォールバックします。
 
 ```json
 {
@@ -2450,7 +2462,7 @@ Kestrel は、`http://localhost:5000` と `https://localhost:5001` (既定の証
 * `Url` パラメーターは、エンドポイントごとに必要です。 このパラメーターの形式は、1 つの値に制限されることを除き、最上位レベルの `Urls` 構成パラメーターと同じです。
 * これらのエンドポイントは、最上位レベルの `Urls` 構成での定義に追加されるのではなく、それを置き換えます。 コードで `Listen` を使用して定義されているエンドポイントは、構成セクションで定義されているエンドポイントに累積されます。
 * `Certificate` セクションは省略可能です。 `Certificate` セクションを指定しないと、前述のシナリオで定義した既定値が使用されます。 既定値を使用できない場合、サーバーにより例外がスローされ、開始できません。
-* `Certificate` セクションは、 **Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
+* `Certificate` セクションは、**Path**&ndash;**Password** 証明書と **Subject**&ndash;**Store** 証明書の両方をサポートします。
 * ポートが競合しない限り、この方法で任意の数のエンドポイントを定義できます。
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))` が `.Endpoint(string name, listenOptions => { })` メソッドで返す `KestrelConfigurationLoader` を使用して、構成されているエンドポイントの設定を補足できます。
 
@@ -2658,7 +2670,7 @@ Listening on the following addresses: http://127.0.0.1:48508
 
 IIS を使用するときは、IIS オーバーライド バインドに対する URL バインドを、`Listen` または `UseUrls` によって設定します。 詳しくは、「[ASP.NET Core モジュールの概要](xref:host-and-deploy/aspnet-core-module)」をご覧ください。
 
-## <a name="transport-configuration"></a>トランスポート構成
+## <a name="libuv-transport-configuration"></a>Libuv トランスポート構成
 
 ASP.NET Core 2.1 のリリースにより、Kestrel の既定のトランスポートは、Libuv に基づかなくなり、代わりにマネージド ソケットに基づくようになりました。 これは、<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderLibuvExtensions.UseLibuv*> を呼び出す 2.1 にアップグレードする ASP.NET Core 2.0 アプリにとっては破壊的変更であり、以下のパッケージのいずれかに依存しています。
 
@@ -2745,7 +2757,7 @@ Kestrel は `http://example.com:5000` などのプレフィックスに基づく
 
 Host Filtering Middleware は既定では無効です。 このミドルウェアを有効にするには、 *appsettings.json* /*appsettings.\<EnvironmentName>.json* で `AllowedHosts` キーを定義します。 この値は、ポート番号を含まないホスト名のセミコロン区切りリストです。
 
-*appsettings.json* :
+*appsettings.json*:
 
 ```json
 {

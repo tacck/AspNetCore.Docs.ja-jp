@@ -5,7 +5,7 @@ description: Blazor アプリでコンポーネントにサービスを挿入す
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/11/2020
+ms.date: 12/19/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -20,12 +20,12 @@ no-loc:
 - SignalR
 uid: blazor/fundamentals/dependency-injection
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: af6b645fc3c398414c85c78e1cfeb213e538c2a6
-ms.sourcegitcommit: 6b87f2e064cea02e65dacd206394b44f5c604282
+ms.openlocfilehash: 3f2b4eff5422acbec80b2fd9b801101271cc3f75
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97506800"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97808726"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor 依存関係の挿入
 
@@ -98,7 +98,7 @@ public void ConfigureServices(IServiceCollection services)
 
 | 有効期間 | 説明 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>現在、Blazor WebAssembly アプリには DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。</p><p>Blazor Server ホスティング モデルでは、HTTP 要求間で `Scoped` 有効期間がサポートされていますが、クライアントに読み込まれるコンポーネント間での SingalR 接続/回線メッセージ間ではサポートされていません。 アプリの Razor ページまたは MVC の部分では、スコープ付きサービスが通常どおりに処理され、ページまたはビュー間を移動するとき、またはページやビューからコンポーネントに移動するときに、"*各 HTTP 要求*" に対してサービスが再作成されます。 クライアント上のコンポーネント間を移動するときは、スコープ付きサービスは再構築されません。この場合、サーバーとの通信は、HTTP 要求ではなく、ユーザーの回線の SignalR 接続を介して行われます。 次のクライアント上のコンポーネント シナリオでは、ユーザー用に新しい回線が作成されるため、スコープ付きサービスは再構築されます。</p><ul><li>ユーザーがブラウザーのウィンドウを閉じる場合。 ユーザーは新しいウィンドウを開き、アプリに戻ります。</li><li>ユーザーが、ブラウザー ウィンドウでアプリの最後のタブを閉じる場合。 ユーザーは新しいタブを開き、アプリに戻ります。</li><li>ユーザーが、ブラウザーの再読み込みまたは更新ボタンを選択する場合。</li></ul><p>Blazor Server アプリのスコープ付きサービス間でユーザー状態を保持する方法の詳細については、「<xref:blazor/hosting-models?pivots=server>」を参照してください。</p> |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | <p>現在、Blazor WebAssembly アプリには DI スコープの概念はありません。 `Scoped` 登録済みサービスは `Singleton` サービスのように動作します。</p><p>Blazor Server ホスティング モデルでは、HTTP 要求間で `Scoped` 有効期間がサポートされていますが、クライアントに読み込まれるコンポーネント間での SignalR 接続/回線メッセージ間ではサポートされていません。 アプリの Razor ページまたは MVC の部分では、スコープ付きサービスが通常どおりに処理され、ページまたはビュー間を移動するとき、またはページやビューからコンポーネントに移動するときに、"*各 HTTP 要求*" に対してサービスが再作成されます。 クライアント上のコンポーネント間を移動するときは、スコープ付きサービスは再構築されません。この場合、サーバーとの通信は、HTTP 要求ではなく、ユーザーの回線の SignalR 接続を介して行われます。 次のクライアント上のコンポーネント シナリオでは、ユーザー用に新しい回線が作成されるため、スコープ付きサービスは再構築されます。</p><ul><li>ユーザーがブラウザーのウィンドウを閉じる場合。 ユーザーは新しいウィンドウを開き、アプリに戻ります。</li><li>ユーザーが、ブラウザー ウィンドウでアプリの最後のタブを閉じる場合。 ユーザーは新しいタブを開き、アプリに戻ります。</li><li>ユーザーが、ブラウザーの再読み込みまたは更新ボタンを選択する場合。</li></ul><p>Blazor Server アプリのスコープ付きサービス間でユーザー状態を保持する方法の詳細については、「<xref:blazor/hosting-models?pivots=server>」を参照してください。</p> |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI では、サービスの "*単一インスタンス*" が作成されます。 `Singleton` サービスを必要とするすべてのコンポーネントは、同じサービスのインスタンスを受け取ります。 |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | コンポーネントは、サービス コンテナーから `Transient` サービスのインスタンスを取得するたびに、サービスの "*新しいインスタンス*" を受け取ります。 |
 
@@ -106,7 +106,7 @@ DI システムは、ASP.NET Core の DI システムが基になっています
 
 ## <a name="request-a-service-in-a-component"></a>コンポーネント内のサービスを要求する
 
-サービスがサービス コレクションに追加された後、[\@inject](xref:mvc/views/razor#inject) Razor ディレクティブを使用して、サービスをコンポーネントに挿入します。 [`@inject`](xref:mvc/views/razor#inject) には、次の 2 つのパラメーターがあります。
+サービスがサービス コレクションに追加された後、[`@inject`](xref:mvc/views/razor#inject) Razor ディレクティブを使用して、サービスをコンポーネントに挿入します。これには 2 つのパラメーターがあります。
 
 * 型:挿入するサービスの型。
 * プロパティ:挿入されたアプリ サービスを受け取るプロパティの名前。 プロパティを手動で作成する必要はありません。 プロパティはコンパイラによって作成されます。
@@ -192,8 +192,6 @@ Blazor アプリでサービスの有効期間を制限するには、<xref:Micr
 
 詳細については、「<xref:blazor/blazor-server-ef-core>」を参照してください。
 
-::: moniker range="< aspnetcore-5.0"
-
 ## <a name="detect-transient-disposables"></a>破棄可能な一時サービスの検出
 
 次の例は、<xref:Microsoft.AspNetCore.Components.OwningComponentBase> を使用する必要があるアプリ内の破棄可能な一時サービスを検出する方法を示しています。 詳細については、「[DI スコープを管理するためのユーティリティの基本コンポーネント クラス](#utility-base-component-classes-to-manage-a-di-scope)」セクションを参照してください。
@@ -206,17 +204,17 @@ Blazor アプリでサービスの有効期間を制限するには、<xref:Micr
 
 次の例では、`TransientDisposable` が検出されます (`Program.cs`)。
 
-<!-- moniker range=">= aspnetcore-5.0"
+::: moniker range=">= aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/5.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-moniker-end 
+::: moniker-end 
 
-moniker range="< aspnetcore-5.0" -->
+::: moniker range="< aspnetcore-5.0"
 
 [!code-csharp[](dependency-injection/samples_snapshot/3.x/transient-disposables/DetectIncorrectUsagesOfTransientDisposables-wasm-program.cs?highlight=6,9,17,22-25)]
 
-<!-- moniker-end -->
+::: moniker-end
 
 ::: zone-end
 
@@ -242,7 +240,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 ::: zone-end
 
-::: moniker-end
+アプリは、例外をスローすることなく、一時的な破棄可能を登録できます。 ただし、次の例に示すように、一時的に破棄可能な結果を解決しようとすると、<xref:System.InvalidOperationException> が発生します。
+
+`Pages/TransientDisposable.razor`:
+
+```razor
+@page "/transient-disposable"
+@inject TransientDisposable TransientDisposable
+
+<h1>Transient Disposable Detection</h1>
+```
+
+`/transient-disposable` で `TransientDisposable` コンポーネントに移動すると、フレームワークが `TransientDisposable` のインスタンスを構築しようとしたときに <xref:System.InvalidOperationException> がスローされます。
+
+> System.InvalidOperationException:一時的に破棄可能なサービス TransientDisposable を間違ったスコープで解決しようとしています。 解決しようとしているサービス 'T' に対して 'OwningComponentBase\<T>' コンポーネントの基底クラスを使用してください。
 
 ## <a name="additional-resources"></a>その他の技術情報
 

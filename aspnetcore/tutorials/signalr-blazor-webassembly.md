@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 89aeb20d5566447ff86581dfa1d7946d20b9ed2d
-ms.sourcegitcommit: 94c8cc1a8ce2bdba0ebdd9d37c155bf42d3cc62b
+ms.openlocfilehash: b2f58fb29e451628aead4ad35c7272a1409cf3d8
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96473717"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97797354"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>ホストされた Blazor WebAssembly アプリで ASP.NET Core SignalR を使用する
 
@@ -212,6 +212,60 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
+::: moniker range="< aspnetcore-5.0"
+
+## <a name="add-the-systemtextencodingsweb-package"></a>System.Text.Encodings.Web パッケージを追加する
+
+ASP.NET Core 3.1 アプリで [`System.Text.Json`](https://www.nuget.org/packages/System.Text.Json) 5.0.0 を使用する場合のパッケージの解決に関する問題のため、`BlazorSignalRApp.Server` プロジェクトで [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) のパッケージ参照が必要になります。 基になる問題は、.NET 5 の今後のパッチ リリースで解決される予定です。 詳細については、「[System.Text.Json defines netcoreapp3.0 with no dependencies (dotnet/runtime #45560)](https://github.com/dotnet/runtime/issues/45560)」を参照してください。
+
+ASP.NET Core 3.1 でホストされている Blazor ソリューションの `BlazorSignalRApp.Server` プロジェクトに [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) を追加するには、使用するツールのガイダンスに従ってください。
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+
+1. **ソリューション エクスプローラー** で、`BlazorSignalRApp.Server` プロジェクトを右クリックし、 **[NuGet パッケージの管理]** を選択します。
+
+1. **[NuGet パッケージの管理]** ダイアログで、 **[パッケージ ソース]** が `nuget.org` に設定されていることを確認します。
+
+1. **[参照]** が選択されている状態で、検索ボックスに「`System.Text.Encodings.Web`」と入力します。
+
+1. 検索結果から [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) パッケージを選択し、 **[インストール]** を選択します。
+
+1. **[変更のプレビュー]** ダイアログ ボックスが表示されたら、 **[OK]** を選択します。
+
+1. **[ライセンスの同意]** ダイアログが表示されたら、ライセンス条項に同意する場合は **[同意する]** を選択します。
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
+
+**統合ターミナル** (ツール バーの **[表示]** > **[ターミナル]** ) で、次のコマンドを実行します。
+
+```dotnetcli
+dotnet add Server package System.Text.Encodings.Web
+```
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+1. **[ソリューション]** サイドバーで、`BlazorSignalRApp.Server` プロジェクトを右クリックし、 **[NuGet パッケージの管理]** を選択します。
+
+1. **[NuGet パッケージの管理]** ダイアログで、ソースのドロップダウンが `nuget.org` に設定されていることを確認します。
+
+1. **[参照]** が選択されている状態で、検索ボックスに「`System.Text.Encodings.Web`」と入力します。
+
+1. 検索結果の [`System.Text.Encodings.Web`](https://www.nuget.org/packages/System.Text.Encodings.Web) パッケージの横にあるチェック ボックスをオンにし、 **[パッケージの追加]** を選択します。
+
+1. **[ライセンスの同意]** ダイアログが表示されたら、ライセンス条項に同意する場合は **[同意する]** を選択します。
+
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+
+コマンド シェルで次のコマンドを実行します。
+
+```dotnetcli
+dotnet add Server package System.Text.Encodings.Web
+```
+
+---
+
+::: moniker-end
+
 ## <a name="add-a-no-locsignalr-hub"></a>SignalR ハブを追加する
 
 `BlazorSignalRApp.Server` プロジェクトで、`Hubs` (複数形) フォルダーを作成し、次の `ChatHub` クラス (`Hubs/ChatHub.cs`) を追加します。
@@ -238,32 +292,31 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. SignalR および応答の圧縮ミドルウェア サービスを `Startup.ConfigureServices` に追加します。
-
 ::: moniker range=">= aspnetcore-5.0"
 
+1. SignalR および応答の圧縮ミドルウェア サービスを `Startup.ConfigureServices` に追加します。
+
    [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,6-10)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-5.0"
-
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
-
-::: moniker-end
-
+   
 1. `Startup.Configure`の場合:
 
    * 処理パイプラインの構成の上部にある応答圧縮ミドルウェアを使用します。
    * コントローラーのエンドポイントとクライアント側のフォールバックのエンドポイントの間に、ハブのエンドポイントを追加します。
-
-::: moniker range=">= aspnetcore-5.0"
 
    [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,26)]
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+1. SignalR および応答の圧縮ミドルウェア サービスを `Startup.ConfigureServices` に追加します。
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+   
+1. `Startup.Configure`の場合:
+
+   * 処理パイプラインの構成の上部にある応答圧縮ミドルウェアを使用します。
+   * コントローラーのエンドポイントとクライアント側のフォールバックのエンドポイントの間に、ハブのエンドポイントを追加します。
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
 
@@ -273,9 +326,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. `BlazorSignalRApp.Client` プロジェクトで、`Pages/Index.razor` ファイルを開きます。
 
-1. マークアップを次のコードで置き換えます。
-
 ::: moniker range=">= aspnetcore-5.0"
+
+1. マークアップを次のコードで置き換えます。
 
    [!code-razor[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
@@ -283,13 +336,15 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ::: moniker range="< aspnetcore-5.0"
 
+1. マークアップを次のコードで置き換えます。
+
    [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
 ::: moniker-end
 
 ## <a name="run-the-app"></a>アプリを実行する
 
-1. お使いのツール用のガイダンスに従ってください。
+お使いのツール用のガイダンスに従ってください。
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -305,9 +360,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. VS Code により、サーバー アプリの起動プロファイルの作成が提案される場合 (`.vscode/launch.json`)、`program` エントリが次のように表示され、アプリのアセンブリをポイントします (`{APPLICATION NAME}.Server.dll`)。
-
 ::: moniker range=">= aspnetcore-5.0"
+
+1. VS Code により、サーバー アプリの起動プロファイルの作成が提案される場合 (`.vscode/launch.json`)、`program` エントリが次のように表示され、アプリのアセンブリをポイントします (`{APPLICATION NAME}.Server.dll`)。
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/net5.0/{APPLICATION NAME}.Server.dll"
@@ -316,6 +371,8 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+1. VS Code により、サーバー アプリの起動プロファイルの作成が提案される場合 (`.vscode/launch.json`)、`program` エントリが次のように表示され、アプリのアセンブリをポイントします (`{APPLICATION NAME}.Server.dll`)。
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 199ca62f71df5c0ee5ca2f78caf53ad8d6be1179
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059716"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854562"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1 の新機能
 
@@ -93,7 +93,7 @@ ASP.NET Core では、[EU の一般データ保護規制 (GDPR) ](https://www.eu
 
 テストの作成と実行を効率化する新しいパッケージが導入されました。 [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) パッケージは、次のタスクを処理します。
 
-* テスト対象のアプリから依存関係ファイル ( *\*.deps* ) をプロジェクトの *bin* フォルダーにコピーします。
+* テスト対象のアプリから依存関係ファイル ( *\*.deps*) をプロジェクトの *bin* フォルダーにコピーします。
 * テストを実行したときに、静的なファイルとページ/ビューが検出されるように、コンテンツ ルートをテスト対象のアプリのプロジェクト ルートに設定します。
 * [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) クラスを提供して、[TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) を使用してテスト対象のアプリのブートストラップを効率化します。
 
@@ -141,9 +141,9 @@ ASP.NET Core 2.1 には、アプリでの `HttpClient` のインスタンスの�
 
 詳細については、「[HTTP 要求の開始](xref:fundamentals/http-requests)」を参照してください。
 
-## <a name="kestrel-transport-configuration"></a>Kestrel トランスポート構成
+## <a name="kestrel-libuv-transport-configuration"></a>Kestrel libuv トランスポート構成
 
-ASP.NET Core 2.1 のリリースにより、Kestrel の既定のトランスポートは、Libuv に基づかなくなり、代わりにマネージド ソケットに基づくようになりました。 詳細については、[Kestrel Web サーバーの実装:トランスポート構成](xref:fundamentals/servers/kestrel#transport-configuration)に関する記事をご覧ください。
+ASP.NET Core 2.1 のリリースにより、Kestrel の既定のトランスポートは、Libuv に基づかなくなり、代わりにマネージド ソケットに基づくようになりました。 詳細については、[Kestrel Web サーバーの実装:Libuv トランスポート構成](xref:fundamentals/servers/kestrel#libuv-transport-configuration)に関する記事を参照してください。
 
 ## <a name="generic-host-builder"></a>汎用ホスト ビルダー
 

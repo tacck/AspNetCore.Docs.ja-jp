@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/graph-api
-ms.openlocfilehash: 128ba34b1e2a9f8cc2986a8f1cb3fb8beba83b21
-ms.sourcegitcommit: a71bb61f7add06acb949c9258fe506914dfe0c08
+ms.openlocfilehash: 58c201d6d1172c1ff82521589f988e33d5c984ae
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96855392"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854497"
 ---
 # <a name="use-graph-api-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly で Graph API を使用する
 
@@ -107,7 +107,7 @@ internal static class GraphClientExtensions
             var result = await TokenProvider.RequestAccessToken(
                 new AccessTokenRequestOptions()
                 {
-                    Scopes = {STRING ARRAY OF SCOPES}
+                    Scopes = new[] { "{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}" }
                 });
 
             if (result.TryGetToken(out var token))
@@ -150,7 +150,7 @@ internal static class GraphClientExtensions
 }
 ```
 
-上記のコードのプレースホルダー `{STRING ARRAY OF SCOPES}` は、許可されたスコープの文字列配列です。 たとえば、`Scopes` を、この記事の次のセクションにある例の `User.Read` スコープに設定します。
+前のコードのスコープのプレースホルダー `"{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}"` は、1 つ以上の許可されたスコープを表します。 たとえば、`Scopes` を、この記事の後のセクションにある例の `User.Read` の 1 つのスコープの文字列配列に設定します。
 
 ```csharp
 Scopes = new[] { "https://graph.microsoft.com/User.Read" }
@@ -159,10 +159,10 @@ Scopes = new[] { "https://graph.microsoft.com/User.Read" }
 `Program.Main` (`Program.cs`) で、`AddGraphClient` 拡張メソッドを使用して Graph クライアント サービスと構成を追加します。
 
 ```csharp
-builder.Services.AddGraphClient({STRING ARRAY OF SCOPES});
+builder.Services.AddGraphClient("{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}");
 ```
 
-上記のコードのプレースホルダー `{STRING ARRAY OF SCOPES}` は、許可されたスコープの文字列配列です。 たとえば、`User.Read` を、この記事の次のセクションにある例の `AddGraphClient` スコープに渡します。
+前のコードのスコープのプレースホルダー `"{SCOPE 1}", "{SCOPE 2}", ... "{SCOPE X}"` は、1 つ以上の許可されたスコープを表します。 たとえば、`User.Read` を、この記事の次のセクションにある例の `AddGraphClient` スコープに渡します。
 
 ```csharp
 builder.Services.AddGraphClient("https://graph.microsoft.com/User.Read");

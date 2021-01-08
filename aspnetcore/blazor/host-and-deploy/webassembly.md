@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 5983cbc1e0256f7cf8e85fb07f9ba1bbc1bf08db
-ms.sourcegitcommit: c321518bfe367280ef262aecaada287f17fe1bc5
+ms.openlocfilehash: 55289dd7048c08ac61432c7cc062e74d2e69ee24
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 12/10/2020
-ms.locfileid: "97011872"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97753128"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly のホストと展開
 
@@ -135,9 +135,17 @@ Azure App Service の展開については、「<xref:tutorials/publish-to-azure
 
 ### <a name="app-configuration"></a>アプリの構成
 
-複数の Blazor WebAssembly アプリを提供するようにホストされた Blazor ソリューションを構成するには:
+ホスティングされた Blazor ソリューションでは、複数の Blazor WebAssembly アプリに対応できます。
 
-* 既存のホストされた Blazor ソリューションを使用するか、Blazor のホストされたプロジェクト テンプレートから新しいソリューションを作成します。
+> [!NOTE]
+> このセクションの例では、Visual Studio "*ソリューション*" の使用方法を参照していますが、複数のクライアント アプリがホスティングされた Blazor WebAssembly アプリのシナリオで動作するために、Visual Studio と Visual Studio ソリューションを使用する必要はありません。 Visual Studio を使用していない場合は、Visual Studio 用に作成された `{SOLUTION NAME}.sln` ファイルとその他のファイルは無視してください。
+
+次に例を示します。
+
+* 初期 (最初の) クライアント アプリは、Blazor WebAssembly プロジェクト テンプレートから作成されたソリューションの既定のクライアント プロジェクトです。 最初のクライアント アプリは、ブラウザーで、ポート 5001 または `firstapp.com` のホストで URL `/FirstApp` からアクセスできます。
+* 2 つ目のクライアント アプリは、ソリューション `SecondBlazorApp.Client` に追加されます。 2 つ目クライアント アプリは、ブラウザーで、ポート 5002 または `secondapp.com` のホストで URL `/SecondApp` からアクセスできます。
+
+既存のホスティングされた Blazor ソリューションを使用するか、Blazor のホスティングされたプロジェクト テンプレートから新しいソリューションを作成します。
 
 * クライアント アプリのプロジェクト ファイルで、値が `FirstApp` の `<PropertyGroup>` に `<StaticWebAssetBasePath>` プロパティを追加して、プロジェクトの静的アセットの基本パスを設定します。
 
@@ -150,9 +158,19 @@ Azure App Service の展開については、「<xref:tutorials/publish-to-azure
 
 * ソリューションに 2 つ目のクライアント アプリを追加します。
 
-  * `SecondClient` という名前のフォルダーをソリューションのフォルダーに追加します。
+  * `SecondClient` という名前のフォルダーをソリューションのフォルダーに追加します。 プロジェクト テンプレートから作成されたソリューション フォルダーには、`SecondClient` フォルダーを追加した後の次のソリューション ファイルとフォルダーが含まれています。
+  
+    * `Client` (フォルダー)
+    * `SecondClient` (フォルダー)
+    * `Server` (フォルダー)
+    * `Shared` (フォルダー)
+    * `{SOLUTION NAME}.sln` (ファイル)
+    
+    プレースホルダー `{SOLUTION NAME}` は、ソリューションの名前です。
+
   * Blazor WebAssembly プロジェクト テンプレートから `SecondClient` フォルダーに `SecondBlazorApp.Client` という名前の Blazor WebAssembly アプリを作成します。
-  * アプリのプロジェクト ファイル内で:
+
+  * `SecondBlazorApp.Client` アプリのプロジェクト ファイル内で、次のようにします。
 
     * 値が `SecondApp` の `<PropertyGroup>` に `<StaticWebAssetBasePath>` プロパティを追加します。
 
@@ -173,14 +191,17 @@ Azure App Service の展開については、「<xref:tutorials/publish-to-azure
 
       プレースホルダー `{SOLUTION NAME}` は、ソリューションの名前です。
 
-* サーバー アプリのプロジェクト ファイルで、追加したクライアン トアプリに対するプロジェクト参照を作成します。
+* サーバー アプリのプロジェクト ファイルで、追加した `SecondBlazorApp.Client` クライアント アプリに対するプロジェクト参照を作成します。
 
   ```xml
   <ItemGroup>
-    ...
+    <ProjectReference Include="..\Client\{SOLUTION NAME}.Client.csproj" />
     <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
+    <ProjectReference Include="..\Shared\{SOLUTION NAME}.Shared.csproj" />
   </ItemGroup>
   ```
+  
+  プレースホルダー `{SOLUTION NAME}` は、ソリューションの名前です。
 
 * サーバー アプリの `Properties/launchSettings.json` ファイルで、ポート 5001 と 5002 でクライアント アプリにアクセスするように、Kestrel プロファイル (`{SOLUTION NAME}.Server`) の `applicationUrl` を構成します。
 

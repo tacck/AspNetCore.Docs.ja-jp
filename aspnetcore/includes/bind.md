@@ -15,11 +15,11 @@
 
 * パラメーターのないパブリック コンストラクターを持った非抽象でなければなりません。
 * 型のパブリックな読み取り/書き込みプロパティは、すべてバインドされます。
-* フィールドはバインド***されません***。 上のコード `Position` はバインドされません。 `Position` プロパティは、クラスを構成プロバイダーにバインドするときに、アプリで文字列 `"Position"` をハードコーディングする必要をなくすために使用されます。
+* フィールドはバインド ***されません** _。 上のコード `Position` はバインドされません。 `Position` プロパティは、クラスを構成プロバイダーにバインドするときに、アプリで文字列 `"Position"` をハードコーディングする必要をなくすために使用されます。
 
 コード例を次に示します。
 
-* [ConfigurationBinder.Bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) を呼び出して、`PositionOptions` クラスを `Position` セクションにバインドします。
+_ [ConfigurationBinder.Bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) を呼び出して、`PositionOptions` クラスを `Position` セクションにバインドします。
 * `Position` 構成データを表示します。
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Pages/Test22.cshtml.cs?name=snippet)]
@@ -32,7 +32,7 @@
 
 上のコードでは、アプリが開始された後の JSON 構成ファイルへの変更が既定で読み取られます。
 
-***オプション パターン*** を使用する際の別の方法として、`Position` セクションをバインドし、[依存関係挿入サービスコンテナー](xref:fundamentals/dependency-injection)に追加する方法があります。 次のコードでは、`PositionOptions` は <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure*> でサービスコンテナーに追加され、構成にバインドされます:
+***オプション パターン** _ を使用する際の別の方法として、`Position` セクションをバインドし、[依存関係挿入サービスコンテナー](xref:fundamentals/dependency-injection)に追加する方法があります。 次のコードでは、`PositionOptions` は <xref:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure_> でサービスコンテナーに追加され、構成にバインドされます:
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Startup.cs?name=snippet)]
 
@@ -40,4 +40,4 @@
 
 [!code-csharp[](~/fundamentals/configuration/index/samples/3.x/ConfigSample/Pages/Test2.cshtml.cs?name=snippet)]
 
-上のコードでは、アプリが開始された後の JSON 構成ファイルへの変更は読み取られ***ません***。 アプリの開始後に変更を読み取るには、[IOptionsSnapshot](xref:fundamentals/configuration/options#ios) を使用します。
+上のコードでは、アプリが開始された後の JSON 構成ファイルへの変更は読み取られ ***ません***。 アプリの開始後に変更を読み取るには、[IOptionsSnapshot](xref:fundamentals/configuration/options#ios) を使用します。

@@ -1,1 +1,1 @@
-すべてのユーザーの認証をグローバルに要求する方法については、「 [authenticated users を要求](xref:security/authorization/secure-data#rau)する」を参照してください。
+すべてのユーザーの認証をグローバルに要求する方法の詳細については、「[認証されたユーザーを要求する](xref:security/authorization/secure-data#rau)」を参照してください。

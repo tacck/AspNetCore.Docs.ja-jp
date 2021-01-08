@@ -19,18 +19,18 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 259b5bf9bf2a6de987494b5771897355e3ea67db
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: d264aaee7889ec1c8ee0fe6b1f52ccc4cf355745
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057313"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97854627"
 ---
 # <a name="transform-webconfig"></a>web.config を変換する
 
 作成者: [Vijay Ramakrishnan](https://github.com/vijayrkn)
 
-次のものに基づいてアプリを発行する場合、 *web.config* ファイルに対する変換を自動的に適用することができます。
+次のものに基づいてアプリを発行する場合、*web.config* ファイルに対する変換を自動的に適用することができます。
 
 * [ビルド構成](#build-configuration)
 * [Profile](#profile)
@@ -46,7 +46,7 @@ ms.locfileid: "93057313"
 
 ビルド構成の変換は、最初に実行されます。
 
-*web.config* の変換を必要とする [ビルド構成 (デバッグ|リリース)](/dotnet/core/tools/dotnet-publish#options) ごとに、 *web.{CONFIGURATION}.config* ファイルを含めます。
+*web.config* の変換を必要とする [ビルド構成 (デバッグ|リリース)](/dotnet/core/tools/dotnet-publish#options) ごとに、*web.{CONFIGURATION}.config* ファイルを含めます。
 
 次の例では、構成固有の環境変数が *web.Release.config* 内で設定されています。
 
@@ -80,7 +80,7 @@ dotnet publish --configuration Release
 
 プロファイルの変換は、[ビルド構成](#build-configuration)の変換の後、2 番目に実行されます。
 
-*web.config* の変換を必要とするプロファイル構成ごとに、 *web.{PROFILE}.config* ファイルを含めます。
+*web.config* の変換を必要とするプロファイル構成ごとに、*web.{PROFILE}.config* ファイルを含めます。
 
 次の例では、プロファイル固有の環境変数が *web.FolderProfile.config* 内でフォルダーの発行プロファイルに対して設定されています。
 
@@ -110,13 +110,13 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 プロファイル名の MSBuild プロパティは `$(PublishProfile)` です。
 
-プロファイルが渡されなかった場合、既定のプロファイル名は **FileSystem** です。また、アプリのコンテンツのルートにそのファイルが存在していた場合、 *web.FileSystem.config* が適用されます。
+プロファイルが渡されなかった場合、既定のプロファイル名は **FileSystem** です。また、アプリのコンテンツのルートにそのファイルが存在していた場合、*web.FileSystem.config* が適用されます。
 
 ## <a name="environment"></a>環境
 
 環境の変換は、[ビルド構成](#build-configuration)および[プロファイル](#profile)の変換の後、3 番目に実行されます。
 
-*web.config* の変換を必要とする [環境](xref:fundamentals/environments)ごとに、 *web.{ENVIRONMENT}.config* ファイルを含めます。
+*web.config* の変換を必要とする [環境](xref:fundamentals/environments)ごとに、*web.{ENVIRONMENT}.config* ファイルを含めます。
 
 次の例では、環境固有の環境変数が *web.Production.config* 内で Production 環境に対して設定されています。
 

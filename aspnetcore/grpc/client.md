@@ -4,7 +4,7 @@ author: jamesnk
 description: .NET gRPC クライアントを使用して gRPC サービスを呼び出す方法について説明します。
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 07/27/2020
+ms.date: 12/18/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9322020083ce25b00b2979633ae8a692cfd4da4a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 39f9b3fde19e31ca970668552e5829308705f513
+ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060964"
+ms.lasthandoff: 01/04/2021
+ms.locfileid: "97699135"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET クライアントを使用して gRPC サービスを呼び出す
 
@@ -34,7 +34,7 @@ ms.locfileid: "93060964"
 
 ## <a name="configure-grpc-client"></a>gRPC クライアントを構成する
 
-gRPC クライアントは、 [ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。 たとえば、`Greeter` というサービスにより、サービスを呼び出すメソッドを含む `GreeterClient` 型が生成されます。
+gRPC クライアントは、[ *\*.proto* ファイルから生成される](xref:grpc/basics#generated-c-assets)具象的なクライアントの種類です。 具象 gRPC クライアントには、 *\*.proto* ファイル内の gRPC サービスに変換するためのメソッドが含まれます。 たとえば、`Greeter` というサービスにより、サービスを呼び出すメソッドを含む `GreeterClient` 型が生成されます。
 
 gRPC クライアントはチャネルから作成されます。 まず `GrpcChannel.ForAddress` を使用してチャネルを作成し、次にそのチャネルを使用して、gRPC クライアントを作成します。
 
@@ -43,7 +43,7 @@ var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greet.GreeterClient(channel);
 ```
 
-チャネルは、gRPC サービスへの有効期限が長い接続を表します。 チャネルが作成されるときには、サービスの呼び出しに関連するオプションによって構成されます。 たとえば呼び出しを行うために使用される `HttpClient` の場合、`GrpcChannelOptions` で送受信メッセージの最大サイズとログ記録を指定し、`GrpcChannel.ForAddress` と共に使用することができます。 オプションの完全な一覧については、[クライアント構成のオプション](xref:grpc/configuration#configure-client-options)に関するページを参照してください。
+チャネルは、gRPC サービスへの有効期限が長い接続を表します。 チャネルが作成されるときには、サービスの呼び出しに関連するオプションを使用して構成されます。 たとえば呼び出しを行うために使用される `HttpClient` の場合、`GrpcChannelOptions` で送受信メッセージの最大サイズとログ記録を指定し、`GrpcChannel.ForAddress` と共に使用することができます。 オプションの完全な一覧については、[クライアント構成のオプション](xref:grpc/configuration#configure-client-options)に関するページを参照してください。
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -201,11 +201,33 @@ await readTask;
 
 双方向ストリーミング呼び出しの間、クライアントとサービスはいつでも相互にメッセージを送信できます。 双方向呼び出しの操作に最適なクライアント ロジックは、サービス ロジックによってさまざまです。
 
+## <a name="access-grpc-headers"></a>gRPC ヘッダーへのアクセス
+
+gRPC 呼び出しでは応答ヘッダーが返されます。 HTTP 応答ヘッダーは、返されるメッセージに関連付けられていない呼び出しに関する名前と値のメタデータを渡します。
+
+ヘッダーには、`ResponseHeadersAsync` を使用してアクセスできます。これにより、メタデータのコレクションが返されます。 ヘッダーは通常、応答メッセージと共に返されます。そのため、それらを待機する必要があります。
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+
+var headers = await call.ResponseHeadersAsync;
+var myValue = headers.GetValue("my-trailer-name");
+
+var response = await call.ResponseAsync;
+```
+
+`ResponseHeadersAsync` の使用方法:
+
+* ヘッダー コレクションを取得するために `ResponseHeadersAsync` の結果を待機する必要があります。
+* `ResponseAsync` (またはストリーミング時の応答ストリーム) の前にアクセスする必要はありません。 応答が返されている場合、`ResponseHeadersAsync` は、すぐにヘッダーを返します。
+* 接続またはサーバー エラーが発生し、gRPC 呼び出しに対してヘッダーが返されなかった場合、例外がスローされます。
+
 ## <a name="access-grpc-trailers"></a>gRPC トレーラーへのアクセス
 
-gRPC の呼び出しによって gRPC トレーラーが返される場合があります。 gRPC トレーラーは、呼び出しに関する名前や値のメタデータを提供するために使用されます。 トレーラーにより、同様の機能が HTTP ヘッダーに提供されますが、呼び出しの最後で受信されます。
+gRPC の呼び出しによって 応答トレーラーが返される場合があります。 トレーラーは、呼び出しに関する名前と値のメタデータを提供するために使用されます。 トレーラーにより、同様の機能が HTTP ヘッダーに提供されますが、呼び出しの最後で受信されます。
 
-gRPC トレーラーには、`GetTrailers()` を使用してアクセスできます。これにより、メタデータのコレクションが返されます。 応答が完了した後にトレーラーが返されるため、トレーラーにアクセスする前にすべての応答メッセージを待機する必要があります。
+トレーラーには、`GetTrailers()` を使用してアクセスできます。これにより、メタデータのコレクションが返されます。 トレーラーは応答が完了した後に返されます。 そのため、トレーラーにアクセスする前に、すべての応答メッセージを待機する必要があります。
 
 単項呼び出しとクライアント ストリーミング呼び出しでは、`GetTrailers()` を呼び出す前に `ResponseAsync` を待機する必要があります。
 
@@ -237,7 +259,7 @@ var trailers = call.GetTrailers();
 var myValue = trailers.GetValue("my-trailer-name");
 ```
 
-gRPC トレーラーには、`RpcException` からもアクセスできます。 サービスでは、OK でない gRPC の状態と共にトレーラーが返される場合があります。 このような状況では、トレーラーは、gRPC クライアントによってスローされた例外から取得されます。
+トレーラーには、`RpcException` からもアクセスできます。 サービスでは、OK でない gRPC の状態と共にトレーラーが返される場合があります。 このような状況では、トレーラーは、gRPC クライアントによってスローされた例外から取得されます。
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
