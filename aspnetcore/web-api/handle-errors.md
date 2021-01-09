@@ -5,7 +5,7 @@ description: ASP.NET Core Web API を使用したエラー処理について説�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 07/23/2020
+ms.date: 1/11/2021
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: 0efcf1bbeeb65cf7f4420f8c50fb4adf7d1d016d
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 92e9350a7892f8f38f64d4ebd68d54a97ec7e994
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93052527"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058377"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API のエラーを処理する
 
@@ -80,7 +80,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-代わりに HTML 形式の応答を表示するには、`Accept` HTTP 要求ヘッダーを `text/html` のメディアの種類に設定します。 次に例を示します。
+代わりに HTML 形式の応答を表示するには、`Accept` HTTP 要求ヘッダーを `text/html` のメディアの種類に設定します。 例:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -127,7 +127,9 @@ HTML 形式の応答は、Postman などのツールを使用してテストす�
 ::: moniker-end
 
 > [!WARNING]
-> **アプリを開発環境で実行するときにのみ** 、開発者例外ページを有効にします。 アプリを実稼働環境で実行するときは、詳細な例外情報を公開しません。 環境の構成について詳しくは、「<xref:fundamentals/environments>」をご覧ください。
+> **アプリを開発環境で実行するときにのみ**、開発者例外ページを有効にします。 アプリを運用環境で実行するときに、詳細な例外情報を公開しないでください。 環境の構成について詳しくは、「<xref:fundamentals/environments>」をご覧ください。
+>
+> `HttpGet` などの HTTP メソッド属性を使ってエラー ハンドラー アクション メソッドをマークしないでください。 明示的な動詞を使用すると、要求がアクション メソッドに届かないことがあります。 認証されていないユーザーにエラーが表示される場合は、メソッドへの匿名アクセスを許可します。
 
 ## <a name="exception-handler"></a>例外ハンドラー
 
@@ -222,6 +224,8 @@ HTML 形式の応答は、Postman などのツールを使用してテストす�
 
     ::: moniker-end
 
+    前のコードでは、[コントローラー](xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A)を呼び出して、応答を作成しています。 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>
+
 ## <a name="use-exceptions-to-modify-the-response"></a>例外を使用して応答を変更する
 
 応答の内容は、コントローラーの外部で変更できます。 ASP.NET 4.x Web API の場合、これを行う方法の 1 つが <xref:System.Web.Http.HttpResponseException> 型の使用でした。 ASP.NET Core には同等の型が含まれていません。 `HttpResponseException` のサポートは以下の手順で追加することができます。
@@ -234,7 +238,7 @@ HTML 形式の応答は、Postman などのツールを使用してテストす�
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
 
-    上記のフィルターでは、マジックナンバー10が最大の整数値から減算されています。 この値を減算すると、パイプラインの最後で他のフィルターを実行できます。
+    前のフィルターでは、 `Order` 最大の整数値から10を引いたを指定しています。 これにより、パイプラインの最後で他のフィルターを実行できます。
 
 1. `Startup.ConfigureServices` に、フィルター コレクションに対するアクション フィルターを追加します。
 
@@ -280,7 +284,7 @@ Web API コントローラーでは、モデルの検証が失敗すると、MVC
 
 ## <a name="client-error-response"></a>クライアントのエラー応答
 
-" *エラー結果* " は、HTTP 状態コードが 400 以上の結果として定義されます。 Web API コントローラーの場合、MVC によってエラー結果が <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> を含む結果に変換されます。
+"*エラー結果*" は、HTTP 状態コードが 400 以上の結果として定義されます。 Web API コントローラーの場合、MVC によってエラー結果が <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> を含む結果に変換されます。
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -337,3 +341,7 @@ public void ConfigureServices(IServiceCollection serviceCollection)
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
 
 ::: moniker-end
+
+## <a name="custom-middleware-to-handle-exceptions"></a>例外を処理するカスタムミドルウェア
+
+例外処理ミドルウェアの既定値は、ほとんどのアプリに適しています。 特殊な例外処理を必要とするアプリの場合は、 [例外処理ミドルウェアをカスタマイズ](xref:fundamentals/error-handling#exception-handler-lambda)することを検討してください。

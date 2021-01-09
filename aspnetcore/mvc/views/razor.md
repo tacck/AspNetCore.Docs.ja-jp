@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 91e35a7cbd97e2bd6e77566362f02409915de7d7
-ms.sourcegitcommit: 3f0ad1e513296ede1bff39a05be6c278e879afed
+ms.openlocfilehash: cb9ffab19062bf726dd519c782d502f76e372073
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "96035711"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058286"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core の構文リファレンス
 
 [Rick Anderson](https://twitter.com/RickAndMSFT)、 [Taylor Mullen](https://twitter.com/ntaylormullen)、 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor は、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor に *.cshtml* は、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル (*razor*) にもあります。
+Razor は、web ページにサーバーベースのコードを埋め込むためのマークアップ構文です。 構文は、 Razor Razor マークアップ、C#、および HTML で構成されています。 に含まれるファイル Razor には、通常、拡張子が付いています。 Razorは、 [ Razor コンポーネント](xref:blazor/components/index)ファイル (*razor*) にもあります。
 
 ## <a name="rendering-html"></a>HTML のレンダリング
 
@@ -399,7 +399,7 @@ Razor には、次のように、重要なセクションを lock ステート�
 }
 ```
 
-### <a name="comments"></a>説明
+### <a name="comments"></a>備考
 
 Razor C# および HTML コメントをサポートしています。
 
@@ -497,7 +497,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 ::: moniker-end
 
-次に例を示します。
+例:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -611,7 +611,7 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-ディレクティブは、 `@layout` コンポーネントのレイアウトを指定し Razor ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、 <xref:blazor/layouts> を参照してください。
+ディレクティブは、 `@layout` ディレクティブを持つルーティング可能なコンポーネントのレイアウトを指定し Razor [`@page`](#page) ます。 レイアウト コンポーネントは、コードの重複や不整合を回避するために使用されます。 詳細については、「<xref:blazor/layouts>」を参照してください。
 
 ::: moniker-end
 
@@ -687,13 +687,13 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 `@page` ディレクティブには、それが表示されるファイルの型によって、さまざまな効果があります。 ディレクティブ:
 
 * は、ファイルがページであることを示し *ます。* Razor 詳細については、「[カスタム ルート](xref:razor-pages/index#custom-routes)」と「<xref:razor-pages/index>」を参照してください。
-* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、 <xref:blazor/fundamentals/routing> を参照してください。
+* コンポーネントが要求を直接処理する必要があることを指定し Razor ます。 詳細については、「<xref:blazor/fundamentals/routing>」を参照してください。
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し *ます。* Razor 詳細については、 <xref:razor-pages/index> を参照してください。
+`@page`ファイルの先頭行にあるディレクティブは、ファイルがページであることを示し *ます。* Razor 詳細については、「<xref:razor-pages/index>」を参照してください。
 
 ::: moniker-end
 
@@ -706,8 +706,8 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 `false`(既定値) に設定した場合、コンポーネント () から表示されるマークアップ内の空白は、次の場合に削除され Razor `.razor` ます。
 
 * 要素内の先頭または末尾。
-* パラメーター内の先頭または末尾 `RenderFragment` 。 たとえば、別のコンポーネントに渡される子コンテンツなどです。
-* またはなどの C# コードブロックの前または後に `@if` `@foreach` あります。
+* `RenderFragment` パラメーター内の先頭または末尾。 別のコンポーネントに渡される子コンテンツなどです。
+* `@if` または `@foreach` のような、C# コード ブロックの前か後にある。
 
 ::: moniker-end
 
@@ -715,7 +715,7 @@ Razor`Model`ビューに渡されるモデルにアクセスするためのプ�
 
 *このシナリオは、MVC ビューおよび Razor ページ (cshtml) にのみ適用されます。*
 
-ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout) と組み合わせて使用されます。 詳細については、 <xref:mvc/views/layout> を参照してください。
+ディレクティブは、 `@section` ビューまたはページが HTML ページのさまざまな部分でコンテンツを表示できるようにするために、 [MVC および Razor ページレイアウト](xref:mvc/views/layout) と組み合わせて使用されます。 詳細については、「<xref:mvc/views/layout>」を参照してください。
 
 ### `@using`
 
@@ -739,19 +739,19 @@ Razor ディレクティブ属性は、記号の後に予約済みのキーワ�
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、 <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters> を参照してください。
+`@attributes` では、非宣言属性のレンダリングがコンポーネントに許可されます。 詳細については、「<xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>」を参照してください。
 
 ### `@bind`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、 <xref:blazor/components/data-binding> を参照してください。
+コンポーネントのデータ バインドは、`@bind` 属性によって実現されます。 詳細については、「<xref:blazor/components/data-binding>」を参照してください。
 
 ### `@on{EVENT}`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-Razor コンポーネントのイベント処理機能を提供します。 詳細については、 <xref:blazor/components/event-handling> を参照してください。
+Razor コンポーネントのイベント処理機能を提供します。 詳細については、「<xref:blazor/components/event-handling>」を参照してください。
 
 ::: moniker-end
 
@@ -777,19 +777,19 @@ Razor コンポーネントのイベント処理機能を提供します。 詳�
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、 <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components> を参照してください。
+`@key` ディレクティブ属性により、コンポーネントの比較アルゴリズムは、キーの値に基づいて要素またはコンポーネントの保存を保証します。 詳細については、「<xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>」を参照してください。
 
 ### `@ref`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、 <xref:blazor/components/index#capture-references-to-components> を参照してください。
+コンポーネント参照 (`@ref`) からは、コンポーネント インスタンスにコマンドを発行できるように、そのインスタンスを参照する方法が与えられます。 詳細については、「<xref:blazor/components/index#capture-references-to-components>」を参照してください。
 
 ### `@typeparam`
 
 *このシナリオは、 Razor コンポーネント (razor) にのみ適用されます。*
 
-`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、 <xref:blazor/components/templated-components#generic-typed-components> を参照してください。
+`@typeparam` ディレクティブによって、生成されるコンポーネント クラスのジェネリック型パラメーターを宣言します。 詳細については、「<xref:blazor/components/templated-components#generic-typed-components>」を参照してください。
 
 ::: moniker-end
 
@@ -898,7 +898,7 @@ Razorメソッドの引数としてインラインテンプレートを指定す
 
 [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)に関する 3 つのディレクティブがあります。
 
-| ディレクティブ | 機能 |
+| ディレクティブ | 関数 |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | ビューでタグ ヘルパーを使えるようにします。 |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 前に追加したタグ ヘルパーをビューから削除します。 |
