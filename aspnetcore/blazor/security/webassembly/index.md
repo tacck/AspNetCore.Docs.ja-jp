@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fc6fa075faa4fed1c2bf938d82c4dbfe631c31d3
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: c4d1095d3c3b457ca4d94cb1a573c3dc49548ff3
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055068"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024640"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly をセキュリティで保護する
 
@@ -92,7 +92,7 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 * `Pages` フォルダー内の各 Razor コンポーネントに属性を追加します。
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> を持つポリシーに <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> を設定することはサポートされて **いません** 。
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> を持つポリシーに <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> を設定することはサポートされて **いません**。
 
 ## <a name="refresh-tokens"></a>更新トークン
 
@@ -109,7 +109,7 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 
 ## <a name="implementation-guidance"></a>実装ガイダンス
 
-この「 *概要* 」の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。
+この「*概要*」の記事では、特定のプロバイダーに対して Blazor WebAssembly アプリのユーザーを認証する方法について説明します。
 
 スタンドアロン Blazor WebAssembly アプリ:
 
@@ -138,3 +138,9 @@ Blazor WebAssembly アプリでは、すべてのクライアント側コード�
 構成に関するその他のガイダンスについては、「<xref:blazor/security/webassembly/additional-scenarios>」をご覧ください。
 
 ::: moniker-end
+
+## <a name="additional-resources"></a>その他のリソース
+
+* <xref:host-and-deploy/proxy-load-balancer>: 次のガイダンスが含まれます。
+  * 転送されたヘッダー ミドルウェアを使用した、プロキシ サーバーと内部ネットワークの間での HTTPS スキーム情報の保持。
+  * 追加のシナリオとユース ケース (手動スキーム構成を含む)、正しい要求ルーティングのための要求パスの変更、Linux および IIS 以外のリバース プロキシのための要求スキームの転送。

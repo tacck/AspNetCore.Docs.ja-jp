@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 108fb3a8a24295cad43fd8c83303abd95a7ecd33
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: aa24def1a003a2c2608691e6168066c740f47205
+ms.sourcegitcommit: 8b0e9a72c1599ce21830c843558a661ba908ce32
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055478"
+ms.lasthandoff: 01/08/2021
+ms.locfileid: "98024627"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>ASP.NET Core Blazor Server アプリをセキュリティで保護する
 
@@ -45,7 +45,7 @@ Blazor Server プロジェクト テンプレートは、プロジェクトの�
 ダイアログが開き、他の ASP.NET Core プロジェクトで使用できるものと同じ一連の認証メカニズムが表示されます。
 
 * **認証なし**
-* **個人のユーザー アカウント** : ユーザーアカウントは次のように格納できます。
+* **個人のユーザー アカウント**: ユーザーアカウントは次のように格納できます。
   * ASP.NET Core の [Identity](xref:security/authentication/identity) システムを使用するアプリ内。
   * [Azure AD B2C](xref:security/authentication/azure-ad-b2c)。
 * **職場または学校アカウント**
@@ -131,3 +131,6 @@ Identity を Blazor Server プロジェクトにスキャフォールディン�
 
 * [クイック スタート:Microsoft でのサインインを ASP.NET Core Web アプリに追加する](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
 * [クイック スタート:Microsoft ID プラットフォームを使用して ASP.NET Core Web API を保護する](/azure/active-directory/develop/quickstart-v2-aspnet-core-web-api)
+* <xref:host-and-deploy/proxy-load-balancer>: 次のガイダンスが含まれます。
+  * 転送されたヘッダー ミドルウェアを使用した、プロキシ サーバーと内部ネットワークの間での HTTPS スキーム情報の保持。
+  * 追加のシナリオとユース ケース (手動スキーム構成を含む)、正しい要求ルーティングのための要求パスの変更、Linux および IIS 以外のリバース プロキシのための要求スキームの転送。
