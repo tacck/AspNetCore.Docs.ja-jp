@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: b2f58fb29e451628aead4ad35c7272a1409cf3d8
-ms.sourcegitcommit: 3593c4efa707edeaaceffbfa544f99f41fc62535
+ms.openlocfilehash: 2f5630eac65b880bdefff2a4baf4f1878e981536
+ms.sourcegitcommit: 97243663fd46c721660e77ef652fe2190a461f81
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/04/2021
-ms.locfileid: "97797354"
+ms.lasthandoff: 01/09/2021
+ms.locfileid: "98058390"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-a-hosted-no-locblazor-webassembly-app"></a>ホストされた Blazor WebAssembly アプリで ASP.NET Core SignalR を使用する
 
@@ -360,26 +360,6 @@ dotnet add Server package System.Text.Encodings.Web
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-::: moniker range=">= aspnetcore-5.0"
-
-1. VS Code により、サーバー アプリの起動プロファイルの作成が提案される場合 (`.vscode/launch.json`)、`program` エントリが次のように表示され、アプリのアセンブリをポイントします (`{APPLICATION NAME}.Server.dll`)。
-
-   ```json
-   "program": "${workspaceFolder}/Server/bin/Debug/net5.0/{APPLICATION NAME}.Server.dll"
-   ```
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-5.0"
-
-1. VS Code により、サーバー アプリの起動プロファイルの作成が提案される場合 (`.vscode/launch.json`)、`program` エントリが次のように表示され、アプリのアセンブリをポイントします (`{APPLICATION NAME}.Server.dll`)。
-
-   ```json
-   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
-   ```
-
-::: moniker-end
-
 1. <kbd>F5</kbd> キーを押して、デバッグしてアプリを実行するか、<kbd>Ctrl</kbd>+<kbd>F5</kbd> キーを押して、デバッグなしでアプリを実行します。
 
 1. アドレス バーから URL をコピーし、別のブラウザー インスタンスまたはタブを開き、アドレス バーに URL を貼り付けます。
@@ -442,3 +422,4 @@ Blazor アプリの構築について詳しくは、Blazor のドキュメント
 
 * <xref:signalr/introduction>
 * [認証のための SignalR のクロスオリジンネゴシエーション](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* <xref:blazor/debug>
