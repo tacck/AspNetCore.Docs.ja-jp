@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: 8f54f2e4894328f8471d5f80c8184839ce47add6
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 0d43bbbc44015aff040b12dfacb260fe50492e54
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93059690"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252995"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>ASP.NET アプリ間での認証の共有 cookie
 
@@ -65,6 +65,8 @@ services.ConfigureApplicationCookie(options => {
     options.Cookie.Name = ".AspNet.SharedCookie";
 });
 ```
+
+**注:** 前の手順では、 `ITicketStore` () は使用できません `CookieAuthenticationOptions.SessionStore` 。  詳細については、次を参照してください。[この GitHub の問題](https://github.com/dotnet/AspNetCore.Docs/issues/21163)します。
 
 ## <a name="share-authentication-no-loccookies-without-no-locaspnet-core-identity"></a>認証を共有 cookie しない ASP.NET Core Identity
 
@@ -135,7 +137,7 @@ cookieASP.NET 4.x アプリと ASP.NET Core アプリの間で認証を共有す
 
 およびを設定していない場合は `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` `http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider` 、 <xref:System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier> 一意のユーザーを識別するクレームをに設定します。
 
-*App_Start/startup.auth.cs* :
+*App_Start/startup.auth.cs*:
 
 ```csharp
 app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -170,7 +172,7 @@ System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier =
 
 ユーザー id を生成するときは、認証の種類 ( `Identity.Application` ) が `AuthenticationType` `UseCookieAuthentication` *App_Start/startup.auth.cs* ので設定されたで定義されている種類と一致している必要があります。
 
-*モデル/ IdentityModels.cs* :
+*モデル/ IdentityModels.cs*:
 
 ```csharp
 public class ApplicationUser : IdentityUser

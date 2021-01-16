@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: a163c87fdb9a02c1b074ab32c19c11932c66cfd4
-ms.sourcegitcommit: 04a404a9655c59ad1ea02aff5d399ae1b833ad6a
+ms.openlocfilehash: 44c507fb5e0ff4477a84bfc1e4d0c62180c8dd37
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 01/03/2021
-ms.locfileid: "97854536"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98252839"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core でのコントローラー アクションへのルーティング
 
@@ -43,7 +43,7 @@ ASP.NET Core コントローラーは、ルーティング [ミドルウェア](
 * MVC とルーティングの間の相互作用について説明します。
   * 一般的な MVC アプリでルーティング機能を利用する方法。
   * 次の両方について説明します。
-    * 通常、[従来のルーティング](#cr)では、コントローラーとビューが使用されます。
+    * 通常は、コントローラーとビューで使用される[従来のルーティング](#cr)です。
     * REST Api で使用される *属性ルーティング*。 REST Api のルーティングに主に関心がある場合は、「 [Rest api の属性ルーティング](#ar) 」セクションに進んでください。
   * 詳細については、「 [ルーティング](xref:fundamentals/routing) の詳細」を参照してください。
 * ASP.NET Core 3.0 で追加された既定のルーティングシステムを指します (エンドポイントルーティングと呼ばれます)。 以前のバージョンのルーティングでは、互換性のためにコントローラーを使用することができます。 手順については、 [2.2-3.0 移行ガイド](xref:migration/22-to-30) を参照してください。 レガシルーティングシステムのリファレンス資料については、 [このドキュメントの2.2 バージョン](xref:mvc/controllers/routing?view=aspnetcore-2.2) を参照してください。
@@ -570,7 +570,7 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
-前のコードでは、は `[HttpPost("product/{id:int}")]` ルート制約を適用します。 `ProductsController.ShowProduct`アクションは、のような URL パスによってのみ照合され `/product/3` ます。 ルートテンプレートの部分は、 `{id:int}` そのセグメントを整数のみに制限します。
+前のコードでは、は `[HttpPost("product14/{id:int}")]` ルート制約を適用します。 `Products14Controller.ShowProduct`アクションは、のような URL パスによってのみ照合され `/product14/3` ます。 ルートテンプレートの部分は、 `{id:int}` そのセグメントを整数のみに制限します。
 
 ルート テンプレートの構文について詳しくは、「[ルート テンプレート参照](xref:fundamentals/routing#route-template-reference)」をご覧ください。
 
@@ -720,7 +720,7 @@ result: /UrlGeneration/Destination
 
 既定のルートでは、この問題が発生する可能性があり `{controller}/{action}/{id?}` ます。 この問題は、常にとの値が明示的に指定されているため、実際にはめったにあり `Url.Action` `controller` `action` ません。
 
-[Url](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)のいくつかのオーバーロードでは、ルート値オブジェクトを使用し `controller` て、および以外のルートパラメーターの値を指定します。 `action` ルート値オブジェクトは、と共によく使用され `id` ます。 たとえば、「 `Url.Action("Buy", "Products", new { id = 17 })` 」のように入力します。 ルート値オブジェクト:
+[Url](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)のいくつかのオーバーロードでは、ルート値オブジェクトを使用し `controller` て、および以外のルートパラメーターの値を指定します。 `action` ルート値オブジェクトは、と共によく使用され `id` ます。 例: `Url.Action("Buy", "Products", new { id = 17 })`。 ルート値オブジェクト:
 
 * 慣例により、通常は匿名型のオブジェクトです。
 * には、 `IDictionary<>` または [POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)を指定できます。
@@ -791,7 +791,7 @@ TagHelper は、`form` TagHelper と `<a>` TagHelper を使って URL を生成�
 
 <a name="routing-areas-ref-label"></a>
 
-## <a name="areas"></a>Areas
+## <a name="areas"></a>区分
 
 [区分](xref:mvc/controllers/areas) は、関連する機能を別のグループとしてグループにまとめるために使用される MVC 機能です。
 
@@ -1522,7 +1522,7 @@ app.UseMvc(routes =>
 
 <a name="routing-areas-ref-label"></a>
 
-## <a name="areas"></a>Areas
+## <a name="areas"></a>区分
 
 [区分](areas.md)は MVC の機能であり、関連する機能を独立したルーティング名前空間 (コントローラー アクションの場合) およびフォルダー構造 (ビューの場合) としてグループ化するために使われます。 区分を使うと、アプリケーションは同じ名前の複数のコントローラーを持つことができます (ただし、"*区分*" が異なる場合)。 区分を使い、別のルート パラメーター `area` を `controller` および `action` に追加することで、ルーティングのための階層を作成します。 このセクションでは、ルーティングと区分がどのように相互作用するのかについて説明します。ビューでの区分の使い方について詳しくは、「[区分](areas.md)」をご覧ください。
 

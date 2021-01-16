@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 83525a4c1e87a60b57130c1bba14360c7d03f552
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 71f05163c075a2ef88d5c606814925cdcef879d2
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93061380"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253047"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core で証明書認証を構成する
 
@@ -40,7 +40,7 @@ ms.locfileid: "93061380"
 
 プロキシとロードバランサーを使用する環境での証明書認証の代わりに、OpenID Connect (OIDC) を使用したフェデレーションサービス (ADFS) Active Directory ます。
 
-## <a name="get-started"></a>開始
+## <a name="get-started"></a>作業開始
 
 HTTPS 証明書を取得して適用し、証明書を要求するように [サーバーを構成](#configure-your-server-to-require-certificates) します。
 
@@ -152,37 +152,37 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   * 証明書がサービスに対して認識されているかどうかを確認しています。
   * 独自のプリンシパルを構築します。 `Startup.ConfigureServices` での次の例を検討してください。
 
-```csharp
-services.AddAuthentication(
-    CertificateAuthenticationDefaults.AuthenticationScheme)
-    .AddCertificate(options =>
-    {
-        options.Events = new CertificateAuthenticationEvents
+    ```csharp
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate(options =>
         {
-            OnCertificateValidated = context =>
+            options.Events = new CertificateAuthenticationEvents
             {
-                var claims = new[]
+                OnCertificateValidated = context =>
                 {
-                    new Claim(
-                        ClaimTypes.NameIdentifier, 
-                        context.ClientCertificate.Subject,
-                        ClaimValueTypes.String, 
-                        context.Options.ClaimsIssuer),
-                    new Claim(ClaimTypes.Name,
-                        context.ClientCertificate.Subject,
-                        ClaimValueTypes.String, 
-                        context.Options.ClaimsIssuer)
-                };
-
-                context.Principal = new ClaimsPrincipal(
-                    new ClaimsIdentity(claims, context.Scheme.Name));
-                context.Success();
-
-                return Task.CompletedTask;
-            }
-        };
-    });
-```
+                    var claims = new[]
+                    {
+                        new Claim(
+                            ClaimTypes.NameIdentifier, 
+                            context.ClientCertificate.Subject,
+                            ClaimValueTypes.String, 
+                            context.Options.ClaimsIssuer),
+                        new Claim(ClaimTypes.Name,
+                            context.ClientCertificate.Subject,
+                            ClaimValueTypes.String, 
+                            context.Options.ClaimsIssuer)
+                    };
+    
+                    context.Principal = new ClaimsPrincipal(
+                        new ClaimsIdentity(claims, context.Scheme.Name));
+                    context.Success();
+    
+                    return Task.CompletedTask;
+                }
+            };
+        });
+    ```
 
 受信証明書が追加の検証を満たしていない場合は、 `context.Fail("failure reason")` 失敗の理由でを呼び出します。
 
@@ -267,8 +267,8 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 IIS マネージャーで、次の手順を実行します。
 
 1. [ **接続** ] タブからサイトを選択します。
-1. [ **機能ビュー** ] ウィンドウで、[ **SSL 設定** ] オプションをダブルクリックします。
-1. [ **SSL が必要** ] チェックボックスをオンにし、[ **クライアント証明書** ] セクションの [ **必須** ] オプションを選択します。
+1. [**機能ビュー** ] ウィンドウで、[ **SSL 設定**] オプションをダブルクリックします。
+1. [ **SSL が必要**] チェックボックスをオンにし、[**クライアント証明書**] セクションの [**必須**] オプションを選択します。
 
 ![IIS でのクライアント証明書の設定](README-IISConfig.png)
 
@@ -301,7 +301,7 @@ public void ConfigureServices(IServiceCollection services)
         options.HeaderConverter = (headerValue) =>
         {
             X509Certificate2 clientCertificate = null;
-        
+
             if(!string.IsNullOrWhiteSpace(headerValue))
             {
                 byte[] bytes = StringToByteArray(headerValue);
@@ -618,7 +618,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 たとえば、「 `services.AddSingleton<ICertificateValidationCache, YourCache>()` 」のように入力します。
+既定のキャッシュ実装は、結果をメモリに格納します。 独自のキャッシュを提供するには、を実装 `ICertificateValidationCache` し、依存関係の挿入に登録します。 例: `services.AddSingleton<ICertificateValidationCache, YourCache>()`。
 
 ::: moniker-end
 
@@ -638,9 +638,27 @@ ASP.NET Core 5 preview 7 以降では、オプションのクライアント証�
 
 次の方法では、オプションのクライアント証明書がサポートされます。
 
+::: moniker range=">= aspnetcore-5.0"
+
 * ドメインとサブドメインのバインドを設定します。
   * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
-  * 詳細については、次をご覧ください。
+  * 詳細については次を参照してください:
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel/endpoints#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * 注 Kestrel では、現在、1つのバインドで複数の TLS 構成がサポートされていません。一意の Ip またはポートを持つ2つのバインドが必要です。 「https://github.com/dotnet/runtime/issues/31097」を参照してください。
+    * IIS
+      * [IIS のホスト](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [IIS でのセキュリティの構成](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys: [Windows Server の構成](xref:fundamentals/servers/httpsys#configure-windows-server)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+* ドメインとサブドメインのバインドを設定します。
+  * たとえば、とでバインドを設定 `contoso.com` し `myClient.contoso.com` ます。 `contoso.com`ホストはクライアント証明書を必要としませんが、そう `myClient.contoso.com` です。
+  * 詳細については次を参照してください:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
@@ -649,6 +667,9 @@ ASP.NET Core 5 preview 7 以降では、オプションのクライアント証�
       * [IIS のホスト](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS でのセキュリティの構成](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
     * Http.Sys: [Windows Server の構成](xref:fundamentals/servers/httpsys#configure-windows-server)
+
+::: moniker-end
+
 * クライアント証明書を必要としていない web アプリへの要求の場合:
   * クライアント証明書で保護されたサブドメインを使用して同じページにリダイレクトします。
   * たとえば、にリダイレクト `myClient.contoso.com/requestedPage` します。 への要求は `myClient.contoso.com/requestedPage` とは異なるホスト名であるため、 `contoso.com/requestedPage` クライアントは別の接続を確立し、クライアント証明書を提供します。
