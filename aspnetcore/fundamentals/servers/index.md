@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: a27fdd70963830d22b3501972d6150dde5e1ea54
-ms.sourcegitcommit: fe2e3174c34bee1e425c6e52dd8f663fe52b8756
+ms.openlocfilehash: 49e299ed00ea0e5d54c1ba795971da379cd5b695
+ms.sourcegitcommit: 063a06b644d3ade3c15ce00e72a758ec1187dd06
 ms.translationtype: HT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 11/26/2020
-ms.locfileid: "96174598"
+ms.lasthandoff: 01/16/2021
+ms.locfileid: "98253138"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core での Web サーバーの実装
 
@@ -176,7 +176,30 @@ HTTP.sys の構成のガイダンスについては、「<xref:fundamentals/serv
 
 [HTTP/2](https://httpwg.org/specs/rfc7540.html) は、次の展開シナリオでの ASP.NET Core でサポートされます。
 
-::: moniker range=">= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-5.0"
+
+* [Kestrel](xref:fundamentals/servers/kestrel/http2)
+  * オペレーティング システム
+    * Windows Server 2016/Windows 10 以降&dagger;
+    * OpenSSL 1.0.2 以降を使用した Linux (Ubuntu 16.04 以降など)
+    * 将来のリリースでは HTTP/2 が macOS 上でサポートされるようになります。
+  * ターゲット フレームワーク: .NET Core 2.2 以降
+* [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
+  * Windows Server 2016/Windows 10 以降
+  * ターゲット フレームワーク:HTTP.sys の展開には適用できません。
+* [IIS (インプロセス)](xref:host-and-deploy/iis/index#http2-support)
+  * Windows Server 2016/Windows 10 以降、IIS 10 以降
+  * ターゲット フレームワーク: .NET Core 2.2 以降
+* [IIS (アウトプロセス)](xref:host-and-deploy/iis/index#http2-support)
+  * Windows Server 2016/Windows 10 以降、IIS 10 以降
+  * 一般向けのエッジ サーバーでは HTTP/2 を使用しますが、Kestrel へのリバース プロキシ接続では HTTP/1.1 を使用します。
+  * ターゲット フレームワーク:IIS アウトプロセスの展開には適用できません。
+
+&dagger;Kestrel では、Windows Server 2012 R2 および Windows 8.1 上での HTTP/2 のサポートは制限されています。 サポートが制限されている理由は、これらのオペレーティング システムで使用できる TLS 暗号のスイートのリストが制限されているためです。 TLS 接続をセキュリティで保護するためには、楕円曲線デジタル署名アルゴリズム (ECDSA) を使用して生成した証明書が必要になる場合があります。
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2 < aspnetcore-5.0"
 
 * [Kestrel](xref:fundamentals/servers/kestrel#http2-support)
   * オペレーティング システム
