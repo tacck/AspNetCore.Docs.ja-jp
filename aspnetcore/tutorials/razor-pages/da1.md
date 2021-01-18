@@ -145,7 +145,7 @@ Movies/Edit ページが投稿された場合:
 * モデルの状態にエラーがある (たとえば、`ReleaseDate` を日付に変換できない) 場合、送信された値を含むフォームが再表示されます。
 * モデル エラーがない場合、ムービーは保存されます。
 
-Index、[Create]/(作成/)、[Delete]\(削除\) Razor ページの HTTP GET メソッドも同様のパターンに従います。 [作成] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
+Index、[Create]\(作成\)、[Delete]\(削除\) Razor ページの HTTP GET メソッドも同様のパターンに従います。 [作成] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
 
 ## <a name="additional-resources"></a>その他のリソース
 
@@ -260,7 +260,7 @@ Movies/Edit ページが投稿された場合:
 * モデル状態にエラーがある (たとえば、`ReleaseDate` を日付に変換できない) 場合、フォームは送信された値で表示されます。
 * モデル エラーがない場合、ムービーは保存されます。
 
-Index、[Create]/(作成/)、[Delete]\(削除\) Razor ページの HTTP GET メソッドも同様のパターンに従います。 [作成] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
+Index、[Create]\(作成\)、[Delete]\(削除\) Razor ページの HTTP GET メソッドも同様のパターンに従います。 [作成] Razor ページの HTTP POST `OnPostAsync` メソッドも [編集] Razor ページの `OnPostAsync` メソッドと同様のパターンに従います。
 
 次のチュートリアルでは検索を追加します。
 
